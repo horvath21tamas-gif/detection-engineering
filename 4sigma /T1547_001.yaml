@@ -24,5 +24,5 @@ tags:
 	-attack.persistence
 	-attack.t1547.001
 falsepositives:
-	- Legitimate software auto-start configuration
-	- Software installation or updates
+	- Legitim software run inditasa
+	- Software telepites vagy update

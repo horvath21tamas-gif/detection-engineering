@@ -1,0 +1,26 @@
+title: Gyanús Registry key módosítás perzisztencia kiépítése érdekében 
+id: 1
+status: experimental
+description: Detektalni a gyanus Registry key modositasokat
+author: hota05
+date: 2026/01/07
+logsource:
+	product: windows
+	category: registry_event
+detection:
+	selection:
+    EventType: SetValue
+		TargetObjeckt|contains:
+      - '\Software\Microsoft\Windows\CurrentVersion\Run'
+      - '\Software\Microsoft\Windows\CurrentVersion\RunOnce'
+    Details|contains:
+      - '.exe'
+      - 'dll'
+      - 'ps1'
+	condition: selection
+level: high
+tags:
+	-attack.defense_evasion
+	-attack.t1547.001
+falsepositives:
+	- 

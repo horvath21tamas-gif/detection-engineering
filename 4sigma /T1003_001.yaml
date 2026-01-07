@@ -15,8 +15,13 @@ detection:
       - '0x30'
       - '0x50'
       - '0x1fffff'
-  selectio_tools:
-    
+  selection_tools:
+    Image|endswith:
+      - '\procdump.exe'
+      - '\rundll32.exe'
+      - '\taskmgr.exe'
+      - '\comsvcs.dll'
+  condition: selction_lsass and selection_tools
 level: high
 tags: 
   - attack.credential_access

@@ -20,7 +20,8 @@ detection:
 	condition: selection
 level: high
 tags:
-	-attack.defense_evasion
+	-attack.persistence
 	-attack.t1547.001
 falsepositives:
-	- 
+	- Legitimate software auto-start configuration
+	- Software installation or updates

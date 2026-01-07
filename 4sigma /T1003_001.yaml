@@ -1,2 +1,26 @@
-title:
-id:
+title: Credential Dumping LSASS
+id: 1
+status: experimental
+description: a hitelesito adatok LSASS folyamatmemoriabol torteno kiirasara tett kiserlet
+author: hota05
+date: 2026/01/07
+logsource:
+  product: windows
+  catergory: process_access
+detection:
+  selection_lsass:
+    TargetImage|endswith: '\lsass.exe'
+    GrantedAccess:
+      - '0x10'
+      - '0x30'
+      - '0x50'
+      - '0x1fffff'
+  selectio_tools:
+    
+level: high
+tags: 
+  - attack.credential_access
+  - attack.t1003
+  - attack.t1003.001
+falsepositive:
+  - Adminisztratori beavatkozas miatti riasztas

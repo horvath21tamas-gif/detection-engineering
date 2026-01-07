@@ -1,4 +1,4 @@
-title: Gyanús Registry key módosítás perzisztencia kiépítése érdekében 
+title: Gyanus Registry key modositas perzisztencia kiepitese erdekeben 
 id: 1
 status: experimental
 description: Detektalni a gyanus Registry key modositasokat
@@ -10,13 +10,14 @@ logsource:
 detection:
 	selection:
     EventType: SetValue
-		TargetObjeckt|contains:
+	TargetObjeckt|contains:
       - '\Software\Microsoft\Windows\CurrentVersion\Run'
-      - '\Software\Microsoft\Windows\CurrentVersion\RunOnce'
     Details|contains:
-      - '.exe'
-      - 'dll'
-      - 'ps1'
+      - '\AppData\'
+	  - '\Temp\'
+	Image|endswith:
+	  - '\powershell.exe'
+	  - '\cmd.exe'
 	condition: selection
 level: high
 tags:

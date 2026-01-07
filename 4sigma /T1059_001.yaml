@@ -1,0 +1,17 @@
+title: Gyanus Poweshell parancs vegrehajtasa
+id: 1
+status: experimental
+description: Poweshell parancsok eszlelese, melyek hasznalhatoak rosszindulatu kodok futtatasara
+author: hota05
+date: 2026/01/07
+logsource: 
+detection:
+level: medium
+tags:
+  - attack.execution
+  - attack.t1059.001
+  - attack.t1027
+  - attack.defense-evasion
+falsepositive:
+  - Adminisztrator altal tesztek kodolt scriptek
+  - automatikus eszkozok frissitese

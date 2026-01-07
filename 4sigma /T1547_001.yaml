@@ -9,13 +9,13 @@ logsource:
 	category: registry_event
 detection:
 	selection:
-    EventType: SetValue
-	TargetObjeckt|contains:
-      - '\Software\Microsoft\Windows\CurrentVersion\Run'
-    Details|contains:
+   	 EventType: SetValue
+	 TargetObjeckt|contains:
+     	- '\Software\Microsoft\Windows\CurrentVersion\Run'
+   	 Details|contains:
       - '\AppData\'
 	  - '\Temp\'
-	Image|endswith:
+	 Image|endswith:
 	  - '\powershell.exe'
 	  - '\cmd.exe'
 	condition: selection

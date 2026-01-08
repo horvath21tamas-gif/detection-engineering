@@ -10,7 +10,7 @@ logsource:
 detection:
 	selection:
    	 EventType: SetValue
-	 TargetObjeckt|contains:
+	 TargetObject|contains:
      	- '\Software\Microsoft\Windows\CurrentVersion\Run'
    	 Details|contains:
       - '\AppData\'

@@ -20,7 +20,6 @@ detection:
       - '\procdump.exe'
       - '\rundll32.exe'
       - '\taskmgr.exe'
-      - '\comsvcs.dll'
   condition: selction_lsass and selection_tools
 level: high
 tags: 

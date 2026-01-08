@@ -6,7 +6,7 @@ author: hota05
 date: 2026/01/07
 logsource:
   product: windows
-  catergory: process_access
+  category: process_access
 detection:
   selection_lsass:
     TargetImage|endswith: '\lsass.exe'

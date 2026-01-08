@@ -20,7 +20,7 @@ detection:
       - '\procdump.exe'
       - '\rundll32.exe'
       - '\taskmgr.exe'
-  condition: selction_lsass and selection_tools
+  condition: selection_lsass and selection_tools
 level: high
 tags: 
   - attack.credential_access

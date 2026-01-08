@@ -15,14 +15,11 @@ detection:
       - '\POWERPNT.EXE'
       - '\OUTLOOK.EXE'
       - '\MSACCESS.EXE'
-      - '\VISIO.EXE'
   suspicious_child:
     Image|endswith:
       - '\cmd.exe'
       - '\powershell.exe'
       - '\pwsh.exe'
-      - '\wscript.exe'
-      - '\cscript.exe'
       - '\mshta.exe'
       - '\rundll32.exe'
       - '\regsvr32.exe'

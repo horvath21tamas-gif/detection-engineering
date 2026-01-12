@@ -8,25 +8,21 @@ logsource:
   product: generic
   category: webserver
 detection:
-  xss_keyword:
+  payload:
     - "<script"
     - "<svg"
     - "<iframe"
     - "javascript:"
-    - "onerror="
-    - "onload="
-    - "onclick="
-  xss_encoded:
     - "%3cscript"
-    - "%3csvg"
-    - "%3ciframe"
-    - "%253c"
-    - "&#x3c"
-    - "&#60"
-  condition: xss_keyword or xss_encoded
+  selection:
+    status:
+      - 200
+      - 403
+    timeframe: 1m
+  condition: payload and selection | count(ip_src) > 3
 level: medium
 tags: 
-  - attack.persistence
+  - attack.initial_access
   - attack_t1190
 falsepositive:
   - Admin probalkozik 

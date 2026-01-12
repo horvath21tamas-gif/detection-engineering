@@ -1,0 +1,32 @@
+title: Ransomware elokeszites eszlelese
+id: 1
+status: experimental
+description: Ransomware elokeszites eszlelese
+author: hota05
+date: 2026/01/12
+logsource: 
+  product: windows
+  category: process_creation
+detection:
+  selection_service:
+    Image|endswith:
+      - "\sc.exe"
+      - "\net.exe"
+    CommandLine|contains:
+      - "shadow"
+  selection_recovery:
+    Image|endswith:
+      - "\bcdedit.exe"
+    CommandLine|contains:
+      - "recoveryenabled"
+  filter_system:
+    User:
+      - SYSTEM
+  condition: (selection_services or selection_shadow or selection_recovery) and not filter_system | count(Image) by User > 1 within 10m
+level: critical
+tags: 
+  - attack.t1486
+  - attack.t1490
+  - attack.t1562.001
+falsepositive:
+  - admin karbantartas

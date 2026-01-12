@@ -21,8 +21,8 @@ detection:
 	condition: selection
 level: high
 tags:
-	-attack.persistence
-	-attack.t1547.001
+	- attack.persistence
+	- attack.t1547.001
 falsepositives:
 	- Legitim software run inditasa
 	- Software telepites vagy update

@@ -15,8 +15,8 @@ detection:
   selection_encoded:
     CommandLine|contains:
       - '-enc'
-      - 'encodedcommand'
-      - 'EncodedCommand'
+      - '-encodedcommand'
+      - '-EncodedCommand'
   condition: selection_image and selection_encoded
 level: medium
 tags:

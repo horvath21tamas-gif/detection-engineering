@@ -1,0 +1,33 @@
+title: webszeren tortent XSS probakozas
+id: 1
+status: experimental
+description: 
+author: hota05
+date: 2026/01/12
+logsource: 
+  product: generic
+  category: webserver
+detection:
+  xss_keyword:
+    - "<script"
+    - "<svg"
+    - "<iframe"
+    - "javascript:"
+    - "onerror="
+    - "onload="
+    - "onclick="
+  xss_encoded:
+    - "%3cscript"
+    - "%3csvg"
+    - "%3ciframe"
+    - "%253c"
+    - "&#x3c"
+    - "&#60"
+  condition: xss_keyword or xss_encoded
+level: medium
+tags: 
+  - attack.persistence
+  - attack_t1190
+falsepositive:
+  - Admin probalkozik 
+  - csak request van

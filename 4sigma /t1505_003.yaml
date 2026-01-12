@@ -1,0 +1,48 @@
+title: webszerverre torteno webshellfeltoltese/ interakcioba lepese
+id: 1
+status: experimental
+description: Detektalni a potenciális webshell feltolteseket es az interakciokat
+author: hota05
+date: 2026/01/12
+logsoruce: 
+  product: generic
+  category: webserver
+detection:
+  selection_upload:
+    cs-method:
+      - POST
+      - PUT
+    cs-uri-stem|endswith:
+      - ".php"
+      - ".asp"
+      - ".aspx"
+      - ".jsp"
+      - ".phtml"
+  selections_webshell_access:
+    cs-uri-stem|endswith:
+      - ".php"
+      - ".asp"
+      - ".aspx"
+      - ".jsp"
+      - ".phtml"
+  selection_webshell_params:
+    cs-uri-query|endswith:
+      - "cmd="
+      - "exec="
+      - "powershell="
+      - "whoami"
+      - "net user"
+      - "command="
+      - "shell"
+      - "curl"
+      - "wget"
+  condition: selection_upload or (selection_webshell_access and selection_webshell_params)
+level: high
+tags:
+  - attack.persistence
+  - attack.t1505.003
+  - attack.t1059
+falsepositive:
+  - Legitim fajl feltoltese
+  - Admin debugg
+  - Pentest 

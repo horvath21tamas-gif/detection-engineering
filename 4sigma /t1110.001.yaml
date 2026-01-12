@@ -1,0 +1,19 @@
+title: tobbszori sikertelen bejelentkezes egy felhasznalohoz
+id: 1
+status: experimental
+description: Egy adott ido alatt tortent sok sikertelen bejelentkezes egy felhasznalotol
+author: hota05
+date: 2026/01/12
+logsource:
+  product: windows
+  category: login
+detection:
+  selection:
+    EventID: 4625
+  condition: selection | count() by TargetUserName >10 within 5m
+level: medium
+tags:
+- attack.t1110.001
+falsepositive:
+- Elfelejtett jelszo
+- beregadt sessionok

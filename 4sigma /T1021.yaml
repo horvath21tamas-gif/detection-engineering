@@ -1,0 +1,34 @@
+title: Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be
+id: 1
+status: experimental
+description: Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastpl tavol levo hostra jelentkezik be
+author: hota05
+date: 2026/01/13
+logsource:
+  product: windows
+  category: security
+detection:
+  selection_logon:
+    EventID: 4624
+    LogonType:
+      - 2
+      - 10
+  filter_machine_account:
+    TargetUserName|endswith: "$"
+  filter_system_accounts:
+    TargetUserName:
+      - "SYSTEM"
+      - "LOCAL SERVICE"
+      - "NETWORK SERVICE"
+  filter_local_logon:
+    IpAddress:
+      - "127.0.0.1"
+      - "::1"
+  condition: selection_logon and not filter_machine_account and not filter_system_accounts and not filter_local_logon
+level: medium
+tags: 
+  - attack.t1021
+falsepositives:
+  - VPN bejelentkezés
+  - jump host
+  - admin script

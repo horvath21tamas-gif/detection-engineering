@@ -1,0 +1,23 @@
+title: Detektalni, amikor egy legitim remote admin toolt nem a megszokott enterprise módon használnak
+id: 1
+status: experimental
+description: Detektalni, amikor egy ligitim remote admin toolt nem a megszokott enterprise módon használnak
+author: hota05
+date: 2026/01/13
+logsource: 
+  product: windows
+  category: service_creation
+detection:
+  selection_tool:
+    ServiceName|contains:
+      - "PSEXECSVC"
+  filter_legitime_source:
+    Computer|startswith:
+      - "MGMT-"
+  condition: selection_tool and filter_legitime_source
+level: high
+tags: 
+  - attack.t1219
+falsepositives:
+  - pentest gyakorlat
+  - admin fejlesztés

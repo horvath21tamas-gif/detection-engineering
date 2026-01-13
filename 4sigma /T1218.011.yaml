@@ -11,11 +11,12 @@ detection:
   selection:
     Image|endswith: "\rundll32.exe"
     CommandLine|contains:
-      - "\Users\"
-      - "\AppData\"
-      - "\Temp\"
+      - "javascript"
+      - "RunHTMLApplication"
+      - "http://"
+      - "https://"
   condition: selection
-level: medium
+level: high
 tags: 
   - attack.t1218.011
 falsepositives:

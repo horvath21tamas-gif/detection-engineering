@@ -11,7 +11,7 @@ detection:
   selection:
     Image|endswith:
       - "\powershell.exe"
-      - "pwsh.exe"
+      - "\pwsh.exe"
     CommandLine|contains:
       - "-enc"
       - "-encodedcommand"

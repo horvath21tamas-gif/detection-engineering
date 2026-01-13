@@ -1,0 +1,22 @@
+title: Gyanus Scheduled Task letrehozasa
+id: 1
+status: experimental
+description: Gyanus Scheduled Task letrehozasa
+author: hota05
+date: 2026/01/13
+logsource: 
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: "\schtasks.exe"
+    CommandLine|contains: "/create"
+  selection_futtatas:
+    CommandLine|contains: "powershell"
+  condition: selection and selection_futtatas
+level: medium
+tags: 
+  - attack.t1053.005
+falsepositives:
+  - admin automatizacio
+  - backup

@@ -1,0 +1,23 @@
+title: msiexec.exe URL-rol telepit csomagot
+id: 1
+status: experimental
+description: misexec.exe URL-rol telepit csomagot
+author: hota05
+date: 2026/01/13
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: "msiexec.exe"
+    CommandLine|contains:
+      - "http://"
+      - "https://"
+      - "/i"
+  condition: selection
+level: medium
+tags:
+  - attack.t1218.007
+falsepositives:
+  - admin frissít
+  - pentesteles

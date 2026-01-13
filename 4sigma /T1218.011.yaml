@@ -1,0 +1,23 @@
+title: Gyanus rundll32.exe hasznalata
+id: 1
+status: experimental
+description: Gyanus rundll32.exe hasznalata
+author: hota05
+date: 2026/01/13
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: "\rundll32.exe"
+    CommandLine|contains:
+      - "\Users\"
+      - "\AppData\"
+      - "\Temp\"
+  condition: selection
+level: medium
+tags: 
+  - attack.t1218.011
+falsepositives:
+  - legit alkalmazasok
+  - driver telepito

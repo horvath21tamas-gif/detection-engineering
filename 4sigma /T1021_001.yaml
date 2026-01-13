@@ -1,0 +1,24 @@
+title: Gyanus RDP belepes
+id: 1
+status: experimental
+description: Gyanus RDP belepes
+author: hota05
+date: 2026/01/13
+logsource:
+  product: windows
+  category: security
+detection:
+  selection_logon:
+    EventID: 4624
+    LogonType: 10
+  filter_ip:
+    IpAddress|startswith:
+      - "10."
+      - "192.168."
+  condition: selection_logon and not filter_ip
+level: medium
+tags: 
+  - attack.t1021.001
+falsepositives:
+  - Admin script
+  - teszteles

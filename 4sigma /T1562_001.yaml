@@ -1,0 +1,28 @@
+title: Detektálni, amikor egy tamado megprobalja kikapcsolni a Windows funkcioit powershellbol
+id: 1
+status: experimental
+description: Egy tamado megprobalja kikapcsolni a Windows funkcioit poweshellbol
+author: hota05
+date: 2026/01/13
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: 
+      - "\powershell.exe"
+      - "\pwsh.exe"
+    CommandLine|contains:
+      - "Set-MpPreference"
+      - "Add-MpPreference"
+      - "DisableRealtimeMonitoring"
+      - "ExclusionPath"
+  filter_system:
+    User: "SYSTEM"
+  condition: selection and not filter_system
+level: medium
+tags: 
+  - attack.t1562.001
+falsepositives:
+  - admin scriptet futtat
+  - IT security update

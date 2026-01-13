@@ -1,0 +1,27 @@
+title: cmd.exe netuser vagy net localgroup parancsot futtat
+id: 1
+status: experimental
+description: cmd.exe netuser vagy net localgroup parancsot futtat
+author: hota05
+date: 2026/01/13
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection_cmd:
+    Image|endswith:
+      - "\cmd.exe"
+    CommandLine|contains:
+      - "net user"
+      - "net localgroup"
+  filter_user:
+    User:
+      - "SYSTEM"
+  condition: selection_remote and not filter_user
+level: medium
+tags:
+  - attack.t1087
+  - attack.t1098
+falsepositives:
+  - admin futtat
+  - pentesteles

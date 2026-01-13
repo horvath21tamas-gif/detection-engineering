@@ -1,0 +1,24 @@
+title: wevtutil.exe security logokat töröl
+id: 1
+status: experimental
+description: wevtutil.exe security logokat töröl
+author: hota05
+date: 2026/01/13
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: "\wevtutil.exe"
+    CommandLine|contains:
+      - "cl"
+      - "security"
+  filter:
+    User: "SYSTEM"
+  condition: selection and not filter
+level: medium
+tags:
+  - attack.t1070.001
+falsepositives:
+  - admin legitim script
+  - pentesteles

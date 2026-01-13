@@ -1,0 +1,27 @@
+title: Gyanus System process melyet a user indit
+id: 1
+status: experimental
+description: Gyanus System process melyet a user indit
+author: hota05
+date: 2026/01/13
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection_process:
+    ParentImage|endswith:
+      - "\explorer.exe"
+      - "\chrome.exe"
+      - "\brave.exe"
+    Image|endswith:
+      - "\cmd.exe"
+      - "\powershell.exe"
+  selection_system:
+    User|contains: "SYSTEM\"
+  condition: selection_process and selection_system 
+level: medium
+tags: 
+  - attack.t1068
+falsepositives:
+  - fejlesztesek miatti alert
+  - update/telepites

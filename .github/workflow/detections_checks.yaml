@@ -1,1 +1,36 @@
+name: Detection Rules CI
 
+on:
+  push:
+    paths:
+      - 'rules/**'
+      - 'tools/**'
+      - 'test/**'
+      - 'mappings/**'
+  pull_request:
+
+jobs:
+  detections:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: pip install pyyaml
+
+      - name: Lint rules
+        run: python tools/lint_rules.py
+
+      - name: Validate metadata
+        run: python tools/validate_metadata.py
+
+      - name: Convert Sigma to SPL
+        run: python tools/sigma_to_spl.py
+
+      - name: Run tests
+        run: python test/test_rules.py

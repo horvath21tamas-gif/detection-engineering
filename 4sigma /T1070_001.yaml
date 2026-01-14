@@ -1,7 +1,7 @@
-title: wevtutil.exe security logokat töröl
+title: wevtutil.exe security logokat torol
 id: 1
 status: experimental
-description: wevtutil.exe security logokat töröl
+description: wevtutil.exe security logokat torol
 author: hota05
 date: 2026/01/13
 logsource:

@@ -1,0 +1,36 @@
+title: A tamado lemasol egy legitim Windows binarist
+id: 1
+status: experimental
+description: A tamado lemasol egy legitim Windows binarist
+author: hota05
+date: 2026/01/14
+logsource: 
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|contains:
+      - "\Users\"
+      - "\AppData\"
+      - "\Temp\"
+      - "\ProgramData\"
+  selection_legitime:
+    Image|endswith:
+      - "\svchost.exe"
+      - "\lsass.exe"
+      - "services.exe"
+      - "explorer.exe"
+  filter_legit_loc:
+    Image|startswith:
+      - "C:\Windows\System32\"
+      - "C:\\Windows\SysWOW64\"
+  filter_system:
+    User: "SYSTEM"
+  condition: selection and selection_legitime and not filter_legit_loc and not filter_system 
+level: high
+tags: 
+  - attack.t1036.005
+  - attack.t1036
+falsepositives:
+- legitim file
+- teszteles

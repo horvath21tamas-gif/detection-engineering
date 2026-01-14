@@ -12,12 +12,6 @@ detection:
     cs-method:
       - POST
       - PUT
-    cs-uri-stem|endswith:
-      - ".php"
-      - ".asp"
-      - ".aspx"
-      - ".jsp"
-      - ".phtml"
   selections_webshell_access:
     cs-uri-stem|endswith:
       - ".php"
@@ -36,7 +30,7 @@ detection:
       - "shell"
       - "curl"
       - "wget"
-  condition: selection_upload or (selection_webshell_access and selection_webshell_params)
+  condition: all of them
 level: high
 tags:
   - attack.persistence

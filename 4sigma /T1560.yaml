@@ -1,0 +1,36 @@
+title: Adatgyujtes es exfiltration elokeszitese Archiving segitsegevel
+id: 1
+status: experimental
+description: Adatgyujtes es exfiltration elokeszitese Archiving segitsegevel
+author: hota05
+date: 2026/01/14
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith:
+      - "\powershell.exe"
+      - "tar.exe"
+      - "7z.exe"
+      - "rar.exe"
+    CommandLine|contains:
+      - "Compress-Archive"
+  selection_loaded:
+    CommandLine|contains:
+      - "C:\Temp"
+      - "%AppData%"
+      - "Users\Public"
+  selection_file:
+    FileName|endswith:
+      - ".zip"
+      - ".7z"
+      - ".rar"
+  filter_system:
+    User: "SYSTEM"
+  condition: selection and selection_loaded and not filter_system
+level: medium
+tags:
+  - attack.t1560
+falsepositives:
+  - pentesteles a kornyezetben

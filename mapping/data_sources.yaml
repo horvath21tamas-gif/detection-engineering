@@ -1,1 +1,5 @@
-
+Credential Dumping LSASS:
+  product: windows
+  data_sources:
+    - Sysmon
+    - Windows Security Event Log

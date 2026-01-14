@@ -1,0 +1,28 @@
+title: Security tool leallitasa
+id: 1
+status: experimental
+description: Security tool leallitasa
+author: hota05
+date: 2026/01/14
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith:
+      - "\powershell.exe"
+      - "\cmd.exe"
+    CommandLine|contains:
+      - "net stop"
+      - "sc stop"
+      - "Set-MpPreference"
+  filter_system:
+    User: "SYSTEM"
+  condition: selection and not filter_system
+level: medium
+tags:
+  - attack.t1562
+  - attack.t1562.001
+falsepositives:
+  - admin allitja le fejlesztes celjabol
+  - pentesteles

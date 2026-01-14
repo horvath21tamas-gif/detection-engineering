@@ -1,1 +1,6 @@
-
+Credential Dumping LSASS:
+  tactics:
+    - credential_access
+  techniques:
+    - T1003
+    - T1003.001

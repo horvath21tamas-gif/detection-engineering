@@ -21,7 +21,8 @@ jobs:
           python-version: '3.11'
 
       - name: Install deps
-        run: pip install pyyaml
+        run: |
+          pip install pyyaml pytest sigma-cli
 
       - name: Lint rules
         run: python tools/lint_rules.py
@@ -33,4 +34,6 @@ jobs:
         run: python tools/sigma_to_spl.py
 
       - name: Run tests
-        run: python test/test_rules.py
+        env:
+          PYTHONPATH: .
+        run: pytest test/ -v

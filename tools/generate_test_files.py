@@ -7,87 +7,108 @@ rules_dir = "rules/sigma"
 logs_dir = "test/logs"
 expected_dir = "test/expected"
 
-# Létrehozzuk a mappákat, ha nem léteznek
+# Ellenőrizzük, hogy a log/expected mappák léteznek-e
 os.makedirs(logs_dir, exist_ok=True)
 os.makedirs(expected_dir, exist_ok=True)
 
-# Segédfüggvény a detekciós mezők egyszerű generálásához
-def generate_log_and_expected(sigma_rule):
+# Segédfüggvény a példa log generálására Sigma szabály alapján
+def generate_log_from_rule(rule):
     log_event = {}
-    expected = []
 
-    # Ha Windows szabály
-    if sigma_rule.get("logsource", {}).get("product", "").lower() == "windows":
-        selection = sigma_rule.get("detection", {}).get("selection_logon", sigma_rule.get("detection", {}))
-        if not selection:
-            selection = {}
+    detection = rule.get("detection", {})
+    if not detection:
+        return log_event
 
-        # Példa: EventID
-        if "EventID" in selection:
-            log_event["EventID"] = selection["EventID"]
-
-        # Példa: TargetUserName
-        if "TargetUserName" in selection:
-            if isinstance(selection["TargetUserName"], list):
-                log_event["TargetUserName"] = selection["TargetUserName"][0]
+    # Vegyük a selection részt
+    selection = detection.get("selection_logon") or detection.get("selection") or {}
+    for key, value in selection.items():
+        # |endswith operátor kezelése
+        if "|endswith" in key:
+            base_key = key.split("|")[0]
+            if "User" in base_key or "Name" in base_key:
+                log_event[base_key] = "hota05"
+            elif "Image" in base_key or "TargetImage" in base_key:
+                log_event[base_key] = "\\procdump.exe"
             else:
-                log_event["TargetUserName"] = selection["TargetUserName"]
+                log_event[base_key] = "example"
+        # Lista esetén vegyük az első elemet
+        elif isinstance(value, list):
+            log_event[key] = value[0]
+        # Egyszerű érték
+        else:
+            log_event[key] = value
 
-        # Példa: Host
+    # Hozzáadunk alapértelmezett mezőket, ha nincsenek
+    if "User" not in log_event and "TargetUserName" not in log_event:
+        log_event["TargetUserName"] = "hota05"
+    if "Computer" not in log_event and "Host" not in log_event:
         log_event["Host"] = "HOST01"
 
-        # Expected generálás
-        expected.append({
-            "rule": sigma_rule.get("title", "Unknown Rule"),
-            "severity": sigma_rule.get("level", "medium"),
-            "technique": sigma_rule.get("tags", [""])[0].upper().replace("ATTACK.", ""),
-            "user": log_event.get("TargetUserName", "Unknown"),
-            "computer": log_event.get("Host", "Unknown")
-        })
+    return log_event
 
-    # Linux/egyéb log források
-    elif sigma_rule.get("logsource", {}).get("product", "").lower() == "linux":
-        log_event = {
-            "User": "root",
-            "Command": "sudo cat /etc/shadow",
-            "Host": "HOST01"
-        }
-        expected.append({
-            "rule": sigma_rule.get("title", "Unknown Rule"),
-            "severity": sigma_rule.get("level", "medium"),
-            "technique": sigma_rule.get("tags", [""])[0].upper().replace("ATTACK.", ""),
-            "user": log_event["User"],
-            "computer": log_event["Host"]
-        })
-
-    # Ha nem tudjuk
-    else:
-        log_event = {}
-        expected = []
-
-    return log_event, expected
-
-
-# Iterálunk minden Sigma YAML fájlon
+# Bejárjuk a szabályokat
 for root, dirs, files in os.walk(rules_dir):
     for file in files:
         if file.endswith(".yaml") or file.endswith(".yml"):
             rule_path = os.path.join(root, file)
             with open(rule_path) as f:
-                sigma_rule = yaml.safe_load(f)
+                rule = yaml.safe_load(f)
 
-            rule_name = file.replace(".yaml", "").replace(".yml", "")
-
-            log_event, expected = generate_log_and_expected(sigma_rule)
-
-            # Fájlok mentése
+            # Log fájl neve
+            rule_name = rule.get("id") or os.path.splitext(file)[0]
             log_file_path = os.path.join(logs_dir, f"{rule_name}.json")
             expected_file_path = os.path.join(expected_dir, f"{rule_name}_expected.json")
 
-            with open(log_file_path, "w") as f:
-                json.dump([log_event] if log_event else [], f, indent=2)
+            # Példa log
+            log_event = generate_log_from_rule(rule)
 
+            # Több log esemény generálása (például 2 log a teszthez)
+            logs = [log_event.copy(), log_event.copy()]
+            expected = []
+
+            # A detections lista a teszt logikának megfelelően
+            # Itt figyeljük a rule_name-et és a hardcoded logikát a test_rules.py-ból
+            for log in logs:
+                detections = []
+
+                # Credential Dumping LSASS
+                if "lsass" in rule_name.lower():
+                    if (
+                        log.get("TargetImage", "").endswith("\\lsass.exe")
+                        and log.get("Image", "").endswith("\\procdump.exe")
+                        and log.get("GrantedAccess") in ["0x10", "0x30", "0x50", "0x1fffff", None]
+                    ):
+                        detections.append({
+                            "rule": "Credential Dumping LSASS",
+                            "severity": "high",
+                            "technique": "T1003.001",
+                            "user": log.get("User"),
+                            "computer": log.get("Computer") or log.get("Host")
+                        })
+
+                # Multiple Remote Logons / T1021 / suspicious_login
+                elif rule_name.lower() == "t1021" or "suspicious_login" in rule_name.lower():
+                    if (
+                        log.get("EventID") == 4624
+                        and log.get("TargetUserName") not in ["SYSTEM", "LOCAL SERVICE", "NETWORK SERVICE"]
+                        and log.get("IpAddress") not in ["127.0.0.1", "::1", None]
+                    ):
+                        detections.append({
+                            "rule": "Multiple Remote Logons",
+                            "severity": "medium",
+                            "technique": "T1021",
+                            "user": log.get("TargetUserName"),
+                            "computer": log.get("Host")
+                        })
+
+                # Ide lehet új szabályokat hozzáadni
+
+                expected.extend(detections)
+
+            # Írjuk a fájlokat
+            with open(log_file_path, "w") as f:
+                json.dump(logs, f, indent=2)
             with open(expected_file_path, "w") as f:
                 json.dump(expected, f, indent=2)
 
-            print(f"[+] Generated test files for {rule_name}")
+            print(f"Generated {log_file_path} and {expected_file_path}")

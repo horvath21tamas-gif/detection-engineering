@@ -14,26 +14,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+          - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+          - uses: actions/setup-python@v5
+            with:
+              python-version: '3.11'
 
-      - name: Install deps
-        run: |
-          pip install pyyaml pytest sigma-cli
+          - name: Install deps
+            run: pip install pyyaml pytest
 
-      - name: Lint rules
-        run: python tools/lint_rules.py
+          - name: Lint rules
+            run: python tools/lint_rules.py
+          
+          - name: Validate metadata
+            run: python tools/validate_metadata.py
+          
+          - name: Convert Sigma to SPL
+            run: python tools/sigma_to_spl.py
+          
+          - name: Generate placeholder logs for new rules
+            run: python tools/generate_placeholders.py
+          
+          - name: Run tests
+            run: pytest test/ -v
 
-      - name: Validate metadata
-        run: python tools/validate_metadata.py
-
-      - name: Convert Sigma to SPL
-        run: python tools/sigma_to_spl.py
-
-      - name: Run tests
-        env:
-          PYTHONPATH: .
-        run: pytest test/ -v

@@ -1,7 +1,8 @@
+# test/test_rules.py
 import json
-import sys
+import pytest
 
-def main():
+def test_credential_dumping_lsass():
     with open("test/logs/credential_dumping_lsass.json") as f:
         logs = json.load(f)
 
@@ -24,11 +25,4 @@ def main():
                 "computer": log.get("Computer")
             })
 
-    if detections != expected:
-        print("❌ Detection test failed")
-        sys.exit(1)
-
-    print("✅ Detection test passed")
-
-if __name__ == "__main__":
-    main()
+    assert detections == expected, "Detection test failed"

@@ -1,90 +1,69 @@
-# generate_test_files_from_sigma.py
 import os
 import yaml
 import json
-from datetime import datetime
+from itertools import product
 
 # Mappák
 sigma_dir = "rules/sigma"
 logs_dir = "test/logs"
 expected_dir = "test/expected"
 
-# Ha nem léteznek, hozzuk létre a teszt mappákat
 os.makedirs(logs_dir, exist_ok=True)
 os.makedirs(expected_dir, exist_ok=True)
 
-# Segédfüggvény random host/user generáláshoz
-def make_sample_events(detection, num=2):
-    events = []
-    for i in range(1, num+1):
-        event = {}
+# Segédfüggvény: generáljunk egy log példányt a feltételek alapján
+def generate_log(selection):
+    log = {}
+    for key, value in selection.items():
+        if isinstance(value, list):
+            log[key] = value[0]  # Vegyük az első értéket a teszthez
+        elif isinstance(value, dict) and "|endswith" in value:
+            log[key] = "TEST" + value["|endswith"]  # endswith mintával
+        else:
+            log[key] = value
+    return log
 
-        # Ha EventID van, tegyük bele
-        if "EventID" in detection:
-            event["EventID"] = detection["EventID"]
-        if "LogonType" in detection:
-            event["LogonType"] = detection["LogonType"][0]  # csak az első érték
-        if "TargetUserName" in detection:
-            event["TargetUserName"] = f"hota05"
-        if "IpAddress" in detection:
-            event["IpAddress"] = f"10.0.0.{i}"
-        if "TargetImage" in detection:
-            event["TargetImage"] = detection["TargetImage"]
-        if "Image" in detection:
-            event["Image"] = detection["Image"]
-        if "GrantedAccess" in detection:
-            event["GrantedAccess"] = detection["GrantedAccess"]
+# Bejárjuk a Sigma szabályokat
+for file_name in os.listdir(sigma_dir):
+    if not file_name.endswith(".yaml"):
+        continue
+    rule_path = os.path.join(sigma_dir, file_name)
+    with open(rule_path, "r") as f:
+        sigma = yaml.safe_load(f)
 
-        # Adjunk hozzá alap mezőket
-        event["Host"] = f"HOST{i}"
-        event["User"] = event.get("TargetUserName", f"user{i}")
-        event["Computer"] = event["Host"]
+    rule_id = sigma.get("id") or file_name.replace(".yaml", "")
+    rule_name = sigma.get("title", file_name.replace(".yaml", ""))
+    condition = sigma.get("detection", {}).get("condition", "selection")
 
-        events.append(event)
-    return events
+    # Létrehozzuk a log eseményeket
+    detections = []
+    logs = []
 
-# Iterate Sigma YAML files
-for filename in os.listdir(sigma_dir):
-    if filename.endswith(".yaml") or filename.endswith(".yml"):
-        filepath = os.path.join(sigma_dir, filename)
-        with open(filepath) as f:
-            sigma_rule = yaml.safe_load(f)
+    detection_dict = sigma.get("detection", {})
+    selections = {k:v for k,v in detection_dict.items() if k != "condition"}
 
-        # Szabály neve a fájlnév alapján
-        rule_name = os.path.splitext(filename)[0]
+    # Generáljunk minden selection kombinációt (egyszerűsítve)
+    for sel_key, sel_value in selections.items():
+        if isinstance(sel_value, dict):
+            log = generate_log(sel_value)
+        else:
+            log = generate_log({sel_key: sel_value})
+        logs.append(log)
+        detections.append({
+            "rule": rule_name,
+            "severity": sigma.get("level", "medium"),
+            "technique": sigma.get("tags", [""])[0],
+            **{k: log.get(k) for k in ["User", "TargetUserName", "Host", "Computer", "IpAddress"] if k in log}
+        })
 
-        # Ellenőrzés: van-e detection mező
-        detection = sigma_rule.get("detection")
-        if not detection:
-            print(f"{filename} nincs detection mező, kihagyva")
-            continue
+    # Fájlok elérési útja
+    log_file_path = os.path.join(logs_dir, f"{rule_id}.json")
+    expected_file_path = os.path.join(expected_dir, f"{rule_id}_expected.json")
 
-        # Generáljunk logokat
-        logs = []
-        # A Sigma condition mezőt nem dolgozzuk fel teljesen, csak egyszerű sample eventeket generálunk
-        for key, val in detection.items():
-            if isinstance(val, dict):
-                events = make_sample_events(val)
-                logs.extend(events)
+    # Mentés
+    with open(log_file_path, "w") as f:
+        json.dump(logs, f, indent=2)
+    with open(expected_file_path, "w") as f:
+        json.dump(detections, f, indent=2)
 
-        # Mentsük el a logs JSON-t
-        logs_path = os.path.join(logs_dir, f"{rule_name}.json")
-        with open(logs_path, "w") as f:
-            json.dump(logs, f, indent=2)
-        
-        # Generáljuk az expected JSON-t
-        expected = []
-        for event in logs:
-            expected.append({
-                "rule": sigma_rule.get("title", rule_name),
-                "severity": sigma_rule.get("level", "medium"),
-                "technique": sigma_rule.get("tags", [""])[0] if sigma_rule.get("tags") else "",
-                "user": event["User"],
-                "computer": event["Computer"]
-            })
-
-        expected_path = os.path.join(expected_dir, f"{rule_name}_expected.json")
-        with open(expected_path, "w") as f:
-            json.dump(expected, f, indent=2)
-
-        print(f"Generált: {logs_path} és {expected_path}")
+    print(f"Generált tesztfájlok a(z) {rule_name} szabályhoz: {log_file_path}, {expected_file_path}")

@@ -1,16 +1,16 @@
 [
-    {
-        "TargetUserName": "hota05",
-        "IpAddress": "192.168.1.10",
-        "EventID": 4624,
-        "LogonType": 2,
-        "Host": "HOST01"
-    },
-    {
-        "TargetUserName": "hota05",
-        "IpAddress": "192.168.1.20",
-        "EventID": 4624,
-        "LogonType": 10,
-        "Host": "HOST02"
-    }
+  {
+    "TargetUserName": "hota05",
+    "IpAddress": "192.168.1.10",
+    "EventID": 4624,
+    "LogonType": 2,
+    "Host": "HOST01"
+  },
+  {
+    "TargetUserName": "hota05",
+    "IpAddress": "192.168.1.20",
+    "EventID": 4624,
+    "LogonType": 10,
+    "Host": "HOST02"
+  }
 ]

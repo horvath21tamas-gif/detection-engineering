@@ -1,0 +1,36 @@
+title: Gyanus folyamatot inditott a Microsoft office valamelyik alkalmazasa
+id: 1
+status: experimental
+description: Eszlelni a Microsoft Office altal letrehozott chilprocesseket
+author: hota05
+date: 2026/01/08
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  office_parent:
+    ParentImage|endswith:
+      - '\WINWORD.EXE'
+      - '\EXCEL.EXE'
+      - '\POWERPNT.EXE'
+      - '\OUTLOOK.EXE'
+      - '\MSACCESS.EXE'
+  suspicious_child:
+    Image|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\mshta.exe'
+      - '\rundll32.exe'
+      - '\regsvr32.exe'
+      - '\bitsadmin.exe'
+      - '\certutil.exe'
+  condition: office_parent and suspicious_child
+level: high
+tags:
+  - attack.execution
+  - attack.t1204
+  - attack.t1059
+falsepositiv:
+  - Fejlesztesekbol szarmazo childprocess
+  - Adminisztratori fejlesztes miatt torteno alert

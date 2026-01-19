@@ -1,7 +1,5 @@
 name: CI/CD for Detection Rules
 
-name: CI/CD for Detection Rules
-
 on:
   push:
     branches:

@@ -23,7 +23,7 @@ detection:
 level: medium
 tags: 
   - attack.initial_access
-  - attack_t1190
+  - attack.t1190
 falsepositive:
   - Admin probalkozik 
   - csak request van

@@ -1,0 +1,27 @@
+title: egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani
+id: 1
+status: experimental
+description: windows szolgaltatas leallitas vagy modositas
+author: hota05
+date: 2026/01/12
+logsource: 
+  product: windows
+  category: system
+detection:
+   selection:
+     EventID:
+       - 7036
+       - 7040
+    filter_system:
+      User:
+        - SYSTEM
+        - LOCAL SERVICE
+        - NETWORK SERVICE
+  condition: selection and not filter_system | count(ServiceName) by TargetUserName > 3 within 5m 
+level: medium
+tags: 
+  - attack.t1543
+  - attack.t1562
+falsepositive:
+  - legitim admin tevekenyseg
+  - szofterver telepites

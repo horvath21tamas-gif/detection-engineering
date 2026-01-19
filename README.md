@@ -1,21 +1,15 @@
-# 🛡️ Detection Engineering Repository
+# 🛡️ Detection Engineering Dashboard
 
-![Coverage](https://img.shields.io/badge/MITRE_ATT%26CK_Lefedettség-19.4%25-blue?style=for-the-badge)
-![Rules](https://img.shields.io/badge/Sigma_Szabályok-34_db-green?style=for-the-badge)
+## 📊 Lefedettségi Vizualizáció
+Ez az ábra automatikusan frissül a szabályok alapján:
 
-## 📊 Detektálási Statisztika
-- **Összes Sigma szabály:** 34
-- **Lefedett egyedi MITRE technikák:** 39
-- **Részletes lista:** [COVERAGE.md](./COVERAGE.md)
+![MITRE Coverage Map](coverage_map.svg)
 
-## 🗺️ MITRE ATT&CK Navigator (Élő Térkép)
-Kattints az alábbi logóra az interaktív, színezett lefedettségi térkép megnyitásához:
-
-[![MITRE Navigator Map](https://raw.githubusercontent.com/mitre-attack/attack-navigator/master/nav-app/src/assets/favicon.ico)](https://mitre-attack.github.io/attack-navigator/#layerURL=https://raw.githubusercontent.com/horvath21tamas-gif/detection-engineering/test/attack_navigator_layer.json)
-
-> [!IMPORTANT]
-> A színek a szabályok súlyosságát tükrözik: 🔴 **High**, 🟠 **Medium**, 🟡 **Low**. 
-> Ha a térkép üres vagy hibát dob, ellenőrizd, hogy a repository **Public** (nyilvános) állapotban van-e!
+**Jelmagyarázat:** 🔴 High/Critical | 🟠 Medium | 🟡 Low
 
 ---
-*Automatikusan generálva a GitHub Actions által.*
+### 📈 Statisztikák
+- **Lefedettség:** 19.4%
+- **Szabályok száma:** 34 db
+- **Részletes lista:** [COVERAGE.md](./COVERAGE.md)
+- **Interaktív Navigator:** [Kattints ide](https://mitre-attack.github.io/attack-navigator/#layerURL=https://raw.githubusercontent.com/horvath21tamas/detection-engineering/test/attack_navigator_layer.json)

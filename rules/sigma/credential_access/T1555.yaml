@@ -21,7 +21,7 @@ detection:
   condition: selection_access and not selection_browser
 level: medium
 tags:
-  -attack.t1555
+  - attack.t1555
 falsepositves:
   - jelszotarolo general riasztast
   - bongeszo update

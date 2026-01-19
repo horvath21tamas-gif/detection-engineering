@@ -1,13 +1,17 @@
 # 🛡️ Detection Engineering Dashboard
 
-## 📊 MITRE ATT&CK Lefedettségi Kép
-Ez az ábra a privát szabályaid alapján generálódik:
+## 📊 Összesített Statisztika
+- **Lefedett technikák:** `39` db
+- **Sigma szabályok:** `34` db
+- **MITRE ATT&CK Lefedettség:** `[19.4%]`
 
-![MITRE Matrix](https://raw.githubusercontent.com/horvath21tamas-gif/detection-engineering/test/mitre_matrix.svg)
+![Progress Bar](https://geps.dev/progress/19?dangerColor=ff6666&warningColor=ffbd66&successColor=8ecb88)
 
-> [!IMPORTANT]
-> **Interaktív Navigator használata:**
-> Mivel a repository **Private**, a közvetlen link nem működik. 
-> 1. Nyisd meg a [MITRE Navigatort](https://mitre-attack.github.io/attack-navigator/).
-> 2. Kattints: **Open Existing Layer** -> **Upload from local**.
-> 3. Válaszd ki az [attack_navigator_layer.json](./attack_navigator_layer.json) fájlt.
+## 🗺️ MITRE ATT&CK Mátrix Vizualizáció
+![MITRE Matrix](./mitre_matrix.svg)
+
+## 🔗 Interaktív Navigator
+🚀 [**Kattints ide a teljes interaktív mátrix megnyitásához**](https://mitre-attack.github.io/attack-navigator/#layerURL=https://raw.githubusercontent.com/horvath21tamas-gif/detection-engineering/test/attack_navigator_layer.json)
+
+---
+*Ez a dokumentum automatikusan frissül minden commit után.*

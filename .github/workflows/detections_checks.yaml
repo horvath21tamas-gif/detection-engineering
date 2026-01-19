@@ -28,8 +28,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install pytest pyyaml sigma-cli
-          # Csak a splunk plugint telepítjük, a core már a cli része
+          # Minden szükséges komponenst telepítünk
           sigma plugin install splunk
+          sigma plugin install sysmon
+          sigma plugin install windows
 
       - name: Run unit test
         run: |
@@ -50,7 +52,7 @@ jobs:
             filename=$(basename "$file" .yaml)
             echo "Converting $file to Splunk..."
             
-            # A konverzió most már működni fog a splunk backenddel
+            # Most már a -p sysmon működni fog, mert telepítettük a plugint
             sigma convert -t splunk -p sysmon "$file" -o "rules/splunk/${filename}.spl"
           done
 

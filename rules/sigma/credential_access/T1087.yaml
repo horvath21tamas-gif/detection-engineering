@@ -17,7 +17,7 @@ detection:
   filter_user:
     User:
       - 'SYSTEM'
-  condition: selection_remote and not filter_user
+  condition: selection_cmd and not filter_user
 level: medium
 tags:
   - attack.t1087

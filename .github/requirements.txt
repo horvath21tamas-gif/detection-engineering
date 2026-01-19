@@ -1,0 +1,3 @@
+pytest
+sigma
+splunk-rule-validator

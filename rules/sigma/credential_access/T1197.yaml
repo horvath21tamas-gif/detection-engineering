@@ -1,0 +1,26 @@
+title: bitsadmin.exe segitsegevel fajl letoltes
+id: 1
+status: experimental
+description: bitsadmin.exe segitsegevel fajl letoltese
+author: hota05
+date: 2026/01/13
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: "\bitsadmin.exe"
+    CommandLine|contains:
+      - '/transfer'
+      - '/addfile'
+      - 'http://'
+      - 'https://'
+  filter:
+    User: 'SYSTEM'
+  condition: selection and not filter
+level: high
+tags: 
+  - attack.t1197
+falsepositives:
+  - update
+  - regebbi admin script

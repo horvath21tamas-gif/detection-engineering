@@ -14,9 +14,9 @@ detection:
        - 7040
     filter_system:
       User:
-        - SYSTEM
-        - LOCAL SERVICE
-        - NETWORK SERVICE
+        - 'SYSTEM'
+        - 'LOCAL SERVICE'
+        - 'NETWORK SERVICE'
   condition: selection and not filter_system | count(ServiceName) by TargetUserName > 3 within 5m 
 level: medium
 tags: 

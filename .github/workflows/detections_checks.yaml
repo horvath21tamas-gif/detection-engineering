@@ -8,6 +8,7 @@ on:
     branches:
       - test
 
+# Szükséges az írási jog a README, az SPL fájlok és a Navigator JSON feltöltéséhez
 permissions:
   contents: write
 
@@ -28,7 +29,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install pytest pyyaml sigma-cli
-          # Minden szükséges komponenst telepítünk
+          # Sigma komponensek telepítése
           sigma plugin install splunk
           sigma plugin install sysmon
           sigma plugin install windows
@@ -46,20 +47,23 @@ jobs:
       - name: Convert Sigma rules to Splunk (.spl files)
         run: |
           mkdir -p rules/splunk
+          # Töröljük a régi fájlokat, hogy tiszta legyen a mappa
           rm -f rules/splunk/*.spl
           
+          # Konverzió futtatása minden Sigma fájlra
           for file in $(find rules/sigma -name "*.yaml"); do
             filename=$(basename "$file" .yaml)
             echo "Converting $file to Splunk..."
-            
-            # Most már a -p sysmon működni fog, mert telepítettük a plugint
             sigma convert -t splunk -p sysmon "$file" -o "rules/splunk/${filename}.spl"
           done
 
-      - name: Update README.md
+      - name: Update README and Navigator Layer
         if: github.event_name == 'push'
         run: |
+          # README frissítése a szabályok alapján
           python tools/update_readme.py
+          # MITRE Navigator JSON generálása a README alapján
+          python tools/generate_navigator.py
           
       - name: Commit and push changes
         if: github.event_name == 'push'
@@ -67,6 +71,8 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          git add README.md rules/splunk/
+          # Minden módosított fájl hozzáadása
+          git add README.md rules/splunk/*.spl attack_navigator_layer.json
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update: README and Sigma-to-Splunk conversion" && git push)
+          # Csak akkor commitolunk, ha van tényleges változás
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update: README, Splunk rules and Navigator Layer" && git push)

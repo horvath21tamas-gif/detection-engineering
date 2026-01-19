@@ -12,7 +12,7 @@ detection:
     EventID: 4769
   selection_machine_account:
     TargetUserName|endswith: "$"
-  condition: selection and not selection_machine_accounts
+  condition: selection and not selection_machine_account
 level: high
 tags: 
   - attack.t1558.003

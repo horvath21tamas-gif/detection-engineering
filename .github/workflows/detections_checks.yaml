@@ -8,7 +8,7 @@ on:
     branches:
       - test
 
-# Szükséges az írási jog a README, az SPL fájlok és a Navigator JSON feltöltéséhez
+# Szükséges az írási jog a dokumentáció és a JSON fájlok feltöltéséhez
 permissions:
   contents: write
 
@@ -47,23 +47,19 @@ jobs:
       - name: Convert Sigma rules to Splunk (.spl files)
         run: |
           mkdir -p rules/splunk
-          # Töröljük a régi fájlokat, hogy tiszta legyen a mappa
           rm -f rules/splunk/*.spl
           
-          # Konverzió futtatása minden Sigma fájlra
           for file in $(find rules/sigma -name "*.yaml"); do
             filename=$(basename "$file" .yaml)
             echo "Converting $file to Splunk..."
             sigma convert -t splunk -p sysmon "$file" -o "rules/splunk/${filename}.spl"
           done
 
-      - name: Update README and Navigator Layer
+      - name: Update Dashboard and Documentation
         if: github.event_name == 'push'
         run: |
-          # README frissítése a szabályok alapján
-          python tools/update_readme.py
-          # MITRE Navigator JSON generálása a README alapján
-          python tools/generate_navigator.py
+          # Ez az egy script frissíti a README-t, a COVERAGE-t és a Navigator JSON-t is
+          python tools/update_all.py
           
       - name: Commit and push changes
         if: github.event_name == 'push'
@@ -71,8 +67,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Minden módosított fájl hozzáadása
-          git add README.md rules/splunk/*.spl attack_navigator_layer.json
+          # Minden generált fájlt hozzáadunk (README, COVERAGE, JSON, SPL-ek)
+          git add README.md COVERAGE.md attack_navigator_layer.json rules/splunk/*.spl
           
-          # Csak akkor commitolunk, ha van tényleges változás
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update: README, Splunk rules and Navigator Layer" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update: Dashboard, Coverage and Navigator" && git push)

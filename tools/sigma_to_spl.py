@@ -13,6 +13,7 @@ def convert_selection_to_spl(selection, negation=None):
     """
     parts = []
 
+    # Feldolgozzuk a kiválasztott mezőket
     for field, value in selection.items():
         if isinstance(value, list):
             # Lista: OR operátor
@@ -21,6 +22,7 @@ def convert_selection_to_spl(selection, negation=None):
         else:
             parts.append(f'{field}="{value}"')
 
+    # Feldolgozzuk a kizáró mezőket
     if negation:
         for field, value in negation.items():
             if isinstance(value, list):
@@ -33,18 +35,22 @@ def convert_selection_to_spl(selection, negation=None):
 
 
 def process_rule(rule_file):
-    with open(rule_file, "r", encoding="utf-8") as f:
-        try:
+    try:
+        with open(rule_file, "r", encoding="utf-8") as f:
             sigma = yaml.safe_load(f)
-        except yaml.YAMLError as e:
-            print(f"[ERROR] Cannot parse {rule_file}: {e}")
-            return
+    except yaml.YAMLError as e:
+        print(f"[ERROR] Cannot parse YAML {rule_file}: {e}")
+        return
+
+    if not sigma:
+        print(f"[WARNING] Empty or invalid YAML: {rule_file}")
+        return
 
     title = sigma.get("title", rule_file.stem)
     detection = sigma.get("detection", {})
     condition = detection.pop("condition", None)
 
-    # Különítsük el a NOT szűrőket
+    # Különítsük el a NOT / filter mezőket
     negation = {}
     for key in list(detection.keys()):
         if key.startswith("filter_") or key.startswith("not_"):
@@ -53,7 +59,7 @@ def process_rule(rule_file):
     # Konvertálás SPL-re
     spl_body = convert_selection_to_spl(detection, negation)
 
-    # Alap SPL
+    # SPL fájl generálása
     spl = f"""# SPL generated from {rule_file.name} - {title}
 search index=security {spl_body}
 """

@@ -5,12 +5,12 @@ on:
     branches:
       - test
     paths:
-      - 'rules/sigma/**.yaml'
+      - 'rules/sigma/**/*.yaml'
   pull_request:
     branches:
       - test
     paths:
-      - 'rules/sigma/**.yaml'
+      - 'rules/sigma/**/*.yaml'
 
 jobs:
   setup:

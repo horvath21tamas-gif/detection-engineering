@@ -1,29 +1,46 @@
-# tools/sigma_to_spl.py
 import os
 import yaml
-from pathlib import Path
 
-SIGMA_DIR = Path("rules/sigma")
-SPLUNK_DIR = Path("rules/splunk")
+SIGMA_DIR = os.path.join(os.path.dirname(__file__), '..', 'rules', 'sigma')
+SPLUNK_DIR = os.path.join(os.path.dirname(__file__), '..', 'rules', 'splunk')
 
 def generate_spl_from_sigma():
-    SPLUNK_DIR.mkdir(exist_ok=True)
+    if not os.path.isdir(SIGMA_DIR):
+        raise RuntimeError(f"Sigma directory not found: {SIGMA_DIR}")
+    if not os.path.isdir(SPLUNK_DIR):
+        os.makedirs(SPLUNK_DIR)
 
-    for sigma_file in SIGMA_DIR.rglob("*.yaml"):
-        with open(sigma_file, 'r', encoding='utf-8') as f:
-            sigma_rule = yaml.safe_load(f)
+    for sigma_file in os.listdir(SIGMA_DIR):
+        if not sigma_file.endswith(".yaml"):
+            continue
 
-        rule_name = sigma_rule.get('title', sigma_file.stem)
-        spl = f"# SPL generated from {rule_name}\nsearch index=security\n"
+        sigma_file_path = os.path.join(SIGMA_DIR, sigma_file)
 
-        # Generálás a Splunk kereséshez (példa, a pontos logikát a sigma szabály alapján kell kitölteni)
-        spl += f"search {rule_name} | stats count by src_ip, dest_ip\n"
+        try:
+            with open(sigma_file_path, 'r', encoding='utf-8') as f:
+                sigma_rule = yaml.safe_load(f)
+            
+            if sigma_rule is None:
+                print(f"[WARNING] {sigma_file} is empty or invalid YAML.")
+                continue
 
-        output_file = SPLUNK_DIR / f"{sigma_file.stem}.spl"
-        with open(output_file, 'w', encoding='utf-8') as out_f:
-            out_f.write(spl)
+            rule_name = sigma_rule.get('title', sigma_file.stem)
 
-        print(f"[OK] Generated SPL for {rule_name}")
+            if 'detection' not in sigma_rule:
+                print(f"[ERROR] {sigma_file} is missing 'detection' field.")
+                continue
+
+            spl = f"# SPL generated from {rule_name}\nsearch index=security\n"
+            spl_output = os.path.join(SPLUNK_DIR, f"{rule_name}.spl")
+
+            with open(spl_output, 'w', encoding='utf-8') as spl_f:
+                spl_f.write(spl)
+
+            print(f"[OK] Generated SPL for {rule_name}")
+
+        except yaml.YAMLError as e:
+            print(f"[ERROR] YAML parsing error in {sigma_file_path}: {e}")
+            continue
 
 if __name__ == "__main__":
     generate_spl_from_sigma()

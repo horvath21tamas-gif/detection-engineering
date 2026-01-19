@@ -8,7 +8,7 @@ on:
     branches:
       - test
 
-# Ez a rész adja meg a szükséges írási jogot a GitHub Action-nek
+# Szükséges az írási jog a README és az új .spl fájlok feltöltéséhez
 permissions:
   contents: write
 
@@ -32,7 +32,6 @@ jobs:
 
       - name: Run unit test
         run: |
-          # Használjuk a PYTHONPATH-ot, hogy biztosan lássa a tools mappát a teszt
           export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
           python -m pytest test/ --maxfail=5 --disable-warnings -q
 
@@ -40,6 +39,29 @@ jobs:
         run: |
           python tools/lint_rules.py
           python tools/validate_metadata.py
+
+      - name: Convert Sigma rules to Splunk (.spl files)
+        run: |
+          # Célmappa létrehozása
+          mkdir -p rules/splunk
+          
+          # Töröljük a régi .spl fájlokat, hogy a törölt Sigma szabályok ne maradjanak ott
+          rm -f rules/splunk/*.spl
+          
+          # Végigmegyünk minden Sigma fájlon és egyenként lefordítjuk
+          # A 'find' parancs segít megtalálni az összes .yaml fájlt az almappákban is
+          for file in $(find rules/sigma -name "*.yaml"); do
+            # Fájlnév kinyerése kiterjesztés nélkül
+            filename=$(basename "$file" .yaml)
+            
+            echo "Converting $file to Splunk..."
+            
+            # Sigma konverzió:
+            # -t splunk: Splunk backend használata
+            # -p sysmon: Sysmon mezőleképezés (ezt módosítsd windows-ra, ha nem csak sysmonod van)
+            # -o: a kimeneti fájl helye
+            sigma convert -t splunk -p sysmon "$file" -o "rules/splunk/${filename}.spl"
+          done
 
       - name: Update README.md
         if: github.event_name == 'push'
@@ -51,6 +73,9 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
-          git add README.md
-          # Csak akkor commitolunk, ha tényleg változott valami, így elkerüljük a hibaüzeneteket
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update README with rule statistics" && git push)
+          
+          # Hozzáadjuk a README-t és az összes új/módosított .spl fájlt
+          git add README.md rules/splunk/*.spl
+          
+          # Csak akkor commitolunk, ha történt tényleges változás
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update: README and Sigma-to-Splunk conversion" && git push)

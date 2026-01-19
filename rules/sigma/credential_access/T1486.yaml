@@ -22,7 +22,7 @@ detection:
   filter_system:
     User:
       - SYSTEM
-  condition: (selection_services or selection_shadow or selection_recovery) and not filter_system | count(Image) by User > 1 within 10m
+  condition: (selection_services or selection_shadow or selection_recovery) and not filter_system
 level: critical
 tags: 
   - attack.t1486

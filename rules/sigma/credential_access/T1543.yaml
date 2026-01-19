@@ -10,8 +10,8 @@ logsource:
 detection:
    selection:
      EventID:
-       - 7036
-       - 7040
+       - '7036'
+       - '7040'
     filter_system:
       User:
         - 'SYSTEM'

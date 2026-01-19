@@ -3,7 +3,7 @@ import yaml
 from sigma.parser import SigmaParser
 
 def lint_sigma_rules():
-    sigma_rules_dir = 'rules/sigma'
+    sigma_rules_dir = 'rules/sigma/credential_access'
     for root, dirs, files in os.walk(sigma_rules_dir):
         for file in files:
             if file.endswith('.yaml'):

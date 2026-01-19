@@ -1,5 +1,10 @@
-Credential Dumping LSASS:
-  product: windows
-  data_sources:
-    - Sysmon
-    - Windows Security Event Log
+# Data Sources Mapping
+# A Sigma és Splunk szabályokhoz szükséges adatforrások
+data_sources:
+  suspicious_login:
+    - Windows Security Event Logs
+  powershell_encoded:
+    - PowerShell Logs
+  suspicious_file_activity:
+    - File Integrity Monitoring
+    - Windows Security Event Logs

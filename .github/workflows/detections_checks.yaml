@@ -1,3 +1,17 @@
+name: CI/CD for Detection Rules
+
+on:
+  push:
+    branches:
+      - test  # Ez az ág, amelyre a push esemény történik
+    paths:
+      - 'rules/sigma/**'  # Figyeljük a rules/sigma mappát és annak minden fájlját
+  pull_request:
+    branches:
+      - test  # Pull request események is triggerelhetik
+    paths:
+      - 'rules/sigma/**'  # Figyeljük a pull request-eket is, ha a rules/sigma mappában történik változtatás
+
 jobs:
   setup:
     runs-on: ubuntu-latest

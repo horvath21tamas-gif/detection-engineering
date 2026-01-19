@@ -4,16 +4,13 @@ import re
 import json
 
 def get_rule_data():
-    # A szabályok gyökérmappája
     sigma_dir = 'rules/sigma'
     rules = []
-    techniques_found = {} # ID: Level tárolása a színezéshez
+    techniques_found = {}
 
     if not os.path.exists(sigma_dir):
-        print(f"HIBA: A {sigma_dir} mappa nem található!")
         return rules, techniques_found
 
-    # Szabályok beolvasása rekurzívan
     for root, dirs, files in os.walk(sigma_dir):
         for file in files:
             if file.endswith('.yaml'):
@@ -22,110 +19,99 @@ def get_rule_data():
                     with open(path, 'r', encoding='utf-8') as f:
                         content = yaml.safe_load(f)
                         if not content: continue
-                        
-                        # Alapvető metaadatok kinyerése
                         level = str(content.get('level', 'low')).lower()
                         tags = content.get('tags', [])
-                        
-                        t_ids = []
-                        if tags:
-                            for tag in tags:
-                                # MITRE ATT&CK ID keresése (T1234 vagy T1234.001)
-                                match = re.search(r't\d{4}(?:\.\d{3})?', tag.lower())
-                                if match:
-                                    tid = match.group(0).upper()
-                                    t_ids.append(tid)
-                                    # Színezési prioritás: a High/Critical felülírja a Low-t
-                                    if tid not in techniques_found or level in ['high', 'critical']:
-                                        techniques_found[tid] = level
-                        
-                        rules.append({
-                            "name": file,
-                            "title": content.get('title', 'N/A'),
-                            "ids": ", ".join(t_ids) if t_ids else "N/A",
-                            "level": level
-                        })
-                except Exception as e:
-                    print(f"Hiba a fájl feldolgozásakor ({file}): {e}")
-                    continue
-                    
+                        for tag in tags:
+                            match = re.search(r't\d{4}(?:\.\d{3})?', tag.lower())
+                            if match:
+                                tid = match.group(0).upper()
+                                if tid not in techniques_found or level in ['high', 'critical']:
+                                    techniques_found[tid] = level
+                        rules.append({"name": file, "level": level})
+                except: continue
     return rules, techniques_found
+
+def generate_svg_map(techniques_found):
+    """Létrehoz egy vizuális mátrix ábrát SVG formátumban."""
+    colors = {"critical": "#ff6666", "high": "#ff6666", "medium": "#ffbd66", "low": "#ffe766"}
+    
+    # SVG beállítások
+    rect_width = 60
+    rect_height = 30
+    padding = 5
+    cols = 8
+    
+    sorted_tids = sorted(techniques_found.keys())
+    num_tech = len(sorted_tids)
+    rows = (num_tech // cols) + (1 if num_tech % cols != 0 else 0)
+    rows = max(rows, 1)
+
+    svg_width = cols * (rect_width + padding) + padding
+    svg_height = rows * (rect_height + padding) + padding
+
+    svg_header = f'<svg width="{svg_width}" height="{svg_height}" xmlns="http://www.w3.org/2000/svg">'
+    svg_content = '<rect width="100%" height="100%" fill="#f6f8fa" rx="10"/>' # Háttér
+    
+    for i, tid in enumerate(sorted_tids):
+        lvl = techniques_found[tid]
+        color = colors.get(lvl, "#ffe766")
+        r = i // cols
+        c = i % cols
+        x = c * (rect_width + padding) + padding
+        y = r * (rect_height + padding) + padding
+        
+        svg_content += f'''
+        <g>
+            <rect x="{x}" y="{y}" width="{rect_width}" height="{rect_height}" fill="{color}" rx="4" stroke="#333" stroke-width="0.5"/>
+            <text x="{x + rect_width/2}" y="{y + rect_height/2 + 5}" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">{tid}</text>
+        </g>'''
+    
+    svg_footer = '</svg>'
+    
+    with open('coverage_map.svg', 'w', encoding='utf-8') as f:
+        f.write(svg_header + svg_content + svg_footer)
 
 def update_files():
     rules, techniques_found = get_rule_data()
     
-    # 1. Részletes táblázat mentése a COVERAGE.md fájlba
-    with open('COVERAGE.md', 'w', encoding='utf-8') as f:
-        f.write("# 📝 Részletes Szabály Lista\n\n")
-        f.write("Ez a fájl automatikusan frissül minden commit után.\n\n")
-        f.write("| Fájlnév | Megnevezés | MITRE ID | Szint |\n")
-        f.write("| :--- | :--- | :--- | :--- |\n")
-        for r in rules:
-            f.write(f"| {r['name']} | {r['title']} | {r['ids']} | {r['level']} |\n")
+    # 1. SVG Ábra generálása
+    generate_svg_map(techniques_found)
 
-    # 2. MITRE Navigator JSON (Layer) generálása
-    # Színkódok a Navigatorhoz
-    colors = {
-        "critical": "#ff6666", 
-        "high": "#ff6666", 
-        "medium": "#ffbd66", 
-        "low": "#ffe766",
-        "informational": "#ffe766"
-    }
-    
+    # 2. Navigator JSON (háttérnek)
+    colors = {"critical": "#ff6666", "high": "#ff6666", "medium": "#ffbd66", "low": "#ffe766"}
     layer = {
-        "name": "Detection Coverage",
+        "name": "Coverage",
         "versions": {"attack": "14", "navigator": "4.9", "layer": "4.4"},
         "domain": "enterprise-attack",
-        "description": "Sigma Detection Rules Coverage map",
-        "filters": {"platforms": ["windows", "linux", "macos"]},
-        "techniques": [
-            {
-                "techniqueID": tid, 
-                "color": colors.get(lvl, "#ffe766"), 
-                "comment": f"Súlyosság: {lvl}", 
-                "enabled": True
-            } for tid, lvl in techniques_found.items()
-        ]
+        "techniques": [{"techniqueID": tid, "color": colors.get(lvl, "#ffe766")} for tid, lvl in techniques_found.items()]
     }
-    
-    with open('attack_navigator_layer.json', 'w', encoding='utf-8') as f:
+    with open('attack_navigator_layer.json', 'w') as f:
         json.dump(layer, f, indent=4)
 
-    # 3. README.md frissítése statisztikákkal és interaktív linkkel
-    total_techniques = 201 # Becsült technika szám az Enterprise mátrixban
-    coverage_pct = round((len(techniques_found) / total_techniques) * 100, 1) if total_techniques > 0 else 0
-    
-    # --- KONFIGURÁCIÓ: A te elérésed ---
-    USER = "horvath21tamas-gif"
+    # 3. README frissítése (Kép beágyazással)
+    USER = "horvath21tamas"
     REPO = "detection-engineering"
-    BRANCH = "test" 
-    # ----------------------------------
-
+    BRANCH = "test"
+    
+    coverage_pct = round((len(techniques_found) / 201) * 100, 1)
     raw_json_url = f"https://raw.githubusercontent.com/{USER}/{REPO}/{BRANCH}/attack_navigator_layer.json"
     navigator_link = f"https://mitre-attack.github.io/attack-navigator/#layerURL={raw_json_url}"
 
-    readme_content = f"""# 🛡️ Detection Engineering Repository
+    readme_content = f"""# 🛡️ Detection Engineering Dashboard
 
-![Coverage](https://img.shields.io/badge/MITRE_ATT%26CK_Lefedettség-{coverage_pct}%25-blue?style=for-the-badge)
-![Rules](https://img.shields.io/badge/Sigma_Szabályok-{len(rules)}_db-green?style=for-the-badge)
+## 📊 Lefedettségi Vizualizáció
+Ez az ábra automatikusan frissül a szabályok alapján:
 
-## 📊 Detektálási Statisztika
-- **Összes Sigma szabály:** {len(rules)}
-- **Lefedett egyedi MITRE technikák:** {len(techniques_found)}
-- **Részletes lista:** [COVERAGE.md](./COVERAGE.md)
+![MITRE Coverage Map](coverage_map.svg)
 
-## 🗺️ MITRE ATT&CK Navigator (Élő Térkép)
-Kattints az alábbi logóra az interaktív, színezett lefedettségi térkép megnyitásához:
-
-[![MITRE Navigator Map](https://raw.githubusercontent.com/mitre-attack/attack-navigator/master/nav-app/src/assets/favicon.ico)]({navigator_link})
-
-> [!IMPORTANT]
-> A színek a szabályok súlyosságát tükrözik: 🔴 **High**, 🟠 **Medium**, 🟡 **Low**. 
-> Ha a térkép üres vagy hibát dob, ellenőrizd, hogy a repository **Public** (nyilvános) állapotban van-e!
+**Jelmagyarázat:** 🔴 High/Critical | 🟠 Medium | 🟡 Low
 
 ---
-*Automatikusan generálva a GitHub Actions által.*
+### 📈 Statisztikák
+- **Lefedettség:** {coverage_pct}%
+- **Szabályok száma:** {len(rules)} db
+- **Részletes lista:** [COVERAGE.md](./COVERAGE.md)
+- **Interaktív Navigator:** [Kattints ide]({navigator_link})
 """
     with open('README.md', 'w', encoding='utf-8') as f:
         f.write(readme_content)

@@ -1,80 +1,29 @@
-from pathlib import Path
+# tools/sigma_to_spl.py
+import os
 import yaml
+from pathlib import Path
 
 SIGMA_DIR = Path("rules/sigma")
-OUTPUT_DIR = Path("rules/splunk")
+SPLUNK_DIR = Path("rules/splunk")
 
+def generate_spl_from_sigma():
+    SPLUNK_DIR.mkdir(exist_ok=True)
 
-def convert_selection_to_spl(selection, negation=None):
-    """
-    Egyszerű konverter a selection blokkhoz.
-    - selection: dict
-    - negation: dict mezők, amiket NOT-tal kell kezelni
-    """
-    parts = []
+    for sigma_file in SIGMA_DIR.rglob("*.yaml"):
+        with open(sigma_file, 'r', encoding='utf-8') as f:
+            sigma_rule = yaml.safe_load(f)
 
-    # Feldolgozzuk a kiválasztott mezőket
-    for field, value in selection.items():
-        if isinstance(value, list):
-            # Lista: OR operátor
-            or_parts = [f'{field}="{v}"' for v in value]
-            parts.append("(" + " OR ".join(or_parts) + ")")
-        else:
-            parts.append(f'{field}="{value}"')
+        rule_name = sigma_rule.get('title', sigma_file.stem)
+        spl = f"# SPL generated from {rule_name}\nsearch index=security\n"
 
-    # Feldolgozzuk a kizáró mezőket
-    if negation:
-        for field, value in negation.items():
-            if isinstance(value, list):
-                for v in value:
-                    parts.append(f'NOT {field}="{v}"')
-            else:
-                parts.append(f'NOT {field}="{value}"')
+        # Generálás a Splunk kereséshez (példa, a pontos logikát a sigma szabály alapján kell kitölteni)
+        spl += f"search {rule_name} | stats count by src_ip, dest_ip\n"
 
-    return " ".join(parts)
+        output_file = SPLUNK_DIR / f"{sigma_file.stem}.spl"
+        with open(output_file, 'w', encoding='utf-8') as out_f:
+            out_f.write(spl)
 
-
-def process_rule(rule_file):
-    try:
-        with open(rule_file, "r", encoding="utf-8") as f:
-            sigma = yaml.safe_load(f)
-    except yaml.YAMLError as e:
-        print(f"[ERROR] Cannot parse YAML {rule_file}: {e}")
-        return
-
-    if not sigma:
-        print(f"[WARNING] Empty or invalid YAML: {rule_file}")
-        return
-
-    title = sigma.get("title", rule_file.stem)
-    detection = sigma.get("detection", {})
-    condition = detection.pop("condition", None)
-
-    # Különítsük el a NOT / filter mezőket
-    negation = {}
-    for key in list(detection.keys()):
-        if key.startswith("filter_") or key.startswith("not_"):
-            negation[key.replace("filter_", "").replace("not_", "")] = detection.pop(key)
-
-    # Konvertálás SPL-re
-    spl_body = convert_selection_to_spl(detection, negation)
-
-    # SPL fájl generálása
-    spl = f"""# SPL generated from {rule_file.name} - {title}
-search index=security {spl_body}
-"""
-
-    output_file = OUTPUT_DIR / f"{rule_file.stem}.spl"
-    output_file.write_text(spl, encoding="utf-8")
-    print(f"[OK] Generated SPL: {output_file}")
-
-
-def main():
-    OUTPUT_DIR.mkdir(exist_ok=True)
-
-    for rule in SIGMA_DIR.rglob("*.yaml"):
-        process_rule(rule)
-
+        print(f"[OK] Generated SPL for {rule_name}")
 
 if __name__ == "__main__":
-    main()
+    generate_spl_from_sigma()

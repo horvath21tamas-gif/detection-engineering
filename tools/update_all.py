@@ -91,4 +91,4 @@ Kattints az alábbi képre a színes térkép megnyitásához:
         f.write(readme_content)
 
 if __name__ == "__main__":
-    update_all()
+    update_files()

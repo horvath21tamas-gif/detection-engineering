@@ -17,7 +17,7 @@ detection:
       - "SYSTEM"
       - "LOCAL SERVICE"
       - "NETWORK SERVICE"
-  condition: "selection and not filter_system | count(ServiceName) by TargetUserName > 3 within 5m"
+  condition: "selection and not filter_system 
 level: medium
 tags:
   - attack.t1543

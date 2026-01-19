@@ -97,7 +97,7 @@ def update_files():
     coverage_pct = round((len(techniques_found) / total_techniques) * 100, 1) if total_techniques > 0 else 0
     
     # --- KONFIGURÁCIÓ: A te elérésed ---
-    USER = "horvath21tamas"
+    USER = "horvath21tamas-gif"
     REPO = "detection-engineering"
     BRANCH = "test" 
     # ----------------------------------

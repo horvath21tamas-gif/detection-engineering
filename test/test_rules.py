@@ -1,6 +1,12 @@
-import pytest
+import sys
 import os
+
+# Ez a rész megmondja a Pythonnak, hogy nézzen be a tools mappába is modulokért
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'tools'))
+
+import pytest
 import yaml
+# Most már nem fog hibát dobni az importálásnál
 from validate_metadata import validate_rule_metadata
 
 # Példa a validálás tesztelésére

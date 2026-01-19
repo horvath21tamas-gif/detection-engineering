@@ -66,9 +66,20 @@ jobs:
             splunk_rule_validator "$rule"
           done
 
-  deploy:
+  update_readme:
     runs-on: ubuntu-latest
     needs: validate_rules
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Update README.md with new Sigma rules
+        run: |
+          python tools/update_readme.py
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: update_readme
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -76,4 +87,3 @@ jobs:
       - name: Deploy detection rules (optional)
         run: |
           echo "Deploying detection rules..."
-          # A deploy script vagy API hívás ide kerül

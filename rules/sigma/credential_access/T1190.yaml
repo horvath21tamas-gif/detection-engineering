@@ -1,0 +1,29 @@
+title: webszeren tortent XSS probakozas
+id: 1
+status: experimental
+description: 
+author: hota05
+date: 2026/01/12
+logsource: 
+  product: generic
+  category: webserver
+detection:
+  payload:
+    - '<script'
+    - '<svg'
+    - '<iframe'
+    - 'javascript:'
+    - '%3cscript'
+  selection:
+    status:
+      - 200
+      - 403
+    timeframe: 1m
+  condition: payload and selection | count(ip_src) > 3
+level: medium
+tags: 
+  - attack.initial_access
+  - attack_t1190
+falsepositive:
+  - Admin probalkozik 
+  - csak request van

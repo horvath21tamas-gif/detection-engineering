@@ -1,0 +1,25 @@
+title: netsh.exe segitsegevel tuzfal szabalyt adnak hozza vagy modositanak
+id: 1
+status: experimental
+description: netsh.exe segitsegevel tuzfal szabalyt adnak hozza vagy modositanak
+author: hota05
+date: 2026/01/13
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: '\netsh.exe'
+    CommandLine|contains:
+      - "dir=in"
+      - "action=allow"
+      - "set rule"
+      - "add rule"
+      - "advfirewall"
+  condition: selection
+level: medium
+tags:
+  - attack.t1562.004
+falsepositives:
+  - admin hasznalja
+  - pentesteles

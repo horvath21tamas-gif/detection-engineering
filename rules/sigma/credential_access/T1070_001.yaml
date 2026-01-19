@@ -9,12 +9,12 @@ logsource:
   category: process_creation
 detection:
   selection:
-    Image|endswith: "\wevtutil.exe"
+    Image|endswith: '\wevtutil.exe'
     CommandLine|contains:
-      - "cl"
-      - "security"
+      - 'cl'
+      - 'security'
   filter:
-    User: "SYSTEM"
+    User: 'SYSTEM'
   condition: selection and not filter
 level: medium
 tags:

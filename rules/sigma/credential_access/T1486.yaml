@@ -22,7 +22,7 @@ detection:
   filter_system:
     User:
       - SYSTEM
-  condition: (selection_services or selection_recovery) and not filter_system
+  condition: (selection_service or selection_recovery) and not filter_system
 level: critical
 tags: 
   - attack.t1486

@@ -1,28 +1,28 @@
-title: Gyanus Registry key modositas perzisztencia kiepitese erdekeben 
+title: "Gyanus Registry key modositas perzisztencia kiepitese erdekeben"
 id: 1
 status: experimental
-description: Detektalni a gyanus Registry key modositasokat
+description: "Detektalni a gyanus Registry key modositasokat"
 author: hota05
-date: 2026/01/07
+date: "2026-01-07"
 logsource:
-	product: windows
-	category: registry_event
+  product: windows
+  category: registry_event
 detection:
-	selection:
-   	 EventType: SetValue
-	 TargetObject|contains:
-     	- '\Software\Microsoft\Windows\CurrentVersion\Run'
-   	 Details|contains:
+  selection:
+    EventType: SetValue
+    TargetObject|contains:
+      - '\Software\Microsoft\Windows\CurrentVersion\Run'
+    Details|contains:
       - '\AppData\'
-	  - '\Temp\'
-	 Image|endswith:
-	  - '\powershell.exe'
-	  - '\cmd.exe'
-	condition: selection
+      - '\Temp\'
+    Image|endswith:
+      - '\powershell.exe'
+      - '\cmd.exe'
+  condition: selection
 level: high
 tags:
-	- attack.persistence
-	- attack.t1547.001
+  - attack.persistence
+  - attack.t1547.001
 falsepositives:
-	- Legitim software run inditasa
-	- Software telepites vagy update
+  - Legitim software run inditasa
+  - Software telepites vagy update

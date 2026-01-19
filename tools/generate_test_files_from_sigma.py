@@ -1,72 +1,43 @@
 import os
 import yaml
 import json
+from collections import defaultdict
 
-# Mappák
 SIGMA_DIR = "rules/sigma"
 LOGS_DIR = "test/logs"
 EXPECTED_DIR = "test/expected"
+README_FILE = "README.md"
 
 os.makedirs(LOGS_DIR, exist_ok=True)
 os.makedirs(EXPECTED_DIR, exist_ok=True)
 
-def generate_dummy_log(detection):
-    """
-    Egyszerű dummy log generátor a detection mezők alapján
-    """
-    log = {}
-    for key, value in detection.items():
-        if isinstance(value, dict):
-            # Ha van |endswith filter pl. TargetUserName|endswith
-            for subkey, subval in value.items():
-                if subkey.endswith("endswith"):
-                    field = key
-                    log[field] = subval + "_dummy"
-        elif isinstance(value, list):
-            # Lista: vegyünk egy első elemet
-            log[key] = value[0]
-        else:
-            log[key] = value
-    return log
 
 def process_rule(file_path):
     with open(file_path, "r") as f:
         sigma = yaml.safe_load(f)
 
     rule_id = sigma.get("id") or os.path.splitext(os.path.basename(file_path))[0]
-    detections = sigma.get("detection", {})
-    condition = detections.pop("condition", "selection")  # alap default
+    detections = sigma.get("detection", {}).copy()
+    detections.pop("condition", None)
 
-    # Dummy log generálása minden selection/filter alapján
     dummy_log = {}
-    for key, value in detections.items():
-        if isinstance(value, dict):
-            for subkey, subval in value.items():
-                if subkey.endswith("endswith"):
-                    dummy_log[key] = str(subval) + "_dummy"
-                else:
-                    dummy_log[key] = subval if isinstance(subval, str) else str(subval[0])
-        elif isinstance(value, list):
-            dummy_log[key] = value[0]
-        else:
-            dummy_log[key] = value
 
-    # Várt detekció
+    for _, value in detections.items():
+        if isinstance(value, dict):
+            for field, field_val in value.items():
+                if isinstance(field_val, list):
+                    dummy_log[field.split("|")[0]] = field_val[0]
+                else:
+                    dummy_log[field.split("|")[0]] = field_val
+        elif isinstance(value, list):
+            dummy_log["value"] = value[0]
+
     expected_detection = {
         "rule": sigma.get("title", rule_id),
         "severity": sigma.get("level", "medium"),
-        "technique": sigma.get("tags", ["unknown"])[0] if sigma.get("tags") else "unknown",
+        "technique": sigma.get("tags", ["unknown"])[0],
     }
 
-    # Próbáljuk meg kiegészíteni a log mezőket expected-hez
-    if "TargetUserName" in dummy_log:
-        expected_detection["user"] = dummy_log["TargetUserName"]
-    if "Host" in dummy_log:
-        expected_detection["computer"] = dummy_log["Host"]
-    elif "Computer" in dummy_log:
-        expected_detection["computer"] = dummy_log["Computer"]
-
-    # Mentés JSON-be
     log_file = os.path.join(LOGS_DIR, f"{rule_id}.json")
     expected_file = os.path.join(EXPECTED_DIR, f"{rule_id}_expected.json")
 
@@ -78,7 +49,76 @@ def process_rule(file_path):
 
     print(f"[INFO] Generated {log_file} and {expected_file}")
 
-# Fő loop: minden sigma fájl
-for sigma_file in os.listdir(SIGMA_DIR):
-    if sigma_file.endswith(".yaml"):
-        process_rule(os.path.join(SIGMA_DIR, sigma_file))
+    return sigma
+
+
+def extract_mitre_tags(tags):
+    mitre_tags = []
+    for tag in tags or []:
+        if tag.startswith("attack."):
+            mitre_tags.append(tag.replace("attack.", "").upper())
+    return mitre_tags
+
+
+def update_readme(mitre_rules):
+    start_marker = "<!-- SIGMA_RULES_START -->"
+    end_marker = "<!-- SIGMA_RULES_END -->"
+
+    if not os.path.exists(README_FILE):
+        print("[WARN] README.md not found")
+        return
+
+    with open(README_FILE, "r") as f:
+        content = f.read()
+
+    if start_marker not in content or end_marker not in content:
+        print("[WARN] README markers missing")
+        return
+
+    section_lines = []
+
+    for technique in sorted(mitre_rules.keys()):
+        section_lines.append(f"### {technique}")
+        for rule in sorted(mitre_rules[technique]):
+            section_lines.append(f"- {rule}")
+        section_lines.append("")
+
+    new_section = (
+        f"{start_marker}\n"
+        + "\n".join(section_lines).strip()
+        + f"\n{end_marker}"
+    )
+
+    before = content.split(start_marker)[0]
+    after = content.split(end_marker)[1]
+
+    with open(README_FILE, "w") as f:
+        f.write(before + new_section + after)
+
+    print("[INFO] README.md updated (MITRE grouped)")
+
+
+def main():
+    mitre_rules = defaultdict(list)
+
+    for sigma_file in os.listdir(SIGMA_DIR):
+        if not sigma_file.endswith(".yaml"):
+            continue
+
+        path = os.path.join(SIGMA_DIR, sigma_file)
+        sigma = process_rule(path)
+
+        title = sigma.get("title", sigma_file)
+        mitre_tags = extract_mitre_tags(sigma.get("tags", []))
+
+        if not mitre_tags:
+            mitre_rules["UNMAPPED"].append(title)
+        else:
+            for tag in mitre_tags:
+                mitre_rules[tag].append(title)
+
+    update_readme(mitre_rules)
+
+
+if __name__ == "__main__":
+    main()

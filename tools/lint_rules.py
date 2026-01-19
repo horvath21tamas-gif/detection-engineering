@@ -1,36 +1,20 @@
 import os
 import yaml
-
-SIGMA_DIR = os.path.join(os.path.dirname(__file__), '..', 'rules', 'sigma')
+from sigma.parser import SigmaParser
 
 def lint_sigma_rules():
-    for root, dirs, files in os.walk(SIGMA_DIR):
+    sigma_rules_dir = 'rules/sigma'
+    for root, dirs, files in os.walk(sigma_rules_dir):
         for file in files:
             if file.endswith('.yaml'):
-                file_path = os.path.join(root, file)
-                
+                rule_path = os.path.join(root, file)
                 try:
-                    with open(file_path, 'r', encoding='utf-8') as f:
-                        rule = yaml.safe_load(f)
-                    
-                    # Ellenőrizzük, hogy a rule valóban tartalmaz adatokat
-                    if rule is None:
-                        print(f"[WARNING] {file_path} is empty or invalid YAML.")
-                        continue
-
-                    # Ellenőrizzük, hogy a szükséges kulcsok jelen vannak
-                    if 'title' not in rule or 'detection' not in rule:
-                        print(f"[ERROR] {file_path} is missing 'title' or 'detection' field.")
-                        continue
-
-                except yaml.YAMLError as e:
-                    print(f"[ERROR] YAML parsing error in {file_path}: {e}")
-                    continue
-
-                # További linting szabályok itt...
-
-def main():
-    lint_sigma_rules()
+                    with open(rule_path, 'r') as rule_file:
+                        rule = yaml.safe_load(rule_file)
+                        SigmaParser().parse(rule)  # Parse and validate the rule
+                    print(f"[OK] Valid Sigma rule: {rule_path}")
+                except Exception as e:
+                    print(f"[ERROR] Invalid Sigma rule: {rule_path} - {str(e)}")
 
 if __name__ == "__main__":
-    main()
+    lint_sigma_rules()

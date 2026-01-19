@@ -1,0 +1,27 @@
+title: egy felhasznalo beepitett windows eszkozoket hasznal fajl letoltesre es kodfuttatasra
+id: 1
+status: experimental
+description: rosszindulatu fajl letoltese / kod futtatasa
+author: hota05
+date: 2026/01/12
+logsource: 
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\bitsadmin.exe'
+      - '\certutil.exe'
+    Commandline|contains:
+      - 'Invoke-WebRequest'
+      - 'IEX'
+      - 'DownloadFile'
+  condition: selection | count(Image) by TargetUserName > 5 within 10m
+level: medium
+tags:
+  - attack.t1105
+  - attack.t1218
+falsepositive:
+  - Admin dolgozik
+  - legitim fajl letoltese mely nem karos

@@ -5,11 +5,9 @@ import json
 
 def get_rule_data():
     sigma_dir = 'rules/sigma'
-    techniques_found = {} # ID: Level
-    
+    techniques_found = {}
     if not os.path.exists(sigma_dir):
-        return {}, {}
-
+        return {}
     for root, dirs, files in os.walk(sigma_dir):
         for file in files:
             if file.endswith('.yaml'):
@@ -27,81 +25,54 @@ def get_rule_data():
     return techniques_found
 
 def generate_visual_matrix(techniques_found):
-    """Egy SVG képet generál, ami úgy néz ki, mint a MITRE Navigator mátrix."""
     colors = {"critical": "#ff6666", "high": "#ff6666", "medium": "#ffbd66", "low": "#ffe766"}
-    
-    # SVG Paraméterek
     cell_w, cell_h = 80, 40
     gap = 4
     cols = 10
-    
     tids = sorted(techniques_found.keys())
+    if not tids:
+        return
     rows = (len(tids) // cols) + (1 if len(tids) % cols != 0 else 0)
-    
     width = cols * (cell_w + gap) + gap
     height = rows * (cell_h + gap) + gap
-
     svg = f'<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">'
     svg += '<rect width="100%" height="100%" fill="#ffffff"/>'
-
     for i, tid in enumerate(tids):
         r, c = i // cols, i % cols
         x, y = c * (cell_w + gap) + gap, r * (cell_h + gap) + gap
         color = colors.get(techniques_found[tid], "#ffe766")
-        
         svg += f'<rect x="{x}" y="{y}" width="{cell_w}" height="{cell_h}" fill="{color}" stroke="#333" stroke-width="1" rx="2"/>'
         svg += f'<text x="{x+cell_w/2}" y="{y+cell_h/2+5}" font-family="sans-serif" font-size="11" text-anchor="middle" font-weight="bold">{tid}</text>'
-
     svg += '</svg>'
-    
     with open('mitre_matrix.svg', 'w', encoding='utf-8') as f:
         f.write(svg)
 
 def update_all():
     techniques = get_rule_data()
-    
-    # 1. Kép generálása (ez jelenik meg a README-ben)
     generate_visual_matrix(techniques)
     
-    # 2. JSON generálása (hogy a link is működjön ha rákkattintanak)
+    # JSON generálása a manuális feltöltéshez
     layer = {
         "name": "Detection Coverage",
         "versions": {"attack": "14", "navigator": "4.9", "layer": "4.4"},
         "domain": "enterprise-attack",
         "techniques": [{"techniqueID": tid, "color": "#ff6666" if lvl in ['high','critical'] else "#ffbd66"} for tid, lvl in techniques.items()]
     }
-    with open('attack_navigator_layer.json', 'w') as f:
+    with open('attack_navigator_layer.json', 'w', encoding='utf-8') as f:
         json.dump(layer, f, indent=4)
 
-   # 3. README.md frissítése
-    # FIGYELEM: Ellenőrizd a böngésződben a pontos nevet! 
-    # Ha nincs -gif a neved végén a böngészőben, vedd ki innen is!
-    USER = "horvath21tamas-gif" 
-    REPO = "detection-engineering"
-    BRANCH = "test"
-
-    raw_json_url = f"https://raw.githubusercontent.com/{USER}/{REPO}/{BRANCH}/attack_navigator_layer.json"
-    navigator_link = f"https://mitre-attack.github.io/attack-navigator/#layerURL={raw_json_url}"
-
-    readme_content = f"""# 🛡️ Detection Engineering Dashboard
+    # README frissítése - Emoji nélkül a biztonság kedvéért, f-stringben
+    readme_content = """# 🛡️ Detection Engineering Dashboard
 
 ## 📊 MITRE ATT&CK Lefedettségi Kép
-Ez az ábra automatikusan frissül a szabályok alapján:
+Ez az ábra a privát szabályaid alapján generálódik:
 
 ![MITRE Matrix](./mitre_matrix.svg)
 
-[👉 Kattints ide az interaktív Navigator megnyitásához]({navigator_link})
-
-> [!CAUTION]
-> Ha a fenti link hibaüzenetet dob, ellenőrizd, hogy a GitHub Repository beállítása **Public** (nyilvános), különben a MITRE nem éri el a fájlt!
-"""
-
-## 📊 MITRE ATT&CK Lefedettségi Kép
-Ez az ábra automatikusan frissül a szabályok alapján:
-
-![MITRE Matrix](./mitre_matrix.svg)
-
-[👉 Kattints ide az interaktív Navigator megnyitásához](https://mitre-attack.github.io/attack-navigator/#layerURL=https://raw.githubusercontent.com/horvath21tamas-gif/detection-engineering/test/attack_navigator_layer.json)
+> [!IMPORTANT]
+> **Interaktív nézet:**
+> Mivel a repó Private, a Navigator link nem érhető el. 
+> Használd az [attack_navigator_layer.json](./attack_navigator_layer.json) fájlt manuális feltöltéssel.
 """
     with open('README.md', 'w', encoding='utf-8') as f:
         f.write(readme_content)

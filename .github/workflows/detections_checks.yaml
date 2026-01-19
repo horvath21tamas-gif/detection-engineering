@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest sigma splunk-rule-validator  # Telepítjük a szükséges csomagokat
+          pip install pytest sigma  # Eltávolítottuk a splunk-rule-validator csomagot
 
   run_tests:
     runs-on: ubuntu-latest

@@ -73,8 +73,28 @@ def update_all():
     with open('attack_navigator_layer.json', 'w') as f:
         json.dump(layer, f, indent=4)
 
-    # 3. README.md frissítése
+   # 3. README.md frissítése
+    # FIGYELEM: Ellenőrizd a böngésződben a pontos nevet! 
+    # Ha nincs -gif a neved végén a böngészőben, vedd ki innen is!
+    USER = "horvath21tamas-gif" 
+    REPO = "detection-engineering"
+    BRANCH = "test"
+
+    raw_json_url = f"https://raw.githubusercontent.com/{USER}/{REPO}/{BRANCH}/attack_navigator_layer.json"
+    navigator_link = f"https://mitre-attack.github.io/attack-navigator/#layerURL={raw_json_url}"
+
     readme_content = f"""# 🛡️ Detection Engineering Dashboard
+
+## 📊 MITRE ATT&CK Lefedettségi Kép
+Ez az ábra automatikusan frissül a szabályok alapján:
+
+![MITRE Matrix](./mitre_matrix.svg)
+
+[👉 Kattints ide az interaktív Navigator megnyitásához]({navigator_link})
+
+> [!CAUTION]
+> Ha a fenti link hibaüzenetet dob, ellenőrizd, hogy a GitHub Repository beállítása **Public** (nyilvános), különben a MITRE nem éri el a fájlt!
+"""
 
 ## 📊 MITRE ATT&CK Lefedettségi Kép
 Ez az ábra automatikusan frissül a szabályok alapján:

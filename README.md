@@ -9,8 +9,11 @@
 - **Részletes lista:** [COVERAGE.md](./COVERAGE.md)
 
 ## 🗺️ MITRE ATT&CK Navigator
-Kattints az alábbi képre a színes térkép megnyitásához:
+Kattints az alábbi logóra az interaktív térkép megnyitásához:
 
 [![Navigator](https://raw.githubusercontent.com/mitre-attack/attack-navigator/master/nav-app/src/assets/favicon.ico)](https://mitre-attack.github.io/attack-navigator/#layerURL=https://raw.githubusercontent.com/hota05/detection-engineering/test/attack_navigator_layer.json)
 
 *A színek a szabályok súlyosságát jelzik (🔴 High, 🟠 Medium, 🟡 Low).*
+
+---
+*Utolsó frissítés: 2026-01-19*

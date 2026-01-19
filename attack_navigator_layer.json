@@ -6,6 +6,13 @@
         "layer": "4.4"
     },
     "domain": "enterprise-attack",
+    "description": "Sigma Detection Rules Coverage",
+    "filters": {
+        "platforms": [
+            "windows",
+            "linux"
+        ]
+    },
     "techniques": [
         {
             "techniqueID": "T1546.003",
@@ -241,5 +248,13 @@
             "comment": "Level: medium",
             "enabled": true
         }
-    ]
+    ],
+    "gradient": {
+        "colors": [
+            "#ff6666",
+            "#ffe766"
+        ],
+        "minValue": 0,
+        "maxValue": 1
+    }
 }

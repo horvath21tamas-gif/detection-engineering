@@ -1,0 +1,24 @@
+title: UAC bypass Fodhelper segitsegevel
+id: 1
+status: experimental
+description: UAC bypass Fodhelper segitsegevel
+author: hota05
+date: 2026/01/14
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    ParentImage|endswith:
+      - '\fodhelper.exe'
+    Image|endswith:
+      - '\powershell.exe'
+      - '\cmd.exe'
+  filter_system:
+    User: "SYSTEM"
+  condition: selection and not filter_system
+level: high
+tags:
+  - attack.t1548.002
+falsepositives:
+  - nincs

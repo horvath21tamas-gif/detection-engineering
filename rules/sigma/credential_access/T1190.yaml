@@ -19,7 +19,7 @@ detection:
       - 200
       - 403
     timeframe: 1m
-  condition: payload and selection | count(ip_src) > 3
+  condition: payload and selection
 level: medium
 tags: 
   - attack.initial_access

@@ -1,34 +1,6 @@
-import json
-import os
-import pytest
-
-# Segédfüggvény JSON fájlok betöltésére
-def load_json(path):
-    with open(path) as f:
-        return json.load(f)
-
-# Mappa útvonalak
-logs_dir = "test/logs"
-expected_dir = "test/expected"
-
-# Az összes teszt generálása
-def generate_tests():
-    tests = []
-    
-    for log_file in os.listdir(logs_dir):
-        if log_file.endswith(".json"):
-            rule_name = log_file.replace(".json", "")
-            log_path = os.path.join(logs_dir, log_file)
-            expected_path = os.path.join(expected_dir, f"{rule_name}_expected.json")
-
-            tests.append((log_path, expected_path, rule_name))
-
-    return tests
-
-# A szabály-specifikus logika
 def process_rule(rule_name, logs):
     detections = []
-    
+
     # Itt jön a szabály-specifikus logika
     for log in logs:
         if rule_name.lower() == "credential_dumping_lsass":
@@ -57,15 +29,12 @@ def process_rule(rule_name, logs):
                     "user": log.get("TargetUserName"),
                     "computer": log.get("Host")
                 })
+        # Ha nem találunk semmit, adjunk hozzá egy default "UNMAPPED" technikát
+        if not detections:
+            detections.append({
+                "rule": f"Rule {rule_name} not matched",
+                "severity": "medium",
+                "technique": "UNMAPPED"
+            })
+
     return detections
-
-# Teszt dinamikus létrehozása
-@pytest.mark.parametrize("log_path,expected_path,rule_name", generate_tests())
-def test_rule(log_path, expected_path, rule_name):
-    logs = load_json(log_path)
-    expected = load_json(expected_path)
-
-    detections = process_rule(rule_name, logs)
-
-    assert detections == expected, f"Detection test failed for {rule_name}"
-

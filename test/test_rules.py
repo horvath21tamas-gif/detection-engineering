@@ -1,40 +1,52 @@
-def process_rule(rule_name, logs):
-    detections = []
+# test/test_rules.py
+import pytest
+from your_module import process_rule  # Ha más fájlban van a process_rule
 
-    # Itt jön a szabály-specifikus logika
-    for log in logs:
-        if rule_name.lower() == "credential_dumping_lsass":
-            if (
-                log.get("TargetImage", "").endswith("\\lsass.exe")
-                and log.get("Image", "").endswith("\\procdump.exe")
-                and log.get("GrantedAccess") in ["0x10", "0x30", "0x50", "0x1fffff"]
-            ):
-                detections.append({
-                    "rule": "Credential Dumping LSASS",
-                    "severity": "high",
-                    "technique": "T1003.001",
-                    "user": log.get("User"),
-                    "computer": log.get("Computer")
-                })
-        elif rule_name.lower() == "t1021" or rule_name.lower() == "suspicious_login":
-            if (
-                log.get("EventID") == 4624
-                and log.get("TargetUserName") not in ["SYSTEM", "LOCAL SERVICE", "NETWORK SERVICE"]
-                and log.get("IpAddress") not in ["127.0.0.1", "::1"]
-            ):
-                detections.append({
-                    "rule": "Multiple Remote Logons",
-                    "severity": "medium",
-                    "technique": "T1021",
-                    "user": log.get("TargetUserName"),
-                    "computer": log.get("Host")
-                })
-        # Ha nem találunk semmit, adjunk hozzá egy default "UNMAPPED" technikát
-        if not detections:
-            detections.append({
-                "rule": f"Rule {rule_name} not matched",
-                "severity": "medium",
-                "technique": "UNMAPPED"
-            })
+def test_process_rule_for_credential_dumping_lsass():
+    logs = [
+        {
+            "TargetImage": "C:\\Windows\\System32\\lsass.exe",
+            "Image": "C:\\Tools\\procdump.exe",
+            "GrantedAccess": "0x10",
+            "User": "user1",
+            "Computer": "PC1"
+        }
+    ]
+    result = process_rule("credential_dumping_lsass", logs)
+    expected = [{
+        "rule": "Credential Dumping LSASS",
+        "severity": "high",
+        "technique": "T1003.001",
+        "user": "user1",
+        "computer": "PC1"
+    }]
+    assert result == expected
 
-    return detections
+def test_process_rule_for_suspicious_login():
+    logs = [
+        {
+            "EventID": 4624,
+            "TargetUserName": "user1",
+            "IpAddress": "192.168.1.100",
+            "Host": "PC1"
+        }
+    ]
+    result = process_rule("suspicious_login", logs)
+    expected = [{
+        "rule": "Multiple Remote Logons",
+        "severity": "medium",
+        "technique": "T1021",
+        "user": "user1",
+        "computer": "PC1"
+    }]
+    assert result == expected
+
+def test_process_rule_for_unmapped_rule():
+    logs = [{"EventID": 9999}]  # Ha nem találunk semmit
+    result = process_rule("some_other_rule", logs)
+    expected = [{
+        "rule": "Rule some_other_rule not matched",
+        "severity": "medium",
+        "technique": "UNMAPPED"
+    }]
+    assert result == expected

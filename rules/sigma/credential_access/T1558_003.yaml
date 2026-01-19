@@ -12,7 +12,7 @@ detection:
     EventID: 4769
   selection_machine_account:
     TargetUserName|endswith: "$"
-  condition: selection and not selection_machine_accounts | coount(ServiceName) by TargetUsername > 10 within 10m 
+  condition: selection and not selection_machine_accounts
 level: high
 tags: 
   - attack.t1558.003

@@ -3,7 +3,7 @@ import yaml
 import json
 from collections import defaultdict
 
-# === ÚTVONALAK ===
+# === ÚTVONALAK (CI-BIZTOS) ===
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 SIGMA_DIR = os.path.join(BASE_DIR, "rules", "sigma")
 LOGS_DIR = os.path.join(BASE_DIR, "test", "logs")
@@ -77,15 +77,13 @@ def update_readme(mitre_rules):
     end_marker = "<!-- SIGMA_RULES_END -->"
 
     if not os.path.exists(README_FILE):
-        print("[WARN] README.md nem található! README frissítése kihagyva.")
-        return
+        raise FileNotFoundError("README.md nem található!")
 
     with open(README_FILE, "r", encoding="utf-8") as f:
         content = f.read()
 
     if start_marker not in content or end_marker not in content:
-        print("[WARN] SIGMA_RULES marker hiányzik a README.md-ből! README frissítése kihagyva.")
-        return
+        raise RuntimeError("SIGMA_RULES marker hiányzik a README.md-ből!")
 
     lines = []
     for technique in sorted(mitre_rules.keys()):

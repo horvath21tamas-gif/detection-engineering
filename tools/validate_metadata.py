@@ -8,8 +8,15 @@ def validate_rule_metadata(rule_file):
     """
     required_fields = ['id', 'title', 'description']
     
-    with open(rule_file, 'r') as file:
-        rule = yaml.safe_load(file)
+    try:
+        with open(rule_file, 'r') as file:
+            rule = yaml.safe_load(file)
+    except yaml.YAMLError as e:
+        print(f"Error reading YAML file {rule_file}: {e}")
+        return False
+    except Exception as e:
+        print(f"Error opening file {rule_file}: {e}")
+        return False
     
     missing_fields = [field for field in required_fields if field not in rule]
     
@@ -26,6 +33,10 @@ def validate_metadata():
     rule_dirs = ['rules/sigma', 'rules/splunk']
     
     for rule_dir in rule_dirs:
+        if not os.path.exists(rule_dir):
+            print(f"Directory {rule_dir} does not exist.")
+            continue
+        
         for root, dirs, files in os.walk(rule_dir):
             for file in files:
                 file_path = os.path.join(root, file)

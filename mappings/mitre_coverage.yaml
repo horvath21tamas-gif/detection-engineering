@@ -1,6 +1,13 @@
-Credential Dumping LSASS:
-  tactics:
-    - credential_access
-  techniques:
-    - T1003
-    - T1003.001
+# MITRE ATT&CK Coverage Mapping
+# Térképezi a Sigma és Splunk szabályokat az ATT&CK technikákhoz
+rules:
+  suspicious_login:
+    mitre_techniques:
+      - T1071: Application Layer Protocol
+      - T1075: Pass the Hash
+    description: "Detects suspicious login activity (e.g., brute-force attempts)"
+  powershell_encoded:
+    mitre_techniques:
+      - T1059.001: PowerShell
+      - T1071: Application Layer Protocol
+    description: "Detects encoded PowerShell commands"

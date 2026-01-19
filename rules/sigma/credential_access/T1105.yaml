@@ -17,7 +17,7 @@ detection:
       - 'Invoke-WebRequest'
       - 'IEX'
       - 'DownloadFile'
-  condition: selection | count(Image) by TargetUserName > 5 within 10m
+  condition: selection
 level: medium
 tags:
   - attack.t1105

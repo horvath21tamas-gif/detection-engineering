@@ -3,120 +3,130 @@ import yaml
 import json
 from collections import defaultdict
 
-SIGMA_DIR = "rules/sigma"
-LOGS_DIR = "test/logs"
-EXPECTED_DIR = "test/expected"
-README_FILE = "README.md"
+# === ÚTVONALAK (CI-BIZTOS) ===
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+SIGMA_DIR = os.path.join(BASE_DIR, "rules", "sigma")
+LOGS_DIR = os.path.join(BASE_DIR, "test", "logs")
+EXPECTED_DIR = os.path.join(BASE_DIR, "test", "expected")
+README_FILE = os.path.join(BASE_DIR, "README.md")
 
 os.makedirs(LOGS_DIR, exist_ok=True)
 os.makedirs(EXPECTED_DIR, exist_ok=True)
 
 
+# === SIGMA FELDOLGOZÁS ===
 def process_rule(file_path):
-    with open(file_path, "r") as f:
+    with open(file_path, "r", encoding="utf-8") as f:
         sigma = yaml.safe_load(f)
 
     rule_id = sigma.get("id") or os.path.splitext(os.path.basename(file_path))[0]
-    detections = sigma.get("detection", {}).copy()
-    detections.pop("condition", None)
+    detection = sigma.get("detection", {}).copy()
+    detection.pop("condition", None)
 
     dummy_log = {}
 
-    for _, value in detections.items():
+    for _, value in detection.items():
         if isinstance(value, dict):
             for field, field_val in value.items():
+                field_name = field.split("|")[0]
                 if isinstance(field_val, list):
-                    dummy_log[field.split("|")[0]] = field_val[0]
+                    dummy_log[field_name] = field_val[0]
                 else:
-                    dummy_log[field.split("|")[0]] = field_val
+                    dummy_log[field_name] = field_val
         elif isinstance(value, list):
             dummy_log["value"] = value[0]
 
     expected_detection = {
         "rule": sigma.get("title", rule_id),
         "severity": sigma.get("level", "medium"),
-        "technique": sigma.get("tags", ["unknown"])[0],
+        "technique": next(
+            (t for t in sigma.get("tags", []) if t.startswith("attack.")),
+            "unknown"
+        ),
     }
 
     log_file = os.path.join(LOGS_DIR, f"{rule_id}.json")
     expected_file = os.path.join(EXPECTED_DIR, f"{rule_id}_expected.json")
 
-    with open(log_file, "w") as f:
-        json.dump([dummy_log], f, indent=2)
+    with open(log_file, "w", encoding="utf-8") as f:
+        json.dump([dummy_log], f, indent=2, ensure_ascii=False)
 
-    with open(expected_file, "w") as f:
-        json.dump([expected_detection], f, indent=2)
+    with open(expected_file, "w", encoding="utf-8") as f:
+        json.dump([expected_detection], f, indent=2, ensure_ascii=False)
 
-    print(f"[INFO] Generated {log_file} and {expected_file}")
-
+    print(f"[OK] Generated test artifacts for {rule_id}")
     return sigma
 
 
-def extract_mitre_tags(tags):
-    mitre_tags = []
+# === MITRE TAG KINYERÉS ===
+def extract_mitre_techniques(tags):
+    techniques = []
     for tag in tags or []:
         if tag.startswith("attack."):
-            mitre_tags.append(tag.replace("attack.", "").upper())
-    return mitre_tags
+            techniques.append(tag.replace("attack.", "").upper())
+    return techniques
 
 
+# === README FRISSÍTÉS ===
 def update_readme(mitre_rules):
     start_marker = "<!-- SIGMA_RULES_START -->"
     end_marker = "<!-- SIGMA_RULES_END -->"
 
     if not os.path.exists(README_FILE):
-        print("[WARN] README.md not found")
-        return
+        raise FileNotFoundError("README.md nem található!")
 
-    with open(README_FILE, "r") as f:
+    with open(README_FILE, "r", encoding="utf-8") as f:
         content = f.read()
 
     if start_marker not in content or end_marker not in content:
-        print("[WARN] README markers missing")
-        return
+        raise RuntimeError("SIGMA_RULES marker hiányzik a README.md-ből!")
 
-    section_lines = []
-
+    lines = []
     for technique in sorted(mitre_rules.keys()):
-        section_lines.append(f"### {technique}")
+        lines.append(f"### {technique}")
         for rule in sorted(mitre_rules[technique]):
-            section_lines.append(f"- {rule}")
-        section_lines.append("")
+            lines.append(f"- {rule}")
+        lines.append("")
 
-    new_section = (
+    new_block = (
         f"{start_marker}\n"
-        + "\n".join(section_lines).strip()
+        + "\n".join(lines).strip()
         + f"\n{end_marker}"
     )
 
     before = content.split(start_marker)[0]
     after = content.split(end_marker)[1]
 
-    with open(README_FILE, "w") as f:
-        f.write(before + new_section + after)
+    with open(README_FILE, "w", encoding="utf-8") as f:
+        f.write(before + new_block + after)
 
-    print("[INFO] README.md updated (MITRE grouped)")
+    print("[OK] README.md successfully updated")
 
 
+# === MAIN ===
 def main():
+    if not os.path.isdir(SIGMA_DIR):
+        raise RuntimeError(f"Sigma directory not found: {SIGMA_DIR}")
+
     mitre_rules = defaultdict(list)
 
-    for sigma_file in os.listdir(SIGMA_DIR):
-        if not sigma_file.endswith(".yaml"):
+    for file in sorted(os.listdir(SIGMA_DIR)):
+        if not file.endswith(".yaml"):
             continue
 
-        path = os.path.join(SIGMA_DIR, sigma_file)
+        path = os.path.join(SIGMA_DIR, file)
         sigma = process_rule(path)
 
-        title = sigma.get("title", sigma_file)
-        mitre_tags = extract_mitre_tags(sigma.get("tags", []))
+        title = sigma.get("title", file)
+        techniques = extract_mitre_techniques(sigma.get("tags", []))
 
-        if not mitre_tags:
+        if not techniques:
             mitre_rules["UNMAPPED"].append(title)
         else:
-            for tag in mitre_tags:
-                mitre_rules[tag].append(title)
+            for tech in techniques:
+                mitre_rules[tech].append(title)
 
+    print("[DEBUG] MITRE grouping:", dict(mitre_rules))
     update_readme(mitre_rules)
 
 

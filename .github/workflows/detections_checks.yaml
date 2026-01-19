@@ -4,13 +4,9 @@ on:
   push:
     branches:
       - test
-    paths:
-      - 'rules/sigma/**/*.yaml'
-  pull_request:
+  pull_request: 
     branches:
       - test
-    paths:
-      - 'rules/sigma/**/*.yaml'
 
 jobs:
   setup:

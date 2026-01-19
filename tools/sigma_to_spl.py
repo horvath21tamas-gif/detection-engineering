@@ -1,47 +1,34 @@
 import os
 import yaml
 
-SIGMA_DIR = os.path.join(os.path.dirname(__file__), '..', 'rules', 'sigma')
-SPLUNK_DIR = os.path.join(os.path.dirname(__file__), '..', 'rules', 'splunk')
-
 def generate_spl_from_sigma():
-    if not os.path.isdir(SIGMA_DIR):
-        raise RuntimeError(f"Sigma directory not found: {SIGMA_DIR}")
-    if not os.path.isdir(SPLUNK_DIR):
-        os.makedirs(SPLUNK_DIR)
+    sigma_rules_dir = 'rules/sigma'
+    splunk_rules_dir = 'rules/splunk'
+    if not os.path.exists(splunk_rules_dir):
+        os.makedirs(splunk_rules_dir)
 
-    for sigma_file in os.listdir(SIGMA_DIR):
-        if not sigma_file.endswith(".yaml"):
-            continue
+    for root, dirs, files in os.walk(sigma_rules_dir):
+        for file in files:
+            if file.endswith('.yaml'):
+                rule_path = os.path.join(root, file)
+                with open(rule_path, 'r') as rule_file:
+                    sigma_rule = yaml.safe_load(rule_file)
 
-        sigma_file_path = os.path.join(SIGMA_DIR, sigma_file)
+                splunk_rule = convert_sigma_to_spl(sigma_rule)
 
-        try:
-            with open(sigma_file_path, 'r', encoding='utf-8') as f:
-                sigma_rule = yaml.safe_load(f)
-            
-            if sigma_rule is None:
-                print(f"[WARNING] {sigma_file} is empty or invalid YAML.")
-                continue
+                # Splunk szabály mentése
+                splunk_file_path = os.path.join(splunk_rules_dir, file.replace('.yaml', '.spl'))
+                with open(splunk_file_path, 'w') as splunk_file:
+                    splunk_file.write(splunk_rule)
 
-            # Használjuk os.path.splitext() hogy eltávolítsuk a fájl kiterjesztését
-            rule_name = sigma_rule.get('title', os.path.splitext(sigma_file)[0])
+                print(f"[OK] Generated SPL for {file}")
 
-            if 'detection' not in sigma_rule:
-                print(f"[ERROR] {sigma_file} is missing 'detection' field.")
-                continue
-
-            spl = f"# SPL generated from {rule_name}\nsearch index=security\n"
-            spl_output = os.path.join(SPLUNK_DIR, f"{rule_name}.spl")
-
-            with open(spl_output, 'w', encoding='utf-8') as spl_f:
-                spl_f.write(spl)
-
-            print(f"[OK] Generated SPL for {rule_name}")
-
-        except yaml.YAMLError as e:
-            print(f"[ERROR] YAML parsing error in {sigma_file_path}: {e}")
-            continue
+def convert_sigma_to_spl(sigma_rule):
+    # Itt történik az átalakítás a Splunk szabályra
+    splunk_rule = f"# Converted Sigma Rule\n"
+    splunk_rule += f"# {sigma_rule.get('title', 'Unnamed Rule')}\n"
+    splunk_rule += f"search = {sigma_rule.get('detection', {}).get('search', 'No search defined')}\n"
+    return splunk_rule
 
 if __name__ == "__main__":
     generate_spl_from_sigma()

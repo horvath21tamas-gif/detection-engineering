@@ -4,7 +4,7 @@ status: experimental
 description: Detektalni a potenciális webshell feltolteseket es az interakciokat
 author: hota05
 date: 2026/01/12
-logsoruce: 
+logsource: 
   product: generic
   category: webserver
 detection:

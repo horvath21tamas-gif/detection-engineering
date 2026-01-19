@@ -24,7 +24,8 @@ def generate_spl_from_sigma():
                 print(f"[WARNING] {sigma_file} is empty or invalid YAML.")
                 continue
 
-            rule_name = sigma_rule.get('title', sigma_file.stem)
+            # Használjuk os.path.splitext() hogy eltávolítsuk a fájl kiterjesztését
+            rule_name = sigma_rule.get('title', os.path.splitext(sigma_file)[0])
 
             if 'detection' not in sigma_rule:
                 print(f"[ERROR] {sigma_file} is missing 'detection' field.")

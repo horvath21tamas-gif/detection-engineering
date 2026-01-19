@@ -1,5 +1,7 @@
 # 📝 Részletes Szabály Lista
 
+Ez a fájl automatikusan frissül minden commit után.
+
 | Fájlnév | Megnevezés | MITRE ID | Szint |
 | :--- | :--- | :--- | :--- |
 | T1546_003.yaml | wmic.exe segitsegevel perzisztens esemenyt hoznak letre a tamadok | T1546.003, T1546 | high |

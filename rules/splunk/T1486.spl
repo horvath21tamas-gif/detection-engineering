@@ -1,0 +1,1 @@
+EventID=1 (Image IN ("*\\sc.exe", "*\\net.exe") CommandLine="*shadow*") OR (Image="*\\bcdedit.exe" CommandLine="*recoveryenabled*") NOT User="SYSTEM"

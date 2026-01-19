@@ -1,0 +1,1 @@
+EventID=1 Image IN ("*\\powershell.exe", "*tar.exe", "*7z.exe", "*rar.exe") CommandLine="*Compress-Archive*" CommandLine IN ("*C:\\Temp*", "*%AppData%*", "*Users\\Public*") NOT User="SYSTEM"

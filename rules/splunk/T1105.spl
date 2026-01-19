@@ -1,0 +1,1 @@
+EventID=1 Image IN ("*\\powershell.exe", "*\\bitsadmin.exe", "*\\certutil.exe") Commandline IN ("*Invoke-WebRequest*", "*IEX*", "*DownloadFile*")

@@ -1,0 +1,1 @@
+EventID=1 Image="*\\wmic.exe" CommandLine IN ("*/node:*", "*process*", "*call*", "*create*") NOT User="SYSTEM"

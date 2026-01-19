@@ -1,0 +1,1 @@
+EventID IN (12, 13, 14) EventType="SetValue" TargetObject="*\\Software\\Microsoft\\Windows\\CurrentVersion\\Run*" Details IN ("*\\AppData\\*", "*\\Temp\\*") Image IN ("*\\powershell.exe", "*\\cmd.exe")

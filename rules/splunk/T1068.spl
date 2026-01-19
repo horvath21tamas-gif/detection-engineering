@@ -1,0 +1,1 @@
+EventID=1 ParentImage IN ("*\\explorer.exe", "*\\chrome.exe", "*\\brave.exe") Image IN ("*\\cmd.exe", "*\\powershell.exe") User="*SYSTEM\\*"

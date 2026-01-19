@@ -1,0 +1,1 @@
+EventID=1 Image IN ("*\\powershell.exe", "*\\cmd.exe") CommandLine IN ("*net stop*", "*sc stop*", "*Set-MpPreference*") NOT User="SYSTEM"

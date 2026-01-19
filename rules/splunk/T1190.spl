@@ -1,0 +1,1 @@
+"<script" OR "<svg" OR "<iframe" OR "javascript:" OR "%3cscript" status IN (200, 403) timeframe="1m"

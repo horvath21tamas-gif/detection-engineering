@@ -1,0 +1,1 @@
+EventID=11 TargetFileName IN ("*\\User Data\\*", "*Login Data*") NOT (Image IN ("*\\chrome.exe", "*\\msedge.exe", "*\\brave.exe", "*\\firefox.exe"))

@@ -1,0 +1,1 @@
+EventID=1 (Image="*\\wmic.exe" CommandLine IN ("*__EventFilter*", "*CommandLineEventConsumer*", "*FilterToConsumerBinding*")) OR (Image="*\\powershell.exe" CommandLine IN ("*Register-WmiEvent*", "*root\\subscription*")) NOT User="SYSTEM"

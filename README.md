@@ -1,8 +1,11 @@
 # 🛡️ Detection Engineering Dashboard
 
 ## 📊 MITRE ATT&CK Lefedettségi Kép
-Ez az ábra automatikusan frissül a szabályok alapján:
+Ez az ábra a privát szabályaid alapján generálódik:
 
 ![MITRE Matrix](./mitre_matrix.svg)
 
-[👉 Kattints ide az interaktív Navigator megnyitásához](https://mitre-attack.github.io/attack-navigator/#layerURL=https://raw.githubusercontent.com/horvath21tamas-gif/detection-engineering/test/attack_navigator_layer.json)
+> [!IMPORTANT]
+> **Interaktív nézet:**
+> Mivel a repó Private, a Navigator link nem érhető el. 
+> Használd az [attack_navigator_layer.json](./attack_navigator_layer.json) fájlt manuális feltöltéssel.

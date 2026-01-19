@@ -1,0 +1,35 @@
+title: COM hijacking (perzisztencia)
+id: 1
+status: experimental
+description: COM hijacking (perzisztencia)
+author: hota05
+date: 2026/01/14
+logsource: 
+  product: windows
+  category: registry_set
+detection:
+  selection:
+    TargetObject|contains:
+      - '\Software\Classes\CLSID'
+  selection_server:
+    TargetObject|endswith:
+      - "InprocServer32"
+      - "LocalServer32"
+  selection_repo:
+    Details|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - 'ProgramData'
+  filter_system:
+    User: "SYSTEM"
+  filter_legit:
+    Details|startswith:
+      - 'C:\\Windows\System32'
+  condition: selection and selection_server and selection_repo and not filter_system and not filter_legit
+level: high
+tags:
+  - attack.t1546.015
+  - attack.t1546
+falsepositives:
+  - alkalmazas update

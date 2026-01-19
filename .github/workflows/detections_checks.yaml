@@ -29,6 +29,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install pytest pyyaml sigma-cli
+          # Sigma pluginok telepítése a konverzióhoz
+          sigma plugin install splunk
+          sigma plugin install core
 
       - name: Run unit test
         run: |
@@ -42,24 +45,14 @@ jobs:
 
       - name: Convert Sigma rules to Splunk (.spl files)
         run: |
-          # Célmappa létrehozása
           mkdir -p rules/splunk
-          
-          # Töröljük a régi .spl fájlokat, hogy a törölt Sigma szabályok ne maradjanak ott
           rm -f rules/splunk/*.spl
           
-          # Végigmegyünk minden Sigma fájlon és egyenként lefordítjuk
-          # A 'find' parancs segít megtalálni az összes .yaml fájlt az almappákban is
           for file in $(find rules/sigma -name "*.yaml"); do
-            # Fájlnév kinyerése kiterjesztés nélkül
             filename=$(basename "$file" .yaml)
-            
             echo "Converting $file to Splunk..."
             
-            # Sigma konverzió:
-            # -t splunk: Splunk backend használata
-            # -p sysmon: Sysmon mezőleképezés (ezt módosítsd windows-ra, ha nem csak sysmonod van)
-            # -o: a kimeneti fájl helye
+            # Konverzió futtatása
             sigma convert -t splunk -p sysmon "$file" -o "rules/splunk/${filename}.spl"
           done
 
@@ -74,8 +67,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Hozzáadjuk a README-t és az összes új/módosított .spl fájlt
-          git add README.md rules/splunk/*.spl
+          # Az összes módosítás hozzáadása (README és az új .spl fájlok)
+          git add README.md rules/splunk/
           
-          # Csak akkor commitolunk, ha történt tényleges változás
           git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update: README and Sigma-to-Splunk conversion" && git push)

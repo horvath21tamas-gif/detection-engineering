@@ -30,13 +30,13 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           
-          # 1. Alap csomagok + a Sentinel backend közvetlen telepítése pip-pel
-          python -m pip install sigma-cli pysigma-backend-splunk pysigma-backend-microsoft-sentinel pytest "pyyaml>=6.0"
+          # 1. Alap csomagok + a Sentinel backend a pontos pip névvel
+          python -m pip install sigma-cli pysigma-backend-splunk pysigma-backend-sentinel pytest "pyyaml>=6.0"
           
-          # 2. A többi plugin marad
+          # 2. A többi plugin marad, de a sentinelt nem itt telepítjük
           sigma plugin install splunk sysmon windows netwitness
           
-          # 3. QRadar (marad a kényszerített telepítés)
+          # 3. QRadar kényszerített telepítése
           sigma plugin install --force-install qradar || echo "QRadar forced"
           
           # 4. Verzió helyreállítás
@@ -74,7 +74,8 @@ jobs:
             # RSA NetWitness konverzió
             sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
 
-            # Microsoft Sentinel (KQL) konverzió - ÚJ LÉPÉS
+            # Microsoft Sentinel (KQL) konverzió
+            sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || \
             sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba: $file"
           done
 

@@ -1,1 +1,1 @@
-process.exe_path=/.*msiexec\.exe$/i AND (process.cmd_line ICONTAINS-ANY ["http://", "https://", "/i"])
+Image ends 'msiexec.exe' && (CommandLine contains 'http://','https://','/i')

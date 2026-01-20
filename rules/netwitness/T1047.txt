@@ -1,1 +1,1 @@
-process.exe_path=/.*\\wmic\.exe$/i AND (process.cmd_line ICONTAINS-ANY ["/node:", "process", "call", "create"]) AND NOT process.username = NOCASE("SYSTEM")
+(Image ends '\wmic.exe' && (CommandLine contains '/node:','process','call','create')) && (NOT (User = 'SYSTEM'))

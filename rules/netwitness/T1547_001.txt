@@ -1,0 +1,1 @@
+EventType = 'SetValue' && TargetObject contains '\Software\Microsoft\Windows\CurrentVersion\Run' && (Details contains '\AppData\','\Temp\') && (Image ends '\powershell.exe','\cmd.exe')

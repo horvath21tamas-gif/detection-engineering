@@ -1,1 +1,1 @@
-process.exe_path=/.*itsadmin\.exe$/i AND (process.cmd_line ICONTAINS-ANY ["/transfer", "/addfile", "http://", "https://"]) AND NOT process.username = NOCASE("SYSTEM")
+(Image ends 'itsadmin.exe' && (CommandLine contains '/transfer','/addfile','http://','https://')) && (NOT (User = 'SYSTEM'))

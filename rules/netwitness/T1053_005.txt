@@ -1,1 +1,1 @@
-process.exe_path=/.*\\schtasks\.exe$/i AND process.cmd_line ICONTAINS "/create" AND process.cmd_line ICONTAINS "powershell"
+(Image ends '\schtasks.exe' && CommandLine contains '/create') && CommandLine contains 'powershell'

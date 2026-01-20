@@ -1,1 +1,1 @@
-(process.exe_path=/(.*\\powershell\.exe$|.*\\cmd\.exe$)/i) AND (process.cmd_line ICONTAINS-ANY ["net stop", "sc stop", "Set-MpPreference"]) AND NOT process.username = NOCASE("SYSTEM")
+((Image ends '\powershell.exe','\cmd.exe') && (CommandLine contains 'net stop','sc stop','Set-MpPreference')) && (NOT (User = 'SYSTEM'))

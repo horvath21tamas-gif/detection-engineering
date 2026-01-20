@@ -1,1 +1,1 @@
-process.exe_path=/.*\\regsvr32\.exe$/i AND (process.cmd_line ICONTAINS-ANY ["\Users\", "\AppData\", "\Temp\"]) AND NOT process.cmd_line=/.*\.dll$/i
+(Image ends '\regsvr32.exe' && (CommandLine contains '\Users\','\AppData\','\Temp\')) && (NOT (CommandLine ends '.dll'))

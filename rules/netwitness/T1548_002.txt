@@ -1,1 +1,1 @@
-parent_process.exe_path=/.*\\fodhelper\.exe$/i AND (process.exe_path=/(.*\\powershell\.exe$|.*\\cmd\.exe$)/i) AND NOT process.username = NOCASE("SYSTEM")
+(ParentImage ends '\fodhelper.exe' && (Image ends '\powershell.exe','\cmd.exe')) && (NOT (User = 'SYSTEM'))

@@ -1,1 +1,1 @@
-(process.exe_path=/(.*\\powershell\.exe$|.*\\bitsadmin\.exe$|.*\\certutil\.exe$)/i) AND (Commandline ICONTAINS-ANY ["Invoke-WebRequest", "IEX", "DownloadFile"])
+(Image ends '\powershell.exe','\bitsadmin.exe','\certutil.exe') && (Commandline contains 'Invoke-WebRequest','IEX','DownloadFile')

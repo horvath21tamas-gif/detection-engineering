@@ -1,1 +1,1 @@
-process.exe_path=/.*\\vssadmin\.exe$/i AND (process.cmd_line ICONTAINS-ANY ["delete", "shadow"]) AND NOT process.username = NOCASE("SYSTEM")
+(Image ends '\vssadmin.exe' && (CommandLine contains 'delete','shadow')) && (NOT (User = 'SYSTEM'))

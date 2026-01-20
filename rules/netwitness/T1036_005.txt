@@ -1,1 +1,1 @@
-(process.exe_path ICONTAINS-ANY ["\Users\", "\AppData\", "\Temp\", "\ProgramData\"]) AND (process.exe_path=/(.*\\svchost\.exe$|.*\\lsass\.exe$|.*services\.exe$|.*explorer\.exe$)/i) AND NOT (process.exe_path ISTARTS-WITH-ANY ["C:\Windows\System32\", "C:\Windows\SysWOW64\"]) AND NOT process.username = NOCASE("SYSTEM")
+(Image contains '\Users\','\AppData\','\Temp\','\ProgramData\') && (Image ends '\svchost.exe','\lsass.exe','services.exe','explorer.exe') && (NOT (Image begins 'C:\Windows\System32\','C:\Windows\SysWOW64\')) && (NOT (User = 'SYSTEM'))

@@ -30,27 +30,24 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           
-          # 1. Alap CLI és backendek telepítése (itt még feljöhet a hibás pyparsing)
+          # 1. Alap CLI és backendek telepítése
           python -m pip install sigma-cli \
             pysigma-backend-splunk \
             pysigma-backend-qradar \
             pysigma-backend-insightidr \
             pytest "pyyaml>=6.0"
           
-          # 2. KRITIKUS FIX: Töröljük a rossz verziót és kényszerítjük a működőt
-          # Ezt a többi telepítés UTÁN tesszük, hogy semmi ne frissíthesse vissza.
+          # 2. Pyparsing fix (ez már bizonyítottan működik)
           python -m pip uninstall -y pyparsing
           python -m pip install "pyparsing==3.1.4"
           
-          # 3. Sentinel plugin telepítése
-          sigma plugin install microsoft-sentinel || echo "Sentinel plugin hiba"
+          # 3. Microsoft Sentinel backend telepítése (PIP-es verzió kényszerítése)
+          python -m pip install pySigma-backend-microsoft-sentinel || sigma plugin install microsoft-sentinel
 
       - name: Smart Validation and Auto-fix
         id: validate_step
         run: |
-          # Ellenőrizzük az importot közvetlenül Pythonból is, hogy lássuk a hibát
-          python -c "from pyparsing import Set; print('✅ Pyparsing OK')"
-          sigma --version
+          # A hibás --version sort töröltük, csak a validáció fut
           python tools/validate_rules.py || echo "VALIDATION_FAILED=true" >> $GITHUB_ENV
 
       - name: Run unit test
@@ -63,19 +60,22 @@ jobs:
           mkdir -p rules/splunk rules/qradar rules/netwitness rules/sentinel
           rm -f rules/splunk/*.spl rules/qradar/*.aql rules/netwitness/*.txt rules/sentinel/*.kql
           
+          # Ellenőrizzük, hogy látja-e a backendeket (diagnosztika)
+          sigma list targets
+          
           for file in $(find rules/sigma -name "*.yaml"); do
             filename=$(basename "$file" .yaml)
             
-            # Splunk
+            # Splunk konverzió
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba"
             
-            # QRadar
+            # QRadar konverzió
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba"
             
-            # NetWitness
+            # NetWitness konverzió
             sigma convert -t insightidr "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ NetWitness hiba"
 
-            # Microsoft Sentinel
+            # Microsoft Sentinel konverzió
             sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || \
             sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba"
           done
@@ -92,7 +92,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add .
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Dashboard and SIEM rules"
+            git commit -m "Auto-update: SIEM rules and dashboard"
             git pull --rebase origin test
             git push origin test
           fi

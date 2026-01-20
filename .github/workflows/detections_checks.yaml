@@ -30,13 +30,13 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           
-          # 1. FIX: A pyparsing és a pysigma verziójának kényszerítése, 
-          # hogy elkerüljük az ImportError-t és a verzióütközést.
-          python -m pip install "pyparsing<3.2.0" "pysigma>=1.1.0,<2.0.0"
+          # Először a kritikus alapcsomagokat telepítjük
+          python -m pip install "pyparsing>=3.0.0" "pysigma>=1.1.0"
           
-          # 2. FIX: Minden backendet egyetlen parancsban telepítünk, 
-          # így a PIP kénytelen közös nevezőt találni.
-          python -m pip install sigma-cli \
+          # Utána az összes CLI és backend csomagot egyben
+          # A --no-cache-dir segít elkerülni a korábbi hibás letöltéseket
+          python -m pip install --no-cache-dir \
+            sigma-cli \
             pysigma-backend-splunk \
             pysigma-backend-qradar \
             pysigma-backend-microsoft-sentinel \
@@ -46,7 +46,7 @@ jobs:
       - name: Smart Validation and Auto-fix
         id: validate_step
         run: |
-          # Itt ellenőrizzük, hogy a CLI egyáltalán elindul-e
+          # Ellenőrzés, hogy a környezet ép-e
           sigma --version
           python tools/validate_rules.py || echo "VALIDATION_FAILED=true" >> $GITHUB_ENV
 
@@ -69,7 +69,7 @@ jobs:
             # QRadar
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba"
             
-            # NetWitness (insightidr-t használva)
+            # NetWitness
             sigma convert -t insightidr "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ NetWitness hiba"
 
             # Microsoft Sentinel

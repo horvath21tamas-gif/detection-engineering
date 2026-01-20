@@ -4,6 +4,7 @@ Ez a fájl kilistázza az összes lefedett technikát és a hozzájuk tartozó s
 
 | Technika ID | Szint | Kapcsolódó szabályok |
 | :--- | :--- | :--- |
+| T1003 | HIGH | Suspicious Access to LSASS Process |
 | T1003.001 | HIGH | Suspicious Access to LSASS Process |
 | T1021 | MEDIUM | Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be |
 | T1021.001 | MEDIUM | Gyanus RDP belepes |

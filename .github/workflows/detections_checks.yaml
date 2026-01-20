@@ -24,27 +24,33 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
+          cache: 'pip'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           
-          # Telepítés és verzió fixálás
-          python -m pip install "sigma-cli>=2.0.1" "pysigma-backend-splunk" "pysigma-backend-qradar" \
-            "pysigma-backend-insightidr" "pysigma-backend-microsoft-sentinel" \
+          # 1. Alap CLI és backendek telepítése (itt még feljöhet a hibás pyparsing)
+          python -m pip install sigma-cli \
+            pysigma-backend-splunk \
+            pysigma-backend-qradar \
+            pysigma-backend-insightidr \
             pytest "pyyaml>=6.0"
           
-          # Pyparsing fix a végén
-          python -m pip install "pyparsing==3.1.4" "pysigma<1.1.0" --force-reinstall
-
-      - name: Verify and List Backends
-        run: |
-          echo "--- Telepített backendek listája ---"
-          sigma list targets
+          # 2. KRITIKUS FIX: Töröljük a rossz verziót és kényszerítjük a működőt
+          # Ezt a többi telepítés UTÁN tesszük, hogy semmi ne frissíthesse vissza.
+          python -m pip uninstall -y pyparsing
+          python -m pip install "pyparsing==3.1.4"
+          
+          # 3. Sentinel plugin telepítése
+          sigma plugin install microsoft_sentinel || echo "Sentinel plugin hiba"
 
       - name: Smart Validation and Auto-fix
         id: validate_step
         run: |
+          # Ellenőrizzük az importot közvetlenül Pythonból is, hogy lássuk a hibát
+          python -c "from pyparsing import Set; print('✅ Pyparsing OK')"
+          sigma version
           python tools/validate_rules.py || echo "VALIDATION_FAILED=true" >> $GITHUB_ENV
 
       - name: Run unit test
@@ -59,20 +65,19 @@ jobs:
           
           for file in $(find rules/sigma -name "*.yaml"); do
             filename=$(basename "$file" .yaml)
-            echo "Konvertálás: $filename"
             
-            # Splunk (Célpont neve: splunk)
+            # Splunk
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba"
             
-            # QRadar (Célpont neve: qradar)
-            # Megjegyzés: Ha a QRadar hiba marad, az a Sigma szabály mezőinek inkompatibilitása miatt van
+            # QRadar
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba"
             
-            # NetWitness / InsightIDR (Célpont neve pontosan: insight_idr)
+            # NetWitness
             sigma convert -t insight_idr "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ NetWitness hiba"
 
-            # Microsoft Sentinel (Célpont neve pontosan: microsoft_sentinel)
-            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba"
+            # Microsoft Sentinel
+            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || \
+            sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba"
           done
 
       - name: Update Dashboard and SVG Map
@@ -87,7 +92,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add .
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: SIEM rules and dashboard"
+            git commit -m "Auto-update: Dashboard and SIEM rules"
             git pull --rebase origin test
             git push origin test
           fi

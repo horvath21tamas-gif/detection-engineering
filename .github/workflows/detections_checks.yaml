@@ -33,8 +33,8 @@ jobs:
           # 1. Telepítjük a modern alapokat fixen
           python -m pip install sigma-cli pysigma-backend-splunk pytest "pyyaml>=6.0"
           
-          # 2. Felrakjuk az alap pluginokat
-          sigma plugin install splunk sysmon windows
+          # 2. Felrakjuk az alap pluginokat (Hozzáadva: sentinel)
+          sigma plugin install splunk sysmon windows sentinel
           
           # 3. RSA NetWitness telepítése
           sigma plugin install netwitness
@@ -57,11 +57,12 @@ jobs:
 
       - name: Convert Sigma rules to SIEM queries
         run: |
-          # Mappák létrehozása
-          mkdir -p rules/splunk rules/qradar rules/netwitness
+          # Mappák létrehozása (Splunk, QRadar, NetWitness és ÚJ: Sentinel számára)
+          mkdir -p rules/splunk rules/qradar rules/netwitness rules/sentinel
           rm -f rules/splunk/*.spl
           rm -f rules/qradar/*.aql
           rm -f rules/netwitness/*.txt
+          rm -f rules/sentinel/*.kql
           
           for file in $(find rules/sigma -name "*.yaml"); do
             filename=$(basename "$file" .yaml)
@@ -75,6 +76,9 @@ jobs:
             
             # RSA NetWitness konverzió
             sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
+
+            # Microsoft Sentinel (KQL) konverzió - ÚJ LÉPÉS
+            sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba: $file"
           done
 
       - name: Update Dashboard and SVG Map
@@ -96,9 +100,10 @@ jobs:
           if ls rules/splunk/*.spl 1> /dev/null 2>&1; then git add rules/splunk/*.spl; fi
           if ls rules/qradar/*.aql 1> /dev/null 2>&1; then git add rules/qradar/*.aql; fi
           if ls rules/netwitness/*.txt 1> /dev/null 2>&1; then git add rules/netwitness/*.txt; fi
+          if ls rules/sentinel/*.kql 1> /dev/null 2>&1; then git add rules/sentinel/*.kql; fi
           
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Dashboard, Splunk, QRadar & NetWitness rules"
+            git commit -m "Auto-update: Dashboard, Splunk, QRadar, NetWitness & Sentinel rules"
             git pull --rebase origin test
             git push origin test
           else

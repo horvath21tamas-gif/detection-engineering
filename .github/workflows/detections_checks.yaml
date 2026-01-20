@@ -29,18 +29,15 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # Telepítjük az alapcsomagokat
-          python -m pip install pytest pyyaml sigma-cli
+          # 1. Telepítjük a CLI-t és a backendeket közvetlenül PIP-pel (így elkerüljük az interaktív kérdéseket)
+          python -m pip install sigma-cli pysigma-backend-splunk pysigma-backend-qradar pytest pyyaml
           
-          # Pluginok telepítése kényszerítve
-          sigma plugin install splunk
-          sigma plugin install -f qradar
+          # 2. Telepítjük a pipeline-hoz szükséges egyéb sigma pluginokat (ezek általában nem kavarnak be)
           sigma plugin install sysmon
           sigma plugin install windows
           
-          # KRITIKUS JAVÍTÁS: A pluginok által összekavart pysigma verziót 
-          # kényszerítve visszaállítjuk a CLI által elvárt 1.x verzióra
-          python -m pip install "pysigma>=1,<2" --upgrade
+          # 3. Kényszerítjük a legújabb kompatibilis pySigma verziót, hogy mindenki boldog legyen
+          python -m pip install "pysigma>=1.1.0,<2.0.0" --upgrade
 
       # 1. LÉPÉS: Okos ellenőrzés és Automatikus javítás
       - name: Smart Validation and Auto-fix

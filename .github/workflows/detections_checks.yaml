@@ -29,20 +29,9 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          
-          # 1. Telepítjük a modern alapokat fixen
           python -m pip install sigma-cli pysigma-backend-splunk pytest "pyyaml>=6.0"
-          
-          # 2. Felrakjuk az alap pluginokat
-          sigma plugin install splunk sysmon windows
-          
-          # 3. RSA NetWitness telepítése
-          sigma plugin install netwitness
-          
-          # 4. A TRÜKK: A QRadar-t úgy telepítjük, hogy utána AZONNAL helyreállítjuk a környezetet
+          sigma plugin install splunk sysmon windows netwitness
           sigma plugin install --force-install qradar || echo "QRadar forced"
-          
-          # 5. MINDENT HELYREÁLLÍTUNK: Kényszerítjük a legújabb stabil verziókat
           python -m pip install --upgrade "pysigma>=1.1.0" "pyparsing>=3.0.0" sigma-cli
 
       - name: Smart Validation and Auto-fix
@@ -57,23 +46,14 @@ jobs:
 
       - name: Convert Sigma rules to SIEM queries
         run: |
-          # Mappák létrehozása
           mkdir -p rules/splunk rules/qradar rules/netwitness
-          rm -f rules/splunk/*.spl
-          rm -f rules/qradar/*.aql
-          rm -f rules/netwitness/*.txt
+          rm -f rules/splunk/*.spl rules/qradar/*.aql rules/netwitness/*.txt
           
           for file in $(find rules/sigma -name "*.yaml"); do
             filename=$(basename "$file" .yaml)
-            
-            # Splunk konverzió
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
-            
-            # QRadar konverzió
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
-            
-            # RSA NetWitness konverzió
             sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
           done
 
@@ -88,18 +68,17 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Alap fájlok hozzáadása
-          git add README.md COVERAGE.md attack_navigator_layer.json mitre_matrix.svg \
-                  rules/sigma/*.yaml
-          
-          # SIEM fájlok hozzáadása csak ha léteznek (Hiba megelőzése)
-          if ls rules/splunk/*.spl 1> /dev/null 2>&1; then git add rules/splunk/*.spl; fi
-          if ls rules/qradar/*.aql 1> /dev/null 2>&1; then git add rules/qradar/*.aql; fi
-          if ls rules/netwitness/*.txt 1> /dev/null 2>&1; then git add rules/netwitness/*.txt; fi
+          # MINDENT hozzáadunk (SIEM szabályok, Dashboard, COVERAGE.md), hogy ne legyen ütközés
+          git add .
           
           if ! git diff --staged --quiet; then
             git commit -m "Auto-update: Dashboard, Splunk, QRadar & NetWitness rules"
+            
+            # Rebase előtt félretesszük az esetleges maradék változást, majd pull
+            git stash || echo "Nincs mit eltenni"
             git pull --rebase origin test
+            git stash pop || echo "Nincs mit visszatenni"
+            
             git push origin test
           else
             echo "Nincs változás a fájlokban."

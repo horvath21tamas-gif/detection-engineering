@@ -26,55 +26,46 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
 
-      # --- 1. KÖRNYEZET: Splunk (Modern) ---
-      - name: Setup Splunk Environment and Generate
+      - name: Install dependencies
         run: |
-          python -m venv venv_splunk
-          source venv_splunk/bin/activate
           python -m pip install --upgrade pip
-          pip install sigma-cli pysigma-backend-splunk pyyaml
-          sigma plugin install splunk sysmon windows
+          # Csak a modern, kompatibilis verziókat telepítjük
+          python -m pip install sigma-cli pysigma-backend-splunk pysigma-backend-qradar pytest pyyaml
           
-          mkdir -p rules/splunk
-          rm -f rules/splunk/*.spl
-          for file in $(find rules/sigma -name "*.yaml"); do
-            filename=$(basename "$file" .yaml)
-            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
-          done
-          deactivate
-
-      # --- 2. KÖRNYEZET: QRadar (Legacy / Régi) ---
-      - name: Setup QRadar Environment and Generate
-        run: |
-          python -m venv venv_qradar
-          source venv_qradar/bin/activate
-          python -m pip install --upgrade pip
-          # Itt a régi pysigma és pyparsing verziókat használjuk az izolált venv-ben
-          pip install "pysigma<0.10.0" "pyparsing<3.0.0" pysigma-backend-qradar pyyaml "sigma-cli<0.8.0"
-          
-          mkdir -p rules/qradar
-          rm -f rules/qradar/*.aql
-          for file in $(find rules/sigma -name "*.yaml"); do
-            filename=$(basename "$file" .yaml)
-            # A régi verzióban a pipeline neve gyakran csak 'qradar' vagy nincs rá szükség
-            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
-          done
-          deactivate
-
-      # --- 3. LÉPÉS: Közös eszközök telepítése a fő környezetbe a többi híváshoz ---
-      - name: Install validation tools
-        run: |
-          python -m pip install pytest pyyaml sigma-cli
+          # Pluginok regisztrálása a CLI-be
+          sigma plugin install splunk
+          sigma plugin install qradar
+          sigma plugin install sysmon
+          sigma plugin install windows
 
       - name: Smart Validation and Auto-fix
         id: validate_step
         run: |
+          # Feltételezve, hogy a validate_rules.py a tools mappában van
           python tools/validate_rules.py || echo "VALIDATION_FAILED=true" >> $GITHUB_ENV
 
       - name: Run unit test
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
           python -m pytest test/ --maxfail=5 --disable-warnings -q || echo "Nincsenek tesztek vagy hiba történt."
+
+      - name: Convert Sigma rules to SIEM queries (Splunk & QRadar)
+        run: |
+          mkdir -p rules/splunk rules/qradar
+          rm -f rules/splunk/*.spl
+          rm -f rules/qradar/*.aql
+          
+          for file in $(find rules/sigma -name "*.yaml"); do
+            filename=$(basename "$file" .yaml)
+            
+            # Splunk konverzió (modern pipeline-al)
+            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
+            
+            # QRadar konverzió (modern AQL formátum)
+            # Ha a qradar_windows nem működne, próbáld meg a qradar_payload-ot
+            sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
+            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql"
+          done
 
       - name: Update Dashboard and SVG Map
         if: github.event_name == 'push'
@@ -87,6 +78,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
+          # Minden releváns fájl hozzáadása
           git add README.md COVERAGE.md attack_navigator_layer.json mitre_matrix.svg \
                   rules/splunk/*.spl \
                   rules/qradar/*.aql \
@@ -100,7 +92,8 @@ jobs:
             echo "Nincs változás a fájlokban."
           fi
 
+          # Végső státusz ellenőrzés
           if [ "${{ env.VALIDATION_FAILED }}" == "true" ]; then
-            echo "❌ A validáció kritikus hibákat talált, de a javításokat és a konverziókat elmentettem."
+            echo "❌ A validáció kritikus hibákat talált, de a többi folyamat lefutott."
             exit 1
           fi

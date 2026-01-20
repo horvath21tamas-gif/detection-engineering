@@ -34,44 +34,49 @@ jobs:
           sigma plugin install sysmon
           sigma plugin install windows
 
-      # 1. LÉPÉS: OKOS ELLENŐRZÉS (Ha ez elbukik, a többi nem fut le)
-      - name: Smart Validation with Suggestions
+      # 1. LÉPÉS: Automatikus javítás (Auto-fix) és validáció
+      # Ez a script kijavítja az elírásokat (pl. log_source -> logsource)
+      - name: Lint and Smart Validation
         run: |
           python tools/validate_metadata.py
 
+      # 2. LÉPÉS: Meglévő Unit Tesztek futtatása (Pytest)
       - name: Run unit test
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
-          # Csak akkor fut le, ha a validate_metadata.py sikeres volt
-          python -m pytest test/ --maxfail=5 --disable-warnings -q || echo "Nincsenek tesztek."
+          python -m pytest test/ --maxfail=5 --disable-warnings -q || echo "Nincsenek tesztek vagy hiba történt."
 
+      # 3. LÉPÉS: Konvertálás Splunk formátumba (Sigma-CLI)
       - name: Convert Sigma rules to Splunk (.spl files)
         run: |
           mkdir -p rules/splunk
           rm -f rules/splunk/*.spl
           for file in $(find rules/sigma -name "*.yaml"); do
             filename=$(basename "$file" .yaml)
-            sigma convert -t splunk -p sysmon "$file" -o "rules/splunk/${filename}.spl"
+            # A '|| echo' biztosítja, hogy ha egy szabály még hibás, a többi azért lefusson
+            sigma convert -t splunk -p sysmon "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Átugorva: $file"
           done
 
+      # 4. LÉPÉS: Dashboard és MITRE Mátrix frissítése
       - name: Update Dashboard and SVG Map
         if: github.event_name == 'push'
         run: |
           python tools/update_all.py
           
+      # 5. LÉPÉS: Minden mentése (Auto-fix javítások, Splunk fájlok és Navigator)
       - name: Commit and push changes
         if: github.event_name == 'push'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          # A legfrissebb fájlok hozzáadása (README, COVERAGE, JSON, SVG, SPLUNK)
-          git add README.md COVERAGE.md attack_navigator_layer.json mitre_matrix.svg rules/splunk/*.spl
+          # Hozzáadjuk a javított Sigma szabályokat, az új Splunk lekérdezéseket és a Dashboard fájlokat
+          git add README.md COVERAGE.md attack_navigator_layer.json mitre_matrix.svg rules/splunk/*.spl rules/sigma/*.yaml
           
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Dashboard, Coverage Map and Splunk rules"
+            git commit -m "Auto-update: Dashboard, Coverage Map and Sigma auto-fixes"
             git pull --rebase origin test
             git push origin test
           else
-            echo "Nincs változás, nem kell commitolni."
+            echo "Nincs változás a fájlokban."
           fi

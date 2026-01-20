@@ -29,15 +29,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # CSAK a stabil alapokat tesszük fel pip-el
           python -m pip install sigma-cli pysigma-backend-splunk pytest pyyaml
           
-          # A QRadar-t és a többi kiegészítőt a Sigma saját környezetébe telepítjük
-          # Ez izolálja a függőségeket a fő Python környezettől
-          sigma plugin install splunk
-          sigma plugin install qradar
-          sigma plugin install sysmon
-          sigma plugin install windows
+          # Pluginok telepítése - QRadar kényszerítve
+          sigma plugin install splunk sysmon windows
+          sigma plugin install -f qradar
 
       - name: Smart Validation and Auto-fix
         id: validate_step
@@ -57,12 +53,7 @@ jobs:
           
           for file in $(find rules/sigma -name "*.yaml"); do
             filename=$(basename "$file" .yaml)
-            
-            # Splunk konverzió
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
-            
-            # QRadar konverzió (AQL formátum)
-            # Ha a pipeline hiba lenne, megpróbáljuk anélkül
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql"
           done

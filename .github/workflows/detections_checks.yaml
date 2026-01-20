@@ -57,6 +57,11 @@ jobs:
             sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
           done
 
+      - name: Run Integrity Check
+        run: |
+          # Ez a lépés ellenőrzi, hogy ne legyenek üres vagy hibaüzenetet tartalmazó SIEM lekérdezések
+          python tools/check_integrity.py
+
       - name: Update Dashboard and SVG Map
         if: github.event_name == 'push'
         run: |
@@ -68,13 +73,11 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          # MINDENT hozzáadunk (SIEM szabályok, Dashboard, COVERAGE.md), hogy ne legyen ütközés
           git add .
           
           if ! git diff --staged --quiet; then
             git commit -m "Auto-update: Dashboard, Splunk, QRadar & NetWitness rules"
             
-            # Rebase előtt félretesszük az esetleges maradék változást, majd pull
             git stash || echo "Nincs mit eltenni"
             git pull --rebase origin test
             git stash pop || echo "Nincs mit visszatenni"

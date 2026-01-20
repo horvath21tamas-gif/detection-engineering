@@ -1,1 +1,0 @@
-(cs-method = 'POST','PUT') && (cs-uri-stem ends '.php','.asp','.aspx','.jsp','.phtml') && (cs-uri-query ends 'cmd=','exec=','powershell=','whoami','net user','command=','shell','curl','wget')

@@ -1,1 +1,0 @@
-(((Image ends '\sc.exe','\net.exe') && CommandLine contains 'shadow') || (Image ends '\bcdedit.exe' && CommandLine contains 'recoveryenabled')) && (NOT (User = 'SYSTEM'))

@@ -1,1 +1,0 @@
-((ParentImage ends '\explorer.exe','\chrome.exe','\brave.exe') && (Image ends '\cmd.exe','\powershell.exe')) && User contains 'SYSTEM\'

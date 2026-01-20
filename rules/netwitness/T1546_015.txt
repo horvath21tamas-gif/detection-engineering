@@ -1,1 +1,0 @@
-TargetObject contains '\Software\Classes\CLSID' && (TargetObject ends 'InprocServer32','LocalServer32') && (Details contains '\Users\','\AppData\','\Temp\','ProgramData') && (NOT (User = 'SYSTEM')) && (NOT (Details begins 'C:\Windows\System32'))

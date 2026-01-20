@@ -1,1 +1,0 @@
-(ParentImage ends '\fodhelper.exe' && (Image ends '\powershell.exe','\cmd.exe')) && (NOT (User = 'SYSTEM'))

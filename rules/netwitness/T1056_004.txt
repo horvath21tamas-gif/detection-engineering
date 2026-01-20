@@ -1,1 +1,0 @@
-(ImageLoaded ends '\user32.dll','\advapi32.dll','\win32u.dll') && Image ends '.exe' && (NOT (Image begins 'C:\Windows\System32\','C:\Windows\SysWOW64\')) && (NOT (Image ends '\explorer.exe','\chrome.exe','\msedge.exe','\firefox.exe','\teams.exe'))

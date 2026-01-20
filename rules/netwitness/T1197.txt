@@ -1,1 +1,0 @@
-(Image ends 'itsadmin.exe' && (CommandLine contains '/transfer','/addfile','http://','https://')) && (NOT (User = 'SYSTEM'))

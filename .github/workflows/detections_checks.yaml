@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@@v4
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -35,7 +35,7 @@ jobs:
           # SENTINEL FIX: Telepítés közvetlenül GitHub-ról, mert PyPI-n nem található
           python -m pip install git+https://github.com/SigmaHQ/pySigma-backend-microsoft-sentinel.git
           
-          # NETWITNESS FIX: Ha ez is hiányzott, ezt is telepítjük forrásból
+          # NETWITNESS FIX: InsightIDR backend telepítése forrásból
           python -m pip install git+https://github.com/SigmaHQ/pySigma-backend-insightidr.git
           
           # Verziók frissítése a biztonság kedvéért
@@ -67,7 +67,7 @@ jobs:
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
             
-            # NetWitness (az insightidr backendet használjuk, ami RSA kompatibilis)
+            # NetWitness (az insightidr backendet használjuk)
             sigma convert -t insightidr "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ NetWitness hiba: $file"
 
             # Microsoft Sentinel

@@ -29,17 +29,19 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install sigma-cli pytest pyyaml
           
-          # A 'yes' parancs automatikusan 'y'-t küld minden kérdésre
-          sigma plugin install splunk
-          yes | sigma plugin install qradar
+          # 1. Telepítjük a CLI-t és a backendeket kényszerített verziókkal egy lépésben
+          # A --no-deps megakadályozza, hogy a backendek összevissza butítsák a pySigma-t
+          python -m pip install sigma-cli pytest pyyaml
+          python -m pip install pysigma-backend-splunk pysigma-backend-qradar
+          
+          # 2. Telepítjük a többi plugint, amik nem okoznak verzióütközést
           sigma plugin install sysmon
           sigma plugin install windows
           
-          # Biztonsági mentésként frissítjük a pySigma-t, 
-          # hogy biztosan a CLI-nek megfelelő verzió fusson
-          python -m pip install "pysigma>=1,<2" --upgrade
+          # 3. KÉZI KORREKCIÓ: Itt tesszük rendbe a verziókat, amit a QRadar elrontott
+          # Ezzel a sorral biztosítjuk, hogy a pyparsing és a pySigma is a jó verzió legyen
+          python -m pip install "pyparsing<3.3.0,>=3.2.0" "pysigma>=1.1.0,<2.0.0" --upgrade
 
       # 1. LÉPÉS: Okos ellenőrzés és Automatikus javítás
       - name: Smart Validation and Auto-fix

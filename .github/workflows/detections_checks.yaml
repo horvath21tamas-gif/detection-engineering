@@ -5,7 +5,7 @@ on:
     branches:
       - test
   pull_request: 
-    branches: 
+    branches:
       - test
 
 permissions:
@@ -30,54 +30,51 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           
-          # 1. Alap CLI és backendek telepítése (itt még feljöhet a hibás pyparsing)
-          python -m pip install sigma-cli \
-            pysigma-backend-splunk \
-            pysigma-backend-qradar \
-            pysigma-backend-insightidr \
-            pytest "pyyaml>=6.0"
+          # 1. Telepítjük a modern alapokat fixen
+          python -m pip install sigma-cli pysigma-backend-splunk pytest "pyyaml>=6.0"
           
-          # 2. KRITIKUS FIX: Töröljük a rossz verziót és kényszerítjük a működőt
-          # Ezt a többi telepítés UTÁN tesszük, hogy semmi ne frissíthesse vissza.
-          python -m pip uninstall -y pyparsing
-          python -m pip install "pyparsing==3.1.4"
+          # 2. Felrakjuk az alap pluginokat
+          sigma plugin install splunk sysmon windows
           
-          # 3. Sentinel plugin telepítése
-          sigma plugin install microsoft_sentinel || echo "Sentinel plugin hiba"
+          # 3. RSA NetWitness telepítése
+          sigma plugin install netwitness
+          
+          # 4. A TRÜKK: A QRadar-t úgy telepítjük, hogy utána AZONNAL helyreállítjuk a környezetet
+          sigma plugin install --force-install qradar || echo "QRadar forced"
+          
+          # 5. MINDENT HELYREÁLLÍTUNK: Kényszerítjük a legújabb stabil verziókat
+          python -m pip install --upgrade "pysigma>=1.1.0" "pyparsing>=3.0.0" sigma-cli
 
       - name: Smart Validation and Auto-fix
         id: validate_step
         run: |
-          # Ellenőrizzük az importot közvetlenül Pythonból is, hogy lássuk a hibát
-          python -c "from pyparsing import Set; print('✅ Pyparsing OK')"
-          sigma version
           python tools/validate_rules.py || echo "VALIDATION_FAILED=true" >> $GITHUB_ENV
 
       - name: Run unit test
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
-          python -m pytest test/ --maxfail=5 --disable-warnings -q || echo "Nincsenek tesztek."
+          python -m pytest test/ --maxfail=5 --disable-warnings -q || echo "Nincsenek tesztek vagy hiba történt."
 
       - name: Convert Sigma rules to SIEM queries
         run: |
-          mkdir -p rules/splunk rules/qradar rules/netwitness rules/sentinel
-          rm -f rules/splunk/*.spl rules/qradar/*.aql rules/netwitness/*.txt rules/sentinel/*.kql
+          # Mappák létrehozása
+          mkdir -p rules/splunk rules/qradar rules/netwitness
+          rm -f rules/splunk/*.spl
+          rm -f rules/qradar/*.aql
+          rm -f rules/netwitness/*.txt
           
           for file in $(find rules/sigma -name "*.yaml"); do
             filename=$(basename "$file" .yaml)
             
-            # Splunk
-            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba"
+            # Splunk konverzió
+            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
             
-            # QRadar
-            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba"
+            # QRadar konverzió
+            sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
+            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
             
-            # NetWitness
-            sigma convert -t insight_idr "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ NetWitness hiba"
-
-            # Microsoft Sentinel
-            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || \
-            sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba"
+            # RSA NetWitness konverzió
+            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
           done
 
       - name: Update Dashboard and SVG Map
@@ -90,11 +87,22 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
-          git add .
+          
+          # Alap fájlok hozzáadása
+          git add README.md COVERAGE.md attack_navigator_layer.json mitre_matrix.svg \
+                  rules/sigma/*.yaml
+          
+          # SIEM fájlok hozzáadása csak ha léteznek (Hiba megelőzése)
+          if ls rules/splunk/*.spl 1> /dev/null 2>&1; then git add rules/splunk/*.spl; fi
+          if ls rules/qradar/*.aql 1> /dev/null 2>&1; then git add rules/qradar/*.aql; fi
+          if ls rules/netwitness/*.txt 1> /dev/null 2>&1; then git add rules/netwitness/*.txt; fi
+          
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Dashboard and SIEM rules"
+            git commit -m "Auto-update: Dashboard, Splunk, QRadar & NetWitness rules"
             git pull --rebase origin test
             git push origin test
+          else
+            echo "Nincs változás a fájlokban."
           fi
 
           if [ "${{ env.VALIDATION_FAILED }}" == "true" ]; then

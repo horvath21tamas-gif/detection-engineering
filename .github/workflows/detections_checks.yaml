@@ -40,12 +40,11 @@ jobs:
           sigma plugin install netwitness
           
           # 4. A TRÜKK: A QRadar-t úgy telepítjük, hogy utána AZONNAL helyreállítjuk a környezetet
-          # A QRadar hajlamos régebbi csomagokat behúzni, ezért utána kényszerítjük a frissítést
           sigma plugin install --force-install qradar || echo "QRadar forced"
           
           # 5. MINDENT HELYREÁLLÍTUNK: Kényszerítjük a legújabb stabil verziókat
-          # Ez feloldja a pyparsing és pysigma verzióütközéseket
           python -m pip install --upgrade "pysigma>=1.1.0" "pyparsing>=3.0.0" sigma-cli
+
       - name: Smart Validation and Auto-fix
         id: validate_step
         run: |
@@ -58,7 +57,7 @@ jobs:
 
       - name: Convert Sigma rules to SIEM queries
         run: |
-          # Mappák létrehozása (Splunk, QRadar és NetWitness számára)
+          # Mappák létrehozása
           mkdir -p rules/splunk rules/qradar rules/netwitness
           rm -f rules/splunk/*.spl
           rm -f rules/qradar/*.aql
@@ -74,7 +73,7 @@ jobs:
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
             
-            # RSA NetWitness konverzió (ÚJ!)
+            # RSA NetWitness konverzió
             sigma convert -t netwitness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
           done
 
@@ -89,12 +88,14 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Hozzáadtuk a rules/netwitness/*.txt útvonalat is
+          # Alap fájlok hozzáadása
           git add README.md COVERAGE.md attack_navigator_layer.json mitre_matrix.svg \
-                  rules/splunk/*.spl \
-                  rules/qradar/*.aql \
-                  rules/netwitness/*.txt \
                   rules/sigma/*.yaml
+          
+          # SIEM fájlok hozzáadása csak ha léteznek (Hiba megelőzése)
+          if ls rules/splunk/*.spl 1> /dev/null 2>&1; then git add rules/splunk/*.spl; fi
+          if ls rules/qradar/*.aql 1> /dev/null 2>&1; then git add rules/qradar/*.aql; fi
+          if ls rules/netwitness/*.txt 1> /dev/null 2>&1; then git add rules/netwitness/*.txt; fi
           
           if ! git diff --staged --quiet; then
             git commit -m "Auto-update: Dashboard, Splunk, QRadar & NetWitness rules"

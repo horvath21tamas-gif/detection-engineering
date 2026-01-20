@@ -2,7 +2,7 @@
 
 ## 📊 Összesített Statisztika
 - **Lefedett technikák:** `41` db
-- **Sigma szabályok:** `35` db
+- **Sigma szabályok:** `36` db
 - **MITRE ATT&CK Lefedettség:** `[20.4%]`
 - **Részletes lista:** [COVERAGE.md](./COVERAGE.md)
 

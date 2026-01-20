@@ -30,27 +30,26 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           
-          # A legfontosabb fix: pyparsing kényszerítése olyan verzióra, amiben még van 'Set'
-          # A 3.1.4 verzió bizonyítottan működik.
-          python -m pip install "pyparsing==3.1.4"
-          
-          # Pysigma és alap CLI
-          python -m pip install "pysigma>=1.1.0" sigma-cli
-          
-          # Backendek telepítése (Sentinel nélkül a PIP-ből)
-          python -m pip install --no-cache-dir \
+          # 1. Alap CLI és backendek telepítése (itt még feljöhet a hibás pyparsing)
+          python -m pip install sigma-cli \
             pysigma-backend-splunk \
             pysigma-backend-qradar \
             pysigma-backend-insightidr \
             pytest "pyyaml>=6.0"
           
-          # Sentinel telepítése a plugin-rendszeren keresztül
-          sigma plugin install microsoft-sentinel || echo "Sentinel plugin hiba, de folytatjuk"
+          # 2. KRITIKUS FIX: Töröljük a rossz verziót és kényszerítjük a működőt
+          # Ezt a többi telepítés UTÁN tesszük, hogy semmi ne frissíthesse vissza.
+          python -m pip uninstall -y pyparsing
+          python -m pip install "pyparsing==3.1.4"
+          
+          # 3. Sentinel plugin telepítése
+          sigma plugin install microsoft-sentinel || echo "Sentinel plugin hiba"
 
       - name: Smart Validation and Auto-fix
         id: validate_step
         run: |
-          # Ez most már el fog indulni hiba nélkül
+          # Ellenőrizzük az importot közvetlenül Pythonból is, hogy lássuk a hibát
+          python -c "from pyparsing import Set; print('✅ Pyparsing OK')"
           sigma --version
           python tools/validate_rules.py || echo "VALIDATION_FAILED=true" >> $GITHUB_ENV
 

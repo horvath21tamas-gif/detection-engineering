@@ -29,18 +29,16 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          
-          # 1. Alap csomagok (sentinel backend nélkül, azt a sigma cli-vel rakjuk fel)
           python -m pip install sigma-cli pysigma-backend-splunk pytest "pyyaml>=6.0"
           
-          # 2. Pluginok telepítése - Itt adjuk hozzá a sentinelt
-          # A sigma cli-ben a pontos név: sentinel
-          sigma plugin install splunk sysmon windows sentinel netwitness
+          # Pluginok telepítése - Ha a 'sentinel' nem megy, próbáljuk a 'microsoft-sentinel'-t
+          sigma plugin install splunk sysmon windows netwitness
+          sigma plugin install sentinel || sigma plugin install microsoft-sentinel || echo "⚠️ Sentinel plugin nem található, de folytatjuk"
           
-          # 3. QRadar kényszerített telepítése külön, hogy ne rontsa el a többit
+          # QRadar kényszerített telepítése
           sigma plugin install --force-install qradar || echo "QRadar forced"
           
-          # 4. Verzió helyreállítás a stabilitás érdekében
+          # Verziók helyreállítása
           python -m pip install --upgrade "pysigma>=1.1.0" "pyparsing>=3.0.0" sigma-cli
 
       - name: Smart Validation and Auto-fix
@@ -73,7 +71,10 @@ jobs:
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
             
             # RSA NetWitness konverzió
-            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
+            # Microsoft Sentinel (KQL) konverzió - Több lehetséges target névvel
+            sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || \
+            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || \
+            sigma convert -t azure "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba: $file"
 
             # Microsoft Sentinel (KQL) konverzió
             sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba: $file"

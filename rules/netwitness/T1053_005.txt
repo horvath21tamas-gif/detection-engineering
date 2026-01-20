@@ -1,0 +1,1 @@
+(Image ends '\schtasks.exe' && CommandLine contains '/create') && CommandLine contains 'powershell'

@@ -1,0 +1,1 @@
+Image ends '\netsh.exe' && (CommandLine contains 'dir=in','action=allow','set rule','add rule','advfirewall')

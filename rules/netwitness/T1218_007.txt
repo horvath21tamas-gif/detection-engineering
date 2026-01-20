@@ -1,0 +1,1 @@
+Image ends 'msiexec.exe' && (CommandLine contains 'http://','https://','/i')

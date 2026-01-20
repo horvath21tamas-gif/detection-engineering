@@ -1,0 +1,1 @@
+((Image ends '\powershell.exe','\pwsh.exe') && (CommandLine contains 'Set-MpPreference','Add-MpPreference','DisableRealtimeMonitoring','ExclusionPath')) && (NOT (User = 'SYSTEM'))

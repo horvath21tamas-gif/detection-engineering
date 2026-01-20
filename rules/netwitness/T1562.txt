@@ -1,0 +1,1 @@
+((Image ends '\powershell.exe','\cmd.exe') && (CommandLine contains 'net stop','sc stop','Set-MpPreference')) && (NOT (User = 'SYSTEM'))

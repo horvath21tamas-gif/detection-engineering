@@ -1,0 +1,1 @@
+(TargetImage ends '\lsass.exe' && (GrantedAccess = '0x10','0x30','0x50','0x70')) && (NOT (Image ends '\taskmgr.exe','\procexp.exe','\av.exe'))

@@ -1,0 +1,1 @@
+(Image ends '\vssadmin.exe' && (CommandLine contains 'delete','shadow')) && (NOT (User = 'SYSTEM'))

@@ -1,0 +1,1 @@
+(TargetFileName contains '\User Data\','Login Data') && (NOT (Image ends '\chrome.exe','\msedge.exe','\brave.exe','\firefox.exe'))

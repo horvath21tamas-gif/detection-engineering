@@ -1,0 +1,1 @@
+(''<script'' || ''<svg'' || ''<iframe'' || ''javascript:'' || ''%3cscript'') && ((status = 200,403) && timeframe = '1m')

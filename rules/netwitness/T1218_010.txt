@@ -1,0 +1,1 @@
+(Image ends '\regsvr32.exe' && (CommandLine contains '\Users\','\AppData\','\Temp\')) && (NOT (CommandLine ends '.dll'))

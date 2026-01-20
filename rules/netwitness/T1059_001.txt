@@ -1,0 +1,1 @@
+(Image ends '\powershell.exe','\pwsh.exe','\cmd.exe') && (CommandLine contains '-enc','-encodedcommand','-EncodedCommand')

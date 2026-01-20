@@ -1,0 +1,1 @@
+((Image ends '\powershell.exe','tar.exe','7z.exe','rar.exe') && CommandLine contains 'Compress-Archive') && (CommandLine contains 'C:\Temp','%AppData%','Users\Public') && (NOT (User = 'SYSTEM'))

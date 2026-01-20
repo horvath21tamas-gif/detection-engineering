@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@@v4
         with:
           fetch-depth: 0
 
@@ -29,15 +29,16 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # A backendeket PIP-en keresztül telepítjük a biztos regisztrációhoz
-          python -m pip install sigma-cli \
-            pysigma-backend-splunk \
-            pysigma-backend-qradar \
-            pySigma-backend-microsoft-sentinel \
-            pysigma-backend-insightidr \
-            pytest "pyyaml>=6.0"
+          # Alap CLI és stabil backendek telepítése
+          python -m pip install sigma-cli pysigma-backend-splunk pysigma-backend-qradar pytest "pyyaml>=6.0"
           
-          # Csak a pipeline szinkronizáció
+          # SENTINEL FIX: Telepítés közvetlenül GitHub-ról, mert PyPI-n nem található
+          python -m pip install git+https://github.com/SigmaHQ/pySigma-backend-microsoft-sentinel.git
+          
+          # NETWITNESS FIX: Ha ez is hiányzott, ezt is telepítjük forrásból
+          python -m pip install git+https://github.com/SigmaHQ/pySigma-backend-insightidr.git
+          
+          # Verziók frissítése a biztonság kedvéért
           python -m pip install --upgrade "pysigma>=1.1.0" sigma-cli
 
       - name: Smart Validation and Auto-fix
@@ -62,14 +63,14 @@ jobs:
             # Splunk
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
             
-            # QRadar (fallback-kal)
+            # QRadar
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
             
-            # NetWitness (az insightidr backend gyakran kompatibilis alternatíva, ha a plugin nem megy)
+            # NetWitness (az insightidr backendet használjuk, ami RSA kompatibilis)
             sigma convert -t insightidr "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ NetWitness hiba: $file"
 
-            # Microsoft Sentinel (Most már ismerni fogja a microsoft_sentinel targetet)
+            # Microsoft Sentinel
             sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba: $file"
           done
 

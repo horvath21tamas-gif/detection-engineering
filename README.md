@@ -4,6 +4,7 @@
 - **Lefedett technikák:** `40` db
 - **Sigma szabályok:** `35` db
 - **MITRE ATT&CK Lefedettség:** `[19.9%]`
+- **Részletes lista:** [COVERAGE.md](./COVERAGE.md)
 
 ![Progress Bar](https://geps.dev/progress/19?dangerColor=ff6666&warningColor=ffbd66&successColor=8ecb88)
 

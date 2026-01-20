@@ -30,19 +30,16 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           
-          # 1. Telepítjük a modern alapokat fixen
-          python -m pip install sigma-cli pysigma-backend-splunk pytest "pyyaml>=6.0"
+          # 1. Alap csomagok + a Sentinel backend közvetlen telepítése pip-pel
+          python -m pip install sigma-cli pysigma-backend-splunk pysigma-backend-microsoft-sentinel pytest "pyyaml>=6.0"
           
-          # 2. Felrakjuk az alap pluginokat (Hozzáadva: sentinel)
-          sigma plugin install splunk sysmon windows microsoft-sentinel
+          # 2. A többi plugin marad
+          sigma plugin install splunk sysmon windows netwitness
           
-          # 3. RSA NetWitness telepítése
-          sigma plugin install netwitness
-          
-          # 4. A TRÜKK: A QRadar-t úgy telepítjük, hogy utána AZONNAL helyreállítjuk a környezetet
+          # 3. QRadar (marad a kényszerített telepítés)
           sigma plugin install --force-install qradar || echo "QRadar forced"
           
-          # 5. MINDENT HELYREÁLLÍTUNK: Kényszerítjük a legújabb stabil verziókat
+          # 4. Verzió helyreállítás
           python -m pip install --upgrade "pysigma>=1.1.0" "pyparsing>=3.0.0" sigma-cli
 
       - name: Smart Validation and Auto-fix
@@ -78,7 +75,7 @@ jobs:
             sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
 
             # Microsoft Sentinel (KQL) konverzió - ÚJ LÉPÉS
-            sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba: $file"
+            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba: $file"
           done
 
       - name: Update Dashboard and SVG Map

@@ -34,6 +34,9 @@ jobs:
           sigma plugin install -f qradar
           sigma plugin install sysmon
           sigma plugin install windows
+          # KRITIKUS JAVÍTÁS: A pluginok által visszatelepített régi verziót 
+          # kényszerítve frissítjük a CLI-nek megfelelőre
+          python -m pip install "pysigma>=1,<2" --upgrade
 
       # 1. LÉPÉS: Okos ellenőrzés és Automatikus javítás
       - name: Smart Validation and Auto-fix

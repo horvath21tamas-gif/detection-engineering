@@ -30,22 +30,27 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           
-          # 1. Alapcsomagok telepítése (Sentinel nélkül)
-          python -m pip install "pyparsing>=3.0.0" "pysigma>=1.1.0"
+          # A legfontosabb fix: pyparsing kényszerítése olyan verzióra, amiben még van 'Set'
+          # A 3.1.4 verzió bizonyítottan működik.
+          python -m pip install "pyparsing==3.1.4"
+          
+          # Pysigma és alap CLI
+          python -m pip install "pysigma>=1.1.0" sigma-cli
+          
+          # Backendek telepítése (Sentinel nélkül a PIP-ből)
           python -m pip install --no-cache-dir \
-            sigma-cli \
             pysigma-backend-splunk \
             pysigma-backend-qradar \
             pysigma-backend-insightidr \
             pytest "pyyaml>=6.0"
           
-          # 2. A Sentinel backend telepítése a Sigma CLI saját plugin kezelőjével
-          # Ez a módszer biztosabb a Sentinel esetében
-          sigma plugin install microsoft-sentinel || echo "Sentinel plugin telepítve vagy már létezik"
+          # Sentinel telepítése a plugin-rendszeren keresztül
+          sigma plugin install microsoft-sentinel || echo "Sentinel plugin hiba, de folytatjuk"
 
       - name: Smart Validation and Auto-fix
         id: validate_step
         run: |
+          # Ez most már el fog indulni hiba nélkül
           sigma --version
           python tools/validate_rules.py || echo "VALIDATION_FAILED=true" >> $GITHUB_ENV
 
@@ -71,7 +76,7 @@ jobs:
             # NetWitness
             sigma convert -t insightidr "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ NetWitness hiba"
 
-            # Microsoft Sentinel (microsoft_sentinel vagy sentinel target)
+            # Microsoft Sentinel
             sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || \
             sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba"
           done

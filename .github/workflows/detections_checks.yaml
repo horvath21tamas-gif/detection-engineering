@@ -29,20 +29,17 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          
-          # 1. Csak a CLI-t és az alapokat tesszük fel
           python -m pip install sigma-cli pytest pyyaml
           
-          # 2. A pluginokat a saját kezelőjével telepítjük
-          # A -f (force) segít elkerülni bizonyos akadályokat
+          # A 'yes' parancs automatikusan 'y'-t küld minden kérdésre
           sigma plugin install splunk
-          sigma plugin install -f qradar
+          yes | sigma plugin install qradar
           sigma plugin install sysmon
           sigma plugin install windows
           
-          # 3. KRITIKUS JAVÍTÁS: A QRadar plugin visszarakott egy régi pyparsing-et és pySigma-t.
-          # Most kényszerítjük a CLI-nek megfelelő verziókat, de interakció nélkül.
-          python -m pip install "pyparsing<3.3.0,>=3.2.0" "pysigma>=1.1.0,<2.0.0" --upgrade
+          # Biztonsági mentésként frissítjük a pySigma-t, 
+          # hogy biztosan a CLI-nek megfelelő verzió fusson
+          python -m pip install "pysigma>=1,<2" --upgrade
 
       # 1. LÉPÉS: Okos ellenőrzés és Automatikus javítás
       - name: Smart Validation and Auto-fix

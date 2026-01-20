@@ -11,7 +11,6 @@ on:
 permissions:
   contents: write
 
-# Megakadályozzuk a __pycache__ mappák létrehozását globálisan a workflow-ban
 env:
   PYTHONDONTWRITEBYTECODE: 1
 
@@ -51,10 +50,12 @@ jobs:
       - name: Convert Sigma rules to SIEM queries
         run: |
           mkdir -p rules/splunk rules/qradar rules/netwitness
+          # Csak a célfájlokat töröljük, a mappastruktúrát ne
           rm -f rules/splunk/*.spl rules/qradar/*.aql rules/netwitness/*.txt
           
-          for file in $(find rules/sigma -name "*.yaml"); do
+          for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
             filename=$(basename "$file" .yaml)
+            filename=$(basename "$filename" .yml)
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
@@ -82,24 +83,25 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          # 1. Kényszerített takarítás (biztonsági tartalék)
-          find . -name "__pycache__" -type d -exec rm -rf {} +
-          # Eltávolítjuk a követett fájlok közül is, ha korábban bekerültek volna
-          git rm -r --cached . -f --ignore-unmatch "**/__pycache__/*" || echo "Nincs pycache a gitben."
-          
-          git add .
+          # Csak azokat a fájlokat adjuk hozzá, amik tényleg változtak/létrejöttek
+          git add rules/splunk/ rules/qradar/ rules/netwitness/
+          git add DETECTION_WIKI.md attack_navigator_layer.json
+          git add COVERAGE.md README.md *.svg
           
           if ! git diff --staged --quiet; then
             git commit -m "Auto-update: Dashboard, SIEM rules, MITRE Layer & Wiki Documentation"
             
-            # 2. Konfliktuskezelés: A mi generált fájljaink az elsődlegesek (-X ours)
+            # Rebase során a bot által generált friss fájlok győzzenek
             git pull --rebase -X ours origin test
             git push origin test
           else
             echo "Nincs változás a fájlokban."
           fi
 
+      - name: Check Validation Status
+        if: always()
+        run: |
           if [ "${{ env.VALIDATION_FAILED }}" == "true" ]; then
-            echo "❌ A validáció kritikus hibákat talált."
+            echo "❌ A validáció kritikus hibákat talált korábban. A folyamat leáll."
             exit 1
           fi

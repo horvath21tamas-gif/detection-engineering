@@ -3,10 +3,11 @@ id: 550e8400-e29b-41d4-a716-446655440000
 status: experimental
 description: "Ez a szabály szándékosan hibás, hogy leteszteljük a \nfuzzy matching\
   \ elírás-figyelőt és a metadata validátort.\n"
+author: hota05
 logsource:
   product: windows
   service: security
-level: nagyon_magas
+level: critical
 detection:
   selection:
     EventID: 4688

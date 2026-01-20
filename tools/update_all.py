@@ -6,13 +6,25 @@ import time
 
 def get_rule_data():
     sigma_dir = 'rules/sigma'
+    splunk_dir = 'rules/splunk'
+    qradar_dir = 'rules/qradar'
+    
     techniques_found = {} # TID: level
     rule_mapping = {}    # TID: [rule_filenames]
     logsource_stats = {} # category/service: count
     rules_count = 0
     
+    # SIEM specifikus számlálók (ezek csak a COVERAGE.md-hez kellenek)
+    splunk_count = 0
+    qradar_count = 0
+    
+    if os.path.exists(splunk_dir):
+        splunk_count = len([f for f in os.listdir(splunk_dir) if f.endswith('.spl')])
+    if os.path.exists(qradar_dir):
+        qradar_count = len([f for f in os.listdir(qradar_dir) if f.endswith('.aql')])
+        
     if not os.path.exists(sigma_dir):
-        return {}, {}, 0, {}
+        return {}, {}, 0, {}, 0, 0
         
     for root, dirs, files in os.walk(sigma_dir):
         for file in files:
@@ -24,13 +36,12 @@ def get_rule_data():
                         level = str(content.get('level', 'low')).lower()
                         title = content.get('title', file)
                         
-                        # --- LogSource Statisztika gyűjtése ---
+                        # --- LogSource Statisztika ---
                         ls = content.get('logsource', {})
-                        # Megpróbáljuk a legspecifikusabb nevet kinyerni (service, category vagy product)
                         ls_key = ls.get('service') or ls.get('category') or ls.get('product') or 'unknown'
                         logsource_stats[ls_key] = logsource_stats.get(ls_key, 0) + 1
 
-                        # --- MITRE Technika gyűjtése ---
+                        # --- MITRE Technika ---
                         for tag in content.get('tags', []):
                             match = re.search(r't\d{4}(?:\.\d{3})?', tag.lower())
                             if match:
@@ -41,7 +52,7 @@ def get_rule_data():
                                     rule_mapping[tid] = []
                                 rule_mapping[tid].append(title)
                 except: continue
-    return techniques_found, rule_mapping, rules_count, logsource_stats
+    return techniques_found, rule_mapping, rules_count, logsource_stats, splunk_count, qradar_count
 
 def generate_matrix_svg(techniques_found):
     colors = {"critical": "#ff6666", "high": "#ff6666", "medium": "#ffbd66", "low": "#ffe766"}
@@ -83,7 +94,7 @@ def generate_matrix_svg(techniques_found):
         f.write(svg)
 
 def update_all():
-    techniques, rule_mapping, rules_count, ls_stats = get_rule_data()
+    techniques, rule_mapping, rules_count, ls_stats, splunk_count, qradar_count = get_rule_data()
     generate_matrix_svg(techniques)
     
     USER = "horvath21tamas-gif"
@@ -95,7 +106,11 @@ def update_all():
     total_mitre_tech = 201 
     coverage_pct = round((len(techniques) / total_mitre_tech) * 100, 1)
     
-    # 1. Navigator JSON
+    # Százalékos SIEM lefedettség számítása a COVERAGE.md-hez
+    splunk_pct = round((splunk_count / rules_count * 100), 1) if rules_count > 0 else 0
+    qradar_pct = round((qradar_count / rules_count * 100), 1) if rules_count > 0 else 0
+    
+    # 1. Navigator JSON (Eredeti logika)
     layer = {
         "name": "Detection Coverage",
         "versions": {"attack": "14", "navigator": "4.9", "layer": "4.4"},
@@ -105,9 +120,18 @@ def update_all():
     with open('attack_navigator_layer.json', 'w', encoding='utf-8') as f:
         json.dump(layer, f, indent=4)
 
-    # 2. COVERAGE.md
+    # 2. COVERAGE.md (Ide került a SIEM táblázat)
+    siem_table = f"## 📈 SIEM Platform Lefedettség\n\n"
+    siem_table += "| Platform | Konvertált szabályok | Lefedettség |\n"
+    siem_table += "| :--- | :---: | :---: |\n"
+    siem_table += f"| Sigma (Forrás) | {rules_count} | 100% |\n"
+    siem_table += f"| Splunk (SPL) | {splunk_count} | {splunk_pct}% |\n"
+    siem_table += f"| QRadar (AQL) | {qradar_count} | {qradar_pct}% |\n\n"
+
     coverage_content = f"# 📘 Részletes MITRE ATT&CK Lefedettség\n\n"
     coverage_content += f"**Utolsó frissítés:** `{current_time}`\n\n"
+    coverage_content += siem_table
+    coverage_content += "## 🎯 Technika alapú bontás\n"
     coverage_content += "| Technika ID | Szint | Kapcsolódó szabályok |\n"
     coverage_content += "| :--- | :--- | :--- |\n"
     for tid in sorted(rule_mapping.keys()):
@@ -117,12 +141,12 @@ def update_all():
     with open('COVERAGE.md', 'w', encoding='utf-8') as f:
         f.write(coverage_content)
 
-    # 3. LogSource táblázat generálása a README-hez
+    # 3. LogSource táblázat (Eredeti logika)
     ls_table = "| Log Forrás | Szabályok száma |\n| :--- | :--- |\n"
     for source, count in sorted(ls_stats.items(), key=lambda item: item[1], reverse=True):
         ls_table += f"| {source.capitalize()} | {count} |\n"
 
-    # 4. README.md (Mindent megtartva + LogSource táblázat)
+    # 4. README.md (Visszaállítva az eredeti, tiszta formátumra)
     raw_json_url = f"https://raw.githubusercontent.com/{USER}/{REPO}/{BRANCH}/attack_navigator_layer.json"
     navigator_link = f"https://mitre-attack.github.io/attack-navigator/#layerURL={raw_json_url}"
 

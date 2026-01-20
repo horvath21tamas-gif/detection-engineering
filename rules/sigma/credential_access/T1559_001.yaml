@@ -1,0 +1,47 @@
+title: High Fidelity Suspicious Named Pipe Activity
+id: e4a1b7c9-8f12-4b8c-9d33-15590001hf01
+status: stable
+description: High fidelity detection of suspicious named pipe creation or connection with minimal false positives, focusing on non-Microsoft signed binaries and abnormal pipe names.
+author: hota05
+date: 2026/01/20
+logsource:
+  product: windows
+  category: pipe_created
+detection:
+  selection_pipe:
+    PipeName|startswith: '\'
+    PipeName|re: '\\(msagent_|postex_|csagent_|[a-f0-9]{8,})'
+  selection_process:
+    Image|endswith: '.exe'
+    Image|notstartswith:
+      - 'C:\Windows\System32\'
+      - 'C:\Windows\SysWOW64\'
+  selection_user:
+    User|contains: '\'
+  selection_signature:
+    Signed: false
+  filter_legit_pipes:
+    PipeName|contains:
+      - 'svcctl'
+      - 'samr'
+      - 'lsarpc'
+      - 'netlogon'
+      - 'wkssvc'
+      - 'spoolss'
+      - 'atsvc'
+      - 'epmapper'
+  filter_legit_apps:
+    Image|endswith:
+      - '\vmtoolsd.exe'
+      - '\vmwaretray.exe'
+      - '\docker.exe'
+      - '\vboxservice.exe'
+  condition: selection_pipe and selection_process and selection_user and selection_signature and not filter_legit_pipes and not filter_legit_apps
+falsepositives:
+  - Custom in-house software using random named pipes
+  - Rare unsigned legacy applications
+level: high
+tags:
+  - attack.lateral_movement
+  - attack.command_and_control
+  - attack.t1559.001

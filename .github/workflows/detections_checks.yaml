@@ -29,10 +29,10 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # A Sentinelt pip-pel telepítjük a biztos elérés érdekében
-          python -m pip install sigma-cli pysigma-backend-splunk pysigma-backend-sentinel pytest "pyyaml>=6.0"
+          # A Microsoft Sentinel backend pontos neve: pysigma-backend-microsoft-sentinel
+          python -m pip install sigma-cli pysigma-backend-splunk pysigma-backend-microsoft-sentinel pytest "pyyaml>=6.0"
           
-          # A többi plugint hagyományos módon telepítjük
+          # Pluginok telepítése
           sigma plugin install splunk sysmon windows netwitness
           
           # QRadar kényszerített telepítése (bypass hiba esetén)
@@ -53,6 +53,7 @@ jobs:
 
       - name: Convert Sigma rules to SIEM queries
         run: |
+          # Mappák létrehozása és ürítése
           mkdir -p rules/splunk rules/qradar rules/netwitness rules/sentinel
           rm -f rules/splunk/*.spl
           rm -f rules/qradar/*.aql
@@ -65,13 +66,16 @@ jobs:
             # Splunk konverzió
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
             
-            # QRadar konverzió (megpróbáljuk Windows profillal, majd anélkül)
+            # QRadar konverzió (Windows profillal vagy anélkül)
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
             
+            # RSA NetWitness konverzió (ha szükséges, ide is tehető egyedi parancs)
+            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ NetWitness hiba: $file"
+
             # Microsoft Sentinel (KQL) konverzió
-            # A pip-es telepítés után a 'sentinel' azonosító a hivatalos
-            sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba: $file"
+            # A microsoft-sentinel backend a 'microsoft_sentinel' azonosítót használja
+            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba: $file"
           done
 
       - name: Update Dashboard and SVG Map
@@ -85,26 +89,24 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Módosítások stashelése, hogy a pull --rebase ne bukjon el
-          git stash || echo "Nincs mit elmenteni"
-          git pull --rebase origin test
-          git stash pop || echo "Nincs mit visszatölteni"
-
-          git add README.md COVERAGE.md attack_navigator_layer.json mitre_matrix.svg \
-                  rules/sigma/*.yaml
+          # 1. Minden változás hozzáadása
+          git add .
           
-          if ls rules/splunk/*.spl 1> /dev/null 2>&1; then git add rules/splunk/*.spl; fi
-          if ls rules/qradar/*.aql 1> /dev/null 2>&1; then git add rules/qradar/*.aql; fi
-          if ls rules/netwitness/*.txt 1> /dev/null 2>&1; then git add rules/netwitness/*.txt; fi
-          if ls rules/sentinel/*.kql 1> /dev/null 2>&1; then git add rules/sentinel/*.kql; fi
-          
+          # 2. Csak akkor commitolunk, ha van változás
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Dashboard, SIEM rules (Splunk, QRadar, Sentinel)"
+            git commit -m "Auto-update: SIEM rules (Splunk, QRadar, Sentinel) & Dashboard"
+            
+            # 3. Pull --rebase a konfliktusok elkerülésére (piszkos állapot kezelése)
+            # Mivel commitoltunk, a munkakönyvtár tiszta a pull-hoz
+            git pull --rebase origin test
+            
+            # 4. Push
             git push origin test
           else
             echo "Nincs változás a fájlokban."
           fi
 
+          # Ha a validáció korábban hibázott, most állítsuk le a pipeline-t pirossal
           if [ "${{ env.VALIDATION_FAILED }}" == "true" ]; then
             echo "❌ A validáció kritikus hibákat talált."
             exit 1

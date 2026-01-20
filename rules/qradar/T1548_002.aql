@@ -1,1 +1,0 @@
-SELECT UTF8(payload) as search_payload from events where "ParentImage" ILIKE '%\fodhelper.exe' AND ("Image" ILIKE ENUMERATION('%\powershell.exe','%\cmd.exe')) AND NOT "username"='SYSTEM'

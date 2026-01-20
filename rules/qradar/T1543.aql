@@ -1,1 +1,0 @@
-SELECT UTF8(payload) as search_payload from events where ("EventID" ILIKE ENUMERATION('7036','7040')) AND NOT ("username" ILIKE ENUMERATION('SYSTEM','LOCAL SERVICE','NETWORK SERVICE'))

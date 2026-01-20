@@ -1,1 +1,0 @@
-SELECT UTF8(payload) as search_payload from events where ("Image" ILIKE ENUMERATION('%\powershell.exe','%\cmd.exe')) AND ("Process CommandLine" ILIKE ENUMERATION('%net stop%','%sc stop%','%Set-MpPreference%')) AND NOT "username"='SYSTEM'

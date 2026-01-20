@@ -1,1 +1,0 @@
-SELECT UTF8(payload) as search_payload from events where "EventID"=4624 AND ("Logon Type" ILIKE ENUMERATION(2,10)) AND NOT "Target User Name" ILIKE '%$' AND NOT ("Target User Name" ILIKE ENUMERATION('SYSTEM','LOCAL SERVICE','NETWORK SERVICE')) AND NOT ("Source IP" ILIKE ENUMERATION('127.0.0.1','::1'))

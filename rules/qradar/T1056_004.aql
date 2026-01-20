@@ -1,1 +1,0 @@
-SELECT UTF8(payload) as search_payload from events where ("LoadedImage" ILIKE ENUMERATION('%\user32.dll','%\advapi32.dll','%\win32u.dll')) AND "Image" ILIKE '%.exe' AND NOT ("Image" ILIKE ENUMERATION('C:\Windows\System32\%','C:\Windows\SysWOW64\%')) AND NOT ("Image" ILIKE ENUMERATION('%\explorer.exe','%\chrome.exe','%\msedge.exe','%\firefox.exe','%\teams.exe'))

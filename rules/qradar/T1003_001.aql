@@ -1,1 +1,0 @@
-SELECT UTF8(payload) as search_payload from events where "TargetImage" ILIKE '%\lsass.exe' AND ("Granted Access" ILIKE ENUMERATION('0x10','0x30','0x50','0x70')) AND NOT ("Image" ILIKE ENUMERATION('%\taskmgr.exe','%\procexp.exe','%\av.exe'))

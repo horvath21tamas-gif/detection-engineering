@@ -1,1 +1,0 @@
-SELECT UTF8(payload) as search_payload from events where "Image" ILIKE '%\vssadmin.exe' AND ("Process CommandLine" ILIKE ENUMERATION('%delete%','%shadow%')) AND NOT "username"='SYSTEM'

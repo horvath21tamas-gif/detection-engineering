@@ -1,1 +1,0 @@
-SELECT UTF8(payload) as search_payload from events where "Target Object" ILIKE '%\Software\Classes\CLSID%' AND ("Target Object" ILIKE ENUMERATION('%InprocServer32','%LocalServer32')) AND ("Target Details" ILIKE ENUMERATION('%\Users\%','%\AppData\%','%\Temp\%','%ProgramData%')) AND NOT "username"='SYSTEM' AND NOT "Target Details" ILIKE 'C:\Windows\System32%'

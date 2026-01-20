@@ -38,7 +38,7 @@ jobs:
       # Ez a script kijavítja az elírásokat (pl. log_source -> logsource)
       - name: Lint and Smart Validation
         run: |
-          python tools/validate_metadata.py
+          python tools/validate_rules.py
 
       # 2. LÉPÉS: Meglévő Unit Tesztek futtatása (Pytest)
       - name: Run unit test

@@ -1,1 +1,1 @@
-EventID=1 Image="*itsadmin.exe" CommandLine IN ("*/transfer*", "*/addfile*", "*http://*", "*https://*") NOT User="SYSTEM"
+Image="*itsadmin.exe" CommandLine IN ("*/transfer*", "*/addfile*", "*http://*", "*https://*") NOT User="SYSTEM"

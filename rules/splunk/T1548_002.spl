@@ -1,1 +1,1 @@
-EventID=1 ParentImage="*\\fodhelper.exe" Image IN ("*\\powershell.exe", "*\\cmd.exe") NOT User="SYSTEM"
+ParentImage="*\\fodhelper.exe" Image IN ("*\\powershell.exe", "*\\cmd.exe") NOT User="SYSTEM"

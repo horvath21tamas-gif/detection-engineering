@@ -1,1 +1,1 @@
-EventID=1 Image="*\\rundll32.exe" CommandLine IN ("*javascript*", "*RunHTMLApplication*", "*http://*", "*https://*")
+Image="*\\rundll32.exe" CommandLine IN ("*javascript*", "*RunHTMLApplication*", "*http://*", "*https://*")

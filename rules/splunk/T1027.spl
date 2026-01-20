@@ -1,1 +1,1 @@
-EventID=1 Image IN ("*\\powershell.exe", "*\\pwsh.exe") CommandLine IN ("*-enc*", "*-encodedcommand*") CommandLine IN ("*Invoke-WebRequest*", "*iwr*", "*wget*", "*curl*", "*DownloadString*", "*DownloadFile*", "*Net.WebClient*")
+Image IN ("*\\powershell.exe", "*\\pwsh.exe") CommandLine IN ("*-enc*", "*-encodedcommand*") CommandLine IN ("*Invoke-WebRequest*", "*iwr*", "*wget*", "*curl*", "*DownloadString*", "*DownloadFile*", "*Net.WebClient*")

@@ -1,1 +1,1 @@
-EventID=1 Image="*msiexec.exe" CommandLine IN ("*http://*", "*https://*", "*/i*")
+Image="*msiexec.exe" CommandLine IN ("*http://*", "*https://*", "*/i*")

@@ -1,0 +1,1 @@
+SELECT UTF8(payload) as search_payload from events where ("cs-method" ILIKE ENUMERATION('POST','PUT')) AND ("cs-uri-stem" ILIKE ENUMERATION('%.php','%.asp','%.aspx','%.jsp','%.phtml')) AND ("cs-uri-query" ILIKE ENUMERATION('%cmd=','%exec=','%powershell=','%whoami','%net user','%command=','%shell','%curl','%wget'))

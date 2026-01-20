@@ -1,0 +1,1 @@
+SELECT UTF8(payload) as search_payload from events where ("ParentImage" ILIKE ENUMERATION('%\explorer.exe','%\chrome.exe','%\brave.exe')) AND ("Image" ILIKE ENUMERATION('%\cmd.exe','%\powershell.exe')) AND "username" ILIKE '%SYSTEM\%'

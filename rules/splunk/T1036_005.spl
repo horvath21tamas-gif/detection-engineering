@@ -1,1 +1,1 @@
-EventID=1 Image IN ("*\\Users\\*", "*\\AppData\\*", "*\\Temp\\*", "*\\ProgramData\\*") Image IN ("*\\svchost.exe", "*\\lsass.exe", "*services.exe", "*explorer.exe") NOT (Image IN ("C:\\Windows\\System32\\*", "C:\\Windows\\SysWOW64\\*")) NOT User="SYSTEM"
+Image IN ("*\\Users\\*", "*\\AppData\\*", "*\\Temp\\*", "*\\ProgramData\\*") Image IN ("*\\svchost.exe", "*\\lsass.exe", "*services.exe", "*explorer.exe") NOT (Image IN ("C:\\Windows\\System32\\*", "C:\\Windows\\SysWOW64\\*")) NOT User="SYSTEM"

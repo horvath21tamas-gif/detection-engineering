@@ -1,1 +1,1 @@
-EventID=13 TargetObject="*\\Software\\Classes\\CLSID*" TargetObject IN ("*InprocServer32", "*LocalServer32") Details IN ("*\\Users\\*", "*\\AppData\\*", "*\\Temp\\*", "*ProgramData*") NOT User="SYSTEM" NOT Details="C:\\Windows\\System32*"
+TargetObject="*\\Software\\Classes\\CLSID*" TargetObject IN ("*InprocServer32", "*LocalServer32") Details IN ("*\\Users\\*", "*\\AppData\\*", "*\\Temp\\*", "*ProgramData*") NOT User="SYSTEM" NOT Details="C:\\Windows\\System32*"

@@ -1,1 +1,1 @@
-EventID=1 Image="*\\regsvr32.exe" CommandLine IN ("*\\Users\\*", "*\\AppData\\*", "*\\Temp\\*") NOT CommandLine="*.dll"
+Image="*\\regsvr32.exe" CommandLine IN ("*\\Users\\*", "*\\AppData\\*", "*\\Temp\\*") NOT CommandLine="*.dll"

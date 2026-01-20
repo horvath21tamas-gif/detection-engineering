@@ -32,13 +32,16 @@ jobs:
           # 1. Alapok telepítése
           python -m pip install sigma-cli pysigma-backend-splunk pytest pyyaml
           
-          # 2. Pluginok telepítése - Itt jön a trükk:
+          # 2. Pluginok telepítése
           sigma plugin install splunk sysmon windows
           
-          # A QRadar-t kényszerítve rakjuk fel, ami le fogja butítani a pySigma-t
+          # QRadar kényszerítve (lebutítja a pySigma-t)
           sigma plugin install --force-install qradar || echo "QRadar forced"
           
-          # 3. JAVÍTÁS: Kényszerítjük vissza a modern pySigma-t, hogy a CLI működjön
+          # RSA NetWitness plugin telepítése (ÚJ!)
+          sigma plugin install netwitness
+          
+          # 3. JAVÍTÁS: pySigma verzió visszaállítása a CLI kompatibilitáshoz
           python -m pip install "pysigma>=1.0.0,<2.0.0"
 
       - name: Smart Validation and Auto-fix
@@ -53,9 +56,11 @@ jobs:
 
       - name: Convert Sigma rules to SIEM queries
         run: |
-          mkdir -p rules/splunk rules/qradar
+          # Mappák létrehozása (Splunk, QRadar és NetWitness számára)
+          mkdir -p rules/splunk rules/qradar rules/netwitness
           rm -f rules/splunk/*.spl
           rm -f rules/qradar/*.aql
+          rm -f rules/netwitness/*.txt
           
           for file in $(find rules/sigma -name "*.yaml"); do
             filename=$(basename "$file" .yaml)
@@ -64,9 +69,11 @@ jobs:
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
             
             # QRadar konverzió
-            # Megpróbáljuk a qradar_windows pipeline-al, ha nem megy, akkor anélkül
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
+            
+            # RSA NetWitness konverzió (ÚJ!)
+            sigma convert -t netwitness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
           done
 
       - name: Update Dashboard and SVG Map
@@ -80,13 +87,15 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
+          # Hozzáadtuk a rules/netwitness/*.txt útvonalat is
           git add README.md COVERAGE.md attack_navigator_layer.json mitre_matrix.svg \
                   rules/splunk/*.spl \
                   rules/qradar/*.aql \
+                  rules/netwitness/*.txt \
                   rules/sigma/*.yaml
           
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Dashboard, Splunk & QRadar rules, and Sigma auto-fixes"
+            git commit -m "Auto-update: Dashboard, Splunk, QRadar & NetWitness rules"
             git pull --rebase origin test
             git push origin test
           else

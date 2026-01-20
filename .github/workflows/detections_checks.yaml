@@ -29,21 +29,25 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # Alap CLI telepítése
-          python -m pip install sigma-cli pytest "pyyaml>=6.0"
           
-          # PLUGINOK TELEPÍTÉSE (Ez a módszer nem igényel külső git clone-t a pip-től)
-          # A --force-install segít, ha korábban félbemaradt volna
-          sigma plugin install splunk --force-install || echo "Splunk már ott van"
-          sigma plugin install qradar --force-install || echo "QRadar már ott van"
-          sigma plugin install microsoft-sentinel --force-install || sigma plugin install sentinel || echo "Sentinel hiba"
-          sigma plugin install insightidr --force-install || echo "Netwitness/IDR hiba"
-          sigma plugin install windows --force-install
-          sigma plugin install sysmon --force-install
+          # 1. FIX: A pyparsing és a pysigma verziójának kényszerítése, 
+          # hogy elkerüljük az ImportError-t és a verzióütközést.
+          python -m pip install "pyparsing<3.2.0" "pysigma>=1.1.0,<2.0.0"
+          
+          # 2. FIX: Minden backendet egyetlen parancsban telepítünk, 
+          # így a PIP kénytelen közös nevezőt találni.
+          python -m pip install sigma-cli \
+            pysigma-backend-splunk \
+            pysigma-backend-qradar \
+            pysigma-backend-microsoft-sentinel \
+            pysigma-backend-insightidr \
+            pytest "pyyaml>=6.0"
 
       - name: Smart Validation and Auto-fix
         id: validate_step
         run: |
+          # Itt ellenőrizzük, hogy a CLI egyáltalán elindul-e
+          sigma --version
           python tools/validate_rules.py || echo "VALIDATION_FAILED=true" >> $GITHUB_ENV
 
       - name: Run unit test
@@ -63,15 +67,13 @@ jobs:
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba"
             
             # QRadar
-            sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
-            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba"
+            sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba"
             
-            # NetWitness (InsightIDR-rel helyettesítve a kompatibilitás miatt)
+            # NetWitness (insightidr-t használva)
             sigma convert -t insightidr "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ NetWitness hiba"
 
             # Microsoft Sentinel
-            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || \
-            sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba"
+            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba"
           done
 
       - name: Update Dashboard and SVG Map

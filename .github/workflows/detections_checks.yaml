@@ -29,24 +29,24 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           
-          # 1. KÉNYSZERÍTETT TELEPÍTÉS: Fixáljuk a modern CLI-t és a pyparsing-ot egyszerre.
-          # Ez megakadályozza, hogy a pip régi (0.7.x) verziót válasszon.
-          python -m pip install "sigma-cli>=2.0.1" "pysigma>=1.1.0" "pyparsing==3.1.4"
-          
-          # 2. BACKENDEK: Minden szükséges backendet felrakunk, javított Sentinel névvel.
+          # 1. Először telepítjük a backendeket és a CLI-t verziómegkötés nélkül
           python -m pip install \
+            sigma-cli \
             pysigma-backend-splunk \
             pysigma-backend-qradar \
             pysigma-backend-insightidr \
             pysigma-backend-microsoft-sentinel \
             pytest "pyyaml>=6.0"
+          
+          # 2. KRITIKUS LÉPÉS: Utólag kényszerítjük a jó pyparsing-ot és egy kompatibilis pysigma-t
+          # A pysigma 1.0.11 még engedi a pyparsing 3.1.4-et
+          python -m pip install "pyparsing==3.1.4" "pysigma<1.1.0" --force-reinstall
 
       - name: Verify Environment
         run: |
-          # Ellenőrizzük, hogy minden betöltődik-e rendesen
+          # Ez a sor fogja megmondani, hogy sikerült-e a trükk
           python -c "from pyparsing import Set; print('✅ Pyparsing OK')"
           sigma --help > /dev/null && echo "✅ Sigma CLI OK"
-          sigma list targets
 
       - name: Smart Validation and Auto-fix
         id: validate_step
@@ -66,17 +66,13 @@ jobs:
           for file in $(find rules/sigma -name "*.yaml"); do
             filename=$(basename "$file" .yaml)
             
-            # Splunk konverzió
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba"
-            
-            # QRadar konverzió
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba"
-            
-            # NetWitness (InsightIDR backendet használva)
             sigma convert -t insightidr "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ NetWitness hiba"
-
-            # Microsoft Sentinel konverzió (A modern backend neve: microsoft_sentinel)
-            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba"
+            
+            # Sentinel konverzió próbálkozás több néven
+            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || \
+            sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba"
           done
 
       - name: Update Dashboard and SVG Map

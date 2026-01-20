@@ -2,6 +2,7 @@ import os
 import yaml
 import re
 import json
+import time
 
 def get_rule_data():
     sigma_dir = 'rules/sigma'
@@ -23,10 +24,11 @@ def get_rule_data():
                         title = content.get('title', file)
                         
                         for tag in content.get('tags', []):
+                            # Regex a TXXXX vagy TXXXX.XXX formátumhoz
                             match = re.search(r't\d{4}(?:\.\d{3})?', tag.lower())
                             if match:
                                 tid = match.group(0).upper()
-                                # Szín/Szint mentése
+                                # Szín/Szint mentése (a magasabb szint felülírja az alacsonyabbat)
                                 if tid not in techniques_found or level in ['high', 'critical']:
                                     techniques_found[tid] = level
                                 # Szabály hozzáadása a mappinghez a COVERAGE.md-hez
@@ -67,9 +69,9 @@ def generate_matrix_svg(techniques_found):
                 svg += f'<text x="{x+cell_w/2}" y="{y+cell_h/2+4}" font-family="Segoe UI,Arial" font-size="9" text-anchor="middle" font-weight="600" fill="#222">{label}</text>'
 
     svg += f'<g transform="translate(10, {rows * (cell_h + gap) + 20})">'
-    svg += '<circle cx="5" cy="5" r="5" fill="#ff6666"/><text x="15" y="9" font-family="Arial" font-size="11">High</text>'
-    svg += '<circle cx="65" cy="5" r="5" fill="#ffbd66"/><text x="75" y="9" font-family="Arial" font-size="11">Medium</text>'
-    svg += '<circle cx="140" cy="5" r="5" fill="#ffe766"/><text x="150" y="9" font-family="Arial" font-size="11">Low</text>'
+    svg += '<circle cx="5" cy="5" r="5" fill="#ff6666"/><text x="15" y="9" font-family="Arial" font-size="11">High/Critical</text>'
+    svg += '<circle cx="95" cy="5" r="5" fill="#ffbd66"/><text x="105" y="9" font-family="Arial" font-size="11">Medium</text>'
+    svg += '<circle cx="170" cy="5" r="5" fill="#ffe766"/><text x="180" y="9" font-family="Arial" font-size="11">Low</text>'
     svg += '</g></svg>'
 
     with open('mitre_matrix.svg', 'w', encoding='utf-8') as f:
@@ -83,6 +85,11 @@ def update_all():
     REPO = "detection-engineering"
     BRANCH = "test"
     
+    # Időbélyeg generálása a cache-elés megelőzésére
+    ts = int(time.time())
+    current_time = time.strftime('%Y-%m-%d %H:%M:%S')
+    
+    # Statisztika számítása
     total_mitre_tech = 201 
     coverage_pct = round((len(techniques) / total_mitre_tech) * 100, 1)
     
@@ -96,9 +103,10 @@ def update_all():
     with open('attack_navigator_layer.json', 'w', encoding='utf-8') as f:
         json.dump(layer, f, indent=4)
 
-    # 2. COVERAGE.md GENERÁLÁSA (Ez hiányzott!)
+    # 2. COVERAGE.md GENERÁLÁSA
     coverage_content = f"# 📘 Részletes MITRE ATT&CK Lefedettség\n\n"
     coverage_content += f"Ez a fájl kilistázza az összes lefedett technikát és a hozzájuk tartozó szabályokat.\n\n"
+    coverage_content += f"**Utolsó frissítés:** `{current_time}`\n\n"
     coverage_content += "| Technika ID | Szint | Kapcsolódó szabályok |\n"
     coverage_content += "| :--- | :--- | :--- |\n"
     
@@ -110,7 +118,7 @@ def update_all():
     with open('COVERAGE.md', 'w', encoding='utf-8') as f:
         f.write(coverage_content)
 
-    # 3. README.md frissítése
+    # 3. README.md frissítése (Cache-törő linkekkel)
     raw_json_url = f"https://raw.githubusercontent.com/{USER}/{REPO}/{BRANCH}/attack_navigator_layer.json"
     navigator_link = f"https://mitre-attack.github.io/attack-navigator/#layerURL={raw_json_url}"
 
@@ -122,16 +130,17 @@ def update_all():
 - **MITRE ATT&CK Lefedettség:** `[{coverage_pct}%]`
 - **Részletes lista:** [COVERAGE.md](./COVERAGE.md)
 
-![Progress Bar](https://geps.dev/progress/{int(coverage_pct)}?dangerColor=ff6666&warningColor=ffbd66&successColor=8ecb88)
+![Progress Bar](https://geps.dev/progress/{int(coverage_pct)}?dangerColor=ff6666&warningColor=ffbd66&successColor=8ecb88&v={ts})
 
 ## 🗺️ MITRE ATT&CK Mátrix Vizualizáció
-![MITRE Matrix](./mitre_matrix.svg)
+![MITRE Matrix](./mitre_matrix.svg?v={ts})
 
 ## 🔗 Interaktív Navigator
 🚀 [**Kattints ide a teljes interaktív mátrix megnyitásához**]({navigator_link})
 
 ---
-*Ez a dokumentum automatikusan frissül minden commit után.*
+*Ez a dokumentum automatikusan frissül minden módosítás után.*
+*Legutóbbi frissítés: {current_time} (UTC)*
 """
     with open('README.md', 'w', encoding='utf-8') as f:
         f.write(readme_content)

@@ -74,7 +74,7 @@ jobs:
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
             
             # RSA NetWitness konverzió
-            sigma convert -t netwitness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
+            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
           done
 
       - name: Update Dashboard and SVG Map

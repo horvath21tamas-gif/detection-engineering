@@ -11,6 +11,10 @@ on:
 permissions:
   contents: write
 
+# Megakadályozzuk a __pycache__ mappák létrehozását globálisan a workflow-ban
+env:
+  PYTHONDONTWRITEBYTECODE: 1
+
 jobs:
   detection_pipeline:
     runs-on: ubuntu-latest
@@ -59,15 +63,12 @@ jobs:
 
       - name: Run Integrity Check
         run: |
-          # Eltávolítja a hibás/üres konverziókat, hogy ne kerüljenek bele a doksiba
           python tools/check_integrity.py
 
       - name: Generate MITRE Layer and Wiki Docs
         if: github.event_name == 'push'
         run: |
-          # 1-es automatizáció: MITRE Navigator JSON
           python tools/generate_nav_layer.py
-          # 5-ös automatizáció: SOC Wiki Markdown
           python tools/generate_docs.py
 
       - name: Update Dashboard and SVG Map
@@ -81,16 +82,18 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Hozzáadjuk az összes generált fájlt (JSON layer, Wiki MD, SIEM szabályok)
+          # 1. Kényszerített takarítás (biztonsági tartalék)
+          find . -name "__pycache__" -type d -exec rm -rf {} +
+          # Eltávolítjuk a követett fájlok közül is, ha korábban bekerültek volna
+          git rm -r --cached . -f --ignore-unmatch "**/__pycache__/*" || echo "Nincs pycache a gitben."
+          
           git add .
           
           if ! git diff --staged --quiet; then
             git commit -m "Auto-update: Dashboard, SIEM rules, MITRE Layer & Wiki Documentation"
             
-            git stash || echo "Nincs mit eltenni"
-            git pull --rebase origin test
-            git stash pop || echo "Nincs mit visszatenni"
-            
+            # 2. Konfliktuskezelés: A mi generált fájljaink az elsődlegesek (-X ours)
+            git pull --rebase -X ours origin test
             git push origin test
           else
             echo "Nincs változás a fájlokban."

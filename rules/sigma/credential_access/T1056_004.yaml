@@ -1,0 +1,39 @@
+title: Suspicious Credential API Hooking via Win32 APIs
+id: d1a4c8f2-4c3e-4d8c-9e91-105600040001
+status: experimental
+description: Detects suspicious processes loading Win32 libraries commonly abused for credential API hooking such as keylogging or credential interception.
+author: hota05
+date: 2026/01/20
+logsource:
+  product: windows
+  category: image_load
+detection:
+  selection_dll:
+    ImageLoaded|endswith:
+      - '\user32.dll'
+      - '\advapi32.dll'
+      - '\win32u.dll'
+  selection_process:
+    Image|endswith:
+      - '.exe'
+  filter_legit_paths:
+    Image|startswith:
+      - 'C:\Windows\System32\'
+      - 'C:\Windows\SysWOW64\'
+  filter_legit_apps:
+    Image|endswith:
+      - '\explorer.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\firefox.exe'
+      - '\teams.exe'
+  condition: selection_dll and selection_process and not filter_legit_paths and not filter_legit_apps
+falsepositives:
+  - Accessibility software
+  - Screen recording or input method tools
+  - Legitimate security software
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1056.004
+  - attack.collection

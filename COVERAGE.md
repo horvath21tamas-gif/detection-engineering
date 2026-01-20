@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-20 10:01:10`
+**Utolsó frissítés:** `2026-01-20 10:02:54`
 
 | Technika ID | Szint | Kapcsolódó szabályok |
 | :--- | :--- | :--- |

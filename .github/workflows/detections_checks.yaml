@@ -34,7 +34,7 @@ jobs:
           python -m pip install sigma-cli pysigma-backend-splunk pytest "pyyaml>=6.0"
           
           # 2. Felrakjuk az alap pluginokat (Hozzáadva: sentinel)
-          sigma plugin install splunk sysmon windows sentinel
+          sigma plugin install splunk sysmon windows microsoft-sentinel
           
           # 3. RSA NetWitness telepítése
           sigma plugin install netwitness

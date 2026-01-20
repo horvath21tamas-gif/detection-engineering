@@ -29,17 +29,17 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # Alap CLI és stabil backendek telepítése
-          python -m pip install sigma-cli pysigma-backend-splunk pysigma-backend-qradar pytest "pyyaml>=6.0"
+          # Alap CLI telepítése
+          python -m pip install sigma-cli pytest "pyyaml>=6.0"
           
-          # SENTINEL FIX: Telepítés közvetlenül GitHub-ról, mert PyPI-n nem található
-          python -m pip install git+https://github.com/SigmaHQ/pySigma-backend-microsoft-sentinel.git
-          
-          # NETWITNESS FIX: InsightIDR backend telepítése forrásból
-          python -m pip install git+https://github.com/SigmaHQ/pySigma-backend-insightidr.git
-          
-          # Verziók frissítése a biztonság kedvéért
-          python -m pip install --upgrade "pysigma>=1.1.0" sigma-cli
+          # PLUGINOK TELEPÍTÉSE (Ez a módszer nem igényel külső git clone-t a pip-től)
+          # A --force-install segít, ha korábban félbemaradt volna
+          sigma plugin install splunk --force-install || echo "Splunk már ott van"
+          sigma plugin install qradar --force-install || echo "QRadar már ott van"
+          sigma plugin install microsoft-sentinel --force-install || sigma plugin install sentinel || echo "Sentinel hiba"
+          sigma plugin install insightidr --force-install || echo "Netwitness/IDR hiba"
+          sigma plugin install windows --force-install
+          sigma plugin install sysmon --force-install
 
       - name: Smart Validation and Auto-fix
         id: validate_step
@@ -49,11 +49,10 @@ jobs:
       - name: Run unit test
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
-          python -m pytest test/ --maxfail=5 --disable-warnings -q || echo "Nincsenek tesztek vagy hiba történt."
+          python -m pytest test/ --maxfail=5 --disable-warnings -q || echo "Nincsenek tesztek."
 
       - name: Convert Sigma rules to SIEM queries
         run: |
-          # Mappák előkészítése
           mkdir -p rules/splunk rules/qradar rules/netwitness rules/sentinel
           rm -f rules/splunk/*.spl rules/qradar/*.aql rules/netwitness/*.txt rules/sentinel/*.kql
           
@@ -61,17 +60,18 @@ jobs:
             filename=$(basename "$file" .yaml)
             
             # Splunk
-            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
+            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba"
             
             # QRadar
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
-            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
+            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba"
             
-            # NetWitness (az insightidr backendet használjuk)
-            sigma convert -t insightidr "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ NetWitness hiba: $file"
+            # NetWitness (InsightIDR-rel helyettesítve a kompatibilitás miatt)
+            sigma convert -t insightidr "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ NetWitness hiba"
 
             # Microsoft Sentinel
-            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba: $file"
+            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || \
+            sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba"
           done
 
       - name: Update Dashboard and SVG Map
@@ -84,15 +84,11 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
-          
           git add .
-          
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Dashboard and SIEM rules (Splunk, QRadar, Sentinel, NetWitness)"
+            git commit -m "Auto-update: Dashboard and SIEM rules"
             git pull --rebase origin test
             git push origin test
-          else
-            echo "Nincs változás a fájlokban."
           fi
 
           if [ "${{ env.VALIDATION_FAILED }}" == "true" ]; then

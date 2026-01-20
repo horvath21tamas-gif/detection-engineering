@@ -26,72 +26,67 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
 
-      - name: Install dependencies
+      # --- 1. KÖRNYEZET: Splunk (Modern) ---
+      - name: Setup Splunk Environment and Generate
         run: |
+          python -m venv venv_splunk
+          source venv_splunk/bin/activate
           python -m pip install --upgrade pip
-          # 1. Csak a CLI-t és a Splunkot rakjuk fel (ezek modernek)
-          python -m pip install sigma-cli pysigma-backend-splunk pytest pyyaml
+          pip install sigma-cli pysigma-backend-splunk pyyaml
+          sigma plugin install splunk sysmon windows
           
-          # 2. JAVÍTÁS: Kényszerítjük a pyparsing-ot egy olyan verzióra, 
-          # ami még ismeri a 'Set' nevet, de már elég új a CLI-nek
-          python -m pip install "pyparsing<3.0.0" --force-reinstall
-          
-          # 3. A pluginokat a CLI-n BELÜL telepítjük (ez izoláltabb)
-          sigma plugin install splunk
-          sigma plugin install qradar
-          sigma plugin install sysmon
-          sigma plugin install windows
+          mkdir -p rules/splunk
+          rm -f rules/splunk/*.spl
+          for file in $(find rules/sigma -name "*.yaml"); do
+            filename=$(basename "$file" .yaml)
+            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
+          done
+          deactivate
 
-      - name: Generate Rules
+      # --- 2. KÖRNYEZET: QRadar (Legacy / Régi) ---
+      - name: Setup QRadar Environment and Generate
         run: |
-          # Splunk generálás
-          sigma convert -t splunk -p splunk_windows -o splunk_rules.txt rules/
+          python -m venv venv_qradar
+          source venv_qradar/bin/activate
+          python -m pip install --upgrade pip
+          # Itt a régi pysigma és pyparsing verziókat használjuk az izolált venv-ben
+          pip install "pysigma<0.10.0" "pyparsing<3.0.0" pysigma-backend-qradar pyyaml "sigma-cli<0.8.0"
           
-          # QRadar generálás (most már nem fog elszállni az ImportError-ral)
-          sigma convert -t qradar -p qradar_windows -o qradar_rules.txt rules/
+          mkdir -p rules/qradar
+          rm -f rules/qradar/*.aql
+          for file in $(find rules/sigma -name "*.yaml"); do
+            filename=$(basename "$file" .yaml)
+            # A régi verzióban a pipeline neve gyakran csak 'qradar' vagy nincs rá szükség
+            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
+          done
+          deactivate
 
-      # 1. LÉPÉS: Okos ellenőrzés és Automatikus javítás
+      # --- 3. LÉPÉS: Közös eszközök telepítése a fő környezetbe a többi híváshoz ---
+      - name: Install validation tools
+        run: |
+          python -m pip install pytest pyyaml sigma-cli
+
       - name: Smart Validation and Auto-fix
         id: validate_step
         run: |
           python tools/validate_rules.py || echo "VALIDATION_FAILED=true" >> $GITHUB_ENV
 
-      # 2. LÉPÉS: Meglévő Unit Tesztek (Pytest)
       - name: Run unit test
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
           python -m pytest test/ --maxfail=5 --disable-warnings -q || echo "Nincsenek tesztek vagy hiba történt."
 
-      # 3. LÉPÉS: Konvertálás Splunk ÉS QRadar formátumba
-      - name: Convert Sigma rules to SIEM queries
-        run: |
-          mkdir -p rules/splunk rules/qradar
-          rm -f rules/splunk/*.spl
-          rm -f rules/qradar/*.aql
-          for file in $(find rules/sigma -name "*.yaml"); do
-            filename=$(basename "$file" .yaml)
-            
-            # Splunk konverzió
-            sigma convert -t splunk -p sysmon "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
-            
-            # QRadar konverzió (AQL)
-            sigma convert -t qradar -p sysmon "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
-          done
-
-      # 4. LÉPÉS: Dashboard és MITRE Mátrix (SVG) frissítése
       - name: Update Dashboard and SVG Map
         if: github.event_name == 'push'
         run: |
           python tools/update_all.py
           
-      # 5. LÉPÉS: Mentés és Visszatöltés
       - name: Commit and push changes
         if: github.event_name == 'push'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Hozzáadjuk a Splunk mellett a QRadar (.aql) fájlokat is a Git-hez
           git add README.md COVERAGE.md attack_navigator_layer.json mitre_matrix.svg \
                   rules/splunk/*.spl \
                   rules/qradar/*.aql \
@@ -105,7 +100,6 @@ jobs:
             echo "Nincs változás a fájlokban."
           fi
 
-          # VÉGSŐ ELLENŐRZÉS: Ha a validáció hibás volt, piros marad a pipeline
           if [ "${{ env.VALIDATION_FAILED }}" == "true" ]; then
             echo "❌ A validáció kritikus hibákat talált, de a javításokat és a konverziókat elmentettem."
             exit 1

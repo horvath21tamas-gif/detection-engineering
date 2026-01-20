@@ -29,18 +29,18 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # 1. Először a kritikus pyparsing-et tesszük rendbe (3.2.0 stabilabb a régebbi Sigmához)
-          python -m pip install "pyparsing<3.3.0"
           
-          # 2. Telepítjük a CLI-t és a backendeket kényszerített verziókkal
-          # A sigma-cli-t felvisszük 2.0.1-re, ami már kezeli az újabb pySigma-t
-          python -m pip install "sigma-cli>=2.0.1" "pysigma>=1.1.0"
-          python -m pip install pysigma-backend-splunk pysigma-backend-qradar
+          # 1. Először a pyparsing-et rögzítjük egy régebbi, de kompatibilis verzióra
+          python -m pip install "pyparsing<3.0.0"
           
-          # 3. Alap kiegészítők
-          python -m pip install pytest pyyaml
+          # 2. Telepítjük a CLI-t és a backendeket EGYETLEN parancsban.
+          # Ez kényszeríti a PIP-et, hogy olyan verziókat találjon, amik egyszerre jók mindegyiknek.
+          python -m pip install "sigma-cli>=2.0.1" "pysigma>=1.1.0" \
+                                pysigma-backend-splunk \
+                                pysigma-backend-qradar \
+                                pytest pyyaml
           
-          # 4. Pluginok (ezek most már a PIP-es telepítés után csak beregisztrálják magukat)
+          # 3. Telepítjük a maradék pluginokat
           sigma plugin install sysmon
           sigma plugin install windows
 

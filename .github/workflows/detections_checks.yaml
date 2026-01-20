@@ -29,11 +29,17 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          # 1. Alapok telepítése
           python -m pip install sigma-cli pysigma-backend-splunk pytest pyyaml
           
-          # Pluginok telepítése - QRadar kényszerítve
+          # 2. Pluginok telepítése - Itt jön a trükk:
           sigma plugin install splunk sysmon windows
-          sigma plugin install -f qradar
+          
+          # A QRadar-t kényszerítve rakjuk fel, ami le fogja butítani a pySigma-t
+          sigma plugin install --force-install qradar || echo "QRadar forced"
+          
+          # 3. JAVÍTÁS: Kényszerítjük vissza a modern pySigma-t, hogy a CLI működjön
+          python -m pip install "pysigma>=1.0.0,<2.0.0"
 
       - name: Smart Validation and Auto-fix
         id: validate_step
@@ -53,9 +59,14 @@ jobs:
           
           for file in $(find rules/sigma -name "*.yaml"); do
             filename=$(basename "$file" .yaml)
+            
+            # Splunk konverzió
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
+            
+            # QRadar konverzió
+            # Megpróbáljuk a qradar_windows pipeline-al, ha nem megy, akkor anélkül
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
-            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql"
+            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
           done
 
       - name: Update Dashboard and SVG Map

@@ -1,0 +1,1 @@
+(process.exe_path=/(.*\\powershell\.exe$|.*\\pwsh\.exe$)/i) AND (process.cmd_line ICONTAINS-ANY ["Set-MpPreference", "Add-MpPreference", "DisableRealtimeMonitoring", "ExclusionPath"]) AND NOT process.username = NOCASE("SYSTEM")

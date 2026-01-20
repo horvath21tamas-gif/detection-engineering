@@ -1,0 +1,1 @@
+SELECT UTF8(payload) as search_payload from events where "Image" ILIKE '%\regsvr32.exe' AND ("Process CommandLine" ILIKE ENUMERATION('%\Users\%','%\AppData\%','%\Temp\%')) AND NOT "Process CommandLine" ILIKE '%.dll'

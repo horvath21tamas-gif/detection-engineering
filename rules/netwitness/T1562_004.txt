@@ -1,0 +1,1 @@
+process.exe_path=/.*\\netsh\.exe$/i AND (process.cmd_line ICONTAINS-ANY ["dir=in", "action=allow", "set rule", "add rule", "advfirewall"])

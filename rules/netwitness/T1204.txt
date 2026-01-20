@@ -1,0 +1,1 @@
+(parent_process.exe_path=/(.*\\WINWORD\.EXE$|.*\\EXCEL\.EXE$|.*\\POWERPNT\.EXE$|.*\\OUTLOOK\.EXE$|.*\\MSACCESS\.EXE$)/i) AND (process.exe_path=/(.*\\cmd\.exe$|.*\\powershell\.exe$|.*\\pwsh\.exe$|.*\\mshta\.exe$|.*\\rundll32\.exe$|.*\\regsvr32\.exe$|.*\\bitsadmin\.exe$|.*\\certutil\.exe$)/i)

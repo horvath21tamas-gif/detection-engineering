@@ -1,0 +1,1 @@
+SELECT UTF8(payload) as search_payload from events where (("Image" ILIKE ENUMERATION('%\sc.exe','%\net.exe')) AND "Process CommandLine" ILIKE '%shadow%' OR "Image" ILIKE '%\bcdedit.exe' AND "Process CommandLine" ILIKE '%recoveryenabled%') AND NOT "username"='SYSTEM'

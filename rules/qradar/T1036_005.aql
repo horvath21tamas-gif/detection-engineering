@@ -1,0 +1,1 @@
+SELECT UTF8(payload) as search_payload from events where ("Image" ILIKE ENUMERATION('%\Users\%','%\AppData\%','%\Temp\%','%\ProgramData\%')) AND ("Image" ILIKE ENUMERATION('%\svchost.exe','%\lsass.exe','%services.exe','%explorer.exe')) AND NOT ("Image" ILIKE ENUMERATION('C:\Windows\System32\%','C:\Windows\SysWOW64\%')) AND NOT "username"='SYSTEM'

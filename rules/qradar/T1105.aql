@@ -1,0 +1,1 @@
+SELECT UTF8(payload) as search_payload from events where ("Image" ILIKE ENUMERATION('%\powershell.exe','%\bitsadmin.exe','%\certutil.exe')) AND ("Process CommandLine" ILIKE ENUMERATION('%Invoke-WebRequest%','%IEX%','%DownloadFile%'))

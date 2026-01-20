@@ -1,0 +1,1 @@
+(parent_process.exe_path=/(.*\\explorer\.exe$|.*\\chrome\.exe$|.*\\brave\.exe$)/i) AND (process.exe_path=/(.*\\cmd\.exe$|.*\\powershell\.exe$)/i) AND process.username ICONTAINS "SYSTEM\"

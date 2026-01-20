@@ -1,0 +1,1 @@
+(process.exe_path=/.*\\wmic\.exe$/i AND (process.cmd_line ICONTAINS-ANY ["__EventFilter", "CommandLineEventConsumer", "FilterToConsumerBinding"]) OR process.exe_path=/.*\\powershell\.exe$/i AND (process.cmd_line ICONTAINS-ANY ["Register-WmiEvent", "root\subscription"])) AND NOT process.username = NOCASE("SYSTEM")

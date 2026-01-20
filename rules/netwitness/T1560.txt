@@ -1,0 +1,1 @@
+(process.exe_path=/(.*\\powershell\.exe$|.*tar\.exe$|.*7z\.exe$|.*rar\.exe$)/i) AND process.cmd_line ICONTAINS "Compress-Archive" AND (process.cmd_line ICONTAINS-ANY ["C:\Temp", "%AppData%", "Users\Public"]) AND NOT process.username = NOCASE("SYSTEM")

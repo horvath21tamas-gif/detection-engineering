@@ -1,0 +1,1 @@
+SELECT UTF8(payload) as search_payload from events where ("Image" ILIKE ENUMERATION('%\powershell.exe','%tar.exe','%7z.exe','%rar.exe')) AND "Process CommandLine" ILIKE '%Compress-Archive%' AND ("Process CommandLine" ILIKE ENUMERATION('%C:\Temp%','%%AppData%%','%Users\Public%')) AND NOT "username"='SYSTEM'

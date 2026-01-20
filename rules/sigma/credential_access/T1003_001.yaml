@@ -1,0 +1,30 @@
+title: Suspicious Access to LSASS Process
+id: ab19ed96-a870-43c9-a05c-5d85254852c7
+status: experimental
+description: Detektalni a process dumpingot LSASS memoriaban
+author: hota05
+date: 2026/01/20
+logsource:
+  product: windows
+  category: process_access
+detection:
+  selection:
+    TargetImage|endswith: '\lsass.exe'
+    GrantedAccess:
+      - '0x10'
+      - '0x30'
+      - '0x50'
+      - '0x70'
+  filter_legit:
+    Image|endswith:
+      - '\taskmgr.exe'
+      - '\procexp.exe'
+      - '\av.exe'
+  condition: selection and not filter_legit
+falsepositives:
+  - Antivirus or EDR solutions
+  - System administrators hsznal debugging tool-t
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1003.001

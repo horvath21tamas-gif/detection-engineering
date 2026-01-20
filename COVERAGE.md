@@ -1,8 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-Ez a fájl kilistázza az összes lefedett technikát és a hozzájuk tartozó szabályokat.
-
-**Utolsó frissítés:** `2026-01-20 08:49:45`
+**Utolsó frissítés:** `2026-01-20 08:56:31`
 
 | Technika ID | Szint | Kapcsolódó szabályok |
 | :--- | :--- | :--- |

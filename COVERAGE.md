@@ -2,6 +2,8 @@
 
 Ez a fájl kilistázza az összes lefedett technikát és a hozzájuk tartozó szabályokat.
 
+**Utolsó frissítés:** `2026-01-20 08:49:45`
+
 | Technika ID | Szint | Kapcsolódó szabályok |
 | :--- | :--- | :--- |
 | T1003 | HIGH | Suspicious Access to LSASS Process |

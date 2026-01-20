@@ -1,7 +1,16 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-20 10:02:54`
+**Utolsó frissítés:** `2026-01-20 10:08:08`
 
+## 📈 SIEM Platform Lefedettség
+
+| Platform | Konvertált szabályok | Lefedettség |
+| :--- | :---: | :---: |
+| Sigma (Forrás) | 36 | 100% |
+| Splunk (SPL) | 36 | 100.0% |
+| QRadar (AQL) | 34 | 94.4% |
+
+## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
 | :--- | :--- | :--- |
 | T1003 | HIGH | Suspicious Access to LSASS Process |

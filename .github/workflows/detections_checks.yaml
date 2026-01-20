@@ -29,17 +29,20 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # A Microsoft Sentinel backend pontos neve: pysigma-backend-microsoft-sentinel
-          python -m pip install sigma-cli pysigma-backend-splunk pysigma-backend-microsoft-sentinel pytest "pyyaml>=6.0"
+          # Csak a stabil alapokat telepítjük pip-pel
+          python -m pip install sigma-cli pysigma-backend-splunk pytest "pyyaml>=6.0"
           
-          # Pluginok telepítése
+          # Pluginok telepítése a Sigma CLI-vel (ez megkerüli a PIP hibát)
           sigma plugin install splunk sysmon windows netwitness
           
-          # QRadar kényszerített telepítése (bypass hiba esetén)
+          # Sentinel telepítése több lehetséges néven (v2 és v1 kompatibilitás)
+          sigma plugin install microsoft-sentinel || sigma plugin install sentinel || echo "⚠️ Sentinel plugin nem található a listában"
+          
+          # QRadar kényszerített telepítése
           sigma plugin install --force-install qradar || echo "QRadar forced"
           
-          # Verziók fixálása a stabilitásért
-          python -m pip install --upgrade "pysigma>=1.1.0" "pyparsing>=3.0.0" sigma-cli
+          # Függőségek szinkronizálása
+          python -m pip install --upgrade "pysigma>=1.1.0" sigma-cli
 
       - name: Smart Validation and Auto-fix
         id: validate_step
@@ -53,7 +56,7 @@ jobs:
 
       - name: Convert Sigma rules to SIEM queries
         run: |
-          # Mappák létrehozása és ürítése
+          # Mappák előkészítése
           mkdir -p rules/splunk rules/qradar rules/netwitness rules/sentinel
           rm -f rules/splunk/*.spl
           rm -f rules/qradar/*.aql
@@ -66,16 +69,17 @@ jobs:
             # Splunk konverzió
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
             
-            # QRadar konverzió (Windows profillal vagy anélkül)
+            # QRadar konverzió (fallback logikával)
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
             
-            # RSA NetWitness konverzió (ha szükséges, ide is tehető egyedi parancs)
+            # NetWitness konverzió
             sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ NetWitness hiba: $file"
 
             # Microsoft Sentinel (KQL) konverzió
-            # A microsoft-sentinel backend a 'microsoft_sentinel' azonosítót használja
-            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba: $file"
+            # Megpróbáljuk mindkét lehetséges technikai azonosítóval
+            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || \
+            sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba: $file"
           done
 
       - name: Update Dashboard and SVG Map
@@ -89,24 +93,21 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          # 1. Minden változás hozzáadása
+          # Változások hozzáadása
           git add .
           
-          # 2. Csak akkor commitolunk, ha van változás
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: SIEM rules (Splunk, QRadar, Sentinel) & Dashboard"
+            git commit -m "Auto-update: Dashboard and SIEM rules (Splunk, QRadar, Sentinel, NetWitness)"
             
-            # 3. Pull --rebase a konfliktusok elkerülésére (piszkos állapot kezelése)
-            # Mivel commitoltunk, a munkakönyvtár tiszta a pull-hoz
+            # Pull rebase-szel a konfliktusok ellen
             git pull --rebase origin test
             
-            # 4. Push
             git push origin test
           else
             echo "Nincs változás a fájlokban."
           fi
 
-          # Ha a validáció korábban hibázott, most állítsuk le a pipeline-t pirossal
+          # Ha a validáció korábban elbukott, itt állítjuk meg a pipeline-t
           if [ "${{ env.VALIDATION_FAILED }}" == "true" ]; then
             echo "❌ A validáció kritikus hibákat talált."
             exit 1

@@ -29,16 +29,16 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install sigma-cli pysigma-backend-splunk pytest "pyyaml>=6.0"
+          # A Sentinelt pip-pel telepítjük a biztos elérés érdekében
+          python -m pip install sigma-cli pysigma-backend-splunk pysigma-backend-sentinel pytest "pyyaml>=6.0"
           
-          # Pluginok telepítése - Ha a 'sentinel' nem megy, próbáljuk a 'microsoft-sentinel'-t
+          # A többi plugint hagyományos módon telepítjük
           sigma plugin install splunk sysmon windows netwitness
-          sigma plugin install sentinel || sigma plugin install microsoft-sentinel || echo "⚠️ Sentinel plugin nem található, de folytatjuk"
           
-          # QRadar kényszerített telepítése
+          # QRadar kényszerített telepítése (bypass hiba esetén)
           sigma plugin install --force-install qradar || echo "QRadar forced"
           
-          # Verziók helyreállítása
+          # Verziók fixálása a stabilitásért
           python -m pip install --upgrade "pysigma>=1.1.0" "pyparsing>=3.0.0" sigma-cli
 
       - name: Smart Validation and Auto-fix
@@ -53,7 +53,6 @@ jobs:
 
       - name: Convert Sigma rules to SIEM queries
         run: |
-          # Mappák létrehozása (Splunk, QRadar, NetWitness és ÚJ: Sentinel számára)
           mkdir -p rules/splunk rules/qradar rules/netwitness rules/sentinel
           rm -f rules/splunk/*.spl
           rm -f rules/qradar/*.aql
@@ -66,17 +65,12 @@ jobs:
             # Splunk konverzió
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
             
-            # QRadar konverzió
+            # QRadar konverzió (megpróbáljuk Windows profillal, majd anélkül)
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
             
-            # RSA NetWitness konverzió
-            # Microsoft Sentinel (KQL) konverzió - Több lehetséges target névvel
-            sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || \
-            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || \
-            sigma convert -t azure "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba: $file"
-
             # Microsoft Sentinel (KQL) konverzió
+            # A pip-es telepítés után a 'sentinel' azonosító a hivatalos
             sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba: $file"
           done
 
@@ -91,19 +85,21 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Alap fájlok hozzáadása
+          # Módosítások stashelése, hogy a pull --rebase ne bukjon el
+          git stash || echo "Nincs mit elmenteni"
+          git pull --rebase origin test
+          git stash pop || echo "Nincs mit visszatölteni"
+
           git add README.md COVERAGE.md attack_navigator_layer.json mitre_matrix.svg \
                   rules/sigma/*.yaml
           
-          # SIEM fájlok hozzáadása csak ha léteznek (Hiba megelőzése)
           if ls rules/splunk/*.spl 1> /dev/null 2>&1; then git add rules/splunk/*.spl; fi
           if ls rules/qradar/*.aql 1> /dev/null 2>&1; then git add rules/qradar/*.aql; fi
           if ls rules/netwitness/*.txt 1> /dev/null 2>&1; then git add rules/netwitness/*.txt; fi
           if ls rules/sentinel/*.kql 1> /dev/null 2>&1; then git add rules/sentinel/*.kql; fi
           
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Dashboard, Splunk, QRadar, NetWitness & Sentinel rules"
-            git pull --rebase origin test
+            git commit -m "Auto-update: Dashboard, SIEM rules (Splunk, QRadar, Sentinel)"
             git push origin test
           else
             echo "Nincs változás a fájlokban."

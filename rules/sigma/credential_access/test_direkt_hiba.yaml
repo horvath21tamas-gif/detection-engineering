@@ -1,0 +1,28 @@
+title: "Teszt Szabály az Automatikus Ellenőrzéshez"
+id: 550e8400-e29b-41d4-a716-446655440000
+status: experimental
+description: |
+    Ez a szabály szándékosan hibás, hogy leteszteljük a 
+    fuzzy matching elírás-figyelőt és a metadata validátort.
+
+# 1. HIBA: Elírás (logsource helyett log_source)
+log_source:
+    product: windows
+    service: security
+
+# 2. HIBA: Érvénytelen szint (csak low, medium, high, critical lehet)
+level: nagyon_magas
+
+# 3. HIBA: Hiányzó kötelező mező (author)
+# author: horvath21tamas
+
+detection:
+    selection:
+        EventID: 4688
+        CommandLine|contains: 'powershell.exe -enc'
+    condition: selection
+
+# 4. HIBA: Hiányzó vagy rossz MITRE tag (attack.t nélkül)
+tags:
+    - attack.persistence
+    - internal.policy

@@ -29,26 +29,29 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # Csak a legfrissebb CLI-t és a modern Splunk backendet rakjuk fel
-          python -m pip install sigma-cli pysigma-backend-splunk pytest pyyaml
-
-      - name: Install Sigma Plugins
-        run: |
-          # Csak a szükséges kiegészítőket telepítjük
+          # A CLI és a backendek telepítése pip-el (ez a legstabilabb)
+          python -m pip install sigma-cli pysigma-backend-splunk pysigma-backend-qradar pytest pyyaml
+          
+          # A szükséges pipeline-okat a CLI-vel telepítjük
           sigma plugin install splunk
+          sigma plugin install qradar
           sigma plugin install sysmon
           sigma plugin install windows
 
+      - name: Debug Pipelines (Opcionális, ha látni akarod a neveket a logban)
+        run: |
+          sigma list pipelines splunk
+          sigma list pipelines qradar
+
       - name: Generate Splunk Rules
         run: |
-          sigma convert -t splunk -p sysmon -p windows -o splunk_rules.txt rules/
+          # Az újabb verziókban a 'splunk_windows' a biztos befutó
+          sigma convert -t splunk -p splunk_windows -o splunk_rules.txt rules/
 
       - name: Generate QRadar Rules
         run: |
-          # TRÜKK: Nem kell külön qradar backend! 
-          # A Splunk backend telepítésekor a CLI képessé válik alap konverziókra.
-          # Ha a 'qradar' név nem megy, próbáljuk meg az 'aql' (IBM QRadar nyelve) célpontot.
-          sigma convert -t qradar -p sysmon -p windows -o qradar_rules.txt rules/
+          # QRadar esetén a 'qradar_payload' vagy 'qradar_windows' szokott működni
+          sigma convert -t qradar -p qradar_windows -o qradar_rules.txt rules/
 
       # 1. LÉPÉS: Okos ellenőrzés és Automatikus javítás
       - name: Smart Validation and Auto-fix

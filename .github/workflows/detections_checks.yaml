@@ -29,15 +29,15 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # A backendeket pip-en keresztül telepítjük, mert a plugin install nem regisztrálódik megbízhatóan a runneren
-          python -m pip install sigma-cli \
-            pysigma-backend-splunk \
-            pysigma-backend-qradar \
-            pysigma-backend-microsoft-sentinel \
-            pytest "pyyaml>=6.0"
+          # Csak azokat telepítjük pip-pel, amiket biztosan megtalál (Splunk, QRadar)
+          python -m pip install sigma-cli pysigma-backend-splunk pysigma-backend-qradar pytest "pyyaml>=6.0"
           
-          # A többi kiegészítőt hagyhatjuk plugin-ként
-          sigma plugin install sysmon windows netwitness || echo "Néhány plugin nem elérhető, de folytatjuk"
+          # A Sentinelt a Sigma CLI saját plugin rendszerén keresztül telepítjük
+          # Próbáljuk a 'microsoft-sentinel' nevet, ha nem megy, a 'sentinel'-t
+          sigma plugin install microsoft-sentinel || sigma plugin install sentinel || echo "⚠️ Sentinel nem sikerült"
+          
+          # Egyéb szükséges pluginok
+          sigma plugin install sysmon windows netwitness || echo "Néhány plugin nem elérhető"
           
           # Függőségek szinkronizálása
           python -m pip install --upgrade "pysigma>=1.1.0" sigma-cli
@@ -54,29 +54,26 @@ jobs:
 
       - name: Convert Sigma rules to SIEM queries
         run: |
-          # Mappák előkészítése
           mkdir -p rules/splunk rules/qradar rules/netwitness rules/sentinel
-          rm -f rules/splunk/*.spl
-          rm -f rules/qradar/*.aql
-          rm -f rules/netwitness/*.txt
-          rm -f rules/sentinel/*.kql
+          rm -f rules/splunk/*.spl rules/qradar/*.aql rules/netwitness/*.txt rules/sentinel/*.kql
           
           for file in $(find rules/sigma -name "*.yaml"); do
             filename=$(basename "$file" .yaml)
             
-            # Splunk konverzió
+            # Splunk
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
             
-            # QRadar konverzió (A logod alapján sok mezőhiba várható, ezért nem állítjuk meg a scriptet)
+            # QRadar
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
             
-            # NetWitness konverzió
+            # NetWitness
             sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ NetWitness hiba: $file"
 
-            # Microsoft Sentinel (KQL) konverzió
-            # A pip-es telepítés után az azonosító: microsoft_sentinel
-            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba: $file"
+            # Microsoft Sentinel
+            # Itt mindkét lehetséges technikai nevet megpróbáljuk a konverzióhoz
+            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || \
+            sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "⚠️ Sentinel hiba: $file"
           done
 
       - name: Update Dashboard and SVG Map
@@ -89,15 +86,13 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
-          
           git add .
-          
           if ! git diff --staged --quiet; then
             git commit -m "Auto-update: Dashboard and SIEM rules (Splunk, QRadar, Sentinel, NetWitness)"
             git pull --rebase origin test
             git push origin test
           else
-            echo "Nincs változás a fájlokban."
+            echo "Nincs változás."
           fi
 
           if [ "${{ env.VALIDATION_FAILED }}" == "true" ]; then

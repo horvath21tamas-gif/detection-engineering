@@ -8,10 +8,11 @@ def get_rule_data():
     sigma_dir = 'rules/sigma'
     techniques_found = {} # TID: level
     rule_mapping = {}    # TID: [rule_filenames]
+    logsource_stats = {} # category/service: count
     rules_count = 0
     
     if not os.path.exists(sigma_dir):
-        return {}, {}, 0
+        return {}, {}, 0, {}
         
     for root, dirs, files in os.walk(sigma_dir):
         for file in files:
@@ -23,20 +24,24 @@ def get_rule_data():
                         level = str(content.get('level', 'low')).lower()
                         title = content.get('title', file)
                         
+                        # --- LogSource Statisztika gyűjtése ---
+                        ls = content.get('logsource', {})
+                        # Megpróbáljuk a legspecifikusabb nevet kinyerni (service, category vagy product)
+                        ls_key = ls.get('service') or ls.get('category') or ls.get('product') or 'unknown'
+                        logsource_stats[ls_key] = logsource_stats.get(ls_key, 0) + 1
+
+                        # --- MITRE Technika gyűjtése ---
                         for tag in content.get('tags', []):
-                            # Regex a TXXXX vagy TXXXX.XXX formátumhoz
                             match = re.search(r't\d{4}(?:\.\d{3})?', tag.lower())
                             if match:
                                 tid = match.group(0).upper()
-                                # Szín/Szint mentése (a magasabb szint felülírja az alacsonyabbat)
                                 if tid not in techniques_found or level in ['high', 'critical']:
                                     techniques_found[tid] = level
-                                # Szabály hozzáadása a mappinghez a COVERAGE.md-hez
                                 if tid not in rule_mapping:
                                     rule_mapping[tid] = []
                                 rule_mapping[tid].append(title)
                 except: continue
-    return techniques_found, rule_mapping, rules_count
+    return techniques_found, rule_mapping, rules_count, logsource_stats
 
 def generate_matrix_svg(techniques_found):
     colors = {"critical": "#ff6666", "high": "#ff6666", "medium": "#ffbd66", "low": "#ffe766"}
@@ -78,22 +83,19 @@ def generate_matrix_svg(techniques_found):
         f.write(svg)
 
 def update_all():
-    techniques, rule_mapping, rules_count = get_rule_data()
+    techniques, rule_mapping, rules_count, ls_stats = get_rule_data()
     generate_matrix_svg(techniques)
     
     USER = "horvath21tamas-gif"
     REPO = "detection-engineering"
     BRANCH = "test"
     
-    # Időbélyeg generálása a cache-elés megelőzésére
     ts = int(time.time())
     current_time = time.strftime('%Y-%m-%d %H:%M:%S')
-    
-    # Statisztika számítása
     total_mitre_tech = 201 
     coverage_pct = round((len(techniques) / total_mitre_tech) * 100, 1)
     
-    # 1. Navigator JSON frissítése
+    # 1. Navigator JSON
     layer = {
         "name": "Detection Coverage",
         "versions": {"attack": "14", "navigator": "4.9", "layer": "4.4"},
@@ -103,22 +105,24 @@ def update_all():
     with open('attack_navigator_layer.json', 'w', encoding='utf-8') as f:
         json.dump(layer, f, indent=4)
 
-    # 2. COVERAGE.md GENERÁLÁSA
+    # 2. COVERAGE.md
     coverage_content = f"# 📘 Részletes MITRE ATT&CK Lefedettség\n\n"
-    coverage_content += f"Ez a fájl kilistázza az összes lefedett technikát és a hozzájuk tartozó szabályokat.\n\n"
     coverage_content += f"**Utolsó frissítés:** `{current_time}`\n\n"
     coverage_content += "| Technika ID | Szint | Kapcsolódó szabályok |\n"
     coverage_content += "| :--- | :--- | :--- |\n"
-    
     for tid in sorted(rule_mapping.keys()):
         level = techniques[tid].upper()
         rules_list = ", ".join(rule_mapping[tid])
         coverage_content += f"| {tid} | {level} | {rules_list} |\n"
-        
     with open('COVERAGE.md', 'w', encoding='utf-8') as f:
         f.write(coverage_content)
 
-    # 3. README.md frissítése (Cache-törő linkekkel)
+    # 3. LogSource táblázat generálása a README-hez
+    ls_table = "| Log Forrás | Szabályok száma |\n| :--- | :--- |\n"
+    for source, count in sorted(ls_stats.items(), key=lambda item: item[1], reverse=True):
+        ls_table += f"| {source.capitalize()} | {count} |\n"
+
+    # 4. README.md (Mindent megtartva + LogSource táblázat)
     raw_json_url = f"https://raw.githubusercontent.com/{USER}/{REPO}/{BRANCH}/attack_navigator_layer.json"
     navigator_link = f"https://mitre-attack.github.io/attack-navigator/#layerURL={raw_json_url}"
 
@@ -131,6 +135,9 @@ def update_all():
 - **Részletes lista:** [COVERAGE.md](./COVERAGE.md)
 
 ![Progress Bar](https://geps.dev/progress/{int(coverage_pct)}?dangerColor=ff6666&warningColor=ffbd66&successColor=8ecb88&v={ts})
+
+## 🪵 Log Forrás Lefedettség
+{ls_table}
 
 ## 🗺️ MITRE ATT&CK Mátrix Vizualizáció
 ![MITRE Matrix](./mitre_matrix.svg?v={ts})

@@ -31,7 +31,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install pytest pyyaml sigma-cli
           sigma plugin install splunk
-          sigma plugin install qradar
+          sigma plugin install -f qradar
           sigma plugin install sysmon
           sigma plugin install windows
 

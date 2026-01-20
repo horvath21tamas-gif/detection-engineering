@@ -29,20 +29,23 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # 1. Alapok telepítése
-          python -m pip install sigma-cli pysigma-backend-splunk pytest pyyaml
           
-          # 2. Pluginok telepítése
+          # 1. Először telepítjük a stabil alapokat és rögzítjük a pyparsing-ot
+          python -m pip install "pyparsing<3.0.0" sigma-cli pysigma-backend-splunk pytest pyyaml
+          
+          # 2. Pluginok telepítése sorrendben
           sigma plugin install splunk sysmon windows
           
-          # QRadar kényszerítve (lebutítja a pySigma-t)
-          sigma plugin install --force-install qradar || echo "QRadar forced"
+          # A QRadar-t kényszerítve rakjuk fel
+          # Itt az 'echo "y"' automatikusan válaszol a reinstall kérdésre, ha felmerülne
+          echo "y" | sigma plugin install --force-install qradar || echo "QRadar forced"
           
-          # RSA NetWitness plugin telepítése (ÚJ!)
+          # RSA NetWitness plugin
           sigma plugin install netwitness
           
-          # 3. JAVÍTÁS: pySigma verzió visszaállítása a CLI kompatibilitáshoz
-          python -m pip install "pysigma>=1.0.0,<2.0.0"
+          # 3. VÉGSŐ JAVÍTÁS: Mindent frissítünk a modern verzióra, ami már kezeli a pyparsing 3-at
+          # Ez felülírja a QRadar által okozott régi verziókat
+          python -m pip install --upgrade "pysigma>=1.0.0,<2.0.0" "pyparsing>=3.0.0"
 
       - name: Smart Validation and Auto-fix
         id: validate_step

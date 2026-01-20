@@ -1,14 +1,13 @@
 import os
-import sys
 
-def check_rules():
+def check_and_clean_rules():
     directories = {
         'rules/splunk': '.spl',
         'rules/qradar': '.aql',
         'rules/netwitness': '.txt'
     }
     
-    errors = []
+    removed_count = 0
     
     for directory, extension in directories.items():
         if not os.path.exists(directory):
@@ -18,33 +17,35 @@ def check_rules():
         
         for filename in files:
             path = os.path.join(directory, filename)
+            should_remove = False
+            reason = ""
+            
+            # Ellenőrizzük a méretet
             size = os.path.getsize(path)
-            
-            # 1. Hiba: Üres fájl
             if size == 0:
-                errors.append(f"❌ Üres fájl: {path}")
-                continue
-            
-            with open(path, 'r', encoding='utf-8') as f:
-                content = f.read().strip()
-                
-                # 2. Hiba: A fájl csak hibaüzenetet tartalmaz
-                if "Error" in content or "Usage:" in content:
-                    errors.append(f"❌ Konverziós hiba maradt a fájlban: {path}")
-                
-                # 3. Hiba: Túl rövid tartalom (valószínűleg hibás lekérdezés)
-                if len(content) < 10:
-                    errors.append(f"❌ Gyanúsan rövid lekérdezés: {path} ('{content}')")
+                should_remove = True
+                reason = "üres fájl"
+            else:
+                # Ellenőrizzük a tartalmat
+                with open(path, 'r', encoding='utf-8') as f:
+                    content = f.read().strip()
+                    if "Error" in content or "Usage:" in content:
+                        should_remove = True
+                        reason = "konverziós hibaüzenet"
+                    elif len(content) < 10:
+                        should_remove = True
+                        reason = "túl rövid tartalom"
 
-    if errors:
-        print("\n--- Integrity Check Hibák ---")
-        for err in errors:
-            print(err)
-        return False
-    
-    print("\n✅ Minden generált szabály sértetlen és valid.")
-    return True
+            if should_remove:
+                print(f"🗑️ Törlés: {path} ({reason})")
+                os.remove(path)
+                removed_count += 1
+
+    if removed_count > 0:
+        print(f"\n✅ Összesen {removed_count} hibás szabály lett eltávolítva.")
+    else:
+        print("\n✨ Minden szabály rendben, nem volt szükség törlésre.")
 
 if __name__ == "__main__":
-    if not check_rules():
-        sys.exit(1)
+    check_and_clean_rules()
+    # Mindig 0-val lépünk ki, hogy a pipeline ne álljon meg

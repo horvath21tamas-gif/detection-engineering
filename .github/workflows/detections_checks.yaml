@@ -31,12 +31,11 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install pytest pyyaml sigma-cli
           sigma plugin install splunk
+          sigma plugin install qradar
           sigma plugin install sysmon
           sigma plugin install windows
 
       # 1. LÉPÉS: Okos ellenőrzés és Automatikus javítás
-      # A "|| true" miatt a folyamat nem áll le itt, ha hibát talál, 
-      # így a 5. lépésben a bot vissza tudja tölteni a javított elírásokat.
       - name: Smart Validation and Auto-fix
         id: validate_step
         run: |
@@ -48,14 +47,20 @@ jobs:
           export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
           python -m pytest test/ --maxfail=5 --disable-warnings -q || echo "Nincsenek tesztek vagy hiba történt."
 
-      # 3. LÉPÉS: Konvertálás Splunk formátumba
-      - name: Convert Sigma rules to Splunk (.spl files)
+      # 3. LÉPÉS: Konvertálás Splunk ÉS QRadar formátumba
+      - name: Convert Sigma rules to SIEM queries
         run: |
-          mkdir -p rules/splunk
+          mkdir -p rules/splunk rules/qradar
           rm -f rules/splunk/*.spl
+          rm -f rules/qradar/*.aql
           for file in $(find rules/sigma -name "*.yaml"); do
             filename=$(basename "$file" .yaml)
-            sigma convert -t splunk -p sysmon "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Átugorva: $file"
+            
+            # Splunk konverzió
+            sigma convert -t splunk -p sysmon "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
+            
+            # QRadar konverzió (AQL)
+            sigma convert -t qradar -p sysmon "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
           done
 
       # 4. LÉPÉS: Dashboard és MITRE Mátrix (SVG) frissítése
@@ -64,27 +69,29 @@ jobs:
         run: |
           python tools/update_all.py
           
-      # 5. LÉPÉS: Mentés és Visszatöltés (Auto-fix + Dashboard fájlok)
+      # 5. LÉPÉS: Mentés és Visszatöltés
       - name: Commit and push changes
         if: github.event_name == 'push'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Hozzáadjuk a javított Sigma szabályokat, Splunk fájlokat és a Dashboard-ot
-          git add README.md COVERAGE.md attack_navigator_layer.json mitre_matrix.svg rules/splunk/*.spl rules/sigma/*.yaml
+          # Hozzáadjuk a Splunk mellett a QRadar (.aql) fájlokat is a Git-hez
+          git add README.md COVERAGE.md attack_navigator_layer.json mitre_matrix.svg \
+                  rules/splunk/*.spl \
+                  rules/qradar/*.aql \
+                  rules/sigma/*.yaml
           
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Dashboard, Coverage Map and Sigma auto-fixes"
+            git commit -m "Auto-update: Dashboard, Splunk & QRadar rules, and Sigma auto-fixes"
             git pull --rebase origin test
             git push origin test
           else
             echo "Nincs változás a fájlokban."
           fi
 
-          # VÉGSŐ ELLENŐRZÉS: Ha az 1. lépésben volt hiba, itt dobjuk el a pipeline-t.
-          # Így a piros X megmarad a GitHubon, jelezve, hogy kézzel még javítanod kell az author-t/szintet.
+          # VÉGSŐ ELLENŐRZÉS: Ha a validáció hibás volt, piros marad a pipeline
           if [ "${{ env.VALIDATION_FAILED }}" == "true" ]; then
-            echo "❌ A validáció kritikus hibákat talált (pl. hiányzó author), de az elírásokat a bot kijavította."
+            echo "❌ A validáció kritikus hibákat talált, de a javításokat és a konverziókat elmentettem."
             exit 1
           fi

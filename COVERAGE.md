@@ -1,15 +1,15 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-20 14:41:04`
+**Utolsó frissítés:** `2026-01-20 14:47:09`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 36 | 100% |
-| Splunk (SPL) | 36 | 100.0% |
-| QRadar (AQL) | 34 | 94.4% |
-| RSA NetWitness | 36 | 100.0% |
+| Sigma (Forrás) | 37 | 100% |
+| Splunk (SPL) | 36 | 97.3% |
+| QRadar (AQL) | 34 | 91.9% |
+| RSA NetWitness | 36 | 97.3% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -52,6 +52,7 @@
 | T1548.002 | HIGH | UAC bypass Fodhelper segitsegevel |
 | T1555 | MEDIUM | Detektalni, amikor nem a bongeszo folyamata fer hozza a bongeszo credential storejahoz |
 | T1558.003 | HIGH | Szokatlan mennyisegu szolgaltatas jegy kerese |
+| T1559.001 | HIGH | High Fidelity Suspicious Named Pipe Activity |
 | T1560 | MEDIUM | Adatgyujtes es exfiltration elokeszitese Archiving segitsegevel |
 | T1562 | MEDIUM | egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani, Security tool leallitasa |
 | T1562.001 | CRITICAL | Ransomware elokeszites eszlelese, Detektalni, amikor egy tamado megprobalja kikapcsolni a Windows funkcioit powershellbol, Security tool leallitasa |

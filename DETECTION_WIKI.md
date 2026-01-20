@@ -256,6 +256,14 @@
 - **Hamis pozitívok:** Nincs megadva
 
 ---
+### High Fidelity Suspicious Named Pipe Activity
+- **Azonosító:** `T1559_001`
+- **Leírás:** High fidelity detection of suspicious named pipe creation or connection with minimal false positives, focusing on non-Microsoft signed binaries and abnormal pipe names.
+- **Szint:** `high`
+- **Kritikusság:** 🟠
+- **Hamis pozitívok:** Custom in-house software using random named pipes, Rare unsigned legacy applications
+
+---
 ### Adatgyujtes es exfiltration elokeszitese Archiving segitsegevel
 - **Azonosító:** `T1560`
 - **Leírás:** Adatgyujtes es exfiltration elokeszitese Archiving segitsegevel

@@ -1,0 +1,73 @@
+title: Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt
+id: a91d6b52-4f8a-4c8c-bd8b-5c2b87c3f41e
+status: stable
+description: >
+  Észleli az ütemezett feladatok vagy a több operációs rendszeren keresztüli adatmegőrzéshez használt feladatok gyanús létrehozását. A támadószerű végrehajtási mintákra összpontosít.
+author: hota05
+date: 2026/01/21
+references:
+  - https://attack.mitre.org/techniques/T1053/
+tags:
+  - attack.persistence
+  - attack.t1053
+
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  selection_scheduler_tools:
+    Image|endswith:
+      - '\schtasks.exe'
+      - '\at.exe'
+      - '\powershell.exe'
+      - '\cmd.exe'
+
+  selection_scheduler_keywords:
+    CommandLine|contains:
+      - 'schtasks'
+      - '/create'
+      - '/sc'
+      - 'Register-ScheduledTask'
+      - 'New-ScheduledTask'
+      - 'at '
+
+  suspicious_execution_target:
+    CommandLine|contains:
+      - '\AppData\'
+      - '\Users\Public\'
+      - '\ProgramData\'
+      - '\Temp\'
+      - 'powershell'
+      - 'cmd.exe'
+      - 'wscript'
+      - 'cscript'
+      - 'mshta'
+      - 'rundll32'
+      - '.ps1'
+      - '.vbs'
+      - '.js'
+
+  filter_legitimate_system:
+    User|contains:
+      - 'SYSTEM'
+      - 'LOCAL SERVICE'
+      - 'NETWORK SERVICE'
+    OR:
+      CommandLine|contains:
+        - '\Microsoft\Windows\'
+        - 'Windows Defender'
+        - 'OneDrive'
+        - 'GoogleUpdate'
+        - 'Adobe'
+
+  condition: selection_scheduler_tools
+             and selection_scheduler_keywords
+             and suspicious_execution_target
+             and not filter_legitimate_system
+
+falsepositives:
+  - Ritka adminisztratív automatizálás felhasználó által írható könyvtárak használatával
+  - Egyedi IT karbantartási szkriptek végrehajtása ütemezett feladatokon keresztül
+
+level: high

@@ -1,0 +1,4 @@
+
+| rex field=PipeName "(?<PipeNameMatch>^\\\\+[a-f0-9]{8,10}$)"
+| eval PipeNameCondition=if(isnotnull(PipeNameMatch), "true", "false")
+| search PipeName IN ("*\\msagent_*", "*\\postex_*", "*\\status_*", "*\\psexec*", "*\\paexec*", "*\\remcom*", "*\\lsadump*", "*\\cachedump*", "*\\mypipe*", "*\\win_svc*") OR (Image IN ("*\\cmd.exe", "*\\powershell.exe", "*\\pwsh.exe", "*\\powershell_ise.exe", "*\\wscript.exe", "*\\cscript.exe", "*\\rundll32.exe", "*\\mshta.exe") PipeNameCondition="true") NOT ((Image IN ("C:\\Windows\\System32\\*", "C:\\Windows\\SysWOW64\\*") PipeName IN ("*\\lsass*", "*\\ntsvcs*", "*\\scerpc*", "*\\epmapper*", "*\\atsvc*", "*\\spoolss*", "*\\srvsvc*")) OR Image IN ("*\\vmtoolsd.exe", "*\\docker.exe", "*\\vboxservice.exe", "*\\chrome.exe", "*\\msedge.exe"))

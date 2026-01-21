@@ -62,6 +62,9 @@ jobs:
           export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
           python -m pytest test/ --ignore=test/test_detection_logic.py --maxfail=5 --disable-warnings -q || echo "Nincsenek általános tesztek."
 
+      - name: Preprocess Sigma rules for strict SIEMs
+        run: python tools/preprocess_sigma.py
+
       - name: Convert Sigma rules to SIEM queries
         run: |
           mkdir -p rules/splunk rules/qradar rules/netwitness rules/elastic
@@ -70,22 +73,18 @@ jobs:
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
             
-            # --- SPLUNK ---
-            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
+            # Splunk
+            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk error"
             
-            # --- QRADAR (Kibővített javítás) ---
-            # 1. Megpróbáljuk a standard profillal
-            # 2. Ha elbukik (pl. mező hiba miatt), megpróbáljuk profil nélkül, hogy legalább a logikát kimentse
-            sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
-            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || \
-            echo "⚠️ QRadar kritikus hiba: $file"
+            # QRadar (Most már a preprocesszált mezőkkel fut le)
+            # Megjegyzés: itt NE használj qradar_windows pipeline-t, mert az ütközhet a kézzel átírt mezőkkel
+            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar error"
             
-            # --- RSA NETWITNESS ---
-            # Itt is levettük a hibás pipeline hivatkozást, a backend alapból próbálkozik
-            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
+            # NetWitness
+            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "RSA error"
             
-            # --- ELASTIC ---
-            sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "⚠️ Elastic hiba: $file"
+            # Elastic (Lucene)
+            sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic error"
           done
       - name: Run Integrity Check
         run: |

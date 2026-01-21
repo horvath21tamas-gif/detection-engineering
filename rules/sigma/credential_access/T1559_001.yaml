@@ -1,5 +1,5 @@
 title: Gyanús Named Pipe létrehozása (High Fidelity - Fixed)
-id: e4a1b7c9-8f12-4b8c-9d33-15590001hf01
+id: 519fab54-5841-48d3-b600-bb082c0251e6
 status: stable
 description: >
   Javított verzió, amely kompatibilis a Splunk, Elastic, QRadar és NetWitness backendekkel.

@@ -62,13 +62,12 @@ jobs:
           export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
           python -m pytest test/ --ignore=test/test_detection_logic.py --maxfail=5 --disable-warnings -q || echo "Nincsenek általános tesztek."
 
-      - name: Preprocess Sigma rules for QRadar
+      - name: Preprocess Sigma rules
         run: python tools/preprocess_sigma.py
 
       - name: Convert Sigma rules to SIEM queries
         run: |
           mkdir -p rules/splunk rules/qradar rules/netwitness rules/elastic
-          rm -f rules/splunk/*.spl rules/qradar/*.aql rules/netwitness/*.txt rules/elastic/*.kql
           
           for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
             filename=$(basename "$file" .yaml)
@@ -77,22 +76,19 @@ jobs:
             # SPLUNK
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk error"
             
-            # QRADAR - Nyers konverzió + Utólagos javítás
-            # A pipeline-t (-p) szándékosan kihagyjuk, hogy ne dobjon mezőhibát
-            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || \
-            echo "SELECT UTF8(payload) FROM events WHERE devicetype=12" > "rules/qradar/${filename}.aql"
+            # QRADAR (Nyersen, pipeline nélkül)
+            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar error"
             
-            # Itt futtatjuk le a javító scriptet a frissen generált fájlon
-            python tools/fix_qradar_aql.py "rules/qradar/${filename}.aql"
-            
-            # RSA NETWITNESS
+            # RSA NETWITNESS (Nyersen)
             sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "RSA error"
             
             # ELASTIC
             sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic error"
           done
 
-      # ... (további lépések változatlanok: Integrity Check, Scoring, stb.) ...
+      - name: Final SIEM Query Fixer (QRadar & NetWitness)
+        run: python tools/final_siem_fixer.py
+
       - name: Run Integrity Check
         run: |
           python tools/check_integrity.py

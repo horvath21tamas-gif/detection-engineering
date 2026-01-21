@@ -1,1 +1,1 @@
-SELECT UTF8(payload) as search_payload from events where processname LIKE '%msiexec.exe' AND (processcommandline LIKE ('%http://%','%https://%','%/i%')) 
+SELECT UTF8(payload) as search_payload from events where "Image" LIKE '%msiexec.exe' AND ("Process CommandLine" LIKE ('%http://%','%https://%','%/i%'))

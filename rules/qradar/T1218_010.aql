@@ -1,1 +1,1 @@
-SELECT UTF8(payload) as search_payload from events where processname LIKE '%\regsvr32.exe' AND (processcommandline LIKE ('%\Users\%','%\AppData\%','%\Temp\%')) AND NOT processcommandline LIKE '%.dll' 
+SELECT UTF8(payload) as search_payload from events where "Image" LIKE '%\regsvr32.exe' AND ("Process CommandLine" LIKE ('%\Users\%','%\AppData\%','%\Temp\%')) AND NOT "Process CommandLine" LIKE '%.dll'

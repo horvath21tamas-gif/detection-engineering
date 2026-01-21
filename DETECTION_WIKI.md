@@ -35,7 +35,7 @@
 - [Detektalni, amikor nem a bongeszo folyamata fer hozza a bongeszo credential storejahoz](#detektalni,-amikor-nem-a-bongeszo-folyamata-fer-hozza-a-bongeszo-credential-storejahoz)
 - [Szokatlan mennyisegu szolgaltatas jegy kerese](#szokatlan-mennyisegu-szolgaltatas-jegy-kerese)
 - [High Fidelity Suspicious Named Pipe Activity](#high-fidelity-suspicious-named-pipe-activity)
-- [Adatgyujtes es exfiltration elokeszitese Archiving segitsegevel](#adatgyujtes-es-exfiltration-elokeszitese-archiving-segitsegevel)
+- [Adatok gyanús archiválása exfiltráció céljából](#adatok-gyanús-archiválása-exfiltráció-céljából)
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
 - [Suspicious Firewall Modification via Netsh.exe](#suspicious-firewall-modification-via-netshexe)
@@ -538,17 +538,19 @@
 
 ---
 
-## Adatgyujtes es exfiltration elokeszitese Archiving segitsegevel
+## Adatok gyanús archiválása exfiltráció céljából
 - **Azonosító:** `T1560.yaml`
-- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
-- **Kritikusság:** 🟡 (medium)
-- **Leírás:** Adatgyujtes es exfiltration elokeszitese Archiving segitsegevel
-- **Hamis pozitívok:** pentesteles a kornyezetben
-- **MITRE ATT&CK:** `T1560`
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Észleli a fájlok gyanús tömörítését és archiválását (7z, rar, tar, PowerShell), különösen ha jelszavas védelmet  alkalmaznak vagy gyanús ideiglenes könyvtárakat használnak célhelyként.
+
+- **Hamis pozitívok:** Rendszergazdai mentési scriptek, Szoftverfrissítések, amelyek ideiglenes mappákban tömörítenek, Felhasználók, akik jelszóval védett tömörítményt készítenek legális célból
+- **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld a hostot a hálózatról!
 
 ---
 

@@ -1,5 +1,6 @@
 sigma-cli
 pysigma-backend-splunk
+pysigma-backend-elasticsearch
 pytest
 pyyaml>=6.0
 requests

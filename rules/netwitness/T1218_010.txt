@@ -1,1 +1,1 @@
-(process ends '\regsvr32.exe' && (param contains '\Users\','\AppData\','\Temp\')) && (NOT (param ends '.dll'))
+(process = '*\regsvr32.exe*' AND (param = '*\user.dsts\*','\AppData\','\Temp\')) AND (NOT (param = '*.dll*'))

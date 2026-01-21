@@ -1,1 +1,1 @@
-(process ends '\powershell.exe','\bitsadmin.exe','\certutil.exe') && (Commandline contains 'Invoke-WebRequest','IEX','DownloadFile')
+(process = '*\powershell.exe*','\bitsadmin.exe','\certutil.exe') AND (Commandline = '*Invoke-WebRequest*','IEX','DownloadFile')

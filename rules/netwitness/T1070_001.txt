@@ -1,1 +1,1 @@
-(process ends '\wevtutil.exe' && (param contains 'cl','security')) && (NOT (user.dst = 'SYSTEM'))
+(process = '*\wevtutil.exe*' AND (param = '*cl*','security')) AND (NOT (username = 'SYSTEM'))

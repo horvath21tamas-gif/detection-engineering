@@ -1,1 +1,1 @@
-(processLoaded ends '\user32.dll','\advapi32.dll','\win32u.dll') && process ends '.exe' && (NOT (process begins 'C:\Windows\System32\','C:\Windows\SysWOW64\')) && (NOT (process ends '\explorer.exe','\chrome.exe','\msedge.exe','\firefox.exe','\teams.exe'))
+(processLoaded = '*\user32.dll*','\advapi32.dll','\win32u.dll') AND process = '*.exe*' AND (NOT (process begins 'C:\Windows\System32\','C:\Windows\SysWOW64\')) AND (NOT (process = '*\explorer.exe*','\chrome.exe','\msedge.exe','\firefox.exe','\teams.exe'))

@@ -1,1 +1,1 @@
-(''<script'' || ''<svg'' || ''<iframe'' || ''javascript:'' || ''*3cscript'') && ((status = 200,403) && timeframe = '1m')
+(''<script'' OR ''<svg'' OR ''<iframe'' OR ''javascript:'' OR ''%3cscript'') AND ((status = 200,403) AND timeframe = '1m')

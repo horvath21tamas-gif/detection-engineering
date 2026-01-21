@@ -1,1 +1,1 @@
-(process ends 'itsadmin.exe' && (param contains '/transfer','/addfile','http://','https://')) && (NOT (user.dst = 'SYSTEM'))
+(process = '*itsadmin.exe*' AND (param = '*/transfer*','/addfile','http://','https://')) AND (NOT (username = 'SYSTEM'))

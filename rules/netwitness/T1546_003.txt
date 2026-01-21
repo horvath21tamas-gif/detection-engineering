@@ -1,1 +1,1 @@
-((process ends '\wmic.exe' && (param contains '__EventFilter','paramEventConsumer','FilterToConsumerBinding')) || (process ends '\powershell.exe' && (param contains 'Register-WmiEvent','root\subscription'))) && (NOT (user.dst = 'SYSTEM'))
+((process = '*\wmic.exe*' AND (param = '*__EventFilter*','paramEventConsumer','FilterToConsumerBinding')) OR (process = '*\powershell.exe*' AND (param = '*Register-WmiEvent*','root\subscription'))) AND (NOT (username = 'SYSTEM'))

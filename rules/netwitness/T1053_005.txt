@@ -1,1 +1,1 @@
-(process ends '\schtasks.exe' && param contains '/create') && param contains 'powershell'
+(process = '*\schtasks.exe*' AND param = '*/create*') AND param = '*powershell*'

@@ -1,1 +1,1 @@
-EventType = 'SetValue' && TargetObject contains '\Software\Microsoft\Windows\CurrentVersion\Run' && (Details contains '\AppData\','\Temp\') && (process ends '\powershell.exe','\cmd.exe')
+EventType = 'SetValue' AND TargetObject = '*\Software\Microsoft\Windows\CurrentVersion\Run*' AND (Details = '*\AppData\*','\Temp\') AND (process = '*\powershell.exe*','\cmd.exe')

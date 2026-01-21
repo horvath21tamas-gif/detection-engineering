@@ -1,1 +1,1 @@
-process ends '\rundll32.exe' && (param contains 'javascript','RunHTMLApplication','http://','https://')
+process = '*\rundll32.exe*' AND (param = '*javascript*','RunHTMLApplication','http://','https://')

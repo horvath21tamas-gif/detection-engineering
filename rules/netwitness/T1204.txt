@@ -1,1 +1,1 @@
-(Parentprocess ends '\WINWORD.EXE','\EXCEL.EXE','\POWERPNT.EXE','\OUTLOOK.EXE','\MSACCESS.EXE') && (process ends '\cmd.exe','\powershell.exe','\pwsh.exe','\mshta.exe','\rundll32.exe','\regsvr32.exe','\bitsadmin.exe','\certutil.exe')
+(Parentprocess = '*\WINWORD.EXE*','\EXCEL.EXE','\POWERPNT.EXE','\OUTLOOK.EXE','\MSACCESS.EXE') AND (process = '*\cmd.exe*','\powershell.exe','\pwsh.exe','\mshta.exe','\rundll32.exe','\regsvr32.exe','\bitsadmin.exe','\certutil.exe')

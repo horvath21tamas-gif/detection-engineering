@@ -1,1 +1,1 @@
-(process ends '\powershell.exe','\pwsh.exe','\cmd.exe') && (param contains '-enc','-encodedcommand','-EncodedCommand')
+(process = '*\powershell.exe*','\pwsh.exe','\cmd.exe') AND (param = '*-enc*','-encodedcommand','-EncodedCommand')

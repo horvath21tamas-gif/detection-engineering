@@ -1,1 +1,1 @@
-(Parentprocess ends '\fodhelper.exe' && (process ends '\powershell.exe','\cmd.exe')) && (NOT (user.dst = 'SYSTEM'))
+(Parentprocess = '*\fodhelper.exe*' AND (process = '*\powershell.exe*','\cmd.exe')) AND (NOT (username = 'SYSTEM'))

@@ -1,1 +1,1 @@
-(EventID = 4769 && Status = '0x0' && (TicketEncryptionType = '0x17','0x1','0x3')) && (NOT (TargetUserName ends '$' || (ServiceCode = '0x11' && ServiceName ends '$') || (IpAddress = '::1','127.0.0.1')))
+(EventID = 4769 AND Status = '0x0' AND (TicketEncryptionType = '0x17','0x1','0x3')) AND (NOT (Targetuser.dstName = '*$*' OR (ServiceCode = '0x11' AND ServiceName = '*$*') OR (IpAddress = '::1','127.0.0.1')))

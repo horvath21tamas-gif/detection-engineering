@@ -1,1 +1,1 @@
-SELECT UTF8(payload) as search_payload from events where "Service Name " LIKE '%PSEXECSVC%' AND "Machine ID" LIKE 'MGMT-%'
+SELECT UTF8(payload) as search_payload from events where "Service Name " ILIKE '%PSEXECSVC%' AND "Machine ID" ILIKE 'MGMT-%'

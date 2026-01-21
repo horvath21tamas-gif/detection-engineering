@@ -1,15 +1,15 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-21 07:22:52`
+**Utolsó frissítés:** `2026-01-21 07:35:15`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 37 | 100% |
-| Splunk (SPL) | 37 | 100.0% |
-| QRadar (AQL) | 35 | 94.6% |
-| RSA NetWitness | 37 | 100.0% |
+| Sigma (Forrás) | 38 | 100% |
+| Splunk (SPL) | 37 | 97.4% |
+| QRadar (AQL) | 35 | 92.1% |
+| RSA NetWitness | 37 | 97.4% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -22,6 +22,7 @@
 | T1036 | HIGH | A tamado lemasol egy legitim Windows binarist |
 | T1036.005 | HIGH | A tamado lemasol egy legitim Windows binarist |
 | T1047 | MEDIUM | Tavoli hoston inditott folyamat wmic.exe segitsegevel |
+| T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
 | T1053.005 | MEDIUM | Gyanus Scheduled Task letrehozasa |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 APIs |
 | T1059 | HIGH | Gyanus folyamatot inditott a Microsoft office valamelyik alkalmazasa, webszerverre torteno webshellfeltoltese/ interakcioba lepese |

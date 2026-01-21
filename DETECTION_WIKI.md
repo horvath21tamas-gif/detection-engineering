@@ -7,6 +7,7 @@
 - [Detektalni a poweshellbol base64-encoded parancsot](#detektalni-a-poweshellbol-base64-encoded-parancsot)
 - [A tamado lemasol egy legitim Windows binarist](#a-tamado-lemasol-egy-legitim-windows-binarist)
 - [Tavoli hoston inditott folyamat wmic.exe segitsegevel](#tavoli-hoston-inditott-folyamat-wmicexe-segitsegevel)
+- [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [Gyanus Scheduled Task letrehozasa](#gyanus-scheduled-task-letrehozasa)
 - [Suspicious Credential API Hooking via Win32 APIs](#suspicious-credential-api-hooking-via-win32-apis)
 - [Gyanus Poweshell parancs vegrehajtasa](#gyanus-poweshell-parancs-vegrehajtasa)
@@ -126,6 +127,22 @@
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+
+---
+
+## Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt
+- **Azonosító:** `T1053.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Észleli az ütemezett feladatok vagy a több operációs rendszeren keresztüli adatmegőrzéshez használt feladatok gyanús létrehozását. A támadószerű végrehajtási mintákra összpontosít.
+
+- **Hamis pozitívok:** Ritka adminisztratív automatizálás felhasználó által írható könyvtárak használatával, Egyedi IT karbantartási szkriptek végrehajtása ütemezett feladatokon keresztül
+- **MITRE ATT&CK:** `T1053`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld a hostot a hálózatról!
 
 ---
 

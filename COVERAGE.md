@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-21 08:02:21`
+**Utolsó frissítés:** `2026-01-21 08:06:21`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -54,6 +54,6 @@
 | T1558.003 | HIGH | Szokatlan mennyisegu szolgaltatas jegy kerese |
 | T1559.001 | HIGH | High Fidelity Suspicious Named Pipe Activity |
 | T1560 | MEDIUM | Adatgyujtes es exfiltration elokeszitese Archiving segitsegevel |
-| T1562 | MEDIUM | egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani, Security tool leallitasa |
-| T1562.001 | HIGH | Ransomware elokeszites eszlelese, Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Security tool leallitasa |
+| T1562 | MEDIUM | egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani |
+| T1562.001 | CRITICAL | Ransomware elokeszites eszlelese, Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |

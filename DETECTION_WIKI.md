@@ -36,7 +36,7 @@
 - [Szokatlan mennyisegu szolgaltatas jegy kerese](#szokatlan-mennyisegu-szolgaltatas-jegy-kerese)
 - [High Fidelity Suspicious Named Pipe Activity](#high-fidelity-suspicious-named-pipe-activity)
 - [Adatgyujtes es exfiltration elokeszitese Archiving segitsegevel](#adatgyujtes-es-exfiltration-elokeszitese-archiving-segitsegevel)
-- [Security tool leallitasa](#security-tool-leallitasa)
+- [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
 - [Suspicious Firewall Modification via Netsh.exe](#suspicious-firewall-modification-via-netshexe)
 - [Credential Dumping LSASS](#credential-dumping-lsass)
@@ -552,17 +552,19 @@
 
 ---
 
-## Security tool leallitasa
+## Biztonsági szolgáltatások gyanús leállítása
 - **Azonosító:** `T1562.yaml`
-- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
-- **Kritikusság:** 🟡 (medium)
-- **Leírás:** Security tool leallitasa
-- **Hamis pozitívok:** admin allitja le fejlesztes celjabol, pentesteles
-- **MITRE ATT&CK:** `T1562, 001`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Észleli a kritikus biztonsági szolgáltatások (Antivírus, EDR, Tűzfal) leállítására irányuló kísérleteket  olyan eszközökkel, mint a net.exe, sc.exe vagy PowerShell. Ez a védelem kiiktatására irányuló támadói tevékenység.
+
+- **Hamis pozitívok:** Rendszergazdák által végzett hibaelhárítás vagy szoftvercsere, Biztonsági ügynökök frissítése (néha leállítják és újraindítják magukat)
+- **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld a hostot a hálózatról!
 
 ---
 

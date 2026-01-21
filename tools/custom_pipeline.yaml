@@ -1,0 +1,12 @@
+name: Custom Field Mapping
+priority: 100
+transformations:
+  - type: field_name_mapping
+    mapping:
+      Image: process # QRadar és RSA gyakran ezt várja
+      CommandLine: command
+      ParentImage: parent_process
+      User: user_name
+      Hashes: checksum
+      TargetFilename: file_path
+      PipeName: name

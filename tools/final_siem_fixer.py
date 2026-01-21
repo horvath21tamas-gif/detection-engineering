@@ -1,79 +1,79 @@
 import os
 import re
 
-def expand_list_to_or_logic(field, values_str):
-    """
-    Átalakítja a ('val1','val2') listát (field LIKE 'val1' OR field LIKE 'val2') formátumra.
-    """
-    # Kiszedjük az értékeket a zárójelek közül
-    values = [v.strip().strip("'") for v in values_str.split(',')]
-    # Felépítjük az OR láncot
-    or_chain = " OR ".join([f"{field} LIKE '{v}'" for v in values])
+def expand_list_to_or_logic(field, values_str, operator="LIKE"):
+    """Szétbontja a listát (field OP 'v1' OR field OP 'v2') formára."""
+    values = [v.strip().strip("'").strip("%").strip("*") for v in values_str.split(',')]
+    # QRadarhoz LIKE '%érték%', NetWitnesshez = '*érték*'
+    if operator == "LIKE":
+        or_chain = " OR ".join([f"{field} LIKE '%{v}%'" for v in values])
+    else:
+        or_chain = " OR ".join([f"{field} = '*{v}*'" for f, v in zip([field]*len(values), values)])
     return f"({or_chain})"
 
 def fix_qradar(content):
-    # 1. ENUMERATION és felesleges szavak törlése
-    content = content.replace("ENUMERATION", "")
-    content = content.replace("ILIKE", "LIKE")
-    
-    # 2. Mezőnevek fixálása (idézőjelek nélkül)
+    # 1. Alapvető QRadar mezőnevek (DSM függő, de ezek a leggyakoribbak)
+    # Ha a processname nem jó, a "Filename" vagy a "Process Name" (idézőjelben) a befutó
     mapping = {
-        '"Image"': "processname",
-        '"Process CommandLine"': "processcommandline",
-        '"username"': "username"
+        'processname': '"Filename"',
+        'processcommandline': '"Process CommandLine"',
+        'username': '"UserName"',
+        '"Image"': '"Filename"',
+        '"Process CommandLine"': '"Process CommandLine"'
     }
     for old, new in mapping.items():
         content = content.replace(old, new)
 
-    # 3. A legnehezebb rész: (field LIKE ('a','b')) -> (field LIKE 'a' OR field LIKE 'b')
-    # Regex keresi a: field LIKE ('érték1','érték2'...) mintát
-    pattern = r"(\w+)\s+LIKE\s+\(([^)]+)\)"
+    # 2. Tisztítás
+    content = content.replace("ENUMERATION", "").replace("ILIKE", "LIKE")
     
-    def replacer(match):
-        field = match.group(1)
-        values_str = match.group(2)
-        if ',' in values_str:
-            return expand_list_to_or_logic(field, values_str)
-        return match.group(0) # Ha nincs benne vessző, nem nyúlunk hozzá
+    # 3. Lista bontás: mező LIKE ('a','b') -> (mező LIKE '%a%' OR mező LIKE '%b%')
+    pattern = r'(\"?[a-zA-Z\s]+\"?)\s+LIKE\s+\(([^)]+)\)'
+    content = re.sub(pattern, lambda m: expand_list_to_or_logic(m.group(1), m.group(2), "LIKE"), content)
 
-    content = re.sub(pattern, replacer, content)
-
-    # 4. SELECT váz hozzáadása
+    # 4. SELECT javítás
     if "SELECT" not in content:
-        content = f"SELECT UTF8(payload) as EventPayload, deviceatttime, processname, processcommandline FROM events WHERE {content}"
+        content = f"SELECT UTF8(payload), \"Filename\", \"Process CommandLine\" FROM events WHERE {content}"
     
     return content
 
 def fix_netwitness(content):
-    # Mezőnevek átalakítása NetWitness meta kulcsokra
+    # NetWitness-nél nincs CONTAINS, helyette mező = '*érték*'
+    # 1. Mezőnevek fixálása
     mapping = {
         "Image": "process",
         "CommandLine": "param",
-        "username": "user.dst"
+        "username": "user.dst",
+        "CONTAINS": "=" # Ez a legfontosabb javítás
     }
     for old, new in mapping.items():
         content = content.replace(old, new)
-    
-    # NetWitness-nél a % helyett * kell wildcardnak
+
+    # 2. Lista bontás NetWitnessre: mező = ('a','b') -> (mező = '*a*' OR mező = '*b*')
+    pattern = r'(\w+)\s+=\s+\(([^)]+)\)'
+    content = re.sub(pattern, lambda m: expand_list_to_or_logic(m.group(1), m.group(2), "="), content)
+
+    # 3. Wildcard javítás: % -> *
     content = content.replace("%", "*")
+    
+    # Felesleges LIKE-ok törlése, ha maradtak volna
+    content = content.replace("LIKE", "=")
     return content
 
 def process_files():
-    # QRadar
-    q_path = 'rules/qradar'
-    if os.path.exists(q_path):
-        for f in os.listdir(q_path):
+    # QRadar (.aql)
+    if os.path.exists('rules/qradar'):
+        for f in os.listdir('rules/qradar'):
             if f.endswith('.aql'):
-                p = os.path.join(q_path, f)
+                p = os.path.join('rules/qradar', f)
                 with open(p, 'r') as file: data = file.read()
                 with open(p, 'w') as file: file.write(fix_qradar(data))
 
-    # NetWitness
-    n_path = 'rules/netwitness'
-    if os.path.exists(n_path):
-        for f in os.listdir(n_path):
+    # NetWitness (.txt)
+    if os.path.exists('rules/netwitness'):
+        for f in os.listdir('rules/netwitness'):
             if f.endswith('.txt'):
-                p = os.path.join(n_path, f)
+                p = os.path.join('rules/netwitness', f)
                 with open(p, 'r') as file: data = file.read()
                 with open(p, 'w') as file: file.write(fix_netwitness(data))
 

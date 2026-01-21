@@ -12,6 +12,9 @@ available_sources:
   - pipe_created
   - login
   - service_creation
+  - security
+  - system
+  - sysmon
   product:
   - windows
   - linux

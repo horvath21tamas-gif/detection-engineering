@@ -3,58 +3,50 @@ import re
 
 def expand_complex_list(field, values_str, siem_type):
     """
-    Szétbontja a listákat érvényes SIEM logikára.
-    QRadar: (field LIKE '%v1%' OR field LIKE '%v2%')
-    NetWitness: (field = '*v1*' OR field = '*v2*')
+    Szétbontja a listákat érvényes SIEM logikára és közben leképezi a mezőneveket.
     """
     raw_values = [v.strip().strip("'").strip('"').strip('%').strip('*') for v in values_str.split(',')]
+    
+    # Mezőnév leképezés (Mapping)
+    nw_map = {"Image": "process", "CommandLine": "param", "User": "user.dst", "username": "user.dst"}
+    qr_map = {"Image": '"Filename"', "username": '"UserName"', "Process CommandLine": '"Process CommandLine"'}
+    
+    clean_field = field.strip().strip('"')
+    if siem_type == "netwitness":
+        mapped_field = nw_map.get(clean_field, clean_field)
+    else:
+        mapped_field = qr_map.get(clean_field, f'"{clean_field}"')
+
     clauses = []
     for v in raw_values:
         if not v: continue
         if siem_type == "qradar":
-            clauses.append(f"{field} LIKE '%{v}%'")
+            clauses.append(f"{mapped_field} LIKE '%{v}%'")
         else: # netwitness
-            clauses.append(f"{field} = '*{v}*'")
+            clauses.append(f"{mapped_field} = '*{v}*'")
+    
     return "(" + " OR ".join(clauses) + ")"
 
 def fix_qradar(content):
-    # 1. Mezőnevek kényszerítése a QRadar DSM-hez
-    mapping = {
-        '"Image"': '"Filename"',
-        '"username"': '"UserName"',
-        'Image': '"Filename"',
-        'username': '"UserName"'
-    }
-    for old, new in mapping.items():
-        content = content.replace(old, new)
-    
     content = content.replace('""', '"')
-    
-    # 2. Lista bontás
+    # Megkeresi a mező LIKE (...) mintákat
     pattern = r'("[^"]+"|\w+)\s+(?:ILIKE ENUMERATION|LIKE)\s*\(([^)]+)\)'
     content = re.sub(pattern, lambda m: expand_complex_list(m.group(1), m.group(2), "qradar"), content)
-    
     return content
 
 def fix_netwitness(content):
-    # 1. MEZŐNEVEK CSERÉJE NetWitness meta-kulcsokra
-    # Figyelünk a szóközökre, hogy csak a mezőneveket bántsa!
-    content = content.replace("CommandLine =", "param =")
-    content = content.replace("Image =", "process =")
-    content = content.replace("User =", "user.dst =")
-    content = content.replace("username =", "user.dst =")
+    # 1. Először a magányos mezőneveket cseréljük le (pl. Image = '*...')
+    # Úgy keressük, hogy előtte zárójel vagy szóköz van, utána pedig egyenlőségjel
+    content = re.sub(r'(\bImage\b)(?=\s*=)', 'process', content)
+    content = re.sub(r'(\bCommandLine\b)(?=\s*=)', 'param', content)
+    content = re.sub(r'(\bUser\b|\busername\b)(?=\s*=)', 'user.dst', content)
 
-    # 2. Lista bontás és operátor javítás
-    nw_pattern = r'(\w+(?:\.\w+)?)\s+(?:contains|ends|=)\s+((?:\'[^\']+\'(?:,)?\s*)+)'
-    content = re.sub(nw_pattern, lambda m: expand_complex_list(m.group(1).strip(), m.group(2).strip().strip('()'), "netwitness"), content)
-    
-    # 3. Logika és wildcardok
-    content = content.replace(" && ", " AND ").replace(" || ", " OR ")
-    content = content.replace("%", "*")
-    
-    # 4. Útvonal védelem (visszaállítjuk, ha véletlenül lecseréltük az útvonalban)
-    content = content.replace("user.dsts", "Users")
-    content = content.replace("user.dst\\", "Users\\")
+    # 2. Logikai operátorok és wildcardok
+    content = content.replace(" && ", " AND ").replace(" || ", " OR ").replace("%", "*")
+
+    # 3. Biztonsági javítás: Ha a \Users\ útvonalat véletlenül elrontotta volna egy korábbi futás
+    content = content.replace("user.dst\\Public", "Users\\Public")
+    content = content.replace("user.dsts\\Public", "Users\\Public")
     
     return content
 

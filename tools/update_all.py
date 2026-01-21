@@ -8,27 +8,31 @@ def get_rule_data():
     sigma_dir = 'rules/sigma'
     splunk_dir = 'rules/splunk'
     qradar_dir = 'rules/qradar'
-    netwitness_dir = 'rules/netwitness' # ÚJ mappa
-    
-    techniques_found = {} # TID: level
-    rule_mapping = {}    # TID: [rule_filenames]
-    logsource_stats = {} # category/service: count
+    netwitness_dir = 'rules/netwitness'
+    elastic_dir = 'rules/elastic' # ÚJ: Elastic mappa
+
+    techniques_found = {} 
+    rule_mapping = {}    
+    logsource_stats = {} 
     rules_count = 0
     
     # SIEM specifikus számlálók
     splunk_count = 0
     qradar_count = 0
-    netwitness_count = 0 # ÚJ számláló
+    netwitness_count = 0
+    elastic_count = 0 # ÚJ: Elastic számláló
     
     if os.path.exists(splunk_dir):
         splunk_count = len([f for f in os.listdir(splunk_dir) if f.endswith('.spl')])
     if os.path.exists(qradar_dir):
         qradar_count = len([f for f in os.listdir(qradar_dir) if f.endswith('.aql')])
-    if os.path.exists(netwitness_dir): # ÚJ ellenőrzés
+    if os.path.exists(netwitness_dir):
         netwitness_count = len([f for f in os.listdir(netwitness_dir) if f.endswith('.txt')])
+    if os.path.exists(elastic_dir): # ÚJ: Elastic fájlok számolása (.kql vagy .eql)
+        elastic_count = len([f for f in os.listdir(elastic_dir) if f.endswith('.kql') or f.endswith('.eql')])
         
     if not os.path.exists(sigma_dir):
-        return {}, {}, 0, {}, 0, 0, 0 # Bővített return
+        return {}, {}, 0, {}, 0, 0, 0, 0 # Bővítve elastic_count-tal
         
     for root, dirs, files in os.walk(sigma_dir):
         for file in files:
@@ -40,12 +44,10 @@ def get_rule_data():
                         level = str(content.get('level', 'low')).lower()
                         title = content.get('title', file)
                         
-                        # --- LogSource Statisztika ---
                         ls = content.get('logsource', {})
                         ls_key = ls.get('service') or ls.get('category') or ls.get('product') or 'unknown'
                         logsource_stats[ls_key] = logsource_stats.get(ls_key, 0) + 1
 
-                        # --- MITRE Technika ---
                         for tag in content.get('tags', []):
                             match = re.search(r't\d{4}(?:\.\d{3})?', tag.lower())
                             if match:
@@ -54,10 +56,11 @@ def get_rule_data():
                                     techniques_found[tid] = level
                                 if tid not in rule_mapping:
                                     rule_mapping[tid] = []
-                                if tid not in rule_mapping[tid]:
+                                if title not in rule_mapping[tid]:
                                     rule_mapping[tid].append(title)
                 except: continue
-    return techniques_found, rule_mapping, rules_count, logsource_stats, splunk_count, qradar_count, netwitness_count
+    # ÚJ: elastic_count hozzáadva a return-höz
+    return techniques_found, rule_mapping, rules_count, logsource_stats, splunk_count, qradar_count, netwitness_count, elastic_count
 
 def generate_matrix_svg(techniques_found):
     colors = {"critical": "#ff6666", "high": "#ff6666", "medium": "#ffbd66", "low": "#ffe766"}
@@ -99,8 +102,8 @@ def generate_matrix_svg(techniques_found):
         f.write(svg)
 
 def update_all():
-    # ÚJ return paraméter fogadása
-    techniques, rule_mapping, rules_count, ls_stats, splunk_count, qradar_count, nw_count = get_rule_data()
+    # ÚJ: elastic_count fogadása
+    techniques, rule_mapping, rules_count, ls_stats, splunk_count, qradar_count, nw_count, el_count = get_rule_data()
     generate_matrix_svg(techniques)
     
     USER = "horvath21tamas-gif"
@@ -116,6 +119,7 @@ def update_all():
     splunk_pct = round((splunk_count / rules_count * 100), 1) if rules_count > 0 else 0
     qradar_pct = round((qradar_count / rules_count * 100), 1) if rules_count > 0 else 0
     nw_pct = round((nw_count / rules_count * 100), 1) if rules_count > 0 else 0
+    el_pct = round((el_count / rules_count * 100), 1) if rules_count > 0 else 0 # ÚJ: Elastic %
     
     # 1. Navigator JSON
     layer = {
@@ -127,13 +131,14 @@ def update_all():
     with open('attack_navigator_layer.json', 'w', encoding='utf-8') as f:
         json.dump(layer, f, indent=4)
 
-    # 2. COVERAGE.md (RSA-val bővítve)
+    # 2. COVERAGE.md (Elastic-kal bővítve)
     siem_table = f"## 📈 SIEM Platform Lefedettség\n\n"
     siem_table += "| Platform | Konvertált szabályok | Lefedettség |\n"
     siem_table += "| :--- | :---: | :---: |\n"
     siem_table += f"| Sigma (Forrás) | {rules_count} | 100% |\n"
     siem_table += f"| Splunk (SPL) | {splunk_count} | {splunk_pct}% |\n"
     siem_table += f"| QRadar (AQL) | {qradar_count} | {qradar_pct}% |\n"
+    siem_table += f"| Elastic (KQL/EQL) | {el_count} | {el_pct}% |\n" # ÚJ sor
     siem_table += f"| RSA NetWitness | {nw_count} | {nw_pct}% |\n\n"
 
     coverage_content = f"# 📘 Részletes MITRE ATT&CK Lefedettség\n\n"

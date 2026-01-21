@@ -37,7 +37,7 @@
 - [High Fidelity Suspicious Named Pipe Activity](#high-fidelity-suspicious-named-pipe-activity)
 - [Adatgyujtes es exfiltration elokeszitese Archiving segitsegevel](#adatgyujtes-es-exfiltration-elokeszitese-archiving-segitsegevel)
 - [Security tool leallitasa](#security-tool-leallitasa)
-- [Detektalni, amikor egy tamado megprobalja kikapcsolni a Windows funkcioit powershellbol](#detektalni,-amikor-egy-tamado-megprobalja-kikapcsolni-a-windows-funkcioit-powershellbol)
+- [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
 - [Suspicious Firewall Modification via Netsh.exe](#suspicious-firewall-modification-via-netshexe)
 - [Credential Dumping LSASS](#credential-dumping-lsass)
 
@@ -566,17 +566,19 @@
 
 ---
 
-## Detektalni, amikor egy tamado megprobalja kikapcsolni a Windows funkcioit powershellbol
+## Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével
 - **Azonosító:** `T1562_001.yaml`
-- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
-- **Kritikusság:** 🟡 (medium)
-- **Leírás:** Egy tamado megprobalja kikapcsolni a Windows funkcioit poweshellbol
-- **Hamis pozitívok:** admin scriptet futtat, IT security update
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Észleli, amikor a támadók PowerShell segítségével próbálják megváltoztatni a Windows Defender beállításait,  például a valós idejű védelem kikapcsolásával vagy kivételek hozzáadásával. Ez a technika a védelem megkerülésére szolgál.
+
+- **Hamis pozitívok:** Központilag kezelt biztonsági beállítások módosítása Group Policy-n keresztül, IT biztonsági csapat által végzett tesztelés vagy karbantartás, Szoftvertelepítők, amelyek automatikusan adnak hozzá kivételeket (pl. SQL Server)
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld a hostot a hálózatról!
 
 ---
 

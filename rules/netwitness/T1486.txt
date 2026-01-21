@@ -1,1 +1,1 @@
-((((process = '*\sc.exe*' OR process = '*\net.exe*')) AND (param = '*shadow*')) OR ((process = '*\bcdedit.exe*')&& (param = '*recoveryenabled*'))) AND (NOT ((user.dst = '*SYSTEM*')))
+((((Image = '*\sc.exe*' OR Image = '*\net.exe*')) AND (CommandLine = '*shadow*')) OR ((Image = '*\bcdedit.exe*')&& (CommandLine = '*recoveryenabled*'))) AND (NOT ((user.dst = '*SYSTEM*')))

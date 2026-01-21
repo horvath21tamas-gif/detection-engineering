@@ -1,1 +1,1 @@
-((process = '*\cmd.exe*')&& ((param = '*net user*' OR param = '*net localgroup*'))) AND (NOT ((user.dst = '*SYSTEM*')))
+((Image = '*\cmd.exe*')&& ((CommandLine = '*net user*' OR CommandLine = '*net localgroup*'))) AND (NOT ((user.dst = '*SYSTEM*')))

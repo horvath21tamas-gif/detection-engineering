@@ -1,1 +1,1 @@
-((process = '*\wevtutil.exe*')&& ((param = '*cl*' OR param = '*security*'))) AND (NOT ((user.dst = '*SYSTEM*')))
+((Image = '*\wevtutil.exe*')&& ((CommandLine = '*cl*' OR CommandLine = '*security*'))) AND (NOT ((user.dst = '*SYSTEM*')))

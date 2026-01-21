@@ -1,1 +1,1 @@
-((TargetFileName = '*\user.dst Data\*' OR TargetFileName = '*Login Data*')) AND (NOT ((process = '*\chrome.exe*' OR process = '*\msedge.exe*' OR process = '*\brave.exe*' OR process = '*\firefox.exe*')))
+((TargetFileName = '*\User Data\*' OR TargetFileName = '*Login Data*')) AND (NOT ((Image = '*\chrome.exe*' OR Image = '*\msedge.exe*' OR Image = '*\brave.exe*' OR Image = '*\firefox.exe*')))

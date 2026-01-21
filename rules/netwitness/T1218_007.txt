@@ -1,1 +1,1 @@
-(process = '*msiexec.exe*')&& ((param = '*http://*' OR param = '*https://*' OR param = '*/i*'))
+(Image = '*msiexec.exe*')&& ((CommandLine = '*http://*' OR CommandLine = '*https://*' OR CommandLine = '*/i*'))

@@ -1,1 +1,1 @@
-(((Parentprocess = '*\explorer.exe*' OR Parentprocess = '*\chrome.exe*' OR Parentprocess = '*\brave.exe*')) AND ((process = '*\cmd.exe*' OR process = '*\powershell.exe*'))) AND (user.dst = '*SYSTEM\*')
+(((ParentImage = '*\explorer.exe*' OR ParentImage = '*\chrome.exe*' OR ParentImage = '*\brave.exe*')) AND ((Image = '*\cmd.exe*' OR Image = '*\powershell.exe*'))) AND (User = '*SYSTEM\*')

@@ -1,47 +1,76 @@
-title: High Fidelity Suspicious Named Pipe Activity
+title: Gyanús Named Pipe létrehozása (High Fidelity)
 id: e4a1b7c9-8f12-4b8c-9d33-15590001hf01
 status: stable
-description: High fidelity detection of suspicious named pipe creation or connection with minimal false positives, focusing on non-Microsoft signed binaries and abnormal pipe names.
+description: >
+  Észleli a gyanús Named Pipe-ok létrehozását, amelyek gyakran támadó eszközökhöz (pl. Cobalt Strike, Metasploit, PoshC2) 
+  vagy távoli parancsvégrehajtáshoz köthetők. A szabály a mintázatokra és a nem szabványos elérési utakra fókuszál.
 author: hota05
-date: 2026/01/20
-logsource:
-  product: windows
-  category: pipe_created
-detection:
-  selection_pipe:
-    PipeName|startswith: '\'
-    PipeName|re: '\\(msagent_|postex_|csagent_|[a-f0-9]{8,})'
-  selection_process:
-    Image|endswith: '.exe'
-    Image|notstartswith:
-      - 'C:\Windows\System32\'
-      - 'C:\Windows\SysWOW64\'
-  selection_user:
-    User|contains: '\'
-  selection_signature:
-    Signed: false
-  filter_legit_pipes:
-    PipeName|contains:
-      - 'svcctl'
-      - 'samr'
-      - 'lsarpc'
-      - 'netlogon'
-      - 'wkssvc'
-      - 'spoolss'
-      - 'atsvc'
-      - 'epmapper'
-  filter_legit_apps:
-    Image|endswith:
-      - '\vmtoolsd.exe'
-      - '\vmwaretray.exe'
-      - '\docker.exe'
-      - '\vboxservice.exe'
-  condition: selection_pipe and selection_process and selection_user and selection_signature and not filter_legit_pipes and not filter_legit_apps
-falsepositives:
-  - Custom in-house software using random named pipes
-  - Rare unsigned legacy applications
-level: high
+date: 2026/01/21
+references:
+  - https://attack.mitre.org/techniques/T1559/001/
+  - https://book.hacktricks.xyz/windows-hardening/stealing-credentials-and-privesc/named-pipes
 tags:
   - attack.lateral_movement
   - attack.command_and_control
   - attack.t1559.001
+
+logsource:
+  product: windows
+  category: pipe_created
+
+detection:
+  selection_known_malicious:
+    PipeName|contains:
+      - '\msagent_'       
+      - '\postex_'        
+      - '\status_'        
+      - '\psexec'         
+      - '\paexec'         
+      - '\remcom'         
+      - '\lsadump'        
+      - '\cachedump'      
+      - '\mypipe'         
+      - '\win_svc'        
+
+  selection_regex_patterns:
+    PipeName|re: '\\[a-f0-9]{8,10}'
+
+  selection_suspicious_paths:
+    Image|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\powershell_ise.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\rundll32.exe'
+      - '\mshta.exe'
+
+  filter_legit_microsoft:
+    Image|startswith:
+      - 'C:\Windows\System32\'
+      - 'C:\Windows\SysWOW64\'
+    PipeName|contains:
+      - '\lsass'
+      - '\ntsvcs'
+      - '\scerpc'
+      - '\epmapper'
+      - '\atsvc'
+      - '\spoolss'
+      - '\srvsvc'
+
+  filter_legit_apps:
+    Image|endswith:
+      - '\vmtoolsd.exe'
+      - '\docker.exe'
+      - '\vboxservice.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+
+  condition: (selection_known_malicious or (selection_suspicious_paths and selection_regex_patterns)) and not (filter_legit_microsoft or filter_legit_apps)
+
+falsepositives:
+  - Egyedi fejlesztésű szoftverek, amelyek véletlenszerű pipe-neveket használnak (pl. Google Chrome modulok)
+  - Bizonyos biztonsági szoftverek (pl. EDR ügynökök) belső kommunikációja
+
+level: high

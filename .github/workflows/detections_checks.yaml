@@ -70,22 +70,21 @@ jobs:
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
             
-            # --- SPLUNK (Több profil összefűzése a jobb mappingért) ---
-            sigma convert -t splunk -p sysmon -p windows -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
+            # --- SPLUNK ---
+            # Megjegyzés: A 'windows' pipeline helyett a 'splunk_windows' a helyes
+            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
             
-            # --- QRADAR (Szigorú, ezért több fallback kell) ---
+            # --- QRADAR ---
+            # Megjegyzés: Ha elbukik a specifikus mappinggel, megpróbáljuk mapping nélkül (raw)
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
-            sigma convert -t qradar -p sysmon "$file" -o "rules/qradar/${filename}.aql" || \
-            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql"
-
-            # --- ELASTIC (Lucene és EQL különválasztása) ---
-            # Lucene (Kibana Discoverhez)
-            sigma convert -t lucene -p ecs_windows -p sysmon "$file" -o "rules/elastic/${filename}.kql" || echo "⚠️ Elastic KQL hiba: $file"
-            # EQL (Elastic Security Alertshez)
-            sigma convert -t eql -p ecs_windows -p sysmon "$file" -o "rules/elastic/${filename}.eql" || echo "⚠️ Elastic EQL hiba: $file"
+            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
             
             # --- RSA NetWitness ---
-            sigma convert -t net_witness -p windows -p sysmon "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
+            # Megjegyzés: Itt is kivettük a hibás 'windows' pipeline-t
+            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
+            
+            # --- ELASTIC (Lucene) ---
+            sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "⚠️ Elastic hiba: $file"
           done
       - name: Run Integrity Check
         run: |

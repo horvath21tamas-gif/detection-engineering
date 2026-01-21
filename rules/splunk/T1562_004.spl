@@ -1,1 +1,1 @@
-Image="*\\netsh.exe" CommandLine IN ("*dir=in*", "*action=allow*", "*set rule*", "*add rule*", "*advfirewall*")
+Image="*\\netsh.exe" OR OriginalFileName="netsh.exe" CommandLine IN ("*advfirewall*", "*firewall*") CommandLine IN ("*add*", "*set*") CommandLine IN ("*action=allow*", "*enable=yes*") NOT (ParentImage IN ("*\\CcmExec.exe", "*\\msiexec.exe") CommandLine IN ("*show*", "*monitor*", "*profile state*"))

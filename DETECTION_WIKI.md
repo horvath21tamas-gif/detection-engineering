@@ -38,7 +38,7 @@
 - [Adatgyujtes es exfiltration elokeszitese Archiving segitsegevel](#adatgyujtes-es-exfiltration-elokeszitese-archiving-segitsegevel)
 - [Security tool leallitasa](#security-tool-leallitasa)
 - [Detektalni, amikor egy tamado megprobalja kikapcsolni a Windows funkcioit powershellbol](#detektalni,-amikor-egy-tamado-megprobalja-kikapcsolni-a-windows-funkcioit-powershellbol)
-- [netsh.exe segitsegevel tuzfal szabalyt adnak hozza vagy modositanak](#netshexe-segitsegevel-tuzfal-szabalyt-adnak-hozza-vagy-modositanak)
+- [Suspicious Firewall Modification via Netsh.exe](#suspicious-firewall-modification-via-netshexe)
 - [Credential Dumping LSASS](#credential-dumping-lsass)
 
 ---
@@ -580,17 +580,19 @@
 
 ---
 
-## netsh.exe segitsegevel tuzfal szabalyt adnak hozza vagy modositanak
+## Suspicious Firewall Modification via Netsh.exe
 - **Azonosító:** `T1562_004.yaml`
-- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
-- **Kritikusság:** 🟡 (medium)
-- **Leírás:** netsh.exe segitsegevel tuzfal szabalyt adnak hozza vagy modositanak
-- **Hamis pozitívok:** admin hasznalja, pentesteles
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Észleli, amikor a támadók a netsh.exe eszközt használják a Windows tűzfal szabályainak módosítására vagy új,  engedékeny szabályok hozzáadására. Ez gyakran a védelem megkerülésére (Impair Defenses) utal.
+
+- **Hamis pozitívok:** Legitim szoftvertelepítők (pl. VPN kliensek, hálózati eszközök), SCCM vagy egyéb távoli felügyeleti eszközök által futtatott konfigurációs szkriptek, Rendszergazdák manuális hibajavítása
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld a hostot a hálózatról!
 
 ---
 

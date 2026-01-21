@@ -1,1 +1,1 @@
-Image ends '\netsh.exe' && (CommandLine contains 'dir=in','action=allow','set rule','add rule','advfirewall')
+(Image ends '\netsh.exe' || OriginalFileName = 'netsh.exe') && (CommandLine contains 'advfirewall','firewall') && (CommandLine contains 'add','set') && (CommandLine contains 'action=allow','enable=yes') && (NOT ((ParentImage ends '\CcmExec.exe','\msiexec.exe') && (CommandLine contains 'show','monitor','profile state')))

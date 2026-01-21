@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-21 07:51:51`
+**Utolsó frissítés:** `2026-01-21 07:58:47`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -56,4 +56,4 @@
 | T1560 | MEDIUM | Adatgyujtes es exfiltration elokeszitese Archiving segitsegevel |
 | T1562 | MEDIUM | egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani, Security tool leallitasa |
 | T1562.001 | CRITICAL | Ransomware elokeszites eszlelese, Detektalni, amikor egy tamado megprobalja kikapcsolni a Windows funkcioit powershellbol, Security tool leallitasa |
-| T1562.004 | MEDIUM | netsh.exe segitsegevel tuzfal szabalyt adnak hozza vagy modositanak |
+| T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |

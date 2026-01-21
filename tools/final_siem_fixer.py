@@ -3,11 +3,11 @@ import re
 
 def expand_complex_list(field, values_str, siem_type):
     """
-    Szétbontja a listákat érvényes SIEM logikára.
-    QRadar: (field LIKE '%val1%' OR field LIKE '%val2%')
-    NetWitness: (field = '*val1*' OR field = '*val2*')
+    Szétbontja a listákat (v1, v2) érvényes SIEM logikára.
+    QRadar: (field LIKE '%v1%' OR field LIKE '%v2%')
+    NetWitness: (field = '*v1*' OR field = '*v2*')
     """
-    # Értékek kinyerése, tisztítása az idézőjelektől és százalékjelektől
+    # Értékek kinyerése és tisztítása
     raw_values = [v.strip().strip("'").strip('"').strip('%').strip('*') for v in values_str.split(',')]
     
     clauses = []
@@ -16,63 +16,45 @@ def expand_complex_list(field, values_str, siem_type):
         if siem_type == "qradar":
             clauses.append(f"{field} LIKE '%{v}%'")
         else: # netwitness
+            # NetWitnessnél minden tartalmazza/végződik keresés = '*érték*'
             clauses.append(f"{field} = '*{v}*'")
     
     return "(" + " OR ".join(clauses) + ")"
 
 def fix_qradar(content):
-    # 1. Mezőnevek kényszerítése (DSM kompatibilis nevek)
-    mapping = {
-        '"Image"': '"Filename"',
-        '"Process CommandLine"': '"Process CommandLine"',
-        '"username"': '"UserName"',
-        'Image': '"Filename"',
-        'username': '"UserName"'
-    }
-    for old, new in mapping.items():
-        content = content.replace(old, new)
-
-    # 2. ILIKE ENUMERATION(...) és LIKE (...) minták keresése
-    # Megkeresi a mezőnév + operátor + (lista) szerkezetet
+    # QRadar most már rendben van a kimeneted alapján, 
+    # de a biztonság kedvéért a korábbi javításokat benne hagyjuk.
+    content = content.replace('""', '"')
     pattern = r'("[^"]+"|\w+)\s+(?:ILIKE ENUMERATION|LIKE)\s*\(([^)]+)\)'
-    
     content = re.sub(pattern, lambda m: expand_complex_list(m.group(1), m.group(2), "qradar"), content)
-
-    # 3. SELECT váz és végső tisztítás
-    if "SELECT" not in content:
-        content = f"SELECT UTF8(payload), \"Filename\", \"Process CommandLine\" FROM events WHERE {content}"
-    
     return content
 
 def fix_netwitness(content):
-    # 1. Alapvető operátorok
+    # 1. Alapvető logikai operátorok cseréje
     content = content.replace(" && ", " AND ").replace(" || ", " OR ")
+
+    # 2. Speciális NetWitness lista bontás (contains és ends esetére is)
+    # Ez a regex elkapja a: field contains 'a','b' és field ends 'a','b' mintákat
+    nw_pattern = r'(\w+(?:\.\w+)?)\s+(?:contains|ends|=)\s+((?:\'[^\']+\'(?:,)?\s*)+)'
     
-    # 2. Mezőnevek NetWitness meta kulcsokra
-    mapping = {
-        "Image": "process",
-        "CommandLine": "param",
-        "User": "user.dst",
-        "user.dsts": "user.dst" # Javítás a korábbi elírásodra
-    }
-    for old, new in mapping.items():
-        content = content.replace(old, new)
+    def nw_replacer(match):
+        field = match.group(1)
+        # Az értékeket tartalmazó string tisztítása a külső zárójelektől (ha vannak)
+        values_str = match.group(2).strip().strip('()')
+        return expand_complex_list(field, values_str, "netwitness")
 
-    # 3. Lista bontás: mező = ('a','b') -> (mező = '*a*' OR mező = '*b*')
-    # Regex: mező + egyenlőség + (lista)
-    pattern = r'([a-z.0-9]+)\s*=\s*\(([^)]+)\)'
+    content = re.sub(nw_pattern, nw_replacer, content)
+
+    # 3. Wildcardok egységesítése
+    content = content.replace("%", "*")
     
-    content = re.sub(pattern, lambda m: expand_complex_list(m.group(1), m.group(2), "netwitness"), content)
-
-    # 4. Magányos értékek wildcardozása (ami nem listában van)
-    # pl: process = 'schtasks.exe' -> process = '*schtasks.exe*'
-    # Csak akkor, ha nincs már ott csillag
-    content = re.sub(r"(\w+)\s+=\s+'(?!\*)([^']+)(?<!\*)'", r"\1 = '*\2*'", content)
-
+    # 4. Tisztítás: ha maradtak volna magányos contains/ends szavak
+    content = content.replace("contains", "=").replace("ends", "=")
+    
     return content
 
 def process_files():
-    # QRadar
+    # QRadar javítás
     if os.path.exists('rules/qradar'):
         for f in os.listdir('rules/qradar'):
             if f.endswith('.aql'):
@@ -80,7 +62,7 @@ def process_files():
                 with open(p, 'r', encoding='utf-8') as file: data = file.read()
                 with open(p, 'w', encoding='utf-8') as file: file.write(fix_qradar(data))
 
-    # NetWitness
+    # NetWitness javítás
     if os.path.exists('rules/netwitness'):
         for f in os.listdir('rules/netwitness'):
             if f.endswith('.txt'):

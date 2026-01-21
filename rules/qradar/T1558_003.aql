@@ -1,1 +1,0 @@
-SELECT UTF8(payload) as search_payload from events where "EventID"=4769 AND NOT "Target User Name" ILIKE '%$'

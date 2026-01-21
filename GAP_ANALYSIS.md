@@ -1,12 +1,12 @@
 # 🎯 Detection Strategy & Gap Analysis
-*Frissítve: 2026-01-21 08:14:28*
+*Frissítve: 2026-01-21 08:17:47*
 
 ## 📊 Állapotösszegző
 | Mutató | Érték |
 | :--- | :--- |
 | Összes szabály | 39 |
-| Aktív (van logforrás) | 35 |
-| Inaktív (hiányzó log) | 4 |
+| Aktív (van logforrás) | 36 |
+| Inaktív (hiányzó log) | 3 |
 | MITRE Lefedettség | 30 technika |
 
 ## 🛑 Kritikus Adatforrás Hiányok
@@ -17,7 +17,6 @@ Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logok
 | egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani (`T1543.yaml`) | category: `system` |
 | Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be (`T1021.yaml`) | category: `security` |
 | Gyanus RDP belepes (`T1021_001.yaml`) | category: `security` |
-| Szokatlan mennyisegu szolgaltatas jegy kerese (`T1558_003.yaml`) | category: `security` |
 
 ## 🛡️ Stratégiai Teendők (Hiányzó Technikák)
 A SOC hatékonyság növelése érdekében ezekre a technikákra kellene szabályt írni:

@@ -33,7 +33,7 @@
 - [Gyanus Registry key modositas perzisztencia kiepitese erdekeben](#gyanus-registry-key-modositas-perzisztencia-kiepitese-erdekeben)
 - [UAC bypass Fodhelper segitsegevel](#uac-bypass-fodhelper-segitsegevel)
 - [Detektalni, amikor nem a bongeszo folyamata fer hozza a bongeszo credential storejahoz](#detektalni,-amikor-nem-a-bongeszo-folyamata-fer-hozza-a-bongeszo-credential-storejahoz)
-- [Szokatlan mennyisegu szolgaltatas jegy kerese](#szokatlan-mennyisegu-szolgaltatas-jegy-kerese)
+- [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
 - [Gyanús Named Pipe létrehozása (High Fidelity)](#gyanús-named-pipe-létrehozása-(high-fidelity))
 - [Adatok gyanús archiválása exfiltráció céljából](#adatok-gyanús-archiválása-exfiltráció-céljából)
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
@@ -508,12 +508,13 @@
 
 ---
 
-## Szokatlan mennyisegu szolgaltatas jegy kerese
+## Gyanús Kerberos TGS jegykérés (Kerberoasting)
 - **Azonosító:** `T1558_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** szokatlan mennyisegu szolgaltatas jegy kerese
-- **Hamis pozitívok:** Nincs megadva
+- **Leírás:** Észleli a gyanús Kerberos Service Ticket (TGS) kéréseket, amelyek Kerberoasting támadásra utalhatnak.  A szabály fókuszál a gyenge titkosítási típusokra (RC4) és szűri a gyakori legális zajt.
+
+- **Hamis pozitívok:** Régi (legacy) alkalmazások, amelyek csak RC4 titkosítást támogatnak, Olyan környezetek, ahol a "Kerberos AES" nincs kényszerítve a szervizfiókokon, Bizonyos szkennerek vagy adminisztratív eszközök
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook

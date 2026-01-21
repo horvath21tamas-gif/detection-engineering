@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-21 08:14:28`
+**Utolsó frissítés:** `2026-01-21 08:17:47`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -8,7 +8,7 @@
 | :--- | :---: | :---: |
 | Sigma (Forrás) | 38 | 100% |
 | Splunk (SPL) | 38 | 100.0% |
-| QRadar (AQL) | 35 | 92.1% |
+| QRadar (AQL) | 34 | 89.5% |
 | RSA NetWitness | 38 | 100.0% |
 
 ## 🎯 Technika alapú bontás
@@ -51,7 +51,7 @@
 | T1547.001 | HIGH | Gyanus Registry key modositas perzisztencia kiepitese erdekeben |
 | T1548.002 | HIGH | UAC bypass Fodhelper segitsegevel |
 | T1555 | MEDIUM | Detektalni, amikor nem a bongeszo folyamata fer hozza a bongeszo credential storejahoz |
-| T1558.003 | HIGH | Szokatlan mennyisegu szolgaltatas jegy kerese |
+| T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |
 | T1559.001 | HIGH | Gyanús Named Pipe létrehozása (High Fidelity) |
 | T1560.001 | HIGH | Adatok gyanús archiválása exfiltráció céljából |
 | T1562 | MEDIUM | egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani |

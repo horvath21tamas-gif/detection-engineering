@@ -1,1 +1,1 @@
-EventCode=4769 NOT TargetUserName="*$"
+source="WinEventLog:Security" EventCode=4769 Status="0x0" TicketEncryptionType IN ("0x17", "0x1", "0x3") NOT (TargetUserName="*$" OR (ServiceCode="0x11" ServiceName="*$") OR IpAddress IN ("::1", "127.0.0.1"))

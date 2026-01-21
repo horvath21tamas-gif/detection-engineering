@@ -65,27 +65,28 @@ jobs:
       - name: Convert Sigma rules to SIEM queries
         run: |
           mkdir -p rules/splunk rules/qradar rules/netwitness rules/elastic
-          rm -f rules/splunk/*.spl rules/qradar/*.aql rules/netwitness/*.txt rules/elastic/*.kql
           
           for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
             
-            # Splunk
-            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
+            # --- SPLUNK (Több profil összefűzése a jobb mappingért) ---
+            sigma convert -t splunk -p sysmon -p windows -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
             
-            # QRadar - Próbáljuk meg alapértelmezett beállításokkal, ha a windows profil elbukik
+            # --- QRADAR (Szigorú, ezért több fallback kell) ---
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
-            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
-            
-            # RSA NetWitness
-            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
-            
-            # ELK (Lucene/KQL) - Itt a javítás: 'lucene' vagy 'eql' kell az 'elasticsearch' helyett
-            sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || \
-            sigma convert -t eql -p ecs_windows "$file" -o "rules/elastic/${filename}.eql" || echo "⚠️ Elastic hiba: $file"
-          done
+            sigma convert -t qradar -p sysmon "$file" -o "rules/qradar/${filename}.aql" || \
+            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql"
 
+            # --- ELASTIC (Lucene és EQL különválasztása) ---
+            # Lucene (Kibana Discoverhez)
+            sigma convert -t lucene -p ecs_windows -p sysmon "$file" -o "rules/elastic/${filename}.kql" || echo "⚠️ Elastic KQL hiba: $file"
+            # EQL (Elastic Security Alertshez)
+            sigma convert -t eql -p ecs_windows -p sysmon "$file" -o "rules/elastic/${filename}.eql" || echo "⚠️ Elastic EQL hiba: $file"
+            
+            # --- RSA NetWitness ---
+            sigma convert -t net_witness -p windows -p sysmon "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
+          done
       - name: Run Integrity Check
         run: |
           python tools/check_integrity.py

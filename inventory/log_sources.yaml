@@ -4,11 +4,22 @@ available_sources:
     - network_connection
     - dns_query
     - file_event
+    - registry_set      
+    - system            
+    - security          
+    - image_load        
+    - process_access    
+    - webserver         
+    - pipe_created      
+    - registry_event    
+    - service_creation  
+    - login             
   product:
     - windows
     - linux
     - azure
     - office365
+    - generic           
   service:
     - sysmon
     - security

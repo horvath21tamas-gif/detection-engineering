@@ -1,26 +1,24 @@
 available_sources:
   category:
-    - process_creation
-    - network_connection
-    - dns_query
-    - file_event
-    - registry_set      
-    - system            
-    - security          
-    - image_load        
-    - process_access    
-    - webserver         
-    - pipe_created      
-    - registry_event    
-    - service_creation  
-    - login             
+  - process_creation
+  - network_connection
+  - file_event
+  - registry_set
+  - dns_query
+  - registry_event
+  - image_load
+  - process_access
+  - webserver
+  - pipe_created
+  - login
+  - service_creation
   product:
-    - windows
-    - linux
-    - azure
-    - office365
-    - generic           
+  - windows
+  - linux
+  - azure
+  - generic
   service:
-    - sysmon
-    - security
-    - powershell
+  - sysmon
+  - security
+  - powershell
+  - system

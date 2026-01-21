@@ -1,20 +1,53 @@
-title: Szokatlan mennyisegu szolgaltatas jegy kerese
-id: 'c2ea119c-4dad-4eb3-9cc1-6bbda317d85b'
-status: experimental
-description: szokatlan mennyisegu szolgaltatas jegy kerese
+title: Gyanús Kerberos TGS jegykérés (Kerberoasting)
+id: c2ea119c-4dad-4eb3-9cc1-6bbda317d85b
+status: stable
+description: >
+  Észleli a gyanús Kerberos Service Ticket (TGS) kéréseket, amelyek Kerberoasting támadásra utalhatnak. 
+  A szabály fókuszál a gyenge titkosítási típusokra (RC4) és szűri a gyakori legális zajt.
 author: hota05
-date: 2026/01/12
-logsource: 
+date: 2026/01/21
+references:
+  - https://attack.mitre.org/techniques/T1558/003/
+  - https://adsecurity.org/?p=2293
+tags:
+  - attack.credential_access
+  - attack.t1558.003
+
+logsource:
   product: windows
-  category: security
+  service: security
+  definition: 'Requirements: Audit Kerberos Service Ticket Operations must be enabled'
+
 detection:
   selection:
     EventID: 4769
-  selection_machine_account:
-    TargetUserName|endswith: "$"
-  condition: selection and not selection_machine_account
+    Status: '0x0' # Csak a sikeres kéréseket nézzük
+    TicketEncryptionType:
+      - '0x17' # RC4-HMAC (A leggyakoribb célpont Kerberoastingnál, mert könnyen törhető)
+      - '0x1'  # DES-CBC-CRC
+      - '0x3'  # DES-CBC-MD5
+
+  filter_machine_accounts:
+    # A számítógép fiókok ($) jegykérései normálisak (pl. frissítés, gép-gép kommunikáció)
+    TargetUserName|endswith: '$'
+
+  filter_service_names:
+    # Bizonyos szerviznevek alapértelmezés szerint RC4-et használnak, ezeket szűrjük a zaj csökkentése érdekében
+    ServiceCode: 
+      - '0x11' # Alapértelmezett kódok szűrése ha szükséges
+    ServiceName|endswith: '$'
+
+  filter_ip:
+    # Kizárhatók a domain controllerek saját IP címei, ha azok generálnak zajt
+    IpAddress:
+      - '::1'
+      - '127.0.0.1'
+
+  condition: selection and not (filter_machine_accounts or filter_service_names or filter_ip)
+
+falsepositives:
+  - Régi (legacy) alkalmazások, amelyek csak RC4 titkosítást támogatnak
+  - Olyan környezetek, ahol a "Kerberos AES" nincs kényszerítve a szervizfiókokon
+  - Bizonyos szkennerek vagy adminisztratív eszközök
+
 level: high
-tags: 
-  - attack.t1558.003
-falsepositive:
-  - admin generalja fejlesztes celjabol

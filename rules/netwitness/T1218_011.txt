@@ -1,1 +1,1 @@
-(Image = '*\rundll32.exe*')&& ((CommandLine = '*javascript*' OR CommandLine = '*RunHTMLApplication*' OR CommandLine = '*http://*' OR CommandLine = '*https://*'))
+(process = '*\rundll32.exe*')&& ((param = '*javascript*' OR param = '*RunHTMLApplication*' OR param = '*http://*' OR param = '*https://*'))

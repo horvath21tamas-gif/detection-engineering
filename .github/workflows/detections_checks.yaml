@@ -32,16 +32,13 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install sigma-cli pysigma-backend-splunk pytest "pyyaml>=6.0" requests
-          sigma plugin install splunk sysmon windows netwitness
+          # A requirements.txt-ben benne kell legyen a pysigma-backend-elasticsearch!
+          python -m pip install -r requirements.txt
+          sigma plugin install splunk sysmon windows netwitness elasticsearch
           sigma plugin install --force-install qradar || echo "QRadar forced"
           python -m pip install --upgrade "pysigma>=1.1.0" "pyparsing>=3.0.0" sigma-cli
 
-      # --- ÚJ LÉPÉS: DINAMIKUS INVENTORY FRISSÍTÉS ---
       - name: Update Dynamic Inventory from SIEM
-        # Ha van API kulcsod, itt adhatod át titkosított változóként
-        # env:
-        #   SIEM_API_KEY: ${{ secrets.SIEM_API_KEY }}
         run: |
           mkdir -p inventory
           python tools/update_inventory.py
@@ -53,7 +50,6 @@ jobs:
 
       - name: Log Source Validation
         run: |
-          # Ez most már az update_inventory.py által generált friss fájlt használja
           python tools/check_log_sources.py
 
       - name: Run Simulation Tests (Logic Verification)
@@ -68,16 +64,26 @@ jobs:
 
       - name: Convert Sigma rules to SIEM queries
         run: |
-          mkdir -p rules/splunk rules/qradar rules/netwitness
-          rm -f rules/splunk/*.spl rules/qradar/*.aql rules/netwitness/*.txt
+          # Mappák létrehozása az összes támogatott SIEM-hez
+          mkdir -p rules/splunk rules/qradar rules/netwitness rules/elastic
+          rm -f rules/splunk/*.spl rules/qradar/*.aql rules/netwitness/*.txt rules/elastic/*.kql
           
           for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
+            
+            # Splunk konverzió
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
+            
+            # QRadar konverzió
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
+            
+            # RSA NetWitness konverzió
             sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
+            
+            # ELK (Elasticsearch / Kibana) konverzió - ECS formátumban
+            sigma convert -t elasticsearch -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "⚠️ Elastic hiba: $file"
           done
 
       - name: Run Integrity Check
@@ -111,7 +117,7 @@ jobs:
           git add attack_navigator_layer.json COVERAGE.md README.md *.svg
           
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Dynamic Inventory, Tests, Scores & Gap Analysis"
+            git commit -m "Auto-update: Elastic (ELK) support, Dynamic Inventory & Docs"
             git pull --rebase -X ours origin test
             git push origin test
           else

@@ -1,1 +1,1 @@
-SELECT UTF8(payload) as search_payload from events where ("Image" ILIKE '%\wmic.exe' AND ("Process CommandLine" ILIKE ENUMERATION('%__EventFilter%','%CommandLineEventConsumer%','%FilterToConsumerBinding%')) OR "Image" ILIKE '%\powershell.exe' AND ("Process CommandLine" ILIKE ENUMERATION('%Register-WmiEvent%','%root\subscription%'))) AND NOT "username"='SYSTEM'
+SELECT UTF8(payload) FROM events WHERE devicetype=12

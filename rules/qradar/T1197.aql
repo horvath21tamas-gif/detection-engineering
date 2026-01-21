@@ -1,1 +1,1 @@
-SELECT UTF8(payload) as search_payload from events where "Image" ILIKE '%itsadmin.exe' AND ("Process CommandLine" ILIKE ENUMERATION('%/transfer%','%/addfile%','%http://%','%https://%')) AND NOT "username"='SYSTEM'
+SELECT UTF8(payload) FROM events WHERE devicetype=12

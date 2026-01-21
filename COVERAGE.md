@@ -8,7 +8,7 @@
 | :--- | :---: | :---: |
 | Sigma (Forrás) | 38 | 100% |
 | Splunk (SPL) | 39 | 102.6% |
-| QRadar (AQL) | 34 | 89.5% |
+| QRadar (AQL) | 39 | 102.6% |
 | Elastic (KQL/EQL) | 39 | 102.6% |
 | RSA NetWitness | 39 | 102.6% |
 

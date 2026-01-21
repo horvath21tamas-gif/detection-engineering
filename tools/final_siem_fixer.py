@@ -2,12 +2,10 @@ import os
 import re
 
 def expand_complex_list(field, values_str, siem_type):
-    """
-    Szétbontja a listákat érvényes SIEM logikára és közben leképezi a mezőneveket.
-    """
+    # Értékek kinyerése és tisztítása
     raw_values = [v.strip().strip("'").strip('"').strip('%').strip('*') for v in values_str.split(',')]
     
-    # Mezőnév leképezés (Mapping)
+    # Mezőnév leképezés (NetWitness Meta kulcsok)
     nw_map = {"Image": "process", "CommandLine": "param", "User": "user.dst", "username": "user.dst"}
     qr_map = {"Image": '"Filename"', "username": '"UserName"', "Process CommandLine": '"Process CommandLine"'}
     
@@ -29,25 +27,33 @@ def expand_complex_list(field, values_str, siem_type):
 
 def fix_qradar(content):
     content = content.replace('""', '"')
-    # Megkeresi a mező LIKE (...) mintákat
     pattern = r'("[^"]+"|\w+)\s+(?:ILIKE ENUMERATION|LIKE)\s*\(([^)]+)\)'
     content = re.sub(pattern, lambda m: expand_complex_list(m.group(1), m.group(2), "qradar"), content)
     return content
 
 def fix_netwitness(content):
-    # 1. Először a magányos mezőneveket cseréljük le (pl. Image = '*...')
-    # Úgy keressük, hogy előtte zárójel vagy szóköz van, utána pedig egyenlőségjel
-    content = re.sub(r'(\bImage\b)(?=\s*=)', 'process', content)
-    content = re.sub(r'(\bCommandLine\b)(?=\s*=)', 'param', content)
-    content = re.sub(r'(\bUser\b|\busername\b)(?=\s*=)', 'user.dst', content)
-
-    # 2. Logikai operátorok és wildcardok
-    content = content.replace(" && ", " AND ").replace(" || ", " OR ").replace("%", "*")
-
-    # 3. Biztonsági javítás: Ha a \Users\ útvonalat véletlenül elrontotta volna egy korábbi futás
-    content = content.replace("user.dst\\Public", "Users\\Public")
-    content = content.replace("user.dsts\\Public", "Users\\Public")
+    # 1. Speciális regex a NetWitness 'contains' és 'ends' listákhoz
+    # Elkapja: Mezőnév + (contains|ends|=) + 'érték1','érték2'
+    # Akkor is ha van zárójel a lista körül, és akkor is ha nincs.
+    nw_list_pattern = r'(\w+)\s+(?:contains|ends|=)\s+((?:\'[^\']+\'(?:,)?\s*)+)'
     
+    def nw_replacer(match):
+        field = match.group(1)
+        values_str = match.group(2).strip()
+        return expand_complex_list(field, values_str, "netwitness")
+
+    content = re.sub(nw_list_pattern, nw_replacer, content)
+
+    # 2. Logikai operátorok javítása
+    content = content.replace(" && ", " AND ").replace(" || ", " OR ")
+    
+    # 3. Maradék magányos mezőnevek cseréje (ha maradt volna)
+    mapping = {"Image": "process", "CommandLine": "param", "User": "user.dst"}
+    for old, new in mapping.items():
+        content = re.sub(rf'\b{old}\b', new, content)
+
+    # 4. Útvonal védelem
+    content = content.replace("user.dst\\Public", "Users\\Public")
     return content
 
 def process_files():

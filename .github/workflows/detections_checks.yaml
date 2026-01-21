@@ -32,10 +32,19 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install sigma-cli pysigma-backend-splunk pytest "pyyaml>=6.0"
+          python -m pip install sigma-cli pysigma-backend-splunk pytest "pyyaml>=6.0" requests
           sigma plugin install splunk sysmon windows netwitness
           sigma plugin install --force-install qradar || echo "QRadar forced"
           python -m pip install --upgrade "pysigma>=1.1.0" "pyparsing>=3.0.0" sigma-cli
+
+      # --- ÚJ LÉPÉS: DINAMIKUS INVENTORY FRISSÍTÉS ---
+      - name: Update Dynamic Inventory from SIEM
+        # Ha van API kulcsod, itt adhatod át titkosított változóként
+        # env:
+        #   SIEM_API_KEY: ${{ secrets.SIEM_API_KEY }}
+        run: |
+          mkdir -p inventory
+          python tools/update_inventory.py
 
       - name: Smart Validation and Auto-fix
         id: validate_step
@@ -44,17 +53,13 @@ jobs:
 
       - name: Log Source Validation
         run: |
-          mkdir -p inventory
-          if [ ! -f inventory/log_sources.yaml ]; then
-            echo "available_sources: {category: [process_creation, network_connection, dns_query], product: [windows, linux], service: [sysmon, security, powershell]}" > inventory/log_sources.yaml
-          fi
+          # Ez most már az update_inventory.py által generált friss fájlt használja
           python tools/check_log_sources.py
 
       - name: Run Simulation Tests (Logic Verification)
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
-          # Ez futtatja a mock log alapú logikai teszteket
-          python -m pytest test/test_detection_logic.py -v || echo "⚠️ Szimulációs tesztek sikertelenek vagy hiányoznak."
+          python -m pytest test/test_detection_logic.py -v || echo "⚠️ Szimulációs tesztek sikertelenek."
 
       - name: Run Unit Tests (General)
         run: |
@@ -106,7 +111,7 @@ jobs:
           git add attack_navigator_layer.json COVERAGE.md README.md *.svg
           
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Simulation tests, Playbooks, Scores & Gap Analysis"
+            git commit -m "Auto-update: Dynamic Inventory, Tests, Scores & Gap Analysis"
             git pull --rebase -X ours origin test
             git push origin test
           else

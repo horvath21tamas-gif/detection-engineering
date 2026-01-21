@@ -64,7 +64,6 @@ jobs:
 
       - name: Convert Sigma rules to SIEM queries
         run: |
-          # Mappák létrehozása az összes támogatott SIEM-hez
           mkdir -p rules/splunk rules/qradar rules/netwitness rules/elastic
           rm -f rules/splunk/*.spl rules/qradar/*.aql rules/netwitness/*.txt rules/elastic/*.kql
           
@@ -72,18 +71,19 @@ jobs:
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
             
-            # Splunk konverzió
+            # Splunk
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
             
-            # QRadar konverzió
+            # QRadar - Próbáljuk meg alapértelmezett beállításokkal, ha a windows profil elbukik
             sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
             
-            # RSA NetWitness konverzió
+            # RSA NetWitness
             sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
             
-            # ELK (Elasticsearch / Kibana) konverzió - ECS formátumban
-            sigma convert -t elasticsearch -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "⚠️ Elastic hiba: $file"
+            # ELK (Lucene/KQL) - Itt a javítás: 'lucene' vagy 'eql' kell az 'elasticsearch' helyett
+            sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || \
+            sigma convert -t eql -p ecs_windows "$file" -o "rules/elastic/${filename}.eql" || echo "⚠️ Elastic hiba: $file"
           done
 
       - name: Run Integrity Check

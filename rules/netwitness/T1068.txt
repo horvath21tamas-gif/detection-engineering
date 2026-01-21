@@ -1,1 +1,1 @@
-((Parentprocess = '*\explorer.exe*','\chrome.exe','\brave.exe') AND (process = '*\cmd.exe*','\powershell.exe')) AND user.dst = '*SYSTEM\*'
+((Parentprocess ends '\explorer.exe','\chrome.exe','\brave.exe') AND (process ends '\cmd.exe','\powershell.exe')) AND user.dst contains 'SYSTEM\'

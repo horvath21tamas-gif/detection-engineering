@@ -1,1 +1,1 @@
-(cs-method = 'POST','PUT') AND (cs-uri-stem = '*.php*','.asp','.aspx','.jsp','.phtml') AND (cs-uri-query = '*cmd=*','exec=','powershell=','whoami','net user','command=','shell','curl','wget')
+(cs-method = '*POST*','PUT') AND (cs-uri-stem ends '.php','.asp','.aspx','.jsp','.phtml') AND (cs-uri-query ends 'cmd=','exec=','powershell=','whoami','net user','command=','shell','curl','wget')

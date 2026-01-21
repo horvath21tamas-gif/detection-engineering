@@ -1,1 +1,1 @@
-(((process = '*\sc.exe*','\net.exe') AND param = '*shadow*') OR (process = '*\bcdedit.exe*' AND param = '*recoveryenabled*')) AND (NOT (username = 'SYSTEM'))
+(((process ends '\sc.exe','\net.exe') AND param contains 'shadow') OR (process ends '\bcdedit.exe' AND param contains 'recoveryenabled')) AND (NOT (username = '*SYSTEM*'))

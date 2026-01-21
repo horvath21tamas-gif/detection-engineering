@@ -1,1 +1,1 @@
-((process = '*\wmic.exe*' AND (param = '*__EventFilter*','paramEventConsumer','FilterToConsumerBinding')) OR (process = '*\powershell.exe*' AND (param = '*Register-WmiEvent*','root\subscription'))) AND (NOT (username = 'SYSTEM'))
+((process ends '\wmic.exe' AND (param contains '__EventFilter','paramEventConsumer','FilterToConsumerBinding')) OR (process ends '\powershell.exe' AND (param contains 'Register-WmiEvent','root\subscription'))) AND (NOT (username = '*SYSTEM*'))

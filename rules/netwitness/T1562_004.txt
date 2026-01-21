@@ -1,1 +1,1 @@
-(process = '*\netsh.exe*' OR filename = 'netsh.exe') AND (param = '*advfirewall*','firewall') AND (param = '*add*','set') AND (param = '*action=allow*','enable=yes') AND (NOT ((Parentprocess = '*\CcmExec.exe*','\msiexec.exe') AND (param = '*show*','monitor','profile state')))
+(process ends '\netsh.exe' OR filename = '*netsh.exe*') AND (param contains 'advfirewall','firewall') AND (param contains 'add','set') AND (param contains 'action=allow','enable=yes') AND (NOT ((Parentprocess ends '\CcmExec.exe','\msiexec.exe') AND (param contains 'show','monitor','profile state')))

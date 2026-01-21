@@ -1,1 +1,1 @@
-(process = '*\user.dsts\*','\AppData\','\Temp\','\ProgramData\') AND (process = '*\svchost.exe*','\lsass.exe','services.exe','explorer.exe') AND (NOT (process begins 'C:\Windows\System32\','C:\Windows\SysWOW64\')) AND (NOT (username = 'SYSTEM'))
+(process contains '\user.dst\','\AppData\','\Temp\','\ProgramData\') AND (process ends '\svchost.exe','\lsass.exe','services.exe','explorer.exe') AND (NOT (process begins 'C:\Windows\System32\','C:\Windows\SysWOW64\')) AND (NOT (username = '*SYSTEM*'))

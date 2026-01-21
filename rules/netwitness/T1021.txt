@@ -1,1 +1,1 @@
-(EventID = 4624 AND (LogonType = 2,10)) AND (NOT (Targetuser.dstName = '*$*')) AND (NOT (Targetuser.dstName = 'SYSTEM','LOCAL SERVICE','NETWORK SERVICE')) AND (NOT (IpAddress = '127.0.0.1','::1'))
+(EventID = 4624 AND (LogonType = 2,10)) AND (NOT (Targetuser.dstName ends '$')) AND (NOT (Targetuser.dstName = '*SYSTEM*','LOCAL SERVICE','NETWORK SERVICE')) AND (NOT (IpAddress = '*127.0.0.1*','::1'))

@@ -1,5 +1,5 @@
 # 🎯 Detection Strategy & Gap Analysis
-*Frissítve: 2026-01-21 07:45:50*
+*Frissítve: 2026-01-21 07:51:51*
 
 ## 📊 Állapotösszegző
 | Mutató | Érték |
@@ -7,7 +7,7 @@
 | Összes szabály | 39 |
 | Aktív (van logforrás) | 35 |
 | Inaktív (hiányzó log) | 4 |
-| MITRE Lefedettség | 32 technika |
+| MITRE Lefedettség | 31 technika |
 
 ## 🛑 Kritikus Adatforrás Hiányok
 Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logokat:
@@ -22,4 +22,5 @@ Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logok
 ## 🛡️ Stratégiai Teendők (Hiányzó Technikák)
 A SOC hatékonyság növelése érdekében ezekre a technikákra kellene szabályt írni:
 
+- [ ] **T1003** - Credential Dumping ([Link](https://attack.mitre.org/techniques/T1003))
 - [ ] **T1547** - Boot or Logon Autostart Execution ([Link](https://attack.mitre.org/techniques/T1547))

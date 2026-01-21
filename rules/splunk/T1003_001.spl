@@ -1,1 +1,1 @@
-TargetImage="*\\lsass.exe" GrantedAccess IN ("0x10", "0x30", "0x50", "0x70") NOT (Image IN ("*\\taskmgr.exe", "*\\procexp.exe", "*\\av.exe"))
+TargetImage="*\\lsass.exe" GrantedAccess IN ("*0x10*", "*0x1410*", "*0x1010*", "*0x1fffff*", "*0x1438*") NOT (SourceImage IN ("*\\CcmExec.exe", "*\\MsMpEng.exe", "*\\mcafee.exe", "*\\sentinelone.exe", "*\\csagent.exe", "*\\taniumclient.exe", "*\\taskmgr.exe") OR CallTrace IN ("*C:\\Windows\\System32\\ntdll.dll+*", "*C:\\Windows\\System32\\kernelbase.dll+*"))

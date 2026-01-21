@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-21 07:45:50`
+**Utolsó frissítés:** `2026-01-21 07:51:51`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -8,14 +8,13 @@
 | :--- | :---: | :---: |
 | Sigma (Forrás) | 38 | 100% |
 | Splunk (SPL) | 38 | 100.0% |
-| QRadar (AQL) | 36 | 94.7% |
+| QRadar (AQL) | 35 | 92.1% |
 | RSA NetWitness | 38 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
 | :--- | :--- | :--- |
-| T1003 | HIGH | Suspicious Access to LSASS Process |
-| T1003.001 | HIGH | Suspicious Access to LSASS Process |
+| T1003.001 | HIGH | Suspicious Access to LSASS Process Memory |
 | T1021 | MEDIUM | Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be |
 | T1021.001 | MEDIUM | Gyanus RDP belepes |
 | T1027 | HIGH | Detektalni a poweshellbol base64-encoded parancsot, Gyanus Poweshell parancs vegrehajtasa |

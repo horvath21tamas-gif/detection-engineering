@@ -1,7 +1,7 @@
 # 🛡️ Detection Rule Knowledge Base
 
 ## 📖 Tartalomjegyzék
-- [Suspicious Access to LSASS Process](#suspicious-access-to-lsass-process)
+- [Suspicious Access to LSASS Process Memory](#suspicious-access-to-lsass-process-memory)
 - [Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be](#detektalni-ugyanazon-felhasznalotol-rovid-idon-belul,-tobb-egymastol-tavol-levo-hostra-jelentkezik-be)
 - [Gyanus RDP belepes](#gyanus-rdp-belepes)
 - [Detektalni a poweshellbol base64-encoded parancsot](#detektalni-a-poweshellbol-base64-encoded-parancsot)
@@ -43,13 +43,14 @@
 
 ---
 
-## Suspicious Access to LSASS Process
+## Suspicious Access to LSASS Process Memory
 - **Azonosító:** `T1003_001.yaml`
-- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** Detektalni a process dumpingot LSASS memoriaban
-- **Hamis pozitívok:** Antivirus or EDR solutions, System administrators hsznal debugging tool-t
-- **MITRE ATT&CK:** `001, T1003`
+- **Leírás:** Észleli a gyanús hozzáférést az LSASS folyamat memóriájához, ami hitelesítő adatok ellopására (Credential Dumping) utalhat.  A szabály figyeli a gyanús GrantedAccess maszkokat és szűri a gyakori legális folyamatokat.
+
+- **Hamis pozitívok:** Antivírus szoftverek és EDR ügynökök mélyvizsgálata, Rendszerfelügyeleti eszközök (pl. SCCM, Tanium), Debuggerek használata jogosult adminisztrátorok által
+- **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

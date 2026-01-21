@@ -1,0 +1,15 @@
+available_sources:
+  category:
+    - process_creation
+    - network_connection
+    - dns_query
+    - file_event
+  product:
+    - windows
+    - linux
+    - azure
+    - office365
+  service:
+    - sysmon
+    - security
+    - powershell

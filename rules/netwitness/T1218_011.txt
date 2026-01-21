@@ -1,1 +1,1 @@
-Image ends '\rundll32.exe' AND (CommandLine contains 'javascript','RunHTMLApplication','http://','https://')
+(process = '*\rundll32.exe*')&& ((param = '*javascript*' OR param = '*RunHTMLApplication*' OR param = '*http://*' OR param = '*https://*'))

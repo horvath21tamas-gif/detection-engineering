@@ -1,1 +1,1 @@
-((ParentImage ends '\explorer.exe','\chrome.exe','\brave.exe') AND (Image ends '\cmd.exe','\powershell.exe')) AND User contains 'SYSTEM\'
+(((ParentImage = '*\explorer.exe*' OR ParentImage = '*\chrome.exe*' OR ParentImage = '*\brave.exe*')) AND ((process = '*\cmd.exe*' OR process = '*\powershell.exe*'))) AND (user.dst = '*SYSTEM\*')

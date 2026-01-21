@@ -1,1 +1,1 @@
-(Image ends '\mshta.exe' AND (CommandLine contains 'http://','https://')) AND (NOT (user.dst = 'SYSTEM'))
+((process = '*\mshta.exe*')&& ((param = '*http://*' OR param = '*https://*'))) AND (NOT ((user.dst = '*SYSTEM*')))

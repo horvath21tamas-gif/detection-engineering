@@ -1,1 +1,1 @@
-ServiceName contains 'PSEXECSVC' AND Computer begins 'MGMT-'
+(ServiceName = '*PSEXECSVC*')&& Computer begins 'MGMT-'

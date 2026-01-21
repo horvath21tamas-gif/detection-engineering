@@ -1,1 +1,1 @@
-((process ends '\wmic.exe' AND (param contains '__EventFilter','paramEventConsumer','FilterToConsumerBinding')) OR (process ends '\powershell.exe' AND (param contains 'Register-WmiEvent','root\subscription'))) AND (NOT (username = '*SYSTEM*'))
+(((Image = '*\wmic.exe*')AND ((CommandLine = '*__EventFilter*' OR CommandLine = '*CommandLineEventConsumer*' OR CommandLine = '*FilterToConsumerBinding*'))) OR ((Image = '*\powershell.exe*')AND ((CommandLine = '*Register-WmiEvent*' OR CommandLine = '*root\subscription*')))) AND (NOT ((username = '*SYSTEM*')))

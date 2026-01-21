@@ -1,1 +1,1 @@
-process ends 'msiexec.exe' AND (param contains 'http://','https://','/i')
+(Image = '*msiexec.exe*')AND ((CommandLine = '*http://*' OR CommandLine = '*https://*' OR CommandLine = '*/i*'))

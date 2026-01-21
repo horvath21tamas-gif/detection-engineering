@@ -1,1 +1,1 @@
-(process ends '\vssadmin.exe' AND (param contains 'delete','shadow')) AND (NOT (username = '*SYSTEM*'))
+((Image = '*\vssadmin.exe*')AND ((CommandLine = '*delete*' OR CommandLine = '*shadow*'))) AND (NOT ((username = '*SYSTEM*')))

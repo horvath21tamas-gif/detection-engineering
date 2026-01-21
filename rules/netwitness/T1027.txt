@@ -1,1 +1,1 @@
-((process ends '\powershell.exe','\pwsh.exe') AND (param contains '-enc','-encodedcommand')) AND (param contains 'Invoke-WebRequest','iwr','wget','curl','DownloadString','DownloadFile','Net.WebClient')
+(((Image = '*\powershell.exe*' OR Image = '*\pwsh.exe*')) AND ((CommandLine = '*-enc*' OR CommandLine = '*-encodedcommand*'))) AND ((CommandLine = '*Invoke-WebRequest*' OR CommandLine = '*iwr*' OR CommandLine = '*wget*' OR CommandLine = '*curl*' OR CommandLine = '*DownloadString*' OR CommandLine = '*DownloadFile*' OR CommandLine = '*Net.WebClient*'))

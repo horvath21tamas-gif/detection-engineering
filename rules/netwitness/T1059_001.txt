@@ -1,1 +1,1 @@
-(process ends '\powershell.exe','\pwsh.exe','\cmd.exe') AND (param contains '-enc','-encodedcommand','-EncodedCommand')
+((Image = '*\powershell.exe*' OR Image = '*\pwsh.exe*' OR Image = '*\cmd.exe*')) AND ((CommandLine = '*-enc*' OR CommandLine = '*-encodedcommand*' OR CommandLine = '*-EncodedCommand*'))

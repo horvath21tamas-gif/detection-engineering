@@ -1,1 +1,1 @@
-(process ends '\wmic.exe' AND (param contains '/node:','process','call','create')) AND (NOT (username = '*SYSTEM*'))
+((Image = '*\wmic.exe*')AND ((CommandLine = '*/node:*' OR CommandLine = '*process*' OR CommandLine = '*call*' OR CommandLine = '*create*'))) AND (NOT ((username = '*SYSTEM*')))

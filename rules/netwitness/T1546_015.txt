@@ -1,1 +1,1 @@
-TargetObject contains '\Software\Classes\CLSID' AND (TargetObject ends 'InprocServer32','LocalServer32') AND (Details contains '\user.dst\','\AppData\','\Temp\','ProgramData') AND (NOT (username = '*SYSTEM*')) AND (NOT (Details begins 'C:\Windows\System32'))
+(TargetObject = '*\Software\Classes\CLSID*')AND ((TargetObject = '*InprocServer32*' OR TargetObject = '*LocalServer32*')) AND ((Details = '*\Users\*' OR Details = '*\AppData\*' OR Details = '*\Temp\*' OR Details = '*ProgramData*')) AND (NOT ((username = '*SYSTEM*'))) AND (NOT (Details begins 'C:\Windows\System32'))

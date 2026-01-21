@@ -1,1 +1,1 @@
-(process ends '\schtasks.exe' AND param contains '/create') AND param contains 'powershell'
+((Image = '*\schtasks.exe*')AND (CommandLine = '*/create*')) AND (CommandLine = '*powershell*')

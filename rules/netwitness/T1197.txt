@@ -1,1 +1,1 @@
-(process ends 'itsadmin.exe' AND (param contains '/transfer','/addfile','http://','https://')) AND (NOT (username = '*SYSTEM*'))
+((Image = '*itsadmin.exe*')AND ((CommandLine = '*/transfer*' OR CommandLine = '*/addfile*' OR CommandLine = '*http://*' OR CommandLine = '*https://*'))) AND (NOT ((username = '*SYSTEM*')))

@@ -1,1 +1,1 @@
-(process ends '\powershell.exe','\bitsadmin.exe','\certutil.exe') AND (Commandline contains 'Invoke-WebRequest','IEX','DownloadFile')
+((Image = '*\powershell.exe*' OR Image = '*\bitsadmin.exe*' OR Image = '*\certutil.exe*')) AND ((Commandline = '*Invoke-WebRequest*' OR Commandline = '*IEX*' OR Commandline = '*DownloadFile*'))

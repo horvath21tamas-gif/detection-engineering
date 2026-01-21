@@ -1,1 +1,1 @@
-(process ends '\wevtutil.exe' AND (param contains 'cl','security')) AND (NOT (username = '*SYSTEM*'))
+((Image = '*\wevtutil.exe*')AND ((CommandLine = '*cl*' OR CommandLine = '*security*'))) AND (NOT ((username = '*SYSTEM*')))

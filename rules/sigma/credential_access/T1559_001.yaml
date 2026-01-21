@@ -1,39 +1,33 @@
-title: Gyanús Named Pipe létrehozása (High Fidelity)
+title: Gyanús Named Pipe létrehozása (High Fidelity - Fixed)
 id: e4a1b7c9-8f12-4b8c-9d33-15590001hf01
 status: stable
 description: >
-  Észleli a gyanús Named Pipe-ok létrehozását, amelyek gyakran támadó eszközökhöz (pl. Cobalt Strike, Metasploit, PoshC2) 
-  vagy távoli parancsvégrehajtáshoz köthetők. A szabály a mintázatokra és a nem szabványos elérési utakra fókuszál.
+  Javított verzió, amely kompatibilis a Splunk, Elastic, QRadar és NetWitness backendekkel.
 author: hota05
 date: 2026/01/21
-references:
-  - https://attack.mitre.org/techniques/T1559/001/
-  - https://book.hacktricks.xyz/windows-hardening/stealing-credentials-and-privesc/named-pipes
-tags:
-  - attack.lateral_movement
-  - attack.command_and_control
-  - attack.t1559.001
-
 logsource:
   product: windows
   category: pipe_created
 
 detection:
   selection_known_malicious:
+    # A backslash-eket dupla \\-el vagy idézőjellel kell védeni
     PipeName|contains:
-      - '\msagent_'       
-      - '\postex_'        
-      - '\status_'        
-      - '\psexec'         
-      - '\paexec'         
-      - '\remcom'         
-      - '\lsadump'        
-      - '\cachedump'      
-      - '\mypipe'         
-      - '\win_svc'        
+      - '\msagent_'
+      - '\postex_'
+      - '\status_'
+      - '\psexec'
+      - '\paexec'
+      - '\remcom'
+      - '\lsadump'
+      - '\cachedump'
+      - '\mypipe'
+      - '\win_svc'
 
   selection_regex_patterns:
-    PipeName|re: '\\[a-f0-9]{8,10}'
+    # A hiba itt volt: A Sigma regexben a \ karaktert duplázni kell: \\\\ 
+    # Vagy használjunk egyszerűbb illeszkedést, amit minden backend szeret.
+    PipeName|re: '^\\+[a-f0-9]{8,10}$'
 
   selection_suspicious_paths:
     Image|endswith:
@@ -70,7 +64,8 @@ detection:
   condition: (selection_known_malicious or (selection_suspicious_paths and selection_regex_patterns)) and not (filter_legit_microsoft or filter_legit_apps)
 
 falsepositives:
-  - Egyedi fejlesztésű szoftverek, amelyek véletlenszerű pipe-neveket használnak (pl. Google Chrome modulok)
-  - Bizonyos biztonsági szoftverek (pl. EDR ügynökök) belső kommunikációja
-
+  - Egyedi fejlesztésű szoftverek
 level: high
+tags:
+  - attack.lateral_movement
+  - attack.t1559.001

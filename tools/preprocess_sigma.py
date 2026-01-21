@@ -1,15 +1,16 @@
 import os
-import yaml
 
-# Mező megfeleltetések a "makacs" SIEM-ekhez
-MAPPING = {
-    "Image": "process",
-    "CommandLine": "command",
-    "ParentImage": "parent_process",
-    "ParentCommandLine": "parent_command",
-    "OriginalFileName": "filename",
-    "User": "username",
-    "PipeName": "pipename"
+# QRadar specifikus AQL mapping
+# Ezeket a mezőneveket a QRadar alapból felismeri
+QRADAR_MAPPING = {
+    "Image:": "processname:",
+    "CommandLine:": "processcommandline:",
+    "ParentImage:": "parentprocessname:",
+    "ParentCommandLine:": "parentprocesscommandline:",
+    "User:": "username:",
+    "LogonId:": "logonid:",
+    "Hashes:": "hash:",
+    "TargetFilename:": "filename:"
 }
 
 def preprocess():
@@ -18,18 +19,18 @@ def preprocess():
         for file in files:
             if file.endswith(('.yaml', '.yml')):
                 path = os.path.join(root, file)
-                with open(path, 'r', encoding='utf-8') as f:
-                    try:
+                try:
+                    with open(path, 'r', encoding='utf-8') as f:
                         data = f.read()
-                        # Egyszerű string csere a mezőkre (gyors és hatékony)
-                        for old, new in MAPPING.items():
-                            data = data.replace(f"{old}:", f"{new}:")
-                        
-                        # Visszaírjuk az ideiglenesen módosított szabályt
-                        with open(path, 'w', encoding='utf-8') as wf:
-                            wf.write(data)
-                    except Exception as e:
-                        print(f"Hiba a fájl feldolgozásakor: {file} - {e}")
+                    
+                    # Lecseréljük a mezőket a QRadar által emészthető nevekre
+                    for old, new in QRADAR_MAPPING.items():
+                        data = data.replace(old, new)
+                    
+                    with open(path, 'w', encoding='utf-8') as wf:
+                        wf.write(data)
+                except Exception as e:
+                    print(f"Hiba: {file} - {e}")
 
 if __name__ == "__main__":
     preprocess()

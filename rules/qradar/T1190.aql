@@ -1,1 +1,1 @@
-SELECT UTF8(payload) as search_payload from events where (''<script'' OR ''<svg'' OR ''<iframe'' OR ''javascript:'' OR ''%3cscript'') AND ("status" LIKE (200,403)) AND "timeframe"='1m'
+SELECT UTF8(payload) as search_payload from events where (''<script'' OR ''<svg'' OR ''<iframe'' OR ''javascript:'' OR ''%3cscript'') AND (("status" LIKE '%200%' OR "status" LIKE '%403%')) AND "timeframe"='1m'

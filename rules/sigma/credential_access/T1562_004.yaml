@@ -1,25 +1,56 @@
-title: netsh.exe segitsegevel tuzfal szabalyt adnak hozza vagy modositanak
-id: '329931f0-bcbb-4906-bcc7-f9a4f54d6f1b'
-status: experimental
-description: netsh.exe segitsegevel tuzfal szabalyt adnak hozza vagy modositanak
+title: Suspicious Firewall Modification via Netsh.exe
+id: 329931f0-bcbb-4906-bcc7-f9a4f54d6f1b
+status: stable
+description: >
+  Észleli, amikor a támadók a netsh.exe eszközt használják a Windows tűzfal szabályainak módosítására vagy új, 
+  engedékeny szabályok hozzáadására. Ez gyakran a védelem megkerülésére (Impair Defenses) utal.
 author: hota05
-date: 2026/01/13
+date: 2026/01/21
+references:
+  - https://attack.mitre.org/techniques/T1562/004/
+tags:
+  - attack.defense_evasion
+  - attack.t1562.004
+
 logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection:
-    Image|endswith: '\netsh.exe'
+  selection_img:
+    - Image|endswith: '\netsh.exe'
+    - OriginalFileName: 'netsh.exe'
+
+  selection_cmd_base:
     CommandLine|contains:
-      - "dir=in"
-      - "action=allow"
-      - "set rule"
-      - "add rule"
-      - "advfirewall"
-  condition: selection
-level: medium
-tags:
-  - attack.t1562.004
+      - 'advfirewall'
+      - 'firewall'
+
+  selection_cmd_action:
+    CommandLine|contains:
+      - 'add'
+      - 'set'
+
+  selection_cmd_type:
+    CommandLine|contains:
+      - 'action=allow'
+      - 'enable=yes'
+
+
+  condition: selection_img and selection_cmd_base and selection_cmd_action and selection_cmd_type and not filter_legit
+
+  filter_legit:
+    ParentImage|endswith:
+      - '\CcmExec.exe'      
+      - '\msiexec.exe'     
+    CommandLine|contains:
+      - 'show'              
+      - 'monitor'           
+      - 'profile state'     
+
 falsepositives:
-  - admin hasznalja
-  - pentesteles
+  - Legitim szoftvertelepítők (pl. VPN kliensek, hálózati eszközök)
+  - SCCM vagy egyéb távoli felügyeleti eszközök által futtatott konfigurációs szkriptek
+  - Rendszergazdák manuális hibajavítása
+
+level: high

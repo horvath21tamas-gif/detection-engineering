@@ -1,1 +1,1 @@
-(Image ends 'itsadmin.exe' && (CommandLine contains '/transfer','/addfile','http://','https://')) && (NOT (username = 'SYSTEM'))
+(process ends 'itsadmin.exe' && (param contains '/transfer','/addfile','http://','https://')) && (NOT (user.dst = 'SYSTEM'))

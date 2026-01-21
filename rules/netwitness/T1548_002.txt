@@ -1,1 +1,1 @@
-(ParentImage ends '\fodhelper.exe' && (Image ends '\powershell.exe','\cmd.exe')) && (NOT (username = 'SYSTEM'))
+(Parentprocess ends '\fodhelper.exe' && (process ends '\powershell.exe','\cmd.exe')) && (NOT (user.dst = 'SYSTEM'))

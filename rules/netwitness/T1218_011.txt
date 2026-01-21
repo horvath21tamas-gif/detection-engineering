@@ -1,1 +1,1 @@
-Image ends '\rundll32.exe' && (CommandLine contains 'javascript','RunHTMLApplication','http://','https://')
+process ends '\rundll32.exe' && (param contains 'javascript','RunHTMLApplication','http://','https://')

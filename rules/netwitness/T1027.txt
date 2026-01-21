@@ -1,1 +1,1 @@
-((Image ends '\powershell.exe','\pwsh.exe') && (CommandLine contains '-enc','-encodedcommand')) && (CommandLine contains 'Invoke-WebRequest','iwr','wget','curl','DownloadString','DownloadFile','Net.WebClient')
+((process ends '\powershell.exe','\pwsh.exe') && (param contains '-enc','-encodedcommand')) && (param contains 'Invoke-WebRequest','iwr','wget','curl','DownloadString','DownloadFile','Net.WebClient')

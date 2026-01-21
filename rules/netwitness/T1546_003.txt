@@ -1,1 +1,1 @@
-((Image ends '\wmic.exe' && (CommandLine contains '__EventFilter','CommandLineEventConsumer','FilterToConsumerBinding')) || (Image ends '\powershell.exe' && (CommandLine contains 'Register-WmiEvent','root\subscription'))) && (NOT (username = 'SYSTEM'))
+((process ends '\wmic.exe' && (param contains '__EventFilter','paramEventConsumer','FilterToConsumerBinding')) || (process ends '\powershell.exe' && (param contains 'Register-WmiEvent','root\subscription'))) && (NOT (user.dst = 'SYSTEM'))

@@ -1,1 +1,1 @@
-(Image ends '\wmic.exe' && (CommandLine contains '/node:','process','call','create')) && (NOT (username = 'SYSTEM'))
+(process ends '\wmic.exe' && (param contains '/node:','process','call','create')) && (NOT (user.dst = 'SYSTEM'))

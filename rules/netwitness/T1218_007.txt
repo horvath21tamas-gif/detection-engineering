@@ -1,1 +1,1 @@
-Image ends 'msiexec.exe' && (CommandLine contains 'http://','https://','/i')
+process ends 'msiexec.exe' && (param contains 'http://','https://','/i')

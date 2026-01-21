@@ -1,1 +1,1 @@
-SELECT UTF8(payload) as search_payload from events where ("ParentImage" LIKE ('%\explorer.exe','%\chrome.exe','%\brave.exe')) AND ("Image" LIKE ('%\cmd.exe','%\powershell.exe')) AND "username" LIKE '%SYSTEM\%'
+SELECT UTF8(payload) as search_payload from events where ("ParentImage" LIKE ('%\explorer.exe','%\chrome.exe','%\brave.exe')) AND ((processname LIKE '%\cmd.exe' OR processname LIKE '%\powershell.exe')) AND username LIKE '%SYSTEM\%'

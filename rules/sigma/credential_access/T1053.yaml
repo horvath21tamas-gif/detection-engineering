@@ -48,23 +48,22 @@ detection:
       - '.vbs'
       - '.js'
 
-  filter_legitimate_system:
+  # Szétbontottuk két külön részre a filtert
+  filter_user:
     User|contains:
       - 'SYSTEM'
       - 'LOCAL SERVICE'
       - 'NETWORK SERVICE'
-    OR:
-      CommandLine|contains:
-        - '\Microsoft\Windows\'
-        - 'Windows Defender'
-        - 'OneDrive'
-        - 'GoogleUpdate'
-        - 'Adobe'
+  
+  filter_cmd:
+    CommandLine|contains:
+      - '\Microsoft\Windows\'
+      - 'Windows Defender'
+      - 'OneDrive'
+      - 'GoogleUpdate'
+      - 'Adobe'
 
-  condition: selection_scheduler_tools
-             and selection_scheduler_keywords
-             and suspicious_execution_target
-             and not filter_legitimate_system
+  condition: selection_scheduler_tools and selection_scheduler_keywords and suspicious_execution_target and not (filter_user or filter_cmd)
 
 falsepositives:
   - Ritka adminisztratív automatizálás felhasználó által írható könyvtárak használatával

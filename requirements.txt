@@ -1,0 +1,7 @@
+sigma-cli
+pysigma-backend-splunk
+pytest
+pyyaml>=6.0
+requests
+pysigma>=1.1.0
+pyparsing>=3.0.0

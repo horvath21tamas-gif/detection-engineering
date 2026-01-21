@@ -1,1 +1,1 @@
-((ParentImage = '*\fodhelper.exe*')&& ((Image = '*\powershell.exe*' OR Image = '*\cmd.exe*'))) AND (NOT ((user.dst = '*SYSTEM*')))
+(ParentImage ends '\fodhelper.exe' AND (Image ends '\powershell.exe','\cmd.exe')) AND (NOT (user.dst = 'SYSTEM'))

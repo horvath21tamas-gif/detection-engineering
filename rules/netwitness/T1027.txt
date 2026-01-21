@@ -1,1 +1,1 @@
-(((Image = '*\powershell.exe*' OR Image = '*\pwsh.exe*')) AND ((CommandLine = '*-enc*' OR CommandLine = '*-encodedcommand*'))) AND ((CommandLine = '*Invoke-WebRequest*' OR CommandLine = '*iwr*' OR CommandLine = '*wget*' OR CommandLine = '*curl*' OR CommandLine = '*DownloadString*' OR CommandLine = '*DownloadFile*' OR CommandLine = '*Net.WebClient*'))
+((Image ends '\powershell.exe','\pwsh.exe') AND (CommandLine contains '-enc','-encodedcommand')) AND (CommandLine contains 'Invoke-WebRequest','iwr','wget','curl','DownloadString','DownloadFile','Net.WebClient')

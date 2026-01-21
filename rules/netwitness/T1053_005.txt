@@ -1,1 +1,1 @@
-((Image = '*\schtasks.exe*')&& (CommandLine = '*/create*')) AND (CommandLine = '*powershell*')
+(Image ends '\schtasks.exe' AND CommandLine contains '/create') AND CommandLine contains 'powershell'

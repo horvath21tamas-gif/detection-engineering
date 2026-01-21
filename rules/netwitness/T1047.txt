@@ -1,1 +1,1 @@
-((Image = '*\wmic.exe*')&& ((CommandLine = '*/node:*' OR CommandLine = '*process*' OR CommandLine = '*call*' OR CommandLine = '*create*'))) AND (NOT ((user.dst = '*SYSTEM*')))
+(Image ends '\wmic.exe' AND (CommandLine contains '/node:','process','call','create')) AND (NOT (user.dst = 'SYSTEM'))

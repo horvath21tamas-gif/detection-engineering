@@ -1,1 +1,1 @@
-((Image = '*\regsvr32.exe*')&& ((CommandLine = '*\Users\*' OR CommandLine = '*\AppData\*' OR CommandLine = '*\Temp\*'))) AND (NOT ((CommandLine = '*.dll*')))
+(Image ends '\regsvr32.exe' AND (CommandLine contains '\Users\','\AppData\','\Temp\')) AND (NOT (CommandLine ends '.dll'))

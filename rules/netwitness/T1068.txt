@@ -1,1 +1,1 @@
-(((ParentImage = '*\explorer.exe*' OR ParentImage = '*\chrome.exe*' OR ParentImage = '*\brave.exe*')) AND ((Image = '*\cmd.exe*' OR Image = '*\powershell.exe*'))) AND (User = '*SYSTEM\*')
+((ParentImage ends '\explorer.exe','\chrome.exe','\brave.exe') AND (Image ends '\cmd.exe','\powershell.exe')) AND User contains 'SYSTEM\'

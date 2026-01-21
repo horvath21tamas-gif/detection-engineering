@@ -1,1 +1,1 @@
-((Image = '*itsadmin.exe*')&& ((CommandLine = '*/transfer*' OR CommandLine = '*/addfile*' OR CommandLine = '*http://*' OR CommandLine = '*https://*'))) AND (NOT ((user.dst = '*SYSTEM*')))
+(Image ends 'itsadmin.exe' AND (CommandLine contains '/transfer','/addfile','http://','https://')) AND (NOT (user.dst = 'SYSTEM'))

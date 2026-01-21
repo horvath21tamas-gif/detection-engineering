@@ -1,1 +1,1 @@
-((Image = '*\vssadmin.exe*')&& ((CommandLine = '*delete*' OR CommandLine = '*shadow*'))) AND (NOT ((user.dst = '*SYSTEM*')))
+(Image ends '\vssadmin.exe' AND (CommandLine contains 'delete','shadow')) AND (NOT (user.dst = 'SYSTEM'))

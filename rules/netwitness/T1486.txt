@@ -1,1 +1,1 @@
-((((Image = '*\sc.exe*' OR Image = '*\net.exe*')) AND (CommandLine = '*shadow*')) OR ((Image = '*\bcdedit.exe*')&& (CommandLine = '*recoveryenabled*'))) AND (NOT ((user.dst = '*SYSTEM*')))
+(((Image ends '\sc.exe','\net.exe') AND CommandLine contains 'shadow') OR (Image ends '\bcdedit.exe' AND CommandLine contains 'recoveryenabled')) AND (NOT (user.dst = 'SYSTEM'))

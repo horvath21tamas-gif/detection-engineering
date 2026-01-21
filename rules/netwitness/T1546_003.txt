@@ -1,1 +1,1 @@
-(((Image = '*\wmic.exe*')&& ((CommandLine = '*__EventFilter*' OR CommandLine = '*CommandLineEventConsumer*' OR CommandLine = '*FilterToConsumerBinding*'))) OR ((Image = '*\powershell.exe*')&& ((CommandLine = '*Register-WmiEvent*' OR CommandLine = '*root\subscription*')))) AND (NOT ((user.dst = '*SYSTEM*')))
+((Image ends '\wmic.exe' AND (CommandLine contains '__EventFilter','CommandLineEventConsumer','FilterToConsumerBinding')) OR (Image ends '\powershell.exe' AND (CommandLine contains 'Register-WmiEvent','root\subscription'))) AND (NOT (user.dst = 'SYSTEM'))

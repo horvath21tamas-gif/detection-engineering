@@ -68,6 +68,7 @@ jobs:
       - name: Convert Sigma rules to SIEM queries
         run: |
           mkdir -p rules/splunk rules/qradar rules/netwitness rules/elastic
+          rm -f rules/splunk/*.spl rules/qradar/*.aql rules/netwitness/*.txt rules/elastic/*.kql
           
           for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
             filename=$(basename "$file" .yaml)
@@ -76,11 +77,13 @@ jobs:
             # SPLUNK
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk error"
             
-            # QRADAR - ITT A VÁLTOZÁS: 
-            # Elhagyjuk a -p kapcsolót, hogy ne fusson rá a hibás mezőellenőrzés!
-            # Csak a tiszta AQL logikát kérjük le.
+            # QRADAR - Nyers konverzió + Utólagos javítás
+            # A pipeline-t (-p) szándékosan kihagyjuk, hogy ne dobjon mezőhibát
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || \
             echo "SELECT UTF8(payload) FROM events WHERE devicetype=12" > "rules/qradar/${filename}.aql"
+            
+            # Itt futtatjuk le a javító scriptet a frissen generált fájlon
+            python tools/fix_qradar_aql.py "rules/qradar/${filename}.aql"
             
             # RSA NETWITNESS
             sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "RSA error"
@@ -88,6 +91,8 @@ jobs:
             # ELASTIC
             sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic error"
           done
+
+      # ... (további lépések változatlanok: Integrity Check, Scoring, stb.) ...
       - name: Run Integrity Check
         run: |
           python tools/check_integrity.py

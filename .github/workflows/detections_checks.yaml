@@ -50,7 +50,6 @@ jobs:
       - name: Convert Sigma rules to SIEM queries
         run: |
           mkdir -p rules/splunk rules/qradar rules/netwitness
-          # Csak a célfájlokat töröljük, a mappastruktúrát ne
           rm -f rules/splunk/*.spl rules/qradar/*.aql rules/netwitness/*.txt
           
           for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
@@ -65,6 +64,12 @@ jobs:
       - name: Run Integrity Check
         run: |
           python tools/check_integrity.py
+
+      - name: Calculate Rule Scores
+        if: github.event_name == 'push'
+        run: |
+          # Ez a lépés generálja a rule_scores.json fájlt a Wiki számára
+          python tools/score_rules.py
 
       - name: Generate MITRE Layer and Wiki Docs
         if: github.event_name == 'push'
@@ -83,15 +88,18 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Csak azokat a fájlokat adjuk hozzá, amik tényleg változtak/létrejöttek
+          # Hozzáadjuk a SIEM szabályokat
           git add rules/splunk/ rules/qradar/ rules/netwitness/
-          git add DETECTION_WIKI.md attack_navigator_layer.json
+          
+          # Hozzáadjuk a dokumentációt ÉS az új pontszám JSON-t
+          git add DETECTION_WIKI.md attack_navigator_layer.json rule_scores.json
+          
+          # Hozzáadjuk a dashboard elemeket
           git add COVERAGE.md README.md *.svg
           
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Dashboard, SIEM rules, MITRE Layer & Wiki Documentation"
+            git commit -m "Auto-update: Dashboard, SIEM rules, MITRE Layer, Scores & Wiki"
             
-            # Rebase során a bot által generált friss fájlok győzzenek
             git pull --rebase -X ours origin test
             git push origin test
           else

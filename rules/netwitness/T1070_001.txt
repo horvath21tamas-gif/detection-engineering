@@ -1,1 +1,1 @@
-(Image ends '\wevtutil.exe' && (CommandLine contains 'cl','security')) && (NOT (User = 'SYSTEM'))
+(Image ends '\wevtutil.exe' && (CommandLine contains 'cl','security')) && (NOT (username = 'SYSTEM'))

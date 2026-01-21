@@ -22,7 +22,7 @@ detection:
       - "Register-WmiEvent"
       - 'root\\subscription'
   filter_system:
-    User: "SYSTEM"
+    username: "SYSTEM"
   condition: (selection_wmic or selection_powershell) and not filter_system
 level: high
 tags:

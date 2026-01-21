@@ -1,1 +1,1 @@
-(process.executable:*\\wmic.exe AND (process.command_line:(*\/node\:* OR *process* OR *call* OR *create*))) AND (NOT user.name:SYSTEM)
+(process.executable:*\\wmic.exe AND (process.command_line:(*\/node\:* OR *process* OR *call* OR *create*))) AND (NOT winlog.event_data.username:SYSTEM)

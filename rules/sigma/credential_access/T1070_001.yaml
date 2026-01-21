@@ -14,7 +14,7 @@ detection:
       - 'cl'
       - 'security'
   filter:
-    User: 'SYSTEM'
+    username: 'SYSTEM'
   condition: selection and not filter
 level: medium
 tags:

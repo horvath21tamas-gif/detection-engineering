@@ -15,7 +15,7 @@ detection:
       - 'net user'
       - 'net localgroup'
   filter_user:
-    User:
+    username:
       - 'SYSTEM'
   condition: selection_cmd and not filter_user
 level: medium

@@ -16,7 +16,7 @@ detection:
       - 'http://'
       - 'https://'
   filter:
-    User: 'SYSTEM'
+    username: 'SYSTEM'
   condition: selection and not filter
 level: high
 tags: 

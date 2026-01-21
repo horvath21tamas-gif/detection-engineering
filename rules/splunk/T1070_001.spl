@@ -1,1 +1,1 @@
-Image="*\\wevtutil.exe" CommandLine IN ("*cl*", "*security*") NOT User="SYSTEM"
+Image="*\\wevtutil.exe" CommandLine IN ("*cl*", "*security*") NOT username="SYSTEM"

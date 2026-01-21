@@ -1,1 +1,1 @@
-(event.code:(7036 OR 7040)) AND (NOT (user.name:(SYSTEM OR LOCAL\ SERVICE OR NETWORK\ SERVICE)))
+(event.code:(7036 OR 7040)) AND (NOT (winlog.event_data.username:(SYSTEM OR LOCAL\ SERVICE OR NETWORK\ SERVICE)))

@@ -15,7 +15,7 @@ detection:
       - '\powershell.exe'
       - '\cmd.exe'
   filter_system:
-    User: "SYSTEM"
+    username: "SYSTEM"
   condition: selection and not filter_system
 level: high
 tags:

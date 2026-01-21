@@ -25,7 +25,7 @@ detection:
       - 'C:\Windows\System32\'
       - 'C:\\Windows\SysWOW64\'
   filter_system:
-    User: "SYSTEM"
+    username: "SYSTEM"
   condition: selection and selection_legitime and not filter_legit_loc and not filter_system 
 level: high
 tags: 

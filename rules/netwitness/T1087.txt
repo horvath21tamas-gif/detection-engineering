@@ -1,1 +1,1 @@
-(Image ends '\cmd.exe' && (CommandLine contains 'net user','net localgroup')) && (NOT (User = 'SYSTEM'))
+(Image ends '\cmd.exe' && (CommandLine contains 'net user','net localgroup')) && (NOT (username = 'SYSTEM'))

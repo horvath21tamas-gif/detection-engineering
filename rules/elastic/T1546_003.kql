@@ -1,1 +1,1 @@
-((process.executable:*\\wmic.exe AND (process.command_line:(*__EventFilter* OR *CommandLineEventConsumer* OR *FilterToConsumerBinding*))) OR (process.executable:*\\powershell.exe AND (process.command_line:(*Register\-WmiEvent* OR *root\\subscription*)))) AND (NOT user.name:SYSTEM)
+((process.executable:*\\wmic.exe AND (process.command_line:(*__EventFilter* OR *CommandLineEventConsumer* OR *FilterToConsumerBinding*))) OR (process.executable:*\\powershell.exe AND (process.command_line:(*Register\-WmiEvent* OR *root\\subscription*)))) AND (NOT winlog.event_data.username:SYSTEM)

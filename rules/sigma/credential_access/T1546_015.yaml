@@ -22,7 +22,7 @@ detection:
       - '\Temp\'
       - 'ProgramData'
   filter_system:
-    User: "SYSTEM"
+    username: "SYSTEM"
   filter_legit:
     Details|startswith:
       - 'C:\\Windows\System32'

@@ -1,1 +1,1 @@
-(process.executable:*itsadmin.exe AND (process.command_line:(*\/transfer* OR *\/addfile* OR *http\:\/\/* OR *https\:\/\/*))) AND (NOT user.name:SYSTEM)
+(process.executable:*itsadmin.exe AND (process.command_line:(*\/transfer* OR *\/addfile* OR *http\:\/\/* OR *https\:\/\/*))) AND (NOT winlog.event_data.username:SYSTEM)

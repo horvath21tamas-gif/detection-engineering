@@ -20,7 +20,7 @@ detection:
     CommandLine|contains:
       - 'recoveryenabled'
   filter_system:
-    User:
+    username:
       - SYSTEM
   condition: (selection_service or selection_recovery) and not filter_system
 level: critical

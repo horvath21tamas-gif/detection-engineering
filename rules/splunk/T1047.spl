@@ -1,1 +1,1 @@
-Image="*\\wmic.exe" CommandLine IN ("*/node:*", "*process*", "*call*", "*create*") NOT User="SYSTEM"
+Image="*\\wmic.exe" CommandLine IN ("*/node:*", "*process*", "*call*", "*create*") NOT username="SYSTEM"

@@ -1,1 +1,1 @@
-Image="*\\vssadmin.exe" CommandLine IN ("*delete*", "*shadow*") NOT User="SYSTEM"
+Image="*\\vssadmin.exe" CommandLine IN ("*delete*", "*shadow*") NOT username="SYSTEM"

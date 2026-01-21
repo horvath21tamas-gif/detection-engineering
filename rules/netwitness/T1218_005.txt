@@ -1,1 +1,1 @@
-(Image ends '\mshta.exe' && (CommandLine contains 'http://','https://')) && (NOT (User = 'SYSTEM'))
+(Image ends '\mshta.exe' && (CommandLine contains 'http://','https://')) && (NOT (username = 'SYSTEM'))

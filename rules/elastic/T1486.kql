@@ -1,1 +1,1 @@
-(((process.executable:(*\\sc.exe OR *\\net.exe)) AND process.command_line:*shadow*) OR (process.executable:*\\bcdedit.exe AND process.command_line:*recoveryenabled*)) AND (NOT user.name:SYSTEM)
+(((process.executable:(*\\sc.exe OR *\\net.exe)) AND process.command_line:*shadow*) OR (process.executable:*\\bcdedit.exe AND process.command_line:*recoveryenabled*)) AND (NOT winlog.event_data.username:SYSTEM)

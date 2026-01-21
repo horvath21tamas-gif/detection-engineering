@@ -1,1 +1,1 @@
-(process.executable:*\\wevtutil.exe AND (process.command_line:(*cl* OR *security*))) AND (NOT user.name:SYSTEM)
+(process.executable:*\\wevtutil.exe AND (process.command_line:(*cl* OR *security*))) AND (NOT winlog.event_data.username:SYSTEM)

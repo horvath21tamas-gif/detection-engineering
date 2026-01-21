@@ -14,7 +14,7 @@ detection:
       - 'delete'
       - 'shadow'
   filter:
-    User:
+    username:
       - 'SYSTEM'
   condition: selection and not filter
 level: medium

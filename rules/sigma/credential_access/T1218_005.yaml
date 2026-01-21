@@ -14,7 +14,7 @@ detection:
       - 'http://'
       - 'https://'
   selection_user:
-    User:
+    username:
       - 'SYSTEM'
   condition: selection_remote and not selection_user
 level: medium

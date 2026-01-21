@@ -28,7 +28,7 @@ detection:
         - '\tar.exe'
         - '\powershell.exe'
         - '\pwsh.exe'
-    - OriginalFileName:
+    - filename:
         - '7z.exe'
         - '7za.exe'
         - 'Rar.exe'

@@ -13,7 +13,7 @@ detection:
       - "7036"
       - "7040"
   filter_system:
-    User:
+    username:
       - "SYSTEM"
       - "LOCAL SERVICE"
       - "NETWORK SERVICE"

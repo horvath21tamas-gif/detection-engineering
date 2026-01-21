@@ -1,1 +1,1 @@
-(process.executable:*\\vssadmin.exe AND (process.command_line:(*delete* OR *shadow*))) AND (NOT user.name:SYSTEM)
+(process.executable:*\\vssadmin.exe AND (process.command_line:(*delete* OR *shadow*))) AND (NOT winlog.event_data.username:SYSTEM)

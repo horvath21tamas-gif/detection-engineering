@@ -1,1 +1,1 @@
-Image="*\\mshta.exe" CommandLine IN ("*http://*", "*https://*") NOT User="SYSTEM"
+Image="*\\mshta.exe" CommandLine IN ("*http://*", "*https://*") NOT username="SYSTEM"

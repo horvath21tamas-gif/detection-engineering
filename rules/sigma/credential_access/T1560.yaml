@@ -1,36 +1,76 @@
-title: Adatgyujtes es exfiltration elokeszitese Archiving segitsegevel
-id: 'f672c0fe-c3df-4d17-b71e-d731bd89e930'
-status: experimental
-description: Adatgyujtes es exfiltration elokeszitese Archiving segitsegevel
+title: Adatok gyanús archiválása exfiltráció céljából
+id: f672c0fe-c3df-4d17-b71e-d731bd89e930
+status: stable
+description: >
+  Észleli a fájlok gyanús tömörítését és archiválását (7z, rar, tar, PowerShell), különösen ha jelszavas védelmet 
+  alkalmaznak vagy gyanús ideiglenes könyvtárakat használnak célhelyként.
 author: hota05
-date: 2026/01/14
+date: 2026/01/21
+references:
+  - https://attack.mitre.org/techniques/T1560/
+  - https://attack.mitre.org/techniques/T1560/001/
+tags:
+  - attack.collection
+  - attack.exfiltration
+  - attack.t1560.001
+
 logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection:
-    Image|endswith:
-      - '\powershell.exe'
-      - 'tar.exe'
-      - '7z.exe'
-      - 'rar.exe'
+  selection_tools:
+    - Image|endswith:
+        - '\7z.exe'
+        - '\7za.exe'
+        - '\rar.exe'
+        - '\WinRAR.exe'
+        - '\tar.exe'
+        - '\powershell.exe'
+        - '\pwsh.exe'
+    - OriginalFileName:
+        - '7z.exe'
+        - '7za.exe'
+        - 'Rar.exe'
+        - 'tar.exe'
+        - 'PowerShell.EXE'
+
+  selection_archive_params:
     CommandLine|contains:
-      - "Compress-Archive"
-  selection_loaded:
+      - ' a '         
+      - ' -a'         
+      - ' -cf '       
+      - 'Compress-Archive'
+      - 'New-Object System.IO.Compression'
+
+  selection_suspicious_flags:
     CommandLine|contains:
-      - 'C:\Temp'
-      - '%AppData%'
-      - 'Users\Public'
-  selection_file:
-    FileName|endswith:
-      - ".zip"
-      - ".7z"
-      - ".rar"
-  filter_system:
-    User: "SYSTEM"
-  condition: selection and selection_loaded and not filter_system
-level: medium
-tags:
-  - attack.t1560
+      - ' -p'         
+      - ' -hp'        
+      - ' -v'         
+      - ' -mhe=on'    
+      - ' -sdel'      
+
+  selection_locations:
+    CommandLine|contains:
+      - '\AppData\'
+      - '\Temp\'
+      - '\Users\Public\'
+      - '\ProgramData\'
+      - 'C:\PerfLogs\'
+
+  filter_legit_installers:
+    ParentImage|endswith:
+      - '\msiexec.exe'
+      - '\CcmExec.exe'
+    CommandLine|contains:
+      - '\Microsoft\Windows\SoftwareDistribution\'
+
+  condition: selection_tools and selection_archive_params and (selection_suspicious_flags or selection_locations) and not filter_legit_installers
+
 falsepositives:
-  - pentesteles a kornyezetben
+  - Rendszergazdai mentési scriptek
+  - Szoftverfrissítések, amelyek ideiglenes mappákban tömörítenek
+  - Felhasználók, akik jelszóval védett tömörítményt készítenek legális célból
+
+level: high

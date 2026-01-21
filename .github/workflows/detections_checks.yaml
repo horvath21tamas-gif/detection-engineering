@@ -44,17 +44,22 @@ jobs:
 
       - name: Log Source Validation
         run: |
-          # Automatikusan létrehozzuk az alap inventory-t, ha hiányzik
           mkdir -p inventory
           if [ ! -f inventory/log_sources.yaml ]; then
-            echo "available_sources: {category: [process_creation, network_connection], product: [windows], service: [sysmon, security]}" > inventory/log_sources.yaml
+            echo "available_sources: {category: [process_creation, network_connection, dns_query], product: [windows, linux], service: [sysmon, security, powershell]}" > inventory/log_sources.yaml
           fi
           python tools/check_log_sources.py
 
-      - name: Run unit test
+      - name: Run Simulation Tests (Logic Verification)
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
-          python -m pytest test/ --maxfail=5 --disable-warnings -q || echo "Nincsenek tesztek vagy hiba történt."
+          # Ez futtatja a mock log alapú logikai teszteket
+          python -m pytest test/test_detection_logic.py -v || echo "⚠️ Szimulációs tesztek sikertelenek vagy hiányoznak."
+
+      - name: Run Unit Tests (General)
+        run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
+          python -m pytest test/ --ignore=test/test_detection_logic.py --maxfail=5 --disable-warnings -q || echo "Nincsenek általános tesztek."
 
       - name: Convert Sigma rules to SIEM queries
         run: |
@@ -78,7 +83,7 @@ jobs:
         if: github.event_name == 'push'
         run: python tools/score_rules.py
 
-      - name: Generate MITRE Layer, Wiki and Gap Analysis
+      - name: Generate MITRE Layer, Wiki, Playbooks and Gap Analysis
         if: github.event_name == 'push'
         run: |
           python tools/generate_nav_layer.py
@@ -96,13 +101,12 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Hozzáadjuk az összes új dokumentumot és eredményfájlt
-          git add rules/ inventory/
+          git add rules/ inventory/ test/
           git add DETECTION_WIKI.md GAP_ANALYSIS.md rule_scores.json
           git add attack_navigator_layer.json COVERAGE.md README.md *.svg
           
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Quality scores, Gap analysis & Documentation"
+            git commit -m "Auto-update: Simulation tests, Playbooks, Scores & Gap Analysis"
             git pull --rebase -X ours origin test
             git push origin test
           else

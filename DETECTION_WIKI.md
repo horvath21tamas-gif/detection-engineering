@@ -34,7 +34,7 @@
 - [UAC bypass Fodhelper segitsegevel](#uac-bypass-fodhelper-segitsegevel)
 - [Detektalni, amikor nem a bongeszo folyamata fer hozza a bongeszo credential storejahoz](#detektalni,-amikor-nem-a-bongeszo-folyamata-fer-hozza-a-bongeszo-credential-storejahoz)
 - [Szokatlan mennyisegu szolgaltatas jegy kerese](#szokatlan-mennyisegu-szolgaltatas-jegy-kerese)
-- [High Fidelity Suspicious Named Pipe Activity](#high-fidelity-suspicious-named-pipe-activity)
+- [Gyanús Named Pipe létrehozása (High Fidelity)](#gyanús-named-pipe-létrehozása-(high-fidelity))
 - [Adatok gyanús archiválása exfiltráció céljából](#adatok-gyanús-archiválása-exfiltráció-céljából)
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
@@ -523,12 +523,13 @@
 
 ---
 
-## High Fidelity Suspicious Named Pipe Activity
+## Gyanús Named Pipe létrehozása (High Fidelity)
 - **Azonosító:** `T1559_001.yaml`
-- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** High fidelity detection of suspicious named pipe creation or connection with minimal false positives, focusing on non-Microsoft signed binaries and abnormal pipe names.
-- **Hamis pozitívok:** Custom in-house software using random named pipes, Rare unsigned legacy applications
+- **Leírás:** Észleli a gyanús Named Pipe-ok létrehozását, amelyek gyakran támadó eszközökhöz (pl. Cobalt Strike, Metasploit, PoshC2)  vagy távoli parancsvégrehajtáshoz köthetők. A szabály a mintázatokra és a nem szabványos elérési utakra fókuszál.
+
+- **Hamis pozitívok:** Egyedi fejlesztésű szoftverek, amelyek véletlenszerű pipe-neveket használnak (pl. Google Chrome modulok), Bizonyos biztonsági szoftverek (pl. EDR ügynökök) belső kommunikációja
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook

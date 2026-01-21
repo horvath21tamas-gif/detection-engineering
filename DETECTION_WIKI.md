@@ -34,7 +34,7 @@
 - [UAC bypass Fodhelper segitsegevel](#uac-bypass-fodhelper-segitsegevel)
 - [Detektalni, amikor nem a bongeszo folyamata fer hozza a bongeszo credential storejahoz](#detektalni,-amikor-nem-a-bongeszo-folyamata-fer-hozza-a-bongeszo-credential-storejahoz)
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
-- [Gyanús Named Pipe létrehozása (High Fidelity)](#gyanús-named-pipe-létrehozása-(high-fidelity))
+- [Gyanús Named Pipe létrehozása (High Fidelity - Fixed)](#gyanús-named-pipe-létrehozása-(high-fidelity---fixed))
 - [Adatok gyanús archiválása exfiltráció céljából](#adatok-gyanús-archiválása-exfiltráció-céljából)
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
@@ -524,13 +524,13 @@
 
 ---
 
-## Gyanús Named Pipe létrehozása (High Fidelity)
+## Gyanús Named Pipe létrehozása (High Fidelity - Fixed)
 - **Azonosító:** `T1559_001.yaml`
-- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** Észleli a gyanús Named Pipe-ok létrehozását, amelyek gyakran támadó eszközökhöz (pl. Cobalt Strike, Metasploit, PoshC2)  vagy távoli parancsvégrehajtáshoz köthetők. A szabály a mintázatokra és a nem szabványos elérési utakra fókuszál.
+- **Leírás:** Javított verzió, amely kompatibilis a Splunk, Elastic, QRadar és NetWitness backendekkel.
 
-- **Hamis pozitívok:** Egyedi fejlesztésű szoftverek, amelyek véletlenszerű pipe-neveket használnak (pl. Google Chrome modulok), Bizonyos biztonsági szoftverek (pl. EDR ügynökök) belső kommunikációja
+- **Hamis pozitívok:** Egyedi fejlesztésű szoftverek
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook

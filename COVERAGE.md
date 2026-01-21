@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-21 09:35:57`
+**Utolsó frissítés:** `2026-01-21 09:41:41`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -53,7 +53,7 @@
 | T1548.002 | HIGH | UAC bypass Fodhelper segitsegevel |
 | T1555 | MEDIUM | Detektalni, amikor nem a bongeszo folyamata fer hozza a bongeszo credential storejahoz |
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |
-| T1559.001 | HIGH | Gyanús Named Pipe létrehozása (High Fidelity) |
+| T1559.001 | HIGH | Gyanús Named Pipe létrehozása (High Fidelity - Fixed) |
 | T1560.001 | HIGH | Adatok gyanús archiválása exfiltráció céljából |
 | T1562 | MEDIUM | egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani |
 | T1562.001 | CRITICAL | Ransomware elokeszites eszlelese, Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |

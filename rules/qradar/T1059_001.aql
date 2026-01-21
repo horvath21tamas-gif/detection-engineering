@@ -1,1 +1,1 @@
-SELECT UTF8(payload) as search_payload from events where ("Image" ILIKE ENUMERATION('%\powershell.exe','%\pwsh.exe','%\cmd.exe')) AND ("Process CommandLine" ILIKE ENUMERATION('%-enc%','%-encodedcommand%','%-EncodedCommand%'))
+SELECT UTF8(payload) as search_payload from events where (processname LIKE ('%\powershell.exe','%\pwsh.exe','%\cmd.exe')) AND (processcommandline LIKE ('%-enc%','%-encodedcommand%','%-EncodedCommand%')) 

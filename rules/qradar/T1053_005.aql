@@ -1,1 +1,1 @@
-SELECT UTF8(payload) as search_payload from events where "Image" ILIKE '%\schtasks.exe' AND "Process CommandLine" ILIKE '%/create%' AND "Process CommandLine" ILIKE '%powershell%'
+SELECT UTF8(payload) as search_payload from events where processname LIKE '%\schtasks.exe' AND processcommandline LIKE '%/create%' AND processcommandline LIKE '%powershell%' 

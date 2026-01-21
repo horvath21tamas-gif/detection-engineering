@@ -1,1 +1,1 @@
-SELECT UTF8(payload) as search_payload from events where "EventID"=4624 AND "Logon Type"=10 AND NOT ("Source IP" ILIKE ENUMERATION('10.%','192.168.%'))
+SELECT UTF8(payload) as search_payload from events where "EventID"=4624 AND "Logon Type"=10 AND NOT ("Source IP" LIKE ('10.%','192.168.%')) 

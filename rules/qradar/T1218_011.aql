@@ -1,1 +1,1 @@
-SELECT UTF8(payload) as search_payload from events where "Image" ILIKE '%\rundll32.exe' AND ("Process CommandLine" ILIKE ENUMERATION('%javascript%','%RunHTMLApplication%','%http://%','%https://%'))
+SELECT UTF8(payload) as search_payload from events where processname LIKE '%\rundll32.exe' AND (processcommandline LIKE ('%javascript%','%RunHTMLApplication%','%http://%','%https://%')) 

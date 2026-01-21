@@ -70,21 +70,19 @@ jobs:
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
             
-            # --- SPLUNK ---
-            # Megjegyzés: A 'windows' pipeline helyett a 'splunk_windows' a helyes
-            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
+            # SPLUNK - marad a megszokott
+            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl"
             
-            # --- QRADAR ---
-            # Megjegyzés: Ha elbukik a specifikus mappinggel, megpróbáljuk mapping nélkül (raw)
-            sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
-            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "⚠️ QRadar hiba: $file"
+            # QRADAR - Itt adjuk hozzá a saját szótárunkat a végére
+            sigma convert -t qradar -p qradar_windows -p tools/custom_pipeline.yml "$file" -o "rules/qradar/${filename}.aql" || \
+            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql"
             
-            # --- RSA NetWitness ---
-            # Megjegyzés: Itt is kivettük a hibás 'windows' pipeline-t
-            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
+            # RSA NETWITNESS - Itt is bevetjük a saját szótárat
+            sigma convert -t net_witness -p tools/custom_pipeline.yml "$file" -o "rules/netwitness/${filename}.txt" || \
+            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt"
             
-            # --- ELASTIC (Lucene) ---
-            sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "⚠️ Elastic hiba: $file"
+            # ELASTIC
+            sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql"
           done
       - name: Run Integrity Check
         run: |

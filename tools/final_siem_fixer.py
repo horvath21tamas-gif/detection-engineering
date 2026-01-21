@@ -1,81 +1,81 @@
 import os
 import re
 
-def expand_list_to_or_logic(field, values_str, operator="LIKE"):
-    """Szétbontja a listát (field OP 'v1' OR field OP 'v2') formára."""
-    values = [v.strip().strip("'").strip("%").strip("*") for v in values_str.split(',')]
-    # QRadarhoz LIKE '%érték%', NetWitnesshez = '*érték*'
+def expand_list(field, values_str, operator):
+    """Szétbontja a ('a','b') listát (field OP 'a' OR field OP 'b') formára."""
+    # Tisztítjuk az értékeket
+    values = [v.strip().strip("'").strip('"') for v in values_str.split(',')]
+    
+    # QRadar (LIKE) vagy NetWitness (=) formázás
     if operator == "LIKE":
-        or_chain = " OR ".join([f"{field} LIKE '%{v}%'" for v in values])
+        clauses = [f"{field} LIKE '%{v}%'" for v in values]
     else:
-        or_chain = " OR ".join([f"{field} = '*{v}*'" for f, v in zip([field]*len(values), values)])
-    return f"({or_chain})"
+        # NetWitness: a 'contains' és 'ends' helyett is '=' + wildcard
+        clauses = [f"{field} = '*{v}*'" for v in values]
+        
+    return "(" + " OR ".join(clauses) + ")"
 
 def fix_qradar(content):
-    # 1. Alapvető QRadar mezőnevek (DSM függő, de ezek a leggyakoribbak)
-    # Ha a processname nem jó, a "Filename" vagy a "Process Name" (idézőjelben) a befutó
-    mapping = {
-        'processname': '"Filename"',
-        'processcommandline': '"Process CommandLine"',
-        'username': '"UserName"',
-        '"Image"': '"Filename"',
-        '"Process CommandLine"': '"Process CommandLine"'
-    }
-    for old, new in mapping.items():
-        content = content.replace(old, new)
-
-    # 2. Tisztítás
-    content = content.replace("ENUMERATION", "").replace("ILIKE", "LIKE")
+    # 1. Dupla idézőjelek javítása (pl. ""UserName"" -> "UserName")
+    content = content.replace('""', '"')
     
-    # 3. Lista bontás: mező LIKE ('a','b') -> (mező LIKE '%a%' OR mező LIKE '%b%')
-    pattern = r'(\"?[a-zA-Z\s]+\"?)\s+LIKE\s+\(([^)]+)\)'
-    content = re.sub(pattern, lambda m: expand_list_to_or_logic(m.group(1), m.group(2), "LIKE"), content)
-
-    # 4. SELECT javítás
-    if "SELECT" not in content:
-        content = f"SELECT UTF8(payload), \"Filename\", \"Process CommandLine\" FROM events WHERE {content}"
+    # 2. Maradék LIKE ('a','b') listák javítása
+    # Ez kezeli a NOT ("UserName" LIKE ('%SYSTEM%')) részt is
+    pattern = r'("[a-zA-Z\s]+")\s+LIKE\s+\(([^)]+)\)'
+    content = re.sub(pattern, lambda m: expand_list(m.group(1), m.group(2), "LIKE"), content)
+    
+    # 3. SELECT tisztítása (ha kétszer szerepelne)
+    if content.count("SELECT") > 1:
+        content = "SELECT " + content.split("SELECT")[-1]
     
     return content
 
 def fix_netwitness(content):
-    # NetWitness-nél nincs CONTAINS, helyette mező = '*érték*'
-    # 1. Mezőnevek fixálása
+    # 1. Alapvető operátor cserék: contains -> =, ends -> =, && -> AND, || -> OR
+    content = content.replace(" && ", " AND ").replace(" || ", " OR ")
+    
+    # 2. Mezőnevek fixálása (ha a Sigma benne hagyta az eredetit)
     mapping = {
         "Image": "process",
         "CommandLine": "param",
-        "username": "user.dst",
-        "CONTAINS": "=" # Ez a legfontosabb javítás
+        "User": "user.dst"
     }
     for old, new in mapping.items():
         content = content.replace(old, new)
 
-    # 2. Lista bontás NetWitnessre: mező = ('a','b') -> (mező = '*a*' OR mező = '*b*')
-    pattern = r'(\w+)\s+=\s+\(([^)]+)\)'
-    content = re.sub(pattern, lambda m: expand_list_to_or_logic(m.group(1), m.group(2), "="), content)
-
-    # 3. Wildcard javítás: % -> *
-    content = content.replace("%", "*")
+    # 3. Lista bontás: (field operator 'val1','val2'...) -> (field = '*val1*' OR field = '*val2*')
+    # Ez felismeri a: (process ends 'a','b') és a (param contains 'a','b') mintákat is
+    pattern = r'([a-z.0-9]+)\s+(?:ends|contains|=)\s+\(([^)]+)\)'
     
-    # Felesleges LIKE-ok törlése, ha maradtak volna
-    content = content.replace("LIKE", "=")
+    def nw_replacer(match):
+        field = match.group(1)
+        values_str = match.group(2)
+        return expand_list(field, values_str, "=")
+
+    content = re.sub(pattern, nw_replacer, content)
+    
+    # 4. Magányos 'contains' és 'ends' javítása (ha nincs lista, csak egy érték)
+    # pl: process ends '\schtasks.exe' -> process = '*\schtasks.exe*'
+    content = re.sub(r"(\w+)\s+(?:ends|contains)\s+'([^']+)'", r"\1 = '*\2*'", content)
+
     return content
 
 def process_files():
-    # QRadar (.aql)
+    # QRadar javítás
     if os.path.exists('rules/qradar'):
         for f in os.listdir('rules/qradar'):
             if f.endswith('.aql'):
                 p = os.path.join('rules/qradar', f)
-                with open(p, 'r') as file: data = file.read()
-                with open(p, 'w') as file: file.write(fix_qradar(data))
+                with open(p, 'r', encoding='utf-8') as file: data = file.read()
+                with open(p, 'w', encoding='utf-8') as file: file.write(fix_qradar(data))
 
-    # NetWitness (.txt)
+    # NetWitness javítás
     if os.path.exists('rules/netwitness'):
         for f in os.listdir('rules/netwitness'):
             if f.endswith('.txt'):
                 p = os.path.join('rules/netwitness', f)
-                with open(p, 'r') as file: data = file.read()
-                with open(p, 'w') as file: file.write(fix_netwitness(data))
+                with open(p, 'r', encoding='utf-8') as file: data = file.read()
+                with open(p, 'w', encoding='utf-8') as file: file.write(fix_netwitness(data))
 
 if __name__ == "__main__":
     process_files()

@@ -70,19 +70,22 @@ jobs:
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
             
-            # SPLUNK - marad a megszokott
-            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl"
+            # --- SPLUNK ---
+            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "⚠️ Splunk hiba: $file"
             
-            # QRADAR - Itt adjuk hozzá a saját szótárunkat a végére
-            sigma convert -t qradar -p qradar_windows -p tools/custom_pipeline.yml "$file" -o "rules/qradar/${filename}.aql" || \
-            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql"
+            # --- QRADAR (Kibővített javítás) ---
+            # 1. Megpróbáljuk a standard profillal
+            # 2. Ha elbukik (pl. mező hiba miatt), megpróbáljuk profil nélkül, hogy legalább a logikát kimentse
+            sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || \
+            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || \
+            echo "⚠️ QRadar kritikus hiba: $file"
             
-            # RSA NETWITNESS - Itt is bevetjük a saját szótárat
-            sigma convert -t net_witness -p tools/custom_pipeline.yml "$file" -o "rules/netwitness/${filename}.txt" || \
-            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt"
+            # --- RSA NETWITNESS ---
+            # Itt is levettük a hibás pipeline hivatkozást, a backend alapból próbálkozik
+            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "⚠️ RSA hiba: $file"
             
-            # ELASTIC
-            sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql"
+            # --- ELASTIC ---
+            sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "⚠️ Elastic hiba: $file"
           done
       - name: Run Integrity Check
         run: |

@@ -1,1 +1,1 @@
-((Image = '*\mshta.exe*')AND ((CommandLine = '*http://*' OR CommandLine = '*https://*'))) AND (NOT ((username = '*SYSTEM*')))
+((Image = '*\mshta.exe*')&& ((CommandLine = '*http://*' OR CommandLine = '*https://*'))) AND (NOT ((user.dst = '*SYSTEM*')))

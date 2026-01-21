@@ -1,1 +1,1 @@
-(Image = '*msiexec.exe*')AND ((CommandLine = '*http://*' OR CommandLine = '*https://*' OR CommandLine = '*/i*'))
+(Image = '*msiexec.exe*')&& ((CommandLine = '*http://*' OR CommandLine = '*https://*' OR CommandLine = '*/i*'))

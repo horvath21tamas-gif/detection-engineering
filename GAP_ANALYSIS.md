@@ -1,5 +1,5 @@
 # 🎯 Detection Strategy & Gap Analysis
-*Frissítve: 2026-01-21 13:24:52*
+*Frissítve: 2026-01-21 13:29:04*
 
 ## 📊 Állapotösszegző
 | Mutató | Érték |

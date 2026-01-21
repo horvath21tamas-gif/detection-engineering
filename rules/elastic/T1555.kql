@@ -1,0 +1,1 @@
+(winlog.event_data.TargetFileName:(*\\User\ Data\\* OR *Login\ Data*)) AND (NOT (process.executable:(*\\chrome.exe OR *\\msedge.exe OR *\\brave.exe OR *\\firefox.exe)))

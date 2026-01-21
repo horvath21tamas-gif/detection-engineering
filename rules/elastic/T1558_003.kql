@@ -1,0 +1,1 @@
+winlog.channel:Security AND ((event.code:4769 AND winlog.event_data.Status:0x0 AND (winlog.event_data.TicketEncryptionType:(0x17 OR 0x1 OR 0x3))) AND (NOT (winlog.event_data.TargetUserName:*$ OR (winlog.event_data.ServiceCode:0x11 AND service.name:*$) OR (source.ip:(\:\:1 OR 127.0.0.1)))))

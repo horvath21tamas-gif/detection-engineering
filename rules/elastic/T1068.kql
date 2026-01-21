@@ -1,0 +1,1 @@
+((process.parent.executable:(*\\explorer.exe OR *\\chrome.exe OR *\\brave.exe)) AND (process.executable:(*\\cmd.exe OR *\\powershell.exe))) AND user.name:*SYSTEM\\*

@@ -1,0 +1,1 @@
+winlog.event_data.ServiceName:*PSEXECSVC* AND winlog.event_data.Computer:MGMT\-*

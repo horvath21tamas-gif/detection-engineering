@@ -1,0 +1,1 @@
+(process.executable:*\\mshta.exe AND (process.command_line:(*http\:\/\/* OR *https\:\/\/*))) AND (NOT user.name:SYSTEM)

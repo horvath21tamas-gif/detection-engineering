@@ -1,0 +1,1 @@
+(event.code:4624 AND winlog.event_data.LogonType:10) AND (NOT (source.ip:(10.* OR 192.168.*)))

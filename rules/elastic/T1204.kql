@@ -1,0 +1,1 @@
+(process.parent.executable:(*\\WINWORD.EXE OR *\\EXCEL.EXE OR *\\POWERPNT.EXE OR *\\OUTLOOK.EXE OR *\\MSACCESS.EXE)) AND (process.executable:(*\\cmd.exe OR *\\powershell.exe OR *\\pwsh.exe OR *\\mshta.exe OR *\\rundll32.exe OR *\\regsvr32.exe OR *\\bitsadmin.exe OR *\\certutil.exe))

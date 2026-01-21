@@ -1,0 +1,1 @@
+(event.code:(7036 OR 7040)) AND (NOT (user.name:(SYSTEM OR LOCAL\ SERVICE OR NETWORK\ SERVICE)))

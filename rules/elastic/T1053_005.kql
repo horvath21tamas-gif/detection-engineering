@@ -1,0 +1,1 @@
+(process.executable:*\\schtasks.exe AND process.command_line:*\/create*) AND process.command_line:*powershell*

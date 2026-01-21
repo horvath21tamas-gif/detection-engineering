@@ -1,0 +1,1 @@
+(cs-method:(POST OR PUT)) AND (cs-uri-stem:(*.php OR *.asp OR *.aspx OR *.jsp OR *.phtml)) AND (cs-uri-query:(*cmd\= OR *exec\= OR *powershell\= OR *whoami OR *net\ user OR *command\= OR *shell OR *curl OR *wget))

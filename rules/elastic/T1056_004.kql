@@ -1,0 +1,1 @@
+(file.path:(*\\user32.dll OR *\\advapi32.dll OR *\\win32u.dll)) AND process.executable:*.exe AND (NOT (process.executable:(C\:\\Windows\\System32\\* OR C\:\\Windows\\SysWOW64\\*))) AND (NOT (process.executable:(*\\explorer.exe OR *\\chrome.exe OR *\\msedge.exe OR *\\firefox.exe OR *\\teams.exe)))

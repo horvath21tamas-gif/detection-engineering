@@ -1,0 +1,1 @@
+process.executable:*\\rundll32.exe AND (process.command_line:(*javascript* OR *RunHTMLApplication* OR *http\:\/\/* OR *https\:\/\/*))

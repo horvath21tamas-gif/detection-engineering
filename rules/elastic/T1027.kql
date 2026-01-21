@@ -1,0 +1,1 @@
+((process.executable:(*\\powershell.exe OR *\\pwsh.exe)) AND (process.command_line:(*\-enc* OR *\-encodedcommand*))) AND (process.command_line:(*Invoke\-WebRequest* OR *iwr* OR *wget* OR *curl* OR *DownloadString* OR *DownloadFile* OR *Net.WebClient*))

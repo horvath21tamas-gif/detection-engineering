@@ -1,0 +1,1 @@
+(process.executable:(*\\powershell.exe OR *\\bitsadmin.exe OR *\\certutil.exe)) AND (winlog.event_data.Commandline:(*Invoke\-WebRequest* OR *IEX* OR *DownloadFile*))

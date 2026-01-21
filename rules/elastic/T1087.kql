@@ -1,0 +1,1 @@
+(process.executable:*\\cmd.exe AND (process.command_line:(*net\ user* OR *net\ localgroup*))) AND (NOT user.name:SYSTEM)

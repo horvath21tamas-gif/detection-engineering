@@ -1,0 +1,1 @@
+registry.path:*\\Software\\Classes\\CLSID* AND (registry.path:(*InprocServer32 OR *LocalServer32)) AND (winlog.event_data.Details:(*\\Users\\* OR *\\AppData\\* OR *\\Temp\\* OR *ProgramData*)) AND (NOT user.name:SYSTEM) AND (NOT winlog.event_data.Details:C\:\\Windows\\System32*)

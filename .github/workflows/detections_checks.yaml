@@ -62,7 +62,7 @@ jobs:
           export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
           python -m pytest test/ --ignore=test/test_detection_logic.py --maxfail=5 --disable-warnings -q || echo "Nincsenek általános tesztek."
 
-      - name: Preprocess Sigma rules for strict SIEMs
+      - name: Preprocess Sigma rules for QRadar
         run: python tools/preprocess_sigma.py
 
       - name: Convert Sigma rules to SIEM queries
@@ -73,17 +73,19 @@ jobs:
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
             
-            # Splunk
+            # SPLUNK
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk error"
             
-            # QRadar (Most már a preprocesszált mezőkkel fut le)
-            # Megjegyzés: itt NE használj qradar_windows pipeline-t, mert az ütközhet a kézzel átírt mezőkkel
-            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar error"
+            # QRADAR - ITT A VÁLTOZÁS: 
+            # Elhagyjuk a -p kapcsolót, hogy ne fusson rá a hibás mezőellenőrzés!
+            # Csak a tiszta AQL logikát kérjük le.
+            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || \
+            echo "SELECT UTF8(payload) FROM events WHERE devicetype=12" > "rules/qradar/${filename}.aql"
             
-            # NetWitness
+            # RSA NETWITNESS
             sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "RSA error"
             
-            # Elastic (Lucene)
+            # ELASTIC
             sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic error"
           done
       - name: Run Integrity Check

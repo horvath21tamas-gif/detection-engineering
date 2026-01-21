@@ -1,28 +1,72 @@
-title: Detektalni, amikor egy tamado megprobalja kikapcsolni a Windows funkcioit powershellbol
-id: 'e38eec19-9090-4c18-9ec5-0f1f9191bb2c'
-status: experimental
-description: Egy tamado megprobalja kikapcsolni a Windows funkcioit poweshellbol
+title: Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével
+id: e38eec19-9090-4c18-9ec5-0f1f9191bb2c
+status: stable
+description: >
+  Észleli, amikor a támadók PowerShell segítségével próbálják megváltoztatni a Windows Defender beállításait, 
+  például a valós idejű védelem kikapcsolásával vagy kivételek hozzáadásával. Ez a technika a védelem megkerülésére szolgál.
 author: hota05
-date: 2026/01/13
+date: 2026/01/21
+references:
+  - https://attack.mitre.org/techniques/T1562/001/
+  - https://docs.microsoft.com/en-us/powershell/module/defender/set-mppreference
+tags:
+  - attack.defense_evasion
+  - attack.t1562.001
+
 logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection:
-    Image|endswith: 
-      - '\powershell.exe'
-      - '\pwsh.exe'
+  selection_ps:
+    - Image|endswith: 
+        - '\powershell.exe'
+        - '\pwsh.exe'
+        - '\powershell_ise.exe'
+    - OriginalFileName: 
+        - 'PowerShell.EXE'
+        - 'pwsh.dll'
+        - 'powershell_ise.EXE'
+
+  selection_cmd:
     CommandLine|contains:
-      - "Set-MpPreference"
-      - "Add-MpPreference"
-      - "DisableRealtimeMonitoring"
-      - "ExclusionPath"
-  filter_system:
-    User: "SYSTEM"
-  condition: selection and not filter_system
-level: medium
-tags: 
-  - attack.t1562.001
+      - 'Set-MpPreference'
+      - 'Add-MpPreference'
+
+  selection_params:
+    CommandLine|contains:
+      - 'DisableRealtimeMonitoring'
+      - 'DisableBehaviorMonitoring'
+      - 'DisableIOAVProtection'
+      - 'ExclusionPath'
+      - 'ExclusionExtension'
+      - 'ExclusionProcess'
+      - 'MAPSReporting'
+      - 'SubmitSamplesConsent'
+
+  selection_values:
+    CommandLine|contains:
+      - '1'
+      - '$true'
+      - 'NeverSend'
+
+  selection_obfuscation:
+    CommandLine|contains:
+      - ' -disablere'
+      - ' -excl'
+
+  condition: selection_ps and ( (selection_cmd and (selection_params or selection_values)) or selection_obfuscation ) and not filter_legit
+
+  filter_legit:
+    ParentImage|endswith:
+      - '\CcmExec.exe'
+      - '\Gpscript.exe' # Group Policy script végrehajtás
+    CommandLine|contains:
+      - 'Specific_Safe_Admin_Script.ps1' # Ide írd a saját legális szkripted nevét
+
 falsepositives:
-  - admin scriptet futtat
-  - IT security update
+  - Központilag kezelt biztonsági beállítások módosítása Group Policy-n keresztül
+  - IT biztonsági csapat által végzett tesztelés vagy karbantartás
+  - Szoftvertelepítők, amelyek automatikusan adnak hozzá kivételeket (pl. SQL Server)
+
+level: high

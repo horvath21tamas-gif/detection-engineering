@@ -31,10 +31,9 @@ jobs:
       - name: Install dependencies (Phase 1)
         run: |
           python -m pip install --upgrade pip
-          # A pyparsing 3.1.1 kényszerítése az ImportError elkerülése érdekében
-          python -m pip install "pyparsing==3.1.1" "pysigma>=1.1.0" "packaging>=25.0" sigma-cli
+          # Fixáljuk a pysigma és pyparsing párost, amik még ismerik egymást
+          python -m pip install "pyparsing==3.1.1" "pysigma==1.0.12" "packaging>=24.0" sigma-cli
           sigma plugin install splunk sysmon windows netwitness elasticsearch
-          # Sentinel backend telepítése pip-en keresztül
           python -m pip install pysigma-backend-azure
 
       - name: Update Dynamic Inventory from SIEM
@@ -84,7 +83,7 @@ jobs:
       - name: Re-install for Phase 2 (QRadar)
         run: |
           python -m pip uninstall -y pysigma pyparsing packaging sigma-cli
-          # Itt is kényszerítjük a pyparsing==3.1.1-et a QRadar mellé
+          # A QRadar-nak még régebbi pysigma kell, de a pyparsing maradjon 3.1.1
           python -m pip install "pyparsing==3.1.1" "pysigma==0.9.11" "sigma-cli==2.0.1" pysigma-backend-qradar
 
       - name: Convert Sigma rules (Phase 2)

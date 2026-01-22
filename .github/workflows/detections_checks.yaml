@@ -33,9 +33,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
-          # A pontos csomagnév: pysigma-backend-azure-sentinel
-          python -m pip install pysigma-backend-azure-sentinel
           
+          # A pontos, jelenleg elérhető csomagnév a PyPI-n:
+          python -m pip install pysigma-backend-sentinel
+          
+          # A többi plugin marad a régiben
           sigma plugin install splunk sysmon windows netwitness elasticsearch
           sigma plugin install --force-install qradar || echo "QRadar forced"
           python -m pip install --upgrade "pysigma>=1.1.0" "pyparsing>=3.0.0" sigma-cli

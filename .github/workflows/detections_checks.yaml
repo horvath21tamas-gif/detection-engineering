@@ -31,7 +31,6 @@ jobs:
       - name: Install dependencies (Phase 1: QRadar - The Stable Base)
         run: |
           python -m pip install --upgrade pip
-          # Kezdünk a legrégebbi szükséges verziókkal
           python -m pip install "pyparsing==3.1.1" "pysigma==0.9.11" "packaging<23.0"
           python -m pip install --no-deps sigma-cli==2.0.1
           python -m pip install "click>=8.0.0" "colorama>=0.4.6" "prettytable>=3.0.0"
@@ -53,9 +52,8 @@ jobs:
 
       - name: Upgrade dependencies (Phase 2: Modern SIEMs)
         run: |
-          # Frissítünk a 0.11.23-ra, ami már tudja a modern backendeket, de még nem töri el a pyparsing-et
+          # Frissítünk a 0.11.23-ra, ami már tudja a modern backendeket
           python -m pip install --upgrade "pysigma==0.11.23" "packaging>=24.0"
-          # Pluginok telepítése
           sigma plugin install -f splunk sysmon windows netwitness elasticsearch
           python -m pip install pysigma-backend-azure
 
@@ -114,7 +112,7 @@ jobs:
           git add DETECTION_WIKI.md GAP_ANALYSIS.md rule_scores.json
           git add attack_navigator_layer.json COVERAGE.md README.md *.svg
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update rules and documentation (Sequential Upgrade Mode)"
+            git commit -m "Auto-update: Sequential conversion flow (QRadar first)"
             git pull --rebase -X ours origin test
             git push origin test
           fi

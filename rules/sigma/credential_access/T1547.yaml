@@ -1,0 +1,59 @@
+title: Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása
+id: 779a7033-7b23-4dc2-8249-b563cc5716b0
+status: experimental
+description: Észleli a gyanús beállításjegyzékbeli vagy indítómappák módosításait, amelyeket az adatok megőrzése érdekében használnak, a nem szabványos elérési utakra és a gyanús végrehajtókra összpontosítva.
+references:
+    - https://attack.mitre.org/techniques/T1547/001/
+author: hota05
+date: 2024/05/22
+tags:
+    - attack.persistence
+    - attack.t1547.001
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    # 1. Gyanús folyamatok, amik autostart bejegyzést hozhatnak létre
+    selection_executors:
+        Image|endswith:
+            - '\reg.exe'
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+            - '\schtasks.exe'
+    
+    # 2. Célpont kulcsok és útvonalak a parancssorban
+    selection_targets:
+        CommandLine|contains:
+            - '\Microsoft\Windows\CurrentVersion\Run'
+            - '\Microsoft\Windows\CurrentVersion\RunOnce'
+            - '\Microsoft\Windows\CurrentVersion\RunService'
+            - '\Group Policy\Scripts'
+            - '\Start Menu\Programs\Startup'
+    
+    # 3. Gyanús indítási útvonalak (False Positive csökkentés)
+    # Csak akkor riaszt, ha a futtatandó fájl gyanús helyen van
+    selection_suspicious_paths:
+        CommandLine|contains:
+            - '\AppData\Local\Temp\'
+            - '\Users\Public\'
+            - '\ProgramData\'
+            - 'C:\Windows\Temp\'
+            - 'http'  # Letöltő script indítása indításkor
+    
+    # Kizárások a False Positive-ok ellen (Legális szoftverek)
+    filter_legitimate:
+        CommandLine|contains:
+            - '\Microsoft\Windows\CloudExperienceHost'
+            - 'OneDrive.exe'
+            - 'Teams.exe'
+            - 'AdobeCollabSync.exe'
+            - 'GoogleUpdate.exe'
+    
+    condition: (selection_executors and selection_targets and selection_suspicious_paths) and not filter_legitimate
+falsepositives:
+    - Szoftverfrissítők, amelyek ideiglenes mappából futtatnak telepítőt a következő bejelentkezéskor.
+    - Egyedi vállalati scriptek a Startup mappában.
+level: high

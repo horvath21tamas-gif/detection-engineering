@@ -1,1 +1,1 @@
-((((((((process = '*\\\\\\\\\\\\\\\\rundll32.exe*'))))))))&& (((((((((param = '*javascript*'))))))OR ((((((param = '*RunHTMLApplication*'))))))OR ((((((param = '*http://*'))))))OR ((((((param = '*https://*')))))))))
+((((((((((process = '*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\rundll32.exe*'))))))))))&& (((((((((((param = '*javascript*'))))))))OR ((((((((param = '*RunHTMLApplication*'))))))))OR ((((((((param = '*http://*'))))))))OR ((((((((param = '*https://*')))))))))))

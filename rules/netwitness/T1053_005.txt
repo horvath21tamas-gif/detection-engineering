@@ -1,1 +1,1 @@
-(((((((((process = '*\\\\\\\\\\\\\\\\schtasks.exe*'))))))))&& ((((((((param = '*/create*'))))))))) AND ((((((((param = '*powershell*'))))))))
+(((((((((((process = '*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\schtasks.exe*'))))))))))&& ((((((((((param = '*/create*'))))))))))) AND ((((((((((param = '*powershell*'))))))))))

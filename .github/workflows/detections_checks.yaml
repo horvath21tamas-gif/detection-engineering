@@ -15,7 +15,7 @@ env:
   PYTHONDONTWRITEBYTECODE: 1
 
 jobs:
-  # 1. JOB: QRadar konverzió egy tiszta, izolált gépen
+  # 1. JOB: QRadar konverzió (Stabil középút a függőségekben)
   qradar_job:
     runs-on: ubuntu-latest
     steps:
@@ -30,7 +30,8 @@ jobs:
       - name: Install QRadar environment
         run: |
           python -m pip install --upgrade pip
-          python -m pip install "pyparsing==3.1.1" "pysigma==0.9.11" "packaging<23.0"
+          # 0.10.11 kell, mert ebben már benne van a sigma.correlations, amit a CLI keres
+          python -m pip install "pyparsing==3.1.1" "pysigma==0.10.11" "packaging<23.0"
           python -m pip install --no-deps sigma-cli==2.0.1
           python -m pip install "click>=8.0.0" "colorama>=0.4.6" "prettytable>=3.0.0"
           python -m pip install pysigma-backend-qradar
@@ -41,6 +42,7 @@ jobs:
           for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
+            # A CLI most már látni fogja a correlations modult
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "Skip: $file"
           done
 
@@ -51,7 +53,7 @@ jobs:
           path: rules/qradar/
           retention-days: 1
 
-  # 2. JOB: Minden egyéb SIEM és dokumentáció generálás egy másik gépen
+  # 2. JOB: Modern SIEM-ek (Legfrissebb verziók, javított pyparsing-el)
   modern_siem_job:
     needs: qradar_job
     runs-on: ubuntu-latest
@@ -78,8 +80,11 @@ jobs:
           python -m pip install "pyparsing==3.1.1" "pysigma==0.11.23" "packaging>=24.0"
           python -m pip install --no-deps sigma-cli==2.0.1
           python -m pip install "click>=8.0.0" "colorama>=0.4.6" "prettytable>=3.0.0"
+          
+          # Plugin telepítés után kényszerítjük a jó pyparsing verziót (ez javítja a Set import hibát)
           sigma plugin install -f splunk sysmon windows netwitness elasticsearch
           python -m pip install pysigma-backend-azure
+          python -m pip install --force-reinstall "pyparsing==3.1.1"
 
       - name: Update and Validate
         run: |
@@ -120,7 +125,7 @@ jobs:
           git add DETECTION_WIKI.md GAP_ANALYSIS.md rule_scores.json
           git add attack_navigator_layer.json COVERAGE.md README.md *.svg
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Split runner pipeline (QRadar + Modern)"
+            git commit -m "Auto-update: Fixed dependencies for QRadar and pyparsing"
             git pull --rebase -X ours origin test
             git push origin test
           fi

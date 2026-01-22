@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - test
-  pull_request: 
+  pull_request:
     branches:
       - test
 
@@ -15,20 +15,19 @@ env:
   PYTHONDONTWRITEBYTECODE: 1
 
 jobs:
-  detection_pipeline:
+  # 1. JOB: QRadar konverzió egy tiszta, izolált gépen
+  qradar_job:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install dependencies (Phase 1)
+      - name: Install QRadar environment
         run: |
           python -m pip install --upgrade pip
           python -m pip install "pyparsing==3.1.1" "pysigma==0.9.11" "packaging<23.0"
@@ -36,71 +35,82 @@ jobs:
           python -m pip install "click>=8.0.0" "colorama>=0.4.6" "prettytable>=3.0.0"
           python -m pip install pysigma-backend-qradar
 
-      - name: Update Dynamic Inventory
+      - name: Convert QRadar rules
         run: |
-          mkdir -p inventory
-          python tools/update_inventory.py
-
-      - name: Convert Sigma rules (Phase 1 QRadar)
-        run: |
-          mkdir -p rules/splunk rules/qradar rules/netwitness rules/elastic rules/sentinel
+          mkdir -p rules/qradar
           for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
-            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar error on $file"
+            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "Skip: $file"
           done
 
-      - name: Upgrade dependencies (Phase 2)
+      - name: Upload QRadar rules as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: qradar-results
+          path: rules/qradar/
+          retention-days: 1
+
+  # 2. JOB: Minden egyéb SIEM és dokumentáció generálás egy másik gépen
+  modern_siem_job:
+    needs: qradar_job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download QRadar artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: qradar-results
+          path: rules/qradar/
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Modern SIEM environment
         run: |
-          python -m pip install --upgrade "pysigma==0.11.23" "packaging>=24.0"
+          python -m pip install --upgrade pip
+          python -m pip install "pyparsing==3.1.1" "pysigma==0.11.23" "packaging>=24.0"
+          python -m pip install --no-deps sigma-cli==2.0.1
+          python -m pip install "click>=8.0.0" "colorama>=0.4.6" "prettytable>=3.0.0"
           sigma plugin install -f splunk sysmon windows netwitness elasticsearch
           python -m pip install pysigma-backend-azure
 
-      - name: Smart Validation and Auto-fix
-        id: validate_step
+      - name: Update and Validate
         run: |
+          mkdir -p inventory rules/splunk rules/netwitness rules/elastic rules/sentinel
+          python tools/update_inventory.py
           python tools/validate_rules.py || echo "VALIDATION_FAILED=true" >> $GITHUB_ENV
-
-      - name: Log Source Validation
-        run: |
           python tools/check_log_sources.py
+          python tools/preprocess_sigma.py
 
-      - name: Preprocess Sigma rules
-        run: python tools/preprocess_sigma.py
-
-      - name: Convert Sigma rules (Phase 2)
+      - name: Convert Modern SIEM rules
         run: |
           for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
-            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk error on $file"
-            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "RSA error on $file"
-            sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic error on $file"
-            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "Sentinel error on $file"
+            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Error $file"
+            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "Error $file"
+            sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Error $file"
+            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "Error $file"
           done
 
-      - name: Final SIEM Query Fixer
+      - name: Post-processing and Docs
+        if: github.event_name == 'push'
         run: |
           python tools/final_siem_fixer.py
-
-      - name: Run Integrity Check
-        run: python tools/check_integrity.py
-
-      - name: Calculate Rule Scores
-        if: github.event_name == 'push'
-        run: python tools/score_rules.py
-
-      - name: Generate MITRE Layer and Docs
-        if: github.event_name == 'push'
-        run: |
+          python tools/check_integrity.py
+          python tools/score_rules.py
           python tools/generate_nav_layer.py
           python tools/generate_docs.py
           python tools/gap_analysis.py
+          python tools/update_all.py
 
-      - name: Update Dashboard
-        if: github.event_name == 'push'
-        run: python tools/update_all.py
-          
       - name: Commit and push changes
         if: github.event_name == 'push'
         run: |
@@ -110,15 +120,14 @@ jobs:
           git add DETECTION_WIKI.md GAP_ANALYSIS.md rule_scores.json
           git add attack_navigator_layer.json COVERAGE.md README.md *.svg
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Sequential conversion flow"
+            git commit -m "Auto-update: Split runner pipeline (QRadar + Modern)"
             git pull --rebase -X ours origin test
             git push origin test
           fi
 
-      - name: Check Validation Status
+      - name: Check Status
         if: always()
         run: |
           if [ "${{ env.VALIDATION_FAILED }}" == "true" ]; then
-            echo "❌ A validáció kritikus hibákat talált korábban."
             exit 1
           fi

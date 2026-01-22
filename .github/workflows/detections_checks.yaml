@@ -32,10 +32,9 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # A requirements.txt-ben benne kell legyen a pysigma-backend-elasticsearch!
           python -m pip install -r requirements.txt
-          sigma plugin install splunk sysmon windows netwitness elasticsearch
-          sigma plugin install microsoft-sentinel  # ÚJ: Sentinel plugin telepítése
+          # A microsoft-sentinel helyett csak a 'sentinel' azonosítót használjuk
+          sigma plugin install splunk sysmon windows netwitness elasticsearch sentinel
           sigma plugin install --force-install qradar || echo "QRadar forced"
           python -m pip install --upgrade "pysigma>=1.1.0" "pyparsing>=3.0.0" sigma-cli
 

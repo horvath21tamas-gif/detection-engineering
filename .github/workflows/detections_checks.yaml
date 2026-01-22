@@ -35,6 +35,7 @@ jobs:
           # A requirements.txt-ben benne kell legyen a pysigma-backend-elasticsearch!
           python -m pip install -r requirements.txt
           sigma plugin install splunk sysmon windows netwitness elasticsearch
+          sigma plugin install microsoft-sentinel  # ÚJ: Sentinel plugin telepítése
           sigma plugin install --force-install qradar || echo "QRadar forced"
           python -m pip install --upgrade "pysigma>=1.1.0" "pyparsing>=3.0.0" sigma-cli
 
@@ -67,7 +68,7 @@ jobs:
 
       - name: Convert Sigma rules to SIEM queries
         run: |
-          mkdir -p rules/splunk rules/qradar rules/netwitness rules/elastic
+          mkdir -p rules/splunk rules/qradar rules/netwitness rules/elastic rules/sentinel
           
           for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
             filename=$(basename "$file" .yaml)
@@ -84,6 +85,9 @@ jobs:
             
             # ELASTIC
             sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic error"
+
+            # SENTINEL (ÚJ)
+            sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "Sentinel error"
           done
 
       - name: Final SIEM Query Fixer (QRadar & NetWitness)
@@ -120,7 +124,7 @@ jobs:
           git add attack_navigator_layer.json COVERAGE.md README.md *.svg
           
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Elastic (ELK) support, Dynamic Inventory & Docs"
+            git commit -m "Auto-update: Elastic (ELK) & Sentinel support, Dynamic Inventory & Docs"
             git pull --rebase -X ours origin test
             git push origin test
           else

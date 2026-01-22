@@ -33,16 +33,16 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
           
-          # 1. Telepítjük a Sentinel-t (amihez kell a 3.11)
-          python -m pip install pysigma-backend-microsoft-sentinel
+          # 1. Telepítjük a sigma-cli-t és az alapokat
+          python -m pip install "pysigma>=1.1.0" sigma-cli
           
-          # 2. Telepítjük a többi plugint
+          # 2. A sigma-cli-vel telepítjük a sentinel-t (ez a legmegbízhatóbb út)
+          # A plugin neve a belső registry-ben: 'sentinel'
+          sigma plugin install sentinel
+          
+          # 3. Telepítjük a többit
           sigma plugin install splunk sysmon windows netwitness elasticsearch
-          
-          # 3. A QRadar-t kényszerítve telepítjük, hogy ne akadjon össze a verziókkal
-          sigma plugin install --force-install qradar || echo "QRadar install failed, trying pip..."
-          # Ha a plugin install nem menne, a pip-es közvetlen telepítés a mentőöv:
-          python -m pip install pysigma-backend-qradar
+          sigma plugin install --force-install qradar || echo "QRadar forced"
 
       - name: Update Dynamic Inventory from SIEM
         run: |

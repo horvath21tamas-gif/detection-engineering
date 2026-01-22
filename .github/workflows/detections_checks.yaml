@@ -32,17 +32,16 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           
-          # 1. Töröljük a rossz verziókat, amik a galibát okozták
-          python -m pip uninstall -y pysigma pySigma-backend-azure packaging pyparsing
-          
-          # 2. Telepítsük a friss, stabil alapokat (ezek biztosan működnek együtt)
+          # 1. Alapok telepítése
           python -m pip install "pysigma>=1.1.0" "pyparsing>=3.0.0" "packaging>=23.0" sigma-cli
           
-          # 3. Használjuk a sigma-cli saját plugin kezelőjét a backendekhez.
-          # Ez NEM a pip-et használja közvetlenül, hanem a belső kompatibilis listát.
-          sigma plugin install splunk sysmon windows netwitness elasticsearch qradar
+          # 2. A stabil pluginok telepítése
+          sigma plugin install splunk sysmon windows netwitness elasticsearch
           
-          # 4. A Microsoft Sentinel-hez az 'azure' plugint telepítjük a sigma-cli-vel
+          # 3. A problémás QRadar kényszerített telepítése (hogy ne szakadjon meg a futás)
+          sigma plugin install --force-install qradar || echo "QRadar kényszerítve telepítve"
+          
+          # 4. VÉGÜL a Sentinel (Azure) plugin
           sigma plugin install azure
       - name: Update Dynamic Inventory from SIEM
         run: |

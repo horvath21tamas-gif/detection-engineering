@@ -13,7 +13,7 @@ env:
   PYTHONDONTWRITEBYTECODE: 1
 
 jobs:
-  # 1. JOB: QRadar - Izolált környezet, közvetlen Python hívással
+  # 1. JOB: QRadar - Speciális, robusztus konverzió régi függőségekkel
   qradar_job:
     runs-on: ubuntu-latest
     steps:
@@ -28,34 +28,55 @@ jobs:
       - name: Install QRadar environment
         run: |
           python -m pip install --upgrade pip
-          # Csak a minimálisan szükséges csomagok, CLI nélkül
           python -m pip install "pyparsing==3.1.1" "pysigma==0.9.11" "pysigma-backend-qradar"
 
-      - name: Convert QRadar rules (Direct Script Mode)
+      - name: Convert QRadar rules (Dynamic Class Discovery)
         run: |
           mkdir -p rules/qradar
           cat <<EOF > convert_qradar.py
           import os
+          import sigma.backends.qradar
           from sigma.collection import SigmaCollection
-          from sigma.backends.qradar import QRadarBackend
+          import inspect
+
+          # Dinamikus osztálykeresés a QRadar backendhez
+          QRadarBackend = None
           
+          # Megpróbáljuk a standard elérési utakat
+          try:
+              from sigma.backends.qradar import QRadarBackend as QB
+              QRadarBackend = QB
+          except ImportError:
+              # Ha nem megy, megkeressük az összes osztályt a modulban
+              for name, obj in inspect.getmembers(sigma.backends.qradar):
+                  if inspect.isclass(obj) and "Backend" in name and ("QRadar" in name or "Qradar" in name):
+                      QRadarBackend = obj
+                      print(f"Found QRadar class: {name}")
+                      break
+
+          if QRadarBackend is None:
+              print("Critical Error: Could not find QRadar Backend class!")
+              exit(1)
+
           backend = QRadarBackend()
           rules_path = "rules/sigma"
           
+          count = 0
           for root, _, files in os.walk(rules_path):
               for file in files:
                   if file.endswith((".yaml", ".yml")):
                       try:
                           with open(os.path.join(root, file), "r", encoding="utf-8") as f:
                               rule = SigmaCollection.from_yaml(f.read())
-                              # Közvetlen konverzió a backend meghívásával
                               result = backend.convert(rule)
                               if result:
                                   out_name = file.rsplit(".", 1)[0] + ".aql"
                                   with open(f"rules/qradar/{out_name}", "w") as out:
                                       out.write(result[0])
+                                      count += 1
                       except Exception as e:
                           print(f"Error converting {file}: {e}")
+          print(f"Successfully converted {count} rules to QRadar AQL.")
           EOF
           python convert_qradar.py
 
@@ -66,7 +87,7 @@ jobs:
           path: rules/qradar/
           retention-days: 1
 
-  # 2. JOB: Modern SIEM-ek és dokumentáció
+  # 2. JOB: Modern SIEM-ek és Dokumentáció
   modern_siem_job:
     needs: qradar_job
     runs-on: ubuntu-latest
@@ -94,11 +115,11 @@ jobs:
           python -m pip install --no-deps sigma-cli==2.0.1
           python -m pip install "click>=8.0.0" "colorama>=0.4.6" "prettytable>=3.0.0"
           
-          # Pluginok telepítése
+          # Pluginok telepítése modern SIEM-ekhez
           sigma plugin install -f splunk sysmon windows netwitness elasticsearch
           python -m pip install pysigma-backend-azure
           
-          # A pyparsing kényszerítése a Set import hiba elkerülésére
+          # Pyparsing kényszerítése (visszaállítás a plugin install után)
           python -m pip install --force-reinstall "pyparsing==3.1.1"
 
       - name: Update and Validate
@@ -119,7 +140,7 @@ jobs:
             sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "Err $file"
           done
 
-      - name: Post-processing and Final Checks
+      - name: Post-processing and Commit
         run: |
           python tools/final_siem_fixer.py
           python tools/check_integrity.py
@@ -136,7 +157,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add rules/ inventory/ *.md *.json *.svg
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Multi-stage pipeline with isolated QRadar conversion"
+            git commit -m "Auto-update: Multi-stage pipeline with robust QRadar conversion"
             git pull --rebase -X ours origin test
             git push origin test
           fi
@@ -145,6 +166,6 @@ jobs:
         if: always()
         run: |
           if [ "${{ env.VALIDATION_FAILED }}" == "true" ]; then
-            echo "❌ Kritikus validációs hiba történt."
+            echo "❌ Critical validation error occurred."
             exit 1
           fi

@@ -32,17 +32,18 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           
-          # 1. Alapok telepítése
-          python -m pip install "pysigma>=1.1.0" "pyparsing>=3.0.0" "packaging>=23.0" sigma-cli
+          # 1. Alapcsomagok és a sigma-cli telepítése
+          python -m pip install "pysigma>=1.1.0" "pyparsing>=3.0.0" "packaging>=25.0" sigma-cli
           
-          # 2. A stabil pluginok telepítése
+          # 2. A stabil backendek telepítése (ezek nem okoznak verzióütközést)
           sigma plugin install splunk sysmon windows netwitness elasticsearch
           
-          # 3. A problémás QRadar kényszerített telepítése (hogy ne szakadjon meg a futás)
-          sigma plugin install --force-install qradar || echo "QRadar kényszerítve telepítve"
+          # 3. QRadar és Azure (Sentinel) telepítése manuálisan PIP-en keresztül.
+          # Így elkerüljük a sigma-cli interaktív kérdéseit és a verzióvisszalépést.
+          python -m pip install pysigma-backend-qradar pysigma-backend-azure
           
-          # 4. VÉGÜL a Sentinel (Azure) plugin
-          sigma plugin install azure
+          # 4. KRITIKUS LÉPÉS: Kényszerítjük a friss pysigma-t, ha a qradar butított volna rajta
+          python -m pip install --upgrade "pysigma>=1.1.0" "pyparsing>=3.0.0"
       - name: Update Dynamic Inventory from SIEM
         run: |
           mkdir -p inventory

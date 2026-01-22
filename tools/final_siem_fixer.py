@@ -24,35 +24,22 @@ def expand_complex_list(field, values_str, siem_type):
         "cs-method": "RequestMethod", 
         "cs-uri-query": "URL"
     }
-
-    # Sentinel: KQL specifikus mezőnevek
-    st_map = {
-        "Image": "FileName",
-        "CommandLine": "ProcessCommandLine",
-        "User": "AccountName",
-        "process": "FileName",
-        "param": "ProcessCommandLine"
-    }
     
     clean_field = field.strip().strip('"')
     
     if siem_type == "netwitness":
         mapped_field = nw_map.get(clean_field, clean_field)
-    elif siem_type == "sentinel":
-        mapped_field = st_map.get(clean_field, clean_field)
     else:
         mapped_field = qr_map.get(clean_field, f'"{clean_field}"')
 
     clauses = []
     for v in raw_values:
         if not v: continue
-        # Perjelek duplázása (Minden SIEM-nél biztonságosabb)
+        # Perjelek duplázása (NetWitness-nél és QRadar-nál is fontos)
         v_esc = v.replace("\\", "\\\\")
         
         if siem_type == "qradar":
             clauses.append(f"{mapped_field} LIKE '%{v_esc}%'")
-        elif siem_type == "sentinel":
-            clauses.append(f"{mapped_field} contains '{v_esc}'")
         else: # NetWitness - Visszatérés az eredeti '=' és '*' stílushoz
             clauses.append(f"{mapped_field} = '*{v_esc}*'")
     
@@ -60,9 +47,7 @@ def expand_complex_list(field, values_str, siem_type):
     if siem_type == "netwitness":
         return "((" + " OR ".join(clauses) + "))"
     
-    # Sentinel esetén kisbetűs or-t használunk a KQL stílushoz
-    sep = " or " if siem_type == "sentinel" else " OR "
-    return "(" + sep.join(clauses) + ")"
+    return "(" + " OR ".join(clauses) + ")"
 
 def fix_qradar(content):
     content = content.replace('""', '"')
@@ -110,27 +95,6 @@ def fix_netwitness(content):
 
     return content
 
-def fix_sentinel(content):
-    # 1. KQL specifikus operátorok (kisbetűs and/or)
-    content = content.replace(" && ", " and ").replace(" || ", " or ")
-    content = content.replace(" AND ", " and ").replace(" OR ", " or ")
-    
-    # 2. Lista alapú minták (pl. Image in ('...')) javítása KQL stílusra
-    # A backend sokszor 'in' operátort használ, amit mi 'contains' alapú listává bontunk
-    pattern = r'(\w+)\s+(?:in|contains|==)\s*\(([^)]+)\)'
-    content = re.sub(pattern, lambda m: expand_complex_list(m.group(1), m.group(2), "sentinel"), content)
-
-    # 3. Mezőnevek cseréje
-    mapping = {"Image": "FileName", "CommandLine": "ProcessCommandLine", "User": "AccountName"}
-    for old, new in mapping.items():
-        content = content.replace(old, new)
-
-    # 4. Ha nincs táblanév, adjunk hozzá egy alapértelmezettet (DeviceProcessEvents)
-    if not content.startswith("Device"):
-        content = "DeviceProcessEvents\n| where " + content
-
-    return content
-
 def process_files():
     # QRadar feldolgozás
     if os.path.exists('rules/qradar'):
@@ -148,15 +112,6 @@ def process_files():
                 p = os.path.join('rules/netwitness', f)
                 with open(p, 'r', encoding='utf-8') as file: data = file.read()
                 processed_data = fix_netwitness(data)
-                with open(p, 'w', encoding='utf-8') as file: file.write(processed_data)
-
-    # Sentinel feldolgozás
-    if os.path.exists('rules/sentinel'):
-        for f in os.listdir('rules/sentinel'):
-            if f.endswith('.kql') or f.endswith('.txt'):
-                p = os.path.join('rules/sentinel', f)
-                with open(p, 'r', encoding='utf-8') as file: data = file.read()
-                processed_data = fix_sentinel(data)
                 with open(p, 'w', encoding='utf-8') as file: file.write(processed_data)
 
 if __name__ == "__main__":

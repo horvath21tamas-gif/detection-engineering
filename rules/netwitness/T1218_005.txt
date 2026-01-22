@@ -1,1 +1,1 @@
-((filename ends '\\\\mshta.exe')&& ((arguments contains 'http://' OR arguments contains 'https://'))) AND (NOT ((user.dst contains 'SYSTEM')))
+(process = '*\\mshta.exe*')&& (param = '*http://*' OR param = '*https://*')) AND (NOT (user.dst = '*SYSTEM*'))

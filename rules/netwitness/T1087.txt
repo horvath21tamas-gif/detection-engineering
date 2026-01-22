@@ -1,1 +1,1 @@
-((filename ends '\\\\cmd.exe')&& ((arguments contains 'net user' OR arguments contains 'net localgroup'))) AND (NOT ((user.dst contains 'SYSTEM')))
+(process = '*\\cmd.exe*')&& (param = '*net user*' OR param = '*net localgroup*')) AND (NOT (user.dst = '*SYSTEM*'))

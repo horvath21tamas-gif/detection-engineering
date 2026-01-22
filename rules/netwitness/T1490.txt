@@ -1,1 +1,1 @@
-((filename ends '\\\\vssadmin.exe')&& ((arguments contains 'delete' OR arguments contains 'shadow'))) AND (NOT ((user.dst contains 'SYSTEM')))
+(process = '*\\vssadmin.exe*')&& (param = '*delete*' OR param = '*shadow*')) AND (NOT (user.dst = '*SYSTEM*'))

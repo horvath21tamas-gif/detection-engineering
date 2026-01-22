@@ -1,1 +1,1 @@
-((filename ends '\\\\powershell.exe' OR filename ends '\\\\pwsh.exe' OR filename ends '\\\\cmd.exe')) AND ((arguments contains '-enc' OR arguments contains '-encodedcommand' OR arguments contains '-EncodedCommand'))
+(process = '*\\powershell.exe*' OR process = '*\\pwsh.exe*' OR process = '*\\cmd.exe*') AND (param = '*-enc*' OR param = '*-encodedcommand*' OR param = '*-EncodedCommand*')

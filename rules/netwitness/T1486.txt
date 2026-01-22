@@ -1,1 +1,1 @@
-((((filename ends '\\\\sc.exe' OR filename ends '\\\\net.exe')) AND (arguments contains 'shadow')) OR ((filename ends '\\\\bcdedit.exe')&& (arguments contains 'recoveryenabled'))) AND (NOT ((user.dst contains 'SYSTEM')))
+(process = '*\\sc.exe*' OR process = '*\\net.exe*') AND (param = '*shadow*') OR (process = '*\\bcdedit.exe*')&& (param = '*recoveryenabled*') AND (NOT (user.dst = '*SYSTEM*')

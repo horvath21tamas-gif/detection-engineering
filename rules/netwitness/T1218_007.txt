@@ -1,1 +1,1 @@
-(filename ends 'msiexec.exe')&& ((arguments contains 'http://' OR arguments contains 'https://' OR arguments contains '/i'))
+(process = '*msiexec.exe*')&& (param = '*http://*' OR param = '*https://*' OR param = '*/i*')

@@ -1,2 +1,2 @@
-(((((((((((((((EventID = '*7036*'))))))))))))OR ((((((((((((EventID = '*7040*'))))))))))))))) AND (NOT ((((((((((user.((((((((((((dst = '*SYSTEM*'))))))))))))OR user.((((((((((((dst = '*LOCAL SERVICE*'))))))))))))OR user.((((((((((((dst = '*NETWORK SERVICE*'))))))))))))))))
-)))))))
+(((EventID = '*7036*' OR EventID = '*7040*'))) AND (NOT ((((user.dst = '*SYSTEM*' OR user.dst = '*LOCAL SERVICE*' OR user.dst = '*NETWORK SERVICE*'))))
+)

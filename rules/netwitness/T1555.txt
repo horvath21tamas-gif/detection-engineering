@@ -1,1 +1,1 @@
-((TargetFileName = '*\user.dst Data\*' OR TargetFileName = '*Login Data*')) AND (NOT ((process = '*\chrome.exe*' OR process = '*\msedge.exe*' OR process = '*\brave.exe*' OR process = '*\firefox.exe*')))
+((TargetFileName contains '\\\\User Data\\\\' OR TargetFileName contains 'Login Data')) AND (NOT ((filename ends '\\\\chrome.exe' OR filename ends '\\\\msedge.exe' OR filename ends '\\\\brave.exe' OR filename ends '\\\\firefox.exe')))

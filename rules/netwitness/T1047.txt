@@ -1,1 +1,1 @@
-((process = '*\wmic.exe*')&& ((param = '*/node:*' OR param = '*process*' OR param = '*call*' OR param = '*create*'))) AND (NOT ((user.dst = '*SYSTEM*')))
+((filename ends '\\\\wmic.exe')&& ((arguments contains '/node:' OR arguments contains 'filename' OR arguments contains 'call' OR arguments contains 'create'))) AND (NOT ((user.dst contains 'SYSTEM')))

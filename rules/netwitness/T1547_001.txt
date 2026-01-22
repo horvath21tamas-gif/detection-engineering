@@ -1,1 +1,1 @@
-(EventType = '*SetValue*')&& (TargetObject = '*\Software\Microsoft\Windows\CurrentVersion\Run*')&& ((Details = '*\AppData\*' OR Details = '*\Temp\*')) AND ((process = '*\powershell.exe*' OR process = '*\cmd.exe*'))
+(EventType contains 'SetValue')&& (TargetObject contains '\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run')&& ((Details contains '\\\\AppData\\\\' OR Details contains '\\\\Temp\\\\')) AND ((filename ends '\\\\powershell.exe' OR filename ends '\\\\cmd.exe'))

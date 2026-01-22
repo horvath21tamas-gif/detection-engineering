@@ -1,1 +1,1 @@
-((process = '*\schtasks.exe*')&& (param = '*/create*')) AND (param = '*powershell*')
+((filename ends '\\\\schtasks.exe')&& (arguments contains '/create')) AND (arguments contains 'powershell')

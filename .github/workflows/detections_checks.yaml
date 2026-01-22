@@ -30,8 +30,8 @@ jobs:
       - name: Install QRadar environment
         run: |
           python -m pip install --upgrade pip
-          # 0.10.11 kell, mert ebben már benne van a sigma.correlations, amit a CLI keres
-          python -m pip install "pyparsing==3.1.1" "pysigma==0.10.11" "packaging<23.0"
+          # Javítva 0.10.10-re: ebben már van correlation modul, de még QRadar-kompatibilis
+          python -m pip install "pyparsing==3.1.1" "pysigma==0.10.10" "packaging<23.0"
           python -m pip install --no-deps sigma-cli==2.0.1
           python -m pip install "click>=8.0.0" "colorama>=0.4.6" "prettytable>=3.0.0"
           python -m pip install pysigma-backend-qradar
@@ -42,7 +42,6 @@ jobs:
           for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
-            # A CLI most már látni fogja a correlations modult
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "Skip: $file"
           done
 
@@ -81,7 +80,7 @@ jobs:
           python -m pip install --no-deps sigma-cli==2.0.1
           python -m pip install "click>=8.0.0" "colorama>=0.4.6" "prettytable>=3.0.0"
           
-          # Plugin telepítés után kényszerítjük a jó pyparsing verziót (ez javítja a Set import hibát)
+          # Plugin telepítés után kényszerítjük a jó pyparsing verziót
           sigma plugin install -f splunk sysmon windows netwitness elasticsearch
           python -m pip install pysigma-backend-azure
           python -m pip install --force-reinstall "pyparsing==3.1.1"
@@ -125,7 +124,7 @@ jobs:
           git add DETECTION_WIKI.md GAP_ANALYSIS.md rule_scores.json
           git add attack_navigator_layer.json COVERAGE.md README.md *.svg
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Fixed dependencies for QRadar and pyparsing"
+            git commit -m "Auto-update: Fixed pysigma version and dependency isolation"
             git pull --rebase -X ours origin test
             git push origin test
           fi

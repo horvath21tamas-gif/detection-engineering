@@ -31,10 +31,17 @@ jobs:
       - name: Install dependencies (Phase 1)
         run: |
           python -m pip install --upgrade pip
-          # A <1.1.0 verzió megállítja a pip-et a hibás verziónál, 
-          # a pyparsing rögzítése pedig megvédi a CLI-t.
-          python -m pip install "pyparsing==3.1.1" "pysigma<1.1.0" "packaging>=24.0" sigma-cli
-          sigma plugin install splunk sysmon windows netwitness elasticsearch
+          # 1. Rögzítjük a működő pyparsing-et és a pysigma-t az 1.1.0 ALATT
+          python -m pip install "pyparsing==3.1.1" "pysigma==1.0.2" "packaging>=24.0"
+          
+          # 2. Kényszerítjük a legújabb CLI-t, de vigyázunk, hogy ne húzza magával a rossz pysigma-t
+          python -m pip install --no-deps sigma-cli==2.0.1
+          python -m pip install "click>=8.0.0" "colorama>=0.4.6" "prettytable>=3.0.0"
+          
+          # 3. Pluginok telepítése kényszerítve, hogy ne akadjanak fenn a verzióellenőrzésen
+          sigma plugin install -f splunk sysmon windows netwitness elasticsearch
+          
+          # 4. Sentinel telepítése manuálisan
           python -m pip install pysigma-backend-azure
       - name: Update Dynamic Inventory from SIEM
         run: |

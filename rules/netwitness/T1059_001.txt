@@ -1,1 +1,1 @@
-(((((((process = '*\\\\\\\\powershell.exe*'))))OR ((((process = '*\\\\\\\\pwsh.exe*'))))OR ((((process = '*\\\\\\\\cmd.exe*'))))))) AND (((((((param = '*-enc*'))))OR ((((param = '*-encodedcommand*'))))OR ((((param = '*-EncodedCommand*')))))))
+(((((((((process = '*\\\\\\\\\\\\\\\\powershell.exe*'))))))OR ((((((process = '*\\\\\\\\\\\\\\\\pwsh.exe*'))))))OR ((((((process = '*\\\\\\\\\\\\\\\\cmd.exe*'))))))))) AND (((((((((param = '*-enc*'))))))OR ((((((param = '*-encodedcommand*'))))))OR ((((((param = '*-EncodedCommand*')))))))))

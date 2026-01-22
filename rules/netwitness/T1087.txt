@@ -1,2 +1,2 @@
-(((((((process = '*\\\\\\\\cmd.exe*'))))))&& (((((((param = '*net user*'))))OR ((((param = '*net localgroup*')))))))) AND (NOT ((((((user.((((dst = '*SYSTEM*'))))))))
-)))
+(((((((((process = '*\\\\\\\\\\\\\\\\cmd.exe*'))))))))&& (((((((((param = '*net user*'))))))OR ((((((param = '*net localgroup*')))))))))) AND (NOT (((((((user.((((((dst = '*SYSTEM*'))))))))))
+))))

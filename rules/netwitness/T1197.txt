@@ -1,2 +1,2 @@
-(((((((process = '*itsadmin.exe*'))))))&& (((((((param = '*/transfer*'))))OR ((((param = '*/addfile*'))))OR ((((param = '*http://*'))))OR ((((param = '*https://*')))))))) AND (NOT ((((((user.((((dst = '*SYSTEM*'))))))))
-)))
+(((((((((process = '*itsadmin.exe*'))))))))&& (((((((((param = '*/transfer*'))))))OR ((((((param = '*/addfile*'))))))OR ((((((param = '*http://*'))))))OR ((((((param = '*https://*')))))))))) AND (NOT (((((((user.((((((dst = '*SYSTEM*'))))))))))
+))))

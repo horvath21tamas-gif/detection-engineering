@@ -1,2 +1,2 @@
-(EventID = 4624 AND (LogonType = 2,10)) AND (NOT ((((((((((TargetUserName = '*$*')))))))) AND (NOT ((((((((((TargetUserName = '*SYSTEM*'))))OR ((((TargetUserName = '*LOCAL SERVICE*'))))OR ((((TargetUserName = '*NETWORK SERVICE*')))))))) AND (NOT ((((((((((IpAddress = '*127.0.0.1*'))))OR ((((IpAddress = '*::1*'))))))))
-)))))))))
+(EventID = 4624 AND (LogonType = 2,10)) AND (NOT (((((((((((((TargetUserName = '*$*')))))))))) AND (NOT (((((((((((((TargetUserName = '*SYSTEM*'))))))OR ((((((TargetUserName = '*LOCAL SERVICE*'))))))OR ((((((TargetUserName = '*NETWORK SERVICE*')))))))))) AND (NOT (((((((((((((IpAddress = '*127.0.0.1*'))))))OR ((((((IpAddress = '*::1*'))))))))))
+))))))))))))

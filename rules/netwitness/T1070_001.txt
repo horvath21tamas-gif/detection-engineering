@@ -1,2 +1,2 @@
-(((((((process = '*\\\\\\\\wevtutil.exe*'))))))&& (((((((param = '*cl*'))))OR ((((param = '*security*')))))))) AND (NOT ((((((user.((((dst = '*SYSTEM*'))))))))
-)))
+(((((((((process = '*\\\\\\\\\\\\\\\\wevtutil.exe*'))))))))&& (((((((((param = '*cl*'))))))OR ((((((param = '*security*')))))))))) AND (NOT (((((((user.((((((dst = '*SYSTEM*'))))))))))
+))))

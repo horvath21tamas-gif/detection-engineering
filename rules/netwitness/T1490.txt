@@ -1,2 +1,2 @@
-(((process = '*\\vssadmin.exe*'))&& (((param = '*delete*' OR param = '*shadow*')))) AND (NOT ((((user.dst = '*SYSTEM*'))))
-)
+(((((process = '*\\\\vssadmin.exe*'))))&& (((((param = '*delete*'))OR ((param = '*shadow*')))))) AND (NOT (((((user.((dst = '*SYSTEM*'))))))
+))

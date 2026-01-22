@@ -31,17 +31,17 @@ jobs:
       - name: Install dependencies (Phase 1)
         run: |
           python -m pip install --upgrade pip
-          # 1. Rögzítjük a működő pyparsing-et és a pysigma-t az 1.1.0 ALATT
-          python -m pip install "pyparsing==3.1.1" "pysigma==1.0.2" "packaging>=24.0"
+          # 1. A 0.11.23 a legutolsó verzió, ami még elfogadja a pyparsing 3.1.1-et
+          python -m pip install "pyparsing==3.1.1" "pysigma==0.11.23" "packaging>=24.0"
           
-          # 2. Kényszerítjük a legújabb CLI-t, de vigyázunk, hogy ne húzza magával a rossz pysigma-t
+          # 2. CLI telepítése függőségek kényszerítése nélkül
           python -m pip install --no-deps sigma-cli==2.0.1
           python -m pip install "click>=8.0.0" "colorama>=0.4.6" "prettytable>=3.0.0"
           
-          # 3. Pluginok telepítése kényszerítve, hogy ne akadjanak fenn a verzióellenőrzésen
+          # 3. Pluginok kényszerített telepítése
           sigma plugin install -f splunk sysmon windows netwitness elasticsearch
           
-          # 4. Sentinel telepítése manuálisan
+          # 4. Azure/Sentinel manuálisan
           python -m pip install pysigma-backend-azure
       - name: Update Dynamic Inventory from SIEM
         run: |
@@ -90,7 +90,11 @@ jobs:
       - name: Re-install for Phase 2 (QRadar)
         run: |
           python -m pip uninstall -y pysigma pyparsing packaging sigma-cli
-          python -m pip install "pyparsing==3.1.1" "pysigma==0.9.11" "sigma-cli==2.0.1" pysigma-backend-qradar
+          # A QRadar-hoz maradunk a 0.9.11-nél, mert az a legstabilabb hozzá
+          python -m pip install "pyparsing==3.1.1" "pysigma==0.9.11"
+          python -m pip install --no-deps sigma-cli==2.0.1
+          python -m pip install "click>=8.0.0" "colorama>=0.4.6" "prettytable>=3.0.0"
+          python -m pip install pysigma-backend-qradar
 
       - name: Convert Sigma rules (Phase 2)
         run: |

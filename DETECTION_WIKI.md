@@ -30,6 +30,7 @@
 - [egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani](#egy-nem-admin-felhasznalo-rovid-idon-belul-tobb-kulonbozo,-erzekeny-windows-szolgaltatsat-proball-leallitani-vagy-modositani)
 - [wmic.exe segitsegevel perzisztens esemenyt hoznak letre a tamadok](#wmicexe-segitsegevel-perzisztens-esemenyt-hoznak-letre-a-tamadok)
 - [COM hijacking (perzisztencia)](#com-hijacking-(perzisztencia))
+- [Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása](#gyanús-rendszerindítási-vagy-bejelentkezési-automatikus-indítás-végrehajtása)
 - [Gyanus Registry key modositas perzisztencia kiepitese erdekeben](#gyanus-registry-key-modositas-perzisztencia-kiepitese-erdekeben)
 - [UAC bypass Fodhelper segitsegevel](#uac-bypass-fodhelper-segitsegevel)
 - [Detektalni, amikor nem a bongeszo folyamata fer hozza a bongeszo credential storejahoz](#detektalni,-amikor-nem-a-bongeszo-folyamata-fer-hozza-a-bongeszo-credential-storejahoz)
@@ -460,6 +461,21 @@
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld a hostot a hálózatról!
+
+---
+
+## Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása
+- **Azonosító:** `T1547.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Észleli a gyanús beállításjegyzékbeli vagy indítómappák módosításait, amelyeket az adatok megőrzése érdekében használnak, a nem szabványos elérési utakra és a gyanús végrehajtókra összpontosítva.
+- **Hamis pozitívok:** Szoftverfrissítők, amelyek ideiglenes mappából futtatnak telepítőt a következő bejelentkezéskor., Egyedi vállalati scriptek a Startup mappában.
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld a hostot a hálózatról!
 
 ---

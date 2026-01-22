@@ -1,16 +1,16 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-22 09:06:00`
+**Utolsó frissítés:** `2026-01-22 09:11:39`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 38 | 100% |
-| Splunk (SPL) | 39 | 102.6% |
-| QRadar (AQL) | 39 | 102.6% |
-| Elastic (KQL/EQL) | 39 | 102.6% |
-| RSA NetWitness | 39 | 102.6% |
+| Sigma (Forrás) | 39 | 100% |
+| Splunk (SPL) | 40 | 102.6% |
+| QRadar (AQL) | 40 | 102.6% |
+| Elastic (KQL/EQL) | 40 | 102.6% |
+| RSA NetWitness | 40 | 102.6% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -49,7 +49,7 @@
 | T1546 | HIGH | wmic.exe segitsegevel perzisztens esemenyt hoznak letre a tamadok, COM hijacking (perzisztencia) |
 | T1546.003 | HIGH | wmic.exe segitsegevel perzisztens esemenyt hoznak letre a tamadok |
 | T1546.015 | HIGH | COM hijacking (perzisztencia) |
-| T1547.001 | HIGH | Gyanus Registry key modositas perzisztencia kiepitese erdekeben |
+| T1547.001 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása, Gyanus Registry key modositas perzisztencia kiepitese erdekeben |
 | T1548.002 | HIGH | UAC bypass Fodhelper segitsegevel |
 | T1555 | MEDIUM | Detektalni, amikor nem a bongeszo folyamata fer hozza a bongeszo credential storejahoz |
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |

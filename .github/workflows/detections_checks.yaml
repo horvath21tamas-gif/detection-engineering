@@ -13,7 +13,7 @@ env:
   PYTHONDONTWRITEBYTECODE: 1
 
 jobs:
-  # 1. JOB: QRadar - Speciális konverzió hibatűréssel
+  # 1. JOB: QRadar - Speciális konverzió hibatűréssel (VÁLTOZATLAN, MŰKÖDŐ RÉSZ)
   qradar_job:
     runs-on: ubuntu-latest
     steps:
@@ -39,7 +39,6 @@ jobs:
           from sigma.collection import SigmaCollection
           import inspect
 
-          # Backend osztály keresése
           QRadarBackend = None
           for name, obj in inspect.getmembers(sigma.backends.qradar):
               if inspect.isclass(obj) and "Backend" in name and ("QRadar" in name or "Qradar" in name):
@@ -69,10 +68,9 @@ jobs:
                                       out.write(result[0])
                                       success_count += 1
                       except Exception as e:
-                          # Itt kezeljük a "supports only the following fields" jellegű backend hibákat
                           skip_count += 1
           
-          print(f"DONE: {success_count} rules converted, {skip_count} skipped due to QRadar field limitations.")
+          print(f"DONE: {success_count} rules converted, {skip_count} skipped.")
           EOF
           python convert_qradar.py
 
@@ -83,7 +81,7 @@ jobs:
           path: rules/qradar/
           retention-days: 1
 
-  # 2. JOB: Modern SIEM-ek és dokumentáció (Javított függőségekkel)
+  # 2. JOB: Modern SIEM-ek - JAVÍTOTT RÉSZ a korrelációs hiba ellen
   modern_siem_job:
     needs: qradar_job
     runs-on: ubuntu-latest
@@ -104,19 +102,25 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Modern SIEM environment
+      - name: Install Modern SIEM environment (Clean & Force Update)
         run: |
           python -m pip install --upgrade pip
-          # Kényszerített frissítés a sigma.correlations hiba ellen
-          python -m pip install "pysigma>=0.11.23" "pyparsing==3.1.1" "packaging>=24.0"
-          python -m pip install --no-deps sigma-cli==2.0.1
+          
+          # Eltávolítunk minden maradványt, ami bekavarhat
+          python -m pip uninstall -y pysigma sigma-cli pyparsing
+          
+          # Legfrissebb motor telepítése (ebben már benne van a correlations modul)
+          python -m pip install "pysigma==1.1.0" "pyparsing==3.1.1" "packaging>=24.0"
+          
+          # CLI telepítése a saját függőségei nélkül, hogy ne írja felül a motort
+          python -m pip install --no-deps "sigma-cli==2.0.1"
           python -m pip install "click>=8.0.0" "colorama>=0.4.6" "prettytable>=3.0.0"
           
-          sigma plugin install -f splunk sysmon windows netwitness elasticsearch
-          python -m pip install pysigma-backend-azure
+          # Backendek manuális telepítése a konfliktusok elkerülésére
+          python -m pip install pysigma-backend-splunk pysigma-backend-azure pysigma-backend-elasticsearch pysigma-backend-insightidr
           
-          # Fix pyparsing set import error
-          python -m pip install --force-reinstall "pyparsing==3.1.1"
+          # Alapvető pluginok felrakása
+          sigma plugin install -f windows sysmon
 
       - name: Update and Validate
         run: |
@@ -130,10 +134,15 @@ jobs:
           for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
+            
+            # Splunk konverzió
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Err Splunk: $file"
-            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "Err RSA: $file"
-            sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Err Elastic: $file"
+            
+            # Sentinel konverzió
             sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "Err Sentinel: $file"
+            
+            # Elastic konverzió
+            sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Err Elastic: $file"
           done
 
       - name: Post-processing and Commit
@@ -149,7 +158,7 @@ jobs:
             git config --local user.name "github-actions[bot]"
             git add rules/ inventory/ *.md *.json *.svg
             if ! git diff --staged --quiet; then
-              git commit -m "Auto-update: Multi-SIEM detections (Fixed QRadar fields & Correlations)"
+              git commit -m "Auto-update: Multi-SIEM detections (Fixed pysigma correlation error)"
               git pull --rebase -X ours origin test
               git push origin test
             fi
@@ -159,6 +168,5 @@ jobs:
         if: always()
         run: |
           if [ "${{ env.VALIDATION_FAILED }}" == "true" ]; then
-            echo "❌ Validációs hiba történt, de a kompatibilis szabályok mentésre kerültek."
             exit 1
           fi

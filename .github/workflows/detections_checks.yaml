@@ -26,24 +26,17 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'  # Ez kell a Sentinelnek, de a QRadar is futni fog rajta
+          python-version: '3.11'
 
-      - name: Install dependencies
+      - name: Install dependencies (Phase 1: Modern SIEMs)
         run: |
           python -m pip install --upgrade pip
-          
-          # 1. Alapcsomagok és a sigma-cli telepítése
+          # Alapok és a Modern backendek telepítése
           python -m pip install "pysigma>=1.1.0" "pyparsing>=3.0.0" "packaging>=25.0" sigma-cli
-          
-          # 2. A stabil backendek telepítése (ezek nem okoznak verzióütközést)
           sigma plugin install splunk sysmon windows netwitness elasticsearch
-          
-          # 3. QRadar és Azure (Sentinel) telepítése manuálisan PIP-en keresztül.
-          # Így elkerüljük a sigma-cli interaktív kérdéseit és a verzióvisszalépést.
-          python -m pip install pysigma-backend-qradar pysigma-backend-azure
-          
-          # 4. KRITIKUS LÉPÉS: Kényszerítjük a friss pysigma-t, ha a qradar butított volna rajta
-          python -m pip install --upgrade "pysigma>=1.1.0" "pyparsing>=3.0.0"
+          # Sentinel (Azure) kényszerítése pip-pel a registry hibák elkerülésére
+          python -m pip install pysigma-backend-azure
+
       - name: Update Dynamic Inventory from SIEM
         run: |
           mkdir -p inventory
@@ -71,36 +64,47 @@ jobs:
       - name: Preprocess Sigma rules
         run: python tools/preprocess_sigma.py
 
-      - name: Convert Sigma rules to SIEM queries
+      - name: Convert Sigma rules (Phase 1: Splunk, Elastic, Sentinel, NetWitness)
         run: |
           mkdir -p rules/splunk rules/qradar rules/netwitness rules/elastic rules/sentinel
-          
           for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
             
             # SPLUNK
             sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk error"
-            
-            # QRADAR (Nyersen, pipeline nélkül)
-            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar error"
-            
-            # RSA NETWITNESS (Nyersen)
+            # RSA NETWITNESS
             sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "RSA error"
-            
             # ELASTIC
             sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic error"
+            # SENTINEL (Target név javítva a backend alapján)
+            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "Sentinel error"
+          done
 
-            # SENTINEL (ÚJ)
-            sigma convert -t sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "Sentinel error"
+      - name: Re-install for Phase 2 (QRadar Legacy)
+        run: |
+          # Mindent törlünk, ami ütközhet
+          python -m pip uninstall -y pysigma pyparsing packaging sigma-cli
+          # Telepítjük a QRadar által megkövetelt régebbi verziót
+          python -m pip install "pysigma==0.9.11" "pyparsing<3.0.0" "sigma-cli==2.0.1" pysigma-backend-qradar
+
+      - name: Convert Sigma rules (Phase 2: QRadar)
+        run: |
+          for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
+            filename=$(basename "$file" .yaml)
+            filename=$(basename "$filename" .yml)
+            # QRADAR konverzió a butított környezetben
+            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar error"
           done
 
       - name: Final SIEM Query Fixer (QRadar & NetWitness)
-        run: python tools/final_siem_fixer.py
+        run: |
+          # Itt újra szükség lehet a modern környezetre a scriptnek, ha importál valamit
+          python -m pip install --upgrade "pysigma>=1.1.0" "pyparsing>=3.0.0"
+          python tools/final_siem_fixer.py
 
       - name: Run Integrity Check
-        run: |
-          python tools/check_integrity.py
+        run: python tools/check_integrity.py
 
       - name: Calculate Rule Scores
         if: github.event_name == 'push'
@@ -115,19 +119,16 @@ jobs:
 
       - name: Update Dashboard and SVG Map
         if: github.event_name == 'push'
-        run: |
-          python tools/update_all.py
+        run: python tools/update_all.py
           
       - name: Commit and push changes
         if: github.event_name == 'push'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
-          
           git add rules/ inventory/ test/
           git add DETECTION_WIKI.md GAP_ANALYSIS.md rule_scores.json
           git add attack_navigator_layer.json COVERAGE.md README.md *.svg
-          
           if ! git diff --staged --quiet; then
             git commit -m "Auto-update: Elastic (ELK) & Sentinel support, Dynamic Inventory & Docs"
             git pull --rebase -X ours origin test

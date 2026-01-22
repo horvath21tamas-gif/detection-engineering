@@ -1,1 +1,1 @@
-((((ServiceName = '*PSEXECSVC*'))))&& Computer begins 'MGMT-'
+((((((ServiceName = '*PSEXECSVC*'))))))&& Computer begins 'MGMT-'

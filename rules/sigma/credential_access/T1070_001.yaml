@@ -1,24 +1,74 @@
-title: wevtutil.exe security logokat torol
-id: '9ca72165-29f6-4bac-98c0-dbdc37604945'
-status: experimental
-description: wevtutil.exe security logokat torol
+title: Security Event Log Cleared Using wevtutil.exe
+id: 9ca72165-29f6-4bac-98c0-dbdc37604945
+status: stable
+description: >
+  Detects attempts to clear the Windows Security event log using
+  wevtutil.exe, a common attacker technique used to cover tracks
+  after credential access, lateral movement, or persistence.
 author: hota05
-date: 2026/01/13
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1070/001/
+
 logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection:
+
+  wevtutil_execution:
     Image|endswith: '\wevtutil.exe'
+
+  clear_security_log:
     CommandLine|contains:
-      - 'cl'
-      - 'security'
-  filter:
-    username: 'SYSTEM'
-  condition: selection and not filter
-level: medium
-tags:
-  - attack.t1070.001
+      - 'cl Security'
+      - 'cl "Security"'
+      - 'clear-log Security'
+
+  suspicious_parent:
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+      - '\rundll32.exe'
+
+  filter_service_accounts:
+    User|contains:
+      - 'SYSTEM'
+      - 'LOCAL SERVICE'
+      - 'NETWORK SERVICE'
+
+  filter_legit_tooling:
+    ParentImage|contains:
+      - '\Windows\CCM\'
+      - '\Microsoft Configuration Manager\'
+      - '\SCCM\'
+      - '\Tanium\'
+      - '\Splunk\'
+      - '\Elastic\'
+      - '\NXLog\'
+      - '\OSSEC\'
+      - '\QRadar\'
+      - '\LogRhythm\'
+
+  condition: >
+    wevtutil_execution
+    and clear_security_log
+    and suspicious_parent
+    and not (
+      filter_service_accounts
+      or filter_legit_tooling
+    )
+
 falsepositives:
-  - admin legitim script
-  - pentesteles
+  - Rare emergency log maintenance by administrators
+  - Approved red team or penetration testing activity
+
+level: high
+
+tags:
+  - attack.defense_evasion
+  - attack.t1070.001

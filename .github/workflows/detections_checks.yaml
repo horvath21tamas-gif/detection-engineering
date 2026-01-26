@@ -152,6 +152,9 @@ jobs:
       - name: Score Detection Rules
         run: python tools/score_rules.py
 
+      - name: Run Gap Analysis
+        run: python tools/gap_analysis.py
+
       - name: Generate Wiki and Dashboard
         run: |
           python tools/generate_docs.py
@@ -167,7 +170,7 @@ jobs:
           git add -A
           
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Multi-SIEM queries, Scores and Dashboard [skip ci]"
+            git commit -m "Auto-update: Multi-SIEM queries, Scores, Gap Analysis and Dashboard [skip ci]"
             git pull --rebase -X ours origin test
             git push origin test
           fi

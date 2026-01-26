@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 09:53:59`
+**Utolsó frissítés:** `2026-01-26 09:58:45`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -31,8 +31,8 @@
 | T1059.001 | MEDIUM | Gyanus Poweshell parancs vegrehajtasa |
 | T1068 | MEDIUM | Gyanus System process melyet a user indit |
 | T1070.001 | MEDIUM | wevtutil.exe security logokat torol |
-| T1087 | MEDIUM | cmd.exe netuser vagy net localgroup parancsot futtat |
-| T1098 | MEDIUM | cmd.exe netuser vagy net localgroup parancsot futtat |
+| T1087 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
+| T1098 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
 | T1105 | HIGH | Detektalni a poweshellbol base64-encoded parancsot, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1110.001 | MEDIUM | Multiple Failed Login Attempts for Single User (Possible Password Guessing) |
 | T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |

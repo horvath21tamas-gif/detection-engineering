@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (FolderPath endswith "\cmd.exe" and (ProcessCommandLine in ("*net user*", "*net localgroup*"))) and (not username =~ "SYSTEM")
+| where FolderPath endswith "\cmd.exe" and (ProcessCommandLine in ("*net user*", "*net localgroup*")) and ((ProcessCommandLine in ("*/add*", "*/delete*")) or (ProcessCommandLine in ("*administrators*", "*remote desktop users*", "*domain admins*", "*enterprise admins*"))) and (ParentProcessName in ("*\WINWORD.EXE", "*\EXCEL.EXE", "*\POWERPNT.EXE", "*\OUTLOOK.EXE", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe")) and (not ((User in ("*SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*")) or (ParentProcessName in ("*\Windows\CCM\*", "*\Microsoft Configuration Manager\*", "*\PDQ\*", "*\Ivanti\*", "*\ManageEngine\*", "*\Tanium\*"))))

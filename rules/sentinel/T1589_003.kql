@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (SrcIp in ("1.*", "2.*", "3.*", "4.*", "5.*", "6.*", "7.*", "8.*", "9.*")) and (UriStem in ("*/search*", "*/find*", "*/lookup*", "*/directory*", "*/people*", "*/staff*", "*/team*", "*/employees*", "*/api/search*", "*/api/directory*")) and (UriQuery in ("*site:*", "*domain=*", "*subdomain=*", "*email*", "*mail*", "*user*", "*username*", "*employee*", "*account*", "*@*")) and (UserAgent in ("*curl*", "*wget*", "*python*", "*requests*", "*go-http-client*", "*httpclient*", "*axios*", "*libwww*", "*osint*", "*recon*", "*scanner*")) and (Status in (200, 206)) and (not ((UserAgent in ("*Mozilla*", "*Chrome*", "*Firefox*", "*Safari*", "*Edge*", "*HeadlessChrome*")) or (UserAgent in ("*Googlebot*", "*Bingbot*", "*Slurp*", "*DuckDuckBot*", "*Yandex*", "*Baiduspider*", "*Ahrefs*", "*Semrush*", "*MJ12bot*")) or (UserAgent in ("*uptime*", "*pingdom*", "*datadog*", "*newrelic*", "*zabbix*", "*prometheus*"))))

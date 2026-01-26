@@ -13,7 +13,7 @@ references:
 
 logsource:
   product: windows
-  category: security
+  service: security
 
 detection:
 

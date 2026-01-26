@@ -1,36 +1,95 @@
-title: A tamado lemasol egy legitim Windows binarist
-id: '4f8eb7f5-4160-4dc2-aac4-cb2d1652ee2a'
-status: experimental
-description: A tamado lemasol egy legitim Windows binarist
+title: Legitimate Windows Binary Copied to User-Writable Location
+id: 4f8eb7f5-4160-4dc2-aac4-cb2d1652ee2a
+status: stable
+description: >
+  Detects suspicious copying of legitimate Windows system binaries
+  into user-writable directories. This technique is commonly used
+  by attackers for masquerading, DLL sideloading, or execution
+  evasion by abusing trusted binary names.
 author: hota05
-date: 2026/01/14
-logsource: 
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1036/005/
+
+logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection:
-    Image|contains:
+
+  copy_execution:
+    Image|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\robocopy.exe'
+      - '\xcopy.exe'
+
+  copy_command:
+    CommandLine|contains:
+      - 'copy '
+      - 'xcopy '
+      - 'robocopy '
+      - 'Copy-Item'
+
+  sensitive_binaries:
+    CommandLine|contains:
+      - '\svchost.exe'
+      - '\lsass.exe'
+      - '\services.exe'
+      - '\explorer.exe'
+      - '\winlogon.exe'
+      - '\csrss.exe'
+      - '\smss.exe'
+
+  user_writable_destination:
+    CommandLine|contains:
       - '\Users\'
       - '\AppData\'
       - '\Temp\'
       - '\ProgramData\'
-  selection_legitime:
-    Image|endswith:
-      - '\svchost.exe'
-      - '\lsass.exe'
-      - "services.exe"
-      - "explorer.exe"
-  filter_legit_loc:
-    Image|startswith:
+
+  system_source:
+    CommandLine|contains:
       - 'C:\Windows\System32\'
-      - 'C:\\Windows\SysWOW64\'
-  filter_system:
-    username: "SYSTEM"
-  condition: selection and selection_legitime and not filter_legit_loc and not filter_system 
-level: high
-tags: 
-  - attack.t1036.005
-  - attack.t1036
+      - 'C:\Windows\SysWOW64\'
+
+  filter_service_accounts:
+    User|contains:
+      - 'NT AUTHORITY\SYSTEM'
+      - 'LOCAL SERVICE'
+      - 'NETWORK SERVICE'
+
+  filter_legit_tooling:
+    ParentImage|contains:
+      - '\Windows\Installer\'
+      - '\Microsoft Configuration Manager\'
+      - '\Windows\CCM\'
+      - '\PDQ\'
+      - '\Ivanti\'
+      - '\ManageEngine\'
+      - '\Tanium\'
+      - '\Setup\'
+      - '\Update\'
+
+  condition: >
+    copy_execution
+    and copy_command
+    and sensitive_binaries
+    and system_source
+    and user_writable_destination
+    and not (
+      filter_service_accounts
+      or filter_legit_tooling
+    )
+
 falsepositives:
-- legitim file
-- teszteles
+  - Rare advanced troubleshooting by administrators
+  - Approved red team or malware simulation activity
+
+level: high
+
+tags:
+  - attack.defense_evasion
+  - attack.t1036
+  - attack.t1036.005

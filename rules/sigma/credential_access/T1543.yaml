@@ -14,7 +14,7 @@ references:
 
 logsource:
   product: windows
-  category: system
+  service: system
 
 detection:
 

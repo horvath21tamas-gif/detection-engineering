@@ -1,22 +1,95 @@
-title: Gyanus Scheduled Task letrehozasa
-id: '7a649cc8-f893-4c1e-b1b4-b049c6ce46f2'
-status: experimental
-description: Gyanus Scheduled Task letrehozasa
+title: Suspicious Scheduled Task Creation Executing PowerShell
+id: 7a649cc8-f893-4c1e-b1b4-b049c6ce46f2
+status: stable
+description: >
+  Detects suspicious creation of scheduled tasks using schtasks.exe
+  that execute PowerShell, commonly abused by attackers to establish
+  persistence or delayed execution of malicious payloads.
 author: hota05
-date: 2026/01/13
-logsource: 
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1053/005/
+
+logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection:
+
+  schtasks_create:
     Image|endswith: '\schtasks.exe'
-    CommandLine|contains: "/create"
-  selection_futtatas:
-    CommandLine|contains: "powershell"
-  condition: selection and selection_futtatas
-level: medium
-tags: 
-  - attack.t1053.005
+    CommandLine|contains:
+      - '/create'
+
+  powershell_task:
+    CommandLine|contains:
+      - 'powershell'
+      - 'pwsh'
+
+  stealth_flags:
+    CommandLine|contains:
+      - '-enc'
+      - '-encodedcommand'
+      - '-nop'
+      - '-w hidden'
+      - '-executionpolicy bypass'
+
+  user_writable_payload:
+    CommandLine|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\ProgramData\'
+
+  suspicious_parent:
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+      - '\WINWORD.EXE'
+      - '\EXCEL.EXE'
+
+  filter_service_accounts:
+    User|contains:
+      - 'NT AUTHORITY\SYSTEM'
+      - 'LOCAL SERVICE'
+      - 'NETWORK SERVICE'
+
+  filter_legit_tooling:
+    ParentImage|contains:
+      - '\Windows\CCM\'
+      - '\Microsoft Configuration Manager\'
+      - '\SCCM\'
+      - '\Tanium\'
+      - '\PDQ\'
+      - '\Ivanti\'
+      - '\ManageEngine\'
+      - '\Veeam\'
+      - '\Acronis\'
+      - '\Backup\'
+
+  condition: >
+    schtasks_create
+    and powershell_task
+    and (
+      stealth_flags
+      or user_writable_payload
+    )
+    and suspicious_parent
+    and not (
+      filter_service_accounts
+      or filter_legit_tooling
+    )
+
 falsepositives:
-  - admin automatizacio
-  - backup
+  - Rare custom administrative automation
+  - Approved red team or malware simulation activity
+
+level: high
+
+tags:
+  - attack.persistence
+  - attack.t1053.005

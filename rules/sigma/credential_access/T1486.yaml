@@ -82,7 +82,6 @@ detection:
       filter_service_accounts
       or filter_legit_tools
     )
-    | count(Image) by User > 2
 
 falsepositives:
   - Rare manual disaster recovery testing

@@ -17,7 +17,6 @@ logsource:
 
 detection:
 
-  # === 1. User-level COM hijack locations ===
   com_hijack_keys:
     TargetObject|contains:
       - '\Software\Classes\CLSID\'
@@ -25,7 +24,6 @@ detection:
       - '\InprocServer32'
       - '\LocalServer32'
 
-  # === 2. Suspicious COM server locations ===
   suspicious_server_location:
     Details|contains:
       - '\Users\'
@@ -34,7 +32,6 @@ detection:
       - '\ProgramData\'
       - '\Downloads\'
 
-  # === 3. Suspicious execution context ===
   suspicious_process:
     Image|endswith:
       - '\powershell.exe'
@@ -46,18 +43,15 @@ detection:
       - '\rundll32.exe'
       - '\regsvr32.exe'
 
-  # === 4. Exclude system context ===
   filter_system:
     User|contains:
       - 'SYSTEM'
 
-  # === 5. Legit Windows COM servers ===
   filter_legit_windows_com:
     Details|startswith:
       - 'C:\Windows\System32\'
       - 'C:\Windows\SysWOW64\'
 
-  # === 6. Installer & updater allowlist ===
   filter_legit_installers:
     Image|contains:
       - '\Windows\Installer\'

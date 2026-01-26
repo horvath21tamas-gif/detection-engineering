@@ -12,8 +12,7 @@ tags:
     - attack.t1204.004
 logsource:
     category: email
-    # A 'product: any' helyett érdemes specifikusabbat adni, ha üres a kimenet, 
-    # de a kategória 'email' már segít a backendnek.
+    product: windows
 detection:
     suspicious_url_shortener:
         url|contains:

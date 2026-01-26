@@ -1,34 +1,94 @@
-title: Detektalni a poweshellbol base64-encoded parancsot 
-id: 'f18c91cf-5d2f-4687-8691-eb54f0fd574d'
-status: experimental
-description: Detektalni a powershellbol a base64-encoded parancsot
+title: Suspicious Base64-Encoded PowerShell Command with Network Activity
+id: f18c91cf-5d2f-4687-8691-eb54f0fd574d
+status: stable
+description: >
+  Detects PowerShell executions using Base64-encoded commands combined
+  with network-based payload retrieval and non-interactive execution.
+  This pattern is strongly associated with malware delivery, loaders,
+  and post-exploitation frameworks.
 author: hota05
-date: 2026/01/13
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1027/
+  - https://attack.mitre.org/techniques/T1105/
+
 logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection:
+
+  selection_powershell:
     Image|endswith:
       - '\powershell.exe'
       - '\pwsh.exe'
+
+  selection_encoded:
     CommandLine|contains:
-      - "-enc"
-      - "-encodedcommand"
+      - '-enc'
+      - '-encodedcommand'
+
+  selection_stealth:
+    CommandLine|contains:
+      - '-nop'
+      - '-noni'
+      - '-windowstyle hidden'
+      - '-w hidden'
+
   selection_network:
     CommandLine|contains:
-      - "Invoke-WebRequest"
-      - "iwr"
-      - "wget"
-      - "curl"
-      - "DownloadString"
-      - "DownloadFile"
-      - "Net.WebClient"
-  condition: selection and selection_network
+      - 'Invoke-WebRequest'
+      - 'iwr '
+      - 'wget '
+      - 'curl '
+      - 'DownloadString'
+      - 'DownloadFile'
+      - 'Net.WebClient'
+      - 'http://'
+      - 'https://'
+
+  selection_exec:
+    CommandLine|contains:
+      - 'IEX'
+      - 'Invoke-Expression'
+
+  filter_service_accounts:
+    User|contains:
+      - 'NT AUTHORITY\SYSTEM'
+      - 'LOCAL SERVICE'
+      - 'NETWORK SERVICE'
+
+  filter_legit_tooling:
+    ParentImage|contains:
+      - '\Windows\Installer\'
+      - '\Microsoft Configuration Manager\'
+      - '\Windows\CCM\'
+      - '\PDQ\'
+      - '\Ivanti\'
+      - '\Tanium\'
+      - '\ManageEngine\'
+      - '\Automation\'
+      - '\Scripts\'
+
+  condition: >
+    selection_powershell
+    and selection_encoded
+    and selection_stealth
+    and selection_network
+    and selection_exec
+    and not (
+      filter_service_accounts
+      or filter_legit_tooling
+    )
+
+falsepositives:
+  - Rare advanced administrative automation using encoded commands
+  - Approved red team or penetration testing activity
+
 level: high
+
 tags:
+  - attack.defense_evasion
   - attack.t1027
   - attack.t1105
-falsepositives:
-  - admin scriptet futtat
-  - pentesteles
+  - attack.execution

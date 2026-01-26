@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 10:47:24`
+**Utolsó frissítés:** `2026-01-26 10:51:27`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -18,7 +18,7 @@
 | :--- | :--- | :--- |
 | T1003 | HIGH | Credential Dumping LSASS |
 | T1003.001 | HIGH | Suspicious Access to LSASS Process Memory, Credential Dumping LSASS |
-| T1021 | MEDIUM | Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be |
+| T1021 | MEDIUM | Rapid Logons to Multiple Distant Hosts by Same User |
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |
 | T1027 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Encoded PowerShell Command Execution |
 | T1036 | HIGH | Legitimate Windows Binary Copied to User-Writable Location |

@@ -2,7 +2,7 @@
 
 ## 📖 Tartalomjegyzék
 - [Suspicious Access to LSASS Process Memory](#suspicious-access-to-lsass-process-memory)
-- [Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be](#detektalni-ugyanazon-felhasznalotol-rovid-idon-belul-tobb-egymastol-tavol-levo-hostra-jelentkezik-be)
+- [Rapid Logons to Multiple Distant Hosts by Same User](#rapid-logons-to-multiple-distant-hosts-by-same-user)
 - [Suspicious RDP Logon from Unusual Source](#suspicious-rdp-logon-from-unusual-source)
 - [Suspicious Base64-Encoded PowerShell Command with Network Activity](#suspicious-base64-encoded-powershell-command-with-network-activity)
 - [Legitimate Windows Binary Copied to User-Writable Location](#legitimate-windows-binary-copied-to-user-writable-location)
@@ -60,12 +60,12 @@
 
 ---
 
-## Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be
+## Rapid Logons to Multiple Distant Hosts by Same User
 - **Azonosító:** `T1021.yaml`
-- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟡 (medium)
-- **Leírás:** Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastpl tavol levo hostra jelentkezik be
-- **Hamis pozitívok:** VPN bejelentkezés, jump host, admin script
+- **Leírás:** Detects a single user successfully logging on to multiple different hosts within a short time window. This behavior may indicate stolen credentials, pass-the-hash, or lateral movement using valid accounts.
+- **Hamis pozitívok:** Legitimate VPN reconnects causing new source IPs, Admin activity via multiple servers during maintenance, Misconfigured jump host naming conventions
 - **MITRE ATT&CK:** `T1021`
 
 #### 🚨 Response Playbook

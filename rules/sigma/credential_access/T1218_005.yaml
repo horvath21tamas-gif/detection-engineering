@@ -1,25 +1,74 @@
-title: Gyanus mshta.exe URL-rol futtat scriptet
-id: '24d8de69-1ec4-42d9-8e5e-38d6e36e9a48'
-status: experimental
-description: Gyanus mshta.exe URL-rol futtat scriptet
+title: Suspicious Mshta Execution of Remote Script (High Fidelity)
+id: 24d8de69-1ec4-42d9-8e5e-38d6e36e9a48
+status: stable
+description: >
+  Detects suspicious execution of mshta.exe used to run scripts
+  directly from remote URLs, a common LOLBAS technique used by
+  attackers for initial execution and payload staging.
 author: hota05
-date: 2026/01/13
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1218/005/
+
 logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection_remote:
+
+  mshta_execution:
     Image|endswith: '\mshta.exe'
+
+  remote_script:
     CommandLine|contains:
       - 'http://'
       - 'https://'
-  selection_user:
-    username:
+      - '.hta'
+      - 'javascript:'
+      - 'vbscript:'
+
+  suspicious_parent:
+    ParentImage|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\rundll32.exe'
+
+  filter_service_accounts:
+    User|contains:
       - 'SYSTEM'
-  condition: selection_remote and not selection_user
-level: medium
-tags:
-  - attack.t1218.005
+      - 'LOCAL SERVICE'
+      - 'NETWORK SERVICE'
+
+  filter_legit_tooling:
+    ParentImage|contains:
+      - '\Windows\Installer\'
+      - '\Program Files\'
+      - '\Program Files (x86)\'
+      - '\Microsoft Configuration Manager\'
+      - '\Windows\CCM\'
+      - '\PDQ\'
+      - '\Ivanti\'
+      - '\ManageEngine\'
+      - '\Tanium\'
+
+  condition: >
+    mshta_execution
+    and remote_script
+    and suspicious_parent
+    and not (
+      filter_service_accounts
+      or filter_legit_tooling
+    )
+
 falsepositives:
-  - admin script futtatasa
-  - pentesteles
+  - Rare administrative scripts executed from internal web servers
+  - Approved red team or penetration testing activity
+
+level: high
+
+tags:
+  - attack.execution
+  - attack.t1218.005

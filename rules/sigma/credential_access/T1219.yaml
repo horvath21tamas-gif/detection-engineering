@@ -1,23 +1,69 @@
-title: Detektalni, amikor egy legitim remote admin toolt nem a megszokott enterprise modon hasznalnak
-id: 'b132d51c-1bc1-4f6c-a1c8-337dc5dfefff'
-status: experimental
-description: Detektalni, amikor egy ligitim remote admin toolt nem a megszokott enterprise modon hasznalnak
+title: Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern
+id: b132d51c-1bc1-4f6c-a1c8-337dc5dfefff
+status: stable
+description: >
+  Detects suspicious creation of services associated with legitimate
+  remote administration tools (e.g. PsExec) when used outside
+  approved enterprise management patterns. This behavior is commonly
+  observed during lateral movement by attackers abusing admin tools.
 author: hota05
-date: 2026/01/13
-logsource: 
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1219/
+
+logsource:
   product: windows
   category: service_creation
+
 detection:
-  selection_tool:
-    ServiceName|contains:
+
+  remote_admin_services:
+    ServiceName:
       - 'PSEXECSVC'
-  filter_legitime_source:
+      - 'PAExec'
+      - 'RemComSvc'
+      - 'CSEXEC'
+      - 'ATSVC'
+
+  filter_legit_management_hosts:
     Computer|startswith:
       - 'MGMT-'
-  condition: selection_tool and filter_legitime_source
-level: high
-tags: 
-  - attack.t1219
+      - 'SCCM-'
+      - 'DEPLOY-'
+      - 'ADMIN-'
+
+  filter_legit_accounts:
+    User|contains:
+      - 'svc_'
+      - 'admin_'
+      - 'deploy'
+      - 'sccm'
+      - 'ansible'
+      - 'pdq'
+
+  filter_legit_tooling:
+    Image|contains:
+      - '\Windows\CCM\'
+      - '\Microsoft Configuration Manager\'
+      - '\PDQ\'
+      - '\Ivanti\'
+      - '\ManageEngine\'
+      - '\Tanium\'
+
+  condition: >
+    remote_admin_services
+    and not (
+      filter_legit_management_hosts
+      or filter_legit_accounts
+      or filter_legit_tooling
+    )
+
 falsepositives:
-  - pentest gyakorlat
-  - admin fejlesztés
+  - Approved penetration testing
+  - Emergency troubleshooting from non-standard hosts (rare)
+
+level: high
+
+tags:
+  - attack.lateral_movement
+  - attack.t1219

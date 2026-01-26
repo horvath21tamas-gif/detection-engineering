@@ -9,7 +9,8 @@ def get_rule_data():
     splunk_dir = 'rules/splunk'
     qradar_dir = 'rules/qradar'
     netwitness_dir = 'rules/netwitness'
-    elastic_dir = 'rules/elastic' # ÚJ: Elastic mappa
+    elastic_dir = 'rules/elastic'
+    sentinel_dir = 'rules/sentinel' # ÚJ: Sentinel mappa
 
     techniques_found = {} 
     rule_mapping = {}    
@@ -20,7 +21,8 @@ def get_rule_data():
     splunk_count = 0
     qradar_count = 0
     netwitness_count = 0
-    elastic_count = 0 # ÚJ: Elastic számláló
+    elastic_count = 0
+    sentinel_count = 0 # ÚJ: Sentinel számláló
     
     if os.path.exists(splunk_dir):
         splunk_count = len([f for f in os.listdir(splunk_dir) if f.endswith('.spl')])
@@ -28,15 +30,17 @@ def get_rule_data():
         qradar_count = len([f for f in os.listdir(qradar_dir) if f.endswith('.aql')])
     if os.path.exists(netwitness_dir):
         netwitness_count = len([f for f in os.listdir(netwitness_dir) if f.endswith('.txt')])
-    if os.path.exists(elastic_dir): # ÚJ: Elastic fájlok számolása (.kql vagy .eql)
+    if os.path.exists(elastic_dir):
         elastic_count = len([f for f in os.listdir(elastic_dir) if f.endswith('.kql') or f.endswith('.eql')])
+    if os.path.exists(sentinel_dir): # ÚJ: Sentinel fájlok számolása
+        sentinel_count = len([f for f in os.listdir(sentinel_dir) if f.endswith('.kql')])
         
     if not os.path.exists(sigma_dir):
-        return {}, {}, 0, {}, 0, 0, 0, 0 # Bővítve elastic_count-tal
+        return {}, {}, 0, {}, 0, 0, 0, 0, 0 # Bővítve sentinel_count-tal
         
     for root, dirs, files in os.walk(sigma_dir):
         for file in files:
-            if file.endswith('.yaml'):
+            if file.endswith(('.yaml', '.yml')):
                 rules_count += 1
                 try:
                     with open(os.path.join(root, file), 'r', encoding='utf-8') as f:
@@ -59,8 +63,8 @@ def get_rule_data():
                                 if title not in rule_mapping[tid]:
                                     rule_mapping[tid].append(title)
                 except: continue
-    # ÚJ: elastic_count hozzáadva a return-höz
-    return techniques_found, rule_mapping, rules_count, logsource_stats, splunk_count, qradar_count, netwitness_count, elastic_count
+
+    return techniques_found, rule_mapping, rules_count, logsource_stats, splunk_count, qradar_count, netwitness_count, elastic_count, sentinel_count
 
 def generate_matrix_svg(techniques_found):
     colors = {"critical": "#ff6666", "high": "#ff6666", "medium": "#ffbd66", "low": "#ffe766"}
@@ -102,8 +106,8 @@ def generate_matrix_svg(techniques_found):
         f.write(svg)
 
 def update_all():
-    # ÚJ: elastic_count fogadása
-    techniques, rule_mapping, rules_count, ls_stats, splunk_count, qradar_count, nw_count, el_count = get_rule_data()
+    # ÚJ: sentinel_count fogadása (se_count)
+    techniques, rule_mapping, rules_count, ls_stats, splunk_count, qradar_count, nw_count, el_count, se_count = get_rule_data()
     generate_matrix_svg(techniques)
     
     USER = "horvath21tamas-gif"
@@ -119,7 +123,8 @@ def update_all():
     splunk_pct = round((splunk_count / rules_count * 100), 1) if rules_count > 0 else 0
     qradar_pct = round((qradar_count / rules_count * 100), 1) if rules_count > 0 else 0
     nw_pct = round((nw_count / rules_count * 100), 1) if rules_count > 0 else 0
-    el_pct = round((el_count / rules_count * 100), 1) if rules_count > 0 else 0 # ÚJ: Elastic %
+    el_pct = round((el_count / rules_count * 100), 1) if rules_count > 0 else 0
+    se_pct = round((se_count / rules_count * 100), 1) if rules_count > 0 else 0 # ÚJ: Sentinel %
     
     # 1. Navigator JSON
     layer = {
@@ -131,14 +136,15 @@ def update_all():
     with open('attack_navigator_layer.json', 'w', encoding='utf-8') as f:
         json.dump(layer, f, indent=4)
 
-    # 2. COVERAGE.md (Elastic-kal bővítve)
+    # 2. COVERAGE.md (Sentinel-lel bővítve)
     siem_table = f"## 📈 SIEM Platform Lefedettség\n\n"
     siem_table += "| Platform | Konvertált szabályok | Lefedettség |\n"
     siem_table += "| :--- | :---: | :---: |\n"
     siem_table += f"| Sigma (Forrás) | {rules_count} | 100% |\n"
     siem_table += f"| Splunk (SPL) | {splunk_count} | {splunk_pct}% |\n"
+    siem_table += f"| Microsoft Sentinel (KQL) | {se_count} | {se_pct}% |\n" # ÚJ sor
     siem_table += f"| QRadar (AQL) | {qradar_count} | {qradar_pct}% |\n"
-    siem_table += f"| Elastic (KQL/EQL) | {el_count} | {el_pct}% |\n" # ÚJ sor
+    siem_table += f"| Elastic (KQL/EQL) | {el_count} | {el_pct}% |\n"
     siem_table += f"| RSA NetWitness | {nw_count} | {nw_pct}% |\n\n"
 
     coverage_content = f"# 📘 Részletes MITRE ATT&CK Lefedettség\n\n"
@@ -172,9 +178,6 @@ def update_all():
 - **Részletes lista:** [COVERAGE.md](./COVERAGE.md)
 
 ![Progress Bar](https://geps.dev/progress/{int(coverage_pct)}?dangerColor=ff6666&warningColor=ffbd66&successColor=8ecb88&v={ts})
-
-## 🪵 Log Forrás Lefedettség
-{ls_table}
 
 ## 🗺️ MITRE ATT&CK Mátrix Vizualizáció
 ![MITRE Matrix](./mitre_matrix.svg?v={ts})

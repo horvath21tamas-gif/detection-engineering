@@ -127,13 +127,14 @@ jobs:
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
             
-            # WINDOWS ÉS PROCESS CREATION SZABÁLYOK (Mapping kényszerítése)
+            # WINDOWS ÉS PROCESS CREATION SZABÁLYOK (PROFIL HASZNÁLATA)
             if grep -qiE "windows|process_creation|sysmon|registry|service_control" "$file"; then
               sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk error"
               sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic error"
-              sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar error"
+              # QRadar: without-pipeline a backend hiba elkerülésére, a fixer majd javítja a mezőket
+              sigma convert -t qradar --without-pipeline "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar error"
             
-            # EGYÉB SZABÁLYOK (PIPELINE KIKAPCSOLÁSA)
+            # EGYÉB (E-MAIL, STB.) SZABÁLYOK (PIPELINE KIKAPCSOLÁSA)
             else
               sigma convert -t splunk --without-pipeline "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk generic error"
               sigma convert -t lucene --without-pipeline "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic generic error"
@@ -167,7 +168,6 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Minden módosított fájl (szabályok, json, md, svg) hozzáadása
           git add -A
           
           if ! git diff --staged --quiet; then

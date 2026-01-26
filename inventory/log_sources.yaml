@@ -12,7 +12,6 @@ available_sources:
   - pipe_created
   - login
   - service_creation
-  - email
   product:
   - windows
   - linux

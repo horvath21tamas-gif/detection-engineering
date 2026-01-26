@@ -1,21 +1,23 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 06:24:43`
+**Utolsó frissítés:** `2026-01-26 08:03:56`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 39 | 100% |
-| Splunk (SPL) | 40 | 102.6% |
-| QRadar (AQL) | 40 | 102.6% |
-| Elastic (KQL/EQL) | 40 | 102.6% |
-| RSA NetWitness | 40 | 102.6% |
+| Sigma (Forrás) | 41 | 100% |
+| Splunk (SPL) | 41 | 100.0% |
+| Microsoft Sentinel (KQL) | 41 | 100.0% |
+| QRadar (AQL) | 41 | 100.0% |
+| Elastic (KQL/EQL) | 41 | 100.0% |
+| RSA NetWitness | 41 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
 | :--- | :--- | :--- |
-| T1003.001 | HIGH | Suspicious Access to LSASS Process Memory |
+| T1003 | HIGH | Credential Dumping LSASS |
+| T1003.001 | HIGH | Suspicious Access to LSASS Process Memory, Credential Dumping LSASS |
 | T1021 | MEDIUM | Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be |
 | T1021.001 | MEDIUM | Gyanus RDP belepes |
 | T1027 | HIGH | Detektalni a poweshellbol base64-encoded parancsot, Gyanus Poweshell parancs vegrehajtasa |
@@ -36,6 +38,7 @@
 | T1190 | MEDIUM | webszeren tortent XSS probakozas |
 | T1197 | HIGH | bitsadmin.exe segitsegevel fajl letoltes |
 | T1204 | HIGH | Gyanus folyamatot inditott a Microsoft office valamelyik alkalmazasa |
+| T1204.004 | HIGH | Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel |
 | T1218 | MEDIUM | egy felhasznalo beepitett windows eszkozoket hasznal fajl letoltesre es kodfuttatasra |
 | T1218.005 | MEDIUM | Gyanus mshta.exe URL-rol futtat scriptet |
 | T1218.007 | MEDIUM | msiexec.exe URL-rol telepit csomagot |
@@ -51,9 +54,9 @@
 | T1546.015 | HIGH | COM hijacking (perzisztencia) |
 | T1547.001 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása, Gyanus Registry key modositas perzisztencia kiepitese erdekeben |
 | T1548.002 | HIGH | UAC bypass Fodhelper segitsegevel |
-| T1555 | MEDIUM | Detektalni, amikor nem a bongeszo folyamata fer hozza a bongeszo credential storejahoz |
+| T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |
-| T1559.001 | HIGH | Gyanús Named Pipe létrehozása (High Fidelity - Fixed) |
+| T1559.001 | HIGH | Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity) |
 | T1560.001 | HIGH | Adatok gyanús archiválása exfiltráció céljából |
 | T1562 | MEDIUM | egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani |
 | T1562.001 | CRITICAL | Ransomware elokeszites eszlelese, Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |

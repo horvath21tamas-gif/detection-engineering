@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (SrcIp in ("1.*", "2.*", "3.*", "4.*", "5.*", "6.*", "7.*", "8.*", "9.*")) and (HttpMethod in ("HEAD", "OPTIONS", "TRACE")) and (UriStem in ("/", "/index", "/login", "/admin")) and (UserAgent in ("*curl*", "*wget*", "*python*", "*httpclient*", "*go-http-client*", "*libwww*", "*probe*", "*scanner*")) and (RequestHeaders in ("*Accept-Language*", "*Accept-Encoding*", "*X-Forwarded-For*", "*Forwarded*", "*Via*")) and (not ((UserAgent in ("*Mozilla*", "*Chrome*", "*Safari*", "*Firefox*", "*Edge*")) or (UserAgent in ("*nessus*", "*qualys*", "*openvas*", "*acunetix*", "*nikto*", "*nuclei*", "*zap*", "*zabbix*", "*uptime*", "*pingdom*")) or (UriStem in ("*.css", "*.js", "*.png", "*.jpg", "*.svg", "*.ico", "*.woff", "*.woff2", "*.json", "*/api"))))

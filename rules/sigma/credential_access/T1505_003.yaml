@@ -1,42 +1,103 @@
-title: webszerverre torteno webshellfeltoltese/ interakcioba lepese
-id: '46a34a4b-8860-43a8-9f2a-3f50166641af'
-status: experimental
-description: Detektalni a potenciális webshell feltolteseket es az interakciokat
+title: Webshell Upload or Interaction Detected on Web Server (High Fidelity)
+id: 46a34a4b-8860-43a8-9f2a-3f50166641af
+status: stable
+description: >
+  Detects potential webshell activity by identifying suspicious script uploads
+  to web-accessible directories and subsequent interactions using
+  command-execution style parameters. The rule minimizes false positives by
+  focusing on attacker-typical paths, parameters, and access patterns.
 author: hota05
-date: 2026/01/12
-logsource: 
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1505/003/
+
+logsource:
   product: generic
   category: webserver
+
 detection:
-  selection_upload:
-    cs-method:
-      - POST
-      - PUT
-  selections_webshell_access:
+
+  suspicious_upload_path:
+    cs-uri-stem|contains:
+      - '/uploads/'
+      - '/upload/'
+      - '/files/'
+      - '/images/'
+      - '/tmp/'
+      - '/data/'
+
+  script_file_extension:
     cs-uri-stem|endswith:
       - '.php'
+      - '.phtml'
+      - '.php5'
       - '.asp'
       - '.aspx'
       - '.jsp'
-      - '.phtml'
-  selection_webshell_params:
-    cs-uri-query|endswith:
+
+  upload_method:
+    cs-method:
+      - POST
+      - PUT
+
+  webshell_parameters:
+    cs-uri-query|contains:
       - 'cmd='
       - 'exec='
+      - 'system='
       - 'powershell='
       - 'whoami'
       - 'net user'
-      - 'command='
-      - 'shell'
+      - 'uname'
+      - 'id'
+      - 'curl '
+      - 'wget '
+
+  successful_response:
+    sc-status:
+      - 200
+
+  suspicious_user_agent:
+    cs-user-agent|contains:
       - 'curl'
       - 'wget'
-  condition: all of them
+      - 'python'
+      - 'powershell'
+      - 'httpclient'
+      - 'libwww'
+
+  filter_legit_cms:
+    cs-uri-stem|contains:
+      - '/wp-admin/'
+      - '/wp-json/'
+      - '/administrator/'
+      - '/api/'
+      - '/rest/'
+
+  condition: >
+    (
+      upload_method
+      and suspicious_upload_path
+      and script_file_extension
+    )
+    or
+    (
+      script_file_extension
+      and webshell_parameters
+      and successful_response
+      and suspicious_user_agent
+    )
+    and not filter_legit_cms
+
+falsepositives:
+  - Legitimate file upload functionality with misconfiguration
+  - Developer debugging on non-production systems
+  - Approved penetration testing
+
 level: high
+
 tags:
   - attack.persistence
   - attack.t1505.003
+  - attack.execution
   - attack.t1059
-falsepositive:
-  - Legitim fajl feltoltese
-  - Admin debugg
-  - Pentest ami engedelyezett

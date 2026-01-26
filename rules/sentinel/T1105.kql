@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (FolderPath in ("*\powershell.exe", "*\bitsadmin.exe", "*\certutil.exe")) and (Commandline in ("*Invoke-WebRequest*", "*IEX*", "*DownloadFile*"))
+| where (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\bitsadmin.exe", "*\certutil.exe")) and (ProcessCommandLine in ("*http://*", "*https://*", "*Invoke-WebRequest*", "*iwr *", "*DownloadFile*", "*bitsadmin /transfer*", "*certutil -urlcache*")) and ((ProcessCommandLine in ("*IEX*", "*Invoke-Expression*", "*| iex*", "*-enc*", "*FromBase64String*")) or (ProcessCommandLine in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Downloads\*"))) and (ParentProcessName in ("*\WINWORD.EXE", "*\EXCEL.EXE", "*\POWERPNT.EXE", "*\OUTLOOK.EXE", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe")) and (not ((User in ("*SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*")) or (ParentProcessName in ("*\Windows\CCM\*", "*\Microsoft Configuration Manager\*", "*\PDQ\*", "*\Ivanti\*", "*\ManageEngine\*", "*\Tanium\*", "*\Intune\*", "*\Microsoft\EdgeUpdate\*", "*\Google\Update\*"))))

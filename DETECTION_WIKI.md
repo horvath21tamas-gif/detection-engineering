@@ -14,7 +14,7 @@
 - [Gyanus System process melyet a user indit](#gyanus-system-process-melyet-a-user-indit)
 - [wevtutil.exe security logokat torol](#wevtutilexe-security-logokat-torol)
 - [cmd.exe netuser vagy net localgroup parancsot futtat](#cmdexe-netuser-vagy-net-localgroup-parancsot-futtat)
-- [egy felhasznalo beepitett windows eszkozoket hasznal fajl letoltesre es kodfuttatasra](#egy-felhasznalo-beepitett-windows-eszkozoket-hasznal-fajl-letoltesre-es-kodfuttatasra)
+- [Suspicious Use of Built-in Windows Tools for File Download and Code Execution](#suspicious-use-of-built-in-windows-tools-for-file-download-and-code-execution)
 - [Multiple Failed Login Attempts for Single User (Possible Password Guessing)](#multiple-failed-login-attempts-for-single-user-(possible-password-guessing))
 - [Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server](#suspicious-cross-site-scripting-(xss)-attempt-detected-on-web-server)
 - [Suspicious File Download via Bitsadmin (High Fidelity)](#suspicious-file-download-via-bitsadmin-(high-fidelity))
@@ -232,17 +232,18 @@
 
 ---
 
-## egy felhasznalo beepitett windows eszkozoket hasznal fajl letoltesre es kodfuttatasra
+## Suspicious Use of Built-in Windows Tools for File Download and Code Execution
 - **Azonosító:** `T1105.yaml`
-- **Minőségi mutató:** `50/100` ⭐⭐⭐ (Közepes)
-- **Kritikusság:** 🟡 (medium)
-- **Leírás:** rosszindulatu fajl letoltese / kod futtatasa
-- **Hamis pozitívok:** Nincs megadva
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious usage of built-in Windows utilities such as PowerShell, bitsadmin, and certutil to download files and execute code, a common attacker technique for payload staging and execution. The rule focuses on attacker-typical patterns and execution context to reduce false positives.
+- **Hamis pozitívok:** Rare advanced administrative automation, Approved red team or malware simulation activity
 - **MITRE ATT&CK:** `T1105, T1218`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
 

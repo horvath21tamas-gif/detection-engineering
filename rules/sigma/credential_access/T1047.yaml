@@ -1,27 +1,90 @@
-title: Tavoli hoston inditott folyamat wmic.exe segitsegevel
-id: '3b9f4c2e-72cc-4a3b-ad5e-412d7ce1a14d'
-status: experimental
-description: Tavoli hoston inditott folyamat wmic.exe segitsegevel
+title: Suspicious Remote Process Creation via WMIC
+id: 3b9f4c2e-72cc-4a3b-ad5e-412d7ce1a14d
+status: stable
+description: >
+  Detects suspicious usage of wmic.exe to create processes on
+  remote hosts using the "process call create" method. This
+  technique is commonly used by attackers for lateral movement
+  after credential compromise.
 author: hota05
-date: 2026/01/13
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1047/
+
 logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection_remote:
+
+  wmic_execution:
     Image|endswith: '\wmic.exe'
-    CommandLine|contains: 
-      - "/node:"
-      - "process"
-      - "call"
-      - "create"
-  selection_user:
-    username:
-      - "SYSTEM"
-  condition: selection_remote and not selection_user
-level: medium
-tags:
-  - attack.t1047
+
+  remote_process_creation:
+    CommandLine|contains:
+      - '/node:'
+      - 'process'
+      - 'call'
+      - 'create'
+
+  suspicious_payload:
+    CommandLine|contains:
+      - 'cmd.exe'
+      - 'powershell.exe'
+      - 'pwsh.exe'
+      - 'rundll32.exe'
+      - 'mshta.exe'
+      - 'regsvr32.exe'
+      - 'bitsadmin'
+      - 'certutil'
+
+  suspicious_parent:
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\WINWORD.EXE'
+      - '\EXCEL.EXE'
+      - '\POWERPNT.EXE'
+
+  filter_service_accounts:
+    User|contains:
+      - 'NT AUTHORITY\SYSTEM'
+      - 'LOCAL SERVICE'
+      - 'NETWORK SERVICE'
+
+  filter_legit_tooling:
+    ParentImage|contains:
+      - '\Windows\CCM\'
+      - '\Microsoft Configuration Manager\'
+      - '\SCCM\'
+      - '\Tanium\'
+      - '\PDQ\'
+      - '\Ivanti\'
+      - '\ManageEngine\'
+      - '\Ansible\'
+      - '\SaltStack\'
+      - '\Puppet\'
+
+  condition: >
+    wmic_execution
+    and remote_process_creation
+    and suspicious_payload
+    and suspicious_parent
+    and not (
+      filter_service_accounts
+      or filter_legit_tooling
+    )
+
 falsepositives:
-  - admin scriptek
-  - management tooling
+  - Rare administrative remote troubleshooting
+  - Approved red team or penetration testing activity
+
+level: high
+
+tags:
+  - attack.lateral_movement
+  - attack.execution
+  - attack.t1047

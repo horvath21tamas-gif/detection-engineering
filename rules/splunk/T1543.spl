@@ -1,1 +1,1 @@
-EventCode IN ("7036", "7040") NOT (username IN ("SYSTEM", "LOCAL SERVICE", "NETWORK SERVICE"))
+EventCode IN (7036, 7040) ServiceName IN ("*WinDefend*", "*WdNisSvc*", "*Sense*", "*SecurityHealthService*", "*Sysmon*", "*EventLog*", "*SamSs*", "*VSS*", "*BITS*", "*wuauserv*", "*Backup*", "*MpsSvc*") NOT (User IN ("*SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*") OR Image IN ("*\\Windows\\Installer\\*", "*\\Microsoft\\EdgeUpdate\\*", "*\\Google\\Update\\*", "*\\Mozilla Maintenance Service\\*", "*\\Adobe\\*", "*\\Microsoft\\Teams\\Update\\*", "*\\Windows\\CCM\\*"))

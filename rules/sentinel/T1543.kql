@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (EventID in ("7036", "7040")) and (not (username in ("SYSTEM", "LOCAL SERVICE", "NETWORK SERVICE")))
+| where (EventID in (7036, 7040)) and (ServiceName in ("*WinDefend*", "*WdNisSvc*", "*Sense*", "*SecurityHealthService*", "*Sysmon*", "*EventLog*", "*SamSs*", "*VSS*", "*BITS*", "*wuauserv*", "*Backup*", "*MpsSvc*")) and (not ((User in ("*SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*")) or (FolderPath in ("*\Windows\Installer\*", "*\Microsoft\EdgeUpdate\*", "*\Google\Update\*", "*\Mozilla Maintenance Service\*", "*\Adobe\*", "*\Microsoft\Teams\Update\*", "*\Windows\CCM\*"))))

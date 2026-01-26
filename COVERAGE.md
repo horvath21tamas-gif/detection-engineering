@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 12:09:31`
+**Utolsó frissítés:** `2026-01-26 12:28:07`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 41 | 100% |
-| Splunk (SPL) | 41 | 100.0% |
-| Microsoft Sentinel (KQL) | 41 | 100.0% |
-| QRadar (AQL) | 41 | 100.0% |
-| Elastic (KQL/EQL) | 41 | 100.0% |
-| RSA NetWitness | 41 | 100.0% |
+| Sigma (Forrás) | 42 | 100% |
+| Splunk (SPL) | 41 | 97.6% |
+| Microsoft Sentinel (KQL) | 42 | 100.0% |
+| QRadar (AQL) | 42 | 100.0% |
+| Elastic (KQL/EQL) | 41 | 97.6% |
+| RSA NetWitness | 42 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -61,3 +61,5 @@
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |
+| T1595 | HIGH | High-Fidelity External IP Block Scanning Detection |
+| T1595.001 | HIGH | High-Fidelity External IP Block Scanning Detection |

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ServiceName contains "PSEXECSVC" and Computer startswith "MGMT-"

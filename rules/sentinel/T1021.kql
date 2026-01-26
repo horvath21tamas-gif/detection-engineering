@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (EventID =~ 4624 and (LogonType in (2, 10))) and (not TargetUserName endswith "$") and (not (TargetUserName in ("SYSTEM", "LOCAL SERVICE", "NETWORK SERVICE"))) and (not (IpAddress in ("127.0.0.1", "::1")))

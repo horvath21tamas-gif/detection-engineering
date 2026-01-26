@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath endswith "\wmic.exe" and (ProcessCommandLine in ("*__EventFilter*", "*CommandLineEventConsumer*", "*FilterToConsumerBinding*"))) or (FolderPath endswith "\powershell.exe" and (ProcessCommandLine in ("*Register-WmiEvent*", "*root\subscription*")))) and (not username =~ "SYSTEM")

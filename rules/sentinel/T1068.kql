@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ParentProcessName in ("*\explorer.exe", "*\chrome.exe", "*\brave.exe")) and (FolderPath in ("*\cmd.exe", "*\powershell.exe"))) and User contains "SYSTEM\"

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where EventType =~ "SetValue" and TargetObject contains "\Software\Microsoft\Windows\CurrentVersion\Run" and (Details in ("*\AppData\*", "*\Temp\*")) and (FolderPath in ("*\powershell.exe", "*\cmd.exe"))

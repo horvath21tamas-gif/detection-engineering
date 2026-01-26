@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\7z.exe", "*\7za.exe", "*\rar.exe", "*\WinRAR.exe", "*\tar.exe", "*\powershell.exe", "*\pwsh.exe")) or (filename in ("7z.exe", "7za.exe", "Rar.exe", "tar.exe", "PowerShell.EXE"))) and (ProcessCommandLine in ("* a *", "* -a*", "* -cf *", "*Compress-Archive*", "*New-Object System.IO.Compression*")) and ((ProcessCommandLine in ("* -p*", "* -hp*", "* -v*", "* -mhe=on*", "* -sdel*")) or (ProcessCommandLine in ("*\AppData\*", "*\Temp\*", "*\Users\Public\*", "*\ProgramData\*", "*C:\PerfLogs\*"))) and (not ((ParentProcessName in ("*\msiexec.exe", "*\CcmExec.exe")) and ProcessCommandLine contains "\Microsoft\Windows\SoftwareDistribution\"))

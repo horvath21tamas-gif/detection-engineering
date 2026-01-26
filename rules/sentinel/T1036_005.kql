@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\ProgramData\*")) and (FolderPath in ("*\svchost.exe", "*\lsass.exe", "*services.exe", "*explorer.exe")) and (not (FolderPath in ("C:\Windows\System32\*", "C:\Windows\SysWOW64\*"))) and (not username =~ "SYSTEM")

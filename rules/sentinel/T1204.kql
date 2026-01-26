@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ParentProcessName in ("*\WINWORD.EXE", "*\EXCEL.EXE", "*\POWERPNT.EXE", "*\OUTLOOK.EXE", "*\MSACCESS.EXE")) and (FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\mshta.exe", "*\rundll32.exe", "*\regsvr32.exe", "*\bitsadmin.exe", "*\certutil.exe"))

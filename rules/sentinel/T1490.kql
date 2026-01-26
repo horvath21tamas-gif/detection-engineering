@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath endswith "\vssadmin.exe" and (ProcessCommandLine in ("*delete*", "*shadow*"))) and (not username =~ "SYSTEM")

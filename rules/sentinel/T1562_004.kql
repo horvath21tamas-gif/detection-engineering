@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath endswith "\netsh.exe" or filename =~ "netsh.exe") and (ProcessCommandLine in ("*advfirewall*", "*firewall*")) and (ProcessCommandLine in ("*add*", "*set*")) and (ProcessCommandLine in ("*action=allow*", "*enable=yes*")) and (not ((ParentProcessName in ("*\CcmExec.exe", "*\msiexec.exe")) and (ProcessCommandLine in ("*show*", "*monitor*", "*profile state*"))))

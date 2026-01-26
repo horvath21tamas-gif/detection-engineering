@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where FolderPath endswith "msiexec.exe" and (ProcessCommandLine in ("*http://*", "*https://*", "*/i*"))

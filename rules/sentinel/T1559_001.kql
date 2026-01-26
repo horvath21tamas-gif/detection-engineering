@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((PipeName in ("*\msagent_*", "*\postex_*", "*\status_*", "*\psexec*", "*\paexec*", "*\remcom*", "*\lsadump*", "*\cachedump*", "*\mypipe*", "*\win_svc*")) or ((FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\powershell_ise.exe", "*\wscript.exe", "*\cscript.exe", "*\rundll32.exe", "*\mshta.exe")) and PipeName matches regex "^\\\\+[a-f0-9]{8,10}$")) and (not (((FolderPath in ("C:\Windows\System32\*", "C:\Windows\SysWOW64\*")) and (PipeName in ("*\lsass*", "*\ntsvcs*", "*\scerpc*", "*\epmapper*", "*\atsvc*", "*\spoolss*", "*\srvsvc*"))) or (FolderPath in ("*\vmtoolsd.exe", "*\docker.exe", "*\vboxservice.exe", "*\chrome.exe", "*\msedge.exe"))))

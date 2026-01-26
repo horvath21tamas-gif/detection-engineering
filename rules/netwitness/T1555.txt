@@ -1,2 +1,2 @@
-(((((TargetFileName = '*\\\\User Data\\\\*'))OR ((TargetFileName = '*Login Data*'))))) AND (NOT (((((((process = '*\\\\chrome.exe*'))OR ((process = '*\\\\msedge.exe*'))OR ((process = '*\\\\brave.exe*'))OR ((process = '*\\\\firefox.exe*'))))))
-))
+(((TargetFileName = '*\\User Data\\*' OR TargetFileName = '*Login Data*'))) AND (NOT ((((process = '*\\chrome.exe*' OR process = '*\\msedge.exe*' OR process = '*\\brave.exe*' OR process = '*\\firefox.exe*'))))
+)

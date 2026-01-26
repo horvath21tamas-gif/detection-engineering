@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath endswith "\mshta.exe" and (ProcessCommandLine in ("*http://*", "*https://*"))) and (not username =~ "SYSTEM")

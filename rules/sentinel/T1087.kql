@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath endswith "\cmd.exe" and (ProcessCommandLine in ("*net user*", "*net localgroup*"))) and (not username =~ "SYSTEM")

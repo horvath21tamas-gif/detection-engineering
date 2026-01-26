@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\schtasks.exe", "*\at.exe", "*\powershell.exe", "*\cmd.exe")) and (ProcessCommandLine in ("*schtasks*", "*/create*", "*/sc*", "*Register-ScheduledTask*", "*New-ScheduledTask*", "*at *")) and (ProcessCommandLine in ("*\AppData\*", "*\Users\Public\*", "*\ProgramData\*", "*\Temp\*", "*powershell*", "*cmd.exe*", "*wscript*", "*cscript*", "*mshta*", "*rundll32*", "*.ps1*", "*.vbs*", "*.js*")) and (not ((User in ("*SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*")) or (ProcessCommandLine in ("*\Microsoft\Windows\*", "*Windows Defender*", "*OneDrive*", "*GoogleUpdate*", "*Adobe*"))))

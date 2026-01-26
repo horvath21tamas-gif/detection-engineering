@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetFileName in ("*\User Data\*", "*Login Data*")) and (not (FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\brave.exe", "*\firefox.exe")))

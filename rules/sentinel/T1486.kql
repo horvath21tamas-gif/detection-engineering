@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\sc.exe", "*\net.exe")) and ProcessCommandLine contains "shadow") or (FolderPath endswith "\bcdedit.exe" and ProcessCommandLine contains "recoveryenabled")) and (not username =~ "SYSTEM")

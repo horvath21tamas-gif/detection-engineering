@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath endswith "\wevtutil.exe" and (ProcessCommandLine in ("*cl*", "*security*"))) and (not username =~ "SYSTEM")

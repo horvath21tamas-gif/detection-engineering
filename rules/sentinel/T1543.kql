@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (EventID in ("7036", "7040")) and (not (username in ("SYSTEM", "LOCAL SERVICE", "NETWORK SERVICE")))

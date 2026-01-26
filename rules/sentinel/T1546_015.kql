@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where TargetObject contains "\Software\Classes\CLSID" and (TargetObject in ("*InprocServer32", "*LocalServer32")) and (Details in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*ProgramData*")) and (not username =~ "SYSTEM") and (not Details startswith "C:\Windows\System32")

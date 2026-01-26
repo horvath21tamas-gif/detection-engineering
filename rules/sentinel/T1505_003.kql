@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (['cs-method'] in ("POST", "PUT")) and (['cs-uri-stem'] in ("*.php", "*.asp", "*.aspx", "*.jsp", "*.phtml")) and (['cs-uri-query'] in ("*cmd=", "*exec=", "*powershell=", "*whoami", "*net user", "*command=", "*shell", "*curl", "*wget"))

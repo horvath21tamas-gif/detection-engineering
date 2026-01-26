@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (EventID =~ 4769 and Status =~ "0x0" and (TicketEncryptionType in ("0x17", "0x1", "0x3"))) and (not (TargetUserName endswith "$" or (ServiceCode =~ "0x11" and ServiceName endswith "$") or (IpAddress in ("::1", "127.0.0.1"))))

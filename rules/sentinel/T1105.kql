@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\powershell.exe", "*\bitsadmin.exe", "*\certutil.exe")) and (Commandline in ("*Invoke-WebRequest*", "*IEX*", "*DownloadFile*"))

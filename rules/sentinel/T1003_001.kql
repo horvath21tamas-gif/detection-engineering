@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetImage endswith "\lsass.exe" and (GrantedAccess in ("*0x10*", "*0x1410*", "*0x1010*", "*0x1fffff*", "*0x1438*"))) and (not ((SourceImage in ("*\CcmExec.exe", "*\MsMpEng.exe", "*\mcafee.exe", "*\sentinelone.exe", "*\csagent.exe", "*\taniumclient.exe", "*\taskmgr.exe")) or (CallTrace in ("*C:\Windows\System32\ntdll.dll+*", "*C:\Windows\System32\kernelbase.dll+*"))))

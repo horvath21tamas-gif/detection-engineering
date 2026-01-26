@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (["*"] contains "<script" or ["*"] contains "<svg" or ["*"] contains "<iframe" or ["*"] contains "javascript:" or ["*"] contains "%3cscript") and ((status in (200, 403)) and timeframe =~ "1m")

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath endswith "\regsvr32.exe" and (ProcessCommandLine in ("*\Users\*", "*\AppData\*", "*\Temp\*"))) and (not ProcessCommandLine endswith ".dll")

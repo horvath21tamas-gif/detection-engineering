@@ -127,18 +127,19 @@ jobs:
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
             
-            # WINDOWS SZABÁLYOK (PROFIL HASZNÁLATA)
+            # WINDOWS ÉS PROCESS CREATION SZABÁLYOK (Mapping kényszerítése)
             if grep -qiE "windows|process_creation|sysmon|registry|service_control" "$file"; then
               sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk error"
               sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic error"
+              sigma convert -t qradar -p qradar_windows "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar error"
             
-            # EGYÉB (E-MAIL, STB.) SZABÁLYOK (PROFIL NÉLKÜL - PIPELINE KIKAPCSOLÁSA)
+            # EGYÉB SZABÁLYOK (PIPELINE KIKAPCSOLÁSA)
             else
               sigma convert -t splunk --without-pipeline "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk generic error"
               sigma convert -t lucene --without-pipeline "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic generic error"
+              sigma convert -t qradar --without-pipeline "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar generic error"
             fi
             
-            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar error"
             sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "RSA error"
           done
 

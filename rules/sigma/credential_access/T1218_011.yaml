@@ -1,24 +1,86 @@
-title: Gyanus rundll32.exe hasznalata
-id: 'e96a86f0-4765-4f74-8358-207fae8ca0c5'
-status: experimental
-description: Gyanus rundll32.exe hasznalata
+title: Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity)
+id: e96a86f0-4765-4f74-8358-207fae8ca0c5
+status: stable
+description: >
+  Detects suspicious usage of rundll32.exe commonly associated with
+  LOLBAS abuse, including JavaScript execution, HTML applications,
+  and loading payloads from remote or user-writable locations.
+  The rule minimizes false positives by focusing on attacker-typical
+  command-line patterns and execution context.
 author: hota05
-date: 2026/01/13
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1218/011/
+
 logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection:
+
+  rundll32_execution:
     Image|endswith: '\rundll32.exe'
+
+  suspicious_command_patterns:
     CommandLine|contains:
-      - 'javascript'
+      - 'javascript:'
       - 'RunHTMLApplication'
+      - 'mshtml,'
       - 'http://'
       - 'https://'
-  condition: selection
-level: high
-tags: 
-  - attack.t1218.011
+      - 'scrobj.dll'
+      - 'shell32.dll,ShellExec_RunDLL'
+
+  suspicious_parent:
+    ParentImage|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+
+  suspicious_payload_location:
+    CommandLine|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Downloads\'
+
+  filter_legit_windows_dll:
+    CommandLine|contains:
+      - '\Windows\System32\'
+      - '\Windows\SysWOW64\'
+
+  filter_legit_installers:
+    ParentImage|contains:
+      - '\Windows\Installer\'
+      - '\Program Files\'
+      - '\Program Files (x86)\'
+      - '\DriverStore\'
+      - '\Dell\'
+      - '\HP\'
+      - '\Lenovo\'
+      - '\Intel\'
+
+  condition: >
+    rundll32_execution
+    and suspicious_command_patterns
+    and (
+      suspicious_parent
+      or suspicious_payload_location
+    )
+    and not (
+      filter_legit_windows_dll
+      or filter_legit_installers
+    )
+
 falsepositives:
-  - legit alkalmazasok
-  - driver telepito
+  - Rare legacy applications abusing rundll32 for scripting
+  - Approved red team or malware research activity
+
+level: high
+
+tags:
+  - attack.execution
+  - attack.t1218.011

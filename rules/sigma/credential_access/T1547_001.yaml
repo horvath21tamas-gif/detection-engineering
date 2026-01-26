@@ -1,28 +1,77 @@
-title: "Gyanus Registry key modositas perzisztencia kiepitese erdekeben"
-id: '870102c0-c2fc-4beb-b684-16ab57cb09a1'
-status: experimental
-description: "Detektalni a gyanus Registry key modositasokat"
+title: Suspicious Registry Run Key Modification for User Persistence (High Fidelity)
+id: 870102c0-c2fc-4beb-b684-16ab57cb09a1
+status: stable
+description: >
+  Detects suspicious registry modifications used to establish user-level
+  persistence via Windows Run and RunOnce keys. The rule focuses on
+  non-standard executable locations combined with scripting engines
+  to reduce false positives from legitimate software installations.
 author: hota05
-date: "2026-01-07"
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1547/001/
+
 logsource:
   product: windows
   category: registry_event
+
 detection:
-  selection:
+
+  persistence_keys:
     EventType: SetValue
     TargetObject|contains:
       - '\Software\Microsoft\Windows\CurrentVersion\Run'
+      - '\Software\Microsoft\Windows\CurrentVersion\RunOnce'
+      - '\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Run'
+
+  suspicious_binary_location:
     Details|contains:
       - '\AppData\'
       - '\Temp\'
+      - '\Downloads\'
+      - '\Public\'
+      - '\ProgramData\'
+
+  suspicious_process:
     Image|endswith:
       - '\powershell.exe'
+      - '\pwsh.exe'
       - '\cmd.exe'
-  condition: selection
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+      - '\rundll32.exe'
+      - '\regsvr32.exe'
+
+  filter_system:
+    User|contains:
+      - 'SYSTEM'
+
+  filter_legit_installers:
+    Image|contains:
+      - '\Windows\Installer\'
+      - '\Program Files\'
+      - '\Program Files (x86)\'
+      - '\Microsoft\EdgeUpdate\'
+      - '\Google\Update\'
+      - '\Mozilla Maintenance Service\'
+      - '\Adobe\'
+
+  condition: >
+    persistence_keys
+    and suspicious_binary_location
+    and suspicious_process
+    and not (
+      filter_system
+      or filter_legit_installers
+    )
+
+falsepositives:
+  - Custom enterprise logon scripts
+  - Rare legacy software using user-level Run keys
+
 level: high
+
 tags:
   - attack.persistence
   - attack.t1547.001
-falsepositives:
-  - Legitim software run inditasa
-  - Software telepites vagy update

@@ -1,17 +1,21 @@
-title: Gyanús Named Pipe létrehozása (High Fidelity - Fixed)
+title: Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity)
 id: 519fab54-5841-48d3-b600-bb082c0251e6
 status: stable
 description: >
-  Javított verzió, amely kompatibilis a Splunk, Elastic, QRadar és NetWitness backendekkel.
+  A gyanús nevesített csővezetékek létrehozásának nagy pontosságú észlelése, amelyek gyakran kapcsolódnak az oldalirányú mozgáshoz és a kihasználás utáni keretrendszerekhez.
+  A szabály az ismert rosszindulatú csővezeték-neveket, a véletlenszerű csővezeték-mintákat, a LOLBin végrehajtási kontextust és a szigorú engedélyezési listákat ötvözi a téves riasztások minimalizálása érdekében.
 author: hota05
-date: 2026/01/21
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1559/001/
+
 logsource:
   product: windows
   category: pipe_created
 
 detection:
-  selection_known_malicious:
-    # A backslash-eket dupla \\-el vagy idézőjellel kell védeni
+
+  known_malicious_pipes:
     PipeName|contains:
       - '\msagent_'
       - '\postex_'
@@ -21,15 +25,13 @@ detection:
       - '\remcom'
       - '\lsadump'
       - '\cachedump'
-      - '\mypipe'
       - '\win_svc'
+      - '\mypipe'
 
-  selection_regex_patterns:
-    # A hiba itt volt: A Sigma regexben a \ karaktert duplázni kell: \\\\ 
-    # Vagy használjunk egyszerűbb illeszkedést, amit minden backend szeret.
-    PipeName|re: '^\\+[a-f0-9]{8,10}$'
+  randomized_pipe_pattern:
+    PipeName|re: '^\\+[a-f0-9]{8,12}$'
 
-  selection_suspicious_paths:
+  suspicious_execution_image:
     Image|endswith:
       - '\cmd.exe'
       - '\powershell.exe'
@@ -39,6 +41,13 @@ detection:
       - '\cscript.exe'
       - '\rundll32.exe'
       - '\mshta.exe'
+
+  suspicious_parent:
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
 
   filter_legit_microsoft:
     Image|startswith:
@@ -53,19 +62,39 @@ detection:
       - '\spoolss'
       - '\srvsvc'
 
+
   filter_legit_apps:
     Image|endswith:
       - '\vmtoolsd.exe'
-      - '\docker.exe'
       - '\vboxservice.exe'
+      - '\docker.exe'
+
+  # === 7. Browser noise reduction ===
+  filter_browsers:
+    Image|endswith:
       - '\chrome.exe'
       - '\msedge.exe'
+    PipeName|re: '^\\+(chrome|edge|mojo)'
 
-  condition: (selection_known_malicious or (selection_suspicious_paths and selection_regex_patterns)) and not (filter_legit_microsoft or filter_legit_apps)
+  condition: >
+    known_malicious_pipes
+    or (
+        randomized_pipe_pattern
+        and suspicious_execution_image
+        and suspicious_parent
+      )
+    and not (
+        filter_legit_microsoft
+        or filter_legit_apps
+        or filter_browsers
+      )
 
 falsepositives:
-  - Egyedi fejlesztésű szoftverek
+  - Custom in-house IPC mechanisms
+  - Rare administrative tooling using randomized pipe names
+
 level: high
+
 tags:
   - attack.lateral_movement
   - attack.t1559.001

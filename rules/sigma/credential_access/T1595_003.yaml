@@ -1,0 +1,126 @@
+title: Active Wordlist Scanning Against Authentication Endpoints
+id: 25f55495-d967-4823-8eb1-a5565cf50149
+status: stable
+description: >
+  Detects high-confidence wordlist scanning activity where an external
+  source rapidly probes authentication or administrative endpoints using
+  varying username parameters, consistent with automated reconnaissance.
+author: hota05
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1595/003/
+
+logsource:
+  product: generic
+  category: webserver
+
+detection:
+
+  selection_external:
+    SrcIp|startswith:
+      - '1.'
+      - '2.'
+      - '3.'
+      - '4.'
+      - '5.'
+      - '6.'
+      - '7.'
+      - '8.'
+      - '9.'
+
+  selection_auth_paths:
+    UriStem|contains:
+      - '/login'
+      - '/signin'
+      - '/auth'
+      - '/admin'
+      - '/administrator'
+      - '/wp-login'
+      - '/wp-admin'
+      - '/account'
+      - '/user'
+
+  selection_identity_params:
+    UriQuery|contains:
+      - 'user='
+      - 'username='
+      - 'login='
+      - 'email='
+      - 'account='
+
+  selection_failed:
+    Status:
+      - 401
+      - 403
+      - 404
+
+  selection_automation:
+    UserAgent|contains:
+      - 'python'
+      - 'curl'
+      - 'wget'
+      - 'httpclient'
+      - 'go-http-client'
+      - 'libwww'
+      - 'scrapy'
+
+  filter_browsers:
+    UserAgent|contains:
+      - 'Mozilla'
+      - 'Chrome'
+      - 'Safari'
+      - 'Firefox'
+      - 'Edge'
+
+  filter_scanners:
+    UserAgent|contains:
+      - 'nessus'
+      - 'qualys'
+      - 'openvas'
+      - 'acunetix'
+      - 'nikto'
+      - 'nuclei'
+      - 'zap'
+      - 'burp'
+
+  filter_static:
+    UriStem|endswith:
+      - '.css'
+      - '.js'
+      - '.png'
+      - '.jpg'
+      - '.ico'
+      - '.svg'
+      - '.woff'
+      - '.json'
+
+
+  condition: >
+    selection_external
+    and selection_auth_paths
+    and selection_identity_params
+    and selection_failed
+    and selection_automation
+    and not (
+      filter_browsers
+      or filter_scanners
+      or filter_static
+    )
+
+fields:
+  - SrcIp
+  - UriStem
+  - UriQuery
+  - Status
+  - UserAgent
+
+falsepositives:
+  - Custom API clients without browser User-Agent (rare)
+  - Approved red team activity not allowlisted
+
+level: high
+
+tags:
+  - attack.reconnaissance
+  - attack.t1595
+  - attack.t1595.003

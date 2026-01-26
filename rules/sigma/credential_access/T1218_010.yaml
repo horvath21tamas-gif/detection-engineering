@@ -1,25 +1,86 @@
-title: Gyanus regsvr32.exe futtatasa
-id: 'b43fae63-d51d-4577-bc0a-6e179d34e23a'
-status: experimental
-description: Gyanus regsvr32.exe futtatasa
+title: Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity)
+id: b43fae63-d51d-4577-bc0a-6e179d34e23a
+status: stable
+description: >
+  Detects suspicious usage of regsvr32.exe commonly associated with
+  LOLBAS abuse (Squiblydoo technique), including execution of scriptlets,
+  remote payloads, or DLLs from user-writable locations using attacker-
+  typical command-line arguments.
 author: hota05
-date: 2026/01/13
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1218/010/
+
 logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection:
+
+  regsvr32_execution:
     Image|endswith: '\regsvr32.exe'
+
+  suspicious_arguments:
+    CommandLine|contains:
+      - '/i:'
+      - '/n'
+      - '/s'
+      - 'scrobj.dll'
+      - '.sct'
+      - 'http://'
+      - 'https://'
+
+  suspicious_payload_location:
     CommandLine|contains:
       - '\Users\'
       - '\AppData\'
       - '\Temp\'
-  filter_dll:
-    CommandLine|endswith: '.dll'
-  condition: selection and not filter_dll
-level: medium
-tags: 
-  - attack.t1218.010
+      - '\Downloads\'
+
+  suspicious_parent:
+    ParentImage|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+
+  filter_legit_installers:
+    ParentImage|contains:
+      - '\Windows\Installer\'
+      - '\Program Files\'
+      - '\Program Files (x86)\'
+      - '\Microsoft\EdgeUpdate\'
+      - '\Google\Update\'
+      - '\Adobe\'
+      - '\Mozilla\'
+      - '\Citrix\'
+
+  filter_system:
+    User|contains:
+      - 'SYSTEM'
+      - 'LOCAL SERVICE'
+      - 'NETWORK SERVICE'
+
+  condition: >
+    regsvr32_execution
+    and suspicious_arguments
+    and (
+      suspicious_payload_location
+      or suspicious_parent
+    )
+    and not (
+      filter_legit_installers
+      or filter_system
+    )
+
 falsepositives:
-  - regi alkalmazasok
-  - frissites
+  - Rare legacy applications using scriptlets
+  - Approved red team activity
+
+level: high
+
+tags:
+  - attack.execution
+  - attack.t1218.010

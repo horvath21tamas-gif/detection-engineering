@@ -92,16 +92,24 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Install Modern Dependencies
+      - name: Install Modern SIEM environment (Clean & Force Update)
         run: |
           python -m pip install --upgrade pip
+          
+          # Eltávolítunk minden maradványt
           python -m pip uninstall -y pysigma sigma-cli pyparsing
-          python -m pip install "pysigma>=1.1.0" "pyparsing==3.1.1" "packaging>=24.0"
+          
+          # Engedjük a modern verziókat, amik kompatibilisek egymással
+          python -m pip install "pysigma>=1.1.0" "packaging>=24.0"
+          
+          # CLI telepítése
           python -m pip install --no-deps "sigma-cli==2.0.1"
           python -m pip install "click>=8.0.0" "colorama>=0.4.6" "prettytable>=3.0.0"
           
-          # Backendek és Sentinel támogatás
+          # Backendek manuális telepítése (Sentinel támogatással)
           python -m pip install pysigma-backend-splunk pysigma-backend-azure pysigma-backend-elasticsearch pysigma-backend-insightidr
+          
+          # Pluginok (csak ami feltétlen kell)
           sigma plugin install -f windows sysmon
 
       - name: Update Dynamic Inventory

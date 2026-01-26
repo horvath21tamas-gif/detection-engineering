@@ -1,27 +1,104 @@
-title: egy felhasznalo beepitett windows eszkozoket hasznal fajl letoltesre es kodfuttatasra
-id: '03cbebe4-d867-47e9-a4c9-801844913ca2'
-status: experimental
-description: rosszindulatu fajl letoltese / kod futtatasa
+title: Suspicious Use of Built-in Windows Tools for File Download and Code Execution
+id: 03cbebe4-d867-47e9-a4c9-801844913ca2
+status: stable
+description: >
+  Detects suspicious usage of built-in Windows utilities such as
+  PowerShell, bitsadmin, and certutil to download files and execute
+  code, a common attacker technique for payload staging and execution.
+  The rule focuses on attacker-typical patterns and execution context
+  to reduce false positives.
 author: hota05
-date: 2026/01/12
-logsource: 
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1105/
+
+logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection:
+
+  lolbin_execution:
     Image|endswith:
       - '\powershell.exe'
+      - '\pwsh.exe'
       - '\bitsadmin.exe'
       - '\certutil.exe'
-    Commandline|contains:
+
+  download_indicators:
+    CommandLine|contains:
+      - 'http://'
+      - 'https://'
       - 'Invoke-WebRequest'
-      - 'IEX'
+      - 'iwr '
       - 'DownloadFile'
-  condition: selection
-level: medium
+      - 'bitsadmin /transfer'
+      - 'certutil -urlcache'
+
+  execution_indicators:
+    CommandLine|contains:
+      - 'IEX'
+      - 'Invoke-Expression'
+      - '| iex'
+      - '-enc'
+      - 'FromBase64String'
+
+  suspicious_target_path:
+    CommandLine|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Downloads\'
+
+  suspicious_parent:
+    ParentImage|endswith:
+      - '\WINWORD.EXE'
+      - '\EXCEL.EXE'
+      - '\POWERPNT.EXE'
+      - '\OUTLOOK.EXE'
+      - '\cmd.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+
+  filter_service_accounts:
+    User|contains:
+      - 'SYSTEM'
+      - 'LOCAL SERVICE'
+      - 'NETWORK SERVICE'
+
+  filter_legit_tooling:
+    ParentImage|contains:
+      - '\Windows\CCM\'
+      - '\Microsoft Configuration Manager\'
+      - '\PDQ\'
+      - '\Ivanti\'
+      - '\ManageEngine\'
+      - '\Tanium\'
+      - '\Intune\'
+      - '\Microsoft\EdgeUpdate\'
+      - '\Google\Update\'
+
+  condition: >
+    lolbin_execution
+    and download_indicators
+    and (
+      execution_indicators
+      or suspicious_target_path
+    )
+    and suspicious_parent
+    and not (
+      filter_service_accounts
+      or filter_legit_tooling
+    )
+
+falsepositives:
+  - Rare advanced administrative automation
+  - Approved red team or malware simulation activity
+
+level: high
+
 tags:
+  - attack.command_and_control
   - attack.t1105
   - attack.t1218
-falsepositive:
-  - Admin dolgozik
-  - legitim fajl letoltese mely nem karos

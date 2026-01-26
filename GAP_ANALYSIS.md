@@ -1,21 +1,18 @@
 # 🎯 Detection Strategy & Gap Analysis
-*Frissítve: 2026-01-26 14:41:15*
+*Frissítve: 2026-01-26 14:50:01*
 
 ## 📊 Állapotösszegző
 | Mutató | Érték |
 | :--- | :--- |
 | Összes szabály | 54 |
-| Aktív (van logforrás) | 52 |
-| Inaktív (hiányzó log) | 2 |
+| Aktív (van logforrás) | 54 |
+| Inaktív (hiányzó log) | 0 |
 | MITRE Lefedettség | 58 technika |
 
 ## 🛑 Kritikus Adatforrás Hiányok
 Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logokat:
 
-| Szabály | Hiányzó forrás |
-| :--- | :--- |
-| High-Fidelity External IP Block Scanning Detection (`T1595_001.yaml`) | category: `network_traffic` |
-| Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel (`T1204_004.yaml`) | category: `email` |
+✅ Minden szabályhoz rendelkezésre áll a megfelelő adatforrás a SIEM-ben.
 
 ## 🛡️ Stratégiai Teendők (Hiányzó Technikák)
 A SOC hatékonyság növelése érdekében ezekre a technikákra kellene szabályt írni:

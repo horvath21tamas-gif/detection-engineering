@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (FolderPath endswith "\mshta.exe" and (ProcessCommandLine in ("*http://*", "*https://*"))) and (not username =~ "SYSTEM")
+| where FolderPath endswith "\mshta.exe" and (ProcessCommandLine in ("*http://*", "*https://*", "*.hta*", "*javascript:*", "*vbscript:*")) and (ParentProcessName in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\rundll32.exe")) and (not ((User in ("*SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*")) or (ParentProcessName in ("*\Windows\Installer\*", "*\Program Files\*", "*\Program Files (x86)\*", "*\Microsoft Configuration Manager\*", "*\Windows\CCM\*", "*\PDQ\*", "*\Ivanti\*", "*\ManageEngine\*", "*\Tanium\*"))))

@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 09:20:23`
+**Utolsó frissítés:** `2026-01-26 09:23:58`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -40,7 +40,7 @@
 | T1204 | HIGH | Gyanus folyamatot inditott a Microsoft office valamelyik alkalmazasa |
 | T1204.004 | HIGH | Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel |
 | T1218 | MEDIUM | egy felhasznalo beepitett windows eszkozoket hasznal fajl letoltesre es kodfuttatasra |
-| T1218.005 | MEDIUM | Gyanus mshta.exe URL-rol futtat scriptet |
+| T1218.005 | HIGH | Suspicious Mshta Execution of Remote Script (High Fidelity) |
 | T1218.007 | HIGH | Suspicious Msiexec Installation from Remote URL (High Fidelity) |
 | T1218.010 | HIGH | Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity) |
 | T1218.011 | HIGH | Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity) |

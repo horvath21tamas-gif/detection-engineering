@@ -20,7 +20,7 @@
 - [bitsadmin.exe segitsegevel fajl letoltes](#bitsadminexe-segitsegevel-fajl-letoltes)
 - [Gyanus folyamatot inditott a Microsoft office valamelyik alkalmazasa](#gyanus-folyamatot-inditott-a-microsoft-office-valamelyik-alkalmazasa)
 - [Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel](#adathalászat-rosszindulatú-linken-keresztül-domain-és-feladó-rendellenességekkel)
-- [Gyanus mshta.exe URL-rol futtat scriptet](#gyanus-mshtaexe-url-rol-futtat-scriptet)
+- [Suspicious Mshta Execution of Remote Script (High Fidelity)](#suspicious-mshta-execution-of-remote-script-(high-fidelity))
 - [Suspicious Msiexec Installation from Remote URL (High Fidelity)](#suspicious-msiexec-installation-from-remote-url-(high-fidelity))
 - [Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity)](#suspicious-regsvr32-execution-indicative-of-lolbas-abuse-(high-fidelity))
 - [Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity)](#suspicious-rundll32-execution-with-script-or-remote-payload-(high-fidelity))
@@ -319,17 +319,18 @@
 
 ---
 
-## Gyanus mshta.exe URL-rol futtat scriptet
+## Suspicious Mshta Execution of Remote Script (High Fidelity)
 - **Azonosító:** `T1218_005.yaml`
-- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
-- **Kritikusság:** 🟡 (medium)
-- **Leírás:** Gyanus mshta.exe URL-rol futtat scriptet
-- **Hamis pozitívok:** admin script futtatasa, pentesteles
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious execution of mshta.exe used to run scripts directly from remote URLs, a common LOLBAS technique used by attackers for initial execution and payload staging.
+- **Hamis pozitívok:** Rare administrative scripts executed from internal web servers, Approved red team or penetration testing activity
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
 

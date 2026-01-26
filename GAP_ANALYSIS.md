@@ -1,25 +1,22 @@
 # 🎯 Detection Strategy & Gap Analysis
-*Frissítve: 2026-01-26 06:24:43*
+*Frissítve: 2026-01-26 11:59:11*
 
 ## 📊 Állapotösszegző
 | Mutató | Érték |
 | :--- | :--- |
-| Összes szabály | 40 |
-| Aktív (van logforrás) | 37 |
-| Inaktív (hiányzó log) | 3 |
-| MITRE Lefedettség | 30 technika |
+| Összes szabály | 41 |
+| Aktív (van logforrás) | 40 |
+| Inaktív (hiányzó log) | 1 |
+| MITRE Lefedettség | 45 technika |
 
 ## 🛑 Kritikus Adatforrás Hiányok
 Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logokat:
 
 | Szabály | Hiányzó forrás |
 | :--- | :--- |
-| egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani (`T1543.yaml`) | category: `system` |
-| Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be (`T1021.yaml`) | category: `security` |
-| Gyanus RDP belepes (`T1021_001.yaml`) | category: `security` |
+| Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel (`T1204_004.yaml`) | category: `email` |
 
 ## 🛡️ Stratégiai Teendők (Hiányzó Technikák)
 A SOC hatékonyság növelése érdekében ezekre a technikákra kellene szabályt írni:
 
-- [ ] **T1003** - Credential Dumping ([Link](https://attack.mitre.org/techniques/T1003))
 - [ ] **T1547** - Boot or Logon Autostart Execution ([Link](https://attack.mitre.org/techniques/T1547))

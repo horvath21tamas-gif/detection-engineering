@@ -14,7 +14,7 @@ def fetch_live_log_sources():
     }
     
     # Kiegészítjük azokat, amiket a hibaüzenetben kaptál
-    extra_from_siem = ['registry_event', 'image_load', 'process_access', 'webserver', 'pipe_created', 'login', 'service_creation']
+    extra_from_siem = ['registry_event', 'image_load', 'process_access', 'webserver', 'pipe_created', 'login', 'service_creation', 'email', 'network_traffic']
     live_sources['category'].extend(extra_from_siem)
     live_sources['product'].append('generic')
 

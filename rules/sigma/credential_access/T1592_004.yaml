@@ -1,0 +1,128 @@
+title: High-Confidence Client Configuration Fingerprinting (Reconnaissance)
+id: 8128254f-e37b-4fd0-a62a-5b5e3852498f
+status: stable
+description: >
+  Detects high-confidence reconnaissance activity where an external source
+  performs repeated non-browser HTTP requests using probing methods and
+  header-focused techniques to enumerate client or infrastructure
+  configurations. Optimized to minimize false positives.
+author: hota05
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1592/004/
+
+logsource:
+  product: generic
+  category: webserver
+
+detection:
+
+  selection_external:
+    SrcIp|startswith:
+      - '1.'
+      - '2.'
+      - '3.'
+      - '4.'
+      - '5.'
+      - '6.'
+      - '7.'
+      - '8.'
+      - '9.'
+
+  selection_methods:
+    HttpMethod:
+      - 'HEAD'
+      - 'OPTIONS'
+      - 'TRACE'
+
+  selection_probe_targets:
+    UriStem:
+      - '/'
+      - '/index'
+      - '/login'
+      - '/admin'
+
+  selection_automation_ua:
+    UserAgent|contains:
+      - 'curl'
+      - 'wget'
+      - 'python'
+      - 'httpclient'
+      - 'go-http-client'
+      - 'libwww'
+      - 'probe'
+      - 'scanner'
+
+  selection_header_probe:
+    RequestHeaders|contains:
+      - 'Accept-Language'
+      - 'Accept-Encoding'
+      - 'X-Forwarded-For'
+      - 'Forwarded'
+      - 'Via'
+
+  filter_browsers:
+    UserAgent|contains:
+      - 'Mozilla'
+      - 'Chrome'
+      - 'Safari'
+      - 'Firefox'
+      - 'Edge'
+
+  filter_known_tools:
+    UserAgent|contains:
+      - 'nessus'
+      - 'qualys'
+      - 'openvas'
+      - 'acunetix'
+      - 'nikto'
+      - 'nuclei'
+      - 'zap'
+      - 'zabbix'
+      - 'uptime'
+      - 'pingdom'
+
+  filter_noise:
+    UriStem|endswith:
+      - '.css'
+      - '.js'
+      - '.png'
+      - '.jpg'
+      - '.svg'
+      - '.ico'
+      - '.woff'
+      - '.woff2'
+      - '.json'
+      - '/api'
+
+  timeframe: 90s
+
+  condition: >
+    selection_external
+    and selection_methods
+    and selection_probe_targets
+    and selection_automation_ua
+    and selection_header_probe
+    and not (
+      filter_browsers
+      or filter_known_tools
+      or filter_noise
+    )
+
+fields:
+  - SrcIp
+  - HttpMethod
+  - UriStem
+  - UserAgent
+  - RequestHeaders
+
+falsepositives:
+  - Custom external API clients without browser User-Agent (rare)
+  - Approved red team activity if not allowlisted
+
+level: medium
+
+tags:
+  - attack.reconnaissance
+  - attack.t1592
+  - attack.t1592.004

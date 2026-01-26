@@ -30,8 +30,8 @@ jobs:
       - name: Install Sentinel Environment
         run: |
           python -m pip install --upgrade pip
-          # Kényszerítjük a Sentinel-kompatibilis verziókat
-          python -m pip install "pysigma>=0.10.6,<0.11.0" "pysigma-backend-azure==0.1.3"
+          # A pyparsing 3.1.1 a kulcs a régi Sigma motorhoz
+          python -m pip install "pyparsing==3.1.1" "pysigma<0.11.0" "pysigma-backend-azure==0.1.3"
 
       - name: Convert Sentinel rules
         run: |

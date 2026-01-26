@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 09:23:58`
+**Utolsó frissítés:** `2026-01-26 09:29:25`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -27,7 +27,7 @@
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
 | T1053.005 | MEDIUM | Gyanus Scheduled Task letrehozasa |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 APIs |
-| T1059 | HIGH | Gyanus folyamatot inditott a Microsoft office valamelyik alkalmazasa, Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
+| T1059 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1059.001 | MEDIUM | Gyanus Poweshell parancs vegrehajtasa |
 | T1068 | MEDIUM | Gyanus System process melyet a user indit |
 | T1070.001 | MEDIUM | wevtutil.exe security logokat torol |
@@ -37,7 +37,7 @@
 | T1110.001 | MEDIUM | tobbszori sikertelen bejelentkezes egy felhasznalohoz |
 | T1190 | MEDIUM | webszeren tortent XSS probakozas |
 | T1197 | HIGH | bitsadmin.exe segitsegevel fajl letoltes |
-| T1204 | HIGH | Gyanus folyamatot inditott a Microsoft office valamelyik alkalmazasa |
+| T1204 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity) |
 | T1204.004 | HIGH | Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel |
 | T1218 | MEDIUM | egy felhasznalo beepitett windows eszkozoket hasznal fajl letoltesre es kodfuttatasra |
 | T1218.005 | HIGH | Suspicious Mshta Execution of Remote Script (High Fidelity) |

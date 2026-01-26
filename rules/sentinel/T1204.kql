@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (ParentProcessName in ("*\WINWORD.EXE", "*\EXCEL.EXE", "*\POWERPNT.EXE", "*\OUTLOOK.EXE", "*\MSACCESS.EXE")) and (FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\mshta.exe", "*\rundll32.exe", "*\regsvr32.exe", "*\bitsadmin.exe", "*\certutil.exe"))
+| where (ParentProcessName in ("*\WINWORD.EXE", "*\EXCEL.EXE", "*\POWERPNT.EXE", "*\OUTLOOK.EXE", "*\MSACCESS.EXE")) and (FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\mshta.exe", "*\rundll32.exe", "*\regsvr32.exe", "*\bitsadmin.exe", "*\certutil.exe", "*\wscript.exe", "*\cscript.exe")) and ((ProcessCommandLine in ("*http://*", "*https://*", "*-enc*", "*Invoke-Expression*", "*IEX*", "*DownloadString*", "*FromBase64String*", "*/c*", "*/r*")) or (ProcessCommandLine in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Microsoft\Office\*", "*\INetCache\*"))) and (not ((ParentProcessCommandLine in ("*\Addins\*", "*\VSTO\*", "*\Program Files\Microsoft Office\*")) or (User in ("*SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*"))))

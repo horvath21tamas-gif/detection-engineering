@@ -18,7 +18,7 @@
 - [tobbszori sikertelen bejelentkezes egy felhasznalohoz](#tobbszori-sikertelen-bejelentkezes-egy-felhasznalohoz)
 - [webszeren tortent XSS probakozas](#webszeren-tortent-xss-probakozas)
 - [bitsadmin.exe segitsegevel fajl letoltes](#bitsadminexe-segitsegevel-fajl-letoltes)
-- [Gyanus folyamatot inditott a Microsoft office valamelyik alkalmazasa](#gyanus-folyamatot-inditott-a-microsoft-office-valamelyik-alkalmazasa)
+- [Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity)](#suspicious-child-process-spawned-by-microsoft-office-application-(high-fidelity))
 - [Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel](#adathalászat-rosszindulatú-linken-keresztül-domain-és-feladó-rendellenességekkel)
 - [Suspicious Mshta Execution of Remote Script (High Fidelity)](#suspicious-mshta-execution-of-remote-script-(high-fidelity))
 - [Suspicious Msiexec Installation from Remote URL (High Fidelity)](#suspicious-msiexec-installation-from-remote-url-(high-fidelity))
@@ -289,12 +289,12 @@
 
 ---
 
-## Gyanus folyamatot inditott a Microsoft office valamelyik alkalmazasa
+## Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity)
 - **Azonosító:** `T1204.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** Eszlelni a Microsoft Office altal letrehozott chilprocesseket
-- **Hamis pozitívok:** Nincs megadva
+- **Leírás:** Detects suspicious child processes spawned by Microsoft Office applications that are indicative of macro abuse, DDE exploitation, or document-based malware execution. The rule focuses on attacker- typical child processes, command-line patterns, and user-writable execution context to minimize false positives.
+- **Hamis pozitívok:** Rare developer automation using Office COM, Approved red team / phishing simulation exercises
 - **MITRE ATT&CK:** `T1204, T1059`
 
 #### 🚨 Response Playbook

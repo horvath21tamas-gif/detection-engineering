@@ -148,6 +148,9 @@ jobs:
       - name: Run Integrity Check
         run: python tools/check_integrity.py
 
+      - name: Generate Documentation
+        run: python tools/generate_docs.py
+
       - name: Commit and push changes
         if: github.event_name == 'push'
         run: |

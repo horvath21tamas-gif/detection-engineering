@@ -1,1 +1,1 @@
-event.code:4625
+event.code:4625 AND (winlog.event_data.LogonType:(2 OR 3 OR 10)) AND (NOT (winlog.event_data.TargetUserName:*$ OR (winlog.event_data.TargetUserName:(*svc_* OR *service* OR *sql* OR *backup*)) OR (source.domain:(*EXCHANGE* OR *AADCONNECT* OR *ADFS*))))

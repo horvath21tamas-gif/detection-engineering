@@ -1,1 +1,2 @@
-EventID = 4625
+EventID = 4625 AND (LogonType = 2,3,10) AND (NOT ((((TargetUserName = '*$*'))|| (((TargetUserName = '*svc_*' OR TargetUserName = '*service*' OR TargetUserName = '*sql*' OR TargetUserName = '*backup*'))) OR (((WorkstationName = '*EXCHANGE*' OR WorkstationName = '*AADCONNECT*' OR WorkstationName = '*ADFS*')))))
+)

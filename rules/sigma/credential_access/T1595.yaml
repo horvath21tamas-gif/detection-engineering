@@ -1,0 +1,150 @@
+title: High-Fidelity Active Scanning Detection (Behavior-Based)
+id: 081f4ef1-3aa0-41e0-b872-801d4ca4abbb
+status: stable
+description: >
+  Detects high-confidence active scanning behavior by identifying
+  automated clients systematically probing multiple sensitive web
+  endpoints from an external source within a short timeframe.
+  Designed to minimize false positives by excluding browsers,
+  monitoring, health checks, and known benign scanners.
+author: hota05
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1595/
+
+logsource:
+  product: generic
+  category: webserver
+
+detection:
+
+  selection_external_ip:
+    SrcIp|startswith:
+      - '1.'
+      - '2.'
+      - '3.'
+      - '4.'
+      - '5.'
+      - '6.'
+      - '7.'
+      - '8.'
+      - '9.'
+
+  selection_methods:
+    Method:
+      - GET
+      - HEAD
+      - OPTIONS
+
+  selection_sensitive_paths:
+    UriStem|contains:
+      - '/admin'
+      - '/login'
+      - '/config'
+      - '/setup'
+      - '/debug'
+      - '/test'
+      - '/backup'
+      - '/old'
+      - '/dev'
+      - '/server-status'
+      - '/phpinfo'
+      - '/.git'
+      - '/.env'
+      - '/wp-admin'
+      - '/actuator'
+
+  selection_automation_ua:
+    UserAgent|contains:
+      - 'curl'
+      - 'wget'
+      - 'python'
+      - 'go-http-client'
+      - 'libwww'
+      - 'scanner'
+      - 'probe'
+      - 'masscan'
+      - 'nmap'
+      - 'zgrab'
+      - 'httpclient'
+      - 'axios'
+      - 'requests'
+
+  selection_status:
+    Status:
+      - 200
+      - 301
+      - 302
+      - 401
+      - 403
+      - 404
+
+  filter_browser_ua:
+    UserAgent|contains:
+      - 'Mozilla'
+      - 'Chrome'
+      - 'Firefox'
+      - 'Safari'
+      - 'Edge'
+
+  filter_known_scanners:
+    UserAgent|contains:
+      - 'nessus'
+      - 'qualys'
+      - 'openvas'
+      - 'acunetix'
+      - 'nikto'
+      - 'nuclei'
+      - 'zabbix'
+      - 'prometheus'
+      - 'uptime'
+      - 'pingdom'
+      - 'datadog'
+      - 'newrelic'
+
+  filter_noise:
+    UriStem|contains:
+      - '/health'
+      - '/metrics'
+      - '/status/health'
+      - '/api'
+    UriStem|endswith:
+      - '.css'
+      - '.js'
+      - '.png'
+      - '.jpg'
+      - '.svg'
+      - '.ico'
+      - '.woff'
+      - '.woff2'
+      - '.map'
+
+
+  condition: >
+    selection_external_ip
+    and selection_methods
+    and selection_sensitive_paths
+    and selection_automation_ua
+    and selection_status
+    and not (
+      filter_browser_ua
+      or filter_known_scanners
+      or filter_noise
+    )
+
+fields:
+  - SrcIp
+  - Method
+  - UriStem
+  - Status
+  - UserAgent
+
+falsepositives:
+  - Explicitly approved external vulnerability scans
+  - Rare external troubleshooting using CLI tools
+
+level: high
+
+tags:
+  - attack.reconnaissance
+  - attack.t1595

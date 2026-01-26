@@ -1,27 +1,78 @@
-title: "egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani"
-id: '2f17f7b4-8f20-4adf-bc54-20d5af6138f3'
-status: experimental
-description: "windows szolgaltatas leallitas vagy modositas"
+title: Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services
+id: 2f17f7b4-8f20-4adf-bc54-20d5af6138f3
+status: stable
+description: >
+  Detects suspicious behavior where a non-administrative user attempts to stop
+  or modify multiple sensitive Windows services within a short time window.
+  This behavior is commonly associated with defense evasion or persistence
+  preparation activities.
 author: hota05
-date: 2026-01-12
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1543/
+  - https://attack.mitre.org/techniques/T1562/
+
 logsource:
   product: windows
   category: system
+
 detection:
-  selection:
+
+  service_change:
     EventID:
-      - "7036"
-      - "7040"
-  filter_system:
-    username:
-      - "SYSTEM"
-      - "LOCAL SERVICE"
-      - "NETWORK SERVICE"
-  condition: selection and not filter_system 
-level: medium
+      - 7036   
+      - 7040   
+
+  sensitive_services:
+    ServiceName|contains:
+      - 'WinDefend'
+      - 'WdNisSvc'
+      - 'Sense'
+      - 'SecurityHealthService'
+      - 'Sysmon'
+      - 'EventLog'
+      - 'SamSs'
+      - 'VSS'
+      - 'BITS'
+      - 'wuauserv'
+      - 'Backup'
+      - 'MpsSvc'
+
+  filter_service_accounts:
+    User|contains:
+      - 'SYSTEM'
+      - 'LOCAL SERVICE'
+      - 'NETWORK SERVICE'
+
+  filter_legit_installers:
+    Image|contains:
+      - '\Windows\Installer\'
+      - '\Microsoft\EdgeUpdate\'
+      - '\Google\Update\'
+      - '\Mozilla Maintenance Service\'
+      - '\Adobe\'
+      - '\Microsoft\Teams\Update\'
+      - '\Windows\CCM\'
+
+  timeframe: 5m
+
+  condition: >
+    service_change
+    and sensitive_services
+    and not (
+      filter_service_accounts
+      or filter_legit_installers
+    )
+    | count(ServiceName) by User > 2
+
+falsepositives:
+  - Rare helpdesk troubleshooting using non-standard privileges
+  - Misconfigured enterprise automation
+
+level: high
+
 tags:
+  - attack.persistence
+  - attack.defense_evasion
   - attack.t1543
   - attack.t1562
-falsepositives:
-  - legitim admin tevekenyseg
-  - szoftver telepites

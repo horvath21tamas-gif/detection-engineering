@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wmic.exe")) and (ProcessCommandLine in ("*systeminfo*", "*hostname*", "*whoami*", "*wmic os*", "*wmic computersystem*", "*wmic bios*", "*Get-ComputerInfo*", "*Get-CimInstance*", "*Get-WmiObject*", "*ver*", "*echo %PROCESSOR_ARCHITECTURE%*")) and (ProcessCommandLine in ("*&*", "*&&*", "*;*", "*|*")) and (ParentProcessName in ("*\explorer.exe", "*\winword.exe", "*\excel.exe", "*\powerpnt.exe", "*\outlook.exe", "*\mshta.exe", "*\rundll32.exe", "*\wscript.exe", "*\cscript.exe")) and (not ((User in ("*SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*")) or (FolderPath in ("*\Windows\CCM\*", "*\SCCM\*", "*\PDQ\*", "*\Ivanti\*", "*\ManageEngine\*", "*\TanService\*", "*\CarbonBlack\*", "*\CrowdStrike\*", "*\Defender\*"))))

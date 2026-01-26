@@ -1,13 +1,23 @@
-title: Gyanus folyamatot inditott a Microsoft office valamelyik alkalmazasa
-id: 'f10bd85f-3d32-44dd-8dfb-627c6d957421'
-status: experimental
-description: Eszlelni a Microsoft Office altal letrehozott chilprocesseket
+title: Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity)
+id: f10bd85f-3d32-44dd-8dfb-627c6d957421
+status: stable
+description: >
+  Detects suspicious child processes spawned by Microsoft Office
+  applications that are indicative of macro abuse, DDE exploitation,
+  or document-based malware execution. The rule focuses on attacker-
+  typical child processes, command-line patterns, and user-writable
+  execution context to minimize false positives.
 author: hota05
-date: 2026/01/08
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1204/
+
 logsource:
   product: windows
   category: process_creation
+
 detection:
+
   office_parent:
     ParentImage|endswith:
       - '\WINWORD.EXE'
@@ -15,6 +25,7 @@ detection:
       - '\POWERPNT.EXE'
       - '\OUTLOOK.EXE'
       - '\MSACCESS.EXE'
+
   suspicious_child:
     Image|endswith:
       - '\cmd.exe'
@@ -25,12 +36,60 @@ detection:
       - '\regsvr32.exe'
       - '\bitsadmin.exe'
       - '\certutil.exe'
-  condition: office_parent and suspicious_child
+      - '\wscript.exe'
+      - '\cscript.exe'
+
+  suspicious_commandline:
+    CommandLine|contains:
+      - 'http://'
+      - 'https://'
+      - '-enc'
+      - 'Invoke-Expression'
+      - 'IEX'
+      - 'DownloadString'
+      - 'FromBase64String'
+      - '/c'
+      - '/r'
+
+  suspicious_execution_path:
+    CommandLine|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Microsoft\Office\'
+      - '\INetCache\'
+
+  filter_legit_addins:
+    ParentCommandLine|contains:
+      - '\Addins\'
+      - '\VSTO\'
+      - '\Program Files\Microsoft Office\'
+
+  filter_service_accounts:
+    User|contains:
+      - 'SYSTEM'
+      - 'LOCAL SERVICE'
+      - 'NETWORK SERVICE'
+
+  condition: >
+    office_parent
+    and suspicious_child
+    and (
+      suspicious_commandline
+      or suspicious_execution_path
+    )
+    and not (
+      filter_legit_addins
+      or filter_service_accounts
+    )
+
+falsepositives:
+  - Rare developer automation using Office COM
+  - Approved red team / phishing simulation exercises
+
 level: high
+
 tags:
   - attack.execution
   - attack.t1204
   - attack.t1059
-falsepositiv:
-  - Fejlesztesekbol szarmazo childprocess
-  - Adminisztratori fejlesztes miatt torteno alert

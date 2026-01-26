@@ -15,7 +15,7 @@
 - [wevtutil.exe security logokat torol](#wevtutilexe-security-logokat-torol)
 - [cmd.exe netuser vagy net localgroup parancsot futtat](#cmdexe-netuser-vagy-net-localgroup-parancsot-futtat)
 - [egy felhasznalo beepitett windows eszkozoket hasznal fajl letoltesre es kodfuttatasra](#egy-felhasznalo-beepitett-windows-eszkozoket-hasznal-fajl-letoltesre-es-kodfuttatasra)
-- [tobbszori sikertelen bejelentkezes egy felhasznalohoz](#tobbszori-sikertelen-bejelentkezes-egy-felhasznalohoz)
+- [Multiple Failed Login Attempts for Single User (Possible Password Guessing)](#multiple-failed-login-attempts-for-single-user-(possible-password-guessing))
 - [Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server](#suspicious-cross-site-scripting-(xss)-attempt-detected-on-web-server)
 - [Suspicious File Download via Bitsadmin (High Fidelity)](#suspicious-file-download-via-bitsadmin-(high-fidelity))
 - [Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity)](#suspicious-child-process-spawned-by-microsoft-office-application-(high-fidelity))
@@ -246,12 +246,12 @@
 
 ---
 
-## tobbszori sikertelen bejelentkezes egy felhasznalohoz
+## Multiple Failed Login Attempts for Single User (Possible Password Guessing)
 - **Azonosító:** `T1110_001.yaml`
-- **Minőségi mutató:** `50/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟡 (medium)
-- **Leírás:** Egy adott ido alatt tortent sok sikertelen bejelentkezes egy felhasznalotol
-- **Hamis pozitívok:** Nincs megadva
+- **Leírás:** Detects multiple failed authentication attempts for the same user account within a short time window, which may indicate password guessing or brute-force activity. The rule excludes common sources of authentication noise to reduce false positives.
+- **Hamis pozitívok:** User repeatedly entering wrong password, Misconfigured application using user credentials, Legacy systems retrying authentication
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook

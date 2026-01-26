@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 10:22:17`
+**Utolsó frissítés:** `2026-01-26 10:26:03`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -26,7 +26,7 @@
 | T1047 | MEDIUM | Tavoli hoston inditott folyamat wmic.exe segitsegevel |
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
 | T1053.005 | MEDIUM | Gyanus Scheduled Task letrehozasa |
-| T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 APIs |
+| T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 Libraries |
 | T1059 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1059.001 | HIGH | Suspicious Encoded PowerShell Command Execution |
 | T1068 | HIGH | Suspicious SYSTEM Process Spawned from User Context |

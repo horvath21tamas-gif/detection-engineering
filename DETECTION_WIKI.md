@@ -9,7 +9,7 @@
 - [Tavoli hoston inditott folyamat wmic.exe segitsegevel](#tavoli-hoston-inditott-folyamat-wmicexe-segitsegevel)
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [Gyanus Scheduled Task letrehozasa](#gyanus-scheduled-task-letrehozasa)
-- [Suspicious Credential API Hooking via Win32 APIs](#suspicious-credential-api-hooking-via-win32-apis)
+- [Suspicious Credential API Hooking via Win32 Libraries](#suspicious-credential-api-hooking-via-win32-libraries)
 - [Suspicious Encoded PowerShell Command Execution](#suspicious-encoded-powershell-command-execution)
 - [Suspicious SYSTEM Process Spawned from User Context](#suspicious-system-process-spawned-from-user-context)
 - [Security Event Log Cleared Using wevtutil.exe](#security-event-log-cleared-using-wevtutilexe)
@@ -161,12 +161,12 @@
 
 ---
 
-## Suspicious Credential API Hooking via Win32 APIs
+## Suspicious Credential API Hooking via Win32 Libraries
 - **Azonosító:** `T1056_004.yaml`
-- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** Detects suspicious processes loading Win32 libraries commonly abused for credential API hooking such as keylogging or credential interception.
-- **Hamis pozitívok:** Accessibility software, Screen recording or input method tools, Legitimate security software
+- **Leírás:** Detects suspicious processes loading combinations of Win32 libraries commonly abused for credential interception or API hooking, such as user32.dll, advapi32.dll, and win32u.dll. The rule focuses on non-system, user-writable execution paths and excludes common legitimate software to reduce false positives.
+- **Hamis pozitívok:** Custom accessibility or assistive input software, Internally developed monitoring tools, Rare GUI utilities running from user directories
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook

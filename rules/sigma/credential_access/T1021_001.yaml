@@ -1,24 +1,80 @@
-title: Gyanus RDP belepes
-id: '1a0e043b-5199-46e9-a360-5f803c707fef'
-status: experimental
-description: Gyanus RDP belepes
+title: Suspicious RDP Logon from Unusual Source
+id: 1a0e043b-5199-46e9-a360-5f803c707fef
+status: stable
+description: >
+  Detects successful RDP logons originating from unusual or
+  non-enterprise sources, especially when targeting servers
+  and performed by non-admin or rarely used accounts.
 author: hota05
-date: 2026/01/13
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1021/001/
+
 logsource:
   product: windows
-  category: security
+  service: security
+
 detection:
-  selection_logon:
+
+  selection_rdp:
     EventID: 4624
     LogonType: 10
-  filter_ip:
+
+  filter_internal_ranges:
     IpAddress|startswith:
-      - "10."
-      - "192.168."
-  condition: selection_logon and not filter_ip
-level: medium
-tags: 
-  - attack.t1021.001
+      - '10.'
+      - '192.168.'
+      - '172.16.'
+      - '172.17.'
+      - '172.18.'
+      - '172.19.'
+      - '172.20.'
+      - '172.21.'
+      - '172.22.'
+      - '172.23.'
+      - '172.24.'
+      - '172.25.'
+      - '172.26.'
+      - '172.27.'
+      - '172.28.'
+      - '172.29.'
+      - '172.30.'
+      - '172.31.'
+
+  filter_jump_hosts:
+    WorkstationName|startswith:
+      - 'JUMP-'
+      - 'BASTION-'
+      - 'MGMT-'
+
+  filter_service_accounts:
+    TargetUserName|contains:
+      - '$'
+      - 'SYSTEM'
+      - 'LOCAL SERVICE'
+      - 'NETWORK SERVICE'
+
+  filter_admin_users:
+    TargetUserName|startswith:
+      - 'admin'
+      - 'svc_'
+
+  condition: >
+    selection_rdp
+    and not (
+      filter_internal_ranges
+      or filter_jump_hosts
+      or filter_service_accounts
+      or filter_admin_users
+    )
+
 falsepositives:
-  - Admin script
-  - teszteles
+  - First-time legitimate remote access from new location
+  - Approved administrator working remotely via new VPN
+  - Cloud-hosted management access not yet allowlisted
+
+level: medium
+
+tags:
+  - attack.lateral_movement
+  - attack.t1021.001

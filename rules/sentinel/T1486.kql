@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (((FolderPath in ("*\sc.exe", "*\net.exe")) and ProcessCommandLine contains "shadow") or (FolderPath endswith "\bcdedit.exe" and ProcessCommandLine contains "recoveryenabled")) and (not username =~ "SYSTEM")
+| where (((FolderPath in ("*\vssadmin.exe", "*\wmic.exe")) and (ProcessCommandLine in ("*delete*", "*shadow*"))) or (FolderPath endswith "\bcdedit.exe" and (ProcessCommandLine in ("*recoveryenabled*", "*bootstatuspolicy*"))) or ((FolderPath in ("*\sc.exe", "*\net.exe")) and (ProcessCommandLine in ("*stop*", "*WinDefend*", "*Sense*", "*VSS*", "*MpsSvc*", "*Backup*")))) and (ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe")) and (not ((User in ("*SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*")) or (ParentProcessName in ("*\Veeam\*", "*\Acronis\*", "*\Commvault\*", "*\Veritas\*", "*\Windows\CCM\*", "*\Microsoft Configuration Manager\*", "*\PDQ\*"))))

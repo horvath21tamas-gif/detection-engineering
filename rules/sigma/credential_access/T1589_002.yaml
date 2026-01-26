@@ -1,0 +1,137 @@
+title: High-Confidence OSINT Identity Enumeration via Public APIs
+id: cb3be7ff-9d54-41e5-8082-e3090b0df975
+status: stable
+description: >
+  Detects high-confidence open-source identity enumeration attempts via
+  public-facing APIs or directory endpoints. This rule focuses on scripted,
+  automated reconnaissance behavior designed to collect user or employee
+  identity data, while excluding normal browsing, search engines, and
+  legitimate crawlers to minimize false positives.
+author: hota05
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1589/002/
+
+logsource:
+  product: generic
+  category: webserver
+
+detection:
+
+  selection_external_ip:
+    SrcIp|startswith:
+      - '1.'
+      - '2.'
+      - '3.'
+      - '4.'
+      - '5.'
+      - '6.'
+      - '7.'
+      - '8.'
+      - '9.'
+
+  selection_identity_endpoints:
+    UriStem|contains:
+      - '/api/users'
+      - '/api/employees'
+      - '/api/profiles'
+      - '/directory'
+      - '/people'
+      - '/staff'
+      - '/team'
+      - '/search/users'
+      - '/lookup'
+
+  selection_identity_params:
+    UriQuery|contains:
+      - 'email='
+      - 'user='
+      - 'username='
+      - 'name='
+      - 'employee'
+      - 'account'
+
+  selection_method:
+    Method:
+      - GET
+
+  selection_automation_ua:
+    UserAgent|contains:
+      - 'curl'
+      - 'wget'
+      - 'python'
+      - 'requests'
+      - 'go-http-client'
+      - 'httpclient'
+      - 'libwww'
+      - 'axios'
+      - 'scanner'
+      - 'probe'
+
+  selection_status:
+    Status:
+      - 200
+      - 206
+
+  filter_browsers:
+    UserAgent|contains:
+      - 'Mozilla'
+      - 'Chrome'
+      - 'Firefox'
+      - 'Safari'
+      - 'Edge'
+      - 'HeadlessChrome'
+
+  filter_crawlers:
+    UserAgent|contains:
+      - 'Googlebot'
+      - 'Bingbot'
+      - 'Slurp'
+      - 'DuckDuckBot'
+      - 'Yandex'
+      - 'Baiduspider'
+      - 'Ahrefs'
+      - 'Semrush'
+      - 'MJ12bot'
+
+  filter_monitoring:
+    UserAgent|contains:
+      - 'uptime'
+      - 'pingdom'
+      - 'datadog'
+      - 'newrelic'
+      - 'zabbix'
+      - 'prometheus'
+
+
+  condition: >
+    selection_external_ip
+    and selection_identity_endpoints
+    and selection_identity_params
+    and selection_method
+    and selection_automation_ua
+    and selection_status
+    and not (
+      filter_browsers
+      or filter_crawlers
+      or filter_monitoring
+    )
+
+fields:
+  - SrcIp
+  - Method
+  - UriStem
+  - UriQuery
+  - Status
+  - UserAgent
+
+falsepositives:
+  - Explicitly approved OSINT or data aggregation jobs
+  - Rare third-party integrations misconfigured to scrape directories
+
+level: high
+
+tags:
+  - attack.reconnaissance
+  - attack.t1589
+  - attack.t1589.002

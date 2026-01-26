@@ -1,27 +1,91 @@
-title: cmd.exe netuser vagy net localgroup parancsot futtat
-id: '617db5b5-6714-4e5a-baea-4b9760d6d3b0'
-status: experimental
-description: cmd.exe netuser vagy net localgroup parancsot futtat
+title: Suspicious Use of net user or net localgroup via cmd.exe
+id: 617db5b5-6714-4e5a-baea-4b9760d6d3b0
+status: stable
+description: >
+  Detects suspicious usage of cmd.exe executing net user or
+  net localgroup commands, commonly used by attackers for
+  account discovery or privilege escalation. The rule focuses
+  on attacker-like execution context to reduce false positives.
 author: hota05
-date: 2026/01/13
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1087/
+  - https://attack.mitre.org/techniques/T1098/
+
 logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection_cmd:
-    Image|endswith:
-      - '\cmd.exe'
+
+  cmd_execution:
+    Image|endswith: '\cmd.exe'
+
+  net_commands:
     CommandLine|contains:
       - 'net user'
       - 'net localgroup'
-  filter_user:
-    username:
+
+  modification_keywords:
+    CommandLine|contains:
+      - '/add'
+      - '/delete'
+
+  privileged_groups:
+    CommandLine|contains:
+      - 'administrators'
+      - 'remote desktop users'
+      - 'domain admins'
+      - 'enterprise admins'
+
+  suspicious_parent:
+    ParentImage|endswith:
+      - '\WINWORD.EXE'
+      - '\EXCEL.EXE'
+      - '\POWERPNT.EXE'
+      - '\OUTLOOK.EXE'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+
+  filter_service_accounts:
+    User|contains:
       - 'SYSTEM'
-  condition: selection_cmd and not filter_user
-level: medium
+      - 'LOCAL SERVICE'
+      - 'NETWORK SERVICE'
+
+  filter_legit_tooling:
+    ParentImage|contains:
+      - '\Windows\CCM\'
+      - '\Microsoft Configuration Manager\'
+      - '\PDQ\'
+      - '\Ivanti\'
+      - '\ManageEngine\'
+      - '\Tanium\'
+
+  condition: >
+    cmd_execution
+    and net_commands
+    and (
+      modification_keywords
+      or privileged_groups
+    )
+    and suspicious_parent
+    and not (
+      filter_service_accounts
+      or filter_legit_tooling
+    )
+
+falsepositives:
+  - Rare administrative troubleshooting
+  - Approved penetration testing activity
+
+level: high
+
 tags:
+  - attack.discovery
+  - attack.privilege_escalation
   - attack.t1087
   - attack.t1098
-falsepositives:
-  - admin futtat
-  - pentesteles

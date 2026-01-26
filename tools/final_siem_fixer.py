@@ -5,7 +5,7 @@ def expand_complex_list(field, values_str, siem_type):
     # Értékek kinyerése és tisztítása
     raw_values = [v.strip().strip("'").strip('"').strip('%').strip('*') for v in values_str.split(',')]
     
-    # 1. MEZŐNÉV LEKÉPEZÉSEK
+    # MEZŐNÉV LEKÉPEZÉSEK
     nw_map = {
         "Image": "process", "process": "process",
         "CommandLine": "param", "param": "param",
@@ -18,12 +18,12 @@ def expand_complex_list(field, values_str, siem_type):
         "cs-method": "RequestMethod", "cs-uri-query": "URL"
     }
 
-    # SENTINEL MAP: KQL specifikus mezők
     sentinel_map = {
         "Image": "FolderPath",
         "CommandLine": "ProcessCommandLine",
         "ParentImage": "ParentProcessName",
-        "User": "Account"
+        "User": "Account",
+        "Computer": "DeviceName"
     }
     
     clean_field = field.strip().strip('"')
@@ -38,16 +38,20 @@ def expand_complex_list(field, values_str, siem_type):
     clauses = []
     for v in raw_values:
         if not v: continue
-        v_esc = v.replace("\\", "\\\\")
+        # Speciális karakterek kezelése
+        v_esc = v.replace("\\", "\\\\").replace("'", "\\'")
         
         if siem_type == "qradar":
             clauses.append(f"{mapped_field} LIKE '%{v_esc}%'")
         elif siem_type == "sentinel":
-            # KQL-ben a contains hatékonyabb nagy szövegekre
+            # KQL-ben ha pontos egyezés kell, használhatnánk az == -t is, 
+            # de a Sigma alapértelmezetten gyakran részszövegre keres.
             clauses.append(f"{mapped_field} contains '{v_esc}'")
         else: # NetWitness
             clauses.append(f"{mapped_field} = '*{v_esc}*'")
     
+    if not clauses: return ""
+
     if siem_type == "netwitness":
         return "((" + " OR ".join(clauses) + "))"
     
@@ -55,19 +59,30 @@ def expand_complex_list(field, values_str, siem_type):
 
 def fix_sentinel(content):
     """Speciális Sentinel (KQL) javítások"""
-    # 1. Mezőnevek utólagos finomhangolása
+    # 1. Alapvető mezőcsere, ha a convert nem tette meg
     sentinel_replacements = {
         "CommandLine": "ProcessCommandLine",
         "Image": "FolderPath",
         "ParentImage": "ParentProcessName",
-        "\\\\": "\\" # KQL néha nem szereti a túlzott escape-elést a végén
+        "ParentCommandLine": "ParentProcessCommandLine",
+        "DestinationPort": "RemotePort",
+        "DestinationIp": "RemoteIP"
     }
     for old, new in sentinel_replacements.items():
-        content = content.replace(old, new)
+        # Csak teljes szavakat cserélünk, hogy ne rontsuk el a mezőnevek belsejét
+        content = re.sub(rf'\b{old}\b', new, content)
 
-    # 2. Üres sorok és felesleges Pipe (|) karakterek takarítása
+    # 2. Üres pipe-ok és dupla szóközök takarítása
     content = content.replace("|  |", "|")
+    content = re.sub(r'\|\s*$', '', content, flags=re.MULTILINE) # Sor végi árva pipe törlése
     
+    # 3. KQL specifikus: A Sigma néha 'None' értéket tesz be, ha valami nem sikerült
+    content = content.replace("== 'None'", "!= ''")
+
+    # 4. Időablak hozzáadása, ha nincs (Sentinel alapfeltétel)
+    if "TimeGenerated" not in content:
+        content = "DeviceProcessEvents\n| where TimeGenerated > ago(24h)\n" + content
+
     return content
 
 def fix_qradar(content):
@@ -96,22 +111,33 @@ def fix_netwitness(content):
     return content
 
 def process_files():
-    # SIEM típusok és hozzájuk tartozó fixerek meghatározása
     tasks = [
         ('rules/qradar', '.aql', fix_qradar),
         ('rules/netwitness', '.txt', fix_netwitness),
-        ('rules/sentinel', '.kql', fix_sentinel) # ÚJ: Sentinel feladat
+        ('rules/sentinel', '.kql', fix_sentinel)
     ]
 
     for folder, extension, fixer in tasks:
         if os.path.exists(folder):
+            count = 0
             for f in os.listdir(folder):
                 if f.endswith(extension):
                     p = os.path.join(folder, f)
-                    with open(p, 'r', encoding='utf-8') as file: data = file.read()
-                    processed_data = fixer(data)
-                    with open(p, 'w', encoding='utf-8') as file: file.write(processed_data)
-            print(f"✓ {folder} queries fixed.")
+                    try:
+                        with open(p, 'r', encoding='utf-8') as file: 
+                            data = file.read()
+                        
+                        if not data.strip(): # Üres fájlok kihagyása
+                            continue
+                            
+                        processed_data = fixer(data)
+                        
+                        with open(p, 'w', encoding='utf-8') as file: 
+                            file.write(processed_data)
+                        count += 1
+                    except Exception as e:
+                        print(f"Error processing {p}: {e}")
+            print(f"✓ {folder}: {count} queries fixed.")
 
 if __name__ == "__main__":
     process_files()

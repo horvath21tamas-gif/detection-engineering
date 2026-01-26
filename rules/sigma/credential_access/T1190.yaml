@@ -1,29 +1,88 @@
-title: webszeren tortent XSS probakozas
-id: '2a7f1290-2082-40c4-86c5-55e59445df3e'
-status: experimental
-description: 
+title: Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server
+id: 2a7f1290-2082-40c4-86c5-55e59445df3e
+status: stable
+description: >
+  Detects potential Cross-Site Scripting (XSS) attempts by identifying
+  common reflected and encoded XSS payloads in HTTP requests, focusing
+  on parameter-based injection patterns and excluding typical automated
+  scanners to reduce false positives.
 author: hota05
-date: 2026/01/12
-logsource: 
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1190/
+
+logsource:
   product: generic
   category: webserver
+
 detection:
-  payload:
-    - '<script'
-    - '<svg'
-    - '<iframe'
-    - 'javascript:'
-    - '%3cscript'
-  selection:
-    status:
+
+  xss_payload:
+    cs-uri-query|contains:
+      - '<script'
+      - '</script'
+      - '<svg'
+      - '<iframe'
+      - 'javascript:'
+      - 'onerror='
+      - 'onload='
+      - '%3cscript'
+      - '%3csvg'
+      - '%3ciframe'
+      - '%6a%61%76%61%73%63%72%69%70%74'
+
+  xss_post_body:
+    cs-method: POST
+    cs-uri-query|contains:
+      - '<script'
+      - 'javascript:'
+      - 'onerror='
+
+  response_status:
+    sc-status:
       - 200
       - 403
-    timeframe: 1m
-  condition: payload and selection
+      - 500
+
+  filter_scanners:
+    cs-user-agent|contains:
+      - 'sqlmap'
+      - 'nikto'
+      - 'acunetix'
+      - 'burp'
+      - 'nessus'
+      - 'zap'
+      - 'w3af'
+
+  filter_static_content:
+    cs-uri-stem|endswith:
+      - '.js'
+      - '.css'
+      - '.png'
+      - '.jpg'
+      - '.gif'
+      - '.svg'
+
+  timeframe: 1m
+
+  condition: >
+    (
+      xss_payload
+      or xss_post_body
+    )
+    and response_status
+    and not (
+      filter_scanners
+      or filter_static_content
+    )
+
+falsepositives:
+  - Manual security testing by administrators
+  - Approved penetration testing
+  - Rare application-specific encoding behavior
+
 level: medium
-tags: 
+
+tags:
   - attack.initial_access
   - attack.t1190
-falsepositive:
-  - Admin probalkozik 
-  - csak request van

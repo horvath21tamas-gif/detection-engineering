@@ -30,7 +30,7 @@
 - [webszerverre torteno webshellfeltoltese/ interakcioba lepese](#webszerverre-torteno-webshellfeltoltese-interakcioba-lepese)
 - [egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani](#egy-nem-admin-felhasznalo-rovid-idon-belul-tobb-kulonbozo-erzekeny-windows-szolgaltatsat-proball-leallitani-vagy-modositani)
 - [wmic.exe segitsegevel perzisztens esemenyt hoznak letre a tamadok](#wmicexe-segitsegevel-perzisztens-esemenyt-hoznak-letre-a-tamadok)
-- [COM hijacking (perzisztencia)](#com-hijacking-(perzisztencia))
+- [Suspicious COM Hijacking for User-Level Persistence (High Fidelity)](#suspicious-com-hijacking-for-user-level-persistence-(high-fidelity))
 - [Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása](#gyanús-rendszerindítási-vagy-bejelentkezési-automatikus-indítás-végrehajtása)
 - [Suspicious Registry Run Key Modification for User Persistence (High Fidelity)](#suspicious-registry-run-key-modification-for-user-persistence-(high-fidelity))
 - [UAC Bypass via Fodhelper Registry Hijack (High Fidelity)](#uac-bypass-via-fodhelper-registry-hijack-(high-fidelity))
@@ -464,13 +464,13 @@
 
 ---
 
-## COM hijacking (perzisztencia)
+## Suspicious COM Hijacking for User-Level Persistence (High Fidelity)
 - **Azonosító:** `T1546_015.yaml`
-- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** COM hijacking (perzisztencia)
-- **Hamis pozitívok:** alkalmazas update
-- **MITRE ATT&CK:** `015, T1546`
+- **Leírás:** Detects suspicious COM hijacking attempts used for user-level persistence by monitoring registry modifications of CLSID InprocServer32 and LocalServer32 entries pointing to non-standard execution paths. The rule focuses on HKCU modifications combined with scripting or LOLBin execution to reduce false positives.
+- **Hamis pozitívok:** Rare legacy applications using user-level COM registration, Custom enterprise automation frameworks
+- **MITRE ATT&CK:** `T1546, 015`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

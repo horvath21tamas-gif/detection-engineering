@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where TargetObject contains "\Software\Classes\CLSID" and (TargetObject in ("*InprocServer32", "*LocalServer32")) and (Details in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*ProgramData*")) and (not username =~ "SYSTEM") and (not Details startswith "C:\Windows\System32")
+| where (TargetObject contains "\Software\Classes\CLSID\" and (TargetObject in ("*\InprocServer32", "*\LocalServer32"))) and (Details in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\ProgramData\*", "*\Downloads\*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\rundll32.exe", "*\regsvr32.exe")) and (not (User contains "SYSTEM" or (Details in ("C:\Windows\System32\*", "C:\Windows\SysWOW64\*")) or (FolderPath in ("*\Windows\Installer\*", "*\Microsoft\EdgeUpdate\*", "*\Google\Update\*", "*\Mozilla Maintenance Service\*", "*\Adobe\*", "*\Microsoft\Teams\Update\*"))))

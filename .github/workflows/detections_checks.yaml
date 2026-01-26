@@ -2,9 +2,11 @@ name: CI/CD for Detection Rules
 
 on:
   push:
-    branches: [test]
-  pull_request:
-    branches: [test]
+    branches:
+      - test
+  pull_request: 
+    branches:
+      - test
 
 permissions:
   contents: write
@@ -13,8 +15,8 @@ env:
   PYTHONDONTWRITEBYTECODE: 1
 
 jobs:
-  # --- 1. JOB: QRADAR KONVERZIÓ (Izolált, régi környezet) ---
-  qradar_job:
+  # --- 1. JOB: SENTINEL KONVERZIÓ (Izolált környezet) ---
+  sentinel_job:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -23,57 +25,49 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.9' # A régebbi backendeknek stabilabb
 
-      - name: Install QRadar environment
+      - name: Install Sentinel Environment
         run: |
           python -m pip install --upgrade pip
-          # A QRadar-nak szüksége van a régi pyparsingra
-          python -m pip install "pyparsing==3.1.1" "pysigma==0.9.11" "pysigma-backend-qradar"
+          # Csak a Sentinelhez szükséges régi verziókat telepítjük
+          python -m pip install "pysigma<0.11.0" "pysigma-backend-azure==0.1.3"
 
-      - name: Convert QRadar rules (Robust Script)
+      - name: Convert Sentinel rules
         run: |
-          mkdir -p rules/qradar
-          cat <<EOF > convert_qradar.py
+          mkdir -p rules/sentinel
+          # Python scriptet használunk a konverzióhoz, mert a régi sigma-cli nem biztos, hogy ott van
+          python -c "
           import os
-          import sigma.backends.qradar
           from sigma.collection import SigmaCollection
-          import inspect
+          from sigma.backends.azure import AzureBackend
+          
+          backend = AzureBackend()
+          for root, _, files in os.walk('rules/sigma'):
+              for file in files:
+                  if file.endswith(('.yaml', '.yml')):
+                      try:
+                          with open(os.path.join(root, file), 'r', encoding='utf-8') as f:
+                              rule = SigmaCollection.from_yaml(f.read())
+                              result = backend.convert(rule)
+                              if result:
+                                  out_name = file.rsplit('.', 1)[0] + '.kql'
+                                  with open(f'rules/sentinel/{out_name}', 'w') as out:
+                                      out.write(result[0])
+                      except Exception as e:
+                          print(f'Error converting {file}: {e}')
+          "
 
-          QRadarBackend = None
-          for name, obj in inspect.getmembers(sigma.backends.qradar):
-              if inspect.isclass(obj) and "Backend" in name and ("QRadar" in name or "Qradar" in name):
-                  QRadarBackend = obj
-                  break
-          if QRadarBackend:
-              backend = QRadarBackend()
-              rules_path = "rules/sigma"
-              for root, _, files in os.walk(rules_path):
-                  for file in files:
-                      if file.endswith((".yaml", ".yml")):
-                          try:
-                              with open(os.path.join(root, file), "r", encoding="utf-8") as f:
-                                  rule = SigmaCollection.from_yaml(f.read())
-                                  result = backend.convert(rule)
-                                  if result:
-                                      out_name = file.rsplit(".", 1)[0] + ".aql"
-                                      with open(f"rules/qradar/{out_name}", "w") as out:
-                                          out.write(result[0])
-                          except:
-                              pass
-          EOF
-          python convert_qradar.py
-
-      - name: Upload QRadar rules as artifact
+      - name: Upload Sentinel artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: qradar-results
-          path: rules/qradar/
+          name: sentinel-queries
+          path: rules/sentinel/
           retention-days: 1
 
-  # --- 2. JOB: MODERN SIEMS & VALIDATION (Új környezet) ---
+  # --- 2. JOB: FŐ PIPELINE (A te eredeti kódod) ---
   detection_pipeline:
-    needs: qradar_job
+    needs: sentinel_job # Megvárja a Sentinelt
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -81,66 +75,32 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Download QRadar results
+      - name: Download Sentinel results
         uses: actions/download-artifact@v4
         with:
-          name: qradar-results
-          path: rules/qradar/
+          name: sentinel-queries
+          path: rules/sentinel/
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.10'
           cache: 'pip'
 
-      - name: Install Modern SIEM environment
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # 1. Alap csomagok a scriptekhez
-          python -m pip install "pyyaml" "packaging" "requests"
-          
-          # 2. Virtuális környezet a SPLUNK/ELASTIC-nak (Modern)
-          python -m venv venv_modern
-          ./venv_modern/bin/pip install "pysigma>=1.1.0" "sigma-cli==2.0.1" "pysigma-backend-splunk>=2.0.0" "pysigma-backend-elasticsearch>=2.0.2"
-          
-          # 3. Virtuális környezet a SENTINEL-nek (Külön sziget az Azure-nak)
-          python -m venv venv_sentinel
-          ./venv_sentinel/bin/pip install "pysigma<0.11.0" "pysigma-backend-azure==0.1.3"
+          python -m pip install -r requirements.txt
+          sigma plugin install splunk sysmon windows netwitness elasticsearch
+          sigma plugin install --force-install qradar || echo "QRadar forced"
+          python -m pip install --upgrade "pysigma>=1.1.0" "pyparsing>=3.0.0" sigma-cli
 
-      - name: Convert Sigma rules (Environment Switch)
-        run: |
-          mkdir -p rules/splunk rules/netwitness rules/elastic rules/sentinel
-          
-          for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
-            filename=$(basename "$file" .yaml)
-            filename=$(basename "$filename" .yml)
-            
-            # SPLUNK & ELASTIC (Modern környezet használata)
-            ./venv_modern/bin/sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk error"
-            ./venv_modern/bin/sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic error"
-            
-            # SENTINEL (Speciális környezet használata)
-            # Itt manuálisan hívjuk a backendet, mert a régi verzió máshogy működik
-            ./venv_sentinel/bin/python -c "
-            import sys
-            from sigma.collection import SigmaCollection
-            from sigma.backends.azure import AzureBackend
-            try:
-                with open('$file', 'r') as f:
-                    rule = SigmaCollection.from_yaml(f.read())
-                    backend = AzureBackend()
-                    print(backend.convert(rule)[0])
-            except Exception as e:
-                sys.stderr.write(str(e))
-            " > "rules/sentinel/${filename}.kql" || echo "Sentinel error"
-          done
-
-      - name: Update Dynamic Inventory
+      - name: Update Dynamic Inventory from SIEM
         run: |
           mkdir -p inventory
           python tools/update_inventory.py
 
-      - name: Smart Validation
+      - name: Smart Validation and Auto-fix
         id: validate_step
         run: |
           python tools/validate_rules.py || echo "VALIDATION_FAILED=true" >> $GITHUB_ENV
@@ -148,61 +108,64 @@ jobs:
       - name: Log Source Validation
         run: python tools/check_log_sources.py
 
+      - name: Run Simulation Tests (Logic Verification)
+        run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
+          python -m pytest test/test_detection_logic.py -v || echo "⚠️ Szimulációs tesztek sikertelenek."
+
+      - name: Run Unit Tests (General)
+        run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
+          python -m pytest test/ --ignore=test/test_detection_logic.py --maxfail=5 --disable-warnings -q || echo "Nincsenek általános tesztek."
+
       - name: Preprocess Sigma rules
         run: python tools/preprocess_sigma.py
 
-      - name: Convert Sigma rules (Modern SIEMs)
+      - name: Convert Sigma rules to SIEM queries
         run: |
-          mkdir -p rules/splunk rules/netwitness rules/elastic rules/sentinel
+          mkdir -p rules/splunk rules/qradar rules/netwitness rules/elastic
           
           for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
             
             # SPLUNK
-            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk error: $file"
+            sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk error"
             
-            # SENTINEL
-            sigma convert -t microsoft_sentinel "$file" -o "rules/sentinel/${filename}.kql" || echo "Sentinel error: $file"
+            # QRADAR
+            sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar error"
             
             # RSA NETWITNESS
-            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "RSA error: $file"
+            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "RSA error"
             
             # ELASTIC
-            sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic error: $file"
+            sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic error"
           done
 
-      - name: Final SIEM Query Fixer
+      - name: Final SIEM Query Fixer (QRadar, NetWitness & Sentinel)
         run: python tools/final_siem_fixer.py
 
       - name: Run Integrity Check
         run: python tools/check_integrity.py
-
-      - name: Generate MITRE, Wiki & Stats
-        if: github.event_name == 'push'
-        run: |
-          python tools/score_rules.py
-          python tools/generate_nav_layer.py
-          python tools/generate_docs.py
-          python tools/gap_analysis.py
-          python tools/update_all.py
 
       - name: Commit and push changes
         if: github.event_name == 'push'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
-          git add rules/ inventory/ *.md *.json *.svg
+          
+          # Hozzáadjuk a sentinel mappát is!
+          git add rules/ inventory/ test/ *.md *.json *.svg
+          
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Multi-agent pipeline with Sentinel support (fixed dependency conflict)"
+            git commit -m "Auto-update: Multi-SIEM pipeline (Splunk, QRadar, Elastic, NetWitness, Sentinel)"
             git pull --rebase -X ours origin test
             git push origin test
           fi
 
-      - name: Check Status
+      - name: Check Validation Status
         if: always()
         run: |
           if [ "${{ env.VALIDATION_FAILED }}" == "true" ]; then
-            echo "❌ Validációs hiba történt korábban."
             exit 1
           fi

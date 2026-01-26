@@ -148,17 +148,26 @@ jobs:
       - name: Run Integrity Check
         run: python tools/check_integrity.py
 
-      - name: Generate Documentation
-        run: python tools/generate_docs.py
+      # --- DOKUMENTÁCIÓS FOLYAMAT (Helyes sorrendben) ---
+      - name: Score Detection Rules
+        run: python tools/score_rules.py
+
+      - name: Generate Wiki and Dashboard
+        run: |
+          python tools/generate_docs.py
+          python tools/update_all.py
 
       - name: Commit and push changes
         if: github.event_name == 'push'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
-          git add rules/ inventory/ test/ *.md *.json *.svg
+          
+          # Minden módosított fájl (szabályok, json, md, svg) hozzáadása
+          git add -A
+          
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Multi-SIEM pipeline (Splunk, QRadar, Elastic, NetWitness, Sentinel)"
+            git commit -m "Auto-update: Multi-SIEM queries, Scores and Dashboard [skip ci]"
             git pull --rebase -X ours origin test
             git push origin test
           fi

@@ -1,1 +1,1 @@
-ServiceName="*PSEXECSVC*" Computer="MGMT-*"
+ServiceName IN ("PSEXECSVC", "PAExec", "RemComSvc", "CSEXEC", "ATSVC") NOT (Computer IN ("MGMT-*", "SCCM-*", "DEPLOY-*", "ADMIN-*") OR User IN ("*svc_*", "*admin_*", "*deploy*", "*sccm*", "*ansible*", "*pdq*") OR Image IN ("*\\Windows\\CCM\\*", "*\\Microsoft Configuration Manager\\*", "*\\PDQ\\*", "*\\Ivanti\\*", "*\\ManageEngine\\*", "*\\Tanium\\*"))

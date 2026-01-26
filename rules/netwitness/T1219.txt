@@ -1,1 +1,2 @@
-((ServiceName = '*PSEXECSVC*'))&& Computer begins 'MGMT-'
+(((ServiceName = '*PSEXECSVC*' OR ServiceName = '*PAExec*' OR ServiceName = '*RemComSvc*' OR ServiceName = '*CSEXEC*' OR ServiceName = '*ATSVC*'))) AND (NOT (((Computer begins 'MGMT-','SCCM-','DEPLOY-','ADMIN-') OR (((user.dst = '*svc_*' OR user.dst = '*admin_*' OR user.dst = '*deploy*' OR user.dst = '*sccm*' OR user.dst = '*ansible*' OR user.dst = '*pdq*'))) OR (((process = '*\\Windows\\CCM\\*' OR process = '*\\Microsoft Configuration Manager\\*' OR process = '*\\PDQ\\*' OR process = '*\\Ivanti\\*' OR process = '*\\ManageEngine\\*' OR process = '*\\Tanium\\*')))))
+)

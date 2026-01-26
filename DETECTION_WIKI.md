@@ -24,7 +24,7 @@
 - [msiexec.exe URL-rol telepit csomagot](#msiexecexe-url-rol-telepit-csomagot)
 - [Gyanus regsvr32.exe futtatasa](#gyanus-regsvr32exe-futtatasa)
 - [Gyanus rundll32.exe hasznalata](#gyanus-rundll32exe-hasznalata)
-- [Detektalni, amikor egy legitim remote admin toolt nem a megszokott enterprise modon hasznalnak](#detektalni-amikor-egy-legitim-remote-admin-toolt-nem-a-megszokott-enterprise-modon-hasznalnak)
+- [Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern](#suspicious-use-of-legitimate-remote-administration-tools-outside-enterprise-pattern)
 - [Ransomware Preparation Activity Detected on Windows Host (High Fidelity)](#ransomware-preparation-activity-detected-on-windows-host-(high-fidelity))
 - [Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity)](#suspicious-deletion-of-volume-shadow-copies-via-vssadmin-(high-fidelity))
 - [Webshell Upload or Interaction Detected on Web Server (High Fidelity)](#webshell-upload-or-interaction-detected-on-web-server-(high-fidelity))
@@ -376,12 +376,12 @@
 
 ---
 
-## Detektalni, amikor egy legitim remote admin toolt nem a megszokott enterprise modon hasznalnak
+## Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern
 - **Azonosító:** `T1219.yaml`
-- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** Detektalni, amikor egy ligitim remote admin toolt nem a megszokott enterprise modon hasznalnak
-- **Hamis pozitívok:** pentest gyakorlat, admin fejlesztés
+- **Leírás:** Detects suspicious creation of services associated with legitimate remote administration tools (e.g. PsExec) when used outside approved enterprise management patterns. This behavior is commonly observed during lateral movement by attackers abusing admin tools.
+- **Hamis pozitívok:** Approved penetration testing, Emergency troubleshooting from non-standard hosts (rare)
 - **MITRE ATT&CK:** `T1219`
 
 #### 🚨 Response Playbook

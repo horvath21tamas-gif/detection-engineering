@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 09:03:57`
+**Utolsó frissítés:** `2026-01-26 09:09:21`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -44,7 +44,7 @@
 | T1218.007 | MEDIUM | msiexec.exe URL-rol telepit csomagot |
 | T1218.010 | MEDIUM | Gyanus regsvr32.exe futtatasa |
 | T1218.011 | HIGH | Gyanus rundll32.exe hasznalata |
-| T1219 | HIGH | Detektalni, amikor egy legitim remote admin toolt nem a megszokott enterprise modon hasznalnak |
+| T1219 | HIGH | Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern |
 | T1486 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1490 | CRITICAL | Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity), Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1505.003 | HIGH | Webshell Upload or Interaction Detected on Web Server (High Fidelity) |

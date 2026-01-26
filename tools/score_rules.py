@@ -39,10 +39,10 @@ def score_all_rules():
                     except:
                         continue
     
-    # Mentés egy JSON-be a Dashboard számára
+    # Mentés egy JSON-be a Dashboard számára (UTF-8 támogatással)
     import json
-    with open('rule_scores.json', 'w') as f:
-        json.dump(results, f, indent=4)
+    with open('rule_scores.json', 'w', encoding='utf-8') as f:
+        json.dump(results, f, indent=4, ensure_ascii=False)
     print(f"✅ {len(results)} szabály pontozva.")
 
 if __name__ == "__main__":

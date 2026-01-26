@@ -1,0 +1,149 @@
+title: Advanced Software Enumeration Reconnaissance via Web Endpoints
+id: f19143ba-a4c8-4bbc-8410-3eb1170a751e
+status: stable
+description: >
+  Detects advanced reconnaissance activity where an external actor
+  systematically enumerates installed software, application names,
+  or version information through multiple web-accessible endpoints
+  in a short time window. Tuned to minimize false positives by
+  requiring automation-like behavior and repeated probing patterns.
+author: hota05
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1592/002/
+
+logsource:
+  product: generic
+  category: webserver
+
+detection:
+
+  selection_external:
+    SrcIp|startswith:
+      - '1.'
+      - '2.'
+      - '3.'
+      - '4.'
+      - '5.'
+      - '6.'
+      - '7.'
+      - '8.'
+      - '9.'
+
+  selection_methods:
+    Method:
+      - GET
+      - HEAD
+
+  selection_software_endpoints:
+    UriStem|contains:
+      - '/version'
+      - '/about'
+      - '/status'
+      - '/info'
+      - '/build'
+      - '/debug'
+      - '/admin'
+      - '/server-info'
+      - '/actuator'
+      - '/metrics'
+
+  selection_software_keywords:
+    UriQuery|contains:
+      - 'version'
+      - 'build'
+      - 'release'
+      - 'software'
+      - 'application'
+      - 'component'
+      - 'module'
+      - 'plugin'
+      - 'stack'
+
+  selection_automation_ua:
+    UserAgent|contains:
+      - 'curl'
+      - 'wget'
+      - 'python'
+      - 'httpclient'
+      - 'go-http-client'
+      - 'libwww'
+      - 'scanner'
+      - 'probe'
+
+  selection_status:
+    Status:
+      - 200
+      - 401
+      - 403
+      - 404
+
+  filter_browsers:
+    UserAgent|contains:
+      - 'Mozilla'
+      - 'Chrome'
+      - 'Safari'
+      - 'Firefox'
+      - 'Edge'
+
+  filter_scanners:
+    UserAgent|contains:
+      - 'nessus'
+      - 'qualys'
+      - 'openvas'
+      - 'acunetix'
+      - 'nikto'
+      - 'nuclei'
+      - 'zap'
+      - 'zabbix'
+      - 'prometheus'
+      - 'uptime'
+      - 'pingdom'
+
+  filter_noise:
+    UriStem|contains:
+      - '/api'
+      - '/health'
+    UriStem|endswith:
+      - '.css'
+      - '.js'
+      - '.png'
+      - '.jpg'
+      - '.svg'
+      - '.ico'
+      - '.woff'
+      - '.woff2'
+      - '.json'
+
+
+  condition: >
+    selection_external
+    and selection_methods
+    and selection_software_endpoints
+    and selection_software_keywords
+    and selection_automation_ua
+    and selection_status
+    and not (
+      filter_browsers
+      or filter_scanners
+      or filter_noise
+    )
+
+fields:
+  - SrcIp
+  - Method
+  - UriStem
+  - UriQuery
+  - Status
+  - UserAgent
+
+falsepositives:
+  - Explicitly approved external vulnerability scanning
+  - Vendor troubleshooting performed from non-browser tools
+
+level: high
+
+tags:
+  - attack.reconnaissance
+  - attack.t1592
+  - attack.t1592.002

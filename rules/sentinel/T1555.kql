@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (TargetFileName in ("*\User Data\*", "*Login Data*")) and (not (FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\brave.exe", "*\firefox.exe")))
+| where ((TargetFileName in ("*\User Data\Default\Login Data*", "*\User Data\Default\Web Data*", "*\User Data\Default\Cookies*", "*\Firefox\Profiles\*")) and (TargetFileName in ("*logins.json", "*key4.db", "*cookies.sqlite"))) and (AccessMask in ("0x1", "0x10", "ReadData", "ReadFile")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\rundll32.exe", "*\regsvr32.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\python.exe", "*\perl.exe")) and (not ((FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\brave.exe", "*\firefox.exe")) or (FolderPath in ("C:\Windows\System32\*", "C:\Windows\SysWOW64\*")) or (FolderPath in ("*\Windows Defender\*", "*\Program Files\Windows Defender\*", "*\CrowdStrike\*", "*\SentinelOne\*", "*\Sophos\*", "*\ESET\*")) or (FolderPath in ("*\Veeam\*", "*\Acronis\*", "*\Commvault\*", "*\Veritas\*"))))

@@ -3,7 +3,7 @@
 ## 📖 Tartalomjegyzék
 - [Suspicious Access to LSASS Process Memory](#suspicious-access-to-lsass-process-memory)
 - [Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be](#detektalni-ugyanazon-felhasznalotol-rovid-idon-belul-tobb-egymastol-tavol-levo-hostra-jelentkezik-be)
-- [Gyanus RDP belepes](#gyanus-rdp-belepes)
+- [Suspicious RDP Logon from Unusual Source](#suspicious-rdp-logon-from-unusual-source)
 - [Suspicious Base64-Encoded PowerShell Command with Network Activity](#suspicious-base64-encoded-powershell-command-with-network-activity)
 - [Legitimate Windows Binary Copied to User-Writable Location](#legitimate-windows-binary-copied-to-user-writable-location)
 - [Suspicious Remote Process Creation via WMIC](#suspicious-remote-process-creation-via-wmic)
@@ -74,12 +74,12 @@
 
 ---
 
-## Gyanus RDP belepes
+## Suspicious RDP Logon from Unusual Source
 - **Azonosító:** `T1021_001.yaml`
-- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟡 (medium)
-- **Leírás:** Gyanus RDP belepes
-- **Hamis pozitívok:** Admin script, teszteles
+- **Leírás:** Detects successful RDP logons originating from unusual or non-enterprise sources, especially when targeting servers and performed by non-admin or rarely used accounts.
+- **Hamis pozitívok:** First-time legitimate remote access from new location, Approved administrator working remotely via new VPN, Cloud-hosted management access not yet allowlisted
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook

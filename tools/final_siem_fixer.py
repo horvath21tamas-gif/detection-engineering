@@ -13,9 +13,14 @@ def expand_complex_list(field, values_str, siem_type):
     }
     
     qr_map = {
-        "Image": '"Filename"', "username": '"UserName"', 
+        "Image": '"Filename"', 
+        "username": '"UserName"', 
         "Process CommandLine": '"Process CommandLine"',
-        "cs-method": "RequestMethod", "cs-uri-query": "URL"
+        "CommandLine": '"Process CommandLine"',
+        "ParentImage": '"Parent Filename"',
+        "ParentCommandLine": '"Parent Process CommandLine"',
+        "cs-method": "RequestMethod", 
+        "cs-uri-query": "URL"
     }
 
     sentinel_map = {
@@ -44,8 +49,6 @@ def expand_complex_list(field, values_str, siem_type):
         if siem_type == "qradar":
             clauses.append(f"{mapped_field} LIKE '%{v_esc}%'")
         elif siem_type == "sentinel":
-            # KQL-ben ha pontos egyezés kell, használhatnánk az == -t is, 
-            # de a Sigma alapértelmezetten gyakran részszövegre keres.
             clauses.append(f"{mapped_field} contains '{v_esc}'")
         else: # NetWitness
             clauses.append(f"{mapped_field} = '*{v_esc}*'")
@@ -69,17 +72,12 @@ def fix_sentinel(content):
         "DestinationIp": "RemoteIP"
     }
     for old, new in sentinel_replacements.items():
-        # Csak teljes szavakat cserélünk, hogy ne rontsuk el a mezőnevek belsejét
         content = re.sub(rf'\b{old}\b', new, content)
 
-    # 2. Üres pipe-ok és dupla szóközök takarítása
     content = content.replace("|  |", "|")
-    content = re.sub(r'\|\s*$', '', content, flags=re.MULTILINE) # Sor végi árva pipe törlése
-    
-    # 3. KQL specifikus: A Sigma néha 'None' értéket tesz be, ha valami nem sikerült
+    content = re.sub(r'\|\s*$', '', content, flags=re.MULTILINE)
     content = content.replace("== 'None'", "!= ''")
 
-    # 4. Időablak hozzáadása, ha nincs (Sentinel alapfeltétel)
     if "TimeGenerated" not in content:
         content = "DeviceProcessEvents\n| where TimeGenerated > ago(24h)\n" + content
 
@@ -87,12 +85,24 @@ def fix_sentinel(content):
 
 def fix_qradar(content):
     content = content.replace('""', '"')
-    mapping = {'cs-method': 'RequestMethod', 'cs-uri-query': 'URL'}
+    # Bővített mapping QRadarhoz
+    mapping = {
+        'cs-method': 'RequestMethod', 
+        'cs-uri-query': 'URL',
+        'Image': '"Filename"',
+        'CommandLine': '"Process CommandLine"',
+        'ParentImage': '"Parent Filename"'
+    }
     for old, new in mapping.items():
-        content = content.replace(old, new)
+        content = re.sub(rf'\b{old}\b', new, content)
         
     pattern = r'("[^"]+"|\w+)\s+(?:ILIKE ENUMERATION|LIKE)\s*\(([^)]+)\)'
     content = re.sub(pattern, lambda m: expand_complex_list(m.group(1), m.group(2), "qradar"), content)
+    
+    # Biztosítsuk, hogy az AQL tartalmaz SELECT-et, ha a sigma elhagyta volna
+    if not content.startswith("SELECT"):
+        content = "SELECT * FROM events WHERE " + content
+        
     return content
 
 def fix_netwitness(content):
@@ -127,7 +137,7 @@ def process_files():
                         with open(p, 'r', encoding='utf-8') as file: 
                             data = file.read()
                         
-                        if not data.strip(): # Üres fájlok kihagyása
+                        if not data.strip():
                             continue
                             
                         processed_data = fixer(data)

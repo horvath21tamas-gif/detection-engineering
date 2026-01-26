@@ -48,7 +48,6 @@ detection:
       - '.vbs'
       - '.js'
 
-  # Szétbontottuk két külön részre a filtert
   filter_user:
     User|contains:
       - 'SYSTEM'

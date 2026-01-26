@@ -1,23 +1,90 @@
-title: msiexec.exe URL-rol telepit csomagot
-id: '427a695f-26ba-47a3-9e26-6094a730a946'
-status: experimental
-description: misexec.exe URL-rol telepit csomagot
+title: Suspicious Msiexec Installation from Remote URL (High Fidelity)
+id: 427a695f-26ba-47a3-9e26-6094a730a946
+status: stable
+description: >
+  Detects suspicious use of msiexec.exe to install MSI packages
+  directly from remote URLs, a technique commonly abused by attackers
+  as a LOLBAS method. The rule focuses on attacker-typical command-line
+  patterns and execution context to reduce false positives.
 author: hota05
-date: 2026/01/13
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1218/007/
+
 logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection:
-    Image|endswith: 'msiexec.exe'
+
+  msiexec_execution:
+    Image|endswith: '\msiexec.exe'
+
+  remote_install:
     CommandLine|contains:
       - 'http://'
       - 'https://'
       - '/i'
-  condition: selection
-level: medium
-tags:
-  - attack.t1218.007
+
+  silent_install:
+    CommandLine|contains:
+      - '/quiet'
+      - '/qn'
+      - '/norestart'
+
+  suspicious_parent:
+    ParentImage|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+      - '\rundll32.exe'
+
+  filter_system_accounts:
+    User|contains:
+      - 'SYSTEM'
+      - 'LOCAL SERVICE'
+      - 'NETWORK SERVICE'
+
+  filter_legit_deployment:
+    ParentImage|contains:
+      - '\Windows\CCM\'
+      - '\Microsoft Configuration Manager\'
+      - '\PDQ\'
+      - '\Ivanti\'
+      - '\ManageEngine\'
+      - '\Tanium\'
+      - '\Intune\'
+
+  filter_vendor_updaters:
+    ParentImage|contains:
+      - '\Google\Update\'
+      - '\Microsoft\EdgeUpdate\'
+      - '\Adobe\'
+      - '\Mozilla\'
+      - '\Zoom\'
+      - '\Slack\'
+      - '\Cisco\'
+
+  condition: >
+    msiexec_execution
+    and remote_install
+    and silent_install
+    and suspicious_parent
+    and not (
+      filter_system_accounts
+      or filter_legit_deployment
+      or filter_vendor_updaters
+    )
+
 falsepositives:
-  - admin frissít
-  - pentesteles
+  - Rare manual software installation by advanced administrators
+  - Approved red team or penetration testing activity
+
+level: high
+
+tags:
+  - attack.execution
+  - attack.t1218.007

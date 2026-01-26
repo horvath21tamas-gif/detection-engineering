@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 10:36:20`
+**Utolsó frissítés:** `2026-01-26 10:39:52`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -21,8 +21,8 @@
 | T1021 | MEDIUM | Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be |
 | T1021.001 | MEDIUM | Gyanus RDP belepes |
 | T1027 | HIGH | Detektalni a poweshellbol base64-encoded parancsot, Suspicious Encoded PowerShell Command Execution |
-| T1036 | HIGH | A tamado lemasol egy legitim Windows binarist |
-| T1036.005 | HIGH | A tamado lemasol egy legitim Windows binarist |
+| T1036 | HIGH | Legitimate Windows Binary Copied to User-Writable Location |
+| T1036.005 | HIGH | Legitimate Windows Binary Copied to User-Writable Location |
 | T1047 | HIGH | Suspicious Remote Process Creation via WMIC |
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
 | T1053.005 | HIGH | Suspicious Scheduled Task Creation Executing PowerShell |

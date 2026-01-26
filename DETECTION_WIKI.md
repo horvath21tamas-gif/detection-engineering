@@ -5,7 +5,7 @@
 - [Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be](#detektalni-ugyanazon-felhasznalotol-rovid-idon-belul-tobb-egymastol-tavol-levo-hostra-jelentkezik-be)
 - [Gyanus RDP belepes](#gyanus-rdp-belepes)
 - [Detektalni a poweshellbol base64-encoded parancsot](#detektalni-a-poweshellbol-base64-encoded-parancsot)
-- [A tamado lemasol egy legitim Windows binarist](#a-tamado-lemasol-egy-legitim-windows-binarist)
+- [Legitimate Windows Binary Copied to User-Writable Location](#legitimate-windows-binary-copied-to-user-writable-location)
 - [Suspicious Remote Process Creation via WMIC](#suspicious-remote-process-creation-via-wmic)
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [Suspicious Scheduled Task Creation Executing PowerShell](#suspicious-scheduled-task-creation-executing-powershell)
@@ -103,13 +103,13 @@
 
 ---
 
-## A tamado lemasol egy legitim Windows binarist
+## Legitimate Windows Binary Copied to User-Writable Location
 - **Azonosító:** `T1036_005.yaml`
-- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** A tamado lemasol egy legitim Windows binarist
-- **Hamis pozitívok:** legitim file, teszteles
-- **MITRE ATT&CK:** `005, T1036`
+- **Leírás:** Detects suspicious copying of legitimate Windows system binaries into user-writable directories. This technique is commonly used by attackers for masquerading, DLL sideloading, or execution evasion by abusing trusted binary names.
+- **Hamis pozitívok:** Rare advanced troubleshooting by administrators, Approved red team or malware simulation activity
+- **MITRE ATT&CK:** `T1036, 005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

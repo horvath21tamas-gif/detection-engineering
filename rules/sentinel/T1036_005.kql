@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\ProgramData\*")) and (FolderPath in ("*\svchost.exe", "*\lsass.exe", "*services.exe", "*explorer.exe")) and (not (FolderPath in ("C:\Windows\System32\*", "C:\Windows\SysWOW64\*"))) and (not username =~ "SYSTEM")
+| where (FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\robocopy.exe", "*\xcopy.exe")) and (ProcessCommandLine in ("*copy *", "*xcopy *", "*robocopy *", "*Copy-Item*")) and (ProcessCommandLine in ("*\svchost.exe*", "*\lsass.exe*", "*\services.exe*", "*\explorer.exe*", "*\winlogon.exe*", "*\csrss.exe*", "*\smss.exe*")) and (ProcessCommandLine in ("*C:\Windows\System32\*", "*C:\Windows\SysWOW64\*")) and (ProcessCommandLine in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\ProgramData\*")) and (not ((User in ("*NT AUTHORITY\SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*")) or (ParentProcessName in ("*\Windows\Installer\*", "*\Microsoft Configuration Manager\*", "*\Windows\CCM\*", "*\PDQ\*", "*\Ivanti\*", "*\ManageEngine\*", "*\Tanium\*", "*\Setup\*", "*\Update\*"))))

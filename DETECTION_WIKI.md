@@ -25,7 +25,7 @@
 - [Gyanus regsvr32.exe futtatasa](#gyanus-regsvr32exe-futtatasa)
 - [Gyanus rundll32.exe hasznalata](#gyanus-rundll32exe-hasznalata)
 - [Detektalni, amikor egy legitim remote admin toolt nem a megszokott enterprise modon hasznalnak](#detektalni-amikor-egy-legitim-remote-admin-toolt-nem-a-megszokott-enterprise-modon-hasznalnak)
-- [Ransomware elokeszites eszlelese](#ransomware-elokeszites-eszlelese)
+- [Ransomware Preparation Activity Detected on Windows Host (High Fidelity)](#ransomware-preparation-activity-detected-on-windows-host-(high-fidelity))
 - [Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity)](#suspicious-deletion-of-volume-shadow-copies-via-vssadmin-(high-fidelity))
 - [Webshell Upload or Interaction Detected on Web Server (High Fidelity)](#webshell-upload-or-interaction-detected-on-web-server-(high-fidelity))
 - [Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services](#non-admin-user-attempting-to-stop-or-modify-multiple-sensitive-windows-services)
@@ -391,12 +391,12 @@
 
 ---
 
-## Ransomware elokeszites eszlelese
+## Ransomware Preparation Activity Detected on Windows Host (High Fidelity)
 - **Azonosító:** `T1486.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
-- **Leírás:** Ransomware elokeszites eszlelese
-- **Hamis pozitívok:** Nincs megadva
+- **Leírás:** Detects ransomware preparation activity by identifying multiple recovery-inhibition and defense-evasion actions executed within a short time window. This includes disabling recovery options, deleting shadow copies, and stopping security-related services.
+- **Hamis pozitívok:** Rare manual disaster recovery testing, Advanced troubleshooting by senior administrators
 - **MITRE ATT&CK:** `T1486, T1490, 001`
 
 #### 🚨 Response Playbook

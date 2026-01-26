@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 13:49:19`
+**Utolsó frissítés:** `2026-01-26 13:56:15`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 47 | 100% |
-| Splunk (SPL) | 47 | 100.0% |
-| Microsoft Sentinel (KQL) | 47 | 100.0% |
-| QRadar (AQL) | 47 | 100.0% |
-| Elastic (KQL/EQL) | 47 | 100.0% |
-| RSA NetWitness | 47 | 100.0% |
+| Sigma (Forrás) | 48 | 100% |
+| Splunk (SPL) | 48 | 100.0% |
+| Microsoft Sentinel (KQL) | 48 | 100.0% |
+| QRadar (AQL) | 48 | 100.0% |
+| Elastic (KQL/EQL) | 48 | 100.0% |
+| RSA NetWitness | 48 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -61,8 +61,9 @@
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |
-| T1592 | HIGH | High-Confidence Firmware Enumeration Against Network Devices, High-Confidence Hardware Enumeration via Management Interfaces, High-Confidence Client Configuration Fingerprinting (Reconnaissance) |
+| T1592 | HIGH | High-Confidence Firmware Enumeration Against Network Devices, Advanced Software Enumeration Reconnaissance via Web Endpoints, High-Confidence Hardware Enumeration via Management Interfaces, High-Confidence Client Configuration Fingerprinting (Reconnaissance) |
 | T1592.001 | HIGH | High-Confidence Hardware Enumeration via Management Interfaces |
+| T1592.002 | HIGH | Advanced Software Enumeration Reconnaissance via Web Endpoints |
 | T1592.003 | HIGH | High-Confidence Firmware Enumeration Against Network Devices |
 | T1592.004 | MEDIUM | High-Confidence Client Configuration Fingerprinting (Reconnaissance) |
 | T1595 | HIGH | High-Fidelity External IP Block Scanning Detection, High-Confidence External Vulnerability Scanning Activity, Active Wordlist Scanning Against Authentication Endpoints |

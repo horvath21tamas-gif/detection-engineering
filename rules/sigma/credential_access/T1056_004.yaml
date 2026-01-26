@@ -1,39 +1,91 @@
-title: Suspicious Credential API Hooking via Win32 APIs
+title: Suspicious Credential API Hooking via Win32 Libraries
 id: d1a4c8f2-4c3e-4d8c-9e91-105600040001
-status: experimental
-description: Detects suspicious processes loading Win32 libraries commonly abused for credential API hooking such as keylogging or credential interception.
+status: stable
+description: >
+  Detects suspicious processes loading combinations of Win32 libraries
+  commonly abused for credential interception or API hooking, such as
+  user32.dll, advapi32.dll, and win32u.dll. The rule focuses on non-system,
+  user-writable execution paths and excludes common legitimate software
+  to reduce false positives.
 author: hota05
-date: 2026/01/20
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1056/004/
+
 logsource:
   product: windows
   category: image_load
+
 detection:
-  selection_dll:
+
+  credential_api_dlls:
     ImageLoaded|endswith:
       - '\user32.dll'
       - '\advapi32.dll'
       - '\win32u.dll'
-  selection_process:
-    Image|endswith:
-      - '.exe'
-  filter_legit_paths:
+
+  executable_process:
+    Image|endswith: '.exe'
+
+  multiple_api_loads:
+    ImageLoaded|contains:
+      - 'user32.dll'
+      - 'advapi32.dll'
+
+  suspicious_execution_path:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\ProgramData\'
+
+  filter_system_paths:
     Image|startswith:
       - 'C:\Windows\System32\'
       - 'C:\Windows\SysWOW64\'
-  filter_legit_apps:
+
+  filter_common_apps:
     Image|endswith:
       - '\explorer.exe'
       - '\chrome.exe'
       - '\msedge.exe'
       - '\firefox.exe'
       - '\teams.exe'
-  condition: selection_dll and selection_process and not filter_legit_paths and not filter_legit_apps
+      - '\outlook.exe'
+      - '\slack.exe'
+      - '\zoom.exe'
+
+  filter_legit_tools:
+    Image|contains:
+      - '\Accessibility\'
+      - '\Screen Recorder\'
+      - '\ScreenCapture\'
+      - '\Security\'
+      - '\Antivirus\'
+      - '\EDR\'
+      - '\Defender\'
+      - '\CrowdStrike\'
+      - '\SentinelOne\'
+
+  condition: >
+    executable_process
+    and credential_api_dlls
+    and multiple_api_loads
+    and suspicious_execution_path
+    and not (
+      filter_system_paths
+      or filter_common_apps
+      or filter_legit_tools
+    )
+
 falsepositives:
-  - Accessibility software
-  - Screen recording or input method tools
-  - Legitimate security software
+  - Custom accessibility or assistive input software
+  - Internally developed monitoring tools
+  - Rare GUI utilities running from user directories
+
 level: high
+
 tags:
   - attack.credential_access
-  - attack.t1056.004
   - attack.collection
+  - attack.t1056.004

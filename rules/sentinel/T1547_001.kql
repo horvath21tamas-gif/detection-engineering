@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where EventType =~ "SetValue" and TargetObject contains "\Software\Microsoft\Windows\CurrentVersion\Run" and (Details in ("*\AppData\*", "*\Temp\*")) and (FolderPath in ("*\powershell.exe", "*\cmd.exe"))
+| where (EventType =~ "SetValue" and (TargetObject in ("*\Software\Microsoft\Windows\CurrentVersion\Run*", "*\Software\Microsoft\Windows\CurrentVersion\RunOnce*", "*\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Run*"))) and (Details in ("*\AppData\*", "*\Temp\*", "*\Downloads\*", "*\Public\*", "*\ProgramData\*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\rundll32.exe", "*\regsvr32.exe")) and (not (User contains "SYSTEM" or (FolderPath in ("*\Windows\Installer\*", "*\Program Files\*", "*\Program Files (x86)\*", "*\Microsoft\EdgeUpdate\*", "*\Google\Update\*", "*\Mozilla Maintenance Service\*", "*\Adobe\*"))))

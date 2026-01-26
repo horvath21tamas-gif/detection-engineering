@@ -32,7 +32,7 @@
 - [wmic.exe segitsegevel perzisztens esemenyt hoznak letre a tamadok](#wmicexe-segitsegevel-perzisztens-esemenyt-hoznak-letre-a-tamadok)
 - [COM hijacking (perzisztencia)](#com-hijacking-(perzisztencia))
 - [Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása](#gyanús-rendszerindítási-vagy-bejelentkezési-automatikus-indítás-végrehajtása)
-- [Gyanus Registry key modositas perzisztencia kiepitese erdekeben](#gyanus-registry-key-modositas-perzisztencia-kiepitese-erdekeben)
+- [Suspicious Registry Run Key Modification for User Persistence (High Fidelity)](#suspicious-registry-run-key-modification-for-user-persistence-(high-fidelity))
 - [UAC Bypass via Fodhelper Registry Hijack (High Fidelity)](#uac-bypass-via-fodhelper-registry-hijack-(high-fidelity))
 - [Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)](#nem-böngészős-folyamat-hozzáférése-a-böngésző-hitelesítőadat-tárolóihoz-(high-fidelity))
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
@@ -494,12 +494,12 @@
 
 ---
 
-## Gyanus Registry key modositas perzisztencia kiepitese erdekeben
+## Suspicious Registry Run Key Modification for User Persistence (High Fidelity)
 - **Azonosító:** `T1547_001.yaml`
-- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** Detektalni a gyanus Registry key modositasokat
-- **Hamis pozitívok:** Legitim software run inditasa, Software telepites vagy update
+- **Leírás:** Detects suspicious registry modifications used to establish user-level persistence via Windows Run and RunOnce keys. The rule focuses on non-standard executable locations combined with scripting engines to reduce false positives from legitimate software installations.
+- **Hamis pozitívok:** Custom enterprise logon scripts, Rare legacy software using user-level Run keys
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook

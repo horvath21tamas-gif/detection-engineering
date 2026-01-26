@@ -1,28 +1,101 @@
-title: Detektalni, amikor nem a bongeszo folyamata fer hozza a bongeszo credential storejahoz
-id: '880ff33b-a339-4732-91a3-fcbb7942caed'
-status: experimental
-description:
+title: Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)
+id: 880ff33b-a339-4732-91a3-fcbb7942caed
+status: stable
+description: >
+  Észleli a böngésző hitelesítőadat-tároló fájljaihoz való gyanús hozzáférést nem böngészőfolyamatok által.
+  A szabály az ismert hitelesítőadat-adatbázisokhoz való olvasási hozzáférésre összpontosít,
+  valamint a gyanús végrehajtási kontextusra, hogy csökkentse a téves riasztásokat,
+  amelyek a biztonsági mentési ügynököktől, víruskereső szoftverektől és böngészőfrissítésektől származnak.
 author: hota05
-date: 2026/01/13
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1555/
+
 logsource:
   product: windows
   category: file_event
+
 detection:
-  selection_browser:
+
+  credential_files:
+    TargetFileName|contains:
+      # Chromium-based
+      - '\User Data\Default\Login Data'
+      - '\User Data\Default\Web Data'
+      - '\User Data\Default\Cookies'
+      # Firefox
+      - '\Firefox\Profiles\'
+    TargetFileName|endswith:
+      - 'logins.json'
+      - 'key4.db'
+      - 'cookies.sqlite'
+
+  read_access:
+    AccessMask:
+      - '0x1'
+      - '0x10'
+      - 'ReadData'
+      - 'ReadFile'
+
+  legit_browser_process:
     Image|endswith:
       - '\chrome.exe'
       - '\msedge.exe'
       - '\brave.exe'
       - '\firefox.exe'
-  selection_access:
-    TargetFileName|contains:
-      - '\User Data\'
-      - "Login Data"
-  condition: selection_access and not selection_browser
-level: medium
+
+  suspicious_process:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\rundll32.exe'
+      - '\regsvr32.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+      - '\python.exe'
+      - '\perl.exe'
+
+  filter_legit_system:
+    Image|startswith:
+      - 'C:\Windows\System32\'
+      - 'C:\Windows\SysWOW64\'
+
+  filter_security_software:
+    Image|contains:
+      - '\Windows Defender\'
+      - '\Program Files\Windows Defender\'
+      - '\CrowdStrike\'
+      - '\SentinelOne\'
+      - '\Sophos\'
+      - '\ESET\'
+
+  filter_backup_agents:
+    Image|contains:
+      - '\Veeam\'
+      - '\Acronis\'
+      - '\Commvault\'
+      - '\Veritas\'
+
+  condition: >
+    credential_files
+    and read_access
+    and suspicious_process
+    and not (
+      legit_browser_process
+      or filter_legit_system
+      or filter_security_software
+      or filter_backup_agents
+    )
+
+falsepositives:
+  - Egyedi jelszókezelő eszközök
+  - Kriminalisztikai vagy DFIR tevékenységek
+  - Ritka vállalati végpontkezelési feladatok
+
+level: high
+
 tags:
+  - attack.credential_access
   - attack.t1555
-falsepositves:
-  - jelszotarolo general riasztast
-  - bongeszo update
-  - backup agent

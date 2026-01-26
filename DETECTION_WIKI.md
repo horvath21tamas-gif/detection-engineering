@@ -16,7 +16,7 @@
 - [cmd.exe netuser vagy net localgroup parancsot futtat](#cmdexe-netuser-vagy-net-localgroup-parancsot-futtat)
 - [egy felhasznalo beepitett windows eszkozoket hasznal fajl letoltesre es kodfuttatasra](#egy-felhasznalo-beepitett-windows-eszkozoket-hasznal-fajl-letoltesre-es-kodfuttatasra)
 - [tobbszori sikertelen bejelentkezes egy felhasznalohoz](#tobbszori-sikertelen-bejelentkezes-egy-felhasznalohoz)
-- [webszeren tortent XSS probakozas](#webszeren-tortent-xss-probakozas)
+- [Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server](#suspicious-cross-site-scripting-(xss)-attempt-detected-on-web-server)
 - [Suspicious File Download via Bitsadmin (High Fidelity)](#suspicious-file-download-via-bitsadmin-(high-fidelity))
 - [Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity)](#suspicious-child-process-spawned-by-microsoft-office-application-(high-fidelity))
 - [Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel](#adathalászat-rosszindulatú-linken-keresztül-domain-és-feladó-rendellenességekkel)
@@ -260,12 +260,12 @@
 
 ---
 
-## webszeren tortent XSS probakozas
+## Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server
 - **Azonosító:** `T1190.yaml`
-- **Minőségi mutató:** `40/100` ⭐⭐ (Fejlesztendő)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟡 (medium)
-- **Leírás:** Nincs leírás megadva.
-- **Hamis pozitívok:** Nincs megadva
+- **Leírás:** Detects potential Cross-Site Scripting (XSS) attempts by identifying common reflected and encoded XSS payloads in HTTP requests, focusing on parameter-based injection patterns and excluding typical automated scanners to reduce false positives.
+- **Hamis pozitívok:** Manual security testing by administrators, Approved penetration testing, Rare application-specific encoding behavior
 - **MITRE ATT&CK:** `T1190`
 
 #### 🚨 Response Playbook

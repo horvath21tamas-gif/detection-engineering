@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 09:33:05`
+**Utolsó frissítés:** `2026-01-26 09:39:55`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -35,7 +35,7 @@
 | T1098 | MEDIUM | cmd.exe netuser vagy net localgroup parancsot futtat |
 | T1105 | HIGH | Detektalni a poweshellbol base64-encoded parancsot, egy felhasznalo beepitett windows eszkozoket hasznal fajl letoltesre es kodfuttatasra |
 | T1110.001 | MEDIUM | tobbszori sikertelen bejelentkezes egy felhasznalohoz |
-| T1190 | MEDIUM | webszeren tortent XSS probakozas |
+| T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |
 | T1197 | HIGH | Suspicious File Download via Bitsadmin (High Fidelity) |
 | T1204 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity) |
 | T1204.004 | HIGH | Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel |

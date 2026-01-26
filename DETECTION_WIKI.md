@@ -10,7 +10,7 @@
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [Gyanus Scheduled Task letrehozasa](#gyanus-scheduled-task-letrehozasa)
 - [Suspicious Credential API Hooking via Win32 APIs](#suspicious-credential-api-hooking-via-win32-apis)
-- [Gyanus Poweshell parancs vegrehajtasa](#gyanus-poweshell-parancs-vegrehajtasa)
+- [Suspicious Encoded PowerShell Command Execution](#suspicious-encoded-powershell-command-execution)
 - [Suspicious SYSTEM Process Spawned from User Context](#suspicious-system-process-spawned-from-user-context)
 - [Security Event Log Cleared Using wevtutil.exe](#security-event-log-cleared-using-wevtutilexe)
 - [Suspicious Use of net user or net localgroup via cmd.exe](#suspicious-use-of-net-user-or-net-localgroup-via-cmdexe)
@@ -176,17 +176,18 @@
 
 ---
 
-## Gyanus Poweshell parancs vegrehajtasa
+## Suspicious Encoded PowerShell Command Execution
 - **Azonosító:** `T1059_001.yaml`
-- **Minőségi mutató:** `50/100` ⭐⭐⭐ (Közepes)
-- **Kritikusság:** 🟡 (medium)
-- **Leírás:** Poweshell parancsok eszlelese, melyek hasznalhatoak rosszindulatu kodok futtatasara
-- **Hamis pozitívok:** Nincs megadva
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious execution of PowerShell using encoded commands combined with execution bypass or obfuscation flags. This technique is commonly used by attackers to evade detection and execute malicious payloads in memory.
+- **Hamis pozitívok:** Rare advanced administrative automation, Approved red team activity
 - **MITRE ATT&CK:** `001, T1027`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
 

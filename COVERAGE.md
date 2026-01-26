@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 10:18:13`
+**Utolsó frissítés:** `2026-01-26 10:22:17`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -20,7 +20,7 @@
 | T1003.001 | HIGH | Suspicious Access to LSASS Process Memory, Credential Dumping LSASS |
 | T1021 | MEDIUM | Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be |
 | T1021.001 | MEDIUM | Gyanus RDP belepes |
-| T1027 | HIGH | Detektalni a poweshellbol base64-encoded parancsot, Gyanus Poweshell parancs vegrehajtasa |
+| T1027 | HIGH | Detektalni a poweshellbol base64-encoded parancsot, Suspicious Encoded PowerShell Command Execution |
 | T1036 | HIGH | A tamado lemasol egy legitim Windows binarist |
 | T1036.005 | HIGH | A tamado lemasol egy legitim Windows binarist |
 | T1047 | MEDIUM | Tavoli hoston inditott folyamat wmic.exe segitsegevel |
@@ -28,7 +28,7 @@
 | T1053.005 | MEDIUM | Gyanus Scheduled Task letrehozasa |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 APIs |
 | T1059 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
-| T1059.001 | MEDIUM | Gyanus Poweshell parancs vegrehajtasa |
+| T1059.001 | HIGH | Suspicious Encoded PowerShell Command Execution |
 | T1068 | HIGH | Suspicious SYSTEM Process Spawned from User Context |
 | T1070.001 | HIGH | Security Event Log Cleared Using wevtutil.exe |
 | T1087 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |

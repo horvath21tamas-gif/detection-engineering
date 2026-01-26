@@ -28,7 +28,7 @@
 - [Ransomware elokeszites eszlelese](#ransomware-elokeszites-eszlelese)
 - [vssadmin.exe shadow copy-t torol](#vssadminexe-shadow-copy-t-torol)
 - [webszerverre torteno webshellfeltoltese/ interakcioba lepese](#webszerverre-torteno-webshellfeltoltese-interakcioba-lepese)
-- [egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani](#egy-nem-admin-felhasznalo-rovid-idon-belul-tobb-kulonbozo-erzekeny-windows-szolgaltatsat-proball-leallitani-vagy-modositani)
+- [Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services](#non-admin-user-attempting-to-stop-or-modify-multiple-sensitive-windows-services)
 - [WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity)](#wmi-event-subscription-persistence-via-wmic-or-powershell-(high-fidelity))
 - [Suspicious COM Hijacking for User-Level Persistence (High Fidelity)](#suspicious-com-hijacking-for-user-level-persistence-(high-fidelity))
 - [Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása](#gyanús-rendszerindítási-vagy-bejelentkezési-automatikus-indítás-végrehajtása)
@@ -435,17 +435,18 @@
 
 ---
 
-## egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani
+## Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services
 - **Azonosító:** `T1543.yaml`
-- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
-- **Kritikusság:** 🟡 (medium)
-- **Leírás:** windows szolgaltatas leallitas vagy modositas
-- **Hamis pozitívok:** legitim admin tevekenyseg, szoftver telepites
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious behavior where a non-administrative user attempts to stop or modify multiple sensitive Windows services within a short time window. This behavior is commonly associated with defense evasion or persistence preparation activities.
+- **Hamis pozitívok:** Rare helpdesk troubleshooting using non-standard privileges, Misconfigured enterprise automation
 - **MITRE ATT&CK:** `T1543, T1562`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
 

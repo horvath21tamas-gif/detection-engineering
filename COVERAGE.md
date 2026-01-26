@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 08:24:05`
+**Utolsó frissítés:** `2026-01-26 08:27:52`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -48,7 +48,7 @@
 | T1486 | CRITICAL | Ransomware elokeszites eszlelese |
 | T1490 | CRITICAL | vssadmin.exe shadow copy-t torol, Ransomware elokeszites eszlelese |
 | T1505.003 | HIGH | webszerverre torteno webshellfeltoltese/ interakcioba lepese |
-| T1543 | MEDIUM | egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani |
+| T1543 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1546 | HIGH | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity), Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
 | T1546.003 | HIGH | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity) |
 | T1546.015 | HIGH | Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
@@ -58,6 +58,6 @@
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |
 | T1559.001 | HIGH | Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity) |
 | T1560.001 | HIGH | Adatok gyanús archiválása exfiltráció céljából |
-| T1562 | MEDIUM | egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani |
+| T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1562.001 | CRITICAL | Ransomware elokeszites eszlelese, Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |

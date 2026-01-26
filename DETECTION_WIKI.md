@@ -26,7 +26,7 @@
 - [Gyanus rundll32.exe hasznalata](#gyanus-rundll32exe-hasznalata)
 - [Detektalni, amikor egy legitim remote admin toolt nem a megszokott enterprise modon hasznalnak](#detektalni-amikor-egy-legitim-remote-admin-toolt-nem-a-megszokott-enterprise-modon-hasznalnak)
 - [Ransomware elokeszites eszlelese](#ransomware-elokeszites-eszlelese)
-- [vssadmin.exe shadow copy-t torol](#vssadminexe-shadow-copy-t-torol)
+- [Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity)](#suspicious-deletion-of-volume-shadow-copies-via-vssadmin-(high-fidelity))
 - [Webshell Upload or Interaction Detected on Web Server (High Fidelity)](#webshell-upload-or-interaction-detected-on-web-server-(high-fidelity))
 - [Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services](#non-admin-user-attempting-to-stop-or-modify-multiple-sensitive-windows-services)
 - [WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity)](#wmi-event-subscription-persistence-via-wmic-or-powershell-(high-fidelity))
@@ -406,17 +406,18 @@
 
 ---
 
-## vssadmin.exe shadow copy-t torol
+## Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity)
 - **Azonosító:** `T1490.yaml`
-- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
-- **Kritikusság:** 🟡 (medium)
-- **Leírás:** vssadmin.exe shadow copy-t torol
-- **Hamis pozitívok:** legitem admin fejlesztesek, backup tool
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious deletion of Volume Shadow Copies using vssadmin.exe, commonly observed during ransomware and destructive attacks. The rule focuses on attacker-typical command-line arguments, non-service execution context, and excludes known backup solutions to minimize false positives.
+- **Hamis pozitívok:** Rare manual administrative maintenance, Approved disaster recovery testing
 - **MITRE ATT&CK:** `T1490`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
 

@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 08:56:45`
+**Utolsó frissítés:** `2026-01-26 09:00:20`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -46,7 +46,7 @@
 | T1218.011 | HIGH | Gyanus rundll32.exe hasznalata |
 | T1219 | HIGH | Detektalni, amikor egy legitim remote admin toolt nem a megszokott enterprise modon hasznalnak |
 | T1486 | CRITICAL | Ransomware elokeszites eszlelese |
-| T1490 | CRITICAL | vssadmin.exe shadow copy-t torol, Ransomware elokeszites eszlelese |
+| T1490 | CRITICAL | Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity), Ransomware elokeszites eszlelese |
 | T1505.003 | HIGH | Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1543 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1546 | HIGH | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity), Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |

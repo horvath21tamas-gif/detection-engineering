@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (FolderPath endswith "\vssadmin.exe" and (ProcessCommandLine in ("*delete*", "*shadow*"))) and (not username =~ "SYSTEM")
+| where FolderPath endswith "\vssadmin.exe" and (ProcessCommandLine in ("*delete shadows*", "*delete shadow*", "*/all*", "*/quiet*")) and (ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\rundll32.exe")) and (not ((User in ("*SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*")) or (ParentProcessName in ("*\Veeam\*", "*\Acronis\*", "*\Commvault\*", "*\Veritas\*", "*\Dell\*", "*\Microsoft Azure Backup\*", "*\Datto\*"))))

@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (FolderPath endswith "itsadmin.exe" and (ProcessCommandLine in ("*/transfer*", "*/addfile*", "*http://*", "*https://*"))) and (not username =~ "SYSTEM")
+| where FolderPath endswith "\bitsadmin.exe" and (ProcessCommandLine in ("*/transfer*", "*/addfile*", "*http://*", "*https://*")) and (ProcessCommandLine in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Downloads\*")) and (ParentProcessName in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\rundll32.exe")) and (not ((User in ("*SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*")) or (ParentProcessName in ("*\Windows\CCM\*", "*\Microsoft Configuration Manager\*", "*\PDQ\*", "*\Ivanti\*", "*\ManageEngine\*", "*\Tanium\*", "*\Intune\*", "*\WindowsUpdate\*"))))

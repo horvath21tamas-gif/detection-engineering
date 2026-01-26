@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 09:29:25`
+**Utolsó frissítés:** `2026-01-26 09:33:05`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -36,7 +36,7 @@
 | T1105 | HIGH | Detektalni a poweshellbol base64-encoded parancsot, egy felhasznalo beepitett windows eszkozoket hasznal fajl letoltesre es kodfuttatasra |
 | T1110.001 | MEDIUM | tobbszori sikertelen bejelentkezes egy felhasznalohoz |
 | T1190 | MEDIUM | webszeren tortent XSS probakozas |
-| T1197 | HIGH | bitsadmin.exe segitsegevel fajl letoltes |
+| T1197 | HIGH | Suspicious File Download via Bitsadmin (High Fidelity) |
 | T1204 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity) |
 | T1204.004 | HIGH | Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel |
 | T1218 | MEDIUM | egy felhasznalo beepitett windows eszkozoket hasznal fajl letoltesre es kodfuttatasra |

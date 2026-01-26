@@ -17,7 +17,7 @@
 - [egy felhasznalo beepitett windows eszkozoket hasznal fajl letoltesre es kodfuttatasra](#egy-felhasznalo-beepitett-windows-eszkozoket-hasznal-fajl-letoltesre-es-kodfuttatasra)
 - [tobbszori sikertelen bejelentkezes egy felhasznalohoz](#tobbszori-sikertelen-bejelentkezes-egy-felhasznalohoz)
 - [webszeren tortent XSS probakozas](#webszeren-tortent-xss-probakozas)
-- [bitsadmin.exe segitsegevel fajl letoltes](#bitsadminexe-segitsegevel-fajl-letoltes)
+- [Suspicious File Download via Bitsadmin (High Fidelity)](#suspicious-file-download-via-bitsadmin-(high-fidelity))
 - [Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity)](#suspicious-child-process-spawned-by-microsoft-office-application-(high-fidelity))
 - [Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel](#adathalászat-rosszindulatú-linken-keresztül-domain-és-feladó-rendellenességekkel)
 - [Suspicious Mshta Execution of Remote Script (High Fidelity)](#suspicious-mshta-execution-of-remote-script-(high-fidelity))
@@ -274,12 +274,12 @@
 
 ---
 
-## bitsadmin.exe segitsegevel fajl letoltes
+## Suspicious File Download via Bitsadmin (High Fidelity)
 - **Azonosító:** `T1197.yaml`
-- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** bitsadmin.exe segitsegevel fajl letoltese
-- **Hamis pozitívok:** update, regebbi admin script
+- **Leírás:** Detects suspicious file downloads performed using bitsadmin.exe, a deprecated but still abused Windows LOLBAS utility. The rule focuses on attacker-typical usage patterns, execution context, and download targets to reduce false positives.
+- **Hamis pozitívok:** Rare legacy administrative scripts, Approved red team or malware simulation
 - **MITRE ATT&CK:** `T1197`
 
 #### 🚨 Response Playbook

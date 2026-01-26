@@ -1,32 +1,97 @@
-title: Ransomware elokeszites eszlelese
-id: '629203ce-103e-4303-bfc5-eb3b2df615a2'
-status: experimental
-description: Ransomware elokeszites eszlelese
+title: Ransomware Preparation Activity Detected on Windows Host (High Fidelity)
+id: 629203ce-103e-4303-bfc5-eb3b2df615a2
+status: stable
+description: >
+  Detects ransomware preparation activity by identifying multiple
+  recovery-inhibition and defense-evasion actions executed within
+  a short time window. This includes disabling recovery options,
+  deleting shadow copies, and stopping security-related services.
 author: hota05
-date: 2026/01/12
-logsource: 
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1490/
+  - https://attack.mitre.org/techniques/T1486/
+  - https://attack.mitre.org/techniques/T1562/001/
+
+logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection_service:
+
+  shadow_copy_deletion:
+    Image|endswith:
+      - '\vssadmin.exe'
+      - '\wmic.exe'
+    CommandLine|contains:
+      - 'delete'
+      - 'shadow'
+
+  recovery_modification:
+    Image|endswith: '\bcdedit.exe'
+    CommandLine|contains:
+      - 'recoveryenabled'
+      - 'bootstatuspolicy'
+
+  service_manipulation:
     Image|endswith:
       - '\sc.exe'
       - '\net.exe'
     CommandLine|contains:
-      - 'shadow'
-  selection_recovery:
-    Image|endswith:
-      - '\bcdedit.exe'
-    CommandLine|contains:
-      - 'recoveryenabled'
-  filter_system:
-    username:
-      - SYSTEM
-  condition: (selection_service or selection_recovery) and not filter_system
+      - 'stop'
+      - 'WinDefend'
+      - 'Sense'
+      - 'VSS'
+      - 'MpsSvc'
+      - 'Backup'
+
+  suspicious_parent:
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+
+  filter_service_accounts:
+    User|contains:
+      - 'SYSTEM'
+      - 'LOCAL SERVICE'
+      - 'NETWORK SERVICE'
+
+  filter_legit_tools:
+    ParentImage|contains:
+      - '\Veeam\'
+      - '\Acronis\'
+      - '\Commvault\'
+      - '\Veritas\'
+      - '\Windows\CCM\'
+      - '\Microsoft Configuration Manager\'
+      - '\PDQ\'
+
+  timeframe: 10m
+
+  condition: >
+    (
+      shadow_copy_deletion
+      or recovery_modification
+      or service_manipulation
+    )
+    and suspicious_parent
+    and not (
+      filter_service_accounts
+      or filter_legit_tools
+    )
+    | count(Image) by User > 2
+
+falsepositives:
+  - Rare manual disaster recovery testing
+  - Advanced troubleshooting by senior administrators
+
 level: critical
-tags: 
+
+tags:
+  - attack.impact
   - attack.t1486
   - attack.t1490
   - attack.t1562.001
-falsepositive:
-  - admin karbantartas

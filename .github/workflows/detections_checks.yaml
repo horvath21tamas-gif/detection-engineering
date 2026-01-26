@@ -132,10 +132,10 @@ jobs:
               sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk error"
               sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic error"
             
-            # EGYÉB (E-MAIL, STB.) SZABÁLYOK (PROFIL NÉLKÜL)
+            # EGYÉB (E-MAIL, STB.) SZABÁLYOK (PROFIL NÉLKÜL - PIPELINE KIKAPCSOLÁSA)
             else
-              sigma convert -t splunk "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk generic error"
-              sigma convert -t lucene "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic generic error"
+              sigma convert -t splunk --without-pipeline "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk generic error"
+              sigma convert -t lucene --without-pipeline "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic generic error"
             fi
             
             sigma convert -t qradar "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar error"

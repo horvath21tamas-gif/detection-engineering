@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (FolderPath endswith "\schtasks.exe" and ProcessCommandLine contains "/create") and ProcessCommandLine contains "powershell"
+| where (FolderPath endswith "\schtasks.exe" and ProcessCommandLine contains "/create") and (ProcessCommandLine in ("*powershell*", "*pwsh*")) and ((ProcessCommandLine in ("*-enc*", "*-encodedcommand*", "*-nop*", "*-w hidden*", "*-executionpolicy bypass*")) or (ProcessCommandLine in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\ProgramData\*"))) and (ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\WINWORD.EXE", "*\EXCEL.EXE")) and (not ((User in ("*NT AUTHORITY\SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*")) or (ParentProcessName in ("*\Windows\CCM\*", "*\Microsoft Configuration Manager\*", "*\SCCM\*", "*\Tanium\*", "*\PDQ\*", "*\Ivanti\*", "*\ManageEngine\*", "*\Veeam\*", "*\Acronis\*", "*\Backup\*"))))

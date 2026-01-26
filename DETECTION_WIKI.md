@@ -8,7 +8,7 @@
 - [A tamado lemasol egy legitim Windows binarist](#a-tamado-lemasol-egy-legitim-windows-binarist)
 - [Tavoli hoston inditott folyamat wmic.exe segitsegevel](#tavoli-hoston-inditott-folyamat-wmicexe-segitsegevel)
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
-- [Gyanus Scheduled Task letrehozasa](#gyanus-scheduled-task-letrehozasa)
+- [Suspicious Scheduled Task Creation Executing PowerShell](#suspicious-scheduled-task-creation-executing-powershell)
 - [Suspicious Credential API Hooking via Win32 Libraries](#suspicious-credential-api-hooking-via-win32-libraries)
 - [Suspicious Encoded PowerShell Command Execution](#suspicious-encoded-powershell-command-execution)
 - [Suspicious SYSTEM Process Spawned from User Context](#suspicious-system-process-spawned-from-user-context)
@@ -147,17 +147,18 @@
 
 ---
 
-## Gyanus Scheduled Task letrehozasa
+## Suspicious Scheduled Task Creation Executing PowerShell
 - **Azonosító:** `T1053_005.yaml`
-- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
-- **Kritikusság:** 🟡 (medium)
-- **Leírás:** Gyanus Scheduled Task letrehozasa
-- **Hamis pozitívok:** admin automatizacio, backup
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious creation of scheduled tasks using schtasks.exe that execute PowerShell, commonly abused by attackers to establish persistence or delayed execution of malicious payloads.
+- **Hamis pozitívok:** Rare custom administrative automation, Approved red team or malware simulation activity
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
 

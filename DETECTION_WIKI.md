@@ -11,7 +11,7 @@
 - [Gyanus Scheduled Task letrehozasa](#gyanus-scheduled-task-letrehozasa)
 - [Suspicious Credential API Hooking via Win32 APIs](#suspicious-credential-api-hooking-via-win32-apis)
 - [Gyanus Poweshell parancs vegrehajtasa](#gyanus-poweshell-parancs-vegrehajtasa)
-- [Gyanus System process melyet a user indit](#gyanus-system-process-melyet-a-user-indit)
+- [Suspicious SYSTEM Process Spawned from User Context](#suspicious-system-process-spawned-from-user-context)
 - [Security Event Log Cleared Using wevtutil.exe](#security-event-log-cleared-using-wevtutilexe)
 - [Suspicious Use of net user or net localgroup via cmd.exe](#suspicious-use-of-net-user-or-net-localgroup-via-cmdexe)
 - [Suspicious Use of Built-in Windows Tools for File Download and Code Execution](#suspicious-use-of-built-in-windows-tools-for-file-download-and-code-execution)
@@ -190,17 +190,18 @@
 
 ---
 
-## Gyanus System process melyet a user indit
+## Suspicious SYSTEM Process Spawned from User Context
 - **Azonosító:** `T1068.yaml`
-- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
-- **Kritikusság:** 🟡 (medium)
-- **Leírás:** Gyanus System process melyet a user indit
-- **Hamis pozitívok:** fejlesztesek miatti alert, update/telepites
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious processes running as SYSTEM that are spawned from user-initiated parent processes such as Explorer, browsers, or Office applications. This behavior may indicate privilege escalation, token manipulation, or UAC bypass exploitation.
+- **Hamis pozitívok:** Rare custom administrative tooling, Approved software installation using custom launchers
 - **MITRE ATT&CK:** `T1068`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
 

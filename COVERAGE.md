@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 10:14:12`
+**Utolsó frissítés:** `2026-01-26 10:18:13`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -29,7 +29,7 @@
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 APIs |
 | T1059 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1059.001 | MEDIUM | Gyanus Poweshell parancs vegrehajtasa |
-| T1068 | MEDIUM | Gyanus System process melyet a user indit |
+| T1068 | HIGH | Suspicious SYSTEM Process Spawned from User Context |
 | T1070.001 | HIGH | Security Event Log Cleared Using wevtutil.exe |
 | T1087 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
 | T1098 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |

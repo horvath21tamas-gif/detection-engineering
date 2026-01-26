@@ -1,0 +1,129 @@
+title: High-Fidelity External IP Block Scanning Detection
+id: 00590bb8-708d-4d05-b048-b2503a35dde9
+status: stable
+description: >
+  Detects high-confidence active scanning behavior where a single
+  external source IP rapidly probes multiple destination IP
+  addresses within a short time window. Optimized to reduce false
+  positives by excluding known scanners, crawlers, and cloud
+  infrastructure.
+author: hota05
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1595/001/
+
+logsource:
+  product: generic
+  category: network_traffic
+
+detection:
+
+  selection_external_src:
+    SrcIp|startswith:
+      - '1.'
+      - '2.'
+      - '3.'
+      - '4.'
+      - '5.'
+      - '6.'
+      - '7.'
+      - '8.'
+      - '9.'
+
+  selection_scan_behavior:
+    Action:
+      - 'deny'
+      - 'drop'
+      - 'reset'
+    Protocol:
+      - 'tcp'
+
+  selection_scan_responses:
+    Status:
+      - 400
+      - 401
+      - 403
+      - 404
+      - 408
+      - 444
+      - 499
+
+  timeframe: 60s
+
+  filter_internal_dst:
+    DestIp|startswith:
+      - '10.'
+      - '192.168.'
+      - '172.16.'
+      - '172.17.'
+      - '172.18.'
+      - '172.19.'
+      - '172.20.'
+      - '172.21.'
+      - '172.22.'
+      - '172.23.'
+      - '172.24.'
+      - '172.25.'
+      - '172.26.'
+      - '172.27.'
+      - '172.28.'
+      - '172.29.'
+      - '172.30.'
+      - '172.31.'
+
+  filter_known_scanners:
+    UserAgent|contains:
+      - 'nessus'
+      - 'qualys'
+      - 'openvas'
+      - 'acunetix'
+      - 'burp'
+      - 'nikto'
+      - 'zabbix'
+      - 'nagios'
+
+  filter_crawlers:
+    UserAgent|contains:
+      - 'googlebot'
+      - 'bingbot'
+      - 'yandex'
+      - 'ahrefs'
+      - 'semrush'
+      - 'uptimerobot'
+      - 'pingdom'
+
+  filter_cloud_ranges:
+    SrcIp|startswith:
+      - '34.'
+      - '35.'
+      - '52.'
+      - '54.'
+
+  condition: >
+    selection_external_src
+    and selection_scan_behavior
+    and selection_scan_responses
+    and not (
+      filter_internal_dst
+      or filter_known_scanners
+      or filter_crawlers
+      or filter_cloud_ranges
+    )
+
+fields:
+  - SrcIp
+  - DestIp
+  - DestPort
+  - Action
+  - Status
+
+falsepositives:
+  - Rare misconfigured external services
+  - Newly deployed monitoring not yet allowlisted
+
+level: high
+
+tags:
+  - attack.reconnaissance
+  - attack.t1595
+  - attack.t1595.001

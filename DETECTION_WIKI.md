@@ -27,7 +27,7 @@
 - [Detektalni, amikor egy legitim remote admin toolt nem a megszokott enterprise modon hasznalnak](#detektalni-amikor-egy-legitim-remote-admin-toolt-nem-a-megszokott-enterprise-modon-hasznalnak)
 - [Ransomware elokeszites eszlelese](#ransomware-elokeszites-eszlelese)
 - [vssadmin.exe shadow copy-t torol](#vssadminexe-shadow-copy-t-torol)
-- [webszerverre torteno webshellfeltoltese/ interakcioba lepese](#webszerverre-torteno-webshellfeltoltese-interakcioba-lepese)
+- [Webshell Upload or Interaction Detected on Web Server (High Fidelity)](#webshell-upload-or-interaction-detected-on-web-server-(high-fidelity))
 - [Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services](#non-admin-user-attempting-to-stop-or-modify-multiple-sensitive-windows-services)
 - [WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity)](#wmi-event-subscription-persistence-via-wmic-or-powershell-(high-fidelity))
 - [Suspicious COM Hijacking for User-Level Persistence (High Fidelity)](#suspicious-com-hijacking-for-user-level-persistence-(high-fidelity))
@@ -420,12 +420,12 @@
 
 ---
 
-## webszerverre torteno webshellfeltoltese/ interakcioba lepese
+## Webshell Upload or Interaction Detected on Web Server (High Fidelity)
 - **Azonosító:** `T1505_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** Detektalni a potenciális webshell feltolteseket es az interakciokat
-- **Hamis pozitívok:** Nincs megadva
+- **Leírás:** Detects potential webshell activity by identifying suspicious script uploads to web-accessible directories and subsequent interactions using command-execution style parameters. The rule minimizes false positives by focusing on attacker-typical paths, parameters, and access patterns.
+- **Hamis pozitívok:** Legitimate file upload functionality with misconfiguration, Developer debugging on non-production systems, Approved penetration testing
 - **MITRE ATT&CK:** `003, T1059`
 
 #### 🚨 Response Playbook

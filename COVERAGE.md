@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 08:27:52`
+**Utolsó frissítés:** `2026-01-26 08:56:45`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -27,7 +27,7 @@
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
 | T1053.005 | MEDIUM | Gyanus Scheduled Task letrehozasa |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 APIs |
-| T1059 | HIGH | Gyanus folyamatot inditott a Microsoft office valamelyik alkalmazasa, webszerverre torteno webshellfeltoltese/ interakcioba lepese |
+| T1059 | HIGH | Gyanus folyamatot inditott a Microsoft office valamelyik alkalmazasa, Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1059.001 | MEDIUM | Gyanus Poweshell parancs vegrehajtasa |
 | T1068 | MEDIUM | Gyanus System process melyet a user indit |
 | T1070.001 | MEDIUM | wevtutil.exe security logokat torol |
@@ -47,7 +47,7 @@
 | T1219 | HIGH | Detektalni, amikor egy legitim remote admin toolt nem a megszokott enterprise modon hasznalnak |
 | T1486 | CRITICAL | Ransomware elokeszites eszlelese |
 | T1490 | CRITICAL | vssadmin.exe shadow copy-t torol, Ransomware elokeszites eszlelese |
-| T1505.003 | HIGH | webszerverre torteno webshellfeltoltese/ interakcioba lepese |
+| T1505.003 | HIGH | Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1543 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1546 | HIGH | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity), Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
 | T1546.003 | HIGH | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity) |

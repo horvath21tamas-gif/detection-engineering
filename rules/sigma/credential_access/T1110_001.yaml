@@ -52,7 +52,6 @@ detection:
       or filter_service_accounts
       or filter_noisy_sources
     )
-    | count(EventID) by TargetUserName > 5
 
 falsepositives:
   - User repeatedly entering wrong password

@@ -1,19 +1,66 @@
-title: tobbszori sikertelen bejelentkezes egy felhasznalohoz
-id: '14e9a30d-91f1-4422-a14c-8b20f8f5542a'
-status: experimental
-description: Egy adott ido alatt tortent sok sikertelen bejelentkezes egy felhasznalotol
+title: Multiple Failed Login Attempts for Single User (Possible Password Guessing)
+id: 14e9a30d-91f1-4422-a14c-8b20f8f5542a
+status: stable
+description: >
+  Detects multiple failed authentication attempts for the same user
+  account within a short time window, which may indicate password
+  guessing or brute-force activity. The rule excludes common sources
+  of authentication noise to reduce false positives.
 author: hota05
-date: 2026/01/12
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1110/001/
+
 logsource:
   product: windows
-  category: login
+  category: security
+
 detection:
-  selection:
+
+  failed_logon:
     EventID: 4625
-  condition: selection
+
+  logon_type:
+    LogonType:
+      - 2   # Interactive
+      - 3   # Network
+      - 10  # RemoteInteractive (RDP)
+
+  filter_machine_accounts:
+    TargetUserName|endswith: '$'
+
+  filter_service_accounts:
+    TargetUserName|contains:
+      - 'svc_'
+      - 'service'
+      - 'sql'
+      - 'backup'
+
+  filter_noisy_sources:
+    WorkstationName|contains:
+      - 'EXCHANGE'
+      - 'AADCONNECT'
+      - 'ADFS'
+
+  timeframe: 5m
+
+  condition: >
+    failed_logon
+    and logon_type
+    and not (
+      filter_machine_accounts
+      or filter_service_accounts
+      or filter_noisy_sources
+    )
+    | count(EventID) by TargetUserName > 5
+
+falsepositives:
+  - User repeatedly entering wrong password
+  - Misconfigured application using user credentials
+  - Legacy systems retrying authentication
+
 level: medium
+
 tags:
-- attack.t1110.001
-falsepositive:
-- Elfelejtett jelszo
-- beregadt sessionok
+  - attack.credential_access
+  - attack.t1110.001

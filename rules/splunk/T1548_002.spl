@@ -1,1 +1,1 @@
-ParentImage="*\\fodhelper.exe" Image IN ("*\\powershell.exe", "*\\cmd.exe") NOT username="SYSTEM"
+Image="*\\fodhelper.exe" IntegrityLevel IN ("High", "System") ParentImage="*\\fodhelper.exe" Image IN ("*\\cmd.exe", "*\\powershell.exe", "*\\pwsh.exe", "*\\rundll32.exe", "*\\mshta.exe", "*\\wscript.exe", "*\\cscript.exe", "*\\regsvr32.exe", "*\\python.exe") NOT (User="*SYSTEM*" OR Image IN ("*\\Windows\\CCM\\*", "*\\Microsoft Configuration Manager\\*", "*\\PDQ\\*", "*\\Ivanti\\*"))

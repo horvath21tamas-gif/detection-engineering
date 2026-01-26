@@ -33,7 +33,7 @@
 - [COM hijacking (perzisztencia)](#com-hijacking-(perzisztencia))
 - [Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása](#gyanús-rendszerindítási-vagy-bejelentkezési-automatikus-indítás-végrehajtása)
 - [Gyanus Registry key modositas perzisztencia kiepitese erdekeben](#gyanus-registry-key-modositas-perzisztencia-kiepitese-erdekeben)
-- [UAC bypass Fodhelper segitsegevel](#uac-bypass-fodhelper-segitsegevel)
+- [UAC Bypass via Fodhelper Registry Hijack (High Fidelity)](#uac-bypass-via-fodhelper-registry-hijack-(high-fidelity))
 - [Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)](#nem-böngészős-folyamat-hozzáférése-a-böngésző-hitelesítőadat-tárolóihoz-(high-fidelity))
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
 - [Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity)](#gyanús-elnevezett-csővezeték-létrehozás-amely-utólagos-kihasználási-eszközökhöz-kapcsolódik-(high-fidelity))
@@ -509,12 +509,12 @@
 
 ---
 
-## UAC bypass Fodhelper segitsegevel
+## UAC Bypass via Fodhelper Registry Hijack (High Fidelity)
 - **Azonosító:** `T1548_002.yaml`
-- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** UAC bypass Fodhelper segitsegevel
-- **Hamis pozitívok:** nincs
+- **Leírás:** Detects UAC bypass attempts abusing fodhelper.exe by monitoring registry hijacking of the ms-settings protocol combined with suspicious child process execution. This rule focuses on user-context auto-elevation to reduce false positives.
+- **Hamis pozitívok:** Advanced administrative automation using fodhelper (rare), DFIR or red team activity
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook

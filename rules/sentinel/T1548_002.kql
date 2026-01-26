@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (ParentProcessName endswith "\fodhelper.exe" and (FolderPath in ("*\powershell.exe", "*\cmd.exe"))) and (not username =~ "SYSTEM")
+| where (FolderPath endswith "\fodhelper.exe" and (IntegrityLevel in ("High", "System"))) and (ParentProcessName endswith "\fodhelper.exe" and (FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\rundll32.exe", "*\mshta.exe", "*\wscript.exe", "*\cscript.exe", "*\regsvr32.exe", "*\python.exe"))) and (not (User contains "SYSTEM" or (FolderPath in ("*\Windows\CCM\*", "*\Microsoft Configuration Manager\*", "*\PDQ\*", "*\Ivanti\*"))))

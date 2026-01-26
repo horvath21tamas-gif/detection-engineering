@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 08:03:56`
+**Utolsó frissítés:** `2026-01-26 08:10:11`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -53,7 +53,7 @@
 | T1546.003 | HIGH | wmic.exe segitsegevel perzisztens esemenyt hoznak letre a tamadok |
 | T1546.015 | HIGH | COM hijacking (perzisztencia) |
 | T1547.001 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása, Gyanus Registry key modositas perzisztencia kiepitese erdekeben |
-| T1548.002 | HIGH | UAC bypass Fodhelper segitsegevel |
+| T1548.002 | HIGH | UAC Bypass via Fodhelper Registry Hijack (High Fidelity) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |
 | T1559.001 | HIGH | Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity) |

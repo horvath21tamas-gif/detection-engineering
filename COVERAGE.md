@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 08:20:29`
+**Utolsó frissítés:** `2026-01-26 08:24:05`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -49,8 +49,8 @@
 | T1490 | CRITICAL | vssadmin.exe shadow copy-t torol, Ransomware elokeszites eszlelese |
 | T1505.003 | HIGH | webszerverre torteno webshellfeltoltese/ interakcioba lepese |
 | T1543 | MEDIUM | egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani |
-| T1546 | HIGH | wmic.exe segitsegevel perzisztens esemenyt hoznak letre a tamadok, Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
-| T1546.003 | HIGH | wmic.exe segitsegevel perzisztens esemenyt hoznak letre a tamadok |
+| T1546 | HIGH | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity), Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
+| T1546.003 | HIGH | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity) |
 | T1546.015 | HIGH | Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
 | T1547.001 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása, Suspicious Registry Run Key Modification for User Persistence (High Fidelity) |
 | T1548.002 | HIGH | UAC Bypass via Fodhelper Registry Hijack (High Fidelity) |

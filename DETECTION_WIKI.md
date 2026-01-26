@@ -29,7 +29,7 @@
 - [vssadmin.exe shadow copy-t torol](#vssadminexe-shadow-copy-t-torol)
 - [webszerverre torteno webshellfeltoltese/ interakcioba lepese](#webszerverre-torteno-webshellfeltoltese-interakcioba-lepese)
 - [egy nem admin felhasznalo rovid idon belul tobb kulonbozo, erzekeny windows szolgaltatsat proball leallitani vagy modositani](#egy-nem-admin-felhasznalo-rovid-idon-belul-tobb-kulonbozo-erzekeny-windows-szolgaltatsat-proball-leallitani-vagy-modositani)
-- [wmic.exe segitsegevel perzisztens esemenyt hoznak letre a tamadok](#wmicexe-segitsegevel-perzisztens-esemenyt-hoznak-letre-a-tamadok)
+- [WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity)](#wmi-event-subscription-persistence-via-wmic-or-powershell-(high-fidelity))
 - [Suspicious COM Hijacking for User-Level Persistence (High Fidelity)](#suspicious-com-hijacking-for-user-level-persistence-(high-fidelity))
 - [Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása](#gyanús-rendszerindítási-vagy-bejelentkezési-automatikus-indítás-végrehajtása)
 - [Suspicious Registry Run Key Modification for User Persistence (High Fidelity)](#suspicious-registry-run-key-modification-for-user-persistence-(high-fidelity))
@@ -449,13 +449,13 @@
 
 ---
 
-## wmic.exe segitsegevel perzisztens esemenyt hoznak letre a tamadok
+## WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity)
 - **Azonosító:** `T1546_003.yaml`
-- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** wmic.exe segitsegevel perzisztens esemenyt hoznak letre
-- **Hamis pozitívok:** enterprise monitoring agent
-- **MITRE ATT&CK:** `003, T1546`
+- **Leírás:** Detects the creation of permanent WMI event subscriptions used for persistence. The rule focuses on attacker-typical combinations of EventFilter, CommandLineEventConsumer, and FilterToConsumerBinding created via WMIC or PowerShell within the root\subscription namespace, while excluding known enterprise monitoring agents.
+- **Hamis pozitívok:** Custom enterprise monitoring or compliance scripts, DFIR or red team activities
+- **MITRE ATT&CK:** `T1546, 003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

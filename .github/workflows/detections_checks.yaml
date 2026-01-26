@@ -97,20 +97,20 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           
-          # Eltávolítunk minden maradványt a tiszta laphoz
-          python -m pip uninstall -y pysigma sigma-cli pyparsing
+          # MINDEN korábbi maradvány eltávolítása
+          python -m pip uninstall -y pysigma sigma-cli pyparsing packaging
           
-          # Telepítjük a modern verziókat (NEM kényszerítjük a 3.1.1-et!)
-          python -m pip install "pysigma>=1.1.0" "packaging>=24.0" "pyyaml"
+          # 1. Telepítsük a motort és a CLI-t rögzített, kompatibilis verziókkal
+          python -m pip install "pysigma>=1.1.0" "sigma-cli==2.0.1" "pyparsing>=3.2.0" "packaging>=24.0" "pyyaml"
           
-          # CLI telepítése függőségek nélkül a motor védelme érdekében
-          python -m pip install --no-deps "sigma-cli==2.0.1"
-          python -m pip install "click>=8.0.0" "colorama>=0.4.6" "prettytable>=3.0.0"
+          # 2. A backendeket kényszerítsük a 2.0.0+ verzióra, hogy ne butítsák vissza a motort!
+          # A Sentinel (Azure) backendből még nincs 2.0, de az új motorral is fut.
+          python -m pip install "pysigma-backend-splunk>=2.0.0" \
+                                "pysigma-backend-elasticsearch>=2.0.2" \
+                                "pysigma-backend-azure>=0.1.3" \
+                                "pysigma-backend-insightidr>=0.2.4"
           
-          # Backendek telepítése (Sentinel, Splunk, Elastic)
-          python -m pip install pysigma-backend-splunk pysigma-backend-azure pysigma-backend-elasticsearch pysigma-backend-insightidr
-          
-          # Pluginok telepítése
+          # 3. Csak a szükséges pluginok
           sigma plugin install -f windows sysmon
 
       - name: Update Dynamic Inventory

@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 09:12:53`
+**Utolsó frissítés:** `2026-01-26 09:16:47`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -42,7 +42,7 @@
 | T1218 | MEDIUM | egy felhasznalo beepitett windows eszkozoket hasznal fajl letoltesre es kodfuttatasra |
 | T1218.005 | MEDIUM | Gyanus mshta.exe URL-rol futtat scriptet |
 | T1218.007 | MEDIUM | msiexec.exe URL-rol telepit csomagot |
-| T1218.010 | MEDIUM | Gyanus regsvr32.exe futtatasa |
+| T1218.010 | HIGH | Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity) |
 | T1218.011 | HIGH | Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity) |
 | T1219 | HIGH | Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern |
 | T1486 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |

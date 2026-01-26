@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (FolderPath endswith "\regsvr32.exe" and (ProcessCommandLine in ("*\Users\*", "*\AppData\*", "*\Temp\*"))) and (not ProcessCommandLine endswith ".dll")
+| where FolderPath endswith "\regsvr32.exe" and (ProcessCommandLine in ("*/i:*", "*/n*", "*/s*", "*scrobj.dll*", "*.sct*", "*http://*", "*https://*")) and ((ProcessCommandLine in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Downloads\*")) or (ParentProcessName in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe"))) and (not ((ParentProcessName in ("*\Windows\Installer\*", "*\Program Files\*", "*\Program Files (x86)\*", "*\Microsoft\EdgeUpdate\*", "*\Google\Update\*", "*\Adobe\*", "*\Mozilla\*", "*\Citrix\*")) or (User in ("*SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*"))))

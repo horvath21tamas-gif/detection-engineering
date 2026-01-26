@@ -17,7 +17,7 @@ def get_playbook(category, level):
     elif category == 'network_connection':
         playbook += "1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.\n"
         playbook += "2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.\n"
-    elif category == 'email': # ÚJ: E-mail specifikus playbook
+    elif category == 'email': 
         playbook += "1. **Header elemzés:** Ellenőrizd a feladó valódi IP címét és az SPF/DKIM/DMARC státuszt.\n"
         playbook += "2. **Link/Melléklet:** Vizsgáld meg az URL-t sandbox környezetben (pl. URLScan.io).\n"
     else:
@@ -49,12 +49,10 @@ def generate_wiki():
                 file_path = os.path.join(root, file)
                 with open(file_path, 'r', encoding='utf-8') as f:
                     try:
-                        # Beolvassuk a YAML-t
                         d = yaml.safe_load(f)
                         if d:
                             rules_data.append({'filename': file, 'data': d})
                     except Exception as e:
-                        # NE maradjon némán a hiba!
                         print(f"❌ Hiba a {file} feldolgozásakor: {e}")
                         continue
 
@@ -64,7 +62,6 @@ def generate_wiki():
 
     wiki_content = "# 🛡️ Detection Rule Knowledge Base\n\n"
     
-    # 1. Tartalomjegyzék
     wiki_content += "## 📖 Tartalomjegyzék\n"
     for item in rules_data:
         title = item['data'].get('title', 'Névtelen szabály')
@@ -72,14 +69,21 @@ def generate_wiki():
         wiki_content += f"- [{title}](#{anchor})\n"
     wiki_content += "\n---\n\n"
 
-    # 2. Szabályok részletezése
     for item in rules_data:
         file = item['filename']
         d = item['data']
         
         title = d.get('title', 'Névtelen szabály')
         level = d.get('level', 'n/a')
-        desc = d.get('description', 'Nincs leírás megadva.')
+        
+        # --- JAVÍTÁS: NoneType hiba kezelése a description mezőnél ---
+        raw_desc = d.get('description')
+        if raw_desc is None:
+            desc = "Nincs leírás megadva."
+        else:
+            desc = str(raw_desc).strip()
+        # -----------------------------------------------------------
+
         fps = d.get('falsepositives', ['Nincs megadva'])
         category = d.get('logsource', {}).get('category', 'unknown')
         
@@ -90,21 +94,18 @@ def generate_wiki():
         wiki_content += f"- **Azonosító:** `{file}`\n"
         wiki_content += f"- **Minőségi mutató:** `{current_score}/100` {star_rating}\n"
         wiki_content += f"- **Kritikusság:** {'🔴' if level == 'critical' else '🟠' if level == 'high' else '🟡' if level == 'medium' else '🟢'} ({level})\n"
-        wiki_content += f"- **Leírás:** {desc.strip()}\n"
+        wiki_content += f"- **Leírás:** {desc}\n"
         
-        # Hamis pozitívok listázása
         if isinstance(fps, list):
             wiki_content += f"- **Hamis pozitívok:** {', '.join(fps)}\n"
         else:
             wiki_content += f"- **Hamis pozitívok:** {fps}\n"
         
-        # MITRE ATT&CK
         tags = d.get('tags', []) if d.get('tags') else []
         techniques = [t.split('.')[-1].upper() for t in tags if t.startswith('attack.t')]
         if techniques:
             wiki_content += f"- **MITRE ATT&CK:** `{', '.join(techniques)}`\n"
 
-        # Playbook
         wiki_content += "\n" + get_playbook(category, level) + "\n"
         wiki_content += "---\n\n"
 

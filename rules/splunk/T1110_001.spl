@@ -1,1 +1,1 @@
-EventCode=4625 LogonType IN (2, 3, 10) NOT (TargetUserName="*$" OR TargetUserName IN ("*svc_*", "*service*", "*sql*", "*backup*") OR WorkstationName IN ("*EXCHANGE*", "*AADCONNECT*", "*ADFS*"))
+source="WinEventLog:Security" EventCode=4625 LogonType IN (2, 3, 10) NOT (TargetUserName="*$" OR TargetUserName IN ("*svc_*", "*service*", "*sql*", "*backup*") OR WorkstationName IN ("*EXCHANGE*", "*AADCONNECT*", "*ADFS*"))

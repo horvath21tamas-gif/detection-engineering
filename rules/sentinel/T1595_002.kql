@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (SrcIp in ("1.*", "2.*", "3.*", "4.*", "5.*", "6.*", "7.*", "8.*", "9.*")) and (Status in (400, 401, 403, 404, 405, 500, 502, 503)) and ((UserAgent in ("*nuclei*", "*sqlmap*", "*nikto*", "*acunetix*", "*wpscan*", "*zgrab*")) or ((UriStem in ("*/.env*", "*/.git*", "*/vendor/phpunit*", "*/phpmyadmin*", "*/cgi-bin*", "*/wp-config*", "*/wp-admin*", "*/actuator*", "*/console*")) and (UriQuery in ("*../*", "*%2e%2e*", "*cmd=*", "*exec=*", "*shell*", "*whoami*", "*id=*", "*base64*", "*payload=*")))) and (not ((UserAgent in ("*googlebot*", "*bingbot*", "*uptimerobot*", "*pingdom*", "*statuscake*", "*datadog*", "*newrelic*")) or (SrcIp in ("203.0.113.10", "203.0.113.11"))))

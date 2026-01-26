@@ -42,6 +42,7 @@
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
 - [Suspicious Firewall Modification via Netsh.exe](#suspicious-firewall-modification-via-netshexe)
 - [High-Fidelity External IP Block Scanning Detection](#high-fidelity-external-ip-block-scanning-detection)
+- [High-Confidence External Vulnerability Scanning Activity](#high-confidence-external-vulnerability-scanning-activity)
 - [Credential Dumping LSASS](#credential-dumping-lsass)
 
 ---
@@ -649,6 +650,21 @@
 - **Leírás:** Detects high-confidence active scanning behavior where a single external source IP rapidly probes multiple destination IP addresses within a short time window. Optimized to reduce false positives by excluding known scanners, crawlers, and cloud infrastructure.
 - **Hamis pozitívok:** Rare misconfigured external services, Newly deployed monitoring not yet allowlisted
 - **MITRE ATT&CK:** `T1595, 001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Confidence External Vulnerability Scanning Activity
+- **Azonosító:** `T1595_002.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects high-confidence vulnerability scanning activity by correlating aggressive request behavior, exploit discovery paths, payload indicators, and known scanner tooling. Optimized to minimize false positives in enterprise environments.
+- **Hamis pozitívok:** Approved external penetration tests not yet allowlisted, Newly onboarded security vendors performing scans
+- **MITRE ATT&CK:** `T1595, 002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

@@ -1,0 +1,77 @@
+title: Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel
+id: 8f3d9e42-5c41-4a61-9a2b-9a1e8d2e4b91
+status: stable
+description: |
+    Az URL-rövidítési szolgáltatások, az újonnan regisztrált vagy alacsony hírű domainek, a feladó megjelenített nevének hamisítása és a HTML-alapú kézbesítés kombinálásával észleli a rosszindulatú vagy gyanús linkeket tartalmazó adathalász e-maileket.
+    Úgy tervezték, hogy csökkentse a téves riasztásokat a megbízható domainek és a legitim tömeges feladók kizárásával.
+
+author: SOC Team
+date: 2026/01/26
+references:
+    - https://attack.mitre.org/techniques/T1204/004/
+
+tags:
+    - attack.initial_access
+    - attack.t1204.004
+    - phishing
+    - email
+
+logsource:
+    category: email
+    product: any
+
+detection:
+    suspicious_url_shortener:
+        url|contains:
+            - 'bit.ly/'
+            - 'tinyurl.com/'
+            - 't.co/'
+            - 'rebrand.ly/'
+            - 'is.gd/'
+            - 'cutt.ly/'
+
+    suspicious_domain_characteristics:
+        - url_domain_age|lt: 30
+        - url_reputation: low
+
+    html_email_with_link:
+        email_content_type|contains: 'text/html'
+        url|exists: true
+
+    sender_displayname_spoofing:
+        sender_display_name|contains:
+            - 'Microsoft'
+            - 'Office 365'
+            - 'OneDrive'
+            - 'DocuSign'
+            - 'PayPal'
+            - 'Bank'
+        sender_domain|not_contains:
+            - 'microsoft.com'
+            - 'office.com'
+            - 'docusign.com'
+            - 'paypal.com'
+
+    trusted_domain_filter:
+        url|contains:
+            - 'microsoft.com'
+            - 'google.com'
+            - 'amazon.com'
+            - 'github.com'
+            - 'linkedin.com'
+
+    condition: >
+        html_email_with_link
+        and (suspicious_url_shortener or suspicious_domain_characteristics)
+        and sender_displayname_spoofing
+        and not trusted_domain_filter
+
+falsepositives:
+    - Belső biztonsági figyelemfelkeltő kampányok
+    - Legális harmadik féltől származó szolgáltatások URL-rövidítők használatával
+    - Megbízható szolgáltatók által használt újonnan regisztrált domainek 
+
+level: high
+
+mitre:
+    - T1204.004

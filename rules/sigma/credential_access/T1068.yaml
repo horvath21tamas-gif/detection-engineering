@@ -1,27 +1,92 @@
-title: Gyanus System process melyet a user indit
-id: '04b4a362-50cc-4303-91a1-c763e7a47625'
-status: experimental
-description: Gyanus System process melyet a user indit
+title: Suspicious SYSTEM Process Spawned from User Context
+id: 04b4a362-50cc-4303-91a1-c763e7a47625
+status: stable
+description: >
+  Detects suspicious processes running as SYSTEM that are spawned
+  from user-initiated parent processes such as Explorer, browsers,
+  or Office applications. This behavior may indicate privilege
+  escalation, token manipulation, or UAC bypass exploitation.
 author: hota05
-date: 2026/01/13
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1068/
+
 logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection_process:
+
+  user_parent:
     ParentImage|endswith:
       - '\explorer.exe'
       - '\chrome.exe'
+      - '\msedge.exe'
       - '\brave.exe'
+      - '\firefox.exe'
+      - '\WINWORD.EXE'
+      - '\EXCEL.EXE'
+      - '\POWERPNT.EXE'
+
+  suspicious_system_process:
     Image|endswith:
       - '\cmd.exe'
       - '\powershell.exe'
-  selection_system:
-    User|contains: 'SYSTEM\'
-  condition: selection_process and selection_system 
-level: medium
-tags: 
-  - attack.t1068
+      - '\pwsh.exe'
+      - '\rundll32.exe'
+      - '\mshta.exe'
+      - '\regsvr32.exe'
+      - '\schtasks.exe'
+      - '\sc.exe'
+
+  system_context:
+    User:
+      - 'NT AUTHORITY\SYSTEM'
+
+  non_system_path:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\ProgramData\'
+
+  filter_legit_installers:
+    ParentImage|contains:
+      - '\Windows\Installer\'
+      - '\Microsoft Configuration Manager\'
+      - '\Windows\CCM\'
+      - '\PDQ\'
+      - '\Ivanti\'
+      - '\ManageEngine\'
+      - '\Tanium\'
+      - '\Dell\'
+      - '\HP\'
+      - '\Lenovo\'
+
+  filter_uac_helpers:
+    ParentImage|endswith:
+      - '\consent.exe'
+      - '\services.exe'
+      - '\svchost.exe'
+
+  condition: >
+    user_parent
+    and suspicious_system_process
+    and system_context
+    and (
+      non_system_path
+    )
+    and not (
+      filter_legit_installers
+      or filter_uac_helpers
+    )
+
 falsepositives:
-  - fejlesztesek miatti alert
-  - update/telepites
+  - Rare custom administrative tooling
+  - Approved software installation using custom launchers
+
+level: high
+
+tags:
+  - attack.privilege_escalation
+  - attack.t1068

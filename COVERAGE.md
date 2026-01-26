@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 10:32:06`
+**Utolsó frissítés:** `2026-01-26 10:36:20`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -23,7 +23,7 @@
 | T1027 | HIGH | Detektalni a poweshellbol base64-encoded parancsot, Suspicious Encoded PowerShell Command Execution |
 | T1036 | HIGH | A tamado lemasol egy legitim Windows binarist |
 | T1036.005 | HIGH | A tamado lemasol egy legitim Windows binarist |
-| T1047 | MEDIUM | Tavoli hoston inditott folyamat wmic.exe segitsegevel |
+| T1047 | HIGH | Suspicious Remote Process Creation via WMIC |
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
 | T1053.005 | HIGH | Suspicious Scheduled Task Creation Executing PowerShell |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 Libraries |

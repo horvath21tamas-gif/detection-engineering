@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (FolderPath endswith "\wmic.exe" and (ProcessCommandLine in ("*/node:*", "*process*", "*call*", "*create*"))) and (not username =~ "SYSTEM")
+| where FolderPath endswith "\wmic.exe" and (ProcessCommandLine in ("*/node:*", "*process*", "*call*", "*create*")) and (ProcessCommandLine in ("*cmd.exe*", "*powershell.exe*", "*pwsh.exe*", "*rundll32.exe*", "*mshta.exe*", "*regsvr32.exe*", "*bitsadmin*", "*certutil*")) and (ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\WINWORD.EXE", "*\EXCEL.EXE", "*\POWERPNT.EXE")) and (not ((User in ("*NT AUTHORITY\SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*")) or (ParentProcessName in ("*\Windows\CCM\*", "*\Microsoft Configuration Manager\*", "*\SCCM\*", "*\Tanium\*", "*\PDQ\*", "*\Ivanti\*", "*\ManageEngine\*", "*\Ansible\*", "*\SaltStack\*", "*\Puppet\*"))))

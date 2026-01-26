@@ -6,12 +6,12 @@
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 46 | 100% |
-| Splunk (SPL) | 46 | 100.0% |
-| Microsoft Sentinel (KQL) | 46 | 100.0% |
-| QRadar (AQL) | 46 | 100.0% |
-| Elastic (KQL/EQL) | 46 | 100.0% |
-| RSA NetWitness | 46 | 100.0% |
+| Sigma (Forrás) | 47 | 100% |
+| Splunk (SPL) | 47 | 100.0% |
+| Microsoft Sentinel (KQL) | 47 | 100.0% |
+| QRadar (AQL) | 47 | 100.0% |
+| Elastic (KQL/EQL) | 47 | 100.0% |
+| RSA NetWitness | 47 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -61,7 +61,8 @@
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |
-| T1592 | HIGH | High-Confidence Firmware Enumeration Against Network Devices, High-Confidence Client Configuration Fingerprinting (Reconnaissance) |
+| T1592 | HIGH | High-Confidence Firmware Enumeration Against Network Devices, High-Confidence Hardware Enumeration via Management Interfaces, High-Confidence Client Configuration Fingerprinting (Reconnaissance) |
+| T1592.001 | HIGH | High-Confidence Hardware Enumeration via Management Interfaces |
 | T1592.003 | HIGH | High-Confidence Firmware Enumeration Against Network Devices |
 | T1592.004 | MEDIUM | High-Confidence Client Configuration Fingerprinting (Reconnaissance) |
 | T1595 | HIGH | High-Fidelity External IP Block Scanning Detection, High-Confidence External Vulnerability Scanning Activity, Active Wordlist Scanning Against Authentication Endpoints |

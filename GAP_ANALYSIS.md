@@ -4,8 +4,8 @@
 ## 📊 Állapotösszegző
 | Mutató | Érték |
 | :--- | :--- |
-| Összes szabály | 46 |
-| Aktív (van logforrás) | 44 |
+| Összes szabály | 47 |
+| Aktív (van logforrás) | 45 |
 | Inaktív (hiányzó log) | 2 |
 | MITRE Lefedettség | 52 technika |
 

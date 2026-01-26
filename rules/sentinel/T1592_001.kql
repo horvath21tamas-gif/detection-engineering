@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (SrcIp in ("1.*", "2.*", "3.*", "4.*", "5.*", "6.*", "7.*", "8.*", "9.*")) and (UriStem in ("*/system*", "*/hardware*", "*/device*", "*/diagnostics*", "*/status*", "*/mgmt*", "*/management*", "*/admin*", "*/cgi-bin*")) and (UriQuery in ("*cpu*", "*cores*", "*architecture*", "*arch*", "*model*", "*vendor*", "*manufacturer*", "*serial*", "*board*", "*chip*", "*memory*", "*ram*")) and (UserAgent in ("*curl*", "*wget*", "*python*", "*httpclient*", "*go-http-client*", "*libwww*", "*probe*")) and (not ((UserAgent in ("*Mozilla*", "*Chrome*", "*Safari*", "*Firefox*", "*Edge*")) or (UserAgent in ("*nessus*", "*qualys*", "*openvas*", "*acunetix*", "*nikto*", "*nuclei*", "*zap*", "*zabbix*", "*uptime*", "*pingdom*")) or ((UriStem in ("*.css", "*.js", "*.png", "*.jpg", "*.svg", "*.ico", "*.woff", "*.woff2", "*.json")) and UriStem contains "/api")))

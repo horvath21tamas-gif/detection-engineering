@@ -1,0 +1,138 @@
+title: Targeted OSINT Enumeration of Open Websites and Domains
+id: 3c1aab76-9d3a-4cd0-82f2-c62f25ebe20c
+status: stable
+description: >
+  Detects high-confidence reconnaissance activity targeting open websites
+  and domains to gather victim identity information. The rule focuses on
+  scripted enumeration behavior against search or directory-style endpoints,
+  excluding browsers, crawlers, and legitimate monitoring traffic to ensure
+  very low false positive rates.
+author: hota05
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1589/003/
+
+logsource:
+  product: generic
+  category: webserver
+
+detection:
+
+  selection_external_ip:
+    SrcIp|startswith:
+      - '1.'
+      - '2.'
+      - '3.'
+      - '4.'
+      - '5.'
+      - '6.'
+      - '7.'
+      - '8.'
+      - '9.'
+
+  selection_enum_endpoints:
+    UriStem|contains:
+      - '/search'
+      - '/find'
+      - '/lookup'
+      - '/directory'
+      - '/people'
+      - '/staff'
+      - '/team'
+      - '/employees'
+      - '/api/search'
+      - '/api/directory'
+
+  selection_enum_params:
+    UriQuery|contains:
+      - 'site:'
+      - 'domain='
+      - 'subdomain='
+      - 'email'
+      - 'mail'
+      - 'user'
+      - 'username'
+      - 'employee'
+      - 'account'
+      - '@'
+
+  selection_osint_ua:
+    UserAgent|contains:
+      - 'curl'
+      - 'wget'
+      - 'python'
+      - 'requests'
+      - 'go-http-client'
+      - 'httpclient'
+      - 'axios'
+      - 'libwww'
+      - 'osint'
+      - 'recon'
+      - 'scanner'
+
+  selection_status:
+    Status:
+      - 200
+      - 206
+
+  filter_browsers:
+    UserAgent|contains:
+      - 'Mozilla'
+      - 'Chrome'
+      - 'Firefox'
+      - 'Safari'
+      - 'Edge'
+      - 'HeadlessChrome'
+
+  filter_crawlers:
+    UserAgent|contains:
+      - 'Googlebot'
+      - 'Bingbot'
+      - 'Slurp'
+      - 'DuckDuckBot'
+      - 'Yandex'
+      - 'Baiduspider'
+      - 'Ahrefs'
+      - 'Semrush'
+      - 'MJ12bot'
+
+  filter_monitoring:
+    UserAgent|contains:
+      - 'uptime'
+      - 'pingdom'
+      - 'datadog'
+      - 'newrelic'
+      - 'zabbix'
+      - 'prometheus'
+
+
+  condition: >
+    selection_external_ip
+    and selection_enum_endpoints
+    and selection_enum_params
+    and selection_osint_ua
+    and selection_status
+    and not (
+      filter_browsers
+      or filter_crawlers
+      or filter_monitoring
+    )
+
+fields:
+  - SrcIp
+  - Method
+  - UriStem
+  - UriQuery
+  - Status
+  - UserAgent
+
+falsepositives:
+  - Explicitly approved OSINT or red team reconnaissance
+  - Rare third-party integrations misconfigured to enumerate directories
+
+level: high
+
+tags:
+  - attack.reconnaissance
+  - attack.t1589
+  - attack.t1589.003

@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 14:09:41`
+**Utolsó frissítés:** `2026-01-26 14:15:12`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 50 | 100% |
-| Splunk (SPL) | 50 | 100.0% |
-| Microsoft Sentinel (KQL) | 50 | 100.0% |
-| QRadar (AQL) | 50 | 100.0% |
-| Elastic (KQL/EQL) | 50 | 100.0% |
-| RSA NetWitness | 50 | 100.0% |
+| Sigma (Forrás) | 51 | 100% |
+| Splunk (SPL) | 51 | 100.0% |
+| Microsoft Sentinel (KQL) | 51 | 100.0% |
+| QRadar (AQL) | 51 | 100.0% |
+| Elastic (KQL/EQL) | 51 | 100.0% |
+| RSA NetWitness | 51 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -61,6 +61,7 @@
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |
+| T1589 | HIGH | High-Fidelity Identity Enumeration via Authentication Endpoints |
 | T1592 | HIGH | High-Confidence Firmware Enumeration Against Network Devices, Advanced Software Enumeration Reconnaissance via Web Endpoints, High-Confidence Hardware Enumeration via Management Interfaces, High-Confidence Client Configuration Fingerprinting (Reconnaissance), High-Fidelity Host Information Reconnaissance Activity |
 | T1592.001 | HIGH | High-Confidence Hardware Enumeration via Management Interfaces |
 | T1592.002 | HIGH | Advanced Software Enumeration Reconnaissance via Web Endpoints |

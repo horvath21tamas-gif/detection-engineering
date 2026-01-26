@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where FolderPath endswith "msiexec.exe" and (ProcessCommandLine in ("*http://*", "*https://*", "*/i*"))
+| where FolderPath endswith "\msiexec.exe" and (ProcessCommandLine in ("*http://*", "*https://*", "*/i*")) and (ProcessCommandLine in ("*/quiet*", "*/qn*", "*/norestart*")) and (ParentProcessName in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\rundll32.exe")) and (not ((User in ("*SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*")) or (ParentProcessName in ("*\Windows\CCM\*", "*\Microsoft Configuration Manager\*", "*\PDQ\*", "*\Ivanti\*", "*\ManageEngine\*", "*\Tanium\*", "*\Intune\*")) or (ParentProcessName in ("*\Google\Update\*", "*\Microsoft\EdgeUpdate\*", "*\Adobe\*", "*\Mozilla\*", "*\Zoom\*", "*\Slack\*", "*\Cisco\*"))))

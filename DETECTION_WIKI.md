@@ -21,7 +21,7 @@
 - [Gyanus folyamatot inditott a Microsoft office valamelyik alkalmazasa](#gyanus-folyamatot-inditott-a-microsoft-office-valamelyik-alkalmazasa)
 - [Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel](#adathalászat-rosszindulatú-linken-keresztül-domain-és-feladó-rendellenességekkel)
 - [Gyanus mshta.exe URL-rol futtat scriptet](#gyanus-mshtaexe-url-rol-futtat-scriptet)
-- [msiexec.exe URL-rol telepit csomagot](#msiexecexe-url-rol-telepit-csomagot)
+- [Suspicious Msiexec Installation from Remote URL (High Fidelity)](#suspicious-msiexec-installation-from-remote-url-(high-fidelity))
 - [Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity)](#suspicious-regsvr32-execution-indicative-of-lolbas-abuse-(high-fidelity))
 - [Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity)](#suspicious-rundll32-execution-with-script-or-remote-payload-(high-fidelity))
 - [Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern](#suspicious-use-of-legitimate-remote-administration-tools-outside-enterprise-pattern)
@@ -333,17 +333,18 @@
 
 ---
 
-## msiexec.exe URL-rol telepit csomagot
+## Suspicious Msiexec Installation from Remote URL (High Fidelity)
 - **Azonosító:** `T1218_007.yaml`
-- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
-- **Kritikusság:** 🟡 (medium)
-- **Leírás:** misexec.exe URL-rol telepit csomagot
-- **Hamis pozitívok:** admin frissít, pentesteles
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious use of msiexec.exe to install MSI packages directly from remote URLs, a technique commonly abused by attackers as a LOLBAS method. The rule focuses on attacker-typical command-line patterns and execution context to reduce false positives.
+- **Hamis pozitívok:** Rare manual software installation by advanced administrators, Approved red team or penetration testing activity
 - **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
 

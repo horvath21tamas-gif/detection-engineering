@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 10:39:52`
+**Utolsó frissítés:** `2026-01-26 10:44:01`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -20,7 +20,7 @@
 | T1003.001 | HIGH | Suspicious Access to LSASS Process Memory, Credential Dumping LSASS |
 | T1021 | MEDIUM | Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be |
 | T1021.001 | MEDIUM | Gyanus RDP belepes |
-| T1027 | HIGH | Detektalni a poweshellbol base64-encoded parancsot, Suspicious Encoded PowerShell Command Execution |
+| T1027 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Encoded PowerShell Command Execution |
 | T1036 | HIGH | Legitimate Windows Binary Copied to User-Writable Location |
 | T1036.005 | HIGH | Legitimate Windows Binary Copied to User-Writable Location |
 | T1047 | HIGH | Suspicious Remote Process Creation via WMIC |
@@ -33,7 +33,7 @@
 | T1070.001 | HIGH | Security Event Log Cleared Using wevtutil.exe |
 | T1087 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
 | T1098 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
-| T1105 | HIGH | Detektalni a poweshellbol base64-encoded parancsot, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
+| T1105 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1110.001 | MEDIUM | Multiple Failed Login Attempts for Single User (Possible Password Guessing) |
 | T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |
 | T1197 | HIGH | Suspicious File Download via Bitsadmin (High Fidelity) |

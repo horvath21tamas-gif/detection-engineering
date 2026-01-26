@@ -4,7 +4,7 @@
 - [Suspicious Access to LSASS Process Memory](#suspicious-access-to-lsass-process-memory)
 - [Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be](#detektalni-ugyanazon-felhasznalotol-rovid-idon-belul-tobb-egymastol-tavol-levo-hostra-jelentkezik-be)
 - [Gyanus RDP belepes](#gyanus-rdp-belepes)
-- [Detektalni a poweshellbol base64-encoded parancsot](#detektalni-a-poweshellbol-base64-encoded-parancsot)
+- [Suspicious Base64-Encoded PowerShell Command with Network Activity](#suspicious-base64-encoded-powershell-command-with-network-activity)
 - [Legitimate Windows Binary Copied to User-Writable Location](#legitimate-windows-binary-copied-to-user-writable-location)
 - [Suspicious Remote Process Creation via WMIC](#suspicious-remote-process-creation-via-wmic)
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
@@ -88,12 +88,12 @@
 
 ---
 
-## Detektalni a poweshellbol base64-encoded parancsot
+## Suspicious Base64-Encoded PowerShell Command with Network Activity
 - **Azonosító:** `T1027.yaml`
-- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** Detektalni a powershellbol a base64-encoded parancsot
-- **Hamis pozitívok:** admin scriptet futtat, pentesteles
+- **Leírás:** Detects PowerShell executions using Base64-encoded commands combined with network-based payload retrieval and non-interactive execution. This pattern is strongly associated with malware delivery, loaders, and post-exploitation frameworks.
+- **Hamis pozitívok:** Rare advanced administrative automation using encoded commands, Approved red team or penetration testing activity
 - **MITRE ATT&CK:** `T1027, T1105`
 
 #### 🚨 Response Playbook

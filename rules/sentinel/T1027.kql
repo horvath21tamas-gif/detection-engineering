@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where ((FolderPath in ("*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("*-enc*", "*-encodedcommand*"))) and (ProcessCommandLine in ("*Invoke-WebRequest*", "*iwr*", "*wget*", "*curl*", "*DownloadString*", "*DownloadFile*", "*Net.WebClient*"))
+| where (FolderPath in ("*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("*-enc*", "*-encodedcommand*")) and (ProcessCommandLine in ("*-nop*", "*-noni*", "*-windowstyle hidden*", "*-w hidden*")) and (ProcessCommandLine in ("*Invoke-WebRequest*", "*iwr *", "*wget *", "*curl *", "*DownloadString*", "*DownloadFile*", "*Net.WebClient*", "*http://*", "*https://*")) and (ProcessCommandLine in ("*IEX*", "*Invoke-Expression*")) and (not ((User in ("*NT AUTHORITY\SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*")) or (ParentProcessName in ("*\Windows\Installer\*", "*\Microsoft Configuration Manager\*", "*\Windows\CCM\*", "*\PDQ\*", "*\Ivanti\*", "*\Tanium\*", "*\ManageEngine\*", "*\Automation\*", "*\Scripts\*"))))

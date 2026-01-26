@@ -23,7 +23,7 @@
 - [Gyanus mshta.exe URL-rol futtat scriptet](#gyanus-mshtaexe-url-rol-futtat-scriptet)
 - [msiexec.exe URL-rol telepit csomagot](#msiexecexe-url-rol-telepit-csomagot)
 - [Gyanus regsvr32.exe futtatasa](#gyanus-regsvr32exe-futtatasa)
-- [Gyanus rundll32.exe hasznalata](#gyanus-rundll32exe-hasznalata)
+- [Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity)](#suspicious-rundll32-execution-with-script-or-remote-payload-(high-fidelity))
 - [Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern](#suspicious-use-of-legitimate-remote-administration-tools-outside-enterprise-pattern)
 - [Ransomware Preparation Activity Detected on Windows Host (High Fidelity)](#ransomware-preparation-activity-detected-on-windows-host-(high-fidelity))
 - [Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity)](#suspicious-deletion-of-volume-shadow-copies-via-vssadmin-(high-fidelity))
@@ -361,12 +361,12 @@
 
 ---
 
-## Gyanus rundll32.exe hasznalata
+## Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity)
 - **Azonosító:** `T1218_011.yaml`
-- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** Gyanus rundll32.exe hasznalata
-- **Hamis pozitívok:** legit alkalmazasok, driver telepito
+- **Leírás:** Detects suspicious usage of rundll32.exe commonly associated with LOLBAS abuse, including JavaScript execution, HTML applications, and loading payloads from remote or user-writable locations. The rule minimizes false positives by focusing on attacker-typical command-line patterns and execution context.
+- **Hamis pozitívok:** Rare legacy applications abusing rundll32 for scripting, Approved red team or malware research activity
 - **MITRE ATT&CK:** `011`
 
 #### 🚨 Response Playbook

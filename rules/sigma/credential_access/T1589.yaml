@@ -1,0 +1,151 @@
+title: High-Fidelity Identity Enumeration via Authentication Endpoints
+id: aa05bd79-4648-4d64-9e78-4525cdc825bf
+status: stable
+description: >
+  Detects high-confidence identity reconnaissance activity where an
+  external actor enumerates valid user identities via authentication
+  or account-related endpoints. Detection is based on enumeration
+  behavior, automation indicators, and authentication response
+  patterns, excluding browsers, SSO flows, and monitoring tools.
+author: hota05
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1589/
+
+logsource:
+  product: generic
+  category: webserver
+
+detection:
+
+  selection_external_ip:
+    SrcIp|startswith:
+      - '1.'
+      - '2.'
+      - '3.'
+      - '4.'
+      - '5.'
+      - '6.'
+      - '7.'
+      - '8.'
+      - '9.'
+
+  selection_identity_endpoints:
+    UriStem|contains:
+      - '/login'
+      - '/signin'
+      - '/auth'
+      - '/account'
+      - '/user'
+      - '/users'
+      - '/password'
+      - '/forgot'
+      - '/reset'
+
+  selection_identity_params:
+    UriQuery|contains:
+      - 'user='
+      - 'username='
+      - 'email='
+      - 'login='
+      - 'account='
+      - 'upn='
+      - 'principal='
+
+  selection_methods:
+    Method:
+      - GET
+      - POST
+
+  selection_automation_ua:
+    UserAgent|contains:
+      - 'curl'
+      - 'wget'
+      - 'python'
+      - 'go-http-client'
+      - 'httpclient'
+      - 'axios'
+      - 'requests'
+      - 'scanner'
+      - 'probe'
+
+  selection_status:
+    Status:
+      - 401
+      - 403
+      - 404
+
+  filter_browser_ua:
+    UserAgent|contains:
+      - 'Mozilla'
+      - 'Chrome'
+      - 'Firefox'
+      - 'Safari'
+      - 'Edge'
+
+  filter_sso:
+    UriStem|contains:
+      - '/sso'
+      - '/oauth'
+      - '/openid'
+      - '/saml'
+      - '/idp'
+      - '/federation'
+
+  filter_known_tools:
+    UserAgent|contains:
+      - 'nessus'
+      - 'qualys'
+      - 'openvas'
+      - 'acunetix'
+      - 'nuclei'
+      - 'zabbix'
+      - 'prometheus'
+      - 'uptime'
+      - 'pingdom'
+      - 'datadog'
+      - 'newrelic'
+
+  filter_noise:
+    UriStem|endswith:
+      - '.css'
+      - '.js'
+      - '.png'
+      - '.jpg'
+      - '.svg'
+      - '.ico'
+      - '.woff'
+      - '.woff2'
+
+
+  condition: >
+    selection_external_ip
+    and selection_identity_endpoints
+    and selection_identity_params
+    and selection_methods
+    and selection_automation_ua
+    and selection_status
+    and not (
+      filter_browser_ua
+      or filter_sso
+      or filter_known_tools
+      or filter_noise
+    )
+
+fields:
+  - SrcIp
+  - Method
+  - UriStem
+  - UriQuery
+  - Status
+  - UserAgent
+
+falsepositives:
+  - Explicitly approved external identity testing
+  - Rare API-based account validation by trusted partners
+
+level: high
+
+tags:
+  - attack.reconnaissance
+  - attack.t1589

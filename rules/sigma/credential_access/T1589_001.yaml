@@ -1,0 +1,140 @@
+title: Credential Enumeration via Authentication API (High Confidence)
+id: 68042f75-59ae-40c7-b7dd-0e5f584f2bac
+status: stable
+description: >
+  Detects high-confidence credential enumeration activity against
+  authentication APIs. The rule focuses on automated, non-interactive
+  probing behavior attempting to validate the existence or correctness
+  of credentials. Browser-based logins, SSO flows, monitoring systems,
+  and legitimate user authentication are excluded to minimize false
+  positives.
+author: hota05
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1589/001/
+
+logsource:
+  product: generic
+  category: webserver
+
+detection:
+
+  selection_external:
+    SrcIp|startswith:
+      - '1.'
+      - '2.'
+      - '3.'
+      - '4.'
+      - '5.'
+      - '6.'
+      - '7.'
+      - '8.'
+      - '9.'
+
+  selection_auth_api:
+    UriStem|contains:
+      - '/api/auth'
+      - '/api/login'
+      - '/api/token'
+      - '/api/session'
+      - '/api/password'
+      - '/auth/api'
+      - '/v1/auth'
+      - '/v2/auth'
+
+  selection_credential_body:
+    RequestBody|contains:
+      - 'username'
+      - 'email'
+      - 'password'
+      - 'pass'
+      - 'pwd'
+      - 'secret'
+
+  selection_method:
+    Method:
+      - POST
+
+  selection_automation_ua:
+    UserAgent|contains:
+      - 'curl'
+      - 'wget'
+      - 'python'
+      - 'requests'
+      - 'go-http-client'
+      - 'httpclient'
+      - 'axios'
+      - 'libwww'
+      - 'scanner'
+      - 'probe'
+
+  selection_status:
+    Status:
+      - 401
+      - 403
+      - 404
+      - 422
+
+  filter_browser:
+    UserAgent|contains:
+      - 'Mozilla'
+      - 'Chrome'
+      - 'Firefox'
+      - 'Safari'
+      - 'Edge'
+      - 'HeadlessChrome'
+
+  filter_sso:
+    UriStem|contains:
+      - '/sso'
+      - '/oauth'
+      - '/openid'
+      - '/saml'
+      - '/idp'
+      - '/federation'
+
+  filter_known_tools:
+    UserAgent|contains:
+      - 'nessus'
+      - 'qualys'
+      - 'openvas'
+      - 'acunetix'
+      - 'nuclei'
+      - 'zabbix'
+      - 'prometheus'
+      - 'uptime'
+      - 'pingdom'
+      - 'datadog'
+      - 'newrelic'
+
+
+  condition: >
+    selection_external
+    and selection_auth_api
+    and selection_credential_body
+    and selection_method
+    and selection_automation_ua
+    and selection_status
+    and not (
+      filter_browser
+      or filter_sso
+      or filter_known_tools
+    )
+
+fields:
+  - SrcIp
+  - Method
+  - UriStem
+  - Status
+  - UserAgent
+
+falsepositives:
+  - Explicitly approved red team credential enumeration
+  - Rare third-party integration misconfiguration
+
+level: high
+
+tags:
+  - attack.reconnaissance
+  - attack.t1589
+  - attack.t1589.001

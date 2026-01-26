@@ -1,34 +1,76 @@
-title: Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastol tavol levo hostra jelentkezik be
-id: '01925dcb-632d-4c95-a4d4-33210e82aff7'
-status: experimental
-description: Detektalni ugyanazon felhasznalotol rovid idon belul, tobb egymastpl tavol levo hostra jelentkezik be
+title: Rapid Logons to Multiple Distant Hosts by Same User
+id: 01925dcb-632d-4c95-a4d4-33210e82aff7
+status: stable
+description: >
+  Detects a single user successfully logging on to multiple
+  different hosts within a short time window. This behavior
+  may indicate stolen credentials, pass-the-hash, or lateral
+  movement using valid accounts.
 author: hota05
-date: 2026/01/13
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1021/
+
 logsource:
   product: windows
-  category: security
+  service: security
+
 detection:
+
   selection_logon:
     EventID: 4624
     LogonType:
-      - 2
-      - 10
-  filter_machine_account:
-    TargetUserName|endswith: "$"
-  filter_system_accounts:
+      - 2    
+      - 10   
+
+  filter_machine_accounts:
+    TargetUserName|endswith: '$'
+
+  filter_service_accounts:
     TargetUserName:
-      - "SYSTEM"
-      - "LOCAL SERVICE"
-      - "NETWORK SERVICE"
-  filter_local_logon:
+      - 'SYSTEM'
+      - 'LOCAL SERVICE'
+      - 'NETWORK SERVICE'
+
+  filter_localhost:
     IpAddress:
-      - "127.0.0.1"
-      - "::1"
-  condition: selection_logon and not filter_machine_account and not filter_system_accounts and not filter_local_logon
-level: medium
-tags: 
-  - attack.t1021
+      - '127.0.0.1'
+      - '::1'
+
+  filter_jump_hosts:
+    WorkstationName|startswith:
+      - 'JUMP-'
+      - 'BASTION-'
+      - 'MGMT-'
+
+  filter_admin_users:
+    TargetUserName|startswith:
+      - 'admin'
+      - 'svc_'
+
+  condition: >
+    selection_logon
+    and not (
+      filter_machine_accounts
+      or filter_service_accounts
+      or filter_localhost
+      or filter_jump_hosts
+      or filter_admin_users
+    )
+
+fields:
+  - TargetUserName
+  - WorkstationName
+  - IpAddress
+
 falsepositives:
-  - VPN bejelentkezés
-  - jump host
-  - admin script
+  - Legitimate VPN reconnects causing new source IPs
+  - Admin activity via multiple servers during maintenance
+  - Misconfigured jump host naming conventions
+
+level: medium
+
+tags:
+  - attack.lateral_movement
+  - attack.t1021
+  - attack.credential_access

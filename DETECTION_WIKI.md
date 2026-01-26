@@ -12,7 +12,7 @@
 - [Suspicious Credential API Hooking via Win32 APIs](#suspicious-credential-api-hooking-via-win32-apis)
 - [Gyanus Poweshell parancs vegrehajtasa](#gyanus-poweshell-parancs-vegrehajtasa)
 - [Gyanus System process melyet a user indit](#gyanus-system-process-melyet-a-user-indit)
-- [wevtutil.exe security logokat torol](#wevtutilexe-security-logokat-torol)
+- [Security Event Log Cleared Using wevtutil.exe](#security-event-log-cleared-using-wevtutilexe)
 - [Suspicious Use of net user or net localgroup via cmd.exe](#suspicious-use-of-net-user-or-net-localgroup-via-cmdexe)
 - [Suspicious Use of Built-in Windows Tools for File Download and Code Execution](#suspicious-use-of-built-in-windows-tools-for-file-download-and-code-execution)
 - [Multiple Failed Login Attempts for Single User (Possible Password Guessing)](#multiple-failed-login-attempts-for-single-user-(possible-password-guessing))
@@ -204,17 +204,18 @@
 
 ---
 
-## wevtutil.exe security logokat torol
+## Security Event Log Cleared Using wevtutil.exe
 - **Azonosító:** `T1070_001.yaml`
-- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
-- **Kritikusság:** 🟡 (medium)
-- **Leírás:** wevtutil.exe security logokat torol
-- **Hamis pozitívok:** admin legitim script, pentesteles
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects attempts to clear the Windows Security event log using wevtutil.exe, a common attacker technique used to cover tracks after credential access, lateral movement, or persistence.
+- **Hamis pozitívok:** Rare emergency log maintenance by administrators, Approved red team or penetration testing activity
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
 

@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 09:58:45`
+**Utolsó frissítés:** `2026-01-26 10:14:12`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -30,7 +30,7 @@
 | T1059 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1059.001 | MEDIUM | Gyanus Poweshell parancs vegrehajtasa |
 | T1068 | MEDIUM | Gyanus System process melyet a user indit |
-| T1070.001 | MEDIUM | wevtutil.exe security logokat torol |
+| T1070.001 | HIGH | Security Event Log Cleared Using wevtutil.exe |
 | T1087 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
 | T1098 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
 | T1105 | HIGH | Detektalni a poweshellbol base64-encoded parancsot, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |

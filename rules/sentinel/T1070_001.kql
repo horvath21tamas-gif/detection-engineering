@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (FolderPath endswith "\wevtutil.exe" and (ProcessCommandLine in ("*cl*", "*security*"))) and (not username =~ "SYSTEM")
+| where FolderPath endswith "\wevtutil.exe" and (ProcessCommandLine in ("*cl Security*", "*cl \"Security\"*", "*clear-log Security*")) and (ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\rundll32.exe")) and (not ((User in ("*SYSTEM*", "*LOCAL SERVICE*", "*NETWORK SERVICE*")) or (ParentProcessName in ("*\Windows\CCM\*", "*\Microsoft Configuration Manager\*", "*\SCCM\*", "*\Tanium\*", "*\Splunk\*", "*\Elastic\*", "*\NXLog\*", "*\OSSEC\*", "*\QRadar\*", "*\LogRhythm\*"))))

@@ -1,32 +1,79 @@
-title: wmic.exe segitsegevel perzisztens esemenyt hoznak letre a tamadok
-id: '25a456ec-86d2-4639-a068-06d30e04ac84'
-status: experimental
-description: wmic.exe segitsegevel perzisztens esemenyt hoznak letre
+title: WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity)
+id: 25a456ec-86d2-4639-a068-06d30e04ac84
+status: stable
+description: >
+  Detects the creation of permanent WMI event subscriptions used for persistence.
+  The rule focuses on attacker-typical combinations of EventFilter,
+  CommandLineEventConsumer, and FilterToConsumerBinding created via WMIC
+  or PowerShell within the root\subscription namespace, while excluding
+  known enterprise monitoring agents.
 author: hota05
-date: 2026/01/13
+date: 2026/01/26
+references:
+  - https://attack.mitre.org/techniques/T1546/003/
+
 logsource:
   product: windows
   category: process_creation
+
 detection:
-  selection_wmic:
-    Image|endswith: 
-      - '\wmic.exe'
+
+  wmic_persistence:
+    Image|endswith: '\wmic.exe'
     CommandLine|contains:
-      - "__EventFilter"
-      - "CommandLineEventConsumer"
-      - "FilterToConsumerBinding"
-  selection_powershell:
+      - 'root\subscription'
+      - '__EventFilter'
+      - 'CommandLineEventConsumer'
+      - 'FilterToConsumerBinding'
+
+  powershell_persistence:
     Image|endswith:
       - '\powershell.exe'
+      - '\pwsh.exe'
     CommandLine|contains:
-      - "Register-WmiEvent"
-      - 'root\\subscription'
+      - 'Register-WmiEvent'
+      - 'Set-WmiInstance'
+      - 'New-CimInstance'
+      - 'root\subscription'
+
   filter_system:
-    username: "SYSTEM"
-  condition: (selection_wmic or selection_powershell) and not filter_system
-level: high
-tags:
-  - attack.t1546.003
-  - attack.t1546
+    User|contains:
+      - 'SYSTEM'
+
+  filter_monitoring_agents:
+    Image|contains:
+      - '\Microsoft Monitoring Agent\'
+      - '\SCOM\'
+      - '\System Center\'
+      - '\Tanium\'
+      - '\Qualys\'
+      - '\CrowdStrike\'
+      - '\SentinelOne\'
+      - '\SplunkUniversalForwarder\'
+      - '\Datadog\'
+      - '\Elastic\Agent\'
+
+  filter_legit_admin_scripts:
+    CommandLine|contains:
+      - 'HealthCheck'
+      - 'Inventory'
+      - 'Monitoring'
+
+  condition: >
+    (wmic_persistence or powershell_persistence)
+    and not (
+      filter_system
+      or filter_monitoring_agents
+      or filter_legit_admin_scripts
+    )
+
 falsepositives:
-  - enterprise monitoring agent
+  - Custom enterprise monitoring or compliance scripts
+  - DFIR or red team activities
+
+level: high
+
+tags:
+  - attack.persistence
+  - attack.t1546
+  - attack.t1546.003

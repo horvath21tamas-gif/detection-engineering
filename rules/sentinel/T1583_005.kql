@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\curl.exe", "*\wget.exe", "*\python.exe")) or (ProcessCommandLine contains "http" and ProcessCommandLine contains "chmod") or (ProcessCommandLine in ("*.arm7*", "*.mips*", "*.x86_64*", "*/bins/*"))) or ((FolderPath in ("*\mirai-gen.exe", "*\hydra.exe", "*\ncrack.exe", "*\proxy-checker.exe")) or (ProcessCommandLine in ("*botnet*", "*cnc-connect*", "*zombie-list*")))) and (not ((FolderPath in ("*\Lansweeper\*", "*\SolarWinds\*", "*\PRTG Network Monitor\*")) or (User in ("*svc_network_inventory*", "*adm_netscan*")))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_bot_tools")) and (not (ParentProcessName in ("*\code.exe", "*\devenv.exe")))

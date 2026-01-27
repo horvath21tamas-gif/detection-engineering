@@ -1,0 +1,77 @@
+title: Advanced Spearphishing Link Redirection - T1598.001
+id: e017edd2-d76b-487a-b9a8-f76907b7464b
+status: stable
+description: >
+  Detects suspicious URL execution patterns originating from productivity apps. 
+  Focuses on indirect browser launches (via cmd/powershell) and OAuth-specific 
+  credential harvesting parameters while filtering out known SSO providers.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1598/001/
+tags:
+  - attack.initial_access
+  - attack.t1598.001
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_indirect_launch:
+    ParentImage|endswith:
+      - '\outlook.exe'
+      - '\teams.exe'
+      - '\slack.exe'
+    Image|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+
+  selection_phishing_params:
+    CommandLine|contains:
+      - 'redirect_uri='    
+      - 'client_id='
+      - 'response_type=token'
+      - 'login_hint='
+      - 'verify-account'
+      - 'password-reset'
+      - 'azure-edge.net'   
+
+  selection_browser_flags:
+    Image|endswith:
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\firefox.exe'
+    CommandLine|contains:
+      - '--incognito'
+      - '--inprivate'
+      - '--new-window'
+      - '--headless'
+
+  filter_legit_idp:
+    CommandLine|contains:
+      - 'login.microsoftonline.com'
+      - 'okta.com'
+      - 'duosecurity.com'
+      - 'auth.' 
+
+  filter_updates:
+    CommandLine|contains:
+      - 'office.com/setup'
+      - 'akamai.net'
+      - 'windowsupdate.com'
+
+  filter_internal:
+    CommandLine|contains:
+      - '.local'
+      - '.lan'
+      - 'http://10.'
+      - 'http://192.168.'
+
+  condition: (selection_indirect_launch and selection_phishing_params) or (selection_browser_flags and selection_phishing_params and not filter_legit_idp) and not filter_updates and not filter_internal
+falsepositives:
+  - Security awareness training platforms (e.g., KnowBe4).
+  - Legitimate OAuth flows for third-party business apps (e.g., Zoom, Trello).
+  - External HR or Payroll portals using complex redirect strings.
+level: high

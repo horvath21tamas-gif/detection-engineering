@@ -46,6 +46,7 @@
 - [High-Fidelity Automated Domain Registration & Acquisition - T1583.002](#high-fidelity-automated-domain-registration-&-acquisition---t1583002)
 - [High-Fidelity Serverless Infrastructure Provisioning - T1583.004](#high-fidelity-serverless-infrastructure-provisioning---t1583004)
 - [High-Fidelity Botnet Infrastructure Acquisition - T1583.005](#high-fidelity-botnet-infrastructure-acquisition---t1583005)
+- [High-Fidelity Serverless Infrastructure Provisioning - T1583.007](#high-fidelity-serverless-infrastructure-provisioning---t1583007)
 - [High-Fidelity Cloud Account Acquisition and Bootstrap - T1583.008](#high-fidelity-cloud-account-acquisition-and-bootstrap---t1583008)
 - [High-Fidelity Identity Enumeration via Authentication Endpoints](#high-fidelity-identity-enumeration-via-authentication-endpoints)
 - [Credential Enumeration via Authentication API (High Confidence)](#credential-enumeration-via-authentication-api-(high-confidence))
@@ -759,6 +760,21 @@
 - **Leírás:** Detects the acquisition and preparation of botnet infrastructure.  Focuses on identifying multi-architecture agent downloads, automated  propagation attempts (brute-force), and botnet C2 client usage.
 - **Hamis pozitívok:** Authorized vulnerability scanners or red team exercises., Network admins performing bulk configuration changes via SSH scripts., Security researchers in isolated malware analysis environments.
 - **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Serverless Infrastructure Provisioning - T1583.007
+- **Azonosító:** `T1583_007.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the automated acquisition and provisioning of serverless infrastructure  (AWS Lambda, Azure Functions, GCP Functions). Focuses on CLI-based creation  and critical configuration changes while isolating authorized CI/CD pipelines  and interactive developer IDE contexts.
+- **Hamis pozitívok:** Authorized developers performing manual serverless deployments for debugging., Automated maintenance scripts that rotate function secrets or update env vars.
+- **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

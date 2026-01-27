@@ -1,9 +1,9 @@
-title: Network Reconnaissance with High Port Diversity (Windows Sysmon)
+title: Network Reconnaissance with High Port Diversity
 id: 8d113721-f4fd-4e51-82d7-b31d70537593
 status: stable
 description: >
-  Detects network reconnaissance activity by identifying local processes 
-  attempting connections to multiple distinct external ports using Sysmon Event ID 3.
+  Detects network reconnaissance activity. Optimized for cross-SIEM compatibility
+  by using standard field names and avoiding complex CIDR logic in the core rule.
 author: SOC Engineering
 date: 2026/01/27
 references:
@@ -13,19 +13,31 @@ tags:
   - attack.t1590
 logsource:
   category: network_connection
-  product: windows 
+  product: windows
 detection:
   selection:
-    EventID: 3 
+    EventID: 3
     Protocol: tcp
-  external_source:
-    DestinationIp|cidrv4:
-      - '0.0.0.0/0'
   filter_internal:
-    DestinationIp|cidrv4:
-      - '10.0.0.0/8'
-      - '172.16.0.0/12'
-      - '192.168.0.0/16'
+    DestinationIp|startswith:
+      - '10.'
+      - '172.16.'
+      - '172.17.'
+      - '172.18.'
+      - '172.19.'
+      - '172.20.'
+      - '172.21.'
+      - '172.22.'
+      - '172.23.'
+      - '172.24.'
+      - '172.25.'
+      - '172.26.'
+      - '172.27.'
+      - '172.28.'
+      - '172.29.'
+      - '172.30.'
+      - '172.31.'
+      - '192.168.'
   exclude_common_ports:
     DestinationPort:
       - 80
@@ -33,8 +45,7 @@ detection:
       - 53
       - 123
       - 25
-  condition: selection and external_source and not filter_internal and not exclude_common_ports
+  condition: selection and not filter_internal and not exclude_common_ports
 falsepositives:
   - Authorized vulnerability scanners
-  - Browser activity to non-standard ports
 level: high

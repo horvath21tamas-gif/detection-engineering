@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 10:09:24`
+**Utolsó frissítés:** `2026-01-27 10:14:16`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 77 | 100% |
-| Splunk (SPL) | 77 | 100.0% |
-| Microsoft Sentinel (KQL) | 77 | 100.0% |
-| QRadar (AQL) | 63 | 81.8% |
-| Elastic (KQL/EQL) | 77 | 100.0% |
-| RSA NetWitness | 77 | 100.0% |
+| Sigma (Forrás) | 78 | 100% |
+| Splunk (SPL) | 78 | 100.0% |
+| Microsoft Sentinel (KQL) | 78 | 100.0% |
+| QRadar (AQL) | 63 | 80.8% |
+| Elastic (KQL/EQL) | 78 | 100.0% |
+| RSA NetWitness | 78 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -87,6 +87,7 @@
 | T1595.002 | HIGH | High-Confidence External Vulnerability Scanning Activity |
 | T1595.003 | HIGH | Active Wordlist Scanning Against Authentication Endpoints |
 | T1596 | HIGH | High-Fidelity Open Technical Database Reconnaissance - T1596 |
+| T1596.001 | HIGH | High-Fidelity WHOIS Database Reconnaissance - T1596.001 |
 | T1596.003 | HIGH | High-Fidelity Passive DNS Reconnaissance - T1597.003 |
 | T1596.004 | HIGH | High-Fidelity Digital Certificate Reconnaissance - T1596.004 |
 | T1597 | HIGH | High-Fidelity Victim-Owned Website Reconnaissance - T1597 |

@@ -1,0 +1,73 @@
+title: High-Fidelity IP Infrastructure Reconnaissance - T1596.005
+id: 45820679-78fe-4d11-9be7-2e8114cf3f36
+status: stable
+description: >
+  Detects automated reconnaissance of IP address metadata. Focuses on specialized 
+  OSINT tools (Shodan, GreyNoise, Censys) and CLI-based API harvesting while 
+  filtering out routine network troubleshooting, browser traffic, and EDR noise.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1596/005/
+tags:
+  - attack.reconnaissance
+  - attack.t1596.005
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_specialized_tools:
+    - Image|endswith:
+        - '\shodan.exe'
+        - '\censys.exe'
+        - '\greynoise.exe'
+        - '\zoomeye.exe'
+    - CommandLine|contains:
+        - ' host '          
+        - ' stats '         
+        - ' facets '        
+        - ' ip.addr:'       
+
+  selection_api_scraping:
+    - Image|endswith:
+        - '\curl.exe'
+        - '\wget.exe'
+        - '\python.exe'
+        - '\pwsh.exe'
+    - CommandLine|contains:
+        - 'api.shodan.io/shodan/host/'
+        - 'api.greynoise.io/v2/hosts/'
+        - 'api.censys.io/v2/hosts'
+        - 'api.zoomeye.org/host/'
+        - 'viz.greynoise.io'
+
+  filter_browsers:
+    - Image|endswith:
+        - '\chrome.exe'
+        - '\msedge.exe'
+        - '\firefox.exe'
+    - ParentImage|endswith:
+        - '\explorer.exe'
+
+  filter_net_troubleshooting:
+    - CommandLine|contains:
+        - 'ping '
+        - 'tracert '
+        - 'nslookup '
+        - 'netstat '
+    - condition: not selection_specialized_tools
+
+  filter_security_vendors:
+    User: 'NT AUTHORITY\SYSTEM'
+    Image|contains:
+      - '\SentinelOne\'
+      - '\CrowdStrike\'
+      - '\Microsoft Security Client\'
+      - '\Cylance\'
+
+  condition: (selection_specialized_tools or selection_api_scraping) and not filter_browsers and not filter_net_troubleshooting and not filter_security_vendors
+falsepositives:
+  - Security analysts manually investigating an IP address via CLI.
+  - Authorized vulnerability management tools performing asset inventory.
+  - IT automation scripts verifying public-facing service exposure.
+level: high

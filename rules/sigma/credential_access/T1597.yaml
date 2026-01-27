@@ -1,0 +1,71 @@
+title: High-Fidelity Victim-Owned Website Reconnaissance - T1597
+id: 14b65be9-e3e1-4ab6-959a-a0c895a24b31
+status: stable
+description: >
+  Detects automated and systematic reconnaissance of organization-owned 
+  web infrastructure. Focuses on bulk data extraction, recursive directory 
+  brute-forcing, and the discovery of sensitive configuration files.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1597/
+tags:
+  - attack.reconnaissance
+  - attack.t1597
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_automation_flags:
+    - CommandLine|contains:
+        - ' --mirror'
+        - ' -m '
+        - ' --recursive'
+        - ' -r '
+        - ' --no-parent'
+        - ' --level='
+        - ' -l ' 
+    - Image|endswith:
+        - '\httrack.exe'
+        - '\cygwin\bin\wget.exe'
+
+  selection_sensitive_files:
+    CommandLine|contains:
+      - '/.git/'
+      - '/.env'
+      - '/web.config'
+      - '/robots.txt'
+      - '/wp-config.php'
+      - '/backup/'
+      - '/conf/'
+      - '/sql_dump'
+
+  filter_browser_subprocesses:
+    Image|endswith:
+      - '\chrome.exe'
+      - '\msedge.exe'
+    CommandLine|contains:
+      - '--type='
+      - '--service-sandbox-type='
+
+  filter_dev_context:
+    - Image|endswith:
+        - '\git.exe'
+        - '\code.exe'
+    - CommandLine|contains:
+        - 'git pull'
+        - 'git clone'
+        - 'npm install'
+
+  filter_windows_internal:
+    ParentImage|endswith:
+      - '\services.exe'
+      - '\svchost.exe'
+    User: 'NT AUTHORITY\SYSTEM'
+
+  condition: (selection_automation_flags or selection_sensitive_files) and not filter_browser_subprocesses and not filter_dev_context and not filter_windows_internal
+falsepositives:
+  - Web developers performing site migrations or integrity checks.
+  - Legitimate vulnerability scanners (e.g., Nessus, Burp Suite) if not excluded by IP.
+  - Automated SEO crawling tools used by marketing.
+level: high

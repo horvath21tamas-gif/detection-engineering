@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\aws.exe", "*\az.exe", "*\gcloud.exe", "*\mgc.exe")) or (ProcessCommandLine in ("* create-access-key*", "* update-login-profile*", "* create-service-principal*", "* add-password*", "* delete-virtual-mfa-device*", "* authentication-method-create*"))) and (not ((User in ("*svc_iam_provisioner*", "*adm_cloud_identity*", "*entra_admin_deploy*")) and (FolderPath in ("*\ManagementConsole\*", "*\Program Files\Terraform\*")))) and (not (ParentProcessName in ("*\code.exe", "*\devenv.exe", "*\idea64.exe"))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_cloud_identity_ops"))

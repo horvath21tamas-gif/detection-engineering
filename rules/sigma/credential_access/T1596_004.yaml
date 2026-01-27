@@ -49,7 +49,7 @@ detection:
         - '\explorer.exe'
 
   filter_system_pki:
-    User: 'NT AUTHORITY\SYSTEM'
+    username: 'NT AUTHORITY\SYSTEM'
     Image|endswith:
       - '\certutil.exe'
       - '\svchost.exe'

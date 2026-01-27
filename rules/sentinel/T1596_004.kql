@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\subfinder.exe", "*\amass.exe", "*\sslscan.exe", "*\sslyze.exe", "*\certspotter.exe")) or (ProcessCommandLine in ("*certgraph*", "*ctfr*"))) or ((FolderPath in ("*\curl.exe", "*\wget.exe", "*\python.exe", "*\powershell.exe")) or (ProcessCommandLine in ("*crt.sh*", "*api.certspotter.com*", "*censys.io/api*", "*trustid.com*", "*entrust.com/ct-search*")))) and (not ((FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe")) or ParentProcessName endswith "\explorer.exe")) and (not (User =~ "NT AUTHORITY\SYSTEM" and (FolderPath in ("*\certutil.exe", "*\svchost.exe")) and (ProcessCommandLine in ("* -verify*", "* -urlcache*")))) and (not ((User in ("*svc_soc*", "*admin_sec*")) and (FolderPath in ("*\Qualys\*", "*\Rapid7\*"))))

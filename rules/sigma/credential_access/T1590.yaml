@@ -2,10 +2,8 @@ title: Network Reconnaissance with High Port Diversity
 id: 64a49cac-bb4d-4f6d-bebc-9bdd3c95dfff
 status: stable
 description: >
-  Detects network reconnaissance activity consistent with MITRE ATT&CK T1590
-  by identifying a single source IP attempting connections to a high number
-  of distinct destination ports across one or more hosts within a short
-  timeframe, excluding known scanners and benign infrastructure.
+  Detects network reconnaissance activity (T1590) by identifying external source IPs 
+  attempting connections to multiple distinct ports, excluding common services.
 author: SOC Engineering
 date: 2026/01/27
 references:
@@ -13,44 +11,33 @@ references:
 tags:
   - attack.reconnaissance
   - attack.t1590
-
 logsource:
-  category: network_traffic
-  product: zeek
-
+  category: network_connection
+  product: windows
 detection:
-  base_filter:
+  selection:
     proto: tcp
     conn_state:
-      - S0      
-      - REJ     
-      - RSTO    
-
+      - 'S0'
+      - 'REJ'
+      - 'RSTO'
   external_source:
-    src_ip|cidr:
-      - 0.0.0.0/0
-    src_ip|not_cidr:
-      - 10.0.0.0/8
-      - 172.16.0.0/12
-      - 192.168.0.0/16
-
+    src_ip|cidrv4:
+      - '0.0.0.0/0'
+  filter_internal:
+    src_ip|cidrv4:
+      - '10.0.0.0/8'
+      - '172.16.0.0/12'
+      - '192.168.0.0/16'
   exclude_common_ports:
-    destination_port|not_in:
+    dest_port:
       - 80
       - 443
       - 53
       - 123
       - 25
-
-
-  condition: >
-    base_filter
-    and external_source
-    and exclude_common_ports
-
+  condition: selection and external_source and not filter_internal and not exclude_common_ports
 falsepositives:
-  - Authorized external vulnerability scanners (explicitly allowlisted)
+  - Authorized external vulnerability scanners
   - Temporary misconfigured load balancers
-  - Rare ISP-level scanning activity
-
 level: high

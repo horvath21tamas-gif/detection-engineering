@@ -75,6 +75,7 @@
 | T1584.002 | CRITICAL | High-Fidelity DNS Server Configuration Subversion - T1584.002 |
 | T1584.004 | HIGH | High-Fidelity Serverless Function Subversion - T1584.004 |
 | T1584.005 | HIGH | High-Fidelity Botnet Agent Persistence and Control - T1584.005 |
+| T1584.007 | HIGH | High-Fidelity VPS Control and Tunneling - T1584.007 |
 | T1586 | HIGH | High-Fidelity Account Compromise and Identity Manipulation - T1586 |
 | T1586.001 | HIGH | High-Fidelity Automated Social Media Manipulation - T1586.001 |
 | T1586.002 | HIGH | High-Fidelity Email Forwarding Rule Manipulation - T1586.002 |

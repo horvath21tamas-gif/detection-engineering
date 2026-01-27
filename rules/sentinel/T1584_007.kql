@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\aws.exe", "*\az.exe", "*\doctl.exe", "*\gcloud.exe")) or (ProcessCommandLine in ("*authorize-security-group-ingress*", "*add-metadata*", "*vm user set*", "*instance-templates create*", "*network-security-groups rule create*"))) or ((FolderPath in ("*\chisel.exe", "*\frpc.exe", "*\gost.exe", "*\nps.exe")) or (ProcessCommandLine in ("* client *", "* -secret *", "* -proxy *", "* R:*")))) and (not ((User in ("*svc_terraform*", "*svc_ansible*", "*adm_cloud_infra*")) or (FolderPath in ("*\Terraform\*", "*\Ansible\*")))) and (not (ProcessCommandLine in ("*sandbox*", "*test-env*", "*127.0.0.1*"))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_vps_control"))

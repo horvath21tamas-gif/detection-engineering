@@ -55,6 +55,7 @@
 - [High-Fidelity DNS Server Configuration Subversion - T1584.002](#high-fidelity-dns-server-configuration-subversion---t1584002)
 - [High-Fidelity Serverless Function Subversion - T1584.004](#high-fidelity-serverless-function-subversion---t1584004)
 - [High-Fidelity Botnet Agent Persistence and Control - T1584.005](#high-fidelity-botnet-agent-persistence-and-control---t1584005)
+- [High-Fidelity VPS Control and Tunneling - T1584.007](#high-fidelity-vps-control-and-tunneling---t1584007)
 - [High-Fidelity Account Compromise and Identity Manipulation - T1586](#high-fidelity-account-compromise-and-identity-manipulation---t1586)
 - [High-Fidelity Automated Social Media Manipulation - T1586.001](#high-fidelity-automated-social-media-manipulation---t1586001)
 - [High-Fidelity Email Forwarding Rule Manipulation - T1586.002](#high-fidelity-email-forwarding-rule-manipulation---t1586002)
@@ -906,6 +907,21 @@
 - **Leírás:** Detects botnet agent activity by identifying suspicious process lineages  (e.g., LOLBins spawning from WMI), P2P bootstrap arguments, and known  DDoS tool patterns while filtering authorized IT management and P2P software.
 - **Hamis pozitívok:** Legitimate P2P-based software distribution (e.g., BranchCache, Delivery Optimization)., IT admins using WMI for authorized mass-configuration changes., Performance monitoring tools using Stratum-like protocols.
 - **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity VPS Control and Tunneling - T1584.007
+- **Azonosító:** `T1584_007.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized VPS manipulation by identifying critical lifecycle changes  (SSH key injection, firewall opening) and the execution of reverse tunneling tools  from non-authorized administrative contexts.
+- **Hamis pozitívok:** Cloud engineers performing emergency manual network troubleshooting., Legitimate automated scaling scripts not yet in the service account whitelist., Authorized Red Team exercises.
+- **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

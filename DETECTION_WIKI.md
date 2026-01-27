@@ -51,6 +51,7 @@
 - [High-Fidelity Serverless Infrastructure Provisioning - T1583.007](#high-fidelity-serverless-infrastructure-provisioning---t1583007)
 - [High-Fidelity Cloud Account Acquisition and Bootstrap - T1583.008](#high-fidelity-cloud-account-acquisition-and-bootstrap---t1583008)
 - [High-Fidelity Account Compromise and Identity Manipulation - T1586](#high-fidelity-account-compromise-and-identity-manipulation---t1586)
+- [High-Fidelity Automated Social Media Manipulation - T1586.001](#high-fidelity-automated-social-media-manipulation---t1586001)
 - [High-Fidelity Email Forwarding Rule Manipulation - T1586.002](#high-fidelity-email-forwarding-rule-manipulation---t1586002)
 - [High-Fidelity Cloud Account Takeover and Persistence - T1586.003](#high-fidelity-cloud-account-takeover-and-persistence---t1586003)
 - [High-Fidelity Identity Enumeration via Authentication Endpoints](#high-fidelity-identity-enumeration-via-authentication-endpoints)
@@ -840,6 +841,21 @@
 - **Leírás:** Detects actions indicative of account compromise and takeover (ATO), such as  unauthorized MFA modification, suspicious login profile updates, and automated  credential testing from non-standard administrative processes.
 - **Hamis pozitívok:** Authorized Red Team exercises or internal penetration testing., Emergency account recovery by senior IT staff via CLI., Automated identity lifecycle management scripts (if not using the service account).
 - **MITRE ATT&CK:** `T1586`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Automated Social Media Manipulation - T1586.001
+- **Azonosító:** `T1586_001.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects automated interaction with social media platforms via headless browser  frameworks (Selenium, Puppeteer, Playwright). Attackers use these to scale  account takeover (ATO) and bypass security controls by injecting stolen cookies.
+- **Hamis pozitívok:** Frontend developers running automated UI tests for internal apps., Marketing automation tools used for scheduled posts on authorized machines.
+- **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

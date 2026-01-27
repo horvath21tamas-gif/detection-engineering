@@ -1,0 +1,62 @@
+title: High-Fidelity Botnet Agent Persistence and Control - T1584.005
+id: 09fdbf4b-f978-4233-b1bd-cfedb3804357
+status: stable
+description: >
+  Detects botnet agent activity by identifying suspicious process lineages 
+  (e.g., LOLBins spawning from WMI), P2P bootstrap arguments, and known 
+  DDoS tool patterns while filtering authorized IT management and P2P software.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1584/005/
+tags:
+  - attack.resource_development
+  - attack.t1584.005
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_bot_behavior:
+    - CommandLine|contains:
+        - ' p2p_bootstrap'   
+        - ' ddos_start'      
+        - ' stratum+tcp'      
+        - ' -irc '            
+        - ' -flood'           
+
+  selection_suspicious_lineage:
+    ParentImage|endswith:
+      - '\wmiprvse.exe'      
+      - '\scrcons.exe'       
+    Image|contains:
+      - '\AppData\Local\Temp\'
+      - '\Users\Public\'
+    Image|endswith:
+        - '\powershell.exe'
+        - '\cmd.exe'
+        - '\certutil.exe'   
+
+  filter_authorized_p2p:
+    - Image|contains:
+        - '\Microsoft\ConfigMgr\'
+        - '\Altiris\'
+        - '\Tanium\'
+    - User|contains:
+        - 'svc_deploy'
+        - 'svc_inventory'
+
+  filter_entertainment:
+    Image|contains:
+      - '\Spotify\'
+      - '\Steam\'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_bot_behavior
+
+  condition: (selection_bot_behavior or selection_suspicious_lineage) and not filter_authorized_p2p and not filter_entertainment and not filter_interactive
+falsepositives:
+  - Legitimate P2P-based software distribution (e.g., BranchCache, Delivery Optimization).
+  - IT admins using WMI for authorized mass-configuration changes.
+  - Performance monitoring tools using Stratum-like protocols.
+level: high

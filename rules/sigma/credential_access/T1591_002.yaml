@@ -12,6 +12,7 @@ references:
 tags:
   - attack.reconnaissance
   - attack.t1591.002
+  - attack.t1591
 logsource:
   category: process_creation
   product: windows

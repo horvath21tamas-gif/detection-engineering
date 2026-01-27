@@ -53,7 +53,7 @@ detection:
     User|contains:
       - 'fin_'
       - 'proc_'
-      - 'pénzügy'
+      - 'penzugy'
 
   filter_system:
     username: 'NT AUTHORITY\SYSTEM'

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\aws.exe", "*\az.exe", "*\gcloud.exe")) or (ProcessCommandLine in ("* create-vpc*", "* create-internet-gateway*", "* create-vpc-peering-connection*", "* network vnet create*", "* compute networks create*"))) or ((FolderPath in ("*\terraform.exe", "*\pulumi.exe")) and (ProcessCommandLine in ("*aws_vpc*", "*aws_internet_gateway*", "*aws_vpc_peering_connection*", "*azurerm_virtual_network*", "*google_compute_network*")))) and (not ((User in ("*svc_terraform_network*", "*adm_netops_deploy*")) or (FolderPath in ("*\Program Files\Terraform\*", "*\actions-runner\*")))) and (not (ParentProcessName in ("*\code.exe", "*\devenv.exe", "*\idea64.exe"))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_network_ops"))

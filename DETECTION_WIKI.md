@@ -44,6 +44,7 @@
 - [High-Fidelity Offensive Infrastructure Provisioning - T1583](#high-fidelity-offensive-infrastructure-provisioning---t1583)
 - [High-Fidelity VPS Infrastructure Provisioning - T1583.001](#high-fidelity-vps-infrastructure-provisioning---t1583001)
 - [High-Fidelity Automated Domain Registration & Acquisition - T1583.002](#high-fidelity-automated-domain-registration-&-acquisition---t1583002)
+- [High-Fidelity Cloud Network (VPC) Provisioning - T1583.003](#high-fidelity-cloud-network-(vpc)-provisioning---t1583003)
 - [High-Fidelity Serverless Infrastructure Provisioning - T1583.004](#high-fidelity-serverless-infrastructure-provisioning---t1583004)
 - [High-Fidelity Botnet Infrastructure Acquisition - T1583.005](#high-fidelity-botnet-infrastructure-acquisition---t1583005)
 - [High-Fidelity Serverless Infrastructure Provisioning - T1583.007](#high-fidelity-serverless-infrastructure-provisioning---t1583007)
@@ -730,6 +731,21 @@
 - **Leírás:** Detects automated domain registration through registrar APIs and specialized  provisioning tools. Focuses on programmatic acquisition via curl/python  while filtering out authorized IT infrastructure management (Certbot, Terraform).
 - **Hamis pozitívok:** Automated domain renewals by IT department., SEO teams using auditing tools for brand protection., Security team performing authorized domain-squatting research.
 - **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Cloud Network (VPC) Provisioning - T1583.003
+- **Azonosító:** `T1583_003.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the acquisition and configuration of cloud networking (VPC).  Focuses on identifying the creation of internet egress points and  cross-network bridges from unauthorized endpoints, isolating automated  CI/CD pipelines from manual or scripted local abuse.
+- **Hamis pozitívok:** Authorized network architects deploying new staging VPCs., Automated disaster recovery scripts rebuilding network stacks.
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 12:47:42`
+**Utolsó frissítés:** `2026-01-27 12:53:16`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 93 | 100% |
-| Splunk (SPL) | 93 | 100.0% |
-| Microsoft Sentinel (KQL) | 93 | 100.0% |
-| QRadar (AQL) | 63 | 67.7% |
-| Elastic (KQL/EQL) | 93 | 100.0% |
-| RSA NetWitness | 93 | 100.0% |
+| Sigma (Forrás) | 94 | 100% |
+| Splunk (SPL) | 94 | 100.0% |
+| Microsoft Sentinel (KQL) | 94 | 100.0% |
+| QRadar (AQL) | 63 | 67.0% |
+| Elastic (KQL/EQL) | 94 | 100.0% |
+| RSA NetWitness | 94 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -64,6 +64,7 @@
 | T1583 | HIGH | High-Fidelity Offensive Infrastructure Provisioning - T1583 |
 | T1583.001 | HIGH | High-Fidelity VPS Infrastructure Provisioning - T1583.001 |
 | T1583.002 | HIGH | High-Fidelity Automated Domain Registration & Acquisition - T1583.002 |
+| T1583.003 | HIGH | High-Fidelity Cloud Network (VPC) Provisioning - T1583.003 |
 | T1583.004 | HIGH | High-Fidelity Serverless Infrastructure Provisioning - T1583.004 |
 | T1583.007 | HIGH | High-Fidelity Serverless Infrastructure Provisioning - T1583.007 |
 | T1583.008 | HIGH | High-Fidelity Cloud Account Acquisition and Bootstrap - T1583.008 |

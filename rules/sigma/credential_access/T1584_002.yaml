@@ -1,0 +1,61 @@
+title: High-Fidelity DNS Server Configuration Subversion - T1584.002
+id: e56528e8-cb9c-4150-aa7e-de6d89e2bd10
+status: stable
+description: >
+  Detects unauthorized DNS infrastructure manipulation by monitoring for 
+  critical configuration changes (zone resets, master updates) and 
+  suspicious child processes spawned directly from DNS services.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1584/002/
+tags:
+  - attack.resource_development
+  - attack.t1584.002
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_dns_critical_ops:
+    - Image|endswith:
+        - '\dnscmd.exe'       
+        - '\nsupdate.exe'   
+    - CommandLine|contains:
+        - ' /ZoneResetMasters' 
+        - ' /Config '         
+        - ' /ZoneAdd '       
+        - ' /RecordAdd '     
+
+  selection_dns_service_abuse:
+    ParentImage|endswith:
+      - '\dns.exe'            
+      - '\named.exe'         
+      - '\coredns.exe'
+    Image|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\whoami.exe'         
+      - '\certutil.exe'      
+      - '\curl.exe'
+
+  filter_dc_system_updates:
+    User: 'NT AUTHORITY\SYSTEM'
+    CommandLine|contains: ' /RecordAdd '
+
+  filter_authorized_it:
+    User|contains:
+      - 'svc_dns_mgr'
+      - 'adm_net_ops'
+    Image|contains:
+      - '\System32\ServerManager.exe'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_dns_critical_ops
+
+  condition: (selection_dns_critical_ops or selection_dns_service_abuse) and not filter_dc_system_updates and not filter_authorized_it and not filter_interactive
+falsepositives:
+  - Authorized IPAM software performing DNS zone synchronization.
+  - Emergency manual DNS recovery by authorized senior administrators.
+  - Vulnerability scanners probing the DNS service (e.g., Nessus).
+level: critical

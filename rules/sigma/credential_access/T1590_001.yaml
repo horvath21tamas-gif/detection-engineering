@@ -1,0 +1,62 @@
+title: Professional IP Infrastructure Reconnaissance - T1590.001
+id: 857abbf0-ed5a-495d-9a16-a60ca3594111
+status: stable
+description: >
+  Detects professional IP discovery techniques by focusing on reconnaissance-specific 
+  command arguments and external IP lookup services, while filtering out 
+  standard Windows networking noise.
+author: SOC Engineering
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1590/001/
+tags:
+  - attack.reconnaissance
+  - attack.t1590.001
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_local:
+    - Image|endswith: '\ipconfig.exe'
+      CommandLine|contains: 
+        - ' /all'
+        - ' /displaydns'
+    - Image|endswith: '\route.exe'
+      CommandLine|contains: ' print'
+    - Image|endswith: '\arp.exe'
+      CommandLine|contains: ' -a'
+    - Image|endswith: '\netsh.exe'
+      CommandLine|contains: ' interface ipv4 show'
+
+  selection_external:
+    CommandLine|contains:
+      - 'curl '
+      - 'wget '
+      - 'Invoke-WebRequest'
+      - 'Invoke-RestMethod'
+    CommandLine|contains:
+      - 'ifconfig.me'
+      - 'icanhazip.com'
+      - 'ident.me'
+      - 'api.ipify.org'
+      - 'checkip.amazonaws.com'
+
+  filter_system:
+    User: 'NT AUTHORITY\SYSTEM'
+    ParentImage|endswith:
+      - '\services.exe'
+      - '\svchost.exe'
+      - '\msiexec.exe'
+
+  filter_installers:
+    Image|contains:
+      - '\AppData\Local\Temp\'
+    CommandLine|contains:
+      - '--check-connection'
+      - '--update'
+
+  condition: (selection_local or selection_external) and not filter_system and not filter_installers
+falsepositives:
+  - IT Support troubleshooting network issues
+  - Automated software update checks
+level: medium

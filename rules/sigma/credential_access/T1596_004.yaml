@@ -1,0 +1,73 @@
+title: High-Fidelity Digital Certificate Reconnaissance - T1596.004
+id: f6719649-9857-479a-8215-398a4420abba
+status: stable
+description: >
+  Detects automated reconnaissance targeting Digital Certificates and CT logs. 
+  Focuses on programmatic CLI patterns (API-based scraping) while filtering 
+  out legitimate system-level certificate validation and browser traffic.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1596/004/
+tags:
+  - attack.reconnaissance
+  - attack.t1596.004
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_recon_binaries:
+    - Image|endswith:
+        - '\subfinder.exe'
+        - '\amass.exe'
+        - '\sslscan.exe'
+        - '\sslyze.exe'
+        - '\certspotter.exe'
+    - CommandLine|contains:
+        - 'certgraph'
+        - 'ctfr' 
+
+  selection_api_scraping:
+    - Image|endswith:
+        - '\curl.exe'
+        - '\wget.exe'
+        - '\python.exe'
+        - '\powershell.exe'
+    - CommandLine|contains:
+        - 'crt.sh'           
+        - 'api.certspotter.com'
+        - 'censys.io/api'
+        - 'trustid.com'
+        - 'entrust.com/ct-search'
+
+  filter_browsers:
+    - Image|endswith:
+        - '\chrome.exe'
+        - '\msedge.exe'
+        - '\firefox.exe'
+    - ParentImage|endswith:
+        - '\explorer.exe'
+
+  filter_system_pki:
+    User: 'NT AUTHORITY\SYSTEM'
+    Image|endswith:
+      - '\certutil.exe'
+      - '\svchost.exe'
+    CommandLine|contains:
+      - ' -verify'
+      - ' -urlcache'
+
+  filter_soc_tools:
+    User|contains:
+      - 'svc_soc'
+      - 'admin_sec'
+    Image|contains:
+      - '\Qualys\'
+      - '\Rapid7\'
+
+  condition: (selection_recon_binaries or selection_api_scraping) and not filter_browsers and not filter_system_pki and not filter_soc_tools
+falsepositives:
+  - DevOps automation for SSL certificate renewal (e.g., ACME/Let's Encrypt).
+  - Internal PKI health checks performed by network admins.
+  - Security analysts performing authorized external audits.
+level: high

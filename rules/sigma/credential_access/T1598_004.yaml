@@ -1,0 +1,77 @@
+title: High-Fidelity Spearphishing Attachment Interaction - T1598.004
+id: 54c88efe-6548-47a6-8a62-f7e9cb30b61c
+status: stable
+description: >
+  Detects suspicious execution patterns from email attachments. Focuses on HTML 
+  smuggling and Office-to-script transitions while filtering out legitimate 
+  SharePoint, OneDrive, and enterprise software update noise.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1598/004/
+tags:
+  - attack.initial_access
+  - attack.t1598.004
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_html_smuggling:
+    Image|endswith:
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\firefox.exe'
+    CommandLine|contains:
+      - '\Content.Outlook\'
+      - '\AppData\Local\Temp\'
+      - '\INetCache\'
+    CommandLine|contains:
+      - '.html'
+      - '.htm'
+      - '.js' 
+
+  selection_office_anomaly:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\powerpnt.exe'
+    Image|endswith:
+      - '\powershell.exe'
+      - '\cmd.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe' 
+
+  selection_harvesting_params:
+    CommandLine|contains:
+      - ' -WindowStyle Hidden'
+      - ' -ExecutionPolicy Bypass'
+      - 'login'
+      - 'auth'
+      - 'verify'
+      - 'token'
+
+  filter_legit_automation:
+    CommandLine|contains:
+      - 'SharePoint'
+      - 'Microsoft365'
+      - 'GraphAPI'
+    User: 'NT AUTHORITY\SYSTEM'
+
+  filter_browser_internals:
+    CommandLine|contains:
+      - '--type=utility'
+      - '--type=renderer'
+      - '--type=gpu-process'
+
+  filter_installers:
+    ParentImage|contains:
+      - '\Windows\Installer\'
+      - '\ConfigMgr\'
+
+  condition: (selection_html_smuggling and selection_harvesting_params) or (selection_office_anomaly and selection_harvesting_params) and not filter_legit_automation and not filter_browser_internals and not filter_installers
+falsepositives:
+  - Internal business automation using Excel macros to pull data via PowerShell.
+  - Software installers opening "ReadMe" or "Release Notes" in HTML format.
+  - Users saving legitimate web pages for offline viewing.
+level: high

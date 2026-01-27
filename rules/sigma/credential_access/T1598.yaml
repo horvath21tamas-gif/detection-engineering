@@ -1,0 +1,68 @@
+title: Advanced Phishing for Info & Credential Harvesting - T1598
+id: cd0c9ea6-7668-4ff6-81c4-1e57f861bdf9
+status: stable
+description: >
+  Detects post-phishing credential harvesting and session token theft. 
+  Focuses on non-browser processes accessing browser profile data and 
+  suspicious interactive credential prompts.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1598/
+tags:
+  - attack.initial_access
+  - attack.t1598
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_token_theft:
+    CommandLine|contains:
+      - '\User Data\Default\Cookies'
+      - '\User Data\Default\Login Data'
+      - '\User Data\Default\Network\Cookies'
+      - '\AppData\Roaming\Mozilla\Firefox\Profiles'
+    CommandLine|contains:
+      - 'copy '
+      - 'type '
+      - 'tar '
+      - '7z'
+      - 'powershell'
+
+  selection_spoofing:
+    - Image|endswith: '\powershell.exe'
+      CommandLine|contains:
+        - 'Get-Credential'
+        - 'prompt'
+        - 'CredentialPrompt'
+        - '-WindowStyle Hidden' 
+    - Image|endswith: '\msg.exe'
+      CommandLine|contains: '*' 
+
+  filter_browser_binaries:
+    Image|endswith:
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\firefox.exe'
+      - '\GoogleUpdate.exe'
+      - '\MicrosoftEdgeUpdate.exe'
+
+  filter_migration:
+    Image|endswith:
+      - '\migwiz.exe'
+      - '\OneDrive.exe'
+    CommandLine|contains:
+      - 'MigLog'
+      - 'settings'
+
+  filter_admin:
+    ParentImage|endswith:
+      - '\CcmExec.exe' 
+      - '\gpscript.exe'
+
+  condition: (selection_token_theft and not filter_browser_binaries and not filter_migration) or (selection_spoofing and not filter_admin)
+falsepositives:
+  - IT support scripts used for legitimate credential collection.
+  - Browser profile backup tools.
+  - User-initiated manual profile migration.
+level: high

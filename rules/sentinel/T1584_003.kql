@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\aws.exe", "*\az.exe", "*\mgc.exe", "*\gcloud.exe")) or (ProcessCommandLine in ("*delete-virtual-mfa-device*", "*deactivate-mfa-device*", "*create-access-key*", "*add-password*", "*update-login-profile*", "*create-service-principal*"))) and (not ((User in ("*svc_terraform*", "*svc_deploy*", "*github_actions_runner*")) or (FolderPath in ("*\Terraform\*", "*\actions-runner\*", "*\Jenkins\*")))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_cloud_identity_ops")) and (not (ProcessCommandLine in ("*get-caller-identity*", "*sts get-session-token*")))

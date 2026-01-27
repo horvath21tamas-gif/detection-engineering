@@ -53,6 +53,7 @@
 - [High-Fidelity Compromised Infrastructure and Resource Abuse - T1584](#high-fidelity-compromised-infrastructure-and-resource-abuse---t1584)
 - [High-Fidelity Domain Infrastructure Hijacking - T1584.001](#high-fidelity-domain-infrastructure-hijacking---t1584001)
 - [High-Fidelity DNS Server Configuration Subversion - T1584.002](#high-fidelity-dns-server-configuration-subversion---t1584002)
+- [High-Fidelity Cloud Identity Subversion and Persistence - T1584.003](#high-fidelity-cloud-identity-subversion-and-persistence---t1584003)
 - [High-Fidelity Serverless Function Subversion - T1584.004](#high-fidelity-serverless-function-subversion---t1584004)
 - [High-Fidelity Botnet Agent Persistence and Control - T1584.005](#high-fidelity-botnet-agent-persistence-and-control---t1584005)
 - [High-Fidelity VPS Control and Tunneling - T1584.007](#high-fidelity-vps-control-and-tunneling---t1584007)
@@ -877,6 +878,21 @@
 - **Leírás:** Detects unauthorized DNS infrastructure manipulation by monitoring for  critical configuration changes (zone resets, master updates) and  suspicious child processes spawned directly from DNS services.
 - **Hamis pozitívok:** Authorized IPAM software performing DNS zone synchronization., Emergency manual DNS recovery by authorized senior administrators., Vulnerability scanners probing the DNS service (e.g., Nessus).
 - **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Cloud Identity Subversion and Persistence - T1584.003
+- **Azonosító:** `T1584_003.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized cloud account manipulation by monitoring for  high-risk identity changes (MFA removal, new access keys) executed  outside of authorized CI/CD pipelines or known administrative jump-hosts.
+- **Hamis pozitívok:** Emergency manual MFA reset by a Cloud Architect from an authorized jump-host., Legitimate identity migration scripts during tenant consolidation., Security audits using authorized scanning accounts.
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

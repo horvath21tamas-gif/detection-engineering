@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 13:54:22`
+**Utolsó frissítés:** `2026-01-27 14:00:15`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 104 | 100% |
-| Splunk (SPL) | 104 | 100.0% |
-| Microsoft Sentinel (KQL) | 104 | 100.0% |
-| QRadar (AQL) | 63 | 60.6% |
-| Elastic (KQL/EQL) | 104 | 100.0% |
-| RSA NetWitness | 104 | 100.0% |
+| Sigma (Forrás) | 106 | 100% |
+| Splunk (SPL) | 106 | 100.0% |
+| Microsoft Sentinel (KQL) | 106 | 100.0% |
+| QRadar (AQL) | 63 | 59.4% |
+| Elastic (KQL/EQL) | 106 | 100.0% |
+| RSA NetWitness | 106 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -73,6 +73,7 @@
 | T1584 | HIGH | High-Fidelity Compromised Infrastructure and Resource Abuse - T1584 |
 | T1584.001 | CRITICAL | High-Fidelity Domain Infrastructure Hijacking - T1584.001 |
 | T1584.002 | CRITICAL | High-Fidelity DNS Server Configuration Subversion - T1584.002 |
+| T1584.003 | CRITICAL | High-Fidelity Cloud Identity Subversion and Persistence - T1584.003 |
 | T1584.004 | HIGH | High-Fidelity Serverless Function Subversion - T1584.004 |
 | T1584.005 | HIGH | High-Fidelity Botnet Agent Persistence and Control - T1584.005 |
 | T1584.007 | HIGH | High-Fidelity VPS Control and Tunneling - T1584.007 |

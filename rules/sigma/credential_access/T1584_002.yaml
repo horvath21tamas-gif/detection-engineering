@@ -39,7 +39,7 @@ detection:
       - '\curl.exe'
 
   filter_dc_system_updates:
-    User: 'NT AUTHORITY\SYSTEM'
+    username: 'NT AUTHORITY\SYSTEM'
     CommandLine|contains: ' /RecordAdd '
 
   filter_authorized_it:

@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 09:45:09`
+**Utolsó frissítés:** `2026-01-27 09:49:42`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 73 | 100% |
-| Splunk (SPL) | 73 | 100.0% |
-| Microsoft Sentinel (KQL) | 73 | 100.0% |
-| QRadar (AQL) | 63 | 86.3% |
-| Elastic (KQL/EQL) | 73 | 100.0% |
-| RSA NetWitness | 73 | 100.0% |
+| Sigma (Forrás) | 74 | 100% |
+| Splunk (SPL) | 74 | 100.0% |
+| Microsoft Sentinel (KQL) | 74 | 100.0% |
+| QRadar (AQL) | 63 | 85.1% |
+| Elastic (KQL/EQL) | 74 | 100.0% |
+| RSA NetWitness | 74 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -87,6 +87,7 @@
 | T1595.002 | HIGH | High-Confidence External Vulnerability Scanning Activity |
 | T1595.003 | HIGH | Active Wordlist Scanning Against Authentication Endpoints |
 | T1597 | HIGH | High-Fidelity Victim-Owned Website Reconnaissance - T1597 |
+| T1597.001 | HIGH | High-Fidelity Domain Infrastructure Enumeration - T1597.001 |
 | T1597.002 | HIGH | High-Fidelity Secret Hunting in Code Repositories - T1597.002 |
 | T1598 | HIGH | Advanced Phishing for Info & Credential Harvesting - T1598 |
 | T1598.001 | HIGH | Advanced Spearphishing Link Redirection - T1598.001 |

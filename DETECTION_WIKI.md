@@ -67,6 +67,7 @@
 - [High-Confidence External Vulnerability Scanning Activity](#high-confidence-external-vulnerability-scanning-activity)
 - [Active Wordlist Scanning Against Authentication Endpoints](#active-wordlist-scanning-against-authentication-endpoints)
 - [High-Fidelity Victim-Owned Website Reconnaissance - T1597](#high-fidelity-victim-owned-website-reconnaissance---t1597)
+- [High-Fidelity Domain Infrastructure Enumeration - T1597.001](#high-fidelity-domain-infrastructure-enumeration---t1597001)
 - [High-Fidelity Secret Hunting in Code Repositories - T1597.002](#high-fidelity-secret-hunting-in-code-repositories---t1597002)
 - [Advanced Phishing for Info & Credential Harvesting - T1598](#advanced-phishing-for-info-&-credential-harvesting---t1598)
 - [Advanced Spearphishing Link Redirection - T1598.001](#advanced-spearphishing-link-redirection---t1598001)
@@ -1053,6 +1054,21 @@
 - **Leírás:** Detects automated and systematic reconnaissance of organization-owned  web infrastructure. Focuses on bulk data extraction, recursive directory  brute-forcing, and the discovery of sensitive configuration files.
 - **Hamis pozitívok:** Web developers performing site migrations or integrity checks., Legitimate vulnerability scanners (e.g., Nessus, Burp Suite) if not excluded by IP., Automated SEO crawling tools used by marketing.
 - **MITRE ATT&CK:** `T1597`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Domain Infrastructure Enumeration - T1597.001
+- **Azonosító:** `T1597_001.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects advanced and automated domain/DNS reconnaissance. Focuses on  unusual DNS query types (AXFR, ANY) and professional sub-domain discovery  tools while filtering out routine network troubleshooting.
+- **Hamis pozitívok:** Network engineers performing deep DNS audits or migrations., Security vulnerability scanners performing asset discovery., Automated cloud-sync tools verifying domain ownership (e.g., Let's Encrypt).
+- **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

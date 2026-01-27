@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("*AXFR*", "* -query=any*", "* -type=any*", "* -t any*", "* -q any*", "* -t TXT*", "* -t MX*")) or ((FolderPath in ("*\subfinder.exe", "*\amass.exe", "*\dnsrecon.exe", "*\fierce.exe", "*\knockpy.exe")) or (ProcessCommandLine in ("* -active*", "* -passive*", "* -brute*", "* -enum*")))) and (not ((ProcessCommandLine in ("nslookup ", "ping ", "tracert ")) or condition =~ "not selection_dns_recon")) and (not (FolderPath in ("*\Windows\System32\dns.exe*", "*\Windows\System32\lsass.exe*"))) and (not ((User in ("*svc_monitoring*", "*svc_network*")) and (FolderPath in ("*\Zabbix\*", "*\Nagios\*", "*\SolarWinds\*"))))

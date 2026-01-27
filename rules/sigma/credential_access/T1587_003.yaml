@@ -1,0 +1,65 @@
+title: High-Fidelity Unauthorized Digital Certificate Development - T1587.003
+id: 383bdfd2-2086-4207-83e7-1ab2064910b9
+status: stable
+description: >
+  Detects unauthorized digital certificate and private key generation by monitoring 
+  for high-risk command-line arguments (self-signing, key exfiltration) occurring 
+  in non-standard directories or by unauthorized users.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1587/003/
+tags:
+  - attack.resource_development
+  - attack.t1587.003
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_tools:
+    - Image|endswith:
+        - '\openssl.exe'
+        - '\keytool.exe'      
+        - '\certutil.exe'
+        - '\makecert.exe'
+
+  selection_risk_params:
+    CommandLine|contains:
+      - ' -selfsign '         
+      - ' -genrsa '          
+      - ' -keyout '           
+      - ' -export '          
+      - ' -req -new '        
+
+  selection_suspicious_paths:
+    CommandLine|contains:
+      - '\Users\Public\'
+      - '\AppData\Local\Temp\'
+      - '\PerfLogs\'
+      - 'C:\Windows\Temp\'
+      - '\ProgramData\'
+
+  filter_legit_paths:
+    Image|contains:
+      - '\Program Files\'
+      - '\Program Files (x86)\'
+      - '\System32\'
+
+  filter_authorized_users:
+    User|contains:
+      - 'svc_pki'
+      - 'adm_infra'
+      - 'svc_deploy'
+
+  filter_legit_parents:
+    ParentImage|endswith:
+      - '\msiexec.exe'
+      - '\setup.exe'
+      - '\install.exe'
+
+  condition: (selection_tools and selection_risk_params and selection_suspicious_paths) and not filter_legit_paths and not filter_authorized_users and not filter_legit_parents
+falsepositives:
+  - Developers testing SSL/TLS logic in local temp folders.
+  - Automated deployment scripts (Ansible/Puppet) creating local certs.
+  - Third-party software installers generating self-signed certs during setup.
+level: high

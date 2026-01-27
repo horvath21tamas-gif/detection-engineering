@@ -1,0 +1,68 @@
+title: Advanced Business Relationship Information Discovery - T1591.002
+id: 9b7427f3-48f0-4731-bd47-40941ac69f1e
+status: stable
+description: >
+  Detects systematic and automated discovery of business relationships. 
+  It filters out common office productivity noise and focuses on bulk 
+  search operations originating from non-standard parent processes.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1591/002/
+tags:
+  - attack.reconnaissance
+  - attack.t1590.002
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_recon_pattern:
+    - Image|endswith: 
+        - '\findstr.exe'
+        - '\grep.exe'
+      CommandLine|contains:
+        - 'partner'
+        - 'vendor'
+        - 'supplier'
+        - 'contract'
+        - 'beszallito'
+        - 'szerzodes'
+    - Image|endswith: '\powershell.exe'
+      CommandLine|contains:
+        - 'Select-String'
+      CommandLine|contains:
+        - ' -Path '
+        - ' -Recurse'
+
+  selection_file_search:
+    CommandLine|contains:
+      - 'customer_list'
+      - 'client_database'
+      - 'invoice_summary'
+      - 'ugyfellista'
+      - 'szamlak'
+
+  filter_office_context:
+    ParentImage|endswith:
+      - '\explorer.exe'
+      - '\outlook.exe'
+      - '\SearchHost.exe'
+      - '\SearchIndexer.exe'
+
+  filter_department:
+    User|contains:
+      - 'fin_'
+      - 'proc_'
+      - 'pénzügy'
+
+  filter_system:
+    User: 'NT AUTHORITY\SYSTEM'
+    ParentImage|endswith:
+      - '\services.exe'
+      - '\svchost.exe'
+
+  condition: (selection_recon_pattern or selection_file_search) and not filter_office_context and not filter_department and not filter_system
+falsepositives:
+  - Legal or Finance team performing legitimate data migration.
+  - Desktop search tools indexing local documents.
+level: high

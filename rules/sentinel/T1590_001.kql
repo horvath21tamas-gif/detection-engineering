@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath endswith "\ipconfig.exe" and (ProcessCommandLine in ("* /all*", "* /displaydns*"))) or (FolderPath endswith "\route.exe" and ProcessCommandLine contains " print") or (FolderPath endswith "\arp.exe" and ProcessCommandLine contains " -a") or (FolderPath endswith "\netsh.exe" and ProcessCommandLine contains " interface ipv4 show")) or (ProcessCommandLine in ("*ifconfig.me*", "*icanhazip.com*", "*ident.me*", "*api.ipify.org*", "*checkip.amazonaws.com*"))) and (not (User =~ "NT AUTHORITY\SYSTEM" and (ParentProcessName in ("*\services.exe", "*\svchost.exe", "*\msiexec.exe")))) and (not (FolderPath contains "\AppData\Local\Temp\" and (ProcessCommandLine in ("*--check-connection*", "*--update*"))))

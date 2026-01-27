@@ -42,7 +42,7 @@ detection:
       - 'checkip.amazonaws.com'
 
   filter_system:
-    User: 'NT AUTHORITY\SYSTEM'
+    username: 'NT AUTHORITY\SYSTEM'
     ParentImage|endswith:
       - '\services.exe'
       - '\svchost.exe'

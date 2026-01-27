@@ -66,6 +66,7 @@
 - [High-Fidelity External IP Block Scanning Detection](#high-fidelity-external-ip-block-scanning-detection)
 - [High-Confidence External Vulnerability Scanning Activity](#high-confidence-external-vulnerability-scanning-activity)
 - [Active Wordlist Scanning Against Authentication Endpoints](#active-wordlist-scanning-against-authentication-endpoints)
+- [High-Fidelity Open Technical Database Reconnaissance - T1596](#high-fidelity-open-technical-database-reconnaissance---t1596)
 - [High-Fidelity Victim-Owned Website Reconnaissance - T1597](#high-fidelity-victim-owned-website-reconnaissance---t1597)
 - [High-Fidelity Domain Infrastructure Enumeration - T1597.001](#high-fidelity-domain-infrastructure-enumeration---t1597001)
 - [High-Fidelity Secret Hunting in Code Repositories - T1597.002](#high-fidelity-secret-hunting-in-code-repositories---t1597002)
@@ -1043,6 +1044,21 @@
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Open Technical Database Reconnaissance - T1596
+- **Azonosító:** `T1596.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the systematic use of CLI tools and script-based API queries directed  at technical databases like Shodan, Censys, and VirusTotal.  Focuses on non-browser process chains and automated data extraction patterns.
+- **Hamis pozitívok:** Authorized vulnerability assessments., Threat hunters performing manual investigations., Automated cloud asset inventory scripts.
+- **MITRE ATT&CK:** `T1596`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

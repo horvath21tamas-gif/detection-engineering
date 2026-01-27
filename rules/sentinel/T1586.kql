@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\hydra.exe", "*\medusa.exe", "*\patator.exe", "*\ncrack.exe")) or (ProcessCommandLine in ("* -P *", "* -L *", "* -C *"))) or ((FolderPath in ("*\aws.exe", "*\az.exe", "*\mgc.exe")) or (ProcessCommandLine in ("* update-login-profile*", "* delete-virtual-mfa-device*", "* authentication-method-create*", "* ad user update --password*")))) and (not ((User in ("*adm_helpdesk*", "*svc_iam_provisioner*", "*cloud_platform_admin*")) and FolderPath contains "\ManagementConsole\")) and (not (ParentProcessName in ("*\code.exe", "*\devenv.exe", "*\idea64.exe"))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_brute_force_tools"))

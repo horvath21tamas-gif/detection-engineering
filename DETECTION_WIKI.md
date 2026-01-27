@@ -50,6 +50,7 @@
 - [High-Fidelity Web Service Acquisition and Provisioning - T1583.006](#high-fidelity-web-service-acquisition-and-provisioning---t1583006)
 - [High-Fidelity Serverless Infrastructure Provisioning - T1583.007](#high-fidelity-serverless-infrastructure-provisioning---t1583007)
 - [High-Fidelity Cloud Account Acquisition and Bootstrap - T1583.008](#high-fidelity-cloud-account-acquisition-and-bootstrap---t1583008)
+- [High-Fidelity Account Compromise and Identity Manipulation - T1586](#high-fidelity-account-compromise-and-identity-manipulation---t1586)
 - [High-Fidelity Identity Enumeration via Authentication Endpoints](#high-fidelity-identity-enumeration-via-authentication-endpoints)
 - [Credential Enumeration via Authentication API (High Confidence)](#credential-enumeration-via-authentication-api-(high-confidence))
 - [High-Confidence OSINT Identity Enumeration via Public APIs](#high-confidence-osint-identity-enumeration-via-public-apis)
@@ -822,6 +823,21 @@
 - **Leírás:** Detects the acquisition and initial configuration of cloud accounts.  Targets account-level bootstrapping (credential setup, IAM user creation)  and automated identity harvesting from non-standard processes,  while filtering out authorized DevOps pipelines.
 - **Hamis pozitívok:** Cloud engineers configuring their local environment for the first time., Development teams debugging cloud integration locally in authorized IDEs., Legitimate automated billing or auditing scripts run outside of CI/CD.
 - **MITRE ATT&CK:** `008`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Account Compromise and Identity Manipulation - T1586
+- **Azonosító:** `T1586.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects actions indicative of account compromise and takeover (ATO), such as  unauthorized MFA modification, suspicious login profile updates, and automated  credential testing from non-standard administrative processes.
+- **Hamis pozitívok:** Authorized Red Team exercises or internal penetration testing., Emergency account recovery by senior IT staff via CLI., Automated identity lifecycle management scripts (if not using the service account).
+- **MITRE ATT&CK:** `T1586`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

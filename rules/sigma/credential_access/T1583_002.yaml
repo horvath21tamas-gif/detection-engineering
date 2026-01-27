@@ -1,0 +1,71 @@
+title: High-Fidelity Automated Domain Registration & Acquisition - T1583.002
+id: fc579690-6cf8-44ef-b0b9-81116278369b
+status: stable
+description: >
+  Detects automated domain registration through registrar APIs and specialized 
+  provisioning tools. Focuses on programmatic acquisition via curl/python 
+  while filtering out authorized IT infrastructure management (Certbot, Terraform).
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1583/002/
+tags:
+  - attack.resource_development
+  - attack.t1583.002
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_api_acquisition:
+    - Image|endswith:
+        - '\curl.exe'
+        - '\wget.exe'
+        - '\python.exe'
+        - '\pwsh.exe'
+    - CommandLine|contains:
+        - 'api.namecheap.com'
+        - 'api.godaddy.com'
+        - 'api.registrar.eu'
+        - 'freenom.com/api'    
+        - 'dot.tk'             
+
+  selection_specialized_tools:
+    - Image|endswith:
+        - '\domain-manager.exe'
+        - '\bulky-domain.exe'
+        - '\tld-scanner.exe'
+    - CommandLine|contains:
+        - 'register-domain'
+        - 'purchase-domain'
+        - '--check-availability'
+
+  filter_cert_management:
+    - Image|contains:
+        - '\certbot\'
+        - '\acme.sh\'
+        - '\win-acme.exe'
+    - CommandLine|contains:
+        - '_acme-challenge'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_specialized_tools
+
+  filter_authorized_infra:
+    User|contains:
+      - 'svc_terraform'
+      - 'adm_infra_deploy'
+    Image|contains:
+      - '\Program Files\Terraform\'
+
+  filter_dev_context:
+    ParentImage|endswith:
+      - '\code.exe'
+      - '\devenv.exe'
+
+  condition: (selection_api_acquisition or selection_specialized_tools) and not filter_cert_management and not filter_interactive and not filter_authorized_infra and not filter_dev_context
+falsepositives:
+  - Automated domain renewals by IT department.
+  - SEO teams using auditing tools for brand protection.
+  - Security team performing authorized domain-squatting research.
+level: high

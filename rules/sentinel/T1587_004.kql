@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\csc.exe", "*\vbc.exe", "*\cl.exe", "*\gcc.exe")) or (ProcessCommandLine in ("*/target:library*", "*/unsafe*"))) and (ProcessCommandLine in ("*VirtualAllocEx*", "*WriteProcessMemory*", "*CreateRemoteThread*", "*QueueUserAPC*", "*NtMapViewOfSection*", "*0x90,0x90,0x90*", "*shellcode*")) and (ProcessCommandLine in ("*\Users\Public\*", "*\AppData\Local\Temp\*", "*C:\Windows\Temp\*", "*\PerfLogs\*", "*\Temporary ASP.NET Files\*"))) and (not ((User in ("*svc_jenkins*", "*svc_deploy*", "*adm_build_master*")) or (FolderPath in ("*\Microsoft Visual Studio\*", "*\MSBuild\*", "*\actions-runner\*")))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_exploit_primitives"))

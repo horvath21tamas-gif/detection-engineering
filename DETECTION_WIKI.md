@@ -63,6 +63,9 @@
 - [High-Fidelity Email Forwarding Rule Manipulation - T1586.002](#high-fidelity-email-forwarding-rule-manipulation---t1586002)
 - [High-Fidelity Cloud Account Takeover and Persistence - T1586.003](#high-fidelity-cloud-account-takeover-and-persistence---t1586003)
 - [High-Fidelity Offensive Capability Development and Compilation - T1587](#high-fidelity-offensive-capability-development-and-compilation---t1587)
+- [High-Fidelity Unauthorized Code Signing Capability Development - T1587.002](#high-fidelity-unauthorized-code-signing-capability-development---t1587002)
+- [High-Fidelity Unauthorized Digital Certificate Development - T1587.003](#high-fidelity-unauthorized-digital-certificate-development---t1587003)
+- [High-Fidelity Exploit Development and Compilation Detection - T1587.004](#high-fidelity-exploit-development-and-compilation-detection---t1587004)
 - [High-Fidelity Identity Enumeration via Authentication Endpoints](#high-fidelity-identity-enumeration-via-authentication-endpoints)
 - [Credential Enumeration via Authentication API (High Confidence)](#credential-enumeration-via-authentication-api-(high-confidence))
 - [High-Confidence OSINT Identity Enumeration via Public APIs](#high-confidence-osint-identity-enumeration-via-public-apis)
@@ -1030,6 +1033,51 @@
 - **Leírás:** Detects the development and compilation of offensive tools by monitoring  for specific C2 framework build arguments, unauthorized use of code packers,  and certificate manipulation outside of verified CI/CD pipelines.
 - **Hamis pozitívok:** Legitimate developers working on obfuscated internal tools., Software installation processes that compile components on the fly (e.g., .NET optimization)., Security analysts performing authorized research in lab environments.
 - **MITRE ATT&CK:** `T1587`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Unauthorized Code Signing Capability Development - T1587.002
+- **Azonosító:** `T1587_002.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the creation of code-signing certificates and the manual signing of binaries  by monitoring for specific OIDs (1.3.6.1.5.5.7.3.3) and signing tools used outside  of verified CI/CD pipelines or Windows SDK paths.
+- **Hamis pozitívok:** Authorized developers signing internal drivers or legacy applications., Security tools (e.g., AV/EDR) generating local certificates for inspection., IT admins generating self-signed certs for internal lab testing.
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Unauthorized Digital Certificate Development - T1587.003
+- **Azonosító:** `T1587_003.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized digital certificate and private key generation by monitoring  for high-risk command-line arguments (self-signing, key exfiltration) occurring  in non-standard directories or by unauthorized users.
+- **Hamis pozitívok:** Developers testing SSL/TLS logic in local temp folders., Automated deployment scripts (Ansible/Puppet) creating local certs., Third-party software installers generating self-signed certs during setup.
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Exploit Development and Compilation Detection - T1587.004
+- **Azonosító:** `T1587_004.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects indicators of exploit development by monitoring for the compilation of  source code containing memory injection primitives and shellcode-related  arguments, specifically when executed from non-standard or temporary directories.
+- **Hamis pozitívok:** Security software (e.g., EDR/AV) components that compile filters on the fly., Legitimate custom .NET applications that use 'unsafe' code for performance., Authorized vulnerability scanning tools that deploy temporary agents.
+- **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

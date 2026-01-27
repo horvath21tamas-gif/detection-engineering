@@ -1,0 +1,69 @@
+title: High-Fidelity Compromised Infrastructure and Resource Abuse - T1584
+id: 8d593377-5197-4ed9-953d-56fc54591f84
+status: stable
+description: >
+  Detects indicators of compromised infrastructure, specifically focusing on 
+  web server process subversion (Web Shells), unauthorized reverse proxies, 
+  and tunneling tools executed from non-standard administrative contexts.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1584/
+tags:
+  - attack.resource_development
+  - attack.t1584
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_web_abuse:
+    ParentImage|endswith:
+      - '\w3wp.exe'           
+      - '\httpd.exe'         
+      - '\nginx.exe'
+      - '\php-cgi.exe'
+      - '\tomcat.exe'
+    Image|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\whoami.exe'        
+      - '\net.exe'            
+      - '\nltest.exe'        
+
+  selection_tunnel_tools:
+    - Image|endswith:
+        - '\chisel.exe'      
+        - '\frpc.exe'        
+        - '\ngrok.exe'       
+        - '\gost.exe'        
+        - '\nps.exe'          
+    - CommandLine|contains:
+        - ' -proxy '
+        - ' -tunnel '
+        - ' -secret '         
+
+  filter_authorized_admin:
+    User|contains:
+      - 'svc_monitoring'
+      - 'adm_sysadmin_deploy'
+    Image|contains:
+      - '\Windows\System32\OpenSSH\' 
+      - '\Program Files\Datadog\'
+
+  filter_dev_context:
+    ParentImage|endswith:
+      - '\code.exe'        
+    CommandLine|contains:
+      - 'localhost'
+      - '127.0.0.1'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_tunnel_tools
+
+  condition: (selection_web_abuse or selection_tunnel_tools) and not filter_authorized_admin and not filter_dev_context and not filter_interactive
+falsepositives:
+  - Penetration testing or Red Team exercises.
+  - Developers using Chisel/Ngrok for authorized remote debugging.
+  - Complex web applications that legitimately call system commands (rare, check app logic).
+level: high

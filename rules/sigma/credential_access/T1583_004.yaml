@@ -1,0 +1,64 @@
+title: High-Fidelity Serverless Infrastructure Provisioning - T1583.004
+id: 789d419f-d839-42d0-a543-d1b7b689c9a3
+status: stable
+description: >
+  Detects the automated acquisition and provisioning of serverless infrastructure 
+  (AWS Lambda, Azure Functions, GCP Functions). Focuses on CLI-based creation 
+  and critical configuration changes while isolating authorized CI/CD pipelines 
+  and interactive developer IDE contexts.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1583/004/
+tags:
+  - attack.resource_development
+  - attack.t1583.004
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_serverless_tools:
+    - Image|endswith:
+        - '\sls.exe'          
+        - '\sam.exe'          
+        - '\func.exe'         
+        - '\serverless.exe'
+    - CommandLine|contains:
+        - ' deploy'
+        - ' create-function'
+        - ' functions deploy' 
+        - ' invoke'           
+
+  selection_iac_serverless:
+    Image|endswith:
+      - '\terraform.exe'
+      - '\pulumi.exe'
+    CommandLine|contains:
+      - 'aws_lambda_function'
+      - 'azurerm_function_app'
+      - 'google_cloudfunctions_function'
+
+  filter_authorized_pipelines:
+    - User|contains:
+        - 'svc_jenkins'
+        - 'svc_github_actions'
+        - 'adm_devops_deploy'
+    - Image|contains:
+        - '\Program Files\Terraform\'
+        - '\actions-runner\'
+
+  filter_dev_context:
+    ParentImage|endswith:
+      - '\code.exe'         
+      - '\devenv.exe'       
+      - '\idea64.exe'        
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_serverless_tools
+
+  condition: (selection_serverless_tools or selection_iac_serverless) and not filter_authorized_pipelines and not filter_dev_context and not filter_interactive
+falsepositives:
+  - Authorized developers performing manual serverless deployments for debugging.
+  - Automated maintenance scripts that rotate function secrets or update env vars.
+level: high

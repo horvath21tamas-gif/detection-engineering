@@ -1,0 +1,67 @@
+title: High-Fidelity Serverless Function Subversion - T1584.004
+id: e3e11911-3998-4dfb-b9eb-34b0d011bcb6
+status: stable
+description: >
+  Detects unauthorized modification of serverless functions (Lambda, Azure Functions, GCP)
+  by focusing on high-risk parameters like layer injection and environment variable
+  manipulation, while strictly filtering for authorized CI/CD pipeline service accounts.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1584/004/
+tags:
+  - attack.resource_development
+  - attack.t1584.004
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_serverless_cli:
+    - Image|endswith:
+        - '\aws.exe'
+        - '\az.exe'
+        - '\gcloud.exe'
+        - '\sam.exe'
+        - '\sls.exe'
+    - CommandLine|contains:
+        - 'update-function-configuration'
+        - 'update-function-code'
+        - 'functionapp config set'
+        - 'functions deploy'
+        - 'lambda publish-layer-version' 
+
+  selection_high_risk_params:
+    CommandLine|contains:
+      - '--layers'           
+      - '--variables'       
+      - '--environment'     
+      - '--image-uri'        
+      - '--role'             
+
+  filter_authorized_source:
+    - User|contains:
+        - 'svc_deploy'
+        - 'svc_pipeline'
+        - 'github_actions'
+    - Image|contains:
+        - '\actions-runner\'
+        - '\Jenkins\'
+        - '\AzureDevOps\'
+
+  filter_dev_sandbox:
+    CommandLine|contains:
+      - '--stage dev'
+      - '--stage test'
+      - 'sandbox'
+      - 'local-test'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_high_risk_params
+
+  condition: (selection_serverless_cli and selection_high_risk_params) and not filter_authorized_source and not filter_dev_sandbox and not filter_interactive
+falsepositives:
+  - Emergency manual hotfix by a senior Cloud Architect from a jump-server.
+  - Authorized security testing/red teaming focusing on FaaS.
+  - Initial setup of serverless infrastructure before CI/CD is established.
+level: high

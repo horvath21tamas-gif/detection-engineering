@@ -1,0 +1,68 @@
+title: High-Fidelity VPS Control and Tunneling - T1584.007
+id: 28078ea7-eab7-48dd-a24f-fa2fa7e70820
+status: stable
+description: >
+  Detects unauthorized VPS manipulation by identifying critical lifecycle changes 
+  (SSH key injection, firewall opening) and the execution of reverse tunneling tools 
+  from non-authorized administrative contexts.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1584/007/
+tags:
+  - attack.resource_development
+  - attack.t1584.007
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_vps_control:
+    - Image|endswith:
+        - '\aws.exe'          
+        - '\az.exe'           
+        - '\doctl.exe'        
+        - '\gcloud.exe'       
+    - CommandLine|contains:
+        - 'authorize-security-group-ingress' 
+        - 'add-metadata'                     
+        - 'vm user set'                     
+        - 'instance-templates create'       
+        - 'network-security-groups rule create'
+
+  selection_tunneling:
+    - Image|endswith:
+        - '\chisel.exe'
+        - '\frpc.exe'
+        - '\gost.exe'
+        - '\nps.exe'
+    - CommandLine|contains:
+        - ' client '           
+        - ' -secret '         
+        - ' -proxy '
+        - ' R:'               
+
+  filter_authorized_infra:
+    - User|contains:
+        - 'svc_terraform'
+        - 'svc_ansible'
+        - 'adm_cloud_infra'
+    - Image|contains:
+        - '\Terraform\'
+        - '\Ansible\'
+
+  filter_dev_testing:
+    CommandLine|contains:
+      - 'sandbox'
+      - 'test-env'
+      - '127.0.0.1'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_vps_control
+
+  condition: (selection_vps_control or selection_tunneling) and not filter_authorized_infra and not filter_dev_testing and not filter_interactive
+falsepositives:
+  - Cloud engineers performing emergency manual network troubleshooting.
+  - Legitimate automated scaling scripts not yet in the service account whitelist.
+  - Authorized Red Team exercises.
+level: high

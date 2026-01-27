@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 14:00:15`
+**Utolsó frissítés:** `2026-01-27 14:14:55`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 106 | 100% |
-| Splunk (SPL) | 106 | 100.0% |
-| Microsoft Sentinel (KQL) | 106 | 100.0% |
-| QRadar (AQL) | 63 | 59.4% |
-| Elastic (KQL/EQL) | 106 | 100.0% |
-| RSA NetWitness | 106 | 100.0% |
+| Sigma (Forrás) | 108 | 100% |
+| Splunk (SPL) | 108 | 100.0% |
+| Microsoft Sentinel (KQL) | 108 | 100.0% |
+| QRadar (AQL) | 63 | 58.3% |
+| Elastic (KQL/EQL) | 108 | 100.0% |
+| RSA NetWitness | 108 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -82,6 +82,7 @@
 | T1586.001 | HIGH | High-Fidelity Automated Social Media Manipulation - T1586.001 |
 | T1586.002 | HIGH | High-Fidelity Email Forwarding Rule Manipulation - T1586.002 |
 | T1586.003 | HIGH | High-Fidelity Cloud Account Takeover and Persistence - T1586.003 |
+| T1587 | HIGH | High-Fidelity Offensive Capability Development and Compilation - T1587 |
 | T1589 | HIGH | High-Confidence OSINT Identity Enumeration via Public APIs, High-Fidelity Identity Enumeration via Authentication Endpoints, Targeted OSINT Enumeration of Open Websites and Domains, Credential Enumeration via Authentication API (High Confidence) |
 | T1589.001 | HIGH | Credential Enumeration via Authentication API (High Confidence) |
 | T1589.002 | HIGH | High-Confidence OSINT Identity Enumeration via Public APIs |

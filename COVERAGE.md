@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 10:14:16`
+**Utolsó frissítés:** `2026-01-27 10:19:11`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 78 | 100% |
-| Splunk (SPL) | 78 | 100.0% |
-| Microsoft Sentinel (KQL) | 78 | 100.0% |
-| QRadar (AQL) | 63 | 80.8% |
-| Elastic (KQL/EQL) | 78 | 100.0% |
-| RSA NetWitness | 78 | 100.0% |
+| Sigma (Forrás) | 79 | 100% |
+| Splunk (SPL) | 79 | 100.0% |
+| Microsoft Sentinel (KQL) | 79 | 100.0% |
+| QRadar (AQL) | 63 | 79.7% |
+| Elastic (KQL/EQL) | 79 | 100.0% |
+| RSA NetWitness | 79 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -90,6 +90,7 @@
 | T1596.001 | HIGH | High-Fidelity WHOIS Database Reconnaissance - T1596.001 |
 | T1596.003 | HIGH | High-Fidelity Passive DNS Reconnaissance - T1597.003 |
 | T1596.004 | HIGH | High-Fidelity Digital Certificate Reconnaissance - T1596.004 |
+| T1596.005 | HIGH | High-Fidelity IP Infrastructure Reconnaissance - T1596.005 |
 | T1597 | HIGH | High-Fidelity Victim-Owned Website Reconnaissance - T1597 |
 | T1597.001 | HIGH | High-Fidelity Domain Infrastructure Enumeration - T1597.001 |
 | T1597.002 | HIGH | High-Fidelity Secret Hunting in Code Repositories - T1597.002 |

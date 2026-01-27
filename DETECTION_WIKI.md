@@ -70,6 +70,7 @@
 - [High-Fidelity WHOIS Database Reconnaissance - T1596.001](#high-fidelity-whois-database-reconnaissance---t1596001)
 - [High-Fidelity Passive DNS Reconnaissance - T1597.003](#high-fidelity-passive-dns-reconnaissance---t1597003)
 - [High-Fidelity Digital Certificate Reconnaissance - T1596.004](#high-fidelity-digital-certificate-reconnaissance---t1596004)
+- [High-Fidelity IP Infrastructure Reconnaissance - T1596.005](#high-fidelity-ip-infrastructure-reconnaissance---t1596005)
 - [High-Fidelity Victim-Owned Website Reconnaissance - T1597](#high-fidelity-victim-owned-website-reconnaissance---t1597)
 - [High-Fidelity Domain Infrastructure Enumeration - T1597.001](#high-fidelity-domain-infrastructure-enumeration---t1597001)
 - [High-Fidelity Secret Hunting in Code Repositories - T1597.002](#high-fidelity-secret-hunting-in-code-repositories---t1597002)
@@ -1103,6 +1104,21 @@
 - **Leírás:** Detects automated reconnaissance targeting Digital Certificates and CT logs.  Focuses on programmatic CLI patterns (API-based scraping) while filtering  out legitimate system-level certificate validation and browser traffic.
 - **Hamis pozitívok:** DevOps automation for SSL certificate renewal (e.g., ACME/Let's Encrypt)., Internal PKI health checks performed by network admins., Security analysts performing authorized external audits.
 - **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity IP Infrastructure Reconnaissance - T1596.005
+- **Azonosító:** `T1596_005.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects automated reconnaissance of IP address metadata. Focuses on specialized  OSINT tools (Shodan, GreyNoise, Censys) and CLI-based API harvesting while  filtering out routine network troubleshooting, browser traffic, and EDR noise.
+- **Hamis pozitívok:** Security analysts manually investigating an IP address via CLI., Authorized vulnerability management tools performing asset inventory., IT automation scripts verifying public-facing service exposure.
+- **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

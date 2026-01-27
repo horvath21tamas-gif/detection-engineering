@@ -1,0 +1,62 @@
+title: High-Fidelity Unauthorized Code Signing Capability Development - T1587.002
+id: f8fd8d9e-3f0a-4da6-83e5-8e45e12a9098
+status: stable
+description: >
+  Detects the creation of code-signing certificates and the manual signing of binaries 
+  by monitoring for specific OIDs (1.3.6.1.5.5.7.3.3) and signing tools used outside 
+  of verified CI/CD pipelines or Windows SDK paths.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1587/002/
+tags:
+  - attack.resource_development
+  - attack.t1587.002
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_cert_gen:
+    - Image|endswith:
+        - '\openssl.exe'
+        - '\makecert.exe'
+        - '\certutil.exe'
+    - CommandLine|contains:
+        - '1.3.6.1.5.5.7.3.3'  
+        - ' -eku '            
+        - ' -pe '              
+        - ' -cy authority'     
+
+  selection_binary_signing:
+    - Image|endswith:
+        - '\signtool.exe'
+        - '\osslsigncode.exe'
+    - CommandLine|contains:
+        - ' sign '
+        - ' /f '               
+        - ' /p '               
+
+  filter_authorized_build:
+    - User|contains:
+        - 'svc_jenkins'
+        - 'svc_code_signer'
+        - 'adm_build_master'
+    - Image|contains:
+        - '\Program Files (x86)\Windows Kits\' 
+        - '\actions-runner\'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_cert_gen
+
+  filter_web_certs:
+    CommandLine|contains:
+      - '1.3.6.1.5.5.7.3.1' # Server Auth
+      - '1.3.6.1.5.5.7.3.2' # Client Auth
+
+  condition: (selection_cert_gen or selection_binary_signing) and not filter_authorized_build and not filter_interactive and not filter_web_certs
+falsepositives:
+  - Authorized developers signing internal drivers or legacy applications.
+  - Security tools (e.g., AV/EDR) generating local certificates for inspection.
+  - IT admins generating self-signed certs for internal lab testing.
+level: high

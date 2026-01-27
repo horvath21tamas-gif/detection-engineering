@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 07:05:24`
+**Utolsó frissítés:** `2026-01-27 07:11:54`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 60 | 100% |
-| Splunk (SPL) | 60 | 100.0% |
-| Microsoft Sentinel (KQL) | 60 | 100.0% |
-| QRadar (AQL) | 58 | 96.7% |
-| Elastic (KQL/EQL) | 60 | 100.0% |
-| RSA NetWitness | 60 | 100.0% |
+| Sigma (Forrás) | 61 | 100% |
+| Splunk (SPL) | 61 | 100.0% |
+| Microsoft Sentinel (KQL) | 61 | 100.0% |
+| QRadar (AQL) | 58 | 95.1% |
+| Elastic (KQL/EQL) | 61 | 100.0% |
+| RSA NetWitness | 61 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -68,6 +68,7 @@
 | T1590 | HIGH | Network Reconnaissance with High Port Diversity |
 | T1590.001 | MEDIUM | Professional IP Infrastructure Reconnaissance - T1590.001 |
 | T1590.002 | HIGH | Advanced DNS Infrastructure Reconnaissance - T1590.002 |
+| T1590.003 | HIGH | Advanced Network Trust Dependencies Reconnaissance - T1590.003 |
 | T1590.004 | HIGH | Advanced Certificate Information Reconnaissance - T1590.004 |
 | T1590.005 | HIGH | Advanced Cloud Infrastructure Reconnaissance - T1590.005 |
 | T1590.006 | HIGH | Advanced Victim Web Page Info Reconnaissance - T1590.006 |

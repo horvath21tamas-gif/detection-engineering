@@ -48,6 +48,7 @@
 - [Network Reconnaissance with High Port Diversity](#network-reconnaissance-with-high-port-diversity)
 - [Professional IP Infrastructure Reconnaissance - T1590.001](#professional-ip-infrastructure-reconnaissance---t1590001)
 - [Advanced DNS Infrastructure Reconnaissance - T1590.002](#advanced-dns-infrastructure-reconnaissance---t1590002)
+- [Advanced Network Trust Dependencies Reconnaissance - T1590.003](#advanced-network-trust-dependencies-reconnaissance---t1590003)
 - [Advanced Certificate Information Reconnaissance - T1590.004](#advanced-certificate-information-reconnaissance---t1590004)
 - [Advanced Cloud Infrastructure Reconnaissance - T1590.005](#advanced-cloud-infrastructure-reconnaissance---t1590005)
 - [Advanced Victim Web Page Info Reconnaissance - T1590.006](#advanced-victim-web-page-info-reconnaissance---t1590006)
@@ -756,6 +757,21 @@
 - **Leírás:** Detects systematic DNS reconnaissance. It reduces false positives by filtering  legitimate single-host lookups and focusing on infrastructure-wide enumeration  attempts like Zone Transfers or specific record harvesting.
 - **Hamis pozitívok:** High-level network troubleshooting by Domain Admins, Automated IT inventory or audit scripts
 - **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Advanced Network Trust Dependencies Reconnaissance - T1590.003
+- **Azonosító:** `T1590_003.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic discovery of network trust relationships and shared resources.  It minimizes noise by filtering standard GPO-driven drive mappings and focused  on high-intent enumeration commands like nltest domain trusts and remote session listing.
+- **Hamis pozitívok:** System administrators auditing domain trusts., Legacy login scripts mapping drives on old workstations., Automated security assessment tools (authorized).
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

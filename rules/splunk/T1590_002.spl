@@ -1,0 +1,1 @@
+CommandLine IN ("* -type=AXFR*", "* -query=AXFR*", "* -type=ANY*", "* -type=SOA*", "* -type=TXT*", "*ls -d*", "* -q=srv*") OR (Image IN ("*\\dig.exe", "*\\host.exe", "*\\dnscmd.exe") CommandLine IN ("* /enumzones*", "* /zoneprint*")) NOT CommandLine="*nslookup.exe*" NOT (User IN ("*svc_monitoring*", "*AD_Sync_Account*"))

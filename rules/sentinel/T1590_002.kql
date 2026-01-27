@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("* -type=AXFR*", "* -query=AXFR*", "* -type=ANY*", "* -type=SOA*", "* -type=TXT*", "*ls -d*", "* -q=srv*")) or ((FolderPath in ("*\dig.exe", "*\host.exe", "*\dnscmd.exe")) and (ProcessCommandLine in ("* /enumzones*", "* /zoneprint*")))) and (not ProcessCommandLine contains "nslookup.exe") and (not (User in ("*svc_monitoring*", "*AD_Sync_Account*")))

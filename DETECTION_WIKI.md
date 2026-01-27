@@ -66,6 +66,7 @@
 - [High-Fidelity Social Media Entity Harvesting - T1593.001](#high-fidelity-social-media-entity-harvesting---t1593001)
 - [High-Fidelity Automated Search Engine Reconnaissance - T1593.002](#high-fidelity-automated-search-engine-reconnaissance---t1593002)
 - [High-Fidelity Social Media Entity Harvesting - T1593.003](#high-fidelity-social-media-entity-harvesting---t1593003)
+- [High-Fidelity Information Repository Reconnaissance - T1594](#high-fidelity-information-repository-reconnaissance---t1594)
 - [High-Fidelity Active Scanning Detection (Behavior-Based)](#high-fidelity-active-scanning-detection-(behavior-based))
 - [High-Fidelity External IP Block Scanning Detection](#high-fidelity-external-ip-block-scanning-detection)
 - [High-Confidence External Vulnerability Scanning Activity](#high-confidence-external-vulnerability-scanning-activity)
@@ -1049,6 +1050,21 @@
 - **Leírás:** Detects automated social media reconnaissance using headless browsers or specialized OSINT tools.  Focuses on identifying systematic data scraping while excluding legitimate browser-based user activity.
 - **Hamis pozitívok:** Authorized recruitment automation tools used by HR., Social media management platforms (Hootsuite, etc.)., QA engineers testing web applications with Selenium.
 - **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Information Repository Reconnaissance - T1594
+- **Azonosító:** `T1594.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects automated reconnaissance of public information repositories (GitHub, GitLab).  Focuses on specialized secret scanners and bulk API harvesting while filtering out  standard developer workflows (git clone/pull) and authorized security tools.
+- **Hamis pozitívok:** Security engineers performing authorized secret scanning., Developers using automated scripts for local repo management., Automated backup scripts for code repositories.
+- **MITRE ATT&CK:** `T1594`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 09:28:44`
+**Utolsó frissítés:** `2026-01-27 09:38:46`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 71 | 100% |
-| Splunk (SPL) | 71 | 100.0% |
-| Microsoft Sentinel (KQL) | 71 | 100.0% |
-| QRadar (AQL) | 62 | 87.3% |
-| Elastic (KQL/EQL) | 71 | 100.0% |
-| RSA NetWitness | 71 | 100.0% |
+| Sigma (Forrás) | 72 | 100% |
+| Splunk (SPL) | 72 | 100.0% |
+| Microsoft Sentinel (KQL) | 72 | 100.0% |
+| QRadar (AQL) | 62 | 86.1% |
+| Elastic (KQL/EQL) | 72 | 100.0% |
+| RSA NetWitness | 72 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -86,6 +86,7 @@
 | T1595.001 | HIGH | High-Fidelity External IP Block Scanning Detection |
 | T1595.002 | HIGH | High-Confidence External Vulnerability Scanning Activity |
 | T1595.003 | HIGH | Active Wordlist Scanning Against Authentication Endpoints |
+| T1597 | HIGH | High-Fidelity Victim-Owned Website Reconnaissance - T1597 |
 | T1598 | HIGH | Advanced Phishing for Info & Credential Harvesting - T1598 |
 | T1598.001 | HIGH | Advanced Spearphishing Link Redirection - T1598.001 |
 | T1598.002 | HIGH | Advanced BEC Mail & Financial Data Exfiltration - T1598.002 |

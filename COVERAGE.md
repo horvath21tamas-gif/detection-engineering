@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 09:01:58`
+**Utolsó frissítés:** `2026-01-27 09:08:49`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 66 | 100% |
-| Splunk (SPL) | 66 | 100.0% |
-| Microsoft Sentinel (KQL) | 66 | 100.0% |
-| QRadar (AQL) | 60 | 90.9% |
-| Elastic (KQL/EQL) | 66 | 100.0% |
-| RSA NetWitness | 66 | 100.0% |
+| Sigma (Forrás) | 67 | 100% |
+| Splunk (SPL) | 67 | 100.0% |
+| Microsoft Sentinel (KQL) | 67 | 100.0% |
+| QRadar (AQL) | 61 | 91.0% |
+| Elastic (KQL/EQL) | 67 | 100.0% |
+| RSA NetWitness | 67 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -86,3 +86,4 @@
 | T1595.001 | HIGH | High-Fidelity External IP Block Scanning Detection |
 | T1595.002 | HIGH | High-Confidence External Vulnerability Scanning Activity |
 | T1595.003 | HIGH | Active Wordlist Scanning Against Authentication Endpoints |
+| T1598 | HIGH | Advanced Phishing for Info & Credential Harvesting - T1598 |

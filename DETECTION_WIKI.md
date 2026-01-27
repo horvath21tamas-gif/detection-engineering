@@ -53,6 +53,7 @@
 - [Advanced Cloud Infrastructure Reconnaissance - T1590.005](#advanced-cloud-infrastructure-reconnaissance---t1590005)
 - [Advanced Victim Web Page Info Reconnaissance - T1590.006](#advanced-victim-web-page-info-reconnaissance---t1590006)
 - [Advanced Organizational Infrastructure Enumeration - T1591](#advanced-organizational-infrastructure-enumeration---t1591)
+- [Advanced Physical Location Infrastructure Enumeration - T1591.001](#advanced-physical-location-infrastructure-enumeration---t1591001)
 - [Advanced Business Relationship Information Discovery - T1591.002](#advanced-business-relationship-information-discovery---t1591002)
 - [High-Fidelity Host Information Reconnaissance Activity](#high-fidelity-host-information-reconnaissance-activity)
 - [High-Confidence Hardware Enumeration via Management Interfaces](#high-confidence-hardware-enumeration-via-management-interfaces)
@@ -834,6 +835,21 @@
 - **Leírás:** Detects systematic gathering of organizational metadata (OUs, groups, users).  It minimizes false positives by filtering known administrative consoles,  service account syncs, and focusing on non-standard execution contexts.
 - **Hamis pozitívok:** Identity Management synchronization tasks., IT audits or mass user updates., Vulnerability scanners with domain credentials.
 - **MITRE ATT&CK:** `T1591`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Advanced Physical Location Infrastructure Enumeration - T1591.001
+- **Azonosító:** `T1591_001.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic discovery of physical infrastructure data (floor plans, badge systems).  It filters out common office usage (Intranet, Visio) and focuses on CLI-based  bulk search operations which are characteristic of reconnaissance before physical  intrusion or social engineering.
+- **Hamis pozitívok:** Facilities staff or architects working on building plans., New employees searching for company maps via command line (unlikely)., Automated backup of CAD/Visio servers.
+- **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

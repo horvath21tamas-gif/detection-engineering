@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((ProcessCommandLine in ("*site_list*", "*adatkozpont*", "*telephely*", "*szekhaz*", "*belepteto*", "*kamera*", "*riaszto*")) or (ProcessCommandLine in ("*floorplan*", "*alaprajz*", "*building_layout*"))) or ((FolderPath in ("*\findstr.exe", "*\grep.exe", "*\where.exe", "*\7z.exe", "*\powershell.exe")) and (ProcessCommandLine in ("*.dwg*", "*.vsdx*", "*.kmz*", "*.kml*")))) and (not (ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe"))) and (not (FolderPath in ("*\acad.exe", "*\visio.exe", "*\GoogleEarth.exe"))) and (not (User in ("*facility*", "*phys_sec*", "*gondnoksag*", "*biztonsag*")))

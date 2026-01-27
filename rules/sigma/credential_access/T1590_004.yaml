@@ -1,0 +1,64 @@
+title: Advanced Certificate Information Reconnaissance - T1590.004
+id: 68cfe059-1674-45f1-b7a4-ce79fff2face
+status: stable
+description: >
+  Detects professional reconnaissance of digital certificates. Focuses on 
+  interactive command-line tools used to extract metadata from local stores 
+  or remote servers while filtering out automated signature verification.
+author: SOC Engineering
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1590/004/
+tags:
+  - attack.reconnaissance
+  - attack.t1590.004
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_manual_tools:
+    - Image|endswith: '\openssl.exe'
+      CommandLine|contains:
+        - ' s_client'        
+        - ' x509'            
+        - ' -text'           
+    - Image|endswith: '\certutil.exe'
+      CommandLine|contains:
+        - ' -dump'           
+        - ' -viewstore'     
+        - ' -user'           
+    - Image|endswith: '\powershell.exe'
+      CommandLine|contains:
+        - 'Get-ChildItem -Path Cert:' 
+
+ 
+  selection_sensitive_files:
+    CommandLine|contains:
+      - '.pfx'
+      - '.p12'
+      - '.pem'
+      - 'exportable' 
+
+  filter_validation:
+    CommandLine|contains:
+      - ' -verify'
+      - ' -v '
+      - ' -silent'
+
+  filter_trusted_parents:
+    ParentImage|endswith:
+      - '\services.exe'
+      - '\svchost.exe'
+      - '\CcmExec.exe'
+      - '\TrustedInstaller.exe'
+
+  filter_dev:
+    CommandLine|contains:
+      - 'localhost'
+      - 'dev.local'
+
+  condition: (selection_manual_tools or selection_sensitive_files) and not filter_validation and not filter_trusted_parents and not filter_dev
+falsepositives:
+  - Security engineers troubleshooting TLS issues.
+  - Automated certificate renewal agents (e.g., Let's Encroll).
+level: high

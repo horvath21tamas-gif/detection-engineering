@@ -1,0 +1,67 @@
+title: High-Fidelity Offensive Infrastructure Provisioning - T1583
+id: c3a988ac-4f29-4160-8ab8-05d105c0c849
+status: stable
+description: >
+  Detects the automated acquisition of infrastructure (VPS, Domains, Serverless) 
+  by monitoring for CLI-based provisioning tools and domain registration API calls. 
+  Filters focus on isolating authorized DevOps pipelines and developer environments.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1583/
+tags:
+  - attack.resource_development
+  - attack.t1583
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_infra_tools:
+    - Image|endswith:
+        - '\doctl.exe'      
+        - '\linode-cli.exe'
+        - '\vultr-cli.exe'
+        - '\terraform.exe'   
+        - '\pulumi.exe'
+    - CommandLine|contains:
+        - 'domain register'
+        - 'vps create'
+        - 'droplet create'
+        - 'compute instances create'
+
+  selection_api_provisioning:
+    - Image|endswith:
+        - '\curl.exe'
+        - '\wget.exe'
+        - '\python.exe'
+    - CommandLine|contains:
+        - 'api.namecheap.com'
+        - 'api.godaddy.com'
+        - 'freenom.com'       
+        - '/v2/droplets'     
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_infra_tools
+
+  filter_authorized_entities:
+    User|contains:
+      - 'svc_jenkins'
+      - 'adm_infra_deploy'
+      - 'terraform_worker'
+    Image|contains:
+      - '\Program Files\Terraform\'
+      - '\Program Files\GitLab-Runner\'
+
+  filter_dev_context:
+    ParentImage|endswith:
+      - '\code.exe'
+      - '\devenv.exe'
+      - '\idea64.exe'
+
+  condition: (selection_infra_tools or selection_api_provisioning) and not filter_interactive and not filter_authorized_entities and not filter_dev_context
+falsepositives:
+  - IT administrators testing Terraform scripts locally.
+  - Authorized developers managing secondary testing domains.
+  - Automated billing or monitoring scripts that use VPS APIs.
+level: high

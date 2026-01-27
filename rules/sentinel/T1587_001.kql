@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\csc.exe", "*\vbc.exe", "*\go.exe", "*\nasm.exe", "*\rustc.exe")) and (ProcessCommandLine in ("*IsDebuggerPresent*", "*CheckRemoteDebuggerPresent*", "*GetTickCount*", "*Sleep(*", "*TerminateProcess*", "*VirtualAllocEx*", "*-ldflags=\"-s -w\"*")) and (ProcessCommandLine in ("*\Users\Public\*", "*\AppData\Local\Temp\*", "*C:\Windows\Temp\*", "*\PerfLogs\*", "*\ProgramData\*"))) and (not ((User in ("*svc_jenkins*", "*svc_github_actions*", "*adm_build_ops*")) or (FolderPath in ("*\Microsoft Visual Studio\*", "*\MSBuild\*", "*\actions-runner\*")))) and (not ((ParentProcessName in ("*\code.exe", "*\devenv.exe", "*\explorer.exe")) and condition =~ "not selection_malware_dna")) and (not ParentProcessName endswith "\mscorsvw.exe")

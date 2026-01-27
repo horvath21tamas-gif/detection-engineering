@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 14:21:28`
+**Utolsó frissítés:** `2026-01-27 14:37:20`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 111 | 100% |
-| Splunk (SPL) | 111 | 100.0% |
-| Microsoft Sentinel (KQL) | 111 | 100.0% |
-| QRadar (AQL) | 64 | 57.7% |
-| Elastic (KQL/EQL) | 111 | 100.0% |
-| RSA NetWitness | 111 | 100.0% |
+| Sigma (Forrás) | 112 | 100% |
+| Splunk (SPL) | 112 | 100.0% |
+| Microsoft Sentinel (KQL) | 112 | 100.0% |
+| QRadar (AQL) | 64 | 57.1% |
+| Elastic (KQL/EQL) | 112 | 100.0% |
+| RSA NetWitness | 112 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -83,6 +83,7 @@
 | T1586.002 | HIGH | High-Fidelity Email Forwarding Rule Manipulation - T1586.002 |
 | T1586.003 | HIGH | High-Fidelity Cloud Account Takeover and Persistence - T1586.003 |
 | T1587 | HIGH | High-Fidelity Offensive Capability Development and Compilation - T1587 |
+| T1587.001 | CRITICAL | High-Fidelity Malware Development and Evasion Patterns - T1587.001 |
 | T1587.002 | HIGH | High-Fidelity Unauthorized Code Signing Capability Development - T1587.002 |
 | T1587.003 | HIGH | High-Fidelity Unauthorized Digital Certificate Development - T1587.003 |
 | T1587.004 | CRITICAL | High-Fidelity Exploit Development and Compilation Detection - T1587.004 |

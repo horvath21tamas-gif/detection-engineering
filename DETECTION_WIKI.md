@@ -63,6 +63,7 @@
 - [High-Fidelity Email Forwarding Rule Manipulation - T1586.002](#high-fidelity-email-forwarding-rule-manipulation---t1586002)
 - [High-Fidelity Cloud Account Takeover and Persistence - T1586.003](#high-fidelity-cloud-account-takeover-and-persistence---t1586003)
 - [High-Fidelity Offensive Capability Development and Compilation - T1587](#high-fidelity-offensive-capability-development-and-compilation---t1587)
+- [High-Fidelity Malware Development and Evasion Patterns - T1587.001](#high-fidelity-malware-development-and-evasion-patterns---t1587001)
 - [High-Fidelity Unauthorized Code Signing Capability Development - T1587.002](#high-fidelity-unauthorized-code-signing-capability-development---t1587002)
 - [High-Fidelity Unauthorized Digital Certificate Development - T1587.003](#high-fidelity-unauthorized-digital-certificate-development---t1587003)
 - [High-Fidelity Exploit Development and Compilation Detection - T1587.004](#high-fidelity-exploit-development-and-compilation-detection---t1587004)
@@ -1033,6 +1034,21 @@
 - **Leírás:** Detects the development and compilation of offensive tools by monitoring  for specific C2 framework build arguments, unauthorized use of code packers,  and certificate manipulation outside of verified CI/CD pipelines.
 - **Hamis pozitívok:** Legitimate developers working on obfuscated internal tools., Software installation processes that compile components on the fly (e.g., .NET optimization)., Security analysts performing authorized research in lab environments.
 - **MITRE ATT&CK:** `T1587`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Malware Development and Evasion Patterns - T1587.001
+- **Azonosító:** `T1587_001.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects custom malware development by identifying suspicious compiler execution  combined with evasion-related API strings, anti-analysis techniques,  and unauthorized build locations.
+- **Hamis pozitívok:** Security analysts developing internal testing tools., Legitimate installers that compile code during setup (e.g., .NET ngen)., Software protection/DRM developers using obfuscation.
+- **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

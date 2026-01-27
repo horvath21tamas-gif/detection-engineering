@@ -76,6 +76,7 @@
 | T1584.003 | CRITICAL | High-Fidelity Cloud Identity Subversion and Persistence - T1584.003 |
 | T1584.004 | HIGH | High-Fidelity Serverless Function Subversion - T1584.004 |
 | T1584.005 | HIGH | High-Fidelity Botnet Agent Persistence and Control - T1584.005 |
+| T1584.006 | HIGH | High-Fidelity Web Service and Cloud Storage Subversion - T1584.006 |
 | T1584.007 | HIGH | High-Fidelity VPS Control and Tunneling - T1584.007 |
 | T1586 | HIGH | High-Fidelity Account Compromise and Identity Manipulation - T1586 |
 | T1586.001 | HIGH | High-Fidelity Automated Social Media Manipulation - T1586.001 |

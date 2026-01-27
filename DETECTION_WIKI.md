@@ -56,6 +56,7 @@
 - [High-Fidelity Cloud Identity Subversion and Persistence - T1584.003](#high-fidelity-cloud-identity-subversion-and-persistence---t1584003)
 - [High-Fidelity Serverless Function Subversion - T1584.004](#high-fidelity-serverless-function-subversion---t1584004)
 - [High-Fidelity Botnet Agent Persistence and Control - T1584.005](#high-fidelity-botnet-agent-persistence-and-control---t1584005)
+- [High-Fidelity Web Service and Cloud Storage Subversion - T1584.006](#high-fidelity-web-service-and-cloud-storage-subversion---t1584006)
 - [High-Fidelity VPS Control and Tunneling - T1584.007](#high-fidelity-vps-control-and-tunneling---t1584007)
 - [High-Fidelity Account Compromise and Identity Manipulation - T1586](#high-fidelity-account-compromise-and-identity-manipulation---t1586)
 - [High-Fidelity Automated Social Media Manipulation - T1586.001](#high-fidelity-automated-social-media-manipulation---t1586001)
@@ -923,6 +924,21 @@
 - **Leírás:** Detects botnet agent activity by identifying suspicious process lineages  (e.g., LOLBins spawning from WMI), P2P bootstrap arguments, and known  DDoS tool patterns while filtering authorized IT management and P2P software.
 - **Hamis pozitívok:** Legitimate P2P-based software distribution (e.g., BranchCache, Delivery Optimization)., IT admins using WMI for authorized mass-configuration changes., Performance monitoring tools using Stratum-like protocols.
 - **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Web Service and Cloud Storage Subversion - T1584.006
+- **Azonosító:** `T1584_006.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized manipulation of web services and cloud storage by  monitoring for ACL changes (making buckets public), suspicious file types  being hosted (scripts/exes), and the use of third-party data transfer  tools (rclone) outside of authorized contexts.
+- **Hamis pozitívok:** Authorized developers updating static website assets (e.g., .js or .css files)., IT admins using rclone for one-time authorized data migration., Automated report generation uploading zip files to internal storage buckets.
+- **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

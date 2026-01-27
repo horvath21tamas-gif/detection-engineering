@@ -1,0 +1,75 @@
+title: High-Fidelity Web Service Acquisition and Provisioning - T1583.006
+id: 5c411e18-f4d4-49fe-a313-d6fd42ce4934
+status: stable
+description: >
+  Detects the acquisition and setup of web services (SaaS, Storage, Messaging) 
+  for offensive infrastructure. Focuses on command-line based storage provisioning 
+  (Rclone, AzCopy) and messaging API initialization (Slack/Discord/Telegram bots) 
+  from non-administrative or non-developer endpoints.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1583/006/
+tags:
+  - attack.resource_development
+  - attack.t1583.006
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_storage_provisioning:
+    - Image|endswith:
+        - '\rclone.exe'
+        - '\azcopy.exe'
+        - '\gsutil.exe'
+    - CommandLine|contains:
+        - ' config create'   
+        - ' mb '             
+        - ' storage buckets create'
+        - ' make-bucket'
+
+  selection_messaging_api:
+    - Image|endswith:
+        - '\curl.exe'
+        - '\wget.exe'
+        - '\python.exe'
+        - '\pwsh.exe'
+    - CommandLine|contains:
+        - 'api.slack.com/services/T'
+        - 'discord.com/api/webhooks' 
+        - 'api.telegram.org/bot'     
+        - 'github.com/settings/tokens' 
+
+  filter_known_apps:
+    - Image|endswith:
+        - '\OneDrive.exe'
+        - '\Dropbox.exe'
+        - '\googledrivesync.exe'
+    - Image|contains:
+        - '\Veeam\'
+
+  filter_authorized_automation:
+    User|contains:
+      - 'svc_backup'
+      - 'svc_deploy'
+      - 'adm_infra_deploy'
+    Image|contains:
+      - '\actions-runner\'
+      - '\Jenkins\'
+
+  filter_dev_context:
+    ParentImage|endswith:
+      - '\code.exe'         
+      - '\idea64.exe'        
+      - '\devenv.exe'       
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_storage_provisioning
+
+  condition: (selection_storage_provisioning or selection_messaging_api) and not filter_known_apps and not filter_authorized_automation and not filter_dev_context and not filter_interactive
+falsepositives:
+  - IT administrators performing one-time data migrations via Rclone.
+  - Developers testing messaging API integrations in local terminals.
+  - Marketing scripts uploading assets to cloud storage buckets.
+level: high

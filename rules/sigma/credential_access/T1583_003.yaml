@@ -1,0 +1,65 @@
+title: High-Fidelity Cloud Network (VPC) Provisioning - T1583.003
+id: 8c9b1a1d-d215-45a8-a647-8f1f4fe073c7
+status: stable
+description: >
+  Detects the acquisition and configuration of cloud networking (VPC). 
+  Focuses on identifying the creation of internet egress points and 
+  cross-network bridges from unauthorized endpoints, isolating automated 
+  CI/CD pipelines from manual or scripted local abuse.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1583/003/
+tags:
+  - attack.resource_development
+  - attack.t1583.003
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_network_ops:
+    - Image|endswith:
+        - '\aws.exe'
+        - '\az.exe'
+        - '\gcloud.exe'
+    - CommandLine|contains:
+        - ' create-vpc'
+        - ' create-internet-gateway'       
+        - ' create-vpc-peering-connection' 
+        - ' network vnet create'           
+        - ' compute networks create'       
+
+  selection_iac_network:
+    Image|endswith:
+      - '\terraform.exe'
+      - '\pulumi.exe'
+    CommandLine|contains:
+      - 'aws_vpc'
+      - 'aws_internet_gateway'
+      - 'aws_vpc_peering_connection'
+      - 'azurerm_virtual_network'
+      - 'google_compute_network'
+
+  filter_authorized_netops:
+    - User|contains:
+        - 'svc_terraform_network'
+        - 'adm_netops_deploy'
+    - Image|contains:
+        - '\Program Files\Terraform\'
+        - '\actions-runner\'
+
+  filter_dev_context:
+    ParentImage|endswith:
+      - '\code.exe'
+      - '\devenv.exe'
+      - '\idea64.exe'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_network_ops
+
+  condition: (selection_network_ops or selection_iac_network) and not filter_authorized_netops and not filter_dev_context and not filter_interactive
+falsepositives:
+  - Authorized network architects deploying new staging VPCs.
+  - Automated disaster recovery scripts rebuilding network stacks.
+level: high

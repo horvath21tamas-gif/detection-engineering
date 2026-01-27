@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("* p2p_bootstrap*", "* ddos_start*", "* stratum+tcp*", "* -irc *", "* -flood*")) or ((ParentProcessName in ("*\wmiprvse.exe", "*\scrcons.exe")) and (FolderPath in ("*\AppData\Local\Temp\*", "*\Users\Public\*")) and (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\certutil.exe")))) and (not ((FolderPath in ("*\Microsoft\ConfigMgr\*", "*\Altiris\*", "*\Tanium\*")) or (User in ("*svc_deploy*", "*svc_inventory*")))) and (not (FolderPath in ("*\Spotify\*", "*\Steam\*"))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_bot_behavior"))

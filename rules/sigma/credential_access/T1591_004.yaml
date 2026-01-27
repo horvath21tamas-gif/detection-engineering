@@ -1,0 +1,61 @@
+title: High-Fidelity Personnel Information Discovery - T1591.004
+id: 425219d2-2874-4e96-a6d1-6b23e30c17c9
+status: stable
+description: >
+  Detects suspicious, bulk extraction of employee data from Active Directory. 
+  Focuses on non-standard LDAP queries and broad PowerShell filters that 
+  deviate from routine administrative behavior.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1591/004/
+tags:
+  - attack.reconnaissance
+  - attack.t1591.004
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_broad_queries:
+    - CommandLine|contains:
+        - 'Get-ADUser -Filter *'
+        - 'Get-ADUser -Filter "Enabled -eq'
+        - 'Get-ADGroupMember -Identity "Domain Admins"'
+        - 'dsquery user -limit 0' # Korlátlan lekérdezés
+    - CommandLine|contains:
+        - 'net user /domain'
+        - 'net group /domain'
+
+  selection_ldap_patterns:
+    CommandLine|contains:
+      - '(&(objectCategory=person)(objectClass=user))'
+      - 'distinguishedName'
+      - 'userPrincipalName'
+      - 'samaccountname'
+
+  filter_known_automation:
+    - Image|contains:
+        - '\Lansweeper\'
+        - '\Tanium\'
+        - '\SCCM\'
+    - ParentImage|endswith:
+        - '\miiserver.exe'  
+        - '\Microsoft.IdentityManagement.Service.exe'
+
+  filter_admin_context:
+    - ParentImage|endswith:
+        - '\mmc.exe'
+        - '\ServerManager.exe'
+    - User: 'NT AUTHORITY\SYSTEM'
+
+  filter_local_queries:
+    CommandLine|contains:
+        - 'net user '
+    condition: not selection_broad_queries
+
+  condition: (selection_broad_queries or selection_ldap_patterns) and not filter_known_automation and not filter_admin_context
+falsepositives:
+  - Bulk user audits by internal compliance teams.
+  - New HR system integration testing.
+  - Complex AD reporting scripts by senior admins.
+level: high

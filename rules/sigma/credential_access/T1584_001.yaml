@@ -1,0 +1,63 @@
+title: High-Fidelity Domain Infrastructure Hijacking - T1584.001
+id: 7b53469f-9f67-4b79-b9ba-f7968894d5a8
+status: stable
+description: >
+  Detects unauthorized domain or subdomain hijacking by monitoring for 
+  critical DNS record types (NS, SOA) and mass record creation via 
+  Cloud Provider CLIs, while filtering for authorized DevOps automation.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1584/001/
+tags:
+  - attack.resource_development
+  - attack.t1584.001
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_domain_hijacking:
+    - Image|endswith:
+        - '\aws.exe'         
+        - '\az.exe'           
+        - '\flarectl.exe'  
+        - '\gcloud.exe'      
+    - CommandLine|contains:
+        - 'change-resource-record-sets'
+        - 'network dns record-sets create'
+        - 'dns record create'
+    - CommandLine|contains:
+        - 'NS'             
+        - 'SOA'            
+        - 'MX'              
+
+  selection_mass_subdomains:
+    CommandLine|contains:
+      - '--batch'
+      - '--file'
+      - 'transaction'
+
+  filter_authorized_automation:
+    - User|contains:
+        - 'svc_terraform'
+        - 'svc_deploy'
+        - 'adm_netops_infra'
+    - Image|contains:
+        - '\Terraform\'
+        - '\actions-runner\'
+
+  filter_ssl_challenge:
+    CommandLine|contains:
+      - 'TXT'
+      - '_acme-challenge'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_domain_hijacking
+
+  condition: (selection_domain_hijacking or selection_mass_subdomains) and not filter_authorized_automation and not filter_ssl_challenge and not filter_interactive
+falsepositives:
+  - Authorized network engineers performing bulk DNS migrations.
+  - Automated cloud-native services updating DNS (e.g., ExternalDNS in Kubernetes).
+  - Marketing automation creating new subdomains via authorized CLI.
+level: critical

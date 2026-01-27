@@ -1,0 +1,70 @@
+title: High-Fidelity Malware Development and Evasion Patterns - T1587.001
+id: e30b4562-53db-4cc6-96fb-95c4ca385c7a
+status: stable
+description: >
+  Detects custom malware development by identifying suspicious compiler execution 
+  combined with evasion-related API strings, anti-analysis techniques, 
+  and unauthorized build locations.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1587/001/
+tags:
+  - attack.resource_development
+  - attack.t1587.001
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_compilers:
+    - Image|endswith:
+        - '\csc.exe'           
+        - '\vbc.exe'            
+        - '\go.exe'             
+        - '\nasm.exe'           
+        - '\rustc.exe'          
+
+  selection_malware_dna:
+    CommandLine|contains:
+      - 'IsDebuggerPresent'     
+      - 'CheckRemoteDebuggerPresent'
+      - 'GetTickCount'          
+      - 'Sleep('              
+      - 'TerminateProcess'      
+      - 'VirtualAllocEx'       
+      - '-ldflags="-s -w"'      
+
+  selection_suspicious_paths:
+    CommandLine|contains:
+      - '\Users\Public\'
+      - '\AppData\Local\Temp\'
+      - 'C:\Windows\Temp\'
+      - '\PerfLogs\'
+      - '\ProgramData\'
+
+  filter_authorized_build:
+    - User|contains:
+        - 'svc_jenkins'
+        - 'svc_github_actions'
+        - 'adm_build_ops'
+    - Image|contains:
+        - '\Microsoft Visual Studio\'
+        - '\MSBuild\'
+        - '\actions-runner\'
+
+  filter_ide_context:
+    ParentImage|endswith:
+      - '\code.exe'
+      - '\devenv.exe'
+      - '\explorer.exe'
+    condition: not selection_malware_dna
+
+  filter_dotnet_ngen:
+    ParentImage|endswith: '\mscorsvw.exe'
+
+  condition: (selection_compilers and selection_malware_dna and selection_suspicious_paths) and not filter_authorized_build and not filter_ide_context and not filter_dotnet_ngen
+falsepositives:
+  - Security analysts developing internal testing tools.
+  - Legitimate installers that compile code during setup (e.g., .NET ngen).
+  - Software protection/DRM developers using obfuscation.
+level: critical

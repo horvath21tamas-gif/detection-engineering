@@ -1,0 +1,75 @@
+title: High-Fidelity Automated Search Engine Reconnaissance - T1593.002
+id: 320a1f32-d9fa-48c6-b00e-7034476dfa85
+status: stable
+description: >
+  Detects automated reconnaissance using search engines by monitoring for headless 
+  browser flags and systematic dorking patterns. Specifically filters out 
+  legitimate developer activity and interactive browser usage to minimize false positives.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1593/002/
+tags:
+  - attack.reconnaissance
+  - attack.t1593.002
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_specialized_tools:
+    - Image|endswith:
+        - '\pagodo.exe'      
+        - '\ghunt.exe'      
+        - '\dork-cli.exe'
+        - '\snakedork.exe'
+    - CommandLine|contains:
+        - 'google-dork'
+        - 'bing-scraper'
+
+  selection_automation_flags:
+    CommandLine|contains|all:
+      - '--headless'           
+      - 'webdriver'           
+    CommandLine|contains:
+      - 'google.com/search'
+      - 'bing.com/search'
+
+  selection_scripted_dorks:
+    - Image|endswith:
+        - '\curl.exe'
+        - '\wget.exe'
+        - '\python.exe'
+        - '\pwsh.exe'
+    - CommandLine|contains|all:
+        - 'site:'
+        - 'filetype:'         
+    - CommandLine|contains:
+        - 'intitle:"index of"'
+        - 'inurl:admin'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_specialized_tools
+
+  filter_developer_tools:
+    ParentImage|endswith:
+      - '\code.exe'
+      - '\devenv.exe'
+      - '\idea64.exe'
+    CommandLine|contains:
+      - 'msdn.microsoft.com'
+      - 'stackoverflow.com'
+      - 'github.com'
+
+  filter_browser_internals:
+    CommandLine|contains:
+      - '--type=renderer'
+      - '--type=utility'
+      - '--type=gpu-process'
+
+  condition: (selection_specialized_tools or (selection_automation_flags or selection_scripted_dorks)) and not filter_interactive and not filter_developer_tools and not filter_browser_internals
+falsepositives:
+  - SEO/Marketing tools performing automated ranking checks.
+  - Developers using CLI-based search for error code resolution.
+  - Vulnerability scanners (authorized).
+level: high

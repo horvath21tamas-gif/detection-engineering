@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\sherlock.exe", "*\theHarvester.exe", "*\social-analyzer.exe", "*\photon.exe", "*\spiderfoot.exe")) or (ProcessCommandLine in ("*twint*", "*instagram-scraper*", "*ghunt*"))) or ((ProcessCommandLine in ("*--headless*", "*--remote-debugging-port*", "*--disable-gpu*", "*webdriver*", "*user-data-dir*")) and ((FolderPath in ("*\python.exe", "*\node.exe", "*\curl.exe")) or (ProcessCommandLine in ("*linkedin.com/in/*", "*twitter.com/*", "*facebook.com/*", "*glassdoor.com/Reviews*"))))) and (not ((ProcessCommandLine in ("*--type=utility*", "*--type=gpu-process*", "*--type=renderer*")) or (ParentProcessName in ("*\chrome.exe", "*\msedge.exe")))) and (not ((User in ("*hr_user*", "*recruiter*", "*mkt_lead*")) and (ProcessCommandLine in ("*campaign*", "*talent*")))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_specialized_tools"))

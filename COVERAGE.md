@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-26 14:50:02`
+**Utolsó frissítés:** `2026-01-27 06:12:11`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 54 | 100% |
-| Splunk (SPL) | 54 | 100.0% |
-| Microsoft Sentinel (KQL) | 54 | 100.0% |
-| QRadar (AQL) | 54 | 100.0% |
-| Elastic (KQL/EQL) | 54 | 100.0% |
-| RSA NetWitness | 54 | 100.0% |
+| Sigma (Forrás) | 55 | 100% |
+| Splunk (SPL) | 54 | 98.2% |
+| Microsoft Sentinel (KQL) | 54 | 98.2% |
+| QRadar (AQL) | 54 | 98.2% |
+| Elastic (KQL/EQL) | 54 | 98.2% |
+| RSA NetWitness | 54 | 98.2% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -65,6 +65,7 @@
 | T1589.001 | HIGH | Credential Enumeration via Authentication API (High Confidence) |
 | T1589.002 | HIGH | High-Confidence OSINT Identity Enumeration via Public APIs |
 | T1589.003 | HIGH | Targeted OSINT Enumeration of Open Websites and Domains |
+| T1590 | HIGH | Network Reconnaissance with High Port Diversity |
 | T1592 | HIGH | High-Confidence Firmware Enumeration Against Network Devices, Advanced Software Enumeration Reconnaissance via Web Endpoints, High-Confidence Hardware Enumeration via Management Interfaces, High-Confidence Client Configuration Fingerprinting (Reconnaissance), High-Fidelity Host Information Reconnaissance Activity |
 | T1592.001 | HIGH | High-Confidence Hardware Enumeration via Management Interfaces |
 | T1592.002 | HIGH | Advanced Software Enumeration Reconnaissance via Web Endpoints |

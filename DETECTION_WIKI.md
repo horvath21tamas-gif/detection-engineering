@@ -47,6 +47,7 @@
 - [High-Fidelity Cloud Network (VPC) Provisioning - T1583.003](#high-fidelity-cloud-network-(vpc)-provisioning---t1583003)
 - [High-Fidelity Serverless Infrastructure Provisioning - T1583.004](#high-fidelity-serverless-infrastructure-provisioning---t1583004)
 - [High-Fidelity Botnet Infrastructure Acquisition - T1583.005](#high-fidelity-botnet-infrastructure-acquisition---t1583005)
+- [High-Fidelity Web Service Acquisition and Provisioning - T1583.006](#high-fidelity-web-service-acquisition-and-provisioning---t1583006)
 - [High-Fidelity Serverless Infrastructure Provisioning - T1583.007](#high-fidelity-serverless-infrastructure-provisioning---t1583007)
 - [High-Fidelity Cloud Account Acquisition and Bootstrap - T1583.008](#high-fidelity-cloud-account-acquisition-and-bootstrap---t1583008)
 - [High-Fidelity Identity Enumeration via Authentication Endpoints](#high-fidelity-identity-enumeration-via-authentication-endpoints)
@@ -776,6 +777,21 @@
 - **Leírás:** Detects the acquisition and preparation of botnet infrastructure.  Focuses on identifying multi-architecture agent downloads, automated  propagation attempts (brute-force), and botnet C2 client usage.
 - **Hamis pozitívok:** Authorized vulnerability scanners or red team exercises., Network admins performing bulk configuration changes via SSH scripts., Security researchers in isolated malware analysis environments.
 - **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Web Service Acquisition and Provisioning - T1583.006
+- **Azonosító:** `T1583_006.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the acquisition and setup of web services (SaaS, Storage, Messaging)  for offensive infrastructure. Focuses on command-line based storage provisioning  (Rclone, AzCopy) and messaging API initialization (Slack/Discord/Telegram bots)  from non-administrative or non-developer endpoints.
+- **Hamis pozitívok:** IT administrators performing one-time data migrations via Rclone., Developers testing messaging API integrations in local terminals., Marketing scripts uploading assets to cloud storage buckets.
+- **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

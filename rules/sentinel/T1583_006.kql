@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\rclone.exe", "*\azcopy.exe", "*\gsutil.exe")) or (ProcessCommandLine in ("* config create*", "* mb *", "* storage buckets create*", "* make-bucket*"))) or ((FolderPath in ("*\curl.exe", "*\wget.exe", "*\python.exe", "*\pwsh.exe")) or (ProcessCommandLine in ("*api.slack.com/services/T*", "*discord.com/api/webhooks*", "*api.telegram.org/bot*", "*github.com/settings/tokens*")))) and (not ((FolderPath in ("*\OneDrive.exe", "*\Dropbox.exe", "*\googledrivesync.exe")) or FolderPath contains "\Veeam\")) and (not ((User in ("*svc_backup*", "*svc_deploy*", "*adm_infra_deploy*")) and (FolderPath in ("*\actions-runner\*", "*\Jenkins\*")))) and (not (ParentProcessName in ("*\code.exe", "*\idea64.exe", "*\devenv.exe"))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_storage_provisioning"))

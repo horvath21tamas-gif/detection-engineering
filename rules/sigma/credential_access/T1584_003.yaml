@@ -1,0 +1,57 @@
+title: High-Fidelity Cloud Identity Subversion and Persistence - T1584.003
+id: e86b20cf-449c-487a-9f51-16f21dd3573d
+status: stable
+description: >
+  Detects unauthorized cloud account manipulation by monitoring for 
+  high-risk identity changes (MFA removal, new access keys) executed 
+  outside of authorized CI/CD pipelines or known administrative jump-hosts.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1584/003/
+tags:
+  - attack.resource_development
+  - attack.t1584.003
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_cloud_identity_ops:
+    - Image|endswith:
+        - '\aws.exe'          
+        - '\az.exe'         
+        - '\mgc.exe'         
+        - '\gcloud.exe'      
+    - CommandLine|contains:
+        - 'delete-virtual-mfa-device' 
+        - 'deactivate-mfa-device'
+        - 'create-access-key'        
+        - 'add-password'             
+        - 'update-login-profile'     
+        - 'create-service-principal'  
+
+  filter_authorized_source:
+    - User|contains:
+        - 'svc_terraform'
+        - 'svc_deploy'
+        - 'github_actions_runner'
+    - Image|contains:
+        - '\Terraform\'
+        - '\actions-runner\'
+        - '\Jenkins\'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_cloud_identity_ops
+
+  filter_session_refresh:
+    CommandLine|contains:
+      - 'get-caller-identity'
+      - 'sts get-session-token'
+
+  condition: selection_cloud_identity_ops and not filter_authorized_source and not filter_interactive and not filter_session_refresh
+falsepositives:
+  - Emergency manual MFA reset by a Cloud Architect from an authorized jump-host.
+  - Legitimate identity migration scripts during tenant consolidation.
+  - Security audits using authorized scanning accounts.
+level: critical

@@ -1,0 +1,66 @@
+title: High-Fidelity Offensive Capability Development and Compilation - T1587
+id: 64ea0f30-c772-4ff1-9a77-e8118ca27746
+status: stable
+description: >
+  Detects the development and compilation of offensive tools by monitoring 
+  for specific C2 framework build arguments, unauthorized use of code packers, 
+  and certificate manipulation outside of verified CI/CD pipelines.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1587/
+tags:
+  - attack.resource_development
+  - attack.t1587
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_c2_build:
+    CommandLine|contains:
+      - 'msfvenom -p '        
+      - 'sliver-gen'          
+      - 'cobaltstrike.jar'    
+      - ' -payload-type '     
+      - ' --obfuscate'        
+
+  selection_compilation:
+    Image|endswith:
+      - '\csc.exe'           
+      - '\vbc.exe'            
+      - '\jsc.exe'           
+    CommandLine|contains:
+      - '\AppData\Local\Temp\' 
+      - '\Users\Public\'
+
+  selection_packers:
+    - Image|endswith:
+        - '\upx.exe'          
+        - '\pyarmor.exe'     
+        - '\confuser.exe'    
+    - CommandLine|contains:
+        - ' --compress-icons' 
+        - ' --all-methods'  
+
+  filter_authorized_build:
+    - User|contains:
+        - 'svc_jenkins'
+        - 'svc_gitlab_runner'
+        - 'adm_devops_build'
+    - Image|contains:
+        - '\Program Files\Microsoft Visual Studio\'
+        - '\MsBuild\'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not (selection_c2_build or selection_packers)
+
+  filter_dotnet_optimize:
+    ParentImage|endswith: '\mscorsvw.exe'
+
+  condition: (selection_c2_build or selection_compilation or selection_packers) and not filter_authorized_build and not filter_interactive and not filter_dotnet_optimize
+falsepositives:
+  - Legitimate developers working on obfuscated internal tools.
+  - Software installation processes that compile components on the fly (e.g., .NET optimization).
+  - Security analysts performing authorized research in lab environments.
+level: high

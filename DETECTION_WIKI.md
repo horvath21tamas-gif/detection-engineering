@@ -42,6 +42,7 @@
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
 - [Suspicious Firewall Modification via Netsh.exe](#suspicious-firewall-modification-via-netshexe)
 - [High-Fidelity Offensive Infrastructure Provisioning - T1583](#high-fidelity-offensive-infrastructure-provisioning---t1583)
+- [High-Fidelity Automated Domain Registration & Acquisition - T1583.002](#high-fidelity-automated-domain-registration-&-acquisition---t1583002)
 - [High-Fidelity Botnet Infrastructure Acquisition - T1583.005](#high-fidelity-botnet-infrastructure-acquisition---t1583005)
 - [High-Fidelity Identity Enumeration via Authentication Endpoints](#high-fidelity-identity-enumeration-via-authentication-endpoints)
 - [Credential Enumeration via Authentication API (High Confidence)](#credential-enumeration-via-authentication-api-(high-confidence))
@@ -695,6 +696,21 @@
 - **Leírás:** Detects the automated acquisition of infrastructure (VPS, Domains, Serverless)  by monitoring for CLI-based provisioning tools and domain registration API calls.  Filters focus on isolating authorized DevOps pipelines and developer environments.
 - **Hamis pozitívok:** IT administrators testing Terraform scripts locally., Authorized developers managing secondary testing domains., Automated billing or monitoring scripts that use VPS APIs.
 - **MITRE ATT&CK:** `T1583`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Automated Domain Registration & Acquisition - T1583.002
+- **Azonosító:** `T1583_002.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects automated domain registration through registrar APIs and specialized  provisioning tools. Focuses on programmatic acquisition via curl/python  while filtering out authorized IT infrastructure management (Certbot, Terraform).
+- **Hamis pozitívok:** Automated domain renewals by IT department., SEO teams using auditing tools for brand protection., Security team performing authorized domain-squatting research.
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

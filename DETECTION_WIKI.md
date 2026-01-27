@@ -51,6 +51,7 @@
 - [High-Fidelity Serverless Infrastructure Provisioning - T1583.007](#high-fidelity-serverless-infrastructure-provisioning---t1583007)
 - [High-Fidelity Cloud Account Acquisition and Bootstrap - T1583.008](#high-fidelity-cloud-account-acquisition-and-bootstrap---t1583008)
 - [High-Fidelity Account Compromise and Identity Manipulation - T1586](#high-fidelity-account-compromise-and-identity-manipulation---t1586)
+- [High-Fidelity Email Forwarding Rule Manipulation - T1586.002](#high-fidelity-email-forwarding-rule-manipulation---t1586002)
 - [High-Fidelity Cloud Account Takeover and Persistence - T1586.003](#high-fidelity-cloud-account-takeover-and-persistence---t1586003)
 - [High-Fidelity Identity Enumeration via Authentication Endpoints](#high-fidelity-identity-enumeration-via-authentication-endpoints)
 - [Credential Enumeration via Authentication API (High Confidence)](#credential-enumeration-via-authentication-api-(high-confidence))
@@ -839,6 +840,21 @@
 - **Leírás:** Detects actions indicative of account compromise and takeover (ATO), such as  unauthorized MFA modification, suspicious login profile updates, and automated  credential testing from non-standard administrative processes.
 - **Hamis pozitívok:** Authorized Red Team exercises or internal penetration testing., Emergency account recovery by senior IT staff via CLI., Automated identity lifecycle management scripts (if not using the service account).
 - **MITRE ATT&CK:** `T1586`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Email Forwarding Rule Manipulation - T1586.002
+- **Azonosító:** `T1586_002.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the creation or modification of email forwarding/redirection rules via  command-line tools (PowerShell, Microsoft Graph CLI). This is a high-confidence  indicator of Account Takeover (ATO) where an attacker attempts to exfiltrate  sensitive emails (invoices, password resets) without user interaction.
+- **Hamis pozitívok:** IT administrators using PowerShell for bulk mailbox migration or cleanup., Power users who prefer managing their mailbox via scripts rather than the GUI.
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

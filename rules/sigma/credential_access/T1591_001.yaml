@@ -1,0 +1,71 @@
+title: Advanced Physical Location Infrastructure Enumeration - T1591.001
+id: 13d349fd-58f3-4b26-8e69-0e6a2ed04f4f
+status: stable
+description: >
+  Detects systematic discovery of physical infrastructure data (floor plans, badge systems). 
+  It filters out common office usage (Intranet, Visio) and focuses on CLI-based 
+  bulk search operations which are characteristic of reconnaissance before physical 
+  intrusion or social engineering.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1591/001/
+tags:
+  - attack.reconnaissance
+  - attack.t1591.001
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_recon_queries:
+    - CommandLine|contains:
+        - 'site_list'
+        - 'adatkozpont'
+        - 'telephely'
+        - 'szekhaz'
+        - 'belepteto'
+        - 'kamera'
+        - 'riaszto'
+    - CommandLine|contains:
+        - 'floorplan'
+        - 'alaprajz'
+        - 'building_layout'
+
+  selection_tools_and_files:
+    Image|endswith:
+      - '\findstr.exe'
+      - '\grep.exe'
+      - '\where.exe'
+      - '\7z.exe'      
+      - '\powershell.exe'
+    CommandLine|contains:
+      - '.dwg'   
+      - '.vsdx'  
+      - '.kmz'   
+      - '.kml'
+
+  filter_browsers:
+    ParentImage|endswith:
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\firefox.exe'
+
+  filter_legit_apps:
+    Image|endswith:
+      - '\acad.exe'      
+      - '\visio.exe'     
+      - '\GoogleEarth.exe'
+
+  filter_privileged_groups:
+    User|contains:
+      - 'facility'
+      - 'phys_sec'
+      - 'gondnoksag'
+      - 'biztonsag'
+
+  condition: (selection_recon_queries or selection_tools_and_files) and not filter_browsers and not filter_legit_apps and not filter_privileged_groups
+falsepositives:
+  - Facilities staff or architects working on building plans.
+  - New employees searching for company maps via command line (unlikely).
+  - Automated backup of CAD/Visio servers.
+level: high

@@ -1,9 +1,9 @@
-title: Network Reconnaissance with High Port Diversity
-id: 64a49cac-bb4d-4f6d-bebc-9bdd3c95dfff
+title: Network Reconnaissance with High Port Diversity (Windows Sysmon)
+id: 8d113721-f4fd-4e51-82d7-b31d70537593
 status: stable
 description: >
-  Detects network reconnaissance activity (T1590) by identifying external source IPs 
-  attempting connections to multiple distinct ports, excluding common services.
+  Detects network reconnaissance activity by identifying local processes 
+  attempting connections to multiple distinct external ports using Sysmon Event ID 3.
 author: SOC Engineering
 date: 2026/01/27
 references:
@@ -13,24 +13,21 @@ tags:
   - attack.t1590
 logsource:
   category: network_connection
-  product: windows
+  product: windows 
 detection:
   selection:
-    proto: tcp
-    conn_state:
-      - 'S0'
-      - 'REJ'
-      - 'RSTO'
+    EventID: 3 
+    Protocol: tcp
   external_source:
-    src_ip|cidrv4:
+    DestinationIp|cidrv4:
       - '0.0.0.0/0'
   filter_internal:
-    src_ip|cidrv4:
+    DestinationIp|cidrv4:
       - '10.0.0.0/8'
       - '172.16.0.0/12'
       - '192.168.0.0/16'
   exclude_common_ports:
-    dest_port:
+    DestinationPort:
       - 80
       - 443
       - 53
@@ -38,6 +35,6 @@ detection:
       - 25
   condition: selection and external_source and not filter_internal and not exclude_common_ports
 falsepositives:
-  - Authorized external vulnerability scanners
-  - Temporary misconfigured load balancers
+  - Authorized vulnerability scanners
+  - Browser activity to non-standard ports
 level: high

@@ -6,12 +6,12 @@
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 61 | 100% |
-| Splunk (SPL) | 61 | 100.0% |
-| Microsoft Sentinel (KQL) | 61 | 100.0% |
-| QRadar (AQL) | 58 | 95.1% |
-| Elastic (KQL/EQL) | 61 | 100.0% |
-| RSA NetWitness | 61 | 100.0% |
+| Sigma (Forrás) | 62 | 100% |
+| Splunk (SPL) | 62 | 100.0% |
+| Microsoft Sentinel (KQL) | 62 | 100.0% |
+| QRadar (AQL) | 58 | 93.5% |
+| Elastic (KQL/EQL) | 62 | 100.0% |
+| RSA NetWitness | 62 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -72,6 +72,7 @@
 | T1590.004 | HIGH | Advanced Certificate Information Reconnaissance - T1590.004 |
 | T1590.005 | HIGH | Advanced Cloud Infrastructure Reconnaissance - T1590.005 |
 | T1590.006 | HIGH | Advanced Victim Web Page Info Reconnaissance - T1590.006 |
+| T1591 | HIGH | Advanced Organizational Infrastructure Enumeration - T1591 |
 | T1592 | HIGH | High-Confidence Firmware Enumeration Against Network Devices, Advanced Software Enumeration Reconnaissance via Web Endpoints, High-Confidence Hardware Enumeration via Management Interfaces, High-Confidence Client Configuration Fingerprinting (Reconnaissance), High-Fidelity Host Information Reconnaissance Activity |
 | T1592.001 | HIGH | High-Confidence Hardware Enumeration via Management Interfaces |
 | T1592.002 | HIGH | Advanced Software Enumeration Reconnaissance via Web Endpoints |

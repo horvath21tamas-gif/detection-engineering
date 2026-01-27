@@ -52,6 +52,7 @@
 - [Advanced Certificate Information Reconnaissance - T1590.004](#advanced-certificate-information-reconnaissance---t1590004)
 - [Advanced Cloud Infrastructure Reconnaissance - T1590.005](#advanced-cloud-infrastructure-reconnaissance---t1590005)
 - [Advanced Victim Web Page Info Reconnaissance - T1590.006](#advanced-victim-web-page-info-reconnaissance---t1590006)
+- [Advanced Organizational Infrastructure Enumeration - T1591](#advanced-organizational-infrastructure-enumeration---t1591)
 - [High-Fidelity Host Information Reconnaissance Activity](#high-fidelity-host-information-reconnaissance-activity)
 - [High-Confidence Hardware Enumeration via Management Interfaces](#high-confidence-hardware-enumeration-via-management-interfaces)
 - [Advanced Software Enumeration Reconnaissance via Web Endpoints](#advanced-software-enumeration-reconnaissance-via-web-endpoints)
@@ -817,6 +818,21 @@
 - **Leírás:** Detects automated web reconnaissance and sensitive file discovery attempts.  It minimizes false positives by filtering development environments and focusing  on high-intent reconnaissance patterns across CLI tools.
 - **Hamis pozitívok:** Developers debugging cloud configurations or APIs., Legitimate security auditing or automated penetration testing.
 - **MITRE ATT&CK:** `006`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Advanced Organizational Infrastructure Enumeration - T1591
+- **Azonosító:** `T1591.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic gathering of organizational metadata (OUs, groups, users).  It minimizes false positives by filtering known administrative consoles,  service account syncs, and focusing on non-standard execution contexts.
+- **Hamis pozitívok:** Identity Management synchronization tasks., IT audits or mass user updates., Vulnerability scanners with domain credentials.
+- **MITRE ATT&CK:** `T1591`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

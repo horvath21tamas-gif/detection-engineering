@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\terraform.exe", "*\pulumi.exe", "*\aws.exe", "*\az.exe", "*\doctl.exe", "*\gcloud.exe")) or (ProcessCommandLine in ("* apply*", "* run-instances*", "* vm create*", "* droplets create*", "* compute instances create*"))) or ((FolderPath in ("*\python.exe", "*\curl.exe")) or (ProcessCommandLine contains "http" and ProcessCommandLine contains "api.") or (ProcessCommandLine in ("*/v2/droplets*", "*ec2.amazonaws.com*", "*management.azure.com*")))) and (not ((User in ("*svc_jenkins*", "*svc_terraform*", "*gitlab_runner*", "*adm_infra_deploy*")) and (FolderPath in ("*\Program Files\Terraform\*", "*\actions-runner\*")))) and (not (ParentProcessName in ("*\code.exe", "*\devenv.exe", "*\idea64.exe"))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_provisioning_ops"))

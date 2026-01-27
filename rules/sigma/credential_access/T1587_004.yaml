@@ -1,0 +1,66 @@
+title: High-Fidelity Exploit Development and Compilation Detection - T1587.004
+id: b1fb1b6f-a6b9-4f8b-88e7-aac4f689fe0b
+status: stable
+description: >
+  Detects indicators of exploit development by monitoring for the compilation of 
+  source code containing memory injection primitives and shellcode-related 
+  arguments, specifically when executed from non-standard or temporary directories.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1587/004/
+tags:
+  - attack.resource_development
+  - attack.t1587.004
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_compilers:
+    - Image|endswith:
+        - '\csc.exe'            
+        - '\vbc.exe'            
+        - '\cl.exe'             
+        - '\gcc.exe'           
+    - CommandLine|contains:
+        - '/target:library'    
+        - '/unsafe'            
+
+  selection_exploit_primitives:
+    CommandLine|contains:
+      - 'VirtualAllocEx'        
+      - 'WriteProcessMemory'   
+      - 'CreateRemoteThread'    
+      - 'QueueUserAPC'         
+      - 'NtMapViewOfSection'    
+      - '0x90,0x90,0x90'        
+      - 'shellcode'            
+
+  filter_authorized_dev:
+    - User|contains:
+        - 'svc_jenkins'
+        - 'svc_deploy'
+        - 'adm_build_master'
+    - Image|contains:
+        - '\Microsoft Visual Studio\'
+        - '\MSBuild\'
+        - '\actions-runner\'
+
+  selection_suspicious_paths:
+    CommandLine|contains:
+      - '\Users\Public\'
+      - '\AppData\Local\Temp\'
+      - 'C:\Windows\Temp\'
+      - '\PerfLogs\'
+      - '\Temporary ASP.NET Files\' 
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_exploit_primitives
+
+  condition: (selection_compilers and selection_exploit_primitives and selection_suspicious_paths) and not filter_authorized_dev and not filter_interactive
+falsepositives:
+  - Security software (e.g., EDR/AV) components that compile filters on the fly.
+  - Legitimate custom .NET applications that use 'unsafe' code for performance.
+  - Authorized vulnerability scanning tools that deploy temporary agents.
+level: critical

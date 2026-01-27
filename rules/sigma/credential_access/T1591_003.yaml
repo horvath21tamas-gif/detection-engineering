@@ -1,0 +1,73 @@
+title: Advanced Knowledge Management Discovery - T1591.003
+id: 3f1ae29c-7925-4370-9c3a-8cab7bf7a03e
+status: stable
+description: >
+  Detects systematic and automated discovery of internal knowledge management systems. 
+  It targets bulk data extraction patterns and command-line reconnaissance 
+  while filtering out standard web browser usage and IT automation.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1591/003/
+tags:
+  - attack.reconnaissance
+  - attack.t1591.003
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_scraping:
+    - Image|endswith:
+        - '\wget.exe'
+        - '\curl.exe'
+      CommandLine|contains:
+        - ' --mirror'
+        - ' -m '
+        - ' --recursive'
+        - ' -r '
+        - ' --no-parent'
+    - Image|endswith: '\powershell.exe'
+      CommandLine|contains:
+        - 'Invoke-WebRequest'
+        - 'Invoke-RestMethod'
+      CommandLine|contains:
+        - 'foreach'
+        - 'while'
+
+  selection_keywords:
+    CommandLine|contains:
+      - 'confluence'
+      - 'sharepoint'
+      - 'wiki.'
+      - 'tudastar'
+      - 'onboarding'
+      - 'network-diagram'
+      - 'credential'
+      - 'jelszo'
+
+  filter_browsers:
+    ParentImage|endswith:
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\firefox.exe'
+      - '\brave.exe'
+
+  filter_it_automation:
+    User|contains:
+      - 'svc_deploy'
+      - 'svc_wiki_backup'
+    CommandLine|contains:
+      - '--update'
+      - '/check-updates'
+
+  filter_indexers:
+    Image|endswith:
+      - '\SearchIndexer.exe'
+      - '\SearchHost.exe'
+
+  condition: (selection_scraping or (selection_keywords and not filter_browsers)) and not filter_it_automation and not filter_indexers
+falsepositives:
+  - IT administrators performing site migrations or bulk edits via API.
+  - Authorized security scanners auditing internal documentation.
+  - Legitimate automated backup tasks.
+level: high

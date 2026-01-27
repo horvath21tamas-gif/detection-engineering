@@ -1,0 +1,81 @@
+title: High-Fidelity Secret Hunting in Code Repositories - T1597.002
+id: bbb77cb9-9c8e-4672-89e4-c27698d1c2d8
+status: stable
+description: >
+  Detects professional secret-hunting tools and manual reconnaissance patterns 
+  within code repositories. Focuses on deep history analysis (diff-searching) 
+  and automated credential extraction while filtering out standard dev-cycles.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1597/002/
+tags:
+  - attack.reconnaissance
+  - attack.t1597.002
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_specialized_tools:
+    - Image|endswith:
+        - '\trufflehog.exe'
+        - '\gitleaks.exe'
+        - '\shhgit.exe'
+        - '\git-secrets.exe'
+        - '\detect-secrets.exe'
+    - CommandLine|contains:
+        - 'trufflehog'
+        - 'gitleaks'
+        - 'scan --repo'
+
+  selection_git_deep_search:
+    - Image|endswith: '\git.exe'
+      CommandLine|contains:
+        - ' log -G'         
+        - ' log -S'        
+        - ' rev-list --all'
+        - ' log --pretty=format'
+        - ' grep --cached'  
+
+  selection_secret_patterns:
+    CommandLine|contains:
+      - 'password='
+      - 'api_key'
+      - 'client_secret'
+      - 'private_key'
+      - 'access_token'
+      - 'jelszo'
+      - 'titok'
+
+  filter_ide_automation:
+    ParentImage|endswith:
+      - '\code.exe'
+      - '\idea64.exe'
+      - '\visualstudio.exe'
+      - '\eclipse.exe'
+
+  filter_build_agents:
+    User|contains:
+      - 'svc_jenkins'
+      - 'github_runner'
+      - 'gitlab_runner'
+      - 'azure_devops'
+    CommandLine|contains:
+      - 'npm '
+      - 'nuget '
+      - 'dotnet '
+
+  filter_standard_git:
+    CommandLine|contains:
+      - 'git pull'
+      - 'git push'
+      - 'git commit'
+      - 'git clone'
+      - 'git fetch'
+
+  condition: (selection_specialized_tools or (selection_git_deep_search and selection_secret_patterns)) and not filter_ide_automation and not filter_build_agents and not filter_standard_git
+falsepositives:
+  - Security engineers performing authorized baseline scans of repositories.
+  - Pre-commit hooks that use gitleaks or similar tools to prevent secrets from being pushed.
+  - Developers searching for a specific past change where a credential was used as a placeholder.
+level: high

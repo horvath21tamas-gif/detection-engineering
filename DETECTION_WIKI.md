@@ -68,6 +68,7 @@
 - [Active Wordlist Scanning Against Authentication Endpoints](#active-wordlist-scanning-against-authentication-endpoints)
 - [Advanced Phishing for Info & Credential Harvesting - T1598](#advanced-phishing-for-info-&-credential-harvesting---t1598)
 - [Advanced BEC Mail & Financial Data Exfiltration - T1598.002](#advanced-bec-mail-&-financial-data-exfiltration---t1598002)
+- [High-Fidelity MFA/OTP Spoofing & Harvesting - T1598.003](#high-fidelity-mfaotp-spoofing-&-harvesting---t1598003)
 - [Credential Dumping LSASS](#credential-dumping-lsass)
 
 ---
@@ -1063,6 +1064,21 @@
 - **Leírás:** Detects suspicious command-line access to mail archives and financial documents  typically targeted in BEC campaigns. It filters out legitimate Outlook  indexing, OneDrive synchronization, and system-level backups.
 - **Hamis pozitívok:** Manual PST migration by IT support during workstation refresh., User manually zipping their own mail folder for archiving., Accounting software running local search/export tasks.
 - **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity MFA/OTP Spoofing & Harvesting - T1598.003
+- **Azonosító:** `T1598_003.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the creation of fraudulent MFA/OTP input prompts by monitoring  unusual PowerShell UI class loading and specific CLI keywords.  Filters out common IT automation and software deployment noise.
+- **Hamis pozitívok:** Legitimate IT support tools that prompt users for a temporary password or code., In-house applications using PowerShell wrappers for basic UI interaction.
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

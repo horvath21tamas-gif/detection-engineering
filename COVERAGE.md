@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 11:59:54`
+**Utolsó frissítés:** `2026-01-27 12:08:29`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 85 | 100% |
-| Splunk (SPL) | 85 | 100.0% |
-| Microsoft Sentinel (KQL) | 85 | 100.0% |
-| QRadar (AQL) | 63 | 74.1% |
-| Elastic (KQL/EQL) | 85 | 100.0% |
-| RSA NetWitness | 85 | 100.0% |
+| Sigma (Forrás) | 86 | 100% |
+| Splunk (SPL) | 86 | 100.0% |
+| Microsoft Sentinel (KQL) | 86 | 100.0% |
+| QRadar (AQL) | 63 | 73.3% |
+| Elastic (KQL/EQL) | 86 | 100.0% |
+| RSA NetWitness | 86 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -105,3 +105,4 @@
 | T1598.002 | HIGH | Advanced BEC Mail & Financial Data Exfiltration - T1598.002 |
 | T1598.003 | HIGH | High-Fidelity MFA/OTP Spoofing & Harvesting - T1598.003 |
 | T1598.004 | HIGH | High-Fidelity Spearphishing Attachment Interaction - T1598.004 |
+| T1650 | HIGH | High-Fidelity Cloud Account Acquisition and Initialization - T1650 |

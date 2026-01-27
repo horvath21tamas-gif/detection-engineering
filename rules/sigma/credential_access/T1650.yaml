@@ -56,7 +56,7 @@ detection:
       - '\idea64.exe'
 
   filter_system:
-    User: 'NT AUTHORITY\SYSTEM'
+    username: 'NT AUTHORITY\SYSTEM'
 
   condition: (selection_cloud_init or selection_sdk_harvesting) and not filter_automation_engines and not filter_dev_tools and not filter_system
 falsepositives:

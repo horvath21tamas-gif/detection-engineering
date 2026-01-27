@@ -54,7 +54,7 @@ detection:
         - '\explorer.exe'
 
   filter_legit_net_tools:
-    - CommandLine:
+    - processcommandline:
         - 'nslookup '
         - 'ping '
         - 'tracert '

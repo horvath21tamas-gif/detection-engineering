@@ -1,0 +1,66 @@
+title: High-Fidelity Cloud Account Acquisition and Initialization - T1650
+id: d0e84f17-cc58-4bc9-910c-5599f503daf7
+status: stable
+description: >
+  Detects the acquisition or unauthorized setup of cloud accounts. Focuses on 
+  credential configuration, profile creation, and automated SDK-based 
+  identity harvesting while filtering out authorized DevOps automation.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1650/
+tags:
+  - attack.resource_development
+  - attack.t1650
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_cloud_init:
+    - Image|endswith:
+        - '\aws.exe'
+        - '\az.exe'
+        - '\gcloud.exe'
+    - CommandLine|contains:
+        - ' configure '      
+        - ' login '          
+        - ' account set '
+        - ' iam create-user' 
+        - ' adsp '           
+
+  selection_sdk_harvesting:
+    - Image|endswith:
+        - '\python.exe'
+        - '\pwsh.exe'
+        - '\node.exe'
+    - CommandLine|contains|all:
+        - 'boto3'            
+        - '.credentials'     
+    - CommandLine|contains:
+        - 'DefaultAzureCredential'
+        - 'GoogleCredentials'
+
+  filter_automation_engines:
+    - User|contains:
+        - 'svc_jenkins'
+        - 'svc_terraform'
+        - 'ansible_worker'
+    - Image|contains:
+        - '\Terraform\'
+        - '\Jenkins\'
+
+  filter_dev_tools:
+    ParentImage|endswith:
+      - '\code.exe'
+      - '\devenv.exe'
+      - '\idea64.exe'
+
+  filter_system:
+    User: 'NT AUTHORITY\SYSTEM'
+
+  condition: (selection_cloud_init or selection_sdk_harvesting) and not filter_automation_engines and not filter_dev_tools and not filter_system
+falsepositives:
+  - Cloud administrators configuring their local environment for the first time.
+  - Legitimate automated deployment scripts not run through central engines.
+  - Developers debugging cloud integration locally.
+level: high

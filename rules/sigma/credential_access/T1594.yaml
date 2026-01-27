@@ -1,0 +1,74 @@
+title: High-Fidelity Information Repository Reconnaissance - T1594
+id: 0c2c3295-843e-4417-ab72-0edb03b2ff63
+status: stable
+description: >
+  Detects automated reconnaissance of public information repositories (GitHub, GitLab). 
+  Focuses on specialized secret scanners and bulk API harvesting while filtering out 
+  standard developer workflows (git clone/pull) and authorized security tools.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1594/
+tags:
+  - attack.reconnaissance
+  - attack.t1594
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_specialized_tools:
+    - Image|endswith:
+        - '\trufflehog.exe'    
+        - '\gitleaks.exe'     
+        - '\git-robber.exe'    
+        - '\shhgit.exe'        
+        - '\ripsecrets.exe'
+    - CommandLine|contains:
+        - 'github-dorks'
+        - 'git-dump'
+        - '--scan-all'
+
+  selection_api_scraping:
+    - Image|endswith:
+        - '\curl.exe'
+        - '\wget.exe'
+        - '\python.exe'
+        - '\pwsh.exe'
+    - CommandLine|contains|all:
+        - 'api.github.com'
+        - '/search/'
+    - CommandLine|contains:
+        - '.env'              
+        - 'id_rsa'             
+        - 'aws_access_key'
+        - 'connectionstring'
+
+  filter_standard_git:
+    CommandLine|contains:
+      - 'git clone'
+      - 'git pull'
+      - 'git fetch'
+      - 'git push'
+
+  filter_dev_context:
+    ParentImage|endswith:
+      - '\code.exe'
+      - '\devenv.exe'
+      - '\idea64.exe'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_specialized_tools
+
+  filter_authorized_service:
+    User|contains:
+      - 'svc_jenkins'
+      - 'svc_devsecops'
+      - 'github-actions'
+
+  condition: (selection_specialized_tools or selection_api_scraping) and not filter_standard_git and not filter_dev_context and not filter_interactive and not filter_authorized_service
+falsepositives:
+  - Security engineers performing authorized secret scanning.
+  - Developers using automated scripts for local repo management.
+  - Automated backup scripts for code repositories.
+level: high

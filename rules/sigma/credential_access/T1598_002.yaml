@@ -1,0 +1,72 @@
+title: Advanced BEC Mail & Financial Data Exfiltration - T1598.002
+id: 504d1878-4567-469b-b0f4-ce603ae94c75
+status: stable
+description: >
+  Detects suspicious command-line access to mail archives and financial documents 
+  typically targeted in BEC campaigns. It filters out legitimate Outlook 
+  indexing, OneDrive synchronization, and system-level backups.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1598/002/
+tags:
+  - attack.initial_access
+  - attack.t1598.002
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_mail_access:
+    - Image|endswith:
+        - '\7z.exe'
+        - '\rar.exe'
+        - '\tar.exe'
+        - '\powershell.exe'
+        - '\curl.exe'      
+      CommandLine|contains:
+        - '.pst'           
+        - '.ost'           
+        - '.msg'           
+        - 'contacts.edb'   
+
+  selection_financial_recon:
+    Image|endswith:
+      - '\findstr.exe'
+      - '\grep.exe'
+    CommandLine|contains:
+      - 'invoice'
+      - 'payment'
+      - 'swift'
+      - 'iban'
+      - 'szamla'
+      - 'utalas'
+
+  filter_native_apps:
+    ParentImage|endswith:
+      - '\outlook.exe'
+      - '\SearchIndexer.exe'
+      - '\SearchHost.exe'
+      - '\RuntimeBroker.exe'
+
+  filter_backup_agents:
+    User: 'NT AUTHORITY\SYSTEM'
+    Image|contains:
+      - '\Veeam\'
+      - '\Veritas\'
+      - '\Commvault\'
+      - '\Backup\'
+
+  filter_sync_tools:
+    Image|endswith:
+      - '\OneDrive.exe'
+      - '\MicrosoftSharePointSvc.exe'
+    CommandLine|contains:
+      - ' /background'
+      - ' /client'
+
+  condition: (selection_mail_access and not filter_native_apps and not filter_backup_agents) or (selection_financial_recon and not filter_native_apps)
+falsepositives:
+  - Manual PST migration by IT support during workstation refresh.
+  - User manually zipping their own mail folder for archiving.
+  - Accounting software running local search/export tasks.
+level: high

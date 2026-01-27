@@ -1,0 +1,73 @@
+title: High-Fidelity Social Media Entity Harvesting - T1593.001
+id: b4c385b1-afdf-4c77-adef-4b43a295c181
+status: stable
+description: >
+  Detects automated reconnaissance of social media profiles. It targets headless 
+  browser automation (Selenium/Puppeteer) and specialized OSINT tools while 
+  filtering out routine HR recruitment and interactive browser usage.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1593/001/
+tags:
+  - attack.reconnaissance
+  - attack.t1593.001
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_specialized_tools:
+    - Image|endswith:
+        - '\sherlock.exe'      
+        - '\maigret.exe'       
+        - '\ghunt.exe'         
+        - '\twint.exe'         
+    - CommandLine|contains:
+        - 'social-analyzer'
+        - 'linkedintools'
+
+  selection_automation_context:
+    CommandLine|contains|all:
+      - '--headless'          
+      - 'webdriver'            
+    CommandLine|contains:
+      - 'linkedin.com/in/'
+      - 'twitter.com/'
+      - 'facebook.com/profile'
+
+  selection_scripted_scraping:
+    - Image|endswith:
+        - '\python.exe'
+        - '\node.exe'
+        - '\curl.exe'
+    - CommandLine|contains:
+        - 'api.linkedin.com'
+        - 'api.twitter.com'
+        - '/users/lookup'
+        - 'graphql'            
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_specialized_tools
+
+  filter_authorized_users:
+    User|contains:
+      - 'hr_recruiter'
+      - 'mkt_lead'
+    Image|contains:
+      - '\LinkedInRecruiter\'
+      - '\Hootsuite\'
+      - '\Salesforce\'
+
+  filter_browser_internals:
+    CommandLine|contains:
+      - '--type=renderer'
+      - '--type=utility'
+      - '--type=gpu-process'
+
+  condition: (selection_specialized_tools or (selection_automation_context and selection_scripted_scraping)) and not filter_interactive and not filter_authorized_users and not filter_browser_internals
+falsepositives:
+  - Authorized recruiters using browser automation for bulk messaging.
+  - QA engineers testing social auth flows via Selenium.
+  - Marketing analytics scripts (if not run from a server).
+level: high

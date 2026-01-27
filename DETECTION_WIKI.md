@@ -63,6 +63,7 @@
 - [High-Confidence Firmware Enumeration Against Network Devices](#high-confidence-firmware-enumeration-against-network-devices)
 - [High-Confidence Client Configuration Fingerprinting (Reconnaissance)](#high-confidence-client-configuration-fingerprinting-(reconnaissance))
 - [High-Fidelity Automated Web Reconnaissance - T1593](#high-fidelity-automated-web-reconnaissance---t1593)
+- [High-Fidelity Social Media Entity Harvesting - T1593.003](#high-fidelity-social-media-entity-harvesting---t1593003)
 - [High-Fidelity Active Scanning Detection (Behavior-Based)](#high-fidelity-active-scanning-detection-(behavior-based))
 - [High-Fidelity External IP Block Scanning Detection](#high-fidelity-external-ip-block-scanning-detection)
 - [High-Confidence External Vulnerability Scanning Activity](#high-confidence-external-vulnerability-scanning-activity)
@@ -1001,6 +1002,21 @@
 - **Leírás:** Detects automated web scraping and OSINT collection patterns targeting  social media and public sites. Focuses on headless browser automation  and specialized CLI tools while filtering out legitimate HR and Marketing activity.
 - **Hamis pozitívok:** Marketing teams using automated tools for brand monitoring., HR department using LinkedIn automation for bulk recruiting., Software testing (QA) using Selenium/Webdriver.
 - **MITRE ATT&CK:** `T1593`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Social Media Entity Harvesting - T1593.003
+- **Azonosító:** `T1593_003.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects automated social media reconnaissance using headless browsers or specialized OSINT tools.  Focuses on identifying systematic data scraping while excluding legitimate browser-based user activity.
+- **Hamis pozitívok:** Authorized recruitment automation tools used by HR., Social media management platforms (Hootsuite, etc.)., QA engineers testing web applications with Selenium.
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

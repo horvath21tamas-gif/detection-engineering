@@ -58,7 +58,7 @@ detection:
       - '\Salesforce\'
 
   filter_system_user:
-    User: 'NT AUTHORITY\SYSTEM'
+    username: 'NT AUTHORITY\SYSTEM'
 
   condition: (selection_specialized_tools or (selection_automation_flags and selection_scripted_recon)) and not filter_interactive and not filter_authorized_apps and not filter_system_user
 falsepositives:

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((ParentProcessName in ("*\w3wp.exe", "*\httpd.exe", "*\nginx.exe", "*\php-cgi.exe", "*\tomcat.exe")) and (FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\whoami.exe", "*\net.exe", "*\nltest.exe"))) or ((FolderPath in ("*\chisel.exe", "*\frpc.exe", "*\ngrok.exe", "*\gost.exe", "*\nps.exe")) or (ProcessCommandLine in ("* -proxy *", "* -tunnel *", "* -secret *")))) and (not ((User in ("*svc_monitoring*", "*adm_sysadmin_deploy*")) and (FolderPath in ("*\Windows\System32\OpenSSH\*", "*\Program Files\Datadog\*")))) and (not (ParentProcessName endswith "\code.exe" and (ProcessCommandLine in ("*localhost*", "*127.0.0.1*")))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_tunnel_tools"))

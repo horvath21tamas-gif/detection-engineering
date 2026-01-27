@@ -50,6 +50,7 @@
 - [High-Fidelity Web Service Acquisition and Provisioning - T1583.006](#high-fidelity-web-service-acquisition-and-provisioning---t1583006)
 - [High-Fidelity Serverless Infrastructure Provisioning - T1583.007](#high-fidelity-serverless-infrastructure-provisioning---t1583007)
 - [High-Fidelity Cloud Account Acquisition and Bootstrap - T1583.008](#high-fidelity-cloud-account-acquisition-and-bootstrap---t1583008)
+- [High-Fidelity Compromised Infrastructure and Resource Abuse - T1584](#high-fidelity-compromised-infrastructure-and-resource-abuse---t1584)
 - [High-Fidelity Account Compromise and Identity Manipulation - T1586](#high-fidelity-account-compromise-and-identity-manipulation---t1586)
 - [High-Fidelity Automated Social Media Manipulation - T1586.001](#high-fidelity-automated-social-media-manipulation---t1586001)
 - [High-Fidelity Email Forwarding Rule Manipulation - T1586.002](#high-fidelity-email-forwarding-rule-manipulation---t1586002)
@@ -826,6 +827,21 @@
 - **Leírás:** Detects the acquisition and initial configuration of cloud accounts.  Targets account-level bootstrapping (credential setup, IAM user creation)  and automated identity harvesting from non-standard processes,  while filtering out authorized DevOps pipelines.
 - **Hamis pozitívok:** Cloud engineers configuring their local environment for the first time., Development teams debugging cloud integration locally in authorized IDEs., Legitimate automated billing or auditing scripts run outside of CI/CD.
 - **MITRE ATT&CK:** `008`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Compromised Infrastructure and Resource Abuse - T1584
+- **Azonosító:** `T1584.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects indicators of compromised infrastructure, specifically focusing on  web server process subversion (Web Shells), unauthorized reverse proxies,  and tunneling tools executed from non-standard administrative contexts.
+- **Hamis pozitívok:** Penetration testing or Red Team exercises., Developers using Chisel/Ngrok for authorized remote debugging., Complex web applications that legitimately call system commands (rare, check app logic).
+- **MITRE ATT&CK:** `T1584`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

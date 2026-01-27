@@ -1,0 +1,68 @@
+title: High-Fidelity Domain Infrastructure Enumeration - T1597.001
+id: 4802f276-30db-4dfb-9a26-35adc743db89
+status: stable
+description: >
+  Detects advanced and automated domain/DNS reconnaissance. Focuses on 
+  unusual DNS query types (AXFR, ANY) and professional sub-domain discovery 
+  tools while filtering out routine network troubleshooting.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1597/001/
+tags:
+  - attack.reconnaissance
+  - attack.t1597.001
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_dns_recon:
+    - CommandLine|contains:
+        - 'AXFR'               
+        - ' -query=any'        
+        - ' -type=any'
+        - ' -t any'
+        - ' -q any'
+        - ' -t TXT'           
+        - ' -t MX'            
+
+  selection_recon_tools:
+    - Image|endswith:
+        - '\subfinder.exe'
+        - '\amass.exe'
+        - '\dnsrecon.exe'
+        - '\fierce.exe'
+        - '\knockpy.exe'
+    - CommandLine|contains:
+        - ' -active'          
+        - ' -passive'          
+        - ' -brute'
+        - ' -enum'
+
+  filter_standard_troubleshooting:
+    - CommandLine:
+        - 'nslookup '
+        - 'ping '
+        - 'tracert '
+    - condition: not selection_dns_recon
+
+  filter_dns_servers:
+    Image|contains:
+      - '\Windows\System32\dns.exe'
+      - '\Windows\System32\lsass.exe'
+
+  filter_it_tools:
+    User|contains:
+      - 'svc_monitoring'
+      - 'svc_network'
+    Image|contains:
+      - '\Zabbix\'
+      - '\Nagios\'
+      - '\SolarWinds\'
+
+  condition: (selection_dns_recon or selection_recon_tools) and not filter_standard_troubleshooting and not filter_dns_servers and not filter_it_tools
+falsepositives:
+  - Network engineers performing deep DNS audits or migrations.
+  - Security vulnerability scanners performing asset discovery.
+  - Automated cloud-sync tools verifying domain ownership (e.g., Let's Encrypt).
+level: high

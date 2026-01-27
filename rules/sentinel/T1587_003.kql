@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\openssl.exe", "*\keytool.exe", "*\certutil.exe", "*\makecert.exe")) and (ProcessCommandLine in ("* -selfsign *", "* -genrsa *", "* -keyout *", "* -export *", "* -req -new *")) and (ProcessCommandLine in ("*\Users\Public\*", "*\AppData\Local\Temp\*", "*\PerfLogs\*", "*C:\Windows\Temp\*", "*\ProgramData\*"))) and (not (FolderPath in ("*\Program Files\*", "*\Program Files (x86)\*", "*\System32\*"))) and (not (User in ("*svc_pki*", "*adm_infra*", "*svc_deploy*"))) and (not (ParentProcessName in ("*\msiexec.exe", "*\setup.exe", "*\install.exe")))

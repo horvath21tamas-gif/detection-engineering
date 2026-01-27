@@ -38,7 +38,6 @@ detection:
   filter_normal_usage:
     CommandLine|contains:
       - 'nslookup.exe'
-    CommandLine|length: < 25 
 
   filter_admin_scripts:
     User|contains:

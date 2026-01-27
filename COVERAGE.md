@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 11:45:47`
+**Utolsó frissítés:** `2026-01-27 11:52:29`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 83 | 100% |
-| Splunk (SPL) | 83 | 100.0% |
-| Microsoft Sentinel (KQL) | 83 | 100.0% |
-| QRadar (AQL) | 63 | 75.9% |
-| Elastic (KQL/EQL) | 83 | 100.0% |
-| RSA NetWitness | 83 | 100.0% |
+| Sigma (Forrás) | 84 | 100% |
+| Splunk (SPL) | 84 | 100.0% |
+| Microsoft Sentinel (KQL) | 84 | 100.0% |
+| QRadar (AQL) | 63 | 75.0% |
+| Elastic (KQL/EQL) | 84 | 100.0% |
+| RSA NetWitness | 84 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -83,6 +83,7 @@
 | T1592.003 | HIGH | High-Confidence Firmware Enumeration Against Network Devices |
 | T1592.004 | MEDIUM | High-Confidence Client Configuration Fingerprinting (Reconnaissance) |
 | T1593 | HIGH | High-Fidelity Automated Web Reconnaissance - T1593 |
+| T1593.001 | HIGH | High-Fidelity Social Media Entity Harvesting - T1593.001 |
 | T1593.002 | HIGH | High-Fidelity Automated Search Engine Reconnaissance - T1593.002 |
 | T1593.003 | HIGH | High-Fidelity Social Media Entity Harvesting - T1593.003 |
 | T1595 | HIGH | High-Fidelity Active Scanning Detection (Behavior-Based), High-Fidelity External IP Block Scanning Detection, High-Confidence External Vulnerability Scanning Activity, Active Wordlist Scanning Against Authentication Endpoints |

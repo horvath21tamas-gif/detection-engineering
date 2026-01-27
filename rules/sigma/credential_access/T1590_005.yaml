@@ -1,0 +1,65 @@
+title: Advanced Cloud Infrastructure Reconnaissance - T1590.005
+id: a8a82860-6626-46fd-9c00-da1371720e0e
+status: stable
+description: >
+  Detects manual or suspicious cloud infrastructure enumeration. 
+  It filters out legitimate CI/CD pipelines and automated service accounts 
+  to focus on interactive discovery.
+author: SOC Engineering
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1590/005/
+tags:
+  - attack.reconnaissance
+  - attack.t1590.005
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_aws:
+    Image|endswith: '\aws.exe'
+    CommandLine|contains:
+      - ' iam list-'        
+      - ' s3api list-'      
+      - ' secretsmanager list-secrets' 
+
+  selection_azure:
+    Image|endswith: '\az.exe'
+    CommandLine|contains:
+      - ' network nsg list'    
+      - ' account list'        
+      - ' keyvault list'      
+
+  selection_gcp:
+    Image|endswith: 
+      - '\gcloud.exe'
+      - '\gsutil.exe'
+    CommandLine|contains:
+      - ' projects list'
+      - ' iam roles list'
+ 
+  filter_automation_parent:
+    ParentImage|endswith:
+      - '\jenkins.exe'
+      - '\git-remote-http.exe'
+      - '\gitlab-runner.exe'
+      - '\terraform.exe'
+      - '\ansible.exe'
+
+  filter_common_ops:
+    CommandLine|contains:
+      - '--version'
+      - ' help'
+      - '--help'
+
+  filter_service_accounts:
+    User|contains:
+      - 'SVC_'
+      - 'SA_'
+      - 'AUTO_'
+
+  condition: (selection_aws or selection_azure or selection_gcp) and not filter_automation_parent and not filter_common_ops and not filter_service_accounts
+falsepositives:
+  - Legitimate manual cloud audit by certified admins.
+  - New automation scripts not yet added to filters.
+level: high

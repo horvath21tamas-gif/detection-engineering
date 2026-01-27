@@ -1,0 +1,76 @@
+title: High-Fidelity Automated Search Engine Dorking - T1596.002
+id: 6e098aee-2c87-4128-a974-104a11ddc79b
+status: stable
+description: >
+  Detects the automated use of search engine dorks and specialized CLI tools 
+  designed for bulk technical data harvesting. Filters out interactive browser 
+  searches and legitimate IDE-triggered error lookups.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1596/002/
+tags:
+  - attack.reconnaissance
+  - attack.t1596.002
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_dork_binaries:
+    - Image|endswith:
+        - '\pagodo.exe'      
+        - '\ghunt.exe'       
+        - '\dork-cli.exe'
+        - '\snakedork.exe'
+    - CommandLine|contains:
+        - 'ghdb'             
+        - 'google-dork'
+
+  selection_dork_operators:
+    CommandLine|contains|all:
+      - 'site:'
+      - 'filetype:'
+    CommandLine|contains:
+      - 'inurl:admin'
+      - 'intitle:"index of"'
+      - 'filetype:env'
+      - 'filetype:sql'
+      - 'filetype:config'
+
+  selection_api_interaction:
+    - Image|endswith:
+        - '\curl.exe'
+        - '\wget.exe'
+        - '\python.exe'
+        - '\pwsh.exe'
+    - CommandLine|contains:
+        - 'google.com/search?q='
+        - 'bing.com/search?q='
+        - 'api.serpstack.com' # Keresőmotor találati API
+        - 'googleapis.com/customsearch'
+
+  filter_interactive_browsers:
+    - Image|endswith:
+        - '\chrome.exe'
+        - '\msedge.exe'
+        - '\firefox.exe'
+    - ParentImage|endswith:
+        - '\explorer.exe'
+
+  filter_ide_automation:
+    ParentImage|endswith:
+      - '\code.exe'
+      - '\devenv.exe'
+      - '\idea64.exe'
+    CommandLine|contains:
+      - 'msdn.microsoft.com'
+
+  filter_system_context:
+    User: 'NT AUTHORITY\SYSTEM'
+
+  condition: (selection_dork_binaries or selection_dork_operators or selection_api_interaction) and not filter_interactive_browsers and not filter_ide_automation and not filter_system_context
+falsepositives:
+  - Security analysts performing authorized audits for exposed files.
+  - Marketing or SEO tools using automated scripts for ranking checks.
+  - Developers using CLI-based search tools for documentation.
+level: high

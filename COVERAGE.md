@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 12:59:15`
+**Utolsó frissítés:** `2026-01-27 13:04:14`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -66,6 +66,7 @@
 | T1583.002 | HIGH | High-Fidelity Automated Domain Registration & Acquisition - T1583.002 |
 | T1583.003 | HIGH | High-Fidelity Cloud Network (VPC) Provisioning - T1583.003 |
 | T1583.004 | HIGH | High-Fidelity Serverless Infrastructure Provisioning - T1583.004 |
+| T1583.005 | CRITICAL | High-Fidelity Botnet Infrastructure Acquisition - T1583.005 |
 | T1583.006 | HIGH | High-Fidelity Web Service Acquisition and Provisioning - T1583.006 |
 | T1583.007 | HIGH | High-Fidelity Serverless Infrastructure Provisioning - T1583.007 |
 | T1583.008 | HIGH | High-Fidelity Cloud Account Acquisition and Bootstrap - T1583.008 |
@@ -94,7 +95,6 @@
 | T1593.001 | HIGH | High-Fidelity Social Media Entity Harvesting - T1593.001 |
 | T1593.002 | HIGH | High-Fidelity Automated Search Engine Reconnaissance - T1593.002 |
 | T1593.003 | HIGH | High-Fidelity Social Media Entity Harvesting - T1593.003 |
-| T1593.005 | CRITICAL | High-Fidelity Botnet Infrastructure Acquisition - T1583.005 |
 | T1594 | HIGH | High-Fidelity Information Repository Reconnaissance - T1594 |
 | T1595 | HIGH | High-Fidelity Active Scanning Detection (Behavior-Based), High-Fidelity External IP Block Scanning Detection, High-Confidence External Vulnerability Scanning Activity, Active Wordlist Scanning Against Authentication Endpoints |
 | T1595.001 | HIGH | High-Fidelity External IP Block Scanning Detection |

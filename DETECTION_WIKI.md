@@ -70,6 +70,7 @@
 - [Advanced Spearphishing Link Redirection - T1598.001](#advanced-spearphishing-link-redirection---t1598001)
 - [Advanced BEC Mail & Financial Data Exfiltration - T1598.002](#advanced-bec-mail-&-financial-data-exfiltration---t1598002)
 - [High-Fidelity MFA/OTP Spoofing & Harvesting - T1598.003](#high-fidelity-mfaotp-spoofing-&-harvesting---t1598003)
+- [High-Fidelity Spearphishing Attachment Interaction - T1598.004](#high-fidelity-spearphishing-attachment-interaction---t1598004)
 - [Credential Dumping LSASS](#credential-dumping-lsass)
 
 ---
@@ -1095,6 +1096,21 @@
 - **Leírás:** Detects the creation of fraudulent MFA/OTP input prompts by monitoring  unusual PowerShell UI class loading and specific CLI keywords.  Filters out common IT automation and software deployment noise.
 - **Hamis pozitívok:** Legitimate IT support tools that prompt users for a temporary password or code., In-house applications using PowerShell wrappers for basic UI interaction.
 - **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Spearphishing Attachment Interaction - T1598.004
+- **Azonosító:** `T1598_004.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious execution patterns from email attachments. Focuses on HTML  smuggling and Office-to-script transitions while filtering out legitimate  SharePoint, OneDrive, and enterprise software update noise.
+- **Hamis pozitívok:** Internal business automation using Excel macros to pull data via PowerShell., Software installers opening "ReadMe" or "Release Notes" in HTML format., Users saving legitimate web pages for offline viewing.
+- **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 12:08:29`
+**Utolsó frissítés:** `2026-01-27 12:14:39`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 86 | 100% |
-| Splunk (SPL) | 86 | 100.0% |
-| Microsoft Sentinel (KQL) | 86 | 100.0% |
-| QRadar (AQL) | 63 | 73.3% |
-| Elastic (KQL/EQL) | 86 | 100.0% |
-| RSA NetWitness | 86 | 100.0% |
+| Sigma (Forrás) | 87 | 100% |
+| Splunk (SPL) | 87 | 100.0% |
+| Microsoft Sentinel (KQL) | 87 | 100.0% |
+| QRadar (AQL) | 63 | 72.4% |
+| Elastic (KQL/EQL) | 87 | 100.0% |
+| RSA NetWitness | 87 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -61,6 +61,7 @@
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |
+| T1583 | HIGH | High-Fidelity Offensive Infrastructure Provisioning - T1583 |
 | T1589 | HIGH | High-Confidence OSINT Identity Enumeration via Public APIs, High-Fidelity Identity Enumeration via Authentication Endpoints, Targeted OSINT Enumeration of Open Websites and Domains, Credential Enumeration via Authentication API (High Confidence) |
 | T1589.001 | HIGH | Credential Enumeration via Authentication API (High Confidence) |
 | T1589.002 | HIGH | High-Confidence OSINT Identity Enumeration via Public APIs |

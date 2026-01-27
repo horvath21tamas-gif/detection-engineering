@@ -866,7 +866,7 @@
 - **Kritikusság:** 🟠 (high)
 - **Leírás:** Detects systematic and automated discovery of business relationships.  It filters out common office productivity noise and focuses on bulk  search operations originating from non-standard parent processes.
 - **Hamis pozitívok:** Legal or Finance team performing legitimate data migration., Desktop search tools indexing local documents.
-- **MITRE ATT&CK:** `002`
+- **MITRE ATT&CK:** `002, T1591`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

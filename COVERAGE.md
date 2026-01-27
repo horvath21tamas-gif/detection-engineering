@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 08:57:42`
+**Utolsó frissítés:** `2026-01-27 09:01:58`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -72,7 +72,7 @@
 | T1590.004 | HIGH | Advanced Certificate Information Reconnaissance - T1590.004 |
 | T1590.005 | HIGH | Advanced Cloud Infrastructure Reconnaissance - T1590.005 |
 | T1590.006 | HIGH | Advanced Victim Web Page Info Reconnaissance - T1590.006 |
-| T1591 | HIGH | Advanced Organizational Infrastructure Enumeration - T1591 |
+| T1591 | HIGH | Advanced Organizational Infrastructure Enumeration - T1591, Advanced Business Relationship Information Discovery - T1591.002 |
 | T1591.001 | HIGH | Advanced Physical Location Infrastructure Enumeration - T1591.001 |
 | T1591.002 | HIGH | Advanced Business Relationship Information Discovery - T1591.002 |
 | T1591.003 | HIGH | Advanced Knowledge Management Discovery - T1591.003 |

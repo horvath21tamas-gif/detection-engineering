@@ -1,0 +1,70 @@
+title: High-Fidelity Web Service and Cloud Storage Subversion - T1584.006
+id: 5ff4ee67-0271-4167-99ec-f121d104208c
+status: stable
+description: >
+  Detects unauthorized manipulation of web services and cloud storage by 
+  monitoring for ACL changes (making buckets public), suspicious file types 
+  being hosted (scripts/exes), and the use of third-party data transfer 
+  tools (rclone) outside of authorized contexts.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1584/006/
+tags:
+  - attack.resource_development
+  - attack.t1584.006
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_storage_ops:
+    - Image|endswith:
+        - '\aws.exe'         
+        - '\az.exe'          
+        - '\gsutil.exe'      
+        - '\rclone.exe'      
+        - '\mega.exe'        
+    - CommandLine|contains:
+        - 'put-bucket-acl'     
+        - '--acl public-read'  
+        - 'upload-batch'      
+        - 'sync'              
+        - 'copy'             
+
+  selection_high_risk_payloads:
+    CommandLine|contains:
+      - '.exe'
+      - '.dll'
+      - '.ps1'
+      - '.zip'
+      - '.7z'
+      - '--public-access'
+
+  filter_authorized_pipelines:
+    - User|contains:
+        - 'svc_backup'
+        - 'svc_deploy'
+        - 'github_actions_runner'
+    - Image|contains:
+        - '\Veeam\'
+        - '\actions-runner\'
+        - '\Jenkins\'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_high_risk_payloads
+
+  filter_common_files:
+    CommandLine|contains:
+      - '.jpg'
+      - '.png'
+      - '.pdf'
+      - '.docx'
+    condition: not selection_high_risk_payloads
+
+  condition: (selection_storage_ops and selection_high_risk_payloads) and not filter_authorized_pipelines and not filter_interactive and not filter_common_files
+falsepositives:
+  - Authorized developers updating static website assets (e.g., .js or .css files).
+  - IT admins using rclone for one-time authorized data migration.
+  - Automated report generation uploading zip files to internal storage buckets.
+level: high

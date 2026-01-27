@@ -1,0 +1,58 @@
+title: High-Fidelity Cloud Account Takeover and Persistence - T1586.003
+id: d8ef8a46-f85f-4296-9ef5-cf1c74996362
+status: stable
+description: >
+  Detects unauthorized cloud account manipulation focusing on identity takeover 
+  and persistence. Targets the creation of new cloud credentials, MFA removal, 
+  and login profile updates from non-authorized processes, specifically filtering 
+  out known administrative and developer workflows.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1586/003/
+tags:
+  - attack.resource_development
+  - attack.t1586.003
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_cloud_identity_ops:
+    - Image|endswith:
+        - '\aws.exe'
+        - '\az.exe'
+        - '\gcloud.exe'
+        - '\mgc.exe'         
+    - CommandLine|contains:
+        - ' create-access-key'     
+        - ' update-login-profile'   
+        - ' create-service-principal' 
+        - ' add-password'          
+        - ' delete-virtual-mfa-device' 
+        - ' authentication-method-create' 
+
+  filter_authorized_iam:
+    User|contains:
+      - 'svc_iam_provisioner'
+      - 'adm_cloud_identity'
+      - 'entra_admin_deploy'
+    Image|contains:
+      - '\ManagementConsole\'
+      - '\Program Files\Terraform\'
+
+  filter_dev_context:
+    ParentImage|endswith:
+      - '\code.exe'          
+      - '\devenv.exe'       
+      - '\idea64.exe'    
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_cloud_identity_ops
+
+  condition: selection_cloud_identity_ops and not filter_authorized_iam and not filter_dev_context and not filter_interactive
+falsepositives:
+  - Authorized identity admins performing manual emergency recovery.
+  - Legitimate automated IAM cleanup or key rotation scripts.
+  - Developers debugging identity-related logic in authorized local environments.
+level: high

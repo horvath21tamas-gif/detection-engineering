@@ -53,6 +53,7 @@
 - [High-Fidelity Compromised Infrastructure and Resource Abuse - T1584](#high-fidelity-compromised-infrastructure-and-resource-abuse---t1584)
 - [High-Fidelity Domain Infrastructure Hijacking - T1584.001](#high-fidelity-domain-infrastructure-hijacking---t1584001)
 - [High-Fidelity DNS Server Configuration Subversion - T1584.002](#high-fidelity-dns-server-configuration-subversion---t1584002)
+- [High-Fidelity Serverless Function Subversion - T1584.004](#high-fidelity-serverless-function-subversion---t1584004)
 - [High-Fidelity Botnet Agent Persistence and Control - T1584.005](#high-fidelity-botnet-agent-persistence-and-control---t1584005)
 - [High-Fidelity Account Compromise and Identity Manipulation - T1586](#high-fidelity-account-compromise-and-identity-manipulation---t1586)
 - [High-Fidelity Automated Social Media Manipulation - T1586.001](#high-fidelity-automated-social-media-manipulation---t1586001)
@@ -875,6 +876,21 @@
 - **Leírás:** Detects unauthorized DNS infrastructure manipulation by monitoring for  critical configuration changes (zone resets, master updates) and  suspicious child processes spawned directly from DNS services.
 - **Hamis pozitívok:** Authorized IPAM software performing DNS zone synchronization., Emergency manual DNS recovery by authorized senior administrators., Vulnerability scanners probing the DNS service (e.g., Nessus).
 - **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Serverless Function Subversion - T1584.004
+- **Azonosító:** `T1584_004.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized modification of serverless functions (Lambda, Azure Functions, GCP) by focusing on high-risk parameters like layer injection and environment variable manipulation, while strictly filtering for authorized CI/CD pipeline service accounts.
+- **Hamis pozitívok:** Emergency manual hotfix by a senior Cloud Architect from a jump-server., Authorized security testing/red teaming focusing on FaaS., Initial setup of serverless infrastructure before CI/CD is established.
+- **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

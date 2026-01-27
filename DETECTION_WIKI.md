@@ -63,6 +63,7 @@
 - [High-Confidence Firmware Enumeration Against Network Devices](#high-confidence-firmware-enumeration-against-network-devices)
 - [High-Confidence Client Configuration Fingerprinting (Reconnaissance)](#high-confidence-client-configuration-fingerprinting-(reconnaissance))
 - [High-Fidelity Automated Web Reconnaissance - T1593](#high-fidelity-automated-web-reconnaissance---t1593)
+- [High-Fidelity Automated Search Engine Reconnaissance - T1593.002](#high-fidelity-automated-search-engine-reconnaissance---t1593002)
 - [High-Fidelity Social Media Entity Harvesting - T1593.003](#high-fidelity-social-media-entity-harvesting---t1593003)
 - [High-Fidelity Active Scanning Detection (Behavior-Based)](#high-fidelity-active-scanning-detection-(behavior-based))
 - [High-Fidelity External IP Block Scanning Detection](#high-fidelity-external-ip-block-scanning-detection)
@@ -1002,6 +1003,21 @@
 - **Leírás:** Detects automated web scraping and OSINT collection patterns targeting  social media and public sites. Focuses on headless browser automation  and specialized CLI tools while filtering out legitimate HR and Marketing activity.
 - **Hamis pozitívok:** Marketing teams using automated tools for brand monitoring., HR department using LinkedIn automation for bulk recruiting., Software testing (QA) using Selenium/Webdriver.
 - **MITRE ATT&CK:** `T1593`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Automated Search Engine Reconnaissance - T1593.002
+- **Azonosító:** `T1593_002.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects automated reconnaissance using search engines by monitoring for headless  browser flags and systematic dorking patterns. Specifically filters out  legitimate developer activity and interactive browser usage to minimize false positives.
+- **Hamis pozitívok:** SEO/Marketing tools performing automated ranking checks., Developers using CLI-based search for error code resolution., Vulnerability scanners (authorized).
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

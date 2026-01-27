@@ -1,0 +1,77 @@
+title: High-Fidelity Automated Web Reconnaissance - T1593
+id: e589f4cd-f3ef-4664-ac87-66cfe3cdc606
+status: stable
+description: >
+  Detects automated web scraping and OSINT collection patterns targeting 
+  social media and public sites. Focuses on headless browser automation 
+  and specialized CLI tools while filtering out legitimate HR and Marketing activity.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1593/
+tags:
+  - attack.reconnaissance
+  - attack.t1593
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_specialized_tools:
+    - Image|endswith:
+        - '\sherlock.exe'      
+        - '\theHarvester.exe'  
+        - '\social-analyzer.exe'
+        - '\photon.exe'        
+        - '\spiderfoot.exe'
+    - CommandLine|contains:
+        - 'twint'              
+        - 'instagram-scraper'
+        - 'ghunt'              
+
+  selection_automation_flags:
+    CommandLine|contains:
+      - '--headless'          
+      - '--remote-debugging-port'
+      - '--disable-gpu'        
+      - 'webdriver'            
+      - 'user-data-dir'        
+
+  selection_scripted_recon:
+    - Image|endswith:
+        - '\python.exe'
+        - '\node.exe'
+        - '\curl.exe'
+    - CommandLine|contains:
+        - 'linkedin.com/in/'
+        - 'twitter.com/'
+        - 'facebook.com/'
+        - 'glassdoor.com/Reviews'
+
+  filter_browser_internal:
+    - CommandLine|contains:
+        - '--type=utility'
+        - '--type=gpu-process'
+        - '--type=renderer'
+    - ParentImage|endswith:
+        - '\chrome.exe'
+        - '\msedge.exe'
+
+  filter_hr_marketing:
+    User|contains:
+      - 'hr_user'
+      - 'recruiter'
+      - 'mkt_lead'
+    CommandLine|contains:
+      - 'campaign'
+      - 'talent'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_specialized_tools
+
+  condition: (selection_specialized_tools or (selection_automation_flags and selection_scripted_recon)) and not filter_browser_internal and not filter_hr_marketing and not filter_interactive
+falsepositives:
+  - Marketing teams using automated tools for brand monitoring.
+  - HR department using LinkedIn automation for bulk recruiting.
+  - Software testing (QA) using Selenium/Webdriver.
+level: high

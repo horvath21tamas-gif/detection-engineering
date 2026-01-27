@@ -1,0 +1,59 @@
+title: High-Fidelity Email Forwarding Rule Manipulation - T1586.002
+id: 1fa900b1-9575-41b0-b36c-8daf27bb69b6
+status: stable
+description: >
+  Detects the creation or modification of email forwarding/redirection rules via 
+  command-line tools (PowerShell, Microsoft Graph CLI). This is a high-confidence 
+  indicator of Account Takeover (ATO) where an attacker attempts to exfiltrate 
+  sensitive emails (invoices, password resets) without user interaction.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1586/002/
+tags:
+  - attack.resource_development
+  - attack.t1586.002
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_powershell_rules:
+    - Image|endswith:
+        - '\powershell.exe'
+        - '\pwsh.exe'
+    - CommandLine|contains:
+        - 'New-InboxRule'
+        - 'Set-InboxRule'
+        - 'Set-Mailbox'
+    - CommandLine|contains:
+        - 'ForwardTo'
+        - 'ForwardAsAttachmentTo'
+        - 'RedirectTo'
+        - 'DeliverToMailboxAndForward'
+
+  selection_graph_cli:
+    - Image|endswith: '\mgc.exe'
+    - CommandLine|contains:
+        - 'messageRules'
+        - 'mailFolders'
+
+  filter_interactive_outlook:
+    ParentImage|endswith:
+      - '\explorer.exe'
+      - '\outlook.exe'
+    condition: not selection_powershell_rules
+
+  filter_authorized_it:
+    User|contains:
+      - 'svc_exchange_migration'
+      - 'adm_helpdesk_mail'
+      - 'it_ops_automation'
+
+  filter_system:
+    User: 'NT AUTHORITY\SYSTEM'
+
+  condition: (selection_powershell_rules or selection_graph_cli) and not filter_interactive_outlook and not filter_authorized_it and not filter_system
+falsepositives:
+  - IT administrators using PowerShell for bulk mailbox migration or cleanup.
+  - Power users who prefer managing their mailbox via scripts rather than the GUI.
+level: high

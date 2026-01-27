@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\aws.exe", "*\az.exe", "*\gcloud.exe")) or (ProcessCommandLine in ("* configure *", "* iam create-user*", "* login --service-principal*", "* account set *", "* organizations create*"))) or ((FolderPath in ("*\python.exe", "*\pwsh.exe")) or (ProcessCommandLine contains "boto3" and ProcessCommandLine contains ".aws/credentials") or (ProcessCommandLine in ("*DefaultAzureCredential*", "*GoogleCredentials*")))) and (not ((User in ("*svc_jenkins*", "*svc_terraform*", "*gitlab_runner*", "*adm_cloud_deploy*")) and (FolderPath in ("*\Program Files\Terraform\*", "*\actions-runner\*")))) and (not (ParentProcessName in ("*\code.exe", "*\devenv.exe", "*\idea64.exe"))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_cloud_bootstrap"))

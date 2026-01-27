@@ -1,0 +1,64 @@
+title: High-Fidelity MFA/OTP Spoofing & Harvesting - T1598.003
+id: 9c089010-9810-45e6-a154-b1e89c606642
+status: stable
+description: >
+  Detects the creation of fraudulent MFA/OTP input prompts by monitoring 
+  unusual PowerShell UI class loading and specific CLI keywords. 
+  Filters out common IT automation and software deployment noise.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1598/003/
+tags:
+  - attack.initial_access
+  - attack.t1598.003
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_pwsh_ui:
+    - Image|endswith:
+        - '\powershell.exe'
+        - '\pwsh.exe'
+      CommandLine|contains:
+        - 'System.Windows.Forms'
+        - 'System.Drawing'
+        - 'Microsoft.VisualBasic.Interaction'
+    - CommandLine|contains:
+        - 'OTP'
+        - 'MFA'
+        - 'Hitelesito'
+        - 'kod'
+        - 'Verification'
+
+  selection_msg_spam:
+    Image|endswith: '\msg.exe'
+    CommandLine|contains:
+      - 'approve'
+      - 'confirm'
+      - 'megerosites'
+      - 'fogadja el'
+
+  filter_mgmt_agents:
+    ParentImage|endswith:
+      - '\CcmExec.exe'
+      - '\SidecarAgent.exe' # Intune
+      - '\ManagementAgent.exe'
+    User: 'NT AUTHORITY\SYSTEM'
+
+  filter_updates:
+    CommandLine|contains:
+      - 'update'
+      - 'upgrade'
+      - 'check-for-updates'
+
+  filter_admin_paths:
+    Image|contains:
+      - '\Windows\AdminArsenal\' # PDQ Deploy
+      - '\Windows\System32\GroupPolicy\Machine\Scripts\' # GPO startup scripts
+
+  condition: (selection_pwsh_ui and not filter_mgmt_agents and not filter_admin_paths) or (selection_msg_spam and not filter_updates)
+falsepositives:
+  - Legitimate IT support tools that prompt users for a temporary password or code.
+  - In-house applications using PowerShell wrappers for basic UI interaction.
+level: high

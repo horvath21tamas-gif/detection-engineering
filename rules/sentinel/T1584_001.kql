@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\aws.exe", "*\az.exe", "*\flarectl.exe", "*\gcloud.exe")) or (ProcessCommandLine in ("*change-resource-record-sets*", "*network dns record-sets create*", "*dns record create*")) or (ProcessCommandLine in ("*NS*", "*SOA*", "*MX*"))) or (ProcessCommandLine in ("*--batch*", "*--file*", "*transaction*"))) and (not ((User in ("*svc_terraform*", "*svc_deploy*", "*adm_netops_infra*")) or (FolderPath in ("*\Terraform\*", "*\actions-runner\*")))) and (not (ProcessCommandLine in ("*TXT*", "*_acme-challenge*"))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_domain_hijacking"))

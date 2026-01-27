@@ -1,0 +1,61 @@
+title: Advanced Organizational Infrastructure Enumeration - T1591
+id: e5698b9f-94a9-4f8b-8308-e7f4b688a546
+status: stable
+description: >
+  Detects systematic gathering of organizational metadata (OUs, groups, users). 
+  It minimizes false positives by filtering known administrative consoles, 
+  service account syncs, and focusing on non-standard execution contexts.
+author: SOC Engineering
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1591/
+tags:
+  - attack.reconnaissance
+  - attack.t1591
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_recon_commands:
+    - CommandLine|contains:
+        - ' /domain'        
+        - 'objectCategory=' 
+        - 'objectClass='
+        - 'LDAP://'
+    - CommandLine|contains:
+        - 'Get-ADOrganizationalUnit' 
+        - 'Get-ADGroupMember'       
+        - 'Get-NetGPO'             
+
+  selection_tools:
+    Image|endswith:
+      - '\dsquery.exe'
+      - '\dsget.exe'
+      - '\csvde.exe'   
+      - '\ldifde.exe'  
+
+  filter_known_sync_accounts:
+    User|contains:
+      - 'SVC_IAM'
+      - 'SVC_HR'
+      - 'SVC_BACKUP'
+      - 'ADSync'
+
+  filter_admin_consoles:
+    ParentImage|endswith:
+      - '\mmc.exe'
+      - '\ServerManager.exe'
+      - '\dsa.msc'
+
+  filter_system_tasks:
+    User: 'NT AUTHORITY\SYSTEM'
+    ParentImage|endswith:
+      - '\services.exe'
+      - '\svchost.exe'
+
+  condition: (selection_recon_commands or selection_tools) and not filter_known_sync_accounts and not filter_admin_consoles and not filter_system_tasks
+falsepositives:
+  - Identity Management synchronization tasks.
+  - IT audits or mass user updates.
+  - Vulnerability scanners with domain credentials.
+level: high

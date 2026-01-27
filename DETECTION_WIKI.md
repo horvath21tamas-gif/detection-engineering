@@ -45,7 +45,7 @@
 - [Credential Enumeration via Authentication API (High Confidence)](#credential-enumeration-via-authentication-api-(high-confidence))
 - [High-Confidence OSINT Identity Enumeration via Public APIs](#high-confidence-osint-identity-enumeration-via-public-apis)
 - [Targeted OSINT Enumeration of Open Websites and Domains](#targeted-osint-enumeration-of-open-websites-and-domains)
-- [Network Reconnaissance with High Port Diversity](#network-reconnaissance-with-high-port-diversity)
+- [Network Reconnaissance with High Port Diversity (Windows Sysmon)](#network-reconnaissance-with-high-port-diversity-(windows-sysmon))
 - [High-Fidelity Host Information Reconnaissance Activity](#high-fidelity-host-information-reconnaissance-activity)
 - [High-Confidence Hardware Enumeration via Management Interfaces](#high-confidence-hardware-enumeration-via-management-interfaces)
 - [Advanced Software Enumeration Reconnaissance via Web Endpoints](#advanced-software-enumeration-reconnaissance-via-web-endpoints)
@@ -715,12 +715,12 @@
 
 ---
 
-## Network Reconnaissance with High Port Diversity
+## Network Reconnaissance with High Port Diversity (Windows Sysmon)
 - **Azonosító:** `T1590.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
-- **Leírás:** Detects network reconnaissance activity (T1590) by identifying external source IPs  attempting connections to multiple distinct ports, excluding common services.
-- **Hamis pozitívok:** Authorized external vulnerability scanners, Temporary misconfigured load balancers
+- **Leírás:** Detects network reconnaissance activity by identifying local processes  attempting connections to multiple distinct external ports using Sysmon Event ID 3.
+- **Hamis pozitívok:** Authorized vulnerability scanners, Browser activity to non-standard ports
 - **MITRE ATT&CK:** `T1590`
 
 #### 🚨 Response Playbook

@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 06:18:07`
+**Utolsó frissítés:** `2026-01-27 06:21:37`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -65,7 +65,7 @@
 | T1589.001 | HIGH | Credential Enumeration via Authentication API (High Confidence) |
 | T1589.002 | HIGH | High-Confidence OSINT Identity Enumeration via Public APIs |
 | T1589.003 | HIGH | Targeted OSINT Enumeration of Open Websites and Domains |
-| T1590 | HIGH | Network Reconnaissance with High Port Diversity |
+| T1590 | HIGH | Network Reconnaissance with High Port Diversity (Windows Sysmon) |
 | T1592 | HIGH | High-Confidence Firmware Enumeration Against Network Devices, Advanced Software Enumeration Reconnaissance via Web Endpoints, High-Confidence Hardware Enumeration via Management Interfaces, High-Confidence Client Configuration Fingerprinting (Reconnaissance), High-Fidelity Host Information Reconnaissance Activity |
 | T1592.001 | HIGH | High-Confidence Hardware Enumeration via Management Interfaces |
 | T1592.002 | HIGH | Advanced Software Enumeration Reconnaissance via Web Endpoints |

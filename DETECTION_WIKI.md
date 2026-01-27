@@ -67,6 +67,7 @@
 - [High-Confidence External Vulnerability Scanning Activity](#high-confidence-external-vulnerability-scanning-activity)
 - [Active Wordlist Scanning Against Authentication Endpoints](#active-wordlist-scanning-against-authentication-endpoints)
 - [High-Fidelity Victim-Owned Website Reconnaissance - T1597](#high-fidelity-victim-owned-website-reconnaissance---t1597)
+- [High-Fidelity Secret Hunting in Code Repositories - T1597.002](#high-fidelity-secret-hunting-in-code-repositories---t1597002)
 - [Advanced Phishing for Info & Credential Harvesting - T1598](#advanced-phishing-for-info-&-credential-harvesting---t1598)
 - [Advanced Spearphishing Link Redirection - T1598.001](#advanced-spearphishing-link-redirection---t1598001)
 - [Advanced BEC Mail & Financial Data Exfiltration - T1598.002](#advanced-bec-mail-&-financial-data-exfiltration---t1598002)
@@ -1052,6 +1053,21 @@
 - **Leírás:** Detects automated and systematic reconnaissance of organization-owned  web infrastructure. Focuses on bulk data extraction, recursive directory  brute-forcing, and the discovery of sensitive configuration files.
 - **Hamis pozitívok:** Web developers performing site migrations or integrity checks., Legitimate vulnerability scanners (e.g., Nessus, Burp Suite) if not excluded by IP., Automated SEO crawling tools used by marketing.
 - **MITRE ATT&CK:** `T1597`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Secret Hunting in Code Repositories - T1597.002
+- **Azonosító:** `T1597_002.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects professional secret-hunting tools and manual reconnaissance patterns  within code repositories. Focuses on deep history analysis (diff-searching)  and automated credential extraction while filtering out standard dev-cycles.
+- **Hamis pozitívok:** Security engineers performing authorized baseline scans of repositories., Pre-commit hooks that use gitleaks or similar tools to prevent secrets from being pushed., Developers searching for a specific past change where a credential was used as a placeholder.
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -1,0 +1,67 @@
+title: High-Fidelity Botnet Infrastructure Acquisition - T1583.005
+id: 32569f1f-6b80-42e1-ae86-31efc1146c08
+status: stable
+description: >
+  Detects the acquisition and preparation of botnet infrastructure. 
+  Focuses on identifying multi-architecture agent downloads, automated 
+  propagation attempts (brute-force), and botnet C2 client usage.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1583/005/
+tags:
+  - attack.resource_development
+  - attack.t1593.005
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_multi_arch_download:
+    - Image|endswith:
+        - '\curl.exe'
+        - '\wget.exe'
+        - '\python.exe'
+    - CommandLine|contains|all:
+        - 'http'
+        - 'chmod' 
+    - CommandLine|contains:
+        - '.arm7'
+        - '.mips'
+        - '.x86_64'
+        - '/bins/'
+
+  selection_bot_tools:
+    - Image|endswith:
+        - '\mirai-gen.exe'
+        - '\hydra.exe'       
+        - '\ncrack.exe'
+        - '\proxy-checker.exe'
+    - CommandLine|contains:
+        - 'botnet'
+        - 'cnc-connect'
+        - 'zombie-list'
+
+  filter_network_inventory:
+    - Image|contains:
+        - '\Lansweeper\'
+        - '\SolarWinds\'
+        - '\PRTG Network Monitor\'
+    - User|contains:
+        - 'svc_network_inventory'
+        - 'adm_netscan'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_bot_tools
+
+  filter_dev_context:
+    ParentImage|endswith:
+      - '\code.exe'
+      - '\devenv.exe'
+
+  condition: (selection_multi_arch_download or selection_bot_tools) and not filter_network_inventory and not filter_interactive and not filter_dev_context
+falsepositives:
+  - Authorized vulnerability scanners or red team exercises.
+  - Network admins performing bulk configuration changes via SSH scripts.
+  - Security researchers in isolated malware analysis environments.
+level: critical

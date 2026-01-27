@@ -1,0 +1,64 @@
+title: High-Fidelity Automated Social Media Manipulation - T1586.001
+id: cd3a7ea6-9f87-438c-a965-aa0b843ac79c
+status: stable
+description: >
+  Detects automated interaction with social media platforms via headless browser 
+  frameworks (Selenium, Puppeteer, Playwright). Attackers use these to scale 
+  account takeover (ATO) and bypass security controls by injecting stolen cookies.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1586/001/
+tags:
+  - attack.resource_development
+  - attack.t1586.001
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_headless_automation:
+    - Image|endswith:
+        - '\chrome.exe'
+        - '\msedge.exe'
+        - '\firefox.exe'
+    - CommandLine|contains:
+        - '--headless'              
+        - '--remote-debugging-port'   
+        - '--disable-gpu'           
+        - '--user-data-dir='        
+
+  selection_automation_tools:
+    - Image|endswith:
+        - '\python.exe'
+        - '\node.exe'
+    - CommandLine|contains:
+        - 'selenium'
+        - 'puppeteer'
+        - 'playwright'
+        - 'tweepy'                 
+        - 'instaloader'            
+
+  filter_marketing_automation:
+    User|contains:
+      - 'mkt_automation'
+      - 'social_media_mgr'
+    CommandLine|contains:
+      - 'C:\Program Files\Social_Tools\'
+
+  filter_dev_context:
+    ParentImage|endswith:
+      - '\code.exe'
+      - '\idea64.exe'
+    CommandLine|contains:
+      - 'localhost'
+      - '127.0.0.1'
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_headless_automation
+
+  condition: (selection_headless_automation or selection_automation_tools) and not filter_marketing_automation and not filter_dev_context and not filter_interactive
+falsepositives:
+  - Frontend developers running automated UI tests for internal apps.
+  - Marketing automation tools used for scheduled posts on authorized machines.
+level: high

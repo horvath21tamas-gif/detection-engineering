@@ -1,0 +1,72 @@
+title: Advanced Victim Web Page Info Reconnaissance - T1590.006
+id: 50fc8291-c514-4780-a46d-75e2bfb69d24
+status: stable
+description: >
+  Detects automated web reconnaissance and sensitive file discovery attempts. 
+  It minimizes false positives by filtering development environments and focusing 
+  on high-intent reconnaissance patterns across CLI tools.
+author: SOC Engineering
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1590/006/
+tags:
+  - attack.reconnaissance
+  - attack.t1590.006
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_sensitive_files:
+    CommandLine|contains:
+      - '/.env'
+      - '/.git/'
+      - '/.ssh/'
+      - '/config.php'
+      - '/web.config'
+      - '/settings.py'
+      - '/.aws/credentials'
+
+  selection_tools:
+    - Image|endswith:
+        - '\ffuf.exe'
+        - '\gobuster.exe'
+        - '\dirsearch.exe'
+        - '\nikto.exe'
+    - CommandLine|contains:
+        - ' -wordlist'
+        - ' -w '
+        - ' --threads'
+        - ' -recursive'
+
+  selection_fingerprint:
+    CommandLine|contains:
+      - ' --banner'
+      - ' --header "User-Agent:'
+      - 'whatweb'
+      - 'Wappalyzer'
+  
+  filter_local_dev:
+    CommandLine|contains:
+      - 'localhost:'
+      - '127.0.0.1'
+      - '::1'
+      - '.local'
+      - '.test'
+
+  filter_browsers:
+    ParentImage|endswith:
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\firefox.exe'
+
+  filter_updates:
+    Image|endswith:
+      - '\OneDrive.exe'
+      - '\Dropbox.exe'
+      - '\Teams.exe'
+
+  condition: (selection_sensitive_files or selection_tools or selection_fingerprint) and not filter_local_dev and not filter_browsers and not filter_updates
+falsepositives:
+  - Developers debugging cloud configurations or APIs.
+  - Legitimate security auditing or automated penetration testing.
+level: high

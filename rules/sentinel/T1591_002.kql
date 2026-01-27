@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((((FolderPath in ("*\findstr.exe", "*\grep.exe")) and (ProcessCommandLine in ("*partner*", "*vendor*", "*supplier*", "*contract*", "*beszallito*", "*szerzodes*"))) or (FolderPath endswith "\powershell.exe" and (ProcessCommandLine in ("* -Path *", "* -Recurse*")))) or (ProcessCommandLine in ("*customer_list*", "*client_database*", "*invoice_summary*", "*ugyfellista*", "*szamlak*"))) and (not (ParentProcessName in ("*\explorer.exe", "*\outlook.exe", "*\SearchHost.exe", "*\SearchIndexer.exe"))) and (not (User in ("*fin_*", "*proc_*", "*pénzügy*"))) and (not (User =~ "NT AUTHORITY\SYSTEM" and (ParentProcessName in ("*\services.exe", "*\svchost.exe"))))

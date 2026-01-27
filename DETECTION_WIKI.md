@@ -53,6 +53,7 @@
 - [Advanced Cloud Infrastructure Reconnaissance - T1590.005](#advanced-cloud-infrastructure-reconnaissance---t1590005)
 - [Advanced Victim Web Page Info Reconnaissance - T1590.006](#advanced-victim-web-page-info-reconnaissance---t1590006)
 - [Advanced Organizational Infrastructure Enumeration - T1591](#advanced-organizational-infrastructure-enumeration---t1591)
+- [Advanced Business Relationship Information Discovery - T1591.002](#advanced-business-relationship-information-discovery---t1591002)
 - [High-Fidelity Host Information Reconnaissance Activity](#high-fidelity-host-information-reconnaissance-activity)
 - [High-Confidence Hardware Enumeration via Management Interfaces](#high-confidence-hardware-enumeration-via-management-interfaces)
 - [Advanced Software Enumeration Reconnaissance via Web Endpoints](#advanced-software-enumeration-reconnaissance-via-web-endpoints)
@@ -833,6 +834,21 @@
 - **Leírás:** Detects systematic gathering of organizational metadata (OUs, groups, users).  It minimizes false positives by filtering known administrative consoles,  service account syncs, and focusing on non-standard execution contexts.
 - **Hamis pozitívok:** Identity Management synchronization tasks., IT audits or mass user updates., Vulnerability scanners with domain credentials.
 - **MITRE ATT&CK:** `T1591`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Advanced Business Relationship Information Discovery - T1591.002
+- **Azonosító:** `T1591_002.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic and automated discovery of business relationships.  It filters out common office productivity noise and focuses on bulk  search operations originating from non-standard parent processes.
+- **Hamis pozitívok:** Legal or Finance team performing legitimate data migration., Desktop search tools indexing local documents.
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

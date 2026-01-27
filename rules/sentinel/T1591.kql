@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (((ProcessCommandLine in ("* /domain*", "*objectCategory=*", "*objectClass=*", "*LDAP://*")) or (ProcessCommandLine in ("*Get-ADOrganizationalUnit*", "*Get-ADGroupMember*", "*Get-NetGPO*"))) or (FolderPath in ("*\dsquery.exe", "*\dsget.exe", "*\csvde.exe", "*\ldifde.exe"))) and (not (User in ("*SVC_IAM*", "*SVC_HR*", "*SVC_BACKUP*", "*ADSync*"))) and (not (ParentProcessName in ("*\mmc.exe", "*\ServerManager.exe", "*\dsa.msc"))) and (not (User =~ "NT AUTHORITY\SYSTEM" and (ParentProcessName in ("*\services.exe", "*\svchost.exe"))))
+| where (((ProcessCommandLine in ("* /domain*", "*objectCategory=*", "*objectClass=*", "*LDAP://*")) or (ProcessCommandLine in ("*Get-ADOrganizationalUnit*", "*Get-ADGroupMember*", "*Get-NetGPO*"))) or (FolderPath in ("*\dsquery.exe", "*\dsget.exe", "*\csvde.exe", "*\ldifde.exe"))) and (not (User in ("*SVC_IAM*", "*SVC_HR*", "*SVC_BACKUP*", "*ADSync*"))) and (not (ParentProcessName in ("*\mmc.exe", "*\ServerManager.exe", "*\dsa.msc"))) and (not (username =~ "NT AUTHORITY\SYSTEM" and (ParentProcessName in ("*\services.exe", "*\svchost.exe"))))

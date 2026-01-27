@@ -46,6 +46,7 @@
 - [High-Confidence OSINT Identity Enumeration via Public APIs](#high-confidence-osint-identity-enumeration-via-public-apis)
 - [Targeted OSINT Enumeration of Open Websites and Domains](#targeted-osint-enumeration-of-open-websites-and-domains)
 - [Network Reconnaissance with High Port Diversity](#network-reconnaissance-with-high-port-diversity)
+- [Advanced DNS Infrastructure Reconnaissance - T1590.002](#advanced-dns-infrastructure-reconnaissance---t1590002)
 - [High-Fidelity Host Information Reconnaissance Activity](#high-fidelity-host-information-reconnaissance-activity)
 - [High-Confidence Hardware Enumeration via Management Interfaces](#high-confidence-hardware-enumeration-via-management-interfaces)
 - [Advanced Software Enumeration Reconnaissance via Web Endpoints](#advanced-software-enumeration-reconnaissance-via-web-endpoints)
@@ -726,6 +727,21 @@
 #### 🚨 Response Playbook
 1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
 2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Advanced DNS Infrastructure Reconnaissance - T1590.002
+- **Azonosító:** `T1590_002.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic DNS reconnaissance. It reduces false positives by filtering  legitimate single-host lookups and focusing on infrastructure-wide enumeration  attempts like Zone Transfers or specific record harvesting.
+- **Hamis pozitívok:** High-level network troubleshooting by Domain Admins, Automated IT inventory or audit scripts
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

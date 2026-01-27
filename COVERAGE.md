@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-27 09:18:22`
+**Utolsó frissítés:** `2026-01-27 09:23:51`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 69 | 100% |
-| Splunk (SPL) | 69 | 100.0% |
-| Microsoft Sentinel (KQL) | 69 | 100.0% |
-| QRadar (AQL) | 61 | 88.4% |
-| Elastic (KQL/EQL) | 69 | 100.0% |
-| RSA NetWitness | 69 | 100.0% |
+| Sigma (Forrás) | 70 | 100% |
+| Splunk (SPL) | 70 | 100.0% |
+| Microsoft Sentinel (KQL) | 70 | 100.0% |
+| QRadar (AQL) | 62 | 88.6% |
+| Elastic (KQL/EQL) | 70 | 100.0% |
+| RSA NetWitness | 70 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -87,5 +87,6 @@
 | T1595.002 | HIGH | High-Confidence External Vulnerability Scanning Activity |
 | T1595.003 | HIGH | Active Wordlist Scanning Against Authentication Endpoints |
 | T1598 | HIGH | Advanced Phishing for Info & Credential Harvesting - T1598 |
+| T1598.001 | HIGH | Advanced Spearphishing Link Redirection - T1598.001 |
 | T1598.002 | HIGH | Advanced BEC Mail & Financial Data Exfiltration - T1598.002 |
 | T1598.003 | HIGH | High-Fidelity MFA/OTP Spoofing & Harvesting - T1598.003 |

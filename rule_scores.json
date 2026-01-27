@@ -56,6 +56,7 @@
     "credential_dumping_lsass.yml": 60,
     "T1219.yaml": 90,
     "T1197.yaml": 90,
+    "T1598_001.yaml": 90,
     "T1190.yaml": 80,
     "T1486.yaml": 100,
     "T1592.yaml": 90,

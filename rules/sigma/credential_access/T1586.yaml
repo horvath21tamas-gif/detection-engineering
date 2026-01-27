@@ -1,0 +1,64 @@
+title: High-Fidelity Account Compromise and Identity Manipulation - T1586
+id: 3b3710a7-1b89-477a-894d-f9f8a80da1c1
+status: stable
+description: >
+  Detects actions indicative of account compromise and takeover (ATO), such as 
+  unauthorized MFA modification, suspicious login profile updates, and automated 
+  credential testing from non-standard administrative processes.
+author: hota05
+date: 2026/01/27
+references:
+  - https://attack.mitre.org/techniques/T1586/
+tags:
+  - attack.resource_development
+  - attack.t1586
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_brute_force_tools:
+    - Image|endswith:
+        - '\hydra.exe'
+        - '\medusa.exe'
+        - '\patator.exe'
+        - '\ncrack.exe'
+    - CommandLine|contains:
+        - ' -P '            
+        - ' -L '            
+        - ' -C '            
+
+  selection_identity_takeover:
+    - Image|endswith:
+        - '\aws.exe'
+        - '\az.exe'
+        - '\mgc.exe'        
+    - CommandLine|contains:
+        - ' update-login-profile'      
+        - ' delete-virtual-mfa-device' 
+        - ' authentication-method-create' 
+        - ' ad user update --password'  
+
+  filter_authorized_iam:
+    User|contains:
+      - 'adm_helpdesk'
+      - 'svc_iam_provisioner'
+      - 'cloud_platform_admin'
+    Image|contains:
+      - '\ManagementConsole\'
+
+  filter_dev_context:
+    ParentImage|endswith:
+      - '\code.exe'          
+      - '\devenv.exe'        
+      - '\idea64.exe'        
+
+  filter_interactive:
+    ParentImage|endswith: '\explorer.exe'
+    condition: not selection_brute_force_tools
+
+  condition: (selection_brute_force_tools or selection_identity_takeover) and not filter_authorized_iam and not filter_dev_context and not filter_interactive
+falsepositives:
+  - Authorized Red Team exercises or internal penetration testing.
+  - Emergency account recovery by senior IT staff via CLI.
+  - Automated identity lifecycle management scripts (if not using the service account).
+level: high

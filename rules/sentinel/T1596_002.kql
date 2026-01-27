@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\pagodo.exe", "*\ghunt.exe", "*\dork-cli.exe", "*\snakedork.exe")) or (ProcessCommandLine in ("*ghdb*", "*google-dork*"))) or ((ProcessCommandLine contains "site:" and ProcessCommandLine contains "filetype:") and (ProcessCommandLine in ("*inurl:admin*", "*intitle:\"index of\"*", "*filetype:env*", "*filetype:sql*", "*filetype:config*"))) or ((FolderPath in ("*\curl.exe", "*\wget.exe", "*\python.exe", "*\pwsh.exe")) or (ProcessCommandLine in ("*google.com/search*q=*", "*bing.com/search*q=*", "*api.serpstack.com*", "*googleapis.com/customsearch*")))) and (not ((FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe")) or ParentProcessName endswith "\explorer.exe")) and (not ((ParentProcessName in ("*\code.exe", "*\devenv.exe", "*\idea64.exe")) and ProcessCommandLine contains "msdn.microsoft.com")) and (not User =~ "NT AUTHORITY\SYSTEM")

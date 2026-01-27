@@ -68,6 +68,7 @@
 - [Active Wordlist Scanning Against Authentication Endpoints](#active-wordlist-scanning-against-authentication-endpoints)
 - [High-Fidelity Open Technical Database Reconnaissance - T1596](#high-fidelity-open-technical-database-reconnaissance---t1596)
 - [High-Fidelity WHOIS Database Reconnaissance - T1596.001](#high-fidelity-whois-database-reconnaissance---t1596001)
+- [High-Fidelity Automated Search Engine Dorking - T1596.002](#high-fidelity-automated-search-engine-dorking---t1596002)
 - [High-Fidelity Passive DNS Reconnaissance - T1597.003](#high-fidelity-passive-dns-reconnaissance---t1597003)
 - [High-Fidelity Digital Certificate Reconnaissance - T1596.004](#high-fidelity-digital-certificate-reconnaissance---t1596004)
 - [High-Fidelity IP Infrastructure Reconnaissance - T1596.005](#high-fidelity-ip-infrastructure-reconnaissance---t1596005)
@@ -1074,6 +1075,21 @@
 - **Leírás:** Detects automated WHOIS reconnaissance patterns. Focuses on bulk domain registration  queries via CLI tools and API-based scripts (RDAP) while filtering out standard  browser-based research, software licensing, and routine IT diagnostics.
 - **Hamis pozitívok:** Domain administrators verifying registration details via CLI., Legal departments using WHOIS APIs for trademark enforcement., Procurement auditing vendor domain ownership.
 - **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Automated Search Engine Dorking - T1596.002
+- **Azonosító:** `T1596_002.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the automated use of search engine dorks and specialized CLI tools  designed for bulk technical data harvesting. Filters out interactive browser  searches and legitimate IDE-triggered error lookups.
+- **Hamis pozitívok:** Security analysts performing authorized audits for exposed files., Marketing or SEO tools using automated scripts for ranking checks., Developers using CLI-based search tools for documentation.
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -56,6 +56,7 @@
 - [Advanced Physical Location Infrastructure Enumeration - T1591.001](#advanced-physical-location-infrastructure-enumeration---t1591001)
 - [Advanced Business Relationship Information Discovery - T1591.002](#advanced-business-relationship-information-discovery---t1591002)
 - [Advanced Knowledge Management Discovery - T1591.003](#advanced-knowledge-management-discovery---t1591003)
+- [High-Fidelity Personnel Information Discovery - T1591.004](#high-fidelity-personnel-information-discovery---t1591004)
 - [High-Fidelity Host Information Reconnaissance Activity](#high-fidelity-host-information-reconnaissance-activity)
 - [High-Confidence Hardware Enumeration via Management Interfaces](#high-confidence-hardware-enumeration-via-management-interfaces)
 - [Advanced Software Enumeration Reconnaissance via Web Endpoints](#advanced-software-enumeration-reconnaissance-via-web-endpoints)
@@ -881,6 +882,21 @@
 - **Leírás:** Detects systematic and automated discovery of internal knowledge management systems.  It targets bulk data extraction patterns and command-line reconnaissance  while filtering out standard web browser usage and IT automation.
 - **Hamis pozitívok:** IT administrators performing site migrations or bulk edits via API., Authorized security scanners auditing internal documentation., Legitimate automated backup tasks.
 - **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Personnel Information Discovery - T1591.004
+- **Azonosító:** `T1591_004.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious, bulk extraction of employee data from Active Directory.  Focuses on non-standard LDAP queries and broad PowerShell filters that  deviate from routine administrative behavior.
+- **Hamis pozitívok:** Bulk user audits by internal compliance teams., New HR system integration testing., Complex AD reporting scripts by senior admins.
+- **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

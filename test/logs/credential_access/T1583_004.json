@@ -5,5 +5,5 @@
     "source_ip": "192.168.1.200",
     "user": "db_backup",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\sls.exe"
+    "Image|endswith": "\\serverless.exe"
 }

@@ -6,5 +6,5 @@
     "user": "admin",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\openssl.exe",
-    "CommandLine|contains": " -text"
+    "CommandLine|contains": " x509"
 }

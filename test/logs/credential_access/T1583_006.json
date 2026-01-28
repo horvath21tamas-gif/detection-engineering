@@ -5,5 +5,5 @@
     "source_ip": "192.168.1.180",
     "user": "db_backup",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\azcopy.exe"
+    "Image|endswith": "\\rclone.exe"
 }

@@ -7,5 +7,5 @@
     "domain": "CORP.LOCAL",
     "EventID": 4769,
     "Status": "0x0",
-    "TicketEncryptionType": "0x3"
+    "TicketEncryptionType": "0x1"
 }

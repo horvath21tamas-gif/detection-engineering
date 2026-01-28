@@ -5,5 +5,5 @@
     "source_ip": "192.168.1.98",
     "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "CommandLine|contains": "Get-ADUser -Filter *"
+    "CommandLine|contains": "Get-ADGroupMember -Identity \"Domain Admins\""
 }

@@ -6,5 +6,5 @@
     "user": "db_backup",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\nltest.exe",
-    "CommandLine|contains": "/dclist:"
+    "CommandLine|contains": "/domain_trusts"
 }

@@ -3,5 +3,7 @@
     "timestamp": "2026-01-28T07:17:22.471138",
     "Product": "windows",
     "Service": "sysmon",
-    "CommandLine": ".exe"
+    "CommandLine": ".jpg",
+    "ParentImage": "\\explorer.exe",
+    "condition": "not selection_high_risk_payloads"
 }

@@ -4,5 +4,7 @@
     "Product": "windows",
     "Service": "sysmon",
     "Image": "\\powershell.exe",
-    "CommandLine": "IEX"
+    "CommandLine": "IEX",
+    "User": "NT AUTHORITY\\SYSTEM",
+    "ParentImage": "\\Windows\\Installer\\"
 }

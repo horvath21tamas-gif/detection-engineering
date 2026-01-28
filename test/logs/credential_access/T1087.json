@@ -2,5 +2,9 @@
     "event_id": "87fcbe89-edde-4ce5-b4e2-cc5d6ad3315c",
     "timestamp": "2026-01-28T07:17:22.409078",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "Image": "\\cmd.exe",
+    "CommandLine": "administrators",
+    "ParentImage": "\\Windows\\CCM\\",
+    "User": "SYSTEM"
 }

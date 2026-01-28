@@ -4,5 +4,7 @@
     "Product": "windows",
     "Service": "sysmon",
     "TargetImage": "\\lsass.exe",
-    "GrantedAccess": "0x10"
+    "GrantedAccess": "0x10",
+    "SourceImage": "\\CcmExec.exe",
+    "CallTrace": "C:\\Windows\\System32\\ntdll.dll+"
 }

@@ -3,5 +3,6 @@
     "timestamp": "2026-01-28T07:17:22.637872",
     "Product": "windows",
     "Service": "sysmon",
-    "CommandLine": "\\AppData\\"
+    "CommandLine": "\\Microsoft\\Windows\\SoftwareDistribution\\",
+    "ParentImage": "\\msiexec.exe"
 }

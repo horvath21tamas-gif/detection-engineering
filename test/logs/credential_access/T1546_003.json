@@ -2,5 +2,8 @@
     "event_id": "f775cc55-6c65-4840-bcac-edaa3f5f3a59",
     "timestamp": "2026-01-28T07:17:22.371413",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "Image": "\\Microsoft Monitoring Agent\\",
+    "CommandLine": "HealthCheck",
+    "User": "SYSTEM"
 }

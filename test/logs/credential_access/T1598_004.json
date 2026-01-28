@@ -4,6 +4,7 @@
     "Product": "windows",
     "Service": "sysmon",
     "Image": "\\powershell.exe",
-    "CommandLine": " -WindowStyle Hidden",
-    "ParentImage": "\\winword.exe"
+    "CommandLine": "--type=utility",
+    "ParentImage": "\\Windows\\Installer\\",
+    "username": "NT AUTHORITY\\SYSTEM"
 }

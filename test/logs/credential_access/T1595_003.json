@@ -4,8 +4,8 @@
     "Product": "generic",
     "Service": "sysmon",
     "SrcIp": "1.",
-    "UriStem": "/login",
+    "UriStem": ".css",
     "UriQuery": "user=",
     "Status": 401,
-    "UserAgent": "python"
+    "UserAgent": "nessus"
 }

@@ -5,5 +5,5 @@
     "Service": "sysmon",
     "ParentImage": "\\outlook.exe",
     "Image": "\\chrome.exe",
-    "CommandLine": "--incognito"
+    "CommandLine": ".local"
 }

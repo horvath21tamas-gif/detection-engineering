@@ -3,6 +3,8 @@
     "timestamp": "2026-01-28T07:17:22.655974",
     "Product": "windows",
     "Service": "sysmon",
-    "Image": "\\findstr.exe",
-    "CommandLine": ".dwg"
+    "Image": "\\acad.exe",
+    "CommandLine": ".dwg",
+    "ParentImage": "\\chrome.exe",
+    "User": "facility"
 }

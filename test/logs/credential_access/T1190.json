@@ -2,5 +2,10 @@
     "event_id": "059b9df3-8dac-41dd-a6da-a934bf1c35d7",
     "timestamp": "2026-01-28T07:17:22.780216",
     "Product": "generic",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "cs-uri-query": "<script",
+    "cs-method": "POST",
+    "sc-status": 200,
+    "cs-user-agent": "sqlmap",
+    "cs-uri-stem": ".js"
 }

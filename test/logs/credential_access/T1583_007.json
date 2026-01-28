@@ -4,5 +4,7 @@
     "Product": "windows",
     "Service": "sysmon",
     "Image": "\\terraform.exe",
-    "CommandLine": "aws_lambda_function"
+    "CommandLine": "aws_lambda_function",
+    "ParentImage": "\\explorer.exe",
+    "condition": "not selection_serverless_tools"
 }

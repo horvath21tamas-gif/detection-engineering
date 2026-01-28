@@ -3,5 +3,8 @@
     "timestamp": "2026-01-28T07:17:22.462019",
     "Product": "windows",
     "Service": "sysmon",
-    "Image": "\\dsquery.exe"
+    "Image": "\\dsquery.exe",
+    "User": "SVC_IAM",
+    "ParentImage": "\\services.exe",
+    "username": "NT AUTHORITY\\SYSTEM"
 }

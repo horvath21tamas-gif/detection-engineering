@@ -3,5 +3,6 @@
     "timestamp": "2026-01-28T07:17:22.633395",
     "Product": "windows",
     "Service": "sysmon",
-    "CommandLine": "action=allow"
+    "CommandLine": "show",
+    "ParentImage": "\\CcmExec.exe"
 }

@@ -2,5 +2,7 @@
     "event_id": "ee2f96a9-5b80-470a-bc6d-95f8fa6731cb",
     "timestamp": "2026-01-28T07:17:22.376578",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "User": "svc_soc",
+    "Image": "\\Nmap\\"
 }

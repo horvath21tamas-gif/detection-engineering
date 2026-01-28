@@ -2,5 +2,9 @@
     "event_id": "bfa9777c-f5c2-41e7-81ac-f0125ffd17f3",
     "timestamp": "2026-01-28T07:17:22.642459",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "Image": "\\schtasks.exe",
+    "CommandLine": "\\Users\\",
+    "ParentImage": "\\Windows\\CCM\\",
+    "User": "NT AUTHORITY\\SYSTEM"
 }

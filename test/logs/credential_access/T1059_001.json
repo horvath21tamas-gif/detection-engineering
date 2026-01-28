@@ -2,5 +2,9 @@
     "event_id": "e3d1e19d-55f3-4af6-a65a-89475e747aaf",
     "timestamp": "2026-01-28T07:17:22.562822",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "Image": "\\powershell.exe",
+    "CommandLine": "-nop",
+    "ParentImage": "\\Windows\\CCM\\",
+    "User": "NT AUTHORITY\\SYSTEM"
 }

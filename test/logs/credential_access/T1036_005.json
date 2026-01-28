@@ -2,5 +2,9 @@
     "event_id": "24913bcb-b313-44ee-90ed-697c6322b0fd",
     "timestamp": "2026-01-28T07:17:22.651564",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "Image": "\\cmd.exe",
+    "CommandLine": "C:\\Windows\\System32\\",
+    "User": "NT AUTHORITY\\SYSTEM",
+    "ParentImage": "\\Windows\\Installer\\"
 }

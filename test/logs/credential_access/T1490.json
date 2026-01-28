@@ -2,5 +2,9 @@
     "event_id": "8e292d20-77e8-4f61-8728-c98d0e517e05",
     "timestamp": "2026-01-28T07:17:22.541929",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "Image": "\\vssadmin.exe",
+    "CommandLine": "delete shadows",
+    "ParentImage": "\\Veeam\\",
+    "User": "SYSTEM"
 }

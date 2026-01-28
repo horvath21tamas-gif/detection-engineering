@@ -2,5 +2,11 @@
     "event_id": "8faef71e-fa79-4da3-95b3-5cbca8572bd3",
     "timestamp": "2026-01-28T07:17:22.846659",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "url": "microsoft.com",
+    "url_domain_age": 30,
+    "url_reputation": "low",
+    "email_content_type": "text/html",
+    "sender_display_name": "Microsoft",
+    "sender_domain": "microsoft.com"
 }

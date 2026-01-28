@@ -2,5 +2,9 @@
     "event_id": "75d3b16c-98e9-44d8-ba2a-7c2edd591689",
     "timestamp": "2026-01-28T07:17:22.789371",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "Image": "\\sc.exe",
+    "CommandLine": "stop",
+    "ParentImage": "\\Veeam\\",
+    "User": "SYSTEM"
 }

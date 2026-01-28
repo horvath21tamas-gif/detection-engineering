@@ -6,6 +6,6 @@
     "SrcIp": "1.",
     "UriStem": "/search",
     "UriQuery": "site:",
-    "UserAgent": "curl",
+    "UserAgent": "uptime",
     "Status": 200
 }

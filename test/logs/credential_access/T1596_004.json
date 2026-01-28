@@ -2,5 +2,9 @@
     "event_id": "e5d4dbb4-a2ef-45b7-8d23-94a014d16796",
     "timestamp": "2026-01-28T07:17:22.687313",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "username": "NT AUTHORITY\\SYSTEM",
+    "Image": "\\Qualys\\",
+    "CommandLine": " -verify",
+    "User": "svc_soc"
 }

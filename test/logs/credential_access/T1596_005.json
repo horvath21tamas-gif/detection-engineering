@@ -2,5 +2,7 @@
     "event_id": "af72b038-71ae-4177-bd77-09b87eaa4d56",
     "timestamp": "2026-01-28T07:17:22.381614",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "username": "NT AUTHORITY\\SYSTEM",
+    "Image": "\\SentinelOne\\"
 }

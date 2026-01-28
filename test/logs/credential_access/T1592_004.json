@@ -5,7 +5,7 @@
     "Service": "sysmon",
     "SrcIp": "1.",
     "HttpMethod": "HEAD",
-    "UriStem": "/",
-    "UserAgent": "curl",
+    "UriStem": ".css",
+    "UserAgent": "nessus",
     "RequestHeaders": "Accept-Language"
 }

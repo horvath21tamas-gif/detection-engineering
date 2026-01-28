@@ -4,5 +4,7 @@
     "Product": "windows",
     "Service": "sysmon",
     "CommandLine": "\\AppData\\Local\\Temp\\",
-    "Image": "\\csc.exe"
+    "Image": "\\csc.exe",
+    "ParentImage": "\\mscorsvw.exe",
+    "condition": "not (selection_c2_build or selection_packers)"
 }

@@ -2,5 +2,9 @@
     "event_id": "c8b7b014-479c-4799-af15-0b6d4c90e610",
     "timestamp": "2026-01-28T07:17:22.842419",
     "Product": "windows",
-    "Service": "security"
+    "Service": "security",
+    "EventID": 4625,
+    "LogonType": 2,
+    "TargetUserName": "svc_",
+    "WorkstationName": "EXCHANGE"
 }

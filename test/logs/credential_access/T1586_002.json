@@ -2,5 +2,9 @@
     "event_id": "b8f43c27-e286-46dd-9249-1a8f67ff090d",
     "timestamp": "2026-01-28T07:17:22.404544",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "ParentImage": "\\explorer.exe",
+    "condition": "not selection_powershell_rules",
+    "User": "svc_exchange_migration",
+    "username": "NT AUTHORITY\\SYSTEM"
 }

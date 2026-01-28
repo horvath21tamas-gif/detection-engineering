@@ -3,5 +3,8 @@
     "timestamp": "2026-01-28T07:17:22.422323",
     "Product": "windows",
     "Service": "sysmon",
-    "CommandLine": "ifconfig.me"
+    "CommandLine": "--check-connection",
+    "username": "NT AUTHORITY\\SYSTEM",
+    "ParentImage": "\\services.exe",
+    "Image": "\\AppData\\Local\\Temp\\"
 }

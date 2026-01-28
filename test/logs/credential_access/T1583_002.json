@@ -2,5 +2,9 @@
     "event_id": "9f72a198-0c62-4489-b939-fd6421c0b07b",
     "timestamp": "2026-01-28T07:17:22.493872",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "ParentImage": "\\code.exe",
+    "condition": "not selection_specialized_tools",
+    "User": "svc_terraform",
+    "Image": "\\Program Files\\Terraform\\"
 }

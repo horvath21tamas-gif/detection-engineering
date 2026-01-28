@@ -4,5 +4,5 @@
     "Product": "windows",
     "Service": "sysmon",
     "Image": "\\reg.exe",
-    "CommandLine": "\\AppData\\Local\\Temp\\"
+    "CommandLine": "\\Microsoft\\Windows\\CloudExperienceHost"
 }

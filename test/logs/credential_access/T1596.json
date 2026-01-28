@@ -2,5 +2,9 @@
     "event_id": "e7a3c0ee-6453-45c9-a218-2c49c4a9bb1d",
     "timestamp": "2026-01-28T07:17:22.600803",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "username": "NT AUTHORITY\\SYSTEM",
+    "Image": "\\chrome.exe",
+    "ParentImage": "\\code.exe",
+    "CommandLine": "--config"
 }

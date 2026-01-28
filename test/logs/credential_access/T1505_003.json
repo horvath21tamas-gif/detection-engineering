@@ -2,5 +2,10 @@
     "event_id": "45fb3ae8-5ff3-4fee-bd08-c92e186cd86b",
     "timestamp": "2026-01-28T07:17:22.538223",
     "Product": "generic",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "cs-uri-stem": "/wp-admin/",
+    "cs-method": "POST",
+    "cs-uri-query": "cmd=",
+    "sc-status": 200,
+    "cs-user-agent": "curl"
 }

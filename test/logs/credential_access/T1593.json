@@ -3,5 +3,8 @@
     "timestamp": "2026-01-28T07:17:22.860621",
     "Product": "windows",
     "Service": "sysmon",
-    "CommandLine": "--headless"
+    "CommandLine": "campaign",
+    "User": "hr_user",
+    "ParentImage": "\\explorer.exe",
+    "condition": "not selection_specialized_tools"
 }

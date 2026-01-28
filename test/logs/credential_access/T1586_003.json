@@ -2,5 +2,9 @@
     "event_id": "f36b7525-46b5-45f6-9237-4945be879925",
     "timestamp": "2026-01-28T07:17:22.497876",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "User": "svc_iam_provisioner",
+    "Image": "\\ManagementConsole\\",
+    "ParentImage": "\\explorer.exe",
+    "condition": "not selection_cloud_identity_ops"
 }

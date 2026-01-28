@@ -3,6 +3,8 @@
     "timestamp": "2026-01-28T07:17:22.646898",
     "Product": "windows",
     "Service": "sysmon",
-    "Image": "\\findstr.exe",
-    "CommandLine": "invoice"
+    "Image": "\\OneDrive.exe",
+    "CommandLine": " /background",
+    "ParentImage": "\\outlook.exe",
+    "username": "NT AUTHORITY\\SYSTEM"
 }

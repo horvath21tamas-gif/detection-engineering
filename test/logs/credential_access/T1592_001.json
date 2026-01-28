@@ -4,7 +4,7 @@
     "Product": "generic",
     "Service": "sysmon",
     "SrcIp": "1.",
-    "UriStem": "/system",
+    "UriStem": "/api",
     "UriQuery": "cpu",
-    "UserAgent": "curl"
+    "UserAgent": "nessus"
 }

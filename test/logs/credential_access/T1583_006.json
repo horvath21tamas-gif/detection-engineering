@@ -2,5 +2,9 @@
     "event_id": "6b3d5f03-3091-4d97-ae57-0edf6dcf7a21",
     "timestamp": "2026-01-28T07:17:22.457915",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "User": "svc_backup",
+    "Image": "\\actions-runner\\",
+    "ParentImage": "\\explorer.exe",
+    "condition": "not selection_storage_provisioning"
 }

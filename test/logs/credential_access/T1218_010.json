@@ -2,5 +2,9 @@
     "event_id": "cea68c40-2924-4f35-bb7f-c5e1fe315fb4",
     "timestamp": "2026-01-28T07:17:22.435497",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "Image": "\\regsvr32.exe",
+    "CommandLine": "\\Users\\",
+    "ParentImage": "\\Windows\\Installer\\",
+    "User": "SYSTEM"
 }

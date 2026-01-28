@@ -2,5 +2,9 @@
     "event_id": "3bf8c95a-f4b7-440f-be00-3e07f820a6b9",
     "timestamp": "2026-01-28T07:17:22.762683",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "ServiceName": "PSEXECSVC",
+    "Computer": "MGMT-",
+    "User": "svc_",
+    "Image": "\\Windows\\CCM\\"
 }

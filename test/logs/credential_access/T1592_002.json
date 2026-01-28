@@ -5,8 +5,8 @@
     "Service": "sysmon",
     "SrcIp": "1.",
     "Method": "GET",
-    "UriStem": "/version",
+    "UriStem": ".css",
     "UriQuery": "version",
-    "UserAgent": "curl",
+    "UserAgent": "nessus",
     "Status": 200
 }

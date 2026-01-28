@@ -3,5 +3,7 @@
     "timestamp": "2026-01-28T07:17:22.476282",
     "Product": "windows",
     "Service": "sysmon",
-    "CommandLine": "inurl:admin"
+    "CommandLine": "msdn.microsoft.com",
+    "ParentImage": "\\code.exe",
+    "username": "NT AUTHORITY\\SYSTEM"
 }

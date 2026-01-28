@@ -4,9 +4,9 @@
     "Product": "generic",
     "Service": "sysmon",
     "SrcIp": "1.",
-    "UriStem": "/api/auth",
+    "UriStem": "/sso",
     "RequestBody": "username",
     "Method": "POST",
-    "UserAgent": "curl",
+    "UserAgent": "nessus",
     "Status": 401
 }

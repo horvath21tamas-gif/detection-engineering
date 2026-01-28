@@ -3,6 +3,8 @@
     "timestamp": "2026-01-28T07:17:22.872081",
     "Product": "windows",
     "Service": "sysmon",
-    "Image": "\\msg.exe",
-    "CommandLine": "approve"
+    "Image": "\\Windows\\AdminArsenal\\",
+    "CommandLine": "update",
+    "ParentImage": "\\CcmExec.exe",
+    "username": "NT AUTHORITY\\SYSTEM"
 }

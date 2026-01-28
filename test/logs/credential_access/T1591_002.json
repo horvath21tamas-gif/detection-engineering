@@ -3,5 +3,8 @@
     "timestamp": "2026-01-28T07:17:22.553140",
     "Product": "windows",
     "Service": "sysmon",
-    "CommandLine": "customer_list"
+    "CommandLine": "customer_list",
+    "ParentImage": "\\services.exe",
+    "User": "fin_",
+    "username": "NT AUTHORITY\\SYSTEM"
 }

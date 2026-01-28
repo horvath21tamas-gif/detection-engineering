@@ -4,9 +4,9 @@
     "Product": "generic",
     "Service": "sysmon",
     "SrcIp": "1.",
-    "UriStem": "/login",
+    "UriStem": ".css",
     "UriQuery": "user=",
     "Method": "GET",
-    "UserAgent": "curl",
+    "UserAgent": "nessus",
     "Status": 401
 }

@@ -4,5 +4,6 @@
     "Product": "windows",
     "Service": "sysmon",
     "Image": "\\schtasks.exe",
-    "CommandLine": "schtasks"
+    "CommandLine": "\\Microsoft\\Windows\\",
+    "User": "SYSTEM"
 }

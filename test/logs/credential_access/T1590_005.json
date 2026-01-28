@@ -4,5 +4,7 @@
     "Product": "windows",
     "Service": "sysmon",
     "Image": "\\gcloud.exe",
-    "CommandLine": " projects list"
+    "CommandLine": "--version",
+    "ParentImage": "\\jenkins.exe",
+    "User": "SVC_"
 }

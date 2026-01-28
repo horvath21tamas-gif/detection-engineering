@@ -2,5 +2,9 @@
     "event_id": "bf99cb36-8714-4daf-b187-c4a20ab4ea27",
     "timestamp": "2026-01-28T07:17:22.666335",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "User": "mkt_automation",
+    "CommandLine": "localhost",
+    "ParentImage": "\\explorer.exe",
+    "condition": "not selection_headless_automation"
 }

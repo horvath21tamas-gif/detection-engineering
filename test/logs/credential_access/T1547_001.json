@@ -2,5 +2,10 @@
     "event_id": "ae161f1f-48af-4dca-a9b1-68739ca9602c",
     "timestamp": "2026-01-28T07:17:22.730066",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "EventType": "SetValue",
+    "TargetObject": "\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+    "Details": "\\AppData\\",
+    "Image": "\\Windows\\Installer\\",
+    "User": "SYSTEM"
 }

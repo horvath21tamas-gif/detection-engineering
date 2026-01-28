@@ -7,6 +7,6 @@
     "UriStem": "/api/users",
     "UriQuery": "email=",
     "Method": "GET",
-    "UserAgent": "curl",
+    "UserAgent": "uptime",
     "Status": 200
 }

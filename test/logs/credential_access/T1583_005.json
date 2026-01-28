@@ -1,0 +1,9 @@
+{
+    "event_id": "0e006a9c-fae1-4987-9a40-356807585b6a",
+    "timestamp": "2026-01-28T06:37:08.839700",
+    "hostname": "WIN-SRV-29",
+    "source_ip": "192.168.1.72",
+    "user": "svc_sql",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\curl.exe"
+}

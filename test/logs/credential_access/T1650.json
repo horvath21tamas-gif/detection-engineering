@@ -1,0 +1,9 @@
+{
+    "event_id": "5d882086-4028-4399-bc55-e74ce53c31f6",
+    "timestamp": "2026-01-28T06:32:08.805106",
+    "hostname": "WIN-SRV-59",
+    "source_ip": "192.168.1.38",
+    "user": "admin",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\aws.exe"
+}

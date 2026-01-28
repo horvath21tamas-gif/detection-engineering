@@ -1,0 +1,9 @@
+{
+    "event_id": "10c48100-aa37-42fa-802c-79f85a18fd91",
+    "timestamp": "2026-01-28T06:23:08.798286",
+    "hostname": "WIN-SRV-90",
+    "source_ip": "192.168.1.157",
+    "user": "db_backup",
+    "domain": "CORP.LOCAL",
+    "SrcIp|startswith": "1."
+}

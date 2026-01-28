@@ -1,0 +1,9 @@
+{
+    "event_id": "ca4200af-6afb-41f8-b46d-2cf20bd573c1",
+    "timestamp": "2026-01-28T05:49:08.853640",
+    "hostname": "WIN-SRV-82",
+    "source_ip": "192.168.1.113",
+    "user": "db_backup",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\powershell_ise.exe"
+}

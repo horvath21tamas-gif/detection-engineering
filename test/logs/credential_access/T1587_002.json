@@ -1,0 +1,9 @@
+{
+    "event_id": "a4977230-5b5b-465c-9ed4-b1af243f3774",
+    "timestamp": "2026-01-28T06:33:08.578634",
+    "hostname": "WIN-SRV-56",
+    "source_ip": "192.168.1.170",
+    "user": "j.doe",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\certutil.exe"
+}

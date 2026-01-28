@@ -1,0 +1,9 @@
+{
+    "event_id": "85317d06-61db-4aaf-8c44-d717a35a4774",
+    "timestamp": "2026-01-28T06:23:08.876450",
+    "hostname": "WIN-SRV-82",
+    "source_ip": "192.168.1.152",
+    "user": "admin",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\net.exe"
+}

@@ -1,0 +1,9 @@
+{
+    "event_id": "d85188ae-39c9-452a-a961-89eb502e0dcf",
+    "timestamp": "2026-01-28T06:41:08.611931",
+    "hostname": "WIN-SRV-98",
+    "source_ip": "192.168.1.68",
+    "user": "admin",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\go.exe"
+}

@@ -1,0 +1,9 @@
+{
+    "event_id": "c462dbcd-9948-4667-93ae-e55c41ac58d0",
+    "timestamp": "2026-01-28T06:27:08.658602",
+    "hostname": "WIN-SRV-40",
+    "source_ip": "192.168.1.197",
+    "user": "svc_sql",
+    "domain": "CORP.LOCAL",
+    "SrcIp|startswith": "9."
+}

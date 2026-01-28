@@ -1,0 +1,9 @@
+{
+    "event_id": "7a6fe731-a309-486c-81a2-7f865ad7577a",
+    "timestamp": "2026-01-28T05:59:08.602876",
+    "hostname": "WIN-SRV-38",
+    "source_ip": "192.168.1.143",
+    "user": "j.doe",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\az.exe"
+}

@@ -1,0 +1,9 @@
+{
+    "event_id": "4707f90d-aaeb-44d8-80ff-e8be31e5b80f",
+    "timestamp": "2026-01-28T05:52:08.844065",
+    "hostname": "WIN-SRV-42",
+    "source_ip": "192.168.1.237",
+    "user": "svc_sql",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\sam.exe"
+}

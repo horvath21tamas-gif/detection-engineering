@@ -1,0 +1,9 @@
+{
+    "event_id": "bc38d223-a418-427a-bd63-bc74db9d9981",
+    "timestamp": "2026-01-28T06:40:08.771880",
+    "hostname": "WIN-SRV-78",
+    "source_ip": "192.168.1.117",
+    "user": "j.doe",
+    "domain": "CORP.LOCAL",
+    "CommandLine|contains": " -payload-type "
+}

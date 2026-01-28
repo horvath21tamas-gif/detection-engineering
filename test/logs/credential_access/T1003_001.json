@@ -1,0 +1,10 @@
+{
+    "event_id": "80d1356b-23f9-496a-9ec7-21d5a3dd3184",
+    "timestamp": "2026-01-28T06:22:08.574270",
+    "hostname": "WIN-SRV-43",
+    "source_ip": "192.168.1.38",
+    "user": "db_backup",
+    "domain": "CORP.LOCAL",
+    "TargetImage|endswith": "\\lsass.exe",
+    "GrantedAccess|contains": "0x10"
+}

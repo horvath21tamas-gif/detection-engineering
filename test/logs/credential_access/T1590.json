@@ -1,0 +1,10 @@
+{
+    "event_id": "5b521d84-3596-46b5-ba9a-4663341bb7ff",
+    "timestamp": "2026-01-28T05:52:08.909611",
+    "hostname": "WIN-SRV-89",
+    "source_ip": "192.168.1.43",
+    "user": "j.doe",
+    "domain": "CORP.LOCAL",
+    "EventID": 3,
+    "Protocol": "tcp"
+}

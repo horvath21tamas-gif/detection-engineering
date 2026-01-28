@@ -1,0 +1,9 @@
+{
+    "event_id": "db6d63df-0d55-4714-af34-5776c67a92b7",
+    "timestamp": "2026-01-28T06:36:08.413222",
+    "hostname": "WIN-SRV-63",
+    "source_ip": "192.168.1.17",
+    "user": "admin",
+    "domain": "CORP.LOCAL",
+    "CommandLine|contains": " --no-parent"
+}

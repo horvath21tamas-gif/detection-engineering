@@ -1,0 +1,9 @@
+{
+    "event_id": "94e08230-64e0-4bb2-a9fd-5a147ec6da03",
+    "timestamp": "2026-01-28T06:24:08.640960",
+    "hostname": "WIN-SRV-56",
+    "source_ip": "192.168.1.143",
+    "user": "svc_sql",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\shhgit.exe"
+}

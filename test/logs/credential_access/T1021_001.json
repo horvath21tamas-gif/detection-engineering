@@ -1,0 +1,10 @@
+{
+    "event_id": "af84a305-3aff-4c5f-82f0-9fdd179f677e",
+    "timestamp": "2026-01-28T06:30:08.724730",
+    "hostname": "WIN-SRV-64",
+    "source_ip": "192.168.1.23",
+    "user": "db_backup",
+    "domain": "CORP.LOCAL",
+    "EventID": 4624,
+    "LogonType": 10
+}

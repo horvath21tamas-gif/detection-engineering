@@ -1,0 +1,11 @@
+{
+    "event_id": "451c25c2-61e2-447c-a5c4-b848227d437e",
+    "timestamp": "2026-01-28T06:27:08.857264",
+    "hostname": "WIN-SRV-44",
+    "source_ip": "192.168.1.115",
+    "user": "admin",
+    "domain": "CORP.LOCAL",
+    "EventID": 4769,
+    "Status": "0x0",
+    "TicketEncryptionType": "0x3"
+}

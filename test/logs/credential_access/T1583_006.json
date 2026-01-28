@@ -1,0 +1,9 @@
+{
+    "event_id": "13b7b4a7-d59b-4f0e-87d5-9544d1d355d3",
+    "timestamp": "2026-01-28T06:44:08.503772",
+    "hostname": "WIN-SRV-70",
+    "source_ip": "192.168.1.156",
+    "user": "admin",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\rclone.exe"
+}

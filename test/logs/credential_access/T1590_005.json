@@ -1,0 +1,10 @@
+{
+    "event_id": "ac454c67-4451-4661-9bf0-968f9119568c",
+    "timestamp": "2026-01-28T06:03:08.792558",
+    "hostname": "WIN-SRV-69",
+    "source_ip": "192.168.1.141",
+    "user": "admin",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\aws.exe",
+    "CommandLine|contains": " s3api list-"
+}

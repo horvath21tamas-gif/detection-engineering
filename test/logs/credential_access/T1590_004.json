@@ -1,0 +1,10 @@
+{
+    "event_id": "19176193-2a01-4f97-8a30-eb69b385f2df",
+    "timestamp": "2026-01-28T06:42:08.534506",
+    "hostname": "WIN-SRV-10",
+    "source_ip": "192.168.1.179",
+    "user": "admin",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\openssl.exe",
+    "CommandLine|contains": " s_client"
+}

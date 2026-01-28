@@ -1,0 +1,9 @@
+{
+    "event_id": "2c062919-7299-469e-8c8e-667883504ef9",
+    "timestamp": "2026-01-28T06:43:08.788393",
+    "hostname": "WIN-SRV-43",
+    "source_ip": "192.168.1.31",
+    "user": "admin",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\cl.exe"
+}

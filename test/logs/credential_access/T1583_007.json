@@ -1,0 +1,9 @@
+{
+    "event_id": "1e416879-7972-41c4-b524-86ccfa1b23da",
+    "timestamp": "2026-01-28T06:20:08.901150",
+    "hostname": "WIN-SRV-18",
+    "source_ip": "192.168.1.128",
+    "user": "admin",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\sls.exe"
+}

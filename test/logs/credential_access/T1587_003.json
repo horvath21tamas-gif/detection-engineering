@@ -1,0 +1,9 @@
+{
+    "event_id": "a81463f5-8265-4557-b0f5-0c9610b5793d",
+    "timestamp": "2026-01-28T06:13:08.490317",
+    "hostname": "WIN-SRV-21",
+    "source_ip": "192.168.1.75",
+    "user": "admin",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\openssl.exe"
+}

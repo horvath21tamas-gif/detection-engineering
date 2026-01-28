@@ -1,0 +1,9 @@
+{
+    "event_id": "68352172-de7d-4c9d-a43b-bc0d7ed130be",
+    "timestamp": "2026-01-28T06:37:08.767302",
+    "hostname": "WIN-SRV-56",
+    "source_ip": "192.168.1.47",
+    "user": "admin",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\twint.exe"
+}

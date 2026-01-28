@@ -1,0 +1,10 @@
+{
+    "event_id": "bb772053-a792-4c94-831c-f3a6c2e22742",
+    "timestamp": "2026-01-28T06:33:08.598322",
+    "hostname": "WIN-SRV-28",
+    "source_ip": "192.168.1.192",
+    "user": "j.doe",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\grep.exe",
+    "CommandLine|contains": "vendor"
+}

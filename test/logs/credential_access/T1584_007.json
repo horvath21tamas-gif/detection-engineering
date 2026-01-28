@@ -1,0 +1,9 @@
+{
+    "event_id": "84bb0500-9900-4aa8-83eb-ccf0807c9570",
+    "timestamp": "2026-01-28T06:37:08.896688",
+    "hostname": "WIN-SRV-92",
+    "source_ip": "192.168.1.121",
+    "user": "db_backup",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\aws.exe"
+}

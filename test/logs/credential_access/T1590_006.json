@@ -1,0 +1,9 @@
+{
+    "event_id": "028c4782-d1ad-4064-a652-0c20563f54cd",
+    "timestamp": "2026-01-28T06:42:08.498627",
+    "hostname": "WIN-SRV-45",
+    "source_ip": "192.168.1.37",
+    "user": "j.doe",
+    "domain": "CORP.LOCAL",
+    "CommandLine|contains": "/.ssh/"
+}

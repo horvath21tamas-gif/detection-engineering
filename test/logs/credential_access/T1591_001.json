@@ -1,0 +1,9 @@
+{
+    "event_id": "aa172c07-fc93-404d-9bf0-b0827e97dacf",
+    "timestamp": "2026-01-28T06:05:08.701552",
+    "hostname": "WIN-SRV-53",
+    "source_ip": "192.168.1.72",
+    "user": "db_backup",
+    "domain": "CORP.LOCAL",
+    "CommandLine|contains": "riaszto"
+}

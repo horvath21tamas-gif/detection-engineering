@@ -1,0 +1,10 @@
+{
+    "event_id": "d5b60e73-e033-4958-95c8-ea958f37c145",
+    "timestamp": "2026-01-28T06:14:08.692496",
+    "hostname": "WIN-SRV-42",
+    "source_ip": "192.168.1.84",
+    "user": "svc_sql",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\tar.exe",
+    "CommandLine|contains": ".pst"
+}

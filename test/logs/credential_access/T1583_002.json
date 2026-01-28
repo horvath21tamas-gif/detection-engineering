@@ -1,0 +1,9 @@
+{
+    "event_id": "a843841c-516b-4a02-9ca3-48db10adab19",
+    "timestamp": "2026-01-28T05:48:08.539374",
+    "hostname": "WIN-SRV-73",
+    "source_ip": "192.168.1.183",
+    "user": "admin",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\python.exe"
+}

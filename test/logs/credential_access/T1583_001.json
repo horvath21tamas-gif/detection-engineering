@@ -1,0 +1,9 @@
+{
+    "event_id": "bea20dad-5930-457a-afed-8189b3f964a5",
+    "timestamp": "2026-01-28T06:01:08.783921",
+    "hostname": "WIN-SRV-12",
+    "source_ip": "192.168.1.208",
+    "user": "j.doe",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\pulumi.exe"
+}

@@ -1,0 +1,9 @@
+{
+    "event_id": "da5290c0-b822-4c52-9458-6db6a2c88aa0",
+    "timestamp": "2026-01-28T06:02:08.712155",
+    "hostname": "WIN-SRV-31",
+    "source_ip": "192.168.1.249",
+    "user": "admin",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\firefox.exe"
+}

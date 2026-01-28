@@ -1,0 +1,9 @@
+{
+    "event_id": "aa71814e-ba96-413a-ac6e-072348af74ba",
+    "timestamp": "2026-01-28T06:32:08.733288",
+    "hostname": "WIN-SRV-51",
+    "source_ip": "192.168.1.187",
+    "user": "db_backup",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\subfinder.exe"
+}

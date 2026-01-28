@@ -1,0 +1,9 @@
+{
+    "event_id": "d46b012f-7eab-4de0-a2ae-da51c9f38b5e",
+    "timestamp": "2026-01-28T06:24:08.830292",
+    "hostname": "WIN-SRV-80",
+    "source_ip": "192.168.1.245",
+    "user": "db_backup",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\gcloud.exe"
+}

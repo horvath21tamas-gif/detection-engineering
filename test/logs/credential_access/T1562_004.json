@@ -1,0 +1,9 @@
+{
+    "event_id": "b5c40c9f-8b86-46d2-b414-890be4058e8e",
+    "timestamp": "2026-01-28T06:16:08.678783",
+    "hostname": "WIN-SRV-78",
+    "source_ip": "192.168.1.95",
+    "user": "j.doe",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\netsh.exe"
+}

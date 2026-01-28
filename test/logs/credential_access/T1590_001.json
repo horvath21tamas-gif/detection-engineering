@@ -1,0 +1,10 @@
+{
+    "event_id": "6f2b63a9-bbb1-4571-b82f-f46a9c68ccc3",
+    "timestamp": "2026-01-28T06:21:08.468400",
+    "hostname": "WIN-SRV-34",
+    "source_ip": "192.168.1.234",
+    "user": "db_backup",
+    "domain": "CORP.LOCAL",
+    "Image|endswith": "\\ipconfig.exe",
+    "CommandLine|contains": " /all"
+}

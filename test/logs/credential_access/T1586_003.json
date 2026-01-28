@@ -1,9 +1,9 @@
 {
-    "event_id": "96981303-2a38-4060-bba8-e17e1b110e58",
-    "timestamp": "2026-01-28T06:15:08.543367",
-    "hostname": "WIN-SRV-14",
-    "source_ip": "192.168.1.180",
-    "user": "admin",
+    "event_id": "b7142497-574b-4678-a82a-103a888e1fc3",
+    "timestamp": "2026-01-28T06:19:46.089356",
+    "hostname": "WIN-SRV-28",
+    "source_ip": "192.168.1.127",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\aws.exe"
+    "Image|endswith": "\\gcloud.exe"
 }

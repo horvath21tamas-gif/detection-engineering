@@ -1,10 +1,10 @@
 {
-    "event_id": "a60d31ae-8f9b-4766-ae2f-740e1738266e",
-    "timestamp": "2026-01-28T05:51:08.884604",
-    "hostname": "WIN-SRV-50",
-    "source_ip": "192.168.1.108",
-    "user": "admin",
+    "event_id": "a58d770d-5d70-4197-bed0-be3d9ff6c531",
+    "timestamp": "2026-01-28T06:43:46.447427",
+    "hostname": "WIN-SRV-34",
+    "source_ip": "192.168.1.14",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\firefox.exe",
-    "CommandLine|contains": ".js"
+    "Image|endswith": "\\chrome.exe",
+    "CommandLine|contains": ".html"
 }

@@ -1,10 +1,10 @@
 {
-    "event_id": "fe86c63c-e8bd-403f-a76c-c2b9472d816a",
-    "timestamp": "2026-01-28T06:02:08.917887",
-    "hostname": "WIN-SRV-97",
-    "source_ip": "192.168.1.95",
-    "user": "db_backup",
+    "event_id": "e3bd4d2d-d3c9-46dc-81dd-780dae00ff3c",
+    "timestamp": "2026-01-28T06:48:46.480058",
+    "hostname": "WIN-SRV-45",
+    "source_ip": "192.168.1.210",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\powershell.exe",
-    "CommandLine|contains": "System.Windows.Forms"
+    "CommandLine|contains": "Microsoft.VisualBasic.Interaction"
 }

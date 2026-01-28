@@ -1,9 +1,9 @@
 {
-    "event_id": "a6f76ef8-0bee-45c6-8b6f-c738573b80ab",
-    "timestamp": "2026-01-28T06:24:08.849116",
-    "hostname": "WIN-SRV-58",
-    "source_ip": "192.168.1.30",
-    "user": "j.doe",
+    "event_id": "f35bb811-5a0c-4d72-9557-8c4b43d4ca47",
+    "timestamp": "2026-01-28T06:49:46.411848",
+    "hostname": "WIN-SRV-49",
+    "source_ip": "192.168.1.143",
+    "user": "admin",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\pwsh.exe"
+    "Image|endswith": "\\wmic.exe"
 }

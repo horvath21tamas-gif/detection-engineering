@@ -1,9 +1,9 @@
 {
-    "event_id": "ac969faa-a305-477e-8bd0-c0efe7f9e2f9",
-    "timestamp": "2026-01-28T06:10:08.861535",
-    "hostname": "WIN-SRV-24",
-    "source_ip": "192.168.1.161",
-    "user": "admin",
+    "event_id": "c27861e5-1bb5-49f1-b3db-92620c73413e",
+    "timestamp": "2026-01-28T06:18:46.424422",
+    "hostname": "WIN-SRV-59",
+    "source_ip": "192.168.1.239",
+    "user": "db_backup",
     "domain": "CORP.LOCAL",
-    "CommandLine|contains": " -irc "
+    "CommandLine|contains": " -flood"
 }

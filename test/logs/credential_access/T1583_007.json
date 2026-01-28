@@ -1,9 +1,9 @@
 {
-    "event_id": "1e416879-7972-41c4-b524-86ccfa1b23da",
-    "timestamp": "2026-01-28T06:20:08.901150",
-    "hostname": "WIN-SRV-18",
-    "source_ip": "192.168.1.128",
-    "user": "admin",
+    "event_id": "7cbe5b12-fa1d-4d43-ad1b-d2c7d100b9d6",
+    "timestamp": "2026-01-28T06:42:46.463522",
+    "hostname": "WIN-SRV-62",
+    "source_ip": "192.168.1.199",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\sls.exe"
+    "Image|endswith": "\\serverless.exe"
 }

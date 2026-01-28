@@ -1,9 +1,9 @@
 {
-    "event_id": "9b04e7de-0324-4eec-8964-db6d4b583587",
-    "timestamp": "2026-01-28T06:16:08.906307",
-    "hostname": "WIN-SRV-26",
-    "source_ip": "192.168.1.181",
+    "event_id": "eeddc1ad-a702-4bbd-9f3b-01a4adb58f9c",
+    "timestamp": "2026-01-28T06:16:46.468608",
+    "hostname": "WIN-SRV-79",
+    "source_ip": "192.168.1.116",
     "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\social-analyzer.exe"
+    "Image|endswith": "\\photon.exe"
 }

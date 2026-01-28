@@ -1,9 +1,9 @@
 {
-    "event_id": "9bbe3386-1880-4c92-a7d2-ed7bec5474d3",
-    "timestamp": "2026-01-28T06:07:08.645592",
-    "hostname": "WIN-SRV-48",
-    "source_ip": "192.168.1.62",
-    "user": "admin",
+    "event_id": "ef588230-e768-4b75-85a0-7d4ad5ceddf5",
+    "timestamp": "2026-01-28T06:36:46.209766",
+    "hostname": "WIN-SRV-51",
+    "source_ip": "192.168.1.10",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\amass.exe"
 }

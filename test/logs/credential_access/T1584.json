@@ -1,10 +1,10 @@
 {
-    "event_id": "fb036ec8-c0f1-473f-b83a-a395edf12965",
-    "timestamp": "2026-01-28T06:33:08.464047",
-    "hostname": "WIN-SRV-74",
-    "source_ip": "192.168.1.85",
+    "event_id": "26d52855-2a83-4f2a-aedb-2f261f8db2c9",
+    "timestamp": "2026-01-28T06:32:46.011105",
+    "hostname": "WIN-SRV-49",
+    "source_ip": "192.168.1.55",
     "user": "j.doe",
     "domain": "CORP.LOCAL",
     "ParentImage|endswith": "\\tomcat.exe",
-    "Image|endswith": "\\powershell.exe"
+    "Image|endswith": "\\net.exe"
 }

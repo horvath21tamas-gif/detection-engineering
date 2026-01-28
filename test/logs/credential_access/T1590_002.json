@@ -1,9 +1,9 @@
 {
-    "event_id": "b1dbd442-e60a-47c6-b564-aed2f2b02e71",
-    "timestamp": "2026-01-28T05:58:08.879781",
-    "hostname": "WIN-SRV-32",
-    "source_ip": "192.168.1.89",
+    "event_id": "0865f202-2dca-4389-a9c2-badcc41c5066",
+    "timestamp": "2026-01-28T06:27:46.442666",
+    "hostname": "WIN-SRV-70",
+    "source_ip": "192.168.1.67",
     "user": "db_backup",
     "domain": "CORP.LOCAL",
-    "CommandLine|contains": " -q=srv"
+    "CommandLine|contains": " -type=TXT"
 }

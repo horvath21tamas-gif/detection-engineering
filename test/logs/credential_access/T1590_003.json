@@ -1,10 +1,10 @@
 {
-    "event_id": "ccac8c4e-03c4-4fa6-8d57-e52b524d2520",
-    "timestamp": "2026-01-28T05:56:08.432488",
-    "hostname": "WIN-SRV-84",
-    "source_ip": "192.168.1.115",
-    "user": "svc_sql",
+    "event_id": "6aadc1d9-70a5-4003-8f8a-5ccf26a55c90",
+    "timestamp": "2026-01-28T06:33:45.979555",
+    "hostname": "WIN-SRV-91",
+    "source_ip": "192.168.1.165",
+    "user": "db_backup",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\nltest.exe",
-    "CommandLine|contains": "/domain_trusts"
+    "CommandLine|contains": "/dclist:"
 }

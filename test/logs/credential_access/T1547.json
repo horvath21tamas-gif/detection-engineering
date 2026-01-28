@@ -1,9 +1,9 @@
 {
-    "event_id": "cd66587e-b1a0-4d32-bc7c-a5bf64c62769",
-    "timestamp": "2026-01-28T06:31:08.621257",
-    "hostname": "WIN-SRV-89",
-    "source_ip": "192.168.1.132",
-    "user": "db_backup",
+    "event_id": "bee685ba-a87d-4e39-8951-362161f7b0ea",
+    "timestamp": "2026-01-28T05:52:46.185272",
+    "hostname": "WIN-SRV-25",
+    "source_ip": "192.168.1.13",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\cscript.exe"
+    "Image|endswith": "\\mshta.exe"
 }

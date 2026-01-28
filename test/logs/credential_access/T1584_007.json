@@ -1,9 +1,9 @@
 {
-    "event_id": "84bb0500-9900-4aa8-83eb-ccf0807c9570",
-    "timestamp": "2026-01-28T06:37:08.896688",
-    "hostname": "WIN-SRV-92",
-    "source_ip": "192.168.1.121",
-    "user": "db_backup",
+    "event_id": "cfbde2f6-3e90-46a5-9176-17f5402b6079",
+    "timestamp": "2026-01-28T06:44:46.459257",
+    "hostname": "WIN-SRV-76",
+    "source_ip": "192.168.1.212",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\aws.exe"
+    "Image|endswith": "\\az.exe"
 }

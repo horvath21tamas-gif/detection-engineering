@@ -1,9 +1,9 @@
 {
-    "event_id": "d2161482-a363-42b9-8712-03dd4007810f",
-    "timestamp": "2026-01-28T05:57:08.716536",
-    "hostname": "WIN-SRV-14",
-    "source_ip": "192.168.1.87",
-    "user": "j.doe",
+    "event_id": "9b4c22fb-e894-4737-99f8-d03b258b1719",
+    "timestamp": "2026-01-28T06:48:46.279934",
+    "hostname": "WIN-SRV-38",
+    "source_ip": "192.168.1.26",
+    "user": "db_backup",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\medusa.exe"
 }

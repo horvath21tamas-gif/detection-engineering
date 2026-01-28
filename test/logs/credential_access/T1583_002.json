@@ -1,9 +1,9 @@
 {
-    "event_id": "a843841c-516b-4a02-9ca3-48db10adab19",
-    "timestamp": "2026-01-28T05:48:08.539374",
-    "hostname": "WIN-SRV-73",
-    "source_ip": "192.168.1.183",
-    "user": "admin",
+    "event_id": "773d65d8-96e3-4f2d-bc49-796ded62a698",
+    "timestamp": "2026-01-28T06:44:46.085405",
+    "hostname": "WIN-SRV-48",
+    "source_ip": "192.168.1.109",
+    "user": "db_backup",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\python.exe"
+    "Image|endswith": "\\curl.exe"
 }

@@ -1,9 +1,9 @@
 {
-    "event_id": "668fae2b-1b23-4be8-a216-ad5dec9737cb",
-    "timestamp": "2026-01-28T06:05:08.422812",
-    "hostname": "WIN-SRV-73",
-    "source_ip": "192.168.1.41",
-    "user": "db_backup",
+    "event_id": "f3de40f4-010f-4db8-bb7e-55f3ae3dc220",
+    "timestamp": "2026-01-28T06:44:45.969874",
+    "hostname": "WIN-SRV-15",
+    "source_ip": "192.168.1.223",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\subfinder.exe"
+    "Image|endswith": "\\assetfinder.exe"
 }

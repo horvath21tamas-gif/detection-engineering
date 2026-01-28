@@ -1,9 +1,9 @@
 {
-    "event_id": "0e006a9c-fae1-4987-9a40-356807585b6a",
-    "timestamp": "2026-01-28T06:37:08.839700",
-    "hostname": "WIN-SRV-29",
-    "source_ip": "192.168.1.72",
-    "user": "svc_sql",
+    "event_id": "af71ea0b-45b9-4ae2-8495-c51f1b06d275",
+    "timestamp": "2026-01-28T06:21:46.402429",
+    "hostname": "WIN-SRV-92",
+    "source_ip": "192.168.1.38",
+    "user": "admin",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\curl.exe"
+    "Image|endswith": "\\wget.exe"
 }

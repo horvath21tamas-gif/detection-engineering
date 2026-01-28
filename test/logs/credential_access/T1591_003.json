@@ -1,10 +1,10 @@
 {
-    "event_id": "9da3769b-6cac-4c70-890f-dd25feda0a26",
-    "timestamp": "2026-01-28T06:31:08.486045",
-    "hostname": "WIN-SRV-50",
-    "source_ip": "192.168.1.117",
-    "user": "admin",
+    "event_id": "e88bb51d-c0fd-41e6-8853-fd3efe1cb5cb",
+    "timestamp": "2026-01-28T06:25:46.032604",
+    "hostname": "WIN-SRV-86",
+    "source_ip": "192.168.1.47",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\wget.exe",
-    "CommandLine|contains": " -r "
+    "CommandLine|contains": " --no-parent"
 }

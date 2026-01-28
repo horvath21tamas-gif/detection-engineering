@@ -1,9 +1,9 @@
 {
-    "event_id": "94ae54d7-1a3a-4f87-9af0-426dca4c0792",
-    "timestamp": "2026-01-28T06:36:08.512107",
-    "hostname": "WIN-SRV-78",
-    "source_ip": "192.168.1.61",
-    "user": "svc_sql",
+    "event_id": "4e0261a4-b927-4f26-9821-ff2b03863e38",
+    "timestamp": "2026-01-28T06:25:46.058414",
+    "hostname": "WIN-SRV-77",
+    "source_ip": "192.168.1.182",
+    "user": "admin",
     "domain": "CORP.LOCAL",
     "CommandLine|contains": "tar "
 }

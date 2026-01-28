@@ -1,10 +1,10 @@
 {
-    "event_id": "6f2b63a9-bbb1-4571-b82f-f46a9c68ccc3",
-    "timestamp": "2026-01-28T06:21:08.468400",
-    "hostname": "WIN-SRV-34",
-    "source_ip": "192.168.1.234",
-    "user": "db_backup",
+    "event_id": "4f08e690-49f3-409e-82e1-286019f11a55",
+    "timestamp": "2026-01-28T05:57:46.015410",
+    "hostname": "WIN-SRV-66",
+    "source_ip": "192.168.1.109",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\ipconfig.exe",
-    "CommandLine|contains": " /all"
+    "CommandLine|contains": " /displaydns"
 }

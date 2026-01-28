@@ -1,9 +1,9 @@
 {
-    "event_id": "137f71cb-23b0-45b8-8af3-bdf793c5fee1",
-    "timestamp": "2026-01-28T06:24:08.683380",
-    "hostname": "WIN-SRV-26",
-    "source_ip": "192.168.1.92",
-    "user": "admin",
+    "event_id": "0de574a3-73d1-4722-b3b2-4c8d6487c8b4",
+    "timestamp": "2026-01-28T06:48:46.246931",
+    "hostname": "WIN-SRV-96",
+    "source_ip": "192.168.1.151",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\7z.exe"
+    "Image|endswith": "\\rar.exe"
 }

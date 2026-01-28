@@ -1,9 +1,9 @@
 {
-    "event_id": "efc5cb21-6fbf-40f5-8c0d-888a68a1fe24",
-    "timestamp": "2026-01-28T06:27:08.561140",
-    "hostname": "WIN-SRV-24",
-    "source_ip": "192.168.1.78",
-    "user": "j.doe",
+    "event_id": "587e12ff-1352-42fc-991e-ab9001f75bb3",
+    "timestamp": "2026-01-28T05:54:46.114615",
+    "hostname": "WIN-SRV-32",
+    "source_ip": "192.168.1.197",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "SrcIp|startswith": "6."
+    "SrcIp|startswith": "4."
 }

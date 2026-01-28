@@ -1,9 +1,9 @@
 {
-    "event_id": "bcd422d8-bfc1-4306-bda1-840ba8d9d12f",
-    "timestamp": "2026-01-28T06:12:08.631376",
-    "hostname": "WIN-SRV-23",
-    "source_ip": "192.168.1.64",
-    "user": "db_backup",
+    "event_id": "213cc841-c17d-41c5-a944-f33061211ba8",
+    "timestamp": "2026-01-28T06:39:46.195489",
+    "hostname": "WIN-SRV-64",
+    "source_ip": "192.168.1.171",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\trufflehog.exe"
+    "Image|endswith": "\\shhgit.exe"
 }

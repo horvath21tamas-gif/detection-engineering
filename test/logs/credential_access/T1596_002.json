@@ -1,9 +1,9 @@
 {
-    "event_id": "7aafc567-8b44-484c-b939-41dea244f099",
-    "timestamp": "2026-01-28T06:16:08.521836",
-    "hostname": "WIN-SRV-23",
-    "source_ip": "192.168.1.32",
+    "event_id": "f2304149-4020-446e-9dd1-5949417294c1",
+    "timestamp": "2026-01-28T06:44:46.068077",
+    "hostname": "WIN-SRV-29",
+    "source_ip": "192.168.1.97",
     "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\pagodo.exe"
+    "Image|endswith": "\\ghunt.exe"
 }

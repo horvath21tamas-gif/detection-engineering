@@ -1,9 +1,9 @@
 {
-    "event_id": "5b521d84-3596-46b5-ba9a-4663341bb7ff",
-    "timestamp": "2026-01-28T05:52:08.909611",
-    "hostname": "WIN-SRV-89",
-    "source_ip": "192.168.1.43",
-    "user": "j.doe",
+    "event_id": "ab6462ba-b3ae-4252-a85b-45924ed76be1",
+    "timestamp": "2026-01-28T06:18:46.471858",
+    "hostname": "WIN-SRV-69",
+    "source_ip": "192.168.1.186",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
     "EventID": 3,
     "Protocol": "tcp"

@@ -1,9 +1,9 @@
 {
-    "event_id": "4707f90d-aaeb-44d8-80ff-e8be31e5b80f",
-    "timestamp": "2026-01-28T05:52:08.844065",
-    "hostname": "WIN-SRV-42",
-    "source_ip": "192.168.1.237",
-    "user": "svc_sql",
+    "event_id": "a10f3619-0803-48a0-bdc1-bca25a5eb4a6",
+    "timestamp": "2026-01-28T05:58:46.406789",
+    "hostname": "WIN-SRV-94",
+    "source_ip": "192.168.1.17",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\sam.exe"
+    "Image|endswith": "\\sls.exe"
 }

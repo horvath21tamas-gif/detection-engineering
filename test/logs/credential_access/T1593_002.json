@@ -1,9 +1,9 @@
 {
-    "event_id": "da00f0bf-da8f-4b96-bbf3-5e92e6979d22",
-    "timestamp": "2026-01-28T05:55:08.866570",
-    "hostname": "WIN-SRV-69",
-    "source_ip": "192.168.1.166",
+    "event_id": "07bf01ed-f3a1-4577-8235-70e69d3aed8b",
+    "timestamp": "2026-01-28T05:50:46.429473",
+    "hostname": "WIN-SRV-82",
+    "source_ip": "192.168.1.25",
     "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\snakedork.exe"
+    "Image|endswith": "\\pagodo.exe"
 }

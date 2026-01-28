@@ -1,9 +1,9 @@
 {
-    "event_id": "94e08230-64e0-4bb2-a9fd-5a147ec6da03",
-    "timestamp": "2026-01-28T06:24:08.640960",
-    "hostname": "WIN-SRV-56",
-    "source_ip": "192.168.1.143",
-    "user": "svc_sql",
+    "event_id": "40a01065-7841-4822-8ddc-ed771a66bf66",
+    "timestamp": "2026-01-28T06:47:46.205164",
+    "hostname": "WIN-SRV-89",
+    "source_ip": "192.168.1.147",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\shhgit.exe"
+    "Image|endswith": "\\gitleaks.exe"
 }

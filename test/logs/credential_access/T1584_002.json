@@ -1,9 +1,9 @@
 {
-    "event_id": "3a4c975e-33e0-4162-b5cd-8612a40a9d36",
-    "timestamp": "2026-01-28T05:47:08.752302",
-    "hostname": "WIN-SRV-10",
-    "source_ip": "192.168.1.41",
-    "user": "svc_sql",
+    "event_id": "b6a5ed53-6796-4c0a-bc95-b043cfc6f78f",
+    "timestamp": "2026-01-28T05:59:46.315299",
+    "hostname": "WIN-SRV-80",
+    "source_ip": "192.168.1.184",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\nsupdate.exe"
+    "Image|endswith": "\\dnscmd.exe"
 }

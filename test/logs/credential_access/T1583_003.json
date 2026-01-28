@@ -1,9 +1,9 @@
 {
-    "event_id": "d46b012f-7eab-4de0-a2ae-da51c9f38b5e",
-    "timestamp": "2026-01-28T06:24:08.830292",
-    "hostname": "WIN-SRV-80",
-    "source_ip": "192.168.1.245",
-    "user": "db_backup",
+    "event_id": "6f45ef1e-593f-4c7a-b55a-5f622f349e0f",
+    "timestamp": "2026-01-28T06:14:46.393117",
+    "hostname": "WIN-SRV-23",
+    "source_ip": "192.168.1.26",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\gcloud.exe"
+    "Image|endswith": "\\az.exe"
 }

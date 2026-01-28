@@ -1,6 +1,6 @@
 {
-    "event_id": "8ad3cb1b-76bd-439d-a69e-6bfb7cecd1b1",
-    "timestamp": "2026-01-28T09:41:54.620646",
+    "event_id": "11b87256-4004-4f3e-90c3-db123c25c9c4",
+    "timestamp": "2026-01-28T09:46:36.689006",
     "product": "windows",
     "service": "sysmon",
     "category": "pipe_created",

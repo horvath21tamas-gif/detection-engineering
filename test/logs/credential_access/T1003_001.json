@@ -1,6 +1,6 @@
 {
-    "event_id": "b79fcccf-f640-483b-b3c8-41e6ca23b68d",
-    "timestamp": "2026-01-28T09:41:54.567500",
+    "event_id": "f52a345b-3b01-4569-9c6e-8e1613ae8e3c",
+    "timestamp": "2026-01-28T09:46:36.626506",
     "product": "windows",
     "service": "sysmon",
     "category": "process_access",

@@ -1,6 +1,6 @@
 {
-    "event_id": "f8d648de-c72e-44ff-bd83-3129752f8289",
-    "timestamp": "2026-01-28T09:41:54.547196",
+    "event_id": "c1bedf0b-15c0-4b59-8b43-2719851084ad",
+    "timestamp": "2026-01-28T09:46:36.606274",
     "product": "windows",
     "service": "sysmon",
     "category": "image_load",

@@ -1,6 +1,6 @@
 {
-    "event_id": "2d0c0ed1-c168-4a7c-a82d-fe5195dc936d",
-    "timestamp": "2026-01-28T09:41:54.908442",
+    "event_id": "6be4bc3f-1c08-4d62-be16-486c02f69642",
+    "timestamp": "2026-01-28T09:46:36.975095",
     "product": "windows",
     "service": "sysmon",
     "category": "network_connection",

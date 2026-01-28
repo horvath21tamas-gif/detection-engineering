@@ -1,6 +1,6 @@
 {
-    "event_id": "e9b33d95-a3d6-4ad5-9cc1-12daa24441b0",
-    "timestamp": "2026-01-28T09:41:54.464951",
+    "event_id": "f47fbc73-8f24-4330-90d5-c4046fc791e1",
+    "timestamp": "2026-01-28T09:46:36.522763",
     "product": "windows",
     "service": "sysmon",
     "category": "registry_set",

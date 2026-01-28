@@ -1,6 +1,6 @@
 {
-    "event_id": "099aa49f-9d7d-4aaf-9bb1-45520ce0b820",
-    "timestamp": "2026-01-28T09:41:54.805858",
+    "event_id": "4cfa6d13-9778-4a90-8644-7c5da5196b71",
+    "timestamp": "2026-01-28T09:46:36.873446",
     "product": "windows",
     "service": "sysmon",
     "category": "service_creation",

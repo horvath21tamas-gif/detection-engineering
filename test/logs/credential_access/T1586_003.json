@@ -1,6 +1,6 @@
 {
-    "event_id": "33043739-da22-4194-b282-b2108e68775f",
-    "timestamp": "2026-01-28T09:41:54.536320",
+    "event_id": "6bb19aad-9732-4790-bae3-526334644842",
+    "timestamp": "2026-01-28T09:46:36.595222",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation"

@@ -1,6 +1,6 @@
 {
-    "event_id": "86a5a957-db75-4b5e-8b57-ee9d3ce16fd2",
-    "timestamp": "2026-01-28T09:41:54.890563",
+    "event_id": "760952ac-2d7b-4553-8ebd-ad65971e4109",
+    "timestamp": "2026-01-28T09:46:36.957607",
     "product": "windows",
     "service": "sysmon",
     "category": "email",

@@ -1,6 +1,6 @@
 {
-    "event_id": "569c4f3d-ec5c-4550-a59b-4fbcf2043add",
-    "timestamp": "2026-01-28T09:41:54.739963",
+    "event_id": "f539c931-97a3-4824-83b4-375818500bd4",
+    "timestamp": "2026-01-28T09:46:36.807569",
     "product": "generic",
     "service": "sysmon",
     "category": "network_traffic",

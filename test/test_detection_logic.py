@@ -19,32 +19,37 @@ def get_test_pairs():
 def evaluate_block(block_data, log):
     if not isinstance(block_data, dict): return False
     
-    # Pre-calculate lower-case raw data for faster searching
-    raw_content = str(log.get('raw_data', '')).lower()
-    
-    for field, expected_values in block_data.items():
-        # Handle Sigma modifiers (e.g., field|contains) by taking the prefix
-        clean_field = field.split('|')[0].lower()
+    # Minden kulcs-érték párt ellenőrizni kell a blokkon belül (AND kapcsolat)
+    for field_with_modifier, expected_values in block_data.items():
+        # Sigma mező tisztítása (pl. Image|contains -> Image)
+        clean_field = field_with_modifier.split('|')[0]
         if not isinstance(expected_values, list):
             expected_values = [expected_values]
         
-        # Check 1: Direct field match in JSON
-        found = False
-        actual_val = log.get(clean_field)
+        # Értékek keresése a logban
+        found_in_field = False
+        
+        # 1. Próbáljuk meg közvetlen mezőként (Case-insensitive)
+        actual_val = None
+        for k, v in log.items():
+            if k.lower() == clean_field.lower():
+                actual_val = v
+                break
+        
         if actual_val:
             val_str = str(actual_val).lower()
             if any(str(v).lower().replace('*', '') in val_str for v in expected_values):
-                found = True
+                found_in_field = True
         
-        # Check 2: Fallback - look for the "field: value" pattern inside raw_data
-        if not found:
-            for v in expected_values:
-                search_term = str(v).lower().replace('*', '')
-                if search_term in raw_content:
-                    found = True
-                    break
-        
-        if not found: return False
+        # 2. Ha nincs meg, nézzük meg a raw_data-ban (biztonsági háló)
+        if not found_in_field and 'raw_data' in log:
+            raw_str = str(log['raw_data']).lower()
+            if any(str(v).lower().replace('*', '') in raw_str for v in expected_values):
+                found_in_field = True
+                
+        if not found_in_field:
+            return False # Ha egy mező sem stimmel a blokkból, a blokk False
+            
     return True
 
 @pytest.mark.parametrize("rule_path, log_path", get_test_pairs())
@@ -57,17 +62,17 @@ def test_sigma_logic(rule_path, log_path):
     detection = rule.get('detection', {})
     condition = detection.get('condition', 'any of selection*').lower()
     
-    # Evaluate all selection blocks
+    # Minden detekciós blokk kiértékelése
     results = {k: evaluate_block(v, log) for k, v in detection.items() 
                if k != 'condition' and isinstance(v, dict)}
 
-    # Logic Engine
+    # Logikai motor (Egyszerűsített Sigma condition parser)
     if '1 of' in condition or 'any of' in condition:
         matched = any(results.values())
     elif 'all of' in condition:
         matched = all(results.values()) if results else False
     else:
-        # Default to checking if any 'selection' block is true
+        # Ha konkrét nevek vannak, megnézzük a selection-öket
         matched = any(results.get(k, False) for k in results if 'selection' in k)
 
     assert matched, f"DETECTION FAILED: {os.path.basename(rule_path)}\nLog: {json.dumps(log, indent=2)}"

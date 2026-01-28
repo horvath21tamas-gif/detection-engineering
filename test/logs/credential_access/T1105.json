@@ -1,6 +1,6 @@
 {
-    "event_id": "b5e0289a-dd10-44c1-b7d3-70c58d83990f",
-    "timestamp": "2026-01-28T09:57:08.372807",
+    "event_id": "d9853408-f3ac-434a-81d5-e978cbf06411",
+    "timestamp": "2026-01-28T10:01:07.227619",
     "product": "windows",
     "service": null,
     "category": "process_creation",

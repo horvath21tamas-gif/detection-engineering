@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetFilename in ("*CVE-20*", "*\exploit*", "*\poc_code*", "*\lpe_x64*", "*\rce_exploit*", "*\cve_20*", "*\metasploit*", "*\msfvenom*")) and (FolderPath in ("*\curl.exe", "*\wget.exe", "*\certutil.exe", "*\bitsadmin.exe", "*\powershell.exe", "*\pwsh.exe")) and (not ((TargetFilename in ("*\src\*", "*\repos\*", "*\github.com\*", "*\Visual Studio\*", "*\node_modules\*", "*\pip-install-*", "*\AppData\Local\Temp\build-*")) or ((FolderPath in ("*\Nessus\*", "*\Qualys\*", "*\Rapid7\*")) and (UserName in ("*SVC_Scanner*", "*SYSTEM*")))))

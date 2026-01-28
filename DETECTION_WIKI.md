@@ -59,6 +59,7 @@
 - [High-Fidelity Web Service and Cloud Storage Subversion - T1584.006](#high-fidelity-web-service-and-cloud-storage-subversion---t1584006)
 - [High-Fidelity VPS Control and Tunneling - T1584.007](#high-fidelity-vps-control-and-tunneling---t1584007)
 - [Suspicious User Account Creation via CLI/Scripting](#suspicious-user-account-creation-via-cliscripting)
+- [Stealthy Email Account Establishment and Manipulation](#stealthy-email-account-establishment-and-manipulation)
 - [Anomalous Cloud User Account Creation](#anomalous-cloud-user-account-creation)
 - [High-Fidelity Account Compromise and Identity Manipulation - T1586](#high-fidelity-account-compromise-and-identity-manipulation---t1586)
 - [High-Fidelity Automated Social Media Manipulation - T1586.001](#high-fidelity-automated-social-media-manipulation---t1586001)
@@ -978,6 +979,23 @@ suspicious processes like CMD, PowerShell, or net.exe, rather than
 standard Administrative consoles (ADUC, Windows Admin Center).
 - **Hamis pozitívok:** Automated provisioning scripts (adjust filters for your specific SVC accounts), Legacy batch scripts used by sysadmins for bulk user creation
 - **MITRE ATT&CK:** `T1585`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Stealthy Email Account Establishment and Manipulation
+- **Azonosító:** `T1585_002.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the creation of email accounts followed by immediate sensitive 
+permission changes or forwarding rules. Focuses on CLI-based execution 
+to reduce noise from standard HR-driven GUI processes.
+- **Hamis pozitívok:** IT migrations where mailbox forwarding is part of the decommissioning process., Security-approved automated backup or journaling accounts.
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

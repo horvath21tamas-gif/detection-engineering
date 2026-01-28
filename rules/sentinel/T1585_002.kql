@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (Operation in ("New-Mailbox", "Add-MailboxPermission", "Set-Mailbox", "New-InboxRule")) and ((Parameters in ("*AccessRights=FullAccess*", "*ForwardingAddress*", "*ForwardingSmtpAddress*", "*DeliverToMailboxAndForward=True*")) or (ClientInfoString in ("*Client=Microsoft.Exchange.Management*", "*PowerShell*", "*Custom-Context-Script*"))) and (not (ClientInfoString contains "Client=MSExchangeRPC" or (UserId in ("*SVC_Okta*", "*AzureADConnect*", "*Sync_*"))))

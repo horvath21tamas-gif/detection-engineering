@@ -1,11 +1,11 @@
 {
-    "event_id": "b1f55241-228a-4314-9c76-f97d34ff179a",
-    "timestamp": "2026-01-28T09:46:36.843730",
+    "event_id": "2066d393-6509-4d19-bda5-aef450dd289b",
+    "timestamp": "2026-01-28T09:53:10.910452",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\cmd.exe_test_suffix",
-    "process_path": "test_prefix_\\cmd.exe_test_suffix",
-    "IntegrityLevel": "High",
-    "ParentImage": "test_prefix_\\fodhelper.exe_test_suffix"
+    "Image": "\\cmd.exe \\powershell.exe \\pwsh.exe \\rundll32.exe \\mshta.exe \\wscript.exe \\cscript.exe \\regsvr32.exe \\python.exe",
+    "process_path": "\\cmd.exe \\powershell.exe \\pwsh.exe \\rundll32.exe \\mshta.exe \\wscript.exe \\cscript.exe \\regsvr32.exe \\python.exe",
+    "IntegrityLevel": "High System",
+    "ParentImage": "\\fodhelper.exe"
 }

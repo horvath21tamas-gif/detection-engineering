@@ -1,7 +1,8 @@
 {
-    "event_id": "6bb19aad-9732-4790-bae3-526334644842",
-    "timestamp": "2026-01-28T09:46:36.595222",
+    "event_id": "6e6ada3e-45a8-4f97-b6d5-944bac1dda4a",
+    "timestamp": "2026-01-28T09:53:10.664893",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'Image|endswith': ['\\\\aws.exe', '\\\\az.exe', '\\\\gcloud.exe', '\\\\mgc.exe']} {'CommandLine|contains': [' create-access-key', ' update-login-profile', ' create-service-principal', ' add-password', ' delete-virtual-mfa-device', ' authentication-method-create']}"
 }

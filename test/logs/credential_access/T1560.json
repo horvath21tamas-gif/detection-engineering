@@ -1,9 +1,10 @@
 {
-    "event_id": "9d586474-7868-4b0c-ab7a-35a085eb41da",
-    "timestamp": "2026-01-28T09:46:36.746262",
+    "event_id": "da1aa3c3-c59b-45e2-8406-920679ab53e4",
+    "timestamp": "2026-01-28T09:53:10.810468",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_\\AppData\\_test_suffix",
-    "command": "test_prefix_\\AppData\\_test_suffix"
+    "raw_data": "{'Image|endswith': ['\\\\7z.exe', '\\\\7za.exe', '\\\\rar.exe', '\\\\WinRAR.exe', '\\\\tar.exe', '\\\\powershell.exe', '\\\\pwsh.exe']} {'filename': ['7z.exe', '7za.exe', 'Rar.exe', 'tar.exe', 'PowerShell.EXE']}",
+    "CommandLine": "\\AppData\\ \\Temp\\ \\Users\\Public\\ \\ProgramData\\ C:\\PerfLogs\\",
+    "command": "\\AppData\\ \\Temp\\ \\Users\\Public\\ \\ProgramData\\ C:\\PerfLogs\\"
 }

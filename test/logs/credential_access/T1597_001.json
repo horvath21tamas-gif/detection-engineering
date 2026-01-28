@@ -1,7 +1,8 @@
 {
-    "event_id": "d413cfe1-0749-43e6-8a6b-e215baeec90a",
-    "timestamp": "2026-01-28T09:46:36.581985",
+    "event_id": "0ae3bd50-cdb2-42d5-952f-61c9a4b979dd",
+    "timestamp": "2026-01-28T09:53:10.651521",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'processcommandline': ['nslookup ', 'ping ', 'tracert ']} {'condition': 'not selection_dns_recon'}"
 }

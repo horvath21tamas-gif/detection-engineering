@@ -1,12 +1,12 @@
 {
-    "event_id": "0076620e-59d2-47fe-bbf7-89bbd8f69353",
-    "timestamp": "2026-01-28T09:46:36.527529",
+    "event_id": "678a3c74-3e45-443c-ad27-9772536f0c99",
+    "timestamp": "2026-01-28T09:53:10.596669",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "ParentImage": "test_prefix_\\WINWORD.EXE_test_suffix",
-    "Image": "test_prefix_\\cmd.exe_test_suffix",
-    "process_path": "test_prefix_\\cmd.exe_test_suffix",
-    "CommandLine": "test_prefix_\\Users\\_test_suffix",
-    "command": "test_prefix_\\Users\\_test_suffix"
+    "ParentImage": "\\WINWORD.EXE \\EXCEL.EXE \\POWERPNT.EXE \\OUTLOOK.EXE \\MSACCESS.EXE",
+    "Image": "\\cmd.exe \\powershell.exe \\pwsh.exe \\mshta.exe \\rundll32.exe \\regsvr32.exe \\bitsadmin.exe \\certutil.exe \\wscript.exe \\cscript.exe",
+    "process_path": "\\cmd.exe \\powershell.exe \\pwsh.exe \\mshta.exe \\rundll32.exe \\regsvr32.exe \\bitsadmin.exe \\certutil.exe \\wscript.exe \\cscript.exe",
+    "CommandLine": "\\Users\\ \\AppData\\ \\Temp\\ \\Microsoft\\Office\\ \\INetCache\\",
+    "command": "\\Users\\ \\AppData\\ \\Temp\\ \\Microsoft\\Office\\ \\INetCache\\"
 }

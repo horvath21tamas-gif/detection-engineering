@@ -1,12 +1,12 @@
 {
-    "event_id": "0ac23179-49f4-433d-9a30-8f895de4a732",
-    "timestamp": "2026-01-28T09:46:36.900248",
+    "event_id": "b4f13727-ba39-46bf-9537-0af540364051",
+    "timestamp": "2026-01-28T09:53:10.981472",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\sc.exe_test_suffix",
-    "process_path": "test_prefix_\\sc.exe_test_suffix",
-    "CommandLine": "test_prefix_stop_test_suffix",
-    "command": "test_prefix_stop_test_suffix",
-    "ParentImage": "test_prefix_\\cmd.exe_test_suffix"
+    "Image": "\\sc.exe \\net.exe",
+    "process_path": "\\sc.exe \\net.exe",
+    "CommandLine": "stop WinDefend Sense VSS MpsSvc Backup",
+    "command": "stop WinDefend Sense VSS MpsSvc Backup",
+    "ParentImage": "\\cmd.exe \\powershell.exe \\pwsh.exe \\wscript.exe \\cscript.exe"
 }

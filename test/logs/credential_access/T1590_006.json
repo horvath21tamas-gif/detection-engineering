@@ -1,9 +1,10 @@
 {
-    "event_id": "5e30a834-82e4-4fab-b458-22ce540264fe",
-    "timestamp": "2026-01-28T09:46:36.549466",
+    "event_id": "2c96c671-5fda-4f4d-a562-3c37169066a3",
+    "timestamp": "2026-01-28T09:53:10.618867",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_ --banner_test_suffix",
-    "command": "test_prefix_ --banner_test_suffix"
+    "CommandLine": " --banner  --header \"User-Agent: whatweb Wappalyzer",
+    "command": " --banner  --header \"User-Agent: whatweb Wappalyzer",
+    "raw_data": "{'Image|endswith': ['\\\\ffuf.exe', '\\\\gobuster.exe', '\\\\dirsearch.exe', '\\\\nikto.exe']} {'CommandLine|contains': [' -wordlist', ' -w ', ' --threads', ' -recursive']}"
 }

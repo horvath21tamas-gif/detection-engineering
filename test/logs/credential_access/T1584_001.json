@@ -1,9 +1,10 @@
 {
-    "event_id": "19a9d8d6-8fd8-4e94-876f-60ffc5a77984",
-    "timestamp": "2026-01-28T09:46:36.455227",
+    "event_id": "34d9f1fa-4bc4-4379-95ec-d9d88704f73a",
+    "timestamp": "2026-01-28T09:53:10.524161",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_--batch_test_suffix",
-    "command": "test_prefix_--batch_test_suffix"
+    "raw_data": "{'User|contains': ['svc_terraform', 'svc_deploy', 'adm_netops_infra']} {'Image|contains': ['\\\\Terraform\\\\', '\\\\actions-runner\\\\']}",
+    "CommandLine": "--batch --file transaction",
+    "command": "--batch --file transaction"
 }

@@ -1,9 +1,10 @@
 {
-    "event_id": "b4ef3512-6241-43f1-ab66-7976b74c6169",
-    "timestamp": "2026-01-28T09:46:36.586264",
+    "event_id": "a41fa8c8-4323-4e84-8a94-4c1d192874ed",
+    "timestamp": "2026-01-28T09:53:10.655824",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_.pfx_test_suffix",
-    "command": "test_prefix_.pfx_test_suffix"
+    "raw_data": "{'Image|endswith': '\\\\openssl.exe', 'CommandLine|contains': [' s_client', ' x509', ' -text']} {'Image|endswith': '\\\\certutil.exe', 'CommandLine|contains': [' -dump', ' -viewstore', ' -user']} {'Image|endswith': '\\\\powershell.exe', 'CommandLine|contains': ['Get-ChildItem -Path Cert:']}",
+    "CommandLine": ".pfx .p12 .pem exportable",
+    "command": ".pfx .p12 .pem exportable"
 }

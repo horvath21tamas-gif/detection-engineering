@@ -1,11 +1,12 @@
 {
-    "event_id": "5525e190-0f28-4a31-9ee1-a0ab639e0608",
-    "timestamp": "2026-01-28T09:46:36.764763",
+    "event_id": "0103fe4f-9c02-495d-b056-7211793b486f",
+    "timestamp": "2026-01-28T09:53:10.829339",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\findstr.exe_test_suffix",
-    "process_path": "test_prefix_\\findstr.exe_test_suffix",
-    "CommandLine": "test_prefix_.dwg_test_suffix",
-    "command": "test_prefix_.dwg_test_suffix"
+    "raw_data": "{'CommandLine|contains': ['site_list', 'adatkozpont', 'telephely', 'szekhaz', 'belepteto', 'kamera', 'riaszto']} {'CommandLine|contains': ['floorplan', 'alaprajz', 'building_layout']}",
+    "Image": "\\findstr.exe \\grep.exe \\where.exe \\7z.exe \\powershell.exe",
+    "process_path": "\\findstr.exe \\grep.exe \\where.exe \\7z.exe \\powershell.exe",
+    "CommandLine": ".dwg .vsdx .kmz .kml",
+    "command": ".dwg .vsdx .kmz .kml"
 }

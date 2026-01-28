@@ -1,7 +1,8 @@
 {
-    "event_id": "603446b4-7aec-4142-9b3e-49aa1cbf14f6",
-    "timestamp": "2026-01-28T09:46:36.630921",
+    "event_id": "ba7d6953-e705-490c-bd21-f93093333e25",
+    "timestamp": "2026-01-28T09:53:10.701643",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'User|contains': ['svc_jenkins', 'svc_code_signer', 'adm_build_master']} {'Image|contains': ['\\\\Program Files (x86)\\\\Windows Kits\\\\', '\\\\actions-runner\\\\']}"
 }

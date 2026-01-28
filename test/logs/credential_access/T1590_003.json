@@ -1,9 +1,10 @@
 {
-    "event_id": "61572fb9-3346-433a-9a92-605d1e96d6da",
-    "timestamp": "2026-01-28T09:46:36.481039",
+    "event_id": "838dd48a-01d7-4718-bf16-5585bc99dccf",
+    "timestamp": "2026-01-28T09:53:10.550148",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_Get-NetDomainTrust_test_suffix",
-    "command": "test_prefix_Get-NetDomainTrust_test_suffix"
+    "raw_data": "{'Image|endswith': ['\\\\net.exe', '\\\\net1.exe'], 'CommandLine|contains': [' share', ' session', ' view /']}",
+    "CommandLine": "Get-NetDomainTrust Get-NetForestTrust Get-AdTrust Get-NetSession",
+    "command": "Get-NetDomainTrust Get-NetForestTrust Get-AdTrust Get-NetSession"
 }

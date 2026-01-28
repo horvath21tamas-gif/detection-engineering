@@ -1,10 +1,10 @@
 {
-    "event_id": "c1bedf0b-15c0-4b59-8b43-2719851084ad",
-    "timestamp": "2026-01-28T09:46:36.606274",
+    "event_id": "e49c6d3c-a5d4-4d2c-a93b-7ee25c856aa7",
+    "timestamp": "2026-01-28T09:53:10.676154",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "image_load",
-    "ImageLoaded": "test_prefix_user32.dll_test_suffix",
-    "Image": "test_prefix_\\Users\\_test_suffix",
-    "process_path": "test_prefix_\\Users\\_test_suffix"
+    "ImageLoaded": "user32.dll advapi32.dll",
+    "Image": "\\Users\\ \\AppData\\ \\Temp\\ \\ProgramData\\",
+    "process_path": "\\Users\\ \\AppData\\ \\Temp\\ \\ProgramData\\"
 }

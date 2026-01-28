@@ -1,9 +1,10 @@
 {
-    "event_id": "9b2b10e0-f16c-4e27-a7bf-d6cc2de50cc4",
-    "timestamp": "2026-01-28T09:46:36.563155",
+    "event_id": "4ade8f3b-db02-4cfb-9b13-75111ba61dd1",
+    "timestamp": "2026-01-28T09:53:10.632717",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_copy _test_suffix",
-    "command": "test_prefix_copy _test_suffix"
+    "CommandLine": "copy  type  tar  7z powershell",
+    "command": "copy  type  tar  7z powershell",
+    "raw_data": "{'Image|endswith': '\\\\powershell.exe', 'CommandLine|contains': ['Get-Credential', 'prompt', 'CredentialPrompt', '-WindowStyle Hidden']} {'Image|endswith': '\\\\msg.exe', 'CommandLine|contains': ''}"
 }

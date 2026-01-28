@@ -1,11 +1,11 @@
 {
-    "event_id": "a842542c-cb97-49c1-a3ee-452be78db384",
-    "timestamp": "2026-01-28T09:46:36.857307",
+    "event_id": "86e6fb94-562f-476c-80b4-188a950b8d76",
+    "timestamp": "2026-01-28T09:53:10.924579",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\gcloud.exe_test_suffix",
-    "process_path": "test_prefix_\\gcloud.exe_test_suffix",
-    "CommandLine": "test_prefix_ projects list_test_suffix",
-    "command": "test_prefix_ projects list_test_suffix"
+    "Image": "\\gcloud.exe \\gsutil.exe",
+    "process_path": "\\gcloud.exe \\gsutil.exe",
+    "CommandLine": " projects list  iam roles list",
+    "command": " projects list  iam roles list"
 }

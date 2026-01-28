@@ -1,9 +1,10 @@
 {
-    "event_id": "dc9d433a-502f-44a1-8d89-1e2595715636",
-    "timestamp": "2026-01-28T09:46:36.672418",
+    "event_id": "a9a199b5-ac9d-4f62-b153-c9ebb1dd3dc6",
+    "timestamp": "2026-01-28T09:53:10.736320",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_\\Users\\Public\\_test_suffix",
-    "command": "test_prefix_\\Users\\Public\\_test_suffix"
+    "raw_data": "{'User|contains': ['svc_jenkins', 'svc_github_actions', 'adm_build_ops']} {'Image|contains': ['\\\\Microsoft Visual Studio\\\\', '\\\\MSBuild\\\\', '\\\\actions-runner\\\\']}",
+    "CommandLine": "\\Users\\Public\\ \\AppData\\Local\\Temp\\ C:\\Windows\\Temp\\ \\PerfLogs\\ \\ProgramData\\",
+    "command": "\\Users\\Public\\ \\AppData\\Local\\Temp\\ C:\\Windows\\Temp\\ \\PerfLogs\\ \\ProgramData\\"
 }

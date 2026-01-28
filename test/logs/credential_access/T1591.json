@@ -1,9 +1,10 @@
 {
-    "event_id": "cc11fbc1-063a-47e4-9630-4cd7e8a101aa",
-    "timestamp": "2026-01-28T09:46:36.558693",
+    "event_id": "9c159969-7246-4339-8a5b-a194568bca51",
+    "timestamp": "2026-01-28T09:53:10.628198",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\dsquery.exe_test_suffix",
-    "process_path": "test_prefix_\\dsquery.exe_test_suffix"
+    "raw_data": "{'CommandLine|contains': [' /domain', 'objectCategory=', 'objectClass=', 'LDAP://']} {'CommandLine|contains': ['Get-ADOrganizationalUnit', 'Get-ADGroupMember', 'Get-NetGPO']}",
+    "Image": "\\dsquery.exe \\dsget.exe \\csvde.exe \\ldifde.exe",
+    "process_path": "\\dsquery.exe \\dsget.exe \\csvde.exe \\ldifde.exe"
 }

@@ -1,7 +1,8 @@
 {
-    "event_id": "f790a970-3587-42c2-a164-34157092f5b4",
-    "timestamp": "2026-01-28T09:46:36.699116",
+    "event_id": "2e213e52-1c18-436d-8f2d-607e1279aa5c",
+    "timestamp": "2026-01-28T09:53:10.761385",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'Image|endswith': ['\\\\chrome.exe', '\\\\msedge.exe', '\\\\firefox.exe']} {'ParentImage|endswith': ['\\\\explorer.exe']}"
 }

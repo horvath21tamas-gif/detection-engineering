@@ -1,12 +1,12 @@
 {
-    "event_id": "e95597ef-e56b-4526-aa59-7c9ffa38399d",
-    "timestamp": "2026-01-28T09:46:36.635853",
+    "event_id": "3ff3bf40-79b9-43c5-a28a-b910d62cd44a",
+    "timestamp": "2026-01-28T09:53:10.706731",
     "product": "generic",
-    "service": "sysmon",
+    "service": null,
     "category": "webserver",
-    "cs-uri-stem": "test_prefix_.php_test_suffix",
-    "cs-method": "POST",
-    "cs-uri-query": "test_prefix_cmd=_test_suffix",
+    "cs-uri-stem": ".php .phtml .php5 .asp .aspx .jsp",
+    "cs-method": "POST PUT",
+    "cs-uri-query": "cmd= exec= system= powershell= whoami net user uname id curl  wget ",
     "sc-status": "200",
-    "cs-user-agent": "test_prefix_curl_test_suffix"
+    "cs-user-agent": "curl wget python powershell httpclient libwww"
 }

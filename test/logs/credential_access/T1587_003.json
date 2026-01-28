@@ -1,9 +1,10 @@
 {
-    "event_id": "d29f64ed-dd0c-4e70-a39a-93b221484681",
-    "timestamp": "2026-01-28T09:46:36.540957",
+    "event_id": "9e53cde6-b1d8-4e12-ad18-2487db327da0",
+    "timestamp": "2026-01-28T09:53:10.610182",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_\\Users\\Public\\_test_suffix",
-    "command": "test_prefix_\\Users\\Public\\_test_suffix"
+    "raw_data": "{'Image|endswith': ['\\\\openssl.exe', '\\\\keytool.exe', '\\\\certutil.exe', '\\\\makecert.exe']}",
+    "CommandLine": "\\Users\\Public\\ \\AppData\\Local\\Temp\\ \\PerfLogs\\ C:\\Windows\\Temp\\ \\ProgramData\\",
+    "command": "\\Users\\Public\\ \\AppData\\Local\\Temp\\ \\PerfLogs\\ C:\\Windows\\Temp\\ \\ProgramData\\"
 }

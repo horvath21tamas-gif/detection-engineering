@@ -1,9 +1,10 @@
 {
-    "event_id": "f4a49bbd-04ea-4b6e-a3ce-f1f486d0f2cf",
-    "timestamp": "2026-01-28T09:46:36.536621",
+    "event_id": "923b4c39-51ea-4713-a070-4a0d6be7e891",
+    "timestamp": "2026-01-28T09:53:10.605801",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_confluence_test_suffix",
-    "command": "test_prefix_confluence_test_suffix"
+    "raw_data": "{'Image|endswith': ['\\\\wget.exe', '\\\\curl.exe'], 'CommandLine|contains': [' --mirror', ' -m ', ' --recursive', ' -r ', ' --no-parent']} {'Image|endswith': '\\\\powershell.exe', 'CommandLine|contains': ['foreach', 'while']}",
+    "CommandLine": "confluence sharepoint wiki. tudastar onboarding network-diagram credential jelszo",
+    "command": "confluence sharepoint wiki. tudastar onboarding network-diagram credential jelszo"
 }

@@ -1,8 +1,8 @@
 {
-    "event_id": "4cfa6d13-9778-4a90-8644-7c5da5196b71",
-    "timestamp": "2026-01-28T09:46:36.873446",
+    "event_id": "2d9718d1-ed8d-44da-96fb-f2c4ef6c45c8",
+    "timestamp": "2026-01-28T09:53:10.941011",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "service_creation",
-    "ServiceName": "PSEXECSVC"
+    "ServiceName": "PSEXECSVC PAExec RemComSvc CSEXEC ATSVC"
 }

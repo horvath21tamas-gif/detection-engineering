@@ -1,11 +1,11 @@
 {
-    "event_id": "11b87256-4004-4f3e-90c3-db123c25c9c4",
-    "timestamp": "2026-01-28T09:46:36.689006",
+    "event_id": "7283b144-4116-4766-95cf-cb6c2c2e6b56",
+    "timestamp": "2026-01-28T09:53:10.751199",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "pipe_created",
     "PipeName": "^\\\\+[a-f0-9]{8,12}$",
-    "Image": "test_prefix_\\cmd.exe_test_suffix",
-    "process_path": "test_prefix_\\cmd.exe_test_suffix",
-    "ParentImage": "test_prefix_\\cmd.exe_test_suffix"
+    "Image": "\\cmd.exe \\powershell.exe \\pwsh.exe \\powershell_ise.exe \\wscript.exe \\cscript.exe \\rundll32.exe \\mshta.exe",
+    "process_path": "\\cmd.exe \\powershell.exe \\pwsh.exe \\powershell_ise.exe \\wscript.exe \\cscript.exe \\rundll32.exe \\mshta.exe",
+    "ParentImage": "\\cmd.exe \\powershell.exe \\wscript.exe \\cscript.exe"
 }

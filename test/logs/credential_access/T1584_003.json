@@ -1,7 +1,8 @@
 {
-    "event_id": "afdb65ad-01e9-4ff5-b9f7-a0778b9f03f7",
-    "timestamp": "2026-01-28T09:46:36.979128",
+    "event_id": "30d06056-e3c8-4479-91dc-c7879ae7d87b",
+    "timestamp": "2026-01-28T09:53:11.062613",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'User|contains': ['svc_terraform', 'svc_deploy', 'github_actions_runner']} {'Image|contains': ['\\\\Terraform\\\\', '\\\\actions-runner\\\\', '\\\\Jenkins\\\\']}"
 }

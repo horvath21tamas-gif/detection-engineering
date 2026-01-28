@@ -1,11 +1,11 @@
 {
-    "event_id": "c68920df-25d4-4458-8935-3953afb4d7dc",
-    "timestamp": "2026-01-28T09:46:36.770937",
+    "event_id": "f7520bcf-158b-4462-ab6e-90bf18ab1cd8",
+    "timestamp": "2026-01-28T09:53:10.835621",
     "product": "generic",
-    "service": "sysmon",
+    "service": null,
     "category": "webserver",
-    "SrcIp": "test_prefix_1._test_suffix",
-    "UriStem": "test_prefix_/system_test_suffix",
-    "UriQuery": "test_prefix_cpu_test_suffix",
-    "UserAgent": "test_prefix_curl_test_suffix"
+    "SrcIp": "1. 2. 3. 4. 5. 6. 7. 8. 9.",
+    "UriStem": "/system /hardware /device /diagnostics /status /mgmt /management /admin /cgi-bin",
+    "UriQuery": "cpu cores architecture arch model vendor manufacturer serial board chip memory ram",
+    "UserAgent": "curl wget python httpclient go-http-client libwww probe"
 }

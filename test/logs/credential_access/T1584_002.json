@@ -1,10 +1,11 @@
 {
-    "event_id": "ef969530-634b-4722-90f8-fc6119370696",
-    "timestamp": "2026-01-28T09:46:36.816329",
+    "event_id": "35ce8515-da87-46fb-9e51-004b4087e8ec",
+    "timestamp": "2026-01-28T09:53:10.881349",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "ParentImage": "test_prefix_\\dns.exe_test_suffix",
-    "Image": "test_prefix_\\cmd.exe_test_suffix",
-    "process_path": "test_prefix_\\cmd.exe_test_suffix"
+    "raw_data": "{'Image|endswith': ['\\\\dnscmd.exe', '\\\\nsupdate.exe']} {'CommandLine|contains': [' /ZoneResetMasters', ' /Config ', ' /ZoneAdd ', ' /RecordAdd ']}",
+    "ParentImage": "\\dns.exe \\named.exe \\coredns.exe",
+    "Image": "\\cmd.exe \\powershell.exe \\whoami.exe \\certutil.exe \\curl.exe",
+    "process_path": "\\cmd.exe \\powershell.exe \\whoami.exe \\certutil.exe \\curl.exe"
 }

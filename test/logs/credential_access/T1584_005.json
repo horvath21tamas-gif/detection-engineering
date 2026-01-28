@@ -1,10 +1,11 @@
 {
-    "event_id": "22d06e4d-7105-4097-9c8f-b929f7143345",
-    "timestamp": "2026-01-28T09:46:36.926790",
+    "event_id": "d063cd3c-a7b1-4e08-b3b9-1f1bc96c7e78",
+    "timestamp": "2026-01-28T09:53:11.009033",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "ParentImage": "test_prefix_\\wmiprvse.exe_test_suffix",
-    "Image": "test_prefix_\\powershell.exe_test_suffix",
-    "process_path": "test_prefix_\\powershell.exe_test_suffix"
+    "raw_data": "{'Image|contains': ['\\\\Microsoft\\\\ConfigMgr\\\\', '\\\\Altiris\\\\', '\\\\Tanium\\\\']} {'User|contains': ['svc_deploy', 'svc_inventory']}",
+    "ParentImage": "\\wmiprvse.exe \\scrcons.exe",
+    "Image": "\\powershell.exe \\cmd.exe \\certutil.exe",
+    "process_path": "\\powershell.exe \\cmd.exe \\certutil.exe"
 }

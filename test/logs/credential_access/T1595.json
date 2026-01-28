@@ -1,12 +1,12 @@
 {
-    "event_id": "f09e04e4-5a4d-426a-b973-14cc543d66f3",
-    "timestamp": "2026-01-28T09:46:36.738038",
+    "event_id": "4c81b1a8-159b-4970-aef5-2cec6133108a",
+    "timestamp": "2026-01-28T09:53:10.801339",
     "product": "generic",
-    "service": "sysmon",
+    "service": null,
     "category": "webserver",
-    "SrcIp": "test_prefix_1._test_suffix",
-    "Method": "GET",
-    "UriStem": "test_prefix_/admin_test_suffix",
-    "UserAgent": "test_prefix_curl_test_suffix",
-    "Status": "200"
+    "SrcIp": "1. 2. 3. 4. 5. 6. 7. 8. 9.",
+    "Method": "GET HEAD OPTIONS",
+    "UriStem": "/admin /login /config /setup /debug /test /backup /old /dev /server-status /phpinfo /.git /.env /wp-admin /actuator",
+    "UserAgent": "curl wget python go-http-client libwww scanner probe masscan nmap zgrab httpclient axios requests",
+    "Status": "200 301 302 401 403 404"
 }

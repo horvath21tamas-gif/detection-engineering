@@ -1,7 +1,8 @@
 {
-    "event_id": "8e26a021-b09d-4d26-9358-8ee7472db742",
-    "timestamp": "2026-01-28T09:46:36.962329",
+    "event_id": "a84a0f7b-9c81-43d0-8375-82e04460ef44",
+    "timestamp": "2026-01-28T09:53:11.045480",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'User|contains': ['svc_terraform', 'svc_ansible', 'adm_cloud_infra']} {'Image|contains': ['\\\\Terraform\\\\', '\\\\Ansible\\\\']}"
 }

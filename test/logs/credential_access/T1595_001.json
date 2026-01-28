@@ -1,11 +1,11 @@
 {
-    "event_id": "f539c931-97a3-4824-83b4-375818500bd4",
-    "timestamp": "2026-01-28T09:46:36.807569",
+    "event_id": "8dd77d56-f334-4755-8b6c-b87fe75250ea",
+    "timestamp": "2026-01-28T09:53:10.872500",
     "product": "generic",
-    "service": "sysmon",
+    "service": null,
     "category": "network_traffic",
-    "SrcIp": "test_prefix_1._test_suffix",
-    "Action": "deny",
+    "SrcIp": "1. 2. 3. 4. 5. 6. 7. 8. 9.",
+    "Action": "deny drop reset",
     "Protocol": "tcp",
-    "Status": "400"
+    "Status": "400 401 403 404 408 444 499"
 }

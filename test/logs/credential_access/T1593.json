@@ -1,9 +1,10 @@
 {
-    "event_id": "7577fd76-dea5-4077-8ebc-d5f1129c6b5c",
-    "timestamp": "2026-01-28T09:46:36.971797",
+    "event_id": "f541617a-4953-4e9b-954f-776818e326b6",
+    "timestamp": "2026-01-28T09:53:11.055127",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_--headless_test_suffix",
-    "command": "test_prefix_--headless_test_suffix"
+    "raw_data": "{'CommandLine|contains': ['--type=utility', '--type=gpu-process', '--type=renderer']} {'ParentImage|endswith': ['\\\\chrome.exe', '\\\\msedge.exe']}",
+    "CommandLine": "--headless --remote-debugging-port --disable-gpu webdriver user-data-dir",
+    "command": "--headless --remote-debugging-port --disable-gpu webdriver user-data-dir"
 }

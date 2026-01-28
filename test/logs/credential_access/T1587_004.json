@@ -1,9 +1,10 @@
 {
-    "event_id": "bfff4920-1b60-4e30-baae-c7b17e87f98c",
-    "timestamp": "2026-01-28T09:46:36.853130",
+    "event_id": "88e39738-4fdf-40d9-ba3c-dbe258a63fac",
+    "timestamp": "2026-01-28T09:53:10.920288",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_\\Users\\Public\\_test_suffix",
-    "command": "test_prefix_\\Users\\Public\\_test_suffix"
+    "raw_data": "{'User|contains': ['svc_jenkins', 'svc_deploy', 'adm_build_master']} {'Image|contains': ['\\\\Microsoft Visual Studio\\\\', '\\\\MSBuild\\\\', '\\\\actions-runner\\\\']}",
+    "CommandLine": "\\Users\\Public\\ \\AppData\\Local\\Temp\\ C:\\Windows\\Temp\\ \\PerfLogs\\ \\Temporary ASP.NET Files\\",
+    "command": "\\Users\\Public\\ \\AppData\\Local\\Temp\\ C:\\Windows\\Temp\\ \\PerfLogs\\ \\Temporary ASP.NET Files\\"
 }

@@ -1,9 +1,10 @@
 {
-    "event_id": "a0b24e57-2960-4716-86eb-fc761c82e6e6",
-    "timestamp": "2026-01-28T09:46:36.741633",
+    "event_id": "ea6b00c7-9e7d-4839-90d6-159dfea1619f",
+    "timestamp": "2026-01-28T09:53:10.805011",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_action=allow_test_suffix",
-    "command": "test_prefix_action=allow_test_suffix"
+    "raw_data": "{'Image|endswith': '\\\\netsh.exe'} {'filename': 'netsh.exe'}",
+    "CommandLine": "action=allow enable=yes",
+    "command": "action=allow enable=yes"
 }

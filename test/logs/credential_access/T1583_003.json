@@ -1,11 +1,12 @@
 {
-    "event_id": "8edbbf84-b792-4408-a821-5b2b4e9f619d",
-    "timestamp": "2026-01-28T09:46:36.895430",
+    "event_id": "176c29f7-84a9-498d-8950-229d197e1797",
+    "timestamp": "2026-01-28T09:53:10.973282",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\terraform.exe_test_suffix",
-    "process_path": "test_prefix_\\terraform.exe_test_suffix",
-    "CommandLine": "test_prefix_aws_vpc_test_suffix",
-    "command": "test_prefix_aws_vpc_test_suffix"
+    "raw_data": "{'User|contains': ['svc_terraform_network', 'adm_netops_deploy']} {'Image|contains': ['\\\\Program Files\\\\Terraform\\\\', '\\\\actions-runner\\\\']}",
+    "Image": "\\terraform.exe \\pulumi.exe",
+    "process_path": "\\terraform.exe \\pulumi.exe",
+    "CommandLine": "aws_vpc aws_internet_gateway aws_vpc_peering_connection azurerm_virtual_network google_compute_network",
+    "command": "aws_vpc aws_internet_gateway aws_vpc_peering_connection azurerm_virtual_network google_compute_network"
 }

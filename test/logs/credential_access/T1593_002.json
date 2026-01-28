@@ -1,9 +1,10 @@
 {
-    "event_id": "c112d67c-2f90-42a8-ade5-f0ae70a606ab",
-    "timestamp": "2026-01-28T09:46:36.931821",
+    "event_id": "0c15ccb5-577b-4cd5-9e4a-b4bba9eebf24",
+    "timestamp": "2026-01-28T09:53:11.014222",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_google.com/search_test_suffix",
-    "command": "test_prefix_google.com/search_test_suffix"
+    "raw_data": "{'Image|endswith': ['\\\\curl.exe', '\\\\wget.exe', '\\\\python.exe', '\\\\pwsh.exe']} {'CommandLine|contains|all': ['site:', 'filetype:']} {'CommandLine|contains': ['intitle:\"index of\"', 'inurl:admin']}",
+    "CommandLine": "google.com/search bing.com/search",
+    "command": "google.com/search bing.com/search"
 }

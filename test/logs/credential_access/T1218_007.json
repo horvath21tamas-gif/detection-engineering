@@ -1,12 +1,12 @@
 {
-    "event_id": "8ffe4358-703c-42a9-b185-6f18471f14d9",
-    "timestamp": "2026-01-28T09:46:36.801589",
+    "event_id": "5cda144e-32d2-4480-9f8a-f89a40a6f1de",
+    "timestamp": "2026-01-28T09:53:10.866388",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\msiexec.exe_test_suffix",
-    "process_path": "test_prefix_\\msiexec.exe_test_suffix",
-    "CommandLine": "test_prefix_/quiet_test_suffix",
-    "command": "test_prefix_/quiet_test_suffix",
-    "ParentImage": "test_prefix_\\powershell.exe_test_suffix"
+    "Image": "\\msiexec.exe",
+    "process_path": "\\msiexec.exe",
+    "CommandLine": "/quiet /qn /norestart",
+    "command": "/quiet /qn /norestart",
+    "ParentImage": "\\powershell.exe \\pwsh.exe \\cmd.exe \\wscript.exe \\cscript.exe \\mshta.exe \\rundll32.exe"
 }

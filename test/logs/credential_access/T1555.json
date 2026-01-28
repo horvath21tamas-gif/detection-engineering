@@ -1,11 +1,11 @@
 {
-    "event_id": "f7dc01af-69d0-4436-b4cd-ff355f85f94d",
-    "timestamp": "2026-01-28T09:46:36.726584",
+    "event_id": "9c61daf0-b40b-409b-ae80-3ab7e76dbd5a",
+    "timestamp": "2026-01-28T09:53:10.789601",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "file_event",
-    "TargetFileName": "test_prefix_logins.json_test_suffix",
-    "AccessMask": "0x1",
-    "Image": "test_prefix_\\powershell.exe_test_suffix",
-    "process_path": "test_prefix_\\powershell.exe_test_suffix"
+    "TargetFileName": "logins.json key4.db cookies.sqlite",
+    "AccessMask": "0x1 0x10 ReadData ReadFile",
+    "Image": "\\powershell.exe \\pwsh.exe \\cmd.exe \\rundll32.exe \\regsvr32.exe \\wscript.exe \\cscript.exe \\mshta.exe \\python.exe \\perl.exe",
+    "process_path": "\\powershell.exe \\pwsh.exe \\cmd.exe \\rundll32.exe \\regsvr32.exe \\wscript.exe \\cscript.exe \\mshta.exe \\python.exe \\perl.exe"
 }

@@ -1,7 +1,8 @@
 {
-    "event_id": "2e045dde-dc01-4b23-9bec-ae4ea21f257b",
-    "timestamp": "2026-01-28T09:46:36.703975",
+    "event_id": "63b45038-2859-41c4-95dd-f286ab311352",
+    "timestamp": "2026-01-28T09:53:10.766433",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'Image|endswith': ['\\\\curl.exe', '\\\\wget.exe', '\\\\python.exe', '\\\\pwsh.exe']} {'CommandLine|contains|all': ['api.github.com', '/search/']} {'CommandLine|contains': ['.env', 'id_rsa', 'aws_access_key', 'connectionstring']}"
 }

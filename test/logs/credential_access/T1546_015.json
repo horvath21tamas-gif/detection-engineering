@@ -1,11 +1,11 @@
 {
-    "event_id": "f47fbc73-8f24-4330-90d5-c4046fc791e1",
-    "timestamp": "2026-01-28T09:46:36.522763",
+    "event_id": "c238ffa7-2d50-41dc-a590-ae72fe338402",
+    "timestamp": "2026-01-28T09:53:10.591895",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "registry_set",
-    "TargetObject": "test_prefix_\\InprocServer32_test_suffix",
-    "Details": "test_prefix_\\Users\\_test_suffix",
-    "Image": "test_prefix_\\powershell.exe_test_suffix",
-    "process_path": "test_prefix_\\powershell.exe_test_suffix"
+    "TargetObject": "\\InprocServer32 \\LocalServer32",
+    "Details": "\\Users\\ \\AppData\\ \\Temp\\ \\ProgramData\\ \\Downloads\\",
+    "Image": "\\powershell.exe \\pwsh.exe \\cmd.exe \\wscript.exe \\cscript.exe \\mshta.exe \\rundll32.exe \\regsvr32.exe",
+    "process_path": "\\powershell.exe \\pwsh.exe \\cmd.exe \\wscript.exe \\cscript.exe \\mshta.exe \\rundll32.exe \\regsvr32.exe"
 }

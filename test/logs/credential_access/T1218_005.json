@@ -1,12 +1,12 @@
 {
-    "event_id": "5f3a8972-5846-40c8-a0fb-cd196c3abb99",
-    "timestamp": "2026-01-28T09:46:36.623178",
+    "event_id": "f5caa89f-7863-42f9-9184-918d2bc1d97a",
+    "timestamp": "2026-01-28T09:53:10.693631",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\mshta.exe_test_suffix",
-    "process_path": "test_prefix_\\mshta.exe_test_suffix",
-    "CommandLine": "test_prefix_http://_test_suffix",
-    "command": "test_prefix_http://_test_suffix",
-    "ParentImage": "test_prefix_\\powershell.exe_test_suffix"
+    "Image": "\\mshta.exe",
+    "process_path": "\\mshta.exe",
+    "CommandLine": "http:// https:// .hta javascript: vbscript:",
+    "command": "http:// https:// .hta javascript: vbscript:",
+    "ParentImage": "\\powershell.exe \\pwsh.exe \\cmd.exe \\wscript.exe \\cscript.exe \\rundll32.exe"
 }

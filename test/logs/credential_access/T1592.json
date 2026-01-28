@@ -1,12 +1,12 @@
 {
-    "event_id": "198e021b-fed3-46f9-8bd7-ffdf85a7cb31",
-    "timestamp": "2026-01-28T09:46:36.914275",
+    "event_id": "73b7f94a-383d-4477-bd5d-e3e357c472c8",
+    "timestamp": "2026-01-28T09:53:10.996143",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\cmd.exe_test_suffix",
-    "process_path": "test_prefix_\\cmd.exe_test_suffix",
-    "CommandLine": "test_prefix_&_test_suffix",
-    "command": "test_prefix_&_test_suffix",
-    "ParentImage": "test_prefix_\\explorer.exe_test_suffix"
+    "Image": "\\cmd.exe \\powershell.exe \\pwsh.exe \\wmic.exe",
+    "process_path": "\\cmd.exe \\powershell.exe \\pwsh.exe \\wmic.exe",
+    "CommandLine": "& && ; |",
+    "command": "& && ; |",
+    "ParentImage": "\\explorer.exe \\winword.exe \\excel.exe \\powerpnt.exe \\outlook.exe \\mshta.exe \\rundll32.exe \\wscript.exe \\cscript.exe"
 }

@@ -1,9 +1,9 @@
 {
-    "event_id": "d8101859-a648-4575-86ed-2fe8e20048e4",
-    "timestamp": "2026-01-28T09:46:36.788248",
+    "event_id": "2c10c1c3-75ad-4858-8fdd-78b5ca7f41ce",
+    "timestamp": "2026-01-28T09:53:10.852972",
     "product": "windows",
     "service": "security",
-    "category": "process_creation",
+    "category": null,
     "EventID": "4624",
     "LogonType": "10"
 }

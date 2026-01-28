@@ -1,7 +1,8 @@
 {
-    "event_id": "e166d56f-93c0-4a01-a9ed-73c5a4b8b855",
-    "timestamp": "2026-01-28T09:46:36.882016",
+    "event_id": "4d2a9443-148d-48f8-9699-4756ccdc9e96",
+    "timestamp": "2026-01-28T09:53:10.949776",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'Image|endswith': ['\\\\curl.exe', '\\\\wget.exe', '\\\\python.exe']} {'CommandLine|contains': ['api.namecheap.com', 'api.godaddy.com', 'freenom.com', '/v2/droplets']}"
 }

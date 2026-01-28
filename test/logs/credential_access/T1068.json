@@ -1,11 +1,11 @@
 {
-    "event_id": "3d35187f-ced6-4ad6-91a1-11df3a25ce19",
-    "timestamp": "2026-01-28T09:46:36.485829",
+    "event_id": "09f21618-b336-4c43-8efe-c6b44e7131a2",
+    "timestamp": "2026-01-28T09:53:10.554917",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "ParentImage": "test_prefix_\\explorer.exe_test_suffix",
-    "Image": "test_prefix_\\Users\\_test_suffix",
-    "process_path": "test_prefix_\\Users\\_test_suffix",
+    "ParentImage": "\\explorer.exe \\chrome.exe \\msedge.exe \\brave.exe \\firefox.exe \\WINWORD.EXE \\EXCEL.EXE \\POWERPNT.EXE",
+    "Image": "\\Users\\ \\AppData\\ \\Temp\\ \\ProgramData\\",
+    "process_path": "\\Users\\ \\AppData\\ \\Temp\\ \\ProgramData\\",
     "username": "NT AUTHORITY\\SYSTEM"
 }

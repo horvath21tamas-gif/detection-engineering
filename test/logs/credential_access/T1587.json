@@ -1,11 +1,12 @@
 {
-    "event_id": "a6e532cd-6c69-40f6-9439-b64f3db7b9dc",
-    "timestamp": "2026-01-28T09:46:36.836220",
+    "event_id": "a262c6c8-ebf8-4f5c-bd96-3bebd84577bd",
+    "timestamp": "2026-01-28T09:53:10.902752",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_\\AppData\\Local\\Temp\\_test_suffix",
-    "command": "test_prefix_\\AppData\\Local\\Temp\\_test_suffix",
-    "Image": "test_prefix_\\csc.exe_test_suffix",
-    "process_path": "test_prefix_\\csc.exe_test_suffix"
+    "CommandLine": "\\AppData\\Local\\Temp\\ \\Users\\Public\\",
+    "command": "\\AppData\\Local\\Temp\\ \\Users\\Public\\",
+    "Image": "\\csc.exe \\vbc.exe \\jsc.exe",
+    "process_path": "\\csc.exe \\vbc.exe \\jsc.exe",
+    "raw_data": "{'User|contains': ['svc_jenkins', 'svc_gitlab_runner', 'adm_devops_build']} {'Image|contains': ['\\\\Program Files\\\\Microsoft Visual Studio\\\\', '\\\\MsBuild\\\\']}"
 }

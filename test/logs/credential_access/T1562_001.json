@@ -1,9 +1,10 @@
 {
-    "event_id": "f864f1ae-53cd-4f4a-b188-dc8935ed043f",
-    "timestamp": "2026-01-28T09:46:36.918837",
+    "event_id": "562ad5e0-82ff-4a70-8320-5265760eb911",
+    "timestamp": "2026-01-28T09:53:11.000868",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_ -disablere_test_suffix",
-    "command": "test_prefix_ -disablere_test_suffix"
+    "raw_data": "{'Image|endswith': ['\\\\powershell.exe', '\\\\pwsh.exe', '\\\\powershell_ise.exe']} {'filename': ['PowerShell.EXE', 'pwsh.dll', 'powershell_ise.EXE']}",
+    "CommandLine": " -disablere  -excl",
+    "command": " -disablere  -excl"
 }

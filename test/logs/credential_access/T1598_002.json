@@ -1,11 +1,12 @@
 {
-    "event_id": "508fd11d-7c96-40fe-89d2-7cdbf15c2280",
-    "timestamp": "2026-01-28T09:46:36.755528",
+    "event_id": "5150ab54-99c2-45e2-97d1-b409c90c75b7",
+    "timestamp": "2026-01-28T09:53:10.819927",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\findstr.exe_test_suffix",
-    "process_path": "test_prefix_\\findstr.exe_test_suffix",
-    "CommandLine": "test_prefix_invoice_test_suffix",
-    "command": "test_prefix_invoice_test_suffix"
+    "raw_data": "{'Image|endswith': ['\\\\7z.exe', '\\\\rar.exe', '\\\\tar.exe', '\\\\powershell.exe', '\\\\curl.exe'], 'CommandLine|contains': ['.pst', '.ost', '.msg', 'contacts.edb']}",
+    "Image": "\\findstr.exe \\grep.exe",
+    "process_path": "\\findstr.exe \\grep.exe",
+    "CommandLine": "invoice payment swift iban szamla utalas",
+    "command": "invoice payment swift iban szamla utalas"
 }

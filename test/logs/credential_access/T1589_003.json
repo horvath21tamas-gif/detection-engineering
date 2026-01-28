@@ -1,12 +1,12 @@
 {
-    "event_id": "5d2fca4e-0e46-48f8-930c-4d3b4651c712",
-    "timestamp": "2026-01-28T09:46:36.714972",
+    "event_id": "545e4ea7-12d0-45d0-ac22-ed1ab6e11dec",
+    "timestamp": "2026-01-28T09:53:10.777763",
     "product": "generic",
-    "service": "sysmon",
+    "service": null,
     "category": "webserver",
-    "SrcIp": "test_prefix_1._test_suffix",
-    "UriStem": "test_prefix_/search_test_suffix",
-    "UriQuery": "test_prefix_site:_test_suffix",
-    "UserAgent": "test_prefix_curl_test_suffix",
-    "Status": "200"
+    "SrcIp": "1. 2. 3. 4. 5. 6. 7. 8. 9.",
+    "UriStem": "/search /find /lookup /directory /people /staff /team /employees /api/search /api/directory",
+    "UriQuery": "site: domain= subdomain= email mail user username employee account @",
+    "UserAgent": "curl wget python requests go-http-client httpclient axios libwww osint recon scanner",
+    "Status": "200 206"
 }

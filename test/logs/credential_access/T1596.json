@@ -1,7 +1,8 @@
 {
-    "event_id": "dd673463-124d-4584-ac8b-99a9bfc2c065",
-    "timestamp": "2026-01-28T09:46:36.708606",
+    "event_id": "deb9483c-47bc-4b25-9a63-63833db6d803",
+    "timestamp": "2026-01-28T09:53:10.771247",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'Image|endswith': ['\\\\curl.exe', '\\\\wget.exe', '\\\\python.exe', '\\\\pwsh.exe']} {'CommandLine|contains': ['api.shodan.io', 'api.censys.io', 'api.virustotal.com', 'otx.alienvault.com', 'api.binaryedge.io']}"
 }

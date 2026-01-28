@@ -1,11 +1,12 @@
 {
-    "event_id": "688ccab2-25c6-4097-8c51-9e7633e575e0",
-    "timestamp": "2026-01-28T09:46:36.983409",
+    "event_id": "d41b53c1-ebed-4897-add4-fcf30c87df33",
+    "timestamp": "2026-01-28T09:53:11.066954",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\msg.exe_test_suffix",
-    "process_path": "test_prefix_\\msg.exe_test_suffix",
-    "CommandLine": "test_prefix_approve_test_suffix",
-    "command": "test_prefix_approve_test_suffix"
+    "raw_data": "{'Image|endswith': ['\\\\powershell.exe', '\\\\pwsh.exe'], 'CommandLine|contains': ['System.Windows.Forms', 'System.Drawing', 'Microsoft.VisualBasic.Interaction']} {'CommandLine|contains': ['OTP', 'MFA', 'Hitelesito', 'kod', 'Verification']}",
+    "Image": "\\msg.exe",
+    "process_path": "\\msg.exe",
+    "CommandLine": "approve confirm megerosites fogadja el",
+    "command": "approve confirm megerosites fogadja el"
 }

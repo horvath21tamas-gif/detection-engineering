@@ -1,7 +1,8 @@
 {
-    "event_id": "ee890fc1-5477-4fdf-872d-78c53681386e",
-    "timestamp": "2026-01-28T09:46:36.904803",
+    "event_id": "70ab7129-4ae1-43ca-9042-ef354c2a79bd",
+    "timestamp": "2026-01-28T09:53:10.986365",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'Image|contains': ['\\\\Lansweeper\\\\', '\\\\SolarWinds\\\\', '\\\\PRTG Network Monitor\\\\']} {'User|contains': ['svc_network_inventory', 'adm_netscan']}"
 }

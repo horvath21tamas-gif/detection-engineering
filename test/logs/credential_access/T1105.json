@@ -1,12 +1,12 @@
 {
-    "event_id": "d633f4e6-3301-4814-b494-fba7e3643e52",
-    "timestamp": "2026-01-28T09:46:36.677536",
+    "event_id": "c7957604-6e2b-438d-82ae-ab069f1cee12",
+    "timestamp": "2026-01-28T09:53:10.741543",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\powershell.exe_test_suffix",
-    "process_path": "test_prefix_\\powershell.exe_test_suffix",
-    "CommandLine": "test_prefix_\\Users\\_test_suffix",
-    "command": "test_prefix_\\Users\\_test_suffix",
-    "ParentImage": "test_prefix_\\WINWORD.EXE_test_suffix"
+    "Image": "\\powershell.exe \\pwsh.exe \\bitsadmin.exe \\certutil.exe",
+    "process_path": "\\powershell.exe \\pwsh.exe \\bitsadmin.exe \\certutil.exe",
+    "CommandLine": "\\Users\\ \\AppData\\ \\Temp\\ \\Downloads\\",
+    "command": "\\Users\\ \\AppData\\ \\Temp\\ \\Downloads\\",
+    "ParentImage": "\\WINWORD.EXE \\EXCEL.EXE \\POWERPNT.EXE \\OUTLOOK.EXE \\cmd.exe \\wscript.exe \\cscript.exe \\mshta.exe"
 }

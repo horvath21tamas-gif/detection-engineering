@@ -1,10 +1,10 @@
 {
-    "event_id": "8683835a-3287-4165-b1d1-4128e99ff013",
-    "timestamp": "2026-01-28T09:46:36.922497",
+    "event_id": "c9a14b0f-4b1b-41db-b0f6-943b7f2737d2",
+    "timestamp": "2026-01-28T09:53:11.004663",
     "product": "windows",
     "service": "security",
-    "category": "process_creation",
+    "category": null,
     "EventID": "4769",
     "Status": "0x0",
-    "TicketEncryptionType": "0x17"
+    "TicketEncryptionType": "0x17 0x1 0x3"
 }

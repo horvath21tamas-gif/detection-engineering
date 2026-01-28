@@ -1,12 +1,12 @@
 {
-    "event_id": "5eeba1af-a482-4890-b8fb-482b5ca216c7",
-    "timestamp": "2026-01-28T09:46:36.840253",
+    "event_id": "91956f05-bfc9-438a-a08f-67b995acb1c8",
+    "timestamp": "2026-01-28T09:53:10.906934",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "registry_event",
     "EventType": "SetValue",
-    "TargetObject": "test_prefix_\\Software\\Microsoft\\Windows\\CurrentVersion\\Run_test_suffix",
-    "Details": "test_prefix_\\AppData\\_test_suffix",
-    "Image": "test_prefix_\\powershell.exe_test_suffix",
-    "process_path": "test_prefix_\\powershell.exe_test_suffix"
+    "TargetObject": "\\Software\\Microsoft\\Windows\\CurrentVersion\\Run \\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce \\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Run",
+    "Details": "\\AppData\\ \\Temp\\ \\Downloads\\ \\Public\\ \\ProgramData\\",
+    "Image": "\\powershell.exe \\pwsh.exe \\cmd.exe \\wscript.exe \\cscript.exe \\mshta.exe \\rundll32.exe \\regsvr32.exe",
+    "process_path": "\\powershell.exe \\pwsh.exe \\cmd.exe \\wscript.exe \\cscript.exe \\mshta.exe \\rundll32.exe \\regsvr32.exe"
 }

@@ -1,9 +1,10 @@
 {
-    "event_id": "e950523f-6368-41c9-9b3b-9d9327a8b40a",
-    "timestamp": "2026-01-28T09:46:36.831634",
+    "event_id": "aa733668-0527-471d-9dc5-96869b78c552",
+    "timestamp": "2026-01-28T09:53:10.898080",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_linkedin.com/in/_test_suffix",
-    "command": "test_prefix_linkedin.com/in/_test_suffix"
+    "raw_data": "{'Image|endswith': ['\\\\python.exe', '\\\\node.exe', '\\\\curl.exe']} {'CommandLine|contains': ['api.linkedin.com', 'api.twitter.com', '/users/lookup', 'graphql']}",
+    "CommandLine": "linkedin.com/in/ twitter.com/ facebook.com/profile",
+    "command": "linkedin.com/in/ twitter.com/ facebook.com/profile"
 }

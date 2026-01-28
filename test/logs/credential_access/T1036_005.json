@@ -1,11 +1,11 @@
 {
-    "event_id": "4cbe1084-88f3-4169-871a-68fe1ed1fddd",
-    "timestamp": "2026-01-28T09:46:36.760308",
+    "event_id": "45c33aab-077d-4d9e-acec-ebecc6ff7fb3",
+    "timestamp": "2026-01-28T09:53:10.824784",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\cmd.exe_test_suffix",
-    "process_path": "test_prefix_\\cmd.exe_test_suffix",
-    "CommandLine": "test_prefix_C:\\Windows\\System32\\_test_suffix",
-    "command": "test_prefix_C:\\Windows\\System32\\_test_suffix"
+    "Image": "\\cmd.exe \\powershell.exe \\pwsh.exe \\robocopy.exe \\xcopy.exe",
+    "process_path": "\\cmd.exe \\powershell.exe \\pwsh.exe \\robocopy.exe \\xcopy.exe",
+    "CommandLine": "C:\\Windows\\System32\\ C:\\Windows\\SysWOW64\\",
+    "command": "C:\\Windows\\System32\\ C:\\Windows\\SysWOW64\\"
 }

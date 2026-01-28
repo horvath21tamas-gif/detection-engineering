@@ -1,10 +1,10 @@
 {
-    "event_id": "6be4bc3f-1c08-4d62-be16-486c02f69642",
-    "timestamp": "2026-01-28T09:46:36.975095",
+    "event_id": "1336cc85-4fbb-40bd-b24f-b063406a5944",
+    "timestamp": "2026-01-28T09:53:11.058483",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "network_connection",
     "EventID": "3",
     "Protocol": "tcp",
-    "DestinationPort": "80"
+    "DestinationPort": "80 443 53 123 25"
 }

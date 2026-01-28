@@ -1,7 +1,8 @@
 {
-    "event_id": "88cb0850-119e-4d8d-8132-a67a18b9d0d9",
-    "timestamp": "2026-01-28T09:46:36.869893",
+    "event_id": "952f5e22-7122-44ae-889b-460d3ad7927d",
+    "timestamp": "2026-01-28T09:53:10.937366",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'User|contains': ['svc_jenkins', 'svc_terraform', 'ansible_worker']} {'Image|contains': ['\\\\Terraform\\\\', '\\\\Jenkins\\\\']}"
 }

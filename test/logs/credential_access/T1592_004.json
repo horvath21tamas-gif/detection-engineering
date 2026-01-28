@@ -1,12 +1,12 @@
 {
-    "event_id": "f54873d4-cd9c-43ab-834b-fb934b0b24bb",
-    "timestamp": "2026-01-28T09:46:36.822344",
+    "event_id": "15f418b0-900c-437d-9193-8651f7efbaab",
+    "timestamp": "2026-01-28T09:53:10.887428",
     "product": "generic",
-    "service": "sysmon",
+    "service": null,
     "category": "webserver",
-    "SrcIp": "test_prefix_1._test_suffix",
-    "HttpMethod": "HEAD",
-    "UriStem": "/",
-    "UserAgent": "test_prefix_curl_test_suffix",
-    "RequestHeaders": "test_prefix_Accept-Language_test_suffix"
+    "SrcIp": "1. 2. 3. 4. 5. 6. 7. 8. 9.",
+    "HttpMethod": "HEAD OPTIONS TRACE",
+    "UriStem": "/ /index /login /admin",
+    "UserAgent": "curl wget python httpclient go-http-client libwww probe scanner",
+    "RequestHeaders": "Accept-Language Accept-Encoding X-Forwarded-For Forwarded Via"
 }

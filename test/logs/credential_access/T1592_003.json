@@ -1,11 +1,11 @@
 {
-    "event_id": "3a7533c5-10bd-49dd-bfe4-0fcabcad053a",
-    "timestamp": "2026-01-28T09:46:36.619313",
+    "event_id": "684de0f7-f131-421b-a941-eb193956d3ba",
+    "timestamp": "2026-01-28T09:53:10.689654",
     "product": "generic",
-    "service": "sysmon",
+    "service": null,
     "category": "webserver",
-    "SrcIp": "test_prefix_1._test_suffix",
-    "UriStem": "test_prefix_/cgi-bin_test_suffix",
-    "UriQuery": "test_prefix_firmware_test_suffix",
-    "UserAgent": "test_prefix_curl_test_suffix"
+    "SrcIp": "1. 2. 3. 4. 5. 6. 7. 8. 9.",
+    "UriStem": "/cgi-bin /status /system /device /version /firmware /diagnostic /setup /admin /mgmt /management",
+    "UriQuery": "firmware version build model hardware platform",
+    "UserAgent": "curl wget python httpclient go-http-client libwww probe"
 }

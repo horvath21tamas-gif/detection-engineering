@@ -1,7 +1,8 @@
 {
-    "event_id": "66c17fc6-ab98-4b61-9e1e-c39615c2bc66",
-    "timestamp": "2026-01-28T09:46:36.779919",
+    "event_id": "d96bbb8c-2aa2-468f-8f54-bbe8d9833411",
+    "timestamp": "2026-01-28T09:53:10.844620",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'Image|endswith': ['\\\\aws.exe', '\\\\az.exe', '\\\\mgc.exe']} {'CommandLine|contains': [' update-login-profile', ' delete-virtual-mfa-device', ' authentication-method-create', ' ad user update --password']}"
 }

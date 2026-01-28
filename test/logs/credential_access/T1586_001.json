@@ -1,7 +1,8 @@
 {
-    "event_id": "1aa63039-ab94-4b55-9fcd-43667b9ddbdc",
-    "timestamp": "2026-01-28T09:46:36.775373",
+    "event_id": "43550bf7-9472-4d74-a26c-0f1ef454afba",
+    "timestamp": "2026-01-28T09:53:10.840095",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'Image|endswith': ['\\\\python.exe', '\\\\node.exe']} {'CommandLine|contains': ['selenium', 'puppeteer', 'playwright', 'tweepy', 'instaloader']}"
 }

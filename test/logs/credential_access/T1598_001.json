@@ -1,12 +1,12 @@
 {
-    "event_id": "e13f1474-26cc-423e-b269-eff3f725ffc8",
-    "timestamp": "2026-01-28T09:46:36.886762",
+    "event_id": "010533b0-82f3-4e4c-b022-29ad476112a5",
+    "timestamp": "2026-01-28T09:53:10.956941",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "ParentImage": "test_prefix_\\outlook.exe_test_suffix",
-    "Image": "test_prefix_\\chrome.exe_test_suffix",
-    "process_path": "test_prefix_\\chrome.exe_test_suffix",
-    "CommandLine": "test_prefix_--incognito_test_suffix",
-    "command": "test_prefix_--incognito_test_suffix"
+    "ParentImage": "\\outlook.exe \\teams.exe \\slack.exe",
+    "Image": "\\chrome.exe \\msedge.exe \\firefox.exe",
+    "process_path": "\\chrome.exe \\msedge.exe \\firefox.exe",
+    "CommandLine": "--incognito --inprivate --new-window --headless",
+    "command": "--incognito --inprivate --new-window --headless"
 }

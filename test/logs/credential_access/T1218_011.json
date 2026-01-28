@@ -1,12 +1,12 @@
 {
-    "event_id": "47ef5453-ea1d-4a0d-a82b-f7f4c8301c39",
-    "timestamp": "2026-01-28T09:46:36.826699",
+    "event_id": "1357e934-e333-4873-ba42-27aeb8a4cfe0",
+    "timestamp": "2026-01-28T09:53:10.893094",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\rundll32.exe_test_suffix",
-    "process_path": "test_prefix_\\rundll32.exe_test_suffix",
-    "CommandLine": "test_prefix_\\Users\\_test_suffix",
-    "command": "test_prefix_\\Users\\_test_suffix",
-    "ParentImage": "test_prefix_\\powershell.exe_test_suffix"
+    "Image": "\\rundll32.exe",
+    "process_path": "\\rundll32.exe",
+    "CommandLine": "\\Users\\ \\AppData\\ \\Temp\\ \\Downloads\\",
+    "command": "\\Users\\ \\AppData\\ \\Temp\\ \\Downloads\\",
+    "ParentImage": "\\powershell.exe \\pwsh.exe \\cmd.exe \\wscript.exe \\cscript.exe \\mshta.exe"
 }

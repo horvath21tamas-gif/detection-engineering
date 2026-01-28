@@ -1,11 +1,12 @@
 {
-    "event_id": "8f79fecc-040a-4f22-921b-7a070411fa38",
-    "timestamp": "2026-01-28T09:46:36.966713",
+    "event_id": "bbf1618a-a2c0-43e4-a29b-6be0ebe5988f",
+    "timestamp": "2026-01-28T09:53:11.049923",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\terraform.exe_test_suffix",
-    "process_path": "test_prefix_\\terraform.exe_test_suffix",
-    "CommandLine": "test_prefix_aws_lambda_function_test_suffix",
-    "command": "test_prefix_aws_lambda_function_test_suffix"
+    "raw_data": "{'User|contains': ['svc_jenkins', 'svc_github_actions', 'adm_devops_deploy']} {'Image|contains': ['\\\\Program Files\\\\Terraform\\\\', '\\\\actions-runner\\\\']}",
+    "Image": "\\terraform.exe \\pulumi.exe",
+    "process_path": "\\terraform.exe \\pulumi.exe",
+    "CommandLine": "aws_lambda_function azurerm_function_app google_cloudfunctions_function",
+    "command": "aws_lambda_function azurerm_function_app google_cloudfunctions_function"
 }

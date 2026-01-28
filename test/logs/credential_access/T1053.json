@@ -1,11 +1,11 @@
 {
-    "event_id": "caac8f07-4815-4c90-b9a3-ad5d80accc73",
-    "timestamp": "2026-01-28T09:46:36.784084",
+    "event_id": "7f160daa-4d82-43fe-b740-c32a75a4cfb3",
+    "timestamp": "2026-01-28T09:53:10.848864",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\schtasks.exe_test_suffix",
-    "process_path": "test_prefix_\\schtasks.exe_test_suffix",
-    "CommandLine": "test_prefix_\\AppData\\_test_suffix",
-    "command": "test_prefix_\\AppData\\_test_suffix"
+    "Image": "\\schtasks.exe \\at.exe \\powershell.exe \\cmd.exe",
+    "process_path": "\\schtasks.exe \\at.exe \\powershell.exe \\cmd.exe",
+    "CommandLine": "\\AppData\\ \\Users\\Public\\ \\ProgramData\\ \\Temp\\ powershell cmd.exe wscript cscript mshta rundll32 .ps1 .vbs .js",
+    "command": "\\AppData\\ \\Users\\Public\\ \\ProgramData\\ \\Temp\\ powershell cmd.exe wscript cscript mshta rundll32 .ps1 .vbs .js"
 }

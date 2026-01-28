@@ -1,7 +1,8 @@
 {
-    "event_id": "b4d37c33-9b15-49d0-b50d-b1d08b085d95",
-    "timestamp": "2026-01-28T09:46:36.490865",
+    "event_id": "d51a2121-b960-4aa6-8a9a-55509dc5b01e",
+    "timestamp": "2026-01-28T09:53:10.559770",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'Image|endswith': ['\\\\python.exe', '\\\\pwsh.exe']} {'CommandLine|contains|all': ['boto3', '.aws/credentials']} {'CommandLine|contains': ['DefaultAzureCredential', 'GoogleCredentials']}"
 }

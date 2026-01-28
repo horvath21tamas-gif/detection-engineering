@@ -1,7 +1,8 @@
 {
-    "event_id": "66fd9c6e-f3ae-49e7-be55-d12adc9d2610",
-    "timestamp": "2026-01-28T09:46:36.554646",
+    "event_id": "54851959-575b-476b-921a-47042df16f9a",
+    "timestamp": "2026-01-28T09:53:10.624071",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'Image|endswith': ['\\\\OneDrive.exe', '\\\\Dropbox.exe', '\\\\googledrivesync.exe']} {'Image|contains': ['\\\\Veeam\\\\']}"
 }

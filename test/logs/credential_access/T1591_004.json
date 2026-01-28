@@ -1,9 +1,10 @@
 {
-    "event_id": "c8f26301-48ec-41bc-834f-b761bb14c8cf",
-    "timestamp": "2026-01-28T09:46:36.509230",
+    "event_id": "4067de9f-dd9a-41e3-b11a-ff42274ab409",
+    "timestamp": "2026-01-28T09:53:10.578208",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_(&(objectCategory=person)(objectClass=user))_test_suffix",
-    "command": "test_prefix_(&(objectCategory=person)(objectClass=user))_test_suffix"
+    "raw_data": "{'ParentImage|endswith': ['\\\\mmc.exe', '\\\\ServerManager.exe']} {'username': 'NT AUTHORITY\\\\SYSTEM'}",
+    "CommandLine": "(&(objectCategory=person)(objectClass=user)) distinguishedName userPrincipalName samaccountname",
+    "command": "(&(objectCategory=person)(objectClass=user)) distinguishedName userPrincipalName samaccountname"
 }

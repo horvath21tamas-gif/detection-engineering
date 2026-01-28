@@ -1,13 +1,13 @@
 {
-    "event_id": "480d501b-58df-42a9-bba0-cd39ac8a2505",
-    "timestamp": "2026-01-28T09:46:36.646467",
+    "event_id": "311a4082-5961-4f02-967e-2df90de64d1a",
+    "timestamp": "2026-01-28T09:53:10.717741",
     "product": "generic",
-    "service": "sysmon",
+    "service": null,
     "category": "webserver",
-    "SrcIp": "test_prefix_1._test_suffix",
-    "Method": "GET",
-    "UriStem": "test_prefix_/version_test_suffix",
-    "UriQuery": "test_prefix_version_test_suffix",
-    "UserAgent": "test_prefix_curl_test_suffix",
-    "Status": "200"
+    "SrcIp": "1. 2. 3. 4. 5. 6. 7. 8. 9.",
+    "Method": "GET HEAD",
+    "UriStem": "/version /about /status /info /build /debug /admin /server-info /actuator /metrics",
+    "UriQuery": "version build release software application component module plugin stack",
+    "UserAgent": "curl wget python httpclient go-http-client libwww scanner probe",
+    "Status": "200 401 403 404"
 }

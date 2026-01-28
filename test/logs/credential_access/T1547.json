@@ -1,11 +1,11 @@
 {
-    "event_id": "21fb0544-f420-4491-a731-931fb65230f9",
-    "timestamp": "2026-01-28T09:46:36.683876",
+    "event_id": "03c22989-430a-4263-8b62-dd7902cf82a2",
+    "timestamp": "2026-01-28T09:53:10.745986",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\reg.exe_test_suffix",
-    "process_path": "test_prefix_\\reg.exe_test_suffix",
-    "CommandLine": "test_prefix_\\AppData\\Local\\Temp\\_test_suffix",
-    "command": "test_prefix_\\AppData\\Local\\Temp\\_test_suffix"
+    "Image": "\\reg.exe \\powershell.exe \\cmd.exe \\wscript.exe \\cscript.exe \\mshta.exe \\schtasks.exe",
+    "process_path": "\\reg.exe \\powershell.exe \\cmd.exe \\wscript.exe \\cscript.exe \\mshta.exe \\schtasks.exe",
+    "CommandLine": "\\AppData\\Local\\Temp\\ \\Users\\Public\\ \\ProgramData\\ C:\\Windows\\Temp\\ http",
+    "command": "\\AppData\\Local\\Temp\\ \\Users\\Public\\ \\ProgramData\\ C:\\Windows\\Temp\\ http"
 }

@@ -1,12 +1,12 @@
 {
-    "event_id": "0d56affe-c5e3-420c-be6e-c237023226a9",
-    "timestamp": "2026-01-28T09:46:36.750952",
+    "event_id": "06d88d56-d24c-4fea-9411-b012533754da",
+    "timestamp": "2026-01-28T09:53:10.815287",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\schtasks.exe_test_suffix",
-    "process_path": "test_prefix_\\schtasks.exe_test_suffix",
-    "CommandLine": "test_prefix_\\Users\\_test_suffix",
-    "command": "test_prefix_\\Users\\_test_suffix",
-    "ParentImage": "test_prefix_\\cmd.exe_test_suffix"
+    "Image": "\\schtasks.exe",
+    "process_path": "\\schtasks.exe",
+    "CommandLine": "\\Users\\ \\AppData\\ \\Temp\\ \\ProgramData\\",
+    "command": "\\Users\\ \\AppData\\ \\Temp\\ \\ProgramData\\",
+    "ParentImage": "\\cmd.exe \\powershell.exe \\pwsh.exe \\wscript.exe \\cscript.exe \\mshta.exe \\WINWORD.EXE \\EXCEL.EXE"
 }

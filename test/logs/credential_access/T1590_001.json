@@ -1,9 +1,10 @@
 {
-    "event_id": "ec2a5227-732d-4f8d-8a18-ac4a2bdb5d31",
-    "timestamp": "2026-01-28T09:46:36.518366",
+    "event_id": "ef1104b6-651d-41fc-ac56-1a5c4747a36c",
+    "timestamp": "2026-01-28T09:53:10.587429",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_ifconfig.me_test_suffix",
-    "command": "test_prefix_ifconfig.me_test_suffix"
+    "raw_data": "{'Image|endswith': '\\\\ipconfig.exe', 'CommandLine|contains': [' /all', ' /displaydns']} {'Image|endswith': '\\\\route.exe', 'CommandLine|contains': ' print'} {'Image|endswith': '\\\\arp.exe', 'CommandLine|contains': ' -a'} {'Image|endswith': '\\\\netsh.exe', 'CommandLine|contains': ' interface ipv4 show'}",
+    "CommandLine": "ifconfig.me icanhazip.com ident.me api.ipify.org checkip.amazonaws.com",
+    "command": "ifconfig.me icanhazip.com ident.me api.ipify.org checkip.amazonaws.com"
 }

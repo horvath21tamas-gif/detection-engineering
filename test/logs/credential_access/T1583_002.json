@@ -1,7 +1,8 @@
 {
-    "event_id": "3ddd5daf-b015-4331-852d-985a7c5ea75b",
-    "timestamp": "2026-01-28T09:46:36.591157",
+    "event_id": "2a5b6118-5418-4215-807a-da13973036d0",
+    "timestamp": "2026-01-28T09:53:10.660796",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'Image|contains': ['\\\\certbot\\\\', '\\\\acme.sh\\\\', '\\\\win-acme.exe']} {'CommandLine|contains': ['_acme-challenge']}"
 }

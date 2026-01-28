@@ -1,12 +1,12 @@
 {
-    "event_id": "a6394ef8-afe4-4fb7-a5b4-cd5f539c6ea0",
-    "timestamp": "2026-01-28T09:46:36.792109",
+    "event_id": "9cd65664-19b3-4d02-ba01-d04fdc445953",
+    "timestamp": "2026-01-28T09:53:10.856816",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\wevtutil.exe_test_suffix",
-    "process_path": "test_prefix_\\wevtutil.exe_test_suffix",
-    "CommandLine": "test_prefix_cl Security_test_suffix",
-    "command": "test_prefix_cl Security_test_suffix",
-    "ParentImage": "test_prefix_\\cmd.exe_test_suffix"
+    "Image": "\\wevtutil.exe",
+    "process_path": "\\wevtutil.exe",
+    "CommandLine": "cl Security cl \"Security\" clear-log Security",
+    "command": "cl Security cl \"Security\" clear-log Security",
+    "ParentImage": "\\cmd.exe \\powershell.exe \\pwsh.exe \\wscript.exe \\cscript.exe \\mshta.exe \\rundll32.exe"
 }

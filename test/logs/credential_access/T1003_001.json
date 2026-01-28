@@ -1,9 +1,9 @@
 {
-    "event_id": "f52a345b-3b01-4569-9c6e-8e1613ae8e3c",
-    "timestamp": "2026-01-28T09:46:36.626506",
+    "event_id": "1a022fd3-a182-474a-bdfa-d942441a0b76",
+    "timestamp": "2026-01-28T09:53:10.697047",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_access",
-    "TargetImage": "test_prefix_\\lsass.exe_test_suffix",
-    "GrantedAccess": "test_prefix_0x10_test_suffix"
+    "TargetImage": "\\lsass.exe",
+    "GrantedAccess": "0x10 0x1410 0x1010 0x1fffff 0x1438"
 }

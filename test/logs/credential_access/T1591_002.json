@@ -1,9 +1,10 @@
 {
-    "event_id": "e0761649-25a2-4909-a891-3f121794d48e",
-    "timestamp": "2026-01-28T09:46:36.653141",
+    "event_id": "163f7c4b-3c4f-4f6a-b2c0-056e253a1480",
+    "timestamp": "2026-01-28T09:53:10.722316",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_customer_list_test_suffix",
-    "command": "test_prefix_customer_list_test_suffix"
+    "raw_data": "{'Image|endswith': ['\\\\findstr.exe', '\\\\grep.exe'], 'CommandLine|contains': ['partner', 'vendor', 'supplier', 'contract', 'beszallito', 'szerzodes']} {'Image|endswith': '\\\\powershell.exe', 'CommandLine|contains': [' -Path ', ' -Recurse']}",
+    "CommandLine": "customer_list client_database invoice_summary ugyfellista szamlak",
+    "command": "customer_list client_database invoice_summary ugyfellista szamlak"
 }

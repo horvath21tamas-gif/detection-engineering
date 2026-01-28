@@ -1,9 +1,9 @@
 {
-    "event_id": "88c59b77-fb12-48e8-b477-d9a74ee1f517",
-    "timestamp": "2026-01-28T09:46:36.544953",
+    "event_id": "b7b10b9f-09dc-4af3-af05-165c7898686c",
+    "timestamp": "2026-01-28T09:53:10.614229",
     "product": "windows",
     "service": "system",
-    "category": "process_creation",
-    "EventID": "7036",
-    "ServiceName": "test_prefix_WinDefend_test_suffix"
+    "category": null,
+    "EventID": "7036 7040",
+    "ServiceName": "WinDefend WdNisSvc Sense SecurityHealthService Sysmon EventLog SamSs VSS BITS wuauserv Backup MpsSvc"
 }

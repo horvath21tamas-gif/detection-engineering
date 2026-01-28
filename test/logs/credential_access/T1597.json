@@ -1,9 +1,10 @@
 {
-    "event_id": "7ca9d20c-e185-4700-8fe9-727d9a930a9b",
-    "timestamp": "2026-01-28T09:46:36.460356",
+    "event_id": "748d4fdd-b4e8-4484-8938-ebfe264671c3",
+    "timestamp": "2026-01-28T09:53:10.529463",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_/.git/_test_suffix",
-    "command": "test_prefix_/.git/_test_suffix"
+    "raw_data": "{'Image|endswith': ['\\\\git.exe', '\\\\code.exe']} {'CommandLine|contains': ['git pull', 'git clone', 'npm install']}",
+    "CommandLine": "/.git/ /.env /web.config /robots.txt /wp-config.php /backup/ /conf/ /sql_dump",
+    "command": "/.git/ /.env /web.config /robots.txt /wp-config.php /backup/ /conf/ /sql_dump"
 }

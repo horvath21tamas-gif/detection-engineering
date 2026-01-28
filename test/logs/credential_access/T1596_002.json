@@ -1,9 +1,10 @@
 {
-    "event_id": "05dfa1d5-5807-4d16-a58b-fba835f7aa40",
-    "timestamp": "2026-01-28T09:46:36.573346",
+    "event_id": "3df44b92-0772-4b0a-89da-71509c34dec4",
+    "timestamp": "2026-01-28T09:53:10.642814",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_inurl:admin_test_suffix",
-    "command": "test_prefix_inurl:admin_test_suffix"
+    "raw_data": "{'Image|endswith': ['\\\\chrome.exe', '\\\\msedge.exe', '\\\\firefox.exe']} {'ParentImage|endswith': ['\\\\explorer.exe']}",
+    "CommandLine": "inurl:admin intitle:\"index of\" filetype:env filetype:sql filetype:config",
+    "command": "inurl:admin intitle:\"index of\" filetype:env filetype:sql filetype:config"
 }

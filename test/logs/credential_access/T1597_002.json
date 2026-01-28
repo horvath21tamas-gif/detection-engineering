@@ -1,9 +1,10 @@
 {
-    "event_id": "f0c8647d-a04c-4881-ac12-213168fcb6a8",
-    "timestamp": "2026-01-28T09:46:36.694352",
+    "event_id": "5712b6c5-098b-4d02-aeff-be4fd0dc7999",
+    "timestamp": "2026-01-28T09:53:10.756518",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_password=_test_suffix",
-    "command": "test_prefix_password=_test_suffix"
+    "raw_data": "{'Image|endswith': '\\\\git.exe', 'CommandLine|contains': [' log -G', ' log -S', ' rev-list --all', ' log --pretty=format', ' grep --cached']}",
+    "CommandLine": "password= api_key client_secret private_key access_token jelszo titok",
+    "command": "password= api_key client_secret private_key access_token jelszo titok"
 }

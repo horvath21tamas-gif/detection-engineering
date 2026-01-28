@@ -1,12 +1,12 @@
 {
-    "event_id": "b2f0d4a3-a74f-43f5-8e61-3c6532e7b95b",
-    "timestamp": "2026-01-28T09:46:36.863007",
+    "event_id": "a3b3db8e-14b4-4f8c-845e-8d163c62bc56",
+    "timestamp": "2026-01-28T09:53:10.930389",
     "product": "generic",
-    "service": "sysmon",
+    "service": null,
     "category": "webserver",
-    "SrcIp": "test_prefix_1._test_suffix",
-    "UserAgent": "test_prefix_nuclei_test_suffix",
-    "UriStem": "test_prefix_/.env_test_suffix",
-    "UriQuery": "test_prefix_../_test_suffix",
-    "Status": "400"
+    "SrcIp": "1. 2. 3. 4. 5. 6. 7. 8. 9.",
+    "UserAgent": "nuclei sqlmap nikto acunetix wpscan zgrab",
+    "UriStem": "/.env /.git /vendor/phpunit /phpmyadmin /cgi-bin /wp-config /wp-admin /actuator /console",
+    "UriQuery": "../ %2e%2e cmd= exec= shell whoami id= base64 payload=",
+    "Status": "400 401 403 404 405 500 502 503"
 }

@@ -1,12 +1,12 @@
 {
-    "event_id": "623753dd-d94d-46f5-bb52-4f9f3e727ddb",
-    "timestamp": "2026-01-28T09:46:36.812027",
+    "event_id": "fd7287ae-d570-4948-bb65-ce0dd447479e",
+    "timestamp": "2026-01-28T09:53:10.877062",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\wmic.exe_test_suffix",
-    "process_path": "test_prefix_\\wmic.exe_test_suffix",
-    "CommandLine": "test_prefix_cmd.exe_test_suffix",
-    "command": "test_prefix_cmd.exe_test_suffix",
-    "ParentImage": "test_prefix_\\cmd.exe_test_suffix"
+    "Image": "\\wmic.exe",
+    "process_path": "\\wmic.exe",
+    "CommandLine": "cmd.exe powershell.exe pwsh.exe rundll32.exe mshta.exe regsvr32.exe bitsadmin certutil",
+    "command": "cmd.exe powershell.exe pwsh.exe rundll32.exe mshta.exe regsvr32.exe bitsadmin certutil",
+    "ParentImage": "\\cmd.exe \\powershell.exe \\pwsh.exe \\wscript.exe \\cscript.exe \\WINWORD.EXE \\EXCEL.EXE \\POWERPNT.EXE"
 }

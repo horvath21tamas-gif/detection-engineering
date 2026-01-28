@@ -1,12 +1,12 @@
 {
-    "event_id": "eaeb9fe0-9505-4bb1-a885-37173b28795f",
-    "timestamp": "2026-01-28T09:46:36.937655",
+    "event_id": "8d7df74e-0220-42e6-a785-5adec34ca63c",
+    "timestamp": "2026-01-28T09:53:11.020306",
     "product": "generic",
-    "service": "sysmon",
+    "service": null,
     "category": "webserver",
-    "SrcIp": "test_prefix_1._test_suffix",
-    "UriStem": "test_prefix_/login_test_suffix",
-    "UriQuery": "test_prefix_user=_test_suffix",
-    "Status": "401",
-    "UserAgent": "test_prefix_python_test_suffix"
+    "SrcIp": "1. 2. 3. 4. 5. 6. 7. 8. 9.",
+    "UriStem": "/login /signin /auth /admin /administrator /wp-login /wp-admin /account /user",
+    "UriQuery": "user= username= login= email= account=",
+    "Status": "401 403 404",
+    "UserAgent": "python curl wget httpclient go-http-client libwww scrapy"
 }

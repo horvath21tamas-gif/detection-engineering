@@ -1,11 +1,11 @@
 {
-    "event_id": "e33a6047-0c9e-4437-a566-76f096ac03a9",
-    "timestamp": "2026-01-28T09:46:36.495789",
+    "event_id": "3e5d35cf-7b1f-4001-97a5-937608a5f5ad",
+    "timestamp": "2026-01-28T09:53:10.564713",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\powershell.exe_test_suffix",
-    "process_path": "test_prefix_\\powershell.exe_test_suffix",
-    "CommandLine": "test_prefix_IEX_test_suffix",
-    "command": "test_prefix_IEX_test_suffix"
+    "Image": "\\powershell.exe \\pwsh.exe",
+    "process_path": "\\powershell.exe \\pwsh.exe",
+    "CommandLine": "IEX Invoke-Expression",
+    "command": "IEX Invoke-Expression"
 }

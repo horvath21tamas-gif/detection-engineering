@@ -1,9 +1,10 @@
 {
-    "event_id": "77a30f44-dedf-4098-b8d1-a5bdab80a78f",
-    "timestamp": "2026-01-28T09:46:36.661391",
+    "event_id": "408010b9-4768-4be9-aa25-36cbdac72b0d",
+    "timestamp": "2026-01-28T09:53:10.726997",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_--layers_test_suffix",
-    "command": "test_prefix_--layers_test_suffix"
+    "raw_data": "{'User|contains': ['svc_deploy', 'svc_pipeline', 'github_actions']} {'Image|contains': ['\\\\actions-runner\\\\', '\\\\Jenkins\\\\', '\\\\AzureDevOps\\\\']}",
+    "CommandLine": "--layers --variables --environment --image-uri --role",
+    "command": "--layers --variables --environment --image-uri --role"
 }

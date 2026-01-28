@@ -1,11 +1,11 @@
 {
-    "event_id": "5b58cbc2-f2d4-4db5-b50b-4150a916b053",
-    "timestamp": "2026-01-28T09:46:36.464810",
+    "event_id": "c510eb74-b06e-4aa0-bf71-958ab52c44d2",
+    "timestamp": "2026-01-28T09:53:10.534076",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\powershell.exe_test_suffix",
-    "process_path": "test_prefix_\\powershell.exe_test_suffix",
-    "CommandLine": "test_prefix_Register-WmiEvent_test_suffix",
-    "command": "test_prefix_Register-WmiEvent_test_suffix"
+    "Image": "\\powershell.exe \\pwsh.exe",
+    "process_path": "\\powershell.exe \\pwsh.exe",
+    "CommandLine": "Register-WmiEvent Set-WmiInstance New-CimInstance root\\subscription",
+    "command": "Register-WmiEvent Set-WmiInstance New-CimInstance root\\subscription"
 }

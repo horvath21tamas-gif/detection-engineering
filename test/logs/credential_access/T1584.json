@@ -1,10 +1,11 @@
 {
-    "event_id": "f775773e-7fb1-43b2-8fde-468484266c4d",
-    "timestamp": "2026-01-28T09:46:36.513946",
+    "event_id": "3e3b0b2f-e9fb-428f-a14d-1a4839af9b92",
+    "timestamp": "2026-01-28T09:53:10.582992",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "ParentImage": "test_prefix_\\w3wp.exe_test_suffix",
-    "Image": "test_prefix_\\cmd.exe_test_suffix",
-    "process_path": "test_prefix_\\cmd.exe_test_suffix"
+    "ParentImage": "\\w3wp.exe \\httpd.exe \\nginx.exe \\php-cgi.exe \\tomcat.exe",
+    "Image": "\\cmd.exe \\powershell.exe \\whoami.exe \\net.exe \\nltest.exe",
+    "process_path": "\\cmd.exe \\powershell.exe \\whoami.exe \\net.exe \\nltest.exe",
+    "raw_data": "{'Image|endswith': ['\\\\chisel.exe', '\\\\frpc.exe', '\\\\ngrok.exe', '\\\\gost.exe', '\\\\nps.exe']} {'CommandLine|contains': [' -proxy ', ' -tunnel ', ' -secret ']}"
 }

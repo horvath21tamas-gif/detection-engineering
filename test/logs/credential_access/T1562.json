@@ -1,9 +1,10 @@
 {
-    "event_id": "35f240be-54d9-4d18-9f94-35b9df4f156f",
-    "timestamp": "2026-01-28T09:46:36.941722",
+    "event_id": "b521793d-a41a-4d85-afcb-9a14d99ee955",
+    "timestamp": "2026-01-28T09:53:11.024452",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_WinDefend_test_suffix",
-    "command": "test_prefix_WinDefend_test_suffix"
+    "raw_data": "{'Image|endswith': ['\\\\net.exe', '\\\\net1.exe', '\\\\sc.exe', '\\\\powershell.exe', '\\\\pwsh.exe', '\\\\taskkill.exe']} {'filename': ['net.exe', 'net1.exe', 'sc.exe', 'PowerShell.EXE', 'taskkill.exe']}",
+    "CommandLine": "WinDefend MpsSvc Sense MsSense SentinelAgent CarbonBlack CylanceSvc CrowdStrike Symantec Sophos McAfee",
+    "command": "WinDefend MpsSvc Sense MsSense SentinelAgent CarbonBlack CylanceSvc CrowdStrike Symantec Sophos McAfee"
 }

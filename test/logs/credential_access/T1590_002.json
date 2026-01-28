@@ -1,11 +1,11 @@
 {
-    "event_id": "89a0e51e-0418-444d-b181-079342b56c47",
-    "timestamp": "2026-01-28T09:46:36.945151",
+    "event_id": "a253d28d-f4ee-4c32-9ef4-797aca33045f",
+    "timestamp": "2026-01-28T09:53:11.027875",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_ /enumzones_test_suffix",
-    "command": "test_prefix_ /enumzones_test_suffix",
-    "Image": "test_prefix_\\dig.exe_test_suffix",
-    "process_path": "test_prefix_\\dig.exe_test_suffix"
+    "CommandLine": " /enumzones  /zoneprint",
+    "command": " /enumzones  /zoneprint",
+    "Image": "\\dig.exe \\host.exe \\dnscmd.exe",
+    "process_path": "\\dig.exe \\host.exe \\dnscmd.exe"
 }

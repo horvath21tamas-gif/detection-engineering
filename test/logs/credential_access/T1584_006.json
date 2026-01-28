@@ -1,9 +1,10 @@
 {
-    "event_id": "e9ae0f64-457b-484b-849d-ede51a1fbfb5",
-    "timestamp": "2026-01-28T09:46:36.567887",
+    "event_id": "e48040b9-ecb6-4a60-acca-5823e65a95b5",
+    "timestamp": "2026-01-28T09:53:10.637516",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "CommandLine": "test_prefix_.exe_test_suffix",
-    "command": "test_prefix_.exe_test_suffix"
+    "raw_data": "{'User|contains': ['svc_backup', 'svc_deploy', 'github_actions_runner']} {'Image|contains': ['\\\\Veeam\\\\', '\\\\actions-runner\\\\', '\\\\Jenkins\\\\']}",
+    "CommandLine": ".exe .dll .ps1 .zip .7z --public-access",
+    "command": ".exe .dll .ps1 .zip .7z --public-access"
 }

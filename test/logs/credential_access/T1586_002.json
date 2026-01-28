@@ -1,7 +1,8 @@
 {
-    "event_id": "36996161-a04b-428f-9244-96d95389c08d",
-    "timestamp": "2026-01-28T09:46:36.500134",
+    "event_id": "f037aef4-f9b6-42be-8b6a-8e835cd52aa4",
+    "timestamp": "2026-01-28T09:53:10.569039",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'Image|endswith': '\\\\mgc.exe'} {'CommandLine|contains': ['messageRules', 'mailFolders']}"
 }

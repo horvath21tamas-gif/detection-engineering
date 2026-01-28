@@ -1,7 +1,8 @@
 {
-    "event_id": "ecfed4df-86e9-4861-ac35-966c4c16e85e",
-    "timestamp": "2026-01-28T09:46:36.848580",
+    "event_id": "0abc0a3c-8a3d-43bd-921c-2c1242876491",
+    "timestamp": "2026-01-28T09:53:10.915347",
     "product": "windows",
-    "service": "sysmon",
-    "category": "process_creation"
+    "service": null,
+    "category": "process_creation",
+    "raw_data": "{'Image|endswith': ['\\\\python.exe', '\\\\curl.exe']} {'CommandLine|contains|all': ['http', 'api.']} {'CommandLine|contains': ['/v2/droplets', 'ec2.amazonaws.com', 'management.azure.com']}"
 }

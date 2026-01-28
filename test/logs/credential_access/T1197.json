@@ -1,12 +1,12 @@
 {
-    "event_id": "31d790b0-d4b4-460e-96ad-5a4f18dd4665",
-    "timestamp": "2026-01-28T09:46:36.877523",
+    "event_id": "29bb7b7e-758a-48a0-af4b-aaa19d960d8b",
+    "timestamp": "2026-01-28T09:53:10.945185",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "process_creation",
-    "Image": "test_prefix_\\bitsadmin.exe_test_suffix",
-    "process_path": "test_prefix_\\bitsadmin.exe_test_suffix",
-    "CommandLine": "test_prefix_\\Users\\_test_suffix",
-    "command": "test_prefix_\\Users\\_test_suffix",
-    "ParentImage": "test_prefix_\\powershell.exe_test_suffix"
+    "Image": "\\bitsadmin.exe",
+    "process_path": "\\bitsadmin.exe",
+    "CommandLine": "\\Users\\ \\AppData\\ \\Temp\\ \\Downloads\\",
+    "command": "\\Users\\ \\AppData\\ \\Temp\\ \\Downloads\\",
+    "ParentImage": "\\powershell.exe \\pwsh.exe \\cmd.exe \\wscript.exe \\cscript.exe \\mshta.exe \\rundll32.exe"
 }

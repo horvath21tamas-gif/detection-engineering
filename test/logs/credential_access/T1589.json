@@ -1,13 +1,13 @@
 {
-    "event_id": "82b6343a-f49e-42c7-ac2b-66b38d0860ea",
-    "timestamp": "2026-01-28T09:46:36.613285",
+    "event_id": "f28017b7-e569-46b0-9054-a3102691729c",
+    "timestamp": "2026-01-28T09:53:10.683342",
     "product": "generic",
-    "service": "sysmon",
+    "service": null,
     "category": "webserver",
-    "SrcIp": "test_prefix_1._test_suffix",
-    "UriStem": "test_prefix_/login_test_suffix",
-    "UriQuery": "test_prefix_user=_test_suffix",
-    "Method": "GET",
-    "UserAgent": "test_prefix_curl_test_suffix",
-    "Status": "401"
+    "SrcIp": "1. 2. 3. 4. 5. 6. 7. 8. 9.",
+    "UriStem": "/login /signin /auth /account /user /users /password /forgot /reset",
+    "UriQuery": "user= username= email= login= account= upn= principal=",
+    "Method": "GET POST",
+    "UserAgent": "curl wget python go-http-client httpclient axios requests scanner probe",
+    "Status": "401 403 404"
 }

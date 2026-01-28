@@ -1,13 +1,13 @@
 {
-    "event_id": "760952ac-2d7b-4553-8ebd-ad65971e4109",
-    "timestamp": "2026-01-28T09:46:36.957607",
+    "event_id": "df04bead-63a7-4985-8d86-1e807ab69eb5",
+    "timestamp": "2026-01-28T09:53:11.040689",
     "product": "windows",
-    "service": "sysmon",
+    "service": null,
     "category": "email",
     "url": ".+",
     "url_domain_age": "30",
     "url_reputation": "low",
-    "email_content_type": "test_prefix_text/html_test_suffix",
-    "sender_display_name": "test_prefix_Microsoft_test_suffix",
-    "sender_domain": "test_prefix_microsoft.com_test_suffix"
+    "email_content_type": "text/html",
+    "sender_display_name": "Microsoft Office 365 OneDrive DocuSign PayPal Bank",
+    "sender_domain": "microsoft.com office.com docusign.com paypal.com"
 }

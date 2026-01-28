@@ -106,6 +106,10 @@ jobs:
       - name: Log Source Validation
         run: python tools/check_log_sources.py
 
+      # --- AUTOMATIZÁCIÓ: Szintetikus logok generálása a teszteléshez ---
+      - name: Generate Synthetic Mock Logs
+        run: python tools/generate_mock_logs.py
+
       - name: Run Simulation Tests (Logic Verification)
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/tools

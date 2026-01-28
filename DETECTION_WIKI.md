@@ -73,6 +73,7 @@
 - [High-Fidelity Exploit Development and Compilation Detection - T1587.004](#high-fidelity-exploit-development-and-compilation-detection---t1587004)
 - [Anomalous Procurement of Offensive Capabilities](#anomalous-procurement-of-offensive-capabilities)
 - [Anomalous Procurement of Malware Capabilities](#anomalous-procurement-of-malware-capabilities)
+- [Anomalous Offensive Tool Acquisition via CLI](#anomalous-offensive-tool-acquisition-via-cli)
 - [Anomalous Code Signing Certificate Export or Acquisition](#anomalous-code-signing-certificate-export-or-acquisition)
 - [Strategic Trusted Root Certificate Store Manipulation](#strategic-trusted-root-certificate-store-manipulation)
 - [Anomalous Procurement of Exploit or PoC Code](#anomalous-procurement-of-exploit-or-poc-code)
@@ -1204,6 +1205,23 @@ interacting with compressed/container formats or known malware naming patterns
 in non-standard directories.
 - **Hamis pozitívok:** IT staff downloading OS images (.iso) via PowerShell scripts (add to exclusion by user)., Developers using CLI tools to download legitimate libraries or VM images.
 - **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Anomalous Offensive Tool Acquisition via CLI
+- **Azonosító:** `T1588_002.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the acquisition of offensive tools (hacktools) by monitoring command-line 
+downloads targeting non-standard directories. Filters out legitimate IT 
+administration from browsers and authorized management agents.
+- **Hamis pozitívok:** DevOps mérnökök, akik scriptekkel konfigurálnak munkaállomásokat., IT automatizációs scriptek, amik nem szervizfiókkal futnak.
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

@@ -50,7 +50,7 @@ detection:
             - '\SCCM\'
             - '\Intune\'
             - '\Altiris\'
-        User: 'SYSTEM'
+        username: 'SYSTEM'
 
     filter_browsers:
         Image|endswith:

@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-28 13:14:50`
+**Utolsó frissítés:** `2026-01-28 13:39:46`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 121 | 100% |
-| Splunk (SPL) | 121 | 100.0% |
-| Microsoft Sentinel (KQL) | 121 | 100.0% |
-| QRadar (AQL) | 70 | 57.9% |
-| Elastic (KQL/EQL) | 121 | 100.0% |
-| RSA NetWitness | 121 | 100.0% |
+| Sigma (Forrás) | 122 | 100% |
+| Splunk (SPL) | 122 | 100.0% |
+| Microsoft Sentinel (KQL) | 122 | 100.0% |
+| QRadar (AQL) | 70 | 57.4% |
+| Elastic (KQL/EQL) | 122 | 100.0% |
+| RSA NetWitness | 122 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -93,6 +93,7 @@
 | T1587.004 | CRITICAL | High-Fidelity Exploit Development and Compilation Detection - T1587.004 |
 | T1588 | HIGH | Anomalous Procurement of Offensive Capabilities |
 | T1588.001 | HIGH | Anomalous Procurement of Malware Capabilities |
+| T1588.002 | HIGH | Anomalous Offensive Tool Acquisition via CLI |
 | T1588.003 | HIGH | Anomalous Code Signing Certificate Export or Acquisition |
 | T1588.004 | HIGH | Strategic Trusted Root Certificate Store Manipulation |
 | T1588.005 | HIGH | Anomalous Procurement of Exploit or PoC Code |

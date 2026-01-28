@@ -6,5 +6,9 @@
     "User": "AttackerAdmin",
     "PipeName": "^\\\\+[a-f0-9]{8,12}$",
     "Image": "\\cmd.exe",
-    "ParentImage": "\\cmd.exe"
+    "CommandLine": "whoami",
+    "PipeName": "^\\\\+[a-f0-9]{8,12}$",
+    "process_path": "\\cmd.exe",
+    "ParentImage": "\\cmd.exe",
+    "parent_process_path": "\\cmd.exe"
 }

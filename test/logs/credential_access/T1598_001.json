@@ -6,5 +6,9 @@
     "User": "AttackerAdmin",
     "ParentImage": "\\outlook.exe",
     "Image": "\\chrome.exe",
-    "CommandLine": "--incognito"
+    "CommandLine": "--incognito",
+    "ParentImage": "\\outlook.exe",
+    "parent_process_path": "\\outlook.exe",
+    "process_path": "\\chrome.exe",
+    "command": "--incognito"
 }

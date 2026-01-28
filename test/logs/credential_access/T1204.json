@@ -6,5 +6,9 @@
     "User": "AttackerAdmin",
     "ParentImage": "\\WINWORD.EXE",
     "Image": "\\cmd.exe",
-    "CommandLine": "\\Users\\"
+    "CommandLine": "\\Users\\",
+    "ParentImage": "\\WINWORD.EXE",
+    "parent_process_path": "\\WINWORD.EXE",
+    "process_path": "\\cmd.exe",
+    "command": "\\Users\\"
 }

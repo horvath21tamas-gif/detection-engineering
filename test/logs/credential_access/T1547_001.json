@@ -7,5 +7,5 @@
     "EventType": "SetValue",
     "TargetObject": "\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
     "Details": "\\AppData\\",
-    "Image": "\\powershell.exe"
+    "process_path": "\\powershell.exe"
 }

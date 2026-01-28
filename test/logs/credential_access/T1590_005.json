@@ -5,5 +5,7 @@
     "Service": "sysmon",
     "User": "AttackerAdmin",
     "Image": "\\gcloud.exe",
-    "CommandLine": " projects list"
+    "CommandLine": " projects list",
+    "process_path": "\\gcloud.exe",
+    "command": " projects list"
 }

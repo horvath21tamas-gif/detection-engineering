@@ -5,5 +5,7 @@
     "Service": "sysmon",
     "User": "AttackerAdmin",
     "Image": "\\findstr.exe",
-    "CommandLine": "invoice"
+    "CommandLine": "invoice",
+    "process_path": "\\findstr.exe",
+    "command": "invoice"
 }

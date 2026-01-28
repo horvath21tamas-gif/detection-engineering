@@ -6,5 +6,8 @@
     "User": "AttackerAdmin",
     "Image": "\\powershell.exe",
     "CommandLine": "-nop",
-    "ParentImage": "\\cmd.exe"
+    "process_path": "\\powershell.exe",
+    "command": "-nop",
+    "ParentImage": "\\cmd.exe",
+    "parent_process_path": "\\cmd.exe"
 }

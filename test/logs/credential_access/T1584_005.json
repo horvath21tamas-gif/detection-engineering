@@ -5,5 +5,6 @@
     "Service": "sysmon",
     "User": "AttackerAdmin",
     "ParentImage": "\\wmiprvse.exe",
-    "Image": "\\powershell.exe"
+    "parent_process_path": "\\wmiprvse.exe",
+    "process_path": "\\powershell.exe"
 }

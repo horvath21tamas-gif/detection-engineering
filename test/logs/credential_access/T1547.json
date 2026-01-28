@@ -5,5 +5,7 @@
     "Service": "sysmon",
     "User": "AttackerAdmin",
     "Image": "\\reg.exe",
-    "CommandLine": "\\AppData\\Local\\Temp\\"
+    "CommandLine": "\\AppData\\Local\\Temp\\",
+    "process_path": "\\reg.exe",
+    "command": "\\AppData\\Local\\Temp\\"
 }

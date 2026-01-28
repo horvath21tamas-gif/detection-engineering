@@ -5,5 +5,7 @@
     "Service": "sysmon",
     "User": "AttackerAdmin",
     "Image": "\\msg.exe",
-    "CommandLine": "approve"
+    "CommandLine": "approve",
+    "process_path": "\\msg.exe",
+    "command": "approve"
 }

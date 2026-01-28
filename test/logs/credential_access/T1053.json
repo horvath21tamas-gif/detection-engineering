@@ -5,5 +5,7 @@
     "Service": "sysmon",
     "User": "AttackerAdmin",
     "Image": "\\schtasks.exe",
-    "CommandLine": "\\AppData\\"
+    "CommandLine": "\\AppData\\",
+    "process_path": "\\schtasks.exe",
+    "command": "\\AppData\\"
 }

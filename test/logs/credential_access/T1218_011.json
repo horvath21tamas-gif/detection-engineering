@@ -6,5 +6,8 @@
     "User": "AttackerAdmin",
     "Image": "\\rundll32.exe",
     "CommandLine": "\\Users\\",
-    "ParentImage": "\\powershell.exe"
+    "process_path": "\\rundll32.exe",
+    "command": "\\Users\\",
+    "ParentImage": "\\powershell.exe",
+    "parent_process_path": "\\powershell.exe"
 }

@@ -5,5 +5,7 @@
     "Service": "sysmon",
     "User": "AttackerAdmin",
     "Image": "\\terraform.exe",
-    "CommandLine": "aws_vpc"
+    "CommandLine": "aws_vpc",
+    "process_path": "\\terraform.exe",
+    "command": "aws_vpc"
 }

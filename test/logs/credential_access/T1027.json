@@ -5,5 +5,7 @@
     "Service": "sysmon",
     "User": "AttackerAdmin",
     "Image": "\\powershell.exe",
-    "CommandLine": "IEX"
+    "CommandLine": "IEX",
+    "process_path": "\\powershell.exe",
+    "command": "IEX"
 }

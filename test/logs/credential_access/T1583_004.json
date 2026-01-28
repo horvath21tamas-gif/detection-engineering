@@ -5,5 +5,7 @@
     "Service": "sysmon",
     "User": "AttackerAdmin",
     "Image": "\\terraform.exe",
-    "CommandLine": "aws_lambda_function"
+    "CommandLine": "aws_lambda_function",
+    "process_path": "\\terraform.exe",
+    "command": "aws_lambda_function"
 }

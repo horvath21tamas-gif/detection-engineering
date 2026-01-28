@@ -1,0 +1,62 @@
+title: Anomalous Procurement of Exploit or PoC Code
+id: c03ee391-5e65-4e1e-b953-aabd94f11086
+status: stable
+description: |
+    Detects the acquisition of exploits or Proof-of-Concept (PoC) code by monitoring 
+    suspicious download patterns, CLI-based transfers, and known exploit naming 
+    conventions while filtering out authorized security scanners and developer activity.
+author: hota05
+date: 2026-01-28
+references:
+    - https://attack.mitre.org/techniques/T1588/005/
+tags:
+    - attack.resource_development
+    - attack.t1588.005
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection_exploit_names:
+        TargetFilename|contains:
+            - 'CVE-20'           
+            - '\exploit'
+            - '\poc_code'
+            - '\lpe_x64'        
+            - '\rce_exploit'    
+            - '\cve_20'
+            - '\metasploit'
+            - '\msfvenom'
+
+    selection_downloader_tools:
+        Image|endswith:
+            - '\curl.exe'
+            - '\wget.exe'
+            - '\certutil.exe'
+            - '\bitsadmin.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+
+    filter_known_paths:
+        TargetFilename|contains:
+            - '\src\'
+            - '\repos\'
+            - '\github.com\'
+            - '\Visual Studio\'
+            - '\node_modules\'
+            - '\pip-install-'
+            - '\AppData\Local\Temp\build-'
+
+    filter_authorized_scanners:
+        Image|contains:
+            - '\Nessus\'
+            - '\Qualys\'
+            - '\Rapid7\'
+        UserName|contains:
+            - 'SVC_Scanner'
+            - 'SYSTEM'
+
+    condition: selection_exploit_names and selection_downloader_tools and not (filter_known_paths or filter_authorized_scanners)
+falsepositives:
+    - Security researchers or IT staff manually downloading PoCs for patching validation.
+    - Automated build systems downloading packages that contain "exploit" in their name as a dependency.
+level: high

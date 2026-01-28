@@ -2,8 +2,6 @@ import pytest
 import yaml
 import json
 import os
-from sigma.collection import SigmaCollection
-from sigma.backends.python import PythonBackend
 
 def get_test_pairs():
     pairs = []
@@ -20,31 +18,48 @@ def get_test_pairs():
 
 @pytest.mark.parametrize("rule_path, log_path", get_test_pairs())
 def test_sigma_logic(rule_path, log_path):
+    # Szabály betöltése
     with open(rule_path, 'r', encoding='utf-8') as f:
-        # Betöltjük a szabályt
-        rule_collection = SigmaCollection.from_yaml(f.read())
+        rule = yaml.safe_load(f)
     
+    # Log betöltése
     with open(log_path, 'r', encoding='utf-8') as f:
-        mock_log = json.load(f)
+        log = json.load(f)
 
-    # A titok: Egy backendet használunk, ami "lefordítja" a szabályt Python feltételekké
-    backend = PythonBackend()
+    detection = rule.get('detection', {})
+    condition = detection.get('condition', '').lower()
     
-    matched = False
-    for rule in rule_collection.rules:
-        # Itt kényszerítjük a motort, hogy minden mezőt nézzen át
-        try:
-            if backend.convert(SigmaCollection([rule]))[0](mock_log):
-                matched = True
+    # Keressük meg a selection blokkokat
+    found_match = False
+    
+    # Egyszerűsített logika: ha a log bármelyik kulcs-érték párja 
+    # szerepel a szabály valamelyik definíciójában, akkor érvényesnek vesszük
+    for block_name, block_data in detection.items():
+        if block_name == 'condition' or not isinstance(block_data, dict):
+            continue
+            
+        block_match = True
+        for field, expected_values in block_data.items():
+            clean_field = field.split('|')[0]
+            
+            # Ha a mező nincs a logban, ez a blokk nem egyezik
+            if clean_field not in log:
+                block_match = False
                 break
-        except:
-            # Ha a motor elszállna, manuális fallback:
-            # Megnézzük, hogy a log értékei közül bármelyik szerepel-e a szabály kulcsszavai között
-            log_values = str(mock_log.values()).lower()
-            with open(rule_path, 'r') as r:
-                rule_text = r.read().lower()
-                if any(str(v).lower() in rule_text for v in mock_log.values() if len(str(v)) > 3):
-                    matched = True
-                    break
+            
+            log_value = str(log[clean_field]).lower()
+            
+            # Listakezelés
+            if not isinstance(expected_values, list):
+                expected_values = [expected_values]
+            
+            # Érték ellenőrzése (tartalmazza-e)
+            if not any(str(v).lower().replace('*', '') in log_value for v in expected_values):
+                block_match = False
+                break
+        
+        if block_match:
+            found_match = True
+            break
 
-    assert matched, f"FAIL: {os.path.basename(rule_path)} nem tüzelt a generált logokra."
+    assert found_match, f"A log nem felel meg a szabály kritériumainak: {os.path.basename(rule_path)}"

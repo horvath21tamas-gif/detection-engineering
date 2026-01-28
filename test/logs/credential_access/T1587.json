@@ -1,9 +1,9 @@
 {
-    "event_id": "79a747d8-877a-4fa6-b4fd-4f87c7fd10f7",
-    "timestamp": "2026-01-28T06:01:46.334693",
-    "hostname": "WIN-SRV-42",
-    "source_ip": "192.168.1.245",
-    "user": "svc_sql",
+    "event_id": "f49c71a4-e00a-4892-a816-8421383abba9",
+    "timestamp": "2026-01-28T06:25:35.025623",
+    "hostname": "WIN-SRV-52",
+    "source_ip": "192.168.1.248",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "CommandLine|contains": " -payload-type "
+    "CommandLine|contains": "cobaltstrike.jar"
 }

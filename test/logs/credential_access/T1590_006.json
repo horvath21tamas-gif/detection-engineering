@@ -1,9 +1,9 @@
 {
-    "event_id": "0337fe0b-5f4b-4e6c-969a-e545d1110ae4",
-    "timestamp": "2026-01-28T06:42:46.044990",
-    "hostname": "WIN-SRV-85",
-    "source_ip": "192.168.1.250",
-    "user": "db_backup",
+    "event_id": "37ea3d97-4f09-4662-8056-618ec66f66c3",
+    "timestamp": "2026-01-28T06:25:34.740533",
+    "hostname": "WIN-SRV-24",
+    "source_ip": "192.168.1.242",
+    "user": "admin",
     "domain": "CORP.LOCAL",
-    "CommandLine|contains": "/config.php"
+    "CommandLine|contains": "/.git/"
 }

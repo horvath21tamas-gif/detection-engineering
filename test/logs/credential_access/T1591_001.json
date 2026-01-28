@@ -1,9 +1,9 @@
 {
-    "event_id": "3ae1aede-8adb-4a98-859b-2f13200ec012",
-    "timestamp": "2026-01-28T05:54:46.265084",
-    "hostname": "WIN-SRV-97",
-    "source_ip": "192.168.1.99",
+    "event_id": "3900c7dd-95c1-4438-b372-aa64bc8180d5",
+    "timestamp": "2026-01-28T06:48:34.954906",
+    "hostname": "WIN-SRV-67",
+    "source_ip": "192.168.1.138",
     "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "CommandLine|contains": "telephely"
+    "CommandLine|contains": "szekhaz"
 }

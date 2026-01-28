@@ -1,9 +1,9 @@
 {
-    "event_id": "cd1c739f-dd36-42c2-86ac-1cb34737f8ff",
-    "timestamp": "2026-01-28T06:49:46.232026",
-    "hostname": "WIN-SRV-58",
-    "source_ip": "192.168.1.54",
-    "user": "admin",
+    "event_id": "6aa203f7-4f03-44d3-b4c6-7eff4c893888",
+    "timestamp": "2026-01-28T06:06:34.921658",
+    "hostname": "WIN-SRV-56",
+    "source_ip": "192.168.1.200",
+    "user": "db_backup",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\sherlock.exe"
 }

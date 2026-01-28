@@ -1,9 +1,9 @@
 {
-    "event_id": "18a5e9bb-75b7-470d-a32a-aa7925a1c906",
-    "timestamp": "2026-01-28T06:02:46.242385",
-    "hostname": "WIN-SRV-99",
-    "source_ip": "192.168.1.231",
-    "user": "j.doe",
+    "event_id": "86c2af8d-307a-4a4e-89cd-237ae26c76f8",
+    "timestamp": "2026-01-28T06:04:34.932098",
+    "hostname": "WIN-SRV-14",
+    "source_ip": "192.168.1.183",
+    "user": "admin",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\netsh.exe"
 }

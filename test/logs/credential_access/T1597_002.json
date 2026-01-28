@@ -1,9 +1,9 @@
 {
-    "event_id": "213cc841-c17d-41c5-a944-f33061211ba8",
-    "timestamp": "2026-01-28T06:39:46.195489",
-    "hostname": "WIN-SRV-64",
-    "source_ip": "192.168.1.171",
+    "event_id": "7c566eca-02b2-4e75-b644-4c237a847020",
+    "timestamp": "2026-01-28T06:40:34.884863",
+    "hostname": "WIN-SRV-77",
+    "source_ip": "192.168.1.206",
     "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\shhgit.exe"
+    "Image|endswith": "\\trufflehog.exe"
 }

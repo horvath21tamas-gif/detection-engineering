@@ -1,10 +1,10 @@
 {
-    "event_id": "e762b6fe-3996-4212-89de-5895315b75fa",
-    "timestamp": "2026-01-28T06:41:46.162780",
-    "hostname": "WIN-SRV-27",
-    "source_ip": "192.168.1.118",
+    "event_id": "03ae18c9-8731-4de2-97b6-ed510ace4560",
+    "timestamp": "2026-01-28T05:58:34.851753",
+    "hostname": "WIN-SRV-28",
+    "source_ip": "192.168.1.138",
     "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\findstr.exe",
-    "CommandLine|contains": "szerzodes"
+    "Image|endswith": "\\grep.exe",
+    "CommandLine|contains": "beszallito"
 }

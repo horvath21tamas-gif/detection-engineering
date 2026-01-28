@@ -1,9 +1,9 @@
 {
-    "event_id": "2b7a5cde-1ba6-418d-878c-f42334e33d8f",
-    "timestamp": "2026-01-28T06:39:46.036774",
-    "hostname": "WIN-SRV-17",
-    "source_ip": "192.168.1.174",
-    "user": "admin",
+    "event_id": "79666795-de7e-40b5-8373-1bc6b753650a",
+    "timestamp": "2026-01-28T06:20:34.732132",
+    "hostname": "WIN-SRV-32",
+    "source_ip": "192.168.1.208",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\openssl.exe"
+    "Image|endswith": "\\makecert.exe"
 }

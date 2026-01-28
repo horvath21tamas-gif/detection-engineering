@@ -1,10 +1,10 @@
 {
-    "event_id": "958087f8-6d84-4fb4-bf2f-bf26f5197683",
-    "timestamp": "2026-01-28T06:07:46.355418",
-    "hostname": "WIN-SRV-98",
-    "source_ip": "192.168.1.17",
+    "event_id": "cc1cd085-855b-435d-9590-e607e4fad84c",
+    "timestamp": "2026-01-28T06:49:35.047092",
+    "hostname": "WIN-SRV-15",
+    "source_ip": "192.168.1.197",
     "user": "svc_sql",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\aws.exe",
-    "CommandLine|contains": " secretsmanager list-secrets"
+    "CommandLine|contains": " iam list-"
 }

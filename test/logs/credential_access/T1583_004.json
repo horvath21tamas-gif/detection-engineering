@@ -1,9 +1,9 @@
 {
-    "event_id": "a10f3619-0803-48a0-bdc1-bca25a5eb4a6",
-    "timestamp": "2026-01-28T05:58:46.406789",
-    "hostname": "WIN-SRV-94",
-    "source_ip": "192.168.1.17",
-    "user": "j.doe",
+    "event_id": "ce65a4ff-a7e8-49f7-8503-8479b7e3960b",
+    "timestamp": "2026-01-28T06:30:35.099003",
+    "hostname": "WIN-SRV-18",
+    "source_ip": "192.168.1.200",
+    "user": "db_backup",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\sls.exe"
 }

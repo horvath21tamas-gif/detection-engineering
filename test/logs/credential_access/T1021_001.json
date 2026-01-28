@@ -1,9 +1,9 @@
 {
-    "event_id": "04fbca9b-ddd7-464c-aa19-6e7aa98ef872",
-    "timestamp": "2026-01-28T06:48:46.288094",
-    "hostname": "WIN-SRV-59",
-    "source_ip": "192.168.1.25",
-    "user": "j.doe",
+    "event_id": "08be14fd-3454-4953-882c-7044ed630f76",
+    "timestamp": "2026-01-28T06:33:34.978156",
+    "hostname": "WIN-SRV-37",
+    "source_ip": "192.168.1.186",
+    "user": "admin",
     "domain": "CORP.LOCAL",
     "EventID": 4624,
     "LogonType": 10

@@ -1,9 +1,9 @@
 {
-    "event_id": "40c99ff0-85b0-4a96-82a8-8df79be7af25",
-    "timestamp": "2026-01-28T05:59:45.974912",
-    "hostname": "WIN-SRV-10",
-    "source_ip": "192.168.1.206",
-    "user": "db_backup",
+    "event_id": "b63af6ec-5a59-49e8-b718-674439cdc839",
+    "timestamp": "2026-01-28T06:47:34.668824",
+    "hostname": "WIN-SRV-45",
+    "source_ip": "192.168.1.20",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\zoomeye.exe"
+    "Image|endswith": "\\censys.exe"
 }

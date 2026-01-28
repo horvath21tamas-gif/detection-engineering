@@ -1,9 +1,9 @@
 {
-    "event_id": "da067f15-6449-4975-adec-d85f3388727a",
-    "timestamp": "2026-01-28T06:06:46.054000",
-    "hostname": "WIN-SRV-47",
-    "source_ip": "192.168.1.47",
-    "user": "j.doe",
+    "event_id": "9ac5e6ad-a942-4b8e-951a-21af556566df",
+    "timestamp": "2026-01-28T06:09:34.749825",
+    "hostname": "WIN-SRV-25",
+    "source_ip": "192.168.1.139",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "CommandLine|contains": "objectCategory="
+    "CommandLine|contains": "LDAP://"
 }

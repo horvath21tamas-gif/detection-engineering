@@ -1,9 +1,9 @@
 {
-    "event_id": "773d65d8-96e3-4f2d-bc49-796ded62a698",
-    "timestamp": "2026-01-28T06:44:46.085405",
-    "hostname": "WIN-SRV-48",
-    "source_ip": "192.168.1.109",
-    "user": "db_backup",
+    "event_id": "85dd1175-28a8-484e-89a0-df55c87b155d",
+    "timestamp": "2026-01-28T06:51:34.781945",
+    "hostname": "WIN-SRV-84",
+    "source_ip": "192.168.1.124",
+    "user": "admin",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\curl.exe"
+    "Image|endswith": "\\wget.exe"
 }

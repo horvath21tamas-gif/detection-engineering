@@ -1,9 +1,9 @@
 {
-    "event_id": "bee685ba-a87d-4e39-8951-362161f7b0ea",
-    "timestamp": "2026-01-28T05:52:46.185272",
-    "hostname": "WIN-SRV-25",
-    "source_ip": "192.168.1.13",
-    "user": "j.doe",
+    "event_id": "86583570-9bee-4879-921e-361ead226a73",
+    "timestamp": "2026-01-28T06:47:34.874638",
+    "hostname": "WIN-SRV-24",
+    "source_ip": "192.168.1.138",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\mshta.exe"
+    "Image|endswith": "\\schtasks.exe"
 }

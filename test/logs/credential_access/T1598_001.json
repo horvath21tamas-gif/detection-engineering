@@ -1,10 +1,10 @@
 {
-    "event_id": "834de861-9133-451d-b3b7-3f25373cbb81",
-    "timestamp": "2026-01-28T06:15:46.384603",
-    "hostname": "WIN-SRV-57",
-    "source_ip": "192.168.1.162",
+    "event_id": "92ca5e12-6c2d-4517-b238-dc88447db2aa",
+    "timestamp": "2026-01-28T06:08:35.076617",
+    "hostname": "WIN-SRV-69",
+    "source_ip": "192.168.1.36",
     "user": "admin",
     "domain": "CORP.LOCAL",
     "ParentImage|endswith": "\\teams.exe",
-    "Image|endswith": "\\wscript.exe"
+    "Image|endswith": "\\cscript.exe"
 }

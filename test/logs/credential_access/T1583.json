@@ -1,9 +1,9 @@
 {
-    "event_id": "e0afd403-2238-491b-a6f8-a3fd3d63a7ba",
-    "timestamp": "2026-01-28T06:15:46.379849",
-    "hostname": "WIN-SRV-27",
-    "source_ip": "192.168.1.187",
-    "user": "admin",
+    "event_id": "91b0d497-8c9a-4259-b7e8-054661aa0950",
+    "timestamp": "2026-01-28T06:18:35.071799",
+    "hostname": "WIN-SRV-76",
+    "source_ip": "192.168.1.104",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\pulumi.exe"
 }

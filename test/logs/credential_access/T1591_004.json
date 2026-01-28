@@ -1,9 +1,9 @@
 {
-    "event_id": "dabf69ae-6355-4b09-ab51-a279113face6",
-    "timestamp": "2026-01-28T05:53:46.006544",
-    "hostname": "WIN-SRV-99",
-    "source_ip": "192.168.1.128",
-    "user": "svc_sql",
+    "event_id": "c10c1ae4-ac18-4b58-a522-e5eb08ef11cc",
+    "timestamp": "2026-01-28T06:45:34.701037",
+    "hostname": "WIN-SRV-97",
+    "source_ip": "192.168.1.98",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
     "CommandLine|contains": "Get-ADUser -Filter *"
 }

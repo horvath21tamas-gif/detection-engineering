@@ -1,9 +1,9 @@
 {
-    "event_id": "a91cad95-028b-4050-8d35-2c04e075cb65",
-    "timestamp": "2026-01-28T06:36:46.330163",
-    "hostname": "WIN-SRV-76",
-    "source_ip": "192.168.1.23",
-    "user": "db_backup",
+    "event_id": "0ab0eba8-3ce2-4c43-ae98-ee861cbad968",
+    "timestamp": "2026-01-28T06:46:35.020922",
+    "hostname": "WIN-SRV-10",
+    "source_ip": "192.168.1.103",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\twint.exe"
 }

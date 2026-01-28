@@ -1,9 +1,9 @@
 {
-    "event_id": "4f08e690-49f3-409e-82e1-286019f11a55",
-    "timestamp": "2026-01-28T05:57:46.015410",
-    "hostname": "WIN-SRV-66",
-    "source_ip": "192.168.1.109",
-    "user": "j.doe",
+    "event_id": "ee805888-2d12-43ee-9474-fd5075632d05",
+    "timestamp": "2026-01-28T06:09:34.710153",
+    "hostname": "WIN-SRV-39",
+    "source_ip": "192.168.1.165",
+    "user": "admin",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\ipconfig.exe",
     "CommandLine|contains": " /displaydns"

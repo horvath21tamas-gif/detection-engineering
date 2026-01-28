@@ -1,9 +1,9 @@
 {
-    "event_id": "73e023f8-13fa-4e14-9ac9-681a97c8ceff",
-    "timestamp": "2026-01-28T06:24:46.076430",
-    "hostname": "WIN-SRV-99",
-    "source_ip": "192.168.1.47",
-    "user": "svc_sql",
+    "event_id": "661b8ebf-9607-45e4-bebc-acaca4a2a232",
+    "timestamp": "2026-01-28T06:32:34.772855",
+    "hostname": "WIN-SRV-52",
+    "source_ip": "192.168.1.112",
+    "user": "admin",
     "domain": "CORP.LOCAL",
-    "CommandLine|contains": " -q any"
+    "CommandLine|contains": " -t TXT"
 }

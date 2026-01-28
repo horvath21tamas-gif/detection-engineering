@@ -1,9 +1,9 @@
 {
-    "event_id": "89c61d68-80c6-414c-b2dc-5f75b13bcb95",
-    "timestamp": "2026-01-28T06:43:46.176098",
-    "hostname": "WIN-SRV-18",
-    "source_ip": "192.168.1.24",
+    "event_id": "3fb4985a-f760-464d-8d6f-18f01e8cb9ca",
+    "timestamp": "2026-01-28T06:07:34.865383",
+    "hostname": "WIN-SRV-67",
+    "source_ip": "192.168.1.39",
     "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\go.exe"
+    "Image|endswith": "\\rustc.exe"
 }

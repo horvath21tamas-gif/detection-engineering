@@ -1,9 +1,9 @@
 {
-    "event_id": "ff3b43d6-2a18-4e9e-80eb-d30d54a4028c",
-    "timestamp": "2026-01-28T06:07:46.296543",
-    "hostname": "WIN-SRV-29",
-    "source_ip": "192.168.1.108",
-    "user": "db_backup",
+    "event_id": "0e46c5c6-f2e8-4d7a-8790-ad86d3eb0281",
+    "timestamp": "2026-01-28T06:52:34.986739",
+    "hostname": "WIN-SRV-63",
+    "source_ip": "192.168.1.51",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\subfinder.exe"
 }

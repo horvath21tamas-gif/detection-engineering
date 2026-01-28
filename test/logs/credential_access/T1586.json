@@ -1,9 +1,9 @@
 {
-    "event_id": "9b4c22fb-e894-4737-99f8-d03b258b1719",
-    "timestamp": "2026-01-28T06:48:46.279934",
-    "hostname": "WIN-SRV-38",
-    "source_ip": "192.168.1.26",
+    "event_id": "6d230bdb-7ee9-4ec0-b857-afd06e9cb6cc",
+    "timestamp": "2026-01-28T06:44:34.969906",
+    "hostname": "WIN-SRV-88",
+    "source_ip": "192.168.1.230",
     "user": "db_backup",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\medusa.exe"
+    "Image|endswith": "\\patator.exe"
 }

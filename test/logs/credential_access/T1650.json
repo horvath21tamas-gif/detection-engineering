@@ -1,9 +1,9 @@
 {
-    "event_id": "f9a2808f-e252-4ab7-b95f-fb9e27ca90ed",
-    "timestamp": "2026-01-28T05:53:46.367993",
-    "hostname": "WIN-SRV-84",
-    "source_ip": "192.168.1.51",
-    "user": "svc_sql",
+    "event_id": "5ef93c5c-a7ca-451c-911e-98f4d0020337",
+    "timestamp": "2026-01-28T06:24:35.059895",
+    "hostname": "WIN-SRV-96",
+    "source_ip": "192.168.1.113",
+    "user": "admin",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\aws.exe"
 }

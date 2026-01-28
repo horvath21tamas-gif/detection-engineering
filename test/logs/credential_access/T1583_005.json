@@ -1,8 +1,8 @@
 {
-    "event_id": "af71ea0b-45b9-4ae2-8495-c51f1b06d275",
-    "timestamp": "2026-01-28T06:21:46.402429",
-    "hostname": "WIN-SRV-92",
-    "source_ip": "192.168.1.38",
+    "event_id": "51966143-847d-4220-a7fe-759963647f2a",
+    "timestamp": "2026-01-28T05:58:35.094585",
+    "hostname": "WIN-SRV-73",
+    "source_ip": "192.168.1.124",
     "user": "admin",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\wget.exe"

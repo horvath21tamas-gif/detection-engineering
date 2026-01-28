@@ -1,8 +1,8 @@
 {
-    "event_id": "042c33fb-aa49-4347-8118-8fbb05314217",
-    "timestamp": "2026-01-28T06:24:46.200228",
-    "hostname": "WIN-SRV-74",
-    "source_ip": "192.168.1.200",
+    "event_id": "48119821-c889-447e-a5d1-15953d375ad7",
+    "timestamp": "2026-01-28T06:24:34.889723",
+    "hostname": "WIN-SRV-26",
+    "source_ip": "192.168.1.135",
     "user": "svc_sql",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\jwhois.exe"

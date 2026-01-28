@@ -1,9 +1,9 @@
 {
-    "event_id": "f2304149-4020-446e-9dd1-5949417294c1",
-    "timestamp": "2026-01-28T06:44:46.068077",
-    "hostname": "WIN-SRV-29",
-    "source_ip": "192.168.1.97",
-    "user": "j.doe",
+    "event_id": "4eecf6b9-1b48-4699-b404-3821c636f919",
+    "timestamp": "2026-01-28T05:59:34.764311",
+    "hostname": "WIN-SRV-77",
+    "source_ip": "192.168.1.232",
+    "user": "admin",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\ghunt.exe"
 }

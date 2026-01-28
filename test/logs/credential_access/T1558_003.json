@@ -1,8 +1,8 @@
 {
-    "event_id": "8948974c-bf62-4149-9599-70a278289347",
-    "timestamp": "2026-01-28T06:29:46.420122",
-    "hostname": "WIN-SRV-67",
-    "source_ip": "192.168.1.54",
+    "event_id": "eb29000d-d593-4cdc-be80-fa11ddafe644",
+    "timestamp": "2026-01-28T06:52:35.112297",
+    "hostname": "WIN-SRV-86",
+    "source_ip": "192.168.1.24",
     "user": "j.doe",
     "domain": "CORP.LOCAL",
     "EventID": 4769,

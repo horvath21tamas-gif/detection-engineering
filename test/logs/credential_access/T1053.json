@@ -1,9 +1,9 @@
 {
-    "event_id": "d7f37c27-75de-49be-a27f-12982e736606",
-    "timestamp": "2026-01-28T06:07:46.284048",
-    "hostname": "WIN-SRV-76",
-    "source_ip": "192.168.1.103",
+    "event_id": "c2c45536-3c7a-4695-b01c-4cecf5c82fdb",
+    "timestamp": "2026-01-28T06:35:34.974076",
+    "hostname": "WIN-SRV-86",
+    "source_ip": "192.168.1.240",
     "user": "admin",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\schtasks.exe"
+    "Image|endswith": "\\cmd.exe"
 }

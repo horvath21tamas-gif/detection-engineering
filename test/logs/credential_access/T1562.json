@@ -1,9 +1,9 @@
 {
-    "event_id": "e7cffdac-fd8a-420d-b6e5-ab75723afff2",
-    "timestamp": "2026-01-28T06:35:46.439292",
-    "hostname": "WIN-SRV-87",
-    "source_ip": "192.168.1.186",
-    "user": "j.doe",
+    "event_id": "6e83ee44-c0ad-403e-b26b-a751537b3893",
+    "timestamp": "2026-01-28T06:12:35.131637",
+    "hostname": "WIN-SRV-29",
+    "source_ip": "192.168.1.140",
+    "user": "admin",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\taskkill.exe"
+    "Image|endswith": "\\net.exe"
 }

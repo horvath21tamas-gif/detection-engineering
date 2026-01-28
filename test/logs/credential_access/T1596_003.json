@@ -1,9 +1,9 @@
 {
-    "event_id": "f3de40f4-010f-4db8-bb7e-55f3ae3dc220",
-    "timestamp": "2026-01-28T06:44:45.969874",
-    "hostname": "WIN-SRV-15",
-    "source_ip": "192.168.1.223",
-    "user": "svc_sql",
+    "event_id": "5d9ea64a-5820-463c-995c-2ba4e6e4ab7e",
+    "timestamp": "2026-01-28T06:03:34.663541",
+    "hostname": "WIN-SRV-19",
+    "source_ip": "192.168.1.54",
+    "user": "db_backup",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\assetfinder.exe"
+    "Image|endswith": "\\massdns.exe"
 }

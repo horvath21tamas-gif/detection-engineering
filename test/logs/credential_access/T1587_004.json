@@ -1,9 +1,9 @@
 {
-    "event_id": "ddddf388-ec13-4ec3-bfe9-b9ecbe5882de",
-    "timestamp": "2026-01-28T06:32:46.351258",
-    "hostname": "WIN-SRV-45",
-    "source_ip": "192.168.1.235",
+    "event_id": "024dff51-9f19-40e9-8a7b-09538272bc14",
+    "timestamp": "2026-01-28T06:40:35.042742",
+    "hostname": "WIN-SRV-65",
+    "source_ip": "192.168.1.11",
     "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\csc.exe"
+    "Image|endswith": "\\gcc.exe"
 }

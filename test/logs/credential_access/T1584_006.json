@@ -1,9 +1,9 @@
 {
-    "event_id": "b37af009-ec53-42da-b9c8-2b546cab1852",
-    "timestamp": "2026-01-28T06:22:46.063010",
-    "hostname": "WIN-SRV-16",
-    "source_ip": "192.168.1.154",
-    "user": "svc_sql",
+    "event_id": "49d79a4e-6854-4b87-850e-9a2f28ab250f",
+    "timestamp": "2026-01-28T06:30:34.759032",
+    "hostname": "WIN-SRV-44",
+    "source_ip": "192.168.1.227",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\mega.exe"
+    "Image|endswith": "\\gsutil.exe"
 }

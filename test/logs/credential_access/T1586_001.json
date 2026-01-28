@@ -1,9 +1,9 @@
 {
-    "event_id": "b235e9f7-50a5-45f8-8b08-a68c0239c78a",
-    "timestamp": "2026-01-28T06:19:46.275564",
-    "hostname": "WIN-SRV-62",
-    "source_ip": "192.168.1.82",
-    "user": "svc_sql",
+    "event_id": "591f6c91-39e2-42a3-8839-273456484933",
+    "timestamp": "2026-01-28T06:23:34.965470",
+    "hostname": "WIN-SRV-34",
+    "source_ip": "192.168.1.97",
+    "user": "admin",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\msedge.exe"
 }

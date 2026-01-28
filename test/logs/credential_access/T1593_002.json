@@ -1,9 +1,9 @@
 {
-    "event_id": "07bf01ed-f3a1-4577-8235-70e69d3aed8b",
-    "timestamp": "2026-01-28T05:50:46.429473",
-    "hostname": "WIN-SRV-82",
-    "source_ip": "192.168.1.25",
-    "user": "svc_sql",
+    "event_id": "683bcd7f-4065-4f7d-9a16-9ea42dfb7fea",
+    "timestamp": "2026-01-28T06:08:35.121662",
+    "hostname": "WIN-SRV-72",
+    "source_ip": "192.168.1.178",
+    "user": "admin",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\pagodo.exe"
+    "Image|endswith": "\\dork-cli.exe"
 }

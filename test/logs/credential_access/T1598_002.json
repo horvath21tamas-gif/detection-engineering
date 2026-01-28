@@ -1,10 +1,10 @@
 {
-    "event_id": "66151445-2d82-4bbf-b230-fab8aaa63e00",
-    "timestamp": "2026-01-28T06:32:46.256043",
-    "hostname": "WIN-SRV-75",
-    "source_ip": "192.168.1.159",
-    "user": "db_backup",
+    "event_id": "dc4c196a-0040-4b35-b43a-805ce087598b",
+    "timestamp": "2026-01-28T06:11:34.945829",
+    "hostname": "WIN-SRV-28",
+    "source_ip": "192.168.1.122",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\powershell.exe",
-    "CommandLine|contains": "contacts.edb"
+    "Image|endswith": "\\tar.exe",
+    "CommandLine|contains": ".pst"
 }

@@ -1,9 +1,9 @@
 {
-    "event_id": "c40dfa83-7bfb-4f24-8139-539929dec1a8",
-    "timestamp": "2026-01-28T06:41:46.080600",
-    "hostname": "WIN-SRV-60",
-    "source_ip": "192.168.1.160",
-    "user": "db_backup",
+    "event_id": "d45b42e0-e66f-429a-befe-12890cbb04ae",
+    "timestamp": "2026-01-28T06:52:34.777095",
+    "hostname": "WIN-SRV-87",
+    "source_ip": "192.168.1.180",
+    "user": "admin",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\openssl.exe",
     "CommandLine|contains": " -text"

@@ -1,9 +1,9 @@
 {
-    "event_id": "13b8b9dd-5e09-4725-a58a-f816f1c342e4",
-    "timestamp": "2026-01-28T06:14:46.475848",
-    "hostname": "WIN-SRV-36",
-    "source_ip": "192.168.1.144",
-    "user": "j.doe",
+    "event_id": "f29dac33-c374-43dc-a8b8-aae6541c2870",
+    "timestamp": "2026-01-28T06:25:35.168937",
+    "hostname": "WIN-SRV-10",
+    "source_ip": "192.168.1.13",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\az.exe"
 }

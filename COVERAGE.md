@@ -97,6 +97,7 @@
 | T1588.003 | HIGH | Anomalous Code Signing Certificate Export or Acquisition |
 | T1588.004 | HIGH | Strategic Trusted Root Certificate Store Manipulation |
 | T1588.005 | HIGH | Anomalous Procurement of Exploit or PoC Code |
+| T1588.006 | HIGH | Targeted Harvesting of Vulnerability Research Artifacts |
 | T1589 | HIGH | High-Confidence OSINT Identity Enumeration via Public APIs, High-Fidelity Identity Enumeration via Authentication Endpoints, Targeted OSINT Enumeration of Open Websites and Domains, Credential Enumeration via Authentication API (High Confidence) |
 | T1589.001 | HIGH | Credential Enumeration via Authentication API (High Confidence) |
 | T1589.002 | HIGH | High-Confidence OSINT Identity Enumeration via Public APIs |

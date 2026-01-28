@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetFilename in ("*pentest_final_report*", "*internal_audit_security*", "*vulnerability_assessment*", "*exploit_chain*", "*0day_poc*", "*zero-day_research*", "*exploit_writeup*")) and (FolderPath in ("*\curl.exe", "*\wget.exe", "*\certutil.exe", "*\powershell.exe", "*\pwsh.exe")) and (not (((TargetFilename in ("*\Compliance\*", "*\GRC_Reports\*", "*\Security_Audit_20*")) and (UserName in ("*sec_admin*", "*audit_user*", "*compliance_mgr*")) and (FolderPath in ("*\SharePoint.exe*", "*\OneDrive.exe*"))) or (FolderPath in ("*\chrome.exe", "*\msedge.exe"))))

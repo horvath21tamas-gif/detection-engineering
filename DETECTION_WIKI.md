@@ -77,6 +77,7 @@
 - [Anomalous Code Signing Certificate Export or Acquisition](#anomalous-code-signing-certificate-export-or-acquisition)
 - [Strategic Trusted Root Certificate Store Manipulation](#strategic-trusted-root-certificate-store-manipulation)
 - [Anomalous Procurement of Exploit or PoC Code](#anomalous-procurement-of-exploit-or-poc-code)
+- [Targeted Harvesting of Vulnerability Research Artifacts](#targeted-harvesting-of-vulnerability-research-artifacts)
 - [High-Fidelity Identity Enumeration via Authentication Endpoints](#high-fidelity-identity-enumeration-via-authentication-endpoints)
 - [Credential Enumeration via Authentication API (High Confidence)](#credential-enumeration-via-authentication-api-(high-confidence))
 - [High-Confidence OSINT Identity Enumeration via Public APIs](#high-confidence-osint-identity-enumeration-via-public-apis)
@@ -1272,6 +1273,23 @@ suspicious download patterns, CLI-based transfers, and known exploit naming
 conventions while filtering out authorized security scanners and developer activity.
 - **Hamis pozitívok:** Security researchers or IT staff manually downloading PoCs for patching validation., Automated build systems downloading packages that contain "exploit" in their name as a dependency.
 - **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Targeted Harvesting of Vulnerability Research Artifacts
+- **Azonosító:** `T1588_006.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the systematic acquisition of vulnerability research, audit reports, or 
+zero-day PoC documentation. Focuses on CLI-based harvesting in non-technical 
+user contexts while filtering out authorized security research.
+- **Hamis pozitívok:** IT managers downloading security compliance templates via PowerShell., Automated backup of security documentation shares (if not excluded).
+- **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

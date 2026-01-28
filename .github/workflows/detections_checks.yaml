@@ -147,6 +147,10 @@ jobs:
       - name: Final SIEM Query Fixer (QRadar, NetWitness & Sentinel)
         run: python tools/final_siem_fixer.py
 
+      # --- HIGIÉNIA ELLENŐRZÉS: 90 napos szabály ---
+      - name: Run Rule Hygiene Check (90 days modification)
+        run: python tools/check_rule_hygiene.py
+
       - name: Run Integrity Check
         run: python tools/check_integrity.py
 

@@ -1,0 +1,56 @@
+title: Strategic Trusted Root Certificate Store Manipulation
+id: 83975d29-43e8-411d-a48b-3019c4b49f31
+status: stable
+description: |
+    Detects unauthorized attempts to modify the Trusted Root Certification Authorities 
+    store. Attackers do this to facilitate MitM attacks or bypass security warnings. 
+    Filters out legitimate system-level installers and known security agents.
+author: hota05
+date: 2026-01-28
+references:
+    - https://attack.mitre.org/techniques/T1588/004/
+tags:
+    - attack.resource_development
+    - attack.t1588.004
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        Image|endswith:
+            - '\certutil.exe'
+            - '\certmgr.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+
+    selection_action:
+        CommandLine|contains:
+            - '-addstore'
+            - 'Import-Certificate'
+            - '-importCertificate'
+            - 'Install-Certificate'
+
+    selection_target_stores:
+        CommandLine|contains:
+            - ' Root'      
+            - ' AuthRoot'  
+            - ' Disallowed' 
+
+    filter_legit_installers:
+        ParentImage|endswith:
+            - '\msiexec.exe'
+            - '\CcmExec.exe' 
+            - '\setup.exe'
+        User|contains: 'SYSTEM'
+
+    filter_security_agents:
+        Image|contains:
+            - '\SentinelOne\'
+            - '\CrowdStrike\'
+            - '\Cisco\AnyConnect\'
+
+    condition: selection_tools and selection_action and selection_target_stores and not (filter_legit_installers or filter_security_agents)
+falsepositives:
+    - Corporate PKI updates via GPO or automated scripts (should be added to filters by thumbprint/user).
+    - Security appliance agents (e.g., Zscaler, Netskope) injecting inspection certs.
+level: high

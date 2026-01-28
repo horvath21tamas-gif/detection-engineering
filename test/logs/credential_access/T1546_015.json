@@ -1,6 +1,6 @@
 {
-    "event_id": "c238ffa7-2d50-41dc-a590-ae72fe338402",
-    "timestamp": "2026-01-28T09:53:10.591895",
+    "event_id": "8351ad27-e135-44be-9400-4be2b80d04e3",
+    "timestamp": "2026-01-28T09:57:08.224858",
     "product": "windows",
     "service": null,
     "category": "registry_set",

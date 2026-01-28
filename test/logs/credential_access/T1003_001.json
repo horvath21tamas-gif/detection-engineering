@@ -1,6 +1,6 @@
 {
-    "event_id": "1a022fd3-a182-474a-bdfa-d942441a0b76",
-    "timestamp": "2026-01-28T09:53:10.697047",
+    "event_id": "07f6058b-5a91-416d-813d-93a27aa914b4",
+    "timestamp": "2026-01-28T09:57:08.329127",
     "product": "windows",
     "service": null,
     "category": "process_access",

@@ -2,7 +2,7 @@ import os
 import datetime
 
 # A CI/CD környezetben a gyökérkönyvtárból indulunk
-SIGMA_RULES_PATH = 'rules/sigma' 
+SIGMA_RULES_PATH = 'rules/sigma/credential_access' 
 THRESHOLD_DAYS = 90
 
 def check_age():

@@ -1,0 +1,65 @@
+title: Anomalous Offensive Tool Acquisition via CLI
+id: 091ebc28-e200-43f5-9038-1e15861f5efb
+status: stable
+description: |
+    Detects the acquisition of offensive tools (hacktools) by monitoring command-line 
+    downloads targeting non-standard directories. Filters out legitimate IT 
+    administration from browsers and authorized management agents.
+author: hota05
+date: 2026-01-28
+references:
+    - https://attack.mitre.org/techniques/T1588/002/
+tags:
+    - attack.resource_development
+    - attack.t1588.002
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection_hacktools:
+        TargetFilename|contains:
+            - '\nmap'
+            - '\nc.exe'
+            - '\netcat'
+            - '\socat'
+            - '\rclone'     
+            - '\plink'      
+            - '\mimikatz'
+            - '\ngrok'      
+            - '\chisel'    
+
+    selection_cli_downloaders:
+        Image|endswith:
+            - '\curl.exe'
+            - '\wget.exe'
+            - '\certutil.exe'
+            - '\bitsadmin.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+
+    filter_legit_paths:
+        TargetFilename|contains:
+            - '\Program Files\'
+            - '\Program Files (x86)\'
+            - '\Windows\System32\'
+            - '\Chocolatey\'
+
+    filter_management_agents:
+        Image|contains:
+            - '\Tanium\'
+            - '\SCCM\'
+            - '\Intune\'
+            - '\Altiris\'
+        User: 'SYSTEM'
+
+    filter_browsers:
+        Image|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+
+    condition: selection_hacktools and selection_cli_downloaders and not (filter_legit_paths or filter_management_agents or filter_browsers)
+falsepositives:
+    - DevOps mérnökök, akik scriptekkel konfigurálnak munkaállomásokat.
+    - IT automatizációs scriptek, amik nem szervizfiókkal futnak.
+level: high

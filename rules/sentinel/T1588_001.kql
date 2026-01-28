@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((TargetFilename in ("*redline*", "*lumma*", "*stealer*", "*agenttesla*", "*remcos*", "*cobaltstrike*", "*brutenratel*", "*ransomware*")) or (TargetFilename in ("*.iso", "*.vhd", "*.vhdx", "*.img", "*.cab"))) and (FolderPath in ("*\certutil.exe", "*\bitsadmin.exe", "*\curl.exe", "*\wget.exe", "*\powershell.exe", "*\pwsh.exe")) and (not (((TargetFilename in ("*\Windows\SoftwareDistribution\*", "*\Program Files\*", "*\Program Files (x86)\*")) and User contains "SYSTEM") or (FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe"))))

@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-28 13:09:01`
+**Utolsó frissítés:** `2026-01-28 13:14:50`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 119 | 100% |
-| Splunk (SPL) | 119 | 100.0% |
-| Microsoft Sentinel (KQL) | 119 | 100.0% |
-| QRadar (AQL) | 69 | 58.0% |
-| Elastic (KQL/EQL) | 119 | 100.0% |
-| RSA NetWitness | 119 | 100.0% |
+| Sigma (Forrás) | 121 | 100% |
+| Splunk (SPL) | 121 | 100.0% |
+| Microsoft Sentinel (KQL) | 121 | 100.0% |
+| QRadar (AQL) | 70 | 57.9% |
+| Elastic (KQL/EQL) | 121 | 100.0% |
+| RSA NetWitness | 121 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -92,8 +92,10 @@
 | T1587.003 | HIGH | High-Fidelity Unauthorized Digital Certificate Development - T1587.003 |
 | T1587.004 | CRITICAL | High-Fidelity Exploit Development and Compilation Detection - T1587.004 |
 | T1588 | HIGH | Anomalous Procurement of Offensive Capabilities |
+| T1588.001 | HIGH | Anomalous Procurement of Malware Capabilities |
 | T1588.003 | HIGH | Anomalous Code Signing Certificate Export or Acquisition |
 | T1588.004 | HIGH | Strategic Trusted Root Certificate Store Manipulation |
+| T1588.005 | HIGH | Anomalous Procurement of Exploit or PoC Code |
 | T1589 | HIGH | High-Confidence OSINT Identity Enumeration via Public APIs, High-Fidelity Identity Enumeration via Authentication Endpoints, Targeted OSINT Enumeration of Open Websites and Domains, Credential Enumeration via Authentication API (High Confidence) |
 | T1589.001 | HIGH | Credential Enumeration via Authentication API (High Confidence) |
 | T1589.002 | HIGH | High-Confidence OSINT Identity Enumeration via Public APIs |

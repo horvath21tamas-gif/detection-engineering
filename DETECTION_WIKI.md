@@ -72,8 +72,10 @@
 - [High-Fidelity Unauthorized Digital Certificate Development - T1587.003](#high-fidelity-unauthorized-digital-certificate-development---t1587003)
 - [High-Fidelity Exploit Development and Compilation Detection - T1587.004](#high-fidelity-exploit-development-and-compilation-detection---t1587004)
 - [Anomalous Procurement of Offensive Capabilities](#anomalous-procurement-of-offensive-capabilities)
+- [Anomalous Procurement of Malware Capabilities](#anomalous-procurement-of-malware-capabilities)
 - [Anomalous Code Signing Certificate Export or Acquisition](#anomalous-code-signing-certificate-export-or-acquisition)
 - [Strategic Trusted Root Certificate Store Manipulation](#strategic-trusted-root-certificate-store-manipulation)
+- [Anomalous Procurement of Exploit or PoC Code](#anomalous-procurement-of-exploit-or-poc-code)
 - [High-Fidelity Identity Enumeration via Authentication Endpoints](#high-fidelity-identity-enumeration-via-authentication-endpoints)
 - [Credential Enumeration via Authentication API (High Confidence)](#credential-enumeration-via-authentication-api-(high-confidence))
 - [High-Confidence OSINT Identity Enumeration via Public APIs](#high-confidence-osint-identity-enumeration-via-public-apis)
@@ -1193,6 +1195,23 @@ filtering out legitimate IT software deployment tools.
 
 ---
 
+## Anomalous Procurement of Malware Capabilities
+- **Azonosító:** `T1588_001.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the acquisition of malware by monitoring suspicious downloaders (LotL) 
+interacting with compressed/container formats or known malware naming patterns 
+in non-standard directories.
+- **Hamis pozitívok:** IT staff downloading OS images (.iso) via PowerShell scripts (add to exclusion by user)., Developers using CLI tools to download legitimate libraries or VM images.
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Anomalous Code Signing Certificate Export or Acquisition
 - **Azonosító:** `T1588_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
@@ -1222,6 +1241,23 @@ Filters out legitimate system-level installers and known security agents.
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Anomalous Procurement of Exploit or PoC Code
+- **Azonosító:** `T1588_005.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the acquisition of exploits or Proof-of-Concept (PoC) code by monitoring 
+suspicious download patterns, CLI-based transfers, and known exploit naming 
+conventions while filtering out authorized security scanners and developer activity.
+- **Hamis pozitívok:** Security researchers or IT staff manually downloading PoCs for patching validation., Automated build systems downloading packages that contain "exploit" in their name as a dependency.
+- **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

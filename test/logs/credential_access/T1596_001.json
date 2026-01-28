@@ -1,10 +1,6 @@
 {
-    "event_id": "596e8b75-63e5-4338-bef7-2049e4314959",
-    "timestamp": "2026-01-28T07:25:55.534631",
+    "event_id": "15d37320-5e15-4879-8f23-480418d78c3f",
+    "timestamp": "2026-01-28T07:46:42.345472",
     "Product": "windows",
-    "Service": "sysmon",
-    "Source": "Security",
-    "username": "NT AUTHORITY\\SYSTEM",
-    "Image": "\\Nmap\\",
-    "User": "svc_soc"
+    "Service": "sysmon"
 }

@@ -1,13 +1,9 @@
 {
-    "event_id": "43f82cea-6283-4610-80ef-29c95ee74948",
-    "timestamp": "2026-01-28T07:25:55.797538",
+    "event_id": "051a9fe3-a438-4cd7-a307-c2775eda8fea",
+    "timestamp": "2026-01-28T07:46:42.602291",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "url": "microsoft.com",
-    "url_domain_age": 30,
-    "url_reputation": "low",
-    "email_content_type": "text/html",
-    "sender_display_name": "Microsoft",
-    "sender_domain": "microsoft.com"
+    "url": "bit.ly/",
+    "url_domain_age": "30",
+    "url_reputation": "low"
 }

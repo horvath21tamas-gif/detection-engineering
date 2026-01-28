@@ -1,10 +1,7 @@
 {
-    "event_id": "7b372da1-40af-45bb-8436-11835324f666",
-    "timestamp": "2026-01-28T07:25:55.407471",
+    "event_id": "fbfa48b4-0034-4e96-9037-299b53b67feb",
+    "timestamp": "2026-01-28T07:46:42.220875",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "MigLog",
-    "Image": "\\migwiz.exe",
-    "ParentImage": "\\CcmExec.exe"
+    "CommandLine": "copy "
 }

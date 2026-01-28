@@ -1,10 +1,7 @@
 {
-    "event_id": "4e23d828-e6f1-486b-9637-78653d89b53d",
-    "timestamp": "2026-01-28T07:25:55.329470",
+    "event_id": "7ef72d77-a477-4e87-abb0-3e03a7a1cd5f",
+    "timestamp": "2026-01-28T07:46:42.145408",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "ParentImage": "\\consent.exe",
-    "Image": "\\Users\\",
-    "username": "NT AUTHORITY\\SYSTEM"
+    "Image": "\\cmd.exe"
 }

@@ -1,11 +1,6 @@
 {
-    "event_id": "648c93ea-944a-404c-b5f7-482ee708f022",
-    "timestamp": "2026-01-28T07:25:55.612212",
+    "event_id": "5bd4ba97-7ac4-4400-bb56-c47072306546",
+    "timestamp": "2026-01-28T07:46:42.421427",
     "Product": "windows",
-    "Service": "sysmon",
-    "Source": "Security",
-    "User": "mkt_automation",
-    "CommandLine": "localhost",
-    "ParentImage": "\\explorer.exe",
-    "condition": "not selection_headless_automation"
+    "Service": "sysmon"
 }

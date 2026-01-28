@@ -1,10 +1,7 @@
 {
-    "event_id": "9a3e340f-f6a1-411a-9c63-9b09d3a927c5",
-    "timestamp": "2026-01-28T07:25:55.771439",
+    "event_id": "65f61e45-520f-4ad5-bf94-fd2995be79ac",
+    "timestamp": "2026-01-28T07:46:42.576625",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "--type=renderer",
-    "ParentImage": "\\code.exe",
-    "condition": "not selection_specialized_tools"
+    "CommandLine": "google.com/search"
 }

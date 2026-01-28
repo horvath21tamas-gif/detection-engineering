@@ -1,11 +1,7 @@
 {
-    "event_id": "bb9ef934-abb4-480a-969b-388bc9882c8f",
-    "timestamp": "2026-01-28T07:25:55.304022",
+    "event_id": "919af9cc-e901-4f04-9c0e-8a27ad79d045",
+    "timestamp": "2026-01-28T07:46:42.120726",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "--type=",
-    "Image": "\\chrome.exe",
-    "ParentImage": "\\services.exe",
-    "username": "NT AUTHORITY\\SYSTEM"
+    "CommandLine": "/.git/"
 }

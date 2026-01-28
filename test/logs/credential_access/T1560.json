@@ -1,9 +1,7 @@
 {
-    "event_id": "49078928-736b-439a-bed1-df7f7d4d6a64",
-    "timestamp": "2026-01-28T07:25:55.582608",
+    "event_id": "b409f0df-db19-41f0-8275-0e95ce0df481",
+    "timestamp": "2026-01-28T07:46:42.392584",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "\\Microsoft\\Windows\\SoftwareDistribution\\",
-    "ParentImage": "\\msiexec.exe"
+    "CommandLine": "\\AppData\\"
 }

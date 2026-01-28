@@ -1,9 +1,7 @@
 {
-    "event_id": "3c34edf1-8b19-4076-a13b-59789cb1a4a6",
-    "timestamp": "2026-01-28T07:25:55.430593",
+    "event_id": "caaf227b-a73d-4ed1-b2fc-96a373f33f07",
+    "timestamp": "2026-01-28T07:46:42.243489",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "localhost",
-    "ParentImage": "\\services.exe"
+    "CommandLine": ".pfx"
 }

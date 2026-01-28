@@ -1,11 +1,6 @@
 {
-    "event_id": "f27b5f0b-df7c-453e-a002-eab2b679e796",
-    "timestamp": "2026-01-28T07:25:55.712293",
+    "event_id": "5a318e7e-d839-4fae-bbf6-14f86f776a13",
+    "timestamp": "2026-01-28T07:46:42.518642",
     "Product": "windows",
-    "Service": "sysmon",
-    "Source": "Security",
-    "ServiceName": "PSEXECSVC",
-    "Computer": "MGMT-",
-    "User": "svc_",
-    "Image": "\\Windows\\CCM\\"
+    "Service": "sysmon"
 }

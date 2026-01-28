@@ -1,13 +1,8 @@
 {
-    "event_id": "610ef5b6-41e7-4606-bd12-5996e3e5352e",
-    "timestamp": "2026-01-28T07:25:55.653549",
+    "event_id": "60e5a6e4-98cf-42a0-ae1f-6e4a9f12ded6",
+    "timestamp": "2026-01-28T07:46:42.461822",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "ParentImage": "\\explorer.exe",
-    "Image": "\\System32\\ServerManager.exe",
-    "username": "NT AUTHORITY\\SYSTEM",
-    "CommandLine": " /RecordAdd ",
-    "User": "svc_dns_mgr",
-    "condition": "not selection_dns_critical_ops"
+    "ParentImage": "\\dns.exe",
+    "Image": "\\cmd.exe"
 }

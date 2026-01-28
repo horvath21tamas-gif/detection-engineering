@@ -1,9 +1,8 @@
 {
-    "event_id": "8e22ea66-c578-451d-b2b5-6395d028aecc",
-    "timestamp": "2026-01-28T07:25:55.674551",
+    "event_id": "ec25042a-8116-491d-9fae-53552ff3a2ad",
+    "timestamp": "2026-01-28T07:46:42.481510",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
     "CommandLine": "\\AppData\\Local\\Temp\\",
     "Image": "\\csc.exe"
 }

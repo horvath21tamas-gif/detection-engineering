@@ -1,9 +1,7 @@
 {
-    "event_id": "2c4e6246-9b65-4c3a-a387-5a80c231a558",
-    "timestamp": "2026-01-28T07:25:55.451189",
+    "event_id": "7e1bf017-fc84-4516-9aa0-009e51811353",
+    "timestamp": "2026-01-28T07:46:42.263383",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "ImageLoaded": "user32.dll",
     "Image": "\\Users\\"
 }

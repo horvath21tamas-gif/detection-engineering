@@ -1,12 +1,11 @@
 {
-    "event_id": "9a631667-ecbb-4d69-9ac9-ee3364662a17",
-    "timestamp": "2026-01-28T07:25:55.701771",
+    "event_id": "fc969439-1580-4903-8061-2e07f5977d57",
+    "timestamp": "2026-01-28T07:46:42.508269",
     "Product": "generic",
     "Service": "sysmon",
-    "Source": "Security",
-    "SrcIp": "203.0.113.10",
-    "UserAgent": "googlebot",
+    "SrcIp": "1.",
+    "UserAgent": "nuclei",
     "UriStem": "/.env",
     "UriQuery": "../",
-    "Status": 400
+    "Status": "400"
 }

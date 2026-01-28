@@ -1,11 +1,7 @@
 {
-    "event_id": "da57e087-e51c-438b-9b87-68801b0edc34",
-    "timestamp": "2026-01-28T07:25:55.361950",
+    "event_id": "abc121b6-1afb-48ef-920f-e1b648c19196",
+    "timestamp": "2026-01-28T07:46:42.176997",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "--check-connection",
-    "username": "NT AUTHORITY\\SYSTEM",
-    "ParentImage": "\\services.exe",
-    "Image": "\\AppData\\Local\\Temp\\"
+    "CommandLine": "ifconfig.me"
 }

@@ -1,12 +1,8 @@
 {
-    "event_id": "33d49431-3a61-4cf4-acaf-f71c61c5b641",
-    "timestamp": "2026-01-28T07:25:55.357545",
+    "event_id": "830f3357-0a19-4d1e-93e5-61fd3ca6ebde",
+    "timestamp": "2026-01-28T07:46:42.172646",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "ParentImage": "\\explorer.exe",
-    "Image": "\\Windows\\System32\\OpenSSH\\",
-    "User": "svc_monitoring",
-    "CommandLine": "localhost",
-    "condition": "not selection_tunnel_tools"
+    "ParentImage": "\\w3wp.exe",
+    "Image": "\\cmd.exe"
 }

@@ -1,9 +1,8 @@
 {
-    "event_id": "e45c7692-ef0a-4ad5-b313-73678e6dfd26",
-    "timestamp": "2026-01-28T07:25:55.471647",
+    "event_id": "9816b34b-935c-4140-94ac-acb13c1be4a6",
+    "timestamp": "2026-01-28T07:46:42.283395",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
     "TargetImage": "\\lsass.exe",
     "GrantedAccess": "0x10"
 }

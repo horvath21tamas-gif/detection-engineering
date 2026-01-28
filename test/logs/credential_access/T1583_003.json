@@ -1,9 +1,8 @@
 {
-    "event_id": "13a22ff4-2c1e-48cb-9889-06c56d3a6ed7",
-    "timestamp": "2026-01-28T07:25:55.734887",
+    "event_id": "da8041e5-265b-4c84-8d02-7e45c924cdbb",
+    "timestamp": "2026-01-28T07:46:42.540439",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
     "Image": "\\terraform.exe",
     "CommandLine": "aws_vpc"
 }

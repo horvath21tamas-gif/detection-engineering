@@ -1,10 +1,6 @@
 {
-    "event_id": "025a2322-bbff-489a-9544-8af3b69870c6",
-    "timestamp": "2026-01-28T07:25:55.476087",
+    "event_id": "cc3c3084-ae1c-4813-978c-78e9645a3f29",
+    "timestamp": "2026-01-28T07:46:42.287766",
     "Product": "windows",
-    "Service": "sysmon",
-    "Source": "Security",
-    "ParentImage": "\\explorer.exe",
-    "condition": "not selection_cert_gen",
-    "CommandLine": "1.3.6.1.5.5.7.3.1"
+    "Service": "sysmon"
 }

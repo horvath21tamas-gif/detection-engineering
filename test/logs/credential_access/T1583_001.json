@@ -1,11 +1,6 @@
 {
-    "event_id": "c9a07960-086e-4ab2-9f0b-40150e74f375",
-    "timestamp": "2026-01-28T07:25:55.687251",
+    "event_id": "b32a7230-9c72-4f66-a43f-4708ea1ce581",
+    "timestamp": "2026-01-28T07:46:42.493858",
     "Product": "windows",
-    "Service": "sysmon",
-    "Source": "Security",
-    "User": "svc_jenkins",
-    "Image": "\\Program Files\\Terraform\\",
-    "ParentImage": "\\explorer.exe",
-    "condition": "not selection_provisioning_ops"
+    "Service": "sysmon"
 }

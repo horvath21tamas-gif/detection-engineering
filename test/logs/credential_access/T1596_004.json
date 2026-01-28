@@ -1,11 +1,6 @@
 {
-    "event_id": "1e973405-543c-4282-bb52-2be1bfb075aa",
-    "timestamp": "2026-01-28T07:25:55.633963",
+    "event_id": "0ea3dd15-b3f6-481f-a56c-6a86210f9237",
+    "timestamp": "2026-01-28T07:46:42.442742",
     "Product": "windows",
-    "Service": "sysmon",
-    "Source": "Security",
-    "username": "NT AUTHORITY\\SYSTEM",
-    "Image": "\\Qualys\\",
-    "CommandLine": " -verify",
-    "User": "svc_soc"
+    "Service": "sysmon"
 }

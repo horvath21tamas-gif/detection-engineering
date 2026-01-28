@@ -1,9 +1,6 @@
 {
-    "event_id": "1d54c3b5-8d00-41aa-b25b-75bf7b12ca3f",
-    "timestamp": "2026-01-28T07:25:55.793205",
+    "event_id": "5e81e596-77cf-4ec2-98f3-da50594ab84a",
+    "timestamp": "2026-01-28T07:46:42.598002",
     "Product": "windows",
-    "Service": "security",
-    "Source": "Security",
-    "EventID": 4625,
-    "LogonType": 2
+    "Service": "security"
 }

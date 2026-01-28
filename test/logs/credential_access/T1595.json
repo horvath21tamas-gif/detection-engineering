@@ -1,12 +1,11 @@
 {
-    "event_id": "58df2df1-b7ff-47d4-ac96-510c81b16522",
-    "timestamp": "2026-01-28T07:25:55.574296",
+    "event_id": "e4049ecc-64d0-4a8b-a5fa-d69953abae8f",
+    "timestamp": "2026-01-28T07:46:42.384363",
     "Product": "generic",
     "Service": "sysmon",
-    "Source": "Security",
     "SrcIp": "1.",
     "Method": "GET",
     "UriStem": "/admin",
     "UserAgent": "curl",
-    "Status": 200
+    "Status": "200"
 }

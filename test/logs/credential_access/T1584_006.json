@@ -1,10 +1,7 @@
 {
-    "event_id": "113ae933-7d0c-4283-aa4f-21d79744a58a",
-    "timestamp": "2026-01-28T07:25:55.412258",
+    "event_id": "e3f8d5d6-b71d-4be5-bb5c-f54fc1f44bd9",
+    "timestamp": "2026-01-28T07:46:42.225596",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": ".jpg",
-    "ParentImage": "\\explorer.exe",
-    "condition": "not selection_high_risk_payloads"
+    "CommandLine": ".exe"
 }

@@ -1,11 +1,10 @@
 {
-    "event_id": "8a34899a-07c7-4f24-8ea5-b7e2cf040daa",
-    "timestamp": "2026-01-28T07:25:55.644752",
+    "event_id": "ebe2448b-8207-4e5d-907a-a302369b4cbd",
+    "timestamp": "2026-01-28T07:46:42.453208",
     "Product": "generic",
     "Service": "sysmon",
-    "Source": "Security",
-    "SrcIp": "34.",
+    "SrcIp": "1.",
     "Action": "deny",
     "Protocol": "tcp",
-    "Status": 400
+    "Status": "400"
 }

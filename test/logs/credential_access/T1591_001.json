@@ -1,11 +1,8 @@
 {
-    "event_id": "8e071cc0-7839-4a45-aadd-64749f62c2c4",
-    "timestamp": "2026-01-28T07:25:55.601400",
+    "event_id": "3c61e02f-b4e2-428a-b52b-1d5b9dc87ff5",
+    "timestamp": "2026-01-28T07:46:42.410904",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "Image": "\\acad.exe",
-    "CommandLine": ".dwg",
-    "ParentImage": "\\chrome.exe",
-    "User": "facility"
+    "Image": "\\findstr.exe",
+    "CommandLine": ".dwg"
 }

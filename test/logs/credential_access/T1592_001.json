@@ -1,9 +1,8 @@
 {
-    "event_id": "85f5956a-d19b-46a1-9c8a-372f417c2672",
-    "timestamp": "2026-01-28T07:25:55.607724",
+    "event_id": "6963029c-5519-4f39-846e-685f9a55f7c4",
+    "timestamp": "2026-01-28T07:46:42.417048",
     "Product": "generic",
     "Service": "sysmon",
-    "Source": "Security",
     "SrcIp": "1.",
     "UriStem": "/system",
     "UriQuery": "cpu",

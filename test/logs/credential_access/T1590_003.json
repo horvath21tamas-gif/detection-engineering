@@ -1,11 +1,7 @@
 {
-    "event_id": "af7b9990-804c-472a-b523-7370b866d3a7",
-    "timestamp": "2026-01-28T07:25:55.324720",
+    "event_id": "c0072744-2c6e-4a36-8174-4170bbdceb6e",
+    "timestamp": "2026-01-28T07:46:42.140798",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "use ",
-    "ParentImage": "\\services.exe",
-    "username": "NT AUTHORITY\\SYSTEM",
-    "Image": "\\AdminArsenal\\"
+    "CommandLine": "Get-NetDomainTrust"
 }

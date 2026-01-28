@@ -1,11 +1,7 @@
 {
-    "event_id": "6e313a6b-a9bb-481d-9fe7-e21d210268da",
-    "timestamp": "2026-01-28T07:25:55.811768",
+    "event_id": "0bfccd71-125c-4f27-8e3a-4dd97a0d821e",
+    "timestamp": "2026-01-28T07:46:42.616324",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "campaign",
-    "User": "hr_user",
-    "ParentImage": "\\explorer.exe",
-    "condition": "not selection_specialized_tools"
+    "CommandLine": "--headless"
 }

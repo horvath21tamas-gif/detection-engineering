@@ -1,10 +1,9 @@
 {
-    "event_id": "e6538ea7-96ac-47fc-98c9-5d455b3bba77",
-    "timestamp": "2026-01-28T07:25:55.753833",
+    "event_id": "673a6f48-9da0-4268-bd15-0af80e711dbb",
+    "timestamp": "2026-01-28T07:46:42.559130",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "Image": "\\Windows\\CCM\\",
+    "Image": "\\cmd.exe",
     "CommandLine": "&",
     "ParentImage": "\\explorer.exe"
 }

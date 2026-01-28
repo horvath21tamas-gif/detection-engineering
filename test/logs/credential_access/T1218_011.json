@@ -1,10 +1,8 @@
 {
-    "event_id": "bdfc3959-18ce-4041-bf4a-f9617ed7f682",
-    "timestamp": "2026-01-28T07:25:55.664796",
+    "event_id": "3c6b88cf-f498-4680-b0d7-7631f16df3d7",
+    "timestamp": "2026-01-28T07:46:42.472065",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "Image": "\\rundll32.exe",
     "CommandLine": "\\Users\\",
     "ParentImage": "\\powershell.exe"
 }

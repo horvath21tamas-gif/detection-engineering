@@ -1,11 +1,8 @@
 {
-    "event_id": "68a77ef1-5b5b-4e66-bdc7-464db0b85757",
-    "timestamp": "2026-01-28T07:25:55.678769",
+    "event_id": "65662ae4-c728-4c85-87a9-6a1a192e5f4e",
+    "timestamp": "2026-01-28T07:46:42.485571",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "EventType": "SetValue",
-    "TargetObject": "\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
     "Details": "\\AppData\\",
     "Image": "\\powershell.exe"
 }

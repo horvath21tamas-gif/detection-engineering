@@ -1,9 +1,6 @@
 {
-    "event_id": "e2d44425-f3c2-4112-8137-9c57cdc0498d",
-    "timestamp": "2026-01-28T07:25:55.744408",
+    "event_id": "dc784913-6e62-4c9a-8028-0d3e9d6c1747",
+    "timestamp": "2026-01-28T07:46:42.549761",
     "Product": "windows",
-    "Service": "sysmon",
-    "Source": "Security",
-    "ParentImage": "\\code.exe",
-    "condition": "not selection_bot_tools"
+    "Service": "sysmon"
 }

@@ -1,9 +1,8 @@
 {
-    "event_id": "9f834e64-2562-4cfa-8056-f0c7b334fbec",
-    "timestamp": "2026-01-28T07:25:55.339372",
+    "event_id": "b14ac7fe-9076-4b73-a74c-2192c5f76539",
+    "timestamp": "2026-01-28T07:46:42.154929",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
     "Image": "\\powershell.exe",
     "CommandLine": "IEX"
 }

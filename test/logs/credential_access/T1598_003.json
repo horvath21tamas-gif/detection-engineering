@@ -1,11 +1,8 @@
 {
-    "event_id": "4e93df2d-7f99-4b8e-bb63-423b954c9e34",
-    "timestamp": "2026-01-28T07:25:55.823640",
+    "event_id": "6dc29f86-83fe-465f-b425-4eed4db60cf0",
+    "timestamp": "2026-01-28T07:46:42.627683",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "Image": "\\Windows\\AdminArsenal\\",
-    "CommandLine": "update",
-    "ParentImage": "\\CcmExec.exe",
-    "username": "NT AUTHORITY\\SYSTEM"
+    "Image": "\\msg.exe",
+    "CommandLine": "approve"
 }

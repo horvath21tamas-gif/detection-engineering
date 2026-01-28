@@ -1,13 +1,12 @@
 {
-    "event_id": "8055b1c8-15f2-4e98-946b-7aeadddb3c88",
-    "timestamp": "2026-01-28T07:25:55.557184",
+    "event_id": "b990b51f-847f-45b7-b76f-619bd1ffb4b9",
+    "timestamp": "2026-01-28T07:46:42.367823",
     "Product": "generic",
     "Service": "sysmon",
-    "Source": "Security",
     "SrcIp": "1.",
     "UriStem": "/api/auth",
     "RequestBody": "username",
     "Method": "POST",
     "UserAgent": "curl",
-    "Status": 401
+    "Status": "401"
 }

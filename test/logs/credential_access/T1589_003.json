@@ -1,12 +1,11 @@
 {
-    "event_id": "fcfc8e31-999b-4bdc-848a-c60801b74f03",
-    "timestamp": "2026-01-28T07:25:55.550731",
+    "event_id": "7a81d1e6-ca44-49ce-9d53-c42eb7588dc0",
+    "timestamp": "2026-01-28T07:46:42.361440",
     "Product": "generic",
     "Service": "sysmon",
-    "Source": "Security",
     "SrcIp": "1.",
     "UriStem": "/search",
     "UriQuery": "site:",
     "UserAgent": "curl",
-    "Status": 200
+    "Status": "200"
 }

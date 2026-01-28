@@ -1,9 +1,6 @@
 {
-    "event_id": "6695ea27-0649-4eb4-8570-e0688d8b4522",
-    "timestamp": "2026-01-28T07:25:55.388589",
+    "event_id": "3359d389-f20b-47d6-b57d-9856e19d16dd",
+    "timestamp": "2026-01-28T07:46:42.202945",
     "Product": "windows",
-    "Service": "system",
-    "Source": "Security",
-    "EventID": 7036,
-    "ServiceName": "WinDefend"
+    "Service": "system"
 }

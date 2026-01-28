@@ -1,10 +1,6 @@
 {
-    "event_id": "7839508d-34ab-495d-872e-75d5cbd35630",
-    "timestamp": "2026-01-28T07:25:55.802270",
+    "event_id": "ef35fd39-f016-4436-b319-09353bdfb6f4",
+    "timestamp": "2026-01-28T07:46:42.606998",
     "Product": "windows",
-    "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "sandbox",
-    "ParentImage": "\\explorer.exe",
-    "condition": "not selection_vps_control"
+    "Service": "sysmon"
 }

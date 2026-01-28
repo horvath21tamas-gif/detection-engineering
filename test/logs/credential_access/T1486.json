@@ -1,10 +1,7 @@
 {
-    "event_id": "080e6a11-8a17-4272-9a63-01f04389ad1d",
-    "timestamp": "2026-01-28T07:25:55.739705",
+    "event_id": "516e221c-21ed-4858-8f2e-ff035b8a2d93",
+    "timestamp": "2026-01-28T07:46:42.545210",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "Image": "\\sc.exe",
-    "CommandLine": "stop",
     "ParentImage": "\\cmd.exe"
 }

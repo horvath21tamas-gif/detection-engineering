@@ -1,11 +1,6 @@
 {
-    "event_id": "418615c4-4e4e-46a2-8656-75dbc7543228",
-    "timestamp": "2026-01-28T07:25:55.544210",
+    "event_id": "0863f0ca-c40e-4e11-b8fc-70f605ab6277",
+    "timestamp": "2026-01-28T07:46:42.355010",
     "Product": "windows",
-    "Service": "sysmon",
-    "Source": "Security",
-    "username": "NT AUTHORITY\\SYSTEM",
-    "Image": "\\chrome.exe",
-    "ParentImage": "\\code.exe",
-    "CommandLine": "--config"
+    "Service": "sysmon"
 }

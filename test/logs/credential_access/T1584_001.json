@@ -1,10 +1,7 @@
 {
-    "event_id": "73fe2d5b-deaf-46de-be6e-dd1e5607dc8c",
-    "timestamp": "2026-01-28T07:25:55.298830",
+    "event_id": "e63412e8-ed29-40be-b853-fda3b8925f2e",
+    "timestamp": "2026-01-28T07:46:42.115740",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "TXT",
-    "ParentImage": "\\explorer.exe",
-    "condition": "not selection_domain_hijacking"
+    "CommandLine": "--batch"
 }

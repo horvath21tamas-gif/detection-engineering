@@ -1,11 +1,7 @@
 {
-    "event_id": "9230280e-b63d-43e0-81dd-2b6d57aa2b08",
-    "timestamp": "2026-01-28T07:25:55.496200",
+    "event_id": "cf0dc4e9-7dcd-4637-ac49-c6685bf39f8e",
+    "timestamp": "2026-01-28T07:46:42.307579",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "customer_list",
-    "ParentImage": "\\services.exe",
-    "User": "fin_",
-    "username": "NT AUTHORITY\\SYSTEM"
+    "CommandLine": "customer_list"
 }

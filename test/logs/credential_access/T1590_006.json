@@ -1,10 +1,7 @@
 {
-    "event_id": "e22fd76c-ec9d-4c87-89c1-9342741fb3db",
-    "timestamp": "2026-01-28T07:25:55.393446",
+    "event_id": "3d0d8fac-4f64-4722-9e8b-133cfbf91932",
+    "timestamp": "2026-01-28T07:46:42.207372",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "localhost:",
-    "ParentImage": "\\chrome.exe",
-    "Image": "\\OneDrive.exe"
+    "CommandLine": " --banner"
 }

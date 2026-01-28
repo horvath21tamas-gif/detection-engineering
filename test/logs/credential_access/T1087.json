@@ -1,10 +1,7 @@
 {
-    "event_id": "2a62f8c8-6e3a-405d-9468-95ce85847609",
-    "timestamp": "2026-01-28T07:25:55.348341",
+    "event_id": "dcb4f1df-4312-42ab-b2bb-b291b7c6c5dc",
+    "timestamp": "2026-01-28T07:46:42.163652",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "Image": "\\cmd.exe",
-    "CommandLine": "administrators",
     "ParentImage": "\\WINWORD.EXE"
 }

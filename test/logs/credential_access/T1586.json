@@ -1,11 +1,6 @@
 {
-    "event_id": "39b1d943-9b56-425a-a303-ee837f23804a",
-    "timestamp": "2026-01-28T07:25:55.616751",
+    "event_id": "cc35f9df-ed27-429f-a53d-a60a560d894b",
+    "timestamp": "2026-01-28T07:46:42.425870",
     "Product": "windows",
-    "Service": "sysmon",
-    "Source": "Security",
-    "User": "adm_helpdesk",
-    "Image": "\\ManagementConsole\\",
-    "ParentImage": "\\explorer.exe",
-    "condition": "not selection_brute_force_tools"
+    "Service": "sysmon"
 }

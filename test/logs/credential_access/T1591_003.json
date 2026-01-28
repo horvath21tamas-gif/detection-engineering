@@ -1,11 +1,7 @@
 {
-    "event_id": "424bdb24-dcaf-4760-83f3-c1c232afe93d",
-    "timestamp": "2026-01-28T07:25:55.380226",
+    "event_id": "4fb115f5-62e3-4ae0-809d-70d261f5c49d",
+    "timestamp": "2026-01-28T07:46:42.194784",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "--update",
-    "ParentImage": "\\chrome.exe",
-    "User": "svc_deploy",
-    "Image": "\\SearchIndexer.exe"
+    "CommandLine": "confluence"
 }

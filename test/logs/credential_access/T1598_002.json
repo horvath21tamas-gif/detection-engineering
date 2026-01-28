@@ -1,11 +1,8 @@
 {
-    "event_id": "ef9cbc9d-442c-412c-8b73-003de749d0e8",
-    "timestamp": "2026-01-28T07:25:55.591993",
+    "event_id": "188755a3-e8b9-4b2c-8d83-394fc600a751",
+    "timestamp": "2026-01-28T07:46:42.401707",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "Image": "\\OneDrive.exe",
-    "CommandLine": " /background",
-    "ParentImage": "\\outlook.exe",
-    "username": "NT AUTHORITY\\SYSTEM"
+    "Image": "\\findstr.exe",
+    "CommandLine": "invoice"
 }

@@ -1,11 +1,6 @@
 {
-    "event_id": "69bd169e-baf1-435b-a69a-62e60e373c44",
-    "timestamp": "2026-01-28T07:25:55.439888",
+    "event_id": "6da3188a-66e0-402a-a38a-5a613def6094",
+    "timestamp": "2026-01-28T07:46:42.252389",
     "Product": "windows",
-    "Service": "sysmon",
-    "Source": "Security",
-    "User": "svc_iam_provisioner",
-    "Image": "\\ManagementConsole\\",
-    "ParentImage": "\\explorer.exe",
-    "condition": "not selection_cloud_identity_ops"
+    "Service": "sysmon"
 }

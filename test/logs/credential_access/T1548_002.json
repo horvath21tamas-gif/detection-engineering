@@ -1,10 +1,8 @@
 {
-    "event_id": "e3354fd1-7832-48a8-8901-28bbaa304ed8",
-    "timestamp": "2026-01-28T07:25:55.682352",
+    "event_id": "358b559c-9dd0-4a0b-8395-a94b7af86ec6",
+    "timestamp": "2026-01-28T07:46:42.489070",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "Image": "\\Windows\\CCM\\",
-    "IntegrityLevel": "High",
-    "ParentImage": "\\fodhelper.exe"
+    "ParentImage": "\\fodhelper.exe",
+    "Image": "\\cmd.exe"
 }

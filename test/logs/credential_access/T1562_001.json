@@ -1,9 +1,7 @@
 {
-    "event_id": "6f0e3b76-d3c4-4674-94f0-16431c027b21",
-    "timestamp": "2026-01-28T07:25:55.758466",
+    "event_id": "d827535d-6da2-4478-9ca5-f1788f9b9d5e",
+    "timestamp": "2026-01-28T07:46:42.563640",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "Specific_Safe_Admin_Script.ps1",
-    "ParentImage": "\\CcmExec.exe"
+    "CommandLine": " -disablere"
 }

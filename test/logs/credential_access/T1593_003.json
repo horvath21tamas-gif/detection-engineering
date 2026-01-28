@@ -1,12 +1,7 @@
 {
-    "event_id": "e6cf528a-7f2d-4e89-a0c2-64eef7866495",
-    "timestamp": "2026-01-28T07:25:55.567279",
+    "event_id": "13261355-7d99-4616-a695-230ea919cb69",
+    "timestamp": "2026-01-28T07:46:42.377539",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "linkedin.com/in/",
-    "ParentImage": "\\explorer.exe",
-    "condition": "not selection_specialized_tools",
-    "Image": "\\LinkedInRecruiter\\",
-    "username": "NT AUTHORITY\\SYSTEM"
+    "CommandLine": "linkedin.com/in/"
 }

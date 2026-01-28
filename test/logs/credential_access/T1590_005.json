@@ -1,9 +1,8 @@
 {
-    "event_id": "a9f1e82a-8125-4188-ac13-0c1bcd123950",
-    "timestamp": "2026-01-28T07:25:55.696008",
+    "event_id": "fcd892ee-4707-4127-ba1c-69327dd7016b",
+    "timestamp": "2026-01-28T07:46:42.502512",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
     "Image": "\\gcloud.exe",
     "CommandLine": " projects list"
 }

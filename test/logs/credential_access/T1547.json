@@ -1,9 +1,8 @@
 {
-    "event_id": "c450675c-df8f-415b-ac93-93794684aed7",
-    "timestamp": "2026-01-28T07:25:55.519225",
+    "event_id": "e858a630-72ac-4c7a-a3be-0c11bc9b52b5",
+    "timestamp": "2026-01-28T07:46:42.330406",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
     "Image": "\\reg.exe",
     "CommandLine": "\\AppData\\Local\\Temp\\"
 }

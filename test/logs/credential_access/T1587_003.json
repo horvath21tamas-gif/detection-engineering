@@ -1,11 +1,7 @@
 {
-    "event_id": "e7ff82e0-f835-4cd1-a22a-85007c83da80",
-    "timestamp": "2026-01-28T07:25:55.384552",
+    "event_id": "eb9a1431-2e2d-4f56-bdb7-8ef9e585af2a",
+    "timestamp": "2026-01-28T07:46:42.199016",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "\\Users\\Public\\",
-    "Image": "\\Program Files\\",
-    "User": "svc_pki",
-    "ParentImage": "\\msiexec.exe"
+    "CommandLine": "\\Users\\Public\\"
 }

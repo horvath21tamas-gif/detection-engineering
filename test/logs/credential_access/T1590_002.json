@@ -1,10 +1,8 @@
 {
-    "event_id": "dbdaf15d-7b26-4dad-8ec0-02a78e5cb5f6",
-    "timestamp": "2026-01-28T07:25:55.784861",
+    "event_id": "5d87fedd-592b-446d-906f-36f20bd0e1c2",
+    "timestamp": "2026-01-28T07:46:42.589815",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "CommandLine": "nslookup.exe",
-    "Image": "\\dig.exe",
-    "User": "svc_monitoring"
+    "CommandLine": " /enumzones",
+    "Image": "\\dig.exe"
 }

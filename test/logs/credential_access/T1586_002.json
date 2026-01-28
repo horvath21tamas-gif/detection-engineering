@@ -1,11 +1,6 @@
 {
-    "event_id": "b359d0bd-b430-4a21-974f-840055f57444",
-    "timestamp": "2026-01-28T07:25:55.343662",
+    "event_id": "c8247b23-0b6c-4777-ace1-7973365b4863",
+    "timestamp": "2026-01-28T07:46:42.159115",
     "Product": "windows",
-    "Service": "sysmon",
-    "Source": "Security",
-    "ParentImage": "\\explorer.exe",
-    "condition": "not selection_powershell_rules",
-    "User": "svc_exchange_migration",
-    "username": "NT AUTHORITY\\SYSTEM"
+    "Service": "sysmon"
 }

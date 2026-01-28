@@ -1,9 +1,8 @@
 {
-    "event_id": "8a058807-c686-4690-8961-89dece4df217",
-    "timestamp": "2026-01-28T07:25:55.464468",
+    "event_id": "0f3aa668-79a8-4a06-ab4e-b39c5ec214a0",
+    "timestamp": "2026-01-28T07:46:42.276302",
     "Product": "generic",
     "Service": "sysmon",
-    "Source": "Security",
     "SrcIp": "1.",
     "UriStem": "/cgi-bin",
     "UriQuery": "firmware",

@@ -1,10 +1,7 @@
 {
-    "event_id": "18f5feb2-9afc-45a4-8e91-a149e93bad54",
-    "timestamp": "2026-01-28T07:25:55.468347",
+    "event_id": "8db8e608-1731-4482-b78c-d83702224618",
+    "timestamp": "2026-01-28T07:46:42.280123",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "Image": "\\mshta.exe",
-    "CommandLine": "http://",
     "ParentImage": "\\powershell.exe"
 }

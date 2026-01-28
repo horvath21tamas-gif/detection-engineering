@@ -1,10 +1,8 @@
 {
-    "event_id": "6aca42bb-4bb7-4d41-af51-013937ac5c15",
-    "timestamp": "2026-01-28T07:25:55.505277",
+    "event_id": "da094409-299c-4f0d-9967-1f5311eaea0a",
+    "timestamp": "2026-01-28T07:46:42.316550",
     "Product": "windows",
     "Service": "sysmon",
-    "Source": "Security",
-    "Image": "\\powershell.exe",
     "CommandLine": "-nop",
     "ParentImage": "\\cmd.exe"
 }

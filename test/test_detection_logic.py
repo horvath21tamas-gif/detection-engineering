@@ -2,77 +2,102 @@ import pytest
 import yaml
 import json
 import os
+import re
 
 def get_test_pairs():
+    """
+    Összepárosítja a Sigma szabályokat a hozzájuk tartozó JSON log mintákkal.
+    Csak azokat a párokat adja vissza, ahol a log fájl létezik.
+    """
     pairs = []
-    for root, _, files in os.walk('rules/sigma'):
+    sigma_root = 'rules/sigma'
+    log_root = 'test/logs'
+    
+    if not os.path.exists(sigma_root):
+        return pairs
+
+    for root, _, files in os.walk(sigma_root):
         for file in files:
             if file.endswith(('.yml', '.yaml')):
                 rule_path = os.path.join(root, file)
-                rel_path = os.path.relpath(root, 'rules/sigma')
-                log_file = file.replace('.yml', '.json').replace('.yaml', '.json')
-                log_path = os.path.join('test/logs', rel_path, log_file)
+                
+                # Relatív útvonal kiszámítása a mappaszerkezet követéséhez
+                rel_path = os.path.relpath(root, sigma_root)
+                log_name = file.rsplit('.', 1)[0] + '.json'
+                log_path = os.path.join(log_root, rel_path, log_name)
+                
                 if os.path.exists(log_path):
                     pairs.append((rule_path, log_path))
     return pairs
 
-def evaluate_block(block_data, log):
-    if not isinstance(block_data, dict): return False
+def match_value(expected, actual):
+    """
+    Alapvető Sigma illesztési logika: támogatja a listákat és a wildcards-okat (*).
+    """
+    if actual is None:
+        return False
     
-    # Minden kulcs-érték párt ellenőrizni kell a blokkon belül (AND kapcsolat)
-    for field_with_modifier, expected_values in block_data.items():
-        # Sigma mező tisztítása (pl. Image|contains -> Image)
-        clean_field = field_with_modifier.split('|')[0]
-        if not isinstance(expected_values, list):
-            expected_values = [expected_values]
+    actual = str(actual).lower()
+    
+    if isinstance(expected, list):
+        return any(match_value(e, actual) for e in expected)
+    
+    expected = str(expected).lower()
+    
+    if '*' in expected:
+        # Sigma wildcard átalakítása regex-re
+        pattern = re.escape(expected).replace(r'\*', '.*')
+        return re.search(f"^{pattern}$", actual) is not None
+    
+    return expected == actual
+
+def evaluate_block(block, log):
+    """
+    Kiértékel egy Sigma detekciós blokkot (pl. selection).
+    Egy blokkon belül minden mezőnek egyeznie kell (AND logika).
+    """
+    if not isinstance(block, dict):
+        return False
         
-        # Értékek keresése a logban
-        found_in_field = False
+    for field_mod, expected_val in block.items():
+        # Eltávolítjuk a módosítókat (pl. |contains), csak a mezőnevet nézzük
+        field = field_mod.split('|')[0]
         
-        # 1. Próbáljuk meg közvetlen mezőként (Case-insensitive)
-        actual_val = None
-        for k, v in log.items():
-            if k.lower() == clean_field.lower():
-                actual_val = v
-                break
+        # Kis/nagybetű független mezőkeresés a logban
+        actual_val = next((v for k, v in log.items() if k.lower() == field.lower()), None)
         
-        if actual_val:
-            val_str = str(actual_val).lower()
-            if any(str(v).lower().replace('*', '') in val_str for v in expected_values):
-                found_in_field = True
-        
-        # 2. Ha nincs meg, nézzük meg a raw_data-ban (biztonsági háló)
-        if not found_in_field and 'raw_data' in log:
-            raw_str = str(log['raw_data']).lower()
-            if any(str(v).lower().replace('*', '') in raw_str for v in expected_values):
-                found_in_field = True
-                
-        if not found_in_field:
-            return False # Ha egy mező sem stimmel a blokkból, a blokk False
-            
+        if not match_value(expected_val, actual_val):
+            return False
     return True
 
 @pytest.mark.parametrize("rule_path, log_path", get_test_pairs())
 def test_sigma_logic(rule_path, log_path):
+    """
+    Teszteli a Sigma szabály logikáját egy adott JSON log fájlon.
+    """
     with open(rule_path, 'r', encoding='utf-8') as f:
         rule = yaml.safe_load(f)
     with open(log_path, 'r', encoding='utf-8') as f:
         log = json.load(f)
 
     detection = rule.get('detection', {})
-    condition = detection.get('condition', 'any of selection*').lower()
+    condition = detection.get('condition', '').lower()
     
-    # Minden detekciós blokk kiértékelése
-    results = {k: evaluate_block(v, log) for k, v in detection.items() 
-               if k != 'condition' and isinstance(v, dict)}
+    # Minden blokk kiértékelése (kivéve a condition-t)
+    results = {
+        key: evaluate_block(val, log) 
+        for key, val in detection.items() 
+        if key != 'condition' and isinstance(val, (dict, list))
+    }
 
-    # Logikai motor (Egyszerűsített Sigma condition parser)
-    if '1 of' in condition or 'any of' in condition:
-        matched = any(results.values())
-    elif 'all of' in condition:
-        matched = all(results.values()) if results else False
+    # Egyszerűsített Sigma feltételkezelő
+    if not condition or 'any of selection*' in condition:
+        matched = any(v for k, v in results.items() if k.startswith('selection'))
+    elif 'all of selection*' in condition:
+        selections = [v for k, v in results.items() if k.startswith('selection')]
+        matched = all(selections) if selections else False
     else:
-        # Ha konkrét nevek vannak, megnézzük a selection-öket
-        matched = any(results.get(k, False) for k in results if 'selection' in k)
+        # Ha a feltétel konkrét blokkneveket tartalmaz
+        matched = any(results.values())
 
-    assert matched, f"DETECTION FAILED: {os.path.basename(rule_path)}\nLog: {json.dumps(log, indent=2)}"
+    assert matched, f"DETEKCIÓ SIKERTELEN: {os.path.basename(rule_path)}. A log nem triggerelte a szabályt."

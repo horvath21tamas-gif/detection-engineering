@@ -6,6 +6,5 @@
     "Source": "Security",
     "Image": "\\wmic.exe",
     "CommandLine": "cmd.exe",
-    "ParentImage": "\\Windows\\CCM\\",
-    "User": "NT AUTHORITY\\SYSTEM"
+    "ParentImage": "\\cmd.exe"
 }

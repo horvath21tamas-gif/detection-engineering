@@ -7,6 +7,5 @@
     "EventType": "SetValue",
     "TargetObject": "\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
     "Details": "\\AppData\\",
-    "Image": "\\Windows\\Installer\\",
-    "User": "SYSTEM"
+    "Image": "\\powershell.exe"
 }

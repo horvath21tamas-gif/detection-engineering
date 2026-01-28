@@ -5,6 +5,6 @@
     "Service": "sysmon",
     "Source": "Security",
     "Image": "\\rundll32.exe",
-    "CommandLine": "\\Windows\\System32\\",
-    "ParentImage": "\\Windows\\Installer\\"
+    "CommandLine": "\\Users\\",
+    "ParentImage": "\\powershell.exe"
 }

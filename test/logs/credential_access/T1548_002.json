@@ -6,6 +6,5 @@
     "Source": "Security",
     "Image": "\\Windows\\CCM\\",
     "IntegrityLevel": "High",
-    "ParentImage": "\\fodhelper.exe",
-    "User": "SYSTEM"
+    "ParentImage": "\\fodhelper.exe"
 }

@@ -6,6 +6,5 @@
     "Source": "Security",
     "Image": "\\powershell.exe",
     "CommandLine": "\\Users\\",
-    "ParentImage": "\\Windows\\CCM\\",
-    "User": "SYSTEM"
+    "ParentImage": "\\WINWORD.EXE"
 }

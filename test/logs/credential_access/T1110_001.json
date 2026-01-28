@@ -5,7 +5,5 @@
     "Service": "security",
     "Source": "Security",
     "EventID": 4625,
-    "LogonType": 2,
-    "TargetUserName": "svc_",
-    "WorkstationName": "EXCHANGE"
+    "LogonType": 2
 }

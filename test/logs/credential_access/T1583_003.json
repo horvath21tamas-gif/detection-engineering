@@ -5,7 +5,5 @@
     "Service": "sysmon",
     "Source": "Security",
     "Image": "\\terraform.exe",
-    "CommandLine": "aws_vpc",
-    "ParentImage": "\\explorer.exe",
-    "condition": "not selection_network_ops"
+    "CommandLine": "aws_vpc"
 }

@@ -6,6 +6,5 @@
     "Source": "Security",
     "Image": "\\bitsadmin.exe",
     "CommandLine": "\\Users\\",
-    "ParentImage": "\\Windows\\CCM\\",
-    "User": "SYSTEM"
+    "ParentImage": "\\powershell.exe"
 }

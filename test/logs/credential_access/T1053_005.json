@@ -6,6 +6,5 @@
     "Source": "Security",
     "Image": "\\schtasks.exe",
     "CommandLine": "\\Users\\",
-    "ParentImage": "\\Windows\\CCM\\",
-    "User": "NT AUTHORITY\\SYSTEM"
+    "ParentImage": "\\cmd.exe"
 }

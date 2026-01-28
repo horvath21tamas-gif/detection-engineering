@@ -5,7 +5,7 @@
     "Service": "sysmon",
     "Source": "Security",
     "SrcIp": "1.",
-    "UriStem": "/api",
+    "UriStem": "/cgi-bin",
     "UriQuery": "firmware",
-    "UserAgent": "nessus"
+    "UserAgent": "curl"
 }

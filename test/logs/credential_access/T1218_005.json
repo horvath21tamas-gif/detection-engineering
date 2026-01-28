@@ -6,6 +6,5 @@
     "Source": "Security",
     "Image": "\\mshta.exe",
     "CommandLine": "http://",
-    "ParentImage": "\\Windows\\Installer\\",
-    "User": "SYSTEM"
+    "ParentImage": "\\powershell.exe"
 }

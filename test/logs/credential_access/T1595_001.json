@@ -7,7 +7,5 @@
     "SrcIp": "34.",
     "Action": "deny",
     "Protocol": "tcp",
-    "Status": 400,
-    "DestIp": "10.",
-    "UserAgent": "googlebot"
+    "Status": 400
 }

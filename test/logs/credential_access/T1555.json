@@ -6,5 +6,5 @@
     "Source": "Security",
     "TargetFileName": "logins.json",
     "AccessMask": "0x1",
-    "Image": "\\Veeam\\"
+    "Image": "\\powershell.exe"
 }

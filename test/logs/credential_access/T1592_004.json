@@ -6,7 +6,7 @@
     "Source": "Security",
     "SrcIp": "1.",
     "HttpMethod": "HEAD",
-    "UriStem": ".css",
-    "UserAgent": "nessus",
+    "UriStem": "/",
+    "UserAgent": "curl",
     "RequestHeaders": "Accept-Language"
 }

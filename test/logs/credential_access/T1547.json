@@ -5,5 +5,5 @@
     "Service": "sysmon",
     "Source": "Security",
     "Image": "\\reg.exe",
-    "CommandLine": "\\Microsoft\\Windows\\CloudExperienceHost"
+    "CommandLine": "\\AppData\\Local\\Temp\\"
 }

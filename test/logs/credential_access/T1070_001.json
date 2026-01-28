@@ -6,6 +6,5 @@
     "Source": "Security",
     "Image": "\\wevtutil.exe",
     "CommandLine": "cl Security",
-    "ParentImage": "\\Windows\\CCM\\",
-    "User": "SYSTEM"
+    "ParentImage": "\\cmd.exe"
 }

@@ -6,7 +6,5 @@
     "Source": "Security",
     "ParentImage": "\\WINWORD.EXE",
     "Image": "\\cmd.exe",
-    "CommandLine": "\\Users\\",
-    "ParentCommandLine": "\\Addins\\",
-    "User": "SYSTEM"
+    "CommandLine": "\\Users\\"
 }

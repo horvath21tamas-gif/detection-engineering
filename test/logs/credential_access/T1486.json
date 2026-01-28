@@ -6,6 +6,5 @@
     "Source": "Security",
     "Image": "\\sc.exe",
     "CommandLine": "stop",
-    "ParentImage": "\\Veeam\\",
-    "User": "SYSTEM"
+    "ParentImage": "\\cmd.exe"
 }

@@ -6,7 +6,5 @@
     "Source": "Security",
     "cs-uri-query": "<script",
     "cs-method": "POST",
-    "sc-status": 200,
-    "cs-user-agent": "sqlmap",
-    "cs-uri-stem": ".js"
+    "sc-status": 200
 }

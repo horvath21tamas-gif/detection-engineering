@@ -5,6 +5,5 @@
     "Service": "sysmon",
     "Source": "Security",
     "Image": "\\schtasks.exe",
-    "CommandLine": "\\Microsoft\\Windows\\",
-    "User": "SYSTEM"
+    "CommandLine": "\\AppData\\"
 }

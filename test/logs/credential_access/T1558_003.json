@@ -6,9 +6,5 @@
     "Source": "Security",
     "EventID": 4769,
     "Status": "0x0",
-    "TicketEncryptionType": "0x17",
-    "TargetUserName": "$",
-    "ServiceCode": "0x11",
-    "ServiceName": "$",
-    "IpAddress": "::1"
+    "TicketEncryptionType": "0x17"
 }

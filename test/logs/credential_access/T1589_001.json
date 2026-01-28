@@ -5,9 +5,9 @@
     "Service": "sysmon",
     "Source": "Security",
     "SrcIp": "1.",
-    "UriStem": "/sso",
+    "UriStem": "/api/auth",
     "RequestBody": "username",
     "Method": "POST",
-    "UserAgent": "nessus",
+    "UserAgent": "curl",
     "Status": 401
 }

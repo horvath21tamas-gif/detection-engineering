@@ -6,6 +6,5 @@
     "Source": "Security",
     "Image": "\\vssadmin.exe",
     "CommandLine": "delete shadows",
-    "ParentImage": "\\Veeam\\",
-    "User": "SYSTEM"
+    "ParentImage": "\\cmd.exe"
 }

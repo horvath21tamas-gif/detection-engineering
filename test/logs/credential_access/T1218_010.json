@@ -6,6 +6,5 @@
     "Source": "Security",
     "Image": "\\regsvr32.exe",
     "CommandLine": "\\Users\\",
-    "ParentImage": "\\Windows\\Installer\\",
-    "User": "SYSTEM"
+    "ParentImage": "\\powershell.exe"
 }

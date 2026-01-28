@@ -5,8 +5,8 @@
     "Service": "sysmon",
     "Source": "Security",
     "SrcIp": "1.",
-    "UriStem": ".css",
+    "UriStem": "/login",
     "UriQuery": "user=",
     "Status": 401,
-    "UserAgent": "nessus"
+    "UserAgent": "python"
 }

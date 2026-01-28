@@ -6,8 +6,8 @@
     "Source": "Security",
     "SrcIp": "1.",
     "Method": "GET",
-    "UriStem": ".css",
+    "UriStem": "/version",
     "UriQuery": "version",
-    "UserAgent": "nessus",
+    "UserAgent": "curl",
     "Status": 200
 }

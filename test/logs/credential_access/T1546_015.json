@@ -5,7 +5,6 @@
     "Service": "sysmon",
     "Source": "Security",
     "TargetObject": "\\InprocServer32",
-    "Details": "C:\\Windows\\System32\\",
-    "Image": "\\Windows\\Installer\\",
-    "User": "SYSTEM"
+    "Details": "\\Users\\",
+    "Image": "\\powershell.exe"
 }

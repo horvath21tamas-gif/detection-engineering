@@ -6,6 +6,5 @@
     "Source": "Security",
     "Image": "\\cmd.exe",
     "CommandLine": "administrators",
-    "ParentImage": "\\Windows\\CCM\\",
-    "User": "SYSTEM"
+    "ParentImage": "\\WINWORD.EXE"
 }

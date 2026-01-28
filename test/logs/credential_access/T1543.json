@@ -5,7 +5,5 @@
     "Service": "system",
     "Source": "Security",
     "EventID": 7036,
-    "ServiceName": "WinDefend",
-    "User": "SYSTEM",
-    "Image": "\\Windows\\Installer\\"
+    "ServiceName": "WinDefend"
 }

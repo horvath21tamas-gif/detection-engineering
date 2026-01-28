@@ -5,7 +5,5 @@
     "Service": "sysmon",
     "Source": "Security",
     "Image": "\\powershell.exe",
-    "CommandLine": "IEX",
-    "User": "NT AUTHORITY\\SYSTEM",
-    "ParentImage": "\\Windows\\Installer\\"
+    "CommandLine": "IEX"
 }

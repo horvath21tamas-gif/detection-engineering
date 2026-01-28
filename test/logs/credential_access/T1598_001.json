@@ -6,5 +6,5 @@
     "Source": "Security",
     "ParentImage": "\\outlook.exe",
     "Image": "\\chrome.exe",
-    "CommandLine": ".local"
+    "CommandLine": "--incognito"
 }

@@ -5,7 +5,5 @@
     "Service": "sysmon",
     "Source": "Security",
     "Image": "\\gcloud.exe",
-    "CommandLine": "--version",
-    "ParentImage": "\\jenkins.exe",
-    "User": "SVC_"
+    "CommandLine": " projects list"
 }

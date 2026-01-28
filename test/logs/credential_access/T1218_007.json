@@ -6,6 +6,5 @@
     "Source": "Security",
     "Image": "\\msiexec.exe",
     "CommandLine": "/quiet",
-    "ParentImage": "\\Google\\Update\\",
-    "User": "SYSTEM"
+    "ParentImage": "\\powershell.exe"
 }

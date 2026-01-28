@@ -6,7 +6,7 @@
     "Source": "Security",
     "SrcIp": "1.",
     "Method": "GET",
-    "UriStem": ".css",
-    "UserAgent": "nessus",
+    "UriStem": "/admin",
+    "UserAgent": "curl",
     "Status": 200
 }

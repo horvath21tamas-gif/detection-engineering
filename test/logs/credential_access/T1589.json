@@ -5,9 +5,9 @@
     "Service": "sysmon",
     "Source": "Security",
     "SrcIp": "1.",
-    "UriStem": ".css",
+    "UriStem": "/login",
     "UriQuery": "user=",
     "Method": "GET",
-    "UserAgent": "nessus",
+    "UserAgent": "curl",
     "Status": 401
 }

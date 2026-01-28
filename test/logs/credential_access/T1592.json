@@ -6,6 +6,5 @@
     "Source": "Security",
     "Image": "\\Windows\\CCM\\",
     "CommandLine": "&",
-    "ParentImage": "\\explorer.exe",
-    "User": "SYSTEM"
+    "ParentImage": "\\explorer.exe"
 }

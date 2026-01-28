@@ -1,0 +1,48 @@
+title: Potential Automated Social Media Account Establishment
+id: 7558d32a-7e31-45df-8a4c-39f79f784189
+status: stable
+description: |
+    Detects suspicious patterns of social media account registration by monitoring 
+    access to multiple sign-up endpoints from a single host or identifying 
+    non-browser processes making requests to these domains.
+author: hota05
+date: 2026-01-28
+references:
+    - https://attack.mitre.org/techniques/T1585/001/
+tags:
+    - attack.resource_development
+    - attack.t1585.001
+logsource:
+    category: network_connection # Vagy Sysmon EventID 3 / WebProxy logok
+    product: windows
+detection:
+    selection_domains:
+        DestinationHostname|contains:
+            - 'facebook.com/reg'
+            - 'accounts.google.com/signup'
+            - 'twitter.com/i/flow/signup'
+            - 'linkedin.com/signup'
+            - 'instagram.com/accounts/emailsignup'
+            - 'reddit.com/register'
+
+    selection_suspicious_processes:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\python.exe'
+            - '\curl.exe'
+            - '\wget.exe'
+
+    filter_legit_browsers:
+        Image|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+            - '\brave.exe'
+
+    condition: selection_domains and (selection_suspicious_processes or not filter_legit_browsers)
+falsepositives:
+    - Marketing automatizációs szoftverek (pl. HubSpot, Buffer), ha helyileg futnak
+    - Fejlesztők, akik API-kat tesztelnek (érdemes a forrás IP-t szűrni)
+level: high

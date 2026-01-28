@@ -1,9 +1,8 @@
 {
-    "event_id": "c7560448-d7e9-4801-b973-561a1878e50e",
-    "timestamp": "2026-01-28T06:48:18.530508",
-    "hostname": "WIN-SRV-40",
-    "source_ip": "192.168.1.98",
-    "user": "admin",
-    "domain": "CORP.LOCAL",
-    "CommandLine|contains": "telephely"
+    "event_id": "ff482f72-f6a6-4489-8ae4-46c6e1a3511c",
+    "timestamp": "2026-01-28T07:09:58.095394",
+    "Product": "windows",
+    "Service": "sysmon",
+    "Image": "\\findstr.exe",
+    "CommandLine": ".dwg"
 }

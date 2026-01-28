@@ -1,9 +1,11 @@
 {
-    "event_id": "caf658d3-b509-4d84-8500-70245e9f2031",
-    "timestamp": "2026-01-28T06:41:18.588434",
-    "hostname": "WIN-SRV-93",
-    "source_ip": "192.168.1.73",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "SrcIp|startswith": "8."
+    "event_id": "c6e5bbdb-b1fd-487c-a4ae-0cbb70dbe68d",
+    "timestamp": "2026-01-28T07:09:58.152632",
+    "Product": "generic",
+    "Service": "sysmon",
+    "SrcIp": "1.",
+    "HttpMethod": "HEAD",
+    "UriStem": "/",
+    "UserAgent": "curl",
+    "RequestHeaders": "Accept-Language"
 }

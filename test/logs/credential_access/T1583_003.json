@@ -1,9 +1,8 @@
 {
-    "event_id": "7e49f6e7-aded-42e4-93d4-c53e78c9a592",
-    "timestamp": "2026-01-28T06:03:18.662071",
-    "hostname": "WIN-SRV-38",
-    "source_ip": "192.168.1.237",
-    "user": "db_backup",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\gcloud.exe"
+    "event_id": "58e2a5be-fead-4c81-8f9c-06e6b238b76c",
+    "timestamp": "2026-01-28T07:09:58.224833",
+    "Product": "windows",
+    "Service": "sysmon",
+    "Image": "\\terraform.exe",
+    "CommandLine": "aws_vpc"
 }

@@ -1,9 +1,7 @@
 {
-    "event_id": "7f12c875-e7ab-4c0c-afe2-bec12547a232",
-    "timestamp": "2026-01-28T06:44:18.220323",
-    "hostname": "WIN-SRV-81",
-    "source_ip": "192.168.1.42",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\az.exe"
+    "event_id": "9976a2ce-71ea-4568-a758-d54990bb05e5",
+    "timestamp": "2026-01-28T07:09:57.794300",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": "--batch"
 }

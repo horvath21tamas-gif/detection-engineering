@@ -1,9 +1,6 @@
 {
-    "event_id": "b8896448-d981-45cf-9e5e-8bdc0a2f6455",
-    "timestamp": "2026-01-28T06:56:18.361899",
-    "hostname": "WIN-SRV-24",
-    "source_ip": "192.168.1.100",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\mgc.exe"
+    "event_id": "cf83e54d-3c0b-41a1-9f6d-a37723585e7a",
+    "timestamp": "2026-01-28T07:09:57.930767",
+    "Product": "windows",
+    "Service": "sysmon"
 }

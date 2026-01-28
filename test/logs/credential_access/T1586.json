@@ -1,9 +1,6 @@
 {
-    "event_id": "bc55c692-041f-4127-bcca-81fc65c479be",
-    "timestamp": "2026-01-28T06:40:18.545752",
-    "hostname": "WIN-SRV-30",
-    "source_ip": "192.168.1.247",
-    "user": "db_backup",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\medusa.exe"
+    "event_id": "5568cbfc-244f-4892-b2f7-669a1635a123",
+    "timestamp": "2026-01-28T07:09:58.110467",
+    "Product": "windows",
+    "Service": "sysmon"
 }

@@ -1,10 +1,8 @@
 {
-    "event_id": "df7e7d49-466d-41c3-8173-c53f05655bce",
-    "timestamp": "2026-01-28T06:19:18.554080",
-    "hostname": "WIN-SRV-14",
-    "source_ip": "192.168.1.75",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "EventID": 4624,
-    "LogonType": 10
+    "event_id": "29657e16-ea3c-44a7-9886-178641c3ec93",
+    "timestamp": "2026-01-28T07:09:58.118608",
+    "Product": "windows",
+    "Service": "security",
+    "EventID": "4624",
+    "LogonType": "10"
 }

@@ -1,9 +1,12 @@
 {
-    "event_id": "3e294fc8-5912-4064-a242-02199a283266",
-    "timestamp": "2026-01-28T06:28:18.419445",
-    "hostname": "WIN-SRV-90",
-    "source_ip": "192.168.1.14",
-    "user": "db_backup",
-    "domain": "CORP.LOCAL",
-    "SrcIp|startswith": "9."
+    "event_id": "e8537a34-74df-4276-8454-123c05fb7a18",
+    "timestamp": "2026-01-28T07:09:57.987482",
+    "Product": "generic",
+    "Service": "sysmon",
+    "SrcIp": "1.",
+    "Method": "GET",
+    "UriStem": "/version",
+    "UriQuery": "version",
+    "UserAgent": "curl",
+    "Status": 200
 }

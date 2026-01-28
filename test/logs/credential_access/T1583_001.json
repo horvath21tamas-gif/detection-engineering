@@ -1,9 +1,6 @@
 {
-    "event_id": "44275e22-d8e4-4858-8cba-609e1a034e0f",
-    "timestamp": "2026-01-28T06:35:18.614511",
-    "hostname": "WIN-SRV-21",
-    "source_ip": "192.168.1.146",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\terraform.exe"
+    "event_id": "754f47dc-f7bb-4e32-ab07-96e397301789",
+    "timestamp": "2026-01-28T07:09:58.178623",
+    "Product": "windows",
+    "Service": "sysmon"
 }

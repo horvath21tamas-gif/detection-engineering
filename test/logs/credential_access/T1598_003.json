@@ -1,10 +1,8 @@
 {
-    "event_id": "82a6bc04-39ce-492b-8c57-8e0b1b01d285",
-    "timestamp": "2026-01-28T06:59:18.752302",
-    "hostname": "WIN-SRV-75",
-    "source_ip": "192.168.1.67",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\pwsh.exe",
-    "CommandLine|contains": "System.Windows.Forms"
+    "event_id": "0a7524b6-f6fe-4575-b8bf-83caa8653b21",
+    "timestamp": "2026-01-28T07:09:58.312063",
+    "Product": "windows",
+    "Service": "sysmon",
+    "Image": "\\msg.exe",
+    "CommandLine": "approve"
 }

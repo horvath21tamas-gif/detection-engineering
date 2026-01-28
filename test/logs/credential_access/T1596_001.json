@@ -1,9 +1,6 @@
 {
-    "event_id": "b086b568-65c7-429c-8fec-4a20a1aa6bfb",
-    "timestamp": "2026-01-28T06:47:18.462840",
-    "hostname": "WIN-SRV-45",
-    "source_ip": "192.168.1.99",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\subfinder.exe"
+    "event_id": "91d7603e-7c29-493a-ade9-727305275736",
+    "timestamp": "2026-01-28T07:09:58.029923",
+    "Product": "windows",
+    "Service": "sysmon"
 }

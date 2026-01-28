@@ -1,10 +1,8 @@
 {
-    "event_id": "ce26d42e-418f-4e62-bd25-c5500bc954e3",
-    "timestamp": "2026-01-28T06:15:18.278561",
-    "hostname": "WIN-SRV-83",
-    "source_ip": "192.168.1.87",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "ParentImage|endswith": "\\w3wp.exe",
-    "Image|endswith": "\\net.exe"
+    "event_id": "d5b8846c-4364-4ead-8da9-f395e7675cfa",
+    "timestamp": "2026-01-28T07:09:57.850357",
+    "Product": "windows",
+    "Service": "sysmon",
+    "ParentImage": "\\w3wp.exe",
+    "Image": "\\cmd.exe"
 }

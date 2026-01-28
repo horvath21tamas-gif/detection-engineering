@@ -1,9 +1,6 @@
 {
-    "event_id": "d6c0f0e9-3229-45af-9180-cd315820026d",
-    "timestamp": "2026-01-28T06:12:18.467904",
-    "hostname": "WIN-SRV-90",
-    "source_ip": "192.168.1.55",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\ripsecrets.exe"
+    "event_id": "e883592a-29bd-45eb-8457-533256a50126",
+    "timestamp": "2026-01-28T07:09:58.034778",
+    "Product": "windows",
+    "Service": "sysmon"
 }

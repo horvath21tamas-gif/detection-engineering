@@ -1,9 +1,6 @@
 {
-    "event_id": "42b918b5-cfa1-4492-8149-b44cd81243c0",
-    "timestamp": "2026-01-28T06:28:18.264572",
-    "hostname": "WIN-SRV-60",
-    "source_ip": "192.168.1.56",
-    "user": "db_backup",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\pwsh.exe"
+    "event_id": "d84bac0f-880f-46c3-8e32-4cbbd21d3b35",
+    "timestamp": "2026-01-28T07:09:57.836993",
+    "Product": "windows",
+    "Service": "sysmon"
 }

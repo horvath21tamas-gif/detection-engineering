@@ -1,9 +1,8 @@
 {
-    "event_id": "8132eb99-01c7-4443-a292-a564a759ea5c",
-    "timestamp": "2026-01-28T06:48:18.712436",
-    "hostname": "WIN-SRV-99",
-    "source_ip": "192.168.1.240",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "CommandLine|contains": " -type=AXFR"
+    "event_id": "017531a7-7b7f-4bf6-90de-55e00e48beee",
+    "timestamp": "2026-01-28T07:09:58.274221",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": " /enumzones",
+    "Image": "\\dig.exe"
 }

@@ -1,9 +1,7 @@
 {
-    "event_id": "17550895-79e2-49e8-8e07-a58b29814005",
-    "timestamp": "2026-01-28T07:00:18.698973",
-    "hostname": "WIN-SRV-22",
-    "source_ip": "192.168.1.185",
-    "user": "db_backup",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\ghunt.exe"
+    "event_id": "9da1a3f2-8f35-48a6-a5d1-4b73d7272685",
+    "timestamp": "2026-01-28T07:09:58.260875",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": "google.com/search"
 }

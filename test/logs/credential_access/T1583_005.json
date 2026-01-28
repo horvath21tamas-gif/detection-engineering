@@ -1,9 +1,6 @@
 {
-    "event_id": "5c8cae49-6920-4c49-84a6-ff6f727b0618",
-    "timestamp": "2026-01-28T06:52:18.671523",
-    "hostname": "WIN-SRV-57",
-    "source_ip": "192.168.1.84",
-    "user": "db_backup",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\python.exe"
+    "event_id": "d5ca1143-289c-470f-822c-408f75db5280",
+    "timestamp": "2026-01-28T07:09:58.234154",
+    "Product": "windows",
+    "Service": "sysmon"
 }

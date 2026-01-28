@@ -1,9 +1,6 @@
 {
-    "event_id": "c26e1514-424d-4e40-bd66-59790cb49230",
-    "timestamp": "2026-01-28T06:35:18.747997",
-    "hostname": "WIN-SRV-92",
-    "source_ip": "192.168.1.139",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\az.exe"
+    "event_id": "c633f75f-1552-474a-8f7f-0e2358836d48",
+    "timestamp": "2026-01-28T07:09:58.307857",
+    "Product": "windows",
+    "Service": "sysmon"
 }

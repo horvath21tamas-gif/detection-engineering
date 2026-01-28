@@ -1,10 +1,9 @@
 {
-    "event_id": "6034418d-b7e5-4358-a179-a509f44bb396",
-    "timestamp": "2026-01-28T06:13:18.718495",
-    "hostname": "WIN-SRV-20",
-    "source_ip": "192.168.1.88",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\chrome.exe",
-    "CommandLine|contains": ".htm"
+    "event_id": "0903341d-a728-4bee-a47e-12e26c3db73e",
+    "timestamp": "2026-01-28T07:09:58.279093",
+    "Product": "windows",
+    "Service": "sysmon",
+    "Image": "\\powershell.exe",
+    "CommandLine": " -WindowStyle Hidden",
+    "ParentImage": "\\winword.exe"
 }

@@ -1,10 +1,7 @@
 {
-    "event_id": "84671112-a97f-4bb4-8cf9-5d822f6528d7",
-    "timestamp": "2026-01-28T06:23:18.282986",
-    "hostname": "WIN-SRV-90",
-    "source_ip": "192.168.1.231",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\ipconfig.exe",
-    "CommandLine|contains": " /displaydns"
+    "event_id": "1fe4df26-2306-4a0f-8d66-dd79f292c606",
+    "timestamp": "2026-01-28T07:09:57.854646",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": "ifconfig.me"
 }

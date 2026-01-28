@@ -1,9 +1,7 @@
 {
-    "event_id": "08efecf6-3349-42c1-8ab4-a0df28200d24",
-    "timestamp": "2026-01-28T06:21:18.328294",
-    "hostname": "WIN-SRV-55",
-    "source_ip": "192.168.1.46",
-    "user": "db_backup",
-    "domain": "CORP.LOCAL",
-    "CommandLine|contains": "powershell"
+    "event_id": "4e67923d-a5d7-4864-953c-3725f1bd1fe9",
+    "timestamp": "2026-01-28T07:09:57.899402",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": "copy "
 }

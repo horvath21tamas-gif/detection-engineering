@@ -1,9 +1,6 @@
 {
-    "event_id": "0048561c-3e42-42d2-96ad-9a8d3d8a5f02",
-    "timestamp": "2026-01-28T06:47:18.472735",
-    "hostname": "WIN-SRV-21",
-    "source_ip": "192.168.1.195",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\amass.exe"
+    "event_id": "0eb9218e-4504-42fa-83a5-c5804b6a4d89",
+    "timestamp": "2026-01-28T07:09:58.039408",
+    "Product": "windows",
+    "Service": "sysmon"
 }

@@ -1,9 +1,8 @@
 {
-    "event_id": "8fab428b-e83b-49ad-9c4d-fbdbc3474f44",
-    "timestamp": "2026-01-28T06:50:18.549959",
-    "hostname": "WIN-SRV-60",
-    "source_ip": "192.168.1.51",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\cmd.exe"
+    "event_id": "e83aba65-194b-45fc-83bc-394066a59836",
+    "timestamp": "2026-01-28T07:09:58.114630",
+    "Product": "windows",
+    "Service": "sysmon",
+    "Image": "\\schtasks.exe",
+    "CommandLine": "schtasks"
 }

@@ -1,9 +1,7 @@
 {
-    "event_id": "32563a03-e178-403d-a465-b5479c91c9b4",
-    "timestamp": "2026-01-28T06:53:18.496267",
-    "hostname": "WIN-SRV-23",
-    "source_ip": "192.168.1.27",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\maigret.exe"
+    "event_id": "4d844f27-60d5-4b67-957d-063afae33ec3",
+    "timestamp": "2026-01-28T07:09:58.061858",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": "linkedin.com/in/"
 }

@@ -1,9 +1,6 @@
 {
-    "event_id": "504166f0-b8f3-4949-b4aa-fbeae85a6a10",
-    "timestamp": "2026-01-28T06:32:18.235474",
-    "hostname": "WIN-SRV-36",
-    "source_ip": "192.168.1.192",
-    "user": "db_backup",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\subfinder.exe"
+    "event_id": "cbf5f7d3-6528-4ef6-9b71-e81c980e1522",
+    "timestamp": "2026-01-28T07:09:57.808983",
+    "Product": "windows",
+    "Service": "sysmon"
 }

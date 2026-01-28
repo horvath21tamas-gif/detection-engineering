@@ -1,9 +1,8 @@
 {
-    "event_id": "44fcb188-ca91-4b67-b3aa-f5f6aaede445",
-    "timestamp": "2026-01-28T06:44:18.447397",
-    "hostname": "WIN-SRV-10",
-    "source_ip": "192.168.1.105",
-    "user": "db_backup",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\reg.exe"
+    "event_id": "2ac08ad3-c4bd-479b-9f42-e4376fbc485a",
+    "timestamp": "2026-01-28T07:09:58.014775",
+    "Product": "windows",
+    "Service": "sysmon",
+    "Image": "\\reg.exe",
+    "CommandLine": "\\AppData\\Local\\Temp\\"
 }

@@ -1,9 +1,8 @@
 {
-    "event_id": "acab5dae-57ef-41e3-a725-adb073edb1ae",
-    "timestamp": "2026-01-28T06:47:18.735381",
-    "hostname": "WIN-SRV-38",
-    "source_ip": "192.168.1.91",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\sls.exe"
+    "event_id": "ed8e6daf-8c7b-4a3d-a7b4-fac9a6491b60",
+    "timestamp": "2026-01-28T07:09:58.295585",
+    "Product": "windows",
+    "Service": "sysmon",
+    "Image": "\\terraform.exe",
+    "CommandLine": "aws_lambda_function"
 }

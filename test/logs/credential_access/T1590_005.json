@@ -1,10 +1,8 @@
 {
-    "event_id": "6ba0d2cb-0b23-4f74-ba48-7faecb1339e0",
-    "timestamp": "2026-01-28T06:13:18.623441",
-    "hostname": "WIN-SRV-72",
-    "source_ip": "192.168.1.228",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\aws.exe",
-    "CommandLine|contains": " secretsmanager list-secrets"
+    "event_id": "8277a5ed-4c55-4e96-94ce-921aa77bf233",
+    "timestamp": "2026-01-28T07:09:58.187206",
+    "Product": "windows",
+    "Service": "sysmon",
+    "Image": "\\gcloud.exe",
+    "CommandLine": " projects list"
 }

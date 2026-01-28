@@ -1,10 +1,7 @@
 {
-    "event_id": "bb1cc3d4-8b4c-416f-8d79-db4b1931c801",
-    "timestamp": "2026-01-28T06:14:18.424096",
-    "hostname": "WIN-SRV-79",
-    "source_ip": "192.168.1.66",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\findstr.exe",
-    "CommandLine|contains": "szerzodes"
+    "event_id": "f7ab513b-f149-4265-86e4-0211acd48a6a",
+    "timestamp": "2026-01-28T07:09:57.991913",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": "customer_list"
 }

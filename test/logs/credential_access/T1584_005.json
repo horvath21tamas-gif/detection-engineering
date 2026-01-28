@@ -1,9 +1,8 @@
 {
-    "event_id": "4ad4127b-4f90-4409-9578-28396790a291",
-    "timestamp": "2026-01-28T06:48:18.693893",
-    "hostname": "WIN-SRV-10",
-    "source_ip": "192.168.1.123",
-    "user": "admin",
-    "domain": "CORP.LOCAL",
-    "CommandLine|contains": " -flood"
+    "event_id": "218188c0-690e-4852-92e1-fec779a4033a",
+    "timestamp": "2026-01-28T07:09:58.255874",
+    "Product": "windows",
+    "Service": "sysmon",
+    "ParentImage": "\\wmiprvse.exe",
+    "Image": "\\powershell.exe"
 }

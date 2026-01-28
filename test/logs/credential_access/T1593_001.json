@@ -1,9 +1,7 @@
 {
-    "event_id": "9fd591d7-311d-4758-9a19-23c8981dd2f3",
-    "timestamp": "2026-01-28T06:03:18.597583",
-    "hostname": "WIN-SRV-67",
-    "source_ip": "192.168.1.187",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\twint.exe"
+    "event_id": "9ce6e81f-b0ac-4f7a-ba99-10d2573a6818",
+    "timestamp": "2026-01-28T07:09:58.161857",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": "linkedin.com/in/"
 }

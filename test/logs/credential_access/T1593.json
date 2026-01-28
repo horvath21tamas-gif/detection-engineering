@@ -1,9 +1,7 @@
 {
-    "event_id": "e3bc254d-0783-4f4c-b01c-736fe7e15e75",
-    "timestamp": "2026-01-28T06:24:18.740586",
-    "hostname": "WIN-SRV-76",
-    "source_ip": "192.168.1.92",
-    "user": "db_backup",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\social-analyzer.exe"
+    "event_id": "c234184e-6ba5-4520-99cb-265a82ce659e",
+    "timestamp": "2026-01-28T07:09:58.300609",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": "--headless"
 }

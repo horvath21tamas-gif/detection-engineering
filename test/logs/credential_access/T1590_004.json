@@ -1,10 +1,7 @@
 {
-    "event_id": "63520628-2157-4998-b0e3-9f53aacf6529",
-    "timestamp": "2026-01-28T06:19:18.351579",
-    "hostname": "WIN-SRV-41",
-    "source_ip": "192.168.1.75",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\openssl.exe",
-    "CommandLine|contains": " s_client"
+    "event_id": "0e434af0-6fac-4df6-84bc-038e4e717272",
+    "timestamp": "2026-01-28T07:09:57.921962",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": ".pfx"
 }

@@ -1,9 +1,6 @@
 {
-    "event_id": "3755ebce-dd2f-4b6a-906f-a94e88de1685",
-    "timestamp": "2026-01-28T06:37:18.541279",
-    "hostname": "WIN-SRV-44",
-    "source_ip": "192.168.1.146",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\firefox.exe"
+    "event_id": "cea225ba-9d7f-4269-83bb-3f06ed2e5159",
+    "timestamp": "2026-01-28T07:09:58.106065",
+    "Product": "windows",
+    "Service": "sysmon"
 }

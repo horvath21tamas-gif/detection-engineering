@@ -1,9 +1,6 @@
 {
-    "event_id": "97f44b92-c9f0-4853-910a-2b5374771ff0",
-    "timestamp": "2026-01-28T06:58:18.562781",
-    "hostname": "WIN-SRV-57",
-    "source_ip": "192.168.1.97",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\certspotter.exe"
+    "event_id": "aeb572f0-62f2-4241-9ff2-35325b2de113",
+    "timestamp": "2026-01-28T07:09:58.127150",
+    "Product": "windows",
+    "Service": "sysmon"
 }

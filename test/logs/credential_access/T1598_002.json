@@ -1,10 +1,8 @@
 {
-    "event_id": "38f2afa6-592b-40c7-82af-abfa6b0a3f4b",
-    "timestamp": "2026-01-28T06:16:18.521261",
-    "hostname": "WIN-SRV-95",
-    "source_ip": "192.168.1.121",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\curl.exe",
-    "CommandLine|contains": "contacts.edb"
+    "event_id": "6ce0917f-666a-4c17-bc5d-459e2a40f3cb",
+    "timestamp": "2026-01-28T07:09:58.086028",
+    "Product": "windows",
+    "Service": "sysmon",
+    "Image": "\\findstr.exe",
+    "CommandLine": "invoice"
 }

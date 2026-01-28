@@ -1,9 +1,8 @@
 {
-    "event_id": "99a8db04-9230-431c-b09c-16c61aaa0c7c",
-    "timestamp": "2026-01-28T06:42:18.582351",
-    "hostname": "WIN-SRV-98",
-    "source_ip": "192.168.1.228",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\nsupdate.exe"
+    "event_id": "abd7ea4b-b4ee-4d1e-9822-e9a0b33b0658",
+    "timestamp": "2026-01-28T07:09:58.146542",
+    "Product": "windows",
+    "Service": "sysmon",
+    "ParentImage": "\\dns.exe",
+    "Image": "\\cmd.exe"
 }

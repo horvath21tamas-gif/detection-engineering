@@ -1,9 +1,6 @@
 {
-    "event_id": "e497f47d-0b6e-49b4-83ca-45739b88d831",
-    "timestamp": "2026-01-28T06:59:18.648660",
-    "hostname": "WIN-SRV-59",
-    "source_ip": "192.168.1.99",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\vultr-cli.exe"
+    "event_id": "bc30794a-2840-4331-aa8e-74868064a6cd",
+    "timestamp": "2026-01-28T07:09:58.211577",
+    "Product": "windows",
+    "Service": "sysmon"
 }

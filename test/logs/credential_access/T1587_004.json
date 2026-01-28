@@ -1,9 +1,7 @@
 {
-    "event_id": "b86f30fa-b48a-4201-be4b-338669a7813d",
-    "timestamp": "2026-01-28T06:52:18.619149",
-    "hostname": "WIN-SRV-16",
-    "source_ip": "192.168.1.189",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\cl.exe"
+    "event_id": "5f6d901c-74fe-4a14-8d48-6835994a3243",
+    "timestamp": "2026-01-28T07:09:58.183115",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": "\\Users\\Public\\"
 }

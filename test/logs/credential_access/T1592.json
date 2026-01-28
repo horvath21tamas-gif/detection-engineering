@@ -1,9 +1,9 @@
 {
-    "event_id": "39f808b4-3fe5-4379-8280-477a3aa17a8a",
-    "timestamp": "2026-01-28T06:22:18.681197",
-    "hostname": "WIN-SRV-15",
-    "source_ip": "192.168.1.189",
-    "user": "admin",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\wmic.exe"
+    "event_id": "a4025557-aaf0-41dc-bb9b-72844e532fc6",
+    "timestamp": "2026-01-28T07:09:58.243530",
+    "Product": "windows",
+    "Service": "sysmon",
+    "Image": "\\cmd.exe",
+    "CommandLine": "&",
+    "ParentImage": "\\explorer.exe"
 }

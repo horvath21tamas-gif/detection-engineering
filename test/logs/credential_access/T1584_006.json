@@ -1,9 +1,7 @@
 {
-    "event_id": "f94e22e3-24e8-4d21-86e6-cf095a8823f1",
-    "timestamp": "2026-01-28T06:48:18.333096",
-    "hostname": "WIN-SRV-83",
-    "source_ip": "192.168.1.96",
-    "user": "admin",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\mega.exe"
+    "event_id": "44c6fba2-f970-471c-b546-7a9439ee6f6f",
+    "timestamp": "2026-01-28T07:09:57.904017",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": ".exe"
 }

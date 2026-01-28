@@ -1,9 +1,6 @@
 {
-    "event_id": "9407948b-b2cc-46ce-8be3-bd6fe5cdd66b",
-    "timestamp": "2026-01-28T06:57:18.347273",
-    "hostname": "WIN-SRV-24",
-    "source_ip": "192.168.1.104",
-    "user": "db_backup",
-    "domain": "CORP.LOCAL",
-    "CommandLine|contains": " -type=any"
+    "event_id": "d632c134-836f-474b-a017-d97c0c79b697",
+    "timestamp": "2026-01-28T07:09:57.917744",
+    "Product": "windows",
+    "Service": "sysmon"
 }

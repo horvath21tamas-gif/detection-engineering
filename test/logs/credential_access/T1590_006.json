@@ -1,9 +1,7 @@
 {
-    "event_id": "ed2cae87-3fda-4890-afe4-a3191ce42c25",
-    "timestamp": "2026-01-28T06:46:18.314175",
-    "hostname": "WIN-SRV-26",
-    "source_ip": "192.168.1.53",
-    "user": "admin",
-    "domain": "CORP.LOCAL",
-    "CommandLine|contains": "/settings.py"
+    "event_id": "42117540-1d73-410f-b602-4b179b9be4cb",
+    "timestamp": "2026-01-28T07:09:57.885937",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": " --banner"
 }

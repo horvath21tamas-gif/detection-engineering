@@ -1,9 +1,6 @@
 {
-    "event_id": "cbbba44f-2363-4c9e-ade4-bd8851ffebda",
-    "timestamp": "2026-01-28T06:03:18.730870",
-    "hostname": "WIN-SRV-94",
-    "source_ip": "192.168.1.48",
-    "user": "admin",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\doctl.exe"
+    "event_id": "92e19557-32ae-491a-9c76-1d302fabbbb8",
+    "timestamp": "2026-01-28T07:09:58.291307",
+    "Product": "windows",
+    "Service": "sysmon"
 }

@@ -1,9 +1,6 @@
 {
-    "event_id": "95aa09d0-258a-44aa-86a4-a568024c33d3",
-    "timestamp": "2026-01-28T06:24:18.356496",
-    "hostname": "WIN-SRV-21",
-    "source_ip": "192.168.1.87",
-    "user": "admin",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\curl.exe"
+    "event_id": "39ea817d-d8a0-48c9-97b4-a607b7740dfb",
+    "timestamp": "2026-01-28T07:09:57.926839",
+    "Product": "windows",
+    "Service": "sysmon"
 }

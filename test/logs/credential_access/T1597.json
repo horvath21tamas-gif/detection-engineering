@@ -1,9 +1,7 @@
 {
-    "event_id": "5dea0f1a-3603-409e-9548-75fe6a437275",
-    "timestamp": "2026-01-28T06:09:18.225612",
-    "hostname": "WIN-SRV-71",
-    "source_ip": "192.168.1.179",
-    "user": "admin",
-    "domain": "CORP.LOCAL",
-    "CommandLine|contains": " -m "
+    "event_id": "e27aadea-d6cb-49b2-9745-67b7d44cf377",
+    "timestamp": "2026-01-28T07:09:57.799387",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": "/.git/"
 }

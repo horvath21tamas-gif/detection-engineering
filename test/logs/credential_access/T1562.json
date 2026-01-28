@@ -1,9 +1,7 @@
 {
-    "event_id": "2b22307d-a208-440e-8945-1e1b66fe034f",
-    "timestamp": "2026-01-28T06:57:18.709026",
-    "hostname": "WIN-SRV-65",
-    "source_ip": "192.168.1.123",
-    "user": "admin",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\net.exe"
+    "event_id": "be305796-9c6d-493b-9806-9ac98120f366",
+    "timestamp": "2026-01-28T07:09:58.270759",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": "WinDefend"
 }

@@ -1,9 +1,11 @@
 {
-    "event_id": "864ee707-2e96-4cc8-bd21-bee5f4150bbe",
-    "timestamp": "2026-01-28T06:24:18.629292",
-    "hostname": "WIN-SRV-64",
-    "source_ip": "192.168.1.171",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "SrcIp|startswith": "4."
+    "event_id": "c96fc494-591a-412d-8a5f-8c4edbde2a16",
+    "timestamp": "2026-01-28T07:09:58.192832",
+    "Product": "generic",
+    "Service": "sysmon",
+    "SrcIp": "1.",
+    "UserAgent": "nuclei",
+    "UriStem": "/.env",
+    "UriQuery": "../",
+    "Status": 400
 }

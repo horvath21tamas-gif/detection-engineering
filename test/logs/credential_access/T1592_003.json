@@ -1,9 +1,10 @@
 {
-    "event_id": "11e0ffc7-ef06-4eb2-81a8-ca3aa8fb427a",
-    "timestamp": "2026-01-28T07:02:18.391840",
-    "hostname": "WIN-SRV-60",
-    "source_ip": "192.168.1.51",
-    "user": "admin",
-    "domain": "CORP.LOCAL",
-    "SrcIp|startswith": "2."
+    "event_id": "925b39a2-ef35-48bf-a4a2-90752095adf4",
+    "timestamp": "2026-01-28T07:09:57.960387",
+    "Product": "generic",
+    "Service": "sysmon",
+    "SrcIp": "1.",
+    "UriStem": "/cgi-bin",
+    "UriQuery": "firmware",
+    "UserAgent": "curl"
 }

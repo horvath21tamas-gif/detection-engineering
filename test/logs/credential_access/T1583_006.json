@@ -1,9 +1,6 @@
 {
-    "event_id": "8b868041-ba27-4c14-b338-478873d6936d",
-    "timestamp": "2026-01-28T06:10:18.319496",
-    "hostname": "WIN-SRV-43",
-    "source_ip": "192.168.1.113",
-    "user": "admin",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\rclone.exe"
+    "event_id": "4582d6a2-2071-44ef-8e30-6eec2e5b555e",
+    "timestamp": "2026-01-28T07:09:57.891007",
+    "Product": "windows",
+    "Service": "sysmon"
 }

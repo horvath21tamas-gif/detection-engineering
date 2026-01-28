@@ -1,9 +1,7 @@
 {
-    "event_id": "a51df87e-7650-4d1a-bf80-6ab217dc9f6f",
-    "timestamp": "2026-01-28T06:53:18.437914",
-    "hostname": "WIN-SRV-29",
-    "source_ip": "192.168.1.24",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\rustc.exe"
+    "event_id": "c985fadb-1430-47c0-a636-ce5651ae154b",
+    "timestamp": "2026-01-28T07:09:58.005529",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": "\\Users\\Public\\"
 }

@@ -1,11 +1,9 @@
 {
-    "event_id": "e2fd6dc2-f5b4-4f91-9dbd-b1ce63a7c9aa",
-    "timestamp": "2026-01-28T06:20:18.689599",
-    "hostname": "WIN-SRV-46",
-    "source_ip": "192.168.1.213",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "EventID": 4769,
+    "event_id": "adce4817-9fa7-4539-b2fd-d5a7f9264475",
+    "timestamp": "2026-01-28T07:09:58.251644",
+    "Product": "windows",
+    "Service": "security",
+    "EventID": "4769",
     "Status": "0x0",
-    "TicketEncryptionType": "0x3"
+    "TicketEncryptionType": "0x17"
 }

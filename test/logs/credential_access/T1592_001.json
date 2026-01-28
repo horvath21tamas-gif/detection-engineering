@@ -1,9 +1,10 @@
 {
-    "event_id": "1776e7f7-8bd6-4b4e-bdde-8f929572d9b8",
-    "timestamp": "2026-01-28T06:20:18.536794",
-    "hostname": "WIN-SRV-12",
-    "source_ip": "192.168.1.134",
-    "user": "admin",
-    "domain": "CORP.LOCAL",
-    "SrcIp|startswith": "3."
+    "event_id": "a2c96497-f295-4fd3-85f0-4b069b3f62e2",
+    "timestamp": "2026-01-28T07:09:58.101620",
+    "Product": "generic",
+    "Service": "sysmon",
+    "SrcIp": "1.",
+    "UriStem": "/system",
+    "UriQuery": "cpu",
+    "UserAgent": "curl"
 }

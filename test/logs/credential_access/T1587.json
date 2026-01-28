@@ -1,9 +1,8 @@
 {
-    "event_id": "37de11b3-b74f-43e4-9929-bccfab4a7ac7",
-    "timestamp": "2026-01-28T06:41:18.602235",
-    "hostname": "WIN-SRV-88",
-    "source_ip": "192.168.1.225",
-    "user": "admin",
-    "domain": "CORP.LOCAL",
-    "CommandLine|contains": "sliver-gen"
+    "event_id": "c01570c0-909e-4124-b06a-45d68e3e7d16",
+    "timestamp": "2026-01-28T07:09:58.166404",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": "\\AppData\\Local\\Temp\\",
+    "Image": "\\csc.exe"
 }

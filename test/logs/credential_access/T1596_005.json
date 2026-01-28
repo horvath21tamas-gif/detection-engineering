@@ -1,9 +1,6 @@
 {
-    "event_id": "12c59414-e416-411e-96b4-4b0aa0abf759",
-    "timestamp": "2026-01-28T06:37:18.240781",
-    "hostname": "WIN-SRV-97",
-    "source_ip": "192.168.1.97",
-    "user": "admin",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\zoomeye.exe"
+    "event_id": "1c6bd3a6-d065-40fb-bbba-0bd7ec6e1f8b",
+    "timestamp": "2026-01-28T07:09:57.814076",
+    "Product": "windows",
+    "Service": "sysmon"
 }

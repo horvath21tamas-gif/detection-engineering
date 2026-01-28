@@ -1,9 +1,7 @@
 {
-    "event_id": "03d70241-8335-4528-8523-59da956cde7e",
-    "timestamp": "2026-01-28T06:38:18.428741",
-    "hostname": "WIN-SRV-55",
-    "source_ip": "192.168.1.123",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\sls.exe"
+    "event_id": "4dd3db25-0e54-4981-b9df-8b484a9aafa2",
+    "timestamp": "2026-01-28T07:09:57.996397",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": "--layers"
 }

@@ -1,9 +1,7 @@
 {
-    "event_id": "5bbd0894-9b5b-433c-a74d-3f1ef618fd5c",
-    "timestamp": "2026-01-28T07:01:18.457893",
-    "hostname": "WIN-SRV-25",
-    "source_ip": "192.168.1.50",
-    "user": "j.doe",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\gitleaks.exe"
+    "event_id": "813fba87-c493-49d5-8035-7016846e356a",
+    "timestamp": "2026-01-28T07:09:58.025127",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": "password="
 }

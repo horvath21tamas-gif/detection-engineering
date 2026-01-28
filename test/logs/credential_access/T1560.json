@@ -1,9 +1,7 @@
 {
-    "event_id": "c34a0b3e-26b9-488f-aa53-226e0dbe68a4",
-    "timestamp": "2026-01-28T06:13:18.511928",
-    "hostname": "WIN-SRV-11",
-    "source_ip": "192.168.1.54",
-    "user": "db_backup",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\7za.exe"
+    "event_id": "a0b75d6b-8cda-44d2-bc06-ed6176da5fbd",
+    "timestamp": "2026-01-28T07:09:58.076793",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": "\\AppData\\"
 }

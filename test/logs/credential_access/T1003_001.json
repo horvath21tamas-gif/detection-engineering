@@ -1,10 +1,8 @@
 {
-    "event_id": "6e63fa97-9617-48d6-9230-678dd7281942",
-    "timestamp": "2026-01-28T06:08:18.399186",
-    "hostname": "WIN-SRV-51",
-    "source_ip": "192.168.1.126",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "TargetImage|endswith": "\\lsass.exe",
-    "GrantedAccess|contains": "0x1438"
+    "event_id": "878c9485-6489-47b7-b9b8-233ede176ee9",
+    "timestamp": "2026-01-28T07:09:57.967567",
+    "Product": "windows",
+    "Service": "sysmon",
+    "TargetImage": "\\lsass.exe",
+    "GrantedAccess": "0x10"
 }

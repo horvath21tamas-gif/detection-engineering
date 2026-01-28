@@ -1,9 +1,6 @@
 {
-    "event_id": "df889e55-b3ac-42df-87d5-0ef96514ad8a",
-    "timestamp": "2026-01-28T06:40:18.636204",
-    "hostname": "WIN-SRV-73",
-    "source_ip": "192.168.1.20",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\aws.exe"
+    "event_id": "ea55e1e8-df10-4418-bda2-5924b1cfc170",
+    "timestamp": "2026-01-28T07:09:58.199567",
+    "Product": "windows",
+    "Service": "sysmon"
 }

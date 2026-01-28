@@ -1,9 +1,7 @@
 {
-    "event_id": "4ee2caca-6d04-4d5a-8845-5fae2a2a417b",
-    "timestamp": "2026-01-28T06:17:18.685883",
-    "hostname": "WIN-SRV-80",
-    "source_ip": "192.168.1.225",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "Image|endswith": "\\powershell.exe"
+    "event_id": "c09d316e-06a0-411d-b64a-7ba33af246bc",
+    "timestamp": "2026-01-28T07:09:58.248037",
+    "Product": "windows",
+    "Service": "sysmon",
+    "CommandLine": " -disablere"
 }

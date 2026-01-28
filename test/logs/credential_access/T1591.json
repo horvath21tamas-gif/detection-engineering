@@ -1,9 +1,7 @@
 {
-    "event_id": "1ad360fc-3002-496e-bfd4-dc35c9964084",
-    "timestamp": "2026-01-28T06:47:18.323694",
-    "hostname": "WIN-SRV-23",
-    "source_ip": "192.168.1.205",
-    "user": "svc_sql",
-    "domain": "CORP.LOCAL",
-    "CommandLine|contains": "objectCategory="
+    "event_id": "addd6247-28a0-4035-b93c-b666a46b64ac",
+    "timestamp": "2026-01-28T07:09:57.894985",
+    "Product": "windows",
+    "Service": "sysmon",
+    "Image": "\\dsquery.exe"
 }

@@ -1,0 +1,54 @@
+title: Suspicious User Account Creation via CLI/Scripting
+id: 2b86b8e8-b1b5-4e56-abd2-4178bfce5b6e
+status: stable
+description: |
+    Detects the creation of new user accounts (T1585) when initiated from 
+    suspicious processes like CMD, PowerShell, or net.exe, rather than 
+    standard Administrative consoles (ADUC, Windows Admin Center).
+author: hota05
+date: 2026-01-28
+references:
+    - https://attack.mitre.org/techniques/T1585/
+tags:
+    - attack.persistence
+    - attack.t1585
+logsource:
+    product: windows
+    service: security
+detection:
+    selection_eid:
+        EventID: 4720 
+    
+    selection_process:
+        ProcessName|endswith: 
+            - '\net.exe'
+            - '\net1.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+
+    selection_suspicious_names:
+        TargetUserName|contains:
+            - 'admin'
+            - 'svc'
+            - 'temp'
+            - 'test'
+            - 'backdoor'
+
+    filter_machine_accounts:
+        SubjectUserName|endswith: '$'
+
+    filter_dc_sync:
+        SubjectUserName|contains:
+            - 'MSOL_'
+            - 'AAD_'
+            - 'Sync'
+        SubjectDomainName: 'NT AUTHORITY'
+
+    condition: selection_eid and selection_process and not (filter_machine_accounts or filter_dc_sync)
+falsepositives:
+    - Automated provisioning scripts (adjust filters for your specific SVC accounts)
+    - Legacy batch scripts used by sysadmins for bulk user creation
+level: high

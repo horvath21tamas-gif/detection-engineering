@@ -1,0 +1,64 @@
+title: Anomalous Procurement of Malware Capabilities
+id: d8e3060e-4138-4d0b-bcd2-b508b10e7d08
+status: stable
+description: |
+    Detects the acquisition of malware by monitoring suspicious downloaders (LotL) 
+    interacting with compressed/container formats or known malware naming patterns 
+    in non-standard directories.
+author: hota05
+date: 2026-01-28
+references:
+    - https://attack.mitre.org/techniques/T1588/001/
+tags:
+    - attack.resource_development
+    - attack.t1588.001
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection_malware_indicators:
+        TargetFilename|contains:
+            - 'redline'
+            - 'lumma'
+            - 'stealer'
+            - 'agenttesla'
+            - 'remcos'
+            - 'cobaltstrike'
+            - 'brutenratel'
+            - 'ransomware'
+
+    selection_evasive_containers:
+        TargetFilename|endswith:
+            - '.iso'
+            - '.vhd'
+            - '.vhdx'
+            - '.img'
+            - '.cab'
+
+    selection_suspicious_downloaders:
+        Image|endswith:
+            - '\certutil.exe'
+            - '\bitsadmin.exe'
+            - '\curl.exe'
+            - '\wget.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+
+    filter_standard_admin_activity:
+        TargetFilename|contains:
+            - '\Windows\SoftwareDistribution\'
+            - '\Program Files\'
+            - '\Program Files (x86)\'
+        User|contains: 'SYSTEM'
+
+    filter_legit_browsers:
+        Image|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+
+    condition: (selection_malware_indicators or selection_evasive_containers) and selection_suspicious_downloaders and not (filter_standard_admin_activity or filter_legit_browsers)
+falsepositives:
+    - IT staff downloading OS images (.iso) via PowerShell scripts (add to exclusion by user).
+    - Developers using CLI tools to download legitimate libraries or VM images.
+level: high

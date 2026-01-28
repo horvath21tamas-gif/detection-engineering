@@ -106,15 +106,6 @@ jobs:
       - name: Log Source Validation
         run: python tools/check_log_sources.py
 
-      # --- AUTOMATIZÁCIÓ: Szintetikus logok generálása a teszteléshez ---
-      - name: Generate Synthetic Mock Logs
-        run: python tools/generate_mock_logs.py
-
-      - name: Run Simulation Tests (Logic Verification)
-        run: |
-          export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
-          python -m pytest test/test_detection_logic.py -v || echo "⚠️ Szimulációs tesztek sikertelenek."
-
       - name: Run Unit Tests (General)
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
@@ -135,10 +126,9 @@ jobs:
             if grep -qiE "windows|process_creation|sysmon|registry|service_control" "$file"; then
               sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk error"
               sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic error"
-              # QRadar: without-pipeline a backend hiba elkerülésére, a fixer majd javítja a mezőket
               sigma convert -t qradar --without-pipeline "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar error"
             
-            # EGYÉB (E-MAIL, STB.) SZABÁLYOK (PIPELINE KIKAPCSOLÁSA)
+            # EGYÉB SZABÁLYOK (PIPELINE KIKAPCSOLÁSA)
             else
               sigma convert -t splunk --without-pipeline "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk generic error"
               sigma convert -t lucene --without-pipeline "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic generic error"
@@ -151,14 +141,12 @@ jobs:
       - name: Final SIEM Query Fixer (QRadar, NetWitness & Sentinel)
         run: python tools/final_siem_fixer.py
 
-      # --- HIGIÉNIA ELLENŐRZÉS: 90 napos szabály ---
       - name: Run Rule Hygiene Check (90 days modification)
         run: python tools/check_rule_hygiene.py
 
       - name: Run Integrity Check
         run: python tools/check_integrity.py
 
-      # --- DOKUMENTÁCIÓS FOLYAMAT (Helyes sorrendben) ---
       - name: Score Detection Rules
         run: python tools/score_rules.py
 

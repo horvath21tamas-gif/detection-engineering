@@ -1,8 +1,9 @@
 {
-    "event_id": "4e97fe66-670d-4577-8aa6-a62acc1e1035",
-    "timestamp": "2026-01-28T07:53:26.915307",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": "linkedin.com/in/"
+    "event_id": "5d31e166-946c-40a6-a204-3da24d185ece",
+    "timestamp": "2026-01-28T07:57:23.535584",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "linkedin.com/in/",
+    "command": "linkedin.com/in/"
 }

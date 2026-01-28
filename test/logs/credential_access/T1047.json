@@ -1,9 +1,8 @@
 {
-    "event_id": "f790c513-3c98-4fb2-925d-a42a95f8b22e",
-    "timestamp": "2026-01-28T07:53:26.994305",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "bb2605da-e711-420c-81f0-7b438dce16bc",
+    "timestamp": "2026-01-28T07:57:23.612723",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\wmic.exe",
     "CommandLine": "cmd.exe",
     "process_path": "\\wmic.exe",

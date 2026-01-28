@@ -1,9 +1,8 @@
 {
-    "event_id": "85f987e5-5c22-437d-97f0-54bddc86fa20",
-    "timestamp": "2026-01-28T07:53:27.038688",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "fce77431-220f-452f-a833-6a466d2dcfe7",
+    "timestamp": "2026-01-28T07:57:23.655326",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\gcloud.exe",
     "CommandLine": " projects list",
     "process_path": "\\gcloud.exe",

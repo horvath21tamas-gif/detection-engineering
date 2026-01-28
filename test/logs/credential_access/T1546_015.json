@@ -1,9 +1,10 @@
 {
-    "event_id": "84ad14e5-8d47-47d5-9491-b69887ab050a",
-    "timestamp": "2026-01-28T07:53:26.712179",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "c4777610-6430-400a-b133-23abbcde2c04",
+    "timestamp": "2026-01-28T07:57:23.346649",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "\\powershell.exe",
+    "CommandLine": "whoami",
     "TargetObject": "\\InprocServer32",
     "Details": "\\Users\\",
     "process_path": "\\powershell.exe"

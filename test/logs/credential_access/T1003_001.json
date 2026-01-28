@@ -1,9 +1,10 @@
 {
-    "event_id": "b64cd1e7-7814-4e58-b458-8b067a01f1ae",
-    "timestamp": "2026-01-28T07:53:26.821313",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "ea2eb242-1ba8-4e60-997a-81282ca5ace5",
+    "timestamp": "2026-01-28T07:57:23.446207",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "whoami",
     "TargetImage": "\\lsass.exe",
     "GrantedAccess": "0x10"
 }

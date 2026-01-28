@@ -1,7 +1,8 @@
 {
-    "event_id": "99e5e8f4-970f-4902-bdff-ccd081748791",
-    "timestamp": "2026-01-28T07:53:26.690137",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin"
+    "event_id": "b06ed087-1f47-4eff-b576-73cda1c8f20c",
+    "timestamp": "2026-01-28T07:57:23.325528",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "whoami"
 }

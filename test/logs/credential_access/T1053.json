@@ -1,9 +1,8 @@
 {
-    "event_id": "78eef55d-56f6-4220-b4ed-fb3b281c1daf",
-    "timestamp": "2026-01-28T07:53:26.967074",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "81b26d85-7b5b-4fbf-b606-8672ef4e1deb",
+    "timestamp": "2026-01-28T07:57:23.586496",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\schtasks.exe",
     "CommandLine": "\\AppData\\",
     "process_path": "\\schtasks.exe",

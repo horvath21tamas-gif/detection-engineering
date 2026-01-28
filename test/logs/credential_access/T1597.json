@@ -1,8 +1,9 @@
 {
-    "event_id": "0fc737d4-17ae-4eea-802a-ee81c62ac077",
-    "timestamp": "2026-01-28T07:53:26.651722",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": "/.git/"
+    "event_id": "c84951a7-83b5-4aba-95ce-af99b69a7c79",
+    "timestamp": "2026-01-28T07:57:23.288327",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "/.git/",
+    "command": "/.git/"
 }

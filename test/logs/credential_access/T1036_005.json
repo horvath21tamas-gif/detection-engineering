@@ -1,9 +1,10 @@
 {
-    "event_id": "482c6175-3bf0-4d8a-993f-e48ebb1f765e",
-    "timestamp": "2026-01-28T07:53:26.944011",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "3816d991-8b3c-45e9-b75e-c0f2ba014108",
+    "timestamp": "2026-01-28T07:57:23.563530",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\cmd.exe",
-    "CommandLine": "C:\\Windows\\System32\\"
+    "CommandLine": "C:\\Windows\\System32\\",
+    "process_path": "\\cmd.exe",
+    "command": "C:\\Windows\\System32\\"
 }

@@ -1,10 +1,12 @@
 {
-    "event_id": "1a0e5c06-d033-4924-b67e-eb085e3150d4",
-    "timestamp": "2026-01-28T07:53:26.694648",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "c0b02ba3-f677-4b43-b7c7-2c1ae6433217",
+    "timestamp": "2026-01-28T07:57:23.329852",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\cmd.exe",
     "CommandLine": "administrators",
-    "ParentImage": "\\WINWORD.EXE"
+    "process_path": "\\cmd.exe",
+    "command": "administrators",
+    "ParentImage": "\\WINWORD.EXE",
+    "parent_process_path": "\\WINWORD.EXE"
 }

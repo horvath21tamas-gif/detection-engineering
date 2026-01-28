@@ -1,10 +1,11 @@
 {
-    "event_id": "bb57ec14-cb1f-4a32-857f-b89ac95ef2cc",
-    "timestamp": "2026-01-28T07:53:26.910761",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "bfed6338-8bba-4c31-8832-0a786c3e61ce",
+    "timestamp": "2026-01-28T07:57:23.531194",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "\\powershell.exe",
+    "CommandLine": "whoami",
     "TargetFileName": "logins.json",
     "AccessMask": "0x1",
-    "Image": "\\powershell.exe"
+    "process_path": "\\powershell.exe"
 }

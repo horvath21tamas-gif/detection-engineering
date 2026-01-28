@@ -1,9 +1,10 @@
 {
-    "event_id": "8b51ae9e-13ce-4836-8670-ee74ceef721b",
-    "timestamp": "2026-01-28T07:53:26.733825",
-    "Product": "windows",
-    "Service": "system",
-    "User": "AttackerAdmin",
+    "event_id": "7a0b77a8-0f05-4730-837c-faa6efa358d6",
+    "timestamp": "2026-01-28T07:57:23.367658",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "whoami",
     "EventID": "7036",
     "ServiceName": "WinDefend"
 }

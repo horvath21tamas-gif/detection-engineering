@@ -1,8 +1,9 @@
 {
-    "event_id": "ce5a4907-666f-4f58-b60e-1b113c22db96",
-    "timestamp": "2026-01-28T07:53:26.707841",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": "ifconfig.me"
+    "event_id": "7525f4e8-7a9a-4042-a3b6-e384e281d07e",
+    "timestamp": "2026-01-28T07:57:23.342535",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "ifconfig.me",
+    "command": "ifconfig.me"
 }

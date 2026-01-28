@@ -1,9 +1,8 @@
 {
-    "event_id": "e68ad9e2-2845-4051-ad7a-0aba08b5d7de",
-    "timestamp": "2026-01-28T07:53:27.161975",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "59562fc7-137d-43eb-b118-fa7b5a653b55",
+    "timestamp": "2026-01-28T07:57:23.774214",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\msg.exe",
     "CommandLine": "approve",
     "process_path": "\\msg.exe",

@@ -1,10 +1,12 @@
 {
-    "event_id": "2ed2f441-98f1-47f3-8fa7-e5beeac7090e",
-    "timestamp": "2026-01-28T07:53:26.984071",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "e4023068-9f3f-4779-9b5c-6c4a520bbb71",
+    "timestamp": "2026-01-28T07:57:23.602822",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\msiexec.exe",
     "CommandLine": "/quiet",
-    "ParentImage": "\\powershell.exe"
+    "process_path": "\\msiexec.exe",
+    "command": "/quiet",
+    "ParentImage": "\\powershell.exe",
+    "parent_process_path": "\\powershell.exe"
 }

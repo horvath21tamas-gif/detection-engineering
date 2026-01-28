@@ -1,10 +1,12 @@
 {
-    "event_id": "346e1150-aacd-415e-a63b-32d837cf1814",
-    "timestamp": "2026-01-28T07:53:27.025328",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "f800c482-0259-4a46-91f4-0021abc79b32",
+    "timestamp": "2026-01-28T07:57:23.642567",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\cmd.exe",
+    "CommandLine": "whoami",
+    "process_path": "\\cmd.exe",
     "IntegrityLevel": "High",
-    "ParentImage": "\\fodhelper.exe"
+    "ParentImage": "\\fodhelper.exe",
+    "parent_process_path": "\\fodhelper.exe"
 }

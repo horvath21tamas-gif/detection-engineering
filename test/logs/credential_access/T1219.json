@@ -1,8 +1,9 @@
 {
-    "event_id": "edf4cea5-7aab-48ad-ab03-03cd8ded1378",
-    "timestamp": "2026-01-28T07:53:27.054580",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "658eda9c-1ac9-4579-a418-dace762e6502",
+    "timestamp": "2026-01-28T07:57:23.670529",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "whoami",
     "ServiceName": "PSEXECSVC"
 }

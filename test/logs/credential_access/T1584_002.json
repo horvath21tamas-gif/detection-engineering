@@ -1,9 +1,10 @@
 {
-    "event_id": "4fb8d237-2dce-475f-b216-9da5a8002607",
-    "timestamp": "2026-01-28T07:53:26.998428",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "23a33120-5fed-4757-a696-9b86846c97d4",
+    "timestamp": "2026-01-28T07:57:23.616752",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "\\cmd.exe",
+    "CommandLine": "whoami",
     "ParentImage": "\\dns.exe",
     "parent_process_path": "\\dns.exe",
     "process_path": "\\cmd.exe"

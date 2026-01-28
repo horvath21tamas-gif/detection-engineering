@@ -1,8 +1,9 @@
 {
-    "event_id": "8d1e4eb2-07fd-4226-abc1-1f6789b1f6e4",
-    "timestamp": "2026-01-28T07:53:27.121490",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": "WinDefend"
+    "event_id": "4d5607f0-4764-4af7-8182-ef55f43e414b",
+    "timestamp": "2026-01-28T07:57:23.735076",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "WinDefend",
+    "command": "WinDefend"
 }

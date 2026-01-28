@@ -1,9 +1,10 @@
 {
-    "event_id": "9cfe7436-de9f-4dde-b16b-c7aae94777f2",
-    "timestamp": "2026-01-28T07:53:27.102517",
-    "Product": "windows",
-    "Service": "security",
-    "User": "AttackerAdmin",
+    "event_id": "29566592-a7a7-444b-b259-e887b1002e69",
+    "timestamp": "2026-01-28T07:57:23.716954",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "whoami",
     "EventID": "4769",
     "Status": "0x0",
     "TicketEncryptionType": "0x17"

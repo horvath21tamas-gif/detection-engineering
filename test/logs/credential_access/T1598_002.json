@@ -1,9 +1,8 @@
 {
-    "event_id": "f19e89bb-bc09-44e4-9d96-3bf71bcf4a8d",
-    "timestamp": "2026-01-28T07:53:26.939303",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "288f2bff-9510-4ed3-b291-ef59ed33f557",
+    "timestamp": "2026-01-28T07:57:23.558947",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\findstr.exe",
     "CommandLine": "invoice",
     "process_path": "\\findstr.exe",

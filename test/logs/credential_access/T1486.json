@@ -1,10 +1,12 @@
 {
-    "event_id": "4c9261f2-54d6-4f38-8863-19d4de72555f",
-    "timestamp": "2026-01-28T07:53:27.080667",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "863b5d9a-6c52-4517-a26e-317e5f4d18a4",
+    "timestamp": "2026-01-28T07:57:23.695962",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\sc.exe",
     "CommandLine": "stop",
-    "ParentImage": "\\cmd.exe"
+    "process_path": "\\sc.exe",
+    "command": "stop",
+    "ParentImage": "\\cmd.exe",
+    "parent_process_path": "\\cmd.exe"
 }

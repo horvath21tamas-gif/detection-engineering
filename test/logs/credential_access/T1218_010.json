@@ -1,9 +1,8 @@
 {
-    "event_id": "0a1e03fc-d0bc-4460-b3ef-763672a1791c",
-    "timestamp": "2026-01-28T07:53:26.721125",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "6db09a2a-6e58-4f2c-87f5-9cc365a74884",
+    "timestamp": "2026-01-28T07:57:23.355222",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\regsvr32.exe",
     "CommandLine": "\\Users\\",
     "process_path": "\\regsvr32.exe",

@@ -1,9 +1,8 @@
 {
-    "event_id": "1c66fefb-c25e-4120-bd6b-bbc3465cab65",
-    "timestamp": "2026-01-28T07:53:27.058573",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "f84de0d0-6036-49ff-9552-928b73f4d4f3",
+    "timestamp": "2026-01-28T07:57:23.674412",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\bitsadmin.exe",
     "CommandLine": "\\Users\\",
     "process_path": "\\bitsadmin.exe",

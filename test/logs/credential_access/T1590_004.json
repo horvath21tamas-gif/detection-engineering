@@ -1,8 +1,9 @@
 {
-    "event_id": "2afb4ae4-1d6c-4147-a759-a33e952ca768",
-    "timestamp": "2026-01-28T07:53:26.774983",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": ".pfx"
+    "event_id": "4f4d59d1-f49b-44df-9006-9f8751abf673",
+    "timestamp": "2026-01-28T07:57:23.407705",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": ".pfx",
+    "command": ".pfx"
 }

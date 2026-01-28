@@ -1,8 +1,9 @@
 {
-    "event_id": "cda8ebcf-614f-463c-b861-f1a19ba3aa69",
-    "timestamp": "2026-01-28T07:53:27.034598",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": "\\Users\\Public\\"
+    "event_id": "530b628c-6315-4c36-be61-885e134c4acb",
+    "timestamp": "2026-01-28T07:57:23.651392",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "\\Users\\Public\\",
+    "command": "\\Users\\Public\\"
 }

@@ -1,9 +1,10 @@
 {
-    "event_id": "d8ed4878-7896-4a4c-a114-e863553b0345",
-    "timestamp": "2026-01-28T07:53:27.153977",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "c30bb4b6-3497-4f49-a5d4-5c1677990bab",
+    "timestamp": "2026-01-28T07:57:23.766480",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "whoami",
     "EventID": "3",
     "Protocol": "tcp",
     "DestinationPort": "80"

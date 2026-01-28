@@ -1,8 +1,9 @@
 {
-    "event_id": "8efbfc06-0a8a-42b0-8f5c-1f3f71a83ebb",
-    "timestamp": "2026-01-28T07:53:26.762234",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": "inurl:admin"
+    "event_id": "a61b94c6-2f98-449d-a44e-47ec16151ada",
+    "timestamp": "2026-01-28T07:57:23.394682",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "inurl:admin",
+    "command": "inurl:admin"
 }

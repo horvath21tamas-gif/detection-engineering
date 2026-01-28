@@ -1,8 +1,9 @@
 {
-    "event_id": "3fb56e95-5245-45a4-b019-9ac128857e90",
-    "timestamp": "2026-01-28T07:53:26.671690",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": "Get-NetDomainTrust"
+    "event_id": "6f34bda4-5c66-403d-9347-a0f3a2fc34de",
+    "timestamp": "2026-01-28T07:57:23.307347",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "Get-NetDomainTrust",
+    "command": "Get-NetDomainTrust"
 }

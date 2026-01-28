@@ -1,13 +1,14 @@
 {
-    "event_id": "41dd2b6b-417c-41f9-a145-6dce3009f5a1",
-    "timestamp": "2026-01-28T07:53:27.137010",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "9f9175d7-1946-4976-ad3a-57c14d2d70e4",
+    "timestamp": "2026-01-28T07:57:23.750085",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "whoami",
     "url": ".+",
     "url_domain_age": "30",
     "url_reputation": "low",
     "email_content_type": "text/html",
     "sender_display_name": "Microsoft",
-    "sender_domain": "office.com"
+    "sender_domain": "microsoft.com"
 }

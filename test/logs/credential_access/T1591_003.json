@@ -1,8 +1,9 @@
 {
-    "event_id": "af754777-806d-45b8-8397-bcca05f84541",
-    "timestamp": "2026-01-28T07:53:26.725704",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": "confluence"
+    "event_id": "a2c7125c-2afc-4e44-b261-37c33c6079db",
+    "timestamp": "2026-01-28T07:57:23.359657",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "confluence",
+    "command": "confluence"
 }

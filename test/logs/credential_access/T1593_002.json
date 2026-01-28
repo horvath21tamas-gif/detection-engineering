@@ -1,8 +1,9 @@
 {
-    "event_id": "f508b2cc-5419-45f7-9aa3-8eb8d67eb6e7",
-    "timestamp": "2026-01-28T07:53:27.111613",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": "google.com/search"
+    "event_id": "cd56b606-710a-44c7-909e-0d2ca0f63451",
+    "timestamp": "2026-01-28T07:57:23.725686",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "google.com/search",
+    "command": "google.com/search"
 }

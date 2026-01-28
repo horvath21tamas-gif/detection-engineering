@@ -1,10 +1,12 @@
 {
-    "event_id": "5c4ef91b-84a9-4d3f-ad3a-2410f4500543",
-    "timestamp": "2026-01-28T07:53:26.817972",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "8ada6c34-a412-4c78-b30a-8a073c03d1b9",
+    "timestamp": "2026-01-28T07:57:23.443121",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\mshta.exe",
     "CommandLine": "http://",
-    "ParentImage": "\\powershell.exe"
+    "process_path": "\\mshta.exe",
+    "command": "http://",
+    "ParentImage": "\\powershell.exe",
+    "parent_process_path": "\\powershell.exe"
 }

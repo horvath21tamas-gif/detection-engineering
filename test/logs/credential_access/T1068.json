@@ -1,10 +1,12 @@
 {
-    "event_id": "744717ec-7ee4-40f4-8904-63c6c5cfb13e",
-    "timestamp": "2026-01-28T07:53:26.676300",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "ParentImage": "\\explorer.exe",
+    "event_id": "bbc662ff-3632-42f9-91ca-c07c2a4a74a1",
+    "timestamp": "2026-01-28T07:57:23.312180",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\Users\\",
+    "CommandLine": "whoami",
+    "ParentImage": "\\explorer.exe",
+    "parent_process_path": "\\explorer.exe",
+    "process_path": "\\Users\\",
     "username": "NT AUTHORITY\\SYSTEM"
 }

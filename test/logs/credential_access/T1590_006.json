@@ -1,8 +1,9 @@
 {
-    "event_id": "396e2f26-3858-4558-b30a-e2e6d27abc40",
-    "timestamp": "2026-01-28T07:53:26.738280",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": " --banner"
+    "event_id": "feb6af39-f6fb-474a-917f-c5d77fbae117",
+    "timestamp": "2026-01-28T07:57:23.371929",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": " --banner",
+    "command": " --banner"
 }

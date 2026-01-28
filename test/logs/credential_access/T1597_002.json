@@ -1,8 +1,9 @@
 {
-    "event_id": "55aeb8c8-ad50-4c9e-98a9-822b6ff5b573",
-    "timestamp": "2026-01-28T07:53:26.878864",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": "password="
+    "event_id": "e6fbc2a6-5232-4eb4-b72d-01f0c6c0068b",
+    "timestamp": "2026-01-28T07:57:23.500827",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "password=",
+    "command": "password="
 }

@@ -1,8 +1,9 @@
 {
-    "event_id": "8b4f0db3-3801-42c6-a4ff-cf45b7a6a43e",
-    "timestamp": "2026-01-28T07:53:26.845787",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": "customer_list"
+    "event_id": "65af263d-9edb-4d5e-9561-29d4e2de6210",
+    "timestamp": "2026-01-28T07:57:23.469266",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "customer_list",
+    "command": "customer_list"
 }

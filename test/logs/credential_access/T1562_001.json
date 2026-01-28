@@ -1,8 +1,9 @@
 {
-    "event_id": "a1c38b16-35e3-4b6b-9f40-c7c59c5c443f",
-    "timestamp": "2026-01-28T07:53:27.098952",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": " -disablere"
+    "event_id": "b4cb2da9-5885-404f-8f97-64e32c9ee7a3",
+    "timestamp": "2026-01-28T07:57:23.713486",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": " -disablere",
+    "command": " -disablere"
 }

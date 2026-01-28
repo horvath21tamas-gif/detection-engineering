@@ -1,9 +1,8 @@
 {
-    "event_id": "03c413ae-6dcc-4982-9a2b-60c9952d385d",
-    "timestamp": "2026-01-28T07:53:26.868664",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "f3a95509-b13b-45bd-ba2f-d2463923acc2",
+    "timestamp": "2026-01-28T07:57:23.490935",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\reg.exe",
     "CommandLine": "\\AppData\\Local\\Temp\\",
     "process_path": "\\reg.exe",

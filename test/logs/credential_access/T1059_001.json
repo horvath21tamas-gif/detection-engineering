@@ -1,9 +1,8 @@
 {
-    "event_id": "2135cb82-1a77-4ac0-bf74-dffbbc8687ff",
-    "timestamp": "2026-01-28T07:53:26.854813",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "60b799cc-c39f-4a04-a8b7-b34e52e57302",
+    "timestamp": "2026-01-28T07:57:23.477826",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\powershell.exe",
     "CommandLine": "-nop",
     "process_path": "\\powershell.exe",

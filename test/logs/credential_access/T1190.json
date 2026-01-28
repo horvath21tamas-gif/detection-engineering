@@ -1,9 +1,10 @@
 {
-    "event_id": "e23280cd-7284-4cb7-954b-2c47ffceb494",
-    "timestamp": "2026-01-28T07:53:27.071733",
-    "Product": "generic",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "80264290-5eaf-4613-85e2-1b549cae1ba8",
+    "timestamp": "2026-01-28T07:57:23.687277",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "whoami",
     "cs-uri-query": "<script",
     "cs-method": "POST",
     "sc-status": "200"

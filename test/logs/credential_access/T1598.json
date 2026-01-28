@@ -1,8 +1,9 @@
 {
-    "event_id": "40cecb94-a333-4d35-a8cb-4f4d8d6bafa7",
-    "timestamp": "2026-01-28T07:53:26.752254",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": "copy "
+    "event_id": "4a6f0011-d03c-4a52-978f-f0bd24e76bee",
+    "timestamp": "2026-01-28T07:57:23.384867",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "copy ",
+    "command": "copy "
 }

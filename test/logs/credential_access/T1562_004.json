@@ -1,8 +1,9 @@
 {
-    "event_id": "b5584d61-b19c-48fa-8349-d16d2d58a01e",
-    "timestamp": "2026-01-28T07:53:26.925665",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": "action=allow"
+    "event_id": "839bfbab-8ed6-479c-8384-42ce0e396c9b",
+    "timestamp": "2026-01-28T07:57:23.545462",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "action=allow",
+    "command": "action=allow"
 }

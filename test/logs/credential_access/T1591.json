@@ -1,8 +1,9 @@
 {
-    "event_id": "e8fc4eab-a2d6-42a1-bb64-296a5a08a94c",
-    "timestamp": "2026-01-28T07:53:26.747852",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "Image": "\\dsquery.exe"
+    "event_id": "9127c22a-8ca0-423c-8514-ea154fd96f97",
+    "timestamp": "2026-01-28T07:57:23.380645",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "\\dsquery.exe",
+    "CommandLine": "whoami",
+    "process_path": "\\dsquery.exe"
 }

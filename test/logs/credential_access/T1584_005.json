@@ -1,9 +1,10 @@
 {
-    "event_id": "d70a04fc-860e-4ca9-a622-6829929a7c68",
-    "timestamp": "2026-01-28T07:53:27.106685",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "f87efaaf-f67b-4f13-9edc-517bdcf25dd2",
+    "timestamp": "2026-01-28T07:57:23.720979",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "\\powershell.exe",
+    "CommandLine": "whoami",
     "ParentImage": "\\wmiprvse.exe",
     "parent_process_path": "\\wmiprvse.exe",
     "process_path": "\\powershell.exe"

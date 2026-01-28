@@ -1,9 +1,10 @@
 {
-    "event_id": "8c3a72c3-69bd-40a6-93fb-c735d5abe0fd",
-    "timestamp": "2026-01-28T07:53:26.971056",
-    "Product": "windows",
-    "Service": "security",
-    "User": "AttackerAdmin",
+    "event_id": "abdc260c-3533-451a-b15f-19519346035f",
+    "timestamp": "2026-01-28T07:57:23.590336",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "whoami",
     "EventID": "4624",
     "LogonType": "10"
 }

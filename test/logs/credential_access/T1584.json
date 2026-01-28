@@ -1,9 +1,10 @@
 {
-    "event_id": "6612e105-5aa6-46b2-acc9-ca2b255d3a74",
-    "timestamp": "2026-01-28T07:53:26.703575",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "277050a0-314d-4aa8-b1a2-55035b0221b6",
+    "timestamp": "2026-01-28T07:57:23.338442",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "\\cmd.exe",
+    "CommandLine": "whoami",
     "ParentImage": "\\w3wp.exe",
     "parent_process_path": "\\w3wp.exe",
     "process_path": "\\cmd.exe"

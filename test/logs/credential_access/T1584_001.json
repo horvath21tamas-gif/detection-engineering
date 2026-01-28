@@ -1,8 +1,9 @@
 {
-    "event_id": "64c2c392-86b8-4679-bcac-c2dfc6bf5765",
-    "timestamp": "2026-01-28T07:53:26.646701",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": "--batch"
+    "event_id": "19949437-585f-4bb8-addb-47d0fd150ff2",
+    "timestamp": "2026-01-28T07:57:23.283530",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "--batch",
+    "command": "--batch"
 }

@@ -1,9 +1,10 @@
 {
-    "event_id": "31012c53-e6a2-4d62-87f0-2c4e8400a8cf",
-    "timestamp": "2026-01-28T07:53:26.656110",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "259aa0d9-97d5-48c6-81a1-fbb2daf5cda8",
+    "timestamp": "2026-01-28T07:57:23.292425",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\powershell.exe",
-    "CommandLine": "Register-WmiEvent"
+    "CommandLine": "Register-WmiEvent",
+    "process_path": "\\powershell.exe",
+    "command": "Register-WmiEvent"
 }

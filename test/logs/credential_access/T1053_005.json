@@ -1,10 +1,12 @@
 {
-    "event_id": "2f301a91-7236-41b5-b9c3-09df1ae4748c",
-    "timestamp": "2026-01-28T07:53:26.934846",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
+    "event_id": "7d9b6d0a-579e-4e4c-a451-8d4c86d139af",
+    "timestamp": "2026-01-28T07:57:23.554367",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
     "Image": "\\schtasks.exe",
     "CommandLine": "\\Users\\",
-    "ParentImage": "\\cmd.exe"
+    "process_path": "\\schtasks.exe",
+    "command": "\\Users\\",
+    "ParentImage": "\\cmd.exe",
+    "parent_process_path": "\\cmd.exe"
 }

@@ -1,8 +1,9 @@
 {
-    "event_id": "a37dc7f9-9532-4581-9f53-037ab503f023",
-    "timestamp": "2026-01-28T07:53:26.850307",
-    "Product": "windows",
-    "Service": "sysmon",
-    "User": "AttackerAdmin",
-    "CommandLine": "--layers"
+    "event_id": "a3079de8-1375-416e-b90f-ede61153cd4d",
+    "timestamp": "2026-01-28T07:57:23.473557",
+    "User": "TargetUser",
+    "SourceUser": "TargetUser",
+    "Image": "C:\\Windows\\System32\\cmd.exe",
+    "CommandLine": "--layers",
+    "command": "--layers"
 }

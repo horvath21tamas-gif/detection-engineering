@@ -58,6 +58,7 @@
 - [High-Fidelity Botnet Agent Persistence and Control - T1584.005](#high-fidelity-botnet-agent-persistence-and-control---t1584005)
 - [High-Fidelity Web Service and Cloud Storage Subversion - T1584.006](#high-fidelity-web-service-and-cloud-storage-subversion---t1584006)
 - [High-Fidelity VPS Control and Tunneling - T1584.007](#high-fidelity-vps-control-and-tunneling---t1584007)
+- [Suspicious User Account Creation via CLI/Scripting](#suspicious-user-account-creation-via-cliscripting)
 - [High-Fidelity Account Compromise and Identity Manipulation - T1586](#high-fidelity-account-compromise-and-identity-manipulation---t1586)
 - [High-Fidelity Automated Social Media Manipulation - T1586.001](#high-fidelity-automated-social-media-manipulation---t1586001)
 - [High-Fidelity Email Forwarding Rule Manipulation - T1586.002](#high-fidelity-email-forwarding-rule-manipulation---t1586002)
@@ -963,6 +964,23 @@
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Suspicious User Account Creation via CLI/Scripting
+- **Azonosító:** `T1585.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the creation of new user accounts (T1585) when initiated from 
+suspicious processes like CMD, PowerShell, or net.exe, rather than 
+standard Administrative consoles (ADUC, Windows Admin Center).
+- **Hamis pozitívok:** Automated provisioning scripts (adjust filters for your specific SVC accounts), Legacy batch scripts used by sysadmins for bulk user creation
+- **MITRE ATT&CK:** `T1585`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

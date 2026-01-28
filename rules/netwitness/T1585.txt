@@ -1,0 +1,2 @@
+EventID = 4720 AND (((ProcessName = '*\\net.exe*' OR ProcessName = '*\\net1.exe*' OR ProcessName = '*\\powershell.exe*' OR ProcessName = '*\\pwsh.exe*' OR ProcessName = '*\\cmd.exe*' OR ProcessName = '*\\wscript.exe*' OR ProcessName = '*\\cscript.exe*'))) AND (NOT ((((SubjectUserName = '*$*'))|| ((((SubjectUserName = '*MSOL_*' OR SubjectUserName = '*AAD_*' OR SubjectUserName = '*Sync*'))) AND ((SubjectDomainName = '*NT AUTHORITY*')))))
+)

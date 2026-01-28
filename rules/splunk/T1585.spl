@@ -1,0 +1,1 @@
+source="WinEventLog:Security" EventCode=4720 ProcessName IN ("*\\net.exe", "*\\net1.exe", "*\\powershell.exe", "*\\pwsh.exe", "*\\cmd.exe", "*\\wscript.exe", "*\\cscript.exe") NOT (SubjectUserName="*$" OR (SubjectUserName IN ("*MSOL_*", "*AAD_*", "*Sync*") SubjectDomainName="NT AUTHORITY"))

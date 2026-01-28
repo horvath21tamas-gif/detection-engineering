@@ -1,0 +1,64 @@
+title: Anomalous Procurement of Offensive Capabilities
+id: fd692e1a-3db1-463a-af48-7df11f7925c7
+status: stable
+description: |
+    Detects the acquisition of offensive tools by monitoring suspicious combinations 
+    of download-capable processes and known hacktool signatures or file extensions, 
+    filtering out legitimate IT software deployment tools.
+author: hota05
+date: 2026-01-28
+references:
+    - https://attack.mitre.org/techniques/T1588/
+tags:
+    - attack.resource_development
+    - attack.t1588
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection_tools:
+        TargetFilename|contains:
+            - '\mimikatz'
+            - '\bloodhound'
+            - '\sharphound'
+            - '\cobaltstrike'
+            - '\metasploit'
+            - '\responder'
+            - '\pypykatz'
+            - '\impacket'
+            - '\chisel'
+            - '\ngrok'
+
+    selection_dual_use_binaries:
+        TargetFilename|endswith:
+            - '\nmap.exe'
+            - '\nc.exe'
+            - '\netcat.exe'
+            - '\socat.exe'
+            - '\7z.exe' 
+
+    selection_suspicious_downloaders:
+        Image|endswith:
+            - '\certutil.exe'
+            - '\bitsadmin.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\curl.exe'
+            - '\wget.exe'
+            - '\csc.exe' 
+            - '\msbuild.exe'
+
+    filter_it_tools:
+        Image|contains:
+            - '\sccm\'
+            - '\tanium\'
+            - '\pdq\'
+            - '\intune\'
+            - '\chocolatey\'
+        SubjectUserName: 'SYSTEM'
+
+    condition: (selection_tools or selection_dual_use_binaries) and selection_suspicious_downloaders and not filter_it_tools
+falsepositives:
+    - Authorized penetration testing activities.
+    - Security administrators updating their local toolkits via CLI.
+level: high

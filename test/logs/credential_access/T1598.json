@@ -1,9 +1,9 @@
 {
-    "event_id": "a40261ca-3a20-4d19-aced-e36bc9355add",
-    "timestamp": "2026-01-28T06:28:34.754316",
-    "hostname": "WIN-SRV-28",
-    "source_ip": "192.168.1.241",
-    "user": "admin",
+    "event_id": "08efecf6-3349-42c1-8ab4-a0df28200d24",
+    "timestamp": "2026-01-28T06:21:18.328294",
+    "hostname": "WIN-SRV-55",
+    "source_ip": "192.168.1.46",
+    "user": "db_backup",
     "domain": "CORP.LOCAL",
-    "CommandLine|contains": "7z"
+    "CommandLine|contains": "powershell"
 }

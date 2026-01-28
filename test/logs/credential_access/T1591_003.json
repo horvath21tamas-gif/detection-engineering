@@ -1,10 +1,10 @@
 {
-    "event_id": "e39fc8e7-7437-4db2-b8f8-44b8b8715c60",
-    "timestamp": "2026-01-28T06:04:34.727839",
-    "hostname": "WIN-SRV-80",
-    "source_ip": "192.168.1.162",
-    "user": "svc_sql",
+    "event_id": "f1a784d1-0337-4337-8989-67447b165815",
+    "timestamp": "2026-01-28T06:16:18.301014",
+    "hostname": "WIN-SRV-31",
+    "source_ip": "192.168.1.20",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\curl.exe",
+    "Image|endswith": "\\wget.exe",
     "CommandLine|contains": " --recursive"
 }

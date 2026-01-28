@@ -1,9 +1,9 @@
 {
-    "event_id": "35b4bfa8-533a-4c48-93ff-6d252ed459a9",
-    "timestamp": "2026-01-28T05:57:34.653797",
-    "hostname": "WIN-SRV-60",
-    "source_ip": "192.168.1.151",
-    "user": "j.doe",
+    "event_id": "5dea0f1a-3603-409e-9548-75fe6a437275",
+    "timestamp": "2026-01-28T06:09:18.225612",
+    "hostname": "WIN-SRV-71",
+    "source_ip": "192.168.1.179",
+    "user": "admin",
     "domain": "CORP.LOCAL",
-    "CommandLine|contains": " --recursive"
+    "CommandLine|contains": " -m "
 }

@@ -1,8 +1,8 @@
 {
-    "event_id": "b7377f6a-a09c-41cb-ac84-0ca593090b2d",
-    "timestamp": "2026-01-28T06:03:35.135003",
-    "hostname": "WIN-SRV-59",
-    "source_ip": "192.168.1.205",
+    "event_id": "8132eb99-01c7-4443-a292-a564a759ea5c",
+    "timestamp": "2026-01-28T06:48:18.712436",
+    "hostname": "WIN-SRV-99",
+    "source_ip": "192.168.1.240",
     "user": "j.doe",
     "domain": "CORP.LOCAL",
     "CommandLine|contains": " -type=AXFR"

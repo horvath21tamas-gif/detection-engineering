@@ -1,9 +1,9 @@
 {
-    "event_id": "73164512-76c2-47c7-8f55-395086a8ad46",
-    "timestamp": "2026-01-28T06:53:34.768241",
-    "hostname": "WIN-SRV-90",
-    "source_ip": "192.168.1.181",
-    "user": "svc_sql",
+    "event_id": "c1c2e5ce-541b-4bb8-b523-79ced595edbe",
+    "timestamp": "2026-01-28T06:11:18.342566",
+    "hostname": "WIN-SRV-82",
+    "source_ip": "192.168.1.42",
+    "user": "admin",
     "domain": "CORP.LOCAL",
     "EventID": 4624,
     "LogonType": 2

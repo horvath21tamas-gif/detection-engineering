@@ -1,9 +1,9 @@
 {
-    "event_id": "51966143-847d-4220-a7fe-759963647f2a",
-    "timestamp": "2026-01-28T05:58:35.094585",
-    "hostname": "WIN-SRV-73",
-    "source_ip": "192.168.1.124",
-    "user": "admin",
+    "event_id": "5c8cae49-6920-4c49-84a6-ff6f727b0618",
+    "timestamp": "2026-01-28T06:52:18.671523",
+    "hostname": "WIN-SRV-57",
+    "source_ip": "192.168.1.84",
+    "user": "db_backup",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\wget.exe"
+    "Image|endswith": "\\python.exe"
 }

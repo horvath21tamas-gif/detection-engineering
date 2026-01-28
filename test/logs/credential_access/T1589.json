@@ -1,9 +1,9 @@
 {
-    "event_id": "c192039e-7736-4d69-bb25-06ffa37978f1",
-    "timestamp": "2026-01-28T05:57:34.813429",
-    "hostname": "WIN-SRV-45",
-    "source_ip": "192.168.1.98",
-    "user": "admin",
+    "event_id": "81fbc764-e19d-4302-b73c-02e37d8043ba",
+    "timestamp": "2026-01-28T06:56:18.385512",
+    "hostname": "WIN-SRV-82",
+    "source_ip": "192.168.1.193",
+    "user": "db_backup",
     "domain": "CORP.LOCAL",
-    "SrcIp|startswith": "1."
+    "SrcIp|startswith": "6."
 }

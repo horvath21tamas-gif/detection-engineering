@@ -1,10 +1,10 @@
 {
-    "event_id": "92ca5e12-6c2d-4517-b238-dc88447db2aa",
-    "timestamp": "2026-01-28T06:08:35.076617",
-    "hostname": "WIN-SRV-69",
-    "source_ip": "192.168.1.36",
-    "user": "admin",
+    "event_id": "f18c0e01-4020-4de5-948d-9302c1ad13c0",
+    "timestamp": "2026-01-28T06:37:18.653443",
+    "hostname": "WIN-SRV-54",
+    "source_ip": "192.168.1.32",
+    "user": "db_backup",
     "domain": "CORP.LOCAL",
-    "ParentImage|endswith": "\\teams.exe",
-    "Image|endswith": "\\cscript.exe"
+    "ParentImage|endswith": "\\slack.exe",
+    "Image|endswith": "\\powershell.exe"
 }

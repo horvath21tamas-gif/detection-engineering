@@ -1,9 +1,9 @@
 {
-    "event_id": "591f6c91-39e2-42a3-8839-273456484933",
-    "timestamp": "2026-01-28T06:23:34.965470",
-    "hostname": "WIN-SRV-34",
-    "source_ip": "192.168.1.97",
-    "user": "admin",
+    "event_id": "3755ebce-dd2f-4b6a-906f-a94e88de1685",
+    "timestamp": "2026-01-28T06:37:18.541279",
+    "hostname": "WIN-SRV-44",
+    "source_ip": "192.168.1.146",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\msedge.exe"
+    "Image|endswith": "\\firefox.exe"
 }

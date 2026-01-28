@@ -1,9 +1,9 @@
 {
-    "event_id": "58625068-ea4f-41b1-b692-d170a2c394b4",
-    "timestamp": "2026-01-28T06:50:34.745760",
-    "hostname": "WIN-SRV-34",
-    "source_ip": "192.168.1.180",
-    "user": "db_backup",
+    "event_id": "8b868041-ba27-4c14-b338-478873d6936d",
+    "timestamp": "2026-01-28T06:10:18.319496",
+    "hostname": "WIN-SRV-43",
+    "source_ip": "192.168.1.113",
+    "user": "admin",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\rclone.exe"
 }

@@ -1,9 +1,9 @@
 {
-    "event_id": "85dd1175-28a8-484e-89a0-df55c87b155d",
-    "timestamp": "2026-01-28T06:51:34.781945",
-    "hostname": "WIN-SRV-84",
-    "source_ip": "192.168.1.124",
+    "event_id": "95aa09d0-258a-44aa-86a4-a568024c33d3",
+    "timestamp": "2026-01-28T06:24:18.356496",
+    "hostname": "WIN-SRV-21",
+    "source_ip": "192.168.1.87",
     "user": "admin",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\wget.exe"
+    "Image|endswith": "\\curl.exe"
 }

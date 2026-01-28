@@ -1,9 +1,9 @@
 {
-    "event_id": "52069bb9-458d-428c-91e0-326de301e4e0",
-    "timestamp": "2026-01-28T06:28:35.156333",
-    "hostname": "WIN-SRV-23",
-    "source_ip": "192.168.1.145",
-    "user": "admin",
+    "event_id": "acab5dae-57ef-41e3-a725-adb073edb1ae",
+    "timestamp": "2026-01-28T06:47:18.735381",
+    "hostname": "WIN-SRV-38",
+    "source_ip": "192.168.1.91",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\sls.exe"
 }

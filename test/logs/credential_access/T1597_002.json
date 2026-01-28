@@ -1,9 +1,9 @@
 {
-    "event_id": "7c566eca-02b2-4e75-b644-4c237a847020",
-    "timestamp": "2026-01-28T06:40:34.884863",
-    "hostname": "WIN-SRV-77",
-    "source_ip": "192.168.1.206",
-    "user": "svc_sql",
+    "event_id": "5bbd0894-9b5b-433c-a74d-3f1ef618fd5c",
+    "timestamp": "2026-01-28T07:01:18.457893",
+    "hostname": "WIN-SRV-25",
+    "source_ip": "192.168.1.50",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\trufflehog.exe"
+    "Image|endswith": "\\gitleaks.exe"
 }

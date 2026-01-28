@@ -1,9 +1,9 @@
 {
-    "event_id": "3fb4985a-f760-464d-8d6f-18f01e8cb9ca",
-    "timestamp": "2026-01-28T06:07:34.865383",
-    "hostname": "WIN-SRV-67",
-    "source_ip": "192.168.1.39",
-    "user": "j.doe",
+    "event_id": "a51df87e-7650-4d1a-bf80-6ab217dc9f6f",
+    "timestamp": "2026-01-28T06:53:18.437914",
+    "hostname": "WIN-SRV-29",
+    "source_ip": "192.168.1.24",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\rustc.exe"
 }

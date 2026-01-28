@@ -1,9 +1,9 @@
 {
-    "event_id": "c6fdc3b8-4d47-46c9-a63a-fe78366bcfe2",
-    "timestamp": "2026-01-28T06:31:35.108644",
-    "hostname": "WIN-SRV-71",
-    "source_ip": "192.168.1.107",
-    "user": "db_backup",
+    "event_id": "4ee2caca-6d04-4d5a-8845-5fae2a2a417b",
+    "timestamp": "2026-01-28T06:17:18.685883",
+    "hostname": "WIN-SRV-80",
+    "source_ip": "192.168.1.225",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\powershell_ise.exe"
+    "Image|endswith": "\\powershell.exe"
 }

@@ -1,9 +1,9 @@
 {
-    "event_id": "f9f4021c-f7fe-4523-9bbd-b6b0065353a7",
-    "timestamp": "2026-01-28T06:21:35.116585",
-    "hostname": "WIN-SRV-69",
+    "event_id": "4ad4127b-4f90-4409-9578-28396790a291",
+    "timestamp": "2026-01-28T06:48:18.693893",
+    "hostname": "WIN-SRV-10",
     "source_ip": "192.168.1.123",
-    "user": "db_backup",
+    "user": "admin",
     "domain": "CORP.LOCAL",
-    "CommandLine|contains": " ddos_start"
+    "CommandLine|contains": " -flood"
 }

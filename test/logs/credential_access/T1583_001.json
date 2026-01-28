@@ -1,9 +1,9 @@
 {
-    "event_id": "c605731d-c120-4c61-a4a7-e98329c63e09",
-    "timestamp": "2026-01-28T06:55:35.038105",
-    "hostname": "WIN-SRV-29",
-    "source_ip": "192.168.1.56",
+    "event_id": "44275e22-d8e4-4858-8cba-609e1a034e0f",
+    "timestamp": "2026-01-28T06:35:18.614511",
+    "hostname": "WIN-SRV-21",
+    "source_ip": "192.168.1.146",
     "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\gcloud.exe"
+    "Image|endswith": "\\terraform.exe"
 }

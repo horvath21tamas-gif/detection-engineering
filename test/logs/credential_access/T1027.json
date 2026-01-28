@@ -1,9 +1,9 @@
 {
-    "event_id": "f30a7996-87d3-41ac-b205-257db1b366f7",
-    "timestamp": "2026-01-28T06:48:34.687741",
-    "hostname": "WIN-SRV-62",
-    "source_ip": "192.168.1.223",
-    "user": "j.doe",
+    "event_id": "48ca85dc-c307-4e29-9dcd-4fa2f93d1ef6",
+    "timestamp": "2026-01-28T06:14:18.260218",
+    "hostname": "WIN-SRV-58",
+    "source_ip": "192.168.1.29",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\powershell.exe"
 }

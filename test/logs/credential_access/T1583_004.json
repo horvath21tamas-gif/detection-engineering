@@ -1,9 +1,9 @@
 {
-    "event_id": "ce65a4ff-a7e8-49f7-8503-8479b7e3960b",
-    "timestamp": "2026-01-28T06:30:35.099003",
-    "hostname": "WIN-SRV-18",
-    "source_ip": "192.168.1.200",
-    "user": "db_backup",
+    "event_id": "8ef43cac-6cdc-47fc-b852-ea9c8ae69335",
+    "timestamp": "2026-01-28T06:23:18.676063",
+    "hostname": "WIN-SRV-14",
+    "source_ip": "192.168.1.223",
+    "user": "admin",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\serverless.exe"
+    "Image|endswith": "\\func.exe"
 }

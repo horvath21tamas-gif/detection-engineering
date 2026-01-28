@@ -1,10 +1,10 @@
 {
-    "event_id": "401cca77-f934-4628-ad43-d57310e7a313",
-    "timestamp": "2026-01-28T06:33:34.705746",
-    "hostname": "WIN-SRV-52",
-    "source_ip": "192.168.1.63",
-    "user": "db_backup",
+    "event_id": "ce26d42e-418f-4e62-bd25-c5500bc954e3",
+    "timestamp": "2026-01-28T06:15:18.278561",
+    "hostname": "WIN-SRV-83",
+    "source_ip": "192.168.1.87",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "ParentImage|endswith": "\\httpd.exe",
-    "Image|endswith": "\\powershell.exe"
+    "ParentImage|endswith": "\\w3wp.exe",
+    "Image|endswith": "\\net.exe"
 }

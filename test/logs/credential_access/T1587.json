@@ -1,9 +1,9 @@
 {
-    "event_id": "f49c71a4-e00a-4892-a816-8421383abba9",
-    "timestamp": "2026-01-28T06:25:35.025623",
-    "hostname": "WIN-SRV-52",
-    "source_ip": "192.168.1.248",
-    "user": "j.doe",
+    "event_id": "37de11b3-b74f-43e4-9929-bccfab4a7ac7",
+    "timestamp": "2026-01-28T06:41:18.602235",
+    "hostname": "WIN-SRV-88",
+    "source_ip": "192.168.1.225",
+    "user": "admin",
     "domain": "CORP.LOCAL",
-    "CommandLine|contains": "cobaltstrike.jar"
+    "CommandLine|contains": "sliver-gen"
 }

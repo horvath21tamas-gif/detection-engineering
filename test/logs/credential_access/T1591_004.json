@@ -1,9 +1,9 @@
 {
-    "event_id": "c10c1ae4-ac18-4b58-a522-e5eb08ef11cc",
-    "timestamp": "2026-01-28T06:45:34.701037",
-    "hostname": "WIN-SRV-97",
-    "source_ip": "192.168.1.98",
-    "user": "j.doe",
+    "event_id": "3eff0396-26f6-451a-9d05-ace21cae3365",
+    "timestamp": "2026-01-28T06:18:18.273749",
+    "hostname": "WIN-SRV-67",
+    "source_ip": "192.168.1.197",
+    "user": "admin",
     "domain": "CORP.LOCAL",
-    "CommandLine|contains": "Get-ADGroupMember -Identity \"Domain Admins\""
+    "CommandLine|contains": "Get-ADUser -Filter \"Enabled -eq"
 }

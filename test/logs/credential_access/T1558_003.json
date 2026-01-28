@@ -1,11 +1,11 @@
 {
-    "event_id": "eb29000d-d593-4cdc-be80-fa11ddafe644",
-    "timestamp": "2026-01-28T06:52:35.112297",
-    "hostname": "WIN-SRV-86",
-    "source_ip": "192.168.1.24",
+    "event_id": "e2fd6dc2-f5b4-4f91-9dbd-b1ce63a7c9aa",
+    "timestamp": "2026-01-28T06:20:18.689599",
+    "hostname": "WIN-SRV-46",
+    "source_ip": "192.168.1.213",
     "user": "j.doe",
     "domain": "CORP.LOCAL",
     "EventID": 4769,
     "Status": "0x0",
-    "TicketEncryptionType": "0x1"
+    "TicketEncryptionType": "0x3"
 }

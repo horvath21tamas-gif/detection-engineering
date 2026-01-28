@@ -1,9 +1,9 @@
 {
-    "event_id": "5d9ea64a-5820-463c-995c-2ba4e6e4ab7e",
-    "timestamp": "2026-01-28T06:03:34.663541",
-    "hostname": "WIN-SRV-19",
-    "source_ip": "192.168.1.54",
+    "event_id": "504166f0-b8f3-4949-b4aa-fbeae85a6a10",
+    "timestamp": "2026-01-28T06:32:18.235474",
+    "hostname": "WIN-SRV-36",
+    "source_ip": "192.168.1.192",
     "user": "db_backup",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\massdns.exe"
+    "Image|endswith": "\\subfinder.exe"
 }

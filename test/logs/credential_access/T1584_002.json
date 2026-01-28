@@ -1,9 +1,9 @@
 {
-    "event_id": "1521c5cf-adb7-4bea-9d16-b5542109c9ac",
-    "timestamp": "2026-01-28T06:39:35.005672",
-    "hostname": "WIN-SRV-44",
-    "source_ip": "192.168.1.207",
-    "user": "admin",
+    "event_id": "99a8db04-9230-431c-b09c-16c61aaa0c7c",
+    "timestamp": "2026-01-28T06:42:18.582351",
+    "hostname": "WIN-SRV-98",
+    "source_ip": "192.168.1.228",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\nsupdate.exe"
 }

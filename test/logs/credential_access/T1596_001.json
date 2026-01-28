@@ -1,9 +1,9 @@
 {
-    "event_id": "48119821-c889-447e-a5d1-15953d375ad7",
-    "timestamp": "2026-01-28T06:24:34.889723",
-    "hostname": "WIN-SRV-26",
-    "source_ip": "192.168.1.135",
-    "user": "svc_sql",
+    "event_id": "b086b568-65c7-429c-8fec-4a20a1aa6bfb",
+    "timestamp": "2026-01-28T06:47:18.462840",
+    "hostname": "WIN-SRV-45",
+    "source_ip": "192.168.1.99",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\amass.exe"
+    "Image|endswith": "\\subfinder.exe"
 }

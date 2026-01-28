@@ -1,10 +1,10 @@
 {
-    "event_id": "dcf49914-dc1e-4a1a-925a-57368d3d9ce7",
-    "timestamp": "2026-01-28T06:56:35.139872",
-    "hostname": "WIN-SRV-58",
-    "source_ip": "192.168.1.20",
-    "user": "db_backup",
+    "event_id": "6034418d-b7e5-4358-a179-a509f44bb396",
+    "timestamp": "2026-01-28T06:13:18.718495",
+    "hostname": "WIN-SRV-20",
+    "source_ip": "192.168.1.88",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\msedge.exe",
-    "CommandLine|contains": ".html"
+    "Image|endswith": "\\chrome.exe",
+    "CommandLine|contains": ".htm"
 }

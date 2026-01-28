@@ -1,9 +1,9 @@
 {
-    "event_id": "0df34fb5-c448-4f17-b76f-b17d030765ed",
-    "timestamp": "2026-01-28T06:35:34.899309",
-    "hostname": "WIN-SRV-79",
-    "source_ip": "192.168.1.144",
+    "event_id": "0048561c-3e42-42d2-96ad-9a8d3d8a5f02",
+    "timestamp": "2026-01-28T06:47:18.472735",
+    "hostname": "WIN-SRV-21",
+    "source_ip": "192.168.1.195",
     "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\masscan.exe"
+    "Image|endswith": "\\amass.exe"
 }

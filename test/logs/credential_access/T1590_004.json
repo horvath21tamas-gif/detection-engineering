@@ -1,10 +1,10 @@
 {
-    "event_id": "d45b42e0-e66f-429a-befe-12890cbb04ae",
-    "timestamp": "2026-01-28T06:52:34.777095",
-    "hostname": "WIN-SRV-87",
-    "source_ip": "192.168.1.180",
-    "user": "admin",
+    "event_id": "63520628-2157-4998-b0e3-9f53aacf6529",
+    "timestamp": "2026-01-28T06:19:18.351579",
+    "hostname": "WIN-SRV-41",
+    "source_ip": "192.168.1.75",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\openssl.exe",
-    "CommandLine|contains": " x509"
+    "CommandLine|contains": " s_client"
 }

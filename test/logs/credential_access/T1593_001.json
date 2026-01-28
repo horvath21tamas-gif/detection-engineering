@@ -1,9 +1,9 @@
 {
-    "event_id": "0ab0eba8-3ce2-4c43-ae98-ee861cbad968",
-    "timestamp": "2026-01-28T06:46:35.020922",
-    "hostname": "WIN-SRV-10",
-    "source_ip": "192.168.1.103",
-    "user": "j.doe",
+    "event_id": "9fd591d7-311d-4758-9a19-23c8981dd2f3",
+    "timestamp": "2026-01-28T06:03:18.597583",
+    "hostname": "WIN-SRV-67",
+    "source_ip": "192.168.1.187",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\maigret.exe"
+    "Image|endswith": "\\twint.exe"
 }

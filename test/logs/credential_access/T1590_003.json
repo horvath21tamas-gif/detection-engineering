@@ -1,8 +1,8 @@
 {
-    "event_id": "60e5d5d1-d3ac-41df-8a93-6f0f9db9ac7a",
-    "timestamp": "2026-01-28T06:12:34.673539",
-    "hostname": "WIN-SRV-30",
-    "source_ip": "192.168.1.85",
+    "event_id": "0ca0d9c4-8e17-4a19-8613-fa6b6b7beee1",
+    "timestamp": "2026-01-28T06:23:18.245662",
+    "hostname": "WIN-SRV-84",
+    "source_ip": "192.168.1.116",
     "user": "db_backup",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\nltest.exe",

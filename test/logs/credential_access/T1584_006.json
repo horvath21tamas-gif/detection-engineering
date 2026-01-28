@@ -1,9 +1,9 @@
 {
-    "event_id": "49d79a4e-6854-4b87-850e-9a2f28ab250f",
-    "timestamp": "2026-01-28T06:30:34.759032",
-    "hostname": "WIN-SRV-44",
-    "source_ip": "192.168.1.227",
-    "user": "j.doe",
+    "event_id": "f94e22e3-24e8-4d21-86e6-cf095a8823f1",
+    "timestamp": "2026-01-28T06:48:18.333096",
+    "hostname": "WIN-SRV-83",
+    "source_ip": "192.168.1.96",
+    "user": "admin",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\gsutil.exe"
+    "Image|endswith": "\\mega.exe"
 }

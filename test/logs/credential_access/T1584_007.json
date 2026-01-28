@@ -1,9 +1,9 @@
 {
-    "event_id": "c2c4c05a-eb8a-4212-91b9-9df5904244ca",
-    "timestamp": "2026-01-28T06:55:35.151965",
-    "hostname": "WIN-SRV-69",
-    "source_ip": "192.168.1.67",
-    "user": "svc_sql",
+    "event_id": "cbbba44f-2363-4c9e-ade4-bd8851ffebda",
+    "timestamp": "2026-01-28T06:03:18.730870",
+    "hostname": "WIN-SRV-94",
+    "source_ip": "192.168.1.48",
+    "user": "admin",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\az.exe"
+    "Image|endswith": "\\doctl.exe"
 }

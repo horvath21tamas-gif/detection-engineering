@@ -1,9 +1,9 @@
 {
-    "event_id": "0e46c5c6-f2e8-4d7a-8790-ad86d3eb0281",
-    "timestamp": "2026-01-28T06:52:34.986739",
-    "hostname": "WIN-SRV-63",
-    "source_ip": "192.168.1.51",
-    "user": "svc_sql",
+    "event_id": "97f44b92-c9f0-4853-910a-2b5374771ff0",
+    "timestamp": "2026-01-28T06:58:18.562781",
+    "hostname": "WIN-SRV-57",
+    "source_ip": "192.168.1.97",
+    "user": "j.doe",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\subfinder.exe"
+    "Image|endswith": "\\certspotter.exe"
 }

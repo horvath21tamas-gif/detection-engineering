@@ -1,9 +1,9 @@
 {
-    "event_id": "7e9430b0-b374-49e8-a23c-c4ce545a4e44",
-    "timestamp": "2026-01-28T06:40:35.161576",
-    "hostname": "WIN-SRV-42",
-    "source_ip": "192.168.1.173",
-    "user": "j.doe",
+    "event_id": "e3bc254d-0783-4f4c-b01c-736fe7e15e75",
+    "timestamp": "2026-01-28T06:24:18.740586",
+    "hostname": "WIN-SRV-76",
+    "source_ip": "192.168.1.92",
+    "user": "db_backup",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\social-analyzer.exe"
 }

@@ -1,10 +1,10 @@
 {
-    "event_id": "801ddb07-529d-416e-9ef0-6ec1a8aa81b2",
-    "timestamp": "2026-01-28T06:12:34.827233",
-    "hostname": "WIN-SRV-25",
-    "source_ip": "192.168.1.167",
-    "user": "db_backup",
+    "event_id": "6e63fa97-9617-48d6-9230-678dd7281942",
+    "timestamp": "2026-01-28T06:08:18.399186",
+    "hostname": "WIN-SRV-51",
+    "source_ip": "192.168.1.126",
+    "user": "svc_sql",
     "domain": "CORP.LOCAL",
     "TargetImage|endswith": "\\lsass.exe",
-    "GrantedAccess|contains": "0x10"
+    "GrantedAccess|contains": "0x1438"
 }

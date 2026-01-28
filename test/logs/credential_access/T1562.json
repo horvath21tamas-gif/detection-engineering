@@ -1,8 +1,8 @@
 {
-    "event_id": "6e83ee44-c0ad-403e-b26b-a751537b3893",
-    "timestamp": "2026-01-28T06:12:35.131637",
-    "hostname": "WIN-SRV-29",
-    "source_ip": "192.168.1.140",
+    "event_id": "2b22307d-a208-440e-8945-1e1b66fe034f",
+    "timestamp": "2026-01-28T06:57:18.709026",
+    "hostname": "WIN-SRV-65",
+    "source_ip": "192.168.1.123",
     "user": "admin",
     "domain": "CORP.LOCAL",
     "Image|endswith": "\\net.exe"

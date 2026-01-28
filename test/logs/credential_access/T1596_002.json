@@ -1,9 +1,9 @@
 {
-    "event_id": "4eecf6b9-1b48-4699-b404-3821c636f919",
-    "timestamp": "2026-01-28T05:59:34.764311",
-    "hostname": "WIN-SRV-77",
-    "source_ip": "192.168.1.232",
-    "user": "admin",
+    "event_id": "4700628c-4e3d-44f0-99a5-f72ca8973b25",
+    "timestamp": "2026-01-28T06:32:18.338425",
+    "hostname": "WIN-SRV-25",
+    "source_ip": "192.168.1.55",
+    "user": "db_backup",
     "domain": "CORP.LOCAL",
-    "Image|endswith": "\\dork-cli.exe"
+    "Image|endswith": "\\ghunt.exe"
 }

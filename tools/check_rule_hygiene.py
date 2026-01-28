@@ -1,15 +1,13 @@
 import os
 import datetime
 
-# Útvonalak beállítása a struktúrád alapján
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# A tools-ból egyet vissza, majd be a rules/sigma szabályok mappába
-SIGMA_RULES_PATH = os.path.join(BASE_DIR, '..', 'rules', 'sigma szabályok')
+# A CI/CD környezetben a gyökérkönyvtárból indulunk
+SIGMA_RULES_PATH = 'rules/sigma' 
 THRESHOLD_DAYS = 90
 
 def check_age():
     today = datetime.datetime.now()
-    stale_rules = []
+    stale_found = False
 
     if not os.path.exists(SIGMA_RULES_PATH):
         print(f"[!] Hiba: Nem találom a Sigma szabályokat itt: {SIGMA_RULES_PATH}")
@@ -19,7 +17,7 @@ def check_age():
 
     for root, _, files in os.walk(SIGMA_RULES_PATH):
         for file in files:
-            if file.endswith(('.yml', '.yaml')):
+            if file.endswith(('.yaml', '.yml')):
                 file_path = os.path.join(root, file)
                 
                 # Utolsó módosítás lekérése
@@ -28,14 +26,11 @@ def check_age():
                 age = (today - last_mod).days
 
                 if age >= THRESHOLD_DAYS:
-                    stale_rules.append((file, age, last_mod.date()))
+                    stale_found = True
+                    print(f"[⚠️ FIGYELEM] ELAVULT SZABÁLY: {file} | {age} napja érintetlen ({last_mod.date()})")
 
-    if stale_rules:
-        print(f"\n[!] {len(stale_rules)} szabály elavult:")
-        for name, days, l_date in stale_rules:
-            print(f" - {name:30} | {days} napja módosítva ({l_date})")
-    else:
-        print("\n[+] Minden szabály naprakész!")
+    if not stale_found:
+        print("[✅ OK] Minden szabály frissítve lett 90 napon belül.")
 
 if __name__ == "__main__":
     check_age()

@@ -1,8 +1,9 @@
 {
-    "event_id": "05c03dd0-ede2-435f-a452-ceab0c8c66a2",
-    "timestamp": "2026-01-28T07:17:22.596194",
+    "event_id": "1a10a706-197a-45cd-b20b-e8e7737a0930",
+    "timestamp": "2026-01-28T07:25:55.539516",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "git clone",
     "ParentImage": "\\explorer.exe",
     "condition": "not selection_specialized_tools",

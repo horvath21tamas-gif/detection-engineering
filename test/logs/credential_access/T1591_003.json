@@ -1,8 +1,9 @@
 {
-    "event_id": "f26f56fb-d45d-4819-83af-965dbd5cf22a",
-    "timestamp": "2026-01-28T07:17:22.440098",
+    "event_id": "424bdb24-dcaf-4760-83f3-c1c232afe93d",
+    "timestamp": "2026-01-28T07:25:55.380226",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "--update",
     "ParentImage": "\\chrome.exe",
     "User": "svc_deploy",

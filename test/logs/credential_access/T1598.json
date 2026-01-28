@@ -1,8 +1,9 @@
 {
-    "event_id": "66900da7-efa8-41bc-af9a-2273e59dc901",
-    "timestamp": "2026-01-28T07:17:22.466446",
+    "event_id": "7b372da1-40af-45bb-8436-11835324f666",
+    "timestamp": "2026-01-28T07:25:55.407471",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "MigLog",
     "Image": "\\migwiz.exe",
     "ParentImage": "\\CcmExec.exe"

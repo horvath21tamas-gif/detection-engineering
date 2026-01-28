@@ -1,8 +1,9 @@
 {
-    "event_id": "e3d1e19d-55f3-4af6-a65a-89475e747aaf",
-    "timestamp": "2026-01-28T07:17:22.562822",
+    "event_id": "6aca42bb-4bb7-4d41-af51-013937ac5c15",
+    "timestamp": "2026-01-28T07:25:55.505277",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "Image": "\\powershell.exe",
     "CommandLine": "-nop",
     "ParentImage": "\\Windows\\CCM\\",

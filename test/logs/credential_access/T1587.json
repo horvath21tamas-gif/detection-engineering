@@ -1,8 +1,9 @@
 {
-    "event_id": "3921cf29-7893-4754-9ddb-3d3fd90bab12",
-    "timestamp": "2026-01-28T07:17:22.726071",
+    "event_id": "8e22ea66-c578-451d-b2b5-6395d028aecc",
+    "timestamp": "2026-01-28T07:25:55.674551",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "\\AppData\\Local\\Temp\\",
     "Image": "\\csc.exe",
     "ParentImage": "\\mscorsvw.exe",

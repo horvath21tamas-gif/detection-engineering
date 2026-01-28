@@ -1,8 +1,9 @@
 {
-    "event_id": "5fd40029-3a3c-4f10-8a0f-b1e3e6675772",
-    "timestamp": "2026-01-28T07:17:22.576547",
+    "event_id": "c450675c-df8f-415b-ac93-93794684aed7",
+    "timestamp": "2026-01-28T07:25:55.519225",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "Image": "\\reg.exe",
     "CommandLine": "\\Microsoft\\Windows\\CloudExperienceHost"
 }

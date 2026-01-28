@@ -1,8 +1,9 @@
 {
-    "event_id": "d14acb4d-cf67-400d-a47d-cee8c7bcdbe6",
-    "timestamp": "2026-01-28T07:17:22.567390",
+    "event_id": "3109f273-e182-420a-ae08-e4af5d36ff4a",
+    "timestamp": "2026-01-28T07:25:55.509879",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "\\Users\\Public\\",
     "ParentImage": "\\mscorsvw.exe",
     "condition": "not selection_malware_dna"

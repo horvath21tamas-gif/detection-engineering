@@ -1,8 +1,9 @@
 {
-    "event_id": "005de12e-5a13-4655-b7c3-844d3f51903a",
-    "timestamp": "2026-01-28T07:17:22.872081",
+    "event_id": "4e93df2d-7f99-4b8e-bb63-423b954c9e34",
+    "timestamp": "2026-01-28T07:25:55.823640",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "Image": "\\Windows\\AdminArsenal\\",
     "CommandLine": "update",
     "ParentImage": "\\CcmExec.exe",

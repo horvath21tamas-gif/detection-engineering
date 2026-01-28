@@ -1,8 +1,9 @@
 {
-    "event_id": "a1880661-0ba6-4126-a268-7a567699ce1a",
-    "timestamp": "2026-01-28T07:17:22.484717",
+    "event_id": "183cfdeb-5df9-4bec-9450-6fb2c45030cd",
+    "timestamp": "2026-01-28T07:25:55.426267",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "Image": "\\Zabbix\\",
     "User": "svc_monitoring"
 }

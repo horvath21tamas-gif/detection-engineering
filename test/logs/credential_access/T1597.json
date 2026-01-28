@@ -1,8 +1,9 @@
 {
-    "event_id": "65fa3ea0-5898-4e19-a664-7e9bd85ea611",
-    "timestamp": "2026-01-28T07:17:22.367096",
+    "event_id": "bb9ef934-abb4-480a-969b-388bc9882c8f",
+    "timestamp": "2026-01-28T07:25:55.304022",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "--type=",
     "Image": "\\chrome.exe",
     "ParentImage": "\\services.exe",

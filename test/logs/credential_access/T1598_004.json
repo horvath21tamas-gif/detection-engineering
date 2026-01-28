@@ -1,8 +1,9 @@
 {
-    "event_id": "24b8ffd2-fb5c-4e24-8755-ce080ca23491",
-    "timestamp": "2026-01-28T07:17:22.839069",
+    "event_id": "949f1fd4-87ce-43fe-b6ce-ea49230bf171",
+    "timestamp": "2026-01-28T07:25:55.789765",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "Image": "\\powershell.exe",
     "CommandLine": "--type=utility",
     "ParentImage": "\\Windows\\Installer\\",

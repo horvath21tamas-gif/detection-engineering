@@ -1,8 +1,9 @@
 {
-    "event_id": "daf50cc3-a1f7-48f5-9c3a-470c564e1f7a",
-    "timestamp": "2026-01-28T07:17:22.742737",
+    "event_id": "ba22b0e3-7244-4e49-ae05-5e97b2d41702",
+    "timestamp": "2026-01-28T07:25:55.691821",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "\\Users\\Public\\",
     "ParentImage": "\\explorer.exe",
     "condition": "not selection_exploit_primitives"

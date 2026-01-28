@@ -1,8 +1,9 @@
 {
-    "event_id": "e03c6fbc-97f4-495b-b53e-626e078a6ff3",
-    "timestamp": "2026-01-28T07:17:22.798405",
+    "event_id": "62894def-0c62-4103-abd7-a3bf01a4c37d",
+    "timestamp": "2026-01-28T07:25:55.748789",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "Image": "\\terraform.exe",
     "CommandLine": "aws_lambda_function",
     "ParentImage": "\\explorer.exe",

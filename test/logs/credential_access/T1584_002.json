@@ -1,8 +1,9 @@
 {
-    "event_id": "52a632f6-849a-4d5a-a9b9-c9874332624a",
-    "timestamp": "2026-01-28T07:17:22.706252",
+    "event_id": "610ef5b6-41e7-4606-bd12-5996e3e5352e",
+    "timestamp": "2026-01-28T07:25:55.653549",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "ParentImage": "\\explorer.exe",
     "Image": "\\System32\\ServerManager.exe",
     "username": "NT AUTHORITY\\SYSTEM",

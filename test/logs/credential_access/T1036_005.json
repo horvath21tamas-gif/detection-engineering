@@ -1,8 +1,9 @@
 {
-    "event_id": "24913bcb-b313-44ee-90ed-697c6322b0fd",
-    "timestamp": "2026-01-28T07:17:22.651564",
+    "event_id": "f330e4ac-fd9e-43bd-b0a1-ea401272e3f0",
+    "timestamp": "2026-01-28T07:25:55.596881",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "Image": "\\cmd.exe",
     "CommandLine": "C:\\Windows\\System32\\",
     "User": "NT AUTHORITY\\SYSTEM",

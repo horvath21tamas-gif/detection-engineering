@@ -1,8 +1,9 @@
 {
-    "event_id": "cb5b9992-07b9-4e25-81a7-13445a28c35c",
-    "timestamp": "2026-01-28T07:17:22.759212",
+    "event_id": "744f6d9a-1a26-4ead-b72a-0e6fae4d32a9",
+    "timestamp": "2026-01-28T07:25:55.708699",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "ParentImage": "\\code.exe",
     "username": "NT AUTHORITY\\SYSTEM"
 }

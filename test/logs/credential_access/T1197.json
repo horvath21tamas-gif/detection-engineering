@@ -1,8 +1,9 @@
 {
-    "event_id": "d107c3ea-563d-4de5-8b80-5eafd16e0d2f",
-    "timestamp": "2026-01-28T07:17:22.766751",
+    "event_id": "3fda40c8-200e-4188-a4d3-4477a1d46bbd",
+    "timestamp": "2026-01-28T07:25:55.716689",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "Image": "\\bitsadmin.exe",
     "CommandLine": "\\Users\\",
     "ParentImage": "\\Windows\\CCM\\",

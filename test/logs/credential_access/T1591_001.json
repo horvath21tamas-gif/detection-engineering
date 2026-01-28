@@ -1,8 +1,9 @@
 {
-    "event_id": "8ebb2fcc-de6e-4e17-969c-1d2e5a7918d1",
-    "timestamp": "2026-01-28T07:17:22.655974",
+    "event_id": "8e071cc0-7839-4a45-aadd-64749f62c2c4",
+    "timestamp": "2026-01-28T07:25:55.601400",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "Image": "\\acad.exe",
     "CommandLine": ".dwg",
     "ParentImage": "\\chrome.exe",

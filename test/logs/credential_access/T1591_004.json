@@ -1,8 +1,9 @@
 {
-    "event_id": "ebcc68ea-5624-4470-9078-406710a6a592",
-    "timestamp": "2026-01-28T07:17:22.413424",
+    "event_id": "e5d8b6e2-aa7c-4ef0-a3a6-7c462156279b",
+    "timestamp": "2026-01-28T07:25:55.352817",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "net user ",
     "condition": "not selection_broad_queries"
 }

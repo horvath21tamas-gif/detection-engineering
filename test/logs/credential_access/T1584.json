@@ -1,8 +1,9 @@
 {
-    "event_id": "a88f3396-6003-44e6-90be-431e70dfcf66",
-    "timestamp": "2026-01-28T07:17:22.418054",
+    "event_id": "33d49431-3a61-4cf4-acaf-f71c61c5b641",
+    "timestamp": "2026-01-28T07:25:55.357545",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "ParentImage": "\\explorer.exe",
     "Image": "\\Windows\\System32\\OpenSSH\\",
     "User": "svc_monitoring",

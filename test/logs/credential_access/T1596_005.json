@@ -1,8 +1,9 @@
 {
-    "event_id": "af72b038-71ae-4177-bd77-09b87eaa4d56",
-    "timestamp": "2026-01-28T07:17:22.381614",
+    "event_id": "301b3a2c-3cbe-40dc-922a-9b01c52a7a9a",
+    "timestamp": "2026-01-28T07:25:55.319909",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "username": "NT AUTHORITY\\SYSTEM",
     "Image": "\\SentinelOne\\"
 }

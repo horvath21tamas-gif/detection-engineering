@@ -1,8 +1,9 @@
 {
-    "event_id": "8b63d09c-5815-41aa-851c-eb31f1e73d78",
-    "timestamp": "2026-01-28T07:17:22.697700",
+    "event_id": "8a34899a-07c7-4f24-8ea5-b7e2cf040daa",
+    "timestamp": "2026-01-28T07:25:55.644752",
     "Product": "generic",
     "Service": "sysmon",
+    "Source": "Security",
     "SrcIp": "34.",
     "Action": "deny",
     "Protocol": "tcp",

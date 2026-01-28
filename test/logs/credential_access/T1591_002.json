@@ -1,8 +1,9 @@
 {
-    "event_id": "fcf64e25-fe99-4bee-96b7-d3c960ecde80",
-    "timestamp": "2026-01-28T07:17:22.553140",
+    "event_id": "9230280e-b63d-43e0-81dd-2b6d57aa2b08",
+    "timestamp": "2026-01-28T07:25:55.496200",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "customer_list",
     "ParentImage": "\\services.exe",
     "User": "fin_",

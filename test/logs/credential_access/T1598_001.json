@@ -1,8 +1,9 @@
 {
-    "event_id": "79932cd3-5b43-449c-85c8-53124b2d783f",
-    "timestamp": "2026-01-28T07:17:22.775988",
+    "event_id": "1ef52427-b76c-4871-ac4a-c6c219280528",
+    "timestamp": "2026-01-28T07:25:55.726197",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "ParentImage": "\\outlook.exe",
     "Image": "\\chrome.exe",
     "CommandLine": ".local"

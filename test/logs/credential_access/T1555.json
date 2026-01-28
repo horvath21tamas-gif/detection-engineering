@@ -1,8 +1,9 @@
 {
-    "event_id": "08bdf7ba-bf13-4aca-b0d3-31d4362efd87",
-    "timestamp": "2026-01-28T07:17:22.618485",
+    "event_id": "42e82a37-5d9c-4364-ab67-18e14d73e573",
+    "timestamp": "2026-01-28T07:25:55.562557",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "TargetFileName": "logins.json",
     "AccessMask": "0x1",
     "Image": "\\Veeam\\"

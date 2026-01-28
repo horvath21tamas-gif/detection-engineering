@@ -1,8 +1,9 @@
 {
-    "event_id": "74e7a7ce-2230-4535-843c-4956c487bdff",
-    "timestamp": "2026-01-28T07:17:22.716737",
+    "event_id": "bdfc3959-18ce-4041-bf4a-f9617ed7f682",
+    "timestamp": "2026-01-28T07:25:55.664796",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "Image": "\\rundll32.exe",
     "CommandLine": "\\Windows\\System32\\",
     "ParentImage": "\\Windows\\Installer\\"

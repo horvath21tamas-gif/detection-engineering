@@ -1,8 +1,9 @@
 {
-    "event_id": "cde0ca87-5642-4233-abbd-44180ad2f245",
-    "timestamp": "2026-01-28T07:17:22.426605",
+    "event_id": "53f60e5c-012a-4a79-9a1d-142c004f67c9",
+    "timestamp": "2026-01-28T07:25:55.366369",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "TargetObject": "\\InprocServer32",
     "Details": "C:\\Windows\\System32\\",
     "Image": "\\Windows\\Installer\\",

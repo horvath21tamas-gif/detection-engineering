@@ -1,8 +1,9 @@
 {
-    "event_id": "0a25fd1b-e341-4a0d-ac2e-048c44e46761",
-    "timestamp": "2026-01-28T07:17:22.557961",
+    "event_id": "4e38634c-0f37-4a6d-a570-e246895655fd",
+    "timestamp": "2026-01-28T07:25:55.500730",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "--stage dev",
     "ParentImage": "\\explorer.exe",
     "condition": "not selection_high_risk_params"

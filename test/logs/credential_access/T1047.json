@@ -1,8 +1,9 @@
 {
-    "event_id": "d7c14bc7-d147-40cf-bc68-60be347fc444",
-    "timestamp": "2026-01-28T07:17:22.702105",
+    "event_id": "ad8ab881-9642-4a0e-9ea8-242470c24cf9",
+    "timestamp": "2026-01-28T07:25:55.649304",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "Image": "\\wmic.exe",
     "CommandLine": "cmd.exe",
     "ParentImage": "\\Windows\\CCM\\",

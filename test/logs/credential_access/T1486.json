@@ -1,8 +1,9 @@
 {
-    "event_id": "75d3b16c-98e9-44d8-ba2a-7c2edd591689",
-    "timestamp": "2026-01-28T07:17:22.789371",
+    "event_id": "080e6a11-8a17-4272-9a63-01f04389ad1d",
+    "timestamp": "2026-01-28T07:25:55.739705",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "Image": "\\sc.exe",
     "CommandLine": "stop",
     "ParentImage": "\\Veeam\\",

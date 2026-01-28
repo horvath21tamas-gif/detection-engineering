@@ -1,8 +1,9 @@
 {
-    "event_id": "9d5c4ead-7967-4e74-a1aa-ae55cb3d236b",
-    "timestamp": "2026-01-28T07:17:22.746827",
+    "event_id": "a9f1e82a-8125-4188-ac13-0c1bcd123950",
+    "timestamp": "2026-01-28T07:25:55.696008",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "Image": "\\gcloud.exe",
     "CommandLine": "--version",
     "ParentImage": "\\jenkins.exe",

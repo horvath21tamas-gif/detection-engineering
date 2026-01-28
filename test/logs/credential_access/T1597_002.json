@@ -1,8 +1,9 @@
 {
-    "event_id": "fdcfe595-ec50-42cb-b375-5b89e893f701",
-    "timestamp": "2026-01-28T07:17:22.586673",
+    "event_id": "970ac3e3-a433-45df-a89e-f66c7d4a9f5b",
+    "timestamp": "2026-01-28T07:25:55.529763",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "git pull",
     "ParentImage": "\\code.exe",
     "User": "svc_jenkins"

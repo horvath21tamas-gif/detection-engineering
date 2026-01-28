@@ -1,8 +1,9 @@
 {
-    "event_id": "a582f08a-a5bd-4a87-a924-85f2ae32bc76",
-    "timestamp": "2026-01-28T07:17:22.504253",
+    "event_id": "8ab4f85e-db90-4493-8a05-5bf450f997ce",
+    "timestamp": "2026-01-28T07:25:55.446482",
     "Product": "generic",
     "Service": "sysmon",
+    "Source": "Security",
     "SrcIp": "1.",
     "UriStem": "/api/users",
     "UriQuery": "email=",

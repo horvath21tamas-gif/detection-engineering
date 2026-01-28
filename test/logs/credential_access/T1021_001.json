@@ -1,8 +1,12 @@
 {
-    "event_id": "27c95e4c-2689-4aff-b653-70ca38fd89d8",
-    "timestamp": "2026-01-28T07:17:22.678710",
+    "event_id": "aae3a896-36b4-4a2f-a43f-835c443efb65",
+    "timestamp": "2026-01-28T07:25:55.625143",
     "Product": "windows",
     "Service": "security",
+    "Source": "Security",
     "EventID": 4624,
-    "LogonType": 10
+    "LogonType": 10,
+    "IpAddress": "10.",
+    "WorkstationName": "JUMP-",
+    "TargetUserName": "admin"
 }

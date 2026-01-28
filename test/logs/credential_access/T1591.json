@@ -1,8 +1,9 @@
 {
-    "event_id": "b5f08415-5066-44d0-92b9-810469ef8610",
-    "timestamp": "2026-01-28T07:17:22.462019",
+    "event_id": "151304cf-ceac-498b-8c47-4f37bdab7878",
+    "timestamp": "2026-01-28T07:25:55.402909",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "Image": "\\dsquery.exe",
     "User": "SVC_IAM",
     "ParentImage": "\\services.exe",

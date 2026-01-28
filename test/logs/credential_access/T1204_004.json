@@ -1,8 +1,9 @@
 {
-    "event_id": "8faef71e-fa79-4da3-95b3-5cbca8572bd3",
-    "timestamp": "2026-01-28T07:17:22.846659",
+    "event_id": "43f82cea-6283-4610-80ef-29c95ee74948",
+    "timestamp": "2026-01-28T07:25:55.797538",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "url": "microsoft.com",
     "url_domain_age": 30,
     "url_reputation": "low",

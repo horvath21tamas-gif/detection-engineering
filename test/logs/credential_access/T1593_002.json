@@ -1,8 +1,9 @@
 {
-    "event_id": "00399926-8abd-4412-9898-effa836326ce",
-    "timestamp": "2026-01-28T07:17:22.820919",
+    "event_id": "9a3e340f-f6a1-411a-9c63-9b09d3a927c5",
+    "timestamp": "2026-01-28T07:25:55.771439",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "--type=renderer",
     "ParentImage": "\\code.exe",
     "condition": "not selection_specialized_tools"

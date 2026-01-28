@@ -1,8 +1,9 @@
 {
-    "event_id": "35e19b07-1f66-406a-a099-02d4502710ac",
-    "timestamp": "2026-01-28T07:17:22.488931",
+    "event_id": "3c34edf1-8b19-4076-a13b-59789cb1a4a6",
+    "timestamp": "2026-01-28T07:25:55.430593",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "localhost",
     "ParentImage": "\\services.exe"
 }

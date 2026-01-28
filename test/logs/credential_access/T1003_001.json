@@ -1,8 +1,9 @@
 {
-    "event_id": "07d7d14b-ff69-490f-b430-bf0f14b572e8",
-    "timestamp": "2026-01-28T07:17:22.529023",
+    "event_id": "e45c7692-ef0a-4ad5-b313-73678e6dfd26",
+    "timestamp": "2026-01-28T07:25:55.471647",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "TargetImage": "\\lsass.exe",
     "GrantedAccess": "0x10",
     "SourceImage": "\\CcmExec.exe",

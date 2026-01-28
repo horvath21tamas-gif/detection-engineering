@@ -1,8 +1,9 @@
 {
-    "event_id": "45fb3ae8-5ff3-4fee-bd08-c92e186cd86b",
-    "timestamp": "2026-01-28T07:17:22.538223",
+    "event_id": "ae7a6842-6c11-4867-a952-a0e1d898b2d0",
+    "timestamp": "2026-01-28T07:25:55.480990",
     "Product": "generic",
     "Service": "sysmon",
+    "Source": "Security",
     "cs-uri-stem": "/wp-admin/",
     "cs-method": "POST",
     "cs-uri-query": "cmd=",

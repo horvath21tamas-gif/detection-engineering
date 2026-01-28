@@ -1,8 +1,9 @@
 {
-    "event_id": "1163221d-132a-48dd-ad96-1e96da53faf0",
-    "timestamp": "2026-01-28T07:17:22.834227",
+    "event_id": "dbdaf15d-7b26-4dad-8ec0-02a78e5cb5f6",
+    "timestamp": "2026-01-28T07:25:55.784861",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "nslookup.exe",
     "Image": "\\dig.exe",
     "User": "svc_monitoring"

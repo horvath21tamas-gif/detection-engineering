@@ -1,8 +1,9 @@
 {
-    "event_id": "33c5d0b7-0902-4b32-b962-2667e83f622e",
-    "timestamp": "2026-01-28T07:17:22.390830",
+    "event_id": "4e23d828-e6f1-486b-9637-78653d89b53d",
+    "timestamp": "2026-01-28T07:25:55.329470",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "ParentImage": "\\consent.exe",
     "Image": "\\Users\\",
     "username": "NT AUTHORITY\\SYSTEM"

@@ -1,8 +1,9 @@
 {
-    "event_id": "86694d3a-3b7a-4bb2-be4c-37cc5fa8041a",
-    "timestamp": "2026-01-28T07:17:22.444307",
+    "event_id": "e7ff82e0-f835-4cd1-a22a-85007c83da80",
+    "timestamp": "2026-01-28T07:25:55.384552",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "\\Users\\Public\\",
     "Image": "\\Program Files\\",
     "User": "svc_pki",

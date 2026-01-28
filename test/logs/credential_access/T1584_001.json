@@ -1,8 +1,9 @@
 {
-    "event_id": "50a45d0d-64ee-40c7-a184-824733c41c4e",
-    "timestamp": "2026-01-28T07:17:22.362075",
+    "event_id": "73fe2d5b-deaf-46de-be6e-dd1e5607dc8c",
+    "timestamp": "2026-01-28T07:25:55.298830",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "TXT",
     "ParentImage": "\\explorer.exe",
     "condition": "not selection_domain_hijacking"

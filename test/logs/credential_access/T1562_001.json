@@ -1,8 +1,9 @@
 {
-    "event_id": "86634ec3-01e6-4297-847a-994b5d55747a",
-    "timestamp": "2026-01-28T07:17:22.807986",
+    "event_id": "6f0e3b76-d3c4-4674-94f0-16431c027b21",
+    "timestamp": "2026-01-28T07:25:55.758466",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "Specific_Safe_Admin_Script.ps1",
     "ParentImage": "\\CcmExec.exe"
 }

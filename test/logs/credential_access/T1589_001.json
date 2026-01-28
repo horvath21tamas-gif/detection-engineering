@@ -1,8 +1,9 @@
 {
-    "event_id": "b1822075-80df-470b-b8ce-4d3261a5d368",
-    "timestamp": "2026-01-28T07:17:22.613381",
+    "event_id": "8055b1c8-15f2-4e98-946b-7aeadddb3c88",
+    "timestamp": "2026-01-28T07:25:55.557184",
     "Product": "generic",
     "Service": "sysmon",
+    "Source": "Security",
     "SrcIp": "1.",
     "UriStem": "/sso",
     "RequestBody": "username",

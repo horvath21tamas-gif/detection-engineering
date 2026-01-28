@@ -1,8 +1,9 @@
 {
-    "event_id": "2c8a584d-ecb9-474c-8441-0165be57f938",
-    "timestamp": "2026-01-28T07:17:22.811618",
+    "event_id": "80c0ff24-54fc-4133-9fd0-1f1703165882",
+    "timestamp": "2026-01-28T07:25:55.762125",
     "Product": "windows",
     "Service": "security",
+    "Source": "Security",
     "EventID": 4769,
     "Status": "0x0",
     "TicketEncryptionType": "0x17",

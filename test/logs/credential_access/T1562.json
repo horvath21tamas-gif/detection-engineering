@@ -1,8 +1,9 @@
 {
-    "event_id": "94b961d4-0dea-46c9-a74d-306ea5f3028e",
-    "timestamp": "2026-01-28T07:17:22.830869",
+    "event_id": "97223b7d-6d2d-44b6-88b7-b46569efcfa0",
+    "timestamp": "2026-01-28T07:25:55.781455",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "WinDefend",
     "ParentImage": "\\CcmExec.exe"
 }

@@ -1,8 +1,11 @@
 {
-    "event_id": "d806c902-fe6f-4532-8ef0-cead580d9509",
-    "timestamp": "2026-01-28T07:17:22.863871",
+    "event_id": "80137ab0-71cc-45be-8d68-6cbf87743215",
+    "timestamp": "2026-01-28T07:25:55.815115",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "EventID": 3,
-    "Protocol": "tcp"
+    "Protocol": "tcp",
+    "DestinationIp": "10.",
+    "DestinationPort": 80
 }

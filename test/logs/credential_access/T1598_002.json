@@ -1,8 +1,9 @@
 {
-    "event_id": "3d850584-bc78-496c-9f15-f69b5e84d701",
-    "timestamp": "2026-01-28T07:17:22.646898",
+    "event_id": "ef9cbc9d-442c-412c-8b73-003de749d0e8",
+    "timestamp": "2026-01-28T07:25:55.591993",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "Image": "\\OneDrive.exe",
     "CommandLine": " /background",
     "ParentImage": "\\outlook.exe",

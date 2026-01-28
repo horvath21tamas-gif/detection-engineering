@@ -1,8 +1,9 @@
 {
-    "event_id": "8e540c43-96fe-411e-b40a-801905c5a8dc",
-    "timestamp": "2026-01-28T07:17:22.629819",
+    "event_id": "58df2df1-b7ff-47d4-ac96-510c81b16522",
+    "timestamp": "2026-01-28T07:25:55.574296",
     "Product": "generic",
     "Service": "sysmon",
+    "Source": "Security",
     "SrcIp": "1.",
     "Method": "GET",
     "UriStem": ".css",

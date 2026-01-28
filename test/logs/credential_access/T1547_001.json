@@ -1,8 +1,9 @@
 {
-    "event_id": "ae161f1f-48af-4dca-a9b1-68739ca9602c",
-    "timestamp": "2026-01-28T07:17:22.730066",
+    "event_id": "68a77ef1-5b5b-4e66-bdc7-464db0b85757",
+    "timestamp": "2026-01-28T07:25:55.678769",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "EventType": "SetValue",
     "TargetObject": "\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
     "Details": "\\AppData\\",

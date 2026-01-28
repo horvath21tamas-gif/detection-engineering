@@ -1,8 +1,9 @@
 {
-    "event_id": "f775cc55-6c65-4840-bcac-edaa3f5f3a59",
-    "timestamp": "2026-01-28T07:17:22.371413",
+    "event_id": "916f1e9d-71e3-4bdc-8dae-127e78479a7b",
+    "timestamp": "2026-01-28T07:25:55.308505",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "Image": "\\Microsoft Monitoring Agent\\",
     "CommandLine": "HealthCheck",
     "User": "SYSTEM"

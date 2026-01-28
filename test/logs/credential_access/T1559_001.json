@@ -1,8 +1,9 @@
 {
-    "event_id": "4e3bb1ee-d68e-4cad-a9ae-ef546cd00c65",
-    "timestamp": "2026-01-28T07:17:22.581544",
+    "event_id": "eea657b2-44e3-415e-950e-901301b1f01c",
+    "timestamp": "2026-01-28T07:25:55.524349",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "PipeName": "^\\\\+(chrome|edge|mojo)",
     "Image": "\\chrome.exe",
     "ParentImage": "\\cmd.exe"

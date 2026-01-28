@@ -1,8 +1,9 @@
 {
-    "event_id": "18f19a1a-ebec-4184-b4af-0ef541ee7445",
-    "timestamp": "2026-01-28T07:17:22.422323",
+    "event_id": "da57e087-e51c-438b-9b87-68801b0edc34",
+    "timestamp": "2026-01-28T07:25:55.361950",
     "Product": "windows",
     "Service": "sysmon",
+    "Source": "Security",
     "CommandLine": "--check-connection",
     "username": "NT AUTHORITY\\SYSTEM",
     "ParentImage": "\\services.exe",

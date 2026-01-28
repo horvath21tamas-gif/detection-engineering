@@ -1,0 +1,59 @@
+title: Targeted Harvesting of Vulnerability Research Artifacts
+id: f81d6d57-fea8-445f-8c07-1c092649aa53
+status: stable
+description: |
+    Detects the systematic acquisition of vulnerability research, audit reports, or 
+    zero-day PoC documentation. Focuses on CLI-based harvesting in non-technical 
+    user contexts while filtering out authorized security research.
+author: hota05
+date: 2026-01-28
+references:
+    - https://attack.mitre.org/techniques/T1588/006/
+tags:
+    - attack.resource_development
+    - attack.t1588.006
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection_artifacts:
+        TargetFilename|contains:
+            - 'pentest_final_report'
+            - 'internal_audit_security'
+            - 'vulnerability_assessment'
+            - 'exploit_chain'
+            - '0day_poc'
+            - 'zero-day_research'
+            - 'exploit_writeup'
+
+    selection_cli_tools:
+        Image|endswith:
+            - '\curl.exe'
+            - '\wget.exe'
+            - '\certutil.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+
+    filter_legit_contexts:
+        TargetFilename|contains:
+            - '\Compliance\'
+            - '\GRC_Reports\'
+            - '\Security_Audit_20'
+        UserName|contains:
+            - 'sec_admin'
+            - 'audit_user'
+            - 'compliance_mgr'
+        Image|contains:
+            - '\SharePoint.exe'
+            - '\OneDrive.exe'
+
+    filter_browsers:
+        Image|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+
+    condition: selection_artifacts and selection_cli_tools and not (filter_legit_contexts or filter_browsers)
+falsepositives:
+    - IT managers downloading security compliance templates via PowerShell.
+    - Automated backup of security documentation shares (if not excluded).
+level: high

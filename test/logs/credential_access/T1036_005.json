@@ -1,6 +1,9 @@
 {
-    "event_id": "f737a9ea-cd49-438b-9d1c-1b722504851d",
-    "timestamp": "2026-01-28T07:46:42.406467",
+    "event_id": "482c6175-3bf0-4d8a-993f-e48ebb1f765e",
+    "timestamp": "2026-01-28T07:53:26.944011",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "User": "AttackerAdmin",
+    "Image": "\\cmd.exe",
+    "CommandLine": "C:\\Windows\\System32\\"
 }

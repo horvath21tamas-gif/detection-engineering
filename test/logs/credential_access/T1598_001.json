@@ -1,8 +1,9 @@
 {
-    "event_id": "68c19397-9ad8-44b5-899c-ab10f63eb717",
-    "timestamp": "2026-01-28T07:46:42.531843",
+    "event_id": "6e62b822-f202-49a0-bd5f-449a26f0af7d",
+    "timestamp": "2026-01-28T07:53:27.067590",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "ParentImage": "\\outlook.exe",
     "Image": "\\chrome.exe",
     "CommandLine": "--incognito"

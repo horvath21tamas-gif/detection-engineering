@@ -1,7 +1,8 @@
 {
-    "event_id": "abc121b6-1afb-48ef-920f-e1b648c19196",
-    "timestamp": "2026-01-28T07:46:42.176997",
+    "event_id": "ce5a4907-666f-4f58-b60e-1b113c22db96",
+    "timestamp": "2026-01-28T07:53:26.707841",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "CommandLine": "ifconfig.me"
 }

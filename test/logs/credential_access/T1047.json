@@ -1,8 +1,10 @@
 {
-    "event_id": "d6c7b830-e282-4484-a981-ad1588903d0c",
-    "timestamp": "2026-01-28T07:46:42.457636",
+    "event_id": "f790c513-3c98-4fb2-925d-a42a95f8b22e",
+    "timestamp": "2026-01-28T07:53:26.994305",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
+    "Image": "\\wmic.exe",
     "CommandLine": "cmd.exe",
     "ParentImage": "\\cmd.exe"
 }

@@ -1,8 +1,9 @@
 {
-    "event_id": "3c61e02f-b4e2-428a-b52b-1d5b9dc87ff5",
-    "timestamp": "2026-01-28T07:46:42.410904",
+    "event_id": "239ddc5c-b4ad-4c01-974a-be25b5684d04",
+    "timestamp": "2026-01-28T07:53:26.948386",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "Image": "\\findstr.exe",
     "CommandLine": ".dwg"
 }

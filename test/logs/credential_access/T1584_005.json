@@ -1,8 +1,9 @@
 {
-    "event_id": "0176650c-dccc-46dd-bd9b-8ef832f13553",
-    "timestamp": "2026-01-28T07:46:42.571608",
+    "event_id": "d70a04fc-860e-4ca9-a622-6829929a7c68",
+    "timestamp": "2026-01-28T07:53:27.106685",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "ParentImage": "\\wmiprvse.exe",
     "Image": "\\powershell.exe"
 }

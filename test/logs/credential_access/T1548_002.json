@@ -1,8 +1,10 @@
 {
-    "event_id": "358b559c-9dd0-4a0b-8395-a94b7af86ec6",
-    "timestamp": "2026-01-28T07:46:42.489070",
+    "event_id": "346e1150-aacd-415e-a63b-32d837cf1814",
+    "timestamp": "2026-01-28T07:53:27.025328",
     "Product": "windows",
     "Service": "sysmon",
-    "ParentImage": "\\fodhelper.exe",
-    "Image": "\\cmd.exe"
+    "User": "AttackerAdmin",
+    "Image": "\\cmd.exe",
+    "IntegrityLevel": "High",
+    "ParentImage": "\\fodhelper.exe"
 }

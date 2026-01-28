@@ -1,7 +1,8 @@
 {
-    "event_id": "0bfccd71-125c-4f27-8e3a-4dd97a0d821e",
-    "timestamp": "2026-01-28T07:46:42.616324",
+    "event_id": "1a7b261d-4814-4647-bdaf-bc419641410d",
+    "timestamp": "2026-01-28T07:53:27.150784",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "CommandLine": "--headless"
 }

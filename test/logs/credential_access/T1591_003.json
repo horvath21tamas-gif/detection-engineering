@@ -1,7 +1,8 @@
 {
-    "event_id": "4fb115f5-62e3-4ae0-809d-70d261f5c49d",
-    "timestamp": "2026-01-28T07:46:42.194784",
+    "event_id": "af754777-806d-45b8-8397-bcca05f84541",
+    "timestamp": "2026-01-28T07:53:26.725704",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "CommandLine": "confluence"
 }

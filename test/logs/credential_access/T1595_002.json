@@ -1,8 +1,9 @@
 {
-    "event_id": "fc969439-1580-4903-8061-2e07f5977d57",
-    "timestamp": "2026-01-28T07:46:42.508269",
+    "event_id": "e8b7449f-4702-4991-8c5a-1ea972956844",
+    "timestamp": "2026-01-28T07:53:27.044321",
     "Product": "generic",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "SrcIp": "1.",
     "UserAgent": "nuclei",
     "UriStem": "/.env",

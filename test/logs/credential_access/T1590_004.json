@@ -1,7 +1,8 @@
 {
-    "event_id": "caaf227b-a73d-4ed1-b2fc-96a373f33f07",
-    "timestamp": "2026-01-28T07:46:42.243489",
+    "event_id": "2afb4ae4-1d6c-4147-a759-a33e952ca768",
+    "timestamp": "2026-01-28T07:53:26.774983",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "CommandLine": ".pfx"
 }

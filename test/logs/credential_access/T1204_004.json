@@ -1,9 +1,13 @@
 {
-    "event_id": "051a9fe3-a438-4cd7-a307-c2775eda8fea",
-    "timestamp": "2026-01-28T07:46:42.602291",
+    "event_id": "41dd2b6b-417c-41f9-a145-6dce3009f5a1",
+    "timestamp": "2026-01-28T07:53:27.137010",
     "Product": "windows",
     "Service": "sysmon",
-    "url": "bit.ly/",
+    "User": "AttackerAdmin",
+    "url": ".+",
     "url_domain_age": "30",
-    "url_reputation": "low"
+    "url_reputation": "low",
+    "email_content_type": "text/html",
+    "sender_display_name": "Microsoft",
+    "sender_domain": "office.com"
 }

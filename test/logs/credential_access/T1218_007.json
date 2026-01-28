@@ -1,7 +1,10 @@
 {
-    "event_id": "bd0a5b35-dbb7-4627-a5df-939eceabf151",
-    "timestamp": "2026-01-28T07:46:42.447236",
+    "event_id": "2ed2f441-98f1-47f3-8fa7-e5beeac7090e",
+    "timestamp": "2026-01-28T07:53:26.984071",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
+    "Image": "\\msiexec.exe",
+    "CommandLine": "/quiet",
     "ParentImage": "\\powershell.exe"
 }

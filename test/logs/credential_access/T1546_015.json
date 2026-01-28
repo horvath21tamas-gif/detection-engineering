@@ -1,8 +1,10 @@
 {
-    "event_id": "de7f007b-5928-42f1-bf62-797a5e317aff",
-    "timestamp": "2026-01-28T07:46:42.181281",
+    "event_id": "84ad14e5-8d47-47d5-9491-b69887ab050a",
+    "timestamp": "2026-01-28T07:53:26.712179",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
+    "TargetObject": "\\InprocServer32",
     "Details": "\\Users\\",
     "Image": "\\powershell.exe"
 }

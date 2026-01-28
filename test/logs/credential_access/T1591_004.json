@@ -1,7 +1,8 @@
 {
-    "event_id": "7c7282c9-0845-4cc4-9c47-35dfddbb774a",
-    "timestamp": "2026-01-28T07:46:42.168039",
+    "event_id": "5c35b7a6-3dc3-4dc8-806e-e4a9a8e1dab2",
+    "timestamp": "2026-01-28T07:53:26.698963",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "CommandLine": "(&(objectCategory=person)(objectClass=user))"
 }

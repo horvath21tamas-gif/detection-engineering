@@ -6,14 +6,14 @@
 - **MITRE ATT&CK Lefedettség:** `[57.7%]`
 - **Részletes lista:** [COVERAGE.md](./COVERAGE.md)
 
-![Progress Bar](https://geps.dev/progress/57?dangerColor=ff6666&warningColor=ffbd66&successColor=8ecb88&v=1769586613)
+![Progress Bar](https://geps.dev/progress/57?dangerColor=ff6666&warningColor=ffbd66&successColor=8ecb88&v=1769587009)
 
 ## 🗺️ MITRE ATT&CK Mátrix Vizualizáció
-![MITRE Matrix](./mitre_matrix.svg?v=1769586613)
+![MITRE Matrix](./mitre_matrix.svg?v=1769587009)
 
 ## 🔗 Interaktív Navigator
 🚀 [**Kattints ide a teljes interaktív mátrix megnyitásához**](https://mitre-attack.github.io/attack-navigator/#layerURL=https://raw.githubusercontent.com/horvath21tamas-gif/detection-engineering/test/attack_navigator_layer.json)
 
 ---
 *Ez a dokumentum automatikusan frissül minden módosítás után.*
-*Legutóbbi frissítés: 2026-01-28 07:50:13 (UTC)*
+*Legutóbbi frissítés: 2026-01-28 07:56:49 (UTC)*

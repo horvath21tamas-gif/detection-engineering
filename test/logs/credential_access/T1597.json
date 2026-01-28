@@ -1,7 +1,8 @@
 {
-    "event_id": "919af9cc-e901-4f04-9c0e-8a27ad79d045",
-    "timestamp": "2026-01-28T07:46:42.120726",
+    "event_id": "0fc737d4-17ae-4eea-802a-ee81c62ac077",
+    "timestamp": "2026-01-28T07:53:26.651722",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "CommandLine": "/.git/"
 }

@@ -1,6 +1,8 @@
 {
-    "event_id": "5a318e7e-d839-4fae-bbf6-14f86f776a13",
-    "timestamp": "2026-01-28T07:46:42.518642",
+    "event_id": "edf4cea5-7aab-48ad-ab03-03cd8ded1378",
+    "timestamp": "2026-01-28T07:53:27.054580",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "User": "AttackerAdmin",
+    "ServiceName": "PSEXECSVC"
 }

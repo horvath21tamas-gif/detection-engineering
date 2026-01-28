@@ -1,8 +1,10 @@
 {
-    "event_id": "32efc1c7-5e0c-46be-bb55-569cef1a9bbe",
-    "timestamp": "2026-01-28T07:46:42.335493",
+    "event_id": "4ceb8af3-f83e-438f-9a47-d405715b839b",
+    "timestamp": "2026-01-28T07:53:26.873708",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
+    "PipeName": "^\\\\+[a-f0-9]{8,12}$",
     "Image": "\\cmd.exe",
     "ParentImage": "\\cmd.exe"
 }

@@ -1,7 +1,8 @@
 {
-    "event_id": "fbfa48b4-0034-4e96-9037-299b53b67feb",
-    "timestamp": "2026-01-28T07:46:42.220875",
+    "event_id": "40cecb94-a333-4d35-a8cb-4f4d8d6bafa7",
+    "timestamp": "2026-01-28T07:53:26.752254",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "CommandLine": "copy "
 }

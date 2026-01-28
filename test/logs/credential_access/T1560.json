@@ -1,7 +1,8 @@
 {
-    "event_id": "b409f0df-db19-41f0-8275-0e95ce0df481",
-    "timestamp": "2026-01-28T07:46:42.392584",
+    "event_id": "a159634c-af5f-4d48-905a-57be1ce5d524",
+    "timestamp": "2026-01-28T07:53:26.930317",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "CommandLine": "\\AppData\\"
 }

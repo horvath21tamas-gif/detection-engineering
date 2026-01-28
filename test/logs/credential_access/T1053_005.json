@@ -1,7 +1,10 @@
 {
-    "event_id": "9c9d30f0-82ea-44bf-b269-bf45b3c5ad0c",
-    "timestamp": "2026-01-28T07:46:42.397209",
+    "event_id": "2f301a91-7236-41b5-b9c3-09df1ae4748c",
+    "timestamp": "2026-01-28T07:53:26.934846",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
+    "Image": "\\schtasks.exe",
+    "CommandLine": "\\Users\\",
     "ParentImage": "\\cmd.exe"
 }

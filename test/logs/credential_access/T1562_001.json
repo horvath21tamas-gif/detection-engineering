@@ -1,7 +1,8 @@
 {
-    "event_id": "d827535d-6da2-4478-9ca5-f1788f9b9d5e",
-    "timestamp": "2026-01-28T07:46:42.563640",
+    "event_id": "a1c38b16-35e3-4b6b-9f40-c7c59c5c443f",
+    "timestamp": "2026-01-28T07:53:27.098952",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "CommandLine": " -disablere"
 }

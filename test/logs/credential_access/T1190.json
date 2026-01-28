@@ -1,6 +1,10 @@
 {
-    "event_id": "3795c0f6-93c2-4270-9e98-d2105639b96f",
-    "timestamp": "2026-01-28T07:46:42.536114",
+    "event_id": "e23280cd-7284-4cb7-954b-2c47ffceb494",
+    "timestamp": "2026-01-28T07:53:27.071733",
     "Product": "generic",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "User": "AttackerAdmin",
+    "cs-uri-query": "<script",
+    "cs-method": "POST",
+    "sc-status": "200"
 }

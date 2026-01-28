@@ -1,8 +1,10 @@
 {
-    "event_id": "5facb0a8-0d07-4dbc-bc61-16761798d58b",
-    "timestamp": "2026-01-28T07:46:42.619541",
+    "event_id": "d8ed4878-7896-4a4c-a114-e863553b0345",
+    "timestamp": "2026-01-28T07:53:27.153977",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "EventID": "3",
-    "Protocol": "tcp"
+    "Protocol": "tcp",
+    "DestinationPort": "80"
 }

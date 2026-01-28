@@ -1,7 +1,10 @@
 {
-    "event_id": "f4a3eb1a-f8c1-40bb-831a-dbc75297ed88",
-    "timestamp": "2026-01-28T07:46:42.437894",
+    "event_id": "689448ba-b3ba-46d5-b01c-f73e2ef94551",
+    "timestamp": "2026-01-28T07:53:26.974851",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
+    "Image": "\\wevtutil.exe",
+    "CommandLine": "cl Security",
     "ParentImage": "\\cmd.exe"
 }

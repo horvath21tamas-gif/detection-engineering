@@ -1,8 +1,9 @@
 {
-    "event_id": "eff13ac0-02c6-4aa2-9f3d-0e5c77e1be07",
-    "timestamp": "2026-01-28T07:46:42.467784",
+    "event_id": "f06ab364-2092-41cc-85ed-7afc1a67d07f",
+    "timestamp": "2026-01-28T07:53:27.004252",
     "Product": "generic",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "SrcIp": "1.",
     "HttpMethod": "HEAD",
     "UriStem": "/",

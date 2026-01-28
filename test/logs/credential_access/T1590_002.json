@@ -1,8 +1,9 @@
 {
-    "event_id": "5d87fedd-592b-446d-906f-36f20bd0e1c2",
-    "timestamp": "2026-01-28T07:46:42.589815",
+    "event_id": "1f74e605-5057-46aa-873e-1dad9cb717a1",
+    "timestamp": "2026-01-28T07:53:27.124791",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "CommandLine": " /enumzones",
     "Image": "\\dig.exe"
 }

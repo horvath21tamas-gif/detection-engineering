@@ -1,8 +1,12 @@
 {
-    "event_id": "c221d252-afc6-40c2-8534-3705b5d977ca",
-    "timestamp": "2026-01-28T07:46:42.292626",
+    "event_id": "a9a1848f-f979-4752-8b6c-953bf3243353",
+    "timestamp": "2026-01-28T07:53:26.830649",
     "Product": "generic",
     "Service": "sysmon",
-    "cs-uri-stem": "/uploads/",
+    "User": "AttackerAdmin",
+    "cs-uri-stem": ".php",
+    "cs-method": "POST",
+    "cs-uri-query": "cmd=",
+    "sc-status": "200",
     "cs-user-agent": "curl"
 }

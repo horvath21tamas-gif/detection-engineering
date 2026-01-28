@@ -1,8 +1,9 @@
 {
-    "event_id": "673a6f48-9da0-4268-bd15-0af80e711dbb",
-    "timestamp": "2026-01-28T07:46:42.559130",
+    "event_id": "cf673c8d-9c4e-4592-8891-f86a3e864d2e",
+    "timestamp": "2026-01-28T07:53:27.094401",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "Image": "\\cmd.exe",
     "CommandLine": "&",
     "ParentImage": "\\explorer.exe"

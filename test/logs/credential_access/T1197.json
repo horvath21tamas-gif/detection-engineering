@@ -1,8 +1,10 @@
 {
-    "event_id": "b5344c2a-feb7-4fd1-90bb-469aa11d7603",
-    "timestamp": "2026-01-28T07:46:42.522697",
+    "event_id": "1c66fefb-c25e-4120-bd6b-bbc3465cab65",
+    "timestamp": "2026-01-28T07:53:27.058573",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
+    "Image": "\\bitsadmin.exe",
     "CommandLine": "\\Users\\",
     "ParentImage": "\\powershell.exe"
 }

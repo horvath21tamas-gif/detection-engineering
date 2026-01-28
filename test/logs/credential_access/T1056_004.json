@@ -1,7 +1,9 @@
 {
-    "event_id": "7e1bf017-fc84-4516-9aa0-009e51811353",
-    "timestamp": "2026-01-28T07:46:42.263383",
+    "event_id": "68f7b365-01f5-4e65-8c07-49c6185772fd",
+    "timestamp": "2026-01-28T07:53:26.799542",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
+    "ImageLoaded": "user32.dll",
     "Image": "\\Users\\"
 }

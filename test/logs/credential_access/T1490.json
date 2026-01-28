@@ -1,7 +1,10 @@
 {
-    "event_id": "2a0151ea-ffa3-4bfc-846b-0173599ce6f6",
-    "timestamp": "2026-01-28T07:46:42.296422",
+    "event_id": "f9a10c11-f1fe-4f6a-a5c1-dd32e32f7811",
+    "timestamp": "2026-01-28T07:53:26.834408",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
+    "Image": "\\vssadmin.exe",
+    "CommandLine": "delete shadows",
     "ParentImage": "\\cmd.exe"
 }

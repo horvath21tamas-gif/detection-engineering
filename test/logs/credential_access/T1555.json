@@ -1,7 +1,10 @@
 {
-    "event_id": "2ecd7938-04e0-432c-b871-8373ce21b9be",
-    "timestamp": "2026-01-28T07:46:42.372948",
+    "event_id": "bb57ec14-cb1f-4a32-857f-b89ac95ef2cc",
+    "timestamp": "2026-01-28T07:53:26.910761",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
+    "TargetFileName": "logins.json",
+    "AccessMask": "0x1",
     "Image": "\\powershell.exe"
 }

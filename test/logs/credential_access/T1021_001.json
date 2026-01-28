@@ -1,8 +1,9 @@
 {
-    "event_id": "bb284b38-3c76-42c5-916c-e624a3a7cf20",
-    "timestamp": "2026-01-28T07:46:42.434080",
+    "event_id": "8c3a72c3-69bd-40a6-93fb-c735d5abe0fd",
+    "timestamp": "2026-01-28T07:53:26.971056",
     "Product": "windows",
     "Service": "security",
+    "User": "AttackerAdmin",
     "EventID": "4624",
     "LogonType": "10"
 }

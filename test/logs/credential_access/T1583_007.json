@@ -1,8 +1,9 @@
 {
-    "event_id": "10e94b26-04b7-4dc4-b289-50691bc5b267",
-    "timestamp": "2026-01-28T07:46:42.611307",
+    "event_id": "c40e0316-386f-49cc-8c55-ef498783da30",
+    "timestamp": "2026-01-28T07:53:27.145837",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "Image": "\\terraform.exe",
     "CommandLine": "aws_lambda_function"
 }

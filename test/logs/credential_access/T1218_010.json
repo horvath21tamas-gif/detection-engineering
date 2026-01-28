@@ -1,8 +1,10 @@
 {
-    "event_id": "5527a348-61ad-4b76-a91d-ae84403afc56",
-    "timestamp": "2026-01-28T07:46:42.190217",
+    "event_id": "0a1e03fc-d0bc-4460-b3ef-763672a1791c",
+    "timestamp": "2026-01-28T07:53:26.721125",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
+    "Image": "\\regsvr32.exe",
     "CommandLine": "\\Users\\",
     "ParentImage": "\\powershell.exe"
 }

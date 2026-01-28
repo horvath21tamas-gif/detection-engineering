@@ -1,8 +1,9 @@
 {
-    "event_id": "830f3357-0a19-4d1e-93e5-61fd3ca6ebde",
-    "timestamp": "2026-01-28T07:46:42.172646",
+    "event_id": "6612e105-5aa6-46b2-acc9-ca2b255d3a74",
+    "timestamp": "2026-01-28T07:53:26.703575",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "ParentImage": "\\w3wp.exe",
     "Image": "\\cmd.exe"
 }

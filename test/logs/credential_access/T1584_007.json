@@ -1,6 +1,7 @@
 {
-    "event_id": "ef35fd39-f016-4436-b319-09353bdfb6f4",
-    "timestamp": "2026-01-28T07:46:42.606998",
+    "event_id": "739e272a-7492-4c5f-91a0-d2ebbc50f5c6",
+    "timestamp": "2026-01-28T07:53:27.141593",
     "Product": "windows",
-    "Service": "sysmon"
+    "Service": "sysmon",
+    "User": "AttackerAdmin"
 }

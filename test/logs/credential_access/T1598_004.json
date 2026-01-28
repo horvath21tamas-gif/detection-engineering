@@ -1,8 +1,9 @@
 {
-    "event_id": "6cae1154-db3d-4d88-ab83-a00d1b314efa",
-    "timestamp": "2026-01-28T07:46:42.594636",
+    "event_id": "1132ebda-138e-4b12-b2f8-86318ea960a5",
+    "timestamp": "2026-01-28T07:53:27.129533",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "Image": "\\powershell.exe",
     "CommandLine": " -WindowStyle Hidden",
     "ParentImage": "\\winword.exe"

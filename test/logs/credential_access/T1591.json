@@ -1,7 +1,8 @@
 {
-    "event_id": "de5e5968-4ed3-4d85-b83e-c3a7c9509fec",
-    "timestamp": "2026-01-28T07:46:42.216475",
+    "event_id": "e8fc4eab-a2d6-42a1-bb64-296a5a08a94c",
+    "timestamp": "2026-01-28T07:53:26.747852",
     "Product": "windows",
     "Service": "sysmon",
+    "User": "AttackerAdmin",
     "Image": "\\dsquery.exe"
 }

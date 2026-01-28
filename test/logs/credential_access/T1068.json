@@ -1,7 +1,10 @@
 {
-    "event_id": "7ef72d77-a477-4e87-abb0-3e03a7a1cd5f",
-    "timestamp": "2026-01-28T07:46:42.145408",
+    "event_id": "744717ec-7ee4-40f4-8904-63c6c5cfb13e",
+    "timestamp": "2026-01-28T07:53:26.676300",
     "Product": "windows",
     "Service": "sysmon",
-    "Image": "\\cmd.exe"
+    "User": "AttackerAdmin",
+    "ParentImage": "\\explorer.exe",
+    "Image": "\\Users\\",
+    "username": "NT AUTHORITY\\SYSTEM"
 }

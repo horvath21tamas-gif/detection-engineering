@@ -20,36 +20,38 @@ def generate_mock_event(rule_content):
     }
     
     detection = rule_content.get('detection', {})
-    condition = detection.get('condition', '').lower()
     
+    # Először összegyűjtjük a tiltólistás (filter) értékeket
+    filters = set()
     for key, value in detection.items():
-        # 1. KIHAGYJUK a szűrőket (amik a 'not' után vannak vagy 'filter' a nevük)
-        if 'filter' in key.lower():
-            continue
-            
-        # 2. CSAK azokat a mezőket vesszük be, amik kellenek a detekcióhoz (szerepelnek a condition-ben)
-        if key in condition and isinstance(value, dict):
+        if 'filter' in key.lower() and isinstance(value, dict):
             for field, val in value.items():
-                clean_name = clean_field_name(field)
-                
-                # Ha a mező már benne van (pl. CommandLine), ne írjuk felül 
-                # egy szűrő értékkel, hanem próbáljunk gyanúsat választani
-                if isinstance(val, list) and val:
-                    # Olyan értéket választunk, ami valószínűleg NEM szűrő (pl. a lista vége vagy gyanúsabb elem)
-                    mock_event[clean_name] = val[0]
-                elif isinstance(val, str):
-                    mock_event[clean_name] = val.replace('*', '')
-                else:
-                    mock_event[clean_name] = val
-                    
-    # Manuális korrekció a beküldött példád alapján, hogy ne legyen SYSTEM a tesztben
-    if mock_event.get("User") in ["SYSTEM", "LOCAL SERVICE", "NETWORK SERVICE"]:
-        mock_event["User"] = "Attacker"
-    
-    # Ha a CommandLine-ba véletlenül bekerült egy szűrő kifejezés, írjuk felül valami gyanússal
-    if "\\Microsoft\\Windows\\" in mock_event.get("CommandLine", ""):
-        mock_event["CommandLine"] = "schtasks /create /sc daily /tn 'Persistence' /tr 'C:\\Users\\Public\\malware.exe'"
+                if isinstance(val, list): filters.update([str(v).lower() for v in val])
+                else: filters.add(str(val).lower())
 
+    # Generálunk értékeket a pozitív (selection) blokkokból
+    for key, value in detection.items():
+        if 'selection' in key.lower() or 'suspicious' in key.lower():
+            if isinstance(value, dict):
+                for field, val in value.items():
+                    clean_name = clean_field_name(field)
+                    
+                    if isinstance(val, list):
+                        # Megpróbálunk olyan értéket választani a listából, ami NINCS a szűrőben
+                        chosen_val = val[0]
+                        for candidate in val:
+                            if str(candidate).lower() not in filters:
+                                chosen_val = candidate
+                                break
+                        mock_event[clean_name] = str(chosen_val).replace('*', '')
+                    else:
+                        mock_event[clean_name] = str(val).replace('*', '')
+
+    # Kényszerített korrekciók, hogy a log biztosan "gonosz" legyen
+    if mock_event.get("User", "").upper() in ["SYSTEM", "LOCAL SERVICE"]:
+        mock_event["User"] = "DetectedUser"
+    
+    # Ha a szabály specifikus szerszámokat vár (pl. schtasks), biztosítsuk, hogy ott legyenek
     return mock_event
 
 def main():
@@ -64,12 +66,10 @@ def main():
                         content = yaml.safe_load(f)
                         if not content or 'detection' not in content: continue
                         log = generate_mock_event(content)
-                        output_file = file.rsplit('.', 1)[0] + '.json'
-                        with open(os.path.join(output_dir, output_file), 'w') as out:
+                        with open(os.path.join(output_dir, file.rsplit('.', 1)[0] + '.json'), 'w') as out:
                             json.dump(log, out, indent=4)
                     except Exception as e:
                         print(f"Hiba: {e}")
-    print("✅ Mock logok generálva a szűrők elkerülésével.")
 
 if __name__ == "__main__":
     main()

@@ -7,41 +7,46 @@ from datetime import datetime
 SIGMA_BASE_PATH = 'rules/sigma'
 OUTPUT_BASE_PATH = 'test/logs'
 
+def flatten_value(v):
+    """Kinyeri a tiszta szöveget a Sigma értékekből (listákból vagy stringekből)."""
+    if isinstance(v, list):
+        return [str(i).replace('*', '').replace('?', '') for i in v]
+    return [str(v).replace('*', '').replace('?', '')]
+
 def generate_mock_log(rule_content):
     detection = rule_content.get('detection', {})
     logsource = rule_content.get('logsource', {})
     
+    # A legfontosabb: a log mezőinek tükrözniük kell a logsource-t!
     event = {
         "event_id": str(uuid.uuid4()),
         "timestamp": datetime.now().isoformat(),
-        "product": logsource.get('product', 'windows'),
-        "service": logsource.get('service', 'sysmon'),
-        "category": logsource.get('category', 'process_creation'),
+        # Sok Sigma backend ezek alapján szűr először
+        "product": logsource.get('product'),
+        "service": logsource.get('service'),
+        "category": logsource.get('category')
     }
 
-    # Megkeressük az első olyan blokkot, ami nem filter és nem condition
+    # Minden olyan mezőt kitöltünk, ami a detekcióban szerepel
     for key, data in detection.items():
+        # Csak a pozitív illesztéseket nézzük (selection, keywords, stb.)
         if isinstance(data, dict) and 'filter' not in key.lower() and key != 'condition':
             for field, value in data.items():
-                # Mezőnév tisztítása (pl. CommandLine|contains -> CommandLine)
                 clean_field = field.split('|')[0]
+                values = flatten_value(value)
                 
-                # Érték kinyerése és tisztítása a wildcardoktól (*, ?)
-                if isinstance(value, list):
-                    val = str(value[0]).replace('*', '').replace('?', '')
-                else:
-                    val = str(value).replace('*', '').replace('?', '')
+                # Trükk: összefűzzük az összes értéket egy mezőbe, 
+                # így bármelyikre is szűr a szabály, "megtalálja"
+                combined_val = " ".join(values)
+                event[clean_field] = combined_val
                 
-                # Trükk: Ha a szabály "contains" módosítót használ, 
-                # biztosítjuk, hogy az érték benne legyen egy életszerűbb környezetben
-                if '|contains' in field or '|endswith' in field or '|startswith' in field:
-                    event[clean_field] = f"test_prefix_{val}_test_suffix"
-                else:
-                    event[clean_field] = val
-                
-                # Mappingek a backend kompatibilitás miatt
-                if clean_field == "CommandLine": event["command"] = event[clean_field]
-                if clean_field == "Image": event["process_path"] = event[clean_field]
+                # Aliasok biztosítása
+                if clean_field == "CommandLine": event["command"] = combined_val
+                if clean_field == "Image": event["process_path"] = combined_val
+
+        # Ha a szabály kulcsszavakat (keywords) használ mezőnév nélkül
+        elif isinstance(data, list) and key != 'condition':
+            event["raw_data"] = " ".join(flatten_value(data))
 
     return event
 
@@ -52,8 +57,9 @@ def main():
             if file.endswith(('.yml', '.yaml')):
                 with open(os.path.join(root, file), 'r', encoding='utf-8') as f:
                     try:
-                        docs = yaml.safe_load_all(f)
-                        for content in docs:
+                        # Safe load kezelése, ha több dokumentum van
+                        content_list = list(yaml.safe_load_all(f))
+                        for content in content_list:
                             if not content or 'detection' not in content: continue
                             
                             log = generate_mock_log(content)
@@ -61,11 +67,13 @@ def main():
                             out_dir = os.path.join(OUTPUT_BASE_PATH, rel_path)
                             os.makedirs(out_dir, exist_ok=True)
                             
-                            with open(os.path.join(out_dir, file.replace('.yml', '.json').replace('.yaml', '.json')), 'w') as out:
+                            out_file_name = file.replace('.yml', '.json').replace('.yaml', '.json')
+                            with open(os.path.join(out_dir, out_file_name), 'w') as out:
                                 json.dump(log, out, indent=4)
                             processed += 1
-                    except: continue
-    print(f"Generálva: {processed} log.")
+                    except Exception as e:
+                        print(f"Hiba {file}: {e}")
+    print(f"Kész! {processed} log generálva.")
 
 if __name__ == "__main__":
     main()

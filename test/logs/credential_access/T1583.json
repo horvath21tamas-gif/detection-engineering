@@ -1,6 +1,9 @@
 {
-    "event_id": "2dfe7bf0-5028-4988-a57b-a0087f47f29f",
-    "timestamp": "2026-01-28T07:57:23.678685",
+    "event_id": "7a67ea85-746f-4bfd-9a01-5e37b84f5390",
+    "timestamp": "2026-01-28T08:04:58.746123",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "C:\\Windows\\System32\\cmd.exe",

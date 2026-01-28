@@ -1,6 +1,9 @@
 {
-    "event_id": "288f2bff-9510-4ed3-b291-ef59ed33f557",
-    "timestamp": "2026-01-28T07:57:23.558947",
+    "event_id": "7d5843a4-ba59-450f-abad-1b0bd976358a",
+    "timestamp": "2026-01-28T08:04:58.615362",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "\\findstr.exe",

@@ -1,6 +1,9 @@
 {
-    "event_id": "0adf7621-c3fc-4f90-a396-cd2922f49c3f",
-    "timestamp": "2026-01-28T07:57:23.593931",
+    "event_id": "0b60d281-d1af-4327-a5c3-ea8eafabbee4",
+    "timestamp": "2026-01-28T08:04:58.652082",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "\\wevtutil.exe",

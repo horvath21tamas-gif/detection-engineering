@@ -1,6 +1,9 @@
 {
-    "event_id": "f84de0d0-6036-49ff-9552-928b73f4d4f3",
-    "timestamp": "2026-01-28T07:57:23.674412",
+    "event_id": "b32cb714-2d8e-49b0-bb6f-9bf994c42167",
+    "timestamp": "2026-01-28T08:04:58.741369",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "\\bitsadmin.exe",

@@ -1,6 +1,9 @@
 {
-    "event_id": "0c519e26-e504-4b26-879c-3980d7a16e18",
-    "timestamp": "2026-01-28T07:57:23.683254",
+    "event_id": "b637075f-1770-4c8b-9f99-1bf5703614fa",
+    "timestamp": "2026-01-28T08:04:58.750997",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "\\chrome.exe",

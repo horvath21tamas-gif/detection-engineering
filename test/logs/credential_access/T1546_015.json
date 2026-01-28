@@ -1,11 +1,13 @@
 {
-    "event_id": "c4777610-6430-400a-b133-23abbcde2c04",
-    "timestamp": "2026-01-28T07:57:23.346649",
+    "event_id": "2dc49329-03a1-46ce-9c68-5aff819d963c",
+    "timestamp": "2026-01-28T08:04:58.388864",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "registry_set",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
-    "Image": "\\powershell.exe",
-    "CommandLine": "whoami",
     "TargetObject": "\\InprocServer32",
     "Details": "\\Users\\",
+    "Image": "\\powershell.exe",
     "process_path": "\\powershell.exe"
 }

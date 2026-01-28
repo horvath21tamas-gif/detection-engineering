@@ -1,6 +1,9 @@
 {
-    "event_id": "7d9b6d0a-579e-4e4c-a451-8d4c86d139af",
-    "timestamp": "2026-01-28T07:57:23.554367",
+    "event_id": "62b5a81a-e331-4a40-b42d-11650181b814",
+    "timestamp": "2026-01-28T08:04:58.610752",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "\\schtasks.exe",

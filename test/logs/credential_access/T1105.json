@@ -1,6 +1,9 @@
 {
-    "event_id": "1fb01e6d-8cb6-4aa7-aadf-4f3ae813549b",
-    "timestamp": "2026-01-28T07:57:23.486987",
+    "event_id": "52ac9209-6077-42af-860f-c5649a9d5f36",
+    "timestamp": "2026-01-28T08:04:58.537766",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "\\powershell.exe",

@@ -1,10 +1,11 @@
 {
-    "event_id": "80264290-5eaf-4613-85e2-1b549cae1ba8",
-    "timestamp": "2026-01-28T07:57:23.687277",
+    "event_id": "4cf78550-d543-498c-a8b5-be81d5ab0e6e",
+    "timestamp": "2026-01-28T08:04:58.755368",
+    "product": "generic",
+    "service": "sysmon",
+    "category": "webserver",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
-    "Image": "C:\\Windows\\System32\\cmd.exe",
-    "CommandLine": "whoami",
     "cs-uri-query": "<script",
     "cs-method": "POST",
     "sc-status": "200"

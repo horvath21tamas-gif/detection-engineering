@@ -1,6 +1,9 @@
 {
-    "event_id": "29566592-a7a7-444b-b259-e887b1002e69",
-    "timestamp": "2026-01-28T07:57:23.716954",
+    "event_id": "e43c207d-40e0-4c52-85c4-62718942599f",
+    "timestamp": "2026-01-28T08:04:58.787322",
+    "product": "windows",
+    "service": "security",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "C:\\Windows\\System32\\cmd.exe",

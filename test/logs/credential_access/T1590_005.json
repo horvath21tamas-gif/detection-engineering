@@ -1,6 +1,9 @@
 {
-    "event_id": "fce77431-220f-452f-a833-6a466d2dcfe7",
-    "timestamp": "2026-01-28T07:57:23.655326",
+    "event_id": "434a3145-0eb4-4ff8-8c2b-cdb5f32fc5ad",
+    "timestamp": "2026-01-28T08:04:58.717980",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "\\gcloud.exe",

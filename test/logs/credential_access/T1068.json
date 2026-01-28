@@ -1,6 +1,9 @@
 {
-    "event_id": "bbc662ff-3632-42f9-91ca-c07c2a4a74a1",
-    "timestamp": "2026-01-28T07:57:23.312180",
+    "event_id": "cbad954c-f93f-4d7f-9879-b982ccca656b",
+    "timestamp": "2026-01-28T08:04:58.351809",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "\\Users\\",

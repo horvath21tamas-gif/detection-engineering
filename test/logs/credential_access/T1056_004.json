@@ -1,10 +1,12 @@
 {
-    "event_id": "59175fb6-eb27-474e-bed7-4eb09f0d8863",
-    "timestamp": "2026-01-28T07:57:23.426829",
+    "event_id": "0fc3f882-ad44-48e0-aaa1-4c47f41c5d3d",
+    "timestamp": "2026-01-28T08:04:58.472630",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "image_load",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
-    "Image": "\\Users\\",
-    "CommandLine": "whoami",
     "ImageLoaded": "user32.dll",
+    "Image": "\\Users\\",
     "process_path": "\\Users\\"
 }

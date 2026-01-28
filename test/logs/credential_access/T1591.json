@@ -1,6 +1,9 @@
 {
-    "event_id": "9127c22a-8ca0-423c-8514-ea154fd96f97",
-    "timestamp": "2026-01-28T07:57:23.380645",
+    "event_id": "c99a5d13-91b8-4bb2-b659-f198d1c8b7ae",
+    "timestamp": "2026-01-28T08:04:58.424663",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "\\dsquery.exe",

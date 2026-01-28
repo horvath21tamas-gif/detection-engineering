@@ -1,6 +1,9 @@
 {
-    "event_id": "6db09a2a-6e58-4f2c-87f5-9cc365a74884",
-    "timestamp": "2026-01-28T07:57:23.355222",
+    "event_id": "2c1ffb95-7140-4aa6-ad0b-d660d02633fc",
+    "timestamp": "2026-01-28T08:04:58.397955",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "\\regsvr32.exe",

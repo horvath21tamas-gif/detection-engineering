@@ -1,6 +1,9 @@
 {
-    "event_id": "bb2605da-e711-420c-81f0-7b438dce16bc",
-    "timestamp": "2026-01-28T07:57:23.612723",
+    "event_id": "9a243add-bafa-48ae-92e0-6e34cf8f99eb",
+    "timestamp": "2026-01-28T08:04:58.672130",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "\\wmic.exe",

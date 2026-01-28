@@ -1,6 +1,9 @@
 {
-    "event_id": "8ada6c34-a412-4c78-b30a-8a073c03d1b9",
-    "timestamp": "2026-01-28T07:57:23.443121",
+    "event_id": "bb97c14a-227b-4794-a372-c9e31fd59660",
+    "timestamp": "2026-01-28T08:04:58.489835",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "\\mshta.exe",

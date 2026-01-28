@@ -1,6 +1,9 @@
 {
-    "event_id": "25bfee53-e26f-4754-849b-2b61d91a4d0b",
-    "timestamp": "2026-01-28T07:57:23.635459",
+    "event_id": "7c104abc-6750-4dd1-880c-eb8518efd1f7",
+    "timestamp": "2026-01-28T08:04:58.696489",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "\\csc.exe",

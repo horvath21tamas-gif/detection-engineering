@@ -1,6 +1,9 @@
 {
-    "event_id": "e4023068-9f3f-4779-9b5c-6c4a520bbb71",
-    "timestamp": "2026-01-28T07:57:23.602822",
+    "event_id": "7991626f-8a05-4330-8ebb-e6b72319c4d4",
+    "timestamp": "2026-01-28T08:04:58.661562",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "\\msiexec.exe",

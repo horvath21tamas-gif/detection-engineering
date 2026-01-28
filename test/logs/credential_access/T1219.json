@@ -1,9 +1,10 @@
 {
-    "event_id": "658eda9c-1ac9-4579-a418-dace762e6502",
-    "timestamp": "2026-01-28T07:57:23.670529",
+    "event_id": "46ae0809-1f43-45c2-9fe1-e888c6f83d8d",
+    "timestamp": "2026-01-28T08:04:58.736994",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "service_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
-    "Image": "C:\\Windows\\System32\\cmd.exe",
-    "CommandLine": "whoami",
     "ServiceName": "PSEXECSVC"
 }

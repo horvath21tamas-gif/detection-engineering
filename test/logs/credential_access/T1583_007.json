@@ -1,6 +1,9 @@
 {
-    "event_id": "64002f2d-7f40-4905-945a-776aab5cc887",
-    "timestamp": "2026-01-28T07:57:23.758650",
+    "event_id": "a64ed89d-0db6-484e-9f1a-a5bc2acf1c0f",
+    "timestamp": "2026-01-28T08:04:58.832093",
+    "product": "windows",
+    "service": "sysmon",
+    "category": "process_creation",
     "User": "TargetUser",
     "SourceUser": "TargetUser",
     "Image": "\\terraform.exe",

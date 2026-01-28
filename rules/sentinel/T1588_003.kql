@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath endswith "\certutil.exe" and (ProcessCommandLine in ("*-exportPFX*", "*-p *", "*-p=*"))) or (FolderPath endswith "\certutil.exe" and (ProcessCommandLine in ("*-urlcache*", "*-addstore*"))) or ((FolderPath in ("*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("*Export-PfxCertificate*", "*Import-PfxCertificate*", "*Set-AuthenticodeSignature*")))) and (not ((ParentProcessName in ("*\mmc.exe", "*\ServerManager.exe", "*\svchost.exe")) or ((FolderPath in ("*\Jenkins\*", "*\AzureDevOps\*", "*\MSBuild\*")) and User contains "SVC_Build")))

@@ -1,8 +1,8 @@
 {
-    "event_id": "70a31237-317f-413e-bc0e-41fba899b5ce",
-    "timestamp": "2026-01-28T07:09:58.303869",
+    "event_id": "d806c902-fe6f-4532-8ef0-cead580d9509",
+    "timestamp": "2026-01-28T07:17:22.863871",
     "Product": "windows",
     "Service": "sysmon",
-    "EventID": "3",
+    "EventID": 3,
     "Protocol": "tcp"
 }

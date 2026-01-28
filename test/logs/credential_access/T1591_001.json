@@ -1,6 +1,6 @@
 {
-    "event_id": "ff482f72-f6a6-4489-8ae4-46c6e1a3511c",
-    "timestamp": "2026-01-28T07:09:58.095394",
+    "event_id": "8ebb2fcc-de6e-4e17-969c-1d2e5a7918d1",
+    "timestamp": "2026-01-28T07:17:22.655974",
     "Product": "windows",
     "Service": "sysmon",
     "Image": "\\findstr.exe",

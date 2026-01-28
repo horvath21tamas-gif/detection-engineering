@@ -1,6 +1,6 @@
 {
-    "event_id": "c01570c0-909e-4124-b06a-45d68e3e7d16",
-    "timestamp": "2026-01-28T07:09:58.166404",
+    "event_id": "3921cf29-7893-4754-9ddb-3d3fd90bab12",
+    "timestamp": "2026-01-28T07:17:22.726071",
     "Product": "windows",
     "Service": "sysmon",
     "CommandLine": "\\AppData\\Local\\Temp\\",

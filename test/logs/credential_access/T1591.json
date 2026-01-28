@@ -1,6 +1,6 @@
 {
-    "event_id": "addd6247-28a0-4035-b93c-b666a46b64ac",
-    "timestamp": "2026-01-28T07:09:57.894985",
+    "event_id": "b5f08415-5066-44d0-92b9-810469ef8610",
+    "timestamp": "2026-01-28T07:17:22.462019",
     "Product": "windows",
     "Service": "sysmon",
     "Image": "\\dsquery.exe"

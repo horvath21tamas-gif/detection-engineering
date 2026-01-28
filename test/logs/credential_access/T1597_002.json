@@ -1,6 +1,6 @@
 {
-    "event_id": "813fba87-c493-49d5-8035-7016846e356a",
-    "timestamp": "2026-01-28T07:09:58.025127",
+    "event_id": "fdcfe595-ec50-42cb-b375-5b89e893f701",
+    "timestamp": "2026-01-28T07:17:22.586673",
     "Product": "windows",
     "Service": "sysmon",
     "CommandLine": "password="

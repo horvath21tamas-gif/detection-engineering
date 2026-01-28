@@ -1,6 +1,6 @@
 {
-    "event_id": "9d48b123-80b3-44f3-a98a-8512c2a9db57",
-    "timestamp": "2026-01-28T07:09:57.832868",
+    "event_id": "2ed61003-9309-402e-b7dc-0b24a2b0c7b6",
+    "timestamp": "2026-01-28T07:17:22.400390",
     "Product": "windows",
     "Service": "sysmon",
     "Image": "\\powershell.exe",

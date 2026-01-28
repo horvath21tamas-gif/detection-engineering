@@ -1,6 +1,6 @@
 {
-    "event_id": "0e434af0-6fac-4df6-84bc-038e4e717272",
-    "timestamp": "2026-01-28T07:09:57.921962",
+    "event_id": "35e19b07-1f66-406a-a099-02d4502710ac",
+    "timestamp": "2026-01-28T07:17:22.488931",
     "Product": "windows",
     "Service": "sysmon",
     "CommandLine": ".pfx"

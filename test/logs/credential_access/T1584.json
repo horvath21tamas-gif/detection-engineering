@@ -1,6 +1,6 @@
 {
-    "event_id": "d5b8846c-4364-4ead-8da9-f395e7675cfa",
-    "timestamp": "2026-01-28T07:09:57.850357",
+    "event_id": "a88f3396-6003-44e6-90be-431e70dfcf66",
+    "timestamp": "2026-01-28T07:17:22.418054",
     "Product": "windows",
     "Service": "sysmon",
     "ParentImage": "\\w3wp.exe",

@@ -1,6 +1,6 @@
 {
-    "event_id": "1fe4df26-2306-4a0f-8d66-dd79f292c606",
-    "timestamp": "2026-01-28T07:09:57.854646",
+    "event_id": "18f19a1a-ebec-4184-b4af-0ef541ee7445",
+    "timestamp": "2026-01-28T07:17:22.422323",
     "Product": "windows",
     "Service": "sysmon",
     "CommandLine": "ifconfig.me"

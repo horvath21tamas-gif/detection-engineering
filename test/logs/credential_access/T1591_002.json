@@ -1,6 +1,6 @@
 {
-    "event_id": "f7ab513b-f149-4265-86e4-0211acd48a6a",
-    "timestamp": "2026-01-28T07:09:57.991913",
+    "event_id": "fcf64e25-fe99-4bee-96b7-d3c960ecde80",
+    "timestamp": "2026-01-28T07:17:22.553140",
     "Product": "windows",
     "Service": "sysmon",
     "CommandLine": "customer_list"

@@ -1,6 +1,6 @@
 {
-    "event_id": "878c9485-6489-47b7-b9b8-233ede176ee9",
-    "timestamp": "2026-01-28T07:09:57.967567",
+    "event_id": "07d7d14b-ff69-490f-b430-bf0f14b572e8",
+    "timestamp": "2026-01-28T07:17:22.529023",
     "Product": "windows",
     "Service": "sysmon",
     "TargetImage": "\\lsass.exe",

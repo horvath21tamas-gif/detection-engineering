@@ -1,6 +1,6 @@
 {
-    "event_id": "42117540-1d73-410f-b602-4b179b9be4cb",
-    "timestamp": "2026-01-28T07:09:57.885937",
+    "event_id": "5ce301cd-7536-41e6-9837-7946d82b586c",
+    "timestamp": "2026-01-28T07:17:22.452582",
     "Product": "windows",
     "Service": "sysmon",
     "CommandLine": " --banner"

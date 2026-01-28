@@ -1,6 +1,6 @@
 {
-    "event_id": "7f777608-18ef-4fb8-a686-c2ff4875ec28",
-    "timestamp": "2026-01-28T07:09:57.818706",
+    "event_id": "8eb6fe16-d6a1-47a0-8deb-2e46dc5e4988",
+    "timestamp": "2026-01-28T07:17:22.386274",
     "Product": "windows",
     "Service": "sysmon",
     "CommandLine": "Get-NetDomainTrust"

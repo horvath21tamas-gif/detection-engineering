@@ -1,6 +1,6 @@
 {
-    "event_id": "58e2a5be-fead-4c81-8f9c-06e6b238b76c",
-    "timestamp": "2026-01-28T07:09:58.224833",
+    "event_id": "538be5a7-7f03-45c6-b047-749421098586",
+    "timestamp": "2026-01-28T07:17:22.784553",
     "Product": "windows",
     "Service": "sysmon",
     "Image": "\\terraform.exe",

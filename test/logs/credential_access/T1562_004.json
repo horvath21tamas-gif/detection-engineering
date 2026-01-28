@@ -1,6 +1,6 @@
 {
-    "event_id": "f35b0a81-adcc-4d1e-9a3c-030fe45f6252",
-    "timestamp": "2026-01-28T07:09:58.072255",
+    "event_id": "49d9cd50-e024-4221-8dbf-97abcfd41215",
+    "timestamp": "2026-01-28T07:17:22.633395",
     "Product": "windows",
     "Service": "sysmon",
     "CommandLine": "action=allow"

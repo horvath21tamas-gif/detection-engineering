@@ -1,6 +1,6 @@
 {
-    "event_id": "e27aadea-d6cb-49b2-9745-67b7d44cf377",
-    "timestamp": "2026-01-28T07:09:57.799387",
+    "event_id": "65fa3ea0-5898-4e19-a664-7e9bd85ea611",
+    "timestamp": "2026-01-28T07:17:22.367096",
     "Product": "windows",
     "Service": "sysmon",
     "CommandLine": "/.git/"

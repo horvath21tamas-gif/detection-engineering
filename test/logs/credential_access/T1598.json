@@ -1,6 +1,6 @@
 {
-    "event_id": "4e67923d-a5d7-4864-953c-3725f1bd1fe9",
-    "timestamp": "2026-01-28T07:09:57.899402",
+    "event_id": "66900da7-efa8-41bc-af9a-2273e59dc901",
+    "timestamp": "2026-01-28T07:17:22.466446",
     "Product": "windows",
     "Service": "sysmon",
     "CommandLine": "copy "

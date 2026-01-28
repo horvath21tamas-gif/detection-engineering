@@ -1,6 +1,6 @@
 {
-    "event_id": "be305796-9c6d-493b-9806-9ac98120f366",
-    "timestamp": "2026-01-28T07:09:58.270759",
+    "event_id": "94b961d4-0dea-46c9-a74d-306ea5f3028e",
+    "timestamp": "2026-01-28T07:17:22.830869",
     "Product": "windows",
     "Service": "sysmon",
     "CommandLine": "WinDefend"

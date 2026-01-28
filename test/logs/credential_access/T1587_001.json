@@ -1,6 +1,6 @@
 {
-    "event_id": "c985fadb-1430-47c0-a636-ce5651ae154b",
-    "timestamp": "2026-01-28T07:09:58.005529",
+    "event_id": "d14acb4d-cf67-400d-a47d-cee8c7bcdbe6",
+    "timestamp": "2026-01-28T07:17:22.567390",
     "Product": "windows",
     "Service": "sysmon",
     "CommandLine": "\\Users\\Public\\"

@@ -1,6 +1,6 @@
 {
-    "event_id": "abd7ea4b-b4ee-4d1e-9822-e9a0b33b0658",
-    "timestamp": "2026-01-28T07:09:58.146542",
+    "event_id": "52a632f6-849a-4d5a-a9b9-c9874332624a",
+    "timestamp": "2026-01-28T07:17:22.706252",
     "Product": "windows",
     "Service": "sysmon",
     "ParentImage": "\\dns.exe",

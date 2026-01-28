@@ -59,6 +59,7 @@
 - [High-Fidelity Web Service and Cloud Storage Subversion - T1584.006](#high-fidelity-web-service-and-cloud-storage-subversion---t1584006)
 - [High-Fidelity VPS Control and Tunneling - T1584.007](#high-fidelity-vps-control-and-tunneling---t1584007)
 - [Suspicious User Account Creation via CLI/Scripting](#suspicious-user-account-creation-via-cliscripting)
+- [Potential Automated Social Media Account Establishment](#potential-automated-social-media-account-establishment)
 - [Stealthy Email Account Establishment and Manipulation](#stealthy-email-account-establishment-and-manipulation)
 - [Anomalous Cloud User Account Creation](#anomalous-cloud-user-account-creation)
 - [High-Fidelity Account Compromise and Identity Manipulation - T1586](#high-fidelity-account-compromise-and-identity-manipulation---t1586)
@@ -983,6 +984,23 @@ standard Administrative consoles (ADUC, Windows Admin Center).
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Potential Automated Social Media Account Establishment
+- **Azonosító:** `T1585_001.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious patterns of social media account registration by monitoring 
+access to multiple sign-up endpoints from a single host or identifying 
+non-browser processes making requests to these domains.
+- **Hamis pozitívok:** Marketing automatizációs szoftverek (pl. HubSpot, Buffer), ha helyileg futnak, Fejlesztők, akik API-kat tesztelnek (érdemes a forrás IP-t szűrni)
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

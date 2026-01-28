@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-28 12:21:55`
+**Utolsó frissítés:** `2026-01-28 12:37:05`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 115 | 100% |
-| Splunk (SPL) | 115 | 100.0% |
-| Microsoft Sentinel (KQL) | 115 | 100.0% |
-| QRadar (AQL) | 66 | 57.4% |
-| Elastic (KQL/EQL) | 115 | 100.0% |
-| RSA NetWitness | 115 | 100.0% |
+| Sigma (Forrás) | 116 | 100% |
+| Splunk (SPL) | 116 | 100.0% |
+| Microsoft Sentinel (KQL) | 116 | 100.0% |
+| QRadar (AQL) | 66 | 56.9% |
+| Elastic (KQL/EQL) | 116 | 100.0% |
+| RSA NetWitness | 116 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -79,6 +79,7 @@
 | T1584.006 | HIGH | High-Fidelity Web Service and Cloud Storage Subversion - T1584.006 |
 | T1584.007 | HIGH | High-Fidelity VPS Control and Tunneling - T1584.007 |
 | T1585 | HIGH | Suspicious User Account Creation via CLI/Scripting |
+| T1585.001 | HIGH | Potential Automated Social Media Account Establishment |
 | T1585.002 | HIGH | Stealthy Email Account Establishment and Manipulation |
 | T1585.003 | HIGH | Anomalous Cloud User Account Creation |
 | T1586 | HIGH | High-Fidelity Account Compromise and Identity Manipulation - T1586 |

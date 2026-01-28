@@ -1,0 +1,2 @@
+(((operationName = '*Add user*'))&& ((result = '*success*'))) AND (((userAgent = '*AzureCLI*' OR userAgent = '*AzurePowerShell*' OR userAgent = '*GraphExplorer*' OR userAgent = '*python-requests*'))) AND (NOT (((((identity = '*Sync_*' OR identity = '*On-Premises Directory Synchronization*' OR identity = '*ManagedIdentity*'))) OR ((identity = '*MS-PIM*'))|| (((identity = '*Workday_Sync*' OR identity = '*Okta_Provisioner*')))))
+)

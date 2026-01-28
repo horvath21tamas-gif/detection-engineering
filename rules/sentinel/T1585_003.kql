@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (operationName =~ "Add user" and result =~ "success") and (userAgent in ("*AzureCLI*", "*AzurePowerShell*", "*GraphExplorer*", "*python-requests*")) and (not ((identity in ("*Sync_*", "*On-Premises Directory Synchronization*", "*ManagedIdentity*")) or identity contains "MS-PIM" or (identity in ("*Workday_Sync*", "*Okta_Provisioner*"))))

@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-28 10:57:50`
+**Utolsó frissítés:** `2026-01-28 11:02:37`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 113 | 100% |
-| Splunk (SPL) | 113 | 100.0% |
-| Microsoft Sentinel (KQL) | 113 | 100.0% |
-| QRadar (AQL) | 64 | 56.6% |
-| Elastic (KQL/EQL) | 113 | 100.0% |
-| RSA NetWitness | 113 | 100.0% |
+| Sigma (Forrás) | 114 | 100% |
+| Splunk (SPL) | 114 | 100.0% |
+| Microsoft Sentinel (KQL) | 114 | 100.0% |
+| QRadar (AQL) | 65 | 57.0% |
+| Elastic (KQL/EQL) | 114 | 100.0% |
+| RSA NetWitness | 114 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -79,6 +79,7 @@
 | T1584.006 | HIGH | High-Fidelity Web Service and Cloud Storage Subversion - T1584.006 |
 | T1584.007 | HIGH | High-Fidelity VPS Control and Tunneling - T1584.007 |
 | T1585 | HIGH | Suspicious User Account Creation via CLI/Scripting |
+| T1585.003 | HIGH | Anomalous Cloud User Account Creation |
 | T1586 | HIGH | High-Fidelity Account Compromise and Identity Manipulation - T1586 |
 | T1586.001 | HIGH | High-Fidelity Automated Social Media Manipulation - T1586.001 |
 | T1586.002 | HIGH | High-Fidelity Email Forwarding Rule Manipulation - T1586.002 |

@@ -71,6 +71,7 @@
 - [High-Fidelity Unauthorized Code Signing Capability Development - T1587.002](#high-fidelity-unauthorized-code-signing-capability-development---t1587002)
 - [High-Fidelity Unauthorized Digital Certificate Development - T1587.003](#high-fidelity-unauthorized-digital-certificate-development---t1587003)
 - [High-Fidelity Exploit Development and Compilation Detection - T1587.004](#high-fidelity-exploit-development-and-compilation-detection---t1587004)
+- [Anomalous Procurement of Offensive Capabilities](#anomalous-procurement-of-offensive-capabilities)
 - [High-Fidelity Identity Enumeration via Authentication Endpoints](#high-fidelity-identity-enumeration-via-authentication-endpoints)
 - [Credential Enumeration via Authentication API (High Confidence)](#credential-enumeration-via-authentication-api-(high-confidence))
 - [High-Confidence OSINT Identity Enumeration via Public APIs](#high-confidence-osint-identity-enumeration-via-public-apis)
@@ -1169,6 +1170,23 @@ excluding authorized synchronization accounts and automated HR provisioning syst
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Anomalous Procurement of Offensive Capabilities
+- **Azonosító:** `T1588.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the acquisition of offensive tools by monitoring suspicious combinations 
+of download-capable processes and known hacktool signatures or file extensions, 
+filtering out legitimate IT software deployment tools.
+- **Hamis pozitívok:** Authorized penetration testing activities., Security administrators updating their local toolkits via CLI.
+- **MITRE ATT&CK:** `T1588`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

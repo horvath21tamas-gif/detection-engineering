@@ -1,0 +1,47 @@
+title: Anomalous Cloud User Account Creation
+id: 579acd81-81b4-477d-9c80-6ecfd1551635
+status: stable
+description: |
+    Detects the creation of cloud accounts via command-line tools or service principals, 
+    excluding authorized synchronization accounts and automated HR provisioning systems.
+author: hota05
+date: 2026-01-28
+references:
+    - https://attack.mitre.org/techniques/T1585/003/
+tags:
+    - attack.persistence
+    - attack.t1585.003
+logsource:
+    product: azure
+    service: audit
+detection:
+    selection_operation:
+        operationName: "Add user"
+        result: "success"
+
+    selection_tools:
+        userAgent|contains:
+            - 'AzureCLI'
+            - 'AzurePowerShell'
+            - 'GraphExplorer'
+            - 'python-requests' 
+
+    filter_authorized_sync:
+        identity|contains:
+            - 'Sync_'
+            - 'On-Premises Directory Synchronization'
+            - 'ManagedIdentity'
+
+    filter_pims:
+        identity|contains: 'MS-PIM'
+
+    filter_known_provisioning:
+        identity|contains:
+            - 'Workday_Sync'
+            - 'Okta_Provisioner'
+
+    condition: selection_operation and selection_tools and not (filter_authorized_sync or filter_pims or filter_known_provisioning)
+falsepositives:
+    - DevOps mérnökök, akik CLI-ből automatizálnak (őket érdemes fix IP vagy user alapján szűrni)
+    - Újonnan bevezetett felhő-menedzsment eszközök
+level: high

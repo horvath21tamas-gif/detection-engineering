@@ -1,0 +1,53 @@
+title: Stealthy Email Account Establishment and Manipulation
+id: e203b5ca-ae9f-4641-9905-0158441d1f7b
+status: stable
+description: |
+    Detects the creation of email accounts followed by immediate sensitive 
+    permission changes or forwarding rules. Focuses on CLI-based execution 
+    to reduce noise from standard HR-driven GUI processes.
+author: hota05
+date: 2026-01-28
+references:
+    - https://attack.mitre.org/techniques/T1585/002/
+tags:
+    - attack.persistence
+    - attack.t1585.002
+    - attack.collection
+logsource:
+    product: m365
+    service: exchange
+detection:
+    selection_critical_ops:
+        Operation:
+            - 'New-Mailbox'
+            - 'Add-MailboxPermission'
+            - 'Set-Mailbox' 
+            - 'New-InboxRule' 
+
+    selection_params:
+        Parameters|contains:
+            - 'AccessRights=FullAccess'
+            - 'ForwardingAddress'
+            - 'ForwardingSmtpAddress'
+            - 'DeliverToMailboxAndForward=True'
+
+    selection_cli_context:
+        ClientInfoString|contains:
+            - 'Client=Microsoft.Exchange.Management'
+            - 'PowerShell'
+            - 'Custom-Context-Script'
+
+    filter_standard_it:
+        ClientInfoString|contains: 'Client=MSExchangeRPC'
+        
+    filter_provisioning_accounts:
+        UserId|contains:
+            - 'SVC_Okta'
+            - 'AzureADConnect'
+            - 'Sync_'
+
+    condition: selection_critical_ops and (selection_params or selection_cli_context) and not (filter_standard_it or filter_provisioning_accounts)
+falsepositives:
+    - IT migrations where mailbox forwarding is part of the decommissioning process.
+    - Security-approved automated backup or journaling accounts.
+level: high

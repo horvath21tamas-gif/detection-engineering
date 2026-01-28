@@ -1,14 +1,10 @@
 {
-    "event_id": "59b5d8c8-9de5-4b6e-83e0-e9634ff601d7",
-    "timestamp": "2026-01-28T08:04:58.676423",
+    "event_id": "562efbb5-89d7-4b64-952e-e79bd1776c0e",
+    "timestamp": "2026-01-28T09:41:54.748677",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "\\cmd.exe",
-    "CommandLine": "whoami",
-    "ParentImage": "\\dns.exe",
-    "parent_process_path": "\\dns.exe",
-    "process_path": "\\cmd.exe"
+    "ParentImage": "test_prefix_\\dns.exe_test_suffix",
+    "Image": "test_prefix_\\cmd.exe_test_suffix",
+    "process_path": "test_prefix_\\cmd.exe_test_suffix"
 }

@@ -1,11 +1,9 @@
 {
-    "event_id": "c97c9af9-ef37-4d14-b91f-a34eade373e0",
-    "timestamp": "2026-01-28T08:04:58.840504",
+    "event_id": "2d0c0ed1-c168-4a7c-a82d-fe5195dc936d",
+    "timestamp": "2026-01-28T09:41:54.908442",
     "product": "windows",
     "service": "sysmon",
     "category": "network_connection",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
     "EventID": "3",
     "Protocol": "tcp",
     "DestinationPort": "80"

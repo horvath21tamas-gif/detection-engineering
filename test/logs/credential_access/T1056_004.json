@@ -1,12 +1,10 @@
 {
-    "event_id": "0fc3f882-ad44-48e0-aaa1-4c47f41c5d3d",
-    "timestamp": "2026-01-28T08:04:58.472630",
+    "event_id": "f8d648de-c72e-44ff-bd83-3129752f8289",
+    "timestamp": "2026-01-28T09:41:54.547196",
     "product": "windows",
     "service": "sysmon",
     "category": "image_load",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "ImageLoaded": "user32.dll",
-    "Image": "\\Users\\",
-    "process_path": "\\Users\\"
+    "ImageLoaded": "test_prefix_user32.dll_test_suffix",
+    "Image": "test_prefix_\\Users\\_test_suffix",
+    "process_path": "test_prefix_\\Users\\_test_suffix"
 }

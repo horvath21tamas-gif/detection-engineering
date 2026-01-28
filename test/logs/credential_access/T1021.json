@@ -1,13 +1,9 @@
 {
-    "event_id": "e218f5e5-b787-40f3-8439-26f0a6002c4b",
-    "timestamp": "2026-01-28T08:04:58.443026",
+    "event_id": "b772962b-81a3-4d67-9509-b226b0b6acc0",
+    "timestamp": "2026-01-28T09:41:54.518648",
     "product": "windows",
     "service": "security",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "C:\\Windows\\System32\\cmd.exe",
-    "CommandLine": "whoami",
     "EventID": "4624",
     "LogonType": "2"
 }

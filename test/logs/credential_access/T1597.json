@@ -1,12 +1,9 @@
 {
-    "event_id": "c3a10c47-6076-427e-8615-df74c02800e9",
-    "timestamp": "2026-01-28T08:04:58.326483",
+    "event_id": "b65e6b90-2ead-4318-bae0-e4c8a5c437d9",
+    "timestamp": "2026-01-28T09:41:54.404022",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "C:\\Windows\\System32\\cmd.exe",
-    "CommandLine": "/.git/",
-    "command": "/.git/"
+    "CommandLine": "test_prefix_/.git/_test_suffix",
+    "command": "test_prefix_/.git/_test_suffix"
 }

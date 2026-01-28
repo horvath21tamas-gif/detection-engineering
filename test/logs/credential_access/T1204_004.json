@@ -1,15 +1,13 @@
 {
-    "event_id": "3da63cf2-b659-4e9a-b706-d82121285c95",
-    "timestamp": "2026-01-28T08:04:58.822968",
+    "event_id": "86a5a957-db75-4b5e-8b57-ee9d3ce16fd2",
+    "timestamp": "2026-01-28T09:41:54.890563",
     "product": "windows",
     "service": "sysmon",
     "category": "email",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
     "url": ".+",
     "url_domain_age": "30",
     "url_reputation": "low",
-    "email_content_type": "text/html",
-    "sender_display_name": "Microsoft",
-    "sender_domain": "microsoft.com"
+    "email_content_type": "test_prefix_text/html_test_suffix",
+    "sender_display_name": "test_prefix_Microsoft_test_suffix",
+    "sender_domain": "test_prefix_microsoft.com_test_suffix"
 }

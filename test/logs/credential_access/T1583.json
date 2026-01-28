@@ -1,11 +1,7 @@
 {
-    "event_id": "7a67ea85-746f-4bfd-9a01-5e37b84f5390",
-    "timestamp": "2026-01-28T08:04:58.746123",
+    "event_id": "5d500965-97eb-4f18-87d4-2a5231b81750",
+    "timestamp": "2026-01-28T09:41:54.814541",
     "product": "windows",
     "service": "sysmon",
-    "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "C:\\Windows\\System32\\cmd.exe",
-    "CommandLine": "whoami"
+    "category": "process_creation"
 }

@@ -1,12 +1,9 @@
 {
-    "event_id": "5d18b3be-7a6c-46fb-b937-fad4ab794b1f",
-    "timestamp": "2026-01-28T08:04:58.384335",
+    "event_id": "d5428c1f-32f7-4d20-976b-6f7a37232556",
+    "timestamp": "2026-01-28T09:41:54.460585",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "C:\\Windows\\System32\\cmd.exe",
-    "CommandLine": "ifconfig.me",
-    "command": "ifconfig.me"
+    "CommandLine": "test_prefix_ifconfig.me_test_suffix",
+    "command": "test_prefix_ifconfig.me_test_suffix"
 }

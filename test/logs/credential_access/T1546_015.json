@@ -1,13 +1,11 @@
 {
-    "event_id": "2dc49329-03a1-46ce-9c68-5aff819d963c",
-    "timestamp": "2026-01-28T08:04:58.388864",
+    "event_id": "e9b33d95-a3d6-4ad5-9cc1-12daa24441b0",
+    "timestamp": "2026-01-28T09:41:54.464951",
     "product": "windows",
     "service": "sysmon",
     "category": "registry_set",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "TargetObject": "\\InprocServer32",
-    "Details": "\\Users\\",
-    "Image": "\\powershell.exe",
-    "process_path": "\\powershell.exe"
+    "TargetObject": "test_prefix_\\InprocServer32_test_suffix",
+    "Details": "test_prefix_\\Users\\_test_suffix",
+    "Image": "test_prefix_\\powershell.exe_test_suffix",
+    "process_path": "test_prefix_\\powershell.exe_test_suffix"
 }

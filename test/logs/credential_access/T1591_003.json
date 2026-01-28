@@ -1,12 +1,9 @@
 {
-    "event_id": "6abfa6d2-c487-43f5-b62b-c1f7ea3e0da3",
-    "timestamp": "2026-01-28T08:04:58.402688",
+    "event_id": "889500bd-1664-4bd8-a333-419bac243d99",
+    "timestamp": "2026-01-28T09:41:54.478595",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "C:\\Windows\\System32\\cmd.exe",
-    "CommandLine": "confluence",
-    "command": "confluence"
+    "CommandLine": "test_prefix_confluence_test_suffix",
+    "command": "test_prefix_confluence_test_suffix"
 }

@@ -1,15 +1,12 @@
 {
-    "event_id": "2c1ffb95-7140-4aa6-ad0b-d660d02633fc",
-    "timestamp": "2026-01-28T08:04:58.397955",
+    "event_id": "4a895126-5ad7-46c4-9ba6-380b398f4b05",
+    "timestamp": "2026-01-28T09:41:54.473957",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "\\regsvr32.exe",
-    "CommandLine": "\\Users\\",
-    "process_path": "\\regsvr32.exe",
-    "command": "\\Users\\",
-    "ParentImage": "\\powershell.exe",
-    "parent_process_path": "\\powershell.exe"
+    "Image": "test_prefix_\\regsvr32.exe_test_suffix",
+    "process_path": "test_prefix_\\regsvr32.exe_test_suffix",
+    "CommandLine": "test_prefix_\\Users\\_test_suffix",
+    "command": "test_prefix_\\Users\\_test_suffix",
+    "ParentImage": "test_prefix_\\powershell.exe_test_suffix"
 }

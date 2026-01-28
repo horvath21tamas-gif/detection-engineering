@@ -1,15 +1,12 @@
 {
-    "event_id": "2d246d75-1c9a-42c0-88b3-9e53d4c05185",
-    "timestamp": "2026-01-28T08:04:58.686855",
+    "event_id": "91690a16-bce0-4e19-bcb3-cdeaf25a2b9a",
+    "timestamp": "2026-01-28T09:41:54.758924",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "\\rundll32.exe",
-    "CommandLine": "\\Users\\",
-    "process_path": "\\rundll32.exe",
-    "command": "\\Users\\",
-    "ParentImage": "\\powershell.exe",
-    "parent_process_path": "\\powershell.exe"
+    "Image": "test_prefix_\\rundll32.exe_test_suffix",
+    "process_path": "test_prefix_\\rundll32.exe_test_suffix",
+    "CommandLine": "test_prefix_\\Users\\_test_suffix",
+    "command": "test_prefix_\\Users\\_test_suffix",
+    "ParentImage": "test_prefix_\\powershell.exe_test_suffix"
 }

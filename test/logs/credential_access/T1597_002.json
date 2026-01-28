@@ -1,12 +1,9 @@
 {
-    "event_id": "8e29d85d-b9ff-43c1-b499-ebe4cbcb0989",
-    "timestamp": "2026-01-28T08:04:58.552577",
+    "event_id": "b0635ce2-ba3c-4a97-bba1-d03f5ab475ac",
+    "timestamp": "2026-01-28T09:41:54.625925",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "C:\\Windows\\System32\\cmd.exe",
-    "CommandLine": "password=",
-    "command": "password="
+    "CommandLine": "test_prefix_password=_test_suffix",
+    "command": "test_prefix_password=_test_suffix"
 }

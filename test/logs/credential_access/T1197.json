@@ -1,15 +1,12 @@
 {
-    "event_id": "b32cb714-2d8e-49b0-bb6f-9bf994c42167",
-    "timestamp": "2026-01-28T08:04:58.741369",
+    "event_id": "7cb681e8-b1ca-41db-8a40-515d417d50bf",
+    "timestamp": "2026-01-28T09:41:54.809986",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "\\bitsadmin.exe",
-    "CommandLine": "\\Users\\",
-    "process_path": "\\bitsadmin.exe",
-    "command": "\\Users\\",
-    "ParentImage": "\\powershell.exe",
-    "parent_process_path": "\\powershell.exe"
+    "Image": "test_prefix_\\bitsadmin.exe_test_suffix",
+    "process_path": "test_prefix_\\bitsadmin.exe_test_suffix",
+    "CommandLine": "test_prefix_\\Users\\_test_suffix",
+    "command": "test_prefix_\\Users\\_test_suffix",
+    "ParentImage": "test_prefix_\\powershell.exe_test_suffix"
 }

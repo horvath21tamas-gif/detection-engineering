@@ -1,15 +1,12 @@
 {
-    "event_id": "2ce0a526-52f9-47a2-8f07-f2663c284ad7",
-    "timestamp": "2026-01-28T08:04:58.527512",
+    "event_id": "7b808e39-2924-4163-816c-25370a916a30",
+    "timestamp": "2026-01-28T09:41:54.601370",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "\\powershell.exe",
-    "CommandLine": "-nop",
-    "process_path": "\\powershell.exe",
-    "command": "-nop",
-    "ParentImage": "\\cmd.exe",
-    "parent_process_path": "\\cmd.exe"
+    "Image": "test_prefix_\\powershell.exe_test_suffix",
+    "process_path": "test_prefix_\\powershell.exe_test_suffix",
+    "CommandLine": "test_prefix_-nop_test_suffix",
+    "command": "test_prefix_-nop_test_suffix",
+    "ParentImage": "test_prefix_\\cmd.exe_test_suffix"
 }

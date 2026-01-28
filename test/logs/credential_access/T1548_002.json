@@ -1,15 +1,11 @@
 {
-    "event_id": "253ecca9-e454-4113-9d75-16fd38aa8f06",
-    "timestamp": "2026-01-28T08:04:58.704154",
+    "event_id": "c50daf7d-c2b6-4f8e-9552-68c2ee05295a",
+    "timestamp": "2026-01-28T09:41:54.776082",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "\\cmd.exe",
-    "CommandLine": "whoami",
-    "process_path": "\\cmd.exe",
+    "Image": "test_prefix_\\cmd.exe_test_suffix",
+    "process_path": "test_prefix_\\cmd.exe_test_suffix",
     "IntegrityLevel": "High",
-    "ParentImage": "\\fodhelper.exe",
-    "parent_process_path": "\\fodhelper.exe"
+    "ParentImage": "test_prefix_\\fodhelper.exe_test_suffix"
 }

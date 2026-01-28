@@ -1,12 +1,9 @@
 {
-    "event_id": "80a9ae06-e9cc-4362-b6ee-348d507fe423",
-    "timestamp": "2026-01-28T08:04:58.347105",
+    "event_id": "116270d0-b657-4454-af90-61fdfae6844d",
+    "timestamp": "2026-01-28T09:41:54.424090",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "C:\\Windows\\System32\\cmd.exe",
-    "CommandLine": "Get-NetDomainTrust",
-    "command": "Get-NetDomainTrust"
+    "CommandLine": "test_prefix_Get-NetDomainTrust_test_suffix",
+    "command": "test_prefix_Get-NetDomainTrust_test_suffix"
 }

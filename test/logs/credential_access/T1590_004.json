@@ -1,12 +1,9 @@
 {
-    "event_id": "7650c599-6e49-479e-a257-33ddfd290f8c",
-    "timestamp": "2026-01-28T08:04:58.451947",
+    "event_id": "208b2696-58ee-439f-b3fc-4644c6ead9e6",
+    "timestamp": "2026-01-28T09:41:54.527506",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "C:\\Windows\\System32\\cmd.exe",
-    "CommandLine": ".pfx",
-    "command": ".pfx"
+    "CommandLine": "test_prefix_.pfx_test_suffix",
+    "command": "test_prefix_.pfx_test_suffix"
 }

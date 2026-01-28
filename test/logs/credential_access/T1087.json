@@ -1,15 +1,12 @@
 {
-    "event_id": "0a450a0a-97be-4630-8ba8-4ef0ec947722",
-    "timestamp": "2026-01-28T08:04:58.370650",
+    "event_id": "a02a3fb2-788a-4a13-8d9e-2d1c8a4711a5",
+    "timestamp": "2026-01-28T09:41:54.447210",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "\\cmd.exe",
-    "CommandLine": "administrators",
-    "process_path": "\\cmd.exe",
-    "command": "administrators",
-    "ParentImage": "\\WINWORD.EXE",
-    "parent_process_path": "\\WINWORD.EXE"
+    "Image": "test_prefix_\\cmd.exe_test_suffix",
+    "process_path": "test_prefix_\\cmd.exe_test_suffix",
+    "CommandLine": "test_prefix_administrators_test_suffix",
+    "command": "test_prefix_administrators_test_suffix",
+    "ParentImage": "test_prefix_\\WINWORD.EXE_test_suffix"
 }

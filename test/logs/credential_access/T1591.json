@@ -1,12 +1,9 @@
 {
-    "event_id": "c99a5d13-91b8-4bb2-b659-f198d1c8b7ae",
-    "timestamp": "2026-01-28T08:04:58.424663",
+    "event_id": "4ac95c1d-43d2-4d48-8883-5f89dfa42c62",
+    "timestamp": "2026-01-28T09:41:54.500480",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "\\dsquery.exe",
-    "CommandLine": "whoami",
-    "process_path": "\\dsquery.exe"
+    "Image": "test_prefix_\\dsquery.exe_test_suffix",
+    "process_path": "test_prefix_\\dsquery.exe_test_suffix"
 }

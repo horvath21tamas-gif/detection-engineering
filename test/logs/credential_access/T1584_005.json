@@ -1,14 +1,10 @@
 {
-    "event_id": "2d44cb25-472f-4ccb-b3e2-7a1018fa7f37",
-    "timestamp": "2026-01-28T08:04:58.791648",
+    "event_id": "09401347-bf42-4b1c-b10f-c80b3b6be4f6",
+    "timestamp": "2026-01-28T09:41:54.859544",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "\\powershell.exe",
-    "CommandLine": "whoami",
-    "ParentImage": "\\wmiprvse.exe",
-    "parent_process_path": "\\wmiprvse.exe",
-    "process_path": "\\powershell.exe"
+    "ParentImage": "test_prefix_\\wmiprvse.exe_test_suffix",
+    "Image": "test_prefix_\\powershell.exe_test_suffix",
+    "process_path": "test_prefix_\\powershell.exe_test_suffix"
 }

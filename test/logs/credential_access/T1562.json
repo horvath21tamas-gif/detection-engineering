@@ -1,12 +1,9 @@
 {
-    "event_id": "24f0b418-0b1c-4103-807e-40d12f8969b4",
-    "timestamp": "2026-01-28T08:04:58.806789",
+    "event_id": "0230b6a8-8da7-49d5-957d-54a77bfc964a",
+    "timestamp": "2026-01-28T09:41:54.874551",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "C:\\Windows\\System32\\cmd.exe",
-    "CommandLine": "WinDefend",
-    "command": "WinDefend"
+    "CommandLine": "test_prefix_WinDefend_test_suffix",
+    "command": "test_prefix_WinDefend_test_suffix"
 }

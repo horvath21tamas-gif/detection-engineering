@@ -1,12 +1,9 @@
 {
-    "event_id": "b4ca7c2e-76e3-45b0-a1e7-b76fb6dd0191",
-    "timestamp": "2026-01-28T08:04:58.691814",
+    "event_id": "92bb0bb6-bf46-4729-baca-13304b28c62f",
+    "timestamp": "2026-01-28T09:41:54.763848",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "C:\\Windows\\System32\\cmd.exe",
-    "CommandLine": "linkedin.com/in/",
-    "command": "linkedin.com/in/"
+    "CommandLine": "test_prefix_linkedin.com/in/_test_suffix",
+    "command": "test_prefix_linkedin.com/in/_test_suffix"
 }

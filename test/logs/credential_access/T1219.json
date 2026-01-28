@@ -1,10 +1,8 @@
 {
-    "event_id": "46ae0809-1f43-45c2-9fe1-e888c6f83d8d",
-    "timestamp": "2026-01-28T08:04:58.736994",
+    "event_id": "099aa49f-9d7d-4aaf-9bb1-45520ce0b820",
+    "timestamp": "2026-01-28T09:41:54.805858",
     "product": "windows",
     "service": "sysmon",
     "category": "service_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
     "ServiceName": "PSEXECSVC"
 }

@@ -1,12 +1,10 @@
 {
-    "event_id": "7f534217-4760-4f38-b78c-d1090047fa91",
-    "timestamp": "2026-01-28T08:04:58.667639",
+    "event_id": "569c4f3d-ec5c-4550-a59b-4fbcf2043add",
+    "timestamp": "2026-01-28T09:41:54.739963",
     "product": "generic",
     "service": "sysmon",
     "category": "network_traffic",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "SrcIp": "1.",
+    "SrcIp": "test_prefix_1._test_suffix",
     "Action": "deny",
     "Protocol": "tcp",
     "Status": "400"

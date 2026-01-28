@@ -1,13 +1,11 @@
 {
-    "event_id": "ce8bf130-3bed-478d-94f6-aefabb27a936",
-    "timestamp": "2026-01-28T08:04:58.585987",
+    "event_id": "4c49af0b-7065-4422-a191-b0ac6c0bf947",
+    "timestamp": "2026-01-28T09:41:54.659146",
     "product": "windows",
     "service": "sysmon",
     "category": "file_event",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "TargetFileName": "logins.json",
+    "TargetFileName": "test_prefix_logins.json_test_suffix",
     "AccessMask": "0x1",
-    "Image": "\\powershell.exe",
-    "process_path": "\\powershell.exe"
+    "Image": "test_prefix_\\powershell.exe_test_suffix",
+    "process_path": "test_prefix_\\powershell.exe_test_suffix"
 }

@@ -1,12 +1,10 @@
 {
-    "event_id": "4cf78550-d543-498c-a8b5-be81d5ab0e6e",
-    "timestamp": "2026-01-28T08:04:58.755368",
+    "event_id": "1994a1d8-8fd7-47eb-b0df-67895d353dad",
+    "timestamp": "2026-01-28T09:41:54.823591",
     "product": "generic",
     "service": "sysmon",
     "category": "webserver",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "cs-uri-query": "<script",
+    "cs-uri-query": "test_prefix_<script_test_suffix",
     "cs-method": "POST",
     "sc-status": "200"
 }

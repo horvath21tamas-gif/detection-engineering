@@ -1,13 +1,11 @@
 {
-    "event_id": "a3962e81-7de3-4155-8bcf-f6050583869b",
-    "timestamp": "2026-01-28T08:04:58.630912",
+    "event_id": "8286a7dc-dad9-4f62-af45-4d8b5366df63",
+    "timestamp": "2026-01-28T09:41:54.703634",
     "product": "generic",
     "service": "sysmon",
     "category": "webserver",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "SrcIp": "1.",
-    "UriStem": "/system",
-    "UriQuery": "cpu",
-    "UserAgent": "curl"
+    "SrcIp": "test_prefix_1._test_suffix",
+    "UriStem": "test_prefix_/system_test_suffix",
+    "UriQuery": "test_prefix_cpu_test_suffix",
+    "UserAgent": "test_prefix_curl_test_suffix"
 }

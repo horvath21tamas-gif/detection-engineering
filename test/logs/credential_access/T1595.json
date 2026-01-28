@@ -1,14 +1,12 @@
 {
-    "event_id": "f62fccf7-d1f9-4a53-9661-3f49a1bbbe03",
-    "timestamp": "2026-01-28T08:04:58.597731",
+    "event_id": "64e580c8-8958-447c-8749-6f63751a7452",
+    "timestamp": "2026-01-28T09:41:54.670741",
     "product": "generic",
     "service": "sysmon",
     "category": "webserver",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "SrcIp": "1.",
+    "SrcIp": "test_prefix_1._test_suffix",
     "Method": "GET",
-    "UriStem": "/admin",
-    "UserAgent": "curl",
+    "UriStem": "test_prefix_/admin_test_suffix",
+    "UserAgent": "test_prefix_curl_test_suffix",
     "Status": "200"
 }

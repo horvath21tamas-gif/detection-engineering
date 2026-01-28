@@ -1,12 +1,9 @@
 {
-    "event_id": "2e134519-deb9-4675-a4db-19108228c318",
-    "timestamp": "2026-01-28T08:04:58.606014",
+    "event_id": "bdae11c4-646e-4b1e-977f-d0dd4c1df8b2",
+    "timestamp": "2026-01-28T09:41:54.678962",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "C:\\Windows\\System32\\cmd.exe",
-    "CommandLine": "\\AppData\\",
-    "command": "\\AppData\\"
+    "CommandLine": "test_prefix_\\AppData\\_test_suffix",
+    "command": "test_prefix_\\AppData\\_test_suffix"
 }

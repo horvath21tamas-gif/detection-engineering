@@ -1,12 +1,9 @@
 {
-    "event_id": "1e46d3ac-d204-4ef5-9c91-501b2feb8d8c",
-    "timestamp": "2026-01-28T08:04:58.601375",
+    "event_id": "a2de949c-2a11-4e0a-a4d2-b3f4bcc4e88b",
+    "timestamp": "2026-01-28T09:41:54.674399",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "C:\\Windows\\System32\\cmd.exe",
-    "CommandLine": "action=allow",
-    "command": "action=allow"
+    "CommandLine": "test_prefix_action=allow_test_suffix",
+    "command": "test_prefix_action=allow_test_suffix"
 }

@@ -1,14 +1,12 @@
 {
-    "event_id": "980664c4-4fe8-4f22-86c4-4a5903c60ce9",
-    "timestamp": "2026-01-28T08:04:58.802668",
+    "event_id": "f79b474d-03f2-4d43-93bc-a3c1d2ffa312",
+    "timestamp": "2026-01-28T09:41:54.870490",
     "product": "generic",
     "service": "sysmon",
     "category": "webserver",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "SrcIp": "1.",
-    "UriStem": "/login",
-    "UriQuery": "user=",
+    "SrcIp": "test_prefix_1._test_suffix",
+    "UriStem": "test_prefix_/login_test_suffix",
+    "UriQuery": "test_prefix_user=_test_suffix",
     "Status": "401",
-    "UserAgent": "python"
+    "UserAgent": "test_prefix_python_test_suffix"
 }

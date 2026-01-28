@@ -1,14 +1,12 @@
 {
-    "event_id": "b25310ca-54e6-48e0-85c3-4dd232a822fe",
-    "timestamp": "2026-01-28T08:04:58.502850",
+    "event_id": "53aa8979-ece8-499f-ac8c-2043e3b42ffb",
+    "timestamp": "2026-01-28T09:41:54.576958",
     "product": "generic",
     "service": "sysmon",
     "category": "webserver",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "cs-uri-stem": ".php",
+    "cs-uri-stem": "test_prefix_.php_test_suffix",
     "cs-method": "POST",
-    "cs-uri-query": "cmd=",
+    "cs-uri-query": "test_prefix_cmd=_test_suffix",
     "sc-status": "200",
-    "cs-user-agent": "curl"
+    "cs-user-agent": "test_prefix_curl_test_suffix"
 }

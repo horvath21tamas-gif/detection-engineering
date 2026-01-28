@@ -1,15 +1,12 @@
 {
-    "event_id": "0b60d281-d1af-4327-a5c3-ea8eafabbee4",
-    "timestamp": "2026-01-28T08:04:58.652082",
+    "event_id": "c0f33eb1-ce57-40e2-a450-57a935301fa6",
+    "timestamp": "2026-01-28T09:41:54.724647",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "\\wevtutil.exe",
-    "CommandLine": "cl Security",
-    "process_path": "\\wevtutil.exe",
-    "command": "cl Security",
-    "ParentImage": "\\cmd.exe",
-    "parent_process_path": "\\cmd.exe"
+    "Image": "test_prefix_\\wevtutil.exe_test_suffix",
+    "process_path": "test_prefix_\\wevtutil.exe_test_suffix",
+    "CommandLine": "test_prefix_cl Security_test_suffix",
+    "command": "test_prefix_cl Security_test_suffix",
+    "ParentImage": "test_prefix_\\cmd.exe_test_suffix"
 }

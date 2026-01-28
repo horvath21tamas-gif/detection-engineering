@@ -1,13 +1,9 @@
 {
-    "event_id": "ccfc4882-32f9-4125-bf35-463a41efa4f6",
-    "timestamp": "2026-01-28T08:04:58.410979",
+    "event_id": "9f08af8a-0a7f-4b66-923f-f5c65cdcf063",
+    "timestamp": "2026-01-28T09:41:54.486852",
     "product": "windows",
     "service": "system",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "C:\\Windows\\System32\\cmd.exe",
-    "CommandLine": "whoami",
     "EventID": "7036",
-    "ServiceName": "WinDefend"
+    "ServiceName": "test_prefix_WinDefend_test_suffix"
 }

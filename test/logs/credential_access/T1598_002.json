@@ -1,13 +1,11 @@
 {
-    "event_id": "7d5843a4-ba59-450f-abad-1b0bd976358a",
-    "timestamp": "2026-01-28T08:04:58.615362",
+    "event_id": "4f3ffad7-2ce0-4cdb-8b79-b1b26bc9c91f",
+    "timestamp": "2026-01-28T09:41:54.688254",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "\\findstr.exe",
-    "CommandLine": "invoice",
-    "process_path": "\\findstr.exe",
-    "command": "invoice"
+    "Image": "test_prefix_\\findstr.exe_test_suffix",
+    "process_path": "test_prefix_\\findstr.exe_test_suffix",
+    "CommandLine": "test_prefix_invoice_test_suffix",
+    "command": "test_prefix_invoice_test_suffix"
 }

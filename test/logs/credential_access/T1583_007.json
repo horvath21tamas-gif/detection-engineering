@@ -1,13 +1,11 @@
 {
-    "event_id": "a64ed89d-0db6-484e-9f1a-a5bc2acf1c0f",
-    "timestamp": "2026-01-28T08:04:58.832093",
+    "event_id": "c0d0770b-9c76-440f-9e92-faa540b67880",
+    "timestamp": "2026-01-28T09:41:54.900058",
     "product": "windows",
     "service": "sysmon",
     "category": "process_creation",
-    "User": "TargetUser",
-    "SourceUser": "TargetUser",
-    "Image": "\\terraform.exe",
-    "CommandLine": "aws_lambda_function",
-    "process_path": "\\terraform.exe",
-    "command": "aws_lambda_function"
+    "Image": "test_prefix_\\terraform.exe_test_suffix",
+    "process_path": "test_prefix_\\terraform.exe_test_suffix",
+    "CommandLine": "test_prefix_aws_lambda_function_test_suffix",
+    "command": "test_prefix_aws_lambda_function_test_suffix"
 }

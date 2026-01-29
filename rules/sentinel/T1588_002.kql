@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (TargetFilename in ("*\nmap*", "*\nc.exe*", "*\netcat*", "*\socat*", "*\rclone*", "*\plink*", "*\mimikatz*", "*\ngrok*", "*\chisel*")) and (FolderPath in ("*\curl.exe", "*\wget.exe", "*\certutil.exe", "*\bitsadmin.exe", "*\powershell.exe", "*\pwsh.exe")) and (not ((TargetFilename in ("*\Program Files\*", "*\Program Files (x86)\*", "*\Windows\System32\*", "*\Chocolatey\*")) or ((FolderPath in ("*\Tanium\*", "*\SCCM\*", "*\Intune\*", "*\Altiris\*")) and User =~ "SYSTEM") or (FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe"))))
+| where (TargetFilename in ("*\nmap*", "*\nc.exe*", "*\netcat*", "*\socat*", "*\rclone*", "*\plink*", "*\mimikatz*", "*\ngrok*", "*\chisel*")) and (FolderPath in ("*\curl.exe", "*\wget.exe", "*\certutil.exe", "*\bitsadmin.exe", "*\powershell.exe", "*\pwsh.exe")) and (not ((TargetFilename in ("*\Program Files\*", "*\Program Files (x86)\*", "*\Windows\System32\*", "*\Chocolatey\*")) or ((FolderPath in ("*\Tanium\*", "*\SCCM\*", "*\Intune\*", "*\Altiris\*")) and username =~ "SYSTEM") or (FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe"))))

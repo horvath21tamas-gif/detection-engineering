@@ -123,6 +123,9 @@
 - [High-Fidelity MFA/OTP Spoofing & Harvesting - T1598.003](#high-fidelity-mfaotp-spoofing-&-harvesting---t1598003)
 - [High-Fidelity Spearphishing Attachment Interaction - T1598.004](#high-fidelity-spearphishing-attachment-interaction---t1598004)
 - [Anomalous Infrastructure Staging and Resource Deployment](#anomalous-infrastructure-staging-and-resource-deployment)
+- [Strategic Digital Certificate Staging in Trusted Root Store](#strategic-digital-certificate-staging-in-trusted-root-store)
+- [Anomalous Web Content Modification for Drive-by Staging](#anomalous-web-content-modification-for-drive-by-staging)
+- [Strategic Staging of Malicious Link Targets](#strategic-staging-of-malicious-link-targets)
 - [High-Fidelity Cloud Account Acquisition and Initialization - T1650](#high-fidelity-cloud-account-acquisition-and-initialization---t1650)
 - [Credential Dumping LSASS](#credential-dumping-lsass)
 
@@ -1966,6 +1969,57 @@ It focuses on non-standard users performing upload or infrastructure modificatio
 actions, filtering out authorized CI/CD pipelines and IT administration.
 - **Hamis pozitívok:** IT staff performing emergency cloud fixes outside of standard CI/CD., Developers using Cloud CLIs on their local machines (should be added to filters if permitted).
 - **MITRE ATT&CK:** `T1608`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Strategic Digital Certificate Staging in Trusted Root Store
+- **Azonosító:** `T1608_003.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the command-line installation of certificates into the Trusted Root store. 
+Adversaries do this to establish trust for C2 infrastructure or to enable 
+transparent SSL/TLS interception (MitM).
+- **Hamis pozitívok:** Manual IT administration via CLI (should be avoided, but happens)., Internal PKI rollouts using custom scripts (filter by specific script path).
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Anomalous Web Content Modification for Drive-by Staging
+- **Azonosító:** `T1608_004.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious modifications to web server content directories (web root) 
+initiated by non-standard processes or interactive shells. This behavior is 
+typical when an adversary stages a drive-by download site or injects malicious scripts.
+- **Hamis pozitívok:** Web developers performing emergency hotfixes via CLI (unrecommended practice)., Legitimate CMS auto-updates (e.g. WordPress, Joomla) - filter by service account.
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Strategic Staging of Malicious Link Targets
+- **Azonosító:** `T1608_005.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the automated preparation of malicious link targets by monitoring 
+CLI-based interactions with URL shortener APIs or cloud-based redirector staging 
+initiated by unauthorized users or unusual parent processes.
+- **Hamis pozitívok:** Marketing automation scripts that haven't been whitelisted by username., Security teams testing URL shortening for internal phishing simulations.
+- **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

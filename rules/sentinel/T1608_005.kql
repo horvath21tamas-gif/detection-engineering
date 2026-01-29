@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\curl.exe", "*\wget.exe", "*\powershell.exe", "*\pwsh.exe", "*\python.exe")) and (ProcessCommandLine in ("*api-ssl.bitly.com*", "*api.tinyurl.com*", "*api.rebrandly.com*", "*api.shorte.st*", "*cutt.ly/api*")) and (ProcessCommandLine in ("*.exe*", "*.zip*", "*.iso*", "*.vhd*", "*.msi*", "*.js*")) and (not ((UserName in ("*svc_marketing*", "*svc_social*", "*svc_devops*", "*admin_automated*")) or (ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe")) or (FolderPath in ("*\AppData\Local\slack\*", "*\AppData\Local\Microsoft\Teams\*"))))

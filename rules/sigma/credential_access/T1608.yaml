@@ -1,0 +1,54 @@
+title: Anomalous Infrastructure Staging and Resource Deployment
+id: afe05aa4-a695-48e0-8bfd-c5229d0eabd1
+status: stable
+description: |
+    Detects the use of cloud CLI tools and IaC binaries to stage adversary resources. 
+    It focuses on non-standard users performing upload or infrastructure modification 
+    actions, filtering out authorized CI/CD pipelines and IT administration.
+author: hota05
+date: 2026-01-29
+references:
+    - https://attack.mitre.org/techniques/T1608/
+tags:
+    - attack.resource_development
+    - attack.t1608
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        Image|endswith:
+            - '\aws.exe'
+            - '\az.exe'
+            - '\gcloud.exe'
+            - '\terraform.exe'
+            - '\ansible-playbook.exe'
+            - '\rclone.exe'
+
+    selection_actions:
+        CommandLine|contains:
+            - ' s3 cp '            
+            - ' s3 sync '
+            - ' storage blob upload ' 
+            - ' apply '            
+            - ' lambda update-function '
+            - ' rclone copy '      
+            - ' rclone move '
+
+    filter_authorized_contexts:
+        UserName|contains:
+            - 'svc_devops'
+            - 'cloud_mgr'
+            - 'deploy_bot'
+            - 'admin_pki'
+        Image|contains:
+            - '\AppData\Local\Programs\Microsoft VS Code\'
+            - '\.jenkins\'
+            - '\github_runner\'
+        SubjectUserName: 'SYSTEM'
+
+    condition: selection_tools and selection_actions and not filter_authorized_contexts
+falsepositives:
+    - IT staff performing emergency cloud fixes outside of standard CI/CD.
+    - Developers using Cloud CLIs on their local machines (should be added to filters if permitted).
+level: high

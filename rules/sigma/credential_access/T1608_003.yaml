@@ -49,7 +49,7 @@ detection:
             - '\CrowdStrike\'
 
     filter_system_user:
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
         ParentImage|endswith: '\svchost.exe'
 
     condition: selection_tools and selection_action and selection_target_root and not (filter_trusted_parents or filter_security_vendors or filter_system_user)

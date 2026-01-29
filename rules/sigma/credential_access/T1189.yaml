@@ -1,0 +1,59 @@
+title: Browser-Originating Shell or System Tool Execution
+id: 328cd924-fc62-4de2-8d24-92a3b7513454
+status: stable
+description: |
+    Detects suspicious child processes spawned by web browsers. This pattern is highly 
+    indicative of successful exploitation via a Drive-by Compromise (T1189), 
+    where an exploit kit triggers a payload or a shell directly from the browser's memory.
+author: hota05
+date: 2026-01-29
+references:
+    - https://attack.mitre.org/techniques/T1189/
+tags:
+    - attack.initial_access
+    - attack.t1189
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_browsers:
+        ParentImage|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+            - '\brave.exe'
+            - '\opera.exe'
+
+    selection_suspicious_children:
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\mshta.exe'       
+            - '\cscript.exe'
+            - '\wscript.exe'
+            - '\certutil.exe'     
+            - '\scrcons.exe'      
+            - '\regsvr32.exe'     
+            - '\rundll32.exe'
+
+    filter_legit_browser_mechanics:
+        CommandLine|contains:
+            - '--type=renderer'
+            - '--type=gpu-process'
+            - '--type=utility'
+            - '--type=crashpad-handler'
+            - '--type=extension'
+
+    filter_known_integrations:
+        CommandLine|contains:
+            - 'dw20.exe' 
+            - 'ie_to_edge_stub.exe'
+
+    filter_updates:
+        Image|contains:
+            - '\Google\Update\'
+            - '\Microsoft\EdgeUpdate\'
+
+    condition: selection_browsers and selection_suspicious_children and not (filter_legit_browser_mechanics or filter_known_integrations or filter_updates)
+level: critical

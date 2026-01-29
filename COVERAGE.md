@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-29 06:52:48`
+**Utolsó frissítés:** `2026-01-29 07:02:34`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 127 | 100% |
-| Splunk (SPL) | 127 | 100.0% |
-| Microsoft Sentinel (KQL) | 127 | 100.0% |
-| QRadar (AQL) | 70 | 55.1% |
-| Elastic (KQL/EQL) | 127 | 100.0% |
-| RSA NetWitness | 127 | 100.0% |
+| Sigma (Forrás) | 130 | 100% |
+| Splunk (SPL) | 130 | 100.0% |
+| Microsoft Sentinel (KQL) | 130 | 100.0% |
+| QRadar (AQL) | 70 | 53.8% |
+| Elastic (KQL/EQL) | 130 | 100.0% |
+| RSA NetWitness | 130 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -143,7 +143,10 @@
 | T1598.003 | HIGH | High-Fidelity MFA/OTP Spoofing & Harvesting - T1598.003 |
 | T1598.004 | HIGH | High-Fidelity Spearphishing Attachment Interaction - T1598.004 |
 | T1608 | HIGH | Anomalous Infrastructure Staging and Resource Deployment |
+| T1608.001 | HIGH | Anomalous Malware Staging to External Infrastructure |
+| T1608.002 | HIGH | Anomalous Offensive Tool Staging and External Upload |
 | T1608.003 | HIGH | Strategic Digital Certificate Staging in Trusted Root Store |
 | T1608.004 | HIGH | Anomalous Web Content Modification for Drive-by Staging |
 | T1608.005 | HIGH | Strategic Staging of Malicious Link Targets |
+| T1608.006 | HIGH | Anomalous SEO Poisoning and Metadata Staging |
 | T1650 | HIGH | High-Fidelity Cloud Account Acquisition and Initialization - T1650 |

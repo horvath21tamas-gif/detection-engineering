@@ -123,9 +123,12 @@
 - [High-Fidelity MFA/OTP Spoofing & Harvesting - T1598.003](#high-fidelity-mfaotp-spoofing-&-harvesting---t1598003)
 - [High-Fidelity Spearphishing Attachment Interaction - T1598.004](#high-fidelity-spearphishing-attachment-interaction---t1598004)
 - [Anomalous Infrastructure Staging and Resource Deployment](#anomalous-infrastructure-staging-and-resource-deployment)
+- [Anomalous Malware Staging to External Infrastructure](#anomalous-malware-staging-to-external-infrastructure)
+- [Anomalous Offensive Tool Staging and External Upload](#anomalous-offensive-tool-staging-and-external-upload)
 - [Strategic Digital Certificate Staging in Trusted Root Store](#strategic-digital-certificate-staging-in-trusted-root-store)
 - [Anomalous Web Content Modification for Drive-by Staging](#anomalous-web-content-modification-for-drive-by-staging)
 - [Strategic Staging of Malicious Link Targets](#strategic-staging-of-malicious-link-targets)
+- [Anomalous SEO Poisoning and Metadata Staging](#anomalous-seo-poisoning-and-metadata-staging)
 - [High-Fidelity Cloud Account Acquisition and Initialization - T1650](#high-fidelity-cloud-account-acquisition-and-initialization---t1650)
 - [Credential Dumping LSASS](#credential-dumping-lsass)
 
@@ -1977,6 +1980,40 @@ actions, filtering out authorized CI/CD pipelines and IT administration.
 
 ---
 
+## Anomalous Malware Staging to External Infrastructure
+- **Azonosító:** `T1608_001.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the staging of malware to external infrastructure by monitoring 
+non-browser based uploads to cloud storage, file-sharing, and code-hosting platforms 
+using command-line tools or unusual processes.
+- **Hamis pozitívok:** Developers manually pushing code to GitHub via CLI (add developer usernames to filters)., IT administrators using rclone for legitimate offsite backups.
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Anomalous Offensive Tool Staging and External Upload
+- **Azonosító:** `T1608_002.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the staging of offensive tools to external infrastructure by monitoring 
+CLI-based uploads from non-standard directories. Focuses on the "staged-then-shipped" 
+pattern where hacktools are moved to external drop zones.
+- **Hamis pozitívok:** IT troubleshooting where an admin uploads a tool log or binary to a vendor., Security researchers testing tools from their own Desktop/Temp folders.
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Strategic Digital Certificate Staging in Trusted Root Store
 - **Azonosító:** `T1608_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
@@ -2020,6 +2057,23 @@ CLI-based interactions with URL shortener APIs or cloud-based redirector staging
 initiated by unauthorized users or unusual parent processes.
 - **Hamis pozitívok:** Marketing automation scripts that haven't been whitelisted by username., Security teams testing URL shortening for internal phishing simulations.
 - **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Anomalous SEO Poisoning and Metadata Staging
+- **Azonosító:** `T1608_006.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the preparation of SEO poisoning infrastructure by monitoring for 
+unauthorized CMS manipulation, automated content spinning, and the use of 
+known black-hat SEO tools on web servers or staging environments.
+- **Hamis pozitívok:** Marketing agencies performing bulk content migrations via CLI., Web developers testing sitemap plugins on dev environments.
+- **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

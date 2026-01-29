@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\curl.exe", "*\wget.exe", "*\rclone.exe", "*\powershell.exe", "*\pwsh.exe", "*\scp.exe")) and (ProcessCommandLine in ("*chisel*", "*mimikatz*", "*ngrok*", "*socat*", "*nmap*", "*bloodhound*", "*rclone*")) and (ProcessCommandLine in ("* -F *", "* --upload-file *", "* s3 cp *", "* copy *", "* Invoke-RestMethod *", "* -Method Post *")) and (ProcessCommandLine in ("*\Users\Public\*", "*\AppData\Local\Temp\*", "*\Windows\Temp\*", "*\Desktop\*")) and (not (((UserName in ("*svc_deploy*", "*it_admin_global*", "*build_agent*")) and (ParentProcessName in ("*\Program Files\*", "*\Windows\System32\services.exe*"))) or (ParentProcessName in ("*\chrome.exe", "*\msedge.exe"))))

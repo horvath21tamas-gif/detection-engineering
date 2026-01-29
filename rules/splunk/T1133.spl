@@ -1,0 +1,1 @@
+source="WinEventLog:Security" (EventCode=4624 LogonType=10 NOT (IpAddress IN ("10.*", "192.168.*", "172.16.*") OR IpAddress IN ("203.0.113.10", "203.0.113.11"))) OR (EventCode=4624 LogonType=10 IpAddress IN ("*127.0.0.1*", "*::1*") OR IpAddress="-" OR IpAddress="")

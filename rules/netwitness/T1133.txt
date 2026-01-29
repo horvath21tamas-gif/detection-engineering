@@ -1,0 +1,2 @@
+((EventID = 4624 AND LogonType = 10) AND (NOT (((IpAddress begins '10.','192.168.','172.16.') OR (((IpAddress = '*203.0.113.10*' OR IpAddress = '*203.0.113.11*')))))) OR ((EventID = 4624 AND LogonType = 10) AND ((((IpAddress = '*127.0.0.1*' OR IpAddress = '*::1*'))) OR ((IpAddress = '*-*'))|| IpAddress = ''))
+)

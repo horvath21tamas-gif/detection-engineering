@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((EventID =~ 4624 and LogonType =~ 10) and (not ((IpAddress in ("10.*", "192.168.*", "172.16.*")) or (IpAddress in ("203.0.113.10", "203.0.113.11"))))) or ((EventID =~ 4624 and LogonType =~ 10) and ((IpAddress in ("*127.0.0.1*", "*::1*")) or IpAddress =~ "-" or IpAddress =~ ""))

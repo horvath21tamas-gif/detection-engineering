@@ -1,0 +1,68 @@
+title: Anomalous Malware Staging to External Infrastructure
+id: f2c18230-6661-401c-bae7-708e8ae7bc77
+status: stable
+description: |
+    Detects the staging of malware to external infrastructure by monitoring 
+    non-browser based uploads to cloud storage, file-sharing, and code-hosting platforms 
+    using command-line tools or unusual processes.
+author: hota05
+date: 2026-01-29
+references:
+    - https://attack.mitre.org/techniques/T1608/001/
+tags:
+    - attack.resource_development
+    - attack.t1608.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_transfer_tools:
+        Image|endswith:
+            - '\curl.exe'
+            - '\wget.exe'
+            - '\rclone.exe'
+            - '\aws.exe'
+            - '\az.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+
+    selection_staging_commands:
+        CommandLine|contains:
+            - ' -F '               
+            - ' --upload-file '
+            - ' s3 cp '            
+            - ' storage blob upload ' 
+            - ' rclone copy '     
+            - ' Invoke-RestMethod '
+            - ' -Method Post '
+
+    selection_destinations:
+        CommandLine|contains:
+            - 'github.com'
+            - 'gitlab.com'
+            - 's3.amazonaws.com'
+            - 'blob.core.windows.net'
+            - 'transfer.sh'
+            - 'mega.nz'
+            - 'pastebin.com'
+
+    filter_authorized_contexts:
+        Image|contains:
+            - '\Jenkins\'
+            - '\GitLab-Runner\'
+            - '\AzureDevOps\'
+        CommandLine|contains:
+            - '\Program Files\'
+            - 'backup_config.json'
+        User: 'SYSTEM'
+
+    filter_interactive_browsers:
+        ParentImage|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+
+    condition: selection_transfer_tools and selection_staging_commands and selection_destinations and not (filter_authorized_contexts or filter_interactive_browsers)
+falsepositives:
+    - Developers manually pushing code to GitHub via CLI (add developer usernames to filters).
+    - IT administrators using rclone for legitimate offsite backups.
+level: high

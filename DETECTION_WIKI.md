@@ -130,6 +130,7 @@
 - [Strategic Staging of Malicious Link Targets](#strategic-staging-of-malicious-link-targets)
 - [Anomalous SEO Poisoning and Metadata Staging](#anomalous-seo-poisoning-and-metadata-staging)
 - [High-Fidelity Cloud Account Acquisition and Initialization - T1650](#high-fidelity-cloud-account-acquisition-and-initialization---t1650)
+- [Professional Content Impersonation and Infrastructure Mirroring](#professional-content-impersonation-and-infrastructure-mirroring)
 - [Credential Dumping LSASS](#credential-dumping-lsass)
 
 ---
@@ -2089,6 +2090,23 @@ known black-hat SEO tools on web servers or staging environments.
 - **Leírás:** Detects the acquisition or unauthorized setup of cloud accounts. Focuses on  credential configuration, profile creation, and automated SDK-based  identity harvesting while filtering out authorized DevOps automation.
 - **Hamis pozitívok:** Cloud administrators configuring their local environment for the first time., Legitimate automated deployment scripts not run through central engines., Developers debugging cloud integration locally.
 - **MITRE ATT&CK:** `T1650`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Professional Content Impersonation and Infrastructure Mirroring
+- **Azonosító:** `T1659.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects tools and CLI patterns used to clone or impersonate legitimate web content. 
+Focuses on recursive mirroring of internal portals and the use of phishing 
+frameworks, filtering out legitimate development and browser-based activity.
+- **Hamis pozitívok:** Web developers migrating internal sites using CLI tools., Security teams conducting authorized phishing simulations., Automated documentation generators (e.g., Doxygen, Sphinx) if misconfigured.
+- **MITRE ATT&CK:** `T1659`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

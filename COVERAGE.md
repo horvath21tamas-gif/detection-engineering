@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-29 07:02:34`
+**Utolsó frissítés:** `2026-01-29 08:01:08`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 130 | 100% |
-| Splunk (SPL) | 130 | 100.0% |
-| Microsoft Sentinel (KQL) | 130 | 100.0% |
-| QRadar (AQL) | 70 | 53.8% |
-| Elastic (KQL/EQL) | 130 | 100.0% |
-| RSA NetWitness | 130 | 100.0% |
+| Sigma (Forrás) | 131 | 100% |
+| Splunk (SPL) | 131 | 100.0% |
+| Microsoft Sentinel (KQL) | 131 | 100.0% |
+| QRadar (AQL) | 70 | 53.4% |
+| Elastic (KQL/EQL) | 131 | 100.0% |
+| RSA NetWitness | 131 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -150,3 +150,4 @@
 | T1608.005 | HIGH | Strategic Staging of Malicious Link Targets |
 | T1608.006 | HIGH | Anomalous SEO Poisoning and Metadata Staging |
 | T1650 | HIGH | High-Fidelity Cloud Account Acquisition and Initialization - T1650 |
+| T1659 | HIGH | Professional Content Impersonation and Infrastructure Mirroring |

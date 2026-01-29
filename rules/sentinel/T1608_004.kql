@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetFilename in ("*\inetpub\wwwroot\*", "*\htdocs\*", "*\apache\www\*", "*\nginx\html\*")) and (TargetFilename in ("*.js", "*.php", "*.html", "*.htm", "*.hta")) and (FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\python.exe", "*\curl.exe", "*\wget.exe", "*\node.exe")) and (not ((FolderPath in ("*\Jenkins\*", "*\GitLab-Runner\*", "*\WebDeploy\*", "*\AzureDevOps\*")) and (UserName in ("*SVC_Deploy*", "*WebAdmin*", "*SYSTEM*"))))

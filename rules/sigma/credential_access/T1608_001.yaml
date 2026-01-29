@@ -54,7 +54,7 @@ detection:
         CommandLine|contains:
             - '\Program Files\'
             - 'backup_config.json'
-        User: 'SYSTEM'
+        username: 'SYSTEM'
 
     filter_interactive_browsers:
         ParentImage|endswith:

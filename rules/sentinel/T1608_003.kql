@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (FolderPath in ("*\certutil.exe", "*\certmgr.exe", "*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("*-addstore*", "*Import-Certificate*", "*-importCertificate*", "*Install-Certificate*")) and (ProcessCommandLine in ("* Root*", "* AuthRoot*")) and (not ((ParentProcessName in ("*\mmc.exe", "*\ServerManager.exe", "*\msiexec.exe", "*\CcmExec.exe")) or (FolderPath in ("*\Cisco\AnyConnect\*", "*\SentinelOne\*", "*\CrowdStrike\*")) or (User =~ "NT AUTHORITY\SYSTEM" and ParentProcessName endswith "\svchost.exe")))
+| where (FolderPath in ("*\certutil.exe", "*\certmgr.exe", "*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("*-addstore*", "*Import-Certificate*", "*-importCertificate*", "*Install-Certificate*")) and (ProcessCommandLine in ("* Root*", "* AuthRoot*")) and (not ((ParentProcessName in ("*\mmc.exe", "*\ServerManager.exe", "*\msiexec.exe", "*\CcmExec.exe")) or (FolderPath in ("*\Cisco\AnyConnect\*", "*\SentinelOne\*", "*\CrowdStrike\*")) or (username =~ "NT AUTHORITY\SYSTEM" and ParentProcessName endswith "\svchost.exe")))

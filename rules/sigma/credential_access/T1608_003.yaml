@@ -1,0 +1,59 @@
+title: Strategic Digital Certificate Staging in Trusted Root Store
+id: 84c1d391-1a5f-44fc-84a3-8f22235ea0d9
+status: stable
+description: |
+    Detects the command-line installation of certificates into the Trusted Root store. 
+    Adversaries do this to establish trust for C2 infrastructure or to enable 
+    transparent SSL/TLS interception (MitM).
+author: hota05
+date: 2026-01-29
+references:
+    - https://attack.mitre.org/techniques/T1608/003/
+tags:
+    - attack.resource_development
+    - attack.t1608.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        Image|endswith:
+            - '\certutil.exe'
+            - '\certmgr.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+
+    selection_action:
+        CommandLine|contains:
+            - '-addstore'
+            - 'Import-Certificate'
+            - '-importCertificate'
+            - 'Install-Certificate'
+
+    selection_target_root:
+        CommandLine|contains:
+            - ' Root'      
+            - ' AuthRoot'  
+
+    filter_trusted_parents:
+        ParentImage|endswith:
+            - '\mmc.exe'          
+            - '\ServerManager.exe'
+            - '\msiexec.exe'      
+            - '\CcmExec.exe'       
+
+    filter_security_vendors:
+        Image|contains:
+            - '\Cisco\AnyConnect\'
+            - '\SentinelOne\'
+            - '\CrowdStrike\'
+
+    filter_system_user:
+        User: 'NT AUTHORITY\SYSTEM'
+        ParentImage|endswith: '\svchost.exe'
+
+    condition: selection_tools and selection_action and selection_target_root and not (filter_trusted_parents or filter_security_vendors or filter_system_user)
+falsepositives:
+    - Manual IT administration via CLI (should be avoided, but happens).
+    - Internal PKI rollouts using custom scripts (filter by specific script path).
+level: high

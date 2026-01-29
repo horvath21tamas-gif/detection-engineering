@@ -1,0 +1,63 @@
+title: Anomalous SEO Poisoning and Metadata Staging
+id: 89e9d5c5-6bff-45f0-8951-8ceb4b989e04
+status: stable
+description: |
+    Detects the preparation of SEO poisoning infrastructure by monitoring for 
+    unauthorized CMS manipulation, automated content spinning, and the use of 
+    known black-hat SEO tools on web servers or staging environments.
+author: hota05
+date: 2026-01-29
+references:
+    - https://attack.mitre.org/techniques/T1608/006/
+tags:
+    - attack.resource_development
+    - attack.t1608.006
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_blackhat_tools:
+        Image|endswith:
+            - '\xrumer.exe'
+            - '\scrapebox.exe'
+            - '\gsa_ser.exe'
+            - '\senuke.exe'
+
+    selection_cms_manipulation:
+        CommandLine|contains:
+            - 'wp-cli.phar post create'
+            - 'wp post generate'
+            - 'wp plugin install' 
+            - 'joomla-cli.php'
+
+    selection_content_spinning:
+        CommandLine|contains:
+            - 'keyword-stuff'
+            - 'spin-content'
+            - 'word-ai'
+            - '--sitemap-gen'
+            - 'cloaking-enable' 
+
+    filter_authorized_context:
+        UserName|contains:
+            - 'svc_marketing'
+            - 'seo_lead'
+            - 'content_bot'
+        Image|contains:
+            - '\ScreamingFrogSEOSpider\'
+            - '\Sitebulb\'
+        ParentImage|endswith:
+            - '\w3wp.exe'
+            - '\httpd.exe'
+            - '\nginx.exe'
+
+    filter_interactive_browsers:
+        ParentImage|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+
+    condition: (selection_blackhat_tools or (selection_cms_manipulation or selection_content_spinning)) and not (filter_authorized_context or filter_interactive_browsers)
+falsepositives:
+    - Marketing agencies performing bulk content migrations via CLI.
+    - Web developers testing sitemap plugins on dev environments.
+level: high

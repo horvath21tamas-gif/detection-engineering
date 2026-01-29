@@ -1,0 +1,72 @@
+title: Anomalous Offensive Tool Staging and External Upload
+id: 915a2ed1-9615-431a-b318-69bb477a6d99
+status: stable
+description: |
+    Detects the staging of offensive tools to external infrastructure by monitoring 
+    CLI-based uploads from non-standard directories. Focuses on the "staged-then-shipped" 
+    pattern where hacktools are moved to external drop zones.
+author: hota05
+date: 2026-01-29
+references:
+    - https://attack.mitre.org/techniques/T1608/002/
+tags:
+    - attack.resource_development
+    - attack.t1608.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        Image|endswith:
+            - '\curl.exe'
+            - '\wget.exe'
+            - '\rclone.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\scp.exe'
+
+    selection_hacktool_patterns:
+        CommandLine|contains:
+            - 'chisel'    
+            - 'mimikatz'   
+            - 'ngrok'      
+            - 'socat'      
+            - 'nmap'      
+            - 'bloodhound' 
+            - 'rclone'     
+
+    selection_upload_params:
+        CommandLine|contains:
+            - ' -F '              
+            - ' --upload-file '
+            - ' s3 cp '            
+            - ' copy '             
+            - ' Invoke-RestMethod ' 
+            - ' -Method Post '
+
+    selection_source_anomality:
+        CommandLine|contains:
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+            - '\Windows\Temp\'
+            - '\Desktop\'
+
+    filter_authorized_it:
+        UserName|contains:
+            - 'svc_deploy'
+            - 'it_admin_global'
+            - 'build_agent'
+        ParentImage|contains:
+            - '\Program Files\'
+            - '\Windows\System32\services.exe'
+
+    filter_browsers:
+        ParentImage|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+
+    condition: selection_tools and selection_hacktool_patterns and selection_upload_params and selection_source_anomality and not (filter_authorized_it or filter_browsers)
+falsepositives:
+    - IT troubleshooting where an admin uploads a tool log or binary to a vendor.
+    - Security researchers testing tools from their own Desktop/Temp folders.
+level: high

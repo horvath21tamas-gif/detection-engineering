@@ -1,0 +1,51 @@
+title: Anomalous External Remote Service Access Context
+id: d7ee8b59-0d75-43e9-aa98-cd0b7c08d42d
+status: stable
+description: |
+    Detects suspicious successful logins via external remote services (RDP/VPN). 
+    It filters for non-standard source IPs and focuses on high-risk account types 
+    or technical anomalies in the logon event that are typical for automated 
+    credential stuffing or lateral movement from external jump boxes.
+author: hota05
+date: 2026-01-29
+references:
+    - https://attack.mitre.org/techniques/T1133/
+tags:
+    - attack.initial_access
+    - attack.t1133
+logsource:
+    product: windows
+    service: security
+detection:
+    selection_rdp_external:
+        EventID: 4624
+        LogonType: 10 
+        
+    selection_anomalous_source:
+        - IpAddress|contains: 
+            - '127.0.0.1'
+            - '::1'
+        - IpAddress: '-'
+        - IpAddress: ''
+
+    filter_internal_ranges:
+        IpAddress|startswith:
+            - '10.'
+            - '192.168.'
+            - '172.16.'
+
+    filter_authorized_gateways:
+        IpAddress:
+            - '203.0.113.10'
+            - '203.0.113.11'
+
+    filter_privileged_accounts:
+        TargetUserName|contains:
+            - 'svc_'
+            - 'adm_'
+
+    condition: selection_rdp_external and not (filter_internal_ranges or filter_authorized_gateways) or (selection_rdp_external and selection_anomalous_source)
+falsepositives:
+    - Misconfigured internal load balancers showing their own IP or no IP.
+    - New VPN ranges not yet added to the 'filter_authorized_gateways' list.
+level: high

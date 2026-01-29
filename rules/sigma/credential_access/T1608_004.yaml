@@ -1,0 +1,59 @@
+title: Anomalous Web Content Modification for Drive-by Staging
+id: 4512d68b-70c3-426f-98a0-8c34a26f57cf
+status: stable
+description: |
+    Detects suspicious modifications to web server content directories (web root) 
+    initiated by non-standard processes or interactive shells. This behavior is 
+    typical when an adversary stages a drive-by download site or injects malicious scripts.
+author: hota05
+date: 2026-01-29
+references:
+    - https://attack.mitre.org/techniques/T1608/004/
+tags:
+    - attack.resource_development
+    - attack.t1608.004
+logsource:
+    category: file_event
+    product: windows 
+detection:
+    selection_web_root:
+        TargetFilename|contains:
+            - '\inetpub\wwwroot\'
+            - '\htdocs\'
+            - '\apache\www\'
+            - '\nginx\html\'
+
+    selection_suspicious_extensions:
+        TargetFilename|endswith:
+            - '.js'    
+            - '.php'   
+            - '.html'  
+            - '.htm'
+            - '.hta'  
+
+    selection_anomaly_processes:
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\python.exe'
+            - '\curl.exe'
+            - '\wget.exe'
+            - '\node.exe'
+
+    filter_legit_deploy:
+        Image|contains:
+            - '\Jenkins\'
+            - '\GitLab-Runner\'
+            - '\WebDeploy\'
+            - '\AzureDevOps\'
+        UserName|contains:
+            - 'SVC_Deploy'
+            - 'WebAdmin'
+            - 'SYSTEM'
+
+    condition: selection_web_root and selection_suspicious_extensions and selection_anomaly_processes and not filter_legit_deploy
+falsepositives:
+    - Web developers performing emergency hotfixes via CLI (unrecommended practice).
+    - Legitimate CMS auto-updates (e.g. WordPress, Joomla) - filter by service account.
+level: high

@@ -1,0 +1,66 @@
+title: Strategic Staging of Malicious Link Targets
+id: e15e9c73-6a2b-479d-99be-dd84e006da0e
+status: stable
+description: |
+    Detects the automated preparation of malicious link targets by monitoring 
+    CLI-based interactions with URL shortener APIs or cloud-based redirector staging 
+    initiated by unauthorized users or unusual parent processes.
+author: hota05
+date: 2026-01-29
+references:
+    - https://attack.mitre.org/techniques/T1608/005/
+tags:
+    - attack.resource_development
+    - attack.t1608.005
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        Image|endswith:
+            - '\curl.exe'
+            - '\wget.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\python.exe'
+
+    selection_api_endpoints:
+        CommandLine|contains:
+            - 'api-ssl.bitly.com'
+            - 'api.tinyurl.com'
+            - 'api.rebrandly.com'
+            - 'api.shorte.st'
+            - 'cutt.ly/api'
+
+    selection_staging_indicators:
+        CommandLine|contains:
+            - '.exe'
+            - '.zip'
+            - '.iso'
+            - '.vhd'
+            - '.msi'
+            - '.js'
+
+    filter_authorized_users:
+        UserName|contains:
+            - 'svc_marketing'
+            - 'svc_social'
+            - 'svc_devops'
+            - 'admin_automated'
+            
+    filter_interactive_browsers:
+        ParentImage|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+
+    filter_known_apps:
+        Image|contains:
+            - '\AppData\Local\slack\'
+            - '\AppData\Local\Microsoft\Teams\'
+
+    condition: selection_tools and selection_api_endpoints and selection_staging_indicators and not (filter_authorized_users or filter_interactive_browsers or filter_known_apps)
+falsepositives:
+    - Marketing automation scripts that haven't been whitelisted by username.
+    - Security teams testing URL shortening for internal phishing simulations.
+level: high

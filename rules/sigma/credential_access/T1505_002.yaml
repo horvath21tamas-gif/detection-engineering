@@ -42,7 +42,7 @@ detection:
             - '\ProgramData\'
 
     filter_trusted_processes:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
           Image|contains: 
             - '\Windows\System32\inetsrv\iissetup.exe'
             - '\Windows\SoftwareDistribution\'

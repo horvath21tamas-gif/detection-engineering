@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath endswith "\appcmd.exe" or OriginalFileName =~ "appcmd.exe") and (ProcessCommandLine in ("*install module*", "*add module*", "*image-path*"))) or ((((FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\notepad.exe")) or (ProcessCommandLine in ("*\inetsrv\Config\applicationHost.config*", "*\inetsrv\Config\web.config*"))) or (ProcessCommandLine in ("*\AppData\*", "*\Temp\*", "*\Users\Public\*", "*\PerfLogs\*", "*\ProgramData\*"))) and (not ((User =~ "NT AUTHORITY\SYSTEM" and (FolderPath in ("*\Windows\System32\inetsrv\iissetup.exe*", "*\Windows\SoftwareDistribution\*"))) or FolderPath endswith "\ngen.exe")))

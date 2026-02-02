@@ -1,0 +1,55 @@
+title: High-Fidelity Native API Abuse via LOLBins
+id: 3123fea3-9ec1-4121-9460-6458a71ee812
+status: stable
+description: |
+    Detects the suspicious use of Native API execution through trusted Windows 
+    binaries (LOLBins). Focuses on scenarios where compilers or system tools 
+    are abused by untrusted parent processes to perform memory injection.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1106/
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1106/T1106.md
+tags:
+    - attack.execution
+    - attack.t1106
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_untrusted_parents:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\powerpnt.exe'
+            - '\outlook.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\acrord32.exe'
+
+    selection_abused_binaries:
+        Image|endswith:
+            - '\csc.exe'         
+            - '\msbuild.exe'     
+            - '\installutil.exe'
+            - '\regsvcs.exe'
+            - '\regasm.exe'
+            - '\cvtres.exe'
+
+    selection_injection_indicators:
+        CommandLine|contains:
+            - 'NtCreateSection'
+            - 'NtMapViewOfSection'
+            - 'NtWriteVirtualMemory'
+            - 'NtQueueApcThread'
+            - 'ZwMapViewOfSection'
+
+    filter_legit_dev:
+        - ParentImage|contains: 
+            - 'Microsoft Visual Studio'
+            - 'Windows\Microsoft.NET\Framework'
+        - CommandLine|contains:
+            - 'Microsoft.Workflow.Compiler'
+
+    condition: (selection_untrusted_parents and selection_abused_binaries) or selection_injection_indicators and not filter_legit_dev
+level: critical

@@ -1,0 +1,66 @@
+title: Ultra-Pro DLL Search Order Hijacking Detection (T1574.001)
+id: 20b93f6f-04e0-4a89-a5bb-484332b892f6
+status: stable
+description: |
+    Detects trusted Windows system binaries loading DLLs from non-standard, 
+    potentially user-writable directories. It filters out validly signed 
+    third-party modules to reduce false positives.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1574/001/
+tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1574.001
+logsource:
+    category: image_load
+    product: windows
+detection:
+    selection_system_binary:
+        Image|startsWith: 'C:\Windows\'
+        Image|endswith:
+            - '\svchost.exe'
+            - '\explorer.exe'
+            - '\taskhostw.exe'
+            - '\searchindexer.exe'
+            - '\gpscript.exe'
+            - '\calc.exe'
+            - '\notepad.exe'
+            - '\cmd.exe'
+            - '\OneDrive.exe' 
+
+    selection_suspicious_load_path:
+        ImageLoaded|contains:
+            - '\Users\'
+            - '\ProgramData\'
+            - '\Windows\Temp\'
+            - '\AppData\'
+            - '\Public\'
+            - '\PerfLogs\'
+
+    selection_common_targets:
+        ImageLoaded|endswith:
+            - '\version.dll'
+            - '\ntmarta.dll'
+            - '\cryptbase.dll'
+            - '\uxtheme.dll'
+            - '\dwmapi.dll'
+            - '\winmm.dll'
+            - '\dnsapi.dll'
+            - '\netutils.dll'
+            - '\shcore.dll'
+
+    filter_standard_locations:
+        ImageLoaded|startsWith:
+            - 'C:\Windows\System32\'
+            - 'C:\Windows\WinSxS\'
+            - 'C:\Program Files\'
+            - 'C:\Program Files (x86)\'
+
+    filter_signatures:
+        Signed: 'true'
+        SignatureStatus: 'Valid'
+
+    condition: selection_system_binary and selection_suspicious_load_path and selection_common_targets and not (filter_standard_locations or filter_signatures)
+level: critical

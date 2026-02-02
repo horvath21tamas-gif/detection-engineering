@@ -1,0 +1,51 @@
+title: Ultra-Pro Shell Configuration & Path Interception (T1574.003)
+id: 9e18abb9-8a35-4190-896d-16a47dd47167
+status: stable
+description: |
+    Detects unauthorized modification of PATH environment variables or shell autorun 
+    registry keys. Focuses on "Path Prepending" (placing malicious paths at the 
+    beginning) and non-standard shell startup commands.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1574/003/
+tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1574.003
+logsource:
+    category: registry_event
+    product: windows
+detection:
+    selection_registry_paths:
+        TargetObject|contains:
+            - 'Environment\Path'                              
+            - 'Software\Microsoft\Command Processor\Autorun'    
+            - 'Software\Microsoft\Windows\CurrentVersion\App Paths' 
+
+
+    selection_suspicious_logic:
+        - Details|startsWith: 'C:\Users\'       
+        - Details|startsWith: 'C:\ProgramData\' 
+        - Details|contains: 
+            - 'powershell'
+            - 'cmd.exe /c'
+            - 'iex'
+            - 'WScript.Shell'
+
+    filter_trusted_installers:
+        Image|endswith:
+            - '\msiexec.exe'
+            - '\trustedinstaller.exe'
+            - '\TiWorker.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_known_dev_tools:
+        Image|contains:
+            - '\AppData\Local\Programs\Python\'
+            - '\AppData\Local\Programs\Microsoft VS Code\'
+            - '\node.exe'
+            - '\chocolatey\choco.exe'
+
+    condition: selection_registry_paths and selection_suspicious_logic and not (filter_trusted_installers or filter_known_dev_tools)
+level: high

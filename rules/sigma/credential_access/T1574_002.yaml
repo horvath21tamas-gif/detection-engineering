@@ -1,0 +1,59 @@
+title: Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002)
+id: c6499c32-0dc2-4ab4-b701-232dcde00531
+status: stable
+description: |
+    Detects potential DLL side-loading by identifying cases where a signed, 
+    trusted executable loads an unsigned or suspiciously-located DLL from 
+    user-writable directories.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1574/002/
+tags:
+    - attack.persistence
+    - attack.defense_evasion
+    - attack.t1574.002
+logsource:
+    category: image_load
+    product: windows
+detection:
+    selection_trusted_exes:
+        Image|startsWith:
+            - 'C:\Windows\'
+            - 'C:\Program Files\'
+            - 'C:\Program Files (x86)\'
+        Image|endswith:
+            - '\OneDrive.exe'
+            - '\calc.exe'
+            - '\notepad.exe'
+            - '\mshta.exe'
+            - '\WinWord.exe'
+            - '\Excel.exe'
+            - '\Gpscript.exe'
+            - '\MsiExec.exe'
+
+    selection_writable_path:
+        ImageLoaded|contains:
+            - '\Users\'
+            - '\ProgramData\'
+            - '\Windows\Temp\'
+            - '\AppData\Local\Temp\'
+            - '\Public\'
+
+    selection_unsigned_dll:
+        Signed: 'false'  
+
+    filter_known_good_locations:
+        ImageLoaded|startsWith:
+            - 'C:\Windows\System32\'
+            - 'C:\Windows\WinSxS\'
+            - 'C:\Program Files\'
+            - 'C:\Program Files (x86)\'
+
+    filter_browser_updates:
+        Image|contains:
+            - '\Google\Update\'
+            - '\Microsoft\EdgeUpdate\'
+
+    condition: selection_trusted_exes and selection_writable_path and selection_unsigned_dll and not filter_known_good_locations and not filter_browser_updates
+level: critical

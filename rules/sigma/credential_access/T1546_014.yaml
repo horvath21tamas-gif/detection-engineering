@@ -1,0 +1,54 @@
+title: Ultra-Pro WMI Event Subscription Persistence (T1546.014)
+id: 29ca3122-f9f0-4e3f-a8fd-aa3090b4263e
+status: stable
+description: |
+    Detects unauthorized WMI event subscriptions by monitoring the creation of 
+    EventFilters and Command/Script Consumers. Filters out known administrative 
+    tools and focuses on non-standard scripted execution.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1546/014/
+tags:
+    - attack.persistence
+    - attack.t1546.014
+logsource:
+    product: windows
+    service: sysmon
+detection:
+    selection_consumer:
+        Operation: 'Created'
+        ConsumerType: 
+            - 'CommandLineEventConsumer'
+            - 'ActiveScriptEventConsumer'
+
+    selection_suspicious_payload:
+        Destination|contains:
+            - 'powershell'
+            - 'cmd.exe'
+            - 'mshta'
+            - 'regsvr32'
+            - 'scrcons.exe' 
+            - 'C:\Users\'
+            - 'C:\Windows\Temp\'
+
+    selection_filter:
+        Query|contains:
+            - 'SELECT * FROM __InstanceModificationEvent WITHIN'
+            - 'SELECT * FROM Win32_LocalTime'
+
+    filter_trusted_management:
+        Image|endswith:
+            - '\CcmExec.exe'      
+            - '\TaniumClient.exe'
+            - '\MonitoringHost.exe' 
+            - '\ltsvc.exe'      
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_known_names:
+        Name:
+            - 'SCM Event Log Consumer'
+            - 'BVTConsumer'
+
+    condition: (selection_consumer and (selection_suspicious_payload or selection_filter)) and not (filter_trusted_management or filter_known_names)
+level: critical

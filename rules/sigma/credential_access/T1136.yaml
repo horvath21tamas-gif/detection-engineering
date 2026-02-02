@@ -10,7 +10,7 @@ references:
     - https://attack.mitre.org/techniques/T1136/001/
 tags:
     - attack.persistence
-    - attack.t1136.001
+    - attack.t1136
 logsource:
     category: process_creation
     product: windows

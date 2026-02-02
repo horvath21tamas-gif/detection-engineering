@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((ProcessCommandLine in ("*steal_token*", "*impersonate*", "*incognito*", "*make_token*", "*token::elevate*", "*token::revert*")) or (FolderPath in ("*\incognito.exe", "*\mimikatz.exe"))) or ((ParentProcessName in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\cscript.exe", "*\wscript.exe")) and User contains "SYSTEM" and LogonId =~ "0x3e7") or (TargetImage endswith "\lsass.exe" and GrantedAccess =~ "0x1438")) and (not ((ParentProcessName in ("*\services.exe", "*\wininit.exe", "*\winlogon.exe", "*\lsass.exe")) or FolderPath contains "\Windows\System32\wbem\WmiPrvSE.exe" or User =~ "NT AUTHORITY\SYSTEM"))

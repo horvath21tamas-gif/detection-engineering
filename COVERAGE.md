@@ -69,6 +69,7 @@
 | T1110.001 | MEDIUM | Multiple Failed Login Attempts for Single User (Possible Password Guessing) |
 | T1129 | HIGH | High-Fidelity Shared Module Load from Untrusted Path |
 | T1133 | HIGH | Anomalous External Remote Service Access Context |
+| T1134 | CRITICAL | Ultra-Pro Access Token Manipulation & Impersonation (T1134) |
 | T1136 | CRITICAL | Ultra-Pro Unauthorized Account Creation (T1136) |
 | T1136.001 | CRITICAL | Ultra-Pro Unauthorized Local Account Creation (T1136.001) |
 | T1136.002 | CRITICAL | Ultra-Pro Unauthorized Domain Account Creation (T1136.002) |

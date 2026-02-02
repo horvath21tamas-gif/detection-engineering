@@ -52,6 +52,7 @@
 - [Multiple Failed Login Attempts for Single User (Possible Password Guessing)](#multiple-failed-login-attempts-for-single-user-(possible-password-guessing))
 - [High-Fidelity Shared Module Load from Untrusted Path](#high-fidelity-shared-module-load-from-untrusted-path)
 - [Anomalous External Remote Service Access Context](#anomalous-external-remote-service-access-context)
+- [Ultra-Pro Access Token Manipulation & Impersonation (T1134)](#ultra-pro-access-token-manipulation-&-impersonation-(t1134))
 - [Ultra-Pro Unauthorized Account Creation (T1136)](#ultra-pro-unauthorized-account-creation-(t1136))
 - [Ultra-Pro Unauthorized Local Account Creation (T1136.001)](#ultra-pro-unauthorized-local-account-creation-(t1136001))
 - [Ultra-Pro Unauthorized Domain Account Creation (T1136.002)](#ultra-pro-unauthorized-domain-account-creation-(t1136002))
@@ -1112,6 +1113,23 @@ credential stuffing or lateral movement from external jump boxes.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Access Token Manipulation & Impersonation (T1134)
+- **Azonosító:** `T1134.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects high-risk access token manipulation by monitoring for suspicious 
+Integrity Level transitions and the use of specialized tools that interact 
+with LSASS to duplicate or steal security tokens.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1134`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

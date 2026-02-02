@@ -1,0 +1,59 @@
+title: High-Fidelity Dependency Poisoning Detection
+id: 49e42690-0b7b-4199-9264-9ed12bfa6383
+status: stable
+description: |
+    Detects suspicious child processes spawned by package managers or build tools. 
+    Focuses on reconnaissance and exfiltration activities triggered during library 
+    installation or compilation (pre/post-install scripts).
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1195/001/
+tags:
+    - attack.initial_access
+    - attack.t1195.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_dev_parents:
+        ParentImage|endswith:
+            - '\node.exe'
+            - '\npm.cmd'
+            - '\python.exe'
+            - '\pip.exe'
+            - '\msbuild.exe'
+            - '\dotnet.exe'
+            - '\csc.exe'
+            - '\cmake.exe'
+
+    selection_recon_tools:
+        Image|endswith:
+            - '\whoami.exe'
+            - '\net.exe'
+            - '\net1.exe'
+            - '\ipconfig.exe'
+            - '\nltest.exe'
+            - '\systeminfo.exe'
+            - '\nslookup.exe' 
+            - '\certutil.exe' 
+
+    selection_suspicious_args:
+        CommandLine|contains:
+            - 'curl '
+            - 'wget '
+            - 'Invoke-WebRequest'
+            - 'DownloadString'
+            - 'env'         
+            - 'base64'       
+
+    filter_legit_node_modules:
+        - CommandLine|contains: '\node_modules\.bin\'
+        - Image|contains: '\AppData\Local\npm-cache\'
+
+    filter_python_venv:
+        - Image|contains: '\site-packages\'
+        - CommandLine|contains: 'setup.py install'
+
+    condition: selection_dev_parents and (selection_recon_tools or selection_suspicious_args) and not (filter_legit_node_modules or filter_python_venv)
+level: critical

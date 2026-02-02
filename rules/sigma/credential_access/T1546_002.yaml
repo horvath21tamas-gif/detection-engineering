@@ -43,7 +43,7 @@ detection:
             - '\control.exe'      
             - '\explorer.exe'     
             - '\SystemSettings.exe' 
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     filter_standard_binaries:
         Details|startsWith: 'C:\Windows\System32\'

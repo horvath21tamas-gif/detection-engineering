@@ -1,0 +1,48 @@
+title: Ultra-Pro DHCP/PXE Boot Hijacking (T1542.005)
+id: 87ff2f63-b7b4-4741-a2cb-263e4cd6a9ad
+status: stable
+description: |
+    Detects unauthorized modification of DHCP Options 66 (Boot Server) and 67 (Bootfile Name).
+    Attackers use this to redirect network boot requests to a malicious TFTP server.
+author: hota05
+date: 2026-02-02
+tags:
+    - attack.persistence
+    - attack.t1542.005
+logsource:
+    product: windows
+    category: registry_event
+detection:
+    selection_registry:
+        TargetObject|contains: '\Services\DHCPServer\Parameters\Options\'
+    
+    selection_options:
+        TargetObject|contains:
+            - '\066'
+            - '\067'
+
+    selection_values:
+        Details|contains:
+            - '.efi'
+            - '.bin'
+            - '.pxe'
+            - '.com' 
+
+    selection_unauthorized_actor:
+        Image|not|endswith:
+            - '\dhcpssvc.exe' 
+            - '\mmc.exe'      
+            - '\svchost.exe'
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\netsh.exe'    
+            - '\reg.exe'
+
+    filter_trusted_admin:
+        User: 'NT AUTHORITY\NETWORK SERVICE'
+        Image|contains: 'C:\Windows\System32\'
+
+    condition: selection_registry and selection_options and selection_unauthorized_actor and not filter_trusted_admin
+level: critical

@@ -53,8 +53,8 @@ detection:
         - ParentImage|endswith:
             - '/systemd'
             - '/sbin/init'
-        - User: 'root'
-          ParentImage: '/usr/sbin/sshd' 
+        - username: 'root'
+          Parentprocessname: '/usr/sbin/sshd' 
 
     condition: selection_interpreter and (selection_one_liner_logic or selection_risky_parents) and not filter_legit_automation
 level: critical

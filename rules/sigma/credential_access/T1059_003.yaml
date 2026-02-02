@@ -1,10 +1,10 @@
-title: High-Fidelity Windows Command Shell Abuse Detection
-id: 91f834fa-dc8c-4c0e-b670-0627816e4e60
+title: Advanced Windows Command Shell Contextual Anomaly
+id: f08e9831-a8d5-4aef-b296-54c4c3496992
 status: stable
 description: |
-    Detects suspicious cmd.exe execution by monitoring for command chaining, 
-    interactive reconnaissance from non-interactive accounts (IIS, SQL), 
-    and execution from office productivity or web-facing applications.
+    Detects suspicious cmd.exe execution by correlating risky parent processes 
+    (Web Servers, Office, SQL) with anomalous command-line patterns like 
+    command chaining and discovery.
 author: hota05
 date: 2026-02-02
 references:
@@ -22,32 +22,27 @@ detection:
     selection_risky_parents:
         ParentImage|endswith:
             - '\w3wp.exe'        
-            - '\sqlservr.exe'   
+            - '\sqlservr.exe'    
             - '\winword.exe'     
-            - '\excel.exe'      
-            - '\outlook.exe'    
+            - '\excel.exe'       
             - '\mshta.exe'       
-            - '\scrcons.exe'     
+            - '\tomcat.exe'      
 
     selection_attack_patterns:
         CommandLine|contains:
             - ' /c '
             - ' /r '
         CommandLine|contains|all:
-            - ' && '            
+            - ' && '             
             - 'whoami'           
-        - CommandLine|contains:
-            - 'net user /add'
-            - 'reg add'
-            - 'certutil -urlcache'
 
-    filter_legit_context:
+    filter_legit_admin:
         - ParentImage|endswith: '\services.exe'
         - CommandLine|contains: 
             - 'C:\Windows\System32\wbem\WMIC.exe'
-            - 'C:\Program Files\Microsoft Monitoring Agent\'
-        - UserName: 'SYSTEM'
+            - 'Microsoft Monitoring Agent'
+        - User: 'NT AUTHORITY\SYSTEM'
           CommandLine|contains: 'C:\Windows\TEMP\'
 
-    condition: selection_cmd and (selection_risky_parents or selection_attack_patterns) and not filter_legit_context
+    condition: selection_cmd and (selection_risky_parents or selection_attack_patterns) and not filter_legit_admin
 level: critical

@@ -1,0 +1,49 @@
+title: High-Fidelity SSP DLL Persistence (T1547.005)
+id: 36e4c5c1-8a4d-4213-8b4b-17b21e6525fa 
+status: stable
+description: |
+    Detects the addition of unauthorized DLLs to the LSA Security Packages registry key.
+    Attackers use this for persistence and cleartext credential theft.
+    Filters standard Windows SSPs and alerts on unmanaged modifications.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1547/005/
+tags:
+    - attack.persistence
+    - attack.t1547.005
+    - attack.credential_access
+logsource:
+    category: registry_set
+    product: windows
+detection:
+    selection_registry:
+        TargetObject|endswith: '\Control\Lsa\Security Packages'
+
+    filter_standard_packages:
+        Details|contains:
+            - 'kerberos'
+            - 'msv1_0'
+            - 'schannel'
+            - 'wdigest'
+            - 'tspkg'
+            - 'pku2u'
+            - 'livessp'
+            - 'cloudap'
+            - 'negotiate'
+
+    selection_suspicious_payload:
+        Details|contains:
+            - ':\'             
+            - '.dll'            
+            - 'mimilib'        
+            - 'ssp'            
+
+    filter_trusted_process:
+        Image|endswith:
+            - '\trustedinstaller.exe'
+            - '\System32\msiexec.exe'
+            - '\System32\setupsrv.exe'
+
+    condition: selection_registry and (not filter_standard_packages or selection_suspicious_payload) and not filter_trusted_process
+level: critical

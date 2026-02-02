@@ -1,0 +1,41 @@
+title: High-Fidelity Device Registration Persistence (T1098.005)
+id: 54eb3237-4e28-4c0a-a329-1bfc8775aff5
+status: stable
+description: |
+    Detects suspicious device registrations in Entra ID. Attackers register their own devices 
+    to bypass Conditional Access policies that require a "registered" device state.
+    This rule filters out managed enrollments and focuses on unmanaged or scripted registrations.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1098/005/
+tags:
+    - attack.persistence
+    - attack.t1098.005
+logsource:
+    product: azure
+    service: process_creation
+detection:
+    selection_operation:
+        operationName:
+            - 'Add device'
+            - 'Register device'
+    
+    selection_status:
+        result: 'success'
+
+    filter_managed_registration:
+        initiatedBy.app.displayName:
+            - 'Microsoft Intune'
+            - 'Microsoft Device Registration Service'
+            - 'Azure Active Directory' 
+
+    filter_known_os:
+        additionalDetails.value|contains:
+            - 'Python'
+            - 'Go-http-client'
+            - 'Postman'
+            - 'curl'
+
+    condition: selection_operation and selection_status and not filter_managed_registration or filter_known_os
+level: high

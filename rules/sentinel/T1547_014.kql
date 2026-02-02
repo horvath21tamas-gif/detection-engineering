@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetObject contains "SOFTWARE\Microsoft\Active Setup\Installed Components\" and TargetObject endswith "\StubPath") and ((Details in ("*:\Users\*", "*:\ProgramData\*", "*:\Temp\*", "*:\Windows\Temp\*", "*AppData\*", "*C:\PerfLogs\*")) or (Details in ("*powershell*", "*pwsh*", "*cmd.exe*", "*wscript*", "*cscript*", "*mshta*", "*rundll32*", "*regsvr32*", "*bitsadmin*", "*certutil*"))) and (not ((FolderPath in ("*\trustedinstaller.exe", "*\System32\msiexec.exe", "*\System32\mscorsvw.exe", "*\System32\oobe\setupsrv.exe")) or (Details in ("C:\Windows\System32\*", "C:\Program Files\*", "C:\Program Files (x86)\*"))))

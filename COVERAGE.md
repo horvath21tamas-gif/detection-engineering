@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 06:51:40`
+**Utolsó frissítés:** `2026-02-02 06:59:45`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 140 | 100% |
-| Splunk (SPL) | 140 | 100.0% |
-| Microsoft Sentinel (KQL) | 140 | 100.0% |
-| QRadar (AQL) | 78 | 55.7% |
-| Elastic (KQL/EQL) | 140 | 100.0% |
-| RSA NetWitness | 140 | 100.0% |
+| Sigma (Forrás) | 144 | 100% |
+| Splunk (SPL) | 144 | 100.0% |
+| Microsoft Sentinel (KQL) | 144 | 100.0% |
+| QRadar (AQL) | 82 | 56.9% |
+| Elastic (KQL/EQL) | 144 | 100.0% |
+| RSA NetWitness | 144 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -40,6 +40,9 @@
 | T1189 | CRITICAL | Browser-Originating Shell or System Tool Execution |
 | T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |
 | T1195 | CRITICAL | High-Fidelity Supply Chain Compromise Detection (Post-Update Anomaly) |
+| T1195.001 | CRITICAL | High-Fidelity Dependency Poisoning Detection |
+| T1195.002 | CRITICAL | High-Fidelity Compromised Binary Activity (Post-Update) |
+| T1195.003 | CRITICAL | High-Fidelity Hardware/Firmware Manipulation Detection |
 | T1197 | HIGH | Suspicious File Download via Bitsadmin (High Fidelity) |
 | T1200 | CRITICAL | Malicious Hardware-Induced Command Execution (HID Injection) |
 | T1204 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity) |

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\flashrom.exe", "*\flashprog.exe", "*\RWEverything.exe", "*\amifldrv64.sys", "*\AfuEfix64.exe", "*\H2OFFT-W.exe", "*\FPT.exe")) and ((FolderPath in ("*\Users\Public\*", "*\AppData\Local\Temp\*", "*\Downloads\*", "*C:\Windows\Temp\*")) or (ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\outlook.exe", "*\winword.exe", "*\excel.exe")))) and (not ((FolderPath in ("*\Dell\CommandUpdate\*", "*\Lenovo\SystemUpdate\*", "*\HP\SupportAssistant\*")) or (ParentProcessName in ("*\services.exe", "*\TrustedInstaller.exe"))))

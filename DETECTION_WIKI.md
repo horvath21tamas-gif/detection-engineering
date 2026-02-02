@@ -21,6 +21,9 @@
 - [Browser-Originating Shell or System Tool Execution](#browser-originating-shell-or-system-tool-execution)
 - [Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server](#suspicious-cross-site-scripting-(xss)-attempt-detected-on-web-server)
 - [High-Fidelity Supply Chain Compromise Detection (Post-Update Anomaly)](#high-fidelity-supply-chain-compromise-detection-(post-update-anomaly))
+- [High-Fidelity Dependency Poisoning Detection](#high-fidelity-dependency-poisoning-detection)
+- [High-Fidelity Compromised Binary Activity (Post-Update)](#high-fidelity-compromised-binary-activity-(post-update))
+- [High-Fidelity Hardware/Firmware Manipulation Detection](#high-fidelity-hardwarefirmware-manipulation-detection)
 - [Suspicious File Download via Bitsadmin (High Fidelity)](#suspicious-file-download-via-bitsadmin-(high-fidelity))
 - [Malicious Hardware-Induced Command Execution (HID Injection)](#malicious-hardware-induced-command-execution-(hid-injection))
 - [Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity)](#suspicious-child-process-spawned-by-microsoft-office-application-(high-fidelity))
@@ -442,6 +445,57 @@ installers. Focuses on discovery and credential access tools that should never b
 part of a standard software maintenance or update cycle.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1195`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Dependency Poisoning Detection
+- **Azonosító:** `T1195_001.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects suspicious child processes spawned by package managers or build tools. 
+Focuses on reconnaissance and exfiltration activities triggered during library 
+installation or compilation (pre/post-install scripts).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Compromised Binary Activity (Post-Update)
+- **Azonosító:** `T1195_002.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects suspicious child processes spawned by trusted business applications that 
+have been compromised at the binary level. It focuses on the transition from 
+legitimate app execution to unauthorized discovery or script execution.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Hardware/Firmware Manipulation Detection
+- **Azonosító:** `T1195_003.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the execution of firmware-flashing tools or low-level hardware access 
+utilities in suspicious contexts. This targets potential post-exploitation 
+of compromised hardware or attempts to install UEFI rootkits.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -43,6 +43,7 @@
 | T1059.009 | CRITICAL | High-Fidelity Cloud Shell Exploitation and Data Exfiltration |
 | T1068 | HIGH | Suspicious SYSTEM Process Spawned from User Context |
 | T1070.001 | HIGH | Security Event Log Cleared Using wevtutil.exe |
+| T1072 | CRITICAL | High-Fidelity Software Deployment Tool Abuse Detection |
 | T1078 | HIGH | High-Fidelity Anomalous Logon via Valid Account |
 | T1078.001 | CRITICAL | High-Fidelity Default Account Abuse Detection |
 | T1078.002 | HIGH | High-Fidelity Domain Account Lateral Movement Anomaly |

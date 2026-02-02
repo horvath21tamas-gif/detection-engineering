@@ -1,10 +1,9 @@
 title: High-Fidelity Unix Shell Abuse and Reverse Shell Detection
-id: 872ba5dc-0c00-40e8-9e12-ede6f29b7a60
+id: 11adfa8a-54d3-4fa0-b0fb-7eeb09cee4b6
 status: stable
 description: |
-    Detects suspicious Unix shell behavior, focusing on reverse shells, 
-    pipe-to-shell patterns, and execution from high-risk network-facing 
-    processes (web servers, databases) while filtering common automation.
+    Detects suspicious Unix shell execution by monitoring for command injection 
+    from web processes, reverse shell socket redirection, and fileless pipe-to-shell patterns.
 author: hota05
 date: 2026-02-02
 references:
@@ -23,25 +22,26 @@ detection:
             - '/bash'
             - '/zsh'
             - '/dash'
-            - '/ash'
 
-    selection_suspicious_parents:
+    selection_web_rce:
         ParentImage|endswith:
             - '/httpd'
             - '/apache2'
             - '/nginx'
             - '/php-fpm'
-            - '/python' 
             - '/node'
-            - '/mysqld'
-            - '/postgres'
-            - '/redis-server'
+            - '/python' 
+            - '/java'
+        User:
+            - 'www-data'
+            - 'apache'
+            - 'nginx'
+            - 'nobody'
 
     selection_attack_logic:
         - CommandLine|contains:
             - '/dev/tcp/'
             - '/dev/udp/'
-            - 'interactive'
             - '>&'
             - '0>&1'
         - CommandLine|contains|all:
@@ -50,18 +50,19 @@ detection:
             - 'sh'
         - CommandLine|contains|all:
             - 'wget'
-            - '-O-'
+            - '|'
+            - 'bash'
 
-    filter_automation_and_admin:
+    filter_legit_automation:
         - ParentImage|endswith: 
             - '/systemd'
             - '/sbin/init'
         - CommandLine|contains:
             - '/var/lib/apt/'
-            - '/tmp/terraform_'
             - 'logrotate'
+            - '/usr/bin/mandb'
         - User: 'root'
           ParentImage: '/usr/sbin/sshd' 
 
-    condition: selection_shells and (selection_suspicious_parents or selection_attack_logic) and not filter_automation_and_admin
+    condition: selection_shells and (selection_web_rce or selection_attack_logic) and not filter_legit_automation
 level: critical

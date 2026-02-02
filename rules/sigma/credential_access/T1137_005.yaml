@@ -1,0 +1,50 @@
+title: Ultra-Pro Office Security Policy Tampering (T1137.005)
+id: 8693d72f-0411-472d-8cb6-26cc5a0c2b70
+status: stable
+description: |
+    Detects unauthorized weakening of Microsoft Office security policies. 
+    Focuses on global macro enablement, addition of untrusted network locations, 
+    and policy modifications originating from non-standard processes.
+author: hota05
+date: 2026-02-02
+tags:
+    - attack.persistence
+    - attack.defense_evasion
+    - attack.t1137.005
+logsource:
+    product: windows
+    category: registry_event
+detection:
+    selection_registry:
+        TargetObject|contains: '\Software\Microsoft\Office\'
+        TargetObject|endswith:
+            - '\Security\VBAWarnings'        
+            - '\Security\Trusted Locations\' 
+            - '\Security\Trusted Documents\DisableTrustedDocuments' 
+            - '\Security\BlockContentExecutionFromInternet' 
+
+    selection_values:
+        - Details: 'DWORD (0x00000001)'
+        - Details: 'DWORD (0x00000000)'
+
+    selection_unauthorized_actor:
+        Image|not|endswith:
+            - '\winword.exe'   
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\svchost.exe'   
+            - '\msiexec.exe'   
+        Image|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\reg.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+
+    filter_trusted_paths:
+        Details|contains:
+            - '\\InternalStorage\Templates'
+            - 'C:\Program Files\'
+
+    condition: selection_registry and (selection_values or selection_unauthorized_actor) and not filter_trusted_paths
+level: critical

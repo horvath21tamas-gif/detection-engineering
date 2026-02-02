@@ -1,0 +1,57 @@
+title: High-Fidelity Browser Session Persistence (T1547.007)
+id: 43db6cb4-86a3-48d2-b994-b5ab88ced3af
+status: stable
+description: |
+    Detects unauthorized modification of browser session or preference files by non-browser processes. 
+    Attackers use this to force browsers to open malicious URLs upon startup for persistence.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1547/007/
+tags:
+    - attack.persistence
+    - attack.t1547.007
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection_target_files:
+        TargetFilename|contains:
+            - '\User Data\Default\Preferences'
+            - '\User Data\Default\Secure Preferences'
+            - '\User Data\Default\Current Session'
+            - '\User Data\Default\Last Session'
+            - '\AppData\Roaming\Mozilla\Firefox\Profiles\'
+    
+    selection_extensions:
+        TargetFilename|endswith:
+            - '\sessionstore.jsonlz4'
+            - '\prefs.js'
+
+    filter_legit_browsers:
+        Image|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+            - '\brave.exe'
+            - '\opera.exe'
+
+    filter_system_tools:
+        Image|endswith:
+            - '\C:\Windows\System32\robocopy.exe'
+            - '\C:\Windows\System32\xcopy.exe'
+        Image|contains:
+            - '\Microsoft\EdgeUpdate\'
+            - '\Google\Update\'
+
+    selection_suspicious_writers:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+            - '\python.exe'
+
+    condition: selection_target_files and not (filter_legit_browsers or filter_system_tools) or selection_suspicious_writers
+level: high

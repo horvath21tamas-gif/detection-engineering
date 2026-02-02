@@ -1,0 +1,68 @@
+title: High-Fidelity Phishing Payload Execution from Communication Apps
+id: 387b6ea7-a6c6-40c9-bc0e-934bee9932f7
+status: stable
+description: |
+    Detects suspicious child processes spawned by email clients, browsers, or chat apps 
+    where the payload originates from a user-writable directory. This pattern is 
+    highly characteristic of spearphishing (T1566.001/.002).
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1566/
+tags:
+    - attack.initial_access
+    - attack.t1566
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_parents:
+        ParentImage|endswith:
+            - '\outlook.exe'
+            - '\thunderbird.exe'
+            - '\msedge.exe'
+            - '\chrome.exe'
+            - '\firefox.exe'
+            - '\teams.exe'
+            - '\slack.exe'
+            - '\whatsapp.exe'
+
+    selection_suspicious_children:
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+            - '\scrcons.exe'
+            - '\certutil.exe'
+            - '\regsvr32.exe'
+            - '\rundll32.exe'
+
+    selection_user_writable_paths:
+        CommandLine|contains:
+            - '\AppData\Local\Temp\'
+            - '\AppData\Local\Microsoft\Windows\INetCache\'
+            - '\Downloads\'
+            - '\Users\Public\'
+            - 'C:\Windows\Temp\'
+
+    filter_legit_browser_internal:
+        CommandLine|contains:
+            - '--type='
+            - 'gpu-process'
+            - 'utility'
+            - 'crashpad-handler'
+
+    filter_ms_office_updates:
+        Image|contains:
+            - '\Common Files\Microsoft Shared\ClickToRun\'
+
+    filter_teams_legit:
+        CommandLine|contains:
+            - '--update'
+            - '--checkInstall'
+
+    condition: selection_parents and selection_suspicious_children and selection_user_writable_paths and not (filter_legit_browser_internal or filter_ms_office_updates or filter_teams_legit)
+level: critical

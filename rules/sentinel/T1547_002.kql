@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where TargetObject endswith "\Control\Lsa\Authentication Packages" and ((not (Details in ("*msv1_0*", "*kerberos*", "*tspkg*", "*pku2u*", "*livessp*", "*cloudap*", "*wdigest*", "*negotiate*"))) or (Details in ("*:\Users\*", "*:\ProgramData\*", "*:\Temp\*", "*:\Windows\Temp\*", "*.ps1*", "*.exe*"))) and (not (FolderPath in ("*\C:\Windows\servicing\TrustedInstaller.exe", "*\System32\msiexec.exe")))

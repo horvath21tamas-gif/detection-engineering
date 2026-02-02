@@ -1,0 +1,1 @@
+TargetObject="*\\Control\\Lsa\\Authentication Packages" NOT (Details IN ("*msv1_0*", "*kerberos*", "*tspkg*", "*pku2u*", "*livessp*", "*cloudap*", "*wdigest*", "*negotiate*")) OR Details IN ("*:\\Users\\*", "*:\\ProgramData\\*", "*:\\Temp\\*", "*:\\Windows\\Temp\\*", "*.ps1*", "*.exe*") NOT (Image IN ("*\\C:\\Windows\\servicing\\TrustedInstaller.exe", "*\\System32\\msiexec.exe"))

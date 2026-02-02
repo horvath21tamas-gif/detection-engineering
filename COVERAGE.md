@@ -94,6 +94,7 @@
 | T1546.015 | HIGH | Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
 | T1547 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása |
 | T1547.001 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása, Suspicious Registry Run Key Modification for User Persistence (High Fidelity) |
+| T1547.002 | CRITICAL | High-Fidelity LSA Authentication Package Persistence |
 | T1548.002 | HIGH | UAC Bypass via Fodhelper Registry Hijack (High Fidelity) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |

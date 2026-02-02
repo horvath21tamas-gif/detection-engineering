@@ -74,6 +74,7 @@
 - [Suspicious COM Hijacking for User-Level Persistence (High Fidelity)](#suspicious-com-hijacking-for-user-level-persistence-(high-fidelity))
 - [Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása](#gyanús-rendszerindítási-vagy-bejelentkezési-automatikus-indítás-végrehajtása)
 - [Suspicious Registry Run Key Modification for User Persistence (High Fidelity)](#suspicious-registry-run-key-modification-for-user-persistence-(high-fidelity))
+- [High-Fidelity LSA Authentication Package Persistence](#high-fidelity-lsa-authentication-package-persistence)
 - [UAC Bypass via Fodhelper Registry Hijack (High Fidelity)](#uac-bypass-via-fodhelper-registry-hijack-(high-fidelity))
 - [Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)](#nem-böngészős-folyamat-hozzáférése-a-böngésző-hitelesítőadat-tárolóihoz-(high-fidelity))
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
@@ -1356,6 +1357,23 @@ a common pattern for malware bypassing Mark-of-the-Web.
 - **Leírás:** Detects suspicious registry modifications used to establish user-level persistence via Windows Run and RunOnce keys. The rule focuses on non-standard executable locations combined with scripting engines to reduce false positives from legitimate software installations.
 - **Hamis pozitívok:** Custom enterprise logon scripts, Rare legacy software using user-level Run keys
 - **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity LSA Authentication Package Persistence
+- **Azonosító:** `T1547_002.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the addition of unauthorized Authentication Packages in the LSA registry key.
+Attackers use this for SYSTEM-level persistence and credential harvesting.
+This rule filters standard Windows packages and monitors for DLLs outside System32.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (EventID =~ 4624 and Status =~ "0x0") and (TargetUserName in ("Administrator", "Guest", "Admin", "root", "DefaultAccount")) and (LogonType in (3, 8, 10)) and (not (((IpAddress in ("::1", "127.0.0.1")) and TargetUserName startswith "UMFD-") or (WorkstationName in ("INFRA-MONITOR-*", "BACKUP-SRV-*"))))

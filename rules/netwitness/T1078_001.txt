@@ -1,0 +1,2 @@
+(EventID = 4624 AND ((Status = '*0x0*'))) AND (((TargetUserName = '*Administrator*' OR TargetUserName = '*Guest*' OR TargetUserName = '*Admin*' OR TargetUserName = '*root*' OR TargetUserName = '*DefaultAccount*'))) AND (LogonType = 3,8,10) AND (NOT ((((((IpAddress = '*::1*' OR IpAddress = '*127.0.0.1*'))) AND TargetUserName begins 'UMFD-') OR (WorkstationName begins 'INFRA-MONITOR-','BACKUP-SRV-')))
+)

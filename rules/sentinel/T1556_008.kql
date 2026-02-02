@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((['targetResources.displayName'] in ("*AnyConnect*", "*FortiGate*", "*GlobalProtect*", "*Check Point*", "*Pulse Secure*", "*F5 Big-IP*")) or (operationName =~ "Update conditional access policy" and ['targetResources.displayName'] contains "MFA") or (operationName in ("Add owner to application", "Update application – Certificates and secrets management"))) and (not (['initiatedBy.userPrincipalName'] endswith "admin_secure@company.com" and (userAgent in ("*HashiCorp/1.0*", "*Ansible*"))))

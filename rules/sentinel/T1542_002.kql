@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where ((FolderPath in ("*\hdparm.exe", "*\nvflash.exe", "*\mlxfwmanager.exe", "*\wd-fw-update.exe")) or (OriginalFileName in ("nvflash.exe", "hdparm.exe", "FPTW64.exe"))) and (ProcessCommandLine in ("* -f *", "* --write*", "* -update*", "* -s *")) and ((ParentProcessName in ("*\powershell.exe", "*\cmd.exe", "*\wscript.exe")) or (FolderPath in ("*\Users\*", "*\Temp\*", "*\Public\*"))) and (not ((FolderPath in ("*C:\Program Files\*", "*C:\Program Files (x86)\*")) and ParentProcessName endswith "\svchost.exe" and User =~ "NT AUTHORITY\SYSTEM"))
+| where ((FolderPath in ("*\hdparm.exe", "*\nvflash.exe", "*\mlxfwmanager.exe", "*\wd-fw-update.exe")) or (OriginalFileName in ("nvflash.exe", "hdparm.exe", "FPTW64.exe"))) and (ProcessCommandLine in ("* -f *", "* --write*", "* -update*", "* -s *")) and ((ParentProcessName in ("*\powershell.exe", "*\cmd.exe", "*\wscript.exe")) or (FolderPath in ("*\Users\*", "*\Temp\*", "*\Public\*"))) and (not ((FolderPath in ("*C:\Program Files\*", "*C:\Program Files (x86)\*")) and ParentProcessName endswith "\svchost.exe" and username =~ "NT AUTHORITY\SYSTEM"))

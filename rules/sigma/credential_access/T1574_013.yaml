@@ -1,65 +1,49 @@
 title: Exploit-Grade KernelCallbackTable Manipulation via Remote Memory Write
 id: b6d6a120-3026-4973-8efa-60dc760106d0
 status: stable
-description: >
-  Detects potential KernelCallbackTable abuse by identifying non-debugger,
-  non-security user-space processes performing remote memory writes with
-  VM_WRITE and VM_OPERATION privileges into GUI processes such as explorer.exe,
-  which is a prerequisite for KernelCallbackTable execution flow hijacking.
-references:
-  - https://attack.mitre.org/techniques/T1574/013/
-author: hota05
+description: |
+  Detects remote memory write operations into GUI processes which are prerequisites 
+  for KernelCallbackTable hijacking. This technique is often used for process 
+  injection that evades standard hook-based monitoring.
+author: hota05 
 date: 2026/02/02
 tags:
   - attack.privilege_escalation
   - attack.defense_evasion
-  - attack.persistence
   - attack.t1574.013
-
 logsource:
   product: windows
-  category: process_access
-
+  category: process_access 
 detection:
   gui_target_process:
     TargetImage|endswith:
       - '\explorer.exe'
       - '\dwm.exe'
+      - '\taskhostw.exe'
 
   dangerous_memory_access:
     GrantedAccess|contains:
-      - '0x0010'    
-      - '0x0020'    
+      - '0x28'
+      - '0x20'
+      - '0x1fffff'
 
-  exclude_debuggers_and_security_tools:
+  exclude_standard_software:
     SourceImage|contains:
       - '\Visual Studio\'
       - '\WinDbg\'
-      - '\Procmon.exe'
-      - '\procexp.exe'
-      - '\Accessibility\'
       - '\Windows Defender\'
       - '\CrowdStrike\'
-      - '\CarbonBlack\'
       - '\SentinelOne\'
+      - '\CarbonBlack\'
+      - '\Tanium\'
+    SourceImage|endswith:
+      - '\procmon.exe'
+      - '\procexp.exe'
+      - '\taskmgr.exe' 
 
-  exclude_system_context:
-    SourceUser|contains:
-      - 'NT AUTHORITY\SYSTEM'
-      - 'NT SERVICE'
+  exclude_system_and_parent:
+    - SourceUser: 'NT AUTHORITY\SYSTEM'
+    - ParentImage|endswith: '\explorer.exe' 
 
-  exclude_parent_child_relationship:
-    ParentImage|endswith:
-      - '\explorer.exe'
-
-  condition: gui_target_process
-             and dangerous_memory_access
-             and not exclude_debuggers_and_security_tools
-             and not exclude_system_context
-             and not exclude_parent_child_relationship
-
-falsepositives:
-  - Extremely rare, explicitly approved UI automation or assistive technologies
-  - Specialized security research tooling
-
+  condition: gui_target_process and dangerous_memory_access and not (exclude_standard_software or exclude_system_and_parent)
 level: critical

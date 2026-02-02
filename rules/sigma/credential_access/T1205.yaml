@@ -50,7 +50,7 @@ detection:
 
     filter_trusted_apps:
         - Image|contains: 'C:\Windows\System32\svchost.exe'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - CommandLine|contains: 'description=' 
 
     condition: (selection_netsh and selection_firewall_args or selection_sniffers) and selection_unauthorized_actor and not filter_trusted_apps

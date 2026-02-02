@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 14:06:52`
+**Utolsó frissítés:** `2026-02-02 14:15:31`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 271 | 100% |
-| Splunk (SPL) | 246 | 90.8% |
-| Microsoft Sentinel (KQL) | 247 | 91.1% |
-| QRadar (AQL) | 147 | 54.2% |
-| Elastic (KQL/EQL) | 247 | 91.1% |
-| RSA NetWitness | 245 | 90.4% |
+| Sigma (Forrás) | 276 | 100% |
+| Splunk (SPL) | 250 | 90.6% |
+| Microsoft Sentinel (KQL) | 251 | 90.9% |
+| QRadar (AQL) | 148 | 53.6% |
+| Elastic (KQL/EQL) | 251 | 90.9% |
+| RSA NetWitness | 249 | 90.2% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -96,6 +96,7 @@
 | T1204.002 | CRITICAL | High-Fidelity User Execution of Malicious File |
 | T1204.003 | CRITICAL | High-Fidelity Execution from Mounted Virtual Disk (T1204.003) |
 | T1204.004 | HIGH | Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel |
+| T1205 | HIGH | Ultra-Pro Traffic Signaling & Port Knocking (T1205) |
 | T1218 | HIGH | Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1218.005 | HIGH | Suspicious Mshta Execution of Remote Script (High Fidelity) |
 | T1218.007 | HIGH | Suspicious Msiexec Installation from Remote URL (High Fidelity) |
@@ -104,7 +105,10 @@
 | T1219 | HIGH | Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern |
 | T1486 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1490 | CRITICAL | Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity), Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
+| T1505.001 | CRITICAL | Ultra-Pro SQL Server Command Shell Execution (T1505.001) |
+| T1505.002 | CRITICAL | Ultra-Pro IIS Native Module Injection (T1505.002) |
 | T1505.003 | HIGH | Ultra-Pro Web Shell Execution Patterns (T1505.003), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
+| T1505.005 | CRITICAL | Ultra-Pro Terminal Services DLL Hijacking (T1505.005) |
 | T1525 | CRITICAL | Exploit-Grade Unauthorized Container Image Execution (Implant Container Image) |
 | T1542 | CRITICAL | Ultra-Pro Pre-OS Boot Manipulation (T1542) |
 | T1542.001 | CRITICAL | Ultra-Pro ROM Kit & UEFI Firmware Tampering (T1542.001) |

@@ -1,0 +1,60 @@
+title: High-Fidelity JScript Interpreter Contextual Anomaly
+id: 76d2a2c9-60ce-4ac9-8ac8-1b322661d304
+status: stable
+description: |
+    Detects suspicious JScript execution by correlating wscript/cscript with 
+    risky parent processes, untrusted file locations, and command-line arguments 
+    typically used for obfuscation or remote payload retrieval.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1059/007/
+tags:
+    - attack.execution
+    - attack.t1059.007
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_interpreters:
+        Image|endswith:
+            - '\wscript.exe'
+            - '\cscript.exe'
+
+    selection_js_extension:
+        CommandLine|contains:
+            - '.js'
+            - '.jse'
+
+    selection_risky_parents:
+        ParentImage|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\brave.exe'
+            - '\outlook.exe'
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\mshta.exe'
+
+    selection_attack_logic:
+        CommandLine|contains:
+            - ' -e:jscript'       
+            - 'http'              
+            - 'xmlhttp'           
+            - 'adodb.stream'      
+            - ' -b'             
+
+    selection_untrusted_paths:
+        CommandLine|contains:
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+            - '\Downloads\'
+            - 'C:\ProgramData\'
+
+    filter_legit_os:
+        - CommandLine|contains: 'C:\Windows\System32\'
+        - ParentImage|endswith: '\services.exe'
+        - CommandLine|contains: 'UevAgent.js' 
+
+    condition: selection_interpreters and selection_js_extension and (selection_risky_parents or selection_untrusted_paths or selection_attack_logic) and not filter_legit_os
+level: critical

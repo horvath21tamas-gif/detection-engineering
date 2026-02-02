@@ -1,0 +1,62 @@
+title: High-Fidelity Client-Side Exploitation and Shell Spawning
+id: 38d85756-e89e-434a-8e82-f04edba6ef32
+status: stable
+description: |
+    Detects suspicious child processes spawned by client applications (Office, Browsers, 
+    PDF Readers). Focuses on shell execution, discovery tools, and LOLBins originating 
+    from sandboxed or low-integrity application contexts.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1203/
+tags:
+    - attack.execution
+    - attack.t1203
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_vulnerable_parents:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\powerpnt.exe'
+            - '\outlook.exe'
+            - '\acrord32.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\vlc.exe'
+            - '\7zFM.exe'
+            - '\winrar.exe'
+
+    selection_suspicious_children:
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+            - '\certutil.exe'
+            - '\bitsadmin.exe'
+            - '\scrcons.exe'
+            - '\schtasks.exe'
+            - '\regsvr32.exe'
+            - '\rundll32.exe'
+            - '\whoami.exe'
+
+    filter_legit_subprocesses:
+        - CommandLine|contains: 
+            - '--type=renderer'     
+            - '--type=utility'
+            - 'MicrosoftEdgeUpdate.exe'
+            - 'OfficeClickToRun.exe'
+        - Image|endswith: 
+            - '\splwow64.exe'       
+            - '\WerFault.exe'      
+
+    filter_low_risk_cl:
+        CommandLine: null
+
+    condition: selection_vulnerable_parents and selection_suspicious_children and not filter_legit_subprocesses and not filter_low_risk_cl
+level: critical

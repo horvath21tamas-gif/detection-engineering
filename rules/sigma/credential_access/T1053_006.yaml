@@ -58,7 +58,7 @@ detection:
             - '/apt'
             - '/yum'
             - '/dnf'
-        - User: 'root'
+        - username: 'root'
           CommandLine|contains: 'daemon-reload' 
 
     condition: selection_systemd_tools and (selection_suspicious_paths or selection_dangerous_keywords or selection_untrusted_parents) and not filter_legit_automation

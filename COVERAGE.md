@@ -100,6 +100,10 @@
 | T1547.005 | CRITICAL | High-Fidelity SSP DLL Persistence (T1547.005) |
 | T1547.006 | CRITICAL | High-Fidelity Kernel Driver Registration (T1547.006) |
 | T1547.007 | HIGH | High-Fidelity Browser Session Persistence (T1547.007) |
+| T1547.008 | CRITICAL | High-Fidelity LSASS Driver/Package Persistence (T1547.008) |
+| T1547.009 | HIGH | High-Fidelity Shortcut Modification Detection |
+| T1547.010 | CRITICAL | High-Fidelity AppCert DLL Persistence (T1547.010) |
+| T1547.011 | CRITICAL | High-Fidelity Application Shimming Persistence (T1547.011) |
 | T1548.002 | HIGH | UAC Bypass via Fodhelper Registry Hijack (High Fidelity) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |

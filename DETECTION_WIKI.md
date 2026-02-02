@@ -80,6 +80,10 @@
 - [High-Fidelity SSP DLL Persistence (T1547.005)](#high-fidelity-ssp-dll-persistence-(t1547005))
 - [High-Fidelity Kernel Driver Registration (T1547.006)](#high-fidelity-kernel-driver-registration-(t1547006))
 - [High-Fidelity Browser Session Persistence (T1547.007)](#high-fidelity-browser-session-persistence-(t1547007))
+- [High-Fidelity LSASS Driver/Package Persistence (T1547.008)](#high-fidelity-lsass-driverpackage-persistence-(t1547008))
+- [High-Fidelity Shortcut Modification Detection](#high-fidelity-shortcut-modification-detection)
+- [High-Fidelity AppCert DLL Persistence (T1547.010)](#high-fidelity-appcert-dll-persistence-(t1547010))
+- [High-Fidelity Application Shimming Persistence (T1547.011)](#high-fidelity-application-shimming-persistence-(t1547011))
 - [UAC Bypass via Fodhelper Registry Hijack (High Fidelity)](#uac-bypass-via-fodhelper-registry-hijack-(high-fidelity))
 - [Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)](#nem-böngészős-folyamat-hozzáférése-a-böngésző-hitelesítőadat-tárolóihoz-(high-fidelity))
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
@@ -1466,6 +1470,72 @@ Attackers use this to force browsers to open malicious URLs upon startup for per
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity LSASS Driver/Package Persistence (T1547.008)
+- **Azonosító:** `T1547_008.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the registration of new LSA plugins, notification packages, or drivers. 
+Attackers use this to load malicious code into the lsass.exe process for 
+persistence and real-time credential harvesting.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `008`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Shortcut Modification Detection
+- **Azonosító:** `T1547_009.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the creation or modification of LNK files by suspicious processes (PowerShell, CMD, etc.)
+in startup folders or taskbar paths. This is a common technique for persistence.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `009`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity AppCert DLL Persistence (T1547.010)
+- **Azonosító:** `T1547_010.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized registration of AppCert DLLs. These DLLs are loaded into 
+every process that calls CreateProcess, making it a powerful persistence and injection vector.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `010`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Application Shimming Persistence (T1547.011)
+- **Azonosító:** `T1547_011.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the installation of a new Shim database (.sdb) using sdbinst.exe.
+Attackers use shims to inject DLLs, bypass security controls, or maintain persistence.
+This rule filters legit installers and flags suspicious parent-child relationships.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `011`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

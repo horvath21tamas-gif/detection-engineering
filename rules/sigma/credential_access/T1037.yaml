@@ -10,7 +10,7 @@ references:
     - https://attack.mitre.org/techniques/T1037/001/
 tags:
     - attack.persistence
-    - attack.t1037.001
+    - attack.t1037
 logsource:
     category: registry_set
     product: windows

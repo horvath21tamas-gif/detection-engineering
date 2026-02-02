@@ -10,7 +10,7 @@ date: 2026-02-02
 tags:
     - attack.privilege_escalation
     - attack.persistence
-    - attack.t1484.001
+    - attack.t1484
 logsource:
     product: windows
     category: file_event

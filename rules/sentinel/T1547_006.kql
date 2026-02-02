@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetObject contains "System\CurrentControlSet\Services\" and TargetObject endswith "\ImagePath") and Details endswith ".sys" and ((Details in ("*:\Users\*", "*:\Temp\*", "*:\Windows\Temp\*", "*:\ProgramData\*", "*C:\PerfLogs\*", "*\*")) or (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\reg.exe", "*\sc.exe"))) and (not (FolderPath in ("*\trustedinstaller.exe", "*\System32\msiexec.exe", "*\System32\DriverStore\FileRepository\")))

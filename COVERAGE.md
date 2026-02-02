@@ -103,6 +103,7 @@
 | T1566.002 | CRITICAL | High-Fidelity Browser-Originating Payload Execution |
 | T1566.003 | CRITICAL | High-Fidelity Process Spawn from Business Communication Service |
 | T1566.004 | HIGH | High-Fidelity Detection of Post-Vishing Remote Tool Execution |
+| T1569 | HIGH | High-Fidelity System Service Execution Detection |
 | T1569.001 | CRITICAL | High-Fidelity Launch Daemon Persistence Detection |
 | T1569.002 | HIGH | High-Fidelity System Service Execution Detection, High-Fidelity System Service Execution Detection (T1569.002) |
 | T1583 | HIGH | High-Fidelity Offensive Infrastructure Provisioning - T1583 |

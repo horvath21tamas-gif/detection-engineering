@@ -1504,7 +1504,7 @@ the victim is instructed to run "support" software.
 such as binaries located in world-writable directories or services used as 
 wrappers for shell commands. Optimized to filter out legitimate software installers.
 - **Hamis pozitívok:** Nincs megadva
-- **MITRE ATT&CK:** `002`
+- **MITRE ATT&CK:** `T1569, 002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -8,6 +8,7 @@ author: hota05
 date: 2024/05/22
 tags:
     - attack.persistence
+    - attack.t1547
     - attack.t1547.001
 logsource:
     product: windows

@@ -1,0 +1,53 @@
+title: Ultra-Pro Token Impersonation via LSASS Handle Duplication (T1134.001)
+id: f8840dd1-a36d-4247-b8db-677fea4eabb1
+status: stable
+description: |
+    Detects token theft by monitoring for suspicious handle duplication requests 
+    targeting LSASS.exe. It filters for known legitimate system processes and 
+    security agents to ensure high-fidelity alerts.
+author: hota05
+date: 2026-02-02
+tags:
+    - attack.privilege_escalation
+    - attack.defense_evasion
+    - attack.t1134.001
+logsource:
+    product: windows
+    service: sysmon
+detection:
+    selection_target:
+        TargetImage|endswith: '\lsaccess.exe' 
+        TargetImage|endswith: '\lsass.exe'
+
+    selection_access_mask:
+        GrantedAccess: 
+            - '0x1438'
+            - '0x143a'
+            - '0x1038'
+
+    selection_source:
+        SourceImage|contains:
+            - '\Temp\'
+            - '\Users\Public\'
+            - '\AppData\'
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\rundll32.exe'
+
+    filter_trusted_apps:
+        SourceImage|endswith:
+            - '\MsMpEng.exe'        
+            - '\Cyserver.exe'       
+            - '\wininit.exe'
+            - '\services.exe'
+            - '\csrss.exe'
+            - '\GoogleUpdate.exe'
+        SourceUser: 'NT AUTHORITY\SYSTEM'
+
+    filter_callstack:
+        CallTrace|contains: 'unknown' 
+
+    condition: selection_target and selection_access_mask and selection_source and not filter_trusted_apps
+level: critical

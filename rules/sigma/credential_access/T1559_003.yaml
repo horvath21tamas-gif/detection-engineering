@@ -1,0 +1,51 @@
+title: High-Fidelity Hypervisor API and VM Escape Research
+id: ca3c024a-63fc-453a-9719-0d9b74bf5b14
+status: stable
+description: |
+    Detects unauthorized interaction with hypervisor APIs and diagnostic tools. 
+    Focuses on manual execution from interactive shells and suspicious command-line 
+    parameters associated with VM escape or sandbox evasion.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1559/003/
+tags:
+    - attack.execution
+    - attack.t1559.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_hypervisor_bins:
+        Image|endswith:
+            - '\vmtoolsd.exe'
+            - '\vboxmanage.exe'
+            - '\vboxguest.exe'
+            - '\hyperv-daemons.exe'
+            - '\vmmem.exe'
+
+    selection_suspicious_context:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+
+    selection_dangerous_args:
+        CommandLine|contains:
+            - 'debug-vm'
+            - 'dump-guest-memory'
+            - 'hypercall'
+            - '--cpuid'
+            - 'in-out-instruction'
+            - 'guest-property'
+
+    filter_legit_system:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith:
+            - '\services.exe'
+            - '\svchost.exe'
+
+    condition: selection_hypervisor_bins and (selection_suspicious_context or selection_dangerous_args) and not filter_legit_system
+level: high

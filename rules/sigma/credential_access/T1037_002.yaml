@@ -1,0 +1,50 @@
+title: High-Fidelity Netsh Helper DLL Persistence
+id: 472c2857-273f-43ee-82e7-c8f90a9dae6d
+status: stable
+description: |
+    Detects the registration of a new Netsh Helper DLL. 
+    Attackers use this to maintain persistence by loading a malicious DLL 
+    whenever netsh.exe or a related networking service starts.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1037/002/
+tags:
+    - attack.persistence
+    - attack.t1037.002
+logsource:
+    category: registry_set
+    product: windows
+detection:
+    selection_registry:
+        TargetObject|contains: 'SOFTWARE\Microsoft\Netsh'
+
+    selection_suspicious_path:
+        Details|contains:
+            - ':\Users\'
+            - ':\ProgramData\'
+            - ':\Temp\'
+            - ':\Windows\Temp\'
+            - 'AppData\'
+            - 'C:\PerfLogs\'
+
+    selection_suspicious_writer:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\reg.exe'
+            - '\mshta.exe'
+            - '\wscript.exe'
+
+    filter_trusted_installers:
+        Image|endswith:
+            - '\trustedinstaller.exe'
+            - '\System32\msiexec.exe'
+            - '\System32\netsh.exe'
+
+    filter_standard_location:
+        Details|startswith: 'C:\Windows\System32\'
+        Details|contains: 'C:\Program Files\' 
+
+    condition: selection_registry and (selection_suspicious_path or selection_suspicious_writer) and not (filter_trusted_installers or filter_standard_location)
+level: critical

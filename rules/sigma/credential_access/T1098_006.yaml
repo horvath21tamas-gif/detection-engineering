@@ -1,0 +1,43 @@
+title: High-Fidelity MFA Method Addition
+id: a7095c45-de0e-4150-83e4-11400fa0718e
+status: stable
+description: |
+    Detects when a new MFA method is added to a user account from a non-trusted location 
+    or without a fresh MFA challenge. This is a primary persistence technique for attackers 
+    to maintain access after an initial account compromise.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1098/006/
+tags:
+    - attack.persistence
+    - attack.t1098.006
+logsource:
+    product: azure
+    service: process_creation
+detection:
+    selection_operation:
+        operationName:
+            - 'User registered security info'
+            - 'Admin registered security info'
+
+    selection_mfa_details:
+        targetResources.modifiedProperties.newValue:
+            - '*StrongAuthenticationPhoneAppDetail*' 
+            - '*StrongAuthenticationUserDetails*'    
+
+    filter_trusted_ips:
+        ipAddress:
+            - '203.0.113.*' 
+            - '198.51.100.*'
+
+    filter_helpdesk:
+        initiatedBy.user.userPrincipalName|contains:
+            - 'helpdesk-admin@'
+            - 'it-support@'
+
+    selection_suspicious_bypass:
+        additionalDetails.value: 'MFA requirement satisfied by claim in the token'
+
+    condition: selection_operation and selection_mfa_details and (selection_suspicious_bypass or not filter_trusted_ips) and not filter_helpdesk
+level: critical

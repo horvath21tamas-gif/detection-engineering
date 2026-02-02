@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetObject contains "System\CurrentControlSet\Control\Lsa" and (TargetObject in ("*\Notification Packages", "*\Authentication Packages", "*\Security Packages"))) and ((not (Details in ("*scecli*", "*msv1_0*", "*kerberos*", "*tspkg*", "*pku2u*", "*livessp*", "*cloudap*", "*wdigest*", "*schannel*", "*negotiate*"))) or ((Details in ("*:\Users\*", "*:\Temp\*", "*:\ProgramData\*", "*C:\Windows\Temp\*", "*.sys*", "*.tmp*")) or Details contains ":\")) and (not (FolderPath in ("*\trustedinstaller.exe", "*\System32\msiexec.exe")))

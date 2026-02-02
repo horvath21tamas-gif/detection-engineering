@@ -1,0 +1,77 @@
+title: Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration
+id: 47602c72-7412-4796-a5e8-66d6920ba1dc
+status: stable
+description: >
+  Detects exploitation-grade modification of the Windows authentication
+  process where a non-system process registers a new authentication-related
+  DLL from a user-writable directory into LSA, SSP, or Credential Provider
+  registry locations, strongly indicating credential interception.
+references:
+  - https://attack.mitre.org/techniques/T1556/
+author: hota05
+date: 2026/02/02
+tags:
+  - attack.credential_access
+  - attack.persistence
+  - attack.privilege_escalation
+  - attack.t1556
+
+logsource:
+  category: registry_set
+  product: windows
+
+detection:
+  auth_registry_root:
+    TargetObject|startswith:
+      - 'HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa'
+      - 'HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders'
+      - 'HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication'
+
+  auth_sensitive_values:
+    TargetObject|endswith:
+      - '\\Authentication Packages'
+      - '\\Security Packages'
+      - '\\Providers'
+      - '\\Credential Providers'
+
+  dll_registration:
+    Details|contains: '.dll'
+
+  user_writable_dll_path:
+    Details|contains:
+      - '\\Users\\'
+      - '\\Users\\Public\\'
+      - '\\ProgramData\\'
+      - '\\AppData\\'
+      - '\\Temp\\'
+
+  exclude_system_dll_locations:
+    Details|contains:
+      - '\\Windows\\System32\\'
+      - '\\Windows\\SysWOW64\\'
+
+  exclude_trusted_writers:
+    Image|contains:
+      - '\\Windows\\System32\\lsass.exe'
+      - '\\Windows\\System32\\services.exe'
+      - '\\Windows\\System32\\msiexec.exe'
+      - '\\Windows\\servicing\\'
+
+  exclude_trusted_accounts:
+    User|contains:
+      - 'NT AUTHORITY\\SYSTEM'
+      - 'NT SERVICE\\TrustedInstaller'
+
+  condition: auth_registry_root
+             and auth_sensitive_values
+             and dll_registration
+             and user_writable_dll_path
+             and not exclude_system_dll_locations
+             and not exclude_trusted_writers
+             and not exclude_trusted_accounts
+
+falsepositives:
+  - Extremely rare, explicitly approved third-party authentication extensions
+  - Legacy SSO components with insecure installation practices (should be allowlisted)
+
+level: critical

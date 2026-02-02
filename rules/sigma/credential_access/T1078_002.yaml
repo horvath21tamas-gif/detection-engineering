@@ -1,0 +1,49 @@
+title: High-Fidelity Domain Account Lateral Movement Anomaly
+id: 77b49547-72f6-4fcd-a5cd-cc1bb79882a1
+status: stable
+description: |
+    Detects anomalous RDP or Network logons to critical infrastructure (DCs, SQL, File Servers) 
+    originating from unauthorized source subnets or non-admin user accounts. 
+    Implements strict filtering for machine accounts and known jump servers.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1078/002/
+tags:
+    - attack.initial_access
+    - attack.lateral_movement
+    - attack.t1078.002
+logsource:
+    product: windows
+    service: security
+detection:
+    selection_4624:
+        EventID: 4624
+        Status: "0x0" 
+
+    selection_critical_targets:
+        ComputerName|contains:
+            - '-DC'    
+            - '-SQL'   
+            - '-SAP'  
+            - '-EXCH'  
+
+    selection_remote_types:
+        LogonType:
+            - 10 
+            - 3  
+
+    filter_machine_accounts:
+        TargetUserName|endswith: '$'
+
+    filter_authorized_admin_sources:
+        IpAddress|startswith: 
+            - '10.50.10.' 
+        WorkstationName|startswith: 
+            - 'ADM-JUMP-'
+
+    filter_it_service_accounts:
+        TargetUserName|startswith: 'svc_infra_'
+
+    condition: selection_4624 and selection_critical_targets and selection_remote_types and not (filter_machine_accounts or filter_authorized_admin_sources or filter_it_service_accounts)
+level: high

@@ -48,6 +48,7 @@
 | T1091 | HIGH | High-Fidelity Process Execution from Removable Media |
 | T1098 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
 | T1105 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
+| T1106 | CRITICAL | High-Fidelity Native API Abuse via LOLBins |
 | T1110.001 | MEDIUM | Multiple Failed Login Attempts for Single User (Possible Password Guessing) |
 | T1133 | HIGH | Anomalous External Remote Service Access Context |
 | T1189 | CRITICAL | Browser-Originating Shell or System Tool Execution |

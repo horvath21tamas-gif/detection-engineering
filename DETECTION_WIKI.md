@@ -30,6 +30,7 @@
 - [Suspicious Use of net user or net localgroup via cmd.exe](#suspicious-use-of-net-user-or-net-localgroup-via-cmdexe)
 - [High-Fidelity Process Execution from Removable Media](#high-fidelity-process-execution-from-removable-media)
 - [Suspicious Use of Built-in Windows Tools for File Download and Code Execution](#suspicious-use-of-built-in-windows-tools-for-file-download-and-code-execution)
+- [High-Fidelity Native API Abuse via LOLBins](#high-fidelity-native-api-abuse-via-lolbins)
 - [Multiple Failed Login Attempts for Single User (Possible Password Guessing)](#multiple-failed-login-attempts-for-single-user-(possible-password-guessing))
 - [Anomalous External Remote Service Access Context](#anomalous-external-remote-service-access-context)
 - [Browser-Originating Shell or System Tool Execution](#browser-originating-shell-or-system-tool-execution)
@@ -622,6 +623,23 @@ attacks while filtering out common portable applications.
 - **Leírás:** Detects suspicious usage of built-in Windows utilities such as PowerShell, bitsadmin, and certutil to download files and execute code, a common attacker technique for payload staging and execution. The rule focuses on attacker-typical patterns and execution context to reduce false positives.
 - **Hamis pozitívok:** Rare advanced administrative automation, Approved red team or malware simulation activity
 - **MITRE ATT&CK:** `T1105, T1218`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Native API Abuse via LOLBins
+- **Azonosító:** `T1106.yaml`
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the suspicious use of Native API execution through trusted Windows 
+binaries (LOLBins). Focuses on scenarios where compilers or system tools 
+are abused by untrusted parent processes to perform memory injection.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1106`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

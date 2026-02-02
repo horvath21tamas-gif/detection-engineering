@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powerpnt.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\acrord32.exe")) and (FolderPath in ("*\csc.exe", "*\msbuild.exe", "*\installutil.exe", "*\regsvcs.exe", "*\regasm.exe", "*\cvtres.exe"))) or ((ProcessCommandLine in ("*NtCreateSection*", "*NtMapViewOfSection*", "*NtWriteVirtualMemory*", "*NtQueueApcThread*", "*ZwMapViewOfSection*")) and (not ((ParentProcessName in ("*Microsoft Visual Studio*", "*Windows\Microsoft.NET\Framework*")) or ProcessCommandLine contains "Microsoft.Workflow.Compiler")))

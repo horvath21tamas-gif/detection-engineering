@@ -1,0 +1,50 @@
+title: High-Fidelity Detection of Post-Vishing Remote Tool Execution
+id: 29e9f9c2-2708-48cb-a690-028b62e4bf2a
+status: stable
+description: |
+    Detects the execution of unauthorized remote access tools (AnyDesk, TeamViewer, etc.) 
+    specifically when run from user-writable directories (Downloads, Temp). 
+    This pattern is a high-confidence indicator of a successful vishing attack where 
+    the victim is instructed to run "support" software.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1566/004/
+tags:
+    - attack.initial_access
+    - attack.t1566.004
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_remote_tools:
+        Image|endswith:
+            - '\anydesk.exe'
+            - '\teamviewer.exe'
+            - '\teamviewer_desktop.exe'
+            - '\rustdesk.exe'
+            - '\logmein.exe'
+            - '\screenconnect.exe'
+            - '\connectwise.exe'
+            - '\ultraviewer.exe'
+            - '\aeroadmin.exe'
+
+    selection_unauthorized_paths:
+        CommandLine|contains:
+            - '\Downloads\'
+            - '\Desktop\'
+            - '\AppData\Local\Temp\'
+            - '\Users\Public\'
+
+    filter_legit_install_path:
+        Image|startswith:
+            - 'C:\Program Files\'
+            - 'C:\Program Files (x86)\'
+
+    filter_it_admin_accounts:
+        UserName|contains:
+            - 'adm_'
+            - 'it_support'
+
+    condition: selection_remote_tools and selection_unauthorized_paths and not filter_legit_install_path and not filter_it_admin_accounts
+level: high

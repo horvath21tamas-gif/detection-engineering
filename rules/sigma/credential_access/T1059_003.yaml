@@ -1,0 +1,53 @@
+title: High-Fidelity Windows Command Shell Abuse Detection
+id: 91f834fa-dc8c-4c0e-b670-0627816e4e60
+status: stable
+description: |
+    Detects suspicious cmd.exe execution by monitoring for command chaining, 
+    interactive reconnaissance from non-interactive accounts (IIS, SQL), 
+    and execution from office productivity or web-facing applications.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1059/003/
+tags:
+    - attack.execution
+    - attack.t1059.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cmd:
+        Image|endswith: '\cmd.exe'
+
+    selection_risky_parents:
+        ParentImage|endswith:
+            - '\w3wp.exe'        
+            - '\sqlservr.exe'   
+            - '\winword.exe'     
+            - '\excel.exe'      
+            - '\outlook.exe'    
+            - '\mshta.exe'       
+            - '\scrcons.exe'     
+
+    selection_attack_patterns:
+        CommandLine|contains:
+            - ' /c '
+            - ' /r '
+        CommandLine|contains|all:
+            - ' && '            
+            - 'whoami'           
+        - CommandLine|contains:
+            - 'net user /add'
+            - 'reg add'
+            - 'certutil -urlcache'
+
+    filter_legit_context:
+        - ParentImage|endswith: '\services.exe'
+        - CommandLine|contains: 
+            - 'C:\Windows\System32\wbem\WMIC.exe'
+            - 'C:\Program Files\Microsoft Monitoring Agent\'
+        - UserName: 'SYSTEM'
+          CommandLine|contains: 'C:\Windows\TEMP\'
+
+    condition: selection_cmd and (selection_risky_parents or selection_attack_patterns) and not filter_legit_context
+level: critical

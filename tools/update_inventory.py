@@ -9,8 +9,8 @@ def fetch_live_log_sources():
     
     live_sources = {
         'category': ['process_creation', 'network_connection', 'file_event', 'registry_set', 'dns_query'],
-        'product': ['windows', 'linux', 'azure'],
-        'service': ['sysmon', 'security', 'powershell', 'system']
+        'product': ['windows', 'linux', 'azure', 'macos', 'm365'],
+        'service': ['sysmon', 'security', 'powershell', 'system', 'signinlogs', 'audit', 'exchange']
     }
     
     # Kiegészítjük azokat, amiket a hibaüzenetben kaptál

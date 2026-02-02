@@ -1,0 +1,60 @@
+title: High-Fidelity Software Deployment Tool Abuse Detection
+id: adb4ac7f-9726-4e7c-af06-e1a6950a47aa
+status: stable
+description: |
+    Detects the abuse of software deployment agents to execute malicious payloads. 
+    Focuses on anomalous child processes (PowerShell, BitsAdmin, CertUtil) spawned 
+    by deployment services, filtering out standard maintenance patterns.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1072/
+tags:
+    - attack.execution
+    - attack.lateral_movement
+    - attack.t1072
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_deployment_parents:
+        ParentImage|endswith:
+            - '\CcmExec.exe'       
+            - '\PDQDeployService.exe'
+            - '\AdminArsenal.exe'
+            - '\PSEXESVC.exe'       
+            - '\BatchPatch.exe'
+            - '\GMSCAgent.exe'
+            - '\ManageEngine\UEMS_Agent\bin\dcoptimizationservice.exe'
+
+    selection_suspicious_children:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\bitsadmin.exe'
+            - '\certutil.exe'
+            - '\rundll32.exe'
+            - '\regsvr32.exe'
+            - '\mshta.exe'
+
+    selection_dangerous_args:
+        CommandLine|contains:
+            - '-enc'                
+            - 'DownloadString'     
+            - 'http'               
+            - 'IEX'                
+            - 'Invoke-WebRequest'
+            - 'lsass'              
+            - 'vssadmin'            
+
+    filter_legit_patterns:
+        - CommandLine|contains:
+            - 'C:\Windows\CCM\SystemTemp\'
+            - 'PolicyNames'
+            - 'SoftwareCenter'
+            - 'Configuration Manager'
+        - User: 'NT AUTHORITY\SYSTEM'
+          CommandLine|contains: 'C:\Windows\ccmcache\'
+
+    condition: selection_deployment_parents and (selection_suspicious_children or selection_dangerous_args) and not filter_legit_patterns
+level: critical

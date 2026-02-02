@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 10:16:02`
+**Utolsó frissítés:** `2026-02-02 10:24:53`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -23,7 +23,8 @@
 | T1027 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Encoded PowerShell Command Execution |
 | T1036 | HIGH | Legitimate Windows Binary Copied to User-Writable Location |
 | T1036.005 | HIGH | Legitimate Windows Binary Copied to User-Writable Location |
-| T1037.001 | CRITICAL | High-Fidelity Logon Script Persistence (T1037), High-Fidelity UserInitMprLogonScript Persistence |
+| T1037 | CRITICAL | High-Fidelity Logon Script Persistence (T1037) |
+| T1037.001 | CRITICAL | High-Fidelity UserInitMprLogonScript Persistence |
 | T1037.002 | CRITICAL | High-Fidelity Netsh Helper DLL Persistence |
 | T1037.003 | CRITICAL | Ultra-Pro Network Logon Script/Shortcut Modification (T1037.003) |
 | T1037.004 | CRITICAL | Ultra-Pro RC Script and Init.d Persistence (T1037.004) |

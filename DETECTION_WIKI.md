@@ -301,7 +301,7 @@
 - **Leírás:** Detects the creation or modification of logon scripts in the registry (UserInitMprLogonScript).
 Attackers use this to bypass GPO-based logon scripts and execute malicious code at every logon.
 - **Hamis pozitívok:** Nincs megadva
-- **MITRE ATT&CK:** `001`
+- **MITRE ATT&CK:** `T1037`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

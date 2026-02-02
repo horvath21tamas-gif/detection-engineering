@@ -1,0 +1,60 @@
+title: Ultra-Pro MSI Installer Custom Action Persistence (T1546.016)
+id: 7c02002a-026e-4d3d-a9fe-eb32276c32e3
+status: stable
+description: |
+    Detects suspicious child processes spawned by msiexec.exe originating from non-standard 
+    directories. This targets malicious MSI Custom Actions used for persistence or privilege escalation.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1546/016/
+tags:
+    - attack.persistence
+    - attack.t1546.016
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_parent:
+        ParentImage|endswith: '\msiexec.exe'
+
+    selection_suspicious_path:
+        ParentCommandLine|contains:
+            - '\Users\'
+            - '\Downloads\'
+            - '\Desktop\'
+            - '\AppData\Local\Temp\'
+            - '\Windows\Temp\'
+            - '\PerfLogs\'
+
+    selection_child_procs:
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\bitsadmin.exe'
+            - '\certutil.exe'
+            - '\mshta.exe'
+            - '\regsvr32.exe'
+            - '\scrcons.exe'
+            - '\rundll32.exe'
+
+    selection_suspicious_args:
+        CommandLine|contains:
+            - 'http'
+            - 'ftp'
+            - '-enc'     
+            - '-ExecutionPolicy Bypass'
+            - 'DownloadString'
+            - 'Invoke-WebRequest'
+
+    filter_trusted_sources:
+        ParentCommandLine|contains:
+            - 'C:\Windows\ccmcache\'    
+            - 'C:\Windows\IME\'           
+            - 'C:\Program Files\'
+            - 'C:\Program Files (x86)\'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_parent and selection_suspicious_path and (selection_child_procs or selection_suspicious_args) and not filter_trusted_sources
+level: high

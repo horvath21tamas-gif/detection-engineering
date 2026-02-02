@@ -1,0 +1,53 @@
+title: Ultra-Pro Screensaver Persistence Detection (T1546.002)
+id: e2796759-282c-4a17-9613-636c27665793
+status: stable
+description: |
+    Detects unauthorized screensaver hijacking by monitoring Registry writes to 'SCRNSAVE.EXE'. 
+    Filters out GPO-driven changes and validates binary extensions and trusted paths.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1546/002/
+tags:
+    - attack.persistence
+    - attack.t1546.002
+logsource:
+    category: registry_event
+    product: windows
+detection:
+    selection_registry:
+        TargetObject|contains: 'Control Panel\Desktop\SCRNSAVE.EXE'
+
+    selection_suspicious_values:
+        - Details|endswith: '.exe'
+        - Details|contains:
+            - '\Users\'
+            - '\ProgramData\'
+            - '\Windows\Temp\'
+            - 'powershell'
+            - 'cmd.exe'
+            - 'regsvr32'
+
+    selection_suspicious_actor:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\reg.exe'
+            - '\w3wp.exe'     
+            - '\cscript.exe'
+            - '\python.exe'
+
+    filter_trusted_management:
+        Image|endswith:
+            - '\svchost.exe'      
+            - '\control.exe'      
+            - '\explorer.exe'     
+            - '\SystemSettings.exe' 
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_standard_binaries:
+        Details|startsWith: 'C:\Windows\System32\'
+        Details|endswith: '.scr'
+
+    condition: selection_registry and (selection_suspicious_values or selection_suspicious_actor) and not (filter_trusted_management or filter_standard_binaries)
+level: critical

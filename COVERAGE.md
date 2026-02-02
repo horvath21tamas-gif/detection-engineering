@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 09:35:06`
+**Utolsó frissítés:** `2026-02-02 09:43:54`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 200 | 100% |
-| Splunk (SPL) | 196 | 98.0% |
-| Microsoft Sentinel (KQL) | 196 | 98.0% |
-| QRadar (AQL) | 119 | 59.5% |
-| Elastic (KQL/EQL) | 196 | 98.0% |
-| RSA NetWitness | 196 | 98.0% |
+| Sigma (Forrás) | 201 | 100% |
+| Splunk (SPL) | 197 | 98.0% |
+| Microsoft Sentinel (KQL) | 197 | 98.0% |
+| QRadar (AQL) | 120 | 59.7% |
+| Elastic (KQL/EQL) | 197 | 98.0% |
+| RSA NetWitness | 197 | 98.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -104,6 +104,10 @@
 | T1547.009 | HIGH | High-Fidelity Shortcut Modification Detection |
 | T1547.010 | CRITICAL | High-Fidelity AppCert DLL Persistence (T1547.010) |
 | T1547.011 | CRITICAL | High-Fidelity Application Shimming Persistence (T1547.011) |
+| T1547.012 | HIGH | High-Fidelity COM Hijacking Persistence (T1547.012) |
+| T1547.013 | HIGH | High-Fidelity Email Client Helper Persistence (T1547.013) |
+| T1547.014 | CRITICAL | High-Fidelity Active Setup Persistence (T1547.014) |
+| T1547.015 | HIGH | High-Fidelity COM Hijacking Persistence (T1547.015) |
 | T1548.002 | HIGH | UAC Bypass via Fodhelper Registry Hijack (High Fidelity) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |

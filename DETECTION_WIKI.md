@@ -84,6 +84,10 @@
 - [High-Fidelity Shortcut Modification Detection](#high-fidelity-shortcut-modification-detection)
 - [High-Fidelity AppCert DLL Persistence (T1547.010)](#high-fidelity-appcert-dll-persistence-(t1547010))
 - [High-Fidelity Application Shimming Persistence (T1547.011)](#high-fidelity-application-shimming-persistence-(t1547011))
+- [High-Fidelity COM Hijacking Persistence (T1547.012)](#high-fidelity-com-hijacking-persistence-(t1547012))
+- [High-Fidelity Email Client Helper Persistence (T1547.013)](#high-fidelity-email-client-helper-persistence-(t1547013))
+- [High-Fidelity Active Setup Persistence (T1547.014)](#high-fidelity-active-setup-persistence-(t1547014))
+- [High-Fidelity COM Hijacking Persistence (T1547.015)](#high-fidelity-com-hijacking-persistence-(t1547015))
 - [UAC Bypass via Fodhelper Registry Hijack (High Fidelity)](#uac-bypass-via-fodhelper-registry-hijack-(high-fidelity))
 - [Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)](#nem-böngészős-folyamat-hozzáférése-a-böngésző-hitelesítőadat-tárolóihoz-(high-fidelity))
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
@@ -1536,6 +1540,71 @@ This rule filters legit installers and flags suspicious parent-child relationshi
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity COM Hijacking Persistence (T1547.012)
+- **Azonosító:** `T1547_012.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the creation of COM object handlers in HKCU that point to suspicious locations.
+Focuses on InprocServer32 and LocalServer32 keys, which are primary targets for hijacking.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `012`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Email Client Helper Persistence (T1547.013)
+- **Azonosító:** `T1547_013.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the registration of unauthorized email client helpers or COM add-ins.
+Focuses on DLLs registered from user-writable paths and suspicious registry writers.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `013`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Active Setup Persistence (T1547.014)
+- **Azonosító:** `T1547_014.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the creation or modification of Active Setup 'StubPath' registry keys by non-system processes.
+Attackers use this to achieve persistence that executes once per user upon logon.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `014`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity COM Hijacking Persistence (T1547.015)
+- **Azonosító:** `T1547_015.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the creation of COM object handlers in HKCU that point to suspicious, 
+user-writable locations. Attackers hijack CLSIDs to achieve stealthy persistence 
+within legitimate system processes like explorer.exe.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `015`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

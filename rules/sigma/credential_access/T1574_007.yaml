@@ -1,0 +1,83 @@
+title: PATH Hijacking Leading to Privileged Binary Execution
+id: 04068bbb-463b-461a-84dc-cf3dcb13ba1c
+status: stable
+description: >
+  Detects PATH environment variable hijacking where a privileged Linux
+  binary is executed with a user-writable directory at the beginning of PATH,
+  and a non-absolute command is resolved, indicating a viable path interception
+  attack chain.
+references:
+  - https://attack.mitre.org/techniques/T1574/007/
+author: hota05
+date: 2026/02/02
+tags:
+  - attack.privilege_escalation
+  - attack.persistence
+  - attack.defense_evasion
+  - attack.t1574.007
+
+logsource:
+  category: process_creation
+  product: linux
+
+detection:
+  path_override:
+    CommandLine|contains: 'PATH='
+
+  user_writable_path_first:
+    CommandLine|startswith:
+      - 'PATH=/tmp:'
+      - 'PATH=/var/tmp:'
+      - 'PATH=/dev/shm:'
+      - 'PATH=/home/'
+      - 'PATH=/run/user/'
+
+  privileged_targets:
+    Image|endswith:
+      - '/sudo'
+      - '/pkexec'
+      - '/su'
+      - '/mount'
+      - '/umount'
+      - '/passwd'
+      - '/chsh'
+      - '/newgrp'
+      - '/crontab'
+
+  non_absolute_command:
+    CommandLine|contains:
+      - ' sudo '
+      - ' pkexec '
+      - ' su '
+      - ' mount '
+      - ' umount '
+      - ' passwd '
+      - ' chsh '
+      - ' newgrp '
+      - ' crontab '
+
+  exclude_secure_path:
+    CommandLine|contains:
+      - 'secure_path='
+      - '/usr/sbin:/usr/bin:/sbin:/bin'
+
+  exclude_interactive_shell:
+    ParentImage|endswith:
+      - '/bash'
+      - '/zsh'
+      - '/fish'
+      - '/tmux'
+      - '/screen'
+
+  condition: path_override
+             and user_writable_path_first
+             and privileged_targets
+             and non_absolute_command
+             and not exclude_secure_path
+             and not exclude_interactive_shell
+
+falsepositives:
+  - Extremely rare misconfigured automation running privileged tools
+  - Controlled red team or security testing activity
+
+level: critical

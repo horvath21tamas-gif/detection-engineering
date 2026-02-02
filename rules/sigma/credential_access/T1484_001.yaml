@@ -1,0 +1,46 @@
+title: Ultra-Pro Group Policy Modification & Abuse (T1484.001)
+id: e53d025a-d24e-471d-8cfe-890496057fc3
+status: stable
+description: |
+    Detects unauthorized GPO modifications by correlating file system writes to critical 
+    policy templates in SYSVOL with process-level anomalies. Filters out DFSR 
+    replication and standard GPMC management consoles to minimize false positives.
+author: hota05
+date: 2026-02-02
+tags:
+    - attack.privilege_escalation
+    - attack.persistence
+    - attack.t1484.001
+logsource:
+    product: windows
+    category: file_event 
+detection:
+    selection_critical_paths:
+        TargetFilename|contains: '\Windows\SYSVOL\domain\Policies\'
+        TargetFilename|endswith:
+            - '\GptTmpl.inf'     
+            - '\Scripts.ini'      
+            - '\ScheduledTasks.xml'
+            - '\Registry.pol'     
+
+    selection_suspicious_writer:
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\bitsadmin.exe'
+            - '\python.exe'
+            - '\curl.exe'
+
+    selection_ad_link_change:
+        EventID: 5136
+        AttributeCommonName: 'gPLink'
+
+    filter_trusted_operations:
+        - Image|endswith: '\Windows\System32\svchost.exe'
+        - Image|endswith: '\Windows\System32\mmc.exe'
+        - User: 'NT AUTHORITY\SYSTEM'
+        - SubjectUserName|contains: 'GPO_SVC_' 
+
+    condition: (selection_critical_paths and selection_suspicious_writer) or (selection_ad_link_change and not filter_trusted_operations)
+level: critical

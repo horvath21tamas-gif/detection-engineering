@@ -39,6 +39,7 @@
 | T1133 | HIGH | Anomalous External Remote Service Access Context |
 | T1189 | CRITICAL | Browser-Originating Shell or System Tool Execution |
 | T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |
+| T1195 | CRITICAL | High-Fidelity Supply Chain Compromise Detection (Post-Update Anomaly) |
 | T1197 | HIGH | Suspicious File Download via Bitsadmin (High Fidelity) |
 | T1200 | CRITICAL | Malicious Hardware-Induced Command Execution (HID Injection) |
 | T1204 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity) |

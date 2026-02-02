@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ParentProcessName in ("*\Update*", "*\Upgrade*", "*\Installer*", "*\Setup*")) and (ParentProcessName in ("*\msiexec.exe", "*\winget.exe", "*\dism.exe"))) and ((FolderPath in ("*\whoami.exe", "*\net.exe", "*\net1.exe", "*\ipconfig.exe", "*\nltest.exe", "*\nbtstat.exe", "*\systeminfo.exe", "*\tasklist.exe", "*\nslookup.exe")) or (FolderPath in ("*\procdump.exe", "*\nanodump.exe", "*\vssadmin.exe", "*\reg.exe"))) and (not (((ProcessCommandLine in ("*C:\Program Files\*", "*C:\Program Files (x86)\*")) or ParentProcessName contains "\Windows\servicing\TrustedInstaller.exe") or (ProcessCommandLine in ("*/configure*", "*/update*"))))

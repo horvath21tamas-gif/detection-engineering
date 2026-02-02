@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*.bashrc*", "*.bash_profile*", "*.zshrc*", "*.profile*", "*/etc/profile*", "*/etc/bash.bashrc*")) and (ProcessCommandLine in ("*DEBUG*", "*EXIT*", "*RETURN*")) and (ProcessCommandLine in ("*curl*", "*wget*", "*base64*", "*python*", "*/dev/tcp/*", "*sh -i*", "*nc *")) and (not ((ParentProcessName in ("*/ansible-playbook", "*/chef-client", "*/salt-minion", "*/puppet", "*/dpkg", "*/apt")) or (ProcessCommandLine in ("*rbenv rehash*", "*pyenv*", "*bash_completion*"))))

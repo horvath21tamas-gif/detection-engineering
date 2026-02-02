@@ -35,6 +35,10 @@
 - [Suspicious Use of net user or net localgroup via cmd.exe](#suspicious-use-of-net-user-or-net-localgroup-via-cmdexe)
 - [High-Fidelity Process Execution from Removable Media](#high-fidelity-process-execution-from-removable-media)
 - [High-Fidelity Account Manipulation - Persistence Focused](#high-fidelity-account-manipulation---persistence-focused)
+- [High-Fidelity Entra ID Application Credential Addition](#high-fidelity-entra-id-application-credential-addition)
+- [High-Fidelity Exchange Mailbox Permission Grant (T1098.002)](#high-fidelity-exchange-mailbox-permission-grant-(t1098002))
+- [High-Fidelity Entra ID App Certificate Addition](#high-fidelity-entra-id-app-certificate-addition)
+- [High-Fidelity Azure Role Assignment Escalation](#high-fidelity-azure-role-assignment-escalation)
 - [Suspicious Use of Built-in Windows Tools for File Download and Code Execution](#suspicious-use-of-built-in-windows-tools-for-file-download-and-code-execution)
 - [High-Fidelity Native API Abuse via LOLBins](#high-fidelity-native-api-abuse-via-lolbins)
 - [Multiple Failed Login Attempts for Single User (Possible Password Guessing)](#multiple-failed-login-attempts-for-single-user-(possible-password-guessing))
@@ -726,6 +730,74 @@ SID History injection, Kerberos Constrained Delegation changes, and
 disabling password expiration for sensitive accounts.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1098`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Entra ID Application Credential Addition
+- **Azonosító:** `T1098_001.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects when a new secret or certificate is added to an Entra ID application.
+Attackers use this to establish a backdoor via Service Principals.
+This rule filters out common Microsoft first-party apps and known CI/CD service principals.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Exchange Mailbox Permission Grant (T1098.002)
+- **Azonosító:** `T1098_002.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the granting of critical mailbox permissions (FullAccess, SendAs). 
+Filters out common service accounts and focuses on cross-tenant or 
+unauthorized administrative actions, especially on high-value targets.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Entra ID App Certificate Addition
+- **Azonosító:** `T1098_003.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the addition of a new certificate (public key) to an Entra ID application.
+Attackers use this for long-term persistence to act as the application's service principal.
+This rule is optimized to filter out automated Microsoft internal rotations and known CI/CD providers.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Azure Role Assignment Escalation
+- **Azonosító:** `T1098_004.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects direct assignment of highly privileged Azure roles (Owner, Contributor, User Access Admin). 
+Filters out PIM (Privileged Identity Management) activations and known automation principals 
+to reduce noise and focus on manual privilege escalation.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

@@ -52,6 +52,10 @@
 | T1087 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
 | T1091 | HIGH | High-Fidelity Process Execution from Removable Media |
 | T1098 | CRITICAL | Suspicious Use of net user or net localgroup via cmd.exe, High-Fidelity Account Manipulation - Persistence Focused |
+| T1098.001 | CRITICAL | High-Fidelity Entra ID Application Credential Addition |
+| T1098.002 | CRITICAL | High-Fidelity Exchange Mailbox Permission Grant (T1098.002) |
+| T1098.003 | CRITICAL | High-Fidelity Entra ID App Certificate Addition |
+| T1098.004 | CRITICAL | High-Fidelity Azure Role Assignment Escalation |
 | T1105 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1106 | CRITICAL | High-Fidelity Native API Abuse via LOLBins |
 | T1110.001 | MEDIUM | Multiple Failed Login Attempts for Single User (Possible Password Guessing) |

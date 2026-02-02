@@ -1,0 +1,68 @@
+title: High-Fidelity Process Spawn from Business Communication Service
+id: faef7835-5298-41fb-a779-216e00db7f69
+status: stable
+description: |
+    Detects highly suspicious child processes spawned by business communication tools 
+    (Teams, Slack, Discord, LinkedIn). It specifically targets script interpreters 
+    and dual-use binaries (LOLBins) executing from user-writable directories, 
+    effectively filtering out legitimate application updates and browser launches.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1566/003/
+tags:
+    - attack.initial_access
+    - attack.t1566.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_service_parents:
+        ParentImage|endswith:
+            - '\teams.exe'
+            - '\slack.exe'
+            - '\discord.exe'
+            - '\webex.exe'
+            - '\zoom.exe'
+            - '\whatsapp.exe'
+            - '\linkedin.exe' 
+
+    selection_suspicious_interpreters:
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+            - '\scrcons.exe'
+            - '\regsvr32.exe'
+            - '\rundll32.exe'
+
+    selection_payload_locations:
+        CommandLine|contains:
+            - '\Downloads\'
+            - '\AppData\Local\Temp\'
+            - '\Users\Public\'
+            - 'C:\Windows\Temp\'
+
+    filter_legit_service_behavior:
+        Image|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+        CommandLine|contains:
+            - '--type='
+            - 'squirrel'
+            - '--update'
+            - '--checkInstall'
+            - 'notification'
+
+    filter_ms_office_isolated:
+        Image|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\powerpnt.exe'
+
+    condition: selection_service_parents and (selection_suspicious_interpreters and selection_payload_locations) and not (filter_legit_service_behavior or filter_ms_office_isolated)
+level: critical

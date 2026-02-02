@@ -1,0 +1,71 @@
+title: Dynamic Linker Hijacking Against Privileged Binary
+id: 43574431-778e-4a8f-a36c-6d195d207205
+status: stable
+description: >
+  Detects Dynamic Linker Hijacking by identifying execution of
+  privileged or SetUID Linux binaries with manipulated dynamic linker
+  environment variables pointing to user-writable shared libraries.
+references:
+  - https://attack.mitre.org/techniques/T1574/006/
+author: hota05
+date: 2026/02/02
+tags:
+  - attack.privilege_escalation
+  - attack.persistence
+  - attack.defense_evasion
+  - attack.t1574.006
+
+logsource:
+  category: process_creation
+  product: linux
+
+detection:
+  linker_manipulation:
+    CommandLine|contains:
+      - 'LD_PRELOAD='
+      - 'LD_LIBRARY_PATH='
+
+  privileged_targets:
+    Image|endswith:
+      - '/sudo'
+      - '/pkexec'
+      - '/su'
+      - '/mount'
+      - '/umount'
+      - '/passwd'
+      - '/chsh'
+      - '/newgrp'
+
+  user_writable_library:
+    CommandLine|contains:
+      - '.so'
+      - '/tmp/'
+      - '/var/tmp/'
+      - '/dev/shm/'
+      - '/home/'
+      - '/run/user/'
+
+  exclude_standard_libs:
+    CommandLine|contains:
+      - '/lib/'
+      - '/lib64/'
+      - '/usr/lib/'
+      - '/usr/lib64/'
+
+  exclude_interactive_shells:
+    ParentImage|endswith:
+      - '/bash'
+      - '/zsh'
+      - '/fish'
+
+  condition: linker_manipulation
+             and privileged_targets
+             and user_writable_library
+             and not exclude_standard_libs
+             and not exclude_interactive_shells
+
+falsepositives:
+  - Extremely rare custom hardened environments
+  - Manual exploitation labs or red team activity
+
+level: critical

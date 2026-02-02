@@ -6,12 +6,12 @@
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 218 | 100% |
-| Splunk (SPL) | 212 | 97.2% |
-| Microsoft Sentinel (KQL) | 212 | 97.2% |
-| QRadar (AQL) | 126 | 57.8% |
-| Elastic (KQL/EQL) | 212 | 97.2% |
-| RSA NetWitness | 212 | 97.2% |
+| Sigma (Forrás) | 223 | 100% |
+| Splunk (SPL) | 214 | 96.0% |
+| Microsoft Sentinel (KQL) | 214 | 96.0% |
+| QRadar (AQL) | 127 | 57.0% |
+| Elastic (KQL/EQL) | 214 | 96.0% |
+| RSA NetWitness | 214 | 96.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -104,7 +104,12 @@
 | T1543.003 | CRITICAL | Ultra-Pro Unauthorized Windows Service Installation (T1543.003) |
 | T1543.004 | CRITICAL | Ultra-Pro Unauthorized macOS Launch Daemon (T1543.004) |
 | T1546 | CRITICAL | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity), Suspicious COM Hijacking for User-Level Persistence (High Fidelity), Ultra-Pro WMI Event Subscription Persistence (T1546.003) |
+| T1546.001 | CRITICAL | Ultra-Pro File Association Hijacking (T1546.001) |
+| T1546.002 | CRITICAL | Ultra-Pro Screensaver Persistence Detection (T1546.002) |
 | T1546.003 | CRITICAL | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity), Ultra-Pro WMI Event Subscription Persistence (T1546.003) |
+| T1546.004 | CRITICAL | Ultra-Pro AppCert DLL Persistence Detection (T1546.004) |
+| T1546.005 | CRITICAL | Ultra-Pro Shell Trap Persistence Detection (T1546.005) |
+| T1546.006 | CRITICAL | Ultra-Pro Mach-O LC_LOAD_DYLIB Injection (T1546.006) |
 | T1546.015 | HIGH | Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
 | T1547 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása |
 | T1547.001 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása, Suspicious Registry Run Key Modification for User Persistence (High Fidelity) |

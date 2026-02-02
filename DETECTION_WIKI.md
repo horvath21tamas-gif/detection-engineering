@@ -86,6 +86,8 @@
 - [Ultra-Pro Unauthorized Windows Service Installation (T1543.003)](#ultra-pro-unauthorized-windows-service-installation-(t1543003))
 - [Ultra-Pro Unauthorized macOS Launch Daemon (T1543.004)](#ultra-pro-unauthorized-macos-launch-daemon-(t1543004))
 - [Ultra-Pro WMI Event Subscription Persistence (T1546.003)](#ultra-pro-wmi-event-subscription-persistence-(t1546003))
+- [Ultra-Pro File Association Hijacking (T1546.001)](#ultra-pro-file-association-hijacking-(t1546001))
+- [Ultra-Pro Screensaver Persistence Detection (T1546.002)](#ultra-pro-screensaver-persistence-detection-(t1546002))
 - [WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity)](#wmi-event-subscription-persistence-via-wmic-or-powershell-(high-fidelity))
 - [Ultra-Pro AppCert DLL Persistence Detection (T1546.004)](#ultra-pro-appcert-dll-persistence-detection-(t1546004))
 - [Suspicious COM Hijacking for User-Level Persistence (High Fidelity)](#suspicious-com-hijacking-for-user-level-persistence-(high-fidelity))
@@ -1591,6 +1593,38 @@ and verifying the integrity of the writing process and the target binary signatu
 suspicious command-line patterns and excluding trusted system orchestrators.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1546, 003`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro File Association Hijacking (T1546.001)
+- **Azonosító:** `T1546_001.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized changes to file associations in the Registry by monitoring 
+suspicious actor processes and non-standard executable paths in 'shell\open\command'.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Screensaver Persistence Detection (T1546.002)
+- **Azonosító:** `T1546_002.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized screensaver hijacking by monitoring Registry writes to 'SCRNSAVE.EXE'. 
+Filters out GPO-driven changes and validates binary extensions and trusted paths.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

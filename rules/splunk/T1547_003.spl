@@ -1,0 +1,1 @@
+TargetObject="*Services\\W32Time\\TimeProviders\\*" TargetObject="*DllName" NOT (Details IN ("w32time.dll", "vmictimeprovider.dll")) OR Details IN ("*:\\*", "*\\*", "*%AppData%*", "*%Temp%*", "*C:\\Users\\*") NOT Image="*\\trustedinstaller.exe"

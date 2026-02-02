@@ -1,0 +1,63 @@
+title: High-Fidelity Spearphishing Attachment Execution
+id: 1bcdaff6-d1c0-4c93-9f6c-cad6e4a48fa0
+status: stable
+description: |
+    Detects highly suspicious child processes spawned from email clients or Office applications. 
+    It specifically targets script interpreters and dual-use binaries (LOLBins) that 
+    originate from user-writable directories, significantly reducing false positives 
+    from legitimate system updates and standard GUI behavior.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1566/001/
+tags:
+    - attack.initial_access
+    - attack.t1566.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_parents:
+        ParentImage|endswith:
+            - '\outlook.exe'
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\powerpnt.exe'
+            - '\mspub.exe'
+            - '\visio.exe'
+
+    selection_interpreters:
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+            - '\scrcons.exe'
+            - '\hh.exe'
+
+    selection_payload_locations:
+        CommandLine|contains:
+            - '\AppData\Local\Temp\'          
+            - '\AppData\Local\Microsoft\Windows\INetCache\' 
+            - '\Downloads\'
+            - '\Users\Public\'
+            - 'C:\ProgramData\'                 
+
+    filter_legit_office_subprocesses:
+        Image|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+            - '\AcroRd32.exe'
+        ParentCommandLine|contains:
+            - '\Common Files\Microsoft Shared\ClickToRun\'
+
+    filter_ms_office_isolated:
+        Image|endswith:
+            - '\splwow64.exe' 
+            - '\werfault.exe' 
+
+    condition: selection_parents and (selection_interpreters and selection_payload_locations) and not (filter_legit_office_subprocesses or filter_ms_office_isolated)
+level: critical

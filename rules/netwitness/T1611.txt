@@ -1,0 +1,2 @@
+((((param = '*--privileged*' OR param = '*--cap-add=SYS_ADMIN*' OR param = '*--cap-add=SYS_PTRACE*' OR param = '*--pid=host*' OR param = '*--net=host*' OR param = '*--ipc=host*'))) OR (((param = '*-v /:/*' OR param = '*/var/run/docker.sock*' OR param = '*/run/containerd*' OR param = '*/etc/kubernetes*' OR param = '*/root/.ssh*')))) AND (NOT (((((process = '*kube-proxy*' OR process = '*calico/node*' OR process = '*cilium*' OR process = '*datadog/agent*' OR process = '*node-exporter*' OR process = '*istio-proxy*'))) AND ((user.dst = '*root*'))))
+)

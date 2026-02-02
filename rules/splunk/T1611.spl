@@ -1,0 +1,1 @@
+CommandLine IN ("*--privileged*", "*--cap-add=SYS_ADMIN*", "*--cap-add=SYS_PTRACE*", "*--pid=host*", "*--net=host*", "*--ipc=host*") OR CommandLine IN ("*-v /:/*", "*/var/run/docker.sock*", "*/run/containerd*", "*/etc/kubernetes*", "*/root/.ssh*") NOT (Image IN ("*kube-proxy*", "*calico/node*", "*cilium*", "*datadog/agent*", "*node-exporter*", "*istio-proxy*") username="root")

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("*--privileged*", "*--cap-add=SYS_ADMIN*", "*--cap-add=SYS_PTRACE*", "*--pid=host*", "*--net=host*", "*--ipc=host*")) or (ProcessCommandLine in ("*-v /:/*", "*/var/run/docker.sock*", "*/run/containerd*", "*/etc/kubernetes*", "*/root/.ssh*"))) and (not ((FolderPath in ("*kube-proxy*", "*calico/node*", "*cilium*", "*datadog/agent*", "*node-exporter*", "*istio-proxy*")) and User =~ "root"))

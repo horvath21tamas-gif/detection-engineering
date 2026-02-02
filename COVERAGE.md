@@ -6,12 +6,12 @@
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 292 | 100% |
-| Splunk (SPL) | 263 | 90.1% |
-| Microsoft Sentinel (KQL) | 264 | 90.4% |
-| QRadar (AQL) | 152 | 52.1% |
-| Elastic (KQL/EQL) | 264 | 90.4% |
-| RSA NetWitness | 262 | 89.7% |
+| Sigma (Forrás) | 293 | 100% |
+| Splunk (SPL) | 264 | 90.1% |
+| Microsoft Sentinel (KQL) | 265 | 90.4% |
+| QRadar (AQL) | 153 | 52.2% |
+| Elastic (KQL/EQL) | 265 | 90.4% |
+| RSA NetWitness | 263 | 89.8% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -305,6 +305,7 @@
 | T1608.006 | HIGH | Anomalous SEO Poisoning and Metadata Staging |
 | T1609 | CRITICAL | High-Fidelity Container Interactive Shell Execution |
 | T1610 | CRITICAL | High-Fidelity Malicious Container Deployment Detection |
+| T1611 | CRITICAL | Ultra-Pro Container Escape & Host Access (T1611) |
 | T1648 | HIGH | High-Fidelity Serverless Function Persistence or Abuse |
 | T1650 | HIGH | High-Fidelity Cloud Account Acquisition and Initialization - T1650 |
 | T1651 | CRITICAL | High-Fidelity Cloud Administration Agent Abuse |

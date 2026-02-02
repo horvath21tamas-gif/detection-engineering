@@ -287,6 +287,7 @@
 - [Anomalous SEO Poisoning and Metadata Staging](#anomalous-seo-poisoning-and-metadata-staging)
 - [High-Fidelity Container Interactive Shell Execution](#high-fidelity-container-interactive-shell-execution)
 - [High-Fidelity Malicious Container Deployment Detection](#high-fidelity-malicious-container-deployment-detection)
+- [Ultra-Pro Container Escape & Host Access (T1611)](#ultra-pro-container-escape-&-host-access-(t1611))
 - [High-Fidelity Serverless Function Persistence or Abuse](#high-fidelity-serverless-function-persistence-or-abuse)
 - [High-Fidelity Cloud Account Acquisition and Initialization - T1650](#high-fidelity-cloud-account-acquisition-and-initialization---t1650)
 - [High-Fidelity Cloud Administration Agent Abuse](#high-fidelity-cloud-administration-agent-abuse)
@@ -4875,6 +4876,23 @@ facilitate container escape or persistence. Focuses on privileged mode,
 host-level resource sharing, and non-standard image sources.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1610`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Container Escape & Host Access (T1611)
+- **Azonosító:** `T1611.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized attempts to bypass container isolation and access the 
+underlying host. Targets non-standard privileged executions and high-risk 
+volume mounts, while filtering out known cluster infrastructure components.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1611`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

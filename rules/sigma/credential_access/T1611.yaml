@@ -39,7 +39,7 @@ detection:
             - 'datadog/agent'
             - 'node-exporter'
             - 'istio-proxy'
-        User: 'root'
+        username: 'root'
 
     selection_interactive:
         ParentImage|endswith:

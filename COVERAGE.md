@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 13:19:21`
+**Utolsó frissítés:** `2026-02-02 13:32:35`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 254 | 100% |
-| Splunk (SPL) | 235 | 92.5% |
-| Microsoft Sentinel (KQL) | 236 | 92.9% |
-| QRadar (AQL) | 139 | 54.7% |
-| Elastic (KQL/EQL) | 236 | 92.9% |
-| RSA NetWitness | 234 | 92.1% |
+| Sigma (Forrás) | 257 | 100% |
+| Splunk (SPL) | 237 | 92.2% |
+| Microsoft Sentinel (KQL) | 238 | 92.6% |
+| QRadar (AQL) | 141 | 54.9% |
+| Elastic (KQL/EQL) | 238 | 92.6% |
+| RSA NetWitness | 236 | 91.8% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -73,6 +73,7 @@
 | T1136.001 | CRITICAL | Ultra-Pro Unauthorized Local Account Creation (T1136.001) |
 | T1136.002 | CRITICAL | Ultra-Pro Unauthorized Domain Account Creation (T1136.002) |
 | T1136.003 | CRITICAL | Ultra-Pro Unauthorized Cloud Account Creation (T1136.003) |
+| T1137 | HIGH | Ultra-Pro Office Application Startup Persistence (T1137) |
 | T1176 | CRITICAL | Ultra-Pro Browser Extension Force-Install Persistence (T1176) |
 | T1189 | CRITICAL | Browser-Originating Shell or System Tool Execution |
 | T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |
@@ -147,6 +148,8 @@
 | T1556.004 | CRITICAL | Ultra-Pro Network Device Authentication Hijacking (T1556.004) |
 | T1556.005 | CRITICAL | Ultra-Pro SID History Injection Correlation (T1556.005) |
 | T1556.006 | CRITICAL | Ultra-Pro Entra ID MFA Method Hijacking (T1556.006) |
+| T1556.007 | CRITICAL | Ultra-Pro Hybrid Identity Sync Manipulation (T1556.007) |
+| T1556.008 | CRITICAL | Ultra-Pro Network-to-Cloud Auth Hijacking (T1556.008) |
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |
 | T1559 | CRITICAL | High-Fidelity Indirect IPC and COM Execution |
 | T1559.001 | HIGH | High-Fidelity Indirect IPC and COM Execution, Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity) |

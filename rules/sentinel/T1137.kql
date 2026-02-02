@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetObject contains "\Software\Microsoft\Office\" and (TargetObject in ("*\Addins\LoadBehavior", "*\Options\OPEN", "*\Outlook\WebView\URL", "*\Security\Trusted Documents\TrustRecords"))) and ((Details in ("*\AppData\Local\Temp\*", "*C:\Users\Public\*", "*\Downloads\*", "*http*")) or (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\reg.exe", "*\bitsadmin.exe"))) and (not ((FolderPath in ("*\msiexec.exe", "*\setup.exe", "*\OfficeClickToRun.exe")) and (Details in ("*C:\Program Files\*", "*C:\Program Files (x86)\*"))))

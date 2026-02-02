@@ -1,0 +1,67 @@
+title: Ultra-Pro RC Script and Init.d Persistence (T1037.004)
+id: 82e0ab5e-c2c9-4f7a-b715-0bafb9caa0b0
+status: stable
+description: |
+    Detects unauthorized modification of RC scripts, init.d, or systemd generators by non-package manager processes.
+    Attackers use these to gain root persistence on Linux/macOS systems.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1037/004/
+tags:
+    - attack.persistence
+    - attack.t1037.004
+logsource:
+    product: linux
+    service: auditd 
+detection:
+    selection_paths:
+        TargetFilename|startswith:
+            - '/etc/rc.local'
+            - '/etc/rc.d/'
+            - '/etc/init.d/'
+            - '/etc/update-rc.d/'
+            - '/usr/lib/systemd/system-generators/' 
+
+    selection_suspicious_writer:
+        Image|endswith:
+            - '/python'
+            - '/python3'
+            - '/perl'
+            - '/ruby'
+            - '/lua'
+            - '/bash'
+            - '/sh'
+            - '/nc'
+            - '/socat'
+            - '/curl'
+            - '/wget'
+
+    selection_shell_redirection:
+        CommandLine|contains:
+            - '>>'
+            - 'tee -a'
+            - 'sed -i'
+
+    filter_package_managers:
+        ParentImage|endswith:
+            - '/apt'
+            - '/dpkg'
+            - '/yum'
+            - '/dnf'
+            - '/rpm'
+            - '/zypper'
+            - '/pacman'
+        Image|endswith:
+            - '/frontend'
+            - '/preinst'
+            - '/postinst'
+
+    filter_trusted_admin:
+        Image|contains:
+            - '/ansible/'
+            - '/salt/'
+            - '/puppet/'
+
+    condition: selection_paths and (selection_suspicious_writer or selection_shell_redirection) and not (filter_package_managers or filter_trusted_admin)
+level: critical

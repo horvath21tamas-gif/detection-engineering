@@ -1,0 +1,48 @@
+title: Ultra-Pro Network Device Authentication Hijacking (T1556.004)
+id: 6216d09d-5a23-42de-9207-dcbf1b9b0309
+status: stable
+description: |
+    Detects unauthorized modifications to AAA (Authentication, Authorization, and Accounting) 
+    settings or local user databases on network devices. Focuses on manual bypasses 
+    performed outside of authorized management subnets.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1556/004/
+tags:
+    - attack.persistence
+    - attack.credential_access
+    - attack.t1556.004
+logsource:
+    category: network_connection
+    product: windows
+detection:
+  selection_aaa_hijack:
+    Message|contains:
+      - 'aaa authentication'
+      - 'aaa authorization'
+      - 'tacacs-server host' 
+      - 'radius-server host'
+      - 'no aaa'             
+
+  selection_local_admin:
+    Message|contains:
+      - 'username '
+    Message|all:
+      - 'privilege 15'       
+      - 'secret'              
+
+  selection_unauthorized_source:
+    SourceIp|all:
+      - 'NOT 10.50.0.0/24'     
+      - 'NOT 127.0.0.1'
+
+  filter_management_tools:
+    User:
+      - 'SVC_NetworkAutomation'
+      - 'CiscoDNA_Admin'
+    SourceIp: 
+      - '10.50.0.100'
+
+  condition: (selection_aaa_hijack or selection_local_admin) and selection_unauthorized_source and not filter_management_tools
+level: critical

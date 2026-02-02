@@ -1,0 +1,67 @@
+title: Exploit-Grade Security Support Provider Hijacking (LSA SSP)
+id: 36b02061-85b5-4fb6-9f85-7544bd0684ca
+status: stable
+description: >
+  Detects exploitation-grade Security Support Provider (SSP) hijacking
+  by identifying unauthorized modification of the LSA Security Packages
+  registry value to register a new, non-system DLL from a user-writable
+  directory by a non-trusted process or account.
+references:
+  - https://attack.mitre.org/techniques/T1556/001/
+author: hota05
+date: 2026/02/02
+tags:
+  - attack.credential_access
+  - attack.persistence
+  - attack.privilege_escalation
+  - attack.t1556.001
+
+logsource:
+  category: registry_set
+  product: windows
+
+detection:
+  lsa_ssp_registry:
+    TargetObject: 'HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\Security Packages'
+
+  dll_reference_added:
+    Details|contains: '.dll'
+
+  user_writable_dll_location:
+    Details|contains:
+      - '\\Users\\'
+      - '\\Users\\Public\\'
+      - '\\ProgramData\\'
+      - '\\AppData\\'
+      - '\\Temp\\'
+
+  exclude_system_dll_locations:
+    Details|contains:
+      - '\\Windows\\System32\\'
+      - '\\Windows\\SysWOW64\\'
+
+  exclude_trusted_writers:
+    Image|contains:
+      - '\\Windows\\System32\\lsass.exe'
+      - '\\Windows\\System32\\services.exe'
+      - '\\Windows\\System32\\msiexec.exe'
+      - '\\Windows\\servicing\\'
+      - '\\Windows\\System32\\dism.exe'
+
+  exclude_trusted_accounts:
+    User|contains:
+      - 'NT AUTHORITY\\SYSTEM'
+      - 'NT SERVICE\\TrustedInstaller'
+
+  condition: lsa_ssp_registry
+             and dll_reference_added
+             and user_writable_dll_location
+             and not exclude_system_dll_locations
+             and not exclude_trusted_writers
+             and not exclude_trusted_accounts
+
+falsepositives:
+  - Extremely rare, explicitly approved third-party SSP deployments
+  - Legacy authentication extensions with insecure installers (should be allowlisted)
+
+level: critical

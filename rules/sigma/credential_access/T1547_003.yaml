@@ -1,0 +1,40 @@
+title: High-Fidelity Time Provider Persistence (T1547.003)
+id: 7b2d05d5-efed-4df7-94d8-5ac1f1de0a59
+status: stable
+description: |
+    Detects the registration of a new Windows Time Provider. 
+    Attackers use this for SYSTEM-level persistence by loading a malicious DLL into svchost.exe.
+    This rule filters standard Windows DLLs and targets non-System32 paths.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1547/003/
+tags:
+    - attack.persistence
+    - attack.t1547.003
+logsource:
+    category: registry_set
+    product: windows
+detection:
+    selection_registry:
+        TargetObject|contains: 'Services\W32Time\TimeProviders\'
+        TargetObject|endswith: 'DllName'
+
+    filter_standard_dlls:
+        Details:
+            - 'w32time.dll'
+            - 'vmictimeprovider.dll' 
+
+    selection_suspicious_path:
+        Details|contains:
+            - ':\'             
+            - '\\'           
+            - '%AppData%'
+            - '%Temp%'
+            - 'C:\Users\'
+
+    filter_trusted_installer:
+        Image|endswith: '\trustedinstaller.exe'
+
+    condition: selection_registry and (not filter_standard_dlls or selection_suspicious_path) and not filter_trusted_installer
+level: critical

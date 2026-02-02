@@ -31,7 +31,7 @@ detection:
             - '\cscript.exe'
             - '\wscript.exe'
         User|contains: 'SYSTEM'
-        LogonId: '0x3e7'
+        logonid: '0x3e7'
 
     filter_trusted_system_procs:
         - ParentImage|endswith:

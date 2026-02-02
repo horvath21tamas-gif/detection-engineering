@@ -1,0 +1,57 @@
+title: High-Fidelity Email Client Helper Persistence (T1547.013)
+id: f7c4235d-3873-4324-89a0-5fa6609e3ec8
+status: stable
+description: |
+    Detects the registration of unauthorized email client helpers or COM add-ins.
+    Focuses on DLLs registered from user-writable paths and suspicious registry writers.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1547/013/
+tags:
+    - attack.persistence
+    - attack.t1547.013
+logsource:
+    category: registry_set
+    product: windows
+detection:
+    selection_registry:
+        TargetObject|contains:
+            - '\Software\Microsoft\Office\Outlook\Addins\'
+            - '\Software\Classes\CLSID\'
+            - '\Software\Microsoft\Windows Messaging Subsystem\MSMapiApps'
+
+    selection_suspicious_path:
+        Details|contains:
+            - ':\Users\'
+            - ':\ProgramData\'
+            - ':\Temp\'
+            - ':\Windows\Temp\'
+            - 'C:\PerfLogs\'
+
+    selection_suspicious_writer:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\reg.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+            - '\mshta.exe'
+
+    filter_trusted_installers:
+        Image|endswith:
+            - '\trustedinstaller.exe'
+            - '\System32\msiexec.exe'
+            - '\Microsoft\Office\root\Integration\Integrator.exe' # Office frissítő
+        Image|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+
+    filter_standard_location:
+        Details|contains:
+            - 'C:\Program Files\'
+            - 'C:\Program Files (x86)\'
+
+    condition: selection_registry and (selection_suspicious_path or selection_suspicious_writer) and not (filter_trusted_installers or filter_standard_location)
+level: high

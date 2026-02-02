@@ -1,0 +1,65 @@
+title: High-Fidelity Systemd Service Creation or Modification
+id: ba955422-dd76-4c01-b22d-3080e0c9e85b
+status: stable
+description: |
+    Detects the creation or modification of systemd service units with a focus on 
+    anomalous execution paths (e.g., /tmp, /dev/shm) and suspicious parent processes 
+    (e.g., shells, web servers). Filters out legitimate package management and CM tools.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1053/006/
+tags:
+    - attack.persistence
+    - attack.t1053.006
+logsource:
+    category: process_creation
+    product: linux
+detection:
+    selection_systemd_tools:
+        Image|endswith:
+            - '/systemctl'
+            - '/systemd-analyze'
+
+    selection_suspicious_paths:
+        CommandLine|contains:
+            - '/tmp/'
+            - '/var/tmp/'
+            - '/dev/shm/'
+            - '/home/'
+            - '/root/'
+            - '/dev/tcp/' 
+
+    selection_dangerous_keywords:
+        CommandLine|contains:
+            - 'ExecStart='
+            - 'Restart=always'
+            - 'base64'
+            - 'curl'
+            - 'wget'
+
+    selection_untrusted_parents:
+        ParentImage|endswith:
+            - '/bash'
+            - '/sh'
+            - '/zsh'
+            - '/python'
+            - '/apache2'
+            - '/nginx'
+            - '/php'
+
+    filter_legit_automation:
+        - ParentImage|endswith:
+            - '/ansible'
+            - '/salt-minion'
+            - '/puppet'
+            - '/chef-client'
+            - '/dpkg'
+            - '/apt'
+            - '/yum'
+            - '/dnf'
+        - User: 'root'
+          CommandLine|contains: 'daemon-reload' 
+
+    condition: selection_systemd_tools and (selection_suspicious_paths or selection_dangerous_keywords or selection_untrusted_parents) and not filter_legit_automation
+level: high

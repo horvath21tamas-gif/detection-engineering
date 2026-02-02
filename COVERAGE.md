@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 08:58:15`
+**Utolsó frissítés:** `2026-02-02 09:13:28`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 184 | 100% |
-| Splunk (SPL) | 182 | 98.9% |
-| Microsoft Sentinel (KQL) | 182 | 98.9% |
-| QRadar (AQL) | 105 | 57.1% |
-| Elastic (KQL/EQL) | 182 | 98.9% |
-| RSA NetWitness | 182 | 98.9% |
+| Sigma (Forrás) | 187 | 100% |
+| Splunk (SPL) | 185 | 98.9% |
+| Microsoft Sentinel (KQL) | 185 | 98.9% |
+| QRadar (AQL) | 108 | 57.8% |
+| Elastic (KQL/EQL) | 185 | 98.9% |
+| RSA NetWitness | 185 | 98.9% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -56,6 +56,8 @@
 | T1098.002 | CRITICAL | High-Fidelity Exchange Mailbox Permission Grant (T1098.002) |
 | T1098.003 | CRITICAL | High-Fidelity Entra ID App Certificate Addition |
 | T1098.004 | CRITICAL | High-Fidelity Azure Role Assignment Escalation |
+| T1098.005 | HIGH | High-Fidelity Device Registration Persistence (T1098.005) |
+| T1098.006 | CRITICAL | High-Fidelity MFA Method Addition |
 | T1105 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1106 | CRITICAL | High-Fidelity Native API Abuse via LOLBins |
 | T1110.001 | MEDIUM | Multiple Failed Login Attempts for Single User (Possible Password Guessing) |
@@ -90,6 +92,7 @@
 | T1546 | HIGH | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity), Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
 | T1546.003 | HIGH | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity) |
 | T1546.015 | HIGH | Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
+| T1547 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása |
 | T1547.001 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása, Suspicious Registry Run Key Modification for User Persistence (High Fidelity) |
 | T1548.002 | HIGH | UAC Bypass via Fodhelper Registry Hijack (High Fidelity) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |

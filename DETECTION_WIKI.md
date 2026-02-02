@@ -39,6 +39,8 @@
 - [High-Fidelity Exchange Mailbox Permission Grant (T1098.002)](#high-fidelity-exchange-mailbox-permission-grant-(t1098002))
 - [High-Fidelity Entra ID App Certificate Addition](#high-fidelity-entra-id-app-certificate-addition)
 - [High-Fidelity Azure Role Assignment Escalation](#high-fidelity-azure-role-assignment-escalation)
+- [High-Fidelity Device Registration Persistence (T1098.005)](#high-fidelity-device-registration-persistence-(t1098005))
+- [High-Fidelity MFA Method Addition](#high-fidelity-mfa-method-addition)
 - [Suspicious Use of Built-in Windows Tools for File Download and Code Execution](#suspicious-use-of-built-in-windows-tools-for-file-download-and-code-execution)
 - [High-Fidelity Native API Abuse via LOLBins](#high-fidelity-native-api-abuse-via-lolbins)
 - [Multiple Failed Login Attempts for Single User (Possible Password Guessing)](#multiple-failed-login-attempts-for-single-user-(possible-password-guessing))
@@ -806,6 +808,40 @@ to reduce noise and focus on manual privilege escalation.
 
 ---
 
+## High-Fidelity Device Registration Persistence (T1098.005)
+- **Azonosító:** `T1098_005.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious device registrations in Entra ID. Attackers register their own devices 
+to bypass Conditional Access policies that require a "registered" device state.
+This rule filters out managed enrollments and focuses on unmanaged or scripted registrations.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity MFA Method Addition
+- **Azonosító:** `T1098_006.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects when a new MFA method is added to a user account from a non-trusted location 
+or without a fresh MFA challenge. This is a primary persistence technique for attackers 
+to maintain access after an initial account compromise.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `006`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Suspicious Use of Built-in Windows Tools for File Download and Code Execution
 - **Azonosító:** `T1105.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
@@ -1304,7 +1340,7 @@ a common pattern for malware bypassing Mark-of-the-Web.
 - **Kritikusság:** 🟠 (high)
 - **Leírás:** Észleli a gyanús beállításjegyzékbeli vagy indítómappák módosításait, amelyeket az adatok megőrzése érdekében használnak, a nem szabványos elérési utakra és a gyanús végrehajtókra összpontosítva.
 - **Hamis pozitívok:** Szoftverfrissítők, amelyek ideiglenes mappából futtatnak telepítőt a következő bejelentkezéskor., Egyedi vállalati scriptek a Startup mappában.
-- **MITRE ATT&CK:** `001`
+- **MITRE ATT&CK:** `T1547, 001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (FolderPath in ("*/python", "*/python3", "*/python2", "*/pythonw.exe")) and ((ProcessCommandLine in ("*import socket*", "*pty.spawn*", "*base64.b64decode*", "*requests.get*", "*os.system*")) or (ParentProcessName in ("*/httpd", "*/apache2", "*/nginx", "*/php-fpm", "*/w3wp.exe", "*/sqlservr.exe", "*/redis-server"))) and (not ((ProcessCommandLine in ("*yum *", "*dnf *", "*cloud-init*", "*aws-cli*")) or (ParentProcessName in ("*/systemd", "*/sbin/init")) or (User =~ "root" and ParentProcessName =~ "/usr/sbin/sshd")))
+| where (FolderPath in ("*/python", "*/python3", "*/python2", "*/pythonw.exe")) and ((ProcessCommandLine in ("*import socket*", "*pty.spawn*", "*base64.b64decode*", "*requests.get*", "*os.system*")) or (ParentProcessName in ("*/httpd", "*/apache2", "*/nginx", "*/php-fpm", "*/w3wp.exe", "*/sqlservr.exe", "*/redis-server"))) and (not ((ProcessCommandLine in ("*yum *", "*dnf *", "*cloud-init*", "*aws-cli*")) or (ParentProcessName in ("*/systemd", "*/sbin/init")) or (username =~ "root" and Parentprocessname =~ "/usr/sbin/sshd")))

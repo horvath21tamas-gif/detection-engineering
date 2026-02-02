@@ -48,7 +48,7 @@ detection:
             - '/rpm'
             - '/ansible' 
             - '/puppet'
-        User: 'root'
+        username: 'root'
 
     selection_shell_origin:
         ParentImage|endswith:

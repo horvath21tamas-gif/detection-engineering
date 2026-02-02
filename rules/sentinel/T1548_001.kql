@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath endswith "/chmod" and (ProcessCommandLine in ("*u+s*", "*g+s*", "*4755*", "*4777*", "*2755*", "*4000*", "*2000*"))) and ((ProcessCommandLine in ("*/tmp/*", "*/dev/shm/*", "*/var/tmp/*", "*/home/*", "*/run/*")) or (ParentProcessName in ("*/bash", "*/zsh", "*/sh")))) or (FolderPath endswith "/find" and (ProcessCommandLine in ("*-perm -4000*", "*-perm -2000*")))) and (not ((ParentProcessName in ("*/apt", "*/dpkg", "*/yum", "*/dnf", "*/rpm", "*/ansible", "*/puppet")) and User =~ "root"))

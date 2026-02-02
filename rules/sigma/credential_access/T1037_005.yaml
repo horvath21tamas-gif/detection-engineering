@@ -1,0 +1,58 @@
+title: Ultra-Pro macOS Startup Items Persistence (T1037.005)
+id: 189911ad-0130-4574-9273-8add7c03563e
+status: stable
+description: |
+    Detects unauthorized creation of files in legacy StartupItems directories.
+    It minimizes false positives by whitelisting the official macOS installer 
+    subsystem and focusing on unsigned or script-generated persistence.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1037/005/
+tags:
+    - attack.persistence
+    - attack.t1037.005
+logsource:
+    product: windows
+    category: file_event
+detection:
+    selection_paths:
+        TargetFilename|startswith:
+            - '/Library/StartupItems/'
+            - '/System/Library/StartupItems/'
+
+    selection_suspicious_writer:
+        Image|endswith:
+            - '/bash'
+            - '/sh'
+            - '/zsh'
+            - '/python'
+            - '/python3'
+            - '/perl'
+            - '/curl'
+            - '/wget'
+            - '/nc'
+
+    selection_payload:
+        TargetFilename|endswith:
+            - '.sh'
+            - '.py'
+            - '.pl'
+            - '.php'
+
+    filter_macos_installers:
+        Image|endswith:
+            - '/installd'              
+            - '/systempreferences'     
+            - '/softwareupdated'     
+            - '/package_script_service' 
+        User: 'root'
+
+    filter_trusted_management:
+        Image|contains:
+            - '/jamf'
+            - '/kandji'
+            - '/managedclient'
+
+    condition: selection_paths and (selection_suspicious_writer or selection_payload) and not (filter_macos_installers or filter_trusted_management)
+level: critical

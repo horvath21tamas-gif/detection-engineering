@@ -1,0 +1,1 @@
+winlog.channel:Security AND ((event.code:5136 AND winlog.event_data.AttributeLDAPDisplayName:sIDHistory) AND (winlog.event_data.AttributeValue:(*\-500 OR *\-502 OR *\-512 OR *\-517 OR *\-518 OR *\-519 OR *\-544)) AND (NOT ((user.name:(*ADMT_* OR *MIGR_SVC*)) AND user.id:S\-1\-5\-18)))

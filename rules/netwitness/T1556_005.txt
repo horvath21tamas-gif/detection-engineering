@@ -1,0 +1,2 @@
+(EventID = 5136 AND ((AttributeLDAPDisplayName = '*sIDHistory*'))) AND (((AttributeValue = '*-500*' OR AttributeValue = '*-502*' OR AttributeValue = '*-512*' OR AttributeValue = '*-517*' OR AttributeValue = '*-518*' OR AttributeValue = '*-519*' OR AttributeValue = '*-544*'))) AND (NOT (((((SubjectUserName = '*ADMT_*' OR SubjectUserName = '*MIGR_SVC*'))) AND ((SubjectUserSid = '*S-1-5-18*'))))
+)

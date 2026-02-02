@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (EventID =~ 5136 and AttributeLDAPDisplayName =~ "sIDHistory") and (AttributeValue in ("*-500", "*-502", "*-512", "*-517", "*-518", "*-519", "*-544")) and (not ((SubjectUserName in ("*ADMT_*", "*MIGR_SVC*")) and SubjectUserSid =~ "S-1-5-18"))

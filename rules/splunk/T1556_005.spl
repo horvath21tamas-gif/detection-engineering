@@ -1,0 +1,1 @@
+source="WinEventLog:Security" EventCode=5136 AttributeLDAPDisplayName="sIDHistory" AttributeValue IN ("*-500", "*-502", "*-512", "*-517", "*-518", "*-519", "*-544") NOT (SubjectUserName IN ("*ADMT_*", "*MIGR_SVC*") SubjectUserSid="S-1-5-18")

@@ -7,6 +7,11 @@
 - [Suspicious Base64-Encoded PowerShell Command with Network Activity](#suspicious-base64-encoded-powershell-command-with-network-activity)
 - [Legitimate Windows Binary Copied to User-Writable Location](#legitimate-windows-binary-copied-to-user-writable-location)
 - [High-Fidelity Logon Script Persistence (T1037)](#high-fidelity-logon-script-persistence-(t1037))
+- [High-Fidelity UserInitMprLogonScript Persistence](#high-fidelity-userinitmprlogonscript-persistence)
+- [High-Fidelity Netsh Helper DLL Persistence](#high-fidelity-netsh-helper-dll-persistence)
+- [Ultra-Pro Network Logon Script/Shortcut Modification (T1037.003)](#ultra-pro-network-logon-scriptshortcut-modification-(t1037003))
+- [Ultra-Pro RC Script and Init.d Persistence (T1037.004)](#ultra-pro-rc-script-and-initd-persistence-(t1037004))
+- [Ultra-Pro macOS Startup Items Persistence (T1037.005)](#ultra-pro-macos-startup-items-persistence-(t1037005))
 - [Suspicious Remote Process Creation via WMIC](#suspicious-remote-process-creation-via-wmic)
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [High-Fidelity At.exe Activity Detection](#high-fidelity-atexe-activity-detection)
@@ -287,6 +292,90 @@
 Attackers use this to bypass GPO-based logon scripts and execute malicious code at every logon.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity UserInitMprLogonScript Persistence
+- **Azonosító:** `T1037_001.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized creation or modification of the UserInitMprLogonScript registry key.
+This is a high-fidelity rule because it filters out standard GPO updates and focuses on 
+user-writable paths and suspicious execution patterns.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Netsh Helper DLL Persistence
+- **Azonosító:** `T1037_002.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the registration of a new Netsh Helper DLL. 
+Attackers use this to maintain persistence by loading a malicious DLL 
+whenever netsh.exe or a related networking service starts.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Network Logon Script/Shortcut Modification (T1037.003)
+- **Azonosító:** `T1037_003.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized modification of scripts (.bat, .ps1, .vbs) or shortcuts (.lnk) 
+within sensitive network shares like NETLOGON or SYSVOL. 
+It specifically filters out legitimate DFS replication and system-level updates.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro RC Script and Init.d Persistence (T1037.004)
+- **Azonosító:** `T1037_004.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized modification of RC scripts, init.d, or systemd generators by non-package manager processes.
+Attackers use these to gain root persistence on Linux/macOS systems.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro macOS Startup Items Persistence (T1037.005)
+- **Azonosító:** `T1037_005.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized creation of files in legacy StartupItems directories.
+It minimizes false positives by whitelisting the official macOS installer 
+subsystem and focusing on unsigned or script-generated persistence.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetFilename in ("/Library/StartupItems/*", "/System/Library/StartupItems/*")) and ((FolderPath in ("*/bash", "*/sh", "*/zsh", "*/python", "*/python3", "*/perl", "*/curl", "*/wget", "*/nc")) or (TargetFilename in ("*.sh", "*.py", "*.pl", "*.php"))) and (not (((FolderPath in ("*/installd", "*/systempreferences", "*/softwareupdated", "*/package_script_service")) and User =~ "root") or (FolderPath in ("*/jamf*", "*/kandji*", "*/managedclient*"))))

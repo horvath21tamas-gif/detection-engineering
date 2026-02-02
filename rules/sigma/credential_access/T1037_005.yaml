@@ -46,7 +46,7 @@ detection:
             - '/systempreferences'     
             - '/softwareupdated'     
             - '/package_script_service' 
-        User: 'root'
+        username: 'root'
 
     filter_trusted_management:
         Image|contains:

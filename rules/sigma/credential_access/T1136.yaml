@@ -1,0 +1,58 @@
+title: Ultra-Pro Unauthorized Account Creation (T1136)
+id: b56971f6-7c5b-415e-bdc8-3731e6833503
+status: stable
+description: |
+    Detects local or domain account creation by identifying suspicious process lineages 
+    and command-line patterns while filtering out authorized system and deployment tools.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1136/001/
+tags:
+    - attack.persistence
+    - attack.t1136.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_commands:
+        CommandLine|contains:
+            - 'user /add'
+            - 'user /ad'
+            - 'New-LocalUser'
+            - 'New-ADUser'
+            - 'ad-user -name'
+
+    selection_obfuscation:
+        CommandLine|contains:
+            - '$ ' 
+            - 'password' 
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\w3wp.exe'       
+            - '\httpd.exe'      
+            - '\sqlservr.exe'    
+            - '\winword.exe'     
+            - '\powershell.exe'  
+
+    filter_trusted_automation:
+        ParentImage|endswith:
+            - '\CcmExec.exe'
+            - '\omadmac.exe'   
+            - '\svchost.exe'     
+        Image|endswith:
+            - '\net.exe'
+            - '\net1.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_known_installers:
+        ParentImage|contains:
+            - '\Windows\Temp\'
+            - '\ConfigMgr\'
+        CommandLine|contains:
+            - 'MSSQL$'
+            - 'IIS_'
+
+    condition: selection_commands and (selection_suspicious_parent or (not filter_trusted_automation and not filter_known_installers))
+level: critical

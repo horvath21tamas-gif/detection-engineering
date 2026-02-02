@@ -1,0 +1,50 @@
+title: Ultra-Pro Unauthorized Domain Account Creation (T1136.002)
+id: 41d30788-8ea0-4daa-808d-112e57d83e31
+status: stable
+description: |
+    Detects domain account creation by identifying suspicious process lineages and 
+    non-standard execution environments. Filters out authorized IAM, HR-sync tools, 
+    and official AD management consoles.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1136/002/
+tags:
+    - attack.persistence
+    - attack.t1136.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_commands:
+        CommandLine|contains:
+            - 'user /add /domain'
+            - 'user /ad /domain'
+            - 'New-ADUser'
+            - 'dsadd user'
+
+    selection_suspicious_lineage:
+        ParentImage|endswith:
+            - '\wsmprovhost.exe'   
+            - '\psexesvc.exe'      
+            - '\wmiprvse.exe'      
+            - '\w3wp.exe'          
+            - '\powershell.exe'    
+
+    filter_trusted_interfaces:
+        ParentImage|endswith:
+            - '\mmc.exe'           
+            - '\dsac.exe'         
+            - '\ServerManager.exe'
+        User|contains:
+            - 'svc_iam'          
+            - 'svc_hr_sync'       
+
+    filter_standard_dc_ops:
+        Image|endswith:
+            - '\lsass.exe'
+            - '\services.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_commands and (selection_suspicious_lineage or (not filter_trusted_interfaces and not filter_standard_dc_ops))
+level: critical

@@ -1,0 +1,79 @@
+title: .NET AppDomainManager Hijacking via Non-GAC Assembly
+id: 2ef7b7ed-130d-438c-a7f1-55e798afabf7
+status: stable
+description: >
+  Detects .NET AppDomainManager hijacking by identifying .NET runtime
+  hosts that load a managed assembly from a user-writable directory
+  at process initialization, outside of the GAC and Microsoft .NET
+  framework paths. This behavior is highly indicative of malicious
+  AppDomainManager abuse.
+references:
+  - https://attack.mitre.org/techniques/T1574/009/
+author: hota05
+date: 2026/02/02
+tags:
+  - attack.persistence
+  - attack.privilege_escalation
+  - attack.defense_evasion
+  - attack.t1574.009
+
+logsource:
+  category: image_load
+  product: windows
+
+detection:
+  dotnet_runtime_hosts:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\wsmprovhost.exe'
+      - '\installutil.exe'
+      - '\regasm.exe'
+      - '\regsvcs.exe'
+      - '\mshta.exe'
+      - '\dotnet.exe'
+
+  early_managed_assembly:
+    ImageLoaded|endswith: '.dll'
+
+  user_writable_assembly_path:
+    ImageLoaded|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\ProgramData\'
+
+  exclude_gac_and_framework:
+    ImageLoaded|contains:
+      - '\Windows\assembly\'
+      - '\assembly\GAC'
+      - '\assembly\GAC_MSIL'
+      - '\assembly\GAC_32'
+      - '\assembly\GAC_64'
+      - '\Microsoft.NET\'
+
+  exclude_system_dirs:
+    ImageLoaded|contains:
+      - '\Windows\System32\'
+      - '\Windows\SysWOW64\'
+
+  exclude_known_dev_hosts:
+    Image|endswith:
+      - '\devenv.exe'
+      - '\msbuild.exe'
+      - '\csc.exe'
+      - '\vbc.exe'
+      - '\nunit.exe'
+      - '\resharper.exe'
+
+  condition: dotnet_runtime_hosts
+             and early_managed_assembly
+             and user_writable_assembly_path
+             and not exclude_gac_and_framework
+             and not exclude_system_dirs
+             and not exclude_known_dev_hosts
+
+falsepositives:
+  - Almost non-existent in production environments
+  - Highly specialized .NET research or red team activity
+
+level: critical

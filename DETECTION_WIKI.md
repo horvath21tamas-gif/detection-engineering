@@ -1060,7 +1060,7 @@ credential stuffing or lateral movement from external jump boxes.
 - **Leírás:** Detects local or domain account creation by identifying suspicious process lineages 
 and command-line patterns while filtering out authorized system and deployment tools.
 - **Hamis pozitívok:** Nincs megadva
-- **MITRE ATT&CK:** `001`
+- **MITRE ATT&CK:** `T1136`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

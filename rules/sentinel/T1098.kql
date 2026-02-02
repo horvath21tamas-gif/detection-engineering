@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where EventID =~ 4738 and (PasswordNeverExpires =~ "true" or SidHistory startswith "" or AllowedToDelegateTo startswith "" or SecurityDescriptor startswith "") and (not (SubjectUserSid =~ "S-1-5-18" or (SubjectUserName in ("*MSOL_*", "*AD_Sync_Admin*", "*AzureADConnect*")) or (ComputerName in ("*PAW-ADMIN-*", "*JUMP-HOST-*"))))

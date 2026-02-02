@@ -1,0 +1,2 @@
+EventID = 4738 AND (((PasswordNeverExpires = '*true*'))|| SidHistory begins '' OR AllowedToDelegateTo begins '' OR SecurityDescriptor begins '') AND (NOT ((((SubjectUserSid = '*S-1-5-18*'))|| (((SubjectUserName = '*MSOL_*' OR SubjectUserName = '*AD_Sync_Admin*' OR SubjectUserName = '*AzureADConnect*'))) OR (((ComputerName = '*PAW-ADMIN-*' OR ComputerName = '*JUMP-HOST-*')))))
+)

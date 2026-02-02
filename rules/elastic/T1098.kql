@@ -1,0 +1,1 @@
+winlog.channel:Security AND (event.code:4738 AND (winlog.event_data.PasswordNeverExpires:true OR winlog.event_data.SidHistory:* OR winlog.event_data.AllowedToDelegateTo:* OR winlog.event_data.SecurityDescriptor:*) AND (NOT (user.id:S\-1\-5\-18 OR (user.name:(*MSOL_* OR *AD_Sync_Admin* OR *AzureADConnect*)) OR (winlog.computer_name:(*PAW\-ADMIN\-* OR *JUMP\-HOST\-*)))))

@@ -82,6 +82,8 @@
 - [High-Fidelity Process Spawn from Business Communication Service](#high-fidelity-process-spawn-from-business-communication-service)
 - [High-Fidelity Detection of Post-Vishing Remote Tool Execution](#high-fidelity-detection-of-post-vishing-remote-tool-execution)
 - [High-Fidelity System Service Execution Detection](#high-fidelity-system-service-execution-detection)
+- [High-Fidelity Launch Daemon Persistence Detection](#high-fidelity-launch-daemon-persistence-detection)
+- [High-Fidelity System Service Execution Detection (T1569.002)](#high-fidelity-system-service-execution-detection-(t1569002))
 - [High-Fidelity Offensive Infrastructure Provisioning - T1583](#high-fidelity-offensive-infrastructure-provisioning---t1583)
 - [High-Fidelity VPS Infrastructure Provisioning - T1583.001](#high-fidelity-vps-infrastructure-provisioning---t1583001)
 - [High-Fidelity Automated Domain Registration & Acquisition - T1583.002](#high-fidelity-automated-domain-registration-&-acquisition---t1583002)
@@ -1465,6 +1467,40 @@ the victim is instructed to run "support" software.
 - **Leírás:** Detects the creation or execution of system services with suspicious characteristics, 
 such as binaries located in world-writable directories or services used as 
 wrappers for shell commands. Optimized to filter out legitimate software installers.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Launch Daemon Persistence Detection
+- **Azonosító:** `T1569_001.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the creation or modification of Launch Daemons by monitoring 
+untrusted parent processes and suspicious command-line strings. 
+Optimized to filter out Apple and common third-party installers.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity System Service Execution Detection (T1569.002)
+- **Azonosító:** `T1569_002.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious service execution or modification by monitoring anomalous 
+parent processes, world-writable binary paths, and shell command wrappers. 
+Optimized for low false positive rates in enterprise environments.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 

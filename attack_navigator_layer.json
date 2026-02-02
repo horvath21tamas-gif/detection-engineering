@@ -8,6 +8,10 @@
     "domain": "enterprise-attack",
     "techniques": [
         {
+            "techniqueID": "T1574.013",
+            "color": "#ff6666"
+        },
+        {
             "techniqueID": "T1059.009",
             "color": "#ff6666"
         },
@@ -137,6 +141,10 @@
         },
         {
             "techniqueID": "T1078.003",
+            "color": "#ff6666"
+        },
+        {
+            "techniqueID": "T1556",
             "color": "#ff6666"
         },
         {
@@ -309,6 +317,10 @@
         },
         {
             "techniqueID": "T1056.004",
+            "color": "#ff6666"
+        },
+        {
+            "techniqueID": "T1556.001",
             "color": "#ff6666"
         },
         {
@@ -660,6 +672,10 @@
             "color": "#ff6666"
         },
         {
+            "techniqueID": "T1556.002",
+            "color": "#ff6666"
+        },
+        {
             "techniqueID": "T1021.001",
             "color": "#ffbd66"
         },
@@ -897,6 +913,10 @@
         },
         {
             "techniqueID": "T1595.003",
+            "color": "#ff6666"
+        },
+        {
+            "techniqueID": "T1525",
             "color": "#ff6666"
         },
         {

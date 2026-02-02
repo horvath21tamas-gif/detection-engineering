@@ -42,7 +42,7 @@ detection:
       - '\taskmgr.exe' 
 
   exclude_system_and_parent:
-    - SourceUser: 'NT AUTHORITY\SYSTEM'
+    - Sourceusername: 'NT AUTHORITY\SYSTEM'
     - ParentImage|endswith: '\explorer.exe' 
 
   condition: gui_target_process and dangerous_memory_access and not (exclude_standard_software or exclude_system_and_parent)

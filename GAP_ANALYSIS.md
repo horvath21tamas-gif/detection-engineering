@@ -1,13 +1,13 @@
 # 🎯 Detection Strategy & Gap Analysis
-*Frissítve: 2026-02-02 12:17:49*
+*Frissítve: 2026-02-02 12:53:08*
 
 ## 📊 Állapotösszegző
 | Mutató | Érték |
 | :--- | :--- |
-| Összes szabály | 241 |
-| Aktív (van logforrás) | 233 |
-| Inaktív (hiányzó log) | 8 |
-| MITRE Lefedettség | 238 technika |
+| Összes szabály | 250 |
+| Aktív (van logforrás) | 241 |
+| Inaktív (hiányzó log) | 9 |
+| MITRE Lefedettség | 247 technika |
 
 ## 🛑 Kritikus Adatforrás Hiányok
 Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logokat:

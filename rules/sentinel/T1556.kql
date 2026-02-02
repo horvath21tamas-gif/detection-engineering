@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetObject in ("HKLM\SYSTEM\CurrentControlSet\Control\Lsa*", "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders*", "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication*")) and (TargetObject in ("*\Authentication Packages", "*\Security Packages", "*\Providers", "*\Credential Providers")) and Details contains ".dll" and (Details in ("*\Users\*", "*\Users\Public\*", "*\ProgramData\*", "*\AppData\*", "*\Temp\*")) and (not (Details in ("*\Windows\System32\*", "*\Windows\SysWOW64\*"))) and (not (FolderPath in ("*\Windows\System32\lsass.exe*", "*\Windows\System32\services.exe*", "*\Windows\System32\msiexec.exe*", "*\Windows\servicing\*"))) and (not (User in ("*NT AUTHORITY\SYSTEM*", "*NT SERVICE\TrustedInstaller*")))

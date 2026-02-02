@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 12:17:51`
+**Utolsó frissítés:** `2026-02-02 12:53:10`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 241 | 100% |
-| Splunk (SPL) | 223 | 92.5% |
-| Microsoft Sentinel (KQL) | 224 | 92.9% |
-| QRadar (AQL) | 131 | 54.4% |
-| Elastic (KQL/EQL) | 224 | 92.9% |
-| RSA NetWitness | 223 | 92.5% |
+| Sigma (Forrás) | 250 | 100% |
+| Splunk (SPL) | 232 | 92.8% |
+| Microsoft Sentinel (KQL) | 233 | 93.2% |
+| QRadar (AQL) | 138 | 55.2% |
+| Elastic (KQL/EQL) | 233 | 93.2% |
+| RSA NetWitness | 231 | 92.4% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -98,6 +98,7 @@
 | T1486 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1490 | CRITICAL | Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity), Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1505.003 | HIGH | Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
+| T1525 | CRITICAL | Exploit-Grade Unauthorized Container Image Execution (Implant Container Image) |
 | T1543 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1543.001 | CRITICAL | Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001) |
 | T1543.002 | CRITICAL | High-Fidelity Systemd Timer Persistence Detection, Ultra-Pro Systemd Service Persistence (T1543.002) |
@@ -139,6 +140,9 @@
 | T1548.002 | HIGH | UAC Bypass via Fodhelper Registry Hijack (High Fidelity) |
 | T1554 | CRITICAL | Ultra-Pro Client Binary Integrity Compromise (T1554) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
+| T1556 | CRITICAL | Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration |
+| T1556.001 | CRITICAL | Exploit-Grade Security Support Provider Hijacking (LSA SSP) |
+| T1556.002 | CRITICAL | Exploit-Grade Password Filter DLL Hijacking via LSA Notification Packages |
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |
 | T1559 | CRITICAL | High-Fidelity Indirect IPC and COM Execution |
 | T1559.001 | HIGH | High-Fidelity Indirect IPC and COM Execution, Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity) |
@@ -165,6 +169,11 @@
 | T1574.006 | CRITICAL | Dynamic Linker Hijacking Against Privileged Binary |
 | T1574.007 | CRITICAL | PATH Hijacking Leading to Privileged Binary Execution |
 | T1574.008 | CRITICAL | .NET Assembly Search Order Hijacking via User-Writable Directory |
+| T1574.009 | CRITICAL | .NET AppDomainManager Hijacking via Non-GAC Assembly |
+| T1574.010 | CRITICAL | Privileged Service Executable Overwritten from User-Writable Location |
+| T1574.011 | CRITICAL | Privileged Service ImagePath or ServiceDll Hijacked via Registry |
+| T1574.012 | CRITICAL | Exploit-Grade COR_PROFILER Hijacking via User-Writable Profiler DLL |
+| T1574.013 | CRITICAL | Exploit-Grade KernelCallbackTable Manipulation via Remote Memory Write |
 | T1583 | HIGH | High-Fidelity Offensive Infrastructure Provisioning - T1583 |
 | T1583.001 | HIGH | High-Fidelity VPS Infrastructure Provisioning - T1583.001 |
 | T1583.002 | HIGH | High-Fidelity Automated Domain Registration & Acquisition - T1583.002 |

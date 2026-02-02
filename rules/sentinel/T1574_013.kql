@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetImage in ("*\explorer.exe", "*\dwm.exe", "*\taskhostw.exe")) and (GrantedAccess in ("*0x28*", "*0x20*", "*0x1fffff*")) and (not (((SourceImage in ("*\Visual Studio\*", "*\WinDbg\*", "*\Windows Defender\*", "*\CrowdStrike\*", "*\SentinelOne\*", "*\CarbonBlack\*", "*\Tanium\*")) and (SourceImage in ("*\procmon.exe", "*\procexp.exe", "*\taskmgr.exe"))) or (SourceUser =~ "NT AUTHORITY\SYSTEM" or ParentProcessName endswith "\explorer.exe")))

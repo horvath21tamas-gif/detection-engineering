@@ -80,6 +80,7 @@
 - [Ransomware Preparation Activity Detected on Windows Host (High Fidelity)](#ransomware-preparation-activity-detected-on-windows-host-(high-fidelity))
 - [Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity)](#suspicious-deletion-of-volume-shadow-copies-via-vssadmin-(high-fidelity))
 - [Webshell Upload or Interaction Detected on Web Server (High Fidelity)](#webshell-upload-or-interaction-detected-on-web-server-(high-fidelity))
+- [Exploit-Grade Unauthorized Container Image Execution (Implant Container Image)](#exploit-grade-unauthorized-container-image-execution-(implant-container-image))
 - [Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services](#non-admin-user-attempting-to-stop-or-modify-multiple-sensitive-windows-services)
 - [Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001)](#ultra-pro-macos-launch-agent-persistence-detection-(t1543001))
 - [Ultra-Pro Systemd Service Persistence (T1543.002)](#ultra-pro-systemd-service-persistence-(t1543002))
@@ -121,6 +122,9 @@
 - [UAC Bypass via Fodhelper Registry Hijack (High Fidelity)](#uac-bypass-via-fodhelper-registry-hijack-(high-fidelity))
 - [Ultra-Pro Client Binary Integrity Compromise (T1554)](#ultra-pro-client-binary-integrity-compromise-(t1554))
 - [Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)](#nem-böngészős-folyamat-hozzáférése-a-böngésző-hitelesítőadat-tárolóihoz-(high-fidelity))
+- [Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration](#exploit-grade-authentication-process-hijack-via-suspicious-dll-registration)
+- [Exploit-Grade Security Support Provider Hijacking (LSA SSP)](#exploit-grade-security-support-provider-hijacking-(lsa-ssp))
+- [Exploit-Grade Password Filter DLL Hijacking via LSA Notification Packages](#exploit-grade-password-filter-dll-hijacking-via-lsa-notification-packages)
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
 - [High-Fidelity Indirect IPC and COM Execution](#high-fidelity-indirect-ipc-and-com-execution)
 - [Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity)](#gyanús-elnevezett-csővezeték-létrehozás-amely-utólagos-kihasználási-eszközökhöz-kapcsolódik-(high-fidelity))
@@ -147,6 +151,11 @@
 - [Dynamic Linker Hijacking Against Privileged Binary](#dynamic-linker-hijacking-against-privileged-binary)
 - [PATH Hijacking Leading to Privileged Binary Execution](#path-hijacking-leading-to-privileged-binary-execution)
 - [.NET Assembly Search Order Hijacking via User-Writable Directory](#net-assembly-search-order-hijacking-via-user-writable-directory)
+- [.NET AppDomainManager Hijacking via Non-GAC Assembly](#net-appdomainmanager-hijacking-via-non-gac-assembly)
+- [Privileged Service Executable Overwritten from User-Writable Location](#privileged-service-executable-overwritten-from-user-writable-location)
+- [Privileged Service ImagePath or ServiceDll Hijacked via Registry](#privileged-service-imagepath-or-servicedll-hijacked-via-registry)
+- [Exploit-Grade COR_PROFILER Hijacking via User-Writable Profiler DLL](#exploit-grade-cor_profiler-hijacking-via-user-writable-profiler-dll)
+- [Exploit-Grade KernelCallbackTable Manipulation via Remote Memory Write](#exploit-grade-kernelcallbacktable-manipulation-via-remote-memory-write)
 - [High-Fidelity Offensive Infrastructure Provisioning - T1583](#high-fidelity-offensive-infrastructure-provisioning---t1583)
 - [High-Fidelity VPS Infrastructure Provisioning - T1583.001](#high-fidelity-vps-infrastructure-provisioning---t1583001)
 - [High-Fidelity Automated Domain Registration & Acquisition - T1583.002](#high-fidelity-automated-domain-registration-&-acquisition---t1583002)
@@ -1526,6 +1535,21 @@ a common pattern for malware bypassing Mark-of-the-Web.
 
 ---
 
+## Exploit-Grade Unauthorized Container Image Execution (Implant Container Image)
+- **Azonosító:** `T1525.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects execution of container images that are not sourced from approved registries and are executed outside of CI/CD or system namespaces, indicating potential use of implanted container images for persistence or initial access.
+- **Hamis pozitívok:** Explicitly approved manual container testing on isolated nodes, Emergency break-glass debugging with documented approval
+- **MITRE ATT&CK:** `T1525`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services
 - **Azonosító:** `T1543.yaml`
 - **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
@@ -2190,6 +2214,51 @@ Focuses on cases where the writing process is a LOLBin or the file lacks a valid
 
 ---
 
+## Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration
+- **Azonosító:** `T1556.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects exploitation-grade modification of the Windows authentication process where a non-system process registers a new authentication-related DLL from a user-writable directory into LSA, SSP, or Credential Provider registry locations, strongly indicating credential interception.
+- **Hamis pozitívok:** Extremely rare, explicitly approved third-party authentication extensions, Legacy SSO components with insecure installation practices (should be allowlisted)
+- **MITRE ATT&CK:** `T1556`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Exploit-Grade Security Support Provider Hijacking (LSA SSP)
+- **Azonosító:** `T1556_001.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects exploitation-grade Security Support Provider (SSP) hijacking by identifying unauthorized modification of the LSA Security Packages registry value to register a new, non-system DLL from a user-writable directory by a non-trusted process or account.
+- **Hamis pozitívok:** Extremely rare, explicitly approved third-party SSP deployments, Legacy authentication extensions with insecure installers (should be allowlisted)
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Exploit-Grade Password Filter DLL Hijacking via LSA Notification Packages
+- **Azonosító:** `T1556_002.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects exploitation-grade installation of a malicious Password Filter DLL by identifying unauthorized modification of the LSA Notification Packages registry value to add a new DLL located in a user-writable directory by a non-trusted process or account. This behavior strongly indicates credential interception on Domain Controllers.
+- **Hamis pozitívok:** Explicitly approved custom password policy extensions (should be extremely rare and allowlisted), Controlled red team or malware research environments
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Gyanús Kerberos TGS jegykérés (Kerberoasting)
 - **Azonosító:** `T1558_003.yaml`
 - **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
@@ -2609,6 +2678,83 @@ with a malicious one due to insecure directory permissions.
 - **Leírás:** Detects potential .NET Assembly Search Order Hijacking where a legitimate .NET runtime host loads a managed assembly from a user-writable directory outside of the GAC, Microsoft.NET framework paths, or the application installation directory.
 - **Hamis pozitívok:** Extremely rare legacy .NET applications with local assembly loading, Explicitly misconfigured enterprise applications
 - **MITRE ATT&CK:** `008`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## .NET AppDomainManager Hijacking via Non-GAC Assembly
+- **Azonosító:** `T1574_009.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects .NET AppDomainManager hijacking by identifying .NET runtime hosts that load a managed assembly from a user-writable directory at process initialization, outside of the GAC and Microsoft .NET framework paths. This behavior is highly indicative of malicious AppDomainManager abuse.
+- **Hamis pozitívok:** Almost non-existent in production environments, Highly specialized .NET research or red team activity
+- **MITRE ATT&CK:** `009`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Privileged Service Executable Overwritten from User-Writable Location
+- **Azonosító:** `T1574_010.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects exploitation of weak service file permissions where a registered Windows service executable running with high privileges is overwritten or modified from a user-writable directory by a non-system process.
+- **Hamis pozitívok:** Extremely rare legacy third-party services installed in unsafe paths, Misconfigured enterprise software with self-updating service binaries
+- **MITRE ATT&CK:** `010`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Privileged Service ImagePath or ServiceDll Hijacked via Registry
+- **Azonosító:** `T1574_011.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects exploitation of weak Windows service registry permissions where a non-system process modifies critical service registry values to point to an executable or DLL located in a user-writable directory, enabling privilege escalation upon service start or restart.
+- **Hamis pozitívok:** Extremely rare legacy software with insecure service update mechanisms, Intentionally vulnerable lab or red team environments
+- **MITRE ATT&CK:** `011`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Exploit-Grade COR_PROFILER Hijacking via User-Writable Profiler DLL
+- **Azonosító:** `T1574_012.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects exploitation of COR_PROFILER hijacking where a .NET runtime host is executed with profiling enabled and a custom profiler DLL specified from a user-writable directory, excluding legitimate Microsoft, Visual Studio, and APM profiling use cases.
+- **Hamis pozitívok:** Extremely rare, explicitly approved .NET profiling on production systems, Controlled red team or malware research environments
+- **MITRE ATT&CK:** `012`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Exploit-Grade KernelCallbackTable Manipulation via Remote Memory Write
+- **Azonosító:** `T1574_013.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects remote memory write operations into GUI processes which are prerequisites 
+for KernelCallbackTable hijacking. This technique is often used for process 
+injection that evades standard hook-based monitoring.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `013`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\wscript.exe", "*\cscript.exe")) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powerpnt.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\mshta.exe")) or (ProcessCommandLine in ("*\AppData\Local\Temp\*", "*\Users\Public\*", "*http*", "*xmlhttp*", "*adodb.stream*", "* -e:vbscript.encode*"))) and (not ((ProcessCommandLine in ("*\slmgr.vbs*", "*\manage-bde.vbs*", "*\prnmngr.vbs*", "*\pubprn.vbs*")) or ParentProcessName endswith "\services.exe"))

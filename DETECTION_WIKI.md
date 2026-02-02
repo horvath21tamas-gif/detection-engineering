@@ -261,6 +261,7 @@
 - [High-Fidelity Serverless Function Persistence or Abuse](#high-fidelity-serverless-function-persistence-or-abuse)
 - [High-Fidelity Cloud Account Acquisition and Initialization - T1650](#high-fidelity-cloud-account-acquisition-and-initialization---t1650)
 - [High-Fidelity Cloud Administration Agent Abuse](#high-fidelity-cloud-administration-agent-abuse)
+- [Ultra-Pro Power Settings Manipulation (T1137.001)](#ultra-pro-power-settings-manipulation-(t1137001))
 - [Professional Content Impersonation and Infrastructure Mirroring](#professional-content-impersonation-and-infrastructure-mirroring)
 - [Credential Dumping LSASS](#credential-dumping-lsass)
 
@@ -4408,6 +4409,22 @@ that bypass traditional network perimeter defenses.
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Power Settings Manipulation (T1137.001)
+- **Azonosító:** `T1653.yaml`
+- **Minőségi mutató:** `50/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟡 (medium)
+- **Leírás:** Detects unauthorized power setting modifications aimed at preventing sleep or 
+hibernation. Focuses on command-line automation (powercfg) via suspicious 
+parent processes like PowerShell or CMD, while filtering legitimate UI-based changes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1653`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 
 ---
 

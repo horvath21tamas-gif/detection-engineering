@@ -279,4 +279,5 @@
 | T1648 | HIGH | High-Fidelity Serverless Function Persistence or Abuse |
 | T1650 | HIGH | High-Fidelity Cloud Account Acquisition and Initialization - T1650 |
 | T1651 | CRITICAL | High-Fidelity Cloud Administration Agent Abuse |
+| T1653 | MEDIUM | Ultra-Pro Power Settings Manipulation (T1137.001) |
 | T1659 | HIGH | Professional Content Impersonation and Infrastructure Mirroring |

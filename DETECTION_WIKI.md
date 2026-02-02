@@ -90,6 +90,11 @@
 - [Ultra-Pro Screensaver Persistence Detection (T1546.002)](#ultra-pro-screensaver-persistence-detection-(t1546002))
 - [WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity)](#wmi-event-subscription-persistence-via-wmic-or-powershell-(high-fidelity))
 - [Ultra-Pro AppCert DLL Persistence Detection (T1546.004)](#ultra-pro-appcert-dll-persistence-detection-(t1546004))
+- [Ultra-Pro Shell Trap Persistence Detection (T1546.005)](#ultra-pro-shell-trap-persistence-detection-(t1546005))
+- [Ultra-Pro Mach-O LC_LOAD_DYLIB Injection (T1546.006)](#ultra-pro-mach-o-lc_load_dylib-injection-(t1546006))
+- [Ultra-Pro Netsh Helper DLL Persistence (T1546.007)](#ultra-pro-netsh-helper-dll-persistence-(t1546007))
+- [Ultra-Pro WER SilentProcessExit Persistence (T1546.008)](#ultra-pro-wer-silentprocessexit-persistence-(t1546008))
+- [Ultra-Pro AppInit_DLLs Persistence Detection (T1546.009)](#ultra-pro-appinit_dlls-persistence-detection-(t1546009))
 - [Suspicious COM Hijacking for User-Level Persistence (High Fidelity)](#suspicious-com-hijacking-for-user-level-persistence-(high-fidelity))
 - [Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása](#gyanús-rendszerindítási-vagy-bejelentkezési-automatikus-indítás-végrehajtása)
 - [Suspicious Registry Run Key Modification for User Persistence (High Fidelity)](#suspicious-registry-run-key-modification-for-user-persistence-(high-fidelity))
@@ -1657,6 +1662,89 @@ Registry key. It filters out trusted system installers and requires non-standard
 paths or suspicious process lineages to trigger.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Shell Trap Persistence Detection (T1546.005)
+- **Azonosító:** `T1546_005.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized shell trap persistence by monitoring writes to shell profile files 
+that include 'trap' commands combined with suspicious network payloads or execution patterns.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Mach-O LC_LOAD_DYLIB Injection (T1546.006)
+- **Azonosító:** `T1546_006.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized modification of Mach-O binaries to inject malicious dylibs. 
+Focuses on non-developer tools modifying Application binaries and checks for 
+suspicious dylib search paths or unsigned library loads.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `006`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Netsh Helper DLL Persistence (T1546.007)
+- **Azonosító:** `T1546_007.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized Netsh Helper DLL registration by monitoring Registry writes 
+and command-line arguments. Filters out known-good installers and signed Microsoft binaries.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `007`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro WER SilentProcessExit Persistence (T1546.008)
+- **Azonosító:** `T1546_008.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized persistence via Windows Error Reporting (WER) SilentProcessExit. 
+Focuses on the registration of 'MonitorProcess' commands which execute when a process 
+crashes or exits, excluding known debugging environments.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `008`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro AppInit_DLLs Persistence Detection (T1546.009)
+- **Azonosító:** `T1546_009.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized persistence via AppInit_DLLs by monitoring Registry writes 
+to the 'AppInit_DLLs' and 'LoadAppInit_DLLs' values. 
+Filters out signed Microsoft binaries and trusted system installers.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `009`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

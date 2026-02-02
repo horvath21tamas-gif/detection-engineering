@@ -1,0 +1,45 @@
+title: Ultra-Pro Office Global Template Integrity (T1137.001)
+id: 3840d2b9-4a1f-419c-8d28-d9be0173f744
+status: stable
+description: |
+    Detects high-risk modifications to the Office global template (Normal.dotm) by 
+    identifying non-Office processes or suspicious file creation patterns in the 
+    Templates directory.
+author: hota05
+date: 2026-02-02
+tags:
+    - attack.persistence
+    - attack.t1137.001
+logsource:
+    product: windows
+    category: file_event
+detection:
+    selection_target:
+        TargetFilename|contains: '\AppData\Roaming\Microsoft\Templates\'
+        TargetFilename|endswith:
+            - '\Normal.dotm'
+            - '\NormalEmail.dotm'
+
+    selection_illegal_process:
+        Image|not|endswith:
+            - '\winword.exe'
+            - '\outlook.exe'
+            - '\msiexec.exe'
+            - '\setup.exe'
+            - '\OfficeClickToRun.exe'
+
+    selection_operation:
+        - action: 'Rename'
+        - action: 'Write' 
+
+    filter_trusted_management:
+        Image|contains:
+            - '\Windows\ccm\'
+            - '\Microsoft\IntuneManagementExtension\'
+            - '\Tanium\'
+        Image|endswith:
+            - '\OneDrive.exe'
+            - '\MigrateUser.exe'
+
+    condition: selection_target and selection_illegal_process and not filter_trusted_management
+level: critical

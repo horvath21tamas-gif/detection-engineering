@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 08:24:19`
+**Utolsó frissítés:** `2026-02-02 08:30:59`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 169 | 100% |
-| Splunk (SPL) | 169 | 100.0% |
-| Microsoft Sentinel (KQL) | 169 | 100.0% |
-| QRadar (AQL) | 97 | 57.4% |
-| Elastic (KQL/EQL) | 169 | 100.0% |
-| RSA NetWitness | 169 | 100.0% |
+| Sigma (Forrás) | 173 | 100% |
+| Splunk (SPL) | 173 | 100.0% |
+| Microsoft Sentinel (KQL) | 173 | 100.0% |
+| QRadar (AQL) | 100 | 57.8% |
+| Elastic (KQL/EQL) | 173 | 100.0% |
+| RSA NetWitness | 173 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -28,6 +28,7 @@
 | T1053.002 | HIGH | High-Fidelity At.exe Activity Detection |
 | T1053.003 | HIGH | High-Fidelity Cron Persistence and In-Place Modification |
 | T1053.005 | HIGH | Suspicious Scheduled Task Creation Executing PowerShell |
+| T1053.006 | HIGH | High-Fidelity Systemd Service Creation or Modification |
 | T1053.007 | HIGH | High-Fidelity Systemd Timer Persistence Detection |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 Libraries |
 | T1059 | HIGH | High-Fidelity Scripting Interpreter Contextual Anomaly, Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
@@ -53,6 +54,7 @@
 | T1105 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1106 | CRITICAL | High-Fidelity Native API Abuse via LOLBins |
 | T1110.001 | MEDIUM | Multiple Failed Login Attempts for Single User (Possible Password Guessing) |
+| T1129 | HIGH | High-Fidelity Shared Module Load from Untrusted Path |
 | T1133 | HIGH | Anomalous External Remote Service Access Context |
 | T1189 | CRITICAL | Browser-Originating Shell or System Tool Execution |
 | T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |

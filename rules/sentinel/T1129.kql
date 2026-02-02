@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\svchost.exe", "*\rundll32.exe", "*\regsvr32.exe", "*\msiexec.exe", "*\cmd.exe")) and (ImageLoaded in ("*\Users\Public\*", "*\AppData\Local\Temp\*", "*\Downloads\*", "*C:\ProgramData\*", "*\Desktop\*")) and (not ((ImageLoaded in ("*\Microsoft\Teams\*", "*\AppData\Local\Discord\*", "*\Microsoft\OneDrive\*")) or (FolderPath in ("*C:\Windows\System32\*", "*C:\Program Files\*", "*C:\Program Files (x86)\*"))))

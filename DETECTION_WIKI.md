@@ -141,6 +141,7 @@
 - [Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574)](#ultra-pro-dll-hijacking-&-side-loading-detection-(t1574))
 - [Ultra-Pro DLL Search Order Hijacking Detection (T1574.001)](#ultra-pro-dll-search-order-hijacking-detection-(t1574001))
 - [Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002)](#ultra-pro-dll-side-loading-integrity-gap-detection-(t1574002))
+- [Ultra-Pro Shell Configuration & Path Interception (T1574.003)](#ultra-pro-shell-configuration-&-path-interception-(t1574003))
 - [High-Fidelity Offensive Infrastructure Provisioning - T1583](#high-fidelity-offensive-infrastructure-provisioning---t1583)
 - [High-Fidelity VPS Infrastructure Provisioning - T1583.001](#high-fidelity-vps-infrastructure-provisioning---t1583001)
 - [High-Fidelity Automated Domain Registration & Acquisition - T1583.002](#high-fidelity-automated-domain-registration-&-acquisition---t1583002)
@@ -2507,6 +2508,23 @@ trusted executable loads an unsigned or suspiciously-located DLL from
 user-writable directories.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Shell Configuration & Path Interception (T1574.003)
+- **Azonosító:** `T1574_003.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized modification of PATH environment variables or shell autorun 
+registry keys. Focuses on "Path Prepending" (placing malicious paths at the 
+beginning) and non-standard shell startup commands.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

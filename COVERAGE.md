@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 12:01:11`
+**Utolsó frissítés:** `2026-02-02 12:09:13`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 235 | 100% |
-| Splunk (SPL) | 219 | 93.2% |
-| Microsoft Sentinel (KQL) | 220 | 93.6% |
-| QRadar (AQL) | 127 | 54.0% |
-| Elastic (KQL/EQL) | 220 | 93.6% |
-| RSA NetWitness | 219 | 93.2% |
+| Sigma (Forrás) | 236 | 100% |
+| Splunk (SPL) | 219 | 92.8% |
+| Microsoft Sentinel (KQL) | 220 | 93.2% |
+| QRadar (AQL) | 127 | 53.8% |
+| Elastic (KQL/EQL) | 220 | 93.2% |
+| RSA NetWitness | 219 | 92.8% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -159,6 +159,7 @@
 | T1574 | CRITICAL | Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574) |
 | T1574.001 | CRITICAL | Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574), Ultra-Pro DLL Search Order Hijacking Detection (T1574.001) |
 | T1574.002 | CRITICAL | Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002), Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574) |
+| T1574.003 | HIGH | Ultra-Pro Shell Configuration & Path Interception (T1574.003) |
 | T1583 | HIGH | High-Fidelity Offensive Infrastructure Provisioning - T1583 |
 | T1583.001 | HIGH | High-Fidelity VPS Infrastructure Provisioning - T1583.001 |
 | T1583.002 | HIGH | High-Fidelity Automated Domain Registration & Acquisition - T1583.002 |

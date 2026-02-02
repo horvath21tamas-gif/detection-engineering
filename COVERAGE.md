@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 14:46:34`
+**Utolsó frissítés:** `2026-02-02 14:58:56`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 290 | 100% |
-| Splunk (SPL) | 261 | 90.0% |
-| Microsoft Sentinel (KQL) | 262 | 90.3% |
-| QRadar (AQL) | 152 | 52.4% |
-| Elastic (KQL/EQL) | 262 | 90.3% |
-| RSA NetWitness | 260 | 89.7% |
+| Sigma (Forrás) | 292 | 100% |
+| Splunk (SPL) | 263 | 90.1% |
+| Microsoft Sentinel (KQL) | 264 | 90.4% |
+| QRadar (AQL) | 152 | 52.1% |
+| Elastic (KQL/EQL) | 264 | 90.4% |
+| RSA NetWitness | 262 | 89.7% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -73,6 +73,8 @@
 | T1134.001 | CRITICAL | Ultra-Pro Token Impersonation via LSASS Handle Duplication (T1134.001) |
 | T1134.002 | CRITICAL | Ultra-Pro Create Process with Token (T1134.002) |
 | T1134.003 | CRITICAL | Ultra-Pro Make and Impersonate Token (T1134.003) |
+| T1134.004 | CRITICAL | Ultra-Pro Parent PID Spoofing & Process Tree Violation (T1134.004) |
+| T1134.005 | CRITICAL | Ultra-Pro SID-History Injection & DS Manipulation (T1134.005) |
 | T1136 | CRITICAL | Ultra-Pro Unauthorized Account Creation (T1136) |
 | T1136.001 | CRITICAL | Ultra-Pro Unauthorized Local Account Creation (T1136.001) |
 | T1136.002 | CRITICAL | Ultra-Pro Unauthorized Domain Account Creation (T1136.002) |
@@ -109,7 +111,8 @@
 | T1218.010 | HIGH | Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity) |
 | T1218.011 | HIGH | Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity) |
 | T1219 | HIGH | Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern |
-| T1484.001 | CRITICAL | Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484) |
+| T1484.001 | CRITICAL | Ultra-Pro Group Policy Modification & Abuse (T1484.001), Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484) |
+| T1484.002 | CRITICAL | Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002) |
 | T1486 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1490 | CRITICAL | Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity), Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1505.001 | CRITICAL | Ultra-Pro SQL Server Command Shell Execution (T1505.001) |

@@ -56,6 +56,8 @@
 - [Ultra-Pro Token Impersonation via LSASS Handle Duplication (T1134.001)](#ultra-pro-token-impersonation-via-lsass-handle-duplication-(t1134001))
 - [Ultra-Pro Create Process with Token (T1134.002)](#ultra-pro-create-process-with-token-(t1134002))
 - [Ultra-Pro Make and Impersonate Token (T1134.003)](#ultra-pro-make-and-impersonate-token-(t1134003))
+- [Ultra-Pro Parent PID Spoofing & Process Tree Violation (T1134.004)](#ultra-pro-parent-pid-spoofing-&-process-tree-violation-(t1134004))
+- [Ultra-Pro SID-History Injection & DS Manipulation (T1134.005)](#ultra-pro-sid-history-injection-&-ds-manipulation-(t1134005))
 - [Ultra-Pro Unauthorized Account Creation (T1136)](#ultra-pro-unauthorized-account-creation-(t1136))
 - [Ultra-Pro Unauthorized Local Account Creation (T1136.001)](#ultra-pro-unauthorized-local-account-creation-(t1136001))
 - [Ultra-Pro Unauthorized Domain Account Creation (T1136.002)](#ultra-pro-unauthorized-domain-account-creation-(t1136002))
@@ -92,6 +94,8 @@
 - [Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity)](#suspicious-rundll32-execution-with-script-or-remote-payload-(high-fidelity))
 - [Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern](#suspicious-use-of-legitimate-remote-administration-tools-outside-enterprise-pattern)
 - [Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484)](#ultra-pro-domain-policy-manipulation-&-gpo-abuse-(t1484))
+- [Ultra-Pro Group Policy Modification & Abuse (T1484.001)](#ultra-pro-group-policy-modification-&-abuse-(t1484001))
+- [Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)](#ultra-pro-domain-trust-tampering-&-sid-filtering-bypass-(t1484002))
 - [Ransomware Preparation Activity Detected on Windows Host (High Fidelity)](#ransomware-preparation-activity-detected-on-windows-host-(high-fidelity))
 - [Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity)](#suspicious-deletion-of-volume-shadow-copies-via-vssadmin-(high-fidelity))
 - [Ultra-Pro Web Shell Execution Patterns (T1505.003)](#ultra-pro-web-shell-execution-patterns-(t1505003))
@@ -1192,6 +1196,40 @@ correlates with Logon Type 9 (NewCredentials) anomalies from untrusted parents.
 
 ---
 
+## Ultra-Pro Parent PID Spoofing & Process Tree Violation (T1134.004)
+- **Azonosító:** `T1134_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects Parent PID spoofing by identifying violations of the Windows process 
+hierarchical model. Specifically targets critical system processes (LSASS, 
+Spooler, CSRSS) spawning shells or script interpreters, which is architecturally 
+impossible in a healthy environment.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro SID-History Injection & DS Manipulation (T1134.005)
+- **Azonosító:** `T1134_005.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects sIDHistory injection by monitoring Directory Service object changes (Event 5136) 
+and correlating them with suspicious RPC calls or unauthorized LSASS access on Domain Controllers.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro Unauthorized Account Creation (T1136)
 - **Azonosító:** `T1136.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
@@ -1773,6 +1811,40 @@ file system writes to the SYSVOL folder and GPO link changes, filtering out
 standard administrative tools (GPMC).
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Group Policy Modification & Abuse (T1484.001)
+- **Azonosító:** `T1484_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized GPO modifications by correlating file system writes to critical 
+policy templates in SYSVOL with process-level anomalies. Filters out DFSR 
+replication and standard GPMC management consoles to minimize false positives.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)
+- **Azonosító:** `T1484_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects high-risk modifications to Domain Trust relationships, focusing on 
+the disabling of SID Filtering (Quarantine) and unauthorized trust creation. 
+Correlates AD object changes with known administrative context.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

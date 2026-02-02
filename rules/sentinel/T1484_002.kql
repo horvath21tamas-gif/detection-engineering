@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((EventID in (4706, 4716)) or (EventID =~ 5136 and ObjectClass =~ "trustedDomain" and (AttributeCommonName in ("trustAttributes", "msDS-TrustForestTrustInfo", "trustDirection"))) or ((FolderPath in ("*\netdom.exe", "*\nltest.exe")) and (ProcessCommandLine in ("* trust *", "*/quarantine*", "*/enable_sidhistory*")))) and (not (SubjectUserSid =~ "S-1-5-18" or SubjectUserName endswith "$" or SubjectUserName contains "SVC_TrustAdmin"))

@@ -32,6 +32,7 @@
 | T1068 | HIGH | Suspicious SYSTEM Process Spawned from User Context |
 | T1070.001 | HIGH | Security Event Log Cleared Using wevtutil.exe |
 | T1087 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
+| T1091 | HIGH | High-Fidelity Process Execution from Removable Media |
 | T1098 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
 | T1105 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1110.001 | MEDIUM | Multiple Failed Login Attempts for Single User (Possible Password Guessing) |

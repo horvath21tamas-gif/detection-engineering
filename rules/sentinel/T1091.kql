@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where FolderPath matches regex "^[a-bd-z,A-BD-Z]:\\\\" and ((FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\mshta.exe", "*\wscript.exe", "*\cscript.exe", "*\regsvr32.exe", "*\rundll32.exe", "*\cmd.exe")) or (ProcessCommandLine in ("* -enc *", "* -nop *", "* -w hidden *", "*javascript:*", "*vbscript:*", "*shell32.dll,Control_RunDLL*"))) and (not (((FolderPath in ("*\PortableApps\*", "*\VLC\*", "*\Wireshark\*", "*\Putty\*")) and (ProcessCommandLine in ("*Launcher.exe*", "*Unlocker.exe*"))) or (ParentProcessName in ("*\services.exe", "*\wininit.exe"))))

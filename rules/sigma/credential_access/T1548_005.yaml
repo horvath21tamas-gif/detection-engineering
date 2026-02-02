@@ -50,7 +50,7 @@ detection:
             - '/yum'
             - '/dnf'
             - '/rpm'
-        - User: 'root'
+        - username: 'root'
 
     condition: (selection_target_paths and selection_content_abuse and not filter_trusted_installers) or (selection_target_paths and selection_suspicious_writer)
 level: high

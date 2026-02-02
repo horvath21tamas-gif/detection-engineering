@@ -1,0 +1,60 @@
+title: High-Fidelity Container Interactive Shell Execution
+id: 210525a6-ded6-4dfb-b8c9-020413a48f9d
+status: stable
+description: |
+    Detects unauthorized interactive shell access to running containers using 
+    kubectl or docker exec. Filters legitimate health checks and CI/CD automation 
+    to focus on manual, high-risk interventions.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1059/
+    - https://attack.mitre.org/techniques/T1609/
+tags:
+    - attack.execution
+    - attack.t1609
+logsource:
+    category: process_creation
+    product: linux
+detection:
+    selection_tools:
+        Image|endswith:
+            - '/kubectl'
+            - '/docker'
+            - '/crictl'
+            - '/podman'
+
+    selection_exec_params:
+        CommandLine|contains:
+            - ' exec '
+        CommandLine|contains:
+            - ' -it '
+            - ' -i '
+            - ' --interactive '
+
+    selection_suspicious_shells:
+        CommandLine|contains:
+            - '/bin/sh'
+            - '/bin/bash'
+            - '/bin/zsh'
+            - '/bin/dash'
+            - 'sh'
+            - 'bash'
+
+    filter_legit_automation:
+        - User: 
+            - 'jenkins'
+            - 'gitlab-runner'
+            - 'github-actions'
+            - 'zabbix'
+            - 'nagios'
+        - CommandLine|contains:
+            - 'pg_dump'
+            - 'mysqldump'
+            - 'vacuumdb'
+            - 'healthcheck'
+        - ParentImage|endswith:
+            - '/kubelet'
+
+    condition: selection_tools and selection_exec_params and selection_suspicious_shells and not filter_legit_automation
+level: critical

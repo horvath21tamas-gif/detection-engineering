@@ -68,6 +68,7 @@
 | T1110.001 | MEDIUM | Multiple Failed Login Attempts for Single User (Possible Password Guessing) |
 | T1129 | HIGH | High-Fidelity Shared Module Load from Untrusted Path |
 | T1133 | HIGH | Anomalous External Remote Service Access Context |
+| T1176 | CRITICAL | Ultra-Pro Browser Extension Force-Install Persistence (T1176) |
 | T1189 | CRITICAL | Browser-Originating Shell or System Tool Execution |
 | T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |
 | T1195 | CRITICAL | High-Fidelity Supply Chain Compromise Detection (Post-Update Anomaly) |
@@ -114,6 +115,7 @@
 | T1547.014 | CRITICAL | High-Fidelity Active Setup Persistence (T1547.014) |
 | T1547.015 | HIGH | High-Fidelity COM Hijacking Persistence (T1547.015) |
 | T1548.002 | HIGH | UAC Bypass via Fodhelper Registry Hijack (High Fidelity) |
+| T1554 | CRITICAL | Ultra-Pro Client Binary Integrity Compromise (T1554) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |
 | T1559 | CRITICAL | High-Fidelity Indirect IPC and COM Execution |

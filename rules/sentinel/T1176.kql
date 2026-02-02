@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetObject in ("*\Software\Policies\Google\Chrome\ExtensionInstall*", "*\Software\Policies\Microsoft\Edge\ExtensionInstall*", "*\Software\Policies\BraveSoftware\Brave\ExtensionInstall*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\reg.exe", "*\cscript.exe", "*\wscript.exe", "*\mshta.exe")) and (not ((FolderPath in ("*\svchost.exe", "*\gpupdate.exe", "*\trustedinstaller.exe", "*\System32\msiexec.exe")) and User =~ "NT AUTHORITY\SYSTEM"))

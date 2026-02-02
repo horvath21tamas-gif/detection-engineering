@@ -4,7 +4,7 @@
 ## 📊 Állapotösszegző
 | Mutató | Érték |
 | :--- | :--- |
-| Összes szabály | 250 |
+| Összes szabály | 251 |
 | Aktív (van logforrás) | 241 |
 | Inaktív (hiányzó log) | 9 |
 | MITRE Lefedettség | 252 technika |
@@ -15,6 +15,7 @@ Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logok
 | Szabály | Hiányzó forrás |
 | :--- | :--- |
 | Ultra-Pro Unauthorized Windows Service Installation (T1543.003) (`T1543_003.yaml`) | service: `process_creation` |
+| Ultra-Pro PAM Integrity Hijacking & Backdoor (T1556.003) (`T1556_003.yaml`) | service: `auditd` |
 | Ultra-Pro Unauthorized Cloud Account Creation (T1136.003) (`T1136_003.yaml`) | service: `auditlogs` |
 | High-Fidelity Device Registration Persistence (T1098.005) (`T1098_005.yaml`) | service: `process_creation` |
 | High-Fidelity Entra ID Application Credential Addition (`T1098_001.yaml`) | service: `ad` |

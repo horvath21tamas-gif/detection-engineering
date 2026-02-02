@@ -1,9 +1,9 @@
 # 🛡️ Detection Engineering Dashboard
 
 ## 📊 Összesített Statisztika
-- **Lefedett technikák:** `252` db
-- **Sigma szabályok:** `250` db
-- **MITRE ATT&CK Lefedettség:** `[125.4%]`
+- **Lefedett technikák:** `253` db
+- **Sigma szabályok:** `251` db
+- **MITRE ATT&CK Lefedettség:** `[125.9%]`
 - **Részletes lista:** [COVERAGE.md](./COVERAGE.md)
 
 ![Progress Bar](https://geps.dev/progress/125?dangerColor=ff6666&warningColor=ffbd66&successColor=8ecb88&v=1770037720)

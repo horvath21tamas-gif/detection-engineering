@@ -6,12 +6,12 @@
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 250 | 100% |
-| Splunk (SPL) | 232 | 92.8% |
-| Microsoft Sentinel (KQL) | 233 | 93.2% |
-| QRadar (AQL) | 138 | 55.2% |
-| Elastic (KQL/EQL) | 233 | 93.2% |
-| RSA NetWitness | 231 | 92.4% |
+| Sigma (Forrás) | 251 | 100% |
+| Splunk (SPL) | 232 | 92.4% |
+| Microsoft Sentinel (KQL) | 233 | 92.8% |
+| QRadar (AQL) | 138 | 55.0% |
+| Elastic (KQL/EQL) | 233 | 92.8% |
+| RSA NetWitness | 231 | 92.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -143,6 +143,7 @@
 | T1556 | CRITICAL | Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration |
 | T1556.001 | CRITICAL | Exploit-Grade Security Support Provider Hijacking (LSA SSP) |
 | T1556.002 | CRITICAL | Exploit-Grade Password Filter DLL Hijacking via LSA Notification Packages |
+| T1556.003 | CRITICAL | Ultra-Pro PAM Integrity Hijacking & Backdoor (T1556.003) |
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |
 | T1559 | CRITICAL | High-Fidelity Indirect IPC and COM Execution |
 | T1559.001 | HIGH | High-Fidelity Indirect IPC and COM Execution, Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity) |

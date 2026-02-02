@@ -1,0 +1,59 @@
+title: High-Fidelity Process Execution from Removable Media
+id: d1c9683d-9539-48bf-8f31-6be0ca2bafda
+status: stable
+description: |
+    Detects the execution of script interpreters and LOLBins from non-system drives. 
+    Focuses on patterns used by worms (like Raspberry Robin) and manual USB-based 
+    attacks while filtering out common portable applications.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1091/
+tags:
+    - attack.initial_access
+    - attack.lateral_movement
+    - attack.t1091
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_removable_drive:
+        Image|re: '^[a-bd-z,A-BD-Z]:\\'
+
+    selection_suspicious_interpreters:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\mshta.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\regsvr32.exe'
+            - '\rundll32.exe'
+            - '\cmd.exe'
+
+    selection_behavior_flags:
+        CommandLine|contains:
+            - ' -enc '
+            - ' -nop '
+            - ' -w hidden '
+            - 'javascript:'
+            - 'vbscript:'
+            - 'shell32.dll,Control_RunDLL' 
+
+    filter_legit_portable_apps:
+        Image|contains:
+            - '\PortableApps\'
+            - '\VLC\'
+            - '\Wireshark\'
+            - '\Putty\'
+        CommandLine|contains:
+            - 'Launcher.exe'
+            - 'Unlocker.exe'
+
+    filter_system_processes:
+        ParentImage|endswith:
+            - '\services.exe'
+            - '\wininit.exe'
+
+    condition: selection_removable_drive and (selection_suspicious_interpreters or selection_behavior_flags) and not (filter_legit_portable_apps or filter_system_processes)
+level: high

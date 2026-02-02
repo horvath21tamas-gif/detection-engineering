@@ -1,0 +1,50 @@
+title: High-Fidelity Shortcut Modification Detection
+id: 4b71bd0b-bbae-4855-bdc4-7172965aab8e
+status: stable
+description: |
+    Detects the creation or modification of LNK files by suspicious processes (PowerShell, CMD, etc.)
+    in startup folders or taskbar paths. This is a common technique for persistence.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1547/009/
+tags:
+    - attack.persistence
+    - attack.t1547.009
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection_target_locations:
+        TargetFilename|contains:
+            - '\Microsoft\Windows\Start Menu\Programs\Startup\'
+            - '\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\'
+            - '\Desktop\'
+
+    selection_extension:
+        TargetFilename|endswith: '.lnk'
+
+    selection_suspicious_writers:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+            - '\bitsadmin.exe'
+            - '\certutil.exe'
+            - '\rundll32.exe'
+
+    filter_legit_installers:
+        Image|endswith:
+            - '\msiexec.exe'
+            - '\trustedinstaller.exe'
+            - '\is-*.tmp' # Inno Setup
+            - '\setup.exe'
+        Image|contains:
+            - '\AppData\Local\Microsoft\Teams\'
+            - '\AppData\Local\Google\Update\'
+
+    condition: selection_target_locations and selection_extension and selection_suspicious_writers and not filter_legit_installers
+level: high

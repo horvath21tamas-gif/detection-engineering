@@ -1,0 +1,51 @@
+title: Ultra-Pro Privilege Escalation via Registry Hijacking (T1548.002)
+id: e3d14373-a7af-4539-9f57-7b3cf7787b82
+status: stable
+description: |
+    Detects UAC bypass attempts by monitoring unauthorized Registry modifications 
+    to shell open commands. Specifically filters for trusted installers and 
+    system-initiated changes to minimize false positives.
+author: hota05
+date: 2026-02-02
+tags:
+    - attack.privilege_escalation
+    - attack.t1548
+    - attack.t1548.002
+logsource:
+    product: windows
+    category: registry_event
+detection:
+    selection_uac_keys:
+        TargetObject|contains:
+            - 'Software\Classes\ms-settings\shell\open\command'
+            - 'Software\Classes\mscfile\shell\open\command'
+            - 'Software\Classes\exefile\shell\open\command'
+            - 'Software\Classes\launcher.ext.isv\shell\open\command'
+
+    selection_payload:
+        Details|contains: 
+            - 'powershell'
+            - 'cmd.exe'
+            - 'pwsh'
+            - 'rundll32.exe'
+            - 'regsvr32.exe'
+
+    filter_trusted_processes:
+        Image|endswith:
+            - '\Windows\servicing\TrustedInstaller.exe'
+            - '\Windows\System32\svchost.exe'
+            - '\Windows\System32\msiexec.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\fodhelper.exe'
+            - '\computerdefaults.exe'
+            - '\sdclt.exe'
+            - '\eventvwr.exe'
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+
+    condition: (selection_uac_keys and selection_payload and not filter_trusted_processes) or selection_suspicious_parent
+level: critical

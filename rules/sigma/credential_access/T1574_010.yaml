@@ -1,0 +1,65 @@
+title: Privileged Service Executable Overwritten from User-Writable Location
+id: b2182f6b-e13b-472f-b328-1822cccac4c3
+status: stable
+description: >
+  Detects exploitation of weak service file permissions where a registered
+  Windows service executable running with high privileges is overwritten
+  or modified from a user-writable directory by a non-system process.
+references:
+  - https://attack.mitre.org/techniques/T1574/010/
+author: hota05
+date: 2026/02/02
+tags:
+  - attack.privilege_escalation
+  - attack.persistence
+  - attack.t1574.010
+
+logsource:
+  category: file_change
+  product: windows
+
+detection:
+  service_executable:
+    TargetFilename|endswith: '.exe'
+
+  user_writable_service_path:
+    TargetFilename|contains:
+      - '\ProgramData\'
+      - '\Users\Public\'
+      - '\AppData\'
+      - '\Temp\'
+
+  exclude_protected_locations:
+    TargetFilename|contains:
+      - '\Windows\'
+      - '\Program Files\'
+      - '\Program Files (x86)\'
+
+  non_system_writer:
+    Image|endswith: '.exe'
+
+  exclude_trusted_writers:
+    Image|contains:
+      - '\Windows\System32\'
+      - '\Windows\SysWOW64\'
+      - '\Windows\servicing\'
+      - '\Windows\Installer\'
+
+  file_overwrite:
+    EventType:
+      - 'FileOverwrite'
+      - 'FileModify'
+      - 'Rename'
+
+  condition: service_executable
+             and user_writable_service_path
+             and not exclude_protected_locations
+             and non_system_writer
+             and not exclude_trusted_writers
+             and file_overwrite
+
+falsepositives:
+  - Extremely rare legacy third-party services installed in unsafe paths
+  - Misconfigured enterprise software with self-updating service binaries
+
+level: critical

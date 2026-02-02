@@ -1,0 +1,56 @@
+title: Ultra-Pro Client Binary Integrity Compromise (T1554)
+id: b6a5c395-0dc9-4547-ba94-95343c705149
+status: stable
+description: |
+    Detects the modification or replacement of trusted client binaries by unauthorized processes. 
+    Focuses on cases where the writing process is a LOLBin or the file lacks a valid vendor signature.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1554/
+tags:
+    - attack.persistence
+    - attack.t1554
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection_targets:
+        TargetFilename|contains:
+            - '\Google\Chrome\Application\'
+            - '\Microsoft\Edge\Application\'
+            - '\Microsoft\Teams\current\'
+            - '\Zoom\bin\'
+            - '\AnyDesk.exe'
+            - '\TeamViewer.exe'
+        TargetFilename|endswith: '.exe'
+
+    selection_suspicious_writer:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+            - '\mshta.exe'
+            - '\bitsadmin.exe'
+            - '\certutil.exe'
+            - '\curl.exe'
+
+    filter_trusted_updaters:
+        Image|endswith:
+            - '\GoogleUpdate.exe'
+            - '\MicrosoftEdgeUpdate.exe'
+            - '\installer.exe'
+            - '\setup.exe'
+            - '\Update.exe' 
+            - '\trustedinstaller.exe'
+        User: 
+            - 'NT AUTHORITY\SYSTEM'
+            - 'NT AUTHORITY\NETWORK SERVICE'
+
+    filter_signed:
+        HasSignedId: 'true'
+
+    condition: selection_targets and selection_suspicious_writer and not filter_trusted_updaters
+level: critical

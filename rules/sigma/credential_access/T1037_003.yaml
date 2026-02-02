@@ -1,0 +1,47 @@
+title: Ultra-Pro Network Logon Script/Shortcut Modification (T1037.003)
+id: 5605ef0e-6c80-4d37-8e2f-e29e6d5cf65e
+status: stable
+description: |
+    Detects unauthorized modification of scripts (.bat, .ps1, .vbs) or shortcuts (.lnk) 
+    within sensitive network shares like NETLOGON or SYSVOL. 
+    It specifically filters out legitimate DFS replication and system-level updates.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1037/003/
+tags:
+    - attack.persistence
+    - attack.t1037.003
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection_target:
+        TargetFilename|contains:
+            - '\SYSVOL\'
+            - '\NETLOGON\'
+        TargetFilename|endswith:
+            - '.lnk'
+            - '.bat'
+            - '.ps1'
+            - '.vbs'
+            - '.cmd'
+            - '.exe'
+
+    filter_trusted_processes:
+        Image|endswith:
+            - '\ntfrs.exe'      
+            - '\dfsrs.exe'      
+            - '\robocopy.exe'   
+            - '\svchost.exe'    
+
+    filter_trusted_users:
+        User|contains:
+            - 'NT AUTHORITY\SYSTEM'
+            - 'NT AUTHORITY\NETWORK SERVICE'
+
+    selection_network_origin:
+        SourceProcessGuid: '00000000-0000-0000-0000-000000000000' 
+
+    condition: selection_target and not (filter_trusted_processes or filter_trusted_users)
+level: critical

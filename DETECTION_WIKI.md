@@ -9,6 +9,7 @@
 - [Suspicious Remote Process Creation via WMIC](#suspicious-remote-process-creation-via-wmic)
 - [High-Fidelity At.exe Activity Detection](#high-fidelity-atexe-activity-detection)
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
+- [High-Fidelity At.exe Activity Detection](#high-fidelity-atexe-activity-detection)
 - [Suspicious Scheduled Task Creation Executing PowerShell](#suspicious-scheduled-task-creation-executing-powershell)
 - [Suspicious Credential API Hooking via Win32 Libraries](#suspicious-credential-api-hooking-via-win32-libraries)
 - [High-Fidelity Scripting Interpreter Contextual Anomaly](#high-fidelity-scripting-interpreter-contextual-anomaly)
@@ -283,6 +284,23 @@ and indicative of persistence or lateral movement.
 - **Leírás:** Észleli az ütemezett feladatok vagy a több operációs rendszeren keresztüli adatmegőrzéshez használt feladatok gyanús létrehozását. A támadószerű végrehajtási mintákra összpontosít.
 - **Hamis pozitívok:** Ritka adminisztratív automatizálás felhasználó által írható könyvtárak használatával, Egyedi IT karbantartási szkriptek végrehajtása ütemezett feladatokon keresztül
 - **MITRE ATT&CK:** `T1053`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity At.exe Activity Detection
+- **Azonosító:** `T1053_002.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the execution of at.exe for task scheduling. Since 'at' is deprecated, 
+any interactive use or remote machine targeting (\\) is considered highly suspicious 
+and indicative of persistence or lateral movement.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

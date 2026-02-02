@@ -1,0 +1,1 @@
+Image="*\\at.exe" OR OriginalFileName="at.exe" CommandLine IN ("* \\*", "* /interactive*", "*cmd*", "*powershell*", "*wscript*", "*cscript*", "*http*", "*.exe*") OR ParentImage IN ("*\\cmd.exe", "*\\powershell.exe", "*\\pwsh.exe", "*\\explorer.exe", "*\\winword.exe", "*\\excel.exe") NOT (CommandLine="*C:\\Legacy\\Backup.bat*" OR username="NT AUTHORITY\\SYSTEM")

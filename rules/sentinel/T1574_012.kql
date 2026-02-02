@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\powershell.exe", "*\wsmprovhost.exe", "*\installutil.exe", "*\regasm.exe", "*\regsvcs.exe", "*\mshta.exe", "*\dotnet.exe")) and ProcessCommandLine contains "COR_ENABLE_PROFILING=1" and (ProcessCommandLine in ("*COR_PROFILER=*", "*COR_PROFILER_PATH=*")) and (ProcessCommandLine in ("*\Users\*", "*\Users\Public\*", "*\AppData\*", "*\Temp\*", "*\ProgramData\*")) and (not (ProcessCommandLine in ("*\Windows\Microsoft.NET\*", "*\Program Files\Microsoft Visual Studio\*", "*\Program Files (x86)\Microsoft Visual Studio\*", "*\VSPerf*", "*\PerfWatson*", "*\Application Insights*", "*\Datadog*", "*\NewRelic*", "*\Dynatrace*"))) and (not (FolderPath in ("*\devenv.exe", "*\vsjitdebugger.exe", "*\msbuild.exe", "*\vstest.console.exe", "*\dotnet-test.exe"))) and (not (ParentProcessName in ("*\cmd.exe", "*\powershell_ise.exe")))

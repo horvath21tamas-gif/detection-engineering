@@ -1,0 +1,59 @@
+title: High-Fidelity Trusted Relationship Abuse Detection
+id: 03b1a3b7-2965-400a-8867-aa847dda1667
+status: stable
+description: |
+    Detects suspicious discovery and reconnaissance activities originating from 
+    trusted ingress points (RDP, Citrix, VPN). It filters out standard administrative 
+    behavior by focusing on specific parent-child process chains and unusual arguments.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1199/
+tags:
+    - attack.initial_access
+    - attack.t1199
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_ingress_parents:
+        ParentImage|endswith:
+            - '\rdpinit.exe'     
+            - '\rdpclip.exe'     
+            - '\wfshell.exe'     
+            - '\ctxsi.exe'      
+            - '\vpnui.exe'       
+            - '\TeamViewer.exe'  
+            - '\AnyDesk.exe'
+
+    selection_discovery_tools:
+        Image|endswith:
+            - '\nltest.exe'      
+            - '\whoami.exe'      
+            - '\net.exe'         
+            - '\net1.exe'
+            - '\qwinsta.exe'     
+            - '\nslookup.exe'   
+            - '\arp.exe'
+            - '\nbtstat.exe'
+
+    selection_suspicious_args:
+        CommandLine|contains:
+            - ' /domain'
+            - ' /all'
+            - ' /groups'
+            - 'dclist'
+            - 'trust_dom'
+            - 'all-ad-servers'
+
+    filter_it_automation:
+        - CommandLine|contains: 'C:\Windows\System32\GroupPolicy\Machine\Scripts\'
+        - Image|endswith: '\gpupdate.exe'
+        - ParentImage|endswith: '\services.exe' 
+
+    filter_msp_updates:
+        - CommandLine|contains: '--update'
+        - CommandLine|contains: '/check-update'
+
+    condition: selection_ingress_parents and (selection_discovery_tools and selection_suspicious_args) and not filter_it_automation
+level: high

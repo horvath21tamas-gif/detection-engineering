@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((TargetFilename in ("*/etc/systemd/system/*", "*/usr/lib/systemd/system/*", "*/lib/systemd/system/*", "*/.config/systemd/user/*")) and TargetFilename endswith ".service") and ((FolderPath in ("*/bash", "*/sh", "*/zsh", "*/python3", "*/perl", "*/curl", "*/wget", "*/nc", "*/php")) or (ProcessCommandLine in ("*ExecStart=/tmp/*", "*ExecStart=/dev/shm/*", "*ExecStart=/var/tmp/*", "*ExecStart=python*", "*ExecStart=perl*"))) and (not ((ParentProcessName in ("*/ansible-playbook", "*/chef-client", "*/salt-minion", "*/puppet", "*/dpkg", "*/apt-get", "*/dnf", "*/yum")) and User =~ "root"))

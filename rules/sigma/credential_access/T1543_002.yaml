@@ -53,7 +53,7 @@ detection:
             - '/apt-get'
             - '/dnf'
             - '/yum'
-        User: 'root'
+        username: 'root'
 
     condition: selection_paths and (selection_suspicious_writer or selection_suspicious_payload) and not filter_trusted_automation
 level: critical

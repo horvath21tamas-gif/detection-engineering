@@ -1,0 +1,51 @@
+title: High-Fidelity Cloud Shell Exploitation and Data Exfiltration
+id: 835267ef-f55a-4e0c-ad65-f1720ff5116c
+status: stable
+description: |
+    Detects unauthorized or malicious activities within Cloud Shell environments, 
+    focusing on identity theft, log suppression, and the conversion of private 
+    cloud resources to public access.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1059/009/
+tags:
+    - attack.execution
+    - attack.t1059.009
+logsource:
+    category: process_creation
+    product: linux 
+detection:
+    selection_cloud_binaries:
+        Image|endswith:
+            - '/az'
+            - '/aws'
+            - '/gcloud'
+            - '/kubectl'
+
+    selection_critical_actions:
+        - CommandLine|contains:
+            - 'list-access-keys'
+            - 'export-credentials'
+            - 'get-secret'
+        - CommandLine|contains:
+            - 'stop-logging'
+            - 'delete-trail'
+            - 'disable-policy'
+            - 'delete-flow-log'
+        - CommandLine|contains:
+            - 'make-public'
+            - 'add-iam-policy-binding' 
+            - 'modify-instance-attribute --attribute disableApiTermination'
+            - 'create-presigned-url'
+
+    filter_known_ci_cd:
+        - User: 
+            - 'deployment-service-account'
+            - 'terraform-runner'
+        - CommandLine|contains:
+            - '--describe'
+            - '--list' 
+
+    condition: selection_cloud_binaries and selection_critical_actions and not filter_known_ci_cd
+level: critical

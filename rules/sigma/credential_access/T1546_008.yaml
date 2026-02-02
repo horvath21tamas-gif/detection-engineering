@@ -1,0 +1,53 @@
+title: Ultra-Pro WER SilentProcessExit Persistence (T1546.008)
+id: 953e7004-5977-4671-a2bb-7d50d716dd9a
+status: stable
+description: |
+    Detects unauthorized persistence via Windows Error Reporting (WER) SilentProcessExit. 
+    Focuses on the registration of 'MonitorProcess' commands which execute when a process 
+    crashes or exits, excluding known debugging environments.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1546/008/
+tags:
+    - attack.persistence
+    - attack.t1546.008
+logsource:
+    category: registry_event
+    product: windows
+detection:
+    selection_registry_path:
+        TargetObject|contains: 'Microsoft\Windows NT\CurrentVersion\SilentProcessExit\'
+
+    selection_critical_values:
+        - TargetObject|endswith: '\MonitorProcess'
+        - TargetObject|endswith: '\ReportingMode'
+          Details: '0x00000001' 
+
+    selection_suspicious_payload:
+        Details|contains:
+            - 'powershell'
+            - 'cmd.exe'
+            - 'regsvr32'
+            - 'mshta'
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+            - 'cscript'
+            - 'wscript'
+
+    filter_trusted_debuggers:
+        Image|endswith:
+            - '\devenv.exe'     
+            - '\windbg.exe'     
+            - '\msiexec.exe'   
+            - '\trustedinstaller.exe'
+            - '\svchost.exe'    
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_standard_tools:
+        Image|endswith:
+            - '\WerFault.exe'
+            - '\wermgr.exe'
+
+    condition: selection_registry_path and (selection_critical_values or selection_suspicious_payload) and not (filter_trusted_debuggers or filter_standard_tools)
+level: critical

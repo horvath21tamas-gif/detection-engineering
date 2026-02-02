@@ -41,7 +41,7 @@ detection:
             - '\reg.exe'
 
     filter_trusted_admin:
-        User: 'NT AUTHORITY\NETWORK SERVICE'
+        username: 'NT AUTHORITY\NETWORK SERVICE'
         Image|contains: 'C:\Windows\System32\'
 
     condition: selection_registry and selection_options and selection_unauthorized_actor and not filter_trusted_admin

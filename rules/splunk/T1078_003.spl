@@ -1,0 +1,1 @@
+source="WinEventLog:Security" EventCode=4624 Status="0x0" LogonType IN (3, 10, 8) NOT ((TargetUserName IN ("UMFD-*", "DWM-*") TargetUserName IN ("SYSTEM", "LOCAL SERVICE", "NETWORK SERVICE", "ANONYMOUS LOGON") TargetUserName="*$") OR IpAddress IN ("127.0.0.1", "::1"))

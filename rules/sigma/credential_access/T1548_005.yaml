@@ -1,0 +1,56 @@
+title: Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005)
+id: 008e5d12-9d9a-41c1-a84b-006ee99bd436
+status: stable
+description: |
+    Detects unauthorized modification of XDG desktop entries or shortcuts that attempt 
+    to execute SUID binaries or leverage pkexec for privilege escalation. 
+    Focuses on modifications in user-writable directories by untrusted processes.
+author: hota05
+date: 2026-02-02
+tags:
+    - attack.privilege_escalation
+    - attack.persistence
+    - attack.t1548.005
+logsource:
+    product: linux
+    category: file_event
+detection:
+    selection_target_paths:
+        TargetFilename|contains:
+            - '/.local/share/applications/'
+            - '/.config/autostart/'
+            - '/Desktop/'
+        TargetFilename|endswith: '.desktop'
+
+    selection_content_abuse:
+        Details|contains:
+            - 'Exec=sudo'
+            - 'Exec=pkexec'     
+            - 'Exec=gksudo'
+            - 'Exec=/tmp/'      
+            - 'Exec=/dev/shm/'   
+
+    selection_suspicious_writer:
+        Image|endswith:
+            - '/wget'
+            - '/curl'
+            - '/python'
+            - '/perl'
+            - '/bash'
+        ParentImage|contains:
+            - '/apache'
+            - '/nginx'
+            - '/node'
+            - '/php'
+
+    filter_trusted_installers:
+        - Image|endswith:
+            - '/apt'
+            - '/dpkg'
+            - '/yum'
+            - '/dnf'
+            - '/rpm'
+        - User: 'root'
+
+    condition: (selection_target_paths and selection_content_abuse and not filter_trusted_installers) or (selection_target_paths and selection_suspicious_writer)
+level: high

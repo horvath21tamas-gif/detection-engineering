@@ -1,0 +1,57 @@
+title: High-Fidelity Launch Daemon Persistence Detection
+id: ed5f8fa9-6203-4fb9-b839-10637e2be3c7
+status: stable
+description: |
+    Detects the creation or modification of Launch Daemons by monitoring 
+    untrusted parent processes and suspicious command-line strings. 
+    Optimized to filter out Apple and common third-party installers.
+author: Gemini AI / Detection Engineering
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1569/001/
+tags:
+    - attack.persistence
+    - attack.t1569.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_launch_paths:
+        CommandLine|contains:
+            - '/Library/LaunchDaemons/'
+            - '/Library/LaunchAgents/'
+
+    selection_untrusted_parents:
+        ParentImage|endswith:
+            - '/bash'
+            - '/sh'
+            - '/zsh'
+            - '/python'
+            - '/curl'
+            - '/wget'
+            - '/nc'
+
+    selection_suspicious_payloads:
+        CommandLine|contains:
+            - 'curl '
+            - 'wget '
+            - 'base64'
+            - 'bash -i'
+            - '/dev/tcp/'
+            - 'chmod +x'
+            - '/tmp/'
+
+    filter_apple_legit:
+        - ParentImage|endswith:
+            - '/installd'
+            - '/pkgutil'
+            - '/Software Update'
+            - '/managedclient'
+        - CommandLine|contains:
+            - 'com.apple.'
+            - 'com.microsoft.'
+            - 'com.google.'
+            - 'com.jamf.'
+
+    condition: selection_launch_paths and (selection_untrusted_parents or selection_suspicious_payload) and not filter_apple_legit
+level: critical

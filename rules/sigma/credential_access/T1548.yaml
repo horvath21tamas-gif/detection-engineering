@@ -35,7 +35,7 @@ detection:
             - '\Windows\servicing\TrustedInstaller.exe'
             - '\Windows\System32\svchost.exe'
             - '\Windows\System32\msiexec.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     selection_suspicious_parent:
         ParentImage|endswith:

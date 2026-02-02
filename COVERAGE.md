@@ -154,7 +154,8 @@
 | T1547.013 | HIGH | High-Fidelity Email Client Helper Persistence (T1547.013) |
 | T1547.014 | CRITICAL | High-Fidelity Active Setup Persistence (T1547.014) |
 | T1547.015 | HIGH | High-Fidelity COM Hijacking Persistence (T1547.015) |
-| T1548.002 | HIGH | UAC Bypass via Fodhelper Registry Hijack (High Fidelity) |
+| T1548 | CRITICAL | Ultra-Pro Privilege Escalation via Registry Hijacking (T1548.002) |
+| T1548.002 | HIGH | Ultra-Pro Privilege Escalation via Registry Hijacking (T1548.002), UAC Bypass via Fodhelper Registry Hijack (High Fidelity) |
 | T1554 | CRITICAL | Ultra-Pro Client Binary Integrity Compromise (T1554) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
 | T1556 | CRITICAL | Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration |

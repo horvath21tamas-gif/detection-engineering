@@ -1,0 +1,46 @@
+title: Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)
+id: 8afc55d7-3e4d-46ff-b0fb-5194fe3e15df
+status: stable
+description: |
+    Detects high-risk modifications to Domain Trust relationships, focusing on 
+    the disabling of SID Filtering (Quarantine) and unauthorized trust creation. 
+    Correlates AD object changes with known administrative context.
+author: hota05
+date: 2026-02-02
+tags:
+    - attack.privilege_escalation
+    - attack.persistence
+    - attack.t1484.002
+logsource:
+    product: windows
+    service: security
+detection:
+    selection_ad_trust_attr:
+        EventID: 5136
+        ObjectClass: 'trustedDomain'
+        AttributeCommonName:
+            - 'trustAttributes'             
+            - 'msDS-TrustForestTrustInfo'  
+            - 'trustDirection'             
+
+    selection_trust_events:
+        EventID:
+            - 4706 
+            - 4716 
+
+    selection_tools:
+        Image|endswith:
+            - '\netdom.exe'
+            - '\nltest.exe'
+        CommandLine|contains:
+            - ' trust '      
+            - '/quarantine'  
+            - '/enable_sidhistory' 
+
+    filter_trusted_dc:
+        - SubjectUserSid: 'S-1-5-18'
+        - SubjectUserName|endswith: '$' 
+        - SubjectUserName|contains: 'SVC_TrustAdmin' 
+
+    condition: (selection_trust_events or selection_ad_trust_attr or selection_tools) and not filter_trusted_dc
+level: critical

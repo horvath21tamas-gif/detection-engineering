@@ -1,0 +1,50 @@
+title: High-Fidelity Azure Role Assignment Escalation
+id: 39f76d41-5b01-46cb-9d92-5a3175ee1024
+status: stable
+description: |
+    Detects direct assignment of highly privileged Azure roles (Owner, Contributor, User Access Admin). 
+    Filters out PIM (Privileged Identity Management) activations and known automation principals 
+    to reduce noise and focus on manual privilege escalation.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1098/004/
+tags:
+    - attack.privilege_escalation
+    - attack.persistence
+    - attack.t1098.004
+logsource:
+    product: azure
+    service: process_access
+detection:
+    selection_operation:
+        operationNameValue: 
+            - 'Microsoft.Authorization/roleAssignments/write'
+    
+    selection_status:
+        statusValue: 'Success'
+
+    selection_critical_roles:
+        properties.requestbody:
+            - '*8e3af657-a8ff-443c-a75c-2fe8c4bcb635*' 
+            - '*b24988ac-6180-42a0-ab88-20f7382dd24c*' 
+            - '*18d7d81d-022d-446a-b976-5d3f57fbe149*' 
+            - '*fdd26090-ad57-4cfb-8440-41a33b7d652d*' 
+
+    filter_pim:
+        caller:
+            - 'MS-PIM'
+            - 'Azure Privileged Identity Management'
+            - 'ms-pim@microsoft.com'
+
+    filter_known_iac_service_principals:
+        caller|contains:
+            - 'svc-terraform'
+            - 'github-actions'
+            - 'azure-devops-deployment'
+
+    selection_suspicious_actor:
+        caller|contains: '@' 
+
+    condition: selection_operation and selection_status and selection_critical_roles and selection_suspicious_actor and not (filter_pim or filter_known_iac_service_principals)
+level: critical

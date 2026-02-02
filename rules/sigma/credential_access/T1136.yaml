@@ -44,7 +44,7 @@ detection:
         Image|endswith:
             - '\net.exe'
             - '\net1.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     filter_known_installers:
         ParentImage|contains:

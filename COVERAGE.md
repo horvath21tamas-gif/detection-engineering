@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 09:50:55`
+**Utolsó frissítés:** `2026-02-02 09:58:31`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 206 | 100% |
-| Splunk (SPL) | 202 | 98.1% |
-| Microsoft Sentinel (KQL) | 202 | 98.1% |
-| QRadar (AQL) | 124 | 60.2% |
-| Elastic (KQL/EQL) | 202 | 98.1% |
-| RSA NetWitness | 202 | 98.1% |
+| Sigma (Forrás) | 210 | 100% |
+| Splunk (SPL) | 206 | 98.1% |
+| Microsoft Sentinel (KQL) | 206 | 98.1% |
+| QRadar (AQL) | 124 | 59.0% |
+| Elastic (KQL/EQL) | 206 | 98.1% |
+| RSA NetWitness | 206 | 98.1% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |

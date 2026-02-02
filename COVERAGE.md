@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 14:58:56`
+**Utolsó frissítés:** `2026-02-02 15:09:30`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -118,6 +118,7 @@
 | T1505.001 | CRITICAL | Ultra-Pro SQL Server Command Shell Execution (T1505.001) |
 | T1505.002 | CRITICAL | Ultra-Pro IIS Native Module Injection (T1505.002) |
 | T1505.003 | HIGH | Ultra-Pro Web Shell Execution Patterns (T1505.003), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
+| T1505.004 | CRITICAL | Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004) |
 | T1505.005 | CRITICAL | Ultra-Pro Terminal Services DLL Hijacking (T1505.005) |
 | T1525 | CRITICAL | Exploit-Grade Unauthorized Container Image Execution (Implant Container Image) |
 | T1542 | CRITICAL | Ultra-Pro Pre-OS Boot Manipulation (T1542) |

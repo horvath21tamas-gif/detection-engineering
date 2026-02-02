@@ -1,0 +1,2 @@
+((((Message = '*aaa authentication*' OR Message = '*aaa authorization*' OR Message = '*tacacs-server host*' OR Message = '*radius-server host*' OR Message = '*no aaa*'))) OR (((Message = '*username *'))&& (((Message = '*privilege 15*'))&& ((Message = '*secret*'))))) AND (((SourceIp = '*NOT 10.50.0.0/24*'))&& ((SourceIp = '*NOT 127.0.0.1*'))) AND (NOT (((((user.dst = '*SVC_NetworkAutomation*' OR user.dst = '*CiscoDNA_Admin*'))) AND ((SourceIp = '*10.50.0.100*'))))
+)

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((Message in ("*aaa authentication*", "*aaa authorization*", "*tacacs-server host*", "*radius-server host*", "*no aaa*")) or (Message contains "username " and (Message =~ "privilege 15" and Message =~ "secret"))) and (SourceIp =~ "NOT 10.50.0.0/24" and SourceIp =~ "NOT 127.0.0.1") and (not ((User in ("SVC_NetworkAutomation", "CiscoDNA_Admin")) and SourceIp =~ "10.50.0.100"))

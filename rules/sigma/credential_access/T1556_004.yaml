@@ -38,7 +38,7 @@ detection:
       - 'NOT 127.0.0.1'
 
   filter_management_tools:
-    User:
+    username:
       - 'SVC_NetworkAutomation'
       - 'CiscoDNA_Admin'
     SourceIp: 

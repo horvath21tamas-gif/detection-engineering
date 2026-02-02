@@ -95,6 +95,11 @@
 - [Ultra-Pro Netsh Helper DLL Persistence (T1546.007)](#ultra-pro-netsh-helper-dll-persistence-(t1546007))
 - [Ultra-Pro WER SilentProcessExit Persistence (T1546.008)](#ultra-pro-wer-silentprocessexit-persistence-(t1546008))
 - [Ultra-Pro AppInit_DLLs Persistence Detection (T1546.009)](#ultra-pro-appinit_dlls-persistence-detection-(t1546009))
+- [Ultra-Pro AppCert DLL Persistence Detection (T1546.010)](#ultra-pro-appcert-dll-persistence-detection-(t1546010))
+- [Ultra-Pro Application Shimming Persistence Detection (T1546.011)](#ultra-pro-application-shimming-persistence-detection-(t1546011))
+- [Ultra-Pro IFEO Debugger Hijacking Detection (T1546.012)](#ultra-pro-ifeo-debugger-hijacking-detection-(t1546012))
+- [Ultra-Pro PowerShell Profile Injection Detection (T1546.013)](#ultra-pro-powershell-profile-injection-detection-(t1546013))
+- [Ultra-Pro WMI Event Subscription Persistence (T1546.014)](#ultra-pro-wmi-event-subscription-persistence-(t1546014))
 - [Suspicious COM Hijacking for User-Level Persistence (High Fidelity)](#suspicious-com-hijacking-for-user-level-persistence-(high-fidelity))
 - [Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása](#gyanús-rendszerindítási-vagy-bejelentkezési-automatikus-indítás-végrehajtása)
 - [Suspicious Registry Run Key Modification for User Persistence (High Fidelity)](#suspicious-registry-run-key-modification-for-user-persistence-(high-fidelity))
@@ -1745,6 +1750,90 @@ to the 'AppInit_DLLs' and 'LoadAppInit_DLLs' values.
 Filters out signed Microsoft binaries and trusted system installers.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `009`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro AppCert DLL Persistence Detection (T1546.010)
+- **Azonosító:** `T1546_010.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized registration of AppCert DLLs by monitoring the Session Manager 
+Registry key. It filters out trusted system installers and requires non-standard 
+paths or suspicious process lineages to trigger.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `010`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Application Shimming Persistence Detection (T1546.011)
+- **Azonosító:** `T1546_011.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized Shim database installation by monitoring sdbinst.exe 
+execution with suspicious source paths and direct Registry writes to InstalledSDB.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `011`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro IFEO Debugger Hijacking Detection (T1546.012)
+- **Azonosító:** `T1546_012.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized Debugger injection via Image File Execution Options (IFEO). 
+Filters out legitimate developer tools and focuses on high-risk system binaries 
+and accessibility features (Sticky Keys, Utility Manager).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `012`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro PowerShell Profile Injection Detection (T1546.013)
+- **Azonosító:** `T1546_013.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized automated modification of PowerShell profiles. 
+Filters out legitimate manual editing via text editors and focuses on 
+programmatic injection from shells or non-standard parent processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `013`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro WMI Event Subscription Persistence (T1546.014)
+- **Azonosító:** `T1546_014.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized WMI event subscriptions by monitoring the creation of 
+EventFilters and Command/Script Consumers. Filters out known administrative 
+tools and focuses on non-standard scripted execution.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `014`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

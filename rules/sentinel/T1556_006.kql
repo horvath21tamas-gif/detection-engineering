@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (operationName in ("Update user", "Update mfa registered phone number", "Add user auth method", "Admin registered security info", "User registered security info")) and ((result =~ "success" and (userAgent in ("*python*", "*curl*", "*wget*", "*powershell*", "*postman*"))) or (['initiatedBy.userPrincipalName'] contains "admin" and ['targetResources.userPrincipalName'] contains "admin")) and (not ((['initiatedBy.userPrincipalName'] endswith ".onmicrosoft.com" and ipAddress =~ "1.2.3.4") or userAgent =~ "MyTrustedMigrationBot/2.1"))

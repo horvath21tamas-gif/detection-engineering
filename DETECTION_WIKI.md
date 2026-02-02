@@ -126,6 +126,9 @@
 - [Exploit-Grade Security Support Provider Hijacking (LSA SSP)](#exploit-grade-security-support-provider-hijacking-(lsa-ssp))
 - [Exploit-Grade Password Filter DLL Hijacking via LSA Notification Packages](#exploit-grade-password-filter-dll-hijacking-via-lsa-notification-packages)
 - [Ultra-Pro PAM Integrity Hijacking & Backdoor (T1556.003)](#ultra-pro-pam-integrity-hijacking-&-backdoor-(t1556003))
+- [Ultra-Pro Network Device Authentication Hijacking (T1556.004)](#ultra-pro-network-device-authentication-hijacking-(t1556004))
+- [Ultra-Pro SID History Injection Correlation (T1556.005)](#ultra-pro-sid-history-injection-correlation-(t1556005))
+- [Ultra-Pro Entra ID MFA Method Hijacking (T1556.006)](#ultra-pro-entra-id-mfa-method-hijacking-(t1556006))
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
 - [High-Fidelity Indirect IPC and COM Execution](#high-fidelity-indirect-ipc-and-com-execution)
 - [Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity)](#gyanús-elnevezett-csővezeték-létrehozás-amely-utólagos-kihasználási-eszközökhöz-kapcsolódik-(high-fidelity))
@@ -2269,6 +2272,56 @@ by identifying non-package-manager writes to /etc/pam.d/ and /lib/security/.
 Specifically filters for automated configuration tools to reduce false positives.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Network Device Authentication Hijacking (T1556.004)
+- **Azonosító:** `T1556_004.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized modifications to AAA (Authentication, Authorization, and Accounting) 
+settings or local user databases on network devices. Focuses on manual bypasses 
+performed outside of authorized management subnets.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro SID History Injection Correlation (T1556.005)
+- **Azonosító:** `T1556_005.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the injection of highly privileged SIDs into the sIDHistory attribute of a user. 
+This targets the "Ghost Admin" scenario where a user gains Domain Admin rights 
+without being a member of the group.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Entra ID MFA Method Hijacking (T1556.006)
+- **Azonosító:** `T1556_006.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects high-risk modifications to MFA methods in Entra ID by correlating 
+successful method changes with suspicious entry points or administrative anomalies.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

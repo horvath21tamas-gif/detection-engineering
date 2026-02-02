@@ -1,0 +1,61 @@
+title: High-Fidelity Cron Persistence and In-Place Modification
+id: ea3500fe-a18e-4574-bb7c-1a6b8f2faf29
+status: stable
+description: |
+    Detects unauthorized creation or modification of cron jobs by monitoring 
+    direct writes to cron directories and suspicious shell one-liners. 
+    Filters legitimate package managers and configuration management tools.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1053/003/
+tags:
+    - attack.persistence
+    - attack.t1053.003
+logsource:
+    category: process_creation
+    product: linux
+detection:
+    selection_tools:
+        Image|endswith:
+            - '/echo'
+            - '/tee'
+            - '/sed'
+            - '/cat'
+            - '/printf'
+
+    selection_paths:
+        CommandLine|contains:
+            - '/etc/cron.d/'
+            - '/etc/cron.daily/'
+            - '/etc/cron.hourly/'
+            - '/etc/cron.monthly/'
+            - '/etc/cron.weekly/'
+            - '/var/spool/cron/'
+            - '/etc/crontab'
+
+    selection_suspicious_payloads:
+        CommandLine|contains:
+            - 'bash -i'      
+            - 'python'        
+            - 'curl'         
+            - 'wget'
+            - 'base64'        
+            - '/dev/tcp/'    
+            - 'nc '           
+            - 'chmod +x'      
+
+    filter_legit_automation:
+        - ParentImage|endswith:
+            - '/ansible'
+            - '/salt-minion'
+            - '/puppet'
+            - '/chef-client'
+        - User: 'root'
+          ParentImage|endswith:
+            - '/dpkg'
+            - '/rpm'
+            - '/apt'
+
+    condition: selection_tools and selection_paths and selection_suspicious_payloads and not filter_legit_automation
+level: high

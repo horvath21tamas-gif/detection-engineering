@@ -1,0 +1,65 @@
+title: Ultra-Pro Parent PID Spoofing & Process Tree Violation (T1134.004)
+id: 8928ef14-2dac-4146-9a36-aae418aad287
+status: stable
+description: |
+    Detects Parent PID spoofing by identifying violations of the Windows process 
+    hierarchical model. Specifically targets critical system processes (LSASS, 
+    Spooler, CSRSS) spawning shells or script interpreters, which is architecturally 
+    impossible in a healthy environment.
+author: hota05
+date: 2026-02-02
+tags:
+    - attack.privilege_escalation
+    - attack.defense_evasion
+    - attack.t1134.004
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_impossible_parent:
+        ParentImage|endswith:
+            - '\lsass.exe'
+            - '\lsm.exe'
+            - '\csrss.exe'
+            - '\wininit.exe'
+            - '\smss.exe'
+            - '\spoolsv.exe' 
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\sh.exe'
+            - '\bash.exe'
+            - '\scrcons.exe'
+
+    selection_suspicious_context:
+        ParentImage|contains:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\winword.exe'
+            - '\excel.exe'
+        Image|endswith:
+            - '\whoami.exe'
+            - '\nltest.exe'
+            - '\net.exe'
+            - '\net1.exe'
+            - '\ipconfig.exe'
+
+    filter_trusted_windows:
+        - Image|endswith: 
+            - '\WerFault.exe'
+            - '\conhost.exe'
+            - '\csc.exe'
+        - ParentCommandLine|contains: 'svchost.exe -k'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    filter_wmi_sched:
+        ParentImage|endswith:
+            - '\wmiprvse.exe'
+            - '\taskhostw.exe'
+            - '\svchost.exe'
+
+    condition: (selection_impossible_parent or selection_suspicious_context) and not (filter_trusted_windows or filter_wmi_sched)
+level: critical

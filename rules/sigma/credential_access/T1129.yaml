@@ -1,0 +1,49 @@
+title: High-Fidelity Shared Module Load from Untrusted Path
+id: 85e67e40-2062-4ed7-b968-f41852750e0c
+status: stable
+description: |
+    Detects trusted system binaries or productivity apps loading DLLs from 
+    untrusted, world-writable directories. This is a primary indicator of 
+    DLL Side-Loading or Search Order Hijacking.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1129/
+tags:
+    - attack.execution
+    - attack.t1129
+logsource:
+    category: image_load
+    product: windows
+detection:
+    selection_vulnerable_apps:
+        Image|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\svchost.exe'
+            - '\rundll32.exe'
+            - '\regsvr32.exe'
+            - '\msiexec.exe'
+            - '\cmd.exe'
+
+    selection_untrusted_paths:
+        ImageLoaded|contains:
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+            - '\Downloads\'
+            - 'C:\ProgramData\'
+            - '\Desktop\'
+
+    filter_legit_installers:
+        - ImageLoaded|contains:
+            - '\Microsoft\Teams\'
+            - '\AppData\Local\Discord\'
+            - '\Microsoft\OneDrive\'
+        - Image|contains:
+            - 'C:\Windows\System32\'
+            - 'C:\Program Files\'
+            - 'C:\Program Files (x86)\'
+
+    condition: selection_vulnerable_apps and selection_untrusted_paths and not filter_legit_installers
+level: high

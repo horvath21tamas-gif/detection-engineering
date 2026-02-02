@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 06:43:43`
+**Utolsó frissítés:** `2026-02-02 06:51:40`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 139 | 100% |
-| Splunk (SPL) | 139 | 100.0% |
-| Microsoft Sentinel (KQL) | 139 | 100.0% |
-| QRadar (AQL) | 77 | 55.4% |
-| Elastic (KQL/EQL) | 139 | 100.0% |
-| RSA NetWitness | 139 | 100.0% |
+| Sigma (Forrás) | 140 | 100% |
+| Splunk (SPL) | 140 | 100.0% |
+| Microsoft Sentinel (KQL) | 140 | 100.0% |
+| QRadar (AQL) | 78 | 55.7% |
+| Elastic (KQL/EQL) | 140 | 100.0% |
+| RSA NetWitness | 140 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -69,6 +69,7 @@
 | T1566.001 | CRITICAL | High-Fidelity Spearphishing Attachment Execution |
 | T1566.002 | CRITICAL | High-Fidelity Browser-Originating Payload Execution |
 | T1566.003 | CRITICAL | High-Fidelity Process Spawn from Business Communication Service |
+| T1566.004 | HIGH | High-Fidelity Detection of Post-Vishing Remote Tool Execution |
 | T1583 | HIGH | High-Fidelity Offensive Infrastructure Provisioning - T1583 |
 | T1583.001 | HIGH | High-Fidelity VPS Infrastructure Provisioning - T1583.001 |
 | T1583.002 | HIGH | High-Fidelity Automated Domain Registration & Acquisition - T1583.002 |

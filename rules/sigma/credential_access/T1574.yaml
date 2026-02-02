@@ -1,0 +1,65 @@
+title: Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574)
+id: 21c89b0b-ed8e-4bad-969e-cfd70a3a32d5
+status: stable
+description: |
+    Detects potential DLL hijacking or side-loading by monitoring trusted system 
+    binaries loading DLLs from non-standard, user-writable directories, while 
+    filtering out legitimate signed modules and known application behaviors.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1574/001/
+    - https://attack.mitre.org/techniques/T1574/002/
+tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1574
+    - attack.t1574.001
+    - attack.t1574.002
+logsource:
+    category: image_load
+    product: windows
+detection:
+    selection_system_proc:
+        Image|startsWith: 'C:\Windows\'
+        Image|endswith:
+            - '\svchost.exe'
+            - '\explorer.exe'
+            - '\taskhostw.exe'
+            - '\searchindexer.exe'
+            - '\gpscript.exe'
+            - '\calc.exe'
+            - '\notepad.exe'
+            - '\cmd.exe'
+
+    selection_suspicious_load_path:
+        ImageLoaded|contains:
+            - '\Users\'
+            - '\ProgramData\'
+            - '\Windows\Temp\'
+            - '\AppData\'
+            - '\Public\'
+
+    selection_common_hijack_names:
+        ImageLoaded|endswith:
+            - '\version.dll'
+            - '\ntmarta.dll'
+            - '\cryptbase.dll'
+            - '\uxtheme.dll'
+            - '\dwmapi.dll'
+            - '\winmm.dll'
+            - '\dnsapi.dll'
+
+    filter_standard_locations:
+        ImageLoaded|startsWith:
+            - 'C:\Windows\System32\'
+            - 'C:\Windows\WinSxS\'
+            - 'C:\Program Files\'
+            - 'C:\Program Files (x86)\'
+
+    filter_known_signatures:
+        Signed: 'true'
+        SignatureStatus: 'Valid'
+
+    condition: selection_system_proc and selection_suspicious_load_path and selection_common_hijack_names and not (filter_standard_locations or filter_known_signatures)
+level: critical

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (operationName in ("User registered security info", "Admin registered security info")) and (['targetResources.modifiedProperties.newValue'] in ("*StrongAuthenticationPhoneAppDetail*", "*StrongAuthenticationUserDetails*")) and (['additionalDetails.value'] =~ "MFA requirement satisfied by claim in the token" or (not (ipAddress in ("203.0.113.*", "198.51.100.*")))) and (not (['initiatedBy.user.userPrincipalName'] in ("*helpdesk-admin@*", "*it-support@*")))

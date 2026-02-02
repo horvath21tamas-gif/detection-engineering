@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 13:32:35`
+**Utolsó frissítés:** `2026-02-02 13:42:31`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 257 | 100% |
-| Splunk (SPL) | 237 | 92.2% |
-| Microsoft Sentinel (KQL) | 238 | 92.6% |
-| QRadar (AQL) | 141 | 54.9% |
-| Elastic (KQL/EQL) | 238 | 92.6% |
-| RSA NetWitness | 236 | 91.8% |
+| Sigma (Forrás) | 262 | 100% |
+| Splunk (SPL) | 239 | 91.2% |
+| Microsoft Sentinel (KQL) | 240 | 91.6% |
+| QRadar (AQL) | 143 | 54.6% |
+| Elastic (KQL/EQL) | 240 | 91.6% |
+| RSA NetWitness | 238 | 90.8% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -74,6 +74,11 @@
 | T1136.002 | CRITICAL | Ultra-Pro Unauthorized Domain Account Creation (T1136.002) |
 | T1136.003 | CRITICAL | Ultra-Pro Unauthorized Cloud Account Creation (T1136.003) |
 | T1137 | HIGH | Ultra-Pro Office Application Startup Persistence (T1137) |
+| T1137.001 | CRITICAL | Ultra-Pro Office Global Template Integrity (T1137.001) |
+| T1137.002 | CRITICAL | Ultra-Pro Office Test DLL Persistence (T1137.002) |
+| T1137.003 | HIGH | Ultra-Pro Outlook Custom Forms Persistence (T1137.003) |
+| T1137.004 | CRITICAL | Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004) |
+| T1137.005 | CRITICAL | Ultra-Pro Office Security Policy Tampering (T1137.005) |
 | T1176 | CRITICAL | Ultra-Pro Browser Extension Force-Install Persistence (T1176) |
 | T1189 | CRITICAL | Browser-Originating Shell or System Tool Execution |
 | T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |

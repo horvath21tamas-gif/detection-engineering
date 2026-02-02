@@ -57,6 +57,11 @@
 - [Ultra-Pro Unauthorized Domain Account Creation (T1136.002)](#ultra-pro-unauthorized-domain-account-creation-(t1136002))
 - [Ultra-Pro Unauthorized Cloud Account Creation (T1136.003)](#ultra-pro-unauthorized-cloud-account-creation-(t1136003))
 - [Ultra-Pro Office Application Startup Persistence (T1137)](#ultra-pro-office-application-startup-persistence-(t1137))
+- [Ultra-Pro Office Global Template Integrity (T1137.001)](#ultra-pro-office-global-template-integrity-(t1137001))
+- [Ultra-Pro Office Test DLL Persistence (T1137.002)](#ultra-pro-office-test-dll-persistence-(t1137002))
+- [Ultra-Pro Outlook Custom Forms Persistence (T1137.003)](#ultra-pro-outlook-custom-forms-persistence-(t1137003))
+- [Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004)](#ultra-pro-outlook-home-page-hijacking-&-bypass-(t1137004))
+- [Ultra-Pro Office Security Policy Tampering (T1137.005)](#ultra-pro-office-security-policy-tampering-(t1137005))
 - [Ultra-Pro Browser Extension Force-Install Persistence (T1176)](#ultra-pro-browser-extension-force-install-persistence-(t1176))
 - [Browser-Originating Shell or System Tool Execution](#browser-originating-shell-or-system-tool-execution)
 - [Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server](#suspicious-cross-site-scripting-(xss)-attempt-detected-on-web-server)
@@ -1167,6 +1172,91 @@ source IP reputation, and the absence of authorized provisioning service princip
 originating from non-standard processes or pointing to suspicious file locations.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1137`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Office Global Template Integrity (T1137.001)
+- **Azonosító:** `T1137_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects high-risk modifications to the Office global template (Normal.dotm) by 
+identifying non-Office processes or suspicious file creation patterns in the 
+Templates directory.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Office Test DLL Persistence (T1137.002)
+- **Azonosító:** `T1137_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the creation or modification of the 'Office Test' Registry key used for 
+DLL sideloading persistence. High-fidelity detection filters for non-standard 
+paths and unauthorized parent processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Outlook Custom Forms Persistence (T1137.003)
+- **Azonosító:** `T1137_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized Outlook Custom Forms persistence by monitoring 
+non-standard Registry modifications and suspicious process spawning 
+from Outlook related to form script execution.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004)
+- **Azonosító:** `T1137_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized modification of Outlook Folder Home Pages and the 
+enabling of WebView bypass keys. This technique is used to execute 
+arbitrary code when a user clicks on an Outlook folder.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Office Security Policy Tampering (T1137.005)
+- **Azonosító:** `T1137_005.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized weakening of Microsoft Office security policies. 
+Focuses on global macro enablement, addition of untrusted network locations, 
+and policy modifications originating from non-standard processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

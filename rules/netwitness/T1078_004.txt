@@ -1,0 +1,2 @@
+properties.status.errorCode = 0 AND (((properties.((userPrincipalName = '*admin*' OR userPrincipalName = '*sync_*' OR userPrincipalName = '*global*'))) AND properties.((authenticationRequirement = '*singleFactorAuthentication*'))) OR (properties.((userAgent = '*python-requests*' OR userAgent = '*curl*' OR userAgent = '*Postman*' OR userAgent = '*PowerShell*')))) AND (NOT (((properties.((ipAddress = '*1.2.3.4*'))&& properties.location.((city = '*Budapest*'))) OR properties.((authenticationProtocol = '*servicePrincipal*'))))
+)

@@ -25,6 +25,7 @@
 | T1036.005 | HIGH | Legitimate Windows Binary Copied to User-Writable Location |
 | T1047 | HIGH | Suspicious Remote Process Creation via WMIC |
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
+| T1053.002 | HIGH | High-Fidelity At.exe Activity Detection |
 | T1053.005 | HIGH | Suspicious Scheduled Task Creation Executing PowerShell |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 Libraries |
 | T1059 | HIGH | High-Fidelity Scripting Interpreter Contextual Anomaly, Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
@@ -81,7 +82,8 @@
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |
 | T1559.001 | HIGH | High-Fidelity Indirect IPC and COM Execution, Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity) |
-| T1559.002 | CRITICAL | High-Fidelity Indirect IPC and COM Execution |
+| T1559.002 | CRITICAL | High-Fidelity Office DDE Contextual Anomaly, High-Fidelity Indirect IPC and COM Execution |
+| T1559.003 | HIGH | High-Fidelity Hypervisor API and VM Escape Research |
 | T1560.001 | HIGH | Adatok gyanús archiválása exfiltráció céljából |
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |

@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-01-29 08:01:08`
+**Utolsó frissítés:** `2026-02-02 06:13:11`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 131 | 100% |
-| Splunk (SPL) | 131 | 100.0% |
-| Microsoft Sentinel (KQL) | 131 | 100.0% |
-| QRadar (AQL) | 70 | 53.4% |
-| Elastic (KQL/EQL) | 131 | 100.0% |
-| RSA NetWitness | 131 | 100.0% |
+| Sigma (Forrás) | 133 | 100% |
+| Splunk (SPL) | 133 | 100.0% |
+| Microsoft Sentinel (KQL) | 133 | 100.0% |
+| QRadar (AQL) | 72 | 54.1% |
+| Elastic (KQL/EQL) | 133 | 100.0% |
+| RSA NetWitness | 133 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -35,6 +35,7 @@
 | T1098 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
 | T1105 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1110.001 | MEDIUM | Multiple Failed Login Attempts for Single User (Possible Password Guessing) |
+| T1133 | HIGH | Anomalous External Remote Service Access Context |
 | T1189 | CRITICAL | Browser-Originating Shell or System Tool Execution |
 | T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |
 | T1197 | HIGH | Suspicious File Download via Bitsadmin (High Fidelity) |

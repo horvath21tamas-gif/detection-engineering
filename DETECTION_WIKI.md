@@ -7,9 +7,9 @@
 - [Suspicious Base64-Encoded PowerShell Command with Network Activity](#suspicious-base64-encoded-powershell-command-with-network-activity)
 - [Legitimate Windows Binary Copied to User-Writable Location](#legitimate-windows-binary-copied-to-user-writable-location)
 - [Suspicious Remote Process Creation via WMIC](#suspicious-remote-process-creation-via-wmic)
-- [High-Fidelity At.exe Activity Detection](#high-fidelity-atexe-activity-detection)
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [High-Fidelity At.exe Activity Detection](#high-fidelity-atexe-activity-detection)
+- [High-Fidelity Cron Persistence and In-Place Modification](#high-fidelity-cron-persistence-and-in-place-modification)
 - [Suspicious Scheduled Task Creation Executing PowerShell](#suspicious-scheduled-task-creation-executing-powershell)
 - [High-Fidelity Systemd Timer Persistence Detection](#high-fidelity-systemd-timer-persistence-detection)
 - [Suspicious Credential API Hooking via Win32 Libraries](#suspicious-credential-api-hooking-via-win32-libraries)
@@ -167,6 +167,7 @@
 - [Anomalous SEO Poisoning and Metadata Staging](#anomalous-seo-poisoning-and-metadata-staging)
 - [High-Fidelity Container Interactive Shell Execution](#high-fidelity-container-interactive-shell-execution)
 - [High-Fidelity Malicious Container Deployment Detection](#high-fidelity-malicious-container-deployment-detection)
+- [High-Fidelity Serverless Function Persistence or Abuse](#high-fidelity-serverless-function-persistence-or-abuse)
 - [High-Fidelity Cloud Account Acquisition and Initialization - T1650](#high-fidelity-cloud-account-acquisition-and-initialization---t1650)
 - [High-Fidelity Cloud Administration Agent Abuse](#high-fidelity-cloud-administration-agent-abuse)
 - [Professional Content Impersonation and Infrastructure Mirroring](#professional-content-impersonation-and-infrastructure-mirroring)
@@ -262,23 +263,6 @@
 
 ---
 
-## High-Fidelity At.exe Activity Detection
-- **Azonosító:** `T1052_002.yaml`
-- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
-- **Kritikusság:** 🟠 (high)
-- **Leírás:** Detects the execution of at.exe for task scheduling. Since 'at' is deprecated, 
-any interactive use or remote machine targeting (\\) is considered highly suspicious 
-and indicative of persistence or lateral movement.
-- **Hamis pozitívok:** Nincs megadva
-- **MITRE ATT&CK:** `002`
-
-#### 🚨 Response Playbook
-1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
-2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
-
----
-
 ## Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt
 - **Azonosító:** `T1053.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
@@ -303,6 +287,23 @@ any interactive use or remote machine targeting (\\) is considered highly suspic
 and indicative of persistence or lateral movement.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Cron Persistence and In-Place Modification
+- **Azonosító:** `T1053_003.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized creation or modification of cron jobs by monitoring 
+direct writes to cron directories and suspicious shell one-liners. 
+Filters legitimate package managers and configuration management tools.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -2766,6 +2767,23 @@ host-level resource sharing, and non-standard image sources.
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Serverless Function Persistence or Abuse
+- **Azonosító:** `T1648.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious creation or update of AWS Lambda functions by monitoring 
+non-automated activity, unusual source IPs, and risky configurations. 
+Focuses on bypassing CI/CD pipelines.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1648`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

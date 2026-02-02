@@ -26,6 +26,7 @@
 | T1047 | HIGH | Suspicious Remote Process Creation via WMIC |
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
 | T1053.002 | HIGH | High-Fidelity At.exe Activity Detection |
+| T1053.003 | HIGH | High-Fidelity Cron Persistence and In-Place Modification |
 | T1053.005 | HIGH | Suspicious Scheduled Task Creation Executing PowerShell |
 | T1053.007 | HIGH | High-Fidelity Systemd Timer Persistence Detection |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 Libraries |
@@ -185,6 +186,7 @@
 | T1608.006 | HIGH | Anomalous SEO Poisoning and Metadata Staging |
 | T1609 | CRITICAL | High-Fidelity Container Interactive Shell Execution |
 | T1610 | CRITICAL | High-Fidelity Malicious Container Deployment Detection |
+| T1648 | HIGH | High-Fidelity Serverless Function Persistence or Abuse |
 | T1650 | HIGH | High-Fidelity Cloud Account Acquisition and Initialization - T1650 |
 | T1651 | CRITICAL | High-Fidelity Cloud Administration Agent Abuse |
 | T1659 | HIGH | Professional Content Impersonation and Infrastructure Mirroring |

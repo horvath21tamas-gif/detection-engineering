@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((TargetFilename in ("*\SYSVOL\*", "*\NETLOGON\*")) and (TargetFilename in ("*.lnk", "*.bat", "*.ps1", "*.vbs", "*.cmd", "*.exe"))) and (not ((FolderPath in ("*\ntfrs.exe", "*\dfsrs.exe", "*\robocopy.exe", "*\svchost.exe")) or (User in ("*NT AUTHORITY\SYSTEM*", "*NT AUTHORITY\NETWORK SERVICE*"))))

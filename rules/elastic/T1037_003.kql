@@ -1,0 +1,1 @@
+((file.path:(*\\SYSVOL\\* OR *\\NETLOGON\\*)) AND (file.path:(*.lnk OR *.bat OR *.ps1 OR *.vbs OR *.cmd OR *.exe))) AND (NOT ((process.executable:(*\\ntfrs.exe OR *\\dfsrs.exe OR *\\robocopy.exe OR *\\svchost.exe)) OR (user.name:(*NT\ AUTHORITY\\SYSTEM* OR *NT\ AUTHORITY\\NETWORK\ SERVICE*))))

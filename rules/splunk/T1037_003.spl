@@ -1,0 +1,1 @@
+TargetFilename IN ("*\\SYSVOL\\*", "*\\NETLOGON\\*") TargetFilename IN ("*.lnk", "*.bat", "*.ps1", "*.vbs", "*.cmd", "*.exe") NOT (Image IN ("*\\ntfrs.exe", "*\\dfsrs.exe", "*\\robocopy.exe", "*\\svchost.exe") OR User IN ("*NT AUTHORITY\\SYSTEM*", "*NT AUTHORITY\\NETWORK SERVICE*"))

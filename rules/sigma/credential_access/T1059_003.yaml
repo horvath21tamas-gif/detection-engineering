@@ -41,7 +41,7 @@ detection:
         - CommandLine|contains: 
             - 'C:\Windows\System32\wbem\WMIC.exe'
             - 'Microsoft Monitoring Agent'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
           CommandLine|contains: 'C:\Windows\TEMP\'
 
     condition: selection_cmd and (selection_risky_parents or selection_attack_patterns) and not filter_legit_admin

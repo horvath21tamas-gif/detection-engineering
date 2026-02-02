@@ -18,9 +18,14 @@ available_sources:
   - windows
   - linux
   - azure
+  - macos
+  - m365
   - generic
   service:
   - sysmon
   - security
   - powershell
   - system
+  - signinlogs
+  - audit
+  - exchange

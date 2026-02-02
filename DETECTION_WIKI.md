@@ -13,6 +13,8 @@
 - [High-Fidelity Scripting Interpreter Contextual Anomaly](#high-fidelity-scripting-interpreter-contextual-anomaly)
 - [Suspicious Encoded PowerShell Command Execution](#suspicious-encoded-powershell-command-execution)
 - [High-Fidelity AppleScript (osascript) Abuse Detection](#high-fidelity-applescript-(osascript)-abuse-detection)
+- [Advanced Windows Command Shell Contextual Anomaly](#advanced-windows-command-shell-contextual-anomaly)
+- [High-Fidelity Unix Shell Abuse and Reverse Shell Detection](#high-fidelity-unix-shell-abuse-and-reverse-shell-detection)
 - [Suspicious SYSTEM Process Spawned from User Context](#suspicious-system-process-spawned-from-user-context)
 - [Security Event Log Cleared Using wevtutil.exe](#security-event-log-cleared-using-wevtutilexe)
 - [High-Fidelity Anomalous Logon via Valid Account](#high-fidelity-anomalous-logon-via-valid-account)
@@ -330,6 +332,40 @@ base64 encoded payloads, and execution originating from untrusted parent process
 like browsers or mail clients.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Advanced Windows Command Shell Contextual Anomaly
+- **Azonosító:** `T1059_003.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects suspicious cmd.exe execution by correlating risky parent processes 
+(Web Servers, Office, SQL) with anomalous command-line patterns like 
+command chaining and discovery.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Unix Shell Abuse and Reverse Shell Detection
+- **Azonosító:** `T1059_004.yaml`
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects suspicious Unix shell behavior, focusing on reverse shells, 
+pipe-to-shell patterns, and execution from high-risk network-facing 
+processes (web servers, databases) while filtering common automation.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

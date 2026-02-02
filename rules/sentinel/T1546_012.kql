@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetObject contains "Microsoft\Windows NT\CurrentVersion\FolderPath File Execution Options\" and TargetObject endswith "\Debugger") and ((TargetObject in ("*\utilman.exe*", "*\sethc.exe*", "*\osk.exe*", "*\magnify.exe*", "*\DisplaySwitch.exe*", "*\AtBroker.exe*", "*\taskmgr.exe*", "*\lsass.exe*", "*\svchost.exe*", "*\csrss.exe*")) or ((Details in ("*cmd.exe*", "*powershell*", "*pwsh*", "*cscript*", "*wscript*", "*mshta*", "*regsvr32*")) or (Details in ("*\Users\*", "*\ProgramData\*", "*\Windows\Temp\*")))) and (not (((FolderPath in ("*\Microsoft Visual Studio\*", "*\Windows Kits\*", "*\Common Files\Microsoft Shared\Windows Error Reporting\*")) and (FolderPath in ("*\trustedinstaller.exe", "*\msiexec.exe", "*\TiWorker.exe"))) or (TargetObject in ("*\Google\Update\*", "*\Microsoft\EdgeUpdate\*"))))

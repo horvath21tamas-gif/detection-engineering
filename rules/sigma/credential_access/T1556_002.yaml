@@ -1,0 +1,68 @@
+title: Exploit-Grade Password Filter DLL Hijacking via LSA Notification Packages
+id: 119edf21-2d32-4402-9099-819c9dd15c36
+status: stable
+description: >
+  Detects exploitation-grade installation of a malicious Password Filter
+  DLL by identifying unauthorized modification of the LSA Notification
+  Packages registry value to add a new DLL located in a user-writable
+  directory by a non-trusted process or account. This behavior strongly
+  indicates credential interception on Domain Controllers.
+references:
+  - https://attack.mitre.org/techniques/T1556/002/
+author: hota05
+date: 2026/02/02
+tags:
+  - attack.credential_access
+  - attack.persistence
+  - attack.privilege_escalation
+  - attack.t1556.002
+
+logsource:
+  category: registry_set
+  product: windows
+
+detection:
+  lsa_notification_packages_value:
+    TargetObject: 'HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\Notification Packages'
+
+  dll_added:
+    Details|contains: '.dll'
+
+  user_writable_dll_path:
+    Details|contains:
+      - '\\Users\\'
+      - '\\Users\\Public\\'
+      - '\\ProgramData\\'
+      - '\\AppData\\'
+      - '\\Temp\\'
+
+  exclude_system_dll_paths:
+    Details|contains:
+      - '\\Windows\\System32\\'
+      - '\\Windows\\SysWOW64\\'
+
+  exclude_trusted_writers:
+    Image|contains:
+      - '\\Windows\\System32\\lsass.exe'
+      - '\\Windows\\System32\\services.exe'
+      - '\\Windows\\System32\\msiexec.exe'
+      - '\\Windows\\servicing\\'
+      - '\\Windows\\System32\\dism.exe'
+
+  exclude_trusted_accounts:
+    User|contains:
+      - 'NT AUTHORITY\\SYSTEM'
+      - 'NT SERVICE\\TrustedInstaller'
+
+  condition: lsa_notification_packages_value
+             and dll_added
+             and user_writable_dll_path
+             and not exclude_system_dll_paths
+             and not exclude_trusted_writers
+             and not exclude_trusted_accounts
+
+falsepositives:
+  - Explicitly approved custom password policy extensions (should be extremely rare and allowlisted)
+  - Controlled red team or malware research environments
+
+level: critical

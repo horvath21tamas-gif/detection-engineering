@@ -1,0 +1,45 @@
+title: High-Fidelity Account Manipulation - Persistence Focused
+id: a405cb14-8d47-4e6b-8c4e-e3b6f63b89e2
+status: stable
+description: |
+    Detects suspicious and rare modifications to user account attributes that are 
+    strongly associated with persistence and privilege escalation, such as 
+    SID History injection, Kerberos Constrained Delegation changes, and 
+    disabling password expiration for sensitive accounts.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1098/
+tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1098
+logsource:
+    product: windows
+    service: security
+detection:
+    selection_base_event:
+        EventID: 4738 
+
+    selection_critical_attributes:
+        - PasswordNeverExpires: 'true'
+        - SidHistory: '*'            
+        - AllowedToDelegateTo: '*'    
+        - SecurityDescriptor: '*'    
+
+    filter_legit_system_accounts:
+        SubjectUserSid: 'S-1-5-18'
+
+    filter_legit_idm:
+        SubjectUserName|contains:
+            - 'MSOL_'
+            - 'AD_Sync_Admin'
+            - 'AzureADConnect'
+
+    filter_admin_jump_hosts:
+        ComputerName|contains:
+            - 'PAW-ADMIN-' 
+            - 'JUMP-HOST-'
+
+    condition: selection_base_event and selection_critical_attributes and not (filter_legit_system_accounts or filter_legit_idm or filter_admin_jump_hosts)
+level: critical

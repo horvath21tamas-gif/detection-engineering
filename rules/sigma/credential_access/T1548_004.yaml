@@ -42,7 +42,7 @@ detection:
             - '/System/Library/PrivateFrameworks/'        
         - Image|contains:
             - '/usr/sbin/softwareupdate'
-        - User: 'root'
+        - username: 'root'
 
     condition: selection_osascript and selection_elevation_args and selection_suspicious_parent and not filter_trusted_management
 level: critical

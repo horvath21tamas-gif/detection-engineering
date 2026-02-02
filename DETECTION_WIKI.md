@@ -101,6 +101,7 @@
 - [Ultra-Pro PowerShell Profile Injection Detection (T1546.013)](#ultra-pro-powershell-profile-injection-detection-(t1546013))
 - [Ultra-Pro WMI Event Subscription Persistence (T1546.014)](#ultra-pro-wmi-event-subscription-persistence-(t1546014))
 - [Suspicious COM Hijacking for User-Level Persistence (High Fidelity)](#suspicious-com-hijacking-for-user-level-persistence-(high-fidelity))
+- [Ultra-Pro MSI Installer Custom Action Persistence (T1546.016)](#ultra-pro-msi-installer-custom-action-persistence-(t1546016))
 - [Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása](#gyanús-rendszerindítási-vagy-bejelentkezési-automatikus-indítás-végrehajtása)
 - [Suspicious Registry Run Key Modification for User Persistence (High Fidelity)](#suspicious-registry-run-key-modification-for-user-persistence-(high-fidelity))
 - [High-Fidelity LSA Authentication Package Persistence](#high-fidelity-lsa-authentication-package-persistence)
@@ -1853,6 +1854,22 @@ tools and focuses on non-standard scripted execution.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro MSI Installer Custom Action Persistence (T1546.016)
+- **Azonosító:** `T1546_016.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious child processes spawned by msiexec.exe originating from non-standard 
+directories. This targets malicious MSI Custom Actions used for persistence or privilege escalation.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `016`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

@@ -6,12 +6,12 @@
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 228 | 100% |
-| Splunk (SPL) | 216 | 94.7% |
-| Microsoft Sentinel (KQL) | 216 | 94.7% |
-| QRadar (AQL) | 127 | 55.7% |
-| Elastic (KQL/EQL) | 216 | 94.7% |
-| RSA NetWitness | 216 | 94.7% |
+| Sigma (Forrás) | 232 | 100% |
+| Splunk (SPL) | 219 | 94.4% |
+| Microsoft Sentinel (KQL) | 220 | 94.8% |
+| QRadar (AQL) | 127 | 54.7% |
+| Elastic (KQL/EQL) | 220 | 94.8% |
+| RSA NetWitness | 219 | 94.4% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -115,7 +115,11 @@
 | T1546.009 | CRITICAL | Ultra-Pro AppInit_DLLs Persistence Detection (T1546.009) |
 | T1546.010 | CRITICAL | Ultra-Pro AppCert DLL Persistence Detection (T1546.010) |
 | T1546.011 | CRITICAL | Ultra-Pro Application Shimming Persistence Detection (T1546.011) |
+| T1546.012 | CRITICAL | Ultra-Pro IFEO Debugger Hijacking Detection (T1546.012) |
+| T1546.013 | HIGH | Ultra-Pro PowerShell Profile Injection Detection (T1546.013) |
+| T1546.014 | CRITICAL | Ultra-Pro WMI Event Subscription Persistence (T1546.014) |
 | T1546.015 | HIGH | Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
+| T1546.016 | HIGH | Ultra-Pro MSI Installer Custom Action Persistence (T1546.016) |
 | T1547 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása |
 | T1547.001 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása, Suspicious Registry Run Key Modification for User Persistence (High Fidelity) |
 | T1547.002 | CRITICAL | High-Fidelity LSA Authentication Package Persistence |

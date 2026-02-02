@@ -54,7 +54,7 @@ detection:
             - 'C:\Windows\IME\'           
             - 'C:\Program Files\'
             - 'C:\Program Files (x86)\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_parent and selection_suspicious_path and (selection_child_procs or selection_suspicious_args) and not filter_trusted_sources
 level: high

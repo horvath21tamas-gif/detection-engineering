@@ -1,0 +1,60 @@
+title: Ultra-Pro File Association Hijacking (T1546.001)
+id: 825d2310-d289-4243-a823-695adf44f0ae
+status: stable
+description: |
+    Detects unauthorized changes to file associations in the Registry by monitoring 
+    suspicious actor processes and non-standard executable paths in 'shell\open\command'.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1546/001/
+tags:
+    - attack.persistence
+    - attack.t1546.001
+logsource:
+    category: registry_event
+    product: windows
+detection:
+    selection_registry_paths:
+        TargetObject|contains:
+            - '\shell\open\command\'
+            - 'HKEY_CLASSES_ROOT\.'
+            - '_Classes\.'
+
+    selection_suspicious_values:
+        Details|contains:
+            - 'powershell'
+            - 'cmd.exe'
+            - 'regsvr32'
+            - 'mshta'
+            - 'cscript'
+            - 'wscript'
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+            - '\PerfLogs\'
+
+    selection_suspicious_actor:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\w3wp.exe'     
+            - '\cscript.exe'
+            - '\wscript.exe'
+
+    filter_trusted_processes:
+        Image|endswith:
+            - '\explorer.exe'    
+            - '\msiexec.exe'   
+            - '\OpenWith.exe'   
+            - '\svchost.exe'     
+            - '\TiWorker.exe'    
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_known_paths:
+        Details|contains:
+            - 'C:\Program Files\'
+            - 'C:\Program Files (x86)\'
+            - 'C:\Windows\System32\'
+
+    condition: selection_registry_paths and (selection_suspicious_values or selection_suspicious_actor) and not (filter_trusted_processes or filter_known_paths)
+level: critical

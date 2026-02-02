@@ -51,7 +51,7 @@ detection:
             - 'bitnami/'
 
     filter_legit_automation:
-        - User: 
+        - username: 
             - 'terraform'
             - 'ansible-runner'
             - 'kube-system'

@@ -1,0 +1,58 @@
+title: Ultra-Pro Web Shell Execution Patterns (T1505.003)
+id: e89205cd-fd90-4ee7-8082-5944a7d01055
+status: stable
+description: |
+    Detects high-confidence indicators of web shell activity by monitoring web server processes 
+    spawning interactive shells or system reconnaissance tools. Includes strict filtering 
+    for legitimate .NET compilation and IIS administration.
+author: hota05
+date: 2026-02-02
+tags:
+    - attack.persistence
+    - attack.t1505.003
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_web_servers:
+        ParentImage|endswith:
+            - '\w3wp.exe'        
+            - '\httpd.exe'        
+            - '\nginx.exe'        
+            - '\php-cgi.exe'       
+            - '\tomcat.exe'      
+            - '\java.exe'        
+
+    selection_suspicious_children:
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\sh.exe'
+            - '\bash.exe'
+            - '\whoami.exe'
+            - '\net.exe'
+            - '\net1.exe'
+            - '\ipconfig.exe'
+            - '\certutil.exe'      
+            - '\bitsadmin.exe'   
+            - '\systeminfo.exe'
+            - '\nltest.exe'       
+            - '\netstat.exe'       
+
+    filter_legit_compilation:
+        Image|endswith:
+            - '\csc.exe'         
+            - '\cvtres.exe'
+        CommandLine|contains:
+            - '\Windows\Microsoft.NET\Framework'
+            - '\Temporary ASP.NET Files\'
+
+    filter_iis_management:
+        CommandLine|contains:
+            - 'appcmd.exe list config' 
+            - 'iisreset.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_web_servers and selection_suspicious_children and not (filter_legit_compilation or filter_iis_management)
+level: critical

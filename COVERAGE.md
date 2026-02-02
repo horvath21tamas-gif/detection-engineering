@@ -65,6 +65,9 @@
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |
 | T1566 | CRITICAL | High-Fidelity Phishing Payload Execution from Communication Apps |
+| T1566.001 | CRITICAL | High-Fidelity Spearphishing Attachment Execution |
+| T1566.002 | CRITICAL | High-Fidelity Browser-Originating Payload Execution |
+| T1566.003 | CRITICAL | High-Fidelity Process Spawn from Business Communication Service |
 | T1583 | HIGH | High-Fidelity Offensive Infrastructure Provisioning - T1583 |
 | T1583.001 | HIGH | High-Fidelity VPS Infrastructure Provisioning - T1583.001 |
 | T1583.002 | HIGH | High-Fidelity Automated Domain Registration & Acquisition - T1583.002 |

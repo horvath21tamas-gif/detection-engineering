@@ -1,0 +1,58 @@
+title: Ultra-Pro PowerShell Profile Injection Detection (T1546.013)
+id: 5348327c-3b67-469f-9571-a7d6785e165a
+status: stable
+description: |
+    Detects unauthorized automated modification of PowerShell profiles. 
+    Filters out legitimate manual editing via text editors and focuses on 
+    programmatic injection from shells or non-standard parent processes.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1546/013/
+tags:
+    - attack.persistence
+    - attack.t1546.013
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection_target_files:
+        TargetFilename|endswith:
+            - '\Microsoft.PowerShell_profile.ps1'
+            - '\profile.ps1'
+
+    selection_suspicious_actor:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\w3wp.exe'        
+            - '\sqlservr.exe'   
+            - '\nginx.exe'
+            - '\apache.exe'
+
+    filter_trusted_editors:
+        Image|endswith:
+            - '\notepad.exe'
+            - '\notepad++.exe'
+            - '\code.exe'       
+            - '\code - insid.exe'
+            - '\powershell_ise.exe'
+            - '\sublime_text.exe'
+            - '\explorer.exe'   
+
+    filter_installers:
+        Image|endswith:
+            - '\msiexec.exe'
+            - '\trustedinstaller.exe'
+            - '\choco.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_target_files and (selection_suspicious_actor or selection_suspicious_parent) and not (filter_trusted_editors or filter_installers)
+level: high

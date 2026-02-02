@@ -68,6 +68,7 @@
 | T1200 | CRITICAL | Malicious Hardware-Induced Command Execution (HID Injection) |
 | T1203 | CRITICAL | High-Fidelity Client-Side Exploitation and Shell Spawning |
 | T1204 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity) |
+| T1204.001 | CRITICAL | High-Fidelity User Execution of Malicious Link (T1204.001) |
 | T1204.004 | HIGH | Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel |
 | T1218 | HIGH | Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1218.005 | HIGH | Suspicious Mshta Execution of Remote Script (High Fidelity) |

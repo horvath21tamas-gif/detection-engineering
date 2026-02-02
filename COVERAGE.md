@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 13:55:35`
+**Utolsó frissítés:** `2026-02-02 14:06:52`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 265 | 100% |
-| Splunk (SPL) | 241 | 90.9% |
-| Microsoft Sentinel (KQL) | 242 | 91.3% |
-| QRadar (AQL) | 145 | 54.7% |
-| Elastic (KQL/EQL) | 242 | 91.3% |
-| RSA NetWitness | 240 | 90.6% |
+| Sigma (Forrás) | 271 | 100% |
+| Splunk (SPL) | 246 | 90.8% |
+| Microsoft Sentinel (KQL) | 247 | 91.1% |
+| QRadar (AQL) | 147 | 54.2% |
+| Elastic (KQL/EQL) | 247 | 91.1% |
+| RSA NetWitness | 245 | 90.4% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -104,9 +104,14 @@
 | T1219 | HIGH | Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern |
 | T1486 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1490 | CRITICAL | Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity), Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
-| T1505.003 | HIGH | Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
+| T1505.003 | HIGH | Ultra-Pro Web Shell Execution Patterns (T1505.003), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1525 | CRITICAL | Exploit-Grade Unauthorized Container Image Execution (Implant Container Image) |
 | T1542 | CRITICAL | Ultra-Pro Pre-OS Boot Manipulation (T1542) |
+| T1542.001 | CRITICAL | Ultra-Pro ROM Kit & UEFI Firmware Tampering (T1542.001) |
+| T1542.002 | CRITICAL | Ultra-Pro Component Firmware Tampering (T1542.002) |
+| T1542.003 | CRITICAL | Ultra-Pro Bootkit Persistence & EFI Tampering (T1542.003) |
+| T1542.004 | CRITICAL | Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004) |
+| T1542.005 | CRITICAL | Ultra-Pro DHCP/PXE Boot Hijacking (T1542.005) |
 | T1543 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1543.001 | CRITICAL | Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001) |
 | T1543.002 | CRITICAL | High-Fidelity Systemd Timer Persistence Detection, Ultra-Pro Systemd Service Persistence (T1543.002) |

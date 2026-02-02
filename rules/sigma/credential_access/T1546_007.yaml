@@ -1,0 +1,49 @@
+title: Ultra-Pro Netsh Helper DLL Persistence (T1546.007)
+id: 3e82f402-e0ca-4de3-a8e1-048c198beb85
+status: stable
+description: |
+    Detects unauthorized Netsh Helper DLL registration by monitoring Registry writes 
+    and command-line arguments. Filters out known-good installers and signed Microsoft binaries.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1546/007/
+tags:
+    - attack.persistence
+    - attack.t1546.007
+logsource:
+    product: windows
+    category: registry_event
+detection:
+    selection_registry_path:
+        TargetObject|contains: 'HKLM\SOFTWARE\Microsoft\NetSh'
+
+    selection_suspicious_location:
+        - Details|contains:
+            - '\Users\'
+            - '\ProgramData\'
+            - '\Windows\Temp\'
+            - '\AppData\'
+        - Details|endswith: '.exe' 
+
+    selection_suspicious_actor:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\w3wp.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+
+    filter_trusted_installers:
+        Image|endswith:
+            - '\msiexec.exe'
+            - '\trustedinstaller.exe'
+            - '\TiWorker.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_microsoft_signed:
+        Details|startsWith: 'C:\Windows\System32\'
+        Details|endswith: '.dll'
+
+    condition: selection_registry_path and (selection_suspicious_location or selection_suspicious_actor) and not (filter_trusted_installers or filter_microsoft_signed)
+level: critical

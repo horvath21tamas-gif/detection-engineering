@@ -11,6 +11,7 @@
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [High-Fidelity At.exe Activity Detection](#high-fidelity-atexe-activity-detection)
 - [Suspicious Scheduled Task Creation Executing PowerShell](#suspicious-scheduled-task-creation-executing-powershell)
+- [High-Fidelity Systemd Timer Persistence Detection](#high-fidelity-systemd-timer-persistence-detection)
 - [Suspicious Credential API Hooking via Win32 Libraries](#suspicious-credential-api-hooking-via-win32-libraries)
 - [High-Fidelity Scripting Interpreter Contextual Anomaly](#high-fidelity-scripting-interpreter-contextual-anomaly)
 - [Suspicious Encoded PowerShell Command Execution](#suspicious-encoded-powershell-command-execution)
@@ -66,6 +67,7 @@
 - [High-Fidelity Indirect IPC and COM Execution](#high-fidelity-indirect-ipc-and-com-execution)
 - [Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity)](#gyanús-elnevezett-csővezeték-létrehozás-amely-utólagos-kihasználási-eszközökhöz-kapcsolódik-(high-fidelity))
 - [High-Fidelity Office DDE Contextual Anomaly](#high-fidelity-office-dde-contextual-anomaly)
+- [High-Fidelity Hypervisor API and VM Escape Research](#high-fidelity-hypervisor-api-and-vm-escape-research)
 - [Adatok gyanús archiválása exfiltráció céljából](#adatok-gyanús-archiválása-exfiltráció-céljából)
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
@@ -316,6 +318,23 @@ and indicative of persistence or lateral movement.
 - **Leírás:** Detects suspicious creation of scheduled tasks using schtasks.exe that execute PowerShell, commonly abused by attackers to establish persistence or delayed execution of malicious payloads.
 - **Hamis pozitívok:** Rare custom administrative automation, Approved red team or malware simulation activity
 - **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Systemd Timer Persistence Detection
+- **Azonosító:** `T1053_007.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the creation or activation of systemd timers used for persistence. 
+Focuses on non-standard directory locations (user-level units), interactive shell 
+triggers, and suspicious execution payloads (obfuscation, network tools).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002, 007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -1192,6 +1211,23 @@ Filters legitimate financial data links (Excel) and focuses on Office apps launc
 interpreters or LOLBins with DDE-specific command-line markers.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Hypervisor API and VM Escape Research
+- **Azonosító:** `T1559_003.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized interaction with hypervisor APIs and diagnostic tools. 
+Focuses on manual execution from interactive shells and suspicious command-line 
+parameters associated with VM escape or sandbox evasion.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

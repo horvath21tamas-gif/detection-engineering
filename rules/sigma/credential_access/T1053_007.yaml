@@ -51,7 +51,7 @@ detection:
             - '/dpkg'
             - '/ansible-playbook'
             - '/salt-minion'
-        - User: 'root'
+        - username: 'root'
           CommandLine|contains: 
             - 'apt-daily'
             - 'motd-news'

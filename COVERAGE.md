@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 08:17:04`
+**Utolsó frissítés:** `2026-02-02 08:24:19`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 165 | 100% |
-| Splunk (SPL) | 165 | 100.0% |
-| Microsoft Sentinel (KQL) | 165 | 100.0% |
-| QRadar (AQL) | 95 | 57.6% |
-| Elastic (KQL/EQL) | 165 | 100.0% |
-| RSA NetWitness | 165 | 100.0% |
+| Sigma (Forrás) | 169 | 100% |
+| Splunk (SPL) | 169 | 100.0% |
+| Microsoft Sentinel (KQL) | 169 | 100.0% |
+| QRadar (AQL) | 97 | 57.4% |
+| Elastic (KQL/EQL) | 169 | 100.0% |
+| RSA NetWitness | 169 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -27,6 +27,7 @@
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
 | T1053.002 | HIGH | High-Fidelity At.exe Activity Detection |
 | T1053.005 | HIGH | Suspicious Scheduled Task Creation Executing PowerShell |
+| T1053.007 | HIGH | High-Fidelity Systemd Timer Persistence Detection |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 Libraries |
 | T1059 | HIGH | High-Fidelity Scripting Interpreter Contextual Anomaly, Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1059.001 | HIGH | Suspicious Encoded PowerShell Command Execution |
@@ -74,6 +75,7 @@
 | T1490 | CRITICAL | Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity), Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1505.003 | HIGH | Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1543 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
+| T1543.002 | HIGH | High-Fidelity Systemd Timer Persistence Detection |
 | T1546 | HIGH | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity), Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
 | T1546.003 | HIGH | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity) |
 | T1546.015 | HIGH | Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |

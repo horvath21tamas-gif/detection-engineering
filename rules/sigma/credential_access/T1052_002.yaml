@@ -1,0 +1,49 @@
+title: High-Fidelity At.exe Activity Detection
+id: 5a9f91f8-8883-4b45-8656-89e545e8bf6a
+status: stable
+description: |
+    Detects the execution of at.exe for task scheduling. Since 'at' is deprecated, 
+    any interactive use or remote machine targeting (\\) is considered highly suspicious 
+    and indicative of persistence or lateral movement.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1053/002/
+tags:
+    - attack.execution
+    - attack.persistence
+    - attack.t1053.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\at.exe'
+        - OriginalFileName: 'at.exe'
+
+    selection_dangerous_args:
+        CommandLine|contains:
+            - ' \\'         
+            - ' /interactive' 
+            - 'cmd'
+            - 'powershell'
+            - 'wscript'
+            - 'cscript'
+            - 'http'       
+            - '.exe'
+
+    selection_untrusted_context:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\explorer.exe'
+            - '\winword.exe'
+            - '\excel.exe'
+
+    filter_legit_backup:
+        - CommandLine|contains: 'C:\Legacy\Backup.bat'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_img and (selection_dangerous_args or selection_untrusted_context) and not filter_legit_backup
+level: high

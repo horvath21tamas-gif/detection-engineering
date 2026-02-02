@@ -1,0 +1,44 @@
+title: High-Fidelity Entra ID App Certificate Addition
+id: d6871b3f-dfb0-49b2-9ee7-3a2c3289d8e7
+status: stable
+description: |
+    Detects the addition of a new certificate (public key) to an Entra ID application.
+    Attackers use this for long-term persistence to act as the application's service principal.
+    This rule is optimized to filter out automated Microsoft internal rotations and known CI/CD providers.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1098/003/
+tags:
+    - attack.persistence
+    - attack.t1098.003
+logsource:
+    product: azure
+    service: ad
+detection:
+    selection_operation:
+        operationName:
+            - 'Update application – Certificates and secrets management '
+    
+    selection_property:
+        targetResources.modifiedProperties.displayName:
+            - 'KeyDescription'
+            - 'Public Key'
+
+    filter_microsoft_services:
+        initiatedBy.app.displayName:
+            - 'Microsoft App-Registration-Service'
+            - 'Azure Active Directory Connector'
+            - 'Azure Key Vault'
+    
+    filter_ci_cd_pipelines:
+        initiatedBy.user.userPrincipalName|contains:
+            - 'svc-terraform'
+            - 'github-actions'
+            - 'devops-spn'
+
+    selection_human_actor:
+        initiatedBy.user.userPrincipalName: '*' 
+
+    condition: selection_operation and selection_property and selection_human_actor and not (filter_microsoft_services or filter_ci_cd_pipelines)
+level: critical

@@ -1,0 +1,54 @@
+title: High-Fidelity Hardware/Firmware Manipulation Detection
+id: c7661578-7afc-403c-8c25-dfcec5ff7562
+status: stable
+description: |
+    Detects the execution of firmware-flashing tools or low-level hardware access 
+    utilities in suspicious contexts. This targets potential post-exploitation 
+    of compromised hardware or attempts to install UEFI rootkits.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1195/003/
+tags:
+    - attack.initial_access
+    - attack.t1195.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_flasher_tools:
+        Image|endswith:
+            - '\flashrom.exe'
+            - '\flashprog.exe'
+            - '\RWEverything.exe' 
+            - '\amifldrv64.sys'   
+            - '\AfuEfix64.exe'    
+            - '\H2OFFT-W.exe'     
+            - '\FPT.exe'          
+
+    selection_suspicious_paths:
+        Image|contains:
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+            - '\Downloads\'
+            - 'C:\Windows\Temp\'
+
+    selection_suspicious_parents:
+        ParentImage|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\outlook.exe'
+            - '\winword.exe'
+            - '\excel.exe'
+
+    filter_oem_software:
+        - Image|contains:
+            - '\Dell\CommandUpdate\'
+            - '\Lenovo\SystemUpdate\'
+            - '\HP\SupportAssistant\'
+        - ParentImage|endswith:
+            - '\services.exe'
+            - '\TrustedInstaller.exe'
+
+    condition: (selection_flasher_tools and (selection_suspicious_paths or selection_suspicious_parents)) and not filter_oem_software
+level: critical

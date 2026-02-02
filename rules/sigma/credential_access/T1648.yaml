@@ -1,0 +1,50 @@
+title: High-Fidelity Serverless Function Persistence or Abuse
+id: e2489318-9c77-49af-a3b8-fd9318ab4a15
+status: stable
+description: |
+    Detects suspicious creation or update of AWS Lambda functions by monitoring 
+    non-automated activity, unusual source IPs, and risky configurations. 
+    Focuses on bypassing CI/CD pipelines.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1648/
+tags:
+    - attack.execution
+    - attack.persistence
+    - attack.t1648
+logsource:
+    product: windows
+    service: sysmon
+detection:
+    selection_api_actions:
+        eventName:
+            - 'CreateFunction20150331'
+            - 'UpdateFunctionCode20150331'
+            - 'UpdateFunctionConfiguration20150331'
+            - 'PublishVersion20150331'
+
+    selection_untrusted_context:
+        - userAgent|not_contains:
+            - 'HashiCorp/1.0 (Terraform)'
+            - 'CloudFormation'
+            - 'ServerlessFramework'
+        - sourceIPAddress|not_contains:
+            - '10.0.0.0/8'      
+            - '1.2.3.4'         
+
+    selection_risky_config:
+        requestParameters:
+            - 'sh'             
+            - 'curl'            
+            - 'wget'
+            - 'base64'         
+            - 'python -c'
+
+    filter_legit_admin:
+        userIdentity.arn|contains:
+            - 'role/GitLabCI-Deployer'
+            - 'role/Jenkins-Lambda-Master'
+
+    condition: selection_api_actions and (selection_untrusted_context or selection_risky_config) and not filter_legit_admin
+level: high

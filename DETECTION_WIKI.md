@@ -16,6 +16,9 @@
 - [Advanced Windows Command Shell Contextual Anomaly](#advanced-windows-command-shell-contextual-anomaly)
 - [High-Fidelity Unix Shell Abuse and Reverse Shell Detection](#high-fidelity-unix-shell-abuse-and-reverse-shell-detection)
 - [High-Fidelity VBScript Contextual Anomaly Detection](#high-fidelity-vbscript-contextual-anomaly-detection)
+- [High-Fidelity Python Interpreter Abuse Detection](#high-fidelity-python-interpreter-abuse-detection)
+- [High-Fidelity JScript Interpreter Contextual Anomaly](#high-fidelity-jscript-interpreter-contextual-anomaly)
+- [High-Fidelity Network Device CLI Manipulation](#high-fidelity-network-device-cli-manipulation)
 - [Suspicious SYSTEM Process Spawned from User Context](#suspicious-system-process-spawned-from-user-context)
 - [Security Event Log Cleared Using wevtutil.exe](#security-event-log-cleared-using-wevtutilexe)
 - [High-Fidelity Anomalous Logon via Valid Account](#high-fidelity-anomalous-logon-via-valid-account)
@@ -387,6 +390,57 @@ common obfuscation/download patterns used in malware delivery.
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Python Interpreter Abuse Detection
+- **Azonosító:** `T1059_006.yaml`
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects suspicious Python execution patterns, focusing on one-liner reverse shells, 
+interactive shell upgrades, and execution originating from high-risk network-facing 
+parent processes (Web Servers, SQL).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `006`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity JScript Interpreter Contextual Anomaly
+- **Azonosító:** `T1059_007.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects suspicious JScript execution by correlating wscript/cscript with 
+risky parent processes, untrusted file locations, and command-line arguments 
+typically used for obfuscation or remote payload retrieval.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `007`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Network Device CLI Manipulation
+- **Azonosító:** `T1059_008.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects critical unauthorized configuration changes on network devices, 
+focusing on anti-forensics (disabling logs), credential exposure, 
+and unauthorized data exfiltration (config export).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `008`
+
+#### 🚨 Response Playbook
+1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

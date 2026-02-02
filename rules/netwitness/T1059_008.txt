@@ -1,0 +1,2 @@
+((''no logging'' OR ''no logging buffer'' OR ''no logging console'' OR ''clear logging'') OR (''no service password-encryption'' OR ''no password-encryption'') OR (''privilege level 15'' OR ''transport input telnet'' OR ''permit any any'') OR (''copy running-config tftp'' OR ''copy running-config ftp'' OR ''copy running-config scp'')) AND (NOT (((((SourceAddress = '*10.0.50.10*' OR SourceAddress = '*10.0.50.100*'))) OR ((processcommandline = '*show running-config*'))))
+)

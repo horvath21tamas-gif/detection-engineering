@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 07:55:14`
+**Utolsó frissítés:** `2026-02-02 08:01:00`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 156 | 100% |
-| Splunk (SPL) | 156 | 100.0% |
-| Microsoft Sentinel (KQL) | 156 | 100.0% |
-| QRadar (AQL) | 89 | 57.1% |
-| Elastic (KQL/EQL) | 156 | 100.0% |
-| RSA NetWitness | 156 | 100.0% |
+| Sigma (Forrás) | 159 | 100% |
+| Splunk (SPL) | 159 | 100.0% |
+| Microsoft Sentinel (KQL) | 159 | 100.0% |
+| QRadar (AQL) | 91 | 57.2% |
+| Elastic (KQL/EQL) | 159 | 100.0% |
+| RSA NetWitness | 159 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -33,6 +33,9 @@
 | T1059.003 | CRITICAL | Advanced Windows Command Shell Contextual Anomaly |
 | T1059.004 | CRITICAL | High-Fidelity Unix Shell Abuse and Reverse Shell Detection |
 | T1059.005 | CRITICAL | High-Fidelity VBScript Contextual Anomaly Detection |
+| T1059.006 | CRITICAL | High-Fidelity Python Interpreter Abuse Detection |
+| T1059.007 | CRITICAL | High-Fidelity JScript Interpreter Contextual Anomaly |
+| T1059.008 | CRITICAL | High-Fidelity Network Device CLI Manipulation |
 | T1068 | HIGH | Suspicious SYSTEM Process Spawned from User Context |
 | T1070.001 | HIGH | Security Event Log Cleared Using wevtutil.exe |
 | T1078 | HIGH | High-Fidelity Anomalous Logon via Valid Account |

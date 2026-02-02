@@ -40,7 +40,7 @@ detection:
         - SourceAddress: 
             - '10.0.50.10' # Backup szerver
             - '10.0.50.100' # Admin Jump Host
-        - CommandLine: 'show running-config'
+        - processcommandline: 'show running-config'
 
     condition: (selection_anti_forensics or selection_credential_exposure or selection_unauthorized_access or selection_exfiltration) and not filter_authorized_management
 level: critical

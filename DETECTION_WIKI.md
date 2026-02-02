@@ -1891,7 +1891,7 @@ Correlates AD object changes with known administrative context.
 spawning interactive shells or system reconnaissance tools. Includes strict filtering 
 for legitimate .NET compilation and IIS administration.
 - **Hamis pozitívok:** Nincs megadva
-- **MITRE ATT&CK:** `003`
+- **MITRE ATT&CK:** `T1505`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

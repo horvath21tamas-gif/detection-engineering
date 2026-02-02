@@ -115,6 +115,7 @@
 | T1484.002 | CRITICAL | Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002) |
 | T1486 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1490 | CRITICAL | Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity), Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
+| T1505 | CRITICAL | Ultra-Pro Web Shell Execution Patterns (T1505.003) |
 | T1505.001 | CRITICAL | Ultra-Pro SQL Server Command Shell Execution (T1505.001) |
 | T1505.002 | CRITICAL | Ultra-Pro IIS Native Module Injection (T1505.002) |
 | T1505.003 | HIGH | Ultra-Pro Web Shell Execution Patterns (T1505.003), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |

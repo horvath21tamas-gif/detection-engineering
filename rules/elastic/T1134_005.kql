@@ -1,0 +1,1 @@
+winlog.channel:Security AND (((event.code:5136 AND winlog.event_data.AttributeCommonName:sIDHistory AND winlog.event_data.OperationType:%%14674) OR (event.code:10 AND winlog.event_data.TargetImage:*\\lsass.exe AND winlog.event_data.GrantedAccess:0x1438)) AND (NOT ((user.name:(*ADMT_* OR *MSOL_*)) OR user.id:S\-1\-5\-18 OR user.domain:NT\ AUTHORITY)))

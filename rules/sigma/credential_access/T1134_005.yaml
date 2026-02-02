@@ -33,7 +33,7 @@ detection:
         - SubjectDomainName: 'NT AUTHORITY'
 
     selection_unauthorized_source:
-        SubjectLogonId:
+        Subjectlogonid:
             - '0x3e7' 
 
     condition: (selection_ds_change or selection_lsass_handle) and not filter_trusted_migration

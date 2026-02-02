@@ -1,0 +1,2 @@
+((EventID = 5136 AND ((AttributeCommonName = '*sIDHistory*'))&& ((OperationType = '*14674*'))) OR (EventID = 10 AND ((TargetImage = '*\\lsass.exe*'))&& ((GrantedAccess = '*0x1438*')))) AND (NOT (((((SubjectUserName = '*ADMT_*' OR SubjectUserName = '*MSOL_*'))) OR ((SubjectUserSid = '*S-1-5-18*'))|| ((SubjectDomainName = '*NT AUTHORITY*'))))
+)

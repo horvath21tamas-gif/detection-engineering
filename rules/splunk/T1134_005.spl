@@ -1,0 +1,1 @@
+source="WinEventLog:Security" (EventCode=5136 AttributeCommonName="sIDHistory" OperationType="%%14674") OR (EventCode=10 TargetImage="*\\lsass.exe" GrantedAccess="0x1438") NOT (SubjectUserName IN ("*ADMT_*", "*MSOL_*") OR SubjectUserSid="S-1-5-18" OR SubjectDomainName="NT AUTHORITY")

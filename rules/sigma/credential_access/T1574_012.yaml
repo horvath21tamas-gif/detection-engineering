@@ -1,0 +1,87 @@
+title: Exploit-Grade COR_PROFILER Hijacking via User-Writable Profiler DLL
+id: ada81899-1fc5-4c9a-9a0e-8fde7d3bb697
+status: stable
+description: >
+  Detects exploitation of COR_PROFILER hijacking where a .NET runtime host
+  is executed with profiling enabled and a custom profiler DLL specified
+  from a user-writable directory, excluding legitimate Microsoft,
+  Visual Studio, and APM profiling use cases.
+references:
+  - https://attack.mitre.org/techniques/T1574/012/
+author: hota05
+date: 2026/02/02
+tags:
+  - attack.persistence
+  - attack.privilege_escalation
+  - attack.defense_evasion
+  - attack.t1574.012
+
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  dotnet_runtime_hosts:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\wsmprovhost.exe'
+      - '\installutil.exe'
+      - '\regasm.exe'
+      - '\regsvcs.exe'
+      - '\mshta.exe'
+      - '\dotnet.exe'
+
+  profiling_explicitly_enabled:
+    CommandLine|contains: 'COR_ENABLE_PROFILING=1'
+
+  profiler_configured:
+    CommandLine|contains:
+      - 'COR_PROFILER='
+      - 'COR_PROFILER_PATH='
+
+  user_writable_profiler_dll:
+    CommandLine|contains:
+      - '\Users\'
+      - '\Users\Public\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\ProgramData\'
+
+  exclude_trusted_profilers:
+    CommandLine|contains:
+      - '\Windows\Microsoft.NET\'
+      - '\Program Files\Microsoft Visual Studio\'
+      - '\Program Files (x86)\Microsoft Visual Studio\'
+      - '\VSPerf'
+      - '\PerfWatson'
+      - '\Application Insights'
+      - '\Datadog'
+      - '\NewRelic'
+      - '\Dynatrace'
+
+  exclude_dev_and_build_hosts:
+    Image|endswith:
+      - '\devenv.exe'
+      - '\vsjitdebugger.exe'
+      - '\msbuild.exe'
+      - '\vstest.console.exe'
+      - '\dotnet-test.exe'
+
+  exclude_diagnostics_shells:
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\powershell_ise.exe'
+
+  condition: dotnet_runtime_hosts
+             and profiling_explicitly_enabled
+             and profiler_configured
+             and user_writable_profiler_dll
+             and not exclude_trusted_profilers
+             and not exclude_dev_and_build_hosts
+             and not exclude_diagnostics_shells
+
+falsepositives:
+  - Extremely rare, explicitly approved .NET profiling on production systems
+  - Controlled red team or malware research environments
+
+level: critical

@@ -1,0 +1,2 @@
+((TargetObject = '*\\Control\\Lsa\\Security Packages*'))&& ((NOT ((((Details = '*kerberos*' OR Details = '*msv1_0*' OR Details = '*schannel*' OR Details = '*wdigest*' OR Details = '*tspkg*' OR Details = '*pku2u*' OR Details = '*livessp*' OR Details = '*cloudap*' OR Details = '*negotiate*')))) OR (((Details = '*:\\*' OR Details = '*.dll*' OR Details = '*mimilib*' OR Details = '*ssp*')))) AND (NOT ((((process = '*\\trustedinstaller.exe*' OR process = '*\\System32\\msiexec.exe*' OR process = '*\\System32\\setupsrv.exe*'))))
+))

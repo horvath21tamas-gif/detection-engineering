@@ -1,0 +1,54 @@
+title: Ultra-Pro Sudoers Manipulation and Sudo Abuse (T1548.003)
+id: 2ad88929-61d3-46cc-b2cb-91086b6b8714
+status: stable
+description: |
+    Detects unauthorized sudoers file modifications and sudo caching abuse. 
+    Focuses on NOPASSWD additions, timestamp_timeout manipulation, and 
+    dangerous environment variable injections like LD_PRELOAD.
+author: hota05
+date: 2026-02-02
+tags:
+    - attack.privilege_escalation
+    - attack.t1548.003
+logsource:
+    product: linux
+    category: process_creation
+detection:
+    selection_sudoers_tamper:
+        CommandLine|contains:
+            - '/etc/sudoers'
+            - '/etc/sudoers.d/'
+        CommandLine|contains:
+            - 'NOPASSWD:'    
+            - 'ALL=(ALL)'   
+            - 'timestamp_timeout' 
+
+    selection_env_injection:
+        CommandLine|contains:
+            - 'LD_PRELOAD='
+            - 'PYTHONPATH='
+            - 'PERL5LIB='
+        CommandLine|contains: 'sudo '
+
+    selection_sudo_recon:
+        CommandLine|contains:
+            - 'sudo -l'      
+            - 'sudo -n -l'   
+
+    filter_trusted_automation:
+        ParentImage|endswith:
+            - '/ansible-playbook'
+            - '/puppet'
+            - '/salt-minion'
+            - '/chef-client'
+        User: 'root'
+
+    selection_suspicious_actor:
+        ParentImage|endswith:
+            - '/apache2'
+            - '/nginx'
+            - '/php-fpm'
+            - '/node'
+
+    condition: (selection_sudoers_tamper or selection_env_injection or selection_sudo_recon) and (selection_suspicious_actor or not filter_trusted_automation)
+level: critical

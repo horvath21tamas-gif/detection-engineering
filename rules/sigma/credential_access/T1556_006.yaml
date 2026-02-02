@@ -1,0 +1,50 @@
+title: Ultra-Pro Entra ID MFA Method Hijacking (T1556.006)
+id: 9f211000-7823-4a3e-95b0-b6c08730645a
+status: stable
+description: |
+    Detects high-risk modifications to MFA methods in Entra ID by correlating 
+    successful method changes with suspicious entry points or administrative anomalies.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1556/006/
+tags:
+    - attack.persistence
+    - attack.credential_access
+    - attack.t1556.006
+logsource:
+    product: azure
+    service: audit
+detection:
+    selection_mfa_ops:
+        operationName:
+            - 'Update user'
+            - 'Update mfa registered phone number'
+            - 'Add user auth method'
+            - 'Admin registered security info'
+            - 'User registered security info'
+
+    selection_suspicious_attributes:
+        result: 'success'
+        userAgent|contains:
+            - 'python'
+            - 'curl'
+            - 'wget'
+            - 'powershell'
+            - 'postman'
+
+    selection_admin_bypass:
+        initiatedBy.userPrincipalName|contains: 'admin'
+        targetResources.userPrincipalName|contains: 'admin'
+
+    filter_trusted_infra:
+        initiatedBy.userPrincipalName|endswith: 
+            - '.onmicrosoft.com'
+        ipAddress: 
+            - '1.2.3.4' 
+
+    filter_known_it_tools:
+        userAgent: 'MyTrustedMigrationBot/2.1'
+
+    condition: selection_mfa_ops and (selection_suspicious_attributes or selection_admin_bypass) and not (filter_trusted_infra or filter_known_it_tools)
+level: critical

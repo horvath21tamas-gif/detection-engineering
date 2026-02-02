@@ -16,6 +16,8 @@
 - [High-Fidelity Anomalous Logon via Valid Account](#high-fidelity-anomalous-logon-via-valid-account)
 - [High-Fidelity Default Account Abuse Detection](#high-fidelity-default-account-abuse-detection)
 - [High-Fidelity Domain Account Lateral Movement Anomaly](#high-fidelity-domain-account-lateral-movement-anomaly)
+- [High-Fidelity Local Account Remote Access Detection](#high-fidelity-local-account-remote-access-detection)
+- [High-Fidelity Cloud Account Compromise (Entra ID)](#high-fidelity-cloud-account-compromise-(entra-id))
 - [Suspicious Use of net user or net localgroup via cmd.exe](#suspicious-use-of-net-user-or-net-localgroup-via-cmdexe)
 - [High-Fidelity Process Execution from Removable Media](#high-fidelity-process-execution-from-removable-media)
 - [Suspicious Use of Built-in Windows Tools for File Download and Code Execution](#suspicious-use-of-built-in-windows-tools-for-file-download-and-code-execution)
@@ -147,6 +149,7 @@
 - [Strategic Staging of Malicious Link Targets](#strategic-staging-of-malicious-link-targets)
 - [Anomalous SEO Poisoning and Metadata Staging](#anomalous-seo-poisoning-and-metadata-staging)
 - [High-Fidelity Cloud Account Acquisition and Initialization - T1650](#high-fidelity-cloud-account-acquisition-and-initialization---t1650)
+- [High-Fidelity Cloud Administration Agent Abuse](#high-fidelity-cloud-administration-agent-abuse)
 - [Professional Content Impersonation and Infrastructure Mirroring](#professional-content-impersonation-and-infrastructure-mirroring)
 - [Credential Dumping LSASS](#credential-dumping-lsass)
 
@@ -373,6 +376,40 @@ originating from unauthorized source subnets or non-admin user accounts.
 Implements strict filtering for machine accounts and known jump servers.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Local Account Remote Access Detection
+- **Azonosító:** `T1078_003.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects successful remote logons (RDP, SMB, WinRM) using local accounts. 
+In a domain environment, local accounts should only be used for local console 
+access. Remote usage is a strong indicator of lateral movement or credential theft.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Cloud Account Compromise (Entra ID)
+- **Azonosító:** `T1078_004.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects successful cloud logons that exhibit high-risk indicators: 
+MFA bypass on privileged accounts, impossible travel patterns, 
+or the use of non-standard automation User-Agents by human accounts.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
@@ -2400,6 +2437,23 @@ known black-hat SEO tools on web servers or staging environments.
 - **Leírás:** Detects the acquisition or unauthorized setup of cloud accounts. Focuses on  credential configuration, profile creation, and automated SDK-based  identity harvesting while filtering out authorized DevOps automation.
 - **Hamis pozitívok:** Cloud administrators configuring their local environment for the first time., Legitimate automated deployment scripts not run through central engines., Developers debugging cloud integration locally.
 - **MITRE ATT&CK:** `T1650`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Cloud Administration Agent Abuse
+- **Azonosító:** `T1651.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects anomalous process execution initiated by cloud management agents (AWS SSM, Azure Guest Agent). 
+Attackers use these trusted paths to execute reconnaissance or credential dumping commands 
+that bypass traditional network perimeter defenses.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1651`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

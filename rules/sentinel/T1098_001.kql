@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (operationName in ("Update application – Certificates and secrets management ", "Add service principal credentials")) and result =~ "success" and (not ((['initiatedBy.app.displayName'] in ("Microsoft App-Registration-Service", "Azure Resource Manager")) or (['initiatedBy.user.userPrincipalName'] in ("*svc-terraform*", "*github-actions*", "*devops-pipeline*")) or (['targetResources.displayName'] in ("*Office 365*", "*Microsoft Teams*", "*Azure Monitor*"))))

@@ -1,0 +1,64 @@
+title: High-Fidelity User Execution of Malicious File
+id: 9dc92dc9-ce7e-409c-8291-d0bf0a92988c
+status: stable
+description: |
+    Detects suspicious child processes spawned by office productivity apps, 
+    PDF readers, or archive tools. Specifically targets macro-initiated 
+    or exploit-driven execution of system tools (LOLBins).
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1204/002/
+tags:
+    - attack.execution
+    - attack.initial_access
+    - attack.t1204.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_office_parents:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\powerpnt.exe'
+            - '\outlook.exe'
+            - '\acrord32.exe'
+            - '\acrobat.exe'
+            - '\7zFM.exe'
+            - '\winrar.exe'
+
+    selection_suspicious_children:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+            - '\certutil.exe'
+            - '\rundll32.exe'
+            - '\regsvr32.exe'
+            - '\scrcons.exe'
+            - '\bitsadmin.exe'
+
+    selection_dangerous_args:
+        CommandLine|contains:
+            - '-enc'                
+            - ' -w hidden'         
+            - 'DownloadString'      
+            - 'Invoke-WebRequest'
+            - 'http'                
+            - 'javascript:'
+            - 'vbscript:'
+            - 'GlobalTemp'          
+
+    filter_legit_office_addins:
+        - CommandLine|contains:
+            - '\AppData\Local\Microsoft\Office\'
+            - 'Template.dotm'
+        - ParentImage|contains:
+            - 'C:\Program Files\'  
+
+    condition: selection_office_parents and (selection_suspicious_children or selection_dangerous_args) and not filter_legit_office_addins
+level: critical

@@ -1,0 +1,55 @@
+title: Malicious Hardware-Induced Command Execution (HID Injection)
+id: 427773a1-b8c4-4577-9940-21ff43e6ffce
+status: stable
+description: |
+    Detects suspicious command execution patterns typical for malicious HID devices (Rubber Ducky, Bash Bunny). 
+    Focuses on rapid shell spawning with "stealth" flags originating from the user session context 
+    without standard GUI interaction.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1200/
+tags:
+    - attack.initial_access
+    - attack.t1200
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_suspicious_binaries:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\mshta.exe'
+            - '\conhost.exe' 
+
+    selection_hid_behavior:
+        CommandLine|contains|all:
+            - ' -w ' 
+            - ' hidden '
+        CommandLine|contains:
+            - ' -enc '
+            - ' -nop '
+            - ' -noni '
+            - ' Invoke-Execution '
+            - ' .DownloadString'
+
+    selection_parent_context:
+        ParentImage|endswith:
+            - '\explorer.exe'
+            - '\taskhostw.exe'
+
+    filter_legit_logon_scripts:
+        CommandLine|contains:
+            - 'Netlogon'
+            - 'Sysvol'
+            - 'HealthCheck'
+
+    filter_dev_tools:
+        ParentImage|contains:
+            - '\AppData\Local\Programs\Microsoft VS Code\'
+            - '\Common7\IDE\devenv.exe'
+
+    condition: selection_suspicious_binaries and selection_hid_behavior and selection_parent_context and not (filter_legit_logon_scripts or filter_dev_tools)
+level: critical

@@ -1,0 +1,56 @@
+title: High-Fidelity LSASS Driver/Package Persistence (T1547.008)
+id: df1a5370-0d75-43a9-81ad-6a4d2760f7f1
+status: stable
+description: |
+    Detects the registration of new LSA plugins, notification packages, or drivers. 
+    Attackers use this to load malicious code into the lsass.exe process for 
+    persistence and real-time credential harvesting.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1547/008/
+tags:
+    - attack.persistence
+    - attack.t1547.008
+    - attack.credential_access
+logsource:
+    category: registry_set
+    product: windows
+detection:
+    selection_registry:
+        TargetObject|contains: 'System\CurrentControlSet\Control\Lsa'
+        TargetObject|endswith:
+            - '\Notification Packages'
+            - '\Authentication Packages'
+            - '\Security Packages'
+
+    filter_standard_packages:
+        Details|contains:
+            - 'scecli'
+            - 'msv1_0'
+            - 'kerberos'
+            - 'tspkg'
+            - 'pku2u'
+            - 'livessp'
+            - 'cloudap'
+            - 'wdigest'
+            - 'schannel'
+            - 'negotiate'
+
+    selection_suspicious_details:
+        - Details|contains:
+            - ':\Users\'
+            - ':\Temp\'
+            - ':\ProgramData\'
+            - 'C:\Windows\Temp\'
+            - '.sys'
+            - '.tmp'
+        - Details|contains: ':\' 
+
+    filter_trusted_process:
+        Image|endswith:
+            - '\trustedinstaller.exe' 
+            - '\System32\msiexec.exe' 
+
+    condition: selection_registry and (not filter_standard_packages or selection_suspicious_details) and not filter_trusted_process
+level: critical

@@ -85,6 +85,7 @@
 - [Ultra-Pro Systemd Service Persistence (T1543.002)](#ultra-pro-systemd-service-persistence-(t1543002))
 - [Ultra-Pro Unauthorized Windows Service Installation (T1543.003)](#ultra-pro-unauthorized-windows-service-installation-(t1543003))
 - [Ultra-Pro Unauthorized macOS Launch Daemon (T1543.004)](#ultra-pro-unauthorized-macos-launch-daemon-(t1543004))
+- [Ultra-Pro WMI Event Subscription Persistence (T1546.003)](#ultra-pro-wmi-event-subscription-persistence-(t1546003))
 - [WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity)](#wmi-event-subscription-persistence-via-wmic-or-powershell-(high-fidelity))
 - [Suspicious COM Hijacking for User-Level Persistence (High Fidelity)](#suspicious-com-hijacking-for-user-level-persistence-(high-fidelity))
 - [Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása](#gyanús-rendszerindítási-vagy-bejelentkezési-automatikus-indítás-végrehajtása)
@@ -1573,6 +1574,22 @@ Focuses on suspicious binary paths, shell-spawned services, and non-standard ser
 and verifying the integrity of the writing process and the target binary signature.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro WMI Event Subscription Persistence (T1546.003)
+- **Azonosító:** `T1546.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized WMI event subscriptions by correlating consumer types with 
+suspicious command-line patterns and excluding trusted system orchestrators.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1546, 003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

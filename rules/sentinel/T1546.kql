@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (EventID in (19, 20, 21)) and ((Destination contains "CommandLineEventConsumer" or Destination contains "ActiveScriptEventConsumer" or (ProcessCommandLine in ("*powershell*", "* -enc *", "* -e *", "*bypass*", "*iex(*", "*WScript.Shell*", "*system.net.webclient*", "*\Users\Public\*", "*\AppData\Local\Temp\*"))) or (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\w3wp.exe", "*\winword.exe", "*\excel.exe"))) and (not (((FolderPath in ("*\CcmExec.exe", "*\MonitoringHost.exe", "*\svchost.exe", "*\msiexec.exe")) and User =~ "NT AUTHORITY\SYSTEM") or (ProcessCommandLine in ("*Inventory*", "*UpdateChecker*", "*HealthCheck*"))))

@@ -1,0 +1,49 @@
+title: Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001)
+id: c7f989eb-a29c-4af4-b600-3af41ec50c64
+status: stable
+description: |
+    Detects unauthorized creation of Launch Agents by monitoring suspicious process lineages 
+    and identifying unsigned or script-based execution targets within the .plist.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1543/001/
+tags:
+    - attack.persistence
+    - attack.t1543.001
+logsource:
+    product: windows
+    category: file_event
+detection:
+    selection_paths:
+        TargetFilename|contains: '/Library/LaunchAgents/'
+        TargetFilename|endswith: '.plist'
+
+    selection_suspicious_writer:
+        Image|endswith:
+            - '/bash'
+            - '/zsh'
+            - '/sh'
+            - '/python'
+            - '/python3'
+            - '/curl'
+            - '/wget'
+            - '/Safari'
+            - '/Google Chrome'
+            - '/terminal'
+
+    filter_trusted_installers:
+        Image|endswith:
+            - '/installd'                
+            - '/package_script_service'  
+            - '/softwareupdated'         
+            - '/jamf'                   
+            - '/kandji-agent'         
+        User: 'root'
+
+    selection_unsigned_target:
+        - TargetCodeSignature|contains: 'unsigned'
+        - TargetCodeSignature|not_contains: 'Developer ID Application:'
+
+    condition: selection_paths and (selection_suspicious_writer or selection_unsigned_target) and not filter_trusted_installers
+level: critical

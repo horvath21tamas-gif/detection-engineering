@@ -25,6 +25,7 @@
 - [High-Fidelity Compromised Binary Activity (Post-Update)](#high-fidelity-compromised-binary-activity-(post-update))
 - [High-Fidelity Hardware/Firmware Manipulation Detection](#high-fidelity-hardwarefirmware-manipulation-detection)
 - [Suspicious File Download via Bitsadmin (High Fidelity)](#suspicious-file-download-via-bitsadmin-(high-fidelity))
+- [High-Fidelity Trusted Relationship Abuse Detection](#high-fidelity-trusted-relationship-abuse-detection)
 - [Malicious Hardware-Induced Command Execution (HID Injection)](#malicious-hardware-induced-command-execution-(hid-injection))
 - [Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity)](#suspicious-child-process-spawned-by-microsoft-office-application-(high-fidelity))
 - [Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel](#adathalászat-rosszindulatú-linken-keresztül-domain-és-feladó-rendellenességekkel)
@@ -511,6 +512,23 @@ of compromised hardware or attempts to install UEFI rootkits.
 - **Leírás:** Detects suspicious file downloads performed using bitsadmin.exe, a deprecated but still abused Windows LOLBAS utility. The rule focuses on attacker-typical usage patterns, execution context, and download targets to reduce false positives.
 - **Hamis pozitívok:** Rare legacy administrative scripts, Approved red team or malware simulation
 - **MITRE ATT&CK:** `T1197`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Trusted Relationship Abuse Detection
+- **Azonosító:** `T1199.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious discovery and reconnaissance activities originating from 
+trusted ingress points (RDP, Citrix, VPN). It filters out standard administrative 
+behavior by focusing on specific parent-child process chains and unusual arguments.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1199`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

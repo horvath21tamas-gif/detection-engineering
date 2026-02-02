@@ -44,6 +44,7 @@
 | T1195.002 | CRITICAL | High-Fidelity Compromised Binary Activity (Post-Update) |
 | T1195.003 | CRITICAL | High-Fidelity Hardware/Firmware Manipulation Detection |
 | T1197 | HIGH | Suspicious File Download via Bitsadmin (High Fidelity) |
+| T1199 | HIGH | High-Fidelity Trusted Relationship Abuse Detection |
 | T1200 | CRITICAL | Malicious Hardware-Induced Command Execution (HID Injection) |
 | T1204 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity) |
 | T1204.004 | HIGH | Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel |

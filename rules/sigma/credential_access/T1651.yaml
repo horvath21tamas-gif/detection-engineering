@@ -1,0 +1,53 @@
+title: High-Fidelity Cloud Administration Agent Abuse
+id: 9e93ddb3-a4aa-4707-9f25-110251efedc6
+status: stable
+description: |
+    Detects anomalous process execution initiated by cloud management agents (AWS SSM, Azure Guest Agent). 
+    Attackers use these trusted paths to execute reconnaissance or credential dumping commands 
+    that bypass traditional network perimeter defenses.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1651/
+tags:
+    - attack.lateral_movement
+    - attack.t1651
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cloud_agents:
+        ParentImage|endswith:
+            - '\amazon-ssm-agent.exe'       
+            - '\CaaSAgent.exe'               
+            - '\WaAppAgent.exe'              
+            - '\google_guest_agent.exe'      
+
+    selection_suspicious_activity:
+        - Image|endswith:
+            - '\whoami.exe'
+            - '\nltest.exe'
+            - '\nbtstat.exe'
+            - '\net1.exe'
+            - '\qwinsta.exe'
+            - '\klist.exe'
+        - CommandLine|contains:
+            - ' -enc '
+            - ' -encodedcommand '
+            - 'Invoke-WebRequest'
+            - 'IEX' 
+            - 'MiniDump' 
+
+    filter_legit_azure_extensions:
+        - CommandLine|contains:
+            - '\Packages\Plugins\Microsoft.Azure.Monitoring'
+            - '\Packages\Plugins\Microsoft.EnterpriseCloud.Monitoring'
+            - 'CollectGuestLogs.exe'
+
+    filter_aws_automation:
+        - CommandLine|contains:
+            - 'AmazonCloudWatchAgent'
+            - 'ssm-document-worker.exe'
+
+    condition: selection_cloud_agents and selection_suspicious_activity and not (filter_legit_azure_extensions or filter_aws_automation)
+level: critical

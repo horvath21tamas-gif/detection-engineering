@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ProcessCommandLine contains "PATH=" and (ProcessCommandLine in ("PATH=/tmp:*", "PATH=/var/tmp:*", "PATH=/dev/shm:*", "PATH=/home/*", "PATH=/run/user/*")) and (FolderPath in ("*/sudo", "*/pkexec", "*/su", "*/mount", "*/umount", "*/passwd", "*/chsh", "*/newgrp", "*/crontab")) and (ProcessCommandLine in ("* sudo *", "* pkexec *", "* su *", "* mount *", "* umount *", "* passwd *", "* chsh *", "* newgrp *", "* crontab *")) and (not (ProcessCommandLine in ("*secure_path=*", "*/usr/sbin:/usr/bin:/sbin:/bin*"))) and (not (ParentProcessName in ("*/bash", "*/zsh", "*/fish", "*/tmux", "*/screen")))

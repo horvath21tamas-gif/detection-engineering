@@ -1,0 +1,61 @@
+title: High-Fidelity Systemd Timer Persistence Detection
+id: 5cef89f2-4ec2-4f60-90ee-bda7c739723f
+status: stable
+description: |
+    Detects the creation or activation of systemd timers used for persistence. 
+    Focuses on non-standard directory locations (user-level units), interactive shell 
+    triggers, and suspicious execution payloads (obfuscation, network tools).
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1053/007/
+tags:
+    - attack.persistence
+    - attack.t1543.002
+    - attack.t1053.007
+logsource:
+    category: process_creation
+    product: linux
+detection:
+    selection_systemd_tools:
+        Image|endswith:
+            - '/systemctl'
+            - '/systemd-analyze'
+
+    selection_suspicious_actions:
+        CommandLine|contains:
+            - 'enable'
+            - 'start'
+            - 'daemon-reload'
+            - '--user' 
+
+    selection_suspicious_payloads:
+        CommandLine|contains:
+            - 'base64'
+            - 'curl'
+            - 'wget'
+            - 'python'
+            - 'perl'
+            - 'ruby'
+            - 'nc '
+            - 'sh -c'
+            - '/tmp/'
+            - '/var/tmp/'
+            - '/dev/tcp/'
+
+    filter_legit_installers:
+        - ParentImage|endswith:
+            - '/apt'
+            - '/yum'
+            - '/dnf'
+            - '/dpkg'
+            - '/ansible-playbook'
+            - '/salt-minion'
+        - User: 'root'
+          CommandLine|contains: 
+            - 'apt-daily'
+            - 'motd-news'
+            - 'logrotate'
+
+    condition: selection_systemd_tools and (selection_suspicious_actions and selection_suspicious_payloads) and not filter_legit_installers
+level: high

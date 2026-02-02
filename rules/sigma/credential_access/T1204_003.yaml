@@ -1,0 +1,49 @@
+title: High-Fidelity Execution from Mounted Virtual Disk (T1204.003)
+id: 98fbfd55-0ae7-47ee-a711-108edd89e998
+status: stable
+description: |
+    Detects suspicious binaries or scripts executing from a virtual disk drive (ISO, VHD, VHDX).
+    Focuses on LOLBins and script interpreters launched via explorer.exe from non-C: drives,
+    a common pattern for malware bypassing Mark-of-the-Web.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1204/003/
+tags:
+    - attack.execution
+    - attack.initial_access
+    - attack.t1204.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_mounted_drive_path:
+        CommandLine|re: '^[D-Z]:\\.*'
+
+    selection_suspicious_interpreters:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+            - '\rundll32.exe'
+            - '\regsvr32.exe'
+            - '\scrcons.exe'
+
+    selection_user_context:
+        ParentImage|endswith: '\explorer.exe'
+
+    filter_legit_setup:
+        - CommandLine|contains:
+            - 'setup.exe'
+            - 'install.exe'
+            - 'autorun.inf'
+        - Image|contains:
+            - 'C:\Windows\'
+        - CommandLine|contains:
+            - '\\YourCompanyShare\'
+
+    condition: selection_mounted_drive_path and selection_suspicious_interpreters and selection_user_context and not filter_legit_setup
+level: critical

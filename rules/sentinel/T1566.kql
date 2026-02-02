@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ParentProcessName in ("*\outlook.exe", "*\thunderbird.exe", "*\msedge.exe", "*\chrome.exe", "*\firefox.exe", "*\teams.exe", "*\slack.exe", "*\whatsapp.exe")) and (FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\scrcons.exe", "*\certutil.exe", "*\regsvr32.exe", "*\rundll32.exe")) and (ProcessCommandLine in ("*\AppData\Local\Temp\*", "*\AppData\Local\Microsoft\Windows\INetCache\*", "*\Downloads\*", "*\Users\Public\*", "*C:\Windows\Temp\*")) and (not ((ProcessCommandLine in ("*--type=*", "*gpu-process*", "*utility*", "*crashpad-handler*")) or FolderPath contains "\Common Files\Microsoft Shared\ClickToRun\" or (ProcessCommandLine in ("*--update*", "*--checkInstall*"))))

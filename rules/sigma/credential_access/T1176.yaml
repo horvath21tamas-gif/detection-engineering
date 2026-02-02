@@ -1,0 +1,52 @@
+title: Ultra-Pro Browser Extension Force-Install Persistence (T1176)
+id: c8682224-4516-4786-8843-fbc4b38f232c
+status: stable
+description: |
+    Detects the creation of 'ExtensionInstallForcelist' or 'ExtensionInstallSources' registry keys.
+    Attackers use these to force-install malicious extensions that cannot be removed by the user 
+    and to allow installation from non-official webstores.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1176/
+tags:
+    - attack.persistence
+    - attack.t1176
+logsource:
+    category: registry_set
+    product: windows
+detection:
+    selection_registry_keys:
+        TargetObject|contains:
+            - '\Software\Policies\Google\Chrome\ExtensionInstall'
+            - '\Software\Policies\Microsoft\Edge\ExtensionInstall'
+            - '\Software\Policies\BraveSoftware\Brave\ExtensionInstall'
+
+    selection_external_source:
+        TargetObject|contains: 'ExtensionInstallSources'
+
+    selection_suspicious_writer:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\reg.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+            - '\mshta.exe'
+
+    filter_trusted_management:
+        Image|endswith:
+            - '\svchost.exe'      
+            - '\gpupdate.exe'
+            - '\trustedinstaller.exe'
+            - '\System32\msiexec.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_known_good_sources:
+        Details|contains:
+            - 'https://clients2.google.com/service/update2/crx'
+            - 'https://edge.microsoft.com/extensionwebstorebase/v1/crx'
+
+    condition: selection_registry_keys and selection_suspicious_writer and not filter_trusted_management
+level: critical

@@ -1,0 +1,45 @@
+title: High-Fidelity Anomalous Logon via Valid Account
+id: 38da177a-ff1f-4433-be87-f3067f93a226
+status: stable
+description: |
+    Detects successful logons using valid accounts that exhibit anomalous characteristics, 
+    such as unusual logon types for service accounts or logons followed by immediate 
+    sensitive command execution.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1078/
+tags:
+    - attack.initial_access
+    - attack.persistence
+    - attack.t1078
+logsource:
+    product: windows
+    service: security
+detection:
+    selection_4624:
+        EventID: 4624
+        Status: "0x0" 
+
+    selection_types:
+        LogonType:
+            - 3  
+            - 10 
+            - 8  
+
+    selection_anomalies:
+        - TargetUserName|startswith: 'svc_'
+          LogonType: 10
+        - TargetUserName|contains: 'admin'
+          IpAddress|re: '^(?!127\.|192\.168\.|10\.).*'
+
+    filter_known_good:
+        - WorkstationName|startswith: 'INFRA-MONITOR-'
+        - IpAddress: 
+            - '::1'
+            - '127.0.0.1'
+
+        - TargetUserName: 'svc_vulnerability_scanner'
+
+    condition: selection_4624 and selection_types and selection_anomalies and not filter_known_good
+level: high

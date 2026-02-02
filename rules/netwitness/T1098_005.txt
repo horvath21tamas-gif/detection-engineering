@@ -1,0 +1,2 @@
+((((operationName = '*Add device*' OR operationName = '*Register device*'))) AND ((result = '*success*'))&& (NOT ((initiatedBy.app.((displayName = '*Microsoft Intune*' OR displayName = '*Microsoft Device Registration Service*' OR displayName = '*Azure Active Directory*'))))) OR (additionalDetails.((value = '*Python*' OR value = '*Go-http-client*' OR value = '*Postman*' OR value = '*curl*')))
+)

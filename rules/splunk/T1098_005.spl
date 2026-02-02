@@ -1,0 +1,1 @@
+(operationName IN ("Add device", "Register device") result="success" NOT (initiatedBy.app.displayName IN ("Microsoft Intune", "Microsoft Device Registration Service", "Azure Active Directory"))) OR additionalDetails.value IN ("*Python*", "*Go-http-client*", "*Postman*", "*curl*")

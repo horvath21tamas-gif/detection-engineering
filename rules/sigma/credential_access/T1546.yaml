@@ -1,0 +1,59 @@
+title: Ultra-Pro WMI Event Subscription Persistence (T1546.003)
+id: d0b2fd95-5b3d-46da-8ec5-968b8f520ffa
+status: stable
+description: |
+    Detects unauthorized WMI event subscriptions by correlating consumer types with 
+    suspicious command-line patterns and excluding trusted system orchestrators.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1546/003/
+tags:
+    - attack.persistence
+    - attack.t1546
+    - attack.t1546.003
+logsource:
+    product: windows
+    service: sysmon
+detection:
+    selection_wmi:
+        EventID: [19, 20, 21]
+
+    selection_suspicious_payload:
+        - Destination|contains: 'CommandLineEventConsumer'
+        - Destination|contains: 'ActiveScriptEventConsumer'
+        - CommandLine|contains:
+            - 'powershell'
+            - ' -enc '
+            - ' -e '
+            - 'bypass'
+            - 'iex('
+            - 'WScript.Shell'
+            - 'system.net.webclient'
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+
+    selection_suspicious_creator:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\w3wp.exe'
+            - '\winword.exe'
+            - '\excel.exe'
+
+    filter_trusted_management:
+        Image|endswith:
+            - '\CcmExec.exe'
+            - '\MonitoringHost.exe'
+            - '\svchost.exe'
+            - '\msiexec.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_known_patterns:
+        CommandLine|contains:
+            - 'Inventory'
+            - 'UpdateChecker'
+            - 'HealthCheck'
+
+    condition: selection_wmi and (selection_suspicious_payload or selection_suspicious_creator) and not (filter_trusted_management or filter_known_patterns)
+level: critical

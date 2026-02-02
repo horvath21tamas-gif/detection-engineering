@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where ((ProcessCommandLine in ("*NOPASSWD:*", "*ALL=(ALL)*", "*timestamp_timeout*")) or ProcessCommandLine contains "sudo " or (ProcessCommandLine in ("*sudo -l*", "*sudo -n -l*"))) and ((ParentProcessName in ("*/apache2", "*/nginx", "*/php-fpm", "*/node")) or (not ((ParentProcessName in ("*/ansible-playbook", "*/puppet", "*/salt-minion", "*/chef-client")) and User =~ "root")))
+| where ((ProcessCommandLine in ("*NOPASSWD:*", "*ALL=(ALL)*", "*timestamp_timeout*")) or ProcessCommandLine contains "sudo " or (ProcessCommandLine in ("*sudo -l*", "*sudo -n -l*"))) and ((ParentProcessName in ("*/apache2", "*/nginx", "*/php-fpm", "*/node")) or (not ((ParentProcessName in ("*/ansible-playbook", "*/puppet", "*/salt-minion", "*/chef-client")) and username =~ "root")))

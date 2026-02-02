@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 14:26:15`
+**Utolsó frissítés:** `2026-02-02 14:36:35`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 281 | 100% |
-| Splunk (SPL) | 254 | 90.4% |
-| Microsoft Sentinel (KQL) | 255 | 90.7% |
-| QRadar (AQL) | 150 | 53.4% |
-| Elastic (KQL/EQL) | 255 | 90.7% |
-| RSA NetWitness | 253 | 90.0% |
+| Sigma (Forrás) | 285 | 100% |
+| Splunk (SPL) | 258 | 90.5% |
+| Microsoft Sentinel (KQL) | 259 | 90.9% |
+| QRadar (AQL) | 152 | 53.3% |
+| Elastic (KQL/EQL) | 259 | 90.9% |
+| RSA NetWitness | 257 | 90.2% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -158,7 +158,11 @@
 | T1547.014 | CRITICAL | High-Fidelity Active Setup Persistence (T1547.014) |
 | T1547.015 | HIGH | High-Fidelity COM Hijacking Persistence (T1547.015) |
 | T1548 | CRITICAL | Ultra-Pro Privilege Escalation via Registry Hijacking (T1548.002) |
+| T1548.001 | HIGH | Ultra-Pro Setuid/Setgid Bit Manipulation (T1548.001) |
 | T1548.002 | HIGH | Ultra-Pro Privilege Escalation via Registry Hijacking (T1548.002), UAC Bypass via Fodhelper Registry Hijack (High Fidelity) |
+| T1548.003 | CRITICAL | Ultra-Pro Sudoers Manipulation and Sudo Abuse (T1548.003) |
+| T1548.004 | CRITICAL | Ultra-Pro AppleScript Privilege Escalation (T1548.004) |
+| T1548.005 | HIGH | Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005) |
 | T1554 | CRITICAL | Ultra-Pro Client Binary Integrity Compromise (T1554) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
 | T1556 | CRITICAL | Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration |

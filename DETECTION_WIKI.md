@@ -142,8 +142,11 @@
 - [High-Fidelity Active Setup Persistence (T1547.014)](#high-fidelity-active-setup-persistence-(t1547014))
 - [High-Fidelity COM Hijacking Persistence (T1547.015)](#high-fidelity-com-hijacking-persistence-(t1547015))
 - [Ultra-Pro Privilege Escalation via Registry Hijacking (T1548.002)](#ultra-pro-privilege-escalation-via-registry-hijacking-(t1548002))
+- [Ultra-Pro Setuid/Setgid Bit Manipulation (T1548.001)](#ultra-pro-setuidsetgid-bit-manipulation-(t1548001))
 - [UAC Bypass via Fodhelper Registry Hijack (High Fidelity)](#uac-bypass-via-fodhelper-registry-hijack-(high-fidelity))
 - [Ultra-Pro Sudoers Manipulation and Sudo Abuse (T1548.003)](#ultra-pro-sudoers-manipulation-and-sudo-abuse-(t1548003))
+- [Ultra-Pro AppleScript Privilege Escalation (T1548.004)](#ultra-pro-applescript-privilege-escalation-(t1548004))
+- [Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005)](#ultra-pro-suid-desktop-entry-&-shortcut-abuse-(t1548005))
 - [Ultra-Pro Client Binary Integrity Compromise (T1554)](#ultra-pro-client-binary-integrity-compromise-(t1554))
 - [Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)](#nem-böngészős-folyamat-hozzáférése-a-böngésző-hitelesítőadat-tárolóihoz-(high-fidelity))
 - [Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration](#exploit-grade-authentication-process-hijack-via-suspicious-dll-registration)
@@ -2587,6 +2590,23 @@ system-initiated changes to minimize false positives.
 
 ---
 
+## Ultra-Pro Setuid/Setgid Bit Manipulation (T1548.001)
+- **Azonosító:** `T1548_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized SUID/SGID bit escalation by monitoring chmod/chown 
+execution in world-writable directories and suspicious reconnaissance 
+patterns, while filtering out legitimate package managers.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## UAC Bypass via Fodhelper Registry Hijack (High Fidelity)
 - **Azonosító:** `T1548_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
@@ -2615,6 +2635,40 @@ dangerous environment variable injections like LD_PRELOAD.
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro AppleScript Privilege Escalation (T1548.004)
+- **Azonosító:** `T1548_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized AppleScript elevation attempts. Specifically monitors 
+osascript execution with "administrator privileges" from untrusted parent 
+processes such as browsers, office suites, or temporary directories.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005)
+- **Azonosító:** `T1548_005.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized modification of XDG desktop entries or shortcuts that attempt 
+to execute SUID binaries or leverage pkexec for privilege escalation. 
+Focuses on modifications in user-writable directories by untrusted processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

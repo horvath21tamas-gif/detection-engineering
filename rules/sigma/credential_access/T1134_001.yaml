@@ -44,7 +44,7 @@ detection:
             - '\services.exe'
             - '\csrss.exe'
             - '\GoogleUpdate.exe'
-        SourceUser: 'NT AUTHORITY\SYSTEM'
+        Sourceusername: 'NT AUTHORITY\SYSTEM'
 
     filter_callstack:
         CallTrace|contains: 'unknown' 

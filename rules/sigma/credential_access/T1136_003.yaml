@@ -1,0 +1,45 @@
+title: Ultra-Pro Unauthorized Cloud Account Creation (T1136.003)
+id: 9931373b-6c07-4858-bef2-74e9ed332fa5
+status: stable
+description: |
+    Detects manual cloud account creation by correlating the actor type, 
+    source IP reputation, and the absence of authorized provisioning service principals.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1136/003/
+tags:
+    - attack.persistence
+    - attack.t1136.003
+logsource:
+    product: azure
+    service: auditlogs
+detection:
+    selection_operation:
+        operationName: 'Add user'
+        result: 'success'
+
+    selection_actor_type:
+        initiatedBy_user_userPrincipalName|contains: '@' 
+
+    selection_context:
+        - ipAddress: 'unusual_ip' 
+        - userAgent|contains:
+            - 'python-requests'
+            - 'curl'
+            - 'Postman'
+            - 'Kali'
+
+    filter_trusted_provisioning:
+        initiatedBy_app_displayName:
+            - 'Azure AD Connect'
+            - 'Workday to Azure AD'
+            - 'Okta Provisioning'
+            - 'MS-PIM' 
+
+    filter_emergency_accounts:
+        initiatedBy_user_userPrincipalName:
+            - 'breakglass-admin@yourdomain.com'
+
+    condition: selection_operation and selection_actor_type and selection_context and not filter_trusted_provisioning
+level: critical

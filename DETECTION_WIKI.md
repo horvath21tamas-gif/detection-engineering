@@ -142,6 +142,11 @@
 - [Ultra-Pro DLL Search Order Hijacking Detection (T1574.001)](#ultra-pro-dll-search-order-hijacking-detection-(t1574001))
 - [Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002)](#ultra-pro-dll-side-loading-integrity-gap-detection-(t1574002))
 - [Ultra-Pro Shell Configuration & Path Interception (T1574.003)](#ultra-pro-shell-configuration-&-path-interception-(t1574003))
+- [Ultra-Pro Library Search Order Hijacking & Integrity Gap (T1574.004)](#ultra-pro-library-search-order-hijacking-&-integrity-gap-(t1574004))
+- [Ultra-Pro Installer File Permissions Weakness (T1574.005)](#ultra-pro-installer-file-permissions-weakness-(t1574005))
+- [Dynamic Linker Hijacking Against Privileged Binary](#dynamic-linker-hijacking-against-privileged-binary)
+- [PATH Hijacking Leading to Privileged Binary Execution](#path-hijacking-leading-to-privileged-binary-execution)
+- [.NET Assembly Search Order Hijacking via User-Writable Directory](#net-assembly-search-order-hijacking-via-user-writable-directory)
 - [High-Fidelity Offensive Infrastructure Provisioning - T1583](#high-fidelity-offensive-infrastructure-provisioning---t1583)
 - [High-Fidelity VPS Infrastructure Provisioning - T1583.001](#high-fidelity-vps-infrastructure-provisioning---t1583001)
 - [High-Fidelity Automated Domain Registration & Acquisition - T1583.002](#high-fidelity-automated-domain-registration-&-acquisition---t1583002)
@@ -2525,6 +2530,85 @@ registry keys. Focuses on "Path Prepending" (placing malicious paths at the
 beginning) and non-standard shell startup commands.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Library Search Order Hijacking & Integrity Gap (T1574.004)
+- **Azonosító:** `T1574_004.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects potential library hijacking by monitoring trusted system binaries 
+loading unsigned or suspiciously-located DLLs from user-writable directories, 
+specifically looking for trust mismatches between the EXE and the DLL.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Installer File Permissions Weakness (T1574.005)
+- **Azonosító:** `T1574_005.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects high-privilege execution of binaries from user-writable locations. 
+This targets scenarios where an attacker replaces a legitimate installer 
+with a malicious one due to insecure directory permissions.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Dynamic Linker Hijacking Against Privileged Binary
+- **Azonosító:** `T1574_006.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects Dynamic Linker Hijacking by identifying execution of privileged or SetUID Linux binaries with manipulated dynamic linker environment variables pointing to user-writable shared libraries.
+- **Hamis pozitívok:** Extremely rare custom hardened environments, Manual exploitation labs or red team activity
+- **MITRE ATT&CK:** `006`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## PATH Hijacking Leading to Privileged Binary Execution
+- **Azonosító:** `T1574_007.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects PATH environment variable hijacking where a privileged Linux binary is executed with a user-writable directory at the beginning of PATH, and a non-absolute command is resolved, indicating a viable path interception attack chain.
+- **Hamis pozitívok:** Extremely rare misconfigured automation running privileged tools, Controlled red team or security testing activity
+- **MITRE ATT&CK:** `007`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## .NET Assembly Search Order Hijacking via User-Writable Directory
+- **Azonosító:** `T1574_008.yaml`
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects potential .NET Assembly Search Order Hijacking where a legitimate .NET runtime host loads a managed assembly from a user-writable directory outside of the GAC, Microsoft.NET framework paths, or the application installation directory.
+- **Hamis pozitívok:** Extremely rare legacy .NET applications with local assembly loading, Explicitly misconfigured enterprise applications
+- **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

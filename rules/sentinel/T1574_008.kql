@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\powershell.exe", "*\wsmprovhost.exe", "*\mshta.exe", "*\installutil.exe", "*\regasm.exe", "*\regsvcs.exe", "*\dotnet.exe")) and ImageLoaded endswith ".dll" and (ImageLoaded in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\ProgramData\*")) and (not (ImageLoaded in ("*\Microsoft.NET\*", "*\Windows\assembly\*", "*\assembly\GAC*", "*\assembly\GAC_MSIL*", "*\assembly\GAC_32*", "*\assembly\GAC_64*"))) and (not (ImageLoaded in ("*\Windows\System32\*", "*\Windows\SysWOW64\*"))) and (not (FolderPath in ("*\devenv.exe", "*\msbuild.exe", "*\csc.exe", "*\vbc.exe", "*\nunit.exe", "*\resharper.exe")))

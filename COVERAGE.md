@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 12:09:13`
+**Utolsó frissítés:** `2026-02-02 12:17:51`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 236 | 100% |
-| Splunk (SPL) | 219 | 92.8% |
-| Microsoft Sentinel (KQL) | 220 | 93.2% |
-| QRadar (AQL) | 127 | 53.8% |
-| Elastic (KQL/EQL) | 220 | 93.2% |
-| RSA NetWitness | 219 | 92.8% |
+| Sigma (Forrás) | 241 | 100% |
+| Splunk (SPL) | 223 | 92.5% |
+| Microsoft Sentinel (KQL) | 224 | 92.9% |
+| QRadar (AQL) | 131 | 54.4% |
+| Elastic (KQL/EQL) | 224 | 92.9% |
+| RSA NetWitness | 223 | 92.5% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -160,6 +160,11 @@
 | T1574.001 | CRITICAL | Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574), Ultra-Pro DLL Search Order Hijacking Detection (T1574.001) |
 | T1574.002 | CRITICAL | Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002), Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574) |
 | T1574.003 | HIGH | Ultra-Pro Shell Configuration & Path Interception (T1574.003) |
+| T1574.004 | CRITICAL | Ultra-Pro Library Search Order Hijacking & Integrity Gap (T1574.004) |
+| T1574.005 | CRITICAL | Ultra-Pro Installer File Permissions Weakness (T1574.005) |
+| T1574.006 | CRITICAL | Dynamic Linker Hijacking Against Privileged Binary |
+| T1574.007 | CRITICAL | PATH Hijacking Leading to Privileged Binary Execution |
+| T1574.008 | CRITICAL | .NET Assembly Search Order Hijacking via User-Writable Directory |
 | T1583 | HIGH | High-Fidelity Offensive Infrastructure Provisioning - T1583 |
 | T1583.001 | HIGH | High-Fidelity VPS Infrastructure Provisioning - T1583.001 |
 | T1583.002 | HIGH | High-Fidelity Automated Domain Registration & Acquisition - T1583.002 |

@@ -1,0 +1,54 @@
+title: Ultra-Pro Library Search Order Hijacking & Integrity Gap (T1574.004)
+id: 1b67e7c5-c400-4f7d-8d63-d12852f09f73
+status: stable
+description: |
+    Detects potential library hijacking by monitoring trusted system binaries 
+    loading unsigned or suspiciously-located DLLs from user-writable directories, 
+    specifically looking for trust mismatches between the EXE and the DLL.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1574/004/
+tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1574.004
+logsource:
+    category: image_load
+    product: windows
+detection:
+    selection_system_binary:
+        Image|startsWith: 'C:\Windows\'
+        Image|endswith:
+            - '\svchost.exe'
+            - '\explorer.exe'
+            - '\taskhostw.exe'
+            - '\searchindexer.exe'
+            - '\msiexec.exe'
+            - '\calc.exe'
+            - '\notepad.exe'
+
+    selection_writable_path:
+        ImageLoaded|contains:
+            - '\Users\'
+            - '\ProgramData\'
+            - '\Windows\Temp\'
+            - '\AppData\'
+            - '\Public\'
+
+    selection_unsigned_dll:
+        Signed: 'false'
+
+    filter_standard_locations:
+        ImageLoaded|startsWith:
+            - 'C:\Windows\System32\'
+            - 'C:\Windows\WinSxS\'
+            - 'C:\Program Files\'
+            - 'C:\Program Files (x86)\'
+
+    filter_ms_signed:
+        SignatureStatus: 'Valid'
+        Signer|contains: 'Microsoft'
+
+    condition: selection_system_binary and selection_writable_path and selection_unsigned_dll and not (filter_standard_locations or filter_ms_signed)
+level: critical

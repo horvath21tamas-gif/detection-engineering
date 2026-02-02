@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 11:53:04`
+**Utolsó frissítés:** `2026-02-02 12:01:11`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 233 | 100% |
-| Splunk (SPL) | 219 | 94.0% |
-| Microsoft Sentinel (KQL) | 220 | 94.4% |
-| QRadar (AQL) | 127 | 54.5% |
-| Elastic (KQL/EQL) | 220 | 94.4% |
-| RSA NetWitness | 219 | 94.0% |
+| Sigma (Forrás) | 235 | 100% |
+| Splunk (SPL) | 219 | 93.2% |
+| Microsoft Sentinel (KQL) | 220 | 93.6% |
+| QRadar (AQL) | 127 | 54.0% |
+| Elastic (KQL/EQL) | 220 | 93.6% |
+| RSA NetWitness | 219 | 93.2% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -157,8 +157,8 @@
 | T1569.001 | CRITICAL | High-Fidelity Launch Daemon Persistence Detection |
 | T1569.002 | HIGH | High-Fidelity System Service Execution Detection, High-Fidelity System Service Execution Detection (T1569.002) |
 | T1574 | CRITICAL | Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574) |
-| T1574.001 | CRITICAL | Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574) |
-| T1574.002 | CRITICAL | Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574) |
+| T1574.001 | CRITICAL | Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574), Ultra-Pro DLL Search Order Hijacking Detection (T1574.001) |
+| T1574.002 | CRITICAL | Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002), Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574) |
 | T1583 | HIGH | High-Fidelity Offensive Infrastructure Provisioning - T1583 |
 | T1583.001 | HIGH | High-Fidelity VPS Infrastructure Provisioning - T1583.001 |
 | T1583.002 | HIGH | High-Fidelity Automated Domain Registration & Acquisition - T1583.002 |

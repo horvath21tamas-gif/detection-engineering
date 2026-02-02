@@ -1,0 +1,52 @@
+title: High-Fidelity VBScript Contextual Anomaly Detection
+id: a0d04714-1912-4c98-a42b-3c25a8b62f94
+status: stable
+description: |
+    Detects suspicious VBScript execution by filtering legitimate OS management scripts 
+    and focusing on risky parent processes, unusual file locations, and 
+    common obfuscation/download patterns used in malware delivery.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1059/005/
+tags:
+    - attack.execution
+    - attack.t1059.005
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_interpreters:
+        Image|endswith:
+            - '\wscript.exe'
+            - '\cscript.exe'
+
+    selection_risky_parents:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\powerpnt.exe'
+            - '\outlook.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\mshta.exe'
+
+    selection_suspicious_args:
+        CommandLine|contains:
+            - '\AppData\Local\Temp\' 
+            - '\Users\Public\'     
+            - 'http'                 
+            - 'xmlhttp'              
+            - 'adodb.stream'         
+            - ' -e:vbscript.encode'  
+
+    filter_legit_os_scripts:
+        - CommandLine|contains:
+            - '\slmgr.vbs'           
+            - '\manage-bde.vbs'      
+            - '\prnmngr.vbs'         
+            - '\pubprn.vbs'          
+        - ParentImage|endswith: '\services.exe'
+
+    condition: selection_interpreters and (selection_risky_parents or selection_suspicious_args) and not filter_legit_os_scripts
+level: critical

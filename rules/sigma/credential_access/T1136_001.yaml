@@ -1,0 +1,60 @@
+title: Ultra-Pro Unauthorized Local Account Creation (T1136.001)
+id: cf69369d-e005-4aef-817f-e2be24064fb7
+status: stable
+description: |
+    Detects local user account creation by analyzing suspicious process lineages 
+    and command-line arguments. Filters out automated MDM, GPO, and known installer 
+    activities to maintain a low false-positive rate.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1136/001/
+tags:
+    - attack.persistence
+    - attack.t1136.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_commands:
+        CommandLine|contains:
+            - 'user /add'
+            - 'user /ad '
+            - 'New-LocalUser'
+            - 'net1 user /add'
+
+    selection_suspicious_lineage:
+        ParentImage|endswith:
+            - '\w3wp.exe'      
+            - '\httpd.exe'      
+            - '\sqlservr.exe'   
+            - '\winword.exe'     
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\powershell.exe'  
+
+    selection_obfuscation:
+        CommandLine|contains:
+            - '$ /add'         
+            - ' -enc '          
+            - ' -e '
+            - '/passwordreq:no' 
+
+    filter_trusted_orchestrators:
+        ParentImage|endswith:
+            - '\CcmExec.exe'    
+            - '\omadmac.exe'     
+            - '\svchost.exe'     
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_known_provisioning:
+        CommandLine|contains:
+            - 'WDAGUtilityAccount'
+            - 'IIS_'
+            - 'MSSQL$'
+        Image|endswith:
+            - '\lsass.exe'
+            - '\services.exe'
+
+    condition: selection_commands and (selection_suspicious_lineage or (selection_obfuscation and not filter_trusted_orchestrators)) and not filter_known_provisioning
+level: critical

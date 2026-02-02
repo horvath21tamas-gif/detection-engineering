@@ -1,19 +1,19 @@
 # 🛡️ Detection Engineering Dashboard
 
 ## 📊 Összesített Statisztika
-- **Lefedett technikák:** `276` db
-- **Sigma szabályok:** `276` db
-- **MITRE ATT&CK Lefedettség:** `[137.3%]`
+- **Lefedett technikák:** `281` db
+- **Sigma szabályok:** `281` db
+- **MITRE ATT&CK Lefedettség:** `[139.8%]`
 - **Részletes lista:** [COVERAGE.md](./COVERAGE.md)
 
-![Progress Bar](https://geps.dev/progress/137?dangerColor=ff6666&warningColor=ffbd66&successColor=8ecb88&v=1770041731)
+![Progress Bar](https://geps.dev/progress/139?dangerColor=ff6666&warningColor=ffbd66&successColor=8ecb88&v=1770042375)
 
 ## 🗺️ MITRE ATT&CK Mátrix Vizualizáció
-![MITRE Matrix](./mitre_matrix.svg?v=1770041731)
+![MITRE Matrix](./mitre_matrix.svg?v=1770042375)
 
 ## 🔗 Interaktív Navigator
 🚀 [**Kattints ide a teljes interaktív mátrix megnyitásához**](https://mitre-attack.github.io/attack-navigator/#layerURL=https://raw.githubusercontent.com/horvath21tamas-gif/detection-engineering/test/attack_navigator_layer.json)
 
 ---
 *Ez a dokumentum automatikusan frissül minden módosítás után.*
-*Legutóbbi frissítés: 2026-02-02 14:15:31 (UTC)*
+*Legutóbbi frissítés: 2026-02-02 14:26:15 (UTC)*

@@ -41,7 +41,7 @@ detection:
             - '/puppet'
             - '/salt-minion'
             - '/chef-client'
-        User: 'root'
+        username: 'root'
 
     selection_suspicious_actor:
         ParentImage|endswith:

@@ -1,0 +1,1 @@
+CommandLine IN ("*NOPASSWD:*", "*ALL=(ALL)*", "*timestamp_timeout*") OR CommandLine="*sudo *" OR CommandLine IN ("*sudo -l*", "*sudo -n -l*") ParentImage IN ("*/apache2", "*/nginx", "*/php-fpm", "*/node") OR NOT (ParentImage IN ("*/ansible-playbook", "*/puppet", "*/salt-minion", "*/chef-client") username="root")

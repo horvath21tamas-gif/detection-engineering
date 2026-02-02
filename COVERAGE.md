@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 14:15:31`
+**Utolsó frissítés:** `2026-02-02 14:26:15`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 276 | 100% |
-| Splunk (SPL) | 250 | 90.6% |
-| Microsoft Sentinel (KQL) | 251 | 90.9% |
-| QRadar (AQL) | 148 | 53.6% |
-| Elastic (KQL/EQL) | 251 | 90.9% |
-| RSA NetWitness | 249 | 90.2% |
+| Sigma (Forrás) | 281 | 100% |
+| Splunk (SPL) | 254 | 90.4% |
+| Microsoft Sentinel (KQL) | 255 | 90.7% |
+| QRadar (AQL) | 150 | 53.4% |
+| Elastic (KQL/EQL) | 255 | 90.7% |
+| RSA NetWitness | 253 | 90.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -97,6 +97,8 @@
 | T1204.003 | CRITICAL | High-Fidelity Execution from Mounted Virtual Disk (T1204.003) |
 | T1204.004 | HIGH | Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel |
 | T1205 | HIGH | Ultra-Pro Traffic Signaling & Port Knocking (T1205) |
+| T1205.001 | HIGH | Ultra-Pro Port Knocking & Raw Socket Listener (T1205.001) |
+| T1205.002 | CRITICAL | Ultra-Pro Socket Filter & WFP Traffic Signaling (T1205.002) |
 | T1218 | HIGH | Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1218.005 | HIGH | Suspicious Mshta Execution of Remote Script (High Fidelity) |
 | T1218.007 | HIGH | Suspicious Msiexec Installation from Remote URL (High Fidelity) |

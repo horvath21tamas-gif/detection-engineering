@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\anydesk.exe", "*\teamviewer.exe", "*\teamviewer_desktop.exe", "*\rustdesk.exe", "*\logmein.exe", "*\screenconnect.exe", "*\connectwise.exe", "*\ultraviewer.exe", "*\aeroadmin.exe")) and (ProcessCommandLine in ("*\Downloads\*", "*\Desktop\*", "*\AppData\Local\Temp\*", "*\Users\Public\*")) and (not (FolderPath in ("C:\Program Files\*", "C:\Program Files (x86)\*"))) and (not (UserName in ("*adm_*", "*it_support*")))

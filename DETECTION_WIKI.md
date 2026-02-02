@@ -19,6 +19,7 @@
 - [High-Fidelity Python Interpreter Abuse Detection](#high-fidelity-python-interpreter-abuse-detection)
 - [High-Fidelity JScript Interpreter Contextual Anomaly](#high-fidelity-jscript-interpreter-contextual-anomaly)
 - [High-Fidelity Network Device CLI Manipulation](#high-fidelity-network-device-cli-manipulation)
+- [High-Fidelity Cloud Shell Exploitation and Data Exfiltration](#high-fidelity-cloud-shell-exploitation-and-data-exfiltration)
 - [Suspicious SYSTEM Process Spawned from User Context](#suspicious-system-process-spawned-from-user-context)
 - [Security Event Log Cleared Using wevtutil.exe](#security-event-log-cleared-using-wevtutilexe)
 - [High-Fidelity Anomalous Logon via Valid Account](#high-fidelity-anomalous-logon-via-valid-account)
@@ -156,6 +157,7 @@
 - [Anomalous Web Content Modification for Drive-by Staging](#anomalous-web-content-modification-for-drive-by-staging)
 - [Strategic Staging of Malicious Link Targets](#strategic-staging-of-malicious-link-targets)
 - [Anomalous SEO Poisoning and Metadata Staging](#anomalous-seo-poisoning-and-metadata-staging)
+- [High-Fidelity Container Interactive Shell Execution](#high-fidelity-container-interactive-shell-execution)
 - [High-Fidelity Cloud Account Acquisition and Initialization - T1650](#high-fidelity-cloud-account-acquisition-and-initialization---t1650)
 - [High-Fidelity Cloud Administration Agent Abuse](#high-fidelity-cloud-administration-agent-abuse)
 - [Professional Content Impersonation and Infrastructure Mirroring](#professional-content-impersonation-and-infrastructure-mirroring)
@@ -441,6 +443,23 @@ and unauthorized data exfiltration (config export).
 #### 🚨 Response Playbook
 1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
 2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Cloud Shell Exploitation and Data Exfiltration
+- **Azonosító:** `T1059_009.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized or malicious activities within Cloud Shell environments, 
+focusing on identity theft, log suppression, and the conversion of private 
+cloud resources to public access.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `009`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
@@ -2564,6 +2583,23 @@ unauthorized CMS manipulation, automated content spinning, and the use of
 known black-hat SEO tools on web servers or staging environments.
 - **Hamis pozitívok:** Marketing agencies performing bulk content migrations via CLI., Web developers testing sitemap plugins on dev environments.
 - **MITRE ATT&CK:** `006`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Container Interactive Shell Execution
+- **Azonosító:** `T1609.yaml`
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized interactive shell access to running containers using 
+kubectl or docker exec. Filters legitimate health checks and CI/CD automation 
+to focus on manual, high-risk interventions.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1609`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

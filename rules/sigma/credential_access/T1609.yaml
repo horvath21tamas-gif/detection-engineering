@@ -42,7 +42,7 @@ detection:
             - 'bash'
 
     filter_legit_automation:
-        - User: 
+        - username: 
             - 'jenkins'
             - 'gitlab-runner'
             - 'github-actions'

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*/kubectl", "*/docker", "*/crictl", "*/podman")) and (ProcessCommandLine in ("* -it *", "* -i *", "* --interactive *")) and (ProcessCommandLine in ("*/bin/sh*", "*/bin/bash*", "*/bin/zsh*", "*/bin/dash*", "*sh*", "*bash*")) and (not ((User in ("jenkins", "gitlab-runner", "github-actions", "zabbix", "nagios")) or (ProcessCommandLine in ("*pg_dump*", "*mysqldump*", "*vacuumdb*", "*healthcheck*")) or ParentProcessName endswith "/kubelet"))

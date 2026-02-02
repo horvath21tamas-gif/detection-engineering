@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 08:01:00`
+**Utolsó frissítés:** `2026-02-02 08:10:07`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 159 | 100% |
-| Splunk (SPL) | 159 | 100.0% |
-| Microsoft Sentinel (KQL) | 159 | 100.0% |
-| QRadar (AQL) | 91 | 57.2% |
-| Elastic (KQL/EQL) | 159 | 100.0% |
-| RSA NetWitness | 159 | 100.0% |
+| Sigma (Forrás) | 161 | 100% |
+| Splunk (SPL) | 161 | 100.0% |
+| Microsoft Sentinel (KQL) | 161 | 100.0% |
+| QRadar (AQL) | 93 | 57.8% |
+| Elastic (KQL/EQL) | 161 | 100.0% |
+| RSA NetWitness | 161 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -36,6 +36,7 @@
 | T1059.006 | CRITICAL | High-Fidelity Python Interpreter Abuse Detection |
 | T1059.007 | CRITICAL | High-Fidelity JScript Interpreter Contextual Anomaly |
 | T1059.008 | CRITICAL | High-Fidelity Network Device CLI Manipulation |
+| T1059.009 | CRITICAL | High-Fidelity Cloud Shell Exploitation and Data Exfiltration |
 | T1068 | HIGH | Suspicious SYSTEM Process Spawned from User Context |
 | T1070.001 | HIGH | Security Event Log Cleared Using wevtutil.exe |
 | T1078 | HIGH | High-Fidelity Anomalous Logon via Valid Account |
@@ -175,6 +176,7 @@
 | T1608.004 | HIGH | Anomalous Web Content Modification for Drive-by Staging |
 | T1608.005 | HIGH | Strategic Staging of Malicious Link Targets |
 | T1608.006 | HIGH | Anomalous SEO Poisoning and Metadata Staging |
+| T1609 | CRITICAL | High-Fidelity Container Interactive Shell Execution |
 | T1650 | HIGH | High-Fidelity Cloud Account Acquisition and Initialization - T1650 |
 | T1651 | CRITICAL | High-Fidelity Cloud Administration Agent Abuse |
 | T1659 | HIGH | Professional Content Impersonation and Infrastructure Mirroring |

@@ -8,6 +8,10 @@
     "domain": "enterprise-attack",
     "techniques": [
         {
+            "techniqueID": "T1059",
+            "color": "#ff6666"
+        },
+        {
             "techniqueID": "T1078.002",
             "color": "#ff6666"
         },
@@ -101,10 +105,6 @@
         },
         {
             "techniqueID": "T1204",
-            "color": "#ff6666"
-        },
-        {
-            "techniqueID": "T1059",
             "color": "#ff6666"
         },
         {

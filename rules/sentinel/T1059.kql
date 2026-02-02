@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe")) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powerpnt.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\w3wp.exe", "*\sqlservr.exe", "*\wmiprvse.exe")) or ((ProcessCommandLine contains " -w " and ProcessCommandLine contains " hidden ") and (ProcessCommandLine in ("* -enc*", "* -encoded*", "*iex(*", "*DownloadString*", "*FromBase64String*")))) and (not ((ProcessCommandLine in ("*C:\Program Files\Microsoft Monitoring Agent\*", "*C:\Windows\System32\Configuration\ManagedInstall*")) or ParentProcessName endswith "\services.exe"))

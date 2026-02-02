@@ -10,6 +10,7 @@
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [Suspicious Scheduled Task Creation Executing PowerShell](#suspicious-scheduled-task-creation-executing-powershell)
 - [Suspicious Credential API Hooking via Win32 Libraries](#suspicious-credential-api-hooking-via-win32-libraries)
+- [High-Fidelity Scripting Interpreter Contextual Anomaly](#high-fidelity-scripting-interpreter-contextual-anomaly)
 - [Suspicious Encoded PowerShell Command Execution](#suspicious-encoded-powershell-command-execution)
 - [Suspicious SYSTEM Process Spawned from User Context](#suspicious-system-process-spawned-from-user-context)
 - [Security Event Log Cleared Using wevtutil.exe](#security-event-log-cleared-using-wevtutilexe)
@@ -284,6 +285,22 @@
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Scripting Interpreter Contextual Anomaly
+- **Azonosító:** `T1059.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects suspicious PowerShell or CMD execution by correlating shell interpreters 
+with high-risk parent processes (Office, Browsers, Web Servers) and obfuscation techniques.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1059`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

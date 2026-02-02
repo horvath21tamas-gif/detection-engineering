@@ -27,7 +27,7 @@
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
 | T1053.005 | HIGH | Suspicious Scheduled Task Creation Executing PowerShell |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 Libraries |
-| T1059 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
+| T1059 | HIGH | High-Fidelity Scripting Interpreter Contextual Anomaly, Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1059.001 | HIGH | Suspicious Encoded PowerShell Command Execution |
 | T1068 | HIGH | Suspicious SYSTEM Process Spawned from User Context |
 | T1070.001 | HIGH | Security Event Log Cleared Using wevtutil.exe |

@@ -1,0 +1,62 @@
+title: Ultra-Pro PAM Integrity Hijacking & Backdoor (T1556.003)
+id: 0577a31a-bfc6-4f5e-8663-8a3f0d088a62
+status: stable
+description: |
+    Detects unauthorized modification of PAM configuration or binary modules 
+    by identifying non-package-manager writes to /etc/pam.d/ and /lib/security/.
+    Specifically filters for automated configuration tools to reduce false positives.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1574/006/
+tags:
+    - attack.persistence
+    - attack.credential_access
+    - attack.t1556.003
+logsource:
+    product: linux
+    service: auditd
+detection:
+    selection_pam_paths:
+        name|startsWith:
+            - '/etc/pam.d/'
+            - '/lib/security/'
+            - '/lib64/security/'
+            - '/usr/lib/security/'
+            - '/usr/lib64/security/'
+
+    selection_write_ops:
+        nametype: 
+            - 'CREATE'
+            - 'DELETE'
+
+    selection_suspicious_tools:
+        Image|endswith:
+            - '/vim'
+            - '/nano'
+            - '/sed'
+            - '/awk'
+            - '/python*'
+            - '/perl'
+            - '/insmod' 
+
+    filter_trusted_processes:
+        Image|endswith:
+            - '/apt'
+            - '/dpkg'
+            - '/yum'
+            - '/dnf'
+            - '/rpm'
+            - '/pam-auth-update'
+        Image|contains:
+            - '/ansible/'
+            - '/salt-minion'
+            - '/chef-client'
+            - '/puppet'
+
+    filter_system_update:
+        ParentImage|endswith:
+            - '/unattended-upgrade'
+
+    condition: selection_pam_paths and (selection_write_ops or selection_suspicious_tools) and not (filter_trusted_processes or filter_system_update)
+level: critical

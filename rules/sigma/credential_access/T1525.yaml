@@ -1,0 +1,91 @@
+title: Exploit-Grade Unauthorized Container Image Execution (Implant Container Image)
+id: e807f9c6-5505-4207-a2fb-0b0f9aff43e2
+status: stable
+description: >
+  Detects execution of container images that are not sourced from
+  approved registries and are executed outside of CI/CD or system
+  namespaces, indicating potential use of implanted container images
+  for persistence or initial access.
+references:
+  - https://attack.mitre.org/techniques/T1525/
+author: hota05
+date: 2026/02/02
+tags:
+  - attack.initial_access
+  - attack.persistence
+  - attack.defense_evasion
+  - attack.t1525
+
+logsource:
+  category: process_creation
+  product: linux
+
+detection:
+  container_runtime:
+    Image|endswith:
+      - '/docker'
+      - '/podman'
+      - '/containerd'
+      - '/ctr'
+      - '/crictl'
+
+  image_execution:
+    CommandLine|contains:
+      - ' run '
+      - ' create '
+      - ' start '
+
+  unapproved_registry:
+    CommandLine|contains:
+      - 'docker.io/'
+      - 'ghcr.io/'
+      - 'quay.io/'
+      - 'registry.hub.docker.com/'
+
+  suspicious_image_tags:
+    CommandLine|contains:
+      - ':latest'
+      - ':dev'
+      - ':test'
+      - ':debug'
+
+  exclude_trusted_registries:
+    CommandLine|contains:
+      - 'registry.corp.local/'
+      - 'harbor.prod.local/'
+      - 'acr.company.com/'
+
+  exclude_ci_cd_execution:
+    ParentImage|contains:
+      - '/jenkins'
+      - '/gitlab-runner'
+      - '/github-actions'
+      - '/azure-pipelines'
+      - '/tekton'
+
+  exclude_k8s_system_components:
+    CommandLine|contains:
+      - 'kube-system'
+      - 'istio-system'
+      - 'monitoring'
+
+  exclude_build_nodes:
+    Hostname|contains:
+      - 'build'
+      - 'ci'
+      - 'runner'
+
+  condition: container_runtime
+             and image_execution
+             and unapproved_registry
+             and suspicious_image_tags
+             and not exclude_trusted_registries
+             and not exclude_ci_cd_execution
+             and not exclude_k8s_system_components
+             and not exclude_build_nodes
+
+falsepositives:
+  - Explicitly approved manual container testing on isolated nodes
+  - Emergency break-glass debugging with documented approval
+
+level: critical

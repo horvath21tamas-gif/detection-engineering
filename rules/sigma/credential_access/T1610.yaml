@@ -1,0 +1,63 @@
+title: High-Fidelity Malicious Container Deployment Detection
+id: 69b3ca68-c125-4f81-a176-0275861e25b6
+status: stable
+description: |
+    Detects the deployment of containers with high-risk configurations that 
+    facilitate container escape or persistence. Focuses on privileged mode, 
+    host-level resource sharing, and non-standard image sources.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1610/
+tags:
+    - attack.execution
+    - attack.t1610
+logsource:
+    category: process_creation
+    product: linux
+detection:
+    selection_tools:
+        Image|endswith:
+            - '/docker'
+            - '/kubectl'
+            - '/podman'
+            - '/crictl'
+
+    selection_run_verbs:
+        CommandLine|contains:
+            - ' run '
+            - ' apply '
+            - ' create '
+
+    selection_dangerous_configs:
+        - CommandLine|contains:
+            - ' --privileged'
+            - ' --cap-add=SYS_ADMIN'
+            - ' --cap-add=ALL'
+        - CommandLine|contains:
+            - ' --network=host'
+            - ' --pid=host'
+            - ' --ipc=host'
+        - CommandLine|contains:
+            - '-v /var/run/docker.sock' 
+            - '-v /:/host'              
+            - '-v /etc/shadow'         
+
+    selection_untrusted_registry:
+        CommandLine|contains:
+            - 'docker.io/'
+            - 'quay.io/'
+            - 'ghcr.io/'
+            - 'bitnami/'
+
+    filter_legit_automation:
+        - User: 
+            - 'terraform'
+            - 'ansible-runner'
+            - 'kube-system'
+        - CommandLine|contains:
+            - 'my-company.azurecr.io'
+            - 'internal-registry.local'
+
+    condition: selection_tools and selection_run_verbs and (selection_dangerous_configs or selection_untrusted_registry) and not filter_legit_automation
+level: critical

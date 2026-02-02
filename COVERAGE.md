@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 14:36:35`
+**Utolsó frissítés:** `2026-02-02 14:46:34`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 285 | 100% |
-| Splunk (SPL) | 258 | 90.5% |
-| Microsoft Sentinel (KQL) | 259 | 90.9% |
-| QRadar (AQL) | 152 | 53.3% |
-| Elastic (KQL/EQL) | 259 | 90.9% |
-| RSA NetWitness | 257 | 90.2% |
+| Sigma (Forrás) | 290 | 100% |
+| Splunk (SPL) | 261 | 90.0% |
+| Microsoft Sentinel (KQL) | 262 | 90.3% |
+| QRadar (AQL) | 152 | 52.4% |
+| Elastic (KQL/EQL) | 262 | 90.3% |
+| RSA NetWitness | 260 | 89.7% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -109,6 +109,7 @@
 | T1218.010 | HIGH | Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity) |
 | T1218.011 | HIGH | Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity) |
 | T1219 | HIGH | Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern |
+| T1484.001 | CRITICAL | Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484) |
 | T1486 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1490 | CRITICAL | Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity), Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1505.001 | CRITICAL | Ultra-Pro SQL Server Command Shell Execution (T1505.001) |

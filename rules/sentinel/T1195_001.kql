@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ParentProcessName in ("*\node.exe", "*\npm.cmd", "*\python.exe", "*\pip.exe", "*\msbuild.exe", "*\dotnet.exe", "*\csc.exe", "*\cmake.exe")) and ((FolderPath in ("*\whoami.exe", "*\net.exe", "*\net1.exe", "*\ipconfig.exe", "*\nltest.exe", "*\systeminfo.exe", "*\nslookup.exe", "*\certutil.exe")) or (ProcessCommandLine in ("*curl *", "*wget *", "*Invoke-WebRequest*", "*DownloadString*", "*env*", "*base64*"))) and (not ((ProcessCommandLine contains "\node_modules\.bin\" or FolderPath contains "\AppData\Local\npm-cache\") or (FolderPath contains "\site-packages\" or ProcessCommandLine contains "setup.py install")))

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where operationName =~ "Update application – Certificates and secrets management " and (['targetResources.modifiedProperties.displayName'] in ("KeyDescription", "Public Key")) and ['initiatedBy.user.userPrincipalName'] startswith "" and (not ((['initiatedBy.app.displayName'] in ("Microsoft App-Registration-Service", "Azure Active Directory Connector", "Azure Key Vault")) or (['initiatedBy.user.userPrincipalName'] in ("*svc-terraform*", "*github-actions*", "*devops-spn*"))))

@@ -1,0 +1,46 @@
+title: High-Fidelity AppleScript (osascript) Abuse Detection
+id: 63a35fcb-baf0-4145-86e0-c535b502281a
+status: stable
+description: |
+    Detects suspicious osascript execution by monitoring for 'do shell script' escapes, 
+    base64 encoded payloads, and execution originating from untrusted parent processes 
+    like browsers or mail clients.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1059/002/
+tags:
+    - attack.execution
+    - attack.t1059.002
+logsource:
+    category: process_creation
+    product: macos
+detection:
+    selection_osascript:
+        Image|endswith: '/osascript'
+
+    selection_suspicious_logic:
+        CommandLine|contains:
+            - 'do shell script'   
+            - 'curl '             
+            - 'python'            
+            - 'eval'              
+            - 'base64'           
+
+    selection_risky_parents:
+        ParentImage|endswith:
+            - '/Safari'
+            - '/Google Chrome'
+            - '/Microsoft Edge'
+            - '/Mail'
+            - '/Slack'
+            - '/Telegram'
+            - '/Terminal' 
+
+    filter_legit_apps:
+        - CommandLine|contains: '/Library/Application Support/Jamf/'
+        - CommandLine|contains: 'com.apple.quarantine' 
+        - ParentImage|endswith: '/launchd' 
+
+    condition: selection_osascript and (selection_suspicious_logic or selection_risky_parents) and not filter_legit_apps
+level: high

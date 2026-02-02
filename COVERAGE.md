@@ -6,12 +6,12 @@
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 223 | 100% |
-| Splunk (SPL) | 214 | 96.0% |
-| Microsoft Sentinel (KQL) | 214 | 96.0% |
-| QRadar (AQL) | 127 | 57.0% |
-| Elastic (KQL/EQL) | 214 | 96.0% |
-| RSA NetWitness | 214 | 96.0% |
+| Sigma (Forrás) | 228 | 100% |
+| Splunk (SPL) | 216 | 94.7% |
+| Microsoft Sentinel (KQL) | 216 | 94.7% |
+| QRadar (AQL) | 127 | 55.7% |
+| Elastic (KQL/EQL) | 216 | 94.7% |
+| RSA NetWitness | 216 | 94.7% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -110,6 +110,11 @@
 | T1546.004 | CRITICAL | Ultra-Pro AppCert DLL Persistence Detection (T1546.004) |
 | T1546.005 | CRITICAL | Ultra-Pro Shell Trap Persistence Detection (T1546.005) |
 | T1546.006 | CRITICAL | Ultra-Pro Mach-O LC_LOAD_DYLIB Injection (T1546.006) |
+| T1546.007 | CRITICAL | Ultra-Pro Netsh Helper DLL Persistence (T1546.007) |
+| T1546.008 | CRITICAL | Ultra-Pro WER SilentProcessExit Persistence (T1546.008) |
+| T1546.009 | CRITICAL | Ultra-Pro AppInit_DLLs Persistence Detection (T1546.009) |
+| T1546.010 | CRITICAL | Ultra-Pro AppCert DLL Persistence Detection (T1546.010) |
+| T1546.011 | CRITICAL | Ultra-Pro Application Shimming Persistence Detection (T1546.011) |
 | T1546.015 | HIGH | Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
 | T1547 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása |
 | T1547.001 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása, Suspicious Registry Run Key Modification for User Persistence (High Fidelity) |

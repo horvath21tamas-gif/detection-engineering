@@ -1,0 +1,1 @@
+(Image="*\\sdbinst.exe" CommandLine="*.sdb*" CommandLine IN ("*\\Users\\*", "*\\ProgramData\\*", "*\\Windows\\Temp\\*", "*\\AppData\\*") NOT CommandLine="*C:\\Windows\\AppPatch\\*") OR (TargetObject="*AppCompatFlags\\InstalledSDB*" NOT (ParentImage IN ("*\\msiexec.exe", "*\\trustedinstaller.exe", "*\\TiWorker.exe") username="NT AUTHORITY\\SYSTEM"))

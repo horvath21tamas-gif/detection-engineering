@@ -111,7 +111,8 @@
 | T1218.010 | HIGH | Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity) |
 | T1218.011 | HIGH | Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity) |
 | T1219 | HIGH | Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern |
-| T1484.001 | CRITICAL | Ultra-Pro Group Policy Modification & Abuse (T1484.001), Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484) |
+| T1484 | CRITICAL | Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484) |
+| T1484.001 | CRITICAL | Ultra-Pro Group Policy Modification & Abuse (T1484.001) |
 | T1484.002 | CRITICAL | Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002) |
 | T1486 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1490 | CRITICAL | Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity), Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |

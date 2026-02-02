@@ -1810,7 +1810,7 @@ untrusted process lineages, a common technique for stealthy port knocking.
 file system writes to the SYSVOL folder and GPO link changes, filtering out 
 standard administrative tools (GPMC).
 - **Hamis pozitívok:** Nincs megadva
-- **MITRE ATT&CK:** `001`
+- **MITRE ATT&CK:** `T1484`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

@@ -1,0 +1,62 @@
+title: High-Fidelity Supply Chain Compromise Detection (Post-Update Anomaly)
+id: 16715c96-3bdc-4f1a-b385-d67fa7bc4000
+status: stable
+description: |
+    Detects suspicious child processes spawned by legitimate software updaters or signed 
+    installers. Focuses on discovery and credential access tools that should never be 
+    part of a standard software maintenance or update cycle.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1195/
+tags:
+    - attack.initial_access
+    - attack.t1195
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_updaters:
+        ParentImage|contains:
+            - '\Update'
+            - '\Upgrade'
+            - '\Installer'
+            - '\Setup'
+        ParentImage|endswith:
+            - '\msiexec.exe'
+            - '\winget.exe'
+            - '\dism.exe'
+
+    selection_discovery_tools:
+        Image|endswith:
+            - '\whoami.exe'
+            - '\net.exe'
+            - '\net1.exe'
+            - '\ipconfig.exe'
+            - '\nltest.exe'
+            - '\nbtstat.exe'
+            - '\systeminfo.exe'
+            - '\tasklist.exe'
+            - '\nslookup.exe'
+
+    selection_credential_access:
+        Image|endswith:
+            - '\procdump.exe'
+            - '\nanodump.exe'
+            - '\vssadmin.exe' 
+            - '\reg.exe'     
+
+    filter_legit_setup_scripts:
+        - CommandLine|contains:
+            - 'C:\Program Files\'
+            - 'C:\Program Files (x86)\'
+        - ParentImage|contains:
+            - '\Windows\servicing\TrustedInstaller.exe'
+
+    filter_ms_config:
+        CommandLine|contains:
+            - '/configure'
+            - '/update'
+
+    condition: selection_updaters and (selection_discovery_tools or selection_credential_access) and not (filter_legit_setup_scripts or filter_ms_config)
+level: critical

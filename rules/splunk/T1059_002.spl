@@ -1,0 +1,1 @@
+Image="*/osascript" CommandLine IN ("*do shell script*", "*curl *", "*python*", "*eval*", "*base64*") OR ParentImage IN ("*/Safari", "*/Google Chrome", "*/Microsoft Edge", "*/Mail", "*/Slack", "*/Telegram", "*/Terminal") NOT (CommandLine="*/Library/Application Support/Jamf/*" OR CommandLine="*com.apple.quarantine*" OR ParentImage="*/launchd")

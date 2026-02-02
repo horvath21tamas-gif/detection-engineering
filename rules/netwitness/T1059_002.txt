@@ -1,0 +1,2 @@
+((process = '*/osascript*'))&& ((((param = '*do shell script*' OR param = '*curl *' OR param = '*python*' OR param = '*eval*' OR param = '*base64*'))) OR (((ParentImage = '*/Safari*' OR ParentImage = '*/Google Chrome*' OR ParentImage = '*/Microsoft Edge*' OR ParentImage = '*/Mail*' OR ParentImage = '*/Slack*' OR ParentImage = '*/Telegram*' OR ParentImage = '*/Terminal*')))) AND (NOT ((((param = '*/Library/Application Support/Jamf/*'))|| ((param = '*com.apple.quarantine*'))|| ((ParentImage = '*/launchd*'))))
+)

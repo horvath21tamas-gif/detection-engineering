@@ -14,6 +14,7 @@ Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logok
 
 | Szabály | Hiányzó forrás |
 | :--- | :--- |
+| High-Fidelity AppleScript (osascript) Abuse Detection (`T1059_002.yaml`) | product: `macos` |
 | High-Fidelity Cloud Account Compromise (Entra ID) (`T1078_004.yaml`) | service: `signinlogs` |
 | Anomalous Cloud User Account Creation (`T1585_003.yaml`) | service: `audit` |
 | Stealthy Email Account Establishment and Manipulation (`T1585_002.yaml`) | product: `m365`, service: `exchange` |

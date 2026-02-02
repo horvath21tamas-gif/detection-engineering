@@ -1,0 +1,61 @@
+title: Ultra-Pro Installer File Permissions Weakness (T1574.005)
+id: 45daf1d5-d56a-4a4c-b4c1-f9664b255aaf
+status: stable
+description: |
+    Detects high-privilege execution of binaries from user-writable locations. 
+    This targets scenarios where an attacker replaces a legitimate installer 
+    with a malicious one due to insecure directory permissions.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1574/005/
+tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1574.005
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_high_priv_context:
+        IntegrityLevel:
+            - 'System'
+            - 'High'
+        User|contains: 'NT AUTHORITY\SYSTEM'
+
+    selection_writable_path:
+        Image|contains:
+            - '\Users\'
+            - '\Downloads\'
+            - '\AppData\Local\Temp\'
+            - '\Windows\Temp\'
+            - '\PerfLogs\'
+            - '\ProgramData\' 
+
+    selection_installer_names:
+        Image|endswith:
+            - '\setup.exe'
+            - '\install.exe'
+            - '\update.exe'
+            - '\msiexec.exe'
+            - '\cmd.exe'
+            - '\powershell.exe'
+
+    filter_trusted_management_tools:
+        ParentImage|endswith:
+            - '\CcmExec.exe'        
+            - '\TaniumClient.exe'
+            - '\MonitoringHost.exe' 
+            - '\ManagementAgent.exe'
+        CommandLine|contains:
+            - '\Windows\ccmcache\'
+            - '\Windows\SoftwareDistribution\'
+            - '\Windows\System32\DriverStore\'
+
+    filter_browser_updates:
+        Image|contains:
+            - '\Google\Update\'
+            - '\Microsoft\EdgeUpdate\'
+
+    condition: selection_high_priv_context and selection_writable_path and selection_installer_names and not (filter_trusted_management_tools or filter_browser_updates)
+level: critical

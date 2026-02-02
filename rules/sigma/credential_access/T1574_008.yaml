@@ -1,0 +1,78 @@
+title: .NET Assembly Search Order Hijacking via User-Writable Directory
+id: 6e0821d9-2678-42a9-89b2-8ee4be4ad6f3
+status: stable
+description: >
+  Detects potential .NET Assembly Search Order Hijacking where a legitimate
+  .NET runtime host loads a managed assembly from a user-writable directory
+  outside of the GAC, Microsoft.NET framework paths, or the application
+  installation directory.
+references:
+  - https://attack.mitre.org/techniques/T1574/008/
+author: hota05
+date: 2026/02/02
+tags:
+  - attack.persistence
+  - attack.privilege_escalation
+  - attack.defense_evasion
+  - attack.t1574.008
+
+logsource:
+  category: image_load
+  product: windows
+
+detection:
+  dotnet_runtime_hosts:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\wsmprovhost.exe'
+      - '\mshta.exe'
+      - '\installutil.exe'
+      - '\regasm.exe'
+      - '\regsvcs.exe'
+      - '\dotnet.exe'
+
+  managed_assembly:
+    ImageLoaded|endswith: '.dll'
+
+  user_writable_paths:
+    ImageLoaded|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\ProgramData\'
+
+  exclude_dotnet_framework:
+    ImageLoaded|contains:
+      - '\Microsoft.NET\'
+      - '\Windows\assembly\'
+      - '\assembly\GAC'
+      - '\assembly\GAC_MSIL'
+      - '\assembly\GAC_32'
+      - '\assembly\GAC_64'
+
+  exclude_system_locations:
+    ImageLoaded|contains:
+      - '\Windows\System32\'
+      - '\Windows\SysWOW64\'
+
+  exclude_dev_tooling:
+    Image|endswith:
+      - '\devenv.exe'
+      - '\msbuild.exe'
+      - '\csc.exe'
+      - '\vbc.exe'
+      - '\nunit.exe'
+      - '\resharper.exe'
+
+  condition: dotnet_runtime_hosts
+             and managed_assembly
+             and user_writable_paths
+             and not exclude_dotnet_framework
+             and not exclude_system_locations
+             and not exclude_dev_tooling
+
+falsepositives:
+  - Extremely rare legacy .NET applications with local assembly loading
+  - Explicitly misconfigured enterprise applications
+
+level: critical

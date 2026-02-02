@@ -1,0 +1,51 @@
+title: High-Fidelity Application Shimming Persistence (T1547.011)
+id: d7be9e3e-0a6a-429f-b3d4-76a8560a4805
+status: stable
+description: |
+    Detects the installation of a new Shim database (.sdb) using sdbinst.exe.
+    Attackers use shims to inject DLLs, bypass security controls, or maintain persistence.
+    This rule filters legit installers and flags suspicious parent-child relationships.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1547/011/
+tags:
+    - attack.persistence
+    - attack.t1547.011
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\sdbinst.exe'
+        - OriginalFileName: 'sdbinst.exe'
+
+    selection_suspicious_path:
+        CommandLine|contains:
+            - ':\Users\'
+            - ':\ProgramData\'
+            - ':\Windows\Temp\'
+            - ':\Temp\'
+            - 'C:\PerfLogs\'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+            - '\mshta.exe'
+
+    filter_trusted_installers:
+        ParentImage|endswith:
+            - '\msiexec.exe'
+            - '\trustedinstaller.exe'
+        CommandLine|contains:
+            - ' -u ' 
+        ParentImage|contains:
+            - '\AppData\Local\Microsoft\Teams\' 
+            - '\AppData\Local\Google\Update\'
+
+    condition: selection_img and (selection_suspicious_path or selection_suspicious_parent) and not filter_trusted_installers
+level: critical

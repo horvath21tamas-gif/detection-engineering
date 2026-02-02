@@ -1,0 +1,49 @@
+title: Ultra-Pro Outlook Custom Forms Persistence (T1137.003)
+id: 44a7f906-f19f-4401-adaf-37fe944342a6
+status: stable
+description: |
+    Detects unauthorized Outlook Custom Forms persistence by monitoring 
+    non-standard Registry modifications and suspicious process spawning 
+    from Outlook related to form script execution.
+author: hota05
+date: 2026-02-02
+tags:
+    - attack.persistence
+    - attack.t1137.003
+logsource:
+    product: windows
+    category: registry_event
+detection:
+    selection_registry:
+        TargetObject|contains: 
+            - '\Software\Microsoft\Office\'
+            - '\Software\WOW6432Node\Microsoft\Office\'
+        TargetObject|endswith:
+            - '\Outlook\Forms\Registry'
+            - '\Outlook\Forms\Cache'
+
+    selection_suspicious_editor:
+        Image|not|endswith:
+            - '\outlook.exe'
+            - '\msiexec.exe' 
+        Image|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\reg.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+
+    selection_suspicious_payload:
+        Details|contains:
+            - 'CLSID'
+            - '.dll'
+            - '.vbs'
+            - 'http'
+
+    filter_trusted_locations:
+        Details|contains:
+            - 'C:\Program Files\'
+            - 'C:\Program Files (x86)\'
+
+    condition: selection_registry and (selection_suspicious_editor or selection_suspicious_payload) and not filter_trusted_locations
+level: high

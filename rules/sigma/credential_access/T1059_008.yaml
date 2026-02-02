@@ -1,0 +1,46 @@
+title: High-Fidelity Network Device CLI Manipulation
+id: 2e2f783e-9055-40f4-b3e5-df903863e339
+status: stable
+description: |
+    Detects critical unauthorized configuration changes on network devices, 
+    focusing on anti-forensics (disabling logs), credential exposure, 
+    and unauthorized data exfiltration (config export).
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1059/008/
+tags:
+    - attack.execution
+    - attack.t1059.008
+logsource:
+    category: network_connection
+    product: windows
+detection:
+    selection_anti_forensics:
+        - 'no logging'
+        - 'no logging buffer'
+        - 'no logging console'
+        - 'clear logging'
+
+    selection_credential_exposure:
+        - 'no service password-encryption'
+        - 'no password-encryption'
+
+    selection_unauthorized_access:
+        - 'privilege level 15'
+        - 'transport input telnet' 
+        - 'permit any any'        
+
+    selection_exfiltration:
+        - 'copy running-config tftp'
+        - 'copy running-config ftp'
+        - 'copy running-config scp'
+
+    filter_authorized_management:
+        - SourceAddress: 
+            - '10.0.50.10' # Backup szerver
+            - '10.0.50.100' # Admin Jump Host
+        - CommandLine: 'show running-config'
+
+    condition: (selection_anti_forensics or selection_credential_exposure or selection_unauthorized_access or selection_exfiltration) and not filter_authorized_management
+level: critical

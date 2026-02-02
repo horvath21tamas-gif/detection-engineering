@@ -75,6 +75,11 @@
 - [Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása](#gyanús-rendszerindítási-vagy-bejelentkezési-automatikus-indítás-végrehajtása)
 - [Suspicious Registry Run Key Modification for User Persistence (High Fidelity)](#suspicious-registry-run-key-modification-for-user-persistence-(high-fidelity))
 - [High-Fidelity LSA Authentication Package Persistence](#high-fidelity-lsa-authentication-package-persistence)
+- [High-Fidelity Time Provider Persistence (T1547.003)](#high-fidelity-time-provider-persistence-(t1547003))
+- [High-Fidelity Winlogon Helper DLL Persistence (T1547.004)](#high-fidelity-winlogon-helper-dll-persistence-(t1547004))
+- [High-Fidelity SSP DLL Persistence (T1547.005)](#high-fidelity-ssp-dll-persistence-(t1547005))
+- [High-Fidelity Kernel Driver Registration (T1547.006)](#high-fidelity-kernel-driver-registration-(t1547006))
+- [High-Fidelity Browser Session Persistence (T1547.007)](#high-fidelity-browser-session-persistence-(t1547007))
 - [UAC Bypass via Fodhelper Registry Hijack (High Fidelity)](#uac-bypass-via-fodhelper-registry-hijack-(high-fidelity))
 - [Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)](#nem-böngészős-folyamat-hozzáférése-a-böngésző-hitelesítőadat-tárolóihoz-(high-fidelity))
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
@@ -1374,6 +1379,89 @@ Attackers use this for SYSTEM-level persistence and credential harvesting.
 This rule filters standard Windows packages and monitors for DLLs outside System32.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Time Provider Persistence (T1547.003)
+- **Azonosító:** `T1547_003.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the registration of a new Windows Time Provider. 
+Attackers use this for SYSTEM-level persistence by loading a malicious DLL into svchost.exe.
+This rule filters standard Windows DLLs and targets non-System32 paths.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Winlogon Helper DLL Persistence (T1547.004)
+- **Azonosító:** `T1547_004.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized modifications to Winlogon helper keys (Userinit, Shell). 
+Focuses on 'appending' multiple executables or using non-standard system paths.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity SSP DLL Persistence (T1547.005)
+- **Azonosító:** `T1547_005.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the addition of unauthorized DLLs to the LSA Security Packages registry key.
+Attackers use this for persistence and cleartext credential theft.
+Filters standard Windows SSPs and alerts on unmanaged modifications.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Kernel Driver Registration (T1547.006)
+- **Azonosító:** `T1547_006.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the registration of a new kernel-mode driver service.
+Attackers use this for rootkit-level persistence and to disable security tools.
+Optimized to flag drivers in non-standard paths and suspicious manual service creation.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `006`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Browser Session Persistence (T1547.007)
+- **Azonosító:** `T1547_007.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized modification of browser session or preference files by non-browser processes. 
+Attackers use this to force browsers to open malicious URLs upon startup for persistence.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

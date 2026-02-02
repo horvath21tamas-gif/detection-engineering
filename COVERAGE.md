@@ -95,6 +95,11 @@
 | T1547 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása |
 | T1547.001 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása, Suspicious Registry Run Key Modification for User Persistence (High Fidelity) |
 | T1547.002 | CRITICAL | High-Fidelity LSA Authentication Package Persistence |
+| T1547.003 | CRITICAL | High-Fidelity Time Provider Persistence (T1547.003) |
+| T1547.004 | CRITICAL | High-Fidelity Winlogon Helper DLL Persistence (T1547.004) |
+| T1547.005 | CRITICAL | High-Fidelity SSP DLL Persistence (T1547.005) |
+| T1547.006 | CRITICAL | High-Fidelity Kernel Driver Registration (T1547.006) |
+| T1547.007 | HIGH | High-Fidelity Browser Session Persistence (T1547.007) |
 | T1548.002 | HIGH | UAC Bypass via Fodhelper Registry Hijack (High Fidelity) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |

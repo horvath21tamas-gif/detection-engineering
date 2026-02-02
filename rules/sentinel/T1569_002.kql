@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath endswith "\sc.exe" or OriginalFileName =~ "sc.exe" or (FolderPath in ("*\powershell.exe", "*\pwsh.exe"))) and (ProcessCommandLine in ("* create *", "* config *", "* binPath*", "*New-Service*", "*Set-Service*")) and (((ProcessCommandLine in ("*:\Windows\Temp\*", "*:\Users\Public\*", "*:\ProgramData\*", "*\AppData\Local\Temp\*", "*admin$*", "*c$*")) or (ProcessCommandLine in ("*cmd.exe /c*", "*powershell.exe -enc*", "* -ExecutionPolicy Bypass *"))) or (ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\wsmprovhost.exe", "*\psexesvc.exe", "*\httpd.exe", "*\nginx.exe", "*\php-cgi.exe"))) and (not ((ParentProcessName in ("*\msiexec.exe", "*\TrustedInstaller.exe", "*\CcmExec.exe", "*\GMSCAgent.exe")) or (User =~ "NT AUTHORITY\SYSTEM" and ProcessCommandLine contains "C:\Windows\System32\")))

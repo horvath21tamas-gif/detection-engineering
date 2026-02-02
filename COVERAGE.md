@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 08:38:21`
+**Utolsó frissítés:** `2026-02-02 08:51:15`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 177 | 100% |
-| Splunk (SPL) | 176 | 99.4% |
-| Microsoft Sentinel (KQL) | 176 | 99.4% |
-| QRadar (AQL) | 100 | 56.5% |
-| Elastic (KQL/EQL) | 176 | 99.4% |
-| RSA NetWitness | 176 | 99.4% |
+| Sigma (Forrás) | 180 | 100% |
+| Splunk (SPL) | 179 | 99.4% |
+| Microsoft Sentinel (KQL) | 179 | 99.4% |
+| QRadar (AQL) | 103 | 57.2% |
+| Elastic (KQL/EQL) | 179 | 99.4% |
+| RSA NetWitness | 179 | 99.4% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -69,6 +69,8 @@
 | T1203 | CRITICAL | High-Fidelity Client-Side Exploitation and Shell Spawning |
 | T1204 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity) |
 | T1204.001 | CRITICAL | High-Fidelity User Execution of Malicious Link (T1204.001) |
+| T1204.002 | CRITICAL | High-Fidelity User Execution of Malicious File |
+| T1204.003 | CRITICAL | High-Fidelity Execution from Mounted Virtual Disk (T1204.003) |
 | T1204.004 | HIGH | Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel |
 | T1218 | HIGH | Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1218.005 | HIGH | Suspicious Mshta Execution of Remote Script (High Fidelity) |
@@ -88,6 +90,7 @@
 | T1548.002 | HIGH | UAC Bypass via Fodhelper Registry Hijack (High Fidelity) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |
+| T1559 | CRITICAL | High-Fidelity Indirect IPC and COM Execution |
 | T1559.001 | HIGH | High-Fidelity Indirect IPC and COM Execution, Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity) |
 | T1559.002 | CRITICAL | High-Fidelity Office DDE Contextual Anomaly, High-Fidelity Indirect IPC and COM Execution |
 | T1559.003 | HIGH | High-Fidelity Hypervisor API and VM Escape Research |

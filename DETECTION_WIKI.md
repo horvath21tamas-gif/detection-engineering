@@ -51,6 +51,8 @@
 - [High-Fidelity Client-Side Exploitation and Shell Spawning](#high-fidelity-client-side-exploitation-and-shell-spawning)
 - [Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity)](#suspicious-child-process-spawned-by-microsoft-office-application-(high-fidelity))
 - [High-Fidelity User Execution of Malicious Link (T1204.001)](#high-fidelity-user-execution-of-malicious-link-(t1204001))
+- [High-Fidelity User Execution of Malicious File](#high-fidelity-user-execution-of-malicious-file)
+- [High-Fidelity Execution from Mounted Virtual Disk (T1204.003)](#high-fidelity-execution-from-mounted-virtual-disk-(t1204003))
 - [Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel](#adathalászat-rosszindulatú-linken-keresztül-domain-és-feladó-rendellenességekkel)
 - [Suspicious Mshta Execution of Remote Script (High Fidelity)](#suspicious-mshta-execution-of-remote-script-(high-fidelity))
 - [Suspicious Msiexec Installation from Remote URL (High Fidelity)](#suspicious-msiexec-installation-from-remote-url-(high-fidelity))
@@ -991,6 +993,40 @@ network-related or obfuscated arguments, indicative of malicious link execution.
 
 ---
 
+## High-Fidelity User Execution of Malicious File
+- **Azonosító:** `T1204_002.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects suspicious child processes spawned by office productivity apps, 
+PDF readers, or archive tools. Specifically targets macro-initiated 
+or exploit-driven execution of system tools (LOLBins).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Execution from Mounted Virtual Disk (T1204.003)
+- **Azonosító:** `T1204_003.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects suspicious binaries or scripts executing from a virtual disk drive (ISO, VHD, VHDX).
+Focuses on LOLBins and script interpreters launched via explorer.exe from non-C: drives,
+a common pattern for malware bypassing Mark-of-the-Web.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel
 - **Azonosító:** `T1204_004.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
@@ -1254,7 +1290,7 @@ network-related or obfuscated arguments, indicative of malicious link execution.
 Focuses on 'orphan' processes where an Office app or browser triggers 
 a system proxy to execute code, bypassing standard parent-child monitoring.
 - **Hamis pozitívok:** Nincs megadva
-- **MITRE ATT&CK:** `001, 002`
+- **MITRE ATT&CK:** `T1559, 001, 002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -44,7 +44,7 @@ detection:
         Image|endswith:
             - '\lsass.exe'
             - '\services.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_commands and (selection_suspicious_lineage or (not filter_trusted_interfaces and not filter_standard_dc_ops))
 level: critical

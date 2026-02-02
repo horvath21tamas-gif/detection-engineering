@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*user /add /domain*", "*user /ad /domain*", "*New-ADUser*", "*dsadd user*")) and ((ParentProcessName in ("*\wsmprovhost.exe", "*\psexesvc.exe", "*\wmiprvse.exe", "*\w3wp.exe", "*\powershell.exe")) or ((not ((ParentProcessName in ("*\mmc.exe", "*\dsac.exe", "*\ServerManager.exe")) and (User in ("*svc_iam*", "*svc_hr_sync*")))) and (not ((FolderPath in ("*\lsass.exe", "*\services.exe")) and User =~ "NT AUTHORITY\SYSTEM"))))

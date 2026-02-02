@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 08:10:07`
+**Utolsó frissítés:** `2026-02-02 08:17:04`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 161 | 100% |
-| Splunk (SPL) | 161 | 100.0% |
-| Microsoft Sentinel (KQL) | 161 | 100.0% |
-| QRadar (AQL) | 93 | 57.8% |
-| Elastic (KQL/EQL) | 161 | 100.0% |
-| RSA NetWitness | 161 | 100.0% |
+| Sigma (Forrás) | 165 | 100% |
+| Splunk (SPL) | 165 | 100.0% |
+| Microsoft Sentinel (KQL) | 165 | 100.0% |
+| QRadar (AQL) | 95 | 57.6% |
+| Elastic (KQL/EQL) | 165 | 100.0% |
+| RSA NetWitness | 165 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -179,6 +179,7 @@
 | T1608.005 | HIGH | Strategic Staging of Malicious Link Targets |
 | T1608.006 | HIGH | Anomalous SEO Poisoning and Metadata Staging |
 | T1609 | CRITICAL | High-Fidelity Container Interactive Shell Execution |
+| T1610 | CRITICAL | High-Fidelity Malicious Container Deployment Detection |
 | T1650 | HIGH | High-Fidelity Cloud Account Acquisition and Initialization - T1650 |
 | T1651 | CRITICAL | High-Fidelity Cloud Administration Agent Abuse |
 | T1659 | HIGH | Professional Content Impersonation and Infrastructure Mirroring |

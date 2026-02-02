@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powerpnt.exe")) and (FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\cscript.exe", "*\wscript.exe", "*\mshta.exe", "*\rundll32.exe", "*\regsvr32.exe")) and (ProcessCommandLine in ("*DDEAUTO*", "*DDE *", "*/c start*", "*http*", "*powershell -e*")) and (not ((ProcessCommandLine in ("*workbook*", "*dde_link*", "*RTD*")) or ParentProcessName contains "Program Files"))

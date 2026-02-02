@@ -53,7 +53,7 @@ detection:
             - '\conhost.exe'
             - '\csc.exe'
         - ParentCommandLine|contains: 'svchost.exe -k'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     filter_wmi_sched:
         ParentImage|endswith:

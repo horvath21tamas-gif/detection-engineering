@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((ParentProcessName in ("*\lsass.exe", "*\lsm.exe", "*\csrss.exe", "*\wininit.exe", "*\smss.exe", "*\spoolsv.exe")) and (FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\sh.exe", "*\bash.exe", "*\scrcons.exe"))) or ((ParentProcessName in ("*\chrome.exe*", "*\msedge.exe*", "*\winword.exe*", "*\excel.exe*")) and (FolderPath in ("*\whoami.exe", "*\nltest.exe", "*\net.exe", "*\net1.exe", "*\ipconfig.exe")))) and (not (((FolderPath in ("*\WerFault.exe", "*\conhost.exe", "*\csc.exe")) or ParentProcessCommandLine contains "svchost.exe -k" or User =~ "NT AUTHORITY\SYSTEM") or (ParentProcessName in ("*\wmiprvse.exe", "*\taskhostw.exe", "*\svchost.exe"))))

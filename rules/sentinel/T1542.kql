@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\flashrom.exe", "*\FPTW64.exe", "*\AfuEfix64.exe", "*\H2OFFT-W.exe")) or (OriginalFileName in ("FPTW64.exe", "flashrom.exe"))) or (FolderPath endswith "\mountvol.exe" and ProcessCommandLine contains " /s")) and (ParentProcessName in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\wmiprvse.exe")) and (not ((ParentProcessName in ("*\Dell\CommandUpdate\*", "*\Lenovo\SystemUpdate\*", "*\HP\HP Support Assistant\*")) and FolderPath contains "C:\Windows\System32\SystemSettingsAdminFlows.exe"))

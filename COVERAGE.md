@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 13:42:31`
+**Utolsó frissítés:** `2026-02-02 13:55:35`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 262 | 100% |
-| Splunk (SPL) | 239 | 91.2% |
-| Microsoft Sentinel (KQL) | 240 | 91.6% |
-| QRadar (AQL) | 143 | 54.6% |
-| Elastic (KQL/EQL) | 240 | 91.6% |
-| RSA NetWitness | 238 | 90.8% |
+| Sigma (Forrás) | 265 | 100% |
+| Splunk (SPL) | 241 | 90.9% |
+| Microsoft Sentinel (KQL) | 242 | 91.3% |
+| QRadar (AQL) | 145 | 54.7% |
+| Elastic (KQL/EQL) | 242 | 91.3% |
+| RSA NetWitness | 240 | 90.6% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -79,6 +79,7 @@
 | T1137.003 | HIGH | Ultra-Pro Outlook Custom Forms Persistence (T1137.003) |
 | T1137.004 | CRITICAL | Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004) |
 | T1137.005 | CRITICAL | Ultra-Pro Office Security Policy Tampering (T1137.005) |
+| T1137.006 | CRITICAL | Ultra-Pro Office Add-in Binary Persistence (T1137.006) |
 | T1176 | CRITICAL | Ultra-Pro Browser Extension Force-Install Persistence (T1176) |
 | T1189 | CRITICAL | Browser-Originating Shell or System Tool Execution |
 | T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |
@@ -105,6 +106,7 @@
 | T1490 | CRITICAL | Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity), Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1505.003 | HIGH | Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1525 | CRITICAL | Exploit-Grade Unauthorized Container Image Execution (Implant Container Image) |
+| T1542 | CRITICAL | Ultra-Pro Pre-OS Boot Manipulation (T1542) |
 | T1543 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1543.001 | CRITICAL | Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001) |
 | T1543.002 | CRITICAL | High-Fidelity Systemd Timer Persistence Detection, Ultra-Pro Systemd Service Persistence (T1543.002) |

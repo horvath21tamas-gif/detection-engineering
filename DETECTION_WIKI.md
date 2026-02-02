@@ -62,6 +62,7 @@
 - [Ultra-Pro Outlook Custom Forms Persistence (T1137.003)](#ultra-pro-outlook-custom-forms-persistence-(t1137003))
 - [Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004)](#ultra-pro-outlook-home-page-hijacking-&-bypass-(t1137004))
 - [Ultra-Pro Office Security Policy Tampering (T1137.005)](#ultra-pro-office-security-policy-tampering-(t1137005))
+- [Ultra-Pro Office Add-in Binary Persistence (T1137.006)](#ultra-pro-office-add-in-binary-persistence-(t1137006))
 - [Ultra-Pro Browser Extension Force-Install Persistence (T1176)](#ultra-pro-browser-extension-force-install-persistence-(t1176))
 - [Browser-Originating Shell or System Tool Execution](#browser-originating-shell-or-system-tool-execution)
 - [Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server](#suspicious-cross-site-scripting-(xss)-attempt-detected-on-web-server)
@@ -87,6 +88,7 @@
 - [Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity)](#suspicious-deletion-of-volume-shadow-copies-via-vssadmin-(high-fidelity))
 - [Webshell Upload or Interaction Detected on Web Server (High Fidelity)](#webshell-upload-or-interaction-detected-on-web-server-(high-fidelity))
 - [Exploit-Grade Unauthorized Container Image Execution (Implant Container Image)](#exploit-grade-unauthorized-container-image-execution-(implant-container-image))
+- [Ultra-Pro Pre-OS Boot Manipulation (T1542)](#ultra-pro-pre-os-boot-manipulation-(t1542))
 - [Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services](#non-admin-user-attempting-to-stop-or-modify-multiple-sensitive-windows-services)
 - [Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001)](#ultra-pro-macos-launch-agent-persistence-detection-(t1543001))
 - [Ultra-Pro Systemd Service Persistence (T1543.002)](#ultra-pro-systemd-service-persistence-(t1543002))
@@ -1266,6 +1268,22 @@ and policy modifications originating from non-standard processes.
 
 ---
 
+## Ultra-Pro Office Add-in Binary Persistence (T1137.006)
+- **Azonosító:** `T1137_006.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized Office Add-in (.wll, .xll) persistence by filtering for 
+untrusted file locations, unsigned binaries, and suspicious writing processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `006`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro Browser Extension Force-Install Persistence (T1176)
 - **Azonosító:** `T1176.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
@@ -1656,6 +1674,23 @@ a common pattern for malware bypassing Mark-of-the-Web.
 - **Leírás:** Detects execution of container images that are not sourced from approved registries and are executed outside of CI/CD or system namespaces, indicating potential use of implanted container images for persistence or initial access.
 - **Hamis pozitívok:** Explicitly approved manual container testing on isolated nodes, Emergency break-glass debugging with documented approval
 - **MITRE ATT&CK:** `T1525`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Pre-OS Boot Manipulation (T1542)
+- **Azonosító:** `T1542.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized firmware or bootloader modifications. Monitors for 
+suspicious mounting of the EFI partition, unauthorized use of firmware 
+flashing tools, and UEFI variable manipulation from non-standard parent processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1542`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

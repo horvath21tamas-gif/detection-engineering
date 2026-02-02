@@ -53,6 +53,9 @@
 - [High-Fidelity Shared Module Load from Untrusted Path](#high-fidelity-shared-module-load-from-untrusted-path)
 - [Anomalous External Remote Service Access Context](#anomalous-external-remote-service-access-context)
 - [Ultra-Pro Access Token Manipulation & Impersonation (T1134)](#ultra-pro-access-token-manipulation-&-impersonation-(t1134))
+- [Ultra-Pro Token Impersonation via LSASS Handle Duplication (T1134.001)](#ultra-pro-token-impersonation-via-lsass-handle-duplication-(t1134001))
+- [Ultra-Pro Create Process with Token (T1134.002)](#ultra-pro-create-process-with-token-(t1134002))
+- [Ultra-Pro Make and Impersonate Token (T1134.003)](#ultra-pro-make-and-impersonate-token-(t1134003))
 - [Ultra-Pro Unauthorized Account Creation (T1136)](#ultra-pro-unauthorized-account-creation-(t1136))
 - [Ultra-Pro Unauthorized Local Account Creation (T1136.001)](#ultra-pro-unauthorized-local-account-creation-(t1136001))
 - [Ultra-Pro Unauthorized Domain Account Creation (T1136.002)](#ultra-pro-unauthorized-domain-account-creation-(t1136002))
@@ -1129,6 +1132,57 @@ Integrity Level transitions and the use of specialized tools that interact
 with LSASS to duplicate or steal security tokens.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1134`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Token Impersonation via LSASS Handle Duplication (T1134.001)
+- **Azonosító:** `T1134_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects token theft by monitoring for suspicious handle duplication requests 
+targeting LSASS.exe. It filters for known legitimate system processes and 
+security agents to ensure high-fidelity alerts.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Create Process with Token (T1134.002)
+- **Azonosító:** `T1134_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized process creation using duplicated tokens. 
+Monitors for suspicious integrity level transitions from Medium to System 
+without standard UAC elevation (Consent.exe) or legitimate service startup.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Make and Impersonate Token (T1134.003)
+- **Azonosító:** `T1134_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized creation of security tokens using explicit credentials. 
+Monitors for suspicious command line arguments from offensive tools and 
+correlates with Logon Type 9 (NewCredentials) anomalies from untrusted parents.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

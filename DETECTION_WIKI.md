@@ -82,6 +82,9 @@
 - [Webshell Upload or Interaction Detected on Web Server (High Fidelity)](#webshell-upload-or-interaction-detected-on-web-server-(high-fidelity))
 - [Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services](#non-admin-user-attempting-to-stop-or-modify-multiple-sensitive-windows-services)
 - [Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001)](#ultra-pro-macos-launch-agent-persistence-detection-(t1543001))
+- [Ultra-Pro Systemd Service Persistence (T1543.002)](#ultra-pro-systemd-service-persistence-(t1543002))
+- [Ultra-Pro Unauthorized Windows Service Installation (T1543.003)](#ultra-pro-unauthorized-windows-service-installation-(t1543003))
+- [Ultra-Pro Unauthorized macOS Launch Daemon (T1543.004)](#ultra-pro-unauthorized-macos-launch-daemon-(t1543004))
 - [WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity)](#wmi-event-subscription-persistence-via-wmic-or-powershell-(high-fidelity))
 - [Suspicious COM Hijacking for User-Level Persistence (High Fidelity)](#suspicious-com-hijacking-for-user-level-persistence-(high-fidelity))
 - [Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása](#gyanús-rendszerindítási-vagy-bejelentkezési-automatikus-indítás-végrehajtása)
@@ -1522,6 +1525,54 @@ a common pattern for malware bypassing Mark-of-the-Web.
 and identifying unsigned or script-based execution targets within the .plist.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Systemd Service Persistence (T1543.002)
+- **Azonosító:** `T1543_002.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized creation or modification of systemd units by monitoring 
+suspicious process lineages and unusual executable paths within the service file.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Unauthorized Windows Service Installation (T1543.003)
+- **Azonosító:** `T1543_003.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized Windows service creation by monitoring Event ID 7045 and process creation. 
+Focuses on suspicious binary paths, shell-spawned services, and non-standard service executables.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Unauthorized macOS Launch Daemon (T1543.004)
+- **Azonosító:** `T1543_004.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized creation of System Launch Daemons by monitoring file events 
+and verifying the integrity of the writing process and the target binary signature.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

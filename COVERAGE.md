@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 10:07:05`
+**Utolsó frissítés:** `2026-02-02 10:16:02`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 214 | 100% |
-| Splunk (SPL) | 209 | 97.7% |
-| Microsoft Sentinel (KQL) | 209 | 97.7% |
-| QRadar (AQL) | 125 | 58.4% |
-| Elastic (KQL/EQL) | 209 | 97.7% |
-| RSA NetWitness | 209 | 97.7% |
+| Sigma (Forrás) | 217 | 100% |
+| Splunk (SPL) | 211 | 97.2% |
+| Microsoft Sentinel (KQL) | 211 | 97.2% |
+| QRadar (AQL) | 126 | 58.1% |
+| Elastic (KQL/EQL) | 211 | 97.2% |
+| RSA NetWitness | 211 | 97.2% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -98,7 +98,9 @@
 | T1505.003 | HIGH | Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1543 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1543.001 | CRITICAL | Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001) |
-| T1543.002 | HIGH | High-Fidelity Systemd Timer Persistence Detection |
+| T1543.002 | CRITICAL | High-Fidelity Systemd Timer Persistence Detection, Ultra-Pro Systemd Service Persistence (T1543.002) |
+| T1543.003 | CRITICAL | Ultra-Pro Unauthorized Windows Service Installation (T1543.003) |
+| T1543.004 | CRITICAL | Ultra-Pro Unauthorized macOS Launch Daemon (T1543.004) |
 | T1546 | HIGH | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity), Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
 | T1546.003 | HIGH | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity) |
 | T1546.015 | HIGH | Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |

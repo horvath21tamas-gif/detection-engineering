@@ -1,0 +1,53 @@
+title: High-Fidelity Indirect IPC and COM Execution
+id: c5558a77-31f7-4b7a-972d-66dc65bdd12a
+status: stable
+description: |
+    Detects suspicious indirect process creation via COM/DDE/WMI. 
+    Focuses on 'orphan' processes where an Office app or browser triggers 
+    a system proxy to execute code, bypassing standard parent-child monitoring.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1559/
+tags:
+    - attack.execution
+    - attack.t1559.001
+    - attack.t1559.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_proxies:
+        ParentImage|endswith:
+            - '\wmiprvse.exe'
+            - '\svchost.exe' 
+            - '\dllhost.exe'
+
+    selection_suspicious_children:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+            - '\cmd.exe'
+            - '\scrcons.exe'
+
+    selection_suspicious_args:
+        CommandLine|contains:
+            - '-ExecutionPolicy Bypass'
+            - 'new-object -comobject'
+            - 'ActiveXObject'
+            - 'GetObject("script:'
+            - ' -e:vbscript'
+
+    filter_legit_automation:
+        - CommandLine|contains:
+            - '\Windows\CCM\'      
+            - '\Microsoft Help\'   
+            - 'UevAgent.js'       
+        - ParentImage: 'C:\Windows\System32\svchost.exe'
+          User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_proxies and selection_suspicious_children and selection_suspicious_args and not filter_legit_automation
+level: critical

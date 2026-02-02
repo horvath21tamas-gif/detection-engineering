@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*LD_PRELOAD=*", "*LD_LIBRARY_PATH=*")) and (FolderPath in ("*/sudo", "*/pkexec", "*/su", "*/mount", "*/umount", "*/passwd", "*/chsh", "*/newgrp")) and (ProcessCommandLine in ("*.so*", "*/tmp/*", "*/var/tmp/*", "*/dev/shm/*", "*/home/*", "*/run/user/*")) and (not (ProcessCommandLine in ("*/lib/*", "*/lib64/*", "*/usr/lib/*", "*/usr/lib64/*"))) and (not (ParentProcessName in ("*/bash", "*/zsh", "*/fish")))

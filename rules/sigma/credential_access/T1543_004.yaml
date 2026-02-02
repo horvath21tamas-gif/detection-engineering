@@ -1,0 +1,55 @@
+title: Ultra-Pro Unauthorized macOS Launch Daemon (T1543.004)
+id: 977e4f5c-0ca1-440e-bc58-9358e616579a
+status: stable
+description: |
+    Detects unauthorized creation of System Launch Daemons by monitoring file events 
+    and verifying the integrity of the writing process and the target binary signature.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1543/004/
+tags:
+    - attack.persistence
+    - attack.t1543.004
+logsource:
+    product: windows
+    category: file_event
+detection:
+    selection_paths:
+        TargetFilename|startsWith: '/Library/LaunchDaemons/'
+        TargetFilename|endswith: '.plist'
+
+    selection_suspicious_writer:
+        Image|endswith:
+            - '/bash'
+            - '/zsh'
+            - '/sh'
+            - '/python3'
+            - '/curl'
+            - '/wget'
+            - '/perl'
+            - '/ruby'
+
+    selection_suspicious_args:
+        CommandLine|contains:
+            - '/tmp/'              
+            - '/Users/Shared/'     
+            - 'base64'            
+            - 'nc -e'              
+
+    filter_trusted_installers:
+        Image|endswith:
+            - '/installd'               
+            - '/package_script_service'   
+            - '/softwareupdated'         
+            - '/jamf'                    
+            - '/kandji-agent'            
+        User: 'root'
+
+    filter_signed_binaries:
+        - TargetCodeSignature|contains: 'Developer ID Application: Google LLC'
+        - TargetCodeSignature|contains: 'Developer ID Application: Microsoft Corporation'
+        - TargetCodeSignature|contains: 'Software Signing' 
+
+    condition: selection_paths and (selection_suspicious_writer or selection_suspicious_args) and not (filter_trusted_installers or filter_signed_binaries)
+level: critical

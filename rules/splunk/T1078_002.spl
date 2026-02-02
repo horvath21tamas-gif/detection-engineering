@@ -1,0 +1,1 @@
+source="WinEventLog:Security" EventCode=4624 Status="0x0" ComputerName IN ("*-DC*", "*-SQL*", "*-SAP*", "*-EXCH*") LogonType IN (10, 3) NOT (TargetUserName="*$" OR (IpAddress="10.50.10.*" WorkstationName="ADM-JUMP-*") OR TargetUserName="svc_infra_*")

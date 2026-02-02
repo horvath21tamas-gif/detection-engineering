@@ -1,0 +1,1 @@
+winlog.channel:Security AND ((event.code:4624 AND winlog.event_data.Status:0x0) AND (winlog.computer_name:(*\-DC* OR *\-SQL* OR *\-SAP* OR *\-EXCH*)) AND (winlog.event_data.LogonType:(10 OR 3)) AND (NOT (winlog.event_data.TargetUserName:*$ OR (source.ip:10.50.10.* AND source.domain:ADM\-JUMP\-*) OR winlog.event_data.TargetUserName:svc_infra_*)))

@@ -14,6 +14,8 @@
 - [Suspicious SYSTEM Process Spawned from User Context](#suspicious-system-process-spawned-from-user-context)
 - [Security Event Log Cleared Using wevtutil.exe](#security-event-log-cleared-using-wevtutilexe)
 - [High-Fidelity Anomalous Logon via Valid Account](#high-fidelity-anomalous-logon-via-valid-account)
+- [High-Fidelity Default Account Abuse Detection](#high-fidelity-default-account-abuse-detection)
+- [High-Fidelity Domain Account Lateral Movement Anomaly](#high-fidelity-domain-account-lateral-movement-anomaly)
 - [Suspicious Use of net user or net localgroup via cmd.exe](#suspicious-use-of-net-user-or-net-localgroup-via-cmdexe)
 - [High-Fidelity Process Execution from Removable Media](#high-fidelity-process-execution-from-removable-media)
 - [Suspicious Use of Built-in Windows Tools for File Download and Code Execution](#suspicious-use-of-built-in-windows-tools-for-file-download-and-code-execution)
@@ -337,6 +339,40 @@ such as unusual logon types for service accounts or logons followed by immediate
 sensitive command execution.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1078`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Default Account Abuse Detection
+- **Azonosító:** `T1078_001.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects successful logons using well-known default account names (Administrator, Guest, root) 
+originating from non-standard network locations or via interactive remote sessions (RDP). 
+Filters out common local system noise and internal automation.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## High-Fidelity Domain Account Lateral Movement Anomaly
+- **Azonosító:** `T1078_002.yaml`
+- **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects anomalous RDP or Network logons to critical infrastructure (DCs, SQL, File Servers) 
+originating from unauthorized source subnets or non-admin user accounts. 
+Implements strict filtering for machine accounts and known jump servers.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

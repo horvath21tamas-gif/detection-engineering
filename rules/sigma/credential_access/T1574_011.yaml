@@ -1,0 +1,74 @@
+title: Privileged Service ImagePath or ServiceDll Hijacked via Registry
+id: f927336b-506d-4a8f-9fc2-94d6a6d3e3f8
+status: stable
+description: >
+  Detects exploitation of weak Windows service registry permissions where
+  a non-system process modifies critical service registry values to point
+  to an executable or DLL located in a user-writable directory, enabling
+  privilege escalation upon service start or restart.
+references:
+  - https://attack.mitre.org/techniques/T1574/011/
+author: hota05
+date: 2026/02/02
+tags:
+  - attack.privilege_escalation
+  - attack.persistence
+  - attack.t1574.011
+
+logsource:
+  category: registry_set
+  product: windows
+
+detection:
+  service_registry_root:
+    TargetObject|startswith: 'HKLM\\SYSTEM\\CurrentControlSet\\Services\\'
+
+  critical_service_values:
+    TargetObject|endswith:
+      - '\\ImagePath'
+      - '\\ServiceDll'
+      - '\\Parameters\\ServiceDll'
+
+  executable_target:
+    Details|contains:
+      - '.exe'
+      - '.dll'
+
+  user_writable_target_path:
+    Details|contains:
+      - '\\Users\\'
+      - '\\ProgramData\\'
+      - '\\AppData\\'
+      - '\\Temp\\'
+
+  exclude_protected_paths:
+    Details|contains:
+      - '\\Windows\\'
+      - '\\Program Files\\'
+      - '\\Program Files (x86)\\'
+
+  exclude_trusted_writers:
+    Image|contains:
+      - '\\Windows\\System32\\services.exe'
+      - '\\Windows\\System32\\svchost.exe'
+      - '\\Windows\\System32\\msiexec.exe'
+      - '\\Windows\\servicing\\'
+
+  exclude_system_accounts:
+    User|contains:
+      - 'NT AUTHORITY\\SYSTEM'
+      - 'NT SERVICE\\TrustedInstaller'
+
+  condition: service_registry_root
+             and critical_service_values
+             and executable_target
+             and user_writable_target_path
+             and not exclude_protected_paths
+             and not exclude_trusted_writers
+             and not exclude_system_accounts
+
+falsepositives:
+  - Extremely rare legacy software with insecure service update mechanisms
+  - Intentionally vulnerable lab or red team environments
+
+level: critical

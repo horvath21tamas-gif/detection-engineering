@@ -1,0 +1,59 @@
+title: High-Fidelity UserInitMprLogonScript Persistence
+id: 861557f2-4497-47fa-87b4-ee7b66ca1c5f
+status: stable
+description: |
+    Detects unauthorized creation or modification of the UserInitMprLogonScript registry key.
+    This is a high-fidelity rule because it filters out standard GPO updates and focuses on 
+    user-writable paths and suspicious execution patterns.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1037/001/
+tags:
+    - attack.persistence
+    - attack.t1037.001
+logsource:
+    category: registry_set
+    product: windows
+detection:
+    selection_registry:
+        TargetObject|contains: '\Environment\UserInitMprLogonScript'
+
+    selection_suspicious_payload:
+        Details|contains:
+            - 'powershell'
+            - 'pwsh'
+            - 'cmd.exe'
+            - 'mshta'
+            - 'cscript'
+            - 'wscript'
+            - 'rundll32'
+            - 'regsvr32'
+            - 'bitsadmin'
+
+    selection_suspicious_paths:
+        Details|contains:
+            - ':\Users\'
+            - ':\ProgramData\'
+            - ':\Temp\'
+            - ':\Windows\Temp\'
+            - 'AppData\'
+            - 'C:\PerfLogs\'
+
+    filter_trusted_writers:
+        Image|endswith:
+            - '\System32\gpupdate.exe'
+            - '\System32\reg.exe'
+            - '\trustedinstaller.exe'
+            - '\System32\svchost.exe'
+
+    filter_standard_locations:
+        Details|contains:
+            - '\\NETLOGON\'
+            - 'C:\Windows\System32\GroupPolicy\'
+        Details|startswith:
+            - 'C:\Program Files\'
+            - 'C:\Program Files (x86)\'
+
+    condition: selection_registry and (selection_suspicious_payload or selection_suspicious_paths) and not (filter_trusted_writers or filter_standard_locations)
+level: critical

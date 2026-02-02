@@ -1,0 +1,44 @@
+title: Ultra-Pro Network-to-Cloud Auth Hijacking (T1556.008)
+id: 2f48a160-be90-4731-9c23-25c878b58c23
+status: stable
+description: |
+    Detects high-risk modifications to Enterprise Applications and Conditional Access 
+    policies used by network devices (VPNs, Firewalls). Focuses on MFA bypasses 
+    and unauthorized credential additions to service principals.
+author: hota05
+date: 2026-02-02
+tags:
+    - attack.persistence
+    - attack.credential_access
+    - attack.t1556.008
+logsource:
+    product: azure
+    service: audit
+detection:
+    selection_network_apps:
+        targetResources.displayName|contains:
+            - 'AnyConnect'
+            - 'FortiGate'
+            - 'GlobalProtect'
+            - 'Check Point'
+            - 'Pulse Secure'
+            - 'F5 Big-IP'
+
+    selection_ca_downgrade:
+        operationName: 'Update conditional access policy'
+        targetResources.displayName|contains: 'MFA'
+
+    selection_app_credentials:
+        operationName: 
+            - 'Add owner to application'
+            - 'Update application – Certificates and secrets management'
+
+    filter_trusted_admins:
+        initiatedBy.userPrincipalName|endswith:
+            - 'admin_secure@company.com'
+        userAgent|contains:
+            - 'HashiCorp/1.0'
+            - 'Ansible'
+
+    condition: (selection_network_apps or selection_ca_downgrade or selection_app_credentials) and not filter_trusted_admins
+level: critical

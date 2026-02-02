@@ -1,0 +1,62 @@
+title: High-Fidelity Browser-Originating Payload Execution
+id: 4bcc685c-4dbb-4149-9217-91f6adf0f988
+status: stable
+description: |
+    Detects suspicious child processes spawned by web browsers where the command line 
+    references user-writable or temporary directories. This pattern is highly 
+    indicative of a successful spearphishing link attack leading to immediate execution.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1566/002/
+tags:
+    - attack.initial_access
+    - attack.t1566.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_browser_parents:
+        ParentImage|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+            - '\brave.exe'
+            - '\opera.exe'
+
+    selection_suspicious_interpreters:
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+            - '\scrcons.exe'
+            - '\regsvr32.exe'
+
+    selection_writable_paths:
+        CommandLine|contains:
+            - '\Downloads\'
+            - '\AppData\Local\Temp\'
+            - '\Users\Public\'
+            - 'C:\Windows\Temp\'
+
+    filter_browser_infrastructure:
+        CommandLine|contains:
+            - '--type='
+            - 'crashpad-handler'
+            - '--extension-process'
+            - '\Google\Update\'
+            - '\Microsoft\EdgeUpdate\'
+
+    filter_legit_installers:
+        Image|endswith:
+            - '\msiexec.exe'
+            - '\setup.exe'
+            - '\install.exe'
+        CommandLine|contains:
+            - 'C:\Program Files'
+
+    condition: selection_browser_parents and (selection_suspicious_interpreters and selection_writable_paths) and not (filter_browser_infrastructure or filter_legit_installers)
+level: critical

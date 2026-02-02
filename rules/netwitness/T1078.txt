@@ -1,0 +1,2 @@
+(EventID = 4624 AND ((Status = '*0x0*'))) AND (LogonType = 3,10,8) AND ((TargetUserName begins 'svc_' AND LogonType = 10) OR (((TargetUserName = '*admin*'))&& IpAddress regex '^(?!127\\.|192\\.168\\.|10\\.).*')) AND (NOT ((WorkstationName begins 'INFRA-MONITOR-' OR (((IpAddress = '*::1*' OR IpAddress = '*127.0.0.1*'))) OR ((TargetUserName = '*svc_vulnerability_scanner*'))))
+)

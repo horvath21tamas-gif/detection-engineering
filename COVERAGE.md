@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 06:59:45`
+**Utolsó frissítés:** `2026-02-02 07:04:17`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 144 | 100% |
-| Splunk (SPL) | 144 | 100.0% |
-| Microsoft Sentinel (KQL) | 144 | 100.0% |
-| QRadar (AQL) | 82 | 56.9% |
-| Elastic (KQL/EQL) | 144 | 100.0% |
-| RSA NetWitness | 144 | 100.0% |
+| Sigma (Forrás) | 146 | 100% |
+| Splunk (SPL) | 146 | 100.0% |
+| Microsoft Sentinel (KQL) | 146 | 100.0% |
+| QRadar (AQL) | 83 | 56.8% |
+| Elastic (KQL/EQL) | 146 | 100.0% |
+| RSA NetWitness | 146 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -31,6 +31,7 @@
 | T1059.001 | HIGH | Suspicious Encoded PowerShell Command Execution |
 | T1068 | HIGH | Suspicious SYSTEM Process Spawned from User Context |
 | T1070.001 | HIGH | Security Event Log Cleared Using wevtutil.exe |
+| T1078 | HIGH | High-Fidelity Anomalous Logon via Valid Account |
 | T1087 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
 | T1091 | HIGH | High-Fidelity Process Execution from Removable Media |
 | T1098 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |

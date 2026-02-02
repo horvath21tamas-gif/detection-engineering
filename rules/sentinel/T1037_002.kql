@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where TargetObject contains "SOFTWARE\Microsoft\Netsh" and ((Details in ("*:\Users\*", "*:\ProgramData\*", "*:\Temp\*", "*:\Windows\Temp\*", "*AppData\*", "*C:\PerfLogs\*")) or (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\reg.exe", "*\mshta.exe", "*\wscript.exe"))) and (not ((FolderPath in ("*\trustedinstaller.exe", "*\System32\msiexec.exe", "*\System32\netsh.exe")) or (Details startswith "C:\Windows\System32\" and Details contains "C:\Program Files\")))

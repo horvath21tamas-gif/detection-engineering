@@ -9,7 +9,7 @@ author: hota05
 date: 2026-02-02
 tags:
     - attack.persistence
-    - attack.t1505.003
+    - attack.t1505
 logsource:
     product: windows
     category: process_creation

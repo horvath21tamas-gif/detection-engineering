@@ -1,0 +1,45 @@
+title: High-Fidelity Entra ID Application Credential Addition
+id: 15211c24-1acc-4d8e-a9b2-46e231dbfb11
+status: stable
+description: |
+    Detects when a new secret or certificate is added to an Entra ID application.
+    Attackers use this to establish a backdoor via Service Principals.
+    This rule filters out common Microsoft first-party apps and known CI/CD service principals.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1098/001/
+tags:
+    - attack.persistence
+    - attack.t1098.001
+logsource:
+    product: azure
+    service: ad
+detection:
+    selection_operation:
+        operationName:
+            - 'Update application – Certificates and secrets management '
+            - 'Add service principal credentials'
+
+    selection_status:
+        result: 'success'
+
+    filter_microsoft_internal:
+        initiatedBy.app.displayName:
+            - 'Microsoft App-Registration-Service'
+            - 'Azure Resource Manager'
+    
+    filter_known_automation:
+        initiatedBy.user.userPrincipalName|contains:
+            - 'svc-terraform'
+            - 'github-actions'
+            - 'devops-pipeline'
+
+    filter_legit_first_party_apps:
+        targetResources.displayName|contains:
+            - 'Office 365'
+            - 'Microsoft Teams'
+            - 'Azure Monitor'
+
+    condition: selection_operation and selection_status and not (filter_microsoft_internal or filter_known_automation or filter_legit_first_party_apps)
+level: critical

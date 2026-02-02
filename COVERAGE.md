@@ -23,6 +23,7 @@
 | T1027 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Encoded PowerShell Command Execution |
 | T1036 | HIGH | Legitimate Windows Binary Copied to User-Writable Location |
 | T1036.005 | HIGH | Legitimate Windows Binary Copied to User-Writable Location |
+| T1037.001 | CRITICAL | High-Fidelity Logon Script Persistence (T1037) |
 | T1047 | HIGH | Suspicious Remote Process Creation via WMIC |
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
 | T1053.002 | HIGH | High-Fidelity At.exe Activity Detection |

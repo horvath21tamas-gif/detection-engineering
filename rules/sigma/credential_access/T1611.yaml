@@ -1,0 +1,52 @@
+title: Ultra-Pro Container Escape & Host Access (T1611)
+id: 4cb24ad2-86f5-4a4a-9453-f6c67523cfca
+status: stable
+description: |
+    Detects unauthorized attempts to bypass container isolation and access the 
+    underlying host. Targets non-standard privileged executions and high-risk 
+    volume mounts, while filtering out known cluster infrastructure components.
+author: hota05
+date: 2026-02-02
+tags:
+    - attack.privilege_escalation
+    - attack.t1611
+logsource:
+    product: linux
+    category: process_creation
+detection:
+    selection_escape_flags:
+        CommandLine|contains:
+            - '--privileged'
+            - '--cap-add=SYS_ADMIN'   
+            - '--cap-add=SYS_PTRACE'  
+            - '--pid=host'           
+            - '--net=host'          
+            - '--ipc=host'            
+
+    selection_dangerous_mounts:
+        CommandLine|contains:
+            - '-v /:/'                
+            - '/var/run/docker.sock'  
+            - '/run/containerd'       
+            - '/etc/kubernetes'      
+            - '/root/.ssh'            
+
+    filter_infrastructure:
+        Image|contains:
+            - 'kube-proxy'
+            - 'calico/node'
+            - 'cilium'
+            - 'datadog/agent'
+            - 'node-exporter'
+            - 'istio-proxy'
+        User: 'root'
+
+    selection_interactive:
+        ParentImage|endswith:
+            - '/bash'
+            - '/sh'
+            - '/zsh'
+            - '/python'
+
+    condition: (selection_escape_flags or selection_dangerous_mounts) and not filter_infrastructure
+level: critical

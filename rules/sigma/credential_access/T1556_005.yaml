@@ -1,0 +1,42 @@
+title: Ultra-Pro SID History Injection Correlation (T1556.005)
+id: c793f78c-4e5f-4024-85f9-a17141eff735
+status: stable
+description: |
+    Detects the injection of highly privileged SIDs into the sIDHistory attribute of a user. 
+    This targets the "Ghost Admin" scenario where a user gains Domain Admin rights 
+    without being a member of the group.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1556/005/
+tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1556.005
+logsource:
+    product: windows
+    service: security
+    definition: 'Requires "Audit Directory Service Changes" enabled via GPO.'
+detection:
+    selection_attr_mod:
+        EventID: 5136
+        AttributeLDAPDisplayName: 'sIDHistory'
+
+    selection_privileged_rids:
+        AttributeValue|endswith:
+            - '-500' 
+            - '-502' 
+            - '-512' 
+            - '-517' 
+            - '-518' 
+            - '-519'
+            - '-544' 
+
+    filter_migration_services:
+        SubjectUserName|contains:
+            - 'ADMT_'
+            - 'MIGR_SVC'
+        SubjectUserSid: 'S-1-5-18' 
+
+    condition: selection_attr_mod and selection_privileged_rids and not filter_migration_services
+level: critical

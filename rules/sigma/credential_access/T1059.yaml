@@ -1,0 +1,54 @@
+title: High-Fidelity Scripting Interpreter Contextual Anomaly
+id: 5b4d1cb3-3c5d-4619-9fc3-a5681b671993
+status: stable
+description: |
+    Detects suspicious PowerShell or CMD execution by correlating shell interpreters 
+    with high-risk parent processes (Office, Browsers, Web Servers) and obfuscation techniques.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1059/
+tags:
+    - attack.execution
+    - attack.t1059
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_interpreters:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+
+    selection_obfuscation_and_download:
+        CommandLine|contains|all:
+            - ' -w ' # WindowStyle
+            - ' hidden '
+        CommandLine|contains:
+            - ' -enc'
+            - ' -encoded'
+            - 'iex('
+            - 'DownloadString'
+            - 'FromBase64String'
+
+    selection_risky_parents:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\powerpnt.exe'
+            - '\outlook.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\w3wp.exe'        
+            - '\sqlservr.exe'    
+            - '\wmiprvse.exe'    
+
+    filter_legit_automation:
+        - CommandLine|contains: 
+            - 'C:\Program Files\Microsoft Monitoring Agent\'
+            - 'C:\Windows\System32\Configuration\ManagedInstall'
+        - ParentImage|endswith: '\services.exe'
+
+    condition: selection_interpreters and (selection_risky_parents or selection_obfuscation_and_download) and not filter_legit_automation
+level: critical

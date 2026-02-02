@@ -1,0 +1,52 @@
+title: Ultra-Pro AppCert DLL Persistence Detection (T1546.010)
+id: 68cd6570-a4f7-4e44-a699-d3627fa5c1af
+status: stable
+description: |
+    Detects unauthorized registration of AppCert DLLs by monitoring the Session Manager 
+    Registry key. It filters out trusted system installers and requires non-standard 
+    paths or suspicious process lineages to trigger.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1546/010/
+tags:
+    - attack.persistence
+    - attack.t1546.010
+logsource:
+    category: registry_event
+    product: windows
+detection:
+    selection_registry_path:
+        TargetObject|contains: 'System\CurrentControlSet\Control\Session Manager\AppCertDlls'
+
+    selection_suspicious_location:
+        - Details|contains:
+            - '\Users\'
+            - '\ProgramData\'
+            - '\Windows\Temp\'
+            - '\AppData\'
+            - '\PerfLogs\'
+        - Details|endswith: '.exe' 
+
+    selection_suspicious_actor:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\reg.exe'
+            - '\regedit.exe'
+            - '\w3wp.exe'     
+            - '\cscript.exe'
+            - '\wscript.exe'
+
+    filter_trusted_installers:
+        Image|endswith:
+            - '\msiexec.exe'
+            - '\trustedinstaller.exe'
+            - '\TiWorker.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_known_good_paths:
+        Details|startsWith: 'C:\Windows\System32\'
+
+    condition: selection_registry_path and (selection_suspicious_location or selection_suspicious_actor) and not (filter_trusted_installers or filter_known_good_paths)
+level: critical

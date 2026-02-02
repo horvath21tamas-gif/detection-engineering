@@ -1,6 +1,6 @@
 import os
 import yaml
-import requests # SIEM API híváshoz
+import requests 
 
 def fetch_live_log_sources():
     # Példa: Splunk API hívás (vagy más SIEM)

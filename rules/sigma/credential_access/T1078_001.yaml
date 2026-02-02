@@ -1,0 +1,50 @@
+title: High-Fidelity Default Account Abuse Detection
+id: 9bf13001-cee8-40e8-b713-82c5573e6808
+status: stable
+description: |
+    Detects successful logons using well-known default account names (Administrator, Guest, root) 
+    originating from non-standard network locations or via interactive remote sessions (RDP). 
+    Filters out common local system noise and internal automation.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1078/001/
+tags:
+    - attack.initial_access
+    - attack.persistence
+    - attack.t1078.001
+logsource:
+    product: windows
+    service: security
+detection:
+    selection_logon_success:
+        EventID: 4624
+        Status: "0x0"
+
+    selection_default_names:
+        TargetUserName:
+            - 'Administrator'
+            - 'Guest'
+            - 'Admin'
+            - 'root'
+            - 'DefaultAccount'
+
+    selection_suspicious_logon_types:
+        LogonType:
+            - 3
+            - 8
+            - 10
+
+    filter_local_and_internal:
+        IpAddress: 
+            - '::1'
+            - '127.0.0.1'
+        TargetUserName|startswith: 'UMFD-'
+
+    filter_known_automation:
+        WorkstationName|startswith: 
+            - 'INFRA-MONITOR-'
+            - 'BACKUP-SRV-'
+
+    condition: selection_logon_success and selection_default_names and selection_suspicious_logon_types and not (filter_local_and_internal or filter_known_automation)
+level: critical

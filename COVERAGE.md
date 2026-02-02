@@ -68,6 +68,9 @@
 | T1110.001 | MEDIUM | Multiple Failed Login Attempts for Single User (Possible Password Guessing) |
 | T1129 | HIGH | High-Fidelity Shared Module Load from Untrusted Path |
 | T1133 | HIGH | Anomalous External Remote Service Access Context |
+| T1136.001 | CRITICAL | Ultra-Pro Unauthorized Local Account Creation (T1136.001), Ultra-Pro Unauthorized Account Creation (T1136) |
+| T1136.002 | CRITICAL | Ultra-Pro Unauthorized Domain Account Creation (T1136.002) |
+| T1136.003 | CRITICAL | Ultra-Pro Unauthorized Cloud Account Creation (T1136.003) |
 | T1176 | CRITICAL | Ultra-Pro Browser Extension Force-Install Persistence (T1176) |
 | T1189 | CRITICAL | Browser-Originating Shell or System Tool Execution |
 | T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |

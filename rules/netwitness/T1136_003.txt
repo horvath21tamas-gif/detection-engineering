@@ -1,0 +1,2 @@
+(((operationName = '*Add user*'))&& ((result = '*success*'))) AND ((initiatedBy_user_userPrincipalName = '*@*'))&& (((ipAddress = '*unusual_ip*'))|| (((userAgent = '*python-requests*' OR userAgent = '*curl*' OR userAgent = '*Postman*' OR userAgent = '*Kali*')))) AND (NOT ((((initiatedBy_app_displayName = '*Azure AD Connect*' OR initiatedBy_app_displayName = '*Workday to Azure AD*' OR initiatedBy_app_displayName = '*Okta Provisioning*' OR initiatedBy_app_displayName = '*MS-PIM*'))))
+)

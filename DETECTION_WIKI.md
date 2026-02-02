@@ -88,6 +88,7 @@
 - [Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity)](#suspicious-deletion-of-volume-shadow-copies-via-vssadmin-(high-fidelity))
 - [Ultra-Pro Web Shell Execution Patterns (T1505.003)](#ultra-pro-web-shell-execution-patterns-(t1505003))
 - [Webshell Upload or Interaction Detected on Web Server (High Fidelity)](#webshell-upload-or-interaction-detected-on-web-server-(high-fidelity))
+- [Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004)](#ultra-pro-mainboard-boot-image-&-spi-flash-tampering-(t1542004))
 - [Exploit-Grade Unauthorized Container Image Execution (Implant Container Image)](#exploit-grade-unauthorized-container-image-execution-(implant-container-image))
 - [Ultra-Pro Pre-OS Boot Manipulation (T1542)](#ultra-pro-pre-os-boot-manipulation-(t1542))
 - [Ultra-Pro ROM Kit & UEFI Firmware Tampering (T1542.001)](#ultra-pro-rom-kit-&-uefi-firmware-tampering-(t1542001))
@@ -1686,6 +1687,23 @@ for legitimate .NET compilation and IIS administration.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004)
+- **Azonosító:** `T1505_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized firmware manipulation by monitoring low-level hardware access 
+tools and driver registrations initiated from non-standard process chains. 
+Focuses on SPI flash writing and image injection attempts.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

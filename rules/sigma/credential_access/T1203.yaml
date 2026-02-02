@@ -56,7 +56,7 @@ detection:
             - '\WerFault.exe'      
 
     filter_low_risk_cl:
-        CommandLine: null
+        processcommandline: null
 
     condition: selection_vulnerable_parents and selection_suspicious_children and not filter_legit_subprocesses and not filter_low_risk_cl
 level: critical

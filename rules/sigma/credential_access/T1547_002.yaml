@@ -1,0 +1,48 @@
+title: High-Fidelity LSA Authentication Package Persistence
+id: f613d9d2-32e2-43cf-8a02-d44ad2d0af7b
+status: stable
+description: |
+    Detects the addition of unauthorized Authentication Packages in the LSA registry key.
+    Attackers use this for SYSTEM-level persistence and credential harvesting.
+    This rule filters standard Windows packages and monitors for DLLs outside System32.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1547/002/
+tags:
+    - attack.persistence
+    - attack.t1547.002
+logsource:
+    category: registry_set
+    product: windows
+detection:
+    selection_registry:
+        TargetObject|endswith: '\Control\Lsa\Authentication Packages'
+
+    filter_standard_packages:
+        Details|contains:
+            - 'msv1_0'
+            - 'kerberos'
+            - 'tspkg'
+            - 'pku2u'
+            - 'livessp'
+            - 'cloudap'
+            - 'wdigest'
+            - 'negotiate'
+
+    selection_suspicious_location:
+        Details|contains:
+            - ':\Users\'
+            - ':\ProgramData\'
+            - ':\Temp\'
+            - ':\Windows\Temp\'
+            - '.ps1'
+            - '.exe'
+
+    filter_trusted_system_process:
+        Image|endswith:
+            - '\C:\Windows\servicing\TrustedInstaller.exe'
+            - '\System32\msiexec.exe'
+
+    condition: selection_registry and (not filter_standard_packages or selection_suspicious_location) and not filter_trusted_system_process
+level: critical

@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 06:13:11`
+**Utolsó frissítés:** `2026-02-02 06:32:40`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 133 | 100% |
-| Splunk (SPL) | 133 | 100.0% |
-| Microsoft Sentinel (KQL) | 133 | 100.0% |
-| QRadar (AQL) | 72 | 54.1% |
-| Elastic (KQL/EQL) | 133 | 100.0% |
-| RSA NetWitness | 133 | 100.0% |
+| Sigma (Forrás) | 134 | 100% |
+| Splunk (SPL) | 134 | 100.0% |
+| Microsoft Sentinel (KQL) | 134 | 100.0% |
+| QRadar (AQL) | 73 | 54.5% |
+| Elastic (KQL/EQL) | 134 | 100.0% |
+| RSA NetWitness | 134 | 100.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -39,6 +39,7 @@
 | T1189 | CRITICAL | Browser-Originating Shell or System Tool Execution |
 | T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |
 | T1197 | HIGH | Suspicious File Download via Bitsadmin (High Fidelity) |
+| T1200 | CRITICAL | Malicious Hardware-Induced Command Execution (HID Injection) |
 | T1204 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity) |
 | T1204.004 | HIGH | Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel |
 | T1218 | HIGH | Suspicious Use of Built-in Windows Tools for File Download and Code Execution |

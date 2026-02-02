@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\mshta.exe", "*\conhost.exe")) and ((ProcessCommandLine contains " -w " and ProcessCommandLine contains " hidden ") and (ProcessCommandLine in ("* -enc *", "* -nop *", "* -noni *", "* Invoke-Execution *", "* .DownloadString*"))) and (ParentProcessName in ("*\explorer.exe", "*\taskhostw.exe")) and (not ((ProcessCommandLine in ("*Netlogon*", "*Sysvol*", "*HealthCheck*")) or (ParentProcessName in ("*\AppData\Local\Programs\Microsoft VS Code\*", "*\Common7\IDE\devenv.exe*"))))

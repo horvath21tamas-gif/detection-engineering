@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where EventID =~ 7045 and ((ServiceFileName in ("*\Users\*", "*\ProgramData\*", "*\Windows\Temp\*", "*\AppData\*", "*\PerfLogs\*", "*powershell*", "*cmd.exe*", "*regsvr32*", "*mshta*")) or (ParentProcessName in ("*\w3wp.exe", "*\powershell.exe", "*\cmd.exe", "*\cscript.exe", "*\wscript.exe"))) and (not ((ServiceFileName in ("*C:\Program Files\*", "*C:\Program Files (x86)\*", "*C:\Windows\System32\*", "*C:\Windows\SysWOW64\*")) and (ParentProcessName in ("*\services.exe", "*\msiexec.exe", "*\trustedinstaller.exe", "*\TiWorker.exe")) and User =~ "NT AUTHORITY\SYSTEM"))

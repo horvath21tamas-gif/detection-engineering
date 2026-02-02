@@ -49,7 +49,7 @@ detection:
             - '\msiexec.exe'
             - '\trustedinstaller.exe'
             - '\TiWorker.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_event_7045 and (selection_suspicious_path or selection_suspicious_parent) and not filter_trusted_installers
 level: critical

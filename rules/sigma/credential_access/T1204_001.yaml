@@ -1,0 +1,71 @@
+title: High-Fidelity User Execution of Malicious Link (T1204.001)
+id: 649dbe7d-6a5b-4395-a056-eb833478ef60
+status: stable
+description: |
+    Detects suspicious child processes spawned by web browsers, email clients, or 
+    instant messengers. Focuses on LOLBins and script interpreters launched with 
+    network-related or obfuscated arguments, indicative of malicious link execution.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1204/001/
+tags:
+    - attack.initial_access
+    - attack.execution
+    - attack.t1204.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_browsers_and_mail:
+        ParentImage|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+            - '\brave.exe'
+            - '\outlook.exe'
+            - '\thunderbird.exe'
+            - '\teams.exe'
+            - '\slack.exe'
+            - '\discord.exe'
+
+    selection_suspicious_children:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\mshta.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\certutil.exe'
+            - '\bitsadmin.exe'
+            - '\rundll32.exe'
+            - '\regsvr32.exe'
+            - '\hh.exe'
+            - '\scrcons.exe'
+
+    selection_dangerous_args:
+        CommandLine|contains:
+            - '-enc'                
+            - 'http'                
+            - 'DownloadString'     
+            - 'Invoke-WebRequest'
+            - '-ExecutionPolicy Bypass'
+            - 'javascript:'         
+            - 'vbscript:'
+            - '.jnlp'               
+            - ' -e '                
+
+    filter_legit_browser_ops:
+        - CommandLine|contains:
+            - '--type=renderer'
+            - '--type=utility'
+            - '--type=gpu-process'
+            - '\Google\Update\'
+            - '\Microsoft\EdgeUpdate\'
+        - CommandLine|contains:
+            - 'RemoteAssistance'
+            - 'TeamViewer'
+
+    condition: selection_browsers_and_mail and (selection_suspicious_children or selection_dangerous_args) and not filter_legit_browser_ops
+level: critical

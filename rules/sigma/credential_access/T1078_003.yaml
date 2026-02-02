@@ -1,0 +1,51 @@
+title: High-Fidelity Local Account Remote Access Detection
+id: 130ecd8c-b93f-44fc-ad40-49da024de4e7
+status: stable
+description: |
+    Detects successful remote logons (RDP, SMB, WinRM) using local accounts. 
+    In a domain environment, local accounts should only be used for local console 
+    access. Remote usage is a strong indicator of lateral movement or credential theft.
+author: hota05
+date: 2026-02-02
+references:
+    - https://attack.mitre.org/techniques/T1078/003/
+tags:
+    - attack.initial_access
+    - attack.lateral_movement
+    - attack.t1078.003
+logsource:
+    product: windows
+    service: security
+detection:
+    selection_4624:
+        EventID: 4624
+        Status: "0x0" 
+
+    selection_remote_types:
+        LogonType:
+            - 3  
+            - 10 
+            - 8  
+
+    selection_local_context:
+        - TargetDomainName: 'Window Manager' 
+        - TargetDomainName: 'NTLMSSP'       
+
+    filter_standard_noise:
+        TargetUserName|startswith:
+            - 'UMFD-'
+            - 'DWM-'
+        TargetUserName:
+            - 'SYSTEM'
+            - 'LOCAL SERVICE'
+            - 'NETWORK SERVICE'
+            - 'ANONYMOUS LOGON'
+        TargetUserName|endswith: '$' 
+
+    filter_local_sources:
+        IpAddress:
+            - '127.0.0.1'
+            - '::1'
+
+    condition: selection_4624 and selection_remote_types and not (filter_standard_noise or filter_local_sources)
+level: critical

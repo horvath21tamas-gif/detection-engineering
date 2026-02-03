@@ -49,5 +49,5 @@ detection:
             - '\AppData\Local\Microsoft\Teams\'
             - '\AppData\Local\Microsoft\Office\'
 
-    condition: selection_registry and (selection_suspicious_path or selection_lolbin_artifacts) and not filter_trusted_apps
+    condition: selection_registry and (selection_suspicious_paths or selection_lolbin_artifacts) and not filter_trusted_apps
 level: high

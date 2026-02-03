@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 09:11:15`
+**Utolsó frissítés:** `2026-02-03 09:23:38`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 348 | 100% |
-| Splunk (SPL) | 317 | 91.1% |
-| Microsoft Sentinel (KQL) | 318 | 91.4% |
-| QRadar (AQL) | 164 | 47.1% |
-| Elastic (KQL/EQL) | 318 | 91.4% |
-| RSA NetWitness | 316 | 90.8% |
+| Sigma (Forrás) | 350 | 100% |
+| Splunk (SPL) | 319 | 91.1% |
+| Microsoft Sentinel (KQL) | 320 | 91.4% |
+| QRadar (AQL) | 164 | 46.9% |
+| Elastic (KQL/EQL) | 320 | 91.4% |
+| RSA NetWitness | 318 | 90.9% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -24,6 +24,7 @@
 | T1027 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Encoded PowerShell Command Execution |
 | T1036 | HIGH | Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036), Legitimate Windows Binary Copied to User-Writable Location |
 | T1036.005 | HIGH | Legitimate Windows Binary Copied to User-Writable Location |
+| T1036.009 | CRITICAL | Ultra-Pro High-Fidelity Allure Document and RTLO Masquerading (T1036.009) |
 | T1037 | CRITICAL | High-Fidelity Logon Script Persistence (T1037) |
 | T1037.001 | CRITICAL | High-Fidelity UserInitMprLogonScript Persistence |
 | T1037.002 | CRITICAL | High-Fidelity Netsh Helper DLL Persistence |

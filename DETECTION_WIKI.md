@@ -8,6 +8,7 @@
 - [Suspicious Base64-Encoded PowerShell Command with Network Activity](#suspicious-base64-encoded-powershell-command-with-network-activity)
 - [Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036)](#ultra-pro-high-fidelity-masquerading-and-process-path-abuse-(t1036))
 - [Legitimate Windows Binary Copied to User-Writable Location](#legitimate-windows-binary-copied-to-user-writable-location)
+- [Ultra-Pro High-Fidelity Allure Document and RTLO Masquerading (T1036.009)](#ultra-pro-high-fidelity-allure-document-and-rtlo-masquerading-(t1036009))
 - [High-Fidelity Logon Script Persistence (T1037)](#high-fidelity-logon-script-persistence-(t1037))
 - [High-Fidelity UserInitMprLogonScript Persistence](#high-fidelity-userinitmprlogonscript-persistence)
 - [High-Fidelity Netsh Helper DLL Persistence](#high-fidelity-netsh-helper-dll-persistence)
@@ -452,6 +453,23 @@ Optimized to filter out legitimate Windows Update and side-loading behaviors.
 - **Leírás:** Detects suspicious copying of legitimate Windows system binaries into user-writable directories. This technique is commonly used by attackers for masquerading, DLL sideloading, or execution evasion by abusing trusted binary names.
 - **Hamis pozitívok:** Rare advanced troubleshooting by administrators, Approved red team or malware simulation activity
 - **MITRE ATT&CK:** `T1036, 005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Allure Document and RTLO Masquerading (T1036.009)
+- **Azonosító:** `T1036_009.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects sophisticated masquerading using allure documents and RTLO characters. 
+Focuses on execution from untrusted user directories and suspicious parent 
+processes (browsers, mail clients) while filtering common developer noise.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `009`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

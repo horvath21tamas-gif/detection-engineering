@@ -50,7 +50,7 @@ detection:
             - '\node_modules\'
             - '\bin\Debug\'
             - '\bin\Release\'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|endswith: '\msiexec.exe'
 
     condition: (selection_double_extension or selection_rtlo) and (selection_untrusted_path or selection_suspicious_parent) and not filter_dev_and_system

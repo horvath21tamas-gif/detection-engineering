@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*.pdf.exe*", "*.docx.exe*", "*.xlsx.exe*", "*.txt.exe*", "*.jpg.exe*", "*.png.exe*", "*.zip.exe*")) or (ProcessCommandLine in ("*‮*", "*\u202e*", "*%E2%80%AE*"))) and ((FolderPath in ("*\Downloads\*", "*\Desktop\*", "*\AppData\Local\Temp\*", "*\Users\Public\*")) or (ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\outlook.exe", "*\winrar.exe", "*\7zFM.exe"))) and (not ((FolderPath in ("*\node_modules\*", "*\bin\Debug\*", "*\bin\Release\*")) or User =~ "NT AUTHORITY\SYSTEM" or ParentProcessName endswith "\msiexec.exe"))

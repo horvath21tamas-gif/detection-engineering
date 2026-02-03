@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("*$false*", "*$null*", "* /dev/null*")) or ((ProcessCommandLine in ("*HistoryBufferSize*", "*0*")) or ProcessCommandLine contains "reg" or ProcessCommandLine contains "Console\HistoryBufferSize") or ((ProcessCommandLine in ("*Remove-Item*", "*del *", "*rm *")) or (ProcessCommandLine in ("*\ConsoleHost_history.txt*", "*\.bash_history*")))) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\w3wp.exe", "*\mshta.exe")) or (not ((ParentProcessName in ("*\Common7\IDE\devenv.exe*", "*\Microsoft VS Code\Code.exe*")) or User =~ "NT AUTHORITY\SYSTEM" or ProcessCommandLine contains "AppData\Local\Temp\SDI")))

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath startswith "C:\Windows\" and (FolderPath in ("*\svchost.exe", "*\explorer.exe", "*\taskhostw.exe", "*\searchindexer.exe", "*\msiexec.exe", "*\calc.exe", "*\notepad.exe"))) and (ImageLoaded in ("*\Users\*", "*\ProgramData\*", "*\Windows\Temp\*", "*\AppData\*", "*\Public\*")) and Signed =~ "false" and (not ((ImageLoaded in ("C:\Windows\System32\*", "C:\Windows\WinSxS\*", "C:\Program Files\*", "C:\Program Files (x86)\*")) or (SignatureStatus =~ "Valid" and Signer contains "Microsoft")))

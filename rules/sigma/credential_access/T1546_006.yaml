@@ -35,7 +35,7 @@ detection:
             - '.hidden/'
 
     filter_trusted_dev:
-        ParentImage|startsWith:
+        ParentImage|startswith:
             - '/Applications/Xcode.app/'
             - '/Library/Developer/'
         Image|endswith:

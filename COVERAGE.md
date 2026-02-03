@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 06:21:00`
+**Utolsó frissítés:** `2026-02-03 06:32:46`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 294 | 100% |
-| Splunk (SPL) | 265 | 90.1% |
-| Microsoft Sentinel (KQL) | 266 | 90.5% |
-| QRadar (AQL) | 153 | 52.0% |
-| Elastic (KQL/EQL) | 266 | 90.5% |
-| RSA NetWitness | 264 | 89.8% |
+| Sigma (Forrás) | 300 | 100% |
+| Splunk (SPL) | 271 | 90.3% |
+| Microsoft Sentinel (KQL) | 272 | 90.7% |
+| QRadar (AQL) | 153 | 51.0% |
+| Elastic (KQL/EQL) | 272 | 90.7% |
+| RSA NetWitness | 270 | 90.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -37,6 +37,12 @@
 | T1053.006 | HIGH | High-Fidelity Systemd Service Creation or Modification |
 | T1053.007 | HIGH | High-Fidelity Systemd Timer Persistence Detection |
 | T1055 | CRITICAL | Ultra-Pro Stealthy Process Injection Detection (T1055) |
+| T1055.001 | CRITICAL | Ultra-Pro Stealthy DLL Injection (T1055.001) |
+| T1055.002 | CRITICAL | Ultra-Pro Stealthy PE Injection (T1055.002) |
+| T1055.004 | CRITICAL | Ultra-Pro Stealthy APC Injection (T1055.004) |
+| T1055.009 | CRITICAL | Ultra-Pro Stealthy Module Overwriting (T1055.009) |
+| T1055.011 | CRITICAL | Ultra-Pro Stealthy EWM Injection (T1055.011) |
+| T1055.015 | CRITICAL | Ultra-Pro Stealthy ListPlanting Injection (T1055.015) |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 Libraries |
 | T1059 | HIGH | High-Fidelity Scripting Interpreter Contextual Anomaly, Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1059.001 | HIGH | Suspicious Encoded PowerShell Command Execution |

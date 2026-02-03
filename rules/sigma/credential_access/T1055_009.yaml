@@ -35,7 +35,7 @@ detection:
             - '\spoolsv.exe'
 
     filter_trusted:
-        - SourceImage: 'C:\Windows\System32\csrss.exe'
+        - Sourceprocessname: 'C:\Windows\System32\csrss.exe'
         - SourceImage|endswith:
             - '\MsMpEng.exe'        
             - '\CcmExec.exe'       

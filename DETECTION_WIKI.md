@@ -20,6 +20,12 @@
 - [High-Fidelity Systemd Service Creation or Modification](#high-fidelity-systemd-service-creation-or-modification)
 - [High-Fidelity Systemd Timer Persistence Detection](#high-fidelity-systemd-timer-persistence-detection)
 - [Ultra-Pro Stealthy Process Injection Detection (T1055)](#ultra-pro-stealthy-process-injection-detection-(t1055))
+- [Ultra-Pro Stealthy DLL Injection (T1055.001)](#ultra-pro-stealthy-dll-injection-(t1055001))
+- [Ultra-Pro Stealthy PE Injection (T1055.002)](#ultra-pro-stealthy-pe-injection-(t1055002))
+- [Ultra-Pro Stealthy APC Injection (T1055.004)](#ultra-pro-stealthy-apc-injection-(t1055004))
+- [Ultra-Pro Stealthy Module Overwriting (T1055.009)](#ultra-pro-stealthy-module-overwriting-(t1055009))
+- [Ultra-Pro Stealthy EWM Injection (T1055.011)](#ultra-pro-stealthy-ewm-injection-(t1055011))
+- [Ultra-Pro Stealthy ListPlanting Injection (T1055.015)](#ultra-pro-stealthy-listplanting-injection-(t1055015))
 - [Suspicious Credential API Hooking via Win32 Libraries](#suspicious-credential-api-hooking-via-win32-libraries)
 - [High-Fidelity Scripting Interpreter Contextual Anomaly](#high-fidelity-scripting-interpreter-contextual-anomaly)
 - [Suspicious Encoded PowerShell Command Execution](#suspicious-encoded-powershell-command-execution)
@@ -593,6 +599,108 @@ monitoring for specific high-risk GrantedAccess masks combined with
 suspicious source-target relationships and unbacked memory regions.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1055`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Stealthy DLL Injection (T1055.001)
+- **Azonosító:** `T1055_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects high-fidelity DLL injection by identifying remote thread creation 
+where the start address is a known library-loading function or the source 
+memory region is not backed by a file on disk (unbacked memory).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Stealthy PE Injection (T1055.002)
+- **Azonosító:** `T1055_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects high-fidelity PE injection by identifying cross-process memory 
+manipulation where the source of the call is an unbacked memory region 
+(shellcode) and the target is a critical system process.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Stealthy APC Injection (T1055.004)
+- **Azonosító:** `T1055_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects high-fidelity APC injection attempts (including Early Bird) by monitoring for 
+specific thread access masks (THREAD_SET_CONTEXT) where the calling code originates 
+from unbacked or untrusted memory regions (CallTrace analysis).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Stealthy Module Overwriting (T1055.009)
+- **Azonosító:** `T1055_009.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects process or module overwriting by identifying cross-process access 
+requests with VM_WRITE permissions where the calling stack originates from 
+unbacked memory (shellcode) rather than a signed on-disk module.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `009`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Stealthy EWM Injection (T1055.011)
+- **Azonosító:** `T1055_011.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects Extra Window Memory (EWM) injection by monitoring for suspicious 
+cross-process access with memory manipulation rights where the CallTrace 
+indicates execution from unbacked memory (shellcode) targeting GUI processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `011`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Stealthy ListPlanting Injection (T1055.015)
+- **Azonosító:** `T1055_015.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects ListPlanting injection by identifying suspicious cross-process access 
+requests to ListView-capable processes where the execution flow originates 
+from unbacked memory regions (shellcode) rather than signed modules.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `015`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

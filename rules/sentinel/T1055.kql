@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where ((GrantedAccess in ("0x1410", "0x1411", "0x1438", "0x143a", "0x1F1FFF")) and ((TargetImage in ("*\explorer.exe", "*\svchost.exe", "*\lsass.exe", "*\spoolsv.exe", "*\winlogon.exe")) and (SourceImage in ("*\Users\*", "*\Temp\*", "*\AppData\*")))) or ((SourceImage in ("*\mimikatz.exe", "*\cobaltstrike.exe", "*\powershell.exe")) and (not ((SourceImage in ("*\MsMpEng.exe", "*\CcmExec.exe", "*\msteams.exe")) or SourceImage =~ "C:\Windows\System32\csrss.exe" or (TargetImage in ("*\WerFault.exe", "*\conhost.exe")) or CallTrace contains "unknown")))
+| where ((GrantedAccess in ("0x1410", "0x1411", "0x1438", "0x143a", "0x1F1FFF")) and ((TargetImage in ("*\explorer.exe", "*\svchost.exe", "*\lsass.exe", "*\spoolsv.exe", "*\winlogon.exe")) and (SourceImage in ("*\Users\*", "*\Temp\*", "*\AppData\*")))) or ((SourceImage in ("*\mimikatz.exe", "*\cobaltstrike.exe", "*\powershell.exe")) and (not ((SourceImage in ("*\MsMpEng.exe", "*\CcmExec.exe", "*\msteams.exe")) or Sourceprocessname =~ "C:\Windows\System32\csrss.exe" or (TargetImage in ("*\WerFault.exe", "*\conhost.exe")) or CallTrace contains "unknown")))

@@ -1,0 +1,1 @@
+(operation_name:(*DeleteSnapshot* OR *ModifyInstanceAttribute* OR *RevokeSecurityGroupIngress* OR *AuthorizeSecurityGroupIngress* OR *DeleteVpcPeeringConnection*)) AND ((request_parameters:(*0.0.0.0\/0* OR *\:\:\/0* OR *all*)) OR (user_agent:(*kali* OR *python\-requests* OR *curl* OR *postman*))) AND (NOT (user_name:(svc\-terraform* OR *system\-internal*)))

@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (FolderPath contains "‮" or ProcessCommandLine contains "‮" or (ProcessCommandLine in ("*\u202e*", "*U+202E*", "*%E2%80%AE*", "****"))) and ((FolderPath in ("*\Users\*", "*\Downloads\*", "*\Desktop\*", "*\AppData\Local\Temp\*", "*\Public\*")) or (ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\outlook.exe", "*\explorer.exe", "*\winrar.exe", "*\7zFM.exe"))) and (not (User =~ "NT AUTHORITY\SYSTEM" or FolderPath startswith "C:\Windows\System32\" or FolderPath contains "\node_modules\"))
+| where (FolderPath contains "‮" or ProcessCommandLine contains "‮" or (ProcessCommandLine in ("*\u202e*", "*U+202E*", "*%E2%80%AE*", "****"))) and ((FolderPath in ("*\Users\*", "*\Downloads\*", "*\Desktop\*", "*\AppData\Local\Temp\*", "*\Public\*")) or (ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\outlook.exe", "*\explorer.exe", "*\winrar.exe", "*\7zFM.exe"))) and (not (username =~ "NT AUTHORITY\SYSTEM" or FolderPath startswith "C:\Windows\System32\" or FolderPath contains "\node_modules\"))

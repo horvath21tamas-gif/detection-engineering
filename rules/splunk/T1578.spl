@@ -1,0 +1,1 @@
+operation_name IN ("*DeleteSnapshot*", "*ModifyInstanceAttribute*", "*RevokeSecurityGroupIngress*", "*AuthorizeSecurityGroupIngress*", "*DeleteVpcPeeringConnection*") request_parameters IN ("*0.0.0.0/0*", "*::/0*", "*all*") OR user_agent IN ("*kali*", "*python-requests*", "*curl*", "*postman*") NOT (user_name IN ("svc-terraform*", "*system-internal*"))

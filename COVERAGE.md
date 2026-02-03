@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 09:35:32`
+**Utolsó frissítés:** `2026-02-03 09:49:34`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 357 | 100% |
-| Splunk (SPL) | 326 | 91.3% |
-| Microsoft Sentinel (KQL) | 327 | 91.6% |
-| QRadar (AQL) | 164 | 45.9% |
-| Elastic (KQL/EQL) | 327 | 91.6% |
-| RSA NetWitness | 325 | 91.0% |
+| Sigma (Forrás) | 358 | 100% |
+| Splunk (SPL) | 327 | 91.3% |
+| Microsoft Sentinel (KQL) | 328 | 91.6% |
+| QRadar (AQL) | 165 | 46.1% |
+| Elastic (KQL/EQL) | 328 | 91.6% |
+| RSA NetWitness | 326 | 91.1% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -275,6 +275,7 @@
 | T1574.011 | CRITICAL | Privileged Service ImagePath or ServiceDll Hijacked via Registry |
 | T1574.012 | CRITICAL | Exploit-Grade COR_PROFILER Hijacking via User-Writable Profiler DLL |
 | T1574.013 | CRITICAL | Exploit-Grade KernelCallbackTable Manipulation via Remote Memory Write |
+| T1578 | CRITICAL | Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578) |
 | T1583 | HIGH | High-Fidelity Offensive Infrastructure Provisioning - T1583 |
 | T1583.001 | HIGH | High-Fidelity VPS Infrastructure Provisioning - T1583.001 |
 | T1583.002 | HIGH | High-Fidelity Automated Domain Registration & Acquisition - T1583.002 |

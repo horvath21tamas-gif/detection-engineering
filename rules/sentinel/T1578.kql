@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (operation_name in ("*DeleteSnapshot*", "*ModifyInstanceAttribute*", "*RevokeSecurityGroupIngress*", "*AuthorizeSecurityGroupIngress*", "*DeleteVpcPeeringConnection*")) and ((request_parameters in ("*0.0.0.0/0*", "*::/0*", "*all*")) or (user_agent in ("*kali*", "*python-requests*", "*curl*", "*postman*"))) and (not (user_name in ("svc-terraform*", "*system-internal*")))

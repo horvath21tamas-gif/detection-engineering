@@ -1,13 +1,13 @@
 # 🎯 Detection Strategy & Gap Analysis
-*Frissítve: 2026-02-03 09:35:29*
+*Frissítve: 2026-02-03 09:49:31*
 
 ## 📊 Állapotösszegző
 | Mutató | Érték |
 | :--- | :--- |
-| Összes szabály | 357 |
+| Összes szabály | 358 |
 | Aktív (van logforrás) | 345 |
-| Inaktív (hiányzó log) | 12 |
-| MITRE Lefedettség | 351 technika |
+| Inaktív (hiányzó log) | 13 |
+| MITRE Lefedettség | 358 technika |
 
 ## 🛑 Kritikus Adatforrás Hiányok
 Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logokat:
@@ -22,6 +22,7 @@ Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logok
 | High-Fidelity Azure Role Assignment Escalation (`T1098_004.yaml`) | service: `process_access` |
 | High-Fidelity MFA Method Addition (`T1098_006.yaml`) | service: `process_creation` |
 | Ultra-Pro RC Script and Init.d Persistence (T1037.004) (`T1037_004.yaml`) | service: `auditd` |
+| Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578) (`T1578.yaml`) | product: `cloud`, service: `Azure Activity` |
 | High-Fidelity Entra ID App Certificate Addition (`T1098_003.yaml`) | service: `ad` |
 | Ultra-Pro Stealthy Ptrace Injection (T1055.008) (`T1055_008.yaml`) | service: `auditd` |
 | Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012) (`T1562_012.yaml`) | product: `cloud`, service: `aws.cloudtrail` |

@@ -258,6 +258,7 @@
 - [Privileged Service ImagePath or ServiceDll Hijacked via Registry](#privileged-service-imagepath-or-servicedll-hijacked-via-registry)
 - [Exploit-Grade COR_PROFILER Hijacking via User-Writable Profiler DLL](#exploit-grade-cor_profiler-hijacking-via-user-writable-profiler-dll)
 - [Exploit-Grade KernelCallbackTable Manipulation via Remote Memory Write](#exploit-grade-kernelcallbacktable-manipulation-via-remote-memory-write)
+- [Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578)](#ultra-pro-high-fidelity-cloud-infrastructure-tampering-(t1578))
 - [High-Fidelity Offensive Infrastructure Provisioning - T1583](#high-fidelity-offensive-infrastructure-provisioning---t1583)
 - [High-Fidelity VPS Infrastructure Provisioning - T1583.001](#high-fidelity-vps-infrastructure-provisioning---t1583001)
 - [High-Fidelity Automated Domain Registration & Acquisition - T1583.002](#high-fidelity-automated-domain-registration-&-acquisition---t1583002)
@@ -4591,6 +4592,22 @@ for KernelCallbackTable hijacking. This technique is often used for process
 injection that evades standard hook-based monitoring.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `013`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578)
+- **Azonosító:** `T1578.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects high-risk modifications to cloud infrastructure that weaken security posture 
+or prepare for data exfiltration, filtered by identity behavior and source trust.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1578`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

@@ -1,0 +1,63 @@
+title: Ultra-Pro High-Fidelity Disable Entity Verification (T1600.002)
+id: a1102620-fcb4-4a2d-a54b-095dd5a9c9cb
+status: stable
+description: |
+    Detects unauthorized modification of system trust settings and certificate verification 
+    by monitoring for suspicious certutil usage and registry-based Authenticode/WinTrust 
+    bypasses initiated by untrusted processes.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1600.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_untrusted_actor:
+        Image|contains:
+            - '\AppData\Local\Temp\'
+            - '\Users\Public\'
+            - '\Downloads\'
+            - '\Desktop\'
+            - '\PerfLogs\'
+        ParentImage|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+
+    selection_certutil:
+        Image|endswith: '\certutil.exe'
+        CommandLine|contains:
+            - '-addstore'
+            - '-importcert'
+        CommandLine|contains:
+            - 'Root'
+            - 'AuthRoot'
+            - 'TrustedPublisher'
+
+    selection_wintrust_bypass:
+        CommandLine|contains:
+            - '\WinTrust\Trust Providers\Software Publishing'
+            - '\CurrentVersion\Policies\Associations'
+        CommandLine|contains:
+            - 'State'
+            - '0x00023e00'
+            - 'LowRiskFileTypes'
+
+    filter_trusted_it:
+        ParentImage|endswith:
+            - '\msiexec.exe'
+            - '\TrustedInstaller.exe'
+            - '\CcmExec.exe' 
+            - '\gpscript.exe' 
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_known_updaters:
+        Image|contains:
+            - '\Program Files\'
+            - '\Program Files (x86)\'
+
+    condition: selection_untrusted_actor and (selection_certutil or selection_wintrust_bypass) and not (filter_trusted_it or filter_known_updaters)
+level: high

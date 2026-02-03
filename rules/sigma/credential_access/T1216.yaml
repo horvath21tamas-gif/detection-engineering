@@ -1,0 +1,61 @@
+title: Ultra-Pro High-Fidelity System Script Proxy Execution (T1216)
+id: 297ab9c8-540e-4a37-9c63-30d8d8a87e40
+status: stable
+description: |
+    Detects the abuse of trusted Windows signed scripts to proxy malicious code. 
+    Focuses on network-based execution triggers and anomalous parent-child 
+    process relationships to minimize false positives.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1216
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_itp:
+        - Image|endswith: 
+            - '\wscript.exe'
+            - '\cscript.exe'
+        - OriginalFileName: 
+            - 'wscript.exe'
+            - 'cscript.exe'
+
+    selection_scripts:
+        CommandLine|contains:
+            - 'pubprn.vbs'   
+            - 'slmgr.vbs'    
+            - 'manage-bde.wsf' 
+            - 'SyncAppvPublishingServer.vbs'
+            - 'Adsiedit.vbs'
+
+    selection_attack_params:
+        CommandLine|contains:
+            - 'http'        
+            - 'script:'      
+            - 'soap:'        
+            - '\\'          
+            - ' /e:'        
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\powershell.exe'
+            - '\cmd.exe'
+
+    filter_legit_context:
+        ParentImage|endswith: 
+            - '\explorer.exe'
+            - '\svchost.exe'
+        CommandLine|contains:
+            - 'C:\Windows\System32\'
+            - 'C:\Windows\SysWOW64\'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_itp and selection_scripts and (selection_attack_params or selection_suspicious_parent) and not filter_legit_context
+level: critical

@@ -1,0 +1,62 @@
+title: Ultra-Pro High-Fidelity Binary Symbol Stripping (T1027.008)
+id: a190741c-59fe-4191-a169-672f4da8dd33
+status: stable
+description: |
+    Detects the active stripping of debug symbols and section headers from binaries 
+    in non-development environments. This hinders forensic analysis and reverse engineering 
+    by removing function names and symbol tables.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1027.008
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_tools:
+        Image|endswith:
+            - '\strip.exe'
+            - '\sstrip.exe'
+            - '\objcopy.exe'
+            - '\llvm-strip.exe'
+
+    selection_flags:
+        CommandLine|contains:
+            - ' --strip-all'
+            - ' --strip-debug'
+            - ' --remove-section'
+            - ' -s '           
+            - ' -S '          
+            - ' /NODEBUG'       
+
+    selection_paths:
+        CommandLine|contains:
+            - '\AppData\Local\Temp\'
+            - '\Users\Public\'
+            - '\Windows\Temp\'
+            - '\PerfLogs\'
+            - '\Downloads\'
+
+    selection_suspicious_parents:
+        ParentImage|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\nginx.exe'
+            - '\httpd.exe'     
+
+    filter_dev_environments:
+        Image|contains:
+            - '\Visual Studio\'
+            - '\Jenkins\'
+            - '\GitLab-Runner\'
+            - '\Azure Pipelines\'
+        User|contains:
+            - 'svc-build'
+            - 'cicd'
+            - 'builder'
+
+    condition: selection_tools and (selection_flags or selection_paths or selection_suspicious_parents) and not filter_dev_environments
+level: high

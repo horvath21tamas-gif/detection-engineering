@@ -25,7 +25,7 @@ detection:
             - '.xll' 
 
     selection_suspicious_writer:
-        Image|not|endswith:
+        Image|endswith:
             - '\msiexec.exe'
             - '\OfficeClickToRun.exe'
             - '\setup.exe'

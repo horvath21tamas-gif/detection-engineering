@@ -168,6 +168,7 @@
 - [Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)](#ultra-pro-domain-trust-tampering-&-sid-filtering-bypass-(t1484002))
 - [Ransomware Preparation Activity Detected on Windows Host (High Fidelity)](#ransomware-preparation-activity-detected-on-windows-host-(high-fidelity))
 - [Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity)](#suspicious-deletion-of-volume-shadow-copies-via-vssadmin-(high-fidelity))
+- [Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497)](#ultra-pro-high-fidelity-virtualizationsandbox-evasion-(t1497))
 - [Ultra-Pro Web Shell Execution Patterns (T1505.003)](#ultra-pro-web-shell-execution-patterns-(t1505003))
 - [Ultra-Pro SQL Server Command Shell Execution (T1505.001)](#ultra-pro-sql-server-command-shell-execution-(t1505001))
 - [Ultra-Pro IIS Native Module Injection (T1505.002)](#ultra-pro-iis-native-module-injection-(t1505002))
@@ -3179,6 +3180,23 @@ Correlates AD object changes with known administrative context.
 - **Leírás:** Detects suspicious deletion of Volume Shadow Copies using vssadmin.exe, commonly observed during ransomware and destructive attacks. The rule focuses on attacker-typical command-line arguments, non-service execution context, and excludes known backup solutions to minimize false positives.
 - **Hamis pozitívok:** Rare manual administrative maintenance, Approved disaster recovery testing
 - **MITRE ATT&CK:** `T1490`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497)
+- **Azonosító:** `T1497.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects sophisticated sandbox evasion by monitoring for rapid, multi-vector 
+virtualization checks (BIOS, MAC, CPU, Disk) initiated by untrusted processes 
+within suspicious directories.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001, 003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 14:20:58`
+**Utolsó frissítés:** `2026-02-03 14:35:15`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 411 | 100% |
-| Splunk (SPL) | 411 | 100.0% |
-| Microsoft Sentinel (KQL) | 412 | 100.2% |
-| QRadar (AQL) | 201 | 48.9% |
-| Elastic (KQL/EQL) | 412 | 100.2% |
-| RSA NetWitness | 410 | 99.8% |
+| Sigma (Forrás) | 419 | 100% |
+| Splunk (SPL) | 418 | 99.8% |
+| Microsoft Sentinel (KQL) | 420 | 100.2% |
+| QRadar (AQL) | 202 | 48.2% |
+| Elastic (KQL/EQL) | 420 | 100.2% |
+| RSA NetWitness | 417 | 99.5% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -247,7 +247,8 @@
 | T1550 | CRITICAL | Ultra-Pro High-Fidelity Alternate Authentication Material (T1550) |
 | T1550.001 | CRITICAL | Ultra-Pro High-Fidelity Application Access Token Abuse (T1550.001) |
 | T1550.002 | CRITICAL | Ultra-Pro High-Fidelity Alternate Authentication Material (T1550), Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002) |
-| T1550.003 | CRITICAL | Ultra-Pro High-Fidelity Alternate Authentication Material (T1550) |
+| T1550.003 | CRITICAL | Ultra-Pro High-Fidelity Alternate Authentication Material (T1550), Ultra-Pro High-Fidelity Pass-the-Ticket Detection (T1550.003) |
+| T1550.004 | CRITICAL | Ultra-Pro High-Fidelity Pass-the-Session Detection (T1550.004) |
 | T1553 | CRITICAL | Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001) |
 | T1553.001 | CRITICAL | Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001) |
 | T1553.002 | CRITICAL | Ultra-Pro High-Fidelity SIP Hijacking and Trust Subversion (T1553.002) |

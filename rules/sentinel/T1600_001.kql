@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath endswith "\bcdedit.exe" and (ProcessCommandLine in ("*nointegritychecks*", "*testsigning*", "*disable-elam-drivers*", "*nx AlwaysOff*"))) or ((ProcessCommandLine in ("*ci.dll*", "*ntoskrnl.exe*", "*winload.efi*", "*lsasrv.dll*")) and (FolderPath in ("*\Users\*", "*\Temp\*", "*\Downloads\*"))) or (ProcessCommandLine in ("*KDU.exe*", "*EfiGuard*", "*TDL.exe*", "*DSEFix*"))) and (not (((ParentProcessName in ("*\msiexec.exe", "*\TrustedInstaller.exe", "*\TiWorker.exe")) and User =~ "NT AUTHORITY\SYSTEM") or (FolderPath in ("*\Program Files\Dell\*", "*\Program Files\HP\*"))))

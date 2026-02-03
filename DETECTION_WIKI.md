@@ -230,6 +230,8 @@
 - [Ultra-Pro High-Fidelity Alternate Authentication Material (T1550)](#ultra-pro-high-fidelity-alternate-authentication-material-(t1550))
 - [Ultra-Pro High-Fidelity Application Access Token Abuse (T1550.001)](#ultra-pro-high-fidelity-application-access-token-abuse-(t1550001))
 - [Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002)](#ultra-pro-high-fidelity-pass-the-hash-detection-(t1550002))
+- [Ultra-Pro High-Fidelity Pass-the-Ticket Detection (T1550.003)](#ultra-pro-high-fidelity-pass-the-ticket-detection-(t1550003))
+- [Ultra-Pro High-Fidelity Pass-the-Session Detection (T1550.004)](#ultra-pro-high-fidelity-pass-the-session-detection-(t1550004))
 - [Ultra-Pro High-Fidelity Subvert Trust Controls (T1553)](#ultra-pro-high-fidelity-subvert-trust-controls-(t1553))
 - [Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001)](#ultra-pro-high-fidelity-macos-gatekeeper-and-quarantine-bypass-(t1553001))
 - [Ultra-Pro High-Fidelity SIP Hijacking and Trust Subversion (T1553.002)](#ultra-pro-high-fidelity-sip-hijacking-and-trust-subversion-(t1553002))
@@ -4203,6 +4205,40 @@ tool patterns while excluding legitimate service accounts.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Pass-the-Ticket Detection (T1550.003)
+- **Azonosító:** `T1550_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects Pass-the-Ticket (PtH) by identifying Kerberos encryption downgrades (RC4), 
+anomalous ticket flags (Rubeus/Mimikatz defaults), and unauthorized ticket injection 
+into the LSA process memory.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Pass-the-Session Detection (T1550.004)
+- **Azonosító:** `T1550_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized web session theft by monitoring for non-browser processes 
+accessing both the encrypted AES key (Local State) and the cookie database (Cookies/Network).
+Excludes legitimate browser update and synchronization mechanisms.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

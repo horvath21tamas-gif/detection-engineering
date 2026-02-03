@@ -42,7 +42,7 @@ detection:
             - 'C:\Windows\servicing\TrustedInstaller.exe'
             - 'C:\Windows\System32\sysprep\'
             - 'C:\Program Files\Common Files\Microsoft Shared\ClickToRun\' 
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_sip_registry and (selection_suspicious_path or selection_process) and not filter_trusted_installers
 level: critical

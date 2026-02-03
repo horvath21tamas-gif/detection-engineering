@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetObject in ("*\SOFTWARE\Microsoft\Cryptography\OID\EncodingType 0\CryptSIPDllVerifyIndirectData\*", "*\SOFTWARE\Microsoft\Cryptography\OID\EncodingType 0\CryptSIPDllGetSignedDataMsg\*", "*\SOFTWARE\Microsoft\Cryptography\Providers\Trust\FinalPolicy\*")) and ((Details in ("*\AppData\*", "*\Users\Public\*", "*\Windows\Temp\*", "*\Downloads\*", "*\PerfLogs\*", "*\ProgramData\*")) or (FolderPath in ("*\reg.exe", "*\powershell.exe", "*\cmd.exe", "*\cscript.exe", "*\wscript.exe"))) and (not ((FolderPath in ("C:\Windows\servicing\TrustedInstaller.exe*", "C:\Windows\System32\sysprep\*", "C:\Program Files\Common Files\Microsoft Shared\ClickToRun\*")) and User =~ "NT AUTHORITY\SYSTEM"))

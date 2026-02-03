@@ -1,0 +1,62 @@
+title: Ultra-Pro High-Fidelity Linux Log Clearing and Journal Sabotage (T1070.002)
+id: 3ad23cc6-35d5-44e1-a7ae-c94d55691f4e
+status: stable
+description: |
+    Detects targeted attempts to clear or truncate Linux system logs and journald buffers. 
+    Focuses on manual command-line patterns, shell redirection to log files, and 
+    vacuuming of systemd journals outside of automated maintenance windows.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1070.002
+logsource:
+    product: linux
+    category: process_creation
+detection:
+    selection_journal_purge:
+        Image|endswith: '/journalctl'
+        CommandLine|contains:
+            - '--vacuum-time'
+            - '--vacuum-size'
+            - '--rotate'
+            - '--flush'
+
+    selection_manual_truncation:
+        - Image|endswith:
+            - '/truncate'
+            - '/shred' 
+            - '/tee'
+        - CommandLine|contains:
+            - '> /var/log/'
+            - '>/var/log/'
+            - '/dev/null'
+        - CommandLine|contains:
+            - 'auth.log'
+            - 'secure'
+            - 'syslog'
+            - 'wtmp'
+            - 'lastlog'
+
+    selection_suspicious_origin:
+        ParentImage|endswith:
+            - '/apache2'
+            - '/nginx'
+            - '/httpd'
+            - '/php-fpm'
+            - '/python*'
+            - '/perl'
+            - '/node'
+
+    filter_automated_maintenance:
+        - ParentImage|endswith: 
+            - '/logrotate'
+            - '/systemd'
+        - CommandLine|contains:
+            - 'logrotate.conf'
+            - '/var/lib/docker/containers' 
+        - User: 'root'
+          ParentImage|endswith: '/ansible' 
+
+    condition: (selection_journal_purge or selection_manual_truncation) and (selection_suspicious_origin or not filter_automated_maintenance)
+level: high

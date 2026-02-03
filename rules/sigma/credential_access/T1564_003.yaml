@@ -1,0 +1,69 @@
+title: Ultra-Pro High-Fidelity Hidden Window Execution (T1564.003)
+id: 902448c7-3848-4de9-bce3-e197b0a5507c
+status: stable
+description: |
+    Detects suspicious process execution with hidden windows by correlating 
+    abbreviated stealth flags with untrusted parent processes and 
+    obfuscation techniques.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1564.003
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_flags:
+        CommandLine|contains:
+            - ' -w h'           
+            - ' -window h'      
+            - ' -win h'
+            - ' -wind h'
+            - 'showwindow=0'    
+            - 'windowstyle 1'   
+            - 'sw_hide'         
+
+    selection_tools:
+        - Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\mshta.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\acrord32.exe'
+            - '\sqlservr.exe'
+            - '\w3wp.exe'
+
+    selection_obfuscation:
+        CommandLine|contains:
+            - ' -enc'         
+            - ' -e '
+            - ' -nop'           
+            - ' -noni'
+            - 'iex'             
+            - 'downloadstring'
+            - 'frombase64string'
+
+    filter_trusted_automation:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|contains:
+            - '\Windows\System32\ServerManager.exe'
+            - '\Configuration Manager\'
+            - '\HealthService.exe'
+        - CommandLine|contains:
+            - 'Chocolatey'
+            - 'Splunk'
+            - 'Logitech'
+
+    condition: selection_tools and selection_flags and (selection_suspicious_parent or selection_obfuscation) and not filter_trusted_automation
+level: high

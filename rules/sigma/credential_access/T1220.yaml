@@ -1,0 +1,52 @@
+title: Ultra-Pro High-Fidelity XSL Script Processing (T1220)
+id: 902f23f4-3765-46d8-a920-73627a263791
+status: stable
+description: |
+    Detects suspicious WMIC execution with XSL stylesheets located in non-standard 
+    directories or remote URLs, which is a common technique to bypass application 
+    whitelisting and execute arbitrary scripts.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1220
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_wmic:
+        Image|endswith: '\wmic.exe'
+        CommandLine|contains: '/FORMAT'
+
+    selection_suspicious_source:
+        CommandLine|contains:
+            - 'http'          
+            - 'ftp'
+            - ':\Users\'      
+            - ':\ProgramData\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\\'            
+
+    selection_extension_anomaly:
+        CommandLine|contains:
+            - '.txt'
+            - '.png'
+            - '.jpg'
+            - '.pdf'
+
+    filter_legit_wbem:
+        CommandLine|contains:
+            - ':\Windows\System32\wbem\'
+            - ':\Windows\SysWOW64\wbem\'
+    
+    filter_common_formats:
+        CommandLine|contains:
+            - 'csv.xsl'
+            - 'htable.xsl'
+            - 'hform.xsl'
+            - 'texttable.xsl'
+            - 'xml.xsl'
+
+    condition: selection_wmic and (selection_suspicious_source or selection_extension_anomaly) and not filter_legit_wbem
+level: high

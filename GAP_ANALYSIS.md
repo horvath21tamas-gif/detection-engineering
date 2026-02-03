@@ -15,6 +15,7 @@ Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logok
 | Szabály | Hiányzó forrás |
 | :--- | :--- |
 | Ultra-Pro Unauthorized Windows Service Installation (T1543.003) (`T1543_003.yaml`) | service: `process_creation` |
+| Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005) (`T1578_005.yaml`) | product: `cloud`, service: `Azure Activity` |
 | Ultra-Pro PAM Integrity Hijacking & Backdoor (T1556.003) (`T1556_003.yaml`) | service: `auditd` |
 | Ultra-Pro Unauthorized Cloud Account Creation (T1136.003) (`T1136_003.yaml`) | service: `auditlogs` |
 | High-Fidelity Device Registration Persistence (T1098.005) (`T1098_005.yaml`) | service: `process_creation` |

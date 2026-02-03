@@ -1,0 +1,48 @@
+title: Ultra-Pro High-Fidelity Process Argument Spoofing Detection (T1564.010)
+id: 019b26d7-816d-43b7-b85e-2b29f614955c
+status: stable
+description: |
+    Detects potential process argument spoofing by identifying execution 
+    mismatches where sensitive interpreters (PowerShell, CMD) are spawned 
+    with empty or generic arguments by untrusted parents.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1564.010
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_target_binaries:
+        - Image|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\wmic.exe'
+            - '\certutil.exe'
+            - '\svchost.exe'
+            - '\schtasks.exe'
+
+    selection_empty_cmd:
+        CommandLine|re: '^(.*\\)?(powershell\.exe|cmd\.exe|svchost\.exe|wmic\.exe)\s*$'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\mshta.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\w3wp.exe' 
+
+    filter_trusted_system_context:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|contains:
+            - '\Windows\System32\services.exe'
+            - '\Windows\System32\wininit.exe'
+        - CommandLine|contains:
+            - ' -k ' 
+
+    condition: selection_target_binaries and selection_empty_cmd and (selection_suspicious_parent or not filter_trusted_system_context)
+level: high

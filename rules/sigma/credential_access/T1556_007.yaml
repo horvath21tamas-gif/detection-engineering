@@ -22,7 +22,7 @@ detection:
             - 'adsync.msc'                   
 
     selection_msol_abuse:
-        User|startsWith: 'MSOL_'
+        User|startswith: 'MSOL_'
         ParentImage|endswith:
             - '\explorer.exe'
             - '\cmd.exe'

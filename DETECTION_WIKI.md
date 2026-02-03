@@ -196,6 +196,7 @@
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
 - [Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002)](#ultra-pro-high-fidelity-disable-windows-event-logging-(t1562002))
+- [Ultra-Pro High-Fidelity Command History Logging Impairment (T1562.003)](#ultra-pro-high-fidelity-command-history-logging-impairment-(t1562003))
 - [Suspicious Firewall Modification via Netsh.exe](#suspicious-firewall-modification-via-netshexe)
 - [Ultra-Pro High-Fidelity Indicator Blocking and Telemetry Silencing (T1562.006)](#ultra-pro-high-fidelity-indicator-blocking-and-telemetry-silencing-(t1562006))
 - [Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007)](#ultra-pro-high-fidelity-cloud-firewall-impairment-(t1562007))
@@ -333,6 +334,7 @@
 - [High-Fidelity Cloud Account Acquisition and Initialization - T1650](#high-fidelity-cloud-account-acquisition-and-initialization---t1650)
 - [High-Fidelity Cloud Administration Agent Abuse](#high-fidelity-cloud-administration-agent-abuse)
 - [Ultra-Pro Power Settings Manipulation (T1137.001)](#ultra-pro-power-settings-manipulation-(t1137001))
+- [Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656)](#ultra-pro-high-fidelity-impersonation-and-identity-hijacking-(t1656))
 - [Professional Content Impersonation and Infrastructure Mirroring](#professional-content-impersonation-and-infrastructure-mirroring)
 - [Credential Dumping LSASS](#credential-dumping-lsass)
 
@@ -3535,6 +3537,23 @@ and stealthy wevtutil usage by non-system processes.
 
 ---
 
+## Ultra-Pro High-Fidelity Command History Logging Impairment (T1562.003)
+- **Azonosító:** `T1562_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted attempts to suppress or redirect command history logging. 
+Focuses on Set-PSReadLineOption abuse (SaveNothing, $null redirection) 
+and console buffer suppression to prevent forensic recovery of commands.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Suspicious Firewall Modification via Netsh.exe
 - **Azonosító:** `T1562_004.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
@@ -5701,6 +5720,23 @@ parent processes like PowerShell or CMD, while filtering legitimate UI-based cha
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+
+---
+
+## Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656)
+- **Azonosító:** `T1656.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects technical impersonation attempts including suspicious 'runas' execution 
+patterns used for lateral movement and the creation of deceptive local accounts 
+that mimic executive or administrative identities outside of standard HR processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1656`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
 

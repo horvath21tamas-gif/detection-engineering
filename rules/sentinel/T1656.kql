@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath endswith "\runas.exe" and (ProcessCommandLine in ("*cmd*", "*powershell*", "*pwsh*", "*temp*", "*\*"))) or ((FolderPath in ("*\net.exe", "*\net1.exe", "*\powershell.exe")) and (ProcessCommandLine in ("*CEO*", "*CFO*", "*Chief*", "*Admin*", "*Support*", "*Helpdesk*")))) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\w3wp.exe")) or (not ((FolderPath in ("*\Program Files\Remote Monitoring\*", "*\Windows\System32\CompMgmtLauncher.exe*")) or User =~ "NT AUTHORITY\SYSTEM" or ProcessCommandLine contains "SmartCard")))

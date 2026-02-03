@@ -57,7 +57,7 @@ detection:
         - Image|contains:
             - '\Program Files\Remote Monitoring\'
             - '\Windows\System32\CompMgmtLauncher.exe'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - CommandLine|contains:
             - 'SmartCard'
 

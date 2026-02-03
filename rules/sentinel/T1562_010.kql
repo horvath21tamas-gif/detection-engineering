@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (((FolderPath in ("*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("* -encoded*", "* -enc*", "* -e *"))) or (ProcessCommandLine in ("* 0*", "* 1*", "* 2*"))) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\w3wp.exe", "*\php-cgi.exe", "*\mshta.exe")) or (not ((User =~ "NT AUTHORITY\SYSTEM" and ParentProcessName endswith "\services.exe") or (ProcessCommandLine in ("*AzureAD*", "*Exchange*")) or ParentProcessName contains "\Windows\System32\wbem\wmiprvse.exe")))
+| where (((FolderPath in ("*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("* -encoded*", "* -enc*", "* -e *"))) or (ProcessCommandLine in ("* 0*", "* 1*", "* 2*"))) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\w3wp.exe", "*\php-cgi.exe", "*\mshta.exe")) or (not ((username =~ "NT AUTHORITY\SYSTEM" and ParentProcessName endswith "\services.exe") or (ProcessCommandLine in ("*AzureAD*", "*Exchange*")) or ParentProcessName contains "\Windows\System32\wbem\wmiprvse.exe")))

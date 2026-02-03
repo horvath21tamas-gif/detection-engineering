@@ -214,6 +214,7 @@
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.002 | CRITICAL | Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002) |
+| T1562.003 | HIGH | Ultra-Pro High-Fidelity Command History Logging Impairment (T1562.003) |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |
 | T1562.006 | CRITICAL | Ultra-Pro High-Fidelity Indicator Blocking and Telemetry Silencing (T1562.006) |
 | T1562.007 | CRITICAL | Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007) |
@@ -351,4 +352,5 @@
 | T1650 | HIGH | High-Fidelity Cloud Account Acquisition and Initialization - T1650 |
 | T1651 | CRITICAL | High-Fidelity Cloud Administration Agent Abuse |
 | T1653 | MEDIUM | Ultra-Pro Power Settings Manipulation (T1137.001) |
+| T1656 | HIGH | Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656) |
 | T1659 | HIGH | Professional Content Impersonation and Infrastructure Mirroring |

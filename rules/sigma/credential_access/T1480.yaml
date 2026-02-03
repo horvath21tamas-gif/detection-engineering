@@ -45,7 +45,7 @@ detection:
             - '\firefox.exe'
 
     filter_legit_noise:
-        - User: 'NT AUTHORITY\SYSTEM' 
+        - username: 'NT AUTHORITY\SYSTEM' 
         - ParentImage|contains:
             - '\Windows\System32\svchost.exe'
             - '\Program Files\Microsoft Monitoring Agent\'

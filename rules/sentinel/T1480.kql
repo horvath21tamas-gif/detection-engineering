@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\whoami.exe", "*\hostname.exe", "*\nltest.exe", "*\systeminfo.exe", "*\net.exe", "*\net1.exe")) and (ProcessCommandLine in ("*/domain*", "*/dsgetdc*", "*TRUSTED_DOMAIN*", "*AD_DOMAIN*", "*USERDOMAIN*", "*COMPUTERNAME*")) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\mshta.exe", "*\wscript.exe", "*\cscript.exe", "*\browser.exe", "*\chrome.exe", "*\firefox.exe")) or (FolderPath in ("*\Users\*", "*\Temp\*", "*\Downloads\*"))) and (not (User =~ "NT AUTHORITY\SYSTEM" or (ParentProcessName in ("*\Windows\System32\svchost.exe*", "*\Program Files\Microsoft Monitoring Agent\*", "*\CcmExec.exe*")) or (ProcessCommandLine in ("*gpresult*", "*logon*"))))

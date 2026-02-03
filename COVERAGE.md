@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 08:23:22`
+**Utolsó frissítés:** `2026-02-03 08:33:41`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 329 | 100% |
-| Splunk (SPL) | 299 | 90.9% |
-| Microsoft Sentinel (KQL) | 300 | 91.2% |
-| QRadar (AQL) | 162 | 49.2% |
-| Elastic (KQL/EQL) | 300 | 91.2% |
-| RSA NetWitness | 298 | 90.6% |
+| Sigma (Forrás) | 335 | 100% |
+| Splunk (SPL) | 305 | 91.0% |
+| Microsoft Sentinel (KQL) | 306 | 91.3% |
+| QRadar (AQL) | 163 | 48.7% |
+| Elastic (KQL/EQL) | 306 | 91.3% |
+| RSA NetWitness | 304 | 90.7% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -215,7 +215,11 @@
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.002 | CRITICAL | Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002) |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |
+| T1562.006 | CRITICAL | Ultra-Pro High-Fidelity Indicator Blocking and Telemetry Silencing (T1562.006) |
 | T1562.007 | CRITICAL | Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007) |
+| T1562.008 | CRITICAL | Ultra-Pro High-Fidelity Cloud Logging Impairment (T1562.008) |
+| T1562.010 | CRITICAL | Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010) |
+| T1562.012 | CRITICAL | Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012) |
 | T1564 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
 | T1564.001 | HIGH | Ultra-Pro High-Fidelity Hidden File Attribute Manipulation (T1564.001), Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
 | T1564.002 | CRITICAL | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564), Ultra-Pro High-Fidelity Hidden User Account Creation (T1564.002) |

@@ -197,7 +197,11 @@
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
 - [Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002)](#ultra-pro-high-fidelity-disable-windows-event-logging-(t1562002))
 - [Suspicious Firewall Modification via Netsh.exe](#suspicious-firewall-modification-via-netshexe)
+- [Ultra-Pro High-Fidelity Indicator Blocking and Telemetry Silencing (T1562.006)](#ultra-pro-high-fidelity-indicator-blocking-and-telemetry-silencing-(t1562006))
 - [Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007)](#ultra-pro-high-fidelity-cloud-firewall-impairment-(t1562007))
+- [Ultra-Pro High-Fidelity Cloud Logging Impairment (T1562.008)](#ultra-pro-high-fidelity-cloud-logging-impairment-(t1562008))
+- [Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010)](#ultra-pro-high-fidelity-defense-downgrade-attack-(t1562010))
+- [Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012)](#ultra-pro-high-fidelity-cloud-security-infrastructure-impairment-(t1562012))
 - [Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564)](#ultra-pro-high-fidelity-hide-artifacts-detection-(t1564))
 - [Ultra-Pro High-Fidelity Hidden File Attribute Manipulation (T1564.001)](#ultra-pro-high-fidelity-hidden-file-attribute-manipulation-(t1564001))
 - [Ultra-Pro High-Fidelity Hidden User Account Creation (T1564.002)](#ultra-pro-high-fidelity-hidden-user-account-creation-(t1564002))
@@ -3546,6 +3550,23 @@ and stealthy wevtutil usage by non-system processes.
 
 ---
 
+## Ultra-Pro High-Fidelity Indicator Blocking and Telemetry Silencing (T1562.006)
+- **Azonosító:** `T1562_006.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects targeted attempts to silence security monitoring by disabling ETW providers, 
+tampering with Event Forwarding (WEF), or using host firewalls to block EDR/AV 
+cloud-reputation and telemetry endpoints.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `006`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007)
 - **Azonosító:** `T1562_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -3555,6 +3576,57 @@ Focuses on "Any-Any" rules (0.0.0.0/0), Root user activity, and modifications
 originating from non-standard administrative tools or IPs.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `007`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Logging Impairment (T1562.008)
+- **Azonosító:** `T1562_008.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects critical changes to cloud logging (CloudTrail, Azure Activity) that 
+create visibility gaps. Focuses on trail deletion, log file encryption 
+disabling, and storage-level tampering by non-automated identities.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `008`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010)
+- **Azonosító:** `T1562_010.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects attempts to downgrade system defenses to bypass modern security controls. 
+Targets PowerShell v2.0 engine forcing (AMSI bypass) and registry-based 
+weakening of authentication and encryption protocols.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `010`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012)
+- **Azonosító:** `T1562_012.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects targeted attempts to blind cloud native security services. 
+Focuses on suppression filter creation, detector deletion, and 
+threat intelligence sabotage by non-automated or root identities.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `012`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

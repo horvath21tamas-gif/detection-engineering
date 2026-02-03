@@ -45,7 +45,7 @@ detection:
             - '--privileged'  
 
     filter_trusted_users:
-        User:
+        username:
             - 'jenkins'
             - 'gitlab-runner'
             - 'github-actions'

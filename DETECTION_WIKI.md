@@ -30,6 +30,7 @@
 - [Ultra-Pro Stealthy EWM Injection (T1055.011)](#ultra-pro-stealthy-ewm-injection-(t1055011))
 - [Ultra-Pro Stealthy Process Hollowing (T1055.012)](#ultra-pro-stealthy-process-hollowing-(t1055012))
 - [Ultra-Pro Stealthy Process Hollowing (T1055.013)](#ultra-pro-stealthy-process-hollowing-(t1055013))
+- [Ultra-Pro Stealthy Process Ghosting (T1055.014)](#ultra-pro-stealthy-process-ghosting-(t1055014))
 - [Ultra-Pro Stealthy ListPlanting Injection (T1055.015)](#ultra-pro-stealthy-listplanting-injection-(t1055015))
 - [Suspicious Credential API Hooking via Win32 Libraries](#suspicious-credential-api-hooking-via-win32-libraries)
 - [High-Fidelity Scripting Interpreter Contextual Anomaly](#high-fidelity-scripting-interpreter-contextual-anomaly)
@@ -300,6 +301,7 @@
 - [High-Fidelity Container Interactive Shell Execution](#high-fidelity-container-interactive-shell-execution)
 - [High-Fidelity Malicious Container Deployment Detection](#high-fidelity-malicious-container-deployment-detection)
 - [Ultra-Pro Container Escape & Host Access (T1611)](#ultra-pro-container-escape-&-host-access-(t1611))
+- [Ultra-Pro Stealthy Local Image Build (T1612)](#ultra-pro-stealthy-local-image-build-(t1612))
 - [High-Fidelity Serverless Function Persistence or Abuse](#high-fidelity-serverless-function-persistence-or-abuse)
 - [High-Fidelity Cloud Account Acquisition and Initialization - T1650](#high-fidelity-cloud-account-acquisition-and-initialization---t1650)
 - [High-Fidelity Cloud Administration Agent Abuse](#high-fidelity-cloud-administration-agent-abuse)
@@ -778,6 +780,23 @@ originates from unbacked memory (shellcode) and targets common sacrificial proce
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Stealthy Process Ghosting (T1055.014)
+- **Azonosító:** `T1055_014.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects Process Ghosting by identifying process creation events where the 
+underlying file is in a 'delete-pending' state, evidenced by missing hashes 
+at execution time and originating from non-standard directories.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `014`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
@@ -5109,6 +5128,23 @@ underlying host. Targets non-standard privileged executions and high-risk
 volume mounts, while filtering out known cluster infrastructure components.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1611`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Stealthy Local Image Build (T1612)
+- **Azonosító:** `T1612.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects high-fidelity local container image builds by identifying builds 
+initiated by non-CI/CD users or suspicious parent processes like web servers, 
+indicating post-exploitation image creation to evade registry scans.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1612`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

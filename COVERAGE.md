@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 06:42:22`
+**Utolsó frissítés:** `2026-02-03 06:56:23`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 305 | 100% |
-| Splunk (SPL) | 276 | 90.5% |
-| Microsoft Sentinel (KQL) | 277 | 90.8% |
-| QRadar (AQL) | 154 | 50.5% |
-| Elastic (KQL/EQL) | 277 | 90.8% |
-| RSA NetWitness | 275 | 90.2% |
+| Sigma (Forrás) | 307 | 100% |
+| Splunk (SPL) | 278 | 90.6% |
+| Microsoft Sentinel (KQL) | 279 | 90.9% |
+| QRadar (AQL) | 155 | 50.5% |
+| Elastic (KQL/EQL) | 279 | 90.9% |
+| RSA NetWitness | 277 | 90.2% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -47,6 +47,7 @@
 | T1055.011 | CRITICAL | Ultra-Pro Stealthy EWM Injection (T1055.011) |
 | T1055.012 | CRITICAL | Ultra-Pro Stealthy Process Hollowing (T1055.012) |
 | T1055.013 | CRITICAL | Ultra-Pro Stealthy Process Hollowing (T1055.013) |
+| T1055.014 | CRITICAL | Ultra-Pro Stealthy Process Ghosting (T1055.014) |
 | T1055.015 | CRITICAL | Ultra-Pro Stealthy ListPlanting Injection (T1055.015) |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 Libraries |
 | T1059 | HIGH | High-Fidelity Scripting Interpreter Contextual Anomaly, Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
@@ -318,6 +319,7 @@
 | T1609 | CRITICAL | High-Fidelity Container Interactive Shell Execution |
 | T1610 | CRITICAL | High-Fidelity Malicious Container Deployment Detection |
 | T1611 | CRITICAL | Ultra-Pro Container Escape & Host Access (T1611) |
+| T1612 | CRITICAL | Ultra-Pro Stealthy Local Image Build (T1612) |
 | T1648 | HIGH | High-Fidelity Serverless Function Persistence or Abuse |
 | T1650 | HIGH | High-Fidelity Cloud Account Acquisition and Initialization - T1650 |
 | T1651 | CRITICAL | High-Fidelity Cloud Administration Agent Abuse |

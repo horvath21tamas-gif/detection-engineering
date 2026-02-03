@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 08:44:52`
+**Utolsó frissítés:** `2026-02-03 08:57:52`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 339 | 100% |
-| Splunk (SPL) | 308 | 90.9% |
-| Microsoft Sentinel (KQL) | 309 | 91.2% |
-| QRadar (AQL) | 163 | 48.1% |
-| Elastic (KQL/EQL) | 309 | 91.2% |
-| RSA NetWitness | 307 | 90.6% |
+| Sigma (Forrás) | 346 | 100% |
+| Splunk (SPL) | 315 | 91.0% |
+| Microsoft Sentinel (KQL) | 316 | 91.3% |
+| QRadar (AQL) | 164 | 47.4% |
+| Elastic (KQL/EQL) | 316 | 91.3% |
+| RSA NetWitness | 314 | 90.8% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -64,7 +64,13 @@
 | T1068 | HIGH | Suspicious SYSTEM Process Spawned from User Context |
 | T1070 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070) |
 | T1070.001 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Security Event Log Cleared Using wevtutil.exe |
-| T1070.004 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070) |
+| T1070.002 | HIGH | Ultra-Pro High-Fidelity Linux Log Clearing and Journal Sabotage (T1070.002) |
+| T1070.003 | HIGH | Ultra-Pro High-Fidelity Mailbox Data Clearing and Rule Sabotage (T1070.003) |
+| T1070.004 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Ultra-Pro High-Fidelity Forensic Artifact and File Deletion (T1070.004) |
+| T1070.005 | HIGH | Ultra-Pro High-Fidelity Network Share and Credential Removal (T1070.005) |
+| T1070.007 | HIGH | Ultra-Pro High-Fidelity Network History and RDP Trace Removal (T1070.007) |
+| T1070.008 | CRITICAL | Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008) |
+| T1070.009 | HIGH | Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009) |
 | T1072 | CRITICAL | High-Fidelity Software Deployment Tool Abuse Detection |
 | T1078 | HIGH | High-Fidelity Anomalous Logon via Valid Account |
 | T1078.001 | CRITICAL | High-Fidelity Default Account Abuse Detection |

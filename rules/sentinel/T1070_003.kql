@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (((FolderPath in ("*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("* -DeleteContent*", "* -Force*", "* -Purge*"))) or (ProcessCommandLine in ("*Security*", "*Alert*", "*Phish*", "*Login*"))) and ((ParentProcessName in ("*\w3wp.exe", "*\winword.exe", "*\excel.exe", "*\mshta.exe", "*\php-cgi.exe")) or (not (User =~ "NT AUTHORITY\SYSTEM" or (ProcessCommandLine in ("*Discovery Management*", "*Compliance*", "*Retention*")) or ParentProcessName endswith "\ExSetup.exe")))
+| where (((FolderPath in ("*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("* -DeleteContent*", "* -Force*", "* -Purge*"))) or (ProcessCommandLine in ("*Security*", "*Alert*", "*Phish*", "*Login*"))) and ((ParentProcessName in ("*\w3wp.exe", "*\winword.exe", "*\excel.exe", "*\mshta.exe", "*\php-cgi.exe")) or (not (username =~ "NT AUTHORITY\SYSTEM" or (ProcessCommandLine in ("*Discovery Management*", "*Compliance*", "*Retention*")) or ParentProcessName endswith "\ExSetup.exe")))

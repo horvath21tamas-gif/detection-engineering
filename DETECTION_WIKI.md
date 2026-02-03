@@ -47,7 +47,13 @@
 - [Suspicious SYSTEM Process Spawned from User Context](#suspicious-system-process-spawned-from-user-context)
 - [Ultra-Pro High-Fidelity Indicator Removal on Host (T1070)](#ultra-pro-high-fidelity-indicator-removal-on-host-(t1070))
 - [Security Event Log Cleared Using wevtutil.exe](#security-event-log-cleared-using-wevtutilexe)
+- [Ultra-Pro High-Fidelity Linux Log Clearing and Journal Sabotage (T1070.002)](#ultra-pro-high-fidelity-linux-log-clearing-and-journal-sabotage-(t1070002))
 - [Ultra-Pro High-Fidelity Mailbox Data Clearing and Rule Sabotage (T1070.003)](#ultra-pro-high-fidelity-mailbox-data-clearing-and-rule-sabotage-(t1070003))
+- [Ultra-Pro High-Fidelity Forensic Artifact and File Deletion (T1070.004)](#ultra-pro-high-fidelity-forensic-artifact-and-file-deletion-(t1070004))
+- [Ultra-Pro High-Fidelity Network Share and Credential Removal (T1070.005)](#ultra-pro-high-fidelity-network-share-and-credential-removal-(t1070005))
+- [Ultra-Pro High-Fidelity Network History and RDP Trace Removal (T1070.007)](#ultra-pro-high-fidelity-network-history-and-rdp-trace-removal-(t1070007))
+- [Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008)](#ultra-pro-high-fidelity-email-storage-and-database-destruction-(t1070008))
+- [Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009)](#ultra-pro-high-fidelity-persistence-artifact-removal-(t1070009))
 - [High-Fidelity Software Deployment Tool Abuse Detection](#high-fidelity-software-deployment-tool-abuse-detection)
 - [High-Fidelity Anomalous Logon via Valid Account](#high-fidelity-anomalous-logon-via-valid-account)
 - [High-Fidelity Default Account Abuse Detection](#high-fidelity-default-account-abuse-detection)
@@ -1096,6 +1102,23 @@ clearing of security-sensitive providers.
 
 ---
 
+## Ultra-Pro High-Fidelity Linux Log Clearing and Journal Sabotage (T1070.002)
+- **Azonosító:** `T1070_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted attempts to clear or truncate Linux system logs and journald buffers. 
+Focuses on manual command-line patterns, shell redirection to log files, and 
+vacuuming of systemd journals outside of automated maintenance windows.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Mailbox Data Clearing and Rule Sabotage (T1070.003)
 - **Azonosító:** `T1070_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -1105,6 +1128,91 @@ Focuses on bulk deletion cmdlets and automated rule sets designed to suppress
 security notifications or hide attacker communication.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Forensic Artifact and File Deletion (T1070.004)
+- **Azonosító:** `T1070_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted destruction of high-value forensic artifacts (USN Journal, Prefetch, Amcache) 
+and the use of secure wipe utilities. Focuses on non-standard process origins and 
+evasion techniques used to prevent post-incident recovery.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Network Share and Credential Removal (T1070.005)
+- **Azonosító:** `T1070_005.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic removal of network shares and stored credentials using wildcard 
+deletion and force flags. Distinguishes between manual user activity and 
+automated anti-forensic cleanup post-lateral movement.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Network History and RDP Trace Removal (T1070.007)
+- **Azonosító:** `T1070_007.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted attempts to clear network connection history, focusing on RDP 
+Terminal Server Client MRU lists and network share metadata removal. 
+Filters out common helpdesk troubleshooting (DNS flush) unless part of a broader attack.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `007`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008)
+- **Azonosító:** `T1070_008.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects targeted destruction of email storage (PST/OST) and Exchange Databases (EDB). 
+Focuses on programmatic deletion, database dismounting, and forensic wiping 
+patterns from untrusted processes or suspicious parent-child chains.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `008`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009)
+- **Azonosító:** `T1070_009.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the systematic removal of persistence mechanisms (Scheduled Tasks, Services, WMI) 
+focusing on forced deletion patterns and suspicious process lineages. 
+Filters out common software update cycles and MSI installer noise.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `009`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

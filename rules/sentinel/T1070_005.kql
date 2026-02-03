@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\net.exe", "*\net1.exe")) and (ProcessCommandLine contains "use" and ProcessCommandLine contains "/delete") and (ProcessCommandLine in ("*", "* /y*", "* /yes*"))) or ((FolderPath endswith "\cmdkey.exe" and ProcessCommandLine contains " /delete") or (FolderPath endswith "\vaultcmd.exe" and ProcessCommandLine contains " /delete"))) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\chrome.exe", "*\msedge.exe", "*\w3wp.exe", "*\powershell.exe")) or (not ((User =~ "NT AUTHORITY\SYSTEM" and ParentProcessName endswith "\services.exe") or (ProcessCommandLine in ("*logon.bat*", "*netlogon*", "*policy*")) or ParentProcessName endswith "\explorer.exe")))

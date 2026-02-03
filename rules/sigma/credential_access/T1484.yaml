@@ -42,5 +42,5 @@ detection:
         - username: 'NT AUTHORITY\SYSTEM'
         - SubjectUserName|contains: 'GPO_Admin_' 
 
-    condition: (selection_critical_files and selection_suspicious_process) or (selection_gplink_modification and not filter_trusted)
+    condition: (selection_critical_files and selection_suspicious_writer) or (selection_gplink_modification and not filter_trusted)
 level: critical

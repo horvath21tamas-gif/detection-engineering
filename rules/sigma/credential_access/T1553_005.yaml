@@ -56,7 +56,7 @@ detection:
             - 'C:\Windows\System32\msiexec.exe'
             - 'C:\Program Files\Google\Chrome\Application\chrome.exe'
             - 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: ((selection_ads and selection_context) or selection_registry) and selection_paths and not filter_trusted_installers
 level: critical

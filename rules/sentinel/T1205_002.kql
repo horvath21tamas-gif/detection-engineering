@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\netsh.exe", "*\fltMC.exe")) or (ProcessCommandLine in ("*wfp*", "*callout*", "*filter*", "*add callout*", "*vfp*"))) or ((FolderPath in ("*\sc.exe", "*\reg.exe")) or (ProcessCommandLine in ("*create*", "*binPath=*", "*type= kernel*")) or (ProcessCommandLine in ("*\Temp\*", "*\AppData\*", "*\Users\Public\*")))) and ((ParentProcessName in ("*\services.exe", "*\svchost.exe", "*\TrustedInstaller.exe", "*\msiexec.exe")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\python.exe"))) and (not ((FolderPath in ("*\Program Files\Windows Defender\*", "*\Program Files\CrowdStrike\*", "*\SentinelOne\*")) or username =~ "NT AUTHORITY\SYSTEM"))

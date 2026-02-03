@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("*Get-ADSyncAccountPassword*", "*Set-ADSyncServerConfiguration*", "*Set-ADSyncAADPasswordReset*", "*adsync.msc*")) or (User startswith "MSOL_" and (ParentProcessName in ("*\explorer.exe", "*\cmd.exe", "*\powershell.exe", "*\svchost.exe"))) or (FolderPath endswith "\sqlcmd.exe" and ProcessCommandLine contains "ADSync" and (FolderPath in ("\miiserver.exe", "\Microsoft.Identity.AadConnect.Health.AadSync.Host.exe")))) and (not ((ComputerName in ("SRV-ADSYNC-01", "SRV-ADSYNC-BCK")) and SubjectUserSid =~ "S-1-5-18"))

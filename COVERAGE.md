@@ -6,12 +6,12 @@
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 310 | 100% |
-| Splunk (SPL) | 281 | 90.6% |
-| Microsoft Sentinel (KQL) | 282 | 91.0% |
-| QRadar (AQL) | 156 | 50.3% |
-| Elastic (KQL/EQL) | 282 | 91.0% |
-| RSA NetWitness | 280 | 90.3% |
+| Sigma (Forrás) | 316 | 100% |
+| Splunk (SPL) | 287 | 90.8% |
+| Microsoft Sentinel (KQL) | 288 | 91.1% |
+| QRadar (AQL) | 159 | 50.3% |
+| Elastic (KQL/EQL) | 288 | 91.1% |
+| RSA NetWitness | 286 | 90.5% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |

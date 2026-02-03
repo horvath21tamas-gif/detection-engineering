@@ -42,7 +42,7 @@ detection:
             - '/bin/bash'
 
     selection_untrusted_users:
-        User:
+        username:
             - 'www-data'
             - 'apache'
             - 'nginx'

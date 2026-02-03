@@ -4,10 +4,10 @@
 ## 📊 Állapotösszegző
 | Mutató | Érték |
 | :--- | :--- |
-| Összes szabály | 310 |
-| Aktív (van logforrás) | 299 |
+| Összes szabály | 316 |
+| Aktív (van logforrás) | 305 |
 | Inaktív (hiányzó log) | 11 |
-| MITRE Lefedettség | 311 technika |
+| MITRE Lefedettség | 312 technika |
 
 ## 🛑 Kritikus Adatforrás Hiányok
 Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logokat:

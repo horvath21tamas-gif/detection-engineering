@@ -1,0 +1,60 @@
+title: Ultra-Pro High-Fidelity Weaken Encryption Attempt (T1600)
+id: 40421183-fce5-4ad4-8a66-b2527a9d5360
+status: stable
+description: |
+    Detects unauthorized weakening of system encryption (TLS downgrade) or 
+    PowerShell certificate validation bypass, initiated by non-system or 
+    suspiciously located processes.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1600
+logsource:
+    category: registry_event
+    product: windows
+detection:
+    selection_tls_downgrade:
+        TargetObject|contains:
+            - '\SCHANNEL\Protocols\TLS 1.2\Client\Enabled'
+            - '\SCHANNEL\Protocols\TLS 1.3\Client\Enabled'
+            - '\.NETFramework\v*\System.Net.ServicePointManager.SecurityProtocol'
+        Details: 
+            - '0x00000000' 
+            - '0x00000030' 
+            - '0x000000c0' 
+
+    selection_ps_bypass:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        CommandLine|contains:
+            - 'ServerCertificateValidationCallback'
+            - 'CheckCertificateRevocationList = $false'
+            - '[Net.ServicePointManager]::SecurityProtocol =' 
+
+    selection_suspicious_actor:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\Local\Temp\'
+            - '\Downloads\'
+            - '\Public\'
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\wscript.exe'
+
+    filter_trusted_installers:
+        Image|endswith:
+            - '\msiexec.exe'
+            - '\TrustedInstaller.exe'
+            - '\CcmExec.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_browser_updates:
+        Image|contains:
+            - '\Google\Chrome\Application\'
+            - '\Microsoft\Edge\Application\'
+
+    condition: (selection_tls_downgrade or selection_ps_bypass) and selection_suspicious_actor and not (filter_trusted_installers or filter_browser_updates)
+level: high

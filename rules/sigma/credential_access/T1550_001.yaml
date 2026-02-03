@@ -1,0 +1,58 @@
+title: Ultra-Pro High-Fidelity Application Access Token Abuse (T1550.001)
+id: 0c55b506-6ecb-4349-94e0-42874133632e
+status: stable
+description: |
+    Detects the theft of application access tokens by identifying unauthorized access to 
+    IdentityCRL and TokenBroker stores, as well as the use of bearer tokens in command-line utilities.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.lateral_movement
+    - attack.t1550.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        CommandLine|contains:
+            - 'Get-AADIntAccessToken' 
+            - 'roadtoken'             
+            - 'sekurlsa::cloudap'    
+            - 'Get-MsGraphToken'
+            - 'Request-AzureADToken'
+
+    selection_storage_access:
+        CommandLine|contains:
+            - '\Microsoft\TokenBroker\'
+            - '\Microsoft\IdentityCRL\'
+            - '\Local Storage\leveldb'
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\cscript.exe'
+            - '\python.exe' 
+
+    selection_cli_injection:
+        Image|endswith:
+            - '\curl.exe'
+            - '\wget.exe'
+        CommandLine|contains:
+            - 'Bearer '
+            - 'X-MS-RefreshToken'
+            - 'access_token'
+
+    filter_legit_azure_cli:
+        Image|contains: 
+            - '\Azure-CLI\'
+            - '\Microsoft SDKs\Azure\'
+        ParentImage|endswith: '\svchost.exe'
+
+    filter_browser_updates:
+        Image|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+        CommandLine|contains: '--type=utility'
+
+    condition: (selection_tools or selection_storage_access or selection_cli_injection) and not (filter_legit_azure_cli or filter_browser_updates)
+level: critical

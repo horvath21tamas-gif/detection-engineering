@@ -29,7 +29,7 @@ detection:
             - 'HashiCorp/1.0 (Terraform)'
             - 'CloudFormation'
             - 'ServerlessFramework'
-        - sourceIPAddress|not_contains:
+        - sourceIPAddress|contains:
             - '10.0.0.0/8'      
             - '1.2.3.4'         
 

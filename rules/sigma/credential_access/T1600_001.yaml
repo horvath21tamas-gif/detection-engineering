@@ -1,0 +1,56 @@
+title: Ultra-Pro High-Fidelity System Image Patching (T1600.001)
+id: 56b6f260-f945-4d97-b529-60b6957241a0
+status: stable
+description: |
+    Detects attempts to weaken system image integrity by disabling Driver Signature Enforcement (DSE), 
+    modifying Boot Configuration Data (BCD), or patching critical system binaries (CI.dll, NTOSKRNL.exe) 
+    using non-system processes.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1600.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_bcdedit:
+        Image|endswith: '\bcdedit.exe'
+        CommandLine|contains:
+            - 'nointegritychecks'    
+            - 'testsigning'          
+            - 'disable-elam-drivers' 
+            - 'nx AlwaysOff'         
+
+    selection_binary_tamper:
+        CommandLine|contains:
+            - 'ci.dll'          
+            - 'ntoskrnl.exe'    
+            - 'winload.efi'    
+            - 'lsasrv.dll'     
+        Image|contains:
+            - '\Users\'
+            - '\Temp\'
+            - '\Downloads\'
+
+    selection_tools:
+        CommandLine|contains:
+            - 'KDU.exe'        
+            - 'EfiGuard'        
+            - 'TDL.exe'         
+            - 'DSEFix'      
+
+    filter_trusted_system:
+        ParentImage|endswith:
+            - '\msiexec.exe'
+            - '\TrustedInstaller.exe'
+            - '\TiWorker.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_known_vendors:
+        Image|contains:
+            - '\Program Files\Dell\'
+            - '\Program Files\HP\'
+
+    condition: (selection_bcdedit or selection_binary_tamper or selection_tools) and not (filter_trusted_system or filter_known_vendors)
+level: critical

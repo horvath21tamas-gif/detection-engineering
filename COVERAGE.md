@@ -160,6 +160,7 @@
 | T1218.003 | CRITICAL | Ultra-Pro High-Fidelity MsiExec Proxy Execution (T1218.003) |
 | T1218.005 | HIGH | Suspicious Mshta Execution of Remote Script (High Fidelity) |
 | T1218.007 | HIGH | Suspicious Msiexec Installation from Remote URL (High Fidelity) |
+| T1218.008 | CRITICAL | Ultra-Pro High-Fidelity Odbcconf Proxy Execution (T1218.008) |
 | T1218.010 | HIGH | Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity) |
 | T1218.011 | HIGH | Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity) |
 | T1218.013 | CRITICAL | Ultra-Pro High-Fidelity Rundll32 Proxy Execution (T1218.013) |

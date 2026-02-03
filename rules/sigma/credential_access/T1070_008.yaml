@@ -56,7 +56,7 @@ detection:
             - '\veeam'
         - CommandLine|contains:
             - '\AppData\Local\Microsoft\Outlook'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_exchange_mgmt or selection_file_destruction) and (selection_suspicious_origin or not filter_trusted_apps)
 level: critical

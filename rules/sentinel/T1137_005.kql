@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetObject contains "\Software\Microsoft\Office\" and (TargetObject in ("*\Security\VBAWarnings", "*\Security\Trusted Locations\", "*\Security\Trusted Documents\DisableTrustedDocuments", "*\Security\BlockContentExecutionFromInternet"))) and ((Details in ("DWORD (0x00000001)", "DWORD (0x00000000)")) or (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\reg.exe", "*\wscript.exe", "*\cscript.exe"))) and (not (Details in ("*\InternalStorage\Templates*", "*C:\Program Files\*")))

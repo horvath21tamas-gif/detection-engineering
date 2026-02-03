@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((ProcessCommandLine in ("*VirtualAlloc*", "*VirtualProtect*", "*WriteProcessMemory*", "*CreateRemoteThread*", "*GetDelegateForFunctionPointer*")) and (ProcessCommandLine in ("*0x40*", "*0x20*", "*0x3000*"))) or ((ProcessCommandLine in ("*[System.Reflection.Assembly]::Load(*", "*Reflection.Emit*", "*Marshal.Copy*")) and (ProcessCommandLine in ("*FromBase64String*", "*IO.MemoryStream*", "*IO.Compression*")))) and (not ((FolderPath in ("*\Visual Studio\*", "*\MSBuild.exe*")) and (User in ("*svc-build*", "*cicd*"))))

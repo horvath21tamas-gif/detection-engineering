@@ -391,6 +391,7 @@
 | T1610 | CRITICAL | High-Fidelity Malicious Container Deployment Detection |
 | T1611 | CRITICAL | Ultra-Pro Container Escape & Host Access (T1611) |
 | T1612 | CRITICAL | Ultra-Pro Stealthy Local Image Build (T1612) |
+| T1620 | CRITICAL | Ultra-Pro High-Fidelity Reflective Code Loading (T1620) |
 | T1622 | HIGH | Ultra-Pro Stealthy Debugger Evasion (T1622) |
 | T1647 | HIGH | Ultra-Pro High-Fidelity macOS Plist Persistence Modification (T1647) |
 | T1648 | HIGH | High-Fidelity Serverless Function Persistence or Abuse |

@@ -1,0 +1,39 @@
+title: Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207)
+id: 58db436e-5e0b-414f-8e0f-fa0b5f3827a7
+status: stable
+description: |
+    Detects the creation of a new nTDSDSA object or the registration of critical 
+    Domain Controller SPNs by a non-DC account. This is indicative of a Rogue DC 
+    or DCShadow attack.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.t1207
+    - attack.persistence
+logsource:
+    product: windows
+    service: security
+detection:
+    selection_ntdsdsa_creation:
+        EventID: 5136
+        ObjectClass|contains: 'nTDSDSA'
+
+    selection_spn_registration:
+        EventID: 4742
+        ServicePrincipalNames|contains:
+            - 'E3514235-4B06-11D1-AB04-00C04FC2DCD2/' 
+            - 'GC/'                                  
+
+    filter_legit_actors:
+        SubjectUserName|contains:
+            - 'NT AUTHORITY'
+            - 'AD-ADMIN-' 
+        SubjectUserName|endswith: '$'
+
+    filter_known_dcs:
+        TargetUserName|contains:
+            - 'DC-PROD-'
+            - 'DC-BACKUP-'
+
+    condition: (selection_ntdsdsa_creation or selection_spn_registration) and not (filter_legit_actors or filter_known_dcs)
+level: critical

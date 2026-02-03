@@ -82,6 +82,7 @@
 - [Suspicious Use of Built-in Windows Tools for File Download and Code Execution](#suspicious-use-of-built-in-windows-tools-for-file-download-and-code-execution)
 - [High-Fidelity Native API Abuse via LOLBins](#high-fidelity-native-api-abuse-via-lolbins)
 - [Multiple Failed Login Attempts for Single User (Possible Password Guessing)](#multiple-failed-login-attempts-for-single-user-(possible-password-guessing))
+- [Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112)](#ultra-pro-high-fidelity-registry-tampering-for-evasion-(t1112))
 - [High-Fidelity Shared Module Load from Untrusted Path](#high-fidelity-shared-module-load-from-untrusted-path)
 - [Anomalous External Remote Service Access Context](#anomalous-external-remote-service-access-context)
 - [Ultra-Pro Access Token Manipulation & Impersonation (T1134)](#ultra-pro-access-token-manipulation-&-impersonation-(t1134))
@@ -1705,6 +1706,23 @@ are abused by untrusted parent processes to perform memory injection.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+
+---
+
+## Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112)
+- **Azonosító:** `T1112.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects high-risk modifications to the Windows Registry aimed at disabling 
+security controls (Defender, UAC, LSA) or enabling unauthorized remote access.
+Optimized to ignore standard system updates and focus on non-standard process behavior.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1112`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
 

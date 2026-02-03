@@ -50,7 +50,7 @@ detection:
             - 'C:\Windows\System32\svchost.exe'
             - 'C:\Windows\System32\msiexec.exe' 
             - 'C:\Program Files\Common Files\Microsoft Shared\ClickToRun\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_security_keys and (selection_suspicious_executor or selection_exploitation_origin) and not filter_trusted_system_procs
 level: critical

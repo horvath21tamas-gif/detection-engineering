@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 10:43:34`
+**Utolsó frissítés:** `2026-02-03 11:03:12`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 363 | 100% |
-| Splunk (SPL) | 362 | 99.7% |
-| Microsoft Sentinel (KQL) | 363 | 100.0% |
-| QRadar (AQL) | 180 | 49.6% |
-| Elastic (KQL/EQL) | 363 | 100.0% |
-| RSA NetWitness | 361 | 99.4% |
+| Sigma (Forrás) | 364 | 100% |
+| Splunk (SPL) | 364 | 100.0% |
+| Microsoft Sentinel (KQL) | 365 | 100.3% |
+| QRadar (AQL) | 180 | 49.5% |
+| Elastic (KQL/EQL) | 365 | 100.3% |
+| RSA NetWitness | 363 | 99.7% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -98,6 +98,7 @@
 | T1105 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1106 | CRITICAL | High-Fidelity Native API Abuse via LOLBins |
 | T1110.001 | MEDIUM | Multiple Failed Login Attempts for Single User (Possible Password Guessing) |
+| T1112 | CRITICAL | Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112) |
 | T1129 | HIGH | High-Fidelity Shared Module Load from Untrusted Path |
 | T1133 | HIGH | Anomalous External Remote Service Access Context |
 | T1134 | CRITICAL | Ultra-Pro Access Token Manipulation & Impersonation (T1134) |

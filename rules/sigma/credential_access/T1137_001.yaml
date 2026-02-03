@@ -21,7 +21,7 @@ detection:
             - '\NormalEmail.dotm'
 
     selection_illegal_process:
-        Image|not|endswith:
+        Image|endswith:
             - '\winword.exe'
             - '\outlook.exe'
             - '\msiexec.exe'

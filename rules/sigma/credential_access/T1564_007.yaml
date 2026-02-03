@@ -1,0 +1,52 @@
+title: Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007)
+id: 1b73565a-e088-49b7-ac5f-295ca6d30623
+status: stable
+description: |
+    Detects attempts to bypass Office macro security or hide VBA projects 
+    by identifying suspicious registry modifications and process-level 
+    manipulation of the Office Object Model.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1564.007
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_registry_bypass:
+        CommandLine|contains:
+            - 'VBAWarnings'      
+            - 'AccessVBOM'      
+            - 'ExtensionHardness'
+            - 'TrustRecords'   
+
+    selection_interpreter_abuse:
+        - Image|endswith:
+            - '\scrcons.exe'  
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+        - CommandLine|contains:
+            - 'ExecuteExcel4Macro'
+            - 'VBAProject.bin'   
+
+    selection_suspicious_chain:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+
+    filter_trusted_automation:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|contains:
+            - '\Windows\System32\svchost.exe'
+            - '\Windows\CCM\CcmExec.exe'
+        - CommandLine|contains:
+            - '\Program Files\'
+            - '\Program Files (x86)\'
+
+    condition: (selection_registry_bypass or selection_interpreter_abuse) and (selection_suspicious_chain or not filter_trusted_automation)
+level: high

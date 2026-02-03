@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\wmic.exe", "*\wbem\wmiprvse.exe")) and (ProcessCommandLine in ("*VMware*", "*Virtual*", "*VBOX*", "*QEMU*", "*Xen*"))) or (ProcessCommandLine in ("*getmac*", "*ipconfig /all*", "*netsh interface show interface*", "*arp -a*")) or (ProcessCommandLine in ("*VBoxGuest*", "*vmtoolsd*", "*vmmouse*", "*vboxguest.sys*", "*vmsrvc*", "*vmusbmouse*"))) and (((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\w3wp.exe", "*\mshta.exe")) or (FolderPath in ("*\AppData\Local\Temp\*", "*\Users\Public\*", "*\Downloads\*"))) and (not ((FolderPath in ("*\Program Files\Lansweeper\*", "*\Program Files\SCCM\*", "*\Program Files\Tanium\*", "*\Windows\System32\ServerManager.exe*")) or User =~ "NT AUTHORITY\SYSTEM")))

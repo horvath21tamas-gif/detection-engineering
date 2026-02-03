@@ -231,7 +231,7 @@
 | T1564.008 | CRITICAL | Ultra-Pro High-Fidelity Email Hiding Rules Detection (T1564.008) |
 | T1564.009 | HIGH | Ultra-Pro High-Fidelity Resource Extraction and Abuse (T1564.009) |
 | T1564.010 | HIGH | Ultra-Pro High-Fidelity Process Argument Spoofing Detection (T1564.010) |
-| T1564.011 | HIGH | Ultra-Pro High-Fidelity Virtual Instance Abuse (T1564.011) |
+| T1564.011 | HIGH | Ultra-Pro High-Fidelity Virtual Instance Abuse (T1564.011), Ultra-Pro High-Fidelity Virtualization and Sandbox Evasion (T1564.011) |
 | T1566 | CRITICAL | High-Fidelity Phishing Payload Execution from Communication Apps |
 | T1566.001 | CRITICAL | High-Fidelity Spearphishing Attachment Execution |
 | T1566.002 | CRITICAL | High-Fidelity Browser-Originating Payload Execution |

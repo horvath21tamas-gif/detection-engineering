@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("*[System.Reflection.Assembly]::Load(*", "*Reflection.Emit*", "*GetManifestResourceStream*", "*LoadModule*")) or (ProcessCommandLine in ("*FromBase64String*", "* [byte[]]*", "*BitConverter*", "*IO.MemoryStream*"))) and (ProcessCommandLine in ("*.dat*", "*.bin*", "*.png*", "*.resources*")) and (not ((FolderPath in ("C:\Windows\Microsoft.NET\Framework*", "C:\Program Files\Common Files\Microsoft Shared\*", "C:\Windows\System32\wbem\WmiPrvSE.exe*")) or (ProcessCommandLine in ("*/package*", "*/update*", "*ngen.exe*"))))

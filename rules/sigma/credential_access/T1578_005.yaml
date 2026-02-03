@@ -1,0 +1,62 @@
+title: Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005)
+id: b1ca2bc8-2edc-41c6-b3eb-734db9c04569
+status: stable
+description: |
+    Detects high-risk modifications to Network ACLs or Security Groups that allow 
+    broad ingress traffic (0.0.0.0/0) on sensitive management ports (RDP, SSH, DB). 
+    Filters out automated infrastructure-as-code (IaC) noise.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.persistence
+    - attack.t1578.005
+logsource:
+    product: cloud
+    service: Azure Activity
+detection:
+    selection_network_ops:
+        operation_name|contains:
+            - 'AuthorizeSecurityGroupIngress'
+            - 'CreateNetworkAclEntry'         
+            - 'Microsoft.Network/networkSecurityGroups/securityRules/write' 
+            - 'v1.compute.networks.updatePolicy' 
+
+    selection_risky_config:
+        request_parameters|contains:
+            - '0.0.0.0/0'
+            - '::/0'
+            - 'all'
+            - 'any'
+
+    selection_sensitive_ports:
+        request_parameters|contains:
+            - '22'   
+            - '3389' 
+            - '445'  
+            - '5985' 
+            - '3306' 
+            - '5432' 
+            - '1433'
+
+    selection_context:
+        mfa_authenticated: 'false'
+        user_agent|contains:
+            - 'kali'
+            - 'python-requests'
+            - 'boto3'
+            - 'postman'
+            - 'curl'
+
+    filter_automation:
+        user_name|startswith: 
+            - 'svc-terraform'
+            - 'svc-ansible'
+            - 'cloud-formation-manager'
+    filter_internal_services:
+        user_name|contains: 
+            - 'system-internal'
+            - 'elasticloadbalancing'
+
+    condition: selection_network_ops and selection_risky_config and (selection_sensitive_ports or selection_context) and not (filter_automation or filter_internal_services)
+level: critical

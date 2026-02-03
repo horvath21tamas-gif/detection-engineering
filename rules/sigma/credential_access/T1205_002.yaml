@@ -40,7 +40,7 @@ detection:
             - '\Users\Public\'
 
     selection_unauthorized_actor:
-        ParentImage|not|endswith:
+        ParentImage|endswith:
             - '\services.exe'
             - '\svchost.exe'
             - '\TrustedInstaller.exe'

@@ -1,0 +1,65 @@
+title: Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656)
+id: cfc8cf4c-f406-4c04-928a-e0dc4a2fc755
+status: stable
+description: |
+    Detects technical impersonation attempts including suspicious 'runas' execution 
+    patterns used for lateral movement and the creation of deceptive local accounts 
+    that mimic executive or administrative identities outside of standard HR processes.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.lateral_movement
+    - attack.t1656
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_suspicious_runas:
+        Image|endswith: '\runas.exe'
+        CommandLine|contains:
+            - ' /netonly' 
+            - ' /savecred'
+            - ' /showtrustlevels'
+        CommandLine|contains:
+            - 'cmd'
+            - 'powershell'
+            - 'pwsh'
+            - 'temp'
+            - '\\' 
+
+    selection_deceptive_creation:
+        Image|endswith: 
+            - '\net.exe'
+            - '\net1.exe'
+            - '\powershell.exe'
+        CommandLine|contains:
+            - 'user '
+            - 'add '
+            - 'New-LocalUser'
+        CommandLine|contains:
+            - 'CEO'
+            - 'CFO'
+            - 'Chief'
+            - 'Admin'
+            - 'Support'
+            - 'Helpdesk'
+
+    selection_suspicious_chain:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\w3wp.exe'
+
+    filter_trusted_management:
+        - Image|contains:
+            - '\Program Files\Remote Monitoring\'
+            - '\Windows\System32\CompMgmtLauncher.exe'
+        - User: 'NT AUTHORITY\SYSTEM'
+        - CommandLine|contains:
+            - 'SmartCard'
+
+    condition: (selection_suspicious_runas or selection_deceptive_creation) and (selection_suspicious_chain or not filter_trusted_management)
+level: high

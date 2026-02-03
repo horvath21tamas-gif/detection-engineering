@@ -259,6 +259,11 @@
 - [Exploit-Grade COR_PROFILER Hijacking via User-Writable Profiler DLL](#exploit-grade-cor_profiler-hijacking-via-user-writable-profiler-dll)
 - [Exploit-Grade KernelCallbackTable Manipulation via Remote Memory Write](#exploit-grade-kernelcallbacktable-manipulation-via-remote-memory-write)
 - [Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578)](#ultra-pro-high-fidelity-cloud-infrastructure-tampering-(t1578))
+- [Ultra-Pro High-Fidelity Suspicious Cloud Instance Creation (T1578.001)](#ultra-pro-high-fidelity-suspicious-cloud-instance-creation-(t1578001))
+- [Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002)](#ultra-pro-high-fidelity-cloud-snapshot-exfiltration-(t1578002))
+- [Ultra-Pro High-Fidelity Cloud Instance Destruction (T1578.003)](#ultra-pro-high-fidelity-cloud-instance-destruction-(t1578003))
+- [Ultra-Pro High-Fidelity Cloud Image Tampering (T1578.004)](#ultra-pro-high-fidelity-cloud-image-tampering-(t1578004))
+- [Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005)](#ultra-pro-high-fidelity-cloud-network-security-regression-(t1578005))
 - [High-Fidelity Offensive Infrastructure Provisioning - T1583](#high-fidelity-offensive-infrastructure-provisioning---t1583)
 - [High-Fidelity VPS Infrastructure Provisioning - T1583.001](#high-fidelity-vps-infrastructure-provisioning---t1583001)
 - [High-Fidelity Automated Domain Registration & Acquisition - T1583.002](#high-fidelity-automated-domain-registration-&-acquisition---t1583002)
@@ -4608,6 +4613,90 @@ injection that evades standard hook-based monitoring.
 or prepare for data exfiltration, filtered by identity behavior and source trust.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1578`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Suspicious Cloud Instance Creation (T1578.001)
+- **Azonosító:** `T1578_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the creation of high-resource or expensive cloud instances from untrusted 
+identities or outside approved regions. Optimized for Cryptojacking detection 
+with minimal false positives from CI/CD pipelines.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002)
+- **Azonosító:** `T1578_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized sharing or public exposure of cloud compute snapshots. 
+Focuses on permission changes and cross-account access rather than simple creation.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002, T1578`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Instance Destruction (T1578.003)
+- **Azonosító:** `T1578_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized or mass deletion of cloud instances. Filters out 
+automated scaling events and focuses on manual, non-MFA, or script-based 
+destruction attempts that indicate sabotage or defense evasion.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Image Tampering (T1578.004)
+- **Azonosító:** `T1578_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized modifications to cloud machine images (AMI, VHD). 
+Focuses on permission changes that expose images to external accounts or 
+the public internet, and filters out known CI/CD build pipelines.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005)
+- **Azonosító:** `T1578_005.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects high-risk modifications to Network ACLs or Security Groups that allow 
+broad ingress traffic (0.0.0.0/0) on sensitive management ports (RDP, SSH, DB). 
+Filters out automated infrastructure-as-code (IaC) noise.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

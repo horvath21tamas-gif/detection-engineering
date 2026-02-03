@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 09:49:34`
+**Utolsó frissítés:** `2026-02-03 10:22:15`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 358 | 100% |
-| Splunk (SPL) | 327 | 91.3% |
-| Microsoft Sentinel (KQL) | 328 | 91.6% |
-| QRadar (AQL) | 165 | 46.1% |
-| Elastic (KQL/EQL) | 328 | 91.6% |
-| RSA NetWitness | 326 | 91.1% |
+| Sigma (Forrás) | 363 | 100% |
+| Splunk (SPL) | 332 | 91.5% |
+| Microsoft Sentinel (KQL) | 333 | 91.7% |
+| QRadar (AQL) | 170 | 46.8% |
+| Elastic (KQL/EQL) | 333 | 91.7% |
+| RSA NetWitness | 331 | 91.2% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -275,7 +275,12 @@
 | T1574.011 | CRITICAL | Privileged Service ImagePath or ServiceDll Hijacked via Registry |
 | T1574.012 | CRITICAL | Exploit-Grade COR_PROFILER Hijacking via User-Writable Profiler DLL |
 | T1574.013 | CRITICAL | Exploit-Grade KernelCallbackTable Manipulation via Remote Memory Write |
-| T1578 | CRITICAL | Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578) |
+| T1578 | CRITICAL | Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002), Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578) |
+| T1578.001 | CRITICAL | Ultra-Pro High-Fidelity Suspicious Cloud Instance Creation (T1578.001) |
+| T1578.002 | CRITICAL | Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002) |
+| T1578.003 | HIGH | Ultra-Pro High-Fidelity Cloud Instance Destruction (T1578.003) |
+| T1578.004 | CRITICAL | Ultra-Pro High-Fidelity Cloud Image Tampering (T1578.004) |
+| T1578.005 | CRITICAL | Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005) |
 | T1583 | HIGH | High-Fidelity Offensive Infrastructure Provisioning - T1583 |
 | T1583.001 | HIGH | High-Fidelity VPS Infrastructure Provisioning - T1583.001 |
 | T1583.002 | HIGH | High-Fidelity Automated Domain Registration & Acquisition - T1583.002 |

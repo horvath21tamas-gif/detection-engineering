@@ -1,13 +1,13 @@
 # 🎯 Detection Strategy & Gap Analysis
-*Frissítve: 2026-02-03 09:49:31*
+*Frissítve: 2026-02-03 10:22:12*
 
 ## 📊 Állapotösszegző
 | Mutató | Érték |
 | :--- | :--- |
-| Összes szabály | 358 |
+| Összes szabály | 363 |
 | Aktív (van logforrás) | 345 |
-| Inaktív (hiányzó log) | 13 |
-| MITRE Lefedettség | 358 technika |
+| Inaktív (hiányzó log) | 18 |
+| MITRE Lefedettség | 364 technika |
 
 ## 🛑 Kritikus Adatforrás Hiányok
 Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logokat:
@@ -22,9 +22,11 @@ Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logok
 | High-Fidelity Entra ID Application Credential Addition (`T1098_001.yaml`) | service: `ad` |
 | High-Fidelity Azure Role Assignment Escalation (`T1098_004.yaml`) | service: `process_access` |
 | High-Fidelity MFA Method Addition (`T1098_006.yaml`) | service: `process_creation` |
+| Ultra-Pro High-Fidelity Cloud Image Tampering (T1578.004) (`T1578_004.yaml`) | product: `cloud`, service: `Azure Activity` |
 | Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002) (`T1578_002.yaml`) | product: `cloud`, service: `Azure Activity` |
 | Ultra-Pro RC Script and Init.d Persistence (T1037.004) (`T1037_004.yaml`) | service: `auditd` |
 | Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578) (`T1578.yaml`) | product: `cloud`, service: `Azure Activity` |
+| Ultra-Pro High-Fidelity Cloud Instance Destruction (T1578.003) (`T1578_003.yaml`) | product: `cloud`, service: `Azure Activity` |
 | High-Fidelity Entra ID App Certificate Addition (`T1098_003.yaml`) | service: `ad` |
 | Ultra-Pro Stealthy Ptrace Injection (T1055.008) (`T1055_008.yaml`) | service: `auditd` |
 | Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012) (`T1562_012.yaml`) | product: `cloud`, service: `aws.cloudtrail` |

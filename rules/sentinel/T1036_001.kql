@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\svchost.exe", "*\lsass.exe", "*\services.exe", "*\wininit.exe", "*\smss.exe", "*\csrss.exe", "*\winlogon.exe", "*\spoolsv.exe", "*\taskhostw.exe")) and (SignatureStatus in ("invalid", "unavailable", "error"))) or (ProcessCommandLine in ("*Micros0ft*", "*Mircosoft*", "*Microsof *", "*Google Inc*", "*Microsofts*"))

@@ -7,6 +7,10 @@
 - [Suspicious RDP Logon from Unusual Source](#suspicious-rdp-logon-from-unusual-source)
 - [Suspicious Base64-Encoded PowerShell Command with Network Activity](#suspicious-base64-encoded-powershell-command-with-network-activity)
 - [Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036)](#ultra-pro-high-fidelity-masquerading-and-process-path-abuse-(t1036))
+- [Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001)](#ultra-pro-high-fidelity-invalid-or-forged-code-signature-(t1036001))
+- [Ultra-Pro High-Fidelity RTLO Character Execution (T1036.002)](#ultra-pro-high-fidelity-rtlo-character-execution-(t1036002))
+- [Ultra-Pro High-Fidelity Renamed System Utility (T1036.003)](#ultra-pro-high-fidelity-renamed-system-utility-(t1036003))
+- [Ultra-Pro High-Fidelity Masquerading via Path Anomaly (T1036.004)](#ultra-pro-high-fidelity-masquerading-via-path-anomaly-(t1036004))
 - [Legitimate Windows Binary Copied to User-Writable Location](#legitimate-windows-binary-copied-to-user-writable-location)
 - [Ultra-Pro High-Fidelity Allure Document and RTLO Masquerading (T1036.009)](#ultra-pro-high-fidelity-allure-document-and-rtlo-masquerading-(t1036009))
 - [High-Fidelity Logon Script Persistence (T1037)](#high-fidelity-logon-script-persistence-(t1037))
@@ -438,6 +442,74 @@ double extensions, and critical system processes spawned by untrusted parents.
 Optimized to filter out legitimate Windows Update and side-loading behaviors.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1036`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001)
+- **Azonosító:** `T1036_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects critical system processes (e.g., lsass, svchost) running with invalid, 
+untrusted, or forged digital signatures. Focuses on identity-signature 
+mismatch and publisher typosquatting to eliminate developer noise.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity RTLO Character Execution (T1036.002)
+- **Azonosító:** `T1036_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the execution of processes containing the Right-to-Left Override (RTLO) 
+Unicode character (U+202E). Optimized to detect various encodings and 
+suspicious execution contexts (Downloads, Temp) while filtering system noise.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Renamed System Utility (T1036.003)
+- **Azonosító:** `T1036_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the execution of renamed Windows system utilities (LOLBins) by comparing 
+current process names with internal metadata. Uses path-based filtering 
+and signature-awareness to eliminate false positives from installers.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Masquerading via Path Anomaly (T1036.004)
+- **Azonosító:** `T1036_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects sophisticated masquerading where system binaries are executed from 
+untrusted, user-writable directories or from spoofed system paths (e.g., space padding). 
+Filters out legitimate Side-by-Side (WinSxS) and Windows Update behaviors.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

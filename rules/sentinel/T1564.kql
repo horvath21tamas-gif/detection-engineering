@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath endswith "\attrib.exe" and ProcessCommandLine contains " +s") or (ProcessCommandLine in ("* > *:*", "*type *:*", "*expand *:*", "*makecab *:*")) or (FolderPath endswith "\reg.exe" and (ProcessCommandLine in ("*SpecialAccounts\UserList*", "* /d 0*")))) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\mshta.exe", "*\wscript.exe", "*\cscript.exe", "*\browser.exe", "*\chrome.exe")) or (ProcessCommandLine in ("*\Users\Public\*", "*\Windows\Temp\*", "*\AppData\Roaming\*"))) and (not (username =~ "NT AUTHORITY\SYSTEM" or (ParentProcessName in ("*\Windows\servicing\TrustedInstaller.exe*", "*\CcmExec.exe*")) or (ProcessCommandLine in ("*AppData\Local\Packages*", "*desktop.ini*"))))

@@ -1,0 +1,50 @@
+title: Ultra-Pro High-Fidelity Network Binary Patching (T1601.001)
+id: 1a99382f-ae99-4606-a5ec-c03445bb4a81
+status: stable
+description: |
+    Detects unauthorized low-level patching of network OS binaries. 
+    Focuses on filesystem remounting (read-write), binary manipulation (dd, xxd), 
+    and kernel module loading (insmod) outside of authorized maintenance.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.persistence
+    - attack.defense_evasion
+    - attack.t1601.001
+logsource:
+    product: network
+    service: FortiOS
+detection:
+    selection_remount:
+        Message|contains:
+            - 'mount -o remount,rw'
+            - 'mount -uw'
+            - 'config-transaction' 
+
+    selection_patch_tools:
+        Message|contains:
+            - 'xxd '    
+            - 'dd if=' 
+            - 'insmod'  
+            - 'gdb '   
+            - 'setenforce 0' 
+
+    selection_critical_paths:
+        Message|contains:
+            - '/bin/'
+            - '/sbin/'
+            - '/lib/modules'
+            - '/boot/'
+
+    filter_authorized_updates:
+        user_name|startswith:
+            - 'svc-system-update'
+            - 'installer'
+    filter_read_only_debug:
+        Message|contains:
+            - 'show '
+            - 'cat '
+            - 'grep '
+
+    condition: (selection_remount or selection_selection_patch_tools) and selection_critical_paths and not (filter_authorized_updates or filter_standard_ops)
+level: critical

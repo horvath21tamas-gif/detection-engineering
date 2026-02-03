@@ -28,7 +28,7 @@ detection:
         - Details: 'DWORD (0x00000000)'
 
     selection_unauthorized_actor:
-        Image|not|endswith:
+        Image|endswith:
             - '\winword.exe'   
             - '\excel.exe'
             - '\outlook.exe'

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetObject contains "Classes\CLSID\" and (TargetObject in ("*\InprocServer32\(Default)", "*\LocalServer32\(Default)"))) and ((Details in ("*:\Users\*", "*:\ProgramData\*", "*:\Windows\Temp\*", "*:\Temp\*", "*.tmp*", "*.bat*", "*.ps1*")) or (Details in ("*scrobj.dll*", "*comsvcs.dll*", "*script:*"))) and (not ((FolderPath in ("*\Microsoft\OneDrive\OneDrive.exe", "*\Microsoft\Teams\current\Teams.exe", "*\Office16\OUTLOOK.EXE", "*\System32\msiexec.exe", "*\trustedinstaller.exe")) and (Details in ("*\AppData\Local\Microsoft\OneDrive\*", "*\AppData\Local\Microsoft\Teams\*", "*\AppData\Local\Microsoft\Office\*"))))

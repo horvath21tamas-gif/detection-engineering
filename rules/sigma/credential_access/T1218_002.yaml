@@ -1,0 +1,55 @@
+title: Ultra-Pro High-Fidelity Control.exe Proxy Execution (T1218.002)
+id: 79c13d1f-ef30-42cd-9d83-af1ef51d9aae
+status: stable
+description: |
+    Detects the abuse of control.exe to load malicious .CPL or DLL files from untrusted paths.
+    Leverages OriginalFileName to catch renamed binaries and focuses on cross-boundary 
+    process execution (e.g., Office or Scripting hosts launching Control Panel).
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1218.002
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_img:
+        - Image|endswith: '\control.exe'
+        - OriginalFileName: 'control.exe'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+            - '\rundll32.exe'
+
+    selection_untrusted_paths:
+        CommandLine|contains:
+            - '\Users\'
+            - '\ProgramData\'
+            - '\Temp\'
+            - '\Public\'
+            - '\PerfLogs\'
+            - '\\' 
+
+    selection_ext_anomaly:
+        CommandLine|contains:
+            - '.dll'
+            - '.tmp'
+            - '.dat'
+            - '.png' 
+
+    filter_legit_system:
+        ParentImage|endswith: '\explorer.exe'
+        CommandLine|contains: 'C:\Windows\System32\'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_img and (selection_suspicious_parent or (selection_untrusted_paths or selection_ext_anomaly)) and not filter_legit_system
+level: critical

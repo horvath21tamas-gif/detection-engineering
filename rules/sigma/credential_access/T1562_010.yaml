@@ -1,0 +1,61 @@
+title: Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010)
+id: 7da28144-53ff-4dff-8a1b-a152503084d4
+status: stable
+description: |
+    Detects attempts to downgrade system defenses to bypass modern security controls. 
+    Targets PowerShell v2.0 engine forcing (AMSI bypass) and registry-based 
+    weakening of authentication and encryption protocols.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1562.010
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_ps_downgrade:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        CommandLine|contains:
+            - ' -version 2'
+            - ' -ver 2'
+            - ' -v 2'
+        CommandLine|contains:
+            - ' -encoded' 
+            - ' -enc'
+            - ' -e '
+
+    selection_registry_auth:
+        CommandLine|contains:
+            - 'LmCompatibilityLevel' 
+            - 'NtlmMinClientSec'     
+        CommandLine|contains:
+            - 'reg'
+            - 'Set-ItemProperty'
+        CommandLine|contains:
+            - ' 0'
+            - ' 1'
+            - ' 2'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\w3wp.exe'
+            - '\php-cgi.exe'
+            - '\mshta.exe'
+
+    filter_trusted_admin:
+        - User: 'NT AUTHORITY\SYSTEM'
+          ParentImage|endswith: '\services.exe'
+        - CommandLine|contains:
+            - 'AzureAD' 
+            - 'Exchange'
+        - ParentImage|contains:
+            - '\Windows\System32\wbem\wmiprvse.exe' 
+
+    condition: (selection_ps_downgrade or selection_registry_auth) and (selection_suspicious_parent or not filter_trusted_admin)
+level: critical

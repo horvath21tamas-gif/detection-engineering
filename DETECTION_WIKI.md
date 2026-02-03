@@ -103,6 +103,7 @@
 - [Ultra-Pro Traffic Signaling & Port Knocking (T1205)](#ultra-pro-traffic-signaling-&-port-knocking-(t1205))
 - [Ultra-Pro Port Knocking & Raw Socket Listener (T1205.001)](#ultra-pro-port-knocking-&-raw-socket-listener-(t1205001))
 - [Ultra-Pro Socket Filter & WFP Traffic Signaling (T1205.002)](#ultra-pro-socket-filter-&-wfp-traffic-signaling-(t1205002))
+- [Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211)](#ultra-pro-high-fidelity-privilege-escalation-exploitation-(t1211))
 - [Suspicious Mshta Execution of Remote Script (High Fidelity)](#suspicious-mshta-execution-of-remote-script-(high-fidelity))
 - [Suspicious Msiexec Installation from Remote URL (High Fidelity)](#suspicious-msiexec-installation-from-remote-url-(high-fidelity))
 - [Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity)](#suspicious-regsvr32-execution-indicative-of-lolbas-abuse-(high-fidelity))
@@ -1993,6 +1994,23 @@ Monitors for low-level driver loading and WFP database manipulation from
 untrusted process lineages, a common technique for stealthy port knocking.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211)
+- **Azonosító:** `T1211.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects potential exploitation for privilege escalation by identifying 
+anomalous child processes from vulnerable parents with specific focus on 
+breaking out of application sandboxes (browsers, office, pdf).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1211`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

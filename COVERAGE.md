@@ -120,6 +120,7 @@
 | T1205 | HIGH | Ultra-Pro Traffic Signaling & Port Knocking (T1205) |
 | T1205.001 | HIGH | Ultra-Pro Port Knocking & Raw Socket Listener (T1205.001) |
 | T1205.002 | CRITICAL | Ultra-Pro Socket Filter & WFP Traffic Signaling (T1205.002) |
+| T1211 | CRITICAL | Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211) |
 | T1218 | HIGH | Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1218.005 | HIGH | Suspicious Mshta Execution of Remote Script (High Fidelity) |
 | T1218.007 | HIGH | Suspicious Msiexec Installation from Remote URL (High Fidelity) |

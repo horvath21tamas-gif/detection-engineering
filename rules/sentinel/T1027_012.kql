@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((TargetObject in ("*\Microsoft\Windows NT\CurrentVersion\Windows\AppInit_DLLs*", "*\Microsoft\Windows NT\CurrentVersion\Windows\AppCertDlls*", "*\Control\Session Manager\AppCertDlls*")) and (Details in ("*\Users\*", "*\AppData\Local\Temp\*", "*\Windows\Temp\*", "*\PerfLogs\*", "*\ProgramData\*"))) or ((TargetObject endswith "\Microsoft\Windows NT\CurrentVersion\Windows\LoadAppInit_DLLs" and Details =~ "DWORD (0x00000001)") and (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\reg.exe", "*\cscript.exe", "*\wscript.exe")))) and (not ((FolderPath in ("C:\Windows\System32\msiexec.exe*", "C:\Windows\System32\wbem\WmiPrvSE.exe*")) and User =~ "NT AUTHORITY\SYSTEM"))

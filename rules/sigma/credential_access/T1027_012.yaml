@@ -45,7 +45,7 @@ detection:
         Image|startswith:
             - 'C:\Windows\System32\msiexec.exe'
             - 'C:\Windows\System32\wbem\WmiPrvSE.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: ((selection_registry_keys and selection_suspicious_paths) or (selection_enable_flag and selection_suspicious_actors)) and not filter_trusted_installers
 level: critical

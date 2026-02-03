@@ -235,6 +235,7 @@
     "T1548_001.yaml": 60,
     "T1199.yaml": 70,
     "T1585_002.yaml": 90,
+    "T1055_003.yaml": 60,
     "T1547_003.yaml": 70,
     "T1543_002.yaml": 70,
     "credential_dumping_lsass.yml": 60,

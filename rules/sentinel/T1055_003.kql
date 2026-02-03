@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (GrantedAccess in ("*0x10*", "*0x16*", "*0x1FFFFF*")) and CallTrace contains "unknown" and (TargetImage in ("*\lsass.exe", "*\svchost.exe", "*\explorer.exe", "*\winlogon.exe", "*\spoolsv.exe")) and (not (SourceImage =~ "C:\Windows\System32\csrss.exe" or (SourceImage in ("*\MsMpEng.exe", "*\CcmExec.exe")) or (CallTrace in ("*clr.dll+*", "*wer.dll+*", "*ntdll.dll+LdrpWorkItem*")) or condition =~ "selection_source_equals_target"))

@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 12:35:49`
+**Utolsó frissítés:** `2026-02-03 12:54:32`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 390 | 100% |
-| Splunk (SPL) | 390 | 100.0% |
-| Microsoft Sentinel (KQL) | 391 | 100.3% |
-| QRadar (AQL) | 196 | 50.3% |
-| Elastic (KQL/EQL) | 391 | 100.3% |
-| RSA NetWitness | 389 | 99.7% |
+| Sigma (Forrás) | 393 | 100% |
+| Splunk (SPL) | 393 | 100.0% |
+| Microsoft Sentinel (KQL) | 394 | 100.3% |
+| QRadar (AQL) | 196 | 49.9% |
+| Elastic (KQL/EQL) | 394 | 100.3% |
+| RSA NetWitness | 392 | 99.7% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -154,7 +154,7 @@
 | T1205.002 | CRITICAL | Ultra-Pro Socket Filter & WFP Traffic Signaling (T1205.002) |
 | T1207 | CRITICAL | Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207) |
 | T1211 | CRITICAL | Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211) |
-| T1218 | HIGH | Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
+| T1218 | HIGH | Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218), Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1218.005 | HIGH | Suspicious Mshta Execution of Remote Script (High Fidelity) |
 | T1218.007 | HIGH | Suspicious Msiexec Installation from Remote URL (High Fidelity) |
 | T1218.010 | HIGH | Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity) |
@@ -227,8 +227,13 @@
 | T1548.003 | CRITICAL | Ultra-Pro Sudoers Manipulation and Sudo Abuse (T1548.003) |
 | T1548.004 | CRITICAL | Ultra-Pro AppleScript Privilege Escalation (T1548.004) |
 | T1548.005 | HIGH | Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005) |
-| T1553.004 | CRITICAL | Ultra-Pro High-Fidelity Subvert Trust Controls (T1553) |
-| T1553.005 | CRITICAL | Ultra-Pro High-Fidelity Subvert Trust Controls (T1553) |
+| T1553 | CRITICAL | Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001) |
+| T1553.001 | CRITICAL | Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001) |
+| T1553.002 | CRITICAL | Ultra-Pro High-Fidelity SIP Hijacking and Trust Subversion (T1553.002) |
+| T1553.003 | CRITICAL | Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003) |
+| T1553.004 | CRITICAL | Ultra-Pro High-Fidelity Root Certificate Injection (T1553.004), Ultra-Pro High-Fidelity Subvert Trust Controls (T1553) |
+| T1553.005 | CRITICAL | Ultra-Pro High-Fidelity MotW Bypass & Zone Subversion (T1553.005), Ultra-Pro High-Fidelity Subvert Trust Controls (T1553) |
+| T1553.006 | CRITICAL | Ultra-Pro High-Fidelity Code Integrity & DSE Subversion (T1553.006) |
 | T1554 | CRITICAL | Ultra-Pro Client Binary Integrity Compromise (T1554) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
 | T1556 | CRITICAL | Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration |

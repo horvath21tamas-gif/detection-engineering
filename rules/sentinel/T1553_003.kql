@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where ((FolderPath in ("*\makecat.exe", "*\pvk2pfx.exe", "*\signtool.exe", "*\upwiz.exe")) or (ProcessCommandLine contains ".cat" and (ProcessCommandLine in ("*\AppData\Local\Temp\*", "*\Users\Public\*", "*\Downloads\*", "*\Desktop\*", "*\PerfLogs\*")) and (ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe")))) and (not ((FolderPath in ("C:\Windows\servicing\TrustedInstaller.exe*", "C:\Windows\System32\svchost.exe*", "C:\Windows\System32\CCM\*")) and User =~ "NT AUTHORITY\SYSTEM"))
+| where ((FolderPath in ("*\makecat.exe", "*\pvk2pfx.exe", "*\signtool.exe", "*\upwiz.exe")) or (ProcessCommandLine contains ".cat" and (ProcessCommandLine in ("*\AppData\Local\Temp\*", "*\Users\Public\*", "*\Downloads\*", "*\Desktop\*", "*\PerfLogs\*")) and (ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe")))) and (not ((FolderPath in ("C:\Windows\servicing\TrustedInstaller.exe*", "C:\Windows\System32\svchost.exe*", "C:\Windows\System32\CCM\*")) and username =~ "NT AUTHORITY\SYSTEM"))

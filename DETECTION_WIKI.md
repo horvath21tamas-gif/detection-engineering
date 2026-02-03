@@ -138,6 +138,7 @@
 - [Ultra-Pro Socket Filter & WFP Traffic Signaling (T1205.002)](#ultra-pro-socket-filter-&-wfp-traffic-signaling-(t1205002))
 - [Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207)](#ultra-pro-high-fidelity-rogue-dc-topology-manipulation-(t1207))
 - [Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211)](#ultra-pro-high-fidelity-privilege-escalation-exploitation-(t1211))
+- [Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218)](#ultra-pro-high-fidelity-system-binary-proxy-execution-(t1218))
 - [Suspicious Mshta Execution of Remote Script (High Fidelity)](#suspicious-mshta-execution-of-remote-script-(high-fidelity))
 - [Suspicious Msiexec Installation from Remote URL (High Fidelity)](#suspicious-msiexec-installation-from-remote-url-(high-fidelity))
 - [Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity)](#suspicious-regsvr32-execution-indicative-of-lolbas-abuse-(high-fidelity))
@@ -211,6 +212,12 @@
 - [Ultra-Pro AppleScript Privilege Escalation (T1548.004)](#ultra-pro-applescript-privilege-escalation-(t1548004))
 - [Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005)](#ultra-pro-suid-desktop-entry-&-shortcut-abuse-(t1548005))
 - [Ultra-Pro High-Fidelity Subvert Trust Controls (T1553)](#ultra-pro-high-fidelity-subvert-trust-controls-(t1553))
+- [Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001)](#ultra-pro-high-fidelity-macos-gatekeeper-and-quarantine-bypass-(t1553001))
+- [Ultra-Pro High-Fidelity SIP Hijacking and Trust Subversion (T1553.002)](#ultra-pro-high-fidelity-sip-hijacking-and-trust-subversion-(t1553002))
+- [Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003)](#ultra-pro-high-fidelity-windows-catalog-database-subversion-(t1553003))
+- [Ultra-Pro High-Fidelity Root Certificate Injection (T1553.004)](#ultra-pro-high-fidelity-root-certificate-injection-(t1553004))
+- [Ultra-Pro High-Fidelity MotW Bypass & Zone Subversion (T1553.005)](#ultra-pro-high-fidelity-motw-bypass-&-zone-subversion-(t1553005))
+- [Ultra-Pro High-Fidelity Code Integrity & DSE Subversion (T1553.006)](#ultra-pro-high-fidelity-code-integrity-&-dse-subversion-(t1553006))
 - [Ultra-Pro Client Binary Integrity Compromise (T1554)](#ultra-pro-client-binary-integrity-compromise-(t1554))
 - [Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)](#nem-böngészős-folyamat-hozzáférése-a-böngésző-hitelesítőadat-tárolóihoz-(high-fidelity))
 - [Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration](#exploit-grade-authentication-process-hijack-via-suspicious-dll-registration)
@@ -2669,6 +2676,23 @@ breaking out of application sandboxes (browsers, office, pdf).
 
 ---
 
+## Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218)
+- **Azonosító:** `T1218.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects anomalous execution of trusted Windows binaries used to proxy malicious code. 
+Focuses on cross-process boundary calls (e.g., Office to Rundll32) and suspicious 
+command-line arguments like URLs or non-DLL extensions.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1218`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Suspicious Mshta Execution of Remote Script (High Fidelity)
 - **Azonosító:** `T1218_005.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
@@ -3852,6 +3876,108 @@ Focuses on modifications in user-writable directories by untrusted processes.
 or modifying security zones/MotW settings from non-standard processes and paths.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004, 005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001)
+- **Azonosító:** `T1553_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects attempts to disable macOS Gatekeeper or programmatically remove the 
+quarantine attribute from files. Focuses on non-interactive shells and 
+suspicious paths to reduce false positives from developers.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001, T1553`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity SIP Hijacking and Trust Subversion (T1553.002)
+- **Azonosító:** `T1553_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized modification of Subject Interface Packages (SIP) and Trust Providers. 
+Focuses on DLL registrations from non-standard or user-writable paths which is a 
+common technique to make malicious binaries appear as validly signed.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003)
+- **Azonosító:** `T1553_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized additions to the Windows Catalog database. 
+Focuses on non-system accounts and suspicious source paths to prevent 
+unsigned malware from appearing as validly signed by the OS.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Root Certificate Injection (T1553.004)
+- **Azonosító:** `T1553_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the programmatic installation of a Root Certificate into the 
+Trusted Root store. Focuses on high-risk command-line arguments and 
+suspicious process lineages to eliminate common false positives.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity MotW Bypass & Zone Subversion (T1553.005)
+- **Azonosító:** `T1553_005.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects programmatic removal or subversion of the Mark of the Web (MotW). 
+Focuses on non-interactive ADS manipulation and suspicious registry 
+modifications that lower security zone settings.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Code Integrity & DSE Subversion (T1553.006)
+- **Azonosító:** `T1553_006.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects attempts to subvert Windows Code Integrity and Driver Signature Enforcement (DSE). 
+Focuses on BCDEDIT flags and registry modifications that allow unsigned kernel drivers 
+to load, while filtering out legitimate OS maintenance and installers.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

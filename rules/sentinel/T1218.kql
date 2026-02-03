@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\rundll32.exe", "*\regsvr32.exe", "*\msiexec.exe", "*\installutil.exe", "*\mshta.exe", "*\control.exe", "*\cmstp.exe", "*\odbcconf.exe")) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powerpnt.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\brave.exe", "*\sqlservr.exe", "*\w3wp.exe")) or ((ProcessCommandLine in ("*http*", "*ftp*", "*javascript:*", "*vbscript:*", "*scrobj.dll*", "*.txt*", "*.png*", "*.jpg*", "*.dat*", "*.inf*")) and (ProcessCommandLine in ("*\AppData\Local\Temp\*", "*\Users\Public\*", "*\Downloads\*", "*\PerfLogs\*")))) and (not (User =~ "NT AUTHORITY\SYSTEM" and ParentProcessName startswith "C:\Windows\System32\svchost.exe" and ProcessCommandLine contains "C:\Windows\Installer\"))

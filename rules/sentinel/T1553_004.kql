@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (FolderPath in ("*\certutil.exe", "*\powershell.exe", "*\pwsh.exe", "*\certmgr.exe")) and (ProcessCommandLine in ("* Root*", "* AuthRoot*", "* -s *")) and ((ProcessCommandLine in ("* -f *", "* -user *", "* -enterprise *")) or (ProcessCommandLine in ("*\AppData\Local\Temp\*", "*\Users\Public\*", "*\Downloads\*", "*\Desktop\*", "*\PerfLogs\*"))) and (not ((ParentProcessName in ("C:\Windows\System32\gpscript.exe*", "C:\Windows\System32\svchost.exe*", "C:\Windows\servicing\TrustedInstaller.exe*")) and User =~ "NT AUTHORITY\SYSTEM"))
+| where (FolderPath in ("*\certutil.exe", "*\powershell.exe", "*\pwsh.exe", "*\certmgr.exe")) and (ProcessCommandLine in ("* Root*", "* AuthRoot*", "* -s *")) and ((ProcessCommandLine in ("* -f *", "* -user *", "* -enterprise *")) or (ProcessCommandLine in ("*\AppData\Local\Temp\*", "*\Users\Public\*", "*\Downloads\*", "*\Desktop\*", "*\PerfLogs\*"))) and (not ((ParentProcessName in ("C:\Windows\System32\gpscript.exe*", "C:\Windows\System32\svchost.exe*", "C:\Windows\servicing\TrustedInstaller.exe*")) and username =~ "NT AUTHORITY\SYSTEM"))

@@ -58,7 +58,7 @@ detection:
             - '\PerfLogs\'
 
     filter_trusted_system:
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
         ParentImage|startswith: 'C:\Windows\System32\svchost.exe'
         CommandLine|contains: 'C:\Windows\Installer\'
 

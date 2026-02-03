@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\AppData\Local\Temp\*", "*\Users\Public\*", "*\Downloads\*", "*\Desktop\*", "*\PerfLogs\*")) and (FolderPath in ("*.scr", "*.pif", "*.exe"))) and ((ProcessCommandLine in ("*GetCursorPos*", "*GetLastInputInfo*", "*GetForegroundWindow*", "*GetKeyState*", "*shell:recent*")) or (ProcessCommandLine in ("*Error*", "*Required*", "*Missing*", "*Update*"))) and (not (((ParentProcessName in ("*\services.exe", "*\explorer.exe")) and User =~ "NT AUTHORITY\SYSTEM") or (FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe"))))

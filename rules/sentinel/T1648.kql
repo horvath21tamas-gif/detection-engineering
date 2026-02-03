@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (eventName in ("CreateFunction20150331", "UpdateFunctionCode20150331", "UpdateFunctionConfiguration20150331", "PublishVersion20150331")) and (((userAgent in ("*HashiCorp/1.0 (Terraform)*", "*CloudFormation*", "*ServerlessFramework*")) or (sourceIPAddress in ("*10.0.0.0/8*", "*1.2.3.4*"))) or (requestParameters in ("sh", "curl", "wget", "base64", "python -c"))) and (not (['userIdentity.arn'] in ("*role/GitLabCI-Deployer*", "*role/Jenkins-Lambda-Master*")))

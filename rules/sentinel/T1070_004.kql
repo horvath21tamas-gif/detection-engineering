@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath endswith "\fsutil.exe" and (ProcessCommandLine contains "usn" and ProcessCommandLine contains "deletejournal")) or (ProcessCommandLine in ("*\Windows\Prefetch\*", "*\Windows\AppCompat\Programs\Amcache.hve*", "*\System32\config\journal*"))) or ((FolderPath in ("*\sdelete.exe", "*\sdelete64.exe")) or (FolderPath endswith "\cipher.exe" and ProcessCommandLine contains " /w") or (FolderPath endswith "\powershell.exe" and ProcessCommandLine contains " -Force"))) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\w3wp.exe", "*\sqlservr.exe")) or (not ((FolderPath in ("*\cleanmgr.exe", "*\dism.exe")) or (ParentProcessName in ("*\msiexec.exe", "*\TiWorker.exe")) or ProcessCommandLine contains "\Windows\SoftwareDistribution\Download" or User =~ "NT AUTHORITY\SYSTEM")))

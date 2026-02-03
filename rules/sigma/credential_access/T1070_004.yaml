@@ -54,7 +54,7 @@ detection:
             - '\TiWorker.exe'
         - CommandLine|contains:
             - '\Windows\SoftwareDistribution\Download'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_forensic_wipe or selection_secure_delete) and (selection_suspicious_parent or not filter_trusted_maintenance)
 level: high

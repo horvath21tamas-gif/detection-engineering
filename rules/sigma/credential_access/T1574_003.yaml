@@ -25,8 +25,8 @@ detection:
 
 
     selection_suspicious_logic:
-        - Details|startsWith: 'C:\Users\'       
-        - Details|startsWith: 'C:\ProgramData\' 
+        - Details|startswith: 'C:\Users\'       
+        - Details|startswith: 'C:\ProgramData\' 
         - Details|contains: 
             - 'powershell'
             - 'cmd.exe /c'

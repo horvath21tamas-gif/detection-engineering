@@ -1,0 +1,1 @@
+GrantedAccess IN ("0x20", "0x22", "0x1438", "0x1F1FFF") CallTrace="*unknown*" NOT (SourceImage IN ("*\\MsMpEng.exe", "*\\CcmExec.exe", "*\\csrss.exe") OR CallTrace IN ("*ntdll.dll+LdrpWorkItem*", "*kernel32.dll+BaseThreadInitThunk*"))

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (GrantedAccess in ("0x20", "0x22", "0x1438", "0x1F1FFF")) and CallTrace contains "unknown" and (not ((SourceImage in ("*\MsMpEng.exe", "*\CcmExec.exe", "*\csrss.exe")) or (CallTrace in ("*ntdll.dll+LdrpWorkItem*", "*kernel32.dll+BaseThreadInitThunk*"))))

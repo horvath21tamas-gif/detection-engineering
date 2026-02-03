@@ -21,6 +21,7 @@ Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logok
 | High-Fidelity Entra ID Application Credential Addition (`T1098_001.yaml`) | service: `ad` |
 | High-Fidelity Azure Role Assignment Escalation (`T1098_004.yaml`) | service: `process_access` |
 | High-Fidelity MFA Method Addition (`T1098_006.yaml`) | service: `process_creation` |
+| Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002) (`T1578_002.yaml`) | product: `cloud`, service: `Azure Activity` |
 | Ultra-Pro RC Script and Init.d Persistence (T1037.004) (`T1037_004.yaml`) | service: `auditd` |
 | Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578) (`T1578.yaml`) | product: `cloud`, service: `Azure Activity` |
 | High-Fidelity Entra ID App Certificate Addition (`T1098_003.yaml`) | service: `ad` |

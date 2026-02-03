@@ -928,6 +928,14 @@
             "color": "#ff6666"
         },
         {
+            "techniqueID": "T1578.002",
+            "color": "#ff6666"
+        },
+        {
+            "techniqueID": "T1578",
+            "color": "#ff6666"
+        },
+        {
             "techniqueID": "T1562.010",
             "color": "#ff6666"
         },

@@ -1,0 +1,1 @@
+operation_name IN ("*ModifySnapshotAttribute*", "*SharedSnapshot*", "*SetSnapshotPermissions*", "*CopySnapshot*") request_parameters IN ("*all*", "*Add.UserId*", "*grantee*", "*public*") OR (mfa_authenticated="false" user_agent IN ("*kali*", "*python-requests*", "*boto3*")) NOT (user_name IN ("svc-veeam*", "svc-commvault*", "backup-agent*") source_ip="10.0.0.0/8")

@@ -1,0 +1,1 @@
+(operation_name:(*ModifySnapshotAttribute* OR *SharedSnapshot* OR *SetSnapshotPermissions* OR *CopySnapshot*)) AND ((request_parameters:(*all* OR *Add.UserId* OR *grantee* OR *public*)) OR (mfa_authenticated:false AND (user_agent:(*kali* OR *python\-requests* OR *boto3*)))) AND (NOT ((user_name:(svc\-veeam* OR svc\-commvault* OR backup\-agent*)) AND source_ip:10.0.0.0\/8))

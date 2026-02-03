@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (operation_name in ("*ModifySnapshotAttribute*", "*SharedSnapshot*", "*SetSnapshotPermissions*", "*CopySnapshot*")) and ((request_parameters in ("*all*", "*Add.UserId*", "*grantee*", "*public*")) or (mfa_authenticated =~ "false" and (user_agent in ("*kali*", "*python-requests*", "*boto3*")))) and (not ((user_name in ("svc-veeam*", "svc-commvault*", "backup-agent*")) and source_ip =~ "10.0.0.0/8"))

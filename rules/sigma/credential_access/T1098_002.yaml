@@ -40,8 +40,8 @@ detection:
             - 'it-automation-principal'
 
     selection_unusual_actor:
-        - UserId|not_contains: 'admin-' 
-        - ClientIPAddress|not_contains: '10.50.' 
+        - UserId|contains: 'admin-' 
+        - ClientIPAddress|contains: '10.50.' 
 
     selection_priority_targets:
         TargetUser|contains:

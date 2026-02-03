@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath endswith "\control.exe" or OriginalFileName =~ "control.exe") and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\powershell.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\rundll32.exe")) or ((ProcessCommandLine in ("*\Users\*", "*\ProgramData\*", "*\Temp\*", "*\Public\*", "*\PerfLogs\*", "*\*")) or (ProcessCommandLine in ("*.dll*", "*.tmp*", "*.dat*", "*.png*")))) and (not (ParentProcessName endswith "\explorer.exe" and ProcessCommandLine contains "C:\Windows\System32\" and User =~ "NT AUTHORITY\SYSTEM"))

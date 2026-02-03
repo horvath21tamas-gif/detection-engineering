@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where FolderPath endswith "\hh.exe" and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\powershell.exe", "*\cmd.exe", "*\chrome.exe", "*\msedge.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe")) or ((ProcessCommandLine in ("*http*", "*its:*", "*mk:@MSITStore*", "*-decompile*", "*.txt*", "*.jpg*")) and (ProcessCommandLine in ("*\AppData\*", "*\Users\Public\*", "*\Downloads\*", "*\Temp\*")))) and (not ((ParentProcessName in ("C:\Program Files\*", "C:\Program Files (x86)\*")) and (ProcessCommandLine in ("*http*", "*-decompile*"))))

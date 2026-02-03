@@ -49,7 +49,7 @@ detection:
     filter_legit_system:
         ParentImage|endswith: '\explorer.exe'
         CommandLine|contains: 'C:\Windows\System32\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_img and (selection_suspicious_parent or (selection_untrusted_paths or selection_ext_anomaly)) and not filter_legit_system
 level: critical

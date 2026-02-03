@@ -1,0 +1,2 @@
+((((StartFunction = '*LoadLibraryA*' OR StartFunction = '*LoadLibraryW*'))) OR StartModule !exists OR ((StartModule = '*-*'))) AND (((TargetImage = '*\\lsass.exe*' OR TargetImage = '*\\svchost.exe*' OR TargetImage = '*\\explorer.exe*' OR TargetImage = '*\\winlogon.exe*' OR TargetImage = '*\\spoolsv.exe*'))) AND (NOT ((((Sourceprocessname = '*C:\\Windows\\System32\\csrss.exe*'))|| (((SourceImage = '*\\MsMpEng.exe*' OR SourceImage = '*\\CcmExec.exe*'))) OR (((Sourceusername = '*NT AUTHORITY\\SYSTEM*'))&& ((Targetprocessname = '*C:\\Windows\\System32\\svchost.exe*')))))
+)

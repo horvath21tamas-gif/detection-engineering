@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((StartFunction in ("LoadLibraryA", "LoadLibraryW")) or StartModule is null) and (TargetImage in ("*\lsass.exe", "*\svchost.exe", "*\explorer.exe", "*\winlogon.exe", "*\spoolsv.exe")) and (not (SourceImage =~ "C:\Windows\System32\csrss.exe" or (SourceImage in ("*\MsMpEng.exe", "*\CcmExec.exe")) or (SourceUser =~ "NT AUTHORITY\SYSTEM" and TargetImage =~ "C:\Windows\System32\svchost.exe")))

@@ -407,6 +407,7 @@
 | T1598.004 | HIGH | High-Fidelity Spearphishing Attachment Interaction - T1598.004 |
 | T1599 | CRITICAL | Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001), Ultra-Pro High-Fidelity Network Boundary Bridging (T1599) |
 | T1599.001 | CRITICAL | Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001) |
+| T1600 | HIGH | Ultra-Pro High-Fidelity Weaken Encryption Attempt (T1600) |
 | T1601 | CRITICAL | Ultra-Pro High-Fidelity Network OS Image Modification (T1601) |
 | T1601.001 | CRITICAL | Ultra-Pro High-Fidelity Network Binary Patching (T1601.001) |
 | T1601.002 | CRITICAL | Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002) |

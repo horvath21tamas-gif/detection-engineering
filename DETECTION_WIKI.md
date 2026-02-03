@@ -389,6 +389,7 @@
 - [High-Fidelity Spearphishing Attachment Interaction - T1598.004](#high-fidelity-spearphishing-attachment-interaction---t1598004)
 - [Ultra-Pro High-Fidelity Network Boundary Bridging (T1599)](#ultra-pro-high-fidelity-network-boundary-bridging-(t1599))
 - [Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001)](#ultra-pro-high-fidelity-logical-isolation-bypass-(t1599001))
+- [Ultra-Pro High-Fidelity Weaken Encryption Attempt (T1600)](#ultra-pro-high-fidelity-weaken-encryption-attempt-(t1600))
 - [Ultra-Pro High-Fidelity Network OS Image Modification (T1601)](#ultra-pro-high-fidelity-network-os-image-modification-(t1601))
 - [Ultra-Pro High-Fidelity Network Binary Patching (T1601.001)](#ultra-pro-high-fidelity-network-binary-patching-(t1601001))
 - [Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002)](#ultra-pro-high-fidelity-malicious-network-os-upgrade-(t1601002))
@@ -6719,6 +6720,23 @@ and hardware-level bridging of isolated interfaces.
 unauthorized VLAN trunking, and L2 bridge creation between secure zones.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, T1599`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Weaken Encryption Attempt (T1600)
+- **Azonosító:** `T1600.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized weakening of system encryption (TLS downgrade) or 
+PowerShell certificate validation bypass, initiated by non-system or 
+suspiciously located processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1600`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

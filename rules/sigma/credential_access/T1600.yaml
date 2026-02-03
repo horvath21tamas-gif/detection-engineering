@@ -49,7 +49,7 @@ detection:
             - '\msiexec.exe'
             - '\TrustedInstaller.exe'
             - '\CcmExec.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     filter_browser_updates:
         Image|contains:

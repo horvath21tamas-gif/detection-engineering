@@ -1,0 +1,61 @@
+title: Ultra-Pro High-Fidelity NTFS Alternative Data Stream (ADS) Abuse (T1564.004)
+id: ac6e2fb2-12c3-484a-acdc-ab347b4950a4
+status: stable
+description: |
+    Detects the creation or execution of malicious NTFS Alternative Data Streams (ADS). 
+    Correlates redirection operators and LOLBins with stream-specific command-line 
+    syntax to minimize false positives from drive letters and MOTW.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1564.004
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_injection:
+        CommandLine|contains:
+            - ' > *.*:*'        
+            - 'type *:*'        
+            - 'expand *:*'
+            - 'makecab *:*'
+            - 'findstr /v *:*'
+
+    selection_execution:
+        CommandLine|contains:
+            - 'start *:*'        
+            - 'wmic process call create'
+            - 'control.exe *:*'
+            - 'rundll32.exe *:*'
+            - 'regsvr32.exe /s *:*'
+
+    selection_powershell_streams:
+        CommandLine|contains:
+            - ' -stream '
+            - 'Set-Content'
+            - 'Add-Content'
+            - 'Get-Item'
+            - ' -alternate '
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\mshta.exe'
+            - '\w3wp.exe'
+
+    filter_motw_and_system:
+        - CommandLine|contains:
+            - ':Zone.Identifier'
+            - ':favicon'
+            - ':\Windows\' 
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|contains:
+            - '\Windows\System32\svchost.exe'
+
+    condition: (selection_injection or selection_execution or selection_powershell_streams) and not filter_motw_and_system and (selection_suspicious_parent or not filter_motw_and_system)
+level: high

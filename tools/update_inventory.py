@@ -10,7 +10,7 @@ def fetch_live_log_sources():
     live_sources = {
         'category': ['process_creation', 'network_connection', 'file_event', 'registry_set', 'dns_query', 'file_change'],
         'product': ['windows', 'linux', 'azure', 'macos', 'm365', 'cloud', 'network'],
-        'service': ['sysmon', 'security', 'powershell', 'system', 'signinlogs', 'audit', 'exchange', 'auditd', 'aws.cloudtrail', 'FortiGate', 'Azure Activity', 'process_creation', 'FortiOS', 'Cisco OS', 'auditlogs', 'ad', 'process_access']
+        'service': ['sysmon', 'security', 'powershell', 'system', 'signinlogs', 'audit', 'exchange', 'auditd', 'aws.cloudtrail', 'FortiGate', 'Azure Activity', 'process_creation', 'FortiOS', 'Cisco OS', 'auditlogs', 'ad', 'process_access', 'Cisco IOS']
     }
     
     # Kiegészítjük azokat, amiket a hibaüzenetben kaptál

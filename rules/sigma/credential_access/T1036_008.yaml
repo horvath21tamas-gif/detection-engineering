@@ -60,7 +60,7 @@ detection:
             - '\explorer.exe'
 
     filter_trusted_apps:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
           ParentImage|endswith: '\services.exe'
         - CommandLine|contains:
             - 'C:\Windows\ccmcache\'     

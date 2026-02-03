@@ -9,6 +9,7 @@ author: hota05
 date: 2026-02-03
 tags:
     - attack.defense_evasion
+    - attack.t1497
     - attack.t1497.001
     - attack.t1497.003
 logsource:

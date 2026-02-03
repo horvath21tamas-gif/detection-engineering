@@ -1,0 +1,46 @@
+title: Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002)
+id: 852bd5e8-3b36-4baa-b4f3-d0cf2c50ff1a
+status: stable
+description: |
+    Detects unauthorized sharing or public exposure of cloud compute snapshots. 
+    Focuses on permission changes and cross-account access rather than simple creation.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.exfiltration
+    - attack.t1578.002
+    - attack.t1578
+logsource:
+    product: cloud
+    service: Azure Activity
+detection:
+    selection_exfil_ops:
+        operation_name|contains:
+            - 'ModifySnapshotAttribute'  
+            - 'SharedSnapshot'            
+            - 'SetSnapshotPermissions'  
+            - 'CopySnapshot'              
+
+    selection_risky_params:
+        request_parameters|contains:
+            - 'all'                       
+            - 'Add.UserId'               
+            - 'grantee'                 
+            - 'public'               
+
+    selection_context:
+        mfa_authenticated: 'false'
+        user_agent|contains:
+            - 'kali'
+            - 'python-requests'
+            - 'boto3'
+
+    filter_backup_apps:
+        user_name|startswith: 
+            - 'svc-veeam'
+            - 'svc-commvault'
+            - 'backup-agent'
+        source_ip: '10.0.0.0/8'
+
+    condition: selection_exfil_ops and (selection_risky_params or selection_context) and not filter_backup_apps
+level: critical

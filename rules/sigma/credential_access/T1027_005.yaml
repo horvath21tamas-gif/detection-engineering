@@ -1,0 +1,51 @@
+title: Ultra-Pro High-Fidelity Indicator Removal and Signature Theft (T1027.005)
+id: 0128ec66-fd73-4e3c-bbe2-c181bfe14c7a
+status: stable
+description: |
+    Detects attempts to remove indicators or manipulate digital signatures on binaries. 
+    Focuses on signature theft (SigThief), PE header stripping, and string replacement 
+    in suspicious locations.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1027.005
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_signature_tampering:
+        CommandLine|contains:
+            - 'sigthief'        
+            - 'copy-signature'
+            - 'osslsigncode'    
+            - 'deltasig'        
+
+    selection_binary_manipulation:
+        CommandLine|contains:
+            - 'petools '       
+            - 'sethc.exe'      
+            - 'strings -d'   
+            - 'strip -s'       
+
+    selection_paths:
+        CommandLine|contains:
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+            - '\Windows\Temp\'
+            - '\PerfLogs\'
+
+    filter_legit_tools:
+        Image|contains:
+            - '\Microsoft SDKs\'
+            - '\Windows Kits\'
+            - '\Visual Studio\'
+        CommandLine|contains:
+            - 'signtool.exe sign' 
+    filter_build_users:
+        User|contains:
+            - 'svc-build'
+            - 'cicd'
+
+    condition: (selection_signature_tampering or selection_binary_manipulation) and selection_paths and not filter_legit_tools
+level: critical

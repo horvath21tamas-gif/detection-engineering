@@ -1,0 +1,63 @@
+title: Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007)
+id: b0aa04bf-5031-430e-b916-ea8dfb789cb5
+status: stable
+description: |
+    Detects execution of binaries masquerading as documents via double extensions. 
+    Strictly filters developer artifacts (.min.js, .map) and verified installers, 
+    focusing on high-risk user directories and suspicious parent lineages.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1036.007
+    - attack.t1036
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_dangerous_extensions:
+        Image|contains:
+            - '.pdf.exe'
+            - '.docx.exe'
+            - '.xlsx.exe'
+            - '.txt.exe'
+            - '.jpg.exe'
+            - '.png.exe'
+            - '.zip.exe'
+            - '.pdf.vbs'
+            - '.txt.vbs'
+            - '.pdf.js'
+            - '.pdf.ps1'
+            - '.pdf.scr'
+
+    selection_untrusted_path:
+        Image|contains:
+            - '\Downloads\'
+            - '\Desktop\'
+            - '\AppData\Local\Temp\'
+            - '\Users\Public\'
+            - '\Content.Outlook\' 
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\outlook.exe'
+            - '\winrar.exe'
+            - '\7zFM.exe'
+            - '\explorer.exe'
+
+    filter_legit_patterns:
+        - Image|contains: 
+            - '.min.js'    
+            - '.js.map'     
+            - '.config.xml'  
+        - Image|startswith: 
+            - 'C:\Windows\System32\'
+            - 'C:\Windows\SysWOW64\'
+            - 'C:\Program Files\'
+            - 'C:\Program Files (x86)\'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_dangerous_extensions and (selection_untrusted_path or selection_suspicious_parent) and not filter_legit_patterns
+level: critical

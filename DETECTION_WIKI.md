@@ -47,6 +47,7 @@
 - [Suspicious SYSTEM Process Spawned from User Context](#suspicious-system-process-spawned-from-user-context)
 - [Ultra-Pro High-Fidelity Indicator Removal on Host (T1070)](#ultra-pro-high-fidelity-indicator-removal-on-host-(t1070))
 - [Security Event Log Cleared Using wevtutil.exe](#security-event-log-cleared-using-wevtutilexe)
+- [Ultra-Pro High-Fidelity Mailbox Data Clearing and Rule Sabotage (T1070.003)](#ultra-pro-high-fidelity-mailbox-data-clearing-and-rule-sabotage-(t1070003))
 - [High-Fidelity Software Deployment Tool Abuse Detection](#high-fidelity-software-deployment-tool-abuse-detection)
 - [High-Fidelity Anomalous Logon via Valid Account](#high-fidelity-anomalous-logon-via-valid-account)
 - [High-Fidelity Default Account Abuse Detection](#high-fidelity-default-account-abuse-detection)
@@ -1087,6 +1088,23 @@ clearing of security-sensitive providers.
 - **Leírás:** Detects attempts to clear the Windows Security event log using wevtutil.exe, a common attacker technique used to cover tracks after credential access, lateral movement, or persistence.
 - **Hamis pozitívok:** Rare emergency log maintenance by administrators, Approved red team or penetration testing activity
 - **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Mailbox Data Clearing and Rule Sabotage (T1070.003)
+- **Azonosító:** `T1070_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic mailbox data removal and the creation of malicious inbox rules. 
+Focuses on bulk deletion cmdlets and automated rule sets designed to suppress 
+security notifications or hide attacker communication.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

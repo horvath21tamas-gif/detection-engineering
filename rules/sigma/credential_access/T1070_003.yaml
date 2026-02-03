@@ -54,7 +54,7 @@ detection:
             - '\php-cgi.exe'
 
     filter_trusted_operations:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - CommandLine|contains:
             - 'Discovery Management' 
             - 'Compliance'

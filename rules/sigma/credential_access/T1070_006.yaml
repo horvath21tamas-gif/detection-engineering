@@ -48,7 +48,7 @@ detection:
             - '\powershell.exe'
 
     filter_trusted_maintenance:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
           ParentImage|endswith:
             - '\msiexec.exe'
             - '\TiWorker.exe' 

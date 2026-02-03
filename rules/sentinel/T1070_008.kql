@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (((FolderPath in ("*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("* -Confirm:$false*", "* -Force*"))) or (ProcessCommandLine in ("*.pst*", "*.ost*", "*.edb*", "*.nst*"))) and ((ParentProcessName in ("*\w3wp.exe", "*\winword.exe", "*\excel.exe", "*\mshta.exe", "*\php-cgi.exe", "*\nginx.exe")) or (not (FolderPath endswith "\SearchIndexer.exe" or (ParentProcessName in ("*\outlook.exe", "*\backup.exe", "*\veeam")) or ProcessCommandLine contains "\AppData\Local\Microsoft\Outlook" or User =~ "NT AUTHORITY\SYSTEM")))
+| where (((FolderPath in ("*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("* -Confirm:$false*", "* -Force*"))) or (ProcessCommandLine in ("*.pst*", "*.ost*", "*.edb*", "*.nst*"))) and ((ParentProcessName in ("*\w3wp.exe", "*\winword.exe", "*\excel.exe", "*\mshta.exe", "*\php-cgi.exe", "*\nginx.exe")) or (not (FolderPath endswith "\SearchIndexer.exe" or (ParentProcessName in ("*\outlook.exe", "*\backup.exe", "*\veeam")) or ProcessCommandLine contains "\AppData\Local\Microsoft\Outlook" or username =~ "NT AUTHORITY\SYSTEM")))

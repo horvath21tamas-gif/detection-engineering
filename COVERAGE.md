@@ -22,7 +22,7 @@
 | T1021 | MEDIUM | Rapid Logons to Multiple Distant Hosts by Same User |
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |
 | T1027 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Encoded PowerShell Command Execution |
-| T1036 | HIGH | Legitimate Windows Binary Copied to User-Writable Location |
+| T1036 | HIGH | Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036), Legitimate Windows Binary Copied to User-Writable Location |
 | T1036.005 | HIGH | Legitimate Windows Binary Copied to User-Writable Location |
 | T1037 | CRITICAL | High-Fidelity Logon Script Persistence (T1037) |
 | T1037.001 | CRITICAL | High-Fidelity UserInitMprLogonScript Persistence |

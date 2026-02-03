@@ -64,7 +64,7 @@ detection:
             - ' .exe'  
 
     filter_trusted_maintenance:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
           ParentImage|endswith: '\services.exe'
         - ParentImage|endswith: '\msiexec.exe'
         - Image|contains: '\Windows\SoftwareDistribution\'

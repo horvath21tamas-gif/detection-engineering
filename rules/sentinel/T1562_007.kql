@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((eventName in ("AuthorizeSecurityGroupIngress", "CreateSecurityGroup", "DeleteSecurityGroup", "PutManagedRuleSet", "UpdateFirewall")) and ((['requestParameters.ipPermissions.items.ipRanges.items.cidrIp'] in ("0.0.0.0/0", "::/0")) and ['requestParameters.ipPermissions.items.ipProtocol'] =~ "-1")) and ((['userIdentity.type'] =~ "Root" or (userAgent in ("*kali*", "*python-requests*", "*curl*", "*postman*"))) and (not ((['userIdentity.arn'] in ("*role/Terraform-Execution-Role*", "*role/AWS-CloudFormation-Stack*", "*role/Azure-DevOps-Service-Principal*")) and sourceIPAddress =~ "10.0.0.0/8")))

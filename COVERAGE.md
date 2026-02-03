@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 08:11:08`
+**Utolsó frissítés:** `2026-02-03 08:23:22`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 324 | 100% |
-| Splunk (SPL) | 294 | 90.7% |
-| Microsoft Sentinel (KQL) | 295 | 91.0% |
-| QRadar (AQL) | 160 | 49.4% |
-| Elastic (KQL/EQL) | 295 | 91.0% |
-| RSA NetWitness | 293 | 90.4% |
+| Sigma (Forrás) | 329 | 100% |
+| Splunk (SPL) | 299 | 90.9% |
+| Microsoft Sentinel (KQL) | 300 | 91.2% |
+| QRadar (AQL) | 162 | 49.2% |
+| Elastic (KQL/EQL) | 300 | 91.2% |
+| RSA NetWitness | 298 | 90.6% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -214,13 +214,18 @@
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |
+| T1562.007 | CRITICAL | Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007) |
 | T1564 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
 | T1564.001 | HIGH | Ultra-Pro High-Fidelity Hidden File Attribute Manipulation (T1564.001), Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
 | T1564.002 | CRITICAL | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564), Ultra-Pro High-Fidelity Hidden User Account Creation (T1564.002) |
 | T1564.003 | HIGH | Ultra-Pro High-Fidelity Hidden Window Execution (T1564.003) |
 | T1564.004 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564), Ultra-Pro High-Fidelity NTFS Alternative Data Stream (ADS) Abuse (T1564.004) |
 | T1564.005 | HIGH | Ultra-Pro High-Fidelity Hidden File System Manipulation (T1564.005) |
+| T1564.006 | HIGH | Ultra-Pro High-Fidelity Virtual Instance Execution Abuse (T1564.006) |
+| T1564.007 | HIGH | Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007) |
 | T1564.008 | CRITICAL | Ultra-Pro High-Fidelity Email Hiding Rules Detection (T1564.008) |
+| T1564.009 | HIGH | Ultra-Pro High-Fidelity Resource Extraction and Abuse (T1564.009) |
+| T1564.010 | HIGH | Ultra-Pro High-Fidelity Process Argument Spoofing Detection (T1564.010) |
 | T1564.011 | HIGH | Ultra-Pro High-Fidelity Virtual Instance Abuse (T1564.011) |
 | T1566 | CRITICAL | High-Fidelity Phishing Payload Execution from Communication Apps |
 | T1566.001 | CRITICAL | High-Fidelity Spearphishing Attachment Execution |

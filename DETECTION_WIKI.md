@@ -196,13 +196,18 @@
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
 - [Suspicious Firewall Modification via Netsh.exe](#suspicious-firewall-modification-via-netshexe)
+- [Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007)](#ultra-pro-high-fidelity-cloud-firewall-impairment-(t1562007))
 - [Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564)](#ultra-pro-high-fidelity-hide-artifacts-detection-(t1564))
 - [Ultra-Pro High-Fidelity Hidden File Attribute Manipulation (T1564.001)](#ultra-pro-high-fidelity-hidden-file-attribute-manipulation-(t1564001))
 - [Ultra-Pro High-Fidelity Hidden User Account Creation (T1564.002)](#ultra-pro-high-fidelity-hidden-user-account-creation-(t1564002))
 - [Ultra-Pro High-Fidelity Hidden Window Execution (T1564.003)](#ultra-pro-high-fidelity-hidden-window-execution-(t1564003))
 - [Ultra-Pro High-Fidelity NTFS Alternative Data Stream (ADS) Abuse (T1564.004)](#ultra-pro-high-fidelity-ntfs-alternative-data-stream-(ads)-abuse-(t1564004))
 - [Ultra-Pro High-Fidelity Hidden File System Manipulation (T1564.005)](#ultra-pro-high-fidelity-hidden-file-system-manipulation-(t1564005))
+- [Ultra-Pro High-Fidelity Virtual Instance Execution Abuse (T1564.006)](#ultra-pro-high-fidelity-virtual-instance-execution-abuse-(t1564006))
+- [Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007)](#ultra-pro-high-fidelity-vba-macro-security-evasion-(t1564007))
 - [Ultra-Pro High-Fidelity Email Hiding Rules Detection (T1564.008)](#ultra-pro-high-fidelity-email-hiding-rules-detection-(t1564008))
+- [Ultra-Pro High-Fidelity Resource Extraction and Abuse (T1564.009)](#ultra-pro-high-fidelity-resource-extraction-and-abuse-(t1564009))
+- [Ultra-Pro High-Fidelity Process Argument Spoofing Detection (T1564.010)](#ultra-pro-high-fidelity-process-argument-spoofing-detection-(t1564010))
 - [Ultra-Pro High-Fidelity Virtual Instance Abuse (T1564.011)](#ultra-pro-high-fidelity-virtual-instance-abuse-(t1564011))
 - [High-Fidelity Phishing Payload Execution from Communication Apps](#high-fidelity-phishing-payload-execution-from-communication-apps)
 - [High-Fidelity Spearphishing Attachment Execution](#high-fidelity-spearphishing-attachment-execution)
@@ -3523,6 +3528,23 @@ parameters associated with VM escape or sandbox evasion.
 
 ---
 
+## Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007)
+- **Azonosító:** `T1562_007.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized or dangerous modifications to cloud security groups and firewalls.
+Focuses on "Any-Any" rules (0.0.0.0/0), Root user activity, and modifications 
+originating from non-standard administrative tools or IPs.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `007`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564)
 - **Azonosító:** `T1564.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -3625,6 +3647,40 @@ often used to bypass MOTW or hide malicious payloads.
 
 ---
 
+## Ultra-Pro High-Fidelity Virtual Instance Execution Abuse (T1564.006)
+- **Azonosító:** `T1564_006.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious execution of virtual instances (Docker, VirtualBox, VMware) 
+by identifying anti-forensic flags (--rm), privileged escalation attempts, 
+and untrusted parent processes like web servers or office apps.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `006`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007)
+- **Azonosító:** `T1564_007.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects attempts to bypass Office macro security or hide VBA projects 
+by identifying suspicious registry modifications and process-level 
+manipulation of the Office Object Model.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `007`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Email Hiding Rules Detection (T1564.008)
 - **Azonosító:** `T1564_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -3634,6 +3690,40 @@ modifications that automate the deletion or hiding of security alerts,
 initiated by untrusted parent processes or non-admin shells.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Resource Extraction and Abuse (T1564.009)
+- **Azonosító:** `T1564_009.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the abuse of binary resource sections and help file interpreters 
+(hh.exe, winhlp32.exe) to extract or execute hidden payloads. 
+Focuses on protocol smuggling (its:, ms-its:) and suspicious de-compilation.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `009`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Process Argument Spoofing Detection (T1564.010)
+- **Azonosító:** `T1564_010.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects potential process argument spoofing by identifying execution 
+mismatches where sensitive interpreters (PowerShell, CMD) are spawned 
+with empty or generic arguments by untrusted parents.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `010`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

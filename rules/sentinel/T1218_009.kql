@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\regsvcs.exe", "*\regasm.exe")) or (OriginalFileName in ("regsvcs.exe", "RegAsm.exe"))) and (ProcessCommandLine in ("* /U *", "* /uninstall *", "* /regfile*")) and ((ProcessCommandLine in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Public\*", "*\Downloads\*", "*\*")) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\powershell.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe"))) and (not (User =~ "NT AUTHORITY\SYSTEM" and (ParentProcessName in ("C:\Windows\Microsoft.NET\Framework*", "C:\Windows\Installer\*")) and ProcessCommandLine contains "C:\Windows\Microsoft.NET\Framework"))

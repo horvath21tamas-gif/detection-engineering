@@ -1,0 +1,58 @@
+title: Ultra-Pro High-Fidelity HH.exe Proxy Execution (T1218.001)
+id: 59ed38d7-5895-4a50-98ce-f7bee1e21c3b
+status: stable
+description: |
+    Detects the abuse of hh.exe to execute malicious code via CHM files or remote ITS protocols. 
+    Focuses on non-standard parent processes and command-line flags used for de-compilation 
+    or fetching remote payloads, while filtering out legitimate help file usage.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1218.001
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_img:
+        Image|endswith: '\hh.exe'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+
+    selection_cmd_args:
+        CommandLine|contains:
+            - 'http'         
+            - 'its:'         
+            - 'mk:@MSITStore'
+            - '-decompile' 
+            - '.txt'         
+            - '.jpg'
+
+    selection_paths:
+        CommandLine|contains:
+            - '\AppData\'
+            - '\Users\Public\'
+            - '\Downloads\'
+            - '\Temp\'
+
+    filter_trusted_apps:
+        ParentImage|startswith:
+            - 'C:\Program Files\'
+            - 'C:\Program Files (x86)\'
+        - CommandLine|contains:
+            - 'http'
+            - '-decompile'
+
+    condition: selection_img and (selection_suspicious_parent or (selection_cmd_args and selection_paths)) and not filter_trusted_apps
+level: critical

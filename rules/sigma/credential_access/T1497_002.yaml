@@ -1,0 +1,61 @@
+title: Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002)
+id: 53c2e2a1-01ba-4da3-979e-40359cb07448
+status: stable
+description: |
+    Detects sophisticated user interaction evasion by identifying un-signed or 
+    suspiciously located processes that query human-centric APIs (mouse, keyboard, recent files) 
+    without having a legitimate UI context.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1497.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_suspicious_process:
+        Image|contains:
+            - '\AppData\Local\Temp\'
+            - '\Users\Public\'
+            - '\Downloads\'
+            - '\Desktop\'
+            - '\PerfLogs\'
+        Image|endswith:
+            - '.scr'
+            - '.pif'
+            - '.exe' 
+
+    selection_api_discovery:
+        CommandLine|contains:
+            - 'GetCursorPos'          
+            - 'GetLastInputInfo'       
+            - 'GetForegroundWindow'   
+            - 'GetKeyState'           
+            - 'shell:recent'         
+
+    selection_fake_ui:
+        CommandLine|contains:
+            - 'MessageBox'
+            - 'powershell -Command "[Reflection.Assembly]::LoadWithPartialName(''System.Windows.Forms''); [System.Windows.Forms.MessageBox]::Show'
+            - 'wscript.shell'
+        CommandLine|contains:
+            - 'Error'
+            - 'Required'
+            - 'Missing'
+            - 'Update'
+
+    filter_legit_system:
+        ParentImage|endswith:
+            - '\services.exe'
+            - '\explorer.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_known_browsers:
+        Image|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+
+    condition: selection_suspicious_process and (selection_api_discovery or selection_fake_ui) and not (filter_legit_system or filter_known_browsers)
+level: high

@@ -50,7 +50,7 @@ detection:
             - 'C:\Windows\System32\gpscript.exe'
             - 'C:\Windows\System32\svchost.exe'
             - 'C:\Windows\servicing\TrustedInstaller.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_tools and selection_store and (selection_flags or selection_paths) and not filter_trusted_automation
 level: critical

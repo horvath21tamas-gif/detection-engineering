@@ -15,19 +15,19 @@ logsource:
     category: process_creation
 detection:
     selection_tools:
-        - Image|endswith: '\certutil.exe'
+        Image|endswith: '\certutil.exe'
           CommandLine|contains:
-              - '-decode'
-              - '-decodehex'
-        - Image|endswith: 
-              - '\expand.exe'
-              - '\extrac32.exe'
-          CommandLine|contains:
-              - '.txt' 
-              - '.jpg'
-              - '.png'
-              - '.xml'
-              - '.log'
+            - '-decode'
+            - '-decodehex'
+        Image|endswith: 
+            - '\expand.exe'
+            - '\extrac32.exe'
+        CommandLine|contains:
+            - '.txt' 
+            - '.jpg'
+            - '.png'
+            - '.xml'
+            - '.log'
 
     selection_suspicious_parent:
         ParentImage|endswith:
@@ -41,14 +41,14 @@ detection:
             - '\mshta.exe'
 
     filter_trusted_installers:
-        - ParentImage|contains:
+        ParentImage|contains:
             - '\Windows\servicing\TrustedInstaller.exe'
             - '\CcmExec.exe'       
             - '\Package Cache\'    
-        - Image|contains:
+        Image|contains:
             - '\Program Files\'
             - '\Windows\System32\'
-        - CommandLine|contains:
+        CommandLine|contains:
             - 'Microsoft\Windows\SoftwareDistribution' 
 
     selection_suspicious_output:

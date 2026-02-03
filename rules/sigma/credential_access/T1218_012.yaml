@@ -1,0 +1,47 @@
+title: Ultra-Pro High-Fidelity Verclsid Proxy Execution (T1218.012)
+id: 9c537c5e-b377-48dc-b8b5-2ff5e25eda94
+status: stable
+description: |
+    Detects the abuse of verclsid.exe to proxy the execution of malicious COM objects (DLLs). 
+    Filters out legitimate system-initiated verifications by focusing on suspicious 
+    parent-child relationships and anomalous command-line triggers.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1218.012
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\verclsid.exe'
+        - OriginalFileName: 'verclsid.exe'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\powerpnt.exe'
+            - '\outlook.exe'
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+            - '\chrome.exe'
+
+    selection_args:
+        CommandLine|contains:
+            - ' /S '
+            - ' /C '
+            - '{'
+    filter_trusted_system:
+        ParentImage|endswith:
+            - '\explorer.exe'
+            - '\svchost.exe'
+            - '\SearchIndexer.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_img and (selection_suspicious_parent or selection_args) and not filter_trusted_system
+level: critical

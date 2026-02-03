@@ -49,7 +49,7 @@ detection:
             - 'C:\Windows\servicing\TrustedInstaller.exe'
             - 'C:\Windows\System32\svchost.exe'
             - 'C:\Windows\System32\CCM\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_tools or (selection_target_paths and selection_origin and selection_parents)) and not filter_legit_os
 level: critical

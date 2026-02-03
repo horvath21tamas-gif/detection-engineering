@@ -9,7 +9,7 @@ author: hota05
 date: 2026-02-03
 tags:
     - attack.defense_evasion
-    - attack.t1564.011
+    - attack.t1562.011
 logsource:
     product: windows
     category: process_creation

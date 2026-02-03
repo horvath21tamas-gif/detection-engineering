@@ -1,0 +1,49 @@
+title: Ultra-Pro High-Fidelity MMC Proxy Execution (T1218.014)
+id: 11327903-2f1a-484d-9dcc-67e327b16482
+status: stable
+description: |
+    Detects the abuse of mmc.exe to execute malicious code via Component Object Model (COM) 
+    hijacking or untrusted console files (.msc). Filters out legitimate administrative actions.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1218.014
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\mmc.exe'
+        - OriginalFileName: 'mmc.exe'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\powerpnt.exe'
+            - '\outlook.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+
+    selection_untrusted_args:
+        CommandLine|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Public\'
+            - '\Downloads\'
+            - '\\'             
+            - 'http'            
+
+    filter_trusted_admin:
+        ParentImage|endswith: '\explorer.exe'
+        CommandLine|contains: 'C:\Windows\System32\'
+        User|contains: 'Admin'
+
+    condition: selection_img and (selection_suspicious_parent or selection_untrusted_args) and not filter_trusted_admin
+level: critical

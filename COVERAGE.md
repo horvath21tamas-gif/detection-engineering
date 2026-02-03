@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 11:15:58`
+**Utolsó frissítés:** `2026-02-03 11:52:16`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 369 | 100% |
-| Splunk (SPL) | 369 | 100.0% |
-| Microsoft Sentinel (KQL) | 370 | 100.3% |
-| QRadar (AQL) | 185 | 50.1% |
-| Elastic (KQL/EQL) | 370 | 100.3% |
-| RSA NetWitness | 368 | 99.7% |
+| Sigma (Forrás) | 370 | 100% |
+| Splunk (SPL) | 370 | 100.0% |
+| Microsoft Sentinel (KQL) | 371 | 100.3% |
+| QRadar (AQL) | 185 | 50.0% |
+| Elastic (KQL/EQL) | 371 | 100.3% |
+| RSA NetWitness | 369 | 99.7% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -22,6 +22,7 @@
 | T1021 | MEDIUM | Rapid Logons to Multiple Distant Hosts by Same User |
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |
 | T1027 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Encoded PowerShell Command Execution |
+| T1027.001 | HIGH | Ultra-Pro High-Fidelity Binary Padding Activity (T1027.001) |
 | T1036 | CRITICAL | Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036), Legitimate Windows Binary Copied to User-Writable Location, Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007) |
 | T1036.001 | CRITICAL | Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001) |
 | T1036.002 | CRITICAL | Ultra-Pro High-Fidelity RTLO Character Execution (T1036.002) |
@@ -363,7 +364,11 @@
 | T1598.002 | HIGH | Advanced BEC Mail & Financial Data Exfiltration - T1598.002 |
 | T1598.003 | HIGH | High-Fidelity MFA/OTP Spoofing & Harvesting - T1598.003 |
 | T1598.004 | HIGH | High-Fidelity Spearphishing Attachment Interaction - T1598.004 |
+| T1599 | CRITICAL | Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001), Ultra-Pro High-Fidelity Network Boundary Bridging (T1599) |
+| T1599.001 | CRITICAL | Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001) |
 | T1601 | CRITICAL | Ultra-Pro High-Fidelity Network OS Image Modification (T1601) |
+| T1601.001 | CRITICAL | Ultra-Pro High-Fidelity Network Binary Patching (T1601.001) |
+| T1601.002 | CRITICAL | Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002) |
 | T1608 | HIGH | Anomalous Infrastructure Staging and Resource Deployment |
 | T1608.001 | HIGH | Anomalous Malware Staging to External Infrastructure |
 | T1608.002 | HIGH | Anomalous Offensive Tool Staging and External Upload |

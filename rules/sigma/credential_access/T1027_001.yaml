@@ -42,7 +42,7 @@ detection:
             - 'C:\Windows\System32\msiexec.exe'
             - 'C:\Windows\System32\CompatTelRunner.exe'
             - 'C:\Program Files\Common Files\Microsoft Shared\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_tools and selection_extensions and selection_paths and not filter_trusted_processes
 level: high

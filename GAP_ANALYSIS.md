@@ -1,13 +1,13 @@
 # 🎯 Detection Strategy & Gap Analysis
-*Frissítve: 2026-02-03 11:15:55*
+*Frissítve: 2026-02-03 11:52:13*
 
 ## 📊 Állapotösszegző
 | Mutató | Érték |
 | :--- | :--- |
-| Összes szabály | 369 |
-| Aktív (van logforrás) | 346 |
+| Összes szabály | 370 |
+| Aktív (van logforrás) | 347 |
 | Inaktív (hiányzó log) | 23 |
-| MITRE Lefedettség | 365 technika |
+| MITRE Lefedettség | 371 technika |
 
 ## 🛑 Kritikus Adatforrás Hiányok
 Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logokat:
@@ -17,6 +17,7 @@ Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logok
 | Ultra-Pro Unauthorized Windows Service Installation (T1543.003) (`T1543_003.yaml`) | service: `process_creation` |
 | Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005) (`T1578_005.yaml`) | product: `cloud`, service: `Azure Activity` |
 | Ultra-Pro High-Fidelity Network OS Image Modification (T1601) (`T1601.yaml`) | product: `network`, service: `FortiOS` |
+| Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001) (`T1599_001.yaml`) | product: `network`, service: `Cisco IOS` |
 | Ultra-Pro PAM Integrity Hijacking & Backdoor (T1556.003) (`T1556_003.yaml`) | service: `auditd` |
 | Ultra-Pro Unauthorized Cloud Account Creation (T1136.003) (`T1136_003.yaml`) | service: `auditlogs` |
 | High-Fidelity Device Registration Persistence (T1098.005) (`T1098_005.yaml`) | service: `process_creation` |

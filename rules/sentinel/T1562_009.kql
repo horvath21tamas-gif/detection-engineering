@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath endswith "\bcdedit.exe" and (ProcessCommandLine in ("*{current}*", "*{default}*"))) or (ProcessCommandLine in ("*delete*", "*0x0*")) or (FolderPath endswith "\shutdown.exe" and (ProcessCommandLine contains " /r" and ProcessCommandLine contains " /f" and ProcessCommandLine contains " /t 0"))) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powershell.exe", "*\cmd.exe", "*\w3wp.exe")) or (not ((username =~ "NT AUTHORITY\SYSTEM" and ParentProcessName endswith "\services.exe") or (ProcessCommandLine in ("*reagentc.exe*", "*SystemReset.exe*")) or ParentProcessName endswith "\msiexec.exe")))

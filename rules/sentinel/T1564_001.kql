@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where FolderPath endswith "\attrib.exe" and (ProcessCommandLine contains " +h" and ProcessCommandLine contains " +s") and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\mshta.exe", "*\powershell.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe")) or (ProcessCommandLine in ("*\Users\Public\*", "*\Windows\Temp\*", "*\AppData\Roaming\*", "*\AppData\Local\Temp\*"))) and (not (User =~ "NT AUTHORITY\SYSTEM" or (ParentProcessName in ("*\Windows\servicing\TrustedInstaller.exe*", "*\CcmExec.exe*")) or ProcessCommandLine contains "desktop.ini"))

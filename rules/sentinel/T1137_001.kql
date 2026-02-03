@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetFilename contains "\AppData\Roaming\Microsoft\Templates\" and (TargetFilename in ("*\Normal.dotm", "*\NormalEmail.dotm"))) and (FolderPath in ("*\winword.exe", "*\outlook.exe", "*\msiexec.exe", "*\setup.exe", "*\OfficeClickToRun.exe")) and (not ((FolderPath in ("*\Windows\ccm\*", "*\Microsoft\IntuneManagementExtension\*", "*\Tanium\*")) and (FolderPath in ("*\OneDrive.exe", "*\MigrateUser.exe"))))

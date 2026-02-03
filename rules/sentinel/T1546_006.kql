@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*/optool", "*/insert_dylib", "*/yololib", "*/patcho")) or (ProcessCommandLine in ("*LC_LOAD_DYLIB*", "*install_name_tool -add_rpath*"))) or (ProcessCommandLine in ("*/tmp/*", "*/Users/Shared/*", "*/Library/Caches/*", "*/Downloads/*", "*.hidden/*"))) and (not (((ParentProcessName in ("/Applications/Xcode.app/*", "/Library/Developer/*")) and (FolderPath in ("*/usr/bin/codesign", "*/usr/bin/xcodebuild", "*/usr/bin/ld")) and username =~ "root") or (FolderPath in ("*/installd", "*/softwareupdated"))))

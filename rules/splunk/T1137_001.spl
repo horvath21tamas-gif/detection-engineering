@@ -1,0 +1,1 @@
+TargetFilename="*\\AppData\\Roaming\\Microsoft\\Templates\\*" TargetFilename IN ("*\\Normal.dotm", "*\\NormalEmail.dotm") Image IN ("*\\winword.exe", "*\\outlook.exe", "*\\msiexec.exe", "*\\setup.exe", "*\\OfficeClickToRun.exe") NOT (Image IN ("*\\Windows\\ccm\\*", "*\\Microsoft\\IntuneManagementExtension\\*", "*\\Tanium\\*") Image IN ("*\\OneDrive.exe", "*\\MigrateUser.exe"))

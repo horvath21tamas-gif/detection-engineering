@@ -1,0 +1,2 @@
+(((TargetFilename = '*\\AppData\\Roaming\\Microsoft\\Templates\\*'))&& (((TargetFilename = '*\\Normal.dotm*' OR TargetFilename = '*\\NormalEmail.dotm*')))) AND (((process = '*\\winword.exe*' OR process = '*\\outlook.exe*' OR process = '*\\msiexec.exe*' OR process = '*\\setup.exe*' OR process = '*\\OfficeClickToRun.exe*'))) AND (NOT (((((process = '*\\Windows\\ccm\\*' OR process = '*\\Microsoft\\IntuneManagementExtension\\*' OR process = '*\\Tanium\\*'))) AND (((process = '*\\OneDrive.exe*' OR process = '*\\MigrateUser.exe*')))))
+)

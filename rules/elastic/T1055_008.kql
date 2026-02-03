@@ -1,0 +1,1 @@
+(type:SYSCALL AND syscall:ptrace AND (a0:(0x4 OR 0x5 OR 0x10))) AND ((exe:(*\/bin\/python* OR *\/bin\/php* OR *\/bin\/perl* OR *\/bin\/node* OR *\/usr\/sbin\/nginx* OR *\/usr\/sbin\/apache* OR *\/usr\/bin\/socat* OR *\/usr\/bin\/nc*)) OR (NOT ((exe:(\/usr\/bin\/gdb OR \/usr\/bin\/strace OR \/usr\/bin\/ltrace OR \/usr\/bin\/auditd OR \/opt\/datadog\/agent)) AND auid:4294967295)))

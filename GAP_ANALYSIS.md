@@ -23,6 +23,7 @@ Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logok
 | High-Fidelity MFA Method Addition (`T1098_006.yaml`) | service: `process_creation` |
 | Ultra-Pro RC Script and Init.d Persistence (T1037.004) (`T1037_004.yaml`) | service: `auditd` |
 | High-Fidelity Entra ID App Certificate Addition (`T1098_003.yaml`) | service: `ad` |
+| Ultra-Pro Stealthy Ptrace Injection (T1055.008) (`T1055_008.yaml`) | service: `auditd` |
 | Privileged Service Executable Overwritten from User-Writable Location (`T1574_010.yaml`) | category: `file_change` |
 
 ## 🛡️ Stratégiai Teendők (Hiányzó Technikák)

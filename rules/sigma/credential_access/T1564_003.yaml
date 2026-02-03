@@ -55,7 +55,7 @@ detection:
             - 'frombase64string'
 
     filter_trusted_automation:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|contains:
             - '\Windows\System32\ServerManager.exe'
             - '\Configuration Manager\'

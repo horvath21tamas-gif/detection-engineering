@@ -1,11 +1,11 @@
 # 🎯 Detection Strategy & Gap Analysis
-*Frissítve: 2026-02-03 14:35:12*
+*Frissítve: 2026-02-03 14:54:34*
 
 ## 📊 Állapotösszegző
 | Mutató | Érték |
 | :--- | :--- |
-| Összes szabály | 419 |
-| Aktív (van logforrás) | 418 |
+| Összes szabály | 421 |
+| Aktív (van logforrás) | 420 |
 | Inaktív (hiányzó log) | 1 |
 | MITRE Lefedettség | 413 technika |
 

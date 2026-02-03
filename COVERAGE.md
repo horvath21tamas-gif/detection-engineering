@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 14:35:15`
+**Utolsó frissítés:** `2026-02-03 14:54:37`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 419 | 100% |
-| Splunk (SPL) | 418 | 99.8% |
-| Microsoft Sentinel (KQL) | 420 | 100.2% |
-| QRadar (AQL) | 202 | 48.2% |
-| Elastic (KQL/EQL) | 420 | 100.2% |
-| RSA NetWitness | 417 | 99.5% |
+| Sigma (Forrás) | 421 | 100% |
+| Splunk (SPL) | 420 | 99.8% |
+| Microsoft Sentinel (KQL) | 422 | 100.2% |
+| QRadar (AQL) | 203 | 48.2% |
+| Elastic (KQL/EQL) | 422 | 100.2% |
+| RSA NetWitness | 419 | 99.5% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -185,8 +185,10 @@
 | T1484.002 | CRITICAL | Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002) |
 | T1486 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1490 | CRITICAL | Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity), Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
-| T1497.001 | HIGH | Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497) |
-| T1497.003 | HIGH | Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497) |
+| T1497 | HIGH | Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497) |
+| T1497.001 | HIGH | Ultra-Pro High-Fidelity VM Artifact Discovery (T1497.001), Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497) |
+| T1497.002 | HIGH | Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002) |
+| T1497.003 | HIGH | Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497), Ultra-Pro High-Fidelity Time-based Evasion (T1497.003) |
 | T1505 | CRITICAL | Ultra-Pro Web Shell Execution Patterns (T1505.003) |
 | T1505.001 | CRITICAL | Ultra-Pro SQL Server Command Shell Execution (T1505.001) |
 | T1505.002 | CRITICAL | Ultra-Pro IIS Native Module Injection (T1505.002) |
@@ -410,6 +412,8 @@
 | T1599 | CRITICAL | Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001), Ultra-Pro High-Fidelity Network Boundary Bridging (T1599) |
 | T1599.001 | CRITICAL | Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001) |
 | T1600 | HIGH | Ultra-Pro High-Fidelity Weaken Encryption Attempt (T1600) |
+| T1600.001 | CRITICAL | Ultra-Pro High-Fidelity System Image Patching (T1600.001) |
+| T1600.002 | HIGH | Ultra-Pro High-Fidelity Disable Entity Verification (T1600.002) |
 | T1601 | CRITICAL | Ultra-Pro High-Fidelity Network OS Image Modification (T1601) |
 | T1601.001 | CRITICAL | Ultra-Pro High-Fidelity Network Binary Patching (T1601.001) |
 | T1601.002 | CRITICAL | Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002) |

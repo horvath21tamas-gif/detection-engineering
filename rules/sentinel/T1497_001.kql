@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where ((FolderPath in ("*\AppData\Local\Temp\*", "*\Users\Public\*", "*\Downloads\*", "*\PerfLogs\*")) and (FolderPath in ("*.exe", "*.scr", "*.pif"))) and (ProcessCommandLine in ("*HKLM\SOFTWARE\VMware, Inc.\VMware Tools*", "*vmtoolsd.exe*", "*drivers\vmmouse.sys*", "*VBoxGuest*", "*VBoxMouse*", "*HARDWARE\ACPI\DSDT\VBOX__*", "*vmsrvc*", "*qemu-ga*", "*Integration Services*")) and (not ((ParentProcessName in ("*\services.exe", "*\msiexec.exe", "*\TrustedInstaller.exe")) and User =~ "NT AUTHORITY\SYSTEM"))
+| where ((FolderPath in ("*\AppData\Local\Temp\*", "*\Users\Public\*", "*\Downloads\*", "*\PerfLogs\*")) and (FolderPath in ("*.exe", "*.scr", "*.pif"))) and (ProcessCommandLine in ("*HKLM\SOFTWARE\VMware, Inc.\VMware Tools*", "*vmtoolsd.exe*", "*drivers\vmmouse.sys*", "*VBoxGuest*", "*VBoxMouse*", "*HARDWARE\ACPI\DSDT\VBOX__*", "*vmsrvc*", "*qemu-ga*", "*Integration Services*")) and (not ((ParentProcessName in ("*\services.exe", "*\msiexec.exe", "*\TrustedInstaller.exe")) and username =~ "NT AUTHORITY\SYSTEM"))

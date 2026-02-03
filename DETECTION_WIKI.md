@@ -170,6 +170,9 @@
 - [Ransomware Preparation Activity Detected on Windows Host (High Fidelity)](#ransomware-preparation-activity-detected-on-windows-host-(high-fidelity))
 - [Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity)](#suspicious-deletion-of-volume-shadow-copies-via-vssadmin-(high-fidelity))
 - [Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497)](#ultra-pro-high-fidelity-virtualizationsandbox-evasion-(t1497))
+- [Ultra-Pro High-Fidelity VM Artifact Discovery (T1497.001)](#ultra-pro-high-fidelity-vm-artifact-discovery-(t1497001))
+- [Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002)](#ultra-pro-high-fidelity-user-interaction-evasion-(t1497002))
+- [Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)](#ultra-pro-high-fidelity-time-based-evasion-(t1497003))
 - [Ultra-Pro Web Shell Execution Patterns (T1505.003)](#ultra-pro-web-shell-execution-patterns-(t1505003))
 - [Ultra-Pro SQL Server Command Shell Execution (T1505.001)](#ultra-pro-sql-server-command-shell-execution-(t1505001))
 - [Ultra-Pro IIS Native Module Injection (T1505.002)](#ultra-pro-iis-native-module-injection-(t1505002))
@@ -393,6 +396,8 @@
 - [Ultra-Pro High-Fidelity Network Boundary Bridging (T1599)](#ultra-pro-high-fidelity-network-boundary-bridging-(t1599))
 - [Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001)](#ultra-pro-high-fidelity-logical-isolation-bypass-(t1599001))
 - [Ultra-Pro High-Fidelity Weaken Encryption Attempt (T1600)](#ultra-pro-high-fidelity-weaken-encryption-attempt-(t1600))
+- [Ultra-Pro High-Fidelity System Image Patching (T1600.001)](#ultra-pro-high-fidelity-system-image-patching-(t1600001))
+- [Ultra-Pro High-Fidelity Disable Entity Verification (T1600.002)](#ultra-pro-high-fidelity-disable-entity-verification-(t1600002))
 - [Ultra-Pro High-Fidelity Network OS Image Modification (T1601)](#ultra-pro-high-fidelity-network-os-image-modification-(t1601))
 - [Ultra-Pro High-Fidelity Network Binary Patching (T1601.001)](#ultra-pro-high-fidelity-network-binary-patching-(t1601001))
 - [Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002)](#ultra-pro-high-fidelity-malicious-network-os-upgrade-(t1601002))
@@ -3217,7 +3222,58 @@ Correlates AD object changes with known administrative context.
 virtualization checks (BIOS, MAC, CPU, Disk) initiated by untrusted processes 
 within suspicious directories.
 - **Hamis pozitívok:** Nincs megadva
-- **MITRE ATT&CK:** `001, 003`
+- **MITRE ATT&CK:** `T1497, 001, 003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity VM Artifact Discovery (T1497.001)
+- **Azonosító:** `T1497_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized discovery of virtualization artifacts by non-system, 
+untrusted processes. Filters out legitimate installers and system services 
+to focus on malware evasion techniques.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002)
+- **Azonosító:** `T1497_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects sophisticated user interaction evasion by identifying un-signed or 
+suspiciously located processes that query human-centric APIs (mouse, keyboard, recent files) 
+without having a legitimate UI context.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)
+- **Azonosító:** `T1497_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects sophisticated time-based evasion by monitoring for non-standard delay 
+mechanisms (ping, choice, timeout) initiated by untrusted binaries, specifically 
+targeting long-duration stalls used to exhaust sandbox analysis limits.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -6795,6 +6851,40 @@ suspiciously located processes.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity System Image Patching (T1600.001)
+- **Azonosító:** `T1600_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects attempts to weaken system image integrity by disabling Driver Signature Enforcement (DSE), 
+modifying Boot Configuration Data (BCD), or patching critical system binaries (CI.dll, NTOSKRNL.exe) 
+using non-system processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Disable Entity Verification (T1600.002)
+- **Azonosító:** `T1600_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized modification of system trust settings and certificate verification 
+by monitoring for suspicious certutil usage and registry-based Authenticode/WinTrust 
+bypasses initiated by untrusted processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

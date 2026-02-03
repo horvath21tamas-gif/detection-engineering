@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((EventID =~ 5136 and ObjectClass contains "nTDSDSA") or (EventID =~ 4742 and (ServicePrincipalNames in ("*E3514235-4B06-11D1-AB04-00C04FC2DCD2/*", "*GC/*")))) and (not (((SubjectUserName in ("*NT AUTHORITY*", "*AD-ADMIN-*")) and SubjectUserName endswith "$") or (TargetUserName in ("*DC-PROD-*", "*DC-BACKUP-*"))))

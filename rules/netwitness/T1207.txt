@@ -1,0 +1,2 @@
+((EventID = 5136 AND ((ObjectClass = '*nTDSDSA*'))) OR (EventID = 4742 AND (((ServicePrincipalNames = '*E3514235-4B06-11D1-AB04-00C04FC2DCD2/*' OR ServicePrincipalNames = '*GC/*'))))) AND (NOT ((((((SubjectUserName = '*NT AUTHORITY*' OR SubjectUserName = '*AD-ADMIN-*'))) AND ((SubjectUserName = '*$*'))) OR (((TargetUserName = '*DC-PROD-*' OR TargetUserName = '*DC-BACKUP-*')))))
+)

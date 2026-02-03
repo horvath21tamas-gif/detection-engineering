@@ -25,7 +25,7 @@ detection:
             - 'PublishVersion20150331'
 
     selection_untrusted_context:
-        - userAgent|not_contains:
+        - userAgent|contains:
             - 'HashiCorp/1.0 (Terraform)'
             - 'CloudFormation'
             - 'ServerlessFramework'

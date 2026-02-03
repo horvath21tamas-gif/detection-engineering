@@ -48,7 +48,7 @@ detection:
             - '\mshta.exe'
 
     filter_trusted_admin_activity:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - CommandLine|contains:
             - 'Spam'
             - 'Junk'

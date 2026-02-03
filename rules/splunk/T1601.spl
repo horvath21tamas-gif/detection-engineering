@@ -1,0 +1,1 @@
+Message IN ("*copy tftp flash*", "*copy ftp flash*", "*request system software add*", "*update firmware*", "*boot system flash*", "*install activate*") Message IN ("*tftp*", "*unauthenticated*", "*unknown source*", "*checksum failed*") OR NOT (SourceIP IN ("10.50.0.10", "10.50.0.11")) NOT (Message IN ("*copy running-config*", "*copy startup-config*", "*archive config*"))

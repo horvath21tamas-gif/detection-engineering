@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (Message in ("*copy tftp flash*", "*copy ftp flash*", "*request system software add*", "*update firmware*", "*boot system flash*", "*install activate*")) and ((Message in ("*tftp*", "*unauthenticated*", "*unknown source*", "*checksum failed*")) or (not (SourceIP in ("10.50.0.10", "10.50.0.11")))) and (not (Message in ("*copy running-config*", "*copy startup-config*", "*archive config*")))

@@ -363,6 +363,7 @@
 | T1598.002 | HIGH | Advanced BEC Mail & Financial Data Exfiltration - T1598.002 |
 | T1598.003 | HIGH | High-Fidelity MFA/OTP Spoofing & Harvesting - T1598.003 |
 | T1598.004 | HIGH | High-Fidelity Spearphishing Attachment Interaction - T1598.004 |
+| T1601 | CRITICAL | Ultra-Pro High-Fidelity Network OS Image Modification (T1601) |
 | T1608 | HIGH | Anomalous Infrastructure Staging and Resource Deployment |
 | T1608.001 | HIGH | Anomalous Malware Staging to External Infrastructure |
 | T1608.002 | HIGH | Anomalous Offensive Tool Staging and External Upload |

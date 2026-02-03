@@ -1,0 +1,2 @@
+(((Message = '*copy tftp flash*' OR Message = '*copy ftp flash*' OR Message = '*request system software add*' OR Message = '*update firmware*' OR Message = '*boot system flash*' OR Message = '*install activate*'))) AND ((((Message = '*tftp*' OR Message = '*unauthenticated*' OR Message = '*unknown source*' OR Message = '*checksum failed*'))) OR (NOT ((((SourceIP = '*10.50.0.10*' OR SourceIP = '*10.50.0.11*'))))) AND (NOT ((((Message = '*copy running-config*' OR Message = '*copy startup-config*' OR Message = '*archive config*'))))
+))

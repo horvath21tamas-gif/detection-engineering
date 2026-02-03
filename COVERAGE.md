@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-02 15:09:30`
+**Utolsó frissítés:** `2026-02-03 06:21:00`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 293 | 100% |
-| Splunk (SPL) | 264 | 90.1% |
-| Microsoft Sentinel (KQL) | 265 | 90.4% |
-| QRadar (AQL) | 153 | 52.2% |
-| Elastic (KQL/EQL) | 265 | 90.4% |
-| RSA NetWitness | 263 | 89.8% |
+| Sigma (Forrás) | 294 | 100% |
+| Splunk (SPL) | 265 | 90.1% |
+| Microsoft Sentinel (KQL) | 266 | 90.5% |
+| QRadar (AQL) | 153 | 52.0% |
+| Elastic (KQL/EQL) | 266 | 90.5% |
+| RSA NetWitness | 264 | 89.8% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -36,6 +36,7 @@
 | T1053.005 | HIGH | Suspicious Scheduled Task Creation Executing PowerShell |
 | T1053.006 | HIGH | High-Fidelity Systemd Service Creation or Modification |
 | T1053.007 | HIGH | High-Fidelity Systemd Timer Persistence Detection |
+| T1055 | CRITICAL | Ultra-Pro Stealthy Process Injection Detection (T1055) |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 Libraries |
 | T1059 | HIGH | High-Fidelity Scripting Interpreter Contextual Anomaly, Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1059.001 | HIGH | Suspicious Encoded PowerShell Command Execution |
@@ -119,7 +120,7 @@
 | T1505 | CRITICAL | Ultra-Pro Web Shell Execution Patterns (T1505.003) |
 | T1505.001 | CRITICAL | Ultra-Pro SQL Server Command Shell Execution (T1505.001) |
 | T1505.002 | CRITICAL | Ultra-Pro IIS Native Module Injection (T1505.002) |
-| T1505.003 | HIGH | Ultra-Pro Web Shell Execution Patterns (T1505.003), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
+| T1505.003 | HIGH | Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1505.004 | CRITICAL | Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004) |
 | T1505.005 | CRITICAL | Ultra-Pro Terminal Services DLL Hijacking (T1505.005) |
 | T1525 | CRITICAL | Exploit-Grade Unauthorized Container Image Execution (Implant Container Image) |

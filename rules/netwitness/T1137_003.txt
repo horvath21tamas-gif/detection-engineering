@@ -1,0 +1,2 @@
+((((TargetObject = '*\\Software\\Microsoft\\Office\\*' OR TargetObject = '*\\Software\\WOW6432Node\\Microsoft\\Office\\*'))) AND (((TargetObject = '*\\Outlook\\Forms\\Registry*' OR TargetObject = '*\\Outlook\\Forms\\Cache*')))) AND ((((process = '*\\powershell.exe*' OR process = '*\\cmd.exe*' OR process = '*\\reg.exe*' OR process = '*\\cscript.exe*' OR process = '*\\wscript.exe*'))) OR (((Details = '*CLSID*' OR Details = '*.dll*' OR Details = '*.vbs*' OR Details = '*http*')))) AND (NOT ((((Details = '*C:\\Program Files\\*' OR Details = '*C:\\Program Files (x86)\\*'))))
+)

@@ -1,0 +1,46 @@
+title: Ultra-Pro High-Fidelity Cloud Instance Destruction (T1578.003)
+id: 7372c9e9-6a46-4018-9cab-2b8565bb8011
+status: stable
+description: |
+    Detects unauthorized or mass deletion of cloud instances. Filters out 
+    automated scaling events and focuses on manual, non-MFA, or script-based 
+    destruction attempts that indicate sabotage or defense evasion.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.impact
+    - attack.defense_evasion
+    - attack.t1578.003
+logsource:
+    product: cloud
+    service: Azure Activity
+detection:
+    selection_delete_ops:
+        operation_name|contains:
+            - 'TerminateInstances'            
+            - 'Microsoft.Compute/virtualMachines/delete' 
+            - 'v1.compute.instances.delete'    
+
+    selection_suspicious_context:
+        mfa_authenticated: 'false'
+        user_agent|contains:
+            - 'kali'
+            - 'python-requests'
+            - 'boto3'
+            - 'curl'
+            - 'postman'
+            - 'Mozilla' 
+
+    filter_automation_identities:
+        user_name|startswith:
+            - 'svc-terraform'
+            - 'svc-ansible'
+            - 'aws-autoscaling' 
+            - 'cloud-controller'
+    filter_internal:
+        user_name|contains: 
+            - 'system-internal'
+            - 'scaling-manager'
+
+    condition: selection_delete_ops and selection_suspicious_context and not (filter_automation_identities or filter_internal)
+level: high

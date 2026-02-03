@@ -227,6 +227,8 @@
 | T1548.003 | CRITICAL | Ultra-Pro Sudoers Manipulation and Sudo Abuse (T1548.003) |
 | T1548.004 | CRITICAL | Ultra-Pro AppleScript Privilege Escalation (T1548.004) |
 | T1548.005 | HIGH | Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005) |
+| T1553.004 | CRITICAL | Ultra-Pro High-Fidelity Subvert Trust Controls (T1553) |
+| T1553.005 | CRITICAL | Ultra-Pro High-Fidelity Subvert Trust Controls (T1553) |
 | T1554 | CRITICAL | Ultra-Pro Client Binary Integrity Compromise (T1554) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
 | T1556 | CRITICAL | Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration |

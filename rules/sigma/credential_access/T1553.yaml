@@ -48,7 +48,7 @@ detection:
         ParentImage|startswith:
             - 'C:\Windows\System32\msiexec.exe'
             - 'C:\Program Files\Microsoft Endpoint Manager\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: ((selection_cert_injection and selection_root_stores and selection_paths) or (selection_zone_bypass and selection_paths)) and not filter_trusted_automation
 level: critical

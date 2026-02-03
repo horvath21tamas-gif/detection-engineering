@@ -12,6 +12,9 @@
 - [Ultra-Pro High-Fidelity Renamed System Utility (T1036.003)](#ultra-pro-high-fidelity-renamed-system-utility-(t1036003))
 - [Ultra-Pro High-Fidelity Masquerading via Path Anomaly (T1036.004)](#ultra-pro-high-fidelity-masquerading-via-path-anomaly-(t1036004))
 - [Legitimate Windows Binary Copied to User-Writable Location](#legitimate-windows-binary-copied-to-user-writable-location)
+- [Ultra-Pro High-Fidelity Space After Filename Masquerading (T1036.006)](#ultra-pro-high-fidelity-space-after-filename-masquerading-(t1036006))
+- [Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007)](#ultra-pro-high-fidelity-double-file-extension-execution-(t1036007))
+- [Ultra-Pro High-Fidelity Masquerade File Type via Interpreter Misuse (T1036.008)](#ultra-pro-high-fidelity-masquerade-file-type-via-interpreter-misuse-(t1036008))
 - [Ultra-Pro High-Fidelity Allure Document and RTLO Masquerading (T1036.009)](#ultra-pro-high-fidelity-allure-document-and-rtlo-masquerading-(t1036009))
 - [High-Fidelity Logon Script Persistence (T1037)](#high-fidelity-logon-script-persistence-(t1037))
 - [High-Fidelity UserInitMprLogonScript Persistence](#high-fidelity-userinitmprlogonscript-persistence)
@@ -525,6 +528,57 @@ Filters out legitimate Side-by-Side (WinSxS) and Windows Update behaviors.
 - **Leírás:** Detects suspicious copying of legitimate Windows system binaries into user-writable directories. This technique is commonly used by attackers for masquerading, DLL sideloading, or execution evasion by abusing trusted binary names.
 - **Hamis pozitívok:** Rare advanced troubleshooting by administrators, Approved red team or malware simulation activity
 - **MITRE ATT&CK:** `T1036, 005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Space After Filename Masquerading (T1036.006)
+- **Azonosító:** `T1036_006.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects intentional masquerading using trailing spaces in filenames or directory names. 
+Focuses on executable extensions followed by spaces to evade string-based detection 
+while filtering common Windows Update and SCCM/MECM noise.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `006`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007)
+- **Azonosító:** `T1036_007.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects execution of binaries masquerading as documents via double extensions. 
+Strictly filters developer artifacts (.min.js, .map) and verified installers, 
+focusing on high-risk user directories and suspicious parent lineages.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `007, T1036`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Masquerade File Type via Interpreter Misuse (T1036.008)
+- **Azonosító:** `T1036_008.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects mismatched file type execution where legitimate interpreters (wscript, cscript, powershell, regsvr32) 
+execute files with non-standard extensions (e.g., .jpg, .txt, .png). 
+Filters out system-level automation and focuses on untrusted user directories.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

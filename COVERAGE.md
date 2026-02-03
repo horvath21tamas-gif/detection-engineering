@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 09:23:38`
+**Utolsó frissítés:** `2026-02-03 09:35:32`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 350 | 100% |
-| Splunk (SPL) | 319 | 91.1% |
-| Microsoft Sentinel (KQL) | 320 | 91.4% |
-| QRadar (AQL) | 164 | 46.9% |
-| Elastic (KQL/EQL) | 320 | 91.4% |
-| RSA NetWitness | 318 | 90.9% |
+| Sigma (Forrás) | 357 | 100% |
+| Splunk (SPL) | 326 | 91.3% |
+| Microsoft Sentinel (KQL) | 327 | 91.6% |
+| QRadar (AQL) | 164 | 45.9% |
+| Elastic (KQL/EQL) | 327 | 91.6% |
+| RSA NetWitness | 325 | 91.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -28,6 +28,9 @@
 | T1036.003 | CRITICAL | Ultra-Pro High-Fidelity Renamed System Utility (T1036.003) |
 | T1036.004 | CRITICAL | Ultra-Pro High-Fidelity Masquerading via Path Anomaly (T1036.004) |
 | T1036.005 | HIGH | Legitimate Windows Binary Copied to User-Writable Location |
+| T1036.006 | CRITICAL | Ultra-Pro High-Fidelity Space After Filename Masquerading (T1036.006) |
+| T1036.007 | CRITICAL | Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007) |
+| T1036.008 | CRITICAL | Ultra-Pro High-Fidelity Masquerade File Type via Interpreter Misuse (T1036.008) |
 | T1036.009 | CRITICAL | Ultra-Pro High-Fidelity Allure Document and RTLO Masquerading (T1036.009) |
 | T1037 | CRITICAL | High-Fidelity Logon Script Persistence (T1037) |
 | T1037.001 | CRITICAL | High-Fidelity UserInitMprLogonScript Persistence |

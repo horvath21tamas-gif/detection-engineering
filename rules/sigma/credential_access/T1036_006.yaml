@@ -44,7 +44,7 @@ detection:
             - 'C:\Windows\System32\'
             - 'C:\Windows\WinSxS\'
             - 'C:\Windows\SoftwareDistribution\'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|endswith: '\msiexec.exe'
 
     condition: (selection_trailing_space or selection_padded_paths) and (selection_untrusted_context or not filter_legit_system)

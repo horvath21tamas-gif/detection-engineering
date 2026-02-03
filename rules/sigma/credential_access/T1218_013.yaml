@@ -1,0 +1,61 @@
+title: Ultra-Pro High-Fidelity Rundll32 Proxy Execution (T1218.013)
+id: 2fbea7c5-55cc-4433-a063-87ace403aaf6
+status: stable
+description: |
+    Detects anomalous rundll32.exe execution by focusing on suspicious command-line 
+    arguments, non-standard file extensions, and untrusted execution paths.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1218.013
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\rundll32.exe'
+        - OriginalFileName: 'RUNDLL32.EXE'
+
+    selection_args:
+        CommandLine|contains:
+            - 'javascript:'   
+            - 'vbscript:'
+            - 'url.dll,OpenURL' 
+            - 'url.dll,FileProtocolHandler'
+            - 'pcwutl.dll,LaunchApplication'
+            - 'shell32.dll,Control_RunDLL' 
+
+    selection_anomalies:
+        CommandLine|contains:
+            - '\AppData\'
+            - '\Users\Public\'
+            - '\Temp\'
+            - '\Downloads\'
+            - '.txt'          
+            - '.png'
+            - '.jpg'
+            - '.dat'
+            - '.inf'
+
+    selection_parents:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\powerpnt.exe'
+            - '\outlook.exe'
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\wscript.exe'
+            - '\mshta.exe'
+
+    filter_legit:
+        CommandLine|contains:
+            - 'C:\Windows\System32\'
+            - 'C:\Windows\SysWOW64\'
+            - 'C:\Windows\WinSxS\'
+        ParentImage|endswith: '\explorer.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_img and (selection_args or (selection_anomalies and selection_parents)) and not filter_legit
+level: critical

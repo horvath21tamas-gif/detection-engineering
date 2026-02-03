@@ -1,0 +1,64 @@
+title: Ultra-Pro High-Fidelity Indicator Removal on Host (T1070)
+id: 29f1cc4a-8018-4b6f-a09b-9fe3358ca8c9
+status: stable
+description: |
+    Detects targeted attempts to clear Windows Event Logs and high-value forensic artifacts 
+    (USN Journal, Prefetch). Focuses on non-standard execution chains and specific 
+    clearing of security-sensitive providers.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1070
+    - attack.t1070.001
+    - attack.t1070.004
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_wevtutil_clear:
+        Image|endswith: '\wevtutil.exe'
+        CommandLine|contains:
+            - ' cl '
+            - ' clear-log '
+        CommandLine|contains:
+            - 'Security'
+            - 'System'
+            - 'Setup'
+            - 'PowerShell'
+
+    selection_forensic_wipe:
+        - Image|endswith: '\fsutil.exe'
+          CommandLine|contains|all:
+            - 'usn'
+            - 'deletejournal'
+        - CommandLine|contains:
+            - 'del '
+            - 'Remove-Item'
+        - CommandLine|contains:
+            - '\Windows\Prefetch\'
+            - '\System32\config\Journal'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\w3wp.exe'
+            - '\powershell.exe'
+
+    filter_legit_maintenance:
+        - User: 'NT AUTHORITY\SYSTEM'
+          ParentImage|endswith: 
+            - '\services.exe'
+            - '\svchost.exe'
+            - '\msiexec.exe'
+        - CommandLine|contains:
+            - 'cleanmgr.exe'
+            - 'CCM\Temp'    
+            - 'HealthCheck'
+
+    condition: (selection_wevtutil_clear or selection_forensic_wipe) and (selection_suspicious_parent or not filter_legit_maintenance)
+level: high

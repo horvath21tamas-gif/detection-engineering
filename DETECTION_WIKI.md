@@ -22,9 +22,14 @@
 - [Ultra-Pro Stealthy Process Injection Detection (T1055)](#ultra-pro-stealthy-process-injection-detection-(t1055))
 - [Ultra-Pro Stealthy DLL Injection (T1055.001)](#ultra-pro-stealthy-dll-injection-(t1055001))
 - [Ultra-Pro Stealthy PE Injection (T1055.002)](#ultra-pro-stealthy-pe-injection-(t1055002))
+- [Ultra-Pro Stealthy Thread Hijacking (T1055.003)](#ultra-pro-stealthy-thread-hijacking-(t1055003))
 - [Ultra-Pro Stealthy APC Injection (T1055.004)](#ultra-pro-stealthy-apc-injection-(t1055004))
+- [Ultra-Pro Stealthy TLS Injection (T1055.005)](#ultra-pro-stealthy-tls-injection-(t1055005))
+- [Ultra-Pro Stealthy Ptrace Injection (T1055.008)](#ultra-pro-stealthy-ptrace-injection-(t1055008))
 - [Ultra-Pro Stealthy Module Overwriting (T1055.009)](#ultra-pro-stealthy-module-overwriting-(t1055009))
 - [Ultra-Pro Stealthy EWM Injection (T1055.011)](#ultra-pro-stealthy-ewm-injection-(t1055011))
+- [Ultra-Pro Stealthy Process Hollowing (T1055.012)](#ultra-pro-stealthy-process-hollowing-(t1055012))
+- [Ultra-Pro Stealthy Process Hollowing (T1055.013)](#ultra-pro-stealthy-process-hollowing-(t1055013))
 - [Ultra-Pro Stealthy ListPlanting Injection (T1055.015)](#ultra-pro-stealthy-listplanting-injection-(t1055015))
 - [Suspicious Credential API Hooking via Win32 Libraries](#suspicious-credential-api-hooking-via-win32-libraries)
 - [High-Fidelity Scripting Interpreter Contextual Anomaly](#high-fidelity-scripting-interpreter-contextual-anomaly)
@@ -641,6 +646,23 @@ manipulation where the source of the call is an unbacked memory region
 
 ---
 
+## Ultra-Pro Stealthy Thread Hijacking (T1055.003)
+- **Azonosító:** `T1055_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects thread execution hijacking by identifying cross-process access 
+requests with thread manipulation rights (SET_CONTEXT) where the 
+calling stack originates from unbacked memory (shellcode).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro Stealthy APC Injection (T1055.004)
 - **Azonosító:** `T1055_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -650,6 +672,40 @@ specific thread access masks (THREAD_SET_CONTEXT) where the calling code origina
 from unbacked or untrusted memory regions (CallTrace analysis).
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Stealthy TLS Injection (T1055.005)
+- **Azonosító:** `T1055_005.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects high-fidelity TLS injection by monitoring for cross-process memory 
+manipulation targeting PE headers where the execution flow originates 
+from unbacked memory (shellcode).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Stealthy Ptrace Injection (T1055.008)
+- **Azonosító:** `T1055_008.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects high-fidelity ptrace-based process injection by identifying 
+PTRACE_POKETEXT/DATA operations from suspicious sources or 
+cross-user ptrace attachments, filtering out legitimate debuggers.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
@@ -684,6 +740,40 @@ cross-process access with memory manipulation rights where the CallTrace
 indicates execution from unbacked memory (shellcode) targeting GUI processes.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `011`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Stealthy Process Hollowing (T1055.012)
+- **Azonosító:** `T1055_012.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects high-fidelity process hollowing by identifying cross-process access 
+requests with VM_WRITE/VM_OPERATION permissions where the calling stack 
+originates from unbacked memory (shellcode) and targets common sacrificial processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `012`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro Stealthy Process Hollowing (T1055.013)
+- **Azonosító:** `T1055_013.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects high-fidelity process hollowing by identifying cross-process access 
+requests with VM_WRITE/VM_OPERATION permissions where the calling stack 
+originates from unbacked memory (shellcode) and targets common sacrificial processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `013`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

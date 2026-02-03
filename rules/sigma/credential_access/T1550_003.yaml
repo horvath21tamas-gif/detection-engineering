@@ -1,0 +1,46 @@
+title: Ultra-Pro High-Fidelity Pass-the-Ticket Detection (T1550.003)
+id: cc26ad5d-0d45-474d-8309-bc96d408eee3
+status: stable
+description: |
+    Detects Pass-the-Ticket (PtH) by identifying Kerberos encryption downgrades (RC4), 
+    anomalous ticket flags (Rubeus/Mimikatz defaults), and unauthorized ticket injection 
+    into the LSA process memory.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.lateral_movement
+    - attack.t1550.003
+logsource:
+    product: windows
+    service: security
+detection:
+    selection_kerberos_downgrade:
+        EventID:
+            - 4768 
+            - 4769 
+        TicketEncryptionType: '0x17' 
+        Status: '0x0'                
+
+    selection_anomalous_flags:
+        EventID: 4768
+        TicketOptions: 
+            - '0x40810000' 
+            - '0x40810010' 
+
+    selection_klist_purge:
+        EventID: 4688
+        CommandLine|contains: 
+            - 'klist purge'
+            - 'kerberos::ptt'
+            - 'monitor /interval'
+
+    filter_machine_accounts:
+        TargetUserName|endswith: '$'
+        ServicePrincipalName|contains: 'krbtgt'
+    
+    filter_legacy_systems:
+        IpAddress:
+            - '10.0.0.5' 
+
+    condition: (selection_kerberos_downgrade or selection_anomalous_flags or selection_klist_purge) and not filter_machine_accounts
+level: critical

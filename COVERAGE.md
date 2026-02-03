@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 13:11:42`
+**Utolsó frissítés:** `2026-02-03 13:36:49`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 396 | 100% |
-| Splunk (SPL) | 396 | 100.0% |
-| Microsoft Sentinel (KQL) | 397 | 100.3% |
-| QRadar (AQL) | 197 | 49.7% |
-| Elastic (KQL/EQL) | 397 | 100.3% |
-| RSA NetWitness | 395 | 99.7% |
+| Sigma (Forrás) | 403 | 100% |
+| Splunk (SPL) | 403 | 100.0% |
+| Microsoft Sentinel (KQL) | 404 | 100.2% |
+| QRadar (AQL) | 198 | 49.1% |
+| Elastic (KQL/EQL) | 404 | 100.2% |
+| RSA NetWitness | 402 | 99.8% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -154,16 +154,21 @@
 | T1205.002 | CRITICAL | Ultra-Pro Socket Filter & WFP Traffic Signaling (T1205.002) |
 | T1207 | CRITICAL | Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207) |
 | T1211 | CRITICAL | Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211) |
-| T1218 | HIGH | Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218), Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
+| T1216 | CRITICAL | Ultra-Pro High-Fidelity System Script Proxy Execution (T1216) |
+| T1218 | HIGH | Ultra-Pro High-Fidelity Regsvcs/Regasm Proxy Execution (T1218.009), Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218), Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1218.001 | CRITICAL | Ultra-Pro High-Fidelity HH.exe Proxy Execution (T1218.001) |
 | T1218.002 | CRITICAL | Ultra-Pro High-Fidelity Control.exe Proxy Execution (T1218.002) |
 | T1218.003 | CRITICAL | Ultra-Pro High-Fidelity MsiExec Proxy Execution (T1218.003) |
+| T1218.004 | CRITICAL | Ultra-Pro High-Fidelity InstallUtil Proxy Execution (T1218.004) |
 | T1218.005 | HIGH | Suspicious Mshta Execution of Remote Script (High Fidelity) |
 | T1218.007 | HIGH | Suspicious Msiexec Installation from Remote URL (High Fidelity) |
 | T1218.008 | CRITICAL | Ultra-Pro High-Fidelity Odbcconf Proxy Execution (T1218.008) |
+| T1218.009 | CRITICAL | Ultra-Pro High-Fidelity Regsvcs/Regasm Proxy Execution (T1218.009) |
 | T1218.010 | HIGH | Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity) |
 | T1218.011 | HIGH | Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity) |
+| T1218.012 | CRITICAL | Ultra-Pro High-Fidelity Verclsid Proxy Execution (T1218.012) |
 | T1218.013 | CRITICAL | Ultra-Pro High-Fidelity Rundll32 Proxy Execution (T1218.013) |
+| T1218.014 | CRITICAL | Ultra-Pro High-Fidelity MMC Proxy Execution (T1218.014) |
 | T1219 | HIGH | Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern |
 | T1222 | HIGH | Ultra-Pro High-Fidelity Permissions Modification (T1222) |
 | T1222.001 | HIGH | Ultra-Pro High-Fidelity Windows File Permissions Modification (T1222.001), Ultra-Pro High-Fidelity Permissions Modification (T1222) |

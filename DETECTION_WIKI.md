@@ -138,16 +138,21 @@
 - [Ultra-Pro Socket Filter & WFP Traffic Signaling (T1205.002)](#ultra-pro-socket-filter-&-wfp-traffic-signaling-(t1205002))
 - [Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207)](#ultra-pro-high-fidelity-rogue-dc-topology-manipulation-(t1207))
 - [Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211)](#ultra-pro-high-fidelity-privilege-escalation-exploitation-(t1211))
+- [Ultra-Pro High-Fidelity System Script Proxy Execution (T1216)](#ultra-pro-high-fidelity-system-script-proxy-execution-(t1216))
 - [Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218)](#ultra-pro-high-fidelity-system-binary-proxy-execution-(t1218))
 - [Ultra-Pro High-Fidelity HH.exe Proxy Execution (T1218.001)](#ultra-pro-high-fidelity-hhexe-proxy-execution-(t1218001))
 - [Ultra-Pro High-Fidelity Control.exe Proxy Execution (T1218.002)](#ultra-pro-high-fidelity-controlexe-proxy-execution-(t1218002))
 - [Ultra-Pro High-Fidelity MsiExec Proxy Execution (T1218.003)](#ultra-pro-high-fidelity-msiexec-proxy-execution-(t1218003))
+- [Ultra-Pro High-Fidelity InstallUtil Proxy Execution (T1218.004)](#ultra-pro-high-fidelity-installutil-proxy-execution-(t1218004))
 - [Suspicious Mshta Execution of Remote Script (High Fidelity)](#suspicious-mshta-execution-of-remote-script-(high-fidelity))
 - [Suspicious Msiexec Installation from Remote URL (High Fidelity)](#suspicious-msiexec-installation-from-remote-url-(high-fidelity))
 - [Ultra-Pro High-Fidelity Odbcconf Proxy Execution (T1218.008)](#ultra-pro-high-fidelity-odbcconf-proxy-execution-(t1218008))
+- [Ultra-Pro High-Fidelity Regsvcs/Regasm Proxy Execution (T1218.009)](#ultra-pro-high-fidelity-regsvcsregasm-proxy-execution-(t1218009))
 - [Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity)](#suspicious-regsvr32-execution-indicative-of-lolbas-abuse-(high-fidelity))
 - [Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity)](#suspicious-rundll32-execution-with-script-or-remote-payload-(high-fidelity))
+- [Ultra-Pro High-Fidelity Verclsid Proxy Execution (T1218.012)](#ultra-pro-high-fidelity-verclsid-proxy-execution-(t1218012))
 - [Ultra-Pro High-Fidelity Rundll32 Proxy Execution (T1218.013)](#ultra-pro-high-fidelity-rundll32-proxy-execution-(t1218013))
+- [Ultra-Pro High-Fidelity MMC Proxy Execution (T1218.014)](#ultra-pro-high-fidelity-mmc-proxy-execution-(t1218014))
 - [Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern](#suspicious-use-of-legitimate-remote-administration-tools-outside-enterprise-pattern)
 - [Ultra-Pro High-Fidelity Permissions Modification (T1222)](#ultra-pro-high-fidelity-permissions-modification-(t1222))
 - [Ultra-Pro High-Fidelity Windows File Permissions Modification (T1222.001)](#ultra-pro-high-fidelity-windows-file-permissions-modification-(t1222001))
@@ -2681,6 +2686,23 @@ breaking out of application sandboxes (browsers, office, pdf).
 
 ---
 
+## Ultra-Pro High-Fidelity System Script Proxy Execution (T1216)
+- **Azonosító:** `T1216.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the abuse of trusted Windows signed scripts to proxy malicious code. 
+Focuses on network-based execution triggers and anomalous parent-child 
+process relationships to minimize false positives.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1216`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218)
 - **Azonosító:** `T1218.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -2749,6 +2771,23 @@ and remote resource fetching while filtering out legitimate enterprise installer
 
 ---
 
+## Ultra-Pro High-Fidelity InstallUtil Proxy Execution (T1218.004)
+- **Azonosító:** `T1218_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the execution of InstallUtil.exe to proxy malicious code. 
+Focuses on the /u flag, non-standard parent processes, and execution 
+from writable directories, while filtering out legitimate .NET installations.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Suspicious Mshta Execution of Remote Script (High Fidelity)
 - **Azonosító:** `T1218_005.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
@@ -2796,6 +2835,23 @@ non-standard file paths to minimize false positives from legitimate installers.
 
 ---
 
+## Ultra-Pro High-Fidelity Regsvcs/Regasm Proxy Execution (T1218.009)
+- **Azonosító:** `T1218_009.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the abuse of regsvcs.exe or regasm.exe to execute malicious .NET assemblies. 
+Focuses on the /U flag for proxy execution, non-standard parent processes, 
+and execution from writable/untrusted paths.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `009, T1218`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity)
 - **Azonosító:** `T1218_010.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
@@ -2826,6 +2882,23 @@ non-standard file paths to minimize false positives from legitimate installers.
 
 ---
 
+## Ultra-Pro High-Fidelity Verclsid Proxy Execution (T1218.012)
+- **Azonosító:** `T1218_012.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the abuse of verclsid.exe to proxy the execution of malicious COM objects (DLLs). 
+Filters out legitimate system-initiated verifications by focusing on suspicious 
+parent-child relationships and anomalous command-line triggers.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `012`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Rundll32 Proxy Execution (T1218.013)
 - **Azonosító:** `T1218_013.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -2834,6 +2907,22 @@ non-standard file paths to minimize false positives from legitimate installers.
 arguments, non-standard file extensions, and untrusted execution paths.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `013`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity MMC Proxy Execution (T1218.014)
+- **Azonosító:** `T1218_014.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the abuse of mmc.exe to execute malicious code via Component Object Model (COM) 
+hijacking or untrusted console files (.msc). Filters out legitimate administrative actions.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `014`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -1,0 +1,2 @@
+((((Message = '*mount -o remount*' OR Message = '*rw*' OR Message = '*mount -uw*' OR Message = '*config-transaction*'))) OR (((Message = '*xxd *' OR Message = '*dd if=*' OR Message = '*insmod*' OR Message = '*gdb *' OR Message = '*setenforce 0*')))) AND (((Message = '*/bin/*' OR Message = '*/sbin/*' OR Message = '*/lib/modules*' OR Message = '*/boot/*'))) AND (NOT (((user_name begins 'svc-system-update','installer') OR (((Message = '*show *' OR Message = '*cat *' OR Message = '*grep *')))))
+)

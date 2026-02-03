@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((Message in ("*mount -o remount,rw*", "*mount -uw*", "*config-transaction*")) or (Message in ("*xxd *", "*dd if=*", "*insmod*", "*gdb *", "*setenforce 0*"))) and (Message in ("*/bin/*", "*/sbin/*", "*/lib/modules*", "*/boot/*")) and (not ((user_name in ("svc-system-update*", "installer*")) or (Message in ("*show *", "*cat *", "*grep *"))))

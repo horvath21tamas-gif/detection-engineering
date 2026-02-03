@@ -1,0 +1,1 @@
+((Message:(*mount\ \-o\ remount,rw* OR *mount\ \-uw* OR *config\-transaction*)) OR (Message:(*xxd\ * OR *dd\ if\=* OR *insmod* OR *gdb\ * OR *setenforce\ 0*))) AND (Message:(*\/bin\/* OR *\/sbin\/* OR *\/lib\/modules* OR *\/boot\/*)) AND (NOT ((user_name:(svc\-system\-update* OR installer*)) OR (Message:(*show\ * OR *cat\ * OR *grep\ *))))

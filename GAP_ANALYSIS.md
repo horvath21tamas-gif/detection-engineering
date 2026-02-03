@@ -22,6 +22,7 @@ Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logok
 | High-Fidelity Device Registration Persistence (T1098.005) (`T1098_005.yaml`) | service: `process_creation` |
 | High-Fidelity Entra ID Application Credential Addition (`T1098_001.yaml`) | service: `ad` |
 | High-Fidelity Azure Role Assignment Escalation (`T1098_004.yaml`) | service: `process_access` |
+| Ultra-Pro High-Fidelity Network Binary Patching (T1601.001) (`T1601_001.yaml`) | product: `network`, service: `FortiOS` |
 | High-Fidelity MFA Method Addition (`T1098_006.yaml`) | service: `process_creation` |
 | Ultra-Pro High-Fidelity Cloud Image Tampering (T1578.004) (`T1578_004.yaml`) | product: `cloud`, service: `Azure Activity` |
 | Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002) (`T1578_002.yaml`) | product: `cloud`, service: `Azure Activity` |

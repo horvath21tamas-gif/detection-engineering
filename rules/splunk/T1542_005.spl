@@ -1,0 +1,1 @@
+TargetObject="*\\Services\\DHCPServer\\Parameters\\Options\\*" TargetObject IN ("*\\066*", "*\\067*") Image IN ("*\\powershell.exe", "*\\pwsh.exe", "*\\cmd.exe", "*\\netsh.exe", "*\\reg.exe") NOT (username="NT AUTHORITY\\NETWORK SERVICE" Image="*C:\\Windows\\System32\\*")

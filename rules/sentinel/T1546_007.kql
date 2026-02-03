@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where TargetObject contains "HKLM\SOFTWARE\Microsoft\NetSh" and (((Details in ("*\Users\*", "*\ProgramData\*", "*\Windows\Temp\*", "*\AppData\*")) or Details endswith ".exe") or (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\w3wp.exe", "*\cscript.exe", "*\wscript.exe"))) and (not (((FolderPath in ("*\msiexec.exe", "*\trustedinstaller.exe", "*\TiWorker.exe")) and username =~ "NT AUTHORITY\SYSTEM") or (Details startswith "C:\Windows\System32\" and Details endswith ".dll")))

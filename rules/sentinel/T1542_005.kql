@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where TargetObject contains "\Services\DHCPServer\Parameters\Options\" and (TargetObject in ("*\066*", "*\067*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\netsh.exe", "*\reg.exe")) and (not (username =~ "NT AUTHORITY\NETWORK SERVICE" and FolderPath contains "C:\Windows\System32\"))

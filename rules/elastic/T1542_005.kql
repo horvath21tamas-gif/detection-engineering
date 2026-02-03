@@ -1,0 +1,1 @@
+registry.path:*\\Services\\DHCPServer\\Parameters\\Options\\* AND (registry.path:(*\\066* OR *\\067*)) AND (process.executable:(*\\powershell.exe OR *\\pwsh.exe OR *\\cmd.exe OR *\\netsh.exe OR *\\reg.exe)) AND (NOT (winlog.event_data.username:NT\ AUTHORITY\\NETWORK\ SERVICE AND process.executable:*C\:\\Windows\\System32\\*))

@@ -1,0 +1,48 @@
+title: Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007)
+id: b4308d32-6655-4645-a0c5-d98f56357c4e
+status: stable
+description: |
+    Detects unauthorized or dangerous modifications to cloud security groups and firewalls.
+    Focuses on "Any-Any" rules (0.0.0.0/0), Root user activity, and modifications 
+    originating from non-standard administrative tools or IPs.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1562.007
+logsource:
+    product: windows
+    service: system
+detection:
+    selection_actions:
+        eventName:
+            - 'AuthorizeSecurityGroupIngress'
+            - 'CreateSecurityGroup'
+            - 'DeleteSecurityGroup'
+            - 'PutManagedRuleSet' 
+            - 'UpdateFirewall'    
+
+    selection_dangerous_config:
+        requestParameters.ipPermissions.items.ipRanges.items.cidrIp: 
+            - '0.0.0.0/0'
+            - '::/0'
+        requestParameters.ipPermissions.items.ipProtocol: '-1' 
+
+    selection_context:
+        - userIdentity.type: 'Root' 
+        - userAgent|contains:
+            - 'kali'
+            - 'python-requests'
+            - 'curl'
+            - 'postman'
+
+    filter_trusted_automation:
+        userIdentity.arn|contains:
+            - 'role/Terraform-Execution-Role'
+            - 'role/AWS-CloudFormation-Stack'
+            - 'role/Azure-DevOps-Service-Principal'
+        sourceIPAddress:
+            - '10.0.0.0/8' 
+
+    condition: (selection_actions and selection_dangerous_config) and (selection_context and not filter_trusted_automation)
+level: critical

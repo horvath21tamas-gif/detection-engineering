@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetFilename startswith "/Library/LaunchDaemons/" and TargetFilename endswith ".plist") and ((FolderPath in ("*/bash", "*/zsh", "*/sh", "*/python3", "*/curl", "*/wget", "*/perl", "*/ruby")) or (ProcessCommandLine in ("*/tmp/*", "*/Users/Shared/*", "*base64*", "*nc -e*"))) and (not (((FolderPath in ("*/installd", "*/package_script_service", "*/softwareupdated", "*/jamf", "*/kandji-agent")) and username =~ "root") or (TargetCodeSignature in ("*Developer ID Application: Google LLC*", "*Developer ID Application: Microsoft Corporation*", "*Software Signing*"))))

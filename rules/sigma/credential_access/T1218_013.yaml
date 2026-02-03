@@ -55,7 +55,7 @@ detection:
             - 'C:\Windows\SysWOW64\'
             - 'C:\Windows\WinSxS\'
         ParentImage|endswith: '\explorer.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_img and (selection_args or (selection_anomalies and selection_parents)) and not filter_legit
 level: critical

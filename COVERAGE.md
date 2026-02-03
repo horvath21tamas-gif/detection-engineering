@@ -162,6 +162,7 @@
 | T1218.007 | HIGH | Suspicious Msiexec Installation from Remote URL (High Fidelity) |
 | T1218.010 | HIGH | Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity) |
 | T1218.011 | HIGH | Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity) |
+| T1218.013 | CRITICAL | Ultra-Pro High-Fidelity Rundll32 Proxy Execution (T1218.013) |
 | T1219 | HIGH | Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern |
 | T1222 | HIGH | Ultra-Pro High-Fidelity Permissions Modification (T1222) |
 | T1222.001 | HIGH | Ultra-Pro High-Fidelity Windows File Permissions Modification (T1222.001), Ultra-Pro High-Fidelity Permissions Modification (T1222) |

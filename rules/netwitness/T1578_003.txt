@@ -1,0 +1,2 @@
+(((operation_name = '*TerminateInstances*' OR operation_name = '*Microsoft.Compute/virtualMachines/delete*' OR operation_name = '*v1.compute.instances.delete*'))) AND (((mfa_authenticated = '*false*'))&& (((user_agent = '*kali*' OR user_agent = '*python-requests*' OR user_agent = '*boto3*' OR user_agent = '*curl*' OR user_agent = '*postman*' OR user_agent = '*Mozilla*')))) AND (NOT (((user_name begins 'svc-terraform','svc-ansible','aws-autoscaling','cloud-controller') OR (((user_name = '*system-internal*' OR user_name = '*scaling-manager*')))))
+)

@@ -1,0 +1,52 @@
+title: Ultra-Pro High-Fidelity InstallUtil Proxy Execution (T1218.004)
+id: f0927570-028a-4b2e-b9a6-6107410f6393
+status: stable
+description: |
+    Detects the execution of InstallUtil.exe to proxy malicious code. 
+    Focuses on the /u flag, non-standard parent processes, and execution 
+    from writable directories, while filtering out legitimate .NET installations.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1218.004
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\InstallUtil.exe'
+        - OriginalFileName: 'InstallUtil.exe'
+
+    selection_flags:
+        CommandLine|contains:
+            - ' /u '
+            - ' /uninstall '
+            - ' /LogToConsole=false '
+
+    selection_paths:
+        CommandLine|contains:
+            - '\Users\'
+            - '\ProgramData\'
+            - '\Temp\'
+            - '\Public\'
+            - '\Downloads\'
+            - '\PerfLogs\'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\wscript.exe'
+            - '\mshta.exe'
+
+    filter_trusted_installer:
+        User: 'NT AUTHORITY\SYSTEM'
+        ParentImage|startswith: 'C:\Windows\Microsoft.NET\Framework'
+        CommandLine|contains: 'C:\Windows\Installer\'
+
+    condition: selection_img and selection_flags and (selection_paths or selection_suspicious_parent) and not filter_trusted_installer
+level: critical

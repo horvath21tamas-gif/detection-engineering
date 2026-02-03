@@ -44,7 +44,7 @@ detection:
             - '\mshta.exe'
 
     filter_trusted_installer:
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
         ParentImage|startswith: 'C:\Windows\Microsoft.NET\Framework'
         CommandLine|contains: 'C:\Windows\Installer\'
 

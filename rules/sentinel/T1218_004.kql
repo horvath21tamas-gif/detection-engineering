@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath endswith "\InstallUtil.exe" or OriginalFileName =~ "InstallUtil.exe") and (ProcessCommandLine in ("* /u *", "* /uninstall *", "* /LogToConsole=false *")) and ((ProcessCommandLine in ("*\Users\*", "*\ProgramData\*", "*\Temp\*", "*\Public\*", "*\Downloads\*", "*\PerfLogs\*")) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\powershell.exe", "*\cmd.exe", "*\wscript.exe", "*\mshta.exe"))) and (not (User =~ "NT AUTHORITY\SYSTEM" and ParentProcessName startswith "C:\Windows\Microsoft.NET\Framework" and ProcessCommandLine contains "C:\Windows\Installer\"))

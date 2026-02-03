@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 13:36:49`
+**Utolsó frissítés:** `2026-02-03 13:58:38`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 403 | 100% |
-| Splunk (SPL) | 403 | 100.0% |
-| Microsoft Sentinel (KQL) | 404 | 100.2% |
-| QRadar (AQL) | 198 | 49.1% |
-| Elastic (KQL/EQL) | 404 | 100.2% |
-| RSA NetWitness | 402 | 99.8% |
+| Sigma (Forrás) | 409 | 100% |
+| Splunk (SPL) | 409 | 100.0% |
+| Microsoft Sentinel (KQL) | 410 | 100.2% |
+| QRadar (AQL) | 200 | 48.9% |
+| Elastic (KQL/EQL) | 410 | 100.2% |
+| RSA NetWitness | 408 | 99.8% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -112,7 +112,8 @@
 | T1106 | CRITICAL | High-Fidelity Native API Abuse via LOLBins |
 | T1110.001 | MEDIUM | Multiple Failed Login Attempts for Single User (Possible Password Guessing) |
 | T1112 | CRITICAL | Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112) |
-| T1127 | CRITICAL | Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127) |
+| T1127 | CRITICAL | Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127), Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001) |
+| T1127.001 | CRITICAL | Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001) |
 | T1129 | HIGH | High-Fidelity Shared Module Load from Untrusted Path |
 | T1133 | HIGH | Anomalous External Remote Service Access Context |
 | T1134 | CRITICAL | Ultra-Pro Access Token Manipulation & Impersonation (T1134) |
@@ -156,6 +157,7 @@
 | T1207 | CRITICAL | Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207) |
 | T1211 | CRITICAL | Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211) |
 | T1216 | CRITICAL | Ultra-Pro High-Fidelity System Script Proxy Execution (T1216) |
+| T1216.001 | CRITICAL | Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001) |
 | T1218 | HIGH | Ultra-Pro High-Fidelity Regsvcs/Regasm Proxy Execution (T1218.009), Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218), Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1218.001 | CRITICAL | Ultra-Pro High-Fidelity HH.exe Proxy Execution (T1218.001) |
 | T1218.002 | CRITICAL | Ultra-Pro High-Fidelity Control.exe Proxy Execution (T1218.002) |
@@ -189,6 +191,7 @@
 | T1505.004 | CRITICAL | Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004) |
 | T1505.005 | CRITICAL | Ultra-Pro Terminal Services DLL Hijacking (T1505.005) |
 | T1525 | CRITICAL | Exploit-Grade Unauthorized Container Image Execution (Implant Container Image) |
+| T1535 | CRITICAL | Ultra-Pro High-Fidelity Unused Service Manipulation (T1535) |
 | T1542 | CRITICAL | Ultra-Pro Pre-OS Boot Manipulation (T1542) |
 | T1542.001 | CRITICAL | Ultra-Pro ROM Kit & UEFI Firmware Tampering (T1542.001) |
 | T1542.002 | CRITICAL | Ultra-Pro Component Firmware Tampering (T1542.002) |
@@ -239,6 +242,9 @@
 | T1548.003 | CRITICAL | Ultra-Pro Sudoers Manipulation and Sudo Abuse (T1548.003) |
 | T1548.004 | CRITICAL | Ultra-Pro AppleScript Privilege Escalation (T1548.004) |
 | T1548.005 | HIGH | Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005) |
+| T1550 | CRITICAL | Ultra-Pro High-Fidelity Alternate Authentication Material (T1550) |
+| T1550.002 | CRITICAL | Ultra-Pro High-Fidelity Alternate Authentication Material (T1550) |
+| T1550.003 | CRITICAL | Ultra-Pro High-Fidelity Alternate Authentication Material (T1550) |
 | T1553 | CRITICAL | Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001) |
 | T1553.001 | CRITICAL | Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001) |
 | T1553.002 | CRITICAL | Ultra-Pro High-Fidelity SIP Hijacking and Trust Subversion (T1553.002) |

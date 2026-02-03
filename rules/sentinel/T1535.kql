@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (TargetObject contains "System\CurrentControlSet\Services\" and TargetObject endswith "\ImagePath") and ((Details in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Public\*", "*\Downloads\*", "*C:\PerfLogs\*")) or (Details in ("*cmd.exe*", "*powershell.exe*", "*pwsh.exe*", "*cscript.exe*", "*wscript.exe*", "*mshta.exe*", "*rundll32.exe*"))) and (not (((FolderPath in ("C:\Windows\servicing\*", "C:\Windows\System32\svchost.exe*", "C:\Windows\sysnative\svchost.exe*")) and User =~ "NT AUTHORITY\SYSTEM") or ((FolderPath in ("*\Google\Update\*", "*\Microsoft\EdgeUpdate\*", "*\Adobe\ARM\*")) and (Details in ("*\Program Files\*", "*\Program Files (x86)\*")))))

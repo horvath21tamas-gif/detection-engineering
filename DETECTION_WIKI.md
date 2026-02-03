@@ -97,6 +97,7 @@
 - [Multiple Failed Login Attempts for Single User (Possible Password Guessing)](#multiple-failed-login-attempts-for-single-user-(possible-password-guessing))
 - [Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112)](#ultra-pro-high-fidelity-registry-tampering-for-evasion-(t1112))
 - [Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)](#ultra-pro-high-fidelity-trusted-developer-utility-proxy-(t1127))
+- [Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001)](#ultra-pro-high-fidelity-msbuild-proxy-execution-(t1127001))
 - [High-Fidelity Shared Module Load from Untrusted Path](#high-fidelity-shared-module-load-from-untrusted-path)
 - [Anomalous External Remote Service Access Context](#anomalous-external-remote-service-access-context)
 - [Ultra-Pro Access Token Manipulation & Impersonation (T1134)](#ultra-pro-access-token-manipulation-&-impersonation-(t1134))
@@ -140,6 +141,7 @@
 - [Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207)](#ultra-pro-high-fidelity-rogue-dc-topology-manipulation-(t1207))
 - [Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211)](#ultra-pro-high-fidelity-privilege-escalation-exploitation-(t1211))
 - [Ultra-Pro High-Fidelity System Script Proxy Execution (T1216)](#ultra-pro-high-fidelity-system-script-proxy-execution-(t1216))
+- [Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001)](#ultra-pro-high-fidelity-pubprn-script-proxy-execution-(t1216001))
 - [Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218)](#ultra-pro-high-fidelity-system-binary-proxy-execution-(t1218))
 - [Ultra-Pro High-Fidelity HH.exe Proxy Execution (T1218.001)](#ultra-pro-high-fidelity-hhexe-proxy-execution-(t1218001))
 - [Ultra-Pro High-Fidelity Control.exe Proxy Execution (T1218.002)](#ultra-pro-high-fidelity-controlexe-proxy-execution-(t1218002))
@@ -173,6 +175,7 @@
 - [Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004)](#ultra-pro-mainboard-boot-image-&-spi-flash-tampering-(t1542004))
 - [Ultra-Pro Terminal Services DLL Hijacking (T1505.005)](#ultra-pro-terminal-services-dll-hijacking-(t1505005))
 - [Exploit-Grade Unauthorized Container Image Execution (Implant Container Image)](#exploit-grade-unauthorized-container-image-execution-(implant-container-image))
+- [Ultra-Pro High-Fidelity Unused Service Manipulation (T1535)](#ultra-pro-high-fidelity-unused-service-manipulation-(t1535))
 - [Ultra-Pro Pre-OS Boot Manipulation (T1542)](#ultra-pro-pre-os-boot-manipulation-(t1542))
 - [Ultra-Pro ROM Kit & UEFI Firmware Tampering (T1542.001)](#ultra-pro-rom-kit-&-uefi-firmware-tampering-(t1542001))
 - [Ultra-Pro Component Firmware Tampering (T1542.002)](#ultra-pro-component-firmware-tampering-(t1542002))
@@ -223,6 +226,7 @@
 - [Ultra-Pro Sudoers Manipulation and Sudo Abuse (T1548.003)](#ultra-pro-sudoers-manipulation-and-sudo-abuse-(t1548003))
 - [Ultra-Pro AppleScript Privilege Escalation (T1548.004)](#ultra-pro-applescript-privilege-escalation-(t1548004))
 - [Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005)](#ultra-pro-suid-desktop-entry-&-shortcut-abuse-(t1548005))
+- [Ultra-Pro High-Fidelity Alternate Authentication Material (T1550)](#ultra-pro-high-fidelity-alternate-authentication-material-(t1550))
 - [Ultra-Pro High-Fidelity Subvert Trust Controls (T1553)](#ultra-pro-high-fidelity-subvert-trust-controls-(t1553))
 - [Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001)](#ultra-pro-high-fidelity-macos-gatekeeper-and-quarantine-bypass-(t1553001))
 - [Ultra-Pro High-Fidelity SIP Hijacking and Trust Subversion (T1553.002)](#ultra-pro-high-fidelity-sip-hijacking-and-trust-subversion-(t1553002))
@@ -2003,6 +2007,23 @@ by focusing on suspicious parentage and command-line anomalies.
 
 ---
 
+## Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001)
+- **Azonosító:** `T1127_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects malicious MSBuild.exe execution by identifying anomalous parent processes, 
+untrusted command-line arguments (like inline XML tasks), and excluding 
+standard development and CI/CD environments.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001, T1127`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## High-Fidelity Shared Module Load from Untrusted Path
 - **Azonosító:** `T1129.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
@@ -2722,6 +2743,23 @@ process relationships to minimize false positives.
 
 ---
 
+## Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001)
+- **Azonosító:** `T1216_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the abuse of the signed Windows script 'pubprn.vbs' to proxy the execution 
+of remote scriptlets (.sct). Focuses on argument injection using the 'script:' 
+protocol and anomalous process lineage.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218)
 - **Azonosító:** `T1218.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -3258,6 +3296,23 @@ untrusted processes and non-standard file paths.
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Unused Service Manipulation (T1535)
+- **Azonosító:** `T1535.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the modification of existing Windows service paths (ImagePath) to untrusted 
+locations or binaries. Filters out legitimate OS servicing and common third-party 
+updaters to ensure high-fidelity alerts.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1535`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
@@ -4073,6 +4128,23 @@ to execute SUID binaries or leverage pkexec for privilege escalation.
 Focuses on modifications in user-writable directories by untrusted processes.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Alternate Authentication Material (T1550)
+- **Azonosító:** `T1550.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the use of stolen hashes or tickets for lateral movement by identifying 
+NTLM/Kerberos protocol anomalies, such as RC4 downgrades and restricted admin 
+logon types. Filters out legitimate system management tools.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1550, 002, 003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

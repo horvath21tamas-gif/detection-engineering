@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath endswith "\schtasks.exe" and (ProcessCommandLine contains " /delete " and ProcessCommandLine contains " /f") and ProcessCommandLine contains " /tn ") or (FolderPath endswith "\sc.exe" and ProcessCommandLine contains " delete ") or ((FolderPath in ("*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("* -Confirm:$false*", "* -Force*")))) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\chrome.exe", "*\msedge.exe", "*\w3wp.exe", "*\sqlservr.exe", "*\java.exe", "*\php-cgi.exe")) or (not ((ParentProcessName in ("*\msiexec.exe", "*\GoogleUpdate.exe", "*\MicrosoftEdgeUpdate.exe")) or (ProcessCommandLine in ("*Windows\System32\SystemReset.exe*", "*Telemetry*")) or (User =~ "NT AUTHORITY\SYSTEM" and ParentProcessName endswith "\services.exe"))))

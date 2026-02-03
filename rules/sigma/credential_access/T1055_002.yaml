@@ -36,7 +36,7 @@ detection:
             - '\runtimebroker.exe'
 
     filter_trusted_processes:
-        - SourceImage: 'C:\Windows\System32\csrss.exe'
+        - Sourceprocessname: 'C:\Windows\System32\csrss.exe'
         - SourceImage|endswith:
             - '\MsMpEng.exe'        
             - '\CcmExec.exe'       

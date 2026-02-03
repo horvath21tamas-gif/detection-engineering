@@ -144,6 +144,10 @@
             "color": "#ff6666"
         },
         {
+            "techniqueID": "T1055.002",
+            "color": "#ff6666"
+        },
+        {
             "techniqueID": "T1590.001",
             "color": "#ffbd66"
         },

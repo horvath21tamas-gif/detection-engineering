@@ -1,0 +1,44 @@
+title: Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578)
+id: 2423921d-a8b6-43ee-8594-9321e75e7790
+status: stable
+description: |
+    Detects high-risk modifications to cloud infrastructure that weaken security posture 
+    or prepare for data exfiltration, filtered by identity behavior and source trust.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.impact
+    - attack.t1578
+logsource:
+    product: cloud
+    service: Azure Activity
+detection:
+    selection_risky_ops:
+        operation_name|contains:
+            - 'DeleteSnapshot'            
+            - 'ModifyInstanceAttribute'     
+            - 'RevokeSecurityGroupIngress'  
+            - 'AuthorizeSecurityGroupIngress' 
+            - 'DeleteVpcPeeringConnection'
+
+    selection_params:
+        request_parameters|contains:
+            - '0.0.0.0/0'                  
+            - '::/0'
+            - 'all'                        
+
+    selection_untrusted_identity:
+        user_agent|contains:
+            - 'kali'
+            - 'python-requests'
+            - 'curl'
+            - 'postman'
+
+    filter_automation:
+        user_name|startswith: 'svc-terraform' 
+    filter_provider:
+        user_name|contains: 'system-internal' 
+
+    condition: selection_risky_ops and (selection_params or selection_untrusted_identity) and not (filter_automation or filter_provider)
+level: critical

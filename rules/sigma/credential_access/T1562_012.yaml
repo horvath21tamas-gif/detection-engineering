@@ -1,0 +1,50 @@
+title: Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012)
+id: 266d137f-9ba3-4a65-9428-2792a3d8f682
+status: stable
+description: |
+    Detects targeted attempts to blind cloud native security services. 
+    Focuses on suppression filter creation, detector deletion, and 
+    threat intelligence sabotage by non-automated or root identities.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1562.012
+logsource:
+    product: cloud
+    service: aws.cloudtrail 
+detection:
+    selection_terminate:
+        eventName:
+            - 'DeleteDetector'          
+            - 'UpdateDetector'          
+            - 'DeleteThreatIntelSet'    
+            - 'DeleteIPSet'           
+
+    selection_stealth_filters:
+        eventName:
+            - 'CreateFilter'           
+            - 'UpdateFilter'
+            - 'CreateSuppressionRule'  
+        requestParameters.action: 
+            - 'ARCHIVE'              
+            - 'SUPPRESS'
+
+    selection_identity_anomaly:
+        - userIdentity.type: 'Root'    
+        - userAgent|contains:
+            - 'python-requests'
+            - 'kali'
+            - 'curl'
+            - 'postman'
+        - userIdentity.sessionContext.attributes.mfaAuthenticated: 'false' 
+
+    filter_trusted_automation:
+        userIdentity.arn|contains:
+            - 'role/Security-Infrastructure-Terraform'
+            - 'role/AWS-Service-Role'     
+        sourceIPAddress:
+            - '10.0.0.0/8'                
+
+    condition: (selection_terminate or selection_stealth_filters) and (selection_identity_anomaly and not filter_trusted_automation)
+level: critical

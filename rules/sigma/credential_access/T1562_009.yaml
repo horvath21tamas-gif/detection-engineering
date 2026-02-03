@@ -1,0 +1,63 @@
+title: Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009)
+id: 4cb7e65b-edb2-46cb-a3a2-1508557715d8
+status: stable
+description: |
+    Detects attempts to force the system into Safe Mode to bypass security controls. 
+    Focuses on bcdedit manipulation combined with immediate forced reboots and 
+    registry-based service exclusion within the SafeBoot key.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1562.009
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_bcdedit_impact:
+        Image|endswith: '\bcdedit.exe'
+        CommandLine|contains:
+            - ' /set '
+        CommandLine|contains:
+            - 'safeboot minimal'
+            - 'safeboot network'
+        CommandLine|contains:
+            - '{current}'
+            - '{default}'
+
+    selection_registry_sabotage:
+        CommandLine|contains:
+            - 'reg'
+            - 'Set-ItemProperty'
+        CommandLine|contains:
+            - '\System\CurrentControlSet\Control\SafeBoot\Minimal\'
+            - '\System\CurrentControlSet\Control\SafeBoot\Network\'
+        CommandLine|contains:
+            - 'delete'
+            - '0x0'
+
+    selection_forced_reboot:
+        Image|endswith: '\shutdown.exe'
+        CommandLine|contains|all:
+            - ' /r' 
+            - ' /f' 
+            - ' /t 0' 
+
+    selection_suspicious_chain:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\w3wp.exe'
+
+    filter_trusted_processes:
+        - User: 'NT AUTHORITY\SYSTEM'
+          ParentImage|endswith: '\services.exe'
+        - CommandLine|contains:
+            - 'reagentc.exe'   
+            - 'SystemReset.exe' 
+        - ParentImage|endswith: '\msiexec.exe' 
+
+    condition: (selection_bcdedit_impact or selection_registry_sabotage or selection_forced_reboot) and (selection_suspicious_parent or not filter_trusted_processes)
+level: critical

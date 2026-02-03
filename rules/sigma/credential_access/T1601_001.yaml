@@ -46,5 +46,5 @@ detection:
             - 'cat '
             - 'grep '
 
-    condition: (selection_remount or selection_selection_patch_tools) and selection_critical_paths and not (filter_authorized_updates or filter_standard_ops)
+    condition: (selection_remount or selection_patch_tools) and selection_critical_paths and not (filter_authorized_updates or filter_read_only_debug)
 level: critical

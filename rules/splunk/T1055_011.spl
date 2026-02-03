@@ -1,0 +1,1 @@
+GrantedAccess IN ("0x1410", "0x1411", "0x1438", "0x143a") TargetImage IN ("*\\explorer.exe", "*\\taskhostw.exe", "*\\sihost.exe", "*\\searchui.exe") CallTrace="*unknown*" NOT (SourceImage IN ("*\\MsMpEng.exe", "*\\CcmExec.exe") OR CallTrace IN ("*user32.dll+*", "*win32u.dll+*", "*ntdll.dll+LdrpWorkItem*") OR condition="selection_source_equals_target")

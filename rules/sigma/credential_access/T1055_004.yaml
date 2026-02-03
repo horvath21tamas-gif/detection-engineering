@@ -1,0 +1,44 @@
+title: Ultra-Pro Stealthy APC Injection (T1055.004)
+id: 2e6b8b74-ebfa-4fb1-85ba-6e2d368e047e
+status: stable
+description: |
+    Detects high-fidelity APC injection attempts (including Early Bird) by monitoring for 
+    specific thread access masks (THREAD_SET_CONTEXT) where the calling code originates 
+    from unbacked or untrusted memory regions (CallTrace analysis).
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1055.004
+logsource:
+    product: windows
+    category: process_access 
+detection:
+    selection_access_mask:
+        GrantedAccess:
+            - '0x20'
+            - '0x22'
+            - '0x1438'
+            - '0x1F1FFF' 
+
+    selection_unbacked_memory:
+        CallTrace|contains: 'unknown'
+
+    selection_suspicious_targets:
+        TargetImage|endswith:
+            - '\svchost.exe'
+            - '\explorer.exe'
+            - '\werfault.exe'
+            - '\searchindexer.exe'
+
+    filter_trusted:
+        - SourceImage|endswith:
+            - '\MsMpEng.exe'        
+            - '\CcmExec.exe'       
+            - '\csrss.exe'          
+        - CallTrace|contains:
+            - 'ntdll.dll+LdrpWorkItem' 
+            - 'kernel32.dll+BaseThreadInitThunk'
+
+    condition: selection_access_mask and selection_unbacked_memory and not filter_trusted
+level: critical

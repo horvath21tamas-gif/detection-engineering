@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath endswith "\mmc.exe" or OriginalFileName =~ "mmc.exe") and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powerpnt.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\powershell.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe")) or (ProcessCommandLine in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Public\*", "*\Downloads\*", "*\*", "*http*"))) and (not (ParentProcessName endswith "\explorer.exe" and ProcessCommandLine contains "C:\Windows\System32\" and User contains "Admin"))

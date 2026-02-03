@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("*Get-AADIntAccessToken*", "*roadtoken*", "*sekurlsa::cloudap*", "*Get-MsGraphToken*", "*Request-AzureADToken*")) or ((ProcessCommandLine in ("*\Microsoft\TokenBroker\*", "*\Microsoft\IdentityCRL\*", "*\Local Storage\leveldb*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\cscript.exe", "*\python.exe"))) or ((FolderPath in ("*\curl.exe", "*\wget.exe")) and (ProcessCommandLine in ("*Bearer *", "*X-MS-RefreshToken*", "*access_token*")))) and (not (((FolderPath in ("*\Azure-CLI\*", "*\Microsoft SDKs\Azure\*")) and ParentProcessName endswith "\svchost.exe") or ((FolderPath in ("*\chrome.exe", "*\msedge.exe")) and ProcessCommandLine contains "--type=utility")))

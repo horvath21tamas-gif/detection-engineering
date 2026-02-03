@@ -29,7 +29,7 @@ detection:
             - '\PerfLogs\'
 
     selection_unauthorized_actor:
-        Image|not|contains:
+        Image|contains:
             - '\Windows\servicing\TrustedInstaller.exe'
             - '\Windows\System32\svchost.exe'
         Image|endswith:

@@ -1,0 +1,51 @@
+title: Ultra-Pro High-Fidelity Space After Filename Masquerading (T1036.006)
+id: f56a90c1-0a71-4184-80de-7fc674da4c11
+status: stable
+description: |
+    Detects intentional masquerading using trailing spaces in filenames or directory names. 
+    Focuses on executable extensions followed by spaces to evade string-based detection 
+    while filtering common Windows Update and SCCM/MECM noise.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1036.006
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_trailing_space:
+        - Image|contains: 
+            - '.exe '
+            - '.com '
+            - '.scr '
+            - '.pif '
+        - CommandLine|contains:
+            - '.exe  ' 
+            - '.exe "' 
+            - '.exe /' 
+
+    selection_padded_paths:
+        Image|contains:
+            - 'Windows \'    
+            - 'System32 \'     
+            - 'Program Files \'
+            - 'AppData \'
+
+    selection_untrusted_context:
+        Image|contains:
+            - '\Users\'
+            - '\Public\'
+            - '\Temp\'
+            - '\Downloads\'
+
+    filter_legit_system:
+        - Image|startswith:
+            - 'C:\Windows\System32\'
+            - 'C:\Windows\WinSxS\'
+            - 'C:\Windows\SoftwareDistribution\'
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith: '\msiexec.exe'
+
+    condition: (selection_trailing_space or selection_padded_paths) and (selection_untrusted_context or not filter_legit_system)
+level: critical

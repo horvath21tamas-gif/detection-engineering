@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (operation_name in ("*RunInstances*", "*Microsoft.Compute/virtualMachines/write*", "*v1.compute.instances.insert*")) and ((request_parameters in ("*p3.*", "*p4.*", "*g4.*", "*c5.24xlarge*", "*Standard_ND*", "*Standard_NC*", "*n1-highcpu-*")) or (mfa_authenticated =~ "false" and (user_agent in ("*kali*", "*python-requests*", "*boto3*", "*postman*")))) and (not ((user_name in ("svc-terraform*", "svc-github-actions*", "aws-autoscaling*")) or user_name contains "system-internal"))

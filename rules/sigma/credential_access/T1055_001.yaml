@@ -1,0 +1,43 @@
+title: Ultra-Pro Stealthy DLL Injection (T1055.001)
+id: e3429027-8461-43ef-8e8d-3705c0c576d7
+status: stable
+description: |
+    Detects high-fidelity DLL injection by identifying remote thread creation 
+    where the start address is a known library-loading function or the source 
+    memory region is not backed by a file on disk (unbacked memory).
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.privilege_escalation
+    - attack.t1055.001
+logsource:
+    product: windows
+    service: sysmon
+detection:
+    selection_load_library:
+        StartFunction:
+            - 'LoadLibraryA'
+            - 'LoadLibraryW'
+
+    selection_unbacked_start:
+        StartModule: null 
+
+    selection_critical_targets:
+        TargetImage|endswith:
+            - '\lsass.exe'
+            - '\svchost.exe'
+            - '\explorer.exe'
+            - '\winlogon.exe'
+            - '\spoolsv.exe'
+
+    filter_trusted:
+        - SourceImage: 'C:\Windows\System32\csrss.exe'
+        - SourceImage|endswith:
+            - '\MsMpEng.exe'       
+            - '\CcmExec.exe'       
+        - SourceUser: 'NT AUTHORITY\SYSTEM'
+          TargetImage: 'C:\Windows\System32\svchost.exe'
+
+    condition: (selection_load_library or selection_unbacked_start) and selection_critical_targets and not filter_trusted
+level: critical

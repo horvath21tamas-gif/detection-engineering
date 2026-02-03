@@ -1,0 +1,59 @@
+title: Ultra-Pro High-Fidelity Cloud Logging Impairment (T1562.008)
+id: b6ef3774-5752-45cb-b1b2-1713e379282d
+status: stable
+description: |
+    Detects critical changes to cloud logging (CloudTrail, Azure Activity) that 
+    create visibility gaps. Focuses on trail deletion, log file encryption 
+    disabling, and storage-level tampering by non-automated identities.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1562.008
+logsource:
+    product: windows
+    service: system
+detection:
+    selection_terminate:
+        eventName:
+            - 'StopLogging'
+            - 'DeleteTrail'
+            - 'DeleteEventBus'
+            - 'DeleteDiagnosticSetting' 
+
+    selection_integrity:
+        eventName:
+            - 'UpdateTrail'
+        requestParameters:
+            - 'EnableLogFileValidation: false'
+            - 'KmsKeyId: ""' 
+
+    selection_storage:
+        eventName:
+            - 'DeleteBucket'
+            - 'PutBucketLifecycleConfiguration' 
+            - 'PutBucketVersioning'             
+        requestParameters.bucketName|contains:
+            - 'log'
+            - 'audit'
+            - 'trail'
+            - 'telemetry'
+
+    selection_identity:
+        - userIdentity.type: 'Root'
+        - userIdentity.sessionContext.sessionIssuer.userName: null
+        - userAgent|contains:
+            - 'python-requests'
+            - 'kali'
+            - 'bot'
+
+    filter_trusted_automation:
+        userIdentity.arn|contains:
+            - 'role/Terraform-Execution-Policy'
+            - 'role/Security-ReadOnly-Auditor'
+            - 'role/OrganizationAccountAccessRole'
+        sourceIPAddress:
+            - '10.0.0.0/8' 
+
+    condition: (selection_terminate or selection_integrity or selection_storage) and (selection_identity and not filter_trusted_automation)
+level: critical

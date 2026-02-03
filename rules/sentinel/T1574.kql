@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath startswith "C:\Windows\" and (FolderPath in ("*\svchost.exe", "*\explorer.exe", "*\taskhostw.exe", "*\searchindexer.exe", "*\gpscript.exe", "*\calc.exe", "*\notepad.exe", "*\cmd.exe"))) and (ImageLoaded in ("*\Users\*", "*\ProgramData\*", "*\Windows\Temp\*", "*\AppData\*", "*\Public\*")) and (ImageLoaded in ("*\version.dll", "*\ntmarta.dll", "*\cryptbase.dll", "*\uxtheme.dll", "*\dwmapi.dll", "*\winmm.dll", "*\dnsapi.dll")) and (not ((ImageLoaded in ("C:\Windows\System32\*", "C:\Windows\WinSxS\*", "C:\Program Files\*", "C:\Program Files (x86)\*")) or (Signed =~ "true" and SignatureStatus =~ "Valid")))

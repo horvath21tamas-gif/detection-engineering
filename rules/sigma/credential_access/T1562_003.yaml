@@ -1,0 +1,64 @@
+title: Ultra-Pro High-Fidelity Command History Logging Impairment (T1562.003)
+id: c411146e-ff5f-4a6a-b918-2679122b822b
+status: stable
+description: |
+    Detects targeted attempts to suppress or redirect command history logging. 
+    Focuses on Set-PSReadLineOption abuse (SaveNothing, $null redirection) 
+    and console buffer suppression to prevent forensic recovery of commands.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1562.003
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_psreadline_impair:
+        CommandLine|contains:
+            - 'Set-PSReadLineOption'
+        CommandLine|contains:
+            - 'SaveNothing'
+            - 'AddToHistoryHandler'
+            - 'HistorySavePath'
+        CommandLine|contains:
+            - '$false'
+            - '$null'
+            - ' /dev/null'
+
+    selection_buffer_suppression:
+        - CommandLine|contains:
+            - 'HistoryBufferSize'
+            - '0'
+        - CommandLine|contains:
+            - 'reg'
+        - CommandLine|contains:
+            - 'Console\HistoryBufferSize'
+
+    selection_history_delete:
+        - CommandLine|contains:
+            - 'Remove-Item'
+            - 'del '
+            - 'rm '
+        - CommandLine|contains:
+            - '\ConsoleHost_history.txt'
+            - '\.bash_history' 
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\w3wp.exe'
+            - '\mshta.exe'
+
+    filter_trusted_apps:
+        - ParentImage|contains:
+            - '\Common7\IDE\devenv.exe' 
+            - '\Microsoft VS Code\Code.exe'
+        - User: 'NT AUTHORITY\SYSTEM'
+        - CommandLine|contains:
+            - 'AppData\Local\Temp\SDI' 
+
+    condition: (selection_psreadline_impair or selection_buffer_suppression or selection_history_delete) and (selection_suspicious_parent or not filter_trusted_apps)
+level: high

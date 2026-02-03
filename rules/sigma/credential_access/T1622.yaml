@@ -1,0 +1,54 @@
+title: Ultra-Pro Stealthy Debugger Evasion (T1622)
+id: 2bcdc689-6373-4494-9607-a3776240964d
+status: stable
+description: |
+    Detects high-fidelity debugger evasion by identifying anti-debug API access 
+    originating from unbacked memory (shellcode) or suspicious temporary paths, 
+    while filtering out legitimate IDEs and system error reporting.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.discovery
+    - attack.t1622
+logsource:
+    product: windows
+    category: process_access
+detection:
+    selection_access_mask:
+        GrantedAccess:
+            - '0x400'
+            - '0x410'
+            - '0x1400'
+            - '0x1F1FFF' 
+
+    selection_unbacked_calltrace:
+        CallTrace|contains: 'unknown'
+
+    selection_api_patterns:
+        CallTrace|contains:
+            - 'IsDebuggerPresent'
+            - 'CheckRemoteDebuggerPresent'
+            - 'NtQueryInformationProcess' 
+            - 'OutputDebugString'         
+
+    selection_suspicious_origin:
+        SourceImage|contains:
+            - '\Users\'
+            - '\Temp\'
+            - '\AppData\'
+            - '\Downloads\'
+
+    filter_legit_dev_tools:
+        SourceImage|endswith:
+            - '\devenv.exe'     
+            - '\windbg.exe'
+            - '\x64dbg.exe'
+            - '\code.exe'      
+            - '\pycharm64.exe'
+        - SourceImage: 'C:\Windows\System32\WerFault.exe'
+        - SourceImage: 'C:\Windows\System32\csrss.exe'
+        - CallTrace|contains: 'clr.dll+' 
+
+    condition: selection_access_mask and selection_unbacked_calltrace and (selection_api_patterns or selection_suspicious_origin) and not filter_legit_dev_tools
+level: high

@@ -31,7 +31,7 @@ detection:
 
     selection_shell_anomaly:
         TargetObject|endswith: '\Shell'
-        Details|not_contains: 'explorer.exe'
+        Details|contains: 'explorer.exe'
 
     selection_path_anomaly:
         Details|contains:

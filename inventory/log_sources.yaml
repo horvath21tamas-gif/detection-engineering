@@ -42,3 +42,4 @@ available_sources:
   - auditlogs
   - ad
   - process_access
+  - Cisco IOS

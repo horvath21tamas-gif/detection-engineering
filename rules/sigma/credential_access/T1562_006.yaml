@@ -1,0 +1,59 @@
+title: Ultra-Pro High-Fidelity Indicator Blocking and Telemetry Silencing (T1562.006)
+id: 07df976e-9e5c-4481-961b-eeb5f8ad03a0
+status: stable
+description: |
+    Detects targeted attempts to silence security monitoring by disabling ETW providers, 
+    tampering with Event Forwarding (WEF), or using host firewalls to block EDR/AV 
+    cloud-reputation and telemetry endpoints.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1562.006
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_etw_silence:
+        Image|endswith: '\logman.exe'
+        CommandLine|contains|all:
+            - 'stop'
+        CommandLine|contains:
+            - 'EventLog-System'
+            - 'EventLog-Security'
+            - 'Microsoft-Windows-DotNETRuntime' 
+            - 'Microsoft-Windows-Web-Http'      
+
+    selection_wef_tamper:
+        Image|endswith: '\wecutil.exe'
+        CommandLine|contains:
+            - ' ds '     
+            - ' /e:false' 
+
+    selection_firewall_blocking:
+        CommandLine|contains:
+            - 'netsh advfirewall firewall add rule'
+        CommandLine|contains:
+            - 'block'
+            - 'remoteport=443'
+        CommandLine|contains:
+            - 'remoteip=' 
+
+    selection_suspicious_chain:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\w3wp.exe'
+            - '\powershell.exe'
+            - '\cmd.exe'
+
+    filter_trusted_system:
+        - User: 'NT AUTHORITY\SYSTEM'
+          ParentImage|endswith: '\services.exe'
+        - CommandLine|contains:
+            - 'C:\Program Files\Microsoft Monitoring Agent\'
+            - 'C:\Program Files\SplunkUniversalForwarder\'
+            - 'C:\Program Files\Docker\' 
+
+    condition: (selection_etw_silence or selection_wef_tamper or selection_firewall_blocking) and (selection_suspicious_chain or not filter_trusted_system)
+level: critical

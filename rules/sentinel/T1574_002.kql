@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("C:\Windows\*", "C:\Program Files\*", "C:\Program Files (x86)\*")) and (FolderPath in ("*\OneDrive.exe", "*\calc.exe", "*\notepad.exe", "*\mshta.exe", "*\WinWord.exe", "*\Excel.exe", "*\Gpscript.exe", "*\MsiExec.exe"))) and (ImageLoaded in ("*\Users\*", "*\ProgramData\*", "*\Windows\Temp\*", "*\AppData\Local\Temp\*", "*\Public\*")) and Signed =~ "false" and (not (ImageLoaded in ("C:\Windows\System32\*", "C:\Windows\WinSxS\*", "C:\Program Files\*", "C:\Program Files (x86)\*"))) and (not (FolderPath in ("*\Google\Update\*", "*\Microsoft\EdgeUpdate\*")))

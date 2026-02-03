@@ -16,7 +16,7 @@ logsource:
     category: file_event
 detection:
     selection_paths:
-        TargetFilename|startsWith: '/Library/LaunchDaemons/'
+        TargetFilename|startswith: '/Library/LaunchDaemons/'
         TargetFilename|endswith: '.plist'
 
     selection_suspicious_writer:

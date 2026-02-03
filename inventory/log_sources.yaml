@@ -5,6 +5,7 @@ available_sources:
   - file_event
   - registry_set
   - dns_query
+  - file_change
   - registry_event
   - image_load
   - process_access
@@ -20,6 +21,8 @@ available_sources:
   - azure
   - macos
   - m365
+  - cloud
+  - network
   - generic
   service:
   - sysmon
@@ -29,3 +32,13 @@ available_sources:
   - signinlogs
   - audit
   - exchange
+  - auditd
+  - aws.cloudtrail
+  - FortiGate
+  - Azure Activity
+  - process_creation
+  - FortiOS
+  - Cisco OS
+  - auditlogs
+  - ad
+  - process_access

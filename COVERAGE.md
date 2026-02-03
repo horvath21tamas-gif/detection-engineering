@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 12:54:32`
+**Utolsó frissítés:** `2026-02-03 13:11:42`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 393 | 100% |
-| Splunk (SPL) | 393 | 100.0% |
-| Microsoft Sentinel (KQL) | 394 | 100.3% |
-| QRadar (AQL) | 196 | 49.9% |
-| Elastic (KQL/EQL) | 394 | 100.3% |
-| RSA NetWitness | 392 | 99.7% |
+| Sigma (Forrás) | 396 | 100% |
+| Splunk (SPL) | 396 | 100.0% |
+| Microsoft Sentinel (KQL) | 397 | 100.3% |
+| QRadar (AQL) | 197 | 49.7% |
+| Elastic (KQL/EQL) | 397 | 100.3% |
+| RSA NetWitness | 395 | 99.7% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -155,6 +155,9 @@
 | T1207 | CRITICAL | Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207) |
 | T1211 | CRITICAL | Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211) |
 | T1218 | HIGH | Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218), Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
+| T1218.001 | CRITICAL | Ultra-Pro High-Fidelity HH.exe Proxy Execution (T1218.001) |
+| T1218.002 | CRITICAL | Ultra-Pro High-Fidelity Control.exe Proxy Execution (T1218.002) |
+| T1218.003 | CRITICAL | Ultra-Pro High-Fidelity MsiExec Proxy Execution (T1218.003) |
 | T1218.005 | HIGH | Suspicious Mshta Execution of Remote Script (High Fidelity) |
 | T1218.007 | HIGH | Suspicious Msiexec Installation from Remote URL (High Fidelity) |
 | T1218.010 | HIGH | Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity) |

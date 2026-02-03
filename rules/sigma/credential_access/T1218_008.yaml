@@ -1,0 +1,56 @@
+title: Ultra-Pro High-Fidelity Odbcconf Proxy Execution (T1218.008)
+id: 6c48c067-e162-4b76-b663-1e832b3d0754
+status: stable
+description: |
+    Detects the abuse of odbcconf.exe to load malicious DLLs via the REGSVR action. 
+    Focuses on command-line anomalies, suspicious parent processes, and 
+    non-standard file paths to minimize false positives from legitimate installers.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1218.008
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\odbcconf.exe'
+        - OriginalFileName: 'odbcconf.exe'
+
+    selection_cmd_args:
+        CommandLine|contains:
+            - 'REGSVR'
+            - 'regsvr'
+            - ' /a ' 
+
+    selection_anomalies:
+        CommandLine|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Public\'
+            - '\Downloads\'
+            - '.txt' 
+            - '.dat'
+            - '.png'
+            - '\\'   
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+
+    filter_trusted_install:
+        ParentImage|startswith: 'C:\Windows\Installer\'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_img and selection_cmd_args and (selection_anomalies or selection_suspicious_parent) and not filter_trusted_install
+level: critical

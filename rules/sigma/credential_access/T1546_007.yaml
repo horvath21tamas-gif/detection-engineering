@@ -42,7 +42,7 @@ detection:
         username: 'NT AUTHORITY\SYSTEM'
 
     filter_microsoft_signed:
-        Details|startsWith: 'C:\Windows\System32\'
+        Details|startswith: 'C:\Windows\System32\'
         Details|endswith: '.dll'
 
     condition: selection_registry_path and (selection_suspicious_location or selection_suspicious_actor) and not (filter_trusted_installers or filter_microsoft_signed)

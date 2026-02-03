@@ -43,7 +43,7 @@ detection:
             - ' /f' 
             - ' /t 0' 
 
-    selection_suspicious_chain:
+    selection_suspicious_parent:
         ParentImage|endswith:
             - '\winword.exe'
             - '\excel.exe'

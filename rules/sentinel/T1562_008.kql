@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((eventName in ("StopLogging", "DeleteTrail", "DeleteEventBus", "DeleteDiagnosticSetting")) or (eventName =~ "UpdateTrail" and (requestParameters in ("EnableLogFileValidation: false", "KmsKeyId: \"\""))) or ((eventName in ("DeleteBucket", "PutBucketLifecycleConfiguration", "PutBucketVersioning")) and (['requestParameters.bucketName'] in ("*log*", "*audit*", "*trail*", "*telemetry*")))) and ((['userIdentity.type'] =~ "Root" or ['userIdentity.sessionContext.sessionIssuer.userName'] is null or (userAgent in ("*python-requests*", "*kali*", "*bot*"))) and (not ((['userIdentity.arn'] in ("*role/Terraform-Execution-Policy*", "*role/Security-ReadOnly-Auditor*", "*role/OrganizationAccountAccessRole*")) and sourceIPAddress =~ "10.0.0.0/8")))

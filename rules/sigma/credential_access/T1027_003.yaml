@@ -1,0 +1,55 @@
+title: Ultra-Pro High-Fidelity Steganography Payload Extraction (T1027.003)
+id: cabf18f2-a58c-4c00-a922-6a8b2fdc2371
+status: stable
+description: |
+    Detects the programmatic extraction of hidden payloads from image files. 
+    Focuses on the transition from pixel-level data access (GDI+) to dynamic 
+    code execution (Reflection/IEX) within the same process context.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1027.003
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_pixel_access:
+        CommandLine|contains:
+            - 'GetPixel'                  
+            - 'LockBits'                 
+            - 'BitmapData'
+            - 'Drawing.Bitmap'
+
+    selection_conversion:
+        CommandLine|contains:
+            - '[System.Text.Encoding]::ASCII.GetString'
+            - '[char[]]'
+            - '::FromBase64String'
+            - '[System.Convert]::ToByte'
+
+    selection_execution:
+        CommandLine|contains:
+            - 'iex'                      
+            - 'Invoke-Command'
+            - '[Reflection.Assembly]::Load'
+            - 'ScriptBlock'
+
+    selection_image_ext:
+        CommandLine|contains:
+            - '.png'
+            - '.jpg'
+            - '.jpeg'
+            - '.bmp'
+
+    filter_trusted_graphics:
+        Image|contains:
+            - '\Adobe\'
+            - '\GIMP'
+            - '\Visual Studio\'
+            - '\mspaint.exe'
+    filter_system_processes:
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_pixel_access and selection_conversion and selection_execution and selection_image_ext and not filter_trusted_graphics
+level: critical

@@ -53,7 +53,7 @@ detection:
             - ':Zone.Identifier'
             - ':favicon'
             - ':\Windows\' 
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|contains:
             - '\Windows\System32\svchost.exe'
 

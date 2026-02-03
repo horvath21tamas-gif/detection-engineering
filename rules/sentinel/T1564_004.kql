@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("* > *.*:*", "*type *:*", "*expand *:*", "*makecab *:*", "*findstr /v *:*")) or (ProcessCommandLine in ("*start *:*", "*wmic process call create*", "*control.exe *:*", "*rundll32.exe *:*", "*regsvr32.exe /s *:*")) or (ProcessCommandLine in ("* -stream *", "*Set-Content*", "*Add-Content*", "*Get-Item*", "* -alternate *"))) and (not ((ProcessCommandLine in ("*:Zone.Identifier*", "*:favicon*", "*:\Windows\*")) or User =~ "NT AUTHORITY\SYSTEM" or ParentProcessName contains "\Windows\System32\svchost.exe")) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\mshta.exe", "*\w3wp.exe")) or (not ((ProcessCommandLine in ("*:Zone.Identifier*", "*:favicon*", "*:\Windows\*")) or User =~ "NT AUTHORITY\SYSTEM" or ParentProcessName contains "\Windows\System32\svchost.exe")))

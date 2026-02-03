@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 08:00:48`
+**Utolsó frissítés:** `2026-02-03 08:11:08`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 317 | 100% |
-| Splunk (SPL) | 287 | 90.5% |
-| Microsoft Sentinel (KQL) | 288 | 90.9% |
-| QRadar (AQL) | 159 | 50.2% |
-| Elastic (KQL/EQL) | 288 | 90.9% |
-| RSA NetWitness | 286 | 90.2% |
+| Sigma (Forrás) | 324 | 100% |
+| Splunk (SPL) | 294 | 90.7% |
+| Microsoft Sentinel (KQL) | 295 | 91.0% |
+| QRadar (AQL) | 160 | 49.4% |
+| Elastic (KQL/EQL) | 295 | 91.0% |
+| RSA NetWitness | 293 | 90.4% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -215,9 +215,13 @@
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |
 | T1564 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
-| T1564.001 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
-| T1564.002 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
-| T1564.004 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
+| T1564.001 | HIGH | Ultra-Pro High-Fidelity Hidden File Attribute Manipulation (T1564.001), Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
+| T1564.002 | CRITICAL | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564), Ultra-Pro High-Fidelity Hidden User Account Creation (T1564.002) |
+| T1564.003 | HIGH | Ultra-Pro High-Fidelity Hidden Window Execution (T1564.003) |
+| T1564.004 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564), Ultra-Pro High-Fidelity NTFS Alternative Data Stream (ADS) Abuse (T1564.004) |
+| T1564.005 | HIGH | Ultra-Pro High-Fidelity Hidden File System Manipulation (T1564.005) |
+| T1564.008 | CRITICAL | Ultra-Pro High-Fidelity Email Hiding Rules Detection (T1564.008) |
+| T1564.011 | HIGH | Ultra-Pro High-Fidelity Virtual Instance Abuse (T1564.011) |
 | T1566 | CRITICAL | High-Fidelity Phishing Payload Execution from Communication Apps |
 | T1566.001 | CRITICAL | High-Fidelity Spearphishing Attachment Execution |
 | T1566.002 | CRITICAL | High-Fidelity Browser-Originating Payload Execution |

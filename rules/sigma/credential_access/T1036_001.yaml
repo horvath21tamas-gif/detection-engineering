@@ -1,0 +1,50 @@
+title: Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001)
+id: 1f0e4eae-4c82-4006-9959-6339c18757fe
+status: stable
+description: |
+    Detects critical system processes (e.g., lsass, svchost) running with invalid, 
+    untrusted, or forged digital signatures. Focuses on identity-signature 
+    mismatch and publisher typosquatting to eliminate developer noise.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1036.001
+logsource:
+    product: windows
+    service: sysmon 
+detection:
+    selection_critical_names:
+        Image|endswith:
+            - '\svchost.exe'
+            - '\lsass.exe'
+            - '\services.exe'
+            - '\wininit.exe'
+            - '\smss.exe'
+            - '\csrss.exe'
+            - '\winlogon.exe'
+            - '\spoolsv.exe'
+            - '\taskhostw.exe'
+
+    selection_bad_signature:
+        SignatureStatus:
+            - 'invalid'
+            - 'unavailable'
+            - 'error'
+
+    selection_forged_publisher:
+        CommandLine|contains: 
+            - 'Micros0ft'
+            - 'Mircosoft'
+            - 'Microsof '
+            - 'Google Inc' 
+            - 'Microsofts'
+
+    filter_legit:
+        - Signed: 'true'
+          SignatureStatus: 'Valid'
+          Publisher|contains: 'Microsoft Corporation'
+        - Image|startswith: 'C:\Windows\WinSxS\' 
+
+    condition: (selection_critical_names and selection_bad_signature) or selection_forged_publisher
+level: critical

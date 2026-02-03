@@ -19,6 +19,7 @@
 | T1003 | HIGH | Credential Dumping LSASS |
 | T1003.001 | HIGH | Suspicious Access to LSASS Process Memory, Credential Dumping LSASS |
 | T1006 | CRITICAL | Ultra-Pro Stealthy Direct Volume Access (T1006) |
+| T1014 | CRITICAL | Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014) |
 | T1021 | MEDIUM | Rapid Logons to Multiple Distant Hosts by Same User |
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |
 | T1027 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Encoded PowerShell Command Execution |

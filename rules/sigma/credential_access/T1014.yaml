@@ -49,7 +49,7 @@ detection:
             - 'C:\Windows\System32\msiexec.exe'
             - 'C:\Windows\System32\DriverStore\'
             - 'C:\Windows\System32\drvinst.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_loaders or (selection_sc_kernel and selection_paths) or (selection_vuln_drivers and selection_paths)) and not filter_legit_install
 level: critical

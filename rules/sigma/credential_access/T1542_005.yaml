@@ -29,7 +29,7 @@ detection:
             - '.com' 
 
     selection_unauthorized_actor:
-        Image|not|endswith:
+        Image|endswith:
             - '\dhcpssvc.exe' 
             - '\mmc.exe'      
             - '\svchost.exe'

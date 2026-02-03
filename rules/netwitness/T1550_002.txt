@@ -1,0 +1,2 @@
+((EventID = 4624 AND LogonType = 9 AND ((LogonProcessName = '*seclogo*'))&& ((AuthenticationPackage = '*Negotiate*'))) OR (EventID = 4624 AND LogonType = 3 AND ((AuthenticationPackage = '*NTLM*'))&& (((IpAddress = '*127.0.0.1*' OR IpAddress = '*::1*')))) OR (((param = '*sekurlsa::pth*' OR param = '*Invoke-TheHash*' OR param = '*mimikatz.exe*' OR param = '*pth-winexe*')))) AND (NOT ((((TargetUserName = '*$*'))&& ((SubjectUserName = '*$*'))))
+)

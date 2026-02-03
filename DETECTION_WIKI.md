@@ -227,6 +227,8 @@
 - [Ultra-Pro AppleScript Privilege Escalation (T1548.004)](#ultra-pro-applescript-privilege-escalation-(t1548004))
 - [Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005)](#ultra-pro-suid-desktop-entry-&-shortcut-abuse-(t1548005))
 - [Ultra-Pro High-Fidelity Alternate Authentication Material (T1550)](#ultra-pro-high-fidelity-alternate-authentication-material-(t1550))
+- [Ultra-Pro High-Fidelity Application Access Token Abuse (T1550.001)](#ultra-pro-high-fidelity-application-access-token-abuse-(t1550001))
+- [Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002)](#ultra-pro-high-fidelity-pass-the-hash-detection-(t1550002))
 - [Ultra-Pro High-Fidelity Subvert Trust Controls (T1553)](#ultra-pro-high-fidelity-subvert-trust-controls-(t1553))
 - [Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001)](#ultra-pro-high-fidelity-macos-gatekeeper-and-quarantine-bypass-(t1553001))
 - [Ultra-Pro High-Fidelity SIP Hijacking and Trust Subversion (T1553.002)](#ultra-pro-high-fidelity-sip-hijacking-and-trust-subversion-(t1553002))
@@ -4145,6 +4147,39 @@ NTLM/Kerberos protocol anomalies, such as RC4 downgrades and restricted admin
 logon types. Filters out legitimate system management tools.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1550, 002, 003`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Application Access Token Abuse (T1550.001)
+- **Azonosító:** `T1550_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the theft of application access tokens by identifying unauthorized access to 
+IdentityCRL and TokenBroker stores, as well as the use of bearer tokens in command-line utilities.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002)
+- **Azonosító:** `T1550_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects Pass-the-Hash (PtH) by identifying anomalous NTLM loopback authentication, 
+restricted admin logon types (LogonType 9 via seclogo), and known credential injection 
+tool patterns while excluding legitimate service accounts.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

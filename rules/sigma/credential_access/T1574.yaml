@@ -21,7 +21,7 @@ logsource:
     product: windows
 detection:
     selection_system_proc:
-        Image|startsWith: 'C:\Windows\'
+        Image|startswith: 'C:\Windows\'
         Image|endswith:
             - '\svchost.exe'
             - '\explorer.exe'
@@ -51,7 +51,7 @@ detection:
             - '\dnsapi.dll'
 
     filter_standard_locations:
-        ImageLoaded|startsWith:
+        ImageLoaded|startswith:
             - 'C:\Windows\System32\'
             - 'C:\Windows\WinSxS\'
             - 'C:\Program Files\'

@@ -1,0 +1,8 @@
+
+| rex field=CommandLine "(?<CommandLineMatch>.* -n (?:[1-9][0-9]{2,}|[1-9][0-9][0-9]+).*)"
+| eval CommandLineCondition=if(isnotnull(CommandLineMatch), "true", "false")
+| rex field=CommandLine "(?<CommandLineMatch2>.* /t (?:[6-9][0-9]|[1-9][0-9]{2,}).*)"
+| eval CommandLineCondition2=if(isnotnull(CommandLineMatch2), "true", "false")
+| rex field=CommandLine "(?<CommandLineMatch3>.* /t (?:[1-9][0-9]{2,}).*)"
+| eval CommandLineCondition3=if(isnotnull(CommandLineMatch3), "true", "false")
+| search Image IN ("*\\AppData\\Local\\Temp\\*", "*\\Users\\Public\\*", "*\\Downloads\\*", "*\\Desktop\\*", "*\\PerfLogs\\*") (CommandLine IN ("*ping 127.0.0.1 -n *", "*ping ::1 -n *") CommandLineCondition="true") OR (CommandLine IN ("*choice /t*", "*choice /d y /t*") CommandLineCondition2="true") OR (CommandLine="*timeout /t*" CommandLineCondition3="true") NOT ((ParentImage IN ("*\\msiexec.exe", "*\\TrustedInstaller.exe", "*\\CcmExec.exe") username="NT AUTHORITY\\SYSTEM") OR CommandLine IN ("*net use*", "*subst*", "*net time*"))

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*GetPixel*", "*LockBits*", "*System.Drawing.Bitmap*", "*System.Drawing.FolderPath*", "*[Drawing.Color]*")) and (ProcessCommandLine in ("*iex*", "*Invoke-Command*", "* -enc *", "*ScriptBlock*")) and (ProcessCommandLine in ("*.png*", "*.jpg*", "*.jpeg*", "*.bmp*")) and (not (FolderPath in ("*C:\Program Files\Adobe\*", "*C:\Program Files\GIMP*", "*C:\Windows\System32\mspaint.exe*", "*Visual Studio*")))

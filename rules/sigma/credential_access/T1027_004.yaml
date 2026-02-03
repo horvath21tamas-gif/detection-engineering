@@ -43,7 +43,7 @@ detection:
             - 'C:\Windows\System32\mspaint.exe'
             - 'Visual Studio'
     filter_null_user:
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_pixel_extraction and selection_execution and selection_image_files and not filter_trusted_apps
 level: critical

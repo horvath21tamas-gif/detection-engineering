@@ -1,0 +1,2 @@
+(((param = '*GetPixel*' OR param = '*LockBits*' OR param = '*System.Drawing.Bitmap*' OR param = '*System.Drawing.process*' OR param = '*[Drawing.Color]*'))) AND (((param = '*iex*' OR param = '*Invoke-Command*' OR param = '* -enc *' OR param = '*ScriptBlock*'))) AND (((param = '*.png*' OR param = '*.jpg*' OR param = '*.jpeg*' OR param = '*.bmp*'))) AND (NOT ((((process = '*C:\\Program Files\\Adobe\\*' OR process = '*C:\\Program Files\\GIMP*' OR process = '*C:\\Windows\\System32\\mspaint.exe*' OR process = '*Visual Studio*'))))
+)

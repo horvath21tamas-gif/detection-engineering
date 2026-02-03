@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 07:32:50`
+**Utolsó frissítés:** `2026-02-03 08:00:48`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 316 | 100% |
-| Splunk (SPL) | 287 | 90.8% |
-| Microsoft Sentinel (KQL) | 288 | 91.1% |
-| QRadar (AQL) | 159 | 50.3% |
-| Elastic (KQL/EQL) | 288 | 91.1% |
-| RSA NetWitness | 286 | 90.5% |
+| Sigma (Forrás) | 317 | 100% |
+| Splunk (SPL) | 287 | 90.5% |
+| Microsoft Sentinel (KQL) | 288 | 90.9% |
+| QRadar (AQL) | 159 | 50.2% |
+| Elastic (KQL/EQL) | 288 | 90.9% |
+| RSA NetWitness | 286 | 90.2% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -127,7 +127,11 @@
 | T1218.010 | HIGH | Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity) |
 | T1218.011 | HIGH | Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity) |
 | T1219 | HIGH | Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern |
+| T1222 | HIGH | Ultra-Pro High-Fidelity Permissions Modification (T1222) |
+| T1222.001 | HIGH | Ultra-Pro High-Fidelity Windows File Permissions Modification (T1222.001), Ultra-Pro High-Fidelity Permissions Modification (T1222) |
+| T1222.002 | HIGH | Ultra-Pro High-Fidelity Linux File Permissions Modification (T1222.002) |
 | T1480 | HIGH | Ultra-Pro High-Fidelity Execution Guardrails Discovery (T1480) |
+| T1480.001 | HIGH | Ultra-Pro Environmental Keying Discovery (T1480.001) |
 | T1484 | CRITICAL | Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484) |
 | T1484.001 | CRITICAL | Ultra-Pro Group Policy Modification & Abuse (T1484.001) |
 | T1484.002 | CRITICAL | Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002) |
@@ -210,6 +214,10 @@
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |
+| T1564 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
+| T1564.001 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
+| T1564.002 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
+| T1564.004 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
 | T1566 | CRITICAL | High-Fidelity Phishing Payload Execution from Communication Apps |
 | T1566.001 | CRITICAL | High-Fidelity Spearphishing Attachment Execution |
 | T1566.002 | CRITICAL | High-Fidelity Browser-Originating Payload Execution |

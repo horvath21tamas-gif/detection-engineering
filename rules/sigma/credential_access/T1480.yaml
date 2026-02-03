@@ -1,0 +1,64 @@
+title: Ultra-Pro High-Fidelity Execution Guardrails Discovery (T1480)
+id: 5499e464-eaf5-490b-a9b7-dae79f175d32
+status: stable
+description: |
+    Detects targeted execution guardrails by identifying anomalous environment 
+    discovery patterns initiated by non-privileged users or suspicious parents, 
+    filtering out common administrative and system noise.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1480
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_discovery_tools:
+        Image|endswith:
+            - '\whoami.exe'
+            - '\hostname.exe'
+            - '\nltest.exe'
+            - '\systeminfo.exe'
+            - '\net.exe'
+            - '\net1.exe'
+
+    selection_guardrail_cmds:
+        CommandLine|contains:
+            - '/domain'
+            - '/dsgetdc'
+            - 'TRUSTED_DOMAIN'
+            - 'AD_DOMAIN'
+            - 'USERDOMAIN'
+            - 'COMPUTERNAME'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\mshta.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\browser.exe'
+            - '\chrome.exe'
+            - '\firefox.exe'
+
+    filter_legit_noise:
+        - User: 'NT AUTHORITY\SYSTEM' 
+        - ParentImage|contains:
+            - '\Windows\System32\svchost.exe'
+            - '\Program Files\Microsoft Monitoring Agent\'
+            - '\CcmExec.exe'
+        - CommandLine|contains:
+            - 'gpresult' 
+            - 'logon'
+
+    selection_suspicious_source:
+        Image|contains:
+            - '\Users\'
+            - '\Temp\'
+            - '\Downloads\'
+
+    condition: selection_discovery_tools and selection_guardrail_cmds and (selection_suspicious_parent or selection_suspicious_source) and not filter_legit_noise
+level: high

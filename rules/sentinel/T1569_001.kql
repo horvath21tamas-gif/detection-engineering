@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*/Library/LaunchDaemons/*", "*/Library/LaunchAgents/*")) and ((ParentProcessName in ("*/bash", "*/sh", "*/zsh", "*/python", "*/curl", "*/wget", "*/nc")) or (ProcessCommandLine in ("*curl *", "*wget *", "*base64*", "*bash -i*", "*/dev/tcp/*", "*chmod +x*", "*/tmp/*"))) and (not ((ParentProcessName in ("*/installd", "*/pkgutil", "*/Software Update", "*/managedclient")) or (ProcessCommandLine in ("*com.apple.*", "*com.microsoft.*", "*com.google.*", "*com.jamf.*"))))

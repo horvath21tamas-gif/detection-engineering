@@ -48,5 +48,5 @@ detection:
         LogonType: 9
         AuthenticationPackage: 'Negotiate'
 
-    condition: (selection_offensive_tools or (selection_suspicious_origin) and not filter_trusted_management
+    condition: (selection_offensive_tools or selection_suspicious_origin) and not filter_trusted_management
 level: critical

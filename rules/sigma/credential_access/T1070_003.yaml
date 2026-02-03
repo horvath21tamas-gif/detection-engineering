@@ -1,0 +1,66 @@
+title: Ultra-Pro High-Fidelity Mailbox Data Clearing and Rule Sabotage (T1070.003)
+id: b68b842f-d6af-47ae-ac3c-24b3dc71efbf
+status: stable
+description: |
+    Detects systematic mailbox data removal and the creation of malicious inbox rules. 
+    Focuses on bulk deletion cmdlets and automated rule sets designed to suppress 
+    security notifications or hide attacker communication.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1070.003
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_bulk_delete:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        CommandLine|contains:
+            - 'Search-Mailbox'
+            - 'New-MailboxSearch'
+            - 'Export-Mailbox' 
+        CommandLine|contains:
+            - ' -DeleteContent'
+            - ' -Force'
+            - ' -Purge'
+
+    selection_malicious_rules:
+        CommandLine|contains:
+            - 'New-InboxRule'
+            - 'Set-InboxRule'
+        CommandLine|contains:
+            - ' -DeleteMessage $true'
+            - ' -MoveToFolder'
+        CommandLine|contains:
+            - 'Junk'
+            - 'Trash'
+            - 'Deleted Items'
+            - 'Archive'
+        CommandLine|contains:
+            - 'Security'
+            - 'Alert'
+            - 'Phish'
+            - 'Login'
+
+    selection_suspicious_chain:
+        ParentImage|endswith:
+            - '\w3wp.exe'
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\mshta.exe'
+            - '\php-cgi.exe'
+
+    filter_trusted_operations:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - CommandLine|contains:
+            - 'Discovery Management' 
+            - 'Compliance'
+            - 'Retention'
+        - ParentImage|endswith:
+            - '\ExSetup.exe' 
+
+    condition: (selection_bulk_delete or selection_malicious_rules) and (selection_suspicious_chain or not filter_trusted_operations)
+level: high

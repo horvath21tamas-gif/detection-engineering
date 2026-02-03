@@ -213,6 +213,7 @@
 | T1560.001 | HIGH | Adatok gyanús archiválása exfiltráció céljából |
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
+| T1562.002 | CRITICAL | Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002) |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |
 | T1562.007 | CRITICAL | Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007) |
 | T1564 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |

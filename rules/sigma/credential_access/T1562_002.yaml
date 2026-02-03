@@ -50,7 +50,7 @@ detection:
             - '\powershell.exe'
 
     filter_trusted_system_context:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
           ParentImage|endswith: 
             - '\services.exe'
             - '\svchost.exe'

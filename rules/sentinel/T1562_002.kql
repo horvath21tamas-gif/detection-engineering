@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath endswith "\wevtutil.exe" and (ProcessCommandLine contains " /e:false" and ProcessCommandLine contains " /q")) or (ProcessCommandLine in ("*sc  config eventlog start= disabled*", "*sc.exe  config eventlog start= disabled*", "*net stop \"event log\"*", "*net stop eventlog*", "*Set-Service -Name eventlog -Status Stopped*")) or ProcessCommandLine contains "0x0") and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\w3wp.exe", "*\powershell.exe")) or (not ((User =~ "NT AUTHORITY\SYSTEM" and (ParentProcessName in ("*\services.exe", "*\svchost.exe", "*\msiexec.exe"))) or (ProcessCommandLine in ("*\Program Files\*", "*TrustedInstaller*")))))

@@ -1,0 +1,44 @@
+title: Ultra-Pro High-Fidelity Network OS Image Modification (T1601)
+id: 9957af0c-9905-4c3b-97b7-e4b4cff441af
+status: stable
+description: |
+    Detects unauthorized modification of network device operating system images. 
+    Focuses on binary uploads via insecure protocols and boot-system overrides 
+    performed outside of trusted management windows or hosts.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.persistence
+    - attack.t1601
+logsource:
+    product: network
+    service: FortiOS
+detection:
+    selection_image_ops:
+        Message|contains:
+            - 'copy tftp flash'             
+            - 'copy ftp flash'
+            - 'request system software add'  
+            - 'update firmware'             
+            - 'boot system flash'            
+            - 'install activate'          
+
+    selection_context:
+        Message|contains:
+            - 'tftp'
+            - 'unauthenticated'
+            - 'unknown source'
+            - 'checksum failed'             
+
+    filter_trusted_mgmt_hosts:
+        SourceIP: 
+            - '10.50.0.10'
+            - '10.50.0.11'
+    filter_standard_backups:
+        Message|contains:
+            - 'copy running-config'
+            - 'copy startup-config'
+            - 'archive config'
+
+    condition: selection_image_ops and (selection_context or not filter_trusted_mgmt_hosts) and not filter_standard_backups
+level: critical

@@ -43,7 +43,7 @@ detection:
 
     selection_unsigned_target:
         - TargetCodeSignature|contains: 'unsigned'
-        - TargetCodeSignature|not_contains: 'Developer ID Application:'
+        - TargetCodeSignature|contains: 'Developer ID Application:'
 
     condition: selection_paths and (selection_suspicious_writer or selection_unsigned_target) and not filter_trusted_installers
 level: critical

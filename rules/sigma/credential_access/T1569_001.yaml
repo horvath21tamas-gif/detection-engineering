@@ -53,5 +53,5 @@ detection:
             - 'com.google.'
             - 'com.jamf.'
 
-    condition: selection_launch_paths and (selection_untrusted_parents or selection_suspicious_payload) and not filter_apple_legit
+    condition: selection_launch_paths and (selection_untrusted_parents or selection_suspicious_payloads) and not filter_apple_legit
 level: critical

@@ -7,13 +7,17 @@
 - [Suspicious RDP Logon from Unusual Source](#suspicious-rdp-logon-from-unusual-source)
 - [Suspicious Base64-Encoded PowerShell Command with Network Activity](#suspicious-base64-encoded-powershell-command-with-network-activity)
 - [Ultra-Pro High-Fidelity Binary Padding Activity (T1027.001)](#ultra-pro-high-fidelity-binary-padding-activity-(t1027001))
+- [Ultra-Pro High-Fidelity Software Packing Event (T1027.002)](#ultra-pro-high-fidelity-software-packing-event-(t1027002))
+- [Ultra-Pro High-Fidelity Steganography Payload Extraction (T1027.003)](#ultra-pro-high-fidelity-steganography-payload-extraction-(t1027003))
 - [Ultra-Pro High-Fidelity Steganography Payload Extraction (T1027.004)](#ultra-pro-high-fidelity-steganography-payload-extraction-(t1027004))
 - [Ultra-Pro High-Fidelity Indicator Removal and Signature Theft (T1027.005)](#ultra-pro-high-fidelity-indicator-removal-and-signature-theft-(t1027005))
 - [Ultra-Pro High-Fidelity HTML Smuggling Execution (T1027.006)](#ultra-pro-high-fidelity-html-smuggling-execution-(t1027006))
 - [Ultra-Pro High-Fidelity Binary Symbol Stripping (T1027.007)](#ultra-pro-high-fidelity-binary-symbol-stripping-(t1027007))
+- [Ultra-Pro High-Fidelity Binary Symbol Stripping (T1027.008)](#ultra-pro-high-fidelity-binary-symbol-stripping-(t1027008))
 - [Ultra-Pro High-Fidelity Embedded Payload Extraction (T1027.009)](#ultra-pro-high-fidelity-embedded-payload-extraction-(t1027009))
 - [Ultra-Pro High-Fidelity Command Line Obfuscation (T1027.010)](#ultra-pro-high-fidelity-command-line-obfuscation-(t1027010))
 - [Ultra-Pro High-Fidelity Suspicious Archive Creation (T1027.011)](#ultra-pro-high-fidelity-suspicious-archive-creation-(t1027011))
+- [Ultra-Pro High-Fidelity Windows LDR Hijacking (T1027.012)](#ultra-pro-high-fidelity-windows-ldr-hijacking-(t1027012))
 - [Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036)](#ultra-pro-high-fidelity-masquerading-and-process-path-abuse-(t1036))
 - [Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001)](#ultra-pro-high-fidelity-invalid-or-forged-code-signature-(t1036001))
 - [Ultra-Pro High-Fidelity RTLO Character Execution (T1036.002)](#ultra-pro-high-fidelity-rtlo-character-execution-(t1036002))
@@ -371,6 +375,7 @@
 - [Ultra-Pro Container Escape & Host Access (T1611)](#ultra-pro-container-escape-&-host-access-(t1611))
 - [Ultra-Pro Stealthy Local Image Build (T1612)](#ultra-pro-stealthy-local-image-build-(t1612))
 - [Ultra-Pro Stealthy Debugger Evasion (T1622)](#ultra-pro-stealthy-debugger-evasion-(t1622))
+- [Ultra-Pro High-Fidelity macOS Plist Persistence Modification (T1647)](#ultra-pro-high-fidelity-macos-plist-persistence-modification-(t1647))
 - [High-Fidelity Serverless Function Persistence or Abuse](#high-fidelity-serverless-function-persistence-or-abuse)
 - [High-Fidelity Cloud Account Acquisition and Initialization - T1650](#high-fidelity-cloud-account-acquisition-and-initialization---t1650)
 - [High-Fidelity Cloud Administration Agent Abuse](#high-fidelity-cloud-administration-agent-abuse)
@@ -473,6 +478,40 @@ commands targeting executable files in suspicious paths.
 
 ---
 
+## Ultra-Pro High-Fidelity Software Packing Event (T1027.002)
+- **Azonosító:** `T1027_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the use of binary packers (UPX, MPRESS, etc.) in non-standard environments. 
+Focuses on command-line patterns used for high-compression/obfuscation and 
+suspicious parent process lineages.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Steganography Payload Extraction (T1027.003)
+- **Azonosító:** `T1027_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the programmatic extraction of hidden payloads from image files. 
+Focuses on the transition from pixel-level data access (GDI+) to dynamic 
+code execution (Reflection/IEX) within the same process context.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Steganography Payload Extraction (T1027.004)
 - **Azonosító:** `T1027_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -540,6 +579,23 @@ Focuses on the execution of stripping tools on non-build systems to hinder foren
 
 ---
 
+## Ultra-Pro High-Fidelity Binary Symbol Stripping (T1027.008)
+- **Azonosító:** `T1027_008.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the active stripping of debug symbols and section headers from binaries 
+in non-development environments. This hinders forensic analysis and reverse engineering 
+by removing function names and symbol tables.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `008`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Embedded Payload Extraction (T1027.009)
 - **Azonosító:** `T1027_009.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -586,6 +642,23 @@ Focuses on command-line password arguments and recursive collection from sensiti
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Windows LDR Hijacking (T1027.012)
+- **Azonosító:** `T1027_012.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects attempts to hijack the Windows loader (LDR) via AppInit_DLLs or AppCertDLLs. 
+It specifically targets DLL registrations originating from non-system paths (Temp, Public, User profiles) 
+and the activation of the LoadAppInit_DLLs flag by suspicious processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `012`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
@@ -6387,6 +6460,23 @@ while filtering out legitimate IDEs and system error reporting.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity macOS Plist Persistence Modification (T1647)
+- **Azonosító:** `T1647.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious modifications of macOS Property List (.plist) files using CLI tools. 
+Focuses on persistence-related keys (LaunchAgents/LaunchDaemons) and filters out 
+legitimate system update processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1647`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

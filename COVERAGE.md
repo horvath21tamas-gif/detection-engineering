@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 12:04:26`
+**Utolsó frissítés:** `2026-02-03 12:22:30`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 377 | 100% |
-| Splunk (SPL) | 377 | 100.0% |
-| Microsoft Sentinel (KQL) | 378 | 100.3% |
-| QRadar (AQL) | 191 | 50.7% |
-| Elastic (KQL/EQL) | 378 | 100.3% |
-| RSA NetWitness | 376 | 99.7% |
+| Sigma (Forrás) | 382 | 100% |
+| Splunk (SPL) | 382 | 100.0% |
+| Microsoft Sentinel (KQL) | 383 | 100.3% |
+| QRadar (AQL) | 194 | 50.8% |
+| Elastic (KQL/EQL) | 383 | 100.3% |
+| RSA NetWitness | 381 | 99.7% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -23,13 +23,17 @@
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |
 | T1027 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Encoded PowerShell Command Execution |
 | T1027.001 | HIGH | Ultra-Pro High-Fidelity Binary Padding Activity (T1027.001) |
+| T1027.002 | HIGH | Ultra-Pro High-Fidelity Software Packing Event (T1027.002) |
+| T1027.003 | CRITICAL | Ultra-Pro High-Fidelity Steganography Payload Extraction (T1027.003) |
 | T1027.004 | CRITICAL | Ultra-Pro High-Fidelity Steganography Payload Extraction (T1027.004) |
 | T1027.005 | CRITICAL | Ultra-Pro High-Fidelity Indicator Removal and Signature Theft (T1027.005) |
 | T1027.006 | CRITICAL | Ultra-Pro High-Fidelity HTML Smuggling Execution (T1027.006) |
 | T1027.007 | HIGH | Ultra-Pro High-Fidelity Binary Symbol Stripping (T1027.007) |
+| T1027.008 | HIGH | Ultra-Pro High-Fidelity Binary Symbol Stripping (T1027.008) |
 | T1027.009 | CRITICAL | Ultra-Pro High-Fidelity Embedded Payload Extraction (T1027.009) |
 | T1027.010 | HIGH | Ultra-Pro High-Fidelity Command Line Obfuscation (T1027.010) |
 | T1027.011 | HIGH | Ultra-Pro High-Fidelity Suspicious Archive Creation (T1027.011) |
+| T1027.012 | CRITICAL | Ultra-Pro High-Fidelity Windows LDR Hijacking (T1027.012) |
 | T1036 | CRITICAL | Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036), Legitimate Windows Binary Copied to User-Writable Location, Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007) |
 | T1036.001 | CRITICAL | Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001) |
 | T1036.002 | CRITICAL | Ultra-Pro High-Fidelity RTLO Character Execution (T1036.002) |
@@ -388,6 +392,7 @@
 | T1611 | CRITICAL | Ultra-Pro Container Escape & Host Access (T1611) |
 | T1612 | CRITICAL | Ultra-Pro Stealthy Local Image Build (T1612) |
 | T1622 | HIGH | Ultra-Pro Stealthy Debugger Evasion (T1622) |
+| T1647 | HIGH | Ultra-Pro High-Fidelity macOS Plist Persistence Modification (T1647) |
 | T1648 | HIGH | High-Fidelity Serverless Function Persistence or Abuse |
 | T1650 | HIGH | High-Fidelity Cloud Account Acquisition and Initialization - T1650 |
 | T1651 | CRITICAL | High-Fidelity Cloud Administration Agent Abuse |

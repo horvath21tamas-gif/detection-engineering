@@ -1,0 +1,56 @@
+title: Ultra-Pro Stealthy Process Injection Detection (T1055)
+id: d693769d-1fae-4a9a-9daa-7a290408d22c
+status: stable
+description: |
+    Detects advanced process injection (e.g. DLL injection, Thread Hijacking) by 
+    monitoring for specific high-risk GrantedAccess masks combined with 
+    suspicious source-target relationships and unbacked memory regions.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.privilege_escalation
+    - attack.t1055
+logsource:
+    product: windows
+    category: process_access 
+detection:
+    selection_access_flags:
+        GrantedAccess:
+            - '0x1410'
+            - '0x1411'
+            - '0x1438'
+            - '0x143a'
+            - '0x1F1FFF' 
+
+    selection_suspicious_pairing:
+        TargetImage|endswith:
+            - '\explorer.exe'
+            - '\svchost.exe'
+            - '\lsass.exe'
+            - '\spoolsv.exe'
+            - '\winlogon.exe'
+        SourceImage|contains:
+            - '\Users\'
+            - '\Temp\'
+            - '\AppData\'
+
+    filter_legitimate:
+        - SourceImage|endswith:
+            - '\MsMpEng.exe'        
+            - '\CcmExec.exe'        
+            - '\msteams.exe'        
+        - SourceImage: 'C:\Windows\System32\csrss.exe'
+        - TargetImage|endswith:
+            - '\WerFault.exe'       
+            - '\conhost.exe'
+        - CallTrace|contains: 'unknown'
+
+    selection_tools:
+        SourceImage|endswith:
+            - '\mimikatz.exe'
+            - '\cobaltstrike.exe'
+            - '\powershell.exe'
+
+    condition: (selection_access_flags and selection_suspicious_pairing) or selection_tools and not filter_legitimate
+level: critical

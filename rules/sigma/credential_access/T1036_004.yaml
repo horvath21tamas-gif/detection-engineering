@@ -56,7 +56,7 @@ detection:
             - 'C:\Windows\SysWOW64\'
             - 'C:\Windows\WinSxS\'
             - 'C:\Windows\servicing\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_space_padding or (selection_system_names_in_user_zones and not filter_legit_system_zones)) or (selection_suspicious_parent and not filter_legit_system_zones)
 level: critical

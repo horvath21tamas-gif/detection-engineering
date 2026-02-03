@@ -61,7 +61,7 @@ detection:
             - 'C:\Windows\System32\'
             - 'C:\Windows\SysWOW64\'
             - 'C:\Windows\WinSxS\'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|endswith: '\msiexec.exe'
 
     condition: selection_metadata and not filter_matching_names and (selection_suspicious_zones or not filter_system_maintenance)

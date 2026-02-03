@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*Windows \*", "*System32 \*", "*Program Files \*", "*AppData \*")) or (((FolderPath in ("*\svchost.exe", "*\lsass.exe", "*\services.exe", "*\wininit.exe", "*\smss.exe", "*\csrss.exe", "*\winlogon.exe", "*\taskhostw.exe", "*\spoolsv.exe")) and (FolderPath in ("*\Users\*", "*\ProgramData\*", "*\AppData\*", "*\Local\Temp\*", "*\Public\*"))) and (not ((FolderPath in ("C:\Windows\System32\*", "C:\Windows\SysWOW64\*", "C:\Windows\WinSxS\*", "C:\Windows\servicing\*")) and User =~ "NT AUTHORITY\SYSTEM")))) or (((FolderPath in ("*\lsass.exe", "*\svchost.exe")) and (ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\winword.exe", "*\excel.exe", "*\powershell.exe"))) and (not ((FolderPath in ("C:\Windows\System32\*", "C:\Windows\SysWOW64\*", "C:\Windows\WinSxS\*", "C:\Windows\servicing\*")) and User =~ "NT AUTHORITY\SYSTEM")))

@@ -45,6 +45,7 @@
 - [High-Fidelity Network Device CLI Manipulation](#high-fidelity-network-device-cli-manipulation)
 - [High-Fidelity Cloud Shell Exploitation and Data Exfiltration](#high-fidelity-cloud-shell-exploitation-and-data-exfiltration)
 - [Suspicious SYSTEM Process Spawned from User Context](#suspicious-system-process-spawned-from-user-context)
+- [Ultra-Pro High-Fidelity Indicator Removal on Host (T1070)](#ultra-pro-high-fidelity-indicator-removal-on-host-(t1070))
 - [Security Event Log Cleared Using wevtutil.exe](#security-event-log-cleared-using-wevtutilexe)
 - [High-Fidelity Software Deployment Tool Abuse Detection](#high-fidelity-software-deployment-tool-abuse-detection)
 - [High-Fidelity Anomalous Logon via Valid Account](#high-fidelity-anomalous-logon-via-valid-account)
@@ -201,7 +202,9 @@
 - [Ultra-Pro High-Fidelity Indicator Blocking and Telemetry Silencing (T1562.006)](#ultra-pro-high-fidelity-indicator-blocking-and-telemetry-silencing-(t1562006))
 - [Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007)](#ultra-pro-high-fidelity-cloud-firewall-impairment-(t1562007))
 - [Ultra-Pro High-Fidelity Cloud Logging Impairment (T1562.008)](#ultra-pro-high-fidelity-cloud-logging-impairment-(t1562008))
+- [Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009)](#ultra-pro-high-fidelity-safe-mode-defense-evasion-(t1562009))
 - [Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010)](#ultra-pro-high-fidelity-defense-downgrade-attack-(t1562010))
+- [Ultra-Pro High-Fidelity Virtualization and Sandbox Evasion (T1564.011)](#ultra-pro-high-fidelity-virtualization-and-sandbox-evasion-(t1564011))
 - [Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012)](#ultra-pro-high-fidelity-cloud-security-infrastructure-impairment-(t1562012))
 - [Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564)](#ultra-pro-high-fidelity-hide-artifacts-detection-(t1564))
 - [Ultra-Pro High-Fidelity Hidden File Attribute Manipulation (T1564.001)](#ultra-pro-high-fidelity-hidden-file-attribute-manipulation-(t1564001))
@@ -1052,6 +1055,23 @@ cloud resources to public access.
 - **Leírás:** Detects suspicious processes running as SYSTEM that are spawned from user-initiated parent processes such as Explorer, browsers, or Office applications. This behavior may indicate privilege escalation, token manipulation, or UAC bypass exploitation.
 - **Hamis pozitívok:** Rare custom administrative tooling, Approved software installation using custom launchers
 - **MITRE ATT&CK:** `T1068`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Indicator Removal on Host (T1070)
+- **Azonosító:** `T1070.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted attempts to clear Windows Event Logs and high-value forensic artifacts 
+(USN Journal, Prefetch). Focuses on non-standard execution chains and specific 
+clearing of security-sensitive providers.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1070, 001, 004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -3620,6 +3640,23 @@ disabling, and storage-level tampering by non-automated identities.
 
 ---
 
+## Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009)
+- **Azonosító:** `T1562_009.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects attempts to force the system into Safe Mode to bypass security controls. 
+Focuses on bcdedit manipulation combined with immediate forced reboots and 
+registry-based service exclusion within the SafeBoot key.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `009`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010)
 - **Azonosító:** `T1562_010.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -3629,6 +3666,23 @@ Targets PowerShell v2.0 engine forcing (AMSI bypass) and registry-based
 weakening of authentication and encryption protocols.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `010`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Virtualization and Sandbox Evasion (T1564.011)
+- **Azonosító:** `T1562_011.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted environment fingerprinting used by malware to detect virtualization, 
+sandboxes, or analysis environments. Focuses on WMI hardware queries, MAC address OUI 
+checks, and VM-specific driver searches from untrusted process chains.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `011`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

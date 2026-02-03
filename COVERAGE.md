@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 08:33:41`
+**Utolsó frissítés:** `2026-02-03 08:44:52`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 335 | 100% |
-| Splunk (SPL) | 305 | 91.0% |
-| Microsoft Sentinel (KQL) | 306 | 91.3% |
-| QRadar (AQL) | 163 | 48.7% |
-| Elastic (KQL/EQL) | 306 | 91.3% |
-| RSA NetWitness | 304 | 90.7% |
+| Sigma (Forrás) | 339 | 100% |
+| Splunk (SPL) | 308 | 90.9% |
+| Microsoft Sentinel (KQL) | 309 | 91.2% |
+| QRadar (AQL) | 163 | 48.1% |
+| Elastic (KQL/EQL) | 309 | 91.2% |
+| RSA NetWitness | 307 | 90.6% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -62,7 +62,9 @@
 | T1059.008 | CRITICAL | High-Fidelity Network Device CLI Manipulation |
 | T1059.009 | CRITICAL | High-Fidelity Cloud Shell Exploitation and Data Exfiltration |
 | T1068 | HIGH | Suspicious SYSTEM Process Spawned from User Context |
-| T1070.001 | HIGH | Security Event Log Cleared Using wevtutil.exe |
+| T1070 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070) |
+| T1070.001 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Security Event Log Cleared Using wevtutil.exe |
+| T1070.004 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070) |
 | T1072 | CRITICAL | High-Fidelity Software Deployment Tool Abuse Detection |
 | T1078 | HIGH | High-Fidelity Anomalous Logon via Valid Account |
 | T1078.001 | CRITICAL | High-Fidelity Default Account Abuse Detection |
@@ -219,6 +221,7 @@
 | T1562.006 | CRITICAL | Ultra-Pro High-Fidelity Indicator Blocking and Telemetry Silencing (T1562.006) |
 | T1562.007 | CRITICAL | Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007) |
 | T1562.008 | CRITICAL | Ultra-Pro High-Fidelity Cloud Logging Impairment (T1562.008) |
+| T1562.009 | CRITICAL | Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009) |
 | T1562.010 | CRITICAL | Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010) |
 | T1562.012 | CRITICAL | Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012) |
 | T1564 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |

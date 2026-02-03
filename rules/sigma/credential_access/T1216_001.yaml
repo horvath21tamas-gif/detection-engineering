@@ -1,0 +1,52 @@
+title: Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001)
+id: b2618334-7058-437e-ba70-2733e0dd2e02
+status: stable
+description: |
+    Detects the abuse of the signed Windows script 'pubprn.vbs' to proxy the execution 
+    of remote scriptlets (.sct). Focuses on argument injection using the 'script:' 
+    protocol and anomalous process lineage.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1216.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_itp:
+        - Image|endswith: 
+            - '\wscript.exe'
+            - '\cscript.exe'
+        - OriginalFileName: 
+            - 'wscript.exe'
+            - 'cscript.exe'
+
+    selection_script:
+        CommandLine|contains: 'pubprn.vbs'
+
+    selection_attack_args:
+        CommandLine|contains:
+            - 'script:'     
+            - 'http'      
+            - 'soap:'      
+            - '\\'         
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\powershell.exe'
+
+    filter_legit_admin:
+        ParentImage|endswith: 
+            - '\explorer.exe'
+            - '\svchost.exe'
+        CommandLine|contains: '127.0.0.1'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_itp and selection_script and (selection_attack_args or selection_suspicious_parent) and not filter_legit_admin
+level: critical

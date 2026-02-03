@@ -1,0 +1,54 @@
+title: Ultra-Pro Stealthy ListPlanting Injection (T1055.015)
+id: 89acb64e-0037-4326-81ba-5dee5e222345
+status: stable
+description: |
+    Detects ListPlanting injection by identifying suspicious cross-process access 
+    requests to ListView-capable processes where the execution flow originates 
+    from unbacked memory regions (shellcode) rather than signed modules.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.privilege_escalation
+    - attack.t1055.015
+logsource:
+    product: windows
+    category: process_access 
+detection:
+    selection_access_mask:
+        GrantedAccess:
+            - '0x1410'
+            - '0x1411'
+            - '0x1438'
+            - '0x143a'
+            - '0x1F1FFF' 
+
+    selection_gui_targets:
+        TargetImage|endswith:
+            - '\explorer.exe'       
+            - '\taskmgr.exe'        
+            - '\mmc.exe'            
+            - '\dllhost.exe'        
+
+    selection_unbacked_calltrace:
+        CallTrace|contains: 'unknown'
+
+    filter_trusted:
+        - SourceImage: 'C:\Windows\System32\csrss.exe'
+        - SourceImage|endswith:
+            - '\MsMpEng.exe'       
+            - '\CcmExec.exe'        
+        - CallTrace|contains:
+            - 'comctl32.dll+'       
+            - 'user32.dll+'        
+            - 'ntdll.dll+LdrpWorkItem'
+        - condition: selection_source_equals_target
+
+    selection_suspicious_source:
+        SourceImage|contains:
+            - '\Users\'
+            - '\Temp\'
+            - '\AppData\'
+
+    condition: selection_access_mask and selection_gui_targets and selection_unbacked_calltrace and not filter_trusted
+level: critical

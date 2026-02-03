@@ -154,6 +154,7 @@
 - [Ultra-Pro High-Fidelity Rundll32 Proxy Execution (T1218.013)](#ultra-pro-high-fidelity-rundll32-proxy-execution-(t1218013))
 - [Ultra-Pro High-Fidelity MMC Proxy Execution (T1218.014)](#ultra-pro-high-fidelity-mmc-proxy-execution-(t1218014))
 - [Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern](#suspicious-use-of-legitimate-remote-administration-tools-outside-enterprise-pattern)
+- [Ultra-Pro High-Fidelity Office Template Injection (T1221)](#ultra-pro-high-fidelity-office-template-injection-(t1221))
 - [Ultra-Pro High-Fidelity Permissions Modification (T1222)](#ultra-pro-high-fidelity-permissions-modification-(t1222))
 - [Ultra-Pro High-Fidelity Windows File Permissions Modification (T1222.001)](#ultra-pro-high-fidelity-windows-file-permissions-modification-(t1222001))
 - [Ultra-Pro High-Fidelity Linux File Permissions Modification (T1222.002)](#ultra-pro-high-fidelity-linux-file-permissions-modification-(t1222002))
@@ -2942,6 +2943,22 @@ hijacking or untrusted console files (.msc). Filters out legitimate administrati
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Office Template Injection (T1221)
+- **Azonosító:** `T1221.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects Microsoft Office applications fetching remote templates from non-Microsoft 
+infrastructure, followed by the creation of temporary template files.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1221`
+
+#### 🚨 Response Playbook
+1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

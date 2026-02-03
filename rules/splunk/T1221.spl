@@ -1,0 +1,1 @@
+Image IN ("*\\winword.exe", "*\\excel.exe", "*\\powerpnt.exe") DestinationPort IN (80, 443, 445) NOT (DestinationHostname IN ("*.microsoft.com", "*.office.com", "*.office365.com", "*.live.com", "*.sharepoint.com", "*.onmicrosoft.com", "*microsoft.com", "*bing.com", "*msn.com", "*azureedge.net") OR DestinationIp IN ("10.*", "192.168.*", "172.16.*"))

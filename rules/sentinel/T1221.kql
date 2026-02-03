@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\winword.exe", "*\excel.exe", "*\powerpnt.exe")) and (RemotePort in (80, 443, 445)) and (not ((DestinationHostname in ("*.microsoft.com", "*.office.com", "*.office365.com", "*.live.com", "*.sharepoint.com", "*.onmicrosoft.com", "*microsoft.com", "*bing.com", "*msn.com", "*azureedge.net")) or (RemoteIP in ("10.*", "192.168.*", "172.16.*"))))

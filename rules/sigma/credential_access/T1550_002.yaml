@@ -1,0 +1,46 @@
+title: Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002)
+id: bc5a4957-34e0-4a37-aafe-509dd9dd7c3d
+status: stable
+description: |
+    Detects Pass-the-Hash (PtH) by identifying anomalous NTLM loopback authentication, 
+    restricted admin logon types (LogonType 9 via seclogo), and known credential injection 
+    tool patterns while excluding legitimate service accounts.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.lateral_movement
+    - attack.t1550.002
+logsource:
+    product: windows
+    service: security
+detection:
+    selection_pth_seclogo:
+        EventID: 4624
+        LogonType: 9
+        LogonProcessName: 'seclogo'
+        AuthenticationPackage: 'Negotiate' 
+
+    selection_ntlm_loopback:
+        EventID: 4624
+        LogonType: 3
+        AuthenticationPackage: 'NTLM'
+        IpAddress:
+            - '127.0.0.1'
+            - '::1'
+
+    selection_tools:
+        CommandLine|contains:
+            - 'sekurlsa::pth'     
+            - 'Invoke-TheHash'   
+            - 'mimikatz.exe'
+            - 'pth-winexe'
+
+    filter_machine_accounts:
+        TargetUserName|endswith: '$'
+        SubjectUserName|endswith: '$'
+    
+    filter_legit_logon_process:
+        LogonProcessName: 'NtMapi' 
+
+    condition: (selection_pth_seclogo or selection_ntlm_loopback or selection_tools) and not filter_machine_accounts
+level: critical

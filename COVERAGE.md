@@ -173,6 +173,7 @@
 | T1218.013 | CRITICAL | Ultra-Pro High-Fidelity Rundll32 Proxy Execution (T1218.013) |
 | T1218.014 | CRITICAL | Ultra-Pro High-Fidelity MMC Proxy Execution (T1218.014) |
 | T1219 | HIGH | Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern |
+| T1220 | HIGH | Ultra-Pro High-Fidelity XSL Script Processing (T1220) |
 | T1221 | HIGH | Ultra-Pro High-Fidelity Office Template Injection (T1221) |
 | T1222 | HIGH | Ultra-Pro High-Fidelity Permissions Modification (T1222) |
 | T1222.001 | HIGH | Ultra-Pro High-Fidelity Windows File Permissions Modification (T1222.001), Ultra-Pro High-Fidelity Permissions Modification (T1222) |

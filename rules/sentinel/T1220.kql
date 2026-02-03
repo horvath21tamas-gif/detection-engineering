@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath endswith "\wmic.exe" and ProcessCommandLine contains "/FORMAT") and ((ProcessCommandLine in ("*http*", "*ftp*", "*:\Users\*", "*:\ProgramData\*", "*\AppData\*", "*\Temp\*", "*\*")) or (ProcessCommandLine in ("*.txt*", "*.png*", "*.jpg*", "*.pdf*"))) and (not (ProcessCommandLine in ("*:\Windows\System32\wbem\*", "*:\Windows\SysWOW64\wbem\*")))

@@ -1,0 +1,1 @@
+Image="*\\wmic.exe" CommandLine="*/FORMAT*" CommandLine IN ("*http*", "*ftp*", "*:\\Users\\*", "*:\\ProgramData\\*", "*\\AppData\\*", "*\\Temp\\*", "*\\*") OR CommandLine IN ("*.txt*", "*.png*", "*.jpg*", "*.pdf*") NOT (CommandLine IN ("*:\\Windows\\System32\\wbem\\*", "*:\\Windows\\SysWOW64\\wbem\\*"))

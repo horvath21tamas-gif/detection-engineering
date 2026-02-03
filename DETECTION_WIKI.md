@@ -157,6 +157,7 @@
 - [Ultra-Pro High-Fidelity Rundll32 Proxy Execution (T1218.013)](#ultra-pro-high-fidelity-rundll32-proxy-execution-(t1218013))
 - [Ultra-Pro High-Fidelity MMC Proxy Execution (T1218.014)](#ultra-pro-high-fidelity-mmc-proxy-execution-(t1218014))
 - [Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern](#suspicious-use-of-legitimate-remote-administration-tools-outside-enterprise-pattern)
+- [Ultra-Pro High-Fidelity XSL Script Processing (T1220)](#ultra-pro-high-fidelity-xsl-script-processing-(t1220))
 - [Ultra-Pro High-Fidelity Office Template Injection (T1221)](#ultra-pro-high-fidelity-office-template-injection-(t1221))
 - [Ultra-Pro High-Fidelity Permissions Modification (T1222)](#ultra-pro-high-fidelity-permissions-modification-(t1222))
 - [Ultra-Pro High-Fidelity Windows File Permissions Modification (T1222.001)](#ultra-pro-high-fidelity-windows-file-permissions-modification-(t1222001))
@@ -3005,6 +3006,23 @@ hijacking or untrusted console files (.msc). Filters out legitimate administrati
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity XSL Script Processing (T1220)
+- **Azonosító:** `T1220.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects suspicious WMIC execution with XSL stylesheets located in non-standard 
+directories or remote URLs, which is a common technique to bypass application 
+whitelisting and execute arbitrary scripts.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1220`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

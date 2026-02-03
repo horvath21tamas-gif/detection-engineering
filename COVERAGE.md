@@ -6,18 +6,19 @@
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 309 | 100% |
-| Splunk (SPL) | 280 | 90.6% |
-| Microsoft Sentinel (KQL) | 281 | 90.9% |
-| QRadar (AQL) | 156 | 50.5% |
-| Elastic (KQL/EQL) | 281 | 90.9% |
-| RSA NetWitness | 279 | 90.3% |
+| Sigma (Forrás) | 310 | 100% |
+| Splunk (SPL) | 281 | 90.6% |
+| Microsoft Sentinel (KQL) | 282 | 91.0% |
+| QRadar (AQL) | 156 | 50.3% |
+| Elastic (KQL/EQL) | 282 | 91.0% |
+| RSA NetWitness | 280 | 90.3% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
 | :--- | :--- | :--- |
 | T1003 | HIGH | Credential Dumping LSASS |
 | T1003.001 | HIGH | Suspicious Access to LSASS Process Memory, Credential Dumping LSASS |
+| T1006 | CRITICAL | Ultra-Pro Stealthy Direct Volume Access (T1006) |
 | T1021 | MEDIUM | Rapid Logons to Multiple Distant Hosts by Same User |
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |
 | T1027 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Encoded PowerShell Command Execution |

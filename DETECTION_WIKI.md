@@ -51,6 +51,7 @@
 - [Ultra-Pro High-Fidelity Mailbox Data Clearing and Rule Sabotage (T1070.003)](#ultra-pro-high-fidelity-mailbox-data-clearing-and-rule-sabotage-(t1070003))
 - [Ultra-Pro High-Fidelity Forensic Artifact and File Deletion (T1070.004)](#ultra-pro-high-fidelity-forensic-artifact-and-file-deletion-(t1070004))
 - [Ultra-Pro High-Fidelity Network Share and Credential Removal (T1070.005)](#ultra-pro-high-fidelity-network-share-and-credential-removal-(t1070005))
+- [Ultra-Pro High-Fidelity Timestomp and MACE Attribute Manipulation (T1070.006)](#ultra-pro-high-fidelity-timestomp-and-mace-attribute-manipulation-(t1070006))
 - [Ultra-Pro High-Fidelity Network History and RDP Trace Removal (T1070.007)](#ultra-pro-high-fidelity-network-history-and-rdp-trace-removal-(t1070007))
 - [Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008)](#ultra-pro-high-fidelity-email-storage-and-database-destruction-(t1070008))
 - [Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009)](#ultra-pro-high-fidelity-persistence-artifact-removal-(t1070009))
@@ -102,6 +103,7 @@
 - [Suspicious File Download via Bitsadmin (High Fidelity)](#suspicious-file-download-via-bitsadmin-(high-fidelity))
 - [High-Fidelity Trusted Relationship Abuse Detection](#high-fidelity-trusted-relationship-abuse-detection)
 - [Malicious Hardware-Induced Command Execution (HID Injection)](#malicious-hardware-induced-command-execution-(hid-injection))
+- [Ultra-Pro High-Fidelity Indirect Command Execution (T1202)](#ultra-pro-high-fidelity-indirect-command-execution-(t1202))
 - [High-Fidelity Client-Side Exploitation and Shell Spawning](#high-fidelity-client-side-exploitation-and-shell-spawning)
 - [Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity)](#suspicious-child-process-spawned-by-microsoft-office-application-(high-fidelity))
 - [High-Fidelity User Execution of Malicious Link (T1204.001)](#high-fidelity-user-execution-of-malicious-link-(t1204001))
@@ -1170,6 +1172,23 @@ automated anti-forensic cleanup post-lateral movement.
 
 ---
 
+## Ultra-Pro High-Fidelity Timestomp and MACE Attribute Manipulation (T1070.006)
+- **Azonosító:** `T1070_006.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects attempts to modify file timestamps (MACE attributes) to evade forensic analysis. 
+Focuses on direct object property manipulation in PowerShell and specialized 
+anti-forensic utilities, while filtering out legitimate installer behavior.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `006`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Network History and RDP Trace Removal (T1070.007)
 - **Azonosító:** `T1070_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -2015,6 +2034,23 @@ Focuses on rapid shell spawning with "stealth" flags originating from the user s
 without standard GUI interaction.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1200`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Indirect Command Execution (T1202)
+- **Azonosító:** `T1202.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the execution of binaries that can be used to proxy command execution. 
+Focuses on non-standard parent processes and specific command-line arguments 
+for pcalua.exe, conhost.exe, and forfiles.exe to minimize false positives.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1202`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

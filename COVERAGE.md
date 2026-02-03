@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 08:57:52`
+**Utolsó frissítés:** `2026-02-03 09:11:15`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 346 | 100% |
-| Splunk (SPL) | 315 | 91.0% |
-| Microsoft Sentinel (KQL) | 316 | 91.3% |
-| QRadar (AQL) | 164 | 47.4% |
-| Elastic (KQL/EQL) | 316 | 91.3% |
-| RSA NetWitness | 314 | 90.8% |
+| Sigma (Forrás) | 348 | 100% |
+| Splunk (SPL) | 317 | 91.1% |
+| Microsoft Sentinel (KQL) | 318 | 91.4% |
+| QRadar (AQL) | 164 | 47.1% |
+| Elastic (KQL/EQL) | 318 | 91.4% |
+| RSA NetWitness | 316 | 90.8% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -68,6 +68,7 @@
 | T1070.003 | HIGH | Ultra-Pro High-Fidelity Mailbox Data Clearing and Rule Sabotage (T1070.003) |
 | T1070.004 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Ultra-Pro High-Fidelity Forensic Artifact and File Deletion (T1070.004) |
 | T1070.005 | HIGH | Ultra-Pro High-Fidelity Network Share and Credential Removal (T1070.005) |
+| T1070.006 | HIGH | Ultra-Pro High-Fidelity Timestomp and MACE Attribute Manipulation (T1070.006) |
 | T1070.007 | HIGH | Ultra-Pro High-Fidelity Network History and RDP Trace Removal (T1070.007) |
 | T1070.008 | CRITICAL | Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008) |
 | T1070.009 | HIGH | Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009) |
@@ -119,6 +120,7 @@
 | T1197 | HIGH | Suspicious File Download via Bitsadmin (High Fidelity) |
 | T1199 | HIGH | High-Fidelity Trusted Relationship Abuse Detection |
 | T1200 | CRITICAL | Malicious Hardware-Induced Command Execution (HID Injection) |
+| T1202 | HIGH | Ultra-Pro High-Fidelity Indirect Command Execution (T1202) |
 | T1203 | CRITICAL | High-Fidelity Client-Side Exploitation and Shell Spawning |
 | T1204 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity) |
 | T1204.001 | CRITICAL | High-Fidelity User Execution of Malicious Link (T1204.001) |

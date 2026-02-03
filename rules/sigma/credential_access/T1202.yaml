@@ -55,7 +55,7 @@ detection:
             - '\php-cgi.exe'
 
     filter_trusted_system:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
           ParentImage|endswith: 
             - '\services.exe'
             - '\msiexec.exe'

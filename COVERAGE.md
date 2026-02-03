@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 06:56:23`
+**Utolsó frissítés:** `2026-02-03 07:10:36`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 307 | 100% |
-| Splunk (SPL) | 278 | 90.6% |
-| Microsoft Sentinel (KQL) | 279 | 90.9% |
-| QRadar (AQL) | 155 | 50.5% |
-| Elastic (KQL/EQL) | 279 | 90.9% |
-| RSA NetWitness | 277 | 90.2% |
+| Sigma (Forrás) | 309 | 100% |
+| Splunk (SPL) | 280 | 90.6% |
+| Microsoft Sentinel (KQL) | 281 | 90.9% |
+| QRadar (AQL) | 156 | 50.5% |
+| Elastic (KQL/EQL) | 281 | 90.9% |
+| RSA NetWitness | 279 | 90.3% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -99,6 +99,7 @@
 | T1137.004 | CRITICAL | Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004) |
 | T1137.005 | CRITICAL | Ultra-Pro Office Security Policy Tampering (T1137.005) |
 | T1137.006 | CRITICAL | Ultra-Pro Office Add-in Binary Persistence (T1137.006) |
+| T1140 | HIGH | Ultra-Pro Stealthy Deobfuscation/Decoding (T1140) |
 | T1176 | CRITICAL | Ultra-Pro Browser Extension Force-Install Persistence (T1176) |
 | T1189 | CRITICAL | Browser-Originating Shell or System Tool Execution |
 | T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |
@@ -320,6 +321,7 @@
 | T1610 | CRITICAL | High-Fidelity Malicious Container Deployment Detection |
 | T1611 | CRITICAL | Ultra-Pro Container Escape & Host Access (T1611) |
 | T1612 | CRITICAL | Ultra-Pro Stealthy Local Image Build (T1612) |
+| T1622 | HIGH | Ultra-Pro Stealthy Debugger Evasion (T1622) |
 | T1648 | HIGH | High-Fidelity Serverless Function Persistence or Abuse |
 | T1650 | HIGH | High-Fidelity Cloud Account Acquisition and Initialization - T1650 |
 | T1651 | CRITICAL | High-Fidelity Cloud Administration Agent Abuse |

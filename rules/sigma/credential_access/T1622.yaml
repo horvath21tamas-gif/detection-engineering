@@ -46,8 +46,8 @@ detection:
             - '\x64dbg.exe'
             - '\code.exe'      
             - '\pycharm64.exe'
-        SourceImage: 'C:\Windows\System32\WerFault.exe'
-        SourceImage: 'C:\Windows\System32\csrss.exe'
+        Sourceprocessname: 'C:\Windows\System32\WerFault.exe'
+        Sourceprocessname: 'C:\Windows\System32\csrss.exe'
         CallTrace|contains: 'clr.dll+' 
 
     condition: selection_access_mask and selection_unbacked_calltrace and (selection_api_patterns or selection_suspicious_origin) and not filter_legit_dev_tools

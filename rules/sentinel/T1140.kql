@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath endswith "\certutil.exe" and (ProcessCommandLine in ("*-decode*", "*-decodehex*"))) or ((FolderPath in ("*\expand.exe", "*\extrac32.exe")) and (ProcessCommandLine in ("*.txt*", "*.jpg*", "*.png*", "*.xml*", "*.log*")))) and ((ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\nginx.exe", "*\httpd.exe", "*\mshta.exe")) or ((ProcessCommandLine in ("*\Users\*", "*\Temp\*", "*\AppData\*", "*.exe*", "*.dll*", "*.vbs*", "*.ps1*")) and (not ((ParentProcessName in ("*\Windows\servicing\TrustedInstaller.exe*", "*\CcmExec.exe*", "*\Package Cache\*")) or (FolderPath in ("*\Program Files\*", "*\Windows\System32\*")) or ProcessCommandLine contains "Microsoft\Windows\SoftwareDistribution"))))

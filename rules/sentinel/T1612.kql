@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where ((FolderPath in ("*/docker", "*/podman", "*/buildah", "*/kaniko")) and (ProcessCommandLine in ("* build *", "* build-using-dockerfile *", "* build-image *"))) and ((ParentProcessName in ("*/nginx", "*/apache2", "*/httpd", "*/php-fpm", "*/python", "*/node", "*/java", "*/redis-server")) or ((ProcessCommandLine in ("* -f -*", "*http://*", "*https://*", "*--no-cache*", "*--privileged*")) and (not ((User in ("jenkins", "gitlab-runner", "github-actions", "root")) and (ProcessCommandLine in ("*/home/jenkins*", "*/var/lib/gitlab-runner*"))))))
+| where ((FolderPath in ("*/docker", "*/podman", "*/buildah", "*/kaniko")) and (ProcessCommandLine in ("* build *", "* build-using-dockerfile *", "* build-image *"))) and ((ParentProcessName in ("*/nginx", "*/apache2", "*/httpd", "*/php-fpm", "*/python", "*/node", "*/java", "*/redis-server")) or ((ProcessCommandLine in ("* -f -*", "*http://*", "*https://*", "*--no-cache*", "*--privileged*")) and (not ((username in ("jenkins", "gitlab-runner", "github-actions", "root")) and (ProcessCommandLine in ("*/home/jenkins*", "*/var/lib/gitlab-runner*"))))))

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("*strip *", "*sstrip *", "*objcopy *", "*eu-strip *")) or (ProcessCommandLine in ("* -s *", "*-Wl,-s*", "*-strip-all*", "*/NODEBUG*"))) and (ProcessCommandLine in ("*.exe*", "*.dll*", "*.sys*", "*.elf*", "*.so*")) and (not (((FolderPath in ("*\Jenkins\*", "*\GitLab-Runner\*", "*\Azure Pipelines\*", "*\Visual Studio\*", "*\bin\mingw*")) and (ParentProcessName in ("*\devenv.exe*", "*\msbuild.exe*"))) or (User in ("*svc-build*", "*cicd-agent*"))))

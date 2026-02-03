@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\hh.exe", "*\winhlp32.exe", "*\extracticon.exe", "*\rc.exe")) and ((ProcessCommandLine in ("*-decompile*", "*its:*", "*ms-its:*", "*mk:@MSITStore:*", "*javascript:*", "*vbscript:*")) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\mshta.exe", "*\powershell.exe")) or ((ProcessCommandLine in ("*\Users\Public\*", "*\Downloads\*", "*\Temp\*", "*\AppData\*")) and (not ((ParentProcessName in ("*\Program Files\*", "*\Program Files (x86)\*", "*\Windows\System32\svchost.exe*")) or ProcessCommandLine contains "ms-help://"))))

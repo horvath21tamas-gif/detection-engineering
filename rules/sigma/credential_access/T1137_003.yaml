@@ -23,7 +23,7 @@ detection:
             - '\Outlook\Forms\Cache'
 
     selection_suspicious_editor:
-        Image|not|endswith:
+        Image|endswith:
             - '\outlook.exe'
             - '\msiexec.exe' 
         Image|endswith:

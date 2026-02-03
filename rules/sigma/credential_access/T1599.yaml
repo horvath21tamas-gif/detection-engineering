@@ -1,0 +1,52 @@
+title: Ultra-Pro High-Fidelity Network Boundary Bridging (T1599)
+id: 8730e925-91d6-47e9-9ab2-a4a642f6cf79
+status: stable
+description: |
+    Detects unauthorized network boundary bridging. Specifically targets manual 
+    creation of 'Any-to-Internal' NAT rules, port forwarding of sensitive ports, 
+    and hardware-level bridging of isolated interfaces.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1599
+logsource:
+    product: network
+    service: FortiGate
+detection:
+    selection_boundary_ops:
+        Message|contains:
+            - 'nat (inside,outside)'        
+            - 'static-nat'                
+            - 'set system bridge'            
+            - 'add bridge-group'            
+            - 'port-forwarding'            
+            - 'virtual-server'              
+
+    selection_risky_ports:
+        Message|contains:
+            - 'port 22'                     
+            - 'port 3389'                   
+            - 'port 445'                   
+            - 'port 5985'                    
+            - 'port 3306'                   
+
+    selection_manual_context:
+        Message|contains:
+            - 'web-console'
+            - 'http-admin'
+            - 'ssh-session'
+            - 'local-user'
+
+    filter_trusted_management:
+        SourceIP:
+            - '10.50.0.10'
+            - '10.50.0.11'
+    filter_legit_vpn_traffic:
+        Message|contains:
+            - 'vpn-pool'
+            - 'dynamic-pat'
+            - 'ipsec-nat-t'
+
+    condition: selection_boundary_ops and selection_risky_ports and selection_manual_context and not (filter_trusted_management or filter_legit_vpn_traffic)
+level: critical

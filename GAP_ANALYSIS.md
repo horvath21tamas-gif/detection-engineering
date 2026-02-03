@@ -7,7 +7,7 @@
 | Összes szabály | 421 |
 | Aktív (van logforrás) | 420 |
 | Inaktív (hiányzó log) | 1 |
-| MITRE Lefedettség | 413 technika |
+| MITRE Lefedettség | 421 technika |
 
 ## 🛑 Kritikus Adatforrás Hiányok
 Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logokat:

@@ -7,6 +7,13 @@
 - [Suspicious RDP Logon from Unusual Source](#suspicious-rdp-logon-from-unusual-source)
 - [Suspicious Base64-Encoded PowerShell Command with Network Activity](#suspicious-base64-encoded-powershell-command-with-network-activity)
 - [Ultra-Pro High-Fidelity Binary Padding Activity (T1027.001)](#ultra-pro-high-fidelity-binary-padding-activity-(t1027001))
+- [Ultra-Pro High-Fidelity Steganography Payload Extraction (T1027.004)](#ultra-pro-high-fidelity-steganography-payload-extraction-(t1027004))
+- [Ultra-Pro High-Fidelity Indicator Removal and Signature Theft (T1027.005)](#ultra-pro-high-fidelity-indicator-removal-and-signature-theft-(t1027005))
+- [Ultra-Pro High-Fidelity HTML Smuggling Execution (T1027.006)](#ultra-pro-high-fidelity-html-smuggling-execution-(t1027006))
+- [Ultra-Pro High-Fidelity Binary Symbol Stripping (T1027.007)](#ultra-pro-high-fidelity-binary-symbol-stripping-(t1027007))
+- [Ultra-Pro High-Fidelity Embedded Payload Extraction (T1027.009)](#ultra-pro-high-fidelity-embedded-payload-extraction-(t1027009))
+- [Ultra-Pro High-Fidelity Command Line Obfuscation (T1027.010)](#ultra-pro-high-fidelity-command-line-obfuscation-(t1027010))
+- [Ultra-Pro High-Fidelity Suspicious Archive Creation (T1027.011)](#ultra-pro-high-fidelity-suspicious-archive-creation-(t1027011))
 - [Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036)](#ultra-pro-high-fidelity-masquerading-and-process-path-abuse-(t1036))
 - [Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001)](#ultra-pro-high-fidelity-invalid-or-forged-code-signature-(t1036001))
 - [Ultra-Pro High-Fidelity RTLO Character Execution (T1036.002)](#ultra-pro-high-fidelity-rtlo-character-execution-(t1036002))
@@ -458,6 +465,123 @@ scanners or alter hashes. Focuses on tools like fsutil, dd, and binary copy
 commands targeting executable files in suspicious paths.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Steganography Payload Extraction (T1027.004)
+- **Azonosító:** `T1027_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the extraction of malicious payloads from image files using 
+low-level GDI+ or .NET Bitmap methods often seen in Invoke-PSImage or similar 
+steganography frameworks.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Indicator Removal and Signature Theft (T1027.005)
+- **Azonosító:** `T1027_005.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects attempts to remove indicators or manipulate digital signatures on binaries. 
+Focuses on signature theft (SigThief), PE header stripping, and string replacement 
+in suspicious locations.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity HTML Smuggling Execution (T1027.006)
+- **Azonosító:** `T1027_006.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the execution of suspicious files typically delivered via HTML Smuggling. 
+Focuses on browser processes spawning script interpreters or mounting disk images 
+from temporary or local app data directories.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `006`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Binary Symbol Stripping (T1027.007)
+- **Azonosító:** `T1027_007.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the active stripping of debug symbols and section headers from binaries. 
+Focuses on the execution of stripping tools on non-build systems to hinder forensics.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `007`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Embedded Payload Extraction (T1027.009)
+- **Azonosító:** `T1027_009.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the extraction and execution of embedded payloads by monitoring 
+suspicious memory-only code loading (Reflection) and byte-array manipulation 
+targeting non-standard resource locations.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `009`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Command Line Obfuscation (T1027.010)
+- **Azonosító:** `T1027_010.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects advanced command line obfuscation techniques. Focuses on excessive 
+escape character density, environment variable slicing, and PowerShell string 
+deconstruction used to bypass static detection filters.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `010`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Suspicious Archive Creation (T1027.011)
+- **Azonosító:** `T1027_011.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the creation of password-protected and/or encrypted archives using common CLI tools. 
+Focuses on command-line password arguments and recursive collection from sensitive paths.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `011`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

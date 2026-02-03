@@ -1,0 +1,63 @@
+title: Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002)
+id: 54ba6fb9-c66e-448c-83d4-4a15bbec2b87
+status: stable
+description: |
+    Detects targeted attempts to disable or impair the Windows Event Log service. 
+    Focuses on service-dependency sabotage, registry-based channel disabling, 
+    and stealthy wevtutil usage by non-system processes.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.defense_evasion
+    - attack.t1562.002
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_wevtutil_stealth:
+        Image|endswith: '\wevtutil.exe'
+        CommandLine|contains|all:
+            - ' /e:false'
+            - ' /q'
+
+    selection_service_sabotage:
+        CommandLine|contains:
+            - 'sc  config eventlog start= disabled'
+            - 'sc.exe  config eventlog start= disabled'
+            - 'net stop "event log"'
+            - 'net stop eventlog'
+            - 'Set-Service -Name eventlog -Status Stopped'
+
+    selection_registry_kill:
+        CommandLine|contains:
+            - '\Services\EventLog\'
+        CommandLine|contains:
+            - 'reg add'
+            - 'reg.exe add'
+        CommandLine|contains:
+            - 'Enabled'
+        CommandLine|contains:
+            - '0x0' 
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\w3wp.exe'
+            - '\powershell.exe'
+
+    filter_trusted_system_context:
+        - User: 'NT AUTHORITY\SYSTEM'
+          ParentImage|endswith: 
+            - '\services.exe'
+            - '\svchost.exe'
+            - '\msiexec.exe' 
+        - CommandLine|contains:
+            - '\Program Files\'
+            - 'TrustedInstaller'
+
+    condition: (selection_wevtutil_stealth or selection_service_sabotage or selection_registry_kill) and (selection_suspicious_parent or not filter_trusted_system_context)
+level: critical

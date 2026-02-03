@@ -34,6 +34,7 @@ Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logok
 | Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012) (`T1562_012.yaml`) | product: `cloud`, service: `aws.cloudtrail` |
 | Privileged Service Executable Overwritten from User-Writable Location (`T1574_010.yaml`) | category: `file_change` |
 | Ultra-Pro High-Fidelity Suspicious Cloud Instance Creation (T1578.001) (`T1578_001.yaml`) | product: `cloud`, service: `Azure Activity` |
+| Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002) (`T1601_002.yaml`) | product: `network`, service: `FortiOS` |
 
 ## 🛡️ Stratégiai Teendők (Hiányzó Technikák)
 A SOC hatékonyság növelése érdekében ezekre a technikákra kellene szabályt írni:

@@ -1,0 +1,2 @@
+((((process = '*/spctl*'))&& (((param = '*--master-disable*' OR param = '*label-disable*')))) OR ((((process = '*/xattr*'))&& (((param = '*-d com.apple.quarantine*' OR param = '*-rc com.apple.quarantine*')))) AND (((ParentImage = '*/sh*' OR ParentImage = '*/bash*' OR ParentImage = '*/zsh*' OR ParentImage = '*/python*' OR ParentImage = '*/php*'))) AND (((param = '*/tmp/*' OR param = '*/Users/Shared/*' OR param = '*/private/var/tmp/*' OR param = '*/Downloads/*'))))) AND (NOT ((ParentImage begins '/System/Library/','/usr/sbin/softwareupdate','/Applications/Xcode.app/'))
+)

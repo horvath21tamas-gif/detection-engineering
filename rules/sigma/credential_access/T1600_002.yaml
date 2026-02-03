@@ -52,7 +52,7 @@ detection:
             - '\TrustedInstaller.exe'
             - '\CcmExec.exe' 
             - '\gpscript.exe' 
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     filter_known_updaters:
         Image|contains:

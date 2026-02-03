@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\docker.exe", "*\dockerd.exe", "*\VBoxManage.exe", "*\VBoxHeadless.exe", "*\vmrun.exe", "*\vmware-kvm.exe")) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\w3wp.exe", "*\php-cgi.exe", "*\httpd.exe", "*\nginx.exe", "*\mshta.exe")) or ((ProcessCommandLine in ("*--rm*", "*--privileged*", "*--net=host*", "*--entrypoint*", "*nogui*", "*startvm*", "* -it *")) and (not ((ParentProcessName in ("*\Common7\IDE\devenv.exe*", "*\bin\code.exe*", "*\Program Files\Docker\*")) or (ProcessCommandLine in ("*docker-desktop*", "*docker-compose*", "*Minikube*"))))))

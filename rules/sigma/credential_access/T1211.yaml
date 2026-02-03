@@ -1,0 +1,64 @@
+title: Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211)
+id: 5c46e06f-210f-411a-85f9-23cf926330fc
+status: stable
+description: |
+    Detects potential exploitation for privilege escalation by identifying 
+    anomalous child processes from vulnerable parents with specific focus on 
+    breaking out of application sandboxes (browsers, office, pdf).
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.privilege_escalation
+    - attack.t1211
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_vulnerable_parents:
+        ParentImage|endswith:
+            - '\chrome.exe'
+            - '\firefox.exe'
+            - '\msedge.exe'
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\powerpnt.exe'
+            - '\outlook.exe'
+            - '\AcroRd32.exe'
+            - '\Acrobat.exe'
+
+    selection_suspicious_children:
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\schtasks.exe'
+            - '\reg.exe'
+            - '\whoami.exe'
+            - '\net.exe'
+            - '\net1.exe'
+
+    filter_legit_activity:
+        - CommandLine|contains:
+            - '--type=renderer'
+            - '--type=utility'
+            - '--type=gpu-process'
+            - '--type=extension'
+            - 'Microsoft\EdgeUpdate'
+        - Image|contains:
+            - '\Windows\System32\WerFault.exe'
+            - '\Windows\System32\conhost.exe'
+        - ParentCommandLine|contains:
+            - 'TrustedInstaller.exe'
+
+    selection_suspicious_args:
+        CommandLine|contains:
+            - '-enc'
+            - '-encodedcommand'
+            - 'bypass'
+            - 'hidden'
+            - 'http'
+
+    condition: (selection_vulnerable_parents and selection_suspicious_children and not filter_legit_activity) or (selection_vulnerable_parents and selection_suspicious_args)
+level: critical

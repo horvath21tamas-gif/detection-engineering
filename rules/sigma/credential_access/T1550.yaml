@@ -1,0 +1,49 @@
+title: Ultra-Pro High-Fidelity Alternate Authentication Material (T1550)
+id: 8d3c34ec-1e25-4a27-8d34-51964724c8f4
+status: stable
+description: |
+    Detects the use of stolen hashes or tickets for lateral movement by identifying 
+    NTLM/Kerberos protocol anomalies, such as RC4 downgrades and restricted admin 
+    logon types. Filters out legitimate system management tools.
+author: hota05
+date: 2026-02-03
+tags:
+    - attack.lateral_movement
+    - attack.t1550
+    - attack.t1550.002
+    - attack.t1550.003
+logsource:
+    product: windows
+    service: security
+detection:
+    selection_pth_type9:
+        EventID: 4624
+        LogonType: 9
+        LogonProcessName: 'seclogo'
+        AuthenticationPackage: 'Negotiate'
+
+    selection_kerberos_downgrade:
+        EventID: 
+            - 4768 
+            - 4769 
+        TicketEncryptionType: '0x17' 
+
+    selection_ntlm_loopback:
+        EventID: 4624
+        AuthenticationPackage: 'NTLM'
+        IpAddress: 
+            - '127.0.0.1'
+            - '::1'
+        LogonType: 3 
+
+    filter_system_accounts:
+        TargetUserName|endswith: '$'
+        SubjectUserName|endswith: '$'
+    
+    filter_legit_tools:
+        ProcessName|contains: 
+            - '\Windows\System32\svchost.exe'
+            - '\Windows\System32\lsass.exe'
+
+    condition: (selection_pth_type9 or selection_kerberos_downgrade or selection_ntlm_loopback) and not (filter_system_accounts or filter_legit_tools)
+level: critical

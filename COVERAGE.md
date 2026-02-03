@@ -231,6 +231,7 @@
 | T1562.008 | CRITICAL | Ultra-Pro High-Fidelity Cloud Logging Impairment (T1562.008) |
 | T1562.009 | CRITICAL | Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009) |
 | T1562.010 | CRITICAL | Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010) |
+| T1562.011 | HIGH | Ultra-Pro High-Fidelity Virtualization and Sandbox Evasion (T1564.011) |
 | T1562.012 | CRITICAL | Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012) |
 | T1564 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
 | T1564.001 | HIGH | Ultra-Pro High-Fidelity Hidden File Attribute Manipulation (T1564.001), Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
@@ -243,7 +244,7 @@
 | T1564.008 | CRITICAL | Ultra-Pro High-Fidelity Email Hiding Rules Detection (T1564.008) |
 | T1564.009 | HIGH | Ultra-Pro High-Fidelity Resource Extraction and Abuse (T1564.009) |
 | T1564.010 | HIGH | Ultra-Pro High-Fidelity Process Argument Spoofing Detection (T1564.010) |
-| T1564.011 | HIGH | Ultra-Pro High-Fidelity Virtual Instance Abuse (T1564.011), Ultra-Pro High-Fidelity Virtualization and Sandbox Evasion (T1564.011) |
+| T1564.011 | HIGH | Ultra-Pro High-Fidelity Virtual Instance Abuse (T1564.011) |
 | T1566 | CRITICAL | High-Fidelity Phishing Payload Execution from Communication Apps |
 | T1566.001 | CRITICAL | High-Fidelity Spearphishing Attachment Execution |
 | T1566.002 | CRITICAL | High-Fidelity Browser-Originating Payload Execution |

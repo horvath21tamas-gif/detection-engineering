@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\wscript.exe", "*\cscript.exe")) or (OriginalFileName in ("wscript.exe", "cscript.exe"))) and ProcessCommandLine contains "pubprn.vbs" and ((ProcessCommandLine in ("*script:*", "*http*", "*soap:*", "*\*")) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\powershell.exe"))) and (not ((ParentProcessName in ("*\explorer.exe", "*\svchost.exe")) and ProcessCommandLine contains "127.0.0.1" and User =~ "NT AUTHORITY\SYSTEM"))

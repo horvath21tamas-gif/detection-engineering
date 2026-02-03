@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((eventName in ("DeleteDetector", "UpdateDetector", "DeleteThreatIntelSet", "DeleteIPSet")) or ((eventName in ("CreateFilter", "UpdateFilter", "CreateSuppressionRule")) and (['requestParameters.action'] in ("ARCHIVE", "SUPPRESS")))) and ((['userIdentity.type'] =~ "Root" or (userAgent in ("*python-requests*", "*kali*", "*curl*", "*postman*")) or ['userIdentity.sessionContext.attributes.mfaAuthenticated'] =~ "false") and (not ((['userIdentity.arn'] in ("*role/Security-Infrastructure-Terraform*", "*role/AWS-Service-Role*")) and sourceIPAddress =~ "10.0.0.0/8")))

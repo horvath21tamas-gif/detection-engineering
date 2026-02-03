@@ -24,6 +24,7 @@ Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logok
 | Ultra-Pro RC Script and Init.d Persistence (T1037.004) (`T1037_004.yaml`) | service: `auditd` |
 | High-Fidelity Entra ID App Certificate Addition (`T1098_003.yaml`) | service: `ad` |
 | Ultra-Pro Stealthy Ptrace Injection (T1055.008) (`T1055_008.yaml`) | service: `auditd` |
+| Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012) (`T1562_012.yaml`) | product: `cloud`, service: `aws.cloudtrail` |
 | Privileged Service Executable Overwritten from User-Writable Location (`T1574_010.yaml`) | category: `file_change` |
 
 ## 🛡️ Stratégiai Teendők (Hiányzó Technikák)

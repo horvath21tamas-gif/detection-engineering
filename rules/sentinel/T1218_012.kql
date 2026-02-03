@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath endswith "\verclsid.exe" or OriginalFileName =~ "verclsid.exe") and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powerpnt.exe", "*\outlook.exe", "*\powershell.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\chrome.exe")) or (ProcessCommandLine in ("* /S *", "* /C *", "*{*"))) and (not ((ParentProcessName in ("*\explorer.exe", "*\svchost.exe", "*\SearchIndexer.exe")) and User =~ "NT AUTHORITY\SYSTEM"))

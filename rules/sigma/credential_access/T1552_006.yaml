@@ -1,0 +1,53 @@
+title: Ultra-Pro High-Fidelity GPP Password Discovery (T1552.006)
+id: 03797fb4-7657-47c9-830b-0849d789c628
+status: stable
+description: |
+    Detects unauthorized manual or scripted discovery of passwords in Group Policy Preferences. 
+    Focuses on non-system processes performing string searches for 'cpassword' within 
+    the SYSVOL share, identifying tools like PowerSploit, Empire, or manual LOLBin usage.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1552.006
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_keyword:
+        CommandLine|contains:
+            - 'cpassword'
+
+    selection_paths:
+        CommandLine|contains:
+            - 'SYSVOL'
+            - 'Policies'
+            - 'Groups.xml'
+            - 'ScheduledTasks.xml'
+
+    selection_tools:
+        - Image|endswith:
+            - '\findstr.exe'
+            - '\grep.exe'
+            - '\powershell.exe'
+            - '\cmd.exe'
+        - CommandLine|contains:
+            - 'Get-GPPPassword' 
+            - 'Select-String'
+            - 'type '
+
+    selection_untrusted_parent:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\wsmprovhost.exe' 
+            - '\psexesvc.exe'   
+
+    filter_legit_service:
+        User: 'NT AUTHORITY\SYSTEM'
+        Image|endswith:
+            - '\svchost.exe'
+            - '\taskhostw.exe'
+
+    condition: selection_keyword and selection_tools and selection_paths and selection_untrusted_context and not filter_legit_service
+level: critical

@@ -45,7 +45,7 @@ detection:
     filter_legit_diagnostic:
         ParentImage|contains: 
             - '\Microsoft Visual Studio\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_procdump_args or selection_comsvcs_ordinal or selection_taskmgr_werfault) and selection_suspicious_context and not filter_legit_diagnostic
 level: critical

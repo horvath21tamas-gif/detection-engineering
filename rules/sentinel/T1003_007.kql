@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine contains "lsass" or (FolderPath endswith "\rundll32.exe" and (ProcessCommandLine in ("*comsvcs.dll, #24*", "*comsvcs.dll,#24*", "*comsvcs.dll, MiniDump*"))) or (ParentProcessName endswith "\taskmgr.exe" and FolderPath endswith "\werfault.exe" and ProcessCommandLine contains "-u -p ")) and (ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\wsmprovhost.exe", "*\psexesvc.exe", "*\httpd.exe")) and (not (ParentProcessName contains "\Microsoft Visual Studio\" and User =~ "NT AUTHORITY\SYSTEM"))

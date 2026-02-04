@@ -1,0 +1,50 @@
+title: Ultra-Pro High-Fidelity AS-REP Roasting & LDAP Enumeration (T1558.004)
+id: 4e204bdf-a9ca-49b3-bbc8-7ff695a31353
+status: stable
+description: |
+    Detects AS-REP Roasting attacks by monitoring for specific LDAP queries targeting 
+    the DONT_REQ_PREAUTH bit (4194304) and offensive tool parameters used for 
+    hash extraction (Rubeus, Impacket, PowerView).
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1558.004
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_ldap_uac:
+        CommandLine|contains:
+            - '1.2.840.113556.1.4.803:=4194304' 
+            - ' -band 4194304'                   
+            - '0x400000'                          
+
+    selection_offensive_flags:
+        CommandLine|contains:
+            - 'asreproast'
+            - 'Get-NPUsers'        
+        CommandLine|contains:
+            - ' /format:hashcat'  
+            - ' /format:john'
+            - ' /outfile:'       
+
+    selection_untrusted_parent:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\wsmprovhost.exe' 
+            - '\httpd.exe'       
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\adfind.exe'     
+
+    filter_legit_admin:
+        User: 'NT AUTHORITY\SYSTEM'
+        Image|contains:
+            - '\Windows\System32\lsass.exe'
+            - '\Microsoft\Active Directory\\'
+
+    condition: (selection_ldap_uac or selection_offensive_flags) and selection_untrusted_parent and not filter_legit_admin
+level: critical

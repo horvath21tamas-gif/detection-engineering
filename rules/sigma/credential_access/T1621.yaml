@@ -49,7 +49,7 @@ detection:
         Image|contains:
             - '\Program Files\Microsoft Azure AD Connect\'
             - '\Program Files\Microsoft Azure AD Sync\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     filter_known_admins:
         ParentImage|endswith: '\explorer.exe'

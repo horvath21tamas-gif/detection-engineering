@@ -436,6 +436,8 @@
 | T1601.001 | CRITICAL | Ultra-Pro High-Fidelity Network Binary Patching (T1601.001) |
 | T1601.002 | CRITICAL | Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002) |
 | T1606 | CRITICAL | Ultra-Pro High-Fidelity Web Token Forgery (T1606) |
+| T1606.001 | CRITICAL | Ultra-Pro High-Fidelity Web Cookie Harvesting (T1606.001) |
+| T1606.002 | CRITICAL | Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002) |
 | T1608 | HIGH | Anomalous Infrastructure Staging and Resource Deployment |
 | T1608.001 | HIGH | Anomalous Malware Staging to External Infrastructure |
 | T1608.002 | HIGH | Anomalous Offensive Tool Staging and External Upload |
@@ -448,6 +450,7 @@
 | T1611 | CRITICAL | Ultra-Pro Container Escape & Host Access (T1611) |
 | T1612 | CRITICAL | Ultra-Pro Stealthy Local Image Build (T1612) |
 | T1620 | CRITICAL | Ultra-Pro High-Fidelity Reflective Code Loading (T1620) |
+| T1621 | HIGH | Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621) |
 | T1622 | HIGH | Ultra-Pro Stealthy Debugger Evasion (T1622) |
 | T1647 | HIGH | Ultra-Pro High-Fidelity macOS Plist Persistence Modification (T1647) |
 | T1648 | HIGH | High-Fidelity Serverless Function Persistence or Abuse |

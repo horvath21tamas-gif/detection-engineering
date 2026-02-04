@@ -420,6 +420,8 @@
 - [Ultra-Pro High-Fidelity Network Binary Patching (T1601.001)](#ultra-pro-high-fidelity-network-binary-patching-(t1601001))
 - [Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002)](#ultra-pro-high-fidelity-malicious-network-os-upgrade-(t1601002))
 - [Ultra-Pro High-Fidelity Web Token Forgery (T1606)](#ultra-pro-high-fidelity-web-token-forgery-(t1606))
+- [Ultra-Pro High-Fidelity Web Cookie Harvesting (T1606.001)](#ultra-pro-high-fidelity-web-cookie-harvesting-(t1606001))
+- [Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002)](#ultra-pro-high-fidelity-web-token-forgery-&-golden-saml-(t1606002))
 - [Anomalous Infrastructure Staging and Resource Deployment](#anomalous-infrastructure-staging-and-resource-deployment)
 - [Anomalous Malware Staging to External Infrastructure](#anomalous-malware-staging-to-external-infrastructure)
 - [Anomalous Offensive Tool Staging and External Upload](#anomalous-offensive-tool-staging-and-external-upload)
@@ -432,6 +434,7 @@
 - [Ultra-Pro Container Escape & Host Access (T1611)](#ultra-pro-container-escape-&-host-access-(t1611))
 - [Ultra-Pro Stealthy Local Image Build (T1612)](#ultra-pro-stealthy-local-image-build-(t1612))
 - [Ultra-Pro High-Fidelity Reflective Code Loading (T1620)](#ultra-pro-high-fidelity-reflective-code-loading-(t1620))
+- [Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621)](#ultra-pro-high-fidelity-mfa-prompt-bombing-automation-(t1621))
 - [Ultra-Pro Stealthy Debugger Evasion (T1622)](#ultra-pro-stealthy-debugger-evasion-(t1622))
 - [Ultra-Pro High-Fidelity macOS Plist Persistence Modification (T1647)](#ultra-pro-high-fidelity-macos-plist-persistence-modification-(t1647))
 - [High-Fidelity Serverless Function Persistence or Abuse](#high-fidelity-serverless-function-persistence-or-abuse)
@@ -7282,6 +7285,41 @@ queries on token databases, and Golden SAML artifact generation.
 
 ---
 
+## Ultra-Pro High-Fidelity Web Cookie Harvesting (T1606.001)
+- **Azonosító:** `T1606_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized extraction of browser cookies and their corresponding 
+AES encryption keys from 'Local State' files. It specifically targets 
+untrusted processes (interpreters, unsigned binaries) while filtering 
+legitimate browser and Electron application behavior.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002)
+- **Azonosító:** `T1606_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized forging of web tokens (SAML, OAuth) by monitoring 
+suspicious access to IDP signing keys, AD FS database extraction, and 
+the use of specialized cloud-native forgery frameworks like Roadtools and AADInternals.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Anomalous Infrastructure Staging and Resource Deployment
 - **Azonosító:** `T1608.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
@@ -7478,6 +7516,23 @@ memory allocation APIs, executable memory flags, and .NET assembly loading
 methods within a single process context.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1620`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621)
+- **Azonosító:** `T1621.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects the execution of tools and scripts designed to automate repetitive MFA requests.
+Focuses on headless browser automation, specialized Azure/Okta exploit kits, and
+PowerShell-based authentication loops running in non-interactive sessions.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1621`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

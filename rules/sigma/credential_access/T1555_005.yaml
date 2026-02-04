@@ -52,7 +52,7 @@ detection:
         ParentImage|endswith:
             - '\services.exe'
             - '\svchost.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     filter_cloud_sync:
         Image|endswith:

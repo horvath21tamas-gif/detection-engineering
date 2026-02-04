@@ -1,0 +1,62 @@
+title: Ultra-Pro High-Fidelity System Network Configuration Discovery (T1016)
+id: c7ca59d6-bc63-4621-b16c-01c0a683bb9d
+status: stable
+description: |
+    Detects systematic discovery of network configuration (IP, routing, DNS, ARP). 
+    Filters high-volume noise from VPN clients and system services using integrity 
+    levels, parent process gating, and command-line switch analysis.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1016
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\ipconfig.exe'
+            - '\route.exe'
+            - '\nbtstat.exe'
+            - '\arp.exe'
+            - '\netsh.exe'
+        - CommandLine|contains:
+            - 'Get-NetIPAddress'
+            - 'Get-NetRoute'
+            - 'Get-NetNeighbor'    
+            - 'interface show'
+
+    selection_patterns:
+        CommandLine|contains:
+            - ' /all'                
+            - ' print'              
+            - ' -a'                  
+            - ' /displaydns'         
+
+    selection_suspicious_lineage:
+        ParentImage|endswith:
+            - '\winword.exe'      
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\httpd.exe'           
+            - '\wsmprovhost.exe'     
+        IntegrityLevel: 'Medium'     
+
+    selection_automation:
+        CommandLine|contains:
+            - ' > '                  
+            - 'ConvertTo-Json'
+            - 'Export-Csv'
+
+    filter_legit_system:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith:
+            - '\svchost.exe'         
+            - '\CcmExec.exe'        
+            - '\msiexec.exe'
+        - CommandLine|contains:
+            - 'Program Files'        
+
+    condition: selection_tools and (selection_patterns or selection_suspicious_lineage or selection_automation) and not filter_legit_system
+level: high

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*\.aws\credentials*", "*\.aws\config*", "*\.azure\accessTokens.json*", "*\.azure\azureProfile.json*", "*\.config\gcloud\*", "*\.docker\config.json*")) and (((ProcessCommandLine in ("*copy *", "*type *", "*cat *", "*Get-Content*", "*7z*", "*curl -F*", "*Invoke-RestMethod*")) or FolderPath endswith "\sqlite3.exe") or ((FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Downloads\*")) and (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\python.exe", "*\node.exe")))) and (not ((FolderPath in ("*\aws.exe", "*\az.exe", "*\gcloud.exe", "*\docker.exe")) and (ParentProcessName in ("*\Microsoft VS Code\*", "*\JetBrains\*", "*\actions-runner\*", "*\agent\*")) and User =~ "NT AUTHORITY\SYSTEM"))

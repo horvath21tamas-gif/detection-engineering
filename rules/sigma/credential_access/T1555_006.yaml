@@ -58,7 +58,7 @@ detection:
             - '\JetBrains\'
             - '\actions-runner\'   
             - '\agent\'             
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_cloud_paths and (selection_harvesting_behavior or selection_untrusted_context) and not filter_official_tools
 level: critical

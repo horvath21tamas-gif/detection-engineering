@@ -1,0 +1,54 @@
+title: Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004)
+id: 3ae8db87-1a14-4b48-b8af-3c55671f6d74
+status: stable
+description: |
+    Detects systematic discovery of cloud accounts (AWS, Azure, GCP) focusing on 
+    interactive shell sessions and anomalous command chaining. Filters legitimate 
+    CI/CD and automation workloads based on process lineage and user context.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1087.004
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cli:
+        Image|endswith:
+            - '\aws.exe'
+            - '\az.cmd'
+            - '\gcloud.cmd'
+
+    selection_iam:
+        CommandLine|contains:
+            - 'iam list-users'
+            - 'iam list-roles'
+            - 'ad user list'      
+            - 'ad group list'
+            - 'projects get-iam-policy' 
+
+    selection_extraction:
+        CommandLine|contains:
+            - '--query'
+            - '--output json'
+            - ' | jq'
+            - ' | grep'
+            - ' > '
+
+    selection_interactive_parent:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wsmprovhost.exe' 
+
+    filter_legit_automation:
+        ParentImage|contains:
+            - '\Jenkins\'
+            - '\GitLab-Runner\'
+            - '\Terraform\'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_cli and selection_iam and (selection_extraction or selection_interactive_parent) and not filter_legit_automation
+level: high

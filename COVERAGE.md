@@ -101,6 +101,9 @@
 | T1059.009 | CRITICAL | High-Fidelity Cloud Shell Exploitation and Data Exfiltration |
 | T1068 | HIGH | Suspicious SYSTEM Process Spawned from User Context |
 | T1069 | HIGH | Ultra-Pro High-Fidelity Permission Groups Discovery (T1069) |
+| T1069.001 | HIGH | Ultra-Pro High-Fidelity Local Group Discovery (T1069.001) |
+| T1069.002 | HIGH | Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002) |
+| T1069.003 | HIGH | Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003) |
 | T1070 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070) |
 | T1070.001 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Security Event Log Cleared Using wevtutil.exe |
 | T1070.002 | HIGH | Ultra-Pro High-Fidelity Linux Log Clearing and Journal Sabotage (T1070.002) |

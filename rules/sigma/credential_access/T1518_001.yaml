@@ -56,7 +56,7 @@ detection:
             - 'Guest Additions'
 
     filter_legit_noise:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|endswith:
             - '\CcmExec.exe'         
             - '\svchost.exe'

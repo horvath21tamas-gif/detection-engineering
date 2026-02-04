@@ -86,6 +86,9 @@
 - [High-Fidelity Cloud Shell Exploitation and Data Exfiltration](#high-fidelity-cloud-shell-exploitation-and-data-exfiltration)
 - [Suspicious SYSTEM Process Spawned from User Context](#suspicious-system-process-spawned-from-user-context)
 - [Ultra-Pro High-Fidelity Permission Groups Discovery (T1069)](#ultra-pro-high-fidelity-permission-groups-discovery-(t1069))
+- [Ultra-Pro High-Fidelity Local Group Discovery (T1069.001)](#ultra-pro-high-fidelity-local-group-discovery-(t1069001))
+- [Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002)](#ultra-pro-high-fidelity-domain-group-discovery-(t1069002))
+- [Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003)](#ultra-pro-high-fidelity-cloud-groups-discovery-(t1069003))
 - [Ultra-Pro High-Fidelity Indicator Removal on Host (T1070)](#ultra-pro-high-fidelity-indicator-removal-on-host-(t1070))
 - [Security Event Log Cleared Using wevtutil.exe](#security-event-log-cleared-using-wevtutilexe)
 - [Ultra-Pro High-Fidelity Linux Log Clearing and Journal Sabotage (T1070.002)](#ultra-pro-high-fidelity-linux-log-clearing-and-journal-sabotage-(t1070002))
@@ -1912,6 +1915,57 @@ while filtering out legitimate system/inventory noise through integrity and pare
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Local Group Discovery (T1069.001)
+- **Azonosító:** `T1069_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted local group reconnaissance focusing on privileged accounts 
+(Administrators, RDP). Filters out legitimate system/inventory noise 
+through integrity level gating and parent-process correlation.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002)
+- **Azonosító:** `T1069_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic AD domain group discovery focusing on reconnaissance tools 
+(BloodHound, AdFind) and suspicious PowerShell patterns. Uses integrity level 
+and process lineage to minimize false positives from admin workstations.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003)
+- **Azonosító:** `T1069_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic cloud group discovery by identifying mass reconnaissance patterns, 
+atypical User-Agents, and expansion of sensitive group properties. 
+Designed to filter out high-volume CSPM and IaC service principals.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

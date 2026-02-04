@@ -1,0 +1,59 @@
+title: Ultra-Pro High-Fidelity GUI Input Capture (T1056.002)
+id: e494919a-efe7-4b6f-ad59-de92e5409ab3
+status: stable
+description: |
+    Detects attempts to capture credentials through deceptive GUI prompts or overlays. 
+    Focuses on PowerShell/C# snippets creating modal dialogs from suspicious parent 
+    processes (browsers, office apps) and unbacked scripts.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.collection
+    - attack.t1056.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\mshta.exe'
+            - '\cmd.exe'
+
+    selection_gui_logic:
+        CommandLine|contains:
+            - 'System.Windows.Forms.Form'
+            - 'Windows.Forms.TextBox'
+            - 'PasswordChar'        
+            - '.ShowDialog()'      
+            - 'TopMost = $true'     
+            - 'credui.dll'          
+
+    selection_cred_commands:
+        CommandLine|contains:
+            - 'PromptForCredential'
+            - 'Get-Credential'
+            - 'Net.NetworkCredential'
+
+    filter_admin_infra:
+        Image|contains:
+            - '\Program Files\'
+            - '\Program Files (x86)\'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_legit_browsers:
+        CommandLine|contains:
+            - '--type=utility'
+            - '--type=renderer'
+
+    condition: (selection_suspicious_parent or (selection_gui_logic or selection_cred_commands)) and not (filter_admin_infra or filter_legit_browsers)
+level: high

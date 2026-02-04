@@ -1,0 +1,47 @@
+title: Ultra-Pro High-Fidelity DCSync Attack Detection (T1003.006)
+id: 99b21c34-8d91-4765-8576-6bc6ea7ca34f
+status: stable
+description: |
+    Detects DCSync attacks where an attacker impersonates a Domain Controller 
+    to request credentials. Focuses on specific RPC flags, abbreviated tool commands, 
+    and anomalous process lineage on non-DC assets.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1003.006
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tool_flags:
+        CommandLine|contains:
+            - 'lsadump::dcsync'  
+            - '-just-dc'         
+            - '-just-dc-user'    
+            - 'Invoke-DCSync'     
+            - 'mimikatz(adsiedit)'
+            - 'DRSGetNCChanges'  
+
+    selection_sensitive_targets:
+        CommandLine|contains:
+            - '/user:krbtgt'     
+            - '/user:administrator'
+            - '-user krbtgt'
+
+    selection_untrusted_parent:
+        ParentImage|endswith:
+            - '\wsmprovhost.exe' 
+            - '\httpd.exe'       
+            - '\php-cgi.exe'
+            - '\psexesvc.exe'    
+
+    filter_legit_domain_controllers:
+        User: 
+            - 'NT AUTHORITY\SYSTEM'
+            - 'NT AUTHORITY\NETWORK SERVICE'
+        Image|contains:
+            - '\Windows\System32\lsass.exe'
+
+    condition: (selection_tool_flags or selection_sensitive_targets) and selection_untrusted_parent and not filter_legit_domain_controllers
+level: critical

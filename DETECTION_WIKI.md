@@ -370,6 +370,7 @@
 - [High-Fidelity System Service Execution Detection](#high-fidelity-system-service-execution-detection)
 - [High-Fidelity Launch Daemon Persistence Detection](#high-fidelity-launch-daemon-persistence-detection)
 - [High-Fidelity System Service Execution Detection (T1569.002)](#high-fidelity-system-service-execution-detection-(t1569002))
+- [Ultra-Pro High-Fidelity Lateral Tool Transfer (T1570)](#ultra-pro-high-fidelity-lateral-tool-transfer-(t1570))
 - [Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574)](#ultra-pro-dll-hijacking-&-side-loading-detection-(t1574))
 - [Ultra-Pro DLL Search Order Hijacking Detection (T1574.001)](#ultra-pro-dll-search-order-hijacking-detection-(t1574001))
 - [Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002)](#ultra-pro-dll-side-loading-integrity-gap-detection-(t1574002))
@@ -6660,6 +6661,24 @@ parent processes, world-writable binary paths, and shell command wrappers.
 Optimized for low false positive rates in enterprise environments.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Lateral Tool Transfer (T1570)
+- **Azonosító:** `T1570.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized lateral tool transfer by monitoring command-line activity 
+targeting administrative shares (C$, ADMIN$). Focuses on non-standard process 
+lineages (Office, Browsers, non-elevated Shells) and weaponized tools like 
+bitsadmin or robocopy.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1570`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

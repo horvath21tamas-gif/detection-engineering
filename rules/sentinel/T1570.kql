@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\robocopy.exe", "*\xcopy.exe", "*\bitsadmin.exe", "*\certutil.exe", "*\curl.exe")) and (ProcessCommandLine in ("*\C$\*", "*\ADMIN$\*", "*\IPC$\*", "*admin$*", "*c$*")) and (ProcessCommandLine in ("*.exe*", "*.dll*", "*.ps1*", "*.vbs*", "*.bat*", "*.zip*", "*.7z*", "*.vhd*", "*.iso*"))) and (not ((FolderPath in ("*\CcmExec.exe", "*\msiexec.exe")) or (ProcessCommandLine in ("*\SoftwareDistribution\*", "*\HealthCheck\*", "*AppData\Local\Google\Chrome*")) or User =~ "NT AUTHORITY\SYSTEM"))

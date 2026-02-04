@@ -64,7 +64,7 @@ detection:
             - '\SoftwareDistribution\' 
             - '\HealthCheck\'
             - 'AppData\Local\Google\Chrome'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_tools and selection_shares and selection_extensions) and not filter_legit_automation
 level: high

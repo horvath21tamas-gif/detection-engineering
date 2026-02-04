@@ -1,0 +1,53 @@
+title: Ultra-Pro High-Fidelity Cloud Credential Discovery (T1552.005)
+id: 22123033-856f-478d-954d-c664135917ea
+status: stable
+description: |
+    Detects unauthorized extraction of cloud credentials (AWS, Azure, GCP) from local 
+    config files. Filters legitimate CLI usage and focuses on anomalous process behavior 
+    like redirection, encoding, or access from web servers and remote shells.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1552.005
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cloud_files:
+        CommandLine|contains:
+            - '.aws\credentials'       
+            - '.azure\azureProfile.json' 
+            - '.azure\accessTokens.json'
+            - '.config\gcloud\'        
+            - '.docker\config.json'     
+
+    selection_extraction:
+        CommandLine|contains:
+            - 'base64'                 
+            - ' | clip'                 
+            - ' > '                  
+            - 'curl'                 
+            - 'type '                 
+            - 'Get-Content'             
+
+    selection_untrusted_context:
+        ParentImage|endswith:
+            - '\wsmprovhost.exe'       
+            - '\httpd.exe'              
+            - '\php-cgi.exe'
+            - '\psexesvc.exe'          
+        Image|contains:
+            - '\AppData\Local\Temp\'
+            - '\Users\Public\'
+
+    filter_legit_cli_tools:
+        Image|endswith:
+            - '\aws.exe'
+            - '\az.cmd'
+            - '\gcloud.cmd'
+            - '\docker.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_cloud_files and (selection_extraction or selection_untrusted_context) and not filter_legit_cli_tools
+level: critical

@@ -1,0 +1,56 @@
+title: Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557)
+id: 893c356b-d200-48e7-b628-5230ae1140f6
+status: stable
+description: |
+    Detects unauthorized system configuration changes required for AiTM attacks, 
+    including IP Forwarding enablement and LLMNR/NetBIOS poisoning tool execution, 
+    while filtering out legitimate VPN and virtualization noise.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1557
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_ip_forwarding:
+        Image|endswith: '\reg.exe'
+        CommandLine|contains: 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+        CommandLine|contains: 'IPEnableRouter'
+        CommandLine|contains: '1' 
+
+    selection_aitm_tools:
+        CommandLine|contains:
+            - ' -interface '
+            - ' -r '        
+            - ' -f '         
+            - ' -LLMNR '    
+            - ' -NBTNS '    
+            - ' --spoof '   
+            - 'arpspoof'
+
+    selection_untrusted_actor:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Downloads\'
+        Image|endswith:
+            - '\python.exe'
+            - '\pythonw.exe'
+            - '\powershell.exe'
+
+    filter_virtualization:
+        ParentImage|contains:
+            - '\VMware\'
+            - '\Oracle\VirtualBox\'
+    
+    filter_vpn_clients:
+        Image|contains:
+            - '\Cisco\AnyConnect\'
+            - '\OpenVPN\'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: (selection_ip_forwarding or selection_aitm_tools) and selection_untrusted_actor and not (filter_virtualization or filter_vpn_clients)
+level: high

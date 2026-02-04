@@ -1,0 +1,59 @@
+title: Ultra-Pro High-Fidelity Cloud Infrastructure Discovery (T1580)
+id: 84e5d0fa-b067-4f5c-a0a2-bebf842de24f
+status: stable
+description: |
+    Detects systematic discovery of cloud resources (VMs, VPCs, S3) focusing on 
+    anomalous execution environments and data extraction patterns. 
+    Excludes legitimate Infrastructure-as-Code (IaC) and CI/CD tools.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1580
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cli:
+        Image|endswith:
+            - '\aws.exe'
+            - '\az.cmd'
+            - '\gcloud.cmd'
+
+    selection_infra:
+        CommandLine|contains:
+            - 'ec2 describe-instances'
+            - 's3 ls'
+            - 'rds describe-db-instances'
+            - 'ec2 describe-security-groups'
+            - 'vm list'
+            - 'storage account list'
+            - 'network vnet list'
+            - 'compute instances list'
+
+    selection_extraction:
+        CommandLine|contains:
+            - '--query'
+            - '--output json'
+            - ' | jq'
+            - ' | base64'
+            - ' > '         
+
+    selection_interactive_parent:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wsmprovhost.exe' 
+            - '\httpd.exe'      
+
+    filter_legit_automation:
+        ParentImage|contains:
+            - '\Jenkins\'
+            - '\GitLab-Runner\'
+            - '\Terraform\'
+            - '\Ansible\'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_cli and selection_infra and (selection_extraction or selection_interactive_parent) and not filter_legit_automation
+level: high

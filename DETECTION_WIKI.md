@@ -97,6 +97,8 @@
 - [Ultra-Pro High-Fidelity Brute Force & Tooling (T1110)](#ultra-pro-high-fidelity-brute-force-&-tooling-(t1110))
 - [Multiple Failed Login Attempts for Single User (Possible Password Guessing)](#multiple-failed-login-attempts-for-single-user-(possible-password-guessing))
 - [Ultra-Pro High-Fidelity Credential Export & Cracking (T1110.002)](#ultra-pro-high-fidelity-credential-export-&-cracking-(t1110002))
+- [Ultra-Pro High-Fidelity Password Spraying (T1110.003)](#ultra-pro-high-fidelity-password-spraying-(t1110003))
+- [Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004)](#ultra-pro-high-fidelity-credential-stuffing-&-combo-list-abuse-(t1110004))
 - [Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112)](#ultra-pro-high-fidelity-registry-tampering-for-evasion-(t1112))
 - [Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)](#ultra-pro-high-fidelity-trusted-developer-utility-proxy-(t1127))
 - [Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001)](#ultra-pro-high-fidelity-msbuild-proxy-execution-(t1127001))
@@ -2018,6 +2020,40 @@ cracking and identifies the execution of password recovery tools with high preci
 by filtering out legitimate backup and system maintenance processes.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Password Spraying (T1110.003)
+- **Azonosító:** `T1110_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects password spraying attacks by identifying suspicious automated authentication 
+logic where a single process iterates through a list of accounts. It filters for 
+untrusted process locations and known attack module signatures.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004)
+- **Azonosító:** `T1110_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects credential stuffing by identifying automated tools and interpreters 
+(Python, .NET) processing large credential combo-lists or using known 
+stuffing framework arguments from untrusted locations.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

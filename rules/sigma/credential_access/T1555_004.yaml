@@ -48,7 +48,7 @@ detection:
     filter_legit_scripts:
         CommandLine|contains:
             - 'C:\Program Files\IT_Management\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     filter_explorer:
         ParentImage|endswith: '\explorer.exe'

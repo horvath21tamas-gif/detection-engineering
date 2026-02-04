@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where ((FolderPath endswith "\reg.exe" and (ProcessCommandLine in ("*\Temp\*", "*\Users\Public\*", "*\AppData\*"))) or ((FolderPath endswith "\esentutl.exe" and ProcessCommandLine contains "ntds.dit") or (FolderPath endswith "\vssadmin.exe" and ProcessCommandLine contains "create shadow")) or (ProcessCommandLine in ("*.hash*", "*.txt*"))) and (not (((ParentProcessName in ("*\services.exe", "*\TrustedInstaller.exe", "*\MsMpEng.exe")) and User =~ "NT AUTHORITY\SYSTEM") or (FolderPath in ("*\Program Files\Veeam\*", "*\Program Files\Backup\*"))))
+| where ((FolderPath endswith "\reg.exe" and (ProcessCommandLine in ("*\Temp\*", "*\Users\Public\*", "*\AppData\*"))) or ((FolderPath endswith "\esentutl.exe" and ProcessCommandLine contains "ntds.dit") or (FolderPath endswith "\vssadmin.exe" and ProcessCommandLine contains "create shadow")) or (ProcessCommandLine in ("*.hash*", "*.txt*"))) and (not (((ParentProcessName in ("*\services.exe", "*\TrustedInstaller.exe", "*\MsMpEng.exe")) and username =~ "NT AUTHORITY\SYSTEM") or (FolderPath in ("*\Program Files\Veeam\*", "*\Program Files\Backup\*"))))

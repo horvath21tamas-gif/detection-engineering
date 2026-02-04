@@ -113,6 +113,8 @@
 | T1110 | HIGH | Ultra-Pro High-Fidelity Brute Force & Tooling (T1110) |
 | T1110.001 | MEDIUM | Multiple Failed Login Attempts for Single User (Possible Password Guessing) |
 | T1110.002 | CRITICAL | Ultra-Pro High-Fidelity Credential Export & Cracking (T1110.002) |
+| T1110.003 | HIGH | Ultra-Pro High-Fidelity Password Spraying (T1110.003) |
+| T1110.004 | HIGH | Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004) |
 | T1112 | CRITICAL | Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112) |
 | T1127 | CRITICAL | Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127), Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001) |
 | T1127.001 | CRITICAL | Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001) |

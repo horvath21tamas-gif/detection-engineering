@@ -48,7 +48,7 @@ detection:
             - '\Jenkins\'
             - '\GitLab-Runner\'
             - '\Terraform\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_cli and selection_iam and (selection_extraction or selection_interactive_parent) and not filter_legit_automation
 level: high

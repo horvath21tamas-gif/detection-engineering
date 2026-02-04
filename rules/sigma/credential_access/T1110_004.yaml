@@ -53,7 +53,7 @@ detection:
         ParentImage|contains:
             - '\Program Files\'
             - '\Windows\System32\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_framework_args or selection_combolist_files) and selection_untrusted_location and not filter_browsers_and_updaters
 level: high

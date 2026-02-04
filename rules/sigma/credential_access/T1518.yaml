@@ -1,0 +1,67 @@
+title: Ultra-Pro High-Fidelity Software Discovery (T1518)
+id: 71af3b56-02a4-492c-bac2-1dd82f634674
+status: stable
+description: |
+    Detects targeted software discovery focusing on security product identification. 
+    Uses integrity level gating, parent-process correlation, and specific keyword 
+    analysis to minimize false positives from system inventory tools.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1518
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\wmic.exe'            
+            - '\reg.exe'             
+        - CommandLine|contains:
+            - 'Get-Package'
+            - 'Get-ItemProperty'   
+            - 'product get name'
+            - 'software list'
+
+    selection_security_keywords:
+        CommandLine|contains:
+            - 'defender'
+            - 'sentinel'
+            - 'crowdstrike'
+            - 'falcon'
+            - 'carbonblack'
+            - 'fireeye'
+            - 'tanium'
+            - 'sophos'
+            - 'symantec'
+            - 'kaspersky'
+            - 'mcafee'
+
+    selection_suspicious_lineage:
+        ParentImage|endswith:
+            - '\wsmprovhost.exe'    
+            - '\httpd.exe'           
+            - '\winword.exe'         
+            - '\excel.exe'
+        IntegrityLevel: 'Medium'   
+
+    selection_automation:
+        CommandLine|contains:
+            - ' > '                  
+            - 'ConvertTo-Json'
+            - 'Export-Csv'
+            - 'findstr'             
+
+    filter_legit_noise:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith:
+            - '\CcmExec.exe'        
+            - '\svchost.exe'
+            - '\msiexec.exe'
+        - CommandLine|contains:
+            - 'Program Files'       
+            - 'Google\Update'        
+
+    condition: selection_tools and (selection_security_keywords or selection_automation or selection_suspicious_lineage) and not filter_legit_noise
+level: high

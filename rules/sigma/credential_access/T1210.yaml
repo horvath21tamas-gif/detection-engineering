@@ -57,7 +57,7 @@ detection:
             - '\HealthCheck\'
         - ParentCommandLine|contains:
             - 'winrm'                                
-        - User: 'NT AUTHORITY\NETWORK SERVICE'      
+        - username: 'NT AUTHORITY\NETWORK SERVICE'      
 
     condition: selection_parent and (selection_child_args or selection_suspicious_paths or selection_child_binaries) and not filter_legit_admin
 level: critical

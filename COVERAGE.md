@@ -198,6 +198,7 @@
 | T1205.001 | HIGH | Ultra-Pro Port Knocking & Raw Socket Listener (T1205.001) |
 | T1205.002 | CRITICAL | Ultra-Pro Socket Filter & WFP Traffic Signaling (T1205.002) |
 | T1207 | CRITICAL | Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207) |
+| T1210 | CRITICAL | Ultra-Pro High-Fidelity Exploitation of Remote Services (T1210) |
 | T1211 | CRITICAL | Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211) |
 | T1212 | CRITICAL | Ultra-Pro High-Fidelity Credential Service Exploitation (T1212) |
 | T1216 | CRITICAL | Ultra-Pro High-Fidelity System Script Proxy Execution (T1216) |

@@ -1,0 +1,53 @@
+title: Ultra-Pro High-Fidelity System Information Discovery (T1082)
+id: 1a52f858-ea85-49b4-b796-8cc82236de0b
+status: stable
+description: |
+    Detects systematic system information discovery (OS, patches, architecture) 
+    focusing on reconnaissance for exploit selection. Filters high-volume noise 
+    from inventory agents and browsers using integrity levels and parent process gating.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1082
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\systeminfo.exe'
+            - '\wmic.exe'
+        - CommandLine|contains:
+            - 'Get-ComputerInfo'
+            - 'os get'               
+            - 'qfe list'            
+            - 'baseboard get'        
+
+    selection_suspicious_lineage:
+        ParentImage|endswith:
+            - '\winword.exe'        
+            - '\excel.exe'
+            - '\wsmprovhost.exe'    
+            - '\httpd.exe'           
+            - '\powershell.exe'    
+        IntegrityLevel: 'Medium'    
+
+    selection_automation:
+        CommandLine|contains:
+            - ' > '                 
+            - 'ConvertTo-Json'
+            - 'findstr'              
+
+    filter_legit_system:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith:
+            - '\CcmExec.exe'        
+            - '\svchost.exe'
+            - '\msiexec.exe'
+        - CommandLine|contains:
+            - 'Program Files'     
+            - 'Google\Update'
+
+    condition: selection_tools and (selection_suspicious_lineage or selection_automation) and not filter_legit_system
+level: high

@@ -1,0 +1,4 @@
+
+| rex field=CommandLine "(?<CommandLineMatch>os_crypt.*encrypted_key)"
+| eval CommandLineCondition=if(isnotnull(CommandLineMatch), "true", "false")
+| search CommandLine IN ("*\\Network\\Cookies*", "*\\Local State*", "*\\Login Data*", "*\\cookies.sqlite*") CommandLine IN ("*copy *", "*type *", "*esentutl*", "*sqlite3*", "* -export*") OR CommandLineCondition="true" OR (Image IN ("*\\Users\\*", "*\\AppData\\Local\\Temp\\*", "*\\Downloads\\*", "*\\Public\\*") Image IN ("*\\powershell.exe", "*\\cmd.exe", "*\\python.exe", "*\\cscript.exe", "*\\wscript.exe")) NOT (Image IN ("*\\Program Files\\Google\\Chrome\\*", "*\\Program Files (x86)\\Microsoft\\Edge\\*", "*\\Program Files\\Mozilla Firefox\\*", "*\\Program Files\\Microsoft\\Teams\\*") OR (ParentImage IN ("*\\services.exe", "*\\MsMpEng.exe") username="NT AUTHORITY\\SYSTEM"))

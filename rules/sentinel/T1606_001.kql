@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*\Network\Cookies*", "*\Local State*", "*\Login Data*", "*\cookies.sqlite*")) and (((ProcessCommandLine in ("*copy *", "*type *", "*esentutl*", "*sqlite3*", "* -export*")) or ProcessCommandLine matches regex "os_crypt.*encrypted_key") or ((FolderPath in ("*\Users\*", "*\AppData\Local\Temp\*", "*\Downloads\*", "*\Public\*")) and (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\python.exe", "*\cscript.exe", "*\wscript.exe")))) and (not ((FolderPath in ("*\Program Files\Google\Chrome\*", "*\Program Files (x86)\Microsoft\Edge\*", "*\Program Files\Mozilla Firefox\*", "*\Program Files\Microsoft\Teams\*")) or ((ParentProcessName in ("*\services.exe", "*\MsMpEng.exe")) and User =~ "NT AUTHORITY\SYSTEM")))

@@ -164,6 +164,7 @@
 - [Ultra-Pro High-Fidelity Credential Service Exploitation (T1212)](#ultra-pro-high-fidelity-credential-service-exploitation-(t1212))
 - [Ultra-Pro High-Fidelity System Script Proxy Execution (T1216)](#ultra-pro-high-fidelity-system-script-proxy-execution-(t1216))
 - [Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001)](#ultra-pro-high-fidelity-pubprn-script-proxy-execution-(t1216001))
+- [Ultra-Pro High-Fidelity Browser Information Discovery (T1217)](#ultra-pro-high-fidelity-browser-information-discovery-(t1217))
 - [Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218)](#ultra-pro-high-fidelity-system-binary-proxy-execution-(t1218))
 - [Ultra-Pro High-Fidelity HH.exe Proxy Execution (T1218.001)](#ultra-pro-high-fidelity-hhexe-proxy-execution-(t1218001))
 - [Ultra-Pro High-Fidelity Control.exe Proxy Execution (T1218.002)](#ultra-pro-high-fidelity-controlexe-proxy-execution-(t1218002))
@@ -3191,6 +3192,23 @@ of remote scriptlets (.sct). Focuses on argument injection using the 'script:'
 protocol and anomalous process lineage.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Browser Information Discovery (T1217)
+- **Azonosító:** `T1217.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized discovery of browser metadata and history. 
+Focuses on non-browser processes accessing sensitive profile files (SQLite/JSON) 
+using command-line tools or anomalous redirection patterns.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1217`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

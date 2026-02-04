@@ -56,7 +56,7 @@ detection:
 
     # 5. ELITE WHITELIST (Profi zajmentesítés)
     filter_legit_it_tools:
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
         Image|contains:
             - '\Program Files\Splunk\'
             - '\Program Files\Tanium\'

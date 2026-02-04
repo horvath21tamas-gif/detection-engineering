@@ -178,6 +178,7 @@
 | T1212 | CRITICAL | Ultra-Pro High-Fidelity Credential Service Exploitation (T1212) |
 | T1216 | CRITICAL | Ultra-Pro High-Fidelity System Script Proxy Execution (T1216) |
 | T1216.001 | CRITICAL | Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001) |
+| T1217 | HIGH | Ultra-Pro High-Fidelity Browser Information Discovery (T1217) |
 | T1218 | HIGH | Ultra-Pro High-Fidelity Regsvcs/Regasm Proxy Execution (T1218.009), Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218), Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1218.001 | CRITICAL | Ultra-Pro High-Fidelity HH.exe Proxy Execution (T1218.001) |
 | T1218.002 | CRITICAL | Ultra-Pro High-Fidelity Control.exe Proxy Execution (T1218.002) |

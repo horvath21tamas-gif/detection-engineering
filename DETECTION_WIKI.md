@@ -35,6 +35,7 @@
 - [Ultra-Pro Network Logon Script/Shortcut Modification (T1037.003)](#ultra-pro-network-logon-scriptshortcut-modification-(t1037003))
 - [Ultra-Pro RC Script and Init.d Persistence (T1037.004)](#ultra-pro-rc-script-and-initd-persistence-(t1037004))
 - [Ultra-Pro macOS Startup Items Persistence (T1037.005)](#ultra-pro-macos-startup-items-persistence-(t1037005))
+- [Ultra-Pro High-Fidelity Network Sniffing Detection (T1040)](#ultra-pro-high-fidelity-network-sniffing-detection-(t1040))
 - [Suspicious Remote Process Creation via WMIC](#suspicious-remote-process-creation-via-wmic)
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [High-Fidelity At.exe Activity Detection](#high-fidelity-atexe-activity-detection)
@@ -1005,6 +1006,23 @@ subsystem and focusing on unsigned or script-generated persistence.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Network Sniffing Detection (T1040)
+- **Azonosító:** `T1040.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized network sniffing by monitoring for administrative tools 
+used in capture mode, driver installation for packet interception, 
+and offensive sniffing frameworks running from untrusted paths.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1040`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

@@ -58,7 +58,7 @@ detection:
             - '\Program Files\Wireshark\'
             - '\Program Files\Microsoft Message Analyzer\'
             - '\Windows\System32\wbem\wmiprvse.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_native_sniff or selection_driver_install or selection_offensive) and selection_untrusted_source and not filter_authorized_admin
 level: high

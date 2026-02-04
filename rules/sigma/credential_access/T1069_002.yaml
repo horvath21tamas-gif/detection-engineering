@@ -1,0 +1,61 @@
+title: Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002)
+id: 328ea5f9-7af7-4d68-ab52-e6e84bdff8a4
+status: stable
+description: |
+    Detects systematic AD domain group discovery focusing on reconnaissance tools 
+    (BloodHound, AdFind) and suspicious PowerShell patterns. Uses integrity level 
+    and process lineage to minimize false positives from admin workstations.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1069.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\adfind.exe'       
+            - '\net.exe'
+            - '\net1.exe'
+            - '\dsquery.exe'
+            - '\SharpHound.exe'    
+        - CommandLine|contains:
+            - 'Get-DomainGroup'     
+            - 'Get-ADGroup'
+            - 'search -filter'       
+
+    selection_targets:
+        CommandLine|contains:
+            - 'Domain Admins'
+            - 'Enterprise Admins'
+            - 'Schema Admins'
+            - 'Remote Desktop Users'
+            - ' /domain'           
+
+    selection_patterns:
+        CommandLine|contains:
+            - 'ConvertTo-Json'
+            - ' -Properties *'      
+            - ' -CSV '
+            - ' > '                 
+
+    selection_suspicious_lineage:
+        ParentImage|endswith:
+            - '\wsmprovhost.exe'    
+            - '\httpd.exe'         
+            - '\winword.exe'         
+        IntegrityLevel: 'Medium'    
+
+    filter_legit_ops:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ComputerName|contains: 'DC-' 
+        - ParentImage|contains:
+            - '\Program Files\Tanium\'
+            - '\Windows\System32\CcmExec.exe' 
+        - CommandLine|contains:
+            - 'Get-ADGroupMember -Identity' 
+
+    condition: selection_tools and (selection_targets or selection_patterns or selection_suspicious_lineage) and not filter_legit_ops
+level: high

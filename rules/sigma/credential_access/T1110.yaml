@@ -54,7 +54,7 @@ detection:
             - '\Program Files\Microsoft Azure AD Connect\'
             - '\Program Files\Puppet Labs\'
             - '\Program Files\Ansible\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     filter_legit_browsers:
         Image|endswith:

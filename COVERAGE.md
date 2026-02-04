@@ -110,6 +110,7 @@
 | T1098.006 | CRITICAL | High-Fidelity MFA Method Addition |
 | T1105 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1106 | CRITICAL | High-Fidelity Native API Abuse via LOLBins |
+| T1110 | HIGH | Ultra-Pro High-Fidelity Brute Force & Tooling (T1110) |
 | T1110.001 | MEDIUM | Multiple Failed Login Attempts for Single User (Possible Password Guessing) |
 | T1112 | CRITICAL | Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112) |
 | T1127 | CRITICAL | Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127), Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001) |

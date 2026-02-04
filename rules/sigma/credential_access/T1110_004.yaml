@@ -1,0 +1,59 @@
+title: Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004)
+id: e47ec821-2a62-42b0-900b-ad5469764c4c
+status: stable
+description: |
+    Detects credential stuffing by identifying automated tools and interpreters 
+    (Python, .NET) processing large credential combo-lists or using known 
+    stuffing framework arguments from untrusted locations.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1110.004
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_framework_args:
+        CommandLine|contains:
+            - 'combo'           
+            - 'proxylist'       
+            - 'capture'         
+            - 'threads'        
+            - 'SentryMBA'
+            - 'OpenBullet'
+
+    selection_combolist_files:
+        CommandLine|contains:
+            - 'user:pass'       
+            - 'wordlist'
+            - 'passlist'
+            - 'accounts.txt'
+            - 'combos.txt'
+
+    selection_untrusted_location:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Downloads\'
+            - '\Public\'
+        Image|endswith:
+            - '\python.exe'
+            - '\pythonw.exe'
+            - '\node.exe'
+            - '\powershell.exe'
+
+    filter_browsers_and_updaters:
+        Image|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+            - '\brave.exe'
+        ParentImage|contains:
+            - '\Program Files\'
+            - '\Windows\System32\'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: (selection_framework_args or selection_combolist_files) and selection_untrusted_location and not filter_browsers_and_updaters
+level: high

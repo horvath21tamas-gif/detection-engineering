@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("*get-signin-token*", "*r=signin*", "*portal.azure.com*", "*account.google.com/ServiceLogin*")) or (((FolderPath in ("*\chrome.exe", "*\msedge.exe")) or (ProcessCommandLine in ("*--incognito*", "*--new-window*", "*--app=*")) or (ProcessCommandLine in ("*console.aws.amazon.com*", "*portal.azure.com*"))) and ((ParentProcessName in ("*\wsmprovhost.exe", "*\httpd.exe", "*\sqlservr.exe")) and ParentProcessName contains "\AppData\Local\Temp\"))) and (not ((ProcessCommandLine in ("*sso login*", "*login --use-device-code*")) and ComputerName contains "ADMIN-VDI-"))

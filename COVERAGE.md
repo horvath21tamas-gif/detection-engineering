@@ -223,6 +223,7 @@
 | T1525 | CRITICAL | Exploit-Grade Unauthorized Container Image Execution (Implant Container Image) |
 | T1528 | CRITICAL | Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528) |
 | T1535 | CRITICAL | Ultra-Pro High-Fidelity Unused Service Manipulation (T1535) |
+| T1538 | HIGH | Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538) |
 | T1539 | CRITICAL | Ultra-Pro High-Fidelity Web Session Cookie Theft (T1539) |
 | T1542 | CRITICAL | Ultra-Pro Pre-OS Boot Manipulation (T1542) |
 | T1542.001 | CRITICAL | Ultra-Pro ROM Kit & UEFI Firmware Tampering (T1542.001) |

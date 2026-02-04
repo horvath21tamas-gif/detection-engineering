@@ -61,7 +61,7 @@ detection:
         Image|contains:
             - '\Program Files\Veeam\'
             - '\Program Files\Microsoft OneDrive\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_files and (selection_ops or selection_untrusted_context) and not (filter_native_browsers or filter_known_backups)
 level: critical

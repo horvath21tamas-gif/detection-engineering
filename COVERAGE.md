@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-04 08:35:19`
+**Utolsó frissítés:** `2026-02-04 08:52:36`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 471 | 100% |
-| Splunk (SPL) | 466 | 98.9% |
-| Microsoft Sentinel (KQL) | 468 | 99.4% |
-| QRadar (AQL) | 209 | 44.4% |
-| Elastic (KQL/EQL) | 468 | 99.4% |
-| RSA NetWitness | 465 | 98.7% |
+| Sigma (Forrás) | 472 | 100% |
+| Splunk (SPL) | 467 | 98.9% |
+| Microsoft Sentinel (KQL) | 469 | 99.4% |
+| QRadar (AQL) | 209 | 44.3% |
+| Elastic (KQL/EQL) | 469 | 99.4% |
+| RSA NetWitness | 466 | 98.7% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -111,6 +111,7 @@
 | T1078.003 | CRITICAL | High-Fidelity Local Account Remote Access Detection |
 | T1078.004 | CRITICAL | High-Fidelity Cloud Account Compromise (Entra ID) |
 | T1087 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
+| T1087.001 | HIGH | Ultra-Pro High-Fidelity Local Account Discovery (T1087.001) |
 | T1091 | HIGH | High-Fidelity Process Execution from Removable Media |
 | T1098 | CRITICAL | Suspicious Use of net user or net localgroup via cmd.exe, High-Fidelity Account Manipulation - Persistence Focused |
 | T1098.001 | CRITICAL | High-Fidelity Entra ID Application Credential Addition |

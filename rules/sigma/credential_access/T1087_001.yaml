@@ -47,7 +47,7 @@ detection:
             - '\Users\Public\'
 
     filter_legit_automation:
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
         ParentImage|contains:
             - '\Windows\System32\msiexec.exe'
             - '\Windows\System32\svchost.exe'

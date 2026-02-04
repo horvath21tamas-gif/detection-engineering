@@ -232,6 +232,7 @@
 - [Exploit-Grade Unauthorized Container Image Execution (Implant Container Image)](#exploit-grade-unauthorized-container-image-execution-(implant-container-image))
 - [Ultra-Pro High-Fidelity Cloud Service Discovery (T1526)](#ultra-pro-high-fidelity-cloud-service-discovery-(t1526))
 - [Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528)](#ultra-pro-high-fidelity-application-token-&-session-hijacking-(t1528))
+- [Ultra-Pro High-Fidelity Internal Spearphishing Detection (T1534)](#ultra-pro-high-fidelity-internal-spearphishing-detection-(t1534))
 - [Ultra-Pro High-Fidelity Unused Service Manipulation (T1535)](#ultra-pro-high-fidelity-unused-service-manipulation-(t1535))
 - [Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538)](#ultra-pro-high-fidelity-cloud-service-dashboard-discovery-(t1538))
 - [Ultra-Pro High-Fidelity Web Session Cookie Theft (T1539)](#ultra-pro-high-fidelity-web-session-cookie-theft-(t1539))
@@ -4366,6 +4367,23 @@ Monitors for suspicious access to Cloud CLI configurations (Azure, AWS, GCP)
 and browser-based credential stores by untrusted processes.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1528`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Internal Spearphishing Detection (T1534)
+- **Azonosító:** `T1534.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects advanced internal spearphishing attempts by identifying anomalous 
+programmatic access to the Outlook MAPI interface, suspicious child processes, 
+and command-line flags used for mass-mailing or attachment injection.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1534`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

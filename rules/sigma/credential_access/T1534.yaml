@@ -56,7 +56,7 @@ detection:
             - 'Adobe\Acrobat'
             - 'Salesforce'
             - 'Zoom'
-        - User: 'NT AUTHORITY\SYSTEM' 
+        - username: 'NT AUTHORITY\SYSTEM' 
         - Image|endswith:
             - '\conhost.exe'
 

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ParentProcessName endswith "\outlook.exe" and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\cscript.exe", "*\wscript.exe", "*\rundll32.exe"))) and ((ProcessCommandLine in ("* /a *", "* /c ipm.note*", "* /m *", "*outlook.application*")) or ProcessCommandLine contains "\")) or ((ParentProcessName in ("*\browser.exe", "*\chrome.exe", "*\msedge.exe", "*\httpd.exe")) and (not ((ProcessCommandLine in ("*C:\Program Files\Microsoft Office*", "*Adobe\Acrobat*", "*Salesforce*", "*Zoom*")) or User =~ "NT AUTHORITY\SYSTEM" or FolderPath endswith "\conhost.exe")))

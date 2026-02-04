@@ -1,0 +1,60 @@
+title: Ultra-Pro High-Fidelity LLMNR/NBT-NS Poisoning (T1557.001)
+id: a3449acb-f915-4e09-9bf0-3dcd777ef196
+status: stable
+description: |
+    Detects LLMNR/NBT-NS poisoning and SMB relay tools (Responder, Inveigh) by identifying 
+    unauthorized processes attempting to bind to network resolution ports combined with 
+    specific attacker command-line signatures.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1557.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cmd_args:
+        CommandLine|contains:
+            - ' -i '          
+            - ' -r '     
+            - ' -force'  
+            - ' -wpad'       
+            - ' -p '       
+        CommandLine|contains:
+            - 'LLMNR'
+            - 'NBTNS'
+            - 'mDNS'
+            - 'Responder'
+            - 'Inveigh'
+
+    selection_interpreters:
+        Image|endswith:
+            - '\python.exe'  
+            - '\pythonw.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'     
+
+    filter_native_windows:
+        Image|endswith:
+            - '\svchost.exe'
+            - '\lsass.exe'
+            - '\System32\nbtstat.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    selection_untrusted_location:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Downloads\'
+            - '\Public\'
+
+    filter_security_tools:
+        Image|contains:
+            - '\Program Files\Wireshark\'
+            - '\Program Files\Nmap\'
+            - '\Program Files\CrowdStrike\' 
+
+    condition: (selection_interpreters and selection_cmd_args) or (selection_untrusted_location and selection_cmd_args) and not (filter_native_windows or filter_security_tools)
+level: critical

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("* --dns *", "* --gateway *", "* --lease *", "* -d *", "*spoof*", "*rogue*")) or ((FolderPath in ("*\python.exe", "*\pythonw.exe", "*\powershell.exe")) or (ProcessCommandLine in ("*Responder*", "*bettercap*", "*ettercap*")))) and (FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Downloads\*", "*\Public\*")) and (not (((FolderPath in ("*\Program Files\VMware\*", "*\Program Files\Oracle\VirtualBox\*", "*\Program Files\Docker\*")) and User =~ "NT AUTHORITY\SYSTEM") or (FolderPath endswith "\System32\svchost.exe" and ProcessCommandLine contains "dhcpssvc")))

@@ -46,7 +46,7 @@ detection:
             - '\Program Files\VMware\'
             - '\Program Files\Oracle\VirtualBox\'
             - '\Program Files\Docker\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     filter_native_dhcp_server:
         Image|endswith: '\System32\svchost.exe'

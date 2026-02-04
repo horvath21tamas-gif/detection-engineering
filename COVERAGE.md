@@ -230,6 +230,7 @@
 | T1505.003 | HIGH | Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1505.004 | CRITICAL | Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004) |
 | T1505.005 | CRITICAL | Ultra-Pro Terminal Services DLL Hijacking (T1505.005) |
+| T1518 | HIGH | Ultra-Pro High-Fidelity Software Discovery (T1518) |
 | T1525 | CRITICAL | Exploit-Grade Unauthorized Container Image Execution (Implant Container Image) |
 | T1526 | HIGH | Ultra-Pro High-Fidelity Cloud Service Discovery (T1526) |
 | T1528 | CRITICAL | Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528) |

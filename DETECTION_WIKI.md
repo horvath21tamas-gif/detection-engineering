@@ -215,6 +215,7 @@
 - [Webshell Upload or Interaction Detected on Web Server (High Fidelity)](#webshell-upload-or-interaction-detected-on-web-server-(high-fidelity))
 - [Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004)](#ultra-pro-mainboard-boot-image-&-spi-flash-tampering-(t1542004))
 - [Ultra-Pro Terminal Services DLL Hijacking (T1505.005)](#ultra-pro-terminal-services-dll-hijacking-(t1505005))
+- [Ultra-Pro High-Fidelity Software Discovery (T1518)](#ultra-pro-high-fidelity-software-discovery-(t1518))
 - [Exploit-Grade Unauthorized Container Image Execution (Implant Container Image)](#exploit-grade-unauthorized-container-image-execution-(implant-container-image))
 - [Ultra-Pro High-Fidelity Cloud Service Discovery (T1526)](#ultra-pro-high-fidelity-cloud-service-discovery-(t1526))
 - [Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528)](#ultra-pro-high-fidelity-application-token-&-session-hijacking-(t1528))
@@ -4065,6 +4066,23 @@ untrusted processes and non-standard file paths.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Software Discovery (T1518)
+- **Azonosító:** `T1518.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted software discovery focusing on security product identification. 
+Uses integrity level gating, parent-process correlation, and specific keyword 
+analysis to minimize false positives from system inventory tools.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1518`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

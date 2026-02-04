@@ -15,6 +15,8 @@
 - [Ultra-Pro High-Fidelity Query Registry Discovery (T1012)](#ultra-pro-high-fidelity-query-registry-discovery-(t1012))
 - [Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014)](#ultra-pro-high-fidelity-byovd-rootkit-loading-(t1014))
 - [Ultra-Pro High-Fidelity System Network Configuration Discovery (T1016)](#ultra-pro-high-fidelity-system-network-configuration-discovery-(t1016))
+- [Ultra-Pro High-Fidelity Internet IP Discovery (T1016.001)](#ultra-pro-high-fidelity-internet-ip-discovery-(t1016001))
+- [Ultra-Pro High-Fidelity Terminal Services Configuration Discovery (T1016.002)](#ultra-pro-high-fidelity-terminal-services-configuration-discovery-(t1016002))
 - [Ultra-Pro High-Fidelity Remote System Discovery (T1018)](#ultra-pro-high-fidelity-remote-system-discovery-(t1018))
 - [Rapid Logons to Multiple Distant Hosts by Same User](#rapid-logons-to-multiple-distant-hosts-by-same-user)
 - [Suspicious RDP Logon from Unusual Source](#suspicious-rdp-logon-from-unusual-source)
@@ -50,6 +52,7 @@
 - [Ultra-Pro High-Fidelity Network Sniffing Detection (T1040)](#ultra-pro-high-fidelity-network-sniffing-detection-(t1040))
 - [Ultra-Pro High-Fidelity Network Service Discovery (T1046)](#ultra-pro-high-fidelity-network-service-discovery-(t1046))
 - [Suspicious Remote Process Creation via WMIC](#suspicious-remote-process-creation-via-wmic)
+- [Ultra-Pro High-Fidelity System Network Connections Discovery (T1049)](#ultra-pro-high-fidelity-system-network-connections-discovery-(t1049))
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [High-Fidelity At.exe Activity Detection](#high-fidelity-atexe-activity-detection)
 - [High-Fidelity Cron Persistence and In-Place Modification](#high-fidelity-cron-persistence-and-in-place-modification)
@@ -488,6 +491,7 @@
 - [Ultra-Pro Stealthy Local Image Build (T1612)](#ultra-pro-stealthy-local-image-build-(t1612))
 - [Ultra-Pro High-Fidelity Container and Instance Discovery (T1613)](#ultra-pro-high-fidelity-container-and-instance-discovery-(t1613))
 - [Ultra-Pro High-Fidelity System Location Discovery (T1614)](#ultra-pro-high-fidelity-system-location-discovery-(t1614))
+- [Ultra-Pro High-Fidelity System Language Discovery (T1614.001)](#ultra-pro-high-fidelity-system-language-discovery-(t1614001))
 - [Ultra-Pro High-Fidelity Group Policy Discovery (T1615)](#ultra-pro-high-fidelity-group-policy-discovery-(t1615))
 - [Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619)](#ultra-pro-high-fidelity-cloud-storage-object-discovery-(t1619))
 - [Ultra-Pro High-Fidelity Reflective Code Loading (T1620)](#ultra-pro-high-fidelity-reflective-code-loading-(t1620))
@@ -735,6 +739,41 @@ Filters high-volume noise from VPN clients and system services using integrity
 levels, parent process gating, and command-line switch analysis.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1016`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Internet IP Discovery (T1016.001)
+- **Azonosító:** `T1016_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects attempts to discover the system's external IP address using command-line tools 
+and common IP-echo services. Minimizes false positives by analyzing the parent-child 
+process relationship, integrity levels, and typical developer tool fingerprints.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Terminal Services Configuration Discovery (T1016.002)
+- **Azonosító:** `T1016_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted discovery of Terminal Services and RDP configurations. 
+Focuses on non-standard process lineages (e.g., Office, Browsers) and 
+detects specific command-line switches used to identify hijackable sessions 
+or disabled security settings.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -1314,6 +1353,24 @@ binaries originating from non-IT admin contexts.
 - **Leírás:** Detects suspicious usage of wmic.exe to create processes on remote hosts using the "process call create" method. This technique is commonly used by attackers for lateral movement after credential compromise.
 - **Hamis pozitívok:** Rare administrative remote troubleshooting, Approved red team or penetration testing activity
 - **MITRE ATT&CK:** `T1047`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity System Network Connections Discovery (T1049)
+- **Azonosító:** `T1049.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted discovery of active network connections and established sessions. 
+Focuses on non-standard process lineages (Office, Browsers, Web Servers) and 
+detects specific command-line switch combinations used by attackers to map 
+the network landscape.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1049`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -8495,6 +8552,23 @@ for regional targeting or exclusion (kill-switch check). Focuses on Registry-bas
 keyboard layout enumeration and external IP-to-geo API calls from non-standard processes.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1614`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity System Language Discovery (T1614.001)
+- **Azonosító:** `T1614_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted system language and keyboard layout discovery, focusing on 
+malware "kill-switch" checks and environment keying. Minimizes false positives 
+by gating against integrity levels, parent process lineage, and specific hex-code filtering.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

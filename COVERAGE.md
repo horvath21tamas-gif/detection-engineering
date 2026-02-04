@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-04 11:52:11`
+**Utolsó frissítés:** `2026-02-04 12:36:53`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 502 | 100% |
-| Splunk (SPL) | 493 | 98.2% |
-| Microsoft Sentinel (KQL) | 495 | 98.6% |
-| QRadar (AQL) | 210 | 41.8% |
-| Elastic (KQL/EQL) | 495 | 98.6% |
-| RSA NetWitness | 492 | 98.0% |
+| Sigma (Forrás) | 507 | 100% |
+| Splunk (SPL) | 498 | 98.2% |
+| Microsoft Sentinel (KQL) | 500 | 98.6% |
+| QRadar (AQL) | 210 | 41.4% |
+| Elastic (KQL/EQL) | 500 | 98.6% |
+| RSA NetWitness | 497 | 98.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -30,6 +30,8 @@
 | T1012 | HIGH | Ultra-Pro High-Fidelity Query Registry Discovery (T1012) |
 | T1014 | CRITICAL | Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014) |
 | T1016 | HIGH | Ultra-Pro High-Fidelity System Network Configuration Discovery (T1016) |
+| T1016.001 | HIGH | Ultra-Pro High-Fidelity Internet IP Discovery (T1016.001) |
+| T1016.002 | HIGH | Ultra-Pro High-Fidelity Terminal Services Configuration Discovery (T1016.002) |
 | T1018 | HIGH | Ultra-Pro High-Fidelity Remote System Discovery (T1018) |
 | T1021 | MEDIUM | Rapid Logons to Multiple Distant Hosts by Same User |
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |
@@ -65,6 +67,7 @@
 | T1040 | HIGH | Ultra-Pro High-Fidelity Network Sniffing Detection (T1040) |
 | T1046 | HIGH | Ultra-Pro High-Fidelity Network Service Discovery (T1046) |
 | T1047 | HIGH | Suspicious Remote Process Creation via WMIC |
+| T1049 | HIGH | Ultra-Pro High-Fidelity System Network Connections Discovery (T1049) |
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
 | T1053.002 | HIGH | High-Fidelity At.exe Activity Detection |
 | T1053.003 | HIGH | High-Fidelity Cron Persistence and In-Place Modification |
@@ -503,6 +506,7 @@
 | T1612 | CRITICAL | Ultra-Pro Stealthy Local Image Build (T1612) |
 | T1613 | HIGH | Ultra-Pro High-Fidelity Container and Instance Discovery (T1613) |
 | T1614 | HIGH | Ultra-Pro High-Fidelity System Location Discovery (T1614) |
+| T1614.001 | HIGH | Ultra-Pro High-Fidelity System Language Discovery (T1614.001) |
 | T1615 | HIGH | Ultra-Pro High-Fidelity Group Policy Discovery (T1615) |
 | T1619 | HIGH | Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619) |
 | T1620 | CRITICAL | Ultra-Pro High-Fidelity Reflective Code Loading (T1620) |

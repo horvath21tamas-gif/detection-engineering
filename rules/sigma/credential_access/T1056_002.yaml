@@ -48,7 +48,7 @@ detection:
         Image|contains:
             - '\Program Files\'
             - '\Program Files (x86)\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     filter_legit_browsers:
         CommandLine|contains:

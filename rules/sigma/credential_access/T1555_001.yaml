@@ -1,0 +1,64 @@
+title: Ultra-Pro High-Fidelity Vault Credential Harvesting (T1555.001)
+id: 76b49d02-0dc0-4eed-9aba-71310c87791e
+status: stable
+description: |
+    Detects unauthorized credential extraction from Windows Vault by monitoring for 
+    command-line data redirection, suspicious API strings, and non-standard 
+    process lineages, while filtering out legitimate browser and system update noise.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1555.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_vault_cli:
+        Image|endswith: '\vaultcmd.exe'
+        CommandLine|contains:
+            - ' /list'
+            - ' /show'
+
+    selection_redirection:
+        CommandLine|contains:
+            - ' > '           
+            - ' >> '          
+            - ' | '           
+            - 'clip'          
+
+    selection_api_strings:
+        CommandLine|contains:
+            - 'VaultEnumerateItems'
+            - 'VaultGetItem'
+            - 'Windows.Security.Credentials.PasswordVault' 
+            - 'Get-VaultCredential'                       
+
+    selection_untrusted_actor:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Downloads\'
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\python.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+
+    filter_legit_browsers:
+        ParentImage|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+    
+    filter_system_processes:
+        ParentImage|endswith:
+            - '\services.exe'
+            - '\msiexec.exe'
+            - '\TrustedInstaller.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: ((selection_vault_cli and selection_redirection) or selection_api_strings) and selection_untrusted_actor and not (filter_legit_browsers or filter_system_processes)
+level: high

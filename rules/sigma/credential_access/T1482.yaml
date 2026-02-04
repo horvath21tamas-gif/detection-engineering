@@ -1,0 +1,59 @@
+title: Ultra-Pro High-Fidelity Domain Trust Discovery (T1482)
+id: 6507f1e1-47c1-4281-8f54-c7d3cfea9cf8
+status: stable
+description: |
+    Detects systematic enumeration of domain and forest trusts. 
+    Focuses on anomalous process lineage (e.g., interactive shells on workstations) 
+    and specific reconnaissance patterns used by tools like BloodHound/SharpHound.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1482
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_native:
+        - Image|endswith:
+            - '\nltest.exe'
+            - '\dsquery.exe'
+        - CommandLine|contains:
+            - '/domain_trusts'
+            - '/all_trusts'
+            - 'trustedDomain'
+
+    selection_advanced:
+        CommandLine|contains:
+            - 'Get-DomainTrust'
+            - 'Get-NetForest'
+            - 'Get-NetDomainTrust'
+            - 'Invoke-Recon'
+            - 'LDAP://'            
+
+    selection_extraction:
+        CommandLine|contains:
+            - ' > '              
+            - 'ConvertTo-Json'
+            - 'Export-Csv'
+            - ' -o '                 
+            - 'zip'                
+
+    selection_suspicious_host:
+        ComputerName|not_contains:
+            - 'DC-'
+            - 'ADM-'
+            - 'SERVER-'
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\wsmprovhost.exe'     
+            - '\httpd.exe'           
+
+    filter_legit_it:
+        User: 'NT AUTHORITY\SYSTEM'
+        Image|contains:
+            - '\Windows\System32\CcmExec.exe'
+
+    condition: (selection_native or selection_advanced) and (selection_extraction or selection_suspicious_host) and not filter_legit_it
+level: high

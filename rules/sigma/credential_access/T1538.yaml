@@ -38,7 +38,7 @@ detection:
             - '\wsmprovhost.exe'         
             - '\httpd.exe'              
             - '\sqlservr.exe'          
-        - ParentImage|contains:
+        ParentImage|contains:
             - '\AppData\Local\Temp\'
 
     filter_legit_dev_tools:

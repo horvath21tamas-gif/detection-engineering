@@ -1,0 +1,67 @@
+title: Ultra-Pro High-Fidelity Browser Credential Harvesting (T1555.003)
+id: d9c8576a-ff1b-40ce-bb36-05d578026026
+status: stable
+description: |
+    Detects unauthorized access and extraction of browser credential databases. 
+    It targets command-line abuse (copying/archiving) and suspicious interpreter 
+    behavior targeting sensitive profile files like 'Login Data' or 'Cookies'.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1555.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_files:
+        CommandLine|contains:
+            - '\Login Data'
+            - '\Cookies'
+            - '\Web Data'
+            - '\key4.db'
+            - '\logins.json'
+
+    selection_ops:
+        - CommandLine|contains:
+            - 'copy '
+            - 'type '
+            - 'add '           
+            - 'tar '
+            - 'Get-Content'   
+            - 'cp '            
+        - Image|endswith:
+            - '\sqlite3.exe'
+            - '\esentutl.exe' 
+
+    selection_untrusted_context:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Downloads\'
+            - '\Public\'
+        Image|endswith:
+            - '\python.exe'
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\cscript.exe'
+
+    filter_native_browsers:
+        Image|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+            - '\brave.exe'
+        ParentImage|contains:
+            - '\Program Files\'
+            - '\Windows\System32\'
+
+    filter_known_backups:
+        Image|contains:
+            - '\Program Files\Veeam\'
+            - '\Program Files\Microsoft OneDrive\'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_files and (selection_ops or selection_untrusted_context) and not (filter_native_browsers or filter_known_backups)
+level: critical

@@ -285,6 +285,7 @@
 - [Ultra-Pro High-Fidelity LLMNR/NBT-NS Poisoning (T1557.001)](#ultra-pro-high-fidelity-llmnrnbt-ns-poisoning-(t1557001))
 - [Ultra-Pro High-Fidelity ARP Poisoning Detection (T1557.002)](#ultra-pro-high-fidelity-arp-poisoning-detection-(t1557002))
 - [Ultra-Pro High-Fidelity DHCP Spoofing Detection (T1557.003)](#ultra-pro-high-fidelity-dhcp-spoofing-detection-(t1557003))
+- [Ultra-Pro High-Fidelity Kerberos Attack Detection (T1558)](#ultra-pro-high-fidelity-kerberos-attack-detection-(t1558))
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
 - [High-Fidelity Indirect IPC and COM Execution](#high-fidelity-indirect-ipc-and-com-execution)
 - [Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity)](#gyanús-elnevezett-csővezeték-létrehozás-amely-utólagos-kihasználási-eszközökhöz-kapcsolódik-(high-fidelity))
@@ -5167,6 +5168,23 @@ as a rogue DHCP server. It specifically looks for gateway/DNS hijack arguments
 combined with untrusted process locations and non-system users.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Kerberos Attack Detection (T1558)
+- **Azonosító:** `T1558.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects sophisticated Kerberos ticket forgery and harvesting. 
+Focuses on encryption downgrade (RC4/0x17), targeted service ticket requests (Kerberoasting), 
+and offensive tool artifacts while filtering legitimate LSASS and system behavior.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1558, 003, 004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -299,7 +299,9 @@
 | T1557.001 | CRITICAL | Ultra-Pro High-Fidelity LLMNR/NBT-NS Poisoning (T1557.001) |
 | T1557.002 | HIGH | Ultra-Pro High-Fidelity ARP Poisoning Detection (T1557.002) |
 | T1557.003 | CRITICAL | Ultra-Pro High-Fidelity DHCP Spoofing Detection (T1557.003) |
-| T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |
+| T1558 | CRITICAL | Ultra-Pro High-Fidelity Kerberos Attack Detection (T1558) |
+| T1558.003 | HIGH | Ultra-Pro High-Fidelity Kerberos Attack Detection (T1558), Gyanús Kerberos TGS jegykérés (Kerberoasting) |
+| T1558.004 | CRITICAL | Ultra-Pro High-Fidelity Kerberos Attack Detection (T1558) |
 | T1559 | CRITICAL | High-Fidelity Indirect IPC and COM Execution |
 | T1559.001 | HIGH | High-Fidelity Indirect IPC and COM Execution, Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity) |
 | T1559.002 | CRITICAL | High-Fidelity Office DDE Contextual Anomaly, High-Fidelity Indirect IPC and COM Execution |

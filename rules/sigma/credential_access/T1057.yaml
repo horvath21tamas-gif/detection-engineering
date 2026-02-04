@@ -49,7 +49,7 @@ detection:
         IntegrityLevel: 'Medium'    
 
     filter_legit_noise:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|endswith:
             - '\chrome.exe'          
             - '\msedge.exe'

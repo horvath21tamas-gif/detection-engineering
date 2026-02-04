@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\tasklist.exe", "*\qprocess.exe")) or (ProcessCommandLine in ("*Get-Process*", "*gps *", "*process where*"))) and ((ProcessCommandLine in ("*msmpeng*", "*cb.exe*", "*falcon*", "*sentinel*", "*cyvera*", "*fireeye*", "*tanium*")) or (ProcessCommandLine in ("*lsass*", "*winlogon*", "*explorer*", "*spoolsv*")) or ((ParentProcessName in ("*\wsmprovhost.exe", "*\httpd.exe", "*\winword.exe", "*\powershell.exe")) and IntegrityLevel =~ "Medium")) and (not (User =~ "NT AUTHORITY\SYSTEM" or (ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\brave.exe", "*\svchost.exe")) or (ProcessCommandLine in ("*Program Files*", "*/all /v*"))))

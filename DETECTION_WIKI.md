@@ -71,6 +71,7 @@
 - [Ultra-Pro High-Fidelity GUI Input Capture (T1056.002)](#ultra-pro-high-fidelity-gui-input-capture-(t1056002))
 - [Ultra-Pro High-Fidelity Digital Certificate Theft (T1056.003)](#ultra-pro-high-fidelity-digital-certificate-theft-(t1056003))
 - [Suspicious Credential API Hooking via Win32 Libraries](#suspicious-credential-api-hooking-via-win32-libraries)
+- [Ultra-Pro High-Fidelity Process Discovery (T1057)](#ultra-pro-high-fidelity-process-discovery-(t1057))
 - [High-Fidelity Scripting Interpreter Contextual Anomaly](#high-fidelity-scripting-interpreter-contextual-anomaly)
 - [Suspicious Encoded PowerShell Command Execution](#suspicious-encoded-powershell-command-execution)
 - [High-Fidelity AppleScript (osascript) Abuse Detection](#high-fidelity-applescript-(osascript)-abuse-detection)
@@ -1659,6 +1660,23 @@ access to the Windows Cryptographic Key Store.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Process Discovery (T1057)
+- **Azonosító:** `T1057.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted process discovery focusing on security product identification 
+and memory target reconnaissance. Filters high-frequency noise from 
+browsers and legitimate update orchestrators.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1057`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

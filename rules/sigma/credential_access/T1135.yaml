@@ -54,7 +54,7 @@ detection:
         IntegrityLevel: 'Medium'  
 
     filter_legit_noise:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - Image|contains:
             - '\Program Files\Tanium\'
             - '\Program Files\Splunk\'

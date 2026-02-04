@@ -146,6 +146,7 @@
 | T1134.003 | CRITICAL | Ultra-Pro Make and Impersonate Token (T1134.003) |
 | T1134.004 | CRITICAL | Ultra-Pro Parent PID Spoofing & Process Tree Violation (T1134.004) |
 | T1134.005 | CRITICAL | Ultra-Pro SID-History Injection & DS Manipulation (T1134.005) |
+| T1135 | HIGH | Ultra-Pro High-Fidelity Network Share Discovery (T1135) |
 | T1136 | CRITICAL | Ultra-Pro Unauthorized Account Creation (T1136) |
 | T1136.001 | CRITICAL | Ultra-Pro Unauthorized Local Account Creation (T1136.001) |
 | T1136.002 | CRITICAL | Ultra-Pro Unauthorized Domain Account Creation (T1136.002) |

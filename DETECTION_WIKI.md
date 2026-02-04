@@ -131,6 +131,7 @@
 - [Ultra-Pro Make and Impersonate Token (T1134.003)](#ultra-pro-make-and-impersonate-token-(t1134003))
 - [Ultra-Pro Parent PID Spoofing & Process Tree Violation (T1134.004)](#ultra-pro-parent-pid-spoofing-&-process-tree-violation-(t1134004))
 - [Ultra-Pro SID-History Injection & DS Manipulation (T1134.005)](#ultra-pro-sid-history-injection-&-ds-manipulation-(t1134005))
+- [Ultra-Pro High-Fidelity Network Share Discovery (T1135)](#ultra-pro-high-fidelity-network-share-discovery-(t1135))
 - [Ultra-Pro Unauthorized Account Creation (T1136)](#ultra-pro-unauthorized-account-creation-(t1136))
 - [Ultra-Pro Unauthorized Local Account Creation (T1136.001)](#ultra-pro-unauthorized-local-account-creation-(t1136001))
 - [Ultra-Pro Unauthorized Domain Account Creation (T1136.002)](#ultra-pro-unauthorized-domain-account-creation-(t1136002))
@@ -2661,6 +2662,23 @@ and correlating them with suspicious RPC calls or unauthorized LSASS access on D
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Network Share Discovery (T1135)
+- **Azonosító:** `T1135.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic network share discovery and content crawling. 
+Focuses on automated enumeration patterns (loops, UNC sweeps) 
+originating from non-standard parent processes and specialized tools like Snaffler.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1135`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

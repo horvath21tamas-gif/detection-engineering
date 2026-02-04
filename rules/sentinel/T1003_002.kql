@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath endswith "\reg.exe" and (ProcessCommandLine in ("*hklm\sam*", "*hklm\system*", "*hklm\security*"))) or ((FolderPath endswith "\vssadmin.exe" and ProcessCommandLine contains "create shadow") or (FolderPath endswith "\esentutl.exe" and (ProcessCommandLine in ("*/y*", "*/vss*", "*config\sam*", "*config\system*"))))) and ((ParentProcessName in ("*\powershell.exe", "*\cmd.exe", "*\wsmprovhost.exe", "*\psexesvc.exe", "*\httpd.exe")) or (ProcessCommandLine in ("*.tmp*", "*.txt*", "*.jpg*", "*C:\Users\Public\*", "*C:\Windows\Temp\*"))) and (not ((User =~ "NT AUTHORITY\SYSTEM" and (ParentProcessName in ("*\services.exe", "*\svchost.exe", "*\msiexec.exe"))) or (FolderPath in ("*\Program Files\*", "*\Program Files (x86)\*"))))

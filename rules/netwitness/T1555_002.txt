@@ -1,0 +1,2 @@
+(((param = '*securityd*' OR param = '*keychain.db*'))) AND (((((process = '*/lldb*' OR process = '*/gcore*' OR process = '*/vmmap*' OR process = '*/heap*'))) OR (((param = '*attach*' OR param = '*memory read*' OR param = '*dump*' OR param = '*save*')))) OR (((process = '*/Users/*' OR process = '*/tmp/*' OR process = '*/var/tmp/*' OR process = '*/Library/Caches/*')))) AND (NOT ((((ParentImage = '*/usr/bin/sysdiagnose*' OR ParentImage = '*/usr/libexec/periodic-wrapper*' OR ParentImage = '*/System/Library/CoreServices/ReportCrash*'))))
+)

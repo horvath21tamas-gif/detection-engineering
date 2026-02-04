@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*securityd*", "*keychain.db*")) and (((FolderPath in ("*/lldb", "*/gcore", "*/vmmap", "*/heap")) or (ProcessCommandLine in ("*attach*", "*memory read*", "*dump*", "*save*"))) or (FolderPath in ("*/Users/*", "*/tmp/*", "*/var/tmp/*", "*/Library/Caches/*"))) and (not (ParentProcessName in ("*/usr/bin/sysdiagnose", "*/usr/libexec/periodic-wrapper", "*/System/Library/CoreServices/ReportCrash")))

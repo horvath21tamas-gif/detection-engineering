@@ -1,0 +1,56 @@
+title: Ultra-Pro High-Fidelity DHCP Spoofing Detection (T1557.003)
+id: 96fca3e3-00fe-405a-aaaa-022082e5b85f
+status: stable
+description: |
+    Detects unauthorized DHCP spoofing attempts by identifying processes attempting to act 
+    as a rogue DHCP server. It specifically looks for gateway/DNS hijack arguments 
+    combined with untrusted process locations and non-system users.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1557.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cmd_args:
+        CommandLine|contains:
+            - ' --dns '       
+            - ' --gateway '
+            - ' --lease '   
+            - ' -d '         
+            - 'spoof'
+            - 'rogue'
+
+    selection_tools:
+        - Image|endswith:
+            - '\python.exe'  
+            - '\pythonw.exe'
+            - '\powershell.exe'
+        - CommandLine|contains:
+            - 'Responder'
+            - 'bettercap'
+            - 'ettercap'
+
+    selection_untrusted_location:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Downloads\'
+            - '\Public\'
+
+    filter_virtualization:
+        Image|contains:
+            - '\Program Files\VMware\'
+            - '\Program Files\Oracle\VirtualBox\'
+            - '\Program Files\Docker\'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_native_dhcp_server:
+        Image|endswith: '\System32\svchost.exe'
+        CommandLine|contains: 'dhcpssvc'
+
+    condition: (selection_cmd_args or selection_tools) and selection_untrusted_location and not (filter_virtualization or filter_native_dhcp_server)
+level: critical

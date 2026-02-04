@@ -206,6 +206,7 @@
 - [Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004)](#ultra-pro-mainboard-boot-image-&-spi-flash-tampering-(t1542004))
 - [Ultra-Pro Terminal Services DLL Hijacking (T1505.005)](#ultra-pro-terminal-services-dll-hijacking-(t1505005))
 - [Exploit-Grade Unauthorized Container Image Execution (Implant Container Image)](#exploit-grade-unauthorized-container-image-execution-(implant-container-image))
+- [Ultra-Pro High-Fidelity Cloud Service Discovery (T1526)](#ultra-pro-high-fidelity-cloud-service-discovery-(t1526))
 - [Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528)](#ultra-pro-high-fidelity-application-token-&-session-hijacking-(t1528))
 - [Ultra-Pro High-Fidelity Unused Service Manipulation (T1535)](#ultra-pro-high-fidelity-unused-service-manipulation-(t1535))
 - [Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538)](#ultra-pro-high-fidelity-cloud-service-dashboard-discovery-(t1538))
@@ -3890,6 +3891,23 @@ untrusted processes and non-standard file paths.
 - **Leírás:** Detects execution of container images that are not sourced from approved registries and are executed outside of CI/CD or system namespaces, indicating potential use of implanted container images for persistence or initial access.
 - **Hamis pozitívok:** Explicitly approved manual container testing on isolated nodes, Emergency break-glass debugging with documented approval
 - **MITRE ATT&CK:** `T1525`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Service Discovery (T1526)
+- **Azonosító:** `T1526.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic cloud service enumeration (Lambda, Secrets, KeyVault) 
+focusing on anomalous execution environments (interactive shells on non-dev hosts) 
+and output redirection patterns used for automated harvesting.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1526`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

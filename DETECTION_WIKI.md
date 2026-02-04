@@ -55,6 +55,7 @@
 - [Ultra-Pro Stealthy Process Hollowing (T1055.013)](#ultra-pro-stealthy-process-hollowing-(t1055013))
 - [Ultra-Pro Stealthy Process Ghosting (T1055.014)](#ultra-pro-stealthy-process-ghosting-(t1055014))
 - [Ultra-Pro Stealthy ListPlanting Injection (T1055.015)](#ultra-pro-stealthy-listplanting-injection-(t1055015))
+- [Ultra-Pro High-Fidelity Input Capture Detection (T1056)](#ultra-pro-high-fidelity-input-capture-detection-(t1056))
 - [Suspicious Credential API Hooking via Win32 Libraries](#suspicious-credential-api-hooking-via-win32-libraries)
 - [High-Fidelity Scripting Interpreter Contextual Anomaly](#high-fidelity-scripting-interpreter-contextual-anomaly)
 - [Suspicious Encoded PowerShell Command Execution](#suspicious-encoded-powershell-command-execution)
@@ -1334,6 +1335,23 @@ from unbacked memory regions (shellcode) rather than signed modules.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Input Capture Detection (T1056)
+- **Azonosító:** `T1056.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects sophisticated input capture (keylogging) by identifying suspicious 
+API-related command lines, unauthorized shell-based keylogging snippets, 
+and anomalous process behavior targeting user input.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

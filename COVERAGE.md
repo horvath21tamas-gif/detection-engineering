@@ -71,6 +71,7 @@
 | T1055.013 | CRITICAL | Ultra-Pro Stealthy Process Hollowing (T1055.013) |
 | T1055.014 | CRITICAL | Ultra-Pro Stealthy Process Ghosting (T1055.014) |
 | T1055.015 | CRITICAL | Ultra-Pro Stealthy ListPlanting Injection (T1055.015) |
+| T1056.001 | HIGH | Ultra-Pro High-Fidelity Input Capture Detection (T1056) |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 Libraries |
 | T1059 | HIGH | High-Fidelity Scripting Interpreter Contextual Anomaly, Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1059.001 | HIGH | Suspicious Encoded PowerShell Command Execution |

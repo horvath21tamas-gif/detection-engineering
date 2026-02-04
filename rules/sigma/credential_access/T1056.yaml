@@ -51,7 +51,7 @@ detection:
             - '\Program Files (x86)\'
         CommandLine|contains:
             - 'node_modules' 
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_script_keylogger or (selection_logging_behavior) or selection_offensive_tools) and not filter_legit_apps
 level: high

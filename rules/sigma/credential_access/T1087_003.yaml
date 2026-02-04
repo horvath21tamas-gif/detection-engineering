@@ -1,0 +1,55 @@
+title: Ultra-Pro High-Fidelity Email Account Discovery (T1087.003)
+id: 59cf992a-949c-4a6e-9432-2d75f754e61d
+status: stable
+description: |
+    Detects systematic discovery of email accounts and Global Address Lists (GAL). 
+    Focuses on non-interactive PowerShell sessions, mass-exporting recipients, 
+    and anomalous access to local mail profile configurations by untrusted processes.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1087.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_mass_discovery:
+        CommandLine|contains:
+            - 'Get-Recipient -ResultSize Unlimited'
+            - 'Get-Mailbox -ResultSize Unlimited'
+            - 'Get-GlobalAddressList'
+            - 'Get-AddressList'
+            - 'Get-ADUser -Properties ProxyAddresses' 
+
+    selection_extraction:
+        CommandLine|contains:
+            - ' | Export-Csv'
+            - ' > '
+            - 'base64'
+            - 'ConvertTo-Json'
+            - ' | clip'
+
+    selection_local_profile:
+        CommandLine|contains:
+            - 'Microsoft\Outlook\*.xml'  
+            - 'profiles.ini'             
+            - 'Identity.xml'             
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\httpd.exe'      
+            - '\sqlservr.exe'   
+            - '\wsmprovhost.exe' 
+            - '\winword.exe'   
+            - '\excel.exe'
+
+    filter_legit_admin_hosts:
+        User: 'NT AUTHORITY\SYSTEM'
+        Image|contains:
+            - '\Exchange Server\bin\'
+            - '\Program Files\Veritas\'
+            - '\Program Files\Veeam\'
+
+    condition: ((selection_mass_discovery or selection_local_profile) and selection_extraction) or (selection_mass_discovery and selection_suspicious_parent) and not filter_legit_admin_hosts
+level: high

@@ -1,0 +1,63 @@
+title: Ultra-Pro High-Fidelity Credentials In Registry Discovery (T1552.002)
+id: ce6a56f9-a5fc-491d-920a-41029fd99051
+status: stable
+description: |
+    Detects unauthorized, recursive, or bulk extraction of sensitive registry keys 
+    containing credentials (PuTTY, WinSCP, RDP, LSA secrets). Correlates search 
+    commands with suspicious parent processes to minimize false positives.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1552.002
+    - attack.t1552
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_registry_keys:
+        CommandLine|contains:
+            - 'Software\SimonTatham\PuTTY\Sessions'
+            - 'Software\Martin Prikryl\WinSCP 2\Sessions'
+            - 'Software\Microsoft\Terminal Server Client\Servers'
+            - 'Software\ORL\WinVNC3'
+            - 'ControlSet001\Control\Lsa\Data'       
+            - 'ControlSet001\Control\Lsa\JD'         
+            - 'ControlSet001\Control\Lsa\Skew1'
+            - 'SAM\SAM\Domains\Account\Users'        
+
+    selection_extraction_methods:
+        - CommandLine|contains|all:
+            - 'reg'
+            - 'query'
+            - '/s'              
+        - CommandLine|contains|all:
+            - 'reg'
+            - 'export'          
+        - CommandLine|contains|all:
+            - 'regedit'
+            - '/e'              
+        - CommandLine|contains|all:
+            - 'Get-ItemProperty'
+            - 'Registry::'      
+
+    selection_suspicious_lineage:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\wsmprovhost.exe' 
+            - '\psexesvc.exe'   
+            - '\httpd.exe'       
+        Image|contains:
+            - '\AppData\Local\Temp\' 
+            - '\Users\Public\'
+
+    filter_legit_os:
+        User: 'NT AUTHORITY\SYSTEM'
+        Image|endswith:
+            - '\Windows\System32\svchost.exe'
+            - '\Windows\System32\msiexec.exe'
+            - '\Windows\System32\wbem\wmiprvse.exe'
+
+    condition: (selection_registry_keys or selection_extraction_methods) and selection_suspicious_lineage and not filter_legit_os
+level: high

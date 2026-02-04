@@ -97,6 +97,7 @@
 - [High-Fidelity Domain Account Lateral Movement Anomaly](#high-fidelity-domain-account-lateral-movement-anomaly)
 - [High-Fidelity Local Account Remote Access Detection](#high-fidelity-local-account-remote-access-detection)
 - [High-Fidelity Cloud Account Compromise (Entra ID)](#high-fidelity-cloud-account-compromise-(entra-id))
+- [Ultra-Pro High-Fidelity File and Directory Discovery (T1083)](#ultra-pro-high-fidelity-file-and-directory-discovery-(t1083))
 - [Suspicious Use of net user or net localgroup via cmd.exe](#suspicious-use-of-net-user-or-net-localgroup-via-cmdexe)
 - [Ultra-Pro High-Fidelity Local Account Discovery (T1087.001)](#ultra-pro-high-fidelity-local-account-discovery-(t1087001))
 - [Ultra-Pro High-Fidelity Domain Account Discovery (T1087.002)](#ultra-pro-high-fidelity-domain-account-discovery-(t1087002))
@@ -2085,6 +2086,23 @@ or the use of non-standard automation User-Agents by human accounts.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity File and Directory Discovery (T1083)
+- **Azonosító:** `T1083.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted file and directory discovery focusing on sensitive data harvesting.
+Filters out legitimate system indexing, AV scans, and developer activities by analyzing 
+process integrity, parent-child relationships, and specific keyword patterns.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1083`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

@@ -55,7 +55,7 @@ detection:
         - Image|contains:
             - '\Program Files\'     
             - '\Windows\System32\'   
-        - User: 'NT AUTHORITY\SYSTEM' 
+        - username: 'NT AUTHORITY\SYSTEM' 
         - ParentImage|endswith:
             - '\msmpeng.exe'         
             - '\searchindexer.exe'   

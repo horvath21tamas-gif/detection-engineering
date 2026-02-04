@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\where.exe", "*\findstr.exe", "*\find.exe", "*\tree.com")) or (ProcessCommandLine in ("*dir *", "*ls *", "*Get-ChildItem*"))) and ((ProcessCommandLine in ("*.kdbx*", "*.vnc*", "*.rdp*", "*id_rsa*", "*unattend.xml*", "*web.config*", "*backup*", "*password*")) or ((ProcessCommandLine in ("* /s*", "* -r*", "* /r*", "* -Recurse*")) and ((ParentProcessName in ("*\wsmprovhost.exe", "*\httpd.exe", "*\winword.exe", "*\powershell.exe")) and IntegrityLevel =~ "Medium"))) and (not ((FolderPath in ("*\Program Files\*", "*\Windows\System32\*")) or User =~ "NT AUTHORITY\SYSTEM" or (ParentProcessName in ("*\msmpeng.exe", "*\searchindexer.exe"))))

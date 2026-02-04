@@ -11,6 +11,7 @@
 - [Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007)](#ultra-pro-high-fidelity-lsass-memory-dump-&-lolbin-abuse-(t1003007))
 - [Ultra-Pro High-Fidelity Linux Shadow File Extraction (T1003.008)](#ultra-pro-high-fidelity-linux-shadow-file-extraction-(t1003008))
 - [Ultra-Pro Stealthy Direct Volume Access (T1006)](#ultra-pro-stealthy-direct-volume-access-(t1006))
+- [Ultra-Pro High-Fidelity System Service Discovery (T1007)](#ultra-pro-high-fidelity-system-service-discovery-(t1007))
 - [Ultra-Pro High-Fidelity Application Window Discovery (T1010)](#ultra-pro-high-fidelity-application-window-discovery-(t1010))
 - [Ultra-Pro High-Fidelity Query Registry Discovery (T1012)](#ultra-pro-high-fidelity-query-registry-discovery-(t1012))
 - [Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014)](#ultra-pro-high-fidelity-byovd-rootkit-loading-(t1014))
@@ -672,6 +673,23 @@ initiated by non-system processes or suspicious parents, often used to bypass
 file system locks and EDR monitoring for credential dumping.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1006`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity System Service Discovery (T1007)
+- **Azonosító:** `T1007.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted discovery of system services. Focuses on suspicious parent processes 
+and specific command-line arguments used to identify security products or 
+misconfigured services for privilege escalation.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -1,0 +1,53 @@
+title: Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003)
+id: 6d1cb0c1-6174-4fde-9323-d825e637d281
+status: stable
+description: |
+    Detects systematic cloud group discovery by identifying mass reconnaissance patterns, 
+    atypical User-Agents, and expansion of sensitive group properties. 
+    Designed to filter out high-volume CSPM and IaC service principals.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1069.003
+logsource:
+    product: cloud
+    service: azure_ad 
+detection:
+    selection_ops:
+        operationName:
+            - 'Get group'
+            - 'List groups'
+            - 'Get members of group'
+            - 'ListGroupPolicies'      
+            - 'v1.compute.instanceGroups.list' 
+
+    selection_mass_params:
+        requestParameters|contains:
+            - '$expand'              
+            - '$select'              
+            - '--all'
+            - '--filter'
+
+    selection_suspicious_ua:
+        userAgent|contains:
+            - 'python-requests'
+            - 'Go-http-client'
+            - 'Postman'
+            - 'Roadtools'            
+            - 'MicroBurst'
+
+    condition_origin:
+        - src_ip_is_external: true
+        - user_agent_is_bot: true
+
+    filter_legit_principals:
+        userIdentity_type: 'AssumedRole' 
+        userAgent|contains:
+            - 'Terraform'
+            - 'PrismaCloud'
+            - 'Wiz.io'
+            - 'Azure-Sentinel'
+
+    condition: selection_ops and (selection_mass_params or selection_suspicious_ua) and condition_origin and not filter_legit_automation
+level: high

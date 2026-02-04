@@ -258,6 +258,7 @@
 - [Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002)](#ultra-pro-high-fidelity-pass-the-hash-detection-(t1550002))
 - [Ultra-Pro High-Fidelity Pass-the-Ticket Detection (T1550.003)](#ultra-pro-high-fidelity-pass-the-ticket-detection-(t1550003))
 - [Ultra-Pro High-Fidelity Pass-the-Session Detection (T1550.004)](#ultra-pro-high-fidelity-pass-the-session-detection-(t1550004))
+- [Ultra-Pro High-Fidelity Unsecured Credentials Discovery (T1552)](#ultra-pro-high-fidelity-unsecured-credentials-discovery-(t1552))
 - [Ultra-Pro High-Fidelity Subvert Trust Controls (T1553)](#ultra-pro-high-fidelity-subvert-trust-controls-(t1553))
 - [Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001)](#ultra-pro-high-fidelity-macos-gatekeeper-and-quarantine-bypass-(t1553001))
 - [Ultra-Pro High-Fidelity SIP Hijacking and Trust Subversion (T1553.002)](#ultra-pro-high-fidelity-sip-hijacking-and-trust-subversion-(t1553002))
@@ -287,6 +288,8 @@
 - [Ultra-Pro High-Fidelity ARP Poisoning Detection (T1557.002)](#ultra-pro-high-fidelity-arp-poisoning-detection-(t1557002))
 - [Ultra-Pro High-Fidelity DHCP Spoofing Detection (T1557.003)](#ultra-pro-high-fidelity-dhcp-spoofing-detection-(t1557003))
 - [Ultra-Pro High-Fidelity Kerberos Attack Detection (T1558)](#ultra-pro-high-fidelity-kerberos-attack-detection-(t1558))
+- [Ultra-Pro High-Fidelity Golden Ticket Forgery & Injection (T1558.001)](#ultra-pro-high-fidelity-golden-ticket-forgery-&-injection-(t1558001))
+- [Ultra-Pro High-Fidelity Silver Ticket Forgery & Injection (T1558.002)](#ultra-pro-high-fidelity-silver-ticket-forgery-&-injection-(t1558002))
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
 - [Ultra-Pro High-Fidelity AS-REP Roasting & LDAP Enumeration (T1558.004)](#ultra-pro-high-fidelity-as-rep-roasting-&-ldap-enumeration-(t1558004))
 - [High-Fidelity Indirect IPC and COM Execution](#high-fidelity-indirect-ipc-and-com-execution)
@@ -4731,6 +4734,23 @@ Excludes legitimate browser update and synchronization mechanisms.
 
 ---
 
+## Ultra-Pro High-Fidelity Unsecured Credentials Discovery (T1552)
+- **Azonosító:** `T1552.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted discovery of credentials in files, registry, and shell history. 
+Uses advanced correlation between search tools (findstr, grep, PowerShell), 
+sensitive file extensions, and high-entropy keywords.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001, 002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Subvert Trust Controls (T1553)
 - **Azonosító:** `T1553.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -5204,6 +5224,40 @@ Focuses on encryption downgrade (RC4/0x17), targeted service ticket requests (Ke
 and offensive tool artifacts while filtering legitimate LSASS and system behavior.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1558, 003, 004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Golden Ticket Forgery & Injection (T1558.001)
+- **Azonosító:** `T1558_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the creation and injection of forged Kerberos TGTs (Golden Tickets). 
+Focuses on the mandatory presence of the KRBTGT hash or AES key in command lines, 
+combined with ticket injection (Pass-the-Ticket) patterns.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Silver Ticket Forgery & Injection (T1558.002)
+- **Azonosító:** `T1558_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the creation and injection of forged Kerberos Service Tickets (Silver Tickets). 
+Focuses on the mandatory presence of service-specific SPNs (cifs, mssql, http) 
+and the provision of service account hashes in the command line.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

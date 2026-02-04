@@ -68,7 +68,7 @@ detection:
             - '\Windows\System32\SearchIndexer.exe'
             - '\Microsoft Visual Studio\'
             - '\Git\usr\bin\grep.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_keywords or (selection_method and selection_targets)) and selection_context and not filter_legit_tools
 level: high

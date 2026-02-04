@@ -50,7 +50,7 @@ detection:
             - '\CrowdStrike\'
             - '\SentinelOne\'
             - '\Windows Defender\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_illegal_spawn or selection_exploit_cmd) and not (filter_legit_wer or filter_security_agents)
 level: critical

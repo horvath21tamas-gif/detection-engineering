@@ -144,6 +144,7 @@
 - [Ultra-Pro Socket Filter & WFP Traffic Signaling (T1205.002)](#ultra-pro-socket-filter-&-wfp-traffic-signaling-(t1205002))
 - [Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207)](#ultra-pro-high-fidelity-rogue-dc-topology-manipulation-(t1207))
 - [Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211)](#ultra-pro-high-fidelity-privilege-escalation-exploitation-(t1211))
+- [Ultra-Pro High-Fidelity Credential Service Exploitation (T1212)](#ultra-pro-high-fidelity-credential-service-exploitation-(t1212))
 - [Ultra-Pro High-Fidelity System Script Proxy Execution (T1216)](#ultra-pro-high-fidelity-system-script-proxy-execution-(t1216))
 - [Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001)](#ultra-pro-high-fidelity-pubprn-script-proxy-execution-(t1216001))
 - [Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218)](#ultra-pro-high-fidelity-system-binary-proxy-execution-(t1218))
@@ -250,6 +251,11 @@
 - [Ultra-Pro Client Binary Integrity Compromise (T1554)](#ultra-pro-client-binary-integrity-compromise-(t1554))
 - [Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)](#nem-böngészős-folyamat-hozzáférése-a-böngésző-hitelesítőadat-tárolóihoz-(high-fidelity))
 - [Ultra-Pro High-Fidelity Vault Credential Harvesting (T1555.001)](#ultra-pro-high-fidelity-vault-credential-harvesting-(t1555001))
+- [Ultra-Pro High-Fidelity Securityd Memory Dumping (T1555.002)](#ultra-pro-high-fidelity-securityd-memory-dumping-(t1555002))
+- [Ultra-Pro High-Fidelity Browser Credential Harvesting (T1555.003)](#ultra-pro-high-fidelity-browser-credential-harvesting-(t1555003))
+- [Ultra-Pro High-Fidelity Windows Credential Manager Harvesting (T1555.004)](#ultra-pro-high-fidelity-windows-credential-manager-harvesting-(t1555004))
+- [Ultra-Pro High-Fidelity Password Manager Extraction (T1555.005)](#ultra-pro-high-fidelity-password-manager-extraction-(t1555005))
+- [Ultra-Pro High-Fidelity Cloud Secret Harvesting (T1555.006)](#ultra-pro-high-fidelity-cloud-secret-harvesting-(t1555006))
 - [Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration](#exploit-grade-authentication-process-hijack-via-suspicious-dll-registration)
 - [Exploit-Grade Security Support Provider Hijacking (LSA SSP)](#exploit-grade-security-support-provider-hijacking-(lsa-ssp))
 - [Exploit-Grade Password Filter DLL Hijacking via LSA Notification Packages](#exploit-grade-password-filter-dll-hijacking-via-lsa-notification-packages)
@@ -2815,6 +2821,23 @@ breaking out of application sandboxes (browsers, office, pdf).
 
 ---
 
+## Ultra-Pro High-Fidelity Credential Service Exploitation (T1212)
+- **Azonosító:** `T1212.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects potential exploitation of authentication services (LSASS, LogonUI, Spooler) 
+by identifying illegal child processes, unbacked memory execution, and known 
+exploitation patterns while filtering legitimate security tool interference.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1212`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity System Script Proxy Execution (T1216)
 - **Azonosító:** `T1216.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -4552,6 +4575,91 @@ command-line data redirection, suspicious API strings, and non-standard
 process lineages, while filtering out legitimate browser and system update noise.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Securityd Memory Dumping (T1555.002)
+- **Azonosító:** `T1555_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized attempts to dump or read the memory of the 'securityd' process. 
+It focuses on non-standard debugger usage and memory mapping tools targeting 
+securityd, while strictly filtering Apple-signed diagnostic utilities.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Browser Credential Harvesting (T1555.003)
+- **Azonosító:** `T1555_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized access and extraction of browser credential databases. 
+It targets command-line abuse (copying/archiving) and suspicious interpreter 
+behavior targeting sensitive profile files like 'Login Data' or 'Cookies'.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Windows Credential Manager Harvesting (T1555.004)
+- **Azonosító:** `T1555_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized credential harvesting via cmdkey.exe by identifying 
+suspicious command-line redirection, non-interactive parent processes, 
+and known credential dumping tool signatures.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Password Manager Extraction (T1555.005)
+- **Azonosító:** `T1555_005.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized access or exfiltration of password manager databases 
+by identifying suspicious file operations (copying, archiving) and 
+untrusted process lineages targeting .kdbx, .opvault, and other vault files.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Secret Harvesting (T1555.006)
+- **Azonosító:** `T1555_006.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized access or exfiltration of cloud provider credentials (AWS, Azure, GCP). 
+It specifically targets command-line tools (archivers, interpreters) accessing 
+sensitive config paths while excluding official cloud CLI binaries and known DevOps agents.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

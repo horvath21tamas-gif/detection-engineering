@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-04 06:46:32`
+**Utolsó frissítés:** `2026-02-04 07:07:43`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 434 | 100% |
-| Splunk (SPL) | 432 | 99.5% |
-| Microsoft Sentinel (KQL) | 434 | 100.0% |
-| QRadar (AQL) | 204 | 47.0% |
-| Elastic (KQL/EQL) | 434 | 100.0% |
-| RSA NetWitness | 431 | 99.3% |
+| Sigma (Forrás) | 436 | 100% |
+| Splunk (SPL) | 434 | 99.5% |
+| Microsoft Sentinel (KQL) | 436 | 100.0% |
+| QRadar (AQL) | 204 | 46.8% |
+| Elastic (KQL/EQL) | 436 | 100.0% |
+| RSA NetWitness | 433 | 99.3% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -160,6 +160,7 @@
 | T1205.002 | CRITICAL | Ultra-Pro Socket Filter & WFP Traffic Signaling (T1205.002) |
 | T1207 | CRITICAL | Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207) |
 | T1211 | CRITICAL | Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211) |
+| T1212 | CRITICAL | Ultra-Pro High-Fidelity Credential Service Exploitation (T1212) |
 | T1216 | CRITICAL | Ultra-Pro High-Fidelity System Script Proxy Execution (T1216) |
 | T1216.001 | CRITICAL | Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001) |
 | T1218 | HIGH | Ultra-Pro High-Fidelity Regsvcs/Regasm Proxy Execution (T1218.009), Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218), Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
@@ -266,6 +267,11 @@
 | T1554 | CRITICAL | Ultra-Pro Client Binary Integrity Compromise (T1554) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
 | T1555.001 | HIGH | Ultra-Pro High-Fidelity Vault Credential Harvesting (T1555.001) |
+| T1555.002 | CRITICAL | Ultra-Pro High-Fidelity Securityd Memory Dumping (T1555.002) |
+| T1555.003 | CRITICAL | Ultra-Pro High-Fidelity Browser Credential Harvesting (T1555.003) |
+| T1555.004 | HIGH | Ultra-Pro High-Fidelity Windows Credential Manager Harvesting (T1555.004) |
+| T1555.005 | CRITICAL | Ultra-Pro High-Fidelity Password Manager Extraction (T1555.005) |
+| T1555.006 | CRITICAL | Ultra-Pro High-Fidelity Cloud Secret Harvesting (T1555.006) |
 | T1556 | CRITICAL | Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration |
 | T1556.001 | CRITICAL | Exploit-Grade Security Support Provider Hijacking (LSA SSP) |
 | T1556.002 | CRITICAL | Exploit-Grade Password Filter DLL Hijacking via LSA Notification Packages |

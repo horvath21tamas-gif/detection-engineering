@@ -1,23 +1,30 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-04 07:43:04`
+**Utolsó frissítés:** `2026-02-04 07:58:46`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 448 | 100% |
-| Splunk (SPL) | 446 | 99.6% |
-| Microsoft Sentinel (KQL) | 448 | 100.0% |
-| QRadar (AQL) | 205 | 45.8% |
-| Elastic (KQL/EQL) | 448 | 100.0% |
-| RSA NetWitness | 445 | 99.3% |
+| Sigma (Forrás) | 456 | 100% |
+| Splunk (SPL) | 454 | 99.6% |
+| Microsoft Sentinel (KQL) | 456 | 100.0% |
+| QRadar (AQL) | 207 | 45.4% |
+| Elastic (KQL/EQL) | 456 | 100.0% |
+| RSA NetWitness | 453 | 99.3% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
 | :--- | :--- | :--- |
 | T1003 | HIGH | Credential Dumping LSASS |
-| T1003.001 | HIGH | Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003), Suspicious Access to LSASS Process Memory, Credential Dumping LSASS |
+| T1003.001 | HIGH | Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007), Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003), Suspicious Access to LSASS Process Memory, Credential Dumping LSASS |
+| T1003.002 | CRITICAL | Ultra-Pro High-Fidelity SAM & SYSTEM Registry Theft (T1003.002) |
+| T1003.003 | CRITICAL | Ultra-Pro High-Fidelity NTDS.dit Extraction (T1003.003) |
+| T1003.004 | CRITICAL | Ultra-Pro High-Fidelity LSA Secrets & Security Hive Theft (T1003.004) |
+| T1003.005 | CRITICAL | Ultra-Pro High-Fidelity MSCASH/DCC Extraction (T1003.005) |
+| T1003.006 | CRITICAL | Ultra-Pro High-Fidelity DCSync Attack Detection (T1003.006) |
+| T1003.007 | CRITICAL | Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007) |
+| T1003.008 | CRITICAL | Ultra-Pro High-Fidelity Linux Shadow File Extraction (T1003.008) |
 | T1006 | CRITICAL | Ultra-Pro Stealthy Direct Volume Access (T1006) |
 | T1014 | CRITICAL | Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014) |
 | T1021 | MEDIUM | Rapid Logons to Multiple Distant Hosts by Same User |
@@ -207,6 +214,7 @@
 | T1505.004 | CRITICAL | Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004) |
 | T1505.005 | CRITICAL | Ultra-Pro Terminal Services DLL Hijacking (T1505.005) |
 | T1525 | CRITICAL | Exploit-Grade Unauthorized Container Image Execution (Implant Container Image) |
+| T1528 | CRITICAL | Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528) |
 | T1535 | CRITICAL | Ultra-Pro High-Fidelity Unused Service Manipulation (T1535) |
 | T1542 | CRITICAL | Ultra-Pro Pre-OS Boot Manipulation (T1542) |
 | T1542.001 | CRITICAL | Ultra-Pro ROM Kit & UEFI Firmware Tampering (T1542.001) |

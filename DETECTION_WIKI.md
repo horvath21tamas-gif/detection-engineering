@@ -194,6 +194,7 @@
 - [Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004)](#ultra-pro-mainboard-boot-image-&-spi-flash-tampering-(t1542004))
 - [Ultra-Pro Terminal Services DLL Hijacking (T1505.005)](#ultra-pro-terminal-services-dll-hijacking-(t1505005))
 - [Exploit-Grade Unauthorized Container Image Execution (Implant Container Image)](#exploit-grade-unauthorized-container-image-execution-(implant-container-image))
+- [Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528)](#ultra-pro-high-fidelity-application-token-&-session-hijacking-(t1528))
 - [Ultra-Pro High-Fidelity Unused Service Manipulation (T1535)](#ultra-pro-high-fidelity-unused-service-manipulation-(t1535))
 - [Ultra-Pro Pre-OS Boot Manipulation (T1542)](#ultra-pro-pre-os-boot-manipulation-(t1542))
 - [Ultra-Pro ROM Kit & UEFI Firmware Tampering (T1542.001)](#ultra-pro-rom-kit-&-uefi-firmware-tampering-(t1542001))
@@ -3656,6 +3657,23 @@ untrusted processes and non-standard file paths.
 - **Leírás:** Detects execution of container images that are not sourced from approved registries and are executed outside of CI/CD or system namespaces, indicating potential use of implanted container images for persistence or initial access.
 - **Hamis pozitívok:** Explicitly approved manual container testing on isolated nodes, Emergency break-glass debugging with documented approval
 - **MITRE ATT&CK:** `T1525`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528)
+- **Azonosító:** `T1528.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized extraction of application access tokens and session cookies. 
+Monitors for suspicious access to Cloud CLI configurations (Azure, AWS, GCP) 
+and browser-based credential stores by untrusted processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1528`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

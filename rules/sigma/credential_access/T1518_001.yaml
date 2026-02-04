@@ -1,0 +1,68 @@
+title: Ultra-Pro High-Fidelity Security Software Discovery (T1518.001)
+id: 7db3536d-05ab-4614-bcff-db103b75d1a4
+status: stable
+description: |
+    Detects targeted discovery of security products (AV/EDR/HIPS) and sandboxes. 
+    Focuses on keyword-specific filtering (findstr/grep) and anomalous process 
+    lineages (Office apps, web servers, or non-elevated shells).
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1518.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\wmic.exe'
+            - '\tasklist.exe'
+            - '\sc.exe'           
+            - '\reg.exe'
+            - '\net.exe'
+        - CommandLine|contains:
+            - 'Get-Process'
+            - 'Get-Service'
+            - 'Get-ItemProperty'
+
+    selection_keywords:
+        CommandLine|contains:
+            - 'defender'
+            - 'sentinel'
+            - 'falcon'
+            - 'crowdstrike'
+            - 'carbonblack'
+            - 'fireeye'
+            - 'cylance'
+            - 'sophos'
+            - 'antivirus'
+            - 'firewall'
+
+    selection_suspicious_lineage:
+        ParentImage|endswith:
+            - '\wsmprovhost.exe'   
+            - '\httpd.exe'           
+            - '\winword.exe'      
+            - '\excel.exe'
+            - '\outlook.exe'
+        IntegrityLevel: 'Medium'     
+
+    selection_vm_check:
+        CommandLine|contains:
+            - 'VBOX'
+            - 'VMWARE'
+            - 'VirtualBox'
+            - 'Guest Additions'
+
+    filter_legit_noise:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith:
+            - '\CcmExec.exe'         
+            - '\svchost.exe'
+        - CommandLine|contains:
+            - 'Program Files'     
+            - 'Google\Update'
+
+    condition: selection_tools and (selection_keywords or selection_vm_check or selection_suspicious_lineage) and not filter_legit_noise
+level: high

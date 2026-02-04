@@ -54,7 +54,7 @@ detection:
             - 'content.asstring'
 
     filter_legit_software:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|endswith:
             - '\svchost.exe'
             - '\CcmExec.exe'         

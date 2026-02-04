@@ -287,6 +287,7 @@
 - [Ultra-Pro High-Fidelity DHCP Spoofing Detection (T1557.003)](#ultra-pro-high-fidelity-dhcp-spoofing-detection-(t1557003))
 - [Ultra-Pro High-Fidelity Kerberos Attack Detection (T1558)](#ultra-pro-high-fidelity-kerberos-attack-detection-(t1558))
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
+- [Ultra-Pro High-Fidelity AS-REP Roasting & LDAP Enumeration (T1558.004)](#ultra-pro-high-fidelity-as-rep-roasting-&-ldap-enumeration-(t1558004))
 - [High-Fidelity Indirect IPC and COM Execution](#high-fidelity-indirect-ipc-and-com-execution)
 - [Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity)](#gyanús-elnevezett-csővezeték-létrehozás-amely-utólagos-kihasználási-eszközökhöz-kapcsolódik-(high-fidelity))
 - [High-Fidelity Office DDE Contextual Anomaly](#high-fidelity-office-dde-contextual-anomaly)
@@ -5204,6 +5205,23 @@ and offensive tool artifacts while filtering legitimate LSASS and system behavio
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity AS-REP Roasting & LDAP Enumeration (T1558.004)
+- **Azonosító:** `T1558_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects AS-REP Roasting attacks by monitoring for specific LDAP queries targeting 
+the DONT_REQ_PREAUTH bit (4194304) and offensive tool parameters used for 
+hash extraction (Rubeus, Impacket, PowerView).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

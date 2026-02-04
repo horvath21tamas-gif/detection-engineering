@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("*1.2.840.113556.1.4.803:=4194304*", "* -band 4194304*", "*0x400000*")) or (ProcessCommandLine in ("* /format:hashcat*", "* /format:john*", "* /outfile:*"))) and ((ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\wsmprovhost.exe", "*\httpd.exe")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\adfind.exe"))) and (not (User =~ "NT AUTHORITY\SYSTEM" and (FolderPath in ("*\Windows\System32\lsass.exe*", "*\Microsoft\Active Directory\*"))))

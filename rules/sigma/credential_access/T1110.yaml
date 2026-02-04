@@ -1,0 +1,65 @@
+title: Ultra-Pro High-Fidelity Brute Force & Tooling (T1110)
+id: 04a560f6-d1cd-499a-87d6-b499d1671c03
+status: stable
+description: |
+    Detects the execution of brute-force tools and scripted credential guessing by identifying 
+    suspicious command-line arguments (password lists, user files) and unauthorized 
+    process lineages from untrusted locations.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1110
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_brute_args:
+        CommandLine|contains:
+            - ' -P '          
+            - ' -L '          
+            - ' -p '         
+            - ' -u '           
+            - 'passlist'
+            - 'userlist'
+            - 'wordlist'
+            - '.dic'           
+            - '.lst'
+
+    selection_scripted_auth:
+        Image|endswith:
+            - '\net.exe'
+            - '\net1.exe'
+            - '\cmd.exe'
+            - '\powershell.exe'
+        CommandLine|contains:
+            - 'use '           
+            - 'Test-ComputerSecureChannel'
+            - 'New-Object System.DirectoryServices.DirectoryEntry'
+            - 'LogonUser'
+
+    selection_suspicious_context:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Downloads\'
+            - '\Public\'
+        Image|endswith:
+            - '\python.exe'
+            - '\pythonw.exe'
+
+    filter_it_automation:
+        ParentImage|contains:
+            - '\Program Files\Microsoft Azure AD Connect\'
+            - '\Program Files\Puppet Labs\'
+            - '\Program Files\Ansible\'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_legit_browsers:
+        Image|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+
+    condition: (selection_brute_args or selection_scripted_auth) and selection_suspicious_context and not (filter_it_automation or filter_legit_browsers)
+level: high

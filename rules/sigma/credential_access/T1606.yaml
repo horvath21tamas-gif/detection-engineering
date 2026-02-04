@@ -1,0 +1,68 @@
+title: Ultra-Pro High-Fidelity Web Token Forgery (T1606)
+id: 5dae39f2-9595-4840-a4fb-76866cb83b3a
+status: stable
+description: |
+    Detects unauthorized forging or theft of web credentials (SAML, cookies, OAuth tokens). 
+    Focuses on non-browser processes accessing DPAPI master keys, suspicious SQLite 
+    queries on token databases, and Golden SAML artifact generation.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1606
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        CommandLine|contains:
+            - 'goldensaml'        
+            - 'asreproast'      
+            - 'Get-AADIntAccessToken'
+            - 'roadtoken'         
+            - 'cloud::google'    
+            - 'cloud::aws'
+
+    selection_dpapi_theft:
+        - CommandLine|contains:
+            - 'dpapi::masterkey'
+            - 'crypt::unprotect' 
+        - Image|endswith:
+            - '\mimikatz.exe'
+            - '\pypykatz.exe'
+
+    selection_db_interaction:
+        CommandLine|contains:
+            - '\Network\Cookies'
+            - '\Local Storage\leveldb'
+            - '\Identity.db'
+            - '\Web Data'
+        CommandLine|contains:
+            - 'select '
+            - 'password_value'
+            - 'token'
+            - 'cookie'
+
+    selection_untrusted:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+
+    filter_official_binaries:
+        Image|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+            - '\teams.exe'
+            - '\slack.exe'
+        ParentImage|contains:
+            - '\Program Files\'
+
+    filter_admin_tools:
+        CommandLine|contains:
+            - 'Connect-MgGraph'
+            - 'az login'
+
+    condition: (selection_tools or selection_dpapi_theft or (selection_db_interaction and selection_untrusted)) and not filter_official_binaries
+level: critical

@@ -62,7 +62,7 @@ detection:
         ParentImage|endswith:
             - '\services.exe'
             - '\svchost.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_export_cli or selection_crypto_abuse or selection_filesystem_search) and selection_untrusted_context and not filter_legit_pki
 level: critical

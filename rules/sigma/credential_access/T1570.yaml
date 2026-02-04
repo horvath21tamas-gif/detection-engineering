@@ -1,0 +1,70 @@
+title: Ultra-Pro High-Fidelity Lateral Tool Transfer (T1570)
+id: 92b271cf-a9c2-46e2-bf06-1ba499fd754e
+status: stable
+description: |
+    Detects unauthorized lateral tool transfer by monitoring command-line activity 
+    targeting administrative shares (C$, ADMIN$). Focuses on non-standard process 
+    lineages (Office, Browsers, non-elevated Shells) and weaponized tools like 
+    bitsadmin or robocopy.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.lateral_movement
+    - attack.t1570
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\robocopy.exe'
+            - '\xcopy.exe'
+            - '\bitsadmin.exe'
+            - '\certutil.exe'        
+            - '\curl.exe'
+
+    selection_shares:
+        CommandLine|contains:
+            - '\\C$\'
+            - '\\ADMIN$\'
+            - '\\IPC$\'
+            - 'admin$'
+            - 'c$'
+
+    selection_extensions:
+        CommandLine|contains:
+            - '.exe'
+            - '.dll'
+            - '.ps1'
+            - '.vbs'
+            - '.bat'
+            - '.zip'
+            - '.7z'
+            - '.vhd'
+            - '.iso'
+
+    selection_suspicious_lineage:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\httpd.exe'           
+            - '\w3wp.exe'            
+            - '\sqlservr.exe'        
+        IntegrityLevel: 'Medium'     
+
+    filter_legit_automation:
+        - Image|endswith:
+            - '\CcmExec.exe'         
+            - '\msiexec.exe'
+        - CommandLine|contains:
+            - '\SoftwareDistribution\' 
+            - '\HealthCheck\'
+            - 'AppData\Local\Google\Chrome'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: (selection_tools and selection_shares and selection_extensions) and not filter_legit_automation
+level: high

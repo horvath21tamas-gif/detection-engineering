@@ -1,0 +1,57 @@
+title: Ultra-Pro High-Fidelity Keylogging & Input Hooking (T1056.001)
+id: a0a5d51e-48b7-4d0c-a957-278578b7c7f0
+status: stable
+description: |
+    Detects advanced keylogging by identifying suspicious API calls from unprivileged 
+    or ephemeral processes, targeting the use of SetWindowsHookEx and GetAsyncKeyState 
+    within non-standard execution contexts (e.g., PowerShell, Rundll32).
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.collection
+    - attack.t1056.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_interpreter_hook:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\rundll32.exe'
+            - '\regsvr32.exe'
+            - '\mshta.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+        CommandLine|contains:
+            - 'SetWindowsHook'     
+            - 'GetAsyncKeyState'   
+            - 'GetKeyboardState'
+            - 'user32.dll'         
+
+    selection_append_behavior:
+        CommandLine|contains:
+            - ' >> '               
+            - 'Add-Content'        
+            - 'tee -a'             
+        CommandLine|contains:
+            - '\AppData\'
+            - '\Temp\'
+            - '\Public\'
+
+    filter_trusted_processes:
+        Image|contains:
+            - '\Windows\System32\'
+            - '\Program Files\'
+            - '\Program Files (x86)\'
+            
+    filter_common_tools:
+        Image|endswith:
+            - '\AnyDesk.exe'
+            - '\TeamViewer.exe'
+            - '\tv_w32.exe'
+            - '\RemoteDesktopManager.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: (selection_interpreter_hook or (selection_append_behavior)) and not (filter_trusted_processes or filter_common_tools)
+level: high

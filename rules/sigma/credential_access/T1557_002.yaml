@@ -1,0 +1,60 @@
+title: Ultra-Pro High-Fidelity ARP Poisoning Detection (T1557.002)
+id: 866a7485-96f3-4b6b-bc59-771a1307581c
+status: stable
+description: |
+    Detects unauthorized ARP poisoning attempts by monitoring for IP Forwarding 
+    enablement and the execution of packet manipulation tools from untrusted 
+    locations, specifically filtering out virtualization and VPN noise.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1557.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_ip_forwarding:
+        Image|endswith: '\reg.exe'
+        CommandLine|contains: 
+            - 'Services\Tcpip\Parameters'
+            - 'IPEnableRouter'
+        CommandLine|contains: '1' 
+
+    selection_attack_tools:
+        CommandLine|contains:
+            - 'arpspoof'
+            - 'bettercap'
+            - 'ettercap'
+            - ' -i '           
+            - ' -t '         
+            - ' -m arp'        
+            - '.sniff'      
+
+    selection_suspicious_actor:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Downloads\'
+            - '\Public\'
+        Image|endswith:
+            - '\python.exe'
+            - '\pythonw.exe'
+            - '\powershell.exe'
+
+    filter_virtualization:
+        ParentImage|contains:
+            - '\Program Files\VMware\'
+            - '\Program Files\Oracle\VirtualBox\'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_vpn_and_diag:
+        Image|contains:
+            - '\Program Files\Wireshark\'
+            - '\Program Files\Cisco\'
+            - '\System32\nbtstat.exe'
+            - '\System32\pathping.exe'
+
+    condition: (selection_ip_forwarding or selection_attack_tools) and selection_suspicious_actor and not (filter_virtualization or filter_vpn_and_diag)
+level: high

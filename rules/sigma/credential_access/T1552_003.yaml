@@ -1,0 +1,52 @@
+title: Ultra-Pro High-Fidelity Shell History & Console Discovery (T1552.003)
+id: ff11bbdd-1eb0-441a-8c36-93fe5e6f6aa0
+status: stable
+description: |
+    Detects unauthorized extraction of shell history files (.bash_history, ConsoleHost_history.txt). 
+    Focuses on non-shell processes accessing these files and the use of exfiltration-related 
+    commands (base64, curl, redirection) combined with history file paths.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1552.003
+logsource:
+    category: process_creation
+    product: windows 
+detection:
+    selection_files:
+        CommandLine|contains:
+            - '.bash_history'
+            - '.zsh_history'
+            - 'ConsoleHost_history.txt' 
+            - '.mysql_history'
+            - '.psql_history'
+
+    selection_exfiltration:
+        CommandLine|contains:
+            - 'base64'
+            - 'curl'
+            - 'wget'
+            - 'nc '          
+            - 'scp '
+            - ' > '            
+            - ' | clip'        
+
+    filter_legit_shells:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\bash.exe'
+            - '\zsh.exe'
+            - '\conhost.exe'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\httpd.exe'       
+            - '\nginx.exe'
+            - '\php-cgi.exe'
+            - '\wsmprovhost.exe' 
+            - '\psexesvc.exe'    
+
+    condition: selection_files and (selection_exfiltration or selection_suspicious_parent) and not filter_legit_shells
+level: high

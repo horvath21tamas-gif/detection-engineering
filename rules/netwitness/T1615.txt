@@ -1,0 +1,2 @@
+((((process = '*\\gpresult.exe*' OR process = '*\\Get-GPO.exe*'))) OR (((param = '*Get-DomainGPO*' OR param = '*Get-NetGPO*' OR param = '*SharpGPOAbuse*' OR param = '*Find-GPO*')))) AND ((((param = '* /h *' OR param = '* /x *' OR param = '* /z *' OR param = '*ConvertTo-Json*' OR param = '*Export-Csv*'))) OR ((((ParentImage = '*\\wsmprovhost.exe*' OR ParentImage = '*\\httpd.exe*' OR ParentImage = '*\\winword.exe*'))) AND ((IntegrityLevel = '*Medium*')))) AND (NOT ((((param = '* /r*'))&& ((user.dst = '*NT AUTHORITY\\SYSTEM*'))&& ((ParentImage = '*\\CcmExec.exe*'))))
+)

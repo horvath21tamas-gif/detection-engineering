@@ -417,6 +417,7 @@
 - [Ultra-Pro High-Fidelity Network OS Image Modification (T1601)](#ultra-pro-high-fidelity-network-os-image-modification-(t1601))
 - [Ultra-Pro High-Fidelity Network Binary Patching (T1601.001)](#ultra-pro-high-fidelity-network-binary-patching-(t1601001))
 - [Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002)](#ultra-pro-high-fidelity-malicious-network-os-upgrade-(t1601002))
+- [Ultra-Pro High-Fidelity Web Token Forgery (T1606)](#ultra-pro-high-fidelity-web-token-forgery-(t1606))
 - [Anomalous Infrastructure Staging and Resource Deployment](#anomalous-infrastructure-staging-and-resource-deployment)
 - [Anomalous Malware Staging to External Infrastructure](#anomalous-malware-staging-to-external-infrastructure)
 - [Anomalous Offensive Tool Staging and External Upload](#anomalous-offensive-tool-staging-and-external-upload)
@@ -7224,6 +7225,23 @@ cryptographic signature failures.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Web Token Forgery (T1606)
+- **Azonosító:** `T1606.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized forging or theft of web credentials (SAML, cookies, OAuth tokens). 
+Focuses on non-browser processes accessing DPAPI master keys, suspicious SQLite 
+queries on token databases, and Golden SAML artifact generation.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1606`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

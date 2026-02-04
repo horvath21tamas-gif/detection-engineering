@@ -48,7 +48,7 @@ detection:
             - '\AppData\Local\Google\Chrome\Application\chrome.exe'
             - '\Microsoft\Edge\Application\msedge.exe'
             - '\Program Files\Mozilla Firefox\firefox.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_paths and selection_untrusted_apps and not filter_legit_browser_execution
 level: critical

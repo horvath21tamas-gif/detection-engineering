@@ -202,6 +202,7 @@
 - [Exploit-Grade Unauthorized Container Image Execution (Implant Container Image)](#exploit-grade-unauthorized-container-image-execution-(implant-container-image))
 - [Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528)](#ultra-pro-high-fidelity-application-token-&-session-hijacking-(t1528))
 - [Ultra-Pro High-Fidelity Unused Service Manipulation (T1535)](#ultra-pro-high-fidelity-unused-service-manipulation-(t1535))
+- [Ultra-Pro High-Fidelity Web Session Cookie Theft (T1539)](#ultra-pro-high-fidelity-web-session-cookie-theft-(t1539))
 - [Ultra-Pro Pre-OS Boot Manipulation (T1542)](#ultra-pro-pre-os-boot-manipulation-(t1542))
 - [Ultra-Pro ROM Kit & UEFI Firmware Tampering (T1542.001)](#ultra-pro-rom-kit-&-uefi-firmware-tampering-(t1542001))
 - [Ultra-Pro Component Firmware Tampering (T1542.002)](#ultra-pro-component-firmware-tampering-(t1542002))
@@ -3806,6 +3807,23 @@ updaters to ensure high-fidelity alerts.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Web Session Cookie Theft (T1539)
+- **Azonosító:** `T1539.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized access to browser session cookies. Monitors for non-browser 
+processes accessing both 'Cookies' and 'Local State' (encryption key) files, 
+identifying exfiltration attempts via LOLBins and suspicious scripts.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1539`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

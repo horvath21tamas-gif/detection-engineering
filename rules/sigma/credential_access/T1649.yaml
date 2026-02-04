@@ -50,7 +50,7 @@ detection:
             - 'C:\PerfLogs\'
 
     filter_legit_os:
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
         ParentImage|endswith: '\msiexec.exe'
         Image|contains: '\Windows\System32\'
 

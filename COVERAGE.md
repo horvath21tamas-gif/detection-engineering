@@ -465,6 +465,7 @@
 | T1622 | HIGH | Ultra-Pro Stealthy Debugger Evasion (T1622) |
 | T1647 | HIGH | Ultra-Pro High-Fidelity macOS Plist Persistence Modification (T1647) |
 | T1648 | HIGH | High-Fidelity Serverless Function Persistence or Abuse |
+| T1649 | CRITICAL | Ultra-Pro High-Fidelity Certificate & Private Key Theft (T1649) |
 | T1650 | HIGH | High-Fidelity Cloud Account Acquisition and Initialization - T1650 |
 | T1651 | CRITICAL | High-Fidelity Cloud Administration Agent Abuse |
 | T1653 | MEDIUM | Ultra-Pro Power Settings Manipulation (T1137.001) |

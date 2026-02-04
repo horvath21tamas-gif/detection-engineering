@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("*crypto::*", "*crypto::export*", "*patch*", "*certificates /export*", "*find-certificate*")) or (FolderPath endswith "\certutil.exe" and (ProcessCommandLine in ("*-exportPFX*", "*-exportp12*", "*-p *"))) or (ProcessCommandLine in ("*.pfx*", "*.p12*", "*.p7b*", "*\Users\Public\*", "*\AppData\Local\Temp\*", "*C:\PerfLogs\*"))) and ((ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\wsmprovhost.exe", "*\psexesvc.exe", "*\httpd.exe")) and (FolderPath in ("*\certutil.exe", "*\powershell.exe"))) and (not (User =~ "NT AUTHORITY\SYSTEM" and ParentProcessName endswith "\msiexec.exe" and FolderPath contains "\Windows\System32\"))

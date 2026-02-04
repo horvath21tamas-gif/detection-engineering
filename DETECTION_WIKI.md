@@ -155,6 +155,7 @@
 - [Suspicious File Download via Bitsadmin (High Fidelity)](#suspicious-file-download-via-bitsadmin-(high-fidelity))
 - [High-Fidelity Trusted Relationship Abuse Detection](#high-fidelity-trusted-relationship-abuse-detection)
 - [Malicious Hardware-Induced Command Execution (HID Injection)](#malicious-hardware-induced-command-execution-(hid-injection))
+- [Ultra-Pro High-Fidelity Password Policy Discovery (T1201)](#ultra-pro-high-fidelity-password-policy-discovery-(t1201))
 - [Ultra-Pro High-Fidelity Indirect Command Execution (T1202)](#ultra-pro-high-fidelity-indirect-command-execution-(t1202))
 - [High-Fidelity Client-Side Exploitation and Shell Spawning](#high-fidelity-client-side-exploitation-and-shell-spawning)
 - [Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity)](#suspicious-child-process-spawned-by-microsoft-office-application-(high-fidelity))
@@ -474,6 +475,7 @@
 - [Ultra-Pro Container Escape & Host Access (T1611)](#ultra-pro-container-escape-&-host-access-(t1611))
 - [Ultra-Pro Stealthy Local Image Build (T1612)](#ultra-pro-stealthy-local-image-build-(t1612))
 - [Ultra-Pro High-Fidelity Container and Instance Discovery (T1613)](#ultra-pro-high-fidelity-container-and-instance-discovery-(t1613))
+- [Ultra-Pro High-Fidelity Group Policy Discovery (T1615)](#ultra-pro-high-fidelity-group-policy-discovery-(t1615))
 - [Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619)](#ultra-pro-high-fidelity-cloud-storage-object-discovery-(t1619))
 - [Ultra-Pro High-Fidelity Reflective Code Loading (T1620)](#ultra-pro-high-fidelity-reflective-code-loading-(t1620))
 - [Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621)](#ultra-pro-high-fidelity-mfa-prompt-bombing-automation-(t1621))
@@ -3057,6 +3059,23 @@ Focuses on rapid shell spawning with "stealth" flags originating from the user s
 without standard GUI interaction.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1200`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Password Policy Discovery (T1201)
+- **Azonosító:** `T1201.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted enumeration of domain/local password policies. 
+Focuses on reconnaissance patterns used to calibrate brute-force 
+attacks while filtering out legitimate system/admin noise.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1201`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -8242,6 +8261,23 @@ Focuses on identity self-interrogation (auth can-i), secret discovery,
 and anomalous process lineage, filtering out high-frequency monitoring and system probes.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1613`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Group Policy Discovery (T1615)
+- **Azonosító:** `T1615.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic Group Policy reconnaissance focusing on report harvesting 
+and policy exploitation patterns. Filters out legitimate Helpdesk activity 
+by analyzing command-line switches and process integrity levels.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1615`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

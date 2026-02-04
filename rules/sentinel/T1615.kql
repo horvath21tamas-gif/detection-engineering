@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where ((FolderPath in ("*\gpresult.exe", "*\Get-GPO.exe")) or (ProcessCommandLine in ("*Get-DomainGPO*", "*Get-NetGPO*", "*SharpGPOAbuse*", "*Find-GPO*"))) and ((ProcessCommandLine in ("* /h *", "* /x *", "* /z *", "*ConvertTo-Json*", "*Export-Csv*")) or ((ParentProcessName in ("*\wsmprovhost.exe", "*\httpd.exe", "*\winword.exe")) and IntegrityLevel =~ "Medium")) and (not (ProcessCommandLine contains " /r" and User =~ "NT AUTHORITY\SYSTEM" and ParentProcessName contains "\CcmExec.exe"))
+| where ((FolderPath in ("*\gpresult.exe", "*\Get-GPO.exe")) or (ProcessCommandLine in ("*Get-DomainGPO*", "*Get-NetGPO*", "*SharpGPOAbuse*", "*Find-GPO*"))) and ((ProcessCommandLine in ("* /h *", "* /x *", "* /z *", "*ConvertTo-Json*", "*Export-Csv*")) or ((ParentProcessName in ("*\wsmprovhost.exe", "*\httpd.exe", "*\winword.exe")) and IntegrityLevel =~ "Medium")) and (not (ProcessCommandLine contains " /r" and username =~ "NT AUTHORITY\SYSTEM" and ParentProcessName contains "\CcmExec.exe"))

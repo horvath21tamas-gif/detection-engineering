@@ -46,7 +46,7 @@ detection:
             - 'Export-Csv'
 
     filter_legit_ops:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ComputerName|contains: 'DC-' 
         - CommandLine|contains:
             - 'logon.bat'             

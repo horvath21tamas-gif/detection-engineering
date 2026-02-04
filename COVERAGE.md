@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-04 09:35:37`
+**Utolsó frissítés:** `2026-02-04 10:00:41`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 483 | 100% |
-| Splunk (SPL) | 476 | 98.6% |
-| Microsoft Sentinel (KQL) | 478 | 99.0% |
-| QRadar (AQL) | 210 | 43.5% |
-| Elastic (KQL/EQL) | 478 | 99.0% |
-| RSA NetWitness | 475 | 98.3% |
+| Sigma (Forrás) | 490 | 100% |
+| Splunk (SPL) | 482 | 98.4% |
+| Microsoft Sentinel (KQL) | 484 | 98.8% |
+| QRadar (AQL) | 210 | 42.9% |
+| Elastic (KQL/EQL) | 484 | 98.8% |
+| RSA NetWitness | 481 | 98.2% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -170,6 +170,7 @@
 | T1197 | HIGH | Suspicious File Download via Bitsadmin (High Fidelity) |
 | T1199 | HIGH | High-Fidelity Trusted Relationship Abuse Detection |
 | T1200 | CRITICAL | Malicious Hardware-Induced Command Execution (HID Injection) |
+| T1201 | HIGH | Ultra-Pro High-Fidelity Password Policy Discovery (T1201) |
 | T1202 | HIGH | Ultra-Pro High-Fidelity Indirect Command Execution (T1202) |
 | T1203 | CRITICAL | High-Fidelity Client-Side Exploitation and Shell Spawning |
 | T1204 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity) |
@@ -489,6 +490,7 @@
 | T1611 | CRITICAL | Ultra-Pro Container Escape & Host Access (T1611) |
 | T1612 | CRITICAL | Ultra-Pro Stealthy Local Image Build (T1612) |
 | T1613 | HIGH | Ultra-Pro High-Fidelity Container and Instance Discovery (T1613) |
+| T1615 | HIGH | Ultra-Pro High-Fidelity Group Policy Discovery (T1615) |
 | T1619 | HIGH | Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619) |
 | T1620 | CRITICAL | Ultra-Pro High-Fidelity Reflective Code Loading (T1620) |
 | T1621 | HIGH | Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621) |

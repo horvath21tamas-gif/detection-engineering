@@ -247,6 +247,7 @@
 - [Ultra-Pro High-Fidelity Code Integrity & DSE Subversion (T1553.006)](#ultra-pro-high-fidelity-code-integrity-&-dse-subversion-(t1553006))
 - [Ultra-Pro Client Binary Integrity Compromise (T1554)](#ultra-pro-client-binary-integrity-compromise-(t1554))
 - [Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)](#nem-böngészős-folyamat-hozzáférése-a-böngésző-hitelesítőadat-tárolóihoz-(high-fidelity))
+- [Ultra-Pro High-Fidelity Vault Credential Harvesting (T1555.001)](#ultra-pro-high-fidelity-vault-credential-harvesting-(t1555001))
 - [Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration](#exploit-grade-authentication-process-hijack-via-suspicious-dll-registration)
 - [Exploit-Grade Security Support Provider Hijacking (LSA SSP)](#exploit-grade-security-support-provider-hijacking-(lsa-ssp))
 - [Exploit-Grade Password Filter DLL Hijacking via LSA Notification Packages](#exploit-grade-password-filter-dll-hijacking-via-lsa-notification-packages)
@@ -4502,6 +4503,23 @@ Focuses on cases where the writing process is a LOLBin or the file lacks a valid
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Vault Credential Harvesting (T1555.001)
+- **Azonosító:** `T1555_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized credential extraction from Windows Vault by monitoring for 
+command-line data redirection, suspicious API strings, and non-standard 
+process lineages, while filtering out legitimate browser and system update noise.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

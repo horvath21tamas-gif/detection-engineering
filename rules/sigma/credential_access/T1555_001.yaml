@@ -58,7 +58,7 @@ detection:
             - '\services.exe'
             - '\msiexec.exe'
             - '\TrustedInstaller.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: ((selection_vault_cli and selection_redirection) or selection_api_strings) and selection_untrusted_actor and not (filter_legit_browsers or filter_system_processes)
 level: high

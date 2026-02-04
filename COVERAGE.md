@@ -263,6 +263,7 @@
 | T1553.006 | CRITICAL | Ultra-Pro High-Fidelity Code Integrity & DSE Subversion (T1553.006) |
 | T1554 | CRITICAL | Ultra-Pro Client Binary Integrity Compromise (T1554) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
+| T1555.001 | HIGH | Ultra-Pro High-Fidelity Vault Credential Harvesting (T1555.001) |
 | T1556 | CRITICAL | Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration |
 | T1556.001 | CRITICAL | Exploit-Grade Security Support Provider Hijacking (LSA SSP) |
 | T1556.002 | CRITICAL | Exploit-Grade Password Filter DLL Hijacking via LSA Notification Packages |

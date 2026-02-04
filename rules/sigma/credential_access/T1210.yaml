@@ -1,0 +1,63 @@
+title: Ultra-Pro High-Fidelity Exploitation of Remote Services (T1210)
+id: 08680bfd-0625-4cd6-8ef4-3d8341d163b1
+status: stable
+description: |
+    Detects successful post-exploitation patterns where a network service spawns an 
+    interactive shell or a proxy binary. Specifically tuned to catch RCE via SMB, 
+    RPC, Spooler, and WMI while ignoring standard IT orchestration.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.lateral_movement
+    - attack.t1210
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_parent:
+        ParentImage|endswith:
+            - '\spoolsv.exe'         
+            - '\lsass.exe'           
+            - '\services.exe'        
+            - '\sqlservr.exe'       
+            - '\umworkerprocess.exe' 
+            - '\w3wp.exe'          
+
+    selection_child_binaries:
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\mshta.exe'
+            - '\rundll32.exe'       
+            - '\werfault.exe'        
+            - '\certutil.exe'
+            - '\scrcons.exe'         
+
+    selection_child_args:
+        CommandLine|contains:
+            - ' -nop'                
+            - ' -w hidden'           
+            - ' -enc'           
+            - 'bypass'             
+            - 'iex('                
+            - 'net user /add'      
+
+    selection_suspicious_paths:
+        Image|contains:
+            - '\AppData\'
+            - '\Temp\'
+            - '\Users\Public\'
+            - '\PerfLogs\'
+
+    filter_legit_admin:
+        - CommandLine|contains:
+            - 'C:\Windows\System32\wbem\WmiPrvSE.exe' 
+            - 'C:\Windows\ccmcache\'                 
+            - '\HealthCheck\'
+        - ParentCommandLine|contains:
+            - 'winrm'                                
+        - User: 'NT AUTHORITY\NETWORK SERVICE'      
+
+    condition: selection_parent and (selection_child_args or selection_suspicious_paths or selection_child_binaries) and not filter_legit_admin
+level: critical

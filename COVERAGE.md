@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-04 08:52:36`
+**Utolsó frissítés:** `2026-02-04 09:08:47`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 472 | 100% |
-| Splunk (SPL) | 467 | 98.9% |
-| Microsoft Sentinel (KQL) | 469 | 99.4% |
-| QRadar (AQL) | 209 | 44.3% |
-| Elastic (KQL/EQL) | 469 | 99.4% |
-| RSA NetWitness | 466 | 98.7% |
+| Sigma (Forrás) | 478 | 100% |
+| Splunk (SPL) | 472 | 98.7% |
+| Microsoft Sentinel (KQL) | 474 | 99.2% |
+| QRadar (AQL) | 209 | 43.7% |
+| Elastic (KQL/EQL) | 474 | 99.2% |
+| RSA NetWitness | 471 | 98.5% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -80,6 +80,7 @@
 | T1055.013 | CRITICAL | Ultra-Pro Stealthy Process Hollowing (T1055.013) |
 | T1055.014 | CRITICAL | Ultra-Pro Stealthy Process Ghosting (T1055.014) |
 | T1055.015 | CRITICAL | Ultra-Pro Stealthy ListPlanting Injection (T1055.015) |
+| T1056 | HIGH | Ultra-Pro High-Fidelity Input Capture Detection (T1056) |
 | T1056.001 | HIGH | Ultra-Pro High-Fidelity Input Capture Detection (T1056), Ultra-Pro High-Fidelity Keylogging & Input Hooking (T1056.001) |
 | T1056.002 | HIGH | Ultra-Pro High-Fidelity GUI Input Capture (T1056.002) |
 | T1056.003 | CRITICAL | Ultra-Pro High-Fidelity Digital Certificate Theft (T1056.003) |
@@ -113,6 +114,9 @@
 | T1078.004 | CRITICAL | High-Fidelity Cloud Account Compromise (Entra ID) |
 | T1087 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
 | T1087.001 | HIGH | Ultra-Pro High-Fidelity Local Account Discovery (T1087.001) |
+| T1087.002 | HIGH | Ultra-Pro High-Fidelity Domain Account Discovery (T1087.002) |
+| T1087.003 | HIGH | Ultra-Pro High-Fidelity Email Account Discovery (T1087.003) |
+| T1087.004 | HIGH | Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004) |
 | T1091 | HIGH | High-Fidelity Process Execution from Removable Media |
 | T1098 | CRITICAL | Suspicious Use of net user or net localgroup via cmd.exe, High-Fidelity Account Manipulation - Persistence Focused |
 | T1098.001 | CRITICAL | High-Fidelity Entra ID Application Credential Addition |

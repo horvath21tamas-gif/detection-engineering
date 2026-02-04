@@ -99,6 +99,9 @@
 - [High-Fidelity Cloud Account Compromise (Entra ID)](#high-fidelity-cloud-account-compromise-(entra-id))
 - [Suspicious Use of net user or net localgroup via cmd.exe](#suspicious-use-of-net-user-or-net-localgroup-via-cmdexe)
 - [Ultra-Pro High-Fidelity Local Account Discovery (T1087.001)](#ultra-pro-high-fidelity-local-account-discovery-(t1087001))
+- [Ultra-Pro High-Fidelity Domain Account Discovery (T1087.002)](#ultra-pro-high-fidelity-domain-account-discovery-(t1087002))
+- [Ultra-Pro High-Fidelity Email Account Discovery (T1087.003)](#ultra-pro-high-fidelity-email-account-discovery-(t1087003))
+- [Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004)](#ultra-pro-high-fidelity-cloud-account-discovery-(t1087004))
 - [High-Fidelity Process Execution from Removable Media](#high-fidelity-process-execution-from-removable-media)
 - [High-Fidelity Account Manipulation - Persistence Focused](#high-fidelity-account-manipulation---persistence-focused)
 - [High-Fidelity Entra ID Application Credential Addition](#high-fidelity-entra-id-application-credential-addition)
@@ -1553,7 +1556,7 @@ from unbacked memory regions (shellcode) rather than signed modules.
 API-related command lines, unauthorized shell-based keylogging snippets, 
 and anomalous process behavior targeting user input.
 - **Hamis pozitívok:** Nincs megadva
-- **MITRE ATT&CK:** `001`
+- **MITRE ATT&CK:** `001, T1056`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -2104,6 +2107,57 @@ Focuses on anomalous process lineages (e.g., discovery tools launched by web ser
 remote shells) and the use of modern enumeration methods like WMI/CIM.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Domain Account Discovery (T1087.002)
+- **Azonosító:** `T1087_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic Active Directory enumeration focusing on offensive LDAP filters 
+and non-standard process lineages. Filters legitimate administrative behavior 
+by excluding known service accounts and management tools.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Email Account Discovery (T1087.003)
+- **Azonosító:** `T1087_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic discovery of email accounts and Global Address Lists (GAL). 
+Focuses on non-interactive PowerShell sessions, mass-exporting recipients, 
+and anomalous access to local mail profile configurations by untrusted processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004)
+- **Azonosító:** `T1087_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic discovery of cloud accounts (AWS, Azure, GCP) focusing on 
+interactive shell sessions and anomalous command chaining. Filters legitimate 
+CI/CD and automation workloads based on process lineage and user context.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

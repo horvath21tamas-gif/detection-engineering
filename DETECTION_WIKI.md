@@ -254,6 +254,7 @@
 - [Ultra-Pro Entra ID MFA Method Hijacking (T1556.006)](#ultra-pro-entra-id-mfa-method-hijacking-(t1556006))
 - [Ultra-Pro Hybrid Identity Sync Manipulation (T1556.007)](#ultra-pro-hybrid-identity-sync-manipulation-(t1556007))
 - [Ultra-Pro Network-to-Cloud Auth Hijacking (T1556.008)](#ultra-pro-network-to-cloud-auth-hijacking-(t1556008))
+- [Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557)](#ultra-pro-high-fidelity-adversary-in-the-middle-(t1557))
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
 - [High-Fidelity Indirect IPC and COM Execution](#high-fidelity-indirect-ipc-and-com-execution)
 - [Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity)](#gyanús-elnevezett-csővezeték-létrehozás-amely-utólagos-kihasználási-eszközökhöz-kapcsolódik-(high-fidelity))
@@ -4607,6 +4608,23 @@ and unauthorized credential additions to service principals.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557)
+- **Azonosító:** `T1557.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized system configuration changes required for AiTM attacks, 
+including IP Forwarding enablement and LLMNR/NetBIOS poisoning tool execution, 
+while filtering out legitimate VPN and virtualization noise.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1557`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

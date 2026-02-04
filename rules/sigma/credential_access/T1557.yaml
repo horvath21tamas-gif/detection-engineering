@@ -50,7 +50,7 @@ detection:
         Image|contains:
             - '\Cisco\AnyConnect\'
             - '\OpenVPN\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_ip_forwarding or selection_aitm_tools) and selection_untrusted_actor and not (filter_virtualization or filter_vpn_clients)
 level: high

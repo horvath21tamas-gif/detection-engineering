@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-03 15:16:14`
+**Utolsó frissítés:** `2026-02-04 06:19:09`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 421 | 100% |
-| Splunk (SPL) | 420 | 99.8% |
-| Microsoft Sentinel (KQL) | 422 | 100.2% |
-| QRadar (AQL) | 203 | 48.2% |
-| Elastic (KQL/EQL) | 422 | 100.2% |
-| RSA NetWitness | 419 | 99.5% |
+| Sigma (Forrás) | 422 | 100% |
+| Splunk (SPL) | 421 | 99.8% |
+| Microsoft Sentinel (KQL) | 423 | 100.2% |
+| QRadar (AQL) | 203 | 48.1% |
+| Elastic (KQL/EQL) | 423 | 100.2% |
+| RSA NetWitness | 420 | 99.5% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -270,6 +270,7 @@
 | T1556.006 | CRITICAL | Ultra-Pro Entra ID MFA Method Hijacking (T1556.006) |
 | T1556.007 | CRITICAL | Ultra-Pro Hybrid Identity Sync Manipulation (T1556.007) |
 | T1556.008 | CRITICAL | Ultra-Pro Network-to-Cloud Auth Hijacking (T1556.008) |
+| T1557 | HIGH | Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557) |
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |
 | T1559 | CRITICAL | High-Fidelity Indirect IPC and COM Execution |
 | T1559.001 | HIGH | High-Fidelity Indirect IPC and COM Execution, Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity) |

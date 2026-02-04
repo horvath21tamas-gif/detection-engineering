@@ -1,0 +1,60 @@
+title: Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619)
+id: ad23f9dc-59e1-48b3-a671-493458eb45d2
+status: stable
+description: |
+    Detects systematic cloud storage object discovery (S3, Blobs, GCS) by monitoring 
+    for recursive listing, metadata-heavy API calls, and anomalous output redirection. 
+    Excludes high-trust backup and ETL service accounts.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1619
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cli:
+        Image|endswith:
+            - '\aws.exe'
+            - '\az.cmd'
+            - '\gcloud.cmd'
+            - '\gsutil.py'
+
+    selection_object_discovery:
+        CommandLine|contains:
+            - 's3 ls'
+            - 's3api list-objects'         
+            - 's3api list-object-versions' 
+            - 'storage blob list'
+            - 'storage container list'     
+            - 'storage ls'                 
+            - 'storage objects list'
+
+    selection_patterns:
+        CommandLine|contains:
+            - '--recursive'               
+            - '--query'
+            - '--output json'
+            - ' | jq'
+            - ' > '                       
+            - 'base64'
+
+    selection_interactive_parent:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wsmprovhost.exe' 
+            - '\httpd.exe'       
+
+    filter_legit_automation:
+        ParentImage|contains:
+            - '\Veeam\'
+            - '\Commvault\'
+            - '\rclone.exe'
+            - '\terraform.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_cli and selection_object_discovery and (selection_patterns or selection_interactive_parent) and not filter_legit_automation
+level: high

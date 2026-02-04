@@ -1,6 +1,7 @@
 # 🛡️ Detection Rule Knowledge Base
 
 ## 📖 Tartalomjegyzék
+- [Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003)](#ultra-pro-high-fidelity-lsass-credential-dumping-(t1003))
 - [Suspicious Access to LSASS Process Memory](#suspicious-access-to-lsass-process-memory)
 - [Ultra-Pro Stealthy Direct Volume Access (T1006)](#ultra-pro-stealthy-direct-volume-access-(t1006))
 - [Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014)](#ultra-pro-high-fidelity-byovd-rootkit-loading-(t1014))
@@ -57,6 +58,9 @@
 - [Ultra-Pro Stealthy Process Ghosting (T1055.014)](#ultra-pro-stealthy-process-ghosting-(t1055014))
 - [Ultra-Pro Stealthy ListPlanting Injection (T1055.015)](#ultra-pro-stealthy-listplanting-injection-(t1055015))
 - [Ultra-Pro High-Fidelity Input Capture Detection (T1056)](#ultra-pro-high-fidelity-input-capture-detection-(t1056))
+- [Ultra-Pro High-Fidelity Keylogging & Input Hooking (T1056.001)](#ultra-pro-high-fidelity-keylogging-&-input-hooking-(t1056001))
+- [Ultra-Pro High-Fidelity GUI Input Capture (T1056.002)](#ultra-pro-high-fidelity-gui-input-capture-(t1056002))
+- [Ultra-Pro High-Fidelity Digital Certificate Theft (T1056.003)](#ultra-pro-high-fidelity-digital-certificate-theft-(t1056003))
 - [Suspicious Credential API Hooking via Win32 Libraries](#suspicious-credential-api-hooking-via-win32-libraries)
 - [High-Fidelity Scripting Interpreter Contextual Anomaly](#high-fidelity-scripting-interpreter-contextual-anomaly)
 - [Suspicious Encoded PowerShell Command Execution](#suspicious-encoded-powershell-command-execution)
@@ -445,6 +449,23 @@
 - [Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656)](#ultra-pro-high-fidelity-impersonation-and-identity-hijacking-(t1656))
 - [Professional Content Impersonation and Infrastructure Mirroring](#professional-content-impersonation-and-infrastructure-mirroring)
 - [Credential Dumping LSASS](#credential-dumping-lsass)
+
+---
+
+## Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003)
+- **Azonosító:** `T1003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects highly sophisticated LSASS memory dumping techniques. 
+Focuses on DLL export ordinals (#24), handle duplication, 
+and specialized LOLBins that bypass standard EDR string-based detection.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
 
@@ -1370,6 +1391,58 @@ API-related command lines, unauthorized shell-based keylogging snippets,
 and anomalous process behavior targeting user input.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Keylogging & Input Hooking (T1056.001)
+- **Azonosító:** `T1056_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects advanced keylogging by identifying suspicious API calls from unprivileged 
+or ephemeral processes, targeting the use of SetWindowsHookEx and GetAsyncKeyState 
+within non-standard execution contexts (e.g., PowerShell, Rundll32).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity GUI Input Capture (T1056.002)
+- **Azonosító:** `T1056_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects attempts to capture credentials through deceptive GUI prompts or overlays. 
+Focuses on PowerShell/C# snippets creating modal dialogs from suspicious parent 
+processes (browsers, office apps) and unbacked scripts.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Digital Certificate Theft (T1056.003)
+- **Azonosító:** `T1056_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized extraction of private keys and digital certificates. 
+Monitors for 'non-exportable' key extraction via memory patching, 
+suspicious use of certutil/PowerShell for PFX creation, and direct 
+access to the Windows Cryptographic Key Store.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

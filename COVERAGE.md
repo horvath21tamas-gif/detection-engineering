@@ -1,23 +1,23 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-04 07:22:19`
+**Utolsó frissítés:** `2026-02-04 07:43:04`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 444 | 100% |
-| Splunk (SPL) | 442 | 99.5% |
-| Microsoft Sentinel (KQL) | 444 | 100.0% |
-| QRadar (AQL) | 205 | 46.2% |
-| Elastic (KQL/EQL) | 444 | 100.0% |
-| RSA NetWitness | 441 | 99.3% |
+| Sigma (Forrás) | 448 | 100% |
+| Splunk (SPL) | 446 | 99.6% |
+| Microsoft Sentinel (KQL) | 448 | 100.0% |
+| QRadar (AQL) | 205 | 45.8% |
+| Elastic (KQL/EQL) | 448 | 100.0% |
+| RSA NetWitness | 445 | 99.3% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
 | :--- | :--- | :--- |
 | T1003 | HIGH | Credential Dumping LSASS |
-| T1003.001 | HIGH | Suspicious Access to LSASS Process Memory, Credential Dumping LSASS |
+| T1003.001 | HIGH | Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003), Suspicious Access to LSASS Process Memory, Credential Dumping LSASS |
 | T1006 | CRITICAL | Ultra-Pro Stealthy Direct Volume Access (T1006) |
 | T1014 | CRITICAL | Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014) |
 | T1021 | MEDIUM | Rapid Logons to Multiple Distant Hosts by Same User |
@@ -72,7 +72,9 @@
 | T1055.013 | CRITICAL | Ultra-Pro Stealthy Process Hollowing (T1055.013) |
 | T1055.014 | CRITICAL | Ultra-Pro Stealthy Process Ghosting (T1055.014) |
 | T1055.015 | CRITICAL | Ultra-Pro Stealthy ListPlanting Injection (T1055.015) |
-| T1056.001 | HIGH | Ultra-Pro High-Fidelity Input Capture Detection (T1056) |
+| T1056.001 | HIGH | Ultra-Pro High-Fidelity Input Capture Detection (T1056), Ultra-Pro High-Fidelity Keylogging & Input Hooking (T1056.001) |
+| T1056.002 | HIGH | Ultra-Pro High-Fidelity GUI Input Capture (T1056.002) |
+| T1056.003 | CRITICAL | Ultra-Pro High-Fidelity Digital Certificate Theft (T1056.003) |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 Libraries |
 | T1059 | HIGH | High-Fidelity Scripting Interpreter Contextual Anomaly, Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
 | T1059.001 | HIGH | Suspicious Encoded PowerShell Command Execution |

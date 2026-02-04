@@ -53,7 +53,7 @@ detection:
         Image|contains: 
             - '\Program Files\'
             - '\Windows\System32\taskmgr.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_comsvcs_ordinal or selection_specialized_tools or selection_offensive_patterns) and not filter_legit_os_behavior
 level: critical

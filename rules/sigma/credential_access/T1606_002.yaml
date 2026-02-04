@@ -1,0 +1,58 @@
+title: Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002)
+id: 2a149ccb-58bc-4107-ae01-e5fef593c3a3
+status: stable
+description: |
+    Detects unauthorized forging of web tokens (SAML, OAuth) by monitoring 
+    suspicious access to IDP signing keys, AD FS database extraction, and 
+    the use of specialized cloud-native forgery frameworks like Roadtools and AADInternals.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1606.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        CommandLine|contains:
+            - 'goldensaml'       
+            - 'asreproast'       
+            - 'Get-AADIntAccessToken' 
+            - 'roadtoken'      
+            - 'Invoke-SelfSignedCertificate' 
+            - 'Set-AdfsCertificate'
+
+    selection_adfs_abuse:
+        - CommandLine|contains:
+            - 'adfs::audittrust'  
+            - 'adfs::dump'        
+            - 'dpapi::masterkey'  
+        - Image|endswith:
+            - '\pypykatz.exe'
+            - '\mimikatz.exe'
+
+    selection_untrusted_context:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\python.exe'
+
+    filter_official_idp:
+        Image|endswith:
+            - '\Microsoft.IdentityServer.ServiceHost.exe'
+            - '\miiserver.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_legit_admin:
+        CommandLine|contains:
+            - 'Connect-MgGraph'
+            - 'Connect-AzureAD'
+            - 'az login'
+
+    condition: (selection_tools or selection_adfs_abuse) and selection_untrusted_context and not (filter_official_idp or filter_legit_admin)
+level: critical

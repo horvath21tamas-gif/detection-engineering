@@ -10,6 +10,7 @@ date: 2026-02-04
 tags:
     - attack.collection
     - attack.t1056.001
+    - attack.t1056
 logsource:
     category: process_creation
     product: windows

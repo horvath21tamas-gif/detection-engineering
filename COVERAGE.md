@@ -374,6 +374,7 @@
 | T1578.003 | HIGH | Ultra-Pro High-Fidelity Cloud Instance Destruction (T1578.003) |
 | T1578.004 | CRITICAL | Ultra-Pro High-Fidelity Cloud Image Tampering (T1578.004) |
 | T1578.005 | CRITICAL | Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005) |
+| T1580 | HIGH | Ultra-Pro High-Fidelity Cloud Infrastructure Discovery (T1580) |
 | T1583 | HIGH | High-Fidelity Offensive Infrastructure Provisioning - T1583 |
 | T1583.001 | HIGH | High-Fidelity VPS Infrastructure Provisioning - T1583.001 |
 | T1583.002 | HIGH | High-Fidelity Automated Domain Registration & Acquisition - T1583.002 |

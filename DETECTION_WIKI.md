@@ -360,6 +360,7 @@
 - [Ultra-Pro High-Fidelity Cloud Instance Destruction (T1578.003)](#ultra-pro-high-fidelity-cloud-instance-destruction-(t1578003))
 - [Ultra-Pro High-Fidelity Cloud Image Tampering (T1578.004)](#ultra-pro-high-fidelity-cloud-image-tampering-(t1578004))
 - [Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005)](#ultra-pro-high-fidelity-cloud-network-security-regression-(t1578005))
+- [Ultra-Pro High-Fidelity Cloud Infrastructure Discovery (T1580)](#ultra-pro-high-fidelity-cloud-infrastructure-discovery-(t1580))
 - [High-Fidelity Offensive Infrastructure Provisioning - T1583](#high-fidelity-offensive-infrastructure-provisioning---t1583)
 - [High-Fidelity VPS Infrastructure Provisioning - T1583.001](#high-fidelity-vps-infrastructure-provisioning---t1583001)
 - [High-Fidelity Automated Domain Registration & Acquisition - T1583.002](#high-fidelity-automated-domain-registration-&-acquisition---t1583002)
@@ -6438,6 +6439,23 @@ Filters out automated infrastructure-as-code (IaC) noise.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Infrastructure Discovery (T1580)
+- **Azonosító:** `T1580.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic discovery of cloud resources (VMs, VPCs, S3) focusing on 
+anomalous execution environments and data extraction patterns. 
+Excludes legitimate Infrastructure-as-Code (IaC) and CI/CD tools.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1580`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

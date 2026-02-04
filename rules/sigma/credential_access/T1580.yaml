@@ -53,7 +53,7 @@ detection:
             - '\GitLab-Runner\'
             - '\Terraform\'
             - '\Ansible\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_cli and selection_infra and (selection_extraction or selection_interactive_parent) and not filter_legit_automation
 level: high

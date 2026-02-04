@@ -1,0 +1,50 @@
+title: Ultra-Pro High-Fidelity Group Policy Discovery (T1615)
+id: 454e918e-783d-4e83-a143-0e899b7a4d4f
+status: stable
+description: |
+    Detects systematic Group Policy reconnaissance focusing on report harvesting 
+    and policy exploitation patterns. Filters out legitimate Helpdesk activity 
+    by analyzing command-line switches and process integrity levels.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1615
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\gpresult.exe'
+            - '\Get-GPO.exe'    
+        - CommandLine|contains:
+            - 'Get-DomainGPO'   
+            - 'Get-NetGPO'      
+            - 'SharpGPOAbuse'  
+            - 'Find-GPO'        
+
+    selection_reporting:
+        CommandLine|contains:
+            - ' /h '            
+            - ' /x '          
+            - ' /z '            
+            - 'ConvertTo-Json'  
+            - 'Export-Csv'
+
+    selection_suspicious_lineage:
+        ParentImage|endswith:
+            - '\wsmprovhost.exe' 
+            - '\httpd.exe'       
+            - '\winword.exe'     
+        IntegrityLevel: 'Medium' 
+
+    filter_legit_ops:
+        CommandLine|contains:
+            - ' /r'
+        User: 'NT AUTHORITY\SYSTEM'
+        ParentImage|contains:
+            - '\CcmExec.exe'    
+
+    condition: selection_tools and (selection_reporting or selection_suspicious_lineage) and not filter_legit_ops
+level: high

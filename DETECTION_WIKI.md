@@ -483,6 +483,7 @@
 - [High-Fidelity Cloud Administration Agent Abuse](#high-fidelity-cloud-administration-agent-abuse)
 - [Ultra-Pro High-Fidelity Device Driver Discovery (T1652)](#ultra-pro-high-fidelity-device-driver-discovery-(t1652))
 - [Ultra-Pro Power Settings Manipulation (T1137.001)](#ultra-pro-power-settings-manipulation-(t1137001))
+- [Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654)](#ultra-pro-high-fidelity-log-enumeration-discovery-(t1654))
 - [Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656)](#ultra-pro-high-fidelity-impersonation-and-identity-hijacking-(t1656))
 - [Professional Content Impersonation and Infrastructure Mirroring](#professional-content-impersonation-and-infrastructure-mirroring)
 - [Credential Dumping LSASS](#credential-dumping-lsass)
@@ -8395,6 +8396,23 @@ parent processes like PowerShell or CMD, while filtering legitimate UI-based cha
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+
+---
+
+## Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654)
+- **Azonosító:** `T1654.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic enumeration of system event logs (metadata harvesting) 
+using native tools or PowerShell. Focuses on identifying security products 
+via log channel discovery from anomalous execution contexts.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1654`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
 

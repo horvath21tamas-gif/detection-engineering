@@ -41,7 +41,7 @@ detection:
         IntegrityLevel: 'Medium'
 
     filter_legit_monitoring:
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
         Image|contains:
             - '\Program Files\SplunkUniversalForwarder\'
             - '\Program Files\Elastic\Agent\'

@@ -498,5 +498,6 @@
 | T1651 | CRITICAL | High-Fidelity Cloud Administration Agent Abuse |
 | T1652 | HIGH | Ultra-Pro High-Fidelity Device Driver Discovery (T1652) |
 | T1653 | MEDIUM | Ultra-Pro Power Settings Manipulation (T1137.001) |
+| T1654 | HIGH | Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654) |
 | T1656 | HIGH | Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656) |
 | T1659 | HIGH | Professional Content Impersonation and Infrastructure Mirroring |

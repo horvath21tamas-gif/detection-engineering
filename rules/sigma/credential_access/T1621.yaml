@@ -1,0 +1,59 @@
+title: Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621)
+id: f68a36a0-a924-437a-829d-fef17815dd70
+status: stable
+description: |
+    Detects the execution of tools and scripts designed to automate repetitive MFA requests.
+    Focuses on headless browser automation, specialized Azure/Okta exploit kits, and
+    PowerShell-based authentication loops running in non-interactive sessions.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1621
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_frameworks:
+        CommandLine|contains:
+            - 'AADInternals'           
+            - 'MSAL.PS'                
+            - 'Okta.Auth'            
+            - 'puppeteer'              
+            - 'selenium-webdriver'  
+            - 'Playwright'          
+
+    selection_loop_logic:
+        CommandLine|contains:
+            - 'Invoke-AADIntMFAFlood'   
+            - 'while($true)'            
+            - 'for($i=0'               
+            - '.ShowPasswordPrompt'
+            - 'Send-PushNotification'
+
+    selection_hidden_context:
+        CommandLine|contains:
+            - '-WindowStyle Hidden'     
+            - '-ExecutionPolicy Bypass'
+            - '-NonInteractive'         
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\taskeng.exe'          
+
+    filter_official_infrastructure:
+        Image|contains:
+            - '\Program Files\Microsoft Azure AD Connect\'
+            - '\Program Files\Microsoft Azure AD Sync\'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_known_admins:
+        ParentImage|endswith: '\explorer.exe'
+        CommandLine|contains: 'Connect-MgGraph'
+
+    condition: (selection_frameworks or selection_loop_logic or selection_hidden_context) and selection_suspicious_parent and not filter_official_infrastructure
+level: high

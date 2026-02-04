@@ -136,6 +136,7 @@
 - [Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111)](#ultra-pro-high-fidelity-mfa-evasion-&-session-hijacking-(t1111))
 - [Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112)](#ultra-pro-high-fidelity-registry-tampering-for-evasion-(t1112))
 - [Ultra-Pro High-Fidelity Peripheral Device Discovery (T1120)](#ultra-pro-high-fidelity-peripheral-device-discovery-(t1120))
+- [Ultra-Pro High-Fidelity System Time Discovery (T1124)](#ultra-pro-high-fidelity-system-time-discovery-(t1124))
 - [Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)](#ultra-pro-high-fidelity-trusted-developer-utility-proxy-(t1127))
 - [Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001)](#ultra-pro-high-fidelity-msbuild-proxy-execution-(t1127001))
 - [High-Fidelity Shared Module Load from Untrusted Path](#high-fidelity-shared-module-load-from-untrusted-path)
@@ -2765,6 +2766,23 @@ Filters out legitimate system PnP activity and driver management by analyzing
 process integrity, parent-child relationships, and specific metadata queries.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1120`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity System Time Discovery (T1124)
+- **Azonosító:** `T1124.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted system time or time zone discovery. Focuses on anomalous process 
+lineages (e.g., Office apps, Web servers) and specific automation patterns 
+used for sandbox evasion or geofencing checks.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1124`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -105,6 +105,7 @@
 - [High-Fidelity Domain Account Lateral Movement Anomaly](#high-fidelity-domain-account-lateral-movement-anomaly)
 - [High-Fidelity Local Account Remote Access Detection](#high-fidelity-local-account-remote-access-detection)
 - [High-Fidelity Cloud Account Compromise (Entra ID)](#high-fidelity-cloud-account-compromise-(entra-id))
+- [Ultra-Pro High-Fidelity System Information Discovery (T1082)](#ultra-pro-high-fidelity-system-information-discovery-(t1082))
 - [Ultra-Pro High-Fidelity File and Directory Discovery (T1083)](#ultra-pro-high-fidelity-file-and-directory-discovery-(t1083))
 - [Suspicious Use of net user or net localgroup via cmd.exe](#suspicious-use-of-net-user-or-net-localgroup-via-cmdexe)
 - [Ultra-Pro High-Fidelity Local Account Discovery (T1087.001)](#ultra-pro-high-fidelity-local-account-discovery-(t1087001))
@@ -2236,6 +2237,23 @@ or the use of non-standard automation User-Agents by human accounts.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity System Information Discovery (T1082)
+- **Azonosító:** `T1082.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic system information discovery (OS, patches, architecture) 
+focusing on reconnaissance for exploit selection. Filters high-volume noise 
+from inventory agents and browsers using integrity levels and parent process gating.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1082`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

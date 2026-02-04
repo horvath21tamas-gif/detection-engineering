@@ -484,6 +484,7 @@
 | T1610 | CRITICAL | High-Fidelity Malicious Container Deployment Detection |
 | T1611 | CRITICAL | Ultra-Pro Container Escape & Host Access (T1611) |
 | T1612 | CRITICAL | Ultra-Pro Stealthy Local Image Build (T1612) |
+| T1619 | HIGH | Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619) |
 | T1620 | CRITICAL | Ultra-Pro High-Fidelity Reflective Code Loading (T1620) |
 | T1621 | HIGH | Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621) |
 | T1622 | HIGH | Ultra-Pro Stealthy Debugger Evasion (T1622) |

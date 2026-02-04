@@ -54,7 +54,7 @@ detection:
             - '\Commvault\'
             - '\rclone.exe'
             - '\terraform.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_cli and selection_object_discovery and (selection_patterns or selection_interactive_parent) and not filter_legit_automation
 level: high

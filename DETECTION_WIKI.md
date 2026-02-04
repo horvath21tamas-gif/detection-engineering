@@ -33,6 +33,7 @@
 - [Ultra-Pro High-Fidelity Command Line Obfuscation (T1027.010)](#ultra-pro-high-fidelity-command-line-obfuscation-(t1027010))
 - [Ultra-Pro High-Fidelity Suspicious Archive Creation (T1027.011)](#ultra-pro-high-fidelity-suspicious-archive-creation-(t1027011))
 - [Ultra-Pro High-Fidelity Windows LDR Hijacking (T1027.012)](#ultra-pro-high-fidelity-windows-ldr-hijacking-(t1027012))
+- [Ultra-Pro High-Fidelity System Owner/User Discovery (T1033)](#ultra-pro-high-fidelity-system-owneruser-discovery-(t1033))
 - [Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036)](#ultra-pro-high-fidelity-masquerading-and-process-path-abuse-(t1036))
 - [Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001)](#ultra-pro-high-fidelity-invalid-or-forged-code-signature-(t1036001))
 - [Ultra-Pro High-Fidelity RTLO Character Execution (T1036.002)](#ultra-pro-high-fidelity-rtlo-character-execution-(t1036002))
@@ -1040,6 +1041,23 @@ and the activation of the LoadAppInit_DLLs flag by suspicious processes.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity System Owner/User Discovery (T1033)
+- **Azonosító:** `T1033.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic discovery of the current user, logged-on users, and token privileges. 
+Focuses on anomalous process lineages (Office, Browsers) and specific switch 
+combinations (/priv, /groups) used before privilege escalation attempts.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1033`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

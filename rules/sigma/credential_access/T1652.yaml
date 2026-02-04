@@ -55,7 +55,7 @@ detection:
             - '\Program Files\Tanium\'
             - '\Program Files\Splunk\'
             - '\Program Files\Datadog\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_tools or selection_wmi) and (selection_extraction or selection_suspicious_lineage) and not filter_legit_it_mgmt
 level: high

@@ -469,6 +469,7 @@
 - [High-Fidelity Malicious Container Deployment Detection](#high-fidelity-malicious-container-deployment-detection)
 - [Ultra-Pro Container Escape & Host Access (T1611)](#ultra-pro-container-escape-&-host-access-(t1611))
 - [Ultra-Pro Stealthy Local Image Build (T1612)](#ultra-pro-stealthy-local-image-build-(t1612))
+- [Ultra-Pro High-Fidelity Container and Instance Discovery (T1613)](#ultra-pro-high-fidelity-container-and-instance-discovery-(t1613))
 - [Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619)](#ultra-pro-high-fidelity-cloud-storage-object-discovery-(t1619))
 - [Ultra-Pro High-Fidelity Reflective Code Loading (T1620)](#ultra-pro-high-fidelity-reflective-code-loading-(t1620))
 - [Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621)](#ultra-pro-high-fidelity-mfa-prompt-bombing-automation-(t1621))
@@ -478,6 +479,7 @@
 - [Ultra-Pro High-Fidelity Certificate & Private Key Theft (T1649)](#ultra-pro-high-fidelity-certificate-&-private-key-theft-(t1649))
 - [High-Fidelity Cloud Account Acquisition and Initialization - T1650](#high-fidelity-cloud-account-acquisition-and-initialization---t1650)
 - [High-Fidelity Cloud Administration Agent Abuse](#high-fidelity-cloud-administration-agent-abuse)
+- [Ultra-Pro High-Fidelity Device Driver Discovery (T1652)](#ultra-pro-high-fidelity-device-driver-discovery-(t1652))
 - [Ultra-Pro Power Settings Manipulation (T1137.001)](#ultra-pro-power-settings-manipulation-(t1137001))
 - [Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656)](#ultra-pro-high-fidelity-impersonation-and-identity-hijacking-(t1656))
 - [Professional Content Impersonation and Infrastructure Mirroring](#professional-content-impersonation-and-infrastructure-mirroring)
@@ -8158,6 +8160,23 @@ indicating post-exploitation image creation to evade registry scans.
 
 ---
 
+## Ultra-Pro High-Fidelity Container and Instance Discovery (T1613)
+- **Azonosító:** `T1613.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic enumeration of containers and Kubernetes resources.
+Focuses on identity self-interrogation (auth can-i), secret discovery, 
+and anomalous process lineage, filtering out high-frequency monitoring and system probes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1613`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619)
 - **Azonosító:** `T1619.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -8301,6 +8320,24 @@ Attackers use these trusted paths to execute reconnaissance or credential dumpin
 that bypass traditional network perimeter defenses.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1651`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Device Driver Discovery (T1652)
+- **Azonosító:** `T1652.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic discovery of device drivers by monitoring for high-fidelity 
+enumeration patterns (WMI/CLI) originating from non-standard lineages. 
+Specifically targets behaviors associated with BYOVD (Bring Your Own Vulnerable Driver) 
+reconnaissance.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1652`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

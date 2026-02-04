@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-04 09:08:47`
+**Utolsó frissítés:** `2026-02-04 09:35:37`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 478 | 100% |
-| Splunk (SPL) | 472 | 98.7% |
-| Microsoft Sentinel (KQL) | 474 | 99.2% |
-| QRadar (AQL) | 209 | 43.7% |
-| Elastic (KQL/EQL) | 474 | 99.2% |
-| RSA NetWitness | 471 | 98.5% |
+| Sigma (Forrás) | 483 | 100% |
+| Splunk (SPL) | 476 | 98.6% |
+| Microsoft Sentinel (KQL) | 478 | 99.0% |
+| QRadar (AQL) | 210 | 43.5% |
+| Elastic (KQL/EQL) | 478 | 99.0% |
+| RSA NetWitness | 475 | 98.3% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -484,6 +484,7 @@
 | T1610 | CRITICAL | High-Fidelity Malicious Container Deployment Detection |
 | T1611 | CRITICAL | Ultra-Pro Container Escape & Host Access (T1611) |
 | T1612 | CRITICAL | Ultra-Pro Stealthy Local Image Build (T1612) |
+| T1613 | HIGH | Ultra-Pro High-Fidelity Container and Instance Discovery (T1613) |
 | T1619 | HIGH | Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619) |
 | T1620 | CRITICAL | Ultra-Pro High-Fidelity Reflective Code Loading (T1620) |
 | T1621 | HIGH | Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621) |
@@ -493,6 +494,7 @@
 | T1649 | CRITICAL | Ultra-Pro High-Fidelity Certificate & Private Key Theft (T1649) |
 | T1650 | HIGH | High-Fidelity Cloud Account Acquisition and Initialization - T1650 |
 | T1651 | CRITICAL | High-Fidelity Cloud Administration Agent Abuse |
+| T1652 | HIGH | Ultra-Pro High-Fidelity Device Driver Discovery (T1652) |
 | T1653 | MEDIUM | Ultra-Pro Power Settings Manipulation (T1137.001) |
 | T1656 | HIGH | Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656) |
 | T1659 | HIGH | Professional Content Impersonation and Infrastructure Mirroring |

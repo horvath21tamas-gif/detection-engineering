@@ -1,0 +1,57 @@
+title: Ultra-Pro High-Fidelity Windows Credential Manager Harvesting (T1555.004)
+id: b0bd85b5-e705-428e-bae9-deb4affd80e1
+status: stable
+description: |
+    Detects unauthorized credential harvesting via cmdkey.exe by identifying 
+    suspicious command-line redirection, non-interactive parent processes, 
+    and known credential dumping tool signatures.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1555.004
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cmdkey:
+        Image|endswith: '\cmdkey.exe'
+        CommandLine|contains:
+            - ' /list'
+            - ' /l '          
+
+    selection_redirection:
+        CommandLine|contains:
+            - ' > '           
+            - ' >> '          
+            - ' | '           
+            - ' *'            
+
+    selection_bad_parents:
+        ParentImage|endswith:
+            - '\wmiprvse.exe'  
+            - '\scrcons.exe'   
+            - '\psexesvc.exe'  
+            - '\java.exe'      
+            - '\nginx.exe'
+            - '\httpd.exe'
+
+    selection_untrusted_location:
+        ParentImage|contains:
+            - '\Users\'
+            - '\Temp\'
+            - '\Downloads\'
+        Image|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+
+    filter_legit_scripts:
+        CommandLine|contains:
+            - 'C:\Program Files\IT_Management\'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_explorer:
+        ParentImage|endswith: '\explorer.exe'
+
+    condition: (selection_cmdkey and (selection_redirection or selection_bad_parents or selection_untrusted_context)) and not (filter_legit_scripts or filter_explorer)
+level: high

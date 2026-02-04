@@ -45,7 +45,7 @@ detection:
         IntegrityLevel: 'Medium'     
 
     filter_legit_system:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|endswith:
             - '\msiexec.exe'         
             - '\svchost.exe'

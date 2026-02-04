@@ -12,6 +12,7 @@
 - [Ultra-Pro High-Fidelity Linux Shadow File Extraction (T1003.008)](#ultra-pro-high-fidelity-linux-shadow-file-extraction-(t1003008))
 - [Ultra-Pro Stealthy Direct Volume Access (T1006)](#ultra-pro-stealthy-direct-volume-access-(t1006))
 - [Ultra-Pro High-Fidelity Application Window Discovery (T1010)](#ultra-pro-high-fidelity-application-window-discovery-(t1010))
+- [Ultra-Pro High-Fidelity Query Registry Discovery (T1012)](#ultra-pro-high-fidelity-query-registry-discovery-(t1012))
 - [Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014)](#ultra-pro-high-fidelity-byovd-rootkit-loading-(t1014))
 - [Rapid Logons to Multiple Distant Hosts by Same User](#rapid-logons-to-multiple-distant-hosts-by-same-user)
 - [Suspicious RDP Logon from Unusual Source](#suspicious-rdp-logon-from-unusual-source)
@@ -674,6 +675,23 @@ MainWindowTitle property access and Win32 API calls via CLI.
 Focuses on non-standard lineages and output redirection used by malware to exfiltrate window titles.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1010`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Query Registry Discovery (T1012)
+- **Azonosító:** `T1012.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic Registry discovery targeting sensitive security configurations, 
+credential storage, and persistence paths. Uses recursive query detection 
+and integrity level gating to minimize false positives.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1012`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

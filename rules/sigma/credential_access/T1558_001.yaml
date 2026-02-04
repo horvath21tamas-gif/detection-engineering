@@ -1,0 +1,45 @@
+title: Ultra-Pro High-Fidelity Golden Ticket Forgery & Injection (T1558.001)
+id: f2749342-1f1f-468b-b9b5-99ed6604ab75
+status: stable
+description: |
+    Detects the creation and injection of forged Kerberos TGTs (Golden Tickets). 
+    Focuses on the mandatory presence of the KRBTGT hash or AES key in command lines, 
+    combined with ticket injection (Pass-the-Ticket) patterns.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1558.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_forgery_args:
+        CommandLine|contains:
+            - ' /krbtgt:'         
+            - ' /aes256:'       
+            - ' /aes128:'
+        CommandLine|contains:
+            - ' /sid:'          
+            - ' /id:'            
+
+    selection_tool_specific:
+        CommandLine|contains:
+            - 'kerberos::golden'
+            - 'kerberos::ptt'
+            - ' /ptt'            
+            - ' /ticket:'        
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\wsmprovhost.exe' 
+            - '\psexesvc.exe'   
+
+    filter_legit_lsass:
+        User: 'NT AUTHORITY\SYSTEM'
+        Image|endswith: '\Windows\System32\lsass.exe'
+
+    condition: (selection_forgery_args or selection_tool_specific) and selection_untrusted_parent and not filter_legit_lsass
+level: critical

@@ -1,0 +1,2 @@
+((((param = '* > /tmp/*' OR param = '* > /var/tmp/*' OR param = '* > /dev/shm/*' OR param = '* > /home/*'))) OR (((param = '*/etc/shadow*' OR param = '*/etc/passwd*'))) OR ((param = '*/etc/shadow*'))|| (((param = '*unshadow *' OR param = '*mimipenguin*' OR param = '*linpeas.sh*')))) AND (NOT (((((param = '*/usr/sbin/pwconv*' OR param = '*/usr/sbin/useradd*' OR param = '*/usr/sbin/usermod*' OR param = '*logrotate*'))) AND ParentImage begins '/etc/cron.'))
+)

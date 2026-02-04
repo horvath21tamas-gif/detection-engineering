@@ -1,0 +1,53 @@
+title: Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654)
+id: bd388570-5049-4f3d-8f14-d9661673f6e9
+status: stable
+description: |
+    Detects systematic enumeration of system event logs (metadata harvesting) 
+    using native tools or PowerShell. Focuses on identifying security products 
+    via log channel discovery from anomalous execution contexts.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1654
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\wevtutil.exe'
+        - CommandLine|contains:
+            - 'Get-WinEvent'
+            - 'Get-EventLog'
+            - 'enum-logs'      
+            - 'el '            
+
+    selection_patterns:
+        CommandLine|contains:
+            - ' -ListLog '     
+            - ' get-log '       
+            - ' /f:json'        
+            - 'ConvertTo-Json'
+            - ' > '             
+
+    selection_suspicious_lineage:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\wsmprovhost.exe' 
+            - '\httpd.exe'       
+            - '\winword.exe'     
+        IntegrityLevel: 'Medium'
+
+    filter_legit_monitoring:
+        User: 'NT AUTHORITY\SYSTEM'
+        Image|contains:
+            - '\Program Files\SplunkUniversalForwarder\'
+            - '\Program Files\Elastic\Agent\'
+            - '\Windows\System32\CcmExec.exe' 
+        CommandLine|contains:
+            - 'Get-WinEvent -FilterHashtable' 
+
+    condition: selection_tools and (selection_patterns or selection_suspicious_lineage) and not filter_legit_monitoring
+level: high

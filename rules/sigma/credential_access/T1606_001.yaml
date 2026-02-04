@@ -1,0 +1,61 @@
+title: Ultra-Pro High-Fidelity Web Cookie Harvesting (T1606.001)
+id: 7296090b-96da-4373-b749-4c07d4556fd6
+status: stable
+description: |
+    Detects unauthorized extraction of browser cookies and their corresponding 
+    AES encryption keys from 'Local State' files. It specifically targets 
+    untrusted processes (interpreters, unsigned binaries) while filtering 
+    legitimate browser and Electron application behavior.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1606.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_target_files:
+        CommandLine|contains:
+            - '\Network\Cookies'    
+            - '\Local State'          
+            - '\Login Data'        
+            - '\cookies.sqlite'     
+
+    selection_actions:
+        - CommandLine|contains:
+            - 'copy '
+            - 'type '               
+            - 'esentutl'              
+            - 'sqlite3'               
+            - ' -export'
+        - CommandLine|re: 'os_crypt.*encrypted_key' 
+
+    selection_untrusted_context:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\Local\Temp\'
+            - '\Downloads\'
+            - '\Public\'
+        Image|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\python.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+
+    filter_trusted_vendors:
+        Image|contains:
+            - '\Program Files\Google\Chrome\'
+            - '\Program Files (x86)\Microsoft\Edge\'
+            - '\Program Files\Mozilla Firefox\'
+            - '\Program Files\Microsoft\Teams\'
+
+    filter_system_processes:
+        ParentImage|endswith:
+            - '\services.exe'
+            - '\MsMpEng.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_target_files and (selection_actions or selection_untrusted_context) and not (filter_trusted_vendors or filter_system_processes)
+level: critical

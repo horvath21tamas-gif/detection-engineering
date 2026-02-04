@@ -1,0 +1,58 @@
+title: Ultra-Pro High-Fidelity Certificate & Private Key Theft (T1649)
+id: d953d2e0-71b6-4e30-bb3d-92e41c2817cd
+status: stable
+description: |
+    Detects unauthorized extraction of digital certificates and private keys. 
+    Identifies memory patching to bypass export restrictions, suspicious certutil 
+    parameters, and key theft using offensive tools like Mimikatz or Certify.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1649
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_offensive_logic:
+        CommandLine|contains:
+            - 'crypto::'
+            - 'crypto::export'
+            - 'patch'                
+            - 'certificates /export'
+            - 'find-certificate'     
+
+    selection_certutil_abuse:
+        Image|endswith: '\certutil.exe'
+        CommandLine|contains:
+            - '-exportPFX'
+            - '-exportp12'
+            - '-p '                  
+
+    selection_suspicious_context:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\wsmprovhost.exe' 
+            - '\psexesvc.exe'    
+            - '\httpd.exe'      
+        Image|endswith:
+            - '\certutil.exe'
+            - '\powershell.exe'
+
+    selection_output_paths:
+        CommandLine|contains:
+            - '.pfx'
+            - '.p12'
+            - '.p7b'
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+            - 'C:\PerfLogs\'
+
+    filter_legit_os:
+        User: 'NT AUTHORITY\SYSTEM'
+        ParentImage|endswith: '\msiexec.exe'
+        Image|contains: '\Windows\System32\'
+
+    condition: (selection_offensive_logic or selection_certutil_abuse or selection_output_paths) and selection_suspicious_context and not filter_legit_os
+level: critical

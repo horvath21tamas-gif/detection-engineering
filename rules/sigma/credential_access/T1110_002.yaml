@@ -1,0 +1,62 @@
+title: Ultra-Pro High-Fidelity Credential Export & Cracking (T1110.002)
+id: 94d292a3-0a22-430c-b8b3-a83f21d96a79
+status: stable
+description: |
+    Detects attempts to extract credential databases (SAM, SYSTEM, NTDS.dit) for offline 
+    cracking and identifies the execution of password recovery tools with high precision 
+    by filtering out legitimate backup and system maintenance processes.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1110.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_reg_export:
+        Image|endswith: '\reg.exe'
+        CommandLine|contains: ' save '
+        CommandLine|contains:
+            - 'HKLM\SAM'
+            - 'HKLM\SYSTEM'
+            - 'HKLM\SECURITY'
+        CommandLine|contains:
+            - '\Temp\'
+            - '\Users\Public\'
+            - '\AppData\'
+
+    selection_ntds_export:
+        - Image|endswith: '\esentutl.exe'
+          CommandLine|contains:
+            - '/y' 
+            - '/vss' 
+          CommandLine|contains: 'ntds.dit'
+        - Image|endswith: '\vssadmin.exe'
+          CommandLine|contains: 'create shadow'
+
+    selection_crack_tools:
+        CommandLine|contains:
+            - ' -m '           
+            - ' -a '          
+            - ' --wordlist'
+            - ' --force'       
+            - ' --format='     
+        CommandLine|contains:
+            - '.hash'        
+            - '.txt'         
+
+    filter_legit_maintenance:
+        ParentImage|endswith:
+            - '\services.exe'
+            - '\TrustedInstaller.exe'
+            - '\MsMpEng.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_backup_software:
+        Image|contains:
+            - '\Program Files\Veeam\'
+            - '\Program Files\Backup\'
+
+    condition: (selection_reg_export or selection_ntds_export or selection_crack_tools) and not (filter_legit_maintenance or filter_backup_software)
+level: critical

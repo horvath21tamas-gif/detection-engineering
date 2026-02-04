@@ -1,0 +1,59 @@
+title: Ultra-Pro High-Fidelity Kerberos Attack Detection (T1558)
+id: 2c059c8c-87e0-4419-b93d-d98092a051c7
+status: stable
+description: |
+    Detects sophisticated Kerberos ticket forgery and harvesting. 
+    Focuses on encryption downgrade (RC4/0x17), targeted service ticket requests (Kerberoasting), 
+    and offensive tool artifacts while filtering legitimate LSASS and system behavior.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1558
+    - attack.t1558.003
+    - attack.t1558.004
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_offensive_flags:
+        CommandLine|contains:
+            - 'kerberoast'
+            - 'asreproast'
+            - 'asreq'          
+            - 'golden'
+            - 'silver'
+            - 'ptt'               
+            - 'tgtdelegate'      
+            - 'ms-mcs-admpwd'    
+
+    selection_encryption_logic:
+        CommandLine|contains:
+            - ' /rc4'
+            - ' 0x17'
+            - ' /ticket:'
+            - ' /service:'
+            - ' /outfile:'       
+
+    selection_untrusted_parent:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\wsmprovhost.exe'
+            - '\httpd.exe'       
+            - '\php-cgi.exe'
+        Image|endswith:
+            - '\rubeus.exe'
+            - '\powershell.exe'
+            - '\klist.exe'       
+
+    filter_legit_os:
+        User: 'NT AUTHORITY\SYSTEM'
+        Image|endswith:
+            - '\Windows\System32\lsass.exe'
+            - '\Windows\System32\svchost.exe'
+        ParentImage|endswith:
+            - '\services.exe'
+
+    condition: (selection_offensive_flags or selection_encryption_logic) and selection_untrusted_parent and not filter_legit_os
+level: critical

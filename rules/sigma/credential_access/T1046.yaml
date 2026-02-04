@@ -1,0 +1,59 @@
+title: Ultra-Pro High-Fidelity Network Service Discovery (T1046)
+id: dfb67413-d4b3-497f-8360-1faecf3bebd2
+status: stable
+description: |
+    Detects systematic network service discovery and internal port scanning. 
+    Focuses on loop-based scanning patterns in PowerShell, CMD, and specialized 
+    binaries originating from non-IT admin contexts.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1046
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\netstat.exe'
+            - '\nmap.exe'
+            - '\portqry.exe'
+            - '\telnet.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+
+    selection_scripts:
+        CommandLine|contains:
+            - 'foreach'              
+            - 'for /L'               
+            - '1..254'               
+            - 'Test-NetConnection'
+            - 'System.Net.Sockets.TcpClient' 
+
+    selection_ports:
+        CommandLine|contains:
+            - '-Port 445'            
+            - '-Port 3389'           
+            - '-Port 5985'           
+            - '-Port 22'            
+            - '-Port 80'             
+
+    selection_suspicious_lineage:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\wsmprovhost.exe'     
+            - '\winword.exe'         
+            - '\httpd.exe'           
+        IntegrityLevel: 'Medium'    
+
+    filter_legit_automation:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - Image|contains:
+            - '\Program Files\Zabbix\'
+            - '\Program Files\Tanium\'
+            - '\Windows\System32\wbem\wmiprvse.exe' 
+
+    condition: selection_tools and (selection_scripts or (selection_ports and selection_suspicious_lineage)) and not filter_legit_automation
+level: high

@@ -51,7 +51,7 @@ detection:
             - '\services.exe'
             - '\TrustedInstaller.exe'
             - '\MsMpEng.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     filter_backup_software:
         Image|contains:

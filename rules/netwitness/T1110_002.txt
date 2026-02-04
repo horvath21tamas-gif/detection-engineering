@@ -1,0 +1,2 @@
+((((process = '*\\reg.exe*'))&& (((param = '*\\Temp\\*' OR param = '*\\Users\\Public\\*' OR param = '*\\AppData\\*')))) OR ((((process = '*\\esentutl.exe*'))&& ((param = '*ntds.dit*'))) OR (((process = '*\\vssadmin.exe*'))&& ((param = '*create shadow*')))) OR (((param = '*.hash*' OR param = '*.txt*')))) AND (NOT ((((((ParentImage = '*\\services.exe*' OR ParentImage = '*\\TrustedInstaller.exe*' OR ParentImage = '*\\MsMpEng.exe*'))) AND ((user.dst = '*NT AUTHORITY\\SYSTEM*'))) OR (((process = '*\\Program Files\\Veeam\\*' OR process = '*\\Program Files\\Backup\\*')))))
+)

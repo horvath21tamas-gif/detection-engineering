@@ -1,0 +1,64 @@
+title: Ultra-Pro High-Fidelity Internal Spearphishing Detection (T1534)
+id: 2e8fbe4e-e1f5-430b-beb0-a643caaec7a8
+status: stable
+description: |
+    Detects advanced internal spearphishing attempts by identifying anomalous 
+    programmatic access to the Outlook MAPI interface, suspicious child processes, 
+    and command-line flags used for mass-mailing or attachment injection.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.lateral_movement
+    - attack.t1534
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_outlook_control:
+        ParentImage|endswith:
+            - '\outlook.exe'
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+            - '\rundll32.exe'
+
+    selection_suspicious_args:
+        CommandLine|contains:
+            - ' /a '               
+            - ' /c ipm.note'       
+            - ' /m '                 
+            - 'outlook.application'  
+
+    selection_dangerous_files:
+        CommandLine|contains:
+            - '.iso'
+            - '.vhd'
+            - '.img'
+            - '.htm'                 
+            - '.lnk'
+            - '.zip'
+        CommandLine|contains:
+            - '\\'                   
+
+    selection_source_anomaly:
+        ParentImage|endswith:
+            - '\browser.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\httpd.exe'          
+
+    filter_legit_corporate:
+        - CommandLine|contains:
+            - 'C:\Program Files\Microsoft Office'
+            - 'Adobe\Acrobat'
+            - 'Salesforce'
+            - 'Zoom'
+        - User: 'NT AUTHORITY\SYSTEM' 
+        - Image|endswith:
+            - '\conhost.exe'
+
+    condition: (selection_outlook_control and (selection_suspicious_args or selection_dangerous_files)) or selection_source_anomaly and not filter_legit_corporate
+level: critical

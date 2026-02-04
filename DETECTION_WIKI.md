@@ -123,6 +123,7 @@
 - [Ultra-Pro Office Add-in Binary Persistence (T1137.006)](#ultra-pro-office-add-in-binary-persistence-(t1137006))
 - [Ultra-Pro Stealthy Deobfuscation/Decoding (T1140)](#ultra-pro-stealthy-deobfuscationdecoding-(t1140))
 - [Ultra-Pro Browser Extension Force-Install Persistence (T1176)](#ultra-pro-browser-extension-force-install-persistence-(t1176))
+- [Ultra-Pro High-Fidelity Forced Authentication (T1187)](#ultra-pro-high-fidelity-forced-authentication-(t1187))
 - [Browser-Originating Shell or System Tool Execution](#browser-originating-shell-or-system-tool-execution)
 - [Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server](#suspicious-cross-site-scripting-(xss)-attempt-detected-on-web-server)
 - [High-Fidelity Supply Chain Compromise Detection (Post-Update Anomaly)](#high-fidelity-supply-chain-compromise-detection-(post-update-anomaly))
@@ -2469,6 +2470,23 @@ and to allow installation from non-official webstores.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Forced Authentication (T1187)
+- **Azonosító:** `T1187.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects forced authentication attempts (NTLM Relay/Coercion) by monitoring 
+suspicious UNC path patterns, WebDAV redirection, and specific RPC 
+interface exploitation used to trigger outbound authentication.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1187`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

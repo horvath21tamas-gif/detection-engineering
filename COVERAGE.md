@@ -26,6 +26,7 @@
 | T1003.007 | CRITICAL | Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007) |
 | T1003.008 | CRITICAL | Ultra-Pro High-Fidelity Linux Shadow File Extraction (T1003.008) |
 | T1006 | CRITICAL | Ultra-Pro Stealthy Direct Volume Access (T1006) |
+| T1010 | HIGH | Ultra-Pro High-Fidelity Application Window Discovery (T1010) |
 | T1014 | CRITICAL | Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014) |
 | T1021 | MEDIUM | Rapid Logons to Multiple Distant Hosts by Same User |
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |

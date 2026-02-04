@@ -45,7 +45,7 @@ detection:
             - '\Users\Public\'
 
     filter_legit:
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
         Image|contains:
             - '\Program Files\AnyDesk\'
             - '\Program Files\TeamViewer\'

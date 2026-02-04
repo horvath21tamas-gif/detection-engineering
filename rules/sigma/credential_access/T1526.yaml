@@ -1,0 +1,60 @@
+title: Ultra-Pro High-Fidelity Cloud Service Discovery (T1526)
+id: 5b887209-61b0-46d1-9cca-2524526e57c0
+status: stable
+description: |
+    Detects systematic cloud service enumeration (Lambda, Secrets, KeyVault) 
+    focusing on anomalous execution environments (interactive shells on non-dev hosts) 
+    and output redirection patterns used for automated harvesting.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1526
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cli:
+        Image|endswith:
+            - '\aws.exe'
+            - '\az.cmd'
+            - '\gcloud.cmd'
+
+    selection_services:
+        CommandLine|contains:
+            - 'lambda list-functions'
+            - 'secretsmanager list-secrets'
+            - 'eks list-clusters'         
+            - 'keyvault list'
+            - 'webapp list'              
+            - 'functionapp list'
+            - 'functions list'          
+            - 'container clusters list'
+
+    selection_extraction:
+        CommandLine|contains:
+            - '--query'
+            - '--output json'
+            - ' | jq'
+            - ' | base64'
+            - ' > '         
+            - ' | clip'     
+
+    selection_interactive_parent:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wsmprovhost.exe'
+            - '\httpd.exe'       
+
+    filter_legit_automation:
+        ParentImage|contains:
+            - '\Jenkins\'
+            - '\GitLab-Runner\'
+            - '\Terraform\'
+            - '\Ansible\'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_cli and selection_services and (selection_extraction or selection_interactive_parent) and not filter_legit_automation
+level: high

@@ -1,0 +1,61 @@
+title: Ultra-Pro High-Fidelity Password Spraying (T1110.003)
+id: cd628a31-bf3e-47e7-9b65-c9f1eba0d7d6
+status: stable
+description: |
+    Detects password spraying attacks by identifying suspicious automated authentication 
+    logic where a single process iterates through a list of accounts. It filters for 
+    untrusted process locations and known attack module signatures.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1110.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+
+    selection_spray_logic:
+        CommandLine|contains:
+            - 'Invoke-PasswordSpray'
+            - 'Invoke-LocalPasswordSpray'
+            - 'DomainPasswordSpray'
+            - 'Test-ADCredential'
+            - 'Get-ADUser'        
+            - 'userlist'
+            - 'user-file'
+            - 'pass-file'
+
+    selection_loops:
+        CommandLine|contains|all:
+            - 'foreach'
+            - 'net'
+            - 'use'
+        CommandLine|contains|all:
+            - 'for /f'
+            - 'net'
+            - 'use'
+
+    selection_untrusted_location:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Downloads\'
+        Image|endswith:
+            - '\python.exe'
+            - '\powershell.exe'
+
+    filter_it_infra:
+        ParentImage|contains:
+            - '\Program Files\Microsoft Azure AD Connect\'
+            - '\Program Files\Puppet Labs\'
+            - '\Windows\System32\inetsrv\w3wp.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_legit_scripts:
+        CommandLine|contains:
+            - 'C:\IT_Admin\Scripts\'
+
+    condition: (selection_spray_logic or selection_loops) and selection_untrusted_location and not filter_it_infra
+level: high

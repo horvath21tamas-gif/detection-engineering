@@ -1,0 +1,65 @@
+title: Ultra-Pro High-Fidelity System Service Discovery (T1007)
+id: d5421288-8d47-4451-abe2-ae128a89e47e
+status: stable
+description: |
+    Detects targeted discovery of system services. Focuses on suspicious parent processes 
+    and specific command-line arguments used to identify security products or 
+    misconfigured services for privilege escalation.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1007
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\sc.exe'
+            - '\tasklist.exe'
+            - '\net.exe'
+            - '\net1.exe'
+        - CommandLine|contains:
+            - 'Get-Service'
+            - 'Get-WmiObject Win32_Service'
+            - 'Get-CimInstance Win32_Service'
+
+    selection_patterns:
+        CommandLine|contains:
+            - 'query'                 
+            - 'state= all'           
+            - 'config'                
+            - 'sdshow'                
+
+    selection_suspicious_lineage:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\httpd.exe'           
+            - '\wsmprovhost.exe'     
+            - '\powershell.exe'      
+        IntegrityLevel: 'Medium'     
+
+    selection_automation:
+        CommandLine|contains:
+            - 'findstr'
+            - 'select-string'
+            - 'where-object'
+            - ' > '                  
+            - 'ConvertTo-Json'
+
+    filter_legit_noise:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith:
+            - '\svchost.exe'
+            - '\msiexec.exe'         
+            - '\CcmExec.exe'         
+        - CommandLine|contains:
+            - 'Program Files'        
+            - 'Splunk'               
+            - 'Tanium'
+
+    condition: selection_tools and (selection_patterns or selection_suspicious_lineage or selection_automation) and not filter_legit_noise
+level: high

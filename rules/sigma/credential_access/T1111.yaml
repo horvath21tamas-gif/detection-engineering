@@ -55,7 +55,7 @@ detection:
             - '\Program Files (x86)\Microsoft\Edge\'
             - '\Program Files\Mozilla Firefox\'
         ParentImage|endswith: '\services.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_session_theft or selection_decryption or selection_proxy_tools) and selection_untrusted_context and not filter_official_apps
 level: critical

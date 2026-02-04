@@ -100,6 +100,7 @@
 - [Ultra-Pro High-Fidelity Credential Export & Cracking (T1110.002)](#ultra-pro-high-fidelity-credential-export-&-cracking-(t1110002))
 - [Ultra-Pro High-Fidelity Password Spraying (T1110.003)](#ultra-pro-high-fidelity-password-spraying-(t1110003))
 - [Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004)](#ultra-pro-high-fidelity-credential-stuffing-&-combo-list-abuse-(t1110004))
+- [Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111)](#ultra-pro-high-fidelity-mfa-evasion-&-session-hijacking-(t1111))
 - [Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112)](#ultra-pro-high-fidelity-registry-tampering-for-evasion-(t1112))
 - [Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)](#ultra-pro-high-fidelity-trusted-developer-utility-proxy-(t1127))
 - [Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001)](#ultra-pro-high-fidelity-msbuild-proxy-execution-(t1127001))
@@ -2080,6 +2081,23 @@ untrusted process locations and known attack module signatures.
 stuffing framework arguments from untrusted locations.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111)
+- **Azonosító:** `T1111.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects MFA evasion by identifying unauthorized access to browser master keys (Local State) 
+and session databases (Cookies) by untrusted processes. It also monitors for 
+Reverse Proxy phishing frameworks (Evilginx, Muraena) and token manipulation tools.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1111`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

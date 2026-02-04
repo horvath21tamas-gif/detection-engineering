@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\ipconfig.exe", "*\route.exe", "*\nbtstat.exe", "*\arp.exe", "*\netsh.exe")) or (ProcessCommandLine in ("*Get-NetIPAddress*", "*Get-NetRoute*", "*Get-NetNeighbor*", "*interface show*"))) and ((ProcessCommandLine in ("* /all*", "* print*", "* -a*", "* /displaydns*")) or ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\httpd.exe", "*\wsmprovhost.exe")) and IntegrityLevel =~ "Medium") or (ProcessCommandLine in ("* > *", "*ConvertTo-Json*", "*Export-Csv*"))) and (not (User =~ "NT AUTHORITY\SYSTEM" or (ParentProcessName in ("*\svchost.exe", "*\CcmExec.exe", "*\msiexec.exe")) or ProcessCommandLine contains "Program Files"))

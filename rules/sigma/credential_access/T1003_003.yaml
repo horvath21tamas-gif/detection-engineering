@@ -54,7 +54,7 @@ detection:
         Image|contains:
             - '\Program Files\'
             - '\Program Files (x86)\'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_ntdsutil_logic or selection_diskshadow or selection_esentutl) and (selection_suspicious_parent or selection_output) and not filter_backup_agents
 level: critical

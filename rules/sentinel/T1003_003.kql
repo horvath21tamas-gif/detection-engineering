@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath endswith "\ntdsutil.exe" and (ProcessCommandLine in ("*ac i ntds*", "* ifm*", "*create f*", "*create h*"))) or (FolderPath endswith "\diskshadow.exe" and ProcessCommandLine contains " /s ") or (FolderPath endswith "\esentutl.exe" and (ProcessCommandLine in ("*/y*", "*/vss*", "*ntds.dit*")))) and ((ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wsmprovhost.exe", "*\psexesvc.exe")) or (ProcessCommandLine in ("*\AppData\*", "*\Temp\*", "*C:\PerfLogs\*", "*C:\Users\Public\*", "*\*"))) and (not ((FolderPath in ("*\Program Files\*", "*\Program Files (x86)\*")) and User =~ "NT AUTHORITY\SYSTEM"))

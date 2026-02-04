@@ -1,0 +1,70 @@
+title: Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528)
+id: 8d4356f7-7cd2-48d9-9af5-0feafca2256a
+status: stable
+description: |
+    Detects unauthorized extraction of application access tokens and session cookies. 
+    Monitors for suspicious access to Cloud CLI configurations (Azure, AWS, GCP) 
+    and browser-based credential stores by untrusted processes.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1528
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cloud_config:
+        CommandLine|contains:
+            - '\.azure\accessTokens.json'
+            - '\.azure\azureProfile.json'
+            - '\.aws\credentials'
+            - '\.aws\config'
+            - '\.config\gcloud\'
+
+    selection_browser_theft:
+        CommandLine|contains:
+            - '\User Data\Local State'
+            - '\User Data\Default\Cookies'
+            - '\User Data\Default\Network\Cookies'
+            - '\User Data\Default\Login Data'
+
+    selection_offensive_logic:
+        - Image|endswith:
+            - '\curl.exe'
+            - '\powershell.exe'
+            - '\certutil.exe'   
+            - '\sqlite3.exe'    
+        - CommandLine|contains:
+            - 'roadtools'       
+            - 'extract-token'
+            - 'cookie-stealer'
+            - 'copy-item'
+
+    selection_untrusted_parent:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\wsmprovhost.exe'
+            - '\explorer.exe'
+        Image|endswith:
+            - '\type.exe'
+            - '\findstr.exe'
+            - '\copy.exe'
+            - '\robocopy.exe'
+
+    filter_legit_browsers:
+        Image|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\brave.exe'
+            - '\firefox.exe'
+    
+    filter_cloud_sdk:
+        Image|contains:
+            - '\Google\Cloud SDK\'
+            - '\Amazon\AWSCLIV2\'
+            - '\Microsoft SDKs\Azure\'
+
+    condition: (selection_cloud_config or selection_browser_theft or selection_offensive_logic) and selection_untrusted_parent and not (filter_legit_browsers or filter_cloud_sdk)
+level: critical

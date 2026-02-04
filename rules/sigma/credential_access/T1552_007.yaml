@@ -1,0 +1,59 @@
+title: Ultra-Pro High-Fidelity Container Secret Discovery (T1552.007)
+id: 2234f2b9-defa-4698-9abd-49cb386a6455
+status: stable
+description: |
+    Detects targeted discovery of secrets (K8s tokens, Cloud keys, Env vars) within containers. 
+    Filters legitimate entrypoint scripts and monitoring agents while focusing on 
+    interactive shell sessions and anomalous command chaining (e.g., env | grep).
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1552.007
+logsource:
+    category: process_creation
+    product: linux
+detection:
+    selection_paths:
+        CommandLine|contains:
+            - '/var/run/secrets/kubernetes.io/serviceaccount' 
+            - '/run/secrets/'                                  
+            - '.docker/config.json'                            
+            - '/etc/kubernetes/admin.conf'                   
+            - 'secret.yml'                                     
+
+    selection_methods:
+        - CommandLine|contains|all:
+            - 'env'
+            - 'grep'
+        - CommandLine|contains|all:
+            - 'printenv'
+            - 'token'
+        - CommandLine|contains|all:
+            - 'cat'
+            - 'base64'
+        - CommandLine|contains:
+            - 'export'                                     
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '/sh'
+            - '/bash'
+            - '/zsh'
+            - '/dash'
+            - '/kubectl'                                       
+        - ParentImage|contains:
+            - '/nginx'
+            - '/httpd'
+            - '/php'
+
+    filter_legit_init:
+        CommandLine|contains:
+            - '/usr/local/bin/docker-entrypoint.sh'
+            - '/init.sh'
+        User: 'fluentd'
+        Image|contains:
+            - '/usr/bin/promtail'
+
+    condition: (selection_paths or selection_methods) and selection_suspicious_parent and not filter_legit_init
+level: high

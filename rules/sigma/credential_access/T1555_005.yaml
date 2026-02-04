@@ -1,0 +1,63 @@
+title: Ultra-Pro High-Fidelity Password Manager Extraction (T1555.005)
+id: ff2c03f6-97ee-405e-98fc-b1fd3dcc8021
+status: stable
+description: |
+    Detects unauthorized access or exfiltration of password manager databases 
+    by identifying suspicious file operations (copying, archiving) and 
+    untrusted process lineages targeting .kdbx, .opvault, and other vault files.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1555.005
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_vault_files:
+        CommandLine|contains:
+            - '.kdbx'          
+            - '.opvault'       
+            - '.agilekeychain' 
+            - 'vault.db'      
+            - 'key3.db'        
+            - 'key4.db'
+
+    selection_actions:
+        - CommandLine|contains:
+            - 'copy '
+            - 'type '          
+            - '7z'            
+            - 'rar'
+            - 'zip'
+            - 'esentutl'       
+        - Image|endswith:
+            - '\sqlite3.exe'  
+
+    selection_untrusted_source:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\Local\Temp\'
+            - '\Public\'
+        Image|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\python.exe'
+
+    filter_legit_apps:
+        Image|contains:
+            - '\Program Files\KeePass'
+            - '\Program Files\1Password'
+            - '\Program Files\Bitwarden'
+        ParentImage|endswith:
+            - '\services.exe'
+            - '\svchost.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    filter_cloud_sync:
+        Image|endswith:
+            - '\OneDrive.exe'
+            - '\Dropbox.exe'
+
+    condition: selection_vault_files and (selection_actions or selection_untrusted_source) and not (filter_legit_apps or filter_cloud_sync)
+level: critical

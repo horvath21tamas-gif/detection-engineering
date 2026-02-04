@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-04 10:00:41`
+**Utolsó frissítés:** `2026-02-04 10:17:12`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 490 | 100% |
-| Splunk (SPL) | 482 | 98.4% |
-| Microsoft Sentinel (KQL) | 484 | 98.8% |
-| QRadar (AQL) | 210 | 42.9% |
-| Elastic (KQL/EQL) | 484 | 98.8% |
-| RSA NetWitness | 481 | 98.2% |
+| Sigma (Forrás) | 498 | 100% |
+| Splunk (SPL) | 489 | 98.2% |
+| Microsoft Sentinel (KQL) | 491 | 98.6% |
+| QRadar (AQL) | 210 | 42.2% |
+| Elastic (KQL/EQL) | 491 | 98.6% |
+| RSA NetWitness | 488 | 98.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -29,6 +29,7 @@
 | T1010 | HIGH | Ultra-Pro High-Fidelity Application Window Discovery (T1010) |
 | T1012 | HIGH | Ultra-Pro High-Fidelity Query Registry Discovery (T1012) |
 | T1014 | CRITICAL | Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014) |
+| T1018 | HIGH | Ultra-Pro High-Fidelity Remote System Discovery (T1018) |
 | T1021 | MEDIUM | Rapid Logons to Multiple Distant Hosts by Same User |
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |
 | T1027 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Encoded PowerShell Command Execution |

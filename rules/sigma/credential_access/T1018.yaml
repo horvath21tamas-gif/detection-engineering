@@ -52,7 +52,7 @@ detection:
             - 'for /L'               
 
     filter_legit_system:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|endswith:
             - '\svchost.exe'
             - '\CcmExec.exe'        

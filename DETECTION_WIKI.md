@@ -14,6 +14,7 @@
 - [Ultra-Pro High-Fidelity Application Window Discovery (T1010)](#ultra-pro-high-fidelity-application-window-discovery-(t1010))
 - [Ultra-Pro High-Fidelity Query Registry Discovery (T1012)](#ultra-pro-high-fidelity-query-registry-discovery-(t1012))
 - [Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014)](#ultra-pro-high-fidelity-byovd-rootkit-loading-(t1014))
+- [Ultra-Pro High-Fidelity Remote System Discovery (T1018)](#ultra-pro-high-fidelity-remote-system-discovery-(t1018))
 - [Rapid Logons to Multiple Distant Hosts by Same User](#rapid-logons-to-multiple-distant-hosts-by-same-user)
 - [Suspicious RDP Logon from Unusual Source](#suspicious-rdp-logon-from-unusual-source)
 - [Suspicious Base64-Encoded PowerShell Command with Network Activity](#suspicious-base64-encoded-powershell-command-with-network-activity)
@@ -709,6 +710,23 @@ Focuses on the execution of known driver loaders or the registration of kernel-m
 services from non-standard paths, while filtering out legitimate OS driver maintenance.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1014`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Remote System Discovery (T1018)
+- **Azonosító:** `T1018.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic remote system discovery with a focus on Domain Controller identification 
+and network topology mapping. Filters out high-volume noise from system services, 
+browsers, and inventory agents using integrity levels and parent process gating.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1018`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

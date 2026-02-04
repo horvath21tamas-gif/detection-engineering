@@ -51,7 +51,7 @@ detection:
             - 'format-list'        
 
     filter_legit_noise:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|contains:
             - '\Program Files\Tanium\'
             - '\Program Files\Splunk\'

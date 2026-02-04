@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\net.exe", "*\net1.exe")) or (ProcessCommandLine in ("*localgroup*", "*group *", "*Get-ADGroup*", "*Get-DomainGroup*", "*Get-NetLocalGroup*", "*Get-ADPrincipalGroupMembership*"))) and ((ProcessCommandLine in ("*Admins*", "*Domain Admins*", "*Enterprise Admins*", "*Remote Desktop Users*", "*DnsAdmins*", "*Schema Admins*")) or (ProcessCommandLine in ("* > *", "*ConvertTo-Json*", "*Export-Csv*", "*format-list*")) or ((ParentProcessName in ("*\wsmprovhost.exe", "*\httpd.exe", "*\winword.exe", "*\powershell.exe")) and IntegrityLevel =~ "Medium")) and (not (User =~ "NT AUTHORITY\SYSTEM" or (ParentProcessName in ("*\Program Files\Tanium\*", "*\Program Files\Splunk\*", "*\Windows\System32\CcmExec.exe*")) or ProcessCommandLine contains "net localgroup"))

@@ -82,6 +82,7 @@
 - [High-Fidelity Network Device CLI Manipulation](#high-fidelity-network-device-cli-manipulation)
 - [High-Fidelity Cloud Shell Exploitation and Data Exfiltration](#high-fidelity-cloud-shell-exploitation-and-data-exfiltration)
 - [Suspicious SYSTEM Process Spawned from User Context](#suspicious-system-process-spawned-from-user-context)
+- [Ultra-Pro High-Fidelity Permission Groups Discovery (T1069)](#ultra-pro-high-fidelity-permission-groups-discovery-(t1069))
 - [Ultra-Pro High-Fidelity Indicator Removal on Host (T1070)](#ultra-pro-high-fidelity-indicator-removal-on-host-(t1070))
 - [Security Event Log Cleared Using wevtutil.exe](#security-event-log-cleared-using-wevtutilexe)
 - [Ultra-Pro High-Fidelity Linux Log Clearing and Journal Sabotage (T1070.002)](#ultra-pro-high-fidelity-linux-log-clearing-and-journal-sabotage-(t1070002))
@@ -1835,6 +1836,23 @@ cloud resources to public access.
 - **Leírás:** Detects suspicious processes running as SYSTEM that are spawned from user-initiated parent processes such as Explorer, browsers, or Office applications. This behavior may indicate privilege escalation, token manipulation, or UAC bypass exploitation.
 - **Hamis pozitívok:** Rare custom administrative tooling, Approved software installation using custom launchers
 - **MITRE ATT&CK:** `T1068`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Permission Groups Discovery (T1069)
+- **Azonosító:** `T1069.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic discovery of local or domain permission groups. 
+Focuses on reconnaissance patterns used to identify privileged accounts 
+while filtering out legitimate system/inventory noise through integrity and parent analysis.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1069`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

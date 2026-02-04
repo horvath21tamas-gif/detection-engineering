@@ -47,7 +47,7 @@ detection:
             - 'Get-TimeZone'
 
     filter_legit_software:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|endswith:
             - '\msiexec.exe'        
             - '\CcmExec.exe'         

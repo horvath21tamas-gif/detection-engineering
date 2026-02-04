@@ -220,6 +220,7 @@
 - [Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004)](#ultra-pro-mainboard-boot-image-&-spi-flash-tampering-(t1542004))
 - [Ultra-Pro Terminal Services DLL Hijacking (T1505.005)](#ultra-pro-terminal-services-dll-hijacking-(t1505005))
 - [Ultra-Pro High-Fidelity Software Discovery (T1518)](#ultra-pro-high-fidelity-software-discovery-(t1518))
+- [Ultra-Pro High-Fidelity Security Software Discovery (T1518.001)](#ultra-pro-high-fidelity-security-software-discovery-(t1518001))
 - [Exploit-Grade Unauthorized Container Image Execution (Implant Container Image)](#exploit-grade-unauthorized-container-image-execution-(implant-container-image))
 - [Ultra-Pro High-Fidelity Cloud Service Discovery (T1526)](#ultra-pro-high-fidelity-cloud-service-discovery-(t1526))
 - [Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528)](#ultra-pro-high-fidelity-application-token-&-session-hijacking-(t1528))
@@ -485,6 +486,7 @@
 - [Ultra-Pro Container Escape & Host Access (T1611)](#ultra-pro-container-escape-&-host-access-(t1611))
 - [Ultra-Pro Stealthy Local Image Build (T1612)](#ultra-pro-stealthy-local-image-build-(t1612))
 - [Ultra-Pro High-Fidelity Container and Instance Discovery (T1613)](#ultra-pro-high-fidelity-container-and-instance-discovery-(t1613))
+- [Ultra-Pro High-Fidelity System Location Discovery (T1614)](#ultra-pro-high-fidelity-system-location-discovery-(t1614))
 - [Ultra-Pro High-Fidelity Group Policy Discovery (T1615)](#ultra-pro-high-fidelity-group-policy-discovery-(t1615))
 - [Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619)](#ultra-pro-high-fidelity-cloud-storage-object-discovery-(t1619))
 - [Ultra-Pro High-Fidelity Reflective Code Loading (T1620)](#ultra-pro-high-fidelity-reflective-code-loading-(t1620))
@@ -4151,6 +4153,23 @@ Uses integrity level gating, parent-process correlation, and specific keyword
 analysis to minimize false positives from system inventory tools.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1518`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Security Software Discovery (T1518.001)
+- **Azonosító:** `T1518_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted discovery of security products (AV/EDR/HIPS) and sandboxes. 
+Focuses on keyword-specific filtering (findstr/grep) and anomalous process 
+lineages (Office apps, web servers, or non-elevated shells).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -8441,6 +8460,23 @@ Focuses on identity self-interrogation (auth can-i), secret discovery,
 and anomalous process lineage, filtering out high-frequency monitoring and system probes.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1613`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity System Location Discovery (T1614)
+- **Azonosító:** `T1614.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted system location and language discovery, often used by ransomware 
+for regional targeting or exclusion (kill-switch check). Focuses on Registry-based 
+keyboard layout enumeration and external IP-to-geo API calls from non-standard processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1614`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

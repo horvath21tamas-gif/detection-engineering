@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-04 10:17:12`
+**Utolsó frissítés:** `2026-02-04 11:52:11`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 498 | 100% |
-| Splunk (SPL) | 489 | 98.2% |
-| Microsoft Sentinel (KQL) | 491 | 98.6% |
-| QRadar (AQL) | 210 | 42.2% |
-| Elastic (KQL/EQL) | 491 | 98.6% |
-| RSA NetWitness | 488 | 98.0% |
+| Sigma (Forrás) | 502 | 100% |
+| Splunk (SPL) | 493 | 98.2% |
+| Microsoft Sentinel (KQL) | 495 | 98.6% |
+| QRadar (AQL) | 210 | 41.8% |
+| Elastic (KQL/EQL) | 495 | 98.6% |
+| RSA NetWitness | 492 | 98.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -235,6 +235,7 @@
 | T1505.004 | CRITICAL | Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004) |
 | T1505.005 | CRITICAL | Ultra-Pro Terminal Services DLL Hijacking (T1505.005) |
 | T1518 | HIGH | Ultra-Pro High-Fidelity Software Discovery (T1518) |
+| T1518.001 | HIGH | Ultra-Pro High-Fidelity Security Software Discovery (T1518.001) |
 | T1525 | CRITICAL | Exploit-Grade Unauthorized Container Image Execution (Implant Container Image) |
 | T1526 | HIGH | Ultra-Pro High-Fidelity Cloud Service Discovery (T1526) |
 | T1528 | CRITICAL | Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528) |
@@ -500,6 +501,7 @@
 | T1611 | CRITICAL | Ultra-Pro Container Escape & Host Access (T1611) |
 | T1612 | CRITICAL | Ultra-Pro Stealthy Local Image Build (T1612) |
 | T1613 | HIGH | Ultra-Pro High-Fidelity Container and Instance Discovery (T1613) |
+| T1614 | HIGH | Ultra-Pro High-Fidelity System Location Discovery (T1614) |
 | T1615 | HIGH | Ultra-Pro High-Fidelity Group Policy Discovery (T1615) |
 | T1619 | HIGH | Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619) |
 | T1620 | CRITICAL | Ultra-Pro High-Fidelity Reflective Code Loading (T1620) |

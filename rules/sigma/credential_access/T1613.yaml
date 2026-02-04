@@ -1,0 +1,57 @@
+title: Ultra-Pro High-Fidelity Container and Instance Discovery (T1613)
+id: 3ee9cbf8-48c8-4c7c-b5fa-39a4819ddfb6
+status: stable
+description: |
+    Detects systematic enumeration of containers and Kubernetes resources.
+    Focuses on identity self-interrogation (auth can-i), secret discovery, 
+    and anomalous process lineage, filtering out high-frequency monitoring and system probes.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1613
+logsource:
+    category: process_creation
+    product: linux
+detection:
+    selection_tools:
+        Image|endswith:
+            - '/kubectl'
+            - '/docker'
+            - '/crictl'
+            - '/nerdctl'
+
+    selection_commands:
+        CommandLine|contains:
+            - 'auth can-i'          
+            - 'get secrets'          
+            - 'describe pod'         
+            - 'inspect'            
+            - 'get nodes'        
+
+    selection_suspicious_parent:
+        ParentImage|contains:
+            - '/www-data'
+            - '/nginx'
+            - '/httpd'
+            - '/php-fpm'
+            - '/python'             
+        User|not: 'root'
+
+    selection_automation:
+        CommandLine|contains:
+            - '--format json'
+            - '-o json'
+            - ' | jq'
+            - ' > '               
+
+    filter_legit_ops:
+        Image|contains:
+            - '/usr/bin/kubelet'    
+            - '/datadog-agent'
+        CommandLine|contains:
+            - 'get pods --watch'    
+            - '--version'
+
+    condition: selection_cli and selection_commands and (selection_suspicious_parent or selection_automation) and not filter_legit_ops
+level: high

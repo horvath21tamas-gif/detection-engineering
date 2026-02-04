@@ -1,0 +1,64 @@
+title: Ultra-Pro High-Fidelity Cloud Secret Harvesting (T1555.006)
+id: e0c12e27-205f-41cb-b1fb-3ef5245438c8
+status: stable
+description: |
+    Detects unauthorized access or exfiltration of cloud provider credentials (AWS, Azure, GCP). 
+    It specifically targets command-line tools (archivers, interpreters) accessing 
+    sensitive config paths while excluding official cloud CLI binaries and known DevOps agents.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1555.006
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cloud_paths:
+        CommandLine|contains:
+            - '\.aws\credentials'  
+            - '\.aws\config'
+            - '\.azure\accessTokens.json' 
+            - '\.azure\azureProfile.json'
+            - '\.config\gcloud\'    
+            - '\.docker\config.json' 
+
+    selection_harvesting_behavior:
+        - CommandLine|contains:
+            - 'copy '
+            - 'type '               
+            - 'cat '                
+            - 'Get-Content'         
+            - '7z'                  
+            - 'curl -F'             
+            - 'Invoke-RestMethod'
+        - Image|endswith:
+            - '\sqlite3.exe'        
+
+    selection_untrusted_context:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Downloads\'
+        Image|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\python.exe'
+            - '\node.exe'
+
+    filter_official_tools:
+        Image|endswith:
+            - '\aws.exe'
+            - '\az.exe'
+            - '\gcloud.exe'
+            - '\docker.exe'
+        ParentImage|contains:
+            - '\Microsoft VS Code\'
+            - '\JetBrains\'
+            - '\actions-runner\'   
+            - '\agent\'             
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_cloud_paths and (selection_harvesting_behavior or selection_untrusted_context) and not filter_official_tools
+level: critical

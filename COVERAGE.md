@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-04 06:19:09`
+**Utolsó frissítés:** `2026-02-04 06:31:52`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 422 | 100% |
-| Splunk (SPL) | 421 | 99.8% |
-| Microsoft Sentinel (KQL) | 423 | 100.2% |
-| QRadar (AQL) | 203 | 48.1% |
-| Elastic (KQL/EQL) | 423 | 100.2% |
-| RSA NetWitness | 420 | 99.5% |
+| Sigma (Forrás) | 428 | 100% |
+| Splunk (SPL) | 427 | 99.8% |
+| Microsoft Sentinel (KQL) | 429 | 100.2% |
+| QRadar (AQL) | 203 | 47.4% |
+| Elastic (KQL/EQL) | 429 | 100.2% |
+| RSA NetWitness | 426 | 99.5% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -273,6 +273,9 @@
 | T1556.007 | CRITICAL | Ultra-Pro Hybrid Identity Sync Manipulation (T1556.007) |
 | T1556.008 | CRITICAL | Ultra-Pro Network-to-Cloud Auth Hijacking (T1556.008) |
 | T1557 | HIGH | Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557) |
+| T1557.001 | CRITICAL | Ultra-Pro High-Fidelity LLMNR/NBT-NS Poisoning (T1557.001) |
+| T1557.002 | HIGH | Ultra-Pro High-Fidelity ARP Poisoning Detection (T1557.002) |
+| T1557.003 | CRITICAL | Ultra-Pro High-Fidelity DHCP Spoofing Detection (T1557.003) |
 | T1558.003 | HIGH | Gyanús Kerberos TGS jegykérés (Kerberoasting) |
 | T1559 | CRITICAL | High-Fidelity Indirect IPC and COM Execution |
 | T1559.001 | HIGH | High-Fidelity Indirect IPC and COM Execution, Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity) |

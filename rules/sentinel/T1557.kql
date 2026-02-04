@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where ((FolderPath endswith "\reg.exe" and ProcessCommandLine contains "1") or (ProcessCommandLine in ("* -interface *", "* -r *", "* -f *", "* -LLMNR *", "* -NBTNS *", "* --spoof *", "*arpspoof*"))) and ((FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Downloads\*")) and (FolderPath in ("*\python.exe", "*\pythonw.exe", "*\powershell.exe"))) and (not ((ParentProcessName in ("*\VMware\*", "*\Oracle\VirtualBox\*")) or ((FolderPath in ("*\Cisco\AnyConnect\*", "*\OpenVPN\*")) and User =~ "NT AUTHORITY\SYSTEM")))
+| where ((FolderPath endswith "\reg.exe" and ProcessCommandLine contains "1") or (ProcessCommandLine in ("* -interface *", "* -r *", "* -f *", "* -LLMNR *", "* -NBTNS *", "* --spoof *", "*arpspoof*"))) and ((FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Downloads\*")) and (FolderPath in ("*\python.exe", "*\pythonw.exe", "*\powershell.exe"))) and (not ((ParentProcessName in ("*\VMware\*", "*\Oracle\VirtualBox\*")) or ((FolderPath in ("*\Cisco\AnyConnect\*", "*\OpenVPN\*")) and username =~ "NT AUTHORITY\SYSTEM")))

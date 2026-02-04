@@ -55,7 +55,7 @@ detection:
             - '\powershell.exe'
 
     filter_legit_tools:
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
         Image|contains:
             - '\OpenSSH\ssh-agent.exe'
             - '\Git\usr\bin\ssh.exe'

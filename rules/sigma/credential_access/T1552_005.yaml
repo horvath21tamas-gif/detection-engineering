@@ -47,7 +47,7 @@ detection:
             - '\az.cmd'
             - '\gcloud.cmd'
             - '\docker.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_cloud_files and (selection_extraction or selection_untrusted_context) and not filter_legit_cli_tools
 level: critical

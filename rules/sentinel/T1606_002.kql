@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("*goldensaml*", "*asreproast*", "*Get-AADIntAccessToken*", "*roadtoken*", "*Invoke-SelfSignedCertificate*", "*Set-AdfsCertificate*")) or ((ProcessCommandLine in ("*adfs::audittrust*", "*adfs::dump*", "*dpapi::masterkey*")) or (FolderPath in ("*\pypykatz.exe", "*\mimikatz.exe")))) and ((FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\python.exe"))) and (not (((FolderPath in ("*\Microsoft.IdentityServer.ServiceHost.exe", "*\miiserver.exe")) and User =~ "NT AUTHORITY\SYSTEM") or (ProcessCommandLine in ("*Connect-MgGraph*", "*Connect-AzureAD*", "*az login*"))))

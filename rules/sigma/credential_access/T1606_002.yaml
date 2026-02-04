@@ -46,7 +46,7 @@ detection:
         Image|endswith:
             - '\Microsoft.IdentityServer.ServiceHost.exe'
             - '\miiserver.exe'
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
 
     filter_legit_admin:
         CommandLine|contains:

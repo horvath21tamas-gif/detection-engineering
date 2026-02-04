@@ -1,0 +1,56 @@
+title: Ultra-Pro High-Fidelity Password Policy Discovery (T1201)
+id: a853e34f-510f-4b94-aa51-7e5be3a1cecb
+status: stable
+description: |
+    Detects targeted enumeration of domain/local password policies. 
+    Focuses on reconnaissance patterns used to calibrate brute-force 
+    attacks while filtering out legitimate system/admin noise.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1201
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\net.exe'
+            - '\net1.exe'
+        - CommandLine|contains:
+            - 'accounts'              
+            - 'Get-DomainPolicy'      
+            - 'Get-ADDefaultDomainPasswordPolicy'
+            - 'Get-ADFineGrainedPasswordPolicy'
+
+    selection_keywords:
+        CommandLine|contains:
+            - 'lockoutthreshold'      
+            - 'minpwdlength'         
+            - 'lockoutduration'
+            - 'pwdcomplexity'
+
+    selection_suspicious_lineage:
+        ParentImage|endswith:
+            - '\wsmprovhost.exe'     
+            - '\httpd.exe'           
+            - '\winword.exe'         
+            - '\powershell.exe'    
+        IntegrityLevel: 'Medium'     
+
+    selection_extraction:
+        CommandLine|contains:
+            - ' > '
+            - 'ConvertTo-Json'
+            - 'Export-Csv'
+
+    filter_legit_ops:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ComputerName|contains: 'DC-' 
+        - CommandLine|contains:
+            - 'logon.bat'             
+            - 'Program Files'         
+
+    condition: selection_tools and (selection_keywords or selection_extraction or selection_suspicious_lineage) and not filter_legit_ops
+level: high

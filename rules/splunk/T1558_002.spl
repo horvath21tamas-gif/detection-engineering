@@ -1,0 +1,1 @@
+CommandLine IN ("* /rc4:*", "* /aes256:*", "* /aes128:*", "* /sid:*") OR CommandLine IN ("*kerberos::golden*", "*silver *", "* /ptt*", "* /spn:*") ParentImage IN ("*\\cmd.exe", "*\\powershell.exe", "*\\wsmprovhost.exe", "*\\psexesvc.exe", "*\\httpd.exe") NOT (username="NT AUTHORITY\\SYSTEM" Image="*\\Windows\\System32\\lsass.exe")

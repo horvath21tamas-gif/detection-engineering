@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("* /rc4:*", "* /aes256:*", "* /aes128:*", "* /sid:*")) or (ProcessCommandLine in ("*kerberos::golden*", "*silver *", "* /ptt*", "* /spn:*"))) and (ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\wsmprovhost.exe", "*\psexesvc.exe", "*\httpd.exe")) and (not (User =~ "NT AUTHORITY\SYSTEM" and FolderPath endswith "\Windows\System32\lsass.exe"))

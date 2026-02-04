@@ -1,0 +1,2 @@
+((((param = '* /rc4:*' OR param = '* /aes256:*' OR param = '* /aes128:*' OR param = '* /sid:*'))) OR (((param = '*kerberos::golden*' OR param = '*silver *' OR param = '* /ptt*' OR param = '* /spn:*')))) AND (((ParentImage = '*\\cmd.exe*' OR ParentImage = '*\\powershell.exe*' OR ParentImage = '*\\wsmprovhost.exe*' OR ParentImage = '*\\psexesvc.exe*' OR ParentImage = '*\\httpd.exe*'))) AND (NOT ((((user.dst = '*NT AUTHORITY\\SYSTEM*'))&& ((process = '*\\Windows\\System32\\lsass.exe*'))))
+)

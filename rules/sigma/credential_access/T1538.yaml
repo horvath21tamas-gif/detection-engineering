@@ -1,0 +1,52 @@
+title: Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538)
+id: 92d3ed84-d1de-4b5e-9d15-cc1e02dec457
+status: stable
+description: |
+    Detects anomalous generation of federated login tokens and automated cloud 
+    dashboard access. Focuses on CLI commands used to bypass standard MFA 
+    via console sign-in tokens and suspicious browser launches from non-interactive shells.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1538
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_federated_access:
+        CommandLine|contains:
+            - 'get-signin-token'         
+            - 'r=signin'                
+            - 'portal.azure.com'         
+            - 'account.google.com/ServiceLogin' 
+
+    selection_browser_automation:
+        - Image|endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+        - CommandLine|contains:
+            - '--incognito'             
+            - '--new-window'
+            - '--app='                  
+        - CommandLine|contains:
+            - 'console.aws.amazon.com'
+            - 'portal.azure.com'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\wsmprovhost.exe'         
+            - '\httpd.exe'              
+            - '\sqlservr.exe'          
+        - ParentImage|contains:
+            - '\AppData\Local\Temp\'
+
+    filter_legit_dev_tools:
+        CommandLine|contains:
+            - 'sso login'
+            - 'login --use-device-code'  
+        ComputerName|contains:
+            - 'ADMIN-VDI-'
+
+    condition: (selection_federated_access or (selection_browser_automation and selection_suspicious_parent)) and not filter_legit_dev_tools
+level: high

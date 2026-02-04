@@ -42,7 +42,7 @@ detection:
             - '/zsh'
             - '/dash'
             - '/kubectl'                                       
-        - ParentImage|contains:
+        ParentImage|contains:
             - '/nginx'
             - '/httpd'
             - '/php'

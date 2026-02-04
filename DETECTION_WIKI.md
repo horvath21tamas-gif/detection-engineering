@@ -259,6 +259,14 @@
 - [Ultra-Pro High-Fidelity Pass-the-Ticket Detection (T1550.003)](#ultra-pro-high-fidelity-pass-the-ticket-detection-(t1550003))
 - [Ultra-Pro High-Fidelity Pass-the-Session Detection (T1550.004)](#ultra-pro-high-fidelity-pass-the-session-detection-(t1550004))
 - [Ultra-Pro High-Fidelity Unsecured Credentials Discovery (T1552)](#ultra-pro-high-fidelity-unsecured-credentials-discovery-(t1552))
+- [Ultra-Pro High-Fidelity Credentials In Files Discovery (T1552.001)](#ultra-pro-high-fidelity-credentials-in-files-discovery-(t1552001))
+- [Ultra-Pro High-Fidelity Credentials In Registry Discovery (T1552.002)](#ultra-pro-high-fidelity-credentials-in-registry-discovery-(t1552002))
+- [Ultra-Pro High-Fidelity Shell History & Console Discovery (T1552.003)](#ultra-pro-high-fidelity-shell-history-&-console-discovery-(t1552003))
+- [Ultra-Pro High-Fidelity Private Key Discovery (T1552.004)](#ultra-pro-high-fidelity-private-key-discovery-(t1552004))
+- [Ultra-Pro High-Fidelity Cloud Credential Discovery (T1552.005)](#ultra-pro-high-fidelity-cloud-credential-discovery-(t1552005))
+- [Ultra-Pro High-Fidelity GPP Password Discovery (T1552.006)](#ultra-pro-high-fidelity-gpp-password-discovery-(t1552006))
+- [Ultra-Pro High-Fidelity Container Secret Discovery (T1552.007)](#ultra-pro-high-fidelity-container-secret-discovery-(t1552007))
+- [Ultra-Pro High-Fidelity GPP Password Discovery (T1552.008)](#ultra-pro-high-fidelity-gpp-password-discovery-(t1552008))
 - [Ultra-Pro High-Fidelity Subvert Trust Controls (T1553)](#ultra-pro-high-fidelity-subvert-trust-controls-(t1553))
 - [Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001)](#ultra-pro-high-fidelity-macos-gatekeeper-and-quarantine-bypass-(t1553001))
 - [Ultra-Pro High-Fidelity SIP Hijacking and Trust Subversion (T1553.002)](#ultra-pro-high-fidelity-sip-hijacking-and-trust-subversion-(t1553002))
@@ -4743,6 +4751,142 @@ Uses advanced correlation between search tools (findstr, grep, PowerShell),
 sensitive file extensions, and high-entropy keywords.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, 002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Credentials In Files Discovery (T1552.001)
+- **Azonosító:** `T1552_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted, recursive searches for credentials in configuration files and scripts. 
+Correlates search tools (findstr, grep, PowerShell) with high-risk file extensions 
+and anomalous parent processes to minimize false positives from dev/admin activity.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Credentials In Registry Discovery (T1552.002)
+- **Azonosító:** `T1552_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized, recursive, or bulk extraction of sensitive registry keys 
+containing credentials (PuTTY, WinSCP, RDP, LSA secrets). Correlates search 
+commands with suspicious parent processes to minimize false positives.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002, T1552`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Shell History & Console Discovery (T1552.003)
+- **Azonosító:** `T1552_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized extraction of shell history files (.bash_history, ConsoleHost_history.txt). 
+Focuses on non-shell processes accessing these files and the use of exfiltration-related 
+commands (base64, curl, redirection) combined with history file paths.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Private Key Discovery (T1552.004)
+- **Azonosító:** `T1552_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted discovery of private cryptographic keys (SSH, PGP, Certificates). 
+Focuses on command-line content searches for private key headers and recursive 
+directory traversal by untrusted processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Credential Discovery (T1552.005)
+- **Azonosító:** `T1552_005.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized extraction of cloud credentials (AWS, Azure, GCP) from local 
+config files. Filters legitimate CLI usage and focuses on anomalous process behavior 
+like redirection, encoding, or access from web servers and remote shells.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity GPP Password Discovery (T1552.006)
+- **Azonosító:** `T1552_006.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized manual or scripted discovery of passwords in Group Policy Preferences. 
+Focuses on non-system processes performing string searches for 'cpassword' within 
+the SYSVOL share, identifying tools like PowerSploit, Empire, or manual LOLBin usage.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `006`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Container Secret Discovery (T1552.007)
+- **Azonosító:** `T1552_007.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted discovery of secrets (K8s tokens, Cloud keys, Env vars) within containers. 
+Filters legitimate entrypoint scripts and monitoring agents while focusing on 
+interactive shell sessions and anomalous command chaining (e.g., env | grep).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `007`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity GPP Password Discovery (T1552.008)
+- **Azonosító:** `T1552_008.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects targeted discovery of encrypted passwords (cpassword) in Group Policy Preference XML files. 
+Filters legitimate GPO engine activity by focusing on command-line string searches 
+originating from interactive or remote shells.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -51,7 +51,7 @@ detection:
         CommandLine|contains:
             - '/usr/local/bin/docker-entrypoint.sh'
             - '/init.sh'
-        User: 'fluentd'
+        username: 'fluentd'
         Image|contains:
             - '/usr/bin/promtail'
 

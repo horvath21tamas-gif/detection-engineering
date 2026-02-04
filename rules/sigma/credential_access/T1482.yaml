@@ -51,7 +51,7 @@ detection:
             - '\httpd.exe'           
 
     filter_legit_it:
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
         Image|contains:
             - '\Windows\System32\CcmExec.exe'
 

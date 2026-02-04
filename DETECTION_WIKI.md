@@ -190,6 +190,7 @@
 - [Ultra-Pro High-Fidelity Linux File Permissions Modification (T1222.002)](#ultra-pro-high-fidelity-linux-file-permissions-modification-(t1222002))
 - [Ultra-Pro High-Fidelity Execution Guardrails Discovery (T1480)](#ultra-pro-high-fidelity-execution-guardrails-discovery-(t1480))
 - [Ultra-Pro Environmental Keying Discovery (T1480.001)](#ultra-pro-environmental-keying-discovery-(t1480001))
+- [Ultra-Pro High-Fidelity Domain Trust Discovery (T1482)](#ultra-pro-high-fidelity-domain-trust-discovery-(t1482))
 - [Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484)](#ultra-pro-domain-policy-manipulation-&-gpo-abuse-(t1484))
 - [Ultra-Pro Group Policy Modification & Abuse (T1484.001)](#ultra-pro-group-policy-modification-&-abuse-(t1484001))
 - [Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)](#ultra-pro-domain-trust-tampering-&-sid-filtering-bypass-(t1484002))
@@ -3630,6 +3631,23 @@ and machine-specific registry lookups initiated by suspicious, unbacked,
 or non-standard parent processes.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Domain Trust Discovery (T1482)
+- **Azonosító:** `T1482.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects systematic enumeration of domain and forest trusts. 
+Focuses on anomalous process lineage (e.g., interactive shells on workstations) 
+and specific reconnaissance patterns used by tools like BloodHound/SharpHound.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1482`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

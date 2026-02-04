@@ -205,6 +205,7 @@
 | T1222.002 | HIGH | Ultra-Pro High-Fidelity Linux File Permissions Modification (T1222.002) |
 | T1480 | HIGH | Ultra-Pro High-Fidelity Execution Guardrails Discovery (T1480) |
 | T1480.001 | HIGH | Ultra-Pro Environmental Keying Discovery (T1480.001) |
+| T1482 | HIGH | Ultra-Pro High-Fidelity Domain Trust Discovery (T1482) |
 | T1484 | CRITICAL | Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484) |
 | T1484.001 | CRITICAL | Ultra-Pro Group Policy Modification & Abuse (T1484.001) |
 | T1484.002 | CRITICAL | Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002) |

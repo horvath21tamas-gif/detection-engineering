@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*.bash_history*", "*.zsh_history*", "*ConsoleHost_history.txt*", "*.mysql_history*", "*.psql_history*")) and ((ProcessCommandLine in ("*base64*", "*curl*", "*wget*", "*nc *", "*scp *", "* > *", "* | clip*")) or (ParentProcessName in ("*\httpd.exe", "*\nginx.exe", "*\php-cgi.exe", "*\wsmprovhost.exe", "*\psexesvc.exe"))) and (not (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\bash.exe", "*\zsh.exe", "*\conhost.exe")))

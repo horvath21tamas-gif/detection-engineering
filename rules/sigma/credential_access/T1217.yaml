@@ -1,0 +1,66 @@
+title: Ultra-Pro High-Fidelity Browser Information Discovery (T1217)
+id: 0de57089-fd4d-491f-86f4-bceb7919a98c
+status: stable
+description: |
+    Detects unauthorized discovery of browser metadata and history. 
+    Focuses on non-browser processes accessing sensitive profile files (SQLite/JSON) 
+    using command-line tools or anomalous redirection patterns.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.discovery
+    - attack.t1217
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_paths:
+        CommandLine|contains:
+            - '\User Data\*\Bookmarks'
+            - '\User Data\*\History'
+            - '\User Data\*\Login Data'       
+            - '\User Data\Local State'        
+            - '\Profiles\*\places.sqlite'     
+            - '\Profiles\*\key4.db'           
+
+    selection_tools:
+        - Image|endswith:
+            - '\findstr.exe'
+            - '\grep.exe'
+            - '\sqlite3.exe'               
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        - CommandLine|contains:
+            - 'type '                         
+            - 'copy '                       
+            - 'Get-ChildItem -Recurse'
+
+    selection_extraction:
+        CommandLine|contains:
+            - ' > '                         
+            - 'Export-Csv'
+            - 'ConvertTo-Json'
+            - 'base64'                        
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\wsmprovhost.exe'           
+            - '\httpd.exe'                   
+        - Image|not_endswith:
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\firefox.exe'
+            - '\brave.exe'
+
+    # 5. ELITE WHITELIST (Profi zajmentesítés)
+    filter_legit_it_tools:
+        User: 'NT AUTHORITY\SYSTEM'
+        Image|contains:
+            - '\Program Files\Splunk\'
+            - '\Program Files\Tanium\'
+            - '\CcmExec.exe'                
+
+    condition: (selection_paths and selection_tools and selection_suspicious_parent) or (selection_paths and selection_extraction) and not filter_legit_it_tools
+level: high

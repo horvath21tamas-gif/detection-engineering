@@ -38,7 +38,7 @@ detection:
             - '\psexesvc.exe'   
 
     filter_legit_lsass:
-        User: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
         Image|endswith: '\Windows\System32\lsass.exe'
 
     condition: (selection_forgery_args or selection_tool_specific) and selection_untrusted_parent and not filter_legit_lsass

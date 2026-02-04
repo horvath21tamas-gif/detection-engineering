@@ -1,0 +1,54 @@
+title: Ultra-Pro High-Fidelity Web Session Cookie Theft (T1539)
+id: 1f6397bd-8309-4705-8a48-875b83d0d13f
+status: stable
+description: |
+    Detects unauthorized access to browser session cookies. Monitors for non-browser 
+    processes accessing both 'Cookies' and 'Local State' (encryption key) files, 
+    identifying exfiltration attempts via LOLBins and suspicious scripts.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1539
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_paths:
+        CommandLine|contains:
+            - '\User Data\Local State'                 
+            - '\User Data\Default\Network\Cookies'   
+            - '\User Data\Default\Login Data'          
+            - '\Profiles\*\cookies.sqlite'            
+
+    selection_untrusted_apps:
+        - Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\python.exe'     
+            - '\sqlite3.exe'    
+            - '\certutil.exe'   
+            - '\curl.exe'       
+        - CommandLine|contains:
+            - 'copy '
+            - 'type '
+            - 'Get-Content'
+            - 'base64'
+            - '.json'          
+
+    selection_tools:
+        CommandLine|contains:
+            - 'master_key'      
+            - 'os_crypt'        
+            - 'decrypt'         
+
+    filter_legit_browser_execution:
+        Image|contains:
+            - '\AppData\Local\Google\Chrome\Application\chrome.exe'
+            - '\Microsoft\Edge\Application\msedge.exe'
+            - '\Program Files\Mozilla Firefox\firefox.exe'
+        User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_paths and selection_untrusted_apps and not filter_legit_browser_execution
+level: critical

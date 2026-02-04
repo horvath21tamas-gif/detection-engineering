@@ -1,0 +1,54 @@
+title: Ultra-Pro High-Fidelity GPP Password Discovery (T1552.008)
+id: 8c5022ee-316c-44c9-a9e5-3fcf467f8dfe
+status: stable
+description: |
+    Detects targeted discovery of encrypted passwords (cpassword) in Group Policy Preference XML files. 
+    Filters legitimate GPO engine activity by focusing on command-line string searches 
+    originating from interactive or remote shells.
+author: hota05
+date: 2026-02-04
+tags:
+    - attack.credential_access
+    - attack.t1552.008
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_keyword:
+        CommandLine|contains:
+            - 'cpassword'
+
+    selection_tools:
+        - Image|endswith:
+            - '\findstr.exe'
+            - '\grep.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+        - CommandLine|contains:
+            - 'Get-GPPPassword' 
+            - 'Select-String'
+            - 'type '
+
+    selection_paths:
+        CommandLine|contains:
+            - 'SYSVOL'
+            - 'Policies'
+            - 'Groups.xml'
+            - 'ScheduledTasks.xml'
+            - 'Services.xml'
+
+    selection_suspicious_lineage:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\wsmprovhost.exe' 
+            - '\psexesvc.exe'   
+
+    filter_legit_system:
+        User: 'NT AUTHORITY\SYSTEM'
+        Image|endswith:
+            - '\svchost.exe'    
+
+    condition: selection_keyword and selection_tools and selection_paths and selection_suspicious_lineage and not filter_legit_system
+level: critical

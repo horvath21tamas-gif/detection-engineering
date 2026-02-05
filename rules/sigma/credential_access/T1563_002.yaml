@@ -47,7 +47,7 @@ detection:
             - 'C:\Program Files\Remote Desktop'
             - 'Citrix'                
             - 'VMware'          
-        - User: 'NT AUTHORITY\NETWORK SERVICE'
+        - username: 'NT AUTHORITY\NETWORK SERVICE'
 
     condition: (selection_tools and (selection_shadow_args or selection_suspicious_context)) and not filter_legit_service
 level: critical

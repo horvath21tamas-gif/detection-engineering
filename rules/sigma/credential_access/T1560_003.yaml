@@ -22,7 +22,7 @@ detection:
             - 'MemoryStream'                
             - '.ToArray()'                   
             - 'b64'                          
-.
+
     selection_obfuscation:
         CommandLine|contains:
             - 'bxor'                          

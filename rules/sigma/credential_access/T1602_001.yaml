@@ -1,0 +1,60 @@
+title: Ultra-Pro High-Fidelity Admin Share Data Exfiltration (T1602.001)
+id: 3db12b0d-3ccc-4f84-b7e5-614c127ed4d4
+status: stable
+description: |
+    Detects unauthorized data collection or staging via administrative shares (C$, ADMIN$) 
+    by correlating anomalous process lineages, non-standard source paths, 
+    and the use of recursive discovery commands within the same session.
+author: hota05
+date: 2026-02-05
+tags:
+    - attack.collection
+    - attack.lateral_movement
+    - attack.t1602.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_admin_shares:
+        CommandLine|contains:
+            - '\\C$\'
+            - '\\ADMIN$\'
+            - '\\IPC$\'
+
+    selection_suspicious_source:
+        Image|contains:
+            - '\Users\'
+            - '\Temp\'
+            - '\AppData\'
+            - '\Public\'
+
+    selection_recon_logic:
+        CommandLine|contains:
+            - 'dir /s'
+            - 'ls -R'
+            - 'findstr'
+            - 'robocopy'
+            - ' -Recurse'
+            - ' /s '
+
+    selection_context:
+        ParentImage|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\w3wp.exe'        
+            - '\httpd.exe'
+            - '\explorer.exe'      
+        IntegrityLevel: 'Medium'   
+
+    filter_trusted_infra:
+        - Image|contains:
+            - 'C:\Windows\System32\wbem\WmiPrvSE.exe' 
+            - 'C:\Windows\CCM\CcmExec.exe'           
+            - 'C:\Program Files\Microsoft Monitoring Agent\'
+            - 'C:\Program Files\Veeam\'             
+        - User: 'NT AUTHORITY\SYSTEM'
+        - CommandLine|contains:
+            - 'SoftwareDistribution'                
+
+    condition: selection_admin_shares and (selection_suspicious_source or selection_recon_logic or selection_context) and not filter_trusted_infra
+level: critical

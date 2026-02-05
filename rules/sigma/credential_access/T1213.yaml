@@ -1,0 +1,62 @@
+title: Ultra-Pro High-Fidelity Repository Dump (T1213)
+id: f3203d3e-952e-47f0-9fe1-c7aa4a5fee1f
+status: stable
+description: |
+    Detects unauthorized mass data collection from internal knowledge bases (Confluence, Jira, SharePoint) 
+    by identifying suspicious API-driven export commands originating from untrusted 
+    process contexts or temporary directories.
+author: hota05
+date: 2026-02-05
+tags:
+    - attack.collection
+    - attack.t1213
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_api_logic:
+        CommandLine|contains:
+            - 'rest/api/'              
+            - 'api/v2/spaces'         
+            - 'api/v2/pages'           
+            - 'rest/api/2/issue'      
+            - '_vti_bin/lists.asmx'    
+            - 'Get-SPO'                
+            - 'export-sharepoint'
+
+    selection_export_intent:
+        CommandLine|contains:
+            - 'export'                 
+            - 'backup'
+            - 'download-all'
+            - 'recursive'
+            - 'dump'
+
+    selection_suspicious_source:
+        Image|contains:
+            - '\Users\'
+            - '\Temp\'
+            - '\AppData\'
+            - '\Public\'
+
+    selection_context:
+        ParentImage|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\w3wp.exe'            
+            - '\httpd.exe'
+            - '\python.exe'
+        IntegrityLevel: 'Medium'     
+
+    filter_trusted_automation:
+        - Image|contains:
+            - 'C:\Program Files\Atlassian\'
+            - 'C:\Program Files\Microsoft Monitoring Agent\'
+            - 'C:\Windows\CCM\'
+        - User: 'NT AUTHORITY\SYSTEM'
+        - CommandLine|contains:
+            - 'healthcheck'
+            - 'ping'
+
+    condition: selection_api_logic and (selection_export_intent or selection_suspicious_source) and selection_context and not filter_trusted_automation
+level: critical

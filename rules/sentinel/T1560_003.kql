@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("*[System.IO.File]::ReadAllBytes*", "*WriteAllBytes*", "*MemoryStream*", "*.ToArray()*", "*b64*")) and (ProcessCommandLine in ("*bxor*", "*-bxor*", "*0x*", "*[Convert]::ToBase64String*")) and (ProcessCommandLine in ("*foreach*", "*Get-ChildItem*", "*-Recurse*", "*-Include*"))) and ((ParentProcessName in ("*\w3wp.exe", "*\httpd.exe", "*\powershell.exe", "*\cmd.exe")) and IntegrityLevel =~ "Medium") and (not ((FolderPath in ("*C:\Program Files\Microsoft Monitoring Agent\*", "*C:\Program Files\Splunk\*")) or (ProcessCommandLine in ("*HealthCheck*", "*Telemetry*")) or User =~ "NT AUTHORITY\SYSTEM"))

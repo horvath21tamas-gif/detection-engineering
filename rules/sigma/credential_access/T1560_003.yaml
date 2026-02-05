@@ -51,7 +51,7 @@ detection:
         - CommandLine|contains:
             - 'HealthCheck'
             - 'Telemetry'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_byte_stream and selection_obfuscation and selection_loop) and selection_context and not filter_trusted_automation
 level: critical

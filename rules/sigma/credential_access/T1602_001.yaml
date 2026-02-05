@@ -52,7 +52,7 @@ detection:
             - 'C:\Windows\CCM\CcmExec.exe'           
             - 'C:\Program Files\Microsoft Monitoring Agent\'
             - 'C:\Program Files\Veeam\'             
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - CommandLine|contains:
             - 'SoftwareDistribution'                
 

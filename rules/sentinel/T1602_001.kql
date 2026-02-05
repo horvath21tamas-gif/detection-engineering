@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*\C$\*", "*\ADMIN$\*", "*\IPC$\*")) and ((FolderPath in ("*\Users\*", "*\Temp\*", "*\AppData\*", "*\Public\*")) or (ProcessCommandLine in ("*dir /s*", "*ls -R*", "*findstr*", "*robocopy*", "* -Recurse*", "* /s *")) or ((ParentProcessName in ("*\powershell.exe", "*\cmd.exe", "*\w3wp.exe", "*\httpd.exe", "*\explorer.exe")) and IntegrityLevel =~ "Medium")) and (not ((FolderPath in ("*C:\Windows\System32\wbem\WmiPrvSE.exe*", "*C:\Windows\CCM\CcmExec.exe*", "*C:\Program Files\Microsoft Monitoring Agent\*", "*C:\Program Files\Veeam\*")) or User =~ "NT AUTHORITY\SYSTEM" or ProcessCommandLine contains "SoftwareDistribution"))

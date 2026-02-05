@@ -143,6 +143,7 @@
 - [Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004)](#ultra-pro-high-fidelity-credential-stuffing-&-combo-list-abuse-(t1110004))
 - [Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111)](#ultra-pro-high-fidelity-mfa-evasion-&-session-hijacking-(t1111))
 - [Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112)](#ultra-pro-high-fidelity-registry-tampering-for-evasion-(t1112))
+- [Ultra-Pro High-Fidelity Clipboard Data Spying (T1115)](#ultra-pro-high-fidelity-clipboard-data-spying-(t1115))
 - [Ultra-Pro High-Fidelity Automated Collection (T1119)](#ultra-pro-high-fidelity-automated-collection-(t1119))
 - [Ultra-Pro High-Fidelity Peripheral Device Discovery (T1120)](#ultra-pro-high-fidelity-peripheral-device-discovery-(t1120))
 - [Ultra-Pro High-Fidelity Audio Capture & Spying (T1123)](#ultra-pro-high-fidelity-audio-capture-&-spying-(t1123))
@@ -2912,6 +2913,23 @@ Optimized to ignore standard system updates and focus on non-standard process be
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Clipboard Data Spying (T1115)
+- **Azonosító:** `T1115.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects automated clipboard monitoring and theft by identifying persistent 
+polling loops, unmanaged assembly loads for clipboard access, and 
+suspicious process lineages (Webshells, Office macros) accessing the API.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1115`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

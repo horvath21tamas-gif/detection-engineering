@@ -50,7 +50,7 @@ detection:
         - Image|contains:
             - 'C:\Program Files\SharePoint Online Management Shell\'
             - 'C:\Program Files\Microsoft SDKs\SharePoint\'
-        - User: 'NT AUTHORITY\SYSTEM'    
+        - username: 'NT AUTHORITY\SYSTEM'    
         - CommandLine|contains:
             - 'OneDrive.exe'            
             - 'OfficeClickToRun.exe'

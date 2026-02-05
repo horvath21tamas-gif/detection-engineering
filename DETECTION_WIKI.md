@@ -197,6 +197,7 @@
 - [Ultra-Pro High-Fidelity Exploitation of Remote Services (T1210)](#ultra-pro-high-fidelity-exploitation-of-remote-services-(t1210))
 - [Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211)](#ultra-pro-high-fidelity-privilege-escalation-exploitation-(t1211))
 - [Ultra-Pro High-Fidelity Credential Service Exploitation (T1212)](#ultra-pro-high-fidelity-credential-service-exploitation-(t1212))
+- [Ultra-Pro High-Fidelity Repository Dump (T1213)](#ultra-pro-high-fidelity-repository-dump-(t1213))
 - [Ultra-Pro High-Fidelity System Script Proxy Execution (T1216)](#ultra-pro-high-fidelity-system-script-proxy-execution-(t1216))
 - [Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001)](#ultra-pro-high-fidelity-pubprn-script-proxy-execution-(t1216001))
 - [Ultra-Pro High-Fidelity Browser Information Discovery (T1217)](#ultra-pro-high-fidelity-browser-information-discovery-(t1217))
@@ -3813,6 +3814,23 @@ by identifying illegal child processes, unbacked memory execution, and known
 exploitation patterns while filtering legitimate security tool interference.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1212`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Repository Dump (T1213)
+- **Azonosító:** `T1213.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized mass data collection from internal knowledge bases (Confluence, Jira, SharePoint) 
+by identifying suspicious API-driven export commands originating from untrusted 
+process contexts or temporary directories.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1213`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

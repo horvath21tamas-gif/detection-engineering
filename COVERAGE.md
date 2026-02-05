@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-05 07:44:04`
+**Utolsó frissítés:** `2026-02-05 08:03:24`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 527 | 100% |
-| Splunk (SPL) | 518 | 98.3% |
-| Microsoft Sentinel (KQL) | 520 | 98.7% |
-| QRadar (AQL) | 213 | 40.4% |
-| Elastic (KQL/EQL) | 520 | 98.7% |
-| RSA NetWitness | 517 | 98.1% |
+| Sigma (Forrás) | 536 | 100% |
+| Splunk (SPL) | 527 | 98.3% |
+| Microsoft Sentinel (KQL) | 529 | 98.7% |
+| QRadar (AQL) | 214 | 39.9% |
+| Elastic (KQL/EQL) | 529 | 98.7% |
+| RSA NetWitness | 526 | 98.1% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -212,6 +212,7 @@
 | T1210 | CRITICAL | Ultra-Pro High-Fidelity Exploitation of Remote Services (T1210) |
 | T1211 | CRITICAL | Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211) |
 | T1212 | CRITICAL | Ultra-Pro High-Fidelity Credential Service Exploitation (T1212) |
+| T1213 | CRITICAL | Ultra-Pro High-Fidelity Repository Dump (T1213) |
 | T1216 | CRITICAL | Ultra-Pro High-Fidelity System Script Proxy Execution (T1216) |
 | T1216.001 | CRITICAL | Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001) |
 | T1217 | HIGH | Ultra-Pro High-Fidelity Browser Information Discovery (T1217) |

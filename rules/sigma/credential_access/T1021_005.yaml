@@ -1,0 +1,65 @@
+title: Ultra-Pro High-Fidelity VNC Lateral Movement & Hijacking (T1021.005)
+id: 54c71906-35b8-466d-acf2-69fa0134ec97
+status: stable
+description: |
+    Detects unauthorized VNC activity by monitoring for portable VNC execution 
+    from suspicious paths, reverse connection attempts, and command-line 
+    credential injection while filtering enterprise remote support tools.
+author: hota05
+date: 2026-02-05
+tags:
+    - attack.lateral_movement
+    - attack.t1021.005
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_vnc_procs:
+        - Image|endswith:
+            - '\vncviewer.exe'
+            - '\winvnc.exe'
+            - '\tvnserver.exe'
+            - '\uvnc_settings.exe'
+        - OriginalFileName:
+            - 'vncviewer.exe'
+            - 'winvnc.exe'
+            - 'tvnserver.exe'
+
+    selection_paths:
+        Image|contains:
+            - '\Temp\'
+            - '\Users\Public\'
+            - '\AppData\Local\'
+            - '\PerfLogs\'
+            - '\\'                   
+
+    selection_args:
+        CommandLine|contains:
+            - ' -connect '           
+            - ' -password '      
+            - ' -passwd '
+            - ' -nomsgbox'       
+            - ' -noauth'            
+            - ' -remoterefresh'     
+
+    selection_lineage:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\psexesvc.exe'      
+            - '\wsmprovhost.exe'     
+        IntegrityLevel: 'System'
+
+    filter_enterprise_vnc:
+        - Image|contains:
+            - 'C:\Program Files\RealVNC\'
+            - 'C:\Program Files\TightVNC\'
+            - 'C:\Program Files\UltraVNC\'
+        - CommandLine|contains:
+            - 'service'              
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith:
+            - '\services.exe'
+
+    condition: (selection_vnc_procs and (selection_paths or selection_args or selection_lineage)) and not filter_enterprise_vnc
+level: critical

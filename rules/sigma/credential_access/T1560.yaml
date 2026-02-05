@@ -13,6 +13,7 @@ tags:
   - attack.collection
   - attack.exfiltration
   - attack.t1560.001
+  - attack.t1560
 
 logsource:
   product: windows

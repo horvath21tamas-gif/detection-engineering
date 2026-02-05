@@ -1,0 +1,60 @@
+title: Ultra-Pro High-Fidelity Cloud Storage Data Theft (T1530)
+id: 67bab759-3ec1-4c55-9884-708042c1ed27
+status: stable
+description: |
+    Detects unauthorized data exfiltration from cloud storage providers (AWS, Azure, GCP) 
+    by identifying suspicious CLI arguments, inline credential injection, and 
+    anomalous process lineages originating from non-admin contexts.
+author: hota05
+date: 2026-02-05
+tags:
+    - attack.collection
+    - attack.t1530
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\aws.exe'
+            - '\az.exe'
+            - '\gsutil.exe'
+            - '\rclone.exe'
+            - '\mc.exe'
+
+    selection_credentials:
+        CommandLine|contains:
+            - '--access-key'
+            - '--secret-key'
+            - '--connection-string'
+            - 'SharedAccessSignature'
+            - '--account-key'
+
+    selection_actions:
+        CommandLine|contains:
+            - ' s3 sync '        
+            - ' storage blob download-batch '
+            - ' cp --recursive '
+            - ' cp -r '
+            - ' ls -R '            
+            - ' --include "*.*"'   
+
+    selection_context:
+        ParentImage|endswith:
+            - '\w3wp.exe'          
+            - '\httpd.exe'       
+            - '\nginx.exe'
+            - '\powershell.exe'
+            - '\cmd.exe'
+        IntegrityLevel: 'Medium' 
+
+    filter_trusted_automation:
+        - CommandLine|contains:
+            - 'Azure-Log-Collector'
+            - 'C:\Program Files\Microsoft SDKs\'
+            - 'cloud-init'
+        - User: 'NT AUTHORITY\SYSTEM' 
+        - ParentImage|contains: '\Jenkins\' 
+
+    condition: selection_tools and (selection_credentials or selection_actions) and selection_context and not filter_trusted_automation
+level: critical

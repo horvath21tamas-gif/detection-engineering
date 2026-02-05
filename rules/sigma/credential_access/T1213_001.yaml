@@ -1,0 +1,61 @@
+title: Ultra-Pro High-Fidelity Confluence Scraping (T1213.001)
+id: adaceb09-0828-45e0-8064-17ba63f5072c
+status: stable
+description: |
+    Detects unauthorized mass content extraction from Atlassian Confluence by 
+    identifying suspicious API-driven read/export patterns originating from 
+    untrusted shell contexts or temporary directories.
+author: hota05
+date: 2026-02-05
+tags:
+    - attack.collection
+    - attack.t1213.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_api_paths:
+        CommandLine|contains:
+            - '/rest/api/space'      
+            - '/rest/api/content'      
+            - '/doexportpage.action'   
+            - '/exportword'           
+            - 'pages/viewpage.action?pageId=' 
+
+    selection_engines:
+        - Image|endswith:
+            - '\curl.exe'
+            - '\wget.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\python.exe'
+            - '\confluence-cli.exe'
+
+    selection_context:
+        ParentImage|endswith:
+            - '\w3wp.exe'            
+            - '\httpd.exe'            
+            - '\winword.exe'        
+            - '\excel.exe'
+            - '\rundll32.exe'
+        IntegrityLevel: 'Medium'       
+
+    selection_staging:
+        CommandLine|contains:
+            - ' > '                  
+            - ' -OutFile '
+            - ' -o '
+            - '\Users\Public\'
+            - '\Temp\'
+
+    filter_trusted_automation:
+        - Image|contains:
+            - 'C:\Program Files\Atlassian\'
+            - 'C:\Program Files (x86)\Atlassian\'
+        - User: 'NT AUTHORITY\SYSTEM'
+        - CommandLine|contains:
+            - 'confluence-healthcheck'
+            - 'inventory-agent'
+
+    condition: selection_api_paths and selection_engines and (selection_context or selection_staging) and not filter_trusted_automation
+level: critical

@@ -127,6 +127,7 @@
 | T1078.002 | HIGH | High-Fidelity Domain Account Lateral Movement Anomaly |
 | T1078.003 | CRITICAL | High-Fidelity Local Account Remote Access Detection |
 | T1078.004 | CRITICAL | High-Fidelity Cloud Account Compromise (Entra ID) |
+| T1080 | HIGH | Ultra-Pro High-Fidelity Taint Shared Content (T1080) |
 | T1082 | HIGH | Ultra-Pro High-Fidelity System Information Discovery (T1082) |
 | T1083 | HIGH | Ultra-Pro High-Fidelity File and Directory Discovery (T1083) |
 | T1087 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |

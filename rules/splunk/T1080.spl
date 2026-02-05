@@ -1,0 +1,4 @@
+
+| rex field=TargetFilename "(?<TargetFilenameMatch>.*\\.(pdf|docx|xlsx|txt)\\.(exe|vbs|ps1|lnk|bat)$)"
+| eval TargetFilenameCondition=if(isnotnull(TargetFilenameMatch), "true", "false")
+| search TargetFilename IN ("*\\*", "*:\\*") TargetFilename IN ("*.docm", "*.dotm", "*.xlsm", "*.lnk", "*.vbs", "*.ps1", "*.bat", "*.chm") (Image IN ("*\\powershell.exe", "*\\pwsh.exe", "*\\cmd.exe", "*\\certutil.exe", "*\\bitsadmin.exe", "*\\curl.exe", "*\\wget.exe") IntegrityLevel="Medium") OR TargetFilenameCondition="true" NOT (Image IN ("*\\winword.exe", "*\\excel.exe", "*\\explorer.exe") OR Image IN ("*C:\\Program Files\\Microsoft Office\\*", "*C:\\Windows\\System32\\msiexec.exe*") OR username="NT AUTHORITY\\SYSTEM")

@@ -52,7 +52,7 @@ detection:
         - Image|contains:
             - 'C:\Program Files\Microsoft Office\'
             - 'C:\Windows\System32\msiexec.exe'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_shares and selection_extensions and (selection_suspicious_procs or selection_masquerade) and not filter_legit_apps
 level: high

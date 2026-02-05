@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*\OneDrive - *", "*\SharePoint\*", "*\Google Drive\*", "*\Dropbox\*")) and (((FolderPath in ("*\robocopy.exe", "*\xcopy.exe", "*\tar.exe", "*\powershell.exe", "*\7z.exe", "*\rar.exe")) or (ProcessCommandLine in ("*Compress-Archive*", "* -Recurse*", "* /s *"))) or (ProcessCommandLine in ("*\Users\Public\*", "*\Windows\Temp\*", "*\AppData\Local\Temp\*", "*C:\ProgramData\*"))) and ((ParentProcessName in ("*\powershell.exe", "*\cmd.exe", "*\w3wp.exe", "*\explorer.exe")) and IntegrityLevel =~ "Medium") and (not ((FolderPath in ("*\OneDrive.exe", "*\GoogleDriveFS.exe", "*\Dropbox.exe")) or (ProcessCommandLine in ("*C:\Program Files\*", "*C:\Windows\System32\*")) or User =~ "NT AUTHORITY\SYSTEM"))

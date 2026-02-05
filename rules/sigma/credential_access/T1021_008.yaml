@@ -1,0 +1,48 @@
+title: Ultra-Pro High-Fidelity macOS ARD Remote Hijacking (T1021.008)
+id: 1026d8a7-5f3c-4a0a-8dc5-7412200c4c7f
+status: stable
+description: |
+    Detects unauthorized activation or modification of Apple Remote Desktop (ARD) 
+    by monitoring the 'kickstart' utility for high-risk flags that grant 
+    universal access, while filtering legitimate MDM (Jamf, Kandji) orchestration.
+author: hota05
+date: 2026-02-05
+tags:
+    - attack.lateral_movement
+    - attack.t1021.008
+logsource:
+    category: process_creation
+    product: macos
+detection:
+    selection_img:
+        Image|endswith: '/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart'
+
+    selection_risk_flags:
+        CommandLine|contains:
+            - '-activate'                   
+            - '-allowAccessFor -allUsers'   
+            - '-privs -all'               
+            - '-clientopts -setmenuextra -menuextra no' 
+
+    selection_suspicious_lineage:
+        ParentImage|endswith:
+            - '/sh'
+            - '/bash'
+            - '/zsh'
+            - '/python'
+            - '/perl'
+            - '/ruby'
+            - '/curl'                      
+        User: 'root'
+
+    filter_mdm_orchestration:
+        - ParentImage|endswith:
+            - '/usr/libexec/admd'           
+            - '/usr/local/jamf/bin/jamf'   
+            - '/usr/local/bin/kandji'     
+        - CommandLine|contains:
+            - '-get_status'                
+            - '-users mdm_admin'            
+
+    condition: selection_img and selection_risk_flags and selection_suspicious_lineage and not filter_mdm_orchestration
+level: critical

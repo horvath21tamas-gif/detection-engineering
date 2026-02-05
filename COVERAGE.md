@@ -37,6 +37,12 @@
 | T1021 | MEDIUM | Rapid Logons to Multiple Distant Hosts by Same User |
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |
 | T1021.002 | HIGH | Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002) |
+| T1021.003 | CRITICAL | Ultra-Pro High-Fidelity DCOM Remote Execution (T1021.003) |
+| T1021.004 | CRITICAL | Ultra-Pro High-Fidelity SSH Lateral Movement & Tunneling (T1021.004) |
+| T1021.005 | CRITICAL | Ultra-Pro High-Fidelity VNC Lateral Movement & Hijacking (T1021.005) |
+| T1021.006 | CRITICAL | Ultra-Pro High-Fidelity WinRM Remote Execution (T1021.006) |
+| T1021.007 | CRITICAL | Ultra-Pro High-Fidelity Cloud Control Plane Hijacking (T1021.007) |
+| T1021.008 | CRITICAL | Ultra-Pro High-Fidelity macOS ARD Remote Hijacking (T1021.008) |
 | T1027 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Encoded PowerShell Command Execution |
 | T1027.001 | HIGH | Ultra-Pro High-Fidelity Binary Padding Activity (T1027.001) |
 | T1027.002 | HIGH | Ultra-Pro High-Fidelity Software Packing Event (T1027.002) |

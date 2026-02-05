@@ -63,7 +63,7 @@ detection:
         - ParentImage|contains: 
             - 'C:\Program Files\Microsoft Monitoring Agent\'
             - 'C:\Program Files\Veritas\'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_tools and (selection_weaponized_args or selection_sensitive_source) and selection_context and not filter_legit_automation
 level: critical

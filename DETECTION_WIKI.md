@@ -22,6 +22,12 @@
 - [Rapid Logons to Multiple Distant Hosts by Same User](#rapid-logons-to-multiple-distant-hosts-by-same-user)
 - [Suspicious RDP Logon from Unusual Source](#suspicious-rdp-logon-from-unusual-source)
 - [Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002)](#ultra-pro-high-fidelity-smb-admin-share-mapping-(t1021002))
+- [Ultra-Pro High-Fidelity DCOM Remote Execution (T1021.003)](#ultra-pro-high-fidelity-dcom-remote-execution-(t1021003))
+- [Ultra-Pro High-Fidelity SSH Lateral Movement & Tunneling (T1021.004)](#ultra-pro-high-fidelity-ssh-lateral-movement-&-tunneling-(t1021004))
+- [Ultra-Pro High-Fidelity VNC Lateral Movement & Hijacking (T1021.005)](#ultra-pro-high-fidelity-vnc-lateral-movement-&-hijacking-(t1021005))
+- [Ultra-Pro High-Fidelity WinRM Remote Execution (T1021.006)](#ultra-pro-high-fidelity-winrm-remote-execution-(t1021006))
+- [Ultra-Pro High-Fidelity Cloud Control Plane Hijacking (T1021.007)](#ultra-pro-high-fidelity-cloud-control-plane-hijacking-(t1021007))
+- [Ultra-Pro High-Fidelity macOS ARD Remote Hijacking (T1021.008)](#ultra-pro-high-fidelity-macos-ard-remote-hijacking-(t1021008))
 - [Suspicious Base64-Encoded PowerShell Command with Network Activity](#suspicious-base64-encoded-powershell-command-with-network-activity)
 - [Ultra-Pro High-Fidelity Binary Padding Activity (T1027.001)](#ultra-pro-high-fidelity-binary-padding-activity-(t1027001))
 - [Ultra-Pro High-Fidelity Software Packing Event (T1027.002)](#ultra-pro-high-fidelity-software-packing-event-(t1027002))
@@ -340,6 +346,7 @@
 - [High-Fidelity Office DDE Contextual Anomaly](#high-fidelity-office-dde-contextual-anomaly)
 - [High-Fidelity Hypervisor API and VM Escape Research](#high-fidelity-hypervisor-api-and-vm-escape-research)
 - [Adatok gyanús archiválása exfiltráció céljából](#adatok-gyanús-archiválása-exfiltráció-céljából)
+- [Ultra-Pro High-Fidelity Data Archiving for Exfiltration (T1560.001)](#ultra-pro-high-fidelity-data-archiving-for-exfiltration-(t1560001))
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
 - [Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002)](#ultra-pro-high-fidelity-disable-windows-event-logging-(t1562002))
@@ -864,6 +871,108 @@ native tools (net.exe, PowerShell) while filtering out standard IT
 orchestration and service-level noise.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity DCOM Remote Execution (T1021.003)
+- **Azonosító:** `T1021_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects lateral movement via DCOM by monitoring suspicious child processes 
+from known vulnerable COM objects. Specifically filters for headless 
+execution and anomalous network-to-process lineage.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity SSH Lateral Movement & Tunneling (T1021.004)
+- **Azonosító:** `T1021_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects advanced SSH lateral movement and tunneling. Filters legitimate 
+DevOps/Git activity by analyzing parent process lineage, command-line 
+entropy, and non-standard authentication patterns.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity VNC Lateral Movement & Hijacking (T1021.005)
+- **Azonosító:** `T1021_005.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized VNC activity by monitoring for portable VNC execution 
+from suspicious paths, reverse connection attempts, and command-line 
+credential injection while filtering enterprise remote support tools.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `005`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity WinRM Remote Execution (T1021.006)
+- **Azonosító:** `T1021_006.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects advanced lateral movement via WinRM by monitoring for high-entropy 
+PowerShell commands, in-memory execution, and suspicious process 
+hollowing attempts originating from the WinRM host process.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `006`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Control Plane Hijacking (T1021.007)
+- **Azonosító:** `T1021_007.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized lateral movement through cloud dashboards by correlating 
+high-risk operations with anomalous user agents, unusual source IPs, and 
+signs of MFA-evasion/automated session hijacking.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `007`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity macOS ARD Remote Hijacking (T1021.008)
+- **Azonosító:** `T1021_008.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized activation or modification of Apple Remote Desktop (ARD) 
+by monitoring the 'kickstart' utility for high-risk flags that grant 
+universal access, while filtering legitimate MDM (Jamf, Kandji) orchestration.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

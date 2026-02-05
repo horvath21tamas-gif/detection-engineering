@@ -1,0 +1,48 @@
+title: Ultra-Pro High-Fidelity Local Session Hijacking (T1563.001)
+id: 9f7216ee-053b-485f-9ede-e3b6c6fd194e
+status: stable
+description: |
+    Detects advanced local session hijacking where tscon.exe is used to attach to 
+    an existing user session. Filters out legitimate RDS/VDI management by 
+    analyzing parent process integrity and command-line entropy.
+author: hota05
+date: 2026-02-05
+tags:
+    - attack.lateral_movement
+    - attack.t1563.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\tscon.exe'
+        - OriginalFileName: 'tscon.exe'
+
+    selection_args:
+        CommandLine|contains:
+            - ' /dest:console'     
+            - 'dest:rdp-tcp#'       
+            - ' /password '          
+
+    selection_suspicious_context:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\psexesvc.exe'         
+            - '\wsmprovhost.exe'   
+            - '\winword.exe'      
+        IntegrityLevel: 'System'    
+
+    filter_legit_orchestration:
+        - ParentImage|endswith:
+            - '\svchost.exe'          
+            - '\winlogon.exe'         
+        - CommandLine|contains:
+            - 'vmsvga'                
+            - 'Citrix'               
+            - 'C:\Program Files\'    
+        - User: 'NT AUTHORITY\NETWORK SERVICE'
+
+    condition: selection_img and (selection_args or selection_suspicious_context) and not filter_legit_orchestration
+level: critical

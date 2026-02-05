@@ -1,0 +1,59 @@
+title: Ultra-Pro High-Fidelity SharePoint Mass Data Exfiltration (T1213.002)
+id: d956d265-2fa3-45e6-a44c-19e84c56e77e
+status: stable
+description: |
+    Detects unauthorized mass data collection from SharePoint by identifying 
+    suspicious PnP PowerShell usage, bulk REST API queries, and unauthorized 
+    SharePoint Online Management Shell activity from non-standard contexts.
+author: hota05
+date: 2026-02-05
+tags:
+    - attack.collection
+    - attack.t1213.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_interfaces:
+        CommandLine|contains:
+            - 'Get-PnP'                 
+            - 'Get-SPO'                 
+            - 'Microsoft.SharePoint.PowerShell'
+            - '/_api/web/lists'         
+            - '/_api/search/query'     
+            - 'Connect-PnPOnline'       
+
+    selection_bulk_args:
+        CommandLine|contains:
+            - ' -All'                    
+            - ' -Recurse'                
+            - ' -PageSize 1000'          
+            - ' -Limit All'
+            - 'Export-PnPListItem'
+
+    selection_context:
+        ParentImage|endswith:
+            - '\powershell.exe'        
+            - '\cmd.exe'
+            - '\w3wp.exe'               
+            - '\explorer.exe'          
+        IntegrityLevel: 'Medium'         
+
+    selection_staging:
+        CommandLine|contains:
+            - '\Users\Public\'
+            - '\Windows\Temp\'
+            - '\AppData\Local\Temp\'
+            - ' -OutFile '               
+
+    filter_trusted_automation:
+        - Image|contains:
+            - 'C:\Program Files\SharePoint Online Management Shell\'
+            - 'C:\Program Files\Microsoft SDKs\SharePoint\'
+        - User: 'NT AUTHORITY\SYSTEM'    
+        - CommandLine|contains:
+            - 'OneDrive.exe'            
+            - 'OfficeClickToRun.exe'
+
+    condition: selection_interfaces and (selection_bulk_args or selection_staging) and selection_context and not filter_trusted_automation
+level: critical

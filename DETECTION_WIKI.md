@@ -171,6 +171,7 @@
 - [Ultra-Pro Office Add-in Binary Persistence (T1137.006)](#ultra-pro-office-add-in-binary-persistence-(t1137006))
 - [Ultra-Pro Stealthy Deobfuscation/Decoding (T1140)](#ultra-pro-stealthy-deobfuscationdecoding-(t1140))
 - [Ultra-Pro Browser Extension Force-Install Persistence (T1176)](#ultra-pro-browser-extension-force-install-persistence-(t1176))
+- [Ultra-Pro High-Fidelity Browser Session Hijacking (T1185)](#ultra-pro-high-fidelity-browser-session-hijacking-(t1185))
 - [Ultra-Pro High-Fidelity Forced Authentication (T1187)](#ultra-pro-high-fidelity-forced-authentication-(t1187))
 - [Browser-Originating Shell or System Tool Execution](#browser-originating-shell-or-system-tool-execution)
 - [Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server](#suspicious-cross-site-scripting-(xss)-attempt-detected-on-web-server)
@@ -3377,6 +3378,23 @@ Attackers use these to force-install malicious extensions that cannot be removed
 and to allow installation from non-official webstores.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1176`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Browser Session Hijacking (T1185)
+- **Azonosító:** `T1185.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects advanced browser session hijacking by monitoring unauthorized access 
+to cookie databases from untrusted/unsigned processes or suspicious locations 
+like \Temp or \AppData.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1185`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.

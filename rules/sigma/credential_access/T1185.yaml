@@ -53,7 +53,7 @@ detection:
             - 'C:\Program Files (x86)\'
             - 'C:\Windows\System32\'
 
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_target_files and (selection_suspicious_source or selection_shell_access) and not (filter_browsers or filter_trusted_apps)
 level: critical

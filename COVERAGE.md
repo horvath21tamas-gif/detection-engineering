@@ -186,6 +186,7 @@
 | T1137.006 | CRITICAL | Ultra-Pro Office Add-in Binary Persistence (T1137.006) |
 | T1140 | HIGH | Ultra-Pro Stealthy Deobfuscation/Decoding (T1140) |
 | T1176 | CRITICAL | Ultra-Pro Browser Extension Force-Install Persistence (T1176) |
+| T1185 | CRITICAL | Ultra-Pro High-Fidelity Browser Session Hijacking (T1185) |
 | T1187 | CRITICAL | Ultra-Pro High-Fidelity Forced Authentication (T1187) |
 | T1189 | CRITICAL | Browser-Originating Shell or System Tool Execution |
 | T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |

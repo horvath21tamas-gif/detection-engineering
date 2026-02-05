@@ -144,6 +144,7 @@
 - [Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111)](#ultra-pro-high-fidelity-mfa-evasion-&-session-hijacking-(t1111))
 - [Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112)](#ultra-pro-high-fidelity-registry-tampering-for-evasion-(t1112))
 - [Ultra-Pro High-Fidelity Peripheral Device Discovery (T1120)](#ultra-pro-high-fidelity-peripheral-device-discovery-(t1120))
+- [Ultra-Pro High-Fidelity Audio Capture & Spying (T1123)](#ultra-pro-high-fidelity-audio-capture-&-spying-(t1123))
 - [Ultra-Pro High-Fidelity System Time Discovery (T1124)](#ultra-pro-high-fidelity-system-time-discovery-(t1124))
 - [Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)](#ultra-pro-high-fidelity-trusted-developer-utility-proxy-(t1127))
 - [Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001)](#ultra-pro-high-fidelity-msbuild-proxy-execution-(t1127001))
@@ -2919,6 +2920,23 @@ Filters out legitimate system PnP activity and driver management by analyzing
 process integrity, parent-child relationships, and specific metadata queries.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1120`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Audio Capture & Spying (T1123)
+- **Azonosító:** `T1123.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized audio recording by correlating low-level multimedia API 
+calls (winmm, dsound) with suspicious process lineages (Shells, Office, W3WP) 
+and anomalous command-line arguments used by offensive toolsets.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1123`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

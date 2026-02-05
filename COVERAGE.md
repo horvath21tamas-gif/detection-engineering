@@ -159,6 +159,7 @@
 | T1111 | CRITICAL | Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111) |
 | T1112 | CRITICAL | Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112) |
 | T1120 | HIGH | Ultra-Pro High-Fidelity Peripheral Device Discovery (T1120) |
+| T1123 | CRITICAL | Ultra-Pro High-Fidelity Audio Capture & Spying (T1123) |
 | T1124 | HIGH | Ultra-Pro High-Fidelity System Time Discovery (T1124) |
 | T1127 | CRITICAL | Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127), Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001) |
 | T1127.001 | CRITICAL | Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001) |

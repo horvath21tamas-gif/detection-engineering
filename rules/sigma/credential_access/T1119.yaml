@@ -56,7 +56,7 @@ detection:
         - CommandLine|contains:
             - ' -Filter *.log'        
             - 'HealthCheck'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_logic and selection_extensions and selection_staging and selection_context and not filter_trusted_systems
 level: critical

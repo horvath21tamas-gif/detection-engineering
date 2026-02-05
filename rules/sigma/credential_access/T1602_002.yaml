@@ -1,0 +1,63 @@
+title: Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002)
+id: 0d87fabb-a7b4-4220-81e5-6a19ae93eb39
+status: stable
+description: |
+    Detects highly suspicious mass data collection from cloud sync roots (OneDrive, 
+    SharePoint, Google Drive) by monitoring for recursive read/copy patterns 
+    combined with archival tools or suspicious staging destinations.
+author: hota05
+date: 2026-02-05
+tags:
+    - attack.collection
+    - attack.t1602.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cloud_paths:
+        CommandLine|contains:
+            - '\OneDrive - '         
+            - '\SharePoint\'        
+            - '\Google Drive\'
+            - '\Dropbox\'
+
+    selection_tools:
+        - Image|endswith:
+            - '\robocopy.exe'
+            - '\xcopy.exe'
+            - '\tar.exe'             
+            - '\powershell.exe'
+            - '\7z.exe'
+            - '\rar.exe'
+        - CommandLine|contains:
+            - 'Compress-Archive'
+            - ' -Recurse'
+            - ' /s '
+
+    selection_staging:
+        CommandLine|contains:
+            - '\Users\Public\'
+            - '\Windows\Temp\'
+            - '\AppData\Local\Temp\'
+            - 'C:\ProgramData\'
+
+    selection_context:
+        ParentImage|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\w3wp.exe'         
+            - '\explorer.exe'   
+        IntegrityLevel: 'Medium'   
+
+    filter_trusted_apps:
+        - Image|endswith:
+            - '\OneDrive.exe'
+            - '\GoogleDriveFS.exe'
+            - '\Dropbox.exe'
+        - CommandLine|contains:
+            - 'C:\Program Files\'  
+            - 'C:\Windows\System32\'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_cloud_paths and (selection_tools or selection_staging) and selection_context and not filter_trusted_apps
+level: critical

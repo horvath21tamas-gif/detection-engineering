@@ -58,7 +58,7 @@ detection:
             - 'git-upload-pack'
             - 'git-receive-pack'
             - 'vscode-remote'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_img and (selection_tunneling or selection_suspicious_lineage or selection_sshd_payload)) and not filter_devops_tools
 level: critical

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ParentProcessName endswith "\wsmprovhost.exe" and ParentProcessCommandLine contains " -Embedding") and ((ProcessCommandLine in ("* -enc *", "* -encodedcommand *", "* -e *", "* [Convert]::ToBase64String*")) or (ProcessCommandLine in ("*Runtime.InteropServices.Marshal*", "*Reflection.Assembly*", "*VirtualAlloc*", "*DownloadString*", "*IEX*")) or (FolderPath in ("*\certutil.exe", "*\whoami.exe", "*\nltest.exe", "*\net.exe", "*\findstr.exe", "*\adsiedit.msc"))) and (not ((ProcessCommandLine in ("*C:\Packages\Plugins\*", "*Monitoring*", "*HealthCheck*")) or ParentProcessName contains "C:\Windows\System32\svchost.exe" or User =~ "NT AUTHORITY\SYSTEM"))

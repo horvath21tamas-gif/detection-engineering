@@ -1,0 +1,2 @@
+((((process = '*\\tscon.exe*'))|| ((OriginalFileName = '*tscon.exe*'))) AND ((((param = '* /dest:*' OR param = '* /password:*' OR param = '*dest:console*'))) OR ((((ParentImage = '*\\cmd.exe*' OR ParentImage = '*\\powershell.exe*' OR ParentImage = '*\\pwsh.exe*' OR ParentImage = '*\\psexesvc.exe*' OR ParentImage = '*\\wsmprovhost.exe*' OR ParentImage = '*\\httpd.exe*'))) AND ((IntegrityLevel = '*System*'))))) AND (NOT (((((ParentImage = '*\\svchost.exe*' OR ParentImage = '*\\rdpinit.exe*'))) OR (((param = '*vmsvga*' OR param = '*Citrix*')))))
+)

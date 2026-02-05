@@ -350,6 +350,7 @@
 - [Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010)](#ultra-pro-high-fidelity-defense-downgrade-attack-(t1562010))
 - [Ultra-Pro High-Fidelity Virtualization and Sandbox Evasion (T1564.011)](#ultra-pro-high-fidelity-virtualization-and-sandbox-evasion-(t1564011))
 - [Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012)](#ultra-pro-high-fidelity-cloud-security-infrastructure-impairment-(t1562012))
+- [Ultra-Pro High-Fidelity Remote Service Session Hijacking (T1563)](#ultra-pro-high-fidelity-remote-service-session-hijacking-(t1563))
 - [Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564)](#ultra-pro-high-fidelity-hide-artifacts-detection-(t1564))
 - [Ultra-Pro High-Fidelity Hidden File Attribute Manipulation (T1564.001)](#ultra-pro-high-fidelity-hidden-file-attribute-manipulation-(t1564001))
 - [Ultra-Pro High-Fidelity Hidden User Account Creation (T1564.002)](#ultra-pro-high-fidelity-hidden-user-account-creation-(t1564002))
@@ -6322,6 +6323,24 @@ threat intelligence sabotage by non-automated or root identities.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Remote Service Session Hijacking (T1563)
+- **Azonosító:** `T1563.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects RDP/Terminal session hijacking by monitoring tscon.exe execution 
+patterns. Focuses on anomalous parent processes and specific command-line 
+switches used to redirect user sessions to the attacker's terminal 
+without credential authentication.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-04 12:36:53`
+**Utolsó frissítés:** `2026-02-05 06:59:06`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 507 | 100% |
-| Splunk (SPL) | 498 | 98.2% |
-| Microsoft Sentinel (KQL) | 500 | 98.6% |
-| QRadar (AQL) | 210 | 41.4% |
-| Elastic (KQL/EQL) | 500 | 98.6% |
-| RSA NetWitness | 497 | 98.0% |
+| Sigma (Forrás) | 514 | 100% |
+| Splunk (SPL) | 505 | 98.2% |
+| Microsoft Sentinel (KQL) | 507 | 98.6% |
+| QRadar (AQL) | 211 | 41.1% |
+| Elastic (KQL/EQL) | 507 | 98.6% |
+| RSA NetWitness | 504 | 98.1% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -365,6 +365,7 @@
 | T1562.010 | CRITICAL | Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010) |
 | T1562.011 | HIGH | Ultra-Pro High-Fidelity Virtualization and Sandbox Evasion (T1564.011) |
 | T1562.012 | CRITICAL | Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012) |
+| T1563.002 | CRITICAL | Ultra-Pro High-Fidelity Remote Service Session Hijacking (T1563) |
 | T1564 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
 | T1564.001 | HIGH | Ultra-Pro High-Fidelity Hidden File Attribute Manipulation (T1564.001), Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
 | T1564.002 | CRITICAL | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564), Ultra-Pro High-Fidelity Hidden User Account Creation (T1564.002) |

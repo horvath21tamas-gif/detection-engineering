@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath endswith "\tscon.exe" or OriginalFileName =~ "tscon.exe") and ((ProcessCommandLine in ("* /dest:*", "* /password:*", "*dest:console*")) or ((ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\psexesvc.exe", "*\wsmprovhost.exe", "*\httpd.exe")) and IntegrityLevel =~ "System"))) and (not ((ParentProcessName in ("*\svchost.exe", "*\rdpinit.exe")) or (ProcessCommandLine in ("*vmsvga*", "*Citrix*"))))

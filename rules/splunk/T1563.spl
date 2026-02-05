@@ -1,0 +1,1 @@
+Image="*\\tscon.exe" OR OriginalFileName="tscon.exe" CommandLine IN ("* /dest:*", "* /password:*", "*dest:console*") OR (ParentImage IN ("*\\cmd.exe", "*\\powershell.exe", "*\\pwsh.exe", "*\\psexesvc.exe", "*\\wsmprovhost.exe", "*\\httpd.exe") IntegrityLevel="System") NOT (ParentImage IN ("*\\svchost.exe", "*\\rdpinit.exe") OR CommandLine IN ("*vmsvga*", "*Citrix*"))

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (operationNameValue in ("Microsoft.Compute/virtualMachines/runCommand/action", "Microsoft.Compute/virtualMachines/extensions/write", "Microsoft.Resources/deployments/write", "Microsoft.Network/networkSecurityGroups/securityRules/write", "Microsoft.Web/sites/config/listcallbacks/action")) and (callerIpAddress_not_in in ("1.2.3.4/32", "5.6.7.8/24")) and ((userAgent_contains in ("python-requests", "Go-http-client", "curl", "Postman", "Az.Compute")) or (['properties.authenticationMethod_not'] =~ "MFA" and ['properties.resultSignature'] =~ "Succeeded")) and (not (caller_contains =~ "service-principal" or userAgent_contains =~ "HashiCorp/Terraform" or (operationNameValue =~ "Microsoft.Compute/virtualMachines/runCommand/action" and caller =~ "system-auto-patcher@company.com")))

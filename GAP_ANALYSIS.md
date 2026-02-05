@@ -14,6 +14,7 @@ Az alábbi szabályok **inaktívak**, mert a SIEM nem küldi a szükséges logok
 
 | Szabály | Hiányzó forrás |
 | :--- | :--- |
+| Ultra-Pro High-Fidelity Cloud Control Plane Hijacking (T1021.007) (`T1021_007.yaml`) | service: `activitylogs` |
 | Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003) (`T1069_003.yaml`) | service: `azure_ad` |
 
 ## 🛡️ Stratégiai Teendők (Hiányzó Technikák)

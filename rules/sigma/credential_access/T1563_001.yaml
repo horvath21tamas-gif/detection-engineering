@@ -42,7 +42,7 @@ detection:
             - 'vmsvga'                
             - 'Citrix'               
             - 'C:\Program Files\'    
-        - User: 'NT AUTHORITY\NETWORK SERVICE'
+        - username: 'NT AUTHORITY\NETWORK SERVICE'
 
     condition: selection_img and (selection_args or selection_suspicious_context) and not filter_legit_orchestration
 level: critical

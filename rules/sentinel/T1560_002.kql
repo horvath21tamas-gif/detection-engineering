@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*System.IO.Compression*", "*Compress-Archive*", "*zipfile*", "*IO.Compression.FileSystem*")) and ((ProcessCommandLine in ("* -enc *", "* -e *", "* -DestinationPath *", "* -Update*", "* [Convert]::ToBase64*")) or (ProcessCommandLine in ("*\Desktop*", "*\Documents*", "*\AppData\Local\Microsoft\Outlook*", "*C:\inetpub\*", "*C:\Users\Public*"))) and ((ParentProcessName in ("*\w3wp.exe", "*\httpd.exe", "*\winword.exe", "*\cmd.exe", "*\powershell.exe")) and IntegrityLevel =~ "Medium") and (not ((FolderPath in ("*C:\Program Files\Microsoft Visual Studio\*", "*C:\Program Files\Azure\*")) or (ProcessCommandLine in ("*C:\Windows\CCM\*", "*C:\ProgramData\Microsoft\Intune\*")) or User =~ "NT AUTHORITY\SYSTEM"))

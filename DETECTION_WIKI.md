@@ -6276,6 +6276,23 @@ parameters associated with VM escape or sandbox evasion.
 
 ---
 
+## Ultra-Pro High-Fidelity Data Archiving via Library (T1560.002)
+- **Azonosító:** `T1560_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects advanced data staging for exfiltration using .NET/PowerShell 
+compression libraries. Filters enterprise automation by analyzing 
+parent process lineage, command-line entropy, and integrity levels.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Biztonsági szolgáltatások gyanús leállítása
 - **Azonosító:** `T1562.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)

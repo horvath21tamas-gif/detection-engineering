@@ -54,7 +54,7 @@ detection:
         - CommandLine|contains:
             - 'C:\Windows\CCM\'         
             - 'C:\ProgramData\Microsoft\Intune\'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_api and (selection_suspicious_args or selection_paths) and selection_context and not filter_enterprise_apps
 level: critical

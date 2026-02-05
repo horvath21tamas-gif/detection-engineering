@@ -53,7 +53,7 @@ detection:
         IntegrityLevel: 'Medium'     
 
     filter_legit_automation:
-        - User: 'NT AUTHORITY\SYSTEM' 
+        - username: 'NT AUTHORITY\SYSTEM' 
         - ParentImage|endswith:
             - '\services.exe'
             - '\CcmExec.exe'         

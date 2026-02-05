@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\net.exe", "*\net1.exe", "*\powershell.exe", "*\pwsh.exe", "*\cmd.exe")) or (OriginalFileName in ("net.exe", "net1.exe", "PowerShell.EXE"))) and (ProcessCommandLine in ("*\C$\*", "*\ADMIN$\*", "*\IPC$\*", "*admin$*", "*c$*", "*ipc$*")) and (ProcessCommandLine in ("*use *", "*New-PSDrive*", "* /user:*", "* /p:*", "* /u:*"))) or (((ProcessCommandLine in ("*\C$\*", "*\ADMIN$\*", "*\IPC$\*", "*admin$*", "*c$*", "*ipc$*")) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\httpd.exe", "*\w3wp.exe", "*\sqlservr.exe")) and IntegrityLevel =~ "Medium")) and (not (User =~ "NT AUTHORITY\SYSTEM" or (ParentProcessName in ("*\services.exe", "*\CcmExec.exe", "*\msiexec.exe", "*\Veeam\")) or (ProcessCommandLine in ("*\SoftwareDistribution*", "*C:\Program Files\*", "*HealthCheck*")))))

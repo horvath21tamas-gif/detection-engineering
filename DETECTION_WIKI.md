@@ -21,6 +21,7 @@
 - [Ultra-Pro High-Fidelity Remote System Discovery (T1018)](#ultra-pro-high-fidelity-remote-system-discovery-(t1018))
 - [Rapid Logons to Multiple Distant Hosts by Same User](#rapid-logons-to-multiple-distant-hosts-by-same-user)
 - [Suspicious RDP Logon from Unusual Source](#suspicious-rdp-logon-from-unusual-source)
+- [Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002)](#ultra-pro-high-fidelity-smb-admin-share-mapping-(t1021002))
 - [Suspicious Base64-Encoded PowerShell Command with Network Activity](#suspicious-base64-encoded-powershell-command-with-network-activity)
 - [Ultra-Pro High-Fidelity Binary Padding Activity (T1027.001)](#ultra-pro-high-fidelity-binary-padding-activity-(t1027001))
 - [Ultra-Pro High-Fidelity Software Packing Event (T1027.002)](#ultra-pro-high-fidelity-software-packing-event-(t1027002))
@@ -848,6 +849,23 @@ browsers, and inventory agents using integrity levels and parent process gating.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+
+---
+
+## Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002)
+- **Azonosító:** `T1021_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted access to administrative shares (C$, ADMIN$, IPC$) using 
+native tools (net.exe, PowerShell) while filtering out standard IT 
+orchestration and service-level noise.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
 

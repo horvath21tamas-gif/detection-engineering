@@ -36,6 +36,7 @@
 | T1018 | HIGH | Ultra-Pro High-Fidelity Remote System Discovery (T1018) |
 | T1021 | MEDIUM | Rapid Logons to Multiple Distant Hosts by Same User |
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |
+| T1021.002 | HIGH | Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002) |
 | T1027 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Encoded PowerShell Command Execution |
 | T1027.001 | HIGH | Ultra-Pro High-Fidelity Binary Padding Activity (T1027.001) |
 | T1027.002 | HIGH | Ultra-Pro High-Fidelity Software Packing Event (T1027.002) |

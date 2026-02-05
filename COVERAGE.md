@@ -258,6 +258,7 @@
 | T1525 | CRITICAL | Exploit-Grade Unauthorized Container Image Execution (Implant Container Image) |
 | T1526 | HIGH | Ultra-Pro High-Fidelity Cloud Service Discovery (T1526) |
 | T1528 | CRITICAL | Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528) |
+| T1530 | CRITICAL | Ultra-Pro High-Fidelity Cloud Storage Data Theft (T1530) |
 | T1534 | CRITICAL | Ultra-Pro High-Fidelity Internal Spearphishing Detection (T1534) |
 | T1535 | CRITICAL | Ultra-Pro High-Fidelity Unused Service Manipulation (T1535) |
 | T1538 | HIGH | Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538) |

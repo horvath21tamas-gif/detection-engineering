@@ -6158,7 +6158,7 @@ parameters associated with VM escape or sandbox evasion.
 - **Kritikusság:** 🟠 (high)
 - **Leírás:** Észleli a fájlok gyanús tömörítését és archiválását (7z, rar, tar, PowerShell), különösen ha jelszavas védelmet  alkalmaznak vagy gyanús ideiglenes könyvtárakat használnak célhelyként.
 - **Hamis pozitívok:** Rendszergazdai mentési scriptek, Szoftverfrissítések, amelyek ideiglenes mappákban tömörítenek, Felhasználók, akik jelszóval védett tömörítményt készítenek legális célból
-- **MITRE ATT&CK:** `001`
+- **MITRE ATT&CK:** `001, T1560`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

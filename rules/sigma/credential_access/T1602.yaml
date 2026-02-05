@@ -58,7 +58,7 @@ detection:
         - CommandLine|contains:
             - 'SoftwareDistribution'  
             - '.log'                  
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_automation_logic and selection_network_path and selection_sensitive_files and selection_context and not filter_trusted_systems
 level: critical

@@ -514,6 +514,7 @@
 | T1601 | CRITICAL | Ultra-Pro High-Fidelity Network OS Image Modification (T1601) |
 | T1601.001 | CRITICAL | Ultra-Pro High-Fidelity Network Binary Patching (T1601.001) |
 | T1601.002 | CRITICAL | Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002) |
+| T1602 | CRITICAL | Ultra-Pro High-Fidelity Network Share Automated Collection (T1602) |
 | T1606 | CRITICAL | Ultra-Pro High-Fidelity Web Token Forgery (T1606) |
 | T1606.001 | CRITICAL | Ultra-Pro High-Fidelity Web Cookie Harvesting (T1606.001) |
 | T1606.002 | CRITICAL | Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002) |

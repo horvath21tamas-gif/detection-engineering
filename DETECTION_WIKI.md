@@ -499,6 +499,7 @@
 - [Ultra-Pro High-Fidelity Network OS Image Modification (T1601)](#ultra-pro-high-fidelity-network-os-image-modification-(t1601))
 - [Ultra-Pro High-Fidelity Network Binary Patching (T1601.001)](#ultra-pro-high-fidelity-network-binary-patching-(t1601001))
 - [Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002)](#ultra-pro-high-fidelity-malicious-network-os-upgrade-(t1601002))
+- [Ultra-Pro High-Fidelity Network Share Automated Collection (T1602)](#ultra-pro-high-fidelity-network-share-automated-collection-(t1602))
 - [Ultra-Pro High-Fidelity Web Token Forgery (T1606)](#ultra-pro-high-fidelity-web-token-forgery-(t1606))
 - [Ultra-Pro High-Fidelity Web Cookie Harvesting (T1606.001)](#ultra-pro-high-fidelity-web-cookie-harvesting-(t1606001))
 - [Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002)](#ultra-pro-high-fidelity-web-token-forgery-&-golden-saml-(t1606002))
@@ -8717,6 +8718,23 @@ cryptographic signature failures.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Network Share Automated Collection (T1602)
+- **Azonosító:** `T1602.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects highly suspicious, automated data collection from network shares by 
+identifying the combination of UNC path traversal, sensitive file extensions, 
+and recursive copying logic originating from untrusted process lineages.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1602`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

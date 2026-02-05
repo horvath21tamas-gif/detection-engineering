@@ -1,0 +1,69 @@
+title: Ultra-Pro High-Fidelity Data Archiving for Exfiltration (T1560.001)
+id: 6174cd26-d2a2-4499-9d7d-efe74520f85a
+status: stable
+description: |
+    Detects advanced data staging for exfiltration by monitoring for high-entropy 
+    archive creation, unusual volume splitting, and password-protected 
+    compression originating from non-administrative or interactive shell contexts.
+author: hota05
+date: 2026-02-05
+tags:
+    - attack.collection
+    - attack.exfiltration
+    - attack.t1560.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\7z.exe'
+            - '\7za.exe'
+            - '\winrar.exe'
+            - '\rar.exe'
+            - '\tar.exe'
+            - '\zip.exe'
+        - OriginalFileName:
+            - '7z.exe'
+            - '7za.exe'
+            - 'WinRAR.exe'
+            - 'rar.exe'
+            - 'tar.exe'
+
+    selection_weaponized_args:
+        CommandLine|contains:
+            - ' -p'                
+            - ' -hp'              
+            - ' -v'               
+            - ' -ta'             
+            - ' -sdel'            
+            - ' -m0='             
+
+    selection_sensitive_source:
+        CommandLine|contains:
+            - '\Desktop'
+            - '\Documents'
+            - '\AppData\Local\Microsoft\Outlook'
+            - 'C:\inetpub\'                       
+            - 'C:\Users\Public'                    
+
+    selection_context:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\w3wp.exe'          
+        IntegrityLevel: 'Medium'   
+
+    filter_legit_automation:
+        - CommandLine|contains:
+            - 'C:\Program Files\Backup'
+            - 'C:\Windows\Temp\Inv'   
+        - ParentImage|contains: 
+            - 'C:\Program Files\Microsoft Monitoring Agent\'
+            - 'C:\Program Files\Veritas\'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_tools and (selection_weaponized_args or selection_sensitive_source) and selection_context and not filter_legit_automation
+level: critical

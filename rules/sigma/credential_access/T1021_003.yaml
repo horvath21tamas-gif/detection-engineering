@@ -55,7 +55,7 @@ detection:
             - '.msc'                 
         - ParentCommandLine|contains:
             - 'servermanager.msc'   
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_parent and selection_child and (selection_args or selection_headless)) and not filter_legit_msc
 level: critical

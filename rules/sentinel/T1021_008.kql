@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where FolderPath endswith "/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart" and (ProcessCommandLine in ("*-activate*", "*-allowAccessFor -allUsers*", "*-privs -all*", "*-clientopts -setmenuextra -menuextra no*")) and ((ParentProcessName in ("*/sh", "*/bash", "*/zsh", "*/python", "*/perl", "*/ruby", "*/curl")) and User =~ "root") and (not ((ParentProcessName in ("*/usr/libexec/admd", "*/usr/local/jamf/bin/jamf", "*/usr/local/bin/kandji")) or (ProcessCommandLine in ("*-get_status*", "*-users mdm_admin*"))))
+| where FolderPath endswith "/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart" and (ProcessCommandLine in ("*-activate*", "*-allowAccessFor -allUsers*", "*-privs -all*", "*-clientopts -setmenuextra -menuextra no*")) and ((ParentProcessName in ("*/sh", "*/bash", "*/zsh", "*/python", "*/perl", "*/ruby", "*/curl")) and username =~ "root") and (not ((ParentProcessName in ("*/usr/libexec/admd", "*/usr/local/jamf/bin/jamf", "*/usr/local/bin/kandji")) or (ProcessCommandLine in ("*-get_status*", "*-users mdm_admin*"))))

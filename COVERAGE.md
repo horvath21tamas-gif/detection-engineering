@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-05 07:14:50`
+**Utolsó frissítés:** `2026-02-05 07:44:04`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 521 | 100% |
-| Splunk (SPL) | 512 | 98.3% |
-| Microsoft Sentinel (KQL) | 514 | 98.7% |
-| QRadar (AQL) | 211 | 40.5% |
-| Elastic (KQL/EQL) | 514 | 98.7% |
-| RSA NetWitness | 511 | 98.1% |
+| Sigma (Forrás) | 527 | 100% |
+| Splunk (SPL) | 518 | 98.3% |
+| Microsoft Sentinel (KQL) | 520 | 98.7% |
+| QRadar (AQL) | 213 | 40.4% |
+| Elastic (KQL/EQL) | 520 | 98.7% |
+| RSA NetWitness | 517 | 98.1% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -361,7 +361,9 @@
 | T1559.002 | CRITICAL | High-Fidelity Office DDE Contextual Anomaly, High-Fidelity Indirect IPC and COM Execution |
 | T1559.003 | HIGH | High-Fidelity Hypervisor API and VM Escape Research |
 | T1560 | HIGH | Adatok gyanús archiválása exfiltráció céljából |
-| T1560.001 | HIGH | Adatok gyanús archiválása exfiltráció céljából |
+| T1560.001 | CRITICAL | Adatok gyanús archiválása exfiltráció céljából, Ultra-Pro High-Fidelity Data Archiving for Exfiltration (T1560.001) |
+| T1560.002 | CRITICAL | Ultra-Pro High-Fidelity Data Archiving via Library (T1560.002) |
+| T1560.003 | CRITICAL | Ultra-Pro High-Fidelity Archive via Custom Method (T1560.003) |
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.002 | CRITICAL | Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002) |
@@ -374,6 +376,7 @@
 | T1562.010 | CRITICAL | Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010) |
 | T1562.011 | HIGH | Ultra-Pro High-Fidelity Virtualization and Sandbox Evasion (T1564.011) |
 | T1562.012 | CRITICAL | Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012) |
+| T1563 | CRITICAL | Ultra-Pro High-Fidelity Remote Service Session Hijacking (T1563) |
 | T1563.001 | CRITICAL | Ultra-Pro High-Fidelity Local Session Hijacking (T1563.001) |
 | T1563.002 | CRITICAL | Ultra-Pro High-Fidelity Remote Service Session Hijacking (T1563), Ultra-Pro High-Fidelity RDP Session Hijacking (T1563.002) |
 | T1564 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |

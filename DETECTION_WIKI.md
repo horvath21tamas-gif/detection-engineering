@@ -347,6 +347,8 @@
 - [High-Fidelity Hypervisor API and VM Escape Research](#high-fidelity-hypervisor-api-and-vm-escape-research)
 - [Adatok gyanús archiválása exfiltráció céljából](#adatok-gyanús-archiválása-exfiltráció-céljából)
 - [Ultra-Pro High-Fidelity Data Archiving for Exfiltration (T1560.001)](#ultra-pro-high-fidelity-data-archiving-for-exfiltration-(t1560001))
+- [Ultra-Pro High-Fidelity Data Archiving via Library (T1560.002)](#ultra-pro-high-fidelity-data-archiving-via-library-(t1560002))
+- [Ultra-Pro High-Fidelity Archive via Custom Method (T1560.003)](#ultra-pro-high-fidelity-archive-via-custom-method-(t1560003))
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
 - [Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002)](#ultra-pro-high-fidelity-disable-windows-event-logging-(t1562002))
@@ -6276,15 +6278,15 @@ parameters associated with VM escape or sandbox evasion.
 
 ---
 
-## Ultra-Pro High-Fidelity Data Archiving via Library (T1560.002)
-- **Azonosító:** `T1560_002.yaml`
+## Ultra-Pro High-Fidelity Data Archiving for Exfiltration (T1560.001)
+- **Azonosító:** `T1560_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
-- **Leírás:** Detects advanced data staging for exfiltration using .NET/PowerShell 
-compression libraries. Filters enterprise automation by analyzing 
-parent process lineage, command-line entropy, and integrity levels.
+- **Leírás:** Detects advanced data staging for exfiltration by monitoring for high-entropy 
+archive creation, unusual volume splitting, and password-protected 
+compression originating from non-administrative or interactive shell contexts.
 - **Hamis pozitívok:** Nincs megadva
-- **MITRE ATT&CK:** `002`
+- **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -6534,7 +6536,7 @@ patterns. Focuses on anomalous parent processes and specific command-line
 switches used to redirect user sessions to the attacker's terminal 
 without credential authentication.
 - **Hamis pozitívok:** Nincs megadva
-- **MITRE ATT&CK:** `002`
+- **MITRE ATT&CK:** `002, T1563`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

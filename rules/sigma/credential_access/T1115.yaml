@@ -49,7 +49,7 @@ detection:
         - ParentImage|endswith:
             - '\explorer.exe'       
             - '\taskhostw.exe'      
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_api_calls and selection_loop) or (selection_context and selection_api_calls) and not filter_legit_apps
 level: critical

@@ -1,0 +1,47 @@
+title: Ultra-Pro High-Fidelity Remote Service Session Hijacking (T1563)
+id: bd069dc8-5feb-42b8-a5b5-f626509bb7ed
+status: stable
+description: |
+    Detects RDP/Terminal session hijacking by monitoring tscon.exe execution 
+    patterns. Focuses on anomalous parent processes and specific command-line 
+    switches used to redirect user sessions to the attacker's terminal 
+    without credential authentication.
+author: hota05
+date: 2026-02-05
+tags:
+    - attack.lateral_movement
+    - attack.t1563.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        - Image|endswith: '\tscon.exe'
+        - OriginalFileName: 'tscon.exe'
+
+    selection_args:
+        CommandLine|contains:
+            - ' /dest:'              
+            - ' /password:'       
+            - 'dest:console'        
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\psexesvc.exe'      
+            - '\wsmprovhost.exe'   
+            - '\httpd.exe'            
+        IntegrityLevel: 'System' 
+
+    filter_legit_service:
+        - ParentImage|endswith:
+            - '\svchost.exe'         
+            - '\rdpinit.exe'
+        - CommandLine|contains:
+            - 'vmsvga'              
+            - 'Citrix'            
+
+    condition: (selection_img and (selection_args or selection_suspicious_parent)) and not filter_legit_service
+level: critical

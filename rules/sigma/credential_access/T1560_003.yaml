@@ -1,0 +1,57 @@
+title: Ultra-Pro High-Fidelity Archive via Custom Method (T1560.003)
+id: f4b47d75-f27a-46ca-95da-00ed4719da0d
+status: stable
+description: |
+    Detects custom data collection by monitoring for byte-level file access 
+    combined with manual encoding (XOR, Base64) originating from 
+    interactive shells or suspicious parent processes like web servers.
+author: hota05
+date: 2026-02-05
+tags:
+    - attack.collection
+    - attack.exfiltration
+    - attack.t1560.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_byte_stream:
+        CommandLine|contains:
+            - '[System.IO.File]::ReadAllBytes' 
+            - 'WriteAllBytes'                
+            - 'MemoryStream'                
+            - '.ToArray()'                   
+            - 'b64'                          
+.
+    selection_obfuscation:
+        CommandLine|contains:
+            - 'bxor'                          
+            - '-bxor'
+            - '0x'                            
+            - '[Convert]::ToBase64String'
+
+    selection_loop:
+        CommandLine|contains:
+            - 'foreach'                    
+            - 'Get-ChildItem'
+            - '-Recurse'
+            - '-Include'                     
+
+    selection_context:
+        ParentImage|endswith:
+            - '\w3wp.exe'                 
+            - '\httpd.exe'               
+            - '\powershell.exe'          
+            - '\cmd.exe'
+        IntegrityLevel: 'Medium'           
+    filter_trusted_automation:
+        - Image|contains:
+            - 'C:\Program Files\Microsoft Monitoring Agent\'
+            - 'C:\Program Files\Splunk\'  
+        - CommandLine|contains:
+            - 'HealthCheck'
+            - 'Telemetry'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: (selection_byte_stream and selection_obfuscation and selection_loop) and selection_context and not filter_trusted_automation
+level: critical

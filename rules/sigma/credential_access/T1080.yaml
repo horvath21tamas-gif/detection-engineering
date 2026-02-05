@@ -1,0 +1,58 @@
+title: Ultra-Pro High-Fidelity Taint Shared Content (T1080)
+id: b11eb5a8-34ad-427d-891b-d93d6d858f8f
+status: stable
+description: |
+    Detects attempts to taint shared content by monitoring for suspicious 
+    process-to-file-share interactions, focusing on macro-enabled templates, 
+    shortcut hijacking, and binary replacement on UNC paths.
+author: hota05
+date: 2026-02-05
+tags:
+    - attack.lateral_movement
+    - attack.t1080
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection_shares:
+        TargetFilename|contains:
+            - '\\'                   
+            - ':\'                 
+
+    selection_extensions:
+        TargetFilename|endswith:
+            - '.docm'                
+            - '.dotm'               
+            - '.xlsm'
+            - '.lnk'                 
+            - '.vbs'
+            - '.ps1'
+            - '.bat'
+            - '.chm'                 
+
+    selection_suspicious_procs:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\certutil.exe'        
+            - '\bitsadmin.exe'
+            - '\curl.exe'
+            - '\wget.exe'
+        IntegrityLevel: 'Medium'
+
+    selection_masquerade:
+        TargetFilename|re: '.*\.(pdf|docx|xlsx|txt)\.(exe|vbs|ps1|lnk|bat)$'
+
+    filter_legit_apps:
+        - Image|endswith:
+            - '\winword.exe'      
+            - '\excel.exe'
+            - '\explorer.exe'        
+        - Image|contains:
+            - 'C:\Program Files\Microsoft Office\'
+            - 'C:\Windows\System32\msiexec.exe'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_shares and selection_extensions and (selection_suspicious_procs or selection_masquerade) and not filter_legit_apps
+level: high

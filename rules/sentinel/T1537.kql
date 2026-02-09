@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\aws.exe", "*\az.exe", "*\gsutil.exe", "*\gcloud.exe", "*\snowball.exe")) and ((ProcessCommandLine in ("* s3 sync *", "* storage copy *", "* --access-key *", "* --profile *", "* --request-payer *", "* --no-sign-request *", "* make-public *")) or ((FolderPath in ("*\Users\*", "*\Temp\*")) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\httpd.exe", "*\php-cgi.exe", "*\rundll32.exe")))) and (not ((ParentProcessName in ("*\msiexec.exe", "*\services.exe")) or (ProcessCommandLine in ("* terraform *", "* ansible *", "* Jenkins *")) or User =~ "NT AUTHORITY\SYSTEM"))

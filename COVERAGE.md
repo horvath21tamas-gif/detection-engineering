@@ -35,6 +35,7 @@
 | T1008 | CRITICAL | Ultra-Pro High-Fidelity Fallback Channel Detection (T1008) |
 | T1010 | HIGH | Ultra-Pro High-Fidelity Application Window Discovery (T1010) |
 | T1011 | HIGH | Ultra-Pro High-Fidelity Bluetooth Exfiltration (T1011) |
+| T1011.001 | CRITICAL | Ultra-Pro High-Fidelity BLE Advertising Exfiltration (T1011.001) |
 | T1012 | HIGH | Ultra-Pro High-Fidelity Query Registry Discovery (T1012) |
 | T1014 | CRITICAL | Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014) |
 | T1016 | HIGH | Ultra-Pro High-Fidelity System Network Configuration Discovery (T1016) |
@@ -314,6 +315,7 @@
 | T1530 | CRITICAL | Ultra-Pro High-Fidelity Cloud Storage Data Theft (T1530) |
 | T1534 | CRITICAL | Ultra-Pro High-Fidelity Internal Spearphishing Detection (T1534) |
 | T1535 | CRITICAL | Ultra-Pro High-Fidelity Unused Service Manipulation (T1535) |
+| T1537 | CRITICAL | Ultra-Pro High-Fidelity Cloud Account Exfil (T1537) |
 | T1538 | HIGH | Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538) |
 | T1539 | CRITICAL | Ultra-Pro High-Fidelity Web Session Cookie Theft (T1539) |
 | T1542 | CRITICAL | Ultra-Pro Pre-OS Boot Manipulation (T1542) |

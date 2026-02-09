@@ -20,6 +20,7 @@
 - [Ultra-Pro High-Fidelity Fallback Channel Detection (T1008)](#ultra-pro-high-fidelity-fallback-channel-detection-(t1008))
 - [Ultra-Pro High-Fidelity Application Window Discovery (T1010)](#ultra-pro-high-fidelity-application-window-discovery-(t1010))
 - [Ultra-Pro High-Fidelity Bluetooth Exfiltration (T1011)](#ultra-pro-high-fidelity-bluetooth-exfiltration-(t1011))
+- [Ultra-Pro High-Fidelity BLE Advertising Exfiltration (T1011.001)](#ultra-pro-high-fidelity-ble-advertising-exfiltration-(t1011001))
 - [Ultra-Pro High-Fidelity Query Registry Discovery (T1012)](#ultra-pro-high-fidelity-query-registry-discovery-(t1012))
 - [Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014)](#ultra-pro-high-fidelity-byovd-rootkit-loading-(t1014))
 - [Ultra-Pro High-Fidelity System Network Configuration Discovery (T1016)](#ultra-pro-high-fidelity-system-network-configuration-discovery-(t1016))
@@ -299,6 +300,7 @@
 - [Ultra-Pro High-Fidelity Cloud Storage Data Theft (T1530)](#ultra-pro-high-fidelity-cloud-storage-data-theft-(t1530))
 - [Ultra-Pro High-Fidelity Internal Spearphishing Detection (T1534)](#ultra-pro-high-fidelity-internal-spearphishing-detection-(t1534))
 - [Ultra-Pro High-Fidelity Unused Service Manipulation (T1535)](#ultra-pro-high-fidelity-unused-service-manipulation-(t1535))
+- [Ultra-Pro High-Fidelity Cloud Account Exfil (T1537)](#ultra-pro-high-fidelity-cloud-account-exfil-(t1537))
 - [Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538)](#ultra-pro-high-fidelity-cloud-service-dashboard-discovery-(t1538))
 - [Ultra-Pro High-Fidelity Web Session Cookie Theft (T1539)](#ultra-pro-high-fidelity-web-session-cookie-theft-(t1539))
 - [Ultra-Pro Pre-OS Boot Manipulation (T1542)](#ultra-pro-pre-os-boot-manipulation-(t1542))
@@ -914,6 +916,23 @@ triggers of Bluetooth transfer wizards (fsquirt.exe) from non-standard
 parent processes or suspicious command-line executions of radio-control tools.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1011`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity BLE Advertising Exfiltration (T1011.001)
+- **Azonosító:** `T1011_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects covert data exfiltration via BLE Advertising frames by identifying 
+unauthorized processes invoking WinRT BluetoothLEAdvertisementPublisher 
+APIs to broadcast custom manufacturer data payloads.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -5596,6 +5615,23 @@ updaters to ensure high-fidelity alerts.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Account Exfil (T1537)
+- **Azonosító:** `T1537.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects data exfiltration via native cloud CLI tools by monitoring for 
+cross-account synchronization, manual credential injection in CLI, 
+and transfers initiated from non-administrative process lineages.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1537`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

@@ -41,7 +41,7 @@ detection:
             - 'Microsoft\Azure'          
             - 'HealthCheck'                
             - 'Chocolatey'
-        - User: 'NT AUTHORITY\SYSTEM'      
+        - username: 'NT AUTHORITY\SYSTEM'      
         - ParentImage|endswith:
             - '\services.exe'              
 

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*ipconfig /flushdns*", "*Clear-DnsClientCache*")) and (ProcessCommandLine in ("*Resolve-DnsName*", "*[System.Net.Dns]::*", "*while(*", "*Start-Sleep*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\rundll32.exe", "*\regsvr32.exe")) and (not ((ProcessCommandLine in ("*\Program Files\*", "*Microsoft\Azure*", "*HealthCheck*", "*Chocolatey*")) or User =~ "NT AUTHORITY\SYSTEM" or ParentProcessName endswith "\services.exe"))

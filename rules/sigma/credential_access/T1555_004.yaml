@@ -53,5 +53,5 @@ detection:
     filter_explorer:
         ParentImage|endswith: '\explorer.exe'
 
-    condition: (selection_cmdkey and (selection_redirection or selection_bad_parents or selection_untrusted_context)) and not (filter_legit_scripts or filter_explorer)
+    condition: (selection_cmdkey and (selection_redirection or selection_bad_parents or selection_untrusted_location)) and not (filter_legit_scripts or filter_explorer)
 level: high

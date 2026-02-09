@@ -36,7 +36,7 @@ detection:
             - '/httpd'
             - '/php-fpm'
             - '/python'             
-        User: 'root'
+        username: 'root'
 
     selection_automation:
         CommandLine|contains:

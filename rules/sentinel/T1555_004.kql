@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath endswith "\cmdkey.exe" and (ProcessCommandLine in ("* /list*", "* /l *"))) and ((ProcessCommandLine in ("* > *", "* >> *", "* | *", "* *")) or (ParentProcessName in ("*\wmiprvse.exe", "*\scrcons.exe", "*\psexesvc.exe", "*\java.exe", "*\nginx.exe", "*\httpd.exe")) or ((ParentProcessName in ("*\Users\*", "*\Temp\*", "*\Downloads\*")) and (FolderPath in ("*\powershell.exe", "*\cmd.exe"))))) and (not ((ProcessCommandLine contains "C:\Program Files\IT_Management\" and username =~ "NT AUTHORITY\SYSTEM") or ParentProcessName endswith "\explorer.exe"))

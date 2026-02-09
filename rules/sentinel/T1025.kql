@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*D:\**", "*E:\**", "*F:\**", "*G:\**", "*H:\**")) and (ProcessCommandLine in ("* /s /b*", "* /e /i /h*", "* -Recurse -Force*", "* -ErrorAction SilentlyContinue*")) and ((ProcessCommandLine in ("*.kdbx*", "*.pst*", "*.key*", "*id_rsa*", "*.docx*", "*.xlsx*")) or ((ParentProcessName in ("*\powershell.exe", "*\cmd.exe", "*\w3wp.exe", "*\rundll32.exe")) and IntegrityLevel =~ "Medium")) and (not ((FolderPath in ("*C:\Program Files\Everything\*", "*C:\Program Files\Veeam\*")) or User =~ "NT AUTHORITY\SYSTEM" or (ProcessCommandLine in ("*SoftwareDistribution*", "*OneDrive.exe*"))))

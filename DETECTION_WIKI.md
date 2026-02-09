@@ -29,6 +29,7 @@
 - [Ultra-Pro High-Fidelity WinRM Remote Execution (T1021.006)](#ultra-pro-high-fidelity-winrm-remote-execution-(t1021006))
 - [Ultra-Pro High-Fidelity Cloud Control Plane Hijacking (T1021.007)](#ultra-pro-high-fidelity-cloud-control-plane-hijacking-(t1021007))
 - [Ultra-Pro High-Fidelity macOS ARD Remote Hijacking (T1021.008)](#ultra-pro-high-fidelity-macos-ard-remote-hijacking-(t1021008))
+- [Ultra-Pro High-Fidelity Removable Media Data Theft (T1025)](#ultra-pro-high-fidelity-removable-media-data-theft-(t1025))
 - [Suspicious Base64-Encoded PowerShell Command with Network Activity](#suspicious-base64-encoded-powershell-command-with-network-activity)
 - [Ultra-Pro High-Fidelity Binary Padding Activity (T1027.001)](#ultra-pro-high-fidelity-binary-padding-activity-(t1027001))
 - [Ultra-Pro High-Fidelity Software Packing Event (T1027.002)](#ultra-pro-high-fidelity-software-packing-event-(t1027002))
@@ -1006,6 +1007,23 @@ by monitoring the 'kickstart' utility for high-risk flags that grant
 universal access, while filtering legitimate MDM (Jamf, Kandji) orchestration.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Removable Media Data Theft (T1025)
+- **Azonosító:** `T1025.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects systematic and automated data collection from removable media (USB/External Drives) 
+by identifying recursive discovery patterns, specific archival switches, and 
+suspicious process lineages, while filtering out standard OS activities.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1025`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

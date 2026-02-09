@@ -50,7 +50,7 @@ detection:
         - Image|contains:
             - 'C:\Program Files\Everything\'
             - 'C:\Program Files\Veeam\' 
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - CommandLine|contains:
             - 'SoftwareDistribution'
             - 'OneDrive.exe'

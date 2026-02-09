@@ -1,0 +1,60 @@
+title: Ultra-Pro High-Fidelity Remote Data Staging (T1074.002)
+id: 76b33478-1b7e-4af3-be04-7954923e3529
+status: stable
+description: |
+    Detects remote data staging by identifying anomalous mass-file movements to 
+    internal UNC paths, followed by archival commands with low-compression/encryption 
+    flags, originating from untrusted process lineages.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.collection
+    - attack.t1074.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_remote:
+        CommandLine|contains:
+            - '\\\\'                  
+            - 'net use '
+            - 'New-SmbMapping'
+            - 'Push-Location '         
+
+    selection_mass_move:
+        CommandLine|contains:
+            - 'robocopy '
+            - 'xcopy '
+            - ' /MOVE'                 
+            - ' /E /H /K'              
+            - 'Compress-Archive '
+            - '7z.exe a '
+
+    selection_archival_intent:
+        CommandLine|contains:
+            - ' -m0'                  
+            - ' -mx0'                 
+            - ' -p'                    
+            - ' -hp'                  
+            - 'type * >> '             
+
+    selection_context:
+        ParentImage|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\w3wp.exe'             
+            - '\httpd.exe'
+        IntegrityLevel: 'Medium'        
+
+    filter_trusted_automation:
+        - Image|contains:
+            - 'C:\Windows\System32\wbem\WmiPrvSE.exe'
+            - 'C:\Program Files\Microsoft\'
+            - 'C:\Program Files\Veritas\'     
+        - User: 'NT AUTHORITY\SYSTEM'
+        - CommandLine|contains:
+            - 'SoftwareDistribution'
+            - 'AppData\Roaming'              
+
+    condition: selection_remote and selection_mass_move and (selection_archival_intent or selection_context) and not filter_trusted_automation
+level: critical

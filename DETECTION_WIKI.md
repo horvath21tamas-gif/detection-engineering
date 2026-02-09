@@ -116,6 +116,8 @@
 - [Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008)](#ultra-pro-high-fidelity-email-storage-and-database-destruction-(t1070008))
 - [Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009)](#ultra-pro-high-fidelity-persistence-artifact-removal-(t1070009))
 - [High-Fidelity Software Deployment Tool Abuse Detection](#high-fidelity-software-deployment-tool-abuse-detection)
+- [Ultra-Pro High-Fidelity Data Staging Anomaly (T1074)](#ultra-pro-high-fidelity-data-staging-anomaly-(t1074))
+- [Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001)](#ultra-pro-high-fidelity-local-data-staging-anomaly-(t1074001))
 - [High-Fidelity Anomalous Logon via Valid Account](#high-fidelity-anomalous-logon-via-valid-account)
 - [High-Fidelity Default Account Abuse Detection](#high-fidelity-default-account-abuse-detection)
 - [High-Fidelity Domain Account Lateral Movement Anomaly](#high-fidelity-domain-account-lateral-movement-anomaly)
@@ -2464,6 +2466,40 @@ Focuses on anomalous child processes (PowerShell, BitsAdmin, CertUtil) spawned
 by deployment services, filtering out standard maintenance patterns.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1072`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Data Staging Anomaly (T1074)
+- **Azonosító:** `T1074.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects data staging by identifying anomalous file aggregation patterns, 
+low-compression archival switches, and mass-copy operations into 
+hidden or temporary system directories from untrusted shells.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1074`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001)
+- **Azonosító:** `T1074_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects systematic local data staging by identifying anomalous file aggregation 
+patterns, specific low-compression or password-protected archival switches, 
+and mass-copy operations into hidden system directories from untrusted contexts.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001, T1074`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

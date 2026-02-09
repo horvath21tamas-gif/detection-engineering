@@ -57,7 +57,7 @@ detection:
         - Image|contains:
             - 'C:\Windows\CCM\'         
             - 'C:\Program Files\Microsoft\' 
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - CommandLine|contains:
             - 'SoftwareDistribution'    
             - 'C:\Windows\Installer'

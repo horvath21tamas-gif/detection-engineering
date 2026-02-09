@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*:\PerfLogs\*", "*:\Users\Public\*", "*:\Windows\Temp\*", "*\AppData\Local\Temp\*", "*:\RECYCLER\*", "*:\ProgramData\*")) and ((ProcessCommandLine in ("* -m0*", "* -mx0*", "* -p*", "* -ta*", "* -r *")) or ((FolderPath in ("*\7z.exe", "*\rar.exe", "*\makecab.exe", "*\powershell.exe", "*\tar.exe")) or (ProcessCommandLine in ("*Compress-Archive*", "*type * >> *")))) and ((ParentProcessName in ("*\w3wp.exe", "*\powershell.exe", "*\cmd.exe", "*\httpd.exe")) and IntegrityLevel =~ "Medium") and (not ((FolderPath in ("*C:\Windows\CCM\*", "*C:\Program Files\Microsoft\*")) or User =~ "NT AUTHORITY\SYSTEM" or (ProcessCommandLine in ("*SoftwareDistribution*", "*C:\Windows\Installer*", "*OneDrive.exe*"))))

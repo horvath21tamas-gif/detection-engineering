@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-09 06:32:09`
+**Utolsó frissítés:** `2026-02-09 06:49:06`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 539 | 100% |
-| Splunk (SPL) | 530 | 98.3% |
-| Microsoft Sentinel (KQL) | 532 | 98.7% |
-| QRadar (AQL) | 214 | 39.7% |
-| Elastic (KQL/EQL) | 532 | 98.7% |
-| RSA NetWitness | 529 | 98.1% |
+| Sigma (Forrás) | 544 | 100% |
+| Splunk (SPL) | 534 | 98.2% |
+| Microsoft Sentinel (KQL) | 537 | 98.7% |
+| QRadar (AQL) | 214 | 39.3% |
+| Elastic (KQL/EQL) | 537 | 98.7% |
+| RSA NetWitness | 533 | 98.0% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -131,6 +131,8 @@
 | T1070.008 | CRITICAL | Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008) |
 | T1070.009 | HIGH | Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009) |
 | T1072 | CRITICAL | High-Fidelity Software Deployment Tool Abuse Detection |
+| T1074 | CRITICAL | Ultra-Pro High-Fidelity Data Staging Anomaly (T1074), Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001) |
+| T1074.001 | CRITICAL | Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001) |
 | T1078 | HIGH | High-Fidelity Anomalous Logon via Valid Account |
 | T1078.001 | CRITICAL | High-Fidelity Default Account Abuse Detection |
 | T1078.002 | HIGH | High-Fidelity Domain Account Lateral Movement Anomaly |

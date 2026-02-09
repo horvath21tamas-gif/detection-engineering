@@ -1,0 +1,67 @@
+title: Ultra-Pro High-Fidelity Email Forwarding Rule Anomaly (T1114.003)
+id: 5da2f113-99ce-41ea-907b-a19c618f8ce7
+status: stable
+description: |
+    Detects unauthorized email forwarding rules by identifying programmatic 
+    redirection to external/untrusted domains combined with sensitive keyword 
+    filtering, originating from suspicious process lineages.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.collection
+    - attack.persistence
+    - attack.t1114.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_mgmt_cmds:
+        CommandLine|contains:
+            - 'New-InboxRule'            
+            - 'Set-InboxRule'         
+            - 'New-TransportRule'    
+            - 'Set-Mailbox '            
+
+    selection_external_target:
+        CommandLine|contains:
+            - '-ForwardTo'
+            - '-ForwardAsAttachmentTo'
+            - '-RedirectTo'
+            - '-ForwardingSmtpAddress'
+
+    selection_untrusted_domains:
+        CommandLine|contains:
+            - '@gmail.com'
+            - '@outlook.com'
+            - '@protonmail.'
+            - '@tutanota.'
+            - '.ru'
+            - '.top'
+            - '.zip'
+
+    selection_keywords:
+        CommandLine|contains:
+            - 'password'
+            - 'invoice'
+            - 'számla'
+            - 'transfer'
+            - 'bank'
+            - 'confidential'
+
+    selection_context:
+        ParentImage|endswith:
+            - '\powershell.exe'
+            - '\w3wp.exe'                 
+            - '\cmd.exe'
+        IntegrityLevel: 'Medium'          
+
+    filter_internal_trust:
+        - CommandLine|contains:
+            - '@sajatdomain.hu'           
+            - 'HealthCheck'
+        - User: 'NT AUTHORITY\SYSTEM'     
+        - CommandLine|contains:
+            - 'Standard_Admin_Script.ps1' 
+
+    condition: selection_mgmt_cmds and (selection_external_target and selection_untrusted_domains) and (selection_keywords or selection_context) and not filter_internal_trust
+level: critical

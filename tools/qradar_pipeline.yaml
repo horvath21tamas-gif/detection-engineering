@@ -1,14 +1,25 @@
-name: QRadar Fixer Pipeline
+name: QRadar Grandmaster Pipeline
 priority: 10
+
+# 1. LOGSOURCE MAPPING
+# Ez oldja meg, hogy a 'process_creation' ne üres mezőlistát kapjon
+logsource_merging: true
 transformations:
-  # Ez a rész mondja meg a backendnek, hogy mit kezdjen a process_creation-nel
   - type: logsource_filter
     mapping:
       process_creation:
-        # Ez az érték aktiválja a QRadar backend belső Windows mezőlistáját
-        logsource: 'microsoft_windows_security_event_log' 
+        logsource: 'microsoft_windows_security_event_log'
+      registry_event:
+        logsource: 'microsoft_windows_security_event_log'
+      sysmon_process_creation:
+        logsource: 'sysmon'
+      network_connection:
+        logsource: 'sysmon'
+      service_control:
+        logsource: 'microsoft_windows_security_event_log'
 
-  # Ez pedig átnevezi a mezőket, amiket a backend hiányolt
+  # 2. FIELD MAPPING
+  # Itt fordítjuk le a Sigma neveket QRadar belső nevekre
   - type: field_name_mapping
     mapping:
       Image: Filename
@@ -16,3 +27,10 @@ transformations:
       ParentImage: Parent Filename
       ParentCommandLine: Parent Process CommandLine
       User: UserName
+      TargetObject: Registry Value Name
+      Details: Registry Value Data
+      DestinationIp: Destination IP
+      DestinationPort: Destination Port
+      SourceIp: Source IP
+      SourcePort: Source Port
+      Hashes: File Hash

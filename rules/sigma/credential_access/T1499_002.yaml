@@ -55,7 +55,7 @@ detection:
             - '\Users\Public\'
 
     filter_legit_mgmt:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|endswith:
             - '\CcmExec.exe'         
             - '\msiexec.exe'          

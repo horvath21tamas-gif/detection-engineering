@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\OneDrive.exe", "*\Dropbox.exe", "*\googledrivesync.exe", "*\Box.exe")) and ((ProcessCommandLine in ("* /move *", "* /upload *", "* /shutdown*", "* -s *", "* --path *")) or (ProcessCommandLine in ("*\AppData\Local\Temp\*", "*\Users\Public\*", "*\Windows\Temp\*", "*\PerfLogs\*", "*C:\Temp\*"))) and (ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe")) and (not ((ProcessCommandLine in ("* /background*", "* /client=personal*")) or User =~ "NT AUTHORITY\SYSTEM" or FolderPath contains "\Program Files\"))

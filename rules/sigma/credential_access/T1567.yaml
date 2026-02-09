@@ -1,0 +1,65 @@
+title: Ultra-Pro High-Fidelity Web Service Exfiltration (T1567)
+id: 43eb2d65-63f7-4ca6-b570-28ef869ef585
+status: stable
+description: |
+    Detects systematic data exfiltration to cloud services by identifying 
+    headless transfer tools (rclone, megatools) using custom config files 
+    from untrusted paths or triggered by non-admin parent processes.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.exfiltration
+    - attack.t1567
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\rclone.exe'          
+            - '\megatools.exe'      
+            - '\mega-put.exe'
+            - '\rcloud.exe'
+        - CommandLine|contains:
+            - 'discordapp.com/api/webhooks' 
+            - 'api.telegram.org/bot'       
+
+    selection_logic:
+        CommandLine|contains:
+            - ' --config '           
+            - ' --no-check-certificate'
+            - ' --bwlimit '         
+            - ' sync '              
+            - ' copy --ignore-existing'
+
+    selection_context:
+        - Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+        - ParentImage|endswith:
+            - '\winword.exe'       
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\rundll32.exe'        
+
+    selection_endpoints:
+        CommandLine|contains:
+            - 'mega.nz'
+            - 'transfer.sh'
+            - 'webhook.site'
+            - 'pastebin.com'
+            - 'file.io'
+
+    filter_legit:
+        - Image|contains:
+            - '\Program Files\'     
+        - CommandLine|contains:
+            - '127.0.0.1'
+            - 'localhost'
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith:
+            - '\services.exe'
+
+    condition: (selection_tools and (selection_logic or selection_endpoints)) and selection_context and not filter_legit
+level: critical

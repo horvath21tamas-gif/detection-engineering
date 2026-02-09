@@ -1,0 +1,52 @@
+title: Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573)
+id: c6e4c1f3-88f8-4da2-8a32-1d9a2fb4596a
+status: stable
+description: |
+    Detects the creation of custom encrypted C2 channels by monitoring for 
+    low-level cryptographic class instantiation (AES, Rijndael, CryptoStream) 
+    in tandem with manual network socket creation from scripting interpreters.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.command_and_control
+    - attack.t1573
+    - attack.t1573.001
+    - attack.t1573.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_crypto_logic:
+        CommandLine|contains:
+            - 'AesManaged'                
+            - 'RijndaelManaged'            
+            - 'CryptoStream'              
+            - 'CreateEncryptor'           
+            - 'ICryptoTransform'          
+
+    selection_network_socket:
+        CommandLine|contains:
+            - 'Net.Sockets.TcpClient'     
+            - 'Net.Sockets.Socket'         
+            - 'IO.MemoryStream'            
+
+    selection_procs:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+            - '\rundll32.exe'
+
+    filter_legit_infra:
+        - CommandLine|contains:
+            - 'C:\Program Files\'
+            - 'Microsoft\Azure'           
+            - 'HealthCheck'                
+        - User: 'NT AUTHORITY\SYSTEM'      
+        - ParentImage|endswith:
+            - '\services.exe'              
+
+    condition: selection_crypto_logic and selection_network_socket and selection_procs and not filter_legit_infra
+level: critical

@@ -49,5 +49,5 @@ detection:
             - '\svchost.exe'
             - '\taskhostw.exe'
 
-    condition: selection_keyword and selection_tools and selection_paths and selection_untrusted_context and not filter_legit_service
+    condition: selection_keyword and selection_tools and selection_paths and selection_untrusted_parent and not filter_legit_service
 level: critical

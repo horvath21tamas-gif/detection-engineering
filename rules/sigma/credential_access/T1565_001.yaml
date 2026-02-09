@@ -1,0 +1,62 @@
+title: Ultra-Pro High-Fidelity Stored Data Manipulation (T1565.001)
+id: 9f152b30-a63b-405d-a527-97fc8ca20d62
+status: stable
+description: |
+    Detects unauthorized modification of stored data (configs, logs, databases) 
+    by identifying suspicious stream editing (sed, powershell-replace) 
+    originating from non-standard parent processes or targeting critical system paths.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1565.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\sed.exe'             
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\sqlite3.exe'         
+            - '\wevtutil.exe'        
+            - '\attrib.exe'        
+
+    selection_logic:
+        CommandLine|contains:
+            - ' -replace '           
+            - ' s/'                
+            - ' UPDATE '         
+            - ' DELETE FROM '        
+            - ' clear-log '        
+            - ' cl '                
+            - 'Set-Content'          
+            - 'Out-File'
+
+    selection_targets:
+        CommandLine|contains:
+            - '.config'            
+            - '.db'                  
+            - '\System32\config\'    
+            - '\System32\winevt\'  
+            - 'hosts'               
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'         
+            - '\excel.exe'
+            - '\httpd.exe'           
+            - '\rundll32.exe'      
+            - '\explorer.exe'        
+
+    filter_legit:
+        - ParentImage|endswith:
+            - '\CcmExec.exe'         
+            - '\msiexec.exe'         
+        - CommandLine|contains:
+            - 'Program Files'      
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_tools and selection_logic and (selection_targets or selection_context) and not filter_legit
+level: critical

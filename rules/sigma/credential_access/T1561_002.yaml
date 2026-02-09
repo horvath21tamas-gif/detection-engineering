@@ -1,0 +1,56 @@
+title: Ultra-Pro High-Fidelity Disk Structure Wipe (T1561.002)
+id: e52848f9-bc27-4329-8e76-b6076d1af7a5
+status: stable
+description: |
+    Detects low-level disk structure destruction (partition table wiping, MBR overwriting) 
+    by monitoring for destructive CLI arguments and raw device access strings originating 
+    from non-standard parent processes or untrusted locations.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1561.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\diskpart.exe'        
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\dd.exe'              
+            - '\format.com'
+
+    selection_logic:
+        CommandLine|contains:
+            - 'clean'                
+            - 'delete partition'     
+            - 'Remove-Partition'     
+            - 'Clear-Disk'           
+            - '\\.\PhysicalDrive'  
+            - 'count=1 bs=512'       
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'         
+            - '\excel.exe'
+            - '\httpd.exe'           
+            - '\rundll32.exe'        
+            - '\services.exe'        
+        - Image|contains:
+            - '\Temp\'
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+
+    filter_legit_imaging:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith:
+            - '\CcmExec.exe'         
+            - '\setup.exe'          
+        - CommandLine|contains:
+            - 'vds.exe'              
+            - 'scripts\deployment'  
+
+    condition: selection_tools and selection_logic and selection_context and not filter_legit_imaging
+level: critical

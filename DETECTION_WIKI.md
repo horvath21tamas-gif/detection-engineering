@@ -199,6 +199,9 @@
 - [Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211)](#ultra-pro-high-fidelity-privilege-escalation-exploitation-(t1211))
 - [Ultra-Pro High-Fidelity Credential Service Exploitation (T1212)](#ultra-pro-high-fidelity-credential-service-exploitation-(t1212))
 - [Ultra-Pro High-Fidelity Repository Dump (T1213)](#ultra-pro-high-fidelity-repository-dump-(t1213))
+- [Ultra-Pro High-Fidelity Confluence Scraping (T1213.001)](#ultra-pro-high-fidelity-confluence-scraping-(t1213001))
+- [Ultra-Pro High-Fidelity SharePoint Mass Data Exfiltration (T1213.002)](#ultra-pro-high-fidelity-sharepoint-mass-data-exfiltration-(t1213002))
+- [Ultra-Pro High-Fidelity Knowledge Base Scraping (T1213.003)](#ultra-pro-high-fidelity-knowledge-base-scraping-(t1213003))
 - [Ultra-Pro High-Fidelity System Script Proxy Execution (T1216)](#ultra-pro-high-fidelity-system-script-proxy-execution-(t1216))
 - [Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001)](#ultra-pro-high-fidelity-pubprn-script-proxy-execution-(t1216001))
 - [Ultra-Pro High-Fidelity Browser Information Discovery (T1217)](#ultra-pro-high-fidelity-browser-information-discovery-(t1217))
@@ -502,6 +505,8 @@
 - [Ultra-Pro High-Fidelity Network Binary Patching (T1601.001)](#ultra-pro-high-fidelity-network-binary-patching-(t1601001))
 - [Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002)](#ultra-pro-high-fidelity-malicious-network-os-upgrade-(t1601002))
 - [Ultra-Pro High-Fidelity Network Share Automated Collection (T1602)](#ultra-pro-high-fidelity-network-share-automated-collection-(t1602))
+- [Ultra-Pro High-Fidelity Admin Share Data Exfiltration (T1602.001)](#ultra-pro-high-fidelity-admin-share-data-exfiltration-(t1602001))
+- [Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002)](#ultra-pro-high-fidelity-cloud-share-exfiltration-(t1602002))
 - [Ultra-Pro High-Fidelity Web Token Forgery (T1606)](#ultra-pro-high-fidelity-web-token-forgery-(t1606))
 - [Ultra-Pro High-Fidelity Web Cookie Harvesting (T1606.001)](#ultra-pro-high-fidelity-web-cookie-harvesting-(t1606001))
 - [Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002)](#ultra-pro-high-fidelity-web-token-forgery-&-golden-saml-(t1606002))
@@ -3849,6 +3854,57 @@ by identifying suspicious API-driven export commands originating from untrusted
 process contexts or temporary directories.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1213`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Confluence Scraping (T1213.001)
+- **Azonosító:** `T1213_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized mass content extraction from Atlassian Confluence by 
+identifying suspicious API-driven read/export patterns originating from 
+untrusted shell contexts or temporary directories.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity SharePoint Mass Data Exfiltration (T1213.002)
+- **Azonosító:** `T1213_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized mass data collection from SharePoint by identifying 
+suspicious PnP PowerShell usage, bulk REST API queries, and unauthorized 
+SharePoint Online Management Shell activity from non-standard contexts.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Knowledge Base Scraping (T1213.003)
+- **Azonosító:** `T1213_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects systematic knowledge base exfiltration (Wiki, Stack Overflow for Teams) 
+by identifying recursive mirroring flags, mass archival logic, and 
+non-browser scripting engines targeting internal documentation URLs.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -8767,6 +8823,40 @@ identifying the combination of UNC path traversal, sensitive file extensions,
 and recursive copying logic originating from untrusted process lineages.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1602`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Admin Share Data Exfiltration (T1602.001)
+- **Azonosító:** `T1602_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized data collection or staging via administrative shares (C$, ADMIN$) 
+by correlating anomalous process lineages, non-standard source paths, 
+and the use of recursive discovery commands within the same session.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002)
+- **Azonosító:** `T1602_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects highly suspicious mass data collection from cloud sync roots (OneDrive, 
+SharePoint, Google Drive) by monitoring for recursive read/copy patterns 
+combined with archival tools or suspicious staging destinations.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-05 08:03:24`
+**Utolsó frissítés:** `2026-02-09 06:32:09`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 536 | 100% |
-| Splunk (SPL) | 527 | 98.3% |
-| Microsoft Sentinel (KQL) | 529 | 98.7% |
-| QRadar (AQL) | 214 | 39.9% |
-| Elastic (KQL/EQL) | 529 | 98.7% |
-| RSA NetWitness | 526 | 98.1% |
+| Sigma (Forrás) | 539 | 100% |
+| Splunk (SPL) | 530 | 98.3% |
+| Microsoft Sentinel (KQL) | 532 | 98.7% |
+| QRadar (AQL) | 214 | 39.7% |
+| Elastic (KQL/EQL) | 532 | 98.7% |
+| RSA NetWitness | 529 | 98.1% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -214,6 +214,9 @@
 | T1211 | CRITICAL | Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211) |
 | T1212 | CRITICAL | Ultra-Pro High-Fidelity Credential Service Exploitation (T1212) |
 | T1213 | CRITICAL | Ultra-Pro High-Fidelity Repository Dump (T1213) |
+| T1213.001 | CRITICAL | Ultra-Pro High-Fidelity Confluence Scraping (T1213.001) |
+| T1213.002 | CRITICAL | Ultra-Pro High-Fidelity SharePoint Mass Data Exfiltration (T1213.002) |
+| T1213.003 | CRITICAL | Ultra-Pro High-Fidelity Knowledge Base Scraping (T1213.003) |
 | T1216 | CRITICAL | Ultra-Pro High-Fidelity System Script Proxy Execution (T1216) |
 | T1216.001 | CRITICAL | Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001) |
 | T1217 | HIGH | Ultra-Pro High-Fidelity Browser Information Discovery (T1217) |
@@ -517,6 +520,8 @@
 | T1601.001 | CRITICAL | Ultra-Pro High-Fidelity Network Binary Patching (T1601.001) |
 | T1601.002 | CRITICAL | Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002) |
 | T1602 | CRITICAL | Ultra-Pro High-Fidelity Network Share Automated Collection (T1602) |
+| T1602.001 | CRITICAL | Ultra-Pro High-Fidelity Admin Share Data Exfiltration (T1602.001) |
+| T1602.002 | CRITICAL | Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002) |
 | T1606 | CRITICAL | Ultra-Pro High-Fidelity Web Token Forgery (T1606) |
 | T1606.001 | CRITICAL | Ultra-Pro High-Fidelity Web Cookie Harvesting (T1606.001) |
 | T1606.002 | CRITICAL | Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002) |

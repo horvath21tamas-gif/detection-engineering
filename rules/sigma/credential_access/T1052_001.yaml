@@ -1,0 +1,63 @@
+title: Ultra-Pro High-Fidelity USB Exfiltration (T1052.001)
+id: 24d0bb36-59f7-48e9-98ce-551ae31c3d07
+status: stable
+description: |
+    Detects systematic data exfiltration to USB devices by monitoring 
+    non-interactive copy/move/archive commands targeting removable drives, 
+    focusing on suspicious process lineages and stealthy CLI arguments.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.exfiltration
+    - attack.t1052.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        Image|endswith:
+            - '\robocopy.exe'        
+            - '\xcopy.exe'
+            - '\powershell.exe'
+            - '\7z.exe'              
+            - '\rar.exe'
+            - '\bitsadmin.exe'       
+
+    selection_usb_target:
+        CommandLine|contains:
+            - ' D:\'
+            - ' E:\'
+            - ' F:\'
+            - ' G:\'
+            - ' H:\'
+            - '\Device\HarddiskVolume' 
+            - '\\*\root\'              
+
+    selection_flags:
+        CommandLine|contains:
+            - ' /S /E /H /K'         
+            - ' /R:0 /W:0'           
+            - ' -Recurse'            
+            - ' -Hidden'             
+            - ' a -p'                
+
+    selection_parent:
+        ParentImage|endswith:
+            - '\winword.exe'         
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\sqlservr.exe'        
+            - '\wscript.exe'
+            - '\cscript.exe'
+
+    filter_legit:
+        - ParentImage|endswith:
+            - '\explorer.exe'       
+        - Image|contains:
+            - '\Program Files\'      
+        - User: 'NT AUTHORITY\SYSTEM'
+        - CommandLine|contains:
+            - 'SoftwareDistribution' 
+
+    condition: selection_tools and selection_usb_target and (selection_flags or selection_parent) and not filter_legit
+level: critical

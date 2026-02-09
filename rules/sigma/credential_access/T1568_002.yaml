@@ -1,0 +1,46 @@
+title: Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002)
+id: 63070386-65d0-4c3e-a15d-ddae36d17664
+status: stable
+description: |
+    Detects DGA activity by monitoring for rapid, programmatic DNS resolution attempts, 
+    high-entropy domain patterns in command lines, and the suppression of DNS errors 
+    from non-standard processes.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.command_and_control
+    - attack.t1568.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_api_logic:
+        CommandLine|contains:
+            - 'Resolve-DnsName'           
+            - '[System.Net.Dns]::'         
+            - 'ErrorAction SilentlyContinue' 
+            - 'ErrorAction 0'              
+            - 'nslookup'                   
+
+    selection_dga_regex:
+        CommandLine|re: '(?i).*[a-z0-9]{18,}\.(top|xyz|pw|icu|bid|monster|live|ga|tk|cf|ml|buzz|online).*'
+
+    selection_procs:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\rundll32.exe'
+            - '\mshta.exe'
+
+    filter_legit_infra:
+        - CommandLine|contains:
+            - '\Program Files\'
+            - 'Microsoft\Azure'          
+            - 'internal.corp'              
+            - 'update.microsoft.com'
+        - User: 'NT AUTHORITY\SYSTEM'      
+
+    condition: (selection_api_logic and selection_procs) or (selection_dga_regex and selection_procs) and not filter_legit_infra
+level: critical

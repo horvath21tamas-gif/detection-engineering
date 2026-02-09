@@ -157,6 +157,7 @@
 | T1087.002 | HIGH | Ultra-Pro High-Fidelity Domain Account Discovery (T1087.002) |
 | T1087.003 | HIGH | Ultra-Pro High-Fidelity Email Account Discovery (T1087.003) |
 | T1087.004 | HIGH | Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004) |
+| T1090 | CRITICAL | Ultra-Pro High-Fidelity Proxy & Pivot Point Detection (T1090) |
 | T1091 | HIGH | High-Fidelity Process Execution from Removable Media |
 | T1092 | CRITICAL | Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092) |
 | T1095 | CRITICAL | Ultra-Pro High-Fidelity Non-Application Layer C2 (T1095) |

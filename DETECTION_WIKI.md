@@ -142,6 +142,7 @@
 - [Ultra-Pro High-Fidelity Domain Account Discovery (T1087.002)](#ultra-pro-high-fidelity-domain-account-discovery-(t1087002))
 - [Ultra-Pro High-Fidelity Email Account Discovery (T1087.003)](#ultra-pro-high-fidelity-email-account-discovery-(t1087003))
 - [Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004)](#ultra-pro-high-fidelity-cloud-account-discovery-(t1087004))
+- [Ultra-Pro High-Fidelity Proxy & Pivot Point Detection (T1090)](#ultra-pro-high-fidelity-proxy-&-pivot-point-detection-(t1090))
 - [High-Fidelity Process Execution from Removable Media](#high-fidelity-process-execution-from-removable-media)
 - [Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092)](#ultra-pro-high-fidelity-removable-media-c2-anomaly-(t1071002--t1092))
 - [Ultra-Pro High-Fidelity Non-Application Layer C2 (T1095)](#ultra-pro-high-fidelity-non-application-layer-c2-(t1095))
@@ -2938,6 +2939,23 @@ interactive shell sessions and anomalous command chaining. Filters legitimate
 CI/CD and automation workloads based on process lineage and user context.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Proxy & Pivot Point Detection (T1090)
+- **Azonosító:** `T1090.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the creation of network proxies and port forwarding rules by correlating 
+high-risk native binaries (Netsh) with pivot-specific arguments that map 
+external listening ports to internal network assets.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1090`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -54,5 +54,5 @@ detection:
             - '\Windows\System32\CompatTelRunner.exe' 
             - '\Microsoft Visual Studio\'             
 
-    condition: selection_recursive_intent and selection_sensitive_targets and selection_suspicious_parent and not filter_legit_systems
+    condition: selection_recursive_intent and selection_sensitive_targets and selection_suspicious_lineage and not filter_legit_systems
 level: high

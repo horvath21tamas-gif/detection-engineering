@@ -48,7 +48,7 @@ detection:
             - '\powershell.exe'
             - '\wsmprovhost.exe'           
             - '\httpd.exe'                   
-        Image|not_endswith:
+        Image|endswith:
             - '\chrome.exe'
             - '\msedge.exe'
             - '\firefox.exe'

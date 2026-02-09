@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (((FolderPath in ("*\ffmpeg.exe", "*\ffprobe.exe", "*\mkvmerge.exe", "*\youtube-upload.exe")) or (ProcessCommandLine in ("*youtube.googleapis.com*", "*vimeo.com/api*"))) and ((ProcessCommandLine in ("* -attach *", "* -metadata *", "* -map_metadata *", "* -f nut *", "* -vcodec copy -acodec copy*")) or ((FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*")) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powershell.exe", "*\rundll32.exe"))))) and (not ((FolderPath in ("*\Program Files\Adobe\*", "*\Program Files\OBS Studio\*", "*\Program Files\Blackmagic Design\*")) or ProcessCommandLine contains " --version" or User =~ "NT AUTHORITY\SYSTEM"))

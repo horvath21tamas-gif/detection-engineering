@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ProcessCommandLine contains "cpassword" and ((FolderPath in ("*\findstr.exe", "*\grep.exe", "*\powershell.exe", "*\cmd.exe")) or (ProcessCommandLine in ("*Get-GPPPassword*", "*Select-String*", "*type *"))) and (ProcessCommandLine in ("*SYSVOL*", "*Policies*", "*Groups.xml*", "*ScheduledTasks.xml*")) and (ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\wsmprovhost.exe", "*\psexesvc.exe")) and (not (username =~ "NT AUTHORITY\SYSTEM" and (FolderPath in ("*\svchost.exe", "*\taskhostw.exe"))))

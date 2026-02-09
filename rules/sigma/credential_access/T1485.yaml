@@ -1,0 +1,64 @@
+title: Ultra-Pro High-Fidelity Data Destruction (T1485)
+id: 1a601db6-2eae-482d-b3ee-ed4acc9d52fb
+status: stable
+description: |
+    Detects systematic data destruction by monitoring for VSS deletion, 
+    secure file shredding (sdelete, cipher), and bulk recursive deletions 
+    initiated from suspicious parent processes or targeting non-temp directories.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1485
+    - attack.t1490
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\vssadmin.exe'        
+            - '\wmic.exe'            
+            - '\sdelete.exe'        
+            - '\cipher.exe'         
+            - '\wbadmin.exe'        
+            - '\powershell.exe'
+
+    selection_vss_logic:
+        CommandLine|contains:
+            - 'delete shadows'
+            - 'shadowcopy delete'
+            - 'shadowstorage'        
+            - 'delete catalog -quiet' 
+
+    selection_wipe_logic:
+        CommandLine|contains:
+            - ' -p '                 
+            - ' -z '                 
+            - ' /w:'                 
+            - ' -s '                 
+            - 'del /f /s /q'         
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'         
+            - '\excel.exe'
+            - '\rundll32.exe'        
+            - '\httpd.exe'           
+            - '\7zFM.exe'           
+        - Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+
+    filter_legit:
+        - ParentImage|endswith:
+            - '\msiexec.exe'      
+            - '\CcmExec.exe'        
+        - CommandLine|contains:
+            - 'cleanmgr.exe'         
+            - '\AppData\Local\Temp'  
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_tools and (selection_vss_logic or selection_wipe_logic) and selection_context and not filter_legit
+level: critical

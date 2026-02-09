@@ -312,6 +312,7 @@
 - [Exploit-Grade Unauthorized Container Image Execution (Implant Container Image)](#exploit-grade-unauthorized-container-image-execution-(implant-container-image))
 - [Ultra-Pro High-Fidelity Cloud Service Discovery (T1526)](#ultra-pro-high-fidelity-cloud-service-discovery-(t1526))
 - [Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528)](#ultra-pro-high-fidelity-application-token-&-session-hijacking-(t1528))
+- [Ultra-Pro High-Fidelity System Shutdown/Reboot (T1529)](#ultra-pro-high-fidelity-system-shutdownreboot-(t1529))
 - [Ultra-Pro High-Fidelity Cloud Storage Data Theft (T1530)](#ultra-pro-high-fidelity-cloud-storage-data-theft-(t1530))
 - [Ultra-Pro High-Fidelity Account Access Removal (T1531)](#ultra-pro-high-fidelity-account-access-removal-(t1531))
 - [Ultra-Pro High-Fidelity Internal Spearphishing Detection (T1534)](#ultra-pro-high-fidelity-internal-spearphishing-detection-(t1534))
@@ -5845,6 +5846,23 @@ Monitors for suspicious access to Cloud CLI configurations (Azure, AWS, GCP)
 and browser-based credential stores by untrusted processes.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1528`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity System Shutdown/Reboot (T1529)
+- **Azonosító:** `T1529.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized or suspicious system shutdown/reboot commands 
+by monitoring for forced operations (-f) originating from untrusted 
+process lineages (browsers, office apps, temp folders).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1529`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

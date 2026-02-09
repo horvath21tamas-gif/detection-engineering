@@ -61,7 +61,7 @@ detection:
         - DestinationIP:
             - '10.0.0.0/8'                
             - '192.168.0.0/16'
-        - User: 'NT AUTHORITY\SYSTEM'     
+        - username: 'NT AUTHORITY\SYSTEM'     
 
     condition: (selection_hollow_victims or selection_automation or selection_context) and selection_ports and not filter_trusted_apps
 level: critical

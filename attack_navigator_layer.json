@@ -2028,6 +2028,10 @@
             "color": "#ff6666"
         },
         {
+            "techniqueID": "T1071.003",
+            "color": "#ff6666"
+        },
+        {
             "techniqueID": "T1546.005",
             "color": "#ff6666"
         },

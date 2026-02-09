@@ -17,6 +17,7 @@
 - [Ultra-Pro High-Fidelity Local Data Harvesting (T1005)](#ultra-pro-high-fidelity-local-data-harvesting-(t1005))
 - [Ultra-Pro Stealthy Direct Volume Access (T1006)](#ultra-pro-stealthy-direct-volume-access-(t1006))
 - [Ultra-Pro High-Fidelity System Service Discovery (T1007)](#ultra-pro-high-fidelity-system-service-discovery-(t1007))
+- [Ultra-Pro High-Fidelity Fallback Channel Detection (T1008)](#ultra-pro-high-fidelity-fallback-channel-detection-(t1008))
 - [Ultra-Pro High-Fidelity Application Window Discovery (T1010)](#ultra-pro-high-fidelity-application-window-discovery-(t1010))
 - [Ultra-Pro High-Fidelity Query Registry Discovery (T1012)](#ultra-pro-high-fidelity-query-registry-discovery-(t1012))
 - [Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014)](#ultra-pro-high-fidelity-byovd-rootkit-loading-(t1014))
@@ -832,6 +833,23 @@ and specific command-line arguments used to identify security products or
 misconfigured services for privilege escalation.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1007`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Fallback Channel Detection (T1008)
+- **Azonosító:** `T1008.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects C2 fallback mechanisms by identifying cross-protocol switching logic 
+(e.g., HTTP to DNS/ICMP) within exception handling blocks (try/catch/trap) 
+triggered by connection failures in non-standard process contexts.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1008`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -32,6 +32,7 @@
 | T1005 | CRITICAL | Ultra-Pro High-Fidelity Local Data Harvesting (T1005) |
 | T1006 | CRITICAL | Ultra-Pro Stealthy Direct Volume Access (T1006) |
 | T1007 | HIGH | Ultra-Pro High-Fidelity System Service Discovery (T1007) |
+| T1008 | CRITICAL | Ultra-Pro High-Fidelity Fallback Channel Detection (T1008) |
 | T1010 | HIGH | Ultra-Pro High-Fidelity Application Window Discovery (T1010) |
 | T1012 | HIGH | Ultra-Pro High-Fidelity Query Registry Discovery (T1012) |
 | T1014 | CRITICAL | Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014) |

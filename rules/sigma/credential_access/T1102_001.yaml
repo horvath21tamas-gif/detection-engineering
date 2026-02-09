@@ -48,7 +48,7 @@ detection:
             - 'winget'
             - 'chocolatey'
             - 'microsoft.com'          
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|endswith:
             - '\explorer.exe'          
 

@@ -1,0 +1,64 @@
+title: Ultra-Pro High-Fidelity Data Staging Anomaly (T1074)
+id: 07f74f71-3bee-496f-8afc-947a4f862443
+status: stable
+description: |
+    Detects data staging by identifying anomalous file aggregation patterns, 
+    low-compression archival switches, and mass-copy operations into 
+    hidden or temporary system directories from untrusted shells.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.collection
+    - attack.t1074
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_staging_paths:
+        CommandLine|contains:
+            - ':\PerfLogs\'           
+            - ':\Users\Public\'
+            - ':\Windows\Temp\'
+            - '\AppData\Local\Temp\'
+            - ':\RECYCLER\'           
+            - ':\ProgramData\'
+
+    selection_archive_flags:
+        CommandLine|contains:
+            - ' -m0'                  
+            - ' -mx0'                 
+            - ' -p'                   
+            - ' -ta'                  
+            - ' -r '                 
+
+    selection_tools:
+        - Image|endswith:
+            - '\7z.exe'
+            - '\rar.exe'
+            - '\makecab.exe'           
+            - '\powershell.exe'
+            - '\tar.exe'
+        - CommandLine|contains:
+            - 'Compress-Archive'
+            - 'type * >> '              
+
+    selection_context:
+        ParentImage|endswith:
+            - '\w3wp.exe'               
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\httpd.exe'
+        IntegrityLevel: 'Medium'        
+
+    filter_trusted_automation:
+        - Image|contains:
+            - 'C:\Windows\CCM\'        
+            - 'C:\Program Files\Microsoft\' 
+        - User: 'NT AUTHORITY\SYSTEM'
+        - CommandLine|contains:
+            - 'SoftwareDistribution'    
+            - 'C:\Windows\Installer'
+            - 'OneDrive.exe'
+
+    condition: selection_staging_paths and (selection_archive_flags or selection_tools) and selection_context and not filter_trusted_automation
+level: critical

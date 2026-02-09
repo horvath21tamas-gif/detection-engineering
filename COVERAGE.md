@@ -34,6 +34,7 @@
 | T1007 | HIGH | Ultra-Pro High-Fidelity System Service Discovery (T1007) |
 | T1008 | CRITICAL | Ultra-Pro High-Fidelity Fallback Channel Detection (T1008) |
 | T1010 | HIGH | Ultra-Pro High-Fidelity Application Window Discovery (T1010) |
+| T1011 | HIGH | Ultra-Pro High-Fidelity Bluetooth Exfiltration (T1011) |
 | T1012 | HIGH | Ultra-Pro High-Fidelity Query Registry Discovery (T1012) |
 | T1014 | CRITICAL | Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014) |
 | T1016 | HIGH | Ultra-Pro High-Fidelity System Network Configuration Discovery (T1016) |

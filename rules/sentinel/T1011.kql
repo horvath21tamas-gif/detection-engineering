@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\fsquirt.exe", "*\bttransfer.exe", "*\BTTray.exe")) or (ProcessCommandLine in ("*Bluetooth.Radio*", "*System.Net.Sockets.AddressFamily::BlueTooth*"))) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powershell.exe", "*\wscript.exe", "*\cmd.exe", "*\schtasks.exe")) or (ProcessCommandLine in ("*\AppData\*", "*\Temp\*", "*\Public\*", "* -send*", "* /send*"))) and (not (ParentProcessName endswith "\explorer.exe" or FolderPath contains "\Program Files\" or User =~ "NT AUTHORITY\SYSTEM"))

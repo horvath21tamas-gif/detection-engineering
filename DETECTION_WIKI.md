@@ -19,6 +19,7 @@
 - [Ultra-Pro High-Fidelity System Service Discovery (T1007)](#ultra-pro-high-fidelity-system-service-discovery-(t1007))
 - [Ultra-Pro High-Fidelity Fallback Channel Detection (T1008)](#ultra-pro-high-fidelity-fallback-channel-detection-(t1008))
 - [Ultra-Pro High-Fidelity Application Window Discovery (T1010)](#ultra-pro-high-fidelity-application-window-discovery-(t1010))
+- [Ultra-Pro High-Fidelity Bluetooth Exfiltration (T1011)](#ultra-pro-high-fidelity-bluetooth-exfiltration-(t1011))
 - [Ultra-Pro High-Fidelity Query Registry Discovery (T1012)](#ultra-pro-high-fidelity-query-registry-discovery-(t1012))
 - [Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014)](#ultra-pro-high-fidelity-byovd-rootkit-loading-(t1014))
 - [Ultra-Pro High-Fidelity System Network Configuration Discovery (T1016)](#ultra-pro-high-fidelity-system-network-configuration-discovery-(t1016))
@@ -893,6 +894,23 @@ MainWindowTitle property access and Win32 API calls via CLI.
 Focuses on non-standard lineages and output redirection used by malware to exfiltrate window titles.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1010`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Bluetooth Exfiltration (T1011)
+- **Azonosító:** `T1011.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized Bluetooth data exfiltration by identifying programmatic 
+triggers of Bluetooth transfer wizards (fsquirt.exe) from non-standard 
+parent processes or suspicious command-line executions of radio-control tools.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1011`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

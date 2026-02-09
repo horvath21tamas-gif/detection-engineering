@@ -1,0 +1,66 @@
+title: Ultra-Pro High-Fidelity Financial Theft (T1657)
+id: af0a1180-5670-4466-a00b-ae1f78816a44
+status: stable
+description: |
+    Detects potential financial theft and fraud by monitoring for clipboard 
+    manipulation (address swapping) and unauthorized financial document 
+    access originating from suspicious/web-facing parent processes.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1657
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_engines:
+        - Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\nircmd.exe'          
+            - '\python.exe'
+            - '\wscript.exe'
+
+    selection_logic:
+        CommandLine|contains:
+            - 'Get-Clipboard'       
+            - 'Set-Clipboard'        
+            - 'System.Windows.Forms.Clipboard' 
+            - 'WriteProcessMemory'   
+            - 'regex'               
+
+    selection_targets:
+        CommandLine|contains:
+            - 'invoice'             
+            - 'payment'              
+            - 'bank_statement'       
+            - 'iban'                 
+            - '.pdf'
+            - '.xlsx'
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'         
+            - '\excel.exe'
+            - '\httpd.exe'           
+            - '\rundll32.exe'       
+            - '\msedge.exe'          
+            - '\chrome.exe'
+        - Image|contains:
+            - '\Temp\'
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+
+    filter_legit_erp:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - Image|contains:
+            - '\Program Files\'      
+        - CommandLine|contains:
+            - 'Inventory'
+            - 'Backup'
+            - 'SignService'          
+
+    condition: selection_engines and (selection_logic and selection_targets) and selection_context and not filter_legit_erp
+level: high

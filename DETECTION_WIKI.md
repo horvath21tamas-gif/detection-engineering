@@ -151,6 +151,7 @@
 - [High-Fidelity Azure Role Assignment Escalation](#high-fidelity-azure-role-assignment-escalation)
 - [High-Fidelity Device Registration Persistence (T1098.005)](#high-fidelity-device-registration-persistence-(t1098005))
 - [High-Fidelity MFA Method Addition](#high-fidelity-mfa-method-addition)
+- [Ultra-Pro High-Fidelity Multi-Stage C2 (T1104)](#ultra-pro-high-fidelity-multi-stage-c2-(t1104))
 - [Suspicious Use of Built-in Windows Tools for File Download and Code Execution](#suspicious-use-of-built-in-windows-tools-for-file-download-and-code-execution)
 - [High-Fidelity Native API Abuse via LOLBins](#high-fidelity-native-api-abuse-via-lolbins)
 - [Ultra-Pro High-Fidelity Brute Force & Tooling (T1110)](#ultra-pro-high-fidelity-brute-force-&-tooling-(t1110))
@@ -3087,6 +3088,23 @@ to maintain access after an initial account compromise.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Multi-Stage C2 (T1104)
+- **Azonosító:** `T1104.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects multi-stage C2 communication by identifying fileless execution patterns 
+where the result of a network request is piped directly into memory-load 
+functions or script evaluators without intermediate disk writes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1104`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

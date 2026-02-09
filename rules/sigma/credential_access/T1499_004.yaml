@@ -1,0 +1,58 @@
+title: Ultra-Pro High-Fidelity Resource Exhaustion (T1499.004)
+id: cb7eddb1-06a2-4c5b-989e-261ebd252d34
+status: stable
+description: |
+    Detects targeted resource exhaustion attempts (CPU/RAM/IO) by identifying 
+    infinite loop patterns and massive memory allocation attempts 
+    originating from suspicious process lineages.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1499.004
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_engines:
+        - Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+
+    selection_logic:
+        CommandLine|contains:
+            - 'while($true)'          
+            - 'for(;;)'               
+            - '::MemoryStream'       
+            - 'AllocHGlobal'          
+            - 'foreach($i in 1..1gb)' 
+            - ':loop'                
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'         
+            - '\excel.exe'
+            - '\httpd.exe'            
+            - '\rundll32.exe'         
+            - '\outlook.exe'
+        - Image|contains:
+            - '\Temp\'
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+
+    filter_legit_apps:
+        - User: 'NT AUTHORITY\SYSTEM' 
+        - ParentImage|endswith:
+            - '\CcmExec.exe'          
+            - '\msiexec.exe'          
+            - '\devenv.exe'          
+        - CommandLine|contains:
+            - 'HealthCheck'           
+            - 'Diagnostic'
+            - 'AzureAD'               
+
+    condition: selection_engines and selection_logic and selection_context and not filter_legit_apps
+level: critical

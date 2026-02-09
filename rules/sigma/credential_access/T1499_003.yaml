@@ -1,0 +1,56 @@
+title: Ultra-Pro High-Fidelity OS Self-Destruction (T1499.003)
+id: b11b5b52-baed-43c7-978f-45d0b8568d41
+status: stable
+description: |
+    Detects targeted OS self-destruction by monitoring for forced termination of 
+    critical kernel processes (csrss.exe, wininit.exe) and malicious use of 
+    system debuggers to trigger immediate BSOD, specifically filtering out 
+    trusted management and update processes.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1499.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_critical_termination:
+        - Image|endswith: '\taskkill.exe'
+        - CommandLine|contains:
+            - ' /f /im csrss.exe'     
+            - ' /f /im wininit.exe'   
+            - ' /f /im smss.exe'      
+            - ' /f /im services.exe'  
+
+    selection_ntsd_abuse:
+        Image|endswith: '\ntsd.exe'
+        CommandLine|contains:
+            - '-pn csrss.exe'
+            - '-pn wininit.exe'
+            - '-c q'                
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'          
+            - '\excel.exe'
+            - '\httpd.exe'            
+            - '\rundll32.exe'        
+            - '\outlook.exe'
+        - Image|contains:
+            - '\Temp\'
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+
+    filter_legit_service_ops:
+        - User: 'NT AUTHORITY\SYSTEM' 
+        - ParentImage|endswith:
+            - '\CcmExec.exe'          
+            - '\msiexec.exe'          
+            - '\TiWorker.exe'         
+        - CommandLine|contains:
+            - 'HealthCheck'          
+            - 'Diagnostic'
+
+    condition: (selection_critical_termination or selection_ntsd_abuse) and selection_context and not filter_legit_service_ops
+level: critical

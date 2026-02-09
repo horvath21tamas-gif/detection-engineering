@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("*Graphics.CopyFromScreen*", "*Drawing.Bitmap.Save*", "*System.Windows.Forms.Screen*")) and (ProcessCommandLine in ("*-WindowStyle Hidden*", "* -enc *", "*Drawing.Imaging.ImageFormat*"))) or (((FolderPath endswith "\psr.exe" and (ProcessCommandLine in ("*/start*", "*/output*", "*/sc 1*", "*/maxsc*"))) and ((ParentProcessName in ("*\w3wp.exe", "*\powershell.exe", "*\cmd.exe", "*\rundll32.exe")) and IntegrityLevel =~ "Medium")) and (not ((FolderPath in ("*C:\Windows\System32\SnippingTool.exe*", "*\Microsoft Teams\*", "*\Zoom.exe*", "*\Slack.exe*")) or (ProcessCommandLine in ("*Microsoft.AAD.BrokerPlugin*", "*C:\Windows\System32\SmartScreen.exe*")) or User =~ "NT AUTHORITY\SYSTEM")))

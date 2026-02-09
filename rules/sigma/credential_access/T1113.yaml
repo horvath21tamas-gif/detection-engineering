@@ -51,7 +51,7 @@ detection:
         - CommandLine|contains:
             - 'Microsoft.AAD.BrokerPlugin'
             - 'C:\Windows\System32\SmartScreen.exe'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_ps_api and selection_evasion) or (selection_psr_stealth and selection_context) and not filter_trusted_productivity
 level: critical

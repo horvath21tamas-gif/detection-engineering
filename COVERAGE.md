@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-09 07:23:27`
+**Utolsó frissítés:** `2026-02-09 07:55:48`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 551 | 100% |
-| Splunk (SPL) | 540 | 98.0% |
-| Microsoft Sentinel (KQL) | 544 | 98.7% |
-| QRadar (AQL) | 214 | 38.8% |
-| Elastic (KQL/EQL) | 544 | 98.7% |
-| RSA NetWitness | 539 | 97.8% |
+| Sigma (Forrás) | 557 | 100% |
+| Splunk (SPL) | 546 | 98.0% |
+| Microsoft Sentinel (KQL) | 550 | 98.7% |
+| QRadar (AQL) | 214 | 38.4% |
+| Elastic (KQL/EQL) | 550 | 98.7% |
+| RSA NetWitness | 545 | 97.8% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -131,7 +131,10 @@
 | T1070.008 | CRITICAL | Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008) |
 | T1070.009 | HIGH | Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009) |
 | T1071 | CRITICAL | Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071) |
-| T1071.001 | CRITICAL | Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071) |
+| T1071.001 | CRITICAL | Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071), Ultra-Pro High-Fidelity HTTP/S C2 Anomaly (T1071.001) |
+| T1071.002 | CRITICAL | Ultra-Pro High-Fidelity FTP/SFTP Protocol Anomaly (T1071.002) |
+| T1071.003 | CRITICAL | Ultra-Pro High-Fidelity Mail Protocol Anomaly (T1071.003) |
+| T1071.004 | CRITICAL | Ultra-Pro High-Fidelity DNS Tunneling & Beaconing (T1071.004) |
 | T1072 | CRITICAL | High-Fidelity Software Deployment Tool Abuse Detection |
 | T1074 | CRITICAL | Ultra-Pro High-Fidelity Data Staging Anomaly (T1074), Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001) |
 | T1074.001 | CRITICAL | Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001) |
@@ -150,6 +153,7 @@
 | T1087.003 | HIGH | Ultra-Pro High-Fidelity Email Account Discovery (T1087.003) |
 | T1087.004 | HIGH | Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004) |
 | T1091 | HIGH | High-Fidelity Process Execution from Removable Media |
+| T1092 | CRITICAL | Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092) |
 | T1098 | CRITICAL | Suspicious Use of net user or net localgroup via cmd.exe, High-Fidelity Account Manipulation - Persistence Focused |
 | T1098.001 | CRITICAL | High-Fidelity Entra ID Application Credential Addition |
 | T1098.002 | CRITICAL | High-Fidelity Exchange Mailbox Permission Grant (T1098.002) |

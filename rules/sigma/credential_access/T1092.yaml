@@ -49,7 +49,7 @@ detection:
             - '$RECYCLE.BIN'
             - 'System Volume Information'
             - 'Found.000'
-        - User: 'NT AUTHORITY\SYSTEM'     
+        - username: 'NT AUTHORITY\SYSTEM'     
 
     condition: selection_removable and selection_suspicious_files and selection_procs and not filter_legit_noise
 level: critical

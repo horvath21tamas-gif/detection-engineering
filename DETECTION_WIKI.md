@@ -116,6 +116,10 @@
 - [Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008)](#ultra-pro-high-fidelity-email-storage-and-database-destruction-(t1070008))
 - [Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009)](#ultra-pro-high-fidelity-persistence-artifact-removal-(t1070009))
 - [Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071)](#ultra-pro-high-fidelity-application-layer-c2-anomaly-(t1071))
+- [Ultra-Pro High-Fidelity HTTP/S C2 Anomaly (T1071.001)](#ultra-pro-high-fidelity-https-c2-anomaly-(t1071001))
+- [Ultra-Pro High-Fidelity FTP/SFTP Protocol Anomaly (T1071.002)](#ultra-pro-high-fidelity-ftpsftp-protocol-anomaly-(t1071002))
+- [Ultra-Pro High-Fidelity Mail Protocol Anomaly (T1071.003)](#ultra-pro-high-fidelity-mail-protocol-anomaly-(t1071003))
+- [Ultra-Pro High-Fidelity DNS Tunneling & Beaconing (T1071.004)](#ultra-pro-high-fidelity-dns-tunneling-&-beaconing-(t1071004))
 - [High-Fidelity Software Deployment Tool Abuse Detection](#high-fidelity-software-deployment-tool-abuse-detection)
 - [Ultra-Pro High-Fidelity Data Staging Anomaly (T1074)](#ultra-pro-high-fidelity-data-staging-anomaly-(t1074))
 - [Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001)](#ultra-pro-high-fidelity-local-data-staging-anomaly-(t1074001))
@@ -134,6 +138,7 @@
 - [Ultra-Pro High-Fidelity Email Account Discovery (T1087.003)](#ultra-pro-high-fidelity-email-account-discovery-(t1087003))
 - [Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004)](#ultra-pro-high-fidelity-cloud-account-discovery-(t1087004))
 - [High-Fidelity Process Execution from Removable Media](#high-fidelity-process-execution-from-removable-media)
+- [Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092)](#ultra-pro-high-fidelity-removable-media-c2-anomaly-(t1071002--t1092))
 - [High-Fidelity Account Manipulation - Persistence Focused](#high-fidelity-account-manipulation---persistence-focused)
 - [High-Fidelity Entra ID Application Credential Addition](#high-fidelity-entra-id-application-credential-addition)
 - [High-Fidelity Exchange Mailbox Permission Grant (T1098.002)](#high-fidelity-exchange-mailbox-permission-grant-(t1098002))
@@ -2482,6 +2487,74 @@ and suspicious parent-child relationships.
 
 ---
 
+## Ultra-Pro High-Fidelity HTTP/S C2 Anomaly (T1071.001)
+- **Azonosító:** `T1071_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects potential C2 communication over HTTP/S by identifying anomalous 
+network connections from processes that typically lack networking logic, 
+or show signs of process hollowing and suspicious parent-child lineage.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity FTP/SFTP Protocol Anomaly (T1071.002)
+- **Azonosító:** `T1071_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized use of file transfer protocols by monitoring for 
+non-interactive FTP/SFTP sessions, suspicious script-based transfers, 
+and anomalous parent-child process relationships (e.g., Office to FTP).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Mail Protocol Anomaly (T1071.003)
+- **Azonosító:** `T1071_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized email-based C2 or exfiltration by identifying direct 
+mail protocol (SMTP, IMAP, POP3) connections from non-mail processes, 
+focusing on .NET/PowerShell automation and suspicious process lineages.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity DNS Tunneling & Beaconing (T1071.004)
+- **Azonosító:** `T1071_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects DNS tunneling and C2 by monitoring for high-entropy subdomains, 
+unusual query types (TXT, NULL), and DNS activity from non-network 
+native processes with specific focus on length and frequency.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## High-Fidelity Software Deployment Tool Abuse Detection
 - **Azonosító:** `T1072.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
@@ -2782,6 +2855,23 @@ attacks while filtering out common portable applications.
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092)
+- **Azonosító:** `T1092.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized C2 or data staging via removable media by identifying 
+non-interactive processes accessing hidden/system files on USB volumes, 
+focusing on automated script execution and Alternate Data Stream (ADS) abuse.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1092`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

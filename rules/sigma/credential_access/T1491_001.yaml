@@ -56,7 +56,7 @@ detection:
             - '\gpscript.exe'                        
         - CommandLine|contains:
             - 'company_logo'                        
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: ((selection_registry and selection_keys) or selection_file_mod) and selection_context and not filter_legit
 level: critical

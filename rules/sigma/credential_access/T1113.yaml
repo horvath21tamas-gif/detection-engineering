@@ -1,0 +1,57 @@
+title: Ultra-Pro High-Fidelity Screen Capture Anomaly (T1113)
+id: 50493d1e-f930-45fc-8ba5-2b8a8acc5a69
+status: stable
+description: |
+    Detects unauthorized screen capture by identifying suspicious .NET/GDI+ API 
+    calls within PowerShell, hidden PSR.exe sessions, and automated image 
+    serialization to temporary/public directories.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.collection
+    - attack.t1113
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_ps_api:
+        CommandLine|contains:
+            - 'Graphics.CopyFromScreen'  
+            - 'Drawing.Bitmap.Save'      
+            - 'System.Windows.Forms.Screen' 
+
+    selection_psr_stealth:
+        Image|endswith: '\psr.exe'
+        CommandLine|contains:
+            - '/start'
+            - '/output'                  
+            - '/sc 1'                     
+            - '/maxsc'                  
+
+    selection_evasion:
+        CommandLine|contains:
+            - '-WindowStyle Hidden'      
+            - ' -enc '                   
+            - 'Drawing.Imaging.ImageFormat' 
+
+    selection_context:
+        ParentImage|endswith:
+            - '\w3wp.exe'                
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\rundll32.exe'
+        IntegrityLevel: 'Medium'         
+
+    filter_trusted_productivity:
+        - Image|contains:
+            - 'C:\Windows\System32\SnippingTool.exe' 
+            - '\Microsoft Teams\'
+            - '\Zoom.exe'
+            - '\Slack.exe'
+        - CommandLine|contains:
+            - 'Microsoft.AAD.BrokerPlugin'
+            - 'C:\Windows\System32\SmartScreen.exe'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: (selection_ps_api and selection_evasion) or (selection_psr_stealth and selection_context) and not filter_trusted_productivity
+level: critical

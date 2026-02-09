@@ -1,0 +1,62 @@
+title: Ultra-Pro High-Fidelity Transmitted Data Manipulation (T1565.002)
+id: bff93518-2144-48a6-af30-ffc6b8f6809f
+status: stable
+description: |
+    Detects unauthorized network redirection and resolution manipulation (DNS, Proxy, Hosts) 
+    by identifying CLI-based configuration changes originating from suspicious 
+    parent processes or targeting critical registry keys.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1565.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\netsh.exe'           
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\reg.exe'             
+            - '\cmd.exe'
+
+    selection_logic:
+        CommandLine|contains:
+            - 'set dns'              
+            - 'set proxy'           
+            - 'winhttp set proxy'    
+            - 'AutoConfigURL'        
+            - 'ProxyServer'
+            - 'ProxyEnable'
+            - 'Internet Settings'
+
+    selection_hosts:
+        CommandLine|contains:
+            - '\etc\hosts'
+            - 'System32\drivers\etc\hosts'
+        CommandLine|contains:
+            - ' >> '                 
+            - 'Set-Content'
+            - 'Add-Content'
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'        
+            - '\excel.exe'
+            - '\httpd.exe'         
+            - '\rundll32.exe'    
+            - '\explorer.exe'      
+
+    filter_legit:
+        - ParentImage|endswith:
+            - '\msiexec.exe'
+            - '\CcmExec.exe'         
+        - CommandLine|contains:
+            - '127.0.0.1'           
+            - 'localhost'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_tools and (selection_logic or selection_hosts) and selection_context and not filter_legit
+level: critical

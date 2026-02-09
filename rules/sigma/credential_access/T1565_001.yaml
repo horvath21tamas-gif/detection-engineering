@@ -56,7 +56,7 @@ detection:
             - '\msiexec.exe'         
         - CommandLine|contains:
             - 'Program Files'      
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_tools and selection_logic and (selection_targets or selection_context) and not filter_legit
 level: critical

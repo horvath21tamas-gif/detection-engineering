@@ -53,5 +53,5 @@ detection:
             - 'get pods --watch'    
             - '--version'
 
-    condition: selection_cli and selection_commands and (selection_suspicious_parent or selection_automation) and not filter_legit_ops
+    condition: selection_tools and selection_commands and (selection_suspicious_parent or selection_automation) and not filter_legit_ops
 level: high

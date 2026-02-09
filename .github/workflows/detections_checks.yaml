@@ -132,7 +132,7 @@ jobs:
               sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk error"
               sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic error"
               # QRadar: A pipeline használata a backend hiba elkerülésére
-              sigma convert -t qradar -p tools/qradar_pipeline.yml "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar error"
+              sigma convert -t qradar -p tools/qradar_pipeline.yaml "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar error"
             
             # EGYÉB (E-MAIL, STB.) SZABÁLYOK (PIPELINE KIKAPCSOLÁSA)
             else

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*/kubectl", "*/docker", "*/crictl", "*/nerdctl")) and (ProcessCommandLine in ("*auth can-i*", "*get secrets*", "*describe pod*", "*inspect*", "*get nodes*")) and (((ParentProcessName in ("*/www-data*", "*/nginx*", "*/httpd*", "*/php-fpm*", "*/python*")) and username =~ "root") or (ProcessCommandLine in ("*--format json*", "*-o json*", "* | jq*", "* > *"))) and (not ((FolderPath in ("*/usr/bin/kubelet*", "*/datadog-agent*")) and (ProcessCommandLine in ("*get pods --watch*", "*--version*"))))

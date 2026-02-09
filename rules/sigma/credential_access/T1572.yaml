@@ -1,0 +1,52 @@
+title: Ultra-Pro High-Fidelity Protocol Tunneling Detection (T1571)
+id: 384bacd6-a7f6-46ec-b6a4-689879013f04
+status: stable
+description: |
+    Detects protocol tunneling by identifying non-standard encapsulation logic, 
+    low-level socket proxying (SOCKS5), and specific CLI signatures of 
+    adversary tunneling tools while filtering legitimate administrative SSH/VPN traffic.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.command_and_control
+    - attack.t1572
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools_cli:
+        CommandLine|contains:
+            - ' client '                       
+            - ' -socks5 '                      
+            - ' -reverse '                     
+            - ' -R:socks '                    
+            - ' -tun '                         
+            - ' -forward '                     
+
+    selection_encapsulation:
+        CommandLine|contains:
+            - 'IcmpSendEcho'                  
+            - ' -target '                     
+            - ' -dns '                      
+            - ' -port 53 '                     
+
+    selection_procs:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\rundll32.exe'
+            - '\svchost.exe'                  
+            - '\regsvr32.exe'
+
+    filter_legit_admin_tools:
+        - Image|contains:
+            - '\Windows\System32\OpenSSH\'    
+            - '\Program Files\OpenVPN'     
+            - '\FortiClient'                 
+        - CommandLine|contains:
+            - 'git-remote-https'              
+            - 'Azure'                     
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: (selection_tools_cli or selection_encapsulation) and selection_procs and not filter_legit_admin_tools
+level: critical

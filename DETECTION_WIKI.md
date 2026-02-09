@@ -437,6 +437,7 @@
 - [High-Fidelity Browser-Originating Payload Execution](#high-fidelity-browser-originating-payload-execution)
 - [High-Fidelity Process Spawn from Business Communication Service](#high-fidelity-process-spawn-from-business-communication-service)
 - [High-Fidelity Detection of Post-Vishing Remote Tool Execution](#high-fidelity-detection-of-post-vishing-remote-tool-execution)
+- [Ultra-Pro High-Fidelity Web Service Exfiltration (T1567)](#ultra-pro-high-fidelity-web-service-exfiltration-(t1567))
 - [Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568)](#ultra-pro-high-fidelity-dynamic-resolution-&-dga-(t1568))
 - [Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001)](#ultra-pro-high-fidelity-fast-flux-&-dns-cache-evasion-(t1568001))
 - [Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002)](#ultra-pro-high-fidelity-domain-generation-algorithm-(dga)-(t1568002))
@@ -7884,6 +7885,23 @@ This pattern is a high-confidence indicator of a successful vishing attack where
 the victim is instructed to run "support" software.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Web Service Exfiltration (T1567)
+- **Azonosító:** `T1567.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects systematic data exfiltration to cloud services by identifying 
+headless transfer tools (rclone, megatools) using custom config files 
+from untrusted paths or triggered by non-admin parent processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1567`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

@@ -452,6 +452,7 @@
 | T1566.002 | CRITICAL | High-Fidelity Browser-Originating Payload Execution |
 | T1566.003 | CRITICAL | High-Fidelity Process Spawn from Business Communication Service |
 | T1566.004 | HIGH | High-Fidelity Detection of Post-Vishing Remote Tool Execution |
+| T1567 | CRITICAL | Ultra-Pro High-Fidelity Web Service Exfiltration (T1567) |
 | T1568 | HIGH | Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568) |
 | T1568.001 | CRITICAL | Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001) |
 | T1568.002 | CRITICAL | Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568), Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002) |

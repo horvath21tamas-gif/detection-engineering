@@ -1,0 +1,61 @@
+title: Ultra-Pro High-Fidelity Disk Content Wipe (T1561.001)
+id: c2592f79-8f9e-478d-83c9-3c5d9ac0a786
+status: stable
+description: |
+    Detects low-level disk content wiping by monitoring for direct physical device 
+    access identifiers and destructive overwrite parameters, specifically filtering 
+    out known-good administrative, security, and imaging tools.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1561.001
+    - attack.t1561
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\dd.exe'             
+            - '\sdelete.exe'        
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+
+    selection_logic:
+        CommandLine|contains:
+            - '\\.\PhysicalDrive'    
+            - '\\.\Harddisk'         
+            - 'if=/dev/zero'        
+            - 'if=/dev/urandom'      
+            - 'of=\\.\'             
+            - ' -z '                
+            - ' -p '                
+            - 'Clear-Disk'           
+            - 'Initialize-Disk'      
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'         
+            - '\excel.exe'
+            - '\httpd.exe'           
+            - '\rundll32.exe'        
+            - '\explorer.exe'        
+        - Image|contains:
+            - '\Temp\'
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+
+    filter_legit:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith:
+            - '\msiexec.exe'         
+            - '\CcmExec.exe'        
+            - '\setup.exe'         
+        - CommandLine|contains:
+            - 'Program Files'       
+            - 'vds.exe'            
+
+    condition: selection_tools and selection_logic and selection_context and not filter_legit
+level: critical

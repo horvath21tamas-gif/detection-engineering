@@ -52,7 +52,7 @@ detection:
         - Image|contains:
             - '\Program Files\'
             - '\Program Files (x86)\'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_procs and not filter_standard_ports and not filter_internal_networks and not filter_legit_software
 level: critical

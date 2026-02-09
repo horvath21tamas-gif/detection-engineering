@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-09 08:29:54`
+**Utolsó frissítés:** `2026-02-09 08:50:48`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 565 | 100% |
-| Splunk (SPL) | 554 | 98.1% |
-| Microsoft Sentinel (KQL) | 558 | 98.8% |
-| QRadar (AQL) | 214 | 37.9% |
-| Elastic (KQL/EQL) | 558 | 98.8% |
-| RSA NetWitness | 553 | 97.9% |
+| Sigma (Forrás) | 575 | 100% |
+| Splunk (SPL) | 562 | 97.7% |
+| Microsoft Sentinel (KQL) | 568 | 98.8% |
+| QRadar (AQL) | 214 | 37.2% |
+| Elastic (KQL/EQL) | 568 | 98.8% |
+| RSA NetWitness | 561 | 97.6% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -159,6 +159,7 @@
 | T1087.004 | HIGH | Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004) |
 | T1091 | HIGH | High-Fidelity Process Execution from Removable Media |
 | T1092 | CRITICAL | Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092) |
+| T1095 | CRITICAL | Ultra-Pro High-Fidelity Non-Application Layer C2 (T1095) |
 | T1098 | CRITICAL | Suspicious Use of net user or net localgroup via cmd.exe, High-Fidelity Account Manipulation - Persistence Focused |
 | T1098.001 | CRITICAL | High-Fidelity Entra ID Application Credential Addition |
 | T1098.002 | CRITICAL | High-Fidelity Exchange Mailbox Permission Grant (T1098.002) |
@@ -433,7 +434,9 @@
 | T1566.003 | CRITICAL | High-Fidelity Process Spawn from Business Communication Service |
 | T1566.004 | HIGH | High-Fidelity Detection of Post-Vishing Remote Tool Execution |
 | T1568 | HIGH | Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568) |
-| T1568.002 | HIGH | Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568) |
+| T1568.001 | CRITICAL | Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001) |
+| T1568.002 | CRITICAL | Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568), Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002) |
+| T1568.003 | CRITICAL | Ultra-Pro High-Fidelity DNS Calculation & Extraction (T1568.003) |
 | T1569 | HIGH | High-Fidelity System Service Execution Detection |
 | T1569.001 | CRITICAL | High-Fidelity Launch Daemon Persistence Detection |
 | T1569.002 | HIGH | High-Fidelity System Service Execution Detection, High-Fidelity System Service Execution Detection (T1569.002) |

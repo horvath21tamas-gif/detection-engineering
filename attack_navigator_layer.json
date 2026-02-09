@@ -1264,6 +1264,10 @@
             "color": "#ff6666"
         },
         {
+            "techniqueID": "T1095",
+            "color": "#ff6666"
+        },
+        {
             "techniqueID": "T1078.001",
             "color": "#ff6666"
         },
@@ -2233,6 +2237,10 @@
         },
         {
             "techniqueID": "T1583.007",
+            "color": "#ff6666"
+        },
+        {
+            "techniqueID": "T1571",
             "color": "#ff6666"
         },
         {

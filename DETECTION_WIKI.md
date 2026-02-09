@@ -144,6 +144,7 @@
 - [Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004)](#ultra-pro-high-fidelity-cloud-account-discovery-(t1087004))
 - [High-Fidelity Process Execution from Removable Media](#high-fidelity-process-execution-from-removable-media)
 - [Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092)](#ultra-pro-high-fidelity-removable-media-c2-anomaly-(t1071002--t1092))
+- [Ultra-Pro High-Fidelity Non-Application Layer C2 (T1095)](#ultra-pro-high-fidelity-non-application-layer-c2-(t1095))
 - [High-Fidelity Account Manipulation - Persistence Focused](#high-fidelity-account-manipulation---persistence-focused)
 - [High-Fidelity Entra ID Application Credential Addition](#high-fidelity-entra-id-application-credential-addition)
 - [High-Fidelity Exchange Mailbox Permission Grant (T1098.002)](#high-fidelity-exchange-mailbox-permission-grant-(t1098002))
@@ -418,6 +419,9 @@
 - [High-Fidelity Process Spawn from Business Communication Service](#high-fidelity-process-spawn-from-business-communication-service)
 - [High-Fidelity Detection of Post-Vishing Remote Tool Execution](#high-fidelity-detection-of-post-vishing-remote-tool-execution)
 - [Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568)](#ultra-pro-high-fidelity-dynamic-resolution-&-dga-(t1568))
+- [Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001)](#ultra-pro-high-fidelity-fast-flux-&-dns-cache-evasion-(t1568001))
+- [Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002)](#ultra-pro-high-fidelity-domain-generation-algorithm-(dga)-(t1568002))
+- [Ultra-Pro High-Fidelity DNS Calculation & Extraction (T1568.003)](#ultra-pro-high-fidelity-dns-calculation-&-extraction-(t1568003))
 - [High-Fidelity System Service Execution Detection](#high-fidelity-system-service-execution-detection)
 - [High-Fidelity Launch Daemon Persistence Detection](#high-fidelity-launch-daemon-persistence-detection)
 - [High-Fidelity System Service Execution Detection (T1569.002)](#high-fidelity-system-service-execution-detection-(t1569002))
@@ -2968,6 +2972,23 @@ focusing on automated script execution and Alternate Data Stream (ADS) abuse.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Non-Application Layer C2 (T1095)
+- **Azonosító:** `T1095.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects custom C2 communication via raw TCP/UDP sockets by identifying 
+the instantiation of low-level NetworkStreams and manual byte-array 
+buffer manipulation followed by socket write operations.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1095`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
@@ -7534,6 +7555,57 @@ DNS queries within loops, low-level DNS API calls from scripting engines,
 and anomalous domain patterns from non-browser processes.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1568, 002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001)
+- **Azonosító:** `T1568_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects Fast Flux DNS infrastructure usage by identifying forced DNS cache 
+flushing combined with programmatic name resolution and loop-based 
+connectivity checks from non-system processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002)
+- **Azonosító:** `T1568_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects DGA activity by monitoring for rapid, programmatic DNS resolution attempts, 
+high-entropy domain patterns in command lines, and the suppression of DNS errors 
+from non-standard processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity DNS Calculation & Extraction (T1568.003)
+- **Azonosító:** `T1568_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects C2 address calculation by identifying programmatic DNS TXT/SRV record 
+retrieval followed by explicit data type conversion or byte-level manipulation 
+within script interpreters.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

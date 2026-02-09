@@ -1,0 +1,2 @@
+(((process = '*\\powershell.exe*' OR process = '*\\pwsh.exe*' OR process = '*\\rundll32.exe*' OR process = '*\\mshta.exe*' OR process = '*\\regsvr32.exe*' OR process = '*\\certutil.exe*' OR process = '*\\scrcons.exe*' OR process = '*\\bitsadmin.exe*'))) AND (NOT ((DestinationPort = 53,80,443,8080,8443,5985,5986)) AND (NOT ((DestinationIp begins '10.','192.168.','172.16.','172.17.','172.18.','172.19.','172.2','172.3','127.','169.254.')) AND (NOT (((((process = '*\\Program Files\\*' OR process = '*\\Program Files (x86)\\*'))) OR ((user.dst = '*NT AUTHORITY\\SYSTEM*'))))
+)))

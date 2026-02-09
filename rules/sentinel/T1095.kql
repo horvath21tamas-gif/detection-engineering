@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*Net.Sockets.TcpClient*", "*Net.Sockets.UdpClient*", "*Net.Sockets.Socket*", "*GetStream()*", "*NetworkStream*")) and (ProcessCommandLine in ("*new-object byte[]*", "*.Write(*", "*.Read(*", "*[Byte[]]*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\rundll32.exe")) and (not ((ProcessCommandLine in ("*C:\Program Files\*", "*Microsoft\Azure*", "*HealthCheck*", "*Test-NetConnection*")) or User =~ "NT AUTHORITY\SYSTEM" or ParentProcessName endswith "\services.exe"))

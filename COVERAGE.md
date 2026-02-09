@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-09 09:44:25`
+**Utolsó frissítés:** `2026-02-09 10:16:31`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 585 | 100% |
-| Splunk (SPL) | 572 | 97.8% |
-| Microsoft Sentinel (KQL) | 578 | 98.8% |
-| QRadar (AQL) | 214 | 36.6% |
-| Elastic (KQL/EQL) | 578 | 98.8% |
-| RSA NetWitness | 571 | 97.6% |
+| Sigma (Forrás) | 593 | 100% |
+| Splunk (SPL) | 580 | 97.8% |
+| Microsoft Sentinel (KQL) | 586 | 98.8% |
+| QRadar (AQL) | 214 | 36.1% |
+| Elastic (KQL/EQL) | 586 | 98.8% |
+| RSA NetWitness | 579 | 97.6% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -41,6 +41,7 @@
 | T1016.002 | HIGH | Ultra-Pro High-Fidelity Terminal Services Configuration Discovery (T1016.002) |
 | T1018 | HIGH | Ultra-Pro High-Fidelity Remote System Discovery (T1018) |
 | T1020 | CRITICAL | Ultra-Pro High-Fidelity Automated Exfiltration (T1020) |
+| T1020.001 | CRITICAL | Ultra-Pro High-Fidelity Client-Linked Cloud Exfil (T1020.001) |
 | T1021 | MEDIUM | Rapid Logons to Multiple Distant Hosts by Same User |
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |
 | T1021.002 | HIGH | Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002) |
@@ -84,9 +85,13 @@
 | T1037.005 | CRITICAL | Ultra-Pro macOS Startup Items Persistence (T1037.005) |
 | T1039 | CRITICAL | Ultra-Pro High-Fidelity Network Share Discovery (T1039) |
 | T1040 | HIGH | Ultra-Pro High-Fidelity Network Sniffing Detection (T1040) |
+| T1041 | CRITICAL | Ultra-Pro High-Fidelity Exfiltration Over C2 Channel (T1041) |
 | T1046 | HIGH | Ultra-Pro High-Fidelity Network Service Discovery (T1046) |
 | T1047 | HIGH | Suspicious Remote Process Creation via WMIC |
 | T1048 | CRITICAL | Ultra-Pro High-Fidelity Alternative Protocol Exfiltration (T1048) |
+| T1048.001 | CRITICAL | Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001) |
+| T1048.002 | CRITICAL | Ultra-Pro High-Fidelity Asymmetric Encrypted Exfiltration (T1048.002) |
+| T1048.003 | CRITICAL | Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003) |
 | T1049 | HIGH | Ultra-Pro High-Fidelity System Network Connections Discovery (T1049) |
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
 | T1053.002 | HIGH | High-Fidelity At.exe Activity Detection |

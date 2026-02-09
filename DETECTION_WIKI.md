@@ -26,6 +26,7 @@
 - [Ultra-Pro High-Fidelity Terminal Services Configuration Discovery (T1016.002)](#ultra-pro-high-fidelity-terminal-services-configuration-discovery-(t1016002))
 - [Ultra-Pro High-Fidelity Remote System Discovery (T1018)](#ultra-pro-high-fidelity-remote-system-discovery-(t1018))
 - [Ultra-Pro High-Fidelity Automated Exfiltration (T1020)](#ultra-pro-high-fidelity-automated-exfiltration-(t1020))
+- [Ultra-Pro High-Fidelity Client-Linked Cloud Exfil (T1020.001)](#ultra-pro-high-fidelity-client-linked-cloud-exfil-(t1020001))
 - [Rapid Logons to Multiple Distant Hosts by Same User](#rapid-logons-to-multiple-distant-hosts-by-same-user)
 - [Suspicious RDP Logon from Unusual Source](#suspicious-rdp-logon-from-unusual-source)
 - [Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002)](#ultra-pro-high-fidelity-smb-admin-share-mapping-(t1021002))
@@ -69,9 +70,13 @@
 - [Ultra-Pro macOS Startup Items Persistence (T1037.005)](#ultra-pro-macos-startup-items-persistence-(t1037005))
 - [Ultra-Pro High-Fidelity Network Share Discovery (T1039)](#ultra-pro-high-fidelity-network-share-discovery-(t1039))
 - [Ultra-Pro High-Fidelity Network Sniffing Detection (T1040)](#ultra-pro-high-fidelity-network-sniffing-detection-(t1040))
+- [Ultra-Pro High-Fidelity Exfiltration Over C2 Channel (T1041)](#ultra-pro-high-fidelity-exfiltration-over-c2-channel-(t1041))
 - [Ultra-Pro High-Fidelity Network Service Discovery (T1046)](#ultra-pro-high-fidelity-network-service-discovery-(t1046))
 - [Suspicious Remote Process Creation via WMIC](#suspicious-remote-process-creation-via-wmic)
 - [Ultra-Pro High-Fidelity Alternative Protocol Exfiltration (T1048)](#ultra-pro-high-fidelity-alternative-protocol-exfiltration-(t1048))
+- [Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001)](#ultra-pro-high-fidelity-symmetric-encrypted-exfiltration-(t1048001))
+- [Ultra-Pro High-Fidelity Asymmetric Encrypted Exfiltration (T1048.002)](#ultra-pro-high-fidelity-asymmetric-encrypted-exfiltration-(t1048002))
+- [Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003)](#ultra-pro-high-fidelity-unencrypted-protocol-exfil-(t1048003))
 - [Ultra-Pro High-Fidelity System Network Connections Discovery (T1049)](#ultra-pro-high-fidelity-system-network-connections-discovery-(t1049))
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [High-Fidelity At.exe Activity Detection](#high-fidelity-atexe-activity-detection)
@@ -1016,6 +1021,23 @@ non-standard tools or cloud-sync binaries from suspicious locations.
 
 ---
 
+## Ultra-Pro High-Fidelity Client-Linked Cloud Exfil (T1020.001)
+- **Azonosító:** `T1020_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects data exfiltration by identifying official cloud storage clients 
+(OneDrive, Dropbox, etc.) being manipulated via command-line to sync 
+non-standard staging directories or running with high-entropy/scripted arguments.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Rapid Logons to Multiple Distant Hosts by Same User
 - **Azonosító:** `T1021.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
@@ -1733,6 +1755,23 @@ and offensive sniffing frameworks running from untrusted paths.
 
 ---
 
+## Ultra-Pro High-Fidelity Exfiltration Over C2 Channel (T1041)
+- **Azonosító:** `T1041.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects data exfiltration over an established C2 channel by correlating 
+systematic file read operations, memory-stream encoding, and long-standing 
+outbound network connections from non-browser processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1041`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Network Service Discovery (T1046)
 - **Azonosító:** `T1046.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -1774,6 +1813,57 @@ abnormal ICMP buffer sizes, SSH/tunneling flags in non-admin contexts,
 and network-capable LoLBins executing from suspicious paths.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1048`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001)
+- **Azonosító:** `T1048_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects encrypted data exfiltration by identifying SCP/SFTP/Rclone 
+usage from non-standard paths, focusing on automated (non-interactive) 
+flags and suspicious parent process lineages.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Asymmetric Encrypted Exfiltration (T1048.002)
+- **Azonosító:** `T1048_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects data exfiltration over asymmetric encrypted protocols (HTTPS) 
+by identifying command-line tools (curl, powershell) using upload-specific 
+flags from untrusted paths or launched by suspicious parent processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003)
+- **Azonosító:** `T1048_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects stealthy data exfiltration via DNS and ICMP by correlating 
+anomalous payload sizes and non-standard query types with suspicious 
+process lineages and untrusted execution paths.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

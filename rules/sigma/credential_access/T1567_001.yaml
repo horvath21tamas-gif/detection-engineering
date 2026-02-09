@@ -1,0 +1,60 @@
+title: Ultra-Pro High-Fidelity Code Repo Exfil (T1567.001)
+id: 87dc2a67-a011-4943-b849-24412d97a621
+status: stable
+description: |
+    Detects systematic data exfiltration to public code repositories by identifying 
+    headless git operations, inline PAT tokens, and remote repository pivots 
+    initiated from non-development parent processes or suspicious directories.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.exfiltration
+    - attack.t1567.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        Image|endswith:
+            - '\git.exe'             
+            - '\gh.exe'              
+            - '\powershell.exe'     
+            - '\curl.exe'
+
+    selection_logic:
+        CommandLine|contains:
+            - ' add . '              
+            - ' add -A'
+            - ' commit -m '         
+            - ' push --force'        
+            - 'remote add '         
+
+    selection_auth:
+        CommandLine|re: '(?i).*(github_pat_|glpat-|[a-zA-Z0-9]{30,}).*'
+
+    selection_context:
+        - Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+        - ParentImage|endswith:
+            - '\winword.exe'         
+            - '\excel.exe'
+            - '\rundll32.exe'        
+            - '\cmd.exe'            
+
+    filter_legit_ide:
+        - ParentImage|endswith:
+            - '\code.exe'           
+            - '\visualstudio.exe'
+            - '\idea64.exe'        
+            - '\sourcetree.exe'
+            - '\git-fork.exe'
+        - CommandLine|contains:
+            - ' pull '               
+            - ' clone '
+            - 'fetch'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: (selection_tools and selection_logic) and (selection_auth or selection_context) and not filter_legit_ide
+level: critical

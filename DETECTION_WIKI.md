@@ -283,6 +283,7 @@
 - [Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)](#ultra-pro-domain-trust-tampering-&-sid-filtering-bypass-(t1484002))
 - [Ultra-Pro High-Fidelity Data Destruction (T1485)](#ultra-pro-high-fidelity-data-destruction-(t1485))
 - [Ransomware Preparation Activity Detected on Windows Host (High Fidelity)](#ransomware-preparation-activity-detected-on-windows-host-(high-fidelity))
+- [Ultra-Pro High-Fidelity Service Stop (T1489)](#ultra-pro-high-fidelity-service-stop-(t1489))
 - [Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity)](#suspicious-deletion-of-volume-shadow-copies-via-vssadmin-(high-fidelity))
 - [Ultra-Pro High-Fidelity Defacement (T1491)](#ultra-pro-high-fidelity-defacement-(t1491))
 - [Ultra-Pro High-Fidelity Internal Defacement (T1491.001)](#ultra-pro-high-fidelity-internal-defacement-(t1491001))
@@ -5355,6 +5356,23 @@ initiated from suspicious parent processes or targeting non-temp directories.
 - **Leírás:** Detects ransomware preparation activity by identifying multiple recovery-inhibition and defense-evasion actions executed within a short time window. This includes disabling recovery options, deleting shadow copies, and stopping security-related services.
 - **Hamis pozitívok:** Rare manual disaster recovery testing, Advanced troubleshooting by senior administrators
 - **MITRE ATT&CK:** `T1486, T1490, 001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Service Stop (T1489)
+- **Azonosító:** `T1489.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized stopping of critical system and security services 
+by monitoring service control tools originating from suspicious process 
+lineages or targeting high-value defense mechanisms (EDR, VSS, AV).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1489`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

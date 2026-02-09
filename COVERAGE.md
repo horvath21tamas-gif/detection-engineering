@@ -459,8 +459,9 @@
 | T1564.010 | HIGH | Ultra-Pro High-Fidelity Process Argument Spoofing Detection (T1564.010) |
 | T1564.011 | HIGH | Ultra-Pro High-Fidelity Virtual Instance Abuse (T1564.011) |
 | T1565 | CRITICAL | Ultra-Pro High-Fidelity Data Manipulation (T1565) |
-| T1565.001 | CRITICAL | Ultra-Pro High-Fidelity Data Manipulation (T1565) |
-| T1565.002 | CRITICAL | Ultra-Pro High-Fidelity Data Manipulation (T1565) |
+| T1565.001 | CRITICAL | Ultra-Pro High-Fidelity Stored Data Manipulation (T1565.001), Ultra-Pro High-Fidelity Data Manipulation (T1565) |
+| T1565.002 | CRITICAL | Ultra-Pro High-Fidelity Transmitted Data Manipulation (T1565.002), Ultra-Pro High-Fidelity Data Manipulation (T1565) |
+| T1565.003 | CRITICAL | Ultra-Pro High-Fidelity Runtime Process Manipulation (T1565.003) |
 | T1566 | CRITICAL | High-Fidelity Phishing Payload Execution from Communication Apps |
 | T1566.001 | CRITICAL | High-Fidelity Spearphishing Attachment Execution |
 | T1566.002 | CRITICAL | High-Fidelity Browser-Originating Payload Execution |

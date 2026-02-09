@@ -441,6 +441,9 @@
 - [Ultra-Pro High-Fidelity Process Argument Spoofing Detection (T1564.010)](#ultra-pro-high-fidelity-process-argument-spoofing-detection-(t1564010))
 - [Ultra-Pro High-Fidelity Virtual Instance Abuse (T1564.011)](#ultra-pro-high-fidelity-virtual-instance-abuse-(t1564011))
 - [Ultra-Pro High-Fidelity Data Manipulation (T1565)](#ultra-pro-high-fidelity-data-manipulation-(t1565))
+- [Ultra-Pro High-Fidelity Stored Data Manipulation (T1565.001)](#ultra-pro-high-fidelity-stored-data-manipulation-(t1565001))
+- [Ultra-Pro High-Fidelity Transmitted Data Manipulation (T1565.002)](#ultra-pro-high-fidelity-transmitted-data-manipulation-(t1565002))
+- [Ultra-Pro High-Fidelity Runtime Process Manipulation (T1565.003)](#ultra-pro-high-fidelity-runtime-process-manipulation-(t1565003))
 - [High-Fidelity Phishing Payload Execution from Communication Apps](#high-fidelity-phishing-payload-execution-from-communication-apps)
 - [High-Fidelity Spearphishing Attachment Execution](#high-fidelity-spearphishing-attachment-execution)
 - [High-Fidelity Browser-Originating Payload Execution](#high-fidelity-browser-originating-payload-execution)
@@ -7967,6 +7970,57 @@ files (hosts, event logs) from non-standard parent processes.
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Stored Data Manipulation (T1565.001)
+- **Azonosító:** `T1565_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized modification of stored data (configs, logs, databases) 
+by identifying suspicious stream editing (sed, powershell-replace) 
+originating from non-standard parent processes or targeting critical system paths.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Transmitted Data Manipulation (T1565.002)
+- **Azonosító:** `T1565_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized network redirection and resolution manipulation (DNS, Proxy, Hosts) 
+by identifying CLI-based configuration changes originating from suspicious 
+parent processes or targeting critical registry keys.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Runtime Process Manipulation (T1565.003)
+- **Azonosító:** `T1565_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects runtime process manipulation by monitoring for suspicious memory access 
+masks (e.g., PROCESS_ALL_ACCESS) and remote thread injection between unrelated 
+processes, specifically filtering out known-good administrative and security tools.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

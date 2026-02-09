@@ -1,0 +1,58 @@
+title: Ultra-Pro High-Fidelity Exfiltration Over C2 Channel (T1041)
+id: a44e690b-fc3b-4d35-b9a4-11c2470640e1
+status: stable
+description: |
+    Detects data exfiltration over an established C2 channel by correlating 
+    systematic file read operations, memory-stream encoding, and long-standing 
+    outbound network connections from non-browser processes.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.exfiltration
+    - attack.t1041
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_mem_logic:
+        CommandLine|contains:
+            - ' [System.IO.MemoryStream]'     
+            - ' [System.Convert]::ToBase64'   
+            - ' .ReadBytes('                 
+            - ' .ReadAllBytes('
+            - 'Compress-Archive'            
+
+    selection_tools:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\rundll32.exe'        
+            - '\regsvcs.exe'
+            - '\mshta.exe'
+            - '\certutil.exe'        
+
+    selection_context:
+        - Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Public\'
+        - ParentImage|endswith:
+            - '\winword.exe'         
+            - '\excel.exe'
+            - '\wmiprvse.exe'        
+            - '\svchost.exe'         
+
+    filter_legit:
+        - Image|contains:
+            - '\Program Files\'
+            - '\Program Files (x86)\'
+        - CommandLine|contains:
+            - 'Windows\Logs'        
+            - 'softwareupdate'
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith:
+            - '\services.exe'
+
+    condition: selection_mem_logic and selection_tools and selection_context and not filter_legit
+level: critical

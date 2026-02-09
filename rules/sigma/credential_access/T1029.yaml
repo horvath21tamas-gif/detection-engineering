@@ -1,0 +1,50 @@
+title: Ultra-Pro High-Fidelity Scheduled Transfer (T1029)
+id: 7212cee0-8c78-43ed-a05f-90ada4c168d4
+status: stable
+description: |
+    Detects the creation of scheduled tasks for automated data exfiltration by 
+    analyzing Task XML for suspicious CLI tools, cloud-sync arguments, and 
+    high-frequency or off-hours triggers, while filtering legitimate system updates.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.exfiltration
+    - attack.t1029
+logsource:
+    product: windows
+    service: security
+detection:
+    selection_action:
+        EventData|contains:
+            - '\rclone.exe'          
+            - '\bitsadmin.exe'       
+            - '\certutil.exe'        
+            - '\megatools.exe'
+            - 'curl '
+            - 'powershell'
+
+    selection_logic:
+        EventData|contains:
+            - ' sync '              
+            - ' upload '
+            - ' -post '
+            - ' -transfer '
+            - ' -ExecutionPolicy Bypass '
+            - 'WebClient.UploadFile'
+
+    selection_trigger:
+        EventData|contains:
+            - '<Interval>PT5M</Interval>'   
+            - '<Interval>PT10M</Interval>' 
+            - '<StartBoundary>202[0-9]-[0-9]{2}-[0-9]{2}T0[0-3]:' 
+
+    filter_legit:
+        - EventData|contains:
+            - '\Windows\System32\Tasks\Microsoft' 
+            - '\Program Files\'                  
+        - SubjectUserName: 'SYSTEM'              
+        - EventData|contains:
+            - 'Telemetry'                        
+
+    condition: (selection_action and (selection_logic or selection_trigger)) and not filter_legit
+level: critical

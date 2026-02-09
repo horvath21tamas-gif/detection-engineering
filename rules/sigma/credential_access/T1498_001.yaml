@@ -48,7 +48,7 @@ detection:
             - '\AppData\Local\Temp\'
 
     filter_legit_ops:
-        - User: 'NT AUTHORITY\SYSTEM' 
+        - username: 'NT AUTHORITY\SYSTEM' 
         - Image|contains:
             - '\Program Files\NetworkMonitoring\' 
             - '\Azure\'                            

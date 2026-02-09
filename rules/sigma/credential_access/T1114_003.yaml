@@ -59,7 +59,7 @@ detection:
         - CommandLine|contains:
             - '@sajatdomain.hu'           
             - 'HealthCheck'
-        - User: 'NT AUTHORITY\SYSTEM'     
+        - username: 'NT AUTHORITY\SYSTEM'     
         - CommandLine|contains:
             - 'Standard_Admin_Script.ps1' 
 

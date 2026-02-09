@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-09 11:16:29`
+**Utolsó frissítés:** `2026-02-09 12:03:19`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 614 | 100% |
-| Splunk (SPL) | 601 | 97.9% |
-| Microsoft Sentinel (KQL) | 607 | 98.9% |
-| QRadar (AQL) | 214 | 34.9% |
-| Elastic (KQL/EQL) | 607 | 98.9% |
-| RSA NetWitness | 600 | 97.7% |
+| Sigma (Forrás) | 617 | 100% |
+| Splunk (SPL) | 604 | 97.9% |
+| Microsoft Sentinel (KQL) | 610 | 98.9% |
+| QRadar (AQL) | 214 | 34.7% |
+| Elastic (KQL/EQL) | 610 | 98.9% |
+| RSA NetWitness | 603 | 97.7% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -306,6 +306,9 @@
 | T1497.001 | HIGH | Ultra-Pro High-Fidelity VM Artifact Discovery (T1497.001), Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497) |
 | T1497.002 | HIGH | Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002) |
 | T1497.003 | HIGH | Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497), Ultra-Pro High-Fidelity Time-based Evasion (T1497.003) |
+| T1499 | CRITICAL | Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
+| T1499.003 | CRITICAL | Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
+| T1499.004 | CRITICAL | Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
 | T1505 | CRITICAL | Ultra-Pro Web Shell Execution Patterns (T1505.003) |
 | T1505.001 | CRITICAL | Ultra-Pro SQL Server Command Shell Execution (T1505.001) |
 | T1505.002 | CRITICAL | Ultra-Pro IIS Native Module Injection (T1505.002) |
@@ -429,8 +432,9 @@
 | T1560.001 | CRITICAL | Adatok gyanús archiválása exfiltráció céljából, Ultra-Pro High-Fidelity Data Archiving for Exfiltration (T1560.001) |
 | T1560.002 | CRITICAL | Ultra-Pro High-Fidelity Data Archiving via Library (T1560.002) |
 | T1560.003 | CRITICAL | Ultra-Pro High-Fidelity Archive via Custom Method (T1560.003) |
-| T1561.001 | CRITICAL | Ultra-Pro High-Fidelity Disk Wipe (T1561) |
-| T1561.002 | CRITICAL | Ultra-Pro High-Fidelity Disk Wipe (T1561) |
+| T1561 | CRITICAL | Ultra-Pro High-Fidelity Disk Content Wipe (T1561.001) |
+| T1561.001 | CRITICAL | Ultra-Pro High-Fidelity Disk Content Wipe (T1561.001), Ultra-Pro High-Fidelity Disk Wipe (T1561) |
+| T1561.002 | CRITICAL | Ultra-Pro High-Fidelity Disk Structure Wipe (T1561.002), Ultra-Pro High-Fidelity Disk Wipe (T1561) |
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.002 | CRITICAL | Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002) |

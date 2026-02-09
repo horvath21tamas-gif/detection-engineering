@@ -285,10 +285,13 @@
 - [Ransomware Preparation Activity Detected on Windows Host (High Fidelity)](#ransomware-preparation-activity-detected-on-windows-host-(high-fidelity))
 - [Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity)](#suspicious-deletion-of-volume-shadow-copies-via-vssadmin-(high-fidelity))
 - [Ultra-Pro High-Fidelity Defacement (T1491)](#ultra-pro-high-fidelity-defacement-(t1491))
+- [Ultra-Pro High-Fidelity Internal Defacement (T1491.001)](#ultra-pro-high-fidelity-internal-defacement-(t1491001))
+- [Ultra-Pro High-Fidelity External Defacement (T1491.002)](#ultra-pro-high-fidelity-external-defacement-(t1491002))
 - [Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497)](#ultra-pro-high-fidelity-virtualizationsandbox-evasion-(t1497))
 - [Ultra-Pro High-Fidelity VM Artifact Discovery (T1497.001)](#ultra-pro-high-fidelity-vm-artifact-discovery-(t1497001))
 - [Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002)](#ultra-pro-high-fidelity-user-interaction-evasion-(t1497002))
 - [Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)](#ultra-pro-high-fidelity-time-based-evasion-(t1497003))
+- [Ultra-Pro High-Fidelity Endpoint DoS (T1499)](#ultra-pro-high-fidelity-endpoint-dos-(t1499))
 - [Ultra-Pro Web Shell Execution Patterns (T1505.003)](#ultra-pro-web-shell-execution-patterns-(t1505003))
 - [Ultra-Pro SQL Server Command Shell Execution (T1505.001)](#ultra-pro-sql-server-command-shell-execution-(t1505001))
 - [Ultra-Pro IIS Native Module Injection (T1505.002)](#ultra-pro-iis-native-module-injection-(t1505002))
@@ -413,6 +416,8 @@
 - [Ultra-Pro High-Fidelity Data Archiving via Library (T1560.002)](#ultra-pro-high-fidelity-data-archiving-via-library-(t1560002))
 - [Ultra-Pro High-Fidelity Archive via Custom Method (T1560.003)](#ultra-pro-high-fidelity-archive-via-custom-method-(t1560003))
 - [Ultra-Pro High-Fidelity Disk Wipe (T1561)](#ultra-pro-high-fidelity-disk-wipe-(t1561))
+- [Ultra-Pro High-Fidelity Disk Content Wipe (T1561.001)](#ultra-pro-high-fidelity-disk-content-wipe-(t1561001))
+- [Ultra-Pro High-Fidelity Disk Structure Wipe (T1561.002)](#ultra-pro-high-fidelity-disk-structure-wipe-(t1561002))
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
 - [Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002)](#ultra-pro-high-fidelity-disable-windows-event-logging-(t1562002))
@@ -5381,6 +5386,40 @@ from non-standard or compromised service processes (e.g., w3wp.exe, httpd.exe).
 
 ---
 
+## Ultra-Pro High-Fidelity Internal Defacement (T1491.001)
+- **Azonosító:** `T1491_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects internal system defacement by monitoring for unauthorized modifications 
+to desktop wallpapers, legal notices, and logon banners via Registry or CLI, 
+specifically filtering out GPO-driven and system-initiated changes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity External Defacement (T1491.002)
+- **Azonosító:** `T1491_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized external website defacement by identifying suspicious file 
+manipulation commands (move, copy, echo) executed by web server worker processes 
+within sensitive webroot directories.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497)
 - **Azonosító:** `T1497.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -5441,6 +5480,23 @@ mechanisms (ping, choice, timeout) initiated by untrusted binaries, specifically
 targeting long-duration stalls used to exhaust sandbox analysis limits.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Endpoint DoS (T1499)
+- **Azonosító:** `T1499.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects targeted endpoint denial of service by monitoring for forced termination 
+of critical system processes (LSASS, CSRSS) and resource exhaustion loops 
+originating from untrusted process lineages.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1499, 003, 004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -7495,6 +7551,40 @@ by monitoring for raw disk access identifiers and destructive CLI arguments
 originating from non-standard parent processes.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, 002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Disk Content Wipe (T1561.001)
+- **Azonosító:** `T1561_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects low-level disk content wiping by monitoring for direct physical device 
+access identifiers and destructive overwrite parameters, specifically filtering 
+out known-good administrative, security, and imaging tools.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001, T1561`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Disk Structure Wipe (T1561.002)
+- **Azonosító:** `T1561_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects low-level disk structure destruction (partition table wiping, MBR overwriting) 
+by monitoring for destructive CLI arguments and raw device access strings originating 
+from non-standard parent processes or untrusted locations.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

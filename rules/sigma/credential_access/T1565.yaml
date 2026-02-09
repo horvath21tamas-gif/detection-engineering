@@ -1,0 +1,65 @@
+title: Ultra-Pro High-Fidelity Data Manipulation (T1565)
+id: 55ff571a-f186-4e4c-90a9-2da5291ae171
+status: stable
+description: |
+    Detects unauthorized data manipulation by monitoring for stream editing, 
+    log clearing via CLI, and unauthorized modifications to critical system 
+    files (hosts, event logs) from non-standard parent processes.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1565
+    - attack.t1565.001
+    - attack.t1565.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\wevtutil.exe'        
+            - '\sed.exe'             
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\sqlite3.exe'         
+            - '\attrib.exe'        
+
+    selection_logic:
+        CommandLine|contains:
+            - ' cl '               
+            - ' clear-log '
+            - ' -replace '           
+            - ' s/'                  
+            - ' > '                  
+            - 'Out-File'
+            - 'Set-Content'
+
+    selection_targets:
+        CommandLine|contains:
+            - '\etc\hosts'           
+            - '\System32\winevt\'    
+            - '\System32\config\'   
+            - '.config'              
+            - '.db'                  
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'         
+            - '\excel.exe'
+            - '\httpd.exe'           
+            - '\rundll32.exe'       
+            - '\explorer.exe'       
+
+    filter_legit:
+        - ParentImage|endswith:
+            - '\CcmExec.exe'      
+            - '\msiexec.exe'         
+        - CommandLine|contains:
+            - 'Program Files'        
+        - User: 'NT AUTHORITY\SYSTEM'
+        - CommandLine|contains:
+            - 'Get-EventLog'         
+
+    condition: selection_tools and selection_logic and (selection_targets or selection_context) and not filter_legit
+level: critical

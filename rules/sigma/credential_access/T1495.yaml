@@ -45,7 +45,7 @@ detection:
             - '\AppData\Local\Temp\'
 
     filter_legit_oem_updates:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|contains:
             - '\System32\svchost.exe'
             - '\CcmExec.exe'         

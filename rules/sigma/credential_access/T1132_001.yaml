@@ -1,0 +1,59 @@
+title: Ultra-Pro High-Fidelity Standard Encoding & Payload Injection (T1132.001)
+id: 1fdf31a3-292d-4216-8450-10cf841d73e0
+status: stable
+description: |
+    Detects suspicious standard encoding usage by identifying embedded 
+    executable headers (MZ/PE) within Base64 strings, anomalous 
+    programmatic decoding, and high-entropy command lines from 
+    non-administrative processes.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.command_and_control
+    - attack.t1132.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_encoded_headers:
+        CommandLine|contains:
+            - 'TVqQA'      
+            - 'TVpQA'    
+            - 'f0VMR'      
+            - 'UEsDB'      
+
+    selection_decoding_logic:
+        CommandLine|contains:
+            - 'FromBase64String('
+            - ' -decode '           
+            - '[System.Convert]::'
+            - 'IO.MemoryStream'    
+            - 'DeflateStream'      
+
+    selection_high_entropy:
+        CommandLine|re: '(?i).*[a-z0-9+/=]{1500,}.*'
+
+    selection_context:
+        - Image|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\w3wp.exe'          
+            - '\sqlservr.exe'      
+            - '\spoolsv.exe'      
+        - ParentImage|endswith:
+            - '\outlook.exe'
+            - '\chrome.exe'
+
+    filter_legit_infra:
+        - Image|contains:
+            - '\Program Files\'
+            - '\ccm\'              
+            - '\AzureConnectedMachineAgent\'
+        - CommandLine|contains:
+            - 'Chocolatey'
+            - 'NuGet'
+            - 'Microsoft.Cloud.Data'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: (selection_encoded_headers or (selection_decoding_logic and selection_high_entropy)) and (selection_context or not filter_legit_infra)
+level: critical

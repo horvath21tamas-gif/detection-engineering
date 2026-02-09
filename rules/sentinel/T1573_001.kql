@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*AesManaged*", "*RijndaelManaged*", "*.Mode = [System.Security.Cryptography.CipherMode]::*", "*.Padding = [System.Security.Cryptography.PaddingMode]::*", "*CreateEncryptor(*", "*CreateDecryptor(*")) and (ProcessCommandLine in ("*CryptoStream*", "*FlushFinalBlock*", "*.Key =*", "*.IV =*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\rundll32.exe")) and (not ((ProcessCommandLine in ("*C:\Program Files\*", "*Microsoft\Azure*", "*SoftwareDistribution*")) or User =~ "NT AUTHORITY\SYSTEM" or ParentProcessName endswith "\services.exe"))

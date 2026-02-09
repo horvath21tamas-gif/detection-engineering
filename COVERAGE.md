@@ -296,8 +296,9 @@
 | T1484 | CRITICAL | Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484) |
 | T1484.001 | CRITICAL | Ultra-Pro Group Policy Modification & Abuse (T1484.001) |
 | T1484.002 | CRITICAL | Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002) |
+| T1485 | CRITICAL | Ultra-Pro High-Fidelity Data Destruction (T1485) |
 | T1486 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
-| T1490 | CRITICAL | Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity), Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
+| T1490 | CRITICAL | Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity), Ultra-Pro High-Fidelity Data Destruction (T1485), Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1497 | HIGH | Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497) |
 | T1497.001 | HIGH | Ultra-Pro High-Fidelity VM Artifact Discovery (T1497.001), Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497) |
 | T1497.002 | HIGH | Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002) |

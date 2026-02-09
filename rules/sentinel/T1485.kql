@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\vssadmin.exe", "*\wmic.exe", "*\sdelete.exe", "*\cipher.exe", "*\wbadmin.exe", "*\powershell.exe")) and ((ProcessCommandLine in ("*delete shadows*", "*shadowcopy delete*", "*shadowstorage*", "*delete catalog -quiet*")) or (ProcessCommandLine in ("* -p *", "* -z *", "* /w:*", "* -s *", "*del /f /s /q*"))) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\rundll32.exe", "*\httpd.exe", "*\7zFM.exe")) or (FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*"))) and (not ((ParentProcessName in ("*\msiexec.exe", "*\CcmExec.exe")) or (ProcessCommandLine in ("*cleanmgr.exe*", "*\AppData\Local\Temp*")) or User =~ "NT AUTHORITY\SYSTEM"))

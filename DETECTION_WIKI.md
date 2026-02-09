@@ -420,6 +420,7 @@
 - [High-Fidelity Launch Daemon Persistence Detection](#high-fidelity-launch-daemon-persistence-detection)
 - [High-Fidelity System Service Execution Detection (T1569.002)](#high-fidelity-system-service-execution-detection-(t1569002))
 - [Ultra-Pro High-Fidelity Lateral Tool Transfer (T1570)](#ultra-pro-high-fidelity-lateral-tool-transfer-(t1570))
+- [Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573)](#ultra-pro-high-fidelity-encrypted-c2-channel-(t1573))
 - [Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574)](#ultra-pro-dll-hijacking-&-side-loading-detection-(t1574))
 - [Ultra-Pro DLL Search Order Hijacking Detection (T1574.001)](#ultra-pro-dll-search-order-hijacking-detection-(t1574001))
 - [Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002)](#ultra-pro-dll-side-loading-integrity-gap-detection-(t1574002))
@@ -7566,6 +7567,23 @@ lineages (Office, Browsers, non-elevated Shells) and weaponized tools like
 bitsadmin or robocopy.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1570`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573)
+- **Azonosító:** `T1573.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the creation of custom encrypted C2 channels by monitoring for 
+low-level cryptographic class instantiation (AES, Rijndael, CryptoStream) 
+in tandem with manual network socket creation from scripting interpreters.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1573, 001, 002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

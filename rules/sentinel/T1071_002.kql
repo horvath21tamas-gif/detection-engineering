@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cscript.exe", "*\wscript.exe", "*\mshta.exe", "*\rundll32.exe")) and (RemotePort in (21, 22, 69, 990))) or (ProcessCommandLine in ("* -s:*", "*put *", "*get *", "*.DownloadFile(*", "*Net.FtpWebRequest*")) or (((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe")) and (RemotePort in (21, 22, 69, 990))) and (not ((FolderPath in ("*\Veeam\*", "*\WinSCP\*")) or (DestinationIP in ("10.0.0.0/8", "192.168.0.0/16", "172.16.0.0/12")) or User =~ "NT AUTHORITY\SYSTEM")))

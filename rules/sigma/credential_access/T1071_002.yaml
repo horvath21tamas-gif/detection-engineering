@@ -55,7 +55,7 @@ detection:
             - '10.0.0.0/8'                
             - '192.168.0.0/16'
             - '172.16.0.0/12'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_interpreters and selection_ports) or selection_automation or (selection_lineage and selection_ports) and not filter_trusted_infra
 level: critical

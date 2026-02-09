@@ -1,0 +1,4 @@
+
+| rex field=CommandLine "(?<CommandLineMatch>(?i).*[a-z0-9+/=]{1500,}.*)"
+| eval CommandLineCondition=if(isnotnull(CommandLineMatch), "true", "false")
+| search CommandLine IN ("*TVqQA*", "*TVpQA*", "*f0VMR*", "*UEsDB*") OR (CommandLine IN ("*FromBase64String(*", "* -decode *", "*[System.Convert]::*", "*IO.MemoryStream*", "*DeflateStream*") CommandLineCondition="true") Image IN ("*\\winword.exe", "*\\excel.exe", "*\\w3wp.exe", "*\\sqlservr.exe", "*\\spoolsv.exe") OR ParentImage IN ("*\\outlook.exe", "*\\chrome.exe") OR NOT (Image IN ("*\\Program Files\\*", "*\\ccm\\*", "*\\AzureConnectedMachineAgent\\*") OR CommandLine IN ("*Chocolatey*", "*NuGet*", "*Microsoft.Cloud.Data*") OR username="NT AUTHORITY\\SYSTEM")

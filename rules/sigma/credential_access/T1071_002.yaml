@@ -1,0 +1,61 @@
+title: Ultra-Pro High-Fidelity FTP/SFTP Protocol Anomaly (T1071.002)
+id: 914d404a-cf9a-421c-be46-61d0f7940513
+status: stable
+description: |
+    Detects unauthorized use of file transfer protocols by monitoring for 
+    non-interactive FTP/SFTP sessions, suspicious script-based transfers, 
+    and anomalous parent-child process relationships (e.g., Office to FTP).
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.command_and_control
+    - attack.exfiltration
+    - attack.t1071.002
+logsource:
+    category: network_connection
+    product: windows
+detection:
+    selection_interpreters:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+            - '\mshta.exe'
+            - '\rundll32.exe'             
+
+    selection_automation:
+        CommandLine|contains:
+            - ' -s:'                       
+            - 'put '                      
+            - 'get '                       
+            - '.DownloadFile('            
+            - 'Net.FtpWebRequest'        
+
+    selection_lineage:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+
+    selection_ports:
+        DestinationPort:
+            - 21                          
+            - 22                          
+            - 69                          
+            - 990                        
+
+    filter_trusted_infra:
+        - Image|contains:
+            - '\Veeam\'                  
+            - '\WinSCP\'                  
+        - DestinationIP:
+            - '10.0.0.0/8'                
+            - '192.168.0.0/16'
+            - '172.16.0.0/12'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: (selection_interpreters and selection_ports) or selection_automation or (selection_lineage and selection_ports) and not filter_trusted_infra
+level: critical

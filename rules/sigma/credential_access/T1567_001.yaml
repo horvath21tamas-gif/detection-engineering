@@ -54,7 +54,7 @@ detection:
             - ' pull '               
             - ' clone '
             - 'fetch'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_tools and selection_logic) and (selection_auth or selection_context) and not filter_legit_ide
 level: critical

@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\git.exe", "*\gh.exe", "*\powershell.exe", "*\curl.exe")) and (ProcessCommandLine in ("* add . *", "* add -A*", "* commit -m *", "* push --force*", "*remote add *"))) and (ProcessCommandLine matches regex "(?i).*(github_pat_|glpat-|[a-zA-Z0-9]{30,}).*" or ((FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*")) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\rundll32.exe", "*\cmd.exe")))) and (not ((ParentProcessName in ("*\code.exe", "*\visualstudio.exe", "*\idea64.exe", "*\sourcetree.exe", "*\git-fork.exe")) or (ProcessCommandLine in ("* pull *", "* clone *", "*fetch*")) or User =~ "NT AUTHORITY\SYSTEM"))

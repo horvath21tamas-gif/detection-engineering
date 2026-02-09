@@ -1,0 +1,4 @@
+
+| rex field=CommandLine "(?<CommandLineMatch>(?i).*(github_pat_|glpat-|[a-zA-Z0-9]{30,}).*)"
+| eval CommandLineCondition=if(isnotnull(CommandLineMatch), "true", "false")
+| search Image IN ("*\\git.exe", "*\\gh.exe", "*\\powershell.exe", "*\\curl.exe") CommandLine IN ("* add . *", "* add -A*", "* commit -m *", "* push --force*", "*remote add *") CommandLineCondition="true" OR Image IN ("*\\Users\\*", "*\\AppData\\*", "*\\Temp\\*") OR ParentImage IN ("*\\winword.exe", "*\\excel.exe", "*\\rundll32.exe", "*\\cmd.exe") NOT (ParentImage IN ("*\\code.exe", "*\\visualstudio.exe", "*\\idea64.exe", "*\\sourcetree.exe", "*\\git-fork.exe") OR CommandLine IN ("* pull *", "* clone *", "*fetch*") OR username="NT AUTHORITY\\SYSTEM")

@@ -55,7 +55,7 @@ detection:
         - Image|contains:
             - '\Program Files\'     
             - '\System32\OneDrive.exe'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|endswith:
             - '\services.exe'
 

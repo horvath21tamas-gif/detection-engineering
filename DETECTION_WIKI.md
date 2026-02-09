@@ -169,6 +169,7 @@
 - [Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)](#ultra-pro-high-fidelity-trusted-developer-utility-proxy-(t1127))
 - [Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001)](#ultra-pro-high-fidelity-msbuild-proxy-execution-(t1127001))
 - [High-Fidelity Shared Module Load from Untrusted Path](#high-fidelity-shared-module-load-from-untrusted-path)
+- [Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132)](#ultra-pro-high-fidelity-data-encoding-&-obfuscation-(t1132))
 - [Anomalous External Remote Service Access Context](#anomalous-external-remote-service-access-context)
 - [Ultra-Pro Access Token Manipulation & Impersonation (T1134)](#ultra-pro-access-token-manipulation-&-impersonation-(t1134))
 - [Ultra-Pro Token Impersonation via LSASS Handle Duplication (T1134.001)](#ultra-pro-token-impersonation-via-lsass-handle-duplication-(t1134001))
@@ -3378,6 +3379,23 @@ DLL Side-Loading or Search Order Hijacking.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132)
+- **Azonosító:** `T1132.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects suspicious data encoding/decoding sequences used for C2 stealth. 
+Focuses on programmatic Base64/Hex conversion within non-standard process 
+lineages and the abuse of Certutil for payload deployment.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001, T1132`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

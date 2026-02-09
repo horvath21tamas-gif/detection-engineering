@@ -1,0 +1,4 @@
+
+| rex field=CommandLine "(?<CommandLineMatch>(?i).*[a-z0-9+/]{500,}.*)"
+| eval CommandLineCondition=if(isnotnull(CommandLineMatch), "true", "false")
+| search (CommandLine IN ("*FromBase64String*", "*ToBase64String*", "* -decode *", "* -encode *", "*[System.Text.Encoding]::*", "*BXAAR*", "*TVqQA*") CommandLineCondition="true") OR (ParentImage IN ("*\\winword.exe", "*\\excel.exe", "*\\w3wp.exe", "*\\sqlservr.exe") OR Image IN ("*\\rundll32.exe", "*\\regsvr32.exe", "*\\colorcpl.exe") CommandLine IN ("*FromBase64String*", "*ToBase64String*", "* -decode *", "* -encode *", "*[System.Text.Encoding]::*", "*BXAAR*", "*TVqQA*") NOT (CommandLine IN ("*C:\\Windows\\System32\\wbem\\WmiPrvSE.exe*", "*CCM\\Cache*", "*Microsoft.Cloud.Data*") OR Image="*\\powershell_ise.exe" OR username="NT AUTHORITY\\SYSTEM"))

@@ -184,6 +184,8 @@
 | T1127 | CRITICAL | Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127), Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001) |
 | T1127.001 | CRITICAL | Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001) |
 | T1129 | HIGH | High-Fidelity Shared Module Load from Untrusted Path |
+| T1132 | CRITICAL | Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132) |
+| T1132.001 | CRITICAL | Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132) |
 | T1133 | HIGH | Anomalous External Remote Service Access Context |
 | T1134 | CRITICAL | Ultra-Pro Access Token Manipulation & Impersonation (T1134) |
 | T1134.001 | CRITICAL | Ultra-Pro Token Impersonation via LSASS Handle Duplication (T1134.001) |

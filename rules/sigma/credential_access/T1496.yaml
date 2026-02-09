@@ -1,0 +1,62 @@
+title: Ultra-Pro High-Fidelity Resource Hijacking (T1496)
+id: 44345809-d2ce-40dd-af5d-46a5986ef9ce
+status: stable
+description: |
+    Detects unauthorized resource hijacking (cryptomining) by monitoring for 
+    specific miner protocols (stratum), algorithm flags, and hardware 
+    optimization arguments originating from untrusted process lineages.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1496
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_miner_logic:
+        CommandLine|contains:
+            - 'stratum+tcp://'        
+            - 'stratum+ssl://'        
+            - '--url='                
+            - '--user='               
+            - '--pass='               
+            - '--algo='               
+            - '--donate-level='      
+            - 'cryptonight'           
+            - 'nicehash'
+
+    selection_optimization:
+        CommandLine|contains:
+            - '--cpu-max-threads-hint'
+            - '--cpu-no-yield'
+            - '--randomx-1gb-pages'
+            - '--cuda-devices'
+            - '--opencl-platform'
+
+    selection_context:
+        - Image|contains:
+            - '\AppData\Local\Temp\'
+            - '\AppData\Roaming\'
+            - '\Users\Public\'
+            - '\ProgramData\'
+            - '\Windows\Temp\'
+        - ParentImage|endswith:
+            - '\winword.exe'          
+            - '\excel.exe'
+            - '\httpd.exe'           
+            - '\powershell.exe'       
+            - '\cmd.exe'
+
+    filter_legit_workloads:
+        - User: 'NT AUTHORITY\SYSTEM' 
+        - Image|contains:
+            - '\Program Files\'       
+            - '\Program Files (x86)\'
+        - CommandLine|contains:
+            - 'Azure'                
+            - 'Telemetry'
+            - 'Diagnostic'
+
+    condition: (selection_miner_logic and (selection_optimization or selection_context)) and not filter_legit_workloads
+level: high

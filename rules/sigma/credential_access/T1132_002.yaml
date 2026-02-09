@@ -1,0 +1,48 @@
+title: Ultra-Pro High-Fidelity Non-Standard Encoding & XOR Obfuscation (T1132.002)
+id: faa8cde5-b28c-4c44-bfab-439f654f02af
+status: stable
+description: |
+    Detects custom encoding and obfuscation by identifying programmatic byte-level 
+    manipulation (XOR), backtick-based string fragmentation, and character-code 
+    reconstruction in non-interactive process contexts.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.command_and_control
+    - attack.t1132.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_logic:
+        CommandLine|contains:
+            - '-bxor'                      
+            - 'bit.bxor'                   
+            - '[char[]]'                   
+            - '::FromCharacterCode'       
+            - '.replace('                 
+
+    selection_fragmentation:
+        CommandLine|re: '(?i)([`]{2,}.*){2,}'
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\w3wp.exe'               
+        - Image|endswith:
+            - '\rundll32.exe'
+            - '\regsvr32.exe'
+            - '\colorcpl.exe'            
+
+    filter_legit_infra:
+        - CommandLine|contains:
+            - 'C:\Program Files\'
+            - 'Microsoft\Exchange'        
+            - 'Chocolatey'
+            - 'NuGet'
+        - User: 'NT AUTHORITY\SYSTEM'    
+
+    condition: (selection_logic and selection_fragmentation) or (selection_context and selection_logic) and not filter_legit_infra
+level: critical

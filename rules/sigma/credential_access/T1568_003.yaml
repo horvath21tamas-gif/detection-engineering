@@ -1,0 +1,50 @@
+title: Ultra-Pro High-Fidelity DNS Calculation & Extraction (T1568.003)
+id: 7d1417a3-bfbb-461b-ac5f-570207c19f47
+status: stable
+description: |
+    Detects C2 address calculation by identifying programmatic DNS TXT/SRV record 
+    retrieval followed by explicit data type conversion or byte-level manipulation 
+    within script interpreters.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.command_and_control
+    - attack.t1568.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_dns_query:
+        CommandLine|contains:
+            - ' -querytype TXT'            
+            - ' -q TXT'                     
+            - 'Resolve-DnsName'             
+            - ' -Type TXT'
+
+    selection_calculation_logic:
+        CommandLine|contains:
+            - '[Convert]::'                
+            - ' -bxor'                     
+            - '.Substring('              
+            - '.Split('                     
+            - ' [int]'                      
+
+    selection_procs:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\rundll32.exe'
+
+    filter_legit_infra:
+        - CommandLine|contains:
+            - '_vlmcs._tcp'                 
+            - 'chocolatey'                  
+            - 'domain-verification'         
+        - User: 'NT AUTHORITY\SYSTEM'    
+        - ParentImage|endswith:
+            - '\services.exe'
+
+    condition: selection_dns_query and selection_calculation_logic and selection_procs and not filter_legit_infra
+level: critical

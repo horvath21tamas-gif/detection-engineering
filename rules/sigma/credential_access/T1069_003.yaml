@@ -49,5 +49,5 @@ detection:
             - 'Wiz.io'
             - 'Azure-Sentinel'
 
-    condition: selection_ops and (selection_mass_params or selection_suspicious_ua) and condition_origin and not filter_legit_automation
+    condition: selection_ops and (selection_mass_params or selection_suspicious_ua) and condition_origin and not filter_legit_principals
 level: high

@@ -1,0 +1,48 @@
+title: Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568)
+id: 10c35e10-a1c0-4468-a600-7688231edf7b
+status: stable
+description: |
+    Detects dynamic resolution and DGA activity by identifying programmatic 
+    DNS queries within loops, low-level DNS API calls from scripting engines, 
+    and anomalous domain patterns from non-browser processes.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.command_and_control
+    - attack.t1568
+    - attack.t1568.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_resolution_api:
+        CommandLine|contains:
+            - 'Resolve-DnsName'            
+            - '[System.Net.Dns]::'        
+            - 'nslookup'                   
+            - 'dnscmd'                     
+            - ' -querytype'                
+
+    selection_dga_patterns:
+        CommandLine|re: '(?i).*[a-z0-9]{18,}\.(top|xyz|pw|icu|bid|monster|live|club|ga|tk).*'
+
+    selection_procs:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\rundll32.exe'
+            - '\mshta.exe'
+            - '\cmd.exe'
+
+    filter_legit_infra:
+        - CommandLine|contains:
+            - 'C:\Program Files\'
+            - 'Microsoft\Azure'
+            - 'internal.corp'              
+            - 'Check-Connectivity'         
+        - User: 'NT AUTHORITY\SYSTEM'     
+
+    condition: (selection_resolution_api and selection_procs) or (selection_dga_patterns and selection_procs) and not filter_legit_infra
+level: high

@@ -46,7 +46,7 @@ detection:
             - '\Program Files (x86)\'
         - CommandLine|contains:
             - '127.0.0.1'                     
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_chain_logic and (selection_suspicious_path or selection_procs) and not filter_legit_browsers
 level: critical

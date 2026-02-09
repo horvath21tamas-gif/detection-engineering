@@ -40,7 +40,7 @@ detection:
             - 'zip'                
 
     selection_suspicious_host:
-        ComputerName|not_contains:
+        ComputerName|contains:
             - 'DC-'
             - 'ADM-'
             - 'SERVER-'
@@ -55,5 +55,5 @@ detection:
         Image|contains:
             - '\Windows\System32\CcmExec.exe'
 
-    condition: (selection_native or selection_advanced) and (selection_extraction or selection_suspicious_host) and not filter_legit_it
+    condition: (selection_native or selection_advanced) and (selection_extraction or not selection_suspicious_host) and not filter_legit_it
 level: high

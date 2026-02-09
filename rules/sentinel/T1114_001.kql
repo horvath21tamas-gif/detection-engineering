@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*New-Object -ComObject Outlook.Application*", "*CreateObject(\"Outlook.Application\")*", "*.GetNamespace(\"MAPI\")*", "*GetDefaultFolder(6)*", "*GetDefaultFolder(5)*")) and (ProcessCommandLine in ("*.SaveAs*", "*.Attachments*", "*.Visible = $false*", "*.Display = 0*", "*SilentlyContinue*")) and ((ParentProcessName in ("*\powershell.exe", "*\cmd.exe", "*\cscript.exe", "*\wscript.exe", "*\mshta.exe")) and IntegrityLevel =~ "Medium") and (not ((FolderPath in ("*C:\Program Files\Microsoft Office\*", "*C:\Program Files (x86)\Microsoft Office\*")) or User =~ "NT AUTHORITY\SYSTEM" or (ProcessCommandLine in ("*HealthCheck.ps1*", "*SignatureUpdater*", "*Outlook_Integration*"))))

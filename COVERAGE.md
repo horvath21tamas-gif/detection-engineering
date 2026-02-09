@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-09 08:50:48`
+**Utolsó frissítés:** `2026-02-09 09:10:39`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 575 | 100% |
-| Splunk (SPL) | 562 | 97.7% |
-| Microsoft Sentinel (KQL) | 568 | 98.8% |
+| Sigma (Forrás) | 576 | 100% |
+| Splunk (SPL) | 563 | 97.7% |
+| Microsoft Sentinel (KQL) | 569 | 98.8% |
 | QRadar (AQL) | 214 | 37.2% |
-| Elastic (KQL/EQL) | 568 | 98.8% |
-| RSA NetWitness | 561 | 97.6% |
+| Elastic (KQL/EQL) | 569 | 98.8% |
+| RSA NetWitness | 562 | 97.6% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -441,9 +441,11 @@
 | T1569.001 | CRITICAL | High-Fidelity Launch Daemon Persistence Detection |
 | T1569.002 | HIGH | High-Fidelity System Service Execution Detection, High-Fidelity System Service Execution Detection (T1569.002) |
 | T1570 | HIGH | Ultra-Pro High-Fidelity Lateral Tool Transfer (T1570) |
+| T1571 | CRITICAL | Ultra-Pro High-Fidelity Non-Standard Port C2 (T1571) |
+| T1572 | CRITICAL | Ultra-Pro High-Fidelity Protocol Tunneling Detection (T1571) |
 | T1573 | CRITICAL | Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573) |
-| T1573.001 | CRITICAL | Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573) |
-| T1573.002 | CRITICAL | Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573) |
+| T1573.001 | CRITICAL | Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573), Ultra-Pro High-Fidelity Symmetric Encryption C2 Channel (T1573.001) |
+| T1573.002 | CRITICAL | Ultra-Pro High-Fidelity Asymmetric Encryption C2 (T1573.002), Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573) |
 | T1574 | CRITICAL | Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574) |
 | T1574.001 | CRITICAL | Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574), Ultra-Pro DLL Search Order Hijacking Detection (T1574.001) |
 | T1574.002 | CRITICAL | Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002), Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574) |

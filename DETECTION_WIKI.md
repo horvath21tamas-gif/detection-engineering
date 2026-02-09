@@ -426,7 +426,11 @@
 - [High-Fidelity Launch Daemon Persistence Detection](#high-fidelity-launch-daemon-persistence-detection)
 - [High-Fidelity System Service Execution Detection (T1569.002)](#high-fidelity-system-service-execution-detection-(t1569002))
 - [Ultra-Pro High-Fidelity Lateral Tool Transfer (T1570)](#ultra-pro-high-fidelity-lateral-tool-transfer-(t1570))
+- [Ultra-Pro High-Fidelity Non-Standard Port C2 (T1571)](#ultra-pro-high-fidelity-non-standard-port-c2-(t1571))
+- [Ultra-Pro High-Fidelity Protocol Tunneling Detection (T1571)](#ultra-pro-high-fidelity-protocol-tunneling-detection-(t1571))
 - [Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573)](#ultra-pro-high-fidelity-encrypted-c2-channel-(t1573))
+- [Ultra-Pro High-Fidelity Symmetric Encryption C2 Channel (T1573.001)](#ultra-pro-high-fidelity-symmetric-encryption-c2-channel-(t1573001))
+- [Ultra-Pro High-Fidelity Asymmetric Encryption C2 (T1573.002)](#ultra-pro-high-fidelity-asymmetric-encryption-c2-(t1573002))
 - [Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574)](#ultra-pro-dll-hijacking-&-side-loading-detection-(t1574))
 - [Ultra-Pro DLL Search Order Hijacking Detection (T1574.001)](#ultra-pro-dll-search-order-hijacking-detection-(t1574001))
 - [Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002)](#ultra-pro-dll-side-loading-integrity-gap-detection-(t1574002))
@@ -7683,6 +7687,40 @@ bitsadmin or robocopy.
 
 ---
 
+## Ultra-Pro High-Fidelity Non-Standard Port C2 (T1571)
+- **Azonosító:** `T1571.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects C2 communication over non-standard ports by correlating high-risk 
+native binaries (LoLBins) with outbound public network connections 
+to ports outside the standard web/mail/directory service ranges.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1571`
+
+#### 🚨 Response Playbook
+1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Protocol Tunneling Detection (T1571)
+- **Azonosító:** `T1572.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects protocol tunneling by identifying non-standard encapsulation logic, 
+low-level socket proxying (SOCKS5), and specific CLI signatures of 
+adversary tunneling tools while filtering legitimate administrative SSH/VPN traffic.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1572`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573)
 - **Azonosító:** `T1573.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -7692,6 +7730,40 @@ low-level cryptographic class instantiation (AES, Rijndael, CryptoStream)
 in tandem with manual network socket creation from scripting interpreters.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1573, 001, 002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Symmetric Encryption C2 Channel (T1573.001)
+- **Azonosító:** `T1573_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects custom symmetric encryption (AES/Rijndael) used in C2 channels by identifying 
+the programmatic setup of CipherMode, PaddingMode, and CryptoStreams within 
+scripting engines, specifically targeting manual IV/Key assignment and stream piping.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Asymmetric Encryption C2 (T1573.002)
+- **Azonosító:** `T1573_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects custom asymmetric encryption (RSA/ECC) by identifying programmatic 
+trust chain overrides (ServerCertificateValidationCallback) and raw public key 
+imports (FromXmlString/ImportSubjectPublicKeyInfo) from non-standard processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

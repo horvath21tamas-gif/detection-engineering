@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-09 10:57:26`
+**Utolsó frissítés:** `2026-02-09 11:16:29`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 605 | 100% |
-| Splunk (SPL) | 592 | 97.9% |
-| Microsoft Sentinel (KQL) | 598 | 98.8% |
-| QRadar (AQL) | 214 | 35.4% |
-| Elastic (KQL/EQL) | 598 | 98.8% |
-| RSA NetWitness | 591 | 97.7% |
+| Sigma (Forrás) | 614 | 100% |
+| Splunk (SPL) | 601 | 97.9% |
+| Microsoft Sentinel (KQL) | 607 | 98.9% |
+| QRadar (AQL) | 214 | 34.9% |
+| Elastic (KQL/EQL) | 607 | 98.9% |
+| RSA NetWitness | 600 | 97.7% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -426,6 +426,8 @@
 | T1560.001 | CRITICAL | Adatok gyanús archiválása exfiltráció céljából, Ultra-Pro High-Fidelity Data Archiving for Exfiltration (T1560.001) |
 | T1560.002 | CRITICAL | Ultra-Pro High-Fidelity Data Archiving via Library (T1560.002) |
 | T1560.003 | CRITICAL | Ultra-Pro High-Fidelity Archive via Custom Method (T1560.003) |
+| T1561.001 | CRITICAL | Ultra-Pro High-Fidelity Disk Wipe (T1561) |
+| T1561.002 | CRITICAL | Ultra-Pro High-Fidelity Disk Wipe (T1561) |
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.002 | CRITICAL | Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002) |

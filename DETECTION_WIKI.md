@@ -412,6 +412,7 @@
 - [Ultra-Pro High-Fidelity Data Archiving for Exfiltration (T1560.001)](#ultra-pro-high-fidelity-data-archiving-for-exfiltration-(t1560001))
 - [Ultra-Pro High-Fidelity Data Archiving via Library (T1560.002)](#ultra-pro-high-fidelity-data-archiving-via-library-(t1560002))
 - [Ultra-Pro High-Fidelity Archive via Custom Method (T1560.003)](#ultra-pro-high-fidelity-archive-via-custom-method-(t1560003))
+- [Ultra-Pro High-Fidelity Disk Wipe (T1561)](#ultra-pro-high-fidelity-disk-wipe-(t1561))
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
 - [Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002)](#ultra-pro-high-fidelity-disable-windows-event-logging-(t1562002))
@@ -7474,6 +7475,23 @@ combined with manual encoding (XOR, Base64) originating from
 interactive shells or suspicious parent processes like web servers.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Disk Wipe (T1561)
+- **Azonosító:** `T1561.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects low-level disk destruction attempts (MBR overwrite, partition wiping) 
+by monitoring for raw disk access identifiers and destructive CLI arguments 
+originating from non-standard parent processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001, 002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

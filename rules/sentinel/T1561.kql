@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\diskpart.exe", "*\dd.exe", "*\format.com", "*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("*\.\PhysicalDrive*", "*\.\Harddisk*", "*clean*", "*delete partition*", "*Clear-Disk*", "*Remove-Partition*", "*if=/dev/zero*", "*if=/dev/urandom*")) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\httpd.exe", "*\rundll32.exe", "*\explorer.exe")) or (FolderPath in ("*\Temp\*", "*\Users\*"))) and (not ((ParentProcessName in ("*\msiexec.exe", "*\CcmExec.exe", "*\setup.exe")) or (ProcessCommandLine in ("*vds.exe*", "*127.0.0.1*")) or User =~ "NT AUTHORITY\SYSTEM"))

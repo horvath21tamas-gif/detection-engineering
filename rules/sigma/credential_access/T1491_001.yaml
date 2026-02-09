@@ -1,0 +1,62 @@
+title: Ultra-Pro High-Fidelity Internal Defacement (T1491.001)
+id: 3f6265a8-60a5-4f4e-94f8-49398d1213ca
+status: stable
+description: |
+    Detects internal system defacement by monitoring for unauthorized modifications 
+    to desktop wallpapers, legal notices, and logon banners via Registry or CLI, 
+    specifically filtering out GPO-driven and system-initiated changes.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1491.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_registry:
+        - Image|endswith: 
+            - '\reg.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        - CommandLine|contains: 
+            - ' add '
+            - 'Set-ItemProperty'
+            - 'New-ItemProperty'
+
+    selection_keys:
+        CommandLine|contains:
+            - 'Control Panel\Desktop\Wallpaper'    
+            - 'Microsoft\Windows\CurrentVersion\Policies\System' 
+            - 'legalnoticecaption'                  
+            - 'legalnoticetext'                      
+
+    selection_file_mod:
+        - Image|endswith:
+            - '\cmd.exe'
+            - '\xcopy.exe'
+            - '\robocopy.exe'
+        - CommandLine|contains:
+            - 'Windows\Web\Wallpaper'              
+            - '.jpg'
+            - '.png'
+            - ' /y'                                
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'                         
+            - '\excel.exe'
+            - '\httpd.exe'                           
+            - '\rundll32.exe'                        
+            - '\explorer.exe'                        
+
+    filter_legit:
+        - ParentImage|endswith:
+            - '\CcmExec.exe'                         
+            - '\gpscript.exe'                        
+        - CommandLine|contains:
+            - 'company_logo'                        
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: ((selection_registry and selection_keys) or selection_file_mod) and selection_context and not filter_legit
+level: critical

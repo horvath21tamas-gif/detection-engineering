@@ -1,0 +1,56 @@
+title: Ultra-Pro High-Fidelity Dead Drop Resolver (T1102.001)
+id: 5f665e15-8360-4c08-9c59-12dfa9da2433
+status: stable
+description: |
+    Detects the use of dead drop resolvers by identifying raw content retrieval 
+    from social/code platforms, specifically filtering for suspicious parent-child 
+    relationships and non-standard download methods.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.command_and_control
+    - attack.t1102.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_resolver_urls:
+        CommandLine|contains:
+            - 'raw.githubusercontent.com'
+            - 'pastebin.com/raw/'
+            - 'gist.githubusercontent.com/raw'
+            - 'api.telegram.org/bot'
+            - 't.me/s/'
+            - 'api.twitter.com/2/tweets'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'        
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\wscript.exe'         
+            - '\cscript.exe'
+            - '\wmiprvse.exe'        
+
+    selection_procs:
+        Image|endswith:
+            - '\certutil.exe'
+            - '\bitsadmin.exe'
+            - '\curl.exe'
+            - '\powershell.exe'
+            - '\rundll32.exe'
+
+    filter_legit_automation:
+        - Image|contains:
+            - '\Program Files\'
+            - '\Program Files (x86)\'
+        - CommandLine|contains:
+            - 'winget'
+            - 'chocolatey'
+            - 'microsoft.com'          
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith:
+            - '\explorer.exe'          
+
+    condition: selection_resolver_urls and (selection_suspicious_parent or selection_procs) and not filter_legit_automation
+level: critical

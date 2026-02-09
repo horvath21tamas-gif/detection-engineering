@@ -1,22 +1,25 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-09 07:55:48`
+**Utolsó frissítés:** `2026-02-09 08:29:54`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 557 | 100% |
-| Splunk (SPL) | 546 | 98.0% |
-| Microsoft Sentinel (KQL) | 550 | 98.7% |
-| QRadar (AQL) | 214 | 38.4% |
-| Elastic (KQL/EQL) | 550 | 98.7% |
-| RSA NetWitness | 545 | 97.8% |
+| Sigma (Forrás) | 565 | 100% |
+| Splunk (SPL) | 554 | 98.1% |
+| Microsoft Sentinel (KQL) | 558 | 98.8% |
+| QRadar (AQL) | 214 | 37.9% |
+| Elastic (KQL/EQL) | 558 | 98.8% |
+| RSA NetWitness | 553 | 97.9% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
 | :--- | :--- | :--- |
 | T1001 | CRITICAL | Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001) |
+| T1001.001 | HIGH | Ultra-Pro High-Fidelity Junk Data & Command Padding (T1001.001) |
+| T1001.002 | CRITICAL | Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001.002) |
+| T1001.003 | HIGH | Ultra-Pro High-Fidelity Protocol Impersonation (T1001.003) |
 | T1003 | HIGH | Credential Dumping LSASS |
 | T1003.001 | HIGH | Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007), Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003), Suspicious Access to LSASS Process Memory, Credential Dumping LSASS |
 | T1003.002 | CRITICAL | Ultra-Pro High-Fidelity SAM & SYSTEM Registry Theft (T1003.002) |
@@ -186,7 +189,8 @@
 | T1127.001 | CRITICAL | Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001) |
 | T1129 | HIGH | High-Fidelity Shared Module Load from Untrusted Path |
 | T1132 | CRITICAL | Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132) |
-| T1132.001 | CRITICAL | Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132) |
+| T1132.001 | CRITICAL | Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132), Ultra-Pro High-Fidelity Standard Encoding & Payload Injection (T1132.001) |
+| T1132.002 | CRITICAL | Ultra-Pro High-Fidelity Non-Standard Encoding & XOR Obfuscation (T1132.002) |
 | T1133 | HIGH | Anomalous External Remote Service Access Context |
 | T1134 | CRITICAL | Ultra-Pro Access Token Manipulation & Impersonation (T1134) |
 | T1134.001 | CRITICAL | Ultra-Pro Token Impersonation via LSASS Handle Duplication (T1134.001) |
@@ -426,6 +430,8 @@
 | T1566.002 | CRITICAL | High-Fidelity Browser-Originating Payload Execution |
 | T1566.003 | CRITICAL | High-Fidelity Process Spawn from Business Communication Service |
 | T1566.004 | HIGH | High-Fidelity Detection of Post-Vishing Remote Tool Execution |
+| T1568 | HIGH | Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568) |
+| T1568.002 | HIGH | Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568) |
 | T1569 | HIGH | High-Fidelity System Service Execution Detection |
 | T1569.001 | CRITICAL | High-Fidelity Launch Daemon Persistence Detection |
 | T1569.002 | HIGH | High-Fidelity System Service Execution Detection, High-Fidelity System Service Execution Detection (T1569.002) |

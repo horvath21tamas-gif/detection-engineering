@@ -2,6 +2,9 @@
 
 ## 📖 Tartalomjegyzék
 - [Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001)](#ultra-pro-high-fidelity-steganography-&-data-reconstruction-(t1001))
+- [Ultra-Pro High-Fidelity Junk Data & Command Padding (T1001.001)](#ultra-pro-high-fidelity-junk-data-&-command-padding-(t1001001))
+- [Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001.002)](#ultra-pro-high-fidelity-steganography-&-data-reconstruction-(t1001002))
+- [Ultra-Pro High-Fidelity Protocol Impersonation (T1001.003)](#ultra-pro-high-fidelity-protocol-impersonation-(t1001003))
 - [Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003)](#ultra-pro-high-fidelity-lsass-credential-dumping-(t1003))
 - [Suspicious Access to LSASS Process Memory](#suspicious-access-to-lsass-process-memory)
 - [Ultra-Pro High-Fidelity SAM & SYSTEM Registry Theft (T1003.002)](#ultra-pro-high-fidelity-sam-&-system-registry-theft-(t1003002))
@@ -171,6 +174,8 @@
 - [Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001)](#ultra-pro-high-fidelity-msbuild-proxy-execution-(t1127001))
 - [High-Fidelity Shared Module Load from Untrusted Path](#high-fidelity-shared-module-load-from-untrusted-path)
 - [Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132)](#ultra-pro-high-fidelity-data-encoding-&-obfuscation-(t1132))
+- [Ultra-Pro High-Fidelity Standard Encoding & Payload Injection (T1132.001)](#ultra-pro-high-fidelity-standard-encoding-&-payload-injection-(t1132001))
+- [Ultra-Pro High-Fidelity Non-Standard Encoding & XOR Obfuscation (T1132.002)](#ultra-pro-high-fidelity-non-standard-encoding-&-xor-obfuscation-(t1132002))
 - [Anomalous External Remote Service Access Context](#anomalous-external-remote-service-access-context)
 - [Ultra-Pro Access Token Manipulation & Impersonation (T1134)](#ultra-pro-access-token-manipulation-&-impersonation-(t1134))
 - [Ultra-Pro Token Impersonation via LSASS Handle Duplication (T1134.001)](#ultra-pro-token-impersonation-via-lsass-handle-duplication-(t1134001))
@@ -410,6 +415,7 @@
 - [High-Fidelity Browser-Originating Payload Execution](#high-fidelity-browser-originating-payload-execution)
 - [High-Fidelity Process Spawn from Business Communication Service](#high-fidelity-process-spawn-from-business-communication-service)
 - [High-Fidelity Detection of Post-Vishing Remote Tool Execution](#high-fidelity-detection-of-post-vishing-remote-tool-execution)
+- [Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568)](#ultra-pro-high-fidelity-dynamic-resolution-&-dga-(t1568))
 - [High-Fidelity System Service Execution Detection](#high-fidelity-system-service-execution-detection)
 - [High-Fidelity Launch Daemon Persistence Detection](#high-fidelity-launch-daemon-persistence-detection)
 - [High-Fidelity System Service Execution Detection (T1569.002)](#high-fidelity-system-service-execution-detection-(t1569002))
@@ -572,6 +578,57 @@ to image manipulation APIs (GDI+, System.Drawing) from script interpreters,
 specifically looking for pixel-level data extraction routines.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Junk Data & Command Padding (T1001.001)
+- **Azonosító:** `T1001_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects command padding and junk data injection by identifying anomalous 
+white-space distribution, repetitive environmental variable definitions, 
+and extreme command line lengths in non-installer processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001.002)
+- **Azonosító:** `T1001_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects data de-steganography by identifying anomalous programmatic access 
+to image manipulation APIs (GDI+, System.Drawing) from script interpreters, 
+specifically looking for pixel-level data extraction routines.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Protocol Impersonation (T1001.003)
+- **Azonosító:** `T1001_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects protocol impersonation by identifying manual manipulation of network headers 
+and anomalous User-Agent strings within script interpreters, specifically 
+targeting attempts to mimic mobile devices or search crawlers from non-browser processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -3410,6 +3467,41 @@ Focuses on programmatic Base64/Hex conversion within non-standard process
 lineages and the abuse of Certutil for payload deployment.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, T1132`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Standard Encoding & Payload Injection (T1132.001)
+- **Azonosító:** `T1132_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects suspicious standard encoding usage by identifying embedded 
+executable headers (MZ/PE) within Base64 strings, anomalous 
+programmatic decoding, and high-entropy command lines from 
+non-administrative processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Non-Standard Encoding & XOR Obfuscation (T1132.002)
+- **Azonosító:** `T1132_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects custom encoding and obfuscation by identifying programmatic byte-level 
+manipulation (XOR), backtick-based string fragmentation, and character-code 
+reconstruction in non-interactive process contexts.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -7388,6 +7480,23 @@ This pattern is a high-confidence indicator of a successful vishing attack where
 the victim is instructed to run "support" software.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568)
+- **Azonosító:** `T1568.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects dynamic resolution and DGA activity by identifying programmatic 
+DNS queries within loops, low-level DNS API calls from scripting engines, 
+and anomalous domain patterns from non-browser processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1568, 002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

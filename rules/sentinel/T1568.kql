@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine in ("*Resolve-DnsName*", "*[System.Net.Dns]::*", "*nslookup*", "*dnscmd*", "* -querytype*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\rundll32.exe", "*\mshta.exe", "*\cmd.exe"))) or ((ProcessCommandLine matches regex "(?i).*[a-z0-9]{18,}\\.(top|xyz|pw|icu|bid|monster|live|club|ga|tk).*" and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\rundll32.exe", "*\mshta.exe", "*\cmd.exe"))) and (not ((ProcessCommandLine in ("*C:\Program Files\*", "*Microsoft\Azure*", "*internal.corp*", "*Check-Connectivity*")) or User =~ "NT AUTHORITY\SYSTEM")))

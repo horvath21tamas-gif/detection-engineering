@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where TargetFilename matches regex "^[D-Z]:\\\\.*" and ((TargetFilename in ("*\.*", "*\autorun*", "*:*")) or (TargetFilename in ("*.dat", "*.bin", "*.lnk", "*.vbs", "*.ps1"))) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\rundll32.exe", "*\regsvr32.exe", "*\wscript.exe", "*\cscript.exe", "*\scrcons.exe")) and (not ((FolderPath in ("*\explorer.exe", "*\msiexec.exe")) or (TargetFilename in ("*$RECYCLE.BIN*", "*System Volume Information*", "*Found.000*")) or User =~ "NT AUTHORITY\SYSTEM"))
+| where TargetFilename matches regex "^[D-Z]:\\\\.*" and ((TargetFilename in ("*\.*", "*\autorun*", "*:*")) or (TargetFilename in ("*.dat", "*.bin", "*.lnk", "*.vbs", "*.ps1"))) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\rundll32.exe", "*\regsvr32.exe", "*\wscript.exe", "*\cscript.exe", "*\scrcons.exe")) and (not ((FolderPath in ("*\explorer.exe", "*\msiexec.exe")) or (TargetFilename in ("*$RECYCLE.BIN*", "*System Volume Information*", "*Found.000*")) or username =~ "NT AUTHORITY\SYSTEM"))

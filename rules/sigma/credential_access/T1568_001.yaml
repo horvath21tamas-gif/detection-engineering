@@ -1,0 +1,49 @@
+title: Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001)
+id: 02b1f5eb-631c-4ec0-b0a9-ae79153494ac
+status: stable
+description: |
+    Detects Fast Flux DNS infrastructure usage by identifying forced DNS cache 
+    flushing combined with programmatic name resolution and loop-based 
+    connectivity checks from non-system processes.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.command_and_control
+    - attack.t1568.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cache_evasion:
+        CommandLine|contains:
+            - 'ipconfig /flushdns'          
+            - 'Clear-DnsClientCache'       
+
+    selection_resolution_logic:
+        CommandLine|contains:
+            - 'Resolve-DnsName'            
+            - '[System.Net.Dns]::'        
+            - 'while('                     
+            - 'Start-Sleep'              
+
+    selection_procs:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\rundll32.exe'
+            - '\regsvr32.exe'
+
+    filter_legit_infra:
+        - CommandLine|contains:
+            - '\Program Files\'
+            - 'Microsoft\Azure'          
+            - 'HealthCheck'                
+            - 'Chocolatey'
+        - User: 'NT AUTHORITY\SYSTEM'      
+        - ParentImage|endswith:
+            - '\services.exe'              
+
+    condition: selection_cache_evasion and selection_resolution_logic and selection_procs and not filter_legit_infra
+level: critical

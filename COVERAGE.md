@@ -86,6 +86,7 @@
 | T1040 | HIGH | Ultra-Pro High-Fidelity Network Sniffing Detection (T1040) |
 | T1046 | HIGH | Ultra-Pro High-Fidelity Network Service Discovery (T1046) |
 | T1047 | HIGH | Suspicious Remote Process Creation via WMIC |
+| T1048 | CRITICAL | Ultra-Pro High-Fidelity Alternative Protocol Exfiltration (T1048) |
 | T1049 | HIGH | Ultra-Pro High-Fidelity System Network Connections Discovery (T1049) |
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
 | T1053.002 | HIGH | High-Fidelity At.exe Activity Detection |

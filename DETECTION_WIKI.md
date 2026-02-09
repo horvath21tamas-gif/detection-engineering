@@ -25,6 +25,7 @@
 - [Ultra-Pro High-Fidelity Internet IP Discovery (T1016.001)](#ultra-pro-high-fidelity-internet-ip-discovery-(t1016001))
 - [Ultra-Pro High-Fidelity Terminal Services Configuration Discovery (T1016.002)](#ultra-pro-high-fidelity-terminal-services-configuration-discovery-(t1016002))
 - [Ultra-Pro High-Fidelity Remote System Discovery (T1018)](#ultra-pro-high-fidelity-remote-system-discovery-(t1018))
+- [Ultra-Pro High-Fidelity Automated Exfiltration (T1020)](#ultra-pro-high-fidelity-automated-exfiltration-(t1020))
 - [Rapid Logons to Multiple Distant Hosts by Same User](#rapid-logons-to-multiple-distant-hosts-by-same-user)
 - [Suspicious RDP Logon from Unusual Source](#suspicious-rdp-logon-from-unusual-source)
 - [Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002)](#ultra-pro-high-fidelity-smb-admin-share-mapping-(t1021002))
@@ -988,6 +989,23 @@ and network topology mapping. Filters out high-volume noise from system services
 browsers, and inventory agents using integrity levels and parent process gating.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1018`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Automated Exfiltration (T1020)
+- **Azonosító:** `T1020.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects automated exfiltration by identifying the sequential pattern of 
+password-protected archiving followed by immediate network transfer using 
+non-standard tools or cloud-sync binaries from suspicious locations.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1020`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

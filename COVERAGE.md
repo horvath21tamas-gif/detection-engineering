@@ -40,6 +40,7 @@
 | T1016.001 | HIGH | Ultra-Pro High-Fidelity Internet IP Discovery (T1016.001) |
 | T1016.002 | HIGH | Ultra-Pro High-Fidelity Terminal Services Configuration Discovery (T1016.002) |
 | T1018 | HIGH | Ultra-Pro High-Fidelity Remote System Discovery (T1018) |
+| T1020 | CRITICAL | Ultra-Pro High-Fidelity Automated Exfiltration (T1020) |
 | T1021 | MEDIUM | Rapid Logons to Multiple Distant Hosts by Same User |
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |
 | T1021.002 | HIGH | Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002) |

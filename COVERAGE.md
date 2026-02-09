@@ -163,6 +163,9 @@
 | T1110.004 | HIGH | Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004) |
 | T1111 | CRITICAL | Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111) |
 | T1112 | CRITICAL | Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112) |
+| T1114 | CRITICAL | Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |
+| T1114.001 | CRITICAL | Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |
+| T1114.002 | CRITICAL | Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |
 | T1115 | CRITICAL | Ultra-Pro High-Fidelity Clipboard Data Spying (T1115) |
 | T1119 | CRITICAL | Ultra-Pro High-Fidelity Automated Collection (T1119) |
 | T1120 | HIGH | Ultra-Pro High-Fidelity Peripheral Device Discovery (T1120) |

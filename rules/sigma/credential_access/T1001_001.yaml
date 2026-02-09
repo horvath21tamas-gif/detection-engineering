@@ -1,0 +1,46 @@
+title: Ultra-Pro High-Fidelity Junk Data & Command Padding (T1001.001)
+id: 0b3148ef-27ae-405c-8188-d19a31158b81
+status: stable
+description: |
+    Detects command padding and junk data injection by identifying anomalous 
+    white-space distribution, repetitive environmental variable definitions, 
+    and extreme command line lengths in non-installer processes.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.command_and_control
+    - attack.t1001.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_padding:
+        CommandLine|re: '(?i)([\s\t,;]{50,})' 
+
+    selection_junk_vars:
+        CommandLine|re: '(?i)(set\s+[a-z0-9]{1,3}=\s*[^&]{1,5}&[\s\t]*){8,}'
+
+    selection_high_density:
+        CommandLine|re: '(?i)([\%\!\^\`]{3,}.*){5,}'
+
+    selection_procs:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+            - '\mshta.exe'
+            - '\rundll32.exe'
+
+    filter_legit_infra:
+        - Image|contains:
+            - '\Windows\System32\wbem\WmiPrvSE.exe' 
+            - '\Program Files\'
+            - '\Windows\System32\msiexec.exe'     
+        - CommandLine|contains:
+            - 'Microsoft.Cloud.Data'
+            - 'chocolatey'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: (selection_padding or selection_junk_vars or selection_high_density) and selection_procs and not filter_legit_infra
+level: high

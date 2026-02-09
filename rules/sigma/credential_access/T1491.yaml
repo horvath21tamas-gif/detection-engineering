@@ -1,0 +1,70 @@
+title: Ultra-Pro High-Fidelity Defacement (T1491)
+id: 8dd28239-9532-472c-8bd2-8916ceb08cb7
+status: stable
+description: |
+    Detects unauthorized website defacement by monitoring for suspicious file 
+    manipulations (move, copy, echo) within web-root directories originating 
+    from non-standard or compromised service processes (e.g., w3wp.exe, httpd.exe).
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1491
+    - attack.t1491.001
+    - attack.t1491.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\move.exe'
+            - '\copy.exe'
+            - '\xcopy.exe'
+            - '\robocopy.exe'
+
+    selection_logic:
+        CommandLine|contains:
+            - 'index.html'
+            - 'index.php'
+            - 'default.aspx'
+            - 'main.js'
+            - 'logo.'                
+        CommandLine|contains:
+            - 'move '
+            - 'copy '
+            - 'echo '                
+            - 'Set-Content'
+            - 'replace'
+
+    selection_paths:
+        CommandLine|contains:
+            - '\inetpub\wwwroot\'    
+            - '\var\www\'            
+            - '\htdocs\'           
+            - '\WordPress\'
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\w3wp.exe'          
+            - '\httpd.exe'       
+            - '\php-cgi.exe'
+            - '\nginx.exe'
+            - '\rundll32.exe'       
+        - Image|contains:
+            - '\Temp\'              
+
+    filter_legit:
+        - CommandLine|contains:
+            - 'deploy'               
+            - 'Jenkins'
+            - 'AzureDevOps'
+            - 'site_update'
+        - ParentImage|endswith:
+            - '\msiexec.exe'         
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_tools and selection_logic and selection_paths and selection_context and not filter_legit
+level: critical

@@ -115,6 +115,7 @@
 - [Ultra-Pro High-Fidelity Network History and RDP Trace Removal (T1070.007)](#ultra-pro-high-fidelity-network-history-and-rdp-trace-removal-(t1070007))
 - [Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008)](#ultra-pro-high-fidelity-email-storage-and-database-destruction-(t1070008))
 - [Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009)](#ultra-pro-high-fidelity-persistence-artifact-removal-(t1070009))
+- [Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071)](#ultra-pro-high-fidelity-application-layer-c2-anomaly-(t1071))
 - [High-Fidelity Software Deployment Tool Abuse Detection](#high-fidelity-software-deployment-tool-abuse-detection)
 - [Ultra-Pro High-Fidelity Data Staging Anomaly (T1074)](#ultra-pro-high-fidelity-data-staging-anomaly-(t1074))
 - [Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001)](#ultra-pro-high-fidelity-local-data-staging-anomaly-(t1074001))
@@ -2460,6 +2461,23 @@ Filters out common software update cycles and MSI installer noise.
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071)
+- **Azonosító:** `T1071.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects potential C2 communication by identifying anomalous network connections 
+initiated by non-browser processes, focusing on library loads (WinInet/WinHTTP) 
+and suspicious parent-child relationships.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001, T1071`
+
+#### 🚨 Response Playbook
+1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

@@ -130,6 +130,8 @@
 | T1070.007 | HIGH | Ultra-Pro High-Fidelity Network History and RDP Trace Removal (T1070.007) |
 | T1070.008 | CRITICAL | Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008) |
 | T1070.009 | HIGH | Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009) |
+| T1071 | CRITICAL | Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071) |
+| T1071.001 | CRITICAL | Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071) |
 | T1072 | CRITICAL | High-Fidelity Software Deployment Tool Abuse Detection |
 | T1074 | CRITICAL | Ultra-Pro High-Fidelity Data Staging Anomaly (T1074), Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001) |
 | T1074.001 | CRITICAL | Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001) |

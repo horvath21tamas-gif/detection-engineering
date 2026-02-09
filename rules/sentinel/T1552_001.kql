@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((ProcessCommandLine contains "findstr" and ProcessCommandLine contains "/s") or (ProcessCommandLine contains "grep" and ProcessCommandLine contains "-r") or (ProcessCommandLine contains "Get-ChildItem" and ProcessCommandLine contains "-Recurse")) and (ProcessCommandLine in ("*.config*", "*.xml*", "*.unattend*", "*.git\config*", "*.aws\credentials*", "*id_rsa*", "*password=*", "*access_key*")) and ((ParentProcessName in ("*\wsmprovhost.exe", "*\psexesvc.exe", "*\httpd.exe", "*\php-cgi.exe", "*\nginx.exe")) and (FolderPath in ("*\AppData\Local\Temp\*", "*\Users\Public\*"))) and (not (username =~ "NT AUTHORITY\SYSTEM" and (FolderPath in ("*\Windows\System32\SearchIndexer.exe*", "*\Windows\System32\CompatTelRunner.exe*", "*\Microsoft Visual Studio\*"))))

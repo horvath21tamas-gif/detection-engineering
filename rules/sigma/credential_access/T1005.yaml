@@ -1,0 +1,66 @@
+title: Ultra-Pro High-Fidelity Local Data Harvesting (T1005)
+id: 37dfb45b-fec8-4e22-b329-f75f03dd6b9e
+status: stable
+description: |
+    Detects systematic local data collection by identifying the combination of 
+    recursive file discovery, targeted sensitive extensions, and the use of 
+    non-standard search tools or suspicious process lineages.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.collection
+    - attack.t1005
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_discovery:
+        CommandLine|contains:
+            - 'dir /s /b'               
+            - 'findstr /s /i /p'       
+            - 'where /r '
+            - 'Get-ChildItem -Path C:\ -Recurse'
+            - 'gci -r -include'
+
+    selection_high_value:
+        CommandLine|contains:
+            - '*.kdbx'                  
+            - 'id_rsa'                  
+            - '*.key'
+            - '*.pgp'
+            - 'personal.xls'           
+            - 'passwords'
+            - 'credentials'
+            - '*.config'                
+            - '*.wallet'                
+
+    selection_context:
+        ParentImage|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\w3wp.exe'               
+            - '\httpd.exe'             
+            - '\explorer.exe'           
+        IntegrityLevel: 'Medium'      
+
+    selection_compression:
+        CommandLine|contains:
+            - 'Compress-Archive'
+            - '7z.exe a'
+            - 'tar.exe -c'
+            - 'rar.exe a'
+            - 'zip -r'
+
+    filter_trusted_automation:
+        - Image|contains:
+            - 'C:\Program Files\Microsoft VS Code\'
+            - 'C:\Program Files\Everything\'
+            - 'C:\Windows\CCM\'         
+            - 'C:\Program Files\Splunk\'
+        - User: 'NT AUTHORITY\SYSTEM'
+        - CommandLine|contains:
+            - 'SoftwareDistribution'   
+            - 'node_modules'         
+
+    condition: selection_discovery and (selection_high_value or selection_compression) and selection_context and not filter_trusted_automation
+level: critical

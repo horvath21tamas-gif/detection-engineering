@@ -287,11 +287,19 @@
 - [Ultra-Pro High-Fidelity Defacement (T1491)](#ultra-pro-high-fidelity-defacement-(t1491))
 - [Ultra-Pro High-Fidelity Internal Defacement (T1491.001)](#ultra-pro-high-fidelity-internal-defacement-(t1491001))
 - [Ultra-Pro High-Fidelity External Defacement (T1491.002)](#ultra-pro-high-fidelity-external-defacement-(t1491002))
+- [Ultra-Pro High-Fidelity Firmware Corruption (T1495)](#ultra-pro-high-fidelity-firmware-corruption-(t1495))
+- [Ultra-Pro High-Fidelity Resource Hijacking (T1496)](#ultra-pro-high-fidelity-resource-hijacking-(t1496))
 - [Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497)](#ultra-pro-high-fidelity-virtualizationsandbox-evasion-(t1497))
 - [Ultra-Pro High-Fidelity VM Artifact Discovery (T1497.001)](#ultra-pro-high-fidelity-vm-artifact-discovery-(t1497001))
 - [Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002)](#ultra-pro-high-fidelity-user-interaction-evasion-(t1497002))
 - [Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)](#ultra-pro-high-fidelity-time-based-evasion-(t1497003))
+- [Ultra-Pro High-Fidelity Network DoS (T1498)](#ultra-pro-high-fidelity-network-dos-(t1498))
+- [Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001)](#ultra-pro-high-fidelity-direct-flow-flood-(t1498001))
 - [Ultra-Pro High-Fidelity Endpoint DoS (T1499)](#ultra-pro-high-fidelity-endpoint-dos-(t1499))
+- [Ultra-Pro High-Fidelity OS Self-Destruction (T1499.001)](#ultra-pro-high-fidelity-os-self-destruction-(t1499001))
+- [Ultra-Pro High-Fidelity Service Exhaustion (T1499.002)](#ultra-pro-high-fidelity-service-exhaustion-(t1499002))
+- [Ultra-Pro High-Fidelity OS Self-Destruction (T1499.003)](#ultra-pro-high-fidelity-os-self-destruction-(t1499003))
+- [Ultra-Pro High-Fidelity Resource Exhaustion (T1499.004)](#ultra-pro-high-fidelity-resource-exhaustion-(t1499004))
 - [Ultra-Pro Web Shell Execution Patterns (T1505.003)](#ultra-pro-web-shell-execution-patterns-(t1505003))
 - [Ultra-Pro SQL Server Command Shell Execution (T1505.001)](#ultra-pro-sql-server-command-shell-execution-(t1505001))
 - [Ultra-Pro IIS Native Module Injection (T1505.002)](#ultra-pro-iis-native-module-injection-(t1505002))
@@ -5421,6 +5429,40 @@ within sensitive webroot directories.
 
 ---
 
+## Ultra-Pro High-Fidelity Firmware Corruption (T1495)
+- **Azonosító:** `T1495.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects potential firmware corruption or unauthorized flashing by monitoring 
+low-level hardware access tools and firmware update utilities originating 
+from untrusted process lineages (e.g., browsers, office apps, or temp folders).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1495`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Resource Hijacking (T1496)
+- **Azonosító:** `T1496.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects unauthorized resource hijacking (cryptomining) by monitoring for 
+specific miner protocols (stratum), algorithm flags, and hardware 
+optimization arguments originating from untrusted process lineages.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1496`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497)
 - **Azonosító:** `T1497.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -5489,6 +5531,40 @@ targeting long-duration stalls used to exhaust sandbox analysis limits.
 
 ---
 
+## Ultra-Pro High-Fidelity Network DoS (T1498)
+- **Azonosító:** `T1498.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted network denial of service attempts (flooding, amplification) 
+by monitoring for low-level packet manipulation tools and high-bandwidth 
+stress tests originating from untrusted process lineages.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1498, 001, 002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001)
+- **Azonosító:** `T1498_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects targeted direct network flooding (SYN, UDP, ICMP) by monitoring 
+for aggressive packet generation parameters (micro-intervals, unlimited bandwidth) 
+originating from untrusted process lineages.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Endpoint DoS (T1499)
 - **Azonosító:** `T1499.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -5498,6 +5574,76 @@ of critical system processes (LSASS, CSRSS) and resource exhaustion loops
 originating from untrusted process lineages.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1499, 003, 004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity OS Self-Destruction (T1499.001)
+- **Azonosító:** `T1499_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects targeted OS self-destruction by monitoring for forced termination of 
+critical kernel processes (csrss.exe, wininit.exe) and malicious use of 
+system debuggers to trigger immediate BSOD, specifically filtering out 
+trusted management and update processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Service Exhaustion (T1499.002)
+- **Azonosító:** `T1499_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects endpoint denial of service via service exhaustion by monitoring 
+unauthorized service termination and persistent configuration changes (disabling) 
+targeting security and infrastructure services, originating from suspicious lineages.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity OS Self-Destruction (T1499.003)
+- **Azonosító:** `T1499_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects targeted OS self-destruction by monitoring for forced termination of 
+critical kernel processes (csrss.exe, wininit.exe) and malicious use of 
+system debuggers to trigger immediate BSOD, specifically filtering out 
+trusted management and update processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Resource Exhaustion (T1499.004)
+- **Azonosító:** `T1499_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects targeted resource exhaustion attempts (CPU/RAM/IO) by identifying 
+infinite loop patterns and massive memory allocation attempts 
+originating from suspicious process lineages.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

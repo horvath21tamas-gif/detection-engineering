@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-09 12:03:19`
+**Utolsó frissítés:** `2026-02-09 13:21:14`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 617 | 100% |
-| Splunk (SPL) | 604 | 97.9% |
-| Microsoft Sentinel (KQL) | 610 | 98.9% |
-| QRadar (AQL) | 214 | 34.7% |
-| Elastic (KQL/EQL) | 610 | 98.9% |
-| RSA NetWitness | 603 | 97.7% |
+| Sigma (Forrás) | 626 | 100% |
+| Splunk (SPL) | 613 | 97.9% |
+| Microsoft Sentinel (KQL) | 619 | 98.9% |
+| QRadar (AQL) | 214 | 34.2% |
+| Elastic (KQL/EQL) | 619 | 98.9% |
+| RSA NetWitness | 612 | 97.8% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -303,13 +303,19 @@
 | T1491.001 | CRITICAL | Ultra-Pro High-Fidelity Defacement (T1491), Ultra-Pro High-Fidelity Internal Defacement (T1491.001) |
 | T1491.002 | CRITICAL | Ultra-Pro High-Fidelity Defacement (T1491), Ultra-Pro High-Fidelity External Defacement (T1491.002) |
 | T1495 | CRITICAL | Ultra-Pro High-Fidelity Firmware Corruption (T1495) |
+| T1496 | HIGH | Ultra-Pro High-Fidelity Resource Hijacking (T1496) |
 | T1497 | HIGH | Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497) |
 | T1497.001 | HIGH | Ultra-Pro High-Fidelity VM Artifact Discovery (T1497.001), Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497) |
 | T1497.002 | HIGH | Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002) |
 | T1497.003 | HIGH | Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497), Ultra-Pro High-Fidelity Time-based Evasion (T1497.003) |
+| T1498 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498) |
+| T1498.001 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498), Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001) |
+| T1498.002 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498) |
 | T1499 | CRITICAL | Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
-| T1499.003 | CRITICAL | Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
-| T1499.004 | CRITICAL | Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
+| T1499.001 | CRITICAL | Ultra-Pro High-Fidelity OS Self-Destruction (T1499.001) |
+| T1499.002 | CRITICAL | Ultra-Pro High-Fidelity Service Exhaustion (T1499.002) |
+| T1499.003 | CRITICAL | Ultra-Pro High-Fidelity OS Self-Destruction (T1499.003), Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
+| T1499.004 | CRITICAL | Ultra-Pro High-Fidelity Endpoint DoS (T1499), Ultra-Pro High-Fidelity Resource Exhaustion (T1499.004) |
 | T1505 | CRITICAL | Ultra-Pro Web Shell Execution Patterns (T1505.003) |
 | T1505.001 | CRITICAL | Ultra-Pro SQL Server Command Shell Execution (T1505.001) |
 | T1505.002 | CRITICAL | Ultra-Pro IIS Native Module Injection (T1505.002) |

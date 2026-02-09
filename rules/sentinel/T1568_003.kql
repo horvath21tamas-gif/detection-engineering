@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("* -querytype TXT*", "* -q TXT*", "*Resolve-DnsName*", "* -Type TXT*")) and (ProcessCommandLine in ("*[Convert]::*", "* -bxor*", "*.Substring(*", "*.Split(*", "* [int]*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\rundll32.exe")) and (not ((ProcessCommandLine in ("*_vlmcs._tcp*", "*chocolatey*", "*domain-verification*")) or User =~ "NT AUTHORITY\SYSTEM" or ParentProcessName endswith "\services.exe"))

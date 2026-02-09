@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-09 09:10:39`
+**Utolsó frissítés:** `2026-02-09 09:44:25`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 576 | 100% |
-| Splunk (SPL) | 563 | 97.7% |
-| Microsoft Sentinel (KQL) | 569 | 98.8% |
-| QRadar (AQL) | 214 | 37.2% |
-| Elastic (KQL/EQL) | 569 | 98.8% |
-| RSA NetWitness | 562 | 97.6% |
+| Sigma (Forrás) | 585 | 100% |
+| Splunk (SPL) | 572 | 97.8% |
+| Microsoft Sentinel (KQL) | 578 | 98.8% |
+| QRadar (AQL) | 214 | 36.6% |
+| Elastic (KQL/EQL) | 578 | 98.8% |
+| RSA NetWitness | 571 | 97.6% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -157,7 +157,11 @@
 | T1087.002 | HIGH | Ultra-Pro High-Fidelity Domain Account Discovery (T1087.002) |
 | T1087.003 | HIGH | Ultra-Pro High-Fidelity Email Account Discovery (T1087.003) |
 | T1087.004 | HIGH | Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004) |
-| T1090 | CRITICAL | Ultra-Pro High-Fidelity Proxy & Pivot Point Detection (T1090) |
+| T1090 | CRITICAL | Ultra-Pro High-Fidelity Proxy & Pivot Point Detection (T1090), Ultra-Pro High-Fidelity External Proxy & Tunneling (T1090.002) |
+| T1090.001 | CRITICAL | Ultra-Pro High-Fidelity Internal Proxy & Pivot Detection (T1090.001) |
+| T1090.002 | CRITICAL | Ultra-Pro High-Fidelity External Proxy & Tunneling (T1090.002) |
+| T1090.003 | CRITICAL | Ultra-Pro High-Fidelity Multi-hop Proxy & Tor Detection (T1090.003) |
+| T1090.004 | CRITICAL | Ultra-Pro High-Fidelity Domain Fronting Detection (T1090.004) |
 | T1091 | HIGH | High-Fidelity Process Execution from Removable Media |
 | T1092 | CRITICAL | Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092) |
 | T1095 | CRITICAL | Ultra-Pro High-Fidelity Non-Application Layer C2 (T1095) |
@@ -169,6 +173,9 @@
 | T1098.005 | HIGH | High-Fidelity Device Registration Persistence (T1098.005) |
 | T1098.006 | CRITICAL | High-Fidelity MFA Method Addition |
 | T1102 | CRITICAL | Ultra-Pro High-Fidelity Web Service C2 (T1102) |
+| T1102.001 | CRITICAL | Ultra-Pro High-Fidelity Dead Drop Resolver (T1102.001) |
+| T1102.002 | CRITICAL | Ultra-Pro High-Fidelity Bidirectional Cloud C2 (T1102.002) |
+| T1102.003 | CRITICAL | Ultra-Pro High-Fidelity One-Way Web Service C2 (T1102.003) |
 | T1104 | CRITICAL | Ultra-Pro High-Fidelity Multi-Stage C2 (T1104) |
 | T1105 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1106 | CRITICAL | High-Fidelity Native API Abuse via LOLBins |

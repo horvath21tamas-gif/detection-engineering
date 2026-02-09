@@ -143,6 +143,10 @@
 - [Ultra-Pro High-Fidelity Email Account Discovery (T1087.003)](#ultra-pro-high-fidelity-email-account-discovery-(t1087003))
 - [Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004)](#ultra-pro-high-fidelity-cloud-account-discovery-(t1087004))
 - [Ultra-Pro High-Fidelity Proxy & Pivot Point Detection (T1090)](#ultra-pro-high-fidelity-proxy-&-pivot-point-detection-(t1090))
+- [Ultra-Pro High-Fidelity Internal Proxy & Pivot Detection (T1090.001)](#ultra-pro-high-fidelity-internal-proxy-&-pivot-detection-(t1090001))
+- [Ultra-Pro High-Fidelity External Proxy & Tunneling (T1090.002)](#ultra-pro-high-fidelity-external-proxy-&-tunneling-(t1090002))
+- [Ultra-Pro High-Fidelity Multi-hop Proxy & Tor Detection (T1090.003)](#ultra-pro-high-fidelity-multi-hop-proxy-&-tor-detection-(t1090003))
+- [Ultra-Pro High-Fidelity Domain Fronting Detection (T1090.004)](#ultra-pro-high-fidelity-domain-fronting-detection-(t1090004))
 - [High-Fidelity Process Execution from Removable Media](#high-fidelity-process-execution-from-removable-media)
 - [Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092)](#ultra-pro-high-fidelity-removable-media-c2-anomaly-(t1071002--t1092))
 - [Ultra-Pro High-Fidelity Non-Application Layer C2 (T1095)](#ultra-pro-high-fidelity-non-application-layer-c2-(t1095))
@@ -154,6 +158,9 @@
 - [High-Fidelity Device Registration Persistence (T1098.005)](#high-fidelity-device-registration-persistence-(t1098005))
 - [High-Fidelity MFA Method Addition](#high-fidelity-mfa-method-addition)
 - [Ultra-Pro High-Fidelity Web Service C2 (T1102)](#ultra-pro-high-fidelity-web-service-c2-(t1102))
+- [Ultra-Pro High-Fidelity Dead Drop Resolver (T1102.001)](#ultra-pro-high-fidelity-dead-drop-resolver-(t1102001))
+- [Ultra-Pro High-Fidelity Bidirectional Cloud C2 (T1102.002)](#ultra-pro-high-fidelity-bidirectional-cloud-c2-(t1102002))
+- [Ultra-Pro High-Fidelity One-Way Web Service C2 (T1102.003)](#ultra-pro-high-fidelity-one-way-web-service-c2-(t1102003))
 - [Ultra-Pro High-Fidelity Multi-Stage C2 (T1104)](#ultra-pro-high-fidelity-multi-stage-c2-(t1104))
 - [Suspicious Use of Built-in Windows Tools for File Download and Code Execution](#suspicious-use-of-built-in-windows-tools-for-file-download-and-code-execution)
 - [High-Fidelity Native API Abuse via LOLBins](#high-fidelity-native-api-abuse-via-lolbins)
@@ -2965,6 +2972,74 @@ external listening ports to internal network assets.
 
 ---
 
+## Ultra-Pro High-Fidelity Internal Proxy & Pivot Detection (T1090.001)
+- **Azonosító:** `T1090_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects internal network pivoting by identifying the configuration of 
+port forwarding to private RFC 1918 IP addresses from non-system 
+processes, excluding legitimate local virtualization and container traffic.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity External Proxy & Tunneling (T1090.002)
+- **Azonosító:** `T1090_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the use of non-standard external proxies by identifying hardcoded 
+credentials, custom PAC files, or proxy-overrides in high-risk binaries 
+launched from interactive or script interpreters.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002, T1090`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Multi-hop Proxy & Tor Detection (T1090.003)
+- **Azonosító:** `T1090_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects multi-hop proxying and Tor circuitry by identifying unauthorized 
+proxy chaining tools or hidden Tor clients running from non-standard 
+directories, focusing on control port manipulation and SOCKS5 chaining.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Domain Fronting Detection (T1090.004)
+- **Azonosító:** `T1090_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects domain fronting by identifying manual HTTP Host header overrides 
+within command-line arguments of common web-enabled LoLBins, 
+specifically targeting CDN-backed infrastructure redirection.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## High-Fidelity Process Execution from Removable Media
 - **Azonosító:** `T1091.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
@@ -3145,6 +3220,57 @@ raw API or raw-content subdomains accessed by non-browser LoLBins,
 script interpreters, or binaries running from suspicious paths.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1102`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Dead Drop Resolver (T1102.001)
+- **Azonosító:** `T1102_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects the use of dead drop resolvers by identifying raw content retrieval 
+from social/code platforms, specifically filtering for suspicious parent-child 
+relationships and non-standard download methods.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Bidirectional Cloud C2 (T1102.002)
+- **Azonosító:** `T1102_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects interactive C2 communication via cloud APIs by identifying 
+specific write/read methods (POST/GET) issued by non-browser LoLBins 
+or binaries running from suspicious paths, excluding official clients.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity One-Way Web Service C2 (T1102.003)
+- **Azonosító:** `T1102_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects one-way C2 or data exfiltration via cloud services by correlating 
+specific API upload/download methods with non-standard process locations 
+and suspicious parent process lineages.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

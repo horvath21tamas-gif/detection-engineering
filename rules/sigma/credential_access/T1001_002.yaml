@@ -1,0 +1,54 @@
+title: Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001.002)
+id: f3bc15b3-8067-4e88-a575-e1c2899f10ad
+status: stable
+description: |
+    Detects data de-steganography by identifying anomalous programmatic access 
+    to image manipulation APIs (GDI+, System.Drawing) from script interpreters, 
+    specifically looking for pixel-level data extraction routines.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.command_and_control
+    - attack.t1001.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_stego_logic:
+        CommandLine|contains:
+            - 'GetPixel'                  
+            - 'LockBits'                  
+            - 'Bitmap.new'                
+            - 'System.Drawing.'            
+            - 'windowscodecs.dll'          
+
+    selection_procs:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\rundll32.exe'
+            - '\mshta.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+
+    selection_context:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\w3wp.exe'                 
+
+    filter_legit_apps:
+        - Image|contains:
+            - '\Adobe\'
+            - '\Microsoft Office\'
+            - '\PhotosApp.exe'
+            - '\Snagit\'
+        - CommandLine|contains:
+            - 'C:\Program Files\'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: (selection_stego_logic and selection_procs) or (selection_stego_logic and selection_context) and not filter_legit_apps
+level: critical

@@ -48,7 +48,7 @@ detection:
             - '\Snagit\'
         - CommandLine|contains:
             - 'C:\Program Files\'
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_stego_logic and selection_procs) or (selection_stego_logic and selection_context) and not filter_legit_apps
 level: critical

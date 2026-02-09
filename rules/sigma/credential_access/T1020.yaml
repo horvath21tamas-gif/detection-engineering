@@ -1,0 +1,61 @@
+title: Ultra-Pro High-Fidelity Automated Exfiltration (T1020)
+id: 0d09b7a5-2da5-4085-a792-f11d459bb16e
+status: stable
+description: |
+    Detects automated exfiltration by identifying the sequential pattern of 
+    password-protected archiving followed by immediate network transfer using 
+    non-standard tools or cloud-sync binaries from suspicious locations.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.exfiltration
+    - attack.t1020
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_staging:
+        CommandLine|contains:
+            - ' -p'            
+            - ' -hp'           
+            - ' -mhe=on'       
+            - ' -mx9'          
+            - ' -ta'           
+
+    selection_tools:
+        Image|endswith:
+            - '\rclone.exe'    
+            - '\mega.exe'      
+            - '\file.exe'      
+            - '\powershell.exe'
+            - '\curl.exe'
+
+    selection_path:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Public\'
+            - '\PerfLogs\'
+
+    selection_targets:
+        CommandLine|contains:
+            - 'copy '         
+            - 'sync '
+            - 'ftp'
+            - 'http'
+            - '--config'       
+
+    filter_legit_infra:
+        - Image|contains:
+            - '\Program Files\'
+            - '\Program Files (x86)\'
+        - CommandLine|contains:
+            - 'localhost'
+            - '127.0.0.1'
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith:
+            - '\services.exe'
+
+    condition: (selection_staging or selection_tools) and selection_path and selection_targets and not filter_legit_infra
+level: critical

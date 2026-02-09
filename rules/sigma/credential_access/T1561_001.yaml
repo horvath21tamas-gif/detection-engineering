@@ -48,7 +48,7 @@ detection:
             - '\AppData\Local\Temp\'
 
     filter_legit:
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|endswith:
             - '\msiexec.exe'         
             - '\CcmExec.exe'        

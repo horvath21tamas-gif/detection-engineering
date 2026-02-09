@@ -43,3 +43,5 @@ available_sources:
   - ad
   - process_access
   - Cisco IOS
+  - activitylogs
+  - azure_ad

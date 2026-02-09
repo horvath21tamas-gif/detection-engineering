@@ -1,0 +1,60 @@
+title: Ultra-Pro High-Fidelity Network DoS (T1498)
+id: 4650df6c-d630-4566-a0c6-57c314747794
+status: stable
+description: |
+    Detects targeted network denial of service attempts (flooding, amplification) 
+    by monitoring for low-level packet manipulation tools and high-bandwidth 
+    stress tests originating from untrusted process lineages.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1498
+    - attack.t1498.001
+    - attack.t1498.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_engines:
+        - Image|endswith:
+            - '\hping3.exe'        
+            - '\loic.exe'            
+            - '\hoic.exe'            
+            - '\iperf.exe'           
+            - '\iperf3.exe'
+            - '\pktmon.exe'          
+
+    selection_logic:
+        CommandLine|contains:
+            - ' --flood'             
+            - ' --rand-source'       
+            - ' -u -b '              
+            - ' --syn'               
+            - ' --udp'               
+            - ' -i u1'              
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\httpd.exe'           
+            - '\chrome.exe'          
+            - '\rundll32.exe'        
+            - '\outlook.exe'
+        - Image|contains:
+            - '\Temp\'
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+
+    filter_legit_ops:
+        - User: 'NT AUTHORITY\SYSTEM' 
+        - Image|contains:
+            - '\Program Files\NetworkMonitoring\' 
+            - '\Azure\'                            
+        - CommandLine|contains:
+            - 'Speedtest'
+            - 'HealthCheck'
+
+    condition: selection_engines and selection_logic and selection_context and not filter_legit_ops
+level: high

@@ -168,6 +168,7 @@
 | T1098.004 | CRITICAL | High-Fidelity Azure Role Assignment Escalation |
 | T1098.005 | HIGH | High-Fidelity Device Registration Persistence (T1098.005) |
 | T1098.006 | CRITICAL | High-Fidelity MFA Method Addition |
+| T1102 | CRITICAL | Ultra-Pro High-Fidelity Web Service C2 (T1102) |
 | T1104 | CRITICAL | Ultra-Pro High-Fidelity Multi-Stage C2 (T1104) |
 | T1105 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1106 | CRITICAL | High-Fidelity Native API Abuse via LOLBins |

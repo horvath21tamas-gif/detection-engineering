@@ -51,7 +51,7 @@ detection:
             - 'chocolatey'                    
             - 'scoop'
             - 'winget'
-        - User: 'NT AUTHORITY\SYSTEM'         
+        - username: 'NT AUTHORITY\SYSTEM'         
 
     condition: selection_api_endpoints and (selection_procs or selection_suspicious_path) and not filter_legit_software
 level: critical

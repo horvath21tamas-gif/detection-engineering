@@ -49,7 +49,7 @@ detection:
         - CommandLine|contains:
             - 'localhost'
             - '127.0.0.1'
-        - User: 'NT AUTHORITY\SYSTEM'          
+        - username: 'NT AUTHORITY\SYSTEM'          
         - ParentImage|endswith:
             - '\services.exe'
 

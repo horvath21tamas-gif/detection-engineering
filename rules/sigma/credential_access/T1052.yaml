@@ -1,0 +1,62 @@
+title: Ultra-Pro High-Fidelity Physical Medium Exfiltration (T1052)
+id: 5a995a72-06d1-444b-bc1b-205c571f34bc
+status: stable
+description: |
+    Detects systematic data exfiltration to physical media by monitoring 
+    non-interactive copy/archive commands targeting removable disk volumes, 
+    filtering out legitimate Windows Explorer GUI operations.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.exfiltration
+    - attack.t1052
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        Image|endswith:
+            - '\robocopy.exe'         
+            - '\xcopy.exe'
+            - '\powershell.exe'
+            - '\7z.exe'              
+            - '\rar.exe'
+            - '\bitsadmin.exe'        
+
+    selection_target:
+        CommandLine|contains:
+            - ' D:\'
+            - ' E:\'
+            - ' F:\'
+            - ' G:\'
+            - ' H:\'
+            - '\Device\HarddiskVolume'
+            - '\\*\root\'             
+
+    selection_flags:
+        CommandLine|contains:
+            - ' /S /E /H /K /R:0 /W:0'
+            - ' -Recurse'           
+            - ' -Hidden'              
+            - ' -ExecutionPolicy Bypass'
+            - ' a -p'                 
+
+    selection_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\sqlservr.exe'         
+            - '\wscript.exe'
+
+    filter_legit:
+        - ParentImage|endswith:
+            - '\explorer.exe'         
+        - Image|contains:
+            - '\Program Files\'      
+        - User: 'NT AUTHORITY\SYSTEM'
+        - CommandLine|contains:
+            - 'Windows\Logs'          
+
+    condition: selection_tools and selection_target and (selection_flags or selection_parent) and not filter_legit
+level: critical

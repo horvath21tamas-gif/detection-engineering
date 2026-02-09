@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (ProcessCommandLine in ("*/webhooks/*", "*api.telegram.org/bot*", "*raw.githubusercontent.com*", "*transfer.sh*", "*file.io*", "*pastebin.com/raw/*", "*webhook.site*")) and ((FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Public\*", "*\PerfLogs\*", "*\Windows\Tasks\*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\curl.exe", "*\certutil.exe", "*\bitsadmin.exe"))) and (ProcessCommandLine in ("* -F *", "* --data *", "* -d *", "*downloadstring*", "*invoke-webrequest*", "*uploadfile*")) and (not ((FolderPath in ("*\Program Files\*", "*\Program Files (x86)\*")) or (ProcessCommandLine in ("*chocolatey*", "*microsoft.com*", "*pnp.microsoft.com*")) or User =~ "NT AUTHORITY\SYSTEM" or ParentProcessName endswith "\services.exe"))

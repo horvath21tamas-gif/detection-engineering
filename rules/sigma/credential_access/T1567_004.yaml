@@ -1,0 +1,66 @@
+title: Ultra-Pro High-Fidelity Text Storage Exfil (T1567.004)
+id: 1ab05116-0676-4620-a5e6-2a9934ac2f8d
+status: stable
+description: |
+    Detects programmatic data exfiltration to text storage sites by monitoring 
+    CLI-based POST requests containing API keys or clipboard-grabbing commands 
+    from non-administrative or suspicious parent processes.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.exfiltration
+    - attack.t1567.004
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\curl.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\certutil.exe'       
+            - '\bitsadmin.exe'
+
+    selection_services:
+        CommandLine|contains:
+            - 'pastebin.com/api/api_post.php'
+            - 'api.pastebin.com'
+            - 'ghostbin.co/paste'
+            - 'hastebin.com/documents'
+            - 'controlc.com/index.php'
+            - 'rentry.co/api'
+
+    selection_logic:
+        CommandLine|contains:
+            - 'Get-Clipboard'        
+            - 'pbpaste'              
+            - 'api_dev_key'           
+            - 'api_paste_code'       
+            - ' -d '               
+            - ' --data'
+            - 'Invoke-RestMethod'     
+
+    selection_context:
+        - Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+        - ParentImage|endswith:
+            - '\winword.exe'          
+            - '\excel.exe'
+            - '\rundll32.exe'       
+            - '\explorer.exe'         
+
+    filter_legit:
+        - Image|contains:
+            - '\Program Files\'       
+        - CommandLine|contains:
+            - ' --version'
+            - ' --help'
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith:
+            - '\services.exe'
+
+    condition: (selection_tools and selection_services) and (selection_logic or selection_context) and not filter_legit
+level: critical

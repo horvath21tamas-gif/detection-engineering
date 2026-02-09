@@ -1,0 +1,53 @@
+title: Ultra-Pro High-Fidelity Local Email Harvesting Anomaly (T1114.001)
+id: ca15d3e3-1436-4dbd-9ec2-f1a7a8f57fa1
+status: stable
+description: |
+    Detects unauthorized automated local email collection by identifying suspicious 
+    COM object instantiation (Outlook.Application), folder index targeting (Inbox/Sent), 
+    and programmatic evasion (Visible=$false) from untrusted shells.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.collection
+    - attack.t1114.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_com_api:
+        CommandLine|contains:
+            - 'New-Object -ComObject Outlook.Application'
+            - 'CreateObject("Outlook.Application")'
+            - '.GetNamespace("MAPI")'
+            - 'GetDefaultFolder(6)'      
+            - 'GetDefaultFolder(5)'      
+
+    selection_intent:
+        CommandLine|contains:
+            - '.SaveAs'                   
+            - '.Attachments'              
+            - '.Visible = $false'        
+            - '.Display = 0'              
+            - 'SilentlyContinue'          
+
+    selection_context:
+        ParentImage|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+            - '\mshta.exe'             
+        IntegrityLevel: 'Medium'        
+
+    filter_trusted_infra:
+        - Image|contains:
+            - 'C:\Program Files\Microsoft Office\' 
+            - 'C:\Program Files (x86)\Microsoft Office\'
+        - User: 'NT AUTHORITY\SYSTEM'     
+        - CommandLine|contains:
+            - 'HealthCheck.ps1'          
+            - 'SignatureUpdater'          
+            - 'Outlook_Integration'      
+
+    condition: selection_com_api and selection_intent and selection_context and not filter_trusted_infra
+level: critical

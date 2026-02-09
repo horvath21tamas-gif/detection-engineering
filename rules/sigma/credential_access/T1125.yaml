@@ -50,7 +50,7 @@ detection:
             - 'C:\Windows\System32\CameraSettingsUIHost.exe'
         - CommandLine|contains:
             - 'skype.exe'
-        - User: 'NT AUTHORITY\SYSTEM'   
+        - username: 'NT AUTHORITY\SYSTEM'   
 
     condition: (selection_multimedia_apis or selection_media_bins) and selection_context and not filter_trusted_apps
 level: critical

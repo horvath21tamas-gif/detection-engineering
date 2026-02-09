@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-09 06:49:06`
+**Utolsó frissítés:** `2026-02-09 07:23:27`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 544 | 100% |
-| Splunk (SPL) | 534 | 98.2% |
-| Microsoft Sentinel (KQL) | 537 | 98.7% |
-| QRadar (AQL) | 214 | 39.3% |
-| Elastic (KQL/EQL) | 537 | 98.7% |
-| RSA NetWitness | 533 | 98.0% |
+| Sigma (Forrás) | 551 | 100% |
+| Splunk (SPL) | 540 | 98.0% |
+| Microsoft Sentinel (KQL) | 544 | 98.7% |
+| QRadar (AQL) | 214 | 38.8% |
+| Elastic (KQL/EQL) | 544 | 98.7% |
+| RSA NetWitness | 539 | 97.8% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -133,6 +133,7 @@
 | T1072 | CRITICAL | High-Fidelity Software Deployment Tool Abuse Detection |
 | T1074 | CRITICAL | Ultra-Pro High-Fidelity Data Staging Anomaly (T1074), Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001) |
 | T1074.001 | CRITICAL | Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001) |
+| T1074.002 | CRITICAL | Ultra-Pro High-Fidelity Remote Data Staging (T1074.002) |
 | T1078 | HIGH | High-Fidelity Anomalous Logon via Valid Account |
 | T1078.001 | CRITICAL | High-Fidelity Default Account Abuse Detection |
 | T1078.002 | HIGH | High-Fidelity Domain Account Lateral Movement Anomaly |
@@ -163,14 +164,17 @@
 | T1110.004 | HIGH | Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004) |
 | T1111 | CRITICAL | Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111) |
 | T1112 | CRITICAL | Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112) |
+| T1113 | CRITICAL | Ultra-Pro High-Fidelity Screen Capture Anomaly (T1113) |
 | T1114 | CRITICAL | Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |
-| T1114.001 | CRITICAL | Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |
-| T1114.002 | CRITICAL | Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |
+| T1114.001 | CRITICAL | Ultra-Pro High-Fidelity Local Email Harvesting Anomaly (T1114.001), Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |
+| T1114.002 | CRITICAL | Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114), Ultra-Pro High-Fidelity Remote Email Export Anomaly (T1114.002) |
+| T1114.003 | CRITICAL | Ultra-Pro High-Fidelity Email Forwarding Rule Anomaly (T1114.003) |
 | T1115 | CRITICAL | Ultra-Pro High-Fidelity Clipboard Data Spying (T1115) |
 | T1119 | CRITICAL | Ultra-Pro High-Fidelity Automated Collection (T1119) |
 | T1120 | HIGH | Ultra-Pro High-Fidelity Peripheral Device Discovery (T1120) |
 | T1123 | CRITICAL | Ultra-Pro High-Fidelity Audio Capture & Spying (T1123) |
 | T1124 | HIGH | Ultra-Pro High-Fidelity System Time Discovery (T1124) |
+| T1125 | CRITICAL | Ultra-Pro High-Fidelity Video Capture Anomaly (T1125) |
 | T1127 | CRITICAL | Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127), Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001) |
 | T1127.001 | CRITICAL | Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001) |
 | T1129 | HIGH | High-Fidelity Shared Module Load from Untrusted Path |

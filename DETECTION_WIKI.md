@@ -118,6 +118,7 @@
 - [High-Fidelity Software Deployment Tool Abuse Detection](#high-fidelity-software-deployment-tool-abuse-detection)
 - [Ultra-Pro High-Fidelity Data Staging Anomaly (T1074)](#ultra-pro-high-fidelity-data-staging-anomaly-(t1074))
 - [Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001)](#ultra-pro-high-fidelity-local-data-staging-anomaly-(t1074001))
+- [Ultra-Pro High-Fidelity Remote Data Staging (T1074.002)](#ultra-pro-high-fidelity-remote-data-staging-(t1074002))
 - [High-Fidelity Anomalous Logon via Valid Account](#high-fidelity-anomalous-logon-via-valid-account)
 - [High-Fidelity Default Account Abuse Detection](#high-fidelity-default-account-abuse-detection)
 - [High-Fidelity Domain Account Lateral Movement Anomaly](#high-fidelity-domain-account-lateral-movement-anomaly)
@@ -148,12 +149,17 @@
 - [Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004)](#ultra-pro-high-fidelity-credential-stuffing-&-combo-list-abuse-(t1110004))
 - [Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111)](#ultra-pro-high-fidelity-mfa-evasion-&-session-hijacking-(t1111))
 - [Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112)](#ultra-pro-high-fidelity-registry-tampering-for-evasion-(t1112))
+- [Ultra-Pro High-Fidelity Screen Capture Anomaly (T1113)](#ultra-pro-high-fidelity-screen-capture-anomaly-(t1113))
 - [Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114)](#ultra-pro-high-fidelity-email-harvesting-anomaly-(t1114))
+- [Ultra-Pro High-Fidelity Local Email Harvesting Anomaly (T1114.001)](#ultra-pro-high-fidelity-local-email-harvesting-anomaly-(t1114001))
+- [Ultra-Pro High-Fidelity Remote Email Export Anomaly (T1114.002)](#ultra-pro-high-fidelity-remote-email-export-anomaly-(t1114002))
+- [Ultra-Pro High-Fidelity Email Forwarding Rule Anomaly (T1114.003)](#ultra-pro-high-fidelity-email-forwarding-rule-anomaly-(t1114003))
 - [Ultra-Pro High-Fidelity Clipboard Data Spying (T1115)](#ultra-pro-high-fidelity-clipboard-data-spying-(t1115))
 - [Ultra-Pro High-Fidelity Automated Collection (T1119)](#ultra-pro-high-fidelity-automated-collection-(t1119))
 - [Ultra-Pro High-Fidelity Peripheral Device Discovery (T1120)](#ultra-pro-high-fidelity-peripheral-device-discovery-(t1120))
 - [Ultra-Pro High-Fidelity Audio Capture & Spying (T1123)](#ultra-pro-high-fidelity-audio-capture-&-spying-(t1123))
 - [Ultra-Pro High-Fidelity System Time Discovery (T1124)](#ultra-pro-high-fidelity-system-time-discovery-(t1124))
+- [Ultra-Pro High-Fidelity Video Capture Anomaly (T1125)](#ultra-pro-high-fidelity-video-capture-anomaly-(t1125))
 - [Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)](#ultra-pro-high-fidelity-trusted-developer-utility-proxy-(t1127))
 - [Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001)](#ultra-pro-high-fidelity-msbuild-proxy-execution-(t1127001))
 - [High-Fidelity Shared Module Load from Untrusted Path](#high-fidelity-shared-module-load-from-untrusted-path)
@@ -2509,6 +2515,23 @@ and mass-copy operations into hidden system directories from untrusted contexts.
 
 ---
 
+## Ultra-Pro High-Fidelity Remote Data Staging (T1074.002)
+- **Azonosító:** `T1074_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects remote data staging by identifying anomalous mass-file movements to 
+internal UNC paths, followed by archival commands with low-compression/encryption 
+flags, originating from untrusted process lineages.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## High-Fidelity Anomalous Logon via Valid Account
 - **Azonosító:** `T1078.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
@@ -3013,6 +3036,23 @@ Optimized to ignore standard system updates and focus on non-standard process be
 
 ---
 
+## Ultra-Pro High-Fidelity Screen Capture Anomaly (T1113)
+- **Azonosító:** `T1113.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized screen capture by identifying suspicious .NET/GDI+ API 
+calls within PowerShell, hidden PSR.exe sessions, and automated image 
+serialization to temporary/public directories.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1113`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114)
 - **Azonosító:** `T1114.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -3022,6 +3062,57 @@ COM object instantiation (Outlook.Application), mailbox export requests,
 and programmatic access to Inbox/Sent folders from non-standard shells.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, 002, T1114`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Local Email Harvesting Anomaly (T1114.001)
+- **Azonosító:** `T1114_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized automated local email collection by identifying suspicious 
+COM object instantiation (Outlook.Application), folder index targeting (Inbox/Sent), 
+and programmatic evasion (Visible=$false) from untrusted shells.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Remote Email Export Anomaly (T1114.002)
+- **Azonosító:** `T1114_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized remote email collection by identifying systematic 
+mailbox export requests that use sensitive keyword filters and redirect 
+output to non-standard internal UNC paths or administrative shares.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Email Forwarding Rule Anomaly (T1114.003)
+- **Azonosító:** `T1114_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized email forwarding rules by identifying programmatic 
+redirection to external/untrusted domains combined with sensitive keyword 
+filtering, originating from suspicious process lineages.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -3107,6 +3198,23 @@ lineages (e.g., Office apps, Web servers) and specific automation patterns
 used for sandbox evasion or geofencing checks.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1124`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Video Capture Anomaly (T1125)
+- **Azonosító:** `T1125.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized video capture by identifying programmatic access to 
+multimedia frameworks (DirectShow, Media Foundation) via suspicious interpreters, 
+standalone media binaries (FFmpeg) with redirection, or headless shell sessions.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1125`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

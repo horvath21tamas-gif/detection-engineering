@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-09 10:35:11`
+**Utolsó frissítés:** `2026-02-09 10:57:26`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 603 | 100% |
-| Splunk (SPL) | 590 | 97.8% |
-| Microsoft Sentinel (KQL) | 596 | 98.8% |
-| QRadar (AQL) | 214 | 35.5% |
-| Elastic (KQL/EQL) | 596 | 98.8% |
-| RSA NetWitness | 589 | 97.7% |
+| Sigma (Forrás) | 605 | 100% |
+| Splunk (SPL) | 592 | 97.9% |
+| Microsoft Sentinel (KQL) | 598 | 98.8% |
+| QRadar (AQL) | 214 | 35.4% |
+| Elastic (KQL/EQL) | 598 | 98.8% |
+| RSA NetWitness | 591 | 97.7% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -97,6 +97,7 @@
 | T1048.003 | CRITICAL | Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003) |
 | T1049 | HIGH | Ultra-Pro High-Fidelity System Network Connections Discovery (T1049) |
 | T1052 | CRITICAL | Ultra-Pro High-Fidelity Physical Medium Exfiltration (T1052) |
+| T1052.001 | CRITICAL | Ultra-Pro High-Fidelity USB Exfiltration (T1052.001) |
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
 | T1053.002 | HIGH | High-Fidelity At.exe Activity Detection |
 | T1053.003 | HIGH | High-Fidelity Cron Persistence and In-Place Modification |
@@ -313,6 +314,7 @@
 | T1526 | HIGH | Ultra-Pro High-Fidelity Cloud Service Discovery (T1526) |
 | T1528 | CRITICAL | Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528) |
 | T1530 | CRITICAL | Ultra-Pro High-Fidelity Cloud Storage Data Theft (T1530) |
+| T1531 | CRITICAL | Ultra-Pro High-Fidelity Account Access Removal (T1531) |
 | T1534 | CRITICAL | Ultra-Pro High-Fidelity Internal Spearphishing Detection (T1534) |
 | T1535 | CRITICAL | Ultra-Pro High-Fidelity Unused Service Manipulation (T1535) |
 | T1537 | CRITICAL | Ultra-Pro High-Fidelity Cloud Account Exfil (T1537) |
@@ -456,6 +458,10 @@
 | T1566.003 | CRITICAL | High-Fidelity Process Spawn from Business Communication Service |
 | T1566.004 | HIGH | High-Fidelity Detection of Post-Vishing Remote Tool Execution |
 | T1567 | CRITICAL | Ultra-Pro High-Fidelity Web Service Exfiltration (T1567) |
+| T1567.001 | CRITICAL | Ultra-Pro High-Fidelity Code Repo Exfil (T1567.001) |
+| T1567.002 | CRITICAL | Ultra-Pro High-Fidelity Cloud Storage Exfil (T1567.002) |
+| T1567.003 | CRITICAL | Ultra-Pro High-Fidelity Video Hosting Exfil (T1567.003) |
+| T1567.004 | CRITICAL | Ultra-Pro High-Fidelity Text Storage Exfil (T1567.004) |
 | T1568 | HIGH | Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568) |
 | T1568.001 | CRITICAL | Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001) |
 | T1568.002 | CRITICAL | Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568), Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002) |

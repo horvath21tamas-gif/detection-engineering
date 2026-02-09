@@ -82,6 +82,7 @@
 - [Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003)](#ultra-pro-high-fidelity-unencrypted-protocol-exfil-(t1048003))
 - [Ultra-Pro High-Fidelity System Network Connections Discovery (T1049)](#ultra-pro-high-fidelity-system-network-connections-discovery-(t1049))
 - [Ultra-Pro High-Fidelity Physical Medium Exfiltration (T1052)](#ultra-pro-high-fidelity-physical-medium-exfiltration-(t1052))
+- [Ultra-Pro High-Fidelity USB Exfiltration (T1052.001)](#ultra-pro-high-fidelity-usb-exfiltration-(t1052001))
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [High-Fidelity At.exe Activity Detection](#high-fidelity-atexe-activity-detection)
 - [High-Fidelity Cron Persistence and In-Place Modification](#high-fidelity-cron-persistence-and-in-place-modification)
@@ -298,6 +299,7 @@
 - [Ultra-Pro High-Fidelity Cloud Service Discovery (T1526)](#ultra-pro-high-fidelity-cloud-service-discovery-(t1526))
 - [Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528)](#ultra-pro-high-fidelity-application-token-&-session-hijacking-(t1528))
 - [Ultra-Pro High-Fidelity Cloud Storage Data Theft (T1530)](#ultra-pro-high-fidelity-cloud-storage-data-theft-(t1530))
+- [Ultra-Pro High-Fidelity Account Access Removal (T1531)](#ultra-pro-high-fidelity-account-access-removal-(t1531))
 - [Ultra-Pro High-Fidelity Internal Spearphishing Detection (T1534)](#ultra-pro-high-fidelity-internal-spearphishing-detection-(t1534))
 - [Ultra-Pro High-Fidelity Unused Service Manipulation (T1535)](#ultra-pro-high-fidelity-unused-service-manipulation-(t1535))
 - [Ultra-Pro High-Fidelity Cloud Account Exfil (T1537)](#ultra-pro-high-fidelity-cloud-account-exfil-(t1537))
@@ -441,6 +443,10 @@
 - [High-Fidelity Process Spawn from Business Communication Service](#high-fidelity-process-spawn-from-business-communication-service)
 - [High-Fidelity Detection of Post-Vishing Remote Tool Execution](#high-fidelity-detection-of-post-vishing-remote-tool-execution)
 - [Ultra-Pro High-Fidelity Web Service Exfiltration (T1567)](#ultra-pro-high-fidelity-web-service-exfiltration-(t1567))
+- [Ultra-Pro High-Fidelity Code Repo Exfil (T1567.001)](#ultra-pro-high-fidelity-code-repo-exfil-(t1567001))
+- [Ultra-Pro High-Fidelity Cloud Storage Exfil (T1567.002)](#ultra-pro-high-fidelity-cloud-storage-exfil-(t1567002))
+- [Ultra-Pro High-Fidelity Video Hosting Exfil (T1567.003)](#ultra-pro-high-fidelity-video-hosting-exfil-(t1567003))
+- [Ultra-Pro High-Fidelity Text Storage Exfil (T1567.004)](#ultra-pro-high-fidelity-text-storage-exfil-(t1567004))
 - [Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568)](#ultra-pro-high-fidelity-dynamic-resolution-&-dga-(t1568))
 - [Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001)](#ultra-pro-high-fidelity-fast-flux-&-dns-cache-evasion-(t1568001))
 - [Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002)](#ultra-pro-high-fidelity-domain-generation-algorithm-(dga)-(t1568002))
@@ -1956,6 +1962,23 @@ non-interactive copy/archive commands targeting removable disk volumes,
 filtering out legitimate Windows Explorer GUI operations.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1052`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity USB Exfiltration (T1052.001)
+- **Azonosító:** `T1052_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects systematic data exfiltration to USB devices by monitoring 
+non-interactive copy/move/archive commands targeting removable drives, 
+focusing on suspicious process lineages and stealthy CLI arguments.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
@@ -5585,6 +5608,23 @@ anomalous process lineages originating from non-admin contexts.
 
 ---
 
+## Ultra-Pro High-Fidelity Account Access Removal (T1531)
+- **Azonosító:** `T1531.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized account removal or lockout by identifying bulk deletions, 
+targeting of administrative accounts via CLI, or destructive account actions 
+originating from non-standard process lineages (e.g., Office apps, web servers).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1531`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
 ## Ultra-Pro High-Fidelity Internal Spearphishing Detection (T1534)
 - **Azonosító:** `T1534.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
@@ -7956,6 +7996,74 @@ headless transfer tools (rclone, megatools) using custom config files
 from untrusted paths or triggered by non-admin parent processes.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1567`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Code Repo Exfil (T1567.001)
+- **Azonosító:** `T1567_001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects systematic data exfiltration to public code repositories by identifying 
+headless git operations, inline PAT tokens, and remote repository pivots 
+initiated from non-development parent processes or suspicious directories.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Cloud Storage Exfil (T1567.002)
+- **Azonosító:** `T1567_002.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects systematic data exfiltration to cloud storage by identifying CLI tools 
+(rclone, megatools) using embedded credentials or custom config files 
+triggered by non-admin parent processes (e.g., Office apps, Beacon hosts).
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `002`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Video Hosting Exfil (T1567.003)
+- **Azonosító:** `T1567_003.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects covert data exfiltration via video hosting platforms by identifying 
+steganographic embedding (metadata abuse, stream attachment) and CLI-based 
+uploads from non-creative department assets.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `003`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Text Storage Exfil (T1567.004)
+- **Azonosító:** `T1567_004.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects programmatic data exfiltration to text storage sites by monitoring 
+CLI-based POST requests containing API keys or clipboard-grabbing commands 
+from non-administrative or suspicious parent processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

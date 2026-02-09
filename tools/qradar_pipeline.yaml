@@ -1,0 +1,18 @@
+name: QRadar Fixer Pipeline
+priority: 10
+transformations:
+  # Ez a rész mondja meg a backendnek, hogy mit kezdjen a process_creation-nel
+  - type: logsource_filter
+    mapping:
+      process_creation:
+        # Ez az érték aktiválja a QRadar backend belső Windows mezőlistáját
+        logsource: 'microsoft_windows_security_event_log' 
+
+  # Ez pedig átnevezi a mezőket, amiket a backend hiányolt
+  - type: field_name_mapping
+    mapping:
+      Image: Filename
+      CommandLine: Process CommandLine
+      ParentImage: Parent Filename
+      ParentCommandLine: Parent Process CommandLine
+      User: UserName

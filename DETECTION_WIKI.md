@@ -79,6 +79,7 @@
 - [Ultra-Pro High-Fidelity Asymmetric Encrypted Exfiltration (T1048.002)](#ultra-pro-high-fidelity-asymmetric-encrypted-exfiltration-(t1048002))
 - [Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003)](#ultra-pro-high-fidelity-unencrypted-protocol-exfil-(t1048003))
 - [Ultra-Pro High-Fidelity System Network Connections Discovery (T1049)](#ultra-pro-high-fidelity-system-network-connections-discovery-(t1049))
+- [Ultra-Pro High-Fidelity Physical Medium Exfiltration (T1052)](#ultra-pro-high-fidelity-physical-medium-exfiltration-(t1052))
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [High-Fidelity At.exe Activity Detection](#high-fidelity-atexe-activity-detection)
 - [High-Fidelity Cron Persistence and In-Place Modification](#high-fidelity-cron-persistence-and-in-place-modification)
@@ -1900,6 +1901,23 @@ detects specific command-line switch combinations used by attackers to map
 the network landscape.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1049`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Physical Medium Exfiltration (T1052)
+- **Azonosító:** `T1052.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects systematic data exfiltration to physical media by monitoring 
+non-interactive copy/archive commands targeting removable disk volumes, 
+filtering out legitimate Windows Explorer GUI operations.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1052`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

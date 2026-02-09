@@ -54,7 +54,7 @@ detection:
             - '\explorer.exe'         
         - Image|contains:
             - '\Program Files\'      
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - CommandLine|contains:
             - 'Windows\Logs'          
 

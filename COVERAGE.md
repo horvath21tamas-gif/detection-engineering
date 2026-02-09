@@ -94,6 +94,7 @@
 | T1048.002 | CRITICAL | Ultra-Pro High-Fidelity Asymmetric Encrypted Exfiltration (T1048.002) |
 | T1048.003 | CRITICAL | Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003) |
 | T1049 | HIGH | Ultra-Pro High-Fidelity System Network Connections Discovery (T1049) |
+| T1052 | CRITICAL | Ultra-Pro High-Fidelity Physical Medium Exfiltration (T1052) |
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
 | T1053.002 | HIGH | High-Fidelity At.exe Activity Detection |
 | T1053.003 | HIGH | High-Fidelity Cron Persistence and In-Place Modification |

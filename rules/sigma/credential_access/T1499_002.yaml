@@ -1,0 +1,69 @@
+title: Ultra-Pro High-Fidelity Service Exhaustion (T1499.002)
+id: 9acf7e6f-cee3-4c19-aecf-1772f321d87d
+status: stable
+description: |
+    Detects endpoint denial of service via service exhaustion by monitoring 
+    unauthorized service termination and persistent configuration changes (disabling) 
+    targeting security and infrastructure services, originating from suspicious lineages.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1499.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\sc.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\net.exe'
+            - '\net1.exe'
+
+    selection_logic:
+        CommandLine|contains:
+            - 'stop '                 
+            - 'config '             
+            - 'start= disabled'       
+            - 'binpath='              
+            - 'Stop-Service'
+            - 'Set-Service'
+            - ' -Status Stopped'
+            - ' -StartupType Disabled'
+
+    selection_targets:
+        CommandLine|contains:
+            - 'WinDefend'             
+            - 'MpsSvc'                
+            - 'EventLog'             
+            - 'RpcSs'                 
+            - 'LanmanServer'          
+            - 'SDRSVC'                
+            - 'VSS'                 
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\httpd.exe'            
+            - '\rundll32.exe'         
+            - '\outlook.exe'
+        - Image|contains:
+            - '\Temp\'
+            - '\Users\Public\'
+
+    filter_legit_mgmt:
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith:
+            - '\CcmExec.exe'         
+            - '\msiexec.exe'          
+            - '\TiWorker.exe'         
+        - CommandLine|contains:
+            - 'HealthCheck'          
+            - 'Update'
+            - 'Diagnostic'
+
+    condition: selection_tools and selection_logic and selection_targets and selection_context and not filter_legit_mgmt
+level: critical

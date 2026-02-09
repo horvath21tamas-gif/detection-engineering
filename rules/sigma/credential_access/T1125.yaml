@@ -1,0 +1,56 @@
+title: Ultra-Pro High-Fidelity Video Capture Anomaly (T1125)
+id: 89a26b4a-2b75-4ae7-8f9b-e63005fc1f61
+status: stable
+description: |
+    Detects unauthorized video capture by identifying programmatic access to 
+    multimedia frameworks (DirectShow, Media Foundation) via suspicious interpreters, 
+    standalone media binaries (FFmpeg) with redirection, or headless shell sessions.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.collection
+    - attack.t1125
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_multimedia_apis:
+        CommandLine|contains:
+            - 'avicap32.dll'             
+            - 'capCreateCaptureWindow'
+            - 'ksuser.dll'              
+            - 'mfplat.dll'               
+            - 'Windows.Media.Capture'    
+
+    selection_media_bins:
+        - Image|endswith:
+            - '\ffmpeg.exe'
+            - '\vlc.exe'
+        - CommandLine|contains:
+            - '-dshow'                   
+            - '-f dshow'
+            - '-video_size'             
+            - 'capture'
+
+    selection_context:
+        ParentImage|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\w3wp.exe'               
+            - '\rundll32.exe'
+            - '\regsvr32.exe'
+        IntegrityLevel: 'Medium'        
+
+    filter_trusted_apps:
+        - Image|contains:
+            - '\Microsoft Teams\'
+            - '\Zoom.exe'
+            - '\Webex.exe'
+            - '\Slack.exe'
+            - 'C:\Windows\System32\CameraSettingsUIHost.exe'
+        - CommandLine|contains:
+            - 'skype.exe'
+        - User: 'NT AUTHORITY\SYSTEM'   
+
+    condition: (selection_multimedia_apis or selection_media_bins) and selection_context and not filter_trusted_apps
+level: critical

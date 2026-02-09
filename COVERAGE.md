@@ -1,17 +1,17 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-09 10:16:31`
+**Utolsó frissítés:** `2026-02-09 10:35:11`
 
 ## 📈 SIEM Platform Lefedettség
 
 | Platform | Konvertált szabályok | Lefedettség |
 | :--- | :---: | :---: |
-| Sigma (Forrás) | 593 | 100% |
-| Splunk (SPL) | 580 | 97.8% |
-| Microsoft Sentinel (KQL) | 586 | 98.8% |
-| QRadar (AQL) | 214 | 36.1% |
-| Elastic (KQL/EQL) | 586 | 98.8% |
-| RSA NetWitness | 579 | 97.6% |
+| Sigma (Forrás) | 603 | 100% |
+| Splunk (SPL) | 590 | 97.8% |
+| Microsoft Sentinel (KQL) | 596 | 98.8% |
+| QRadar (AQL) | 214 | 35.5% |
+| Elastic (KQL/EQL) | 596 | 98.8% |
+| RSA NetWitness | 589 | 97.7% |
 
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
@@ -66,6 +66,7 @@
 | T1027.010 | HIGH | Ultra-Pro High-Fidelity Command Line Obfuscation (T1027.010) |
 | T1027.011 | HIGH | Ultra-Pro High-Fidelity Suspicious Archive Creation (T1027.011) |
 | T1027.012 | CRITICAL | Ultra-Pro High-Fidelity Windows LDR Hijacking (T1027.012) |
+| T1029 | CRITICAL | Ultra-Pro High-Fidelity Scheduled Transfer (T1029) |
 | T1030 | CRITICAL | Ultra-Pro High-Fidelity Data Chunking and Fragmentation (T1030) |
 | T1033 | HIGH | Ultra-Pro High-Fidelity System Owner/User Discovery (T1033) |
 | T1036 | CRITICAL | Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036), Legitimate Windows Binary Copied to User-Writable Location, Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007) |

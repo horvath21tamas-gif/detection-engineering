@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe")) and (ProcessCommandLine in ("*while($true)*", "*for(;;)*", "*::MemoryStream*", "*AllocHGlobal*", "*foreach($i in 1..1gb)*", "*:loop*")) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\httpd.exe", "*\rundll32.exe", "*\outlook.exe")) or (FolderPath in ("*\Temp\*", "*\Users\Public\*", "*\AppData\Local\Temp\*"))) and (not (User =~ "NT AUTHORITY\SYSTEM" or (ParentProcessName in ("*\CcmExec.exe", "*\msiexec.exe", "*\devenv.exe")) or (ProcessCommandLine in ("*HealthCheck*", "*Diagnostic*", "*AzureAD*"))))

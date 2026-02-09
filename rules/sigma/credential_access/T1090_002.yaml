@@ -1,0 +1,60 @@
+title: Ultra-Pro High-Fidelity External Proxy & Tunneling (T1090.002)
+id: f1c7ad80-e15c-460d-890d-7da3b6b961af
+status: stable
+description: |
+    Detects the use of non-standard external proxies by identifying hardcoded 
+    credentials, custom PAC files, or proxy-overrides in high-risk binaries 
+    launched from interactive or script interpreters.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.command_and_control
+    - attack.t1090.002
+    - attack.t1090
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_proxy_auth:
+        CommandLine|contains:
+            - 'proxy-user='
+            - 'proxy-password='
+            - 'http-proxy-user='
+            - 'https-proxy-pass='
+            - ' -U '        
+            - ' -P '
+
+    selection_proxy_logic:
+        CommandLine|contains:
+            - '--proxy-pac-url='               
+            - '--proxy-server=http'            
+            - ' -setproxy '                    
+            - ' -proxybaseurl:'                
+
+    selection_context:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cscript.exe'
+            - '\wscript.exe'
+        Image|endswith:
+            - '\certutil.exe'
+            - '\bitsadmin.exe'
+            - '\curl.exe'
+            - '\rundll32.exe'
+            - '\regsvr32.exe'
+
+    filter_legit_browsers_and_updates:
+        - Image|contains:
+            - '\Program Files\'
+            - '\Program Files (x86)\'
+        - CommandLine|contains:
+            - 'localhost'
+            - '127.0.0.1'
+            - 'microsoft.com'
+            - 'windowsupdate'
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: (selection_proxy_auth or (selection_proxy_logic and selection_context)) and not filter_legit_browsers_and_updates
+level: critical

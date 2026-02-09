@@ -42,7 +42,7 @@ detection:
             - 'Microsoft\Exchange'        
             - 'Chocolatey'
             - 'NuGet'
-        - User: 'NT AUTHORITY\SYSTEM'    
+        - username: 'NT AUTHORITY\SYSTEM'    
 
     condition: (selection_logic and selection_fragmentation) or (selection_context and selection_logic) and not filter_legit_infra
 level: critical

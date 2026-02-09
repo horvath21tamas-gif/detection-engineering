@@ -1,0 +1,59 @@
+title: Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001)
+id: 215fb2e5-1244-46fb-ac5a-1a2ddb506c3b
+status: stable
+description: |
+    Detects encrypted data exfiltration by identifying SCP/SFTP/Rclone 
+    usage from non-standard paths, focusing on automated (non-interactive) 
+    flags and suspicious parent process lineages.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.exfiltration
+    - attack.t1048.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        Image|endswith:
+            - '\pscp.exe'            
+            - '\psftp.exe'           
+            - '\scp.exe'             
+            - '\sftp.exe'           
+            - '\rclone.exe'          
+            - '\winscp.com'          
+
+    selection_flags:
+        CommandLine|contains:
+            - ' -pw '                
+            - ' -batch'              
+            - ' -hostkey '           
+            - ' -ls '               
+            - 'copy'                 
+            - 'sync'
+
+    selection_context:
+        - Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Public\'
+        - ParentImage|endswith:
+            - '\winword.exe'        
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\powershell.exe'      
+
+    filter_legit:
+        - Image|contains:
+            - '\Program Files\'
+            - '\Program Files (x86)\'
+        - CommandLine|contains:
+            - '127.0.0.1'            
+            - 'localhost'
+        - User: 'NT AUTHORITY\SYSTEM'
+        - ParentImage|endswith:
+            - '\services.exe'
+
+    condition: selection_tools and (selection_flags or selection_context) and not filter_legit
+level: critical

@@ -1,0 +1,63 @@
+title: Ultra-Pro High-Fidelity System Shutdown/Reboot (T1529)
+id: 1160d953-32dc-4a15-b406-065130a8f2e5
+status: stable
+description: |
+    Detects unauthorized or suspicious system shutdown/reboot commands 
+    by monitoring for forced operations (-f) originating from untrusted 
+    process lineages (browsers, office apps, temp folders).
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1529
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\shutdown.exe'
+            - '\init.exe'       
+            - '\powershell.exe'
+            - '\pwsh.exe'
+
+    selection_logic:
+        CommandLine|contains:
+            - 'Stop-Computer'  
+            - 'Restart-Computer'
+        CommandLine|contains|all:
+            - ' /f'             
+            - ' /t 0'           
+        CommandLine|contains:
+            - ' /a'             
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
+            - '\httpd.exe'     
+            - '\rundll32.exe'   
+            - '\wscript.exe'
+            - '\cscript.exe'
+        - Image|contains:
+            - '\Temp\'
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+
+    filter_legit_automation:
+        - User: 'NT AUTHORITY\SYSTEM' 
+        - ParentImage|endswith:
+            - '\CcmExec.exe'    
+            - '\TiWorker.exe'  
+            - '\msiexec.exe'    
+            - '\svchost.exe'
+        - CommandLine|contains:
+            - 'HealthCheck'
+            - 'Diagnostic'
+            - 'AzureAD'
+
+    condition: selection_tools and selection_logic and selection_context and not filter_legit_automation
+level: critical

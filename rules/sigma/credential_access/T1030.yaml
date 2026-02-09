@@ -1,0 +1,54 @@
+title: Ultra-Pro High-Fidelity Data Chunking and Fragmentation (T1030)
+id: 52f845f3-2ca1-4fc0-9916-d10ba808aa19
+status: stable
+description: |
+    Detects stealthy data fragmentation for exfiltration by identifying 
+    low-level file stream manipulation, custom buffer-based splitting, 
+    and non-standard archive volume creation from suspicious execution paths.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.exfiltration
+    - attack.t1030
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_logic:
+        CommandLine|contains:
+            - ' [System.IO.File]::OpenRead'  
+            - '.Read('                        
+            - ' [System.Convert]::ToBase64'    
+            - ' -Split '                       
+            - ' [byte[]]'                      
+
+    selection_archiver_pro:
+        CommandLine|contains:
+            - ' -v'                           
+            - ' -m0'                           
+            - ' -sdel'                       
+            - ' -rn'                         
+
+    selection_context:
+        Image|contains:
+            - '\Users\'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Public\'
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\csc.exe'                       
+            - '\certutil.exe'                   
+
+    filter_legit_software:
+        - Image|contains:
+            - '\Program Files\'
+            - '\Program Files (x86)\'
+        - CommandLine|contains:
+            - 'Windows\Logs'                   
+            - 'NuGet'                          
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: (selection_logic or selection_archiver_pro) and selection_context and not filter_legit_software
+level: critical

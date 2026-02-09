@@ -1,0 +1,60 @@
+title: Ultra-Pro High-Fidelity External Defacement (T1491.002)
+id: ab19728a-1343-4aa3-a88c-466a8fd89cd5
+status: stable
+description: |
+    Detects unauthorized external website defacement by identifying suspicious file 
+    manipulation commands (move, copy, echo) executed by web server worker processes 
+    within sensitive webroot directories.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1491.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_web_server_parent:
+        ParentImage|endswith:
+            - '\w3wp.exe'            
+            - '\httpd.exe'         
+            - '\nginx.exe'          
+            - '\php-cgi.exe'        
+            - '\tomcat.exe'         
+
+    selection_shell:
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+
+    selection_logic:
+        CommandLine|contains:
+            - 'index.html'
+            - 'index.php'
+            - 'default.aspx'
+            - 'logo.'
+            - 'echo '           
+            - 'move '                
+            - 'copy '
+            - 'Set-Content'
+
+    selection_paths:
+        CommandLine|contains:
+            - '\inetpub\wwwroot\'
+            - '\var\www\'
+            - '\htdocs\'
+
+    filter_deployment:
+        - User: 
+            - 'AD\svc_deploy'        
+            - 'AD\github_actions'
+        - CommandLine|contains:
+            - 'node_modules'         
+            - 'npm install'
+            - 'composer install'
+        - ParentImage|endswith:
+            - '\msiexec.exe'      
+
+    condition: selection_web_server_parent and selection_shell and selection_logic and selection_paths and not filter_deployment
+level: critical

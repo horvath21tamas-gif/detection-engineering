@@ -10,6 +10,7 @@
 - [Ultra-Pro High-Fidelity DCSync Attack Detection (T1003.006)](#ultra-pro-high-fidelity-dcsync-attack-detection-(t1003006))
 - [Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007)](#ultra-pro-high-fidelity-lsass-memory-dump-&-lolbin-abuse-(t1003007))
 - [Ultra-Pro High-Fidelity Linux Shadow File Extraction (T1003.008)](#ultra-pro-high-fidelity-linux-shadow-file-extraction-(t1003008))
+- [Ultra-Pro High-Fidelity Local Data Harvesting (T1005)](#ultra-pro-high-fidelity-local-data-harvesting-(t1005))
 - [Ultra-Pro Stealthy Direct Volume Access (T1006)](#ultra-pro-stealthy-direct-volume-access-(t1006))
 - [Ultra-Pro High-Fidelity System Service Discovery (T1007)](#ultra-pro-high-fidelity-system-service-discovery-(t1007))
 - [Ultra-Pro High-Fidelity Application Window Discovery (T1010)](#ultra-pro-high-fidelity-application-window-discovery-(t1010))
@@ -686,6 +687,23 @@ Focuses on redirection to suspicious paths, archiving,
 and exfiltration via network tools (LOLBins) from interactive shells.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Local Data Harvesting (T1005)
+- **Azonosító:** `T1005.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects systematic local data collection by identifying the combination of 
+recursive file discovery, targeted sensitive extensions, and the use of 
+non-standard search tools or suspicious process lineages.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

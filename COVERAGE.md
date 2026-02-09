@@ -25,6 +25,7 @@
 | T1003.006 | CRITICAL | Ultra-Pro High-Fidelity DCSync Attack Detection (T1003.006) |
 | T1003.007 | CRITICAL | Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007) |
 | T1003.008 | CRITICAL | Ultra-Pro High-Fidelity Linux Shadow File Extraction (T1003.008) |
+| T1005 | CRITICAL | Ultra-Pro High-Fidelity Local Data Harvesting (T1005) |
 | T1006 | CRITICAL | Ultra-Pro Stealthy Direct Volume Access (T1006) |
 | T1007 | HIGH | Ultra-Pro High-Fidelity System Service Discovery (T1007) |
 | T1010 | HIGH | Ultra-Pro High-Fidelity Application Window Discovery (T1010) |

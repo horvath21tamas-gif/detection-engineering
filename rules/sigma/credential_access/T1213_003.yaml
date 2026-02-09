@@ -1,0 +1,59 @@
+title: Ultra-Pro High-Fidelity Knowledge Base Scraping (T1213.003)
+id: 0e0c1eaf-612b-419e-920b-28f41f6e72f1
+status: stable
+description: |
+    Detects systematic knowledge base exfiltration (Wiki, Stack Overflow for Teams) 
+    by identifying recursive mirroring flags, mass archival logic, and 
+    non-browser scripting engines targeting internal documentation URLs.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.collection
+    - attack.t1213.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_kb_targets:
+        CommandLine|contains:
+            - '/wiki/display/'         
+            - '/wiki/pages/viewpage'
+            - 'stackoverflow.com/c/'   
+            - '.wiki.git'             
+            - '/rest/api/content?expand=body' 
+
+    selection_mirroring_args:
+        CommandLine|contains:
+            - ' --mirror'            
+            - ' --recursive'          
+            - ' -r '
+            - ' --level '             
+            - ' clone '               
+            - ' --accept pdf,docx,zip' 
+
+    selection_engines:
+        - Image|endswith:
+            - '\wget.exe'
+            - '\httrack.exe'          
+            - '\python.exe'            
+            - '\curl.exe'
+            - '\git.exe'
+
+    selection_context:
+        ParentImage|endswith:
+            - '\w3wp.exe'              
+            - '\cmd.exe'
+            - '\powershell.exe'
+        IntegrityLevel: 'Medium'       
+
+    filter_trusted_processes:
+        - Image|contains:
+            - 'C:\Program Files\Elastic\'
+            - 'C:\Program Files\Splunk\'
+        - User: 'NT AUTHORITY\SYSTEM'
+        - CommandLine|contains:
+            - 'healthcheck'
+            - ' --version'           
+
+    condition: selection_kb_targets and selection_engines and (selection_mirroring_args or selection_context) and not filter_trusted_processes
+level: critical

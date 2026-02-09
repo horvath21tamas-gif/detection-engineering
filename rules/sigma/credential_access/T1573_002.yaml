@@ -42,7 +42,7 @@ detection:
             - 'C:\Program Files\'
             - 'Microsoft\Azure'                    
             - 'HealthCheck'                       
-        - User: 'NT AUTHORITY\SYSTEM'             
+        - username: 'NT AUTHORITY\SYSTEM'             
         - ParentImage|endswith:
             - '\services.exe'                       
 

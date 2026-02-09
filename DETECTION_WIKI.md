@@ -1,6 +1,7 @@
 # 🛡️ Detection Rule Knowledge Base
 
 ## 📖 Tartalomjegyzék
+- [Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001)](#ultra-pro-high-fidelity-steganography-&-data-reconstruction-(t1001))
 - [Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003)](#ultra-pro-high-fidelity-lsass-credential-dumping-(t1003))
 - [Suspicious Access to LSASS Process Memory](#suspicious-access-to-lsass-process-memory)
 - [Ultra-Pro High-Fidelity SAM & SYSTEM Registry Theft (T1003.002)](#ultra-pro-high-fidelity-sam-&-system-registry-theft-(t1003002))
@@ -559,6 +560,23 @@
 - [Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656)](#ultra-pro-high-fidelity-impersonation-and-identity-hijacking-(t1656))
 - [Professional Content Impersonation and Infrastructure Mirroring](#professional-content-impersonation-and-infrastructure-mirroring)
 - [Credential Dumping LSASS](#credential-dumping-lsass)
+
+---
+
+## Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001)
+- **Azonosító:** `T1001.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects data de-steganography by identifying anomalous programmatic access 
+to image manipulation APIs (GDI+, System.Drawing) from script interpreters, 
+specifically looking for pixel-level data extraction routines.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1001`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---
 

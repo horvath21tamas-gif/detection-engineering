@@ -16,6 +16,7 @@
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
 | :--- | :--- | :--- |
+| T1001 | CRITICAL | Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001) |
 | T1003 | HIGH | Credential Dumping LSASS |
 | T1003.001 | HIGH | Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007), Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003), Suspicious Access to LSASS Process Memory, Credential Dumping LSASS |
 | T1003.002 | CRITICAL | Ultra-Pro High-Fidelity SAM & SYSTEM Registry Theft (T1003.002) |

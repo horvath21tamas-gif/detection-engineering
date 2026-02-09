@@ -57,7 +57,7 @@ detection:
             - '\msiexec.exe'         
         - CommandLine|contains:
             - 'Program Files'        
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - CommandLine|contains:
             - 'Get-EventLog'         
 

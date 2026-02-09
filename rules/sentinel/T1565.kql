@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where (FolderPath in ("*\wevtutil.exe", "*\sed.exe", "*\powershell.exe", "*\pwsh.exe", "*\sqlite3.exe", "*\attrib.exe")) and (ProcessCommandLine in ("* cl *", "* clear-log *", "* -replace *", "* s/*", "* > *", "*Out-File*", "*Set-Content*")) and ((ProcessCommandLine in ("*\etc\hosts*", "*\System32\winevt\*", "*\System32\config\*", "*.config*", "*.db*")) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\httpd.exe", "*\rundll32.exe", "*\explorer.exe"))) and (not ((ParentProcessName in ("*\CcmExec.exe", "*\msiexec.exe")) or ProcessCommandLine contains "Program Files" or User =~ "NT AUTHORITY\SYSTEM" or ProcessCommandLine contains "Get-EventLog"))

@@ -438,6 +438,7 @@
 - [Ultra-Pro High-Fidelity Resource Extraction and Abuse (T1564.009)](#ultra-pro-high-fidelity-resource-extraction-and-abuse-(t1564009))
 - [Ultra-Pro High-Fidelity Process Argument Spoofing Detection (T1564.010)](#ultra-pro-high-fidelity-process-argument-spoofing-detection-(t1564010))
 - [Ultra-Pro High-Fidelity Virtual Instance Abuse (T1564.011)](#ultra-pro-high-fidelity-virtual-instance-abuse-(t1564011))
+- [Ultra-Pro High-Fidelity Data Manipulation (T1565)](#ultra-pro-high-fidelity-data-manipulation-(t1565))
 - [High-Fidelity Phishing Payload Execution from Communication Apps](#high-fidelity-phishing-payload-execution-from-communication-apps)
 - [High-Fidelity Spearphishing Attachment Execution](#high-fidelity-spearphishing-attachment-execution)
 - [High-Fidelity Browser-Originating Payload Execution](#high-fidelity-browser-originating-payload-execution)
@@ -7909,6 +7910,23 @@ Focuses on untrusted parent processes, non-standard configuration loading,
 and direct command execution within virtual instances.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `011`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Data Manipulation (T1565)
+- **Azonosító:** `T1565.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects unauthorized data manipulation by monitoring for stream editing, 
+log clearing via CLI, and unauthorized modifications to critical system 
+files (hosts, event logs) from non-standard parent processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1565, 001, 002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

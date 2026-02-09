@@ -1,0 +1,60 @@
+title: Ultra-Pro High-Fidelity Account Access Removal (T1531)
+id: 10dec50d-350d-4cd3-a869-880c77d7cdc3
+status: stable
+description: |
+    Detects unauthorized account removal or lockout by identifying bulk deletions, 
+    targeting of administrative accounts via CLI, or destructive account actions 
+    originating from non-standard process lineages (e.g., Office apps, web servers).
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1531
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\net.exe'           
+            - '\net1.exe'           
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+
+    selection_logic:
+        CommandLine|contains:
+            - ' user '           
+            - 'Remove-LocalUser'    
+            - 'Remove-ADUser'        
+            - 'Disable-LocalUser'
+            - 'Disable-ADAccount'
+            - 'Set-LocalUser -AccountExpires' 
+
+    selection_flags:
+        CommandLine|contains:
+            - ' /delete'           
+            - ' /active:no'         
+            - ' /logoff'            
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'       
+            - '\excel.exe'
+            - '\httpd.exe'          
+            - '\rundll32.exe'      
+            - '\explorer.exe'       
+
+    filter_legit:
+        - CommandLine|contains:
+            - 'Add-LocalUser'       
+            - ' /add'
+        - ParentImage|endswith:
+            - '\msiexec.exe'        
+        - User: 'NT AUTHORITY\SYSTEM'
+        - CommandLine|contains:
+            - 'WDAGUtilityAccount'  
+            - 'DefaultAccount'
+
+    condition: selection_tools and selection_logic and selection_flags and selection_context and not filter_legit
+level: critical

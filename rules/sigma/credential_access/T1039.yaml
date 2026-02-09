@@ -54,7 +54,7 @@ detection:
             - 'C:\Program Files\Veritas\'
             - 'C:\Program Files\Commvault\' 
             - 'C:\Windows\CCM\'         
-        - User: 'NT AUTHORITY\SYSTEM'
+        - username: 'NT AUTHORITY\SYSTEM'
         - CommandLine|contains:
             - 'SoftwareDistribution'    
 

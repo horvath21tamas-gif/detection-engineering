@@ -74,6 +74,7 @@
 | T1037.003 | CRITICAL | Ultra-Pro Network Logon Script/Shortcut Modification (T1037.003) |
 | T1037.004 | CRITICAL | Ultra-Pro RC Script and Init.d Persistence (T1037.004) |
 | T1037.005 | CRITICAL | Ultra-Pro macOS Startup Items Persistence (T1037.005) |
+| T1039 | CRITICAL | Ultra-Pro High-Fidelity Network Share Discovery (T1039) |
 | T1040 | HIGH | Ultra-Pro High-Fidelity Network Sniffing Detection (T1040) |
 | T1046 | HIGH | Ultra-Pro High-Fidelity Network Service Discovery (T1046) |
 | T1047 | HIGH | Suspicious Remote Process Creation via WMIC |

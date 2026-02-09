@@ -59,6 +59,7 @@
 - [Ultra-Pro Network Logon Script/Shortcut Modification (T1037.003)](#ultra-pro-network-logon-scriptshortcut-modification-(t1037003))
 - [Ultra-Pro RC Script and Init.d Persistence (T1037.004)](#ultra-pro-rc-script-and-initd-persistence-(t1037004))
 - [Ultra-Pro macOS Startup Items Persistence (T1037.005)](#ultra-pro-macos-startup-items-persistence-(t1037005))
+- [Ultra-Pro High-Fidelity Network Share Discovery (T1039)](#ultra-pro-high-fidelity-network-share-discovery-(t1039))
 - [Ultra-Pro High-Fidelity Network Sniffing Detection (T1040)](#ultra-pro-high-fidelity-network-sniffing-detection-(t1040))
 - [Ultra-Pro High-Fidelity Network Service Discovery (T1046)](#ultra-pro-high-fidelity-network-service-discovery-(t1046))
 - [Suspicious Remote Process Creation via WMIC](#suspicious-remote-process-creation-via-wmic)
@@ -1511,6 +1512,23 @@ subsystem and focusing on unsigned or script-generated persistence.
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
 2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Network Share Discovery (T1039)
+- **Azonosító:** `T1039.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🔴 (critical)
+- **Leírás:** Detects systematic discovery and collection of sensitive data from network shares 
+by identifying recursive file enumeration using UNC paths, combined with 
+output redirection or mass archival from non-standard process contexts.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1039`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
 
 ---

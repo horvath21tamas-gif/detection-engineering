@@ -616,6 +616,7 @@
 - [Ultra-Pro Power Settings Manipulation (T1137.001)](#ultra-pro-power-settings-manipulation-(t1137001))
 - [Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654)](#ultra-pro-high-fidelity-log-enumeration-discovery-(t1654))
 - [Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656)](#ultra-pro-high-fidelity-impersonation-and-identity-hijacking-(t1656))
+- [Ultra-Pro High-Fidelity Financial Theft (T1657)](#ultra-pro-high-fidelity-financial-theft-(t1657))
 - [Professional Content Impersonation and Infrastructure Mirroring](#professional-content-impersonation-and-infrastructure-mirroring)
 - [Credential Dumping LSASS](#credential-dumping-lsass)
 
@@ -10788,6 +10789,23 @@ patterns used for lateral movement and the creation of deceptive local accounts
 that mimic executive or administrative identities outside of standard HR processes.
 - **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1656`
+
+#### 🚨 Response Playbook
+1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
+2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
+3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+
+---
+
+## Ultra-Pro High-Fidelity Financial Theft (T1657)
+- **Azonosító:** `T1657.yaml`
+- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Kritikusság:** 🟠 (high)
+- **Leírás:** Detects potential financial theft and fraud by monitoring for clipboard 
+manipulation (address swapping) and unauthorized financial document 
+access originating from suspicious/web-facing parent processes.
+- **Hamis pozitívok:** Nincs megadva
+- **MITRE ATT&CK:** `T1657`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.

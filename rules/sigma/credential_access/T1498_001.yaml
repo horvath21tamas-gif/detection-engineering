@@ -1,0 +1,60 @@
+title: Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001)
+id: f0bd2223-8331-4e71-ab9a-c97ed8d07c69
+status: stable
+description: |
+    Detects targeted direct network flooding (SYN, UDP, ICMP) by monitoring 
+    for aggressive packet generation parameters (micro-intervals, unlimited bandwidth) 
+    originating from untrusted process lineages.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1498.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_engines:
+        - Image|endswith:
+            - '\hping3.exe'          
+            - '\loic.exe'            
+            - '\hoic.exe'           
+            - '\iperf.exe'           
+            - '\iperf3.exe'
+            - '\nping.exe'         
+            - '\pktmon.exe'          
+
+    selection_flood_logic:
+        CommandLine|contains:
+            - ' --flood'             
+            - ' --syn'              
+            - ' --udp'               
+            - ' -u -b 0'             
+            - ' -i u'               
+            - ' --icmp'              
+            - ' --rand-source'       
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'         
+            - '\excel.exe'
+            - '\httpd.exe'           
+            - '\chrome.exe'         
+            - '\rundll32.exe'        
+            - '\outlook.exe'
+        - Image|contains:
+            - '\Temp\'
+            - '\Users\Public\'
+            - '\AppData\Local\Temp\'
+
+    filter_legit_ops:
+        - User: 'NT AUTHORITY\SYSTEM' 
+        - Image|contains:
+            - '\Program Files\NetworkMonitoring\' 
+            - '\Azure\'                            
+        - CommandLine|contains:
+            - 'Speedtest'
+            - 'HealthCheck'
+
+    condition: selection_engines and selection_flood_logic and selection_context and not filter_legit_ops
+level: high

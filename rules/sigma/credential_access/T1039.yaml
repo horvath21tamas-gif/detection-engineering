@@ -1,0 +1,62 @@
+title: Ultra-Pro High-Fidelity Network Share Discovery (T1039)
+id: d38a5a71-cc10-4439-9c0d-74262249eb1e
+status: stable
+description: |
+    Detects systematic discovery and collection of sensitive data from network shares 
+    by identifying recursive file enumeration using UNC paths, combined with 
+    output redirection or mass archival from non-standard process contexts.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.collection
+    - attack.t1039
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_net_discovery:
+        CommandLine|contains:
+            - '\\\\'                 
+            - 'net use'
+            - 'dir /s /b'             
+            - 'Get-ChildItem -Recurse'
+            - 'robocopy'             
+            - 'findstr /s /i'        
+
+    selection_intent:
+        CommandLine|contains:
+            - ' > '                   
+            - ' -OutFile '
+            - 'Compress-Archive'
+            - '7z.exe a'
+            - 'tar.exe -c'
+
+    selection_sensitive:
+        CommandLine|contains:
+            - '*.kdbx'               
+            - '*.xlsx'             
+            - '*.pdf'
+            - 'id_rsa'                
+            - 'password'
+            - 'confidential'
+
+    selection_context:
+        ParentImage|endswith:
+            - '\powershell.exe'
+            - '\cmd.exe'
+            - '\w3wp.exe'             
+            - '\httpd.exe'           
+            - '\rundll32.exe'
+        IntegrityLevel: 'Medium'      
+
+    filter_trusted_infra:
+        - Image|contains:
+            - 'C:\Program Files\Veritas\'
+            - 'C:\Program Files\Commvault\' 
+            - 'C:\Windows\CCM\'         
+        - User: 'NT AUTHORITY\SYSTEM'
+        - CommandLine|contains:
+            - 'SoftwareDistribution'    
+
+    condition: selection_net_discovery and (selection_intent or selection_sensitive) and selection_context and not filter_trusted_infra
+level: critical

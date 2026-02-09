@@ -1,0 +1,4 @@
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+union *
+| where ((FolderPath in ("*\notepad.exe", "*\calc.exe", "*\mspaint.exe", "*\winver.exe", "*\colorcpl.exe", "*\spoolsv.exe", "*\scrcons.exe")) or ((FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\rundll32.exe", "*\regsvr32.exe", "*\mshta.exe", "*\certutil.exe")) and (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\w3wp.exe")))) and IntegrityLevel =~ "Medium" and (not ((FolderPath in ("*\chrome.exe*", "*\msedge.exe*", "*\firefox.exe*", "*\googleupdate.exe*")) or (DestinationHostname in ("*.microsoft.com", "*.windowsupdate.com", "*.digicert.com", "*.amazontrust.com", "*ocsp.globalsign.com"))))

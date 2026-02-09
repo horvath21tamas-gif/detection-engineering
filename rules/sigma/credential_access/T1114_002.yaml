@@ -1,0 +1,56 @@
+title: Ultra-Pro High-Fidelity Remote Email Export Anomaly (T1114.002)
+id: 5b47fccc-bf5d-4ef2-9ebb-989c8429de6d
+status: stable
+description: |
+    Detects unauthorized remote email collection by identifying systematic 
+    mailbox export requests that use sensitive keyword filters and redirect 
+    output to non-standard internal UNC paths or administrative shares.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.collection
+    - attack.t1114.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_exchange_cmds:
+        CommandLine|contains:
+            - 'New-MailboxExportRequest'  
+            - 'New-ComplianceSearch'      
+            - 'Search-Mailbox'            
+
+    selection_intent:
+        CommandLine|contains:
+            - '-ContentFilter'             
+            - '-TargetMailbox'             
+            - '-FilePath \\\\'             
+            - '-Subject'                   
+
+    selection_anomaly:
+        CommandLine|contains:
+            - '*password*'
+            - '*invoice*'
+            - '*budget*'
+            - '*confidential*'
+            - ' -Force'                   
+            - ' -ErrorAction SilentlyContinue'
+
+    selection_context:
+        ParentImage|endswith:
+            - '\powershell.exe'
+            - '\w3wp.exe'                  
+            - '\cmd.exe'
+        IntegrityLevel: 'High'            
+
+    filter_trusted_automation:
+        - User: 
+            - 'NT AUTHORITY\SYSTEM'
+            - 'SVC_BACKUP_EXCH'            
+        - CommandLine|contains:
+            - 'HealthCheck.ps1'
+            - 'Maintenance'
+            - '\Standard_Backup_Path\'      
+
+    condition: selection_exchange_cmds and (selection_intent or selection_anomaly) and selection_context and not filter_trusted_automation
+level: critical

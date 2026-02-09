@@ -1,0 +1,59 @@
+title: Ultra-Pro High-Fidelity Disk Wipe (T1561)
+id: 96c6c77c-67a8-49a6-9105-45e00aef8f65
+status: stable
+description: |
+    Detects low-level disk destruction attempts (MBR overwrite, partition wiping) 
+    by monitoring for raw disk access identifiers and destructive CLI arguments 
+    originating from non-standard parent processes.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.impact
+    - attack.t1561.001
+    - attack.t1561.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_tools:
+        - Image|endswith:
+            - '\diskpart.exe'        
+            - '\dd.exe'              
+            - '\format.com'         
+            - '\powershell.exe'
+            - '\pwsh.exe'
+
+    selection_logic:
+        CommandLine|contains:
+            - '\\.\PhysicalDrive'    
+            - '\\.\Harddisk'
+            - 'clean'                
+            - 'delete partition'
+            - 'Clear-Disk'           
+            - 'Remove-Partition'
+            - 'if=/dev/zero'        
+            - 'if=/dev/urandom'      
+
+    selection_context:
+        - ParentImage|endswith:
+            - '\winword.exe'         
+            - '\excel.exe'
+            - '\httpd.exe'          
+            - '\rundll32.exe'        
+            - '\explorer.exe'       
+        - Image|contains:
+            - '\Temp\'
+            - '\Users\'
+
+    filter_legit_admin:
+        - ParentImage|endswith:
+            - '\msiexec.exe'         
+            - '\CcmExec.exe'        
+            - '\setup.exe'           
+        - CommandLine|contains:
+            - 'vds.exe'              
+            - '127.0.0.1'           
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_tools and selection_logic and selection_context and not filter_legit_admin
+level: critical

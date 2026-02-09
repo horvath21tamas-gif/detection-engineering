@@ -1,0 +1,54 @@
+title: Ultra-Pro High-Fidelity Fallback Channel Detection (T1008)
+id: 7222560f-5ca2-411e-90ef-1279e1f22baa
+status: stable
+description: |
+    Detects C2 fallback mechanisms by identifying cross-protocol switching logic 
+    (e.g., HTTP to DNS/ICMP) within exception handling blocks (try/catch/trap) 
+    triggered by connection failures in non-standard process contexts.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.command_and_control
+    - attack.t1008
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_logic_flow:
+        CommandLine|contains:
+            - 'try{'
+            - '}catch{'
+            - 'ErrorAction SilentlyContinue' 
+            - 'ErrorAction 0'
+            - 'trap{'                        
+
+    selection_alt_methods:
+        CommandLine|contains:
+            - 'Resolve-DnsName'               
+            - 'nslookup'
+            - 'Net.Sockets.TcpClient'        
+            - 'System.Net.WebClient'         
+            - 'raw.githubusercontent.com'     
+            - 'DownloadString'
+
+    selection_procs:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+            - '\rundll32.exe'
+
+    filter_legit_infra:
+        - CommandLine|contains:
+            - 'C:\Program Files\'
+            - 'Microsoft\Azure'             
+            - 'WindowsUpdate'
+            - 'Chocolatey'                   
+        - User: 'NT AUTHORITY\SYSTEM'       
+        - ParentImage|endswith:
+            - '\services.exe'
+
+    condition: selection_logic_flow and selection_alt_methods and selection_procs and not filter_legit_infra
+level: critical

@@ -1,0 +1,52 @@
+title: Ultra-Pro High-Fidelity Multi-hop Proxy & Tor Detection (T1090.003)
+id: 72974e3f-a5ff-4cda-b5e9-1170dd9beced
+status: stable
+description: |
+    Detects multi-hop proxying and Tor circuitry by identifying unauthorized 
+    proxy chaining tools or hidden Tor clients running from non-standard 
+    directories, focusing on control port manipulation and SOCKS5 chaining.
+author: hota05
+date: 2026-02-09
+tags:
+    - attack.command_and_control
+    - attack.t1090.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_chain_logic:
+        CommandLine|contains:
+            - ' --SocksPort '                  
+            - ' --ControlPort '               
+            - ' --DataDirectory '             
+            - ' -socks5-chain '                
+            - ' -forward-chain '              
+            - 'proxychains'                   
+
+    selection_suspicious_path:
+        Image|contains:
+            - '\AppData\'
+            - '\Temp\'
+            - '\Users\Public\'
+            - '\ProgramData\'
+            - '\Windows\Temp\'
+
+    selection_procs:
+        Image|endswith:
+            - '\tor.exe'
+            - '\gost.exe'
+            - '\proxychains.exe'
+            - '\powershell.exe'
+            - '\rundll32.exe'
+
+    filter_legit_browsers:
+        - Image|contains:
+            - '\Program Files\Tor Browser\'    
+            - '\Program Files\BraveSoftware\'  
+            - '\Program Files (x86)\'
+        - CommandLine|contains:
+            - '127.0.0.1'                     
+        - User: 'NT AUTHORITY\SYSTEM'
+
+    condition: selection_chain_logic and (selection_suspicious_path or selection_procs) and not filter_legit_browsers
+level: critical

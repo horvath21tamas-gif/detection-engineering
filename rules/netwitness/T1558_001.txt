@@ -1,0 +1,2 @@
+((((param = '* /sid:*' OR param = '* /id:*'))) OR (((param = '*kerberos::golden*' OR param = '*kerberos::ptt*' OR param = '* /ptt*' OR param = '* /ticket:*')))) AND (((ParentImage = '*\\cmd.exe*' OR ParentImage = '*\\powershell.exe*' OR ParentImage = '*\\wsmprovhost.exe*' OR ParentImage = '*\\psexesvc.exe*'))) AND (NOT ((((user.dst = '*NT AUTHORITY\\SYSTEM*'))&& ((process = '*\\Windows\\System32\\lsass.exe*'))))
+)

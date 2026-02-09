@@ -1,0 +1,1 @@
+((process.command_line:(*\ \/sid\:* OR *\ \/id\:*)) OR (process.command_line:(*kerberos\:\:golden* OR *kerberos\:\:ptt* OR *\ \/ptt* OR *\ \/ticket\:*))) AND (process.parent.executable:(*\\cmd.exe OR *\\powershell.exe OR *\\wsmprovhost.exe OR *\\psexesvc.exe)) AND (NOT (winlog.event_data.username:NT\ AUTHORITY\\SYSTEM AND process.executable:*\\Windows\\System32\\lsass.exe))

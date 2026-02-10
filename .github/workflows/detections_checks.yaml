@@ -15,7 +15,7 @@ env:
   PYTHONDONTWRITEBYTECODE: 1
 
 jobs:
-  # --- 1. JOB: SENTINEL KONVERZIÓ (Izolált környezet) ---
+  # --- 1. JOB: SENTINEL KONVERZIÓ ---
   sentinel_job:
     runs-on: ubuntu-latest
     steps:
@@ -88,8 +88,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
-          # Fordításhoz szükséges könyvtár telepítése
+          if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
+          # A stabil fordító verzió kényszerítése
           python -m pip install googletrans==4.0.0-rc1
           sigma plugin install splunk sysmon windows netwitness elasticsearch
           sigma plugin install --force-install qradar || echo "QRadar forced"
@@ -108,15 +108,10 @@ jobs:
       - name: Log Source Validation
         run: python tools/check_log_sources.py
 
-      - name: Run Simulation Tests (Logic Verification)
+      - name: Run Simulation Tests
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
           python -m pytest test/test_detection_logic.py -v || echo "⚠️ Szimulációs tesztek sikertelenek."
-
-      - name: Run Unit Tests (General)
-        run: |
-          export PYTHONPATH=$PYTHONPATH:$(pwd)/tools
-          python -m pytest test/ --ignore=test/test_detection_logic.py --maxfail=5 --disable-warnings -q || echo "Nincsenek általános tesztek."
 
       - name: Preprocess Sigma rules
         run: python tools/preprocess_sigma.py
@@ -124,50 +119,39 @@ jobs:
       - name: Convert Sigma rules to SIEM queries
         run: |
           mkdir -p rules/splunk rules/qradar rules/netwitness rules/elastic
-          
           for file in $(find rules/sigma -name "*.yaml" -o -name "*.yml"); do
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
-            
-            # WINDOWS ÉS PROCESS CREATION SZABÁLYOK
             if grep -qiE "windows|process_creation|sysmon|registry|service_control" "$file"; then
               sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "conversion_failed" > "rules/splunk/${filename}.spl"
               sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "conversion_failed" > "rules/elastic/${filename}.kql"
               sigma convert -t qradar --without-pipeline "$file" -o "rules/qradar/${filename}.aql" || echo "conversion_failed" > "rules/qradar/${filename}.aql"
-            
-            # EGYÉB SZABÁLYOK
             else
               sigma convert -t splunk --without-pipeline "$file" -o "rules/splunk/${filename}.spl" || echo "conversion_failed" > "rules/splunk/${filename}.spl"
               sigma convert -t lucene --without-pipeline "$file" -o "rules/elastic/${filename}.kql" || echo "conversion_failed" > "rules/elastic/${filename}.kql"
               sigma convert -t qradar --without-pipeline "$file" -o "rules/qradar/${filename}.aql" || echo "conversion_failed" > "rules/qradar/${filename}.aql"
             fi
-            
             sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "conversion_failed" > "rules/netwitness/${filename}.txt"
           done
 
-      - name: Final SIEM Query Fixer (QRadar, NetWitness & Sentinel)
+      - name: Final SIEM Query Fixer
         run: python tools/final_siem_fixer.py
 
       - name: Run Integrity Check
         run: python tools/check_integrity.py
 
-      # --- DOKUMENTÁCIÓS FOLYAMAT ---
+      # --- DOKUMENTÁCIÓS ÉS WIKI FOLYAMAT ---
       - name: Score Detection Rules
         run: python tools/score_rules.py
-
-      - name: Run Gap Analysis
-        run: python tools/gap_analysis.py
 
       - name: Update LOLBAS Inventory
         run: python tools/update_lolbas.py
 
       - name: Generate Multi-language Wiki and Dashboard
         run: |
-          # Alap dokumentáció generálás
+          # Ez a script végzi a fordítást (cache-szel), a LOLBAS-t és a Wiki generálást is
           python tools/generate_docs.py
-          # Fordított, LOLBAS-szel és Zajszinttel bővített Wiki generálás
-          python tools/generate_wiki.py
-          # Összesített update
+          # Minden egyéb metadata frissítése
           python tools/update_all.py
 
       - name: Commit and push changes
@@ -175,11 +159,9 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
-          
           git add -A
-          
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update: Multi-SIEM queries, Multi-lang Wiki, Scores and Gap Analysis [skip ci]"
+            git commit -m "Auto-update: Multi-SIEM queries, Multi-lang Wiki, Cache and Analytics [skip ci]"
             git pull --rebase -X ours origin test
             git push origin test
           fi

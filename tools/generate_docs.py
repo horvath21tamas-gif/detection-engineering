@@ -127,22 +127,40 @@ def generate_docs():
             scores = json.load(f)
 
     rules_data = []
+    # Statisztika gyűjtő
+    stats = {'critical': 0, 'high': 0, 'medium': 0, 'low': 0}
+
     for root, _, files in os.walk(sigma_path):
         for file in sorted(files):
             if file.endswith(('.yaml', '.yml')):
                 with open(os.path.join(root, file), 'r', encoding='utf-8') as f:
                     try:
                         d = yaml.safe_load(f)
-                        if d: rules_data.append({'filename': file, 'data': d})
+                        if d: 
+                            rules_data.append({'filename': file, 'data': d})
+                            # Statisztika számolása
+                            level = d.get('level', 'low').lower()
+                            if level in stats:
+                                stats[level] += 1
                     except: continue
 
     for lang in LANGUAGES:
         print(f"🌐 Wiki generálása ({lang.upper()})...", flush=True)
         
         main_title = translate_text("Detection Rule Knowledge Base", lang)
-        toc_title = translate_text("Tartalomjegyzék", lang)
         
+        # Dashboard tartalom összeállítása
         wiki_content = f"# 🛡️ {main_title}\n\n"
+        wiki_content += f"### 📊 {translate_text('Detection Engineering Dashboard', lang)}\n"
+        wiki_content += f"| {translate_text('Kritikusság', lang)} | {translate_text('Darabszám', lang)} |\n"
+        wiki_content += "| :--- | :--- |\n"
+        wiki_content += f"| 🔴 Critical | {stats['critical']} |\n"
+        wiki_content += f"| 🟠 High | {stats['high']} |\n"
+        wiki_content += f"| 🟡 Medium | {stats['medium']} |\n"
+        wiki_content += f"| 🔵 Low | {stats['low']} |\n"
+        wiki_content += f"| **{translate_text('Összesen', lang)}** | **{len(rules_data)}** |\n\n---\n"
+
+        toc_title = translate_text("Tartalomjegyzék", lang)
         wiki_content += f"## 📖 {toc_title}\n"
         
         for item in rules_data:

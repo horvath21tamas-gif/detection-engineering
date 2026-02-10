@@ -1,5 +1,15 @@
 # 🛡️ Wissensdatenbank zu Erkennungsregeln
 
+### 📊 Erkennungstechnik-Dashboard
+| Kritikalität | Stückzahl |
+| :--- | :--- |
+| 🔴 Critical | 359 |
+| 🟠 High | 262 |
+| 🟡 Medium | 7 |
+| 🔵 Low | 0 |
+| **Alle** | **628** |
+
+---
 ## 📖 Inhaltsverzeichnis
 - [Ultraprofessionelle High-Fidelity-Steganographie und Datenrekonstruktion (T1001)](#ultraprofessionelle-high-fidelity-steganographie-und-datenrekonstruktion-(t1001))
 - [Ultra-Pro High-Fidelity Junk Data & Command Padding (T1001.001)](#ultra-pro-high-fidelity-junk-data-&-command-padding-(t1001001))

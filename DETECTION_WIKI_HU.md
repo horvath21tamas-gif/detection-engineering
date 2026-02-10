@@ -1,5 +1,15 @@
 # 🛡️ Észlelési szabály tudásbázis
 
+### 📊 Detection Engineering Dashboard
+| Kritikusság | Darabszám |
+| :--- | :--- |
+| 🔴 Critical | 359 |
+| 🟠 High | 262 |
+| 🟡 Medium | 7 |
+| 🔵 Low | 0 |
+| **Összesen** | **628** |
+
+---
 ## 📖 Tartalomjegyzék
 - [Ultra-Pro High-Fidelity szteganográfia és adatrekonstrukció (T1001)](#ultra-pro-high-fidelity-szteganográfia-és-adatrekonstrukció-(t1001))
 - [Ultra-Pro High-Fidelity levélszemét adat és parancstömítés (T1001.001)](#ultra-pro-high-fidelity-levélszemét-adat-és-parancstömítés-(t1001001))

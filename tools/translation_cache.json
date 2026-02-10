@@ -2550,5 +2550,11 @@
     "de_Detects technical impersonation attempts including suspicious 'runas' execution \npatterns used for lateral movement and the creation of deceptive local accounts \nthat mimic executive or administrative identities outside of standard HR processes.\n": "Erkennt technische Nachahmungsversuche, einschließlich verdächtiger „Runas“-Ausführungen\nMuster, die für laterale Bewegungen und die Erstellung irreführender lokaler Konten verwendet werden\ndie Führungs- oder Verwaltungsidentitäten außerhalb der Standard-HR-Prozesse imitieren.",
     "de_Detects potential financial theft and fraud by monitoring for clipboard \nmanipulation (address swapping) and unauthorized financial document \naccess originating from suspicious/web-facing parent processes.\n": "Erkennt potenziellen Finanzdiebstahl und Betrug durch Überwachung der Zwischenablage\nManipulation (Adressaustausch) und nicht autorisiertes Finanzdokument\nZugriff, der von verdächtigen/webbezogenen übergeordneten Prozessen ausgeht.",
     "de_Detects tools and CLI patterns used to clone or impersonate legitimate web content. \nFocuses on recursive mirroring of internal portals and the use of phishing \nframeworks, filtering out legitimate development and browser-based activity.\n": "Erkennt Tools und CLI-Muster, die zum Klonen oder Nachahmen legitimer Webinhalte verwendet werden.\nDer Schwerpunkt liegt auf der rekursiven Spiegelung interner Portale und dem Einsatz von Phishing\nFrameworks, die legitime Entwicklung und browserbasierte Aktivitäten herausfiltern.",
-    "de_a hitelesito adatok LSASS folyamatmemoriabol torteno kiirasara tett kiserlet": "ein Versuch, Authentifizierungsdaten aus dem LSASS-Prozessspeicher zu löschen"
+    "de_a hitelesito adatok LSASS folyamatmemoriabol torteno kiirasara tett kiserlet": "ein Versuch, Authentifizierungsdaten aus dem LSASS-Prozessspeicher zu löschen",
+    "hu_Detection Engineering Dashboard": "Detection Engineering Dashboard",
+    "hu_Darabszám": "Darabszám",
+    "hu_Összesen": "Összesen",
+    "de_Detection Engineering Dashboard": "Erkennungstechnik-Dashboard",
+    "de_Darabszám": "Stückzahl",
+    "de_Összesen": "Alle"
 }

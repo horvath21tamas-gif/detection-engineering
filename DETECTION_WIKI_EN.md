@@ -1,5 +1,15 @@
 # 🛡️ Detection Rule Knowledge Base
 
+### 📊 Detection Engineering Dashboard
+| Kritikusság | Darabszám |
+| :--- | :--- |
+| 🔴 Critical | 359 |
+| 🟠 High | 262 |
+| 🟡 Medium | 7 |
+| 🔵 Low | 0 |
+| **Összesen** | **628** |
+
+---
 ## 📖 Tartalomjegyzék
 - [Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001)](#ultra-pro-high-fidelity-steganography-&-data-reconstruction-(t1001))
 - [Ultra-Pro High-Fidelity Junk Data & Command Padding (T1001.001)](#ultra-pro-high-fidelity-junk-data-&-command-padding-(t1001001))

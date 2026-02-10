@@ -15,9 +15,9 @@ if os.path.exists(CACHE_FILE):
     try:
         with open(CACHE_FILE, 'r', encoding='utf-8') as f:
             translation_cache = json.load(f)
-        print(f"ℹ️ Gyorsítótár betöltve ({len(translation_cache)} elem).")
+        print(f"ℹ️ Gyorsítótár betöltve ({len(translation_cache)} elem).", flush=True)
     except Exception as e:
-        print(f"⚠️ Cache betöltési hiba: {e}")
+        print(f"⚠️ Cache betöltési hiba: {e}", flush=True)
         translation_cache = {}
 
 def translate_text(text, target_lang):
@@ -25,34 +25,35 @@ def translate_text(text, target_lang):
     if not text or target_lang == 'en':
         return text
     
-    # Egyedi kulcs a nyelv és a szöveg alapján
     cache_key = f"{target_lang}_{text}"
     
     if cache_key in translation_cache:
         return translation_cache[cache_key]
 
     try:
-        # Ha nincs a cache-ben, fordítunk (0.4 mp szünet a biztonság kedvéért)
+        # Rövid szünet a Google API miatt
         time.sleep(0.4) 
         translated = translator.translate(text, dest=target_lang).text
-        # Mentés a memóriába
         translation_cache[cache_key] = translated
+        # Kiírjuk, hogy lássuk a haladást
+        print(f"  [API] Fordítás ({target_lang}): {text[:30]}...", flush=True)
         return translated
     except Exception as e:
-        print(f"⚠️ Fordítási hiba ({target_lang}): {e}")
+        print(f"⚠️ Fordítási hiba ({target_lang}): {e}", flush=True)
         return text
 
 def save_cache():
-    """Fordítások mentése fájlba a GitHub repo számára."""
+    """Fordítások mentése fájlba."""
     try:
+        # Biztosítjuk, hogy a mappa létezik
+        os.makedirs(os.path.dirname(CACHE_FILE), exist_ok=True)
         with open(CACHE_FILE, 'w', encoding='utf-8') as f:
             json.dump(translation_cache, f, ensure_ascii=False, indent=4)
-        print(f"💾 Gyorsítótár elmentve: {CACHE_FILE}")
+        print(f"💾 Gyorsítótár elmentve: {CACHE_FILE}", flush=True)
     except Exception as e:
-        print(f"⚠️ Cache mentési hiba: {e}")
+        print(f"⚠️ Cache mentési hiba: {e}", flush=True)
 
 def get_stars(score, lang):
-    """Csillagok és a szöveges értékelés fordítása."""
     rating_text = ""
     if score >= 90: rating_text = "Kiváló"
     elif score >= 70: rating_text = "Jó"
@@ -116,7 +117,7 @@ def get_playbook(category, level, lang):
     
     return playbook
 
-def generate_wiki():
+def generate_docs():
     sigma_path = 'rules/sigma'
     scores_path = 'rule_scores.json'
     scores = {}
@@ -135,9 +136,8 @@ def generate_wiki():
                         if d: rules_data.append({'filename': file, 'data': d})
                     except: continue
 
-    # Generálás minden megadott nyelven
     for lang in LANGUAGES:
-        print(f"🌐 Wiki generálása ({lang.upper()})...")
+        print(f"🌐 Wiki generálása ({lang.upper()})...", flush=True)
         
         main_title = translate_text("Detection Rule Knowledge Base", lang)
         toc_title = translate_text("Tartalomjegyzék", lang)
@@ -145,20 +145,17 @@ def generate_wiki():
         wiki_content = f"# 🛡️ {main_title}\n\n"
         wiki_content += f"## 📖 {toc_title}\n"
         
-        # TOC generálás
         for item in rules_data:
             title = translate_text(item['data'].get('title', 'Névtelen szabály'), lang)
             anchor = title.lower().replace(' ', '-').replace('.', '').replace('/', '').replace(',', '')
             wiki_content += f"- [{title}](#{anchor})\n"
 
-        # Szabály részletek
         for item in rules_data:
             file = item['filename']
             d = item['data']
             title = translate_text(d.get('title', 'Névtelen szabály'), lang)
             level = d.get('level', 'n/a')
             category = d.get('logsource', {}).get('category', 'unknown')
-            tags = d.get('tags', []) if d.get('tags') else []
             
             wiki_content += f"\n---\n## {title}\n"
             wiki_content += f"- **ID:** `{file}`\n"
@@ -179,10 +176,9 @@ def generate_wiki():
         filename = f'DETECTION_WIKI_{lang.upper()}.md'
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(wiki_content)
-        print(f"✅ {filename} elkészült.")
+        print(f"✅ {filename} elkészült.", flush=True)
 
-    # A folyamat végén elmentjük a cache-t
     save_cache()
 
 if __name__ == "__main__":
-    generate_wiki()
+    generate_docs()

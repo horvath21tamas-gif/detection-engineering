@@ -1,0 +1,39 @@
+name: Weekly Detection Engineering Report
+
+on:
+  schedule:
+    # Minden hétfőn reggel 08:00-kor (UTC szerint 07:00)
+    - cron: '0 7 * * 1'
+  workflow_dispatch: # Lehetővé teszi, hogy kézzel is elindítsd a teszteléshez
+
+jobs:
+  create_report:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract Dashboard Summary
+        id: report
+        run: |
+          # Kivonjuk a magyar Wiki első 15 sorát, ahol a Dashboard táblázat van
+          echo "### 📊 Aktuális Szabály Statisztikák" > weekly_summary.txt
+          echo "" >> weekly_summary.txt
+          sed -n '3,15p' DETECTION_WIKI_HU.md >> weekly_summary.txt
+          echo "" >> weekly_summary.txt
+          echo "---" >> weekly_summary.txt
+          echo "🔗 [Teljes Wiki megtekintése](https://github.com/${{ github.repository }}/blob/test/DETECTION_WIKI_HU.md)" >> weekly_summary.txt
+          
+          # Dátum beállítása a címhez
+          echo "REPORT_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: Create Issue Report
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "🚀 Heti Detection Report - ${{ env.REPORT_DATE }}"
+          content-filepath: ./weekly_summary.txt
+          labels: automated-report, management

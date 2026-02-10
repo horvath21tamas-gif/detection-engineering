@@ -5,22 +5,51 @@ import time
 from googletrans import Translator
 
 # --- KONFIGURÁCIÓ ---
-# Itt adhatod meg, milyen nyelveken készüljenek el a Wiki fájlok
 LANGUAGES = ['hu', 'en', 'de'] 
+CACHE_FILE = 'tools/translation_cache.json'
 translator = Translator()
 
+# --- CACHE BETÖLTÉSE ---
+translation_cache = {}
+if os.path.exists(CACHE_FILE):
+    try:
+        with open(CACHE_FILE, 'r', encoding='utf-8') as f:
+            translation_cache = json.load(f)
+        print(f"ℹ️ Gyorsítótár betöltve ({len(translation_cache)} elem).")
+    except Exception as e:
+        print(f"⚠️ Cache betöltési hiba: {e}")
+        translation_cache = {}
+
 def translate_text(text, target_lang):
-    """Szöveg fordítása hibakezeléssel és várakozással."""
+    """Szöveg fordítása cache-eléssel és hibakezeléssel."""
     if not text or target_lang == 'en':
         return text
+    
+    # Egyedi kulcs a nyelv és a szöveg alapján
+    cache_key = f"{target_lang}_{text}"
+    
+    if cache_key in translation_cache:
+        return translation_cache[cache_key]
+
     try:
-        # Rövid szünet, hogy a Google ne tiltson le (Rate limiting)
-        time.sleep(0.5) 
-        translated = translator.translate(text, dest=target_lang)
-        return translated.text
+        # Ha nincs a cache-ben, fordítunk (0.4 mp szünet a biztonság kedvéért)
+        time.sleep(0.4) 
+        translated = translator.translate(text, dest=target_lang).text
+        # Mentés a memóriába
+        translation_cache[cache_key] = translated
+        return translated
     except Exception as e:
         print(f"⚠️ Fordítási hiba ({target_lang}): {e}")
         return text
+
+def save_cache():
+    """Fordítások mentése fájlba a GitHub repo számára."""
+    try:
+        with open(CACHE_FILE, 'w', encoding='utf-8') as f:
+            json.dump(translation_cache, f, ensure_ascii=False, indent=4)
+        print(f"💾 Gyorsítótár elmentve: {CACHE_FILE}")
+    except Exception as e:
+        print(f"⚠️ Cache mentési hiba: {e}")
 
 def get_stars(score, lang):
     """Csillagok és a szöveges értékelés fordítása."""
@@ -116,7 +145,7 @@ def generate_wiki():
         wiki_content = f"# 🛡️ {main_title}\n\n"
         wiki_content += f"## 📖 {toc_title}\n"
         
-        # TOC generálás (címek fordításával)
+        # TOC generálás
         for item in rules_data:
             title = translate_text(item['data'].get('title', 'Névtelen szabály'), lang)
             anchor = title.lower().replace(' ', '-').replace('.', '').replace('/', '').replace(',', '')
@@ -151,6 +180,9 @@ def generate_wiki():
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(wiki_content)
         print(f"✅ {filename} elkészült.")
+
+    # A folyamat végén elmentjük a cache-t
+    save_cache()
 
 if __name__ == "__main__":
     generate_wiki()

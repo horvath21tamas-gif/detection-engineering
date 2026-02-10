@@ -1,77 +1,90 @@
 import yaml
 import os
 import json
+import time
+from googletrans import Translator
 
-def get_stars(score):
-    if score >= 90: return "⭐⭐⭐⭐⭐ (Kiváló)"
-    if score >= 70: return "⭐⭐⭐⭐ (Jó)"
-    if score >= 50: return "⭐⭐⭐ (Közepes)"
-    return "⭐⭐ (Fejlesztendő)"
+# --- KONFIGURÁCIÓ ---
+# Itt adhatod meg, milyen nyelveken készüljenek el a Wiki fájlok
+LANGUAGES = ['hu', 'en', 'de'] 
+translator = Translator()
 
-def get_lolbas_info(rule_data):
-    """LOLBAS linkek keresése a szabályban található folyamatnevek alapján."""
+def translate_text(text, target_lang):
+    """Szöveg fordítása hibakezeléssel és várakozással."""
+    if not text or target_lang == 'en':
+        return text
+    try:
+        # Rövid szünet, hogy a Google ne tiltson le (Rate limiting)
+        time.sleep(0.5) 
+        translated = translator.translate(text, dest=target_lang)
+        return translated.text
+    except Exception as e:
+        print(f"⚠️ Fordítási hiba ({target_lang}): {e}")
+        return text
+
+def get_stars(score, lang):
+    """Csillagok és a szöveges értékelés fordítása."""
+    rating_text = ""
+    if score >= 90: rating_text = "Kiváló"
+    elif score >= 70: rating_text = "Jó"
+    elif score >= 50: rating_text = "Közepes"
+    else: rating_text = "Fejlesztendő"
+    
+    stars = "⭐⭐⭐⭐⭐" if score >= 90 else "⭐⭐⭐⭐" if score >= 70 else "⭐⭐⭐" if score >= 50 else "⭐⭐"
+    return f"{stars} ({translate_text(rating_text, lang)})"
+
+def get_lolbas_info(rule_data, lang):
     lolbas_links = []
     try:
         if os.path.exists('inventory/lolbas_map.json'):
             with open('inventory/lolbas_map.json', 'r') as f:
                 lolbas_map = json.load(f)
-            
-            # Kikeressük a folyamatneveket a YAML-ből (egyszerűsített keresés)
             yaml_str = str(rule_data).lower()
             for proc, link in lolbas_map.items():
                 if proc in yaml_str:
                     lolbas_links.append(f"[{proc.upper()}]({link})")
-    except:
-        pass
+    except: pass
     
     if lolbas_links:
-        return f"\n> ⚠️ **LOLBAS Érintettség:** Ez a szabály visszaélésre alkalmas gyári binárist érint: {', '.join(lolbas_links)}\n"
+        label = translate_text("LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint", lang)
+        return f"\n> ⚠️ **{label}:** {', '.join(lolbas_links)}\n"
     return ""
 
-def get_estimated_volume(category):
-    """Becsült eseményszám (EPS) alapú besorolás."""
+def get_estimated_volume(category, lang):
     volumes = {
-        'process_creation': ('Magas', '⚠️ Erős szűrés javasolt (sok log)'),
-        'network_connection': ('Kritikusan Magas', '🛑 SIEM gyilkos kategória!'),
-        'registry_event': ('Közepes', 'ℹ️ Mérsékelt zajszint'),
-        'file_event': ('Magas', '⚠️ Tárolás-igényes'),
-        'email': ('Alacsony', '✅ Jól monitorozható')
+        'process_creation': ('Magas', 'Erős szűrés javasolt (sok log)'),
+        'network_connection': ('Kritikusan Magas', 'SIEM gyilkos kategória!'),
+        'registry_event': ('Közepes', 'Mérsékelt zajszint'),
+        'file_event': ('Magas', 'Tárolás-igényes'),
+        'email': ('Alacsony', 'Jól monitorozható')
     }
-    vol, advice = volumes.get(category, ('Ismeretlen', 'Nincs adat'))
-    return f"- **Becsült zajszint:** {vol} ({advice})\n"
-
-def get_correlation_hint(tags):
-    """Támadási láncolat (Correlation) tippek a MITRE fázisok alapján."""
-    phases = {
-        'initial_access': 'Belépési pont',
-        'execution': 'Kódfuttatás',
-        'persistence': 'Megtelepedés',
-        'privilege_escalation': 'Jogosultság emelés',
-        'exfiltration': 'Adatszivárogtatás'
-    }
-    found_phases = []
-    for tag in tags:
-        for phase, name in phases.items():
-            if phase in tag:
-                found_phases.append(name)
+    vol_raw, advice_raw = volumes.get(category, ('Ismeretlen', 'Nincs adat'))
     
-    if found_phases:
-        return f"- **Detekciós lánc szerep:** `{ ' -> '.join(set(found_phases)) }`\n"
-    return ""
+    label = translate_text("Becsült zajszint", lang)
+    vol = translate_text(vol_raw, lang)
+    advice = translate_text(advice_raw, lang)
+    return f"- **{label}:** {vol} ({advice})\n"
 
-def get_playbook(category, level):
-    playbook = "#### 🚨 Response Playbook\n"
+def get_playbook(category, level, lang):
+    pb_label = translate_text("Response Playbook", lang)
+    playbook = f"#### 🚨 {pb_label}\n"
+    
+    steps = []
     if category == 'process_creation':
-        playbook += "1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.\n"
-        playbook += "2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.\n"
+        steps.append("Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.")
+        steps.append("Bináris ellenőrzés: Futtasd le a fájl hash-ét VirusTotal-on.")
     elif category == 'network_connection':
-        playbook += "1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.\n"
-        playbook += "2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget.\n"
+        steps.append("IP hírnév: Ellenőrizd a távoli IP címet hírnév-adatbázisokban.")
+        steps.append("Forgalom elemzés: Vizsgáld meg a küldött adatmennyiséget.")
     else:
-        playbook += "1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.\n"
+        steps.append("Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.")
     
     if level in ['high', 'critical']:
-        playbook += "2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!\n"
+        steps.append("Sürgős: Ha a gyanú beigazolódik, izoláld az érintett hostot!")
+
+    for i, step in enumerate(steps, 1):
+        playbook += f"{i}. **{translate_text(step, lang)}**\n"
+    
     return playbook
 
 def generate_wiki():
@@ -93,44 +106,51 @@ def generate_wiki():
                         if d: rules_data.append({'filename': file, 'data': d})
                     except: continue
 
-    wiki_content = "# 🛡️ Detection Rule Knowledge Base\n\n"
-    wiki_content += "## 📖 Tartalomjegyzék\n"
-    for item in rules_data:
-        title = item['data'].get('title', 'Névtelen szabály')
-        anchor = title.lower().replace(' ', '-').replace('.', '').replace('/', '').replace(',', '')
-        wiki_content += f"- [{title}](#{anchor})\n"
+    # Generálás minden megadott nyelven
+    for lang in LANGUAGES:
+        print(f"🌐 Wiki generálása ({lang.upper()})...")
+        
+        main_title = translate_text("Detection Rule Knowledge Base", lang)
+        toc_title = translate_text("Tartalomjegyzék", lang)
+        
+        wiki_content = f"# 🛡️ {main_title}\n\n"
+        wiki_content += f"## 📖 {toc_title}\n"
+        
+        # TOC generálás (címek fordításával)
+        for item in rules_data:
+            title = translate_text(item['data'].get('title', 'Névtelen szabály'), lang)
+            anchor = title.lower().replace(' ', '-').replace('.', '').replace('/', '').replace(',', '')
+            wiki_content += f"- [{title}](#{anchor})\n"
 
-    for item in rules_data:
-        file = item['filename']
-        d = item['data']
-        title = d.get('title', 'Névtelen szabály')
-        level = d.get('level', 'n/a')
-        category = d.get('logsource', {}).get('category', 'unknown')
-        tags = d.get('tags', []) if d.get('tags') else []
-        
-        current_score = scores.get(file, 0)
-        
-        wiki_content += f"\n---\n## {title}\n"
-        wiki_content += f"- **Azonosító:** `{file}`\n"
-        wiki_content += f"- **Minőségi mutató:** `{current_score}/100` {get_stars(current_score)}\n"
-        wiki_content += f"- **Kritikusság:** {'🔴' if level == 'critical' else '🟠' if level == 'high' else '🟡'} ({level})\n"
-        
-        # Gazdagítás (Enrichment)
-        wiki_content += get_estimated_volume(category)
-        wiki_content += get_correlation_hint(tags)
-        wiki_content += get_lolbas_info(d)
-        
-        wiki_content += f"- **Leírás:** {str(d.get('description', 'Nincs leírás')).strip()}\n"
-        
-        techniques = [t.split('.')[-1].upper() for t in tags if t.startswith('attack.t')]
-        if techniques:
-            wiki_content += f"- **MITRE ATT&CK:** `{', '.join(techniques)}`\n"
+        # Szabály részletek
+        for item in rules_data:
+            file = item['filename']
+            d = item['data']
+            title = translate_text(d.get('title', 'Névtelen szabály'), lang)
+            level = d.get('level', 'n/a')
+            category = d.get('logsource', {}).get('category', 'unknown')
+            tags = d.get('tags', []) if d.get('tags') else []
+            
+            wiki_content += f"\n---\n## {title}\n"
+            wiki_content += f"- **ID:** `{file}`\n"
+            wiki_content += f"- **{translate_text('Minőségi mutató', lang)}:** `{scores.get(file, 0)}/100` {get_stars(scores.get(file, 0), lang)}\n"
+            
+            crit_label = translate_text("Kritikusság", lang)
+            wiki_content += f"- **{crit_label}:** {'🔴' if level == 'critical' else '🟠' if level == 'high' else '🟡'} ({level})\n"
+            
+            wiki_content += get_estimated_volume(category, lang)
+            wiki_content += get_lolbas_info(d, lang)
+            
+            desc_label = translate_text("Leírás", lang)
+            desc_val = translate_text(str(d.get('description', 'Nincs leírás')), lang)
+            wiki_content += f"- **{desc_label}:** {desc_val}\n"
+            
+            wiki_content += "\n" + get_playbook(category, level, lang) + "\n"
 
-        wiki_content += "\n" + get_playbook(category, level) + "\n"
-
-    with open('DETECTION_WIKI.md', 'w', encoding='utf-8') as f:
-        f.write(wiki_content)
-    print(f"✅ Wiki generálva ({len(rules_data)} szabály).")
+        filename = f'DETECTION_WIKI_{lang.upper()}.md'
+        with open(filename, 'w', encoding='utf-8') as f:
+            f.write(wiki_content)
+        print(f"✅ {filename} elkészült.")
 
 if __name__ == "__main__":
     generate_wiki()

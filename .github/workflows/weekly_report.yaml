@@ -1,10 +1,13 @@
 name: Weekly Detection Engineering Report
 
 on:
+  push:         # <--- Ez kényszeríti a GitHubot, hogy most azonnal felismerje a workflow-t
+    branches:
+      - test
   schedule:
     # Minden hétfőn reggel 08:00-kor (UTC szerint 07:00)
     - cron: '0 7 * * 1'
-  workflow_dispatch: # Lehetővé teszi, hogy kézzel is elindítsd a teszteléshez
+  workflow_dispatch: # Kézi indításhoz
 
 jobs:
   create_report:
@@ -16,14 +19,23 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: test # Biztosítjuk, hogy a test ágról olvasson
 
       - name: Extract Dashboard Summary
         id: report
         run: |
-          # Kivonjuk a magyar Wiki első 15 sorát, ahol a Dashboard táblázat van
           echo "### 📊 Aktuális Szabály Statisztikák" > weekly_summary.txt
           echo "" >> weekly_summary.txt
-          sed -n '3,15p' DETECTION_WIKI_HU.md >> weekly_summary.txt
+          
+          # Ellenőrizzük, létezik-e a fájl, mielőtt beleolvasunk
+          if [ -f "DETECTION_WIKI_HU.md" ]; then
+            # A 3-15. sor kinyerése (a Dashboard táblázat helye)
+            sed -n '3,15p' DETECTION_WIKI_HU.md >> weekly_summary.txt
+          else
+            echo "⚠️ A magyar nyelvű Wiki (DETECTION_WIKI_HU.md) még nem jött létre." >> weekly_summary.txt
+          fi
+          
           echo "" >> weekly_summary.txt
           echo "---" >> weekly_summary.txt
           echo "🔗 [Teljes Wiki megtekintése](https://github.com/${{ github.repository }}/blob/test/DETECTION_WIKI_HU.md)" >> weekly_summary.txt

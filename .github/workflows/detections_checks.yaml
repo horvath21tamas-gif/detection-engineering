@@ -127,21 +127,20 @@ jobs:
             filename=$(basename "$file" .yaml)
             filename=$(basename "$filename" .yml)
             
-            # WINDOWS ÉS PROCESS CREATION SZABÁLYOK (PROFIL HASZNÁLATA)
+            # WINDOWS ÉS PROCESS CREATION SZABÁLYOK
             if grep -qiE "windows|process_creation|sysmon|registry|service_control" "$file"; then
-              sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk error"
-              sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic error"
-              # QRadar: without-pipeline a backend hiba elkerülésére, a fixer majd javítja a mezőket
-              sigma convert -t qradar --without-pipeline "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar error"
+              sigma convert -t splunk -p splunk_windows "$file" -o "rules/splunk/${filename}.spl" || echo "conversion_failed" > "rules/splunk/${filename}.spl"
+              sigma convert -t lucene -p ecs_windows "$file" -o "rules/elastic/${filename}.kql" || echo "conversion_failed" > "rules/elastic/${filename}.kql"
+              sigma convert -t qradar --without-pipeline "$file" -o "rules/qradar/${filename}.aql" || echo "conversion_failed" > "rules/qradar/${filename}.aql"
             
-            # EGYÉB (E-MAIL, STB.) SZABÁLYOK (PIPELINE KIKAPCSOLÁSA)
+            # EGYÉB SZABÁLYOK
             else
-              sigma convert -t splunk --without-pipeline "$file" -o "rules/splunk/${filename}.spl" || echo "Splunk generic error"
-              sigma convert -t lucene --without-pipeline "$file" -o "rules/elastic/${filename}.kql" || echo "Elastic generic error"
-              sigma convert -t qradar --without-pipeline "$file" -o "rules/qradar/${filename}.aql" || echo "QRadar generic error"
+              sigma convert -t splunk --without-pipeline "$file" -o "rules/splunk/${filename}.spl" || echo "conversion_failed" > "rules/splunk/${filename}.spl"
+              sigma convert -t lucene --without-pipeline "$file" -o "rules/elastic/${filename}.kql" || echo "conversion_failed" > "rules/elastic/${filename}.kql"
+              sigma convert -t qradar --without-pipeline "$file" -o "rules/qradar/${filename}.aql" || echo "conversion_failed" > "rules/qradar/${filename}.aql"
             fi
             
-            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "RSA error"
+            sigma convert -t net_witness "$file" -o "rules/netwitness/${filename}.txt" || echo "conversion_failed" > "rules/netwitness/${filename}.txt"
           done
 
       - name: Final SIEM Query Fixer (QRadar, NetWitness & Sentinel)

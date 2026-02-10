@@ -631,10400 +631,10474 @@
 - [Credential Dumping LSASS](#credential-dumping-lsass)
 
 ---
-
 ## Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001)
 - **Azonosító:** `T1001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects data de-steganography by identifying anomalous programmatic access 
 to image manipulation APIs (GDI+, System.Drawing) from script interpreters, 
 specifically looking for pixel-level data extraction routines.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Junk Data & Command Padding (T1001.001)
 - **Azonosító:** `T1001_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects command padding and junk data injection by identifying anomalous 
 white-space distribution, repetitive environmental variable definitions, 
 and extreme command line lengths in non-installer processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001.002)
 - **Azonosító:** `T1001_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects data de-steganography by identifying anomalous programmatic access 
 to image manipulation APIs (GDI+, System.Drawing) from script interpreters, 
 specifically looking for pixel-level data extraction routines.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Protocol Impersonation (T1001.003)
 - **Azonosító:** `T1001_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects protocol impersonation by identifying manual manipulation of network headers 
 and anomalous User-Agent strings within script interpreters, specifically 
 targeting attempts to mimic mobile devices or search crawlers from non-browser processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003)
 - **Azonosító:** `T1003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects highly sophisticated LSASS memory dumping techniques. 
 Focuses on DLL export ordinals (#24), handle duplication, 
 and specialized LOLBins that bypass standard EDR string-based detection.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Access to LSASS Process Memory
 - **Azonosító:** `T1003_001.yaml`
 - **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Észleli a gyanús hozzáférést az LSASS folyamat memóriájához, ami hitelesítő adatok ellopására (Credential Dumping) utalhat.  A szabály figyeli a gyanús GrantedAccess maszkokat és szűri a gyakori legális folyamatokat.
-- **Hamis pozitívok:** Antivírus szoftverek és EDR ügynökök mélyvizsgálata, Rendszerfelügyeleti eszközök (pl. SCCM, Tanium), Debuggerek használata jogosult adminisztrátorok által
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity SAM & SYSTEM Registry Theft (T1003.002)
 - **Azonosító:** `T1003_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized extraction of the SAM, SYSTEM, and SECURITY registry hives. 
 Focuses on 'reg.exe' abuse, VSS-based theft, and 'esentutl.exe' file copying 
 from non-standard parent processes and untrusted execution paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity NTDS.dit Extraction (T1003.003)
 - **Azonosító:** `T1003_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized extraction of the Active Directory database (NTDS.dit).
 Identifies 'ntdsutil' with abbreviated commands, diskshadow scripts, 
 and shadow copy creation by non-backup processes on Domain Controllers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity LSA Secrets & Security Hive Theft (T1003.004)
 - **Azonosító:** `T1003_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized extraction of LSA Secrets from the HKLM\SECURITY registry hive. 
 Focuses on advanced export patterns, Impacket-style remote dumps, and 
 credential access via untrusted parent processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity MSCASH/DCC Extraction (T1003.005)
 - **Azonosító:** `T1003_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized extraction of Cached Domain Credentials (MSCASH/DCC).
 Monitors for specialized tool fingerprints, registry save operations targeting 
 the Cache key, and anomalous parent-child process relationships.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity DCSync Attack Detection (T1003.006)
 - **Azonosító:** `T1003_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects DCSync attacks where an attacker impersonates a Domain Controller 
 to request credentials. Focuses on specific RPC flags, abbreviated tool commands, 
 and anomalous process lineage on non-DC assets.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007)
 - **Azonosító:** `T1003_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects sophisticated LSASS memory dumping. Focuses on Procdump argument patterns, 
 Task Manager-initiated dumps via WerFault, and COM+ (comsvcs.dll) exports using 
 ordinal-based calls (#24) to bypass string-based detection.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, 007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Linux Shadow File Extraction (T1003.008)
 - **Azonosító:** `T1003_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized extraction of the /etc/shadow file. 
 Focuses on redirection to suspicious paths, archiving, 
 and exfiltration via network tools (LOLBins) from interactive shells.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Local Data Harvesting (T1005)
 - **Azonosító:** `T1005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic local data collection by identifying the combination of 
 recursive file discovery, targeted sensitive extensions, and the use of 
 non-standard search tools or suspicious process lineages.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy Direct Volume Access (T1006)
 - **Azonosító:** `T1006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects high-fidelity direct volume access by monitoring for raw device paths 
 initiated by non-system processes or suspicious parents, often used to bypass 
 file system locks and EDR monitoring for credential dumping.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity System Service Discovery (T1007)
 - **Azonosító:** `T1007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted discovery of system services. Focuses on suspicious parent processes 
 and specific command-line arguments used to identify security products or 
 misconfigured services for privilege escalation.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Fallback Channel Detection (T1008)
 - **Azonosító:** `T1008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects C2 fallback mechanisms by identifying cross-protocol switching logic 
 (e.g., HTTP to DNS/ICMP) within exception handling blocks (try/catch/trap) 
 triggered by connection failures in non-standard process contexts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1008`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Application Window Discovery (T1010)
 - **Azonosító:** `T1010.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized application window discovery by monitoring for .NET 
 MainWindowTitle property access and Win32 API calls via CLI. 
 Focuses on non-standard lineages and output redirection used by malware to exfiltrate window titles.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1010`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Bluetooth Exfiltration (T1011)
 - **Azonosító:** `T1011.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects unauthorized Bluetooth data exfiltration by identifying programmatic 
 triggers of Bluetooth transfer wizards (fsquirt.exe) from non-standard 
 parent processes or suspicious command-line executions of radio-control tools.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1011`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity BLE Advertising Exfiltration (T1011.001)
 - **Azonosító:** `T1011_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects covert data exfiltration via BLE Advertising frames by identifying 
 unauthorized processes invoking WinRT BluetoothLEAdvertisementPublisher 
 APIs to broadcast custom manufacturer data payloads.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Query Registry Discovery (T1012)
 - **Azonosító:** `T1012.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic Registry discovery targeting sensitive security configurations, 
 credential storage, and persistence paths. Uses recursive query detection 
 and integrity level gating to minimize false positives.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1012`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014)
 - **Azonosító:** `T1014.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects the "Bring Your Own Vulnerable Driver" (BYOVD) technique. 
 Focuses on the execution of known driver loaders or the registration of kernel-mode 
 services from non-standard paths, while filtering out legitimate OS driver maintenance.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1014`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity System Network Configuration Discovery (T1016)
 - **Azonosító:** `T1016.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic discovery of network configuration (IP, routing, DNS, ARP). 
 Filters high-volume noise from VPN clients and system services using integrity 
 levels, parent process gating, and command-line switch analysis.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1016`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Internet IP Discovery (T1016.001)
 - **Azonosító:** `T1016_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects attempts to discover the system's external IP address using command-line tools 
 and common IP-echo services. Minimizes false positives by analyzing the parent-child 
 process relationship, integrity levels, and typical developer tool fingerprints.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Terminal Services Configuration Discovery (T1016.002)
 - **Azonosító:** `T1016_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted discovery of Terminal Services and RDP configurations. 
 Focuses on non-standard process lineages (e.g., Office, Browsers) and 
 detects specific command-line switches used to identify hijackable sessions 
 or disabled security settings.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Remote System Discovery (T1018)
 - **Azonosító:** `T1018.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic remote system discovery with a focus on Domain Controller identification 
 and network topology mapping. Filters out high-volume noise from system services, 
 browsers, and inventory agents using integrity levels and parent process gating.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1018`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Automated Exfiltration (T1020)
 - **Azonosító:** `T1020.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects automated exfiltration by identifying the sequential pattern of 
 password-protected archiving followed by immediate network transfer using 
 non-standard tools or cloud-sync binaries from suspicious locations.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1020`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Client-Linked Cloud Exfil (T1020.001)
 - **Azonosító:** `T1020_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects data exfiltration by identifying official cloud storage clients 
 (OneDrive, Dropbox, etc.) being manipulated via command-line to sync 
 non-standard staging directories or running with high-entropy/scripted arguments.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Rapid Logons to Multiple Distant Hosts by Same User
 - **Azonosító:** `T1021.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟡 (medium)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects a single user successfully logging on to multiple different hosts within a short time window. This behavior may indicate stolen credentials, pass-the-hash, or lateral movement using valid accounts.
-- **Hamis pozitívok:** Legitimate VPN reconnects causing new source IPs, Admin activity via multiple servers during maintenance, Misconfigured jump host naming conventions
 - **MITRE ATT&CK:** `T1021`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+
 
 ---
-
 ## Suspicious RDP Logon from Unusual Source
 - **Azonosító:** `T1021_001.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟡 (medium)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects successful RDP logons originating from unusual or non-enterprise sources, especially when targeting servers and performed by non-admin or rarely used accounts.
-- **Hamis pozitívok:** First-time legitimate remote access from new location, Approved administrator working remotely via new VPN, Cloud-hosted management access not yet allowlisted
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+
 
 ---
-
 ## Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002)
 - **Azonosító:** `T1021_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted access to administrative shares (C$, ADMIN$, IPC$) using 
 native tools (net.exe, PowerShell) while filtering out standard IT 
 orchestration and service-level noise.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity DCOM Remote Execution (T1021.003)
 - **Azonosító:** `T1021_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects lateral movement via DCOM by monitoring suspicious child processes 
 from known vulnerable COM objects. Specifically filters for headless 
 execution and anomalous network-to-process lineage.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity SSH Lateral Movement & Tunneling (T1021.004)
 - **Azonosító:** `T1021_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects advanced SSH lateral movement and tunneling. Filters legitimate 
 DevOps/Git activity by analyzing parent process lineage, command-line 
 entropy, and non-standard authentication patterns.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity VNC Lateral Movement & Hijacking (T1021.005)
 - **Azonosító:** `T1021_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized VNC activity by monitoring for portable VNC execution 
 from suspicious paths, reverse connection attempts, and command-line 
 credential injection while filtering enterprise remote support tools.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity WinRM Remote Execution (T1021.006)
 - **Azonosító:** `T1021_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects advanced lateral movement via WinRM by monitoring for high-entropy 
 PowerShell commands, in-memory execution, and suspicious process 
 hollowing attempts originating from the WinRM host process.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Control Plane Hijacking (T1021.007)
 - **Azonosító:** `T1021_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects unauthorized lateral movement through cloud dashboards by correlating 
 high-risk operations with anomalous user agents, unusual source IPs, and 
 signs of MFA-evasion/automated session hijacking.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity macOS ARD Remote Hijacking (T1021.008)
 - **Azonosító:** `T1021_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized activation or modification of Apple Remote Desktop (ARD) 
 by monitoring the 'kickstart' utility for high-risk flags that grant 
 universal access, while filtering legitimate MDM (Jamf, Kandji) orchestration.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Removable Media Data Theft (T1025)
 - **Azonosító:** `T1025.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic and automated data collection from removable media (USB/External Drives) 
 by identifying recursive discovery patterns, specific archival switches, and 
 suspicious process lineages, while filtering out standard OS activities.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1025`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Base64-Encoded PowerShell Command with Network Activity
 - **Azonosító:** `T1027.yaml`
 - **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects PowerShell executions using Base64-encoded commands combined with network-based payload retrieval and non-interactive execution. This pattern is strongly associated with malware delivery, loaders, and post-exploitation frameworks.
-- **Hamis pozitívok:** Rare advanced administrative automation using encoded commands, Approved red team or penetration testing activity
 - **MITRE ATT&CK:** `T1027, T1105`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Binary Padding Activity (T1027.001)
 - **Azonosító:** `T1027_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects binary padding where attackers increase file size to bypass security 
 scanners or alter hashes. Focuses on tools like fsutil, dd, and binary copy 
 commands targeting executable files in suspicious paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Software Packing Event (T1027.002)
 - **Azonosító:** `T1027_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the use of binary packers (UPX, MPRESS, etc.) in non-standard environments. 
 Focuses on command-line patterns used for high-compression/obfuscation and 
 suspicious parent process lineages.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Steganography Payload Extraction (T1027.003)
 - **Azonosító:** `T1027_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the programmatic extraction of hidden payloads from image files. 
 Focuses on the transition from pixel-level data access (GDI+) to dynamic 
 code execution (Reflection/IEX) within the same process context.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Steganography Payload Extraction (T1027.004)
 - **Azonosító:** `T1027_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the extraction of malicious payloads from image files using 
 low-level GDI+ or .NET Bitmap methods often seen in Invoke-PSImage or similar 
 steganography frameworks.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Indicator Removal and Signature Theft (T1027.005)
 - **Azonosító:** `T1027_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects attempts to remove indicators or manipulate digital signatures on binaries. 
 Focuses on signature theft (SigThief), PE header stripping, and string replacement 
 in suspicious locations.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity HTML Smuggling Execution (T1027.006)
 - **Azonosító:** `T1027_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects the execution of suspicious files typically delivered via HTML Smuggling. 
 Focuses on browser processes spawning script interpreters or mounting disk images 
 from temporary or local app data directories.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Binary Symbol Stripping (T1027.007)
 - **Azonosító:** `T1027_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the active stripping of debug symbols and section headers from binaries. 
 Focuses on the execution of stripping tools on non-build systems to hinder forensics.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Binary Symbol Stripping (T1027.008)
 - **Azonosító:** `T1027_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the active stripping of debug symbols and section headers from binaries 
 in non-development environments. This hinders forensic analysis and reverse engineering 
 by removing function names and symbol tables.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Embedded Payload Extraction (T1027.009)
 - **Azonosító:** `T1027_009.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the extraction and execution of embedded payloads by monitoring 
 suspicious memory-only code loading (Reflection) and byte-array manipulation 
 targeting non-standard resource locations.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `009`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Command Line Obfuscation (T1027.010)
 - **Azonosító:** `T1027_010.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects advanced command line obfuscation techniques. Focuses on excessive 
 escape character density, environment variable slicing, and PowerShell string 
 deconstruction used to bypass static detection filters.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `010`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Suspicious Archive Creation (T1027.011)
 - **Azonosító:** `T1027_011.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the creation of password-protected and/or encrypted archives using common CLI tools. 
 Focuses on command-line password arguments and recursive collection from sensitive paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `011`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Windows LDR Hijacking (T1027.012)
 - **Azonosító:** `T1027_012.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects attempts to hijack the Windows loader (LDR) via AppInit_DLLs or AppCertDLLs. 
 It specifically targets DLL registrations originating from non-system paths (Temp, Public, User profiles) 
 and the activation of the LoadAppInit_DLLs flag by suspicious processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `012`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Scheduled Transfer (T1029)
 - **Azonosító:** `T1029.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects the creation of scheduled tasks for automated data exfiltration by 
 analyzing Task XML for suspicious CLI tools, cloud-sync arguments, and 
 high-frequency or off-hours triggers, while filtering legitimate system updates.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1029`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Data Chunking and Fragmentation (T1030)
 - **Azonosító:** `T1030.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects stealthy data fragmentation for exfiltration by identifying 
 low-level file stream manipulation, custom buffer-based splitting, 
 and non-standard archive volume creation from suspicious execution paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1030`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity System Owner/User Discovery (T1033)
 - **Azonosító:** `T1033.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic discovery of the current user, logged-on users, and token privileges. 
 Focuses on anomalous process lineages (Office, Browsers) and specific switch 
 combinations (/priv, /groups) used before privilege escalation attempts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1033`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036)
 - **Azonosító:** `T1036.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects advanced masquerading techniques including system binary path anomalies, 
 double extensions, and critical system processes spawned by untrusted parents. 
 Optimized to filter out legitimate Windows Update and side-loading behaviors.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1036`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001)
 - **Azonosító:** `T1036_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects critical system processes (e.g., lsass, svchost) running with invalid, 
 untrusted, or forged digital signatures. Focuses on identity-signature 
 mismatch and publisher typosquatting to eliminate developer noise.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity RTLO Character Execution (T1036.002)
 - **Azonosító:** `T1036_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the execution of processes containing the Right-to-Left Override (RTLO) 
 Unicode character (U+202E). Optimized to detect various encodings and 
 suspicious execution contexts (Downloads, Temp) while filtering system noise.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Renamed System Utility (T1036.003)
 - **Azonosító:** `T1036_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the execution of renamed Windows system utilities (LOLBins) by comparing 
 current process names with internal metadata. Uses path-based filtering 
 and signature-awareness to eliminate false positives from installers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Masquerading via Path Anomaly (T1036.004)
 - **Azonosító:** `T1036_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects sophisticated masquerading where system binaries are executed from 
 untrusted, user-writable directories or from spoofed system paths (e.g., space padding). 
 Filters out legitimate Side-by-Side (WinSxS) and Windows Update behaviors.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Legitimate Windows Binary Copied to User-Writable Location
 - **Azonosító:** `T1036_005.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects suspicious copying of legitimate Windows system binaries into user-writable directories. This technique is commonly used by attackers for masquerading, DLL sideloading, or execution evasion by abusing trusted binary names.
-- **Hamis pozitívok:** Rare advanced troubleshooting by administrators, Approved red team or malware simulation activity
 - **MITRE ATT&CK:** `T1036, 005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Space After Filename Masquerading (T1036.006)
 - **Azonosító:** `T1036_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects intentional masquerading using trailing spaces in filenames or directory names. 
 Focuses on executable extensions followed by spaces to evade string-based detection 
 while filtering common Windows Update and SCCM/MECM noise.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007)
 - **Azonosító:** `T1036_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects execution of binaries masquerading as documents via double extensions. 
 Strictly filters developer artifacts (.min.js, .map) and verified installers, 
 focusing on high-risk user directories and suspicious parent lineages.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `007, T1036`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Masquerade File Type via Interpreter Misuse (T1036.008)
 - **Azonosító:** `T1036_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects mismatched file type execution where legitimate interpreters (wscript, cscript, powershell, regsvr32) 
 execute files with non-standard extensions (e.g., .jpg, .txt, .png). 
 Filters out system-level automation and focuses on untrusted user directories.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Allure Document and RTLO Masquerading (T1036.009)
 - **Azonosító:** `T1036_009.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects sophisticated masquerading using allure documents and RTLO characters. 
 Focuses on execution from untrusted user directories and suspicious parent 
 processes (browsers, mail clients) while filtering common developer noise.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `009`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Logon Script Persistence (T1037)
 - **Azonosító:** `T1037.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the creation or modification of logon scripts in the registry (UserInitMprLogonScript).
 Attackers use this to bypass GPO-based logon scripts and execute malicious code at every logon.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1037`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity UserInitMprLogonScript Persistence
 - **Azonosító:** `T1037_001.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized creation or modification of the UserInitMprLogonScript registry key.
 This is a high-fidelity rule because it filters out standard GPO updates and focuses on 
 user-writable paths and suspicious execution patterns.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Netsh Helper DLL Persistence
 - **Azonosító:** `T1037_002.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the registration of a new Netsh Helper DLL. 
 Attackers use this to maintain persistence by loading a malicious DLL 
 whenever netsh.exe or a related networking service starts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Network Logon Script/Shortcut Modification (T1037.003)
 - **Azonosító:** `T1037_003.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized modification of scripts (.bat, .ps1, .vbs) or shortcuts (.lnk) 
 within sensitive network shares like NETLOGON or SYSVOL. 
 It specifically filters out legitimate DFS replication and system-level updates.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro RC Script and Init.d Persistence (T1037.004)
 - **Azonosító:** `T1037_004.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized modification of RC scripts, init.d, or systemd generators by non-package manager processes.
 Attackers use these to gain root persistence on Linux/macOS systems.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro macOS Startup Items Persistence (T1037.005)
 - **Azonosító:** `T1037_005.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized creation of files in legacy StartupItems directories.
 It minimizes false positives by whitelisting the official macOS installer 
 subsystem and focusing on unsigned or script-generated persistence.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Network Share Discovery (T1039)
 - **Azonosító:** `T1039.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic discovery and collection of sensitive data from network shares 
 by identifying recursive file enumeration using UNC paths, combined with 
 output redirection or mass archival from non-standard process contexts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1039`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Network Sniffing Detection (T1040)
 - **Azonosító:** `T1040.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized network sniffing by monitoring for administrative tools 
 used in capture mode, driver installation for packet interception, 
 and offensive sniffing frameworks running from untrusted paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1040`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Exfiltration Over C2 Channel (T1041)
 - **Azonosító:** `T1041.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects data exfiltration over an established C2 channel by correlating 
 systematic file read operations, memory-stream encoding, and long-standing 
 outbound network connections from non-browser processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1041`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Network Service Discovery (T1046)
 - **Azonosító:** `T1046.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic network service discovery and internal port scanning. 
 Focuses on loop-based scanning patterns in PowerShell, CMD, and specialized 
 binaries originating from non-IT admin contexts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1046`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Remote Process Creation via WMIC
 - **Azonosító:** `T1047.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious usage of wmic.exe to create processes on remote hosts using the "process call create" method. This technique is commonly used by attackers for lateral movement after credential compromise.
-- **Hamis pozitívok:** Rare administrative remote troubleshooting, Approved red team or penetration testing activity
 - **MITRE ATT&CK:** `T1047`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Alternative Protocol Exfiltration (T1048)
 - **Azonosító:** `T1048.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects data exfiltration over non-standard protocols by identifying 
 abnormal ICMP buffer sizes, SSH/tunneling flags in non-admin contexts, 
 and network-capable LoLBins executing from suspicious paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1048`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001)
 - **Azonosító:** `T1048_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects encrypted data exfiltration by identifying SCP/SFTP/Rclone 
 usage from non-standard paths, focusing on automated (non-interactive) 
 flags and suspicious parent process lineages.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Asymmetric Encrypted Exfiltration (T1048.002)
 - **Azonosító:** `T1048_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects data exfiltration over asymmetric encrypted protocols (HTTPS) 
 by identifying command-line tools (curl, powershell) using upload-specific 
 flags from untrusted paths or launched by suspicious parent processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003)
 - **Azonosító:** `T1048_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects stealthy data exfiltration via DNS and ICMP by correlating 
 anomalous payload sizes and non-standard query types with suspicious 
 process lineages and untrusted execution paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity System Network Connections Discovery (T1049)
 - **Azonosító:** `T1049.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted discovery of active network connections and established sessions. 
 Focuses on non-standard process lineages (Office, Browsers, Web Servers) and 
 detects specific command-line switch combinations used by attackers to map 
 the network landscape.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1049`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Physical Medium Exfiltration (T1052)
 - **Azonosító:** `T1052.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects systematic data exfiltration to physical media by monitoring 
 non-interactive copy/archive commands targeting removable disk volumes, 
 filtering out legitimate Windows Explorer GUI operations.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1052`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity USB Exfiltration (T1052.001)
 - **Azonosító:** `T1052_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects systematic data exfiltration to USB devices by monitoring 
 non-interactive copy/move/archive commands targeting removable drives, 
 focusing on suspicious process lineages and stealthy CLI arguments.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt
 - **Azonosító:** `T1053.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Észleli az ütemezett feladatok vagy a több operációs rendszeren keresztüli adatmegőrzéshez használt feladatok gyanús létrehozását. A támadószerű végrehajtási mintákra összpontosít.
-- **Hamis pozitívok:** Ritka adminisztratív automatizálás felhasználó által írható könyvtárak használatával, Egyedi IT karbantartási szkriptek végrehajtása ütemezett feladatokon keresztül
 - **MITRE ATT&CK:** `T1053`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity At.exe Activity Detection
 - **Azonosító:** `T1053_002.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés -> Kódfuttatás`
 - **Leírás:** Detects the execution of at.exe for task scheduling. Since 'at' is deprecated, 
 any interactive use or remote machine targeting (\\) is considered highly suspicious 
 and indicative of persistence or lateral movement.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Cron Persistence and In-Place Modification
 - **Azonosító:** `T1053_003.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized creation or modification of cron jobs by monitoring 
 direct writes to cron directories and suspicious shell one-liners. 
 Filters legitimate package managers and configuration management tools.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Scheduled Task Creation Executing PowerShell
 - **Azonosító:** `T1053_005.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects suspicious creation of scheduled tasks using schtasks.exe that execute PowerShell, commonly abused by attackers to establish persistence or delayed execution of malicious payloads.
-- **Hamis pozitívok:** Rare custom administrative automation, Approved red team or malware simulation activity
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Systemd Service Creation or Modification
 - **Azonosító:** `T1053_006.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the creation or modification of systemd service units with a focus on 
 anomalous execution paths (e.g., /tmp, /dev/shm) and suspicious parent processes 
 (e.g., shells, web servers). Filters out legitimate package management and CM tools.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Systemd Timer Persistence Detection
 - **Azonosító:** `T1053_007.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the creation or activation of systemd timers used for persistence. 
 Focuses on non-standard directory locations (user-level units), interactive shell 
 triggers, and suspicious execution payloads (obfuscation, network tools).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002, 007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy Process Injection Detection (T1055)
 - **Azonosító:** `T1055.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects advanced process injection (e.g. DLL injection, Thread Hijacking) by 
 monitoring for specific high-risk GrantedAccess masks combined with 
 suspicious source-target relationships and unbacked memory regions.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1055`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy DLL Injection (T1055.001)
 - **Azonosító:** `T1055_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects high-fidelity DLL injection by identifying remote thread creation 
 where the start address is a known library-loading function or the source 
 memory region is not backed by a file on disk (unbacked memory).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy PE Injection (T1055.002)
 - **Azonosító:** `T1055_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects high-fidelity PE injection by identifying cross-process memory 
 manipulation where the source of the call is an unbacked memory region 
 (shellcode) and the target is a critical system process.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy Thread Hijacking (T1055.003)
 - **Azonosító:** `T1055_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects thread execution hijacking by identifying cross-process access 
 requests with thread manipulation rights (SET_CONTEXT) where the 
 calling stack originates from unbacked memory (shellcode).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy APC Injection (T1055.004)
 - **Azonosító:** `T1055_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects high-fidelity APC injection attempts (including Early Bird) by monitoring for 
 specific thread access masks (THREAD_SET_CONTEXT) where the calling code originates 
 from unbacked or untrusted memory regions (CallTrace analysis).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy TLS Injection (T1055.005)
 - **Azonosító:** `T1055_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects high-fidelity TLS injection by monitoring for cross-process memory 
 manipulation targeting PE headers where the execution flow originates 
 from unbacked memory (shellcode).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy Ptrace Injection (T1055.008)
 - **Azonosító:** `T1055_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects high-fidelity ptrace-based process injection by identifying 
 PTRACE_POKETEXT/DATA operations from suspicious sources or 
 cross-user ptrace attachments, filtering out legitimate debuggers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy Module Overwriting (T1055.009)
 - **Azonosító:** `T1055_009.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects process or module overwriting by identifying cross-process access 
 requests with VM_WRITE permissions where the calling stack originates from 
 unbacked memory (shellcode) rather than a signed on-disk module.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `009`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy EWM Injection (T1055.011)
 - **Azonosító:** `T1055_011.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects Extra Window Memory (EWM) injection by monitoring for suspicious 
 cross-process access with memory manipulation rights where the CallTrace 
 indicates execution from unbacked memory (shellcode) targeting GUI processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `011`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy Process Hollowing (T1055.012)
 - **Azonosító:** `T1055_012.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects high-fidelity process hollowing by identifying cross-process access 
 requests with VM_WRITE/VM_OPERATION permissions where the calling stack 
 originates from unbacked memory (shellcode) and targets common sacrificial processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `012`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy Process Hollowing (T1055.013)
 - **Azonosító:** `T1055_013.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects high-fidelity process hollowing by identifying cross-process access 
 requests with VM_WRITE/VM_OPERATION permissions where the calling stack 
 originates from unbacked memory (shellcode) and targets common sacrificial processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `013`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy Process Ghosting (T1055.014)
 - **Azonosító:** `T1055_014.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects Process Ghosting by identifying process creation events where the 
 underlying file is in a 'delete-pending' state, evidenced by missing hashes 
 at execution time and originating from non-standard directories.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `014`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy ListPlanting Injection (T1055.015)
 - **Azonosító:** `T1055_015.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects ListPlanting injection by identifying suspicious cross-process access 
 requests to ListView-capable processes where the execution flow originates 
 from unbacked memory regions (shellcode) rather than signed modules.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `015`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Input Capture Detection (T1056)
 - **Azonosító:** `T1056.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects sophisticated input capture (keylogging) by identifying suspicious 
 API-related command lines, unauthorized shell-based keylogging snippets, 
 and anomalous process behavior targeting user input.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, T1056`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Keylogging & Input Hooking (T1056.001)
 - **Azonosító:** `T1056_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects advanced keylogging by identifying suspicious API calls from unprivileged 
 or ephemeral processes, targeting the use of SetWindowsHookEx and GetAsyncKeyState 
 within non-standard execution contexts (e.g., PowerShell, Rundll32).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity GUI Input Capture (T1056.002)
 - **Azonosító:** `T1056_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects attempts to capture credentials through deceptive GUI prompts or overlays. 
 Focuses on PowerShell/C# snippets creating modal dialogs from suspicious parent 
 processes (browsers, office apps) and unbacked scripts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Digital Certificate Theft (T1056.003)
 - **Azonosító:** `T1056_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized extraction of private keys and digital certificates. 
 Monitors for 'non-exportable' key extraction via memory patching, 
 suspicious use of certutil/PowerShell for PFX creation, and direct 
 access to the Windows Cryptographic Key Store.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Credential API Hooking via Win32 Libraries
 - **Azonosító:** `T1056_004.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects suspicious processes loading combinations of Win32 libraries commonly abused for credential interception or API hooking, such as user32.dll, advapi32.dll, and win32u.dll. The rule focuses on non-system, user-writable execution paths and excludes common legitimate software to reduce false positives.
-- **Hamis pozitívok:** Custom accessibility or assistive input software, Internally developed monitoring tools, Rare GUI utilities running from user directories
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Process Discovery (T1057)
 - **Azonosító:** `T1057.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted process discovery focusing on security product identification 
 and memory target reconnaissance. Filters high-frequency noise from 
 browsers and legitimate update orchestrators.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1057`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Scripting Interpreter Contextual Anomaly
 - **Azonosító:** `T1059.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious PowerShell or CMD execution by correlating shell interpreters 
 with high-risk parent processes (Office, Browsers, Web Servers) and obfuscation techniques.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1059`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Encoded PowerShell Command Execution
 - **Azonosító:** `T1059_001.yaml`
 - **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious execution of PowerShell using encoded commands combined with execution bypass or obfuscation flags. This technique is commonly used by attackers to evade detection and execute malicious payloads in memory.
-- **Hamis pozitívok:** Rare advanced administrative automation, Approved red team activity
 - **MITRE ATT&CK:** `001, T1027`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity AppleScript (osascript) Abuse Detection
 - **Azonosító:** `T1059_002.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious osascript execution by monitoring for 'do shell script' escapes, 
 base64 encoded payloads, and execution originating from untrusted parent processes 
 like browsers or mail clients.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Advanced Windows Command Shell Contextual Anomaly
 - **Azonosító:** `T1059_003.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious cmd.exe execution by correlating risky parent processes 
 (Web Servers, Office, SQL) with anomalous command-line patterns like 
 command chaining and discovery.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Unix Shell Abuse and Reverse Shell Detection
 - **Azonosító:** `T1059_004.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious Unix shell execution by monitoring for command injection 
 from web processes, reverse shell socket redirection, and fileless pipe-to-shell patterns.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity VBScript Contextual Anomaly Detection
 - **Azonosító:** `T1059_005.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious VBScript execution by filtering legitimate OS management scripts 
 and focusing on risky parent processes, unusual file locations, and 
 common obfuscation/download patterns used in malware delivery.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Python Interpreter Abuse Detection
 - **Azonosító:** `T1059_006.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious Python execution patterns, focusing on one-liner reverse shells, 
 interactive shell upgrades, and execution originating from high-risk network-facing 
 parent processes (Web Servers, SQL).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity JScript Interpreter Contextual Anomaly
 - **Azonosító:** `T1059_007.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious JScript execution by correlating wscript/cscript with 
 risky parent processes, untrusted file locations, and command-line arguments 
 typically used for obfuscation or remote payload retrieval.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Network Device CLI Manipulation
 - **Azonosító:** `T1059_008.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Kritikusan Magas (🛑 SIEM gyilkos kategória!)
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects critical unauthorized configuration changes on network devices, 
 focusing on anti-forensics (disabling logs), credential exposure, 
 and unauthorized data exfiltration (config export).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
-2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget.
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Cloud Shell Exploitation and Data Exfiltration
 - **Azonosító:** `T1059_009.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects unauthorized or malicious activities within Cloud Shell environments, 
 focusing on identity theft, log suppression, and the conversion of private 
 cloud resources to public access.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `009`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious SYSTEM Process Spawned from User Context
 - **Azonosító:** `T1068.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects suspicious processes running as SYSTEM that are spawned from user-initiated parent processes such as Explorer, browsers, or Office applications. This behavior may indicate privilege escalation, token manipulation, or UAC bypass exploitation.
-- **Hamis pozitívok:** Rare custom administrative tooling, Approved software installation using custom launchers
 - **MITRE ATT&CK:** `T1068`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Permission Groups Discovery (T1069)
 - **Azonosító:** `T1069.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic discovery of local or domain permission groups. 
 Focuses on reconnaissance patterns used to identify privileged accounts 
 while filtering out legitimate system/inventory noise through integrity and parent analysis.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1069`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Local Group Discovery (T1069.001)
 - **Azonosító:** `T1069_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted local group reconnaissance focusing on privileged accounts 
 (Administrators, RDP). Filters out legitimate system/inventory noise 
 through integrity level gating and parent-process correlation.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002)
 - **Azonosító:** `T1069_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic AD domain group discovery focusing on reconnaissance tools 
 (BloodHound, AdFind) and suspicious PowerShell patterns. Uses integrity level 
 and process lineage to minimize false positives from admin workstations.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003)
 - **Azonosító:** `T1069_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects systematic cloud group discovery by identifying mass reconnaissance patterns, 
 atypical User-Agents, and expansion of sensitive group properties. 
 Designed to filter out high-volume CSPM and IaC service principals.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Indicator Removal on Host (T1070)
 - **Azonosító:** `T1070.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted attempts to clear Windows Event Logs and high-value forensic artifacts 
 (USN Journal, Prefetch). Focuses on non-standard execution chains and specific 
 clearing of security-sensitive providers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1070, 001, 004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Security Event Log Cleared Using wevtutil.exe
 - **Azonosító:** `T1070_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects attempts to clear the Windows Security event log using wevtutil.exe, a common attacker technique used to cover tracks after credential access, lateral movement, or persistence.
-- **Hamis pozitívok:** Rare emergency log maintenance by administrators, Approved red team or penetration testing activity
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Linux Log Clearing and Journal Sabotage (T1070.002)
 - **Azonosító:** `T1070_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted attempts to clear or truncate Linux system logs and journald buffers. 
 Focuses on manual command-line patterns, shell redirection to log files, and 
 vacuuming of systemd journals outside of automated maintenance windows.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Mailbox Data Clearing and Rule Sabotage (T1070.003)
 - **Azonosító:** `T1070_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic mailbox data removal and the creation of malicious inbox rules. 
 Focuses on bulk deletion cmdlets and automated rule sets designed to suppress 
 security notifications or hide attacker communication.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Forensic Artifact and File Deletion (T1070.004)
 - **Azonosító:** `T1070_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted destruction of high-value forensic artifacts (USN Journal, Prefetch, Amcache) 
 and the use of secure wipe utilities. Focuses on non-standard process origins and 
 evasion techniques used to prevent post-incident recovery.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Network Share and Credential Removal (T1070.005)
 - **Azonosító:** `T1070_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic removal of network shares and stored credentials using wildcard 
 deletion and force flags. Distinguishes between manual user activity and 
 automated anti-forensic cleanup post-lateral movement.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Timestomp and MACE Attribute Manipulation (T1070.006)
 - **Azonosító:** `T1070_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects attempts to modify file timestamps (MACE attributes) to evade forensic analysis. 
 Focuses on direct object property manipulation in PowerShell and specialized 
 anti-forensic utilities, while filtering out legitimate installer behavior.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Network History and RDP Trace Removal (T1070.007)
 - **Azonosító:** `T1070_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted attempts to clear network connection history, focusing on RDP 
 Terminal Server Client MRU lists and network share metadata removal. 
 Filters out common helpdesk troubleshooting (DNS flush) unless part of a broader attack.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008)
 - **Azonosító:** `T1070_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted destruction of email storage (PST/OST) and Exchange Databases (EDB). 
 Focuses on programmatic deletion, database dismounting, and forensic wiping 
 patterns from untrusted processes or suspicious parent-child chains.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009)
 - **Azonosító:** `T1070_009.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the systematic removal of persistence mechanisms (Scheduled Tasks, Services, WMI) 
 focusing on forced deletion patterns and suspicious process lineages. 
 Filters out common software update cycles and MSI installer noise.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `009`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071)
 - **Azonosító:** `T1071.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Kritikusan Magas (🛑 SIEM gyilkos kategória!)
 - **Leírás:** Detects potential C2 communication by identifying anomalous network connections 
 initiated by non-browser processes, focusing on library loads (WinInet/WinHTTP) 
 and suspicious parent-child relationships.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, T1071`
 
 #### 🚨 Response Playbook
 1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
-2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget.
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity HTTP/S C2 Anomaly (T1071.001)
 - **Azonosító:** `T1071_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Kritikusan Magas (🛑 SIEM gyilkos kategória!)
 - **Leírás:** Detects potential C2 communication over HTTP/S by identifying anomalous 
 network connections from processes that typically lack networking logic, 
 or show signs of process hollowing and suspicious parent-child lineage.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
-2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget.
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity FTP/SFTP Protocol Anomaly (T1071.002)
 - **Azonosító:** `T1071_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Kritikusan Magas (🛑 SIEM gyilkos kategória!)
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects unauthorized use of file transfer protocols by monitoring for 
 non-interactive FTP/SFTP sessions, suspicious script-based transfers, 
 and anomalous parent-child process relationships (e.g., Office to FTP).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
-2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget.
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Mail Protocol Anomaly (T1071.003)
 - **Azonosító:** `T1071_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Kritikusan Magas (🛑 SIEM gyilkos kategória!)
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects unauthorized email-based C2 or exfiltration by identifying direct 
 mail protocol (SMTP, IMAP, POP3) connections from non-mail processes, 
 focusing on .NET/PowerShell automation and suspicious process lineages.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
-2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget.
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity DNS Tunneling & Beaconing (T1071.004)
 - **Azonosító:** `T1071_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects DNS tunneling and C2 by monitoring for high-entropy subdomains, 
 unusual query types (TXT, NULL), and DNS activity from non-network 
 native processes with specific focus on length and frequency.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Software Deployment Tool Abuse Detection
 - **Azonosító:** `T1072.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects the abuse of software deployment agents to execute malicious payloads. 
 Focuses on anomalous child processes (PowerShell, BitsAdmin, CertUtil) spawned 
 by deployment services, filtering out standard maintenance patterns.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1072`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Data Staging Anomaly (T1074)
 - **Azonosító:** `T1074.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects data staging by identifying anomalous file aggregation patterns, 
 low-compression archival switches, and mass-copy operations into 
 hidden or temporary system directories from untrusted shells.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1074`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001)
 - **Azonosító:** `T1074_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic local data staging by identifying anomalous file aggregation 
 patterns, specific low-compression or password-protected archival switches, 
 and mass-copy operations into hidden system directories from untrusted contexts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, T1074`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Remote Data Staging (T1074.002)
 - **Azonosító:** `T1074_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects remote data staging by identifying anomalous mass-file movements to 
 internal UNC paths, followed by archival commands with low-compression/encryption 
 flags, originating from untrusted process lineages.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Anomalous Logon via Valid Account
 - **Azonosító:** `T1078.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Belépési pont -> Megtelepedés`
 - **Leírás:** Detects successful logons using valid accounts that exhibit anomalous characteristics, 
 such as unusual logon types for service accounts or logons followed by immediate 
 sensitive command execution.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1078`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Default Account Abuse Detection
 - **Azonosító:** `T1078_001.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Belépési pont -> Megtelepedés`
 - **Leírás:** Detects successful logons using well-known default account names (Administrator, Guest, root) 
 originating from non-standard network locations or via interactive remote sessions (RDP). 
 Filters out common local system noise and internal automation.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Domain Account Lateral Movement Anomaly
 - **Azonosító:** `T1078_002.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects anomalous RDP or Network logons to critical infrastructure (DCs, SQL, File Servers) 
 originating from unauthorized source subnets or non-admin user accounts. 
 Implements strict filtering for machine accounts and known jump servers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Local Account Remote Access Detection
 - **Azonosító:** `T1078_003.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects successful remote logons (RDP, SMB, WinRM) using local accounts. 
 In a domain environment, local accounts should only be used for local console 
 access. Remote usage is a strong indicator of lateral movement or credential theft.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Cloud Account Compromise (Entra ID)
 - **Azonosító:** `T1078_004.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects successful cloud logons that exhibit high-risk indicators: 
 MFA bypass on privileged accounts, impossible travel patterns, 
 or the use of non-standard automation User-Agents by human accounts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Taint Shared Content (T1080)
 - **Azonosító:** `T1080.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
 - **Leírás:** Detects attempts to taint shared content by monitoring for suspicious 
 process-to-file-share interactions, focusing on macro-enabled templates, 
 shortcut hijacking, and binary replacement on UNC paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1080`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity System Information Discovery (T1082)
 - **Azonosító:** `T1082.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic system information discovery (OS, patches, architecture) 
 focusing on reconnaissance for exploit selection. Filters high-volume noise 
 from inventory agents and browsers using integrity levels and parent process gating.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1082`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity File and Directory Discovery (T1083)
 - **Azonosító:** `T1083.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted file and directory discovery focusing on sensitive data harvesting.
 Filters out legitimate system indexing, AV scans, and developer activities by analyzing 
 process integrity, parent-child relationships, and specific keyword patterns.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1083`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Use of net user or net localgroup via cmd.exe
 - **Azonosító:** `T1087.yaml`
 - **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects suspicious usage of cmd.exe executing net user or net localgroup commands, commonly used by attackers for account discovery or privilege escalation. The rule focuses on attacker-like execution context to reduce false positives.
-- **Hamis pozitívok:** Rare administrative troubleshooting, Approved penetration testing activity
 - **MITRE ATT&CK:** `T1087, T1098`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Local Account Discovery (T1087.001)
 - **Azonosító:** `T1087_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic local account and group enumeration. 
 Focuses on anomalous process lineages (e.g., discovery tools launched by web servers or 
 remote shells) and the use of modern enumeration methods like WMI/CIM.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Domain Account Discovery (T1087.002)
 - **Azonosító:** `T1087_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic Active Directory enumeration focusing on offensive LDAP filters 
 and non-standard process lineages. Filters legitimate administrative behavior 
 by excluding known service accounts and management tools.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Email Account Discovery (T1087.003)
 - **Azonosító:** `T1087_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic discovery of email accounts and Global Address Lists (GAL). 
 Focuses on non-interactive PowerShell sessions, mass-exporting recipients, 
 and anomalous access to local mail profile configurations by untrusted processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004)
 - **Azonosító:** `T1087_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic discovery of cloud accounts (AWS, Azure, GCP) focusing on 
 interactive shell sessions and anomalous command chaining. Filters legitimate 
 CI/CD and automation workloads based on process lineage and user context.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Proxy & Pivot Point Detection (T1090)
 - **Azonosító:** `T1090.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the creation of network proxies and port forwarding rules by correlating 
 high-risk native binaries (Netsh) with pivot-specific arguments that map 
 external listening ports to internal network assets.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1090`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Internal Proxy & Pivot Detection (T1090.001)
 - **Azonosító:** `T1090_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects internal network pivoting by identifying the configuration of 
 port forwarding to private RFC 1918 IP addresses from non-system 
 processes, excluding legitimate local virtualization and container traffic.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity External Proxy & Tunneling (T1090.002)
 - **Azonosító:** `T1090_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the use of non-standard external proxies by identifying hardcoded 
 credentials, custom PAC files, or proxy-overrides in high-risk binaries 
 launched from interactive or script interpreters.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002, T1090`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Multi-hop Proxy & Tor Detection (T1090.003)
 - **Azonosító:** `T1090_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects multi-hop proxying and Tor circuitry by identifying unauthorized 
 proxy chaining tools or hidden Tor clients running from non-standard 
 directories, focusing on control port manipulation and SOCKS5 chaining.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Domain Fronting Detection (T1090.004)
 - **Azonosító:** `T1090_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects domain fronting by identifying manual HTTP Host header overrides 
 within command-line arguments of common web-enabled LoLBins, 
 specifically targeting CDN-backed infrastructure redirection.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Process Execution from Removable Media
 - **Azonosító:** `T1091.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects the execution of script interpreters and LOLBins from non-system drives. 
 Focuses on patterns used by worms (like Raspberry Robin) and manual USB-based 
 attacks while filtering out common portable applications.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1091`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092)
 - **Azonosító:** `T1092.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects unauthorized C2 or data staging via removable media by identifying 
 non-interactive processes accessing hidden/system files on USB volumes, 
 focusing on automated script execution and Alternate Data Stream (ADS) abuse.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1092`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Non-Application Layer C2 (T1095)
 - **Azonosító:** `T1095.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects custom C2 communication via raw TCP/UDP sockets by identifying 
 the instantiation of low-level NetworkStreams and manual byte-array 
 buffer manipulation followed by socket write operations.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1095`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Account Manipulation - Persistence Focused
 - **Azonosító:** `T1098.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects suspicious and rare modifications to user account attributes that are 
 strongly associated with persistence and privilege escalation, such as 
 SID History injection, Kerberos Constrained Delegation changes, and 
 disabling password expiration for sensitive accounts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1098`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Entra ID Application Credential Addition
 - **Azonosító:** `T1098_001.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects when a new secret or certificate is added to an Entra ID application.
 Attackers use this to establish a backdoor via Service Principals.
 This rule filters out common Microsoft first-party apps and known CI/CD service principals.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Exchange Mailbox Permission Grant (T1098.002)
 - **Azonosító:** `T1098_002.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the granting of critical mailbox permissions (FullAccess, SendAs). 
 Filters out common service accounts and focuses on cross-tenant or 
 unauthorized administrative actions, especially on high-value targets.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Entra ID App Certificate Addition
 - **Azonosító:** `T1098_003.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the addition of a new certificate (public key) to an Entra ID application.
 Attackers use this for long-term persistence to act as the application's service principal.
 This rule is optimized to filter out automated Microsoft internal rotations and known CI/CD providers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Azure Role Assignment Escalation
 - **Azonosító:** `T1098_004.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects direct assignment of highly privileged Azure roles (Owner, Contributor, User Access Admin). 
 Filters out PIM (Privileged Identity Management) activations and known automation principals 
 to reduce noise and focus on manual privilege escalation.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Device Registration Persistence (T1098.005)
 - **Azonosító:** `T1098_005.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects suspicious device registrations in Entra ID. Attackers register their own devices 
 to bypass Conditional Access policies that require a "registered" device state.
 This rule filters out managed enrollments and focuses on unmanaged or scripted registrations.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity MFA Method Addition
 - **Azonosító:** `T1098_006.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects when a new MFA method is added to a user account from a non-trusted location 
 or without a fresh MFA challenge. This is a primary persistence technique for attackers 
 to maintain access after an initial account compromise.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Web Service C2 (T1102)
 - **Azonosító:** `T1102.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects C2 communication via legitimate cloud services by identifying 
 raw API or raw-content subdomains accessed by non-browser LoLBins, 
 script interpreters, or binaries running from suspicious paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1102`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Dead Drop Resolver (T1102.001)
 - **Azonosító:** `T1102_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the use of dead drop resolvers by identifying raw content retrieval 
 from social/code platforms, specifically filtering for suspicious parent-child 
 relationships and non-standard download methods.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Bidirectional Cloud C2 (T1102.002)
 - **Azonosító:** `T1102_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects interactive C2 communication via cloud APIs by identifying 
 specific write/read methods (POST/GET) issued by non-browser LoLBins 
 or binaries running from suspicious paths, excluding official clients.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity One-Way Web Service C2 (T1102.003)
 - **Azonosító:** `T1102_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects one-way C2 or data exfiltration via cloud services by correlating 
 specific API upload/download methods with non-standard process locations 
 and suspicious parent process lineages.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Multi-Stage C2 (T1104)
 - **Azonosító:** `T1104.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects multi-stage C2 communication by identifying fileless execution patterns 
 where the result of a network request is piped directly into memory-load 
 functions or script evaluators without intermediate disk writes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1104`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Use of Built-in Windows Tools for File Download and Code Execution
 - **Azonosító:** `T1105.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects suspicious usage of built-in Windows utilities such as PowerShell, bitsadmin, and certutil to download files and execute code, a common attacker technique for payload staging and execution. The rule focuses on attacker-typical patterns and execution context to reduce false positives.
-- **Hamis pozitívok:** Rare advanced administrative automation, Approved red team or malware simulation activity
 - **MITRE ATT&CK:** `T1105, T1218`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Native API Abuse via LOLBins
 - **Azonosító:** `T1106.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects the suspicious use of Native API execution through trusted Windows 
 binaries (LOLBins). Focuses on scenarios where compilers or system tools 
 are abused by untrusted parent processes to perform memory injection.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1106`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Brute Force & Tooling (T1110)
 - **Azonosító:** `T1110.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the execution of brute-force tools and scripted credential guessing by identifying 
 suspicious command-line arguments (password lists, user files) and unauthorized 
 process lineages from untrusted locations.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1110`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Multiple Failed Login Attempts for Single User (Possible Password Guessing)
 - **Azonosító:** `T1110_001.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟡 (medium)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects multiple failed authentication attempts for the same user account within a short time window, which may indicate password guessing or brute-force activity. The rule excludes common sources of authentication noise to reduce false positives.
-- **Hamis pozitívok:** User repeatedly entering wrong password, Misconfigured application using user credentials, Legacy systems retrying authentication
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Credential Export & Cracking (T1110.002)
 - **Azonosító:** `T1110_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects attempts to extract credential databases (SAM, SYSTEM, NTDS.dit) for offline 
 cracking and identifies the execution of password recovery tools with high precision 
 by filtering out legitimate backup and system maintenance processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Password Spraying (T1110.003)
 - **Azonosító:** `T1110_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects password spraying attacks by identifying suspicious automated authentication 
 logic where a single process iterates through a list of accounts. It filters for 
 untrusted process locations and known attack module signatures.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004)
 - **Azonosító:** `T1110_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects credential stuffing by identifying automated tools and interpreters 
 (Python, .NET) processing large credential combo-lists or using known 
 stuffing framework arguments from untrusted locations.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111)
 - **Azonosító:** `T1111.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects MFA evasion by identifying unauthorized access to browser master keys (Local State) 
 and session databases (Cookies) by untrusted processes. It also monitors for 
 Reverse Proxy phishing frameworks (Evilginx, Muraena) and token manipulation tools.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1111`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112)
 - **Azonosító:** `T1112.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
 - **Leírás:** Detects high-risk modifications to the Windows Registry aimed at disabling 
 security controls (Defender, UAC, LSA) or enabling unauthorized remote access.
 Optimized to ignore standard system updates and focus on non-standard process behavior.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1112`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Screen Capture Anomaly (T1113)
 - **Azonosító:** `T1113.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized screen capture by identifying suspicious .NET/GDI+ API 
 calls within PowerShell, hidden PSR.exe sessions, and automated image 
 serialization to temporary/public directories.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1113`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114)
 - **Azonosító:** `T1114.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized automated email collection by identifying suspicious 
 COM object instantiation (Outlook.Application), mailbox export requests, 
 and programmatic access to Inbox/Sent folders from non-standard shells.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, 002, T1114`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Local Email Harvesting Anomaly (T1114.001)
 - **Azonosító:** `T1114_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized automated local email collection by identifying suspicious 
 COM object instantiation (Outlook.Application), folder index targeting (Inbox/Sent), 
 and programmatic evasion (Visible=$false) from untrusted shells.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Remote Email Export Anomaly (T1114.002)
 - **Azonosító:** `T1114_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized remote email collection by identifying systematic 
 mailbox export requests that use sensitive keyword filters and redirect 
 output to non-standard internal UNC paths or administrative shares.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Email Forwarding Rule Anomaly (T1114.003)
 - **Azonosító:** `T1114_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized email forwarding rules by identifying programmatic 
 redirection to external/untrusted domains combined with sensitive keyword 
 filtering, originating from suspicious process lineages.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Clipboard Data Spying (T1115)
 - **Azonosító:** `T1115.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects automated clipboard monitoring and theft by identifying persistent 
 polling loops, unmanaged assembly loads for clipboard access, and 
 suspicious process lineages (Webshells, Office macros) accessing the API.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1115`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Automated Collection (T1119)
 - **Azonosító:** `T1119.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects highly suspicious, automated data collection by monitoring for 
 wildcard-based recursive file transfers of sensitive extensions into 
 common staging areas, originating from interactive or web shells.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1119`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Peripheral Device Discovery (T1120)
 - **Azonosító:** `T1120.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted peripheral device enumeration focusing on USB and storage devices.
 Filters out legitimate system PnP activity and driver management by analyzing 
 process integrity, parent-child relationships, and specific metadata queries.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1120`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Audio Capture & Spying (T1123)
 - **Azonosító:** `T1123.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized audio recording by correlating low-level multimedia API 
 calls (winmm, dsound) with suspicious process lineages (Shells, Office, W3WP) 
 and anomalous command-line arguments used by offensive toolsets.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1123`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity System Time Discovery (T1124)
 - **Azonosító:** `T1124.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted system time or time zone discovery. Focuses on anomalous process 
 lineages (e.g., Office apps, Web servers) and specific automation patterns 
 used for sandbox evasion or geofencing checks.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1124`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Video Capture Anomaly (T1125)
 - **Azonosító:** `T1125.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized video capture by identifying programmatic access to 
 multimedia frameworks (DirectShow, Media Foundation) via suspicious interpreters, 
 standalone media binaries (FFmpeg) with redirection, or headless shell sessions.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1125`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)
 - **Azonosító:** `T1127.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the abuse of trusted developer utilities (MSBuild, CSC, JSC) to proxy 
 malicious code execution. Filters out legitimate CI/CD and IDE activity 
 by focusing on suspicious parentage and command-line anomalies.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1127`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001)
 - **Azonosító:** `T1127_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects malicious MSBuild.exe execution by identifying anomalous parent processes, 
 untrusted command-line arguments (like inline XML tasks), and excluding 
 standard development and CI/CD environments.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, T1127`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Shared Module Load from Untrusted Path
 - **Azonosító:** `T1129.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects trusted system binaries or productivity apps loading DLLs from 
 untrusted, world-writable directories. This is a primary indicator of 
 DLL Side-Loading or Search Order Hijacking.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1129`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132)
 - **Azonosító:** `T1132.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects suspicious data encoding/decoding sequences used for C2 stealth. 
 Focuses on programmatic Base64/Hex conversion within non-standard process 
 lineages and the abuse of Certutil for payload deployment.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, T1132`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Standard Encoding & Payload Injection (T1132.001)
 - **Azonosító:** `T1132_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects suspicious standard encoding usage by identifying embedded 
 executable headers (MZ/PE) within Base64 strings, anomalous 
 programmatic decoding, and high-entropy command lines from 
 non-administrative processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Non-Standard Encoding & XOR Obfuscation (T1132.002)
 - **Azonosító:** `T1132_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects custom encoding and obfuscation by identifying programmatic byte-level 
 manipulation (XOR), backtick-based string fragmentation, and character-code 
 reconstruction in non-interactive process contexts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Anomalous External Remote Service Access Context
 - **Azonosító:** `T1133.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects suspicious successful logins via external remote services (RDP/VPN). 
 It filters for non-standard source IPs and focuses on high-risk account types 
 or technical anomalies in the logon event that are typical for automated 
 credential stuffing or lateral movement from external jump boxes.
-- **Hamis pozitívok:** Misconfigured internal load balancers showing their own IP or no IP., New VPN ranges not yet added to the 'filter_authorized_gateways' list.
 - **MITRE ATT&CK:** `T1133`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Access Token Manipulation & Impersonation (T1134)
 - **Azonosító:** `T1134.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects high-risk access token manipulation by monitoring for suspicious 
 Integrity Level transitions and the use of specialized tools that interact 
 with LSASS to duplicate or steal security tokens.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1134`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Token Impersonation via LSASS Handle Duplication (T1134.001)
 - **Azonosító:** `T1134_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects token theft by monitoring for suspicious handle duplication requests 
 targeting LSASS.exe. It filters for known legitimate system processes and 
 security agents to ensure high-fidelity alerts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Create Process with Token (T1134.002)
 - **Azonosító:** `T1134_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects unauthorized process creation using duplicated tokens. 
 Monitors for suspicious integrity level transitions from Medium to System 
 without standard UAC elevation (Consent.exe) or legitimate service startup.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Make and Impersonate Token (T1134.003)
 - **Azonosító:** `T1134_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects unauthorized creation of security tokens using explicit credentials. 
 Monitors for suspicious command line arguments from offensive tools and 
 correlates with Logon Type 9 (NewCredentials) anomalies from untrusted parents.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Parent PID Spoofing & Process Tree Violation (T1134.004)
 - **Azonosító:** `T1134_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects Parent PID spoofing by identifying violations of the Windows process 
 hierarchical model. Specifically targets critical system processes (LSASS, 
 Spooler, CSRSS) spawning shells or script interpreters, which is architecturally 
 impossible in a healthy environment.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro SID-History Injection & DS Manipulation (T1134.005)
 - **Azonosító:** `T1134_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects sIDHistory injection by monitoring Directory Service object changes (Event 5136) 
 and correlating them with suspicious RPC calls or unauthorized LSASS access on Domain Controllers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Network Share Discovery (T1135)
 - **Azonosító:** `T1135.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic network share discovery and content crawling. 
 Focuses on automated enumeration patterns (loops, UNC sweeps) 
 originating from non-standard parent processes and specialized tools like Snaffler.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1135`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Unauthorized Account Creation (T1136)
 - **Azonosító:** `T1136.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects local or domain account creation by identifying suspicious process lineages 
 and command-line patterns while filtering out authorized system and deployment tools.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1136`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Unauthorized Local Account Creation (T1136.001)
 - **Azonosító:** `T1136_001.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects local user account creation by analyzing suspicious process lineages 
 and command-line arguments. Filters out automated MDM, GPO, and known installer 
 activities to maintain a low false-positive rate.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Unauthorized Domain Account Creation (T1136.002)
 - **Azonosító:** `T1136_002.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects domain account creation by identifying suspicious process lineages and 
 non-standard execution environments. Filters out authorized IAM, HR-sync tools, 
 and official AD management consoles.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Unauthorized Cloud Account Creation (T1136.003)
 - **Azonosító:** `T1136_003.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects manual cloud account creation by correlating the actor type, 
 source IP reputation, and the absence of authorized provisioning service principals.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Office Application Startup Persistence (T1137)
 - **Azonosító:** `T1137.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized Office persistence by monitoring Registry modifications
 originating from non-standard processes or pointing to suspicious file locations.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1137`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Office Global Template Integrity (T1137.001)
 - **Azonosító:** `T1137_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects high-risk modifications to the Office global template (Normal.dotm) by 
 identifying non-Office processes or suspicious file creation patterns in the 
 Templates directory.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Office Test DLL Persistence (T1137.002)
 - **Azonosító:** `T1137_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the creation or modification of the 'Office Test' Registry key used for 
 DLL sideloading persistence. High-fidelity detection filters for non-standard 
 paths and unauthorized parent processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Outlook Custom Forms Persistence (T1137.003)
 - **Azonosító:** `T1137_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized Outlook Custom Forms persistence by monitoring 
 non-standard Registry modifications and suspicious process spawning 
 from Outlook related to form script execution.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004)
 - **Azonosító:** `T1137_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized modification of Outlook Folder Home Pages and the 
 enabling of WebView bypass keys. This technique is used to execute 
 arbitrary code when a user clicks on an Outlook folder.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Office Security Policy Tampering (T1137.005)
 - **Azonosító:** `T1137_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized weakening of Microsoft Office security policies. 
 Focuses on global macro enablement, addition of untrusted network locations, 
 and policy modifications originating from non-standard processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Office Add-in Binary Persistence (T1137.006)
 - **Azonosító:** `T1137_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized Office Add-in (.wll, .xll) persistence by filtering for 
 untrusted file locations, unsigned binaries, and suspicious writing processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy Deobfuscation/Decoding (T1140)
 - **Azonosító:** `T1140.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects high-fidelity deobfuscation by monitoring native tools (certutil, expand) 
 decoding binaries from non-executable extensions (txt, jpg, xml) initiated 
 by suspicious parents or targeting sensitive temp directories.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1140`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Browser Extension Force-Install Persistence (T1176)
 - **Azonosító:** `T1176.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the creation of 'ExtensionInstallForcelist' or 'ExtensionInstallSources' registry keys.
 Attackers use these to force-install malicious extensions that cannot be removed by the user 
 and to allow installation from non-official webstores.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1176`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Browser Session Hijacking (T1185)
 - **Azonosító:** `T1185.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects advanced browser session hijacking by monitoring unauthorized access 
 to cookie databases from untrusted/unsigned processes or suspicious locations 
 like \Temp or \AppData.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1185`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Forced Authentication (T1187)
 - **Azonosító:** `T1187.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects forced authentication attempts (NTLM Relay/Coercion) by monitoring 
 suspicious UNC path patterns, WebDAV redirection, and specific RPC 
 interface exploitation used to trigger outbound authentication.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1187`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Browser-Originating Shell or System Tool Execution
 - **Azonosító:** `T1189.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects suspicious child processes spawned by web browsers. This pattern is highly 
 indicative of successful exploitation via a Drive-by Compromise (T1189), 
 where an exploit kit triggers a payload or a shell directly from the browser's memory.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1189`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server
 - **Azonosító:** `T1190.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟡 (medium)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects potential Cross-Site Scripting (XSS) attempts by identifying common reflected and encoded XSS payloads in HTTP requests, focusing on parameter-based injection patterns and excluding typical automated scanners to reduce false positives.
-- **Hamis pozitívok:** Manual security testing by administrators, Approved penetration testing, Rare application-specific encoding behavior
 - **MITRE ATT&CK:** `T1190`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+
 
 ---
-
 ## High-Fidelity Supply Chain Compromise Detection (Post-Update Anomaly)
 - **Azonosító:** `T1195.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects suspicious child processes spawned by legitimate software updaters or signed 
 installers. Focuses on discovery and credential access tools that should never be 
 part of a standard software maintenance or update cycle.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1195`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Dependency Poisoning Detection
 - **Azonosító:** `T1195_001.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects suspicious child processes spawned by package managers or build tools. 
 Focuses on reconnaissance and exfiltration activities triggered during library 
 installation or compilation (pre/post-install scripts).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Compromised Binary Activity (Post-Update)
 - **Azonosító:** `T1195_002.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects suspicious child processes spawned by trusted business applications that 
 have been compromised at the binary level. It focuses on the transition from 
 legitimate app execution to unauthorized discovery or script execution.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Hardware/Firmware Manipulation Detection
 - **Azonosító:** `T1195_003.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects the execution of firmware-flashing tools or low-level hardware access 
 utilities in suspicious contexts. This targets potential post-exploitation 
 of compromised hardware or attempts to install UEFI rootkits.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious File Download via Bitsadmin (High Fidelity)
 - **Azonosító:** `T1197.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects suspicious file downloads performed using bitsadmin.exe, a deprecated but still abused Windows LOLBAS utility. The rule focuses on attacker-typical usage patterns, execution context, and download targets to reduce false positives.
-- **Hamis pozitívok:** Rare legacy administrative scripts, Approved red team or malware simulation
 - **MITRE ATT&CK:** `T1197`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Trusted Relationship Abuse Detection
 - **Azonosító:** `T1199.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects suspicious discovery and reconnaissance activities originating from 
 trusted ingress points (RDP, Citrix, VPN). It filters out standard administrative 
 behavior by focusing on specific parent-child process chains and unusual arguments.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1199`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Malicious Hardware-Induced Command Execution (HID Injection)
 - **Azonosító:** `T1200.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects suspicious command execution patterns typical for malicious HID devices (Rubber Ducky, Bash Bunny). 
 Focuses on rapid shell spawning with "stealth" flags originating from the user session context 
 without standard GUI interaction.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1200`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Password Policy Discovery (T1201)
 - **Azonosító:** `T1201.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted enumeration of domain/local password policies. 
 Focuses on reconnaissance patterns used to calibrate brute-force 
 attacks while filtering out legitimate system/admin noise.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1201`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Indirect Command Execution (T1202)
 - **Azonosító:** `T1202.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the execution of binaries that can be used to proxy command execution. 
 Focuses on non-standard parent processes and specific command-line arguments 
 for pcalua.exe, conhost.exe, and forfiles.exe to minimize false positives.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1202`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Client-Side Exploitation and Shell Spawning
 - **Azonosító:** `T1203.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious child processes spawned by client applications (Office, Browsers, 
 PDF Readers). Focuses on shell execution, discovery tools, and LOLBins originating 
 from sandboxed or low-integrity application contexts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1203`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity)
 - **Azonosító:** `T1204.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious child processes spawned by Microsoft Office applications that are indicative of macro abuse, DDE exploitation, or document-based malware execution. The rule focuses on attacker- typical child processes, command-line patterns, and user-writable execution context to minimize false positives.
-- **Hamis pozitívok:** Rare developer automation using Office COM, Approved red team / phishing simulation exercises
 - **MITRE ATT&CK:** `T1204, T1059`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity User Execution of Malicious Link (T1204.001)
 - **Azonosító:** `T1204_001.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont -> Kódfuttatás`
 - **Leírás:** Detects suspicious child processes spawned by web browsers, email clients, or 
 instant messengers. Focuses on LOLBins and script interpreters launched with 
 network-related or obfuscated arguments, indicative of malicious link execution.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity User Execution of Malicious File
 - **Azonosító:** `T1204_002.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont -> Kódfuttatás`
 - **Leírás:** Detects suspicious child processes spawned by office productivity apps, 
 PDF readers, or archive tools. Specifically targets macro-initiated 
 or exploit-driven execution of system tools (LOLBins).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Execution from Mounted Virtual Disk (T1204.003)
 - **Azonosító:** `T1204_003.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont -> Kódfuttatás`
 - **Leírás:** Detects suspicious binaries or scripts executing from a virtual disk drive (ISO, VHD, VHDX).
 Focuses on LOLBins and script interpreters launched via explorer.exe from non-C: drives,
 a common pattern for malware bypassing Mark-of-the-Web.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel
 - **Azonosító:** `T1204_004.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Alacsony (✅ Jól monitorozható)
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Észleli a rosszindulatú linkeket tartalmazó adathalász e-maileket URL-rövidítők, újonnan regisztrált domainek és feladó spoofing alapján.
-- **Hamis pozitívok:** Belső biztonsági kampányok, Legális tömeges levelezők
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
-1. **Header elemzés:** Ellenőrizd a feladó valódi IP címét és az SPF/DKIM/DMARC státuszt.
-2. **Link/Melléklet:** Vizsgáld meg az URL-t sandbox környezetben (pl. URLScan.io).
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Traffic Signaling & Port Knocking (T1205)
 - **Azonosító:** `T1205.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects attempts to implement or trigger Port Knocking/Traffic Signaling. 
 Focuses on the registration of raw packet capturing drivers (Npcap/WinPcap) 
 and suspicious firewall rule modifications initiated from untrusted shells.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1205`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Port Knocking & Raw Socket Listener (T1205.001)
 - **Azonosító:** `T1205_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized implementation of Port Knocking by monitoring the 
 registration of raw packet capturing drivers and suspicious firewall 
 modifications (UDP/ICMP/LocalPort Any) initiated from untrusted shells.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Socket Filter & WFP Traffic Signaling (T1205.002)
 - **Azonosító:** `T1205_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized registration of network socket filters or WFP callouts. 
 Monitors for low-level driver loading and WFP database manipulation from 
 untrusted process lineages, a common technique for stealthy port knocking.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207)
 - **Azonosító:** `T1207.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the creation of a new nTDSDSA object or the registration of critical 
 Domain Controller SPNs by a non-DC account. This is indicative of a Rogue DC 
 or DCShadow attack.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1207`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Exploitation of Remote Services (T1210)
 - **Azonosító:** `T1210.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects successful post-exploitation patterns where a network service spawns an 
 interactive shell or a proxy binary. Specifically tuned to catch RCE via SMB, 
 RPC, Spooler, and WMI while ignoring standard IT orchestration.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1210`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211)
 - **Azonosító:** `T1211.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects potential exploitation for privilege escalation by identifying 
 anomalous child processes from vulnerable parents with specific focus on 
 breaking out of application sandboxes (browsers, office, pdf).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1211`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Credential Service Exploitation (T1212)
 - **Azonosító:** `T1212.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects potential exploitation of authentication services (LSASS, LogonUI, Spooler) 
 by identifying illegal child processes, unbacked memory execution, and known 
 exploitation patterns while filtering legitimate security tool interference.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1212`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Repository Dump (T1213)
 - **Azonosító:** `T1213.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized mass data collection from internal knowledge bases (Confluence, Jira, SharePoint) 
 by identifying suspicious API-driven export commands originating from untrusted 
 process contexts or temporary directories.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1213`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Confluence Scraping (T1213.001)
 - **Azonosító:** `T1213_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized mass content extraction from Atlassian Confluence by 
 identifying suspicious API-driven read/export patterns originating from 
 untrusted shell contexts or temporary directories.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity SharePoint Mass Data Exfiltration (T1213.002)
 - **Azonosító:** `T1213_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized mass data collection from SharePoint by identifying 
 suspicious PnP PowerShell usage, bulk REST API queries, and unauthorized 
 SharePoint Online Management Shell activity from non-standard contexts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Knowledge Base Scraping (T1213.003)
 - **Azonosító:** `T1213_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic knowledge base exfiltration (Wiki, Stack Overflow for Teams) 
 by identifying recursive mirroring flags, mass archival logic, and 
 non-browser scripting engines targeting internal documentation URLs.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity System Script Proxy Execution (T1216)
 - **Azonosító:** `T1216.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the abuse of trusted Windows signed scripts to proxy malicious code. 
 Focuses on network-based execution triggers and anomalous parent-child 
 process relationships to minimize false positives.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1216`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001)
 - **Azonosító:** `T1216_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the abuse of the signed Windows script 'pubprn.vbs' to proxy the execution 
 of remote scriptlets (.sct). Focuses on argument injection using the 'script:' 
 protocol and anomalous process lineage.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Browser Information Discovery (T1217)
 - **Azonosító:** `T1217.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized discovery of browser metadata and history. 
 Focuses on non-browser processes accessing sensitive profile files (SQLite/JSON) 
 using command-line tools or anomalous redirection patterns.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1217`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218)
 - **Azonosító:** `T1218.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects anomalous execution of trusted Windows binaries used to proxy malicious code. 
 Focuses on cross-process boundary calls (e.g., Office to Rundll32) and suspicious 
 command-line arguments like URLs or non-DLL extensions.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1218`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity HH.exe Proxy Execution (T1218.001)
 - **Azonosító:** `T1218_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the abuse of hh.exe to execute malicious code via CHM files or remote ITS protocols. 
 Focuses on non-standard parent processes and command-line flags used for de-compilation 
 or fetching remote payloads, while filtering out legitimate help file usage.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Control.exe Proxy Execution (T1218.002)
 - **Azonosító:** `T1218_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the abuse of control.exe to load malicious .CPL or DLL files from untrusted paths.
 Leverages OriginalFileName to catch renamed binaries and focuses on cross-boundary 
 process execution (e.g., Office or Scripting hosts launching Control Panel).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity MsiExec Proxy Execution (T1218.003)
 - **Azonosító:** `T1218_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the abuse of msiexec.exe to execute malicious payloads. 
 Focuses on non-standard parent-child relationships (e.g., Office to MsiExec) 
 and remote resource fetching while filtering out legitimate enterprise installers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity InstallUtil Proxy Execution (T1218.004)
 - **Azonosító:** `T1218_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the execution of InstallUtil.exe to proxy malicious code. 
 Focuses on the /u flag, non-standard parent processes, and execution 
 from writable directories, while filtering out legitimate .NET installations.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Mshta Execution of Remote Script (High Fidelity)
 - **Azonosító:** `T1218_005.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious execution of mshta.exe used to run scripts directly from remote URLs, a common LOLBAS technique used by attackers for initial execution and payload staging.
-- **Hamis pozitívok:** Rare administrative scripts executed from internal web servers, Approved red team or penetration testing activity
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Msiexec Installation from Remote URL (High Fidelity)
 - **Azonosító:** `T1218_007.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious use of msiexec.exe to install MSI packages directly from remote URLs, a technique commonly abused by attackers as a LOLBAS method. The rule focuses on attacker-typical command-line patterns and execution context to reduce false positives.
-- **Hamis pozitívok:** Rare manual software installation by advanced administrators, Approved red team or penetration testing activity
 - **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Odbcconf Proxy Execution (T1218.008)
 - **Azonosító:** `T1218_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the abuse of odbcconf.exe to load malicious DLLs via the REGSVR action. 
 Focuses on command-line anomalies, suspicious parent processes, and 
 non-standard file paths to minimize false positives from legitimate installers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Regsvcs/Regasm Proxy Execution (T1218.009)
 - **Azonosító:** `T1218_009.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the abuse of regsvcs.exe or regasm.exe to execute malicious .NET assemblies. 
 Focuses on the /U flag for proxy execution, non-standard parent processes, 
 and execution from writable/untrusted paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `009, T1218`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity)
 - **Azonosító:** `T1218_010.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious usage of regsvr32.exe commonly associated with LOLBAS abuse (Squiblydoo technique), including execution of scriptlets, remote payloads, or DLLs from user-writable locations using attacker- typical command-line arguments.
-- **Hamis pozitívok:** Rare legacy applications using scriptlets, Approved red team activity
 - **MITRE ATT&CK:** `010`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity)
 - **Azonosító:** `T1218_011.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious usage of rundll32.exe commonly associated with LOLBAS abuse, including JavaScript execution, HTML applications, and loading payloads from remote or user-writable locations. The rule minimizes false positives by focusing on attacker-typical command-line patterns and execution context.
-- **Hamis pozitívok:** Rare legacy applications abusing rundll32 for scripting, Approved red team or malware research activity
 - **MITRE ATT&CK:** `011`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Verclsid Proxy Execution (T1218.012)
 - **Azonosító:** `T1218_012.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the abuse of verclsid.exe to proxy the execution of malicious COM objects (DLLs). 
 Filters out legitimate system-initiated verifications by focusing on suspicious 
 parent-child relationships and anomalous command-line triggers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `012`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Rundll32 Proxy Execution (T1218.013)
 - **Azonosító:** `T1218_013.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects anomalous rundll32.exe execution by focusing on suspicious command-line 
 arguments, non-standard file extensions, and untrusted execution paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `013`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity MMC Proxy Execution (T1218.014)
 - **Azonosító:** `T1218_014.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the abuse of mmc.exe to execute malicious code via Component Object Model (COM) 
 hijacking or untrusted console files (.msc). Filters out legitimate administrative actions.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `014`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern
 - **Azonosító:** `T1219.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects suspicious creation of services associated with legitimate remote administration tools (e.g. PsExec) when used outside approved enterprise management patterns. This behavior is commonly observed during lateral movement by attackers abusing admin tools.
-- **Hamis pozitívok:** Approved penetration testing, Emergency troubleshooting from non-standard hosts (rare)
 - **MITRE ATT&CK:** `T1219`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity XSL Script Processing (T1220)
 - **Azonosító:** `T1220.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects suspicious WMIC execution with XSL stylesheets located in non-standard 
 directories or remote URLs, which is a common technique to bypass application 
 whitelisting and execute arbitrary scripts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1220`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Office Template Injection (T1221)
 - **Azonosító:** `T1221.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Kritikusan Magas (🛑 SIEM gyilkos kategória!)
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects Microsoft Office applications fetching remote templates from non-Microsoft 
 infrastructure, followed by the creation of temporary template files.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1221`
 
 #### 🚨 Response Playbook
 1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
-2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget.
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Permissions Modification (T1222)
 - **Azonosító:** `T1222.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects suspicious file permission modifications by identifying native tools 
 (icacls, takeown) used with broad access flags (Full Control, Everyone) 
 initiated by non-standard parent processes or from suspicious paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, T1222`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Windows File Permissions Modification (T1222.001)
 - **Azonosító:** `T1222_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted file permission modifications by identifying broad access 
 grants (Full Control, Everyone) or inheritance blocking, initiated by 
 suspicious/untrusted processes or targeting sensitive directories.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Linux File Permissions Modification (T1222.002)
 - **Azonosító:** `T1222_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted Linux permission tampering by identifying high-risk 
 attribute changes (SUID, Immutability) or mass modifications in sensitive 
 system paths initiated by non-privileged or web-facing service accounts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Execution Guardrails Discovery (T1480)
 - **Azonosító:** `T1480.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted execution guardrails by identifying anomalous environment 
 discovery patterns initiated by non-privileged users or suspicious parents, 
 filtering out common administrative and system noise.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1480`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Environmental Keying Discovery (T1480.001)
 - **Azonosító:** `T1480_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted environmental keying by identifying hardware fingerprinting 
 and machine-specific registry lookups initiated by suspicious, unbacked, 
 or non-standard parent processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Domain Trust Discovery (T1482)
 - **Azonosító:** `T1482.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic enumeration of domain and forest trusts. 
 Focuses on anomalous process lineage (e.g., interactive shells on workstations) 
 and specific reconnaissance patterns used by tools like BloodHound/SharpHound.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1482`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484)
 - **Azonosító:** `T1484.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects unauthorized modifications to critical Domain Policies by monitoring 
 file system writes to the SYSVOL folder and GPO link changes, filtering out 
 standard administrative tools (GPMC).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1484`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Group Policy Modification & Abuse (T1484.001)
 - **Azonosító:** `T1484_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects unauthorized GPO modifications by correlating file system writes to critical 
 policy templates in SYSVOL with process-level anomalies. Filters out DFSR 
 replication and standard GPMC management consoles to minimize false positives.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)
 - **Azonosító:** `T1484_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects high-risk modifications to Domain Trust relationships, focusing on 
 the disabling of SID Filtering (Quarantine) and unauthorized trust creation. 
 Correlates AD object changes with known administrative context.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Data Destruction (T1485)
 - **Azonosító:** `T1485.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic data destruction by monitoring for VSS deletion, 
 secure file shredding (sdelete, cipher), and bulk recursive deletions 
 initiated from suspicious parent processes or targeting non-temp directories.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1485, T1490`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ransomware Preparation Activity Detected on Windows Host (High Fidelity)
 - **Azonosító:** `T1486.yaml`
 - **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects ransomware preparation activity by identifying multiple recovery-inhibition and defense-evasion actions executed within a short time window. This includes disabling recovery options, deleting shadow copies, and stopping security-related services.
-- **Hamis pozitívok:** Rare manual disaster recovery testing, Advanced troubleshooting by senior administrators
 - **MITRE ATT&CK:** `T1486, T1490, 001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Service Stop (T1489)
 - **Azonosító:** `T1489.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized stopping of critical system and security services 
 by monitoring service control tools originating from suspicious process 
 lineages or targeting high-value defense mechanisms (EDR, VSS, AV).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1489`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity)
 - **Azonosító:** `T1490.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects suspicious deletion of Volume Shadow Copies using vssadmin.exe, commonly observed during ransomware and destructive attacks. The rule focuses on attacker-typical command-line arguments, non-service execution context, and excludes known backup solutions to minimize false positives.
-- **Hamis pozitívok:** Rare manual administrative maintenance, Approved disaster recovery testing
 - **MITRE ATT&CK:** `T1490`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Defacement (T1491)
 - **Azonosító:** `T1491.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized website defacement by monitoring for suspicious file 
 manipulations (move, copy, echo) within web-root directories originating 
 from non-standard or compromised service processes (e.g., w3wp.exe, httpd.exe).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1491, 001, 002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Internal Defacement (T1491.001)
 - **Azonosító:** `T1491_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects internal system defacement by monitoring for unauthorized modifications 
 to desktop wallpapers, legal notices, and logon banners via Registry or CLI, 
 specifically filtering out GPO-driven and system-initiated changes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity External Defacement (T1491.002)
 - **Azonosító:** `T1491_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized external website defacement by identifying suspicious file 
 manipulation commands (move, copy, echo) executed by web server worker processes 
 within sensitive webroot directories.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Firmware Corruption (T1495)
 - **Azonosító:** `T1495.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects potential firmware corruption or unauthorized flashing by monitoring 
 low-level hardware access tools and firmware update utilities originating 
 from untrusted process lineages (e.g., browsers, office apps, or temp folders).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1495`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Resource Hijacking (T1496)
 - **Azonosító:** `T1496.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized resource hijacking (cryptomining) by monitoring for 
 specific miner protocols (stratum), algorithm flags, and hardware 
 optimization arguments originating from untrusted process lineages.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1496`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497)
 - **Azonosító:** `T1497.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects sophisticated sandbox evasion by monitoring for rapid, multi-vector 
 virtualization checks (BIOS, MAC, CPU, Disk) initiated by untrusted processes 
 within suspicious directories.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1497, 001, 003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity VM Artifact Discovery (T1497.001)
 - **Azonosító:** `T1497_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized discovery of virtualization artifacts by non-system, 
 untrusted processes. Filters out legitimate installers and system services 
 to focus on malware evasion techniques.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002)
 - **Azonosító:** `T1497_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects sophisticated user interaction evasion by identifying un-signed or 
 suspiciously located processes that query human-centric APIs (mouse, keyboard, recent files) 
 without having a legitimate UI context.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)
 - **Azonosító:** `T1497_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects sophisticated time-based evasion by monitoring for non-standard delay 
 mechanisms (ping, choice, timeout) initiated by untrusted binaries, specifically 
 targeting long-duration stalls used to exhaust sandbox analysis limits.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Network DoS (T1498)
 - **Azonosító:** `T1498.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted network denial of service attempts (flooding, amplification) 
 by monitoring for low-level packet manipulation tools and high-bandwidth 
 stress tests originating from untrusted process lineages.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1498, 001, 002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001)
 - **Azonosító:** `T1498_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted direct network flooding (SYN, UDP, ICMP) by monitoring 
 for aggressive packet generation parameters (micro-intervals, unlimited bandwidth) 
 originating from untrusted process lineages.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Endpoint DoS (T1499)
 - **Azonosító:** `T1499.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted endpoint denial of service by monitoring for forced termination 
 of critical system processes (LSASS, CSRSS) and resource exhaustion loops 
 originating from untrusted process lineages.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1499, 003, 004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity OS Self-Destruction (T1499.001)
 - **Azonosító:** `T1499_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted OS self-destruction by monitoring for forced termination of 
 critical kernel processes (csrss.exe, wininit.exe) and malicious use of 
 system debuggers to trigger immediate BSOD, specifically filtering out 
 trusted management and update processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Service Exhaustion (T1499.002)
 - **Azonosító:** `T1499_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects endpoint denial of service via service exhaustion by monitoring 
 unauthorized service termination and persistent configuration changes (disabling) 
 targeting security and infrastructure services, originating from suspicious lineages.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity OS Self-Destruction (T1499.003)
 - **Azonosító:** `T1499_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted OS self-destruction by monitoring for forced termination of 
 critical kernel processes (csrss.exe, wininit.exe) and malicious use of 
 system debuggers to trigger immediate BSOD, specifically filtering out 
 trusted management and update processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Resource Exhaustion (T1499.004)
 - **Azonosító:** `T1499_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted resource exhaustion attempts (CPU/RAM/IO) by identifying 
 infinite loop patterns and massive memory allocation attempts 
 originating from suspicious process lineages.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Web Shell Execution Patterns (T1505.003)
 - **Azonosító:** `T1505.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects high-confidence indicators of web shell activity by monitoring web server processes 
 spawning interactive shells or system reconnaissance tools. Includes strict filtering 
 for legitimate .NET compilation and IIS administration.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1505`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro SQL Server Command Shell Execution (T1505.001)
 - **Azonosító:** `T1505_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés -> Kódfuttatás`
 - **Leírás:** Detects unauthorized OS command execution through SQL Server extended stored procedures 
 and CLR assemblies. Filters legitimate SQL Agent maintenance while flagging 
 suspicious discovery commands and configuration changes (xp_cmdshell, sp_configure).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro IIS Native Module Injection (T1505.002)
 - **Azonosító:** `T1505_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the registration or manual injection of IIS modules by monitoring 
 appcmd.exe usage, direct applicationHost.config edits, and DLL loads 
 from non-standard or user-writable paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Webshell Upload or Interaction Detected on Web Server (High Fidelity)
 - **Azonosító:** `T1505_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Kódfuttatás`
 - **Leírás:** Detects potential webshell activity by identifying suspicious script uploads to web-accessible directories and subsequent interactions using command-execution style parameters. The rule minimizes false positives by focusing on attacker-typical paths, parameters, and access patterns.
-- **Hamis pozitívok:** Legitimate file upload functionality with misconfiguration, Developer debugging on non-production systems, Approved penetration testing
 - **MITRE ATT&CK:** `003, T1059`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004)
 - **Azonosító:** `T1505_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized firmware manipulation by monitoring low-level hardware access 
 tools and driver registrations initiated from non-standard process chains. 
 Focuses on SPI flash writing and image injection attempts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Terminal Services DLL Hijacking (T1505.005)
 - **Azonosító:** `T1505_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized modification of Terminal Services (RDP) service DLLs 
 and providers. Monitors for ServiceDll and ProviderPath tampering from 
 untrusted processes and non-standard file paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Software Discovery (T1518)
 - **Azonosító:** `T1518.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted software discovery focusing on security product identification. 
 Uses integrity level gating, parent-process correlation, and specific keyword 
 analysis to minimize false positives from system inventory tools.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1518`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Security Software Discovery (T1518.001)
 - **Azonosító:** `T1518_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted discovery of security products (AV/EDR/HIPS) and sandboxes. 
 Focuses on keyword-specific filtering (findstr/grep) and anomalous process 
 lineages (Office apps, web servers, or non-elevated shells).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Exploit-Grade Unauthorized Container Image Execution (Implant Container Image)
 - **Azonosító:** `T1525.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont -> Megtelepedés`
 - **Leírás:** Detects execution of container images that are not sourced from approved registries and are executed outside of CI/CD or system namespaces, indicating potential use of implanted container images for persistence or initial access.
-- **Hamis pozitívok:** Explicitly approved manual container testing on isolated nodes, Emergency break-glass debugging with documented approval
 - **MITRE ATT&CK:** `T1525`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Service Discovery (T1526)
 - **Azonosító:** `T1526.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic cloud service enumeration (Lambda, Secrets, KeyVault) 
 focusing on anomalous execution environments (interactive shells on non-dev hosts) 
 and output redirection patterns used for automated harvesting.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1526`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528)
 - **Azonosító:** `T1528.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized extraction of application access tokens and session cookies. 
 Monitors for suspicious access to Cloud CLI configurations (Azure, AWS, GCP) 
 and browser-based credential stores by untrusted processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1528`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity System Shutdown/Reboot (T1529)
 - **Azonosító:** `T1529.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized or suspicious system shutdown/reboot commands 
 by monitoring for forced operations (-f) originating from untrusted 
 process lineages (browsers, office apps, temp folders).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1529`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Storage Data Theft (T1530)
 - **Azonosító:** `T1530.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized data exfiltration from cloud storage providers (AWS, Azure, GCP) 
 by identifying suspicious CLI arguments, inline credential injection, and 
 anomalous process lineages originating from non-admin contexts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1530`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Account Access Removal (T1531)
 - **Azonosító:** `T1531.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized account removal or lockout by identifying bulk deletions, 
 targeting of administrative accounts via CLI, or destructive account actions 
 originating from non-standard process lineages (e.g., Office apps, web servers).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1531`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Internal Spearphishing Detection (T1534)
 - **Azonosító:** `T1534.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects advanced internal spearphishing attempts by identifying anomalous 
 programmatic access to the Outlook MAPI interface, suspicious child processes, 
 and command-line flags used for mass-mailing or attachment injection.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1534`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Unused Service Manipulation (T1535)
 - **Azonosító:** `T1535.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects the modification of existing Windows service paths (ImagePath) to untrusted 
 locations or binaries. Filters out legitimate OS servicing and common third-party 
 updaters to ensure high-fidelity alerts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1535`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Account Exfil (T1537)
 - **Azonosító:** `T1537.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects data exfiltration via native cloud CLI tools by monitoring for 
 cross-account synchronization, manual credential injection in CLI, 
 and transfers initiated from non-administrative process lineages.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1537`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538)
 - **Azonosító:** `T1538.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects anomalous generation of federated login tokens and automated cloud 
 dashboard access. Focuses on CLI commands used to bypass standard MFA 
 via console sign-in tokens and suspicious browser launches from non-interactive shells.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1538`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Web Session Cookie Theft (T1539)
 - **Azonosító:** `T1539.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized access to browser session cookies. Monitors for non-browser 
 processes accessing both 'Cookies' and 'Local State' (encryption key) files, 
 identifying exfiltration attempts via LOLBins and suspicious scripts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1539`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Pre-OS Boot Manipulation (T1542)
 - **Azonosító:** `T1542.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized firmware or bootloader modifications. Monitors for 
 suspicious mounting of the EFI partition, unauthorized use of firmware 
 flashing tools, and UEFI variable manipulation from non-standard parent processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1542`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro ROM Kit & UEFI Firmware Tampering (T1542.001)
 - **Azonosító:** `T1542_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized firmware manipulation by monitoring high-risk driver 
 registrations and firmware update utilities initiated from suspicious 
 process trees, specifically targeting BYOVD and SPI flash access.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Component Firmware Tampering (T1542.002)
 - **Azonosító:** `T1542_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized peripheral firmware (NIC, SSD, GPU) modification by 
 identifying stand-alone flashing tools initiated from untrusted process 
 chains or non-standard file locations.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Bootkit Persistence & EFI Tampering (T1542.003)
 - **Azonosító:** `T1542_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized bootloader modification by monitoring for BCD integrity bypasses, 
 manual EFI partition mounting, and suspicious boot path redirection. 
 Filters out legitimate OS repairs and BitLocker operations.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004)
 - **Azonosító:** `T1542_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized firmware manipulation by monitoring low-level hardware access 
 tools and driver registrations initiated from non-standard process chains. 
 Focuses on SPI flash writing and image injection attempts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro DHCP/PXE Boot Hijacking (T1542.005)
 - **Azonosító:** `T1542_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized modification of DHCP Options 66 (Boot Server) and 67 (Bootfile Name).
 Attackers use this to redirect network boot requests to a malicious TFTP server.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services
 - **Azonosító:** `T1543.yaml`
 - **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects suspicious behavior where a non-administrative user attempts to stop or modify multiple sensitive Windows services within a short time window. This behavior is commonly associated with defense evasion or persistence preparation activities.
-- **Hamis pozitívok:** Rare helpdesk troubleshooting using non-standard privileges, Misconfigured enterprise automation
 - **MITRE ATT&CK:** `T1543, T1562`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001)
 - **Azonosító:** `T1543_001.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized creation of Launch Agents by monitoring suspicious process lineages 
 and identifying unsigned or script-based execution targets within the .plist.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Systemd Service Persistence (T1543.002)
 - **Azonosító:** `T1543_002.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized creation or modification of systemd units by monitoring 
 suspicious process lineages and unusual executable paths within the service file.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Unauthorized Windows Service Installation (T1543.003)
 - **Azonosító:** `T1543_003.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized Windows service creation by monitoring Event ID 7045 and process creation. 
 Focuses on suspicious binary paths, shell-spawned services, and non-standard service executables.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Unauthorized macOS Launch Daemon (T1543.004)
 - **Azonosító:** `T1543_004.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized creation of System Launch Daemons by monitoring file events 
 and verifying the integrity of the writing process and the target binary signature.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro WMI Event Subscription Persistence (T1546.003)
 - **Azonosító:** `T1546.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized WMI event subscriptions by correlating consumer types with 
 suspicious command-line patterns and excluding trusted system orchestrators.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1546, 003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro File Association Hijacking (T1546.001)
 - **Azonosító:** `T1546_001.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized changes to file associations in the Registry by monitoring 
 suspicious actor processes and non-standard executable paths in 'shell\open\command'.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Screensaver Persistence Detection (T1546.002)
 - **Azonosító:** `T1546_002.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized screensaver hijacking by monitoring Registry writes to 'SCRNSAVE.EXE'. 
 Filters out GPO-driven changes and validates binary extensions and trusted paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity)
 - **Azonosító:** `T1546_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the creation of permanent WMI event subscriptions used for persistence. The rule focuses on attacker-typical combinations of EventFilter, CommandLineEventConsumer, and FilterToConsumerBinding created via WMIC or PowerShell within the root\subscription namespace, while excluding known enterprise monitoring agents.
-- **Hamis pozitívok:** Custom enterprise monitoring or compliance scripts, DFIR or red team activities
 - **MITRE ATT&CK:** `T1546, 003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro AppCert DLL Persistence Detection (T1546.004)
 - **Azonosító:** `T1546_004.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized registration of AppCert DLLs by monitoring the Session Manager 
 Registry key. It filters out trusted system installers and requires non-standard 
 paths or suspicious process lineages to trigger.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Shell Trap Persistence Detection (T1546.005)
 - **Azonosító:** `T1546_005.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized shell trap persistence by monitoring writes to shell profile files 
 that include 'trap' commands combined with suspicious network payloads or execution patterns.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Mach-O LC_LOAD_DYLIB Injection (T1546.006)
 - **Azonosító:** `T1546_006.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized modification of Mach-O binaries to inject malicious dylibs. 
 Focuses on non-developer tools modifying Application binaries and checks for 
 suspicious dylib search paths or unsigned library loads.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Netsh Helper DLL Persistence (T1546.007)
 - **Azonosító:** `T1546_007.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized Netsh Helper DLL registration by monitoring Registry writes 
 and command-line arguments. Filters out known-good installers and signed Microsoft binaries.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro WER SilentProcessExit Persistence (T1546.008)
 - **Azonosító:** `T1546_008.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized persistence via Windows Error Reporting (WER) SilentProcessExit. 
 Focuses on the registration of 'MonitorProcess' commands which execute when a process 
 crashes or exits, excluding known debugging environments.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro AppInit_DLLs Persistence Detection (T1546.009)
 - **Azonosító:** `T1546_009.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized persistence via AppInit_DLLs by monitoring Registry writes 
 to the 'AppInit_DLLs' and 'LoadAppInit_DLLs' values. 
 Filters out signed Microsoft binaries and trusted system installers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `009`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro AppCert DLL Persistence Detection (T1546.010)
 - **Azonosító:** `T1546_010.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized registration of AppCert DLLs by monitoring the Session Manager 
 Registry key. It filters out trusted system installers and requires non-standard 
 paths or suspicious process lineages to trigger.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `010`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Application Shimming Persistence Detection (T1546.011)
 - **Azonosító:** `T1546_011.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized Shim database installation by monitoring sdbinst.exe 
 execution with suspicious source paths and direct Registry writes to InstalledSDB.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `011`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro IFEO Debugger Hijacking Detection (T1546.012)
 - **Azonosító:** `T1546_012.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects unauthorized Debugger injection via Image File Execution Options (IFEO). 
 Filters out legitimate developer tools and focuses on high-risk system binaries 
 and accessibility features (Sticky Keys, Utility Manager).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `012`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro PowerShell Profile Injection Detection (T1546.013)
 - **Azonosító:** `T1546_013.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized automated modification of PowerShell profiles. 
 Filters out legitimate manual editing via text editors and focuses on 
 programmatic injection from shells or non-standard parent processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `013`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro WMI Event Subscription Persistence (T1546.014)
 - **Azonosító:** `T1546_014.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized WMI event subscriptions by monitoring the creation of 
 EventFilters and Command/Script Consumers. Filters out known administrative 
 tools and focuses on non-standard scripted execution.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `014`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious COM Hijacking for User-Level Persistence (High Fidelity)
 - **Azonosító:** `T1546_015.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects suspicious COM hijacking attempts used for user-level persistence by monitoring registry modifications of CLSID InprocServer32 and LocalServer32 entries pointing to non-standard execution paths. The rule focuses on HKCU modifications combined with scripting or LOLBin execution to reduce false positives.
-- **Hamis pozitívok:** Rare legacy applications using user-level COM registration, Custom enterprise automation frameworks
 - **MITRE ATT&CK:** `T1546, 015`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro MSI Installer Custom Action Persistence (T1546.016)
 - **Azonosító:** `T1546_016.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects suspicious child processes spawned by msiexec.exe originating from non-standard 
 directories. This targets malicious MSI Custom Actions used for persistence or privilege escalation.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `016`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása
 - **Azonosító:** `T1547.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Észleli a gyanús beállításjegyzékbeli vagy indítómappák módosításait, amelyeket az adatok megőrzése érdekében használnak, a nem szabványos elérési utakra és a gyanús végrehajtókra összpontosítva.
-- **Hamis pozitívok:** Szoftverfrissítők, amelyek ideiglenes mappából futtatnak telepítőt a következő bejelentkezéskor., Egyedi vállalati scriptek a Startup mappában.
 - **MITRE ATT&CK:** `T1547, 001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Registry Run Key Modification for User Persistence (High Fidelity)
 - **Azonosító:** `T1547_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects suspicious registry modifications used to establish user-level persistence via Windows Run and RunOnce keys. The rule focuses on non-standard executable locations combined with scripting engines to reduce false positives from legitimate software installations.
-- **Hamis pozitívok:** Custom enterprise logon scripts, Rare legacy software using user-level Run keys
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity LSA Authentication Package Persistence
 - **Azonosító:** `T1547_002.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the addition of unauthorized Authentication Packages in the LSA registry key.
 Attackers use this for SYSTEM-level persistence and credential harvesting.
 This rule filters standard Windows packages and monitors for DLLs outside System32.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Time Provider Persistence (T1547.003)
 - **Azonosító:** `T1547_003.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the registration of a new Windows Time Provider. 
 Attackers use this for SYSTEM-level persistence by loading a malicious DLL into svchost.exe.
 This rule filters standard Windows DLLs and targets non-System32 paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Winlogon Helper DLL Persistence (T1547.004)
 - **Azonosító:** `T1547_004.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized modifications to Winlogon helper keys (Userinit, Shell). 
 Focuses on 'appending' multiple executables or using non-standard system paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity SSP DLL Persistence (T1547.005)
 - **Azonosító:** `T1547_005.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the addition of unauthorized DLLs to the LSA Security Packages registry key.
 Attackers use this for persistence and cleartext credential theft.
 Filters standard Windows SSPs and alerts on unmanaged modifications.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Kernel Driver Registration (T1547.006)
 - **Azonosító:** `T1547_006.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the registration of a new kernel-mode driver service.
 Attackers use this for rootkit-level persistence and to disable security tools.
 Optimized to flag drivers in non-standard paths and suspicious manual service creation.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Browser Session Persistence (T1547.007)
 - **Azonosító:** `T1547_007.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized modification of browser session or preference files by non-browser processes. 
 Attackers use this to force browsers to open malicious URLs upon startup for persistence.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity LSASS Driver/Package Persistence (T1547.008)
 - **Azonosító:** `T1547_008.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the registration of new LSA plugins, notification packages, or drivers. 
 Attackers use this to load malicious code into the lsass.exe process for 
 persistence and real-time credential harvesting.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Shortcut Modification Detection
 - **Azonosító:** `T1547_009.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the creation or modification of LNK files by suspicious processes (PowerShell, CMD, etc.)
 in startup folders or taskbar paths. This is a common technique for persistence.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `009`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity AppCert DLL Persistence (T1547.010)
 - **Azonosító:** `T1547_010.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized registration of AppCert DLLs. These DLLs are loaded into 
 every process that calls CreateProcess, making it a powerful persistence and injection vector.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `010`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Application Shimming Persistence (T1547.011)
 - **Azonosító:** `T1547_011.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the installation of a new Shim database (.sdb) using sdbinst.exe.
 Attackers use shims to inject DLLs, bypass security controls, or maintain persistence.
 This rule filters legit installers and flags suspicious parent-child relationships.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `011`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity COM Hijacking Persistence (T1547.012)
 - **Azonosító:** `T1547_012.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the creation of COM object handlers in HKCU that point to suspicious locations.
 Focuses on InprocServer32 and LocalServer32 keys, which are primary targets for hijacking.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `012`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Email Client Helper Persistence (T1547.013)
 - **Azonosító:** `T1547_013.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the registration of unauthorized email client helpers or COM add-ins.
 Focuses on DLLs registered from user-writable paths and suspicious registry writers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `013`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Active Setup Persistence (T1547.014)
 - **Azonosító:** `T1547_014.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the creation or modification of Active Setup 'StubPath' registry keys by non-system processes.
 Attackers use this to achieve persistence that executes once per user upon logon.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `014`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity COM Hijacking Persistence (T1547.015)
 - **Azonosító:** `T1547_015.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the creation of COM object handlers in HKCU that point to suspicious, 
 user-writable locations. Attackers hijack CLSIDs to achieve stealthy persistence 
 within legitimate system processes like explorer.exe.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `015`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Privilege Escalation via Registry Hijacking (T1548.002)
 - **Azonosító:** `T1548.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects UAC bypass attempts by monitoring unauthorized Registry modifications 
 to shell open commands. Specifically filters for trusted installers and 
 system-initiated changes to minimize false positives.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1548, 002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Setuid/Setgid Bit Manipulation (T1548.001)
 - **Azonosító:** `T1548_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects unauthorized SUID/SGID bit escalation by monitoring chmod/chown 
 execution in world-writable directories and suspicious reconnaissance 
 patterns, while filtering out legitimate package managers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## UAC Bypass via Fodhelper Registry Hijack (High Fidelity)
 - **Azonosító:** `T1548_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects UAC bypass attempts abusing fodhelper.exe by monitoring registry hijacking of the ms-settings protocol combined with suspicious child process execution. This rule focuses on user-context auto-elevation to reduce false positives.
-- **Hamis pozitívok:** Advanced administrative automation using fodhelper (rare), DFIR or red team activity
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Sudoers Manipulation and Sudo Abuse (T1548.003)
 - **Azonosító:** `T1548_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects unauthorized sudoers file modifications and sudo caching abuse. 
 Focuses on NOPASSWD additions, timestamp_timeout manipulation, and 
 dangerous environment variable injections like LD_PRELOAD.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro AppleScript Privilege Escalation (T1548.004)
 - **Azonosító:** `T1548_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects unauthorized AppleScript elevation attempts. Specifically monitors 
 osascript execution with "administrator privileges" from untrusted parent 
 processes such as browsers, office suites, or temporary directories.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005)
 - **Azonosító:** `T1548_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects unauthorized modification of XDG desktop entries or shortcuts that attempt 
 to execute SUID binaries or leverage pkexec for privilege escalation. 
 Focuses on modifications in user-writable directories by untrusted processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Alternate Authentication Material (T1550)
 - **Azonosító:** `T1550.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects the use of stolen hashes or tickets for lateral movement by identifying 
 NTLM/Kerberos protocol anomalies, such as RC4 downgrades and restricted admin 
 logon types. Filters out legitimate system management tools.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1550, 002, 003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Application Access Token Abuse (T1550.001)
 - **Azonosító:** `T1550_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the theft of application access tokens by identifying unauthorized access to 
 IdentityCRL and TokenBroker stores, as well as the use of bearer tokens in command-line utilities.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002)
 - **Azonosító:** `T1550_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects Pass-the-Hash (PtH) by identifying anomalous NTLM loopback authentication, 
 restricted admin logon types (LogonType 9 via seclogo), and known credential injection 
 tool patterns while excluding legitimate service accounts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Pass-the-Ticket Detection (T1550.003)
 - **Azonosító:** `T1550_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects Pass-the-Ticket (PtH) by identifying Kerberos encryption downgrades (RC4), 
 anomalous ticket flags (Rubeus/Mimikatz defaults), and unauthorized ticket injection 
 into the LSA process memory.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Pass-the-Session Detection (T1550.004)
 - **Azonosító:** `T1550_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized web session theft by monitoring for non-browser processes 
 accessing both the encrypted AES key (Local State) and the cookie database (Cookies/Network).
 Excludes legitimate browser update and synchronization mechanisms.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Unsecured Credentials Discovery (T1552)
 - **Azonosító:** `T1552.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted discovery of credentials in files, registry, and shell history. 
 Uses advanced correlation between search tools (findstr, grep, PowerShell), 
 sensitive file extensions, and high-entropy keywords.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, 002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Credentials In Files Discovery (T1552.001)
 - **Azonosító:** `T1552_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted, recursive searches for credentials in configuration files and scripts. 
 Correlates search tools (findstr, grep, PowerShell) with high-risk file extensions 
 and anomalous parent processes to minimize false positives from dev/admin activity.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Credentials In Registry Discovery (T1552.002)
 - **Azonosító:** `T1552_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized, recursive, or bulk extraction of sensitive registry keys 
 containing credentials (PuTTY, WinSCP, RDP, LSA secrets). Correlates search 
 commands with suspicious parent processes to minimize false positives.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002, T1552`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Shell History & Console Discovery (T1552.003)
 - **Azonosító:** `T1552_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized extraction of shell history files (.bash_history, ConsoleHost_history.txt). 
 Focuses on non-shell processes accessing these files and the use of exfiltration-related 
 commands (base64, curl, redirection) combined with history file paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Private Key Discovery (T1552.004)
 - **Azonosító:** `T1552_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted discovery of private cryptographic keys (SSH, PGP, Certificates). 
 Focuses on command-line content searches for private key headers and recursive 
 directory traversal by untrusted processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Credential Discovery (T1552.005)
 - **Azonosító:** `T1552_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized extraction of cloud credentials (AWS, Azure, GCP) from local 
 config files. Filters legitimate CLI usage and focuses on anomalous process behavior 
 like redirection, encoding, or access from web servers and remote shells.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity GPP Password Discovery (T1552.006)
 - **Azonosító:** `T1552_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized manual or scripted discovery of passwords in Group Policy Preferences. 
 Focuses on non-system processes performing string searches for 'cpassword' within 
 the SYSVOL share, identifying tools like PowerSploit, Empire, or manual LOLBin usage.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Container Secret Discovery (T1552.007)
 - **Azonosító:** `T1552_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted discovery of secrets (K8s tokens, Cloud keys, Env vars) within containers. 
 Filters legitimate entrypoint scripts and monitoring agents while focusing on 
 interactive shell sessions and anomalous command chaining (e.g., env | grep).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity GPP Password Discovery (T1552.008)
 - **Azonosító:** `T1552_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted discovery of encrypted passwords (cpassword) in Group Policy Preference XML files. 
 Filters legitimate GPO engine activity by focusing on command-line string searches 
 originating from interactive or remote shells.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Subvert Trust Controls (T1553)
 - **Azonosító:** `T1553.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects attempts to subvert trust controls by force-installing root certificates 
 or modifying security zones/MotW settings from non-standard processes and paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004, 005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001)
 - **Azonosító:** `T1553_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects attempts to disable macOS Gatekeeper or programmatically remove the 
 quarantine attribute from files. Focuses on non-interactive shells and 
 suspicious paths to reduce false positives from developers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, T1553`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity SIP Hijacking and Trust Subversion (T1553.002)
 - **Azonosító:** `T1553_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
 - **Leírás:** Detects unauthorized modification of Subject Interface Packages (SIP) and Trust Providers. 
 Focuses on DLL registrations from non-standard or user-writable paths which is a 
 common technique to make malicious binaries appear as validly signed.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003)
 - **Azonosító:** `T1553_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized additions to the Windows Catalog database. 
 Focuses on non-system accounts and suspicious source paths to prevent 
 unsigned malware from appearing as validly signed by the OS.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Root Certificate Injection (T1553.004)
 - **Azonosító:** `T1553_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the programmatic installation of a Root Certificate into the 
 Trusted Root store. Focuses on high-risk command-line arguments and 
 suspicious process lineages to eliminate common false positives.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity MotW Bypass & Zone Subversion (T1553.005)
 - **Azonosító:** `T1553_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects programmatic removal or subversion of the Mark of the Web (MotW). 
 Focuses on non-interactive ADS manipulation and suspicious registry 
 modifications that lower security zone settings.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Code Integrity & DSE Subversion (T1553.006)
 - **Azonosító:** `T1553_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects attempts to subvert Windows Code Integrity and Driver Signature Enforcement (DSE). 
 Focuses on BCDEDIT flags and registry modifications that allow unsigned kernel drivers 
 to load, while filtering out legitimate OS maintenance and installers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Client Binary Integrity Compromise (T1554)
 - **Azonosító:** `T1554.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the modification or replacement of trusted client binaries by unauthorized processes. 
 Focuses on cases where the writing process is a LOLBin or the file lacks a valid vendor signature.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1554`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)
 - **Azonosító:** `T1555.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
 - **Leírás:** Észleli a böngésző hitelesítőadat-tároló fájljaihoz való gyanús hozzáférést nem böngészőfolyamatok által. A szabály az ismert hitelesítőadat-adatbázisokhoz való olvasási hozzáférésre összpontosít, valamint a gyanús végrehajtási kontextusra, hogy csökkentse a téves riasztásokat, amelyek a biztonsági mentési ügynököktől, víruskereső szoftverektől és böngészőfrissítésektől származnak.
-- **Hamis pozitívok:** Egyedi jelszókezelő eszközök, Kriminalisztikai vagy DFIR tevékenységek, Ritka vállalati végpontkezelési feladatok
 - **MITRE ATT&CK:** `T1555`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Vault Credential Harvesting (T1555.001)
 - **Azonosító:** `T1555_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized credential extraction from Windows Vault by monitoring for 
 command-line data redirection, suspicious API strings, and non-standard 
 process lineages, while filtering out legitimate browser and system update noise.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Securityd Memory Dumping (T1555.002)
 - **Azonosító:** `T1555_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized attempts to dump or read the memory of the 'securityd' process. 
 It focuses on non-standard debugger usage and memory mapping tools targeting 
 securityd, while strictly filtering Apple-signed diagnostic utilities.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Browser Credential Harvesting (T1555.003)
 - **Azonosító:** `T1555_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized access and extraction of browser credential databases. 
 It targets command-line abuse (copying/archiving) and suspicious interpreter 
 behavior targeting sensitive profile files like 'Login Data' or 'Cookies'.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Windows Credential Manager Harvesting (T1555.004)
 - **Azonosító:** `T1555_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized credential harvesting via cmdkey.exe by identifying 
 suspicious command-line redirection, non-interactive parent processes, 
 and known credential dumping tool signatures.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Password Manager Extraction (T1555.005)
 - **Azonosító:** `T1555_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized access or exfiltration of password manager databases 
 by identifying suspicious file operations (copying, archiving) and 
 untrusted process lineages targeting .kdbx, .opvault, and other vault files.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Secret Harvesting (T1555.006)
 - **Azonosító:** `T1555_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized access or exfiltration of cloud provider credentials (AWS, Azure, GCP). 
 It specifically targets command-line tools (archivers, interpreters) accessing 
 sensitive config paths while excluding official cloud CLI binaries and known DevOps agents.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration
 - **Azonosító:** `T1556.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects exploitation-grade modification of the Windows authentication process where a non-system process registers a new authentication-related DLL from a user-writable directory into LSA, SSP, or Credential Provider registry locations, strongly indicating credential interception.
-- **Hamis pozitívok:** Extremely rare, explicitly approved third-party authentication extensions, Legacy SSO components with insecure installation practices (should be allowlisted)
 - **MITRE ATT&CK:** `T1556`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Exploit-Grade Security Support Provider Hijacking (LSA SSP)
 - **Azonosító:** `T1556_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects exploitation-grade Security Support Provider (SSP) hijacking by identifying unauthorized modification of the LSA Security Packages registry value to register a new, non-system DLL from a user-writable directory by a non-trusted process or account.
-- **Hamis pozitívok:** Extremely rare, explicitly approved third-party SSP deployments, Legacy authentication extensions with insecure installers (should be allowlisted)
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Exploit-Grade Password Filter DLL Hijacking via LSA Notification Packages
 - **Azonosító:** `T1556_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects exploitation-grade installation of a malicious Password Filter DLL by identifying unauthorized modification of the LSA Notification Packages registry value to add a new DLL located in a user-writable directory by a non-trusted process or account. This behavior strongly indicates credential interception on Domain Controllers.
-- **Hamis pozitívok:** Explicitly approved custom password policy extensions (should be extremely rare and allowlisted), Controlled red team or malware research environments
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro PAM Integrity Hijacking & Backdoor (T1556.003)
 - **Azonosító:** `T1556_003.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized modification of PAM configuration or binary modules 
 by identifying non-package-manager writes to /etc/pam.d/ and /lib/security/.
 Specifically filters for automated configuration tools to reduce false positives.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Network Device Authentication Hijacking (T1556.004)
 - **Azonosító:** `T1556_004.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Kritikusan Magas (🛑 SIEM gyilkos kategória!)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized modifications to AAA (Authentication, Authorization, and Accounting) 
 settings or local user databases on network devices. Focuses on manual bypasses 
 performed outside of authorized management subnets.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
-2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget.
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro SID History Injection Correlation (T1556.005)
 - **Azonosító:** `T1556_005.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects the injection of highly privileged SIDs into the sIDHistory attribute of a user. 
 This targets the "Ghost Admin" scenario where a user gains Domain Admin rights 
 without being a member of the group.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Entra ID MFA Method Hijacking (T1556.006)
 - **Azonosító:** `T1556_006.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects high-risk modifications to MFA methods in Entra ID by correlating 
 successful method changes with suspicious entry points or administrative anomalies.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Hybrid Identity Sync Manipulation (T1556.007)
 - **Azonosító:** `T1556_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects unauthorized manipulation of the Entra ID (formerly Azure AD) Connect sync process.
 Focuses on MSOL account abuse from non-sync servers and unauthorized ADSync PowerShell usage.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Network-to-Cloud Auth Hijacking (T1556.008)
 - **Azonosító:** `T1556_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects high-risk modifications to Enterprise Applications and Conditional Access 
 policies used by network devices (VPNs, Firewalls). Focuses on MFA bypasses 
 and unauthorized credential additions to service principals.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557)
 - **Azonosító:** `T1557.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized system configuration changes required for AiTM attacks, 
 including IP Forwarding enablement and LLMNR/NetBIOS poisoning tool execution, 
 while filtering out legitimate VPN and virtualization noise.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1557`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity LLMNR/NBT-NS Poisoning (T1557.001)
 - **Azonosító:** `T1557_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects LLMNR/NBT-NS poisoning and SMB relay tools (Responder, Inveigh) by identifying 
 unauthorized processes attempting to bind to network resolution ports combined with 
 specific attacker command-line signatures.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity ARP Poisoning Detection (T1557.002)
 - **Azonosító:** `T1557_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized ARP poisoning attempts by monitoring for IP Forwarding 
 enablement and the execution of packet manipulation tools from untrusted 
 locations, specifically filtering out virtualization and VPN noise.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity DHCP Spoofing Detection (T1557.003)
 - **Azonosító:** `T1557_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized DHCP spoofing attempts by identifying processes attempting to act 
 as a rogue DHCP server. It specifically looks for gateway/DNS hijack arguments 
 combined with untrusted process locations and non-system users.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Kerberos Attack Detection (T1558)
 - **Azonosító:** `T1558.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects sophisticated Kerberos ticket forgery and harvesting. 
 Focuses on encryption downgrade (RC4/0x17), targeted service ticket requests (Kerberoasting), 
 and offensive tool artifacts while filtering legitimate LSASS and system behavior.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1558, 003, 004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Golden Ticket Forgery & Injection (T1558.001)
 - **Azonosító:** `T1558_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the creation and injection of forged Kerberos TGTs (Golden Tickets). 
 Focuses on the mandatory presence of the KRBTGT hash or AES key in command lines, 
 combined with ticket injection (Pass-the-Ticket) patterns.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Silver Ticket Forgery & Injection (T1558.002)
 - **Azonosító:** `T1558_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the creation and injection of forged Kerberos Service Tickets (Silver Tickets). 
 Focuses on the mandatory presence of service-specific SPNs (cifs, mssql, http) 
 and the provision of service account hashes in the command line.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Gyanús Kerberos TGS jegykérés (Kerberoasting)
 - **Azonosító:** `T1558_003.yaml`
 - **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Észleli a gyanús Kerberos Service Ticket (TGS) kéréseket, amelyek Kerberoasting támadásra utalhatnak.  A szabály fókuszál a gyenge titkosítási típusokra (RC4) és szűri a gyakori legális zajt.
-- **Hamis pozitívok:** Régi (legacy) alkalmazások, amelyek csak RC4 titkosítást támogatnak, Olyan környezetek, ahol a "Kerberos AES" nincs kényszerítve a szervizfiókokon, Bizonyos szkennerek vagy adminisztratív eszközök
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity AS-REP Roasting & LDAP Enumeration (T1558.004)
 - **Azonosító:** `T1558_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects AS-REP Roasting attacks by monitoring for specific LDAP queries targeting 
 the DONT_REQ_PREAUTH bit (4194304) and offensive tool parameters used for 
 hash extraction (Rubeus, Impacket, PowerView).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Indirect IPC and COM Execution
 - **Azonosító:** `T1559.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious indirect process creation via COM/DDE/WMI. 
 Focuses on 'orphan' processes where an Office app or browser triggers 
 a system proxy to execute code, bypassing standard parent-child monitoring.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1559, 001, 002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity)
 - **Azonosító:** `T1559_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** A gyanús nevesített csővezetékek létrehozásának nagy pontosságú észlelése, amelyek gyakran kapcsolódnak az oldalirányú mozgáshoz és a kihasználás utáni keretrendszerekhez. A szabály az ismert rosszindulatú csővezeték-neveket, a véletlenszerű csővezeték-mintákat, a LOLBin végrehajtási kontextust és a szigorú engedélyezési listákat ötvözi a téves riasztások minimalizálása érdekében.
-- **Hamis pozitívok:** Custom in-house IPC mechanisms, Rare administrative tooling using randomized pipe names
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Office DDE Contextual Anomaly
 - **Azonosító:** `T1559_002.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious process spawning via Microsoft Office Dynamic Data Exchange (DDE). 
 Filters legitimate financial data links (Excel) and focuses on Office apps launching 
 interpreters or LOLBins with DDE-specific command-line markers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Hypervisor API and VM Escape Research
 - **Azonosító:** `T1559_003.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects unauthorized interaction with hypervisor APIs and diagnostic tools. 
 Focuses on manual execution from interactive shells and suspicious command-line 
 parameters associated with VM escape or sandbox evasion.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Adatok gyanús archiválása exfiltráció céljából
 - **Azonosító:** `T1560.yaml`
 - **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Észleli a fájlok gyanús tömörítését és archiválását (7z, rar, tar, PowerShell), különösen ha jelszavas védelmet  alkalmaznak vagy gyanús ideiglenes könyvtárakat használnak célhelyként.
-- **Hamis pozitívok:** Rendszergazdai mentési scriptek, Szoftverfrissítések, amelyek ideiglenes mappákban tömörítenek, Felhasználók, akik jelszóval védett tömörítményt készítenek legális célból
 - **MITRE ATT&CK:** `001, T1560`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Data Archiving for Exfiltration (T1560.001)
 - **Azonosító:** `T1560_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects advanced data staging for exfiltration by monitoring for high-entropy 
 archive creation, unusual volume splitting, and password-protected 
 compression originating from non-administrative or interactive shell contexts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Data Archiving via Library (T1560.002)
 - **Azonosító:** `T1560_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects advanced data staging for exfiltration using .NET/PowerShell 
 compression libraries. Filters enterprise automation by analyzing 
 parent process lineage, command-line entropy, and integrity levels.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Archive via Custom Method (T1560.003)
 - **Azonosító:** `T1560_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects custom data collection by monitoring for byte-level file access 
 combined with manual encoding (XOR, Base64) originating from 
 interactive shells or suspicious parent processes like web servers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Disk Wipe (T1561)
 - **Azonosító:** `T1561.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects low-level disk destruction attempts (MBR overwrite, partition wiping) 
 by monitoring for raw disk access identifiers and destructive CLI arguments 
 originating from non-standard parent processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, 002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Disk Content Wipe (T1561.001)
 - **Azonosító:** `T1561_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects low-level disk content wiping by monitoring for direct physical device 
 access identifiers and destructive overwrite parameters, specifically filtering 
 out known-good administrative, security, and imaging tools.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, T1561`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Disk Structure Wipe (T1561.002)
 - **Azonosító:** `T1561_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects low-level disk structure destruction (partition table wiping, MBR overwriting) 
 by monitoring for destructive CLI arguments and raw device access strings originating 
 from non-standard parent processes or untrusted locations.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Biztonsági szolgáltatások gyanús leállítása
 - **Azonosító:** `T1562.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Észleli a kritikus biztonsági szolgáltatások (Antivírus, EDR, Tűzfal) leállítására irányuló kísérleteket  olyan eszközökkel, mint a net.exe, sc.exe vagy PowerShell. Ez a védelem kiiktatására irányuló támadói tevékenység.
-- **Hamis pozitívok:** Rendszergazdák által végzett hibaelhárítás vagy szoftvercsere, Biztonsági ügynökök frissítése (néha leállítják és újraindítják magukat)
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével
 - **Azonosító:** `T1562_001.yaml`
 - **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Észleli, amikor a támadók PowerShell segítségével próbálják megváltoztatni a Windows Defender beállításait,  például a valós idejű védelem kikapcsolásával vagy kivételek hozzáadásával. Ez a technika a védelem megkerülésére szolgál.
-- **Hamis pozitívok:** Központilag kezelt biztonsági beállítások módosítása Group Policy-n keresztül, IT biztonsági csapat által végzett tesztelés vagy karbantartás, Szoftvertelepítők, amelyek automatikusan adnak hozzá kivételeket (pl. SQL Server)
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002)
 - **Azonosító:** `T1562_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted attempts to disable or impair the Windows Event Log service. 
 Focuses on service-dependency sabotage, registry-based channel disabling, 
 and stealthy wevtutil usage by non-system processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Command History Logging Impairment (T1562.003)
 - **Azonosító:** `T1562_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted attempts to suppress or redirect command history logging. 
 Focuses on Set-PSReadLineOption abuse (SaveNothing, $null redirection) 
 and console buffer suppression to prevent forensic recovery of commands.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious Firewall Modification via Netsh.exe
 - **Azonosító:** `T1562_004.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Észleli, amikor a támadók a netsh.exe eszközt használják a Windows tűzfal szabályainak módosítására vagy új,  engedékeny szabályok hozzáadására. Ez gyakran a védelem megkerülésére (Impair Defenses) utal.
-- **Hamis pozitívok:** Legitim szoftvertelepítők (pl. VPN kliensek, hálózati eszközök), SCCM vagy egyéb távoli felügyeleti eszközök által futtatott konfigurációs szkriptek, Rendszergazdák manuális hibajavítása
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Indicator Blocking and Telemetry Silencing (T1562.006)
 - **Azonosító:** `T1562_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted attempts to silence security monitoring by disabling ETW providers, 
 tampering with Event Forwarding (WEF), or using host firewalls to block EDR/AV 
 cloud-reputation and telemetry endpoints.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007)
 - **Azonosító:** `T1562_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects unauthorized or dangerous modifications to cloud security groups and firewalls.
 Focuses on "Any-Any" rules (0.0.0.0/0), Root user activity, and modifications 
 originating from non-standard administrative tools or IPs.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Logging Impairment (T1562.008)
 - **Azonosító:** `T1562_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects critical changes to cloud logging (CloudTrail, Azure Activity) that 
 create visibility gaps. Focuses on trail deletion, log file encryption 
 disabling, and storage-level tampering by non-automated identities.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009)
 - **Azonosító:** `T1562_009.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects attempts to force the system into Safe Mode to bypass security controls. 
 Focuses on bcdedit manipulation combined with immediate forced reboots and 
 registry-based service exclusion within the SafeBoot key.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `009`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010)
 - **Azonosító:** `T1562_010.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects attempts to downgrade system defenses to bypass modern security controls. 
 Targets PowerShell v2.0 engine forcing (AMSI bypass) and registry-based 
 weakening of authentication and encryption protocols.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `010`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Virtualization and Sandbox Evasion (T1564.011)
 - **Azonosító:** `T1562_011.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted environment fingerprinting used by malware to detect virtualization, 
 sandboxes, or analysis environments. Focuses on WMI hardware queries, MAC address OUI 
 checks, and VM-specific driver searches from untrusted process chains.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `011`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012)
 - **Azonosító:** `T1562_012.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects targeted attempts to blind cloud native security services. 
 Focuses on suppression filter creation, detector deletion, and 
 threat intelligence sabotage by non-automated or root identities.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `012`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Remote Service Session Hijacking (T1563)
 - **Azonosító:** `T1563.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects RDP/Terminal session hijacking by monitoring tscon.exe execution 
 patterns. Focuses on anomalous parent processes and specific command-line 
 switches used to redirect user sessions to the attacker's terminal 
 without credential authentication.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002, T1563`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Local Session Hijacking (T1563.001)
 - **Azonosító:** `T1563_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects advanced local session hijacking where tscon.exe is used to attach to 
 an existing user session. Filters out legitimate RDS/VDI management by 
 analyzing parent process integrity and command-line entropy.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity RDP Session Hijacking (T1563.002)
 - **Azonosító:** `T1563_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized RDP session hijacking and shadowing. Focuses on 
 the specific combination of SYSTEM-level execution, anomalous parent 
 processes (shells, lateral movement tools), and 'no-consent' parameters.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564)
 - **Azonosító:** `T1564.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted artifact hiding techniques including NTFS Alternative Data Streams (ADS), 
 registry-based user account hiding, and suspicious file attribute manipulation 
 initiated by untrusted parents.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1564, 001, 002, 004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Hidden File Attribute Manipulation (T1564.001)
 - **Azonosító:** `T1564_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted file and directory hiding by identifying the combined use of 
 System (+s) and Hidden (+h) attributes initiated by untrusted parent processes 
 or targeting sensitive user-writable directories.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Hidden User Account Creation (T1564.002)
 - **Azonosító:** `T1564_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the hiding of user accounts from the Windows logon screen by targeting 
 the 'SpecialAccounts\UserList' registry key. Filters out legitimate system 
 installers and focuses on suspicious parent processes and non-system users.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Hidden Window Execution (T1564.003)
 - **Azonosító:** `T1564_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects suspicious process execution with hidden windows by correlating 
 abbreviated stealth flags with untrusted parent processes and 
 obfuscation techniques.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity NTFS Alternative Data Stream (ADS) Abuse (T1564.004)
 - **Azonosító:** `T1564_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the creation or execution of malicious NTFS Alternative Data Streams (ADS). 
 Correlates redirection operators and LOLBins with stream-specific command-line 
 syntax to minimize false positives from drive letters and MOTW.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Hidden File System Manipulation (T1564.005)
 - **Azonosító:** `T1564_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects suspicious mounting or creation of virtual disk images (VHD, VHDX, ISO) 
 initiated by untrusted parent processes or targeting non-standard paths, 
 often used to bypass MOTW or hide malicious payloads.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Virtual Instance Execution Abuse (T1564.006)
 - **Azonosító:** `T1564_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects suspicious execution of virtual instances (Docker, VirtualBox, VMware) 
 by identifying anti-forensic flags (--rm), privileged escalation attempts, 
 and untrusted parent processes like web servers or office apps.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007)
 - **Azonosító:** `T1564_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects attempts to bypass Office macro security or hide VBA projects 
 by identifying suspicious registry modifications and process-level 
 manipulation of the Office Object Model.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Email Hiding Rules Detection (T1564.008)
 - **Azonosító:** `T1564_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted email hiding rules by identifying suspicious inbox rule 
 modifications that automate the deletion or hiding of security alerts, 
 initiated by untrusted parent processes or non-admin shells.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Resource Extraction and Abuse (T1564.009)
 - **Azonosító:** `T1564_009.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the abuse of binary resource sections and help file interpreters 
 (hh.exe, winhlp32.exe) to extract or execute hidden payloads. 
 Focuses on protocol smuggling (its:, ms-its:) and suspicious de-compilation.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `009`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Process Argument Spoofing Detection (T1564.010)
 - **Azonosító:** `T1564_010.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects potential process argument spoofing by identifying execution 
 mismatches where sensitive interpreters (PowerShell, CMD) are spawned 
 with empty or generic arguments by untrusted parents.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `010`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Virtual Instance Abuse (T1564.011)
 - **Azonosító:** `T1564_011.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects suspicious use of Windows Sandbox and WSL to evade EDR monitoring. 
 Focuses on untrusted parent processes, non-standard configuration loading, 
 and direct command execution within virtual instances.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `011`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Data Manipulation (T1565)
 - **Azonosító:** `T1565.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized data manipulation by monitoring for stream editing, 
 log clearing via CLI, and unauthorized modifications to critical system 
 files (hosts, event logs) from non-standard parent processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1565, 001, 002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Stored Data Manipulation (T1565.001)
 - **Azonosító:** `T1565_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized modification of stored data (configs, logs, databases) 
 by identifying suspicious stream editing (sed, powershell-replace) 
 originating from non-standard parent processes or targeting critical system paths.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Transmitted Data Manipulation (T1565.002)
 - **Azonosító:** `T1565_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized network redirection and resolution manipulation (DNS, Proxy, Hosts) 
 by identifying CLI-based configuration changes originating from suspicious 
 parent processes or targeting critical registry keys.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Runtime Process Manipulation (T1565.003)
 - **Azonosító:** `T1565_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects runtime process manipulation by monitoring for suspicious memory access 
 masks (e.g., PROCESS_ALL_ACCESS) and remote thread injection between unrelated 
 processes, specifically filtering out known-good administrative and security tools.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Phishing Payload Execution from Communication Apps
 - **Azonosító:** `T1566.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects suspicious child processes spawned by email clients, browsers, or chat apps 
 where the payload originates from a user-writable directory. This pattern is 
 highly characteristic of spearphishing (T1566.001/.002).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1566`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Spearphishing Attachment Execution
 - **Azonosító:** `T1566_001.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects highly suspicious child processes spawned from email clients or Office applications. 
 It specifically targets script interpreters and dual-use binaries (LOLBins) that 
 originate from user-writable directories, significantly reducing false positives 
 from legitimate system updates and standard GUI behavior.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Browser-Originating Payload Execution
 - **Azonosító:** `T1566_002.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects suspicious child processes spawned by web browsers where the command line 
 references user-writable or temporary directories. This pattern is highly 
 indicative of a successful spearphishing link attack leading to immediate execution.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Process Spawn from Business Communication Service
 - **Azonosító:** `T1566_003.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects highly suspicious child processes spawned by business communication tools 
 (Teams, Slack, Discord, LinkedIn). It specifically targets script interpreters 
 and dual-use binaries (LOLBins) executing from user-writable directories, 
 effectively filtering out legitimate application updates and browser launches.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Detection of Post-Vishing Remote Tool Execution
 - **Azonosító:** `T1566_004.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects the execution of unauthorized remote access tools (AnyDesk, TeamViewer, etc.) 
 specifically when run from user-writable directories (Downloads, Temp). 
 This pattern is a high-confidence indicator of a successful vishing attack where 
 the victim is instructed to run "support" software.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Web Service Exfiltration (T1567)
 - **Azonosító:** `T1567.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects systematic data exfiltration to cloud services by identifying 
 headless transfer tools (rclone, megatools) using custom config files 
 from untrusted paths or triggered by non-admin parent processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1567`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Code Repo Exfil (T1567.001)
 - **Azonosító:** `T1567_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects systematic data exfiltration to public code repositories by identifying 
 headless git operations, inline PAT tokens, and remote repository pivots 
 initiated from non-development parent processes or suspicious directories.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Storage Exfil (T1567.002)
 - **Azonosító:** `T1567_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects systematic data exfiltration to cloud storage by identifying CLI tools 
 (rclone, megatools) using embedded credentials or custom config files 
 triggered by non-admin parent processes (e.g., Office apps, Beacon hosts).
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Video Hosting Exfil (T1567.003)
 - **Azonosító:** `T1567_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects covert data exfiltration via video hosting platforms by identifying 
 steganographic embedding (metadata abuse, stream attachment) and CLI-based 
 uploads from non-creative department assets.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Text Storage Exfil (T1567.004)
 - **Azonosító:** `T1567_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects programmatic data exfiltration to text storage sites by monitoring 
 CLI-based POST requests containing API keys or clipboard-grabbing commands 
 from non-administrative or suspicious parent processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568)
 - **Azonosító:** `T1568.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects dynamic resolution and DGA activity by identifying programmatic 
 DNS queries within loops, low-level DNS API calls from scripting engines, 
 and anomalous domain patterns from non-browser processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1568, 002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001)
 - **Azonosító:** `T1568_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects Fast Flux DNS infrastructure usage by identifying forced DNS cache 
 flushing combined with programmatic name resolution and loop-based 
 connectivity checks from non-system processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002)
 - **Azonosító:** `T1568_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects DGA activity by monitoring for rapid, programmatic DNS resolution attempts, 
 high-entropy domain patterns in command lines, and the suppression of DNS errors 
 from non-standard processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity DNS Calculation & Extraction (T1568.003)
 - **Azonosító:** `T1568_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects C2 address calculation by identifying programmatic DNS TXT/SRV record 
 retrieval followed by explicit data type conversion or byte-level manipulation 
 within script interpreters.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity System Service Execution Detection
 - **Azonosító:** `T1569.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects the creation or execution of system services with suspicious characteristics, 
 such as binaries located in world-writable directories or services used as 
 wrappers for shell commands. Optimized to filter out legitimate software installers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1569, 002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Launch Daemon Persistence Detection
 - **Azonosító:** `T1569_001.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the creation or modification of Launch Daemons by monitoring 
 untrusted parent processes and suspicious command-line strings. 
 Optimized to filter out Apple and common third-party installers.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity System Service Execution Detection (T1569.002)
 - **Azonosító:** `T1569_002.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects suspicious service execution or modification by monitoring anomalous 
 parent processes, world-writable binary paths, and shell command wrappers. 
 Optimized for low false positive rates in enterprise environments.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Lateral Tool Transfer (T1570)
 - **Azonosító:** `T1570.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized lateral tool transfer by monitoring command-line activity 
 targeting administrative shares (C$, ADMIN$). Focuses on non-standard process 
 lineages (Office, Browsers, non-elevated Shells) and weaponized tools like 
 bitsadmin or robocopy.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1570`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Non-Standard Port C2 (T1571)
 - **Azonosító:** `T1571.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Kritikusan Magas (🛑 SIEM gyilkos kategória!)
 - **Leírás:** Detects C2 communication over non-standard ports by correlating high-risk 
 native binaries (LoLBins) with outbound public network connections 
 to ports outside the standard web/mail/directory service ranges.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1571`
 
 #### 🚨 Response Playbook
 1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
-2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget.
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Protocol Tunneling Detection (T1571)
 - **Azonosító:** `T1572.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects protocol tunneling by identifying non-standard encapsulation logic, 
 low-level socket proxying (SOCKS5), and specific CLI signatures of 
 adversary tunneling tools while filtering legitimate administrative SSH/VPN traffic.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1572`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573)
 - **Azonosító:** `T1573.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the creation of custom encrypted C2 channels by monitoring for 
 low-level cryptographic class instantiation (AES, Rijndael, CryptoStream) 
 in tandem with manual network socket creation from scripting interpreters.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1573, 001, 002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Symmetric Encryption C2 Channel (T1573.001)
 - **Azonosító:** `T1573_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects custom symmetric encryption (AES/Rijndael) used in C2 channels by identifying 
 the programmatic setup of CipherMode, PaddingMode, and CryptoStreams within 
 scripting engines, specifically targeting manual IV/Key assignment and stream piping.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Asymmetric Encryption C2 (T1573.002)
 - **Azonosító:** `T1573_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects custom asymmetric encryption (RSA/ECC) by identifying programmatic 
 trust chain overrides (ServerCertificateValidationCallback) and raw public key 
 imports (FromXmlString/ImportSubjectPublicKeyInfo) from non-standard processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574)
 - **Azonosító:** `T1574.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects potential DLL hijacking or side-loading by monitoring trusted system 
 binaries loading DLLs from non-standard, user-writable directories, while 
 filtering out legitimate signed modules and known application behaviors.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1574, 001, 002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro DLL Search Order Hijacking Detection (T1574.001)
 - **Azonosító:** `T1574_001.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects trusted Windows system binaries loading DLLs from non-standard, 
 potentially user-writable directories. It filters out validly signed 
 third-party modules to reduce false positives.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002)
 - **Azonosító:** `T1574_002.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects potential DLL side-loading by identifying cases where a signed, 
 trusted executable loads an unsigned or suspiciously-located DLL from 
 user-writable directories.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Shell Configuration & Path Interception (T1574.003)
 - **Azonosító:** `T1574_003.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects unauthorized modification of PATH environment variables or shell autorun 
 registry keys. Focuses on "Path Prepending" (placing malicious paths at the 
 beginning) and non-standard shell startup commands.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Library Search Order Hijacking & Integrity Gap (T1574.004)
 - **Azonosító:** `T1574_004.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects potential library hijacking by monitoring trusted system binaries 
 loading unsigned or suspiciously-located DLLs from user-writable directories, 
 specifically looking for trust mismatches between the EXE and the DLL.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Installer File Permissions Weakness (T1574.005)
 - **Azonosító:** `T1574_005.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects high-privilege execution of binaries from user-writable locations. 
 This targets scenarios where an attacker replaces a legitimate installer 
 with a malicious one due to insecure directory permissions.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Dynamic Linker Hijacking Against Privileged Binary
 - **Azonosító:** `T1574_006.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects Dynamic Linker Hijacking by identifying execution of privileged or SetUID Linux binaries with manipulated dynamic linker environment variables pointing to user-writable shared libraries.
-- **Hamis pozitívok:** Extremely rare custom hardened environments, Manual exploitation labs or red team activity
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## PATH Hijacking Leading to Privileged Binary Execution
 - **Azonosító:** `T1574_007.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects PATH environment variable hijacking where a privileged Linux binary is executed with a user-writable directory at the beginning of PATH, and a non-absolute command is resolved, indicating a viable path interception attack chain.
-- **Hamis pozitívok:** Extremely rare misconfigured automation running privileged tools, Controlled red team or security testing activity
 - **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## .NET Assembly Search Order Hijacking via User-Writable Directory
 - **Azonosító:** `T1574_008.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects potential .NET Assembly Search Order Hijacking where a legitimate .NET runtime host loads a managed assembly from a user-writable directory outside of the GAC, Microsoft.NET framework paths, or the application installation directory.
-- **Hamis pozitívok:** Extremely rare legacy .NET applications with local assembly loading, Explicitly misconfigured enterprise applications
 - **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## .NET AppDomainManager Hijacking via Non-GAC Assembly
 - **Azonosító:** `T1574_009.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects .NET AppDomainManager hijacking by identifying .NET runtime hosts that load a managed assembly from a user-writable directory at process initialization, outside of the GAC and Microsoft .NET framework paths. This behavior is highly indicative of malicious AppDomainManager abuse.
-- **Hamis pozitívok:** Almost non-existent in production environments, Highly specialized .NET research or red team activity
 - **MITRE ATT&CK:** `009`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Privileged Service Executable Overwritten from User-Writable Location
 - **Azonosító:** `T1574_010.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects exploitation of weak service file permissions where a registered Windows service executable running with high privileges is overwritten or modified from a user-writable directory by a non-system process.
-- **Hamis pozitívok:** Extremely rare legacy third-party services installed in unsafe paths, Misconfigured enterprise software with self-updating service binaries
 - **MITRE ATT&CK:** `010`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Privileged Service ImagePath or ServiceDll Hijacked via Registry
 - **Azonosító:** `T1574_011.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects exploitation of weak Windows service registry permissions where a non-system process modifies critical service registry values to point to an executable or DLL located in a user-writable directory, enabling privilege escalation upon service start or restart.
-- **Hamis pozitívok:** Extremely rare legacy software with insecure service update mechanisms, Intentionally vulnerable lab or red team environments
 - **MITRE ATT&CK:** `011`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Exploit-Grade COR_PROFILER Hijacking via User-Writable Profiler DLL
 - **Azonosító:** `T1574_012.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés -> Jogosultság emelés`
 - **Leírás:** Detects exploitation of COR_PROFILER hijacking where a .NET runtime host is executed with profiling enabled and a custom profiler DLL specified from a user-writable directory, excluding legitimate Microsoft, Visual Studio, and APM profiling use cases.
-- **Hamis pozitívok:** Extremely rare, explicitly approved .NET profiling on production systems, Controlled red team or malware research environments
 - **MITRE ATT&CK:** `012`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Exploit-Grade KernelCallbackTable Manipulation via Remote Memory Write
 - **Azonosító:** `T1574_013.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects remote memory write operations into GUI processes which are prerequisites 
 for KernelCallbackTable hijacking. This technique is often used for process 
 injection that evades standard hook-based monitoring.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `013`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578)
 - **Azonosító:** `T1578.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects high-risk modifications to cloud infrastructure that weaken security posture 
 or prepare for data exfiltration, filtered by identity behavior and source trust.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1578`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Suspicious Cloud Instance Creation (T1578.001)
 - **Azonosító:** `T1578_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects the creation of high-resource or expensive cloud instances from untrusted 
 identities or outside approved regions. Optimized for Cryptojacking detection 
 with minimal false positives from CI/CD pipelines.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002)
 - **Azonosító:** `T1578_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Adatszivárogtatás`
 - **Leírás:** Detects unauthorized sharing or public exposure of cloud compute snapshots. 
 Focuses on permission changes and cross-account access rather than simple creation.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002, T1578`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Instance Destruction (T1578.003)
 - **Azonosító:** `T1578_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects unauthorized or mass deletion of cloud instances. Filters out 
 automated scaling events and focuses on manual, non-MFA, or script-based 
 destruction attempts that indicate sabotage or defense evasion.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Image Tampering (T1578.004)
 - **Azonosító:** `T1578_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized modifications to cloud machine images (AMI, VHD). 
 Focuses on permission changes that expose images to external accounts or 
 the public internet, and filters out known CI/CD build pipelines.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005)
 - **Azonosító:** `T1578_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects high-risk modifications to Network ACLs or Security Groups that allow 
 broad ingress traffic (0.0.0.0/0) on sensitive management ports (RDP, SSH, DB). 
 Filters out automated infrastructure-as-code (IaC) noise.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Infrastructure Discovery (T1580)
 - **Azonosító:** `T1580.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic discovery of cloud resources (VMs, VPCs, S3) focusing on 
 anomalous execution environments and data extraction patterns. 
 Excludes legitimate Infrastructure-as-Code (IaC) and CI/CD tools.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1580`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Offensive Infrastructure Provisioning - T1583
 - **Azonosító:** `T1583.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the automated acquisition of infrastructure (VPS, Domains, Serverless)  by monitoring for CLI-based provisioning tools and domain registration API calls.  Filters focus on isolating authorized DevOps pipelines and developer environments.
-- **Hamis pozitívok:** IT administrators testing Terraform scripts locally., Authorized developers managing secondary testing domains., Automated billing or monitoring scripts that use VPS APIs.
 - **MITRE ATT&CK:** `T1583`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity VPS Infrastructure Provisioning - T1583.001
 - **Azonosító:** `T1583_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the automated acquisition of VPS infrastructure (DigitalOcean, AWS, Azure, GCP).  Focuses on the provisioning phase (VM creation) while isolating authorized DevOps  pipelines and interactive developer workflows.
-- **Hamis pozitívok:** Authorized cloud engineers performing manual infrastructure updates., Development teams testing IaC scripts in non-standard local environments., Automated cloud-monitoring tools that trigger resource updates.
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Automated Domain Registration & Acquisition - T1583.002
 - **Azonosító:** `T1583_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects automated domain registration through registrar APIs and specialized  provisioning tools. Focuses on programmatic acquisition via curl/python  while filtering out authorized IT infrastructure management (Certbot, Terraform).
-- **Hamis pozitívok:** Automated domain renewals by IT department., SEO teams using auditing tools for brand protection., Security team performing authorized domain-squatting research.
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Cloud Network (VPC) Provisioning - T1583.003
 - **Azonosító:** `T1583_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the acquisition and configuration of cloud networking (VPC).  Focuses on identifying the creation of internet egress points and  cross-network bridges from unauthorized endpoints, isolating automated  CI/CD pipelines from manual or scripted local abuse.
-- **Hamis pozitívok:** Authorized network architects deploying new staging VPCs., Automated disaster recovery scripts rebuilding network stacks.
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Serverless Infrastructure Provisioning - T1583.004
 - **Azonosító:** `T1583_004.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the automated acquisition and provisioning of serverless infrastructure  (AWS Lambda, Azure Functions, GCP Functions). Focuses on CLI-based creation  and critical configuration changes while isolating authorized CI/CD pipelines  and interactive developer IDE contexts.
-- **Hamis pozitívok:** Authorized developers performing manual serverless deployments for debugging., Automated maintenance scripts that rotate function secrets or update env vars.
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Botnet Infrastructure Acquisition - T1583.005
 - **Azonosító:** `T1583_005.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the acquisition and preparation of botnet infrastructure.  Focuses on identifying multi-architecture agent downloads, automated  propagation attempts (brute-force), and botnet C2 client usage.
-- **Hamis pozitívok:** Authorized vulnerability scanners or red team exercises., Network admins performing bulk configuration changes via SSH scripts., Security researchers in isolated malware analysis environments.
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Web Service Acquisition and Provisioning - T1583.006
 - **Azonosító:** `T1583_006.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the acquisition and setup of web services (SaaS, Storage, Messaging)  for offensive infrastructure. Focuses on command-line based storage provisioning  (Rclone, AzCopy) and messaging API initialization (Slack/Discord/Telegram bots)  from non-administrative or non-developer endpoints.
-- **Hamis pozitívok:** IT administrators performing one-time data migrations via Rclone., Developers testing messaging API integrations in local terminals., Marketing scripts uploading assets to cloud storage buckets.
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Serverless Infrastructure Provisioning - T1583.007
 - **Azonosító:** `T1583_007.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the automated acquisition and provisioning of serverless infrastructure  (AWS Lambda, Azure Functions, GCP Functions). Focuses on CLI-based creation  and critical configuration changes while isolating authorized CI/CD pipelines  and interactive developer IDE contexts.
-- **Hamis pozitívok:** Authorized developers performing manual serverless deployments for debugging., Automated maintenance scripts that rotate function secrets or update env vars.
 - **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Cloud Account Acquisition and Bootstrap - T1583.008
 - **Azonosító:** `T1583_008.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the acquisition and initial configuration of cloud accounts.  Targets account-level bootstrapping (credential setup, IAM user creation)  and automated identity harvesting from non-standard processes,  while filtering out authorized DevOps pipelines.
-- **Hamis pozitívok:** Cloud engineers configuring their local environment for the first time., Development teams debugging cloud integration locally in authorized IDEs., Legitimate automated billing or auditing scripts run outside of CI/CD.
 - **MITRE ATT&CK:** `008`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Compromised Infrastructure and Resource Abuse - T1584
 - **Azonosító:** `T1584.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects indicators of compromised infrastructure, specifically focusing on  web server process subversion (Web Shells), unauthorized reverse proxies,  and tunneling tools executed from non-standard administrative contexts.
-- **Hamis pozitívok:** Penetration testing or Red Team exercises., Developers using Chisel/Ngrok for authorized remote debugging., Complex web applications that legitimately call system commands (rare, check app logic).
 - **MITRE ATT&CK:** `T1584`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Domain Infrastructure Hijacking - T1584.001
 - **Azonosító:** `T1584_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized domain or subdomain hijacking by monitoring for  critical DNS record types (NS, SOA) and mass record creation via  Cloud Provider CLIs, while filtering for authorized DevOps automation.
-- **Hamis pozitívok:** Authorized network engineers performing bulk DNS migrations., Automated cloud-native services updating DNS (e.g., ExternalDNS in Kubernetes)., Marketing automation creating new subdomains via authorized CLI.
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity DNS Server Configuration Subversion - T1584.002
 - **Azonosító:** `T1584_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized DNS infrastructure manipulation by monitoring for  critical configuration changes (zone resets, master updates) and  suspicious child processes spawned directly from DNS services.
-- **Hamis pozitívok:** Authorized IPAM software performing DNS zone synchronization., Emergency manual DNS recovery by authorized senior administrators., Vulnerability scanners probing the DNS service (e.g., Nessus).
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Cloud Identity Subversion and Persistence - T1584.003
 - **Azonosító:** `T1584_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized cloud account manipulation by monitoring for  high-risk identity changes (MFA removal, new access keys) executed  outside of authorized CI/CD pipelines or known administrative jump-hosts.
-- **Hamis pozitívok:** Emergency manual MFA reset by a Cloud Architect from an authorized jump-host., Legitimate identity migration scripts during tenant consolidation., Security audits using authorized scanning accounts.
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Serverless Function Subversion - T1584.004
 - **Azonosító:** `T1584_004.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized modification of serverless functions (Lambda, Azure Functions, GCP) by focusing on high-risk parameters like layer injection and environment variable manipulation, while strictly filtering for authorized CI/CD pipeline service accounts.
-- **Hamis pozitívok:** Emergency manual hotfix by a senior Cloud Architect from a jump-server., Authorized security testing/red teaming focusing on FaaS., Initial setup of serverless infrastructure before CI/CD is established.
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Botnet Agent Persistence and Control - T1584.005
 - **Azonosító:** `T1584_005.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects botnet agent activity by identifying suspicious process lineages  (e.g., LOLBins spawning from WMI), P2P bootstrap arguments, and known  DDoS tool patterns while filtering authorized IT management and P2P software.
-- **Hamis pozitívok:** Legitimate P2P-based software distribution (e.g., BranchCache, Delivery Optimization)., IT admins using WMI for authorized mass-configuration changes., Performance monitoring tools using Stratum-like protocols.
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Web Service and Cloud Storage Subversion - T1584.006
 - **Azonosító:** `T1584_006.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized manipulation of web services and cloud storage by  monitoring for ACL changes (making buckets public), suspicious file types  being hosted (scripts/exes), and the use of third-party data transfer  tools (rclone) outside of authorized contexts.
-- **Hamis pozitívok:** Authorized developers updating static website assets (e.g., .js or .css files)., IT admins using rclone for one-time authorized data migration., Automated report generation uploading zip files to internal storage buckets.
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity VPS Control and Tunneling - T1584.007
 - **Azonosító:** `T1584_007.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized VPS manipulation by identifying critical lifecycle changes  (SSH key injection, firewall opening) and the execution of reverse tunneling tools  from non-authorized administrative contexts.
-- **Hamis pozitívok:** Cloud engineers performing emergency manual network troubleshooting., Legitimate automated scaling scripts not yet in the service account whitelist., Authorized Red Team exercises.
 - **MITRE ATT&CK:** `007`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Suspicious User Account Creation via CLI/Scripting
 - **Azonosító:** `T1585.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the creation of new user accounts (T1585) when initiated from 
 suspicious processes like CMD, PowerShell, or net.exe, rather than 
 standard Administrative consoles (ADUC, Windows Admin Center).
-- **Hamis pozitívok:** Automated provisioning scripts (adjust filters for your specific SVC accounts), Legacy batch scripts used by sysadmins for bulk user creation
 - **MITRE ATT&CK:** `T1585`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Potential Automated Social Media Account Establishment
 - **Azonosító:** `T1585_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Kritikusan Magas (🛑 SIEM gyilkos kategória!)
 - **Leírás:** Detects suspicious patterns of social media account registration by monitoring 
 access to multiple sign-up endpoints from a single host or identifying 
 non-browser processes making requests to these domains.
-- **Hamis pozitívok:** Marketing automatizációs szoftverek (pl. HubSpot, Buffer), ha helyileg futnak, Fejlesztők, akik API-kat tesztelnek (érdemes a forrás IP-t szűrni)
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
-2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget.
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Stealthy Email Account Establishment and Manipulation
 - **Azonosító:** `T1585_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the creation of email accounts followed by immediate sensitive 
 permission changes or forwarding rules. Focuses on CLI-based execution 
 to reduce noise from standard HR-driven GUI processes.
-- **Hamis pozitívok:** IT migrations where mailbox forwarding is part of the decommissioning process., Security-approved automated backup or journaling accounts.
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Anomalous Cloud User Account Creation
 - **Azonosító:** `T1585_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects the creation of cloud accounts via command-line tools or service principals, 
 excluding authorized synchronization accounts and automated HR provisioning systems.
-- **Hamis pozitívok:** DevOps mérnökök, akik CLI-ből automatizálnak (őket érdemes fix IP vagy user alapján szűrni), Újonnan bevezetett felhő-menedzsment eszközök
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Account Compromise and Identity Manipulation - T1586
 - **Azonosító:** `T1586.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects actions indicative of account compromise and takeover (ATO), such as  unauthorized MFA modification, suspicious login profile updates, and automated  credential testing from non-standard administrative processes.
-- **Hamis pozitívok:** Authorized Red Team exercises or internal penetration testing., Emergency account recovery by senior IT staff via CLI., Automated identity lifecycle management scripts (if not using the service account).
 - **MITRE ATT&CK:** `T1586`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Automated Social Media Manipulation - T1586.001
 - **Azonosító:** `T1586_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects automated interaction with social media platforms via headless browser  frameworks (Selenium, Puppeteer, Playwright). Attackers use these to scale  account takeover (ATO) and bypass security controls by injecting stolen cookies.
-- **Hamis pozitívok:** Frontend developers running automated UI tests for internal apps., Marketing automation tools used for scheduled posts on authorized machines.
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Email Forwarding Rule Manipulation - T1586.002
 - **Azonosító:** `T1586_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the creation or modification of email forwarding/redirection rules via  command-line tools (PowerShell, Microsoft Graph CLI). This is a high-confidence  indicator of Account Takeover (ATO) where an attacker attempts to exfiltrate  sensitive emails (invoices, password resets) without user interaction.
-- **Hamis pozitívok:** IT administrators using PowerShell for bulk mailbox migration or cleanup., Power users who prefer managing their mailbox via scripts rather than the GUI.
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Cloud Account Takeover and Persistence - T1586.003
 - **Azonosító:** `T1586_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized cloud account manipulation focusing on identity takeover  and persistence. Targets the creation of new cloud credentials, MFA removal,  and login profile updates from non-authorized processes, specifically filtering  out known administrative and developer workflows.
-- **Hamis pozitívok:** Authorized identity admins performing manual emergency recovery., Legitimate automated IAM cleanup or key rotation scripts., Developers debugging identity-related logic in authorized local environments.
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Offensive Capability Development and Compilation - T1587
 - **Azonosító:** `T1587.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the development and compilation of offensive tools by monitoring  for specific C2 framework build arguments, unauthorized use of code packers,  and certificate manipulation outside of verified CI/CD pipelines.
-- **Hamis pozitívok:** Legitimate developers working on obfuscated internal tools., Software installation processes that compile components on the fly (e.g., .NET optimization)., Security analysts performing authorized research in lab environments.
 - **MITRE ATT&CK:** `T1587`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Malware Development and Evasion Patterns - T1587.001
 - **Azonosító:** `T1587_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects custom malware development by identifying suspicious compiler execution  combined with evasion-related API strings, anti-analysis techniques,  and unauthorized build locations.
-- **Hamis pozitívok:** Security analysts developing internal testing tools., Legitimate installers that compile code during setup (e.g., .NET ngen)., Software protection/DRM developers using obfuscation.
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Unauthorized Code Signing Capability Development - T1587.002
 - **Azonosító:** `T1587_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the creation of code-signing certificates and the manual signing of binaries  by monitoring for specific OIDs (1.3.6.1.5.5.7.3.3) and signing tools used outside  of verified CI/CD pipelines or Windows SDK paths.
-- **Hamis pozitívok:** Authorized developers signing internal drivers or legacy applications., Security tools (e.g., AV/EDR) generating local certificates for inspection., IT admins generating self-signed certs for internal lab testing.
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Unauthorized Digital Certificate Development - T1587.003
 - **Azonosító:** `T1587_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized digital certificate and private key generation by monitoring  for high-risk command-line arguments (self-signing, key exfiltration) occurring  in non-standard directories or by unauthorized users.
-- **Hamis pozitívok:** Developers testing SSL/TLS logic in local temp folders., Automated deployment scripts (Ansible/Puppet) creating local certs., Third-party software installers generating self-signed certs during setup.
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Exploit Development and Compilation Detection - T1587.004
 - **Azonosító:** `T1587_004.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects indicators of exploit development by monitoring for the compilation of  source code containing memory injection primitives and shellcode-related  arguments, specifically when executed from non-standard or temporary directories.
-- **Hamis pozitívok:** Security software (e.g., EDR/AV) components that compile filters on the fly., Legitimate custom .NET applications that use 'unsafe' code for performance., Authorized vulnerability scanning tools that deploy temporary agents.
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Anomalous Procurement of Offensive Capabilities
 - **Azonosító:** `T1588.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
 - **Leírás:** Detects the acquisition of offensive tools by monitoring suspicious combinations 
 of download-capable processes and known hacktool signatures or file extensions, 
 filtering out legitimate IT software deployment tools.
-- **Hamis pozitívok:** Authorized penetration testing activities., Security administrators updating their local toolkits via CLI.
 - **MITRE ATT&CK:** `T1588`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Anomalous Procurement of Malware Capabilities
 - **Azonosító:** `T1588_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
 - **Leírás:** Detects the acquisition of malware by monitoring suspicious downloaders (LotL) 
 interacting with compressed/container formats or known malware naming patterns 
 in non-standard directories.
-- **Hamis pozitívok:** IT staff downloading OS images (.iso) via PowerShell scripts (add to exclusion by user)., Developers using CLI tools to download legitimate libraries or VM images.
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Anomalous Offensive Tool Acquisition via CLI
 - **Azonosító:** `T1588_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
 - **Leírás:** Detects the acquisition of offensive tools (hacktools) by monitoring command-line 
 downloads targeting non-standard directories. Filters out legitimate IT 
 administration from browsers and authorized management agents.
-- **Hamis pozitívok:** DevOps mérnökök, akik scriptekkel konfigurálnak munkaállomásokat., IT automatizációs scriptek, amik nem szervizfiókkal futnak.
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Anomalous Code Signing Certificate Export or Acquisition
 - **Azonosító:** `T1588_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects suspicious certificate operations (exporting private keys or forced store additions) 
 initiated from unusual parent processes or using plaintext passwords in the command line.
-- **Hamis pozitívok:** Automated CI/CD pipelines signing binaries (should be added to filters)., Backup scripts for PKI infrastructure.
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Strategic Trusted Root Certificate Store Manipulation
 - **Azonosító:** `T1588_004.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized attempts to modify the Trusted Root Certification Authorities 
 store. Attackers do this to facilitate MitM attacks or bypass security warnings. 
 Filters out legitimate system-level installers and known security agents.
-- **Hamis pozitívok:** Corporate PKI updates via GPO or automated scripts (should be added to filters by thumbprint/user)., Security appliance agents (e.g., Zscaler, Netskope) injecting inspection certs.
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Anomalous Procurement of Exploit or PoC Code
 - **Azonosító:** `T1588_005.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
 - **Leírás:** Detects the acquisition of exploits or Proof-of-Concept (PoC) code by monitoring 
 suspicious download patterns, CLI-based transfers, and known exploit naming 
 conventions while filtering out authorized security scanners and developer activity.
-- **Hamis pozitívok:** Security researchers or IT staff manually downloading PoCs for patching validation., Automated build systems downloading packages that contain "exploit" in their name as a dependency.
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Targeted Harvesting of Vulnerability Research Artifacts
 - **Azonosító:** `T1588_006.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
 - **Leírás:** Detects the systematic acquisition of vulnerability research, audit reports, or 
 zero-day PoC documentation. Focuses on CLI-based harvesting in non-technical 
 user contexts while filtering out authorized security research.
-- **Hamis pozitívok:** IT managers downloading security compliance templates via PowerShell., Automated backup of security documentation shares (if not excluded).
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Identity Enumeration via Authentication Endpoints
 - **Azonosító:** `T1589.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects high-confidence identity reconnaissance activity where an external actor enumerates valid user identities via authentication or account-related endpoints. Detection is based on enumeration behavior, automation indicators, and authentication response patterns, excluding browsers, SSO flows, and monitoring tools.
-- **Hamis pozitívok:** Explicitly approved external identity testing, Rare API-based account validation by trusted partners
 - **MITRE ATT&CK:** `T1589`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Credential Enumeration via Authentication API (High Confidence)
 - **Azonosító:** `T1589_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects high-confidence credential enumeration activity against authentication APIs. The rule focuses on automated, non-interactive probing behavior attempting to validate the existence or correctness of credentials. Browser-based logins, SSO flows, monitoring systems, and legitimate user authentication are excluded to minimize false positives.
-- **Hamis pozitívok:** Explicitly approved red team credential enumeration, Rare third-party integration misconfiguration
 - **MITRE ATT&CK:** `T1589, 001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Confidence OSINT Identity Enumeration via Public APIs
 - **Azonosító:** `T1589_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects high-confidence open-source identity enumeration attempts via public-facing APIs or directory endpoints. This rule focuses on scripted, automated reconnaissance behavior designed to collect user or employee identity data, while excluding normal browsing, search engines, and legitimate crawlers to minimize false positives.
-- **Hamis pozitívok:** Explicitly approved OSINT or data aggregation jobs, Rare third-party integrations misconfigured to scrape directories
 - **MITRE ATT&CK:** `T1589, 002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Targeted OSINT Enumeration of Open Websites and Domains
 - **Azonosító:** `T1589_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects high-confidence reconnaissance activity targeting open websites and domains to gather victim identity information. The rule focuses on scripted enumeration behavior against search or directory-style endpoints, excluding browsers, crawlers, and legitimate monitoring traffic to ensure very low false positive rates.
-- **Hamis pozitívok:** Explicitly approved OSINT or red team reconnaissance, Rare third-party integrations misconfigured to enumerate directories
 - **MITRE ATT&CK:** `T1589, 003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Network Reconnaissance with High Port Diversity
 - **Azonosító:** `T1590.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Kritikusan Magas (🛑 SIEM gyilkos kategória!)
 - **Leírás:** Detects network reconnaissance activity. Optimized for cross-SIEM compatibility by using standard field names and avoiding complex CIDR logic in the core rule.
-- **Hamis pozitívok:** Authorized vulnerability scanners
 - **MITRE ATT&CK:** `T1590`
 
 #### 🚨 Response Playbook
 1. **IP hírnév:** Ellenőrizd a távoli IP címet hírnév-adatbázisokban.
-2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget és a protokoll típusát.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Forgalom elemzés:** Vizsgáld meg a küldött adatmennyiséget.
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Professional IP Infrastructure Reconnaissance - T1590.001
 - **Azonosító:** `T1590_001.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟡 (medium)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects professional IP discovery techniques by focusing on reconnaissance-specific  command arguments and external IP lookup services, while filtering out  standard Windows networking noise.
-- **Hamis pozitívok:** IT Support troubleshooting network issues, Automated software update checks
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 
----
 
+---
 ## Advanced DNS Infrastructure Reconnaissance - T1590.002
 - **Azonosító:** `T1590_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic DNS reconnaissance. It reduces false positives by filtering  legitimate single-host lookups and focusing on infrastructure-wide enumeration  attempts like Zone Transfers or specific record harvesting.
-- **Hamis pozitívok:** High-level network troubleshooting by Domain Admins, Automated IT inventory or audit scripts
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Advanced Network Trust Dependencies Reconnaissance - T1590.003
 - **Azonosító:** `T1590_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic discovery of network trust relationships and shared resources.  It minimizes noise by filtering standard GPO-driven drive mappings and focused  on high-intent enumeration commands like nltest domain trusts and remote session listing.
-- **Hamis pozitívok:** System administrators auditing domain trusts., Legacy login scripts mapping drives on old workstations., Automated security assessment tools (authorized).
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Advanced Certificate Information Reconnaissance - T1590.004
 - **Azonosító:** `T1590_004.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects professional reconnaissance of digital certificates. Focuses on  interactive command-line tools used to extract metadata from local stores  or remote servers while filtering out automated signature verification.
-- **Hamis pozitívok:** Security engineers troubleshooting TLS issues., Automated certificate renewal agents (e.g., Let's Encroll).
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Advanced Cloud Infrastructure Reconnaissance - T1590.005
 - **Azonosító:** `T1590_005.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects manual or suspicious cloud infrastructure enumeration.  It filters out legitimate CI/CD pipelines and automated service accounts  to focus on interactive discovery.
-- **Hamis pozitívok:** Legitimate manual cloud audit by certified admins., New automation scripts not yet added to filters.
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Advanced Victim Web Page Info Reconnaissance - T1590.006
 - **Azonosító:** `T1590_006.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects automated web reconnaissance and sensitive file discovery attempts.  It minimizes false positives by filtering development environments and focusing  on high-intent reconnaissance patterns across CLI tools.
-- **Hamis pozitívok:** Developers debugging cloud configurations or APIs., Legitimate security auditing or automated penetration testing.
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Advanced Organizational Infrastructure Enumeration - T1591
 - **Azonosító:** `T1591.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic gathering of organizational metadata (OUs, groups, users).  It minimizes false positives by filtering known administrative consoles,  service account syncs, and focusing on non-standard execution contexts.
-- **Hamis pozitívok:** Identity Management synchronization tasks., IT audits or mass user updates., Vulnerability scanners with domain credentials.
 - **MITRE ATT&CK:** `T1591`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Advanced Physical Location Infrastructure Enumeration - T1591.001
 - **Azonosító:** `T1591_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic discovery of physical infrastructure data (floor plans, badge systems).  It filters out common office usage (Intranet, Visio) and focuses on CLI-based  bulk search operations which are characteristic of reconnaissance before physical  intrusion or social engineering.
-- **Hamis pozitívok:** Facilities staff or architects working on building plans., New employees searching for company maps via command line (unlikely)., Automated backup of CAD/Visio servers.
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Advanced Business Relationship Information Discovery - T1591.002
 - **Azonosító:** `T1591_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic and automated discovery of business relationships.  It filters out common office productivity noise and focuses on bulk  search operations originating from non-standard parent processes.
-- **Hamis pozitívok:** Legal or Finance team performing legitimate data migration., Desktop search tools indexing local documents.
 - **MITRE ATT&CK:** `002, T1591`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Advanced Knowledge Management Discovery - T1591.003
 - **Azonosító:** `T1591_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic and automated discovery of internal knowledge management systems.  It targets bulk data extraction patterns and command-line reconnaissance  while filtering out standard web browser usage and IT automation.
-- **Hamis pozitívok:** IT administrators performing site migrations or bulk edits via API., Authorized security scanners auditing internal documentation., Legitimate automated backup tasks.
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Personnel Information Discovery - T1591.004
 - **Azonosító:** `T1591_004.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects suspicious, bulk extraction of employee data from Active Directory.  Focuses on non-standard LDAP queries and broad PowerShell filters that  deviate from routine administrative behavior.
-- **Hamis pozitívok:** Bulk user audits by internal compliance teams., New HR system integration testing., Complex AD reporting scripts by senior admins.
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Host Information Reconnaissance Activity
 - **Azonosító:** `T1592.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects high-confidence host information reconnaissance activity by identifying multiple system discovery commands executed in a short timeframe from a user context. Tuned to minimize false positives by excluding SYSTEM activity, enterprise tooling, and single benign command executions.
-- **Hamis pozitívok:** Rare advanced troubleshooting directly from user shell, Approved red team or DFIR activity
 - **MITRE ATT&CK:** `T1592`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Confidence Hardware Enumeration via Management Interfaces
 - **Azonosító:** `T1592_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects high-confidence reconnaissance activity where an external source attempts to enumerate hardware characteristics such as CPU, architecture, memory, or device model via management or embedded system interfaces. The rule is optimized to minimize false positives by focusing on automated probing behavior.
-- **Hamis pozitívok:** Vendor support accessing hardware management interfaces from external networks, Approved red team activity not allowlisted
 - **MITRE ATT&CK:** `T1592, 001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Advanced Software Enumeration Reconnaissance via Web Endpoints
 - **Azonosító:** `T1592_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects advanced reconnaissance activity where an external actor systematically enumerates installed software, application names, or version information through multiple web-accessible endpoints in a short time window. Tuned to minimize false positives by requiring automation-like behavior and repeated probing patterns.
-- **Hamis pozitívok:** Explicitly approved external vulnerability scanning, Vendor troubleshooting performed from non-browser tools
 - **MITRE ATT&CK:** `T1592, 002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Confidence Firmware Enumeration Against Network Devices
 - **Azonosító:** `T1592_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects high-confidence reconnaissance activity targeting firmware and version information of network or embedded devices. The rule focuses on automated, non-browser access to device-specific management endpoints and is optimized to minimize false positives.
-- **Hamis pozitívok:** Vendor support accessing device management interfaces from external networks, Approved red team activity not allowlisted
 - **MITRE ATT&CK:** `T1592, 003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Confidence Client Configuration Fingerprinting (Reconnaissance)
 - **Azonosító:** `T1592_004.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟡 (medium)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects high-confidence reconnaissance activity where an external source performs repeated non-browser HTTP requests using probing methods and header-focused techniques to enumerate client or infrastructure configurations. Optimized to minimize false positives.
-- **Hamis pozitívok:** Custom external API clients without browser User-Agent (rare), Approved red team activity if not allowlisted
 - **MITRE ATT&CK:** `T1592, 004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
+
 
 ---
-
 ## High-Fidelity Automated Web Reconnaissance - T1593
 - **Azonosító:** `T1593.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects automated web scraping and OSINT collection patterns targeting  social media and public sites. Focuses on headless browser automation  and specialized CLI tools while filtering out legitimate HR and Marketing activity.
-- **Hamis pozitívok:** Marketing teams using automated tools for brand monitoring., HR department using LinkedIn automation for bulk recruiting., Software testing (QA) using Selenium/Webdriver.
 - **MITRE ATT&CK:** `T1593`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Social Media Entity Harvesting - T1593.001
 - **Azonosító:** `T1593_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects automated reconnaissance of social media profiles. It targets headless  browser automation (Selenium/Puppeteer) and specialized OSINT tools while  filtering out routine HR recruitment and interactive browser usage.
-- **Hamis pozitívok:** Authorized recruiters using browser automation for bulk messaging., QA engineers testing social auth flows via Selenium., Marketing analytics scripts (if not run from a server).
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Automated Search Engine Reconnaissance - T1593.002
 - **Azonosító:** `T1593_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects automated reconnaissance using search engines by monitoring for headless  browser flags and systematic dorking patterns. Specifically filters out  legitimate developer activity and interactive browser usage to minimize false positives.
-- **Hamis pozitívok:** SEO/Marketing tools performing automated ranking checks., Developers using CLI-based search for error code resolution., Vulnerability scanners (authorized).
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Social Media Entity Harvesting - T1593.003
 - **Azonosító:** `T1593_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects automated social media reconnaissance using headless browsers or specialized OSINT tools.  Focuses on identifying systematic data scraping while excluding legitimate browser-based user activity.
-- **Hamis pozitívok:** Authorized recruitment automation tools used by HR., Social media management platforms (Hootsuite, etc.)., QA engineers testing web applications with Selenium.
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Information Repository Reconnaissance - T1594
 - **Azonosító:** `T1594.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects automated reconnaissance of public information repositories (GitHub, GitLab).  Focuses on specialized secret scanners and bulk API harvesting while filtering out  standard developer workflows (git clone/pull) and authorized security tools.
-- **Hamis pozitívok:** Security engineers performing authorized secret scanning., Developers using automated scripts for local repo management., Automated backup scripts for code repositories.
 - **MITRE ATT&CK:** `T1594`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Active Scanning Detection (Behavior-Based)
 - **Azonosító:** `T1595.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects high-confidence active scanning behavior by identifying automated clients systematically probing multiple sensitive web endpoints from an external source within a short timeframe. Designed to minimize false positives by excluding browsers, monitoring, health checks, and known benign scanners.
-- **Hamis pozitívok:** Explicitly approved external vulnerability scans, Rare external troubleshooting using CLI tools
 - **MITRE ATT&CK:** `T1595`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity External IP Block Scanning Detection
 - **Azonosító:** `T1595_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects high-confidence active scanning behavior where a single external source IP rapidly probes multiple destination IP addresses within a short time window. Optimized to reduce false positives by excluding known scanners, crawlers, and cloud infrastructure.
-- **Hamis pozitívok:** Rare misconfigured external services, Newly deployed monitoring not yet allowlisted
 - **MITRE ATT&CK:** `T1595, 001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Confidence External Vulnerability Scanning Activity
 - **Azonosító:** `T1595_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects high-confidence vulnerability scanning activity by correlating aggressive request behavior, exploit discovery paths, payload indicators, and known scanner tooling. Optimized to minimize false positives in enterprise environments.
-- **Hamis pozitívok:** Approved external penetration tests not yet allowlisted, Newly onboarded security vendors performing scans
 - **MITRE ATT&CK:** `T1595, 002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Active Wordlist Scanning Against Authentication Endpoints
 - **Azonosító:** `T1595_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects high-confidence wordlist scanning activity where an external source rapidly probes authentication or administrative endpoints using varying username parameters, consistent with automated reconnaissance.
-- **Hamis pozitívok:** Custom API clients without browser User-Agent (rare), Approved red team activity not allowlisted
 - **MITRE ATT&CK:** `T1595, 003`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Open Technical Database Reconnaissance - T1596
 - **Azonosító:** `T1596.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the systematic use of CLI tools and script-based API queries directed  at technical databases like Shodan, Censys, and VirusTotal.  Focuses on non-browser process chains and automated data extraction patterns.
-- **Hamis pozitívok:** Authorized vulnerability assessments., Threat hunters performing manual investigations., Automated cloud asset inventory scripts.
 - **MITRE ATT&CK:** `T1596`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity WHOIS Database Reconnaissance - T1596.001
 - **Azonosító:** `T1596_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects automated WHOIS reconnaissance patterns. Focuses on bulk domain registration  queries via CLI tools and API-based scripts (RDAP) while filtering out standard  browser-based research, software licensing, and routine IT diagnostics.
-- **Hamis pozitívok:** Domain administrators verifying registration details via CLI., Legal departments using WHOIS APIs for trademark enforcement., Procurement auditing vendor domain ownership.
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Automated Search Engine Dorking - T1596.002
 - **Azonosító:** `T1596_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the automated use of search engine dorks and specialized CLI tools  designed for bulk technical data harvesting. Filters out interactive browser  searches and legitimate IDE-triggered error lookups.
-- **Hamis pozitívok:** Security analysts performing authorized audits for exposed files., Marketing or SEO tools using automated scripts for ranking checks., Developers using CLI-based search tools for documentation.
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Passive DNS Reconnaissance - T1597.003
 - **Azonosító:** `T1596_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects automated reconnaissance using Passive DNS (pDNS) databases.  Focuses on non-standard process chains and CLI-based API interactions  targeting technical OSINT repositories while filtering out routine  network troubleshooting and browser-based research.
-- **Hamis pozitívok:** Security analysts performing authorized incident investigations., IT automation scripts verifying public DNS records for service health., Authorized red-team exercises.
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Digital Certificate Reconnaissance - T1596.004
 - **Azonosító:** `T1596_004.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects automated reconnaissance targeting Digital Certificates and CT logs.  Focuses on programmatic CLI patterns (API-based scraping) while filtering  out legitimate system-level certificate validation and browser traffic.
-- **Hamis pozitívok:** DevOps automation for SSL certificate renewal (e.g., ACME/Let's Encrypt)., Internal PKI health checks performed by network admins., Security analysts performing authorized external audits.
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity IP Infrastructure Reconnaissance - T1596.005
 - **Azonosító:** `T1596_005.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects automated reconnaissance of IP address metadata. Focuses on specialized  OSINT tools (Shodan, GreyNoise, Censys) and CLI-based API harvesting while  filtering out routine network troubleshooting, browser traffic, and EDR noise.
-- **Hamis pozitívok:** Security analysts manually investigating an IP address via CLI., Authorized vulnerability management tools performing asset inventory., IT automation scripts verifying public-facing service exposure.
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Victim-Owned Website Reconnaissance - T1597
 - **Azonosító:** `T1597.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects automated and systematic reconnaissance of organization-owned  web infrastructure. Focuses on bulk data extraction, recursive directory  brute-forcing, and the discovery of sensitive configuration files.
-- **Hamis pozitívok:** Web developers performing site migrations or integrity checks., Legitimate vulnerability scanners (e.g., Nessus, Burp Suite) if not excluded by IP., Automated SEO crawling tools used by marketing.
 - **MITRE ATT&CK:** `T1597`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Domain Infrastructure Enumeration - T1597.001
 - **Azonosító:** `T1597_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects advanced and automated domain/DNS reconnaissance. Focuses on  unusual DNS query types (AXFR, ANY) and professional sub-domain discovery  tools while filtering out routine network troubleshooting.
-- **Hamis pozitívok:** Network engineers performing deep DNS audits or migrations., Security vulnerability scanners performing asset discovery., Automated cloud-sync tools verifying domain ownership (e.g., Let's Encrypt).
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Secret Hunting in Code Repositories - T1597.002
 - **Azonosító:** `T1597_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects professional secret-hunting tools and manual reconnaissance patterns  within code repositories. Focuses on deep history analysis (diff-searching)  and automated credential extraction while filtering out standard dev-cycles.
-- **Hamis pozitívok:** Security engineers performing authorized baseline scans of repositories., Pre-commit hooks that use gitleaks or similar tools to prevent secrets from being pushed., Developers searching for a specific past change where a credential was used as a placeholder.
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Advanced Phishing for Info & Credential Harvesting - T1598
 - **Azonosító:** `T1598.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects post-phishing credential harvesting and session token theft.  Focuses on non-browser processes accessing browser profile data and  suspicious interactive credential prompts.
-- **Hamis pozitívok:** IT support scripts used for legitimate credential collection., Browser profile backup tools., User-initiated manual profile migration.
 - **MITRE ATT&CK:** `T1598`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Advanced Spearphishing Link Redirection - T1598.001
 - **Azonosító:** `T1598_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects suspicious URL execution patterns originating from productivity apps.  Focuses on indirect browser launches (via cmd/powershell) and OAuth-specific  credential harvesting parameters while filtering out known SSO providers.
-- **Hamis pozitívok:** Security awareness training platforms (e.g., KnowBe4)., Legitimate OAuth flows for third-party business apps (e.g., Zoom, Trello)., External HR or Payroll portals using complex redirect strings.
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Advanced BEC Mail & Financial Data Exfiltration - T1598.002
 - **Azonosító:** `T1598_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects suspicious command-line access to mail archives and financial documents  typically targeted in BEC campaigns. It filters out legitimate Outlook  indexing, OneDrive synchronization, and system-level backups.
-- **Hamis pozitívok:** Manual PST migration by IT support during workstation refresh., User manually zipping their own mail folder for archiving., Accounting software running local search/export tasks.
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity MFA/OTP Spoofing & Harvesting - T1598.003
 - **Azonosító:** `T1598_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects the creation of fraudulent MFA/OTP input prompts by monitoring  unusual PowerShell UI class loading and specific CLI keywords.  Filters out common IT automation and software deployment noise.
-- **Hamis pozitívok:** Legitimate IT support tools that prompt users for a temporary password or code., In-house applications using PowerShell wrappers for basic UI interaction.
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Spearphishing Attachment Interaction - T1598.004
 - **Azonosító:** `T1598_004.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Belépési pont`
 - **Leírás:** Detects suspicious execution patterns from email attachments. Focuses on HTML  smuggling and Office-to-script transitions while filtering out legitimate  SharePoint, OneDrive, and enterprise software update noise.
-- **Hamis pozitívok:** Internal business automation using Excel macros to pull data via PowerShell., Software installers opening "ReadMe" or "Release Notes" in HTML format., Users saving legitimate web pages for offline viewing.
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Network Boundary Bridging (T1599)
 - **Azonosító:** `T1599.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects unauthorized network boundary bridging. Specifically targets manual 
 creation of 'Any-to-Internal' NAT rules, port forwarding of sensitive ports, 
 and hardware-level bridging of isolated interfaces.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1599`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001)
 - **Azonosító:** `T1599_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects unauthorized logical network isolation bypasses, such as VRF route leaking, 
 unauthorized VLAN trunking, and L2 bridge creation between secure zones.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001, T1599`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Weaken Encryption Attempt (T1600)
 - **Azonosító:** `T1600.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Közepes (ℹ️ Mérsékelt zajszint)
 - **Leírás:** Detects unauthorized weakening of system encryption (TLS downgrade) or 
 PowerShell certificate validation bypass, initiated by non-system or 
 suspiciously located processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1600`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity System Image Patching (T1600.001)
 - **Azonosító:** `T1600_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects attempts to weaken system image integrity by disabling Driver Signature Enforcement (DSE), 
 modifying Boot Configuration Data (BCD), or patching critical system binaries (CI.dll, NTOSKRNL.exe) 
 using non-system processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Disable Entity Verification (T1600.002)
 - **Azonosító:** `T1600_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized modification of system trust settings and certificate verification 
 by monitoring for suspicious certutil usage and registry-based Authenticode/WinTrust 
 bypasses initiated by untrusted processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Network OS Image Modification (T1601)
 - **Azonosító:** `T1601.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized modification of network device operating system images. 
 Focuses on binary uploads via insecure protocols and boot-system overrides 
 performed outside of trusted management windows or hosts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1601`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Network Binary Patching (T1601.001)
 - **Azonosító:** `T1601_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized low-level patching of network OS binaries. 
 Focuses on filesystem remounting (read-write), binary manipulation (dd, xxd), 
 and kernel module loading (insmod) outside of authorized maintenance.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002)
 - **Azonosító:** `T1601_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized or malicious network OS upgrades by correlating 
 upgrade commands with insecure protocols, untrusted sources, or 
 cryptographic signature failures.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Network Share Automated Collection (T1602)
 - **Azonosító:** `T1602.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects highly suspicious, automated data collection from network shares by 
 identifying the combination of UNC path traversal, sensitive file extensions, 
 and recursive copying logic originating from untrusted process lineages.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1602`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Admin Share Data Exfiltration (T1602.001)
 - **Azonosító:** `T1602_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized data collection or staging via administrative shares (C$, ADMIN$) 
 by correlating anomalous process lineages, non-standard source paths, 
 and the use of recursive discovery commands within the same session.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002)
 - **Azonosító:** `T1602_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects highly suspicious mass data collection from cloud sync roots (OneDrive, 
 SharePoint, Google Drive) by monitoring for recursive read/copy patterns 
 combined with archival tools or suspicious staging destinations.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Web Token Forgery (T1606)
 - **Azonosító:** `T1606.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized forging or theft of web credentials (SAML, cookies, OAuth tokens). 
 Focuses on non-browser processes accessing DPAPI master keys, suspicious SQLite 
 queries on token databases, and Golden SAML artifact generation.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1606`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Web Cookie Harvesting (T1606.001)
 - **Azonosító:** `T1606_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized extraction of browser cookies and their corresponding 
 AES encryption keys from 'Local State' files. It specifically targets 
 untrusted processes (interpreters, unsigned binaries) while filtering 
 legitimate browser and Electron application behavior.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002)
 - **Azonosító:** `T1606_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized forging of web tokens (SAML, OAuth) by monitoring 
 suspicious access to IDP signing keys, AD FS database extraction, and 
 the use of specialized cloud-native forgery frameworks like Roadtools and AADInternals.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Anomalous Infrastructure Staging and Resource Deployment
 - **Azonosító:** `T1608.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the use of cloud CLI tools and IaC binaries to stage adversary resources. 
 It focuses on non-standard users performing upload or infrastructure modification 
 actions, filtering out authorized CI/CD pipelines and IT administration.
-- **Hamis pozitívok:** IT staff performing emergency cloud fixes outside of standard CI/CD., Developers using Cloud CLIs on their local machines (should be added to filters if permitted).
 - **MITRE ATT&CK:** `T1608`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Anomalous Malware Staging to External Infrastructure
 - **Azonosító:** `T1608_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the staging of malware to external infrastructure by monitoring 
 non-browser based uploads to cloud storage, file-sharing, and code-hosting platforms 
 using command-line tools or unusual processes.
-- **Hamis pozitívok:** Developers manually pushing code to GitHub via CLI (add developer usernames to filters)., IT administrators using rclone for legitimate offsite backups.
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Anomalous Offensive Tool Staging and External Upload
 - **Azonosító:** `T1608_002.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the staging of offensive tools to external infrastructure by monitoring 
 CLI-based uploads from non-standard directories. Focuses on the "staged-then-shipped" 
 pattern where hacktools are moved to external drop zones.
-- **Hamis pozitívok:** IT troubleshooting where an admin uploads a tool log or binary to a vendor., Security researchers testing tools from their own Desktop/Temp folders.
 - **MITRE ATT&CK:** `002`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Strategic Digital Certificate Staging in Trusted Root Store
 - **Azonosító:** `T1608_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the command-line installation of certificates into the Trusted Root store. 
 Adversaries do this to establish trust for C2 infrastructure or to enable 
 transparent SSL/TLS interception (MitM).
-- **Hamis pozitívok:** Manual IT administration via CLI (should be avoided, but happens)., Internal PKI rollouts using custom scripts (filter by specific script path).
 - **MITRE ATT&CK:** `003`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Anomalous Web Content Modification for Drive-by Staging
 - **Azonosító:** `T1608_004.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Tárolás-igényes)
 - **Leírás:** Detects suspicious modifications to web server content directories (web root) 
 initiated by non-standard processes or interactive shells. This behavior is 
 typical when an adversary stages a drive-by download site or injects malicious scripts.
-- **Hamis pozitívok:** Web developers performing emergency hotfixes via CLI (unrecommended practice)., Legitimate CMS auto-updates (e.g. WordPress, Joomla) - filter by service account.
 - **MITRE ATT&CK:** `004`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Strategic Staging of Malicious Link Targets
 - **Azonosító:** `T1608_005.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the automated preparation of malicious link targets by monitoring 
 CLI-based interactions with URL shortener APIs or cloud-based redirector staging 
 initiated by unauthorized users or unusual parent processes.
-- **Hamis pozitívok:** Marketing automation scripts that haven't been whitelisted by username., Security teams testing URL shortening for internal phishing simulations.
 - **MITRE ATT&CK:** `005`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Anomalous SEO Poisoning and Metadata Staging
 - **Azonosító:** `T1608_006.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the preparation of SEO poisoning infrastructure by monitoring for 
 unauthorized CMS manipulation, automated content spinning, and the use of 
 known black-hat SEO tools on web servers or staging environments.
-- **Hamis pozitívok:** Marketing agencies performing bulk content migrations via CLI., Web developers testing sitemap plugins on dev environments.
 - **MITRE ATT&CK:** `006`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Container Interactive Shell Execution
 - **Azonosító:** `T1609.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects unauthorized interactive shell access to running containers using 
 kubectl or docker exec. Filters legitimate health checks and CI/CD automation 
 to focus on manual, high-risk interventions.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1609`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Malicious Container Deployment Detection
 - **Azonosító:** `T1610.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Kódfuttatás`
 - **Leírás:** Detects the deployment of containers with high-risk configurations that 
 facilitate container escape or persistence. Focuses on privileged mode, 
 host-level resource sharing, and non-standard image sources.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1610`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Container Escape & Host Access (T1611)
 - **Azonosító:** `T1611.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Jogosultság emelés`
 - **Leírás:** Detects unauthorized attempts to bypass container isolation and access the 
 underlying host. Targets non-standard privileged executions and high-risk 
 volume mounts, while filtering out known cluster infrastructure components.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1611`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy Local Image Build (T1612)
 - **Azonosító:** `T1612.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects high-fidelity local container image builds by identifying builds 
 initiated by non-CI/CD users or suspicious parent processes like web servers, 
 indicating post-exploitation image creation to evade registry scans.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1612`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Container and Instance Discovery (T1613)
 - **Azonosító:** `T1613.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic enumeration of containers and Kubernetes resources.
 Focuses on identity self-interrogation (auth can-i), secret discovery, 
 and anomalous process lineage, filtering out high-frequency monitoring and system probes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1613`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity System Location Discovery (T1614)
 - **Azonosító:** `T1614.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted system location and language discovery, often used by ransomware 
 for regional targeting or exclusion (kill-switch check). Focuses on Registry-based 
 keyboard layout enumeration and external IP-to-geo API calls from non-standard processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1614`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity System Language Discovery (T1614.001)
 - **Azonosító:** `T1614_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects targeted system language and keyboard layout discovery, focusing on 
 malware "kill-switch" checks and environment keying. Minimizes false positives 
 by gating against integrity levels, parent process lineage, and specific hex-code filtering.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `001`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Group Policy Discovery (T1615)
 - **Azonosító:** `T1615.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic Group Policy reconnaissance focusing on report harvesting 
 and policy exploitation patterns. Filters out legitimate Helpdesk activity 
 by analyzing command-line switches and process integrity levels.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1615`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619)
 - **Azonosító:** `T1619.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic cloud storage object discovery (S3, Blobs, GCS) by monitoring 
 for recursive listing, metadata-heavy API calls, and anomalous output redirection. 
 Excludes high-trust backup and ETL service accounts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1619`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Reflective Code Loading (T1620)
 - **Azonosító:** `T1620.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects reflective code loading by identifying the specific combination of 
 memory allocation APIs, executable memory flags, and .NET assembly loading 
 methods within a single process context.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1620`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621)
 - **Azonosító:** `T1621.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the execution of tools and scripts designed to automate repetitive MFA requests.
 Focuses on headless browser automation, specialized Azure/Okta exploit kits, and
 PowerShell-based authentication loops running in non-interactive sessions.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1621`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Stealthy Debugger Evasion (T1622)
 - **Azonosító:** `T1622.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects high-fidelity debugger evasion by identifying anti-debug API access 
 originating from unbacked memory (shellcode) or suspicious temporary paths, 
 while filtering out legitimate IDEs and system error reporting.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1622`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity macOS Plist Persistence Modification (T1647)
 - **Azonosító:** `T1647.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects suspicious modifications of macOS Property List (.plist) files using CLI tools. 
 Focuses on persistence-related keys (LaunchAgents/LaunchDaemons) and filters out 
 legitimate system update processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1647`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Serverless Function Persistence or Abuse
 - **Azonosító:** `T1648.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
+- **Detekciós lánc szerep:** `Megtelepedés -> Kódfuttatás`
 - **Leírás:** Detects suspicious creation or update of AWS Lambda functions by monitoring 
 non-automated activity, unusual source IPs, and risky configurations. 
 Focuses on bypassing CI/CD pipelines.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1648`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Certificate & Private Key Theft (T1649)
 - **Azonosító:** `T1649.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized extraction of digital certificates and private keys. 
 Identifies memory patching to bypass export restrictions, suspicious certutil 
 parameters, and key theft using offensive tools like Mimikatz or Certify.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1649`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Cloud Account Acquisition and Initialization - T1650
 - **Azonosító:** `T1650.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects the acquisition or unauthorized setup of cloud accounts. Focuses on  credential configuration, profile creation, and automated SDK-based  identity harvesting while filtering out authorized DevOps automation.
-- **Hamis pozitívok:** Cloud administrators configuring their local environment for the first time., Legitimate automated deployment scripts not run through central engines., Developers debugging cloud integration locally.
 - **MITRE ATT&CK:** `T1650`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## High-Fidelity Cloud Administration Agent Abuse
 - **Azonosító:** `T1651.yaml`
 - **Minőségi mutató:** `70/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects anomalous process execution initiated by cloud management agents (AWS SSM, Azure Guest Agent). 
 Attackers use these trusted paths to execute reconnaissance or credential dumping commands 
 that bypass traditional network perimeter defenses.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1651`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Device Driver Discovery (T1652)
 - **Azonosító:** `T1652.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic discovery of device drivers by monitoring for high-fidelity 
 enumeration patterns (WMI/CLI) originating from non-standard lineages. 
 Specifically targets behaviors associated with BYOVD (Bring Your Own Vulnerable Driver) 
 reconnaissance.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1652`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro Power Settings Manipulation (T1137.001)
 - **Azonosító:** `T1653.yaml`
 - **Minőségi mutató:** `50/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟡 (medium)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
+- **Detekciós lánc szerep:** `Megtelepedés`
 - **Leírás:** Detects unauthorized power setting modifications aimed at preventing sleep or 
 hibernation. Focuses on command-line automation (powercfg) via suspicious 
 parent processes like PowerShell or CMD, while filtering legitimate UI-based changes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1653`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
 
----
 
+---
 ## Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654)
 - **Azonosító:** `T1654.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects systematic enumeration of system event logs (metadata harvesting) 
 using native tools or PowerShell. Focuses on identifying security products 
 via log channel discovery from anomalous execution contexts.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1654`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656)
 - **Azonosító:** `T1656.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects technical impersonation attempts including suspicious 'runas' execution 
 patterns used for lateral movement and the creation of deceptive local accounts 
 that mimic executive or administrative identities outside of standard HR processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1656`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Ultra-Pro High-Fidelity Financial Theft (T1657)
 - **Azonosító:** `T1657.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects potential financial theft and fraud by monitoring for clipboard 
 manipulation (address swapping) and unauthorized financial document 
 access originating from suspicious/web-facing parent processes.
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1657`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Professional Content Impersonation and Infrastructure Mirroring
 - **Azonosító:** `T1659.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Magas (⚠️ Erős szűrés javasolt (sok log))
 - **Leírás:** Detects tools and CLI patterns used to clone or impersonate legitimate web content. 
 Focuses on recursive mirroring of internal portals and the use of phishing 
 frameworks, filtering out legitimate development and browser-based activity.
-- **Hamis pozitívok:** Web developers migrating internal sites using CLI tools., Security teams conducting authorized phishing simulations., Automated documentation generators (e.g., Doxygen, Sphinx) if misconfigured.
 - **MITRE ATT&CK:** `T1659`
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata:** Ellenőrizd a szülő folyamatot (ParentProcessName) és a parancssort.
 2. **Bináris ellenőrzés:** Futtasd le a fájl hash-ét VirusTotal-on.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
+
 
 ---
-
 ## Credential Dumping LSASS
 - **Azonosító:** `credential_dumping_lsass.yml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
+- **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** a hitelesito adatok LSASS folyamatmemoriabol torteno kiirasara tett kiserlet
-- **Hamis pozitívok:** Nincs megadva
 - **MITRE ATT&CK:** `T1003, 001`
 
 #### 🚨 Response Playbook
 1. **Triage:** Vizsgáld meg a nyers eseményeket a SIEM-ben.
-2. **Érintett gép:** Ellenőrizd a host státuszát és a legutóbbi bejelentkezéseket.
-3. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett fiókot vagy hostot!
-
----
+2. **Sürgős:** Ha a gyanú beigazolódik, izoláld az érintett hostot!
 

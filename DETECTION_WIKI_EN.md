@@ -505,8 +505,8 @@
 - [Privileged Service Executable Overwritten from User-Writable Location](#privileged-service-executable-overwritten-from-user-writable-location)
 - [Privileged Service ImagePath or ServiceDll Hijacked via Registry](#privileged-service-imagepath-or-servicedll-hijacked-via-registry)
 - [Exploit-Grade COR_PROFILER Hijacking via User-Writable Profiler DLL](#exploit-grade-cor_profiler-hijacking-via-user-writable-profiler-dll)
-- [Exploit-Grade KernelCallbackTable Manipulation via Remote Memory Write](#exploit-grade-kernelcallbacktable-manipulation-via-remote-memory-write)
-- [Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578)](#ultra-pro-high-fidelity-cloud-infrastructure-tampering-(t1578))
+- [Exploit-Grade KernelCallbackTable Manipulation](#exploit-grade-kernelcallbacktable-manipulation)
+- [Cloud Infrastructure Tampering (T1578)](#cloud-infrastructure-tampering-(t1578))
 - [Suspicious Cloud Instance Creation (T1578.001)](#suspicious-cloud-instance-creation-(t1578001))
 - [Cloud Snapshot Exfiltration (T1578.002)](#cloud-snapshot-exfiltration-(t1578002))
 - [Cloud Instance Destruction (T1578.003)](#cloud-instance-destruction-(t1578003))
@@ -9105,16 +9105,19 @@ uploads from non-creative department assets.
 
 
 ---
-## Ultra-Pro High-Fidelity Text Storage Exfil (T1567.004)
+## Text Storage Exfil (T1567.004)
 - **ID:** `T1567_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects programmatic data exfiltration to text storage sites by monitoring 
-CLI-based POST requests containing API keys or clipboard-grabbing commands 
-from non-administrative or suspicious parent processes.
+- **Leírás:** Detects programmatic exfiltration of sensitive data to public text storage platforms
+(Pastebin, Ghostbin, Hastebin, ControlC, Rentry) by monitoring:
+1. CLI-based POST requests containing API keys or data payloads.
+2. Clipboard scraping commands or sensitive file access.
+3. Execution from non-administrative or suspicious parent processes.
+Excludes legitimate administrative and software update activities.
 
 
 #### 🚨 Response Playbook
@@ -9124,16 +9127,19 @@ from non-administrative or suspicious parent processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568)
+## Dynamic Resolution & DGA (T1568)
 - **ID:** `T1568.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects dynamic resolution and DGA activity by identifying programmatic 
-DNS queries within loops, low-level DNS API calls from scripting engines, 
-and anomalous domain patterns from non-browser processes.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects dynamic DNS resolution and Domain Generation Algorithm (DGA) activity 
+by monitoring:
+1. Programmatic DNS queries executed within loops or retry logic.
+2. Low-level DNS API calls from scripting interpreters.
+3. High-entropy and anomalous domain patterns in command lines.
+Excludes legitimate administrative, automation, and internal domains.
 
 
 #### 🚨 Response Playbook

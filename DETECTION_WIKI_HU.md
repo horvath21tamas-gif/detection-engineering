@@ -505,8 +505,8 @@
 - [Privilegizált szolgáltatás végrehajtható felülírva a felhasználó által írható helyről](#privilegizált-szolgáltatás-végrehajtható-felülírva-a-felhasználó-által-írható-helyről)
 - [Privileged Service ImagePath vagy ServiceDll feltörve a rendszerleíró adatbázison keresztül](#privileged-service-imagepath-vagy-servicedll-feltörve-a-rendszerleíró-adatbázison-keresztül)
 - [Exploit-Grade COR_PROFILER eltérítés a User-Writable Profiler DLL-en keresztül](#exploit-grade-cor_profiler-eltérítés-a-user-writable-profiler-dll-en-keresztül)
-- [Exploit-grade KernelCallbackTable manipuláció távoli memóriaíráson keresztül](#exploit-grade-kernelcallbacktable-manipuláció-távoli-memóriaíráson-keresztül)
-- [Ultra-Pro High-Fidelity felhő infrastruktúra manipuláció (T1578)](#ultra-pro-high-fidelity-felhő-infrastruktúra-manipuláció-(t1578))
+- [Exploit-grade KernelCallbackTable Manipulation](#exploit-grade-kernelcallbacktable-manipulation)
+- [Felhő-infrastruktúra manipulálása (T1578)](#felhő-infrastruktúra-manipulálása-(t1578))
 - [Gyanús felhőpéldány létrehozása (T1578.001)](#gyanús-felhőpéldány-létrehozása-(t1578001))
 - [Cloud Snapshot Exfiltration (T1578.002)](#cloud-snapshot-exfiltration-(t1578002))
 - [Felhőpéldány-megsemmisítés (T1578.003)](#felhőpéldány-megsemmisítés-(t1578003))
@@ -8639,16 +8639,19 @@ feltöltések nem kreatív részleg eszközeiből.
 
 
 ---
-## Ultra-Pro High-Fidelity Text Storage Exfil (T1567.004)
+## Text Storage Exfil (T1567.004)
 - **ID:** `T1567_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Figyelemmel észleli a programozott adatok kiszűrését a szövegtároló helyekre
-API-kulcsokat vagy vágólap-megragadási parancsokat tartalmazó CLI-alapú POST-kérelmek
-nem adminisztratív vagy gyanús szülői folyamatokból.
+- **Leírás:** Érzékeli az érzékeny adatok programozott kiszűrését nyilvános szövegtároló platformokra
+(Pastebin, Ghostbin, Hastebin, ControlC, Rentry) figyeléssel:
+1. CLI-alapú POST kérések, amelyek API-kulcsokat vagy adathordozókat tartalmaznak.
+2. Vágólap-kaparási parancsok vagy érzékeny fájlhozzáférés.
+3. Végrehajtás nem adminisztratív vagy gyanús szülői folyamatokból.
+Nem tartalmazza a jogos adminisztrációs és szoftverfrissítési tevékenységeket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -8657,16 +8660,19 @@ nem adminisztratív vagy gyanús szülői folyamatokból.
 
 
 ---
-## Ultra-Pro High-Fidelity dinamikus felbontás és DGA (T1568)
+## Dinamikus felbontás és DGA (T1568)
 - **ID:** `T1568.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a dinamikus felbontást és a DGA-tevékenységet a programozottság azonosításával
-DNS-lekérdezések hurkon belül, alacsony szintű DNS API hívások szkriptmotorokból,
-és a nem böngésző folyamatokból származó rendellenes tartományminták.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a dinamikus DNS-feloldást és a Domain Generation Algorithm (DGA) tevékenységet
+figyeléssel:
+1. Programozott DNS-lekérdezések ciklusokon belül vagy újrapróbálkozási logikán belül.
+2. Alacsony szintű DNS API hívások szkript értelmezőktől.
+3. Nagy entrópiás és rendellenes tartományminták a parancssorokban.
+Kizárja a törvényes adminisztrációs, automatizálási és belső tartományokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

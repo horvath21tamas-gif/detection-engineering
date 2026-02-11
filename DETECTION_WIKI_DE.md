@@ -505,8 +505,8 @@
 - [Ausführbare Datei des privilegierten Dienstes vom vom Benutzer beschreibbaren Speicherort überschrieben](#ausführbare-datei-des-privilegierten-dienstes-vom-vom-benutzer-beschreibbaren-speicherort-überschrieben)
 - [Privilegierter Dienst ImagePath oder ServiceDll über die Registrierung gekapert](#privilegierter-dienst-imagepath-oder-servicedll-über-die-registrierung-gekapert)
 - [COR_PROFILER-Hijacking der Exploit-Klasse über eine vom Benutzer beschreibbare Profiler-DLL](#cor_profiler-hijacking-der-exploit-klasse-über-eine-vom-benutzer-beschreibbare-profiler-dll)
-- [Exploit-Grade-KernelCallbackTable-Manipulation über Remote-Speicher-Schreiben](#exploit-grade-kernelcallbacktable-manipulation-über-remote-speicher-schreiben)
-- [Manipulation der Ultra-Pro-High-Fidelity-Cloud-Infrastruktur (T1578)](#manipulation-der-ultra-pro-high-fidelity-cloud-infrastruktur-(t1578))
+- [Exploit-fähige KernelCallbackTable-Manipulation](#exploit-fähige-kernelcallbacktable-manipulation)
+- [Manipulation der Cloud-Infrastruktur (T1578)](#manipulation-der-cloud-infrastruktur-(t1578))
 - [Verdächtige Cloud-Instanzerstellung (T1578.001)](#verdächtige-cloud-instanzerstellung-(t1578001))
 - [Cloud-Snapshot-Exfiltration (T1578.002)](#cloud-snapshot-exfiltration-(t1578002))
 - [Zerstörung der Cloud-Instanz (T1578.003)](#zerstörung-der-cloud-instanz-(t1578003))
@@ -8639,16 +8639,19 @@ Uploads aus nicht-kreativen Abteilungsressourcen.
 
 
 ---
-## Ultra-Pro High-Fidelity-Textspeicher Exfil (T1567.004)
+## Textspeicher-Exfil (T1567.004)
 - **ID:** `T1567_004.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt durch Überwachung die programmgesteuerte Datenexfiltration auf Textspeicherseiten
-CLI-basierte POST-Anfragen, die API-Schlüssel oder Befehle zum Abrufen der Zwischenablage enthalten
-aus nicht-administrativen oder verdächtigen übergeordneten Prozessen.
+- **Beschreibung:** Erkennt die programmgesteuerte Exfiltration sensibler Daten auf öffentliche Textspeicherplattformen
+(Pastebin, Ghostbin, Hastebin, ControlC, Rentry) durch Überwachung:
+1. CLI-basierte POST-Anfragen, die API-Schlüssel oder Datennutzlasten enthalten.
+2. Befehle zum Scraping der Zwischenablage oder Zugriff auf vertrauliche Dateien.
+3. Ausführung aus nicht-administrativen oder verdächtigen übergeordneten Prozessen.
+Ausgenommen sind legitime Verwaltungs- und Softwareaktualisierungsaktivitäten.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -8657,16 +8660,19 @@ aus nicht-administrativen oder verdächtigen übergeordneten Prozessen.
 
 
 ---
-## Ultraprofessionelle, dynamische Auflösung und DGA (T1568)
+## Dynamische Auflösung und DGA (T1568)
 - **ID:** `T1568.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt dynamische Auflösung und DGA-Aktivität durch Identifizierung programmatischer Aktivitäten
-DNS-Abfragen innerhalb von Schleifen, Low-Level-DNS-API-Aufrufe von Skript-Engines,
-und anomale Domänenmuster von Nicht-Browser-Prozessen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt dynamische DNS-Auflösung und DGA-Aktivitäten (Domain Generation Algorithm).
+durch Überwachung:
+1. Programmatische DNS-Abfragen, die innerhalb von Schleifen oder Wiederholungslogik ausgeführt werden.
+2. Low-Level-DNS-API-Aufrufe von Skriptinterpretern.
+3. Hohe Entropie und anomale Domänenmuster in Befehlszeilen.
+Ausgeschlossen sind legitime Verwaltungs-, Automatisierungs- und interne Domänen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

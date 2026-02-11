@@ -1,2 +1,1 @@
-((((eventName = '*DeleteDetector*' OR eventName = '*UpdateDetector*' OR eventName = '*DeleteThreatIntelSet*' OR eventName = '*DeleteIPSet*'))) OR ((((eventName = '*CreateFilter*' OR eventName = '*UpdateFilter*' OR eventName = '*CreateSuppressionRule*'))) AND (requestParameters.((action = '*ARCHIVE*' OR action = '*SUPPRESS*'))))) AND ((userIdentity.((type = '*Root*'))|| (((userAgent = '*python-requests*' OR userAgent = '*kali*' OR userAgent = '*curl*' OR userAgent = '*postman*'))) OR userIdentity.sessionContext.attributes.((mfaAuthenticated = '*false*'))) AND (NOT (((userIdentity.((arn = '*role/Security-Infrastructure-Terraform*' OR arn = '*role/AWS-Service-Role*'))) AND ((sourceIPAddress = '*10.0.0.0/8*')))))
-)
+conversion_failed

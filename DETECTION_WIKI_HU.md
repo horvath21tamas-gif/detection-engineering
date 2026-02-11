@@ -449,7 +449,7 @@
 - [Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009)](#ultra-pro-high-fidelity-safe-mode-defense-evasion-(t1562009))
 - [Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010)](#ultra-pro-high-fidelity-defense-downgrade-attack-(t1562010))
 - [Ultra-Pro High-Fidelity virtualizáció és Sandbox Evasion (T1564.011)](#ultra-pro-high-fidelity-virtualizáció-és-sandbox-evasion-(t1564011))
-- [Ultra-Pro High-Fidelity felhőbiztonsági infrastruktúra károsodása (T1562.012)](#ultra-pro-high-fidelity-felhőbiztonsági-infrastruktúra-károsodása-(t1562012))
+- [Felhőbiztonsági infrastruktúra károsodása (T1562.012)](#felhőbiztonsági-infrastruktúra-károsodása-(t1562012))
 - [Távoli szolgáltatási munkamenet-eltérítés (T1563)](#távoli-szolgáltatási-munkamenet-eltérítés-(t1563))
 - [Helyi munkamenet-eltérítés (T1563.001)](#helyi-munkamenet-eltérítés-(t1563001))
 - [RDP munkamenet-eltérítés (T1563.002)](#rdp-munkamenet-eltérítés-(t1563002))
@@ -8119,14 +8119,15 @@ ellenőrzések és virtuális gép-specifikus illesztőprogram-keresések nem me
 
 
 ---
-## Ultra-Pro High-Fidelity felhőbiztonsági infrastruktúra károsodása (T1562.012)
+## Felhőbiztonsági infrastruktúra károsodása (T1562.012)
 - **ID:** `T1562_012.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a felhőalapú natív biztonsági szolgáltatások vakítására irányuló célzott kísérleteket.
-Az elnyomó szűrő létrehozására, a detektor törlésére és a
-fenyegetés intelligencia szabotázsa nem automatizált vagy root identitások által.
+- **Leírás:** Érzékeli az AWS-natív biztonsági vezérlők megsértésére irányuló célzott kísérleteket, mint pl
+GuardDuty, Security Hub és a kapcsolódó fenyegetés-felderítési mechanizmusok.
+Az érzékelő törlésére, az elnyomási szabályokkal való visszaélésre és a fenyegető információk manipulálására összpontosít
+gyökér, nem MFA vagy nem automatizált identitások kezdeményezték.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -8224,7 +8225,7 @@ Nem megbízható szülői folyamatok vagy a felhasználó által írható/nem sz
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Fájlok és könyvtárak elrejtésének gyanús használatát észleli a System (+s) és a Hidden (+h) attribútumokon keresztül.
-A nem megbízható szülői folyamatokra, a felhasználó által írható érzékeny könyvtárakra összpontosít, és elkerüli
+A nem megbízható szülői folyamatokra, a felhasználók által írható érzékeny könyvtárakra összpontosít, és elkerüli
 ismert biztonságos rendszer vagy automatizálási tevékenységek.
 
 #### 🚨 Response Playbook
@@ -8253,7 +8254,7 @@ miközben kiszűri a legitim rendszertelepítőket és az adminisztrációs auto
 
 
 ---
-## Rejtett ablak végrehajtás (T1564.003)
+## Rejtett ablak végrehajtása (T1564.003)
 - **ID:** `T1564_003.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
@@ -8309,7 +8310,7 @@ korlátozások vagy a rosszindulatú rakományok elrejtése.
 
 
 ---
-## Virtuális példány végrehajtásával való visszaélés (T1564.006)
+## Virtuális példány végrehajtási visszaélés (T1564.006)
 - **ID:** `T1564_006.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
@@ -8317,7 +8318,7 @@ korlátozások vagy a rosszindulatú rakományok elrejtése.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a virtuális példányok gyanús végrehajtását (Docker, VirtualBox, VMware)
-a kriminalisztikai jelzők (--rm), a kiemelt eszkalációs kísérletek figyelésével,
+a kriminalisztikai jelzőtáblák (--rm), a kiemelt eszkalációs kísérletek megfigyelésével,
 gazdagép hálózatának használata és végrehajtása nem megbízható szülői folyamatokból (Office alkalmazások,
 webszerverek, szkriptek).Megbízható fejlesztői és hangszerelési környezetek szűrése.
 

@@ -1,1 +1,1 @@
-eventName IN ("DeleteDetector", "UpdateDetector", "DeleteThreatIntelSet", "DeleteIPSet") OR (eventName IN ("CreateFilter", "UpdateFilter", "CreateSuppressionRule") requestParameters.action IN ("ARCHIVE", "SUPPRESS")) userIdentity.type="Root" OR userAgent IN ("*python-requests*", "*kali*", "*curl*", "*postman*") OR userIdentity.sessionContext.attributes.mfaAuthenticated="false" NOT (userIdentity.arn IN ("*role/Security-Infrastructure-Terraform*", "*role/AWS-Service-Role*") sourceIPAddress="10.0.0.0/8")
+conversion_failed

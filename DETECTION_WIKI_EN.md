@@ -449,7 +449,7 @@
 - [Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009)](#ultra-pro-high-fidelity-safe-mode-defense-evasion-(t1562009))
 - [Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010)](#ultra-pro-high-fidelity-defense-downgrade-attack-(t1562010))
 - [Ultra-Pro High-Fidelity Virtualization and Sandbox Evasion (T1564.011)](#ultra-pro-high-fidelity-virtualization-and-sandbox-evasion-(t1564011))
-- [Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012)](#ultra-pro-high-fidelity-cloud-security-infrastructure-impairment-(t1562012))
+- [Cloud Security Infrastructure Impairment (T1562.012)](#cloud-security-infrastructure-impairment-(t1562012))
 - [Remote Service Session Hijacking (T1563)](#remote-service-session-hijacking-(t1563))
 - [Local Session Hijacking (T1563.001)](#local-session-hijacking-(t1563001))
 - [RDP Session Hijacking (T1563.002)](#rdp-session-hijacking-(t1563002))
@@ -8556,14 +8556,15 @@ checks, and VM-specific driver searches from untrusted process chains.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012)
+## Cloud Security Infrastructure Impairment (T1562.012)
 - **ID:** `T1562_012.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects targeted attempts to blind cloud native security services. 
-Focuses on suppression filter creation, detector deletion, and 
-threat intelligence sabotage by non-automated or root identities.
+- **Leírás:** Detects targeted attempts to impair AWS-native security controls such as 
+GuardDuty, Security Hub, and related threat intelligence mechanisms.
+Focuses on detector deletion, suppression rule abuse, and threat intel tampering 
+initiated by root, non-MFA, or non-automated identities.
 
 
 #### 🚨 Response Playbook

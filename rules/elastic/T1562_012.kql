@@ -1,1 +1,1 @@
-((eventName:(DeleteDetector OR UpdateDetector OR DeleteThreatIntelSet OR DeleteIPSet)) OR ((eventName:(CreateFilter OR UpdateFilter OR CreateSuppressionRule)) AND (requestParameters.action:(ARCHIVE OR SUPPRESS)))) AND ((userIdentity.type:Root OR (userAgent:(*python\-requests* OR *kali* OR *curl* OR *postman*)) OR userIdentity.sessionContext.attributes.mfaAuthenticated:false) AND (NOT ((userIdentity.arn:(*role\/Security\-Infrastructure\-Terraform* OR *role\/AWS\-Service\-Role*)) AND sourceIPAddress:10.0.0.0\/8)))
+conversion_failed

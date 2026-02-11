@@ -449,7 +449,7 @@
 - [Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009)](#ultra-pro-high-fidelity-safe-mode-defense-evasion-(t1562009))
 - [Ultra-Pro High-Fidelity-Verteidigungs-Downgrade-Angriff (T1562.010)](#ultra-pro-high-fidelity-verteidigungs-downgrade-angriff-(t1562010))
 - [Ultra-Pro High-Fidelity-Virtualisierung und Sandbox-Umgehung (T1564.011)](#ultra-pro-high-fidelity-virtualisierung-und-sandbox-umgehung-(t1564011))
-- [Beeinträchtigung der Ultra-Pro High-Fidelity Cloud-Sicherheitsinfrastruktur (T1562.012)](#beeinträchtigung-der-ultra-pro-high-fidelity-cloud-sicherheitsinfrastruktur-(t1562012))
+- [Beeinträchtigung der Cloud-Sicherheitsinfrastruktur (T1562.012)](#beeinträchtigung-der-cloud-sicherheitsinfrastruktur-(t1562012))
 - [Entführung von Remote-Service-Sitzungen (T1563)](#entführung-von-remote-service-sitzungen-(t1563))
 - [Entführung lokaler Sitzungen (T1563.001)](#entführung-lokaler-sitzungen-(t1563001))
 - [RDP-Sitzungs-Hijacking (T1563.002)](#rdp-sitzungs-hijacking-(t1563002))
@@ -8119,14 +8119,15 @@ Sandboxes oder Analyseumgebungen.Konzentriert sich auf WMI-Hardwareabfragen und 
 
 
 ---
-## Beeinträchtigung der Ultra-Pro High-Fidelity Cloud-Sicherheitsinfrastruktur (T1562.012)
+## Beeinträchtigung der Cloud-Sicherheitsinfrastruktur (T1562.012)
 - **ID:** `T1562_012.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt gezielte Versuche, Cloud-native Sicherheitsdienste auszublenden.
-Konzentriert sich auf die Erstellung von Unterdrückungsfiltern, das Löschen von Detektoren usw
-Sabotage von Bedrohungsinformationen durch nicht automatisierte oder Root-Identitäten.
+- **Beschreibung:** Erkennt gezielte Versuche, AWS-native Sicherheitskontrollen zu beeinträchtigen, z
+GuardDuty, Security Hub und zugehörige Threat-Intelligence-Mechanismen.
+Der Schwerpunkt liegt auf der Löschung von Detektoren, dem Missbrauch von Unterdrückungsregeln und der Manipulation von Bedrohungsinformationen
+initiiert durch Root-, Nicht-MFA- oder nicht automatisierte Identitäten.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**
@@ -8353,7 +8354,7 @@ Dolmetscherausführung.Konzentriert sich auf Nicht-Administrator- oder nicht ver
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt verdächtige Änderungen an E-Mail-Posteingangsregeln, die darauf abzielen,
+- **Beschreibung:** Erkennt verdächtige Änderungen an E-Mail-Posteingangsregeln, die darauf abzielen, zu verbergen,
 Löschen oder Weiterleiten sicherheitsrelevanter Warnungen.Überwacht Eltern ohne Administratorrechte
 Prozesse und nicht vertrauenswürdige Shells für Aktionen, die die Erkennung von verhindern könnten
 Phishing, MFA-Warnungen oder Benachrichtigungen über unbefugten Zugriff.

@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-11 13:08:03`
+**Utolsó frissítés:** `2026-02-11 13:30:01`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -455,7 +455,7 @@
 | T1562.009 | CRITICAL | Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009) |
 | T1562.010 | CRITICAL | Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010) |
 | T1562.011 | HIGH | Ultra-Pro High-Fidelity Virtualization and Sandbox Evasion (T1564.011) |
-| T1562.012 | CRITICAL | Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012) |
+| T1562.012 | CRITICAL | Cloud Security Infrastructure Impairment (T1562.012) |
 | T1563 | CRITICAL | Remote Service Session Hijacking (T1563) |
 | T1563.001 | CRITICAL | Remote Service Session Hijacking (T1563), Local Session Hijacking (T1563.001) |
 | T1563.002 | CRITICAL | Remote Service Session Hijacking (T1563), RDP Session Hijacking (T1563.002) |

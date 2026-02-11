@@ -11173,16 +11173,14 @@ naplócsatorna-felderítésen keresztül rendellenes végrehajtási kontextusokb
 
 
 ---
-## Ultra-Pro High-Fidelity megszemélyesítés és személyazonosság-eltérítés (T1656)
+## Gyanús megszemélyesítés RunAs visszaélésen vagy megtévesztő helyi fiók létrehozásán keresztül
 - **ID:** `T1656.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a technikai megszemélyesítési kísérleteket, beleértve a gyanús „runas” végrehajtást
-oldalirányú mozgáshoz és megtévesztő helyi beszámolók létrehozásához használt minták
-amelyek a szokásos HR folyamatokon kívüli vezetői vagy adminisztratív identitásokat utánozzák.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a technikai megszemélyesítési kísérleteket, beleértve a gyanús RunAs-használatot oldalirányú mozgáshoz és olyan megtévesztő helyi fiókok létrehozását, amelyek a szabványos IT-kiépítési folyamatokon kívüli vezetői vagy adminisztratív identitásokat utánoznak.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -11796,16 +11796,14 @@ via log channel discovery from anomalous execution contexts.
 
 
 ---
-## Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656)
+## Suspicious Impersonation via RunAs Abuse or Deceptive Local Account Creation
 - **ID:** `T1656.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects technical impersonation attempts including suspicious 'runas' execution 
-patterns used for lateral movement and the creation of deceptive local accounts 
-that mimic executive or administrative identities outside of standard HR processes.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects technical impersonation attempts including suspicious RunAs usage  for lateral movement and creation of deceptive local accounts that mimic  executive or administrative identities outside standard IT provisioning processes.
 
 
 #### 🚨 Response Playbook

@@ -11173,16 +11173,14 @@ mit nativen Tools oder PowerShell.Konzentriert sich auf die Identifizierung von 
 
 
 ---
-## Ultra-Pro High-Fidelity-Identitätsbetrug und Identitätsdiebstahl (T1656)
+## Verdächtiger Identitätswechsel durch RunAs-Missbrauch oder irreführende lokale Kontoerstellung
 - **ID:** `T1656.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt technische Nachahmungsversuche, einschließlich verdächtiger „Runas“-Ausführungen
-Muster, die für laterale Bewegungen und die Erstellung irreführender lokaler Konten verwendet werden
-die Führungs- oder Verwaltungsidentitäten außerhalb der Standard-HR-Prozesse imitieren.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt technische Nachahmungsversuche, einschließlich verdächtiger RunAs-Nutzung für laterale Bewegungen und die Erstellung irreführender lokaler Konten, die Führungs- oder Administratoridentitäten außerhalb standardmäßiger IT-Bereitstellungsprozesse imitieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

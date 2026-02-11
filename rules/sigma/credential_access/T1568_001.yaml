@@ -1,49 +1,77 @@
-title: Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001)
+title: Fast Flux & DNS Cache Evasion (T1568.001)
 id: 02b1f5eb-631c-4ec0-b0a9-ae79153494ac
 status: stable
 description: |
-    Detects Fast Flux DNS infrastructure usage by identifying forced DNS cache 
-    flushing combined with programmatic name resolution and loop-based 
-    connectivity checks from non-system processes.
-author: hota05
-date: 2026-02-09
+  Detects Fast Flux DNS infrastructure usage and DNS cache evasion by monitoring:
+  1. Forced DNS cache flushing via system commands or PowerShell.
+  2. Programmatic DNS resolution combined with looped connectivity checks.
+  3. Execution from non-standard scripting or interpreter processes.
+  Excludes legitimate administrative and cloud automation activity.
+author: hota05 
+date: 2026-02-11
 tags:
-    - attack.command_and_control
-    - attack.t1568.001
+  - attack.command_and_control
+  - attack.t1568.001
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_cache_evasion:
-        CommandLine|contains:
-            - 'ipconfig /flushdns'          
-            - 'Clear-DnsClientCache'       
+  selection_cache_evasion:
+    CommandLine|contains:
+      - 'ipconfig /flushdns'
+      - 'Clear-DnsClientCache'
+      - 'Remove-DnsClientCache'
+      - 'Flush-DnsClientCache'
 
-    selection_resolution_logic:
-        CommandLine|contains:
-            - 'Resolve-DnsName'            
-            - '[System.Net.Dns]::'        
-            - 'while('                     
-            - 'Start-Sleep'              
+  selection_resolution_logic:
+    CommandLine|contains:
+      - 'Resolve-DnsName'
+      - '[System.Net.Dns]::'
+      - 'while('
+      - 'for('
+      - 'Start-Sleep'
+      - '-RetryCount'
+      - '-Timeout'
 
-    selection_procs:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
-            - '\rundll32.exe'
-            - '\regsvr32.exe'
+  selection_procs:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\rundll32.exe'
+      - '\regsvr32.exe'
+      - '\mshta.exe'
 
-    filter_legit_infra:
-        - CommandLine|contains:
-            - '\Program Files\'
-            - 'Microsoft\Azure'          
-            - 'HealthCheck'                
-            - 'Chocolatey'
-        - username: 'NT AUTHORITY\SYSTEM'      
-        - ParentImage|endswith:
-            - '\services.exe'              
+  filter_legit_infra:
+    - CommandLine|contains:
+        - '\Program Files\'
+        - 'Microsoft\Azure'
+        - 'HealthCheck'
+        - 'Chocolatey'
+        - '_vlmcs._tcp'
+    - username: 'NT AUTHORITY\SYSTEM'
+    - ParentImage|endswith:
+        - '\services.exe'
+        - '\explorer.exe'
 
-    condition: selection_cache_evasion and selection_resolution_logic and selection_procs and not filter_legit_infra
+  condition: selection_cache_evasion and selection_resolution_logic and selection_procs and not filter_legit_infra
+
+fields:
+  - Time
+  - SourceImage
+  - ParentImage
+  - CommandLine
+  - ProcessId
+  - SourceUsername
+  - DestinationDomain
+  - DestinationIp
+
+falsepositives:
+  - Internal DNS troubleshooting scripts
+  - Cloud automation and monitoring agents
+  - PowerShell DSC / Config Management routines
+  - Chocolatey / PackageManager network verification
+
 level: critical

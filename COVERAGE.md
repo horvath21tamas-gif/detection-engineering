@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-11 08:08:24`
+**Utolsó frissítés:** `2026-02-11 08:29:29`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -642,5 +642,5 @@
 | T1653 | MEDIUM | Ultra-Pro Power Settings Manipulation (T1137.001) |
 | T1654 | HIGH | Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654) |
 | T1656 | HIGH | Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656) |
-| T1657 | HIGH | Ultra-Pro High-Fidelity Financial Theft (T1657) |
+| T1657 | HIGH | Suspicious Clipboard Manipulation and Financial Document Access From Untrusted Parent Process |
 | T1659 | HIGH | Professional Content Impersonation and Infrastructure Mirroring |

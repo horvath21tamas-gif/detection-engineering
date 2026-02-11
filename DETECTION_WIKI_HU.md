@@ -636,7 +636,7 @@
 - [Ultra-Pro teljesítménybeállítások kezelése (T1137.001)](#ultra-pro-teljesítménybeállítások-kezelése-(t1137001))
 - [Ultra-Pro nagy pontosságú naplófeltárás (T1654)](#ultra-pro-nagy-pontosságú-naplófeltárás-(t1654))
 - [Ultra-Pro High-Fidelity megszemélyesítés és személyazonosság-eltérítés (T1656)](#ultra-pro-high-fidelity-megszemélyesítés-és-személyazonosság-eltérítés-(t1656))
-- [Ultra-Pro High-Fidelity pénzügyi lopás (T1657)](#ultra-pro-high-fidelity-pénzügyi-lopás-(t1657))
+- [Gyanús vágólap-manipuláció és pénzügyi dokumentumokhoz való hozzáférés nem megbízható szülői folyamatból](#gyanús-vágólap-manipuláció-és-pénzügyi-dokumentumokhoz-való-hozzáférés-nem-megbízható-szülői-folyamatból)
 - [Professzionális tartalom megszemélyesítése és infrastruktúra tükrözése](#professzionális-tartalom-megszemélyesítése-és-infrastruktúra-tükrözése)
 - [Gyanús hozzáférés az LSASS folyamatmemóriához (hitelesítő adatok kiürítési kísérlete)](#gyanús-hozzáférés-az-lsass-folyamatmemóriához-(hitelesítő-adatok-kiürítési-kísérlete))
 
@@ -11191,16 +11191,14 @@ amelyek a szokásos HR folyamatokon kívüli vezetői vagy adminisztratív ident
 
 
 ---
-## Ultra-Pro High-Fidelity pénzügyi lopás (T1657)
+## Gyanús vágólap-manipuláció és pénzügyi dokumentumokhoz való hozzáférés nem megbízható szülői folyamatból
 - **ID:** `T1657.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A vágólapra történő figyeléssel észleli a lehetséges pénzügyi lopásokat és csalásokat
-manipuláció (címcsere) és jogosulatlan pénzügyi bizonylat
-gyanús/weboldali szülőfolyamatokból származó hozzáférés.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a potenciális pénzügyi lopást vagy csalási tevékenységet, amely magában foglalja a vágólap manipulációját (pl. címcsere), a pénzügyi dokumentumokhoz való hozzáféréssel kombinálva, és amelyet gyanús szülői folyamatok (például böngészők, Office-alkalmazások vagy webes szolgáltatások) indítottak el.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

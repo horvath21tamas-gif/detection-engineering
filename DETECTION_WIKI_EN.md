@@ -636,7 +636,7 @@
 - [Ultra-Pro Power Settings Manipulation (T1137.001)](#ultra-pro-power-settings-manipulation-(t1137001))
 - [Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654)](#ultra-pro-high-fidelity-log-enumeration-discovery-(t1654))
 - [Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656)](#ultra-pro-high-fidelity-impersonation-and-identity-hijacking-(t1656))
-- [Ultra-Pro High-Fidelity Financial Theft (T1657)](#ultra-pro-high-fidelity-financial-theft-(t1657))
+- [Suspicious Clipboard Manipulation and Financial Document Access From Untrusted Parent Process](#suspicious-clipboard-manipulation-and-financial-document-access-from-untrusted-parent-process)
 - [Professional Content Impersonation and Infrastructure Mirroring](#professional-content-impersonation-and-infrastructure-mirroring)
 - [Suspicious Access to LSASS Process Memory (Credential Dumping Attempt)](#suspicious-access-to-lsass-process-memory-(credential-dumping-attempt))
 
@@ -11815,16 +11815,14 @@ that mimic executive or administrative identities outside of standard HR process
 
 
 ---
-## Ultra-Pro High-Fidelity Financial Theft (T1657)
+## Suspicious Clipboard Manipulation and Financial Document Access From Untrusted Parent Process
 - **ID:** `T1657.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects potential financial theft and fraud by monitoring for clipboard 
-manipulation (address swapping) and unauthorized financial document 
-access originating from suspicious/web-facing parent processes.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects potential financial theft or fraud activity involving clipboard manipulation (e.g. address swapping) combined with access to financial documents, initiated from suspicious parent processes such as browsers, Office applications, or web-facing services.
 
 
 #### 🚨 Response Playbook

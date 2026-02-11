@@ -636,7 +636,7 @@
 - [Manipulation der Ultra-Pro-Energieeinstellungen (T1137.001)](#manipulation-der-ultra-pro-energieeinstellungen-(t1137001))
 - [Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654)](#ultra-pro-high-fidelity-log-enumeration-discovery-(t1654))
 - [Ultra-Pro High-Fidelity-Identitätsbetrug und Identitätsdiebstahl (T1656)](#ultra-pro-high-fidelity-identitätsbetrug-und-identitätsdiebstahl-(t1656))
-- [Ultra-Pro High-Fidelity-Finanzdiebstahl (T1657)](#ultra-pro-high-fidelity-finanzdiebstahl-(t1657))
+- [Verdächtige Manipulation der Zwischenablage und Zugriff auf Finanzdokumente über einen nicht vertrauenswürdigen übergeordneten Prozess](#verdächtige-manipulation-der-zwischenablage-und-zugriff-auf-finanzdokumente-über-einen-nicht-vertrauenswürdigen-übergeordneten-prozess)
 - [Professionelle Content-Impersonation und Infrastrukturspiegelung](#professionelle-content-impersonation-und-infrastrukturspiegelung)
 - [Verdächtiger Zugriff auf den LSASS-Prozessspeicher (Credential Dumping-Versuch)](#verdächtiger-zugriff-auf-den-lsass-prozessspeicher-(credential-dumping-versuch))
 
@@ -11191,16 +11191,14 @@ die Führungs- oder Verwaltungsidentitäten außerhalb der Standard-HR-Prozesse 
 
 
 ---
-## Ultra-Pro High-Fidelity-Finanzdiebstahl (T1657)
+## Verdächtige Manipulation der Zwischenablage und Zugriff auf Finanzdokumente über einen nicht vertrauenswürdigen übergeordneten Prozess
 - **ID:** `T1657.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt potenziellen Finanzdiebstahl und Betrug durch Überwachung der Zwischenablage
-Manipulation (Adressaustausch) und nicht autorisiertes Finanzdokument
-Zugriff, der von verdächtigen/webbezogenen übergeordneten Prozessen ausgeht.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt potenzielle Finanzdiebstahl- oder Betrugsaktivitäten im Zusammenhang mit der Manipulation der Zwischenablage (z. B. Adressvertauschung) in Kombination mit dem Zugriff auf Finanzdokumente, die von verdächtigen übergeordneten Prozessen wie Browsern, Office-Anwendungen oder webbasierten Diensten initiiert werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

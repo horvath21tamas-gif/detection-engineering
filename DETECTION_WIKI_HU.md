@@ -11158,7 +11158,7 @@ szülőfolyamatok, például a PowerShell vagy a CMD, miközben szűrik a jogos 
 
 
 ---
-## Gyanús megszemélyesítés RunAs visszaélésen vagy megtévesztő helyi fiók létrehozásán keresztül
+## Gyanús személyes adatokkal való visszaélés RunAs visszaélésen vagy megtévesztő helyi fiók létrehozásán keresztül
 - **ID:** `T1656.yaml`
 - **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)

@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-11 10:32:42`
+**Utolsó frissítés:** `2026-02-11 11:43:51`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -513,7 +513,7 @@
 | T1574.012 | CRITICAL | Exploit-Grade COR_PROFILER Hijacking via User-Writable Profiler DLL |
 | T1574.013 | CRITICAL | Exploit-Grade KernelCallbackTable Manipulation via Remote Memory Write |
 | T1578 | CRITICAL | Cloud Snapshot Exfiltration (T1578.002), Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578) |
-| T1578.001 | CRITICAL | Ultra-Pro High-Fidelity Suspicious Cloud Instance Creation (T1578.001) |
+| T1578.001 | CRITICAL | Suspicious Cloud Instance Creation (T1578.001) |
 | T1578.002 | CRITICAL | Cloud Snapshot Exfiltration (T1578.002) |
 | T1578.003 | CRITICAL | Cloud Instance Destruction (T1578.003) |
 | T1578.004 | CRITICAL | Cloud Image Tampering (T1578.004) |

@@ -507,7 +507,7 @@
 - [Exploit-Grade COR_PROFILER Hijacking via User-Writable Profiler DLL](#exploit-grade-cor_profiler-hijacking-via-user-writable-profiler-dll)
 - [Exploit-Grade KernelCallbackTable Manipulation via Remote Memory Write](#exploit-grade-kernelcallbacktable-manipulation-via-remote-memory-write)
 - [Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578)](#ultra-pro-high-fidelity-cloud-infrastructure-tampering-(t1578))
-- [Ultra-Pro High-Fidelity Suspicious Cloud Instance Creation (T1578.001)](#ultra-pro-high-fidelity-suspicious-cloud-instance-creation-(t1578001))
+- [Suspicious Cloud Instance Creation (T1578.001)](#suspicious-cloud-instance-creation-(t1578001))
 - [Cloud Snapshot Exfiltration (T1578.002)](#cloud-snapshot-exfiltration-(t1578002))
 - [Cloud Instance Destruction (T1578.003)](#cloud-instance-destruction-(t1578003))
 - [Cloud Image Tampering (T1578.004)](#cloud-image-tampering-(t1578004))
@@ -9621,14 +9621,14 @@ or prepare for data exfiltration, filtered by identity behavior and source trust
 
 
 ---
-## Ultra-Pro High-Fidelity Suspicious Cloud Instance Creation (T1578.001)
+## Suspicious Cloud Instance Creation (T1578.001)
 - **ID:** `T1578_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects the creation of high-resource or expensive cloud instances from untrusted 
-identities or outside approved regions. Optimized for Cryptojacking detection 
-with minimal false positives from CI/CD pipelines.
+- **Leírás:** Detects creation of high-resource or expensive cloud instances from untrusted 
+identities or outside approved regions. Optimized for Cryptojacking and unauthorized 
+resource abuse, while filtering out CI/CD and autoscaling operations.
 
 
 #### 🚨 Response Playbook

@@ -507,7 +507,7 @@
 - [Exploit-Grade COR_PROFILER eltérítés a User-Writable Profiler DLL-en keresztül](#exploit-grade-cor_profiler-eltérítés-a-user-writable-profiler-dll-en-keresztül)
 - [Exploit-grade KernelCallbackTable manipuláció távoli memóriaíráson keresztül](#exploit-grade-kernelcallbacktable-manipuláció-távoli-memóriaíráson-keresztül)
 - [Ultra-Pro High-Fidelity felhő infrastruktúra manipuláció (T1578)](#ultra-pro-high-fidelity-felhő-infrastruktúra-manipuláció-(t1578))
-- [Ultra-Pro High-Fidelity gyanús felhőpéldány létrehozása (T1578.001)](#ultra-pro-high-fidelity-gyanús-felhőpéldány-létrehozása-(t1578001))
+- [Gyanús felhőpéldány létrehozása (T1578.001)](#gyanús-felhőpéldány-létrehozása-(t1578001))
 - [Cloud Snapshot Exfiltration (T1578.002)](#cloud-snapshot-exfiltration-(t1578002))
 - [Felhőpéldány-megsemmisítés (T1578.003)](#felhőpéldány-megsemmisítés-(t1578003))
 - [Felhőkép-szabotázs (T1578.004)](#felhőkép-szabotázs-(t1578004))
@@ -9126,14 +9126,14 @@ vagy felkészülni az adatok kiszűrésére, az identitás viselkedése és a fo
 
 
 ---
-## Ultra-Pro High-Fidelity gyanús felhőpéldány létrehozása (T1578.001)
+## Gyanús felhőpéldány létrehozása (T1578.001)
 - **ID:** `T1578_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a nagy erőforrásigényű vagy drága felhőpéldányok létrehozását nem megbízhatókból
-identitások vagy jóváhagyott régiókon kívül.Cryptojacking észlelésére optimalizálva
-minimális hamis pozitív eredménnyel a CI/CD csővezetékekből.
+- **Leírás:** Érzékeli a nagy erőforrásigényű vagy drága felhőpéldányok létrehozását a nem megbízható forrásokból
+identitások vagy jóváhagyott régiókon kívül.Cryptojacking-re optimalizálva és jogosulatlanul
+erőforrás-visszaélés, miközben kiszűri a CI/CD és az automatikus skálázási műveleteket.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

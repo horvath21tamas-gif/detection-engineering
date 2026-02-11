@@ -507,7 +507,7 @@
 - [COR_PROFILER-Hijacking der Exploit-Klasse über eine vom Benutzer beschreibbare Profiler-DLL](#cor_profiler-hijacking-der-exploit-klasse-über-eine-vom-benutzer-beschreibbare-profiler-dll)
 - [Exploit-Grade-KernelCallbackTable-Manipulation über Remote-Speicher-Schreiben](#exploit-grade-kernelcallbacktable-manipulation-über-remote-speicher-schreiben)
 - [Manipulation der Ultra-Pro-High-Fidelity-Cloud-Infrastruktur (T1578)](#manipulation-der-ultra-pro-high-fidelity-cloud-infrastruktur-(t1578))
-- [Ultra-Pro High-Fidelity-Erstellung verdächtiger Cloud-Instanzen (T1578.001)](#ultra-pro-high-fidelity-erstellung-verdächtiger-cloud-instanzen-(t1578001))
+- [Verdächtige Cloud-Instanzerstellung (T1578.001)](#verdächtige-cloud-instanzerstellung-(t1578001))
 - [Cloud-Snapshot-Exfiltration (T1578.002)](#cloud-snapshot-exfiltration-(t1578002))
 - [Zerstörung der Cloud-Instanz (T1578.003)](#zerstörung-der-cloud-instanz-(t1578003))
 - [Manipulation von Wolkenbildern (T1578.004)](#manipulation-von-wolkenbildern-(t1578004))
@@ -9126,14 +9126,14 @@ Oder bereiten Sie sich auf die Datenexfiltration vor, gefiltert nach Identitäts
 
 
 ---
-## Ultra-Pro High-Fidelity-Erstellung verdächtiger Cloud-Instanzen (T1578.001)
+## Verdächtige Cloud-Instanzerstellung (T1578.001)
 - **ID:** `T1578_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 - **Beschreibung:** Erkennt die Erstellung ressourcenintensiver oder teurer Cloud-Instanzen aus nicht vertrauenswürdigen Quellen
-Identitäten oder außerhalb genehmigter Regionen.Optimiert für die Erkennung von Cryptojacking
-mit minimalen Fehlalarmen aus CI/CD-Pipelines.
+Identitäten oder außerhalb genehmigter Regionen.Optimiert für Cryptojacking und nicht autorisiert
+Ressourcenmissbrauch, während CI/CD- und Autoscaling-Vorgänge herausgefiltert werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

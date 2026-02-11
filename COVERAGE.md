@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-11 13:30:01`
+**Utolsó frissítés:** `2026-02-11 13:50:21`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -312,7 +312,7 @@
 | T1498 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498) |
 | T1498.001 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498), Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001) |
 | T1498.002 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498) |
-| T1499 | CRITICAL | Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
+| T1499 | CRITICAL | Disk Structure Wipe, Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
 | T1499.001 | CRITICAL | Ultra-Pro High-Fidelity OS Self-Destruction (T1499.001) |
 | T1499.002 | CRITICAL | Ultra-Pro High-Fidelity Service Exhaustion (T1499.002) |
 | T1499.003 | CRITICAL | Ultra-Pro High-Fidelity OS Self-Destruction (T1499.003), Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
@@ -443,18 +443,17 @@
 | T1560.003 | CRITICAL | Ultra-Pro High-Fidelity Archive via Custom Method (T1560.003) |
 | T1561 | CRITICAL | Ultra-Pro High-Fidelity Disk Content Wipe (T1561.001) |
 | T1561.001 | CRITICAL | Ultra-Pro High-Fidelity Disk Content Wipe (T1561.001), Ultra-Pro High-Fidelity Disk Wipe (T1561) |
-| T1561.002 | CRITICAL | Ultra-Pro High-Fidelity Disk Structure Wipe (T1561.002), Ultra-Pro High-Fidelity Disk Wipe (T1561) |
+| T1561.002 | CRITICAL | Disk Structure Wipe, Ultra-Pro High-Fidelity Disk Wipe (T1561) |
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.002 | CRITICAL | Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002) |
 | T1562.003 | HIGH | Command History Logging Impairment |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |
-| T1562.006 | CRITICAL | Ultra-Pro High-Fidelity Indicator Blocking and Telemetry Silencing (T1562.006) |
-| T1562.007 | CRITICAL | Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007) |
-| T1562.008 | CRITICAL | Ultra-Pro High-Fidelity Cloud Logging Impairment (T1562.008) |
-| T1562.009 | CRITICAL | Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009) |
-| T1562.010 | CRITICAL | Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010) |
-| T1562.011 | HIGH | Ultra-Pro High-Fidelity Virtualization and Sandbox Evasion (T1564.011) |
+| T1562.006 | CRITICAL | Indicator Blocking and Telemetry Suppression |
+| T1562.007 | CRITICAL | Cloud Firewall Impairment (T1562.007) |
+| T1562.008 | CRITICAL | Cloud Logging Impairment (T1562.008) |
+| T1562.009 | CRITICAL | Safe Mode Defense Evasion (T1562.009) |
+| T1562.010 | CRITICAL | Defense Downgrade Attack (T1562.010) |
 | T1562.012 | CRITICAL | Cloud Security Infrastructure Impairment (T1562.012) |
 | T1563 | CRITICAL | Remote Service Session Hijacking (T1563) |
 | T1563.001 | CRITICAL | Remote Service Session Hijacking (T1563), Local Session Hijacking (T1563.001) |

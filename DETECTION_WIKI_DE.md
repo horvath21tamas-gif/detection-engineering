@@ -437,18 +437,18 @@
 - [Ultra-Pro High-Fidelity-Archiv über benutzerdefinierte Methode (T1560.003)](#ultra-pro-high-fidelity-archiv-über-benutzerdefinierte-methode-(t1560003))
 - [Ultra-Pro High-Fidelity Disk Wipe (T1561)](#ultra-pro-high-fidelity-disk-wipe-(t1561))
 - [Ultra-Pro High-Fidelity-Datenträgerinhaltslöschung (T1561.001)](#ultra-pro-high-fidelity-datenträgerinhaltslöschung-(t1561001))
-- [Ultra-Pro High-Fidelity Disk Structure Wipe (T1561.002)](#ultra-pro-high-fidelity-disk-structure-wipe-(t1561002))
+- [Datenträgerstruktur löschen](#datenträgerstruktur-löschen)
 - [Verdächtige Beendigung von Sicherheitsdiensten](#verdächtige-beendigung-von-sicherheitsdiensten)
 - [Deaktivieren oder ändern Sie den Windows Defender-Schutz mit PowerShell](#deaktivieren-oder-ändern-sie-den-windows-defender-schutz-mit-powershell)
 - [Ultra-Pro High-Fidelity Deaktivieren Sie die Windows-Ereignisprotokollierung (T1562.002)](#ultra-pro-high-fidelity-deaktivieren-sie-die-windows-ereignisprotokollierung-(t1562002))
 - [Beeinträchtigung der Protokollierung des Befehlsverlaufs](#beeinträchtigung-der-protokollierung-des-befehlsverlaufs)
 - [Verdächtige Firewall-Änderung über Netsh.exe](#verdächtige-firewall-änderung-über-netshexe)
-- [Ultra-Pro High-Fidelity-Indikatorblockierung und Telemetrie-Stummschaltung (T1562.006)](#ultra-pro-high-fidelity-indikatorblockierung-und-telemetrie-stummschaltung-(t1562006))
-- [Beeinträchtigung der Ultra-Pro High-Fidelity Cloud Firewall (T1562.007)](#beeinträchtigung-der-ultra-pro-high-fidelity-cloud-firewall-(t1562007))
-- [Beeinträchtigung der Ultra-Pro High-Fidelity-Cloud-Protokollierung (T1562.008)](#beeinträchtigung-der-ultra-pro-high-fidelity-cloud-protokollierung-(t1562008))
-- [Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009)](#ultra-pro-high-fidelity-safe-mode-defense-evasion-(t1562009))
-- [Ultra-Pro High-Fidelity-Verteidigungs-Downgrade-Angriff (T1562.010)](#ultra-pro-high-fidelity-verteidigungs-downgrade-angriff-(t1562010))
-- [Ultra-Pro High-Fidelity-Virtualisierung und Sandbox-Umgehung (T1564.011)](#ultra-pro-high-fidelity-virtualisierung-und-sandbox-umgehung-(t1564011))
+- [Anzeigeblockierung und Telemetrieunterdrückung](#anzeigeblockierung-und-telemetrieunterdrückung)
+- [Beeinträchtigung der Cloud-Firewall (T1562.007)](#beeinträchtigung-der-cloud-firewall-(t1562007))
+- [Beeinträchtigung der Cloud-Protokollierung (T1562.008)](#beeinträchtigung-der-cloud-protokollierung-(t1562008))
+- [Verteidigungsumgehung im abgesicherten Modus (T1562.009)](#verteidigungsumgehung-im-abgesicherten-modus-(t1562009))
+- [Verteidigungsherabstufungsangriff (T1562.010)](#verteidigungsherabstufungsangriff-(t1562010))
+- [Virtualisierung und Sandbox-Umgehung (T1564.011)](#virtualisierung-und-sandbox-umgehung-(t1564011))
 - [Beeinträchtigung der Cloud-Sicherheitsinfrastruktur (T1562.012)](#beeinträchtigung-der-cloud-sicherheitsinfrastruktur-(t1562012))
 - [Entführung von Remote-Service-Sitzungen (T1563)](#entführung-von-remote-service-sitzungen-(t1563))
 - [Entführung lokaler Sitzungen (T1563.001)](#entführung-lokaler-sitzungen-(t1563001))
@@ -7915,16 +7915,19 @@ Bereitstellung bekanntermaßen guter Verwaltungs-, Sicherheits- und Imaging-Tool
 
 
 ---
-## Ultra-Pro High-Fidelity Disk Structure Wipe (T1561.002)
+## Datenträgerstruktur löschen
 - **ID:** `T1561_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Zerstörung der Festplattenstruktur auf niedriger Ebene (Löschen der Partitionstabelle, Überschreiben des MBR).
-durch Überwachung auf destruktive CLI-Argumente und unverfälschte Gerätezugriffszeichenfolgen
-von nicht standardmäßigen übergeordneten Prozessen oder nicht vertrauenswürdigen Speicherorten.
+- **Beschreibung:** Erkennt zerstörerische Festplattenoperationen auf niedriger Ebene, z. B. das Löschen von Partitionstabellen,
+MBR-Überschreiben und vollständiges Löschen der Festplatte.
+
+Überwacht auf destruktive CLI-Argumente, unformatierte Gerätezugriffsmuster usw
+nicht vertrauenswürdigen Ausführungskontext, um Ransomware, Wiper oder bösartige Skripte zu verhindern
+vor der Zerstörung von Scheibenstrukturen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -1,1 +1,1 @@
-Image IN ("*\\diskpart.exe", "*\\powershell.exe", "*\\pwsh.exe", "*\\dd.exe", "*\\format.com") CommandLine IN ("*clean*", "*delete partition*", "*Remove-Partition*", "*Clear-Disk*", "*\\.\\PhysicalDrive*", "*count=1 bs=512*") ParentImage IN ("*\\winword.exe", "*\\excel.exe", "*\\httpd.exe", "*\\rundll32.exe", "*\\services.exe") OR Image IN ("*\\Temp\\*", "*\\Users\\Public\\*", "*\\AppData\\Local\\Temp\\*") NOT (username="NT AUTHORITY\\SYSTEM" OR ParentImage IN ("*\\CcmExec.exe", "*\\setup.exe") OR CommandLine IN ("*vds.exe*", "*scripts\\deployment*"))
+conversion_failed

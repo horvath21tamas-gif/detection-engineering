@@ -437,18 +437,18 @@
 - [Ultra-Pro High-Fidelity archívum egyéni módszerrel (T1560.003)](#ultra-pro-high-fidelity-archívum-egyéni-módszerrel-(t1560003))
 - [Ultra-Pro High-Fidelity Disk Wipe (T1561)](#ultra-pro-high-fidelity-disk-wipe-(t1561))
 - [Ultra-Pro High-Fidelity Disk Content Wipe (T1561.001)](#ultra-pro-high-fidelity-disk-content-wipe-(t1561001))
-- [Ultra-Pro High-Fidelity Disk Structure Wipe (T1561.002)](#ultra-pro-high-fidelity-disk-structure-wipe-(t1561002))
+- [Lemezszerkezet törlése](#lemezszerkezet-törlése)
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
 - [Ultra-Pro High-Fidelity Windows eseménynaplózás letiltása (T1562.002)](#ultra-pro-high-fidelity-windows-eseménynaplózás-letiltása-(t1562002))
 - [Parancselőzmények naplózási károsodása](#parancselőzmények-naplózási-károsodása)
 - [Gyanús tűzfalmódosítás a Netsh.exe-n keresztül](#gyanús-tűzfalmódosítás-a-netshexe-n-keresztül)
-- [Ultra-Pro High-Fidelity jelzőblokkolás és telemetriás hangcsillapítás (T1562.006)](#ultra-pro-high-fidelity-jelzőblokkolás-és-telemetriás-hangcsillapítás-(t1562006))
-- [Ultra-Pro High-Fidelity Cloud Firewall károsodás (T1562.007)](#ultra-pro-high-fidelity-cloud-firewall-károsodás-(t1562007))
-- [Ultra-Pro High-Fidelity felhőnaplózás károsodása (T1562.008)](#ultra-pro-high-fidelity-felhőnaplózás-károsodása-(t1562008))
-- [Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009)](#ultra-pro-high-fidelity-safe-mode-defense-evasion-(t1562009))
-- [Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010)](#ultra-pro-high-fidelity-defense-downgrade-attack-(t1562010))
-- [Ultra-Pro High-Fidelity virtualizáció és Sandbox Evasion (T1564.011)](#ultra-pro-high-fidelity-virtualizáció-és-sandbox-evasion-(t1564011))
+- [Kijelző blokkolása és telemetria elnyomása](#kijelző-blokkolása-és-telemetria-elnyomása)
+- [Cloud Firewall károsodás (T1562.007)](#cloud-firewall-károsodás-(t1562007))
+- [Felhőnaplózás károsodása (T1562.008)](#felhőnaplózás-károsodása-(t1562008))
+- [Csökkentett módú védelmi kijátszás (T1562.009)](#csökkentett-módú-védelmi-kijátszás-(t1562009))
+- [Defense Downgrade Attack (T1562.010)](#defense-downgrade-attack-(t1562010))
+- [Virtualizáció és Sandbox Evasion (T1564.011)](#virtualizáció-és-sandbox-evasion-(t1564011))
 - [Felhőbiztonsági infrastruktúra károsodása (T1562.012)](#felhőbiztonsági-infrastruktúra-károsodása-(t1562012))
 - [Távoli szolgáltatási munkamenet-eltérítés (T1563)](#távoli-szolgáltatási-munkamenet-eltérítés-(t1563))
 - [Helyi munkamenet-eltérítés (T1563.001)](#helyi-munkamenet-eltérítés-(t1563001))
@@ -7915,16 +7915,19 @@ ismert jó adminisztrációs, biztonsági és képalkotó eszközöket.
 
 
 ---
-## Ultra-Pro High-Fidelity Disk Structure Wipe (T1561.002)
+## Lemezszerkezet törlése
 - **ID:** `T1561_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az alacsony szintű lemezszerkezet megsemmisülését (partíciós tábla törlése, MBR felülírása)
-a destruktív CLI argumentumok és a nyers eszköz hozzáférési karakterláncok eredetének figyelésével
-nem szabványos szülőfolyamatokból vagy nem megbízható helyekről.
+- **Leírás:** Érzékeli a romboló, alacsony szintű lemezműveleteket, mint például a partíciós tábla törlése,
+MBR felülírása és teljes lemez törlése.
+
+Figyeli a destruktív CLI argumentumokat, a nyers eszköz hozzáférési mintákat és
+nem megbízható végrehajtási környezet a zsarolóvírusok, törlőprogramok vagy rosszindulatú szkriptek megelőzése érdekében
+a lemezszerkezetek tönkretételétől.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

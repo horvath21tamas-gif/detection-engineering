@@ -437,18 +437,18 @@
 - [Ultra-Pro High-Fidelity Archive via Custom Method (T1560.003)](#ultra-pro-high-fidelity-archive-via-custom-method-(t1560003))
 - [Ultra-Pro High-Fidelity Disk Wipe (T1561)](#ultra-pro-high-fidelity-disk-wipe-(t1561))
 - [Ultra-Pro High-Fidelity Disk Content Wipe (T1561.001)](#ultra-pro-high-fidelity-disk-content-wipe-(t1561001))
-- [Ultra-Pro High-Fidelity Disk Structure Wipe (T1561.002)](#ultra-pro-high-fidelity-disk-structure-wipe-(t1561002))
+- [Disk Structure Wipe](#disk-structure-wipe)
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
 - [Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002)](#ultra-pro-high-fidelity-disable-windows-event-logging-(t1562002))
 - [Command History Logging Impairment](#command-history-logging-impairment)
 - [Suspicious Firewall Modification via Netsh.exe](#suspicious-firewall-modification-via-netshexe)
-- [Ultra-Pro High-Fidelity Indicator Blocking and Telemetry Silencing (T1562.006)](#ultra-pro-high-fidelity-indicator-blocking-and-telemetry-silencing-(t1562006))
-- [Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007)](#ultra-pro-high-fidelity-cloud-firewall-impairment-(t1562007))
-- [Ultra-Pro High-Fidelity Cloud Logging Impairment (T1562.008)](#ultra-pro-high-fidelity-cloud-logging-impairment-(t1562008))
-- [Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009)](#ultra-pro-high-fidelity-safe-mode-defense-evasion-(t1562009))
-- [Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010)](#ultra-pro-high-fidelity-defense-downgrade-attack-(t1562010))
-- [Ultra-Pro High-Fidelity Virtualization and Sandbox Evasion (T1564.011)](#ultra-pro-high-fidelity-virtualization-and-sandbox-evasion-(t1564011))
+- [Indicator Blocking and Telemetry Suppression](#indicator-blocking-and-telemetry-suppression)
+- [Cloud Firewall Impairment (T1562.007)](#cloud-firewall-impairment-(t1562007))
+- [Cloud Logging Impairment (T1562.008)](#cloud-logging-impairment-(t1562008))
+- [Safe Mode Defense Evasion (T1562.009)](#safe-mode-defense-evasion-(t1562009))
+- [Defense Downgrade Attack (T1562.010)](#defense-downgrade-attack-(t1562010))
+- [Virtualization and Sandbox Evasion (T1564.011)](#virtualization-and-sandbox-evasion-(t1564011))
 - [Cloud Security Infrastructure Impairment (T1562.012)](#cloud-security-infrastructure-impairment-(t1562012))
 - [Remote Service Session Hijacking (T1563)](#remote-service-session-hijacking-(t1563))
 - [Local Session Hijacking (T1563.001)](#local-session-hijacking-(t1563001))
@@ -8340,16 +8340,19 @@ out known-good administrative, security, and imaging tools.
 
 
 ---
-## Ultra-Pro High-Fidelity Disk Structure Wipe (T1561.002)
+## Disk Structure Wipe
 - **ID:** `T1561_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects low-level disk structure destruction (partition table wiping, MBR overwriting) 
-by monitoring for destructive CLI arguments and raw device access strings originating 
-from non-standard parent processes or untrusted locations.
+- **Leírás:** Detects destructive low-level disk operations such as partition table wiping, 
+MBR overwriting, and full-disk clearing.
+
+Monitors for destructive CLI arguments, raw device access patterns, and 
+untrusted execution context to prevent ransomware, wipers, or malicious scripts
+from destroying disk structures.
 
 
 #### 🚨 Response Playbook

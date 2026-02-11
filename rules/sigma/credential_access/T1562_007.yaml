@@ -1,48 +1,131 @@
-title: Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007)
+title: Cloud Firewall Impairment (T1562.007)
 id: b4308d32-6655-4645-a0c5-d98f56357c4e
 status: stable
 description: |
-    Detects unauthorized or dangerous modifications to cloud security groups and firewalls.
-    Focuses on "Any-Any" rules (0.0.0.0/0), Root user activity, and modifications 
-    originating from non-standard administrative tools or IPs.
+  Detects high-risk modifications to cloud firewalls and security groups
+  that may expose resources to the internet or weaken segmentation.
+  Focuses on ANY/ANY rules, privileged port exposure, and anomalous identities.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-11
+
 tags:
-    - attack.defense_evasion
-    - attack.t1562.007
+  - attack.defense_evasion
+  - attack.t1562.007
+  - attack.impact
+  - cloud.aws
+  - cloud.azure
+
 logsource:
-    product: windows
-    service: system
+  product: aws
+  service: cloudtrail
+
 detection:
-    selection_actions:
-        eventName:
-            - 'AuthorizeSecurityGroupIngress'
-            - 'CreateSecurityGroup'
-            - 'DeleteSecurityGroup'
-            - 'PutManagedRuleSet' 
-            - 'UpdateFirewall'    
 
-    selection_dangerous_config:
-        requestParameters.ipPermissions.items.ipRanges.items.cidrIp: 
-            - '0.0.0.0/0'
-            - '::/0'
-        requestParameters.ipPermissions.items.ipProtocol: '-1' 
+  selection_sg_modify:
+    eventName:
+      - 'AuthorizeSecurityGroupIngress'
+      - 'AuthorizeSecurityGroupEgress'
+      - 'RevokeSecurityGroupIngress'
+      - 'RevokeSecurityGroupEgress'
+      - 'CreateSecurityGroup'
+      - 'DeleteSecurityGroup'
 
-    selection_context:
-        - userIdentity.type: 'Root' 
-        - userAgent|contains:
-            - 'kali'
-            - 'python-requests'
-            - 'curl'
-            - 'postman'
+  selection_network_acl_modify:
+    eventName:
+      - 'CreateNetworkAclEntry'
+      - 'ReplaceNetworkAclEntry'
+      - 'DeleteNetworkAclEntry'
 
-    filter_trusted_automation:
-        userIdentity.arn|contains:
-            - 'role/Terraform-Execution-Role'
-            - 'role/AWS-CloudFormation-Stack'
-            - 'role/Azure-DevOps-Service-Principal'
-        sourceIPAddress:
-            - '10.0.0.0/8' 
+  selection_waf_modify:
+    eventName:
+      - 'UpdateWebACL'
+      - 'PutWebACL'
+      - 'DeleteWebACL'
+      - 'UpdateRuleGroup'
 
-    condition: (selection_actions and selection_dangerous_config) and (selection_context and not filter_trusted_automation)
+  selection_any_any:
+    requestParameters.ipPermissions.items.ipRanges.items.cidrIp:
+      - '0.0.0.0/0'
+    requestParameters.ipPermissions.items.ipv6Ranges.items.cidrIpv6:
+      - '::/0'
+
+  selection_all_protocols:
+    requestParameters.ipPermissions.items.ipProtocol: '-1'
+
+  selection_sensitive_ports:
+    requestParameters.ipPermissions.items.fromPort:
+      - 22
+      - 3389
+      - 5985
+      - 5986
+    requestParameters.ipPermissions.items.toPort:
+      - 22
+      - 3389
+      - 5985
+      - 5986
+
+  selection_root_usage:
+    userIdentity.type: 'Root'
+
+  selection_no_mfa:
+    userIdentity.sessionContext.attributes.mfaAuthenticated: 'false'
+
+  selection_suspicious_useragent:
+    userAgent|contains:
+      - 'python-requests'
+      - 'curl'
+      - 'wget'
+      - 'kali'
+      - 'postman'
+      - 'bot'
+
+  selection_cli_direct:
+    userAgent|contains: 'aws-cli'
+
+  filter_trusted_roles:
+    userIdentity.arn|contains:
+      - 'role/Terraform'
+      - 'role/CloudFormation'
+      - 'role/AWSServiceRole'
+      - 'role/SecurityAutomation'
+      - 'role/OrganizationAccountAccessRole'
+
+  filter_aws_internal:
+    userIdentity.invokedBy:
+      - 'autoscaling.amazonaws.com'
+      - 'elasticloadbalancing.amazonaws.com'
+
+  condition:
+    (selection_sg_modify
+      or selection_network_acl_modify
+      or selection_waf_modify)
+    and
+    (selection_any_any
+      or selection_all_protocols
+      or selection_sensitive_ports)
+    and
+    (selection_root_usage
+      or selection_no_mfa
+      or selection_suspicious_useragent
+      or selection_cli_direct)
+    and not (filter_trusted_roles
+      or filter_aws_internal)
+
+fields:
+  - eventTime
+  - eventName
+  - userIdentity.arn
+  - userIdentity.type
+  - sourceIPAddress
+  - userAgent
+  - requestParameters
+  - awsRegion
+
+falsepositives:
+  - Planned infrastructure deployment
+  - Emergency security group updates
+  - Temporary troubleshooting exposure
+  - Blue team penetration testing
+
 level: critical

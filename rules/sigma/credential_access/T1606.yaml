@@ -1,68 +1,131 @@
-title: Ultra-Pro High-Fidelity Web Token Forgery (T1606)
+title: Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606)
 id: 5dae39f2-9595-4840-a4fb-76866cb83b3a
 status: stable
 description: |
-    Detects unauthorized forging or theft of web credentials (SAML, cookies, OAuth tokens). 
-    Focuses on non-browser processes accessing DPAPI master keys, suspicious SQLite 
-    queries on token databases, and Golden SAML artifact generation.
-author: hota05
+    Detects unauthorized forging or theft of web credentials including 
+    SAML, OAuth, and browser-stored tokens/cookies. 
+    Focuses on non-browser processes accessing DPAPI master keys, suspicious 
+    database queries on token stores, and Golden SAML artifact generation.
+    Filters legitimate browsers, Electron apps, and administrative automation tools.
+
+author: hota05 
 date: 2026-02-04
+modified: 2026-02-11
 tags:
     - attack.credential_access
     - attack.t1606
+    - attack.t1606.001
+    - attack.t1606.002
+
 logsource:
-    category: process_creation
     product: windows
+    category: process_creation
+
 detection:
-    selection_tools:
-        CommandLine|contains:
-            - 'goldensaml'        
-            - 'asreproast'      
-            - 'Get-AADIntAccessToken'
-            - 'roadtoken'         
-            - 'cloud::google'    
-            - 'cloud::aws'
 
-    selection_dpapi_theft:
-        - CommandLine|contains:
-            - 'dpapi::masterkey'
-            - 'crypt::unprotect' 
-        - Image|endswith:
-            - '\mimikatz.exe'
-            - '\pypykatz.exe'
+  selection_offensive_tools:
+    CommandLine|contains:
+      - 'goldensaml'
+      - 'asreproast'
+      - 'Get-AADIntAccessToken'
+      - 'roadtoken'
+      - 'Invoke-SelfSignedCertificate'
+      - 'cloud::google'
+      - 'cloud::aws'
 
-    selection_db_interaction:
-        CommandLine|contains:
-            - '\Network\Cookies'
-            - '\Local Storage\leveldb'
-            - '\Identity.db'
-            - '\Web Data'
-        CommandLine|contains:
-            - 'select '
-            - 'password_value'
-            - 'token'
-            - 'cookie'
+  selection_dpapi_theft:
+    CommandLine|contains:
+      - 'dpapi::masterkey'
+      - 'crypt::unprotect'
+      - 'ProtectedData.Unprotect'
+    Image|endswith:
+      - '\mimikatz.exe'
+      - '\pypykatz.exe'
 
-    selection_untrusted:
-        Image|contains:
-            - '\Users\'
-            - '\AppData\'
-            - '\Temp\'
+  selection_token_db_access:
+    CommandLine|contains:
+      - '\Network\Cookies'
+      - '\Local State'
+      - '\Local Storage\leveldb'
+      - '\Identity.db'
+      - '\Web Data'
+      - '\Login Data'
+    CommandLine|contains:
+      - 'select '
+      - 'password_value'
+      - 'token'
+      - 'cookie'
+      - 'encrypted_key'
 
-    filter_official_binaries:
-        Image|endswith:
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\firefox.exe'
-            - '\teams.exe'
-            - '\slack.exe'
-        ParentImage|contains:
-            - '\Program Files\'
+  selection_untrusted_context:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Downloads\'
+      - '\Public\'
+    ParentImage|endswith:
+      - '\powershell.exe'
+      - '\cmd.exe'
+      - '\python.exe'
+      - '\cscript.exe'
+      - '\wscript.exe'
 
-    filter_admin_tools:
-        CommandLine|contains:
-            - 'Connect-MgGraph'
-            - 'az login'
+  selection_staging:
+    CommandLine|contains:
+      - '\Users\Public\'
+      - '\AppData\Local\Temp\'
+      - '\Windows\Temp\'
+      - '.zip'
+      - '.7z'
+      - '.rar'
+      - 'Compress-Archive'
 
-    condition: (selection_tools or selection_dpapi_theft or (selection_db_interaction and selection_untrusted)) and not filter_official_binaries
+  filter_legit_browsers:
+    Image|contains:
+      - '\Program Files\Google\Chrome\'
+      - '\Program Files (x86)\Google\Chrome\'
+      - '\Program Files (x86)\Microsoft\Edge\'
+      - '\Program Files\Mozilla Firefox\'
+      - '\Program Files\BraveSoftware\'
+      - '\Program Files\Opera\'
+
+  filter_legit_electron:
+    Image|contains:
+      - '\Microsoft\Teams\'
+      - '\Slack\'
+      - '\Discord\'
+      - '\OneDrive\'
+
+  filter_admin_tools:
+    CommandLine|contains:
+      - 'Connect-MgGraph'
+      - 'az login'
+      - 'Connect-AzureAD'
+
+  filter_system_context:
+    username: 'NT AUTHORITY\SYSTEM'
+    ParentImage|endswith:
+      - '\services.exe'
+      - '\MsMpEng.exe'
+      - '\svchost.exe'
+
+  condition: (
+                selection_offensive_tools
+                or selection_dpapi_theft
+                or (selection_token_db_access and selection_untrusted_context)
+             )
+             and not (
+                filter_legit_browsers
+                or filter_legit_electron
+                or filter_admin_tools
+                or filter_system_context
+             )
+
+falsepositives:
+  - Enterprise password vault migrations
+  - Incident response and forensics
+  - Legitimate browser automation or sync
+  - Red team exercises
+
 level: critical

@@ -2,57 +2,77 @@ title: Ultra-Pro Stealthy Local Image Build (T1612)
 id: f7a6ef03-3dcb-45c7-8e7c-aa71f86009b2
 status: stable
 description: |
-    Detects high-fidelity local container image builds by identifying builds 
-    initiated by non-CI/CD users or suspicious parent processes like web servers, 
-    indicating post-exploitation image creation to evade registry scans.
-author: hota05
+  Detects high-fidelity local container image builds initiated by suspicious 
+  users or processes, focusing on post-exploitation image creation and 
+  evasion of registry scanning. Filters out trusted CI/CD pipelines and 
+  known build systems.
+
+author: hota05 
 date: 2026-02-03
+modified: 2026-02-11
 tags:
-    - attack.defense_evasion
-    - attack.t1612
+  - attack.defense_evasion
+  - attack.t1612
+
 logsource:
-    product: linux
-    category: process_creation
+  product: linux
+  category: process_creation
+
 detection:
-    selection_tools:
-        Image|endswith:
-            - '/docker'
-            - '/podman'
-            - '/buildah'
-            - '/kaniko'
-        CommandLine|contains:
-            - ' build '
-            - ' build-using-dockerfile '
-            - ' build-image '
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '/nginx'
-            - '/apache2'
-            - '/httpd'
-            - '/php-fpm'
-            - '/python'
-            - '/node'
-            - '/java'
-            - '/redis-server'
+  selection_tools:
+    Image|endswith:
+      - '/docker'
+      - '/docker-compose'
+      - '/buildah'
+      - '/podman'
+      - '/kaniko'
+    CommandLine|contains:
+      - ' build '
+      - ' build-image '
+      - ' build-using-dockerfile '
+      - ' buildx build '
 
-    selection_suspicious_args:
-        CommandLine|contains:
-            - ' -f -'          
-            - 'http://'       
-            - 'https://'
-            - '--no-cache'     
-            - '--privileged'  
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '/nginx'
+      - '/apache2'
+      - '/httpd'
+      - '/php-fpm'
+      - '/python'
+      - '/node'
+      - '/java'
+      - '/redis-server'
+      - '/mysqld'
+      - '/httpd.worker'
 
-    filter_trusted_users:
-        username:
-            - 'jenkins'
-            - 'gitlab-runner'
-            - 'github-actions'
-            - 'root' 
-        CommandLine|contains:
-            - '/home/jenkins'
-            - '/var/lib/gitlab-runner'
+  selection_suspicious_args:
+    CommandLine|contains:
+      - ' -f -'
+      - ' http://'
+      - ' https://'
+      - '--no-cache'
+      - '--privileged'
+      - '--secret'
+      - '--ssh'
 
-    condition: selection_tools and (selection_suspicious_parent or (selection_suspicious_args and not filter_trusted_users))
+  filter_trusted_users:
+    username:
+      - 'jenkins'
+      - 'gitlab-runner'
+      - 'github-actions'
+      - 'root'
+    CommandLine|contains:
+      - '/home/jenkins'
+      - '/var/lib/gitlab-runner'
+      - '/home/github-actions'
+      - '/home/gitlab-runner'
+
+  condition: selection_tools and (selection_suspicious_parent or (selection_suspicious_args and not filter_trusted_users))
+
+falsepositives:
+  - Legitimate CI/CD builds (Jenkins, GitLab, GitHub Actions)
+  - Root user building images for testing or deployment
+  - Automated build scripts in sanctioned environments
+
 level: critical

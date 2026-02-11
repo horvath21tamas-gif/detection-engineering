@@ -2,52 +2,75 @@ title: Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002)
 id: 9f142517-dab5-4f05-925a-3339d78cfd70
 status: stable
 description: |
-    Detects unauthorized or malicious network OS upgrades by correlating 
-    upgrade commands with insecure protocols, untrusted sources, or 
-    cryptographic signature failures.
-author: hota05
-date: 2026-02-03
+    Detects unauthorized or malicious network OS upgrades by correlating upgrade 
+    commands with insecure protocols, untrusted sources, or cryptographic signature failures.
+    Focuses on FortiOS logs but can be adapted to other network appliances. Filters out 
+    trusted sources and secure channels to reduce false positives.
+author: hota05 
+date: 2026-02-11
 tags:
     - attack.persistence
     - attack.t1601.002
+    - attack.credential_access
+    - attack.defense_evasion
 logsource:
     product: network
     service: FortiOS
+
 detection:
-    selection_upgrade_ops:
-        Message|contains:
-            - 'software install'
-            - 'request system software add' 
-            - 'firmware upgrade'
-            - 'boot system flash'          
-            - 'install activate'           
-            - 'request platform software'
 
-    selection_suspicious_attributes:
-        Message|contains:
-            - 'tftp://'     
-            - 'http://'    
-            - 'ftp://'
-            - '.bin'        
-            - '.tar'
+  selection_upgrade_ops:
+    Message|contains:
+      - 'software install'
+      - 'request system software add'
+      - 'firmware upgrade'
+      - 'boot system flash'
+      - 'install activate'
+      - 'request platform software'
+      - 'request system firmware'
+      - 'request image install'
 
-    selection_integrity_failures:
-        Message|contains:
-            - 'signature validation failed'
-            - 'hash mismatch'
-            - 'invalid image signature'
-            - 'checksum error'
-            - 'not a trusted image'
+  selection_suspicious_transport:
+    Message|contains:
+      - 'tftp://'
+      - 'ftp://'
+      - 'http://'
+      - '.bin'
+      - '.tar'
+      - '.img'
 
-    filter_trusted_source:
-        SourceIP:
-            - '10.50.0.10' 
-            - '10.50.0.11'
-    filter_secure_transfer:
-        Message|contains:
-            - 'scp://'
-            - 'https://'
-            - 'sftp://'
+  selection_integrity_failures:
+    Message|contains:
+      - 'signature validation failed'
+      - 'hash mismatch'
+      - 'invalid image signature'
+      - 'checksum error'
+      - 'not a trusted image'
+      - 'image verification failed'
 
-    condition: selection_upgrade_ops and (selection_suspicious_attributes or selection_integrity_failures) and not (filter_trusted_source or filter_secure_transfer)
+  filter_trusted_sources:
+    SourceIP:
+      - '10.50.0.10'
+      - '10.50.0.11'
+      - '10.50.0.12'
+    Message|contains:
+      - 'scp://'
+      - 'sftp://'
+      - 'https://'
+      - 'signed image'
+      - 'trusted repository'
+
+  condition: selection_upgrade_ops and (selection_suspicious_transport or selection_integrity_failures) and not filter_trusted_sources
+
+fields:
+  - Time
+  - SourceIP
+  - DestinationIP
+  - Message
+
+falsepositives:
+  - Scheduled, verified upgrades from trusted servers
+  - Firmware upgrades via HTTPS or SCP from authorized sources
+  - Lab or test appliance upgrades with unsigned images intentionally
+
 level: critical

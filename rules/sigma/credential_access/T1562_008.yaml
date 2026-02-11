@@ -1,59 +1,125 @@
-title: Ultra-Pro High-Fidelity Cloud Logging Impairment (T1562.008)
+title: Cloud Logging Impairment (T1562.008)
 id: b6ef3774-5752-45cb-b1b2-1713e379282d
 status: stable
 description: |
-    Detects critical changes to cloud logging (CloudTrail, Azure Activity) that 
-    create visibility gaps. Focuses on trail deletion, log file encryption 
-    disabling, and storage-level tampering by non-automated identities.
+  Detects attempts to impair cloud logging visibility by disabling,
+  deleting, or weakening CloudTrail and Azure logging configurations.
+  Focuses on trail deletion, log validation disablement, event selector
+  downgrades, and storage tampering initiated by anomalous identities.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-11
+
 tags:
-    - attack.defense_evasion
-    - attack.t1562.008
+  - attack.defense_evasion
+  - attack.t1562.008
+  - attack.impact
+  - cloud.aws
+  - cloud.azure
+
 logsource:
-    product: windows
-    service: system
+  product: aws
+  service: cloudtrail
+
 detection:
-    selection_terminate:
-        eventName:
-            - 'StopLogging'
-            - 'DeleteTrail'
-            - 'DeleteEventBus'
-            - 'DeleteDiagnosticSetting' 
+  selection_stop_logging:
+    eventName:
+      - 'StopLogging'
+      - 'DeleteTrail'
+      - 'DeleteEventDataStore'
 
-    selection_integrity:
-        eventName:
-            - 'UpdateTrail'
-        requestParameters:
-            - 'EnableLogFileValidation: false'
-            - 'KmsKeyId: ""' 
+  selection_trail_update:
+    eventName: 'UpdateTrail'
 
-    selection_storage:
-        eventName:
-            - 'DeleteBucket'
-            - 'PutBucketLifecycleConfiguration' 
-            - 'PutBucketVersioning'             
-        requestParameters.bucketName|contains:
-            - 'log'
-            - 'audit'
-            - 'trail'
-            - 'telemetry'
+  selection_disable_validation:
+    requestParameters.enableLogFileValidation: false
 
-    selection_identity:
-        - userIdentity.type: 'Root'
-        - userIdentity.sessionContext.sessionIssuer.userName: null
-        - userAgent|contains:
-            - 'python-requests'
-            - 'kali'
-            - 'bot'
+  selection_disable_encryption:
+    requestParameters.kmsKeyId: ''
 
-    filter_trusted_automation:
-        userIdentity.arn|contains:
-            - 'role/Terraform-Execution-Policy'
-            - 'role/Security-ReadOnly-Auditor'
-            - 'role/OrganizationAccountAccessRole'
-        sourceIPAddress:
-            - '10.0.0.0/8' 
+  selection_event_selector_downgrade:
+    eventName:
+      - 'PutEventSelectors'
+      - 'UpdateEventDataStore'
+    requestParameters.includeManagementEvents: false
 
-    condition: (selection_terminate or selection_integrity or selection_storage) and (selection_identity and not filter_trusted_automation)
+  selection_log_bucket_target:
+    eventSource: 's3.amazonaws.com'
+    eventName:
+      - 'DeleteBucket'
+      - 'PutBucketLifecycleConfiguration'
+      - 'PutBucketVersioning'
+      - 'PutBucketPolicy'
+
+  selection_bucket_name_keywords:
+    requestParameters.bucketName|contains:
+      - 'log'
+      - 'trail'
+      - 'audit'
+      - 'security'
+      - 'telemetry'
+
+  selection_root_usage:
+    userIdentity.type: 'Root'
+
+  selection_no_mfa:
+    userIdentity.sessionContext.attributes.mfaAuthenticated: 'false'
+
+  selection_suspicious_user_agent:
+    userAgent|contains:
+      - 'python-requests'
+      - 'curl'
+      - 'wget'
+      - 'kali'
+      - 'postman'
+      - 'bot'
+
+  selection_console_absence:
+    userAgent|contains: 'aws-cli'
+
+  filter_trusted_roles:
+    userIdentity.arn|contains:
+      - 'role/Terraform'
+      - 'role/CloudFormation'
+      - 'role/Security-Automation'
+      - 'role/OrganizationAccountAccessRole'
+      - 'role/AWSServiceRoleForCloudTrail'
+
+  filter_aws_internal_service:
+    userIdentity.invokedBy:
+      - 'cloudtrail.amazonaws.com'
+      - 'config.amazonaws.com'
+
+  condition:
+    (selection_stop_logging or
+      (selection_trail_update and
+        (selection_disable_validation
+          or selection_disable_encryption)) or
+      selection_event_selector_downgrade or
+      (selection_log_bucket_target
+        and selection_bucket_name_keywords)) and
+    (selection_root_usage
+      or selection_no_mfa
+      or selection_suspicious_user_agent
+      or selection_console_absence)
+    and not (
+      filter_trusted_roles
+      or filter_aws_internal_service)
+
+fields:
+  - eventTime
+  - eventName
+  - userIdentity.arn
+  - userIdentity.type
+  - userAgent
+  - sourceIPAddress
+  - requestParameters
+  - awsRegion
+
+falsepositives:
+  - Planned security architecture changes
+  - CloudTrail migration projects
+  - KMS rotation during maintenance
+  - Infrastructure-as-Code pipeline execution
+
 level: critical

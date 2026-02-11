@@ -2,51 +2,71 @@ title: Ultra-Pro Container Escape & Host Access (T1611)
 id: 4cb24ad2-86f5-4a4a-9453-f6c67523cfca
 status: stable
 description: |
-    Detects unauthorized attempts to bypass container isolation and access the 
-    underlying host. Targets non-standard privileged executions and high-risk 
-    volume mounts, while filtering out known cluster infrastructure components.
-author: hota05
+  Detects unauthorized container escape attempts and host access. Focuses on 
+  non-standard privileged executions, dangerous mounts, and unconfined security 
+  contexts, while filtering out legitimate cluster infrastructure components.
+
+author: hota05 
 date: 2026-02-02
+modified: 2026-02-11
 tags:
-    - attack.privilege_escalation
-    - attack.t1611
+  - attack.privilege_escalation
+  - attack.t1611
+
 logsource:
-    product: linux
-    category: process_creation
+  product: linux
+  category: process_creation
+
 detection:
-    selection_escape_flags:
-        CommandLine|contains:
-            - '--privileged'
-            - '--cap-add=SYS_ADMIN'   
-            - '--cap-add=SYS_PTRACE'  
-            - '--pid=host'           
-            - '--net=host'          
-            - '--ipc=host'            
 
-    selection_dangerous_mounts:
-        CommandLine|contains:
-            - '-v /:/'                
-            - '/var/run/docker.sock'  
-            - '/run/containerd'       
-            - '/etc/kubernetes'      
-            - '/root/.ssh'            
+  selection_escape_flags:
+    CommandLine|contains:
+      - '--privileged'
+      - '--cap-add=SYS_ADMIN'
+      - '--cap-add=SYS_PTRACE'
+      - '--pid=host'
+      - '--net=host'
+      - '--ipc=host'
+      - '--security-opt=seccomp=unconfined'
+      - '--security-opt=apparmor=unconfined'
 
-    filter_infrastructure:
-        Image|contains:
-            - 'kube-proxy'
-            - 'calico/node'
-            - 'cilium'
-            - 'datadog/agent'
-            - 'node-exporter'
-            - 'istio-proxy'
-        username: 'root'
+  selection_dangerous_mounts:
+    CommandLine|contains:
+      - '-v /:/'
+      - '-v /proc:/proc'
+      - '-v /sys:/sys'
+      - '-v /var/run/docker.sock:/var/run/docker.sock'
+      - '-v /run/containerd:/run/containerd'
+      - '-v /etc/kubernetes:/etc/kubernetes'
+      - '-v /root/.ssh:/root/.ssh'
 
-    selection_interactive:
-        ParentImage|endswith:
-            - '/bash'
-            - '/sh'
-            - '/zsh'
-            - '/python'
+  selection_interactive:
+    ParentImage|endswith:
+      - '/bash'
+      - '/sh'
+      - '/zsh'
+      - '/python'
+      - '/ruby'
+      - '/php'
+      - '/node'
 
-    condition: (selection_escape_flags or selection_dangerous_mounts) and not filter_infrastructure
+  filter_infrastructure:
+    Image|contains:
+      - 'kube-proxy'
+      - 'calico/node'
+      - 'cilium'
+      - 'datadog/agent'
+      - 'node-exporter'
+      - 'istio-proxy'
+      - 'fluentd'
+      - 'prometheus'
+    username: 'root'
+
+  condition: (selection_escape_flags or selection_dangerous_mounts) and selection_interactive and not filter_infrastructure
+
+falsepositives:
+  - Legitimate privileged container builds or debugging sessions by ops
+  - Monitoring agents mounting Docker socket in orchestrated environments
+  - Root user containers managed by trusted CI/CD pipelines
+
 level: critical

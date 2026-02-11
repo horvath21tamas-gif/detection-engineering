@@ -1,57 +1,81 @@
-title: Ultra-Pro High-Fidelity Archive via Custom Method (T1560.003)
+title: Archive via Custom Method
 id: f4b47d75-f27a-46ca-95da-00ed4719da0d
 status: stable
 description: |
-    Detects custom data collection by monitoring for byte-level file access 
-    combined with manual encoding (XOR, Base64) originating from 
-    interactive shells or suspicious parent processes like web servers.
-author: hota05
-date: 2026-02-05
+    Detects custom data collection and exfiltration attempts via byte-level 
+    file access and manual encoding (XOR, Base64, bitwise operations).
+
+    Focuses on:
+      - Read/Write of file bytes and memory streams
+      - Manual obfuscation or encoding routines
+      - Recursive file enumeration
+      - Suspicious parent processes (web servers, shells)
+      - Excludes trusted automation and telemetry tools
+
+author: hota05 
+date: 2026-02-11
 tags:
     - attack.collection
     - attack.exfiltration
     - attack.t1560.003
+
 logsource:
-    category: process_creation
     product: windows
+    category: process_creation
+
 detection:
-    selection_byte_stream:
-        CommandLine|contains:
-            - '[System.IO.File]::ReadAllBytes' 
-            - 'WriteAllBytes'                
-            - 'MemoryStream'                
-            - '.ToArray()'                   
-            - 'b64'                          
 
-    selection_obfuscation:
-        CommandLine|contains:
-            - 'bxor'                          
+    selection_byte_access:
+        CommandLine|contains|any:
+            - '[System.IO.File]::ReadAllBytes'
+            - '[System.IO.File]::WriteAllBytes'
+            - 'MemoryStream'
+            - '.ToArray()'
+            - 'Get-Content -Encoding Byte'
+            - 'b64'
+
+    selection_encoding:
+        CommandLine|contains|any:
+            - 'bxor'
             - '-bxor'
-            - '0x'                            
+            - '0x'
             - '[Convert]::ToBase64String'
+            - 'ROT13'
+            - '-band'
+            - '-bor'
+            - '-bxor'
 
-    selection_loop:
-        CommandLine|contains:
-            - 'foreach'                    
+    selection_recursive_loop:
+        CommandLine|contains|any:
+            - 'foreach'
             - 'Get-ChildItem'
             - '-Recurse'
-            - '-Include'                     
+            - '-Include'
+            - '-Filter'
 
-    selection_context:
+    selection_suspicious_context:
         ParentImage|endswith:
-            - '\w3wp.exe'                 
-            - '\httpd.exe'               
-            - '\powershell.exe'          
+            - '\w3wp.exe'
+            - '\httpd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
             - '\cmd.exe'
-        IntegrityLevel: 'Medium'           
-    filter_trusted_automation:
+        IntegrityLevel: 'Medium'
+
+    filter_trusted_tools:
         - Image|contains:
             - 'C:\Program Files\Microsoft Monitoring Agent\'
-            - 'C:\Program Files\Splunk\'  
+            - 'C:\Program Files\Splunk\'
+            - 'C:\Program Files\Elastic\Agent\'
         - CommandLine|contains:
             - 'HealthCheck'
             - 'Telemetry'
         - username: 'NT AUTHORITY\SYSTEM'
 
-    condition: (selection_byte_stream and selection_obfuscation and selection_loop) and selection_context and not filter_trusted_automation
+    condition: (selection_byte_access 
+                    and selection_encoding 
+                    and selection_recursive_loop) 
+               and selection_suspicious_context
+               and not filter_trusted_tools
+
 level: critical

@@ -8065,16 +8065,17 @@ letiltása és tárolási szintű manipulálása nem automatizált identitások 
 
 
 ---
-## Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009)
+## Csökkentett módú védelmi kijátszás (T1562.009)
 - **ID:** `T1562_009.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RESET.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a rendszer csökkentett módba kényszerítését a biztonsági ellenőrzések megkerülése érdekében.
-A bcdedit manipulációra összpontosít, azonnali kényszerített újraindítással kombinálva
-beállításjegyzék-alapú szolgáltatás kizárása a SafeBoot kulcson belül.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RESET.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a rosszindulatú próbálkozásokat, amelyek a Windows csökkentett módba kényszerítésére irányulnak
+biztonsági ellenőrzések.A BCDEdit safeboot konfigurációs módosításaira összpontosít,
+SafeBoot beállításjegyzék-manipuláció és összehangolt kényszerített újraindítási tevékenység
+gyanús végrehajtási összefüggésekből ered.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -8083,16 +8084,17 @@ beállításjegyzék-alapú szolgáltatás kizárása a SafeBoot kulcson belül.
 
 
 ---
-## Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010)
+## Defense Downgrade Attack (T1562.010)
 - **ID:** `T1562_010.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a rendszervédelem leminősítési kísérleteit a modern biztonsági ellenőrzések megkerülése érdekében.
-Célja a PowerShell v2.0 motor kényszerítése (AMSI bypass) és a rendszerleíró adatbázis alapú
-a hitelesítési és titkosítási protokollok gyengülése.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a PowerShell motort célzó szándékos biztonsági leminősítési kísérleteket
+visszaállítás (v2 AMSI bypass), NTLM hitelesítés gyengítése és titkosítás
+protokoll csökkentése.A leminősítési szándékra és a gyanúsításra összpontosít
+végrehajtási kontextus a törvényes adminisztrációból származó téves pozitívumok csökkentésére.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

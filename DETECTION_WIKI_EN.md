@@ -8499,16 +8499,17 @@ disabling, and storage-level tampering by non-automated identities.
 
 
 ---
-## Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009)
+## Safe Mode Defense Evasion (T1562.009)
 - **ID:** `T1562_009.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RESET.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects attempts to force the system into Safe Mode to bypass security controls. 
-Focuses on bcdedit manipulation combined with immediate forced reboots and 
-registry-based service exclusion within the SafeBoot key.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RESET.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects malicious attempts to force Windows into Safe Mode to bypass 
+security controls. Focuses on BCDEdit safeboot configuration changes, 
+SafeBoot registry manipulation, and coordinated forced reboot activity 
+originating from suspicious execution contexts.
 
 
 #### 🚨 Response Playbook
@@ -8518,16 +8519,17 @@ registry-based service exclusion within the SafeBoot key.
 
 
 ---
-## Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010)
+## Defense Downgrade Attack (T1562.010)
 - **ID:** `T1562_010.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects attempts to downgrade system defenses to bypass modern security controls. 
-Targets PowerShell v2.0 engine forcing (AMSI bypass) and registry-based 
-weakening of authentication and encryption protocols.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects deliberate security downgrade attempts targeting PowerShell engine
+rollback (v2 AMSI bypass), NTLM authentication weakening, and encryption
+protocol reduction. Focuses on downgrade intent combined with suspicious
+execution context to reduce false positives from legitimate administration.
 
 
 #### 🚨 Response Playbook

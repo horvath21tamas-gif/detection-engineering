@@ -8065,16 +8065,17 @@ Deaktivierung und Manipulation auf Speicherebene durch nicht automatisierte Iden
 
 
 ---
-## Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009)
+## Verteidigungsumgehung im abgesicherten Modus (T1562.009)
 - **ID:** `T1562_009.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RESET.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Versuche, das System in den abgesicherten Modus zu zwingen, um Sicherheitskontrollen zu umgehen.
-Konzentriert sich auf die Bcdedit-Manipulation in Kombination mit sofortigen erzwungenen Neustarts und
-Registrierungsbasierter Dienstausschluss innerhalb des SafeBoot-Schlüssels.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RESET.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt böswillige Versuche, Windows zur Umgehung in den abgesicherten Modus zu zwingen
+Sicherheitskontrollen.Konzentriert sich auf BCDEdit-Safeboot-Konfigurationsänderungen,
+Manipulation der SafeBoot-Registrierung und koordinierte erzwungene Neustartaktivitäten
+aus verdächtigen Ausführungskontexten stammen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -8083,16 +8084,17 @@ Registrierungsbasierter Dienstausschluss innerhalb des SafeBoot-Schlüssels.
 
 
 ---
-## Ultra-Pro High-Fidelity-Verteidigungs-Downgrade-Angriff (T1562.010)
+## Verteidigungsherabstufungsangriff (T1562.010)
 - **ID:** `T1562_010.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Versuche, die Systemverteidigung herunterzustufen, um moderne Sicherheitskontrollen zu umgehen.
-Zielt auf die Erzwingung der PowerShell v2.0-Engine (AMSI-Umgehung) und auf Registrierungsbasis ab
-Schwächung der Authentifizierungs- und Verschlüsselungsprotokolle.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt absichtliche Sicherheitsherabstufungsversuche, die auf die PowerShell-Engine abzielen
+Rollback (v2 AMSI-Bypass), Schwächung der NTLM-Authentifizierung und Verschlüsselung
+Protokollreduzierung.Konzentriert sich auf Downgrade-Absichten in Kombination mit Verdächtigem
+Ausführungskontext, um Fehlalarme durch legitime Verwaltung zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

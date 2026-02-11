@@ -10947,16 +10947,14 @@ durch Gating gegen Integritätsebenen, Herkunft des übergeordneten Prozesses un
 
 
 ---
-## Ultra-Pro High-Fidelity-Gruppenrichtlinienerkennung (T1615)
+## High-Fidelity-Erkennung von Gruppenrichtlinien
 - **ID:** `T1615.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Erkundung von Gruppenrichtlinien mit Schwerpunkt auf der Erfassung von Berichten
-und politische Ausbeutungsmuster.Filtert legitime Helpdesk-Aktivitäten heraus
-durch Analyse von Befehlszeilenschaltern und Prozessintegritätsstufen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die systematische Erfassung von Gruppenrichtlinien, einschließlich der Erfassung von GPO-Berichten und der Richtlinienaufzählung aus ungewöhnlichen Ausführungskontexten.Filtert legitime Verwaltungs- und Helpdesk-Aktivitäten mithilfe von Befehlszeilen-, übergeordneten Prozess- und Integritätsstufenprüfungen heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

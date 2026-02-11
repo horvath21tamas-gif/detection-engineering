@@ -10947,16 +10947,14 @@ az integritási szintek, a szülőfolyamatok vonalának és a specifikus hexadec
 
 
 ---
-## Ultra-Pro High-Fidelity csoportházirend felfedezés (T1615)
+## Nagy pontosságú csoportházirend-felderítés észlelése
 - **ID:** `T1615.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a szisztematikus csoportházirend-felderítést, amely a jelentésgyűjtésre összpontosít
-és politikai kizsákmányolási minták.Kiszűri a jogos Helpdesk tevékenységet
-a parancssori kapcsolók és a folyamatintegritási szintek elemzésével.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a szisztematikus csoportházirend-felderítést, beleértve a csoportházirend-objektumok jelentéseinek begyűjtését és a szabályzatok felsorolását szokatlan végrehajtási kontextusokból.Kiszűri a jogos adminisztrációs és Helpdesk tevékenységet parancssori, szülőfolyamatok és integritásszint-ellenőrzések segítségével.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

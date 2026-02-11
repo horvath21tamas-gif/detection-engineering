@@ -11557,16 +11557,14 @@ by gating against integrity levels, parent process lineage, and specific hex-cod
 
 
 ---
-## Ultra-Pro High-Fidelity Group Policy Discovery (T1615)
+## High-Fidelity Group Policy Discovery Detection
 - **ID:** `T1615.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic Group Policy reconnaissance focusing on report harvesting 
-and policy exploitation patterns. Filters out legitimate Helpdesk activity 
-by analyzing command-line switches and process integrity levels.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects systematic Group Policy reconnaissance, including GPO report harvesting  and policy enumeration from unusual execution contexts. Filters out legitimate  administrative and Helpdesk activity using command-line, parent process, and  integrity level checks.
 
 
 #### 🚨 Response Playbook

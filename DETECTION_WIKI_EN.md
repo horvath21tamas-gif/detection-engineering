@@ -8483,14 +8483,15 @@ originating from non-standard administrative tools or IPs.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Logging Impairment (T1562.008)
+## Cloud Logging Impairment (T1562.008)
 - **ID:** `T1562_008.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects critical changes to cloud logging (CloudTrail, Azure Activity) that 
-create visibility gaps. Focuses on trail deletion, log file encryption 
-disabling, and storage-level tampering by non-automated identities.
+- **Leírás:** Detects attempts to impair cloud logging visibility by disabling,
+deleting, or weakening CloudTrail and Azure logging configurations.
+Focuses on trail deletion, log validation disablement, event selector
+downgrades, and storage tampering initiated by anomalous identities.
 
 
 #### 🚨 Response Playbook

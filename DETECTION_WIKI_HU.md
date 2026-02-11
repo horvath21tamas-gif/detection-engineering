@@ -8050,14 +8050,15 @@ nem szabványos adminisztrációs eszközökből vagy IP-kből származik.
 
 
 ---
-## Ultra-Pro High-Fidelity felhőnaplózás károsodása (T1562.008)
+## Felhőnaplózás károsodása (T1562.008)
 - **ID:** `T1562_008.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a felhőnaplózás (CloudTrail, Azure Activity) kritikus változásait
-láthatósági rések létrehozása.A nyomvonal törlésére, a naplófájlok titkosítására összpontosít
-letiltása és tárolási szintű manipulálása nem automatizált identitások által.
+- **Leírás:** Érzékeli a felhőnaplózás láthatóságának rontására irányuló kísérleteket a
+a CloudTrail és az Azure naplózási konfigurációinak törlése vagy gyengítése.
+A nyomvonal törlésére, a naplóérvényesítés letiltására és az eseményválasztóra összpontosít
+visszaminősítések és tárhely-szabotázsok, amelyeket rendellenes identitások kezdeményeztek.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

@@ -8050,14 +8050,15 @@ von nicht standardmäßigen Verwaltungstools oder IPs stammen.
 
 
 ---
-## Beeinträchtigung der Ultra-Pro High-Fidelity-Cloud-Protokollierung (T1562.008)
+## Beeinträchtigung der Cloud-Protokollierung (T1562.008)
 - **ID:** `T1562_008.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt kritische Änderungen an der Cloud-Protokollierung (CloudTrail, Azure Activity).
-Sichtbarkeitslücken schaffen.Der Schwerpunkt liegt auf der Löschung von Spuren und der Verschlüsselung von Protokolldateien
-Deaktivierung und Manipulation auf Speicherebene durch nicht automatisierte Identitäten.
+- **Beschreibung:** Erkennt Versuche, die Sichtbarkeit der Cloud-Protokollierung durch Deaktivierung zu beeinträchtigen.
+Löschen oder Abschwächen von CloudTrail- und Azure-Protokollierungskonfigurationen.
+Konzentriert sich auf das Löschen von Trails, die Deaktivierung der Protokollvalidierung und die Ereignisauswahl
+Herabstufungen und Speichermanipulationen durch anomale Identitäten.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

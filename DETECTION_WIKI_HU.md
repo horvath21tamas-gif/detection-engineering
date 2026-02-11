@@ -8890,9 +8890,9 @@ a hamis pozitívumok csökkentésére.
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Egyéni szimmetrikus titkosítás (AES/Rijndael) gyanús használatát észleli a C2 csatornákon.
+- **Leírás:** Egyéni szimmetrikus titkosítás (AES/Rijndael) gyanús használatát észleli a C2 csatornáknál.
 A CipherMode, PaddingMode és CryptoStreams programozott beállítására összpontosít
-script motorok, amelyek kifejezetten a kézi IV/Kulcs hozzárendelést és az adatfolyam-vezetékeket célozzák meg
+script motorok, amelyek kifejezetten a kézi IV/Kulcs-hozzárendelést és az adatfolyam-vezetékeket célozzák meg
 nem szabványos folyamatokból vagy nem megbízható végrehajtási környezetekből.
 
 #### 🚨 Response Playbook

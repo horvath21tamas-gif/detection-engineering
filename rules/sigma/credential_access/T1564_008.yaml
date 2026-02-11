@@ -1,60 +1,85 @@
-title: Ultra-Pro High-Fidelity Email Hiding Rules Detection (T1564.008)
+title: Email Hiding Rules Detection (T1564.008)
 id: 7afba0fb-5168-4f01-b10d-f233a952144f
 status: stable
 description: |
-    Detects targeted email hiding rules by identifying suspicious inbox rule 
-    modifications that automate the deletion or hiding of security alerts, 
-    initiated by untrusted parent processes or non-admin shells.
-author: hota05
-date: 2026-02-03
+  Detects suspicious modifications of email inbox rules aimed at hiding, 
+  deleting, or forwarding security-related alerts. Monitors non-admin parent 
+  processes and untrusted shells for actions that could suppress detection of 
+  phishing, MFA alerts, or unauthorized access notifications.
+author: hota05 
+date: 2026-02-11
 tags:
-    - attack.defense_evasion
-    - attack.t1564.008
+  - attack.defense_evasion
+  - attack.t1564.008
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_cmdlets:
-        CommandLine|contains:
-            - 'New-InboxRule'
-            - 'Set-InboxRule'
-            - 'Set-MailboxForwardingConfiguration'
+  selection_cmdlets:
+    CommandLine|contains:
+      - 'New-InboxRule'
+      - 'Set-InboxRule'
+      - 'Set-MailboxForwardingConfiguration'
+      - 'Remove-InboxRule'
 
-    selection_silencing_actions:
-        CommandLine|contains:
-            - 'DeleteMessage'
-            - 'PermanentDelete'
-            - 'MarkAsRead'
-            - 'MoveToFolder'
+  selection_silencing_actions:
+    CommandLine|contains:
+      - 'DeleteMessage'
+      - 'PermanentDelete'
+      - 'MarkAsRead'
+      - 'MoveToFolder'
+      - 'ForwardTo'
 
-    selection_security_keywords:
-        CommandLine|contains:
-            - 'Security'
-            - 'Alert'
-            - 'Password'
-            - 'MFA'
-            - 'Sign-in'
-            - 'Phish'
-            - 'Compromise'
-            - 'Unauthorized'
+  selection_security_keywords:
+    CommandLine|contains:
+      - 'Security'
+      - 'Alert'
+      - 'Password'
+      - 'MFA'
+      - 'Sign-in'
+      - 'Phish'
+      - 'Compromise'
+      - 'Unauthorized'
+      - 'Breach'
 
-    selection_suspicious_parents:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\msedge.exe'
-            - '\chrome.exe'
-            - '\mshta.exe'
+  selection_suspicious_parents:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\msedge.exe'
+      - '\chrome.exe'
+      - '\mshta.exe'
+      - '\powershell.exe'
 
-    filter_trusted_admin_activity:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - CommandLine|contains:
-            - 'Spam'
-            - 'Junk'
-            - 'Internal-Auto-Forward'
-        - ParentImage|contains:
-            - '\Windows\System32\svchost.exe'
+  filter_trusted_admin_activity:
+    - username: 'NT AUTHORITY\SYSTEM'
+    - CommandLine|contains:
+        - 'Spam'
+        - 'Junk'
+        - 'Internal-Auto-Forward'
+    - ParentImage|contains:
+        - '\Windows\System32\svchost.exe'
+        - '\ExchangeManagementShell\'
 
-    condition: selection_cmdlets and ((selection_silencing_actions and selection_security_keywords) or selection_suspicious_parents) and not filter_trusted_admin_activity
+  condition: selection_cmdlets and 
+             (
+               (selection_silencing_actions and selection_security_keywords) or 
+               selection_suspicious_parents
+             ) and not filter_trusted_admin_activity
+
+fields:
+  - Time
+  - SourceImage
+  - ParentImage
+  - CommandLine
+  - SourceUsername
+  - TargetMailbox
+
+falsepositives:
+  - Legitimate mailbox rule automation by system administrators
+  - Security operations automation scripts using Exchange Management Shell
+  - Internal spam or junk mail filtering policies
+
 level: critical

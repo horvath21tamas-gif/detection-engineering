@@ -1,50 +1,120 @@
-title: Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012)
+title: Cloud Security Infrastructure Impairment (T1562.012)
 id: 266d137f-9ba3-4a65-9428-2792a3d8f682
 status: stable
 description: |
-    Detects targeted attempts to blind cloud native security services. 
-    Focuses on suppression filter creation, detector deletion, and 
-    threat intelligence sabotage by non-automated or root identities.
-author: hota05
-date: 2026-02-03
+  Detects targeted attempts to impair AWS-native security controls such as 
+  GuardDuty, Security Hub, and related threat intelligence mechanisms.
+  Focuses on detector deletion, suppression rule abuse, and threat intel tampering 
+  initiated by root, non-MFA, or non-automated identities.
+author: hota05 
+date: 2026-02-11
 tags:
-    - attack.defense_evasion
-    - attack.t1562.012
+  - attack.defense_evasion
+  - attack.t1562.012
+  - attack.impact
+
 logsource:
-    product: cloud
-    service: aws.cloudtrail 
+  product: aws
+  service: cloudtrail
+
 detection:
-    selection_terminate:
-        eventName:
-            - 'DeleteDetector'          
-            - 'UpdateDetector'          
-            - 'DeleteThreatIntelSet'    
-            - 'DeleteIPSet'           
+  selection_security_impairment:
+    eventSource:
+      - guardduty.amazonaws.com
+      - securityhub.amazonaws.com
+      - inspector2.amazonaws.com
+    eventName:
+      - DeleteDetector
+      - UpdateDetector
+      - DeleteMembers
+      - DisassociateMembers
+      - DisableSecurityHub
+      - BatchDisableStandards
+      - DeleteThreatIntelSet
+      - DeleteIPSet
 
-    selection_stealth_filters:
-        eventName:
-            - 'CreateFilter'           
-            - 'UpdateFilter'
-            - 'CreateSuppressionRule'  
-        requestParameters.action: 
-            - 'ARCHIVE'              
-            - 'SUPPRESS'
+  selection_suppression_abuse:
+    eventSource:
+      - guardduty.amazonaws.com
+      - securityhub.amazonaws.com
+    eventName:
+      - CreateFilter
+      - UpdateFilter
+      - CreateSuppressionRule
+      - BatchUpdateFindings
+    requestParameters|contains:
+      - ARCHIVE
+      - SUPPRESS
+      - workflow:
+      - recordState:
 
-    selection_identity_anomaly:
-        - userIdentity.type: 'Root'    
-        - userAgent|contains:
-            - 'python-requests'
-            - 'kali'
-            - 'curl'
-            - 'postman'
-        - userIdentity.sessionContext.attributes.mfaAuthenticated: 'false' 
+  selection_identity_risky:
+    userIdentity.type:
+      - Root
+      - IAMUser
+    userIdentity.sessionContext.attributes.mfaAuthenticated: 'false'
 
-    filter_trusted_automation:
-        userIdentity.arn|contains:
-            - 'role/Security-Infrastructure-Terraform'
-            - 'role/AWS-Service-Role'     
-        sourceIPAddress:
-            - '10.0.0.0/8'                
+  selection_suspicious_useragent:
+    userAgent|contains:
+      - python-requests
+      - curl
+      - postman
+      - httpclient
+      - boto3
+      - aws-cli/
 
-    condition: (selection_terminate or selection_stealth_filters) and (selection_identity_anomaly and not filter_trusted_automation)
+  selection_console_login_absent:
+    eventType: AwsApiCall
+    readOnly: false
+
+  filter_trusted_roles:
+    userIdentity.arn|contains:
+      - role/Security-Infrastructure-Terraform
+      - role/AWSServiceRoleForGuardDuty
+      - role/AWSServiceRoleForSecurityHub
+      - role/OrganizationAccountAccessRole
+
+  filter_aws_internal:
+    userIdentity.invokedBy|exists: true
+
+  filter_known_ip_ranges:
+    sourceIPAddress|startswith:
+      - 10.
+      - 192.168.
+      - 172.16.
+
+  condition:
+    (
+      selection_security_impairment
+      or
+      selection_suppression_abuse
+    )
+    and
+    (
+      selection_identity_risky
+      or selection_suspicious_useragent
+    )
+    and
+    not (
+      filter_trusted_roles
+      or filter_aws_internal
+      or filter_known_ip_ranges
+    )
+
+fields:
+  - eventTime
+  - eventSource
+  - eventName
+  - userIdentity.type
+  - userIdentity.arn
+  - sourceIPAddress
+  - userAgent
+  - requestParameters
+  - awsRegion
+
+falsepositives:
+  - Planned infrastructure-as-code deployments
+  - Security service reconfiguration during onboarding
+  - MSSP-managed security tuning
+
 level: critical

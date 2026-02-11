@@ -9606,13 +9606,14 @@ injection that evades standard hook-based monitoring.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578)
+## Cloud Infrastructure Tampering (T1578)
 - **ID:** `T1578.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects high-risk modifications to cloud infrastructure that weaken security posture 
-or prepare for data exfiltration, filtered by identity behavior and source trust.
+or prepare for data exfiltration. Focuses on manual, untrusted, or anomalous 
+identity actions while filtering out automated and internal operations.
 
 
 #### 🚨 Response Playbook

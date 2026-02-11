@@ -9112,13 +9112,14 @@ befecskendezés, amely elkerüli a standard horog alapú felügyeletet.
 
 
 ---
-## Ultra-Pro High-Fidelity felhő infrastruktúra manipuláció (T1578)
+## Felhő-infrastruktúra manipulálása (T1578)
 - **ID:** `T1578.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Érzékeli a felhő-infrastruktúra magas kockázatú módosításait, amelyek gyengítik a biztonsági helyzetet
-vagy felkészülni az adatok kiszűrésére, az identitás viselkedése és a forrás megbízhatósága alapján szűrve.
+vagy készüljön fel az adatok kiszűrésére.Kézi, megbízhatatlan vagy rendellenes dolgokra összpontosít
+személyazonossági műveleteket, miközben kiszűri az automatizált és belső műveleteket.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

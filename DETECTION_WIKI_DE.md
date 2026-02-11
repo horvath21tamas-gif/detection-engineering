@@ -9112,13 +9112,14 @@ Injektion, die der standardmäßigen Hook-basierten Überwachung entgeht.
 
 
 ---
-## Manipulation der Ultra-Pro-High-Fidelity-Cloud-Infrastruktur (T1578)
+## Manipulation der Cloud-Infrastruktur (T1578)
 - **ID:** `T1578.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 - **Beschreibung:** Erkennt risikoreiche Änderungen an der Cloud-Infrastruktur, die die Sicherheitslage schwächen
-Oder bereiten Sie sich auf die Datenexfiltration vor, gefiltert nach Identitätsverhalten und Quellenvertrauen.
+oder bereiten Sie sich auf die Datenexfiltration vor.Konzentriert sich auf manuell, nicht vertrauenswürdig oder anomal
+Identitätsaktionen und filtert gleichzeitig automatisierte und interne Vorgänge heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

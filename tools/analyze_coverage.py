@@ -23,10 +23,15 @@ def analyze_kill_chain():
     total_rules = 0
 
     # Szabályok elemzése
+    if not os.path.exists(sigma_path):
+        print(f"⚠️ Hiba: A {sigma_path} mappa nem található!")
+        return
+
     for root, _, files in os.walk(sigma_path):
         for file in files:
             if file.endswith(('.yaml', '.yml')):
-                with open(os.path.join(root, file), 'r', encoding='utf-8') as f:
+                file_path = os.path.join(root, file)
+                with open(file_path, 'r', encoding='utf-8') as f:
                     try:
                         d = yaml.safe_load(f)
                         if not d: continue
@@ -36,19 +41,23 @@ def analyze_kill_chain():
                         for phase in kill_chain_mapping.keys():
                             if any(phase in t for t in tags):
                                 stats[phase] += 1
-                    except: continue
+                    except Exception as e:
+                        print(f"Szkennelési hiba ({file}): {e}")
+                        continue
 
     # Jelentés összeállítása (Markdown formátumban)
     report = "# ⛓️ Cyber Kill Chain Lefedettségi Jelentés\n\n"
-    report += f"Ez a jelentés automatikusan készült {total_rules} szabály alapján.\n\n"
+    report += f"Ez a jelentés automatikusan készült **{total_rules}** szabály alapján.\n\n"
     report += "| Támadási Fázis | Szabályok Száma | Lefedettség |\n"
     report += "| :--- | :---: | :--- |\n"
 
     for phase, label in kill_chain_mapping.items():
         count = stats[phase]
-        # Vizuális sáv (progress bar) készítése
-        bar = "█" * (count // 10) + "░" * (10 - (count // 10))
-        report += f "| {label} (`{phase}`) | {count} | `{bar}` |\n"
+        # Progress bar: max 10 karakter, 1 egység = 5 szabály (vagy 10, ízlés szerint)
+        filled_length = min(10, count // 5) 
+        bar = "█" * filled_length + "░" * (10 - filled_length)
+        # JAVÍTOTT SOR: Nincs szóköz az f és az idézőjel között
+        report += f"| {label} (`{phase}`) | {count} | `{bar}` |\n"
 
     with open('KILL_CHAIN_REPORT.md', 'w', encoding='utf-8') as f:
         f.write(report)

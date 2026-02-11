@@ -8207,16 +8207,16 @@ megbízhatatlan szülők kezdeményezték.
 
 
 ---
-## Ultra-Pro High-Fidelity rejtett fájl attribútum-manipuláció (T1564.001)
+## Rejtett fájlattribútum-manipuláció (T1564.001)
 - **ID:** `T1564_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a célzott fájlok és könyvtárak elrejtését a kombinált használat azonosításával
-Nem megbízható szülőfolyamatok által kezdeményezett rendszer (+s) és Rejtett (+h) attribútumok
-vagy érzékeny felhasználó által írható könyvtárakat céloz meg.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Fájlok és könyvtárak elrejtésének gyanús használatát észleli a System (+s) és a Hidden (+h) attribútumokon keresztül.
+A nem megbízható szülői folyamatokra, a felhasználó által írható érzékeny könyvtárakra összpontosít, és elkerüli
+ismert biztonságos rendszer vagy automatizálási tevékenységek.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

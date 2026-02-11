@@ -8207,16 +8207,16 @@ initiiert von nicht vertrauenswürdigen Eltern.
 
 
 ---
-## Ultra-Pro High-Fidelity-Manipulation versteckter Dateiattribute (T1564.001)
+## Manipulation versteckter Dateiattribute (T1564.001)
 - **ID:** `T1564_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt das gezielte Verstecken von Dateien und Verzeichnissen durch die Identifizierung der kombinierten Verwendung von
-Systemattribute (+s) und versteckte Attribute (+h), die von nicht vertrauenswürdigen übergeordneten Prozessen initiiert werden
-oder auf sensible, vom Benutzer beschreibbare Verzeichnisse abzielen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt verdächtige Verwendung des Versteckens von Dateien und Verzeichnissen über die Attribute „System“ (+s) und „Versteckt“ (+h).
+Konzentriert sich auf nicht vertrauenswürdige übergeordnete Prozesse, vertrauliche, vom Benutzer beschreibbare Verzeichnisse und vermeidet diese
+bekannte sichere System- oder Automatisierungsaktivitäten.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

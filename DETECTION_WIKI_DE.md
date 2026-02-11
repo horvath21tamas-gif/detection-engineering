@@ -450,19 +450,19 @@
 - [Ultra-Pro High-Fidelity-Verteidigungs-Downgrade-Angriff (T1562.010)](#ultra-pro-high-fidelity-verteidigungs-downgrade-angriff-(t1562010))
 - [Ultra-Pro High-Fidelity-Virtualisierung und Sandbox-Umgehung (T1564.011)](#ultra-pro-high-fidelity-virtualisierung-und-sandbox-umgehung-(t1564011))
 - [Beeinträchtigung der Ultra-Pro High-Fidelity Cloud-Sicherheitsinfrastruktur (T1562.012)](#beeinträchtigung-der-ultra-pro-high-fidelity-cloud-sicherheitsinfrastruktur-(t1562012))
-- [Ultra-Pro High-Fidelity Remote Service Session Hijacking (T1563)](#ultra-pro-high-fidelity-remote-service-session-hijacking-(t1563))
-- [Ultra-Pro High-Fidelity Local Session Hijacking (T1563.001)](#ultra-pro-high-fidelity-local-session-hijacking-(t1563001))
-- [Ultra-Pro High-Fidelity RDP Session Hijacking (T1563.002)](#ultra-pro-high-fidelity-rdp-session-hijacking-(t1563002))
-- [Ultraprofessionelle High-Fidelity-Erkennung versteckter Artefakte (T1564)](#ultraprofessionelle-high-fidelity-erkennung-versteckter-artefakte-(t1564))
-- [Ultra-Pro High-Fidelity-Manipulation versteckter Dateiattribute (T1564.001)](#ultra-pro-high-fidelity-manipulation-versteckter-dateiattribute-(t1564001))
-- [Ultra-Pro High-Fidelity-Erstellung versteckter Benutzerkonten (T1564.002)](#ultra-pro-high-fidelity-erstellung-versteckter-benutzerkonten-(t1564002))
-- [Ultra-Pro High-Fidelity Hidden Window Execution (T1564.003)](#ultra-pro-high-fidelity-hidden-window-execution-(t1564003))
-- [Ultra-Pro High-Fidelity NTFS Alternative Data Stream (ADS) Missbrauch (T1564.004)](#ultra-pro-high-fidelity-ntfs-alternative-data-stream-(ads)-missbrauch-(t1564004))
-- [Ultra-Pro High-Fidelity-Manipulation versteckter Dateisysteme (T1564.005)](#ultra-pro-high-fidelity-manipulation-versteckter-dateisysteme-(t1564005))
-- [Missbrauch der Ausführung virtueller Ultra-Pro-High-Fidelity-Instanzen (T1564.006)](#missbrauch-der-ausführung-virtueller-ultra-pro-high-fidelity-instanzen-(t1564006))
-- [Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007)](#ultra-pro-high-fidelity-vba-macro-security-evasion-(t1564007))
-- [Ultra-Pro High-Fidelity-Erkennung von E-Mail-Versteckregeln (T1564.008)](#ultra-pro-high-fidelity-erkennung-von-e-mail-versteckregeln-(t1564008))
-- [Ultra-Pro High-Fidelity-Ressourcenextraktion und -missbrauch (T1564.009)](#ultra-pro-high-fidelity-ressourcenextraktion-und--missbrauch-(t1564009))
+- [Entführung von Remote-Service-Sitzungen (T1563)](#entführung-von-remote-service-sitzungen-(t1563))
+- [Entführung lokaler Sitzungen (T1563.001)](#entführung-lokaler-sitzungen-(t1563001))
+- [RDP-Sitzungs-Hijacking (T1563.002)](#rdp-sitzungs-hijacking-(t1563002))
+- [Erkennung versteckter Artefakte (T1564)](#erkennung-versteckter-artefakte-(t1564))
+- [Manipulation versteckter Dateiattribute (T1564.001)](#manipulation-versteckter-dateiattribute-(t1564001))
+- [Erstellung eines versteckten Benutzerkontos (T1564.002)](#erstellung-eines-versteckten-benutzerkontos-(t1564002))
+- [Ausführung versteckter Fenster (T1564.003)](#ausführung-versteckter-fenster-(t1564003))
+- [Missbrauch von NTFS Alternative Data Stream (ADS) (T1564.004)](#missbrauch-von-ntfs-alternative-data-stream-(ads)-(t1564004))
+- [Manipulation versteckter Dateisysteme (T1564.005)](#manipulation-versteckter-dateisysteme-(t1564005))
+- [Missbrauch der Ausführung virtueller Instanzen (T1564.006)](#missbrauch-der-ausführung-virtueller-instanzen-(t1564006))
+- [VBA-Makro-Sicherheitsumgehung (T1564.007)](#vba-makro-sicherheitsumgehung-(t1564007))
+- [Erkennung von E-Mail-Versteckregeln (T1564.008)](#erkennung-von-e-mail-versteckregeln-(t1564008))
+- [Ressourcengewinnung und -missbrauch (T1564.009)](#ressourcengewinnung-und--missbrauch-(t1564009))
 - [Erkennung von Prozessargument-Spoofing (T1564.010)](#erkennung-von-prozessargument-spoofing-(t1564010))
 - [Missbrauch virtueller Instanzen (T1564.011)](#missbrauch-virtueller-instanzen-(t1564011))
 - [Datenmanipulation (T1565)](#datenmanipulation-(t1565))
@@ -8134,17 +8134,18 @@ Sabotage von Bedrohungsinformationen durch nicht automatisierte oder Root-Identi
 
 
 ---
-## Ultra-Pro High-Fidelity Remote Service Session Hijacking (T1563)
+## Entführung von Remote-Service-Sitzungen (T1563)
 - **ID:** `T1563.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Entführung von RDP-/Terminal-Sitzungen durch Überwachung der Ausführung von tscon.exe
-Muster.Konzentriert sich auf anomale übergeordnete Prozesse und bestimmte Befehlszeilen
-Schalter, mit denen Benutzersitzungen zum Terminal des Angreifers umgeleitet werden
-ohne Authentifizierung der Anmeldedaten.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt RDP/Terminal Services-Sitzungshijacking über tscon.exe durch Korrelation:
+- Hijack-spezifische Befehlszeilenparameter
+- Ausführung der Systemintegrität
+- Laterale Bewegung oder schalenbasierte übergeordnete Prozesse
+Filtert explizit legitime RDS/VDI-Orchestrierungs- und Dienstkontexte.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -8153,16 +8154,19 @@ ohne Authentifizierung der Anmeldedaten.
 
 
 ---
-## Ultra-Pro High-Fidelity Local Session Hijacking (T1563.001)
+## Entführung lokaler Sitzungen (T1563.001)
 - **ID:** `T1563_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt erweitertes lokales Sitzungs-Hijacking, bei dem tscon.exe zum Herstellen einer Verbindung verwendet wird
-eine bestehende Benutzersitzung.Filtert legitimes RDS/VDI-Management heraus
-Analyse der Integrität des übergeordneten Prozesses und der Befehlszeilenentropie.
+- **Beschreibung:** Erkennt erweiterte lokale Sitzungs-Hijacking-Versuche, bei denen tscon.exe verwendet wird
+zum Anhängen an bestehende Benutzersitzungen.High-Fidelity-Erkennung kombiniert:
+– Verdächtige Befehlszeilenargumente, die auf Konsolen- oder RDP-Sitzungen abzielen
+- Ausführungskontext auf SYSTEM-Ebene
+– Nicht vertrauenswürdige übergeordnete Prozesse (Shells, Lateral-Movement-Tools, Office-Apps)
+Legitime RDS/VDI-Verwaltungstools werden explizit herausgefiltert.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

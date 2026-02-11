@@ -450,19 +450,19 @@
 - [Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010)](#ultra-pro-high-fidelity-defense-downgrade-attack-(t1562010))
 - [Ultra-Pro High-Fidelity Virtualization and Sandbox Evasion (T1564.011)](#ultra-pro-high-fidelity-virtualization-and-sandbox-evasion-(t1564011))
 - [Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012)](#ultra-pro-high-fidelity-cloud-security-infrastructure-impairment-(t1562012))
-- [Ultra-Pro High-Fidelity Remote Service Session Hijacking (T1563)](#ultra-pro-high-fidelity-remote-service-session-hijacking-(t1563))
-- [Ultra-Pro High-Fidelity Local Session Hijacking (T1563.001)](#ultra-pro-high-fidelity-local-session-hijacking-(t1563001))
-- [Ultra-Pro High-Fidelity RDP Session Hijacking (T1563.002)](#ultra-pro-high-fidelity-rdp-session-hijacking-(t1563002))
-- [Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564)](#ultra-pro-high-fidelity-hide-artifacts-detection-(t1564))
-- [Ultra-Pro High-Fidelity Hidden File Attribute Manipulation (T1564.001)](#ultra-pro-high-fidelity-hidden-file-attribute-manipulation-(t1564001))
-- [Ultra-Pro High-Fidelity Hidden User Account Creation (T1564.002)](#ultra-pro-high-fidelity-hidden-user-account-creation-(t1564002))
-- [Ultra-Pro High-Fidelity Hidden Window Execution (T1564.003)](#ultra-pro-high-fidelity-hidden-window-execution-(t1564003))
-- [Ultra-Pro High-Fidelity NTFS Alternative Data Stream (ADS) Abuse (T1564.004)](#ultra-pro-high-fidelity-ntfs-alternative-data-stream-(ads)-abuse-(t1564004))
-- [Ultra-Pro High-Fidelity Hidden File System Manipulation (T1564.005)](#ultra-pro-high-fidelity-hidden-file-system-manipulation-(t1564005))
-- [Ultra-Pro High-Fidelity Virtual Instance Execution Abuse (T1564.006)](#ultra-pro-high-fidelity-virtual-instance-execution-abuse-(t1564006))
-- [Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007)](#ultra-pro-high-fidelity-vba-macro-security-evasion-(t1564007))
-- [Ultra-Pro High-Fidelity Email Hiding Rules Detection (T1564.008)](#ultra-pro-high-fidelity-email-hiding-rules-detection-(t1564008))
-- [Ultra-Pro High-Fidelity Resource Extraction and Abuse (T1564.009)](#ultra-pro-high-fidelity-resource-extraction-and-abuse-(t1564009))
+- [Remote Service Session Hijacking (T1563)](#remote-service-session-hijacking-(t1563))
+- [Local Session Hijacking (T1563.001)](#local-session-hijacking-(t1563001))
+- [RDP Session Hijacking (T1563.002)](#rdp-session-hijacking-(t1563002))
+- [Hide Artifacts Detection (T1564)](#hide-artifacts-detection-(t1564))
+- [Hidden File Attribute Manipulation (T1564.001)](#hidden-file-attribute-manipulation-(t1564001))
+- [Hidden User Account Creation (T1564.002)](#hidden-user-account-creation-(t1564002))
+- [Hidden Window Execution (T1564.003)](#hidden-window-execution-(t1564003))
+- [NTFS Alternative Data Stream (ADS) Abuse (T1564.004)](#ntfs-alternative-data-stream-(ads)-abuse-(t1564004))
+- [Hidden File System Manipulation (T1564.005)](#hidden-file-system-manipulation-(t1564005))
+- [Virtual Instance Execution Abuse (T1564.006)](#virtual-instance-execution-abuse-(t1564006))
+- [VBA Macro Security Evasion (T1564.007)](#vba-macro-security-evasion-(t1564007))
+- [Email Hiding Rules Detection (T1564.008)](#email-hiding-rules-detection-(t1564008))
+- [Resource Extraction and Abuse (T1564.009)](#resource-extraction-and-abuse-(t1564009))
 - [Process Argument Spoofing Detection (T1564.010)](#process-argument-spoofing-detection-(t1564010))
 - [Virtual Instance Abuse (T1564.011)](#virtual-instance-abuse-(t1564011))
 - [Data Manipulation (T1565)](#data-manipulation-(t1565))
@@ -8572,17 +8572,18 @@ threat intelligence sabotage by non-automated or root identities.
 
 
 ---
-## Ultra-Pro High-Fidelity Remote Service Session Hijacking (T1563)
+## Remote Service Session Hijacking (T1563)
 - **ID:** `T1563.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects RDP/Terminal session hijacking by monitoring tscon.exe execution 
-patterns. Focuses on anomalous parent processes and specific command-line 
-switches used to redirect user sessions to the attacker's terminal 
-without credential authentication.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects RDP/Terminal Services session hijacking via tscon.exe by correlating:
+- Hijack-specific command-line parameters
+- SYSTEM integrity execution
+- Lateral movement or shell-based parent processes
+Explicitly filters legitimate RDS/VDI orchestration and service contexts.
 
 
 #### 🚨 Response Playbook
@@ -8592,16 +8593,19 @@ without credential authentication.
 
 
 ---
-## Ultra-Pro High-Fidelity Local Session Hijacking (T1563.001)
+## Local Session Hijacking (T1563.001)
 - **ID:** `T1563_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects advanced local session hijacking where tscon.exe is used to attach to 
-an existing user session. Filters out legitimate RDS/VDI management by 
-analyzing parent process integrity and command-line entropy.
+- **Leírás:** Detects advanced local session hijacking attempts where tscon.exe is used 
+to attach to existing user sessions. High-fidelity detection combines:
+- Suspicious command-line arguments targeting console or RDP sessions
+- SYSTEM-level execution context
+- Untrusted parent processes (shells, lateral movement tools, Office apps)
+Legitimate RDS/VDI management tools are explicitly filtered out.
 
 
 #### 🚨 Response Playbook

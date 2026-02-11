@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-11 12:47:35`
+**Utolsó frissítés:** `2026-02-11 13:08:03`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -456,19 +456,19 @@
 | T1562.010 | CRITICAL | Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010) |
 | T1562.011 | HIGH | Ultra-Pro High-Fidelity Virtualization and Sandbox Evasion (T1564.011) |
 | T1562.012 | CRITICAL | Ultra-Pro High-Fidelity Cloud Security Infrastructure Impairment (T1562.012) |
-| T1563 | CRITICAL | Ultra-Pro High-Fidelity Remote Service Session Hijacking (T1563) |
-| T1563.001 | CRITICAL | Ultra-Pro High-Fidelity Local Session Hijacking (T1563.001) |
-| T1563.002 | CRITICAL | Ultra-Pro High-Fidelity Remote Service Session Hijacking (T1563), Ultra-Pro High-Fidelity RDP Session Hijacking (T1563.002) |
-| T1564 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
-| T1564.001 | HIGH | Ultra-Pro High-Fidelity Hidden File Attribute Manipulation (T1564.001), Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564) |
-| T1564.002 | CRITICAL | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564), Ultra-Pro High-Fidelity Hidden User Account Creation (T1564.002) |
-| T1564.003 | HIGH | Ultra-Pro High-Fidelity Hidden Window Execution (T1564.003) |
-| T1564.004 | HIGH | Ultra-Pro High-Fidelity Hide Artifacts Detection (T1564), Ultra-Pro High-Fidelity NTFS Alternative Data Stream (ADS) Abuse (T1564.004) |
-| T1564.005 | HIGH | Ultra-Pro High-Fidelity Hidden File System Manipulation (T1564.005) |
-| T1564.006 | HIGH | Ultra-Pro High-Fidelity Virtual Instance Execution Abuse (T1564.006) |
-| T1564.007 | HIGH | Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007) |
-| T1564.008 | CRITICAL | Ultra-Pro High-Fidelity Email Hiding Rules Detection (T1564.008) |
-| T1564.009 | HIGH | Ultra-Pro High-Fidelity Resource Extraction and Abuse (T1564.009) |
+| T1563 | CRITICAL | Remote Service Session Hijacking (T1563) |
+| T1563.001 | CRITICAL | Remote Service Session Hijacking (T1563), Local Session Hijacking (T1563.001) |
+| T1563.002 | CRITICAL | Remote Service Session Hijacking (T1563), RDP Session Hijacking (T1563.002) |
+| T1564 | HIGH | Hide Artifacts Detection (T1564) |
+| T1564.001 | HIGH | Hidden File Attribute Manipulation (T1564.001), Hide Artifacts Detection (T1564) |
+| T1564.002 | CRITICAL | Hide Artifacts Detection (T1564), Hidden User Account Creation (T1564.002) |
+| T1564.003 | HIGH | Hidden Window Execution (T1564.003) |
+| T1564.004 | HIGH | Hide Artifacts Detection (T1564), NTFS Alternative Data Stream (ADS) Abuse (T1564.004) |
+| T1564.005 | HIGH | Hidden File System Manipulation (T1564.005) |
+| T1564.006 | HIGH | Virtual Instance Execution Abuse (T1564.006) |
+| T1564.007 | HIGH | VBA Macro Security Evasion (T1564.007) |
+| T1564.008 | CRITICAL | Email Hiding Rules Detection (T1564.008) |
+| T1564.009 | HIGH | Resource Extraction and Abuse (T1564.009) |
 | T1564.010 | HIGH | Process Argument Spoofing Detection (T1564.010) |
 | T1564.011 | HIGH | Virtual Instance Abuse (T1564.011) |
 | T1565 | CRITICAL | Data Manipulation (T1565) |

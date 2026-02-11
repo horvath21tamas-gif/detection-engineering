@@ -450,19 +450,19 @@
 - [Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010)](#ultra-pro-high-fidelity-defense-downgrade-attack-(t1562010))
 - [Ultra-Pro High-Fidelity virtualizáció és Sandbox Evasion (T1564.011)](#ultra-pro-high-fidelity-virtualizáció-és-sandbox-evasion-(t1564011))
 - [Ultra-Pro High-Fidelity felhőbiztonsági infrastruktúra károsodása (T1562.012)](#ultra-pro-high-fidelity-felhőbiztonsági-infrastruktúra-károsodása-(t1562012))
-- [Ultra-Pro High-Fidelity távoli szolgáltatási munkamenet-eltérítés (T1563)](#ultra-pro-high-fidelity-távoli-szolgáltatási-munkamenet-eltérítés-(t1563))
-- [Ultra-Pro High-Fidelity helyi munkamenet-eltérítés (T1563.001)](#ultra-pro-high-fidelity-helyi-munkamenet-eltérítés-(t1563001))
-- [Ultra-Pro High-Fidelity RDP munkamenet-eltérítés (T1563.002)](#ultra-pro-high-fidelity-rdp-munkamenet-eltérítés-(t1563002))
-- [Ultra-Pro, nagy pontosságú műtermék-észlelés (T1564)](#ultra-pro-nagy-pontosságú-műtermék-észlelés-(t1564))
-- [Ultra-Pro High-Fidelity rejtett fájl attribútum-manipuláció (T1564.001)](#ultra-pro-high-fidelity-rejtett-fájl-attribútum-manipuláció-(t1564001))
-- [Ultra-Pro High-Fidelity rejtett felhasználói fiók létrehozása (T1564.002)](#ultra-pro-high-fidelity-rejtett-felhasználói-fiók-létrehozása-(t1564002))
-- [Ultra-Pro High-Fidelity rejtett ablak végrehajtás (T1564.003)](#ultra-pro-high-fidelity-rejtett-ablak-végrehajtás-(t1564003))
-- [Ultra-Pro High-Fidelity NTFS alternatív adatfolyam (ADS) visszaélés (T1564.004)](#ultra-pro-high-fidelity-ntfs-alternatív-adatfolyam-(ads)-visszaélés-(t1564004))
-- [Ultra-Pro High-Fidelity rejtett fájlrendszer-manipuláció (T1564.005)](#ultra-pro-high-fidelity-rejtett-fájlrendszer-manipuláció-(t1564005))
-- [Ultra-Pro High-Fidelity virtuális példány végrehajtási visszaélés (T1564.006)](#ultra-pro-high-fidelity-virtuális-példány-végrehajtási-visszaélés-(t1564006))
-- [Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007)](#ultra-pro-high-fidelity-vba-macro-security-evasion-(t1564007))
-- [Ultra-Pro High-Fidelity e-mailek elrejtési szabályainak észlelése (T1564.008)](#ultra-pro-high-fidelity-e-mailek-elrejtési-szabályainak-észlelése-(t1564008))
-- [Ultra-Pro High-Fidelity erőforrás-kivonás és visszaélés (T1564.009)](#ultra-pro-high-fidelity-erőforrás-kivonás-és-visszaélés-(t1564009))
+- [Távoli szolgáltatási munkamenet-eltérítés (T1563)](#távoli-szolgáltatási-munkamenet-eltérítés-(t1563))
+- [Helyi munkamenet-eltérítés (T1563.001)](#helyi-munkamenet-eltérítés-(t1563001))
+- [RDP munkamenet-eltérítés (T1563.002)](#rdp-munkamenet-eltérítés-(t1563002))
+- [Műtermékek észlelésének elrejtése (T1564)](#műtermékek-észlelésének-elrejtése-(t1564))
+- [Rejtett fájlattribútum-manipuláció (T1564.001)](#rejtett-fájlattribútum-manipuláció-(t1564001))
+- [Rejtett felhasználói fiók létrehozása (T1564.002)](#rejtett-felhasználói-fiók-létrehozása-(t1564002))
+- [Rejtett ablak végrehajtása (T1564.003)](#rejtett-ablak-végrehajtása-(t1564003))
+- [NTFS alternatív adatfolyammal (ADS) való visszaélés (T1564.004)](#ntfs-alternatív-adatfolyammal-(ads)-való-visszaélés-(t1564004))
+- [Rejtett fájlrendszer-manipuláció (T1564.005)](#rejtett-fájlrendszer-manipuláció-(t1564005))
+- [Virtuális példány végrehajtási visszaélés (T1564.006)](#virtuális-példány-végrehajtási-visszaélés-(t1564006))
+- [VBA Macro Security Evasion (T1564.007)](#vba-macro-security-evasion-(t1564007))
+- [E-mailek elrejtésére vonatkozó szabályok észlelése (T1564.008)](#e-mailek-elrejtésére-vonatkozó-szabályok-észlelése-(t1564008))
+- [Erőforrás-kivonás és visszaélés (T1564.009)](#erőforrás-kivonás-és-visszaélés-(t1564009))
 - [Érveléshamisítás-észlelés feldolgozása (T1564.010)](#érveléshamisítás-észlelés-feldolgozása-(t1564010))
 - [Virtuális példány visszaélés (T1564.011)](#virtuális-példány-visszaélés-(t1564011))
 - [Adatkezelés (T1565)](#adatkezelés-(t1565))
@@ -8134,17 +8134,18 @@ fenyegetés intelligencia szabotázsa nem automatizált vagy root identitások �
 
 
 ---
-## Ultra-Pro High-Fidelity távoli szolgáltatási munkamenet-eltérítés (T1563)
+## Távoli szolgáltatási munkamenet-eltérítés (T1563)
 - **ID:** `T1563.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A tscon.exe végrehajtásának figyelésével észleli az RDP/Terminal munkamenet-eltérítést
-minták.A rendellenes szülőfolyamatokra és az adott parancssorra összpontosít
-A felhasználói munkamenetek átirányítására szolgáló kapcsolók a támadó termináljára
-hitelesítő adatok hitelesítése nélkül.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli az RDP/Terminal Services munkamenet-eltérítést a tscon.exe-n keresztül a következő korrelációval:
+- Hijack-specifikus parancssori paraméterek
+- RENDSZER integritás végrehajtása
+- Oldalirányú mozgás vagy héj alapú szülőfolyamatok
+Kifejezetten szűri a legitim RDS/VDI hangszerelési és szolgáltatási környezeteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -8153,16 +8154,19 @@ hitelesítő adatok hitelesítése nélkül.
 
 
 ---
-## Ultra-Pro High-Fidelity helyi munkamenet-eltérítés (T1563.001)
+## Helyi munkamenet-eltérítés (T1563.001)
 - **ID:** `T1563_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a fejlett helyi munkamenet-eltérítést, ahol a tscon.exe csatlakozik
-meglévő felhasználói munkamenet.Kiszűri a jogos RDS/VDI-kezelést
-a szülőfolyamatok integritásának és a parancssori entrópiának elemzése.
+- **Leírás:** Érzékeli a fejlett helyi munkamenet-eltérítési kísérleteket, ahol a tscon.exe fájlt használják
+meglévő felhasználói munkamenetekhez való csatoláshoz.A nagy pontosságú érzékelés a következőket tartalmazza:
+- Gyanús parancssori argumentumok, amelyek konzolt vagy RDP-munkameneteket céloznak meg
+- RENDSZER szintű végrehajtási környezet
+- Nem megbízható szülői folyamatok (héjak, oldalirányú mozgatási eszközök, Office-alkalmazások)
+A törvényes RDS/VDI kezelőeszközök kifejezetten ki vannak szűrve.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

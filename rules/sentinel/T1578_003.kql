@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (operation_name in ("*TerminateInstances*", "*Microsoft.Compute/virtualMachines/delete*", "*v1.compute.instances.delete*")) and (mfa_authenticated =~ "false" and (user_agent in ("*kali*", "*python-requests*", "*boto3*", "*curl*", "*postman*", "*Mozilla*"))) and (not ((user_name in ("svc-terraform*", "svc-ansible*", "aws-autoscaling*", "cloud-controller*")) or (user_name in ("*system-internal*", "*scaling-manager*"))))
+| where (operation_name in ("*TerminateInstances*", "*Microsoft.Compute/virtualMachines/delete*", "*v1.compute.instances.delete*", "*DeleteVM*", "*DeleteInstance*", "*Compute.instances.delete*")) and (mfa_authenticated =~ "false" and (user_agent in ("*kali*", "*python-requests*", "*boto3*", "*curl*", "*postman*", "*Mozilla*", "*powershell*", "*Terraform*", "*Pulumi*"))) and (not ((user_name in ("svc-terraform*", "svc-ansible*", "aws-autoscaling*", "cloud-controller*", "svc-pulumi*")) or (user_name in ("*system-internal*", "*scaling-manager*", "*azuremonitor*", "*loganalytics*"))))

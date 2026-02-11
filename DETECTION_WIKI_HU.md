@@ -3,8 +3,8 @@
 ### 📊 Detection Engineering Dashboard
 | Kritikusság | Darabszám |
 | :--- | :--- |
-| 🔴 Critical | 359 |
-| 🟠 High | 262 |
+| 🔴 Critical | 360 |
+| 🟠 High | 261 |
 | 🟡 Medium | 7 |
 | 🔵 Low | 0 |
 | **Összesen** | **628** |
@@ -9155,7 +9155,7 @@ Az egyszerű létrehozás helyett az engedélyek módosítására és a fiókok 
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Instance Destruction (T1578.003)
+## Felhőpéldány-megsemmisítés (T1578.003)
 - **ID:** `T1578_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

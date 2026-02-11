@@ -3,8 +3,8 @@
 ### 📊 Erkennungstechnik-Dashboard
 | Kritikalität | Stückzahl |
 | :--- | :--- |
-| 🔴 Critical | 359 |
-| 🟠 High | 262 |
+| 🔴 Critical | 360 |
+| 🟠 High | 261 |
 | 🟡 Medium | 7 |
 | 🔵 Low | 0 |
 | **Alle** | **628** |
@@ -9155,7 +9155,7 @@ Konzentriert sich auf Berechtigungsänderungen und kontoübergreifenden Zugriff 
 
 
 ---
-## Ultra-Pro High-Fidelity-Cloud-Instanzzerstörung (T1578.003)
+## Zerstörung der Cloud-Instanz (T1578.003)
 - **ID:** `T1578_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

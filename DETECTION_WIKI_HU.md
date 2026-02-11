@@ -632,7 +632,7 @@
 - [Ultra-Pro High-Fidelity tanúsítvány és magánkulcs-lopás (T1649)](#ultra-pro-high-fidelity-tanúsítvány-és-magánkulcs-lopás-(t1649))
 - [High-Fidelity Cloud-fiók megszerzése és inicializálása – T1650](#high-fidelity-cloud-fiók-megszerzése-és-inicializálása-–-t1650)
 - [High-Fidelity Cloud Administration Agent Agent Abuse](#high-fidelity-cloud-administration-agent-agent-abuse)
-- [Ultra-Pro High-Fidelity Device Driver Discovery (T1652)](#ultra-pro-high-fidelity-device-driver-discovery-(t1652))
+- [Gyanús eszközillesztő-felsorolás rendellenes kontextusból (BYOVD Recon)](#gyanús-eszközillesztő-felsorolás-rendellenes-kontextusból-(byovd-recon))
 - [Ultra-Pro teljesítménybeállítások kezelése (T1137.001)](#ultra-pro-teljesítménybeállítások-kezelése-(t1137001))
 - [Ultra-Pro nagy pontosságú naplófeltárás (T1654)](#ultra-pro-nagy-pontosságú-naplófeltárás-(t1654))
 - [Ultra-Pro High-Fidelity megszemélyesítés és személyazonosság-eltérítés (T1656)](#ultra-pro-high-fidelity-megszemélyesítés-és-személyazonosság-eltérítés-(t1656))
@@ -11117,17 +11117,14 @@ amelyek megkerülik a hagyományos hálózati peremvédelmet.
 
 
 ---
-## Ultra-Pro High-Fidelity Device Driver Discovery (T1652)
+## Gyanús eszközillesztő-felsorolás rendellenes kontextusból (BYOVD Recon)
 - **ID:** `T1652.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [PNPUTIL.EXE](https://lolbas-project.github.io/lolbas/), [QUERY.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az eszközillesztők szisztematikus felfedezését a nagy pontosság figyelésével
-nem szabványos leszármazási mintákból származó felsorolási minták (WMI/CLI).
-Kifejezetten a BYOVD-vel (Bring Your Own Vulnerable Driver) kapcsolatos viselkedéseket célozza meg.
-felderítés.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [PNPUTIL.EXE](https://lolbas-project.github.io/lolbas/), [QUERY.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a gyanús eszközillesztő-felderítési tevékenységet a natív Windows segédprogramok, WMI vagy PowerShell használatával rendellenes végrehajtási környezetekből.A Bring Your Own Vulnerable Driver (BYOVD) visszaélése előtt gyakran megfigyelt felderítési mintákra összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

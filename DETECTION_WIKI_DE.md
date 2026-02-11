@@ -632,7 +632,7 @@
 - [Ultra-Pro High-Fidelity-Zertifikat und Diebstahl privater Schlüssel (T1649)](#ultra-pro-high-fidelity-zertifikat-und-diebstahl-privater-schlüssel-(t1649))
 - [High-Fidelity-Cloud-Kontoerwerb und -Initialisierung – T1650](#high-fidelity-cloud-kontoerwerb-und--initialisierung-–-t1650)
 - [Missbrauch von High-Fidelity-Cloud-Verwaltungsagenten](#missbrauch-von-high-fidelity-cloud-verwaltungsagenten)
-- [Ultra-Pro High-Fidelity-Gerätetreibererkennung (T1652)](#ultra-pro-high-fidelity-gerätetreibererkennung-(t1652))
+- [Verdächtige Gerätetreiberaufzählung aus anomalem Kontext (BYOVD Recon)](#verdächtige-gerätetreiberaufzählung-aus-anomalem-kontext-(byovd-recon))
 - [Manipulation der Ultra-Pro-Energieeinstellungen (T1137.001)](#manipulation-der-ultra-pro-energieeinstellungen-(t1137001))
 - [Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654)](#ultra-pro-high-fidelity-log-enumeration-discovery-(t1654))
 - [Ultra-Pro High-Fidelity-Identitätsbetrug und Identitätsdiebstahl (T1656)](#ultra-pro-high-fidelity-identitätsbetrug-und-identitätsdiebstahl-(t1656))
@@ -11117,17 +11117,14 @@ die herkömmliche Netzwerk-Perimeter-Verteidigungsmaßnahmen umgehen.
 
 
 ---
-## Ultra-Pro High-Fidelity-Gerätetreibererkennung (T1652)
+## Verdächtige Gerätetreiberaufzählung aus anomalem Kontext (BYOVD Recon)
 - **ID:** `T1652.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [PNPUTIL.EXE](https://lolbas-project.github.io/lolbas/), [QUERY.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Erkennung von Gerätetreibern durch Überwachung auf High-Fidelity
-Aufzählungsmuster (WMI/CLI), die aus nicht standardmäßigen Abstammungslinien stammen.
-Konkret geht es um Verhaltensweisen im Zusammenhang mit BYOVD (Bring Your Own Vulnerable Driver).
-Aufklärung.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [PNPUTIL.EXE](https://lolbas-project.github.io/lolbas/), [QUERY.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt verdächtige Gerätetreiber-Erkennungsaktivitäten mithilfe nativer Windows-Dienstprogramme, WMI oder PowerShell in anormalen Ausführungskontexten.Konzentriert sich auf Aufklärungsmuster, die häufig vor dem Missbrauch von Bring Your Own Vulnerable Driver (BYOVD) beobachtet werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

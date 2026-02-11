@@ -632,7 +632,7 @@
 - [Ultra-Pro High-Fidelity Certificate & Private Key Theft (T1649)](#ultra-pro-high-fidelity-certificate-&-private-key-theft-(t1649))
 - [High-Fidelity Cloud Account Acquisition and Initialization - T1650](#high-fidelity-cloud-account-acquisition-and-initialization---t1650)
 - [High-Fidelity Cloud Administration Agent Abuse](#high-fidelity-cloud-administration-agent-abuse)
-- [Ultra-Pro High-Fidelity Device Driver Discovery (T1652)](#ultra-pro-high-fidelity-device-driver-discovery-(t1652))
+- [Suspicious Device Driver Enumeration From Anomalous Context (BYOVD Recon)](#suspicious-device-driver-enumeration-from-anomalous-context-(byovd-recon))
 - [Ultra-Pro Power Settings Manipulation (T1137.001)](#ultra-pro-power-settings-manipulation-(t1137001))
 - [Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654)](#ultra-pro-high-fidelity-log-enumeration-discovery-(t1654))
 - [Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656)](#ultra-pro-high-fidelity-impersonation-and-identity-hijacking-(t1656))
@@ -11737,17 +11737,14 @@ that bypass traditional network perimeter defenses.
 
 
 ---
-## Ultra-Pro High-Fidelity Device Driver Discovery (T1652)
+## Suspicious Device Driver Enumeration From Anomalous Context (BYOVD Recon)
 - **ID:** `T1652.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [PNPUTIL.EXE](https://lolbas-project.github.io/lolbas/), [QUERY.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic discovery of device drivers by monitoring for high-fidelity 
-enumeration patterns (WMI/CLI) originating from non-standard lineages. 
-Specifically targets behaviors associated with BYOVD (Bring Your Own Vulnerable Driver) 
-reconnaissance.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [PNPUTIL.EXE](https://lolbas-project.github.io/lolbas/), [QUERY.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects suspicious device driver discovery activity using native Windows  utilities, WMI, or PowerShell from anomalous execution contexts.  Focuses on reconnaissance patterns commonly observed prior to  Bring Your Own Vulnerable Driver (BYOVD) abuse.
 
 
 #### 🚨 Response Playbook

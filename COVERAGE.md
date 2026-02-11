@@ -638,7 +638,7 @@
 | T1649 | CRITICAL | Ultra-Pro High-Fidelity Certificate & Private Key Theft (T1649) |
 | T1650 | HIGH | High-Fidelity Cloud Account Acquisition and Initialization - T1650 |
 | T1651 | CRITICAL | High-Fidelity Cloud Administration Agent Abuse |
-| T1652 | HIGH | Ultra-Pro High-Fidelity Device Driver Discovery (T1652) |
+| T1652 | HIGH | Suspicious Device Driver Enumeration From Anomalous Context (BYOVD Recon) |
 | T1653 | MEDIUM | Ultra-Pro Power Settings Manipulation (T1137.001) |
 | T1654 | HIGH | Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654) |
 | T1656 | HIGH | Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656) |

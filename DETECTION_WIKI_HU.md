@@ -508,10 +508,10 @@
 - [Exploit-grade KernelCallbackTable manipuláció távoli memóriaíráson keresztül](#exploit-grade-kernelcallbacktable-manipuláció-távoli-memóriaíráson-keresztül)
 - [Ultra-Pro High-Fidelity felhő infrastruktúra manipuláció (T1578)](#ultra-pro-high-fidelity-felhő-infrastruktúra-manipuláció-(t1578))
 - [Ultra-Pro High-Fidelity gyanús felhőpéldány létrehozása (T1578.001)](#ultra-pro-high-fidelity-gyanús-felhőpéldány-létrehozása-(t1578001))
-- [Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002)](#ultra-pro-high-fidelity-cloud-snapshot-exfiltration-(t1578002))
-- [Ultra-Pro High-Fidelity Cloud Instance Destruction (T1578.003)](#ultra-pro-high-fidelity-cloud-instance-destruction-(t1578003))
-- [Ultra-Pro High-Fidelity felhőkép-szabotázs (T1578.004)](#ultra-pro-high-fidelity-felhőkép-szabotázs-(t1578004))
-- [Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005)](#ultra-pro-high-fidelity-cloud-network-security-regression-(t1578005))
+- [Cloud Snapshot Exfiltration (T1578.002)](#cloud-snapshot-exfiltration-(t1578002))
+- [Felhőpéldány-megsemmisítés (T1578.003)](#felhőpéldány-megsemmisítés-(t1578003))
+- [Felhőkép-szabotázs (T1578.004)](#felhőkép-szabotázs-(t1578004))
+- [Cloud Network Security Regression (T1578.005)](#cloud-network-security-regression-(t1578005))
 - [Cloud Infrastructure Discovery (T1580)](#cloud-infrastructure-discovery-(t1580))
 - [High-Fidelity offensive Infrastructure Provisioning – T1583](#high-fidelity-offensive-infrastructure-provisioning-–-t1583)
 - [High-Fidelity VPS infrastruktúra kiépítése – T1583.001](#high-fidelity-vps-infrastruktúra-kiépítése-–-t1583001)
@@ -594,11 +594,11 @@
 - [Speciális BEC levelezési és pénzügyi adatok kiszűrése – T1598.002](#speciális-bec-levelezési-és-pénzügyi-adatok-kiszűrése-–-t1598002)
 - [High-Fidelity MFA/OTP hamisítás és betakarítás – T1598.003](#high-fidelity-mfaotp-hamisítás-és-betakarítás-–-t1598003)
 - [High-Fidelity Spearphishing Attachment Interaction – T1598.004](#high-fidelity-spearphishing-attachment-interaction-–-t1598004)
-- [Ultra-Pro High-Fidelity hálózati határáthidalás (T1599)](#ultra-pro-high-fidelity-hálózati-határáthidalás-(t1599))
-- [Ultra-Pro High-Fidelity logikai leválasztás bypass (T1599.001)](#ultra-pro-high-fidelity-logikai-leválasztás-bypass-(t1599001))
-- [Ultra-Pro High-Fidelity Weaken Encryption Kísérlet (T1600)](#ultra-pro-high-fidelity-weaken-encryption-kísérlet-(t1600))
-- [Ultra-Pro High-Fidelity rendszer képjavító (T1600.001)](#ultra-pro-high-fidelity-rendszer-képjavító-(t1600001))
-- [Ultra-Pro High-Fidelity Disable Entity Verification (T1600.002)](#ultra-pro-high-fidelity-disable-entity-verification-(t1600002))
+- [Hálózati határok áthidalása (T1599)](#hálózati-határok-áthidalása-(t1599))
+- [Logikai leválasztás bypass (T1599.001)](#logikai-leválasztás-bypass-(t1599001))
+- [Gyengítési kísérlet (T1600)](#gyengítési-kísérlet-(t1600))
+- [Rendszerkép javítás (T1600.001)](#rendszerkép-javítás-(t1600001))
+- [Entitásellenőrzés letiltása (T1600.002)](#entitásellenőrzés-letiltása-(t1600002))
 - [Hálózati operációs rendszer képmódosítása (T1601)](#hálózati-operációs-rendszer-képmódosítása-(t1601))
 - [Hálózati bináris javítás (T1601.001)](#hálózati-bináris-javítás-(t1601001))
 - [Ultra-Pro High-Fidelity rosszindulatú hálózati operációs rendszer frissítése (T1601.002)](#ultra-pro-high-fidelity-rosszindulatú-hálózati-operációs-rendszer-frissítése-(t1601002))
@@ -9141,13 +9141,14 @@ minimális hamis pozitív eredménnyel a CI/CD csővezetékekből.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002)
+## Cloud Snapshot Exfiltration (T1578.002)
 - **ID:** `T1578_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a felhőalapú számítási pillanatképek jogosulatlan megosztását vagy nyilvános közzétételét.
-Az egyszerű létrehozás helyett az engedélyek módosítására és a fiókok közötti hozzáférésre összpontosít.
+- **Leírás:** Érzékeli a felhőalapú számítási pillanatképek jogosulatlan megosztását, fiókok közötti hozzáférését vagy nyilvános közzétételét.
+Az egyszerű pillanatkép-készítés helyett a magas kockázatú engedélymódosításokra összpontosít, és kiszűri
+megbízható biztonsági mentési és replikációs folyamatok.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -9157,12 +9158,13 @@ Az egyszerű létrehozás helyett az engedélyek módosítására és a fiókok 
 ---
 ## Felhőpéldány-megsemmisítés (T1578.003)
 - **ID:** `T1578_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
-- **Kritikusság:** 🟠 (high)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a felhőpéldányok jogosulatlan vagy tömeges törlését.Kiszűri
-automatizált skálázási események, és a manuális, nem MFA- vagy szkriptalapúra összpontosít
-szabotázsra vagy védelmi kijátszásra utaló megsemmisítési kísérletek.
+- **Leírás:** Érzékeli a felhőpéldányok jogosulatlan vagy tömeges törlését az Azure-ban, AWS-ben,
+és GCP környezetek.Kézi, nem MFA vagy gyanús szkriptekre összpontosít
+törlések, amelyek szabotázsra vagy védelmi kijátszásra utalhatnak, ugyanakkor kizárják
+törvényes automatizált skálázási események.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -10515,7 +10517,7 @@ jogosulatlan VLAN trönkölés, L2 híd létrehozása és az EVPN hibás konfigu
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a rendszer titkosításának gyengítésére irányuló jogosulatlan kísérleteket, beleértve a TLS protokoll leminősítését
 és a PowerShell-tanúsítvány érvényesítésének megkerülése.A rendszeren kívüli folyamatokra összpontosít és
-gyanús helyek, miközben kizárja a megbízható telepítőket és a böngészőfrissítéseket.
+gyanús helyeket, miközben kizárja a megbízható telepítőket és a böngészőfrissítéseket.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -10609,7 +10611,7 @@ megbízható források és biztonságos csatornák a téves pozitívumok csökke
 
 
 ---
-## Hálózati megosztás automatikus adatgyűjtése (T1602)
+## Hálózati megosztás automatizált adatgyűjtés (T1602)
 - **ID:** `T1602.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
@@ -10617,8 +10619,8 @@ megbízható források és biztonságos csatornák a téves pozitívumok csökke
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli az érzékeny adatok nagyon gyanús, automatizált gyűjtését a hálózati megosztásokról.
-Az UNC útvonal bejárására, az érzékeny fájlkiterjesztésekre, a rekurzív másolási logikára és a
-nem megbízható folyamatvonal.Szűri a legitim IT-kezelési, biztonsági mentési és rendszerfolyamatokat
+Az UNC-útvonal bejárására, az érzékeny fájlkiterjesztésekre, a rekurzív másolási logikára és a
+nem megbízható folyamatvonal.Szűri a jogszerű IT-kezelési, biztonsági mentési és rendszerfolyamatokat
 a hamis pozitívumok csökkentésére.
 
 #### 🚨 Response Playbook

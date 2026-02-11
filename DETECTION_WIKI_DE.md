@@ -508,10 +508,10 @@
 - [Exploit-Grade-KernelCallbackTable-Manipulation über Remote-Speicher-Schreiben](#exploit-grade-kernelcallbacktable-manipulation-über-remote-speicher-schreiben)
 - [Manipulation der Ultra-Pro-High-Fidelity-Cloud-Infrastruktur (T1578)](#manipulation-der-ultra-pro-high-fidelity-cloud-infrastruktur-(t1578))
 - [Ultra-Pro High-Fidelity-Erstellung verdächtiger Cloud-Instanzen (T1578.001)](#ultra-pro-high-fidelity-erstellung-verdächtiger-cloud-instanzen-(t1578001))
-- [Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002)](#ultra-pro-high-fidelity-cloud-snapshot-exfiltration-(t1578002))
-- [Ultra-Pro High-Fidelity-Cloud-Instanzzerstörung (T1578.003)](#ultra-pro-high-fidelity-cloud-instanzzerstörung-(t1578003))
-- [Ultra-Pro High-Fidelity Cloud Image Manipulation (T1578.004)](#ultra-pro-high-fidelity-cloud-image-manipulation-(t1578004))
-- [Ultra-Pro High-Fidelity-Cloud-Netzwerk-Sicherheitsregression (T1578.005)](#ultra-pro-high-fidelity-cloud-netzwerk-sicherheitsregression-(t1578005))
+- [Cloud-Snapshot-Exfiltration (T1578.002)](#cloud-snapshot-exfiltration-(t1578002))
+- [Zerstörung der Cloud-Instanz (T1578.003)](#zerstörung-der-cloud-instanz-(t1578003))
+- [Manipulation von Wolkenbildern (T1578.004)](#manipulation-von-wolkenbildern-(t1578004))
+- [Regression der Cloud-Netzwerksicherheit (T1578.005)](#regression-der-cloud-netzwerksicherheit-(t1578005))
 - [Cloud-Infrastrukturerkennung (T1580)](#cloud-infrastrukturerkennung-(t1580))
 - [Bereitstellung einer High-Fidelity-Offensiv-Infrastruktur – T1583](#bereitstellung-einer-high-fidelity-offensiv-infrastruktur-–-t1583)
 - [Bereitstellung einer High-Fidelity-VPS-Infrastruktur – T1583.001](#bereitstellung-einer-high-fidelity-vps-infrastruktur-–-t1583001)
@@ -594,11 +594,11 @@
 - [Erweiterte BEC-Mail- und Finanzdaten-Exfiltration – T1598.002](#erweiterte-bec-mail--und-finanzdaten-exfiltration-–-t1598002)
 - [High-Fidelity-MFA/OTP-Spoofing und -Ernte – T1598.003](#high-fidelity-mfaotp-spoofing-und--ernte-–-t1598003)
 - [High-Fidelity-Interaktion mit Spearphishing-Anhängen – T1598.004](#high-fidelity-interaktion-mit-spearphishing-anhängen-–-t1598004)
-- [Ultra-Pro High-Fidelity-Netzwerk-Boundary-Bridging (T1599)](#ultra-pro-high-fidelity-netzwerk-boundary-bridging-(t1599))
-- [Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001)](#ultra-pro-high-fidelity-logical-isolation-bypass-(t1599001))
-- [Ultra-Pro High-Fidelity-Verschlüsselungsversuch schwächen (T1600)](#ultra-pro-high-fidelity-verschlüsselungsversuch-schwächen-(t1600))
-- [Ultra-Pro High-Fidelity-System-Image-Patching (T1600.001)](#ultra-pro-high-fidelity-system-image-patching-(t1600001))
-- [Ultra-Pro High-Fidelity-Entitätsüberprüfung deaktivieren (T1600.002)](#ultra-pro-high-fidelity-entitätsüberprüfung-deaktivieren-(t1600002))
+- [Netzwerkgrenzenüberbrückung (T1599)](#netzwerkgrenzenüberbrückung-(t1599))
+- [Logische Isolationsbypass (T1599.001)](#logische-isolationsbypass-(t1599001))
+- [Verschlüsselungsversuch abschwächen (T1600)](#verschlüsselungsversuch-abschwächen-(t1600))
+- [System-Image-Patching (T1600.001)](#system-image-patching-(t1600001))
+- [Entitätsüberprüfung deaktivieren (T1600.002)](#entitätsüberprüfung-deaktivieren-(t1600002))
 - [Netzwerk-OS-Image-Änderung (T1601)](#netzwerk-os-image-änderung-(t1601))
 - [Netzwerk-Binär-Patching (T1601.001)](#netzwerk-binär-patching-(t1601001))
 - [Ultra-Pro High-Fidelity-Upgrade für bösartige Netzwerk-Betriebssysteme (T1601.002)](#ultra-pro-high-fidelity-upgrade-für-bösartige-netzwerk-betriebssysteme-(t1601002))
@@ -9141,13 +9141,14 @@ mit minimalen Fehlalarmen aus CI/CD-Pipelines.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002)
+## Cloud-Snapshot-Exfiltration (T1578.002)
 - **ID:** `T1578_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt die unbefugte Weitergabe oder öffentliche Offenlegung von Cloud-Computing-Snapshots.
-Konzentriert sich auf Berechtigungsänderungen und kontoübergreifenden Zugriff und nicht auf einfache Erstellung.
+- **Beschreibung:** Erkennt unbefugtes Teilen, kontoübergreifenden Zugriff oder öffentliche Offenlegung von Cloud-Computing-Snapshots.
+Konzentriert sich auf risikoreiche Berechtigungsänderungen statt auf die einfache Snapshot-Erstellung und filtert heraus
+vertrauenswürdige Backup- und Replikationsprozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**
@@ -9157,12 +9158,13 @@ Konzentriert sich auf Berechtigungsänderungen und kontoübergreifenden Zugriff 
 ---
 ## Zerstörung der Cloud-Instanz (T1578.003)
 - **ID:** `T1578_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
-- **Kritikalität:** 🟠 (high)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
+- **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt unbefugtes oder massenhaftes Löschen von Cloud-Instanzen.Filtert heraus
-automatisierte Skalierungsereignisse und konzentriert sich auf manuelle, nicht-MFA- oder skriptbasierte
-Zerstörungsversuche, die auf Sabotage oder Umgehung der Verteidigung schließen lassen.
+- **Beschreibung:** Erkennt unbefugtes oder massenhaftes Löschen von Cloud-Instanzen in Azure, AWS,
+und GCP-Umgebungen.Konzentriert sich auf manuelle, nicht-MFA oder verdächtige Skripte
+Löschungen, die auf Sabotage oder Umgehung der Verteidigung hindeuten könnten, werden dabei ausgeschlossen
+legitime automatisierte Skalierungsereignisse.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

@@ -508,10 +508,10 @@
 - [Exploit-Grade KernelCallbackTable Manipulation via Remote Memory Write](#exploit-grade-kernelcallbacktable-manipulation-via-remote-memory-write)
 - [Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578)](#ultra-pro-high-fidelity-cloud-infrastructure-tampering-(t1578))
 - [Ultra-Pro High-Fidelity Suspicious Cloud Instance Creation (T1578.001)](#ultra-pro-high-fidelity-suspicious-cloud-instance-creation-(t1578001))
-- [Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002)](#ultra-pro-high-fidelity-cloud-snapshot-exfiltration-(t1578002))
-- [Ultra-Pro High-Fidelity Cloud Instance Destruction (T1578.003)](#ultra-pro-high-fidelity-cloud-instance-destruction-(t1578003))
-- [Ultra-Pro High-Fidelity Cloud Image Tampering (T1578.004)](#ultra-pro-high-fidelity-cloud-image-tampering-(t1578004))
-- [Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005)](#ultra-pro-high-fidelity-cloud-network-security-regression-(t1578005))
+- [Cloud Snapshot Exfiltration (T1578.002)](#cloud-snapshot-exfiltration-(t1578002))
+- [Cloud Instance Destruction (T1578.003)](#cloud-instance-destruction-(t1578003))
+- [Cloud Image Tampering (T1578.004)](#cloud-image-tampering-(t1578004))
+- [Cloud Network Security Regression (T1578.005)](#cloud-network-security-regression-(t1578005))
 - [Cloud Infrastructure Discovery (T1580)](#cloud-infrastructure-discovery-(t1580))
 - [High-Fidelity Offensive Infrastructure Provisioning - T1583](#high-fidelity-offensive-infrastructure-provisioning---t1583)
 - [High-Fidelity VPS Infrastructure Provisioning - T1583.001](#high-fidelity-vps-infrastructure-provisioning---t1583001)
@@ -594,11 +594,11 @@
 - [Advanced BEC Mail & Financial Data Exfiltration - T1598.002](#advanced-bec-mail-&-financial-data-exfiltration---t1598002)
 - [High-Fidelity MFA/OTP Spoofing & Harvesting - T1598.003](#high-fidelity-mfaotp-spoofing-&-harvesting---t1598003)
 - [High-Fidelity Spearphishing Attachment Interaction - T1598.004](#high-fidelity-spearphishing-attachment-interaction---t1598004)
-- [Ultra-Pro High-Fidelity Network Boundary Bridging (T1599)](#ultra-pro-high-fidelity-network-boundary-bridging-(t1599))
-- [Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001)](#ultra-pro-high-fidelity-logical-isolation-bypass-(t1599001))
-- [Ultra-Pro High-Fidelity Weaken Encryption Attempt (T1600)](#ultra-pro-high-fidelity-weaken-encryption-attempt-(t1600))
-- [Ultra-Pro High-Fidelity System Image Patching (T1600.001)](#ultra-pro-high-fidelity-system-image-patching-(t1600001))
-- [Ultra-Pro High-Fidelity Disable Entity Verification (T1600.002)](#ultra-pro-high-fidelity-disable-entity-verification-(t1600002))
+- [Network Boundary Bridging (T1599)](#network-boundary-bridging-(t1599))
+- [Logical Isolation Bypass (T1599.001)](#logical-isolation-bypass-(t1599001))
+- [Weaken Encryption Attempt (T1600)](#weaken-encryption-attempt-(t1600))
+- [System Image Patching (T1600.001)](#system-image-patching-(t1600001))
+- [Disable Entity Verification (T1600.002)](#disable-entity-verification-(t1600002))
 - [Network OS Image Modification (T1601)](#network-os-image-modification-(t1601))
 - [Network Binary Patching (T1601.001)](#network-binary-patching-(t1601001))
 - [Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002)](#ultra-pro-high-fidelity-malicious-network-os-upgrade-(t1601002))
@@ -9637,13 +9637,14 @@ with minimal false positives from CI/CD pipelines.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002)
+## Cloud Snapshot Exfiltration (T1578.002)
 - **ID:** `T1578_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects unauthorized sharing or public exposure of cloud compute snapshots. 
-Focuses on permission changes and cross-account access rather than simple creation.
+- **Leírás:** Detects unauthorized sharing, cross-account access, or public exposure of cloud compute snapshots.
+Focuses on high-risk permission changes rather than simple snapshot creation, and filters out 
+trusted backup and replication processes.
 
 
 #### 🚨 Response Playbook
@@ -9654,12 +9655,13 @@ Focuses on permission changes and cross-account access rather than simple creati
 ---
 ## Cloud Instance Destruction (T1578.003)
 - **ID:** `T1578_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
-- **Kritikusság:** 🟠 (high)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
+- **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects unauthorized or mass deletion of cloud instances. Filters out 
-automated scaling events and focuses on manual, non-MFA, or script-based 
-destruction attempts that indicate sabotage or defense evasion.
+- **Leírás:** Detects unauthorized or mass deletion of cloud instances across Azure, AWS, 
+and GCP environments. Focuses on manual, non-MFA, or suspicious scripted 
+deletions that may indicate sabotage or defense evasion, while excluding 
+legitimate automated scaling events.
 
 
 #### 🚨 Response Playbook

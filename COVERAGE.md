@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-11 10:04:07`
+**Utolsó frissítés:** `2026-02-11 10:32:42`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -512,12 +512,12 @@
 | T1574.011 | CRITICAL | Privileged Service ImagePath or ServiceDll Hijacked via Registry |
 | T1574.012 | CRITICAL | Exploit-Grade COR_PROFILER Hijacking via User-Writable Profiler DLL |
 | T1574.013 | CRITICAL | Exploit-Grade KernelCallbackTable Manipulation via Remote Memory Write |
-| T1578 | CRITICAL | Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002), Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578) |
+| T1578 | CRITICAL | Cloud Snapshot Exfiltration (T1578.002), Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578) |
 | T1578.001 | CRITICAL | Ultra-Pro High-Fidelity Suspicious Cloud Instance Creation (T1578.001) |
-| T1578.002 | CRITICAL | Ultra-Pro High-Fidelity Cloud Snapshot Exfiltration (T1578.002) |
-| T1578.003 | HIGH | Ultra-Pro High-Fidelity Cloud Instance Destruction (T1578.003) |
-| T1578.004 | CRITICAL | Ultra-Pro High-Fidelity Cloud Image Tampering (T1578.004) |
-| T1578.005 | CRITICAL | Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005) |
+| T1578.002 | CRITICAL | Cloud Snapshot Exfiltration (T1578.002) |
+| T1578.003 | CRITICAL | Cloud Instance Destruction (T1578.003) |
+| T1578.004 | CRITICAL | Cloud Image Tampering (T1578.004) |
+| T1578.005 | CRITICAL | Cloud Network Security Regression (T1578.005) |
 | T1580 | HIGH | Cloud Infrastructure Discovery (T1580) |
 | T1583 | HIGH | High-Fidelity Offensive Infrastructure Provisioning - T1583 |
 | T1583.001 | HIGH | High-Fidelity VPS Infrastructure Provisioning - T1583.001 |
@@ -600,11 +600,11 @@
 | T1598.002 | HIGH | Advanced BEC Mail & Financial Data Exfiltration - T1598.002 |
 | T1598.003 | HIGH | High-Fidelity MFA/OTP Spoofing & Harvesting - T1598.003 |
 | T1598.004 | HIGH | High-Fidelity Spearphishing Attachment Interaction - T1598.004 |
-| T1599 | CRITICAL | Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001), Ultra-Pro High-Fidelity Network Boundary Bridging (T1599) |
-| T1599.001 | CRITICAL | Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001) |
-| T1600 | HIGH | Ultra-Pro High-Fidelity Weaken Encryption Attempt (T1600) |
-| T1600.001 | CRITICAL | Ultra-Pro High-Fidelity System Image Patching (T1600.001) |
-| T1600.002 | HIGH | Ultra-Pro High-Fidelity Disable Entity Verification (T1600.002) |
+| T1599 | CRITICAL | Logical Isolation Bypass (T1599.001), Network Boundary Bridging (T1599) |
+| T1599.001 | CRITICAL | Logical Isolation Bypass (T1599.001) |
+| T1600 | HIGH | Weaken Encryption Attempt (T1600) |
+| T1600.001 | CRITICAL | System Image Patching (T1600.001) |
+| T1600.002 | HIGH | Disable Entity Verification (T1600.002) |
 | T1601 | CRITICAL | Network OS Image Modification (T1601) |
 | T1601.001 | CRITICAL | Network Binary Patching (T1601.001) |
 | T1601.002 | CRITICAL | Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002) |

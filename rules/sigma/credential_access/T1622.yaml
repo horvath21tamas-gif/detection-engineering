@@ -1,54 +1,106 @@
-title: Ultra-Pro Stealthy Debugger Evasion (T1622)
+title: Suspicious Anti-Debug API Access From Unbacked or User-Space Memory
 id: 2bcdc689-6373-4494-9607-a3776240964d
 status: stable
-description: |
-    Detects high-fidelity debugger evasion by identifying anti-debug API access 
-    originating from unbacked memory (shellcode) or suspicious temporary paths, 
-    while filtering out legitimate IDEs and system error reporting.
-author: hota05
+description: >
+  Detects potential debugger evasion techniques by identifying suspicious
+  access to processes combined with anti-debug API patterns in CallTrace,
+  especially when originating from unbacked memory regions or non-standard
+  execution paths. Filters known development tools and Windows error reporting.
+
+author: hota05 
 date: 2026-02-03
+modified: 2026-02-11
+references:
+  - https://attack.mitre.org/techniques/T1622/
 tags:
-    - attack.defense_evasion
-    - attack.discovery
-    - attack.t1622
+  - attack.defense_evasion
+  - attack.t1622
+
 logsource:
-    product: windows
-    category: process_access
+  product: windows
+  category: process_access
+
 detection:
-    selection_access_mask:
-        GrantedAccess:
-            - '0x400'
-            - '0x410'
-            - '0x1400'
-            - '0x1F1FFF' 
 
-    selection_unbacked_calltrace:
-        CallTrace|contains: 'unknown'
+  selection_debug_access:
+    GrantedAccess:
+      - '0x400'     
+      - '0x410'
+      - '0x1000'    
+      - '0x1400'
+      - '0x1F0FFF'
+      - '0x1F1FFF'  
 
-    selection_api_patterns:
-        CallTrace|contains:
-            - 'IsDebuggerPresent'
-            - 'CheckRemoteDebuggerPresent'
-            - 'NtQueryInformationProcess' 
-            - 'OutputDebugString'         
+  selection_anti_debug_apis:
+    CallTrace|contains:
+      - 'IsDebuggerPresent'
+      - 'CheckRemoteDebuggerPresent'
+      - 'NtQueryInformationProcess'
+      - 'NtSetInformationThread'
+      - 'OutputDebugString'
+      - 'DbgBreakPoint'
+      - 'DbgUiRemoteBreakin'
 
-    selection_suspicious_origin:
-        SourceImage|contains:
-            - '\Users\'
-            - '\Temp\'
-            - '\AppData\'
-            - '\Downloads\'
+  selection_unbacked_memory:
+    CallTrace|contains:
+      - 'UNKNOWN'
+      - 'Unbacked'
+      - 'MEM_PRIVATE'
 
-    filter_legit_dev_tools:
-        SourceImage|endswith:
-            - '\devenv.exe'     
-            - '\windbg.exe'
-            - '\x64dbg.exe'
-            - '\code.exe'      
-            - '\pycharm64.exe'
-        Sourceprocessname: 'C:\Windows\System32\WerFault.exe'
-        Sourceprocessname: 'C:\Windows\System32\csrss.exe'
-        CallTrace|contains: 'clr.dll+' 
+  selection_suspicious_source_path:
+    SourceImage|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Downloads\'
+      - '\ProgramData\'
 
-    condition: selection_access_mask and selection_unbacked_calltrace and (selection_api_patterns or selection_suspicious_origin) and not filter_legit_dev_tools
+  selection_medium_integrity:
+    IntegrityLevel: 'Medium'
+
+  filter_legitimate_debuggers:
+    SourceImage|endswith:
+      - '\devenv.exe'
+      - '\windbg.exe'
+      - '\x64dbg.exe'
+      - '\ollydbg.exe'
+      - '\code.exe'
+      - '\pycharm64.exe'
+
+  filter_windows_error_reporting:
+    SourceImage|endswith:
+      - '\WerFault.exe'
+      - '\vsjitdebugger.exe'
+      - '\csrss.exe'
+
+  filter_dotnet_runtime:
+    CallTrace|contains:
+      - 'clr.dll+'
+      - 'mscor'
+
+  filter_system_context:
+    SourceImage|startswith:
+      - 'C:\Windows\System32\'
+      - 'C:\Windows\SysWOW64\'
+
+  condition:
+    selection_debug_access
+    and selection_anti_debug_apis
+    and (
+          selection_unbacked_memory
+          or selection_suspicious_source_path
+          or selection_medium_integrity
+        )
+    and not filter_legitimate_debuggers
+    and not filter_windows_error_reporting
+    and not filter_dotnet_runtime
+    and not filter_system_context
+
+falsepositives:
+  - Legitimate debugging sessions
+  - Development environments
+  - Windows error reporting
+  - .NET runtime diagnostic activity
+  - Authorized reverse engineering
+
 level: high

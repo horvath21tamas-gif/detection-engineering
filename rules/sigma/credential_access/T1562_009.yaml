@@ -1,63 +1,144 @@
-title: Ultra-Pro High-Fidelity Safe Mode Defense Evasion (T1562.009)
+title: Safe Mode Defense Evasion (T1562.009)
 id: 4cb7e65b-edb2-46cb-a3a2-1508557715d8
 status: stable
 description: |
-    Detects attempts to force the system into Safe Mode to bypass security controls. 
-    Focuses on bcdedit manipulation combined with immediate forced reboots and 
-    registry-based service exclusion within the SafeBoot key.
+  Detects malicious attempts to force Windows into Safe Mode to bypass 
+  security controls. Focuses on BCDEdit safeboot configuration changes, 
+  SafeBoot registry manipulation, and coordinated forced reboot activity 
+  originating from suspicious execution contexts.
 author: hota05
-date: 2026-02-03
+date: 2026-02-11
 tags:
-    - attack.defense_evasion
-    - attack.t1562.009
+  - attack.defense_evasion
+  - attack.t1562.009
+  - attack.impact
+
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_bcdedit_impact:
-        Image|endswith: '\bcdedit.exe'
-        CommandLine|contains:
-            - ' /set '
-        CommandLine|contains:
-            - 'safeboot minimal'
-            - 'safeboot network'
-        CommandLine|contains:
-            - '{current}'
-            - '{default}'
 
-    selection_registry_sabotage:
-        CommandLine|contains:
-            - 'reg'
-            - 'Set-ItemProperty'
-        CommandLine|contains:
-            - '\System\CurrentControlSet\Control\SafeBoot\Minimal\'
-            - '\System\CurrentControlSet\Control\SafeBoot\Network\'
-        CommandLine|contains:
-            - 'delete'
-            - '0x0'
+  selection_bcdedit_binary:
+    Image|endswith: '\bcdedit.exe'
 
-    selection_forced_reboot:
-        Image|endswith: '\shutdown.exe'
-        CommandLine|contains|all:
-            - ' /r' 
-            - ' /f' 
-            - ' /t 0' 
+  selection_safeboot_enable:
+    CommandLine|contains|all:
+      - ' /set'
+      - 'safeboot'
+    CommandLine|contains:
+      - 'minimal'
+      - 'network'
+      - 'alternateshell'
+      - '{current}'
+      - '{default}'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\powershell.exe'
-            - '\cmd.exe'
-            - '\w3wp.exe'
+  selection_safeboot_disable_recovery:
+    CommandLine|contains:
+      - 'bootstatuspolicy ignoreallfailures'
+      - 'recoveryenabled no'
 
-    filter_trusted_processes:
-        - username: 'NT AUTHORITY\SYSTEM'
-          ParentImage|endswith: '\services.exe'
-        - CommandLine|contains:
-            - 'reagentc.exe'   
-            - 'SystemReset.exe' 
-        - ParentImage|endswith: '\msiexec.exe' 
+  selection_registry_tool:
+    Image|endswith:
+      - '\reg.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
 
-    condition: (selection_bcdedit_impact or selection_registry_sabotage or selection_forced_reboot) and (selection_suspicious_parent or not filter_trusted_processes)
+  selection_safeboot_registry_path:
+    CommandLine|contains:
+      - '\System\CurrentControlSet\Control\SafeBoot\Minimal\'
+      - '\System\CurrentControlSet\Control\SafeBoot\Network\'
+
+  selection_registry_disable_action:
+    CommandLine|contains:
+      - ' delete '
+      - ' /f'
+      - 'Set-ItemProperty'
+      - 'Remove-Item'
+      - ' 0x0'
+      - ' /d 0'
+
+  selection_forced_reboot:
+    Image|endswith: '\shutdown.exe'
+    CommandLine|contains|all:
+      - ' /r'
+      - ' /f'
+      - ' /t 0'
+
+  selection_alt_reboot:
+    CommandLine|contains:
+      - 'Restart-Computer -Force'
+      - 'ExitWindowsEx'
+
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\w3wp.exe'
+      - '\php-cgi.exe'
+      - '\mshta.exe'
+      - '\rundll32.exe'
+      - '\wmiprvse.exe'
+      - '\psexesvc.exe'
+
+  selection_user_writable_path:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+
+  selection_high_integrity:
+    IntegrityLevel:
+      - High
+      - System
+
+  filter_legit_system_context:
+    username:
+      - 'NT AUTHORITY\SYSTEM'
+      - 'NT AUTHORITY\LOCAL SERVICE'
+      - 'NT AUTHORITY\NETWORK SERVICE'
+
+  filter_legit_parents:
+    ParentImage|contains:
+      - '\services.exe'
+      - '\svchost.exe'
+      - '\CcmExec.exe'
+      - '\TrustedInstaller.exe'
+      - '\Program Files\Microsoft Monitoring Agent\'
+
+  filter_legit_recovery_tools:
+    CommandLine|contains:
+      - 'reagentc.exe'
+      - 'SystemReset.exe'
+      - 'ResetThisPC'
+      - 'WindowsRecovery'
+
+  condition:
+    (
+      (selection_bcdedit_binary
+        and selection_safeboot_enable) or
+      (selection_registry_tool
+        and selection_safeboot_registry_path
+        and selection_registry_disable_action) or
+      selection_forced_reboot or selection_alt_reboot) and selection_high_integrity and
+    (selection_suspicious_parent
+      or selection_user_writable_path) and not (filter_legit_system_context
+      and filter_legit_parents
+      and filter_legit_recovery_tools)
+
+fields:
+  - Image
+  - ParentImage
+  - CommandLine
+  - IntegrityLevel
+  - User
+  - Hashes
+
+falsepositives:
+  - Enterprise troubleshooting workflows
+  - IT-initiated Safe Mode diagnostics
+  - Automated recovery scripts
+  - Controlled red team simulations
+
 level: critical

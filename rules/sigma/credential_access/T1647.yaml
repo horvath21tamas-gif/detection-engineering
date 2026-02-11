@@ -1,57 +1,118 @@
-title: Ultra-Pro High-Fidelity macOS Plist Persistence Modification (T1647)
+title: Suspicious macOS LaunchAgent or LaunchDaemon Plist Modification
 id: 717edd63-0e4b-45b9-a246-f5c948c1afda
 status: stable
-description: |
-    Detects suspicious modifications of macOS Property List (.plist) files using CLI tools. 
-    Focuses on persistence-related keys (LaunchAgents/LaunchDaemons) and filters out 
-    legitimate system update processes.
-author: hota05
+description: >
+  Detects suspicious modification or creation of macOS LaunchAgent or 
+  LaunchDaemon property list files using command-line utilities.
+  Focuses on persistence-related keys and abnormal execution contexts,
+  filtering legitimate Apple system processes.
+
+author: hota05 
 date: 2026-02-03
+modified: 2026-02-11
+references:
+  - https://attack.mitre.org/techniques/T1647/
+  - https://attack.mitre.org/techniques/T1543/001/
 tags:
-    - attack.persistence
-    - attack.defense_evasion
-    - attack.t1647
+  - attack.persistence
+  - attack.defense_evasion
+  - attack.t1647
+  - attack.t1543.001
+
 logsource:
-    product: macos
-    category: process_creation
+  product: macos
+  category: process_creation
+
 detection:
-    selection_tools:
-        Image|endswith:
-            - '/PlistBuddy'
-            - '/defaults'
-            - '/plutil'
 
-    selection_persistence_keys:
-        CommandLine|contains:
-            - 'RunAtLoad'
-            - 'ProgramArguments'
-            - 'StartCalendarInterval'
-            - 'KeepAlive'
-            - 'Label'
-            - 'LaunchEvents'
+  selection_plist_tools:
+    Image|endswith:
+      - '/PlistBuddy'
+      - '/defaults'
+      - '/plutil'
+      - '/launchctl'
 
-    selection_sensitive_paths:
-        CommandLine|contains:
-            - '/LaunchAgents'
-            - '/LaunchDaemons'
-            - '/Preferences/com.apple.loginitems.plist'
-            - '/Library/StartupItems'
+  selection_launch_paths:
+    CommandLine|contains:
+      - '/Library/LaunchAgents/'
+      - '/Library/LaunchDaemons/'
+      - '/Users/'
+      - '/System/Library/LaunchAgents/'
+      - '/System/Library/LaunchDaemons/'
+      - '/Library/StartupItems/'
 
-    selection_suspicious_parents:
-        ParentImage|contains:
-            - '/Safari.app/'
-            - '/Google Chrome.app/'
-            - '/Microsoft Word.app/'
-            - '/Terminal.app/'
-            - '/iTerm.app/'
+  selection_persistence_keys:
+    CommandLine|contains:
+      - 'RunAtLoad'
+      - 'ProgramArguments'
+      - 'KeepAlive'
+      - 'StartInterval'
+      - 'StartCalendarInterval'
+      - 'LaunchEvents'
+      - 'Label'
+      - 'WatchPaths'
+      - 'QueueDirectories'
 
-    filter_apple_legit:
-        Image|startswith:
-            - '/usr/sbin/softwareupdate'
-            - '/System/Library/PrivateFrameworks/'
-        ParentImage|startswith:
-            - '/System/Library/CoreServices/'
-            - '/usr/libexec/xpcproxy'
+  selection_launchctl_load:
+    CommandLine|contains:
+      - 'bootstrap'
+      - 'bootout'
+      - 'load '
+      - 'unload '
 
-    condition: selection_tools and (selection_persistence_keys or selection_sensitive_paths) and (selection_suspicious_parents or not filter_apple_legit)
+  selection_suspicious_parent:
+    ParentImage|contains:
+      - '/Safari.app/'
+      - '/Google Chrome.app/'
+      - '/Microsoft Word.app/'
+      - '/Microsoft Excel.app/'
+      - '/Mail.app/'
+      - '/zoom.us.app/'
+      - '/Slack.app/'
+
+  selection_shell_execution:
+    ParentImage|endswith:
+      - '/bash'
+      - '/zsh'
+      - '/sh'
+      - '/osascript'
+
+  selection_user_context:
+    User|contains: 'root'  
+    IntegrityLevel: 'Medium'
+
+  filter_apple_system_processes:
+    Image|startswith:
+      - '/usr/sbin/softwareupdate'
+      - '/System/Library/'
+      - '/usr/libexec/'
+
+  filter_mdm_or_management:
+    Image|contains:
+      - '/Jamf/'
+      - '/Intune/'
+      - '/Kandji/'
+      - '/Mosyle/'
+
+  condition:
+    selection_plist_tools
+    and (
+          selection_launch_paths
+          or selection_persistence_keys
+          or selection_launchctl_load
+        )
+    and (
+          selection_suspicious_parent
+          or selection_shell_execution
+          or selection_user_context
+        )
+    and not filter_apple_system_processes
+    and not filter_mdm_or_management
+
+falsepositives:
+  - Legitimate system updates
+  - Enterprise MDM deployment activity
+  - Authorized administrative configuration changes
+  - Software installation routines
+
 level: high

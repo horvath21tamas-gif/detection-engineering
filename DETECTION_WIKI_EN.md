@@ -9143,16 +9143,18 @@ and anomalous domain patterns from non-browser processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001)
+## Fast Flux & DNS Cache Evasion (T1568.001)
 - **ID:** `T1568_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects Fast Flux DNS infrastructure usage by identifying forced DNS cache 
-flushing combined with programmatic name resolution and loop-based 
-connectivity checks from non-system processes.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects Fast Flux DNS infrastructure usage and DNS cache evasion by monitoring:
+1. Forced DNS cache flushing via system commands or PowerShell.
+2. Programmatic DNS resolution combined with looped connectivity checks.
+3. Execution from non-standard scripting or interpreter processes.
+Excludes legitimate administrative and cloud automation activity.
 
 
 #### 🚨 Response Playbook

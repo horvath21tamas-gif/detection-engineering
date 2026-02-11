@@ -8675,16 +8675,18 @@ und anomale Domänenmuster von Nicht-Browser-Prozessen.
 
 
 ---
-## Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001)
+## Fast Flux und DNS-Cache-Umgehung (T1568.001)
 - **ID:** `T1568_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Nutzung der Fast Flux DNS-Infrastruktur durch Identifizierung des erzwungenen DNS-Cache
-Flushing kombiniert mit programmatischer Namensauflösung und schleifenbasiert
-Konnektivitätsprüfungen von Nicht-Systemprozessen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die Nutzung der Fast Flux DNS-Infrastruktur und die Umgehung des DNS-Cache durch Überwachung:
+1. Erzwungenes Leeren des DNS-Cache über Systembefehle oder PowerShell.
+2. Programmatische DNS-Auflösung kombiniert mit Schleifenkonnektivitätsprüfungen.
+3. Ausführung von nicht standardmäßigen Skript- oder Interpreterprozessen.
+Ausgenommen sind legitime Verwaltungs- und Cloud-Automatisierungsaktivitäten.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

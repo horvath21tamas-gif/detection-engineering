@@ -8675,16 +8675,18 @@ DNS-lekérdezések hurkon belül, alacsony szintű DNS API hívások szkriptmoto
 
 
 ---
-## Ultra-Pro High-Fidelity Fast Flux és DNS Cache Evasion (T1568.001)
+## Fast Flux és DNS Cache Evasion (T1568.001)
 - **ID:** `T1568_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Fast Flux DNS-infrastruktúra használatát a kényszerített DNS-gyorsítótár azonosításával
-öblítés programozott névfeloldással és hurok alapúval kombinálva
-kapcsolat-ellenőrzések nem rendszerfolyamatokból.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Felismeri a Fast Flux DNS-infrastruktúra használatát és a DNS-gyorsítótár-kijátszást a következők figyelésével:
+1. Kényszerített DNS-gyorsítótár-öblítés rendszerparancsokkal vagy PowerShell-lel.
+2. Programozott DNS-feloldás hurkos kapcsolódási ellenőrzésekkel kombinálva.
+3. Végrehajtás nem szabványos parancsfájl- vagy értelmező folyamatokból.
+Kizárja a jogos adminisztrációs és felhőalapú automatizálási tevékenységeket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

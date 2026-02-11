@@ -599,8 +599,8 @@
 - [Ultra-Pro High-Fidelity Weaken Encryption Kísérlet (T1600)](#ultra-pro-high-fidelity-weaken-encryption-kísérlet-(t1600))
 - [Ultra-Pro High-Fidelity rendszer képjavító (T1600.001)](#ultra-pro-high-fidelity-rendszer-képjavító-(t1600001))
 - [Ultra-Pro High-Fidelity Disable Entity Verification (T1600.002)](#ultra-pro-high-fidelity-disable-entity-verification-(t1600002))
-- [Ultra-Pro High-Fidelity hálózati OS képmódosítás (T1601)](#ultra-pro-high-fidelity-hálózati-os-képmódosítás-(t1601))
-- [Ultra-Pro High-Fidelity hálózati bináris javítás (T1601.001)](#ultra-pro-high-fidelity-hálózati-bináris-javítás-(t1601001))
+- [Hálózati operációs rendszer képmódosítása (T1601)](#hálózati-operációs-rendszer-képmódosítása-(t1601))
+- [Hálózati bináris javítás (T1601.001)](#hálózati-bináris-javítás-(t1601001))
 - [Ultra-Pro High-Fidelity rosszindulatú hálózati operációs rendszer frissítése (T1601.002)](#ultra-pro-high-fidelity-rosszindulatú-hálózati-operációs-rendszer-frissítése-(t1601002))
 - [Ultra-Pro High-Fidelity Network Share Automated Collection (T1602)](#ultra-pro-high-fidelity-network-share-automated-collection-(t1602))
 - [Admin Share Data Exfiltration (T1602.001)](#admin-share-data-exfiltration-(t1602001))
@@ -10556,14 +10556,15 @@ nem megbízható folyamatok által kezdeményezett megkerülések.
 
 
 ---
-## Ultra-Pro High-Fidelity hálózati OS képmódosítás (T1601)
+## Hálózati operációs rendszer képmódosítása (T1601)
 - **ID:** `T1601.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a hálózati eszközök operációs rendszer képeinek jogosulatlan módosítását.
-A nem biztonságos protokollokon és a rendszerindító rendszer felülírásán keresztüli bináris feltöltésekre összpontosít
-megbízható felügyeleti ablakokon vagy gazdagépeken kívül hajtják végre.
+- **Leírás:** Érzékeli a hálózati eszközök operációs rendszer képeinek jogosulatlan módosítását vagy cseréjét.
+Figyeli a bináris feltöltéseket nem biztonságos protokollokon (TFTP/FTP), firmware-frissítési parancsokon,
+és a megbízható felügyeleti ablakokon vagy gazdagépeken kívül végrehajtott rendszerindítási rendszer felülírásai.
+A rendellenes forráskontextus, az ellenőrzőösszeg-hibák és a nem szabványos gazdagépek észlelésére összpontosít.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -10571,14 +10572,15 @@ megbízható felügyeleti ablakokon vagy gazdagépeken kívül hajtják végre.
 
 
 ---
-## Ultra-Pro High-Fidelity hálózati bináris javítás (T1601.001)
+## Hálózati bináris javítás (T1601.001)
 - **ID:** `T1601_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a hálózati operációs rendszer bináris fájljainak jogosulatlan alacsony szintű javítását.
-A fájlrendszer újracsatlakoztatására (írás-olvasás), bináris manipulációra (dd, xxd) összpontosít,
-és a kernel modul betöltése (insmod) az engedélyezett karbantartáson kívül.
+- **Leírás:** Figyeléssel észleli a hálózati operációs rendszer bináris fájljainak jogosulatlan alacsony szintű javítását
+fájlrendszer újracsatlakoztatásához (írás-olvasás), közvetlen bináris manipulációhoz (dd, xxd),
+és a kernelmodul betöltése (insmod) az engedélyezett karbantartási ablakokon kívül.
+A kritikus útvonalakra összpontosít, és kiszűri a jogos karbantartási és írásvédett műveleteket.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

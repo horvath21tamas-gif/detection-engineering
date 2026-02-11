@@ -599,8 +599,8 @@
 - [Ultra-Pro High-Fidelity Weaken Encryption Attempt (T1600)](#ultra-pro-high-fidelity-weaken-encryption-attempt-(t1600))
 - [Ultra-Pro High-Fidelity System Image Patching (T1600.001)](#ultra-pro-high-fidelity-system-image-patching-(t1600001))
 - [Ultra-Pro High-Fidelity Disable Entity Verification (T1600.002)](#ultra-pro-high-fidelity-disable-entity-verification-(t1600002))
-- [Ultra-Pro High-Fidelity Network OS Image Modification (T1601)](#ultra-pro-high-fidelity-network-os-image-modification-(t1601))
-- [Ultra-Pro High-Fidelity Network Binary Patching (T1601.001)](#ultra-pro-high-fidelity-network-binary-patching-(t1601001))
+- [Network OS Image Modification (T1601)](#network-os-image-modification-(t1601))
+- [Network Binary Patching (T1601.001)](#network-binary-patching-(t1601001))
 - [Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002)](#ultra-pro-high-fidelity-malicious-network-os-upgrade-(t1601002))
 - [Ultra-Pro High-Fidelity Network Share Automated Collection (T1602)](#ultra-pro-high-fidelity-network-share-automated-collection-(t1602))
 - [Admin Share Data Exfiltration (T1602.001)](#admin-share-data-exfiltration-(t1602001))
@@ -11143,14 +11143,15 @@ bypasses initiated by untrusted processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Network OS Image Modification (T1601)
+## Network OS Image Modification (T1601)
 - **ID:** `T1601.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects unauthorized modification of network device operating system images. 
-Focuses on binary uploads via insecure protocols and boot-system overrides 
-performed outside of trusted management windows or hosts.
+- **Leírás:** Detects unauthorized modification or replacement of network device operating system images.
+Monitors binary uploads via insecure protocols (TFTP/FTP), firmware update commands,
+and boot-system overrides performed outside trusted management windows or hosts.
+Focuses on detecting anomalous source context, checksum failures, and non-standard hosts.
 
 
 #### 🚨 Response Playbook
@@ -11159,14 +11160,15 @@ performed outside of trusted management windows or hosts.
 
 
 ---
-## Ultra-Pro High-Fidelity Network Binary Patching (T1601.001)
+## Network Binary Patching (T1601.001)
 - **ID:** `T1601_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects unauthorized low-level patching of network OS binaries. 
-Focuses on filesystem remounting (read-write), binary manipulation (dd, xxd), 
-and kernel module loading (insmod) outside of authorized maintenance.
+- **Leírás:** Detects unauthorized low-level patching of network OS binaries by monitoring 
+for filesystem remounting (read-write), direct binary manipulation (dd, xxd), 
+and kernel module loading (insmod) outside of authorized maintenance windows. 
+Focuses on critical paths and filters out legitimate maintenance and read-only operations.
 
 
 #### 🚨 Response Playbook

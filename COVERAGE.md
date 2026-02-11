@@ -605,8 +605,8 @@
 | T1600 | HIGH | Ultra-Pro High-Fidelity Weaken Encryption Attempt (T1600) |
 | T1600.001 | CRITICAL | Ultra-Pro High-Fidelity System Image Patching (T1600.001) |
 | T1600.002 | HIGH | Ultra-Pro High-Fidelity Disable Entity Verification (T1600.002) |
-| T1601 | CRITICAL | Ultra-Pro High-Fidelity Network OS Image Modification (T1601) |
-| T1601.001 | CRITICAL | Ultra-Pro High-Fidelity Network Binary Patching (T1601.001) |
+| T1601 | CRITICAL | Network OS Image Modification (T1601) |
+| T1601.001 | CRITICAL | Network Binary Patching (T1601.001) |
 | T1601.002 | CRITICAL | Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002) |
 | T1602 | CRITICAL | Ultra-Pro High-Fidelity Network Share Automated Collection (T1602) |
 | T1602.001 | CRITICAL | Admin Share Data Exfiltration (T1602.001) |

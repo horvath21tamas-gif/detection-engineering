@@ -599,8 +599,8 @@
 - [Ultra-Pro High-Fidelity-Verschlüsselungsversuch schwächen (T1600)](#ultra-pro-high-fidelity-verschlüsselungsversuch-schwächen-(t1600))
 - [Ultra-Pro High-Fidelity-System-Image-Patching (T1600.001)](#ultra-pro-high-fidelity-system-image-patching-(t1600001))
 - [Ultra-Pro High-Fidelity-Entitätsüberprüfung deaktivieren (T1600.002)](#ultra-pro-high-fidelity-entitätsüberprüfung-deaktivieren-(t1600002))
-- [Ultra-Pro High-Fidelity-Netzwerk-OS-Image-Modifikation (T1601)](#ultra-pro-high-fidelity-netzwerk-os-image-modifikation-(t1601))
-- [Ultra-Pro High-Fidelity-Netzwerk-Binär-Patching (T1601.001)](#ultra-pro-high-fidelity-netzwerk-binär-patching-(t1601001))
+- [Netzwerk-OS-Image-Änderung (T1601)](#netzwerk-os-image-änderung-(t1601))
+- [Netzwerk-Binär-Patching (T1601.001)](#netzwerk-binär-patching-(t1601001))
 - [Ultra-Pro High-Fidelity-Upgrade für bösartige Netzwerk-Betriebssysteme (T1601.002)](#ultra-pro-high-fidelity-upgrade-für-bösartige-netzwerk-betriebssysteme-(t1601002))
 - [Automatisierte Ultra-Pro-High-Fidelity-Netzwerkfreigabeerfassung (T1602)](#automatisierte-ultra-pro-high-fidelity-netzwerkfreigabeerfassung-(t1602))
 - [Datenexfiltration für Admin-Freigaben (T1602.001)](#datenexfiltration-für-admin-freigaben-(t1602001))
@@ -10556,14 +10556,15 @@ Umgehungen, die von nicht vertrauenswürdigen Prozessen initiiert werden.
 
 
 ---
-## Ultra-Pro High-Fidelity-Netzwerk-OS-Image-Modifikation (T1601)
+## Netzwerk-OS-Image-Änderung (T1601)
 - **ID:** `T1601.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt unbefugte Änderungen an Betriebssystem-Images von Netzwerkgeräten.
-Konzentriert sich auf Binär-Uploads über unsichere Protokolle und Boot-System-Überschreibungen
-Wird außerhalb vertrauenswürdiger Verwaltungsfenster oder Hosts durchgeführt.
+- **Beschreibung:** Erkennt unbefugte Änderungen oder Ersetzungen von Betriebssystem-Images von Netzwerkgeräten.
+Überwacht Binär-Uploads über unsichere Protokolle (TFTP/FTP), Firmware-Aktualisierungsbefehle,
+und Boot-System-Überschreibungen, die außerhalb vertrauenswürdiger Verwaltungsfenster oder Hosts durchgeführt werden.
+Konzentriert sich auf die Erkennung von anomalem Quellkontext, Prüfsummenfehlern und nicht standardmäßigen Hosts.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**
@@ -10571,14 +10572,15 @@ Wird außerhalb vertrauenswürdiger Verwaltungsfenster oder Hosts durchgeführt.
 
 
 ---
-## Ultra-Pro High-Fidelity-Netzwerk-Binär-Patching (T1601.001)
+## Netzwerk-Binär-Patching (T1601.001)
 - **ID:** `T1601_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt unbefugtes Low-Level-Patching von Netzwerk-Betriebssystem-Binärdateien.
-Konzentriert sich auf das erneute Einhängen des Dateisystems (Lesen/Schreiben), binäre Manipulation (dd, xxd),
-und das Laden von Kernelmodulen (insmod) außerhalb der autorisierten Wartung.
+- **Beschreibung:** Erkennt durch Überwachung unbefugtes Low-Level-Patching von Netzwerk-Betriebssystem-Binärdateien
+für das erneute Einhängen des Dateisystems (Lesen/Schreiben), direkte Binärmanipulation (dd, xxd),
+und das Laden von Kernelmodulen (insmod) außerhalb autorisierter Wartungsfenster.
+Konzentriert sich auf kritische Pfade und filtert legitime Wartungs- und Nur-Lese-Vorgänge heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

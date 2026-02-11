@@ -8854,16 +8854,17 @@ in Verbindung mit der manuellen Netzwerk-Socket-Erstellung durch Skriptinterpret
 
 
 ---
-## Ultra-Pro High-Fidelity Symmetric Encryption C2-Kanal (T1573.001)
+## Symmetrischer Verschlüsselungs-C2-Kanal (T1573.001)
 - **ID:** `T1573_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die in C2-Kanälen verwendete benutzerdefinierte symmetrische Verschlüsselung (AES/Rijndael) durch Identifizierung
-die programmatische Einrichtung von CipherMode, PaddingMode und CryptoStreams darin
-Skript-Engines, die speziell auf die manuelle IV/Tastenzuweisung und Stream-Piping abzielen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt verdächtige Verwendung der benutzerdefinierten symmetrischen Verschlüsselung (AES/Rijndael) für C2-Kanäle.
+Konzentriert sich auf die programmatische Einrichtung von CipherMode, PaddingMode und CryptoStreams
+Skript-Engines, die speziell auf die manuelle IV/Tastenzuweisung und Stream-Piping abzielen
+aus nicht standardmäßigen Prozessen oder nicht vertrauenswürdigen Ausführungskontexten.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

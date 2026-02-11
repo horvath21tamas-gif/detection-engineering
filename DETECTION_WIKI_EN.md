@@ -9332,16 +9332,17 @@ in tandem with manual network socket creation from scripting interpreters.
 
 
 ---
-## Ultra-Pro High-Fidelity Symmetric Encryption C2 Channel (T1573.001)
+## Symmetric Encryption C2 Channel (T1573.001)
 - **ID:** `T1573_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects custom symmetric encryption (AES/Rijndael) used in C2 channels by identifying 
-the programmatic setup of CipherMode, PaddingMode, and CryptoStreams within 
-scripting engines, specifically targeting manual IV/Key assignment and stream piping.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects suspicious use of custom symmetric encryption (AES/Rijndael) for C2 channels.
+Focuses on programmatic setup of CipherMode, PaddingMode, and CryptoStreams within
+scripting engines, specifically targeting manual IV/Key assignment and stream piping
+from non-standard processes or untrusted execution contexts.
 
 
 #### 🚨 Response Playbook

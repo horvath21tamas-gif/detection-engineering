@@ -7965,16 +7965,22 @@ von nicht standardmäßigen übergeordneten Prozessen oder nicht vertrauenswürd
 
 
 ---
-## Ultra-Pro High-Fidelity Deaktivieren Sie die Windows-Ereignisprotokollierung (T1562.002)
+## Beeinträchtigung des Windows-Ereignisprotokolldienstes
 - **ID:** `T1562_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezielte Versuche, den Windows-Ereignisprotokolldienst zu deaktivieren oder zu beeinträchtigen.
-Konzentriert sich auf Dienstabhängigkeitssabotage, registrierungsbasierte Kanaldeaktivierung,
-und heimliche Wevtutil-Nutzung durch Nicht-Systemprozesse.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochzuverlässige Versuche, die Windows-Ereignisprotokollierung zu deaktivieren oder zu beeinträchtigen.
+
+Der Versicherungsschutz umfasst:
+- Deaktivierung des Wevtutil-Kanals
+- Stopp-/Deaktivierungsversuche des EventLog-Dienstes
+- Registrierungsbasierte Kanal- oder Dienständerung
+- Manipulation der Dienstabhängigkeit
+
+Entwickelt, um Fehlalarme in Unternehmensumgebungen zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

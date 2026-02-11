@@ -7965,16 +7965,22 @@ nem szabványos szülőfolyamatokból vagy nem megbízható helyekről.
 
 
 ---
-## Ultra-Pro High-Fidelity Windows eseménynaplózás letiltása (T1562.002)
+## A Windows eseménynapló szolgáltatásának károsodása
 - **ID:** `T1562_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Windows Eseménynapló szolgáltatás letiltására vagy károsodására irányuló célzott kísérleteket.
-A szolgáltatásfüggőség szabotázsára, a rendszerleíró adatbázis alapú csatorna letiltására összpontosít,
-és lopakodó wevtutil-használat nem rendszerfolyamatok által.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a nagy megbízhatóságú kísérleteket a Windows eseménynaplózás letiltására vagy rontására.
+
+A fedezet a következőket tartalmazza:
+- wevtutil csatorna letiltása
+- Az EventLog szolgáltatás leállítási/letiltási kísérletei
+- Registry alapú csatorna vagy szolgáltatás módosítása
+- Szolgáltatásfüggőség manipulálása
+
+Úgy tervezték, hogy csökkentse a téves pozitív eredményeket vállalati környezetben.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

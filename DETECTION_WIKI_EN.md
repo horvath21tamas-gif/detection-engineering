@@ -8393,16 +8393,22 @@ from non-standard parent processes or untrusted locations.
 
 
 ---
-## Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002)
+## Windows Event Log Service Impairment
 - **ID:** `T1562_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted attempts to disable or impair the Windows Event Log service. 
-Focuses on service-dependency sabotage, registry-based channel disabling, 
-and stealthy wevtutil usage by non-system processes.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence attempts to disable or impair Windows Event Logging.
+
+Coverage includes:
+  - wevtutil channel disabling
+  - EventLog service stop/disable attempts
+  - Registry-based channel or service modification
+  - Service dependency tampering
+
+Designed to reduce false positives in enterprise environments.
 
 
 #### 🚨 Response Playbook

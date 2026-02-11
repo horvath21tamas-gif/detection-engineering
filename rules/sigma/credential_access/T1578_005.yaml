@@ -1,12 +1,13 @@
-title: Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005)
+title: Cloud Network Security Regression (T1578.005)
 id: b1ca2bc8-2edc-41c6-b3eb-734db9c04569
 status: stable
 description: |
     Detects high-risk modifications to Network ACLs or Security Groups that allow 
-    broad ingress traffic (0.0.0.0/0) on sensitive management ports (RDP, SSH, DB). 
-    Filters out automated infrastructure-as-code (IaC) noise.
-author: hota05
-date: 2026-02-03
+    wide-open ingress (0.0.0.0/0 or ::/0) on sensitive management ports (RDP, SSH, DB). 
+    Includes context-aware checks for suspicious client tools and disables MFA usage.
+    Filters out legitimate IaC automation and internal service operations.
+author: hota05 
+date: 2026-02-11
 tags:
     - attack.defense_evasion
     - attack.persistence
@@ -14,49 +15,75 @@ tags:
 logsource:
     product: cloud
     service: Azure Activity
+
 detection:
-    selection_network_ops:
-        operation_name|contains:
-            - 'AuthorizeSecurityGroupIngress'
-            - 'CreateNetworkAclEntry'         
-            - 'Microsoft.Network/networkSecurityGroups/securityRules/write' 
-            - 'v1.compute.networks.updatePolicy' 
+  selection_network_ops:
+    operation_name|contains:
+      - 'AuthorizeSecurityGroupIngress'
+      - 'CreateNetworkAclEntry'
+      - 'Microsoft.Network/networkSecurityGroups/securityRules/write'
+      - 'v1.compute.networks.updatePolicy'
+      - 'UpdateSecurityGroupRule'
+      - 'SetFirewallRule'
 
-    selection_risky_config:
-        request_parameters|contains:
-            - '0.0.0.0/0'
-            - '::/0'
-            - 'all'
-            - 'any'
+  selection_risky_config:
+    request_parameters|contains:
+      - '0.0.0.0/0'
+      - '::/0'
+      - 'all'
+      - 'any'
 
-    selection_sensitive_ports:
-        request_parameters|contains:
-            - '22'   
-            - '3389' 
-            - '445'  
-            - '5985' 
-            - '3306' 
-            - '5432' 
-            - '1433'
+  selection_sensitive_ports:
+    request_parameters|contains:
+      - '22'        
+      - '3389'     
+      - '445'     
+      - '5985'      
+      - '3306'     
+      - '5432'      
+      - '1433'      
+      - '1521'      
 
-    selection_context:
-        mfa_authenticated: 'false'
-        user_agent|contains:
-            - 'kali'
-            - 'python-requests'
-            - 'boto3'
-            - 'postman'
-            - 'curl'
+  selection_context:
+    mfa_authenticated: 'false'
+    user_agent|contains:
+      - 'kali'
+      - 'python-requests'
+      - 'boto3'
+      - 'postman'
+      - 'curl'
+      - 'nmap'
+      - 'powershell'
 
-    filter_automation:
-        user_name|startswith: 
-            - 'svc-terraform'
-            - 'svc-ansible'
-            - 'cloud-formation-manager'
-    filter_internal_services:
-        user_name|contains: 
-            - 'system-internal'
-            - 'elasticloadbalancing'
+  filter_automation:
+    user_name|startswith:
+      - 'svc-terraform'
+      - 'svc-ansible'
+      - 'cloud-formation-manager'
+      - 'svc-pulumi'
+      - 'svc-jenkins'
 
-    condition: selection_network_ops and selection_risky_config and (selection_sensitive_ports or selection_context) and not (filter_automation or filter_internal_services)
+  filter_internal_services:
+    user_name|contains:
+      - 'system-internal'
+      - 'elasticloadbalancing'
+      - 'azuremonitor'
+      - 'loganalytics'
+
+  condition: selection_network_ops and selection_risky_config and (selection_sensitive_ports or selection_context) and not (filter_automation or filter_internal_services)
+
+fields:
+  - Time
+  - user_name
+  - operation_name
+  - request_parameters
+  - user_agent
+  - mfa_authenticated
+  - resource_id
+
+falsepositives:
+  - IaC pipelines legitimately creating wide-open security rules temporarily
+  - Automated patch or deployment scripts by trusted service accounts
+  - Internal network/monitoring tools adjusting security groups for testing
+
 level: critical

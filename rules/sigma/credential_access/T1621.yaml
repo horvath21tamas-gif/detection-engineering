@@ -1,59 +1,129 @@
-title: Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621)
+title: Suspicious MFA Prompt Bombing or Authentication Flood Automation
 id: f68a36a0-a924-437a-829d-fef17815dd70
 status: stable
-description: |
-    Detects the execution of tools and scripts designed to automate repetitive MFA requests.
-    Focuses on headless browser automation, specialized Azure/Okta exploit kits, and
-    PowerShell-based authentication loops running in non-interactive sessions.
-author: hota05
+description: >
+  Detects potential MFA prompt bombing or authentication flood automation 
+  using PowerShell identity modules, Azure/Okta tooling, or headless browser 
+  frameworks executed in non-interactive or hidden contexts. Focuses on loop 
+  logic combined with identity authentication tooling.
+
+author: hota05 
 date: 2026-02-04
+modified: 2026-02-11
+references:
+  - https://attack.mitre.org/techniques/T1621/
 tags:
-    - attack.credential_access
-    - attack.t1621
+  - attack.credential_access
+  - attack.t1621
+  - attack.initial_access
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_frameworks:
-        CommandLine|contains:
-            - 'AADInternals'           
-            - 'MSAL.PS'                
-            - 'Okta.Auth'            
-            - 'puppeteer'              
-            - 'selenium-webdriver'  
-            - 'Playwright'          
 
-    selection_loop_logic:
-        CommandLine|contains:
-            - 'Invoke-AADIntMFAFlood'   
-            - 'while($true)'            
-            - 'for($i=0'               
-            - '.ShowPasswordPrompt'
-            - 'Send-PushNotification'
+  selection_identity_modules:
+    CommandLine|contains:
+      - 'AADInternals'
+      - 'MSAL.PS'
+      - 'Okta.Auth'
+      - 'Connect-AzureAD'
+      - 'Connect-MgGraph'
+      - 'AcquireToken'
+      - 'DeviceCodeCredential'
 
-    selection_hidden_context:
-        CommandLine|contains:
-            - '-WindowStyle Hidden'     
-            - '-ExecutionPolicy Bypass'
-            - '-NonInteractive'         
+  selection_loop_or_flood_logic:
+    CommandLine|contains:
+      - 'Invoke-AADIntMFAFlood'
+      - 'while($true)'
+      - 'for($i=0'
+      - 'Start-Sleep'
+      - 'Send-PushNotification'
+      - 'ApproveSignIn'
+      - 'ShowPasswordPrompt'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\taskeng.exe'          
+  selection_headless_frameworks:
+    CommandLine|contains:
+      - 'puppeteer'
+      - 'selenium-webdriver'
+      - 'Playwright'
+      - '--headless'
+      - '--disable-gpu'
+      - '--remote-debugging-port'
 
-    filter_official_infrastructure:
-        Image|contains:
-            - '\Program Files\Microsoft Azure AD Connect\'
-            - '\Program Files\Microsoft Azure AD Sync\'
-        username: 'NT AUTHORITY\SYSTEM'
+  selection_hidden_execution:
+    CommandLine|contains:
+      - '-WindowStyle Hidden'
+      - '-ExecutionPolicy Bypass'
+      - '-NonInteractive'
+      - '-EncodedCommand'
 
-    filter_known_admins:
-        ParentImage|endswith: '\explorer.exe'
-        CommandLine|contains: 'Connect-MgGraph'
+  selection_remote_execution_parent:
+    ParentImage|endswith:
+      - '\wsmprovhost.exe'
+      - '\psexesvc.exe'
+      - '\taskeng.exe'
+      - '\schtasks.exe'
 
-    condition: (selection_frameworks or selection_loop_logic or selection_hidden_context) and selection_suspicious_parent and not filter_official_infrastructure
+  selection_office_or_browser_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+
+  selection_suspicious_path:
+    Image|contains:
+      - '\AppData\Local\Temp\'
+      - '\Users\Public\'
+      - '\ProgramData\'
+
+  filter_official_identity_sync:
+    Image|contains:
+      - '\Microsoft Azure AD Connect\'
+      - '\Microsoft Azure AD Sync\'
+      - '\OneDrive\'
+
+  filter_system_context:
+    User|startswith:
+      - 'NT AUTHORITY\'
+      - 'NT SERVICE\'
+
+  filter_expected_admin_usage:
+    ParentImage|endswith:
+      - '\explorer.exe'
+    CommandLine|contains:
+      - 'Connect-MgGraph -Scopes'
+      - 'Connect-AzureAD'
+
+  condition:
+    (
+      (
+        selection_identity_modules
+        and selection_loop_or_flood_logic
+      )
+      or
+      (
+        selection_headless_frameworks
+        and selection_hidden_execution
+      )
+    )
+    and (
+      selection_hidden_execution
+      or selection_remote_execution_parent
+      or selection_office_or_browser_parent
+      or selection_suspicious_path
+    )
+    and not filter_official_identity_sync
+    and not filter_system_context
+    and not filter_expected_admin_usage
+
+falsepositives:
+  - Authorized identity testing or red team exercises
+  - Legitimate automation of authentication testing
+  - Developer headless browser testing environments
+  - Cloud administration scripts in controlled sessions
+
 level: high

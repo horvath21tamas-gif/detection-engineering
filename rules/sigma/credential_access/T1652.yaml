@@ -1,61 +1,135 @@
-title: Ultra-Pro High-Fidelity Device Driver Discovery (T1652)
+title: Suspicious Device Driver Enumeration From Anomalous Context (BYOVD Recon)
 id: 7c9ea581-3758-4c92-acf3-12ebb09de530
 status: stable
-description: |
-    Detects systematic discovery of device drivers by monitoring for high-fidelity 
-    enumeration patterns (WMI/CLI) originating from non-standard lineages. 
-    Specifically targets behaviors associated with BYOVD (Bring Your Own Vulnerable Driver) 
-    reconnaissance.
-author: hota05
+description: >
+  Detects suspicious device driver discovery activity using native Windows 
+  utilities, WMI, or PowerShell from anomalous execution contexts. 
+  Focuses on reconnaissance patterns commonly observed prior to 
+  Bring Your Own Vulnerable Driver (BYOVD) abuse.
+
+author: hota05 
 date: 2026-02-04
+modified: 2026-02-11
+references:
+  - https://attack.mitre.org/techniques/T1652/
+  - https://attack.mitre.org/techniques/T1069/
 tags:
-    - attack.discovery
-    - attack.t1652
+  - attack.discovery
+  - attack.t1652
+  - attack.defense_evasion
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\driverquery.exe'
-            - '\pnputil.exe'
-            - '\sc.exe'
-        - CommandLine|contains:
-            - 'query type= driver'
-            - 'enum-drivers'
 
-    selection_wmi:
-        CommandLine|contains:
-            - 'Win32_PnPSignedDriver'
-            - 'Win32_SystemDriver'
-            - 'Get-WindowsDriver'
-            - 'Get-PnpDevice'
+  selection_cli_binary:
+    Image|endswith:
+      - '\driverquery.exe'
+      - '\pnputil.exe'
+      - '\sc.exe'
+      - '\dism.exe'
 
-    selection_extraction:
-        CommandLine|contains:
-            - ' > '                         
-            - ' | clip'                      
-            - 'ConvertTo-Json'              
-            - 'Export-Csv'
-            - '/fo csv'                  
-            - 'base64'                       
+  selection_cli_enum:
+    CommandLine|contains:
+      - 'query type= driver'
+      - 'enum-drivers'
+      - '/enum-drivers'
+      - '/fo csv'
+      - '/v'
+      - '/si'
 
-    selection_suspicious_lineage:
-        ParentImage|endswith:
-            - '\wsmprovhost.exe'             
-            - '\httpd.exe'                   
-            - '\winword.exe'                 
-            - '\excel.exe'
-        Image|contains:
-            - '\AppData\Local\Temp\'
-            - '\Users\Public\'
+  cli_condition:
+    selection_cli_binary
+    and selection_cli_enum
 
-    filter_legit_it_mgmt:
-        Image|contains:
-            - '\Program Files\Tanium\'
-            - '\Program Files\Splunk\'
-            - '\Program Files\Datadog\'
-        username: 'NT AUTHORITY\SYSTEM'
+  selection_powershell_binary:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
 
-    condition: (selection_tools or selection_wmi) and (selection_extraction or selection_suspicious_lineage) and not filter_legit_it_mgmt
+  selection_wmi_enum:
+    CommandLine|contains:
+      - 'Win32_PnPSignedDriver'
+      - 'Win32_SystemDriver'
+      - 'Get-WindowsDriver'
+      - 'Get-PnpDevice'
+      - 'Get-CimInstance'
+      - 'Get-WmiObject'
+
+  ps_condition:
+    selection_powershell_binary
+    and selection_wmi_enum
+
+  selection_exfil_preparation:
+    CommandLine|contains:
+      - ' > '
+      - 'Out-File'
+      - 'Export-Csv'
+      - 'ConvertTo-Json'
+      - ' | clip'
+      - 'base64'
+      - 'certutil -encode'
+
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\wsmprovhost.exe'   
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\rundll32.exe'
+      - '\httpd.exe'
+      - '\w3wp.exe'
+
+  selection_suspicious_path:
+    Image|contains:
+      - '\AppData\Local\Temp\'
+      - '\Users\Public\'
+      - '\ProgramData\'
+      - '\Windows\Temp\'
+
+  selection_medium_integrity:
+    IntegrityLevel: 'Medium'
+
+  filter_legitimate_management_agents:
+    Image|contains:
+      - '\Program Files\Tanium\'
+      - '\Program Files\Splunk\'
+      - '\Program Files\Datadog\'
+      - '\Program Files\Elastic\'
+      - '\Windows\System32\CcmExec.exe'
+
+  filter_system_context:
+    User|startswith:
+      - 'NT AUTHORITY\'
+      - 'NT SERVICE\'
+
+  filter_expected_admin_usage:
+    ParentImage|endswith:
+      - '\explorer.exe'
+
+  condition:
+    (
+      cli_condition
+      or ps_condition
+    )
+    and (
+      selection_exfil_preparation
+      or selection_suspicious_parent
+      or selection_suspicious_path
+      or selection_medium_integrity
+    )
+    and not filter_legitimate_management_agents
+    and not filter_system_context
+    and not filter_expected_admin_usage
+
+falsepositives:
+  - Authorized driver auditing or troubleshooting
+  - Enterprise inventory and asset management tools
+  - Security monitoring agents
+  - Incident response activities
+
 level: high

@@ -9185,14 +9185,15 @@ a nyilvános internetet, és kiszűri az ismert CI/CD build csővezetékeket.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005)
+## Cloud Network Security Regression (T1578.005)
 - **ID:** `T1578_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Érzékeli a hálózati ACL-ek vagy biztonsági csoportok magas kockázatú módosításait, amelyek lehetővé teszik
-széles bemeneti forgalom (0.0.0.0/0) érzékeny felügyeleti portokon (RDP, SSH, DB).
-Kiszűri az automatizált infrastruktúra-kódként (IaC) zajt.
+széles körű belépés (0.0.0.0/0 vagy ::/0) érzékeny felügyeleti portokon (RDP, SSH, DB).
+Tartalmazza a gyanús ügyféleszközök környezettudatos ellenőrzését, és letiltja az MFA használatát.
+Kiszűri a törvényes IaC automatizálási és belső szolgáltatási műveleteket.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

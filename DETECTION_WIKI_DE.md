@@ -9185,14 +9185,15 @@ das öffentliche Internet und filtert bekannte CI/CD-Build-Pipelines heraus.
 
 
 ---
-## Ultra-Pro High-Fidelity-Cloud-Netzwerk-Sicherheitsregression (T1578.005)
+## Regression der Cloud-Netzwerksicherheit (T1578.005)
 - **ID:** `T1578_005.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 - **Beschreibung:** Erkennt risikoreiche Änderungen an Netzwerk-ACLs oder Sicherheitsgruppen, die dies zulassen
-Breiter Eingangsverkehr (0.0.0.0/0) auf sensiblen Verwaltungsports (RDP, SSH, DB).
-Filtert automatisiertes Infrastructure-as-Code (IaC)-Rauschen heraus.
+Weit offener Eingang (0.0.0.0/0 oder ::/0) auf sensiblen Verwaltungsports (RDP, SSH, DB).
+Beinhaltet kontextbezogene Prüfungen auf verdächtige Client-Tools und deaktiviert die MFA-Nutzung.
+Filtert legitime IaC-Automatisierung und interne Servicevorgänge heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

@@ -7843,16 +7843,17 @@ Komprimierung, die aus nicht-administrativen oder interaktiven Shell-Kontexten s
 
 
 ---
-## Ultraprofessionelle High-Fidelity-Datenarchivierung über die Bibliothek (T1560.002)
+## Datenarchivierung über Bibliothek
 - **ID:** `T1560_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt erweitertes Daten-Staging zur Exfiltration mithilfe von .NET/PowerShell
-Komprimierungsbibliotheken.Filtert die Unternehmensautomatisierung durch Analyse
-Abstammung des übergeordneten Prozesses, Befehlszeilen-Entropie und Integritätsebenen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt erweitertes Daten-Staging zur Exfiltration mithilfe von .NET oder PowerShell
+Komprimierungsbibliotheken, einschließlich manueller Kodierung oder Archivierung des Benutzers
+und Serverdaten.Filtert die Unternehmensautomatisierung nach der Herkunft des übergeordneten Prozesses.
+Befehlszeilen-Entropie und Integritätsebenen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

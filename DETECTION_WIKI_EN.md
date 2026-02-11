@@ -8264,16 +8264,17 @@ compression originating from non-administrative or interactive shell contexts.
 
 
 ---
-## Ultra-Pro High-Fidelity Data Archiving via Library (T1560.002)
+## Data Archiving via Library
 - **ID:** `T1560_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects advanced data staging for exfiltration using .NET/PowerShell 
-compression libraries. Filters enterprise automation by analyzing 
-parent process lineage, command-line entropy, and integrity levels.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects advanced data staging for exfiltration using .NET or PowerShell 
+compression libraries, including manual encoding or archiving of user 
+and server data. Filters enterprise automation by parent process lineage, 
+command-line entropy, and integrity levels.
 
 
 #### 🚨 Response Playbook

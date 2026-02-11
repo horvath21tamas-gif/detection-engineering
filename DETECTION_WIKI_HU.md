@@ -7843,16 +7843,17 @@ nem adminisztratív vagy interaktív shell kontextusból származó tömöríté
 
 
 ---
-## Ultra-Pro High-Fidelity adatarchiválás könyvtáron keresztül (T1560.002)
+## Adatarchiválás a könyvtáron keresztül
 - **ID:** `T1560_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A .NET/PowerShell használatával történő kiszűréshez észleli a fejlett adatállomásozást
-tömörítési könyvtárak.Elemzéssel szűri a vállalati automatizálást
-szülőfolyamat vonal, parancssori entrópia és integritási szintek.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a fejlett adattovábbítást a .NET vagy PowerShell használatával történő kiszűréshez
+tömörítési könyvtárak, beleértve a felhasználó kézi kódolását vagy archiválását
+és a szerveradatokat.Szűri a vállalati automatizálást a szülői folyamatok vonala szerint,
+parancssori entrópia és integritási szintek.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -8110,8 +8111,8 @@ visszaminősítések és tárhely-szabotázsok, amelyeket rendellenes identitás
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RESET.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a rosszindulatú próbálkozásokat, amelyek a Windows csökkentett módba kényszerítésére irányulnak
 biztonsági ellenőrzések.A BCDEdit safeboot konfigurációs módosításaira összpontosít,
-SafeBoot beállításjegyzék-manipuláció és összehangolt kényszerített újraindítási tevékenység
-gyanús végrehajtási összefüggésekből ered.
+A SafeBoot rendszerleíró adatbázis manipulálása és összehangolt kényszerített újraindítási tevékenység
+gyanús végrehajtási összefüggésekből származik.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

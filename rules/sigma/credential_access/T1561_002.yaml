@@ -1,44 +1,56 @@
-title: Ultra-Pro High-Fidelity Disk Structure Wipe (T1561.002)
+title: Disk Structure Wipe
 id: e52848f9-bc27-4329-8e76-b6076d1af7a5
 status: stable
 description: |
-    Detects low-level disk structure destruction (partition table wiping, MBR overwriting) 
-    by monitoring for destructive CLI arguments and raw device access strings originating 
-    from non-standard parent processes or untrusted locations.
-author: hota05
-date: 2026-02-09
+    Detects destructive low-level disk operations such as partition table wiping, 
+    MBR overwriting, and full-disk clearing.
+
+    Monitors for destructive CLI arguments, raw device access patterns, and 
+    untrusted execution context to prevent ransomware, wipers, or malicious scripts
+    from destroying disk structures.
+
+author: hota05 
+date: 2026-02-11
 tags:
     - attack.impact
     - attack.t1561.002
+    - attack.t1070
+    - attack.t1499
+
 logsource:
-    category: process_creation
     product: windows
+    category: process_creation
+
 detection:
+
     selection_tools:
-        - Image|endswith:
-            - '\diskpart.exe'        
+        Image|endswith:
+            - '\diskpart.exe'
+            - '\format.com'
+            - '\dd.exe'
             - '\powershell.exe'
             - '\pwsh.exe'
-            - '\dd.exe'              
-            - '\format.com'
+            - '\manage-bde.exe'
+        CommandLine|contains|any:
+            - 'clean'
+            - 'delete partition'
+            - 'Remove-Partition'
+            - 'Clear-Disk'
+            - 'Initialize-Disk'
+            - '\\.\PhysicalDrive'
+            - 'count=1 bs=512'
+            - '/MBR'
+            - '/GPT'
 
-    selection_logic:
-        CommandLine|contains:
-            - 'clean'                
-            - 'delete partition'     
-            - 'Remove-Partition'     
-            - 'Clear-Disk'           
-            - '\\.\PhysicalDrive'  
-            - 'count=1 bs=512'       
-
-    selection_context:
-        - ParentImage|endswith:
-            - '\winword.exe'         
+    selection_suspicious_context:
+        ParentImage|endswith:
+            - '\winword.exe'
             - '\excel.exe'
-            - '\httpd.exe'           
-            - '\rundll32.exe'        
-            - '\services.exe'        
-        - Image|contains:
+            - '\outlook.exe'
+            - '\httpd.exe'
+            - '\w3wp.exe'
+            - '\rundll32.exe'
+        Image|contains:
             - '\Temp\'
             - '\Users\Public\'
             - '\AppData\Local\Temp\'
@@ -46,11 +58,14 @@ detection:
     filter_legit_imaging:
         - username: 'NT AUTHORITY\SYSTEM'
         - ParentImage|endswith:
-            - '\CcmExec.exe'         
-            - '\setup.exe'          
+            - '\CcmExec.exe'
+            - '\setup.exe'
+            - '\vds.exe'
         - CommandLine|contains:
-            - 'vds.exe'              
-            - 'scripts\deployment'  
+            - 'deployment\scripts'
+            - 'imaging'
+            - 'diskpart /s'
 
-    condition: selection_tools and selection_logic and selection_context and not filter_legit_imaging
+    condition: selection_tools and selection_suspicious_context and not filter_legit_imaging
+
 level: critical

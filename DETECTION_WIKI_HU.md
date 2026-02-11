@@ -224,7 +224,7 @@
 - [Ultra-Pro jogosulatlan domain fiók létrehozása (T1136.002)](#ultra-pro-jogosulatlan-domain-fiók-létrehozása-(t1136002))
 - [Ultra-Pro jogosulatlan felhőfiók létrehozása (T1136.003)](#ultra-pro-jogosulatlan-felhőfiók-létrehozása-(t1136003))
 - [Ultra-Pro Office-alkalmazások indítási állandósága (T1137)](#ultra-pro-office-alkalmazások-indítási-állandósága-(t1137))
-- [Ultra-Pro Office globális sablonintegritás (T1137.001)](#ultra-pro-office-globális-sablonintegritás-(t1137001))
+- [Az Office globális sablonjának gyanús módosítása (Normal.dotm)](#az-office-globális-sablonjának-gyanús-módosítása-(normaldotm))
 - [Ultra-Pro Office teszt DLL-perzisztencia (T1137.002)](#ultra-pro-office-teszt-dll-perzisztencia-(t1137002))
 - [Ultra-Pro Outlook egyéni űrlapok tartóssága (T1137.003)](#ultra-pro-outlook-egyéni-űrlapok-tartóssága-(t1137003))
 - [Ultra-Pro Outlook kezdőlap eltérítése és megkerülése (T1137.004)](#ultra-pro-outlook-kezdőlap-eltérítése-és-megkerülése-(t1137004))
@@ -4299,16 +4299,14 @@ nem szabványos folyamatokból ered, vagy gyanús fájlhelyekre mutat.
 
 
 ---
-## Ultra-Pro Office globális sablonintegritás (T1137.001)
+## Az Office globális sablonjának gyanús módosítása (Normal.dotm)
 - **ID:** `T1137_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Tárolás-igényes)
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az Office globális sablon (Normal.dotm) magas kockázatú módosításait
-nem Office-folyamatok vagy gyanús fájllétrehozási minták azonosítása a
-Sablonok könyvtár.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a Microsoft Office globális sablonok (Normal.dotm / NormalEmail.dotm) nem Office folyamatok általi vagy gyanús végrehajtási útvonalak általi nagy kockázatú módosítását vagy létrehozását.Ez makroalapú perzisztenciára utalhat (MITRE ATT&CK T1137.001).
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

@@ -224,7 +224,7 @@
 - [Ultra-Pro-Erstellung eines nicht autorisierten Domänenkontos (T1136.002)](#ultra-pro-erstellung-eines-nicht-autorisierten-domänenkontos-(t1136002))
 - [Unbefugte Erstellung eines Ultra-Pro-Cloud-Kontos (T1136.003)](#unbefugte-erstellung-eines-ultra-pro-cloud-kontos-(t1136003))
 - [Ultra-Pro Office-Anwendungsstartpersistenz (T1137)](#ultra-pro-office-anwendungsstartpersistenz-(t1137))
-- [Ultra-Pro Office Global Template Integrity (T1137.001)](#ultra-pro-office-global-template-integrity-(t1137001))
+- [Verdächtige Änderung der globalen Office-Vorlage (Normal.dotm)](#verdächtige-änderung-der-globalen-office-vorlage-(normaldotm))
 - [Ultra-Pro Office Test-DLL-Persistenz (T1137.002)](#ultra-pro-office-test-dll-persistenz-(t1137002))
 - [Persistenz benutzerdefinierter Outlook-Formulare von Ultra-Pro (T1137.003)](#persistenz-benutzerdefinierter-outlook-formulare-von-ultra-pro-(t1137003))
 - [Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004)](#ultra-pro-outlook-home-page-hijacking-&-bypass-(t1137004))
@@ -4299,16 +4299,14 @@ von nicht standardmäßigen Prozessen stammen oder auf verdächtige Dateispeiche
 
 
 ---
-## Ultra-Pro Office Global Template Integrity (T1137.001)
+## Verdächtige Änderung der globalen Office-Vorlage (Normal.dotm)
 - **ID:** `T1137_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Speicherintensiv)
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt risikoreiche Änderungen an der globalen Office-Vorlage (Normal.dotm) durch
-Identifizieren von Nicht-Office-Prozessen oder verdächtigen Dateierstellungsmustern im
-Vorlagenverzeichnis.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt risikoreiche Änderungen oder Erstellung globaler Microsoft Office-Vorlagen (Normal.dotm / NormalEmail.dotm) durch Nicht-Office-Prozesse oder aus verdächtigen Ausführungspfaden.Dies kann auf makrobasierte Persistenz hinweisen (MITRE ATT&CK T1137.001).
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

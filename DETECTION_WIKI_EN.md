@@ -224,7 +224,7 @@
 - [Ultra-Pro Unauthorized Domain Account Creation (T1136.002)](#ultra-pro-unauthorized-domain-account-creation-(t1136002))
 - [Ultra-Pro Unauthorized Cloud Account Creation (T1136.003)](#ultra-pro-unauthorized-cloud-account-creation-(t1136003))
 - [Ultra-Pro Office Application Startup Persistence (T1137)](#ultra-pro-office-application-startup-persistence-(t1137))
-- [Ultra-Pro Office Global Template Integrity (T1137.001)](#ultra-pro-office-global-template-integrity-(t1137001))
+- [Suspicious Modification of Office Global Template (Normal.dotm)](#suspicious-modification-of-office-global-template-(normaldotm))
 - [Ultra-Pro Office Test DLL Persistence (T1137.002)](#ultra-pro-office-test-dll-persistence-(t1137002))
 - [Ultra-Pro Outlook Custom Forms Persistence (T1137.003)](#ultra-pro-outlook-custom-forms-persistence-(t1137003))
 - [Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004)](#ultra-pro-outlook-home-page-hijacking-&-bypass-(t1137004))
@@ -4512,16 +4512,14 @@ originating from non-standard processes or pointing to suspicious file locations
 
 
 ---
-## Ultra-Pro Office Global Template Integrity (T1137.001)
+## Suspicious Modification of Office Global Template (Normal.dotm)
 - **ID:** `T1137_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Tárolás-igényes)
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects high-risk modifications to the Office global template (Normal.dotm) by 
-identifying non-Office processes or suspicious file creation patterns in the 
-Templates directory.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-risk modification or creation of Microsoft Office global  templates (Normal.dotm / NormalEmail.dotm) by non-Office processes or  from suspicious execution paths. This may indicate macro-based persistence  (MITRE ATT&CK T1137.001).
 
 
 #### 🚨 Response Playbook

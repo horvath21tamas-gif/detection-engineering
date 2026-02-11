@@ -1,61 +1,74 @@
-title: Ultra-Pro High-Fidelity NTFS Alternative Data Stream (ADS) Abuse (T1564.004)
+title: NTFS Alternative Data Stream (ADS) Abuse (T1564.004)
 id: ac6e2fb2-12c3-484a-acdc-ab347b4950a4
 status: stable
 description: |
-    Detects the creation or execution of malicious NTFS Alternative Data Streams (ADS). 
-    Correlates redirection operators and LOLBins with stream-specific command-line 
-    syntax to minimize false positives from drive letters and MOTW.
-author: hota05
-date: 2026-02-03
+  Detects creation, modification, or execution of NTFS Alternative Data Streams (ADS) 
+  often used to hide malicious payloads or evade endpoint monitoring. 
+  Correlates redirection operators, LOLBins, and stream-specific PowerShell commands 
+  while minimizing false positives from MOTW and system files.
+author: hota05 
+date: 2026-02-11
 tags:
-    - attack.defense_evasion
-    - attack.t1564.004
+  - attack.defense_evasion
+  - attack.t1564.004
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_injection:
-        CommandLine|contains:
-            - ' > *.*:*'        
-            - 'type *:*'        
-            - 'expand *:*'
-            - 'makecab *:*'
-            - 'findstr /v *:*'
+  selection_injection:
+    CommandLine|re: '(\s>\s.*:.*|\stype\s.*:.*|\sexpand\s.*:.*|\smakecab\s.*:.*|\sfindstr\s.*:.*)'
 
-    selection_execution:
-        CommandLine|contains:
-            - 'start *:*'        
-            - 'wmic process call create'
-            - 'control.exe *:*'
-            - 'rundll32.exe *:*'
-            - 'regsvr32.exe /s *:*'
+  selection_execution:
+    CommandLine|re: '(\sstart\s.*:.*|wmic\sprocess\s+call\s+create|control\.exe\s.*:.*|rundll32\.exe\s.*:.*|regsvr32\.exe\s+/s\s.*:.*)'
 
-    selection_powershell_streams:
-        CommandLine|contains:
-            - ' -stream '
-            - 'Set-Content'
-            - 'Add-Content'
-            - 'Get-Item'
-            - ' -alternate '
+  selection_powershell_streams:
+    CommandLine|contains:
+      - ' -stream '
+      - 'Set-Content'
+      - 'Add-Content'
+      - 'Get-Item'
+      - ' -alternate '
+      - 'Get-Content -Stream'
+      - 'Remove-Item -Stream'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\mshta.exe'
-            - '\w3wp.exe'
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\mshta.exe'
+      - '\w3wp.exe'
+      - '\powershell.exe'
+      - '\cmd.exe'
 
-    filter_motw_and_system:
-        - CommandLine|contains:
-            - ':Zone.Identifier'
-            - ':favicon'
-            - ':\Windows\' 
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|contains:
-            - '\Windows\System32\svchost.exe'
+  filter_motw_and_system:
+    CommandLine|contains:
+      - ':Zone.Identifier'
+      - ':favicon'
+      - ':\Windows\' 
+    username: 'NT AUTHORITY\SYSTEM'
+    ParentImage|contains:
+      - '\Windows\System32\svchost.exe'
+      - '\Windows\System32\services.exe'
 
-    condition: (selection_injection or selection_execution or selection_powershell_streams) and not filter_motw_and_system and (selection_suspicious_parent or not filter_motw_and_system)
+  condition: 
+    (selection_injection or selection_execution or selection_powershell_streams) 
+    and (selection_suspicious_parent or not filter_motw_and_system) 
+    and not filter_motw_and_system
+
+fields:
+  - Time
+  - SourceImage
+  - ParentImage
+  - CommandLine
+  - SourceUsername
+
+falsepositives:
+  - Legitimate ADS usage by system processes (e.g., Zone.Identifier)
+  - Admin-driven PowerShell scripts for backups or testing
+  - Trusted enterprise automation writing alternate streams for metadata
+
 level: high

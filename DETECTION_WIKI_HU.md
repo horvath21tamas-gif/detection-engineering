@@ -7825,16 +7825,18 @@ a virtuális gép kilépésével vagy a sandbox kikerülésével kapcsolatos par
 
 
 ---
-## Ultra-Pro nagy pontosságú adatarchiválás a kiszűréshez (T1560.001)
+## Adatarchiválás kiszűréshez
 - **ID:** `T1560_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a fejlett adatbeállítást a kiszűréshez a nagy entrópia figyelésével
-archívum létrehozása, szokatlan kötetfelosztás és jelszóval védett
-nem adminisztratív vagy interaktív shell kontextusból származó tömörítés.
+- **Leírás:** Érzékeli a speciális adatkezelést harmadik féltől származó archiválás segítségével történő kiszűréshez
+eszközök (7-Zip, WinRAR, Tar, Zip) vagy PowerShell.A nagy entrópiára összpontosít
+archívumok, jelszóval védett fájlok, kötetfelosztás és archiválás utáni törlés.
+Szűri a vállalati automatizálást a szülőfolyamat vonala, az interaktív héjak,
+és integritási szintek.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

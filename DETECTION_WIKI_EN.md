@@ -8245,16 +8245,18 @@ parameters associated with VM escape or sandbox evasion.
 
 
 ---
-## Ultra-Pro High-Fidelity Data Archiving for Exfiltration (T1560.001)
+## Data Archiving for Exfiltration
 - **ID:** `T1560_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects advanced data staging for exfiltration by monitoring for high-entropy 
-archive creation, unusual volume splitting, and password-protected 
-compression originating from non-administrative or interactive shell contexts.
+- **Leírás:** Detects advanced data staging for exfiltration using third-party archiving 
+tools (7-Zip, WinRAR, Tar, Zip) or PowerShell. Focuses on high-entropy 
+archives, password-protected files, volume splitting, and deletion-after-archive. 
+Filters enterprise automation by parent process lineage, interactive shells, 
+and integrity levels.
 
 
 #### 🚨 Response Playbook

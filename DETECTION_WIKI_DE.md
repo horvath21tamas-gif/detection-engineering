@@ -7825,16 +7825,18 @@ Parameter im Zusammenhang mit VM-Escape oder Sandbox-Umgehung.
 
 
 ---
-## Ultra-Pro High-Fidelity-Datenarchivierung für Exfiltration (T1560.001)
+## Datenarchivierung zur Exfiltration
 - **ID:** `T1560_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt erweiterte Datenbereitstellung zur Exfiltration durch Überwachung auf hohe Entropie
-Archiverstellung, ungewöhnliche Volume-Aufteilung und Passwortschutz
-Komprimierung, die aus nicht-administrativen oder interaktiven Shell-Kontexten stammt.
+- **Beschreibung:** Erkennt erweitertes Daten-Staging zur Exfiltration mithilfe der Archivierung von Drittanbietern
+Tools (7-Zip, WinRAR, Tar, Zip) oder PowerShell.Konzentriert sich auf hohe Entropie
+Archive, passwortgeschützte Dateien, Volume-Aufteilung und Löschung nach dem Archivieren.
+Filtert die Unternehmensautomatisierung nach übergeordneter Prozessherkunft, interaktiven Shells,
+und Integritätsebenen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

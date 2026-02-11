@@ -1,52 +1,75 @@
-title: Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007)
+title: VBA Macro Security Evasion (T1564.007)
 id: 1b73565a-e088-49b7-ac5f-295ca6d30623
 status: stable
 description: |
-    Detects attempts to bypass Office macro security or hide VBA projects 
-    by identifying suspicious registry modifications and process-level 
-    manipulation of the Office Object Model.
+  Detects attempts to bypass Microsoft Office macro security or hide VBA projects
+  by monitoring registry modifications, Office Object Model abuse, and suspicious
+  interpreter execution. Focuses on non-admin or untrusted parent processes.
 author: hota05
-date: 2026-02-03
+date: 2026-02-11
 tags:
-    - attack.defense_evasion
-    - attack.t1564.007
+  - attack.defense_evasion
+  - attack.t1564.007
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_registry_bypass:
-        CommandLine|contains:
-            - 'VBAWarnings'      
-            - 'AccessVBOM'      
-            - 'ExtensionHardness'
-            - 'TrustRecords'   
+  selection_registry_bypass:
+    CommandLine|contains:
+      - 'VBAWarnings'
+      - 'AccessVBOM'
+      - 'ExtensionHardness'
+      - 'TrustRecords'
+      - 'EnableMacros'          
+      - 'DisableNotifications'
 
-    selection_interpreter_abuse:
-        - Image|endswith:
-            - '\scrcons.exe'  
-            - '\wscript.exe'
-            - '\cscript.exe'
-            - '\mshta.exe'
-        - CommandLine|contains:
-            - 'ExecuteExcel4Macro'
-            - 'VBAProject.bin'   
+  selection_interpreter_abuse:
+    Image|endswith:
+      - '\scrcons.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+      - '\powershell.exe'
+    CommandLine|contains:
+      - 'ExecuteExcel4Macro'
+      - 'VBAProject.bin'
+      - 'RunMacro'
+      - 'AutoOpen'
 
-    selection_suspicious_chain:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
+  selection_suspicious_chain:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\mshta.exe'
 
-    filter_trusted_automation:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|contains:
-            - '\Windows\System32\svchost.exe'
-            - '\Windows\CCM\CcmExec.exe'
-        - CommandLine|contains:
-            - '\Program Files\'
-            - '\Program Files (x86)\'
+  filter_trusted_automation:
+    - username: 'NT AUTHORITY\SYSTEM'
+    - ParentImage|contains:
+        - '\Windows\System32\svchost.exe'
+        - '\Windows\CCM\CcmExec.exe'
+        - '\Windows\System32\consent.exe'
+    - CommandLine|contains:
+        - '\Program Files\'
+        - '\Program Files (x86)\'
+        - 'Microsoft Office\'
 
-    condition: (selection_registry_bypass or selection_interpreter_abuse) and (selection_suspicious_chain or not filter_trusted_automation)
+  condition: (selection_registry_bypass or selection_interpreter_abuse) and 
+             (selection_suspicious_chain or not filter_trusted_automation)
+
+fields:
+  - Time
+  - SourceImage
+  - ParentImage
+  - CommandLine
+  - SourceUsername
+
+falsepositives:
+  - Legitimate macro automation using signed Office templates
+  - System management scripts modifying Office settings
+  - Enterprise deployment via trusted administrative tools
+
 level: high

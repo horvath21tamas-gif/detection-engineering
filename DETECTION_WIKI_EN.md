@@ -8763,16 +8763,16 @@ and untrusted parent processes like web servers or office apps.
 
 
 ---
-## Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007)
+## VBA Macro Security Evasion (T1564.007)
 - **ID:** `T1564_007.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects attempts to bypass Office macro security or hide VBA projects 
-by identifying suspicious registry modifications and process-level 
-manipulation of the Office Object Model.
+- **Leírás:** Detects attempts to bypass Microsoft Office macro security or hide VBA projects
+by monitoring registry modifications, Office Object Model abuse, and suspicious
+interpreter execution. Focuses on non-admin or untrusted parent processes.
 
 
 #### 🚨 Response Playbook

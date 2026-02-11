@@ -8315,16 +8315,16 @@ bűnügyi szakértői jelzők (--rm) azonosításával, privilegizált eszkalác
 
 
 ---
-## Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007)
+## VBA Macro Security Evasion (T1564.007)
 - **ID:** `T1564_007.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az Office makróbiztonság megkerülésére vagy a VBA-projektek elrejtésére irányuló kísérleteket
-a gyanús regisztrációs módosítások és folyamatszint azonosításával
-az Office Object Model manipulációja.
+- **Leírás:** Érzékeli a Microsoft Office makróbiztonság megkerülésére vagy a VBA-projektek elrejtésére irányuló kísérleteket
+a rendszerleíró adatbázis módosításainak, az Office Object Modell visszaéléseknek és a gyanúsnak a figyelésével
+tolmács végrehajtás.A nem rendszergazdai vagy nem megbízható szülői folyamatokra összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

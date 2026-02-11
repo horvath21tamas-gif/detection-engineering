@@ -8315,16 +8315,16 @@ und nicht vertrauenswürdige übergeordnete Prozesse wie Webserver oder Office-A
 
 
 ---
-## Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007)
+## VBA-Makro-Sicherheitsumgehung (T1564.007)
 - **ID:** `T1564_007.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Versuche, die Office-Makrosicherheit zu umgehen oder VBA-Projekte auszublenden
-durch Identifizierung verdächtiger Registrierungsänderungen und auf Prozessebene
-Manipulation des Office-Objektmodells.
+- **Beschreibung:** Erkennt Versuche, die Makrosicherheit von Microsoft Office zu umgehen oder VBA-Projekte auszublenden
+durch Überwachung von Registrierungsänderungen, Missbrauch des Office-Objektmodells und verdächtiger Angriffe
+Dolmetscherausführung.Konzentriert sich auf Nicht-Administrator- oder nicht vertrauenswürdige übergeordnete Prozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

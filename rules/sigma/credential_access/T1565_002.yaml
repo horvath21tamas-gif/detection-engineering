@@ -1,62 +1,76 @@
-title: Ultra-Pro High-Fidelity Transmitted Data Manipulation (T1565.002)
+title: Transmitted Data Manipulation (T1565.002)
 id: bff93518-2144-48a6-af30-ffc6b8f6809f
 status: stable
 description: |
-    Detects unauthorized network redirection and resolution manipulation (DNS, Proxy, Hosts) 
-    by identifying CLI-based configuration changes originating from suspicious 
-    parent processes or targeting critical registry keys.
-author: hota05
-date: 2026-02-09
+  Detects unauthorized network redirection and resolution manipulation including DNS, proxy,
+  and hosts file modifications. Monitors CLI-based configuration changes originating from
+  suspicious parent processes or targeting critical registry keys. Filters legitimate administrative
+  and system activities to reduce false positives.
+author: hota05 
+date: 2026-02-11
 tags:
-    - attack.impact
-    - attack.t1565.002
+  - attack.impact
+  - attack.t1565.002
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\netsh.exe'           
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\reg.exe'             
-            - '\cmd.exe'
+  selection_tools:
+    Image|endswith:
+      - '\netsh.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\reg.exe'
+      - '\cmd.exe'
 
-    selection_logic:
-        CommandLine|contains:
-            - 'set dns'              
-            - 'set proxy'           
-            - 'winhttp set proxy'    
-            - 'AutoConfigURL'        
-            - 'ProxyServer'
-            - 'ProxyEnable'
-            - 'Internet Settings'
+  selection_logic:
+    CommandLine|contains:
+      - 'set dns'
+      - 'set proxy'
+      - 'winhttp set proxy'
+      - 'AutoConfigURL'
+      - 'ProxyServer'
+      - 'ProxyEnable'
+      - 'Internet Settings'
 
-    selection_hosts:
-        CommandLine|contains:
-            - '\etc\hosts'
-            - 'System32\drivers\etc\hosts'
-        CommandLine|contains:
-            - ' >> '                 
-            - 'Set-Content'
-            - 'Add-Content'
+  selection_hosts:
+    CommandLine|contains:
+      - '\etc\hosts'
+      - 'System32\drivers\etc\hosts'
+      - ' >> '
+      - 'Set-Content'
+      - 'Add-Content'
 
-    selection_context:
-        - ParentImage|endswith:
-            - '\winword.exe'        
-            - '\excel.exe'
-            - '\httpd.exe'         
-            - '\rundll32.exe'    
-            - '\explorer.exe'      
+  selection_context:
+    - ParentImage|endswith:
+        - '\winword.exe'
+        - '\excel.exe'
+        - '\httpd.exe'
+        - '\rundll32.exe'
+        - '\explorer.exe'
 
-    filter_legit:
-        - ParentImage|endswith:
-            - '\msiexec.exe'
-            - '\CcmExec.exe'         
-        - CommandLine|contains:
-            - '127.0.0.1'           
-            - 'localhost'
-        - username: 'NT AUTHORITY\SYSTEM'
+  filter_legit:
+    - ParentImage|endswith:
+        - '\msiexec.exe'
+        - '\CcmExec.exe'
+    - CommandLine|contains:
+        - '127.0.0.1'
+        - 'localhost'
+    - username: 'NT AUTHORITY\SYSTEM'
 
-    condition: selection_tools and (selection_logic or selection_hosts) and selection_context and not filter_legit
+  condition: selection_tools and (selection_logic or selection_hosts) and selection_context and not filter_legit
+
+fields:
+  - Time
+  - SourceImage
+  - ParentImage
+  - CommandLine
+  - SourceUsername
+
+falsepositives:
+  - Legitimate administrative proxy or DNS configuration changes
+  - Internal IT automation scripts modifying hosts or registry
+  - System-initiated configuration tasks by NT AUTHORITY\SYSTEM
+
 level: critical

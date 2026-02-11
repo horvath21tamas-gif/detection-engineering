@@ -2556,5 +2556,9 @@
     "hu_Összesen": "Összesen",
     "de_Detection Engineering Dashboard": "Erkennungstechnik-Dashboard",
     "de_Darabszám": "Stückzahl",
-    "de_Összesen": "Alle"
+    "de_Összesen": "Alle",
+    "hu_Suspicious Access to LSASS Process Memory (Credential Dumping Attempt)": "Gyanús hozzáférés az LSASS folyamatmemóriához (hitelesítő adatok kiürítési kísérlete)",
+    "hu_Detects suspicious access to the LSASS process memory which may indicate credential dumping activity (e.g. Mimikatz, ProcDump, Task Manager dump, comsvcs.dll MiniDump, or other memory dumping techniques).\n": "Érzékeli az LSASS folyamatmemóriához való gyanús hozzáférést, amely hitelesítő adatok kiíratását jelezheti (pl. Mimikatz, ProcDump, Feladatkezelő kiíratása, comsvcs.dll MiniDump vagy más memóriakiíratási technikák).",
+    "de_Suspicious Access to LSASS Process Memory (Credential Dumping Attempt)": "Verdächtiger Zugriff auf den LSASS-Prozessspeicher (Credential Dumping-Versuch)",
+    "de_Detects suspicious access to the LSASS process memory which may indicate credential dumping activity (e.g. Mimikatz, ProcDump, Task Manager dump, comsvcs.dll MiniDump, or other memory dumping techniques).\n": "Erkennt verdächtige Zugriffe auf den LSASS-Prozessspeicher, die auf Anmeldeinformations-Dump-Aktivitäten hinweisen können (z. B. Mimikatz, ProcDump, Task-Manager-Dump, comsvcs.dll MiniDump oder andere Speicher-Dump-Techniken)."
 }

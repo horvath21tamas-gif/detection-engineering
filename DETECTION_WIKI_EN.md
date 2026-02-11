@@ -638,7 +638,7 @@
 - [Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656)](#ultra-pro-high-fidelity-impersonation-and-identity-hijacking-(t1656))
 - [Ultra-Pro High-Fidelity Financial Theft (T1657)](#ultra-pro-high-fidelity-financial-theft-(t1657))
 - [Professional Content Impersonation and Infrastructure Mirroring](#professional-content-impersonation-and-infrastructure-mirroring)
-- [Credential Dumping LSASS](#credential-dumping-lsass)
+- [Suspicious Access to LSASS Process Memory (Credential Dumping Attempt)](#suspicious-access-to-lsass-process-memory-(credential-dumping-attempt))
 
 ---
 ## Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001)
@@ -11853,14 +11853,15 @@ frameworks, filtering out legitimate development and browser-based activity.
 
 
 ---
-## Credential Dumping LSASS
+## Suspicious Access to LSASS Process Memory (Credential Dumping Attempt)
 - **ID:** `credential_dumping_lsass.yml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [PROCDUMP.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** a hitelesito adatok LSASS folyamatmemoriabol torteno kiirasara tett kiserlet
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [COMSVCS.DLL](https://lolbas-project.github.io/lolbas/), [DUMP64.EXE](https://lolbas-project.github.io/lolbas/), [PROCDUMP.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects suspicious access to the LSASS process memory which may indicate credential dumping activity (e.g. Mimikatz, ProcDump, Task Manager dump, comsvcs.dll MiniDump, or other memory dumping techniques).
+
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

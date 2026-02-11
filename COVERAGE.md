@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-11 07:27:32`
+**Utolsó frissítés:** `2026-02-11 08:08:24`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -20,8 +20,8 @@
 | T1001.001 | HIGH | Ultra-Pro High-Fidelity Junk Data & Command Padding (T1001.001) |
 | T1001.002 | CRITICAL | Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001.002) |
 | T1001.003 | HIGH | Ultra-Pro High-Fidelity Protocol Impersonation (T1001.003) |
-| T1003 | HIGH | Credential Dumping LSASS |
-| T1003.001 | HIGH | Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007), Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003), Suspicious Access to LSASS Process Memory, Credential Dumping LSASS |
+| T1003 | HIGH | Suspicious Access to LSASS Process Memory (Credential Dumping Attempt) |
+| T1003.001 | HIGH | Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007), Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003), Suspicious Access to LSASS Process Memory, Suspicious Access to LSASS Process Memory (Credential Dumping Attempt) |
 | T1003.002 | CRITICAL | Ultra-Pro High-Fidelity SAM & SYSTEM Registry Theft (T1003.002) |
 | T1003.003 | CRITICAL | Ultra-Pro High-Fidelity NTDS.dit Extraction (T1003.003) |
 | T1003.004 | CRITICAL | Ultra-Pro High-Fidelity LSA Secrets & Security Hive Theft (T1003.004) |

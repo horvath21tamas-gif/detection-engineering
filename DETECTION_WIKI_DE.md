@@ -638,7 +638,7 @@
 - [Ultra-Pro High-Fidelity-Identitätsbetrug und Identitätsdiebstahl (T1656)](#ultra-pro-high-fidelity-identitätsbetrug-und-identitätsdiebstahl-(t1656))
 - [Ultra-Pro High-Fidelity-Finanzdiebstahl (T1657)](#ultra-pro-high-fidelity-finanzdiebstahl-(t1657))
 - [Professionelle Content-Impersonation und Infrastrukturspiegelung](#professionelle-content-impersonation-und-infrastrukturspiegelung)
-- [Anmeldeinformations-Dumping LSASS](#anmeldeinformations-dumping-lsass)
+- [Verdächtiger Zugriff auf den LSASS-Prozessspeicher (Credential Dumping-Versuch)](#verdächtiger-zugriff-auf-den-lsass-prozessspeicher-(credential-dumping-versuch))
 
 ---
 ## Ultraprofessionelle High-Fidelity-Steganographie und Datenrekonstruktion (T1001)
@@ -11227,14 +11227,14 @@ Frameworks, die legitime Entwicklung und browserbasierte Aktivitäten herausfilt
 
 
 ---
-## Anmeldeinformations-Dumping LSASS
+## Verdächtiger Zugriff auf den LSASS-Prozessspeicher (Credential Dumping-Versuch)
 - **ID:** `credential_dumping_lsass.yml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [PROCDUMP.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** ein Versuch, Authentifizierungsdaten aus dem LSASS-Prozessspeicher zu löschen
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [COMSVCS.DLL](https://lolbas-project.github.io/lolbas/), [DUMP64.EXE](https://lolbas-project.github.io/lolbas/), [PROCDUMP.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt verdächtige Zugriffe auf den LSASS-Prozessspeicher, die auf Anmeldeinformations-Dump-Aktivitäten hinweisen können (z. B. Mimikatz, ProcDump, Task-Manager-Dump, comsvcs.dll MiniDump oder andere Speicher-Dump-Techniken).
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

@@ -638,7 +638,7 @@
 - [Ultra-Pro High-Fidelity megszemélyesítés és személyazonosság-eltérítés (T1656)](#ultra-pro-high-fidelity-megszemélyesítés-és-személyazonosság-eltérítés-(t1656))
 - [Ultra-Pro High-Fidelity pénzügyi lopás (T1657)](#ultra-pro-high-fidelity-pénzügyi-lopás-(t1657))
 - [Professzionális tartalom megszemélyesítése és infrastruktúra tükrözése](#professzionális-tartalom-megszemélyesítése-és-infrastruktúra-tükrözése)
-- [Credential Dumping LSASS](#credential-dumping-lsass)
+- [Gyanús hozzáférés az LSASS folyamatmemóriához (hitelesítő adatok kiürítési kísérlete)](#gyanús-hozzáférés-az-lsass-folyamatmemóriához-(hitelesítő-adatok-kiürítési-kísérlete))
 
 ---
 ## Ultra-Pro High-Fidelity szteganográfia és adatrekonstrukció (T1001)
@@ -11227,14 +11227,14 @@ keretrendszereket, kiszűrve a legitim fejlesztést és a böngésző alapú tev
 
 
 ---
-## Credential Dumping LSASS
+## Gyanús hozzáférés az LSASS folyamatmemóriához (hitelesítő adatok kiürítési kísérlete)
 - **ID:** `credential_dumping_lsass.yml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [PROCDUMP.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** a hitelesito adatok LSASS folyamatmemoriabol torteno kiirasara tett kiserlet
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [COMSVCS.DLL](https://lolbas-project.github.io/lolbas/), [DUMP64.EXE](https://lolbas-project.github.io/lolbas/), [PROCDUMP.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli az LSASS folyamatmemóriához való gyanús hozzáférést, amely hitelesítő adatok kiíratását jelezheti (pl. Mimikatz, ProcDump, Feladatkezelő kiíratása, comsvcs.dll MiniDump vagy más memóriakiíratási technikák).
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

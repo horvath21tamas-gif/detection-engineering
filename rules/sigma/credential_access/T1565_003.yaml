@@ -1,56 +1,73 @@
-title: Ultra-Pro High-Fidelity Runtime Process Manipulation (T1565.003)
+title: Runtime Process Manipulation (T1565.003)
 id: 03c21e12-3c6d-4942-bc30-7647b1246849
 status: stable
 description: |
-    Detects runtime process manipulation by monitoring for suspicious memory access 
-    masks (e.g., PROCESS_ALL_ACCESS) and remote thread injection between unrelated 
-    processes, specifically filtering out known-good administrative and security tools.
-author: hota05
-date: 2026-02-09
+  Detects runtime process manipulation including suspicious memory access masks (e.g., PROCESS_ALL_ACCESS)
+  and remote thread injection between unrelated processes. Focuses on non-standard execution contexts
+  and filters known-good administrative, security, and monitoring tools to reduce false positives.
+author: hota05 
+date: 2026-02-11
 tags:
-    - attack.impact
-    - attack.t1565.003
-    - attack.defense_evasion
+  - attack.impact
+  - attack.t1565.003
+  - attack.defense_evasion
 logsource:
-    product: windows
-    service: sysmon
+  product: windows
+  service: sysmon
+
 detection:
-    selection_mem_access:
-        EventID: 10
-        TargetImage|endswith:
-            - '\lsass.exe'          
-            - '\svchost.exe'         
-            - '\explorer.exe'        
-            - '\browser.exe'         
-        GrantedAccess: 
-            - '0x1F1FFF'              
-            - '0x1F3FFF'              
-            - '0x1438'                
+  selection_mem_access:
+    EventID: 10
+    TargetImage|endswith:
+      - '\lsass.exe'
+      - '\svchost.exe'
+      - '\explorer.exe'
+      - '\browser.exe'
+    GrantedAccess:
+      - '0x1F1FFF'  
+      - '0x1F3FFF'
+      - '0x1438'
 
-    selection_remote_thread:
-        EventID: 8
-        SourceImage|contains:
-            - '\Users\'             
-            - '\Temp\'
-            - '\AppData\'
-        condition: selection_remote_thread and NOT (SourceProcessId == TargetProcessId)
+  selection_remote_thread:
+    EventID: 8
+    SourceImage|contains:
+      - '\Users\'
+      - '\Temp\'
+      - '\AppData\'
+    condition: selection_remote_thread and not (SourceProcessId == TargetProcessId)
 
-    selection_context:
-        - SourceImage|endswith:
-            - '\winword.exe'         
-            - '\excel.exe'
-            - '\powershell.exe'      
-            - '\rundll32.exe'        
+  selection_context:
+    - SourceImage|endswith:
+        - '\winword.exe'
+        - '\excel.exe'
+        - '\powershell.exe'
+        - '\rundll32.exe'
 
-    filter_legit_tools:
-        - SourceImage|endswith:
-            - '\CcmExec.exe'        
-            - '\MsMpEng.exe'         
-            - '\Taskmgr.exe'       
-            - '\Sysmon.exe'         
-        - CallTrace|contains:
-            - 'unknown'              
-        - username: 'NT AUTHORITY\SYSTEM'
+  filter_legit_tools:
+    - SourceImage|endswith:
+        - '\CcmExec.exe'
+        - '\MsMpEng.exe'
+        - '\Taskmgr.exe'
+        - '\Sysmon.exe'
+    - CallTrace|contains:
+        - 'unknown'
+    - username: 'NT AUTHORITY\SYSTEM'
 
-    condition: (selection_mem_access or selection_remote_thread) and selection_context and not filter_legit_tools
+  condition: (selection_mem_access or selection_remote_thread) and selection_context and not filter_legit_tools
+
+fields:
+  - Time
+  - SourceImage
+  - SourceProcessId
+  - TargetImage
+  - TargetProcessId
+  - GrantedAccess
+  - CallTrace
+  - SourceUsername
+
+falsepositives:
+  - Admin/security tools performing legitimate memory operations
+  - Debuggers or monitoring agents (Sysmon, Procmon)  
+  - System processes (NT AUTHORITY\SYSTEM) manipulating services
+
 level: critical

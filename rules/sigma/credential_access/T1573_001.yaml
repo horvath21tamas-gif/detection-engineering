@@ -1,52 +1,70 @@
-title: Ultra-Pro High-Fidelity Symmetric Encryption C2 Channel (T1573.001)
+title: Symmetric Encryption C2 Channel (T1573.001)
 id: 3773ee9e-48bc-49e9-b48a-6508d2c191d2
 status: stable
 description: |
-    Detects custom symmetric encryption (AES/Rijndael) used in C2 channels by identifying 
-    the programmatic setup of CipherMode, PaddingMode, and CryptoStreams within 
-    scripting engines, specifically targeting manual IV/Key assignment and stream piping.
-author: hota05
-date: 2026-02-09
+  Detects suspicious use of custom symmetric encryption (AES/Rijndael) for C2 channels.
+  Focuses on programmatic setup of CipherMode, PaddingMode, and CryptoStreams within
+  scripting engines, specifically targeting manual IV/Key assignment and stream piping
+  from non-standard processes or untrusted execution contexts.
+author: hota05 
+date: 2026-02-11
 tags:
-    - attack.command_and_control
-    - attack.t1573.001
+  - attack.command_and_control
+  - attack.t1573.001
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_crypto_config:
-        CommandLine|contains:
-            - 'AesManaged'                
-            - 'RijndaelManaged'           
-            - '.Mode = [System.Security.Cryptography.CipherMode]::' 
-            - '.Padding = [System.Security.Cryptography.PaddingMode]::' 
-            - 'CreateEncryptor('           
-            - 'CreateDecryptor('         
+  selection_crypto_config:
+    CommandLine|contains:
+      - 'AesManaged'
+      - 'RijndaelManaged'
+      - '.Mode = [System.Security.Cryptography.CipherMode]::'
+      - '.Padding = [System.Security.Cryptography.PaddingMode]::'
+      - 'CreateEncryptor('
+      - 'CreateDecryptor('
 
-    selection_stream_logic:
-        CommandLine|contains:
-            - 'CryptoStream'              
-            - 'FlushFinalBlock'           
-            - '.Key ='                    
-            - '.IV ='                      
+  selection_stream_logic:
+    CommandLine|contains:
+      - 'CryptoStream'
+      - 'FlushFinalBlock'
+      - '.Key ='
+      - '.IV ='
 
-    selection_procs:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
-            - '\mshta.exe'
-            - '\rundll32.exe'
+  selection_procs:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+      - '\rundll32.exe'
 
-    filter_legit_infra:
-        - CommandLine|contains:
-            - 'C:\Program Files\'
-            - 'Microsoft\Azure'           
-            - 'SoftwareDistribution'       
-        - username: 'NT AUTHORITY\SYSTEM'      
-        - ParentImage|endswith:
-            - '\services.exe'             
+  filter_legit_infra:
+    - CommandLine|contains:
+        - 'C:\Program Files\'
+        - 'Microsoft\Azure'
+        - 'SoftwareDistribution'
+    - username: 'NT AUTHORITY\SYSTEM'
+    - ParentImage|endswith:
+        - '\services.exe'
+        - '\explorer.exe'
 
-    condition: selection_crypto_config and selection_stream_logic and selection_procs and not filter_legit_infra
+  condition: selection_crypto_config and selection_stream_logic and selection_procs and not filter_legit_infra
+
+fields:
+  - Time
+  - SourceImage
+  - SourceUsername
+  - ParentImage
+  - CommandLine
+  - ProcessId
+  - ThreadId
+
+falsepositives:
+  - Legitimate DevOps or cloud automation scripts using AES/Rijndael
+  - Health checks or backup scripts that programmatically encrypt files
+  - System updates using encryption streams for secure download or verification
+
 level: critical

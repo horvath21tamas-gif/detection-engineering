@@ -8351,16 +8351,17 @@ nem megbízható szülői folyamatok vagy nem rendszergazdai parancsértelmezők
 
 
 ---
-## Ultra-Pro High-Fidelity erőforrás-kivonás és visszaélés (T1564.009)
+## Erőforrás-kivonás és visszaélés (T1564.009)
 - **ID:** `T1564_009.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [HH.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Észleli a bináris erőforrás-szakaszokkal és a súgófájl értelmezőivel való visszaélést
-(hh.exe, winhlp32.exe) rejtett rakományok kibontásához vagy végrehajtásához.
-A protokollcsempészetre (it:, ms-its:) és a gyanús dekompilációra összpontosít.
+(hh.exe, winhlp32.exe) rejtett hasznos adatok kibontásához vagy végrehajtásához.
+Figyeli a gyanús szülői folyamatokat, a protokollcsempészetet (its:, ms-its:),
+dekompilációs kísérletek és a nem szabványos fájl elérési utak.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

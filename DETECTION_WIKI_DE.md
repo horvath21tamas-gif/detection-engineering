@@ -8351,16 +8351,17 @@ initiiert durch nicht vertrauenswürdige übergeordnete Prozesse oder Nicht-Admi
 
 
 ---
-## Ultra-Pro High-Fidelity-Ressourcenextraktion und -missbrauch (T1564.009)
+## Ressourcengewinnung und -missbrauch (T1564.009)
 - **ID:** `T1564_009.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [HH.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt den Missbrauch von binären Ressourcenabschnitten und Hilfedatei-Interpretern
-(hh.exe, winhlp32.exe), um versteckte Payloads zu extrahieren oder auszuführen.
-Konzentriert sich auf Protokollschmuggel (its:, ms-its:) und verdächtige Dekompilierung.
+- **Beschreibung:** Erkennt Missbrauch von binären Ressourcenabschnitten und Hilfedatei-Interpretern
+(hh.exe, winhlp32.exe) zum Extrahieren oder Ausführen versteckter Nutzlasten.
+Überwacht verdächtige übergeordnete Prozesse, Protokollschmuggel (its:, ms-its:),
+Dekompilierungsversuche und nicht standardmäßige Dateipfade.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

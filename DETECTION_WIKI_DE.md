@@ -10639,14 +10639,14 @@ und die Verwendung rekursiver Erkennungsbefehle innerhalb derselben Sitzung.
 ---
 ## Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002)
 - **ID:** `T1602_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt äußerst verdächtige Massendatensammlungen aus Cloud-Synchronisierungswurzeln (OneDrive,
-SharePoint, Google Drive) durch Überwachung auf rekursive Lese-/Kopiermuster
-kombiniert mit Archivierungstools oder verdächtigen Staging-Zielen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [ONEDRIVESTANDALONEUPDATER.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die Massendatenerfassung und -exfiltration aus Cloud-Speicher-Synchronisierungswurzeln
+(OneDrive, SharePoint, Google Drive, Dropbox) durch Überwachung des rekursiven Kopierens,
+Archivierungs- und Staging-Aktivitäten von verdächtigen übergeordneten Prozessen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

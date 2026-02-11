@@ -11231,14 +11231,14 @@ and the use of recursive discovery commands within the same session.
 ---
 ## Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002)
 - **ID:** `T1602_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects highly suspicious mass data collection from cloud sync roots (OneDrive, 
-SharePoint, Google Drive) by monitoring for recursive read/copy patterns 
-combined with archival tools or suspicious staging destinations.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [ONEDRIVESTANDALONEUPDATER.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects mass data collection and exfiltration from cloud storage sync roots 
+(OneDrive, SharePoint, Google Drive, Dropbox) by monitoring recursive copy, 
+archival, and staging activity from suspicious parent processes.
 
 
 #### 🚨 Response Playbook

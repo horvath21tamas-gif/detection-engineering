@@ -10639,14 +10639,14 @@ rendellenes folyamatvonalak, nem szabványos forrásútvonalak korrelációjáva
 ---
 ## Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002)
 - **ID:** `T1602_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a rendkívül gyanús tömeges adatgyűjtést a felhőszinkronizálási gyökerekből (OneDrive,
-SharePoint, Google Drive) a rekurzív olvasási/másolási minták figyelésével
-archív eszközökkel vagy gyanús állomáshelyekkel kombinálva.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [ONEDRIVESTANDALONEUPDATER.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a tömeges adatgyűjtést és a felhőalapú tárolás szinkronizálási gyökereiből való kiszűrést
+(OneDrive, SharePoint, Google Drive, Dropbox) a rekurzív másolás figyelésével,
+archiválási és rendezési tevékenység a gyanús szülői folyamatokból.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

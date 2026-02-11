@@ -1,66 +1,106 @@
-title: Ultra-Pro High-Fidelity Financial Theft (T1657)
+title: Suspicious Clipboard Manipulation and Financial Document Access From Untrusted Parent Process
 id: af0a1180-5670-4466-a00b-ae1f78816a44
 status: stable
-description: |
-    Detects potential financial theft and fraud by monitoring for clipboard 
-    manipulation (address swapping) and unauthorized financial document 
-    access originating from suspicious/web-facing parent processes.
-author: hota05
+description: >
+  Detects potential financial theft or fraud activity involving clipboard
+  manipulation (e.g. address swapping) combined with access to financial
+  documents, initiated from suspicious parent processes such as browsers,
+  Office applications, or web-facing services.
+
+author: hota05 
 date: 2026-02-09
+modified: 2026-02-11
+references:
+  - https://attack.mitre.org/techniques/T1657/
 tags:
-    - attack.impact
-    - attack.t1657
+  - attack.impact
+  - attack.t1657
+  - attack.collection
+  - attack.execution
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_engines:
-        - Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\cmd.exe'
-            - '\nircmd.exe'          
-            - '\python.exe'
-            - '\wscript.exe'
 
-    selection_logic:
-        CommandLine|contains:
-            - 'Get-Clipboard'       
-            - 'Set-Clipboard'        
-            - 'System.Windows.Forms.Clipboard' 
-            - 'WriteProcessMemory'   
-            - 'regex'               
+  selection_engines:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\python.exe'
+      - '\nircmd.exe'
+      - '\mshta.exe'
 
-    selection_targets:
-        CommandLine|contains:
-            - 'invoice'             
-            - 'payment'              
-            - 'bank_statement'       
-            - 'iban'                 
-            - '.pdf'
-            - '.xlsx'
+  selection_clipboard_or_memory:
+    CommandLine|contains:
+      - 'Get-Clipboard'
+      - 'Set-Clipboard'
+      - 'Clipboard'
+      - 'System.Windows.Forms.Clipboard'
+      - 'WriteProcessMemory'
+      - 'ReadProcessMemory'
+      - 'SetWindowsHook'
+      - 'Add-Type'
 
-    selection_context:
-        - ParentImage|endswith:
-            - '\winword.exe'         
-            - '\excel.exe'
-            - '\httpd.exe'           
-            - '\rundll32.exe'       
-            - '\msedge.exe'          
-            - '\chrome.exe'
-        - Image|contains:
-            - '\Temp\'
-            - '\Users\Public\'
-            - '\AppData\Local\Temp\'
+  selection_financial_keywords:
+    CommandLine|contains:
+      - 'invoice'
+      - 'payment'
+      - 'bank'
+      - 'iban'
+      - 'swift'
+      - 'account number'
+      - '.pdf'
+      - '.xlsx'
+      - '.csv'
 
-    filter_legit_erp:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - Image|contains:
-            - '\Program Files\'      
-        - CommandLine|contains:
-            - 'Inventory'
-            - 'Backup'
-            - 'SignService'          
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\iexplore.exe'
+      - '\firefox.exe'
+      - '\rundll32.exe'
+      - '\w3wp.exe'
+      - '\httpd.exe'
 
-    condition: selection_engines and (selection_logic and selection_targets) and selection_context and not filter_legit_erp
+  selection_suspicious_path:
+    Image|contains:
+      - '\AppData\Local\Temp\'
+      - '\Users\Public\'
+      - '\ProgramData\'
+      - '\Windows\Temp\'
+
+  filter_legitimate_enterprise:
+    User|startswith:
+      - 'NT AUTHORITY\'
+    Image|startswith:
+      - 'C:\Program Files\'
+      - 'C:\Program Files (x86)\'
+    CommandLine|contains:
+      - 'Backup'
+      - 'Inventory'
+      - 'AccountingService'
+      - 'SignService'
+
+  condition:
+    selection_engines
+    and selection_clipboard_or_memory
+    and selection_financial_keywords
+    and (selection_suspicious_parent or selection_suspicious_path)
+    and not filter_legitimate_enterprise
+
+falsepositives:
+  - Legitimate accounting or ERP software using PowerShell automation
+  - Authorized financial scripting or reporting tasks
+  - Security tools inspecting clipboard or process memory
+  - Developer scripts in controlled environments
+
 level: high

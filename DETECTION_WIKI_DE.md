@@ -605,8 +605,8 @@
 - [Automatisierte Ultra-Pro-High-Fidelity-Netzwerkfreigabeerfassung (T1602)](#automatisierte-ultra-pro-high-fidelity-netzwerkfreigabeerfassung-(t1602))
 - [Ultra-Pro High-Fidelity Admin-Share-Datenexfiltration (T1602.001)](#ultra-pro-high-fidelity-admin-share-datenexfiltration-(t1602001))
 - [Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002)](#ultra-pro-high-fidelity-cloud-share-exfiltration-(t1602002))
-- [Ultra-Pro High-Fidelity-Web-Token-Fälschung (T1606)](#ultra-pro-high-fidelity-web-token-fälschung-(t1606))
-- [Ultra-Pro High-Fidelity-Web-Cookie-Ernte (T1606.001)](#ultra-pro-high-fidelity-web-cookie-ernte-(t1606001))
+- [Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606)](#ultra-pro-high-fidelity-web-token-&-credential-forgery-(t1606))
+- [Ultra-Pro High-Fidelity-Erfassung von Web-Cookies und Browser-Anmeldeinformationen (T1606.001)](#ultra-pro-high-fidelity-erfassung-von-web-cookies-und-browser-anmeldeinformationen-(t1606001))
 - [Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002)](#ultra-pro-high-fidelity-web-token-forgery-&-golden-saml-(t1606002))
 - [Anomale Infrastrukturbereitstellung und Ressourcenbereitstellung](#anomale-infrastrukturbereitstellung-und-ressourcenbereitstellung)
 - [Anomale Malware-Bereitstellung in der externen Infrastruktur](#anomale-malware-bereitstellung-in-der-externen-infrastruktur)
@@ -10655,16 +10655,18 @@ Archivierungs- und Staging-Aktivitäten von verdächtigen übergeordneten Prozes
 
 
 ---
-## Ultra-Pro High-Fidelity-Web-Token-Fälschung (T1606)
+## Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606)
 - **ID:** `T1606.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [TEAMS.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugtes Fälschen oder Diebstahl von Web-Anmeldeinformationen (SAML, Cookies, OAuth-Tokens).
-Konzentriert sich auf Nicht-Browser-Prozesse, die auf DPAPI-Hauptschlüssel zugreifen, verdächtiges SQLite
-Abfragen in Token-Datenbanken und Generierung von Golden SAML-Artefakten.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt unbefugtes Fälschen oder Diebstahl von Web-Zugangsdaten, einschließlich
+SAML, OAuth und im Browser gespeicherte Token/Cookies.
+Konzentriert sich auf Nicht-Browser-Prozesse, die auf DPAPI-Hauptschlüssel zugreifen, verdächtig
+Datenbankabfragen in Token-Speichern und Generierung von Golden SAML-Artefakten.
+Filtert legitime Browser, Electron-Apps und Verwaltungsautomatisierungstools.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -10673,17 +10675,18 @@ Abfragen in Token-Datenbanken und Generierung von Golden SAML-Artefakten.
 
 
 ---
-## Ultra-Pro High-Fidelity-Web-Cookie-Ernte (T1606.001)
+## Ultra-Pro High-Fidelity-Erfassung von Web-Cookies und Browser-Anmeldeinformationen (T1606.001)
 - **ID:** `T1606_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt das unbefugte Extrahieren von Browser-Cookies und den entsprechenden Cookies
-AES-Verschlüsselungsschlüssel aus „Local State“-Dateien.Es zielt gezielt ab
-Nicht vertrauenswürdige Prozesse (Interpreter, nicht signierte Binärdateien) beim Filtern
-legitimes Browser- und Electron-Anwendungsverhalten.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die unbefugte Extraktion von Browser-Cookies und Verschlüsselungsschlüsseln
+(Chromium Local State AES-Schlüssel/DPAPI-geschützte Anmeldeinformationen).
+Konzentriert sich auf verdächtige Dateizugriffe, SQLite-Dumping, DPAPI-Entschlüsselungsmuster,
+und Ausführung von nicht vertrauenswürdigen oder temporären Standorten aus.
+Filtert legitimes Browser-, Electron- und Sicherheitstoolverhalten.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

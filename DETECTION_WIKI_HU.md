@@ -605,8 +605,8 @@
 - [Ultra-Pro High-Fidelity Network Share Automated Collection (T1602)](#ultra-pro-high-fidelity-network-share-automated-collection-(t1602))
 - [Ultra-Pro High-Fidelity Admin Share Data Exfiltration (T1602.001)](#ultra-pro-high-fidelity-admin-share-data-exfiltration-(t1602001))
 - [Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002)](#ultra-pro-high-fidelity-cloud-share-exfiltration-(t1602002))
-- [Ultra-Pro High-Fidelity webes token hamisítás (T1606)](#ultra-pro-high-fidelity-webes-token-hamisítás-(t1606))
-- [Ultra-Pro High-Fidelity webes cookie-gyűjtés (T1606.001)](#ultra-pro-high-fidelity-webes-cookie-gyűjtés-(t1606001))
+- [Ultra-Pro High-Fidelity webes token és hitelesítő adatok hamisítása (T1606)](#ultra-pro-high-fidelity-webes-token-és-hitelesítő-adatok-hamisítása-(t1606))
+- [Ultra-Pro High-Fidelity webes cookie-k és böngésző hitelesítő adatok begyűjtése (T1606.001)](#ultra-pro-high-fidelity-webes-cookie-k-és-böngésző-hitelesítő-adatok-begyűjtése-(t1606001))
 - [Ultra-Pro High-Fidelity webes token hamisítás és Golden SAML (T1606.002)](#ultra-pro-high-fidelity-webes-token-hamisítás-és-golden-saml-(t1606002))
 - [Rendellenes infrastruktúra szakaszolás és erőforrás-kihelyezés](#rendellenes-infrastruktúra-szakaszolás-és-erőforrás-kihelyezés)
 - [Rendellenes rosszindulatú programok áthelyezése a külső infrastruktúrába](#rendellenes-rosszindulatú-programok-áthelyezése-a-külső-infrastruktúrába)
@@ -10655,16 +10655,18 @@ archiválási és rendezési tevékenység a gyanús szülői folyamatokból.
 
 
 ---
-## Ultra-Pro High-Fidelity webes token hamisítás (T1606)
+## Ultra-Pro High-Fidelity webes token és hitelesítő adatok hamisítása (T1606)
 - **ID:** `T1606.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [TEAMS.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli a webes hitelesítő adatok (SAML, cookie-k, OAuth-tokenek) jogosulatlan hamisítását vagy ellopását.
-A DPAPI főkulcsokhoz hozzáférő nem böngészős folyamatokra összpontosít, és a gyanús SQLite
-lekérdezések token adatbázisokban, és Golden SAML műtermékek generálása.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Észleli a webes hitelesítő adatok jogosulatlan hamisítását vagy ellopását, beleértve
+SAML, OAuth és böngészőben tárolt tokenek/cookie-k.
+A DPAPI főkulcsokhoz hozzáférő nem böngésző folyamatokra összpontosít, gyanús
+adatbázis-lekérdezések jogkivonat-tárolókban, és Golden SAML műtermékek generálása.
+Szűri a legális böngészőket, az Electron alkalmazásokat és az adminisztratív automatizálási eszközöket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -10673,17 +10675,18 @@ lekérdezések token adatbázisokban, és Golden SAML műtermékek generálása.
 
 
 ---
-## Ultra-Pro High-Fidelity webes cookie-gyűjtés (T1606.001)
+## Ultra-Pro High-Fidelity webes cookie-k és böngésző hitelesítő adatok begyűjtése (T1606.001)
 - **ID:** `T1606_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a böngésző cookie-jainak és a hozzájuk tartozók jogosulatlan kimásolását
-AES titkosítási kulcsok „Helyi állapot” fájlokból.Kifejezetten céloz
-nem megbízható folyamatok (tolmácsok, előjel nélküli binárisok) szűrés közben
-törvényes böngésző és Electron alkalmazások viselkedése.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a böngésző cookie-jainak és titkosítási kulcsainak jogosulatlan kimásolását
+(Chromium Local State AES kulcsok / DPAPI-védett hitelesítő adatok).
+A gyanús fájlhozzáférésre, az SQLite dömpingre, a DPAPI visszafejtési mintákra összpontosít,
+és végrehajtás nem megbízható vagy ideiglenes helyekről.
+Szűri a böngésző, az Electron és a biztonsági eszközök szabályszerű viselkedését.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

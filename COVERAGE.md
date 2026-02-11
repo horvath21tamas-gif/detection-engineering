@@ -611,9 +611,9 @@
 | T1602 | CRITICAL | Ultra-Pro High-Fidelity Network Share Automated Collection (T1602) |
 | T1602.001 | CRITICAL | Ultra-Pro High-Fidelity Admin Share Data Exfiltration (T1602.001) |
 | T1602.002 | CRITICAL | Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002) |
-| T1606 | CRITICAL | Ultra-Pro High-Fidelity Web Token Forgery (T1606) |
-| T1606.001 | CRITICAL | Ultra-Pro High-Fidelity Web Cookie Harvesting (T1606.001) |
-| T1606.002 | CRITICAL | Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002) |
+| T1606 | CRITICAL | Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606) |
+| T1606.001 | CRITICAL | Ultra-Pro High-Fidelity Web Cookie & Browser Credential Harvesting (T1606.001), Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606) |
+| T1606.002 | CRITICAL | Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002), Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606) |
 | T1608 | HIGH | Anomalous Infrastructure Staging and Resource Deployment |
 | T1608.001 | HIGH | Anomalous Malware Staging to External Infrastructure |
 | T1608.002 | HIGH | Anomalous Offensive Tool Staging and External Upload |

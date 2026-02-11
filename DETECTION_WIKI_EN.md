@@ -605,8 +605,8 @@
 - [Ultra-Pro High-Fidelity Network Share Automated Collection (T1602)](#ultra-pro-high-fidelity-network-share-automated-collection-(t1602))
 - [Ultra-Pro High-Fidelity Admin Share Data Exfiltration (T1602.001)](#ultra-pro-high-fidelity-admin-share-data-exfiltration-(t1602001))
 - [Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002)](#ultra-pro-high-fidelity-cloud-share-exfiltration-(t1602002))
-- [Ultra-Pro High-Fidelity Web Token Forgery (T1606)](#ultra-pro-high-fidelity-web-token-forgery-(t1606))
-- [Ultra-Pro High-Fidelity Web Cookie Harvesting (T1606.001)](#ultra-pro-high-fidelity-web-cookie-harvesting-(t1606001))
+- [Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606)](#ultra-pro-high-fidelity-web-token-&-credential-forgery-(t1606))
+- [Ultra-Pro High-Fidelity Web Cookie & Browser Credential Harvesting (T1606.001)](#ultra-pro-high-fidelity-web-cookie-&-browser-credential-harvesting-(t1606001))
 - [Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002)](#ultra-pro-high-fidelity-web-token-forgery-&-golden-saml-(t1606002))
 - [Anomalous Infrastructure Staging and Resource Deployment](#anomalous-infrastructure-staging-and-resource-deployment)
 - [Anomalous Malware Staging to External Infrastructure](#anomalous-malware-staging-to-external-infrastructure)
@@ -11248,16 +11248,18 @@ archival, and staging activity from suspicious parent processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Web Token Forgery (T1606)
+## Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606)
 - **ID:** `T1606.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [TEAMS.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized forging or theft of web credentials (SAML, cookies, OAuth tokens). 
-Focuses on non-browser processes accessing DPAPI master keys, suspicious SQLite 
-queries on token databases, and Golden SAML artifact generation.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects unauthorized forging or theft of web credentials including 
+SAML, OAuth, and browser-stored tokens/cookies. 
+Focuses on non-browser processes accessing DPAPI master keys, suspicious 
+database queries on token stores, and Golden SAML artifact generation.
+Filters legitimate browsers, Electron apps, and administrative automation tools.
 
 
 #### 🚨 Response Playbook
@@ -11267,17 +11269,18 @@ queries on token databases, and Golden SAML artifact generation.
 
 
 ---
-## Ultra-Pro High-Fidelity Web Cookie Harvesting (T1606.001)
+## Ultra-Pro High-Fidelity Web Cookie & Browser Credential Harvesting (T1606.001)
 - **ID:** `T1606_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized extraction of browser cookies and their corresponding 
-AES encryption keys from 'Local State' files. It specifically targets 
-untrusted processes (interpreters, unsigned binaries) while filtering 
-legitimate browser and Electron application behavior.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects unauthorized extraction of browser cookies and encryption keys 
+(Chromium Local State AES keys / DPAPI-protected credentials). 
+Focuses on suspicious file access, SQLite dumping, DPAPI decryption patterns, 
+and execution from untrusted or temporary locations. 
+Filters legitimate browser, Electron, and security tooling behavior.
 
 
 #### 🚨 Response Playbook

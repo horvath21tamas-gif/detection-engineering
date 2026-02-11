@@ -619,8 +619,8 @@
 - [High-Fidelity-Erkennung der Bereitstellung bösartiger Container](#high-fidelity-erkennung-der-bereitstellung-bösartiger-container)
 - [Ultra-Pro Container-Flucht und Host-Zugriff (T1611)](#ultra-pro-container-flucht-und-host-zugriff-(t1611))
 - [Ultra-Pro Stealthy Local Image Build (T1612)](#ultra-pro-stealthy-local-image-build-(t1612))
-- [Ultra-Pro High-Fidelity-Container- und Instanzerkennung (T1613)](#ultra-pro-high-fidelity-container--und-instanzerkennung-(t1613))
-- [Ultra-Pro High-Fidelity-System zur Standorterkennung (T1614)](#ultra-pro-high-fidelity-system-zur-standorterkennung-(t1614))
+- [Ultraprofessioneller High-Fidelity-Container und Kubernetes Discovery](#ultraprofessioneller-high-fidelity-container-und-kubernetes-discovery)
+- [High-Fidelity-Systemstandort und regionale Kill-Switch-Erkennung](#high-fidelity-systemstandort-und-regionale-kill-switch-erkennung)
 - [Erkennung von High-Fidelity-Systemsprache und Tastaturlayout](#erkennung-von-high-fidelity-systemsprache-und-tastaturlayout)
 - [High-Fidelity-Erkennung von Gruppenrichtlinien](#high-fidelity-erkennung-von-gruppenrichtlinien)
 - [High-Fidelity-Erkennung von Cloud-Speicherobjekten](#high-fidelity-erkennung-von-cloud-speicherobjekten)
@@ -632,7 +632,7 @@
 - [Verdächtige Aktivität beim Exportieren oder Diebstahl von Zertifikaten und privaten Schlüsseln](#verdächtige-aktivität-beim-exportieren-oder-diebstahl-von-zertifikaten-und-privaten-schlüsseln)
 - [High-Fidelity-Cloud-Kontoerwerb und -Initialisierung – T1650](#high-fidelity-cloud-kontoerwerb-und--initialisierung-–-t1650)
 - [Missbrauch von High-Fidelity-Cloud-Verwaltungsagenten](#missbrauch-von-high-fidelity-cloud-verwaltungsagenten)
-- [Aufzählung verdächtiger Gerätetreiber aus anomalem Kontext (BYOVD Recon)](#aufzählung-verdächtiger-gerätetreiber-aus-anomalem-kontext-(byovd-recon))
+- [Verdächtige Gerätetreiberaufzählung aus anomalem Kontext (BYOVD Recon)](#verdächtige-gerätetreiberaufzählung-aus-anomalem-kontext-(byovd-recon))
 - [Manipulation der Ultra-Pro-Energieeinstellungen (T1137.001)](#manipulation-der-ultra-pro-energieeinstellungen-(t1137001))
 - [Aufzählung verdächtiger Ereignisprotokolle aufgrund eines anomalen Ausführungskontexts](#aufzählung-verdächtiger-ereignisprotokolle-aufgrund-eines-anomalen-ausführungskontexts)
 - [Verdächtiger Identitätswechsel durch RunAs-Missbrauch oder irreführende lokale Kontoerstellung](#verdächtiger-identitätswechsel-durch-runas-missbrauch-oder-irreführende-lokale-kontoerstellung)
@@ -10926,7 +10926,7 @@ Systemsonden, um Fehlalarme zu reduzieren.
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt den Zielsystemstandort und die regionale Erkennung, die häufig von Ransomware und Malware zur geografischen Ausrichtung oder Ausgrenzung verwendet werden (Kill-Switch-Logik).Konzentriert sich auf die registrierungsbasierte Tastatur-/Gebietsschema-Aufzählung in Kombination mit externen IP-zu-Geo-API-Aufrufen aus verdächtigen Ausführungskontexten.
+- **Beschreibung:** Erkennt den Zielsystemstandort und die regionale Erkennung, die häufig von Ransomware und Malware zur geografischen Ausrichtung oder Ausgrenzung verwendet werden (Kill-Switch-Logik).Konzentriert sich auf die registrierungsbasierte Tastatur-/Gebietsschema-Aufzählung in Kombination mit externen IP-to-Geo-API-Aufrufen aus verdächtigen Ausführungskontexten.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -10942,7 +10942,7 @@ Systemsonden, um Fehlalarme zu reduzieren.
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die gezielte Erkennung von Systemsprache und Tastaturlayout und konzentriert sich dabei auf Malware-Kill-Switch-Prüfungen und Umgebungsschlüsselung.Kombiniert Registrierungsabfragen, CLI/PowerShell-Cmdlets und die Umleitung verdächtiger Ausgaben.Minimiert Fehlalarme durch übergeordneten Prozess, Integritätsstufe und Filterung vertrauenswürdiger Pfade.
+- **Beschreibung:** Erkennt die gezielte Erkennung von Systemsprache und Tastaturlayout und konzentriert sich dabei auf Malware-„Kill-Switch“-Prüfungen und Umgebungsschlüsselung.Kombiniert Registrierungsabfragen, CLI/PowerShell-Cmdlets und die Umleitung verdächtiger Ausgaben.Minimiert Fehlalarme durch übergeordneten Prozess, Integritätsstufe und Filterung vertrauenswürdiger Pfade.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -11107,7 +11107,7 @@ die herkömmliche Netzwerk-Perimeter-Verteidigungsmaßnahmen umgehen.
 
 
 ---
-## Aufzählung verdächtiger Gerätetreiber aus anomalem Kontext (BYOVD Recon)
+## Verdächtige Gerätetreiberaufzählung aus anomalem Kontext (BYOVD Recon)
 - **ID:** `T1652.yaml`
 - **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)

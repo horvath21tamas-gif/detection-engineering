@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-11 08:52:14`
+**Utolsó frissítés:** `2026-02-11 09:22:40`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -625,8 +625,8 @@
 | T1610 | CRITICAL | High-Fidelity Malicious Container Deployment Detection |
 | T1611 | CRITICAL | Ultra-Pro Container Escape & Host Access (T1611) |
 | T1612 | CRITICAL | Ultra-Pro Stealthy Local Image Build (T1612) |
-| T1613 | HIGH | Ultra-Pro High-Fidelity Container and Instance Discovery (T1613) |
-| T1614 | HIGH | Ultra-Pro High-Fidelity System Location Discovery (T1614) |
+| T1613 | HIGH | Ultra-Pro High-Fidelity Container and Kubernetes Discovery |
+| T1614 | HIGH | High-Fidelity System Location and Regional Kill-Switch Discovery |
 | T1614.001 | HIGH | High-Fidelity System Language and Keyboard Layout Discovery |
 | T1615 | HIGH | High-Fidelity Group Policy Discovery Detection |
 | T1619 | HIGH | High-Fidelity Cloud Storage Object Discovery Detection |

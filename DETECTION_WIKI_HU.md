@@ -619,8 +619,8 @@
 - [Nagy pontosságú rosszindulatú tárolótelepítés-észlelés](#nagy-pontosságú-rosszindulatú-tárolótelepítés-észlelés)
 - [Ultra-Pro Container Escape & Host Access (T1611)](#ultra-pro-container-escape-&-host-access-(t1611))
 - [Ultra-Pro Stealthy Local Image Build (T1612)](#ultra-pro-stealthy-local-image-build-(t1612))
-- [Ultra-Pro High-Fidelity konténer és példányfelderítés (T1613)](#ultra-pro-high-fidelity-konténer-és-példányfelderítés-(t1613))
-- [Ultra-Pro High-Fidelity rendszer helymeghatározás (T1614)](#ultra-pro-high-fidelity-rendszer-helymeghatározás-(t1614))
+- [Ultra-Pro High-Fidelity tároló és Kubernetes Discovery](#ultra-pro-high-fidelity-tároló-és-kubernetes-discovery)
+- [High-Fidelity rendszer helymeghatározás és regionális Kill-Switch felfedezés](#high-fidelity-rendszer-helymeghatározás-és-regionális-kill-switch-felfedezés)
 - [High-Fidelity rendszernyelv és billentyűzetkiosztás felfedezése](#high-fidelity-rendszernyelv-és-billentyűzetkiosztás-felfedezése)
 - [Nagy pontosságú csoportházirend-felderítés észlelése](#nagy-pontosságú-csoportházirend-felderítés-észlelése)
 - [Nagy pontosságú felhőalapú tárolási objektumfelderítés](#nagy-pontosságú-felhőalapú-tárolási-objektumfelderítés)
@@ -4306,7 +4306,7 @@ nem szabványos folyamatokból ered, vagy gyanús fájlhelyekre mutat.
 - **Becsült zajszint:** Magas (Tárolás-igényes)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Microsoft Office globális sablonok (Normal.dotm / NormalEmail.dotm) nem Office folyamatok vagy gyanús végrehajtási útvonalak általi nagy kockázatú módosítását vagy létrehozását.Ez makroalapú perzisztenciára utalhat (MITRE ATT&CK T1137.001).
+- **Leírás:** Érzékeli a Microsoft Office globális sablonok (Normal.dotm / NormalEmail.dotm) nem Office folyamatok általi vagy gyanús végrehajtási útvonalak általi nagy kockázatú módosítását vagy létrehozását.Ez makroalapú perzisztenciára utalhat (MITRE ATT&CK T1137.001).
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -10876,7 +10876,7 @@ gazdagép szintű erőforrás-megosztás és nem szabványos képforrások.
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 - **Leírás:** Érzékeli a jogosulatlan konténer-szökési kísérleteket és a gazdagép-hozzáférést.-ra összpontosít
 nem szabványos privilegizált végrehajtások, veszélyes rögzítések és korlátlan biztonság
-kontextusokban, miközben kiszűri a legitim fürtinfrastruktúra-összetevőket.
+kontextusban, miközben kiszűri a legitim fürtinfrastruktúra-összetevőket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -10926,7 +10926,7 @@ rendszerszondák a téves pozitívumok csökkentésére.
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a célzott rendszer helyét és a zsarolóvírusok és rosszindulatú programok által általánosan használt regionális felfedezést földrajzi célzáshoz vagy kizáráshoz (kill-switch logika).A rendszerleíró adatbázis-alapú billentyűzet-/helymeghatározásra összpontosít, és a gyanús végrehajtási kontextusokból érkező külső IP-földrajzi API-hívásokkal kombinálva.
+- **Leírás:** Érzékeli a rendszer célzott helyét és a zsarolóvírusok és rosszindulatú programok által általánosan használt területi felfedezést földrajzi célzáshoz vagy kizáráshoz (kill-switch logika).A rendszerleíró adatbázis-alapú billentyűzet-/helymeghatározásra összpontosít, és a gyanús végrehajtási kontextusokból érkező külső IP-földrajzi API-hívásokkal kombinálva.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -11035,7 +11035,7 @@ rendszerszondák a téves pozitívumok csökkentésére.
 - **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Parancssori segédprogramok segítségével észleli a macOS LaunchAgent vagy LaunchDaemon tulajdonságlista-fájlok gyanús módosítását vagy létrehozását.A tartóssággal kapcsolatos kulcsokra és a szokatlan végrehajtási kontextusokra összpontosít, szűrve a legitim Apple rendszerfolyamatokat.
+- **Leírás:** Parancssori segédprogramok segítségével észleli a macOS LaunchAgent vagy LaunchDaemon tulajdonságlista-fájlok gyanús módosítását vagy létrehozását.A tartóssággal kapcsolatos kulcsokra és a rendellenes végrehajtási kontextusokra összpontosít, kiszűri a legitim Apple rendszerfolyamatokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -11114,7 +11114,7 @@ amelyek megkerülik a hagyományos hálózati peremvédelmet.
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [PNPUTIL.EXE](https://lolbas-project.github.io/lolbas/), [QUERY.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a gyanús eszközillesztő-felderítési tevékenységet a natív Windows segédprogramok, WMI vagy PowerShell használatával rendellenes végrehajtási környezetekből.Azokra a felderítési mintákra összpontosít, amelyeket általában a Bring Your Own Vulnerable Driver (BYOVD) visszaélése előtt figyeltek meg.
+- **Leírás:** Érzékeli a gyanús eszközillesztő-felderítési tevékenységet a natív Windows segédprogramok, WMI vagy PowerShell használatával rendellenes végrehajtási környezetekből.A Bring Your Own Vulnerable Driver (BYOVD) visszaélése előtt gyakran megfigyelt felderítési mintákra összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -11147,7 +11147,7 @@ szülőfolyamatok, például a PowerShell vagy a CMD, miközben szűrik a jogos 
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Windows eseménynaplóinak gyanús felsorolását natív segédprogramok (wevtutil) vagy PowerShell-parancsmagok (Get-WinEvent, Get-EventLog) segítségével rendellenes végrehajtási környezetekből.A naplócsatorna-felderítésre és a metaadatgyűjtésre összpontosít, amely potenciálisan a biztonsági eszközök azonosítására vagy az észlelés elkerülésére használható.
+- **Leírás:** Érzékeli a Windows eseménynaplóinak gyanús felsorolását natív segédprogramok (wevtutil) vagy PowerShell-parancsmagok (Get-WinEvent, Get-EventLog) használatával rendellenes végrehajtási környezetekből.A naplócsatorna-felderítésre és a metaadatgyűjtésre összpontosít, amely potenciálisan a biztonsági eszközök azonosítására vagy az észlelés elkerülésére használható.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -11156,7 +11156,7 @@ szülőfolyamatok, például a PowerShell vagy a CMD, miközben szűrik a jogos 
 
 
 ---
-## Gyanús személyes adatokkal való visszaélés RunAs visszaélésen vagy megtévesztő helyi fiók létrehozásán keresztül
+## Gyanús megszemélyesítés RunAs visszaélésen vagy megtévesztő helyi fiók létrehozásán keresztül
 - **ID:** `T1656.yaml`
 - **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)

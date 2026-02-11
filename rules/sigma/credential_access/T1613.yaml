@@ -1,57 +1,82 @@
-title: Ultra-Pro High-Fidelity Container and Instance Discovery (T1613)
+title: Ultra-Pro High-Fidelity Container and Kubernetes Discovery
 id: 3ee9cbf8-48c8-4c7c-b5fa-39a4819ddfb6
 status: stable
 description: |
-    Detects systematic enumeration of containers and Kubernetes resources.
-    Focuses on identity self-interrogation (auth can-i), secret discovery, 
-    and anomalous process lineage, filtering out high-frequency monitoring and system probes.
-author: hota05
+  Detects high-fidelity enumeration of containers, Kubernetes resources, and secrets.
+  Focuses on identity self-interrogation (auth can-i), secret and config discovery, 
+  and anomalous process lineage. Filters out high-frequency monitoring and 
+  system probes to reduce false positives.
+
+author: hota05 
 date: 2026-02-04
+modified: 2026-02-11
 tags:
-    - attack.discovery
-    - attack.t1613
+  - attack.discovery
+  - attack.t1613
+
 logsource:
-    category: process_creation
-    product: linux
+  category: process_creation
+  product: linux
+
 detection:
-    selection_tools:
-        Image|endswith:
-            - '/kubectl'
-            - '/docker'
-            - '/crictl'
-            - '/nerdctl'
 
-    selection_commands:
-        CommandLine|contains:
-            - 'auth can-i'          
-            - 'get secrets'          
-            - 'describe pod'         
-            - 'inspect'            
-            - 'get nodes'        
+  selection_tools:
+    Image|endswith:
+      - '/kubectl'
+      - '/k3s'
+      - '/docker'
+      - '/crictl'
+      - '/nerdctl'
+      - '/oc'            
 
-    selection_suspicious_parent:
-        ParentImage|contains:
-            - '/www-data'
-            - '/nginx'
-            - '/httpd'
-            - '/php-fpm'
-            - '/python'             
-        username: 'root'
+  selection_commands:
+    CommandLine|contains:
+      - 'auth can-i'
+      - 'get secrets'
+      - 'describe pod'
+      - 'describe deployment'
+      - 'get nodes'
+      - 'get svc'
+      - 'get configmaps'
+      - 'inspect'
+      - 'logs'
+      - 'exec'
 
-    selection_automation:
-        CommandLine|contains:
-            - '--format json'
-            - '-o json'
-            - ' | jq'
-            - ' > '               
+  selection_suspicious_parent:
+    ParentImage|contains:
+      - '/www-data'
+      - '/nginx'
+      - '/httpd'
+      - '/php-fpm'
+      - '/python'
+      - '/node'
+    User|in: ['root', 'www-data', 'nginx']
 
-    filter_legit_ops:
-        Image|contains:
-            - '/usr/bin/kubelet'    
-            - '/datadog-agent'
-        CommandLine|contains:
-            - 'get pods --watch'    
-            - '--version'
+  selection_automation:
+    CommandLine|contains:
+      - '--format json'
+      - '-o json'
+      - ' | jq'
+      - ' > '
+      - '--all-namespaces'
 
-    condition: selection_tools and selection_commands and (selection_suspicious_parent or selection_automation) and not filter_legit_ops
+  filter_legit_ops:
+    Image|contains:
+      - '/usr/bin/kubelet'
+      - '/datadog-agent'
+      - '/prometheus'
+      - '/telegraf'
+      - '/rancher'
+    CommandLine|contains:
+      - 'get pods --watch'
+      - '--version'
+      - 'metrics-server'
+
+  condition: selection_tools and selection_commands and (selection_suspicious_parent or selection_automation) and not filter_legit_ops
+
+falsepositives:
+  - CI/CD pipelines legitimately querying k8s resources
+  - Monitoring agents querying pods/services/configmaps
+  - Admins using CLI tools interactively
+
 level: high

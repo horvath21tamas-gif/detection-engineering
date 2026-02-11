@@ -1,61 +1,144 @@
-title: Ultra-Pro High-Fidelity Defense Downgrade Attack (T1562.010)
+title: Defense Downgrade Attack (T1562.010)
 id: 7da28144-53ff-4dff-8a1b-a152503084d4
 status: stable
 description: |
-    Detects attempts to downgrade system defenses to bypass modern security controls. 
-    Targets PowerShell v2.0 engine forcing (AMSI bypass) and registry-based 
-    weakening of authentication and encryption protocols.
-author: hota05
-date: 2026-02-03
+  Detects deliberate security downgrade attempts targeting PowerShell engine
+  rollback (v2 AMSI bypass), NTLM authentication weakening, and encryption
+  protocol reduction. Focuses on downgrade intent combined with suspicious
+  execution context to reduce false positives from legitimate administration.
+author: hota05 
+date: 2026-02-11
 tags:
-    - attack.defense_evasion
-    - attack.t1562.010
+  - attack.defense_evasion
+  - attack.t1562.010
+  - attack.privilege_escalation
+
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_ps_downgrade:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-        CommandLine|contains:
-            - ' -version 2'
-            - ' -ver 2'
-            - ' -v 2'
-        CommandLine|contains:
-            - ' -encoded' 
-            - ' -enc'
-            - ' -e '
 
-    selection_registry_auth:
-        CommandLine|contains:
-            - 'LmCompatibilityLevel' 
-            - 'NtlmMinClientSec'     
-        CommandLine|contains:
-            - 'reg'
-            - 'Set-ItemProperty'
-        CommandLine|contains:
-            - ' 0'
-            - ' 1'
-            - ' 2'
+  selection_ps_binary:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\w3wp.exe'
-            - '\php-cgi.exe'
-            - '\mshta.exe'
+  selection_ps_v2_flag:
+    CommandLine|contains:
+      - ' -version 2'
+      - ' -ver 2'
+      - ' -v 2'
+      - ' -Version 2.0'
 
-    filter_trusted_admin:
-        - username: 'NT AUTHORITY\SYSTEM'
-          ParentImage|endswith: '\services.exe'
-        - CommandLine|contains:
-            - 'AzureAD' 
-            - 'Exchange'
-        - ParentImage|contains:
-            - '\Windows\System32\wbem\wmiprvse.exe' 
+  selection_ps_obfuscation:
+    CommandLine|contains:
+      - ' -enc'
+      - ' -encodedcommand'
+      - 'FromBase64String'
+      - 'IEX '
+      - 'Invoke-Expression'
 
-    condition: (selection_ps_downgrade or selection_registry_auth) and (selection_suspicious_parent or not filter_trusted_admin)
+  selection_ps_non_system_path:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+
+  selection_ntlm_registry_keys:
+    CommandLine|contains:
+      - 'LmCompatibilityLevel'
+      - 'NtlmMinClientSec'
+      - 'NtlmMinServerSec'
+      - 'RestrictSendingNTLMTraffic'
+
+  selection_ntlm_weaken_values:
+    CommandLine|re: '(?i).*(\s(0|1|2)\b).*'
+
+  selection_registry_tools:
+    Image|endswith:
+      - '\reg.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+
+  selection_tls_downgrade:
+    CommandLine|contains:
+      - 'SchUseStrongCrypto'
+      - 'SystemDefaultTlsVersions'
+      - 'SSL 2.0'
+      - 'SSL 3.0'
+
+  selection_disable_defender:
+    CommandLine|contains:
+      - 'DisableAntiSpyware'
+      - 'DisableRealtimeMonitoring'
+      - 'Set-MpPreference'
+
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\w3wp.exe'
+      - '\php-cgi.exe'
+      - '\mshta.exe'
+      - '\rundll32.exe'
+      - '\wmiprvse.exe'
+
+  selection_medium_or_high_integrity:
+    IntegrityLevel:
+      - Medium
+      - High
+      - System
+
+  filter_legit_admin_context:
+    username:
+      - 'NT AUTHORITY\SYSTEM'
+      - 'NT AUTHORITY\NETWORK SERVICE'
+
+  filter_legit_parent:
+    ParentImage|contains:
+      - '\services.exe'
+      - '\svchost.exe'
+      - '\CcmExec.exe'
+      - '\Program Files\Microsoft Monitoring Agent\'
+
+  filter_enterprise_keywords:
+    CommandLine|contains:
+      - 'AzureAD'
+      - 'Exchange'
+      - 'Intune'
+      - 'ConfigurationManager'
+
+  condition:
+    (
+      (selection_ps_binary
+        and selection_ps_v2_flag
+        and (selection_ps_obfuscation or selection_ps_non_system_path)) or
+      (selection_registry_tools
+        and selection_ntlm_registry_keys
+        and selection_ntlm_weaken_values) or
+      selection_tls_downgrade or
+      selection_disable_defender) and
+    selection_medium_or_high_integrity and
+    (selection_suspicious_parent
+      or selection_ps_non_system_path) and
+    not (filter_legit_admin_context
+      and filter_legit_parent
+      and filter_enterprise_keywords)
+
+fields:
+  - Image
+  - ParentImage
+  - CommandLine
+  - IntegrityLevel
+  - User
+  - Hashes
+
+falsepositives:
+  - Legacy application compatibility testing
+  - Security hardening rollback during maintenance
+  - Enterprise configuration management scripts
+  - Controlled red team exercises
+
 level: critical

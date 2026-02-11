@@ -8283,16 +8283,22 @@ parent process lineage, command-line entropy, and integrity levels.
 
 
 ---
-## Ultra-Pro High-Fidelity Archive via Custom Method (T1560.003)
+## Archive via Custom Method
 - **ID:** `T1560_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects custom data collection by monitoring for byte-level file access 
-combined with manual encoding (XOR, Base64) originating from 
-interactive shells or suspicious parent processes like web servers.
+- **Leírás:** Detects custom data collection and exfiltration attempts via byte-level 
+file access and manual encoding (XOR, Base64, bitwise operations).
+
+Focuses on:
+  - Read/Write of file bytes and memory streams
+  - Manual obfuscation or encoding routines
+  - Recursive file enumeration
+  - Suspicious parent processes (web servers, shells)
+  - Excludes trusted automation and telemetry tools
 
 
 #### 🚨 Response Playbook

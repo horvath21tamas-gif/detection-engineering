@@ -7861,16 +7861,22 @@ Abstammung des übergeordneten Prozesses, Befehlszeilen-Entropie und Integrität
 
 
 ---
-## Ultra-Pro High-Fidelity-Archiv über benutzerdefinierte Methode (T1560.003)
+## Archivieren Sie über eine benutzerdefinierte Methode
 - **ID:** `T1560_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die benutzerdefinierte Datenerfassung durch Überwachung des Dateizugriffs auf Byte-Ebene
-kombiniert mit manueller Kodierung (XOR, Base64) aus
-interaktive Shells oder verdächtige übergeordnete Prozesse wie Webserver.
+- **Beschreibung:** Erkennt benutzerdefinierte Datenerfassungs- und Exfiltrationsversuche auf Byte-Ebene
+Dateizugriff und manuelle Kodierung (XOR, Base64, bitweise Operationen).
+
+Konzentriert sich auf:
+- Lesen/Schreiben von Dateibytes und Speicherströmen
+- Manuelle Verschleierungs- oder Kodierungsroutinen
+- Rekursive Dateiaufzählung
+- Verdächtige übergeordnete Prozesse (Webserver, Shells)
+– Ausgenommen sind vertrauenswürdige Automatisierungs- und Telemetrietools
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

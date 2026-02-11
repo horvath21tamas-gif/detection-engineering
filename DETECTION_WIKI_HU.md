@@ -7861,16 +7861,22 @@ szülőfolyamat vonal, parancssori entrópia és integritási szintek.
 
 
 ---
-## Ultra-Pro High-Fidelity archívum egyéni módszerrel (T1560.003)
+## Archiválás egyéni módszerrel
 - **ID:** `T1560_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Egyéni adatgyűjtést észlel a bájtszintű fájlhozzáférés figyelésével
-innen származó kézi kódolással (XOR, Base64) kombinálva
-interaktív héjak vagy gyanús szülőfolyamatok, például webszerverek.
+- **Leírás:** Érzékeli az egyéni adatgyűjtési és kiszűrési kísérleteket bájtszinten keresztül
+fájlelérés és kézi kódolás (XOR, Base64, bitenkénti műveletek).
+
+A következőkre összpontosít:
+- Fájlbájtok és memóriafolyamok olvasása/írása
+- Kézi homályosítás vagy kódolási rutinok
+- Rekurzív fájl felsorolás
+- Gyanús szülőfolyamatok (webszerverek, parancsértelmezők)
+- Nem tartalmazza a megbízható automatizálási és telemetriai eszközöket
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

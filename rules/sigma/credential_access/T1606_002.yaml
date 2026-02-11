@@ -2,57 +2,129 @@ title: Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002)
 id: 2a149ccb-58bc-4107-ae01-e5fef593c3a3
 status: stable
 description: |
-    Detects unauthorized forging of web tokens (SAML, OAuth) by monitoring 
-    suspicious access to IDP signing keys, AD FS database extraction, and 
-    the use of specialized cloud-native forgery frameworks like Roadtools and AADInternals.
-author: hota05
+    Detects unauthorized web token forging activities (Golden SAML / OAuth token abuse) 
+    by correlating AD FS configuration extraction, signing certificate abuse, 
+    DPAPI masterkey access, and cloud token manipulation frameworks executed 
+    outside legitimate Identity Provider service context.
+
+author: hota05 
 date: 2026-02-04
+modified: 2026-02-11
 tags:
     - attack.credential_access
+    - attack.persistence
     - attack.t1606.002
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_tools:
-        CommandLine|contains:
-            - 'goldensaml'       
-            - 'asreproast'       
-            - 'Get-AADIntAccessToken' 
-            - 'roadtoken'      
-            - 'Invoke-SelfSignedCertificate' 
-            - 'Set-AdfsCertificate'
 
-    selection_adfs_abuse:
-        - CommandLine|contains:
-            - 'adfs::audittrust'  
-            - 'adfs::dump'        
-            - 'dpapi::masterkey'  
-        - Image|endswith:
-            - '\pypykatz.exe'
-            - '\mimikatz.exe'
+  selection_token_frameworks:
+    CommandLine|contains:
+      - 'goldensaml'
+      - 'roadtools'
+      - 'roadtoken'
+      - 'AADInternals'
+      - 'Get-AADIntAccessToken'
+      - 'New-AADIntSAMLToken'
+      - 'Invoke-AADInt'
+      - 'TokenSmith'
+      - 'SAMLSigner'
+      - 'OAuth2Client'
 
-    selection_untrusted_context:
-        Image|contains:
-            - '\Users\'
-            - '\AppData\'
-            - '\Temp\'
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\python.exe'
+  selection_adfs_dump:
+    CommandLine|contains:
+      - 'adfs::dump'
+      - 'adfs::audittrust'
+      - 'Export-AdfsCertificate'
+      - 'Get-AdfsProperties'
+      - 'Get-AdfsCertificate'
+      - 'Microsoft.IdentityServer.Service'
+      - 'ADFSSRV'
+      - '\\ADFS\\Configuration'
 
-    filter_official_idp:
-        Image|endswith:
-            - '\Microsoft.IdentityServer.ServiceHost.exe'
-            - '\miiserver.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+  selection_adfs_db_access:
+    CommandLine|contains:
+      - 'sqlcmd'
+      - 'SELECT * FROM IdentityServerPolicy'
+      - 'microsoft##wid'
+      - 'WID'
+      - 'Get-WmiObject -Namespace root\\ADFS'
 
-    filter_legit_admin:
-        CommandLine|contains:
-            - 'Connect-MgGraph'
-            - 'Connect-AzureAD'
-            - 'az login'
+  selection_signing_key_export:
+    CommandLine|contains:
+      - '-exportPFX'
+      - '-exportp12'
+      - 'Export-PfxCertificate'
+      - 'certutil -store my'
+      - 'certutil -exportPFX'
+      - 'certlm.msc'
+      - '.pfx'
+      - '.p12'
 
-    condition: (selection_tools or selection_adfs_abuse) and selection_untrusted_context and not (filter_official_idp or filter_legit_admin)
+  selection_dpapi_abuse:
+    CommandLine|contains:
+      - 'dpapi::masterkey'
+      - 'crypto::certificates'
+      - 'crypto::export'
+      - 'sekurlsa::dpapi'
+      - 'SharpDPAPI'
+
+  selection_untrusted_context:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wsmprovhost.exe'
+      - '\winword.exe'
+      - '\excel.exe'
+    IntegrityLevel: 'Medium'
+
+  selection_known_tools:
+    Image|endswith:
+      - '\mimikatz.exe'
+      - '\pypykatz.exe'
+      - '\Rubeus.exe'
+      - '\SharpDPAPI.exe'
+      - '\Certify.exe'
+
+  filter_legit_idp_service:
+    Image|endswith:
+      - '\Microsoft.IdentityServer.ServiceHost.exe'
+      - '\Microsoft.IdentityServer.Service.exe'
+      - '\miiserver.exe'
+    username: 'NT AUTHORITY\SYSTEM'
+
+  filter_legit_admin_activity:
+    CommandLine|contains:
+      - 'Connect-MgGraph'
+      - 'Connect-AzureAD'
+      - 'az login'
+      - 'Get-MgUser'
+      - 'Get-AzureADUser'
+    ParentImage|endswith:
+      - '\explorer.exe'
+
+  condition: (
+               selection_token_frameworks
+               or selection_adfs_dump
+               or selection_adfs_db_access
+               or selection_signing_key_export
+               or selection_dpapi_abuse
+               or selection_known_tools
+             )
+             and selection_untrusted_context
+             and not (filter_legit_idp_service or filter_legit_admin_activity)
+
+falsepositives:
+  - Legitimate AD FS certificate rotation performed manually
+  - Identity infrastructure troubleshooting by senior admins
+  - Controlled security testing
+
 level: critical

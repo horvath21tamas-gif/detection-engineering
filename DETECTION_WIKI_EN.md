@@ -9588,16 +9588,16 @@ with a malicious one due to insecure directory permissions.
 
 
 ---
-## Exploit-Grade KernelCallbackTable Manipulation via Remote Memory Write
+## Exploit-Grade KernelCallbackTable Manipulation
 - **ID:** `T1574_013.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects remote memory write operations into GUI processes which are prerequisites 
-for KernelCallbackTable hijacking. This technique is often used for process 
-injection that evades standard hook-based monitoring.
+- **Leírás:** Detects suspicious remote memory write operations targeting GUI processes, 
+which are indicative of KernelCallbackTable hijacking attempts. This technique 
+is commonly used for stealthy process injection that bypasses traditional hook-based monitoring.
 
 
 #### 🚨 Response Playbook

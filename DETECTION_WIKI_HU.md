@@ -9095,16 +9095,16 @@ rosszindulatúval a nem biztonságos címtárengedélyek miatt.
 
 
 ---
-## Exploit-grade KernelCallbackTable manipuláció távoli memóriaíráson keresztül
+## Exploit-grade KernelCallbackTable Manipulation
 - **ID:** `T1574_013.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a távoli memória írási műveleteit a GUI folyamatokba, amelyek előfeltételek
-KernelCallbackTable-eltérítéshez.Ezt a technikát gyakran használják a folyamatokhoz
-befecskendezés, amely elkerüli a standard horog alapú felügyeletet.
+- **Leírás:** Érzékeli a GUI-folyamatokat célzó gyanús távoli memória írási műveleteket,
+amelyek a KernelCallbackTable-eltérítési kísérletekre utalnak.Ez a technika
+általában lopakodó folyamatinjektáláshoz használják, amely megkerüli a hagyományos horog alapú felügyeletet.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

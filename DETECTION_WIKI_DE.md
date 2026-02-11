@@ -9095,16 +9095,16 @@ mit einem böswilligen aufgrund unsicherer Verzeichnisberechtigungen.
 
 
 ---
-## Exploit-Grade-KernelCallbackTable-Manipulation über Remote-Speicher-Schreiben
+## Exploit-fähige KernelCallbackTable-Manipulation
 - **ID:** `T1574_013.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Remote-Speicherschreibvorgänge in GUI-Prozesse, die Voraussetzung sind
-für KernelCallbackTable-Hijacking.Diese Technik wird häufig für Prozesse verwendet
-Injektion, die der standardmäßigen Hook-basierten Überwachung entgeht.
+- **Beschreibung:** Erkennt verdächtige Remote-Speicherschreibvorgänge, die auf GUI-Prozesse abzielen.
+die auf KernelCallbackTable-Hijacking-Versuche hinweisen.Diese Technik
+wird häufig für die heimliche Prozessinjektion verwendet, die die herkömmliche Hook-basierte Überwachung umgeht.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

@@ -1,46 +1,76 @@
-title: Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002)
+title: Domain Generation Algorithm (DGA) Detection (T1568.002)
 id: 63070386-65d0-4c3e-a15d-ddae36d17664
 status: stable
 description: |
-    Detects DGA activity by monitoring for rapid, programmatic DNS resolution attempts, 
-    high-entropy domain patterns in command lines, and the suppression of DNS errors 
-    from non-standard processes.
-author: hota05
-date: 2026-02-09
+  Detects programmatic Domain Generation Algorithm (DGA) activity by monitoring:
+  1. Rapid DNS resolution attempts via API or CLI
+  2. High-entropy or suspicious domain patterns in command lines
+  3. Suppression of DNS errors to evade detection.
+  Filters out legitimate software, cloud automation, and internal infrastructure traffic.
+author: hota05 
+date: 2026-02-11
 tags:
-    - attack.command_and_control
-    - attack.t1568.002
+  - attack.command_and_control
+  - attack.t1568.002
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_api_logic:
-        CommandLine|contains:
-            - 'Resolve-DnsName'           
-            - '[System.Net.Dns]::'         
-            - 'ErrorAction SilentlyContinue' 
-            - 'ErrorAction 0'              
-            - 'nslookup'                   
+  selection_api_logic:
+    CommandLine|contains:
+      - 'Resolve-DnsName'
+      - '[System.Net.Dns]::'
+      - 'ErrorAction SilentlyContinue'
+      - 'ErrorAction 0'
+      - 'nslookup'
+      - '-q'
 
-    selection_dga_regex:
-        CommandLine|re: '(?i).*[a-z0-9]{18,}\.(top|xyz|pw|icu|bid|monster|live|ga|tk|cf|ml|buzz|online).*'
+  selection_dga_regex:
+    CommandLine|re: '(?i).*[a-z0-9]{12,}\.(top|xyz|pw|icu|bid|monster|live|ga|tk|cf|ml|buzz|online|club|site).*'
 
-    selection_procs:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
-            - '\rundll32.exe'
-            - '\mshta.exe'
+  selection_procs:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\rundll32.exe'
+      - '\mshta.exe'
+      - '\certutil.exe'
+      - '\bitsadmin.exe'
 
-    filter_legit_infra:
-        - CommandLine|contains:
-            - '\Program Files\'
-            - 'Microsoft\Azure'          
-            - 'internal.corp'              
-            - 'update.microsoft.com'
-        - username: 'NT AUTHORITY\SYSTEM'      
+  filter_legit_infra:
+    - CommandLine|contains:
+        - '\Program Files\'
+        - 'Microsoft\Azure'
+        - 'internal.corp'
+        - 'update.microsoft.com'
+        - 'chocolatey'
+        - 'acme-challenge'
+        - '_vlmcs._tcp'
+    - username: 'NT AUTHORITY\SYSTEM'
+    - ParentImage|endswith:
+        - '\services.exe'
+        - '\explorer.exe'
 
-    condition: (selection_api_logic and selection_procs) or (selection_dga_regex and selection_procs) and not filter_legit_infra
+  condition: (selection_api_logic and selection_procs) or (selection_dga_regex and selection_procs) and not filter_legit_infra
+
+fields:
+  - Time
+  - SourceImage
+  - ParentImage
+  - CommandLine
+  - ProcessId
+  - SourceUsername
+  - DestinationDomain
+  - DestinationIp
+
+falsepositives:
+  - Internal domain enumeration and monitoring scripts
+  - DNS-based license verification (KMS, VLANS)
+  - Package managers (Chocolatey, NuGet)
+  - ACME / Let's Encrypt domain verification
+  - Standard cloud automation scripts
+
 level: critical

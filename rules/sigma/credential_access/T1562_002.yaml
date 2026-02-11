@@ -1,43 +1,90 @@
-title: Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002)
+title: Windows Event Log Service Impairment
 id: 54ba6fb9-c66e-448c-83d4-4a15bbec2b87
 status: stable
 description: |
-    Detects targeted attempts to disable or impair the Windows Event Log service. 
-    Focuses on service-dependency sabotage, registry-based channel disabling, 
-    and stealthy wevtutil usage by non-system processes.
-author: hota05
-date: 2026-02-03
+    Detects high-confidence attempts to disable or impair Windows Event Logging.
+
+    Coverage includes:
+      - wevtutil channel disabling
+      - EventLog service stop/disable attempts
+      - Registry-based channel or service modification
+      - Service dependency tampering
+
+    Designed to reduce false positives in enterprise environments.
+
+author: hota05 
+date: 2026-02-11
 tags:
     - attack.defense_evasion
     - attack.t1562.002
+    - attack.t1112
+    - attack.t1543
+
 logsource:
     product: windows
     category: process_creation
+
 detection:
-    selection_wevtutil_stealth:
+
+    selection_wevtutil_disable:
         Image|endswith: '\wevtutil.exe'
+        CommandLine|contains:
+            - ' sl '
+            - ' set-log '
+        CommandLine|contains:
+            - '/e:false'
+
+    selection_wevtutil_clear:
+        Image|endswith: '\wevtutil.exe'
+        CommandLine|contains:
+            - ' cl '
+            - ' clear-log'
+
+    selection_sc_disable:
+        Image|endswith:
+            - '\sc.exe'
         CommandLine|contains|all:
-            - ' /e:false'
-            - ' /q'
+            - 'config'
+            - 'eventlog'
+            - 'start='
+            - 'disabled'
 
-    selection_service_sabotage:
+    selection_net_stop:
+        Image|endswith:
+            - '\net.exe'
+            - '\net1.exe'
         CommandLine|contains:
-            - 'sc  config eventlog start= disabled'
-            - 'sc.exe  config eventlog start= disabled'
-            - 'net stop "event log"'
-            - 'net stop eventlog'
-            - 'Set-Service -Name eventlog -Status Stopped'
+            - 'stop'
+            - 'eventlog'
 
-    selection_registry_kill:
+    selection_powershell_stop:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
         CommandLine|contains:
+            - 'Set-Service'
+            - 'eventlog'
+            - 'Stopped'
+
+    selection_registry_service_disable:
+        Image|endswith: '\reg.exe'
+        CommandLine|contains|all:
+            - 'add'
+            - 'HKLM\SYSTEM\CurrentControlSet\Services\EventLog'
+            - 'Start'
+        CommandLine|contains:
+            - '0x4'
+            - ' 4'
+
+    selection_registry_channel_disable:
+        Image|endswith: '\reg.exe'
+        CommandLine|contains|all:
+            - 'add'
             - '\Services\EventLog\'
-        CommandLine|contains:
-            - 'reg add'
-            - 'reg.exe add'
-        CommandLine|contains:
             - 'Enabled'
         CommandLine|contains:
-            - '0x0' 
+            - '0x0'
+            - ' 0'
 
     selection_suspicious_parent:
         ParentImage|endswith:
@@ -47,17 +94,38 @@ detection:
             - '\chrome.exe'
             - '\msedge.exe'
             - '\w3wp.exe'
-            - '\powershell.exe'
+            - '\mshta.exe'
+            - '\rundll32.exe'
 
-    filter_trusted_system_context:
-        - username: 'NT AUTHORITY\SYSTEM'
-          ParentImage|endswith: 
+    filter_system_service_context:
+        User|startswith: 'NT AUTHORITY'
+        ParentImage|endswith:
             - '\services.exe'
             - '\svchost.exe'
-            - '\msiexec.exe' 
-        - CommandLine|contains:
-            - '\Program Files\'
+            - '\msiexec.exe'
+
+    filter_known_management_tools:
+        ParentImage|contains:
+            - '\ConfigurationManager\'
+            - '\IntuneManagementExtension\'
+            - '\PDQDeploy\'
+            - '\ManageEngine\'
+
+    filter_trustedinstaller:
+        CommandLine|contains:
             - 'TrustedInstaller'
 
-    condition: (selection_wevtutil_stealth or selection_service_sabotage or selection_registry_kill) and (selection_suspicious_parent or not filter_trusted_system_context)
+    condition: (selection_wevtutil_disable
+                 or selection_wevtutil_clear
+                 or selection_sc_disable
+                 or selection_net_stop
+                 or selection_powershell_stop
+                 or selection_registry_service_disable
+                 or selection_registry_channel_disable)
+               and
+               (selection_suspicious_parent
+                    or not (filter_system_service_context
+                         or filter_known_management_tools
+                         or filter_trustedinstaller))
+
 level: critical

@@ -8035,14 +8035,14 @@ felhő-hírnév és telemetria végpontok.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Firewall károsodás (T1562.007)
+## Cloud Firewall károsodás (T1562.007)
 - **ID:** `T1562_007.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a felhőalapú biztonsági csoportok és tűzfalak jogosulatlan vagy veszélyes módosításait.
-A „Bármilyen” szabályokra (0.0.0.0/0), a root felhasználói tevékenységre és a módosításokra összpontosít
-nem szabványos adminisztrációs eszközökből vagy IP-kből származik.
+- **Leírás:** Érzékeli a felhőtűzfalak és biztonsági csoportok magas kockázatú módosításait
+ami forrásokat tehet ki az internetnek vagy gyengítheti a szegmentációt.
+A BÁRMILYEN/BÁRMILYEN szabályokra, a privilegizált port kitettségre és a rendellenes identitásokra összpontosít.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

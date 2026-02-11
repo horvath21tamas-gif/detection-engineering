@@ -8035,14 +8035,14 @@ Cloud-Reputation- und Telemetrie-Endpunkte.
 
 
 ---
-## Beeinträchtigung der Ultra-Pro High-Fidelity Cloud Firewall (T1562.007)
+## Beeinträchtigung der Cloud-Firewall (T1562.007)
 - **ID:** `T1562_007.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt nicht autorisierte oder gefährliche Änderungen an Cloud-Sicherheitsgruppen und Firewalls.
-Konzentriert sich auf „Any-Any“-Regeln (0.0.0.0/0), Root-Benutzeraktivität und Änderungen
-von nicht standardmäßigen Verwaltungstools oder IPs stammen.
+- **Beschreibung:** Erkennt risikoreiche Änderungen an Cloud-Firewalls und Sicherheitsgruppen
+Dadurch können Ressourcen dem Internet ausgesetzt oder die Segmentierung geschwächt werden.
+Konzentriert sich auf ANY/ANY-Regeln, die Offenlegung privilegierter Ports und anomale Identitäten.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

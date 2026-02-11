@@ -8467,14 +8467,14 @@ cloud-reputation and telemetry endpoints.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007)
+## Cloud Firewall Impairment (T1562.007)
 - **ID:** `T1562_007.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects unauthorized or dangerous modifications to cloud security groups and firewalls.
-Focuses on "Any-Any" rules (0.0.0.0/0), Root user activity, and modifications 
-originating from non-standard administrative tools or IPs.
+- **Leírás:** Detects high-risk modifications to cloud firewalls and security groups
+that may expose resources to the internet or weaken segmentation.
+Focuses on ANY/ANY rules, privileged port exposure, and anomalous identities.
 
 
 #### 🚨 Response Playbook

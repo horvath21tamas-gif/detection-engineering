@@ -1,61 +1,85 @@
-title: Ultra-Pro High-Fidelity Hidden File System Manipulation (T1564.005)
+title: Hidden File System Manipulation (T1564.005)
 id: 72f58c9b-b325-4b60-b2a2-306064e4213d
 status: stable
 description: |
-    Detects suspicious mounting or creation of virtual disk images (VHD, VHDX, ISO) 
-    initiated by untrusted parent processes or targeting non-standard paths, 
-    often used to bypass MOTW or hide malicious payloads.
+  Detects suspicious mounting, creation, or manipulation of virtual disk images 
+  (VHD, VHDX, ISO) by monitoring CLI commands from untrusted parent processes or 
+  non-standard paths. This technique is commonly used to bypass Mark-of-the-Web (MOTW) 
+  restrictions or to hide malicious payloads.
 author: hota05
-date: 2026-02-03
+date: 2026-02-11
 tags:
-    - attack.defense_evasion
-    - attack.t1564.005
+  - attack.defense_evasion
+  - attack.t1564.005
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\diskpart.exe'
-            - '\powershell.exe'
-            - '\pwsh.exe'
-        - CommandLine|contains:
-            - 'Mount-VHD'
-            - 'Mount-DiskImage'
-            - 'attach vdisk'
-            - 'create vdisk'
+  selection_tools:
+    Image|endswith:
+      - '\diskpart.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\mountvol.exe'
+      - '\vhdmount.exe'
+    CommandLine|contains:
+      - 'Mount-VHD'
+      - 'Mount-DiskImage'
+      - 'attach vdisk'
+      - 'create vdisk'
+      - 'Mount-WindowsImage'
+      - 'Mount-Disk'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
-            - '\mshta.exe'
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+      - '\powershell.exe'
+      - '\cmd.exe'
 
-    selection_suspicious_source:
-        CommandLine|contains:
-            - '\Users\'
-            - '\Downloads\'
-            - '\Temp\'
-            - '\AppData\'
-            - '.iso'
-            - '.vhd'
-            - '.vhdx'
+  selection_suspicious_source:
+    CommandLine|contains:
+      - '\Users\'
+      - '\Downloads\'
+      - '\Temp\'
+      - '\AppData\'
+      - '.iso'
+      - '.vhd'
+      - '.vhdx'
+      - '.img'
 
-    filter_trusted_automation:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|contains:
-            - '\Windows\System32\svchost.exe'
-            - '\Program Files\Hyper-V\'
-            - '\Program Files\Microsoft Visual Studio\'
-            - '\CcmExec.exe'
-        - CommandLine|contains:
-            - 'Program Files'
-            - 'WindowsImageBackup'
+  filter_trusted_automation:
+    - username: 'NT AUTHORITY\SYSTEM'
+    - ParentImage|contains:
+        - '\Windows\System32\svchost.exe'
+        - '\Program Files\Hyper-V\'
+        - '\Program Files\Microsoft Visual Studio\'
+        - '\CcmExec.exe'
+    - CommandLine|contains:
+        - 'Program Files'
+        - 'WindowsImageBackup'
+        - 'WinRE'
+        - 'System Center'
 
-    condition: selection_tools and (selection_suspicious_parent or (selection_suspicious_source and not filter_trusted_automation))
+  condition: selection_tools and (selection_suspicious_parent or (selection_suspicious_source and not filter_trusted_automation))
+
+fields:
+  - Time
+  - SourceImage
+  - ParentImage
+  - CommandLine
+  - SourceUsername
+
+falsepositives:
+  - Legitimate mounting of VHD/ISO by system or Hyper-V processes
+  - Backup and restore operations
+  - Developer or automation scripts for testing images
+
 level: high

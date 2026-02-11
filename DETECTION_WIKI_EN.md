@@ -11470,12 +11470,12 @@ host-level resource sharing, and non-standard image sources.
 ---
 ## Ultra-Pro Container Escape & Host Access (T1611)
 - **ID:** `T1611.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects unauthorized attempts to bypass container isolation and access the 
-underlying host. Targets non-standard privileged executions and high-risk 
-volume mounts, while filtering out known cluster infrastructure components.
+- **Leírás:** Detects unauthorized container escape attempts and host access. Focuses on 
+non-standard privileged executions, dangerous mounts, and unconfined security 
+contexts, while filtering out legitimate cluster infrastructure components.
 
 
 #### 🚨 Response Playbook
@@ -11487,12 +11487,13 @@ volume mounts, while filtering out known cluster infrastructure components.
 ---
 ## Ultra-Pro Stealthy Local Image Build (T1612)
 - **ID:** `T1612.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects high-fidelity local container image builds by identifying builds 
-initiated by non-CI/CD users or suspicious parent processes like web servers, 
-indicating post-exploitation image creation to evade registry scans.
+- **Leírás:** Detects high-fidelity local container image builds initiated by suspicious 
+users or processes, focusing on post-exploitation image creation and 
+evasion of registry scanning. Filters out trusted CI/CD pipelines and 
+known build systems.
 
 
 #### 🚨 Response Playbook
@@ -11502,14 +11503,15 @@ indicating post-exploitation image creation to evade registry scans.
 
 
 ---
-## Ultra-Pro High-Fidelity Container and Instance Discovery (T1613)
+## Ultra-Pro High-Fidelity Container and Kubernetes Discovery
 - **ID:** `T1613.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects systematic enumeration of containers and Kubernetes resources.
-Focuses on identity self-interrogation (auth can-i), secret discovery, 
-and anomalous process lineage, filtering out high-frequency monitoring and system probes.
+- **Leírás:** Detects high-fidelity enumeration of containers, Kubernetes resources, and secrets.
+Focuses on identity self-interrogation (auth can-i), secret and config discovery, 
+and anomalous process lineage. Filters out high-frequency monitoring and 
+system probes to reduce false positives.
 
 
 #### 🚨 Response Playbook

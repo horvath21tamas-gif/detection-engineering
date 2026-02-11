@@ -10865,12 +10865,12 @@ Ressourcenfreigabe auf Hostebene und nicht standardmäßige Bildquellen.
 ---
 ## Ultra-Pro Container-Flucht und Host-Zugriff (T1611)
 - **ID:** `T1611.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt unbefugte Versuche, die Containerisolation zu umgehen und auf die zuzugreifen
-zugrunde liegender Host.Zielt auf nicht standardmäßige privilegierte und risikoreiche Ausführungen ab
-Volume-Mounts, während bekannte Cluster-Infrastrukturkomponenten herausgefiltert werden.
+- **Beschreibung:** Erkennt unbefugte Container-Escape-Versuche und Host-Zugriffe.Konzentriert sich auf
+nicht standardmäßige privilegierte Ausführungen, gefährliche Mounts und uneingeschränkte Sicherheit
+Kontexte, während legitime Cluster-Infrastrukturkomponenten herausgefiltert werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -10881,12 +10881,13 @@ Volume-Mounts, während bekannte Cluster-Infrastrukturkomponenten herausgefilter
 ---
 ## Ultra-Pro Stealthy Local Image Build (T1612)
 - **ID:** `T1612.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt lokale Container-Image-Builds mit hoher Wiedergabetreue durch Identifizierung von Builds
-initiiert von Nicht-CI/CD-Benutzern oder verdächtigen übergeordneten Prozessen wie Webservern,
-Dies weist darauf hin, dass nach der Ausnutzung ein Image erstellt wird, um Registrierungsscans zu umgehen.
+- **Beschreibung:** Erkennt lokale Container-Image-Builds mit hoher Wiedergabetreue, die von verdächtigen Personen initiiert wurden
+Benutzer oder Prozesse, wobei der Schwerpunkt auf der Erstellung von Bildern nach der Nutzung liegt
+Umgehung des Registry-Scans.Filtert vertrauenswürdige CI/CD-Pipelines heraus und
+bekannte Build-Systeme.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -10895,14 +10896,15 @@ Dies weist darauf hin, dass nach der Ausnutzung ein Image erstellt wird, um Regi
 
 
 ---
-## Ultra-Pro High-Fidelity-Container- und Instanzerkennung (T1613)
+## Ultraprofessioneller High-Fidelity-Container und Kubernetes Discovery
 - **ID:** `T1613.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt die systematische Aufzählung von Containern und Kubernetes-Ressourcen.
-Konzentriert sich auf die Selbstbefragung der Identität (auth can-i), die Entdeckung von Geheimnissen,
-und anomale Prozessabstammung, indem Hochfrequenzüberwachung und Systemsonden herausgefiltert werden.
+- **Beschreibung:** Erkennt eine hochpräzise Aufzählung von Containern, Kubernetes-Ressourcen und Geheimnissen.
+Konzentriert sich auf die Selbstabfrage der Identität (auth can-i), die Entdeckung von Geheimnissen und Konfigurationen,
+und anomale Prozesslinie.Filtert Hochfrequenzüberwachung heraus und
+Systemsonden, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

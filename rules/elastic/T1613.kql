@@ -1,1 +1,1 @@
-(Image:(*\/kubectl OR *\/docker OR *\/crictl OR *\/nerdctl)) AND (CommandLine:(*auth\ can\-i* OR *get\ secrets* OR *describe\ pod* OR *inspect* OR *get\ nodes*)) AND (((ParentImage:(*\/www\-data* OR *\/nginx* OR *\/httpd* OR *\/php\-fpm* OR *\/python*)) AND username:root) OR (CommandLine:(*\-\-format\ json* OR *\-o\ json* OR *\ \|\ jq* OR *\ \>\ *))) AND (NOT ((Image:(*\/usr\/bin\/kubelet* OR *\/datadog\-agent*)) AND (CommandLine:(*get\ pods\ \-\-watch* OR *\-\-version*))))
+conversion_failed

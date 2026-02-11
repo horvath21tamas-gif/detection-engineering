@@ -10865,12 +10865,12 @@ gazdagép szintű erőforrás-megosztás és nem szabványos képforrások.
 ---
 ## Ultra-Pro Container Escape & Host Access (T1611)
 - **ID:** `T1611.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a jogosulatlan kísérleteket a konténer elszigetelésének megkerülésére és a
-mögöttes gazda.A nem szabványos privilegizált végrehajtásokat és a magas kockázatú végrehajtásokat célozza meg
-kötet-csatlakozások, miközben kiszűri az ismert fürt infrastruktúra-összetevőket.
+- **Leírás:** Érzékeli a jogosulatlan konténer-szökési kísérleteket és a gazdagép-hozzáférést.-ra összpontosít
+nem szabványos privilegizált végrehajtások, veszélyes rögzítések és korlátlan biztonság
+kontextusokban, miközben kiszűri a legitim fürtinfrastruktúra-összetevőket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -10881,12 +10881,13 @@ kötet-csatlakozások, miközben kiszűri az ismert fürt infrastruktúra-össze
 ---
 ## Ultra-Pro Stealthy Local Image Build (T1612)
 - **ID:** `T1612.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** A buildek azonosításával észleli a nagy pontosságú helyi tárolókép-összeállításokat
-nem CI/CD felhasználók vagy gyanús szülői folyamatok, például webszerverek által kezdeményezett,
-jelzi a kizsákmányolás utáni képalkotást a rendszerleíró adatbázis vizsgálatának elkerülése érdekében.
+- **Leírás:** Érzékeli a gyanús személyek által kezdeményezett nagy pontosságú helyi tárolókép-felépítéseket
+felhasználók vagy folyamatok, a kizsákmányolás utáni képalkotásra összpontosítva és
+a rendszerleíró adatbázis ellenőrzésének kijátszása.Kiszűri a megbízható CI/CD csővezetékeket és
+ismert build rendszerek.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -10895,14 +10896,15 @@ jelzi a kizsákmányolás utáni képalkotást a rendszerleíró adatbázis vizs
 
 
 ---
-## Ultra-Pro High-Fidelity konténer és példányfelderítés (T1613)
+## Ultra-Pro High-Fidelity tároló és Kubernetes Discovery
 - **ID:** `T1613.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a tárolók és a Kubernetes-erőforrások szisztematikus felsorolását.
-A személyazonosság önkihallgatására (auth can-i), a titkos felfedezésre összpontosít,
-és rendellenes folyamatvonal, amely kiszűri a nagyfrekvenciás monitorozást és a rendszerszondákat.
+- **Leírás:** Érzékeli a tárolók, Kubernetes-erőforrások és titkok nagy pontosságú felsorolását.
+A személyazonosság önlekérdezésére (auth can-i), a titok- és konfigurációfeltárásra összpontosít,
+és rendellenes folyamatvonal.Kiszűri a nagyfrekvenciás monitorozást és
+rendszerszondák a téves pozitívumok csökkentésére.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -11027,7 +11029,7 @@ A személyazonosság önkihallgatására (auth can-i), a titkos felfedezésre ö
 - **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Parancssori segédprogramok segítségével észleli a macOS LaunchAgent vagy LaunchDaemon tulajdonságlista-fájlok gyanús módosítását vagy létrehozását.A tartóssággal kapcsolatos kulcsokra és a rendellenes végrehajtási kontextusokra összpontosít, kiszűri a legitim Apple rendszerfolyamatokat.
+- **Leírás:** Parancssori segédprogramok segítségével észleli a macOS LaunchAgent vagy LaunchDaemon tulajdonságlista-fájlok gyanús módosítását vagy létrehozását.A tartóssággal kapcsolatos kulcsokra és a szokatlan végrehajtási kontextusokra összpontosít, szűrve a legitim Apple rendszerfolyamatokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -8611,16 +8611,19 @@ analyzing parent process integrity and command-line entropy.
 
 
 ---
-## Ultra-Pro High-Fidelity RDP Session Hijacking (T1563.002)
+## RDP Session Hijacking (T1563.002)
 - **ID:** `T1563_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized RDP session hijacking and shadowing. Focuses on 
-the specific combination of SYSTEM-level execution, anomalous parent 
-processes (shells, lateral movement tools), and 'no-consent' parameters.
+- **Leírás:** Detects unauthorized RDP session hijacking and shadowing attempts.
+High-fidelity detection leverages:
+- SYSTEM-level execution context
+- Anomalous parent processes (shells, lateral movement tools)
+- 'No-consent' shadowing parameters
+Excludes legitimate RDP and remote support tools.
 
 
 #### 🚨 Response Playbook

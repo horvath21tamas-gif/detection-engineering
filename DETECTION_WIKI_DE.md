@@ -8171,16 +8171,19 @@ Analyse der Integrität des übergeordneten Prozesses und der Befehlszeilenentro
 
 
 ---
-## Ultra-Pro High-Fidelity RDP Session Hijacking (T1563.002)
+## RDP-Sitzungs-Hijacking (T1563.002)
 - **ID:** `T1563_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugtes RDP-Sitzungs-Hijacking und Shadowing.Konzentriert sich auf
-die spezifische Kombination aus Ausführung auf SYSTEM-Ebene und anomalem übergeordnetem Element
-Prozesse (Shells, laterale Bewegungswerkzeuge) und „No-Consent“-Parameter.
+- **Beschreibung:** Erkennt unbefugte RDP-Sitzungs-Hijacking- und Shadowing-Versuche.
+Vorteile der High-Fidelity-Erkennung:
+- Ausführungskontext auf SYSTEM-Ebene
+- Anomale übergeordnete Prozesse (Shells, laterale Bewegungswerkzeuge)
+- „No-Consent“-Shadowing-Parameter
+Ausgenommen sind legitime RDP- und Remote-Support-Tools.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -8171,16 +8171,19 @@ a szülőfolyamatok integritásának és a parancssori entrópiának elemzése.
 
 
 ---
-## Ultra-Pro High-Fidelity RDP munkamenet-eltérítés (T1563.002)
+## RDP munkamenet-eltérítés (T1563.002)
 - **ID:** `T1563_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a jogosulatlan RDP-munkamenet-eltérítést és árnyékolást.-ra összpontosít
-a RENDSZER szintű végrehajtás sajátos kombinációja, rendellenes szülő
-folyamatok (héjak, oldalirányú mozgatási eszközök) és a „beleegyezés nélküli” paraméterek.
+- **Leírás:** Érzékeli a jogosulatlan RDP-munkamenet-eltérítési és árnyékolási kísérleteket.
+A nagy pontosságú észlelési lehetőségek:
+- RENDSZER szintű végrehajtási környezet
+- Rendellenes szülői folyamatok (héjak, oldalirányú mozgási eszközök)
+- 'No-consent' árnyékolási paraméterek
+Nem tartalmazza a törvényes RDP és távoli támogatási eszközöket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

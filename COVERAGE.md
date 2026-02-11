@@ -480,24 +480,24 @@
 | T1566.002 | CRITICAL | High-Fidelity Browser-Originating Payload Execution |
 | T1566.003 | CRITICAL | High-Fidelity Process Spawn from Business Communication Service |
 | T1566.004 | HIGH | High-Fidelity Detection of Post-Vishing Remote Tool Execution |
-| T1567 | CRITICAL | Ultra-Pro High-Fidelity Web Service Exfiltration (T1567) |
-| T1567.001 | CRITICAL | Ultra-Pro High-Fidelity Code Repo Exfil (T1567.001) |
-| T1567.002 | CRITICAL | Ultra-Pro High-Fidelity Cloud Storage Exfil (T1567.002) |
-| T1567.003 | CRITICAL | Ultra-Pro High-Fidelity Video Hosting Exfil (T1567.003) |
-| T1567.004 | CRITICAL | Ultra-Pro High-Fidelity Text Storage Exfil (T1567.004) |
-| T1568 | HIGH | Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568) |
-| T1568.001 | CRITICAL | Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001) |
-| T1568.002 | CRITICAL | Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568), Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002) |
+| T1567 | CRITICAL | Web Service Exfiltration (T1567) |
+| T1567.001 | CRITICAL | Code Repository Exfil (T1567.001) |
+| T1567.002 | CRITICAL | Cloud Storage Exfil (T1567.002) |
+| T1567.003 | CRITICAL | Video Hosting Exfil (T1567.003) |
+| T1567.004 | CRITICAL | Text Storage Exfil (T1567.004) |
+| T1568 | HIGH | Dynamic Resolution & DGA (T1568) |
+| T1568.001 | CRITICAL | Fast Flux & DNS Cache Evasion (T1568.001) |
+| T1568.002 | CRITICAL | Dynamic Resolution & DGA (T1568), Domain Generation Algorithm (DGA) Detection (T1568.002) |
 | T1568.003 | CRITICAL | DNS Calculation & Extraction (T1568.003) |
 | T1569 | HIGH | High-Fidelity System Service Execution Detection |
 | T1569.001 | CRITICAL | High-Fidelity Launch Daemon Persistence Detection |
 | T1569.002 | HIGH | High-Fidelity System Service Execution Detection, High-Fidelity System Service Execution Detection (T1569.002) |
-| T1570 | HIGH | Ultra-Pro High-Fidelity Lateral Tool Transfer (T1570) |
+| T1570 | HIGH | Lateral Tool Transfer (T1570) |
 | T1571 | CRITICAL | Non-Standard Port C2 (T1571) |
-| T1572 | CRITICAL | Ultra-Pro High-Fidelity Protocol Tunneling Detection (T1571) |
-| T1573 | CRITICAL | Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573) |
-| T1573.001 | CRITICAL | Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573), Ultra-Pro High-Fidelity Symmetric Encryption C2 Channel (T1573.001) |
-| T1573.002 | CRITICAL | Asymmetric Encryption C2 (T1573.002), Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573) |
+| T1572 | CRITICAL | Protocol Tunneling Detection (T1572) |
+| T1573 | CRITICAL | Encrypted C2 Channel (T1573) |
+| T1573.001 | CRITICAL | Encrypted C2 Channel (T1573), Symmetric Encryption C2 Channel (T1573.001) |
+| T1573.002 | CRITICAL | Asymmetric Encryption C2 (T1573.002), Encrypted C2 Channel (T1573) |
 | T1574 | CRITICAL | Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574) |
 | T1574.001 | CRITICAL | Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574), Ultra-Pro DLL Search Order Hijacking Detection (T1574.001) |
 | T1574.002 | CRITICAL | Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002), Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574) |

@@ -474,23 +474,23 @@
 - [High-Fidelity böngészőből származó hasznos teher végrehajtás](#high-fidelity-böngészőből-származó-hasznos-teher-végrehajtás)
 - [High-Fidelity Process Spawn az üzleti kommunikációs szolgáltatásból](#high-fidelity-process-spawn-az-üzleti-kommunikációs-szolgáltatásból)
 - [A látás utáni távoli eszköz-végrehajtás nagy pontosságú észlelése](#a-látás-utáni-távoli-eszköz-végrehajtás-nagy-pontosságú-észlelése)
-- [Ultra-Pro High-Fidelity Web Service Exfiltration (T1567)](#ultra-pro-high-fidelity-web-service-exfiltration-(t1567))
-- [Ultra-Pro High-Fidelity Code Repo Exfil (T1567.001)](#ultra-pro-high-fidelity-code-repo-exfil-(t1567001))
-- [Ultra-Pro High-Fidelity Cloud Storage Exfil (T1567.002)](#ultra-pro-high-fidelity-cloud-storage-exfil-(t1567002))
-- [Ultra-Pro High-Fidelity Video Hosting Exfil (T1567.003)](#ultra-pro-high-fidelity-video-hosting-exfil-(t1567003))
-- [Ultra-Pro High-Fidelity Text Storage Exfil (T1567.004)](#ultra-pro-high-fidelity-text-storage-exfil-(t1567004))
-- [Ultra-Pro High-Fidelity dinamikus felbontás és DGA (T1568)](#ultra-pro-high-fidelity-dinamikus-felbontás-és-dga-(t1568))
-- [Ultra-Pro High-Fidelity Fast Flux és DNS Cache Evasion (T1568.001)](#ultra-pro-high-fidelity-fast-flux-és-dns-cache-evasion-(t1568001))
-- [Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002)](#ultra-pro-high-fidelity-domain-generation-algorithm-(dga)-(t1568002))
+- [Webszolgáltatás kiszűrése (T1567)](#webszolgáltatás-kiszűrése-(t1567))
+- [Exfil kódtár (T1567.001)](#exfil-kódtár-(t1567001))
+- [Cloud Storage Exfil (T1567.002)](#cloud-storage-exfil-(t1567002))
+- [Videotárhely Exfil (T1567.003)](#videotárhely-exfil-(t1567003))
+- [Text Storage Exfil (T1567.004)](#text-storage-exfil-(t1567004))
+- [Dinamikus felbontás és DGA (T1568)](#dinamikus-felbontás-és-dga-(t1568))
+- [Fast Flux és DNS Cache Evasion (T1568.001)](#fast-flux-és-dns-cache-evasion-(t1568001))
+- [Domaingenerációs algoritmus (DGA) észlelése (T1568.002)](#domaingenerációs-algoritmus-(dga)-észlelése-(t1568002))
 - [DNS számítás és kinyerés (T1568.003)](#dns-számítás-és-kinyerés-(t1568003))
 - [High-Fidelity rendszerszolgáltatás-végrehajtás észlelése](#high-fidelity-rendszerszolgáltatás-végrehajtás-észlelése)
 - [High-Fidelity Launch Daemon Persistence Detection](#high-fidelity-launch-daemon-persistence-detection)
 - [High-Fidelity rendszerszolgáltatás-végrehajtás észlelése (T1569.002)](#high-fidelity-rendszerszolgáltatás-végrehajtás-észlelése-(t1569002))
-- [Ultra-Pro High-Fidelity Lateral Tool Transfer (T1570)](#ultra-pro-high-fidelity-lateral-tool-transfer-(t1570))
+- [Oldalirányú szerszámátvitel (T1570)](#oldalirányú-szerszámátvitel-(t1570))
 - [Nem szabványos C2 port (T1571)](#nem-szabványos-c2-port-(t1571))
-- [Ultra-Pro High-Fidelity Protocol Tunneling Detection (T1571)](#ultra-pro-high-fidelity-protocol-tunneling-detection-(t1571))
-- [Ultra-Pro High-Fidelity titkosított C2 csatorna (T1573)](#ultra-pro-high-fidelity-titkosított-c2-csatorna-(t1573))
-- [Ultra-Pro nagy pontosságú szimmetrikus titkosítási C2 csatorna (T1573.001)](#ultra-pro-nagy-pontosságú-szimmetrikus-titkosítási-c2-csatorna-(t1573001))
+- [Protokoll-alagút-észlelés (T1572)](#protokoll-alagút-észlelés-(t1572))
+- [Titkosított C2 csatorna (T1573)](#titkosított-c2-csatorna-(t1573))
+- [Szimmetrikus titkosítás C2 csatorna (T1573.001)](#szimmetrikus-titkosítás-c2-csatorna-(t1573001))
 - [Aszimmetrikus titkosítás C2 (T1573.002)](#aszimmetrikus-titkosítás-c2-(t1573002))
 - [Ultra-Pro DLL-eltérítés és oldalsó betöltés észlelése (T1574)](#ultra-pro-dll-eltérítés-és-oldalsó-betöltés-észlelése-(t1574))
 - [Ultra-Pro DLL keresési rendelés-eltérítés észlelése (T1574.001)](#ultra-pro-dll-keresési-rendelés-eltérítés-észlelése-(t1574001))
@@ -8567,16 +8567,18 @@ az áldozatot utasítják, hogy futtasson "támogató" szoftvert.
 
 
 ---
-## Ultra-Pro High-Fidelity Web Service Exfiltration (T1567)
+## Webszolgáltatás kiszűrése (T1567)
 - **ID:** `T1567.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Azonosítással észleli az adatok szisztematikus kiszűrését a felhőszolgáltatásokba
-fej nélküli átviteli eszközök (rclone, megatools) egyéni konfigurációs fájlok használatával
-nem megbízható elérési utakból, vagy nem rendszergazdai szülőfolyamatok váltják ki.
+- **Leírás:** Észleli az adatok szisztematikus kiszűrését webes vagy felhőszolgáltatásokba a következők figyelésével:
+1. Fej nélküli átviteli eszközök (rclone, megatools, mega-put) és egyedi webkliensek.
+2. Internetes végpontokat, felhőalapú tárolást vagy nyilvános beillesztési/webhook-szolgáltatásokat célzó automatizált feltöltések.
+3. Végrehajtás nem megbízható könyvtárakból vagy nem adminisztratív szülőfolyamatokból (Office alkalmazások, rundll32, Explorer).
+Szűri a jogos adminisztrációs eszközöket, a helyi gazdagép műveleteit és a rendszerfolyamatokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -8585,16 +8587,19 @@ nem megbízható elérési utakból, vagy nem rendszergazdai szülőfolyamatok v
 
 
 ---
-## Ultra-Pro High-Fidelity Code Repo Exfil (T1567.001)
+## Exfil kódtár (T1567.001)
 - **ID:** `T1567_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Azonosítással észleli a nyilvános kódtárakba való szisztematikus adatszivárgást
-fej nélküli git-műveletek, soron belüli PAT tokenek és távoli adattár pivotok
-nem fejlesztői szülőfolyamatokból vagy gyanús könyvtárakból kezdeményezett.
+- **Leírás:** Észleli a forráskód szisztematikus kiszűrését nyilvános adattárakba azáltal, hogy figyeli:
+1. Fej nélküli vagy automatizált Git/CLI műveletek (git.exe, gh.exe, curl, PowerShell)
+nem fejlesztői szülőfolyamatokból vagy gyanús könyvtárakból hajtják végre.
+2. Soron belüli hitelesítési tokenek vagy személyes hozzáférési jogkivonatok (PAT) a parancssorokban.
+3. Távoli adattár újrakonfigurálása vagy jogosulatlan adatátvitelre utaló kényszerített leküldések.
+Szűri a jogszerű fejlesztői IDE-használatot és a jóváhagyott adattárműveleteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

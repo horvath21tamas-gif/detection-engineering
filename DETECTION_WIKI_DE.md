@@ -474,23 +474,23 @@
 - [High-Fidelity-Browser-basierte Nutzlastausführung](#high-fidelity-browser-basierte-nutzlastausführung)
 - [High-Fidelity-Prozess-Spawn vom Business Communication Service](#high-fidelity-prozess-spawn-vom-business-communication-service)
 - [Hochpräzise Erkennung der Remote-Tool-Ausführung nach dem Vishing](#hochpräzise-erkennung-der-remote-tool-ausführung-nach-dem-vishing)
-- [Ultra-Pro High-Fidelity Web Service Exfiltration (T1567)](#ultra-pro-high-fidelity-web-service-exfiltration-(t1567))
-- [Ultra-Pro High-Fidelity Code Repo Exfil (T1567.001)](#ultra-pro-high-fidelity-code-repo-exfil-(t1567001))
-- [Ultra-Pro High-Fidelity Cloud Storage Exfil (T1567.002)](#ultra-pro-high-fidelity-cloud-storage-exfil-(t1567002))
-- [Ultraprofessionelles High-Fidelity-Video-Hosting Exfil (T1567.003)](#ultraprofessionelles-high-fidelity-video-hosting-exfil-(t1567003))
-- [Ultra-Pro High-Fidelity-Textspeicher Exfil (T1567.004)](#ultra-pro-high-fidelity-textspeicher-exfil-(t1567004))
-- [Ultraprofessionelle, dynamische Auflösung und DGA (T1568)](#ultraprofessionelle-dynamische-auflösung-und-dga-(t1568))
-- [Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001)](#ultra-pro-high-fidelity-fast-flux-&-dns-cache-evasion-(t1568001))
-- [Ultra-Pro High-Fidelity Domain Generation Algorithmus (DGA) (T1568.002)](#ultra-pro-high-fidelity-domain-generation-algorithmus-(dga)-(t1568002))
+- [Webdienst-Exfiltration (T1567)](#webdienst-exfiltration-(t1567))
+- [Code-Repository Exfil (T1567.001)](#code-repository-exfil-(t1567001))
+- [Cloud-Speicher-Exfil (T1567.002)](#cloud-speicher-exfil-(t1567002))
+- [Video-Hosting Exfil (T1567.003)](#video-hosting-exfil-(t1567003))
+- [Textspeicher-Exfil (T1567.004)](#textspeicher-exfil-(t1567004))
+- [Dynamische Auflösung und DGA (T1568)](#dynamische-auflösung-und-dga-(t1568))
+- [Fast Flux und DNS-Cache-Umgehung (T1568.001)](#fast-flux-und-dns-cache-umgehung-(t1568001))
+- [Erkennung des Domänengenerierungsalgorithmus (DGA) (T1568.002)](#erkennung-des-domänengenerierungsalgorithmus-(dga)-(t1568002))
 - [DNS-Berechnung und -Extraktion (T1568.003)](#dns-berechnung-und--extraktion-(t1568003))
 - [High-Fidelity-Erkennung der Ausführung von Systemdiensten](#high-fidelity-erkennung-der-ausführung-von-systemdiensten)
 - [High-Fidelity-Launch-Daemon-Persistenzerkennung](#high-fidelity-launch-daemon-persistenzerkennung)
 - [High-Fidelity-Systemdienstausführungserkennung (T1569.002)](#high-fidelity-systemdienstausführungserkennung-(t1569002))
-- [Ultra-Pro High-Fidelity-lateraler Werkzeugtransfer (T1570)](#ultra-pro-high-fidelity-lateraler-werkzeugtransfer-(t1570))
+- [Seitlicher Werkzeugtransfer (T1570)](#seitlicher-werkzeugtransfer-(t1570))
 - [Nicht-Standard-Port C2 (T1571)](#nicht-standard-port-c2-(t1571))
-- [Ultra-Pro High-Fidelity-Protokoll-Tunneling-Erkennung (T1571)](#ultra-pro-high-fidelity-protokoll-tunneling-erkennung-(t1571))
-- [Ultra-Pro High-Fidelity-verschlüsselter C2-Kanal (T1573)](#ultra-pro-high-fidelity-verschlüsselter-c2-kanal-(t1573))
-- [Ultra-Pro High-Fidelity Symmetric Encryption C2-Kanal (T1573.001)](#ultra-pro-high-fidelity-symmetric-encryption-c2-kanal-(t1573001))
+- [Protokoll-Tunneling-Erkennung (T1572)](#protokoll-tunneling-erkennung-(t1572))
+- [Verschlüsselter C2-Kanal (T1573)](#verschlüsselter-c2-kanal-(t1573))
+- [Symmetrischer Verschlüsselungs-C2-Kanal (T1573.001)](#symmetrischer-verschlüsselungs-c2-kanal-(t1573001))
 - [Asymmetrische Verschlüsselung C2 (T1573.002)](#asymmetrische-verschlüsselung-c2-(t1573002))
 - [Ultra-Pro DLL-Hijacking und Sideloading-Erkennung (T1574)](#ultra-pro-dll-hijacking-und-sideloading-erkennung-(t1574))
 - [Ultra-Pro DLL-Suchreihenfolge-Hijacking-Erkennung (T1574.001)](#ultra-pro-dll-suchreihenfolge-hijacking-erkennung-(t1574001))
@@ -8567,16 +8567,18 @@ Das Opfer wird angewiesen, „Support“-Software auszuführen.
 
 
 ---
-## Ultra-Pro High-Fidelity Web Service Exfiltration (T1567)
+## Webdienst-Exfiltration (T1567)
 - **ID:** `T1567.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt systematische Datenexfiltration in Cloud-Dienste durch Identifizierung
-Headless-Transfer-Tools (rclone, megatools) mit benutzerdefinierten Konfigurationsdateien
-von nicht vertrauenswürdigen Pfaden oder ausgelöst durch übergeordnete Prozesse, die keine Administratoren sind.
+- **Beschreibung:** Erkennt systematische Datenexfiltration in Web- oder Cloud-Dienste durch Überwachung:
+1. Headless-Transfer-Tools (rclone, megatools, mega-put) und benutzerdefinierte Web-Clients.
+2. Programmatische Uploads, die auf Web-Endpunkte, Cloud-Speicher oder öffentliche Paste-/Webhook-Dienste abzielen.
+3. Ausführung aus nicht vertrauenswürdigen Verzeichnissen oder nicht-administrativen übergeordneten Prozessen (Office-Apps, rundll32, Explorer).
+Filtert legitime Verwaltungstools, lokale Hostvorgänge und Systemprozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -8585,16 +8587,19 @@ von nicht vertrauenswürdigen Pfaden oder ausgelöst durch übergeordnete Prozes
 
 
 ---
-## Ultra-Pro High-Fidelity Code Repo Exfil (T1567.001)
+## Code-Repository Exfil (T1567.001)
 - **ID:** `T1567_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt systematische Datenexfiltration in öffentliche Code-Repositorys durch Identifizierung
-Headless-Git-Operationen, Inline-PAT-Tokens und Remote-Repository-Pivots
-initiiert von übergeordneten Prozessen, die nicht zur Entwicklung gehören, oder verdächtigen Verzeichnissen.
+- **Beschreibung:** Erkennt die systematische Exfiltration von Quellcode in öffentliche Repositorys durch Überwachung:
+1. Headless oder automatisierte Git/CLI-Operationen (git.exe, gh.exe, curl, PowerShell)
+Wird von nicht zur Entwicklung gehörenden übergeordneten Prozessen oder verdächtigen Verzeichnissen ausgeführt.
+2. Inline-Authentifizierungstoken oder Personal Access Tokens (PATs) in Befehlszeilen.
+3. Neukonfiguration des Remote-Repositorys oder erzwungene Push-Vorgänge, die auf eine unbefugte Datenübertragung hinweisen.
+Filtert legitime Entwickler-IDE-Nutzung und genehmigte Repository-Vorgänge.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

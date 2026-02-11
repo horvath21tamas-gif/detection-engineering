@@ -474,23 +474,23 @@
 - [High-Fidelity Browser-Originating Payload Execution](#high-fidelity-browser-originating-payload-execution)
 - [High-Fidelity Process Spawn from Business Communication Service](#high-fidelity-process-spawn-from-business-communication-service)
 - [High-Fidelity Detection of Post-Vishing Remote Tool Execution](#high-fidelity-detection-of-post-vishing-remote-tool-execution)
-- [Ultra-Pro High-Fidelity Web Service Exfiltration (T1567)](#ultra-pro-high-fidelity-web-service-exfiltration-(t1567))
-- [Ultra-Pro High-Fidelity Code Repo Exfil (T1567.001)](#ultra-pro-high-fidelity-code-repo-exfil-(t1567001))
-- [Ultra-Pro High-Fidelity Cloud Storage Exfil (T1567.002)](#ultra-pro-high-fidelity-cloud-storage-exfil-(t1567002))
-- [Ultra-Pro High-Fidelity Video Hosting Exfil (T1567.003)](#ultra-pro-high-fidelity-video-hosting-exfil-(t1567003))
-- [Ultra-Pro High-Fidelity Text Storage Exfil (T1567.004)](#ultra-pro-high-fidelity-text-storage-exfil-(t1567004))
-- [Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568)](#ultra-pro-high-fidelity-dynamic-resolution-&-dga-(t1568))
-- [Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001)](#ultra-pro-high-fidelity-fast-flux-&-dns-cache-evasion-(t1568001))
-- [Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002)](#ultra-pro-high-fidelity-domain-generation-algorithm-(dga)-(t1568002))
+- [Web Service Exfiltration (T1567)](#web-service-exfiltration-(t1567))
+- [Code Repository Exfil (T1567.001)](#code-repository-exfil-(t1567001))
+- [Cloud Storage Exfil (T1567.002)](#cloud-storage-exfil-(t1567002))
+- [Video Hosting Exfil (T1567.003)](#video-hosting-exfil-(t1567003))
+- [Text Storage Exfil (T1567.004)](#text-storage-exfil-(t1567004))
+- [Dynamic Resolution & DGA (T1568)](#dynamic-resolution-&-dga-(t1568))
+- [Fast Flux & DNS Cache Evasion (T1568.001)](#fast-flux-&-dns-cache-evasion-(t1568001))
+- [Domain Generation Algorithm (DGA) Detection (T1568.002)](#domain-generation-algorithm-(dga)-detection-(t1568002))
 - [DNS Calculation & Extraction (T1568.003)](#dns-calculation-&-extraction-(t1568003))
 - [High-Fidelity System Service Execution Detection](#high-fidelity-system-service-execution-detection)
 - [High-Fidelity Launch Daemon Persistence Detection](#high-fidelity-launch-daemon-persistence-detection)
 - [High-Fidelity System Service Execution Detection (T1569.002)](#high-fidelity-system-service-execution-detection-(t1569002))
-- [Ultra-Pro High-Fidelity Lateral Tool Transfer (T1570)](#ultra-pro-high-fidelity-lateral-tool-transfer-(t1570))
+- [Lateral Tool Transfer (T1570)](#lateral-tool-transfer-(t1570))
 - [Non-Standard Port C2 (T1571)](#non-standard-port-c2-(t1571))
-- [Ultra-Pro High-Fidelity Protocol Tunneling Detection (T1571)](#ultra-pro-high-fidelity-protocol-tunneling-detection-(t1571))
-- [Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573)](#ultra-pro-high-fidelity-encrypted-c2-channel-(t1573))
-- [Ultra-Pro High-Fidelity Symmetric Encryption C2 Channel (T1573.001)](#ultra-pro-high-fidelity-symmetric-encryption-c2-channel-(t1573001))
+- [Protocol Tunneling Detection (T1572)](#protocol-tunneling-detection-(t1572))
+- [Encrypted C2 Channel (T1573)](#encrypted-c2-channel-(t1573))
+- [Symmetric Encryption C2 Channel (T1573.001)](#symmetric-encryption-c2-channel-(t1573001))
 - [Asymmetric Encryption C2 (T1573.002)](#asymmetric-encryption-c2-(t1573002))
 - [Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574)](#ultra-pro-dll-hijacking-&-side-loading-detection-(t1574))
 - [Ultra-Pro DLL Search Order Hijacking Detection (T1574.001)](#ultra-pro-dll-search-order-hijacking-detection-(t1574001))
@@ -9029,16 +9029,18 @@ the victim is instructed to run "support" software.
 
 
 ---
-## Ultra-Pro High-Fidelity Web Service Exfiltration (T1567)
+## Web Service Exfiltration (T1567)
 - **ID:** `T1567.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic data exfiltration to cloud services by identifying 
-headless transfer tools (rclone, megatools) using custom config files 
-from untrusted paths or triggered by non-admin parent processes.
+- **Leírás:** Detects systematic data exfiltration to web or cloud services by monitoring:
+1. Headless transfer tools (rclone, megatools, mega-put) and custom web clients.
+2. Programmatic uploads targeting web endpoints, cloud storage, or public paste/webhook services.
+3. Execution from untrusted directories or non-administrative parent processes (Office apps, rundll32, explorer). 
+Filters legitimate administrative tools, local host operations, and system processes.
 
 
 #### 🚨 Response Playbook
@@ -9048,16 +9050,19 @@ from untrusted paths or triggered by non-admin parent processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Code Repo Exfil (T1567.001)
+## Code Repository Exfil (T1567.001)
 - **ID:** `T1567_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic data exfiltration to public code repositories by identifying 
-headless git operations, inline PAT tokens, and remote repository pivots 
-initiated from non-development parent processes or suspicious directories.
+- **Leírás:** Detects systematic exfiltration of source code to public repositories by monitoring:
+1. Headless or automated Git/CLI operations (git.exe, gh.exe, curl, PowerShell) 
+   executed from non-development parent processes or suspicious directories.
+2. Inline authentication tokens or Personal Access Tokens (PATs) in command lines.
+3. Remote repository reconfiguration or forced pushes indicative of unauthorized data transfer.
+Filters legitimate developer IDE usage and approved repository operations.
 
 
 #### 🚨 Response Playbook

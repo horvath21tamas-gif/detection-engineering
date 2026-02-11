@@ -8101,16 +8101,17 @@ Schwächung der Authentifizierungs- und Verschlüsselungsprotokolle.
 
 
 ---
-## Ultra-Pro High-Fidelity-Virtualisierung und Sandbox-Umgehung (T1564.011)
+## Virtualisierung und Sandbox-Umgehung (T1564.011)
 - **ID:** `T1562_011.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezieltes Umgebungs-Fingerprinting, das von Malware zur Erkennung von Virtualisierung verwendet wird.
-Sandboxes oder Analyseumgebungen.Konzentriert sich auf WMI-Hardwareabfragen und MAC-Adressen-OUI
-Überprüfungen und VM-spezifische Treibersuchen aus nicht vertrauenswürdigen Prozessketten.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt gezieltes Umgebungs-Fingerprinting zur Identifizierung von Virtualisierung,
+Sandbox- oder Malware-Analyseumgebungen.Korreliert WMI-Hardwareabfragen,
+VM-Anbieter-String-Prüfungen, MAC-OUI-Erkennung und VM-spezifischer Treiber
+Entdeckung, die von verdächtigen Prozessketten oder vom Benutzer beschreibbaren Pfaden initiiert wird.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

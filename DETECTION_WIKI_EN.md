@@ -8537,16 +8537,17 @@ weakening of authentication and encryption protocols.
 
 
 ---
-## Ultra-Pro High-Fidelity Virtualization and Sandbox Evasion (T1564.011)
+## Virtualization and Sandbox Evasion (T1564.011)
 - **ID:** `T1562_011.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted environment fingerprinting used by malware to detect virtualization, 
-sandboxes, or analysis environments. Focuses on WMI hardware queries, MAC address OUI 
-checks, and VM-specific driver searches from untrusted process chains.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects targeted environment fingerprinting used to identify virtualization,
+sandbox, or malware analysis environments. Correlates WMI hardware queries,
+VM vendor string checks, MAC OUI reconnaissance, and VM-specific driver
+discovery initiated from suspicious process chains or user-writable paths.
 
 
 #### 🚨 Response Playbook

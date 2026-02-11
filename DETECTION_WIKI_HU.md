@@ -8101,16 +8101,17 @@ a hitelesítési és titkosítási protokollok gyengülése.
 
 
 ---
-## Ultra-Pro High-Fidelity virtualizáció és Sandbox Evasion (T1564.011)
+## Virtualizáció és Sandbox Evasion (T1564.011)
 - **ID:** `T1562_011.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a rosszindulatú programok által a virtualizáció észlelésére használt célzott környezeti ujjlenyomatokat,
-homokozók vagy elemzési környezetek.A WMI hardveres lekérdezésekre összpontosít, MAC-cím OUI
-ellenőrzések és virtuális gép-specifikus illesztőprogram-keresések nem megbízható folyamatláncokból.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a virtualizáció azonosítására használt célzott környezeti ujjlenyomatokat,
+sandbox vagy rosszindulatú programelemző környezetek.Összefügg a WMI hardveres lekérdezésekkel,
+Virtuálisgép-szállítói karakterlánc-ellenőrzések, MAC OUI-felderítés és virtuális gép-specifikus illesztőprogram
+gyanús folyamatláncokból vagy a felhasználó által írható útvonalakból indított felfedezés.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -10,7 +10,7 @@ Ez a jelentés automatikusan készült **628** szabály alapján.
 | Jogosultság kiterjesztés (`privilege-escalation`) | 0 | `░░░░░░░░░░` |
 | Védelem elkerülése (`defense-evasion`) | 0 | `░░░░░░░░░░` |
 | Hitelesítő adatok megszerzése (`credential-access`) | 0 | `░░░░░░░░░░` |
-| Felderítés (`discovery`) | 40 | `████████░░` |
+| Felderítés (`discovery`) | 41 | `████████░░` |
 | Oldalirányú mozgás (`lateral-movement`) | 0 | `░░░░░░░░░░` |
 | Adatgyűjtés (`collection`) | 35 | `███████░░░` |
 | Adatszivárogtatás (`exfiltration`) | 28 | `█████░░░░░` |

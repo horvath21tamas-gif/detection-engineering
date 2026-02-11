@@ -470,7 +470,7 @@
 | T1564.008 | CRITICAL | Email Hiding Rules Detection (T1564.008) |
 | T1564.009 | HIGH | Resource Extraction and Abuse (T1564.009) |
 | T1564.010 | HIGH | Process Argument Spoofing Detection (T1564.010) |
-| T1564.011 | HIGH | Virtual Instance Abuse (T1564.011) |
+| T1564.011 | HIGH | Virtual Instance Abuse (T1564.011), Virtualization and Sandbox Evasion (T1564.011) |
 | T1565 | CRITICAL | Data Manipulation (T1565) |
 | T1565.001 | CRITICAL | Stored Data Manipulation (T1565.001), Data Manipulation (T1565) |
 | T1565.002 | CRITICAL | Transmitted Data Manipulation (T1565.002), Data Manipulation (T1565) |

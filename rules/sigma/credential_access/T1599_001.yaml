@@ -1,11 +1,12 @@
-title: Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001)
+title: Logical Isolation Bypass (T1599.001)
 id: 272ca8da-121a-44d3-916a-736035a1d28b
 status: stable
 description: |
-    Detects unauthorized logical network isolation bypasses, such as VRF route leaking, 
-    unauthorized VLAN trunking, and L2 bridge creation between secure zones.
-author: hota05
-date: 2026-02-03
+    Detects unauthorized logical network isolation bypass attempts, including VRF route leaking,
+    unauthorized VLAN trunking, L2 bridge creation, and EVPN misconfigurations that could
+    bridge secure zones or bypass segmentation controls.
+author: hota05 
+date: 2026-02-11
 tags:
     - attack.defense_evasion
     - attack.t1599.001
@@ -13,38 +14,62 @@ tags:
 logsource:
     product: network
     service: Cisco IOS
+
 detection:
-    selection_isolation_bypass:
-        Message|contains:
-            - 'import-target'           
-            - 'export-target'
-            - 'ip route vrf'            
-            - 'switchport mode trunk'   
-            - 'vlan-stacking'          
-            - 'brctl addif'             
-            - 'set protocols evpn'     
+  selection_isolation_bypass:
+    Message|contains:
+      - 'import-target'
+      - 'export-target'
+      - 'ip route vrf'
+      - 'switchport mode trunk'
+      - 'vlan-stacking'
+      - 'brctl addif'
+      - 'set protocols evpn'
+      - 'bridge-group'
 
-    selection_risky_config:
-        Message|contains:
-            - 'native vlan'             
-            - 'permit any'
-            - 'allow-all'
-            - 'no shutdown'             
+  selection_risky_config:
+    Message|contains:
+      - 'native vlan'
+      - 'permit any'
+      - 'allow-all'
+      - 'no shutdown'
+      - 'spanning-tree portfast'
+      - 'storm-control'
 
-    selection_manual_session:
-        Message|contains:
-            - 'line vty'
-            - 'console'
-            - 'ssh-session'
+  selection_manual_session:
+    Message|contains:
+      - 'line vty'
+      - 'console'
+      - 'ssh-session'
+      - 'telnet-session'
 
-    filter_trusted_automation_hosts:
-        SourceIP:
-            - '10.50.0.10' 
-            - '10.50.0.11'
-    filter_standard_access_ops:
-        Message|contains:
-            - 'switchport mode access'
-            - 'description '
+  filter_trusted_automation_hosts:
+    SourceIP:
+      - '10.50.0.10'
+      - '10.50.0.11'
 
-    condition: selection_isolation_bypass and (selection_risky_config or selection_manual_session) and not (filter_trusted_automation_hosts or filter_standard_access_ops)
+  filter_standard_access_ops:
+    Message|contains:
+      - 'switchport mode access'
+      - 'description '
+      - 'banner motd'
+      - 'ntp server'
+
+  condition: selection_isolation_bypass and (selection_risky_config or selection_manual_session) and not (filter_trusted_automation_hosts or filter_standard_access_ops)
+
+fields:
+  - Time
+  - SourceIP
+  - User
+  - Message
+  - Interface
+  - VLAN
+  - VRF
+  - Command
+
+falsepositives:
+  - Standard VLAN trunking in lab/test environments
+  - Routine VRF imports/exports performed by network automation systems
+  - Authorized manual sessions by network engineers performing maintenance
+
 level: critical

@@ -8131,7 +8131,7 @@ gyanús végrehajtási összefüggésekből származik.
 - **Leírás:** Érzékeli a PowerShell motort célzó szándékos biztonsági leminősítési kísérleteket
 visszaállítás (v2 AMSI bypass), NTLM hitelesítés gyengítése és titkosítás
 protokoll csökkentése.A leminősítési szándékra és a gyanúsításra összpontosít
-végrehajtási kontextus a törvényes adminisztrációból származó téves pozitívumok csökkentésére.
+végrehajtási kontextus a törvényes adminisztrációból származó téves pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

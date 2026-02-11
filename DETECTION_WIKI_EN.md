@@ -11105,16 +11105,16 @@ suspiciously located processes.
 
 
 ---
-## Ultra-Pro High-Fidelity System Image Patching (T1600.001)
+## System Image Patching (T1600.001)
 - **ID:** `T1600_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects attempts to weaken system image integrity by disabling Driver Signature Enforcement (DSE), 
-modifying Boot Configuration Data (BCD), or patching critical system binaries (CI.dll, NTOSKRNL.exe) 
-using non-system processes.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects attempts to compromise system image integrity by bypassing Driver Signature Enforcement (DSE), 
+modifying Boot Configuration Data (BCD), or patching critical system binaries (CI.dll, NTOSKRNL.exe, LSASRV.dll, Winload.efi). 
+Focuses on untrusted processes and excludes standard system management tools.
 
 
 #### 🚨 Response Playbook
@@ -11124,16 +11124,18 @@ using non-system processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Disable Entity Verification (T1600.002)
+## Disable Entity Verification (T1600.002)
 - **ID:** `T1600_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized modification of system trust settings and certificate verification 
-by monitoring for suspicious certutil usage and registry-based Authenticode/WinTrust 
-bypasses initiated by untrusted processes.
+- **Leírás:** Detects unauthorized attempts to bypass system trust verification, 
+certificate validation, and Authenticode/WinTrust checks. Focuses on 
+suspicious certutil usage and registry-based policy modifications 
+executed by untrusted processes. Minimizes false positives by excluding 
+known IT management tools and signed software updaters.
 
 
 #### 🚨 Response Playbook

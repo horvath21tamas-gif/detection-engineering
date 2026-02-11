@@ -10520,16 +10520,16 @@ gyanúsan elhelyezkedő folyamatok.
 
 
 ---
-## Ultra-Pro High-Fidelity rendszer képjavító (T1600.001)
+## Rendszerkép javítás (T1600.001)
 - **ID:** `T1600_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a rendszerkép integritásának gyengítésére irányuló kísérleteket a Driver Signature Enforcement (DSE) letiltásával,
-a rendszerindítási konfigurációs adatok (BCD) módosítása vagy a kritikus rendszer bináris fájlok (CI.dll, NTOSKRNL.exe) javítása
-nem rendszerfolyamatokat használva.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a rendszerkép integritásának veszélyeztetésére irányuló kísérleteket a Driver Signature Enforcement (DSE) megkerülésével,
+a rendszerindítási konfigurációs adatok (BCD) módosítása vagy a kritikus rendszerbináris fájlok (CI.dll, NTOSKRNL.exe, LSASRV.dll, Winload.efi) javítása.
+A nem megbízható folyamatokra összpontosít, és kizárja a szabványos rendszerfelügyeleti eszközöket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -10538,16 +10538,18 @@ nem rendszerfolyamatokat használva.
 
 
 ---
-## Ultra-Pro High-Fidelity Disable Entity Verification (T1600.002)
+## Entitásellenőrzés letiltása (T1600.002)
 - **ID:** `T1600_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a rendszer megbízhatósági beállításainak jogosulatlan módosítását és a tanúsítvány ellenőrzését
-a gyanús certutil használat és a rendszerleíró adatbázis alapú Authenticode/WinTrust figyelésével
-nem megbízható folyamatok által kezdeményezett megkerülések.
+- **Leírás:** Érzékeli a jogosulatlan kísérleteket a rendszer megbízhatóságának ellenőrzésének megkerülésére,
+tanúsítvány érvényesítése és Authenticode/WinTrust ellenőrzések.-ra összpontosít
+gyanús certutil-használat és rendszerleíró adatbázis-alapú házirend-módosítások
+nem megbízható folyamatok hajtják végre.Kizárással minimalizálja a hamis pozitívumot
+ismert IT menedzsment eszközök és aláírt szoftverfrissítők.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

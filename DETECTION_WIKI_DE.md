@@ -10520,16 +10520,16 @@ verdächtig lokalisierte Prozesse.
 
 
 ---
-## Ultra-Pro High-Fidelity-System-Image-Patching (T1600.001)
+## System-Image-Patching (T1600.001)
 - **ID:** `T1600_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Versuche, die System-Image-Integrität durch Deaktivierung der Driver Signature Enforcement (DSE) zu schwächen.
-Ändern der Boot-Konfigurationsdaten (BCD) oder Patchen kritischer Systembinärdateien (CI.dll, NTOSKRNL.exe)
-Verwendung von Nicht-System-Prozessen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt Versuche, die Integrität des Systemabbilds durch Umgehung der Driver Signature Enforcement (DSE) zu gefährden.
+Ändern der Boot-Konfigurationsdaten (BCD) oder Patchen kritischer Systembinärdateien (CI.dll, NTOSKRNL.exe, LSASRV.dll, Winload.efi).
+Konzentriert sich auf nicht vertrauenswürdige Prozesse und schließt Standard-Systemverwaltungstools aus.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -10538,16 +10538,18 @@ Verwendung von Nicht-System-Prozessen.
 
 
 ---
-## Ultra-Pro High-Fidelity-Entitätsüberprüfung deaktivieren (T1600.002)
+## Entitätsüberprüfung deaktivieren (T1600.002)
 - **ID:** `T1600_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Änderungen der Systemvertrauenseinstellungen und der Zertifikatsüberprüfung
-durch Überwachung auf verdächtige Certutil-Nutzung und registrierungsbasiertes Authenticode/WinTrust
-Umgehungen, die von nicht vertrauenswürdigen Prozessen initiiert werden.
+- **Beschreibung:** Erkennt unbefugte Versuche, die Überprüfung der Systemvertrauenswürdigkeit zu umgehen.
+Zertifikatsvalidierung und Authenticode/WinTrust-Prüfungen.Konzentriert sich auf
+verdächtige certutil-Nutzung und registrierungsbasierte Richtlinienänderungen
+von nicht vertrauenswürdigen Prozessen ausgeführt.Minimiert Fehlalarme durch Ausschluss
+bekannte IT-Management-Tools und signierte Software-Updater.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

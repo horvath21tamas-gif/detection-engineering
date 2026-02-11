@@ -1,58 +1,76 @@
-title: Ultra-Pro High-Fidelity Non-Standard Port C2 (T1571)
+title: Non-Standard Port C2 (T1571)
 id: 8a2e4a0e-6cda-4775-bfec-3efe3e89b60d
 status: stable
 description: |
-    Detects C2 communication over non-standard ports by correlating high-risk 
-    native binaries (LoLBins) with outbound public network connections 
-    to ports outside the standard web/mail/directory service ranges.
-author: hota05
-date: 2026-02-09
+  Detects command-and-control (C2) communication over non-standard ports by 
+  correlating high-risk native binaries (LoLBins) with outbound public network 
+  connections to ports outside standard web, mail, and directory service ranges. 
+  Filters out legitimate automation, internal network traffic, and system binaries 
+  to reduce false positives.
+author: hota05 
+date: 2026-02-11
 tags:
-    - attack.command_and_control
-    - attack.t1571
+  - attack.command_and_control
+  - attack.t1571
 logsource:
-    category: network_connection
-    product: windows
+  category: network_connection
+  product: windows
+
 detection:
-    selection_procs:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\rundll32.exe'
-            - '\mshta.exe'
-            - '\regsvr32.exe'
-            - '\certutil.exe'
-            - '\scrcons.exe'    
-            - '\bitsadmin.exe'
+  selection_procs:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\rundll32.exe'
+      - '\mshta.exe'
+      - '\regsvr32.exe'
+      - '\certutil.exe'
+      - '\scrcons.exe'
+      - '\bitsadmin.exe'
 
-    filter_standard_ports:
-        DestinationPort:
-            - 53     
-            - 80     
-            - 443    
-            - 8080   
-            - 8443   
-            - 5985   
-            - 5986  
+  filter_standard_ports:
+    DestinationPort:
+      - 53      
+      - 80      
+      - 443     
+      - 8080    
+      - 8443   
+      - 5985    
+      - 5986    
 
-    filter_internal_networks:
-        DestinationIp|startswith:
-            - '10.'
-            - '192.168.'
-            - '172.16.'
-            - '172.17.'
-            - '172.18.'
-            - '172.19.'
-            - '172.2'
-            - '172.3'
-            - '127.'
-            - '169.254.' 
+  filter_internal_networks:
+    DestinationIp|startswith:
+      - '10.'
+      - '192.168.'
+      - '172.16.'
+      - '172.17.'
+      - '172.18.'
+      - '172.19.'
+      - '172.2'
+      - '172.3'
+      - '127.'
+      - '169.254.'
 
-    filter_legit_software:
-        - Image|contains:
-            - '\Program Files\'
-            - '\Program Files (x86)\'
-        - username: 'NT AUTHORITY\SYSTEM'
+  filter_legit_software:
+    - Image|contains:
+        - '\Program Files\'
+        - '\Program Files (x86)\'
+    - username: 'NT AUTHORITY\SYSTEM'
 
-    condition: selection_procs and not filter_standard_ports and not filter_internal_networks and not filter_legit_software
+  condition: selection_procs and not filter_standard_ports and not filter_internal_networks and not filter_legit_software
+
+fields:
+  - Time
+  - SourceImage
+  - SourceUsername
+  - DestinationIp
+  - DestinationPort
+  - Protocol
+  - ProcessId
+
+falsepositives:
+  - Internal automation scripts using non-standard ports
+  - Network monitoring or backup tools
+  - Legitimate internal penetration testing
+
 level: critical

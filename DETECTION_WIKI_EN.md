@@ -8706,16 +8706,17 @@ obfuscation techniques.
 
 
 ---
-## Ultra-Pro High-Fidelity NTFS Alternative Data Stream (ADS) Abuse (T1564.004)
+## NTFS Alternative Data Stream (ADS) Abuse (T1564.004)
 - **ID:** `T1564_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CONTROL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the creation or execution of malicious NTFS Alternative Data Streams (ADS). 
-Correlates redirection operators and LOLBins with stream-specific command-line 
-syntax to minimize false positives from drive letters and MOTW.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects creation, modification, or execution of NTFS Alternative Data Streams (ADS) 
+often used to hide malicious payloads or evade endpoint monitoring. 
+Correlates redirection operators, LOLBins, and stream-specific PowerShell commands 
+while minimizing false positives from MOTW and system files.
 
 
 #### 🚨 Response Playbook
@@ -8725,16 +8726,17 @@ syntax to minimize false positives from drive letters and MOTW.
 
 
 ---
-## Ultra-Pro High-Fidelity Hidden File System Manipulation (T1564.005)
+## Hidden File System Manipulation (T1564.005)
 - **ID:** `T1564_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects suspicious mounting or creation of virtual disk images (VHD, VHDX, ISO) 
-initiated by untrusted parent processes or targeting non-standard paths, 
-often used to bypass MOTW or hide malicious payloads.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects suspicious mounting, creation, or manipulation of virtual disk images 
+(VHD, VHDX, ISO) by monitoring CLI commands from untrusted parent processes or 
+non-standard paths. This technique is commonly used to bypass Mark-of-the-Web (MOTW) 
+restrictions or to hide malicious payloads.
 
 
 #### 🚨 Response Playbook

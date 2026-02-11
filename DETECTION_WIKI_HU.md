@@ -8261,16 +8261,17 @@ homályosítási technikák.
 
 
 ---
-## Ultra-Pro High-Fidelity NTFS alternatív adatfolyam (ADS) visszaélés (T1564.004)
+## NTFS alternatív adatfolyammal (ADS) való visszaélés (T1564.004)
 - **ID:** `T1564_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CONTROL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a rosszindulatú NTFS alternatív adatfolyamok (ADS) létrehozását vagy végrehajtását.
-Összekapcsolja az átirányítási operátorokat és a LOLBineket az adatfolyam-specifikus parancssorral
-szintaxis a meghajtóbetűjelekből és a MOTW-ból származó téves pozitívumok minimalizálása érdekében.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli az NTFS alternatív adatfolyamok (ADS) létrehozását, módosítását vagy végrehajtását
+gyakran használják a rosszindulatú rakományok elrejtésére vagy a végpontfigyelés elkerülésére.
+Összekapcsolja az átirányítási operátorokat, a LOLBineket és az adatfolyam-specifikus PowerShell-parancsokat
+miközben minimalizálja a MOTW és a rendszerfájlok téves pozitívumait.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -8279,16 +8280,17 @@ szintaxis a meghajtóbetűjelekből és a MOTW-ból származó téves pozitívum
 
 
 ---
-## Ultra-Pro High-Fidelity rejtett fájlrendszer-manipuláció (T1564.005)
+## Rejtett fájlrendszer-manipuláció (T1564.005)
 - **ID:** `T1564_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a gyanús beillesztést vagy virtuális lemezképek létrehozását (VHD, VHDX, ISO)
-nem megbízható szülőfolyamatok kezdeményezték, vagy nem szabványos útvonalakat céloznak meg,
-gyakran használják a MOTW megkerülésére vagy a rosszindulatú rakományok elrejtésére.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a virtuális lemezképek gyanús csatlakoztatását, létrehozását vagy manipulálását
+(VHD, VHDX, ISO) a nem megbízható szülőfolyamatok CLI-parancsainak figyelésével, ill
+nem szabványos utak.Ezt a technikát általában a Mark-of-the-Web (MOTW) megkerülésére használják.
+korlátozások vagy a rosszindulatú rakományok elrejtése.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -8261,16 +8261,17 @@ Verschleierungstechniken.
 
 
 ---
-## Ultra-Pro High-Fidelity NTFS Alternative Data Stream (ADS) Missbrauch (T1564.004)
+## Missbrauch von NTFS Alternative Data Stream (ADS) (T1564.004)
 - **ID:** `T1564_004.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CONTROL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Erstellung oder Ausführung bösartiger NTFS Alternative Data Streams (ADS).
-Korreliert Umleitungsoperatoren und LOLBins mit streamspezifischer Befehlszeile
-Syntax, um Fehlalarme aus Laufwerksbuchstaben und MOTW zu minimieren.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die Erstellung, Änderung oder Ausführung von NTFS Alternative Data Streams (ADS)
+Wird häufig verwendet, um bösartige Payloads zu verbergen oder die Endpunktüberwachung zu umgehen.
+Korreliert Umleitungsoperatoren, LOLBins und streamspezifische PowerShell-Befehle
+Gleichzeitig werden Fehlalarme aus MOTW- und Systemdateien minimiert.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -8279,16 +8280,17 @@ Syntax, um Fehlalarme aus Laufwerksbuchstaben und MOTW zu minimieren.
 
 
 ---
-## Ultra-Pro High-Fidelity-Manipulation versteckter Dateisysteme (T1564.005)
+## Manipulation versteckter Dateisysteme (T1564.005)
 - **ID:** `T1564_005.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt verdächtiges Mounten oder Erstellen von virtuellen Festplatten-Images (VHD, VHDX, ISO)
-initiiert durch nicht vertrauenswürdige übergeordnete Prozesse oder auf nicht standardmäßige Pfade abzielend,
-Wird häufig verwendet, um MOTW zu umgehen oder bösartige Payloads zu verbergen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt verdächtige Bereitstellungen, Erstellungen oder Manipulationen virtueller Festplatten-Images
+(VHD, VHDX, ISO) durch Überwachung von CLI-Befehlen von nicht vertrauenswürdigen übergeordneten Prozessen oder
+Nicht standardmäßige Pfade.Diese Technik wird häufig verwendet, um Mark-of-the-Web (MOTW) zu umgehen.
+Einschränkungen zu verhindern oder bösartige Payloads zu verbergen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

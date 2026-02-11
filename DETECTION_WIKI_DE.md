@@ -468,7 +468,7 @@
 - [Ultraprofessionelle High-Fidelity-Datenmanipulation (T1565)](#ultraprofessionelle-high-fidelity-datenmanipulation-(t1565))
 - [Ultra-Pro High-Fidelity-Manipulation gespeicherter Daten (T1565.001)](#ultra-pro-high-fidelity-manipulation-gespeicherter-daten-(t1565001))
 - [Ultra-Pro High-Fidelity-Manipulation übertragener Daten (T1565.002)](#ultra-pro-high-fidelity-manipulation-übertragener-daten-(t1565002))
-- [Ultra-Pro High-Fidelity-Laufzeitprozessmanipulation (T1565.003)](#ultra-pro-high-fidelity-laufzeitprozessmanipulation-(t1565003))
+- [Manipulation von Laufzeitprozessen (T1565.003)](#manipulation-von-laufzeitprozessen-(t1565003))
 - [High-Fidelity-Phishing-Payload-Ausführung aus Kommunikations-Apps](#high-fidelity-phishing-payload-ausführung-aus-kommunikations-apps)
 - [High-Fidelity-Ausführung von Spearphishing-Anhängen](#high-fidelity-ausführung-von-spearphishing-anhängen)
 - [High-Fidelity-Browser-basierte Nutzlastausführung](#high-fidelity-browser-basierte-nutzlastausführung)
@@ -8459,16 +8459,16 @@ durch die Identifizierung von CLI-basierten Konfigurationsänderungen, die von v
 
 
 ---
-## Ultra-Pro High-Fidelity-Laufzeitprozessmanipulation (T1565.003)
+## Manipulation von Laufzeitprozessen (T1565.003)
 - **ID:** `T1565_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Manipulationen von Laufzeitprozessen durch Überwachung auf verdächtige Speicherzugriffe
-Masken (z. B. PROCESS_ALL_ACCESS) und Remote-Thread-Injection zwischen unabhängigen
-Prozesse, insbesondere das Herausfiltern bekanntermaßen guter Verwaltungs- und Sicherheitstools.
+- **Beschreibung:** Erkennt Manipulationen von Laufzeitprozessen, einschließlich verdächtiger Speicherzugriffsmasken (z. B. PROCESS_ALL_ACCESS).
+und Remote-Thread-Injection zwischen unabhängigen Prozessen.Konzentriert sich auf nicht standardmäßige Ausführungskontexte
+und filtert bekanntermaßen gute Verwaltungs-, Sicherheits- und Überwachungstools, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

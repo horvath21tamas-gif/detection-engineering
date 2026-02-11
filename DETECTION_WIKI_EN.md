@@ -468,7 +468,7 @@
 - [Ultra-Pro High-Fidelity Data Manipulation (T1565)](#ultra-pro-high-fidelity-data-manipulation-(t1565))
 - [Ultra-Pro High-Fidelity Stored Data Manipulation (T1565.001)](#ultra-pro-high-fidelity-stored-data-manipulation-(t1565001))
 - [Ultra-Pro High-Fidelity Transmitted Data Manipulation (T1565.002)](#ultra-pro-high-fidelity-transmitted-data-manipulation-(t1565002))
-- [Ultra-Pro High-Fidelity Runtime Process Manipulation (T1565.003)](#ultra-pro-high-fidelity-runtime-process-manipulation-(t1565003))
+- [Runtime Process Manipulation (T1565.003)](#runtime-process-manipulation-(t1565003))
 - [High-Fidelity Phishing Payload Execution from Communication Apps](#high-fidelity-phishing-payload-execution-from-communication-apps)
 - [High-Fidelity Spearphishing Attachment Execution](#high-fidelity-spearphishing-attachment-execution)
 - [High-Fidelity Browser-Originating Payload Execution](#high-fidelity-browser-originating-payload-execution)
@@ -8915,16 +8915,16 @@ parent processes or targeting critical registry keys.
 
 
 ---
-## Ultra-Pro High-Fidelity Runtime Process Manipulation (T1565.003)
+## Runtime Process Manipulation (T1565.003)
 - **ID:** `T1565_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects runtime process manipulation by monitoring for suspicious memory access 
-masks (e.g., PROCESS_ALL_ACCESS) and remote thread injection between unrelated 
-processes, specifically filtering out known-good administrative and security tools.
+- **Leírás:** Detects runtime process manipulation including suspicious memory access masks (e.g., PROCESS_ALL_ACCESS)
+and remote thread injection between unrelated processes. Focuses on non-standard execution contexts
+and filters known-good administrative, security, and monitoring tools to reduce false positives.
 
 
 #### 🚨 Response Playbook

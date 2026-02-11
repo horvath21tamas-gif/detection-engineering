@@ -468,7 +468,7 @@
 - [Ultra-Pro nagy pontosságú adatkezelés (T1565)](#ultra-pro-nagy-pontosságú-adatkezelés-(t1565))
 - [Ultra-Pro nagy pontosságú tárolt adatok manipulációja (T1565.001)](#ultra-pro-nagy-pontosságú-tárolt-adatok-manipulációja-(t1565001))
 - [Ultra-Pro nagy felbontású adatátvitel (T1565.002)](#ultra-pro-nagy-felbontású-adatátvitel-(t1565002))
-- [Ultra-Pro High-Fidelity Runtime Process Manipulation (T1565.003)](#ultra-pro-high-fidelity-runtime-process-manipulation-(t1565003))
+- [Futásidejű folyamatmanipuláció (T1565.003)](#futásidejű-folyamatmanipuláció-(t1565003))
 - [Nagy pontosságú adathalászat-végrehajtás kommunikációs alkalmazásokból](#nagy-pontosságú-adathalászat-végrehajtás-kommunikációs-alkalmazásokból)
 - [High-Fidelity Spearphishing melléklet végrehajtás](#high-fidelity-spearphishing-melléklet-végrehajtás)
 - [High-Fidelity böngészőből származó hasznos teher végrehajtás](#high-fidelity-böngészőből-származó-hasznos-teher-végrehajtás)
@@ -8459,16 +8459,16 @@ szülőfolyamatok vagy a kritikus rendszerleíró kulcsok megcélzása.
 
 
 ---
-## Ultra-Pro High-Fidelity Runtime Process Manipulation (T1565.003)
+## Futásidejű folyamatmanipuláció (T1565.003)
 - **ID:** `T1565_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Felismeri a futásidejű folyamatkezelést a gyanús memória-hozzáférés figyelésével
-maszkok (pl. PROCESS_ALL_ACCESS) és távoli szálinjektálás a függetlenek között
-folyamatokat, konkrétan kiszűrve az ismert jó adminisztrációs és biztonsági eszközöket.
+- **Leírás:** Érzékeli a futásidejű folyamatkezelést, beleértve a gyanús memóriaelérési maszkokat (pl. PROCESS_ALL_ACCESS)
+és távoli menetinjektálás a nem kapcsolódó folyamatok között.A nem szabványos végrehajtási kontextusokra összpontosít
+és kiszűri az ismert jó adminisztrációs, biztonsági és felügyeleti eszközöket a téves pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -8742,7 +8742,7 @@ Kiszűri a legális szoftvereket, a felhőautomatizálást és a belső infrastr
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a C2 infrastruktúra címszámítását DNS-en keresztül a programozott figyeléssel
 TXT/SRV rekordok lekérése, majd bájt szintű manipuláció vagy típuskonverzió
-forgatókönyv-értelmezésekben.Kiszűri a jogszerű DNS-alapú automatizálást, a licencellenőrzéseket,
+forgatókönyv-értelmezésekben.Kiszűri a jogos DNS-alapú automatizálást, a licencellenőrzéseket,
 és domain-ellenőrzési folyamatok.
 
 #### 🚨 Response Playbook

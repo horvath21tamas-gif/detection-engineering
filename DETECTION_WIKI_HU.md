@@ -10965,16 +10965,14 @@ a parancssori kapcsolók és a folyamatintegritási szintek elemzésével.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619)
+## Nagy pontosságú felhőalapú tárolási objektumfelderítés
 - **ID:** `T1619.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Figyeléssel észleli a szisztematikus felhőalapú tárolási objektumok felfedezését (S3, Blobs, GCS).
-rekurzív listázáshoz, metaadat-igényes API-hívásokhoz és rendellenes kimeneti átirányításhoz.
-Nem tartalmazza a magas megbízhatóságú biztonsági mentési és ETL-szolgáltatásfiókokat.
+- **Leírás:** Érzékeli a szisztematikus felhőtárhely-objektum-felderítést az AWS S3-ban, az Azure Blobs-ban és a Google Cloud Storage-ban a rekurzív listázás, a metaadat-igényes API-hívások és a rendellenes kimenet-átirányítás figyelésével.Szűri a nagy megbízhatóságú biztonsági mentési, ETL- és DevOps automatizálási fiókokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -11114,7 +11112,7 @@ amelyek megkerülik a hagyományos hálózati peremvédelmet.
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [PNPUTIL.EXE](https://lolbas-project.github.io/lolbas/), [QUERY.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a gyanús eszközillesztő-felderítési tevékenységet a natív Windows segédprogramok, WMI vagy PowerShell használatával rendellenes végrehajtási környezetekből.A Bring Your Own Vulnerable Driver (BYOVD) visszaélése előtt gyakran megfigyelt felderítési mintákra összpontosít.
+- **Leírás:** Érzékeli a gyanús eszközillesztő-felderítési tevékenységet a natív Windows segédprogramok, WMI vagy PowerShell használatával rendellenes végrehajtási környezetekből.Azokra a felderítési mintákra összpontosít, amelyeket általában a Bring Your Own Vulnerable Driver (BYOVD) visszaélése előtt figyeltek meg.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

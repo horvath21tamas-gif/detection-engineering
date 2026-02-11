@@ -11576,16 +11576,14 @@ by analyzing command-line switches and process integrity levels.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619)
+## High-Fidelity Cloud Storage Object Discovery Detection
 - **ID:** `T1619.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic cloud storage object discovery (S3, Blobs, GCS) by monitoring 
-for recursive listing, metadata-heavy API calls, and anomalous output redirection. 
-Excludes high-trust backup and ETL service accounts.
+- **Leírás:** Detects systematic cloud storage object discovery in AWS S3, Azure Blobs,  and Google Cloud Storage by monitoring recursive listing, metadata-heavy  API calls, and anomalous output redirection. Filters high-trust backup,  ETL, and DevOps automation accounts.
 
 
 #### 🚨 Response Playbook

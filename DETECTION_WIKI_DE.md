@@ -632,7 +632,7 @@
 - [Verdächtige Aktivität beim Exportieren oder Diebstahl von Zertifikaten und privaten Schlüsseln](#verdächtige-aktivität-beim-exportieren-oder-diebstahl-von-zertifikaten-und-privaten-schlüsseln)
 - [High-Fidelity-Cloud-Kontoerwerb und -Initialisierung – T1650](#high-fidelity-cloud-kontoerwerb-und--initialisierung-–-t1650)
 - [Missbrauch von High-Fidelity-Cloud-Verwaltungsagenten](#missbrauch-von-high-fidelity-cloud-verwaltungsagenten)
-- [Verdächtige Gerätetreiberaufzählung aus anomalem Kontext (BYOVD Recon)](#verdächtige-gerätetreiberaufzählung-aus-anomalem-kontext-(byovd-recon))
+- [Aufzählung verdächtiger Gerätetreiber aus anomalem Kontext (BYOVD Recon)](#aufzählung-verdächtiger-gerätetreiber-aus-anomalem-kontext-(byovd-recon))
 - [Manipulation der Ultra-Pro-Energieeinstellungen (T1137.001)](#manipulation-der-ultra-pro-energieeinstellungen-(t1137001))
 - [Aufzählung verdächtiger Ereignisprotokolle aufgrund eines anomalen Ausführungskontexts](#aufzählung-verdächtiger-ereignisprotokolle-aufgrund-eines-anomalen-ausführungskontexts)
 - [Verdächtiger Identitätswechsel durch RunAs-Missbrauch oder irreführende lokale Kontoerstellung](#verdächtiger-identitätswechsel-durch-runas-missbrauch-oder-irreführende-lokale-kontoerstellung)
@@ -10965,16 +10965,14 @@ durch Analyse von Befehlszeilenschaltern und Prozessintegritätsstufen.
 
 
 ---
-## Ultra-Pro High-Fidelity-Cloud-Storage-Objekterkennung (T1619)
+## High-Fidelity-Erkennung von Cloud-Speicherobjekten
 - **ID:** `T1619.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Erkennung von Cloud-Speicherobjekten (S3, Blobs, GCS) durch Überwachung
-für rekursive Auflistung, metadatenintensive API-Aufrufe und anomale Ausgabeumleitung.
-Ausgeschlossen sind hochvertrauenswürdige Backup- und ETL-Dienstkonten.
+- **Beschreibung:** Erkennt die systematische Erkennung von Cloud-Speicherobjekten in AWS S3, Azure Blobs und Google Cloud Storage durch Überwachung rekursiver Auflistungen, metadatenintensiver API-Aufrufe und anomaler Ausgabeumleitung.Filtert hochvertrauenswürdige Backup-, ETL- und DevOps-Automatisierungskonten.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -11107,7 +11105,7 @@ die herkömmliche Netzwerk-Perimeter-Verteidigungsmaßnahmen umgehen.
 
 
 ---
-## Verdächtige Gerätetreiberaufzählung aus anomalem Kontext (BYOVD Recon)
+## Aufzählung verdächtiger Gerätetreiber aus anomalem Kontext (BYOVD Recon)
 - **ID:** `T1652.yaml`
 - **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)

@@ -1,61 +1,143 @@
-title: Ultra-Pro High-Fidelity Web Cookie Harvesting (T1606.001)
+title: Ultra-Pro High-Fidelity Web Cookie & Browser Credential Harvesting (T1606.001)
 id: 7296090b-96da-4373-b749-4c07d4556fd6
 status: stable
 description: |
-    Detects unauthorized extraction of browser cookies and their corresponding 
-    AES encryption keys from 'Local State' files. It specifically targets 
-    untrusted processes (interpreters, unsigned binaries) while filtering 
-    legitimate browser and Electron application behavior.
-author: hota05
+    Detects unauthorized extraction of browser cookies and encryption keys 
+    (Chromium Local State AES keys / DPAPI-protected credentials). 
+    Focuses on suspicious file access, SQLite dumping, DPAPI decryption patterns, 
+    and execution from untrusted or temporary locations. 
+    Filters legitimate browser, Electron, and security tooling behavior.
+
+author: hota05 
 date: 2026-02-04
+modified: 2026-02-11
 tags:
     - attack.credential_access
+    - attack.collection
     - attack.t1606.001
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_target_files:
-        CommandLine|contains:
-            - '\Network\Cookies'    
-            - '\Local State'          
-            - '\Login Data'        
-            - '\cookies.sqlite'     
 
-    selection_actions:
-        - CommandLine|contains:
-            - 'copy '
-            - 'type '               
-            - 'esentutl'              
-            - 'sqlite3'               
-            - ' -export'
-        - CommandLine|re: 'os_crypt.*encrypted_key' 
+  selection_browser_artifacts:
+    CommandLine|contains:
+      - '\Network\Cookies'
+      - '\User Data\Default\Cookies'
+      - '\User Data\Profile '
+      - '\Local State'
+      - '\Login Data'
+      - '\Web Data'
+      - '\cookies.sqlite'
+      - 'key4.db'
 
-    selection_untrusted_context:
-        Image|contains:
-            - '\Users\'
-            - '\AppData\Local\Temp\'
-            - '\Downloads\'
-            - '\Public\'
-        Image|endswith:
-            - '\powershell.exe'
-            - '\cmd.exe'
-            - '\python.exe'
-            - '\cscript.exe'
-            - '\wscript.exe'
+  selection_sqlite_dump:
+    CommandLine|contains:
+      - 'sqlite3'
+      - '.dump'
+      - 'select host_key'
+      - 'select encrypted_value'
+      - 'esentutl'
+      - '/y '
+      - 'copy '
+      - 'type '
+      - 'Get-Content'
 
-    filter_trusted_vendors:
-        Image|contains:
-            - '\Program Files\Google\Chrome\'
-            - '\Program Files (x86)\Microsoft\Edge\'
-            - '\Program Files\Mozilla Firefox\'
-            - '\Program Files\Microsoft\Teams\'
+  selection_key_extraction:
+    CommandLine|contains:
+      - 'os_crypt'
+      - 'encrypted_key'
+      - 'CryptUnprotectData'
+      - 'ProtectedData.Unprotect'
+      - 'FromBase64String'
+      - 'DPAPI'
+      - 'System.Security.Cryptography'
 
-    filter_system_processes:
-        ParentImage|endswith:
-            - '\services.exe'
-            - '\MsMpEng.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+  selection_stealer_keywords:
+    CommandLine|contains:
+      - 'ChromeGrabber'
+      - 'CookieGrabber'
+      - 'EdgeCookies'
+      - 'BrowserStealer'
+      - 'RedLine'
+      - 'Vidar'
+      - 'Raccoon'
 
-    condition: selection_target_files and (selection_actions or selection_untrusted_context) and not (filter_trusted_vendors or filter_system_processes)
+  selection_untrusted_process:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\python.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\rundll32.exe'
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\wsmprovhost.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+    IntegrityLevel: 'Medium'
+
+  selection_suspicious_path:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\Local\Temp\'
+      - '\Downloads\'
+      - '\Public\'
+
+  selection_staging:
+    CommandLine|contains:
+      - '\Users\Public\'
+      - '\AppData\Local\Temp\'
+      - '\Windows\Temp\'
+      - '.zip'
+      - '.7z'
+      - '.rar'
+      - 'Compress-Archive'
+-
+  filter_legit_browser:
+    Image|contains:
+      - '\Program Files\Google\Chrome\'
+      - '\Program Files (x86)\Google\Chrome\'
+      - '\Program Files (x86)\Microsoft\Edge\'
+      - '\Program Files\Mozilla Firefox\'
+      - '\Program Files\BraveSoftware\'
+      - '\Program Files\Opera\'
+
+  filter_legit_electron:
+    Image|contains:
+      - '\Microsoft\Teams\'
+      - '\Slack\'
+      - '\Discord\'
+      - '\OneDrive\'
+
+  filter_system_context:
+    username: 'NT AUTHORITY\SYSTEM'
+    ParentImage|endswith:
+      - '\services.exe'
+      - '\MsMpEng.exe'
+      - '\svchost.exe'
+
+  condition: (
+                selection_browser_artifacts
+                and (
+                     selection_sqlite_dump
+                     or selection_key_extraction
+                     or selection_stealer_keywords
+                    )
+             )
+             and (selection_untrusted_process or selection_suspicious_path or selection_staging)
+             and not (filter_legit_browser or filter_legit_electron or filter_system_context)
+
+falsepositives:
+  - Digital forensics investigations
+  - Enterprise password vault migration
+  - Controlled red team operations
+  - Incident response data triage
+
 level: critical

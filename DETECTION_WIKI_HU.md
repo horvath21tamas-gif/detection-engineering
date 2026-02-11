@@ -487,7 +487,7 @@
 - [High-Fidelity Launch Daemon Persistence Detection](#high-fidelity-launch-daemon-persistence-detection)
 - [High-Fidelity rendszerszolgáltatás-végrehajtás észlelése (T1569.002)](#high-fidelity-rendszerszolgáltatás-végrehajtás-észlelése-(t1569002))
 - [Ultra-Pro High-Fidelity Lateral Tool Transfer (T1570)](#ultra-pro-high-fidelity-lateral-tool-transfer-(t1570))
-- [Ultra-Pro High-Fidelity, nem szabványos C2 port (T1571)](#ultra-pro-high-fidelity-nem-szabványos-c2-port-(t1571))
+- [Nem szabványos C2 port (T1571)](#nem-szabványos-c2-port-(t1571))
 - [Ultra-Pro High-Fidelity Protocol Tunneling Detection (T1571)](#ultra-pro-high-fidelity-protocol-tunneling-detection-(t1571))
 - [Ultra-Pro High-Fidelity titkosított C2 csatorna (T1573)](#ultra-pro-high-fidelity-titkosított-c2-csatorna-(t1573))
 - [Ultra-Pro nagy pontosságú szimmetrikus titkosítási C2 csatorna (T1573.001)](#ultra-pro-nagy-pontosságú-szimmetrikus-titkosítási-c2-csatorna-(t1573001))
@@ -8800,16 +8800,18 @@ bitsadmin vagy robocopy.
 
 
 ---
-## Ultra-Pro High-Fidelity, nem szabványos C2 port (T1571)
+## Nem szabványos C2 port (T1571)
 - **ID:** `T1571.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Kritikusan Magas (SIEM gyilkos kategória!)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a C2 kommunikációt a nem szabványos portokon keresztül a magas kockázatú korrelációval
-natív binárisok (LoLBins) kimenő nyilvános hálózati kapcsolatokkal
-a szabványos web/mail/címtár szolgáltatási tartományon kívüli portokra.
+- **Leírás:** Érzékeli a parancs és vezérlés (C2) kommunikációt a nem szabványos portokon keresztül
+a magas kockázatú natív binárisok (LoLBins) korrelációja a kimenő nyilvános hálózattal
+kapcsolatok a szabványos web-, levelezési és címtárszolgáltatási tartományon kívüli portokhoz.
+Kiszűri a törvényes automatizálást, a belső hálózati forgalmat és a rendszerbináris fájlokat
+a hamis pozitívumok csökkentésére.
 
 #### 🚨 Response Playbook
 1. **IP hírnév: Ellenőrizd a távoli IP címet hírnév-adatbázisokban.**

@@ -487,7 +487,7 @@
 - [High-Fidelity-Launch-Daemon-Persistenzerkennung](#high-fidelity-launch-daemon-persistenzerkennung)
 - [High-Fidelity-Systemdienstausführungserkennung (T1569.002)](#high-fidelity-systemdienstausführungserkennung-(t1569002))
 - [Ultra-Pro High-Fidelity-lateraler Werkzeugtransfer (T1570)](#ultra-pro-high-fidelity-lateraler-werkzeugtransfer-(t1570))
-- [Ultra-Pro High-Fidelity Nicht-Standard-Port C2 (T1571)](#ultra-pro-high-fidelity-nicht-standard-port-c2-(t1571))
+- [Nicht-Standard-Port C2 (T1571)](#nicht-standard-port-c2-(t1571))
 - [Ultra-Pro High-Fidelity-Protokoll-Tunneling-Erkennung (T1571)](#ultra-pro-high-fidelity-protokoll-tunneling-erkennung-(t1571))
 - [Ultra-Pro High-Fidelity-verschlüsselter C2-Kanal (T1573)](#ultra-pro-high-fidelity-verschlüsselter-c2-kanal-(t1573))
 - [Ultra-Pro High-Fidelity Symmetric Encryption C2-Kanal (T1573.001)](#ultra-pro-high-fidelity-symmetric-encryption-c2-kanal-(t1573001))
@@ -8800,16 +8800,18 @@ bitsadmin oder robocopy.
 
 
 ---
-## Ultra-Pro High-Fidelity Nicht-Standard-Port C2 (T1571)
+## Nicht-Standard-Port C2 (T1571)
 - **ID:** `T1571.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Kritisch hoch (SIEM-Killerkategorie!)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt C2-Kommunikation über nicht standardmäßige Ports durch Korrelation mit hohem Risiko
-native Binärdateien (LoLBins) mit ausgehenden öffentlichen Netzwerkverbindungen
-an Ports außerhalb der Standardbereiche von Web-/Mail-/Verzeichnisdiensten.
+- **Beschreibung:** Erkennt Command-and-Control-Kommunikation (C2) über nicht standardmäßige Ports durch
+Korrelation hochriskanter nativer Binärdateien (LoLBins) mit ausgehenden öffentlichen Netzwerken
+Verbindungen zu Ports außerhalb der Standardbereiche von Web-, E-Mail- und Verzeichnisdiensten.
+Filtert legitime Automatisierung, internen Netzwerkverkehr und Systembinärdateien heraus
+um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **IP-Reputation: Überprüfen Sie die Remote-IP-Adresse in Reputationsdatenbanken.**

@@ -493,7 +493,7 @@
 | T1569.001 | CRITICAL | High-Fidelity Launch Daemon Persistence Detection |
 | T1569.002 | HIGH | High-Fidelity System Service Execution Detection, High-Fidelity System Service Execution Detection (T1569.002) |
 | T1570 | HIGH | Ultra-Pro High-Fidelity Lateral Tool Transfer (T1570) |
-| T1571 | CRITICAL | Ultra-Pro High-Fidelity Non-Standard Port C2 (T1571) |
+| T1571 | CRITICAL | Non-Standard Port C2 (T1571) |
 | T1572 | CRITICAL | Ultra-Pro High-Fidelity Protocol Tunneling Detection (T1571) |
 | T1573 | CRITICAL | Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573) |
 | T1573.001 | CRITICAL | Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573), Ultra-Pro High-Fidelity Symmetric Encryption C2 Channel (T1573.001) |

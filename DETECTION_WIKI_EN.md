@@ -487,7 +487,7 @@
 - [High-Fidelity Launch Daemon Persistence Detection](#high-fidelity-launch-daemon-persistence-detection)
 - [High-Fidelity System Service Execution Detection (T1569.002)](#high-fidelity-system-service-execution-detection-(t1569002))
 - [Ultra-Pro High-Fidelity Lateral Tool Transfer (T1570)](#ultra-pro-high-fidelity-lateral-tool-transfer-(t1570))
-- [Ultra-Pro High-Fidelity Non-Standard Port C2 (T1571)](#ultra-pro-high-fidelity-non-standard-port-c2-(t1571))
+- [Non-Standard Port C2 (T1571)](#non-standard-port-c2-(t1571))
 - [Ultra-Pro High-Fidelity Protocol Tunneling Detection (T1571)](#ultra-pro-high-fidelity-protocol-tunneling-detection-(t1571))
 - [Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573)](#ultra-pro-high-fidelity-encrypted-c2-channel-(t1573))
 - [Ultra-Pro High-Fidelity Symmetric Encryption C2 Channel (T1573.001)](#ultra-pro-high-fidelity-symmetric-encryption-c2-channel-(t1573001))
@@ -9275,16 +9275,18 @@ bitsadmin or robocopy.
 
 
 ---
-## Ultra-Pro High-Fidelity Non-Standard Port C2 (T1571)
+## Non-Standard Port C2 (T1571)
 - **ID:** `T1571.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Kritikusan Magas (SIEM gyilkos kategória!)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects C2 communication over non-standard ports by correlating high-risk 
-native binaries (LoLBins) with outbound public network connections 
-to ports outside the standard web/mail/directory service ranges.
+- **Leírás:** Detects command-and-control (C2) communication over non-standard ports by 
+correlating high-risk native binaries (LoLBins) with outbound public network 
+connections to ports outside standard web, mail, and directory service ranges. 
+Filters out legitimate automation, internal network traffic, and system binaries 
+to reduce false positives.
 
 
 #### 🚨 Response Playbook

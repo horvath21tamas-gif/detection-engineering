@@ -441,7 +441,7 @@
 - [Verdächtige Beendigung von Sicherheitsdiensten](#verdächtige-beendigung-von-sicherheitsdiensten)
 - [Deaktivieren oder ändern Sie den Windows Defender-Schutz mit PowerShell](#deaktivieren-oder-ändern-sie-den-windows-defender-schutz-mit-powershell)
 - [Ultra-Pro High-Fidelity Deaktivieren Sie die Windows-Ereignisprotokollierung (T1562.002)](#ultra-pro-high-fidelity-deaktivieren-sie-die-windows-ereignisprotokollierung-(t1562002))
-- [Beeinträchtigung der Ultra-Pro High-Fidelity-Befehlsverlaufsprotokollierung (T1562.003)](#beeinträchtigung-der-ultra-pro-high-fidelity-befehlsverlaufsprotokollierung-(t1562003))
+- [Beeinträchtigung der Protokollierung des Befehlsverlaufs](#beeinträchtigung-der-protokollierung-des-befehlsverlaufs)
 - [Verdächtige Firewall-Änderung über Netsh.exe](#verdächtige-firewall-änderung-über-netshexe)
 - [Ultra-Pro High-Fidelity-Indikatorblockierung und Telemetrie-Stummschaltung (T1562.006)](#ultra-pro-high-fidelity-indikatorblockierung-und-telemetrie-stummschaltung-(t1562006))
 - [Beeinträchtigung der Ultra-Pro High-Fidelity Cloud Firewall (T1562.007)](#beeinträchtigung-der-ultra-pro-high-fidelity-cloud-firewall-(t1562007))
@@ -7983,16 +7983,23 @@ und heimliche Wevtutil-Nutzung durch Nicht-Systemprozesse.
 
 
 ---
-## Beeinträchtigung der Ultra-Pro High-Fidelity-Befehlsverlaufsprotokollierung (T1562.003)
+## Beeinträchtigung der Protokollierung des Befehlsverlaufs
 - **ID:** `T1562_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezielte Versuche, die Protokollierung des Befehlsverlaufs zu unterdrücken oder umzuleiten.
-Konzentriert sich auf den Missbrauch von Set-PSReadLineOption (SaveNothing, $null-Umleitung)
-und Konsolenpufferunterdrückung, um eine forensische Wiederherstellung von Befehlen zu verhindern.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochzuverlässige Versuche, interaktive Systeme zu unterdrücken oder zu manipulieren
+Protokollierung des Befehlsverlaufs auf Windows-Systemen.
+
+Konzentriert sich auf:
+- PowerShell PSReadLine-Missbrauch (SaveNothing, HistorySavePath-Umleitung)
+– Löschen der Verlaufsdatei (ConsoleHost_history.txt, Bash-Verlauf)
+- Registrierungsbasierte Konsolenpufferunterdrückung
+– Verschlüsselte PowerShell versucht, das Protokollierungsverhalten zu ändern
+
+Ausgerichtet auf MITRE ATT&CK T1562.003.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

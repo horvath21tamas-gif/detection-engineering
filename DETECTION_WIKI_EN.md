@@ -441,7 +441,7 @@
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
 - [Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002)](#ultra-pro-high-fidelity-disable-windows-event-logging-(t1562002))
-- [Ultra-Pro High-Fidelity Command History Logging Impairment (T1562.003)](#ultra-pro-high-fidelity-command-history-logging-impairment-(t1562003))
+- [Command History Logging Impairment](#command-history-logging-impairment)
 - [Suspicious Firewall Modification via Netsh.exe](#suspicious-firewall-modification-via-netshexe)
 - [Ultra-Pro High-Fidelity Indicator Blocking and Telemetry Silencing (T1562.006)](#ultra-pro-high-fidelity-indicator-blocking-and-telemetry-silencing-(t1562006))
 - [Ultra-Pro High-Fidelity Cloud Firewall Impairment (T1562.007)](#ultra-pro-high-fidelity-cloud-firewall-impairment-(t1562007))
@@ -8412,16 +8412,23 @@ and stealthy wevtutil usage by non-system processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Command History Logging Impairment (T1562.003)
+## Command History Logging Impairment
 - **ID:** `T1562_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted attempts to suppress or redirect command history logging. 
-Focuses on Set-PSReadLineOption abuse (SaveNothing, $null redirection) 
-and console buffer suppression to prevent forensic recovery of commands.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence attempts to suppress or tamper with interactive
+command history logging on Windows systems.
+
+Focuses on:
+  - PowerShell PSReadLine abuse (SaveNothing, HistorySavePath redirection)
+  - History file deletion (ConsoleHost_history.txt, bash history)
+  - Registry-based console buffer suppression
+  - Encoded PowerShell attempts to modify logging behavior
+
+Aligned with MITRE ATT&CK T1562.003.
 
 
 #### 🚨 Response Playbook

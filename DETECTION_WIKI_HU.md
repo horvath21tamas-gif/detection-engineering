@@ -441,7 +441,7 @@
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
 - [Ultra-Pro High-Fidelity Windows eseménynaplózás letiltása (T1562.002)](#ultra-pro-high-fidelity-windows-eseménynaplózás-letiltása-(t1562002))
-- [Ultra-Pro High-Fidelity parancselőzmények naplózási károsodása (T1562.003)](#ultra-pro-high-fidelity-parancselőzmények-naplózási-károsodása-(t1562003))
+- [Parancselőzmények naplózási károsodása](#parancselőzmények-naplózási-károsodása)
 - [Gyanús tűzfalmódosítás a Netsh.exe-n keresztül](#gyanús-tűzfalmódosítás-a-netshexe-n-keresztül)
 - [Ultra-Pro High-Fidelity jelzőblokkolás és telemetriás hangcsillapítás (T1562.006)](#ultra-pro-high-fidelity-jelzőblokkolás-és-telemetriás-hangcsillapítás-(t1562006))
 - [Ultra-Pro High-Fidelity Cloud Firewall károsodás (T1562.007)](#ultra-pro-high-fidelity-cloud-firewall-károsodás-(t1562007))
@@ -7983,16 +7983,23 @@ A szolgáltatásfüggőség szabotázsára, a rendszerleíró adatbázis alapú 
 
 
 ---
-## Ultra-Pro High-Fidelity parancselőzmények naplózási károsodása (T1562.003)
+## Parancselőzmények naplózási károsodása
 - **ID:** `T1562_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a parancselőzmények naplózásának letiltására vagy átirányítására irányuló célzott kísérleteket.
-A Set-PSReadLineOption visszaélésre összpontosít (SaveNothing, $null átirányítás)
-és a konzolpuffer elnyomása a parancsok kriminalisztikai helyreállításának megakadályozására.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a nagy megbízhatóságú kísérleteket az interaktív elnyomására vagy manipulálására
+parancselőzmények naplózása Windows rendszereken.
+
+A következőkre összpontosít:
+- PowerShell PSReadLine visszaélés (SaveNothing, HistorySavePath átirányítás)
+- Előzményfájl törlése (ConsoleHost_history.txt, bash történelem)
+- Registry-alapú konzolpufferelnyomás
+- A kódolt PowerShell megpróbálja módosítani a naplózási viselkedést
+
+A MITER ATT&CK T1562.003 szabványhoz igazítva.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

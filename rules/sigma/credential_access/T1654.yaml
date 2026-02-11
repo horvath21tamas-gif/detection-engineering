@@ -1,53 +1,125 @@
-title: Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654)
+title: Suspicious Event Log Enumeration from Anomalous Execution Context
 id: bd388570-5049-4f3d-8f14-d9661673f6e9
 status: stable
-description: |
-    Detects systematic enumeration of system event logs (metadata harvesting) 
-    using native tools or PowerShell. Focuses on identifying security products 
-    via log channel discovery from anomalous execution contexts.
-author: hota05
+description: >
+  Detects suspicious enumeration of Windows event logs using native utilities 
+  (wevtutil) or PowerShell cmdlets (Get-WinEvent, Get-EventLog) from anomalous 
+  execution contexts. Focuses on log channel discovery and metadata harvesting 
+  potentially used to identify security tooling or evade detection.
+
+author: hota05 
 date: 2026-02-04
+modified: 2026-02-11
+references:
+  - https://attack.mitre.org/techniques/T1082/
+  - https://attack.mitre.org/techniques/T1007/
 tags:
-    - attack.discovery
-    - attack.t1654
+  - attack.discovery
+  - attack.t1082
+  - attack.t1007
+  - attack.t1654
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\wevtutil.exe'
-        - CommandLine|contains:
-            - 'Get-WinEvent'
-            - 'Get-EventLog'
-            - 'enum-logs'      
-            - 'el '            
+  selection_wevtutil_binary:
+    Image|endswith: '\wevtutil.exe'
 
-    selection_patterns:
-        CommandLine|contains:
-            - ' -ListLog '     
-            - ' get-log '       
-            - ' /f:json'        
-            - 'ConvertTo-Json'
-            - ' > '             
+  selection_wevtutil_enum:
+    CommandLine|contains:
+      - ' enum-logs'
+      - ' el '
+      - ' gli '
+      - ' qe '
+      - ' /f:xml'
+      - ' /f:json'
 
-    selection_suspicious_lineage:
-        ParentImage|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\wsmprovhost.exe' 
-            - '\httpd.exe'       
-            - '\winword.exe'     
-        IntegrityLevel: 'Medium'
+  selection_powershell_binary:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
 
-    filter_legit_monitoring:
-        username: 'NT AUTHORITY\SYSTEM'
-        Image|contains:
-            - '\Program Files\SplunkUniversalForwarder\'
-            - '\Program Files\Elastic\Agent\'
-            - '\Windows\System32\CcmExec.exe' 
-        CommandLine|contains:
-            - 'Get-WinEvent -FilterHashtable' 
+  selection_powershell_enum:
+    CommandLine|contains:
+      - 'Get-WinEvent'
+      - 'Get-EventLog'
+      - '-ListLog'
+      - 'LogName'
+      - 'ConvertTo-Json'
+      - 'Out-File'
+      - ' > '
 
-    condition: selection_tools and (selection_patterns or selection_suspicious_lineage) and not filter_legit_monitoring
+  powershell_condition:
+    selection_powershell_binary
+    and selection_powershell_enum
+
+  wevtutil_condition:
+    selection_wevtutil_binary
+    and selection_wevtutil_enum
+
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\rundll32.exe'
+      - '\wsmprovhost.exe'
+      - '\httpd.exe'
+      - '\w3wp.exe'
+
+  selection_suspicious_path:
+    Image|contains:
+      - '\AppData\Local\Temp\'
+      - '\Users\Public\'
+      - '\ProgramData\'
+      - '\Windows\Temp\'
+
+  selection_medium_integrity:
+    IntegrityLevel: 'Medium'
+
+  filter_legitimate_agents:
+    Image|contains:
+      - '\SplunkUniversalForwarder\'
+      - '\Elastic\Agent\'
+      - '\Program Files\Microsoft Monitoring Agent\'
+      - '\Windows\System32\CcmExec.exe'
+
+  filter_system_context:
+    User|startswith:
+      - 'NT AUTHORITY\'
+      - 'NT SERVICE\'
+
+  filter_expected_admin_usage:
+    CommandLine|contains:
+      - 'Get-WinEvent -FilterHashtable'
+      - '-MaxEvents'
+      - '-ComputerName'
+
+  condition:
+    (
+      wevtutil_condition
+      or powershell_condition
+    )
+    and (
+      selection_suspicious_parent
+      or selection_suspicious_path
+      or selection_medium_integrity
+    )
+    and not filter_legitimate_agents
+    and not filter_system_context
+    and not filter_expected_admin_usage
+
+falsepositives:
+  - Authorized administrative troubleshooting
+  - Security monitoring or log forwarding agents
+  - Incident response activity
+  - Enterprise compliance auditing scripts
+
 level: high

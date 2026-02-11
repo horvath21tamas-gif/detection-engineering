@@ -1,59 +1,79 @@
-title: Ultra-Pro High-Fidelity Resource Extraction and Abuse (T1564.009)
+title: Resource Extraction and Abuse (T1564.009)
 id: 376ee868-c545-4d51-9fbb-5dd0f3a307a1
 status: stable
 description: |
-    Detects the abuse of binary resource sections and help file interpreters 
-    (hh.exe, winhlp32.exe) to extract or execute hidden payloads. 
-    Focuses on protocol smuggling (its:, ms-its:) and suspicious de-compilation.
-author: hota05
-date: 2026-02-03
+  Detects abuse of binary resource sections and help file interpreters
+  (hh.exe, winhlp32.exe) for extracting or executing hidden payloads. 
+  Monitors suspicious parent processes, protocol smuggling (its:, ms-its:),
+  decompilation attempts, and non-standard file paths.
+author: hota05 
+date: 2026-02-11
 tags:
-    - attack.defense_evasion
-    - attack.t1564.009
+  - attack.defense_evasion
+  - attack.t1564.009
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_tools:
-        Image|endswith:
-            - '\hh.exe'           
-            - '\winhlp32.exe'    
-            - '\extracticon.exe'  
-            - '\rc.exe'       
+  selection_tools:
+    Image|endswith:
+      - '\hh.exe'
+      - '\winhlp32.exe'
+      - '\extracticon.exe'
+      - '\rc.exe'
 
-    selection_params:
-        CommandLine|contains:
-            - '-decompile'     
-            - 'its:'           
-            - 'ms-its:'
-            - 'mk:@MSITStore:'  
-            - 'javascript:'   
-            - 'vbscript:'
+  selection_params:
+    CommandLine|contains:
+      - '-decompile'
+      - 'its:'
+      - 'ms-its:'
+      - 'mk:@MSITStore:'
+      - 'javascript:'
+      - 'vbscript:'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\mshta.exe'
-            - '\powershell.exe'
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\mshta.exe'
+      - '\powershell.exe'
 
-    selection_suspicious_path:
-        CommandLine|contains:
-            - '\Users\Public\'
-            - '\Downloads\'
-            - '\Temp\'
-            - '\AppData\'
+  selection_suspicious_path:
+    CommandLine|contains:
+      - '\Users\Public\'
+      - '\Downloads\'
+      - '\Temp\'
+      - '\AppData\'
 
-    filter_trusted_apps:
-        - ParentImage|contains:
-            - '\Program Files\'
-            - '\Program Files (x86)\'
-            - '\Windows\System32\svchost.exe'
-        - CommandLine|contains:
-            - 'ms-help://' 
+  filter_trusted_apps:
+    - ParentImage|contains:
+        - '\Program Files\'
+        - '\Program Files (x86)\'
+        - '\Windows\System32\svchost.exe'
+    - CommandLine|contains:
+        - 'ms-help://'
 
-    condition: selection_tools and (selection_params or selection_suspicious_parent or (selection_suspicious_path and not filter_trusted_apps))
+  condition: selection_tools and
+             (
+               selection_params or
+               selection_suspicious_parent or
+               (selection_suspicious_path and not filter_trusted_apps)
+             )
+
+fields:
+  - Time
+  - SourceImage
+  - ParentImage
+  - CommandLine
+  - SourceUsername
+
+falsepositives:
+  - Help file compilation or decompilation by system administrators
+  - Known vendor development tools (e.g., Visual Studio resource compilers)
+  - Internal scripting using hh.exe or rc.exe for documentation purposes
+
 level: high

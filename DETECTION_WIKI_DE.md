@@ -8405,7 +8405,7 @@ und direkte Befehlsausführung innerhalb virtueller Instanzen.
 
 
 ---
-## Ultraprofessionelle High-Fidelity-Datenmanipulation (T1565)
+## Datenmanipulation (T1565)
 - **ID:** `T1565.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

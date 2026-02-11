@@ -8405,7 +8405,7 @@ A nem megbízható szülői folyamatokra, a nem szabványos konfigurációk bet�
 
 
 ---
-## Ultra-Pro nagy pontosságú adatkezelés (T1565)
+## Adatkezelés (T1565)
 - **ID:** `T1565.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

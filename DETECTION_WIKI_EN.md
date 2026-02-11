@@ -8858,7 +8858,7 @@ and direct command execution within virtual instances.
 
 
 ---
-## Ultra-Pro High-Fidelity Data Manipulation (T1565)
+## Data Manipulation (T1565)
 - **ID:** `T1565.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

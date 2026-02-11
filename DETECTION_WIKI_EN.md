@@ -629,7 +629,7 @@
 - [Ultra-Pro Stealthy Debugger Evasion (T1622)](#ultra-pro-stealthy-debugger-evasion-(t1622))
 - [Ultra-Pro High-Fidelity macOS Plist Persistence Modification (T1647)](#ultra-pro-high-fidelity-macos-plist-persistence-modification-(t1647))
 - [High-Fidelity Serverless Function Persistence or Abuse](#high-fidelity-serverless-function-persistence-or-abuse)
-- [Ultra-Pro High-Fidelity Certificate & Private Key Theft (T1649)](#ultra-pro-high-fidelity-certificate-&-private-key-theft-(t1649))
+- [Suspicious Certificate and Private Key Export or Theft Activity](#suspicious-certificate-and-private-key-export-or-theft-activity)
 - [High-Fidelity Cloud Account Acquisition and Initialization - T1650](#high-fidelity-cloud-account-acquisition-and-initialization---t1650)
 - [High-Fidelity Cloud Administration Agent Abuse](#high-fidelity-cloud-administration-agent-abuse)
 - [Suspicious Device Driver Enumeration From Anomalous Context (BYOVD Recon)](#suspicious-device-driver-enumeration-from-anomalous-context-(byovd-recon))
@@ -11684,16 +11684,14 @@ Focuses on bypassing CI/CD pipelines.
 
 
 ---
-## Ultra-Pro High-Fidelity Certificate & Private Key Theft (T1649)
+## Suspicious Certificate and Private Key Export or Theft Activity
 - **ID:** `T1649.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized extraction of digital certificates and private keys. 
-Identifies memory patching to bypass export restrictions, suspicious certutil 
-parameters, and key theft using offensive tools like Mimikatz or Certify.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects potential theft of digital certificates and private keys via certutil abuse, PowerShell-based key export, or offensive tooling (e.g. Mimikatz crypto::export, Certify). Focuses on export operations, private key access, and suspicious output staging paths.
 
 
 #### 🚨 Response Playbook

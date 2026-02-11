@@ -629,7 +629,7 @@
 - [Ultra-Pro Stealthy Debugger Evasion (T1622)](#ultra-pro-stealthy-debugger-evasion-(t1622))
 - [Ultra-Pro High-Fidelity macOS Plist Persistence Modification (T1647)](#ultra-pro-high-fidelity-macos-plist-persistence-modification-(t1647))
 - [High-Fidelity szerver nélküli funkció tartósság vagy visszaélés](#high-fidelity-szerver-nélküli-funkció-tartósság-vagy-visszaélés)
-- [Ultra-Pro High-Fidelity tanúsítvány és magánkulcs-lopás (T1649)](#ultra-pro-high-fidelity-tanúsítvány-és-magánkulcs-lopás-(t1649))
+- [Gyanús tanúsítvány és privát kulcs exportálása vagy lopási tevékenység](#gyanús-tanúsítvány-és-privát-kulcs-exportálása-vagy-lopási-tevékenység)
 - [High-Fidelity Cloud-fiók megszerzése és inicializálása – T1650](#high-fidelity-cloud-fiók-megszerzése-és-inicializálása-–-t1650)
 - [High-Fidelity Cloud Administration Agent Agent Abuse](#high-fidelity-cloud-administration-agent-agent-abuse)
 - [Gyanús eszközillesztő-felsorolás rendellenes kontextusból (BYOVD Recon)](#gyanús-eszközillesztő-felsorolás-rendellenes-kontextusból-(byovd-recon))
@@ -11067,16 +11067,14 @@ A CI/CD csővezetékek megkerülésére összpontosít.
 
 
 ---
-## Ultra-Pro High-Fidelity tanúsítvány és magánkulcs-lopás (T1649)
+## Gyanús tanúsítvány és privát kulcs exportálása vagy lopási tevékenység
 - **ID:** `T1649.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a digitális tanúsítványok és magánkulcsok jogosulatlan kimásolását.
-Azonosítja a memóriafoltozást az exportkorlátozások megkerülésére, gyanús certutil
-paramétereket, és kulcslopást olyan támadó eszközökkel, mint a Mimikatz vagy a Certify.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Észleli a digitális tanúsítványok és magánkulcsok esetleges ellopását certutil visszaélés, PowerShell-alapú kulcsexport vagy támadó eszközök (pl. Mimikatz crypto::export, Certify) révén.Az exportálási műveletekre, a privát kulcsokhoz való hozzáférésre és a gyanús kimeneti állomásozási útvonalakra összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

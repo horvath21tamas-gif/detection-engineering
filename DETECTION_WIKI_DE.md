@@ -629,7 +629,7 @@
 - [Ultra-Pro Stealthy Debugger Evasion (T1622)](#ultra-pro-stealthy-debugger-evasion-(t1622))
 - [Ultra-Pro High-Fidelity macOS Plist Persistenzmodifikation (T1647)](#ultra-pro-high-fidelity-macos-plist-persistenzmodifikation-(t1647))
 - [Persistenz oder Missbrauch von serverlosen High-Fidelity-Funktionen](#persistenz-oder-missbrauch-von-serverlosen-high-fidelity-funktionen)
-- [Ultra-Pro High-Fidelity-Zertifikat und Diebstahl privater Schlüssel (T1649)](#ultra-pro-high-fidelity-zertifikat-und-diebstahl-privater-schlüssel-(t1649))
+- [Verdächtige Aktivität beim Exportieren oder Diebstahl von Zertifikaten und privaten Schlüsseln](#verdächtige-aktivität-beim-exportieren-oder-diebstahl-von-zertifikaten-und-privaten-schlüsseln)
 - [High-Fidelity-Cloud-Kontoerwerb und -Initialisierung – T1650](#high-fidelity-cloud-kontoerwerb-und--initialisierung-–-t1650)
 - [Missbrauch von High-Fidelity-Cloud-Verwaltungsagenten](#missbrauch-von-high-fidelity-cloud-verwaltungsagenten)
 - [Verdächtige Gerätetreiberaufzählung aus anomalem Kontext (BYOVD Recon)](#verdächtige-gerätetreiberaufzählung-aus-anomalem-kontext-(byovd-recon))
@@ -11067,16 +11067,14 @@ Konzentriert sich auf die Umgehung von CI/CD-Pipelines.
 
 
 ---
-## Ultra-Pro High-Fidelity-Zertifikat und Diebstahl privater Schlüssel (T1649)
+## Verdächtige Aktivität beim Exportieren oder Diebstahl von Zertifikaten und privaten Schlüsseln
 - **ID:** `T1649.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die unbefugte Entnahme digitaler Zertifikate und privater Schlüssel.
-Identifiziert Speicherpatching zur Umgehung von Exportbeschränkungen, verdächtiges Zertifikat „certutil“.
-Parameter und Schlüsseldiebstahl mithilfe anstößiger Tools wie Mimikatz oder Certify.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt potenziellen Diebstahl digitaler Zertifikate und privater Schlüssel durch Certutil-Missbrauch, PowerShell-basierten Schlüsselexport oder anstößige Tools (z. B. Mimikatz crypto::export, Certify).Konzentriert sich auf Exportvorgänge, Zugriff auf private Schlüssel und verdächtige Ausgabe-Staging-Pfade.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

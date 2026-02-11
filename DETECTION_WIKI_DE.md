@@ -482,7 +482,7 @@
 - [Ultraprofessionelle, dynamische Auflösung und DGA (T1568)](#ultraprofessionelle-dynamische-auflösung-und-dga-(t1568))
 - [Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001)](#ultra-pro-high-fidelity-fast-flux-&-dns-cache-evasion-(t1568001))
 - [Ultra-Pro High-Fidelity Domain Generation Algorithmus (DGA) (T1568.002)](#ultra-pro-high-fidelity-domain-generation-algorithmus-(dga)-(t1568002))
-- [Ultra-Pro High-Fidelity-DNS-Berechnung und -Extraktion (T1568.003)](#ultra-pro-high-fidelity-dns-berechnung-und--extraktion-(t1568003))
+- [DNS-Berechnung und -Extraktion (T1568.003)](#dns-berechnung-und--extraktion-(t1568003))
 - [High-Fidelity-Erkennung der Ausführung von Systemdiensten](#high-fidelity-erkennung-der-ausführung-von-systemdiensten)
 - [High-Fidelity-Launch-Daemon-Persistenzerkennung](#high-fidelity-launch-daemon-persistenzerkennung)
 - [High-Fidelity-Systemdienstausführungserkennung (T1569.002)](#high-fidelity-systemdienstausführungserkennung-(t1569002))
@@ -8711,16 +8711,17 @@ aus nicht standardmäßigen Prozessen.
 
 
 ---
-## Ultra-Pro High-Fidelity-DNS-Berechnung und -Extraktion (T1568.003)
+## DNS-Berechnung und -Extraktion (T1568.003)
 - **ID:** `T1568_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die C2-Adressberechnung durch Identifizierung programmgesteuerter DNS-TXT/SRV-Einträge
-Abruf mit anschließender expliziter Datentypkonvertierung oder Manipulation auf Byte-Ebene
-innerhalb von Skriptinterpretern.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die Adressberechnung der C2-Infrastruktur über DNS durch programmgesteuerte Überwachung
+Abrufen von TXT/SRV-Datensätzen mit anschließender Manipulation auf Byte-Ebene oder Typkonvertierung
+in Skriptdolmetschern.Filtert legitime DNS-basierte Automatisierung, Lizenzprüfungen usw. heraus.
+und Domain-Verifizierungsprozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

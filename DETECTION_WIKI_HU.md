@@ -482,7 +482,7 @@
 - [Ultra-Pro High-Fidelity dinamikus felbontás és DGA (T1568)](#ultra-pro-high-fidelity-dinamikus-felbontás-és-dga-(t1568))
 - [Ultra-Pro High-Fidelity Fast Flux és DNS Cache Evasion (T1568.001)](#ultra-pro-high-fidelity-fast-flux-és-dns-cache-evasion-(t1568001))
 - [Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002)](#ultra-pro-high-fidelity-domain-generation-algorithm-(dga)-(t1568002))
-- [Ultra-Pro High-Fidelity DNS számítás és kivonás (T1568.003)](#ultra-pro-high-fidelity-dns-számítás-és-kivonás-(t1568003))
+- [DNS számítás és kinyerés (T1568.003)](#dns-számítás-és-kinyerés-(t1568003))
 - [High-Fidelity rendszerszolgáltatás-végrehajtás észlelése](#high-fidelity-rendszerszolgáltatás-végrehajtás-észlelése)
 - [High-Fidelity Launch Daemon Persistence Detection](#high-fidelity-launch-daemon-persistence-detection)
 - [High-Fidelity rendszerszolgáltatás-végrehajtás észlelése (T1569.002)](#high-fidelity-rendszerszolgáltatás-végrehajtás-észlelése-(t1569002))
@@ -8711,16 +8711,17 @@ nem szabványos folyamatokból.
 
 
 ---
-## Ultra-Pro High-Fidelity DNS számítás és kivonás (T1568.003)
+## DNS számítás és kinyerés (T1568.003)
 - **ID:** `T1568_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A programozott DNS TXT/SRV rekord azonosításával észleli a C2 cím kiszámítását
-visszakeresés, amelyet explicit adattípus-konverzió vagy bájtszintű manipuláció követ
-script interpretereken belül.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a C2 infrastruktúra címszámítását DNS-en keresztül a programozott figyeléssel
+TXT/SRV rekordok lekérése, majd bájt szintű manipuláció vagy típuskonverzió
+forgatókönyv-értelmezésekben.Kiszűri a jogszerű DNS-alapú automatizálást, a licencellenőrzéseket,
+és domain-ellenőrzési folyamatok.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

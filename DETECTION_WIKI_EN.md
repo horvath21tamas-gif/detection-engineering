@@ -482,7 +482,7 @@
 - [Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568)](#ultra-pro-high-fidelity-dynamic-resolution-&-dga-(t1568))
 - [Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001)](#ultra-pro-high-fidelity-fast-flux-&-dns-cache-evasion-(t1568001))
 - [Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002)](#ultra-pro-high-fidelity-domain-generation-algorithm-(dga)-(t1568002))
-- [Ultra-Pro High-Fidelity DNS Calculation & Extraction (T1568.003)](#ultra-pro-high-fidelity-dns-calculation-&-extraction-(t1568003))
+- [DNS Calculation & Extraction (T1568.003)](#dns-calculation-&-extraction-(t1568003))
 - [High-Fidelity System Service Execution Detection](#high-fidelity-system-service-execution-detection)
 - [High-Fidelity Launch Daemon Persistence Detection](#high-fidelity-launch-daemon-persistence-detection)
 - [High-Fidelity System Service Execution Detection (T1569.002)](#high-fidelity-system-service-execution-detection-(t1569002))
@@ -9181,16 +9181,17 @@ from non-standard processes.
 
 
 ---
-## Ultra-Pro High-Fidelity DNS Calculation & Extraction (T1568.003)
+## DNS Calculation & Extraction (T1568.003)
 - **ID:** `T1568_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects C2 address calculation by identifying programmatic DNS TXT/SRV record 
-retrieval followed by explicit data type conversion or byte-level manipulation 
-within script interpreters.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects C2 infrastructure address calculation via DNS by monitoring programmatic 
+retrieval of TXT/SRV records followed by byte-level manipulation or type conversion 
+in script interpreters. Filters out legitimate DNS-based automation, license checks, 
+and domain verification processes.
 
 
 #### 🚨 Response Playbook

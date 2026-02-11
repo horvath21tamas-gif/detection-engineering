@@ -488,7 +488,7 @@
 | T1568 | HIGH | Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568) |
 | T1568.001 | CRITICAL | Ultra-Pro High-Fidelity Fast Flux & DNS Cache Evasion (T1568.001) |
 | T1568.002 | CRITICAL | Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568), Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002) |
-| T1568.003 | CRITICAL | Ultra-Pro High-Fidelity DNS Calculation & Extraction (T1568.003) |
+| T1568.003 | CRITICAL | DNS Calculation & Extraction (T1568.003) |
 | T1569 | HIGH | High-Fidelity System Service Execution Detection |
 | T1569.001 | CRITICAL | High-Fidelity Launch Daemon Persistence Detection |
 | T1569.002 | HIGH | High-Fidelity System Service Execution Detection, High-Fidelity System Service Execution Detection (T1569.002) |

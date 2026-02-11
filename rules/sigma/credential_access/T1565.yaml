@@ -1,65 +1,87 @@
-title: Ultra-Pro High-Fidelity Data Manipulation (T1565)
+title: Data Manipulation (T1565)
 id: 55ff571a-f186-4e4c-90a9-2da5291ae171
 status: stable
 description: |
-    Detects unauthorized data manipulation by monitoring for stream editing, 
-    log clearing via CLI, and unauthorized modifications to critical system 
-    files (hosts, event logs) from non-standard parent processes.
-author: hota05
-date: 2026-02-09
+  Detects unauthorized manipulation of stored or transmitted data, including stream editing,
+  log clearing via CLI, SQL/database updates, and modifications to critical system files
+  (hosts, event logs, system configs) originating from non-standard parent processes.
+  Covers T1565.001 (Stored Data Manipulation) and T1565.002 (Transmitted Data Manipulation).
+author: hota05 
+date: 2026-02-11
 tags:
-    - attack.impact
-    - attack.t1565
-    - attack.t1565.001
-    - attack.t1565.002
+  - attack.impact
+  - attack.t1565
+  - attack.t1565.001
+  - attack.t1565.002
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\wevtutil.exe'        
-            - '\sed.exe'             
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\sqlite3.exe'         
-            - '\attrib.exe'        
+  selection_tools:
+    Image|endswith:
+      - '\wevtutil.exe'
+      - '\sed.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\sqlite3.exe'
+      - '\attrib.exe'
+      - '\netsh.exe'
+      - '\reg.exe'
+      - '\cmd.exe'
 
-    selection_logic:
-        CommandLine|contains:
-            - ' cl '               
-            - ' clear-log '
-            - ' -replace '           
-            - ' s/'                  
-            - ' > '                  
-            - 'Out-File'
-            - 'Set-Content'
+  selection_logic:
+    CommandLine|contains:
+      - ' cl '
+      - ' clear-log '
+      - ' -replace '
+      - ' s/'
+      - ' > '
+      - 'Out-File'
+      - 'Set-Content'
+      - ' set dns '
+      - ' set proxy '
+      - 'AutoConfigURL'
+      - 'ProxyEnable'
+      - 'ProxyServer'
 
-    selection_targets:
-        CommandLine|contains:
-            - '\etc\hosts'           
-            - '\System32\winevt\'    
-            - '\System32\config\'   
-            - '.config'              
-            - '.db'                  
+  selection_targets:
+    CommandLine|contains:
+      - '\etc\hosts'
+      - '\System32\winevt\'
+      - '\System32\config\'
+      - '.config'
+      - '.db'
 
-    selection_context:
-        - ParentImage|endswith:
-            - '\winword.exe'         
-            - '\excel.exe'
-            - '\httpd.exe'           
-            - '\rundll32.exe'       
-            - '\explorer.exe'       
+  selection_context:
+    - ParentImage|endswith:
+        - '\winword.exe'
+        - '\excel.exe'
+        - '\httpd.exe'
+        - '\rundll32.exe'
+        - '\explorer.exe'
 
-    filter_legit:
-        - ParentImage|endswith:
-            - '\CcmExec.exe'      
-            - '\msiexec.exe'         
-        - CommandLine|contains:
-            - 'Program Files'        
-        - username: 'NT AUTHORITY\SYSTEM'
-        - CommandLine|contains:
-            - 'Get-EventLog'         
+  filter_legit:
+    - ParentImage|endswith:
+        - '\CcmExec.exe'
+        - '\msiexec.exe'
+    - CommandLine|contains:
+        - 'Program Files'
+        - 'Get-EventLog'
+    - username: 'NT AUTHORITY\SYSTEM'
 
-    condition: selection_tools and selection_logic and (selection_targets or selection_context) and not filter_legit
+  condition: selection_tools and selection_logic and (selection_targets or selection_context) and not filter_legit
+
+fields:
+  - Time
+  - SourceImage
+  - ParentImage
+  - CommandLine
+  - SourceUsername
+
+falsepositives:
+  - IT-admin or system maintenance scripts modifying logs/config/db
+  - Legitimate PowerShell/Office automation tasks
+  - Approved DNS or proxy configuration scripts run by administrators
+
 level: critical

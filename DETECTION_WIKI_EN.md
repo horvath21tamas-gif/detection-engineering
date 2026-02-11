@@ -11191,16 +11191,17 @@ cryptographic signature failures.
 
 
 ---
-## Ultra-Pro High-Fidelity Network Share Automated Collection (T1602)
+## Network Share Automated Collection (T1602)
 - **ID:** `T1602.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects highly suspicious, automated data collection from network shares by 
-identifying the combination of UNC path traversal, sensitive file extensions, 
-and recursive copying logic originating from untrusted process lineages.
+- **Leírás:** Detects highly suspicious, automated collection of sensitive data from network shares.
+Focuses on UNC path traversal, sensitive file extensions, recursive copy logic, and 
+untrusted process lineage. Filters legitimate IT management, backup, and system processes
+to reduce false positives.
 
 
 #### 🚨 Response Playbook

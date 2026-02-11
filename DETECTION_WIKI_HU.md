@@ -10601,16 +10601,17 @@ kriptográfiai aláírási hibák.
 
 
 ---
-## Ultra-Pro High-Fidelity Network Share Automated Collection (T1602)
+## Hálózati megosztás automatikus adatgyűjtése (T1602)
 - **ID:** `T1602.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a nagyon gyanús, automatizált adatgyűjtést a hálózati megosztásokból
-az UNC útvonal bejárása, az érzékeny fájlkiterjesztések kombinációjának azonosítása,
-és a nem megbízható folyamatvonalakból származó rekurzív másolási logika.
+- **Leírás:** Érzékeli az érzékeny adatok nagyon gyanús, automatizált gyűjtését a hálózati megosztásokról.
+Az UNC útvonal bejárására, az érzékeny fájlkiterjesztésekre, a rekurzív másolási logikára és a
+nem megbízható folyamatvonal.Szűri a legitim IT-kezelési, biztonsági mentési és rendszerfolyamatokat
+a hamis pozitívumok csökkentésére.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

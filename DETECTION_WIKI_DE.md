@@ -10601,16 +10601,17 @@ kryptografische Signaturfehler.
 
 
 ---
-## Automatisierte Ultra-Pro-High-Fidelity-Netzwerkfreigabeerfassung (T1602)
+## Automatische Sammlung von Netzwerkfreigaben (T1602)
 - **ID:** `T1602.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt hochverdächtige, automatisierte Datenerfassung aus Netzwerkfreigaben durch
-Identifizieren der Kombination aus UNC-Pfaddurchquerung, sensiblen Dateierweiterungen,
-und rekursive Kopierlogik, die aus nicht vertrauenswürdigen Prozesslinien stammt.
+- **Beschreibung:** Erkennt höchst verdächtige, automatisierte Erfassung sensibler Daten von Netzwerkfreigaben.
+Konzentriert sich auf UNC-Pfaddurchquerung, sensible Dateierweiterungen, rekursive Kopierlogik und
+nicht vertrauenswürdige Prozesslinie.Filtert legitime IT-Verwaltungs-, Backup- und Systemprozesse
+um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

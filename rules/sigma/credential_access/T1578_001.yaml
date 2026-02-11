@@ -1,50 +1,82 @@
-title: Ultra-Pro High-Fidelity Suspicious Cloud Instance Creation (T1578.001)
+title: Suspicious Cloud Instance Creation (T1578.001)
 id: 9ea5dd4d-8b1a-478b-a7b5-9505daa6da70
 status: stable
 description: |
-    Detects the creation of high-resource or expensive cloud instances from untrusted 
-    identities or outside approved regions. Optimized for Cryptojacking detection 
-    with minimal false positives from CI/CD pipelines.
-author: hota05
-date: 2026-02-03
+    Detects creation of high-resource or expensive cloud instances from untrusted 
+    identities or outside approved regions. Optimized for Cryptojacking and unauthorized 
+    resource abuse, while filtering out CI/CD and autoscaling operations.
+author: hota05 
+date: 2026-02-11
 tags:
     - attack.impact
     - attack.t1578.001
 logsource:
     product: cloud
     service: Azure Activity
+
 detection:
-    selection_create_ops:
-        operation_name|contains:
-            - 'RunInstances'             
-            - 'Microsoft.Compute/virtualMachines/write'
-            - 'v1.compute.instances.insert' 
+  selection_create_ops:
+    operation_name|contains:
+      - 'RunInstances'
+      - 'Microsoft.Compute/virtualMachines/write'
+      - 'v1.compute.instances.insert'
+      - 'CreateVirtualMachine'
+      - 'Instances:Insert'
 
-    selection_resource_types:
-        request_parameters|contains:
-            - 'p3.'         
-            - 'p4.'
-            - 'g4.'
-            - 'c5.24xlarge' 
-            - 'Standard_ND' 
-            - 'Standard_NC'
-            - 'n1-highcpu-'
+  selection_resource_types:
+    request_parameters|contains:
+      - 'p3.'
+      - 'p4.'
+      - 'g4.'
+      - 'c5.24xlarge'
+      - 'Standard_ND'
+      - 'Standard_NC'
+      - 'n1-highcpu-'
+      - 'n1-ultramem-'
+      - 'A100'
+      - 'V100'
 
-    selection_context:
-        mfa_authenticated: 'false'
-        user_agent|contains:
-            - 'kali'
-            - 'python-requests'
-            - 'boto3'
-            - 'postman'
+  selection_context:
+    mfa_authenticated: 'false'
+    user_agent|contains:
+      - 'kali'
+      - 'python-requests'
+      - 'boto3'
+      - 'postman'
+      - 'curl'
+      - 'Terraform'
+      - 'Pulumi'
 
-    filter_automation:
-        user_name|startswith: 
-            - 'svc-terraform'
-            - 'svc-github-actions'
-            - 'aws-autoscaling'
-    filter_internal:
-        user_name|contains: 'system-internal'
+  filter_automation:
+    user_name|startswith:
+      - 'svc-terraform'
+      - 'svc-github-actions'
+      - 'aws-autoscaling'
+      - 'svc-packer'
+      - 'svc-azure-devops'
 
-    condition: selection_create_ops and (selection_resource_types or selection_context) and not (filter_automation or filter_internal)
+  filter_internal:
+    user_name|contains:
+      - 'system-internal'
+      - 'cloud-controller'
+
+  condition: selection_create_ops and (selection_resource_types or selection_context) and not (filter_automation or filter_internal)
+
+fields:
+  - Time
+  - user_name
+  - operation_name
+  - request_parameters
+  - user_agent
+  - mfa_authenticated
+  - resource_id
+  - subscription_id
+  - tenant_id
+  - source_ip
+
+falsepositives:
+  - Authorized CI/CD pipelines creating high-performance VMs for build or training jobs
+  - Autoscaling group or cluster provisioning
+  - Internal security testing accounts
+
 level: critical

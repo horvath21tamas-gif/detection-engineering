@@ -1,48 +1,78 @@
-title: Ultra-Pro High-Fidelity Dynamic Resolution & DGA (T1568)
+title: Dynamic Resolution & DGA (T1568)
 id: 10c35e10-a1c0-4468-a600-7688231edf7b
 status: stable
 description: |
-    Detects dynamic resolution and DGA activity by identifying programmatic 
-    DNS queries within loops, low-level DNS API calls from scripting engines, 
-    and anomalous domain patterns from non-browser processes.
-author: hota05
-date: 2026-02-09
+  Detects dynamic DNS resolution and Domain Generation Algorithm (DGA) activity 
+  by monitoring:
+  1. Programmatic DNS queries executed within loops or retry logic.
+  2. Low-level DNS API calls from scripting interpreters.
+  3. High-entropy and anomalous domain patterns in command lines.
+  Excludes legitimate administrative, automation, and internal domains.
+author: hota05 
+date: 2026-02-11
 tags:
-    - attack.command_and_control
-    - attack.t1568
-    - attack.t1568.002
+  - attack.command_and_control
+  - attack.t1568
+  - attack.t1568.002
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_resolution_api:
-        CommandLine|contains:
-            - 'Resolve-DnsName'            
-            - '[System.Net.Dns]::'        
-            - 'nslookup'                   
-            - 'dnscmd'                     
-            - ' -querytype'                
+  selection_resolution_api:
+    CommandLine|contains:
+      - 'Resolve-DnsName'
+      - '[System.Net.Dns]::'
+      - 'nslookup'
+      - 'dnscmd'
+      - '-querytype'
+      - '-Retry'
+      - 'while('
+      - 'for('
+      - 'Start-Sleep'
 
-    selection_dga_patterns:
-        CommandLine|re: '(?i).*[a-z0-9]{18,}\.(top|xyz|pw|icu|bid|monster|live|club|ga|tk).*'
+  selection_dga_patterns:
+    CommandLine|re: '(?i).*[a-z0-9]{18,}\.(top|xyz|pw|icu|bid|monster|live|club|ga|tk|cf|ml|buzz|online)$'
 
-    selection_procs:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
-            - '\rundll32.exe'
-            - '\mshta.exe'
-            - '\cmd.exe'
+  selection_procs:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\rundll32.exe'
+      - '\mshta.exe'
+      - '\cmd.exe'
 
-    filter_legit_infra:
-        - CommandLine|contains:
-            - 'C:\Program Files\'
-            - 'Microsoft\Azure'
-            - 'internal.corp'              
-            - 'Check-Connectivity'         
-        - username: 'NT AUTHORITY\SYSTEM'     
+  filter_legit_infra:
+    - CommandLine|contains:
+        - 'C:\Program Files\'
+        - 'Microsoft\Azure'
+        - 'internal.corp'
+        - 'Check-Connectivity'
+        - 'domain-verification'
+        - 'update.microsoft.com'
+    - username: 'NT AUTHORITY\SYSTEM'
+    - ParentImage|endswith:
+        - '\services.exe'
+        - '\explorer.exe'
 
-    condition: (selection_resolution_api and selection_procs) or (selection_dga_patterns and selection_procs) and not filter_legit_infra
+  condition: (selection_resolution_api and selection_procs) or (selection_dga_patterns and selection_procs) and not filter_legit_infra
+
+fields:
+  - Time
+  - SourceImage
+  - ParentImage
+  - CommandLine
+  - ProcessId
+  - SourceUsername
+  - DestinationDomain
+  - DestinationIp
+
+falsepositives:
+  - Internal DNS troubleshooting scripts
+  - Cloud automation / monitoring tools
+  - PowerShell DSC or Config Management routines
+  - Legitimate high-volume DNS queries for domain verification
+
 level: high

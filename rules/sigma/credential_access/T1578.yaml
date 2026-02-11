@@ -1,11 +1,12 @@
-title: Ultra-Pro High-Fidelity Cloud Infrastructure Tampering (T1578)
+title: Cloud Infrastructure Tampering (T1578)
 id: 2423921d-a8b6-43ee-8594-9321e75e7790
 status: stable
 description: |
     Detects high-risk modifications to cloud infrastructure that weaken security posture 
-    or prepare for data exfiltration, filtered by identity behavior and source trust.
-author: hota05
-date: 2026-02-03
+    or prepare for data exfiltration. Focuses on manual, untrusted, or anomalous 
+    identity actions while filtering out automated and internal operations.
+author: hota05 
+date: 2026-02-11
 tags:
     - attack.defense_evasion
     - attack.impact
@@ -13,32 +14,68 @@ tags:
 logsource:
     product: cloud
     service: Azure Activity
+
 detection:
-    selection_risky_ops:
-        operation_name|contains:
-            - 'DeleteSnapshot'            
-            - 'ModifyInstanceAttribute'     
-            - 'RevokeSecurityGroupIngress'  
-            - 'AuthorizeSecurityGroupIngress' 
-            - 'DeleteVpcPeeringConnection'
+  selection_risky_ops:
+    operation_name|contains:
+      - 'DeleteSnapshot'
+      - 'ModifyInstanceAttribute'
+      - 'RevokeSecurityGroupIngress'
+      - 'AuthorizeSecurityGroupIngress'
+      - 'DeleteVpcPeeringConnection'
+      - 'ModifyNetworkAcl'
+      - 'ModifyImageAttribute'
+      - 'CopySnapshot'
+      - 'SetSnapshotPermissions'
 
-    selection_params:
-        request_parameters|contains:
-            - '0.0.0.0/0'                  
-            - '::/0'
-            - 'all'                        
+  selection_params:
+    request_parameters|contains:
+      - '0.0.0.0/0'
+      - '::/0'
+      - 'all'
+      - 'public'
+      - 'grantee'
+      - 'Add.UserId'
 
-    selection_untrusted_identity:
-        user_agent|contains:
-            - 'kali'
-            - 'python-requests'
-            - 'curl'
-            - 'postman'
+  selection_untrusted_identity:
+    mfa_authenticated: 'false'
+    user_agent|contains:
+      - 'kali'
+      - 'python-requests'
+      - 'curl'
+      - 'postman'
+      - 'boto3'
 
-    filter_automation:
-        user_name|startswith: 'svc-terraform' 
-    filter_provider:
-        user_name|contains: 'system-internal' 
+  filter_automation:
+    user_name|startswith:
+      - 'svc-terraform'
+      - 'svc-ansible'
+      - 'svc-packer'
+      - 'svc-github-actions'
 
-    condition: selection_risky_ops and (selection_params or selection_untrusted_identity) and not (filter_automation or filter_provider)
+  filter_provider:
+    user_name|contains:
+      - 'system-internal'
+      - 'cloud-controller'
+      - 'service-linked-role'
+
+  condition: selection_risky_ops and (selection_params or selection_untrusted_identity) and not (filter_automation or filter_provider)
+
+fields:
+  - Time
+  - user_name
+  - operation_name
+  - request_parameters
+  - user_agent
+  - mfa_authenticated
+  - resource_id
+  - subscription_id
+  - tenant_id
+  - source_ip
+
+falsepositives:
+  - CI/CD pipelines modifying images or snapshots during builds
+  - Automated cloud provisioning and scaling operations
+  - Internal service accounts performing standard maintenance
+
 level: critical

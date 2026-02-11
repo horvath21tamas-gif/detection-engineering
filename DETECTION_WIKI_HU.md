@@ -621,12 +621,12 @@
 - [Ultra-Pro Stealthy Local Image Build (T1612)](#ultra-pro-stealthy-local-image-build-(t1612))
 - [Ultra-Pro High-Fidelity konténer és példányfelderítés (T1613)](#ultra-pro-high-fidelity-konténer-és-példányfelderítés-(t1613))
 - [Ultra-Pro High-Fidelity rendszer helymeghatározás (T1614)](#ultra-pro-high-fidelity-rendszer-helymeghatározás-(t1614))
-- [Ultra-Pro High-Fidelity System Language Discovery (T1614.001)](#ultra-pro-high-fidelity-system-language-discovery-(t1614001))
-- [Ultra-Pro High-Fidelity csoportházirend felfedezés (T1615)](#ultra-pro-high-fidelity-csoportházirend-felfedezés-(t1615))
-- [Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619)](#ultra-pro-high-fidelity-cloud-storage-object-discovery-(t1619))
-- [Ultra-Pro High-Fidelity fényvisszaverő kódbetöltés (T1620)](#ultra-pro-high-fidelity-fényvisszaverő-kódbetöltés-(t1620))
-- [Ultra-Pro High-Fidelity MFA azonnali bombázási automatizálás (T1621)](#ultra-pro-high-fidelity-mfa-azonnali-bombázási-automatizálás-(t1621))
-- [Ultra-Pro Stealthy Debugger Evasion (T1622)](#ultra-pro-stealthy-debugger-evasion-(t1622))
+- [High-Fidelity rendszernyelv és billentyűzetkiosztás felfedezése](#high-fidelity-rendszernyelv-és-billentyűzetkiosztás-felfedezése)
+- [Nagy pontosságú csoportházirend-felderítés észlelése](#nagy-pontosságú-csoportházirend-felderítés-észlelése)
+- [Nagy pontosságú felhőalapú tárolási objektumfelderítés](#nagy-pontosságú-felhőalapú-tárolási-objektumfelderítés)
+- [Nagy pontosságú tükröző kód betöltése és a memóriába épített összeállítás végrehajtása](#nagy-pontosságú-tükröző-kód-betöltése-és-a-memóriába-épített-összeállítás-végrehajtása)
+- [Gyanús MFA azonnali bombázás vagy hitelesítési árvíz automatizálás](#gyanús-mfa-azonnali-bombázás-vagy-hitelesítési-árvíz-automatizálás)
+- [Gyanús Anti-Debug API-hozzáférés nem támogatott vagy felhasználói memóriaterületről](#gyanús-anti-debug-api-hozzáférés-nem-támogatott-vagy-felhasználói-memóriaterületről)
 - [Gyanús macOS LaunchAgent vagy LaunchDaemon Plist módosítás](#gyanús-macos-launchagent-vagy-launchdaemon-plist-módosítás)
 - [High-Fidelity szerver nélküli funkció tartósság vagy visszaélés](#high-fidelity-szerver-nélküli-funkció-tartósság-vagy-visszaélés)
 - [Gyanús tanúsítvány és privát kulcs exportálása vagy lopási tevékenység](#gyanús-tanúsítvány-és-privát-kulcs-exportálása-vagy-lopási-tevékenység)
@@ -10929,16 +10929,14 @@ billentyűzetkiosztás felsorolása és külső IP-geo API hívások nem szabvá
 
 
 ---
-## Ultra-Pro High-Fidelity System Language Discovery (T1614.001)
+## High-Fidelity rendszernyelv és billentyűzetkiosztás felfedezése
 - **ID:** `T1614_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a célzott rendszernyelv és billentyűzetkiosztás felfedezését, összpontosítva
-rosszindulatú programok "kill-switch" ellenőrzései és környezeti kulcsok.Minimalizálja a hamis pozitívumot
-az integritási szintek, a szülőfolyamatok vonalának és a specifikus hexadecimális szűrésnek megfelelő kapuzással.
+- **Leírás:** Érzékeli a célzott rendszernyelv és billentyűzetkiosztás felfedezését, a rosszindulatú programok „kill-switch” ellenőrzésére és a környezeti kulcsokra összpontosítva.Egyesíti a beállításjegyzék-lekérdezéseket, a CLI/PowerShell-parancsmagokat és a gyanús kimenet-átirányítást.Minimalizálja a hamis pozitívumot a szülőfolyamat, az integritási szint és a megbízható útvonal szűrése révén.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -11062,7 +11060,7 @@ A CI/CD csővezetékek megkerülésére összpontosít.
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli a digitális tanúsítványok és magánkulcsok esetleges ellopását certutil visszaélés, PowerShell-alapú kulcsexport vagy támadó eszközök (pl. Mimikatz crypto::export, Certify) révén.Az exportálási műveletekre, a privát kulcsokhoz való hozzáférésre és a gyanús kimeneti állomásozási útvonalakra összpontosít.
+- **Leírás:** Észleli a digitális tanúsítványok és privát kulcsok esetleges ellopását certutil visszaélés, PowerShell-alapú kulcsexport vagy támadó eszközök (pl. Mimikatz crypto::export, Certify) révén.Az exportálási műveletekre, a privát kulcsokhoz való hozzáférésre és a gyanús kimeneti állomásozási útvonalakra összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -621,12 +621,12 @@
 - [Ultra-Pro Stealthy Local Image Build (T1612)](#ultra-pro-stealthy-local-image-build-(t1612))
 - [Ultra-Pro High-Fidelity Container and Instance Discovery (T1613)](#ultra-pro-high-fidelity-container-and-instance-discovery-(t1613))
 - [Ultra-Pro High-Fidelity System Location Discovery (T1614)](#ultra-pro-high-fidelity-system-location-discovery-(t1614))
-- [Ultra-Pro High-Fidelity System Language Discovery (T1614.001)](#ultra-pro-high-fidelity-system-language-discovery-(t1614001))
-- [Ultra-Pro High-Fidelity Group Policy Discovery (T1615)](#ultra-pro-high-fidelity-group-policy-discovery-(t1615))
-- [Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619)](#ultra-pro-high-fidelity-cloud-storage-object-discovery-(t1619))
-- [Ultra-Pro High-Fidelity Reflective Code Loading (T1620)](#ultra-pro-high-fidelity-reflective-code-loading-(t1620))
-- [Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621)](#ultra-pro-high-fidelity-mfa-prompt-bombing-automation-(t1621))
-- [Ultra-Pro Stealthy Debugger Evasion (T1622)](#ultra-pro-stealthy-debugger-evasion-(t1622))
+- [High-Fidelity System Language and Keyboard Layout Discovery](#high-fidelity-system-language-and-keyboard-layout-discovery)
+- [High-Fidelity Group Policy Discovery Detection](#high-fidelity-group-policy-discovery-detection)
+- [High-Fidelity Cloud Storage Object Discovery Detection](#high-fidelity-cloud-storage-object-discovery-detection)
+- [High-Fidelity Reflective Code Loading and In-Memory Assembly Execution](#high-fidelity-reflective-code-loading-and-in-memory-assembly-execution)
+- [Suspicious MFA Prompt Bombing or Authentication Flood Automation](#suspicious-mfa-prompt-bombing-or-authentication-flood-automation)
+- [Suspicious Anti-Debug API Access From Unbacked or User-Space Memory](#suspicious-anti-debug-api-access-from-unbacked-or-user-space-memory)
 - [Suspicious macOS LaunchAgent or LaunchDaemon Plist Modification](#suspicious-macos-launchagent-or-launchdaemon-plist-modification)
 - [High-Fidelity Serverless Function Persistence or Abuse](#high-fidelity-serverless-function-persistence-or-abuse)
 - [Suspicious Certificate and Private Key Export or Theft Activity](#suspicious-certificate-and-private-key-export-or-theft-activity)
@@ -11538,16 +11538,14 @@ keyboard layout enumeration and external IP-to-geo API calls from non-standard p
 
 
 ---
-## Ultra-Pro High-Fidelity System Language Discovery (T1614.001)
+## High-Fidelity System Language and Keyboard Layout Discovery
 - **ID:** `T1614_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted system language and keyboard layout discovery, focusing on 
-malware "kill-switch" checks and environment keying. Minimizes false positives 
-by gating against integrity levels, parent process lineage, and specific hex-code filtering.
+- **Leírás:** Detects targeted system language and keyboard layout discovery, focusing on malware "kill-switch" checks and environment keying. Combines registry queries, CLI/PowerShell cmdlets, and suspicious output redirection. Minimizes false positives via parent process, integrity level, and trusted path filtering.
 
 
 #### 🚨 Response Playbook

@@ -621,12 +621,12 @@
 - [Ultra-Pro Stealthy Local Image Build (T1612)](#ultra-pro-stealthy-local-image-build-(t1612))
 - [Ultra-Pro High-Fidelity-Container- und Instanzerkennung (T1613)](#ultra-pro-high-fidelity-container--und-instanzerkennung-(t1613))
 - [Ultra-Pro High-Fidelity-System zur Standorterkennung (T1614)](#ultra-pro-high-fidelity-system-zur-standorterkennung-(t1614))
-- [Ultra-Pro High-Fidelity-System-Spracherkennung (T1614.001)](#ultra-pro-high-fidelity-system-spracherkennung-(t1614001))
-- [Ultra-Pro High-Fidelity-Gruppenrichtlinienerkennung (T1615)](#ultra-pro-high-fidelity-gruppenrichtlinienerkennung-(t1615))
-- [Ultra-Pro High-Fidelity-Cloud-Storage-Objekterkennung (T1619)](#ultra-pro-high-fidelity-cloud-storage-objekterkennung-(t1619))
-- [Ultra-Pro High-Fidelity-reflektierendes Laden von Codes (T1620)](#ultra-pro-high-fidelity-reflektierendes-laden-von-codes-(t1620))
-- [Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621)](#ultra-pro-high-fidelity-mfa-prompt-bombing-automation-(t1621))
-- [Ultra-Pro Stealthy Debugger Evasion (T1622)](#ultra-pro-stealthy-debugger-evasion-(t1622))
+- [Erkennung von High-Fidelity-Systemsprache und Tastaturlayout](#erkennung-von-high-fidelity-systemsprache-und-tastaturlayout)
+- [High-Fidelity-Erkennung von Gruppenrichtlinien](#high-fidelity-erkennung-von-gruppenrichtlinien)
+- [High-Fidelity-Erkennung von Cloud-Speicherobjekten](#high-fidelity-erkennung-von-cloud-speicherobjekten)
+- [High-Fidelity-Reflective-Code-Laden und In-Memory-Assembly-Ausführung](#high-fidelity-reflective-code-laden-und-in-memory-assembly-ausführung)
+- [Verdächtige MFA-Prompt-Bombing- oder Authentifizierungs-Flood-Automatisierung](#verdächtige-mfa-prompt-bombing--oder-authentifizierungs-flood-automatisierung)
+- [Verdächtiger Anti-Debug-API-Zugriff aus nicht gesichertem oder User-Space-Speicher](#verdächtiger-anti-debug-api-zugriff-aus-nicht-gesichertem-oder-user-space-speicher)
 - [Verdächtige macOS LaunchAgent- oder LaunchDaemon Plist-Änderung](#verdächtige-macos-launchagent--oder-launchdaemon-plist-änderung)
 - [Persistenz oder Missbrauch von serverlosen High-Fidelity-Funktionen](#persistenz-oder-missbrauch-von-serverlosen-high-fidelity-funktionen)
 - [Verdächtige Aktivität beim Exportieren oder Diebstahl von Zertifikaten und privaten Schlüsseln](#verdächtige-aktivität-beim-exportieren-oder-diebstahl-von-zertifikaten-und-privaten-schlüsseln)
@@ -10929,16 +10929,14 @@ Aufzählung des Tastaturlayouts und externe IP-to-Geo-API-Aufrufe von nicht stan
 
 
 ---
-## Ultra-Pro High-Fidelity-System-Spracherkennung (T1614.001)
+## Erkennung von High-Fidelity-Systemsprache und Tastaturlayout
 - **ID:** `T1614_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die gezielte Erkennung von Systemsprachen und Tastaturlayouts und konzentriert sich dabei auf
-Malware-„Kill-Switch“-Prüfungen und Umgebungsschlüsselung.Minimiert Fehlalarme
-durch Gating gegen Integritätsebenen, Herkunft des übergeordneten Prozesses und spezifische Hex-Code-Filterung.
+- **Beschreibung:** Erkennt die gezielte Erkennung von Systemsprache und Tastaturlayout und konzentriert sich dabei auf Malware-Kill-Switch-Prüfungen und Umgebungsschlüsselung.Kombiniert Registrierungsabfragen, CLI/PowerShell-Cmdlets und die Umleitung verdächtiger Ausgaben.Minimiert Fehlalarme durch übergeordneten Prozess, Integritätsstufe und Filterung vertrauenswürdiger Pfade.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

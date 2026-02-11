@@ -627,12 +627,12 @@
 | T1612 | CRITICAL | Ultra-Pro Stealthy Local Image Build (T1612) |
 | T1613 | HIGH | Ultra-Pro High-Fidelity Container and Instance Discovery (T1613) |
 | T1614 | HIGH | Ultra-Pro High-Fidelity System Location Discovery (T1614) |
-| T1614.001 | HIGH | Ultra-Pro High-Fidelity System Language Discovery (T1614.001) |
-| T1615 | HIGH | Ultra-Pro High-Fidelity Group Policy Discovery (T1615) |
-| T1619 | HIGH | Ultra-Pro High-Fidelity Cloud Storage Object Discovery (T1619) |
-| T1620 | CRITICAL | Ultra-Pro High-Fidelity Reflective Code Loading (T1620) |
-| T1621 | HIGH | Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621) |
-| T1622 | HIGH | Ultra-Pro Stealthy Debugger Evasion (T1622) |
+| T1614.001 | HIGH | High-Fidelity System Language and Keyboard Layout Discovery |
+| T1615 | HIGH | High-Fidelity Group Policy Discovery Detection |
+| T1619 | HIGH | High-Fidelity Cloud Storage Object Discovery Detection |
+| T1620 | CRITICAL | High-Fidelity Reflective Code Loading and In-Memory Assembly Execution |
+| T1621 | HIGH | Suspicious MFA Prompt Bombing or Authentication Flood Automation |
+| T1622 | HIGH | Suspicious Anti-Debug API Access From Unbacked or User-Space Memory |
 | T1647 | HIGH | Suspicious macOS LaunchAgent or LaunchDaemon Plist Modification |
 | T1648 | HIGH | High-Fidelity Serverless Function Persistence or Abuse |
 | T1649 | CRITICAL | Suspicious Certificate and Private Key Export or Theft Activity |

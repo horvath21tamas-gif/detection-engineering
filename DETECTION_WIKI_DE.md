@@ -10503,16 +10503,16 @@ unbefugtes VLAN-Trunking und die Erstellung von L2-Brücken zwischen sicheren Zo
 
 
 ---
-## Ultra-Pro High-Fidelity-Verschlüsselungsversuch schwächen (T1600)
+## Verschlüsselungsversuch abschwächen (T1600)
 - **ID:** `T1600.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Medium (Mäßiger Geräuschpegel)
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt eine unbefugte Schwächung der Systemverschlüsselung (TLS-Downgrade) oder
-Umgehung der PowerShell-Zertifikatsvalidierung, initiiert von Nicht-System- oder
-verdächtig lokalisierte Prozesse.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt unbefugte Versuche, die Systemverschlüsselung zu schwächen, einschließlich Downgrades des TLS-Protokolls
+und die Validierung von PowerShell-Zertifikaten wird umgangen.Konzentriert sich auf systemfremde Prozesse und
+verdächtige Speicherorte unter Ausschluss vertrauenswürdiger Installationsprogramme und Browser-Updates.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

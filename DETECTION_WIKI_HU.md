@@ -10503,16 +10503,16 @@ jogosulatlan VLAN trönkölés és L2 híd létrehozása a biztonságos zónák 
 
 
 ---
-## Ultra-Pro High-Fidelity Weaken Encryption Kísérlet (T1600)
+## Gyengítési kísérlet (T1600)
 - **ID:** `T1600.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a rendszer titkosításának jogosulatlan gyengülését (TLS downgrade), ill
-PowerShell-tanúsítvány érvényesítési megkerülése, amelyet nem rendszer, ill
-gyanúsan elhelyezkedő folyamatok.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a rendszer titkosításának gyengítésére irányuló jogosulatlan kísérleteket, beleértve a TLS protokoll leminősítését
+és a PowerShell-tanúsítvány érvényesítésének megkerülése.A rendszeren kívüli folyamatokra összpontosít és
+gyanús helyek, miközben kizárja a megbízható telepítőket és a böngészőfrissítéseket.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

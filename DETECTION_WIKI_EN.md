@@ -11087,16 +11087,16 @@ unauthorized VLAN trunking, and L2 bridge creation between secure zones.
 
 
 ---
-## Ultra-Pro High-Fidelity Weaken Encryption Attempt (T1600)
+## Weaken Encryption Attempt (T1600)
 - **ID:** `T1600.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized weakening of system encryption (TLS downgrade) or 
-PowerShell certificate validation bypass, initiated by non-system or 
-suspiciously located processes.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects unauthorized attempts to weaken system encryption, including TLS protocol downgrades
+and PowerShell certificate validation bypasses. Focuses on non-system processes and
+suspicious locations while excluding trusted installers and browser updates.
 
 
 #### 🚨 Response Playbook

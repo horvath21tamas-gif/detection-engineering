@@ -7897,16 +7897,21 @@ nem szabványos szülőfolyamatokból származó.
 
 
 ---
-## Ultra-Pro High-Fidelity Disk Content Wipe (T1561.001)
+## Lemeztartalom törlése
 - **ID:** `T1561_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az alacsony szintű lemeztartalom törlését a közvetlen fizikai eszköz figyelésével
-hozzáférési azonosítók és destruktív felülírási paraméterek, különösen a szűrés
-ismert jó adminisztrációs, biztonsági és képalkotó eszközöket.
+- **Leírás:** Érzékeli a romboló, alacsony szintű lemeztartalom törlését az eszköz közvetlen elérése révén
+és destruktív felülírási paraméterek.
+
+A következőkre összpontosít:
+- Nyers fizikai lemez hozzáférés (PhysicalDrive, merevlemez)
+- Felülírás nullákkal vagy véletlenszerű adatokkal
+- PowerShell/Cmd romboló lemezparancsok
+- Nem tartalmazza az ismert jó adminisztrációs, képalkotó és biztonsági eszközöket
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

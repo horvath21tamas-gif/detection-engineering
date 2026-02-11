@@ -8321,16 +8321,21 @@ originating from non-standard parent processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Disk Content Wipe (T1561.001)
+## Disk Content Wipe
 - **ID:** `T1561_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects low-level disk content wiping by monitoring for direct physical device 
-access identifiers and destructive overwrite parameters, specifically filtering 
-out known-good administrative, security, and imaging tools.
+- **Leírás:** Detects destructive low-level disk content wiping via direct device access 
+and destructive overwrite parameters.
+
+Focuses on:
+  - Raw physical disk access (PhysicalDrive, Harddisk)
+  - Overwrite with zeroes or random data
+  - PowerShell/Cmd destructive disk commands
+  - Excludes known-good administrative, imaging, and security tools
 
 
 #### 🚨 Response Playbook

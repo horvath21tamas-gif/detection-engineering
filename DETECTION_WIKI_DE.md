@@ -7897,16 +7897,21 @@ die aus nicht standardmäßigen übergeordneten Prozessen stammen.
 
 
 ---
-## Ultra-Pro High-Fidelity-Datenträgerinhaltslöschung (T1561.001)
+## Datenträgerinhalt löschen
 - **ID:** `T1561_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt das Löschen von Festplatteninhalten auf niedriger Ebene durch Überwachung auf direkte physische Geräte
-Zugriffskennungen und destruktive Überschreibparameter, insbesondere Filterung
-Bereitstellung bekanntermaßen guter Verwaltungs-, Sicherheits- und Imaging-Tools.
+- **Beschreibung:** Erkennt zerstörerisches Löschen von Festplatteninhalten auf niedriger Ebene über direkten Gerätezugriff
+und destruktive Überschreibparameter.
+
+Konzentriert sich auf:
+- Roher physischer Festplattenzugriff (PhysicalDrive, Festplatte)
+- Mit Nullen oder Zufallsdaten überschreiben
+- PowerShell/Cmd-zerstörerische Festplattenbefehle
+– Ausgenommen sind bekanntermaßen funktionierende Verwaltungs-, Imaging- und Sicherheitstools
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

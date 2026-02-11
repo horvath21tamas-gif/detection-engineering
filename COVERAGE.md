@@ -343,7 +343,7 @@
 | T1542.004 | CRITICAL | Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004) |
 | T1542.005 | CRITICAL | Ultra-Pro DHCP/PXE Boot Hijacking (T1542.005) |
 | T1543 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
-| T1543.001 | CRITICAL | Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001) |
+| T1543.001 | HIGH | Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001), Suspicious macOS LaunchAgent or LaunchDaemon Plist Modification |
 | T1543.002 | CRITICAL | High-Fidelity Systemd Timer Persistence Detection, Ultra-Pro Systemd Service Persistence (T1543.002) |
 | T1543.003 | CRITICAL | Ultra-Pro Unauthorized Windows Service Installation (T1543.003) |
 | T1543.004 | CRITICAL | Ultra-Pro Unauthorized macOS Launch Daemon (T1543.004) |
@@ -633,7 +633,7 @@
 | T1620 | CRITICAL | Ultra-Pro High-Fidelity Reflective Code Loading (T1620) |
 | T1621 | HIGH | Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621) |
 | T1622 | HIGH | Ultra-Pro Stealthy Debugger Evasion (T1622) |
-| T1647 | HIGH | Ultra-Pro High-Fidelity macOS Plist Persistence Modification (T1647) |
+| T1647 | HIGH | Suspicious macOS LaunchAgent or LaunchDaemon Plist Modification |
 | T1648 | HIGH | High-Fidelity Serverless Function Persistence or Abuse |
 | T1649 | CRITICAL | Suspicious Certificate and Private Key Export or Theft Activity |
 | T1650 | HIGH | High-Fidelity Cloud Account Acquisition and Initialization - T1650 |

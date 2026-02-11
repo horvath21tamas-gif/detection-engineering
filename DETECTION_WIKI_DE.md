@@ -627,7 +627,7 @@
 - [Ultra-Pro High-Fidelity-reflektierendes Laden von Codes (T1620)](#ultra-pro-high-fidelity-reflektierendes-laden-von-codes-(t1620))
 - [Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621)](#ultra-pro-high-fidelity-mfa-prompt-bombing-automation-(t1621))
 - [Ultra-Pro Stealthy Debugger Evasion (T1622)](#ultra-pro-stealthy-debugger-evasion-(t1622))
-- [Ultra-Pro High-Fidelity macOS Plist Persistenzmodifikation (T1647)](#ultra-pro-high-fidelity-macos-plist-persistenzmodifikation-(t1647))
+- [Verdächtige macOS LaunchAgent- oder LaunchDaemon Plist-Änderung](#verdächtige-macos-launchagent--oder-launchdaemon-plist-änderung)
 - [Persistenz oder Missbrauch von serverlosen High-Fidelity-Funktionen](#persistenz-oder-missbrauch-von-serverlosen-high-fidelity-funktionen)
 - [Verdächtige Aktivität beim Exportieren oder Diebstahl von Zertifikaten und privaten Schlüsseln](#verdächtige-aktivität-beim-exportieren-oder-diebstahl-von-zertifikaten-und-privaten-schlüsseln)
 - [High-Fidelity-Cloud-Kontoerwerb und -Initialisierung – T1650](#high-fidelity-cloud-kontoerwerb-und--initialisierung-–-t1650)
@@ -11036,14 +11036,12 @@ während legitime IDEs herausgefiltert und Systemfehler gemeldet werden.
 
 
 ---
-## Ultra-Pro High-Fidelity macOS Plist Persistenzmodifikation (T1647)
+## Verdächtige macOS LaunchAgent- oder LaunchDaemon Plist-Änderung
 - **ID:** `T1647.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt verdächtige Änderungen an macOS-Eigenschaftenlistendateien (.plist) mithilfe von CLI-Tools.
-Konzentriert sich auf persistenzbezogene Schlüssel (LaunchAgents/LaunchDaemons) und filtert diese heraus
-legitime Systemaktualisierungsprozesse.
+- **Beschreibung:** Erkennt verdächtige Änderungen oder Erstellungen von macOS LaunchAgent- oder LaunchDaemon-Eigenschaftenlistendateien mithilfe von Befehlszeilendienstprogrammen.Konzentriert sich auf persistenzbezogene Schlüssel und abnormale Ausführungskontexte und filtert legitime Apple-Systemprozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

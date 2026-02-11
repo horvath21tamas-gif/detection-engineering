@@ -627,7 +627,7 @@
 - [Ultra-Pro High-Fidelity Reflective Code Loading (T1620)](#ultra-pro-high-fidelity-reflective-code-loading-(t1620))
 - [Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621)](#ultra-pro-high-fidelity-mfa-prompt-bombing-automation-(t1621))
 - [Ultra-Pro Stealthy Debugger Evasion (T1622)](#ultra-pro-stealthy-debugger-evasion-(t1622))
-- [Ultra-Pro High-Fidelity macOS Plist Persistence Modification (T1647)](#ultra-pro-high-fidelity-macos-plist-persistence-modification-(t1647))
+- [Suspicious macOS LaunchAgent or LaunchDaemon Plist Modification](#suspicious-macos-launchagent-or-launchdaemon-plist-modification)
 - [High-Fidelity Serverless Function Persistence or Abuse](#high-fidelity-serverless-function-persistence-or-abuse)
 - [Suspicious Certificate and Private Key Export or Theft Activity](#suspicious-certificate-and-private-key-export-or-theft-activity)
 - [High-Fidelity Cloud Account Acquisition and Initialization - T1650](#high-fidelity-cloud-account-acquisition-and-initialization---t1650)
@@ -11651,14 +11651,12 @@ while filtering out legitimate IDEs and system error reporting.
 
 
 ---
-## Ultra-Pro High-Fidelity macOS Plist Persistence Modification (T1647)
+## Suspicious macOS LaunchAgent or LaunchDaemon Plist Modification
 - **ID:** `T1647.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects suspicious modifications of macOS Property List (.plist) files using CLI tools. 
-Focuses on persistence-related keys (LaunchAgents/LaunchDaemons) and filters out 
-legitimate system update processes.
+- **Leírás:** Detects suspicious modification or creation of macOS LaunchAgent or  LaunchDaemon property list files using command-line utilities. Focuses on persistence-related keys and abnormal execution contexts, filtering legitimate Apple system processes.
 
 
 #### 🚨 Response Playbook

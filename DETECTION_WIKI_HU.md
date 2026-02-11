@@ -627,7 +627,7 @@
 - [Ultra-Pro High-Fidelity fényvisszaverő kódbetöltés (T1620)](#ultra-pro-high-fidelity-fényvisszaverő-kódbetöltés-(t1620))
 - [Ultra-Pro High-Fidelity MFA azonnali bombázási automatizálás (T1621)](#ultra-pro-high-fidelity-mfa-azonnali-bombázási-automatizálás-(t1621))
 - [Ultra-Pro Stealthy Debugger Evasion (T1622)](#ultra-pro-stealthy-debugger-evasion-(t1622))
-- [Ultra-Pro High-Fidelity macOS Plist Persistence Modification (T1647)](#ultra-pro-high-fidelity-macos-plist-persistence-modification-(t1647))
+- [Gyanús macOS LaunchAgent vagy LaunchDaemon Plist módosítás](#gyanús-macos-launchagent-vagy-launchdaemon-plist-módosítás)
 - [High-Fidelity szerver nélküli funkció tartósság vagy visszaélés](#high-fidelity-szerver-nélküli-funkció-tartósság-vagy-visszaélés)
 - [Gyanús tanúsítvány és privát kulcs exportálása vagy lopási tevékenység](#gyanús-tanúsítvány-és-privát-kulcs-exportálása-vagy-lopási-tevékenység)
 - [High-Fidelity Cloud-fiók megszerzése és inicializálása – T1650](#high-fidelity-cloud-fiók-megszerzése-és-inicializálása-–-t1650)
@@ -11036,14 +11036,12 @@ miközben kiszűri a legitim IDE-ket és a rendszerhiba-jelentést.
 
 
 ---
-## Ultra-Pro High-Fidelity macOS Plist Persistence Modification (T1647)
+## Gyanús macOS LaunchAgent vagy LaunchDaemon Plist módosítás
 - **ID:** `T1647.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** CLI-eszközök segítségével észleli a macOS Property List (.plist) fájlok gyanús módosításait.
-A tartóssággal kapcsolatos kulcsokra (LaunchAgents/LaunchDaemons) összpontosít, és kiszűri
-törvényes rendszerfrissítési folyamatok.
+- **Leírás:** Parancssori segédprogramok segítségével észleli a macOS LaunchAgent vagy LaunchDaemon tulajdonságlista-fájlok gyanús módosítását vagy létrehozását.A tartóssággal kapcsolatos kulcsokra és a rendellenes végrehajtási kontextusokra összpontosít, kiszűri a legitim Apple rendszerfolyamatokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

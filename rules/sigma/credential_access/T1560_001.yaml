@@ -1,69 +1,85 @@
-title: Ultra-Pro High-Fidelity Data Archiving for Exfiltration (T1560.001)
+title: Data Archiving for Exfiltration
 id: 6174cd26-d2a2-4499-9d7d-efe74520f85a
 status: stable
 description: |
-    Detects advanced data staging for exfiltration by monitoring for high-entropy 
-    archive creation, unusual volume splitting, and password-protected 
-    compression originating from non-administrative or interactive shell contexts.
+    Detects advanced data staging for exfiltration using third-party archiving 
+    tools (7-Zip, WinRAR, Tar, Zip) or PowerShell. Focuses on high-entropy 
+    archives, password-protected files, volume splitting, and deletion-after-archive. 
+    Filters enterprise automation by parent process lineage, interactive shells, 
+    and integrity levels.
+
 author: hota05
-date: 2026-02-05
+date: 2026-02-11
 tags:
     - attack.collection
     - attack.exfiltration
     - attack.t1560.001
+
 logsource:
-    category: process_creation
     product: windows
+    category: process_creation
+
 detection:
     selection_tools:
-        - Image|endswith:
+        Image|endswith:
             - '\7z.exe'
             - '\7za.exe'
             - '\winrar.exe'
             - '\rar.exe'
             - '\tar.exe'
             - '\zip.exe'
-        - OriginalFileName:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        OriginalFileName|in:
             - '7z.exe'
             - '7za.exe'
             - 'WinRAR.exe'
             - 'rar.exe'
             - 'tar.exe'
+            - 'zip.exe'
 
     selection_weaponized_args:
-        CommandLine|contains:
-            - ' -p'                
-            - ' -hp'              
-            - ' -v'               
-            - ' -ta'             
-            - ' -sdel'            
-            - ' -m0='             
+        CommandLine|contains|any:
+            - ' -p'               
+            - ' -hp'               
+            - ' -v'                
+            - ' -ta'               
+            - ' -sdel'             
+            - ' -m0='              
+            - '-CompressionLevel'
+            - '-Force'
+            - '-Update'
 
     selection_sensitive_source:
-        CommandLine|contains:
+        CommandLine|contains|any:
             - '\Desktop'
             - '\Documents'
+            - '\Downloads'
             - '\AppData\Local\Microsoft\Outlook'
-            - 'C:\inetpub\'                       
-            - 'C:\Users\Public'                    
+            - 'C:\inetpub\'
+            - 'C:\Users\Public'
+            - '\ProgramData'
 
-    selection_context:
+    selection_suspicious_context:
         ParentImage|endswith:
             - '\cmd.exe'
             - '\powershell.exe'
             - '\pwsh.exe'
             - '\wscript.exe'
-            - '\w3wp.exe'          
-        IntegrityLevel: 'Medium'   
+            - '\w3wp.exe'
+            - '\httpd.exe'
+        IntegrityLevel: 'Medium'
 
     filter_legit_automation:
-        - CommandLine|contains:
+        - CommandLine|contains|any:
             - 'C:\Program Files\Backup'
-            - 'C:\Windows\Temp\Inv'   
-        - ParentImage|contains: 
+            - 'C:\Windows\Temp\Inv'
+        - ParentImage|contains|any:
             - 'C:\Program Files\Microsoft Monitoring Agent\'
             - 'C:\Program Files\Veritas\'
+            - 'C:\Program Files\Veeam\'
         - username: 'NT AUTHORITY\SYSTEM'
 
-    condition: selection_tools and (selection_weaponized_args or selection_sensitive_source) and selection_context and not filter_legit_automation
+    condition: selection_tools and (selection_weaponized_args or selection_sensitive_source) and selection_suspicious_context and not filter_legit_automation
+
 level: critical

@@ -9067,16 +9067,21 @@ initiated from non-development parent processes or suspicious directories.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Storage Exfil (T1567.002)
+## Cloud Storage Exfil (T1567.002)
 - **ID:** `T1567_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic data exfiltration to cloud storage by identifying CLI tools 
-(rclone, megatools) using embedded credentials or custom config files 
-triggered by non-admin parent processes (e.g., Office apps, Beacon hosts).
+- **Leírás:** Detects systematic data exfiltration to cloud storage platforms by monitoring:
+1. CLI tools (rclone, megatools, pcloud clients) using embedded credentials 
+   or custom config files.
+2. Triggering by non-administrative or suspicious parent processes 
+   (Office apps, Beacon hosts, scripts).
+3. Targeted cloud endpoints including mega.nz, Dropbox, Google Drive, pCloud, 
+   and Transfer.sh.
+Filters legitimate system/administrative usage to reduce false positives.
 
 
 #### 🚨 Response Playbook
@@ -9086,16 +9091,18 @@ triggered by non-admin parent processes (e.g., Office apps, Beacon hosts).
 
 
 ---
-## Ultra-Pro High-Fidelity Video Hosting Exfil (T1567.003)
+## Video Hosting Exfil (T1567.003)
 - **ID:** `T1567_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects covert data exfiltration via video hosting platforms by identifying 
-steganographic embedding (metadata abuse, stream attachment) and CLI-based 
-uploads from non-creative department assets.
+- **Leírás:** Detects covert data exfiltration via video hosting platforms by monitoring:
+1. Steganographic embedding in video files (metadata abuse, stream attachment).
+2. CLI-based uploads targeting public video platforms from non-creative or 
+   non-authorized assets.
+Excludes legitimate creative applications and system processes.
 
 
 #### 🚨 Response Playbook

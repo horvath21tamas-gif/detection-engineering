@@ -8603,16 +8603,21 @@ initiiert von übergeordneten Prozessen, die nicht zur Entwicklung gehören, ode
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Storage Exfil (T1567.002)
+## Cloud-Speicher-Exfil (T1567.002)
 - **ID:** `T1567_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt systematische Datenexfiltration in den Cloud-Speicher durch Identifizierung von CLI-Tools
-(rclone, megatools) mithilfe eingebetteter Anmeldeinformationen oder benutzerdefinierter Konfigurationsdateien
-ausgelöst durch übergeordnete Prozesse ohne Administratorrechte (z. B. Office-Apps, Beacon-Hosts).
+- **Beschreibung:** Erkennt systematische Datenexfiltration auf Cloud-Speicherplattformen durch Überwachung:
+1. CLI-Tools (rclone, megatools, pcloud-Clients) mit eingebetteten Anmeldeinformationen
+oder benutzerdefinierte Konfigurationsdateien.
+2. Auslösung durch nicht-administrative oder verdächtige übergeordnete Prozesse
+(Office-Apps, Beacon-Hosts, Skripte).
+3. Gezielte Cloud-Endpunkte, einschließlich mega.nz, Dropbox, Google Drive, pCloud,
+und Transfer.sh.
+Filtert legitime System-/Administratornutzung, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -8621,16 +8626,18 @@ ausgelöst durch übergeordnete Prozesse ohne Administratorrechte (z. B. Office-
 
 
 ---
-## Ultraprofessionelles High-Fidelity-Video-Hosting Exfil (T1567.003)
+## Video-Hosting Exfil (T1567.003)
 - **ID:** `T1567_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt verdeckte Datenexfiltration über Video-Hosting-Plattformen durch Identifizierung
-Steganografische Einbettung (Metadatenmissbrauch, Stream-Anhang) und CLI-basiert
-Uploads aus nicht-kreativen Abteilungsressourcen.
+- **Beschreibung:** Erkennt verdeckte Datenexfiltration über Video-Hosting-Plattformen durch Überwachung:
+1. Steganografische Einbettung in Videodateien (Metadatenmissbrauch, Stream-Anhang).
+2. CLI-basierte Uploads, die auf öffentliche Videoplattformen von nicht kreativen oder
+nicht genehmigte Vermögenswerte.
+Ausgenommen sind legitime kreative Anwendungen und Systemprozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -9114,7 +9121,7 @@ mit einem böswilligen aufgrund unsicherer Verzeichnisberechtigungen.
 
 
 ---
-## Exploit-fähige KernelCallbackTable-Manipulation
+## Exploit-Grade-KernelCallbackTable-Manipulation
 - **ID:** `T1574_013.yaml`
 - **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)

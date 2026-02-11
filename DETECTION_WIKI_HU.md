@@ -8603,16 +8603,21 @@ nem fejlesztői szülőfolyamatokból vagy gyanús könyvtárakból kezdeményez
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Storage Exfil (T1567.002)
+## Cloud Storage Exfil (T1567.002)
 - **ID:** `T1567_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A CLI-eszközök azonosításával észleli a szisztematikus adatszivárgást a felhőtárhelyre
-(rclone, megatools) beágyazott hitelesítő adatok vagy egyéni konfigurációs fájlok használatával
-nem rendszergazdai szülőfolyamatok (pl. Office-alkalmazások, Beacon gazdagépek) váltják ki.
+- **Leírás:** Észleli az adatok szisztematikus kiszűrését a felhőalapú tárolási platformokra a következők figyelésével:
+1. CLI eszközök (rclone, megatools, pcloud kliensek) beágyazott hitelesítő adatokkal
+vagy egyéni konfigurációs fájlokat.
+2. Nem adminisztratív vagy gyanús szülői folyamatok általi kiváltás
+(Irodai alkalmazások, Beacon hostok, szkriptek).
+3. Célzott felhő-végpontok, beleértve a mega.nz, Dropbox, Google Drive, pCloud,
+és Transfer.sh.
+Szűri a jogos rendszer-/adminisztrációs használatot, hogy csökkentse a hamis pozitív eredményeket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -8621,16 +8626,18 @@ nem rendszergazdai szülőfolyamatok (pl. Office-alkalmazások, Beacon gazdagép
 
 
 ---
-## Ultra-Pro High-Fidelity Video Hosting Exfil (T1567.003)
+## Videotárhely Exfil (T1567.003)
 - **ID:** `T1567_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Azonosítással észleli a titkos adatszivárgást a videotárhely platformokon keresztül
-szteganográfiai beágyazás (metaadat-visszaélés, adatfolyam-melléklet) és CLI-alapú
-feltöltések nem kreatív részleg eszközeiből.
+- **Leírás:** Észleli a videotárhely-platformokon keresztüli titkos adatszivárgást, figyelve:
+1. Szteganográfiai beágyazás videofájlokba (metaadatokkal való visszaélés, adatfolyam melléklet).
+2. Nyilvános videoplatformokat célzó CLI alapú feltöltések a nem kreatív ill
+nem engedélyezett eszközök.
+Nem tartalmazza a legitim kreatív alkalmazásokat és rendszerfolyamatokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -9122,8 +9129,8 @@ rosszindulatúval a nem biztonságos címtárengedélyek miatt.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a GUI-folyamatokat célzó gyanús távoli memória írási műveleteket,
-amelyek a KernelCallbackTable-eltérítési kísérletekre utalnak.Ez a technika
-általában lopakodó folyamatinjektáláshoz használják, amely megkerüli a hagyományos horog alapú felügyeletet.
+amelyek a KernelCallbackTable eltérítési kísérletekre utalnak.Ez a technika
+általánosan használt lopakodó folyamatinjektáláshoz, amely megkerüli a hagyományos horog alapú felügyeletet.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

@@ -1,60 +1,79 @@
-title: Ultra-Pro High-Fidelity Code Repo Exfil (T1567.001)
+title: Code Repository Exfil (T1567.001)
 id: 87dc2a67-a011-4943-b849-24412d97a621
 status: stable
 description: |
-    Detects systematic data exfiltration to public code repositories by identifying 
-    headless git operations, inline PAT tokens, and remote repository pivots 
-    initiated from non-development parent processes or suspicious directories.
-author: hota05
-date: 2026-02-09
+  Detects systematic exfiltration of source code to public repositories by monitoring:
+  1. Headless or automated Git/CLI operations (git.exe, gh.exe, curl, PowerShell) 
+     executed from non-development parent processes or suspicious directories.
+  2. Inline authentication tokens or Personal Access Tokens (PATs) in command lines.
+  3. Remote repository reconfiguration or forced pushes indicative of unauthorized data transfer.
+  Filters legitimate developer IDE usage and approved repository operations.
+author: hota05 
+date: 2026-02-11
 tags:
-    - attack.exfiltration
-    - attack.t1567.001
+  - attack.exfiltration
+  - attack.t1567.001
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_tools:
-        Image|endswith:
-            - '\git.exe'             
-            - '\gh.exe'              
-            - '\powershell.exe'     
-            - '\curl.exe'
+  selection_tools:
+    Image|endswith:
+      - '\git.exe'
+      - '\gh.exe'
+      - '\powershell.exe'
+      - '\curl.exe'
 
-    selection_logic:
-        CommandLine|contains:
-            - ' add . '              
-            - ' add -A'
-            - ' commit -m '         
-            - ' push --force'        
-            - 'remote add '         
+  selection_logic:
+    CommandLine|contains:
+      - ' add . '
+      - ' add -A'
+      - ' commit -m '
+      - ' push --force'
+      - ' remote add '
 
-    selection_auth:
-        CommandLine|re: '(?i).*(github_pat_|glpat-|[a-zA-Z0-9]{30,}).*'
+  selection_auth:
+    CommandLine|re: '(?i).*(github_pat_|ghp_|glpat-|[a-zA-Z0-9]{30,}).*'
 
-    selection_context:
-        - Image|contains:
-            - '\Users\'
-            - '\AppData\'
-            - '\Temp\'
-        - ParentImage|endswith:
-            - '\winword.exe'         
-            - '\excel.exe'
-            - '\rundll32.exe'        
-            - '\cmd.exe'            
+  selection_context:
+    - Image|contains:
+        - '\Users\'
+        - '\AppData\'
+        - '\Temp\'
+    - ParentImage|endswith:
+        - '\winword.exe'
+        - '\excel.exe'
+        - '\rundll32.exe'
+        - '\cmd.exe'
 
-    filter_legit_ide:
-        - ParentImage|endswith:
-            - '\code.exe'           
-            - '\visualstudio.exe'
-            - '\idea64.exe'        
-            - '\sourcetree.exe'
-            - '\git-fork.exe'
-        - CommandLine|contains:
-            - ' pull '               
-            - ' clone '
-            - 'fetch'
-        - username: 'NT AUTHORITY\SYSTEM'
+  filter_legit_ide:
+    - ParentImage|endswith:
+        - '\code.exe'
+        - '\visualstudio.exe'
+        - '\idea64.exe'
+        - '\sourcetree.exe'
+        - '\git-fork.exe'
+    - CommandLine|contains:
+        - ' pull '
+        - ' clone '
+        - ' fetch '
+    - username: 'NT AUTHORITY\SYSTEM'
 
-    condition: (selection_tools and selection_logic) and (selection_auth or selection_context) and not filter_legit_ide
+  condition: (selection_tools and selection_logic) and (selection_auth or selection_context) and not filter_legit_ide
+
+fields:
+  - Time
+  - SourceImage
+  - ParentImage
+  - CommandLine
+  - ProcessId
+  - SourceUsername
+  - DestinationUrl
+
+falsepositives:
+  - Legitimate developer operations from IDEs (VSCode, IntelliJ, Visual Studio)
+  - Automated CI/CD pipelines pushing code with secured tokens
+  - System or administrative users running maintenance scripts
+
 level: critical

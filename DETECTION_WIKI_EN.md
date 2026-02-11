@@ -634,8 +634,8 @@
 - [High-Fidelity Cloud Administration Agent Abuse](#high-fidelity-cloud-administration-agent-abuse)
 - [Suspicious Device Driver Enumeration From Anomalous Context (BYOVD Recon)](#suspicious-device-driver-enumeration-from-anomalous-context-(byovd-recon))
 - [Ultra-Pro Power Settings Manipulation (T1137.001)](#ultra-pro-power-settings-manipulation-(t1137001))
-- [Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654)](#ultra-pro-high-fidelity-log-enumeration-discovery-(t1654))
-- [Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656)](#ultra-pro-high-fidelity-impersonation-and-identity-hijacking-(t1656))
+- [Suspicious Event Log Enumeration from Anomalous Execution Context](#suspicious-event-log-enumeration-from-anomalous-execution-context)
+- [Suspicious Impersonation via RunAs Abuse or Deceptive Local Account Creation](#suspicious-impersonation-via-runas-abuse-or-deceptive-local-account-creation)
 - [Suspicious Clipboard Manipulation and Financial Document Access From Untrusted Parent Process](#suspicious-clipboard-manipulation-and-financial-document-access-from-untrusted-parent-process)
 - [Professional Content Impersonation and Infrastructure Mirroring](#professional-content-impersonation-and-infrastructure-mirroring)
 - [Suspicious Access to LSASS Process Memory (Credential Dumping Attempt)](#suspicious-access-to-lsass-process-memory-(credential-dumping-attempt))
@@ -11614,16 +11614,14 @@ methods within a single process context.
 
 
 ---
-## Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621)
+## Suspicious MFA Prompt Bombing or Authentication Flood Automation
 - **ID:** `T1621.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the execution of tools and scripts designed to automate repetitive MFA requests.
-Focuses on headless browser automation, specialized Azure/Okta exploit kits, and
-PowerShell-based authentication loops running in non-interactive sessions.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [SCHTASKS.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects potential MFA prompt bombing or authentication flood automation  using PowerShell identity modules, Azure/Okta tooling, or headless browser  frameworks executed in non-interactive or hidden contexts. Focuses on loop  logic combined with identity authentication tooling.
 
 
 #### 🚨 Response Playbook
@@ -11633,16 +11631,14 @@ PowerShell-based authentication loops running in non-interactive sessions.
 
 
 ---
-## Ultra-Pro Stealthy Debugger Evasion (T1622)
+## Suspicious Anti-Debug API Access From Unbacked or User-Space Memory
 - **ID:** `T1622.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [WINDBG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects high-fidelity debugger evasion by identifying anti-debug API access 
-originating from unbacked memory (shellcode) or suspicious temporary paths, 
-while filtering out legitimate IDEs and system error reporting.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [VSJITDEBUGGER.EXE](https://lolbas-project.github.io/lolbas/), [WINDBG.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects potential debugger evasion techniques by identifying suspicious access to processes combined with anti-debug API patterns in CallTrace, especially when originating from unbacked memory regions or non-standard execution paths. Filters known development tools and Windows error reporting.
 
 
 #### 🚨 Response Playbook

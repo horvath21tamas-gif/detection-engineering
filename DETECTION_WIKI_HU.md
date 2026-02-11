@@ -634,8 +634,8 @@
 - [High-Fidelity Cloud Administration Agent Agent Abuse](#high-fidelity-cloud-administration-agent-agent-abuse)
 - [Gyanús eszközillesztő-felsorolás rendellenes kontextusból (BYOVD Recon)](#gyanús-eszközillesztő-felsorolás-rendellenes-kontextusból-(byovd-recon))
 - [Ultra-Pro teljesítménybeállítások kezelése (T1137.001)](#ultra-pro-teljesítménybeállítások-kezelése-(t1137001))
-- [Ultra-Pro nagy pontosságú naplófeltárás (T1654)](#ultra-pro-nagy-pontosságú-naplófeltárás-(t1654))
-- [Ultra-Pro High-Fidelity megszemélyesítés és személyazonosság-eltérítés (T1656)](#ultra-pro-high-fidelity-megszemélyesítés-és-személyazonosság-eltérítés-(t1656))
+- [Gyanús eseménynapló felsorolása rendellenes végrehajtási kontextusból](#gyanús-eseménynapló-felsorolása-rendellenes-végrehajtási-kontextusból)
+- [Gyanús megszemélyesítés RunAs visszaélésen vagy megtévesztő helyi fiók létrehozásán keresztül](#gyanús-megszemélyesítés-runas-visszaélésen-vagy-megtévesztő-helyi-fiók-létrehozásán-keresztül)
 - [Gyanús vágólap-manipuláció és pénzügyi dokumentumokhoz való hozzáférés nem megbízható szülői folyamatból](#gyanús-vágólap-manipuláció-és-pénzügyi-dokumentumokhoz-való-hozzáférés-nem-megbízható-szülői-folyamatból)
 - [Professzionális tartalom megszemélyesítése és infrastruktúra tükrözése](#professzionális-tartalom-megszemélyesítése-és-infrastruktúra-tükrözése)
 - [Gyanús hozzáférés az LSASS folyamatmemóriához (hitelesítő adatok kiürítési kísérlete)](#gyanús-hozzáférés-az-lsass-folyamatmemóriához-(hitelesítő-adatok-kiürítési-kísérlete))
@@ -11001,16 +11001,14 @@ módszerek egyetlen folyamatkörnyezeten belül.
 
 
 ---
-## Ultra-Pro High-Fidelity MFA azonnali bombázási automatizálás (T1621)
+## Gyanús MFA azonnali bombázás vagy hitelesítési árvíz automatizálás
 - **ID:** `T1621.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az ismétlődő MFA-kérések automatizálására tervezett eszközök és szkriptek végrehajtását.
-A fej nélküli böngészőautomatizálásra, a speciális Azure/Okta exploit készletekre és a
-Nem interaktív munkamenetekben futó PowerShell-alapú hitelesítési hurkok.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [SCHTASKS.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a lehetséges MFA-kérdések bombázását vagy hitelesítési árvíz-automatizálását PowerShell-identitásmodulok, Azure/Okta-eszközök vagy fej nélküli böngésző keretrendszerek segítségével, amelyek nem interaktív vagy rejtett kontextusban futnak.A huroklogikára összpontosít az identitás-hitelesítési eszközökkel kombinálva.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -11019,16 +11017,14 @@ Nem interaktív munkamenetekben futó PowerShell-alapú hitelesítési hurkok.
 
 
 ---
-## Ultra-Pro Stealthy Debugger Evasion (T1622)
+## Gyanús Anti-Debug API-hozzáférés nem támogatott vagy felhasználói memóriaterületről
 - **ID:** `T1622.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [WINDBG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a nagy pontosságú hibakereső-kijátszást az anti-debug API-hozzáférés azonosításával
-nem támogatott memóriából (shellkód) vagy gyanús ideiglenes útvonalakból származik,
-miközben kiszűri a legitim IDE-ket és a rendszerhiba-jelentést.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [VSJITDEBUGGER.EXE](https://lolbas-project.github.io/lolbas/), [WINDBG.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a lehetséges hibakereső-elkerülési technikákat azáltal, hogy azonosítja a folyamatokhoz való gyanús hozzáférést a CallTrace hibakeresési API-mintáival kombinálva, különösen, ha nem támogatott memóriarégiókból vagy nem szabványos végrehajtási útvonalakból származnak.Szűri az ismert fejlesztőeszközöket és a Windows hibajelentéseit.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

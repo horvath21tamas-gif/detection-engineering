@@ -634,8 +634,8 @@
 - [Missbrauch von High-Fidelity-Cloud-Verwaltungsagenten](#missbrauch-von-high-fidelity-cloud-verwaltungsagenten)
 - [Verdächtige Gerätetreiberaufzählung aus anomalem Kontext (BYOVD Recon)](#verdächtige-gerätetreiberaufzählung-aus-anomalem-kontext-(byovd-recon))
 - [Manipulation der Ultra-Pro-Energieeinstellungen (T1137.001)](#manipulation-der-ultra-pro-energieeinstellungen-(t1137001))
-- [Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654)](#ultra-pro-high-fidelity-log-enumeration-discovery-(t1654))
-- [Ultra-Pro High-Fidelity-Identitätsbetrug und Identitätsdiebstahl (T1656)](#ultra-pro-high-fidelity-identitätsbetrug-und-identitätsdiebstahl-(t1656))
+- [Aufzählung verdächtiger Ereignisprotokolle aufgrund eines anomalen Ausführungskontexts](#aufzählung-verdächtiger-ereignisprotokolle-aufgrund-eines-anomalen-ausführungskontexts)
+- [Verdächtiger Identitätswechsel durch RunAs-Missbrauch oder irreführende lokale Kontoerstellung](#verdächtiger-identitätswechsel-durch-runas-missbrauch-oder-irreführende-lokale-kontoerstellung)
 - [Verdächtige Manipulation der Zwischenablage und Zugriff auf Finanzdokumente über einen nicht vertrauenswürdigen übergeordneten Prozess](#verdächtige-manipulation-der-zwischenablage-und-zugriff-auf-finanzdokumente-über-einen-nicht-vertrauenswürdigen-übergeordneten-prozess)
 - [Professionelle Content-Impersonation und Infrastrukturspiegelung](#professionelle-content-impersonation-und-infrastrukturspiegelung)
 - [Verdächtiger Zugriff auf den LSASS-Prozessspeicher (Credential Dumping-Versuch)](#verdächtiger-zugriff-auf-den-lsass-prozessspeicher-(credential-dumping-versuch))
@@ -11001,16 +11001,14 @@ Methoden innerhalb eines einzelnen Prozesskontexts.
 
 
 ---
-## Ultra-Pro High-Fidelity MFA Prompt Bombing Automation (T1621)
+## Verdächtige MFA-Prompt-Bombing- oder Authentifizierungs-Flood-Automatisierung
 - **ID:** `T1621.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Ausführung von Tools und Skripts, die darauf ausgelegt sind, sich wiederholende MFA-Anfragen zu automatisieren.
-Konzentriert sich auf Headless-Browser-Automatisierung, spezielle Azure/Okta-Exploit-Kits und
-PowerShell-basierte Authentifizierungsschleifen, die in nicht interaktiven Sitzungen ausgeführt werden.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [SCHTASKS.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt potenzielles MFA-Prompt-Bombing oder automatisierte Authentifizierungsfluten mithilfe von PowerShell-Identitätsmodulen, Azure/Okta-Tools oder Headless-Browser-Frameworks, die in nicht interaktiven oder versteckten Kontexten ausgeführt werden.Der Schwerpunkt liegt auf Schleifenlogik in Kombination mit Tools zur Identitätsauthentifizierung.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -11019,16 +11017,14 @@ PowerShell-basierte Authentifizierungsschleifen, die in nicht interaktiven Sitzu
 
 
 ---
-## Ultra-Pro Stealthy Debugger Evasion (T1622)
+## Verdächtiger Anti-Debug-API-Zugriff aus nicht gesichertem oder User-Space-Speicher
 - **ID:** `T1622.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [WINDBG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Umgehung des High-Fidelity-Debuggers durch Identifizierung des Anti-Debug-API-Zugriffs
-aus nicht gesichertem Speicher (Shellcode) oder verdächtigen temporären Pfaden stammen,
-während legitime IDEs herausgefiltert und Systemfehler gemeldet werden.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [VSJITDEBUGGER.EXE](https://lolbas-project.github.io/lolbas/), [WINDBG.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt potenzielle Debugger-Umgehungstechniken durch die Identifizierung verdächtiger Zugriffe auf Prozesse in Kombination mit Anti-Debug-API-Mustern in CallTrace, insbesondere wenn sie aus nicht gesicherten Speicherbereichen oder nicht standardmäßigen Ausführungspfaden stammen.Filtert bekannte Entwicklungstools und Windows-Fehlerberichte.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**
@@ -11153,7 +11149,7 @@ Winterschlaf.Konzentriert sich auf die Befehlszeilenautomatisierung (powercfg) �
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt verdächtige Aufzählungen von Windows-Ereignisprotokollen mithilfe nativer Dienstprogramme (wevtutil) oder PowerShell-Cmdlets (Get-WinEvent, Get-EventLog) aus anomalen Ausführungskontexten.Konzentriert sich auf die Erkennung von Protokollkanälen und die Erfassung von Metadaten, die möglicherweise zur Identifizierung von Sicherheitstools oder zur Umgehung der Erkennung verwendet werden.
+- **Beschreibung:** Erkennt verdächtige Aufzählungen von Windows-Ereignisprotokollen mithilfe nativer Dienstprogramme (wevtutil) oder PowerShell-Cmdlets (Get-WinEvent, Get-EventLog) aus anomalen Ausführungskontexten.Der Schwerpunkt liegt auf der Erkennung von Protokollkanälen und der Erfassung von Metadaten, die möglicherweise zur Identifizierung von Sicherheitstools oder zur Umgehung der Erkennung verwendet werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

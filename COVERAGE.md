@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-11 08:29:29`
+**Utolsó frissítés:** `2026-02-11 08:52:14`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -640,7 +640,7 @@
 | T1651 | CRITICAL | High-Fidelity Cloud Administration Agent Abuse |
 | T1652 | HIGH | Suspicious Device Driver Enumeration From Anomalous Context (BYOVD Recon) |
 | T1653 | MEDIUM | Ultra-Pro Power Settings Manipulation (T1137.001) |
-| T1654 | HIGH | Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654) |
-| T1656 | HIGH | Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656) |
+| T1654 | HIGH | Suspicious Event Log Enumeration from Anomalous Execution Context |
+| T1656 | HIGH | Suspicious Impersonation via RunAs Abuse or Deceptive Local Account Creation |
 | T1657 | HIGH | Suspicious Clipboard Manipulation and Financial Document Access From Untrusted Parent Process |
 | T1659 | HIGH | Professional Content Impersonation and Infrastructure Mirroring |

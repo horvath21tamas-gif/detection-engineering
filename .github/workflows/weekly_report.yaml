@@ -1,7 +1,7 @@
 name: Weekly Detection Engineering Report
 
 on:
-  push:         # <--- Ez kényszeríti a GitHubot, hogy most azonnal felismerje a workflow-t
+  push:          # <--- Ez kényszeríti a GitHubot, hogy most azonnal felismerje a workflow-t
     branches:
       - test
   schedule:
@@ -25,15 +25,26 @@ jobs:
       - name: Extract Dashboard Summary
         id: report
         run: |
-          echo "### 📊 Aktuális Szabály Statisztikák" > weekly_summary.txt
+          echo "## 🚀 Heti Detection Engineering Jelentés" > weekly_summary.txt
+          echo "Dátum: $(date +'%Y-%m-%d')" >> weekly_summary.txt
           echo "" >> weekly_summary.txt
-          
+
+          echo "### 📊 Aktuális Szabály Statisztikák" >> weekly_summary.txt
           # Ellenőrizzük, létezik-e a fájl, mielőtt beleolvasunk
           if [ -f "DETECTION_WIKI_HU.md" ]; then
             # A 3-15. sor kinyerése (a Dashboard táblázat helye)
             sed -n '3,15p' DETECTION_WIKI_HU.md >> weekly_summary.txt
           else
             echo "⚠️ A magyar nyelvű Wiki (DETECTION_WIKI_HU.md) még nem jött létre." >> weekly_summary.txt
+          fi
+          
+          echo "" >> weekly_summary.txt
+          echo "### ⛓️ Cyber Kill Chain Lefedettség" >> weekly_summary.txt
+          if [ -f "KILL_CHAIN_REPORT.md" ]; then
+            # Kivesszük a Kill Chain táblázatot és a vakfoltokat (5. sortól lefelé)
+            sed -n '5,50p' KILL_CHAIN_REPORT.md >> weekly_summary.txt
+          else
+            echo "⚠️ A Kill Chain jelentés (KILL_CHAIN_REPORT.md) még nem jött létre." >> weekly_summary.txt
           fi
           
           echo "" >> weekly_summary.txt

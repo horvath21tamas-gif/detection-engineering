@@ -8448,16 +8448,19 @@ and console buffer suppression to prevent forensic recovery of commands.
 
 
 ---
-## Ultra-Pro High-Fidelity Indicator Blocking and Telemetry Silencing (T1562.006)
+## Indicator Blocking and Telemetry Suppression
 - **ID:** `T1562_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted attempts to silence security monitoring by disabling ETW providers, 
-tampering with Event Forwarding (WEF), or using host firewalls to block EDR/AV 
-cloud-reputation and telemetry endpoints.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence attempts to disable or degrade Windows security telemetry by:
+  - Stopping ETW providers or system trace sessions
+  - Disabling or modifying Windows Event Forwarding (WEF)
+  - Creating firewall rules to block outbound security telemetry (EDR/AV over HTTPS)
+
+Focuses on defense evasion patterns aligned to MITRE ATT&CK T1562.006.
 
 
 #### 🚨 Response Playbook

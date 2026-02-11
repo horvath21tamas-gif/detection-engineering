@@ -8017,16 +8017,19 @@ und Konsolenpufferunterdrückung, um eine forensische Wiederherstellung von Befe
 
 
 ---
-## Ultra-Pro High-Fidelity-Indikatorblockierung und Telemetrie-Stummschaltung (T1562.006)
+## Anzeigeblockierung und Telemetrieunterdrückung
 - **ID:** `T1562_006.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezielte Versuche, die Sicherheitsüberwachung durch die Deaktivierung von ETW-Anbietern zum Schweigen zu bringen.
-Manipulation der Ereignisweiterleitung (WEF) oder Verwendung von Host-Firewalls zur Blockierung von EDR/AV
-Cloud-Reputation- und Telemetrie-Endpunkte.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochzuverlässige Versuche, die Windows-Sicherheitstelemetrie zu deaktivieren oder zu verschlechtern, indem:
+– Stoppen von ETW-Anbietern oder System-Trace-Sitzungen
+- Deaktivieren oder Ändern der Windows-Ereignisweiterleitung (WEF)
+- Erstellen von Firewall-Regeln zum Blockieren ausgehender Sicherheitstelemetrie (EDR/AV über HTTPS)
+
+Konzentriert sich auf Verteidigungs-Umgehungsmuster gemäß MITRE ATT&CK T1562.006.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

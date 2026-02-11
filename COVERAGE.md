@@ -138,7 +138,7 @@
 | T1069.001 | HIGH | Ultra-Pro High-Fidelity Local Group Discovery (T1069.001) |
 | T1069.002 | HIGH | Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002) |
 | T1069.003 | HIGH | Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003) |
-| T1070 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070) |
+| T1070 | CRITICAL | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Indicator Blocking and Telemetry Suppression |
 | T1070.001 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Security Event Log Cleared Using wevtutil.exe |
 | T1070.002 | HIGH | Ultra-Pro High-Fidelity Linux Log Clearing and Journal Sabotage (T1070.002) |
 | T1070.003 | HIGH | Ultra-Pro High-Fidelity Mailbox Data Clearing and Rule Sabotage (T1070.003) |
@@ -198,7 +198,7 @@
 | T1110.003 | HIGH | Ultra-Pro High-Fidelity Password Spraying (T1110.003) |
 | T1110.004 | HIGH | Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004) |
 | T1111 | CRITICAL | Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111) |
-| T1112 | CRITICAL | Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112) |
+| T1112 | CRITICAL | Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112), Indicator Blocking and Telemetry Suppression |
 | T1113 | CRITICAL | Ultra-Pro High-Fidelity Screen Capture Anomaly (T1113) |
 | T1114 | CRITICAL | Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |
 | T1114.001 | CRITICAL | Ultra-Pro High-Fidelity Local Email Harvesting Anomaly (T1114.001), Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |

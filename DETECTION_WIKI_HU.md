@@ -8017,16 +8017,19 @@ A Set-PSReadLineOption visszaélésre összpontosít (SaveNothing, $null átirá
 
 
 ---
-## Ultra-Pro High-Fidelity jelzőblokkolás és telemetriás hangcsillapítás (T1562.006)
+## Kijelző blokkolása és telemetria elnyomása
 - **ID:** `T1562_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a biztonsági megfigyelés elnémítására irányuló célzott kísérleteket az ETW-szolgáltatók letiltásával,
-az Event Forwarding (WEF) manipulálása, vagy gazdagép tűzfalak használata az EDR/AV blokkolására
-felhő-hírnév és telemetria végpontok.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a nagy megbízhatóságú kísérleteket a Windows biztonsági telemetriájának letiltására vagy leromlására az alábbiak szerint:
+- ETW szolgáltatók vagy rendszerkövetési munkamenetek leállítása
+- A Windows eseménytovábbítás (WEF) letiltása vagy módosítása
+- Tűzfalszabályok létrehozása a kimenő biztonsági telemetria blokkolására (EDR/AV HTTPS-en keresztül)
+
+A MITER ATT&CK T1562.006 szabványhoz igazított védelmi kijátszási mintákra összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

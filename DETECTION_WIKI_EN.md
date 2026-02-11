@@ -8782,16 +8782,17 @@ manipulation of the Office Object Model.
 
 
 ---
-## Ultra-Pro High-Fidelity Email Hiding Rules Detection (T1564.008)
+## Email Hiding Rules Detection (T1564.008)
 - **ID:** `T1564_008.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted email hiding rules by identifying suspicious inbox rule 
-modifications that automate the deletion or hiding of security alerts, 
-initiated by untrusted parent processes or non-admin shells.
+- **Leírás:** Detects suspicious modifications of email inbox rules aimed at hiding, 
+deleting, or forwarding security-related alerts. Monitors non-admin parent 
+processes and untrusted shells for actions that could suppress detection of 
+phishing, MFA alerts, or unauthorized access notifications.
 
 
 #### 🚨 Response Playbook

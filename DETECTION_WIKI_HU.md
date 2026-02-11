@@ -8333,16 +8333,17 @@ az Office Object Model manipulációja.
 
 
 ---
-## Ultra-Pro High-Fidelity e-mailek elrejtési szabályainak észlelése (T1564.008)
+## E-mailek elrejtésére vonatkozó szabályok észlelése (T1564.008)
 - **ID:** `T1564_008.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a célzott e-mailek elrejtésére vonatkozó szabályokat a gyanús postafiók-szabályok azonosításával
-olyan módosítások, amelyek automatizálják a biztonsági figyelmeztetések törlését vagy elrejtését,
-nem megbízható szülői folyamatok vagy nem rendszergazdai parancsértelmezők kezdeményezték.
+- **Leírás:** Érzékeli az e-mail postafiók szabályainak gyanús módosításait, amelyek célja az elrejtés,
+a biztonsággal kapcsolatos riasztások törlése vagy továbbítása.Figyeli a nem rendszergazdai szülőt
+folyamatok és nem megbízható parancsértelmezők olyan műveletekhez, amelyek megakadályozhatják az észlelést
+adathalászat, MFA-riasztások vagy jogosulatlan hozzáférési értesítések.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -8333,16 +8333,17 @@ Manipulation des Office-Objektmodells.
 
 
 ---
-## Ultra-Pro High-Fidelity-Erkennung von E-Mail-Versteckregeln (T1564.008)
+## Erkennung von E-Mail-Versteckregeln (T1564.008)
 - **ID:** `T1564_008.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezielte Regeln zum Verstecken von E-Mails, indem verdächtige Posteingangsregeln identifiziert werden
-Modifikationen, die das Löschen oder Ausblenden von Sicherheitswarnungen automatisieren,
-initiiert durch nicht vertrauenswürdige übergeordnete Prozesse oder Nicht-Administrator-Shells.
+- **Beschreibung:** Erkennt verdächtige Änderungen an E-Mail-Posteingangsregeln, die darauf abzielen,
+Löschen oder Weiterleiten sicherheitsrelevanter Warnungen.Überwacht Eltern ohne Administratorrechte
+Prozesse und nicht vertrauenswürdige Shells für Aktionen, die die Erkennung von verhindern könnten
+Phishing, MFA-Warnungen oder Benachrichtigungen über unbefugten Zugriff.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

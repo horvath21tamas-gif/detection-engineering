@@ -8744,16 +8744,17 @@ often used to bypass MOTW or hide malicious payloads.
 
 
 ---
-## Ultra-Pro High-Fidelity Virtual Instance Execution Abuse (T1564.006)
+## Virtual Instance Execution Abuse (T1564.006)
 - **ID:** `T1564_006.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects suspicious execution of virtual instances (Docker, VirtualBox, VMware) 
-by identifying anti-forensic flags (--rm), privileged escalation attempts, 
-and untrusted parent processes like web servers or office apps.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects suspicious execution of virtual instances (Docker, VirtualBox, VMware)
+by monitoring for anti-forensic flags (--rm), privileged escalation attempts,
+host network usage, and execution from untrusted parent processes (Office apps, 
+web servers, scripts). Trusted developer and orchestration environments are filtered.
 
 
 #### 🚨 Response Playbook

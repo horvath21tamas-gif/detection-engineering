@@ -8297,16 +8297,17 @@ gyakran használják a MOTW megkerülésére vagy a rosszindulatú rakományok e
 
 
 ---
-## Ultra-Pro High-Fidelity virtuális példány végrehajtási visszaélés (T1564.006)
+## Virtuális példány végrehajtásával való visszaélés (T1564.006)
 - **ID:** `T1564_006.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a virtuális példányok gyanús végrehajtását (Docker, VirtualBox, VMware)
-bűnügyi szakértői jelzők (--rm) azonosításával, privilegizált eszkalációs kísérletekkel,
-és nem megbízható szülői folyamatok, például webszerverek vagy irodai alkalmazások.
+a kriminalisztikai jelzők (--rm), a kiemelt eszkalációs kísérletek figyelésével,
+gazdagép hálózatának használata és végrehajtása nem megbízható szülői folyamatokból (Office alkalmazások,
+webszerverek, szkriptek).Megbízható fejlesztői és hangszerelési környezetek szűrése.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -8297,16 +8297,17 @@ Wird häufig verwendet, um MOTW zu umgehen oder bösartige Payloads zu verbergen
 
 
 ---
-## Missbrauch der Ausführung virtueller Ultra-Pro-High-Fidelity-Instanzen (T1564.006)
+## Missbrauch der Ausführung virtueller Instanzen (T1564.006)
 - **ID:** `T1564_006.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt verdächtige Ausführung virtueller Instanzen (Docker, VirtualBox, VMware)
-durch Identifizierung von Anti-Forensik-Flags (--rm), privilegierten Eskalationsversuchen,
-und nicht vertrauenswürdige übergeordnete Prozesse wie Webserver oder Office-Apps.
+durch Überwachung auf Anti-Forensik-Flags (--rm), privilegierte Eskalationsversuche,
+Host-Netzwerknutzung und Ausführung durch nicht vertrauenswürdige übergeordnete Prozesse (Office-Apps,
+Webserver, Skripte).Vertrauenswürdige Entwickler- und Orchestrierungsumgebungen werden gefiltert.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

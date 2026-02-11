@@ -1,59 +1,84 @@
-title: Ultra-Pro High-Fidelity Cloud Infrastructure Discovery (T1580)
+title: Cloud Infrastructure Discovery (T1580)
 id: 84e5d0fa-b067-4f5c-a0a2-bebf842de24f
 status: stable
 description: |
-    Detects systematic discovery of cloud resources (VMs, VPCs, S3) focusing on 
-    anomalous execution environments and data extraction patterns. 
-    Excludes legitimate Infrastructure-as-Code (IaC) and CI/CD tools.
-author: hota05
-date: 2026-02-04
+    Detects systematic discovery of cloud infrastructure resources (VMs, VPCs, S3 buckets, storage accounts)
+    by monitoring anomalous CLI usage, output extraction, and interactive session contexts.
+    Filters out legitimate Infrastructure-as-Code (IaC) and CI/CD automation tools.
+author: hota05 
+date: 2026-02-11
 tags:
     - attack.discovery
     - attack.t1580
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_cli:
-        Image|endswith:
-            - '\aws.exe'
-            - '\az.cmd'
-            - '\gcloud.cmd'
+  selection_cli:
+    Image|endswith:
+      - '\aws.exe'
+      - '\az.cmd'
+      - '\gcloud.cmd'
+      - '\oci.exe'
+      - '\ibmcloud.exe'
 
-    selection_infra:
-        CommandLine|contains:
-            - 'ec2 describe-instances'
-            - 's3 ls'
-            - 'rds describe-db-instances'
-            - 'ec2 describe-security-groups'
-            - 'vm list'
-            - 'storage account list'
-            - 'network vnet list'
-            - 'compute instances list'
+  selection_infra:
+    CommandLine|contains:
+      - 'ec2 describe-instances'
+      - 'ec2 describe-security-groups'
+      - 's3 ls'
+      - 'rds describe-db-instances'
+      - 'vm list'
+      - 'compute instances list'
+      - 'network vnet list'
+      - 'storage account list'
+      - 'buckets list'
+      - 'projects list'
 
-    selection_extraction:
-        CommandLine|contains:
-            - '--query'
-            - '--output json'
-            - ' | jq'
-            - ' | base64'
-            - ' > '         
+  selection_extraction:
+    CommandLine|contains:
+      - '--query'
+      - '--output json'
+      - ' | jq'
+      - ' | base64'
+      - ' > '
+      - '>>'
+      - '| ConvertTo-Json'
+      - '| Out-File'
 
-    selection_interactive_parent:
-        ParentImage|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\wsmprovhost.exe' 
-            - '\httpd.exe'      
+  selection_interactive_parent:
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wsmprovhost.exe'
+      - '\httpd.exe'
+      - '\explorer.exe'
 
-    filter_legit_automation:
-        ParentImage|contains:
-            - '\Jenkins\'
-            - '\GitLab-Runner\'
-            - '\Terraform\'
-            - '\Ansible\'
-        username: 'NT AUTHORITY\SYSTEM'
+  filter_legit_automation:
+    ParentImage|contains:
+      - '\Jenkins\'
+      - '\GitLab-Runner\'
+      - '\Terraform\'
+      - '\Ansible\'
+      - '\Pulumi\'
+      - '\Octopus\'
+    username: 'NT AUTHORITY\SYSTEM'
 
-    condition: selection_cli and selection_infra and (selection_extraction or selection_interactive_parent) and not filter_legit_automation
+  condition: selection_cli and selection_infra and (selection_extraction or selection_interactive_parent) and not filter_legit_automation
+
+fields:
+  - Time
+  - CommandLine
+  - ParentImage
+  - User
+  - Image
+  - ProcessID
+
+falsepositives:
+  - IaC pipelines performing resource enumeration for legitimate deployments
+  - Cloud automation scripts executed by system accounts
+  - Security monitoring or auditing tools accessing cloud metadata
+
 level: high

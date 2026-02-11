@@ -1,53 +1,73 @@
-title: Ultra-Pro High-Fidelity RDP Session Hijacking (T1563.002)
+title: RDP Session Hijacking (T1563.002)
 id: a274d9ca-c31d-48eb-9025-a6047880342f
 status: stable
 description: |
-    Detects unauthorized RDP session hijacking and shadowing. Focuses on 
-    the specific combination of SYSTEM-level execution, anomalous parent 
-    processes (shells, lateral movement tools), and 'no-consent' parameters.
+  Detects unauthorized RDP session hijacking and shadowing attempts.
+  High-fidelity detection leverages:
+  - SYSTEM-level execution context
+  - Anomalous parent processes (shells, lateral movement tools)
+  - 'No-consent' shadowing parameters
+  Excludes legitimate RDP and remote support tools.
 author: hota05
-date: 2026-02-05
+date: 2026-02-11
 tags:
-    - attack.lateral_movement
-    - attack.t1563.002
+  - attack.lateral_movement
+  - attack.t1563.002
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\tscon.exe'
-            - '\mstsc.exe'
-        - OriginalFileName:
-            - 'tscon.exe'
-            - 'mstsc.exe'
+  selection_tools:
+    Image|endswith:
+      - '\tscon.exe'
+      - '\mstsc.exe'
+    OriginalFileName:
+      - 'tscon.exe'
+      - 'mstsc.exe'
 
-    selection_shadow_args:
-        CommandLine|contains:
-            - ' /shadow:'           
-            - ' /no-consent-prompt'  
-            - ' /control'          
-            - ' /dest:rdp-tcp#'      
+  selection_shadow_args:
+    CommandLine|contains:
+      - ' /shadow:'            
+      - ' /no-consent-prompt'  
+      - ' /control'            
+      - ' /dest:rdp-tcp#'
 
-    selection_suspicious_context:
-        ParentImage|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\psexesvc.exe'        
-            - '\wsmprovhost.exe'     
-            - '\httpd.exe'            
-        IntegrityLevel: 'System'      
+  selection_suspicious_context:
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\psexesvc.exe'
+      - '\wsmprovhost.exe'
+      - '\httpd.exe'
+    IntegrityLevel: 'System'
 
-    filter_legit_service:
-        - ParentImage|endswith:
-            - '\svchost.exe'          
-            - '\Taskmgr.exe'        
-        - CommandLine|contains:
-            - 'C:\Program Files\Remote Desktop'
-            - 'Citrix'                
-            - 'VMware'          
-        - username: 'NT AUTHORITY\NETWORK SERVICE'
+  filter_legit_service:
+    ParentImage|endswith:
+      - '\svchost.exe'
+      - '\Taskmgr.exe'
+    CommandLine|contains:
+      - 'C:\Program Files\Remote Desktop'
+      - 'Citrix'
+      - 'VMware'
+    username: 'NT AUTHORITY\NETWORK SERVICE'
 
-    condition: (selection_tools and (selection_shadow_args or selection_suspicious_context)) and not filter_legit_service
+  condition: 
+    selection_tools and 
+    (selection_shadow_args or selection_suspicious_context) and
+    not filter_legit_service
+
+fields:
+  - Time
+  - SourceImage
+  - ParentImage
+  - CommandLine
+  - SourceUsername
+  - IntegrityLevel
+
+falsepositives:
+  - Legitimate remote admin sessions with consent prompts (e.g., helpdesk tools)
+  - RDP management scripts executed by trusted SYSTEM services
+
 level: critical

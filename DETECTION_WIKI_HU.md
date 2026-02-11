@@ -9170,14 +9170,14 @@ szabotázsra vagy védelmi kijátszásra utaló megsemmisítési kísérletek.
 
 
 ---
-## Ultra-Pro High-Fidelity felhőkép-szabotázs (T1578.004)
+## Felhőkép-szabotázs (T1578.004)
 - **ID:** `T1578_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a felhőalapú gépek képeinek (AMI, VHD) jogosulatlan módosításait.
-Azokra az engedélymódosításokra összpontosít, amelyek külső fiókok számára teszik ki a képeket, ill
-a nyilvános internetet, és kiszűri az ismert CI/CD build csővezetékeket.
+- **Leírás:** Érzékeli a felhőalapú gépek képeinek (AMI, VHD, Managed Images) jogosulatlan módosításait.
+Azokra az engedélymódosításokra összpontosít, amelyek külső fiókok vagy nyilvános internet számára teszik ki a képeket.
+A környezettudatos észlelés kizárja a törvényes CI/CD- és képalkotási folyamatokat, miközben magában foglalja a gyanús interaktív munkameneteket is.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

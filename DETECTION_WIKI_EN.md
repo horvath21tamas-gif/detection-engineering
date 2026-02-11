@@ -9668,14 +9668,14 @@ destruction attempts that indicate sabotage or defense evasion.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Image Tampering (T1578.004)
+## Cloud Image Tampering (T1578.004)
 - **ID:** `T1578_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects unauthorized modifications to cloud machine images (AMI, VHD). 
-Focuses on permission changes that expose images to external accounts or 
-the public internet, and filters out known CI/CD build pipelines.
+- **Leírás:** Detects unauthorized modifications to cloud machine images (AMI, VHD, Managed Images). 
+Focuses on permission changes that expose images to external accounts or the public internet. 
+Context-aware detection excludes legitimate CI/CD and image build pipelines while including suspicious interactive sessions.
 
 
 #### 🚨 Response Playbook

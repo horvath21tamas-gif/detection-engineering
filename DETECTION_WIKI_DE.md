@@ -9170,14 +9170,14 @@ Zerstörungsversuche, die auf Sabotage oder Umgehung der Verteidigung schließen
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Image Manipulation (T1578.004)
+## Manipulation von Wolkenbildern (T1578.004)
 - **ID:** `T1578_004.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt nicht autorisierte Änderungen an Cloud-Maschinen-Images (AMI, VHD).
-Konzentriert sich auf Berechtigungsänderungen, die Bilder für externe Konten oder verfügbar machen
-das öffentliche Internet und filtert bekannte CI/CD-Build-Pipelines heraus.
+- **Beschreibung:** Erkennt nicht autorisierte Änderungen an Cloud-Maschinen-Images (AMI, VHD, verwaltete Images).
+Konzentriert sich auf Berechtigungsänderungen, die Bilder für externe Konten oder das öffentliche Internet zugänglich machen.
+Die kontextbezogene Erkennung schließt legitime CI/CD- und Image-Build-Pipelines aus und schließt verdächtige interaktive Sitzungen ein.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

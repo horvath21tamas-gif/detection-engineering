@@ -11519,16 +11519,14 @@ and anomalous process lineage, filtering out high-frequency monitoring and syste
 
 
 ---
-## Ultra-Pro High-Fidelity System Location Discovery (T1614)
+## High-Fidelity System Location and Regional Kill-Switch Discovery
 - **ID:** `T1614.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted system location and language discovery, often used by ransomware 
-for regional targeting or exclusion (kill-switch check). Focuses on Registry-based 
-keyboard layout enumeration and external IP-to-geo API calls from non-standard processes.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects targeted system location and regional discovery commonly used by  ransomware and malware for geographic targeting or exclusion (kill-switch logic).  Focuses on registry-based keyboard/locale enumeration combined with  external IP-to-geo API calls from suspicious execution contexts.
 
 
 #### 🚨 Response Playbook

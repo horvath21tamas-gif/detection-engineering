@@ -10911,16 +10911,14 @@ A személyazonosság önkihallgatására (auth can-i), a titkos felfedezésre ö
 
 
 ---
-## Ultra-Pro High-Fidelity rendszer helymeghatározás (T1614)
+## High-Fidelity rendszer helymeghatározás és regionális Kill-Switch felfedezés
 - **ID:** `T1614.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a célzott rendszerhely- és nyelvfelderítést, amelyet gyakran használnak zsarolóvírusok
-regionális célzáshoz vagy kizáráshoz (kill-switch check).A rendszerleíró adatbázisra összpontosít
-billentyűzetkiosztás felsorolása és külső IP-geo API hívások nem szabványos folyamatokból.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a célzott rendszer helyét és a zsarolóvírusok és rosszindulatú programok által általánosan használt regionális felfedezést földrajzi célzáshoz vagy kizáráshoz (kill-switch logika).A rendszerleíró adatbázis-alapú billentyűzet-/helymeghatározásra összpontosít, és a gyanús végrehajtási kontextusokból érkező külső IP-földrajzi API-hívásokkal kombinálva.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -10911,16 +10911,14 @@ und anomale Prozessabstammung, indem Hochfrequenzüberwachung und Systemsonden h
 
 
 ---
-## Ultra-Pro High-Fidelity-System zur Standorterkennung (T1614)
+## High-Fidelity-Systemstandort und regionale Kill-Switch-Erkennung
 - **ID:** `T1614.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt den Zielsystemstandort und die Spracherkennung, die häufig von Ransomware verwendet werden
-für regionales Targeting oder Ausschluss (Kill-Switch-Check).Konzentriert sich auf Registrierungsbasis
-Aufzählung des Tastaturlayouts und externe IP-to-Geo-API-Aufrufe von nicht standardmäßigen Prozessen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt den Zielsystemstandort und die regionale Erkennung, die häufig von Ransomware und Malware zur geografischen Ausrichtung oder Ausgrenzung verwendet werden (Kill-Switch-Logik).Konzentriert sich auf die registrierungsbasierte Tastatur-/Gebietsschema-Aufzählung in Kombination mit externen IP-zu-Geo-API-Aufrufen aus verdächtigen Ausführungskontexten.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

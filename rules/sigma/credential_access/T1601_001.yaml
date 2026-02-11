@@ -1,12 +1,13 @@
-title: Ultra-Pro High-Fidelity Network Binary Patching (T1601.001)
+title: Network Binary Patching (T1601.001)
 id: 1a99382f-ae99-4606-a5ec-c03445bb4a81
 status: stable
 description: |
-    Detects unauthorized low-level patching of network OS binaries. 
-    Focuses on filesystem remounting (read-write), binary manipulation (dd, xxd), 
-    and kernel module loading (insmod) outside of authorized maintenance.
-author: hota05
-date: 2026-02-03
+    Detects unauthorized low-level patching of network OS binaries by monitoring 
+    for filesystem remounting (read-write), direct binary manipulation (dd, xxd), 
+    and kernel module loading (insmod) outside of authorized maintenance windows. 
+    Focuses on critical paths and filters out legitimate maintenance and read-only operations.
+author: hota05 
+date: 2026-02-11
 tags:
     - attack.persistence
     - attack.defense_evasion
@@ -14,37 +15,61 @@ tags:
 logsource:
     product: network
     service: FortiOS
+
 detection:
-    selection_remount:
-        Message|contains:
-            - 'mount -o remount,rw'
-            - 'mount -uw'
-            - 'config-transaction' 
 
-    selection_patch_tools:
-        Message|contains:
-            - 'xxd '    
-            - 'dd if=' 
-            - 'insmod'  
-            - 'gdb '   
-            - 'setenforce 0' 
+  selection_remount:
+    Message|contains:
+      - 'mount -o remount,rw'
+      - 'mount -uw'
+      - 'config-transaction start'
+      - 'config-transaction commit'
 
-    selection_critical_paths:
-        Message|contains:
-            - '/bin/'
-            - '/sbin/'
-            - '/lib/modules'
-            - '/boot/'
+  selection_patch_tools:
+    Message|contains:
+      - 'xxd '
+      - 'dd if='
+      - 'insmod'
+      - 'gdb '
+      - 'setenforce 0'
+      - 'objcopy '
+      - 'strip '
+      - 'modprobe '
 
-    filter_authorized_updates:
-        user_name|startswith:
-            - 'svc-system-update'
-            - 'installer'
-    filter_read_only_debug:
-        Message|contains:
-            - 'show '
-            - 'cat '
-            - 'grep '
+  selection_critical_paths:
+    Message|contains:
+      - '/bin/'
+      - '/sbin/'
+      - '/lib/modules/'
+      - '/boot/'
+      - '/usr/local/bin/'
+      - '/usr/local/sbin/'
 
-    condition: (selection_remount or selection_patch_tools) and selection_critical_paths and not (filter_authorized_updates or filter_read_only_debug)
+  filter_authorized_updates:
+    user_name|startswith:
+      - 'svc-system-update'
+      - 'installer'
+      - 'root-maintenance'
+
+  filter_read_only_debug:
+    Message|contains:
+      - 'show '
+      - 'cat '
+      - 'grep '
+      - 'ls '
+      - 'find '
+
+  condition: (selection_remount or selection_patch_tools) and selection_critical_paths and not (filter_authorized_updates or filter_read_only_debug)
+
+fields:
+  - Time
+  - user_name
+  - Message
+  - SourceIP
+
+falsepositives:
+  - Authorized system updates by maintenance accounts
+  - Read-only inspections or debug commands in logs
+  - Lab/test appliance experiments
+
 level: critical

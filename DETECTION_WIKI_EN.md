@@ -8302,16 +8302,21 @@ interactive shells or suspicious parent processes like web servers.
 
 
 ---
-## Ultra-Pro High-Fidelity Disk Wipe (T1561)
+## Disk Wipe
 - **ID:** `T1561.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects low-level disk destruction attempts (MBR overwrite, partition wiping) 
-by monitoring for raw disk access identifiers and destructive CLI arguments 
-originating from non-standard parent processes.
+- **Leírás:** Detects destructive low-level disk operations, including MBR overwrite, 
+partition wiping, and full-disk content destruction.
+
+Monitors:
+  - Raw physical disk access
+  - Destructive CLI arguments (diskpart, dd, format, PowerShell)
+  - Suspicious execution context (Office apps, web servers, temp paths)
+  - Filters out known-good imaging, admin, and security tools
 
 
 #### 🚨 Response Playbook

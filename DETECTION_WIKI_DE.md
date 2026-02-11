@@ -7879,16 +7879,21 @@ interaktive Shells oder verdächtige übergeordnete Prozesse wie Webserver.
 
 
 ---
-## Ultra-Pro High-Fidelity Disk Wipe (T1561)
+## Datenträgerlöschung
 - **ID:** `T1561.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Versuche zur Festplattenzerstörung auf niedriger Ebene (MBR-Überschreibung, Partitionslöschung)
-durch Überwachung auf unformatierte Festplattenzugriffskennungen und destruktive CLI-Argumente
-die aus nicht standardmäßigen übergeordneten Prozessen stammen.
+- **Beschreibung:** Erkennt destruktive Festplattenoperationen auf niedriger Ebene, einschließlich MBR-Überschreibung,
+Partitionslöschung und Zerstörung des gesamten Festplatteninhalts.
+
+Monitore:
+- Roher Zugriff auf physische Festplatten
+– Zerstörerische CLI-Argumente (diskpart, dd, format, PowerShell)
+– Verdächtiger Ausführungskontext (Office-Apps, Webserver, temporäre Pfade)
+– Filtert bekanntermaßen funktionierende Imaging-, Verwaltungs- und Sicherheitstools heraus
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

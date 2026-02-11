@@ -8836,16 +8836,18 @@ gegnerische Tunneling-Tools und filtert gleichzeitig legitimen administrativen S
 
 
 ---
-## Ultra-Pro High-Fidelity-verschlüsselter C2-Kanal (T1573)
+## Verschlüsselter C2-Kanal (T1573)
 - **ID:** `T1573.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Erstellung benutzerdefinierter verschlüsselter C2-Kanäle durch Überwachung
-Instanziierung kryptografischer Klassen auf niedriger Ebene (AES, Rijndael, CryptoStream)
-in Verbindung mit der manuellen Netzwerk-Socket-Erstellung durch Skriptinterpreter.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die Erstellung benutzerdefinierter verschlüsselter C2-Kanäle durch Korrelation auf niedriger Ebene
+symmetrische Kryptographie (AES/Rijndael, CryptoStream, ICryptoTransform)
+mit manueller Netzwerk-Socket-Nutzung durch Skriptinterpreter.
+Filtert legitime Automatisierung, Cloud-Dienste und Systemprozesse heraus
+um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -8836,16 +8836,18 @@ az ellenfél alagútkezelő eszközeit, miközben szűri a legitim adminisztrat�
 
 
 ---
-## Ultra-Pro High-Fidelity titkosított C2 csatorna (T1573)
+## Titkosított C2 csatorna (T1573)
 - **ID:** `T1573.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Egyéni titkosított C2 csatornák létrehozását észleli a következő megfigyelésével
-alacsony szintű kriptográfiai osztályú példányosítás (AES, Rijndael, CryptoStream)
-párhuzamosan a kézi hálózati socket létrehozásával a szkript értelmezőkből.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Alacsony szintű korrelációval érzékeli az egyéni titkosított C2 csatornák létrehozását
+szimmetrikus kriptográfia (AES/Rijndael, CryptoStream, ICryptoTransform)
+kézi hálózati aljzathasználattal a szkript értelmezőktől.
+Kiszűri a legitim automatizálást, felhőszolgáltatásokat és rendszerfolyamatokat
+a hamis pozitívumok csökkentésére.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

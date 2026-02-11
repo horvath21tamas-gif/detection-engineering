@@ -9313,16 +9313,18 @@ adversary tunneling tools while filtering legitimate administrative SSH/VPN traf
 
 
 ---
-## Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573)
+## Encrypted C2 Channel (T1573)
 - **ID:** `T1573.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the creation of custom encrypted C2 channels by monitoring for 
-low-level cryptographic class instantiation (AES, Rijndael, CryptoStream) 
-in tandem with manual network socket creation from scripting interpreters.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects creation of custom encrypted C2 channels by correlating low-level
+symmetric cryptography (AES/Rijndael, CryptoStream, ICryptoTransform)
+with manual network socket usage from scripting interpreters.
+Filters out legitimate automation, cloud services, and system processes
+to reduce false positives.
 
 
 #### 🚨 Response Playbook

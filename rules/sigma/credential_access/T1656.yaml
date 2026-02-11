@@ -1,65 +1,121 @@
-title: Ultra-Pro High-Fidelity Impersonation and Identity Hijacking (T1656)
+title: Suspicious Impersonation via RunAs Abuse or Deceptive Local Account Creation
 id: cfc8cf4c-f406-4c04-928a-e0dc4a2fc755
 status: stable
-description: |
-    Detects technical impersonation attempts including suspicious 'runas' execution 
-    patterns used for lateral movement and the creation of deceptive local accounts 
-    that mimic executive or administrative identities outside of standard HR processes.
-author: hota05
+description: >
+  Detects technical impersonation attempts including suspicious RunAs usage 
+  for lateral movement and creation of deceptive local accounts that mimic 
+  executive or administrative identities outside standard IT provisioning processes.
+
+author: hota05 
 date: 2026-02-03
+modified: 2026-02-11
+references:
+  - https://attack.mitre.org/techniques/T1656/
+  - https://attack.mitre.org/techniques/T1078/
 tags:
-    - attack.lateral_movement
-    - attack.t1656
+  - attack.lateral_movement
+  - attack.persistence
+  - attack.t1656
+  - attack.t1078
+
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_suspicious_runas:
-        Image|endswith: '\runas.exe'
-        CommandLine|contains:
-            - ' /netonly' 
-            - ' /savecred'
-            - ' /showtrustlevels'
-        CommandLine|contains:
-            - 'cmd'
-            - 'powershell'
-            - 'pwsh'
-            - 'temp'
-            - '\\' 
 
-    selection_deceptive_creation:
-        Image|endswith: 
-            - '\net.exe'
-            - '\net1.exe'
-            - '\powershell.exe'
-        CommandLine|contains:
-            - 'user '
-            - 'add '
-            - 'New-LocalUser'
-        CommandLine|contains:
-            - 'CEO'
-            - 'CFO'
-            - 'Chief'
-            - 'Admin'
-            - 'Support'
-            - 'Helpdesk'
+  selection_runas_binary:
+    Image|endswith: '\runas.exe'
 
-    selection_suspicious_chain:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\w3wp.exe'
+  selection_runas_flags:
+    CommandLine|contains:
+      - ' /netonly'
+      - ' /savecred'
+      - ' /showtrustlevels'
 
-    filter_trusted_management:
-        - Image|contains:
-            - '\Program Files\Remote Monitoring\'
-            - '\Windows\System32\CompMgmtLauncher.exe'
-        - username: 'NT AUTHORITY\SYSTEM'
-        - CommandLine|contains:
-            - 'SmartCard'
+  selection_runas_payload:
+    CommandLine|contains:
+      - 'cmd.exe'
+      - 'powershell'
+      - 'pwsh'
+      - '\\\\'         
+      - '\AppData\'
+      - '\Temp\'
 
-    condition: (selection_suspicious_runas or selection_deceptive_creation) and (selection_suspicious_chain or not filter_trusted_management)
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\w3wp.exe'
+      - '\rundll32.exe'
+
+  runas_condition:
+    selection_runas_binary
+    and selection_runas_flags
+    and selection_runas_payload
+
+
+  selection_account_tools:
+    Image|endswith:
+      - '\net.exe'
+      - '\net1.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+
+  selection_account_creation:
+    CommandLine|contains:
+      - ' user '
+      - ' add '
+      - 'New-LocalUser'
+      - 'Add-LocalGroupMember'
+
+  selection_deceptive_names:
+    CommandLine|contains:
+      - 'CEO'
+      - 'CFO'
+      - 'Chief'
+      - 'Admin'
+      - 'Administrator'
+      - 'Support'
+      - 'Helpdesk'
+      - 'IT-Admin'
+
+  account_creation_condition:
+    selection_account_tools
+    and selection_account_creation
+    and selection_deceptive_names
+
+
+  filter_legitimate_management:
+    Image|startswith:
+      - 'C:\Program Files\'
+      - 'C:\Program Files (x86)\'
+    ParentImage|startswith:
+      - 'C:\Program Files\'
+    User|startswith:
+      - 'NT AUTHORITY\'
+      - 'NT SERVICE\'
+
+  filter_smartcard_or_enterprise:
+    CommandLine|contains:
+      - 'SmartCard'
+      - 'Domain Admins'
+
+  condition:
+    (
+      runas_condition
+      or account_creation_condition
+    )
+    and (selection_suspicious_parent or not filter_legitimate_management)
+    and not filter_smartcard_or_enterprise
+
+falsepositives:
+  - Legitimate IT administrative account provisioning
+  - Authorized red team / penetration testing
+  - Enterprise remote management or deployment tools
+  - SmartCard-based authentication workflows
+
 level: high

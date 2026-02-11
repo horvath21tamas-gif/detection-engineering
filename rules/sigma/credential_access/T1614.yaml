@@ -1,60 +1,133 @@
-title: Ultra-Pro High-Fidelity System Location Discovery (T1614)
+title: High-Fidelity System Location and Regional Kill-Switch Discovery
 id: 3e13bde8-b6ca-4453-bfc2-4a8a4d642cd1
 status: stable
-description: |
-    Detects targeted system location and language discovery, often used by ransomware 
-    for regional targeting or exclusion (kill-switch check). Focuses on Registry-based 
-    keyboard layout enumeration and external IP-to-geo API calls from non-standard processes.
-author: hota05
+description: >
+  Detects targeted system location and regional discovery commonly used by 
+  ransomware and malware for geographic targeting or exclusion (kill-switch logic). 
+  Focuses on registry-based keyboard/locale enumeration combined with 
+  external IP-to-geo API calls from suspicious execution contexts.
+
+author: hota05 
 date: 2026-02-04
+modified: 2026-02-11
+references:
+  - https://attack.mitre.org/techniques/T1614/
 tags:
-    - attack.discovery
-    - attack.t1614
+  - attack.discovery
+  - attack.t1614
+  - attack.impact
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_external_geo:
-        CommandLine|contains:
-            - 'ipinfo.io'
-            - 'ifconfig.me'
-            - 'icanhazip.com'
-            - 'api.ipify.org'
-            - 'checkip.amazonaws.com'
-            - 'ip-api.com'
 
-    selection_registry_locale:
-        CommandLine|contains:
-            - 'Keyboard Layout\Preload'      
-            - 'Control Panel\International'  
-            - 'MUILanguages'
-            - 'GeoID'                       
+  selection_external_geo_domains:
+    CommandLine|contains:
+      - 'ipinfo.io'
+      - 'ifconfig.me'
+      - 'icanhazip.com'
+      - 'api.ipify.org'
+      - 'checkip.amazonaws.com'
+      - 'ip-api.com'
+      - 'ipwho.is'
+      - 'freegeoip'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\powerpnt.exe'
-            - '\outlook.exe'
-            - '\wsmprovhost.exe'   
-            - '\httpd.exe'           
-        IntegrityLevel: 'Medium'     
+  selection_external_geo_tools:
+    Image|endswith:
+      - '\curl.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wget.exe'
+    CommandLine|contains:
+      - 'Invoke-WebRequest'
+      - 'Invoke-RestMethod'
+      - 'nslookup'
+      - 'Resolve-DnsName'
 
-    selection_ps_cmdlets:
-        CommandLine|contains:
-            - 'Get-Culture'
-            - 'Get-WinSystemLocale'
-            - 'Get-TimeZone'
+  selection_registry_locale:
+    CommandLine|contains:
+      - 'Keyboard Layout\Preload'
+      - 'Control Panel\International'
+      - 'MUILanguages'
+      - 'GeoID'
+      - 'Get-ItemProperty'
+      - 'reg query'
 
-    filter_legit_software:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith:
-            - '\msiexec.exe'        
-            - '\CcmExec.exe'         
-            - '\svchost.exe'         
-        - CommandLine|contains:
-            - 'Program Files'        
-            - 'Splunk'              
+  selection_ps_locale_cmdlets:
+    CommandLine|contains:
+      - 'Get-Culture'
+      - 'Get-WinSystemLocale'
+      - 'Get-TimeZone'
+      - 'Get-UICulture'
 
-    condition: (selection_external_geo or selection_registry_locale or selection_ps_cmdlets) and selection_suspicious_parent and not filter_legit_software
+  selection_suspicious_parents:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\powerpnt.exe'
+      - '\outlook.exe'
+      - '\wsmprovhost.exe'
+      - '\httpd.exe'
+      - '\mshta.exe'
+    IntegrityLevel: 'Medium'
+
+  selection_suspicious_paths:
+    Image|contains:
+      - '\AppData\Local\Temp\'
+      - '\Users\Public\'
+      - '\Temp\'
+      - '\ProgramData\'
+
+  selection_output_extraction:
+    CommandLine|contains:
+      - ' > '
+      - '| Out-File'
+      - 'ConvertTo-Json'
+      - 'findstr'
+      - 'select-string'
+
+  filter_legit_system:
+    User|startswith:
+      - 'NT AUTHORITY\'
+      - 'NT SERVICE\'
+
+  filter_legit_management:
+    ParentImage|endswith:
+      - '\msiexec.exe'
+      - '\CcmExec.exe'
+      - '\svchost.exe'
+      - '\IntuneManagementExtension.exe'
+    Image|contains:
+      - '\Program Files\'
+      - '\Splunk\'
+      - '\Tanium\'
+
+  condition:
+    (
+      (
+        selection_external_geo_domains
+        and selection_external_geo_tools
+      )
+      or
+      (
+        selection_registry_locale
+        and selection_ps_locale_cmdlets
+      )
+    )
+    and (
+      selection_suspicious_parents
+      or selection_suspicious_paths
+      or selection_output_extraction
+    )
+    and not filter_legit_system
+    and not filter_legit_management
+
+falsepositives:
+  - Corporate inventory scripts querying locale or timezone
+  - IT troubleshooting scripts
+  - Legitimate geo-IP validation in enterprise apps
+  - Device enrollment or provisioning scripts
+
 level: high

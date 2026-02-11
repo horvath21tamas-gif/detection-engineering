@@ -9296,16 +9296,17 @@ to reduce false positives.
 
 
 ---
-## Ultra-Pro High-Fidelity Protocol Tunneling Detection (T1571)
+## Protocol Tunneling Detection (T1572)
 - **ID:** `T1572.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects protocol tunneling by identifying non-standard encapsulation logic, 
-low-level socket proxying (SOCKS5), and specific CLI signatures of 
-adversary tunneling tools while filtering legitimate administrative SSH/VPN traffic.
+- **Leírás:** Detects adversary protocol tunneling by identifying non-standard encapsulation, 
+low-level socket proxying (SOCKS5/Reverse), and CLI signatures of known tunneling 
+tools. Filters out legitimate administrative VPN/SSH traffic and automation tools 
+to reduce false positives.
 
 
 #### 🚨 Response Playbook

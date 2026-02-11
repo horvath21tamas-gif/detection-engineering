@@ -8820,16 +8820,17 @@ um Fehlalarme zu reduzieren.
 
 
 ---
-## Ultra-Pro High-Fidelity-Protokoll-Tunneling-Erkennung (T1571)
+## Protokoll-Tunneling-Erkennung (T1572)
 - **ID:** `T1572.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Protokoll-Tunneling durch Identifizierung nicht standardmäßiger Kapselungslogik.
-Low-Level-Socket-Proxying (SOCKS5) und spezifische CLI-Signaturen von
-gegnerische Tunneling-Tools und filtert gleichzeitig legitimen administrativen SSH/VPN-Verkehr.
+- **Beschreibung:** Erkennt das Tunneln gegnerischer Protokolle durch Identifizierung nicht standardmäßiger Kapselung,
+Low-Level-Socket-Proxying (SOCKS5/Reverse) und CLI-Signaturen für bekanntes Tunneling
+Werkzeuge.Filtert legitimen administrativen VPN/SSH-Verkehr und Automatisierungstools heraus
+um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

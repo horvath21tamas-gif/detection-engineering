@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where ((ProcessCommandLine in ("* client *", "* -socks5 *", "* -reverse *", "* -R:socks *", "* -tun *", "* -forward *")) or (ProcessCommandLine in ("*IcmpSendEcho*", "* -target *", "* -dns *", "* -port 53 *"))) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\rundll32.exe", "*\svchost.exe", "*\regsvr32.exe")) and (not ((FolderPath in ("*\Windows\System32\OpenSSH\*", "*\Program Files\OpenVPN*", "*\FortiClient*")) or (ProcessCommandLine in ("*git-remote-https*", "*Azure*")) or username =~ "NT AUTHORITY\SYSTEM"))
+| where ((ProcessCommandLine in ("* client *", "* -socks5 *", "* -reverse *", "* -R:socks *", "* -tun *", "* -forward *")) or (ProcessCommandLine in ("*IcmpSendEcho*", "* -target *", "* -dns *", "* -port 53 *"))) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\rundll32.exe", "*\svchost.exe", "*\regsvr32.exe")) and (not ((FolderPath in ("*\Windows\System32\OpenSSH\*", "*\Program Files\OpenVPN\*", "*\FortiClient\*")) or (ProcessCommandLine in ("*git-remote-https*", "*Azure*")) or username =~ "NT AUTHORITY\SYSTEM"))

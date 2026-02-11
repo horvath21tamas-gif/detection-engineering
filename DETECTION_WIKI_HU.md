@@ -8820,16 +8820,17 @@ a hamis pozitívumok csökkentésére.
 
 
 ---
-## Ultra-Pro High-Fidelity Protocol Tunneling Detection (T1571)
+## Protokoll-alagút-észlelés (T1572)
 - **ID:** `T1572.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A nem szabványos tokozási logika azonosításával észleli a protokoll-alagút,
-alacsony szintű socket proxy (SOCKS5) és speciális CLI aláírások
-az ellenfél alagútkezelő eszközeit, miközben szűri a legitim adminisztratív SSH/VPN forgalmat.
+- **Leírás:** Érzékeli az ellenfél protokoll-alagútját a nem szabványos tokozás azonosításával,
+alacsony szintű socket proxy (SOCKS5/Reverse) és az ismert alagút CLI aláírásai
+eszközöket.Kiszűri a legitim adminisztratív VPN/SSH-forgalmat és automatizálási eszközöket
+a hamis pozitívumok csökkentésére.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

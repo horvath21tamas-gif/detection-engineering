@@ -1,44 +1,67 @@
-title: Ultra-Pro High-Fidelity Network OS Image Modification (T1601)
+title: Network OS Image Modification (T1601)
 id: 9957af0c-9905-4c3b-97b7-e4b4cff441af
 status: stable
 description: |
-    Detects unauthorized modification of network device operating system images. 
-    Focuses on binary uploads via insecure protocols and boot-system overrides 
-    performed outside of trusted management windows or hosts.
-author: hota05
-date: 2026-02-03
+    Detects unauthorized modification or replacement of network device operating system images.
+    Monitors binary uploads via insecure protocols (TFTP/FTP), firmware update commands,
+    and boot-system overrides performed outside trusted management windows or hosts.
+    Focuses on detecting anomalous source context, checksum failures, and non-standard hosts.
+author: hota05 
+date: 2026-02-11
 tags:
     - attack.persistence
     - attack.t1601
 logsource:
     product: network
     service: FortiOS
+
 detection:
-    selection_image_ops:
-        Message|contains:
-            - 'copy tftp flash'             
-            - 'copy ftp flash'
-            - 'request system software add'  
-            - 'update firmware'             
-            - 'boot system flash'            
-            - 'install activate'          
+  selection_image_ops:
+    Message|contains:
+      - 'copy tftp flash'
+      - 'copy ftp flash'
+      - 'request system software add'
+      - 'update firmware'
+      - 'boot system flash'
+      - 'install activate'
+      - 'request platform software'
 
-    selection_context:
-        Message|contains:
-            - 'tftp'
-            - 'unauthenticated'
-            - 'unknown source'
-            - 'checksum failed'             
+  selection_context:
+    Message|contains:
+      - 'tftp'
+      - 'unauthenticated'
+      - 'unknown source'
+      - 'checksum failed'
+      - 'hash mismatch'
+      - 'signature validation failed'
+      - 'untrusted image'
+      - 'corrupt image'
 
-    filter_trusted_mgmt_hosts:
-        SourceIP: 
-            - '10.50.0.10'
-            - '10.50.0.11'
-    filter_standard_backups:
-        Message|contains:
-            - 'copy running-config'
-            - 'copy startup-config'
-            - 'archive config'
+  filter_trusted_mgmt_hosts:
+    SourceIP:
+      - '10.50.0.10'
+      - '10.50.0.11'
+      - '10.50.0.12'
 
-    condition: selection_image_ops and (selection_context or not filter_trusted_mgmt_hosts) and not filter_standard_backups
+  filter_standard_backups:
+    Message|contains:
+      - 'copy running-config'
+      - 'copy startup-config'
+      - 'archive config'
+      - 'save config'
+
+  condition: selection_image_ops and selection_context and not (filter_trusted_mgmt_hosts or filter_standard_backups)
+
+fields:
+  - Time
+  - SourceIP
+  - DestinationIP
+  - user_name
+  - Message
+
+falsepositives:
+  - Authorized firmware upgrades from trusted management hosts
+  - Routine configuration backups or image snapshots
+  - Lab or test deployments using TFTP/FTP
+
 level: critical

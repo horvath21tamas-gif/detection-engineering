@@ -1,48 +1,83 @@
-title: Ultra-Pro High-Fidelity Remote Service Session Hijacking (T1563)
+title: Remote Service Session Hijacking (T1563)
 id: bd069dc8-5feb-42b8-a5b5-f626509bb7ed
 status: stable
 description: |
-    Detects RDP/Terminal session hijacking by monitoring tscon.exe execution 
-    patterns. Focuses on anomalous parent processes and specific command-line 
-    switches used to redirect user sessions to the attacker's terminal 
-    without credential authentication.
+  Detects RDP/Terminal Services session hijacking via tscon.exe by correlating:
+  - Hijack-specific command-line parameters
+  - SYSTEM integrity execution
+  - Lateral movement or shell-based parent processes
+  Explicitly filters legitimate RDS/VDI orchestration and service contexts.
 author: hota05
-date: 2026-02-05
+date: 2026-02-11
 tags:
-    - attack.lateral_movement
-    - attack.t1563.002
-    - attack.t1563
+  - attack.lateral_movement
+  - attack.t1563
+  - attack.t1563.001
+  - attack.t1563.002
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_img:
-        - Image|endswith: '\tscon.exe'
-        - OriginalFileName: 'tscon.exe'
+  selection_binary:
+    Image|endswith: '\tscon.exe'
+    OriginalFileName: 'tscon.exe'
 
-    selection_args:
-        CommandLine|contains:
-            - ' /dest:'              
-            - ' /password:'       
-            - 'dest:console'        
+  selection_hijack_args:
+    CommandLine|contains:
+      - ' /dest:'
+      - ' /password'
+      - 'dest:console'
+      - 'rdp-tcp#'
+      - ' /shadow'
+      - ' /control'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\psexesvc.exe'      
-            - '\wsmprovhost.exe'   
-            - '\httpd.exe'            
-        IntegrityLevel: 'System' 
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\psexesvc.exe'
+      - '\wsmprovhost.exe'
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\httpd.exe'
+      - '\w3wp.exe'
+    IntegrityLevel: 'System'
 
-    filter_legit_service:
-        - ParentImage|endswith:
-            - '\svchost.exe'         
-            - '\rdpinit.exe'
-        - CommandLine|contains:
-            - 'vmsvga'              
-            - 'Citrix'            
+  filter_legitimate:
+    ParentImage|endswith:
+      - '\svchost.exe'
+      - '\rdpinit.exe'
+      - '\winlogon.exe'
+      - '\termsrv.dll'
+    CommandLine|contains:
+      - 'Citrix'
+      - 'VMware'
+      - 'vmsvga'
+      - 'C:\Program Files\'
+    username:
+      - 'NT AUTHORITY\SYSTEM'
+      - 'NT AUTHORITY\NETWORK SERVICE'
 
-    condition: (selection_img and (selection_args or selection_suspicious_parent)) and not filter_legit_service
+  condition:
+    selection_binary and
+    (selection_hijack_args or selection_suspicious_parent) and
+    not filter_legitimate
+
+fields:
+  - Time
+  - Image
+  - ParentImage
+  - CommandLine
+  - User
+  - IntegrityLevel
+  - LogonId
+
+falsepositives:
+  - Legitimate administrative session switching in RDS environments
+  - Citrix or VMware console reassignment operations
+  - Enterprise remote management automation
+
 level: critical

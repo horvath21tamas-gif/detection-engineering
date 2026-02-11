@@ -1,60 +1,75 @@
-title: Ultra-Pro High-Fidelity Data Archiving via Library (T1560.002)
+title: Data Archiving via Library
 id: 4931d4e8-110c-40c6-9ac4-676cb51a3308
 status: stable
 description: |
-    Detects advanced data staging for exfiltration using .NET/PowerShell 
-    compression libraries. Filters enterprise automation by analyzing 
-    parent process lineage, command-line entropy, and integrity levels.
-author: hota05
-date: 2026-02-05
+    Detects advanced data staging for exfiltration using .NET or PowerShell 
+    compression libraries, including manual encoding or archiving of user 
+    and server data. Filters enterprise automation by parent process lineage, 
+    command-line entropy, and integrity levels.
+
+author: hota05 
+date: 2026-02-11
 tags:
     - attack.collection
     - attack.exfiltration
     - attack.t1560.002
+
 logsource:
-    category: process_creation
     product: windows
+    category: process_creation
+
 detection:
-    selection_api:
-        CommandLine|contains:
-            - 'System.IO.Compression'   
-            - 'Compress-Archive'          
-            - 'zipfile'                   
-            - 'IO.Compression.FileSystem' 
+    selection_library_api:
+        CommandLine|contains|any:
+            - 'System.IO.Compression'
+            - 'Compress-Archive'
+            - 'zipfile'
+            - 'IO.Compression.FileSystem'
+            - 'System.IO.Compression.GzipStream'
+            - 'System.IO.Compression.BrotliStream'
 
     selection_suspicious_args:
-        CommandLine|contains:
-            - ' -enc '                    
-            - ' -e '                      
-            - ' -DestinationPath '        
-            - ' -Update'                  
-            - ' [Convert]::ToBase64'    
+        CommandLine|contains|any:
+            - ' -enc '
+            - ' -e '
+            - ' -DestinationPath '
+            - ' -Update'
+            - '[Convert]::ToBase64String'
+            - '-CompressionLevel'
+            - '-Force'
 
-    selection_paths:
-        CommandLine|contains:
+    selection_target_paths:
+        CommandLine|contains|any:
             - '\Desktop'
             - '\Documents'
-            - '\AppData\Local\Microsoft\Outlook' 
-            - 'C:\inetpub\'                        
-            - 'C:\Users\Public'                    
+            - '\Downloads'
+            - '\AppData\Local\Microsoft\Outlook'
+            - 'C:\inetpub\'
+            - 'C:\Users\Public'
+            - '\ProgramData'
 
-    selection_context:
+    selection_suspicious_context:
         ParentImage|endswith:
-            - '\w3wp.exe'                
-            - '\httpd.exe'                
-            - '\winword.exe'              
+            - '\w3wp.exe'
+            - '\httpd.exe'
+            - '\winword.exe'
+            - '\excel.exe'
             - '\cmd.exe'
             - '\powershell.exe'
-        IntegrityLevel: 'Medium'           
+            - '\pwsh.exe'
+        IntegrityLevel: 'Medium'
 
     filter_enterprise_apps:
         - Image|contains:
             - 'C:\Program Files\Microsoft Visual Studio\'
             - 'C:\Program Files\Azure\'
+            - 'C:\Program Files\PowerShell\7\'
         - CommandLine|contains:
-            - 'C:\Windows\CCM\'         
+            - 'C:\Windows\CCM\'
             - 'C:\ProgramData\Microsoft\Intune\'
+            - 'HealthCheck'
         - username: 'NT AUTHORITY\SYSTEM'
 
-    condition: selection_api and (selection_suspicious_args or selection_paths) and selection_context and not filter_enterprise_apps
+    condition: selection_library_api and (selection_suspicious_args or selection_target_paths) and selection_suspicious_context and not filter_enterprise_apps
+
 level: critical

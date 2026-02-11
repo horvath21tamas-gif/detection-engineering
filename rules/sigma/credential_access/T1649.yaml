@@ -1,58 +1,137 @@
-title: Ultra-Pro High-Fidelity Certificate & Private Key Theft (T1649)
+title: Suspicious Certificate and Private Key Export or Theft Activity
 id: d953d2e0-71b6-4e30-bb3d-92e41c2817cd
 status: stable
-description: |
-    Detects unauthorized extraction of digital certificates and private keys. 
-    Identifies memory patching to bypass export restrictions, suspicious certutil 
-    parameters, and key theft using offensive tools like Mimikatz or Certify.
-author: hota05
+description: >
+  Detects potential theft of digital certificates and private keys via
+  certutil abuse, PowerShell-based key export, or offensive tooling
+  (e.g. Mimikatz crypto::export, Certify). Focuses on export operations,
+  private key access, and suspicious output staging paths.
+
+author: hota05 
 date: 2026-02-04
+modified: 2026-02-11
+references:
+  - https://attack.mitre.org/techniques/T1649/
+  - https://attack.mitre.org/techniques/T1552/004/
 tags:
-    - attack.credential_access
-    - attack.t1649
+  - attack.credential_access
+  - attack.t1649
+  - attack.defense_evasion
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_offensive_logic:
-        CommandLine|contains:
-            - 'crypto::'
-            - 'crypto::export'
-            - 'patch'                
-            - 'certificates /export'
-            - 'find-certificate'     
 
-    selection_certutil_abuse:
-        Image|endswith: '\certutil.exe'
-        CommandLine|contains:
-            - '-exportPFX'
-            - '-exportp12'
-            - '-p '                  
+  selection_mimikatz_crypto:
+    CommandLine|contains:
+      - 'crypto::export'
+      - 'crypto::certificates'
+      - 'crypto::capi'
+      - 'sekurlsa::crypto'
+      - 'certificates /export'
+      - 'find-certificate'
+      - 'Certify.exe'
+      - 'SharpDPAPI'
 
-    selection_suspicious_context:
-        ParentImage|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\wsmprovhost.exe' 
-            - '\psexesvc.exe'    
-            - '\httpd.exe'      
-        Image|endswith:
-            - '\certutil.exe'
-            - '\powershell.exe'
+  selection_certutil_binary:
+    Image|endswith: '\certutil.exe'
 
-    selection_output_paths:
-        CommandLine|contains:
-            - '.pfx'
-            - '.p12'
-            - '.p7b'
-            - '\Users\Public\'
-            - '\AppData\Local\Temp\'
-            - 'C:\PerfLogs\'
+  selection_certutil_export_flags:
+    CommandLine|contains:
+      - '-exportPFX'
+      - '-exportp12'
+      - '-user -exportPFX'
+      - '-p '
+      - '-password '
 
-    filter_legit_os:
-        username: 'NT AUTHORITY\SYSTEM'
-        ParentImage|endswith: '\msiexec.exe'
-        Image|contains: '\Windows\System32\'
+  certutil_condition:
+    selection_certutil_binary
+    and selection_certutil_export_flags
 
-    condition: (selection_offensive_logic or selection_certutil_abuse or selection_output_paths) and selection_suspicious_context and not filter_legit_os
+  selection_powershell_binary:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+
+  selection_ps_certificate_export:
+    CommandLine|contains:
+      - 'Export-PfxCertificate'
+      - 'Export-Certificate'
+      - 'X509Certificate2'
+      - '.Export('
+      - 'System.Security.Cryptography.X509Certificates'
+
+  ps_condition:
+    selection_powershell_binary
+    and selection_ps_certificate_export
+
+  selection_suspicious_output:
+    CommandLine|contains:
+      - '.pfx'
+      - '.p12'
+      - '.p7b'
+      - '\Users\Public\'
+      - '\AppData\Local\Temp\'
+      - '\ProgramData\'
+      - 'C:\PerfLogs\'
+
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\wsmprovhost.exe'
+      - '\psexesvc.exe'
+      - '\rundll32.exe'
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\httpd.exe'
+      - '\w3wp.exe'
+
+  selection_suspicious_path:
+    Image|contains:
+      - '\AppData\Local\Temp\'
+      - '\Users\Public\'
+
+  selection_medium_integrity:
+    IntegrityLevel: 'Medium'
+
+  filter_system_context:
+    User|startswith:
+      - 'NT AUTHORITY\'
+      - 'NT SERVICE\'
+
+  filter_expected_installer_activity:
+    ParentImage|endswith:
+      - '\msiexec.exe'
+
+  filter_trusted_programfiles:
+    Image|startswith:
+      - 'C:\Program Files\'
+      - 'C:\Program Files (x86)\'
+
+  condition:
+    (
+      selection_mimikatz_crypto
+      or certutil_condition
+      or ps_condition
+    )
+    and selection_suspicious_output
+    and (
+      selection_suspicious_parent
+      or selection_suspicious_path
+      or selection_medium_integrity
+    )
+    and not filter_system_context
+    and not filter_expected_installer_activity
+    and not filter_trusted_programfiles
+
+falsepositives:
+  - Authorized certificate backup by PKI administrators
+  - Enterprise certificate lifecycle management tools
+  - Legitimate application migration procedures
+  - Incident response activities
+
 level: critical

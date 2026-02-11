@@ -497,7 +497,7 @@
 | T1572 | CRITICAL | Ultra-Pro High-Fidelity Protocol Tunneling Detection (T1571) |
 | T1573 | CRITICAL | Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573) |
 | T1573.001 | CRITICAL | Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573), Ultra-Pro High-Fidelity Symmetric Encryption C2 Channel (T1573.001) |
-| T1573.002 | CRITICAL | Ultra-Pro High-Fidelity Asymmetric Encryption C2 (T1573.002), Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573) |
+| T1573.002 | CRITICAL | Asymmetric Encryption C2 (T1573.002), Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573) |
 | T1574 | CRITICAL | Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574) |
 | T1574.001 | CRITICAL | Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574), Ultra-Pro DLL Search Order Hijacking Detection (T1574.001) |
 | T1574.002 | CRITICAL | Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002), Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574) |

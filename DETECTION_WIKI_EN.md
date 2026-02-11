@@ -491,7 +491,7 @@
 - [Ultra-Pro High-Fidelity Protocol Tunneling Detection (T1571)](#ultra-pro-high-fidelity-protocol-tunneling-detection-(t1571))
 - [Ultra-Pro High-Fidelity Encrypted C2 Channel (T1573)](#ultra-pro-high-fidelity-encrypted-c2-channel-(t1573))
 - [Ultra-Pro High-Fidelity Symmetric Encryption C2 Channel (T1573.001)](#ultra-pro-high-fidelity-symmetric-encryption-c2-channel-(t1573001))
-- [Ultra-Pro High-Fidelity Asymmetric Encryption C2 (T1573.002)](#ultra-pro-high-fidelity-asymmetric-encryption-c2-(t1573002))
+- [Asymmetric Encryption C2 (T1573.002)](#asymmetric-encryption-c2-(t1573002))
 - [Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574)](#ultra-pro-dll-hijacking-&-side-loading-detection-(t1574))
 - [Ultra-Pro DLL Search Order Hijacking Detection (T1574.001)](#ultra-pro-dll-search-order-hijacking-detection-(t1574001))
 - [Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002)](#ultra-pro-dll-side-loading-integrity-gap-detection-(t1574002))
@@ -9351,16 +9351,17 @@ scripting engines, specifically targeting manual IV/Key assignment and stream pi
 
 
 ---
-## Ultra-Pro High-Fidelity Asymmetric Encryption C2 (T1573.002)
+## Asymmetric Encryption C2 (T1573.002)
 - **ID:** `T1573_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects custom asymmetric encryption (RSA/ECC) by identifying programmatic 
-trust chain overrides (ServerCertificateValidationCallback) and raw public key 
-imports (FromXmlString/ImportSubjectPublicKeyInfo) from non-standard processes.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects suspicious asymmetric encryption usage (RSA/ECC) that may indicate 
+C2 or data exfiltration activity. Focuses on programmatic trust chain overrides 
+(ServerCertificateValidationCallback) and raw public key imports (FromXmlString, 
+ImportSubjectPublicKeyInfo) from untrusted or non-standard processes.
 
 
 #### 🚨 Response Playbook

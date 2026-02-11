@@ -491,7 +491,7 @@
 - [Ultra-Pro High-Fidelity Protocol Tunneling Detection (T1571)](#ultra-pro-high-fidelity-protocol-tunneling-detection-(t1571))
 - [Ultra-Pro High-Fidelity titkosított C2 csatorna (T1573)](#ultra-pro-high-fidelity-titkosított-c2-csatorna-(t1573))
 - [Ultra-Pro nagy pontosságú szimmetrikus titkosítási C2 csatorna (T1573.001)](#ultra-pro-nagy-pontosságú-szimmetrikus-titkosítási-c2-csatorna-(t1573001))
-- [Ultra-Pro High-Fidelity aszimmetrikus titkosítás C2 (T1573.002)](#ultra-pro-high-fidelity-aszimmetrikus-titkosítás-c2-(t1573002))
+- [Aszimmetrikus titkosítás C2 (T1573.002)](#aszimmetrikus-titkosítás-c2-(t1573002))
 - [Ultra-Pro DLL-eltérítés és oldalsó betöltés észlelése (T1574)](#ultra-pro-dll-eltérítés-és-oldalsó-betöltés-észlelése-(t1574))
 - [Ultra-Pro DLL keresési rendelés-eltérítés észlelése (T1574.001)](#ultra-pro-dll-keresési-rendelés-eltérítés-észlelése-(t1574001))
 - [Ultra-Pro DLL oldalsó betöltési integritáshiány-észlelés (T1574.002)](#ultra-pro-dll-oldalsó-betöltési-integritáshiány-észlelés-(t1574002))
@@ -8872,16 +8872,17 @@ script motorok, amelyek kifejezetten a kézi IV/Kulcs-hozzárendelést és az ad
 
 
 ---
-## Ultra-Pro High-Fidelity aszimmetrikus titkosítás C2 (T1573.002)
+## Aszimmetrikus titkosítás C2 (T1573.002)
 - **ID:** `T1573_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az egyéni aszimmetrikus titkosítást (RSA/ECC) a programozott kód azonosításával
-megbízhatósági lánc felülbírálása (ServerCertificateValidationCallback) és a nyers nyilvános kulcs
-nem szabványos folyamatokból importál (FromXmlString/ImportSubjectPublicKeyInfo).
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Gyanús aszimmetrikus titkosítási használatot (RSA/ECC) észlel, ami arra utalhat,
+C2 vagy adatkiszűrési tevékenység.A programozott megbízhatósági lánc felülírásaira összpontosít
+(ServerCertificateValidationCallback) és nyers nyilvános kulcs importálása (FromXmlString,
+ImportSubjectPublicKeyInfo) nem megbízható vagy nem szabványos folyamatokból.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

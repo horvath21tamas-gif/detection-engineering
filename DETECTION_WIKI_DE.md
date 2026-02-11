@@ -491,7 +491,7 @@
 - [Ultra-Pro High-Fidelity-Protokoll-Tunneling-Erkennung (T1571)](#ultra-pro-high-fidelity-protokoll-tunneling-erkennung-(t1571))
 - [Ultra-Pro High-Fidelity-verschlüsselter C2-Kanal (T1573)](#ultra-pro-high-fidelity-verschlüsselter-c2-kanal-(t1573))
 - [Ultra-Pro High-Fidelity Symmetric Encryption C2-Kanal (T1573.001)](#ultra-pro-high-fidelity-symmetric-encryption-c2-kanal-(t1573001))
-- [Ultra-Pro High-Fidelity Asymmetric Encryption C2 (T1573.002)](#ultra-pro-high-fidelity-asymmetric-encryption-c2-(t1573002))
+- [Asymmetrische Verschlüsselung C2 (T1573.002)](#asymmetrische-verschlüsselung-c2-(t1573002))
 - [Ultra-Pro DLL-Hijacking und Sideloading-Erkennung (T1574)](#ultra-pro-dll-hijacking-und-sideloading-erkennung-(t1574))
 - [Ultra-Pro DLL-Suchreihenfolge-Hijacking-Erkennung (T1574.001)](#ultra-pro-dll-suchreihenfolge-hijacking-erkennung-(t1574001))
 - [Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002)](#ultra-pro-dll-side-loading-integrity-gap-detection-(t1574002))
@@ -8872,16 +8872,17 @@ Skript-Engines, die speziell auf die manuelle IV/Tastenzuweisung und Stream-Pipi
 
 
 ---
-## Ultra-Pro High-Fidelity Asymmetric Encryption C2 (T1573.002)
+## Asymmetrische Verschlüsselung C2 (T1573.002)
 - **ID:** `T1573_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt benutzerdefinierte asymmetrische Verschlüsselung (RSA/ECC) durch Identifizierung programmatischer
-Vertrauenskettenüberschreibungen (ServerCertificateValidationCallback) und roher öffentlicher Schlüssel
-Importe (FromXmlString/ImportSubjectPublicKeyInfo) aus nicht standardmäßigen Prozessen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt verdächtige asymmetrische Verschlüsselungsnutzung (RSA/ECC), die darauf hindeuten könnte
+C2 oder Datenexfiltrationsaktivität.Konzentriert sich auf programmatische Vertrauenskettenüberschreibungen
+(ServerCertificateValidationCallback) und unformatierte Importe öffentlicher Schlüssel (FromXmlString,
+ImportSubjectPublicKeyInfo) aus nicht vertrauenswürdigen oder nicht standardmäßigen Prozessen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

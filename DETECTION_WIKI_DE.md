@@ -11155,16 +11155,14 @@ Winterschlaf.Konzentriert sich auf die Befehlszeilenautomatisierung (powercfg) �
 
 
 ---
-## Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654)
+## Aufzählung verdächtiger Ereignisprotokolle aufgrund eines anomalen Ausführungskontexts
 - **ID:** `T1654.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Aufzählung von Systemereignisprotokollen (Metadaten-Ernte)
-mit nativen Tools oder PowerShell.Konzentriert sich auf die Identifizierung von Sicherheitsprodukten
-über Protokollkanalerkennung aus anomalen Ausführungskontexten.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt verdächtige Aufzählungen von Windows-Ereignisprotokollen mithilfe nativer Dienstprogramme (wevtutil) oder PowerShell-Cmdlets (Get-WinEvent, Get-EventLog) aus anomalen Ausführungskontexten.Konzentriert sich auf die Erkennung von Protokollkanälen und die Erfassung von Metadaten, die möglicherweise zur Identifizierung von Sicherheitstools oder zur Umgehung der Erkennung verwendet werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

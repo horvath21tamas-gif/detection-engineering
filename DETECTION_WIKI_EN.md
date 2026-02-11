@@ -11777,16 +11777,14 @@ parent processes like PowerShell or CMD, while filtering legitimate UI-based cha
 
 
 ---
-## Ultra-Pro High-Fidelity Log Enumeration Discovery (T1654)
+## Suspicious Event Log Enumeration from Anomalous Execution Context
 - **ID:** `T1654.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic enumeration of system event logs (metadata harvesting) 
-using native tools or PowerShell. Focuses on identifying security products 
-via log channel discovery from anomalous execution contexts.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects suspicious enumeration of Windows event logs using native utilities  (wevtutil) or PowerShell cmdlets (Get-WinEvent, Get-EventLog) from anomalous  execution contexts. Focuses on log channel discovery and metadata harvesting  potentially used to identify security tooling or evade detection.
 
 
 #### 🚨 Response Playbook

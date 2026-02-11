@@ -31,7 +31,7 @@
 | T1003.008 | CRITICAL | Ultra-Pro High-Fidelity Linux Shadow File Extraction (T1003.008) |
 | T1005 | CRITICAL | Ultra-Pro High-Fidelity Local Data Harvesting (T1005) |
 | T1006 | CRITICAL | Ultra-Pro Stealthy Direct Volume Access (T1006) |
-| T1007 | HIGH | Ultra-Pro High-Fidelity System Service Discovery (T1007) |
+| T1007 | HIGH | Suspicious Event Log Enumeration from Anomalous Execution Context, Ultra-Pro High-Fidelity System Service Discovery (T1007) |
 | T1008 | CRITICAL | Ultra-Pro High-Fidelity Fallback Channel Detection (T1008) |
 | T1010 | HIGH | Ultra-Pro High-Fidelity Application Window Discovery (T1010) |
 | T1011 | HIGH | Ultra-Pro High-Fidelity Bluetooth Exfiltration (T1011) |
@@ -163,7 +163,7 @@
 | T1078.003 | CRITICAL | High-Fidelity Local Account Remote Access Detection |
 | T1078.004 | CRITICAL | High-Fidelity Cloud Account Compromise (Entra ID) |
 | T1080 | HIGH | Ultra-Pro High-Fidelity Taint Shared Content (T1080) |
-| T1082 | HIGH | Ultra-Pro High-Fidelity System Information Discovery (T1082) |
+| T1082 | HIGH | Suspicious Event Log Enumeration from Anomalous Execution Context, Ultra-Pro High-Fidelity System Information Discovery (T1082) |
 | T1083 | HIGH | Ultra-Pro High-Fidelity File and Directory Discovery (T1083) |
 | T1087 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
 | T1087.001 | HIGH | Ultra-Pro High-Fidelity Local Account Discovery (T1087.001) |

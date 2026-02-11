@@ -11155,16 +11155,14 @@ szülőfolyamatok, például a PowerShell vagy a CMD, miközben szűrik a jogos 
 
 
 ---
-## Ultra-Pro nagy pontosságú naplófeltárás (T1654)
+## Gyanús eseménynapló felsorolása rendellenes végrehajtási kontextusból
 - **ID:** `T1654.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a rendszereseménynaplók szisztematikus felsorolását (metaadatgyűjtés)
-natív eszközök vagy PowerShell használatával.A biztonsági termékek azonosítására összpontosít
-naplócsatorna-felderítésen keresztül rendellenes végrehajtási kontextusokból.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a Windows eseménynaplóinak gyanús felsorolását natív segédprogramok (wevtutil) vagy PowerShell-parancsmagok (Get-WinEvent, Get-EventLog) használatával rendellenes végrehajtási környezetekből.A naplócsatorna-felderítésre és a metaadatgyűjtésre összpontosít, amely potenciálisan a biztonsági eszközök azonosítására vagy az észlelés elkerülésére használható.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

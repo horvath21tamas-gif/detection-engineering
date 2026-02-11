@@ -99,7 +99,6 @@ detection:
       - '.7z'
       - '.rar'
       - 'Compress-Archive'
--
   filter_legit_browser:
     Image|contains:
       - '\Program Files\Google\Chrome\'

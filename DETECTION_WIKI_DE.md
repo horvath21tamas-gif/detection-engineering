@@ -603,7 +603,7 @@
 - [Ultra-Pro High-Fidelity-Netzwerk-Binär-Patching (T1601.001)](#ultra-pro-high-fidelity-netzwerk-binär-patching-(t1601001))
 - [Ultra-Pro High-Fidelity-Upgrade für bösartige Netzwerk-Betriebssysteme (T1601.002)](#ultra-pro-high-fidelity-upgrade-für-bösartige-netzwerk-betriebssysteme-(t1601002))
 - [Automatisierte Ultra-Pro-High-Fidelity-Netzwerkfreigabeerfassung (T1602)](#automatisierte-ultra-pro-high-fidelity-netzwerkfreigabeerfassung-(t1602))
-- [Ultra-Pro High-Fidelity Admin-Share-Datenexfiltration (T1602.001)](#ultra-pro-high-fidelity-admin-share-datenexfiltration-(t1602001))
+- [Datenexfiltration für Admin-Freigaben (T1602.001)](#datenexfiltration-für-admin-freigaben-(t1602001))
 - [Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002)](#ultra-pro-high-fidelity-cloud-share-exfiltration-(t1602002))
 - [Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606)](#ultra-pro-high-fidelity-web-token-&-credential-forgery-(t1606))
 - [Ultra-Pro High-Fidelity-Erfassung von Web-Cookies und Browser-Anmeldeinformationen (T1606.001)](#ultra-pro-high-fidelity-erfassung-von-web-cookies-und-browser-anmeldeinformationen-(t1606001))
@@ -10619,16 +10619,17 @@ und rekursive Kopierlogik, die aus nicht vertrauenswürdigen Prozesslinien stamm
 
 
 ---
-## Ultra-Pro High-Fidelity Admin-Share-Datenexfiltration (T1602.001)
+## Datenexfiltration für Admin-Freigaben (T1602.001)
 - **ID:** `T1602_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Datenerfassung oder Bereitstellung über administrative Freigaben (C$, ADMIN$)
-durch Korrelation anomaler Prozesslinien, nicht standardmäßiger Quellpfade,
-und die Verwendung rekursiver Erkennungsbefehle innerhalb derselben Sitzung.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochpräzise Indikatoren für die Bereitstellung und Exfiltration von Daten über administrative Freigaben
+(C$, ADMIN$, IPC$, print$).Konzentriert sich auf anomale Prozesslinien (Webserver, Shells),
+rekursive Erkennung und hochwertiges Datei-Targeting in Kombination mit Archivierungs- oder Übertragungstools.
+Filtert legitime Backup-, Migrations- und IT-Automatisierungstools, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

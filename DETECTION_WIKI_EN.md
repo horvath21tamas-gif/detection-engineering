@@ -603,7 +603,7 @@
 - [Ultra-Pro High-Fidelity Network Binary Patching (T1601.001)](#ultra-pro-high-fidelity-network-binary-patching-(t1601001))
 - [Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002)](#ultra-pro-high-fidelity-malicious-network-os-upgrade-(t1601002))
 - [Ultra-Pro High-Fidelity Network Share Automated Collection (T1602)](#ultra-pro-high-fidelity-network-share-automated-collection-(t1602))
-- [Ultra-Pro High-Fidelity Admin Share Data Exfiltration (T1602.001)](#ultra-pro-high-fidelity-admin-share-data-exfiltration-(t1602001))
+- [Admin Share Data Exfiltration (T1602.001)](#admin-share-data-exfiltration-(t1602001))
 - [Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002)](#ultra-pro-high-fidelity-cloud-share-exfiltration-(t1602002))
 - [Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606)](#ultra-pro-high-fidelity-web-token-&-credential-forgery-(t1606))
 - [Ultra-Pro High-Fidelity Web Cookie & Browser Credential Harvesting (T1606.001)](#ultra-pro-high-fidelity-web-cookie-&-browser-credential-harvesting-(t1606001))
@@ -11210,16 +11210,17 @@ and recursive copying logic originating from untrusted process lineages.
 
 
 ---
-## Ultra-Pro High-Fidelity Admin Share Data Exfiltration (T1602.001)
+## Admin Share Data Exfiltration (T1602.001)
 - **ID:** `T1602_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized data collection or staging via administrative shares (C$, ADMIN$) 
-by correlating anomalous process lineages, non-standard source paths, 
-and the use of recursive discovery commands within the same session.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-fidelity indicators of data staging and exfiltration via administrative shares
+(C$, ADMIN$, IPC$, print$). Focuses on anomalous process lineages (web servers, shells),
+recursive discovery, and high-value file targeting combined with archival or transfer tools.
+Filters legitimate backup, migration, and IT automation tools to reduce false positives.
 
 
 #### 🚨 Response Playbook

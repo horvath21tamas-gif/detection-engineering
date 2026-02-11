@@ -603,7 +603,7 @@
 - [Ultra-Pro High-Fidelity hálózati bináris javítás (T1601.001)](#ultra-pro-high-fidelity-hálózati-bináris-javítás-(t1601001))
 - [Ultra-Pro High-Fidelity rosszindulatú hálózati operációs rendszer frissítése (T1601.002)](#ultra-pro-high-fidelity-rosszindulatú-hálózati-operációs-rendszer-frissítése-(t1601002))
 - [Ultra-Pro High-Fidelity Network Share Automated Collection (T1602)](#ultra-pro-high-fidelity-network-share-automated-collection-(t1602))
-- [Ultra-Pro High-Fidelity Admin Share Data Exfiltration (T1602.001)](#ultra-pro-high-fidelity-admin-share-data-exfiltration-(t1602001))
+- [Admin Share Data Exfiltration (T1602.001)](#admin-share-data-exfiltration-(t1602001))
 - [Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002)](#ultra-pro-high-fidelity-cloud-share-exfiltration-(t1602002))
 - [Ultra-Pro High-Fidelity webes token és hitelesítő adatok hamisítása (T1606)](#ultra-pro-high-fidelity-webes-token-és-hitelesítő-adatok-hamisítása-(t1606))
 - [Ultra-Pro High-Fidelity webes cookie-k és böngésző hitelesítő adatok begyűjtése (T1606.001)](#ultra-pro-high-fidelity-webes-cookie-k-és-böngésző-hitelesítő-adatok-begyűjtése-(t1606001))
@@ -10619,16 +10619,17 @@ az UNC útvonal bejárása, az érzékeny fájlkiterjesztések kombinációjána
 
 
 ---
-## Ultra-Pro High-Fidelity Admin Share Data Exfiltration (T1602.001)
+## Admin Share Data Exfiltration (T1602.001)
 - **ID:** `T1602_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a jogosulatlan adatgyűjtést vagy szakaszolást adminisztrációs megosztásokon keresztül (C$, ADMIN$)
-rendellenes folyamatvonalak, nem szabványos forrásútvonalak korrelációjával,
-és rekurzív felderítési parancsok használata ugyanazon a munkameneten belül.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Az adminisztratív megosztásokon keresztül észleli az adatok szakaszolásának és kiszűrésének nagy pontosságú mutatóit
+(C$, ADMIN$, IPC$, print$).A rendellenes folyamatvonalakra összpontosít (webszerverek, héjak),
+rekurzív felfedezés és nagy értékű fájlcélzás archiválási vagy átviteli eszközökkel kombinálva.
+Szűri a jogos biztonsági mentési, áttelepítési és IT-automatizálási eszközöket, hogy csökkentse a hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

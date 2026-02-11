@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-11 09:22:40`
+**Utolsó frissítés:** `2026-02-11 09:43:58`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -46,7 +46,7 @@
 | T1020.001 | CRITICAL | Ultra-Pro High-Fidelity Client-Linked Cloud Exfil (T1020.001) |
 | T1021 | MEDIUM | Rapid Logons to Multiple Distant Hosts by Same User |
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |
-| T1021.002 | HIGH | Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002) |
+| T1021.002 | CRITICAL | Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002), Admin Share Data Exfiltration (T1602.001) |
 | T1021.003 | CRITICAL | Ultra-Pro High-Fidelity DCOM Remote Execution (T1021.003) |
 | T1021.004 | CRITICAL | Ultra-Pro High-Fidelity SSH Lateral Movement & Tunneling (T1021.004) |
 | T1021.005 | CRITICAL | Ultra-Pro High-Fidelity VNC Lateral Movement & Hijacking (T1021.005) |
@@ -609,7 +609,7 @@
 | T1601.001 | CRITICAL | Ultra-Pro High-Fidelity Network Binary Patching (T1601.001) |
 | T1601.002 | CRITICAL | Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002) |
 | T1602 | CRITICAL | Ultra-Pro High-Fidelity Network Share Automated Collection (T1602) |
-| T1602.001 | CRITICAL | Ultra-Pro High-Fidelity Admin Share Data Exfiltration (T1602.001) |
+| T1602.001 | CRITICAL | Admin Share Data Exfiltration (T1602.001) |
 | T1602.002 | CRITICAL | Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002) |
 | T1606 | CRITICAL | Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606) |
 | T1606.001 | CRITICAL | Ultra-Pro High-Fidelity Web Cookie & Browser Credential Harvesting (T1606.001), Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606) |

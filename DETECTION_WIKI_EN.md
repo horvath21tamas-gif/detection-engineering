@@ -512,7 +512,7 @@
 - [Ultra-Pro High-Fidelity Cloud Instance Destruction (T1578.003)](#ultra-pro-high-fidelity-cloud-instance-destruction-(t1578003))
 - [Ultra-Pro High-Fidelity Cloud Image Tampering (T1578.004)](#ultra-pro-high-fidelity-cloud-image-tampering-(t1578004))
 - [Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005)](#ultra-pro-high-fidelity-cloud-network-security-regression-(t1578005))
-- [Ultra-Pro High-Fidelity Cloud Infrastructure Discovery (T1580)](#ultra-pro-high-fidelity-cloud-infrastructure-discovery-(t1580))
+- [Cloud Infrastructure Discovery (T1580)](#cloud-infrastructure-discovery-(t1580))
 - [High-Fidelity Offensive Infrastructure Provisioning - T1583](#high-fidelity-offensive-infrastructure-provisioning---t1583)
 - [High-Fidelity VPS Infrastructure Provisioning - T1583.001](#high-fidelity-vps-infrastructure-provisioning---t1583001)
 - [High-Fidelity Automated Domain Registration & Acquisition - T1583.002](#high-fidelity-automated-domain-registration-&-acquisition---t1583002)
@@ -602,7 +602,7 @@
 - [Network OS Image Modification (T1601)](#network-os-image-modification-(t1601))
 - [Network Binary Patching (T1601.001)](#network-binary-patching-(t1601001))
 - [Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002)](#ultra-pro-high-fidelity-malicious-network-os-upgrade-(t1601002))
-- [Ultra-Pro High-Fidelity Network Share Automated Collection (T1602)](#ultra-pro-high-fidelity-network-share-automated-collection-(t1602))
+- [Network Share Automated Collection (T1602)](#network-share-automated-collection-(t1602))
 - [Admin Share Data Exfiltration (T1602.001)](#admin-share-data-exfiltration-(t1602001))
 - [Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002)](#ultra-pro-high-fidelity-cloud-share-exfiltration-(t1602002))
 - [Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606)](#ultra-pro-high-fidelity-web-token-&-credential-forgery-(t1606))
@@ -9700,16 +9700,16 @@ Filters out automated infrastructure-as-code (IaC) noise.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Infrastructure Discovery (T1580)
+## Cloud Infrastructure Discovery (T1580)
 - **ID:** `T1580.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic discovery of cloud resources (VMs, VPCs, S3) focusing on 
-anomalous execution environments and data extraction patterns. 
-Excludes legitimate Infrastructure-as-Code (IaC) and CI/CD tools.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects systematic discovery of cloud infrastructure resources (VMs, VPCs, S3 buckets, storage accounts)
+by monitoring anomalous CLI usage, output extraction, and interactive session contexts.
+Filters out legitimate Infrastructure-as-Code (IaC) and CI/CD automation tools.
 
 
 #### 🚨 Response Playbook

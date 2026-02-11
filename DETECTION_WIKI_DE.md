@@ -512,7 +512,7 @@
 - [Ultra-Pro High-Fidelity-Cloud-Instanzzerstörung (T1578.003)](#ultra-pro-high-fidelity-cloud-instanzzerstörung-(t1578003))
 - [Ultra-Pro High-Fidelity Cloud Image Manipulation (T1578.004)](#ultra-pro-high-fidelity-cloud-image-manipulation-(t1578004))
 - [Ultra-Pro High-Fidelity-Cloud-Netzwerk-Sicherheitsregression (T1578.005)](#ultra-pro-high-fidelity-cloud-netzwerk-sicherheitsregression-(t1578005))
-- [Ultraprofessionelle High-Fidelity-Cloud-Infrastrukturerkennung (T1580)](#ultraprofessionelle-high-fidelity-cloud-infrastrukturerkennung-(t1580))
+- [Cloud-Infrastrukturerkennung (T1580)](#cloud-infrastrukturerkennung-(t1580))
 - [Bereitstellung einer High-Fidelity-Offensiv-Infrastruktur – T1583](#bereitstellung-einer-high-fidelity-offensiv-infrastruktur-–-t1583)
 - [Bereitstellung einer High-Fidelity-VPS-Infrastruktur – T1583.001](#bereitstellung-einer-high-fidelity-vps-infrastruktur-–-t1583001)
 - [Automatisierte High-Fidelity-Domainregistrierung und -Akquise – T1583.002](#automatisierte-high-fidelity-domainregistrierung-und--akquise-–-t1583002)
@@ -602,7 +602,7 @@
 - [Netzwerk-OS-Image-Änderung (T1601)](#netzwerk-os-image-änderung-(t1601))
 - [Netzwerk-Binär-Patching (T1601.001)](#netzwerk-binär-patching-(t1601001))
 - [Ultra-Pro High-Fidelity-Upgrade für bösartige Netzwerk-Betriebssysteme (T1601.002)](#ultra-pro-high-fidelity-upgrade-für-bösartige-netzwerk-betriebssysteme-(t1601002))
-- [Automatisierte Ultra-Pro-High-Fidelity-Netzwerkfreigabeerfassung (T1602)](#automatisierte-ultra-pro-high-fidelity-netzwerkfreigabeerfassung-(t1602))
+- [Automatische Sammlung von Netzwerkfreigaben (T1602)](#automatische-sammlung-von-netzwerkfreigaben-(t1602))
 - [Datenexfiltration für Admin-Freigaben (T1602.001)](#datenexfiltration-für-admin-freigaben-(t1602001))
 - [Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002)](#ultra-pro-high-fidelity-cloud-share-exfiltration-(t1602002))
 - [Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606)](#ultra-pro-high-fidelity-web-token-&-credential-forgery-(t1606))
@@ -9200,16 +9200,16 @@ Filtert automatisiertes Infrastructure-as-Code (IaC)-Rauschen heraus.
 
 
 ---
-## Ultraprofessionelle High-Fidelity-Cloud-Infrastrukturerkennung (T1580)
+## Cloud-Infrastrukturerkennung (T1580)
 - **ID:** `T1580.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Erkennung von Cloud-Ressourcen (VMs, VPCs, S3) mit Schwerpunkt auf
-anormale Ausführungsumgebungen und Datenextraktionsmuster.
-Ausgenommen sind legitime Infrastructure-as-Code (IaC)- und CI/CD-Tools.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die systematische Erkennung von Cloud-Infrastrukturressourcen (VMs, VPCs, S3-Buckets, Speicherkonten)
+durch Überwachung anormaler CLI-Nutzung, Ausgabeextraktion und interaktiver Sitzungskontexte.
+Filtert legitime Infrastructure-as-Code (IaC)- und CI/CD-Automatisierungstools heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

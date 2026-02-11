@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-11 09:43:58`
+**Utolsó frissítés:** `2026-02-11 10:04:07`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -518,7 +518,7 @@
 | T1578.003 | HIGH | Ultra-Pro High-Fidelity Cloud Instance Destruction (T1578.003) |
 | T1578.004 | CRITICAL | Ultra-Pro High-Fidelity Cloud Image Tampering (T1578.004) |
 | T1578.005 | CRITICAL | Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005) |
-| T1580 | HIGH | Ultra-Pro High-Fidelity Cloud Infrastructure Discovery (T1580) |
+| T1580 | HIGH | Cloud Infrastructure Discovery (T1580) |
 | T1583 | HIGH | High-Fidelity Offensive Infrastructure Provisioning - T1583 |
 | T1583.001 | HIGH | High-Fidelity VPS Infrastructure Provisioning - T1583.001 |
 | T1583.002 | HIGH | High-Fidelity Automated Domain Registration & Acquisition - T1583.002 |
@@ -608,7 +608,7 @@
 | T1601 | CRITICAL | Network OS Image Modification (T1601) |
 | T1601.001 | CRITICAL | Network Binary Patching (T1601.001) |
 | T1601.002 | CRITICAL | Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002) |
-| T1602 | CRITICAL | Ultra-Pro High-Fidelity Network Share Automated Collection (T1602) |
+| T1602 | CRITICAL | Network Share Automated Collection (T1602) |
 | T1602.001 | CRITICAL | Admin Share Data Exfiltration (T1602.001) |
 | T1602.002 | CRITICAL | Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002) |
 | T1606 | CRITICAL | Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606) |

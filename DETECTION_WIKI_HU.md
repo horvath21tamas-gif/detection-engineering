@@ -512,7 +512,7 @@
 - [Ultra-Pro High-Fidelity Cloud Instance Destruction (T1578.003)](#ultra-pro-high-fidelity-cloud-instance-destruction-(t1578003))
 - [Ultra-Pro High-Fidelity felhőkép-szabotázs (T1578.004)](#ultra-pro-high-fidelity-felhőkép-szabotázs-(t1578004))
 - [Ultra-Pro High-Fidelity Cloud Network Security Regression (T1578.005)](#ultra-pro-high-fidelity-cloud-network-security-regression-(t1578005))
-- [Ultra-Pro High-Fidelity Cloud Infrastructure Discovery (T1580)](#ultra-pro-high-fidelity-cloud-infrastructure-discovery-(t1580))
+- [Cloud Infrastructure Discovery (T1580)](#cloud-infrastructure-discovery-(t1580))
 - [High-Fidelity offensive Infrastructure Provisioning – T1583](#high-fidelity-offensive-infrastructure-provisioning-–-t1583)
 - [High-Fidelity VPS infrastruktúra kiépítése – T1583.001](#high-fidelity-vps-infrastruktúra-kiépítése-–-t1583001)
 - [Nagy pontosságú automatizált domainregisztráció és -szerzés – T1583.002](#nagy-pontosságú-automatizált-domainregisztráció-és--szerzés-–-t1583002)
@@ -602,7 +602,7 @@
 - [Hálózati operációs rendszer képmódosítása (T1601)](#hálózati-operációs-rendszer-képmódosítása-(t1601))
 - [Hálózati bináris javítás (T1601.001)](#hálózati-bináris-javítás-(t1601001))
 - [Ultra-Pro High-Fidelity rosszindulatú hálózati operációs rendszer frissítése (T1601.002)](#ultra-pro-high-fidelity-rosszindulatú-hálózati-operációs-rendszer-frissítése-(t1601002))
-- [Ultra-Pro High-Fidelity Network Share Automated Collection (T1602)](#ultra-pro-high-fidelity-network-share-automated-collection-(t1602))
+- [Hálózati megosztás automatizált adatgyűjtés (T1602)](#hálózati-megosztás-automatizált-adatgyűjtés-(t1602))
 - [Admin Share Data Exfiltration (T1602.001)](#admin-share-data-exfiltration-(t1602001))
 - [Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002)](#ultra-pro-high-fidelity-cloud-share-exfiltration-(t1602002))
 - [Ultra-Pro High-Fidelity webes token és hitelesítő adatok hamisítása (T1606)](#ultra-pro-high-fidelity-webes-token-és-hitelesítő-adatok-hamisítása-(t1606))
@@ -9200,16 +9200,16 @@ Kiszűri az automatizált infrastruktúra-kódként (IaC) zajt.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Infrastructure Discovery (T1580)
+## Cloud Infrastructure Discovery (T1580)
 - **ID:** `T1580.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a felhő-erőforrások (VM-ek, VPC-k, S3) szisztematikus felfedezését, összpontosítva
-rendellenes végrehajtási környezetek és adatkinyerési minták.
-Nem tartalmazza a legitim Infrastructure-as-Code (IaC) és a CI/CD eszközöket.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a felhő-infrastruktúra-erőforrások szisztematikus felfedezését (VM-ek, VPC-k, S3-tárolók, tárfiókok)
+a rendellenes CLI-használat, a kimeneti kivonás és az interaktív szekciókontextusok figyelésével.
+Kiszűri a legitim Infrastructure-as-Code (IaC) és CI/CD automatizálási eszközöket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

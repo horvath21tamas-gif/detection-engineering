@@ -1,51 +1,77 @@
-title: Ultra-Pro High-Fidelity Cloud Image Tampering (T1578.004)
+title: Cloud Image Tampering (T1578.004)
 id: ac91f337-eabc-4cd1-94bd-b4ce0a6859d8
 status: stable
 description: |
-    Detects unauthorized modifications to cloud machine images (AMI, VHD). 
-    Focuses on permission changes that expose images to external accounts or 
-    the public internet, and filters out known CI/CD build pipelines.
-author: hota05
-date: 2026-02-03
+    Detects unauthorized modifications to cloud machine images (AMI, VHD, Managed Images). 
+    Focuses on permission changes that expose images to external accounts or the public internet. 
+    Context-aware detection excludes legitimate CI/CD and image build pipelines while including suspicious interactive sessions.
+author: hota05 
+date: 2026-02-11
 tags:
     - attack.persistence
     - attack.t1578.004
 logsource:
     product: cloud
     service: Azure Activity
+
 detection:
-    selection_image_ops:
-        operation_name|contains:
-            - 'ModifyImageAttribute'        
-            - 'CopyImage'                  
-            - 'Microsoft.Compute/images/write' 
-            - 'v1.compute.images.setLabels'
+  selection_image_ops:
+    operation_name|contains:
+      - 'ModifyImageAttribute'
+      - 'CopyImage'
+      - 'Microsoft.Compute/images/write'
+      - 'v1.compute.images.setLabels'
+      - 'UpdateImagePermissions'
+      - 'SetImageAccessPolicy'
 
-    selection_exposure:
-        request_parameters|contains:
-            - 'all'       
-            - 'public'   
-            - 'grantee'  
+  selection_exposure:
+    request_parameters|contains:
+      - 'all'
+      - 'public'
+      - 'grantee'
+      - 'Everyone'
+      - 'AuthenticatedUsers'
 
-    selection_context:
-        mfa_authenticated: 'false'
-        user_agent|contains:
-            - 'kali'
-            - 'python-requests'
-            - 'boto3'
-            - 'curl'
-            - 'postman'
+  selection_context:
+    mfa_authenticated: 'false'
+    user_agent|contains:
+      - 'kali'
+      - 'python-requests'
+      - 'boto3'
+      - 'curl'
+      - 'postman'
+      - 'powershell'
+      - 'Terraform'
 
-    filter_trusted_builders:
-        user_name|startswith:
-            - 'svc-packer'
-            - 'svc-terraform'
-            - 'image-pipeline-admin'
-            - 'azure-image-builder'
-    filter_internal:
-        user_name|contains: 
-            - 'system-internal'
-            - 'service-linked-role'
+  filter_trusted_builders:
+    user_name|startswith:
+      - 'svc-packer'
+      - 'svc-terraform'
+      - 'image-pipeline-admin'
+      - 'azure-image-builder'
+      - 'svc-pulumi'
 
-    condition: selection_image_ops and (selection_exposure or selection_context) and not (filter_trusted_builders or filter_internal)
+  filter_internal:
+    user_name|contains:
+      - 'system-internal'
+      - 'service-linked-role'
+      - 'azuremonitor'
+      - 'loganalytics'
+
+  condition: selection_image_ops and (selection_exposure or selection_context) and not (filter_trusted_builders or filter_internal)
+
+fields:
+  - Time
+  - user_name
+  - operation_name
+  - request_parameters
+  - user_agent
+  - mfa_authenticated
+  - resource_id
+
+falsepositives:
+  - Trusted image pipelines modifying metadata temporarily
+  - Automated replication jobs by internal service accounts
+  - Standard labeling/permission updates by authorized CI/CD tools
+
 level: critical

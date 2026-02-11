@@ -9255,17 +9255,18 @@ Optimized for low false positive rates in enterprise environments.
 
 
 ---
-## Ultra-Pro High-Fidelity Lateral Tool Transfer (T1570)
+## Lateral Tool Transfer (T1570)
 - **ID:** `T1570.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized lateral tool transfer by monitoring command-line activity 
-targeting administrative shares (C$, ADMIN$). Focuses on non-standard process 
-lineages (Office, Browsers, non-elevated Shells) and weaponized tools like 
-bitsadmin or robocopy.
+- **Leírás:** Detects unauthorized lateral tool transfer across administrative shares (C$, ADMIN$, IPC$).
+Focuses on high-risk process activity originating from non-standard lineages 
+(Office apps, browsers, non-elevated shells) and known transfer utilities 
+like robocopy, bitsadmin, xcopy, or certutil. Excludes legitimate system 
+automation and software distribution activity.
 
 
 #### 🚨 Response Playbook

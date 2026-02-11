@@ -8781,17 +8781,18 @@ Optimiert für niedrige Falsch-Positiv-Raten in Unternehmensumgebungen.
 
 
 ---
-## Ultra-Pro High-Fidelity-lateraler Werkzeugtransfer (T1570)
+## Seitlicher Werkzeugtransfer (T1570)
 - **ID:** `T1570.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte seitliche Werkzeugübertragungen durch Überwachung der Befehlszeilenaktivität
-Ausrichtung auf administrative Freigaben (C$, ADMIN$).Konzentriert sich auf nicht standardmäßige Prozesse
-Abstammungslinien (Office, Browser, nicht erhöhte Shells) und bewaffnete Tools wie
-bitsadmin oder robocopy.
+- **Beschreibung:** Erkennt unbefugte laterale Toolübertragungen über administrative Freigaben (C$, ADMIN$, IPC$).
+Konzentriert sich auf Prozessaktivitäten mit hohem Risiko, die aus nicht standardmäßigen Abstammungslinien stammen
+(Office-Apps, Browser, nicht erhöhte Shells) und bekannte Übertragungsdienstprogramme
+wie Robocopy, Bitsadmin, xcopy oder certutil.Schließt legitimes System aus
+Automatisierungs- und Softwareverteilungstätigkeit.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -8781,17 +8781,18 @@ Az alacsony téves pozitív arányra optimalizálva vállalati környezetben.
 
 
 ---
-## Ultra-Pro High-Fidelity Lateral Tool Transfer (T1570)
+## Oldalirányú szerszámátvitel (T1570)
 - **ID:** `T1570.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A parancssori tevékenység figyelésével észleli a jogosulatlan oldalirányú szerszámátvitelt
-adminisztratív megosztásokat célozva (C$, ADMIN$).A nem szabványos folyamatokra összpontosít
-vonalak (Office, Böngészők, nem emelt Shellek) és fegyveres eszközök, mint pl
-bitsadmin vagy robocopy.
+- **Leírás:** Érzékeli a jogosulatlan oldalirányú eszközátvitelt az adminisztrációs megosztásokon (C$, ADMIN$, IPC$) keresztül.
+A nem szabványos leszármazási vonalakból származó magas kockázatú folyamattevékenységre összpontosít
+(Irodai alkalmazások, böngészők, nem emelt héjak) és ismert átviteli segédprogramok
+mint a robocopy, bitsadmin, xcopy vagy certutil.Kizárja a legitim rendszert
+automatizálási és szoftverforgalmazási tevékenység.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

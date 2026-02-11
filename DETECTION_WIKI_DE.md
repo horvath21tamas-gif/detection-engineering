@@ -8423,16 +8423,17 @@ Dateien (Hosts, Ereignisprotokolle) von nicht standardmäßigen übergeordneten 
 
 
 ---
-## Ultra-Pro High-Fidelity-Manipulation gespeicherter Daten (T1565.001)
+## Manipulation gespeicherter Daten (T1565.001)
 - **ID:** `T1565_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Änderungen gespeicherter Daten (Konfigurationen, Protokolle, Datenbanken)
-durch Identifizierung verdächtiger Stream-Bearbeitungen (sed, powershell-replace)
-Sie stammen von nicht standardmäßigen übergeordneten Prozessen oder zielen auf kritische Systempfade ab.
+- **Beschreibung:** Erkennt unbefugte Änderungen gespeicherter Daten, einschließlich Konfigurationsdateien.
+Datenbanken und Systemprotokolle.Überwacht verdächtige Stream-Bearbeitungen, SQL-Befehle,
+oder PowerShell-Ersetzungen, die aus nicht standardmäßigen übergeordneten Prozessen stammen oder
+Kritische Systempfade werden ins Visier genommen und legitime Verwaltungsaktivitäten herausgefiltert.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -8441,16 +8442,17 @@ Sie stammen von nicht standardmäßigen übergeordneten Prozessen oder zielen au
 
 
 ---
-## Ultra-Pro High-Fidelity-Manipulation übertragener Daten (T1565.002)
+## Manipulation übertragener Daten (T1565.002)
 - **ID:** `T1565_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Netzwerkumleitung und Auflösungsmanipulation (DNS, Proxy, Hosts)
-durch die Identifizierung von CLI-basierten Konfigurationsänderungen, die von verdächtigem Ursprung stammen
-übergeordnete Prozesse oder das Angreifen kritischer Registrierungsschlüssel.
+- **Beschreibung:** Erkennt unbefugte Netzwerkumleitung und Auflösungsmanipulation, einschließlich DNS, Proxy,
+und hostet Dateiänderungen.Überwacht CLI-basierte Konfigurationsänderungen, die von stammen
+verdächtige übergeordnete Prozesse oder das Angreifen kritischer Registrierungsschlüssel.Filtert legitime administrative
+und Systemaktivitäten zur Reduzierung falsch positiver Ergebnisse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

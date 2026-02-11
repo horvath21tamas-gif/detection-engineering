@@ -8423,16 +8423,17 @@ fájlok (gazdagépek, eseménynaplók) nem szabványos szülőfolyamatokból.
 
 
 ---
-## Ultra-Pro nagy pontosságú tárolt adatok manipulációja (T1565.001)
+## Tárolt adatok kezelése (T1565.001)
 - **ID:** `T1565_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a tárolt adatok (konfigurációk, naplók, adatbázisok) jogosulatlan módosítását
-gyanús adatfolyam-szerkesztés azonosításával (sed, powershell-csere)
-nem szabványos szülőfolyamatokból származó vagy kritikus rendszerútvonalakat célzó.
+- **Leírás:** Érzékeli a tárolt adatok jogosulatlan módosítását, beleértve a konfigurációs fájlokat,
+adatbázisok és rendszernaplók.Figyeli a gyanús adatfolyam-szerkesztést, az SQL-parancsokat,
+vagy a nem szabványos szülőfolyamatokból származó PowerShell-cserék vagy
+a kritikus rendszerútvonalak megcélzása, a jogos adminisztrációs tevékenység kiszűrése.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -8441,16 +8442,17 @@ nem szabványos szülőfolyamatokból származó vagy kritikus rendszerútvonala
 
 
 ---
-## Ultra-Pro nagy felbontású adatátvitel (T1565.002)
+## Továbbított adatok kezelése (T1565.002)
 - **ID:** `T1565_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a jogosulatlan hálózati átirányítást és a felbontás-manipulációt (DNS, proxy, gazdagépek)
-gyanús eredetű CLI-alapú konfigurációs változások azonosításával
-szülőfolyamatok vagy a kritikus rendszerleíró kulcsok megcélzása.
+- **Leírás:** Érzékeli a jogosulatlan hálózati átirányítást és a felbontási manipulációkat, beleértve a DNS-t, a proxyt,
+és fájlmódosításokat tárol.Figyeli a CLI-alapú konfigurációs változásokat, amelyek innen származnak
+gyanús szülőfolyamatokat vagy kritikus rendszerleíró kulcsokat céloz meg.Szűri a jogos adminisztrációt
+és a rendszer tevékenységei a téves pozitívumok csökkentésére.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -8722,7 +8724,7 @@ Kizárja a jogos adminisztrációs és felhőalapú automatizálási tevékenys�
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a programozott tartománygenerálási algoritmus (DGA) tevékenységét a következők figyelésével:
 1. Gyors DNS-feloldási kísérletek API-n vagy CLI-n keresztül
-2. Magas entrópiájú vagy gyanús tartományminták a parancssorban
+2. Nagy entrópiájú vagy gyanús tartományminták a parancssorban
 3. DNS-hibák elnyomása az észlelés elkerülése érdekében.
 Kiszűri a legális szoftvereket, a felhőautomatizálást és a belső infrastruktúra forgalmat.
 

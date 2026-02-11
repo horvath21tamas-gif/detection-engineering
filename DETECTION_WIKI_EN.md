@@ -8877,16 +8877,17 @@ files (hosts, event logs) from non-standard parent processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Stored Data Manipulation (T1565.001)
+## Stored Data Manipulation (T1565.001)
 - **ID:** `T1565_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized modification of stored data (configs, logs, databases) 
-by identifying suspicious stream editing (sed, powershell-replace) 
-originating from non-standard parent processes or targeting critical system paths.
+- **Leírás:** Detects unauthorized modification of stored data including configuration files,
+databases, and system logs. Monitors suspicious stream editing, SQL commands, 
+or PowerShell replacements originating from non-standard parent processes or
+targeting critical system paths, filtering out legitimate administrative activity.
 
 
 #### 🚨 Response Playbook
@@ -8896,16 +8897,17 @@ originating from non-standard parent processes or targeting critical system path
 
 
 ---
-## Ultra-Pro High-Fidelity Transmitted Data Manipulation (T1565.002)
+## Transmitted Data Manipulation (T1565.002)
 - **ID:** `T1565_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized network redirection and resolution manipulation (DNS, Proxy, Hosts) 
-by identifying CLI-based configuration changes originating from suspicious 
-parent processes or targeting critical registry keys.
+- **Leírás:** Detects unauthorized network redirection and resolution manipulation including DNS, proxy,
+and hosts file modifications. Monitors CLI-based configuration changes originating from
+suspicious parent processes or targeting critical registry keys. Filters legitimate administrative
+and system activities to reduce false positives.
 
 
 #### 🚨 Response Playbook

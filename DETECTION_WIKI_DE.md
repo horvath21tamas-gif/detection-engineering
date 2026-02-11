@@ -8225,16 +8225,17 @@ oder auf sensible, vom Benutzer beschreibbare Verzeichnisse abzielen.
 
 
 ---
-## Ultra-Pro High-Fidelity-Erstellung versteckter Benutzerkonten (T1564.002)
+## Erstellung eines versteckten Benutzerkontos (T1564.002)
 - **ID:** `T1564_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BASH.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt durch Targeting das Verstecken von Benutzerkonten auf dem Windows-Anmeldebildschirm
-den Registrierungsschlüssel „SpecialAccounts\UserList“.Filtert legitime Systeme heraus
-Installer und konzentriert sich auf verdächtige übergeordnete Prozesse und Nicht-Systembenutzer.
+- **Beschreibung:** Erkennt Versuche, Windows-Benutzerkonten auf dem Anmeldebildschirm auszublenden
+Überwachen von Änderungen an „SpecialAccounts\UserList“ und zugehörigen Registrierungsschlüsseln.
+Konzentriert sich auf verdächtige übergeordnete Prozesse, Nicht-Systembenutzer und nicht vertrauenswürdige Ausführungspfade.
+Gleichzeitig werden legitime Systeminstallationsprogramme und Verwaltungsautomatisierungen herausgefiltert.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -8243,16 +8244,16 @@ Installer und konzentriert sich auf verdächtige übergeordnete Prozesse und Nic
 
 
 ---
-## Ultra-Pro High-Fidelity Hidden Window Execution (T1564.003)
+## Ausführung versteckter Fenster (T1564.003)
 - **ID:** `T1564_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt verdächtige Prozessausführungen mit ausgeblendeten Fenstern durch Korrelation
-abgekürzte Stealth-Flags mit nicht vertrauenswürdigen übergeordneten Prozessen und
-Verschleierungstechniken.
+- **Beschreibung:** Erkennt verdächtige Prozessausführungen mit versteckten Fenstern,
+Der Schwerpunkt liegt auf Stealth-Flags, Verschleierungstechniken und nicht vertrauenswürdigen übergeordneten Prozessen.
+Entwickelt, um Versuche zu erkennen, die Benutzer- und EDR-Sichtbarkeit zu umgehen und gleichzeitig Fehlalarme zu minimieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

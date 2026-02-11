@@ -8668,16 +8668,17 @@ or targeting sensitive user-writable directories.
 
 
 ---
-## Ultra-Pro High-Fidelity Hidden User Account Creation (T1564.002)
+## Hidden User Account Creation (T1564.002)
 - **ID:** `T1564_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BASH.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the hiding of user accounts from the Windows logon screen by targeting 
-the 'SpecialAccounts\UserList' registry key. Filters out legitimate system 
-installers and focuses on suspicious parent processes and non-system users.
+- **Leírás:** Detects attempts to hide Windows user accounts from the logon screen by 
+monitoring modifications to 'SpecialAccounts\UserList' and related registry keys.
+Focuses on suspicious parent processes, non-system users, and untrusted execution paths,
+while filtering out legitimate system installers and administrative automation.
 
 
 #### 🚨 Response Playbook
@@ -8687,16 +8688,16 @@ installers and focuses on suspicious parent processes and non-system users.
 
 
 ---
-## Ultra-Pro High-Fidelity Hidden Window Execution (T1564.003)
+## Hidden Window Execution (T1564.003)
 - **ID:** `T1564_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects suspicious process execution with hidden windows by correlating 
-abbreviated stealth flags with untrusted parent processes and 
-obfuscation techniques.
+- **Leírás:** Detects suspicious process execution with hidden windows, 
+focusing on stealth flags, obfuscation techniques, and untrusted parent processes. 
+Designed to catch attempts to evade user and EDR visibility while minimizing false positives.
 
 
 #### 🚨 Response Playbook

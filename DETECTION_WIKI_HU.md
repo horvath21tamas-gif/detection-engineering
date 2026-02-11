@@ -8225,16 +8225,17 @@ vagy érzékeny felhasználó által írható könyvtárakat céloz meg.
 
 
 ---
-## Ultra-Pro High-Fidelity rejtett felhasználói fiók létrehozása (T1564.002)
+## Rejtett felhasználói fiók létrehozása (T1564.002)
 - **ID:** `T1564_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BASH.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Célzással érzékeli a felhasználói fiókok elrejtését a Windows bejelentkezési képernyőjén
-a „SpecialAccounts\UserList” beállításkulcsot.Kiszűri a legitim rendszert
-telepítők, és a gyanús szülőfolyamatokra és a rendszeren kívüli felhasználókra összpontosít.
+- **Leírás:** Érzékeli a Windows felhasználói fiókok elrejtésére irányuló kísérleteket a bejelentkezési képernyőről
+a „SpecialAccounts\UserList” és a kapcsolódó rendszerleíró kulcsok módosításainak figyelése.
+A gyanús szülőfolyamatokra, a rendszeren kívüli felhasználókra és a nem megbízható végrehajtási útvonalakra összpontosít,
+miközben kiszűri a legitim rendszertelepítőket és az adminisztrációs automatizálást.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -8243,16 +8244,16 @@ telepítők, és a gyanús szülőfolyamatokra és a rendszeren kívüli felhasz
 
 
 ---
-## Ultra-Pro High-Fidelity rejtett ablak végrehajtás (T1564.003)
+## Rejtett ablak végrehajtás (T1564.003)
 - **ID:** `T1564_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Korrelációval észleli a gyanús folyamatvégrehajtást rejtett ablakokkal
-rövidített lopakodó zászlók nem megbízható szülői folyamatokkal és
-homályosítási technikák.
+- **Leírás:** Érzékeli a gyanús folyamatvégrehajtást rejtett ablakokkal,
+a lopakodó zászlókra, az obfuszkációs technikákra és a nem megbízható szülői folyamatokra összpontosítva.
+Úgy tervezték, hogy felfogja a felhasználói és az EDR láthatóságának elkerülésére irányuló kísérleteket, miközben minimalizálja a hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

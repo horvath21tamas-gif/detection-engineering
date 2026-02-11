@@ -10489,13 +10489,14 @@ und Überbrückung isolierter Schnittstellen auf Hardwareebene.
 
 
 ---
-## Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001)
+## Logische Isolationsbypass (T1599.001)
 - **ID:** `T1599_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt nicht autorisierte Umgehungen der logischen Netzwerkisolation, z. B. VRF-Routenlecks,
-unbefugtes VLAN-Trunking und die Erstellung von L2-Brücken zwischen sicheren Zonen.
+- **Beschreibung:** Erkennt unbefugte Versuche zur Umgehung der logischen Netzwerkisolation, einschließlich VRF-Routenlecks.
+Unbefugtes VLAN-Trunking, die Erstellung von L2-Brücken und EVPN-Fehlkonfigurationen könnten dazu führen
+Überbrücken Sie sichere Zonen oder umgehen Sie Segmentierungskontrollen.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

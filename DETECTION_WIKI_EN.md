@@ -11072,13 +11072,14 @@ and hardware-level bridging of isolated interfaces.
 
 
 ---
-## Ultra-Pro High-Fidelity Logical Isolation Bypass (T1599.001)
+## Logical Isolation Bypass (T1599.001)
 - **ID:** `T1599_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects unauthorized logical network isolation bypasses, such as VRF route leaking, 
-unauthorized VLAN trunking, and L2 bridge creation between secure zones.
+- **Leírás:** Detects unauthorized logical network isolation bypass attempts, including VRF route leaking,
+unauthorized VLAN trunking, L2 bridge creation, and EVPN misconfigurations that could
+bridge secure zones or bypass segmentation controls.
 
 
 #### 🚨 Response Playbook

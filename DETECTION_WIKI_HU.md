@@ -10489,13 +10489,14 @@ felhasználói kontextusokat, miközben kiszűri az engedélyezett biztonsági k
 
 
 ---
-## Ultra-Pro High-Fidelity logikai leválasztás bypass (T1599.001)
+## Logikai leválasztás bypass (T1599.001)
 - **ID:** `T1599_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a jogosulatlan logikai hálózatleválasztási megkerüléseket, mint például a VRF útvonal szivárgását,
-jogosulatlan VLAN trönkölés és L2 híd létrehozása a biztonságos zónák között.
+- **Leírás:** Érzékeli a jogosulatlan logikai hálózatleválasztási megkerülési kísérleteket, beleértve a VRF útvonal kiszivárgását,
+jogosulatlan VLAN trönkölés, L2 híd létrehozása és az EVPN hibás konfigurálása
+áthidalják a biztonságos zónákat vagy a bypass szegmentációs vezérlőket.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

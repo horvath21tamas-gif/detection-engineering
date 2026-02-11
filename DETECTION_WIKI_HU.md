@@ -8387,16 +8387,16 @@ megbízhatatlan szülők üres vagy általános érveivel.
 
 
 ---
-## Ultra-Pro High-Fidelity virtuális példány visszaélés (T1564.011)
+## Virtuális példány visszaélés (T1564.011)
 - **ID:** `T1564_011.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/), [WSL.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Windows Sandbox és WSL gyanús használatát az EDR-figyelés elkerülése érdekében.
-A nem megbízható szülői folyamatokra, a nem szabványos konfigurációk betöltésére összpontosít,
-és közvetlen parancsvégrehajtás a virtuális példányokon belül.
+- **Leírás:** Érzékeli a Windows Sandbox, WSL és a kapcsolódó virtuális példányok gyanús használatát
+hogy elkerülje az EDR megfigyelését.Figyeli a nem megbízható szülői folyamatokat, nem szabványos
+konfiguráció betöltése és közvetlen parancsvégrehajtás virtualizált környezetben.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -8387,16 +8387,16 @@ mit leeren oder allgemeinen Argumenten nicht vertrauenswürdiger Eltern.
 
 
 ---
-## Missbrauch virtueller Ultra-Pro-High-Fidelity-Instanzen (T1564.011)
+## Missbrauch virtueller Instanzen (T1564.011)
 - **ID:** `T1564_011.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/), [WSL.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt verdächtige Verwendung von Windows Sandbox und WSL, um der EDR-Überwachung zu entgehen.
-Konzentriert sich auf nicht vertrauenswürdige übergeordnete Prozesse, das Laden nicht standardmäßiger Konfigurationen,
-und direkte Befehlsausführung innerhalb virtueller Instanzen.
+- **Beschreibung:** Erkennt verdächtige Verwendung von Windows Sandbox, WSL und zugehörigen virtuellen Instanzen
+um der EDR-Überwachung zu entgehen.Überwacht nicht vertrauenswürdige übergeordnete Prozesse, die nicht dem Standard entsprechen
+Laden der Konfiguration und direkte Befehlsausführung in virtualisierten Umgebungen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

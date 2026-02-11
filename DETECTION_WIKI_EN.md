@@ -8839,16 +8839,16 @@ with empty or generic arguments by untrusted parents.
 
 
 ---
-## Ultra-Pro High-Fidelity Virtual Instance Abuse (T1564.011)
+## Virtual Instance Abuse (T1564.011)
 - **ID:** `T1564_011.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/), [WSL.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects suspicious use of Windows Sandbox and WSL to evade EDR monitoring. 
-Focuses on untrusted parent processes, non-standard configuration loading, 
-and direct command execution within virtual instances.
+- **Leírás:** Detects suspicious use of Windows Sandbox, WSL, and related virtual instances
+to evade EDR monitoring. Monitors untrusted parent processes, non-standard
+configuration loading, and direct command execution within virtualized environments.
 
 
 #### 🚨 Response Playbook

@@ -463,11 +463,11 @@
 - [Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007)](#ultra-pro-high-fidelity-vba-macro-security-evasion-(t1564007))
 - [Ultra-Pro High-Fidelity Email Hiding Rules Detection (T1564.008)](#ultra-pro-high-fidelity-email-hiding-rules-detection-(t1564008))
 - [Ultra-Pro High-Fidelity Resource Extraction and Abuse (T1564.009)](#ultra-pro-high-fidelity-resource-extraction-and-abuse-(t1564009))
-- [Ultra-Pro High-Fidelity Process Argument Spoofing Detection (T1564.010)](#ultra-pro-high-fidelity-process-argument-spoofing-detection-(t1564010))
-- [Ultra-Pro High-Fidelity Virtual Instance Abuse (T1564.011)](#ultra-pro-high-fidelity-virtual-instance-abuse-(t1564011))
-- [Ultra-Pro High-Fidelity Data Manipulation (T1565)](#ultra-pro-high-fidelity-data-manipulation-(t1565))
-- [Ultra-Pro High-Fidelity Stored Data Manipulation (T1565.001)](#ultra-pro-high-fidelity-stored-data-manipulation-(t1565001))
-- [Ultra-Pro High-Fidelity Transmitted Data Manipulation (T1565.002)](#ultra-pro-high-fidelity-transmitted-data-manipulation-(t1565002))
+- [Process Argument Spoofing Detection (T1564.010)](#process-argument-spoofing-detection-(t1564010))
+- [Virtual Instance Abuse (T1564.011)](#virtual-instance-abuse-(t1564011))
+- [Data Manipulation (T1565)](#data-manipulation-(t1565))
+- [Stored Data Manipulation (T1565.001)](#stored-data-manipulation-(t1565001))
+- [Transmitted Data Manipulation (T1565.002)](#transmitted-data-manipulation-(t1565002))
 - [Runtime Process Manipulation (T1565.003)](#runtime-process-manipulation-(t1565003))
 - [High-Fidelity Phishing Payload Execution from Communication Apps](#high-fidelity-phishing-payload-execution-from-communication-apps)
 - [High-Fidelity Spearphishing Attachment Execution](#high-fidelity-spearphishing-attachment-execution)
@@ -8820,16 +8820,17 @@ Focuses on protocol smuggling (its:, ms-its:) and suspicious de-compilation.
 
 
 ---
-## Ultra-Pro High-Fidelity Process Argument Spoofing Detection (T1564.010)
+## Process Argument Spoofing Detection (T1564.010)
 - **ID:** `T1564_010.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [SCHTASKS.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects potential process argument spoofing by identifying execution 
-mismatches where sensitive interpreters (PowerShell, CMD) are spawned 
-with empty or generic arguments by untrusted parents.
+- **Leírás:** Detects potential process argument spoofing where sensitive interpreters
+(PowerShell, CMD, WMIC, CertUtil, Svchost, SchTasks) are spawned with empty
+or generic arguments from untrusted parent processes, indicating defense evasion
+techniques.
 
 
 #### 🚨 Response Playbook
@@ -8860,14 +8861,15 @@ configuration loading, and direct command execution within virtualized environme
 ---
 ## Data Manipulation (T1565)
 - **ID:** `T1565.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized data manipulation by monitoring for stream editing, 
-log clearing via CLI, and unauthorized modifications to critical system 
-files (hosts, event logs) from non-standard parent processes.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects unauthorized manipulation of stored or transmitted data, including stream editing,
+log clearing via CLI, SQL/database updates, and modifications to critical system files
+(hosts, event logs, system configs) originating from non-standard parent processes.
+Covers T1565.001 (Stored Data Manipulation) and T1565.002 (Transmitted Data Manipulation).
 
 
 #### 🚨 Response Playbook

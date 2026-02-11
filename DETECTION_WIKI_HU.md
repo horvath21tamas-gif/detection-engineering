@@ -463,11 +463,11 @@
 - [Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007)](#ultra-pro-high-fidelity-vba-macro-security-evasion-(t1564007))
 - [Ultra-Pro High-Fidelity e-mailek elrejtési szabályainak észlelése (T1564.008)](#ultra-pro-high-fidelity-e-mailek-elrejtési-szabályainak-észlelése-(t1564008))
 - [Ultra-Pro High-Fidelity erőforrás-kivonás és visszaélés (T1564.009)](#ultra-pro-high-fidelity-erőforrás-kivonás-és-visszaélés-(t1564009))
-- [Ultra-Pro High-Fidelity Process Argument Spoofing Detection (T1564.010)](#ultra-pro-high-fidelity-process-argument-spoofing-detection-(t1564010))
-- [Ultra-Pro High-Fidelity virtuális példány visszaélés (T1564.011)](#ultra-pro-high-fidelity-virtuális-példány-visszaélés-(t1564011))
-- [Ultra-Pro nagy pontosságú adatkezelés (T1565)](#ultra-pro-nagy-pontosságú-adatkezelés-(t1565))
-- [Ultra-Pro nagy pontosságú tárolt adatok manipulációja (T1565.001)](#ultra-pro-nagy-pontosságú-tárolt-adatok-manipulációja-(t1565001))
-- [Ultra-Pro nagy felbontású adatátvitel (T1565.002)](#ultra-pro-nagy-felbontású-adatátvitel-(t1565002))
+- [Érveléshamisítás-észlelés feldolgozása (T1564.010)](#érveléshamisítás-észlelés-feldolgozása-(t1564010))
+- [Virtuális példány visszaélés (T1564.011)](#virtuális-példány-visszaélés-(t1564011))
+- [Adatkezelés (T1565)](#adatkezelés-(t1565))
+- [Tárolt adatok kezelése (T1565.001)](#tárolt-adatok-kezelése-(t1565001))
+- [Továbbított adatok kezelése (T1565.002)](#továbbított-adatok-kezelése-(t1565002))
 - [Futásidejű folyamatmanipuláció (T1565.003)](#futásidejű-folyamatmanipuláció-(t1565003))
 - [Nagy pontosságú adathalászat-végrehajtás kommunikációs alkalmazásokból](#nagy-pontosságú-adathalászat-végrehajtás-kommunikációs-alkalmazásokból)
 - [High-Fidelity Spearphishing melléklet végrehajtás](#high-fidelity-spearphishing-melléklet-végrehajtás)
@@ -8369,16 +8369,17 @@ A protokollcsempészetre (it:, ms-its:) és a gyanús dekompilációra összpont
 
 
 ---
-## Ultra-Pro High-Fidelity Process Argument Spoofing Detection (T1564.010)
+## Érveléshamisítás-észlelés feldolgozása (T1564.010)
 - **ID:** `T1564_010.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [SCHTASKS.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A végrehajtás azonosításával észleli a lehetséges folyamatargumentum-hamisítást
-eltérések, ahol érzékeny értelmezők (PowerShell, CMD) jönnek létre
-megbízhatatlan szülők üres vagy általános érveivel.
+- **Leírás:** Észleli a lehetséges folyamatargumentum-hamisítást, ha érzékeny tolmácsok vannak
+(PowerShell, CMD, WMIC, CertUtil, Svchost, SchTasks) üres
+vagy a nem megbízható szülői folyamatokból származó általános érvek, amelyek a védekezés kijátszására utalnak
+technikák.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -8407,14 +8408,15 @@ konfiguráció betöltése és közvetlen parancsvégrehajtás virtualizált kö
 ---
 ## Adatkezelés (T1565)
 - **ID:** `T1565.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Az adatfolyam szerkesztésének figyelésével észleli a jogosulatlan adatkezelést,
-naplótörlés CLI-n keresztül, és a kritikus rendszer jogosulatlan módosítása
-fájlok (gazdagépek, eseménynaplók) nem szabványos szülőfolyamatokból.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a tárolt vagy továbbított adatok jogosulatlan manipulálását, beleértve az adatfolyam szerkesztését,
+naplótörlés CLI-n keresztül, SQL/adatbázis-frissítések és a kritikus rendszerfájlok módosításai
+(gazdagépek, eseménynaplók, rendszerkonfigurációk), amelyek nem szabványos szülőfolyamatokból származnak.
+Tartalmazza a T1565.001 (tárolt adatok manipulációja) és a T1565.002 (továbbított adatok manipulációja)
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -8640,9 +8642,9 @@ Szűri a jogos rendszer-/adminisztrációs használatot, hogy csökkentse a hami
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli a videotárhely-platformokon keresztüli titkos adatszivárgást, figyelve:
-1. Szteganográfiai beágyazás videofájlokba (metaadatokkal való visszaélés, adatfolyam melléklet).
-2. Nyilvános videoplatformokat célzó CLI alapú feltöltések a nem kreatív ill
+- **Leírás:** Észleli a titkos adatszivárgást videotárhely-platformokon keresztül, figyelve:
+1. Szteganográfiai beágyazás videofájlokba (metaadat-visszaélés, adatfolyam-csatolás).
+2. Nyilvános videoplatformokat célzó CLI alapú feltöltések nem kreatív ill
 nem engedélyezett eszközök.
 Nem tartalmazza a legitim kreatív alkalmazásokat és rendszerfolyamatokat.
 
@@ -8744,7 +8746,7 @@ Kiszűri a legális szoftvereket, a felhőautomatizálást és a belső infrastr
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a C2 infrastruktúra címszámítását DNS-en keresztül a programozott figyeléssel
 TXT/SRV rekordok lekérése, majd bájt szintű manipuláció vagy típuskonverzió
-forgatókönyv-értelmezésekben.Kiszűri a jogos DNS-alapú automatizálást, a licencellenőrzéseket,
+forgatókönyv-értelmezésekben.Kiszűri a jogszerű DNS-alapú automatizálást, a licencellenőrzéseket,
 és domain-ellenőrzési folyamatok.
 
 #### 🚨 Response Playbook
@@ -8892,9 +8894,9 @@ a hamis pozitívumok csökkentésére.
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Egyéni szimmetrikus titkosítás (AES/Rijndael) gyanús használatát észleli a C2 csatornáknál.
+- **Leírás:** Egyéni szimmetrikus titkosítás (AES/Rijndael) gyanús használatát észleli a C2 csatornákon.
 A CipherMode, PaddingMode és CryptoStreams programozott beállítására összpontosít
-script motorok, amelyek kifejezetten a kézi IV/Kulcs-hozzárendelést és az adatfolyam-vezetékeket célozzák meg
+script motorok, amelyek kifejezetten a kézi IV/Kulcs hozzárendelést és az adatfolyam-vezetékeket célozzák meg
 nem szabványos folyamatokból vagy nem megbízható végrehajtási környezetekből.
 
 #### 🚨 Response Playbook

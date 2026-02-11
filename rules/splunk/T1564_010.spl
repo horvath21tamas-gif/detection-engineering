@@ -1,2 +1,2 @@
 Image IN ("*\\powershell.exe", "*\\cmd.exe", "*\\wmic.exe", "*\\certutil.exe", "*\\svchost.exe", "*\\schtasks.exe") ParentImage IN ("*\\winword.exe", "*\\excel.exe", "*\\outlook.exe", "*\\mshta.exe", "*\\chrome.exe", "*\\msedge.exe", "*\\w3wp.exe") OR NOT (username="NT AUTHORITY\\SYSTEM" OR ParentImage IN ("*\\Windows\\System32\\services.exe*", "*\\Windows\\System32\\wininit.exe*") OR CommandLine="* -k *")
-| regex CommandLine="^(.*\\\\)?(powershell\\.exe|cmd\\.exe|svchost\\.exe|wmic\\.exe)\\s*$"
+| regex CommandLine="^(.*\\\\)?(powershell\\.exe|cmd\\.exe|wmic\\.exe|certutil\\.exe|svchost\\.exe|schtasks\\.exe)\\s*$" | table Time,SourceImage,ParentImage,CommandLine,SourceUsername

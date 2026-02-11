@@ -463,11 +463,11 @@
 - [Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007)](#ultra-pro-high-fidelity-vba-macro-security-evasion-(t1564007))
 - [Ultra-Pro High-Fidelity-Erkennung von E-Mail-Versteckregeln (T1564.008)](#ultra-pro-high-fidelity-erkennung-von-e-mail-versteckregeln-(t1564008))
 - [Ultra-Pro High-Fidelity-Ressourcenextraktion und -missbrauch (T1564.009)](#ultra-pro-high-fidelity-ressourcenextraktion-und--missbrauch-(t1564009))
-- [Ultra-Pro High-Fidelity-Prozessargument-Spoofing-Erkennung (T1564.010)](#ultra-pro-high-fidelity-prozessargument-spoofing-erkennung-(t1564010))
-- [Missbrauch virtueller Ultra-Pro-High-Fidelity-Instanzen (T1564.011)](#missbrauch-virtueller-ultra-pro-high-fidelity-instanzen-(t1564011))
-- [Ultraprofessionelle High-Fidelity-Datenmanipulation (T1565)](#ultraprofessionelle-high-fidelity-datenmanipulation-(t1565))
-- [Ultra-Pro High-Fidelity-Manipulation gespeicherter Daten (T1565.001)](#ultra-pro-high-fidelity-manipulation-gespeicherter-daten-(t1565001))
-- [Ultra-Pro High-Fidelity-Manipulation übertragener Daten (T1565.002)](#ultra-pro-high-fidelity-manipulation-übertragener-daten-(t1565002))
+- [Erkennung von Prozessargument-Spoofing (T1564.010)](#erkennung-von-prozessargument-spoofing-(t1564010))
+- [Missbrauch virtueller Instanzen (T1564.011)](#missbrauch-virtueller-instanzen-(t1564011))
+- [Datenmanipulation (T1565)](#datenmanipulation-(t1565))
+- [Manipulation gespeicherter Daten (T1565.001)](#manipulation-gespeicherter-daten-(t1565001))
+- [Manipulation übertragener Daten (T1565.002)](#manipulation-übertragener-daten-(t1565002))
 - [Manipulation von Laufzeitprozessen (T1565.003)](#manipulation-von-laufzeitprozessen-(t1565003))
 - [High-Fidelity-Phishing-Payload-Ausführung aus Kommunikations-Apps](#high-fidelity-phishing-payload-ausführung-aus-kommunikations-apps)
 - [High-Fidelity-Ausführung von Spearphishing-Anhängen](#high-fidelity-ausführung-von-spearphishing-anhängen)
@@ -8369,16 +8369,17 @@ Konzentriert sich auf Protokollschmuggel (its:, ms-its:) und verdächtige Dekomp
 
 
 ---
-## Ultra-Pro High-Fidelity-Prozessargument-Spoofing-Erkennung (T1564.010)
+## Erkennung von Prozessargument-Spoofing (T1564.010)
 - **ID:** `T1564_010.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [SCHTASKS.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt mögliches Spoofing von Prozessargumenten durch Identifizierung der Ausführung
-Nichtübereinstimmungen, bei denen sensible Interpreter (PowerShell, CMD) erzeugt werden
-mit leeren oder allgemeinen Argumenten nicht vertrauenswürdiger Eltern.
+- **Beschreibung:** Erkennt mögliches Spoofing von Prozessargumenten bei sensiblen Interpreten
+(PowerShell, CMD, WMIC, CertUtil, Svchost, SchTasks) werden mit leer erzeugt
+oder generische Argumente von nicht vertrauenswürdigen übergeordneten Prozessen, die auf eine Umgehung der Verteidigung hinweisen
+Techniken.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -8407,14 +8408,15 @@ Laden der Konfiguration und direkte Befehlsausführung in virtualisierten Umgebu
 ---
 ## Datenmanipulation (T1565)
 - **ID:** `T1565.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Datenmanipulation durch Überwachung der Stream-Bearbeitung,
-Protokolllöschung über CLI und unbefugte Änderungen an kritischen Systemen
-Dateien (Hosts, Ereignisprotokolle) von nicht standardmäßigen übergeordneten Prozessen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt unbefugte Manipulation gespeicherter oder übertragener Daten, einschließlich Stream-Bearbeitung,
+Protokolllöschung über CLI, SQL-/Datenbankaktualisierungen und Änderungen an kritischen Systemdateien
+(Hosts, Ereignisprotokolle, Systemkonfigurationen), die von nicht standardmäßigen übergeordneten Prozessen stammen.
+Deckt T1565.001 (Manipulation gespeicherter Daten) und T1565.002 (Manipulation übertragener Daten) ab.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -9128,7 +9130,7 @@ mit einem böswilligen aufgrund unsicherer Verzeichnisberechtigungen.
 
 
 ---
-## Exploit-Grade-KernelCallbackTable-Manipulation
+## Exploit-fähige KernelCallbackTable-Manipulation
 - **ID:** `T1574_013.yaml`
 - **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)

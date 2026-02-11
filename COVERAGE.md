@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-11 12:21:58`
+**Utolsó frissítés:** `2026-02-11 12:47:35`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -469,11 +469,11 @@
 | T1564.007 | HIGH | Ultra-Pro High-Fidelity VBA Macro Security Evasion (T1564.007) |
 | T1564.008 | CRITICAL | Ultra-Pro High-Fidelity Email Hiding Rules Detection (T1564.008) |
 | T1564.009 | HIGH | Ultra-Pro High-Fidelity Resource Extraction and Abuse (T1564.009) |
-| T1564.010 | HIGH | Ultra-Pro High-Fidelity Process Argument Spoofing Detection (T1564.010) |
-| T1564.011 | HIGH | Ultra-Pro High-Fidelity Virtual Instance Abuse (T1564.011) |
-| T1565 | CRITICAL | Ultra-Pro High-Fidelity Data Manipulation (T1565) |
-| T1565.001 | CRITICAL | Ultra-Pro High-Fidelity Stored Data Manipulation (T1565.001), Ultra-Pro High-Fidelity Data Manipulation (T1565) |
-| T1565.002 | CRITICAL | Ultra-Pro High-Fidelity Transmitted Data Manipulation (T1565.002), Ultra-Pro High-Fidelity Data Manipulation (T1565) |
+| T1564.010 | HIGH | Process Argument Spoofing Detection (T1564.010) |
+| T1564.011 | HIGH | Virtual Instance Abuse (T1564.011) |
+| T1565 | CRITICAL | Data Manipulation (T1565) |
+| T1565.001 | CRITICAL | Stored Data Manipulation (T1565.001), Data Manipulation (T1565) |
+| T1565.002 | CRITICAL | Transmitted Data Manipulation (T1565.002), Data Manipulation (T1565) |
 | T1565.003 | CRITICAL | Runtime Process Manipulation (T1565.003) |
 | T1566 | CRITICAL | High-Fidelity Phishing Payload Execution from Communication Apps |
 | T1566.001 | CRITICAL | High-Fidelity Spearphishing Attachment Execution |

@@ -8189,16 +8189,18 @@ folyamatok (héjak, oldalirányú mozgatási eszközök) és a „beleegyezés n
 
 
 ---
-## Ultra-Pro, nagy pontosságú műtermék-észlelés (T1564)
+## Műtermékek észlelésének elrejtése (T1564)
 - **ID:** `T1564.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a célzott műtermék-elrejtési technikákat, beleértve az NTFS alternatív adatfolyamokat (ADS),
-nyilvántartás alapú felhasználói fiókok elrejtése és gyanús fájlattribútum-manipuláció
-megbízhatatlan szülők kezdeményezték.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a célzott műtermék-elrejtési technikákat, beleértve:
+- NTFS alternatív adatfolyamok (ADS)
+- Registry alapú felhasználói fiókok elrejtése
+- Gyanús fájlattribútum-manipuláció
+Nem megbízható szülői folyamatok vagy a felhasználó által írható/nem szabványos útvonalak kezdeményezik.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

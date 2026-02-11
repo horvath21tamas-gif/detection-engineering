@@ -8189,16 +8189,18 @@ Prozesse (Shells, laterale Bewegungswerkzeuge) und „No-Consent“-Parameter.
 
 
 ---
-## Ultraprofessionelle High-Fidelity-Erkennung versteckter Artefakte (T1564)
+## Erkennung versteckter Artefakte (T1564)
 - **ID:** `T1564.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezielte Techniken zum Verstecken von Artefakten, einschließlich NTFS Alternative Data Streams (ADS),
-Registrierungsbasiertes Ausblenden von Benutzerkonten und verdächtige Manipulation von Dateiattributen
-initiiert von nicht vertrauenswürdigen Eltern.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt gezielte Techniken zum Verstecken von Artefakten, darunter:
+- NTFS Alternative Data Streams (ADS)
+- Registrierungsbasiertes Ausblenden von Benutzerkonten
+- Verdächtige Manipulation von Dateiattributen
+Initiiert von nicht vertrauenswürdigen übergeordneten Prozessen oder von vom Benutzer beschreibbaren/nicht standardmäßigen Pfaden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

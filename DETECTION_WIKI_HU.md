@@ -8693,16 +8693,18 @@ kapcsolat-ellenőrzések nem rendszerfolyamatokból.
 
 
 ---
-## Ultra-Pro High-Fidelity Domain Generation Algorithm (DGA) (T1568.002)
+## Domaingenerációs algoritmus (DGA) észlelése (T1568.002)
 - **ID:** `T1568_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a DGA tevékenységet a gyors, programozott DNS-feloldási kísérletek figyelésével,
-nagy entrópiájú tartományminták a parancssorokban, valamint a DNS-hibák elnyomása
-nem szabványos folyamatokból.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a programozott tartománygenerálási algoritmus (DGA) tevékenységét a következők figyelésével:
+1. Gyors DNS-feloldási kísérletek API-n vagy CLI-n keresztül
+2. Magas entrópiájú vagy gyanús tartományminták a parancssorban
+3. DNS-hibák elnyomása az észlelés elkerülése érdekében.
+Kiszűri a legális szoftvereket, a felhőautomatizálást és a belső infrastruktúra forgalmat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

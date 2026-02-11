@@ -8693,16 +8693,18 @@ Konnektivitätsprüfungen von Nicht-Systemprozessen.
 
 
 ---
-## Ultra-Pro High-Fidelity Domain Generation Algorithmus (DGA) (T1568.002)
+## Erkennung des Domänengenerierungsalgorithmus (DGA) (T1568.002)
 - **ID:** `T1568_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt DGA-Aktivität durch Überwachung auf schnelle, programmgesteuerte DNS-Auflösungsversuche.
-Domänenmuster mit hoher Entropie in Befehlszeilen und die Unterdrückung von DNS-Fehlern
-aus nicht standardmäßigen Prozessen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt programmatische DGA-Aktivitäten (Domain Generation Algorithm) durch Überwachung:
+1. Schnelle DNS-Auflösungsversuche über API oder CLI
+2. Hohe Entropie oder verdächtige Domänenmuster in Befehlszeilen
+3. Unterdrückung von DNS-Fehlern, um einer Erkennung zu entgehen.
+Filtert legitime Software, Cloud-Automatisierung und internen Infrastrukturverkehr heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

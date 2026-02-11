@@ -11056,14 +11056,15 @@ user contexts while filtering out authorized security research.
 
 
 ---
-## Ultra-Pro High-Fidelity Network Boundary Bridging (T1599)
+## Network Boundary Bridging (T1599)
 - **ID:** `T1599.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects unauthorized network boundary bridging. Specifically targets manual 
-creation of 'Any-to-Internal' NAT rules, port forwarding of sensitive ports, 
-and hardware-level bridging of isolated interfaces.
+- **Leírás:** Detects unauthorized network boundary bridging, including manual creation of
+"Any-to-Internal" NAT rules, port forwarding of sensitive services, and
+hardware-level bridging of isolated interfaces. Focuses on untrusted sources
+and manual session activity while filtering out legitimate management and VPN operations.
 
 
 #### 🚨 Response Playbook

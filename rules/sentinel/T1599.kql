@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (Message in ("*nat (inside,outside)*", "*static-nat*", "*set system bridge*", "*add bridge-group*", "*port-forwarding*", "*virtual-server*")) and (Message in ("*port 22*", "*port 3389*", "*port 445*", "*port 5985*", "*port 3306*")) and (Message in ("*web-console*", "*http-admin*", "*ssh-session*", "*local-user*")) and (not ((SourceIP in ("10.50.0.10", "10.50.0.11")) or (Message in ("*vpn-pool*", "*dynamic-pat*", "*ipsec-nat-t*"))))
+| where (Message in ("*nat (inside,outside)*", "*static-nat*", "*set system bridge*", "*add bridge-group*", "*port-forwarding*", "*virtual-server*", "*set nat source*", "*set vip*", "*set policy route*")) and (Message in ("*port 22*", "*port 3389*", "*port 445*", "*port 5985*", "*port 3306*", "*port 5432*", "*port 5900*")) and (Message in ("*web-console*", "*http-admin*", "*ssh-session*", "*local-user*", "*console*", "*telnet-session*")) and (not ((SourceIP in ("10.50.0.10", "10.50.0.11", "10.50.0.12")) or (Message in ("*vpn-pool*", "*dynamic-pat*", "*ipsec-nat-t*", "*ssl-vpn*"))))

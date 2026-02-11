@@ -10474,14 +10474,15 @@ felhasználói kontextusokat, miközben kiszűri az engedélyezett biztonsági k
 
 
 ---
-## Ultra-Pro High-Fidelity hálózati határáthidalás (T1599)
+## Hálózati határok áthidalása (T1599)
 - **ID:** `T1599.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a jogosulatlan hálózathatár-áthidalást.Kifejezetten a kézikönyvre irányul
-"Bármilyen belső" NAT-szabályok létrehozása, érzékeny portok port-továbbítása,
-és az izolált interfészek hardver szintű áthidalása.
+- **Leírás:** Érzékeli a jogosulatlan hálózati határáthidalást, beleértve a kézi létrehozást is
+"Bármilyen belső" NAT-szabályok, érzékeny szolgáltatások port-továbbítása és
+izolált interfészek hardver szintű áthidalása.Nem megbízható forrásokra összpontosít
+és a kézi munkamenet-tevékenység, miközben kiszűri a legitim felügyeleti és VPN-műveleteket.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

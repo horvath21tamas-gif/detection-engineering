@@ -10474,14 +10474,15 @@ Benutzerkontexte und filtern gleichzeitig autorisierte Sicherheitsrecherchen her
 
 
 ---
-## Ultra-Pro High-Fidelity-Netzwerk-Boundary-Bridging (T1599)
+## Netzwerkgrenzenüberbrückung (T1599)
 - **ID:** `T1599.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt nicht autorisierte Netzwerkgrenzenüberbrückung.Speziell auf das Handbuch ausgerichtet
-Erstellung von „Any-to-Internal“-NAT-Regeln, Portweiterleitung sensibler Ports,
-und Überbrückung isolierter Schnittstellen auf Hardwareebene.
+- **Beschreibung:** Erkennt unbefugtes Überbrücken von Netzwerkgrenzen, einschließlich der manuellen Erstellung
+„Any-to-Internal“-NAT-Regeln, Portweiterleitung sensibler Dienste und
+Überbrückung isolierter Schnittstellen auf Hardwareebene.Konzentriert sich auf nicht vertrauenswürdige Quellen
+und manuelle Sitzungsaktivitäten, während legitime Verwaltungs- und VPN-Vorgänge herausgefiltert werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

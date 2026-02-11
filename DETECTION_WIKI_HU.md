@@ -10588,12 +10588,13 @@ A fájlrendszer újracsatlakoztatására (írás-olvasás), bináris manipuláci
 ---
 ## Ultra-Pro High-Fidelity rosszindulatú hálózati operációs rendszer frissítése (T1601.002)
 - **ID:** `T1601_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Korrelációval észleli a jogosulatlan vagy rosszindulatú hálózati operációs rendszer frissítéseket
-frissítési parancsok nem biztonságos protokollokkal, nem megbízható forrásokkal, ill
-kriptográfiai aláírási hibák.
+- **Leírás:** A frissítés korrelációjával észleli a jogosulatlan vagy rosszindulatú hálózati operációs rendszer frissítéseket
+parancsok nem biztonságos protokollokkal, nem megbízható forrásokkal vagy kriptográfiai aláírási hibákkal.
+A FortiOS naplókra összpontosít, de más hálózati eszközökhöz is illeszthető.Kiszűri
+megbízható források és biztonságos csatornák a téves pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

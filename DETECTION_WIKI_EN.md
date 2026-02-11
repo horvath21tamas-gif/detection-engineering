@@ -11177,12 +11177,13 @@ and kernel module loading (insmod) outside of authorized maintenance.
 ---
 ## Ultra-Pro High-Fidelity Malicious Network OS Upgrade (T1601.002)
 - **ID:** `T1601_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects unauthorized or malicious network OS upgrades by correlating 
-upgrade commands with insecure protocols, untrusted sources, or 
-cryptographic signature failures.
+- **Leírás:** Detects unauthorized or malicious network OS upgrades by correlating upgrade 
+commands with insecure protocols, untrusted sources, or cryptographic signature failures.
+Focuses on FortiOS logs but can be adapted to other network appliances. Filters out 
+trusted sources and secure channels to reduce false positives.
 
 
 #### 🚨 Response Playbook

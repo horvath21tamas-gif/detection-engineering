@@ -10588,12 +10588,13 @@ und das Laden von Kernelmodulen (insmod) außerhalb der autorisierten Wartung.
 ---
 ## Ultra-Pro High-Fidelity-Upgrade für bösartige Netzwerk-Betriebssysteme (T1601.002)
 - **ID:** `T1601_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt nicht autorisierte oder böswillige Netzwerk-Betriebssystem-Upgrades durch Korrelation
-Upgrade-Befehle mit unsicheren Protokollen, nicht vertrauenswürdigen Quellen oder
-kryptografische Signaturfehler.
+- **Beschreibung:** Erkennt nicht autorisierte oder böswillige Netzwerk-Betriebssystem-Upgrades durch Korrelation der Upgrades
+Befehle mit unsicheren Protokollen, nicht vertrauenswürdigen Quellen oder kryptografischen Signaturfehlern.
+Konzentriert sich auf FortiOS-Protokolle, kann aber an andere Netzwerkgeräte angepasst werden.Filtert heraus
+vertrauenswürdige Quellen und sichere Kanäle, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

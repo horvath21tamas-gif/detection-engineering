@@ -4306,7 +4306,7 @@ nem szabványos folyamatokból ered, vagy gyanús fájlhelyekre mutat.
 - **Becsült zajszint:** Magas (Tárolás-igényes)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Microsoft Office globális sablonok (Normal.dotm / NormalEmail.dotm) nem Office folyamatok általi vagy gyanús végrehajtási útvonalak általi nagy kockázatú módosítását vagy létrehozását.Ez makroalapú perzisztenciára utalhat (MITRE ATT&CK T1137.001).
+- **Leírás:** Érzékeli a Microsoft Office globális sablonok (Normal.dotm / NormalEmail.dotm) nem Office folyamatok vagy gyanús végrehajtási útvonalak általi nagy kockázatú módosítását vagy létrehozását.Ez makroalapú perzisztenciára utalhat (MITRE ATT&CK T1137.001).
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -10983,16 +10983,14 @@ Nem tartalmazza a magas megbízhatóságú biztonsági mentési és ETL-szolgál
 
 
 ---
-## Ultra-Pro High-Fidelity fényvisszaverő kódbetöltés (T1620)
+## Nagy pontosságú tükröző kód betöltése és a memóriába épített összeállítás végrehajtása
 - **ID:** `T1620.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a tükröző kódbetöltést azáltal, hogy azonosítja a konkrét kombinációt
-memóriafoglalási API-k, végrehajtható memóriajelzők és .NET-összeállítás betöltése
-módszerek egyetlen folyamatkörnyezeten belül.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/), [DOTNET.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a tükröző kódbetöltést és a memórián belüli összeállítás végrehajtását a memóriafoglalás végrehajtási jelzőkkel, a folyamatmemória írásaival és a .NET tükrözési összeállítás betöltési mintákkal kombinált megfigyelésével.Szűri a jogos fejlesztési és CI/CD folyamatokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -11149,7 +11147,7 @@ szülőfolyamatok, például a PowerShell vagy a CMD, miközben szűrik a jogos 
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Windows eseménynaplóinak gyanús felsorolását natív segédprogramok (wevtutil) vagy PowerShell-parancsmagok (Get-WinEvent, Get-EventLog) használatával rendellenes végrehajtási környezetekből.A naplócsatorna-felderítésre és a metaadatgyűjtésre összpontosít, amely potenciálisan a biztonsági eszközök azonosítására vagy az észlelés elkerülésére használható.
+- **Leírás:** Érzékeli a Windows eseménynaplóinak gyanús felsorolását natív segédprogramok (wevtutil) vagy PowerShell-parancsmagok (Get-WinEvent, Get-EventLog) segítségével rendellenes végrehajtási környezetekből.A naplócsatorna-felderítésre és a metaadatgyűjtésre összpontosít, amely potenciálisan a biztonsági eszközök azonosítására vagy az észlelés elkerülésére használható.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

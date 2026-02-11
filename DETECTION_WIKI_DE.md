@@ -10983,16 +10983,14 @@ Ausgeschlossen sind hochvertrauenswürdige Backup- und ETL-Dienstkonten.
 
 
 ---
-## Ultra-Pro High-Fidelity-reflektierendes Laden von Codes (T1620)
+## High-Fidelity-Reflective-Code-Laden und In-Memory-Assembly-Ausführung
 - **ID:** `T1620.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt das Laden von reflektierendem Code durch Identifizieren der spezifischen Kombination von
-Speicherzuweisungs-APIs, ausführbare Speicherflags und Laden von .NET-Assemblys
-Methoden innerhalb eines einzelnen Prozesskontexts.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/), [DOTNET.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt das Laden von reflektierendem Code und die Ausführung von Assemblys im Arbeitsspeicher durch Überwachung der Speicherzuweisung mit Ausführungsflags, Schreibvorgängen im Prozessspeicher und Lademustern für .NET-Reflection-Assemblys in Kombination.Filtert legitime Entwicklungs- und CI/CD-Prozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

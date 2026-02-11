@@ -11595,16 +11595,14 @@ Excludes high-trust backup and ETL service accounts.
 
 
 ---
-## Ultra-Pro High-Fidelity Reflective Code Loading (T1620)
+## High-Fidelity Reflective Code Loading and In-Memory Assembly Execution
 - **ID:** `T1620.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects reflective code loading by identifying the specific combination of 
-memory allocation APIs, executable memory flags, and .NET assembly loading 
-methods within a single process context.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/), [DOTNET.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects reflective code loading and in-memory assembly execution by monitoring  memory allocation with execution flags, process memory writes, and .NET reflection  assembly loading patterns in combination. Filters legitimate development and CI/CD processes.
 
 
 #### 🚨 Response Playbook

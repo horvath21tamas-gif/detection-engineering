@@ -10694,12 +10694,15 @@ legitimes Browser- und Electron-Anwendungsverhalten.
 ---
 ## Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002)
 - **ID:** `T1606_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt unbefugte Fälschungen von Web-Tokens (SAML, OAuth) durch Überwachung
-verdächtiger Zugriff auf IDP-Signaturschlüssel, AD FS-Datenbankextraktion und
-die Verwendung spezialisierter Cloud-nativer Fälschungs-Frameworks wie Roadtools und AADInternals.
+
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt nicht autorisierte Web-Token-Fälschungsaktivitäten (Golden SAML-/OAuth-Token-Missbrauch)
+durch Korrelation der AD FS-Konfigurationsextraktion, des Signierens von Zertifikatmissbrauch,
+DPAPI-Masterkey-Zugriff und Cloud-Token-Manipulations-Frameworks werden ausgeführt
+außerhalb des legitimen Identitätsanbieter-Dienstkontexts.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

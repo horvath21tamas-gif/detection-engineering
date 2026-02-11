@@ -11289,12 +11289,15 @@ legitimate browser and Electron application behavior.
 ---
 ## Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002)
 - **ID:** `T1606_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects unauthorized forging of web tokens (SAML, OAuth) by monitoring 
-suspicious access to IDP signing keys, AD FS database extraction, and 
-the use of specialized cloud-native forgery frameworks like Roadtools and AADInternals.
+
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects unauthorized web token forging activities (Golden SAML / OAuth token abuse) 
+by correlating AD FS configuration extraction, signing certificate abuse, 
+DPAPI masterkey access, and cloud token manipulation frameworks executed 
+outside legitimate Identity Provider service context.
 
 
 #### 🚨 Response Playbook

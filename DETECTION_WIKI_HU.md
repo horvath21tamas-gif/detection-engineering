@@ -10694,12 +10694,15 @@ törvényes böngésző és Electron alkalmazások viselkedése.
 ---
 ## Ultra-Pro High-Fidelity webes token hamisítás és Golden SAML (T1606.002)
 - **ID:** `T1606_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Figyeléssel észleli a webes tokenek (SAML, OAuth) jogosulatlan hamisítását
-gyanús hozzáférés az IDP-aláíró kulcsokhoz, az AD FS-adatbázis kibontásához és
-speciális felhőalapú hamisítási keretrendszerek, például Roadtools és AADInternals használata.
+
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a jogosulatlan webes token-hamisítási tevékenységeket (Golden SAML / OAuth token visszaélés)
+az AD FS-konfiguráció kibontásával, a tanúsítvánnyal való visszaélés aláírásával,
+DPAPI főkulcs-hozzáférés és felhőjogkivonat-manipulációs keretrendszerek végrehajtva
+legitim Identity Provider szolgáltatási környezeten kívül.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

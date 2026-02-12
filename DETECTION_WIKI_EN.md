@@ -8422,15 +8422,15 @@ from destroying disk structures.
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects high-confidence attempts to disable or impair Windows Event Logging.
+- **Leírás:** Detects high-confidence attempts to disable, stop, or impair Windows Event Logging.
 
 Coverage includes:
-  - wevtutil channel disabling
-  - EventLog service stop/disable attempts
-  - Registry-based channel or service modification
-  - Service dependency tampering
+  - wevtutil channel disabling or log clearing
+  - EventLog service stop/disable attempts (sc, net, PowerShell)
+  - Registry-based service or channel modification
+  - Service dependency tampering (DependOnService)
 
-Designed to reduce false positives in enterprise environments.
+Aligned with MITRE ATT&CK T1562.002.
 
 
 #### 🚨 Response Playbook

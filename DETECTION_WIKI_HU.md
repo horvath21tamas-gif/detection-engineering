@@ -7994,15 +7994,15 @@ a lemezszerkezetek tönkretételétől.
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a nagy megbízhatóságú kísérleteket a Windows eseménynaplózás letiltására vagy rontására.
+- **Leírás:** Érzékeli a nagy megbízhatóságú kísérleteket a Windows eseménynaplózás letiltására, leállítására vagy rontására.
 
 A fedezet a következőket tartalmazza:
-- wevtutil csatorna letiltása
-- Az EventLog szolgáltatás leállítási/letiltási kísérletei
-- Registry alapú csatorna vagy szolgáltatás módosítása
-- Szolgáltatásfüggőség manipulálása
+- wevtutil csatorna letiltása vagy napló törlése
+- Az EventLog szolgáltatás leállítási/letiltási kísérletei (sc, net, PowerShell)
+- Registry alapú szolgáltatás vagy csatorna módosítás
+- Szolgáltatásfüggőség manipulálása (DependOnService)
 
-Úgy tervezték, hogy csökkentse a téves pozitív eredményeket vállalati környezetben.
+A MITER ATT&CK T1562.002 szabványhoz igazítva.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

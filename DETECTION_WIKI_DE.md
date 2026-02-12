@@ -7994,15 +7994,15 @@ vor der Zerstörung von Scheibenstrukturen.
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt hochzuverlässige Versuche, die Windows-Ereignisprotokollierung zu deaktivieren oder zu beeinträchtigen.
+- **Beschreibung:** Erkennt hochzuverlässige Versuche, die Windows-Ereignisprotokollierung zu deaktivieren, zu stoppen oder zu beeinträchtigen.
 
 Der Versicherungsschutz umfasst:
-- Deaktivierung des Wevtutil-Kanals
-- Stopp-/Deaktivierungsversuche des EventLog-Dienstes
-- Registrierungsbasierte Kanal- oder Dienständerung
-- Manipulation der Dienstabhängigkeit
+- Deaktivieren des Wevtutil-Kanals oder Löschen des Protokolls
+- Stopp-/Deaktivierungsversuche des EventLog-Dienstes (sc, net, PowerShell)
+- Registrierungsbasierte Dienst- oder Kanaländerung
+- Manipulation der Dienstabhängigkeit (DependOnService)
 
-Entwickelt, um Fehlalarme in Unternehmensumgebungen zu reduzieren.
+Ausgerichtet auf MITRE ATT&CK T1562.002.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

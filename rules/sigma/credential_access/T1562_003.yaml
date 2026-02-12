@@ -2,19 +2,20 @@ title: Command History Logging Impairment
 id: c411146e-ff5f-4a6a-b918-2679122b822b
 status: stable
 description: |
-    Detects high-confidence attempts to suppress or tamper with interactive
-    command history logging on Windows systems.
+    Detects high-confidence attempts to suppress, redirect, or tamper with
+    interactive command history logging on Windows systems.
 
-    Focuses on:
-      - PowerShell PSReadLine abuse (SaveNothing, HistorySavePath redirection)
-      - History file deletion (ConsoleHost_history.txt, bash history)
-      - Registry-based console buffer suppression
-      - Encoded PowerShell attempts to modify logging behavior
+    Detection coverage includes:
 
-    Aligned with MITRE ATT&CK T1562.003.
+      - PowerShell PSReadLine logging suppression (SaveNothing, HistorySavePath abuse)
+      - History file deletion (ConsoleHost_history.txt, PSReadLine folder, bash history)
+      - Registry-based console history buffer suppression
+      - Encoded PowerShell modifying history behavior
+
+    Aligned with MITRE ATT&CK T1562.003 (Impair Command History Logging).
 
 author: hota05
-date: 2026-02-11
+date: 2026-02-12
 tags:
     - attack.defense_evasion
     - attack.t1562.003
@@ -25,7 +26,6 @@ logsource:
     category: process_creation
 
 detection:
-
     selection_psreadline_core:
         Image|endswith:
             - '\powershell.exe'
@@ -33,31 +33,36 @@ detection:
         CommandLine|contains:
             - 'Set-PSReadLineOption'
 
-    selection_psreadline_disable:
+    selection_psreadline_impairment:
         CommandLine|contains:
             - 'SaveNothing'
-            - 'AddToHistoryHandler'
             - 'HistorySavePath'
-            - 'HistoryNoDuplicates'
+            - 'AddToHistoryHandler'
         CommandLine|contains:
             - '$false'
             - '$null'
             - '""'
             - '/dev/null'
 
-    selection_psreadline_encoded:
+    selection_ps_encoded:
         Image|endswith:
             - '\powershell.exe'
             - '\pwsh.exe'
         CommandLine|contains:
-            - '-enc'
+            - '-enc '
             - '-EncodedCommand'
 
+    selection_history_keywords:
+        CommandLine|contains:
+            - 'PSReadLine'
+            - 'ConsoleHost_history'
+            - 'HistorySavePath'
+            - 'SaveNothing'
+
     selection_registry_console_history:
-        Image|endswith:
-            - '\reg.exe'
+        Image|endswith: '\reg.exe'
         CommandLine|contains|all:
-            - 'add'
+            - ' add '
             - 'HKCU\Software\Microsoft\Windows\CurrentVersion\Console'
             - 'HistoryBufferSize'
         CommandLine|contains:
@@ -66,13 +71,13 @@ detection:
 
     selection_history_delete:
         CommandLine|contains:
-            - 'Remove-Item'
+            - 'Remove-Item '
             - 'del '
             - 'erase '
             - 'rm '
         CommandLine|contains:
             - '\ConsoleHost_history.txt'
-            - '\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\'
+            - '\PSReadLine\'
             - '\.bash_history'
 
     selection_suspicious_parent:
@@ -89,23 +94,27 @@ detection:
             - '\Common7\IDE\devenv.exe'
             - '\Microsoft VS Code\Code.exe'
             - '\JetBrains\'
-    
+
     filter_system_context:
         User|startswith: 'NT AUTHORITY'
         ParentImage|endswith: '\services.exe'
 
-    filter_temp_installers:
+    filter_software_distribution:
         CommandLine|contains:
-            - 'AppData\Local\Temp\SDI'
             - 'Chocolatey'
             - 'SCCM'
+            - 'Intune'
+            - 'AppData\Local\Temp\SDI'
 
-    condition: ((selection_psreadline_core and selection_psreadline_disable)
-                 or selection_psreadline_encoded
-                 or selection_registry_console_history
-                 or selection_history_delete)
-               and
-               (selection_suspicious_parent
-                    or not (filter_dev_tools or filter_system_context or filter_temp_installers))
+    condition: (
+                    (selection_psreadline_core and selection_psreadline_impairment)
+                    or (selection_ps_encoded and selection_history_keywords)
+                    or selection_registry_console_history
+                    or selection_history_delete
+               )
+               and selection_suspicious_parent
+               and not filter_dev_tools
+               and not filter_system_context
+               and not filter_software_distribution
 
 level: high

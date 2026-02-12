@@ -1,35 +1,41 @@
-title: Ultra-Pro High-Fidelity ARP Poisoning Detection (T1557.002)
+title: Rogue ARP Poisoning / MITM Detection (T1557.002)
 id: 866a7485-96f3-4b6b-bc59-771a1307581c
 status: stable
-description: |
-    Detects unauthorized ARP poisoning attempts by monitoring for IP Forwarding 
-    enablement and the execution of packet manipulation tools from untrusted 
-    locations, specifically filtering out virtualization and VPN noise.
-author: hota05
-date: 2026-02-04
+description: >
+    Detects potential ARP poisoning or MITM attempts (MITRE ATT&CK T1557.002) by monitoring 
+    IP forwarding enablement and suspicious packet manipulation tools executed from untrusted locations.
+    Filters out legitimate virtualization, VPN, and network diagnostic activity to reduce false positives.
+author: hota05 
+date: 2026-02-12
+references:
+    - https://attack.mitre.org/techniques/T1557/002/
 tags:
     - attack.credential_access
+    - attack.collection
     - attack.t1557.002
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_ip_forwarding:
         Image|endswith: '\reg.exe'
-        CommandLine|contains: 
+        CommandLine|contains:
             - 'Services\Tcpip\Parameters'
             - 'IPEnableRouter'
-        CommandLine|contains: '1' 
+        CommandLine|contains: '1'
 
     selection_attack_tools:
         CommandLine|contains:
             - 'arpspoof'
             - 'bettercap'
             - 'ettercap'
-            - ' -i '           
-            - ' -t '         
-            - ' -m arp'        
-            - '.sniff'      
+            - 'mitm6'
+            - 'Inveigh'
+            - ' -i '
+            - ' -t '
+            - ' -m arp'
+            - '.sniff'
 
     selection_suspicious_actor:
         Image|contains:
@@ -42,11 +48,19 @@ detection:
             - '\python.exe'
             - '\pythonw.exe'
             - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+
+    selection_non_system_user:
+        User|startswith: 'NT AUTHORITY\'|false
 
     filter_virtualization:
-        ParentImage|contains:
-            - '\Program Files\VMware\'
-            - '\Program Files\Oracle\VirtualBox\'
+        ParentImage|startswith:
+            - 'C:\Program Files\VMware\'
+            - 'C:\Program Files (x86)\VMware\'
+            - 'C:\Program Files\Oracle\VirtualBox\'
+            - 'C:\Program Files\Docker\'
+            - 'C:\Program Files\Microsoft\Hyper-V\'
         username: 'NT AUTHORITY\SYSTEM'
 
     filter_vpn_and_diag:
@@ -55,6 +69,24 @@ detection:
             - '\Program Files\Cisco\'
             - '\System32\nbtstat.exe'
             - '\System32\pathping.exe'
+            - '\Program Files\OpenVPN\'
 
-    condition: (selection_ip_forwarding or selection_attack_tools) and selection_suspicious_actor and not (filter_virtualization or filter_vpn_and_diag)
+    condition:
+        (
+            selection_ip_forwarding
+            or selection_attack_tools
+        )
+        and selection_suspicious_actor
+        and selection_non_system_user
+        and not (
+            filter_virtualization
+            or filter_vpn_and_diag
+        )
+
+falsepositives:
+    - Network lab environments
+    - Red team / penetration testing
+    - Security training / simulations
+    - Developers experimenting with packet capture / manipulation
+
 level: high

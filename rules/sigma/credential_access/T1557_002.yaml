@@ -52,7 +52,7 @@ detection:
             - '\cmd.exe'
 
     selection_non_system_user:
-        User|startswith: 'NT AUTHORITY\'|false
+        User|startswith: 'NT AUTHORITY\'
 
     filter_virtualization:
         ParentImage|startswith:

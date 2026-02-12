@@ -1,18 +1,21 @@
-title: Ultra-Pro High-Fidelity Securityd Memory Dumping (T1555.002)
+title: Securityd Memory Dumping Detection (T1555.002)
 id: 7cfc3314-933d-47ce-8741-d228dada9398
 status: stable
-description: |
-    Detects unauthorized attempts to dump or read the memory of the 'securityd' process. 
-    It focuses on non-standard debugger usage and memory mapping tools targeting 
-    securityd, while strictly filtering Apple-signed diagnostic utilities.
-author: hota05
-date: 2026-02-04
+description: >
+    Detects unauthorized attempts to access or dump memory of the 'securityd' process
+    or keychain database on macOS. Monitors suspicious debugger and memory tools usage
+    while filtering legitimate Apple-signed diagnostic utilities and Xcode development tools.
+author: hota05 
+date: 2026-02-12
+references:
+    - https://attack.mitre.org/techniques/T1555/002/
 tags:
     - attack.credential_access
     - attack.t1555.002
 logsource:
     category: process_creation
     product: macos
+
 detection:
     selection_target:
         CommandLine|contains:
@@ -21,15 +24,18 @@ detection:
 
     selection_methods:
         - Image|endswith:
-            - '/lldb'         
-            - '/gcore'        
-            - '/vmmap'        
-            - '/heap'         
+            - '/lldb'
+            - '/gcore'
+            - '/vmmap'
+            - '/heap'
+            - '/frida-server'
         - CommandLine|contains:
-            - 'attach'         
-            - 'memory read'    
+            - 'attach'
+            - 'memory read'
             - 'dump'
             - 'save'
+            - '--pid'
+            - '-p'
 
     selection_untrusted_location:
         Image|contains:
@@ -37,15 +43,31 @@ detection:
             - '/tmp/'
             - '/var/tmp/'
             - '/Library/Caches/'
+        Image|endswith:
+            - '/python3'
+            - '/python'
+            - '/ruby'
+            - '/node'
 
     filter_apple_diagnostics:
         ParentImage|endswith:
             - '/usr/bin/sysdiagnose'
             - '/usr/libexec/periodic-wrapper'
             - '/System/Library/CoreServices/ReportCrash'
-    
+            - '/usr/bin/spindump'
+
     filter_xcode_dev:
         ParentImage|contains: '/Applications/Xcode.app/'
 
-    condition: selection_target and (selection_methods or selection_untrusted_location) and not filter_apple_diagnostics
+    condition:
+        selection_target
+        and (selection_methods or selection_untrusted_location)
+        and not (filter_apple_diagnostics or filter_xcode_dev)
+
+falsepositives:
+    - Legitimate Apple diagnostic memory dumps
+    - Xcode or other developer tools debugging local processes
+    - Security auditing using LLDB, gcore, or vmmap in dev/test environments
+    - Automated testing frameworks accessing securityd for debugging purposes
+
 level: critical

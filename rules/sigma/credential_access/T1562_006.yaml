@@ -2,15 +2,17 @@ title: Indicator Blocking and Telemetry Suppression
 id: 07df976e-9e5c-4481-961b-eeb5f8ad03a0
 status: stable
 description: |
-    Detects high-confidence attempts to disable or degrade Windows security telemetry by:
-      - Stopping ETW providers or system trace sessions
+    Detects high-confidence attempts to disable, suppress, or interfere with Windows
+    security telemetry and monitoring pipelines, including:
+
+      - Stopping or deleting ETW trace sessions
       - Disabling or modifying Windows Event Forwarding (WEF)
-      - Creating firewall rules to block outbound security telemetry (EDR/AV over HTTPS)
+      - Creating outbound firewall rules to block security telemetry (EDR/AV over HTTPS)
 
-    Focuses on defense evasion patterns aligned to MITRE ATT&CK T1562.006.
+    Focuses on defense evasion aligned to MITRE ATT&CK T1562.006.
 
-author: hota05 
-date: 2026-02-11
+author: hota05
+date: 2026-02-12
 tags:
     - attack.defense_evasion
     - attack.t1562.006
@@ -25,7 +27,7 @@ detection:
     selection_etw_stop_trace:
         Image|endswith: '\logman.exe'
         CommandLine|contains|all:
-            - 'stop'
+            - ' stop '
         CommandLine|contains:
             - 'EventLog-System'
             - 'EventLog-Security'
@@ -34,73 +36,89 @@ detection:
             - 'NT Kernel Logger'
             - 'Circular Kernel Context Logger'
 
-    selection_etw_delete:
+    selection_etw_delete_trace:
         Image|endswith: '\logman.exe'
         CommandLine|contains|all:
-            - 'delete'
+            - ' delete '
         CommandLine|contains:
             - 'EventLog'
             - 'Kernel'
+            - 'trace'
 
     selection_wef_disable:
         Image|endswith: '\wecutil.exe'
-        CommandLine|contains|all:
+        CommandLine|contains:
             - ' /e:false'
 
-    selection_wef_delete_sub:
+    selection_wef_delete_subscription:
         Image|endswith: '\wecutil.exe'
-        CommandLine|contains:
-            - ' ds '
-
-    selection_firewall_block_rule:
-        Image|endswith:
-            - '\netsh.exe'
-            - '\powershell.exe'
         CommandLine|contains|all:
-            - 'firewall'
+            - ' ds '
+            - 'Subscription'
+    selection_netsh_firewall_block:
+        Image|endswith: '\netsh.exe'
+        CommandLine|contains|all:
+            - 'advfirewall'
             - 'add rule'
             - 'block'
             - 'remoteport=443'
         CommandLine|contains:
             - 'remoteip='
-            - 'security'
             - 'defender'
+            - 'security'
+            - 'edr'
+            - 'telemetry'
             - 'crowdstrike'
             - 'sentinel'
             - 'carbonblack'
+
+    selection_ps_firewall_block:
+        Image|endswith: '\powershell.exe'
+        CommandLine|contains|all:
+            - 'New-NetFirewallRule'
+            - '-Action Block'
+            - '-Direction Outbound'
+        CommandLine|contains:
+            - '443'
+            - 'defender'
+            - 'security'
             - 'edr'
             - 'telemetry'
-
+            - 'crowdstrike'
+            - 'sentinel'
+            - 'carbonblack'
     selection_suspicious_parent:
         ParentImage|endswith:
             - '\winword.exe'
             - '\excel.exe'
             - '\outlook.exe'
             - '\w3wp.exe'
-            - '\powershell.exe'
-            - '\cmd.exe'
             - '\rundll32.exe'
-
-    filter_legitimate_agents:
+            - '\mshta.exe'
+    filter_legitimate_monitoring_agents:
         CommandLine|contains:
             - 'Microsoft Monitoring Agent'
             - 'SplunkUniversalForwarder'
             - 'AzureMonitorAgent'
             - 'Elastic Agent'
+            - 'SCOM'
+            - 'Defender for Endpoint'
             - 'Docker'
 
-    filter_system_service:
+    filter_system_context:
         User|startswith: 'NT AUTHORITY'
         ParentImage|endswith: '\services.exe'
 
-
-    condition: (selection_etw_stop_trace
-                 or selection_etw_delete
-                 or selection_wef_disable
-                 or selection_wef_delete_sub
-                 or selection_firewall_block_rule)
-               and
-               (selection_suspicious_parent
-                    or not (filter_legitimate_agents or filter_system_service))
+    condition: (
+                    selection_etw_stop_trace
+                    or selection_etw_delete_trace
+                    or selection_wef_disable
+                    or selection_wef_delete_subscription
+                    or selection_netsh_firewall_block
+                    or selection_ps_firewall_block
+               )
+               and not filter_legitimate_monitoring_agents
+               and not filter_system_context
+               and selection_suspicious_parent
 
 level: critical

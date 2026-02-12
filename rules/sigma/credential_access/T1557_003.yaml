@@ -1,37 +1,50 @@
-title: Ultra-Pro High-Fidelity DHCP Spoofing Detection (T1557.003)
+title: Rogue DHCP / DHCP Spoofing Detection (T1557.003)
 id: 96fca3e3-00fe-405a-aaaa-022082e5b85f
 status: stable
-description: |
-    Detects unauthorized DHCP spoofing attempts by identifying processes attempting to act 
-    as a rogue DHCP server. It specifically looks for gateway/DNS hijack arguments 
-    combined with untrusted process locations and non-system users.
-author: hota05
-date: 2026-02-04
+description: >
+    Detects potential rogue DHCP server activity indicative of DHCP spoofing (MITRE ATT&CK T1557.003).
+    The rule identifies suspicious processes attempting to launch DHCP-related services
+    with gateway/DNS manipulation arguments from non-standard locations and non-system users.
+    Designed to reduce false positives by filtering legitimate virtualization and native DHCP services.
+author: hota05 
+date: 2026-02-12
+references:
+    - https://attack.mitre.org/techniques/T1557/003/
 tags:
     - attack.credential_access
+    - attack.collection
     - attack.t1557.003
 logsource:
     category: process_creation
     product: windows
-detection:
-    selection_cmd_args:
-        CommandLine|contains:
-            - ' --dns '       
-            - ' --gateway '
-            - ' --lease '   
-            - ' -d '         
-            - 'spoof'
-            - 'rogue'
 
-    selection_tools:
-        - Image|endswith:
-            - '\python.exe'  
-            - '\pythonw.exe'
-            - '\powershell.exe'
-        - CommandLine|contains:
+detection:
+
+    selection_dhcp_arguments:
+        CommandLine|contains:
+            - '--dns'
+            - '--gateway'
+            - '--lease'
+            - '--dhcp'
+            - 'dhcp-server'
+            - 'rogue'
+            - 'spoof'
+
+    selection_offensive_tools:
+        CommandLine|contains:
             - 'Responder'
             - 'bettercap'
             - 'ettercap'
+            - 'Inveigh'
+            - 'mitm6'
+
+    selection_interpreters:
+        Image|endswith:
+            - '\python.exe'
+            - '\pythonw.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
 
     selection_untrusted_location:
         Image|contains:
@@ -41,16 +54,47 @@ detection:
             - '\Downloads\'
             - '\Public\'
 
+    selection_non_system_user:
+        User|startswith: 'NT AUTHORITY\'|false
+
     filter_virtualization:
-        Image|contains:
-            - '\Program Files\VMware\'
-            - '\Program Files\Oracle\VirtualBox\'
-            - '\Program Files\Docker\'
-        username: 'NT AUTHORITY\SYSTEM'
+        Image|startswith:
+            - 'C:\Program Files\VMware\'
+            - 'C:\Program Files (x86)\VMware\'
+            - 'C:\Program Files\Oracle\VirtualBox\'
+            - 'C:\Program Files\Docker\'
+            - 'C:\Program Files\Microsoft\Hyper-V\'
 
     filter_native_dhcp_server:
         Image|endswith: '\System32\svchost.exe'
         CommandLine|contains: 'dhcpssvc'
 
-    condition: (selection_cmd_args or selection_tools) and selection_untrusted_location and not (filter_virtualization or filter_native_dhcp_server)
+    filter_legitimate_admin_tools:
+        Image|contains:
+            - '\Program Files\Microsoft Configuration Manager\'
+            - '\Program Files\Wireshark\'
+            - '\Program Files\nmap\'
+
+    condition: 
+        (
+            (
+                selection_dhcp_arguments and selection_interpreters
+            )
+            or
+            selection_offensive_tools
+        )
+        and selection_untrusted_location
+        and selection_non_system_user
+        and not (
+            filter_virtualization
+            or filter_native_dhcp_server
+            or filter_legitimate_admin_tools
+        )
+
+falsepositives:
+    - Security testing / red team activity
+    - Authorized penetration testing tools
+    - Network lab environments
+    - Developer testing environments
+
 level: critical

@@ -7917,15 +7917,19 @@ Monitore:
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt zerstörerisches Löschen von Festplatteninhalten auf niedriger Ebene über direkten Gerätezugriff
-und destruktive Überschreibparameter.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochzuverlässige destruktive Datenträgerlöschaktivitäten über
+Rohgerätezugriff oder destruktive Überschreibvorgänge.
 
-Konzentriert sich auf:
-- Roher physischer Festplattenzugriff (PhysicalDrive, Festplatte)
-- Mit Nullen oder Zufallsdaten überschreiben
-- PowerShell/Cmd-zerstörerische Festplattenbefehle
-– Ausgenommen sind bekanntermaßen funktionierende Verwaltungs-, Imaging- und Sicherheitstools
+Der Versicherungsschutz umfasst:
+
+- Direkter Raw-Disk-Zugriff (\\.\PhysicalDrive, \\.\Harddisk)
+- Überschreiben mit null/zufälligen Datenströmen
+- Sicheres Löschen mit mehreren Durchgängen löschen
+- Zerstörerische Datenträgerbereinigung durch PowerShell
+– Verdächtiger Ausführungskontext (Makro, Webshell, temporäre Ausführung)
+
+Konzentriert sich auf Angriffsaktivitäten im Ransomware-Stil (T1561.001).
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

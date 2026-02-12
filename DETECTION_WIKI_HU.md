@@ -7917,15 +7917,19 @@ Monitorok:
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a romboló, alacsony szintű lemeztartalom törlését az eszköz közvetlen elérése révén
-és destruktív felülírási paraméterek.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a nagy megbízhatóságú romboló lemeztörlési tevékenységet ezen keresztül
+nyers eszköz hozzáférés vagy destruktív felülírási műveletek.
 
-A következőkre összpontosít:
-- Nyers fizikai lemez hozzáférés (PhysicalDrive, merevlemez)
-- Felülírás nullákkal vagy véletlenszerű adatokkal
-- PowerShell/Cmd romboló lemezparancsok
-- Nem tartalmazza az ismert jó adminisztrációs, képalkotó és biztonsági eszközöket
+A fedezet a következőket tartalmazza:
+
+- Közvetlen nyers lemez hozzáférés (\\.\PhysicalDrive, \\.\Harddisk)
+- Felülírás nulla/véletlen adatfolyamokkal
+- STörölje a biztonságos törlést több lépéssel
+- PowerShell romboló lemeztörlés
+- Gyanús végrehajtási környezet (makró, webshell, ideiglenes végrehajtás)
+
+A ransomware-szerű hatástevékenységre összpontosít (T1561.001).
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

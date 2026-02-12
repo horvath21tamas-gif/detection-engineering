@@ -8341,15 +8341,19 @@ Monitors:
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects destructive low-level disk content wiping via direct device access 
-and destructive overwrite parameters.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence destructive disk wiping activity via
+raw device access or destructive overwrite operations.
 
-Focuses on:
-  - Raw physical disk access (PhysicalDrive, Harddisk)
-  - Overwrite with zeroes or random data
-  - PowerShell/Cmd destructive disk commands
-  - Excludes known-good administrative, imaging, and security tools
+Coverage includes:
+
+  - Direct raw disk access (\\.\PhysicalDrive, \\.\Harddisk)
+  - Overwrite using zero/random data streams
+  - SDelete secure wipe with multiple passes
+  - PowerShell destructive disk clearing
+  - Suspicious execution context (macro, webshell, temp execution)
+
+Focused on ransomware-style impact activity (T1561.001).
 
 
 #### 🚨 Response Playbook

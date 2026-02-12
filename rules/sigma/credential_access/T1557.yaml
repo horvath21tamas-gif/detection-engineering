@@ -1,34 +1,47 @@
-title: Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557)
+title: Adversary-in-the-Middle Detection (T1557)
 id: 893c356b-d200-48e7-b628-5230ae1140f6
 status: stable
-description: |
-    Detects unauthorized system configuration changes required for AiTM attacks, 
-    including IP Forwarding enablement and LLMNR/NetBIOS poisoning tool execution, 
-    while filtering out legitimate VPN and virtualization noise.
-author: hota05
-date: 2026-02-04
+description: >
+    Detects potential Adversary-in-the-Middle (AiTM) attacks (MITRE ATT&CK T1557) 
+    by monitoring unauthorized system configuration changes such as IP forwarding 
+    enablement and execution of LLMNR/NetBIOS/ARP poisoning tools from untrusted locations. 
+    Filters legitimate virtualization and VPN activity to reduce false positives.
+author: hota05 
+date: 2026-02-12
+references:
+    - https://attack.mitre.org/techniques/T1557/
 tags:
     - attack.credential_access
+    - attack.collection
     - attack.t1557
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_ip_forwarding:
         Image|endswith: '\reg.exe'
-        CommandLine|contains: 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
-        CommandLine|contains: 'IPEnableRouter'
-        CommandLine|contains: '1' 
+        CommandLine|contains:
+            - 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+            - 'IPEnableRouter'
+            - '1'
 
     selection_aitm_tools:
         CommandLine|contains:
             - ' -interface '
-            - ' -r '        
-            - ' -f '         
-            - ' -LLMNR '    
-            - ' -NBTNS '    
-            - ' --spoof '   
+            - ' -i '
+            - ' -r '
+            - ' -f '
+            - ' -force'
+            - ' -LLMNR '
+            - ' -NBTNS '
+            - ' -m arp'
+            - ' --spoof '
             - 'arpspoof'
+            - 'Responder'
+            - 'Inveigh'
+            - 'mitm6'
+            - 'SMBRelay'
 
     selection_untrusted_actor:
         Image|contains:
@@ -36,21 +49,43 @@ detection:
             - '\AppData\'
             - '\Temp\'
             - '\Downloads\'
+            - '\Public\'
         Image|endswith:
             - '\python.exe'
             - '\pythonw.exe'
             - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+
+    selection_non_system_user:
+        User|startswith: 'NT AUTHORITY\'
 
     filter_virtualization:
         ParentImage|contains:
             - '\VMware\'
             - '\Oracle\VirtualBox\'
-    
+            - '\Docker\'
+            - '\Hyper-V\'
+
     filter_vpn_clients:
         Image|contains:
             - '\Cisco\AnyConnect\'
             - '\OpenVPN\'
+            - '\WireGuard\'
         username: 'NT AUTHORITY\SYSTEM'
 
-    condition: (selection_ip_forwarding or selection_aitm_tools) and selection_untrusted_actor and not (filter_virtualization or filter_vpn_clients)
+    condition:
+        (
+            selection_non_system_user
+            and selection_untrusted_actor
+            and (selection_ip_forwarding or selection_aitm_tools)
+        )
+        and not (filter_virtualization or filter_vpn_clients)
+
+falsepositives:
+    - Red team / penetration testing activity
+    - Security lab / training environments
+    - Developer or test systems manipulating network configs
+    - Legitimate use of VPN clients in non-default locations
+
 level: high

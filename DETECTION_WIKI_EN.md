@@ -8447,16 +8447,17 @@ Designed to reduce false positives in enterprise environments.
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects high-confidence attempts to suppress or tamper with interactive
-command history logging on Windows systems.
+- **Leírás:** Detects high-confidence attempts to suppress, redirect, or tamper with
+interactive command history logging on Windows systems.
 
-Focuses on:
-  - PowerShell PSReadLine abuse (SaveNothing, HistorySavePath redirection)
-  - History file deletion (ConsoleHost_history.txt, bash history)
-  - Registry-based console buffer suppression
-  - Encoded PowerShell attempts to modify logging behavior
+Detection coverage includes:
 
-Aligned with MITRE ATT&CK T1562.003.
+  - PowerShell PSReadLine logging suppression (SaveNothing, HistorySavePath abuse)
+  - History file deletion (ConsoleHost_history.txt, PSReadLine folder, bash history)
+  - Registry-based console history buffer suppression
+  - Encoded PowerShell modifying history behavior
+
+Aligned with MITRE ATT&CK T1562.003 (Impair Command History Logging).
 
 
 #### 🚨 Response Playbook

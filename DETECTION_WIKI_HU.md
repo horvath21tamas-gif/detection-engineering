@@ -8018,16 +8018,17 @@ A fedezet a következőket tartalmazza:
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a nagy megbízhatóságú kísérleteket az interaktív elnyomására vagy manipulálására
-parancselőzmények naplózása Windows rendszereken.
+- **Leírás:** Érzékeli a nagy megbízhatóságú elnyomási, átirányítási vagy manipulálási kísérleteket
+interaktív parancselőzmények naplózása Windows rendszereken.
 
-A következőkre összpontosít:
-- PowerShell PSReadLine visszaélés (SaveNothing, HistorySavePath átirányítás)
-- Előzményfájl törlése (ConsoleHost_history.txt, bash történelem)
-- Registry-alapú konzolpufferelnyomás
-- A kódolt PowerShell megpróbálja módosítani a naplózási viselkedést
+Az észlelési lefedettség a következőket tartalmazza:
 
-A MITER ATT&CK T1562.003 szabványhoz igazítva.
+- PowerShell PSReadLine naplózás elnyomása (SaveNothing, HistorySavePath visszaélés)
+- Előzményfájl törlése (ConsoleHost_history.txt, PSReadLine mappa, bash történelem)
+- Registry alapú konzol előzménypuffer elnyomása
+- Kódolt PowerShell módosító előzmények viselkedése
+
+Igazítva a MITER ATT&CK T1562.003-mal (Parancselőzmények naplózása).
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

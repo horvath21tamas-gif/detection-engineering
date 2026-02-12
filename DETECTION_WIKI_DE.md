@@ -8018,16 +8018,17 @@ Entwickelt, um Fehlalarme in Unternehmensumgebungen zu reduzieren.
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt hochzuverlässige Versuche, interaktive Systeme zu unterdrücken oder zu manipulieren
-Protokollierung des Befehlsverlaufs auf Windows-Systemen.
+- **Beschreibung:** Erkennt hochzuverlässige Versuche zur Unterdrückung, Umleitung oder Manipulation
+interaktive Protokollierung des Befehlsverlaufs auf Windows-Systemen.
 
-Konzentriert sich auf:
-- PowerShell PSReadLine-Missbrauch (SaveNothing, HistorySavePath-Umleitung)
-– Löschen der Verlaufsdatei (ConsoleHost_history.txt, Bash-Verlauf)
-- Registrierungsbasierte Konsolenpufferunterdrückung
-– Verschlüsselte PowerShell versucht, das Protokollierungsverhalten zu ändern
+Der Erkennungsumfang umfasst:
 
-Ausgerichtet auf MITRE ATT&CK T1562.003.
+- PowerShell PSReadLine-Protokollierungsunterdrückung (SaveNothing-, HistorySavePath-Missbrauch)
+– Löschen der Verlaufsdatei (ConsoleHost_history.txt, PSReadLine-Ordner, Bash-Verlauf)
+– Registrierungsbasierte Unterdrückung des Konsolenverlaufspuffers
+- Codiertes PowerShell, das das Verlaufsverhalten ändert
+
+Abgeglichen mit MITRE ATT&CK T1562.003 (Impair Command History Logging).
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

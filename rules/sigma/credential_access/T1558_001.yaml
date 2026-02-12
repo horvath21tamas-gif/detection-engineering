@@ -1,45 +1,92 @@
-title: Ultra-Pro High-Fidelity Golden Ticket Forgery & Injection (T1558.001)
+title: Golden Ticket Forgery & Injection
 id: f2749342-1f1f-468b-b9b5-99ed6604ab75
 status: stable
 description: |
-    Detects the creation and injection of forged Kerberos TGTs (Golden Tickets). 
-    Focuses on the mandatory presence of the KRBTGT hash or AES key in command lines, 
-    combined with ticket injection (Pass-the-Ticket) patterns.
-author: hota05
-date: 2026-02-04
+    Detects high-confidence Golden Ticket creation and injection activity.
+
+    Coverage includes:
+
+      - KRBTGT hash or AES key requirement
+      - SID specification
+      - Pass-the-Ticket (/ptt) or kerberos::ptt injection
+      - Mimikatz or Rubeus Golden Ticket usage patterns
+      - Enterprise FP filters (LSASS/system/monitoring)
+
+    Focused on ATT&CK T1558.001.
+
+author: hota05 
+date: 2026-02-12
 tags:
     - attack.credential_access
     - attack.t1558.001
+
 logsource:
     category: process_creation
     product: windows
-detection:
-    selection_forgery_args:
-        CommandLine|contains:
-            - ' /krbtgt:'         
-            - ' /aes256:'       
-            - ' /aes128:'
-        CommandLine|contains:
-            - ' /sid:'          
-            - ' /id:'            
 
-    selection_tool_specific:
+detection:
+    selection_krbtgt_args:
         CommandLine|contains:
-            - 'kerberos::golden'
+            - '/krbtgt:'
+            - '/aes256:'
+            - '/aes128:'
+        CommandLine|contains|all:
+            - '/sid:'
+            - '/id:'
+
+    selection_ticket_injection:
+        CommandLine|contains:
+            - '/ptt'
             - 'kerberos::ptt'
-            - ' /ptt'            
-            - ' /ticket:'        
+
+    selection_mimikatz_golden:
+        CommandLine|contains|all:
+            - 'kerberos::golden'
+            - '/krbtgt:'
+
+    selection_rubeus_golden:
+        Image|endswith:
+            - '\rubeus.exe'
+        CommandLine|contains|all:
+            - 'golden'
+            - '/krbtgt:'
 
     selection_suspicious_parent:
         ParentImage|endswith:
             - '\cmd.exe'
             - '\powershell.exe'
-            - '\wsmprovhost.exe' 
-            - '\psexesvc.exe'   
+            - '\pwsh.exe'
+            - '\wsmprovhost.exe'
+            - '\psexesvc.exe'
+            - '\wmiprvse.exe'
 
-    filter_legit_lsass:
-        username: 'NT AUTHORITY\SYSTEM'
-        Image|endswith: '\Windows\System32\lsass.exe'
+    selection_temp_execution:
+        Image|contains:
+            - '\AppData\Local\Temp\'
+            - '\Users\Public\'
+            - '\Windows\Temp\'
 
-    condition: (selection_forgery_args or selection_tool_specific) and selection_suspicious_parent and not filter_legit_lsass
+    filter_system_context:
+        User|startswith: 'NT AUTHORITY'
+        ParentImage|endswith:
+            - '\services.exe'
+            - '\svchost.exe'
+
+    filter_legit_kerberos_tools:
+        Image|contains:
+            - '\Microsoft Monitoring Agent\'
+            - '\Azure\'
+            - '\RSAT\'
+
+    condition: (
+                    (
+                        selection_mimikatz_golden
+                        or selection_rubeus_golden
+                        or (selection_krbtgt_args and selection_ticket_injection)
+                    )
+               )
+               and (selection_suspicious_parent or selection_temp_execution)
+               and not filter_system_context
+               and not filter_legit_kerberos_tools
+
 level: critical

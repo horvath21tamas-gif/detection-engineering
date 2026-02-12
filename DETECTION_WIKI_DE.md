@@ -7831,12 +7831,20 @@ Parameter im Zusammenhang mit VM-Escape oder Sandbox-Umgehung.
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt erweitertes Daten-Staging zur Exfiltration mithilfe der Archivierung von Drittanbietern
-Tools (7-Zip, WinRAR, Tar, Zip) oder PowerShell.Konzentriert sich auf hohe Entropie
-Archive, passwortgeschützte Dateien, Volume-Aufteilung und Löschung nach dem Archivieren.
-Filtert die Unternehmensautomatisierung nach übergeordneter Prozessherkunft, interaktiven Shells,
-und Integritätsebenen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochzuverlässige Datenbereitstellung zur Exfiltration mithilfe von Drittanbietern
+Archivierungsdienstprogramme oder PowerShell-Komprimierung.
+
+Der Versicherungsschutz umfasst:
+
+- 7-Zip / WinRAR / tar / zip-Archiverstellung
+- Passwortgeschützte Archive
+- Volumenaufteilung
+– Verhalten beim Löschen nach dem Archivieren
+- Ausrichtung auf sensible Daten
+- Verdächtiger interaktiver oder Web-Ausführungskontext
+
+Konzentriert sich auf ATT&CK T1560.001 (Archivierung über Dienstprogramm).
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

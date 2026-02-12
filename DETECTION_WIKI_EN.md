@@ -8251,12 +8251,20 @@ parameters associated with VM escape or sandbox evasion.
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects advanced data staging for exfiltration using third-party archiving 
-tools (7-Zip, WinRAR, Tar, Zip) or PowerShell. Focuses on high-entropy 
-archives, password-protected files, volume splitting, and deletion-after-archive. 
-Filters enterprise automation by parent process lineage, interactive shells, 
-and integrity levels.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence data staging for exfiltration using third-party
+archiving utilities or PowerShell compression.
+
+Coverage includes:
+
+  - 7-Zip / WinRAR / tar / zip archive creation
+  - Password-protected archives
+  - Volume splitting
+  - Delete-after-archive behavior
+  - Sensitive data targeting
+  - Suspicious interactive or web execution context
+
+Focused on ATT&CK T1560.001 (Archive via Utility).
 
 
 #### 🚨 Response Playbook

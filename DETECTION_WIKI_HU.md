@@ -7831,12 +7831,20 @@ a virtuális gép kilépésével vagy a sandbox kikerülésével kapcsolatos par
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a speciális adatkezelést harmadik féltől származó archiválás segítségével történő kiszűréshez
-eszközök (7-Zip, WinRAR, Tar, Zip) vagy PowerShell.A nagy entrópiára összpontosít
-archívumok, jelszóval védett fájlok, kötetfelosztás és archiválás utáni törlés.
-Szűri a vállalati automatizálást a szülőfolyamat vonala, az interaktív héjak,
-és integritási szintek.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a nagy megbízhatóságú adatkezelést harmadik fél általi kiszűréshez
+archiváló segédprogramok vagy PowerShell-tömörítés.
+
+A fedezet a következőket tartalmazza:
+
+- 7-Zip / WinRAR / tar / zip archívum létrehozása
+- Jelszóval védett archívumok
+- Hangerő felosztása
+- Az archívum törlése utáni viselkedés
+- Érzékeny adatcélzás
+- Gyanús interaktív vagy webes végrehajtási környezet
+
+Az ATT&CK T1560.001-re összpontosít (archívum a segédprogramon keresztül).
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

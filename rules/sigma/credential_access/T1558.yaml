@@ -1,59 +1,94 @@
-title: Ultra-Pro High-Fidelity Kerberos Attack Detection (T1558)
+title: Kerberos Attack Detection
 id: 2c059c8c-87e0-4419-b93d-d98092a051c7
 status: stable
 description: |
-    Detects sophisticated Kerberos ticket forgery and harvesting. 
-    Focuses on encryption downgrade (RC4/0x17), targeted service ticket requests (Kerberoasting), 
-    and offensive tool artifacts while filtering legitimate LSASS and system behavior.
-author: hota05
-date: 2026-02-04
+    Detects advanced Kerberos credential attacks including ticket 
+    forgery, AS-REP roasting, Kerberoasting, and ticket injection.
+    
+    Features:
+      - Encryption downgrade (RC4/0x17) detection
+      - Offensive tool flags (Rubeus, Mimikatz, Impacket, PowerView)
+      - Ticket type-specific parameters (Golden, Silver, AS-REP)
+      - Parent process and temp execution context gating
+      - Enterprise FP filtering (LSASS, SYSTEM, monitoring tools)
+
+author: hota05 
+date: 2026-02-12
 tags:
     - attack.credential_access
     - attack.t1558
+    - attack.t1558.001
+    - attack.t1558.002
     - attack.t1558.003
     - attack.t1558.004
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_offensive_flags:
-        CommandLine|contains:
+    selection_offensive_tools:
+        CommandLine|contains|any:
             - 'kerberoast'
             - 'asreproast'
-            - 'asreq'          
+            - 'asreq'
             - 'golden'
             - 'silver'
-            - 'ptt'               
-            - 'tgtdelegate'      
-            - 'ms-mcs-admpwd'    
+            - 'ptt'
+            - 'tgtdelegate'
+            - 'ms-mcs-admpwd'
+        Image|endswith|any:
+            - '\rubeus.exe'
+            - '\mimikatz.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\klist.exe'
 
-    selection_encryption_logic:
-        CommandLine|contains:
+    selection_encryption_params:
+        CommandLine|contains|any:
             - ' /rc4'
             - ' 0x17'
+            - ' /aes128:'
+            - ' /aes256:'
             - ' /ticket:'
             - ' /service:'
-            - ' /outfile:'       
+            - ' /outfile:'
+            - ' /format:hashcat'
+            - ' /format:john'
 
-    selection_untrusted_parent:
-        ParentImage|endswith:
+    selection_suspicious_parent:
+        ParentImage|endswith|any:
             - '\cmd.exe'
             - '\powershell.exe'
+            - '\pwsh.exe'
             - '\wsmprovhost.exe'
-            - '\httpd.exe'       
+            - '\httpd.exe'
             - '\php-cgi.exe'
-        Image|endswith:
-            - '\rubeus.exe'
-            - '\powershell.exe'
-            - '\klist.exe'       
+            - '\psexesvc.exe'
+        IntegrityLevel: 'Medium'
 
-    filter_legit_os:
+    selection_temp_execution:
+        Image|contains|any:
+            - '\AppData\Local\Temp\'
+            - '\Users\Public\'
+            - '\Windows\Temp\'
+
+    filter_legit_system:
         username: 'NT AUTHORITY\SYSTEM'
-        Image|endswith:
+        Image|endswith|any:
             - '\Windows\System32\lsass.exe'
             - '\Windows\System32\svchost.exe'
-        ParentImage|endswith:
-            - '\services.exe'
+        ParentImage|endswith: '\services.exe'
 
-    condition: (selection_offensive_flags or selection_encryption_logic) and selection_untrusted_parent and not filter_legit_os
+    filter_monitoring_tools:
+        Image|contains|any:
+            - 'C:\Program Files\Microsoft Monitoring Agent\'
+            - 'C:\Program Files\Azure\'
+            - 'C:\Program Files\RSAT\'
+
+    condition: 
+        (selection_offensive_tools or selection_encryption_params)
+        and (selection_suspicious_parent or selection_temp_execution)
+        and not (filter_legit_system or filter_monitoring_tools)
+
 level: critical

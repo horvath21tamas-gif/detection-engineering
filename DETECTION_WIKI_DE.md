@@ -432,15 +432,15 @@
 - [High-Fidelity-Office-DDE-Kontextanomalie](#high-fidelity-office-dde-kontextanomalie)
 - [High-Fidelity-Hypervisor-API und VM-Escape-Forschung](#high-fidelity-hypervisor-api-und-vm-escape-forschung)
 - [Verdächtige Archivierung von Daten zu Exfiltrationszwecken](#verdächtige-archivierung-von-daten-zu-exfiltrationszwecken)
-- [Ultra-Pro High-Fidelity-Datenarchivierung für Exfiltration (T1560.001)](#ultra-pro-high-fidelity-datenarchivierung-für-exfiltration-(t1560001))
-- [Ultraprofessionelle High-Fidelity-Datenarchivierung über die Bibliothek (T1560.002)](#ultraprofessionelle-high-fidelity-datenarchivierung-über-die-bibliothek-(t1560002))
-- [Ultra-Pro High-Fidelity-Archiv über benutzerdefinierte Methode (T1560.003)](#ultra-pro-high-fidelity-archiv-über-benutzerdefinierte-methode-(t1560003))
-- [Ultra-Pro High-Fidelity Disk Wipe (T1561)](#ultra-pro-high-fidelity-disk-wipe-(t1561))
-- [Ultra-Pro High-Fidelity-Datenträgerinhaltslöschung (T1561.001)](#ultra-pro-high-fidelity-datenträgerinhaltslöschung-(t1561001))
+- [Datenarchivierung zur Exfiltration](#datenarchivierung-zur-exfiltration)
+- [Datenarchivierung über Bibliothek](#datenarchivierung-über-bibliothek)
+- [Archivieren Sie über eine benutzerdefinierte Methode](#archivieren-sie-über-eine-benutzerdefinierte-methode)
+- [Datenträgerlöschung](#datenträgerlöschung)
+- [Datenträgerinhalt löschen](#datenträgerinhalt-löschen)
 - [Datenträgerstruktur löschen](#datenträgerstruktur-löschen)
 - [Verdächtige Beendigung von Sicherheitsdiensten](#verdächtige-beendigung-von-sicherheitsdiensten)
 - [Deaktivieren oder ändern Sie den Windows Defender-Schutz mit PowerShell](#deaktivieren-oder-ändern-sie-den-windows-defender-schutz-mit-powershell)
-- [Ultra-Pro High-Fidelity Deaktivieren Sie die Windows-Ereignisprotokollierung (T1562.002)](#ultra-pro-high-fidelity-deaktivieren-sie-die-windows-ereignisprotokollierung-(t1562002))
+- [Beeinträchtigung des Windows-Ereignisprotokolldienstes](#beeinträchtigung-des-windows-ereignisprotokolldienstes)
 - [Beeinträchtigung der Protokollierung des Befehlsverlaufs](#beeinträchtigung-der-protokollierung-des-befehlsverlaufs)
 - [Verdächtige Firewall-Änderung über Netsh.exe](#verdächtige-firewall-änderung-über-netshexe)
 - [Anzeigeblockierung und Telemetrieunterdrückung](#anzeigeblockierung-und-telemetrieunterdrückung)
@@ -8058,13 +8058,15 @@ Ausgerichtet auf MITRE ATT&CK T1562.003.
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt hochzuverlässige Versuche, die Windows-Sicherheitstelemetrie zu deaktivieren oder zu verschlechtern, indem:
-– Stoppen von ETW-Anbietern oder System-Trace-Sitzungen
-- Deaktivieren oder Ändern der Windows-Ereignisweiterleitung (WEF)
-- Erstellen von Firewall-Regeln zum Blockieren ausgehender Sicherheitstelemetrie (EDR/AV über HTTPS)
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochzuverlässige Versuche, Windows zu deaktivieren, zu unterdrücken oder zu stören
+Sicherheitstelemetrie- und Überwachungspipelines, einschließlich:
 
-Konzentriert sich auf Verteidigungs-Umgehungsmuster gemäß MITRE ATT&CK T1562.006.
+– Stoppen oder Löschen von ETW-Ablaufverfolgungssitzungen
+- Deaktivieren oder Ändern der Windows-Ereignisweiterleitung (WEF)
+- Erstellen ausgehender Firewall-Regeln zum Blockieren von Sicherheitstelemetrie (EDR/AV über HTTPS)
+
+Konzentriert sich auf Verteidigungsumgehung gemäß MITRE ATT&CK T1562.006.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

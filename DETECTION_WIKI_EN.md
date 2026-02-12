@@ -432,15 +432,15 @@
 - [High-Fidelity Office DDE Contextual Anomaly](#high-fidelity-office-dde-contextual-anomaly)
 - [High-Fidelity Hypervisor API and VM Escape Research](#high-fidelity-hypervisor-api-and-vm-escape-research)
 - [Adatok gyanús archiválása exfiltráció céljából](#adatok-gyanús-archiválása-exfiltráció-céljából)
-- [Ultra-Pro High-Fidelity Data Archiving for Exfiltration (T1560.001)](#ultra-pro-high-fidelity-data-archiving-for-exfiltration-(t1560001))
-- [Ultra-Pro High-Fidelity Data Archiving via Library (T1560.002)](#ultra-pro-high-fidelity-data-archiving-via-library-(t1560002))
-- [Ultra-Pro High-Fidelity Archive via Custom Method (T1560.003)](#ultra-pro-high-fidelity-archive-via-custom-method-(t1560003))
-- [Ultra-Pro High-Fidelity Disk Wipe (T1561)](#ultra-pro-high-fidelity-disk-wipe-(t1561))
-- [Ultra-Pro High-Fidelity Disk Content Wipe (T1561.001)](#ultra-pro-high-fidelity-disk-content-wipe-(t1561001))
+- [Data Archiving for Exfiltration](#data-archiving-for-exfiltration)
+- [Data Archiving via Library](#data-archiving-via-library)
+- [Archive via Custom Method](#archive-via-custom-method)
+- [Disk Wipe](#disk-wipe)
+- [Disk Content Wipe](#disk-content-wipe)
 - [Disk Structure Wipe](#disk-structure-wipe)
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
-- [Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002)](#ultra-pro-high-fidelity-disable-windows-event-logging-(t1562002))
+- [Windows Event Log Service Impairment](#windows-event-log-service-impairment)
 - [Command History Logging Impairment](#command-history-logging-impairment)
 - [Suspicious Firewall Modification via Netsh.exe](#suspicious-firewall-modification-via-netshexe)
 - [Indicator Blocking and Telemetry Suppression](#indicator-blocking-and-telemetry-suppression)
@@ -8489,13 +8489,15 @@ Aligned with MITRE ATT&CK T1562.003.
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects high-confidence attempts to disable or degrade Windows security telemetry by:
-  - Stopping ETW providers or system trace sessions
-  - Disabling or modifying Windows Event Forwarding (WEF)
-  - Creating firewall rules to block outbound security telemetry (EDR/AV over HTTPS)
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence attempts to disable, suppress, or interfere with Windows
+security telemetry and monitoring pipelines, including:
 
-Focuses on defense evasion patterns aligned to MITRE ATT&CK T1562.006.
+  - Stopping or deleting ETW trace sessions
+  - Disabling or modifying Windows Event Forwarding (WEF)
+  - Creating outbound firewall rules to block security telemetry (EDR/AV over HTTPS)
+
+Focuses on defense evasion aligned to MITRE ATT&CK T1562.006.
 
 
 #### 🚨 Response Playbook

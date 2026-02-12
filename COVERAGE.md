@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-11 13:50:21`
+**Utolsó frissítés:** `2026-02-12 06:19:46`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -138,7 +138,7 @@
 | T1069.001 | HIGH | Ultra-Pro High-Fidelity Local Group Discovery (T1069.001) |
 | T1069.002 | HIGH | Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002) |
 | T1069.003 | HIGH | Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003) |
-| T1070 | CRITICAL | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Indicator Blocking and Telemetry Suppression |
+| T1070 | CRITICAL | Disk Structure Wipe, Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Command History Logging Impairment, Indicator Blocking and Telemetry Suppression |
 | T1070.001 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Security Event Log Cleared Using wevtutil.exe |
 | T1070.002 | HIGH | Ultra-Pro High-Fidelity Linux Log Clearing and Journal Sabotage (T1070.002) |
 | T1070.003 | HIGH | Ultra-Pro High-Fidelity Mailbox Data Clearing and Rule Sabotage (T1070.003) |
@@ -198,7 +198,7 @@
 | T1110.003 | HIGH | Ultra-Pro High-Fidelity Password Spraying (T1110.003) |
 | T1110.004 | HIGH | Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004) |
 | T1111 | CRITICAL | Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111) |
-| T1112 | CRITICAL | Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112), Indicator Blocking and Telemetry Suppression |
+| T1112 | CRITICAL | Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112), Windows Event Log Service Impairment, Indicator Blocking and Telemetry Suppression |
 | T1113 | CRITICAL | Ultra-Pro High-Fidelity Screen Capture Anomaly (T1113) |
 | T1114 | CRITICAL | Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |
 | T1114.001 | CRITICAL | Ultra-Pro High-Fidelity Local Email Harvesting Anomaly (T1114.001), Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |
@@ -312,7 +312,7 @@
 | T1498 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498) |
 | T1498.001 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498), Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001) |
 | T1498.002 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498) |
-| T1499 | CRITICAL | Disk Structure Wipe, Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
+| T1499 | CRITICAL | Disk Structure Wipe, Ultra-Pro High-Fidelity Endpoint DoS (T1499), Disk Wipe |
 | T1499.001 | CRITICAL | Ultra-Pro High-Fidelity OS Self-Destruction (T1499.001) |
 | T1499.002 | CRITICAL | Ultra-Pro High-Fidelity Service Exhaustion (T1499.002) |
 | T1499.003 | CRITICAL | Ultra-Pro High-Fidelity OS Self-Destruction (T1499.003), Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
@@ -438,15 +438,15 @@
 | T1559.002 | CRITICAL | High-Fidelity Office DDE Contextual Anomaly, High-Fidelity Indirect IPC and COM Execution |
 | T1559.003 | HIGH | High-Fidelity Hypervisor API and VM Escape Research |
 | T1560 | HIGH | Adatok gyanús archiválása exfiltráció céljából |
-| T1560.001 | CRITICAL | Adatok gyanús archiválása exfiltráció céljából, Ultra-Pro High-Fidelity Data Archiving for Exfiltration (T1560.001) |
-| T1560.002 | CRITICAL | Ultra-Pro High-Fidelity Data Archiving via Library (T1560.002) |
-| T1560.003 | CRITICAL | Ultra-Pro High-Fidelity Archive via Custom Method (T1560.003) |
-| T1561 | CRITICAL | Ultra-Pro High-Fidelity Disk Content Wipe (T1561.001) |
-| T1561.001 | CRITICAL | Ultra-Pro High-Fidelity Disk Content Wipe (T1561.001), Ultra-Pro High-Fidelity Disk Wipe (T1561) |
-| T1561.002 | CRITICAL | Disk Structure Wipe, Ultra-Pro High-Fidelity Disk Wipe (T1561) |
+| T1560.001 | CRITICAL | Adatok gyanús archiválása exfiltráció céljából, Data Archiving for Exfiltration |
+| T1560.002 | CRITICAL | Data Archiving via Library |
+| T1560.003 | CRITICAL | Archive via Custom Method |
+| T1561 | CRITICAL | Disk Content Wipe |
+| T1561.001 | CRITICAL | Disk Content Wipe, Disk Wipe |
+| T1561.002 | CRITICAL | Disk Structure Wipe, Disk Wipe |
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
 | T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
-| T1562.002 | CRITICAL | Ultra-Pro High-Fidelity Disable Windows Event Logging (T1562.002) |
+| T1562.002 | CRITICAL | Windows Event Log Service Impairment |
 | T1562.003 | HIGH | Command History Logging Impairment |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |
 | T1562.006 | CRITICAL | Indicator Blocking and Telemetry Suppression |

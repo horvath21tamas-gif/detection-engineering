@@ -432,15 +432,15 @@
 - [High-Fidelity Office DDE kontextuális anomália](#high-fidelity-office-dde-kontextuális-anomália)
 - [High-Fidelity Hypervisor API és VM Escape Research](#high-fidelity-hypervisor-api-és-vm-escape-research)
 - [Adatok gyanús archiválása exfiltráció céljából](#adatok-gyanús-archiválása-exfiltráció-céljából)
-- [Ultra-Pro nagy pontosságú adatarchiválás a kiszűréshez (T1560.001)](#ultra-pro-nagy-pontosságú-adatarchiválás-a-kiszűréshez-(t1560001))
-- [Ultra-Pro High-Fidelity adatarchiválás könyvtáron keresztül (T1560.002)](#ultra-pro-high-fidelity-adatarchiválás-könyvtáron-keresztül-(t1560002))
-- [Ultra-Pro High-Fidelity archívum egyéni módszerrel (T1560.003)](#ultra-pro-high-fidelity-archívum-egyéni-módszerrel-(t1560003))
-- [Ultra-Pro High-Fidelity Disk Wipe (T1561)](#ultra-pro-high-fidelity-disk-wipe-(t1561))
-- [Ultra-Pro High-Fidelity Disk Content Wipe (T1561.001)](#ultra-pro-high-fidelity-disk-content-wipe-(t1561001))
+- [Adatarchiválás kiszűréshez](#adatarchiválás-kiszűréshez)
+- [Adatarchiválás a könyvtáron keresztül](#adatarchiválás-a-könyvtáron-keresztül)
+- [Archiválás egyéni módszerrel](#archiválás-egyéni-módszerrel)
+- [Lemeztörlés](#lemeztörlés)
+- [Lemeztartalom törlése](#lemeztartalom-törlése)
 - [Lemezszerkezet törlése](#lemezszerkezet-törlése)
 - [Biztonsági szolgáltatások gyanús leállítása](#biztonsági-szolgáltatások-gyanús-leállítása)
 - [Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével](#windows-defender-védelem-kikapcsolása-vagy-módosítása-powershell-segítségével)
-- [Ultra-Pro High-Fidelity Windows eseménynaplózás letiltása (T1562.002)](#ultra-pro-high-fidelity-windows-eseménynaplózás-letiltása-(t1562002))
+- [A Windows eseménynapló szolgáltatásának károsodása](#a-windows-eseménynapló-szolgáltatásának-károsodása)
 - [Parancselőzmények naplózási károsodása](#parancselőzmények-naplózási-károsodása)
 - [Gyanús tűzfalmódosítás a Netsh.exe-n keresztül](#gyanús-tűzfalmódosítás-a-netshexe-n-keresztül)
 - [Kijelző blokkolása és telemetria elnyomása](#kijelző-blokkolása-és-telemetria-elnyomása)
@@ -8058,13 +8058,15 @@ A MITER ATT&CK T1562.003 szabványhoz igazítva.
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a nagy megbízhatóságú kísérleteket a Windows biztonsági telemetriájának letiltására vagy leromlására az alábbiak szerint:
-- ETW szolgáltatók vagy rendszerkövetési munkamenetek leállítása
-- A Windows eseménytovábbítás (WEF) letiltása vagy módosítása
-- Tűzfalszabályok létrehozása a kimenő biztonsági telemetria blokkolására (EDR/AV HTTPS-en keresztül)
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a nagy megbízhatóságú Windows letiltására, elnyomására vagy beavatkozására irányuló kísérleteket
+biztonsági telemetriai és felügyeleti csővezetékek, beleértve:
 
-A MITER ATT&CK T1562.006 szabványhoz igazított védelmi kijátszási mintákra összpontosít.
+- ETW nyomkövetési munkamenetek leállítása vagy törlése
+- A Windows eseménytovábbítás (WEF) letiltása vagy módosítása
+- Kimenő tűzfalszabályok létrehozása a biztonsági telemetria blokkolására (EDR/AV HTTPS-en keresztül)
+
+A védelmi kijátszásra összpontosít a MITER ATT&CK T1562.006 szabvány szerint.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

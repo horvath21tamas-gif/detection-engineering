@@ -1,39 +1,47 @@
-title: Ultra-Pro High-Fidelity Cloud Secret Harvesting (T1555.006)
+title: Cloud Secret Harvesting Detection (T1555.006)
 id: e0c12e27-205f-41cb-b1fb-3ef5245438c8
 status: stable
-description: |
-    Detects unauthorized access or exfiltration of cloud provider credentials (AWS, Azure, GCP). 
-    It specifically targets command-line tools (archivers, interpreters) accessing 
-    sensitive config paths while excluding official cloud CLI binaries and known DevOps agents.
-author: hota05
-date: 2026-02-04
+description: >
+    Detects unauthorized access or exfiltration of cloud provider credentials 
+    (AWS, Azure, GCP, Docker) by monitoring suspicious command-line activity and 
+    tools accessing sensitive configuration paths. Filters official cloud CLI binaries 
+    and known DevOps agents to reduce false positives.
+author: hota05 
+date: 2026-02-12
+references:
+    - https://attack.mitre.org/techniques/T1555/006/
 tags:
     - attack.credential_access
     - attack.t1555.006
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_cloud_paths:
         CommandLine|contains:
-            - '\.aws\credentials'  
+            - '\.aws\credentials'
             - '\.aws\config'
-            - '\.azure\accessTokens.json' 
+            - '\.azure\accessTokens.json'
             - '\.azure\azureProfile.json'
-            - '\.config\gcloud\'    
-            - '\.docker\config.json' 
+            - '\.config\gcloud\'
+            - '\.docker\config.json'
 
     selection_harvesting_behavior:
-        - CommandLine|contains:
+        CommandLine|contains:
             - 'copy '
-            - 'type '               
-            - 'cat '                
-            - 'Get-Content'         
-            - '7z'                  
-            - 'curl -F'             
+            - 'type '
+            - 'cat '
+            - 'Get-Content'
+            - '7z'
+            - 'curl -F'
             - 'Invoke-RestMethod'
-        - Image|endswith:
-            - '\sqlite3.exe'        
+            - 'wget '
+        Image|endswith:
+            - '\sqlite3.exe'
+            - '\7z.exe'
+            - '\curl.exe'
+            - '\wget.exe'
 
     selection_untrusted_context:
         Image|contains:
@@ -41,8 +49,10 @@ detection:
             - '\AppData\'
             - '\Temp\'
             - '\Downloads\'
+            - '\Public\'
         Image|endswith:
             - '\powershell.exe'
+            - '\pwsh.exe'
             - '\cmd.exe'
             - '\python.exe'
             - '\node.exe'
@@ -56,9 +66,19 @@ detection:
         ParentImage|contains:
             - '\Microsoft VS Code\'
             - '\JetBrains\'
-            - '\actions-runner\'   
-            - '\agent\'             
+            - '\actions-runner\'
+            - '\agent\'
         username: 'NT AUTHORITY\SYSTEM'
 
-    condition: selection_cloud_paths and (selection_harvesting_behavior or selection_untrusted_context) and not filter_official_tools
+    condition:
+        selection_cloud_paths
+        and (selection_harvesting_behavior or selection_untrusted_context)
+        and not filter_official_tools
+
+falsepositives:
+    - Legitimate cloud CLI usage in development environments
+    - DevOps automation pipelines (GitHub Actions, Azure DevOps, Terraform scripts)
+    - Security auditing or credential scanning tools by authorized admins
+    - Backup scripts accessing credential/config files
+
 level: critical

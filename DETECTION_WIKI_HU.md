@@ -400,14 +400,14 @@
 - [Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003)](#ultra-pro-high-fidelity-windows-catalog-database-subversion-(t1553003))
 - [Ultra-Pro High-Fidelity Root Certificate Injection (T1553.004)](#ultra-pro-high-fidelity-root-certificate-injection-(t1553004))
 - [Ultra-Pro High-Fidelity MotW bypass & Zone Subversion (T1553.005)](#ultra-pro-high-fidelity-motw-bypass-&-zone-subversion-(t1553005))
-- [Ultra-Pro High-Fidelity kódintegritás és DSE Subversion (T1553.006)](#ultra-pro-high-fidelity-kódintegritás-és-dse-subversion-(t1553006))
+- [Windows Code Integrity & DSE Subversion Detection (T1553.006)](#windows-code-integrity-&-dse-subversion-detection-(t1553006))
 - [Ultra-Pro Client Bináris Integritás Kompromisszum (T1554)](#ultra-pro-client-bináris-integritás-kompromisszum-(t1554))
 - [Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)](#nem-böngészős-folyamat-hozzáférése-a-böngésző-hitelesítőadat-tárolóihoz-(high-fidelity))
-- [Ultra-Pro High-Fidelity Vault hitelesítő adatok begyűjtése (T1555.001)](#ultra-pro-high-fidelity-vault-hitelesítő-adatok-begyűjtése-(t1555001))
-- [Ultra-Pro High-Fidelity biztonsági memória kiíratása (T1555.002)](#ultra-pro-high-fidelity-biztonsági-memória-kiíratása-(t1555002))
-- [Ultra-Pro High-Fidelity Browser hitelesítő adatok begyűjtése (T1555.003)](#ultra-pro-high-fidelity-browser-hitelesítő-adatok-begyűjtése-(t1555003))
-- [Ultra-Pro High-Fidelity Windows Credential Manager begyűjtése (T1555.004)](#ultra-pro-high-fidelity-windows-credential-manager-begyűjtése-(t1555004))
-- [Ultra-Pro nagy pontosságú jelszókezelő kivonat (T1555.005)](#ultra-pro-nagy-pontosságú-jelszókezelő-kivonat-(t1555005))
+- [Windows Vault hitelesítő adatok legyűjtésének észlelése (T1555.001)](#windows-vault-hitelesítő-adatok-legyűjtésének-észlelése-(t1555001))
+- [Biztonságos memóriakiürítés észlelése (T1555.002)](#biztonságos-memóriakiürítés-észlelése-(t1555002))
+- [Böngésző hitelesítő adatok begyűjtésének észlelése (T1555.003)](#böngésző-hitelesítő-adatok-begyűjtésének-észlelése-(t1555003))
+- [Windows Credential Manager begyűjtési észlelés (T1555.004)](#windows-credential-manager-begyűjtési-észlelés-(t1555004))
+- [Jelszókezelő kivonatészlelés (T1555.005)](#jelszókezelő-kivonatészlelés-(t1555005))
 - [Cloud Secret Harvesting Detection (T1555.006)](#cloud-secret-harvesting-detection-(t1555006))
 - [Exploit-Grade hitelesítési folyamat eltérítése gyanús DLL-regisztráción keresztül](#exploit-grade-hitelesítési-folyamat-eltérítése-gyanús-dll-regisztráción-keresztül)
 - [Exploit-Grade Security Support Provider Hijacking (LSA SSP)](#exploit-grade-security-support-provider-hijacking-(lsa-ssp))
@@ -416,9 +416,9 @@
 - [Ultra-Pro hálózati eszköz hitelesítés eltérítése (T1556.004)](#ultra-pro-hálózati-eszköz-hitelesítés-eltérítése-(t1556004))
 - [Ultra-Pro SID History Injection Correlation (T1556.005)](#ultra-pro-sid-history-injection-correlation-(t1556005))
 - [Ultra-Pro Entra ID MFA módszereltérítés (T1556.006)](#ultra-pro-entra-id-mfa-módszereltérítés-(t1556006))
-- [Ultra-Pro hibrid identitásszinkronizálási manipuláció (T1556.007)](#ultra-pro-hibrid-identitásszinkronizálási-manipuláció-(t1556007))
-- [Ultra-Pro Network-to-Cloud Auth Hijacking (T1556.008)](#ultra-pro-network-to-cloud-auth-hijacking-(t1556008))
-- [Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557)](#ultra-pro-high-fidelity-adversary-in-the-middle-(t1557))
+- [Hibrid identitás szinkronizálási manipuláció észlelése (T1556.007)](#hibrid-identitás-szinkronizálási-manipuláció-észlelése-(t1556007))
+- [Hálózatról felhőre történő hitelesítés-eltérítés észlelése (T1556.008)](#hálózatról-felhőre-történő-hitelesítés-eltérítés-észlelése-(t1556008))
+- [Ellenfél észlelése a középsőben (T1557)](#ellenfél-észlelése-a-középsőben-(t1557))
 - [LLMNR/NBT-NS mérgezés és SMB-reléérzékelés (T1557.001)](#llmnrnbt-ns-mérgezés-és-smb-reléérzékelés-(t1557001))
 - [Rogue ARP-mérgezés / MITM-észlelés (T1557.002)](#rogue-arp-mérgezés--mitm-észlelés-(t1557002))
 - [Rogue DHCP / DHCP hamisítás-észlelés (T1557.003)](#rogue-dhcp--dhcp-hamisítás-észlelés-(t1557003))
@@ -7293,16 +7293,14 @@ módosítások, amelyek csökkentik a biztonsági zóna beállításait.
 
 
 ---
-## Ultra-Pro High-Fidelity kódintegritás és DSE Subversion (T1553.006)
+## Windows Code Integrity & DSE Subversion Detection (T1553.006)
 - **ID:** `T1553_006.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Windows Code Integrity and Driver Signature Enforcement (DSE) felforgatására irányuló kísérleteket.
-A BCDEDIT-jelzőkre és a rendszerleíró adatbázis-módosításokra összpontosít, amelyek lehetővé teszik az aláíratlan kernel-illesztőprogramokat
-betölteni, miközben kiszűri a jogos operációs rendszer-karbantartókat és telepítőket.
+- **Leírás:** Érzékeli a Windows Code Integrity and Driver Signature Enforcement (DSE) felforgatására irányuló kísérleteket BCDEDIT jelzők vagy beállításjegyzék-módosítások révén, amelyek lehetővé teszik az aláíratlan kernel-illesztőprogramok betöltését, miközben szűri a jogos operációs rendszer-karbantartási, telepítői és megbízható rendszerfolyamatokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -7395,7 +7393,7 @@ Azokra az esetekre összpontosít, amikor az írási folyamat LOLBin, vagy a fá
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CMDKEY.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a lehetséges jogosulatlan hitelesítő adatok begyűjtését a Windows Credential Manager (cmdkey.exe) segítségével a gyanús parancssori használat, az átirányítás, a nem megbízható szülőfolyamatok és a nem interaktív végrehajtási kontextusok figyelésével.Szűri a jogos IT-felügyeleti szkripteket és a felhasználói tevékenységeket.
+- **Leírás:** Érzékeli a lehetséges jogosulatlan hitelesítő adatok begyűjtését a Windows Credential Manager (cmdkey.exe) segítségével a gyanús parancssori használat, az átirányítás, a nem megbízható szülőfolyamatok és a nem interaktív végrehajtási környezetek figyelésével.Szűri a jogos IT-felügyeleti szkripteket és a felhasználói tevékenységeket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -7541,7 +7539,7 @@ sikeres metódusmódosítások gyanús belépési pontokkal vagy adminisztráci�
 
 
 ---
-## Hibrid Identity Sync Manipulation Detection (T1556.007)
+## Hibrid identitás szinkronizálási manipuláció észlelése (T1556.007)
 - **ID:** `T1556_007.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)

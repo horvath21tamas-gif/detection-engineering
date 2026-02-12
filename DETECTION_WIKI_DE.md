@@ -400,14 +400,14 @@
 - [Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003)](#ultra-pro-high-fidelity-windows-catalog-database-subversion-(t1553003))
 - [Ultra-Pro High-Fidelity-Root-Zertifikat-Injektion (T1553.004)](#ultra-pro-high-fidelity-root-zertifikat-injektion-(t1553004))
 - [Ultra-Pro High-Fidelity MotW Bypass & Zone Subversion (T1553.005)](#ultra-pro-high-fidelity-motw-bypass-&-zone-subversion-(t1553005))
-- [Ultra-Pro High-Fidelity-Codeintegrität und DSE-Subversion (T1553.006)](#ultra-pro-high-fidelity-codeintegrität-und-dse-subversion-(t1553006))
+- [Windows-Codeintegrität und DSE-Subversion-Erkennung (T1553.006)](#windows-codeintegrität-und-dse-subversion-erkennung-(t1553006))
 - [Kompromittierung der Binärintegrität des Ultra-Pro-Clients (T1554)](#kompromittierung-der-binärintegrität-des-ultra-pro-clients-(t1554))
 - [Nicht-Browser-Prozesszugriff auf Browser-Anmeldeinformationsspeicher (High Fidelity)](#nicht-browser-prozesszugriff-auf-browser-anmeldeinformationsspeicher-(high-fidelity))
-- [Ultra-Pro High-Fidelity Vault-Zugangsdatenerfassung (T1555.001)](#ultra-pro-high-fidelity-vault-zugangsdatenerfassung-(t1555001))
-- [Ultra-Pro High-Fidelity-Sicherheitsspeicher-Dumping (T1555.002)](#ultra-pro-high-fidelity-sicherheitsspeicher-dumping-(t1555002))
-- [Ultra-Pro High-Fidelity-Browser-Anmeldedatenerfassung (T1555.003)](#ultra-pro-high-fidelity-browser-anmeldedatenerfassung-(t1555003))
-- [Ultra-Pro High-Fidelity Windows Credential Manager Harvesting (T1555.004)](#ultra-pro-high-fidelity-windows-credential-manager-harvesting-(t1555004))
-- [Ultra-Pro High-Fidelity-Passwort-Manager-Extraktion (T1555.005)](#ultra-pro-high-fidelity-passwort-manager-extraktion-(t1555005))
+- [Erkennung der Erfassung von Windows Vault-Anmeldeinformationen (T1555.001)](#erkennung-der-erfassung-von-windows-vault-anmeldeinformationen-(t1555001))
+- [Sichere Speicherauszugserkennung (T1555.002)](#sichere-speicherauszugserkennung-(t1555002))
+- [Erkennung der Erfassung von Browser-Anmeldedaten (T1555.003)](#erkennung-der-erfassung-von-browser-anmeldedaten-(t1555003))
+- [Windows Credential Manager Harvesting-Erkennung (T1555.004)](#windows-credential-manager-harvesting-erkennung-(t1555004))
+- [Erkennung der Passwort-Manager-Extraktion (T1555.005)](#erkennung-der-passwort-manager-extraktion-(t1555005))
 - [Cloud Secret Harvesting-Erkennung (T1555.006)](#cloud-secret-harvesting-erkennung-(t1555006))
 - [Exploit-Authentifizierungsprozess-Hijacking über verdächtige DLL-Registrierung](#exploit-authentifizierungsprozess-hijacking-über-verdächtige-dll-registrierung)
 - [Exploit-Grade-Hijacking von Sicherheits-Support-Anbietern (LSA SSP)](#exploit-grade-hijacking-von-sicherheits-support-anbietern-(lsa-ssp))
@@ -416,9 +416,9 @@
 - [Ultra-Pro-Hijacking der Netzwerkgeräteauthentifizierung (T1556.004)](#ultra-pro-hijacking-der-netzwerkgeräteauthentifizierung-(t1556004))
 - [Ultra-Pro SID-Verlaufsinjektionskorrelation (T1556.005)](#ultra-pro-sid-verlaufsinjektionskorrelation-(t1556005))
 - [Ultra-Pro Entra ID MFA-Methoden-Hijacking (T1556.006)](#ultra-pro-entra-id-mfa-methoden-hijacking-(t1556006))
-- [Ultra-Pro-Hybrid-Identitätssynchronisierungsmanipulation (T1556.007)](#ultra-pro-hybrid-identitätssynchronisierungsmanipulation-(t1556007))
-- [Ultra-Pro-Netzwerk-zu-Cloud-Auth-Hijacking (T1556.008)](#ultra-pro-netzwerk-zu-cloud-auth-hijacking-(t1556008))
-- [Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557)](#ultra-pro-high-fidelity-adversary-in-the-middle-(t1557))
+- [Erkennung von Hybrid-Identitätssynchronisierungsmanipulationen (T1556.007)](#erkennung-von-hybrid-identitätssynchronisierungsmanipulationen-(t1556007))
+- [Erkennung von Netzwerk-zu-Cloud-Authentifizierungs-Hijacking (T1556.008)](#erkennung-von-netzwerk-zu-cloud-authentifizierungs-hijacking-(t1556008))
+- [Adversary-in-the-Middle-Erkennung (T1557)](#adversary-in-the-middle-erkennung-(t1557))
 - [LLMNR/NBT-NS-Vergiftungs- und SMB-Relay-Erkennung (T1557.001)](#llmnrnbt-ns-vergiftungs--und-smb-relay-erkennung-(t1557001))
 - [Rogue-ARP-Vergiftung/MITM-Erkennung (T1557.002)](#rogue-arp-vergiftungmitm-erkennung-(t1557002))
 - [Rogue-DHCP-/DHCP-Spoofing-Erkennung (T1557.003)](#rogue-dhcp-dhcp-spoofing-erkennung-(t1557003))
@@ -7293,16 +7293,14 @@ Konzentriert sich auf nicht-interaktive ADS-Manipulation und verdächtige Regist
 
 
 ---
-## Ultra-Pro High-Fidelity-Codeintegrität und DSE-Subversion (T1553.006)
+## Windows-Codeintegrität und DSE-Subversion-Erkennung (T1553.006)
 - **ID:** `T1553_006.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Versuche, die Windows-Codeintegrität und Driver Signature Enforcement (DSE) zu untergraben.
-Konzentriert sich auf BCDEDIT-Flags und Registrierungsänderungen, die nicht signierte Kernel-Treiber zulassen
-zu laden, während legitime Betriebssystemwartungs- und Installationsprogramme herausgefiltert werden.
+- **Beschreibung:** Erkennt Versuche, die Windows-Codeintegrität und Driver Signature Enforcement (DSE) über BCDEDIT-Flags oder Registrierungsänderungen zu untergraben, die das Laden nicht signierter Kerneltreiber ermöglichen, während legitime Betriebssystemwartungs-, Installationsprogramm- und vertrauenswürdige Systemprozesse gefiltert werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -7349,7 +7347,7 @@ Konzentriert sich auf Fälle, in denen der Schreibvorgang ein LOLBin ist oder de
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt potenzielle unbefugte Extraktion von Windows Vault-Anmeldeinformationen durch Überwachung der vaultcmd.exe-Nutzung, API-Zeichenfolgen und verdächtiger Befehlszeilendatenumleitungen aus nicht vertrauenswürdigen Kontexten und filtert gleichzeitig legitime Browser und Systemprozesse.
+- **Beschreibung:** Erkennt potenzielle unbefugte Extraktion von Windows Vault-Anmeldeinformationen durch Überwachung der Verwendung von vaultcmd.exe, API-Zeichenfolgen und verdächtiger Befehlszeilendatenumleitungen aus nicht vertrauenswürdigen Kontexten und filtert gleichzeitig legitime Browser und Systemprozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

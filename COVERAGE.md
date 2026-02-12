@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-12 07:06:35`
+**Utolsó frissítés:** `2026-02-12 07:45:58`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -406,14 +406,14 @@
 | T1553.003 | CRITICAL | Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003) |
 | T1553.004 | CRITICAL | Ultra-Pro High-Fidelity Root Certificate Injection (T1553.004), Ultra-Pro High-Fidelity Subvert Trust Controls (T1553) |
 | T1553.005 | CRITICAL | Ultra-Pro High-Fidelity MotW Bypass & Zone Subversion (T1553.005), Ultra-Pro High-Fidelity Subvert Trust Controls (T1553) |
-| T1553.006 | CRITICAL | Ultra-Pro High-Fidelity Code Integrity & DSE Subversion (T1553.006) |
+| T1553.006 | CRITICAL | Windows Code Integrity & DSE Subversion Detection (T1553.006) |
 | T1554 | CRITICAL | Ultra-Pro Client Binary Integrity Compromise (T1554) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
-| T1555.001 | HIGH | Ultra-Pro High-Fidelity Vault Credential Harvesting (T1555.001) |
-| T1555.002 | CRITICAL | Ultra-Pro High-Fidelity Securityd Memory Dumping (T1555.002) |
-| T1555.003 | CRITICAL | Ultra-Pro High-Fidelity Browser Credential Harvesting (T1555.003) |
-| T1555.004 | HIGH | Ultra-Pro High-Fidelity Windows Credential Manager Harvesting (T1555.004) |
-| T1555.005 | CRITICAL | Ultra-Pro High-Fidelity Password Manager Extraction (T1555.005) |
+| T1555.001 | HIGH | Windows Vault Credential Harvesting Detection (T1555.001) |
+| T1555.002 | CRITICAL | Securityd Memory Dumping Detection (T1555.002) |
+| T1555.003 | CRITICAL | Browser Credential Harvesting Detection (T1555.003) |
+| T1555.004 | HIGH | Windows Credential Manager Harvesting Detection (T1555.004) |
+| T1555.005 | CRITICAL | Password Manager Extraction Detection (T1555.005) |
 | T1555.006 | CRITICAL | Cloud Secret Harvesting Detection (T1555.006) |
 | T1556 | CRITICAL | Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration |
 | T1556.001 | CRITICAL | Exploit-Grade Security Support Provider Hijacking (LSA SSP) |
@@ -422,9 +422,9 @@
 | T1556.004 | CRITICAL | Ultra-Pro Network Device Authentication Hijacking (T1556.004) |
 | T1556.005 | CRITICAL | Ultra-Pro SID History Injection Correlation (T1556.005) |
 | T1556.006 | CRITICAL | Ultra-Pro Entra ID MFA Method Hijacking (T1556.006) |
-| T1556.007 | CRITICAL | Ultra-Pro Hybrid Identity Sync Manipulation (T1556.007) |
-| T1556.008 | CRITICAL | Ultra-Pro Network-to-Cloud Auth Hijacking (T1556.008) |
-| T1557 | HIGH | Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557) |
+| T1556.007 | CRITICAL | Hybrid Identity Sync Manipulation Detection (T1556.007) |
+| T1556.008 | CRITICAL | Network-to-Cloud Auth Hijacking Detection (T1556.008) |
+| T1557 | HIGH | Adversary-in-the-Middle Detection (T1557) |
 | T1557.001 | CRITICAL | LLMNR/NBT-NS Poisoning & SMB Relay Detection (T1557.001) |
 | T1557.002 | HIGH | Rogue ARP Poisoning / MITM Detection (T1557.002) |
 | T1557.003 | CRITICAL | Rogue DHCP / DHCP Spoofing Detection (T1557.003) |

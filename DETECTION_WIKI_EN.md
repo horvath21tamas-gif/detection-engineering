@@ -400,14 +400,14 @@
 - [Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003)](#ultra-pro-high-fidelity-windows-catalog-database-subversion-(t1553003))
 - [Ultra-Pro High-Fidelity Root Certificate Injection (T1553.004)](#ultra-pro-high-fidelity-root-certificate-injection-(t1553004))
 - [Ultra-Pro High-Fidelity MotW Bypass & Zone Subversion (T1553.005)](#ultra-pro-high-fidelity-motw-bypass-&-zone-subversion-(t1553005))
-- [Ultra-Pro High-Fidelity Code Integrity & DSE Subversion (T1553.006)](#ultra-pro-high-fidelity-code-integrity-&-dse-subversion-(t1553006))
+- [Windows Code Integrity & DSE Subversion Detection (T1553.006)](#windows-code-integrity-&-dse-subversion-detection-(t1553006))
 - [Ultra-Pro Client Binary Integrity Compromise (T1554)](#ultra-pro-client-binary-integrity-compromise-(t1554))
 - [Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)](#nem-böngészős-folyamat-hozzáférése-a-böngésző-hitelesítőadat-tárolóihoz-(high-fidelity))
-- [Ultra-Pro High-Fidelity Vault Credential Harvesting (T1555.001)](#ultra-pro-high-fidelity-vault-credential-harvesting-(t1555001))
-- [Ultra-Pro High-Fidelity Securityd Memory Dumping (T1555.002)](#ultra-pro-high-fidelity-securityd-memory-dumping-(t1555002))
-- [Ultra-Pro High-Fidelity Browser Credential Harvesting (T1555.003)](#ultra-pro-high-fidelity-browser-credential-harvesting-(t1555003))
-- [Ultra-Pro High-Fidelity Windows Credential Manager Harvesting (T1555.004)](#ultra-pro-high-fidelity-windows-credential-manager-harvesting-(t1555004))
-- [Ultra-Pro High-Fidelity Password Manager Extraction (T1555.005)](#ultra-pro-high-fidelity-password-manager-extraction-(t1555005))
+- [Windows Vault Credential Harvesting Detection (T1555.001)](#windows-vault-credential-harvesting-detection-(t1555001))
+- [Securityd Memory Dumping Detection (T1555.002)](#securityd-memory-dumping-detection-(t1555002))
+- [Browser Credential Harvesting Detection (T1555.003)](#browser-credential-harvesting-detection-(t1555003))
+- [Windows Credential Manager Harvesting Detection (T1555.004)](#windows-credential-manager-harvesting-detection-(t1555004))
+- [Password Manager Extraction Detection (T1555.005)](#password-manager-extraction-detection-(t1555005))
 - [Cloud Secret Harvesting Detection (T1555.006)](#cloud-secret-harvesting-detection-(t1555006))
 - [Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration](#exploit-grade-authentication-process-hijack-via-suspicious-dll-registration)
 - [Exploit-Grade Security Support Provider Hijacking (LSA SSP)](#exploit-grade-security-support-provider-hijacking-(lsa-ssp))
@@ -416,9 +416,9 @@
 - [Ultra-Pro Network Device Authentication Hijacking (T1556.004)](#ultra-pro-network-device-authentication-hijacking-(t1556004))
 - [Ultra-Pro SID History Injection Correlation (T1556.005)](#ultra-pro-sid-history-injection-correlation-(t1556005))
 - [Ultra-Pro Entra ID MFA Method Hijacking (T1556.006)](#ultra-pro-entra-id-mfa-method-hijacking-(t1556006))
-- [Ultra-Pro Hybrid Identity Sync Manipulation (T1556.007)](#ultra-pro-hybrid-identity-sync-manipulation-(t1556007))
-- [Ultra-Pro Network-to-Cloud Auth Hijacking (T1556.008)](#ultra-pro-network-to-cloud-auth-hijacking-(t1556008))
-- [Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557)](#ultra-pro-high-fidelity-adversary-in-the-middle-(t1557))
+- [Hybrid Identity Sync Manipulation Detection (T1556.007)](#hybrid-identity-sync-manipulation-detection-(t1556007))
+- [Network-to-Cloud Auth Hijacking Detection (T1556.008)](#network-to-cloud-auth-hijacking-detection-(t1556008))
+- [Adversary-in-the-Middle Detection (T1557)](#adversary-in-the-middle-detection-(t1557))
 - [LLMNR/NBT-NS Poisoning & SMB Relay Detection (T1557.001)](#llmnrnbt-ns-poisoning-&-smb-relay-detection-(t1557001))
 - [Rogue ARP Poisoning / MITM Detection (T1557.002)](#rogue-arp-poisoning--mitm-detection-(t1557002))
 - [Rogue DHCP / DHCP Spoofing Detection (T1557.003)](#rogue-dhcp--dhcp-spoofing-detection-(t1557003))
@@ -7681,16 +7681,14 @@ modifications that lower security zone settings.
 
 
 ---
-## Ultra-Pro High-Fidelity Code Integrity & DSE Subversion (T1553.006)
+## Windows Code Integrity & DSE Subversion Detection (T1553.006)
 - **ID:** `T1553_006.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects attempts to subvert Windows Code Integrity and Driver Signature Enforcement (DSE). 
-Focuses on BCDEDIT flags and registry modifications that allow unsigned kernel drivers 
-to load, while filtering out legitimate OS maintenance and installers.
+- **Leírás:** Detects attempts to subvert Windows Code Integrity and Driver Signature Enforcement (DSE) via BCDEDIT flags or registry modifications that allow unsigned kernel drivers to load, while filtering legitimate OS maintenance, installer, and trusted system processes.
 
 
 #### 🚨 Response Playbook

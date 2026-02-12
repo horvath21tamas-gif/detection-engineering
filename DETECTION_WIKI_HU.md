@@ -7570,14 +7570,12 @@ A nem szinkronizáló kiszolgálóktól származó MSOL-fiókkal való visszaél
 
 
 ---
-## Ultra-Pro Network-to-Cloud Auth Hijacking (T1556.008)
+## Hálózatról felhőre történő hitelesítés-eltérítés észlelése (T1556.008)
 - **ID:** `T1556_008.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a vállalati alkalmazások és a feltételes hozzáférés magas kockázatú módosításait
-hálózati eszközök által használt házirendek (VPN-ek, tűzfalak).Az MFA megkerülésére összpontosít
-és a hitelesítő adatok jogosulatlan kiegészítése a szolgáltatási tagokhoz.
+- **Leírás:** Érzékeli a nagy kockázatú módosításokat a vállalati alkalmazásokban, az egyszerű szolgáltatásokban és a feltételes hozzáférési házirendekben az Azure-ban, amelyek hálózat-felhő hitelesítési feltörést jelezhetnek (MITRE ATT&CK T1556.008).Az MFA-megkerülésekre, a hitelesítő adatok jogosulatlan kiegészítésére és a gyanús szolgáltatási elv-módosításokra összpontosít.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

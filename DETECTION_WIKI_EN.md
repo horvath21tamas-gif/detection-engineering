@@ -7975,14 +7975,12 @@ Focuses on MSOL account abuse from non-sync servers and unauthorized ADSync Powe
 
 
 ---
-## Ultra-Pro Network-to-Cloud Auth Hijacking (T1556.008)
+## Network-to-Cloud Auth Hijacking Detection (T1556.008)
 - **ID:** `T1556_008.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects high-risk modifications to Enterprise Applications and Conditional Access 
-policies used by network devices (VPNs, Firewalls). Focuses on MFA bypasses 
-and unauthorized credential additions to service principals.
+- **Leírás:** Detects high-risk modifications to enterprise applications, service principals,  and conditional access policies in Azure that could indicate network-to-cloud  authentication hijacking (MITRE ATT&CK T1556.008). Focuses on MFA bypasses,  unauthorized credential additions, and suspicious service principal changes.
 
 
 #### 🚨 Response Playbook

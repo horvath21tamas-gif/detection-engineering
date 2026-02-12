@@ -7570,14 +7570,12 @@ Konzentriert sich auf den Missbrauch von MSOL-Konten durch nicht synchronisierte
 
 
 ---
-## Ultra-Pro-Netzwerk-zu-Cloud-Auth-Hijacking (T1556.008)
+## Erkennung von Netzwerk-zu-Cloud-Authentifizierungs-Hijacking (T1556.008)
 - **ID:** `T1556_008.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt risikoreiche Änderungen an Unternehmensanwendungen und bedingtem Zugriff
-Richtlinien, die von Netzwerkgeräten (VPNs, Firewalls) verwendet werden.Konzentriert sich auf MFA-Umgehungen
-und unbefugte Hinzufügung von Anmeldeinformationen zu Dienstprinzipalen.
+- **Beschreibung:** Erkennt risikoreiche Änderungen an Unternehmensanwendungen, Dienstprinzipalen und Richtlinien für bedingten Zugriff in Azure, die auf einen Hijacking der Netzwerk-zu-Cloud-Authentifizierung hinweisen könnten (MITRE ATT&CK T1556.008).Konzentriert sich auf MFA-Umgehungen, unbefugte Hinzufügungen von Anmeldeinformationen und verdächtige Dienstprinzipaländerungen.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

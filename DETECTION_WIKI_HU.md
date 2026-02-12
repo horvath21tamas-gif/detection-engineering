@@ -7585,16 +7585,14 @@ hálózati eszközök által használt házirendek (VPN-ek, tűzfalak).Az MFA me
 
 
 ---
-## Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557)
+## Ellenfél észlelése a középsőben (T1557)
 - **ID:** `T1557.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az AiTM támadásokhoz szükséges jogosulatlan rendszerkonfiguráció-módosításokat,
-beleértve az IP-továbbítás engedélyezését és az LLMNR/NetBIOS mérgező eszköz végrehajtását,
-miközben kiszűri a legitim VPN és virtualizációs zajt.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a lehetséges Adversary-in-the-Middle (AiTM) támadásokat (MITRE ATT&CK T1557) az olyan jogosulatlan rendszerkonfiguráció-módosítások figyelésével, mint például az IP-továbbítás engedélyezése és az LLMNR/NetBIOS/ARP mérgező eszközök nem megbízható helyekről történő végrehajtása.Szűri a legitim virtualizációs és VPN-tevékenységet, hogy csökkentse a hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

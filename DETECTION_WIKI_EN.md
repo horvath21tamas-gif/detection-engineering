@@ -7991,16 +7991,14 @@ and unauthorized credential additions to service principals.
 
 
 ---
-## Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557)
+## Adversary-in-the-Middle Detection (T1557)
 - **ID:** `T1557.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized system configuration changes required for AiTM attacks, 
-including IP Forwarding enablement and LLMNR/NetBIOS poisoning tool execution, 
-while filtering out legitimate VPN and virtualization noise.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects potential Adversary-in-the-Middle (AiTM) attacks (MITRE ATT&CK T1557)  by monitoring unauthorized system configuration changes such as IP forwarding  enablement and execution of LLMNR/NetBIOS/ARP poisoning tools from untrusted locations.  Filters legitimate virtualization and VPN activity to reduce false positives.
 
 
 #### 🚨 Response Playbook

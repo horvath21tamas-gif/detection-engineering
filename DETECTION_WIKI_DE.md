@@ -7585,16 +7585,14 @@ und unbefugte Hinzufügung von Anmeldeinformationen zu Dienstprinzipalen.
 
 
 ---
-## Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557)
+## Adversary-in-the-Middle-Erkennung (T1557)
 - **ID:** `T1557.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt nicht autorisierte Systemkonfigurationsänderungen, die für AiTM-Angriffe erforderlich sind.
-einschließlich der Aktivierung der IP-Weiterleitung und der Ausführung des LLMNR/NetBIOS-Poisoning-Tools,
-Gleichzeitig werden legitime VPN- und Virtualisierungsgeräusche herausgefiltert.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt potenzielle Adversary-in-the-Middle (AiTM)-Angriffe (MITRE ATT&CK T1557) durch Überwachung nicht autorisierter Systemkonfigurationsänderungen wie der Aktivierung der IP-Weiterleitung und der Ausführung von LLMNR/NetBIOS/ARP-Poisoning-Tools von nicht vertrauenswürdigen Standorten aus.Filtert legitime Virtualisierungs- und VPN-Aktivitäten, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

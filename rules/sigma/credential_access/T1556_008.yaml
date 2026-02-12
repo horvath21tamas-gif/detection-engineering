@@ -1,12 +1,15 @@
-title: Ultra-Pro Network-to-Cloud Auth Hijacking (T1556.008)
+title: Network-to-Cloud Auth Hijacking Detection (T1556.008)
 id: 2f48a160-be90-4731-9c23-25c878b58c23
 status: stable
-description: |
-    Detects high-risk modifications to Enterprise Applications and Conditional Access 
-    policies used by network devices (VPNs, Firewalls). Focuses on MFA bypasses 
-    and unauthorized credential additions to service principals.
-author: hota05
-date: 2026-02-02
+description: >
+    Detects high-risk modifications to enterprise applications, service principals, 
+    and conditional access policies in Azure that could indicate network-to-cloud 
+    authentication hijacking (MITRE ATT&CK T1556.008). Focuses on MFA bypasses, 
+    unauthorized credential additions, and suspicious service principal changes.
+author: hota05 
+date: 2026-02-12
+references:
+    - https://attack.mitre.org/techniques/T1556/008/
 tags:
     - attack.persistence
     - attack.credential_access
@@ -14,6 +17,7 @@ tags:
 logsource:
     product: azure
     service: audit
+
 detection:
     selection_network_apps:
         targetResources.displayName|contains:
@@ -23,22 +27,39 @@ detection:
             - 'Check Point'
             - 'Pulse Secure'
             - 'F5 Big-IP'
+            - 'Palo Alto'
 
     selection_ca_downgrade:
         operationName: 'Update conditional access policy'
         targetResources.displayName|contains: 'MFA'
 
     selection_app_credentials:
-        operationName: 
+        operationName|contains:
             - 'Add owner to application'
             - 'Update application – Certificates and secrets management'
+            - 'Add credential'
+            - 'Update service principal credentials'
 
     filter_trusted_admins:
         initiatedBy.userPrincipalName|endswith:
             - 'admin_secure@company.com'
+            - 'itops@company.com'
         userAgent|contains:
-            - 'HashiCorp/1.0'
+            - 'HashiCorp/'
             - 'Ansible'
+            - 'Terraform/'
 
-    condition: (selection_network_apps or selection_ca_downgrade or selection_app_credentials) and not filter_trusted_admins
+    condition:
+        (
+            selection_network_apps
+            or selection_ca_downgrade
+            or selection_app_credentials
+        )
+        and not filter_trusted_admins
+
+falsepositives:
+    - Legitimate network application administration by approved admins
+    - Automated deployment pipelines using Terraform, Ansible, HashiCorp tools
+    - Security audit or compliance scanning operations
+
 level: critical

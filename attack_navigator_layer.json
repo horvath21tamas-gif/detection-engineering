@@ -628,15 +628,11 @@
             "color": "#ff6666"
         },
         {
+            "techniqueID": "T1561",
+            "color": "#ff6666"
+        },
+        {
             "techniqueID": "T1561.002",
-            "color": "#ff6666"
-        },
-        {
-            "techniqueID": "T1070",
-            "color": "#ff6666"
-        },
-        {
-            "techniqueID": "T1499",
             "color": "#ff6666"
         },
         {
@@ -729,6 +725,10 @@
         },
         {
             "techniqueID": "T1567.003",
+            "color": "#ff6666"
+        },
+        {
+            "techniqueID": "T1070",
             "color": "#ff6666"
         },
         {
@@ -1265,6 +1265,10 @@
         },
         {
             "techniqueID": "T1559.003",
+            "color": "#ff6666"
+        },
+        {
+            "techniqueID": "T1499",
             "color": "#ff6666"
         },
         {

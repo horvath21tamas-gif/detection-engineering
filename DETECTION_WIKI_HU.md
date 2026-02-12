@@ -7944,13 +7944,16 @@ A ransomware-szerű hatástevékenységre összpontosít (T1561.001).
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a romboló, alacsony szintű lemezműveleteket, mint például a partíciós tábla törlése,
-MBR felülírása és teljes lemez törlése.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a nagy megbízhatóságú romboló lemezszerkezeti műveleteket, beleértve:
 
-Figyeli a destruktív CLI argumentumokat, a nyers eszköz hozzáférési mintákat és
-nem megbízható végrehajtási környezet a zsarolóvírusok, törlőprogramok vagy rosszindulatú szkriptek megelőzése érdekében
-a lemezszerkezetek tönkretételétől.
+- Partíciós tábla törlése (lemezpart tisztítása / partíció törlése)
+- MBR felülírás (az első 512 bájtos felülírási minták)
+- Nyers fizikai meghajtó ír
+- Pusztító PowerShell lemeztörlés
+- Gyanús végrehajtási környezet (makró/webshell/LOLBIN)
+
+A zsarolóvírusokra és a pusztító törlő viselkedésre összpontosít (T1561.002).
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

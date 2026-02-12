@@ -8369,13 +8369,16 @@ Focused on ransomware-style impact activity (T1561.001).
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects destructive low-level disk operations such as partition table wiping, 
-MBR overwriting, and full-disk clearing.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence destructive disk structure operations including:
 
-Monitors for destructive CLI arguments, raw device access patterns, and 
-untrusted execution context to prevent ransomware, wipers, or malicious scripts
-from destroying disk structures.
+  - Partition table wiping (diskpart clean / delete partition)
+  - MBR overwrite (first 512 bytes overwrite patterns)
+  - Raw physical drive writes
+  - Destructive PowerShell disk clearing
+  - Suspicious execution context (macro/webshell/LOLBIN)
+
+Focused on ransomware and destructive wiper behavior (T1561.002).
 
 
 #### 🚨 Response Playbook

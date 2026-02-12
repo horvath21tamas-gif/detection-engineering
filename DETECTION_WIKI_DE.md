@@ -7944,13 +7944,16 @@ Konzentriert sich auf Angriffsaktivitäten im Ransomware-Stil (T1561.001).
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt zerstörerische Festplattenoperationen auf niedriger Ebene, z. B. das Löschen von Partitionstabellen,
-MBR-Überschreiben und vollständiges Löschen der Festplatte.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochzuverlässige destruktive Festplattenstrukturoperationen, einschließlich:
 
-Überwacht auf destruktive CLI-Argumente, unformatierte Gerätezugriffsmuster usw
-nicht vertrauenswürdigen Ausführungskontext, um Ransomware, Wiper oder bösartige Skripte zu verhindern
-vor der Zerstörung von Scheibenstrukturen.
+- Löschen der Partitionstabelle (Diskpart bereinigen/Partition löschen)
+- MBR-Überschreibung (die ersten 512 Bytes werden überschrieben)
+- Rohe Schreibvorgänge auf dem physischen Laufwerk
+- Zerstörerische PowerShell-Festplattenbereinigung
+– Verdächtiger Ausführungskontext (Makro/Webshell/LOLBIN)
+
+Konzentriert sich auf Ransomware und destruktives Wiper-Verhalten (T1561.002).
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

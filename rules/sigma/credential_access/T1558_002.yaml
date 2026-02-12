@@ -1,47 +1,114 @@
-title: Ultra-Pro High-Fidelity Silver Ticket Forgery & Injection (T1558.002)
+title: Silver Ticket Forgery & Injection
 id: 18d5cfa9-616e-4f68-9dec-ddb40dc04e2e
 status: stable
 description: |
-    Detects the creation and injection of forged Kerberos Service Tickets (Silver Tickets). 
-    Focuses on the mandatory presence of service-specific SPNs (cifs, mssql, http) 
-    and the provision of service account hashes in the command line.
-author: hota05
-date: 2026-02-04
+    Detects high-confidence Silver Ticket creation and injection activity.
+
+    Coverage includes:
+
+      - Service-specific SPN targeting (cifs, http, mssql, ldap)
+      - Service account hash material (RC4 / AES128 / AES256)
+      - SID specification
+      - Pass-the-ticket (/ptt) injection
+      - Mimikatz and Rubeus Silver ticket usage patterns
+
+    Focused on ATT&CK T1558.002.
+
+author: hota05 
+date: 2026-02-12
 tags:
     - attack.credential_access
     - attack.t1558.002
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_silver_args:
+    selection_service_spn:
         CommandLine|contains:
-            - ' /service:'      
-            - ' /target:'       
-        CommandLine|contains:
-            - ' /rc4:'         
-            - ' /aes256:'        
-            - ' /aes128:'
-            - ' /sid:'         
+            - '/service:cifs'
+            - '/service:http'
+            - '/service:mssql'
+            - '/service:ldap'
+            - '/spn:cifs/'
+            - '/spn:http/'
+            - '/spn:mssql'
+            - '/spn:ldap'
 
-    selection_tools:
+    selection_service_hash:
         CommandLine|contains:
-            - 'kerberos::golden' 
-            - 'silver '          
-            - ' /ptt'            
-            - ' /spn:'           
+            - '/rc4:'
+            - '/aes128:'
+            - '/aes256:'
 
-    selection_untrusted_parent:
+    selection_sid:
+        CommandLine|contains:
+            - '/sid:'
+            - 'S-1-5-21-'
+
+    selection_ticket_injection:
+        CommandLine|contains:
+            - '/ptt'
+            - 'kerberos::ptt'
+
+    selection_mimikatz_silver:
+        CommandLine|contains|all:
+            - 'kerberos::golden'
+            - '/service:'
+
+    selection_rubeus_silver:
+        Image|endswith:
+            - '\rubeus.exe'
+        CommandLine|contains|all:
+            - 'silver'
+            - '/service:'
+
+    selection_suspicious_parent:
         ParentImage|endswith:
             - '\cmd.exe'
             - '\powershell.exe'
-            - '\wsmprovhost.exe' 
+            - '\pwsh.exe'
+            - '\wsmprovhost.exe'
+            - '\wmiprvse.exe'
             - '\psexesvc.exe'
-            - '\httpd.exe'       
+            - '\httpd.exe'
+            - '\w3wp.exe'
+            - '\mshta.exe'
+            - '\rundll32.exe'
 
-    filter_legit_lsass:
-        username: 'NT AUTHORITY\SYSTEM'
-        Image|endswith: '\Windows\System32\lsass.exe'
+    selection_temp_execution:
+        Image|contains:
+            - '\AppData\Local\Temp\'
+            - '\Users\Public\'
+            - '\Windows\Temp\'
 
-    condition: (selection_silver_args or selection_tools) and selection_untrusted_parent and not filter_legit_lsass
+    filter_system_context:
+        User|startswith: 'NT AUTHORITY'
+        ParentImage|endswith:
+            - '\services.exe'
+            - '\svchost.exe'
+
+    filter_legit_kerberos_tools:
+        Image|contains:
+            - '\Microsoft Monitoring Agent\'
+            - '\Azure\'
+            - '\RSAT\'
+
+    condition: (
+                    (
+                        (selection_mimikatz_silver or selection_rubeus_silver)
+                        or
+                        (
+                            selection_service_spn
+                            and selection_service_hash
+                            and selection_sid
+                        )
+                    )
+                    and selection_ticket_injection
+               )
+               and (selection_suspicious_parent or selection_temp_execution)
+               and not filter_system_context
+               and not filter_legit_kerberos_tools
+
 level: critical

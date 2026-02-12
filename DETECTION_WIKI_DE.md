@@ -7553,15 +7553,14 @@ erfolgreiche Methodenänderungen mit verdächtigen Einstiegspunkten oder adminis
 
 
 ---
-## Ultra-Pro-Hybrid-Identitätssynchronisierungsmanipulation (T1556.007)
+## Erkennung von Hybrid-Identitätssynchronisierungsmanipulationen (T1556.007)
 - **ID:** `T1556_007.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Manipulation des Entra ID (ehemals Azure AD) Connect-Synchronisierungsprozesses.
-Konzentriert sich auf den Missbrauch von MSOL-Konten durch nicht synchronisierte Server und die unbefugte Verwendung von ADSync PowerShell.
+- **Beschreibung:** Erkennt potenzielle unbefugte Manipulationen von Entra ID-/Azure AD Connect-Synchronisierungsprozessen (MITRE ATT&CK T1556.007).Überwacht MSOL-Kontomissbrauch durch nicht synchronisierte Server, unbefugte ADSync PowerShell-Nutzung und verdächtige Datenbankzugriffe zur Manipulation von Anmeldeinformationen oder Passwörtern.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -7553,15 +7553,14 @@ sikeres metódusmódosítások gyanús belépési pontokkal vagy adminisztráci�
 
 
 ---
-## Ultra-Pro hibrid identitásszinkronizálási manipuláció (T1556.007)
+## Hibrid Identity Sync Manipulation Detection (T1556.007)
 - **ID:** `T1556_007.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az Entra ID (korábban Azure AD) Connect szinkronizálási folyamatának jogosulatlan manipulálását.
-A nem szinkronizáló kiszolgálóktól származó MSOL-fiókkal való visszaélésre és az ADSync PowerShell engedély nélküli használatára összpontosít.
+- **Leírás:** Érzékeli az Entra ID/Azure AD Connect szinkronizálási folyamatok (MITRE ATT&CK T1556.007) lehetséges jogosulatlan manipulációját.Figyeli az MSOL-fiókkal való visszaélést a nem szinkronizáló kiszolgálókról, a jogosulatlan ADSync PowerShell-használatot és a gyanús adatbázis-hozzáférést a hitelesítő adatok vagy jelszavak manipulálása céljából.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

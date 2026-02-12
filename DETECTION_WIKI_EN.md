@@ -7957,15 +7957,14 @@ successful method changes with suspicious entry points or administrative anomali
 
 
 ---
-## Ultra-Pro Hybrid Identity Sync Manipulation (T1556.007)
+## Hybrid Identity Sync Manipulation Detection (T1556.007)
 - **ID:** `T1556_007.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized manipulation of the Entra ID (formerly Azure AD) Connect sync process.
-Focuses on MSOL account abuse from non-sync servers and unauthorized ADSync PowerShell usage.
+- **Leírás:** Detects potential unauthorized manipulation of Entra ID / Azure AD Connect  synchronization processes (MITRE ATT&CK T1556.007). Monitors MSOL account abuse  from non-sync servers, unauthorized ADSync PowerShell usage, and suspicious  database access for credential or password manipulation.
 
 
 #### 🚨 Response Playbook

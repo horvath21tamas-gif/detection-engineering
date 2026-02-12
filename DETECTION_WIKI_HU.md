@@ -7894,15 +7894,16 @@ A következőkre összpontosít:
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a romboló, alacsony szintű lemezműveleteket, beleértve az MBR felülírását,
-partíciók törlése és a teljes lemeztartalom megsemmisítése.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a nagy megbízhatóságú romboló lemezműveleteket, beleértve:
 
-Monitorok:
-- Nyers fizikai lemez hozzáférés
-- Pusztító CLI argumentumok (diskpart, dd, format, PowerShell)
-- Gyanús végrehajtási környezet (irodai alkalmazások, webszerverek, ideiglenes elérési utak)
-- Kiszűri az ismert jó képalkotó, adminisztrációs és biztonsági eszközöket
+- Nyers fizikai lemez felülírása (MBR / GPT megsemmisítése)
+- Partíciós tábla törlése (lemezpart tisztítása/törlése)
+- Teljes lemezes tartalom felülírása (dd, nulla/véletlen adatfolyam)
+- Pusztító PowerShell lemeztörlés
+- Gyanús végrehajtási környezet (makró/webshell/LOLBIN)
+
+A zsarolóvírusokra és a pusztító ablaktörlő tevékenységre összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

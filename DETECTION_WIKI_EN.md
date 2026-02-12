@@ -8317,15 +8317,16 @@ Focuses on:
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects destructive low-level disk operations, including MBR overwrite, 
-partition wiping, and full-disk content destruction.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence destructive disk operations including:
 
-Monitors:
-  - Raw physical disk access
-  - Destructive CLI arguments (diskpart, dd, format, PowerShell)
-  - Suspicious execution context (Office apps, web servers, temp paths)
-  - Filters out known-good imaging, admin, and security tools
+  - Raw physical disk overwrite (MBR / GPT destruction)
+  - Partition table wiping (diskpart clean/delete)
+  - Full-disk content overwrite (dd, zero/random streams)
+  - Destructive PowerShell disk clearing
+  - Suspicious execution context (macro/webshell/LOLBIN)
+
+Focused on ransomware and destructive wiper activity.
 
 
 #### 🚨 Response Playbook

@@ -7894,15 +7894,16 @@ Konzentriert sich auf:
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt destruktive Festplattenoperationen auf niedriger Ebene, einschließlich MBR-Überschreibung,
-Partitionslöschung und Zerstörung des gesamten Festplatteninhalts.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochzuverlässige destruktive Festplattenoperationen, einschließlich:
 
-Monitore:
-- Roher Zugriff auf physische Festplatten
-– Zerstörerische CLI-Argumente (diskpart, dd, format, PowerShell)
-– Verdächtiger Ausführungskontext (Office-Apps, Webserver, temporäre Pfade)
-– Filtert bekanntermaßen funktionierende Imaging-, Verwaltungs- und Sicherheitstools heraus
+- Überschreiben der rohen physischen Festplatte (MBR-/GPT-Zerstörung)
+- Löschen der Partitionstabelle (Diskpart bereinigen/löschen)
+- Überschreiben des gesamten Festplatteninhalts (dd, null/zufällige Streams)
+- Zerstörerische PowerShell-Festplattenbereinigung
+– Verdächtiger Ausführungskontext (Makro/Webshell/LOLBIN)
+
+Konzentriert sich auf Ransomware und zerstörerische Wiper-Aktivitäten.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

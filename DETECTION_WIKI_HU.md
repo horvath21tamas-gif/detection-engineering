@@ -7851,11 +7851,18 @@ Szűri a vállalati automatizálást a szülőfolyamat vonala, az interaktív h�
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a fejlett adattovábbítást a .NET vagy PowerShell használatával történő kiszűréshez
-tömörítési könyvtárak, beleértve a felhasználó kézi kódolását vagy archiválását
-és a szerveradatokat.Szűri a vállalati automatizálást a szülői folyamatok vonala szerint,
-parancssori entrópia és integritási szintek.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a nagy megbízhatóságú adatsorolást a .NET vagy a kiszűréshez
+PowerShell tömörítési könyvtárak.
+
+A fedezet a következőket tartalmazza:
+
+- A System.IO.Compression API-k közvetlen használata
+- PowerShell Compress-Archive felhasználói/szerver adatcélzással
+- Archívum létrehozása, majd kódolási viselkedés
+- Gyanús végrehajtási vonal (webszerver, makró, shell)
+
+Az ATT&CK T1560.002-re összpontosít (archívum a könyvtáron keresztül).
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -7851,11 +7851,18 @@ und Integritätsebenen.
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt erweitertes Daten-Staging zur Exfiltration mithilfe von .NET oder PowerShell
-Komprimierungsbibliotheken, einschließlich manueller Kodierung oder Archivierung des Benutzers
-und Serverdaten.Filtert die Unternehmensautomatisierung nach der Herkunft des übergeordneten Prozesses.
-Befehlszeilen-Entropie und Integritätsebenen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochzuverlässiges Daten-Staging zur Exfiltration mithilfe von .NET oder
+PowerShell-Komprimierungsbibliotheken.
+
+Der Versicherungsschutz umfasst:
+
+- Direkte Nutzung von System.IO.Compression-APIs
+- PowerShell Compress-Archive mit Benutzer-/Serverdaten-Targeting
+- Archiverstellung, gefolgt von Kodierungsverhalten
+– Verdächtige Ausführungslinie (Webserver, Makro, Shell)
+
+Konzentriert sich auf ATT&CK T1560.002 (Archiv über Bibliothek).
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -7376,16 +7376,14 @@ securityd, während von Apple signierte Diagnoseprogramme strikt gefiltert werde
 
 
 ---
-## Ultra-Pro High-Fidelity-Browser-Anmeldedatenerfassung (T1555.003)
+## Erkennung der Erfassung von Browser-Anmeldedaten (T1555.003)
 - **ID:** `T1555_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugten Zugriff und Extraktion von Browser-Anmeldeinformationsdatenbanken.
-Es zielt auf Befehlszeilenmissbrauch (Kopieren/Archivieren) und verdächtige Interpreter ab
-Verhalten, das auf sensible Profildateien wie „Anmeldedaten“ oder „Cookies“ abzielt.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt potenziellen unbefugten Zugriff und die Exfiltration von Browser-Anmeldeinformationsdatenbanken (Chrome, Edge, Firefox, Brave), indem verdächtige Dateivorgänge in der Befehlszeile überwacht werden, die auf „Anmeldedaten“, „Cookies“, „Webdaten“, „key4.db“ oder „logins.json“ abzielen.Filtert legitime Browserprozesse und Backup-/Synchronisierungstools.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -7376,16 +7376,14 @@ biztonságos, miközben szigorúan szűri az Apple által aláírt diagnosztikai
 
 
 ---
-## Ultra-Pro High-Fidelity Browser hitelesítő adatok begyűjtése (T1555.003)
+## Böngésző hitelesítő adatok begyűjtésének észlelése (T1555.003)
 - **ID:** `T1555_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a jogosulatlan hozzáférést és a böngésző hitelesítőadatbázisainak kibontását.
-A parancssori visszaéléseket (másolás/archiválás) és a gyanús tolmácsokat célozza meg
-olyan érzékeny profilfájlokat célzó viselkedés, mint a „Bejelentkezési adatok” vagy a „Cookie-k”.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** A „Bejelentkezési adatok”, „Cookie-k”, „Webadatok”, „key4.db” vagy „logins.json” fájlokat célzó gyanús parancssori fájlműveletek figyelésével észleli a böngésző hitelesítőadatbázisainak (Chrome, Edge, Firefox, Brave) esetleges jogosulatlan hozzáférését és kiszűrését.Szűri a legitim böngészőfolyamatokat és a biztonsági mentési/szinkronizálási eszközöket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

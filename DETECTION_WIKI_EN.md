@@ -7769,16 +7769,14 @@ securityd, while strictly filtering Apple-signed diagnostic utilities.
 
 
 ---
-## Ultra-Pro High-Fidelity Browser Credential Harvesting (T1555.003)
+## Browser Credential Harvesting Detection (T1555.003)
 - **ID:** `T1555_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized access and extraction of browser credential databases. 
-It targets command-line abuse (copying/archiving) and suspicious interpreter 
-behavior targeting sensitive profile files like 'Login Data' or 'Cookies'.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects potential unauthorized access and exfiltration of browser credential databases  (Chrome, Edge, Firefox, Brave) by monitoring suspicious command-line file operations  targeting 'Login Data', 'Cookies', 'Web Data', 'key4.db', or 'logins.json'. Filters  legitimate browser processes and backup/sync tools.
 
 
 #### 🚨 Response Playbook

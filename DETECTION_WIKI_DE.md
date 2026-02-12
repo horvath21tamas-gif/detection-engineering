@@ -419,11 +419,11 @@
 - [Ultra-Pro-Hybrid-Identitätssynchronisierungsmanipulation (T1556.007)](#ultra-pro-hybrid-identitätssynchronisierungsmanipulation-(t1556007))
 - [Ultra-Pro-Netzwerk-zu-Cloud-Auth-Hijacking (T1556.008)](#ultra-pro-netzwerk-zu-cloud-auth-hijacking-(t1556008))
 - [Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557)](#ultra-pro-high-fidelity-adversary-in-the-middle-(t1557))
-- [Ultra-Pro High-Fidelity LLMNR/NBT-NS-Vergiftung (T1557.001)](#ultra-pro-high-fidelity-llmnrnbt-ns-vergiftung-(t1557001))
-- [Ultra-Pro High-Fidelity ARP-Vergiftungserkennung (T1557.002)](#ultra-pro-high-fidelity-arp-vergiftungserkennung-(t1557002))
-- [Ultra-Pro High-Fidelity DHCP-Spoofing-Erkennung (T1557.003)](#ultra-pro-high-fidelity-dhcp-spoofing-erkennung-(t1557003))
-- [Ultra-Pro High-Fidelity-Kerberos-Angriffserkennung (T1558)](#ultra-pro-high-fidelity-kerberos-angriffserkennung-(t1558))
-- [Ultra-Profi-High-Fidelity-Golden-Ticket-Fälschung und -Injektion (T1558.001)](#ultra-profi-high-fidelity-golden-ticket-fälschung-und--injektion-(t1558001))
+- [LLMNR/NBT-NS-Vergiftungs- und SMB-Relay-Erkennung (T1557.001)](#llmnrnbt-ns-vergiftungs--und-smb-relay-erkennung-(t1557001))
+- [Rogue-ARP-Vergiftung/MITM-Erkennung (T1557.002)](#rogue-arp-vergiftungmitm-erkennung-(t1557002))
+- [Rogue-DHCP-/DHCP-Spoofing-Erkennung (T1557.003)](#rogue-dhcp-dhcp-spoofing-erkennung-(t1557003))
+- [Kerberos-Angriffserkennung](#kerberos-angriffserkennung)
+- [Golden-Ticket-Fälschung und -Einschleusung](#golden-ticket-fälschung-und--einschleusung)
 - [Fälschung und Einschleusung von Silbertickets](#fälschung-und-einschleusung-von-silbertickets)
 - [Verdächtige Kerberos TGS-Ticketanfrage (Kerberoasting)](#verdächtige-kerberos-tgs-ticketanfrage-(kerberoasting))
 - [Ultra-Pro High-Fidelity AS-REP-Röstung und LDAP-Enumeration](#ultra-pro-high-fidelity-as-rep-röstung-und-ldap-enumeration)
@@ -7603,16 +7603,14 @@ Gleichzeitig werden legitime VPN- und Virtualisierungsgeräusche herausgefiltert
 
 
 ---
-## Ultra-Pro High-Fidelity LLMNR/NBT-NS-Vergiftung (T1557.001)
+## LLMNR/NBT-NS-Vergiftungs- und SMB-Relay-Erkennung (T1557.001)
 - **ID:** `T1557_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [AT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt LLMNR/NBT-NS-Vergiftung und SMB-Relay-Tools (Responder, Inveigh) durch Identifizierung
-Nicht autorisierte Prozesse versuchen, eine Verbindung zu Netzwerkauflösungsports herzustellen, kombiniert mit
-spezifische Befehlszeilensignaturen des Angreifers.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt potenzielle LLMNR/NBT-NS-Vergiftung und SMB-Relay-Aktivität (MITRE ATT&CK T1557.001), indem nicht autorisierte Prozesse überwacht werden, die versuchen, sich an Netzwerkauflösungsports zu binden, und bekannte Angriffstools mit verdächtigen Befehlszeilenargumenten ausführen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -7621,16 +7619,14 @@ spezifische Befehlszeilensignaturen des Angreifers.
 
 
 ---
-## Ultra-Pro High-Fidelity ARP-Vergiftungserkennung (T1557.002)
+## Rogue-ARP-Vergiftung/MITM-Erkennung (T1557.002)
 - **ID:** `T1557_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt nicht autorisierte ARP-Poisoning-Versuche durch Überwachung der IP-Weiterleitung
-Aktivierung und Ausführung von Paketmanipulationstools von Unvertrauenswürdigen
-Standorte, insbesondere das Herausfiltern von Virtualisierungs- und VPN-Rauschen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt potenzielle ARP-Poisoning- oder MITM-Versuche (MITRE ATT&CK T1557.002), indem die Aktivierung der IP-Weiterleitung und verdächtige Paketmanipulationstools überwacht werden, die von nicht vertrauenswürdigen Standorten ausgeführt werden.Filtert legitime Virtualisierungs-, VPN- und Netzwerkdiagnoseaktivitäten heraus, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -7639,14 +7635,14 @@ Standorte, insbesondere das Herausfiltern von Virtualisierungs- und VPN-Rauschen
 
 
 ---
-## Ultra-Pro High-Fidelity DHCP-Spoofing-Erkennung (T1557.003)
+## Rogue-DHCP-/DHCP-Spoofing-Erkennung (T1557.003)
 - **ID:** `T1557_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt nicht autorisierte DHCP-Spoofing-Versuche, indem Prozesse identifiziert werden, die versuchen, einzugreifen
-als betrügerischer DHCP-Server.Es sucht speziell nach Gateway-/DNS-Hijack-Argumenten
-kombiniert mit nicht vertrauenswürdigen Prozessstandorten und Nicht-Systembenutzern.
+
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt potenziell unerwünschte DHCP-Serveraktivitäten, die auf DHCP-Spoofing hinweisen (MITRE ATT&CK T1557.003).Die Regel identifiziert verdächtige Prozesse, die versuchen, DHCP-bezogene Dienste mit Gateway-/DNS-Manipulationsargumenten von nicht standardmäßigen Standorten und Nicht-Systembenutzern zu starten.Entwickelt, um Fehlalarme durch Filterung legitimer Virtualisierungs- und nativer DHCP-Dienste zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

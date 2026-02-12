@@ -419,11 +419,11 @@
 - [Ultra-Pro hibrid identitásszinkronizálási manipuláció (T1556.007)](#ultra-pro-hibrid-identitásszinkronizálási-manipuláció-(t1556007))
 - [Ultra-Pro Network-to-Cloud Auth Hijacking (T1556.008)](#ultra-pro-network-to-cloud-auth-hijacking-(t1556008))
 - [Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557)](#ultra-pro-high-fidelity-adversary-in-the-middle-(t1557))
-- [Ultra-Pro High-Fidelity LLMNR/NBT-NS mérgezés (T1557.001)](#ultra-pro-high-fidelity-llmnrnbt-ns-mérgezés-(t1557001))
-- [Ultra-Pro High-Fidelity ARP mérgezésészlelő (T1557.002)](#ultra-pro-high-fidelity-arp-mérgezésészlelő-(t1557002))
-- [Ultra-Pro High-Fidelity DHCP hamisítás-észlelés (T1557.003)](#ultra-pro-high-fidelity-dhcp-hamisítás-észlelés-(t1557003))
-- [Ultra-Pro High-Fidelity Kerberos támadásészlelés (T1558)](#ultra-pro-high-fidelity-kerberos-támadásészlelés-(t1558))
-- [Ultra-Pro High-Fidelity Golden Ticket hamisítás és injekció (T1558.001)](#ultra-pro-high-fidelity-golden-ticket-hamisítás-és-injekció-(t1558001))
+- [LLMNR/NBT-NS mérgezés és SMB-reléérzékelés (T1557.001)](#llmnrnbt-ns-mérgezés-és-smb-reléérzékelés-(t1557001))
+- [Rogue ARP-mérgezés / MITM-észlelés (T1557.002)](#rogue-arp-mérgezés--mitm-észlelés-(t1557002))
+- [Rogue DHCP / DHCP hamisítás-észlelés (T1557.003)](#rogue-dhcp--dhcp-hamisítás-észlelés-(t1557003))
+- [Kerberos támadásészlelés](#kerberos-támadásészlelés)
+- [Aranyjegy-hamisítás és befecskendezés](#aranyjegy-hamisítás-és-befecskendezés)
 - [Ezüst jegyhamisítás és befecskendezés](#ezüst-jegyhamisítás-és-befecskendezés)
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
 - [Ultra-Pro High-Fidelity AS-REP pörkölés és LDAP felsorolás](#ultra-pro-high-fidelity-as-rep-pörkölés-és-ldap-felsorolás)
@@ -7603,16 +7603,14 @@ miközben kiszűri a legitim VPN és virtualizációs zajt.
 
 
 ---
-## Ultra-Pro High-Fidelity LLMNR/NBT-NS mérgezés (T1557.001)
+## LLMNR/NBT-NS mérgezés és SMB-reléérzékelés (T1557.001)
 - **ID:** `T1557_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Felismeri az LLMNR/NBT-NS mérgezést és az SMB közvetítő eszközöket (Responder, Inveigh) az azonosítással
-jogosulatlan folyamatok, amelyek megpróbálnak kapcsolódni a hálózati felbontási portokhoz, kombinálva a
-konkrét támadó parancssori aláírások.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a lehetséges LLMNR/NBT-NS mérgezést és az SMB továbbítási tevékenységet (MITRE ATT&CK T1557.001) azáltal, hogy figyeli a jogosulatlan folyamatokat, amelyek megpróbálnak kapcsolódni a hálózati feloldó portokhoz, és ismert támadási eszközöket futtatnak gyanús parancssori argumentumokkal.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -7621,16 +7619,14 @@ konkrét támadó parancssori aláírások.
 
 
 ---
-## Ultra-Pro High-Fidelity ARP mérgezésészlelő (T1557.002)
+## Rogue ARP-mérgezés / MITM-észlelés (T1557.002)
 - **ID:** `T1557_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Az IP-továbbítás figyelésével észleli a jogosulatlan ARP-mérgezési kísérleteket
-engedélyezése és a nem megbízható csomagkezelő eszközök végrehajtása
-helyekre, konkrétan kiszűrve a virtualizációt és a VPN-zajt.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a lehetséges ARP-mérgezéseket vagy MITM-kísérleteket (MITRE ATT&CK T1557.002) az IP-továbbítás engedélyezésének és a nem megbízható helyekről végrehajtott gyanús csomagkezelési eszközök figyelésével.Kiszűri a legitim virtualizációs, VPN- és hálózati diagnosztikai tevékenységeket, hogy csökkentse a hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -7639,14 +7635,14 @@ helyekre, konkrétan kiszűrve a virtualizációt és a VPN-zajt.
 
 
 ---
-## Ultra-Pro High-Fidelity DHCP hamisítás-észlelés (T1557.003)
+## Rogue DHCP / DHCP hamisítás-észlelés (T1557.003)
 - **ID:** `T1557_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a jogosulatlan DHCP-hamisítási kísérleteket azáltal, hogy azonosítja a cselekvésre irányuló folyamatokat
-gazember DHCP szerverként.Kifejezetten az átjáró/DNS-eltérítő argumentumokat keresi
-nem megbízható folyamathelyekkel és nem rendszerfelhasználókkal kombinálva.
+
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a DHCP-hamisításra utaló potenciális csaló DHCP-szervertevékenységet (MITRE ATT&CK T1557.003).A szabály azonosítja azokat a gyanús folyamatokat, amelyek nem szabványos helyekről és nem rendszerfelhasználókról próbálnak elindítani DHCP-vel kapcsolatos szolgáltatásokat átjáró/DNS-manipulációs argumentumokkal.Úgy tervezték, hogy csökkentse a hamis pozitív eredményeket a legitim virtualizáció és a natív DHCP-szolgáltatások szűrésével.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -419,11 +419,11 @@
 - [Ultra-Pro Hybrid Identity Sync Manipulation (T1556.007)](#ultra-pro-hybrid-identity-sync-manipulation-(t1556007))
 - [Ultra-Pro Network-to-Cloud Auth Hijacking (T1556.008)](#ultra-pro-network-to-cloud-auth-hijacking-(t1556008))
 - [Ultra-Pro High-Fidelity Adversary-in-the-Middle (T1557)](#ultra-pro-high-fidelity-adversary-in-the-middle-(t1557))
-- [Ultra-Pro High-Fidelity LLMNR/NBT-NS Poisoning (T1557.001)](#ultra-pro-high-fidelity-llmnrnbt-ns-poisoning-(t1557001))
-- [Ultra-Pro High-Fidelity ARP Poisoning Detection (T1557.002)](#ultra-pro-high-fidelity-arp-poisoning-detection-(t1557002))
-- [Ultra-Pro High-Fidelity DHCP Spoofing Detection (T1557.003)](#ultra-pro-high-fidelity-dhcp-spoofing-detection-(t1557003))
-- [Ultra-Pro High-Fidelity Kerberos Attack Detection (T1558)](#ultra-pro-high-fidelity-kerberos-attack-detection-(t1558))
-- [Ultra-Pro High-Fidelity Golden Ticket Forgery & Injection (T1558.001)](#ultra-pro-high-fidelity-golden-ticket-forgery-&-injection-(t1558001))
+- [LLMNR/NBT-NS Poisoning & SMB Relay Detection (T1557.001)](#llmnrnbt-ns-poisoning-&-smb-relay-detection-(t1557001))
+- [Rogue ARP Poisoning / MITM Detection (T1557.002)](#rogue-arp-poisoning--mitm-detection-(t1557002))
+- [Rogue DHCP / DHCP Spoofing Detection (T1557.003)](#rogue-dhcp--dhcp-spoofing-detection-(t1557003))
+- [Kerberos Attack Detection](#kerberos-attack-detection)
+- [Golden Ticket Forgery & Injection](#golden-ticket-forgery-&-injection)
 - [Silver Ticket Forgery & Injection](#silver-ticket-forgery-&-injection)
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
 - [Ultra-Pro High-Fidelity AS-REP Roasting & LDAP Enumeration](#ultra-pro-high-fidelity-as-rep-roasting-&-ldap-enumeration)
@@ -8010,16 +8010,14 @@ while filtering out legitimate VPN and virtualization noise.
 
 
 ---
-## Ultra-Pro High-Fidelity LLMNR/NBT-NS Poisoning (T1557.001)
+## LLMNR/NBT-NS Poisoning & SMB Relay Detection (T1557.001)
 - **ID:** `T1557_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects LLMNR/NBT-NS poisoning and SMB relay tools (Responder, Inveigh) by identifying 
-unauthorized processes attempting to bind to network resolution ports combined with 
-specific attacker command-line signatures.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects potential LLMNR/NBT-NS poisoning and SMB relay activity (MITRE ATT&CK T1557.001)  by monitoring unauthorized processes attempting to bind to network resolution ports  and executing known attack tools with suspicious command-line arguments.
 
 
 #### 🚨 Response Playbook
@@ -8029,16 +8027,14 @@ specific attacker command-line signatures.
 
 
 ---
-## Ultra-Pro High-Fidelity ARP Poisoning Detection (T1557.002)
+## Rogue ARP Poisoning / MITM Detection (T1557.002)
 - **ID:** `T1557_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized ARP poisoning attempts by monitoring for IP Forwarding 
-enablement and the execution of packet manipulation tools from untrusted 
-locations, specifically filtering out virtualization and VPN noise.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects potential ARP poisoning or MITM attempts (MITRE ATT&CK T1557.002) by monitoring  IP forwarding enablement and suspicious packet manipulation tools executed from untrusted locations. Filters out legitimate virtualization, VPN, and network diagnostic activity to reduce false positives.
 
 
 #### 🚨 Response Playbook
@@ -8048,14 +8044,14 @@ locations, specifically filtering out virtualization and VPN noise.
 
 
 ---
-## Ultra-Pro High-Fidelity DHCP Spoofing Detection (T1557.003)
+## Rogue DHCP / DHCP Spoofing Detection (T1557.003)
 - **ID:** `T1557_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects unauthorized DHCP spoofing attempts by identifying processes attempting to act 
-as a rogue DHCP server. It specifically looks for gateway/DNS hijack arguments 
-combined with untrusted process locations and non-system users.
+
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects potential rogue DHCP server activity indicative of DHCP spoofing (MITRE ATT&CK T1557.003). The rule identifies suspicious processes attempting to launch DHCP-related services with gateway/DNS manipulation arguments from non-standard locations and non-system users. Designed to reduce false positives by filtering legitimate virtualization and native DHCP services.
 
 
 #### 🚨 Response Playbook

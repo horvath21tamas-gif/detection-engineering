@@ -1,32 +1,35 @@
-title: Ultra-Pro High-Fidelity Code Integrity & DSE Subversion (T1553.006)
+title: Windows Code Integrity & DSE Subversion Detection (T1553.006)
 id: 93144994-c4ec-4023-9186-d61a120c3250
 status: stable
-description: |
-    Detects attempts to subvert Windows Code Integrity and Driver Signature Enforcement (DSE). 
-    Focuses on BCDEDIT flags and registry modifications that allow unsigned kernel drivers 
-    to load, while filtering out legitimate OS maintenance and installers.
-author: hota05
-date: 2026-02-03
+description: >
+    Detects attempts to subvert Windows Code Integrity and Driver Signature Enforcement (DSE)
+    via BCDEDIT flags or registry modifications that allow unsigned kernel drivers to load,
+    while filtering legitimate OS maintenance, installer, and trusted system processes.
+author: hota05 
+date: 2026-02-12
+references:
+    - https://attack.mitre.org/techniques/T1553/006/
 tags:
     - attack.defense_evasion
     - attack.t1553.006
 logsource:
-    product: windows
     category: process_creation
+    product: windows
+
 detection:
+
     selection_bcdedit:
         Image|endswith: '\bcdedit.exe'
         CommandLine|contains:
             - 'set '
-        CommandLine|contains:
-            - 'nointegritychecks' 
-            - 'testsigning'       
-            - 'disable-elam'      
+            - 'nointegritychecks'
+            - 'testsigning'
+            - 'disable-elam'
 
     selection_registry:
         CommandLine|contains:
             - 'Microsoft\CodeIntegrity\Options'
-            - 'Microsoft\Windows\CurrentVersion\Policies\System\Audit' 
+            - 'Microsoft\Windows\CurrentVersion\Policies\System\Audit'
         CommandLine|contains:
             - 'reg add'
             - 'Set-ItemProperty'
@@ -38,14 +41,26 @@ detection:
             - '\pwsh.exe'
             - '\wscript.exe'
             - '\cscript.exe'
-            - '\temp\'
+        Image|contains:
+            - '\Temp\'
 
     filter_trusted_processes:
         Image|startswith:
             - 'C:\Windows\servicing\TrustedInstaller.exe'
             - 'C:\Windows\System32\sysprep\'
             - 'C:\Windows\System32\oobe\'
+            - 'C:\Windows\Setup\'
         username: 'NT AUTHORITY\SYSTEM'
 
-    condition: ((selection_bcdedit) or selection_registry) and selection_context and not filter_trusted_processes
+    condition:
+        (selection_bcdedit or selection_registry)
+        and selection_context
+        and not filter_trusted_processes
+
+falsepositives:
+    - Legitimate OS servicing and patching via TrustedInstaller
+    - Sysprep or OOBE operations during system deployment
+    - Authorized system configuration by IT management automation
+    - Test environments where BCDEDIT flags are modified for development purposes
+
 level: critical

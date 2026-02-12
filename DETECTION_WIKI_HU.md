@@ -7412,16 +7412,14 @@ gyanús parancssori átirányítás, nem interaktív szülőfolyamatok,
 
 
 ---
-## Ultra-Pro nagy pontosságú jelszókezelő kivonat (T1555.005)
+## Jelszókezelő kivonatészlelés (T1555.005)
 - **ID:** `T1555_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a jelszókezelő adatbázisokhoz való jogosulatlan hozzáférést vagy azok kiszűrését
-gyanús fájlműveletek azonosításával (másolás, archiválás) és
-nem megbízható folyamatvonalak, amelyek a .kdbx, .opvault és más tárolófájlokat célozzák.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a jelszókezelő adatbázisok (pl. KeePass, 1Password, Bitwarden) lehetséges jogosulatlan hozzáférését vagy kiszűrését azáltal, hogy figyeli a vault fájlokat (.kdbx, .opvault, .agilekeychain, key3.db, key4.db folyamatokat) és nem végrehajtott kontextusokat célzó gyanús fájlműveleteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -7412,16 +7412,14 @@ und bekannte Signaturen des Credential-Dumping-Tools.
 
 
 ---
-## Ultra-Pro High-Fidelity-Passwort-Manager-Extraktion (T1555.005)
+## Erkennung der Passwort-Manager-Extraktion (T1555.005)
 - **ID:** `T1555_005.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugten Zugriff oder Exfiltration von Passwort-Manager-Datenbanken
-durch die Identifizierung verdächtiger Dateivorgänge (Kopieren, Archivieren) und
-Nicht vertrauenswürdige Prozesslinien, die auf .kdbx-, .opvault- und andere Tresordateien abzielen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt potenziellen unbefugten Zugriff oder die Exfiltration von Passwort-Manager-Datenbanken (z. B. KeePass, 1Password, Bitwarden), indem verdächtige Dateivorgänge überwacht werden, die auf Tresordateien (.kdbx, .opvault, .agilekeychain, key3.db, key4.db) und nicht vertrauenswürdige Prozessausführungskontexte abzielen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

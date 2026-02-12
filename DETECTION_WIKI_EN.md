@@ -7807,16 +7807,14 @@ and known credential dumping tool signatures.
 
 
 ---
-## Ultra-Pro High-Fidelity Password Manager Extraction (T1555.005)
+## Password Manager Extraction Detection (T1555.005)
 - **ID:** `T1555_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized access or exfiltration of password manager databases 
-by identifying suspicious file operations (copying, archiving) and 
-untrusted process lineages targeting .kdbx, .opvault, and other vault files.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects potential unauthorized access or exfiltration of password manager  databases (e.g., KeePass, 1Password, Bitwarden) by monitoring suspicious  file operations targeting vault files (.kdbx, .opvault, .agilekeychain, key3.db, key4.db)  and untrusted process execution contexts.
 
 
 #### 🚨 Response Playbook

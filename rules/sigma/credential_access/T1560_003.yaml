@@ -2,18 +2,20 @@ title: Archive via Custom Method
 id: f4b47d75-f27a-46ca-95da-00ed4719da0d
 status: stable
 description: |
-    Detects custom data collection and exfiltration attempts via byte-level 
-    file access and manual encoding (XOR, Base64, bitwise operations).
+    Detects high-confidence custom data collection and staging activity using
+    byte-level file access and manual encoding/obfuscation routines.
 
-    Focuses on:
-      - Read/Write of file bytes and memory streams
-      - Manual obfuscation or encoding routines
-      - Recursive file enumeration
-      - Suspicious parent processes (web servers, shells)
-      - Excludes trusted automation and telemetry tools
+    Coverage includes:
+
+      - Raw byte-level file access (ReadAllBytes, MemoryStream)
+      - Manual Base64/XOR/bitwise encoding
+      - Recursive file enumeration for staging
+      - Suspicious execution context (web server, shell, temp execution)
+
+    Focused on ATT&CK T1560.003 (Archive via Custom Method).
 
 author: hota05 
-date: 2026-02-11
+date: 2026-02-12
 tags:
     - attack.collection
     - attack.exfiltration
@@ -26,56 +28,81 @@ logsource:
 detection:
 
     selection_byte_access:
-        CommandLine|contains|any:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        CommandLine|contains:
             - '[System.IO.File]::ReadAllBytes'
             - '[System.IO.File]::WriteAllBytes'
             - 'MemoryStream'
-            - '.ToArray()'
             - 'Get-Content -Encoding Byte'
-            - 'b64'
 
-    selection_encoding:
-        CommandLine|contains|any:
-            - 'bxor'
-            - '-bxor'
-            - '0x'
+    selection_manual_encoding:
+        CommandLine|contains:
             - '[Convert]::ToBase64String'
-            - 'ROT13'
+            - '[Convert]::FromBase64String'
+            - '-bxor'
             - '-band'
             - '-bor'
-            - '-bxor'
+            - '::ToCharArray()'
 
-    selection_recursive_loop:
-        CommandLine|contains|any:
-            - 'foreach'
+    selection_recursive_collection:
+        CommandLine|contains|all:
             - 'Get-ChildItem'
             - '-Recurse'
-            - '-Include'
-            - '-Filter'
 
-    selection_suspicious_context:
+    selection_staging_behavior:
+        CommandLine|contains:
+            - '.zip'
+            - '.dat'
+            - '.tmp'
+            - '.log'
+            - 'Out-File'
+            - 'Set-Content'
+
+    selection_suspicious_parent:
         ParentImage|endswith:
             - '\w3wp.exe'
             - '\httpd.exe'
+            - '\cmd.exe'
             - '\powershell.exe'
             - '\pwsh.exe'
-            - '\cmd.exe'
-        IntegrityLevel: 'Medium'
+            - '\rundll32.exe'
+            - '\mshta.exe'
 
-    filter_trusted_tools:
-        - Image|contains:
+    selection_temp_execution:
+        Image|contains:
+            - '\AppData\Local\Temp\'
+            - '\Users\Public\'
+            - '\Windows\Temp\'
+
+    filter_system_context:
+        User|startswith: 'NT AUTHORITY'
+        ParentImage|endswith:
+            - '\services.exe'
+            - '\svchost.exe'
+
+    filter_monitoring_agents:
+        Image|startswith:
             - 'C:\Program Files\Microsoft Monitoring Agent\'
             - 'C:\Program Files\Splunk\'
             - 'C:\Program Files\Elastic\Agent\'
-        - CommandLine|contains:
-            - 'HealthCheck'
-            - 'Telemetry'
-        - username: 'NT AUTHORITY\SYSTEM'
 
-    condition: (selection_byte_access 
-                    and selection_encoding 
-                    and selection_recursive_loop) 
-               and selection_suspicious_context
-               and not filter_trusted_tools
+    filter_dev_automation:
+        ParentImage|contains:
+            - '\AzureDevOps\'
+            - '\Jenkins\'
+            - '\GitLab\'
+
+    condition: (
+                    selection_byte_access
+                    and selection_manual_encoding
+                    and selection_recursive_collection
+                    and selection_staging_behavior
+               )
+               and (selection_suspicious_parent or selection_temp_execution)
+               and not filter_system_context
+               and not filter_monitoring_agents
+               and not filter_dev_automation
 
 level: critical

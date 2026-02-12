@@ -408,7 +408,7 @@
 - [Ultra-Pro High-Fidelity Browser hitelesítő adatok begyűjtése (T1555.003)](#ultra-pro-high-fidelity-browser-hitelesítő-adatok-begyűjtése-(t1555003))
 - [Ultra-Pro High-Fidelity Windows Credential Manager begyűjtése (T1555.004)](#ultra-pro-high-fidelity-windows-credential-manager-begyűjtése-(t1555004))
 - [Ultra-Pro nagy pontosságú jelszókezelő kivonat (T1555.005)](#ultra-pro-nagy-pontosságú-jelszókezelő-kivonat-(t1555005))
-- [Ultra-Pro High-Fidelity Cloud Secret Harvesting (T1555.006)](#ultra-pro-high-fidelity-cloud-secret-harvesting-(t1555006))
+- [Cloud Secret Harvesting Detection (T1555.006)](#cloud-secret-harvesting-detection-(t1555006))
 - [Exploit-Grade hitelesítési folyamat eltérítése gyanús DLL-regisztráción keresztül](#exploit-grade-hitelesítési-folyamat-eltérítése-gyanús-dll-regisztráción-keresztül)
 - [Exploit-Grade Security Support Provider Hijacking (LSA SSP)](#exploit-grade-security-support-provider-hijacking-(lsa-ssp))
 - [Exploit-Grade jelszószűrő DLL-eltérítés LSA értesítési csomagokon keresztül](#exploit-grade-jelszószűrő-dll-eltérítés-lsa-értesítési-csomagokon-keresztül)
@@ -7430,16 +7430,14 @@ nem megbízható folyamatvonalak, amelyek a .kdbx, .opvault és más tárolófá
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Secret Harvesting (T1555.006)
+## Cloud Secret Harvesting Detection (T1555.006)
 - **ID:** `T1555_006.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a felhőszolgáltató hitelesítő adatainak (AWS, Azure, GCP) jogosulatlan hozzáférését vagy kiszűrését.
-Kifejezetten a parancssori eszközök (archiválók, tolmácsok) elérését célozza meg
-érzékeny konfigurációs útvonalakat, miközben kizárja a hivatalos felhőalapú CLI binárisokat és az ismert DevOps ügynököket.
+- **Leírás:** Érzékeli a felhőszolgáltató hitelesítő adatainak (AWS, Azure, GCP, Docker) jogosulatlan elérését vagy kiszűrését a gyanús parancssori tevékenységek és az érzékeny konfigurációs útvonalakat elérő eszközök figyelésével.Szűri a hivatalos felhőalapú CLI-binárisokat és az ismert DevOps-ügynököket, hogy csökkentse a hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

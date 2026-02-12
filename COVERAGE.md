@@ -414,7 +414,7 @@
 | T1555.003 | CRITICAL | Ultra-Pro High-Fidelity Browser Credential Harvesting (T1555.003) |
 | T1555.004 | HIGH | Ultra-Pro High-Fidelity Windows Credential Manager Harvesting (T1555.004) |
 | T1555.005 | CRITICAL | Ultra-Pro High-Fidelity Password Manager Extraction (T1555.005) |
-| T1555.006 | CRITICAL | Ultra-Pro High-Fidelity Cloud Secret Harvesting (T1555.006) |
+| T1555.006 | CRITICAL | Cloud Secret Harvesting Detection (T1555.006) |
 | T1556 | CRITICAL | Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration |
 | T1556.001 | CRITICAL | Exploit-Grade Security Support Provider Hijacking (LSA SSP) |
 | T1556.002 | CRITICAL | Exploit-Grade Password Filter DLL Hijacking via LSA Notification Packages |

@@ -408,7 +408,7 @@
 - [Ultra-Pro High-Fidelity Browser Credential Harvesting (T1555.003)](#ultra-pro-high-fidelity-browser-credential-harvesting-(t1555003))
 - [Ultra-Pro High-Fidelity Windows Credential Manager Harvesting (T1555.004)](#ultra-pro-high-fidelity-windows-credential-manager-harvesting-(t1555004))
 - [Ultra-Pro High-Fidelity Password Manager Extraction (T1555.005)](#ultra-pro-high-fidelity-password-manager-extraction-(t1555005))
-- [Ultra-Pro High-Fidelity Cloud Secret Harvesting (T1555.006)](#ultra-pro-high-fidelity-cloud-secret-harvesting-(t1555006))
+- [Cloud Secret Harvesting Detection (T1555.006)](#cloud-secret-harvesting-detection-(t1555006))
 - [Exploit-Grade Authentication Process Hijack via Suspicious DLL Registration](#exploit-grade-authentication-process-hijack-via-suspicious-dll-registration)
 - [Exploit-Grade Security Support Provider Hijacking (LSA SSP)](#exploit-grade-security-support-provider-hijacking-(lsa-ssp))
 - [Exploit-Grade Password Filter DLL Hijacking via LSA Notification Packages](#exploit-grade-password-filter-dll-hijacking-via-lsa-notification-packages)
@@ -7826,16 +7826,14 @@ untrusted process lineages targeting .kdbx, .opvault, and other vault files.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Secret Harvesting (T1555.006)
+## Cloud Secret Harvesting Detection (T1555.006)
 - **ID:** `T1555_006.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized access or exfiltration of cloud provider credentials (AWS, Azure, GCP). 
-It specifically targets command-line tools (archivers, interpreters) accessing 
-sensitive config paths while excluding official cloud CLI binaries and known DevOps agents.
+- **Leírás:** Detects unauthorized access or exfiltration of cloud provider credentials  (AWS, Azure, GCP, Docker) by monitoring suspicious command-line activity and  tools accessing sensitive configuration paths. Filters official cloud CLI binaries  and known DevOps agents to reduce false positives.
 
 
 #### 🚨 Response Playbook

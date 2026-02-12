@@ -408,7 +408,7 @@
 - [Ultra-Pro High-Fidelity-Browser-Anmeldedatenerfassung (T1555.003)](#ultra-pro-high-fidelity-browser-anmeldedatenerfassung-(t1555003))
 - [Ultra-Pro High-Fidelity Windows Credential Manager Harvesting (T1555.004)](#ultra-pro-high-fidelity-windows-credential-manager-harvesting-(t1555004))
 - [Ultra-Pro High-Fidelity-Passwort-Manager-Extraktion (T1555.005)](#ultra-pro-high-fidelity-passwort-manager-extraktion-(t1555005))
-- [Ultra-Pro High-Fidelity Cloud Secret Harvesting (T1555.006)](#ultra-pro-high-fidelity-cloud-secret-harvesting-(t1555006))
+- [Cloud Secret Harvesting-Erkennung (T1555.006)](#cloud-secret-harvesting-erkennung-(t1555006))
 - [Exploit-Authentifizierungsprozess-Hijacking über verdächtige DLL-Registrierung](#exploit-authentifizierungsprozess-hijacking-über-verdächtige-dll-registrierung)
 - [Exploit-Grade-Hijacking von Sicherheits-Support-Anbietern (LSA SSP)](#exploit-grade-hijacking-von-sicherheits-support-anbietern-(lsa-ssp))
 - [Exploit-Grade-Passwortfilter-DLL-Hijacking über LSA-Benachrichtigungspakete](#exploit-grade-passwortfilter-dll-hijacking-über-lsa-benachrichtigungspakete)
@@ -7430,16 +7430,14 @@ Nicht vertrauenswürdige Prozesslinien, die auf .kdbx-, .opvault- und andere Tre
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Secret Harvesting (T1555.006)
+## Cloud Secret Harvesting-Erkennung (T1555.006)
 - **ID:** `T1555_006.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugten Zugriff oder die Ausschleusung von Anmeldeinformationen von Cloud-Anbietern (AWS, Azure, GCP).
-Es zielt speziell auf den Zugriff auf Befehlszeilentools (Archiver, Interpreter) ab
-sensible Konfigurationspfade unter Ausschluss offizieller Cloud-CLI-Binärdateien und bekannter DevOps-Agenten.
+- **Beschreibung:** Erkennt unbefugten Zugriff oder die Ausschleusung von Anmeldeinformationen von Cloud-Anbietern (AWS, Azure, GCP, Docker), indem verdächtige Befehlszeilenaktivitäten und Tools überwacht werden, die auf vertrauliche Konfigurationspfade zugreifen.Filtert offizielle Cloud-CLI-Binärdateien und bekannte DevOps-Agents, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-12 06:19:46`
+**Utolsó frissítés:** `2026-02-12 06:41:06`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -138,7 +138,7 @@
 | T1069.001 | HIGH | Ultra-Pro High-Fidelity Local Group Discovery (T1069.001) |
 | T1069.002 | HIGH | Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002) |
 | T1069.003 | HIGH | Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003) |
-| T1070 | CRITICAL | Disk Structure Wipe, Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Command History Logging Impairment, Indicator Blocking and Telemetry Suppression |
+| T1070 | CRITICAL | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Command History Logging Impairment, Indicator Blocking and Telemetry Suppression |
 | T1070.001 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Security Event Log Cleared Using wevtutil.exe |
 | T1070.002 | HIGH | Ultra-Pro High-Fidelity Linux Log Clearing and Journal Sabotage (T1070.002) |
 | T1070.003 | HIGH | Ultra-Pro High-Fidelity Mailbox Data Clearing and Rule Sabotage (T1070.003) |
@@ -312,7 +312,7 @@
 | T1498 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498) |
 | T1498.001 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498), Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001) |
 | T1498.002 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498) |
-| T1499 | CRITICAL | Disk Structure Wipe, Ultra-Pro High-Fidelity Endpoint DoS (T1499), Disk Wipe |
+| T1499 | CRITICAL | Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
 | T1499.001 | CRITICAL | Ultra-Pro High-Fidelity OS Self-Destruction (T1499.001) |
 | T1499.002 | CRITICAL | Ultra-Pro High-Fidelity Service Exhaustion (T1499.002) |
 | T1499.003 | CRITICAL | Ultra-Pro High-Fidelity OS Self-Destruction (T1499.003), Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
@@ -441,7 +441,7 @@
 | T1560.001 | CRITICAL | Adatok gyanús archiválása exfiltráció céljából, Data Archiving for Exfiltration |
 | T1560.002 | CRITICAL | Data Archiving via Library |
 | T1560.003 | CRITICAL | Archive via Custom Method |
-| T1561 | CRITICAL | Disk Content Wipe |
+| T1561 | CRITICAL | Disk Structure Wipe, Disk Content Wipe, Disk Wipe |
 | T1561.001 | CRITICAL | Disk Content Wipe, Disk Wipe |
 | T1561.002 | CRITICAL | Disk Structure Wipe, Disk Wipe |
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |

@@ -7655,16 +7655,22 @@ nem megbízható folyamathelyekkel és nem rendszerfelhasználókkal kombinálva
 
 
 ---
-## Ultra-Pro High-Fidelity Kerberos támadásészlelés (T1558)
+## Kerberos támadásészlelés
 - **ID:** `T1558.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Kifinomult Kerberos jegyhamisítást és betakarítást észlel.
-A titkosítás visszaminősítésére (RC4/0x17), a célzott szolgáltatási jegykérésekre (Kerberoasting) összpontosít,
-és sértő eszköztermékek, miközben szűrik a jogos LSASS-t és a rendszer viselkedését.
+- **Leírás:** Érzékeli a fejlett Kerberos hitelesítő támadásokat, beleértve a jegyet is
+hamisítás, AS-REP pörkölés, Kerberoasting és jegyinjekció.
+
+Jellemzők:
+- A titkosítás leépítésének (RC4/0x17) észlelése
+- Támadó eszközjelzők (Rubeus, Mimikatz, Impacket, PowerView)
+- Jegytípus-specifikus paraméterek (arany, ezüst, AS-REP)
+- Szülőfolyamat és ideiglenes végrehajtási környezetkapuzás
+- Vállalati FP szűrés (LSASS, SYSTEM, felügyeleti eszközök)
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -7655,16 +7655,22 @@ kombiniert mit nicht vertrauenswürdigen Prozessstandorten und Nicht-Systembenut
 
 
 ---
-## Ultra-Pro High-Fidelity-Kerberos-Angriffserkennung (T1558)
+## Kerberos-Angriffserkennung
 - **ID:** `T1558.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt raffiniertes Fälschen und Sammeln von Kerberos-Tickets.
-Konzentriert sich auf das Downgrade der Verschlüsselung (RC4/0x17), gezielte Service-Ticket-Anfragen (Kerberoasting),
-und anstößige Tool-Artefakte, während gleichzeitig legitimes LSASS und Systemverhalten gefiltert werden.
+- **Beschreibung:** Erkennt fortgeschrittene Kerberos-Anmeldeinformationsangriffe, einschließlich Tickets
+Fälschung, AS-REP-Roasting, Kerberoasting und Ticket-Injection.
+
+Eigenschaften:
+- Erkennung einer Herabstufung der Verschlüsselung (RC4/0x17).
+- Offensive Tool-Flags (Rubeus, Mimikatz, Impacket, PowerView)
+- Tickettypspezifische Parameter (Golden, Silber, AS-REP)
+- Kontext-Gating für übergeordnete Prozesse und temporäre Ausführung
+- Enterprise FP-Filterung (LSASS, SYSTEM, Überwachungstools)
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

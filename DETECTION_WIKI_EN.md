@@ -8065,16 +8065,22 @@ combined with untrusted process locations and non-system users.
 
 
 ---
-## Ultra-Pro High-Fidelity Kerberos Attack Detection (T1558)
+## Kerberos Attack Detection
 - **ID:** `T1558.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects sophisticated Kerberos ticket forgery and harvesting. 
-Focuses on encryption downgrade (RC4/0x17), targeted service ticket requests (Kerberoasting), 
-and offensive tool artifacts while filtering legitimate LSASS and system behavior.
+- **Leírás:** Detects advanced Kerberos credential attacks including ticket 
+forgery, AS-REP roasting, Kerberoasting, and ticket injection.
+
+Features:
+  - Encryption downgrade (RC4/0x17) detection
+  - Offensive tool flags (Rubeus, Mimikatz, Impacket, PowerView)
+  - Ticket type-specific parameters (Golden, Silver, AS-REP)
+  - Parent process and temp execution context gating
+  - Enterprise FP filtering (LSASS, SYSTEM, monitoring tools)
 
 
 #### 🚨 Response Playbook

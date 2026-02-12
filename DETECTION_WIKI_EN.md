@@ -7752,14 +7752,12 @@ process lineages, while filtering out legitimate browser and system update noise
 
 
 ---
-## Ultra-Pro High-Fidelity Securityd Memory Dumping (T1555.002)
+## Securityd Memory Dumping Detection (T1555.002)
 - **ID:** `T1555_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects unauthorized attempts to dump or read the memory of the 'securityd' process. 
-It focuses on non-standard debugger usage and memory mapping tools targeting 
-securityd, while strictly filtering Apple-signed diagnostic utilities.
+- **Leírás:** Detects unauthorized attempts to access or dump memory of the 'securityd' process or keychain database on macOS. Monitors suspicious debugger and memory tools usage while filtering legitimate Apple-signed diagnostic utilities and Xcode development tools.
 
 
 #### 🚨 Response Playbook

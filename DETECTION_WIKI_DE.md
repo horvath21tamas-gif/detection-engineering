@@ -7360,14 +7360,12 @@ Prozesslinien und filtert gleichzeitig legitime Browser- und Systemupdate-Rausch
 
 
 ---
-## Ultra-Pro High-Fidelity-Sicherheitsspeicher-Dumping (T1555.002)
+## Sichere Speicherauszugserkennung (T1555.002)
 - **ID:** `T1555_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt unbefugte Versuche, den Speicher des „gesicherten“ Prozesses zu sichern oder zu lesen.
-Der Schwerpunkt liegt auf der Verwendung von nicht standardmäßigen Debuggern und der Ausrichtung auf Speicherzuordnungstools
-securityd, während von Apple signierte Diagnoseprogramme strikt gefiltert werden.
+- **Beschreibung:** Erkennt unbefugte Versuche, auf den Speicher des „gesicherten“ Prozesses oder der Schlüsselbunddatenbank unter macOS zuzugreifen oder diesen zu sichern.Überwacht die Nutzung verdächtiger Debugger- und Speichertools und filtert gleichzeitig legitime, von Apple signierte Diagnosedienstprogramme und Xcode-Entwicklungstools.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

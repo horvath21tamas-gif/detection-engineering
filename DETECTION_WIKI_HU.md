@@ -7360,14 +7360,12 @@ folyamati vonalakat, miközben kiszűri a legitim böngésző- és rendszerfriss
 
 
 ---
-## Ultra-Pro High-Fidelity biztonsági memória kiíratása (T1555.002)
+## Biztonságos memóriakiürítés észlelése (T1555.002)
 - **ID:** `T1555_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a jogosulatlan kísérleteket a „securityd” folyamat memóriájának törlésére vagy olvasására.
-A nem szabványos hibakereső-használatra és a memórialeképezési eszközök célzására összpontosít
-biztonságos, miközben szigorúan szűri az Apple által aláírt diagnosztikai segédprogramokat.
+- **Leírás:** Érzékeli a jogosulatlan kísérleteket a „securityd” folyamathoz vagy a kulcslánc-adatbázishoz való hozzáférésre vagy a memória törlésére a macOS rendszeren.Figyeli a gyanús hibakereső és memóriaeszközök használatát, miközben szűri az Apple által aláírt diagnosztikai segédprogramokat és Xcode fejlesztőeszközöket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -1,48 +1,61 @@
-title: Ultra-Pro High-Fidelity Password Manager Extraction (T1555.005)
+title: Password Manager Extraction Detection (T1555.005)
 id: ff2c03f6-97ee-405e-98fc-b1fd3dcc8021
 status: stable
-description: |
-    Detects unauthorized access or exfiltration of password manager databases 
-    by identifying suspicious file operations (copying, archiving) and 
-    untrusted process lineages targeting .kdbx, .opvault, and other vault files.
-author: hota05
-date: 2026-02-04
+description: >
+    Detects potential unauthorized access or exfiltration of password manager 
+    databases (e.g., KeePass, 1Password, Bitwarden) by monitoring suspicious 
+    file operations targeting vault files (.kdbx, .opvault, .agilekeychain, key3.db, key4.db) 
+    and untrusted process execution contexts.
+author: hota05 
+date: 2026-02-12
+references:
+    - https://attack.mitre.org/techniques/T1555/005/
 tags:
     - attack.credential_access
     - attack.t1555.005
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_vault_files:
         CommandLine|contains:
-            - '.kdbx'          
-            - '.opvault'       
-            - '.agilekeychain' 
-            - 'vault.db'      
-            - 'key3.db'        
+            - '.kdbx'
+            - '.opvault'
+            - '.agilekeychain'
+            - 'vault.db'
+            - 'key3.db'
             - 'key4.db'
 
     selection_actions:
-        - CommandLine|contains:
+        CommandLine|contains:
             - 'copy '
-            - 'type '          
-            - '7z'            
+            - 'type '
+            - '7z'
             - 'rar'
             - 'zip'
-            - 'esentutl'       
-        - Image|endswith:
-            - '\sqlite3.exe'  
+            - 'esentutl'
+            - 'tar '
+            - 'gzip '
+        Image|endswith:
+            - '\sqlite3.exe'
+            - '\7z.exe'
+            - '\rar.exe'
+            - '\tar.exe'
+            - '\gzip.exe'
 
     selection_untrusted_source:
         Image|contains:
             - '\Users\'
             - '\AppData\Local\Temp\'
+            - '\Downloads\'
             - '\Public\'
         Image|endswith:
             - '\powershell.exe'
+            - '\pwsh.exe'
             - '\cmd.exe'
             - '\python.exe'
+            - '\node.exe'
 
     filter_legit_apps:
         Image|contains:
@@ -58,6 +71,18 @@ detection:
         Image|endswith:
             - '\OneDrive.exe'
             - '\Dropbox.exe'
+            - '\GoogleDriveFS.exe'
+            - '\Box\Box.exe'
 
-    condition: selection_vault_files and (selection_actions or selection_untrusted_source) and not (filter_legit_apps or filter_cloud_sync)
+    condition:
+        selection_vault_files
+        and (selection_actions or selection_untrusted_source)
+        and not (filter_legit_apps or filter_cloud_sync)
+
+falsepositives:
+    - Legitimate vault access by password manager applications
+    - Cloud backup or sync operations accessing vault files
+    - Security auditing or backup processes
+    - Developer/test environments using vault files for automation
+
 level: critical

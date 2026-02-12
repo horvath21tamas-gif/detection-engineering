@@ -8084,16 +8084,24 @@ and offensive tool artifacts while filtering legitimate LSASS and system behavio
 
 
 ---
-## Ultra-Pro High-Fidelity Golden Ticket Forgery & Injection (T1558.001)
+## Golden Ticket Forgery & Injection
 - **ID:** `T1558_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the creation and injection of forged Kerberos TGTs (Golden Tickets). 
-Focuses on the mandatory presence of the KRBTGT hash or AES key in command lines, 
-combined with ticket injection (Pass-the-Ticket) patterns.
+- **Leírás:** Detects high-confidence Golden Ticket creation and injection activity.
+
+Coverage includes:
+
+  - KRBTGT hash or AES key requirement
+  - SID specification
+  - Pass-the-Ticket (/ptt) or kerberos::ptt injection
+  - Mimikatz or Rubeus Golden Ticket usage patterns
+  - Enterprise FP filters (LSASS/system/monitoring)
+
+Focused on ATT&CK T1558.001.
 
 
 #### 🚨 Response Playbook

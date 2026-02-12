@@ -7673,16 +7673,24 @@ und anstößige Tool-Artefakte, während gleichzeitig legitimes LSASS und System
 
 
 ---
-## Ultra-Profi-High-Fidelity-Golden-Ticket-Fälschung und -Injektion (T1558.001)
+## Golden-Ticket-Fälschung und -Einschleusung
 - **ID:** `T1558_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Erstellung und Injektion gefälschter Kerberos-TGTs (Golden Tickets).
-Konzentriert sich auf das obligatorische Vorhandensein des KRBTGT-Hash- oder AES-Schlüssels in Befehlszeilen.
-kombiniert mit Ticket-Injection-Mustern (Pass-the-Ticket).
+- **Beschreibung:** Erkennt hochzuverlässige Golden-Ticket-Erstellungs- und Injektionsaktivitäten.
+
+Der Versicherungsschutz umfasst:
+
+- KRBTGT-Hash- oder AES-Schlüsselanforderung
+- SID-Spezifikation
+- Pass-the-Ticket (/ptt) oder Kerberos::ptt-Injektion
+- Nutzungsmuster für Mimikatz- oder Rubeus-Golden-Tickets
+- Enterprise FP-Filter (LSASS/System/Überwachung)
+
+Konzentriert sich auf ATT&CK T1558.001.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

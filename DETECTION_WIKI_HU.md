@@ -7673,16 +7673,24 @@ A titkosítás visszaminősítésére (RC4/0x17), a célzott szolgáltatási jeg
 
 
 ---
-## Ultra-Pro High-Fidelity Golden Ticket hamisítás és injekció (T1558.001)
+## Aranyjegy-hamisítás és befecskendezés
 - **ID:** `T1558_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a hamisított Kerberos TGT-k (Golden Tickets) létrehozását és befecskendezését.
-A KRBTGT hash vagy AES kulcs kötelező jelenlétére összpontosít a parancssorban,
-jegyinjekciós (Pass-the-Ticket) mintákkal kombinálva.
+- **Leírás:** Érzékeli a nagy megbízhatóságú Golden Ticket létrehozását és befecskendezési tevékenységét.
+
+A fedezet a következőket tartalmazza:
+
+- KRBTGT hash vagy AES kulcs követelmény
+- SID specifikáció
+- Pass-the-Ticket (/ptt) vagy kerberos::ptt injekció
+- Mimikatz vagy Rubeus Golden Ticket használati minták
+- Vállalati FP szűrők (LSASS/rendszer/monitoring)
+
+Az ATT&CK T1558.001-re összpontosítva.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

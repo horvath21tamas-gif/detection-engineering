@@ -424,7 +424,7 @@
 - [Ultra-Pro High-Fidelity DHCP Spoofing Detection (T1557.003)](#ultra-pro-high-fidelity-dhcp-spoofing-detection-(t1557003))
 - [Ultra-Pro High-Fidelity Kerberos Attack Detection (T1558)](#ultra-pro-high-fidelity-kerberos-attack-detection-(t1558))
 - [Ultra-Pro High-Fidelity Golden Ticket Forgery & Injection (T1558.001)](#ultra-pro-high-fidelity-golden-ticket-forgery-&-injection-(t1558001))
-- [Ultra-Pro High-Fidelity Silver Ticket Forgery & Injection (T1558.002)](#ultra-pro-high-fidelity-silver-ticket-forgery-&-injection-(t1558002))
+- [Silver Ticket Forgery & Injection](#silver-ticket-forgery-&-injection)
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
 - [Ultra-Pro High-Fidelity AS-REP Roasting & LDAP Enumeration](#ultra-pro-high-fidelity-as-rep-roasting-&-ldap-enumeration)
 - [High-Fidelity Indirect IPC and COM Execution](#high-fidelity-indirect-ipc-and-com-execution)
@@ -8103,16 +8103,24 @@ combined with ticket injection (Pass-the-Ticket) patterns.
 
 
 ---
-## Ultra-Pro High-Fidelity Silver Ticket Forgery & Injection (T1558.002)
+## Silver Ticket Forgery & Injection
 - **ID:** `T1558_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the creation and injection of forged Kerberos Service Tickets (Silver Tickets). 
-Focuses on the mandatory presence of service-specific SPNs (cifs, mssql, http) 
-and the provision of service account hashes in the command line.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence Silver Ticket creation and injection activity.
+
+Coverage includes:
+
+  - Service-specific SPN targeting (cifs, http, mssql, ldap)
+  - Service account hash material (RC4 / AES128 / AES256)
+  - SID specification
+  - Pass-the-ticket (/ptt) injection
+  - Mimikatz and Rubeus Silver ticket usage patterns
+
+Focused on ATT&CK T1558.002.
 
 
 #### 🚨 Response Playbook

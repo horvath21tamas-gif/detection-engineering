@@ -424,7 +424,7 @@
 - [Ultra-Pro High-Fidelity DHCP hamisítás-észlelés (T1557.003)](#ultra-pro-high-fidelity-dhcp-hamisítás-észlelés-(t1557003))
 - [Ultra-Pro High-Fidelity Kerberos támadásészlelés (T1558)](#ultra-pro-high-fidelity-kerberos-támadásészlelés-(t1558))
 - [Ultra-Pro High-Fidelity Golden Ticket hamisítás és injekció (T1558.001)](#ultra-pro-high-fidelity-golden-ticket-hamisítás-és-injekció-(t1558001))
-- [Ultra-Pro High-Fidelity ezüst jegyhamisítás és injekció (T1558.002)](#ultra-pro-high-fidelity-ezüst-jegyhamisítás-és-injekció-(t1558002))
+- [Ezüst jegyhamisítás és befecskendezés](#ezüst-jegyhamisítás-és-befecskendezés)
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
 - [Ultra-Pro High-Fidelity AS-REP pörkölés és LDAP felsorolás](#ultra-pro-high-fidelity-as-rep-pörkölés-és-ldap-felsorolás)
 - [High-Fidelity Indirekt IPC és COM végrehajtás](#high-fidelity-indirekt-ipc-és-com-végrehajtás)
@@ -7691,16 +7691,24 @@ jegyinjekciós (Pass-the-Ticket) mintákkal kombinálva.
 
 
 ---
-## Ultra-Pro High-Fidelity ezüst jegyhamisítás és injekció (T1558.002)
+## Ezüst jegyhamisítás és befecskendezés
 - **ID:** `T1558_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a hamisított Kerberos szolgáltatási jegyek (ezüst jegyek) létrehozását és beillesztését.
-A szolgáltatásspecifikus SPN-ek (cifs, mssql, http) kötelező jelenlétére összpontosít.
-és a szolgáltatásfiók-kivonatok megadása a parancssorban.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a nagy megbízhatóságú ezüst jegy létrehozását és befecskendezési tevékenységét.
+
+A fedezet a következőket tartalmazza:
+
+- Szolgáltatás-specifikus SPN-célzás (cifs, http, mssql, ldap)
+- Szolgáltatási fiók hash anyaga (RC4 / AES128 / AES256)
+- SID specifikáció
+- Pass-the-ticket (/ptt) injekció
+- Mimikatz és Rubeus Silver jegyhasználati szokások
+
+Az ATT&CK T1558.002-re összpontosítva.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

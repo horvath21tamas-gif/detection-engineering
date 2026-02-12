@@ -424,7 +424,7 @@
 - [Ultra-Pro High-Fidelity DHCP-Spoofing-Erkennung (T1557.003)](#ultra-pro-high-fidelity-dhcp-spoofing-erkennung-(t1557003))
 - [Ultra-Pro High-Fidelity-Kerberos-Angriffserkennung (T1558)](#ultra-pro-high-fidelity-kerberos-angriffserkennung-(t1558))
 - [Ultra-Profi-High-Fidelity-Golden-Ticket-Fälschung und -Injektion (T1558.001)](#ultra-profi-high-fidelity-golden-ticket-fälschung-und--injektion-(t1558001))
-- [Ultra-Pro High-Fidelity-Silber-Ticketfälschung und -Injektion (T1558.002)](#ultra-pro-high-fidelity-silber-ticketfälschung-und--injektion-(t1558002))
+- [Fälschung und Einschleusung von Silbertickets](#fälschung-und-einschleusung-von-silbertickets)
 - [Verdächtige Kerberos TGS-Ticketanfrage (Kerberoasting)](#verdächtige-kerberos-tgs-ticketanfrage-(kerberoasting))
 - [Ultra-Pro High-Fidelity AS-REP-Röstung und LDAP-Enumeration](#ultra-pro-high-fidelity-as-rep-röstung-und-ldap-enumeration)
 - [Indirekte IPC- und COM-Ausführung mit hoher Wiedergabetreue](#indirekte-ipc--und-com-ausführung-mit-hoher-wiedergabetreue)
@@ -7691,16 +7691,24 @@ kombiniert mit Ticket-Injection-Mustern (Pass-the-Ticket).
 
 
 ---
-## Ultra-Pro High-Fidelity-Silber-Ticketfälschung und -Injektion (T1558.002)
+## Fälschung und Einschleusung von Silbertickets
 - **ID:** `T1558_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Erstellung und Einschleusung gefälschter Kerberos-Service-Tickets (Silver-Tickets).
-Konzentriert sich auf das obligatorische Vorhandensein dienstspezifischer SPNs (cifs, mssql, http)
-und die Bereitstellung von Dienstkonto-Hashes in der Befehlszeile.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochzuverlässige Silver-Ticket-Erstellungs- und Injektionsaktivitäten.
+
+Der Versicherungsschutz umfasst:
+
+- Dienstspezifisches SPN-Targeting (cifs, http, mssql, ldap)
+- Dienstkonto-Hash-Material (RC4 / AES128 / AES256)
+- SID-Spezifikation
+- Pass-the-Ticket-Injektion (/ptt).
+- Nutzungsmuster von Mimikatz- und Rubeus-Silver-Tickets
+
+Konzentriert sich auf ATT&CK T1558.002.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

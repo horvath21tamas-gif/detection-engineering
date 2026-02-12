@@ -7662,16 +7662,14 @@ suspicious process lineages to eliminate common false positives.
 
 
 ---
-## Ultra-Pro High-Fidelity MotW Bypass & Zone Subversion (T1553.005)
+## Mark-of-the-Web (MotW) Bypass & Zone Subversion Detection (T1553.005)
 - **ID:** `T1553_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects programmatic removal or subversion of the Mark of the Web (MotW). 
-Focuses on non-interactive ADS manipulation and suspicious registry 
-modifications that lower security zone settings.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects programmatic removal or tampering of the Mark of the Web (MotW) via Alternate Data Stream (Zone.Identifier) manipulation or registry-based security zone downgrades. Focuses on non-interactive script execution and suspicious zone configuration changes while filtering legitimate installers and browser activity.
 
 
 #### 🚨 Response Playbook

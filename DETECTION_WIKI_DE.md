@@ -7275,16 +7275,14 @@ verdächtige Prozesslinien, um häufige Fehlalarme zu eliminieren.
 
 
 ---
-## Ultra-Pro High-Fidelity MotW Bypass & Zone Subversion (T1553.005)
+## Mark-of-the-Web (MotW)-Umgehung und Zonensubversion-Erkennung (T1553.005)
 - **ID:** `T1553_005.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die programmatische Entfernung oder Subversion des Mark of the Web (MotW).
-Konzentriert sich auf nicht-interaktive ADS-Manipulation und verdächtige Registrierung
-Änderungen, die die Sicherheitszoneneinstellungen herabsetzen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die programmgesteuerte Entfernung oder Manipulation des Mark of the Web (MotW) durch Manipulation des Alternate Data Stream (Zone.Identifier) ​​oder registrierungsbasierte Sicherheitszonen-Downgrades.Konzentriert sich auf die nicht interaktive Skriptausführung und verdächtige Zonenkonfigurationsänderungen und filtert gleichzeitig legitime Installationsprogramme und Browseraktivitäten.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

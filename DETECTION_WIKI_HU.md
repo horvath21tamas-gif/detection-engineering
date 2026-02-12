@@ -7275,16 +7275,14 @@ gyanús folyamatvonalakat a gyakori téves pozitívumok kiküszöbölésére.
 
 
 ---
-## Ultra-Pro High-Fidelity MotW bypass & Zone Subversion (T1553.005)
+## Mark-of-the-Web (MotW) bypass & Zone Subversion Detection (T1553.005)
 - **ID:** `T1553_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Mark of the Web (MotW) programozott eltávolítását vagy felforgatását.
-A nem interaktív ADS-manipulációra és a gyanús nyilvántartásokra összpontosít
-módosítások, amelyek csökkentik a biztonsági zóna beállításait.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a Mark of the Web (MotW) programozott eltávolítását vagy hamisítását az alternatív adatfolyam (Zone.Identifier) ​​manipulációja vagy a rendszerleíró adatbázis alapú biztonsági zóna leminősítése révén.A nem interaktív szkript-végrehajtásra és a gyanús zónakonfiguráció-módosításokra összpontosít, miközben szűri a jogszerű telepítőket és a böngészőtevékenységet.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

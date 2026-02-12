@@ -1,50 +1,108 @@
-title: Ultra-Pro High-Fidelity AS-REP Roasting & LDAP Enumeration (T1558.004)
+title: Ultra-Pro High-Fidelity AS-REP Roasting & LDAP Enumeration
 id: 4e204bdf-a9ca-49b3-bbc8-7ff695a31353
 status: stable
 description: |
-    Detects AS-REP Roasting attacks by monitoring for specific LDAP queries targeting 
-    the DONT_REQ_PREAUTH bit (4194304) and offensive tool parameters used for 
-    hash extraction (Rubeus, Impacket, PowerView).
+    Detects high-confidence AS-REP Roasting activity targeting accounts with
+    DONT_REQ_PREAUTH (UAC 4194304).
+
+    Coverage includes:
+
+      - LDAP bitwise filters for DONT_REQ_PREAUTH
+      - Rubeus / Impacket / PowerView AS-REP roasting usage
+      - Hash export formatting (hashcat / john)
+      - Suspicious PowerShell or remote execution lineage
+
+    Focused on ATT&CK T1558.004.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-12
 tags:
     - attack.credential_access
     - attack.t1558.004
+
 logsource:
     category: process_creation
     product: windows
-detection:
-    selection_ldap_uac:
-        CommandLine|contains:
-            - '1.2.840.113556.1.4.803:=4194304' 
-            - ' -band 4194304'                   
-            - '0x400000'                          
 
-    selection_offensive_flags:
+detection:
+    selection_ldap_bitmask:
+        CommandLine|contains:
+            - '1.2.840.113556.1.4.803:=4194304'
+            - 'userAccountControl:1.2.840.113556.1.4.803:=4194304'
+            - '-band 4194304'
+            - '0x400000'
+
+    selection_rubeus:
         CommandLine|contains:
             - 'asreproast'
-            - 'Get-NPUsers'        
-        CommandLine|contains:
-            - ' /format:hashcat'  
-            - ' /format:john'
-            - ' /outfile:'       
+            - ' /user:'
+        Image|endswith:
+            - '\rubeus.exe'
 
-    selection_untrusted_parent:
-        ParentImage|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\wsmprovhost.exe' 
-            - '\httpd.exe'       
+    selection_impacket:
+        CommandLine|contains:
+            - 'GetNPUsers'
+            - '-no-pass'
+            - '-format hashcat'
+            - '-format john'
+
+    selection_powerview:
+        CommandLine|contains|all:
+            - 'Get-DomainUser'
+            - 'DONT_REQ_PREAUTH'
+
+    selection_hash_export:
+        CommandLine|contains:
+            - '/format:hashcat'
+            - '/format:john'
+            - '/outfile:'
+            - '.hash'
+            - '.txt'
+
+    selection_encoded_ps:
         Image|endswith:
             - '\powershell.exe'
             - '\pwsh.exe'
-            - '\adfind.exe'     
+        CommandLine|contains:
+            - '-enc '
+            - '-EncodedCommand'
 
-    filter_legit_admin:
-        username: 'NT AUTHORITY\SYSTEM'
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wsmprovhost.exe'
+            - '\wmiprvse.exe'
+            - '\httpd.exe'
+            - '\w3wp.exe'
+            - '\mshta.exe'
+            - '\rundll32.exe'
+
+    filter_system_context:
+        User|startswith: 'NT AUTHORITY'
+        ParentImage|endswith:
+            - '\services.exe'
+            - '\svchost.exe'
+            - '\lsass.exe'
+
+    filter_legit_ad_tools:
         Image|contains:
-            - '\Windows\System32\lsass.exe'
-            - '\Microsoft\Active Directory\\'
+            - '\RSAT\'
+            - '\Active Directory\'
+            - '\Microsoft Monitoring Agent\'
 
-    condition: (selection_ldap_uac or selection_offensive_flags) and selection_untrusted_parent and not filter_legit_admin
+    condition: (
+                    selection_rubeus
+                    or selection_impacket
+                    or selection_powerview
+                    or (
+                        selection_ldap_bitmask
+                        and selection_hash_export
+                       )
+               )
+               and selection_suspicious_parent
+               and not filter_system_context
+               and not filter_legit_ad_tools
+
 level: critical

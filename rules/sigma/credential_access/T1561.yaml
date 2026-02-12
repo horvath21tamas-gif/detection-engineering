@@ -2,76 +2,128 @@ title: Disk Wipe
 id: 96c6c77c-67a8-49a6-9105-45e00aef8f65
 status: stable
 description: |
-    Detects destructive low-level disk operations, including MBR overwrite, 
-    partition wiping, and full-disk content destruction.
+    Detects high-confidence destructive disk operations including:
 
-    Monitors:
-      - Raw physical disk access
-      - Destructive CLI arguments (diskpart, dd, format, PowerShell)
-      - Suspicious execution context (Office apps, web servers, temp paths)
-      - Filters out known-good imaging, admin, and security tools
+      - Raw physical disk overwrite (MBR / GPT destruction)
+      - Partition table wiping (diskpart clean/delete)
+      - Full-disk content overwrite (dd, zero/random streams)
+      - Destructive PowerShell disk clearing
+      - Suspicious execution context (macro/webshell/LOLBIN)
+
+    Focused on ransomware and destructive wiper activity.
 
 author: hota05
-date: 2026-02-11
+date: 2026-02-12
 tags:
     - attack.impact
+    - attack.t1561
     - attack.t1561.001
     - attack.t1561.002
-    - attack.t1499
 
 logsource:
     product: windows
     category: process_creation
 
 detection:
-    selection_tools:
-        Image|endswith:
-            - '\diskpart.exe'
-            - '\dd.exe'
-            - '\format.com'
-            - '\powershell.exe'
-            - '\pwsh.exe'
-        CommandLine|contains|any:
+
+    selection_raw_device:
+        CommandLine|contains:
             - '\\.\PhysicalDrive'
             - '\\.\Harddisk'
-            - 'clean'
-            - 'delete partition'
-            - 'Remove-Partition'
-            - 'Clear-Disk'
-            - 'Initialize-Disk'
+            - '\\.\Volume{'
+
+    selection_dd_mbr:
+        Image|endswith: '\dd.exe'
+        CommandLine|contains|all:
+            - 'of=\\.\PhysicalDrive'
+            - 'bs=512'
+        CommandLine|contains:
+            - 'count=1'
             - 'if=/dev/zero'
             - 'if=/dev/urandom'
-            - 'Format-Volume'
-            - '/MBR'
-            - '/GPT'
-    selection_suspicious_context:
+
+    selection_diskpart_clean:
+        Image|endswith: '\diskpart.exe'
+        CommandLine|contains:
+            - ' clean'
+            - ' clean all'
+
+    selection_diskpart_delete:
+        Image|endswith: '\diskpart.exe'
+        CommandLine|contains:
+            - ' delete partition'
+            - ' delete volume'
+
+    selection_ps_clear:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        CommandLine|contains|all:
+            - 'Clear-Disk'
+            - '-RemoveData'
+            - '-Confirm:$false'
+
+    selection_ps_partition_remove:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        CommandLine|contains|all:
+            - 'Remove-Partition'
+            - '-Confirm:$false'
+
+    selection_suspicious_parent:
         ParentImage|endswith:
             - '\winword.exe'
             - '\excel.exe'
             - '\outlook.exe'
-            - '\httpd.exe'
             - '\w3wp.exe'
+            - '\httpd.exe'
+            - '\mshta.exe'
             - '\rundll32.exe'
-            - '\explorer.exe'
+
+    selection_suspicious_path:
         Image|contains:
-            - '\Temp\'
-            - '\Users\Public\'
             - '\AppData\Local\Temp\'
+            - '\Users\Public\'
+            - '\Windows\Temp\'
 
-    filter_legit_admin:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith:
-            - '\msiexec.exe'
-            - '\CcmExec.exe'
-            - '\setup.exe'
+    filter_system_context:
+        User|startswith: 'NT AUTHORITY'
+        ParentImage|endswith:
+            - '\services.exe'
+            - '\svchost.exe'
             - '\vds.exe'
-        - CommandLine|contains:
-            - 'Deployment\Scripts'
-            - 'imaging'
-            - 'Program Files'
-            - '127.0.0.1'
 
+    filter_deployment_tools:
+        ParentImage|endswith:
+            - '\CcmExec.exe'
+            - '\msiexec.exe'
+            - '\setup.exe'
+        ParentImage|contains:
+            - '\ConfigurationManager\'
+            - '\IntuneManagementExtension\'
 
-    condition: selection_tools and selection_suspicious_context and not filter_legit_admin
+    filter_scripted_imaging:
+        CommandLine|contains:
+            - 'diskpart /s'
+            - '\deployment\scripts\'
+            - '\imaging\'
+
+    condition: (
+                    selection_dd_mbr
+                    or (
+                        selection_raw_device
+                        and (
+                                selection_diskpart_clean
+                                or selection_diskpart_delete
+                                or selection_ps_clear
+                                or selection_ps_partition_remove
+                            )
+                       )
+               )
+               and (selection_suspicious_parent or selection_suspicious_path)
+               and not filter_system_context
+               and not filter_deployment_tools
+               and not filter_scripted_imaging
 
 level: critical

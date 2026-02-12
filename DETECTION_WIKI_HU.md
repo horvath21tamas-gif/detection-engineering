@@ -426,7 +426,7 @@
 - [Ultra-Pro High-Fidelity Golden Ticket hamisítás és injekció (T1558.001)](#ultra-pro-high-fidelity-golden-ticket-hamisítás-és-injekció-(t1558001))
 - [Ultra-Pro High-Fidelity ezüst jegyhamisítás és injekció (T1558.002)](#ultra-pro-high-fidelity-ezüst-jegyhamisítás-és-injekció-(t1558002))
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
-- [Ultra-Pro High-Fidelity AS-REP pörkölés és LDAP felsorolás (T1558.004)](#ultra-pro-high-fidelity-as-rep-pörkölés-és-ldap-felsorolás-(t1558004))
+- [Ultra-Pro High-Fidelity AS-REP pörkölés és LDAP felsorolás](#ultra-pro-high-fidelity-as-rep-pörkölés-és-ldap-felsorolás)
 - [High-Fidelity Indirekt IPC és COM végrehajtás](#high-fidelity-indirekt-ipc-és-com-végrehajtás)
 - [Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity)](#gyanús-elnevezett-csővezeték-létrehozás-amely-utólagos-kihasználási-eszközökhöz-kapcsolódik-(high-fidelity))
 - [High-Fidelity Office DDE kontextuális anomália](#high-fidelity-office-dde-kontextuális-anomália)
@@ -7722,16 +7722,24 @@ A szolgáltatásspecifikus SPN-ek (cifs, mssql, http) kötelező jelenlétére �
 
 
 ---
-## Ultra-Pro High-Fidelity AS-REP pörkölés és LDAP felsorolás (T1558.004)
+## Ultra-Pro High-Fidelity AS-REP pörkölés és LDAP felsorolás
 - **ID:** `T1558_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az AS-REP roasting támadásokat azáltal, hogy figyeli az adott LDAP-lekérdezések célzását
-a DONT_REQ_PREAUTH bit (4194304) és a támadó eszköz paraméterei
-hash kivonat (Rubeus, Impacket, PowerView).
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a nagy megbízhatóságú AS-REP pörkölési tevékenységet célzó fiókokat
+DONT_REQ_PREAUTH (UAC 4194304).
+
+A fedezet a következőket tartalmazza:
+
+- LDAP bitenkénti szűrők a DONT_REQ_PREAUTH számára
+- Rubeus / Impacket / PowerView AS-REP pörkölés használat
+- Hash export formázás (hashcat / john)
+- Gyanús PowerShell vagy távoli végrehajtási vonal
+
+Az ATT&CK T1558.004-re összpontosítva.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -426,7 +426,7 @@
 - [Ultra-Pro High-Fidelity Golden Ticket Forgery & Injection (T1558.001)](#ultra-pro-high-fidelity-golden-ticket-forgery-&-injection-(t1558001))
 - [Ultra-Pro High-Fidelity Silver Ticket Forgery & Injection (T1558.002)](#ultra-pro-high-fidelity-silver-ticket-forgery-&-injection-(t1558002))
 - [Gyanús Kerberos TGS jegykérés (Kerberoasting)](#gyanús-kerberos-tgs-jegykérés-(kerberoasting))
-- [Ultra-Pro High-Fidelity AS-REP Roasting & LDAP Enumeration (T1558.004)](#ultra-pro-high-fidelity-as-rep-roasting-&-ldap-enumeration-(t1558004))
+- [Ultra-Pro High-Fidelity AS-REP Roasting & LDAP Enumeration](#ultra-pro-high-fidelity-as-rep-roasting-&-ldap-enumeration)
 - [High-Fidelity Indirect IPC and COM Execution](#high-fidelity-indirect-ipc-and-com-execution)
 - [Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity)](#gyanús-elnevezett-csővezeték-létrehozás-amely-utólagos-kihasználási-eszközökhöz-kapcsolódik-(high-fidelity))
 - [High-Fidelity Office DDE Contextual Anomaly](#high-fidelity-office-dde-contextual-anomaly)
@@ -8136,16 +8136,24 @@ and the provision of service account hashes in the command line.
 
 
 ---
-## Ultra-Pro High-Fidelity AS-REP Roasting & LDAP Enumeration (T1558.004)
+## Ultra-Pro High-Fidelity AS-REP Roasting & LDAP Enumeration
 - **ID:** `T1558_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects AS-REP Roasting attacks by monitoring for specific LDAP queries targeting 
-the DONT_REQ_PREAUTH bit (4194304) and offensive tool parameters used for 
-hash extraction (Rubeus, Impacket, PowerView).
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence AS-REP Roasting activity targeting accounts with
+DONT_REQ_PREAUTH (UAC 4194304).
+
+Coverage includes:
+
+  - LDAP bitwise filters for DONT_REQ_PREAUTH
+  - Rubeus / Impacket / PowerView AS-REP roasting usage
+  - Hash export formatting (hashcat / john)
+  - Suspicious PowerShell or remote execution lineage
+
+Focused on ATT&CK T1558.004.
 
 
 #### 🚨 Response Playbook

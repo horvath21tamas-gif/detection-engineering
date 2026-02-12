@@ -426,7 +426,7 @@
 - [Ultra-Profi-High-Fidelity-Golden-Ticket-Fälschung und -Injektion (T1558.001)](#ultra-profi-high-fidelity-golden-ticket-fälschung-und--injektion-(t1558001))
 - [Ultra-Pro High-Fidelity-Silber-Ticketfälschung und -Injektion (T1558.002)](#ultra-pro-high-fidelity-silber-ticketfälschung-und--injektion-(t1558002))
 - [Verdächtige Kerberos TGS-Ticketanfrage (Kerberoasting)](#verdächtige-kerberos-tgs-ticketanfrage-(kerberoasting))
-- [Ultra-Pro High-Fidelity AS-REP-Röstung und LDAP-Enumeration (T1558.004)](#ultra-pro-high-fidelity-as-rep-röstung-und-ldap-enumeration-(t1558004))
+- [Ultra-Pro High-Fidelity AS-REP-Röstung und LDAP-Enumeration](#ultra-pro-high-fidelity-as-rep-röstung-und-ldap-enumeration)
 - [Indirekte IPC- und COM-Ausführung mit hoher Wiedergabetreue](#indirekte-ipc--und-com-ausführung-mit-hoher-wiedergabetreue)
 - [Verdächtige Pipeline-Erstellung im Zusammenhang mit Post-Exploitation-Tools (High Fidelity)](#verdächtige-pipeline-erstellung-im-zusammenhang-mit-post-exploitation-tools-(high-fidelity))
 - [High-Fidelity-Office-DDE-Kontextanomalie](#high-fidelity-office-dde-kontextanomalie)
@@ -7722,16 +7722,24 @@ und die Bereitstellung von Dienstkonto-Hashes in der Befehlszeile.
 
 
 ---
-## Ultra-Pro High-Fidelity AS-REP-Röstung und LDAP-Enumeration (T1558.004)
+## Ultra-Pro High-Fidelity AS-REP-Röstung und LDAP-Enumeration
 - **ID:** `T1558_004.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt AS-REP-Roasting-Angriffe durch Überwachung auf bestimmte gezielte LDAP-Abfragen
-das DONT_REQ_PREAUTH-Bit (4194304) und anstößige Tool-Parameter, die für verwendet werden
-Hash-Extraktion (Rubeus, Impacket, PowerView).
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochzuverlässige AS-REP-Röstungsaktivitäten, die auf Konten ausgerichtet sind
+DONT_REQ_PREAUTH (UAC 4194304).
+
+Der Versicherungsschutz umfasst:
+
+- Bitweise LDAP-Filter für DONT_REQ_PREAUTH
+- Rubeus / Impacket / PowerView AS-REP Röstnutzung
+- Formatierung des Hash-Exports (Hashcat / John)
+- Verdächtige PowerShell- oder Remote-Ausführungslinie
+
+Konzentriert sich auf ATT&CK T1558.004.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

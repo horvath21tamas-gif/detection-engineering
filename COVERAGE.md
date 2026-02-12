@@ -432,7 +432,7 @@
 | T1558.001 | CRITICAL | Ultra-Pro High-Fidelity Golden Ticket Forgery & Injection (T1558.001) |
 | T1558.002 | CRITICAL | Ultra-Pro High-Fidelity Silver Ticket Forgery & Injection (T1558.002) |
 | T1558.003 | HIGH | Ultra-Pro High-Fidelity Kerberos Attack Detection (T1558), Gyanús Kerberos TGS jegykérés (Kerberoasting) |
-| T1558.004 | CRITICAL | Ultra-Pro High-Fidelity Kerberos Attack Detection (T1558), Ultra-Pro High-Fidelity AS-REP Roasting & LDAP Enumeration (T1558.004) |
+| T1558.004 | CRITICAL | Ultra-Pro High-Fidelity Kerberos Attack Detection (T1558), Ultra-Pro High-Fidelity AS-REP Roasting & LDAP Enumeration |
 | T1559 | CRITICAL | High-Fidelity Indirect IPC and COM Execution |
 | T1559.001 | HIGH | High-Fidelity Indirect IPC and COM Execution, Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity) |
 | T1559.002 | CRITICAL | High-Fidelity Office DDE Contextual Anomaly, High-Fidelity Indirect IPC and COM Execution |

@@ -7870,16 +7870,18 @@ parancssori entrópia és integritási szintek.
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az egyéni adatgyűjtési és kiszűrési kísérleteket bájtszinten keresztül
-fájlelérés és kézi kódolás (XOR, Base64, bitenkénti műveletek).
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a nagy megbízhatóságú egyéni adatgyűjtési és -staging tevékenységet
+bájtszintű fájlhozzáférés és kézi kódolási/obfuszkációs rutinok.
 
-A következőkre összpontosít:
-- Fájlbájtok és memóriafolyamok olvasása/írása
-- Kézi homályosítás vagy kódolási rutinok
-- Rekurzív fájl felsorolás
-- Gyanús szülőfolyamatok (webszerverek, parancsértelmezők)
-- Nem tartalmazza a megbízható automatizálási és telemetriai eszközöket
+A fedezet a következőket tartalmazza:
+
+- Nyers bájt szintű fájlhozzáférés (ReadAllBytes, MemoryStream)
+- Kézi Base64/XOR/bitenkénti kódolás
+- Rekurzív fájlok felsorolása a szakaszoláshoz
+- Gyanús végrehajtási környezet (webszerver, shell, ideiglenes végrehajtás)
+
+Az ATT&CK T1560.003-ra összpontosít (archiválás egyéni módszerrel).
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

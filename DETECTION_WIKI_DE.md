@@ -7870,16 +7870,18 @@ Befehlszeilen-Entropie und Integritätsebenen.
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt benutzerdefinierte Datenerfassungs- und Exfiltrationsversuche auf Byte-Ebene
-Dateizugriff und manuelle Kodierung (XOR, Base64, bitweise Operationen).
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochzuverlässige benutzerdefinierte Datenerfassungs- und Staging-Aktivitäten mithilfe von
+Dateizugriff auf Byte-Ebene und manuelle Kodierungs-/Verschleierungsroutinen.
 
-Konzentriert sich auf:
-- Lesen/Schreiben von Dateibytes und Speicherströmen
-- Manuelle Verschleierungs- oder Kodierungsroutinen
-- Rekursive Dateiaufzählung
-- Verdächtige übergeordnete Prozesse (Webserver, Shells)
-– Ausgenommen sind vertrauenswürdige Automatisierungs- und Telemetrietools
+Der Versicherungsschutz umfasst:
+
+- Roher Dateizugriff auf Byte-Ebene (ReadAllBytes, MemoryStream)
+- Manuelle Base64/XOR/bitweise Kodierung
+- Rekursive Dateiaufzählung für das Staging
+– Verdächtiger Ausführungskontext (Webserver, Shell, temporäre Ausführung)
+
+Konzentriert sich auf ATT&CK T1560.003 (Archivierung über benutzerdefinierte Methode).
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

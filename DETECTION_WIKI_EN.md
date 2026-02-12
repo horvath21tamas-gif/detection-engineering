@@ -8292,16 +8292,18 @@ command-line entropy, and integrity levels.
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects custom data collection and exfiltration attempts via byte-level 
-file access and manual encoding (XOR, Base64, bitwise operations).
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence custom data collection and staging activity using
+byte-level file access and manual encoding/obfuscation routines.
 
-Focuses on:
-  - Read/Write of file bytes and memory streams
-  - Manual obfuscation or encoding routines
-  - Recursive file enumeration
-  - Suspicious parent processes (web servers, shells)
-  - Excludes trusted automation and telemetry tools
+Coverage includes:
+
+  - Raw byte-level file access (ReadAllBytes, MemoryStream)
+  - Manual Base64/XOR/bitwise encoding
+  - Recursive file enumeration for staging
+  - Suspicious execution context (web server, shell, temp execution)
+
+Focused on ATT&CK T1560.003 (Archive via Custom Method).
 
 
 #### 🚨 Response Playbook

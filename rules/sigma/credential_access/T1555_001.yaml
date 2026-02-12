@@ -1,18 +1,21 @@
-title: Ultra-Pro High-Fidelity Vault Credential Harvesting (T1555.001)
+title: Windows Vault Credential Harvesting Detection (T1555.001)
 id: 76b49d02-0dc0-4eed-9aba-71310c87791e
 status: stable
-description: |
-    Detects unauthorized credential extraction from Windows Vault by monitoring for 
-    command-line data redirection, suspicious API strings, and non-standard 
-    process lineages, while filtering out legitimate browser and system update noise.
-author: hota05
-date: 2026-02-04
+description: >
+    Detects potential unauthorized extraction of Windows Vault credentials by monitoring
+    vaultcmd.exe usage, API strings, and suspicious command-line data redirection from 
+    untrusted contexts, while filtering legitimate browsers and system processes.
+author: hota05 
+date: 2026-02-12
+references:
+    - https://attack.mitre.org/techniques/T1555/001/
 tags:
     - attack.credential_access
     - attack.t1555.001
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_vault_cli:
         Image|endswith: '\vaultcmd.exe'
@@ -22,17 +25,17 @@ detection:
 
     selection_redirection:
         CommandLine|contains:
-            - ' > '           
-            - ' >> '          
-            - ' | '           
-            - 'clip'          
+            - ' > '
+            - ' >> '
+            - ' | '
+            - 'clip'
 
     selection_api_strings:
         CommandLine|contains:
             - 'VaultEnumerateItems'
             - 'VaultGetItem'
-            - 'Windows.Security.Credentials.PasswordVault' 
-            - 'Get-VaultCredential'                       
+            - 'Windows.Security.Credentials.PasswordVault'
+            - 'Get-VaultCredential'
 
     selection_untrusted_actor:
         Image|contains:
@@ -52,7 +55,7 @@ detection:
             - '\chrome.exe'
             - '\msedge.exe'
             - '\firefox.exe'
-    
+
     filter_system_processes:
         ParentImage|endswith:
             - '\services.exe'
@@ -60,5 +63,15 @@ detection:
             - '\TrustedInstaller.exe'
         username: 'NT AUTHORITY\SYSTEM'
 
-    condition: ((selection_vault_cli and selection_redirection) or selection_api_strings) and selection_untrusted_actor and not (filter_legit_browsers or filter_system_processes)
+    condition:
+        ((selection_vault_cli and selection_redirection) or selection_api_strings)
+        and selection_untrusted_actor
+        and not (filter_legit_browsers or filter_system_processes)
+
+falsepositives:
+    - Legitimate PowerShell or Python scripts accessing Vault for IT management
+    - User-initiated credential backup/export via Vault CLI or scripts
+    - Security auditing / automated testing on local dev/test machines
+    - Browser plugins legitimately accessing vault credentials
+
 level: high

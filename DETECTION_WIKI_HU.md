@@ -7342,16 +7342,14 @@ Azokra az esetekre összpontosít, amikor az írási folyamat LOLBin, vagy a fá
 
 
 ---
-## Ultra-Pro High-Fidelity Vault hitelesítő adatok begyűjtése (T1555.001)
+## Windows Vault hitelesítő adatok legyűjtésének észlelése (T1555.001)
 - **ID:** `T1555_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a hitelesítő adatok jogosulatlan kimásolását a Windows Vault szolgáltatásból a következő megfigyelésével
-parancssori adatátirányítás, gyanús API-karakterláncok és nem szabványos
-folyamati vonalakat, miközben kiszűri a legitim böngésző- és rendszerfrissítési zajt.
+- **Leírás:** Érzékeli a Windows Vault hitelesítő adatok esetleges jogosulatlan kimásolását a vaultcmd.exe használatának, az API-karakterláncoknak és a nem megbízható kontextusokból származó gyanús parancssori adatok átirányításának figyelésével, miközben kiszűri a legitim böngészőket és rendszerfolyamatokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

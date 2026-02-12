@@ -7733,16 +7733,14 @@ Focuses on cases where the writing process is a LOLBin or the file lacks a valid
 
 
 ---
-## Ultra-Pro High-Fidelity Vault Credential Harvesting (T1555.001)
+## Windows Vault Credential Harvesting Detection (T1555.001)
 - **ID:** `T1555_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized credential extraction from Windows Vault by monitoring for 
-command-line data redirection, suspicious API strings, and non-standard 
-process lineages, while filtering out legitimate browser and system update noise.
+- **Leírás:** Detects potential unauthorized extraction of Windows Vault credentials by monitoring vaultcmd.exe usage, API strings, and suspicious command-line data redirection from  untrusted contexts, while filtering legitimate browsers and system processes.
 
 
 #### 🚨 Response Playbook

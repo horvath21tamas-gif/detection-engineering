@@ -7342,16 +7342,14 @@ Konzentriert sich auf Fälle, in denen der Schreibvorgang ein LOLBin ist oder de
 
 
 ---
-## Ultra-Pro High-Fidelity Vault-Zugangsdatenerfassung (T1555.001)
+## Erkennung der Erfassung von Windows Vault-Anmeldeinformationen (T1555.001)
 - **ID:** `T1555_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die unbefugte Extraktion von Anmeldeinformationen aus Windows Vault durch Überwachung
-Befehlszeilen-Datenumleitung, verdächtige API-Zeichenfolgen und Nicht-Standard
-Prozesslinien und filtert gleichzeitig legitime Browser- und Systemupdate-Rauschen heraus.
+- **Beschreibung:** Erkennt potenzielle unbefugte Extraktion von Windows Vault-Anmeldeinformationen durch Überwachung der vaultcmd.exe-Nutzung, API-Zeichenfolgen und verdächtiger Befehlszeilendatenumleitungen aus nicht vertrauenswürdigen Kontexten und filtert gleichzeitig legitime Browser und Systemprozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

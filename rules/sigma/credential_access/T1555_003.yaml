@@ -1,18 +1,22 @@
-title: Ultra-Pro High-Fidelity Browser Credential Harvesting (T1555.003)
+title: Browser Credential Harvesting Detection (T1555.003)
 id: d9c8576a-ff1b-40ce-bb36-05d578026026
 status: stable
-description: |
-    Detects unauthorized access and extraction of browser credential databases. 
-    It targets command-line abuse (copying/archiving) and suspicious interpreter 
-    behavior targeting sensitive profile files like 'Login Data' or 'Cookies'.
-author: hota05
-date: 2026-02-04
+description: >
+    Detects potential unauthorized access and exfiltration of browser credential databases 
+    (Chrome, Edge, Firefox, Brave) by monitoring suspicious command-line file operations 
+    targeting 'Login Data', 'Cookies', 'Web Data', 'key4.db', or 'logins.json'. Filters 
+    legitimate browser processes and backup/sync tools.
+author: hota05 
+date: 2026-02-12
+references:
+    - https://attack.mitre.org/techniques/T1555/003/
 tags:
     - attack.credential_access
     - attack.t1555.003
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_files:
         CommandLine|contains:
@@ -23,16 +27,23 @@ detection:
             - '\logins.json'
 
     selection_ops:
-        - CommandLine|contains:
+        CommandLine|contains:
             - 'copy '
             - 'type '
-            - 'add '           
+            - 'add '
             - 'tar '
-            - 'Get-Content'   
-            - 'cp '            
-        - Image|endswith:
+            - 'Get-Content'
+            - 'cp '
+            - '7z '
+            - 'rar '
+            - 'zip '
+        Image|endswith:
             - '\sqlite3.exe'
-            - '\esentutl.exe' 
+            - '\esentutl.exe'
+            - '\7z.exe'
+            - '\rar.exe'
+            - '\tar.exe'
+            - '\gzip.exe'
 
     selection_untrusted_context:
         Image|contains:
@@ -42,10 +53,12 @@ detection:
             - '\Downloads\'
             - '\Public\'
         Image|endswith:
-            - '\python.exe'
             - '\powershell.exe'
+            - '\pwsh.exe'
             - '\cmd.exe'
+            - '\python.exe'
             - '\cscript.exe'
+            - '\node.exe'
 
     filter_native_browsers:
         Image|endswith:
@@ -61,7 +74,19 @@ detection:
         Image|contains:
             - '\Program Files\Veeam\'
             - '\Program Files\Microsoft OneDrive\'
+            - '\Program Files\Dropbox\'
+            - '\Program Files\Google\Drive\'
         username: 'NT AUTHORITY\SYSTEM'
 
-    condition: selection_files and (selection_ops or selection_untrusted_context) and not (filter_native_browsers or filter_known_backups)
+    condition:
+        selection_files
+        and (selection_ops or selection_untrusted_context)
+        and not (filter_native_browsers or filter_known_backups)
+
+falsepositives:
+    - Legitimate browser backup or sync operations
+    - Security auditing tools accessing browser profiles
+    - Dev/test environments with automated browser testing scripts
+    - User-initiated copying/export of browser data
+
 level: critical

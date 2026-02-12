@@ -1,50 +1,58 @@
-title: Ultra-Pro High-Fidelity MotW Bypass & Zone Subversion (T1553.005)
+title: Mark-of-the-Web (MotW) Bypass & Zone Subversion Detection (T1553.005)
 id: ddb6308f-9481-4cad-9130-a7d5824482b2
 status: stable
-description: |
-    Detects programmatic removal or subversion of the Mark of the Web (MotW). 
-    Focuses on non-interactive ADS manipulation and suspicious registry 
-    modifications that lower security zone settings.
-author: hota05
-date: 2026-02-03
+description: >
+    Detects programmatic removal or tampering of the Mark of the Web (MotW) via
+    Alternate Data Stream (Zone.Identifier) manipulation or registry-based
+    security zone downgrades. Focuses on non-interactive script execution and
+    suspicious zone configuration changes while filtering legitimate installers
+    and browser activity.
+author: hota05 
+date: 2026-02-12
+references:
+    - https://attack.mitre.org/techniques/T1553/005/
 tags:
     - attack.defense_evasion
     - attack.t1553.005
 logsource:
     product: windows
     category: process_creation
-detection:
-    selection_ads:
-        CommandLine|contains:
-            - ':Zone.Identifier'
-        CommandLine|contains:
-            - 'Remove-Item'      
-            - 'Set-Content'       
-            - 'Clear-Content'
-            - 'streams.exe'      
-            - 'xattr'             
-            - 'delete'
 
-    selection_context:
+detection:
+    selection_ads_target:
+        CommandLine|contains: ':Zone.Identifier'
+
+    selection_ads_actions:
+        CommandLine|contains:
+            - 'Remove-Item'
+            - 'Set-Content'
+            - 'Clear-Content'
+            - 'streams.exe'
+            - 'cmd /c del'
+            - 'powershell -command'
+            - 'del '
+
+    selection_registry_zone:
+        CommandLine|contains:
+            - 'SaveZoneInformation'
+            - 'LowRiskFileTypes'
+            - 'ZoneMap\Domains'
+            - 'ZoneMap\Ranges'
+        CommandLine|contains:
+            - 'reg add'
+            - 'reg delete'
+            - 'Set-ItemProperty'
+
+    selection_script_context:
         ParentImage|endswith:
             - '\powershell.exe'
             - '\pwsh.exe'
             - '\cmd.exe'
             - '\wscript.exe'
             - '\cscript.exe'
-            - '\winword.exe'
-            - '\excel.exe'
+            - '\mshta.exe'
 
-    selection_registry:
-        CommandLine|contains:
-            - 'SaveZoneInformation'  
-            - 'LowRiskFileTypes'    
-            - 'ZoneMap\Domains'      
-        CommandLine|contains:
-            - 'reg add'
-            - 'Set-ItemProperty'
-
-    selection_paths:
+    selection_user_paths:
         CommandLine|contains:
             - '\Downloads\'
             - '\AppData\Local\Temp\'
@@ -52,11 +60,26 @@ detection:
             - '\Desktop\'
 
     filter_trusted_installers:
-        Image|startswith:
-            - 'C:\Windows\System32\msiexec.exe'
-            - 'C:\Program Files\Google\Chrome\Application\chrome.exe'
-            - 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
+        Image|endswith:
+            - '\msiexec.exe'
+            - '\setup.exe'
+            - '\chrome.exe'
+            - '\msedge.exe'
         username: 'NT AUTHORITY\SYSTEM'
 
-    condition: ((selection_ads and selection_context) or selection_registry) and selection_paths and not filter_trusted_installers
+    condition:
+        (
+            (selection_ads_target and selection_ads_actions and selection_script_context)
+            or
+            selection_registry_zone
+        )
+        and selection_user_paths
+        and not filter_trusted_installers
+
+falsepositives:
+    - Legitimate software installers removing ADS during deployment
+    - Enterprise software packaging / repackaging workflows
+    - IT automation modifying security zone settings
+    - Developer scripts manipulating downloaded test files
+
 level: critical

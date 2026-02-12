@@ -7394,16 +7394,14 @@ Verhalten, das auf sensible Profildateien wie „Anmeldedaten“ oder „Cookies
 
 
 ---
-## Ultra-Pro High-Fidelity Windows Credential Manager Harvesting (T1555.004)
+## Windows Credential Manager Harvesting-Erkennung (T1555.004)
 - **ID:** `T1555_004.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CMDKEY.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt das unbefugte Sammeln von Anmeldeinformationen über cmdkey.exe durch Identifizierung
-verdächtige Befehlszeilenumleitung, nicht interaktive übergeordnete Prozesse,
-und bekannte Signaturen des Credential-Dumping-Tools.
+- **Beschreibung:** Erkennt potenzielles unbefugtes Sammeln von Anmeldeinformationen über den Windows-Anmeldeinformations-Manager (cmdkey.exe), indem verdächtige Befehlszeilenverwendungen, Umleitungen, nicht vertrauenswürdige übergeordnete Prozesse und nicht interaktive Ausführungskontexte überwacht werden.Filtert legitime IT-Verwaltungsskripte und Benutzeraktivitäten.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

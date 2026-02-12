@@ -7788,16 +7788,14 @@ behavior targeting sensitive profile files like 'Login Data' or 'Cookies'.
 
 
 ---
-## Ultra-Pro High-Fidelity Windows Credential Manager Harvesting (T1555.004)
+## Windows Credential Manager Harvesting Detection (T1555.004)
 - **ID:** `T1555_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CMDKEY.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized credential harvesting via cmdkey.exe by identifying 
-suspicious command-line redirection, non-interactive parent processes, 
-and known credential dumping tool signatures.
+- **Leírás:** Detects potential unauthorized credential harvesting via Windows Credential Manager (cmdkey.exe) by monitoring suspicious command-line usage, redirection, untrusted parent processes, and  non-interactive execution contexts. Filters legitimate IT management scripts and user activity.
 
 
 #### 🚨 Response Playbook

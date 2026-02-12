@@ -7394,16 +7394,14 @@ olyan érzékeny profilfájlokat célzó viselkedés, mint a „Bejelentkezési 
 
 
 ---
-## Ultra-Pro High-Fidelity Windows Credential Manager begyűjtése (T1555.004)
+## Windows Credential Manager begyűjtési észlelés (T1555.004)
 - **ID:** `T1555_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CMDKEY.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Azonosítással észleli a jogosulatlan hitelesítő adatok begyűjtését a cmdkey.exe fájlon keresztül
-gyanús parancssori átirányítás, nem interaktív szülőfolyamatok,
-és az ismert hitelesítő adatok dömping eszköz aláírásai.
+- **Leírás:** Érzékeli a lehetséges jogosulatlan hitelesítő adatok begyűjtését a Windows Credential Manager (cmdkey.exe) segítségével a gyanús parancssori használat, az átirányítás, a nem megbízható szülőfolyamatok és a nem interaktív végrehajtási kontextusok figyelésével.Szűri a jogos IT-felügyeleti szkripteket és a felhasználói tevékenységeket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

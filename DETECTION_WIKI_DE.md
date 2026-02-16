@@ -5593,7 +5593,7 @@ aus nicht vertrauenswürdigen Prozessherkunftsbereichen (z. B. Browsern, Office-
 
 
 ---
-## Ultra-Pro High-Fidelity-Ressourcen-Hijacking (T1496)
+## Ressourcenentführung (T1496)
 - **ID:** `T1496.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

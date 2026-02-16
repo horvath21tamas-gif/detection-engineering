@@ -5881,7 +5881,7 @@ from untrusted process lineages (e.g., browsers, office apps, or temp folders).
 
 
 ---
-## Ultra-Pro High-Fidelity Resource Hijacking (T1496)
+## Resource Hijacking (T1496)
 - **ID:** `T1496.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

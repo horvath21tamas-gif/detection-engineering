@@ -5593,7 +5593,7 @@ nem megbízható folyamatvonalakból (pl. böngészőkből, irodai alkalmazások
 
 
 ---
-## Ultra-Pro High-Fidelity erőforrás-eltérítés (T1496)
+## Erőforrás-eltérítés (T1496)
 - **ID:** `T1496.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

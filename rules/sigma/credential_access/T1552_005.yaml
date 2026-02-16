@@ -82,7 +82,7 @@ detection:
             - '\Users\Public\'
 
     selection_non_system_user:
-        User|not_contains:
+        User|contains:
             - 'NT AUTHORITY\SYSTEM'
             - 'NT AUTHORITY\LOCAL SERVICE'
             - 'NT AUTHORITY\NETWORK SERVICE'
@@ -113,7 +113,7 @@ detection:
         and (selection_extraction_patterns
             or selection_powershell_dump
             or selection_untrusted_context)
-        and selection_non_system_user
+        and not selection_non_system_user
         and not filter_legitimate_cli_usage
         and not filter_ci_cd_context
 

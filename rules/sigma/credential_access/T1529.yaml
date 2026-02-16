@@ -1,63 +1,89 @@
-title: Ultra-Pro High-Fidelity System Shutdown/Reboot (T1529)
-id: 1160d953-32dc-4a15-b406-065130a8f2e5
+title: Unauthorized System Shutdown/Reboot Detection (T1529)
+id: a89019a5-4c13-4893-986a-448e46d95435
 status: stable
 description: |
-    Detects unauthorized or suspicious system shutdown/reboot commands 
-    by monitoring for forced operations (-f) originating from untrusted 
-    process lineages (browsers, office apps, temp folders).
-author: hota05
-date: 2026-02-09
+    Detects unauthorized or suspicious system shutdown or reboot commands.
+    Monitors forced shutdowns or reboots originating from untrusted process lineages 
+    (browsers, Office apps, scripts, temp folders) and filters legitimate system 
+    automation, administrative, or health check tasks.
+
+author: hota05 
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1529/
 tags:
     - attack.impact
     - attack.t1529
+    - attack.execution
+    - attack.persistence
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_tools:
-        - Image|endswith:
+
+    selection_shutdown_tools:
+        Image|endswith:
             - '\shutdown.exe'
-            - '\init.exe'       
+            - '\init.exe'
             - '\powershell.exe'
             - '\pwsh.exe'
 
-    selection_logic:
+    selection_shutdown_commands:
         CommandLine|contains:
-            - 'Stop-Computer'  
+            - 'Stop-Computer'
             - 'Restart-Computer'
-        CommandLine|contains|all:
-            - ' /f'             
-            - ' /t 0'           
+            - 'shutdown'
+            - 'reboot'
         CommandLine|contains:
-            - ' /a'             
+            - ' /f'
+            - ' /t 0'
+        CommandLine|contains:
+            - ' /a'  # abort flag
 
-    selection_context:
-        - ParentImage|endswith:
+    selection_suspicious_context:
+        ParentImage|endswith:
             - '\winword.exe'
             - '\excel.exe'
             - '\outlook.exe'
+            - '\powerpoint.exe'
             - '\chrome.exe'
             - '\msedge.exe'
-            - '\httpd.exe'     
-            - '\rundll32.exe'   
+            - '\firefox.exe'
+            - '\httpd.exe'
+            - '\rundll32.exe'
             - '\wscript.exe'
             - '\cscript.exe'
-        - Image|contains:
+        Image|contains:
             - '\Temp\'
             - '\Users\Public\'
             - '\AppData\Local\Temp\'
 
-    filter_legit_automation:
-        - username: 'NT AUTHORITY\SYSTEM' 
-        - ParentImage|endswith:
-            - '\CcmExec.exe'    
-            - '\TiWorker.exe'  
-            - '\msiexec.exe'    
+    filter_legit_system_automation:
+        username: 'NT AUTHORITY\SYSTEM'
+        ParentImage|endswith:
+            - '\CcmExec.exe'
+            - '\TiWorker.exe'
+            - '\msiexec.exe'
             - '\svchost.exe'
-        - CommandLine|contains:
+            - '\Sppsvc.exe'
+        CommandLine|contains:
             - 'HealthCheck'
             - 'Diagnostic'
             - 'AzureAD'
+            - 'Update'
+            - 'Patch'
 
-    condition: selection_tools and selection_logic and selection_context and not filter_legit_automation
+    condition: 
+        selection_shutdown_tools 
+        and selection_shutdown_commands 
+        and selection_suspicious_context 
+        and not filter_legit_system_automation
+
+falsepositives:
+    - Windows Update or patching operations
+    - IT admins running health check or diagnostic scripts
+    - Legitimate automation tasks triggered by SCCM, TiWorker, or AzureAD agents
+
 level: critical

@@ -5663,16 +5663,16 @@ ohne einen legitimen UI-Kontext zu haben.
 
 
 ---
-## Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)
+## Zeitbasiertes Ausweichen (T1497.003)
 - **ID:** `T1497_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt raffinierte zeitbasierte Umgehung durch Überwachung auf nicht standardmäßige Verzögerungen
-Mechanismen (Ping, Auswahl, Zeitüberschreitung), die insbesondere von nicht vertrauenswürdigen Binärdateien initiiert werden
-Ziel sind langfristige Verzögerungen, die dazu dienen, die Grenzen der Sandbox-Analyse auszuschöpfen.
+- **Beschreibung:** Erkennt raffinierte zeitbasierte Umgehung durch Überwachung nicht standardmäßiger Verzögerungsmechanismen
+(Ping, Auswahl, Timeout), initiiert von nicht vertrauenswürdigen Binärdateien.Zielt auf langanhaltende Blockaden
+Wird verwendet, um die Grenzen der Sandbox-Analyse auszuschöpfen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

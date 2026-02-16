@@ -26,17 +26,17 @@ detection:
     CommandLine|contains:
       - 'ping 127.0.0.1 -n '
       - 'ping ::1 -n '
-    CommandLine: '.* -n (?:[1-9][0-9]{2,}|[1-9][0-9]{3,}).*'
+    processcommandline: '.* -n (?:[1-9][0-9]{2,}|[1-9][0-9]{3,}).*'
 
   choice_timeout:
     CommandLine|contains:
       - 'choice /t'
       - 'choice /d y /t'
-    CommandLine: '.* /t (?:[6-9][0-9]|[1-9][0-9]{2,}).*'
+    processcommandline: '.* /t (?:[6-9][0-9]|[1-9][0-9]{2,}).*'
 
   timeout_abuse:
     CommandLine|contains: 'timeout /t'
-    CommandLine: '.* /t (?:[1-9][0-9]{2,}).*'
+    processcommandline: '.* /t (?:[1-9][0-9]{2,}).*'
 
   trusted_system_filter:
     ParentImage|endswith:

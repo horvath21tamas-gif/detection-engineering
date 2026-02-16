@@ -5955,16 +5955,16 @@ without having a legitimate UI context.
 
 
 ---
-## Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)
+## Time-based Evasion (T1497.003)
 - **ID:** `T1497_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects sophisticated time-based evasion by monitoring for non-standard delay 
-mechanisms (ping, choice, timeout) initiated by untrusted binaries, specifically 
-targeting long-duration stalls used to exhaust sandbox analysis limits.
+- **Leírás:** Detects sophisticated time-based evasion by monitoring non-standard delay mechanisms 
+(ping, choice, timeout) initiated by untrusted binaries. Targets long-duration stalls 
+used to exhaust sandbox analysis limits.
 
 
 #### 🚨 Response Playbook

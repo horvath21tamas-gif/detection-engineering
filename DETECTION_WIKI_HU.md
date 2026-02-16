@@ -5663,16 +5663,16 @@ legitim UI kontextus nélkül.
 
 
 ---
-## Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)
+## Időalapú kijátszás (T1497.003)
 - **ID:** `T1497_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a kifinomult időalapú kijátszást a nem szabványos késleltetés figyelésével
-konkrétan nem megbízható binárisok által kezdeményezett mechanizmusok (ping, választás, időtúllépés).
-a sandbox elemzési határértékek kimerítésére használt hosszú távú istállók megcélzása.
+- **Leírás:** A nem szabványos késleltetési mechanizmusok figyelésével észleli a kifinomult időalapú kijátszást
+(ping, választás, időtúllépés) nem megbízható binárisok által kezdeményezett.A hosszú távú istállókat célozza meg
+a homokozó elemzési határok kimerítésére szolgál.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

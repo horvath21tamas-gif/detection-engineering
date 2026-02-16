@@ -1,25 +1,34 @@
-title: Ultra-Pro Terminal Services DLL Hijacking (T1505.005)
-id: 78af9ef4-1b30-479e-a3ee-ce63b8c4db1f
+title: Terminal Services DLL Hijacking Detection (T1505.005)
+id: 34f9a81c-b835-4931-b054-cec8d1b34abc
 status: stable
 description: |
-    Detects unauthorized modification of Terminal Services (RDP) service DLLs 
-    and providers. Monitors for ServiceDll and ProviderPath tampering from 
-    untrusted processes and non-standard file paths.
+    Detects unauthorized modification or hijacking of Terminal Services (RDP) service DLLs 
+    and providers. Monitors ServiceDll and ProviderPath registry keys for tampering by 
+    untrusted processes, unusual paths, or suspicious actors, filtering legitimate 
+    system binaries and service operations to minimize false positives.
+
 author: hota05
-date: 2026-02-02
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1505/005/
 tags:
     - attack.persistence
     - attack.t1505.005
+    - attack.credential_access
+    - attack.privilege_escalation
+
 logsource:
     product: windows
     category: registry_event
+
 detection:
+
     selection_registry_path:
         TargetObject|contains:
             - 'SYSTEM\CurrentControlSet\Services\TermService\Parameters\ServiceDll'
             - 'SYSTEM\CurrentControlSet\Control\Terminal Server\Providers\'
 
-    selection_suspicious_path:
+    selection_suspicious_paths:
         Details|contains:
             - '\Users\'
             - '\Temp\'
@@ -27,11 +36,9 @@ detection:
             - '\ProgramData\'
             - '\Public\'
             - '\PerfLogs\'
+            - '\Downloads\'
 
-    selection_unauthorized_actor:
-        Image|contains:
-            - '\Windows\servicing\TrustedInstaller.exe'
-            - '\Windows\System32\svchost.exe'
+    selection_unauthorized_actors:
         Image|endswith:
             - '\powershell.exe'
             - '\pwsh.exe'
@@ -39,11 +46,27 @@ detection:
             - '\reg.exe'
             - '\net.exe'
             - '\python.exe'
+        ParentImage|endswith:
+            - '\explorer.exe'
+            - '\wsmprovhost.exe'
+            - '\httpd.exe'
 
-    filter_trusted_binaries:
+    filter_trusted_system_binaries:
         Details|endswith:
             - '\System32\termsrv.dll'
             - '\System32\rdpcorets.dll'
+        Image|contains:
+            - '\Windows\servicing\TrustedInstaller.exe'
+            - '\Windows\System32\svchost.exe'
 
-    condition: selection_registry_path and (selection_suspicious_path or selection_unauthorized_actor) and not filter_trusted_binaries
+    condition: 
+        selection_registry_path 
+        and (selection_suspicious_paths or selection_unauthorized_actors) 
+        and not filter_trusted_system_binaries
+
+falsepositives:
+    - Legitimate system updates modifying RDP DLLs
+    - IT admins performing registry maintenance via trusted tools
+    - Automated patching or service configuration tools
+
 level: critical

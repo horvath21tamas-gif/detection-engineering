@@ -391,7 +391,7 @@
 | T1550.002 | CRITICAL | Ultra-Pro High-Fidelity Alternate Authentication Material (T1550), Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002) |
 | T1550.003 | CRITICAL | Ultra-Pro High-Fidelity Alternate Authentication Material (T1550), Ultra-Pro High-Fidelity Pass-the-Ticket Detection (T1550.003) |
 | T1550.004 | CRITICAL | Ultra-Pro High-Fidelity Pass-the-Session Detection (T1550.004) |
-| T1552 | HIGH | Ultra-Pro High-Fidelity Credentials In Registry Discovery (T1552.002) |
+| T1552 | HIGH | Credentials In Registry Discovery (T1552.002) |
 | T1552.001 | HIGH | Ultra-Pro High-Fidelity Unsecured Credentials Discovery (T1552), Ultra-Pro High-Fidelity Credentials In Files Discovery (T1552.001) |
 | T1552.002 | HIGH | Ultra-Pro High-Fidelity Unsecured Credentials Discovery (T1552), Ultra-Pro High-Fidelity Credentials In Registry Discovery (T1552.002) |
 | T1552.003 | HIGH | Ultra-Pro High-Fidelity Shell History & Console Discovery (T1552.003) |

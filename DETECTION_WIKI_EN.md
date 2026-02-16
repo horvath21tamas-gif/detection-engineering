@@ -7442,16 +7442,18 @@ and anomalous parent processes to minimize false positives from dev/admin activi
 
 
 ---
-## Ultra-Pro High-Fidelity Credentials In Registry Discovery (T1552.002)
+## Credentials In Registry Discovery (T1552.002)
 - **ID:** `T1552_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized, recursive, or bulk extraction of sensitive registry keys 
-containing credentials (PuTTY, WinSCP, RDP, LSA secrets). Correlates search 
-commands with suspicious parent processes to minimize false positives.
+- **Leírás:** Detects unauthorized discovery or extraction of credentials stored in
+Windows Registry (PuTTY, WinSCP, RDP, LSA secrets, SAM, VPN clients).
+Correlates registry enumeration or export commands with suspicious
+parent processes, recursive search patterns, and non-system user context
+to reduce false positives.
 
 
 #### 🚨 Response Playbook

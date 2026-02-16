@@ -7067,16 +7067,18 @@ und anomale übergeordnete Prozesse, um Fehlalarme durch Entwickler-/Administrat
 
 
 ---
-## Ultra-Pro High-Fidelity-Anmeldeinformationen bei der Registrierungserkennung (T1552.002)
+## Anmeldeinformationen bei der Registrierungserkennung (T1552.002)
 - **ID:** `T1552_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die unbefugte, rekursive oder Massenextraktion vertraulicher Registrierungsschlüssel
-Enthält Anmeldeinformationen (PuTTY-, WinSCP-, RDP-, LSA-Geheimnisse).Korreliert die Suche
-Befehle mit verdächtigen übergeordneten Prozessen, um Fehlalarme zu minimieren.
+- **Beschreibung:** Erkennt die unbefugte Entdeckung oder Entnahme gespeicherter Anmeldeinformationen
+Windows-Registrierung (PuTTY, WinSCP, RDP, LSA-Geheimnisse, SAM, VPN-Clients).
+Korreliert Registrierungsaufzählung oder Exportbefehle mit verdächtigen
+übergeordnete Prozesse, rekursive Suchmuster und systemfremder Benutzerkontext
+um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

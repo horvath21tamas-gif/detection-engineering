@@ -7067,16 +7067,18 @@ Speciális korrelációt használ a keresőeszközök között (findstr, grep, P
 
 
 ---
-## Ultra-Pro High-Fidelity hitelesítő adatok a rendszerleíró adatbázisban (T1552.002)
+## Hitelesítési adatok a rendszerleíró adatbázisban (T1552.002)
 - **ID:** `T1552_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az érzékeny rendszerleíró kulcsok jogosulatlan, rekurzív vagy tömeges kimásolását
-hitelesítő adatokat tartalmazó (PuTTY, WinSCP, RDP, LSA titkok).Összefügg a kereséssel
-parancsokat a gyanús szülőfolyamatokkal, hogy minimalizálja a hamis pozitívumot.
+- **Leírás:** Érzékeli a tárolt hitelesítő adatok jogosulatlan felfedezését vagy kimásolását
+Windows Registry (PuTTY, WinSCP, RDP, LSA titkok, SAM, VPN kliensek).
+Összekapcsolja a rendszerleíró adatbázis felsorolását vagy exportálását a gyanús parancsokkal
+szülőfolyamatok, rekurzív keresési minták és nem rendszer felhasználói környezet
+a hamis pozitívumok csökkentésére.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

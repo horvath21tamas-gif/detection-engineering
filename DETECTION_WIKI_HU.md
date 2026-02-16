@@ -7103,16 +7103,17 @@ parancsok (base64, curl, átirányítás) az előzményfájlok elérési útjaiv
 
 
 ---
-## Ultra-Pro High-Fidelity privát kulcs felfedezés (T1552.004)
+## Privát kulcs felfedezése (T1552.004)
 - **ID:** `T1552_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/), [SSH.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a privát kriptográfiai kulcsok (SSH, PGP, tanúsítványok) célzott felfedezését.
-A privát kulcsfejlécek és a rekurzív parancssori tartalomkeresésre összpontosít
-címtárbejárás nem megbízható folyamatokkal.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/), [SSH.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a privát kriptográfia célzott felderítési vagy gyűjtési kísérleteit
+kulcsok (SSH, PGP, TLS tanúsítványok).A rekurzív fájlok felsorolására összpontosít,
+privát kulcs fejléc keresések, érzékeny címtár bejárás, kódolás ill
+export viselkedés és gyanús végrehajtási környezet.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

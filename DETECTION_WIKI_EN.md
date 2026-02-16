@@ -7480,16 +7480,17 @@ commands (base64, curl, redirection) combined with history file paths.
 
 
 ---
-## Ultra-Pro High-Fidelity Private Key Discovery (T1552.004)
+## Private Key Discovery (T1552.004)
 - **ID:** `T1552_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/), [SSH.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted discovery of private cryptographic keys (SSH, PGP, Certificates). 
-Focuses on command-line content searches for private key headers and recursive 
-directory traversal by untrusted processes.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/), [SSH.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects targeted discovery or collection attempts of private cryptographic
+keys (SSH, PGP, TLS certificates). Focuses on recursive file enumeration,
+private key header searches, sensitive directory traversal, encoding or
+export behavior, and suspicious execution context.
 
 
 #### 🚨 Response Playbook

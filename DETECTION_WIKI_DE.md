@@ -7103,16 +7103,17 @@ Befehle (Base64, Curl, Umleitung) kombiniert mit Verlaufsdateipfaden.
 
 
 ---
-## Ultra-Pro High-Fidelity Private Key Discovery (T1552.004)
+## Ermittlung privater Schlüssel (T1552.004)
 - **ID:** `T1552_004.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/), [SSH.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die gezielte Entdeckung privater kryptografischer Schlüssel (SSH, PGP, Zertifikate).
-Konzentriert sich auf die Suche nach Inhalten in der Befehlszeile nach privaten Schlüsselheadern und rekursiv
-Verzeichnisdurchquerung durch nicht vertrauenswürdige Prozesse.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/), [SSH.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt gezielte Entdeckungs- oder Erfassungsversuche privater Kryptografie
+Schlüssel (SSH-, PGP-, TLS-Zertifikate).Konzentriert sich auf die rekursive Dateiaufzählung,
+Suche nach privaten Schlüsselheadern, Durchquerung sensibler Verzeichnisse, Codierung oder
+Exportverhalten und verdächtiger Ausführungskontext.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -6906,14 +6906,15 @@ mintákat, miközben kiszűri a legitim csomagkezelőket.
 
 
 ---
-## Ultra-Pro Sudoer manipuláció és Sudo Abuse (T1548.003)
+## Sudoer-manipuláció és szudóval való visszaélés (T1548.003)
 - **ID:** `T1548_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 - **Leírás:** Észleli a jogosulatlan sudoers fájlmódosításokat és a sudo gyorsítótárazási visszaéléseket.
 A NOPASSWD kiegészítésekre, a timestamp_timeout manipulációra és a
-veszélyes környezeti változó injekciók, mint például az LD_PRELOAD.
+veszélyes környezeti változó injekciók, mint például az LD_PRELOAD.Kizár
+megbízható automatizálási eszközök.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

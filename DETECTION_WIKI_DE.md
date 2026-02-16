@@ -6906,14 +6906,15 @@ Muster, während legitime Paketmanager herausgefiltert werden.
 
 
 ---
-## Ultra-Pro-Sudo-Manipulation und Sudo-Missbrauch (T1548.003)
+## Sudo-Manipulation und Sudo-Missbrauch (T1548.003)
 - **ID:** `T1548_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 - **Beschreibung:** Erkennt nicht autorisierte Sudoers-Dateiänderungen und Sudo-Caching-Missbrauch.
-Konzentriert sich auf NOPASSWD-Ergänzungen, die Manipulation von timestamp_timeout und
-gefährliche Umgebungsvariableninjektionen wie LD_PRELOAD.
+Konzentriert sich auf NOPASSWD-Ergänzungen, Timestamp_Timeout-Manipulation und
+gefährliche Umgebungsvariableninjektionen wie LD_PRELOAD.Ausgeschlossen
+vertrauenswürdige Automatisierungstools.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -6943,7 +6944,7 @@ Collaboration-Apps oder temporäre Verzeichnisse, während vertrauenswürdige Sy
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Speicherintensiv)
-- **Beschreibung:** Erkennt unbefugte Änderungen an XDG-Desktopeinträgen oder versuchten Verknüpfungen
+- **Beschreibung:** Erkennt unbefugte Änderungen an XDG-Desktopeinträgen oder entsprechende Verknüpfungen
 um SUID-Binärdateien auszuführen oder pkexec zur Rechteausweitung zu nutzen.
 Konzentriert sich auf Änderungen in vom Benutzer beschreibbaren Verzeichnissen durch nicht vertrauenswürdige Prozesse.
 

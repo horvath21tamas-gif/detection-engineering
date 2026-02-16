@@ -7271,14 +7271,15 @@ patterns, while filtering out legitimate package managers.
 
 
 ---
-## Ultra-Pro Sudoers Manipulation and Sudo Abuse (T1548.003)
+## Sudoers Manipulation and Sudo Abuse (T1548.003)
 - **ID:** `T1548_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 - **Leírás:** Detects unauthorized sudoers file modifications and sudo caching abuse. 
 Focuses on NOPASSWD additions, timestamp_timeout manipulation, and 
-dangerous environment variable injections like LD_PRELOAD.
+dangerous environment variable injections like LD_PRELOAD. Excludes 
+trusted automation tools.
 
 
 #### 🚨 Response Playbook

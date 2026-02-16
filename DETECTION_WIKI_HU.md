@@ -7206,14 +7206,16 @@ vagy biztonsági zónák/MotW beállítások módosítása nem szabványos folya
 
 
 ---
-## Ultra-Pro High-Fidelity macOS Gatekeeper és Quarantine Bypass (T1553.001)
+## macOS Gatekeeper és Quarantine Bypass (T1553.001)
 - **ID:** `T1553_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a macOS Gatekeeper letiltására vagy programozott eltávolítására irányuló kísérleteket
-karantén attribútum fájlokból.A nem interaktív héjakra és a
-gyanús utak a fejlesztők téves pozitív üzeneteinek csökkentésére.
+- **Leírás:** Érzékeli a Gatekeeper globális vagy programozott letiltására irányuló kísérleteket
+távolítsa el a com.apple.quarantine attribútumot a fájlokból.-ra összpontosít
+nem interaktív végrehajtás, gyanús fájlhelyek és rendellenes
+a szülő-gyerek kapcsolatok a fejlesztői és adminisztratív csökkentése érdekében
+hamis pozitívumok.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -7281,7 +7283,7 @@ vállalati telepítési téves pozitív eredmények.
 
 
 ---
-## Mark-of-the-Web (MotW) bypass & Zone Subversion Detection (T1553.005)
+## Mark-of-the-Web (MotW) Bypass & Zone Subversion Detection (T1553.005)
 - **ID:** `T1553_005.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)

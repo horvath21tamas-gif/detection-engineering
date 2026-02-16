@@ -7206,14 +7206,16 @@ oder Ändern von Sicherheitszonen/MotW-Einstellungen aus nicht standardmäßigen
 
 
 ---
-## Ultra-Pro High-Fidelity macOS Gatekeeper und Quarantäne-Bypass (T1553.001)
+## macOS Gatekeeper und Quarantäne-Bypass (T1553.001)
 - **ID:** `T1553_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt Versuche, macOS Gatekeeper zu deaktivieren oder programmgesteuert zu entfernen
-Quarantäneattribut aus Dateien.Konzentriert sich auf nicht interaktive Shells und
-verdächtige Pfade, um Fehlalarme von Entwicklern zu reduzieren.
+- **Beschreibung:** Erkennt Versuche, Gatekeeper global oder programmgesteuert zu deaktivieren
+Entfernen Sie das com.apple.quarantine-Attribut aus Dateien.Konzentriert sich auf
+nicht interaktive Ausführung, verdächtige Dateispeicherorte und abnormal
+Eltern-Kind-Beziehungen, um den Entwickler- und Verwaltungsaufwand zu reduzieren
+Fehlalarme.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

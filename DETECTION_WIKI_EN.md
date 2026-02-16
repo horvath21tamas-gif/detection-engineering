@@ -7589,14 +7589,16 @@ or modifying security zones/MotW settings from non-standard processes and paths.
 
 
 ---
-## Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001)
+## macOS Gatekeeper and Quarantine Bypass (T1553.001)
 - **ID:** `T1553_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects attempts to disable macOS Gatekeeper or programmatically remove the 
-quarantine attribute from files. Focuses on non-interactive shells and 
-suspicious paths to reduce false positives from developers.
+- **Leírás:** Detects attempts to globally disable Gatekeeper or programmatically
+remove the com.apple.quarantine attribute from files. Focuses on
+non-interactive execution, suspicious file locations, and abnormal
+parent-child relationships to reduce developer and administrative
+false positives.
 
 
 #### 🚨 Response Playbook

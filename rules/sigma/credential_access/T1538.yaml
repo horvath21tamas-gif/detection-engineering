@@ -1,52 +1,97 @@
-title: Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538)
-id: 92d3ed84-d1de-4b5e-9d15-cc1e02dec457
+title: Cloud Service Dashboard Discovery (T1538)
+id: 8f7b6c12-3e4d-4b2f-9c44-1a9d3e0a5fbb
 status: stable
 description: |
-    Detects anomalous generation of federated login tokens and automated cloud 
-    dashboard access. Focuses on CLI commands used to bypass standard MFA 
-    via console sign-in tokens and suspicious browser launches from non-interactive shells.
+    Detects anomalous cloud dashboard access and federated login token generation.
+    Focuses on suspicious CLI commands and browser launches that bypass MFA or
+    originate from non-interactive shells. Covers AWS, Azure, GCP, Okta, and 
+    other SaaS portals. Detects potential reconnaissance or lateral movement 
+    activity in cloud environments.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1538/
 tags:
     - attack.discovery
     - attack.t1538
+    - attack.reconnaissance
+    - attack.cloud
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_federated_access:
+
+    selection_federated_cli:
         CommandLine|contains:
-            - 'get-signin-token'         
-            - 'r=signin'                
-            - 'portal.azure.com'         
-            - 'account.google.com/ServiceLogin' 
+            - 'get-signin-token'
+            - 'r=signin'
+            - 'sts get-session-token'
+            - 'gcloud auth print-access-token'
+            - 'okta-auth-token'
+            - 'portal.azure.com'
+            - 'account.google.com/ServiceLogin'
+            - 'login.microsoftonline.com'
 
     selection_browser_automation:
-        - Image|endswith:
+        Image|endswith:
             - '\chrome.exe'
             - '\msedge.exe'
-        - CommandLine|contains:
-            - '--incognito'             
+            - '\firefox.exe'
+        CommandLine|contains:
+            - '--incognito'
             - '--new-window'
-            - '--app='                  
-        - CommandLine|contains:
+            - '--app='
             - 'console.aws.amazon.com'
             - 'portal.azure.com'
+            - 'cloud.google.com'
+            - 'okta.com'
 
     selection_suspicious_parent:
         ParentImage|endswith:
-            - '\wsmprovhost.exe'         
-            - '\httpd.exe'              
-            - '\sqlservr.exe'          
+            - '\wsmprovhost.exe'
+            - '\httpd.exe'
+            - '\sqlservr.exe'
+            - '\taskhostw.exe'
+            - '\explorer.exe'
         ParentImage|contains:
             - '\AppData\Local\Temp\'
+        ParentCommandLine|contains:
+            - '-NonInteractive'
+            - '-EncodedCommand'
+            - '/c powershell'
+
+    selection_non_interactive_shells:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+        CommandLine|contains:
+            - '-NonInteractive'
+            - '-EncodedCommand'
+            - '/c'
 
     filter_legit_dev_tools:
         CommandLine|contains:
             - 'sso login'
-            - 'login --use-device-code'  
+            - 'login --use-device-code'
+            - 'az login'
+            - 'aws sso login'
         ComputerName|contains:
             - 'ADMIN-VDI-'
+            - 'DEV-VM-'
 
-    condition: (selection_federated_access or (selection_browser_automation and selection_suspicious_parent)) and not filter_legit_dev_tools
+    condition: 
+        (selection_federated_cli 
+        or (selection_browser_automation and selection_suspicious_parent)
+        or selection_non_interactive_shells)
+        and not filter_legit_dev_tools
+
+falsepositives:
+    - Developers using CLI SSO / device-code login
+    - Automation scripts in test environments
+    - VDI administrative sessions
+
 level: high

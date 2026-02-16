@@ -1,9 +1,11 @@
-title: Ultra-Pro High-Fidelity Office Template Injection (T1221)
+title: Office Template Injection (T1221)
 id: 06868e96-70b4-43b5-8de3-9cee92adc043
 status: stable
-description: |
-    Detects Microsoft Office applications fetching remote templates from non-Microsoft 
-    infrastructure, followed by the creation of temporary template files.
+description: >
+    Detects Microsoft Office applications fetching remote templates from 
+    non-Microsoft infrastructure, potentially indicating malicious template injection.
+    Monitors network connections from Office apps to suspicious external hosts, 
+    excluding trusted Microsoft domains and internal IP ranges.
 author: hota05
 date: 2026-02-03
 tags:
@@ -11,8 +13,8 @@ tags:
     - attack.defense_evasion
     - attack.t1221
 logsource:
-    category: network_connection
     product: windows
+    category: network_connection
 detection:
     selection_office_apps:
         Image|endswith:
@@ -24,7 +26,7 @@ detection:
         DestinationPort:
             - 80
             - 443
-            - 445 
+            - 445
 
     filter_microsoft:
         DestinationHostname|endswith:
@@ -37,7 +39,7 @@ detection:
             - 'microsoft.com'
             - 'bing.com'
             - 'msn.com'
-            - 'azureedge.net' 
+            - 'azureedge.net'
 
     filter_internal:
         DestinationIp|startswith:
@@ -45,5 +47,7 @@ detection:
             - '192.168.'
             - '172.16.'
 
-    condition: selection_office_apps and selection_network and not (filter_microsoft or filter_internal)
+    condition: selection_office_apps 
+               and selection_network 
+               and not (filter_microsoft or filter_internal)
 level: high

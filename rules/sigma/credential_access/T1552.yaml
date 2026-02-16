@@ -1,19 +1,27 @@
-title: Ultra-Pro High-Fidelity Unsecured Credentials Discovery (T1552)
+title: Unsecured Credentials Discovery (T1552)
 id: 6d389b19-c9b0-450d-b736-bed87aa7390a
 status: stable
 description: |
-    Detects targeted discovery of credentials in files, registry, and shell history. 
-    Uses advanced correlation between search tools (findstr, grep, PowerShell), 
-    sensitive file extensions, and high-entropy keywords.
+    Detects targeted discovery of credentials across files, registry, 
+    and shell history. Correlates search tools (findstr, grep, PowerShell)
+    with high-risk file types, sensitive keywords, and suspicious execution
+    contexts to minimize false positives while identifying credential harvesting.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1552/
 tags:
     - attack.credential_access
     - attack.t1552.001
     - attack.t1552.002
+    - attack.t1552.003
+    - attack.discovery
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_keywords:
         CommandLine|contains:
@@ -22,53 +30,103 @@ detection:
             - 'connectionstring'
             - 'access_key'
             - 'secret_key'
-            - 'id_rsa'        
+            - 'id_rsa'
             - 'id_dsa'
-            - 'amzn.mws'        
+            - 'id_ed25519'
+            - 'amzn.mws'
             - 'BEGIN RSA PRIVATE'
+            - 'BEGIN OPENSSH PRIVATE'
+            - 'BEGIN PGP PRIVATE'
 
-    selection_method:
+    selection_methods:
         - CommandLine|contains|all:
             - 'findstr'
-            - '/s'             
-            - '/i'              
+            - '/s'
+            - '/i'
+        - CommandLine|contains|all:
+            - 'grep'
+            - '-r'
         - CommandLine|contains|all:
             - 'Get-ChildItem'
             - '-Recurse'
             - '-Include'
         - CommandLine|contains|all:
-            - 'grep'
-            - '-r'              
+            - 'dir'
+            - '/s'
+        - CommandLine|contains|all:
+            - 'where'
+            - '/r'
 
     selection_targets:
         CommandLine|contains:
             - '.config'
             - '.xml'
             - '.ini'
+            - '.yml'
+            - '.env'
             - '.bak'
             - '.old'
             - '.history'
-            - 'ConsoleHost_history' 
+            - 'ConsoleHost_history'
             - '.aws\credentials'
             - '.ssh\'
+            - '.azure\'
+            - '.docker\config.json'
+
+    selection_exfiltration:
+        CommandLine|contains:
+            - 'base64'
+            - 'certutil -encode'
+            - ' > '
+            - '>>'
+            - ' | clip'
+            - 'curl '
+            - 'wget '
+            - 'scp '
+            - 'Invoke-WebRequest'
+            - '-enc'
+            - '-EncodedCommand'
+            - 'IEX'
+            - 'Invoke-Expression'
 
     selection_context:
         ParentImage|endswith:
             - '\cmd.exe'
             - '\powershell.exe'
             - '\wsmprovhost.exe'
-            - '\httpd.exe'       
+            - '\httpd.exe'
+            - '\php-cgi.exe'
+            - '\nginx.exe'
         Image|endswith:
             - '\findstr.exe'
             - '\grep.exe'
             - '\powershell.exe'
+
+    selection_non_system_user:
+        User|not_contains:
+            - 'NT AUTHORITY\SYSTEM'
+            - 'NT AUTHORITY\LOCAL SERVICE'
+            - 'NT AUTHORITY\NETWORK SERVICE'
 
     filter_legit_tools:
         Image|contains:
             - '\Windows\System32\SearchIndexer.exe'
             - '\Microsoft Visual Studio\'
             - '\Git\usr\bin\grep.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+            - '\explorer.exe'
+        ParentImage|endswith:
+            - '\explorer.exe'
 
-    condition: (selection_keywords or (selection_method and selection_targets)) and selection_context and not filter_legit_tools
+    condition:
+        (selection_keywords or (selection_methods and selection_targets))
+        and selection_context
+        and (selection_exfiltration or selection_non_system_user)
+        and not filter_legit_tools
+
+falsepositives:
+    - Developer scripts searching configs for debugging
+    - CI/CD build agents scanning secrets for deployment
+    - Admin troubleshooting accessing .history/.env
+    - Security audit tools enumerating credentials
+
 level: high

@@ -1,10 +1,11 @@
-title: Ultra-Pro High-Fidelity Data Destruction (T1485)
+title: Data Destruction (T1485/T1490)
 id: 1a601db6-2eae-482d-b3ee-ed4acc9d52fb
 status: stable
-description: |
-    Detects systematic data destruction by monitoring for VSS deletion, 
-    secure file shredding (sdelete, cipher), and bulk recursive deletions 
-    initiated from suspicious parent processes or targeting non-temp directories.
+description: >
+    Detects systematic data destruction attempts by monitoring process creation events
+    involving deletion of Volume Shadow Copies (VSS), secure file shredding utilities
+    (sdelete, cipher), and bulk recursive deletions. Alerts on suspicious parent processes
+    or operations targeting non-temporary directories.
 author: hota05
 date: 2026-02-09
 tags:
@@ -16,49 +17,49 @@ logsource:
     product: windows
 detection:
     selection_tools:
-        - Image|endswith:
-            - '\vssadmin.exe'        
-            - '\wmic.exe'            
-            - '\sdelete.exe'        
-            - '\cipher.exe'         
-            - '\wbadmin.exe'        
+        Image|endswith:
+            - '\vssadmin.exe'
+            - '\wmic.exe'
+            - '\sdelete.exe'
+            - '\cipher.exe'
+            - '\wbadmin.exe'
             - '\powershell.exe'
 
-    selection_vss_logic:
+    selection_vss:
         CommandLine|contains:
             - 'delete shadows'
             - 'shadowcopy delete'
-            - 'shadowstorage'        
-            - 'delete catalog -quiet' 
+            - 'shadowstorage'
+            - 'delete catalog -quiet'
 
-    selection_wipe_logic:
+    selection_wipe:
         CommandLine|contains:
-            - ' -p '                 
-            - ' -z '                 
-            - ' /w:'                 
-            - ' -s '                 
-            - 'del /f /s /q'         
+            - ' -p '
+            - ' -z '
+            - ' /w:'
+            - ' -s '
+            - 'del /f /s /q'
 
     selection_context:
-        - ParentImage|endswith:
-            - '\winword.exe'         
+        ParentImage|endswith:
+            - '\winword.exe'
             - '\excel.exe'
-            - '\rundll32.exe'        
-            - '\httpd.exe'           
-            - '\7zFM.exe'           
-        - Image|contains:
+            - '\rundll32.exe'
+            - '\httpd.exe'
+            - '\7zFM.exe'
+        Image|contains:
             - '\Users\'
             - '\AppData\'
             - '\Temp\'
 
     filter_legit:
-        - ParentImage|endswith:
-            - '\msiexec.exe'      
-            - '\CcmExec.exe'        
-        - CommandLine|contains:
-            - 'cleanmgr.exe'         
-            - '\AppData\Local\Temp'  
-        - username: 'NT AUTHORITY\SYSTEM'
+        username: 'NT AUTHORITY\SYSTEM'
+        ParentImage|endswith:
+            - '\msiexec.exe'
+            - '\CcmExec.exe'
+        CommandLine|contains:
+            - 'cleanmgr.exe'
+            - '\AppData\Local\Temp'
 
-    condition: selection_tools and (selection_vss_logic or selection_wipe_logic) and selection_context and not filter_legit
+    condition: selection_tools and (selection_vss or selection_wipe) and selection_context and not filter_legit
 level: critical

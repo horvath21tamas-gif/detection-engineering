@@ -1,54 +1,99 @@
-title: Ultra-Pro High-Fidelity GPP Password Discovery (T1552.008)
+title: GPP Password Discovery (T1552.008)
 id: 8c5022ee-316c-44c9-a9e5-3fcf467f8dfe
 status: stable
 description: |
-    Detects targeted discovery of encrypted passwords (cpassword) in Group Policy Preference XML files. 
-    Filters legitimate GPO engine activity by focusing on command-line string searches 
-    originating from interactive or remote shells.
+    Detects targeted discovery of encrypted Group Policy Preference (GPP)
+    passwords (cpassword) within SYSVOL shares. Focuses on command-line
+    string searches, PowerShell enumeration, remote execution context,
+    and abnormal user activity to reduce false positives from legitimate
+    Group Policy processing.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1552/008/
 tags:
     - attack.credential_access
     - attack.t1552.008
+    - attack.discovery
+    - attack.lateral_movement
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_keyword:
         CommandLine|contains:
             - 'cpassword'
-
-    selection_tools:
-        - Image|endswith:
-            - '\findstr.exe'
-            - '\grep.exe'
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\cmd.exe'
-        - CommandLine|contains:
-            - 'Get-GPPPassword' 
-            - 'Select-String'
-            - 'type '
-
-    selection_paths:
-        CommandLine|contains:
-            - 'SYSVOL'
-            - 'Policies'
+            - 'Get-GPPPassword'
+            - 'gpp-decrypt'
             - 'Groups.xml'
             - 'ScheduledTasks.xml'
             - 'Services.xml'
 
-    selection_suspicious_lineage:
+    selection_sysvol_paths:
+        CommandLine|contains:
+            - '\\SYSVOL\'
+            - '\SYSVOL\'
+            - '\Policies\'
+            - '\\*\SYSVOL\'
+
+    selection_search_tools:
+        Image|endswith:
+            - '\findstr.exe'
+            - '\find.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
+            - '\grep.exe'
+        CommandLine|contains:
+            - 'Select-String'
+            - 'Get-ChildItem'
+            - 'dir '
+            - 'type '
+            - 'gc '
+
+    selection_remote_context:
         ParentImage|endswith:
+            - '\wsmprovhost.exe'
+            - '\psexesvc.exe'
+            - '\wmiprvse.exe'
             - '\cmd.exe'
             - '\powershell.exe'
-            - '\wsmprovhost.exe' 
-            - '\psexesvc.exe'   
 
-    filter_legit_system:
-        username: 'NT AUTHORITY\SYSTEM'
+    selection_scripted_execution:
+        CommandLine|contains:
+            - '-enc'
+            - '-EncodedCommand'
+            - 'IEX'
+            - 'Invoke-Expression'
+
+    selection_non_system_user:
+        User|not_contains:
+            - 'NT AUTHORITY\SYSTEM'
+            - 'NT AUTHORITY\LOCAL SERVICE'
+            - 'NT AUTHORITY\NETWORK SERVICE'
+
+    filter_legitimate_gpo_engine:
         Image|endswith:
-            - '\svchost.exe'    
+            - '\svchost.exe'
+        User|startswith:
+            - 'NT AUTHORITY\SYSTEM'
 
-    condition: selection_keyword and selection_tools and selection_paths and selection_suspicious_lineage and not filter_legit_system
+    condition:
+        selection_sysvol_paths
+        and selection_keyword
+        and (selection_search_tools
+            or selection_scripted_execution
+            or selection_remote_context)
+        and selection_non_system_user
+        and not filter_legitimate_gpo_engine
+
+falsepositives:
+    - Security auditing scripts reviewing SYSVOL content
+    - Blue team GPP vulnerability assessments
+    - Administrative PowerShell sessions querying GPO content
+    - Rare legacy troubleshooting scenarios
+
 level: critical

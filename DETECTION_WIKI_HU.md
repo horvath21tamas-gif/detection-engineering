@@ -5557,7 +5557,7 @@ kifejezetten kiszűri a csoportházirend-objektum által vezérelt és a rendsze
 
 
 ---
-## Ultra-Pro High-Fidelity külső roncsolás (T1491.002)
+## Külső rontás (T1491.002)
 - **ID:** `T1491_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -5565,8 +5565,8 @@ kifejezetten kiszűri a csoportházirend-objektum által vezérelt és a rendsze
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** A gyanús fájlok azonosításával észleli a külső webhely jogosulatlan megrongálását
-manipulációs parancsok (mozgatás, másolás, visszhang), amelyeket a webszerver dolgozói folyamatok hajtanak végre
-érzékeny webroot könyvtárakon belül.
+webszerver által végrehajtott manipulációs parancsok (mozgatás, másolás, visszhang, Set-Content).
+dolgozói folyamatok az érzékeny webroot könyvtárakban.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

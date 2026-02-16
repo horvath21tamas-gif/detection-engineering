@@ -5843,7 +5843,7 @@ specifically filtering out GPO-driven and system-initiated changes.
 
 
 ---
-## Ultra-Pro High-Fidelity External Defacement (T1491.002)
+## External Defacement (T1491.002)
 - **ID:** `T1491_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -5851,8 +5851,8 @@ specifically filtering out GPO-driven and system-initiated changes.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects unauthorized external website defacement by identifying suspicious file 
-manipulation commands (move, copy, echo) executed by web server worker processes 
-within sensitive webroot directories.
+manipulation commands (move, copy, echo, Set-Content) executed by web server 
+worker processes within sensitive webroot directories.
 
 
 #### 🚨 Response Playbook

@@ -5557,7 +5557,7 @@ Insbesondere werden GPO-gesteuerte und vom System initiierte Änderungen herausg
 
 
 ---
-## Ultra-Pro High-Fidelity externe Verunstaltung (T1491.002)
+## Äußere Verunstaltung (T1491.002)
 - **ID:** `T1491_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -5565,8 +5565,8 @@ Insbesondere werden GPO-gesteuerte und vom System initiierte Änderungen herausg
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt unbefugte Verunstaltungen externer Websites durch Identifizierung verdächtiger Dateien
-Manipulationsbefehle (Verschieben, Kopieren, Echo), die von Webserver-Arbeitsprozessen ausgeführt werden
-innerhalb sensibler Webroot-Verzeichnisse.
+Vom Webserver ausgeführte Manipulationsbefehle (Verschieben, Kopieren, Echo, Inhalt festlegen).
+Worker-Prozesse in sensiblen Webroot-Verzeichnissen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

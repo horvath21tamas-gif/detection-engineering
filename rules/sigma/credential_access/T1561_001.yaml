@@ -43,7 +43,7 @@ detection:
 
     selection_sdelete_destructive:
         Image|endswith: '\sdelete.exe'
-        CommandLine|contains|any:
+        CommandLine|contains:
             - ' -z'
             - ' -p '
             - ' -c '
@@ -102,17 +102,11 @@ detection:
             - 'C:\Program Files\'
             - 'C:\Program Files (x86)\'
 
-    condition: (
-                    (
-                        selection_raw_device_access
-                        and (
-                                selection_dd_overwrite
+    condition: ((selection_raw_device_access
+                        and (selection_dd_overwrite
                                 or selection_sdelete_destructive
                                 or selection_ps_clear_disk
-                                or selection_ps_format_raw
-                            )
-                    )
-               )
+                                or selection_ps_format_raw)))
                and (selection_suspicious_parent or selection_suspicious_path)
                and not filter_system_context
                and not filter_known_deployment_tools

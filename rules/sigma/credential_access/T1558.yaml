@@ -28,7 +28,7 @@ logsource:
 
 detection:
     selection_offensive_tools:
-        CommandLine|contains|any:
+        CommandLine|contains:
             - 'kerberoast'
             - 'asreproast'
             - 'asreq'
@@ -45,7 +45,7 @@ detection:
             - '\klist.exe'
 
     selection_encryption_params:
-        CommandLine|contains|any:
+        CommandLine|contains:
             - ' /rc4'
             - ' 0x17'
             - ' /aes128:'
@@ -57,7 +57,7 @@ detection:
             - ' /format:john'
 
     selection_suspicious_parent:
-        ParentImage|endswith|any:
+        ParentImage|endswith:
             - '\cmd.exe'
             - '\powershell.exe'
             - '\pwsh.exe'
@@ -68,20 +68,20 @@ detection:
         IntegrityLevel: 'Medium'
 
     selection_temp_execution:
-        Image|contains|any:
+        Image|contains:
             - '\AppData\Local\Temp\'
             - '\Users\Public\'
             - '\Windows\Temp\'
 
     filter_legit_system:
         username: 'NT AUTHORITY\SYSTEM'
-        Image|endswith|any:
+        Image|endswith:
             - '\Windows\System32\lsass.exe'
             - '\Windows\System32\svchost.exe'
         ParentImage|endswith: '\services.exe'
 
     filter_monitoring_tools:
-        Image|contains|any:
+        Image|contains:
             - 'C:\Program Files\Microsoft Monitoring Agent\'
             - 'C:\Program Files\Azure\'
             - 'C:\Program Files\RSAT\'

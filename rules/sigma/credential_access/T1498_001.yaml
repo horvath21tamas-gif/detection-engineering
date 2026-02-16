@@ -1,60 +1,60 @@
-title: Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001)
+title: Direct Flow Flood (T1498.001)
 id: f0bd2223-8331-4e71-ab9a-c97ed8d07c69
 status: stable
 description: |
-    Detects targeted direct network flooding (SYN, UDP, ICMP) by monitoring 
-    for aggressive packet generation parameters (micro-intervals, unlimited bandwidth) 
-    originating from untrusted process lineages.
+  Detects high-fidelity direct network flooding attempts (SYN, UDP, ICMP) 
+  by monitoring processes with aggressive packet generation parameters 
+  originating from untrusted or suspicious process lineages.
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.impact
-    - attack.t1498.001
+  - attack.impact
+  - attack.t1498.001
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_engines:
-        - Image|endswith:
-            - '\hping3.exe'          
-            - '\loic.exe'            
-            - '\hoic.exe'           
-            - '\iperf.exe'           
-            - '\iperf3.exe'
-            - '\nping.exe'         
-            - '\pktmon.exe'          
+  engines:
+    - Image|endswith:
+        - '\hping3.exe'
+        - '\loic.exe'
+        - '\hoic.exe'
+        - '\iperf.exe'
+        - '\iperf3.exe'
+        - '\nping.exe'
+        - '\pktmon.exe'
 
-    selection_flood_logic:
-        CommandLine|contains:
-            - ' --flood'             
-            - ' --syn'              
-            - ' --udp'               
-            - ' -u -b 0'             
-            - ' -i u'               
-            - ' --icmp'              
-            - ' --rand-source'       
+  flood_flags:
+    CommandLine|contains:
+      - '--flood'
+      - '--syn'
+      - '--udp'
+      - '-u -b 0'
+      - '-i u'
+      - '--icmp'
+      - '--rand-source'
 
-    selection_context:
-        - ParentImage|endswith:
-            - '\winword.exe'         
-            - '\excel.exe'
-            - '\httpd.exe'           
-            - '\chrome.exe'         
-            - '\rundll32.exe'        
-            - '\outlook.exe'
-        - Image|contains:
-            - '\Temp\'
-            - '\Users\Public\'
-            - '\AppData\Local\Temp\'
+  suspicious_context:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\httpd.exe'
+      - '\chrome.exe'
+      - '\rundll32.exe'
+      - '\outlook.exe'
+    Image|contains:
+      - '\Temp\'
+      - '\Users\Public\'
+      - '\AppData\Local\Temp\'
 
-    filter_legit_ops:
-        - username: 'NT AUTHORITY\SYSTEM' 
-        - Image|contains:
-            - '\Program Files\NetworkMonitoring\' 
-            - '\Azure\'                            
-        - CommandLine|contains:
-            - 'Speedtest'
-            - 'HealthCheck'
+  allowlist:
+    - username: 'NT AUTHORITY\SYSTEM'
+    - Image|contains:
+        - '\Program Files\NetworkMonitoring\'
+        - '\Azure\'
+    - CommandLine|contains:
+        - 'Speedtest'
+        - 'HealthCheck'
 
-    condition: selection_engines and selection_flood_logic and selection_context and not filter_legit_ops
+  condition: engines and flood_flags and suspicious_context and not allowlist
 level: high

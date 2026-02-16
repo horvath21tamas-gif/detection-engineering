@@ -5809,16 +5809,17 @@ gyanús folyamatvonalakból származnak.
 
 
 ---
-## Ultra-Pro Web Shell végrehajtási minták (T1505.003)
+## Web Shell végrehajtási minták (T1505)
 - **ID:** `T1505.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [BASH.EXE](https://lolbas-project.github.io/lolbas/), [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSC.EXE](https://lolbas-project.github.io/lolbas/), [RESET.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A webkiszolgáló folyamatainak figyelésével észleli a webes shell-tevékenység magas megbízhatóságú mutatóit
-interaktív héjak vagy rendszerfelderítő eszközök létrehozása.Szigorú szűrést tartalmaz
-törvényes .NET fordításhoz és IIS adminisztrációhoz.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [BASH.EXE](https://lolbas-project.github.io/lolbas/), [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSC.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RESET.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** A webszerver figyelésével észleli a webes shell-tevékenység magas megbízhatóságú mutatóit
+interaktív héjakat, felderítő segédprogramokat vagy oldalirányú mozgási eszközöket dolgoz fel.
+Tartalmazza a szigorú szűrést a legális .NET-fordításokhoz, az IIS adminisztrációjához,
+és engedélyezett szerverkarbantartási feladatokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

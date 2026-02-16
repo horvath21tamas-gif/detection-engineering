@@ -20,7 +20,7 @@ detection:
       - 'SCHANNEL\\Protocols\\TLS 1\.2\\Client\\Enabled'
       - 'SCHANNEL\\Protocols\\TLS 1\.3\\Client\\Enabled'
       - '\\.NETFramework\\v\d+\.\d+\\System\.Net\.ServicePointManager\.SecurityProtocol'
-    Details|in:
+    Details:
       - '0x00000000'  
       - '0x00000030'  
       - '0x000000C0' 

@@ -5575,7 +5575,7 @@ innerhalb sensibler Webroot-Verzeichnisse.
 
 
 ---
-## Ultra-Pro High-Fidelity-Firmware-Beschädigung (T1495)
+## Firmware-Beschädigung (T1495)
 - **ID:** `T1495.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

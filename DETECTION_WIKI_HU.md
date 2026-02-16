@@ -5575,7 +5575,7 @@ manipulációs parancsok (mozgatás, másolás, visszhang), amelyeket a webszerv
 
 
 ---
-## Ultra-Pro High-Fidelity firmware korrupció (T1495)
+## Firmware korrupció (T1495)
 - **ID:** `T1495.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

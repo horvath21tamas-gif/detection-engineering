@@ -5862,7 +5862,7 @@ within sensitive webroot directories.
 
 
 ---
-## Ultra-Pro High-Fidelity Firmware Corruption (T1495)
+## Firmware Corruption (T1495)
 - **ID:** `T1495.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

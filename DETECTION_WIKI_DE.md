@@ -5876,16 +5876,17 @@ aus nicht standardmäßigen oder vom Benutzer beschreibbaren Pfaden.
 
 
 ---
-## Ultra-Pro Mainboard-Boot-Image und SPI-Flash-Manipulation (T1542.004)
+## Mainboard-Boot-Image und SPI-Flash-Manipulation (T1505.004)
 - **ID:** `T1505_004.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Firmware-Manipulationen durch Überwachung des Hardwarezugriffs auf niedriger Ebene
-Tools und Fahrerregistrierungen, die aus nicht standardmäßigen Prozessketten initiiert werden.
-Konzentriert sich auf SPI-Flash-Schreib- und Image-Injection-Versuche.
+- **Beschreibung:** Erkennt unbefugte Firmware-Manipulationen und SPI-Flash-Manipulationen durch Überwachung
+Low-Level-Hardwarezugriffstools, verdächtige Befehlszeilenflags und Treiber
+Registrierungen, die aus nicht standardmäßigen Prozessketten oder Benutzerpfaden stammen.
+Konzentriert sich auf Boot-Image-Injection, SPI-Schreibvorgänge und nicht vertrauenswürdige Ausführungskontexte.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

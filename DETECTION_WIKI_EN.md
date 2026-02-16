@@ -6180,16 +6180,17 @@ from non-standard or user-writable paths.
 
 
 ---
-## Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004)
+## Mainboard Boot Image & SPI Flash Tampering (T1505.004)
 - **ID:** `T1505_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized firmware manipulation by monitoring low-level hardware access 
-tools and driver registrations initiated from non-standard process chains. 
-Focuses on SPI flash writing and image injection attempts.
+- **Leírás:** Detects unauthorized firmware manipulation and SPI flash tampering by monitoring
+low-level hardware access tools, suspicious command-line flags, and driver 
+registrations originating from non-standard process chains or user paths.
+Focuses on boot image injection, SPI write operations, and untrusted execution contexts.
 
 
 #### 🚨 Response Playbook

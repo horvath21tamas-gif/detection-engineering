@@ -5876,16 +5876,17 @@ nem szabványos vagy a felhasználó által írható útvonalakról.
 
 
 ---
-## Ultra-Pro alaplapi rendszerindítási kép és SPI Flash-szabotázs (T1542.004)
+## Alaplapi rendszerindítási kép és SPI Flash-szabotázs (T1505.004)
 - **ID:** `T1505_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Az alacsony szintű hardver-hozzáférés figyelésével észleli a jogosulatlan firmware-manipulációt
-nem szabványos folyamatláncokból kezdeményezett eszközök és illesztőprogram-regisztrációk.
-Az SPI flash írásra és a képinjektálási kísérletekre összpontosít.
+- **Leírás:** Felügyelet segítségével észleli az illetéktelen firmware-manipulációt és az SPI-flash manipulációját
+alacsony szintű hardver hozzáférési eszközök, gyanús parancssori jelzők és illesztőprogram
+nem szabványos folyamatláncokból vagy felhasználói útvonalakból származó regisztrációk.
+A rendszerindító képbefecskendezésre, az SPI írási műveletekre és a nem megbízható végrehajtási környezetekre összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

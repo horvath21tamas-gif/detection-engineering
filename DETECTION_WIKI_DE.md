@@ -7171,16 +7171,18 @@ interaktive Shell-Sitzungen und anomale Befehlsverkettung (z. B. env | grep).
 
 
 ---
-## Ultra-Pro High-Fidelity-GPP-Passworterkennung (T1552.008)
+## GPP-Passworterkennung (T1552.008)
 - **ID:** `T1552_008.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die gezielte Erkennung verschlüsselter Passwörter (cpassword) in XML-Dateien mit Gruppenrichtlinieneinstellungen.
-Filtert legitime GPO-Engine-Aktivitäten, indem der Schwerpunkt auf der Suche nach Befehlszeilenzeichenfolgen liegt
-stammen aus interaktiven oder Remote-Shells.
+- **Beschreibung:** Erkennt gezielte Erkennung verschlüsselter Gruppenrichtlinieneinstellungen (GPP)
+Passwörter (cpassword) innerhalb von SYSVOL-Freigaben.Konzentriert sich auf die Befehlszeile
+String-Suchen, PowerShell-Aufzählung, Remote-Ausführungskontext,
+und abnormale Benutzeraktivitäten, um Fehlalarme von legitimen zu reduzieren
+Verarbeitung von Gruppenrichtlinien.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

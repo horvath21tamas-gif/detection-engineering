@@ -7552,16 +7552,18 @@ interactive shell sessions and anomalous command chaining (e.g., env | grep).
 
 
 ---
-## Ultra-Pro High-Fidelity GPP Password Discovery (T1552.008)
+## GPP Password Discovery (T1552.008)
 - **ID:** `T1552_008.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted discovery of encrypted passwords (cpassword) in Group Policy Preference XML files. 
-Filters legitimate GPO engine activity by focusing on command-line string searches 
-originating from interactive or remote shells.
+- **Leírás:** Detects targeted discovery of encrypted Group Policy Preference (GPP)
+passwords (cpassword) within SYSVOL shares. Focuses on command-line
+string searches, PowerShell enumeration, remote execution context,
+and abnormal user activity to reduce false positives from legitimate
+Group Policy processing.
 
 
 #### 🚨 Response Playbook

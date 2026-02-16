@@ -1,1 +1,1 @@
-CommandLine="*cpassword*" Image IN ("*\\findstr.exe", "*\\grep.exe", "*\\powershell.exe", "*\\pwsh.exe", "*\\cmd.exe") OR CommandLine IN ("*Get-GPPPassword*", "*Select-String*", "*type *") CommandLine IN ("*SYSVOL*", "*Policies*", "*Groups.xml*", "*ScheduledTasks.xml*", "*Services.xml*") ParentImage IN ("*\\cmd.exe", "*\\powershell.exe", "*\\wsmprovhost.exe", "*\\psexesvc.exe") NOT (username="NT AUTHORITY\\SYSTEM" Image="*\\svchost.exe")
+conversion_failed

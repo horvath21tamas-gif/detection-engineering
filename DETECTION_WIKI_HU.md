@@ -7171,16 +7171,18 @@ interaktív shell-munkamenetek és rendellenes parancsláncolás (pl. env | grep
 
 
 ---
-## Ultra-Pro High-Fidelity GPP jelszófelderítés (T1552.008)
+## GPP jelszó felderítés (T1552.008)
 - **ID:** `T1552_008.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a titkosított jelszavak (cpassword) célzott felfedezését a csoportházirend-beállítások XML-fájljaiban.
-A parancssori karakterlánc-keresésekre összpontosítva szűri a legitim GPO-motortevékenységet
-interaktív vagy távoli héjakból származnak.
+- **Leírás:** Érzékeli a titkosított csoportházirend-beállítások (GPP) célzott felfedezését
+jelszavak (cpassword) a SYSVOL megosztásokon belül.A parancssorra összpontosít
+karakterlánc-keresések, PowerShell-felsorolás, távoli végrehajtási környezet,
+és abnormális felhasználói tevékenység a téves pozitívumok visszaszorítása érdekében
+Csoportházirend feldolgozás.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

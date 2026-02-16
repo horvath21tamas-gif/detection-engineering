@@ -1,28 +1,41 @@
-title: Ultra-Pro High-Fidelity Software Discovery (T1518)
-id: 71af3b56-02a4-492c-bac2-1dd82f634674
+title: Software Discovery Detection (T1518)
+id: 137cb27d-b4b0-430f-b2f9-13783b921ad9
 status: stable
 description: |
-    Detects targeted software discovery focusing on security product identification. 
-    Uses integrity level gating, parent-process correlation, and specific keyword 
-    analysis to minimize false positives from system inventory tools.
+    Detects targeted software discovery with emphasis on security product enumeration.
+    Uses integrity level gating, parent-process correlation, output redirection, and
+    keyword-based filtering to minimize false positives from legitimate system inventory
+    tools or administrative scripts.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1518/
 tags:
     - attack.discovery
     - attack.t1518
+    - attack.endpoint
+    - attack.reconnaissance
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\wmic.exe'            
-            - '\reg.exe'             
-        - CommandLine|contains:
+
+    selection_discovery_tools:
+        Image|endswith:
+            - '\wmic.exe'
+            - '\reg.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        CommandLine|contains|any:
             - 'Get-Package'
-            - 'Get-ItemProperty'   
+            - 'Get-ItemProperty'
             - 'product get name'
             - 'software list'
+            - 'Get-WmiObject'
+            - 'Get-CimInstance'
 
     selection_security_keywords:
         CommandLine|contains:
@@ -37,31 +50,49 @@ detection:
             - 'symantec'
             - 'kaspersky'
             - 'mcafee'
+            - 'EDR'
+            - 'HIPS'
+            - 'AV'
 
     selection_suspicious_lineage:
         ParentImage|endswith:
-            - '\wsmprovhost.exe'    
-            - '\httpd.exe'           
-            - '\winword.exe'         
+            - '\wsmprovhost.exe'
+            - '\httpd.exe'
+            - '\winword.exe'
             - '\excel.exe'
-        IntegrityLevel: 'Medium'   
+            - '\outlook.exe'
+        IntegrityLevel: 'Medium'
 
-    selection_automation:
+    selection_output_analysis:
         CommandLine|contains:
-            - ' > '                  
+            - ' > '
+            - ' | '
             - 'ConvertTo-Json'
             - 'Export-Csv'
-            - 'findstr'             
+            - 'findstr'
+            - 'Select-String'
 
     filter_legit_noise:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith:
-            - '\CcmExec.exe'        
+        username: 'NT AUTHORITY\SYSTEM'
+        ParentImage|endswith:
+            - '\CcmExec.exe'
             - '\svchost.exe'
             - '\msiexec.exe'
-        - CommandLine|contains:
-            - 'Program Files'       
-            - 'Google\Update'        
+            - '\explorer.exe'
+        CommandLine|contains:
+            - 'Program Files'
+            - 'Google\Update'
+            - 'Windows Defender'
+            - 'Microsoft Security'
 
-    condition: selection_tools and (selection_security_keywords or selection_automation or selection_suspicious_lineage) and not filter_legit_noise
+    condition: 
+        selection_discovery_tools 
+        and (selection_security_keywords or selection_output_analysis or selection_suspicious_lineage) 
+        and not filter_legit_noise
+
+falsepositives:
+    - Scheduled inventory or audit scans
+    - IT admins querying installed software
+    - DevOps or patch management tools exporting software lists
+
 level: high

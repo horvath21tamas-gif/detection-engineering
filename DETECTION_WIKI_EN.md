@@ -306,18 +306,18 @@
 - [Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)](#ultra-pro-high-fidelity-time-based-evasion-(t1497003))
 - [Ultra-Pro High-Fidelity Network DoS (T1498)](#ultra-pro-high-fidelity-network-dos-(t1498))
 - [Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001)](#ultra-pro-high-fidelity-direct-flow-flood-(t1498001))
-- [Ultra-Pro High-Fidelity Endpoint DoS (T1499)](#ultra-pro-high-fidelity-endpoint-dos-(t1499))
-- [Ultra-Pro High-Fidelity OS Self-Destruction (T1499.001)](#ultra-pro-high-fidelity-os-self-destruction-(t1499001))
-- [Ultra-Pro High-Fidelity Service Exhaustion (T1499.002)](#ultra-pro-high-fidelity-service-exhaustion-(t1499002))
-- [Ultra-Pro High-Fidelity OS Self-Destruction (T1499.003)](#ultra-pro-high-fidelity-os-self-destruction-(t1499003))
-- [Ultra-Pro High-Fidelity Resource Exhaustion (T1499.004)](#ultra-pro-high-fidelity-resource-exhaustion-(t1499004))
-- [Ultra-Pro Web Shell Execution Patterns (T1505.003)](#ultra-pro-web-shell-execution-patterns-(t1505003))
-- [Ultra-Pro SQL Server Command Shell Execution (T1505.001)](#ultra-pro-sql-server-command-shell-execution-(t1505001))
-- [Ultra-Pro IIS Native Module Injection (T1505.002)](#ultra-pro-iis-native-module-injection-(t1505002))
-- [Webshell Upload or Interaction Detected on Web Server (High Fidelity)](#webshell-upload-or-interaction-detected-on-web-server-(high-fidelity))
-- [Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004)](#ultra-pro-mainboard-boot-image-&-spi-flash-tampering-(t1542004))
-- [Ultra-Pro Terminal Services DLL Hijacking (T1505.005)](#ultra-pro-terminal-services-dll-hijacking-(t1505005))
-- [Ultra-Pro High-Fidelity Software Discovery (T1518)](#ultra-pro-high-fidelity-software-discovery-(t1518))
+- [Endpoint Denial of Service (T1499)](#endpoint-denial-of-service-(t1499))
+- [OS Self-Destruction Detection (T1499.001)](#os-self-destruction-detection-(t1499001))
+- [Service Exhaustion Detection (T1499.002)](#service-exhaustion-detection-(t1499002))
+- [OS Self-Destruction Detection (T1499.003)](#os-self-destruction-detection-(t1499003))
+- [Resource Exhaustion Detection (T1499.004)](#resource-exhaustion-detection-(t1499004))
+- [Web Shell Execution Patterns (T1505)](#web-shell-execution-patterns-(t1505))
+- [SQL Server Command Shell Execution (T1505.001)](#sql-server-command-shell-execution-(t1505001))
+- [IIS Native Module Injection (T1505.002)](#iis-native-module-injection-(t1505002))
+- [Webshell Upload or Interaction Detection (T1505.003)](#webshell-upload-or-interaction-detection-(t1505003))
+- [Mainboard Boot Image & SPI Flash Tampering (T1505.004)](#mainboard-boot-image-&-spi-flash-tampering-(t1505004))
+- [Terminal Services DLL Hijacking Detection (T1505.005)](#terminal-services-dll-hijacking-detection-(t1505005))
+- [Software Discovery Detection (T1518)](#software-discovery-detection-(t1518))
 - [Security Software Discovery Detection (T1518.001)](#security-software-discovery-detection-(t1518001))
 - [Exploit-Grade Unauthorized Container Image Execution (Implant Container Image)](#exploit-grade-unauthorized-container-image-execution-(implant-container-image))
 - [Cloud Service Discovery Detection (T1526)](#cloud-service-discovery-detection-(t1526))
@@ -6012,16 +6012,18 @@ originating from untrusted process lineages.
 
 
 ---
-## Ultra-Pro High-Fidelity Endpoint DoS (T1499)
+## Endpoint Denial of Service (T1499)
 - **ID:** `T1499.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted endpoint denial of service by monitoring for forced termination 
-of critical system processes (LSASS, CSRSS) and resource exhaustion loops 
-originating from untrusted process lineages.
+- **Leírás:** Detects high-confidence endpoint denial of service (DoS) attempts, including forced
+termination of critical system processes (LSASS, CSRSS, Wininit, SMSS, Services)
+and resource exhaustion via infinite loops or massive memory allocation.
+Focuses on suspicious parent process lineages and untrusted execution paths
+while filtering legitimate system maintenance, patching, and monitoring activities.
 
 
 #### 🚨 Response Playbook

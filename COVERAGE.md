@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-16 13:27:12`
+**Utolsó frissítés:** `2026-02-16 13:47:38`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -312,18 +312,18 @@
 | T1498 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498) |
 | T1498.001 | HIGH | Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001), Ultra-Pro High-Fidelity Network DoS (T1498) |
 | T1498.002 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498) |
-| T1499 | CRITICAL | Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
-| T1499.001 | CRITICAL | Ultra-Pro High-Fidelity OS Self-Destruction (T1499.001) |
-| T1499.002 | CRITICAL | Ultra-Pro High-Fidelity Service Exhaustion (T1499.002) |
-| T1499.003 | CRITICAL | Ultra-Pro High-Fidelity OS Self-Destruction (T1499.003), Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
-| T1499.004 | CRITICAL | Ultra-Pro High-Fidelity Resource Exhaustion (T1499.004), Ultra-Pro High-Fidelity Endpoint DoS (T1499) |
-| T1505 | CRITICAL | Ultra-Pro Web Shell Execution Patterns (T1505.003) |
-| T1505.001 | CRITICAL | Ultra-Pro SQL Server Command Shell Execution (T1505.001) |
-| T1505.002 | CRITICAL | Ultra-Pro IIS Native Module Injection (T1505.002) |
-| T1505.003 | HIGH | Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
-| T1505.004 | CRITICAL | Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004) |
-| T1505.005 | CRITICAL | Ultra-Pro Terminal Services DLL Hijacking (T1505.005) |
-| T1518 | HIGH | Ultra-Pro High-Fidelity Software Discovery (T1518) |
+| T1499 | CRITICAL | Endpoint Denial of Service (T1499) |
+| T1499.001 | CRITICAL | OS Self-Destruction Detection (T1499.001) |
+| T1499.002 | CRITICAL | Service Exhaustion Detection (T1499.002) |
+| T1499.003 | CRITICAL | OS Self-Destruction Detection (T1499.003), Endpoint Denial of Service (T1499) |
+| T1499.004 | CRITICAL | Resource Exhaustion Detection (T1499.004), Endpoint Denial of Service (T1499) |
+| T1505 | CRITICAL | Web Shell Execution Patterns (T1505) |
+| T1505.001 | CRITICAL | SQL Server Command Shell Execution (T1505.001) |
+| T1505.002 | CRITICAL | IIS Native Module Injection (T1505.002) |
+| T1505.003 | HIGH | Webshell Upload or Interaction Detection (T1505.003) |
+| T1505.004 | CRITICAL | Mainboard Boot Image & SPI Flash Tampering (T1505.004) |
+| T1505.005 | CRITICAL | Terminal Services DLL Hijacking Detection (T1505.005) |
+| T1518 | HIGH | Software Discovery Detection (T1518) |
 | T1518.001 | HIGH | Security Software Discovery Detection (T1518.001) |
 | T1525 | CRITICAL | Exploit-Grade Unauthorized Container Image Execution (Implant Container Image) |
 | T1526 | HIGH | Cloud Service Discovery Detection (T1526) |

@@ -306,18 +306,18 @@
 - [Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)](#ultra-pro-high-fidelity-time-based-evasion-(t1497003))
 - [Ultra-Pro High-Fidelity Network DoS (T1498)](#ultra-pro-high-fidelity-network-dos-(t1498))
 - [Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001)](#ultra-pro-high-fidelity-direct-flow-flood-(t1498001))
-- [Ultra-Pro High-Fidelity Endpoint DoS (T1499)](#ultra-pro-high-fidelity-endpoint-dos-(t1499))
-- [Ultra-Pro High-Fidelity OS önmegsemmisítés (T1499.001)](#ultra-pro-high-fidelity-os-önmegsemmisítés-(t1499001))
-- [Ultra-Pro High-Fidelity szolgáltatás kimerülése (T1499.002)](#ultra-pro-high-fidelity-szolgáltatás-kimerülése-(t1499002))
-- [Ultra-Pro High-Fidelity OS önmegsemmisítés (T1499.003)](#ultra-pro-high-fidelity-os-önmegsemmisítés-(t1499003))
-- [Ultra-Pro High-Fidelity erőforrás-kimerülés (T1499.004)](#ultra-pro-high-fidelity-erőforrás-kimerülés-(t1499004))
-- [Ultra-Pro Web Shell végrehajtási minták (T1505.003)](#ultra-pro-web-shell-végrehajtási-minták-(t1505003))
-- [Ultra-Pro SQL Server Command Shell végrehajtás (T1505.001)](#ultra-pro-sql-server-command-shell-végrehajtás-(t1505001))
-- [Ultra-Pro IIS natív modul-injekció (T1505.002)](#ultra-pro-iis-natív-modul-injekció-(t1505002))
-- [Webshell-feltöltés vagy interakció észlelve a webszerveren (high Fidelity)](#webshell-feltöltés-vagy-interakció-észlelve-a-webszerveren-(high-fidelity))
-- [Ultra-Pro alaplapi rendszerindítási kép és SPI Flash-szabotázs (T1542.004)](#ultra-pro-alaplapi-rendszerindítási-kép-és-spi-flash-szabotázs-(t1542004))
-- [Ultra-Pro Terminal Services DLL-eltérítés (T1505.005)](#ultra-pro-terminal-services-dll-eltérítés-(t1505005))
-- [Ultra-Pro High-Fidelity Software Discovery (T1518)](#ultra-pro-high-fidelity-software-discovery-(t1518))
+- [Végpont szolgáltatásmegtagadás (T1499)](#végpont-szolgáltatásmegtagadás-(t1499))
+- [OS önmegsemmisítés-észlelés (T1499.001)](#os-önmegsemmisítés-észlelés-(t1499001))
+- [Szolgáltatás kimerülésének észlelése (T1499.002)](#szolgáltatás-kimerülésének-észlelése-(t1499002))
+- [OS önmegsemmisítés-észlelés (T1499.003)](#os-önmegsemmisítés-észlelés-(t1499003))
+- [Erőforrás-kimerülés észlelése (T1499.004)](#erőforrás-kimerülés-észlelése-(t1499004))
+- [Web Shell végrehajtási minták (T1505)](#web-shell-végrehajtási-minták-(t1505))
+- [SQL Server Command Shell végrehajtása (T1505.001)](#sql-server-command-shell-végrehajtása-(t1505001))
+- [IIS natív modul-injekció (T1505.002)](#iis-natív-modul-injekció-(t1505002))
+- [Webshell-feltöltés vagy interakcióészlelés (T1505.003)](#webshell-feltöltés-vagy-interakcióészlelés-(t1505003))
+- [Alaplapi rendszerindítási kép és SPI Flash-szabotázs (T1505.004)](#alaplapi-rendszerindítási-kép-és-spi-flash-szabotázs-(t1505004))
+- [Terminal Services DLL-eltérítés észlelése (T1505.005)](#terminal-services-dll-eltérítés-észlelése-(t1505005))
+- [Szoftverfelderítés-észlelés (T1518)](#szoftverfelderítés-észlelés-(t1518))
 - [Biztonsági szoftverfelderítés észlelése (T1518.001)](#biztonsági-szoftverfelderítés-észlelése-(t1518001))
 - [Exploit-grade jogosulatlan tárolókép-végrehajtás (Implant Container Image)](#exploit-grade-jogosulatlan-tárolókép-végrehajtás-(implant-container-image))
 - [Cloud Service Discovery Detection (T1526)](#cloud-service-discovery-detection-(t1526))
@@ -5717,16 +5717,18 @@ nem megbízható folyamatvonalakból származnak.
 
 
 ---
-## Ultra-Pro High-Fidelity Endpoint DoS (T1499)
+## Végpont szolgáltatásmegtagadás (T1499)
 - **ID:** `T1499.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a célzott végpont szolgáltatásmegtagadást a kényszerített megszüntetés figyelésével
-kritikus rendszerfolyamatok (LSASS, CSRSS) és erőforrás-kimerítő hurkok
-nem megbízható folyamatvonalakból származnak.
+- **Leírás:** Érzékeli a nagy megbízhatóságú végpont szolgáltatásmegtagadási (DoS) kísérleteket, beleértve a kényszerített
+kritikus rendszerfolyamatok leállítása (LSASS, CSRSS, Wininit, SMSS, szolgáltatások)
+és az erőforrások kimerülése végtelen hurkok vagy hatalmas memóriafoglalás révén.
+A gyanús szülőfolyamatok vonalaira és a nem megbízható végrehajtási útvonalakra összpontosít
+miközben szűri a jogszerű rendszerkarbantartási, -javítási és -felügyeleti tevékenységeket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

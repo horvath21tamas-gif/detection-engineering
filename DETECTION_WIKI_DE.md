@@ -306,18 +306,18 @@
 - [Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)](#ultra-pro-high-fidelity-time-based-evasion-(t1497003))
 - [Ultra-Pro High-Fidelity-Netzwerk-DoS (T1498)](#ultra-pro-high-fidelity-netzwerk-dos-(t1498))
 - [Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001)](#ultra-pro-high-fidelity-direct-flow-flood-(t1498001))
-- [Ultra-Pro High-Fidelity-Endpunkt-DoS (T1499)](#ultra-pro-high-fidelity-endpunkt-dos-(t1499))
-- [Ultra-Pro High-Fidelity-OS-Selbstzerstörung (T1499.001)](#ultra-pro-high-fidelity-os-selbstzerstörung-(t1499001))
-- [Ultra-Pro High-Fidelity-Service-Erschöpfung (T1499.002)](#ultra-pro-high-fidelity-service-erschöpfung-(t1499002))
-- [Ultra-Pro High-Fidelity OS-Selbstzerstörung (T1499.003)](#ultra-pro-high-fidelity-os-selbstzerstörung-(t1499003))
-- [Ultra-Pro High-Fidelity-Ressourcenerschöpfung (T1499.004)](#ultra-pro-high-fidelity-ressourcenerschöpfung-(t1499004))
-- [Ultra-Pro-Web-Shell-Ausführungsmuster (T1505.003)](#ultra-pro-web-shell-ausführungsmuster-(t1505003))
-- [Ultra-Pro SQL Server-Befehls-Shell-Ausführung (T1505.001)](#ultra-pro-sql-server-befehls-shell-ausführung-(t1505001))
-- [Ultra-Pro IIS Native Module Injection (T1505.002)](#ultra-pro-iis-native-module-injection-(t1505002))
-- [Webshell-Upload oder Interaktion auf dem Webserver erkannt (High Fidelity)](#webshell-upload-oder-interaktion-auf-dem-webserver-erkannt-(high-fidelity))
-- [Ultra-Pro Mainboard-Boot-Image und SPI-Flash-Manipulation (T1542.004)](#ultra-pro-mainboard-boot-image-und-spi-flash-manipulation-(t1542004))
-- [Ultra-Pro Terminal Services DLL-Hijacking (T1505.005)](#ultra-pro-terminal-services-dll-hijacking-(t1505005))
-- [Ultra-Pro High-Fidelity Software Discovery (T1518)](#ultra-pro-high-fidelity-software-discovery-(t1518))
+- [Endpunkt-Denial-of-Service (T1499)](#endpunkt-denial-of-service-(t1499))
+- [Erkennung der Selbstzerstörung des Betriebssystems (T1499.001)](#erkennung-der-selbstzerstörung-des-betriebssystems-(t1499001))
+- [Erkennung von Service-Erschöpfung (T1499.002)](#erkennung-von-service-erschöpfung-(t1499002))
+- [Erkennung der Selbstzerstörung des Betriebssystems (T1499.003)](#erkennung-der-selbstzerstörung-des-betriebssystems-(t1499003))
+- [Erkennung von Ressourcenerschöpfung (T1499.004)](#erkennung-von-ressourcenerschöpfung-(t1499004))
+- [Web-Shell-Ausführungsmuster (T1505)](#web-shell-ausführungsmuster-(t1505))
+- [Ausführung der SQL Server-Befehlsshell (T1505.001)](#ausführung-der-sql-server-befehlsshell-(t1505001))
+- [Native IIS-Modulinjektion (T1505.002)](#native-iis-modulinjektion-(t1505002))
+- [Webshell-Upload oder Interaktionserkennung (T1505.003)](#webshell-upload-oder-interaktionserkennung-(t1505003))
+- [Mainboard-Boot-Image und SPI-Flash-Manipulation (T1505.004)](#mainboard-boot-image-und-spi-flash-manipulation-(t1505004))
+- [Erkennung von Terminaldienste-DLL-Hijacking (T1505.005)](#erkennung-von-terminaldienste-dll-hijacking-(t1505005))
+- [Software-Discovery-Erkennung (T1518)](#software-discovery-erkennung-(t1518))
 - [Erkennung von Sicherheitssoftware-Erkennung (T1518.001)](#erkennung-von-sicherheitssoftware-erkennung-(t1518001))
 - [Unautorisierte Container-Image-Ausführung mit Exploit-Grad (Implant-Container-Image)](#unautorisierte-container-image-ausführung-mit-exploit-grad-(implant-container-image))
 - [Cloud-Service-Discovery-Erkennung (T1526)](#cloud-service-discovery-erkennung-(t1526))
@@ -5717,16 +5717,18 @@ aus nicht vertrauenswürdigen Prozesslinien stammen.
 
 
 ---
-## Ultra-Pro High-Fidelity-Endpunkt-DoS (T1499)
+## Endpunkt-Denial-of-Service (T1499)
 - **ID:** `T1499.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezielte Denial-of-Service-Angriffe auf Endpunkten durch Überwachung auf erzwungene Beendigung
-von kritischen Systemprozessen (LSASS, CSRSS) und Ressourcenerschöpfungsschleifen
-aus nicht vertrauenswürdigen Prozesslinien stammen.
+- **Beschreibung:** Erkennt hochzuverlässige DoS-Versuche (Denial of Service) auf Endpunkten, einschließlich erzwungener Angriffe
+Beendigung kritischer Systemprozesse (LSASS, CSRSS, Wininit, SMSS, Services)
+und Ressourcenerschöpfung durch Endlosschleifen oder massive Speicherzuweisung.
+Konzentriert sich auf verdächtige übergeordnete Prozesslinien und nicht vertrauenswürdige Ausführungspfade
+während legitime Systemwartungs-, Patch- und Überwachungsaktivitäten gefiltert werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

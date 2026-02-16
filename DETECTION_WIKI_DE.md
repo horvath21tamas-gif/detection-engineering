@@ -7137,16 +7137,19 @@ wie Umleitung, Verschlüsselung oder Zugriff von Webservern und Remote-Shells.
 
 
 ---
-## Ultra-Pro High-Fidelity-GPP-Passworterkennung (T1552.006)
+## Anmeldeinformationen in Files Discovery (T1552.006)
 - **ID:** `T1552_006.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die unbefugte manuelle oder skriptgesteuerte Erkennung von Passwörtern in den Gruppenrichtlinieneinstellungen.
-Konzentriert sich auf systemfremde Prozesse, die darin Zeichenfolgensuchen nach „cpassword“ durchführen
-die SYSVOL-Freigabe, die Tools wie PowerSploit, Empire oder die manuelle LOLBin-Nutzung identifiziert.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die unbefugte manuelle oder skriptgesteuerte Erkennung gespeicherter Anmeldeinformationen
+in Konfigurations- oder Richtliniendateien, einschließlich Gruppenrichtlinieneinstellungen (GPP),
+unbeaufsichtigte Installationsdateien, web.config und anderer Klartext oder schwach
+geschützte Anmeldeinformationsartefakte.Konzentriert sich auf String-Suchaktivitäten,
+sensible Datei-Targeting und Remote-Ausführungskontext beim Ausschließen
+rechtmäßige Systemverarbeitung.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

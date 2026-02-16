@@ -7137,16 +7137,19 @@ például az átirányítás, a kódolás vagy a webszerverekről és távoli re
 
 
 ---
-## Ultra-Pro High-Fidelity GPP jelszófelderítés (T1552.006)
+## Hitelesítő adatok a Files Discoveryben (T1552.006)
 - **ID:** `T1552_006.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a jelszavak jogosulatlan kézi vagy parancsfájl-felderítését a Csoportházirend-beállításokban.
-Azokra a nem rendszerfolyamatokra összpontosít, amelyek a „cpassword” karakterlánc-keresést hajtják végre
-a SYSVOL megosztás, amely azonosítja az olyan eszközöket, mint a PowerSploit, az Empire vagy a kézi LOLBin használat.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a tárolt hitelesítő adatok jogosulatlan kézi vagy parancsfájl-felderítését
+konfigurációs vagy házirend-fájlokban, beleértve a csoportházirend-beállításokat (GPP),
+felügyelet nélküli telepítőfájlok, web.config és egyéb egyszerű szöveges vagy gyengén
+védett hitelesítő műtermékek.A karakterlánc-keresési tevékenységre összpontosít,
+érzékeny fájlcélzás és távoli végrehajtási kontextus, ugyanakkor kizárás
+törvényes rendszerfeldolgozás.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

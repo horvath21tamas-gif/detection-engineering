@@ -7516,16 +7516,19 @@ like redirection, encoding, or access from web servers and remote shells.
 
 
 ---
-## Ultra-Pro High-Fidelity GPP Password Discovery (T1552.006)
+## Credentials in Files Discovery (T1552.006)
 - **ID:** `T1552_006.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized manual or scripted discovery of passwords in Group Policy Preferences. 
-Focuses on non-system processes performing string searches for 'cpassword' within 
-the SYSVOL share, identifying tools like PowerSploit, Empire, or manual LOLBin usage.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects unauthorized manual or scripted discovery of credentials stored
+in configuration or policy files, including Group Policy Preferences (GPP),
+unattended installation files, web.config, and other plaintext or weakly
+protected credential artifacts. Focuses on string-search activity,
+sensitive file targeting, and remote execution context while excluding
+legitimate system processing.
 
 
 #### 🚨 Response Playbook

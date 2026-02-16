@@ -1,57 +1,84 @@
-title: Ultra-Pro High-Fidelity Endpoint DoS (T1499)
-id: 616f38e3-baf2-42b1-8473-6722859deb27
+title: Endpoint Denial of Service (T1499)
+id: a29d4f15-f084-455c-b767-299cb0244d3e
 status: stable
 description: |
-    Detects targeted endpoint denial of service by monitoring for forced termination 
-    of critical system processes (LSASS, CSRSS) and resource exhaustion loops 
-    originating from untrusted process lineages.
+    Detects high-confidence endpoint denial of service (DoS) attempts, including forced
+    termination of critical system processes (LSASS, CSRSS, Wininit, SMSS, Services)
+    and resource exhaustion via infinite loops or massive memory allocation.
+    Focuses on suspicious parent process lineages and untrusted execution paths
+    while filtering legitimate system maintenance, patching, and monitoring activities.
+
 author: hota05
-date: 2026-02-09
+date: 2026-02-16
 tags:
     - attack.impact
     - attack.t1499
     - attack.t1499.003
     - attack.t1499.004
+    - attack.dos
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_critical_targets:
-        CommandLine|contains:
-            - ' /f /im lsass.exe'     
-            - ' /f /im csrss.exe'     
-            - ' /f /im wininit.exe'   
-            - ' /f /im smss.exe'      
-            - ' /f /im services.exe'  
 
-    selection_resource_burn:
-        CommandLine|contains:
-            - 'while($true)'          
-            - '::MemoryStream'        
-            - 'foreach($i in 1..1000000)'
-            - ' -Recursive'           
+  selection_critical_process_termination:
+    CommandLine|contains:
+      - ' /f /im lsass.exe'
+      - ' /f /im csrss.exe'
+      - ' /f /im wininit.exe'
+      - ' /f /im smss.exe'
+      - ' /f /im services.exe'
 
-    selection_context:
-        - ParentImage|endswith:
-            - '\winword.exe'         
-            - '\excel.exe'
-            - '\httpd.exe'            
-            - '\rundll32.exe'         
-            - '\outlook.exe'
-        - Image|contains:
-            - '\Temp\'
-            - '\Users\Public\'
-            - '\AppData\Local\Temp\'
+  selection_resource_exhaustion:
+    CommandLine|contains:
+      - 'while($true)'
+      - 'for(;;)'
+      - '::MemoryStream'
+      - 'AllocHGlobal'
+      - 'foreach($i in 1..1gb)'
+      - ':loop'
+      - '-Recursive'
+      - 'Get-Random'  
 
-    filter_legit_service_ops:
-        - username: 'NT AUTHORITY\SYSTEM' 
-        - ParentImage|endswith:
-            - '\CcmExec.exe'          
-            - '\msiexec.exe'          
-            - '\TiWorker.exe'         
-        - CommandLine|contains:
-            - 'HealthCheck'            
-            - 'Diagnostic'
+  selection_suspicious_context:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\rundll32.exe'
+      - '\httpd.exe'
+      - '\nginx.exe'
+      - '\apache.exe'
+    Image|contains:
+      - '\Temp\'
+      - '\Users\Public\'
+      - '\AppData\Local\Temp\'
+      - '\Downloads\'
 
-    condition: (selection_critical_targets or selection_resource_burn) and selection_context and not filter_legit_service_ops
+  filter_legit_operations:
+    username: 'NT AUTHORITY\SYSTEM'
+    ParentImage|endswith:
+      - '\CcmExec.exe'
+      - '\msiexec.exe'
+      - '\TiWorker.exe'
+      - '\TrustedInstaller.exe'
+    CommandLine|contains:
+      - 'HealthCheck'
+      - 'Diagnostic'
+      - 'Update'
+      - 'Patch'
+      - 'Maintenance'
+
+  condition: 
+    (selection_critical_process_termination or selection_resource_exhaustion)
+    and selection_suspicious_context
+    and not filter_legit_operations
+
+falsepositives:
+  - Legitimate automated process termination during maintenance or patching
+  - Resource-intensive scripts in testing or development environments
+  - Monitoring or health-check scripts by system management software
+
 level: critical

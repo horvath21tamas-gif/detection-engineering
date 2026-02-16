@@ -293,18 +293,18 @@
 - [Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)](#ultra-pro-domain-trust-tampering-&-sid-filtering-bypass-(t1484002))
 - [Ultra-Pro High-Fidelity-Datenvernichtung (T1485)](#ultra-pro-high-fidelity-datenvernichtung-(t1485))
 - [Ransomware-Vorbereitungsaktivität auf Windows-Host erkannt (High Fidelity)](#ransomware-vorbereitungsaktivität-auf-windows-host-erkannt-(high-fidelity))
-- [Ultra-Pro High-Fidelity Service Stop (T1489)](#ultra-pro-high-fidelity-service-stop-(t1489))
+- [Servicestopp (T1489)](#servicestopp-(t1489))
 - [Verdächtiges Löschen von Volume-Schattenkopien über VSSAdmin (High Fidelity)](#verdächtiges-löschen-von-volume-schattenkopien-über-vssadmin-(high-fidelity))
-- [Ultra-Pro High-Fidelity-Verunstaltung (T1491)](#ultra-pro-high-fidelity-verunstaltung-(t1491))
-- [Ultra-Pro High-Fidelity interne Verunstaltung (T1491.001)](#ultra-pro-high-fidelity-interne-verunstaltung-(t1491001))
-- [Ultra-Pro High-Fidelity externe Verunstaltung (T1491.002)](#ultra-pro-high-fidelity-externe-verunstaltung-(t1491002))
-- [Ultra-Pro High-Fidelity-Firmware-Beschädigung (T1495)](#ultra-pro-high-fidelity-firmware-beschädigung-(t1495))
-- [Ultra-Pro High-Fidelity-Ressourcen-Hijacking (T1496)](#ultra-pro-high-fidelity-ressourcen-hijacking-(t1496))
-- [Ultra-Pro High-Fidelity-Virtualisierung/Sandbox-Umgehung (T1497)](#ultra-pro-high-fidelity-virtualisierungsandbox-umgehung-(t1497))
-- [Ultra-Pro High-Fidelity VM Artifact Discovery (T1497.001)](#ultra-pro-high-fidelity-vm-artifact-discovery-(t1497001))
-- [Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002)](#ultra-pro-high-fidelity-user-interaction-evasion-(t1497002))
-- [Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)](#ultra-pro-high-fidelity-time-based-evasion-(t1497003))
-- [Ultra-Pro High-Fidelity-Netzwerk-DoS (T1498)](#ultra-pro-high-fidelity-netzwerk-dos-(t1498))
+- [Verunstaltung (T1491)](#verunstaltung-(t1491))
+- [Interne Verunstaltung (T1491.001)](#interne-verunstaltung-(t1491001))
+- [Äußere Verunstaltung (T1491.002)](#äußere-verunstaltung-(t1491002))
+- [Firmware-Beschädigung (T1495)](#firmware-beschädigung-(t1495))
+- [Ressourcenentführung (T1496)](#ressourcenentführung-(t1496))
+- [Virtualisierung/Sandbox-Umgehung (T1497)](#virtualisierungsandbox-umgehung-(t1497))
+- [VM-Artefakterkennung (T1497.001)](#vm-artefakterkennung-(t1497001))
+- [Umgehung von Benutzerinteraktionen (T1497.002)](#umgehung-von-benutzerinteraktionen-(t1497002))
+- [Zeitbasiertes Ausweichen (T1497.003)](#zeitbasiertes-ausweichen-(t1497003))
+- [Netzwerk-DoS (T1498)](#netzwerk-dos-(t1498))
 - [Direktflussflut (T1498.001)](#direktflussflut-(t1498001))
 - [Endpunkt-Denial-of-Service (T1499)](#endpunkt-denial-of-service-(t1499))
 - [Erkennung der Selbstzerstörung des Betriebssystems (T1499.001)](#erkennung-der-selbstzerstörung-des-betriebssystems-(t1499001))
@@ -5487,16 +5487,14 @@ initiiert von verdächtigen übergeordneten Prozessen oder zielt auf nicht tempo
 
 
 ---
-## Ultra-Pro High-Fidelity Service Stop (T1489)
+## Servicestopp (T1489)
 - **ID:** `T1489.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugtes Stoppen kritischer System- und Sicherheitsdienste
-durch Überwachung von Dienstkontrolltools, die aus verdächtigen Prozessen stammen
-Abstammungslinien oder die gezielte Bekämpfung hochwertiger Abwehrmechanismen (EDR, VSS, AV).
+- **Beschreibung:** Erkennt unbefugte Versuche, kritische System- und Sicherheitsdienste zu stoppen oder zu deaktivieren.Überwacht Prozesserstellungsereignisse, die Dienstkontrolltools betreffen, die von verdächtigen übergeordneten Prozessen initiiert werden oder auf hochwertige Abwehrmechanismen wie EDR, Antiviren- und Systemwiederherstellungsdienste abzielen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

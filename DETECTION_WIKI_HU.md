@@ -293,18 +293,18 @@
 - [Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)](#ultra-pro-domain-trust-tampering-&-sid-filtering-bypass-(t1484002))
 - [Ultra-Pro nagy pontosságú adatmegsemmisítés (T1485)](#ultra-pro-nagy-pontosságú-adatmegsemmisítés-(t1485))
 - [Ransomware-előkészítési tevékenység észlelve a Windows Host-on (High Fidelity)](#ransomware-előkészítési-tevékenység-észlelve-a-windows-host-on-(high-fidelity))
-- [Ultra-Pro High-Fidelity Service Stop (T1489)](#ultra-pro-high-fidelity-service-stop-(t1489))
+- [Szervizmegálló (T1489)](#szervizmegálló-(t1489))
 - [Kötet árnyékmásolatok gyanús törlése a VSSAdminon keresztül (High Fidelity)](#kötet-árnyékmásolatok-gyanús-törlése-a-vssadminon-keresztül-(high-fidelity))
-- [Ultra-Pro High-Fidelity Defacement (T1491)](#ultra-pro-high-fidelity-defacement-(t1491))
-- [Ultra-Pro High-Fidelity belső roncsolás (T1491.001)](#ultra-pro-high-fidelity-belső-roncsolás-(t1491001))
-- [Ultra-Pro High-Fidelity külső roncsolás (T1491.002)](#ultra-pro-high-fidelity-külső-roncsolás-(t1491002))
-- [Ultra-Pro High-Fidelity firmware korrupció (T1495)](#ultra-pro-high-fidelity-firmware-korrupció-(t1495))
-- [Ultra-Pro High-Fidelity erőforrás-eltérítés (T1496)](#ultra-pro-high-fidelity-erőforrás-eltérítés-(t1496))
-- [Ultra-Pro High-Fidelity virtualizáció/Sandbox Evasion (T1497)](#ultra-pro-high-fidelity-virtualizációsandbox-evasion-(t1497))
-- [Ultra-Pro High-Fidelity VM Artifact Discovery (T1497.001)](#ultra-pro-high-fidelity-vm-artifact-discovery-(t1497001))
-- [Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002)](#ultra-pro-high-fidelity-user-interaction-evasion-(t1497002))
-- [Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)](#ultra-pro-high-fidelity-time-based-evasion-(t1497003))
-- [Ultra-Pro High-Fidelity Network DoS (T1498)](#ultra-pro-high-fidelity-network-dos-(t1498))
+- [Defacement (T1491)](#defacement-(t1491))
+- [Belső sérülés (T1491.001)](#belső-sérülés-(t1491001))
+- [Külső rontás (T1491.002)](#külső-rontás-(t1491002))
+- [Firmware korrupció (T1495)](#firmware-korrupció-(t1495))
+- [Erőforrás-eltérítés (T1496)](#erőforrás-eltérítés-(t1496))
+- [Virtualizáció/Sandbox Evasion (T1497)](#virtualizációsandbox-evasion-(t1497))
+- [VM Artifact Discovery (T1497.001)](#vm-artifact-discovery-(t1497001))
+- [Felhasználói interakciók elkerülése (T1497.002)](#felhasználói-interakciók-elkerülése-(t1497002))
+- [Időalapú kijátszás (T1497.003)](#időalapú-kijátszás-(t1497003))
+- [Network DoS (T1498)](#network-dos-(t1498))
 - [Közvetlen áramlású árvíz (T1498.001)](#közvetlen-áramlású-árvíz-(t1498001))
 - [Végpont szolgáltatásmegtagadás (T1499)](#végpont-szolgáltatásmegtagadás-(t1499))
 - [OS önmegsemmisítés-észlelés (T1499.001)](#os-önmegsemmisítés-észlelés-(t1499001))
@@ -5487,16 +5487,14 @@ gyanús szülőfolyamatokból kezdeményezett vagy nem ideiglenes könyvtárakat
 
 
 ---
-## Ultra-Pro High-Fidelity Service Stop (T1489)
+## Szervizmegálló (T1489)
 - **ID:** `T1489.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a kritikus rendszer és biztonsági szolgáltatások jogosulatlan leállítását
-a gyanús folyamatból származó szolgáltatásvezérlő eszközök figyelésével
-leszármazások vagy nagy értékű védekezési mechanizmusok (EDR, VSS, AV) célzása.
+- **Leírás:** Érzékeli a kritikus rendszer- és biztonsági szolgáltatások leállítására vagy letiltására irányuló jogosulatlan kísérleteket.Figyelemmel kíséri a gyanús szülőfolyamatokból kezdeményezett szolgáltatásvezérlő eszközöket vagy olyan nagy értékű védekező mechanizmusokat célzó folyamatlétrehozási eseményeket, mint az EDR, vírusirtó és rendszer-helyreállítási szolgáltatások.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -5653,7 +5651,7 @@ hogy a rosszindulatú programok elkerülési technikáira összpontosítson.
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a kifinomult felhasználói interakciók elkerülését azáltal, hogy azonosítja az aláíratlan vagy
+- **Leírás:** Érzékeli a kifinomult felhasználói interakciók kijátszását azáltal, hogy azonosítja az aláíratlan vagy
 gyanúsan elhelyezkedő folyamatok, amelyek emberközpontú API-kat kérnek le (egér, billentyűzet, legutóbbi fájlok)
 legitim UI kontextus nélkül.
 

@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-16 14:10:54`
+**Utolsó frissítés:** `2026-02-16 14:45:53`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -298,20 +298,20 @@
 | T1484.002 | CRITICAL | Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002) |
 | T1485 | CRITICAL | Ultra-Pro High-Fidelity Data Destruction (T1485) |
 | T1486 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
-| T1489 | CRITICAL | Ultra-Pro High-Fidelity Service Stop (T1489) |
+| T1489 | CRITICAL | Service Stop (T1489) |
 | T1490 | HIGH | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Ultra-Pro High-Fidelity Data Destruction (T1485), Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity) |
-| T1491 | CRITICAL | Ultra-Pro High-Fidelity Defacement (T1491) |
-| T1491.001 | CRITICAL | Ultra-Pro High-Fidelity Defacement (T1491), Ultra-Pro High-Fidelity Internal Defacement (T1491.001) |
-| T1491.002 | CRITICAL | Ultra-Pro High-Fidelity Defacement (T1491), Ultra-Pro High-Fidelity External Defacement (T1491.002) |
-| T1495 | CRITICAL | Ultra-Pro High-Fidelity Firmware Corruption (T1495) |
-| T1496 | HIGH | Ultra-Pro High-Fidelity Resource Hijacking (T1496) |
-| T1497 | HIGH | Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497) |
-| T1497.001 | HIGH | Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497), Ultra-Pro High-Fidelity VM Artifact Discovery (T1497.001) |
-| T1497.002 | HIGH | Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002) |
-| T1497.003 | HIGH | Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497), Ultra-Pro High-Fidelity Time-based Evasion (T1497.003) |
-| T1498 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498) |
-| T1498.001 | HIGH | Direct Flow Flood (T1498.001), Ultra-Pro High-Fidelity Network DoS (T1498) |
-| T1498.002 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498) |
+| T1491 | CRITICAL | Defacement (T1491) |
+| T1491.001 | CRITICAL | Defacement (T1491), Internal Defacement (T1491.001) |
+| T1491.002 | CRITICAL | Defacement (T1491), External Defacement (T1491.002) |
+| T1495 | CRITICAL | Firmware Corruption (T1495) |
+| T1496 | HIGH | Resource Hijacking (T1496) |
+| T1497 | HIGH | Virtualization/Sandbox Evasion (T1497) |
+| T1497.001 | HIGH | Virtualization/Sandbox Evasion (T1497), VM Artifact Discovery (T1497.001) |
+| T1497.002 | HIGH | User Interaction Evasion (T1497.002) |
+| T1497.003 | HIGH | Virtualization/Sandbox Evasion (T1497), Time-based Evasion (T1497.003) |
+| T1498 | HIGH | Network DoS (T1498) |
+| T1498.001 | HIGH | Direct Flow Flood (T1498.001), Network DoS (T1498) |
+| T1498.002 | HIGH | Network DoS (T1498) |
 | T1499 | CRITICAL | Endpoint Denial of Service (T1499) |
 | T1499.001 | CRITICAL | OS Self-Destruction Detection (T1499.001) |
 | T1499.002 | CRITICAL | Service Exhaustion Detection (T1499.002) |

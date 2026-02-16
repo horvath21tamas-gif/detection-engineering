@@ -293,18 +293,18 @@
 - [Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)](#ultra-pro-domain-trust-tampering-&-sid-filtering-bypass-(t1484002))
 - [Ultra-Pro High-Fidelity Data Destruction (T1485)](#ultra-pro-high-fidelity-data-destruction-(t1485))
 - [Ransomware Preparation Activity Detected on Windows Host (High Fidelity)](#ransomware-preparation-activity-detected-on-windows-host-(high-fidelity))
-- [Ultra-Pro High-Fidelity Service Stop (T1489)](#ultra-pro-high-fidelity-service-stop-(t1489))
+- [Service Stop (T1489)](#service-stop-(t1489))
 - [Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity)](#suspicious-deletion-of-volume-shadow-copies-via-vssadmin-(high-fidelity))
-- [Ultra-Pro High-Fidelity Defacement (T1491)](#ultra-pro-high-fidelity-defacement-(t1491))
-- [Ultra-Pro High-Fidelity Internal Defacement (T1491.001)](#ultra-pro-high-fidelity-internal-defacement-(t1491001))
-- [Ultra-Pro High-Fidelity External Defacement (T1491.002)](#ultra-pro-high-fidelity-external-defacement-(t1491002))
-- [Ultra-Pro High-Fidelity Firmware Corruption (T1495)](#ultra-pro-high-fidelity-firmware-corruption-(t1495))
-- [Ultra-Pro High-Fidelity Resource Hijacking (T1496)](#ultra-pro-high-fidelity-resource-hijacking-(t1496))
-- [Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497)](#ultra-pro-high-fidelity-virtualizationsandbox-evasion-(t1497))
-- [Ultra-Pro High-Fidelity VM Artifact Discovery (T1497.001)](#ultra-pro-high-fidelity-vm-artifact-discovery-(t1497001))
-- [Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002)](#ultra-pro-high-fidelity-user-interaction-evasion-(t1497002))
-- [Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)](#ultra-pro-high-fidelity-time-based-evasion-(t1497003))
-- [Ultra-Pro High-Fidelity Network DoS (T1498)](#ultra-pro-high-fidelity-network-dos-(t1498))
+- [Defacement (T1491)](#defacement-(t1491))
+- [Internal Defacement (T1491.001)](#internal-defacement-(t1491001))
+- [External Defacement (T1491.002)](#external-defacement-(t1491002))
+- [Firmware Corruption (T1495)](#firmware-corruption-(t1495))
+- [Resource Hijacking (T1496)](#resource-hijacking-(t1496))
+- [Virtualization/Sandbox Evasion (T1497)](#virtualizationsandbox-evasion-(t1497))
+- [VM Artifact Discovery (T1497.001)](#vm-artifact-discovery-(t1497001))
+- [User Interaction Evasion (T1497.002)](#user-interaction-evasion-(t1497002))
+- [Time-based Evasion (T1497.003)](#time-based-evasion-(t1497003))
+- [Network DoS (T1498)](#network-dos-(t1498))
 - [Direct Flow Flood (T1498.001)](#direct-flow-flood-(t1498001))
 - [Endpoint Denial of Service (T1499)](#endpoint-denial-of-service-(t1499))
 - [OS Self-Destruction Detection (T1499.001)](#os-self-destruction-detection-(t1499001))
@@ -5769,16 +5769,14 @@ initiated from suspicious parent processes or targeting non-temp directories.
 
 
 ---
-## Ultra-Pro High-Fidelity Service Stop (T1489)
+## Service Stop (T1489)
 - **ID:** `T1489.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized stopping of critical system and security services 
-by monitoring service control tools originating from suspicious process 
-lineages or targeting high-value defense mechanisms (EDR, VSS, AV).
+- **Leírás:** Detects unauthorized attempts to stop or disable critical system and security services. Monitors process creation events involving service control tools initiated from suspicious parent processes or targeting high-value defensive mechanisms such as EDR, antivirus,  and system recovery services.
 
 
 #### 🚨 Response Playbook

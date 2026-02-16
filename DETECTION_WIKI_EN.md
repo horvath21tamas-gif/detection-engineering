@@ -5805,16 +5805,17 @@ lineages or targeting high-value defense mechanisms (EDR, VSS, AV).
 
 
 ---
-## Ultra-Pro High-Fidelity Defacement (T1491)
+## Defacement (T1491)
 - **ID:** `T1491.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized website defacement by monitoring for suspicious file 
-manipulations (move, copy, echo) within web-root directories originating 
-from non-standard or compromised service processes (e.g., w3wp.exe, httpd.exe).
+- **Leírás:** Detects unauthorized website defacement by monitoring suspicious file 
+manipulations (move, copy, echo, Set-Content, replace) within web-root 
+directories originating from non-standard or potentially compromised 
+web service processes (e.g., w3wp.exe, httpd.exe).
 
 
 #### 🚨 Response Playbook

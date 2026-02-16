@@ -5521,16 +5521,17 @@ Abstammungslinien oder die gezielte Bekämpfung hochwertiger Abwehrmechanismen (
 
 
 ---
-## Ultra-Pro High-Fidelity-Verunstaltung (T1491)
+## Verunstaltung (T1491)
 - **ID:** `T1491.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Website-Verunstaltungen durch Überwachung auf verdächtige Dateien
-Manipulationen (Verschieben, Kopieren, Echo) innerhalb von Web-Root-Verzeichnissen
-von nicht standardmäßigen oder kompromittierten Dienstprozessen (z. B. w3wp.exe, httpd.exe).
+- **Beschreibung:** Erkennt unbefugte Website-Verunstaltungen durch Überwachung verdächtiger Dateien
+Manipulationen (Verschieben, Kopieren, Echo, Inhalt festlegen, Ersetzen) im Web-Root
+Verzeichnisse, die aus nicht standardmäßigen oder möglicherweise gefährdeten Verzeichnissen stammen
+Webdienstprozesse (z. B. w3wp.exe, httpd.exe).
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

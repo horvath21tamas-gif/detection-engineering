@@ -5521,16 +5521,17 @@ leszármazások vagy nagy értékű védekezési mechanizmusok (EDR, VSS, AV) c�
 
 
 ---
-## Ultra-Pro High-Fidelity Defacement (T1491)
+## Elrontás (T1491)
 - **ID:** `T1491.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A gyanús fájlok megfigyelésével észleli a webhely jogosulatlan megrongálását
-manipulációk (mozgatás, másolás, visszhang) a web-root könyvtárakon belül
-nem szabványos vagy veszélyeztetett szolgáltatási folyamatokból (pl. w3wp.exe, httpd.exe).
+- **Leírás:** A gyanús fájlok figyelésével észleli a webhely jogosulatlan megrongálását
+manipulációk (mozgatás, másolás, visszhang, Set-Content, csere) a web-rooton belül
+nem szabványos vagy potenciálisan veszélyeztetett címtárak
+webszolgáltatási folyamatok (pl. w3wp.exe, httpd.exe).
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

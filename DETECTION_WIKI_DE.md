@@ -5961,16 +5961,17 @@ Abstammungslinien (Office-Apps, Webserver oder nicht erhöhte Shells).
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Service Discovery (T1526)
+## Cloud-Service-Discovery-Erkennung (T1526)
 - **ID:** `T1526.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt systematische Cloud-Service-Aufzählung (Lambda, Secrets, KeyVault)
-Fokussierung auf anomale Ausführungsumgebungen (interaktive Shells auf Nicht-Entwickler-Hosts)
-und Ausgabeumleitungsmuster, die für die automatisierte Ernte verwendet werden.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt systematische Cloud-Service-Aufzählungen, die auf Lambda, Secrets, KeyVault usw. abzielen.
+WebApps und Containerdienste.Konzentriert sich auf anomale Ausführungsumgebungen wie z
+interaktive Shells auf Nicht-Entwickler-Hosts und Ausgabeumleitungsmuster, die für die Automatisierung verwendet werden
+Ernte oder Exfiltration.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -5961,16 +5961,17 @@ vonalak (irodai alkalmazások, webszerverek vagy nem emelt rendszerhéjak).
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Service Discovery (T1526)
+## Cloud Service Discovery Detection (T1526)
 - **ID:** `T1526.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a felhőszolgáltatás szisztematikus felsorolását (Lambda, Secrets, KeyVault)
-a rendellenes végrehajtási környezetekre összpontosítva (interaktív shell a nem fejlesztői gazdagépeken)
-és az automatizált betakarításhoz használt kimeneti átirányítási minták.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a Lambda, Secrets, KeyVault,
+Webalkalmazások és konténerszolgáltatások.A rendellenes végrehajtási környezetekre összpontosít, mint pl
+interaktív parancsértelmezők nem fejlesztői gazdagépeken és automatizált kimeneti átirányítási minták
+betakarítás vagy kiszűrés.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

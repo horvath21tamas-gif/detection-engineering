@@ -6270,16 +6270,17 @@ lineages (Office apps, web servers, or non-elevated shells).
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Service Discovery (T1526)
+## Cloud Service Discovery Detection (T1526)
 - **ID:** `T1526.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic cloud service enumeration (Lambda, Secrets, KeyVault) 
-focusing on anomalous execution environments (interactive shells on non-dev hosts) 
-and output redirection patterns used for automated harvesting.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects systematic cloud service enumeration targeting Lambda, Secrets, KeyVault,
+WebApps, and container services. Focuses on anomalous execution environments such as
+interactive shells on non-dev hosts and output redirection patterns used for automated
+harvesting or exfiltration.
 
 
 #### 🚨 Response Playbook

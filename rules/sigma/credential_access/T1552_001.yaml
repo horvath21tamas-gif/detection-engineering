@@ -1,58 +1,117 @@
-title: Ultra-Pro High-Fidelity Credentials In Files Discovery (T1552.001)
+title: Credentials In Files Discovery (T1552.001)
 id: c52dba60-a368-492f-b6b8-724270c4f2b7
 status: stable
 description: |
-    Detects targeted, recursive searches for credentials in configuration files and scripts. 
-    Correlates search tools (findstr, grep, PowerShell) with high-risk file extensions 
-    and anomalous parent processes to minimize false positives from dev/admin activity.
+    Detects unauthorized, recursive discovery of credentials stored in files 
+    and configuration scripts (AWS, Git, SSH keys, password/config files). 
+    Correlates search tools with sensitive file extensions, exfiltration patterns, 
+    and suspicious parent processes to reduce false positives.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1552/001/
 tags:
     - attack.credential_access
     - attack.t1552.001
+    - attack.discovery
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
+
     selection_recursive_intent:
         - CommandLine|contains|all:
             - 'findstr'
-            - '/s'              
+            - '/s'
         - CommandLine|contains|all:
             - 'grep'
-            - '-r'              
+            - '-r'
         - CommandLine|contains|all:
             - 'Get-ChildItem'
             - '-Recurse'
+        - CommandLine|contains|all:
+            - 'dir'
+            - '/s'
+        - CommandLine|contains|all:
+            - 'where'
+            - '/r'
 
     selection_sensitive_targets:
         CommandLine|contains:
             - '.config'
-            - '.xml'            
-            - '.unattend'      
-            - '.git\config'     
-            - '.aws\credentials' 
-            - 'id_rsa'          
-            - 'password='       
+            - '.xml'
+            - '.json'
+            - '.yml'
+            - '.env'
+            - '.unattend'
+            - '.git\config'
+            - '.aws\credentials'
+            - '.azure\azureProfile.json'
+            - 'id_rsa'
+            - 'id_dsa'
+            - 'id_ed25519'
+            - 'password='
             - 'access_key'
+            - 'secret_key'
+
+    selection_exfiltration:
+        CommandLine|contains:
+            - 'base64'
+            - 'certutil -encode'
+            - ' > '
+            - '>>'
+            - ' | clip'
+            - 'curl '
+            - 'wget '
+            - 'scp '
+            - 'Invoke-WebRequest'
+            - '-enc'
+            - '-EncodedCommand'
+            - 'IEX'
+            - 'Invoke-Expression'
 
     selection_suspicious_lineage:
         ParentImage|endswith:
-            - '\wsmprovhost.exe' 
-            - '\psexesvc.exe'    
-            - '\httpd.exe'       
+            - '\wsmprovhost.exe'
+            - '\psexesvc.exe'
+            - '\httpd.exe'
             - '\php-cgi.exe'
             - '\nginx.exe'
+            - '\powershell.exe'
+            - '\cmd.exe'
         Image|contains:
             - '\AppData\Local\Temp\'
             - '\Users\Public\'
 
+    selection_non_system_user:
+        User|not_contains:
+            - 'NT AUTHORITY\SYSTEM'
+            - 'NT AUTHORITY\LOCAL SERVICE'
+            - 'NT AUTHORITY\NETWORK SERVICE'
+
     filter_legit_systems:
-        username: 'NT AUTHORITY\SYSTEM'
         Image|contains:
             - '\Windows\System32\SearchIndexer.exe'
-            - '\Windows\System32\CompatTelRunner.exe' 
-            - '\Microsoft Visual Studio\'             
+            - '\Windows\System32\CompatTelRunner.exe'
+            - '\Microsoft Visual Studio\'
+            - '\Git\usr\bin\git.exe'
+        ParentImage|endswith:
+            - '\explorer.exe'
 
-    condition: selection_recursive_intent and selection_sensitive_targets and selection_suspicious_lineage and not filter_legit_systems
+    condition:
+        selection_recursive_intent
+        and selection_sensitive_targets
+        and (selection_suspicious_lineage or selection_exfiltration)
+        and selection_non_system_user
+        and not filter_legit_systems
+
+falsepositives:
+    - Developer scripts scanning config files
+    - CI/CD pipeline retrieving secrets for build
+    - Admin troubleshooting in temp directories
+    - Security audits enumerating credential files
+
 level: high

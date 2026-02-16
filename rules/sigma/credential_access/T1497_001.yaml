@@ -1,53 +1,53 @@
-title: Ultra-Pro High-Fidelity VM Artifact Discovery (T1497.001)
+title: VM Artifact Discovery (T1497.001)
 id: b11c6286-1a07-440d-af43-fe7533c4935e
 status: stable
 description: |
-    Detects unauthorized discovery of virtualization artifacts by non-system, 
-    untrusted processes. Filters out legitimate installers and system services 
-    to focus on malware evasion techniques.
+  Detects unauthorized discovery of virtualization artifacts by non-system, 
+  untrusted processes. Filters out legitimate installers and system services 
+  to focus on malware evasion techniques.
 author: hota05
 date: 2026-02-03
 tags:
-    - attack.defense_evasion
-    - attack.t1497.001
+  - attack.defense_evasion
+  - attack.t1497.001
 logsource:
-    category: process_creation 
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_suspicious_origin:
-        Image|contains:
-            - '\AppData\Local\Temp\'
-            - '\Users\Public\'
-            - '\Downloads\'
-            - '\PerfLogs\'
-        Image|endswith:
-            - '.exe'
-            - '.scr'
-            - '.pif'
+  suspicious_origin:
+    Image|contains:
+      - '\AppData\Local\Temp\'
+      - '\Users\Public\'
+      - '\Downloads\'
+      - '\PerfLogs\'
+    Image|endswith:
+      - '.exe'
+      - '.scr'
+      - '.pif'
 
-    selection_vm_artifacts:
-        CommandLine|contains:
-            - 'HKLM\SOFTWARE\VMware, Inc.\VMware Tools'
-            - 'vmtoolsd.exe'
-            - 'drivers\vmmouse.sys'
-            - 'VBoxGuest'
-            - 'VBoxMouse'
-            - 'HARDWARE\ACPI\DSDT\VBOX__'
-            - 'vmsrvc'
-            - 'qemu-ga'
-            - 'Integration Services'
+  vm_artifact_indicators:
+    CommandLine|contains:
+      - 'HKLM\SOFTWARE\VMware, Inc.\VMware Tools'
+      - 'vmtoolsd.exe'
+      - 'drivers\vmmouse.sys'
+      - 'VBoxGuest'
+      - 'VBoxMouse'
+      - 'HARDWARE\ACPI\DSDT\VBOX__'
+      - 'vmsrvc'
+      - 'qemu-ga'
+      - 'Integration Services'
 
-    filter_trusted_processes:
-        ParentImage|endswith:
-            - '\services.exe'
-            - '\msiexec.exe'
-            - '\TrustedInstaller.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+  trusted_process_filter:
+    ParentImage|endswith:
+      - '\services.exe'
+      - '\msiexec.exe'
+      - '\TrustedInstaller.exe'
+    username: 'NT AUTHORITY\SYSTEM'
 
-    filter_known_admin_tools:
-        Image|endswith:
-            - '\CcmExec.exe'
-            - '\gpscript.exe'
+  known_admin_tools_filter:
+    Image|endswith:
+      - '\CcmExec.exe'
+      - '\gpscript.exe'
 
-    condition: selection_suspicious_origin and selection_vm_artifacts and not filter_trusted_processes
+  condition: suspicious_origin and vm_artifact_indicators and not (trusted_process_filter or known_admin_tools_filter)
 level: high

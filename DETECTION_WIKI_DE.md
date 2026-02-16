@@ -5627,7 +5627,7 @@ in verdächtigen Verzeichnissen.
 
 
 ---
-## Ultra-Pro High-Fidelity VM Artifact Discovery (T1497.001)
+## VM-Artefakterkennung (T1497.001)
 - **ID:** `T1497_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

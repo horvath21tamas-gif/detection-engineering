@@ -5917,7 +5917,7 @@ within suspicious directories.
 
 
 ---
-## Ultra-Pro High-Fidelity VM Artifact Discovery (T1497.001)
+## VM Artifact Discovery (T1497.001)
 - **ID:** `T1497_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

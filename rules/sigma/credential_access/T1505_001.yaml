@@ -1,51 +1,75 @@
-title: Ultra-Pro SQL Server Command Shell Execution (T1505.001)
-id: 2feffae6-283b-421f-8f08-dcf1f0099f60
+title: SQL Server Command Shell Execution (T1505.001)
+id: 27eee754-7a42-453a-8657-8f339af30b8d
 status: stable
 description: |
-    Detects unauthorized OS command execution through SQL Server extended stored procedures 
-    and CLR assemblies. Filters legitimate SQL Agent maintenance while flagging 
-    suspicious discovery commands and configuration changes (xp_cmdshell, sp_configure).
+    Detects unauthorized OS command execution via Microsoft SQL Server using
+    extended stored procedures (xp_cmdshell) or CLR assemblies. 
+    Focuses on suspicious discovery commands, configuration changes, and shell execution
+    while filtering legitimate SQL Agent maintenance and installer operations.
+
 author: hota05
-date: 2026-02-02
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1505/001/
 tags:
     - attack.persistence
     - attack.execution
     - attack.t1505.001
+    - attack.privilege_escalation
+
 logsource:
     product: windows
     category: process_creation
+
 detection:
-    selection_sql_engine:
-        ParentImage|endswith: '\sqlservr.exe'
 
-    selection_suspicious_children:
-        - Image|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\bitsadmin.exe'
-            - '\certutil.exe'      
-            - '\net.exe'          
-            - '\net1.exe'
-            - '\whoami.exe'
-            - '\systeminfo.exe'
-            - '\nltest.exe'       
-            - '\scrcons.exe'      
+  selection_sql_engine:
+    ParentImage|endswith:
+      - '\sqlservr.exe'
 
-    selection_sql_config_cmd:
-        CommandLine|contains:
-            - 'sp_configure'
-            - 'xp_cmdshell'
-            - 'RECONFIGURE'
-            - 'show advanced options'
-            - 'Ole Automation Procedures'
+  selection_suspicious_children:
+    Image|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\bitsadmin.exe'
+      - '\certutil.exe'
+      - '\net.exe'
+      - '\net1.exe'
+      - '\whoami.exe'
+      - '\systeminfo.exe'
+      - '\nltest.exe'
+      - '\scrcons.exe'
+      - '\cscript.exe'
+      - '\wscript.exe'
+      - '\rundll32.exe'
 
-    filter_sql_agent_jobs:
-        ParentImage|endswith: '\sqlagent.exe'
-    
-    filter_installers:
-        Image|contains: '\Microsoft SQL Server\...\Setup\'
-        CommandLine|contains: 'sqlagent.exe -i'
+  selection_sql_config_cmd:
+    CommandLine|contains:
+      - 'sp_configure'
+      - 'xp_cmdshell'
+      - 'RECONFIGURE'
+      - 'show advanced options'
+      - 'Ole Automation Procedures'
+      - 'CREATE ASSEMBLY'
+      - 'ALTER ASSEMBLY'
 
-    condition: selection_sql_engine and (selection_suspicious_children or selection_sql_config_cmd) and not (filter_sql_agent_jobs or filter_installers)
+  filter_sql_agent_jobs:
+    ParentImage|endswith:
+      - '\sqlagent.exe'
+
+  filter_sql_installers:
+    Image|contains:
+      - '\Microsoft SQL Server\Setup\'
+      - '\Microsoft SQL Server\MSSQL\Setup\'
+    CommandLine|contains:
+      - 'sqlagent.exe -i'
+
+  condition: selection_sql_engine and (selection_suspicious_children or selection_sql_config_cmd) and not (filter_sql_agent_jobs or filter_sql_installers)
+
+falsepositives:
+  - Scheduled SQL Agent jobs performing maintenance or backups
+  - Automated deployment scripts installing SQL features
+  - Approved administrative use of xp_cmdshell or CLR assemblies
+
 level: critical

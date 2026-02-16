@@ -6140,7 +6140,7 @@ a kiszűrési kísérletek azonosítása LOLBineken és gyanús szkripteken kere
 
 
 ---
-## Ultra-Pro Pre-OS Boot Manipulation (T1542)
+## OS előtti rendszerindítási manipuláció (T1542)
 - **ID:** `T1542.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -6148,8 +6148,9 @@ a kiszűrési kísérletek azonosítása LOLBineken és gyanús szkripteken kere
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a firmware vagy a rendszerbetöltő illetéktelen módosításait.Monitorok a
-az EFI partíció gyanús rögzítése, a firmware illetéktelen használata
-villogó eszközök és UEFI-változómanipuláció a nem szabványos szülőfolyamatokból.
+EFI partíció felszerelése, jogosulatlan firmware flash eszköz használata és
+Nem szabványos folyamatfákból kezdeményezett UEFI-változómanipuláció.
+Kiszűri a megbízható szállítók frissítő segédprogramjait, hogy csökkentse a hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

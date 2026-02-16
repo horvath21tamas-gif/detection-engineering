@@ -6459,7 +6459,7 @@ identifying exfiltration attempts via LOLBins and suspicious scripts.
 
 
 ---
-## Ultra-Pro Pre-OS Boot Manipulation (T1542)
+## Pre-OS Boot Manipulation (T1542)
 - **ID:** `T1542.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -6467,8 +6467,9 @@ identifying exfiltration attempts via LOLBins and suspicious scripts.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects unauthorized firmware or bootloader modifications. Monitors for 
-suspicious mounting of the EFI partition, unauthorized use of firmware 
-flashing tools, and UEFI variable manipulation from non-standard parent processes.
+EFI partition mounting, unauthorized firmware flashing tool usage, and 
+UEFI variable manipulation initiated from non-standard process trees. 
+Filters out trusted vendor update utilities to reduce false positives.
 
 
 #### 🚨 Response Playbook

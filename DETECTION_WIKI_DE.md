@@ -6140,7 +6140,7 @@ Identifizierung von Exfiltrationsversuchen über LOLBins und verdächtige Skript
 
 
 ---
-## Ultra-Pro Pre-OS-Boot-Manipulation (T1542)
+## Manipulation vor dem Betriebssystemstart (T1542)
 - **ID:** `T1542.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -6148,8 +6148,9 @@ Identifizierung von Exfiltrationsversuchen über LOLBins und verdächtige Skript
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt nicht autorisierte Firmware- oder Bootloader-Änderungen.Monitore für
-verdächtiges Mounten der EFI-Partition, unbefugte Nutzung der Firmware
-Flash-Tools und UEFI-Variablenmanipulation von nicht standardmäßigen übergeordneten Prozessen.
+EFI-Partitionsmontage, nicht autorisierte Verwendung von Firmware-Flash-Tools usw
+UEFI-Variablenmanipulation, initiiert von nicht standardmäßigen Prozessbäumen.
+Filtert Update-Dienstprogramme vertrauenswürdiger Anbieter heraus, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

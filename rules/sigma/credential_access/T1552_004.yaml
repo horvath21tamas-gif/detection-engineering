@@ -1,66 +1,149 @@
-title: Ultra-Pro High-Fidelity Private Key Discovery (T1552.004)
+title: Private Key Discovery (T1552.004)
 id: 9c73f483-f6ac-4c8a-bbce-b8d6d9304332
 status: stable
 description: |
-    Detects targeted discovery of private cryptographic keys (SSH, PGP, Certificates). 
-    Focuses on command-line content searches for private key headers and recursive 
-    directory traversal by untrusted processes.
+    Detects targeted discovery or collection attempts of private cryptographic
+    keys (SSH, PGP, TLS certificates). Focuses on recursive file enumeration,
+    private key header searches, sensitive directory traversal, encoding or
+    export behavior, and suspicious execution context.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1552/004/
 tags:
     - attack.credential_access
     - attack.t1552.004
+    - attack.discovery
+    - attack.exfiltration
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_content_headers:
+    selection_key_headers:
         CommandLine|contains:
             - 'BEGIN RSA PRIVATE'
             - 'BEGIN DSA PRIVATE'
             - 'BEGIN EC PRIVATE'
             - 'BEGIN OPENSSH PRIVATE'
             - 'BEGIN PGP PRIVATE'
-            - 'BEGIN PRIVATE KEY' 
+            - 'BEGIN PRIVATE KEY'
 
-    selection_extensions:
+    selection_key_artifacts:
         CommandLine|contains:
-            - '.ppk'   
-            - '.pem'   
+            - '.ppk'
+            - '.pem'
             - '.key'
-            - '.pfx'   
-            - 'id_rsa' 
+            - '.pfx'
+            - '.p12'
+            - 'id_rsa'
+            - 'id_dsa'
+            - 'id_ed25519'
 
-    selection_recursive:
-        - CommandLine|contains:
+    selection_sensitive_paths:
+        CommandLine|contains:
+            - '\.ssh\'
+            - '\AppData\Roaming\Microsoft\Crypto\'
+            - '\ProgramData\Microsoft\Crypto\'
+            - '\Users\'
+            - '\inetpub\'
+            - '\OpenSSL\'
+            - '\CertEnroll\'
+
+    selection_recursive_enumeration:
+        - CommandLine|contains|all:
             - 'findstr'
-            - '/s'    
-        - CommandLine|contains:
-            - 'grep'
-            - '-r'     
+            - '/s'
+        - CommandLine|contains|all:
+            - 'dir'
+            - '/s'
         - CommandLine|contains|all:
             - 'Get-ChildItem'
             - '-Recurse'
+        - CommandLine|contains|all:
+            - 'where'
+            - '/r'
+        - CommandLine|contains|all:
+            - 'grep'
+            - '-r'
 
-    selection_untrusted_context:
+    selection_export_or_encoding:
+        CommandLine|contains:
+            - 'base64'
+            - 'certutil -encode'
+            - 'Export-PfxCertificate'
+            - 'Get-Content'
+            - 'gc '
+            - ' | clip'
+            - ' > '
+            - 'scp '
+            - 'curl '
+            - 'Invoke-WebRequest'
+
+    selection_suspicious_context:
         ParentImage|endswith:
+            - '\wsmprovhost.exe'
+            - '\psexesvc.exe'
+            - '\wmiprvse.exe'
             - '\cmd.exe'
             - '\powershell.exe'
-            - '\wsmprovhost.exe'
-            - '\psexesvc.exe'    
-            - '\httpd.exe'       
+            - '\httpd.exe'
+            - '\php-cgi.exe'
         Image|endswith:
             - '\findstr.exe'
-            - '\grep.exe'
             - '\powershell.exe'
+            - '\cmd.exe'
+            - '\grep.exe'
 
-    filter_legit_tools:
-        username: 'NT AUTHORITY\SYSTEM'
+    selection_obfuscation:
+        CommandLine|contains:
+            - '-enc'
+            - '-EncodedCommand'
+            - 'IEX'
+            - 'Invoke-Expression'
+
+    selection_non_system_user:
+        User|not_contains:
+            - 'NT AUTHORITY\SYSTEM'
+            - 'NT AUTHORITY\LOCAL SERVICE'
+            - 'NT AUTHORITY\NETWORK SERVICE'
+
+    filter_legitimate_dev_activity:
         Image|contains:
             - '\OpenSSH\ssh-agent.exe'
             - '\Git\usr\bin\ssh.exe'
             - '\Microsoft Visual Studio\'
             - '\Windows\System32\certutil.exe'
+        ParentImage|endswith:
+            - '\explorer.exe'
+        User|not_contains:
+            - 'NT AUTHORITY'
 
-    condition: (selection_content_headers or selection_extensions) and selection_recursive and selection_untrusted_context and not filter_legit_tools
+    filter_certificate_management:
+        Image|endswith:
+            - '\mmc.exe'
+        CommandLine|contains:
+            - 'certlm.msc'
+            - 'certmgr.msc'
+
+    condition:
+        (selection_key_headers
+            or selection_key_artifacts)
+        and selection_sensitive_paths
+        and (selection_recursive_enumeration
+            or selection_export_or_encoding
+            or selection_obfuscation
+            or selection_suspicious_context)
+        and selection_non_system_user
+        and not filter_legitimate_dev_activity
+        and not filter_certificate_management
+
+falsepositives:
+    - Developer SSH key management
+    - Certificate export during legitimate administration
+    - Backup solutions scanning certificate stores
+    - PKI maintenance tasks
+
 level: high

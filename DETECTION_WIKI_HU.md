@@ -5791,16 +5791,17 @@ megbízható kezelési és frissítési folyamatok.
 
 
 ---
-## Ultra-Pro High-Fidelity erőforrás-kimerülés (T1499.004)
+## Erőforrás-kimerülés észlelése (T1499.004)
 - **ID:** `T1499_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Azonosítással észleli a célzott erőforrás-kimerülési kísérleteket (CPU/RAM/IO).
-végtelen hurokminták és hatalmas memóriafoglalási kísérletek
-gyanús folyamatvonalakból származnak.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Figyeléssel észleli a célzott erőforrás-kimerülési kísérleteket (CPU, RAM vagy IO).
+végtelen hurok konstrukciók, hatalmas memóriafoglalások és rekurzív folyamatok
+gyanús vagy nem szabványos szülőfolyamat-vonalból származnak.
+Kiszűri a törvényes automatizálást, a karbantartási szkripteket és a fejlesztői környezeteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

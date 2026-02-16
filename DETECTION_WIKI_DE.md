@@ -5791,16 +5791,17 @@ vertrauenswürdige Verwaltungs- und Aktualisierungsprozesse.
 
 
 ---
-## Ultra-Pro High-Fidelity-Ressourcenerschöpfung (T1499.004)
+## Erkennung von Ressourcenerschöpfung (T1499.004)
 - **ID:** `T1499_004.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezielte Versuche zur Ressourcenauslastung (CPU/RAM/IO) durch Identifizierung
-Endlosschleifenmuster und massive Speicherzuweisungsversuche
-aus verdächtigen Prozesslinien stammen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt gezielte Versuche zur Ressourcenauslastung (CPU, RAM oder IO) durch Überwachung
+Endlosschleifenkonstrukte, massive Speicherzuweisungen und rekursive Prozess-Spawns
+aus verdächtigen oder nicht standardmäßigen übergeordneten Prozesslinien stammen.
+Filtert legitime Automatisierung, Wartungsskripte und Entwicklungsumgebungen heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -6535,7 +6535,7 @@ Filters out legitimate OS repairs and BitLocker operations.
 
 
 ---
-## Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004)
+## Mainboard Boot Image & SPI Flash Tampering (T1542.004)
 - **ID:** `T1542_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -6544,7 +6544,8 @@ Filters out legitimate OS repairs and BitLocker operations.
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects unauthorized firmware manipulation by monitoring low-level hardware access 
 tools and driver registrations initiated from non-standard process chains. 
-Focuses on SPI flash writing and image injection attempts.
+Focuses on SPI flash writing and image injection attempts, while filtering 
+trusted management tools.
 
 
 #### 🚨 Response Playbook

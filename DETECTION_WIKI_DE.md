@@ -6212,7 +6212,7 @@ Filtert legitime Betriebssystemreparaturen und BitLocker-Vorgänge heraus.
 
 
 ---
-## Ultra-Pro Mainboard-Boot-Image und SPI-Flash-Manipulation (T1542.004)
+## Mainboard-Boot-Image und SPI-Flash-Manipulation (T1542.004)
 - **ID:** `T1542_004.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -6221,7 +6221,8 @@ Filtert legitime Betriebssystemreparaturen und BitLocker-Vorgänge heraus.
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt unbefugte Firmware-Manipulationen durch Überwachung des Hardwarezugriffs auf niedriger Ebene
 Tools und Fahrerregistrierungen, die aus nicht standardmäßigen Prozessketten initiiert werden.
-Konzentriert sich auf SPI-Flash-Schreib- und Image-Injection-Versuche.
+Konzentriert sich auf SPI-Flash-Schreib- und Image-Injection-Versuche beim Filtern
+vertrauenswürdige Verwaltungstools.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

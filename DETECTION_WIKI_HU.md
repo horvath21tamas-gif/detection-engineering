@@ -6212,7 +6212,7 @@ Kiszűri a jogos operációs rendszer javításokat és a BitLocker műveleteket
 
 
 ---
-## Ultra-Pro alaplapi rendszerindítási kép és SPI Flash-szabotázs (T1542.004)
+## Alaplapi rendszerindítási kép és SPI Flash-szabotázs (T1542.004)
 - **ID:** `T1542_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -6221,7 +6221,8 @@ Kiszűri a jogos operációs rendszer javításokat és a BitLocker műveleteket
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Az alacsony szintű hardver-hozzáférés figyelésével észleli a jogosulatlan firmware-manipulációt
 nem szabványos folyamatláncokból kezdeményezett eszközök és illesztőprogram-regisztrációk.
-Az SPI flash írásra és a képinjektálási kísérletekre összpontosít.
+Szűrés közben az SPI flash írásra és a képinjektálási kísérletekre összpontosít
+megbízható menedzsment eszközök.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

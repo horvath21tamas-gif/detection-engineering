@@ -5611,14 +5611,14 @@ nem megbízható folyamatvonalakból származó optimalizálási argumentumok.
 
 
 ---
-## Ultra-Pro High-Fidelity virtualizáció/Sandbox Evasion (T1497)
+## Virtualizáció/Sandbox Evasion (T1497)
 - **ID:** `T1497.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a kifinomult sandbox-kikerülést a gyors, több vektoros figyeléssel
-nem megbízható folyamatok által kezdeményezett virtualizációs ellenőrzések (BIOS, MAC, CPU, Disk).
-gyanús könyvtárakon belül.
+- **Leírás:** Érzékeli a kifinomult sandbox-elkerülést a gyors, több vektoros figyeléssel
+virtualizációs ellenőrzések (BIOS, MAC, CPU, lemez) és késleltetési taktika
+gyanús könyvtárakon belüli nem megbízható folyamatok indították el.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

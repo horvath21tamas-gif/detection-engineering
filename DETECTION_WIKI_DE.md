@@ -5611,14 +5611,14 @@ Optimierungsargumente, die aus nicht vertrauenswürdigen Prozesslinien stammen.
 
 
 ---
-## Ultra-Pro High-Fidelity-Virtualisierung/Sandbox-Umgehung (T1497)
+## Virtualisierung/Sandbox-Umgehung (T1497)
 - **ID:** `T1497.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt raffinierte Sandbox-Umgehung durch Überwachung auf schnelle Multivektoren
-Virtualisierungsprüfungen (BIOS, MAC, CPU, Festplatte), die von nicht vertrauenswürdigen Prozessen initiiert werden
-in verdächtigen Verzeichnissen.
+- **Beschreibung:** Erkennt raffinierte Sandbox-Umgehung durch schnelle Überwachung mehrerer Vektoren
+Virtualisierungsprüfungen (BIOS, MAC, CPU, Festplatte) und Zeitverzögerungstaktiken
+initiiert durch nicht vertrauenswürdige Prozesse in verdächtigen Verzeichnissen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

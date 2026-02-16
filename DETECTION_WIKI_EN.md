@@ -5900,14 +5900,14 @@ optimization arguments originating from untrusted process lineages.
 
 
 ---
-## Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497)
+## Virtualization/Sandbox Evasion (T1497)
 - **ID:** `T1497.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects sophisticated sandbox evasion by monitoring for rapid, multi-vector 
-virtualization checks (BIOS, MAC, CPU, Disk) initiated by untrusted processes 
-within suspicious directories.
+- **Leírás:** Detects sophisticated sandbox evasion by monitoring rapid, multi-vector 
+virtualization checks (BIOS, MAC, CPU, Disk) and time-delay tactics 
+initiated by untrusted processes within suspicious directories.
 
 
 #### 🚨 Response Playbook

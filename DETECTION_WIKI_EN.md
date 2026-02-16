@@ -5569,16 +5569,14 @@ infrastructure, followed by the creation of temporary template files.
 
 
 ---
-## Ultra-Pro High-Fidelity Permissions Modification (T1222)
+## Windows Permissions Modification (T1222)
 - **ID:** `T1222.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects suspicious file permission modifications by identifying native tools 
-(icacls, takeown) used with broad access flags (Full Control, Everyone) 
-initiated by non-standard parent processes or from suspicious paths.
+- **Leírás:** Detects suspicious file permission modifications by identifying the use of native  tools (icacls, takeown, cacls, attrib) with broad access flags (Full Control, Everyone)  initiated by non-standard parent processes or from suspicious paths. Filters out  trusted system installers and management operations to reduce false positives.
 
 
 #### 🚨 Response Playbook

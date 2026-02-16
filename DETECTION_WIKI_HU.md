@@ -5298,16 +5298,14 @@ infrastruktúra, majd ideiglenes sablonfájlok létrehozása következik.
 
 
 ---
-## Ultra-Pro High-Fidelity engedélyek módosítása (T1222)
+## Windows engedélyek módosítása (T1222)
 - **ID:** `T1222.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A natív eszközök azonosításával észleli a gyanús fájlengedély-módosításokat
-(icacls, takeown) széles hozzáférésű jelzőkkel használva (Teljes felügyelet, Mindenki)
-nem szabványos szülői folyamatok vagy gyanús útvonalak kezdeményezték.
+- **Leírás:** Érzékeli a gyanús fájlengedély-módosításokat azáltal, hogy azonosítja a natív eszközök (icacls, takeown, cacls, attrib) használatát széles hozzáférésű jelzőkkel (Teljes felügyelet, Mindenki), amelyeket nem szabványos szülőfolyamatok vagy gyanús útvonalak kezdeményeztek.Kiszűri a megbízható rendszertelepítőket és a felügyeleti műveleteket, hogy csökkentse a hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

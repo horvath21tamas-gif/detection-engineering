@@ -5298,16 +5298,14 @@ Infrastruktur, gefolgt von der Erstellung temporärer Vorlagendateien.
 
 
 ---
-## Änderung der Ultra-Pro High-Fidelity-Berechtigungen (T1222)
+## Änderung der Windows-Berechtigungen (T1222)
 - **ID:** `T1222.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt verdächtige Dateiberechtigungsänderungen durch Identifizierung nativer Tools
-(icacls, takeown) wird mit breiten Zugriffsflags (Vollzugriff, Jeder) verwendet
-initiiert durch nicht standardmäßige übergeordnete Prozesse oder über verdächtige Pfade.
+- **Beschreibung:** Erkennt verdächtige Dateiberechtigungsänderungen, indem die Verwendung nativer Tools (icacls, takeown, cacls, attrib) mit breiten Zugriffsflags (Vollzugriff, Jeder) identifiziert wird, die von nicht standardmäßigen übergeordneten Prozessen oder von verdächtigen Pfaden aus initiiert werden.Filtert vertrauenswürdige Systeminstallationsprogramme und Verwaltungsvorgänge heraus, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

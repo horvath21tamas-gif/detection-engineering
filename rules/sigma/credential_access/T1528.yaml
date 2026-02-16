@@ -1,20 +1,29 @@
-title: Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528)
-id: 8d4356f7-7cd2-48d9-9af5-0feafca2256a
+title: Application Token & Session Hijacking Detection (T1528)
+id: 43f67aa0-6c2c-4580-863e-af19c84137fc
 status: stable
 description: |
-    Detects unauthorized extraction of application access tokens and session cookies. 
-    Monitors for suspicious access to Cloud CLI configurations (Azure, AWS, GCP) 
-    and browser-based credential stores by untrusted processes.
+    Detects unauthorized extraction of application access tokens and browser session cookies.
+    Monitors suspicious access to cloud CLI credentials (Azure, AWS, GCP) and browser credential
+    stores, originating from untrusted processes or non-standard parent process lineages. 
+    Flags attempts to copy, extract, or exfiltrate sensitive token data.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1528/
 tags:
     - attack.credential_access
     - attack.t1528
+    - attack.cloud
+    - attack.exfiltration
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_cloud_config:
+
+    selection_cloud_config_access:
         CommandLine|contains:
             - '\.azure\accessTokens.json'
             - '\.azure\azureProfile.json'
@@ -22,49 +31,67 @@ detection:
             - '\.aws\config'
             - '\.config\gcloud\'
 
-    selection_browser_theft:
+    selection_browser_token_theft:
         CommandLine|contains:
             - '\User Data\Local State'
             - '\User Data\Default\Cookies'
             - '\User Data\Default\Network\Cookies'
             - '\User Data\Default\Login Data'
 
-    selection_offensive_logic:
-        - Image|endswith:
+    selection_offensive_tools:
+        Image|endswith:
             - '\curl.exe'
             - '\powershell.exe'
-            - '\certutil.exe'   
-            - '\sqlite3.exe'    
-        - CommandLine|contains:
-            - 'roadtools'       
+            - '\pwsh.exe'
+            - '\certutil.exe'
+            - '\sqlite3.exe'
+            - '\python.exe'
+        CommandLine|contains:
+            - 'roadtools'
             - 'extract-token'
             - 'cookie-stealer'
             - 'copy-item'
+            - 'Invoke-WebRequest'
+            - 'Base64'
 
-    selection_untrusted_parent:
+    selection_untrusted_parent_process:
         ParentImage|endswith:
             - '\cmd.exe'
             - '\powershell.exe'
             - '\wsmprovhost.exe'
             - '\explorer.exe'
+            - '\taskhostw.exe'
         Image|endswith:
             - '\type.exe'
             - '\findstr.exe'
             - '\copy.exe'
             - '\robocopy.exe'
 
-    filter_legit_browsers:
+    filter_legit_browser_processes:
         Image|endswith:
             - '\chrome.exe'
             - '\msedge.exe'
-            - '\brave.exe'
             - '\firefox.exe'
-    
-    filter_cloud_sdk:
+            - '\brave.exe'
+            - '\opera.exe'
+
+    filter_trusted_cloud_sdks:
         Image|contains:
             - '\Google\Cloud SDK\'
             - '\Amazon\AWSCLIV2\'
             - '\Microsoft SDKs\Azure\'
+            - '\HashiCorp\Terraform\'
 
-    condition: (selection_cloud_config or selection_browser_theft or selection_offensive_logic) and selection_untrusted_parent and not (filter_legit_browsers or filter_cloud_sdk)
+    condition: 
+        (selection_cloud_config_access 
+        or selection_browser_token_theft 
+        or selection_offensive_tools) 
+        and selection_untrusted_parent_process 
+        and not (filter_legit_browser_processes or filter_trusted_cloud_sdks)
+
+falsepositives:
+    - Developers or automation scripts using official Cloud SDK tooling
+    - IT administrators accessing credentials during legitimate audits
+    - Backup or migration scripts reading local browser/CLI data
+
 level: critical

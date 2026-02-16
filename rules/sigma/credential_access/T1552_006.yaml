@@ -1,53 +1,111 @@
-title: Ultra-Pro High-Fidelity GPP Password Discovery (T1552.006)
+title: Credentials in Files Discovery (T1552.006)
 id: 03797fb4-7657-47c9-830b-0849d789c628
 status: stable
 description: |
-    Detects unauthorized manual or scripted discovery of passwords in Group Policy Preferences. 
-    Focuses on non-system processes performing string searches for 'cpassword' within 
-    the SYSVOL share, identifying tools like PowerSploit, Empire, or manual LOLBin usage.
+    Detects unauthorized manual or scripted discovery of credentials stored
+    in configuration or policy files, including Group Policy Preferences (GPP),
+    unattended installation files, web.config, and other plaintext or weakly
+    protected credential artifacts. Focuses on string-search activity,
+    sensitive file targeting, and remote execution context while excluding
+    legitimate system processing.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1552/006/
 tags:
     - attack.credential_access
     - attack.t1552.006
+    - attack.discovery
+    - attack.lateral_movement
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_keyword:
+    selection_credential_keywords:
         CommandLine|contains:
             - 'cpassword'
-
-    selection_paths:
-        CommandLine|contains:
-            - 'SYSVOL'
-            - 'Policies'
+            - 'password='
+            - 'pwd='
+            - 'userPassword'
+            - 'SecureString'
+            - 'ConvertTo-SecureString'
+            - 'Get-GPPPassword'
+            - 'unattend.xml'
+            - 'sysprep.xml'
+            - 'web.config'
             - 'Groups.xml'
             - 'ScheduledTasks.xml'
+            - 'Services.xml'
 
-    selection_tools:
-        - Image|endswith:
+    selection_sensitive_paths:
+        CommandLine|contains:
+            - '\SYSVOL\'
+            - '\Policies\'
+            - '\Windows\Panther\'
+            - '\Windows\System32\sysprep\'
+            - '\inetpub\wwwroot\'
+            - '\ProgramData\'
+            - '\Users\'
+
+    selection_search_tools:
+        Image|endswith:
             - '\findstr.exe'
+            - '\find.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\cmd.exe'
             - '\grep.exe'
-            - '\powershell.exe'
-            - '\cmd.exe'
-        - CommandLine|contains:
-            - 'Get-GPPPassword' 
+        CommandLine|contains:
             - 'Select-String'
+            - 'Get-ChildItem'
+            - 'dir '
             - 'type '
+            - 'gc '
 
-    selection_untrusted_parent:
+    selection_obfuscated_execution:
+        CommandLine|contains:
+            - '-enc'
+            - '-EncodedCommand'
+            - 'IEX'
+            - 'Invoke-Expression'
+            - 'DownloadString'
+
+    selection_remote_context:
         ParentImage|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\wsmprovhost.exe' 
-            - '\psexesvc.exe'   
+            - '\wsmprovhost.exe'
+            - '\psexesvc.exe'
+            - '\wmiprvse.exe'
 
-    filter_legit_service:
-        username: 'NT AUTHORITY\SYSTEM'
+    selection_non_system_user:
+        User|not_contains:
+            - 'NT AUTHORITY\SYSTEM'
+            - 'NT AUTHORITY\LOCAL SERVICE'
+            - 'NT AUTHORITY\NETWORK SERVICE'
+
+    filter_legitimate_system:
         Image|endswith:
             - '\svchost.exe'
             - '\taskhostw.exe'
+            - '\gpscript.exe'
+        User|startswith:
+            - 'NT AUTHORITY\SYSTEM'
 
-    condition: selection_keyword and selection_tools and selection_paths and selection_untrusted_parent and not filter_legit_service
+    condition:
+        selection_credential_keywords
+        and selection_sensitive_paths
+        and (selection_search_tools
+            or selection_obfuscated_execution
+            or selection_remote_context)
+        and selection_non_system_user
+        and not filter_legitimate_system
+
+falsepositives:
+    - Administrative troubleshooting scripts
+    - Security audits scanning for plaintext credentials
+    - Configuration management validation jobs
+    - Legacy vulnerability assessment scans
+
 level: critical

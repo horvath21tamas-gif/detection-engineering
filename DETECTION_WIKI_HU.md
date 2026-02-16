@@ -5979,16 +5979,17 @@ a rendellenes végrehajtási környezetekre összpontosítva (interaktív shell 
 
 
 ---
-## Ultra-Pro High-Fidelity alkalmazástoken és munkamenet-eltérítés (T1528)
+## Alkalmazási token és munkamenet-eltérítés észlelése (T1528)
 - **ID:** `T1528.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az alkalmazás-hozzáférési tokenek és a munkamenet-sütik jogosulatlan kimásolását.
-Figyeli a gyanús hozzáférést a Cloud CLI konfigurációkhoz (Azure, AWS, GCP)
-és böngésző alapú hitelesítő adatok tárolására nem megbízható folyamatok.
+- **Leírás:** Érzékeli az alkalmazás-hozzáférési tokenek és a böngésző munkamenet-cookie-inak jogosulatlan kimásolását.
+Figyeli a gyanús hozzáférést a felhőalapú CLI hitelesítő adatokhoz (Azure, AWS, GCP) és a böngésző hitelesítő adataihoz
+tárolók, amelyek nem megbízható folyamatokból vagy nem szabványos szülőfolyamat-vonalakból származnak.
+A megjelölések megkísérlik másolni, kinyerni vagy kiszűrni az érzékeny tokenadatokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

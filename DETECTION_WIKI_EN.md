@@ -6289,16 +6289,17 @@ and output redirection patterns used for automated harvesting.
 
 
 ---
-## Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528)
+## Application Token & Session Hijacking Detection (T1528)
 - **ID:** `T1528.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized extraction of application access tokens and session cookies. 
-Monitors for suspicious access to Cloud CLI configurations (Azure, AWS, GCP) 
-and browser-based credential stores by untrusted processes.
+- **Leírás:** Detects unauthorized extraction of application access tokens and browser session cookies.
+Monitors suspicious access to cloud CLI credentials (Azure, AWS, GCP) and browser credential
+stores, originating from untrusted processes or non-standard parent process lineages. 
+Flags attempts to copy, extract, or exfiltrate sensitive token data.
 
 
 #### 🚨 Response Playbook

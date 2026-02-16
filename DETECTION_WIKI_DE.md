@@ -5979,16 +5979,17 @@ und Ausgabeumleitungsmuster, die für die automatisierte Ernte verwendet werden.
 
 
 ---
-## Ultra-Pro High-Fidelity-Anwendungstoken und Session-Hijacking (T1528)
+## Erkennung von Anwendungs-Token und Session-Hijacking (T1528)
 - **ID:** `T1528.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die unbefugte Extraktion von Anwendungszugriffstokens und Sitzungscookies.
-Überwacht verdächtigen Zugriff auf Cloud-CLI-Konfigurationen (Azure, AWS, GCP)
-und browserbasierte Anmeldeinformationsspeicher durch nicht vertrauenswürdige Prozesse.
+- **Beschreibung:** Erkennt die unbefugte Extraktion von Anwendungszugriffstokens und Browser-Sitzungscookies.
+Überwacht verdächtigen Zugriff auf Cloud-CLI-Anmeldeinformationen (Azure, AWS, GCP) und Browser-Anmeldeinformationen
+Stores, die aus nicht vertrauenswürdigen Prozessen oder nicht standardmäßigen übergeordneten Prozesslinien stammen.
+Kennzeichnet Versuche, vertrauliche Token-Daten zu kopieren, zu extrahieren oder zu exfiltrieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

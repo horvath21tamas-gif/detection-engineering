@@ -7155,14 +7155,16 @@ die SYSVOL-Freigabe, die Tools wie PowerSploit, Empire oder die manuelle LOLBin-
 
 
 ---
-## Ultra-Pro High-Fidelity Container Secret Discovery (T1552.007)
+## Entdeckung von Containergeheimnissen (T1552.007)
 - **ID:** `T1552_007.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt die gezielte Entdeckung von Geheimnissen (K8s-Token, Cloud-Schlüssel, Env-Variablen) in Containern.
-Filtert legitime Einstiegspunktskripte und Überwachungsagenten und konzentriert sich dabei auf
-interaktive Shell-Sitzungen und anomale Befehlsverkettung (z. B. env | grep).
+- **Beschreibung:** Erkennt die gezielte Entdeckung sensibler Anmeldeinformationen in Containern.
+einschließlich Kubernetes-Dienstkonto-Tokens, gemountete Geheimnisse, Cloud
+Anbieterschlüssel und Umgebungsvariablen.Der Fokus liegt auf Interaktivität
+Shell-Ausführung, Befehlsverkettung und abnormale Prozessherkunft
+während legitime Einstiegspunkte gefiltert und Aktivitäten überwacht werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

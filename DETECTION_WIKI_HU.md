@@ -7155,14 +7155,16 @@ a SYSVOL megosztás, amely azonosítja az olyan eszközöket, mint a PowerSploit
 
 
 ---
-## Ultra-Pro High-Fidelity Container Secret Discovery (T1552.007)
+## Container Secret Discovery (T1552.007)
 - **ID:** `T1552_007.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a titkok célzott felfedezését (K8s tokenek, felhőkulcsok, Env vars) a tárolókban.
-Szűri a jogos belépési pont szkripteket és a figyelő ügynököket, miközben azokra összpontosít
-interaktív shell-munkamenetek és rendellenes parancsláncolás (pl. env | grep).
+- **Leírás:** Érzékeli az érzékeny hitelesítő adatok célzott felfedezését a tárolókban,
+beleértve a Kubernetes szolgáltatásfiók-tokeneket, a csatolt titkokat, a felhőt
+szolgáltatói kulcsok és környezeti változók.Az interaktívra összpontosít
+shell-végrehajtás, parancsláncolás és abnormális folyamatsor
+miközben szűri a legitim belépési pontot és figyeli a tevékenységet.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

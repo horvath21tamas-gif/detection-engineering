@@ -7535,14 +7535,16 @@ the SYSVOL share, identifying tools like PowerSploit, Empire, or manual LOLBin u
 
 
 ---
-## Ultra-Pro High-Fidelity Container Secret Discovery (T1552.007)
+## Container Secret Discovery (T1552.007)
 - **ID:** `T1552_007.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects targeted discovery of secrets (K8s tokens, Cloud keys, Env vars) within containers. 
-Filters legitimate entrypoint scripts and monitoring agents while focusing on 
-interactive shell sessions and anomalous command chaining (e.g., env | grep).
+- **Leírás:** Detects targeted discovery of sensitive credentials inside containers,
+including Kubernetes service account tokens, mounted secrets, cloud
+provider keys, and environment variables. Focuses on interactive
+shell execution, command chaining, and abnormal process lineage
+while filtering legitimate entrypoint and monitoring activity.
 
 
 #### 🚨 Response Playbook

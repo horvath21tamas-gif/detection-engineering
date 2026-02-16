@@ -80,7 +80,7 @@ detection:
             - '\wmiprvse.exe'
 
     selection_non_system_user:
-        User|not_contains:
+        User|contains:
             - 'NT AUTHORITY\SYSTEM'
             - 'NT AUTHORITY\LOCAL SERVICE'
             - 'NT AUTHORITY\NETWORK SERVICE'
@@ -99,7 +99,7 @@ detection:
         and (selection_search_tools
             or selection_obfuscated_execution
             or selection_remote_context)
-        and selection_non_system_user
+        and not selection_non_system_user
         and not filter_legitimate_system
 
 falsepositives:

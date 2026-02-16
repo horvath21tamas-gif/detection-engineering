@@ -39,21 +39,21 @@ detection:
             - 'BEGIN PGP PRIVATE'
 
     selection_methods:
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'findstr'
             - '/s'
             - '/i'
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'grep'
             - '-r'
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'Get-ChildItem'
             - '-Recurse'
             - '-Include'
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'dir'
             - '/s'
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'where'
             - '/r'
 
@@ -103,7 +103,7 @@ detection:
             - '\powershell.exe'
 
     selection_non_system_user:
-        User|not_contains:
+        User|contains:
             - 'NT AUTHORITY\SYSTEM'
             - 'NT AUTHORITY\LOCAL SERVICE'
             - 'NT AUTHORITY\NETWORK SERVICE'
@@ -120,7 +120,7 @@ detection:
     condition:
         (selection_keywords or (selection_methods and selection_targets))
         and selection_context
-        and (selection_exfiltration or selection_non_system_user)
+        and (selection_exfiltration or not selection_non_system_user)
         and not filter_legit_tools
 
 falsepositives:

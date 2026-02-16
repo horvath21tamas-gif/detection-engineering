@@ -381,7 +381,7 @@
 | T1547.014 | CRITICAL | High-Fidelity Active Setup Persistence (T1547.014) |
 | T1547.015 | HIGH | High-Fidelity COM Hijacking Persistence (T1547.015) |
 | T1548 | CRITICAL | Ultra-Pro Privilege Escalation via Registry Hijacking (T1548.002) |
-| T1548.001 | HIGH | Ultra-Pro Setuid/Setgid Bit Manipulation (T1548.001) |
+| T1548.001 | HIGH | Setuid/Setgid Bit Manipulation (T1548.001) |
 | T1548.002 | HIGH | Ultra-Pro Privilege Escalation via Registry Hijacking (T1548.002), UAC Bypass via Fodhelper Registry Hijack (High Fidelity) |
 | T1548.003 | CRITICAL | Ultra-Pro Sudoers Manipulation and Sudo Abuse (T1548.003) |
 | T1548.004 | CRITICAL | Ultra-Pro AppleScript Privilege Escalation (T1548.004) |

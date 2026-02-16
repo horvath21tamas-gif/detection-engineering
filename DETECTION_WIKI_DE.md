@@ -375,7 +375,7 @@
 - [High-Fidelity Active Setup Persistence (T1547.014)](#high-fidelity-active-setup-persistence-(t1547014))
 - [High-Fidelity-COM-Hijacking-Persistenz (T1547.015)](#high-fidelity-com-hijacking-persistenz-(t1547015))
 - [Ultra-Pro-Berechtigungsausweitung durch Registry-Hijacking (T1548.002)](#ultra-pro-berechtigungsausweitung-durch-registry-hijacking-(t1548002))
-- [Ultra-Pro Setuid/Setgid-Bit-Manipulation (T1548.001)](#ultra-pro-setuidsetgid-bit-manipulation-(t1548001))
+- [Setuid/Setgid-Bit-Manipulation (T1548.001)](#setuidsetgid-bit-manipulation-(t1548001))
 - [UAC-Umgehung über Fodhelper Registry Hijack (High Fidelity)](#uac-umgehung-über-fodhelper-registry-hijack-(high-fidelity))
 - [Ultra-Pro-Sudo-Manipulation und Sudo-Missbrauch (T1548.003)](#ultra-pro-sudo-manipulation-und-sudo-missbrauch-(t1548003))
 - [Ultra-Pro-AppleScript-Berechtigungseskalation (T1548.004)](#ultra-pro-applescript-berechtigungseskalation-(t1548004))
@@ -6874,14 +6874,14 @@ systeminitiierte Änderungen, um Fehlalarme zu minimieren.
 
 
 ---
-## Ultra-Pro Setuid/Setgid-Bit-Manipulation (T1548.001)
+## Setuid/Setgid-Bit-Manipulation (T1548.001)
 - **ID:** `T1548_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt eine unbefugte SUID/SGID-Bit-Eskalation durch Überwachung von chmod/chown
-Ausführung in weltweit beschreibbaren Verzeichnissen und verdächtige Aufklärung
-Muster, während legitime Paketmanager herausgefiltert werden.
+- **Beschreibung:** Erkennt eine unbefugte SUID/SGID-Bit-Eskalation durch Überwachung der chmod/chown-Ausführung
+in weltweit beschreibbaren Verzeichnissen, verdächtigen Aktionen mit Shell-Ursprung und Aufklärung
+Muster mithilfe von „find“ entfernen und dabei vertrauenswürdige Paketmanager und Automatisierungstools ausschließen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

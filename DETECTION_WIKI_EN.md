@@ -375,7 +375,7 @@
 - [High-Fidelity Active Setup Persistence (T1547.014)](#high-fidelity-active-setup-persistence-(t1547014))
 - [High-Fidelity COM Hijacking Persistence (T1547.015)](#high-fidelity-com-hijacking-persistence-(t1547015))
 - [Ultra-Pro Privilege Escalation via Registry Hijacking (T1548.002)](#ultra-pro-privilege-escalation-via-registry-hijacking-(t1548002))
-- [Ultra-Pro Setuid/Setgid Bit Manipulation (T1548.001)](#ultra-pro-setuidsetgid-bit-manipulation-(t1548001))
+- [Setuid/Setgid Bit Manipulation (T1548.001)](#setuidsetgid-bit-manipulation-(t1548001))
 - [UAC Bypass via Fodhelper Registry Hijack (High Fidelity)](#uac-bypass-via-fodhelper-registry-hijack-(high-fidelity))
 - [Ultra-Pro Sudoers Manipulation and Sudo Abuse (T1548.003)](#ultra-pro-sudoers-manipulation-and-sudo-abuse-(t1548003))
 - [Ultra-Pro AppleScript Privilege Escalation (T1548.004)](#ultra-pro-applescript-privilege-escalation-(t1548004))
@@ -7237,14 +7237,14 @@ system-initiated changes to minimize false positives.
 
 
 ---
-## Ultra-Pro Setuid/Setgid Bit Manipulation (T1548.001)
+## Setuid/Setgid Bit Manipulation (T1548.001)
 - **ID:** `T1548_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects unauthorized SUID/SGID bit escalation by monitoring chmod/chown 
-execution in world-writable directories and suspicious reconnaissance 
-patterns, while filtering out legitimate package managers.
+- **Leírás:** Detects unauthorized SUID/SGID bit escalation by monitoring chmod/chown execution 
+in world-writable directories, suspicious shell-origin actions, and reconnaissance 
+patterns using find, while excluding trusted package managers and automation tools.
 
 
 #### 🚨 Response Playbook

@@ -398,8 +398,8 @@
 - [Ultra-Pro High-Fidelity macOS Gatekeeper és Quarantine Bypass (T1553.001)](#ultra-pro-high-fidelity-macos-gatekeeper-és-quarantine-bypass-(t1553001))
 - [Ultra-Pro High-Fidelity SIP-eltérítés és megbízhatóság szubverzió (T1553.002)](#ultra-pro-high-fidelity-sip-eltérítés-és-megbízhatóság-szubverzió-(t1553002))
 - [Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003)](#ultra-pro-high-fidelity-windows-catalog-database-subversion-(t1553003))
-- [Ultra-Pro High-Fidelity Root Certificate Injection (T1553.004)](#ultra-pro-high-fidelity-root-certificate-injection-(t1553004))
-- [Ultra-Pro High-Fidelity MotW bypass & Zone Subversion (T1553.005)](#ultra-pro-high-fidelity-motw-bypass-&-zone-subversion-(t1553005))
+- [Root Certificate Injection (T1553.004)](#root-certificate-injection-(t1553004))
+- [Mark-of-the-Web (MotW) bypass & Zone Subversion Detection (T1553.005)](#mark-of-the-web-(motw)-bypass-&-zone-subversion-detection-(t1553005))
 - [Windows Code Integrity & DSE Subversion Detection (T1553.006)](#windows-code-integrity-&-dse-subversion-detection-(t1553006))
 - [Ultra-Pro Client Bináris Integritás Kompromisszum (T1554)](#ultra-pro-client-bináris-integritás-kompromisszum-(t1554))
 - [Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)](#nem-böngészős-folyamat-hozzáférése-a-böngésző-hitelesítőadat-tárolóihoz-(high-fidelity))
@@ -7257,16 +7257,18 @@ az aláíratlan rosszindulatú programok az operációs rendszer által aláírt
 
 
 ---
-## Ultra-Pro High-Fidelity Root Certificate Injection (T1553.004)
+## Root Certificate Injection (T1553.004)
 - **ID:** `T1553_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a gyökértanúsítvány programozott telepítését a
-Megbízható Root üzlet.A magas kockázatú parancssori argumentumokra összpontosít és
-gyanús folyamatvonalakat a gyakori téves pozitívumok kiküszöbölésére.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a gyökértanúsítvány magas kockázatú programozott telepítését
+a Windows Trusted Root vagy AuthRoot áruházaiban.A gyanúsra összpontosít
+parancssori jelzők, nem szabványos tanúsítványfájlok helyei és
+nem mindennapi szülő-gyerek folyamat kapcsolatokat jelentősen csökkenteni
+vállalati telepítési téves pozitív eredmények.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

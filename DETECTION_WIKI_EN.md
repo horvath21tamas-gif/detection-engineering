@@ -398,8 +398,8 @@
 - [Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001)](#ultra-pro-high-fidelity-macos-gatekeeper-and-quarantine-bypass-(t1553001))
 - [Ultra-Pro High-Fidelity SIP Hijacking and Trust Subversion (T1553.002)](#ultra-pro-high-fidelity-sip-hijacking-and-trust-subversion-(t1553002))
 - [Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003)](#ultra-pro-high-fidelity-windows-catalog-database-subversion-(t1553003))
-- [Ultra-Pro High-Fidelity Root Certificate Injection (T1553.004)](#ultra-pro-high-fidelity-root-certificate-injection-(t1553004))
-- [Ultra-Pro High-Fidelity MotW Bypass & Zone Subversion (T1553.005)](#ultra-pro-high-fidelity-motw-bypass-&-zone-subversion-(t1553005))
+- [Root Certificate Injection (T1553.004)](#root-certificate-injection-(t1553004))
+- [Mark-of-the-Web (MotW) Bypass & Zone Subversion Detection (T1553.005)](#mark-of-the-web-(motw)-bypass-&-zone-subversion-detection-(t1553005))
 - [Windows Code Integrity & DSE Subversion Detection (T1553.006)](#windows-code-integrity-&-dse-subversion-detection-(t1553006))
 - [Ultra-Pro Client Binary Integrity Compromise (T1554)](#ultra-pro-client-binary-integrity-compromise-(t1554))
 - [Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity)](#nem-böngészős-folyamat-hozzáférése-a-böngésző-hitelesítőadat-tárolóihoz-(high-fidelity))
@@ -7643,16 +7643,18 @@ unsigned malware from appearing as validly signed by the OS.
 
 
 ---
-## Ultra-Pro High-Fidelity Root Certificate Injection (T1553.004)
+## Root Certificate Injection (T1553.004)
 - **ID:** `T1553_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the programmatic installation of a Root Certificate into the 
-Trusted Root store. Focuses on high-risk command-line arguments and 
-suspicious process lineages to eliminate common false positives.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-risk programmatic installation of a Root Certificate into
+the Windows Trusted Root or AuthRoot stores. Focuses on suspicious
+command-line flags, non-standard certificate file locations, and
+uncommon parent-child process relationships to significantly reduce
+enterprise deployment false positives.
 
 
 #### 🚨 Response Playbook

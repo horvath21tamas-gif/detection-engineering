@@ -6,7 +6,7 @@ Ez a jelentés automatikusan készült **628** szabály alapján.
 | :--- | :---: | :--- |
 | Belépési pont (`initial-access`) | 0 | `░░░░░░░░░░` |
 | Végrehajtás (`execution`) | 38 | `███████░░░` |
-| Perzisztencia (`persistence`) | 135 | `██████████` |
+| Perzisztencia (`persistence`) | 136 | `██████████` |
 | Jogosultság kiterjesztés (`privilege-escalation`) | 0 | `░░░░░░░░░░` |
 | Védelem elkerülése (`defense-evasion`) | 0 | `░░░░░░░░░░` |
 | Hitelesítő adatok megszerzése (`credential-access`) | 0 | `░░░░░░░░░░` |

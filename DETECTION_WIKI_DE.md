@@ -398,8 +398,8 @@
 - [Ultra-Pro High-Fidelity macOS Gatekeeper und Quarantäne-Bypass (T1553.001)](#ultra-pro-high-fidelity-macos-gatekeeper-und-quarantäne-bypass-(t1553001))
 - [Ultraprofessionelles High-Fidelity-SIP-Hijacking und Trust-Subversion (T1553.002)](#ultraprofessionelles-high-fidelity-sip-hijacking-und-trust-subversion-(t1553002))
 - [Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003)](#ultra-pro-high-fidelity-windows-catalog-database-subversion-(t1553003))
-- [Ultra-Pro High-Fidelity-Root-Zertifikat-Injektion (T1553.004)](#ultra-pro-high-fidelity-root-zertifikat-injektion-(t1553004))
-- [Ultra-Pro High-Fidelity MotW Bypass & Zone Subversion (T1553.005)](#ultra-pro-high-fidelity-motw-bypass-&-zone-subversion-(t1553005))
+- [Root-Zertifikat-Injection (T1553.004)](#root-zertifikat-injection-(t1553004))
+- [Mark-of-the-Web (MotW)-Umgehung und Zonensubversion-Erkennung (T1553.005)](#mark-of-the-web-(motw)-umgehung-und-zonensubversion-erkennung-(t1553005))
 - [Windows-Codeintegrität und DSE-Subversion-Erkennung (T1553.006)](#windows-codeintegrität-und-dse-subversion-erkennung-(t1553006))
 - [Kompromittierung der Binärintegrität des Ultra-Pro-Clients (T1554)](#kompromittierung-der-binärintegrität-des-ultra-pro-clients-(t1554))
 - [Nicht-Browser-Prozesszugriff auf Browser-Anmeldeinformationsspeicher (High Fidelity)](#nicht-browser-prozesszugriff-auf-browser-anmeldeinformationsspeicher-(high-fidelity))
@@ -7257,16 +7257,18 @@ verhindert, dass nicht signierte Malware als vom Betriebssystem gültig signiert
 
 
 ---
-## Ultra-Pro High-Fidelity-Root-Zertifikat-Injektion (T1553.004)
+## Root-Zertifikat-Injection (T1553.004)
 - **ID:** `T1553_004.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die programmgesteuerte Installation eines Stammzertifikats im
-Vertrauenswürdiger Root-Store.Konzentriert sich auf Befehlszeilenargumente mit hohem Risiko und
-verdächtige Prozesslinien, um häufige Fehlalarme zu eliminieren.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die risikoreiche programmgesteuerte Installation eines Stammzertifikats in
+die Windows Trusted Root- oder AuthRoot-Speicher.Konzentriert sich auf Verdächtige
+Befehlszeilenflags, nicht standardmäßige Speicherorte für Zertifikatsdateien und
+Ungewöhnliche Eltern-Kind-Prozessbeziehungen werden deutlich reduziert
+Fehlalarme bei der Unternehmensbereitstellung.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

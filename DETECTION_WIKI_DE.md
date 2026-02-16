@@ -5911,16 +5911,17 @@ nicht vertrauenswürdige Prozesse und nicht standardmäßige Dateipfade.
 
 
 ---
-## Ultra-Pro High-Fidelity Software Discovery (T1518)
+## Software-Discovery-Erkennung (T1518)
 - **ID:** `T1518.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezielte Softwareerkennung mit Schwerpunkt auf der Identifizierung von Sicherheitsprodukten.
-Verwendet Gating auf Integritätsebene, Korrelation zwischen übergeordneten Prozessen und ein bestimmtes Schlüsselwort
-Analyse, um Fehlalarme durch Systeminventarisierungstools zu minimieren.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt gezielte Softwareerkennung mit Schwerpunkt auf der Aufzählung von Sicherheitsprodukten.
+Verwendet Integritätsebenen-Gating, Korrelation zwischen übergeordneten Prozessen, Ausgabeumleitung usw
+Schlüsselwortbasierte Filterung zur Minimierung falsch positiver Ergebnisse aus legitimem Systeminventar
+Tools oder Verwaltungsskripte.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

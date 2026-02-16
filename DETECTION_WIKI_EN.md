@@ -6217,16 +6217,17 @@ untrusted processes and non-standard file paths.
 
 
 ---
-## Ultra-Pro High-Fidelity Software Discovery (T1518)
+## Software Discovery Detection (T1518)
 - **ID:** `T1518.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted software discovery focusing on security product identification. 
-Uses integrity level gating, parent-process correlation, and specific keyword 
-analysis to minimize false positives from system inventory tools.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects targeted software discovery with emphasis on security product enumeration.
+Uses integrity level gating, parent-process correlation, output redirection, and
+keyword-based filtering to minimize false positives from legitimate system inventory
+tools or administrative scripts.
 
 
 #### 🚨 Response Playbook

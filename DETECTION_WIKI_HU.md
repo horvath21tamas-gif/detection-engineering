@@ -5911,16 +5911,17 @@ nem megbízható folyamatok és nem szabványos fájl útvonalak.
 
 
 ---
-## Ultra-Pro High-Fidelity Software Discovery (T1518)
+## Szoftverfelderítés-észlelés (T1518)
 - **ID:** `T1518.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a célzott szoftverfelderítést a biztonsági termékek azonosítására összpontosítva.
-Integritási szintű kapuzást, szülő-folyamat korrelációt és konkrét kulcsszót használ
-elemzés a rendszerleltári eszközökből származó téves pozitívumok minimalizálása érdekében.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a célzott szoftverfelderítést, hangsúlyt fektetve a biztonsági termékek felsorolására.
+Integritási szintű kapuzást, szülő-folyamat korrelációt, kimenet átirányítást és
+kulcsszó alapú szűrés a törvényes rendszerleltárból származó téves pozitívumok minimalizálása érdekében
+eszközök vagy adminisztrációs szkriptek.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

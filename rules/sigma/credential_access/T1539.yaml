@@ -1,54 +1,112 @@
-title: Ultra-Pro High-Fidelity Web Session Cookie Theft (T1539)
-id: 1f6397bd-8309-4705-8a48-875b83d0d13f
+title: Web Browser Session Cookie & Credential Theft Detection (T1539)
+id: 7c8a2e8d-9b12-4f44-b9e3-6f3d4d1c1123
 status: stable
 description: |
-    Detects unauthorized access to browser session cookies. Monitors for non-browser 
-    processes accessing both 'Cookies' and 'Local State' (encryption key) files, 
-    identifying exfiltration attempts via LOLBins and suspicious scripts.
-author: hota05
-date: 2026-02-04
+    Detects high-confidence browser session cookie and credential theft activity.
+    Identifies non-browser processes accessing Chromium and Firefox cookie databases,
+    encryption key files (Local State), or login databases. 
+    Focuses on LOLBins, scripting engines, DPAPI abuse, and staging/exfiltration behavior.
+
+author: hota05 
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1539/
 tags:
     - attack.credential_access
     - attack.t1539
+    - attack.collection
+    - attack.exfiltration
 logsource:
     category: process_creation
     product: windows
-detection:
-    selection_paths:
-        CommandLine|contains:
-            - '\User Data\Local State'                 
-            - '\User Data\Default\Network\Cookies'   
-            - '\User Data\Default\Login Data'          
-            - '\Profiles\*\cookies.sqlite'            
 
-    selection_untrusted_apps:
-        - Image|endswith:
+detection:
+
+    selection_browser_artifacts:
+        CommandLine|contains:
+            - '\User Data\Local State'
+            - '\User Data\Default\Network\Cookies'
+            - '\User Data\Default\Cookies'
+            - '\User Data\Default\Login Data'
+            - '\User Data\Profile'
+            - '\BraveSoftware\Brave-Browser\User Data'
+            - '\Opera Software\Opera Stable'
+            - '\Mozilla\Firefox\Profiles\'
+            - 'cookies.sqlite'
+            - 'key4.db'
+            - 'logins.json'
+
+    selection_suspicious_processes:
+        Image|endswith:
             - '\powershell.exe'
             - '\pwsh.exe'
             - '\cmd.exe'
-            - '\python.exe'     
-            - '\sqlite3.exe'    
-            - '\certutil.exe'   
-            - '\curl.exe'       
-        - CommandLine|contains:
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\python.exe'
+            - '\sqlite3.exe'
+            - '\certutil.exe'
+            - '\curl.exe'
+            - '\rundll32.exe'
+            - '\mshta.exe'
+            - '\7z.exe'
+            - '\tar.exe'
+
+    selection_suspicious_keywords:
+        CommandLine|contains:
             - 'copy '
             - 'type '
             - 'Get-Content'
             - 'base64'
-            - '.json'          
+            - 'FromBase64String'
+            - 'master_key'
+            - 'os_crypt'
+            - 'CryptUnprotectData'
+            - 'DPAPI'
+            - 'decrypt'
+            - 'export'
+            - '.json'
+            - '.sqlite'
+            - '.db'
 
-    selection_tools:
+    selection_staging_exfil:
         CommandLine|contains:
-            - 'master_key'      
-            - 'os_crypt'        
-            - 'decrypt'         
+            - '\AppData\Local\Temp'
+            - '\Temp\'
+            - '.zip'
+            - '.7z'
+            - 'http://'
+            - 'https://'
+            - 'ftp://'
 
-    filter_legit_browser_execution:
+    filter_legitimate_browser:
         Image|contains:
-            - '\AppData\Local\Google\Chrome\Application\chrome.exe'
+            - '\Google\Chrome\Application\chrome.exe'
             - '\Microsoft\Edge\Application\msedge.exe'
-            - '\Program Files\Mozilla Firefox\firefox.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+            - '\Mozilla Firefox\firefox.exe'
+            - '\Brave-Browser\Application\brave.exe'
+            - '\Opera\launcher.exe'
 
-    condition: selection_paths and selection_untrusted_apps and not filter_legit_browser_execution
+    filter_legitimate_system_context:
+        User|startswith: 'NT AUTHORITY\'
+
+    filter_known_backup_or_security_tools:
+        Image|contains:
+            - '\Veeam\'
+            - '\Acronis\'
+            - '\Windows Defender\'
+            - '\SentinelOne\'
+            - '\CrowdStrike\'
+
+    condition: 
+        selection_browser_artifacts 
+        and selection_suspicious_processes
+        and selection_suspicious_keywords
+        and not (filter_legitimate_browser or filter_legitimate_system_context or filter_known_backup_or_security_tools)
+
+falsepositives:
+    - Forensic acquisition tools
+    - Backup software accessing browser profiles
+    - Administrative troubleshooting scripts
+
 level: critical

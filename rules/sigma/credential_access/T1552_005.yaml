@@ -1,53 +1,126 @@
-title: Ultra-Pro High-Fidelity Cloud Credential Discovery (T1552.005)
+title: Cloud Credential Discovery (T1552.005)
 id: 22123033-856f-478d-954d-c664135917ea
 status: stable
 description: |
-    Detects unauthorized extraction of cloud credentials (AWS, Azure, GCP) from local 
-    config files. Filters legitimate CLI usage and focuses on anomalous process behavior 
-    like redirection, encoding, or access from web servers and remote shells.
+    Detects unauthorized discovery or extraction of cloud credentials
+    (AWS, Azure, GCP, Docker) from local configuration files. Focuses on
+    suspicious access patterns, encoding, redirection, remote execution
+    context, and abnormal process lineage while reducing false positives
+    from legitimate CLI activity.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1552/005/
 tags:
     - attack.credential_access
     - attack.t1552.005
+    - attack.discovery
+    - attack.exfiltration
+
 logsource:
     category: process_creation
     product: windows
-detection:
-    selection_cloud_files:
-        CommandLine|contains:
-            - '.aws\credentials'       
-            - '.azure\azureProfile.json' 
-            - '.azure\accessTokens.json'
-            - '.config\gcloud\'        
-            - '.docker\config.json'     
 
-    selection_extraction:
+detection:
+    selection_cloud_credential_files:
         CommandLine|contains:
-            - 'base64'                 
-            - ' | clip'                 
-            - ' > '                  
-            - 'curl'                 
-            - 'type '                 
-            - 'Get-Content'             
+            - '\.aws\credentials'
+            - '\.aws\config'
+            - '\.azure\azureProfile.json'
+            - '\.azure\accessTokens.json'
+            - '\.config\gcloud\'
+            - '\.docker\config.json'
+            - '\AppData\Roaming\gcloud\'
+            - '\AppData\Roaming\AWS\'
+
+    selection_cloud_keywords:
+        CommandLine|contains:
+            - 'aws_access_key_id'
+            - 'aws_secret_access_key'
+            - 'clientSecret'
+            - 'refreshToken'
+            - 'access_token'
+            - 'private_key'
+
+    selection_extraction_patterns:
+        CommandLine|contains:
+            - 'base64'
+            - 'certutil -encode'
+            - ' | clip'
+            - ' > '
+            - '>>'
+            - 'Invoke-WebRequest'
+            - 'curl '
+            - 'wget '
+            - 'scp '
+            - 'nc '
+
+    selection_powershell_dump:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        CommandLine|contains:
+            - 'Get-Content'
+            - 'gc '
+            - '-enc'
+            - '-EncodedCommand'
+            - 'IEX'
+            - 'Invoke-Expression'
 
     selection_untrusted_context:
         ParentImage|endswith:
-            - '\wsmprovhost.exe'       
-            - '\httpd.exe'              
+            - '\wsmprovhost.exe'
+            - '\psexesvc.exe'
+            - '\wmiprvse.exe'
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\httpd.exe'
             - '\php-cgi.exe'
-            - '\psexesvc.exe'          
         Image|contains:
             - '\AppData\Local\Temp\'
             - '\Users\Public\'
 
-    filter_legit_cli_tools:
+    selection_non_system_user:
+        User|not_contains:
+            - 'NT AUTHORITY\SYSTEM'
+            - 'NT AUTHORITY\LOCAL SERVICE'
+            - 'NT AUTHORITY\NETWORK SERVICE'
+
+    filter_legitimate_cli_usage:
         Image|endswith:
             - '\aws.exe'
             - '\az.cmd'
+            - '\az.exe'
             - '\gcloud.cmd'
+            - '\gcloud.exe'
             - '\docker.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+        ParentImage|endswith:
+            - '\explorer.exe'
+        User|not_contains:
+            - 'NT AUTHORITY'
 
-    condition: selection_cloud_files and (selection_extraction or selection_untrusted_context) and not filter_legit_cli_tools
+    filter_ci_cd_context:
+        ParentImage|contains:
+            - 'jenkins'
+            - 'azuredevops'
+            - 'gitlab-runner'
+            - 'teamcity'
+
+    condition:
+        (selection_cloud_credential_files
+            or selection_cloud_keywords)
+        and (selection_extraction_patterns
+            or selection_powershell_dump
+            or selection_untrusted_context)
+        and selection_non_system_user
+        and not filter_legitimate_cli_usage
+        and not filter_ci_cd_context
+
+falsepositives:
+    - Developer local CLI debugging sessions
+    - CI/CD build agents accessing credential files
+    - Cloud SDK profile validation scripts
+    - Administrative troubleshooting
+
 level: critical

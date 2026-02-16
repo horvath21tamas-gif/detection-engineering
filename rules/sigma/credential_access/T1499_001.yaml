@@ -1,56 +1,83 @@
-title: Ultra-Pro High-Fidelity OS Self-Destruction (T1499.001)
-id: f107af5a-6fca-452d-baea-8d5b2461a75f
+title: OS Self-Destruction Detection (T1499.001)
+id: 8b82b3bc-fe8f-4758-9bd8-05a8564c6586
 status: stable
 description: |
-    Detects targeted OS self-destruction by monitoring for forced termination of 
-    critical kernel processes (csrss.exe, wininit.exe) and malicious use of 
-    system debuggers to trigger immediate BSOD, specifically filtering out 
-    trusted management and update processes.
+    Detects high-confidence OS self-destruction attempts, including forced termination
+    of critical kernel processes (csrss.exe, wininit.exe, smss.exe, services.exe)
+    and malicious debugger abuse (ntsd.exe) aimed at triggering immediate BSOD.
+    Includes extensive filtering for trusted management, update operations, and
+    legitimate administrative automation.
+
 author: hota05
-date: 2026-02-09
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1499/001/
 tags:
     - attack.impact
     - attack.t1499.001
+    - attack.dos
+    - attack.persistence
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_critical_termination:
-        - Image|endswith: '\taskkill.exe'
-        - CommandLine|contains:
-            - ' /f /im csrss.exe'    
-            - ' /f /im wininit.exe'  
-            - ' /f /im smss.exe'      
-            - ' /f /im services.exe'  
 
-    selection_ntsd_abuse:
-        Image|endswith: '\ntsd.exe'
-        CommandLine|contains:
-            - '-pn csrss.exe'
-            - '-pn wininit.exe'
-            - '-c q'                 
+  selection_critical_termination:
+    Image|endswith:
+      - '\taskkill.exe'
+    CommandLine|contains:
+      - ' /f /im csrss.exe'
+      - ' /f /im wininit.exe'
+      - ' /f /im smss.exe'
+      - ' /f /im services.exe'
 
-    selection_context:
-        - ParentImage|endswith:
-            - '\winword.exe'        
-            - '\excel.exe'
-            - '\httpd.exe'            
-            - '\rundll32.exe'        
-            - '\outlook.exe'
-        - Image|contains:
-            - '\Temp\'
-            - '\Users\Public\'
-            - '\AppData\Local\Temp\'
+  selection_debugger_abuse:
+    Image|endswith:
+      - '\ntsd.exe'
+    CommandLine|contains:
+      - '-pn csrss.exe'
+      - '-pn wininit.exe'
+      - '-pn smss.exe'
+      - '-c q'
 
-    filter_legit_service_ops:
-        - username: 'NT AUTHORITY\SYSTEM' 
-        - ParentImage|endswith:
-            - '\CcmExec.exe'          
-            - '\msiexec.exe'          
-            - '\TiWorker.exe'        
-        - CommandLine|contains:
-            - 'HealthCheck'           
-            - 'Diagnostic'
+  selection_suspicious_context:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\rundll32.exe'
+      - '\httpd.exe'
+      - '\nginx.exe'
+      - '\apache.exe'
+    Image|contains:
+      - '\Temp\'
+      - '\Users\Public\'
+      - '\AppData\Local\Temp\'
+      - '\Downloads\'
 
-    condition: (selection_critical_termination or selection_ntsd_abuse) and selection_context and not filter_legit_service_ops
+  filter_legit_management:
+    username: 'NT AUTHORITY\SYSTEM'
+    ParentImage|endswith:
+      - '\CcmExec.exe'
+      - '\msiexec.exe'
+      - '\TiWorker.exe'
+      - '\TrustedInstaller.exe'
+    CommandLine|contains:
+      - 'HealthCheck'
+      - 'Diagnostic'
+      - 'Update'
+      - 'Patch'
+      - 'Maintenance'
+
+  condition: (selection_critical_termination or selection_debugger_abuse) 
+             and selection_suspicious_context 
+             and not filter_legit_management
+
+falsepositives:
+  - Legitimate administrative termination of processes during maintenance
+  - Automated testing or debugging on development/test systems
+  - System health checks or patching operations
+
 level: critical

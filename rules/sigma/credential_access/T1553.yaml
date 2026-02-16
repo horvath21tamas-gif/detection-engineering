@@ -84,7 +84,7 @@ detection:
             - '\regsvr32.exe'
 
     selection_non_system_user:
-        User|not_contains:
+        User|contains:
             - 'NT AUTHORITY\SYSTEM'
             - 'NT AUTHORITY\LOCAL SERVICE'
             - 'NT AUTHORITY\NETWORK SERVICE'
@@ -104,7 +104,7 @@ detection:
                 and selection_root_store
                 and (selection_cert_high_risk_flags or selection_suspicious_paths or selection_suspicious_parent))
             or(selection_motw_manipulation
-                and (selection_suspicious_paths or selection_suspicious_parent or selection_non_system_user)))
+                and (selection_suspicious_paths or selection_suspicious_parent or not selection_non_system_user)))
         and not filter_legitimate_automation
 
 falsepositives:

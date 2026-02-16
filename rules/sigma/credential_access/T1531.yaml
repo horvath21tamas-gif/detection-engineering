@@ -1,60 +1,91 @@
-title: Ultra-Pro High-Fidelity Account Access Removal (T1531)
-id: 10dec50d-350d-4cd3-a869-880c77d7cdc3
+title: Account Access Removal Detection (T1531)
+id: adf9c83c-f64d-4435-a8c4-fe7f266ce230
 status: stable
 description: |
-    Detects unauthorized account removal or lockout by identifying bulk deletions, 
-    targeting of administrative accounts via CLI, or destructive account actions 
-    originating from non-standard process lineages (e.g., Office apps, web servers).
+    Detects unauthorized account removal or lockout attempts. Monitors bulk 
+    deletions, targeting of administrative accounts, and destructive account 
+    actions originating from non-standard processes such as Office apps, web servers, 
+    or scripts. Designed to reduce false positives while detecting T1531 techniques.
+
 author: hota05
-date: 2026-02-09
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1531/
 tags:
     - attack.impact
     - attack.t1531
+    - attack.persistence
+    - attack.account_management
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\net.exe'           
-            - '\net1.exe'           
+
+    selection_account_tools:
+        Image|endswith:
+            - '\net.exe'
+            - '\net1.exe'
             - '\powershell.exe'
             - '\pwsh.exe'
             - '\cmd.exe'
+            - '\dsmod.exe'
+            - '\dsrm.exe'
 
-    selection_logic:
+    selection_account_actions:
         CommandLine|contains:
-            - ' user '           
-            - 'Remove-LocalUser'    
-            - 'Remove-ADUser'        
+            - ' user '
+            - 'Remove-LocalUser'
+            - 'Remove-ADUser'
             - 'Disable-LocalUser'
             - 'Disable-ADAccount'
-            - 'Set-LocalUser -AccountExpires' 
+            - 'Set-LocalUser -AccountExpires'
+            - 'dsrm'                  
+            - 'dsmod user -disabled yes'
 
     selection_flags:
         CommandLine|contains:
-            - ' /delete'           
-            - ' /active:no'         
-            - ' /logoff'            
+            - ' /delete'
+            - ' /active:no'
+            - ' /logoff'
+            - '-Confirm:$false'
+            - '-Force'
 
-    selection_context:
-        - ParentImage|endswith:
-            - '\winword.exe'       
+    selection_suspicious_context:
+        ParentImage|endswith:
+            - '\winword.exe'
             - '\excel.exe'
-            - '\httpd.exe'          
-            - '\rundll32.exe'      
-            - '\explorer.exe'       
+            - '\powerpoint.exe'
+            - '\httpd.exe'
+            - '\php-cgi.exe'
+            - '\rundll32.exe'
+            - '\explorer.exe'
+        ParentCommandLine|contains:
+            - '-EncodedCommand'
+            - '-NonInteractive'
 
-    filter_legit:
-        - CommandLine|contains:
-            - 'Add-LocalUser'       
+    filter_legit_actions:
+        CommandLine|contains:
+            - 'Add-LocalUser'
             - ' /add'
-        - ParentImage|endswith:
-            - '\msiexec.exe'        
-        - username: 'NT AUTHORITY\SYSTEM'
-        - CommandLine|contains:
-            - 'WDAGUtilityAccount'  
+            - 'WDAGUtilityAccount'
             - 'DefaultAccount'
+        ParentImage|endswith:
+            - '\msiexec.exe'
+            - '\services.exe'
+        User|startswith: 'NT AUTHORITY\'
 
-    condition: selection_tools and selection_logic and selection_flags and selection_context and not filter_legit
+    condition: 
+        selection_account_tools 
+        and selection_account_actions 
+        and selection_flags 
+        and selection_suspicious_context 
+        and not filter_legit_actions
+
+falsepositives:
+    - System/service account maintenance tasks
+    - IT admins performing scripted bulk updates
+    - Automated patching or imaging tasks
+
 level: critical

@@ -1,10 +1,11 @@
-title: Ultra-Pro Sudoers Manipulation and Sudo Abuse (T1548.003)
+title: Sudoers Manipulation and Sudo Abuse (T1548.003)
 id: 2ad88929-61d3-46cc-b2cb-91086b6b8714
 status: stable
 description: |
     Detects unauthorized sudoers file modifications and sudo caching abuse. 
     Focuses on NOPASSWD additions, timestamp_timeout manipulation, and 
-    dangerous environment variable injections like LD_PRELOAD.
+    dangerous environment variable injections like LD_PRELOAD. Excludes 
+    trusted automation tools.
 author: hota05
 date: 2026-02-02
 tags:
@@ -14,16 +15,16 @@ logsource:
     product: linux
     category: process_creation
 detection:
-    selection_sudoers_tamper:
+    selection_sudoers_modification:
         CommandLine|contains:
             - '/etc/sudoers'
             - '/etc/sudoers.d/'
         CommandLine|contains:
-            - 'NOPASSWD:'    
-            - 'ALL=(ALL)'   
-            - 'timestamp_timeout' 
+            - 'NOPASSWD:'
+            - 'ALL=(ALL)'
+            - 'timestamp_timeout'
 
-    selection_env_injection:
+    selection_environment_injection:
         CommandLine|contains:
             - 'LD_PRELOAD='
             - 'PYTHONPATH='
@@ -32,23 +33,23 @@ detection:
 
     selection_sudo_recon:
         CommandLine|contains:
-            - 'sudo -l'      
-            - 'sudo -n -l'   
+            - 'sudo -l'
+            - 'sudo -n -l'
 
-    filter_trusted_automation:
-        ParentImage|endswith:
+    filters_trusted_automation:
+        - ParentImage|endswith:
             - '/ansible-playbook'
             - '/puppet'
             - '/salt-minion'
             - '/chef-client'
-        username: 'root'
+        - username: 'root'
 
-    selection_suspicious_actor:
+    selection_untrusted_actor:
         ParentImage|endswith:
             - '/apache2'
             - '/nginx'
             - '/php-fpm'
             - '/node'
 
-    condition: (selection_sudoers_tamper or selection_env_injection or selection_sudo_recon) and (selection_suspicious_actor or not filter_trusted_automation)
+    condition: (selection_sudoers_modification or selection_environment_injection or selection_sudo_recon) and (selection_untrusted_actor or not filters_trusted_automation)
 level: critical

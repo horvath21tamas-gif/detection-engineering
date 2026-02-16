@@ -1,59 +1,60 @@
-title: Ultra-Pro High-Fidelity Firmware Corruption (T1495)
+title: Firmware Corruption (T1495)
 id: 4e2f0a59-29b4-42ed-bf65-f984b163fe64
 status: stable
 description: |
-    Detects potential firmware corruption or unauthorized flashing by monitoring 
-    low-level hardware access tools and firmware update utilities originating 
-    from untrusted process lineages (e.g., browsers, office apps, or temp folders).
+  Detects potential firmware corruption or unauthorized flashing by monitoring 
+  low-level hardware access tools and firmware update utilities originating 
+  from untrusted process lineages (e.g., browsers, office apps, or temp folders).
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.impact
-    - attack.t1495
+  - attack.impact
+  - attack.t1495
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\flashrom.exe'        
-            - '\fwupdmgr.exe'        
-            - '\AfuEfix64.exe'       
-            - '\H2OFFT-W.exe'      
-            - '\WinFlash.exe'       
-            - '\wbemtest.exe'        
+  firmware_tools:
+    Image|endswith:
+      - '\flashrom.exe'
+      - '\fwupdmgr.exe'
+      - '\AfuEfix64.exe'
+      - '\H2OFFT-W.exe'
+      - '\WinFlash.exe'
+      - '\wbemtest.exe'
 
-    selection_logic:
-        CommandLine|contains:
-            - ' --flash'             
-            - ' -w '               
-            - ' /forceit'            
-            - '\\.\PhysicalDrive'    
-            - '\\.\Scsi'            
-            - 'WmiInternal'          
+  dangerous_flags:
+    CommandLine|contains:
+      - '--flash'
+      - '-w '
+      - '/forceit'
+      - '\\.\PhysicalDrive'
+      - '\\.\Scsi'
+      - 'WmiInternal'
 
-    selection_context:
-        - ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\httpd.exe'           
-            - '\chrome.exe'          
-            - '\rundll32.exe'        
-        - Image|contains:
-            - '\Temp\'
-            - '\Users\Public\'
-            - '\AppData\Local\Temp\'
+  suspicious_context:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\httpd.exe'
+      - '\chrome.exe'
+      - '\rundll32.exe'
+    Image|contains:
+      - '\Temp\'
+      - '\Users\Public\'
+      - '\AppData\Local\Temp\'
 
-    filter_legit_oem_updates:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|contains:
-            - '\System32\svchost.exe'
-            - '\CcmExec.exe'         
-        - Image|contains:
-            - '\Dell\CommandUpdate\'  
-            - '\Lenovo\SystemUpdate\' 
-            - '\HP\SoftPaq\'          
-            - '\WindowsUpdateBox.exe'
+  legit_oem_updates_filter:
+    - username: 'NT AUTHORITY\SYSTEM'
+    - ParentImage|contains:
+        - '\System32\svchost.exe'
+        - '\CcmExec.exe'
+    - Image|contains:
+        - '\Dell\CommandUpdate\'
+        - '\Lenovo\SystemUpdate\'
+        - '\HP\SoftPaq\'
+        - '\WindowsUpdateBox.exe'
 
-    condition: (selection_tools or selection_logic) and selection_context and not filter_legit_oem_updates
+  condition: (firmware_tools or dangerous_flags) and suspicious_context 
+             and not legit_oem_updates_filter
 level: critical

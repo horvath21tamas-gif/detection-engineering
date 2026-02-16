@@ -1,52 +1,69 @@
-title: Ultra-Pro High-Fidelity Cloud Service Discovery (T1526)
-id: 5b887209-61b0-46d1-9cca-2524526e57c0
+title: Cloud Service Discovery Detection (T1526)
+id: e338d314-d86d-4724-9e1d-5b0b0f74276d
 status: stable
 description: |
-    Detects systematic cloud service enumeration (Lambda, Secrets, KeyVault) 
-    focusing on anomalous execution environments (interactive shells on non-dev hosts) 
-    and output redirection patterns used for automated harvesting.
+    Detects systematic cloud service enumeration targeting Lambda, Secrets, KeyVault,
+    WebApps, and container services. Focuses on anomalous execution environments such as
+    interactive shells on non-dev hosts and output redirection patterns used for automated
+    harvesting or exfiltration.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1526/
 tags:
     - attack.discovery
     - attack.t1526
+    - attack.cloud
+    - attack.enumeration
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_cli:
+
+    selection_cloud_cli:
         Image|endswith:
             - '\aws.exe'
             - '\az.cmd'
+            - '\az.exe'
             - '\gcloud.cmd'
+            - '\gcloud.exe'
+            - '\azcli.exe'
 
-    selection_services:
+    selection_cloud_services:
         CommandLine|contains:
             - 'lambda list-functions'
             - 'secretsmanager list-secrets'
-            - 'eks list-clusters'         
+            - 'eks list-clusters'
             - 'keyvault list'
-            - 'webapp list'              
+            - 'webapp list'
             - 'functionapp list'
-            - 'functions list'          
+            - 'functions list'
             - 'container clusters list'
+            - 'storage account list'
+            - 'projects list'
 
-    selection_extraction:
+    selection_output_exfiltration:
         CommandLine|contains:
             - '--query'
             - '--output json'
-            - ' | jq'
-            - ' | base64'
-            - ' > '         
-            - ' | clip'     
+            - '| jq'
+            - '| base64'
+            - ' > '
+            - ' | clip'
+            - '| tee'
+            - '| Out-File'
 
-    selection_interactive_parent:
+    selection_interactive_parents:
         ParentImage|endswith:
             - '\cmd.exe'
             - '\powershell.exe'
             - '\pwsh.exe'
             - '\wsmprovhost.exe'
-            - '\httpd.exe'       
+            - '\httpd.exe'
+            - '\rundll32.exe'
 
     filter_legit_automation:
         ParentImage|contains:
@@ -54,7 +71,21 @@ detection:
             - '\GitLab-Runner\'
             - '\Terraform\'
             - '\Ansible\'
+            - '\OctopusDeploy\'
         username: 'NT AUTHORITY\SYSTEM'
+        CommandLine|contains:
+            - '-NonInteractive'
+            - '-EncodedCommand'
 
-    condition: selection_cli and selection_services and (selection_extraction or selection_interactive_parent) and not filter_legit_automation
+    condition: 
+        selection_cloud_cli 
+        and selection_cloud_services 
+        and (selection_output_exfiltration or selection_interactive_parents) 
+        and not filter_legit_automation
+
+falsepositives:
+    - CI/CD pipelines performing legitimate cloud resource enumeration
+    - DevOps/Automation scripts for auditing cloud resources
+    - Security or compliance tools querying cloud infrastructure
+
 level: high

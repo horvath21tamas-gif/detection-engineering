@@ -6985,14 +6985,14 @@ Az IdentityCRL és a TokenBroker tárolók, valamint a hordozó tokenek használ
 
 
 ---
-## Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002)
+## Pass-the-Hash Detection (T1550.002)
 - **ID:** `T1550_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a Pass-the-Hash-t (PtH) a rendellenes NTLM loopback hitelesítés azonosításával,
-korlátozott rendszergazdai bejelentkezési típusok (LogonType 9 a seclogo-n keresztül) és ismert hitelesítő adatok beillesztése
-eszközmintákat, miközben kizárja a legitim szolgáltatásfiókokat.
+- **Leírás:** A Pass-the-Hash (PtH) támadásokat a rendellenes NTLM visszacsatolási hitelesítés azonosításával észleli,
+korlátozott rendszergazdai bejelentkezés (LogonType 9 a seclogo-n keresztül) és a hitelesítő adatok beszúróeszköz-tevékenysége,
+miközben kizárja a legitim szolgáltatás- és gépfiókokat.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

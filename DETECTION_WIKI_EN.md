@@ -7355,14 +7355,14 @@ IdentityCRL and TokenBroker stores, as well as the use of bearer tokens in comma
 
 
 ---
-## Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002)
+## Pass-the-Hash Detection (T1550.002)
 - **ID:** `T1550_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects Pass-the-Hash (PtH) by identifying anomalous NTLM loopback authentication, 
-restricted admin logon types (LogonType 9 via seclogo), and known credential injection 
-tool patterns while excluding legitimate service accounts.
+- **Leírás:** Detects Pass-the-Hash (PtH) attacks by identifying anomalous NTLM loopback authentication, 
+restricted admin logons (LogonType 9 via seclogo), and credential injection tool activity, 
+while excluding legitimate service and machine accounts.
 
 
 #### 🚨 Response Playbook

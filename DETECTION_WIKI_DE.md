@@ -6985,14 +6985,14 @@ IdentityCRL- und TokenBroker-Speicher sowie die Verwendung von Inhabertokens in 
 
 
 ---
-## Ultra-Pro High-Fidelity Pass-the-Hash-Erkennung (T1550.002)
+## Pass-the-Hash-Erkennung (T1550.002)
 - **ID:** `T1550_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt Pass-the-Hash (PtH) durch Identifizierung einer anomalen NTLM-Loopback-Authentifizierung.
-eingeschränkte Administrator-Anmeldetypen (LogonType 9 über seclogo) und bekannte Anmeldeinformationsinjektion
-Tool-Muster, während legitime Dienstkonten ausgeschlossen werden.
+- **Beschreibung:** Erkennt Pass-the-Hash-Angriffe (PtH), indem es eine anomale NTLM-Loopback-Authentifizierung identifiziert.
+eingeschränkte Administratoranmeldungen (LogonType 9 über seclogo) und Aktivität des Credential-Injection-Tools,
+unter Ausschluss legitimer Dienst- und Maschinenkonten.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

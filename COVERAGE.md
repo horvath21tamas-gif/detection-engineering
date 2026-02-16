@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-16 12:45:25`
+**Utolsó frissítés:** `2026-02-16 13:27:12`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -324,17 +324,17 @@
 | T1505.004 | CRITICAL | Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004) |
 | T1505.005 | CRITICAL | Ultra-Pro Terminal Services DLL Hijacking (T1505.005) |
 | T1518 | HIGH | Ultra-Pro High-Fidelity Software Discovery (T1518) |
-| T1518.001 | HIGH | Ultra-Pro High-Fidelity Security Software Discovery (T1518.001) |
+| T1518.001 | HIGH | Security Software Discovery Detection (T1518.001) |
 | T1525 | CRITICAL | Exploit-Grade Unauthorized Container Image Execution (Implant Container Image) |
-| T1526 | HIGH | Ultra-Pro High-Fidelity Cloud Service Discovery (T1526) |
-| T1528 | CRITICAL | Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528) |
-| T1529 | CRITICAL | Ultra-Pro High-Fidelity System Shutdown/Reboot (T1529) |
-| T1530 | CRITICAL | Ultra-Pro High-Fidelity Cloud Storage Data Theft (T1530) |
-| T1531 | CRITICAL | Ultra-Pro High-Fidelity Account Access Removal (T1531) |
-| T1534 | CRITICAL | Ultra-Pro High-Fidelity Internal Spearphishing Detection (T1534) |
-| T1535 | CRITICAL | Ultra-Pro High-Fidelity Unused Service Manipulation (T1535) |
-| T1537 | CRITICAL | Ultra-Pro High-Fidelity Cloud Account Exfil (T1537) |
-| T1538 | HIGH | Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538) |
+| T1526 | HIGH | Cloud Service Discovery Detection (T1526) |
+| T1528 | CRITICAL | Application Token & Session Hijacking Detection (T1528) |
+| T1529 | CRITICAL | Unauthorized System Shutdown/Reboot Detection (T1529) |
+| T1530 | CRITICAL | Cloud Storage Data Theft Detection (T1530) |
+| T1531 | CRITICAL | Account Access Removal Detection (T1531) |
+| T1534 | CRITICAL | Internal Spearphishing Detection (T1534) |
+| T1535 | CRITICAL | Unused Service Manipulation Detection (T1535) |
+| T1537 | CRITICAL | Cloud Account Exfiltration Detection (T1537) |
+| T1538 | HIGH | Cloud Service Dashboard Discovery (T1538) |
 | T1539 | CRITICAL | Web Browser Session Cookie & Credential Theft Detection (T1539) |
 | T1542 | CRITICAL | Pre-OS Boot Manipulation (T1542) |
 | T1542.001 | CRITICAL | ROM Kit & UEFI Firmware Tampering (T1542.001) |

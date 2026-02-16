@@ -318,17 +318,17 @@
 - [Ultra-Pro alaplapi rendszerindítási kép és SPI Flash-szabotázs (T1542.004)](#ultra-pro-alaplapi-rendszerindítási-kép-és-spi-flash-szabotázs-(t1542004))
 - [Ultra-Pro Terminal Services DLL-eltérítés (T1505.005)](#ultra-pro-terminal-services-dll-eltérítés-(t1505005))
 - [Ultra-Pro High-Fidelity Software Discovery (T1518)](#ultra-pro-high-fidelity-software-discovery-(t1518))
-- [Ultra-Pro High-Fidelity biztonsági szoftverek felfedezése (T1518.001)](#ultra-pro-high-fidelity-biztonsági-szoftverek-felfedezése-(t1518001))
+- [Biztonsági szoftverfelderítés észlelése (T1518.001)](#biztonsági-szoftverfelderítés-észlelése-(t1518001))
 - [Exploit-grade jogosulatlan tárolókép-végrehajtás (Implant Container Image)](#exploit-grade-jogosulatlan-tárolókép-végrehajtás-(implant-container-image))
-- [Ultra-Pro High-Fidelity Cloud Service Discovery (T1526)](#ultra-pro-high-fidelity-cloud-service-discovery-(t1526))
-- [Ultra-Pro High-Fidelity alkalmazástoken és munkamenet-eltérítés (T1528)](#ultra-pro-high-fidelity-alkalmazástoken-és-munkamenet-eltérítés-(t1528))
-- [Ultra-Pro High-Fidelity rendszer leállítása/újraindítása (T1529)](#ultra-pro-high-fidelity-rendszer-leállításaújraindítása-(t1529))
-- [Ultra-Pro High-Fidelity Cloud Storage Data Theft (T1530)](#ultra-pro-high-fidelity-cloud-storage-data-theft-(t1530))
-- [Ultra-Pro High-Fidelity fiókhozzáférés eltávolítása (T1531)](#ultra-pro-high-fidelity-fiókhozzáférés-eltávolítása-(t1531))
-- [Ultra-Pro High-Fidelity belső adathalász-észlelés (T1534)](#ultra-pro-high-fidelity-belső-adathalász-észlelés-(t1534))
-- [Ultra-Pro High-Fidelity, nem használt szolgáltatás-manipuláció (T1535)](#ultra-pro-high-fidelity-nem-használt-szolgáltatás-manipuláció-(t1535))
-- [Ultra-Pro High-Fidelity Cloud Account Exfil (T1537)](#ultra-pro-high-fidelity-cloud-account-exfil-(t1537))
-- [Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538)](#ultra-pro-high-fidelity-cloud-service-dashboard-discovery-(t1538))
+- [Cloud Service Discovery Detection (T1526)](#cloud-service-discovery-detection-(t1526))
+- [Alkalmazási token és munkamenet-eltérítés észlelése (T1528)](#alkalmazási-token-és-munkamenet-eltérítés-észlelése-(t1528))
+- [Jogosulatlan rendszerleállítás/újraindítás észlelése (T1529)](#jogosulatlan-rendszerleállításújraindítás-észlelése-(t1529))
+- [Cloud Storage Data Theft Detection (T1530)](#cloud-storage-data-theft-detection-(t1530))
+- [Fiókhozzáférés eltávolításának észlelése (T1531)](#fiókhozzáférés-eltávolításának-észlelése-(t1531))
+- [Belső adathalászat-észlelés (T1534)](#belső-adathalászat-észlelés-(t1534))
+- [Nem használt szolgáltatás-manipuláció észlelése (T1535)](#nem-használt-szolgáltatás-manipuláció-észlelése-(t1535))
+- [Felhőbeli fiókok kiszűrésének észlelése (T1537)](#felhőbeli-fiókok-kiszűrésének-észlelése-(t1537))
+- [Cloud Service Dashboard Discovery (T1538)](#cloud-service-dashboard-discovery-(t1538))
 - [Webböngésző munkamenet-cookie-k és hitelesítő adatok lopásának észlelése (T1539)](#webböngésző-munkamenet-cookie-k-és-hitelesítő-adatok-lopásának-észlelése-(t1539))
 - [OS előtti rendszerindítási manipuláció (T1542)](#os-előtti-rendszerindítási-manipuláció-(t1542))
 - [ROM készlet és UEFI firmware manipuláció (T1542.001)](#rom-készlet-és-uefi-firmware-manipuláció-(t1542001))
@@ -5929,16 +5929,17 @@ elemzés a rendszerleltári eszközökből származó téves pozitívumok minima
 
 
 ---
-## Ultra-Pro High-Fidelity biztonsági szoftverek felfedezése (T1518.001)
+## Biztonsági szoftverfelderítés észlelése (T1518.001)
 - **ID:** `T1518_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [REG.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a biztonsági termékek (AV/EDR/HIPS) és homokozók célzott felfedezését.
-A kulcsszóspecifikus szűrésre (findstr/grep) és a rendellenes folyamatokra összpontosít
-vonalak (irodai alkalmazások, webszerverek vagy nem emelt rendszerhéjak).
+- **Leírás:** Érzékeli a biztonsági termékek, például AV, EDR, HIPS és sandbox környezetek célzott felfedezését.
+A kulcsszó-specifikus felsorolásra, a gyanús parancssori használatra összpontosít (findstr, grep, Get-Process/Service),
+és rendellenes szülőfolyamatok (irodai alkalmazások, webszerverek, nem emelt héjak).
+Érzékeli a virtuális gépek ujjlenyomatának kísérleteit is.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -5968,7 +5969,7 @@ vonalak (irodai alkalmazások, webszerverek vagy nem emelt rendszerhéjak).
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Lambda, Secrets, KeyVault,
+- **Leírás:** Érzékeli a szisztematikus felhőszolgáltatás felsorolását, amelyek a Lambdát, a titkokat, a KeyVaultot,
 Webalkalmazások és konténerszolgáltatások.A rendellenes végrehajtási környezetekre összpontosít, mint pl
 interaktív parancsértelmezők nem fejlesztői gazdagépeken és automatizált kimeneti átirányítási minták
 betakarítás vagy kiszűrés.
@@ -6066,7 +6067,7 @@ vagy forgatókönyveket.Úgy tervezték, hogy csökkentse a hamis pozitív eredm
 - **Leírás:** Az anomáliák figyelésével észleli a fejlett belső adathalász kísérleteket
 programozott hozzáférés az Outlook MAPI felületéhez, gyanús gyermekfolyamatok,
 veszélyes parancssori jelzők és abnormális fájlmellékletek.
-A PowerShellre, a cmd-re, a szkriptmotorokra és a nem böngésző szülő anomáliáira összpontosít.
+A PowerShellre, a cmd-re, a parancsfájl-motorokra és a nem böngésző szülő anomáliáira összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -6179,7 +6180,7 @@ Kiszűri a megbízható szállítók frissítési segédprogramjait, hogy csökk
 - **Leírás:** Érzékeli a jogosulatlan firmware-manipulációt a magas kockázatú illesztőprogramok figyelésével
 gyanústól kezdeményezett regisztrációk és firmware-frissítési segédprogramok
 folyamatfák, kifejezetten a BYOVD és az SPI flash hozzáférést célozva.
-Kiszűri a megbízható szállítók frissítési segédprogramjait, hogy minimalizálja a hamis pozitívumot.
+Kiszűri a megbízható szállítók frissítő segédprogramjait, hogy minimalizálja a hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -6196,7 +6197,7 @@ Kiszűri a megbízható szállítók frissítési segédprogramjait, hogy minima
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a perifériás firmware (NIC, SSD, GPU) jogosulatlan módosítását
-a nem megbízható folyamatból kezdeményezett önálló villogó eszközök figyelése
+a nem megbízható folyamatból indított önálló villogó eszközök figyelése
 láncok vagy nem szabványos fájlhelyek.Kiszűri a megbízható kezelést
 eszközök a hamis pozitív eredmények csökkentésére.
 
@@ -6244,7 +6245,7 @@ megbízható menedzsment eszközök.
 
 
 ---
-## DHCP/PXE rendszerindító eltérítés (T1542.005)
+## DHCP/PXE rendszerindítási eltérítés (T1542.005)
 - **ID:** `T1542_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -6252,7 +6253,7 @@ megbízható menedzsment eszközök.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a 66-os (Boot Server) és a 67-es (Bootfile Name) DHCP-opciók jogosulatlan módosítását,
-amelyeket a támadók a hálózati rendszerindítási kérelmek rosszindulatú TFTP-kiszolgálóra való átirányítására használnak.
+amelyet a támadók a hálózati rendszerindítási kérelmek rosszindulatú TFTP-kiszolgálóra való átirányítására használnak.
 Szűri a megbízható rendszerszolgáltatásokat a téves pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
@@ -6943,7 +6944,7 @@ megbízható automatizálási eszközök.
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Az osascript végrehajtásának figyelésével észleli a jogosulatlan AppleScript-emelési kísérleteket
+- **Leírás:** Az Osascript végrehajtásának figyelésével észleli a jogosulatlan AppleScript-emelési kísérleteket
 "rendszergazdai jogosultságokkal" olyan nem megbízható szülői folyamatoktól, mint a böngészők, irodai programcsomagok,
 együttműködési alkalmazások vagy ideiglenes címtárak, a megbízható rendszerfelügyeleti eszközök kizárása mellett.
 

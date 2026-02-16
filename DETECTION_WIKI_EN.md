@@ -318,17 +318,17 @@
 - [Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004)](#ultra-pro-mainboard-boot-image-&-spi-flash-tampering-(t1542004))
 - [Ultra-Pro Terminal Services DLL Hijacking (T1505.005)](#ultra-pro-terminal-services-dll-hijacking-(t1505005))
 - [Ultra-Pro High-Fidelity Software Discovery (T1518)](#ultra-pro-high-fidelity-software-discovery-(t1518))
-- [Ultra-Pro High-Fidelity Security Software Discovery (T1518.001)](#ultra-pro-high-fidelity-security-software-discovery-(t1518001))
+- [Security Software Discovery Detection (T1518.001)](#security-software-discovery-detection-(t1518001))
 - [Exploit-Grade Unauthorized Container Image Execution (Implant Container Image)](#exploit-grade-unauthorized-container-image-execution-(implant-container-image))
-- [Ultra-Pro High-Fidelity Cloud Service Discovery (T1526)](#ultra-pro-high-fidelity-cloud-service-discovery-(t1526))
-- [Ultra-Pro High-Fidelity Application Token & Session Hijacking (T1528)](#ultra-pro-high-fidelity-application-token-&-session-hijacking-(t1528))
-- [Ultra-Pro High-Fidelity System Shutdown/Reboot (T1529)](#ultra-pro-high-fidelity-system-shutdownreboot-(t1529))
-- [Ultra-Pro High-Fidelity Cloud Storage Data Theft (T1530)](#ultra-pro-high-fidelity-cloud-storage-data-theft-(t1530))
-- [Ultra-Pro High-Fidelity Account Access Removal (T1531)](#ultra-pro-high-fidelity-account-access-removal-(t1531))
-- [Ultra-Pro High-Fidelity Internal Spearphishing Detection (T1534)](#ultra-pro-high-fidelity-internal-spearphishing-detection-(t1534))
-- [Ultra-Pro High-Fidelity Unused Service Manipulation (T1535)](#ultra-pro-high-fidelity-unused-service-manipulation-(t1535))
-- [Ultra-Pro High-Fidelity Cloud Account Exfil (T1537)](#ultra-pro-high-fidelity-cloud-account-exfil-(t1537))
-- [Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538)](#ultra-pro-high-fidelity-cloud-service-dashboard-discovery-(t1538))
+- [Cloud Service Discovery Detection (T1526)](#cloud-service-discovery-detection-(t1526))
+- [Application Token & Session Hijacking Detection (T1528)](#application-token-&-session-hijacking-detection-(t1528))
+- [Unauthorized System Shutdown/Reboot Detection (T1529)](#unauthorized-system-shutdownreboot-detection-(t1529))
+- [Cloud Storage Data Theft Detection (T1530)](#cloud-storage-data-theft-detection-(t1530))
+- [Account Access Removal Detection (T1531)](#account-access-removal-detection-(t1531))
+- [Internal Spearphishing Detection (T1534)](#internal-spearphishing-detection-(t1534))
+- [Unused Service Manipulation Detection (T1535)](#unused-service-manipulation-detection-(t1535))
+- [Cloud Account Exfiltration Detection (T1537)](#cloud-account-exfiltration-detection-(t1537))
+- [Cloud Service Dashboard Discovery (T1538)](#cloud-service-dashboard-discovery-(t1538))
 - [Web Browser Session Cookie & Credential Theft Detection (T1539)](#web-browser-session-cookie-&-credential-theft-detection-(t1539))
 - [Pre-OS Boot Manipulation (T1542)](#pre-os-boot-manipulation-(t1542))
 - [ROM Kit & UEFI Firmware Tampering (T1542.001)](#rom-kit-&-uefi-firmware-tampering-(t1542001))
@@ -6236,16 +6236,17 @@ analysis to minimize false positives from system inventory tools.
 
 
 ---
-## Ultra-Pro High-Fidelity Security Software Discovery (T1518.001)
+## Security Software Discovery Detection (T1518.001)
 - **ID:** `T1518_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [REG.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted discovery of security products (AV/EDR/HIPS) and sandboxes. 
-Focuses on keyword-specific filtering (findstr/grep) and anomalous process 
-lineages (Office apps, web servers, or non-elevated shells).
+- **Leírás:** Detects targeted discovery of security products such as AV, EDR, HIPS, and sandbox environments.
+Focuses on keyword-specific enumeration, suspicious command-line usage (findstr, grep, Get-Process/Service),
+and anomalous parent process lineages (Office apps, web servers, non-elevated shells).  
+Also detects attempts to fingerprint virtual machines.
 
 
 #### 🚨 Response Playbook

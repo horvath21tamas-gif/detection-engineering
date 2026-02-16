@@ -318,17 +318,17 @@
 - [Ultra-Pro Mainboard-Boot-Image und SPI-Flash-Manipulation (T1542.004)](#ultra-pro-mainboard-boot-image-und-spi-flash-manipulation-(t1542004))
 - [Ultra-Pro Terminal Services DLL-Hijacking (T1505.005)](#ultra-pro-terminal-services-dll-hijacking-(t1505005))
 - [Ultra-Pro High-Fidelity Software Discovery (T1518)](#ultra-pro-high-fidelity-software-discovery-(t1518))
-- [Ultra-Pro High-Fidelity-Sicherheitssoftware-Erkennung (T1518.001)](#ultra-pro-high-fidelity-sicherheitssoftware-erkennung-(t1518001))
+- [Erkennung von Sicherheitssoftware-Erkennung (T1518.001)](#erkennung-von-sicherheitssoftware-erkennung-(t1518001))
 - [Unautorisierte Container-Image-Ausführung mit Exploit-Grad (Implant-Container-Image)](#unautorisierte-container-image-ausführung-mit-exploit-grad-(implant-container-image))
-- [Ultra-Pro High-Fidelity Cloud Service Discovery (T1526)](#ultra-pro-high-fidelity-cloud-service-discovery-(t1526))
-- [Ultra-Pro High-Fidelity-Anwendungstoken und Session-Hijacking (T1528)](#ultra-pro-high-fidelity-anwendungstoken-und-session-hijacking-(t1528))
-- [Herunterfahren/Neustarten des Ultra-Pro High-Fidelity-Systems (T1529)](#herunterfahrenneustarten-des-ultra-pro-high-fidelity-systems-(t1529))
-- [Ultra-Pro High-Fidelity-Cloud-Speicher-Datendiebstahl (T1530)](#ultra-pro-high-fidelity-cloud-speicher-datendiebstahl-(t1530))
-- [Entfernen des Ultra-Pro High-Fidelity-Kontozugriffs (T1531)](#entfernen-des-ultra-pro-high-fidelity-kontozugriffs-(t1531))
-- [Ultra-Pro High-Fidelity interne Spearphishing-Erkennung (T1534)](#ultra-pro-high-fidelity-interne-spearphishing-erkennung-(t1534))
-- [Ultra-Pro High-Fidelity-Manipulation ungenutzter Dienste (T1535)](#ultra-pro-high-fidelity-manipulation-ungenutzter-dienste-(t1535))
-- [Ultra-Pro High-Fidelity-Cloud-Konto-Exfil (T1537)](#ultra-pro-high-fidelity-cloud-konto-exfil-(t1537))
-- [Ultra-Pro High-Fidelity-Cloud-Service-Dashboard-Erkennung (T1538)](#ultra-pro-high-fidelity-cloud-service-dashboard-erkennung-(t1538))
+- [Cloud-Service-Discovery-Erkennung (T1526)](#cloud-service-discovery-erkennung-(t1526))
+- [Erkennung von Anwendungs-Token und Session-Hijacking (T1528)](#erkennung-von-anwendungs-token-und-session-hijacking-(t1528))
+- [Erkennung eines unbefugten Herunterfahrens/Neustarts des Systems (T1529)](#erkennung-eines-unbefugten-herunterfahrensneustarts-des-systems-(t1529))
+- [Erkennung von Cloud-Speicher-Datendiebstahl (T1530)](#erkennung-von-cloud-speicher-datendiebstahl-(t1530))
+- [Erkennung der Entfernung des Kontozugriffs (T1531)](#erkennung-der-entfernung-des-kontozugriffs-(t1531))
+- [Interne Spearphishing-Erkennung (T1534)](#interne-spearphishing-erkennung-(t1534))
+- [Erkennung ungenutzter Dienstmanipulationen (T1535)](#erkennung-ungenutzter-dienstmanipulationen-(t1535))
+- [Erkennung von Cloud-Konto-Exfiltration (T1537)](#erkennung-von-cloud-konto-exfiltration-(t1537))
+- [Cloud-Service-Dashboard-Erkennung (T1538)](#cloud-service-dashboard-erkennung-(t1538))
 - [Webbrowser-Sitzungs-Cookie und Erkennung von Anmeldedatendiebstahl (T1539)](#webbrowser-sitzungs-cookie-und-erkennung-von-anmeldedatendiebstahl-(t1539))
 - [Manipulation vor dem Betriebssystemstart (T1542)](#manipulation-vor-dem-betriebssystemstart-(t1542))
 - [Manipulation des ROM-Kits und der UEFI-Firmware (T1542.001)](#manipulation-des-rom-kits-und-der-uefi-firmware-(t1542001))
@@ -5929,16 +5929,17 @@ Analyse, um Fehlalarme durch Systeminventarisierungstools zu minimieren.
 
 
 ---
-## Ultra-Pro High-Fidelity-Sicherheitssoftware-Erkennung (T1518.001)
+## Erkennung von Sicherheitssoftware-Erkennung (T1518.001)
 - **ID:** `T1518_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [REG.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die gezielte Erkennung von Sicherheitsprodukten (AV/EDR/HIPS) und Sandboxes.
-Konzentriert sich auf schlüsselwortspezifische Filterung (findstr/grep) und anomale Prozesse
-Abstammungslinien (Office-Apps, Webserver oder nicht erhöhte Shells).
+- **Beschreibung:** Erkennt die gezielte Erkennung von Sicherheitsprodukten wie AV-, EDR-, HIPS- und Sandbox-Umgebungen.
+Konzentriert sich auf schlüsselwortspezifische Aufzählung, verdächtige Befehlszeilenverwendung (findstr, grep, Get-Process/Service),
+und anomale übergeordnete Prozesslinien (Office-Apps, Webserver, nicht erhöhte Shells).
+Erkennt auch Versuche, virtuelle Maschinen mit einem Fingerabdruck zu versehen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -6196,7 +6197,7 @@ Filtert Update-Dienstprogramme vertrauenswürdiger Anbieter heraus, um Fehlalarm
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt unbefugte Modifikationen der Peripherie-Firmware (NIC, SSD, GPU) durch
-Überwachung eigenständiger Flash-Tools, die von einem nicht vertrauenswürdigen Prozess initiiert wurden
+Überwachung eigenständiger Flash-Tools, die von einem nicht vertrauenswürdigen Prozess initiiert werden
 Ketten oder nicht standardmäßige Dateispeicherorte.Filtert vertrauenswürdiges Management heraus
 Tools zur Reduzierung falsch positiver Ergebnisse.
 
@@ -6959,7 +6960,7 @@ Collaboration-Apps oder temporäre Verzeichnisse, während vertrauenswürdige Sy
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Speicherintensiv)
-- **Beschreibung:** Erkennt unbefugte Änderungen an XDG-Desktopeinträgen oder versuchten Verknüpfungen
+- **Beschreibung:** Erkennt unbefugte Änderungen an XDG-Desktopeinträgen oder entsprechende Verknüpfungen
 um SUID-Binärdateien auszuführen oder pkexec zur Rechteausweitung zu nutzen.
 Konzentriert sich auf Änderungen in vom Benutzer beschreibbaren Verzeichnissen durch nicht vertrauenswürdige Prozesse.
 

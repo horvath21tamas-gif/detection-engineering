@@ -5997,16 +5997,17 @@ Figyeli a gyanús hozzáférést a Cloud CLI konfigurációkhoz (Azure, AWS, GCP
 
 
 ---
-## Ultra-Pro High-Fidelity rendszer leállítása/újraindítása (T1529)
+## Jogosulatlan rendszerleállítás/újraindítás észlelése (T1529)
 - **ID:** `T1529.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a jogosulatlan vagy gyanús rendszerleállítási/újraindítási parancsokat
-a nem megbízható forrásból származó kényszerműveletek (-f) megfigyelésével
-folyamatvonalak (böngészők, irodai alkalmazások, ideiglenes mappák).
+- **Leírás:** Érzékeli a jogosulatlan vagy gyanús rendszerleállítási vagy újraindítási parancsokat.
+Figyeli a nem megbízható folyamatvonalakból származó kényszerleállásokat vagy újraindításokat
+(böngészők, Office-alkalmazások, szkriptek, ideiglenes mappák) és szűri a legitim rendszert
+automatizálási, adminisztrációs vagy állapotfelmérési feladatok.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

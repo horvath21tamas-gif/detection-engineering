@@ -6308,16 +6308,17 @@ and browser-based credential stores by untrusted processes.
 
 
 ---
-## Ultra-Pro High-Fidelity System Shutdown/Reboot (T1529)
+## Unauthorized System Shutdown/Reboot Detection (T1529)
 - **ID:** `T1529.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized or suspicious system shutdown/reboot commands 
-by monitoring for forced operations (-f) originating from untrusted 
-process lineages (browsers, office apps, temp folders).
+- **Leírás:** Detects unauthorized or suspicious system shutdown or reboot commands.
+Monitors forced shutdowns or reboots originating from untrusted process lineages 
+(browsers, Office apps, scripts, temp folders) and filters legitimate system 
+automation, administrative, or health check tasks.
 
 
 #### 🚨 Response Playbook

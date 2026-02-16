@@ -5997,16 +5997,17 @@ und browserbasierte Anmeldeinformationsspeicher durch nicht vertrauenswürdige P
 
 
 ---
-## Herunterfahren/Neustarten des Ultra-Pro High-Fidelity-Systems (T1529)
+## Erkennung eines unbefugten Herunterfahrens/Neustarts des Systems (T1529)
 - **ID:** `T1529.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt nicht autorisierte oder verdächtige Befehle zum Herunterfahren/Neustarten des Systems
-durch Überwachung auf erzwungene Operationen (-f), die von nicht vertrauenswürdigen Personen stammen
-Prozesslinien (Browser, Office-Apps, temporäre Ordner).
+- **Beschreibung:** Erkennt nicht autorisierte oder verdächtige Befehle zum Herunterfahren oder Neustarten des Systems.
+Überwacht erzwungene Abschaltungen oder Neustarts, die von nicht vertrauenswürdigen Prozesslinien ausgehen
+(Browser, Office-Apps, Skripte, temporäre Ordner) und filtert legitime Systeme
+Automatisierungs-, Verwaltungs- oder Gesundheitsprüfungsaufgaben.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

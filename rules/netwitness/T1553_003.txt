@@ -1,2 +1,1 @@
-((((process = '*\\makecat.exe*' OR process = '*\\pvk2pfx.exe*' OR process = '*\\signtool.exe*' OR process = '*\\upwiz.exe*'))) OR (((param = '*.cat*'))&& (((param = '*\\AppData\\Local\\Temp\\*' OR param = '*\\Users\\Public\\*' OR param = '*\\Downloads\\*' OR param = '*\\Desktop\\*' OR param = '*\\PerfLogs\\*'))) AND (((ParentImage = '*\\cmd.exe*' OR ParentImage = '*\\powershell.exe*' OR ParentImage = '*\\pwsh.exe*' OR ParentImage = '*\\wscript.exe*' OR ParentImage = '*\\cscript.exe*'))))) AND (NOT (((process begins 'C:\\Windows\\servicing\\TrustedInstaller.exe','C:\\Windows\\System32\\svchost.exe','C:\\Windows\\System32\\CCM\\') AND ((user.dst = '*NT AUTHORITY\\SYSTEM*'))))
-)
+conversion_failed

@@ -7222,16 +7222,18 @@ gyanús utak a fejlesztők téves pozitív üzeneteinek csökkentésére.
 
 
 ---
-## Ultra-Pro High-Fidelity SIP-eltérítés és megbízhatóság szubverzió (T1553.002)
+## SIP-eltérítés és bizalomfelforgatás (T1553.002)
 - **ID:** `T1553_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a tárgyi interfész csomagok (SIP) és a megbízhatósági szolgáltatók jogosulatlan módosítását.
-A nem szabványos vagy a felhasználó által írható útvonalakról származó DLL-regisztrációkra összpontosít, ami a
-általános technika a rosszindulatú binárisok érvényes aláírásának megjelenítésére.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a tárgyi interfész csomagok (SIP) gyanús módosítását,
+Trust Providers vagy WinVerifyTrust-hoz kapcsolódó beállításkulcsok.-ra összpontosít
+DLL átirányítás a felhasználó által írható útvonalakra, rendellenes végrehajtási környezet,
+és a bizalommal általában összefüggő magas kockázatú szülői folyamatok
+felforgató és aláírás-érvényesítési bypass technikák.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -7239,16 +7241,18 @@ A nem szabványos vagy a felhasználó által írható útvonalakról származó
 
 
 ---
-## Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003)
+## Windows Catalog Database Subversion (T1553.003)
 - **ID:** `T1553_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a jogosulatlan kiegészítéseket a Windows katalógus adatbázisban.
-A megelőzés érdekében a nem rendszerfiókokra és a gyanús forrásútvonalakra összpontosít
-az aláíratlan rosszindulatú programok az operációs rendszer által aláírtként jelennek meg.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a katalógusfájlok gyanús manipulációját vagy jogosulatlan hozzáadását
+a Windows Code Integrity Catalog Database adatbázisba (CatRoot / CatRoot2).
+A nagy kockázatú eszközökre, a rendellenes szülő-gyerek kapcsolatokra összpontosít,
+a nem szabványos forrásútvonalak és a ritka felhasználói kontextusok csökkentése
+vállalati telepítési téves pozitív eredmények.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -7606,16 +7606,18 @@ suspicious paths to reduce false positives from developers.
 
 
 ---
-## Ultra-Pro High-Fidelity SIP Hijacking and Trust Subversion (T1553.002)
+## SIP Hijacking and Trust Subversion (T1553.002)
 - **ID:** `T1553_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized modification of Subject Interface Packages (SIP) and Trust Providers. 
-Focuses on DLL registrations from non-standard or user-writable paths which is a 
-common technique to make malicious binaries appear as validly signed.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects suspicious modification of Subject Interface Packages (SIP),
+Trust Providers, or WinVerifyTrust-related registry keys. Focuses on
+DLL redirection to user-writable paths, anomalous execution context,
+and high-risk parent processes commonly associated with trust
+subversion and signature validation bypass techniques.
 
 
 #### 🚨 Response Playbook
@@ -7624,16 +7626,18 @@ common technique to make malicious binaries appear as validly signed.
 
 
 ---
-## Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003)
+## Windows Catalog Database Subversion (T1553.003)
 - **ID:** `T1553_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized additions to the Windows Catalog database. 
-Focuses on non-system accounts and suspicious source paths to prevent 
-unsigned malware from appearing as validly signed by the OS.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects suspicious manipulation or unauthorized addition of catalog files
+to the Windows Code Integrity Catalog Database (CatRoot / CatRoot2).
+Focuses on high-risk tooling, abnormal parent-child relationships,
+non-standard source paths, and uncommon user contexts to reduce
+enterprise deployment false positives.
 
 
 #### 🚨 Response Playbook

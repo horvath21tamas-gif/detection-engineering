@@ -7222,16 +7222,18 @@ verdächtige Pfade, um Fehlalarme von Entwicklern zu reduzieren.
 
 
 ---
-## Ultraprofessionelles High-Fidelity-SIP-Hijacking und Trust-Subversion (T1553.002)
+## SIP-Hijacking und Trust Subversion (T1553.002)
 - **ID:** `T1553_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Medium (Mäßiger Geräuschpegel)
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Änderungen an Subject Interface Packages (SIP) und Trust Providern.
-Konzentriert sich auf DLL-Registrierungen von nicht standardmäßigen oder vom Benutzer beschreibbaren Pfaden
-gängige Technik, um bösartige Binärdateien als gültig signiert erscheinen zu lassen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt verdächtige Änderungen an Subject Interface Packages (SIP),
+Vertrauensanbieter oder WinVerifyTrust-bezogene Registrierungsschlüssel.Konzentriert sich auf
+DLL-Umleitung auf vom Benutzer beschreibbare Pfade, anomaler Ausführungskontext,
+und übergeordnete Prozesse mit hohem Risiko, die häufig mit Vertrauen verbunden sind
+Subversion- und Signaturvalidierungs-Bypass-Techniken.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**
@@ -7239,16 +7241,18 @@ gängige Technik, um bösartige Binärdateien als gültig signiert erscheinen zu
 
 
 ---
-## Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003)
+## Windows-Katalogdatenbank-Subversion (T1553.003)
 - **ID:** `T1553_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt nicht autorisierte Ergänzungen zur Windows-Katalogdatenbank.
-Konzentriert sich auf Nicht-Systemkonten und verdächtige Quellpfade, die verhindert werden sollen
-verhindert, dass nicht signierte Malware als vom Betriebssystem gültig signiert angezeigt wird.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt verdächtige Manipulationen oder unbefugtes Hinzufügen von Katalogdateien
+zur Windows Code Integrity Catalog-Datenbank (CatRoot / CatRoot2).
+Konzentriert sich auf risikoreiche Werkzeuge, abnormale Eltern-Kind-Beziehungen,
+Nicht standardmäßige Quellpfade und ungewöhnliche Benutzerkontexte müssen reduziert werden
+Fehlalarme bei der Unternehmensbereitstellung.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -1,60 +1,90 @@
-title: Ultra-Pro High-Fidelity Cloud Storage Data Theft (T1530)
-id: 67bab759-3ec1-4c55-9884-708042c1ed27
+title: Cloud Storage Data Theft Detection (T1530)
+id: 30098b4b-933c-49d6-90d6-e3a4ed7fdcfb
 status: stable
 description: |
-    Detects unauthorized data exfiltration from cloud storage providers (AWS, Azure, GCP) 
-    by identifying suspicious CLI arguments, inline credential injection, and 
-    anomalous process lineages originating from non-admin contexts.
+    Detects unauthorized data exfiltration from cloud storage providers (AWS, Azure, GCP)
+    by monitoring suspicious CLI arguments, inline credential injection, recursive copy
+    commands, and anomalous process lineages originating from non-admin or user contexts.
+    Covers aws, az, gsutil, rclone, mc and other cloud CLI tools.
+
 author: hota05
-date: 2026-02-05
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1530/
 tags:
     - attack.collection
     - attack.t1530
+    - attack.cloud
+    - attack.exfiltration
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_tools:
-        - Image|endswith:
+
+    selection_cloud_tools:
+        Image|endswith:
             - '\aws.exe'
             - '\az.exe'
             - '\gsutil.exe'
             - '\rclone.exe'
             - '\mc.exe'
+            - '\s3cmd.exe'
 
-    selection_credentials:
+    selection_inline_credentials:
         CommandLine|contains:
             - '--access-key'
             - '--secret-key'
             - '--connection-string'
             - 'SharedAccessSignature'
             - '--account-key'
+            - '--secret-access-key'
+            - '--sas-token'
 
-    selection_actions:
+    selection_exfil_actions:
         CommandLine|contains:
-            - ' s3 sync '        
+            - ' s3 sync '
             - ' storage blob download-batch '
             - ' cp --recursive '
             - ' cp -r '
-            - ' ls -R '            
-            - ' --include "*.*"'   
+            - ' ls -R '
+            - ' --include "*.*"'
+            - ' rsync '
+            - ' azcopy '
 
-    selection_context:
+    selection_suspicious_context:
         ParentImage|endswith:
-            - '\w3wp.exe'          
-            - '\httpd.exe'       
+            - '\w3wp.exe'
+            - '\httpd.exe'
             - '\nginx.exe'
             - '\powershell.exe'
             - '\cmd.exe'
-        IntegrityLevel: 'Medium' 
+            - '\pwsh.exe'
+        IntegrityLevel: 'Medium'
+        User|startswith: 'USER_'
 
     filter_trusted_automation:
-        - CommandLine|contains:
+        CommandLine|contains:
             - 'Azure-Log-Collector'
             - 'C:\Program Files\Microsoft SDKs\'
             - 'cloud-init'
-        - username: 'NT AUTHORITY\SYSTEM' 
-        - ParentImage|contains: '\Jenkins\' 
+            - 'backup.ps1'
+        username: 'NT AUTHORITY\SYSTEM'
+        ParentImage|contains:
+            - '\Jenkins\'
+            - '\TeamCity\'
+            - '\GitLabRunner\'
 
-    condition: selection_tools and (selection_credentials or selection_actions) and selection_context and not filter_trusted_automation
+    condition: 
+        selection_cloud_tools 
+        and (selection_inline_credentials or selection_exfil_actions) 
+        and selection_suspicious_context 
+        and not filter_trusted_automation
+
+falsepositives:
+    - Scheduled backups using cloud CLI tools
+    - CI/CD pipelines (Jenkins, TeamCity, GitLab) performing legitimate data sync
+    - Admin tasks using PowerShell or CMD with inline credentials
+
 level: critical

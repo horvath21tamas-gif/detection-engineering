@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-16 13:47:38`
+**Utolsó frissítés:** `2026-02-16 14:10:54`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -310,7 +310,7 @@
 | T1497.002 | HIGH | Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002) |
 | T1497.003 | HIGH | Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497), Ultra-Pro High-Fidelity Time-based Evasion (T1497.003) |
 | T1498 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498) |
-| T1498.001 | HIGH | Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001), Ultra-Pro High-Fidelity Network DoS (T1498) |
+| T1498.001 | HIGH | Direct Flow Flood (T1498.001), Ultra-Pro High-Fidelity Network DoS (T1498) |
 | T1498.002 | HIGH | Ultra-Pro High-Fidelity Network DoS (T1498) |
 | T1499 | CRITICAL | Endpoint Denial of Service (T1499) |
 | T1499.001 | CRITICAL | OS Self-Destruction Detection (T1499.001) |

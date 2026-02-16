@@ -305,7 +305,7 @@
 - [Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002)](#ultra-pro-high-fidelity-user-interaction-evasion-(t1497002))
 - [Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)](#ultra-pro-high-fidelity-time-based-evasion-(t1497003))
 - [Ultra-Pro High-Fidelity Network DoS (T1498)](#ultra-pro-high-fidelity-network-dos-(t1498))
-- [Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001)](#ultra-pro-high-fidelity-direct-flow-flood-(t1498001))
+- [Közvetlen áramlású árvíz (T1498.001)](#közvetlen-áramlású-árvíz-(t1498001))
 - [Végpont szolgáltatásmegtagadás (T1499)](#végpont-szolgáltatásmegtagadás-(t1499))
 - [OS önmegsemmisítés-észlelés (T1499.001)](#os-önmegsemmisítés-észlelés-(t1499001))
 - [Szolgáltatás kimerülésének észlelése (T1499.002)](#szolgáltatás-kimerülésének-észlelése-(t1499002))
@@ -5699,16 +5699,16 @@ nem megbízható folyamatvonalakból származó stressztesztek.
 
 
 ---
-## Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001)
+## Közvetlen áramlású árvíz (T1498.001)
 - **ID:** `T1498_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [PKTMON.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Megfigyeléssel észleli a célzott közvetlen hálózati elárasztásokat (SYN, UDP, ICMP).
-agresszív csomaggenerálási paraméterekhez (mikrointervallumok, korlátlan sávszélesség)
-nem megbízható folyamatvonalakból származnak.
+- **Leírás:** Érzékeli a nagy pontosságú közvetlen hálózati elárasztási kísérleteket (SYN, UDP, ICMP)
+a folyamatok agresszív csomaggenerálási paraméterekkel történő figyelésével
+nem megbízható vagy gyanús folyamatvonalból származik.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -5807,7 +5807,7 @@ a téves pozitívumok minimalizálása érdekében.
 - **Leírás:** Figyeléssel észleli a célzott erőforrás-kimerülési kísérleteket (CPU, RAM vagy IO).
 végtelen hurok konstrukciók, hatalmas memóriafoglalások és rekurzív folyamatok
 gyanús vagy nem szabványos szülőfolyamat-vonalból származnak.
-Kiszűri a törvényes automatizálást, a karbantartási szkripteket és a fejlesztői környezeteket.
+Kiszűri a legitim automatizálást, a karbantartási szkripteket és a fejlesztői környezeteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -5919,7 +5919,7 @@ A rendszerindító képbefecskendezésre, az SPI írási műveletekre és a nem 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a Terminal Services (RDP) szolgáltatás DLL-einek jogosulatlan módosítását vagy eltérítését
 és szolgáltatók.Figyeli a ServiceDll és a ProviderPath rendszerleíró kulcsokat a manipulációra
-megbízhatatlan folyamatok, szokatlan utak vagy gyanús szereplők, kiszűrve a legitim
+megbízhatatlan folyamatok, szokatlan utak vagy gyanús szereplők, kiszűrve a törvényeseket
 rendszer bináris fájljai és szolgáltatási műveletei a téves pozitívumok minimalizálása érdekében.
 
 #### 🚨 Response Playbook
@@ -6045,7 +6045,7 @@ automatizálási, adminisztrációs vagy állapotfelmérési feladatok.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a felhőalapú tárolási szolgáltatóktól (AWS, Azure, GCP) származó jogosulatlan adatok kiszűrését
-a gyanús CLI-argumentumok figyelésével, a hitelesítő adatok soron belüli befecskendezésével, rekurzív másolással
+a gyanús CLI-argumentumok figyelésével, beépített hitelesítő adatok beszúrásával, rekurzív másolással
 parancsok és rendellenes folyamatsorok, amelyek nem rendszergazdai vagy felhasználói kontextusból származnak.
 Lefedi az aws, az, a gsutil, a rclone, az mc és más felhőalapú CLI eszközöket.
 

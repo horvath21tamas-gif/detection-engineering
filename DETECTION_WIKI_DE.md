@@ -305,7 +305,7 @@
 - [Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002)](#ultra-pro-high-fidelity-user-interaction-evasion-(t1497002))
 - [Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)](#ultra-pro-high-fidelity-time-based-evasion-(t1497003))
 - [Ultra-Pro High-Fidelity-Netzwerk-DoS (T1498)](#ultra-pro-high-fidelity-netzwerk-dos-(t1498))
-- [Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001)](#ultra-pro-high-fidelity-direct-flow-flood-(t1498001))
+- [Direktflussflut (T1498.001)](#direktflussflut-(t1498001))
 - [Endpunkt-Denial-of-Service (T1499)](#endpunkt-denial-of-service-(t1499))
 - [Erkennung der Selbstzerstörung des Betriebssystems (T1499.001)](#erkennung-der-selbstzerstörung-des-betriebssystems-(t1499001))
 - [Erkennung von Service-Erschöpfung (T1499.002)](#erkennung-von-service-erschöpfung-(t1499002))
@@ -5699,16 +5699,16 @@ Stresstests, die aus nicht vertrauenswürdigen Prozesslinien stammen.
 
 
 ---
-## Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001)
+## Direktflussflut (T1498.001)
 - **ID:** `T1498_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [PKTMON.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezieltes direktes Netzwerk-Flooding (SYN, UDP, ICMP) durch Überwachung
-für aggressive Paketgenerierungsparameter (Mikrointervalle, unbegrenzte Bandbreite)
-aus nicht vertrauenswürdigen Prozesslinien stammen.
+- **Beschreibung:** Erkennt High-Fidelity-Versuche zur direkten Netzwerküberflutung (SYN, UDP, ICMP)
+durch Überwachung von Prozessen mit aggressiven Paketgenerierungsparametern
+aus nicht vertrauenswürdigen oder verdächtigen Prozesslinien stammen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -5999,7 +5999,7 @@ Ernte oder Exfiltration.
 
 
 ---
-## Erkennung von Anwendungs-Token und Sitzungs-Hijacking (T1528)
+## Erkennung von Anwendungs-Token und Session-Hijacking (T1528)
 - **ID:** `T1528.yaml`
 - **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)

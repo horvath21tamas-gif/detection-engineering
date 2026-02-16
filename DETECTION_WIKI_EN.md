@@ -305,7 +305,7 @@
 - [Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002)](#ultra-pro-high-fidelity-user-interaction-evasion-(t1497002))
 - [Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)](#ultra-pro-high-fidelity-time-based-evasion-(t1497003))
 - [Ultra-Pro High-Fidelity Network DoS (T1498)](#ultra-pro-high-fidelity-network-dos-(t1498))
-- [Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001)](#ultra-pro-high-fidelity-direct-flow-flood-(t1498001))
+- [Direct Flow Flood (T1498.001)](#direct-flow-flood-(t1498001))
 - [Endpoint Denial of Service (T1499)](#endpoint-denial-of-service-(t1499))
 - [OS Self-Destruction Detection (T1499.001)](#os-self-destruction-detection-(t1499001))
 - [Service Exhaustion Detection (T1499.002)](#service-exhaustion-detection-(t1499002))
@@ -5993,16 +5993,16 @@ stress tests originating from untrusted process lineages.
 
 
 ---
-## Ultra-Pro High-Fidelity Direct Flow Flood (T1498.001)
+## Direct Flow Flood (T1498.001)
 - **ID:** `T1498_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [PKTMON.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted direct network flooding (SYN, UDP, ICMP) by monitoring 
-for aggressive packet generation parameters (micro-intervals, unlimited bandwidth) 
-originating from untrusted process lineages.
+- **Leírás:** Detects high-fidelity direct network flooding attempts (SYN, UDP, ICMP) 
+by monitoring processes with aggressive packet generation parameters 
+originating from untrusted or suspicious process lineages.
 
 
 #### 🚨 Response Playbook

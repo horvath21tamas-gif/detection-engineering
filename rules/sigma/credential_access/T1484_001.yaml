@@ -1,10 +1,11 @@
-title: Ultra-Pro Group Policy Modification & Abuse (T1484.001)
+title: Group Policy Modification & Abuse (T1484.001)
 id: e53d025a-d24e-471d-8cfe-890496057fc3
 status: stable
-description: |
-    Detects unauthorized GPO modifications by correlating file system writes to critical 
-    policy templates in SYSVOL with process-level anomalies. Filters out DFSR 
-    replication and standard GPMC management consoles to minimize false positives.
+description: >
+    Detects unauthorized Group Policy Object (GPO) modifications by monitoring 
+    file system writes to critical policy templates in SYSVOL and correlating 
+    them with suspicious process activity. Filters out standard DFSR replication 
+    and management console operations to reduce false positives.
 author: hota05
 date: 2026-02-02
 tags:
@@ -13,15 +14,15 @@ tags:
     - attack.t1484.001
 logsource:
     product: windows
-    category: file_event 
+    category: file_event
 detection:
     selection_critical_paths:
         TargetFilename|contains: '\Windows\SYSVOL\domain\Policies\'
         TargetFilename|endswith:
-            - '\GptTmpl.inf'     
-            - '\Scripts.ini'      
+            - '\GptTmpl.inf'
+            - '\Scripts.ini'
             - '\ScheduledTasks.xml'
-            - '\Registry.pol'     
+            - '\Registry.pol'
 
     selection_suspicious_writer:
         Image|endswith:
@@ -37,10 +38,12 @@ detection:
         AttributeCommonName: 'gPLink'
 
     filter_trusted_operations:
-        - Image|endswith: '\Windows\System32\svchost.exe'
-        - Image|endswith: '\Windows\System32\mmc.exe'
-        - username: 'NT AUTHORITY\SYSTEM'
-        - SubjectUserName|contains: 'GPO_SVC_' 
+        username: 'NT AUTHORITY\SYSTEM'
+        Image|endswith:
+            - '\Windows\System32\svchost.exe'
+            - '\Windows\System32\mmc.exe'
+        SubjectUserName|contains: 'GPO_SVC_'
 
-    condition: (selection_critical_paths and selection_suspicious_writer) or (selection_ad_link_change and not filter_trusted_operations)
+    condition: (selection_critical_paths and selection_suspicious_writer) 
+               or (selection_ad_link_change and not filter_trusted_operations)
 level: critical

@@ -23,19 +23,19 @@ logsource:
 detection:
 
     selection_recursive_intent:
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'findstr'
             - '/s'
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'grep'
             - '-r'
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'Get-ChildItem'
             - '-Recurse'
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'dir'
             - '/s'
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'where'
             - '/r'
 
@@ -87,7 +87,7 @@ detection:
             - '\Users\Public\'
 
     selection_non_system_user:
-        User|not_contains:
+        User|contains:
             - 'NT AUTHORITY\SYSTEM'
             - 'NT AUTHORITY\LOCAL SERVICE'
             - 'NT AUTHORITY\NETWORK SERVICE'
@@ -105,7 +105,7 @@ detection:
         selection_recursive_intent
         and selection_sensitive_targets
         and (selection_suspicious_lineage or selection_exfiltration)
-        and selection_non_system_user
+        and not selection_non_system_user
         and not filter_legit_systems
 
 falsepositives:

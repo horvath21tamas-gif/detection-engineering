@@ -5539,16 +5539,16 @@ von nicht standardmäßigen oder kompromittierten Dienstprozessen (z. B. w3wp.ex
 
 
 ---
-## Ultra-Pro High-Fidelity interne Verunstaltung (T1491.001)
+## Interne Verunstaltung (T1491.001)
 - **ID:** `T1491_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt interne Systemverunstaltungen durch Überwachung auf nicht autorisierte Änderungen
+- **Beschreibung:** Erkennt interne Systemverunstaltungen durch Überwachung nicht autorisierter Änderungen
 zu Desktop-Hintergründen, rechtlichen Hinweisen und Anmeldebannern über die Registrierung oder CLI,
-Insbesondere werden GPO-gesteuerte und vom System initiierte Änderungen herausgefiltert.
+während GPO-gesteuerte und vom System initiierte Änderungen herausgefiltert werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

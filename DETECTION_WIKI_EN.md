@@ -5824,16 +5824,16 @@ from non-standard or compromised service processes (e.g., w3wp.exe, httpd.exe).
 
 
 ---
-## Ultra-Pro High-Fidelity Internal Defacement (T1491.001)
+## Internal Defacement (T1491.001)
 - **ID:** `T1491_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects internal system defacement by monitoring for unauthorized modifications 
+- **Leírás:** Detects internal system defacement by monitoring unauthorized modifications 
 to desktop wallpapers, legal notices, and logon banners via Registry or CLI, 
-specifically filtering out GPO-driven and system-initiated changes.
+while filtering out GPO-driven and system-initiated changes.
 
 
 #### 🚨 Response Playbook

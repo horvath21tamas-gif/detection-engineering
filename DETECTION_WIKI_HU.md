@@ -5539,16 +5539,16 @@ nem szabványos vagy veszélyeztetett szolgáltatási folyamatokból (pl. w3wp.e
 
 
 ---
-## Ultra-Pro High-Fidelity belső roncsolás (T1491.001)
+## Belső sérülés (T1491.001)
 - **ID:** `T1491_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Az illetéktelen módosítások figyelésével észleli a belső rendszer károsodását
+- **Leírás:** A jogosulatlan módosítások figyelésével észleli a belső rendszer károsodását
 asztali háttérképekhez, jogi közleményekhez és bejelentkezési szalaghirdetésekhez Registry-n vagy CLI-n keresztül,
-kifejezetten kiszűri a csoportházirend-objektum által vezérelt és a rendszer által kezdeményezett változtatásokat.
+miközben kiszűri a GPO által vezérelt és a rendszer által kezdeményezett változtatásokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

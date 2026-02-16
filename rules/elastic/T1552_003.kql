@@ -1,1 +1,1 @@
-(process.command_line:(*.bash_history* OR *.zsh_history* OR *ConsoleHost_history.txt* OR *.mysql_history* OR *.psql_history*)) AND ((process.command_line:(*base64* OR *curl* OR *wget* OR *nc\ * OR *scp\ * OR *\ \>\ * OR *\ \|\ clip*)) OR (process.parent.executable:(*\\httpd.exe OR *\\nginx.exe OR *\\php\-cgi.exe OR *\\wsmprovhost.exe OR *\\psexesvc.exe))) AND (NOT (process.executable:(*\\powershell.exe OR *\\pwsh.exe OR *\\bash.exe OR *\\zsh.exe OR *\\conhost.exe)))
+conversion_failed

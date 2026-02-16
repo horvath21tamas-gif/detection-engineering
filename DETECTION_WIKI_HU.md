@@ -7085,16 +7085,17 @@ parancsokat a gyanús szülőfolyamatokkal, hogy minimalizálja a hamis pozitív
 
 
 ---
-## Ultra-Pro High-Fidelity Shell története és konzolfelfedezés (T1552.003)
+## Shell History & Console Discovery (T1552.003)
 - **ID:** `T1552_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BASH.EXE](https://lolbas-project.github.io/lolbas/), [CONHOST.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a shell előzményfájlok (.bash_history, ConsoleHost_history.txt) jogosulatlan kibontását.
-Az ezekhez a fájlokhoz hozzáférést biztosító nem shell-folyamatokra és a kiszűréssel kapcsolatos használatára összpontosít
-parancsok (base64, curl, átirányítás) az előzményfájlok elérési útjaival kombinálva.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BASH.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONHOST.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a héjtörténeti fájlok jogosulatlan felfedezését vagy kibontását
+(bash, zsh, ConsoleHost, adatbázis-héjak, Python REPL).
+A kiszűrési parancsokra, az előzményfájlokat elérő nem shell folyamatokra összpontosít,
+homályos PowerShell-használat, valamint távoli vagy webszerver-kontextusok.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

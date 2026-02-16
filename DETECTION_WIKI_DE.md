@@ -7085,16 +7085,17 @@ Befehle mit verdächtigen übergeordneten Prozessen, um Fehlalarme zu minimieren
 
 
 ---
-## Ultra-Pro High-Fidelity Shell-Verlauf und Konsolenerkennung (T1552.003)
+## Shell-Verlauf und Konsolenerkennung (T1552.003)
 - **ID:** `T1552_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BASH.EXE](https://lolbas-project.github.io/lolbas/), [CONHOST.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugtes Extrahieren von Shell-Verlaufsdateien (.bash_history, ConsoleHost_history.txt).
-Konzentriert sich auf Nicht-Shell-Prozesse, die auf diese Dateien zugreifen, und die Verwendung von Exfiltrationsfunktionen
-Befehle (Base64, Curl, Umleitung) kombiniert mit Verlaufsdateipfaden.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BASH.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONHOST.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt unbefugtes Entdecken oder Extrahieren von Shell-Verlaufsdateien
+(Bash, ZSH, ConsoleHost, Datenbank-Shells, Python REPL).
+Konzentriert sich auf Exfiltrationsbefehle, Nicht-Shell-Prozesse, die auf Verlaufsdateien zugreifen,
+verschleierte PowerShell-Nutzung und Remote- oder Webserver-Kontexte.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

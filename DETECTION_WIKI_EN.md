@@ -7461,16 +7461,17 @@ commands with suspicious parent processes to minimize false positives.
 
 
 ---
-## Ultra-Pro High-Fidelity Shell History & Console Discovery (T1552.003)
+## Shell History & Console Discovery (T1552.003)
 - **ID:** `T1552_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BASH.EXE](https://lolbas-project.github.io/lolbas/), [CONHOST.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized extraction of shell history files (.bash_history, ConsoleHost_history.txt). 
-Focuses on non-shell processes accessing these files and the use of exfiltration-related 
-commands (base64, curl, redirection) combined with history file paths.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BASH.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONHOST.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects unauthorized discovery or extraction of shell history files 
+(bash, zsh, ConsoleHost, database shells, Python REPL). 
+Focuses on exfiltration commands, non-shell processes accessing history files, 
+obfuscated PowerShell usage, and remote or web server contexts.
 
 
 #### 🚨 Response Playbook

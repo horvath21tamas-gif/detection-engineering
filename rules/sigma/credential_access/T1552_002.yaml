@@ -39,20 +39,20 @@ detection:
             - 'Software\Microsoft\Windows\CurrentVersion\Internet Settings\Credentials'
 
     selection_extraction_methods:
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'reg'
             - 'query'
             - '/s'
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'reg'
             - 'export'
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'regedit'
             - '/e'
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'Get-ItemProperty'
             - 'Registry::'
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'Invoke-Expression'
             - 'Export-Registry'
 
@@ -71,7 +71,7 @@ detection:
             - '\Users\Public\'
 
     selection_non_system_user:
-        User|not_contains:
+        User|contains:
             - 'NT AUTHORITY\SYSTEM'
             - 'NT AUTHORITY\LOCAL SERVICE'
             - 'NT AUTHORITY\NETWORK SERVICE'
@@ -88,7 +88,7 @@ detection:
     condition:
         (selection_registry_keys or selection_extraction_methods)
         and selection_suspicious_lineage
-        and selection_non_system_user
+        and not selection_non_system_user
         and not filter_legit_os
 
 falsepositives:

@@ -5421,16 +5421,14 @@ Standard-Verwaltungstools (GPMC).
 
 
 ---
-## Änderung und Missbrauch der Ultra-Pro-Gruppenrichtlinien (T1484.001)
+## Änderung und Missbrauch von Gruppenrichtlinien (T1484.001)
 - **ID:** `T1484_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Speicherintensiv)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt nicht autorisierte GPO-Änderungen durch Korrelation von Dateisystemschreibvorgängen mit kritischen Änderungen
-Richtlinienvorlagen in SYSVOL mit Anomalien auf Prozessebene.Filtert DFSR heraus
-Replikation und Standard-GPMC-Verwaltungskonsolen, um Fehlalarme zu minimieren.
+- **Beschreibung:** Erkennt nicht autorisierte Gruppenrichtlinienobjekt-Änderungen (GPO), indem es Dateisystemschreibvorgänge in kritische Richtlinienvorlagen in SYSVOL überwacht und sie mit verdächtigen Prozessaktivitäten korreliert.Filtert standardmäßige DFSR-Replikations- und Verwaltungskonsolenvorgänge heraus, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

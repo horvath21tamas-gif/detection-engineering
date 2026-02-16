@@ -5421,16 +5421,14 @@ szabványos adminisztrációs eszközök (GPMC).
 
 
 ---
-## Ultra-Pro csoportházirend-módosítás és visszaélés (T1484.001)
+## Csoportházirend módosítása és visszaélés (T1484.001)
 - **ID:** `T1484_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Tárolás-igényes)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a jogosulatlan csoportházirend-objektum-módosításokat azáltal, hogy a fájlrendszer kritikus írásait korrelálja
-szabályzatsablonok a SYSVOL-ban folyamatszintű anomáliákkal.Kiszűri a DFSR-t
-replikáció és szabványos GPMC felügyeleti konzolok a téves pozitívumok minimalizálása érdekében.
+- **Leírás:** Érzékeli a csoportházirend-objektum (GPO) jogosulatlan módosításait azáltal, hogy figyeli a fájlrendszer kritikus házirend-sablonjaira írt írásait a SYSVOL-ban, és korrelálja azokat a gyanús folyamattevékenységekkel.Kiszűri a szabványos DFSR-replikációs és felügyeleti konzolműveleteket a hamis pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

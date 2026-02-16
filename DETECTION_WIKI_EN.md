@@ -5699,16 +5699,14 @@ standard administrative tools (GPMC).
 
 
 ---
-## Ultra-Pro Group Policy Modification & Abuse (T1484.001)
+## Group Policy Modification & Abuse (T1484.001)
 - **ID:** `T1484_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Tárolás-igényes)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized GPO modifications by correlating file system writes to critical 
-policy templates in SYSVOL with process-level anomalies. Filters out DFSR 
-replication and standard GPMC management consoles to minimize false positives.
+- **Leírás:** Detects unauthorized Group Policy Object (GPO) modifications by monitoring  file system writes to critical policy templates in SYSVOL and correlating  them with suspicious process activity. Filters out standard DFSR replication  and management console operations to reduce false positives.
 
 
 #### 🚨 Response Playbook

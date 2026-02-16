@@ -341,7 +341,7 @@
 | T1542.002 | CRITICAL | Ultra-Pro Component Firmware Tampering (T1542.002) |
 | T1542.003 | CRITICAL | Ultra-Pro Bootkit Persistence & EFI Tampering (T1542.003) |
 | T1542.004 | CRITICAL | Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004) |
-| T1542.005 | CRITICAL | Ultra-Pro DHCP/PXE Boot Hijacking (T1542.005) |
+| T1542.005 | CRITICAL | DHCP/PXE Boot Hijacking (T1542.005) |
 | T1543 | CRITICAL | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services, Windows Event Log Service Impairment |
 | T1543.001 | HIGH | Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001), Suspicious macOS LaunchAgent or LaunchDaemon Plist Modification |
 | T1543.002 | HIGH | Ultra-Pro Systemd Service Persistence (T1543.002), High-Fidelity Systemd Timer Persistence Detection |

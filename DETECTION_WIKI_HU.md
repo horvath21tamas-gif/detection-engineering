@@ -335,7 +335,7 @@
 - [Ultra-Pro komponens firmware-szabotázs (T1542.002)](#ultra-pro-komponens-firmware-szabotázs-(t1542002))
 - [Ultra-Pro Bootkit Perzisztencia és EFI-szabotázs (T1542.003)](#ultra-pro-bootkit-perzisztencia-és-efi-szabotázs-(t1542003))
 - [Ultra-Pro alaplapi rendszerindítási kép és SPI Flash-szabotázs (T1542.004)](#ultra-pro-alaplapi-rendszerindítási-kép-és-spi-flash-szabotázs-(t1542004))
-- [Ultra-Pro DHCP/PXE rendszerindító eltérítés (T1542.005)](#ultra-pro-dhcppxe-rendszerindító-eltérítés-(t1542005))
+- [DHCP/PXE rendszerindítási eltérítés (T1542.005)](#dhcppxe-rendszerindítási-eltérítés-(t1542005))
 - [Nem adminisztrátor felhasználó, aki több érzékeny Windows-szolgáltatást próbál leállítani vagy módosítani](#nem-adminisztrátor-felhasználó-aki-több-érzékeny-windows-szolgáltatást-próbál-leállítani-vagy-módosítani)
 - [Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001)](#ultra-pro-macos-launch-agent-persistence-detection-(t1543001))
 - [Ultra-Pro Systemd Service Persistence (T1543.002)](#ultra-pro-systemd-service-persistence-(t1543002))
@@ -6230,15 +6230,16 @@ Az SPI flash írásra és a képinjektálási kísérletekre összpontosít.
 
 
 ---
-## Ultra-Pro DHCP/PXE rendszerindító eltérítés (T1542.005)
+## DHCP/PXE rendszerindítási eltérítés (T1542.005)
 - **ID:** `T1542_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a 66-os (Boot Server) és a 67-es (Bootfile Name) DHCP-beállítások jogosulatlan módosítását.
-A támadók ezt arra használják, hogy a hálózati rendszerindítási kérelmeket egy rosszindulatú TFTP-kiszolgálóra irányítsák át.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a 66-os (Boot Server) és a 67-es (Bootfile Name) DHCP-opciók jogosulatlan módosítását,
+amelyet a támadók a hálózati rendszerindítási kérelmek rosszindulatú TFTP-kiszolgálóra való átirányítására használnak.
+Szűri a megbízható rendszerszolgáltatásokat a téves pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

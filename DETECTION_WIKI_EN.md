@@ -335,7 +335,7 @@
 - [Ultra-Pro Component Firmware Tampering (T1542.002)](#ultra-pro-component-firmware-tampering-(t1542002))
 - [Ultra-Pro Bootkit Persistence & EFI Tampering (T1542.003)](#ultra-pro-bootkit-persistence-&-efi-tampering-(t1542003))
 - [Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004)](#ultra-pro-mainboard-boot-image-&-spi-flash-tampering-(t1542004))
-- [Ultra-Pro DHCP/PXE Boot Hijacking (T1542.005)](#ultra-pro-dhcppxe-boot-hijacking-(t1542005))
+- [DHCP/PXE Boot Hijacking (T1542.005)](#dhcppxe-boot-hijacking-(t1542005))
 - [Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services](#non-admin-user-attempting-to-stop-or-modify-multiple-sensitive-windows-services)
 - [Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001)](#ultra-pro-macos-launch-agent-persistence-detection-(t1543001))
 - [Ultra-Pro Systemd Service Persistence (T1543.002)](#ultra-pro-systemd-service-persistence-(t1543002))
@@ -6554,15 +6554,16 @@ Focuses on SPI flash writing and image injection attempts.
 
 
 ---
-## Ultra-Pro DHCP/PXE Boot Hijacking (T1542.005)
+## DHCP/PXE Boot Hijacking (T1542.005)
 - **ID:** `T1542_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized modification of DHCP Options 66 (Boot Server) and 67 (Bootfile Name).
-Attackers use this to redirect network boot requests to a malicious TFTP server.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects unauthorized modification of DHCP Options 66 (Boot Server) and 67 (Bootfile Name), 
+which attackers use to redirect network boot requests to a malicious TFTP server. 
+Filters trusted system services to reduce false positives.
 
 
 #### 🚨 Response Playbook

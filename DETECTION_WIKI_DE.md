@@ -335,7 +335,7 @@
 - [Manipulation der Ultra-Pro-Komponenten-Firmware (T1542.002)](#manipulation-der-ultra-pro-komponenten-firmware-(t1542002))
 - [Ultra-Pro Bootkit-Persistenz und EFI-Manipulation (T1542.003)](#ultra-pro-bootkit-persistenz-und-efi-manipulation-(t1542003))
 - [Ultra-Pro Mainboard-Boot-Image und SPI-Flash-Manipulation (T1542.004)](#ultra-pro-mainboard-boot-image-und-spi-flash-manipulation-(t1542004))
-- [Ultra-Pro DHCP/PXE-Boot-Hijacking (T1542.005)](#ultra-pro-dhcppxe-boot-hijacking-(t1542005))
+- [DHCP/PXE-Boot-Hijacking (T1542.005)](#dhcppxe-boot-hijacking-(t1542005))
 - [Benutzer ohne Administratorrechte versuchen, mehrere sensible Windows-Dienste zu stoppen oder zu ändern](#benutzer-ohne-administratorrechte-versuchen-mehrere-sensible-windows-dienste-zu-stoppen-oder-zu-ändern)
 - [Ultra-Pro macOS Launch Agent-Persistenzerkennung (T1543.001)](#ultra-pro-macos-launch-agent-persistenzerkennung-(t1543001))
 - [Ultra-Pro Systemd-Dienstpersistenz (T1543.002)](#ultra-pro-systemd-dienstpersistenz-(t1543002))
@@ -6230,15 +6230,16 @@ Konzentriert sich auf SPI-Flash-Schreib- und Image-Injection-Versuche.
 
 
 ---
-## Ultra-Pro DHCP/PXE-Boot-Hijacking (T1542.005)
+## DHCP/PXE-Boot-Hijacking (T1542.005)
 - **ID:** `T1542_005.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Medium (Mäßiger Geräuschpegel)
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt unbefugte Änderungen der DHCP-Optionen 66 (Boot-Server) und 67 (Bootdateiname).
-Angreifer nutzen dies, um Netzwerk-Boot-Anfragen an einen bösartigen TFTP-Server umzuleiten.
+mit dem Angreifer Netzwerk-Boot-Anfragen an einen bösartigen TFTP-Server umleiten.
+Filtert vertrauenswürdige Systemdienste, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

@@ -5514,7 +5514,7 @@ Systempfade, die von nicht privilegierten oder weborientierten Dienstkonten init
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt unbefugte Website-Verunstaltungen durch Überwachung verdächtiger Dateien
 Manipulationen (Verschieben, Kopieren, Echo, Inhalt festlegen, Ersetzen) im Web-Root
-Verzeichnisse, die aus nicht standardmäßigen oder möglicherweise gefährdeten Verzeichnissen stammen
+Verzeichnisse, die aus nicht standardmäßigen oder potenziell gefährdeten Verzeichnissen stammen
 Webdienstprozesse (z. B. w3wp.exe, httpd.exe).
 
 #### 🚨 Reaktions-Playbook

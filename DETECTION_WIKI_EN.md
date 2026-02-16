@@ -5974,7 +5974,7 @@ targeting long-duration stalls used to exhaust sandbox analysis limits.
 
 
 ---
-## Ultra-Pro High-Fidelity Network DoS (T1498)
+## Network DoS (T1498)
 - **ID:** `T1498.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
@@ -5983,7 +5983,7 @@ targeting long-duration stalls used to exhaust sandbox analysis limits.
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [PKTMON.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects targeted network denial of service attempts (flooding, amplification) 
 by monitoring for low-level packet manipulation tools and high-bandwidth 
-stress tests originating from untrusted process lineages.
+stress tests originating from untrusted or suspicious process lineages.
 
 
 #### 🚨 Response Playbook

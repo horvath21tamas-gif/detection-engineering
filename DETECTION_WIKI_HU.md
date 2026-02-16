@@ -5681,7 +5681,7 @@ a sandbox elemzési határértékek kimerítésére használt hosszú távú ist
 
 
 ---
-## Ultra-Pro High-Fidelity Network DoS (T1498)
+## Network DoS (T1498)
 - **ID:** `T1498.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
@@ -5690,7 +5690,7 @@ a sandbox elemzési határértékek kimerítésére használt hosszú távú ist
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [PKTMON.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a célzott hálózati szolgáltatásmegtagadási kísérleteket (elárasztás, erősítés)
 az alacsony szintű csomagkezelési eszközök és a nagy sávszélesség figyelésével
-nem megbízható folyamatvonalakból származó stressztesztek.
+nem megbízható vagy gyanús folyamatvonalakból származó stressztesztek.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

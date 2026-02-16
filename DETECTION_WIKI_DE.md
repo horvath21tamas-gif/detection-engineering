@@ -5681,7 +5681,7 @@ Ziel sind langfristige Verzögerungen, die dazu dienen, die Grenzen der Sandbox-
 
 
 ---
-## Ultra-Pro High-Fidelity-Netzwerk-DoS (T1498)
+## Netzwerk-DoS (T1498)
 - **ID:** `T1498.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
@@ -5690,7 +5690,7 @@ Ziel sind langfristige Verzögerungen, die dazu dienen, die Grenzen der Sandbox-
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [PKTMON.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt gezielte Netzwerk-Denial-of-Service-Versuche (Flooding, Amplification)
 durch Überwachung auf Low-Level-Paketmanipulationstools und hohe Bandbreite
-Stresstests, die aus nicht vertrauenswürdigen Prozesslinien stammen.
+Stresstests, die aus nicht vertrauenswürdigen oder verdächtigen Prozesslinien stammen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

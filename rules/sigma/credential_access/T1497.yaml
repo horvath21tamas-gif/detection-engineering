@@ -1,58 +1,59 @@
-title: Ultra-Pro High-Fidelity Virtualization/Sandbox Evasion (T1497)
+title: Virtualization/Sandbox Evasion (T1497)
 id: 42a22a82-ac0f-4f0f-b496-92001261f659
 status: stable
 description: |
-    Detects sophisticated sandbox evasion by monitoring for rapid, multi-vector 
-    virtualization checks (BIOS, MAC, CPU, Disk) initiated by untrusted processes 
-    within suspicious directories.
+  Detects sophisticated sandbox evasion by monitoring rapid, multi-vector 
+  virtualization checks (BIOS, MAC, CPU, Disk) and time-delay tactics 
+  initiated by untrusted processes within suspicious directories.
 author: hota05
 date: 2026-02-03
 tags:
-    - attack.defense_evasion
-    - attack.t1497
-    - attack.t1497.001
-    - attack.t1497.003
+  - attack.defense_evasion
+  - attack.t1497
+  - attack.t1497.001
+  - attack.t1497.003
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_untrusted_source:
-        Image|contains:
-            - '\Users\'
-            - '\AppData\Local\Temp\'
-            - '\Downloads\'
-            - '\Public\'
-            - '\PerfLogs\'
+  untrusted_sources:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\Local\Temp\'
+      - '\Downloads\'
+      - '\Public\'
+      - '\PerfLogs\'
 
-    selection_wmi_payloads:
-        CommandLine|contains:
-            - 'Win32_BIOS'
-            - 'Win32_ComputerSystem'
-            - 'Win32_BaseBoard'
-            - 'Win32_DiskDrive'
-            - 'Win32_VideoController'
-    
-    selection_vm_indicators:
-        CommandLine|contains:
-            - 'VMware'
-            - 'VBOX'
-            - 'VirtualBox'
-            - 'QEMU'
-            - 'Hyper-V'
-            - 'Parallels'
+  wmi_checks:
+    CommandLine|contains:
+      - 'Win32_BIOS'
+      - 'Win32_ComputerSystem'
+      - 'Win32_BaseBoard'
+      - 'Win32_DiskDrive'
+      - 'Win32_VideoController'
 
-    selection_delay_tactics:
-        CommandLine|contains:
-            - 'timeout /t'
-            - 'ping 127.0.0.1 -n'
-            - 'choice /c y /n /t' 
+  vm_indicators:
+    CommandLine|contains:
+      - 'VMware'
+      - 'VBOX'
+      - 'VirtualBox'
+      - 'QEMU'
+      - 'Hyper-V'
+      - 'Parallels'
 
-    filter_trusted_it_tools:
-        Image|startswith:
-            - 'C:\Windows\System32\wbem\WmiPrvSE.exe'
-            - 'C:\Program Files\Microsoft Configuration Manager\'
-            - 'C:\Program Files (x86)\'
-        ParentImage|endswith: '\svchost.exe'
+  delay_tactics:
+    CommandLine|contains:
+      - 'timeout /t'
+      - 'ping 127.0.0.1 -n'
+      - 'choice /c y /n /t'
 
-    condition: selection_untrusted_source and ( (selection_wmi_payloads and selection_vm_indicators) or selection_delay_tactics ) and not filter_trusted_it_tools
+  trusted_it_tools_filter:
+    Image|startswith:
+      - 'C:\Windows\System32\wbem\WmiPrvSE.exe'
+      - 'C:\Program Files\Microsoft Configuration Manager\'
+      - 'C:\Program Files (x86)\'
+    ParentImage|endswith: '\svchost.exe'
+
+  condition: untrusted_sources and ((wmi_checks and vm_indicators) or delay_tactics) 
+             and not trusted_it_tools_filter
 level: high

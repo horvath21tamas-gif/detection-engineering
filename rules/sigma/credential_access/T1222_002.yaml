@@ -1,11 +1,13 @@
-title: Ultra-Pro High-Fidelity Linux File Permissions Modification (T1222.002)
+title: Linux File Permissions Modification (T1222.002)
 id: 2b31af57-fd08-40fa-b4af-cedb8e3b7472
 status: stable
-description: |
+description: >
     Detects targeted Linux permission tampering by identifying high-risk 
-    attribute changes (SUID, Immutability) or mass modifications in sensitive 
-    system paths initiated by non-privileged or web-facing service accounts.
-author: hota05 
+    attribute changes such as SUID, immutable, or append-only flags, as well as 
+    mass permission modifications in sensitive system paths. Focuses on actions 
+    initiated by unprivileged or web-facing service accounts while filtering out 
+    trusted system operations.
+author: hota05
 date: 2026-02-03
 tags:
     - attack.defense_evasion
@@ -57,16 +59,20 @@ detection:
             - '/var/tmp/'
 
     filter_trusted_system:
-        - ParentImage|endswith:
+        ParentImage|endswith:
             - '/bin/apt'
             - '/bin/dpkg'
             - '/bin/yum'
             - '/bin/dnf'
             - '/bin/rpm'
             - '/sbin/cloud-init'
-        - CommandLine|contains:
+        CommandLine|contains:
             - ' --help'
             - ' --version'
 
-    condition: selection_tools and ((selection_dangerous_flags and selection_suspicious_source) or selection_critical_paths or selection_untrusted_users) and not filter_trusted_system
+    condition: selection_tools 
+               and ((selection_dangerous_flags and selection_suspicious_source) 
+                    or selection_critical_paths 
+                    or selection_untrusted_users) 
+               and not filter_trusted_system
 level: high

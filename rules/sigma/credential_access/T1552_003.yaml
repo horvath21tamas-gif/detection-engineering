@@ -1,36 +1,64 @@
-title: Ultra-Pro High-Fidelity Shell History & Console Discovery (T1552.003)
+title: Shell History & Console Discovery (T1552.003)
 id: ff11bbdd-1eb0-441a-8c36-93fe5e6f6aa0
 status: stable
 description: |
-    Detects unauthorized extraction of shell history files (.bash_history, ConsoleHost_history.txt). 
-    Focuses on non-shell processes accessing these files and the use of exfiltration-related 
-    commands (base64, curl, redirection) combined with history file paths.
+    Detects unauthorized discovery or extraction of shell history files 
+    (bash, zsh, ConsoleHost, database shells, Python REPL). 
+    Focuses on exfiltration commands, non-shell processes accessing history files, 
+    obfuscated PowerShell usage, and remote or web server contexts.
 author: hota05
-date: 2026-02-04
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1552/003/
 tags:
     - attack.credential_access
     - attack.t1552.003
+    - attack.discovery
 logsource:
     category: process_creation
-    product: windows 
+    product: windows
+
 detection:
-    selection_files:
+    selection_history_files:
         CommandLine|contains:
             - '.bash_history'
             - '.zsh_history'
-            - 'ConsoleHost_history.txt' 
+            - '.fish_history'
+            - 'ConsoleHost_history.txt'
             - '.mysql_history'
             - '.psql_history'
+            - '.python_history'
 
-    selection_exfiltration:
+    selection_exfiltration_patterns:
         CommandLine|contains:
             - 'base64'
-            - 'curl'
-            - 'wget'
-            - 'nc '          
+            - 'certutil -encode'
+            - 'curl '
+            - 'wget '
+            - 'nc '
             - 'scp '
-            - ' > '            
-            - ' | clip'        
+            - ' > '
+            - '>>'
+            - ' | clip'
+            - 'Invoke-WebRequest'
+
+    selection_obfuscation:
+        CommandLine|contains:
+            - '-enc'
+            - '-EncodedCommand'
+            - 'IEX'
+            - 'Invoke-Expression'
+
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\httpd.exe'
+            - '\nginx.exe'
+            - '\php-cgi.exe'
+            - '\wsmprovhost.exe'
+            - '\psexesvc.exe'
+            - '\wmiprvse.exe'
+            - '\cmd.exe'
+            - '\powershell.exe'
 
     filter_legit_shells:
         Image|endswith:
@@ -39,14 +67,24 @@ detection:
             - '\bash.exe'
             - '\zsh.exe'
             - '\conhost.exe'
+            - '\cmd.exe'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\httpd.exe'       
-            - '\nginx.exe'
-            - '\php-cgi.exe'
-            - '\wsmprovhost.exe' 
-            - '\psexesvc.exe'    
+    selection_non_system_user:
+        User|not_contains:
+            - 'NT AUTHORITY\SYSTEM'
+            - 'NT AUTHORITY\LOCAL SERVICE'
+            - 'NT AUTHORITY\NETWORK SERVICE'
 
-    condition: selection_files and (selection_exfiltration or selection_suspicious_parent) and not filter_legit_shells
+    condition:
+        selection_history_files
+        and (selection_exfiltration_patterns or selection_obfuscation or selection_suspicious_parent)
+        and selection_non_system_user
+        and not filter_legit_shells
+
+falsepositives:
+    - Developer shell sessions exporting history for backup
+    - CI/CD build agents capturing console output
+    - Admin troubleshooting via command history
+    - Security audits reading historical commands
+
 level: high

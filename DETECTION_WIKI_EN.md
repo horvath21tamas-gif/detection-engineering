@@ -5551,15 +5551,14 @@ whitelisting and execute arbitrary scripts.
 
 
 ---
-## Ultra-Pro High-Fidelity Office Template Injection (T1221)
+## Office Template Injection (T1221)
 - **ID:** `T1221.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Kritikusan Magas (SIEM gyilkos kategória!)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects Microsoft Office applications fetching remote templates from non-Microsoft 
-infrastructure, followed by the creation of temporary template files.
+- **Leírás:** Detects Microsoft Office applications fetching remote templates from  non-Microsoft infrastructure, potentially indicating malicious template injection. Monitors network connections from Office apps to suspicious external hosts,  excluding trusted Microsoft domains and internal IP ranges.
 
 
 #### 🚨 Response Playbook

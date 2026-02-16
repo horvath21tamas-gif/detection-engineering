@@ -5281,15 +5281,14 @@ Whitelisting und die Ausführung beliebiger Skripte.
 
 
 ---
-## Ultra-Pro High-Fidelity-Office-Vorlageninjektion (T1221)
+## Office-Vorlageninjektion (T1221)
 - **ID:** `T1221.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Kritisch hoch (SIEM-Killerkategorie!)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Microsoft Office-Anwendungen, die Remote-Vorlagen von Nicht-Microsoft abrufen
-Infrastruktur, gefolgt von der Erstellung temporärer Vorlagendateien.
+- **Beschreibung:** Erkennt Microsoft Office-Anwendungen, die Remote-Vorlagen von einer Nicht-Microsoft-Infrastruktur abrufen, was möglicherweise auf die Einschleusung böswilliger Vorlagen hindeutet.Überwacht Netzwerkverbindungen von Office-Apps zu verdächtigen externen Hosts, ausgenommen vertrauenswürdige Microsoft-Domänen und interne IP-Bereiche.
 
 #### 🚨 Reaktions-Playbook
 1. **IP-Reputation: Überprüfen Sie die Remote-IP-Adresse in Reputationsdatenbanken.**

@@ -5281,15 +5281,14 @@ tetszőleges szkriptek engedélyezése és végrehajtása.
 
 
 ---
-## Ultra-Pro High-Fidelity irodai sablonbefecskendezés (T1221)
+## Irodai sablon befecskendezése (T1221)
 - **ID:** `T1221.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Kritikusan Magas (SIEM gyilkos kategória!)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Microsoft Office-alkalmazásokat, amelyek távoli sablonokat kérnek le nem a Microsofttól
-infrastruktúra, majd ideiglenes sablonfájlok létrehozása következik.
+- **Leírás:** Érzékeli a Microsoft Office-alkalmazásokat, amelyek távoli sablonokat kérnek le a nem Microsoft infrastruktúrából, ami potenciálisan rosszindulatú sabloninjektálást jelez.Figyeli az Office-alkalmazások és a gyanús külső gazdagépek közötti hálózati kapcsolatokat, kivéve a megbízható Microsoft-tartományokat és a belső IP-tartományokat.
 
 #### 🚨 Response Playbook
 1. **IP hírnév: Ellenőrizd a távoli IP címet hírnév-adatbázisokban.**

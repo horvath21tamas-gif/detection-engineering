@@ -1,48 +1,105 @@
-title: Ultra-Pro High-Fidelity SIP Hijacking and Trust Subversion (T1553.002)
+title: SIP Hijacking and Trust Subversion (T1553.002)
 id: 783f4673-576c-4ccf-8a17-a1f4d2a2e24b
 status: stable
 description: |
-    Detects unauthorized modification of Subject Interface Packages (SIP) and Trust Providers. 
-    Focuses on DLL registrations from non-standard or user-writable paths which is a 
-    common technique to make malicious binaries appear as validly signed.
+    Detects suspicious modification of Subject Interface Packages (SIP),
+    Trust Providers, or WinVerifyTrust-related registry keys. Focuses on
+    DLL redirection to user-writable paths, anomalous execution context,
+    and high-risk parent processes commonly associated with trust
+    subversion and signature validation bypass techniques.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1553/002/
 tags:
     - attack.defense_evasion
     - attack.t1553.002
+    - attack.persistence
+    - attack.privilege_escalation
+
 logsource:
     product: windows
     category: registry_event
+
 detection:
-    selection_sip_registry:
+    selection_sip_keys:
         TargetObject|contains:
             - '\SOFTWARE\Microsoft\Cryptography\OID\EncodingType 0\CryptSIPDllVerifyIndirectData\'
             - '\SOFTWARE\Microsoft\Cryptography\OID\EncodingType 0\CryptSIPDllGetSignedDataMsg\'
             - '\SOFTWARE\Microsoft\Cryptography\Providers\Trust\FinalPolicy\'
+            - '\SOFTWARE\Microsoft\Cryptography\Providers\Trust\Wintrust\'
+            - '\SOFTWARE\Wow6432Node\Microsoft\Cryptography\OID\EncodingType 0\'
 
-    selection_suspicious_path:
+    selection_registry_write:
+        EventType:
+            - 'SetValue'
+            - 'CreateKey'
+
+    selection_suspicious_dll_path:
         Details|contains:
             - '\AppData\'
             - '\Users\Public\'
-            - '\Windows\Temp\'
+            - '\ProgramData\'
+            - '\Temp\'
             - '\Downloads\'
+            - '\Desktop\'
             - '\PerfLogs\'
-            - '\ProgramData\' 
 
-    selection_process:
+    selection_high_risk_process:
         Image|endswith:
             - '\reg.exe'
             - '\powershell.exe'
+            - '\pwsh.exe'
             - '\cmd.exe'
-            - '\cscript.exe'
             - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+            - '\rundll32.exe'
 
-    filter_trusted_installers:
+    selection_suspicious_parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\acrord32.exe'
+            - '\mshta.exe'
+
+    selection_non_system_user:
+        User|not_contains:
+            - 'NT AUTHORITY\SYSTEM'
+            - 'NT AUTHORITY\LOCAL SERVICE'
+            - 'NT AUTHORITY\NETWORK SERVICE'
+
+    filter_legitimate_servicing:
         Image|startswith:
             - 'C:\Windows\servicing\TrustedInstaller.exe'
-            - 'C:\Windows\System32\sysprep\'
-            - 'C:\Program Files\Common Files\Microsoft Shared\ClickToRun\' 
-        username: 'NT AUTHORITY\SYSTEM'
+            - 'C:\Windows\System32\dism.exe'
+            - 'C:\Windows\System32\TiWorker.exe'
+            - 'C:\Program Files\Common Files\Microsoft Shared\ClickToRun\'
+        User|startswith:
+            - 'NT AUTHORITY\SYSTEM'
 
-    condition: selection_sip_registry and (selection_suspicious_path or selection_process) and not filter_trusted_installers
+    filter_system_dll_path:
+        Details|startswith:
+            - 'C:\Windows\System32\'
+            - 'C:\Windows\SysWOW64\'
+
+    condition:
+        selection_sip_keys
+        and selection_registry_write
+        and (
+            selection_suspicious_dll_path
+            or selection_high_risk_process
+            or selection_suspicious_parent
+            or selection_non_system_user)
+        and not filter_legitimate_servicing
+        and not filter_system_dll_path
+
+falsepositives:
+    - Windows feature upgrades
+    - Microsoft Office Click-to-Run updates
+    - Enterprise security software integrating custom trust providers
+    - Rare PKI / security product installations
+
 level: critical

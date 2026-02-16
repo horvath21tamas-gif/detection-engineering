@@ -44,24 +44,24 @@ detection:
             - 'secret_key'
 
     selection_env_enumeration:
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'env'
             - '|'
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'printenv'
             - '|'
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'set'
             - '|'
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'export'
             - '|'
 
     selection_secret_dumping:
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'cat'
             - 'base64'
-        - CommandLine|contains|all:
+        - CommandLine|contains:
             - 'cat'
             - 'grep'
         - CommandLine|contains:
@@ -105,7 +105,7 @@ detection:
             - '/usr/bin/fluentd'
             - '/usr/bin/telegraf'
             - '/pause'
-        User|in:
+        User:
             - 'fluentd'
             - 'root'   
 

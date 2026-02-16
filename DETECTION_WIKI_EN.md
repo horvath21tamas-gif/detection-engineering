@@ -7305,12 +7305,12 @@ processes such as browsers, office suites, or temporary directories.
 
 
 ---
-## Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005)
+## SUID Desktop Entry & Shortcut Abuse (T1548.005)
 - **ID:** `T1548_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Tárolás-igényes)
-- **Leírás:** Detects unauthorized modification of XDG desktop entries or shortcuts that attempt 
+- **Leírás:** Detects unauthorized modifications of XDG desktop entries or shortcuts that attempt 
 to execute SUID binaries or leverage pkexec for privilege escalation. 
 Focuses on modifications in user-writable directories by untrusted processes.
 

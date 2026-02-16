@@ -6938,7 +6938,7 @@ Prozesse wie Browser, Office-Suiten oder temporäre Verzeichnisse.
 
 
 ---
-## Ultra-Pro SUID-Desktop-Eintrag und Missbrauch von Verknüpfungen (T1548.005)
+## SUID-Desktop-Eintrag und Missbrauch von Verknüpfungen (T1548.005)
 - **ID:** `T1548_005.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

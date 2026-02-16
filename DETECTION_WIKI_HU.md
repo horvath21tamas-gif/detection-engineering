@@ -6938,12 +6938,12 @@ folyamatok, például böngészők, irodai programcsomagok vagy ideiglenes címt
 
 
 ---
-## Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005)
+## SUID Desktop Entry & Shortcut Abuse (T1548.005)
 - **ID:** `T1548_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Tárolás-igényes)
-- **Leírás:** Érzékeli az XDG asztali bejegyzések vagy parancsikonok jogosulatlan módosítását, amelyek megpróbálják
+- **Leírás:** Érzékeli az XDG asztali bejegyzések vagy parancsikonok jogosulatlan módosításait, amelyek megpróbálják
 a SUID binárisok végrehajtásához vagy a pkexec kihasználásához a jogosultságok kiterjesztéséhez.
 A felhasználók által írható könyvtárakban a nem megbízható folyamatok által végzett módosításokra összpontosít.
 

@@ -6086,16 +6086,17 @@ frissítőket a nagy pontosságú riasztások biztosítására.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Account Exfil (T1537)
+## Felhőbeli fiókok kiszűrésének észlelése (T1537)
 - **ID:** `T1537.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az adatok kiszűrését a natív felhőalapú CLI-eszközökön keresztül a következők figyelésével
-fiókok közötti szinkronizálás, kézi hitelesítő adatok beadása a CLI-ben,
-és a nem adminisztratív folyamatok vonalaiból kezdeményezett transzferek.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** A natív CLI-eszközökön keresztül észleli a felhőalapú fiókok esetleges kiszűrését.Monitorok
+fiókok közötti szinkronizálás, kézi hitelesítő adatok beadása és átvitel
+nem adminisztratív vagy gyanús folyamatvonalból indult.Borítók
+AWS, Azure, GCP és Snowball környezetek.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

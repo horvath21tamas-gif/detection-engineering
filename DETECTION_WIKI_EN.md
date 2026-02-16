@@ -6402,16 +6402,17 @@ updaters to ensure high-fidelity alerts.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Account Exfil (T1537)
+## Cloud Account Exfiltration Detection (T1537)
 - **ID:** `T1537.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects data exfiltration via native cloud CLI tools by monitoring for 
-cross-account synchronization, manual credential injection in CLI, 
-and transfers initiated from non-administrative process lineages.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects potential cloud account exfiltration via native CLI tools. Monitors
+cross-account synchronization, manual credential injection, and transfers 
+initiated from non-administrative or suspicious process lineages. Covers 
+AWS, Azure, GCP, and Snowball environments.
 
 
 #### 🚨 Response Playbook

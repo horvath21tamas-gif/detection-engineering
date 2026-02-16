@@ -6086,16 +6086,17 @@ Updater, um Warnungen mit hoher Wiedergabetreue zu gewährleisten.
 
 
 ---
-## Ultra-Pro High-Fidelity-Cloud-Konto-Exfil (T1537)
+## Erkennung von Cloud-Konto-Exfiltration (T1537)
 - **ID:** `T1537.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Datenexfiltration über native Cloud-CLI-Tools durch Überwachung
-Kontoübergreifende Synchronisierung, manuelle Anmeldeinformationsinjektion in CLI,
-und Übertragungen, die von nicht-administrativen Prozesslinien initiiert werden.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt potenzielle Exfiltration von Cloud-Konten über native CLI-Tools.Monitore
+kontoübergreifende Synchronisierung, manuelle Eingabe von Anmeldeinformationen und Übertragungen
+initiiert von nicht-administrativen oder verdächtigen Prozesslinien.Abdeckungen
+AWS-, Azure-, GCP- und Snowball-Umgebungen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

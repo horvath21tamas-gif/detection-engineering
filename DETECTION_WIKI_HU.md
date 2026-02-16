@@ -7121,14 +7121,18 @@ címtárbejárás nem megbízható folyamatokkal.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Credential Discovery (T1552.005)
+## Cloud Credential Discovery (T1552.005)
 - **ID:** `T1552_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a felhő hitelesítő adatok (AWS, Azure, GCP) jogosulatlan kimásolását a helyi adatokból
-konfigurációs fájlok.Szűri a jogos CLI-használatot, és a rendellenes folyamatviselkedésre összpontosít
-például az átirányítás, a kódolás vagy a webszerverekről és távoli rendszerhéjakról való hozzáférés.
+
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a felhőalapú hitelesítő adatok jogosulatlan felfedezését vagy kimásolását
+(AWS, Azure, GCP, Docker) a helyi konfigurációs fájlokból.-ra összpontosít
+gyanús hozzáférési minták, kódolás, átirányítás, távoli végrehajtás
+kontextus és abnormális folyamatvonal, miközben csökkenti a hamis pozitívumot
+jogos CLI tevékenységből.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

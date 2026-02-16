@@ -13,5 +13,5 @@ Ez a jelentés automatikusan készült **628** szabály alapján.
 | Felderítés (`discovery`) | 42 | `████████░░` |
 | Oldalirányú mozgás (`lateral-movement`) | 0 | `░░░░░░░░░░` |
 | Adatgyűjtés (`collection`) | 39 | `███████░░░` |
-| Adatszivárogtatás (`exfiltration`) | 28 | `█████░░░░░` |
+| Adatszivárogtatás (`exfiltration`) | 29 | `█████░░░░░` |
 | Vezérlés (C2) (`command-and-control`) | 0 | `░░░░░░░░░░` |

@@ -7121,14 +7121,18 @@ Verzeichnisdurchquerung durch nicht vertrauenswürdige Prozesse.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Credential Discovery (T1552.005)
+## Cloud-Anmeldeinformationserkennung (T1552.005)
 - **ID:** `T1552_005.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt die unbefugte Extraktion von Cloud-Anmeldeinformationen (AWS, Azure, GCP) aus der lokalen Umgebung
-Konfigurationsdateien.Filtert legitime CLI-Nutzung und konzentriert sich auf anormales Prozessverhalten
-wie Umleitung, Verschlüsselung oder Zugriff von Webservern und Remote-Shells.
+
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die unbefugte Entdeckung oder Extraktion von Cloud-Anmeldeinformationen
+(AWS, Azure, GCP, Docker) aus lokalen Konfigurationsdateien.Konzentriert sich auf
+verdächtige Zugriffsmuster, Verschlüsselung, Umleitung, Remote-Ausführung
+Kontext und abnormale Prozessabstammung bei gleichzeitiger Reduzierung von Fehlalarmen
+von legitimen CLI-Aktivitäten.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

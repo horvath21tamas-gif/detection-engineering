@@ -7499,14 +7499,18 @@ directory traversal by untrusted processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Credential Discovery (T1552.005)
+## Cloud Credential Discovery (T1552.005)
 - **ID:** `T1552_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects unauthorized extraction of cloud credentials (AWS, Azure, GCP) from local 
-config files. Filters legitimate CLI usage and focuses on anomalous process behavior 
-like redirection, encoding, or access from web servers and remote shells.
+
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects unauthorized discovery or extraction of cloud credentials
+(AWS, Azure, GCP, Docker) from local configuration files. Focuses on
+suspicious access patterns, encoding, redirection, remote execution
+context, and abnormal process lineage while reducing false positives
+from legitimate CLI activity.
 
 
 #### 🚨 Response Playbook

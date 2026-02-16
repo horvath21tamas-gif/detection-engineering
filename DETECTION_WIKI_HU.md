@@ -5334,14 +5334,12 @@ gyanús/nem megbízható folyamatok vagy érzékeny címtárak megcélzása.
 
 
 ---
-## Ultra-Pro High-Fidelity Linux-fájlengedélyek módosítása (T1222.002)
+## Linux fájlengedélyek módosítása (T1222.002)
 - **ID:** `T1222_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a célzott Linux-engedély-hamisítást a magas kockázatú személyek azonosításával
-attribútumváltozások (SUID, Immutability) vagy tömeges módosítások az érzékenyben
-nem privilegizált vagy webes szolgáltatásfiókok által kezdeményezett rendszerútvonalak.
+- **Leírás:** Érzékeli a célzott Linux-engedély-módosításokat azáltal, hogy azonosítja a nagy kockázatú attribútum-módosításokat, például a SUID-t, a megváltoztathatatlan vagy csak hozzáfűzhető jelzőket, valamint az érzékeny rendszerútvonalakon végrehajtott tömeges engedélymódosításokat.A privilegizált vagy webes szolgáltatásfiókok által kezdeményezett műveletekre összpontosít, miközben kiszűri a megbízható rendszerműveleteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

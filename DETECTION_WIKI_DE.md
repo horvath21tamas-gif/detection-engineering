@@ -5334,14 +5334,12 @@ verdächtige/nicht vertrauenswürdige Prozesse oder gezielte Angriffe auf sensib
 
 
 ---
-## Änderung der Dateiberechtigungen für Ultra-Pro High-Fidelity Linux (T1222.002)
+## Änderung der Linux-Dateiberechtigungen (T1222.002)
 - **ID:** `T1222_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt gezielte Manipulationen von Linux-Berechtigungen durch Identifizierung hoher Risiken
-Attributänderungen (SUID, Unveränderlichkeit) oder Massenänderungen in sensiblen Bereichen
-Systempfade, die von nicht privilegierten oder weborientierten Dienstkonten initiiert werden.
+- **Beschreibung:** Erkennt gezielte Manipulationen von Linux-Berechtigungen, indem es risikoreiche Attributänderungen wie SUID, unveränderliche oder Nur-Anhängen-Flags sowie Massenberechtigungsänderungen in sensiblen Systempfaden identifiziert.Konzentriert sich auf Aktionen, die von unprivilegierten oder mit dem Internet verbundenen Dienstkonten initiiert werden, und filtert gleichzeitig vertrauenswürdige Systemvorgänge heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

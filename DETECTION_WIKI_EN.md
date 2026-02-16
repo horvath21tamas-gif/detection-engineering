@@ -5607,14 +5607,12 @@ suspicious/untrusted processes or targeting sensitive directories.
 
 
 ---
-## Ultra-Pro High-Fidelity Linux File Permissions Modification (T1222.002)
+## Linux File Permissions Modification (T1222.002)
 - **ID:** `T1222_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects targeted Linux permission tampering by identifying high-risk 
-attribute changes (SUID, Immutability) or mass modifications in sensitive 
-system paths initiated by non-privileged or web-facing service accounts.
+- **Leírás:** Detects targeted Linux permission tampering by identifying high-risk  attribute changes such as SUID, immutable, or append-only flags, as well as  mass permission modifications in sensitive system paths. Focuses on actions  initiated by unprivileged or web-facing service accounts while filtering out  trusted system operations.
 
 
 #### 🚨 Response Playbook

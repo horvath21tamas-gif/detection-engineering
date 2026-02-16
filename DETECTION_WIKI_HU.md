@@ -5316,16 +5316,14 @@ nem szabványos szülői folyamatok vagy gyanús útvonalak kezdeményezték.
 
 
 ---
-## Ultra-Pro High-Fidelity Windows fájlengedélyek módosítása (T1222.001)
+## Windows fájlengedélyek módosítása (T1222.001)
 - **ID:** `T1222_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A széles körű hozzáférés azonosításával észleli a célzott fájlengedély-módosításokat
-által kezdeményezett támogatások (Teljes vezérlés, Mindenki) vagy öröklési blokkolás
-gyanús/nem megbízható folyamatok vagy érzékeny címtárak megcélzása.
+- **Leírás:** Érzékeli a célzott fájlengedély-módosításokat azáltal, hogy azonosítja a széles körű hozzáférési engedélyeket (pl. Teljes felügyelet, Mindenki) vagy az öröklődés blokkolását.A gyanús vagy nem megbízható folyamatok által kezdeményezett műveletekre és/vagy az érzékeny címtárak megcélzására összpontosít, miközben kiszűri a legitim rendszer- és adminisztrációs műveleteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

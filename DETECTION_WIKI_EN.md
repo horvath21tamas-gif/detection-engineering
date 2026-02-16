@@ -5588,16 +5588,14 @@ initiated by non-standard parent processes or from suspicious paths.
 
 
 ---
-## Ultra-Pro High-Fidelity Windows File Permissions Modification (T1222.001)
+## Windows File Permissions Modification (T1222.001)
 - **ID:** `T1222_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted file permission modifications by identifying broad access 
-grants (Full Control, Everyone) or inheritance blocking, initiated by 
-suspicious/untrusted processes or targeting sensitive directories.
+- **Leírás:** Detects targeted file permission modifications by identifying broad access grants  (e.g., Full Control, Everyone) or inheritance blocking. Focuses on actions initiated  by suspicious or untrusted processes and/or targeting sensitive directories, while  filtering out legitimate system and administrative operations.
 
 
 #### 🚨 Response Playbook

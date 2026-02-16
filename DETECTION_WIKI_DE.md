@@ -5316,16 +5316,14 @@ initiiert durch nicht standardmäßige übergeordnete Prozesse oder über verdä
 
 
 ---
-## Änderung der Dateiberechtigungen für Ultra-Pro High-Fidelity Windows (T1222.001)
+## Änderung der Windows-Dateiberechtigungen (T1222.001)
 - **ID:** `T1222_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezielte Dateiberechtigungsänderungen durch Identifizierung des breiten Zugriffs
-Zuschüsse (Vollzugriff, Jeder) oder Vererbungsblockierung, initiiert von
-verdächtige/nicht vertrauenswürdige Prozesse oder gezielte Angriffe auf sensible Verzeichnisse.
+- **Beschreibung:** Erkennt gezielte Dateiberechtigungsänderungen durch Identifizierung allgemeiner Zugriffsgewährungen (z. B. Vollzugriff, Jeder) oder Vererbungsblockierung.Konzentriert sich auf Aktionen, die von verdächtigen oder nicht vertrauenswürdigen Prozessen initiiert werden und/oder auf sensible Verzeichnisse abzielen, während legitime System- und Verwaltungsvorgänge herausgefiltert werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

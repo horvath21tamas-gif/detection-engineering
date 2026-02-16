@@ -386,18 +386,18 @@
 - [Ultra-Pro High-Fidelity Pass-the-Ticket Detection (T1550.003)](#ultra-pro-high-fidelity-pass-the-ticket-detection-(t1550003))
 - [Ultra-Pro High-Fidelity Pass-the-Session Detection (T1550.004)](#ultra-pro-high-fidelity-pass-the-session-detection-(t1550004))
 - [Ultra-Pro High-Fidelity Unsecured Credentials Discovery (T1552)](#ultra-pro-high-fidelity-unsecured-credentials-discovery-(t1552))
-- [Ultra-Pro High-Fidelity Credentials In Files Discovery (T1552.001)](#ultra-pro-high-fidelity-credentials-in-files-discovery-(t1552001))
-- [Ultra-Pro High-Fidelity Credentials In Registry Discovery (T1552.002)](#ultra-pro-high-fidelity-credentials-in-registry-discovery-(t1552002))
-- [Ultra-Pro High-Fidelity Shell History & Console Discovery (T1552.003)](#ultra-pro-high-fidelity-shell-history-&-console-discovery-(t1552003))
-- [Ultra-Pro High-Fidelity Private Key Discovery (T1552.004)](#ultra-pro-high-fidelity-private-key-discovery-(t1552004))
-- [Ultra-Pro High-Fidelity Cloud Credential Discovery (T1552.005)](#ultra-pro-high-fidelity-cloud-credential-discovery-(t1552005))
-- [Ultra-Pro High-Fidelity GPP Password Discovery (T1552.006)](#ultra-pro-high-fidelity-gpp-password-discovery-(t1552006))
-- [Ultra-Pro High-Fidelity Container Secret Discovery (T1552.007)](#ultra-pro-high-fidelity-container-secret-discovery-(t1552007))
-- [Ultra-Pro High-Fidelity GPP Password Discovery (T1552.008)](#ultra-pro-high-fidelity-gpp-password-discovery-(t1552008))
-- [Ultra-Pro High-Fidelity Subvert Trust Controls (T1553)](#ultra-pro-high-fidelity-subvert-trust-controls-(t1553))
-- [Ultra-Pro High-Fidelity macOS Gatekeeper and Quarantine Bypass (T1553.001)](#ultra-pro-high-fidelity-macos-gatekeeper-and-quarantine-bypass-(t1553001))
-- [Ultra-Pro High-Fidelity SIP Hijacking and Trust Subversion (T1553.002)](#ultra-pro-high-fidelity-sip-hijacking-and-trust-subversion-(t1553002))
-- [Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003)](#ultra-pro-high-fidelity-windows-catalog-database-subversion-(t1553003))
+- [Credentials In Files Discovery (T1552.001)](#credentials-in-files-discovery-(t1552001))
+- [Credentials In Registry Discovery (T1552.002)](#credentials-in-registry-discovery-(t1552002))
+- [Shell History & Console Discovery (T1552.003)](#shell-history-&-console-discovery-(t1552003))
+- [Private Key Discovery (T1552.004)](#private-key-discovery-(t1552004))
+- [Cloud Credential Discovery (T1552.005)](#cloud-credential-discovery-(t1552005))
+- [Credentials in Files Discovery (T1552.006)](#credentials-in-files-discovery-(t1552006))
+- [Container Secret Discovery (T1552.007)](#container-secret-discovery-(t1552007))
+- [GPP Password Discovery (T1552.008)](#gpp-password-discovery-(t1552008))
+- [Subvert Trust Controls (T1553)](#subvert-trust-controls-(t1553))
+- [macOS Gatekeeper and Quarantine Bypass (T1553.001)](#macos-gatekeeper-and-quarantine-bypass-(t1553001))
+- [SIP Hijacking and Trust Subversion (T1553.002)](#sip-hijacking-and-trust-subversion-(t1553002))
+- [Windows Catalog Database Subversion (T1553.003)](#windows-catalog-database-subversion-(t1553003))
 - [Root Certificate Injection (T1553.004)](#root-certificate-injection-(t1553004))
 - [Mark-of-the-Web (MotW) Bypass & Zone Subversion Detection (T1553.005)](#mark-of-the-web-(motw)-bypass-&-zone-subversion-detection-(t1553005))
 - [Windows Code Integrity & DSE Subversion Detection (T1553.006)](#windows-code-integrity-&-dse-subversion-detection-(t1553006))
@@ -7425,14 +7425,17 @@ sensitive file extensions, and high-entropy keywords.
 
 
 ---
-## Ultra-Pro High-Fidelity Credentials In Files Discovery (T1552.001)
+## Credentials In Files Discovery (T1552.001)
 - **ID:** `T1552_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects targeted, recursive searches for credentials in configuration files and scripts. 
-Correlates search tools (findstr, grep, PowerShell) with high-risk file extensions 
-and anomalous parent processes to minimize false positives from dev/admin activity.
+
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects unauthorized, recursive discovery of credentials stored in files 
+and configuration scripts (AWS, Git, SSH keys, password/config files). 
+Correlates search tools with sensitive file extensions, exfiltration patterns, 
+and suspicious parent processes to reduce false positives.
 
 
 #### 🚨 Response Playbook

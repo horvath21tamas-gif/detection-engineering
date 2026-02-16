@@ -386,18 +386,18 @@
 - [Ultra-Pro High-Fidelity Pass-the-Ticket Detection (T1550.003)](#ultra-pro-high-fidelity-pass-the-ticket-detection-(t1550003))
 - [Ultra-Pro High-Fidelity Pass-the-Session Detection (T1550.004)](#ultra-pro-high-fidelity-pass-the-session-detection-(t1550004))
 - [Ultra-Pro High-Fidelity, nem biztonságos hitelesítő adatok felfedezése (T1552)](#ultra-pro-high-fidelity-nem-biztonságos-hitelesítő-adatok-felfedezése-(t1552))
-- [Ultra-Pro High-Fidelity hitelesítő adatok a fájlfelderítésben (T1552.001)](#ultra-pro-high-fidelity-hitelesítő-adatok-a-fájlfelderítésben-(t1552001))
-- [Ultra-Pro High-Fidelity hitelesítő adatok a rendszerleíró adatbázisban (T1552.002)](#ultra-pro-high-fidelity-hitelesítő-adatok-a-rendszerleíró-adatbázisban-(t1552002))
-- [Ultra-Pro High-Fidelity Shell története és konzolfelfedezés (T1552.003)](#ultra-pro-high-fidelity-shell-története-és-konzolfelfedezés-(t1552003))
-- [Ultra-Pro High-Fidelity privát kulcs felfedezés (T1552.004)](#ultra-pro-high-fidelity-privát-kulcs-felfedezés-(t1552004))
-- [Ultra-Pro High-Fidelity Cloud Credential Discovery (T1552.005)](#ultra-pro-high-fidelity-cloud-credential-discovery-(t1552005))
-- [Ultra-Pro High-Fidelity GPP jelszófelderítés (T1552.006)](#ultra-pro-high-fidelity-gpp-jelszófelderítés-(t1552006))
-- [Ultra-Pro High-Fidelity Container Secret Discovery (T1552.007)](#ultra-pro-high-fidelity-container-secret-discovery-(t1552007))
-- [Ultra-Pro High-Fidelity GPP jelszófelderítés (T1552.008)](#ultra-pro-high-fidelity-gpp-jelszófelderítés-(t1552008))
-- [Ultra-Pro High-Fidelity Subvert Trust Controls (T1553)](#ultra-pro-high-fidelity-subvert-trust-controls-(t1553))
-- [Ultra-Pro High-Fidelity macOS Gatekeeper és Quarantine Bypass (T1553.001)](#ultra-pro-high-fidelity-macos-gatekeeper-és-quarantine-bypass-(t1553001))
-- [Ultra-Pro High-Fidelity SIP-eltérítés és megbízhatóság szubverzió (T1553.002)](#ultra-pro-high-fidelity-sip-eltérítés-és-megbízhatóság-szubverzió-(t1553002))
-- [Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003)](#ultra-pro-high-fidelity-windows-catalog-database-subversion-(t1553003))
+- [Hitelesítő adatok a Files Discoveryben (T1552.001)](#hitelesítő-adatok-a-files-discoveryben-(t1552001))
+- [Hitelesítési adatok a rendszerleíró adatbázisban (T1552.002)](#hitelesítési-adatok-a-rendszerleíró-adatbázisban-(t1552002))
+- [Shell History & Console Discovery (T1552.003)](#shell-history-&-console-discovery-(t1552003))
+- [Privát kulcs felfedezése (T1552.004)](#privát-kulcs-felfedezése-(t1552004))
+- [Cloud Credential Discovery (T1552.005)](#cloud-credential-discovery-(t1552005))
+- [Hitelesítő adatok a Files Discoveryben (T1552.006)](#hitelesítő-adatok-a-files-discoveryben-(t1552006))
+- [Container Secret Discovery (T1552.007)](#container-secret-discovery-(t1552007))
+- [GPP jelszó felderítés (T1552.008)](#gpp-jelszó-felderítés-(t1552008))
+- [Subvert Trust Controls (T1553)](#subvert-trust-controls-(t1553))
+- [macOS Gatekeeper és Quarantine Bypass (T1553.001)](#macos-gatekeeper-és-quarantine-bypass-(t1553001))
+- [SIP-eltérítés és bizalomfelforgatás (T1553.002)](#sip-eltérítés-és-bizalomfelforgatás-(t1553002))
+- [Windows Catalog Database Subversion (T1553.003)](#windows-catalog-database-subversion-(t1553003))
 - [Root Certificate Injection (T1553.004)](#root-certificate-injection-(t1553004))
 - [Mark-of-the-Web (MotW) bypass & Zone Subversion Detection (T1553.005)](#mark-of-the-web-(motw)-bypass-&-zone-subversion-detection-(t1553005))
 - [Windows Code Integrity & DSE Subversion Detection (T1553.006)](#windows-code-integrity-&-dse-subversion-detection-(t1553006))
@@ -7051,14 +7051,17 @@ Speciális korrelációt használ a keresőeszközök között (findstr, grep, P
 
 
 ---
-## Ultra-Pro High-Fidelity hitelesítő adatok a fájlfelderítésben (T1552.001)
+## Hitelesítő adatok a Files Discoveryben (T1552.001)
 - **ID:** `T1552_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a hitelesítő adatok célzott, rekurzív keresését konfigurációs fájlokban és szkriptekben.
-Összehasonlítja a keresőeszközöket (findstr, grep, PowerShell) a nagy kockázatú fájlkiterjesztésekkel
-és rendellenes szülői folyamatok a fejlesztői/adminisztrátori tevékenységből származó téves pozitívumok minimalizálása érdekében.
+
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a fájlokban tárolt hitelesítő adatok jogosulatlan, rekurzív felfedezését
+és konfigurációs szkriptek (AWS, Git, SSH kulcsok, jelszó/konfig fájlok).
+A keresőeszközöket érzékeny fájlkiterjesztésekkel, kiszűrési mintákkal,
+és gyanús szülői folyamatok a hamis pozitívumok csökkentésére.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

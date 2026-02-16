@@ -386,18 +386,18 @@
 - [Ultraprofessionelle High-Fidelity-Pass-the-Ticket-Erkennung (T1550.003)](#ultraprofessionelle-high-fidelity-pass-the-ticket-erkennung-(t1550003))
 - [Ultra-Pro High-Fidelity Pass-the-Session-Erkennung (T1550.004)](#ultra-pro-high-fidelity-pass-the-session-erkennung-(t1550004))
 - [Ultra-Pro High-Fidelity-Erkennung ungesicherter Anmeldeinformationen (T1552)](#ultra-pro-high-fidelity-erkennung-ungesicherter-anmeldeinformationen-(t1552))
-- [Ultra-Pro High-Fidelity-Anmeldeinformationen bei der Dateierkennung (T1552.001)](#ultra-pro-high-fidelity-anmeldeinformationen-bei-der-dateierkennung-(t1552001))
-- [Ultra-Pro High-Fidelity-Anmeldeinformationen bei der Registrierungserkennung (T1552.002)](#ultra-pro-high-fidelity-anmeldeinformationen-bei-der-registrierungserkennung-(t1552002))
-- [Ultra-Pro High-Fidelity Shell-Verlauf und Konsolenerkennung (T1552.003)](#ultra-pro-high-fidelity-shell-verlauf-und-konsolenerkennung-(t1552003))
-- [Ultra-Pro High-Fidelity Private Key Discovery (T1552.004)](#ultra-pro-high-fidelity-private-key-discovery-(t1552004))
-- [Ultra-Pro High-Fidelity Cloud Credential Discovery (T1552.005)](#ultra-pro-high-fidelity-cloud-credential-discovery-(t1552005))
-- [Ultra-Pro High-Fidelity-GPP-Passworterkennung (T1552.006)](#ultra-pro-high-fidelity-gpp-passworterkennung-(t1552006))
-- [Ultra-Pro High-Fidelity Container Secret Discovery (T1552.007)](#ultra-pro-high-fidelity-container-secret-discovery-(t1552007))
-- [Ultra-Pro High-Fidelity-GPP-Passworterkennung (T1552.008)](#ultra-pro-high-fidelity-gpp-passworterkennung-(t1552008))
-- [Ultra-Pro High-Fidelity Subvert Trust Controls (T1553)](#ultra-pro-high-fidelity-subvert-trust-controls-(t1553))
-- [Ultra-Pro High-Fidelity macOS Gatekeeper und Quarantäne-Bypass (T1553.001)](#ultra-pro-high-fidelity-macos-gatekeeper-und-quarantäne-bypass-(t1553001))
-- [Ultraprofessionelles High-Fidelity-SIP-Hijacking und Trust-Subversion (T1553.002)](#ultraprofessionelles-high-fidelity-sip-hijacking-und-trust-subversion-(t1553002))
-- [Ultra-Pro High-Fidelity Windows Catalog Database Subversion (T1553.003)](#ultra-pro-high-fidelity-windows-catalog-database-subversion-(t1553003))
+- [Anmeldeinformationen in der Dateierkennung (T1552.001)](#anmeldeinformationen-in-der-dateierkennung-(t1552001))
+- [Anmeldeinformationen bei der Registrierungserkennung (T1552.002)](#anmeldeinformationen-bei-der-registrierungserkennung-(t1552002))
+- [Shell-Verlauf und Konsolenerkennung (T1552.003)](#shell-verlauf-und-konsolenerkennung-(t1552003))
+- [Ermittlung privater Schlüssel (T1552.004)](#ermittlung-privater-schlüssel-(t1552004))
+- [Cloud-Anmeldeinformationserkennung (T1552.005)](#cloud-anmeldeinformationserkennung-(t1552005))
+- [Anmeldeinformationen in Files Discovery (T1552.006)](#anmeldeinformationen-in-files-discovery-(t1552006))
+- [Entdeckung von Containergeheimnissen (T1552.007)](#entdeckung-von-containergeheimnissen-(t1552007))
+- [GPP-Passworterkennung (T1552.008)](#gpp-passworterkennung-(t1552008))
+- [Vertrauenskontrollen untergraben (T1553)](#vertrauenskontrollen-untergraben-(t1553))
+- [macOS Gatekeeper und Quarantäne-Bypass (T1553.001)](#macos-gatekeeper-und-quarantäne-bypass-(t1553001))
+- [SIP-Hijacking und Trust Subversion (T1553.002)](#sip-hijacking-und-trust-subversion-(t1553002))
+- [Windows-Katalogdatenbank-Subversion (T1553.003)](#windows-katalogdatenbank-subversion-(t1553003))
 - [Root-Zertifikat-Injection (T1553.004)](#root-zertifikat-injection-(t1553004))
 - [Mark-of-the-Web (MotW)-Umgehung und Zonensubversion-Erkennung (T1553.005)](#mark-of-the-web-(motw)-umgehung-und-zonensubversion-erkennung-(t1553005))
 - [Windows-Codeintegrität und DSE-Subversion-Erkennung (T1553.006)](#windows-codeintegrität-und-dse-subversion-erkennung-(t1553006))
@@ -7051,14 +7051,17 @@ sensible Dateierweiterungen und Schlüsselwörter mit hoher Entropie.
 
 
 ---
-## Ultra-Pro High-Fidelity-Anmeldeinformationen bei der Dateierkennung (T1552.001)
+## Anmeldeinformationen in der Dateierkennung (T1552.001)
 - **ID:** `T1552_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt gezielte, rekursive Suchen nach Anmeldeinformationen in Konfigurationsdateien und Skripten.
-Korreliert Suchtools (findstr, grep, PowerShell) mit Dateierweiterungen mit hohem Risiko
-und anomale übergeordnete Prozesse, um Fehlalarme durch Entwickler-/Administratoraktivitäten zu minimieren.
+
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die unbefugte, rekursive Erkennung von in Dateien gespeicherten Anmeldeinformationen
+und Konfigurationsskripte (AWS, Git, SSH-Schlüssel, Passwort-/Konfigurationsdateien).
+Korreliert Suchwerkzeuge mit sensiblen Dateierweiterungen, Exfiltrationsmustern usw.
+und verdächtige übergeordnete Prozesse, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

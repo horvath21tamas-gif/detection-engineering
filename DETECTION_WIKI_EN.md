@@ -5532,16 +5532,14 @@ hijacking or untrusted console files (.msc). Filters out legitimate administrati
 
 
 ---
-## Ultra-Pro High-Fidelity XSL Script Processing (T1220)
+## XSL Script Processing (T1220)
 - **ID:** `T1220.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [WMIC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects suspicious WMIC execution with XSL stylesheets located in non-standard 
-directories or remote URLs, which is a common technique to bypass application 
-whitelisting and execute arbitrary scripts.
+- **Leírás:** Detects suspicious WMIC executions using XSL stylesheets located in non-standard  directories or remote URLs. This behavior is commonly used to bypass application  whitelisting and execute arbitrary scripts. Filters out known legitimate WBEM  directories and common XSL templates to reduce false positives.
 
 
 #### 🚨 Response Playbook

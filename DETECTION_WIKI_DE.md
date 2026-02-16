@@ -5263,16 +5263,14 @@ Entführung oder nicht vertrauenswürdige Konsolendateien (.msc).Filtert legitim
 
 
 ---
-## Ultraprofessionelle High-Fidelity-XSL-Skriptverarbeitung (T1220)
+## XSL-Skriptverarbeitung (T1220)
 - **ID:** `T1220.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [WMIC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt verdächtige WMIC-Ausführungen mit XSL-Stylesheets, die sich in nicht standardmäßigen Formaten befinden
-Verzeichnisse oder Remote-URLs, was eine gängige Technik zur Umgehung von Anwendungen ist
-Whitelisting und die Ausführung beliebiger Skripte.
+- **Beschreibung:** Erkennt verdächtige WMIC-Ausführungen mithilfe von XSL-Stylesheets, die sich in nicht standardmäßigen Verzeichnissen oder Remote-URLs befinden.Dieses Verhalten wird häufig verwendet, um das Whitelisting von Anwendungen zu umgehen und beliebige Skripts auszuführen.Filtert bekanntermaßen legitime WBEM-Verzeichnisse und gängige XSL-Vorlagen heraus, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

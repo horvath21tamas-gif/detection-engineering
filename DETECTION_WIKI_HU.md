@@ -5263,16 +5263,14 @@ eltérítő vagy nem megbízható konzolfájlok (.msc).Kiszűri a jogos adminisz
 
 
 ---
-## Ultra-Pro High-Fidelity XSL Script Processing (T1220)
+## XSL-szkript feldolgozás (T1220)
 - **ID:** `T1220.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [WMIC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Gyanús WMIC-végrehajtást észlel nem szabványos XSL-stíluslapokkal
-könyvtárak vagy távoli URL-ek, ami egy gyakori technika az alkalmazások megkerülésére
-tetszőleges szkriptek engedélyezése és végrehajtása.
+- **Leírás:** Nem szabványos könyvtárakban vagy távoli URL-címeken található XSL-stíluslapok segítségével észleli a gyanús WMIC-végrehajtásokat.Ezt a viselkedést általában az alkalmazások engedélyezőlistájának megkerülésére és tetszőleges parancsfájlok végrehajtására használják.Kiszűri az ismert legitim WBEM-könyvtárakat és a gyakori XSL-sablonokat, hogy csökkentse a hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

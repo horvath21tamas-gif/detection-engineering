@@ -1,25 +1,32 @@
-title: Ultra-Pro High-Fidelity Unused Service Manipulation (T1535)
-id: 40460a2c-6975-4b34-b550-b1c6b9c32bf8
+title: Unused Service Manipulation Detection (T1535)
+id: ca91beed-5706-4ac7-b17e-b2e75fed2503
 status: stable
 description: |
-    Detects the modification of existing Windows service paths (ImagePath) to untrusted 
-    locations or binaries. Filters out legitimate OS servicing and common third-party 
-    updaters to ensure high-fidelity alerts.
+    Detects modifications of Windows service ImagePath values to untrusted locations
+    or binaries. Monitors registry changes in services and filters out legitimate 
+    OS servicing, svchost, and common third-party updaters to ensure high-fidelity alerts.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1535/
 tags:
     - attack.persistence
     - attack.privilege_escalation
     - attack.t1535
+    - attack.registry
+
 logsource:
     category: registry_set
     product: windows
+
 detection:
-    selection_registry:
+
+    selection_registry_services:
         TargetObject|contains: 'System\CurrentControlSet\Services\'
         TargetObject|endswith: '\ImagePath'
 
-    selection_paths:
+    selection_suspicious_paths:
         Details|contains:
             - '\Users\'
             - '\AppData\'
@@ -27,8 +34,10 @@ detection:
             - '\Public\'
             - '\Downloads\'
             - 'C:\PerfLogs\'
+            - '\OneDrive\'
+            - '\Dropbox\'
 
-    selection_shells:
+    selection_suspicious_shells:
         Details|contains:
             - 'cmd.exe'
             - 'powershell.exe'
@@ -37,22 +46,36 @@ detection:
             - 'wscript.exe'
             - 'mshta.exe'
             - 'rundll32.exe'
+            - 'explorer.exe /embedding'
+            - 'regsvr32.exe'
 
-    filter_trusted_systems:
+    filter_trusted_system:
         Image|startswith:
             - 'C:\Windows\servicing\'
             - 'C:\Windows\System32\svchost.exe'
             - 'C:\Windows\sysnative\svchost.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+            - 'C:\Windows\System32\sc.exe'
+        User|startswith: 'NT AUTHORITY\SYSTEM'
 
     filter_common_updaters:
         Image|contains:
             - '\Google\Update\'
             - '\Microsoft\EdgeUpdate\'
             - '\Adobe\ARM\'
+            - '\Apple\MobileDevice\'
+            - '\Zoom\bin\'
         Details|contains:
             - '\Program Files\'
             - '\Program Files (x86)\'
 
-    condition: selection_registry and (selection_paths or selection_shells) and not (filter_trusted_systems or filter_common_updaters)
+    condition: 
+        selection_registry_services 
+        and (selection_suspicious_paths or selection_suspicious_shells) 
+        and not (filter_trusted_system or filter_common_updaters)
+
+falsepositives:
+    - OS servicing / patching operations
+    - Third-party updater activities
+    - Admin troubleshooting with PowerShell / cmd
+
 level: critical

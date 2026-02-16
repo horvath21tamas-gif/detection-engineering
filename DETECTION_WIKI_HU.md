@@ -6069,16 +6069,16 @@ programozott hozzáférés az Outlook MAPI felületéhez, gyanús gyermekfolyama
 
 
 ---
-## Ultra-Pro High-Fidelity, nem használt szolgáltatás-manipuláció (T1535)
+## Nem használt szolgáltatás-manipuláció észlelése (T1535)
 - **ID:** `T1535.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a meglévő Windows szolgáltatási útvonalak (ImagePath) nem megbízhatóvá történő módosítását
-helyeket vagy binárisokat.Kiszűri a legitim operációs rendszer-szolgáltatást és a gyakori harmadik feleket
-frissítőket a nagy pontosságú riasztások biztosítására.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a Windows szolgáltatás ImagePath értékeinek nem megbízható helyekre történő módosításait
+vagy binárisok.Figyeli a rendszerleíró adatbázis változásait a szolgáltatásokban, és kiszűri a törvényeseket
+Operációs rendszer szervizelése, svchost és általános, harmadik féltől származó frissítők a nagy pontosságú riasztások biztosítása érdekében.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -6173,7 +6173,7 @@ Kiszűri a megbízható szállítók frissítési segédprogramjait, hogy csökk
 - **Leírás:** Érzékeli a jogosulatlan firmware-manipulációt a magas kockázatú illesztőprogramok figyelésével
 gyanústól kezdeményezett regisztrációk és firmware-frissítési segédprogramok
 folyamatfák, kifejezetten a BYOVD és az SPI flash hozzáférést célozva.
-Kiszűri a megbízható szállítók frissítő segédprogramjait, hogy minimalizálja a hamis pozitívumot.
+Kiszűri a megbízható szállítók frissítési segédprogramjait, hogy minimalizálja a hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

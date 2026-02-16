@@ -6384,16 +6384,16 @@ and command-line flags used for mass-mailing or attachment injection.
 
 
 ---
-## Ultra-Pro High-Fidelity Unused Service Manipulation (T1535)
+## Unused Service Manipulation Detection (T1535)
 - **ID:** `T1535.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the modification of existing Windows service paths (ImagePath) to untrusted 
-locations or binaries. Filters out legitimate OS servicing and common third-party 
-updaters to ensure high-fidelity alerts.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects modifications of Windows service ImagePath values to untrusted locations
+or binaries. Monitors registry changes in services and filters out legitimate 
+OS servicing, svchost, and common third-party updaters to ensure high-fidelity alerts.
 
 
 #### 🚨 Response Playbook

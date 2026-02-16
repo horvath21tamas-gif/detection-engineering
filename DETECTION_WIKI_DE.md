@@ -6069,16 +6069,16 @@ und Befehlszeilen-Flags, die für den Massenversand oder die Einfügung von Anh�
 
 
 ---
-## Ultra-Pro High-Fidelity-Manipulation ungenutzter Dienste (T1535)
+## Erkennung ungenutzter Dienstmanipulationen (T1535)
 - **ID:** `T1535.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Änderung vorhandener Windows-Dienstpfade (ImagePath) in „nicht vertrauenswürdig“.
-Standorte oder Binärdateien.Filtert legitime Betriebssystemwartungen und häufige Drittanbieter heraus
-Updater, um Warnungen mit hoher Wiedergabetreue zu gewährleisten.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt Änderungen von ImagePath-Werten des Windows-Dienstes an nicht vertrauenswürdigen Speicherorten
+oder Binärdateien.Überwacht Registrierungsänderungen in Diensten und filtert legitime heraus
+Betriebssystemwartung, Svchost und gängige Updateprogramme von Drittanbietern, um Warnungen mit hoher Wiedergabetreue zu gewährleisten.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**
@@ -6190,7 +6190,7 @@ Filtert Update-Dienstprogramme vertrauenswürdiger Anbieter heraus, um Fehlalarm
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt unbefugte Modifikationen der Peripherie-Firmware (NIC, SSD, GPU) durch
-Überwachung eigenständiger Flash-Tools, die von einem nicht vertrauenswürdigen Prozess initiiert werden
+Überwachung eigenständiger Flash-Tools, die von einem nicht vertrauenswürdigen Prozess initiiert wurden
 Ketten oder nicht standardmäßige Dateispeicherorte.Filtert vertrauenswürdiges Management heraus
 Tools zur Reduzierung falsch positiver Ergebnisse.
 
@@ -6953,7 +6953,7 @@ Collaboration-Apps oder temporäre Verzeichnisse, während vertrauenswürdige Sy
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Speicherintensiv)
-- **Beschreibung:** Erkennt unbefugte Änderungen an XDG-Desktopeinträgen oder entsprechende Verknüpfungen
+- **Beschreibung:** Erkennt unbefugte Änderungen an XDG-Desktopeinträgen oder versuchten Verknüpfungen
 um SUID-Binärdateien auszuführen oder pkexec zur Rechteausweitung zu nutzen.
 Konzentriert sich auf Änderungen in vom Benutzer beschreibbaren Verzeichnissen durch nicht vertrauenswürdige Prozesse.
 

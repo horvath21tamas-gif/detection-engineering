@@ -1,55 +1,56 @@
-title: Ultra-Pro High-Fidelity Time-based Evasion (T1497.003)
+title: Time-based Evasion (T1497.003)
 id: d5678671-3bfa-4b14-8a28-82e0e85e3be9
 status: stable
 description: |
-    Detects sophisticated time-based evasion by monitoring for non-standard delay 
-    mechanisms (ping, choice, timeout) initiated by untrusted binaries, specifically 
-    targeting long-duration stalls used to exhaust sandbox analysis limits.
+  Detects sophisticated time-based evasion by monitoring non-standard delay mechanisms 
+  (ping, choice, timeout) initiated by untrusted binaries. Targets long-duration stalls 
+  used to exhaust sandbox analysis limits.
 author: hota05
 date: 2026-02-03
 tags:
-    - attack.defense_evasion
-    - attack.t1497.003
+  - attack.defense_evasion
+  - attack.t1497.003
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_untrusted_origin:
-        Image|contains:
-            - '\AppData\Local\Temp\'
-            - '\Users\Public\'
-            - '\Downloads\'
-            - '\Desktop\'
-            - '\PerfLogs\'
+  untrusted_origins:
+    Image|contains:
+      - '\AppData\Local\Temp\'
+      - '\Users\Public\'
+      - '\Downloads\'
+      - '\Desktop\'
+      - '\PerfLogs\'
 
-    selection_ping_stall:
-        CommandLine|contains:
-            - 'ping 127.0.0.1 -n '
-            - 'ping ::1 -n '
-        CommandLine|re: '.* -n (?:[1-9][0-9]{2,}|[1-9][0-9][0-9]+).*' 
+  ping_stall:
+    CommandLine|contains:
+      - 'ping 127.0.0.1 -n '
+      - 'ping ::1 -n '
+    CommandLine: '.* -n (?:[1-9][0-9]{2,}|[1-9][0-9]{3,}).*'
 
-    selection_choice_timeout:
-        CommandLine|contains:
-            - 'choice /t'
-            - 'choice /d y /t'
-        CommandLine|re: '.* /t (?:[6-9][0-9]|[1-9][0-9]{2,}).*'
+  choice_timeout:
+    CommandLine|contains:
+      - 'choice /t'
+      - 'choice /d y /t'
+    CommandLine: '.* /t (?:[6-9][0-9]|[1-9][0-9]{2,}).*'
 
-    selection_timeout_abuse:
-        CommandLine|contains: 'timeout /t'
-        CommandLine|re: '.* /t (?:[1-9][0-9]{2,}).*'
+  timeout_abuse:
+    CommandLine|contains: 'timeout /t'
+    CommandLine: '.* /t (?:[1-9][0-9]{2,}).*'
 
-    filter_trusted_system:
-        ParentImage|endswith:
-            - '\msiexec.exe'
-            - '\TrustedInstaller.exe'
-            - '\CcmExec.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+  trusted_system_filter:
+    ParentImage|endswith:
+      - '\msiexec.exe'
+      - '\TrustedInstaller.exe'
+      - '\CcmExec.exe'
+    username: 'NT AUTHORITY\SYSTEM'
 
-    filter_common_admin:
-        CommandLine|contains:
-            - 'net use'
-            - 'subst'
-            - 'net time'
+  common_admin_filter:
+    CommandLine|contains:
+      - 'net use'
+      - 'subst'
+      - 'net time'
 
-    condition: selection_untrusted_origin and (selection_ping_stall or selection_choice_timeout or selection_timeout_abuse) and not (filter_trusted_system or filter_common_admin)
+  condition: untrusted_origins and (ping_stall or choice_timeout or timeout_abuse) 
+             and not (trusted_system_filter or common_admin_filter)
 level: high

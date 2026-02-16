@@ -6015,16 +6015,17 @@ Prozesslinien (Browser, Office-Apps, temporäre Ordner).
 
 
 ---
-## Ultra-Pro High-Fidelity-Cloud-Speicher-Datendiebstahl (T1530)
+## Erkennung von Cloud-Speicher-Datendiebstahl (T1530)
 - **ID:** `T1530.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt unbefugte Datenexfiltration von Cloud-Speicheranbietern (AWS, Azure, GCP)
-durch Identifizierung verdächtiger CLI-Argumente, Inline-Anmeldeinformationsinjektion und
-Anomale Prozesslinien, die aus Nicht-Admin-Kontexten stammen.
+durch Überwachung verdächtiger CLI-Argumente, Inline-Anmeldeinformationsinjektion und rekursives Kopieren
+Befehle und anomale Prozessabläufe, die aus Nicht-Administrator- oder Benutzerkontexten stammen.
+Deckt aws, az, gsutil, rclone, mc und andere Cloud-CLI-Tools ab.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -6033,16 +6034,17 @@ Anomale Prozesslinien, die aus Nicht-Admin-Kontexten stammen.
 
 
 ---
-## Entfernen des Ultra-Pro High-Fidelity-Kontozugriffs (T1531)
+## Erkennung der Entfernung des Kontozugriffs (T1531)
 - **ID:** `T1531.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugtes Entfernen oder Sperren von Konten durch Identifizierung von Massenlöschungen.
-Angriff auf Administratorkonten über die Befehlszeilenschnittstelle oder destruktive Kontoaktionen
-die aus nicht standardmäßigen Prozesslinien stammen (z. B. Office-Apps, Webserver).
+- **Beschreibung:** Erkennt unbefugte Kontoentfernungs- oder Sperrversuche.Überwacht die Masse
+Löschungen, Angriffe auf Administratorkonten und zerstörerische Konten
+Aktionen, die von nicht standardmäßigen Prozessen wie Office-Apps, Webservern usw. ausgehen
+oder Skripte.Entwickelt, um Fehlalarme bei der Erkennung von T1531-Techniken zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

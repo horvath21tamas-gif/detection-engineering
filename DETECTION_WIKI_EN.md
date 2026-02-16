@@ -6327,16 +6327,17 @@ process lineages (browsers, office apps, temp folders).
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Storage Data Theft (T1530)
+## Cloud Storage Data Theft Detection (T1530)
 - **ID:** `T1530.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized data exfiltration from cloud storage providers (AWS, Azure, GCP) 
-by identifying suspicious CLI arguments, inline credential injection, and 
-anomalous process lineages originating from non-admin contexts.
+- **Leírás:** Detects unauthorized data exfiltration from cloud storage providers (AWS, Azure, GCP)
+by monitoring suspicious CLI arguments, inline credential injection, recursive copy
+commands, and anomalous process lineages originating from non-admin or user contexts.
+Covers aws, az, gsutil, rclone, mc and other cloud CLI tools.
 
 
 #### 🚨 Response Playbook
@@ -6346,16 +6347,17 @@ anomalous process lineages originating from non-admin contexts.
 
 
 ---
-## Ultra-Pro High-Fidelity Account Access Removal (T1531)
+## Account Access Removal Detection (T1531)
 - **ID:** `T1531.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized account removal or lockout by identifying bulk deletions, 
-targeting of administrative accounts via CLI, or destructive account actions 
-originating from non-standard process lineages (e.g., Office apps, web servers).
+- **Leírás:** Detects unauthorized account removal or lockout attempts. Monitors bulk 
+deletions, targeting of administrative accounts, and destructive account 
+actions originating from non-standard processes such as Office apps, web servers, 
+or scripts. Designed to reduce false positives while detecting T1531 techniques.
 
 
 #### 🚨 Response Playbook

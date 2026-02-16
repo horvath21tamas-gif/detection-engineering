@@ -6015,16 +6015,17 @@ folyamatvonalak (böngészők, irodai alkalmazások, ideiglenes mappák).
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Storage Data Theft (T1530)
+## Cloud Storage Data Theft Detection (T1530)
 - **ID:** `T1530.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a felhőalapú tárolási szolgáltatóktól (AWS, Azure, GCP) származó jogosulatlan adatok kiszűrését
-a gyanús CLI-argumentumok azonosításával, beépített hitelesítő adatok beadásával és
-rendellenes folyamatvonalak, amelyek nem adminisztrátori környezetből származnak.
+a gyanús CLI-argumentumok figyelésével, beépített hitelesítő adatok beszúrásával, rekurzív másolással
+parancsok és rendellenes folyamatsorok, amelyek nem rendszergazdai vagy felhasználói kontextusból származnak.
+Lefedi az aws, az, a gsutil, a rclone, az mc és más felhőalapú CLI eszközöket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -6033,16 +6034,17 @@ rendellenes folyamatvonalak, amelyek nem adminisztrátori környezetből szárma
 
 
 ---
-## Ultra-Pro High-Fidelity fiókhozzáférés eltávolítása (T1531)
+## Fiókhozzáférés eltávolításának észlelése (T1531)
 - **ID:** `T1531.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Tömeges törlések azonosításával észleli a jogosulatlan fiók eltávolítást vagy zárolást,
-adminisztratív fiókok célzása CLI-n keresztül, vagy destruktív fiókműveletek
-nem szabványos folyamatvonalakból (pl. Office-alkalmazások, webszerverek) származnak.
+- **Leírás:** Érzékeli a jogosulatlan fiókeltávolítási vagy kizárási kísérleteket.Tömegesen figyel
+törlések, adminisztratív fiókok célzása és romboló fiók
+nem szabványos folyamatokból származó műveletek, például Office-alkalmazások, webszerverek,
+vagy forgatókönyveket.Úgy tervezték, hogy csökkentse a hamis pozitív eredményeket a T1531 technikák észlelése közben.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

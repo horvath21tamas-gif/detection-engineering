@@ -5735,17 +5735,18 @@ nem megbízható folyamatvonalakból származnak.
 
 
 ---
-## Ultra-Pro High-Fidelity OS önmegsemmisítés (T1499.001)
+## OS önmegsemmisítés-észlelés (T1499.001)
 - **ID:** `T1499_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [NTSD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a célzott operációs rendszer önmegsemmisítését azáltal, hogy figyeli a kényszerített leállítást
-kritikus kernelfolyamatok (csrss.exe, wininit.exe) és rosszindulatú használata
-rendszer hibakeresők az azonnali BSOD kiváltására, konkrétan kiszűrve
-megbízható kezelési és frissítési folyamatok.
+- **Leírás:** Érzékeli a nagy biztonságú operációs rendszer önmegsemmisítési kísérleteit, beleértve a kényszerített leállítást is
+kritikus kernelfolyamatok (csrss.exe, wininit.exe, smss.exe, services.exe)
+és rosszindulatú hibakereső visszaélés (ntsd.exe), amelynek célja az azonnali BSOD kiváltása.
+Kiterjedt szűrést tartalmaz a megbízható kezeléshez, frissítési műveletekhez és
+törvényes adminisztrációs automatizálás.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

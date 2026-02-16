@@ -6031,17 +6031,18 @@ originating from untrusted process lineages.
 
 
 ---
-## Ultra-Pro High-Fidelity OS Self-Destruction (T1499.001)
+## OS Self-Destruction Detection (T1499.001)
 - **ID:** `T1499_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [NTSD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted OS self-destruction by monitoring for forced termination of 
-critical kernel processes (csrss.exe, wininit.exe) and malicious use of 
-system debuggers to trigger immediate BSOD, specifically filtering out 
-trusted management and update processes.
+- **Leírás:** Detects high-confidence OS self-destruction attempts, including forced termination
+of critical kernel processes (csrss.exe, wininit.exe, smss.exe, services.exe)
+and malicious debugger abuse (ntsd.exe) aimed at triggering immediate BSOD.
+Includes extensive filtering for trusted management, update operations, and
+legitimate administrative automation.
 
 
 #### 🚨 Response Playbook

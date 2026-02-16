@@ -5735,17 +5735,18 @@ aus nicht vertrauenswürdigen Prozesslinien stammen.
 
 
 ---
-## Ultra-Pro High-Fidelity-OS-Selbstzerstörung (T1499.001)
+## Erkennung der Selbstzerstörung des Betriebssystems (T1499.001)
 - **ID:** `T1499_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [NTSD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezielte Selbstzerstörung des Betriebssystems durch Überwachung auf erzwungene Beendigung von
-kritische Kernelprozesse (csrss.exe, wininit.exe) und böswillige Verwendung von
-System-Debugger, um sofortiges BSOD auszulösen, insbesondere das Herausfiltern
-vertrauenswürdige Verwaltungs- und Aktualisierungsprozesse.
+- **Beschreibung:** Erkennt hochzuverlässige Selbstzerstörungsversuche des Betriebssystems, einschließlich erzwungener Beendigung
+kritischer Kernelprozesse (csrss.exe, wininit.exe, smss.exe, services.exe)
+und böswilliger Debugger-Missbrauch (ntsd.exe), der darauf abzielt, sofortigen BSOD auszulösen.
+Beinhaltet umfassende Filterung für vertrauenswürdige Verwaltung, Aktualisierungsvorgänge usw
+legitime Verwaltungsautomatisierung.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

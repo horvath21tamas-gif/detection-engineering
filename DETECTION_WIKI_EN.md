@@ -6497,7 +6497,7 @@ process trees, specifically targeting BYOVD and SPI flash access.
 
 
 ---
-## Ultra-Pro Component Firmware Tampering (T1542.002)
+## Component Firmware Tampering (T1542.002)
 - **ID:** `T1542_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -6505,8 +6505,9 @@ process trees, specifically targeting BYOVD and SPI flash access.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects unauthorized peripheral firmware (NIC, SSD, GPU) modification by 
-identifying stand-alone flashing tools initiated from untrusted process 
-chains or non-standard file locations.
+monitoring stand-alone flashing tools initiated from untrusted process 
+chains or non-standard file locations. Filters out trusted management 
+tools to reduce false positives.
 
 
 #### 🚨 Response Playbook

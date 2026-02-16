@@ -6176,7 +6176,7 @@ folyamatfák, kifejezetten a BYOVD és az SPI flash hozzáférést célozva.
 
 
 ---
-## Ultra-Pro komponens firmware-szabotázs (T1542.002)
+## Komponens firmware-szabotázs (T1542.002)
 - **ID:** `T1542_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -6184,8 +6184,9 @@ folyamatfák, kifejezetten a BYOVD és az SPI flash hozzáférést célozva.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a perifériás firmware (NIC, SSD, GPU) jogosulatlan módosítását
-a nem megbízható folyamatból indított önálló villogó eszközök azonosítása
-láncok vagy nem szabványos fájlhelyek.
+a nem megbízható folyamatból indított önálló villogó eszközök figyelése
+láncok vagy nem szabványos fájlhelyek.Kiszűri a megbízható kezelést
+eszközök a hamis pozitív eredmények csökkentésére.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

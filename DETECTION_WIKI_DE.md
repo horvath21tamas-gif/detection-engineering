@@ -6176,7 +6176,7 @@ Prozessbäume, die speziell auf den BYOVD- und SPI-Flash-Zugriff abzielen.
 
 
 ---
-## Manipulation der Ultra-Pro-Komponenten-Firmware (T1542.002)
+## Manipulation der Komponenten-Firmware (T1542.002)
 - **ID:** `T1542_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -6184,8 +6184,9 @@ Prozessbäume, die speziell auf den BYOVD- und SPI-Flash-Zugriff abzielen.
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt unbefugte Modifikationen der Peripherie-Firmware (NIC, SSD, GPU) durch
-Identifizieren eigenständiger Flash-Tools, die von einem nicht vertrauenswürdigen Prozess initiiert wurden
-Ketten oder nicht standardmäßige Dateispeicherorte.
+Überwachung eigenständiger Flash-Tools, die von einem nicht vertrauenswürdigen Prozess initiiert werden
+Ketten oder nicht standardmäßige Dateispeicherorte.Filtert vertrauenswürdiges Management heraus
+Tools zur Reduzierung falsch positiver Ergebnisse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

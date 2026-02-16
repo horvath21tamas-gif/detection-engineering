@@ -291,7 +291,7 @@
 - [Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484)](#ultra-pro-domain-policy-manipulation-&-gpo-abuse-(t1484))
 - [Ultra-Pro csoportházirend-módosítás és visszaélés (T1484.001)](#ultra-pro-csoportházirend-módosítás-és-visszaélés-(t1484001))
 - [Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)](#ultra-pro-domain-trust-tampering-&-sid-filtering-bypass-(t1484002))
-- [Ultra-Pro nagy pontosságú adatmegsemmisítés (T1485)](#ultra-pro-nagy-pontosságú-adatmegsemmisítés-(t1485))
+- [Adatmegsemmisítés (T1485/T1490)](#adatmegsemmisítés-(t1485t1490))
 - [Ransomware-előkészítési tevékenység észlelve a Windows Host-on (High Fidelity)](#ransomware-előkészítési-tevékenység-észlelve-a-windows-host-on-(high-fidelity))
 - [Szervizmegálló (T1489)](#szervizmegálló-(t1489))
 - [Kötet árnyékmásolatok gyanús törlése a VSSAdminon keresztül (High Fidelity)](#kötet-árnyékmásolatok-gyanús-törlése-a-vssadminon-keresztül-(high-fidelity))
@@ -5453,16 +5453,14 @@ a SID-szűrés (karantén) és a jogosulatlan bizalom létrehozásának letiltá
 
 
 ---
-## Ultra-Pro nagy pontosságú adatmegsemmisítés (T1485)
+## Adatmegsemmisítés (T1485/T1490)
 - **ID:** `T1485.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CIPHER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WBADMIN.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a szisztematikus adatmegsemmisítést a VSS törlésének figyelésével,
-biztonságos fájlmegsemmisítés (sdelete, titkosítás) és tömeges rekurzív törlés
-gyanús szülőfolyamatokból kezdeményezett vagy nem ideiglenes könyvtárakat céloz meg.
+- **Leírás:** Érzékeli a szisztematikus adatmegsemmisítési kísérleteket azáltal, hogy figyeli a folyamatlétrehozási eseményeket, amelyek magukban foglalják a Volume Shadow Copies (VSS) törlését, a biztonságos fájlmegsemmisítő segédprogramokat (sdelete, titkosítás) és a tömeges rekurzív törléseket.Figyelmeztetések gyanús szülőfolyamatokról vagy nem ideiglenes címtárakat célzó műveletekről.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

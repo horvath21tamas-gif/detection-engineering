@@ -291,7 +291,7 @@
 - [Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484)](#ultra-pro-domain-policy-manipulation-&-gpo-abuse-(t1484))
 - [Ultra-Pro Group Policy Modification & Abuse (T1484.001)](#ultra-pro-group-policy-modification-&-abuse-(t1484001))
 - [Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)](#ultra-pro-domain-trust-tampering-&-sid-filtering-bypass-(t1484002))
-- [Ultra-Pro High-Fidelity Data Destruction (T1485)](#ultra-pro-high-fidelity-data-destruction-(t1485))
+- [Data Destruction (T1485/T1490)](#data-destruction-(t1485t1490))
 - [Ransomware Preparation Activity Detected on Windows Host (High Fidelity)](#ransomware-preparation-activity-detected-on-windows-host-(high-fidelity))
 - [Service Stop (T1489)](#service-stop-(t1489))
 - [Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity)](#suspicious-deletion-of-volume-shadow-copies-via-vssadmin-(high-fidelity))
@@ -5733,16 +5733,14 @@ Correlates AD object changes with known administrative context.
 
 
 ---
-## Ultra-Pro High-Fidelity Data Destruction (T1485)
+## Data Destruction (T1485/T1490)
 - **ID:** `T1485.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CIPHER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WBADMIN.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic data destruction by monitoring for VSS deletion, 
-secure file shredding (sdelete, cipher), and bulk recursive deletions 
-initiated from suspicious parent processes or targeting non-temp directories.
+- **Leírás:** Detects systematic data destruction attempts by monitoring process creation events involving deletion of Volume Shadow Copies (VSS), secure file shredding utilities (sdelete, cipher), and bulk recursive deletions. Alerts on suspicious parent processes or operations targeting non-temporary directories.
 
 
 #### 🚨 Response Playbook

@@ -291,7 +291,7 @@
 - [Manipulation von Ultra-Pro-Domänenrichtlinien und GPO-Missbrauch (T1484)](#manipulation-von-ultra-pro-domänenrichtlinien-und-gpo-missbrauch-(t1484))
 - [Änderung und Missbrauch der Ultra-Pro-Gruppenrichtlinien (T1484.001)](#änderung-und-missbrauch-der-ultra-pro-gruppenrichtlinien-(t1484001))
 - [Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)](#ultra-pro-domain-trust-tampering-&-sid-filtering-bypass-(t1484002))
-- [Ultra-Pro High-Fidelity-Datenvernichtung (T1485)](#ultra-pro-high-fidelity-datenvernichtung-(t1485))
+- [Datenvernichtung (T1485/T1490)](#datenvernichtung-(t1485t1490))
 - [Ransomware-Vorbereitungsaktivität auf Windows-Host erkannt (High Fidelity)](#ransomware-vorbereitungsaktivität-auf-windows-host-erkannt-(high-fidelity))
 - [Servicestopp (T1489)](#servicestopp-(t1489))
 - [Verdächtiges Löschen von Volume-Schattenkopien über VSSAdmin (High Fidelity)](#verdächtiges-löschen-von-volume-schattenkopien-über-vssadmin-(high-fidelity))
@@ -5453,16 +5453,14 @@ Korreliert AD-Objektänderungen mit dem bekannten Verwaltungskontext.
 
 
 ---
-## Ultra-Pro High-Fidelity-Datenvernichtung (T1485)
+## Datenvernichtung (T1485/T1490)
 - **ID:** `T1485.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CIPHER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WBADMIN.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt systematische Datenvernichtung durch Überwachung auf VSS-Löschung,
-Sichere Dateivernichtung (sdelete, cipher) und rekursive Massenlöschung
-initiiert von verdächtigen übergeordneten Prozessen oder zielt auf nicht temporäre Verzeichnisse ab.
+- **Beschreibung:** Erkennt systematische Datenvernichtungsversuche durch die Überwachung von Prozesserstellungsereignissen, die das Löschen von Volume Shadow Copies (VSS), sicheren Dienstprogrammen zur Dateivernichtung (sdelete, cipher) und rekursiven Massenlöschungen umfassen.Warnungen zu verdächtigen übergeordneten Prozessen oder Vorgängen, die auf nicht temporäre Verzeichnisse abzielen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -70,7 +70,7 @@ detection:
             - '\cmd.exe'
 
     selection_non_system_user:
-        User|not_contains:
+        User|contains:
             - 'NT AUTHORITY\SYSTEM'
             - 'NT AUTHORITY\LOCAL SERVICE'
             - 'NT AUTHORITY\NETWORK SERVICE'
@@ -78,7 +78,7 @@ detection:
     condition:
         selection_history_files
         and (selection_exfiltration_patterns or selection_obfuscation or selection_suspicious_parent)
-        and selection_non_system_user
+        and not selection_non_system_user
         and not filter_legit_shells
 
 falsepositives:

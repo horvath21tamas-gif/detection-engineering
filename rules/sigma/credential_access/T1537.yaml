@@ -1,57 +1,86 @@
-title: Ultra-Pro High-Fidelity Cloud Account Exfil (T1537)
-id: 70603ca8-ab77-4d2f-b938-cf5083336141
+title: Cloud Account Exfiltration Detection (T1537)
+id: 2bce12cd-7588-405b-88ee-9e81f112c46b
 status: stable
 description: |
-    Detects data exfiltration via native cloud CLI tools by monitoring for 
-    cross-account synchronization, manual credential injection in CLI, 
-    and transfers initiated from non-administrative process lineages.
+    Detects potential cloud account exfiltration via native CLI tools. Monitors
+    cross-account synchronization, manual credential injection, and transfers 
+    initiated from non-administrative or suspicious process lineages. Covers 
+    AWS, Azure, GCP, and Snowball environments.
+
 author: hota05
-date: 2026-02-09
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1537/
 tags:
     - attack.exfiltration
     - attack.t1537
+    - attack.cloud
+    - attack.credential_access
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\aws.exe'            
-            - '\az.exe'             
-            - '\gsutil.exe'          
+
+    selection_cloud_tools:
+        Image|endswith:
+            - '\aws.exe'
+            - '\az.exe'
             - '\gcloud.exe'
-            - '\snowball.exe'       
+            - '\gsutil.exe'
+            - '\snowball.exe'
 
-    selection_logic:
+    selection_exfil_commands:
         CommandLine|contains:
-            - ' s3 sync '            
-            - ' storage copy '       
-            - ' --access-key '       
-            - ' --profile '          
-            - ' --request-payer '    
-            - ' --no-sign-request '  
-            - ' make-public '        
+            - ' s3 sync '
+            - ' storage copy '
+            - ' cp '
+            - ' --access-key '
+            - ' --secret-key '
+            - ' --profile '
+            - ' --request-payer '
+            - ' --no-sign-request '
+            - ' make-public '
+            - ' bucket-to-bucket'
+            - ' gs://'
 
-    selection_context:
-        - Image|contains:
-            - '\Users\'              
+    selection_suspicious_context:
+        Image|contains:
+            - '\Users\'
             - '\Temp\'
-        - ParentImage|endswith:
-            - '\winword.exe'         
+        ParentImage|endswith:
+            - '\winword.exe'
             - '\excel.exe'
-            - '\httpd.exe'          
+            - '\powerpoint.exe'
+            - '\httpd.exe'
             - '\php-cgi.exe'
-            - '\rundll32.exe'        
+            - '\rundll32.exe'
+            - '\taskhostw.exe'
+        ParentCommandLine|contains:
+            - '-EncodedCommand'
+            - '-NonInteractive'
 
-    filter_legit:
-        - ParentImage|endswith:
-            - '\msiexec.exe'         
+    filter_legitimate:
+        ParentImage|endswith:
+            - '\msiexec.exe'
             - '\services.exe'
-        - CommandLine|contains:
-            - ' terraform '          
+            - '\explorer.exe'
+        CommandLine|contains:
+            - ' terraform '
             - ' ansible '
-            - ' Jenkins '           
-        - username: 'NT AUTHORITY\SYSTEM'
+            - ' Jenkins '
+            - ' CI/CD '
+        User|startswith: 'NT AUTHORITY\'
 
-    condition: selection_tools and (selection_logic or selection_context) and not filter_legit
+    condition: 
+        selection_cloud_tools 
+        and (selection_exfil_commands or selection_suspicious_context) 
+        and not filter_legitimate
+
+falsepositives:
+    - CI/CD automation pipelines (Terraform, Ansible, Jenkins)
+    - Admin/service accounts performing legitimate cloud sync
+    - Power-user scripts for backups
+
 level: critical

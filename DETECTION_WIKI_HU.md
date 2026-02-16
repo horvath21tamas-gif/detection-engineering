@@ -5845,16 +5845,18 @@ gyanús felderítési parancsok és konfigurációs változások (xp_cmdshell, s
 
 
 ---
-## Ultra-Pro IIS natív modul-injekció (T1505.002)
+## IIS natív modul-injekció (T1505.002)
 - **ID:** `T1505_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [NGEN.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Figyeléssel észleli az IIS-modulok regisztrációját vagy kézi befecskendezését
-appcmd.exe használat, közvetlen applicationHost.config szerkesztések és DLL-betöltések
-nem szabványos vagy a felhasználó által írható útvonalakról.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [NGEN.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Megfigyeléssel észleli a jogosulatlan IIS natív modul regisztrációját vagy befecskendezését
+az appcmd.exe használata, az applicationHost.config vagy a web.config közvetlen szerkesztése,
+és a DLL betöltése nem szabványos, felhasználó által írható vagy gyanús útvonalakról.
+A minimalizálás érdekében a rendellenes parancssori argumentumokra és végrehajtási kontextusokra összpontosít
+hamis pozitív eredmények a szabványos IIS vagy Windows szervizfolyamatokból.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -6034,7 +6036,7 @@ automatizálási, adminisztrációs vagy állapotfelmérési feladatok.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a felhőalapú tárolási szolgáltatóktól (AWS, Azure, GCP) származó jogosulatlan adatok kiszűrését
-a gyanús CLI-argumentumok figyelésével, beépített hitelesítő adatok beszúrásával, rekurzív másolással
+a gyanús CLI-argumentumok figyelésével, a hitelesítő adatok soron belüli befecskendezésével, rekurzív másolással
 parancsok és rendellenes folyamatsorok, amelyek nem rendszergazdai vagy felhasználói kontextusból származnak.
 Lefedi az aws, az, a gsutil, a rclone, az mc és más felhőalapú CLI eszközöket.
 

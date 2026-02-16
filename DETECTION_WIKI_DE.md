@@ -5845,16 +5845,18 @@ verdächtige Erkennungsbefehle und Konfigurationsänderungen (xp_cmdshell, sp_co
 
 
 ---
-## Ultra-Pro IIS Native Module Injection (T1505.002)
+## Native IIS-Modulinjektion (T1505.002)
 - **ID:** `T1505_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [NGEN.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Registrierung oder manuelle Injektion von IIS-Modulen durch Überwachung
-Verwendung von appcmd.exe, direkte Bearbeitung von applicationHost.config und Laden von DLLs
-aus nicht standardmäßigen oder vom Benutzer beschreibbaren Pfaden.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [NGEN.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt unbefugte Registrierung oder Injektion von nativen IIS-Modulen durch Überwachung
+Verwendung von appcmd.exe, direkte Bearbeitung von applicationHost.config oder web.config,
+und DLL-Ladevorgänge aus nicht standardmäßigen, vom Benutzer beschreibbaren oder verdächtigen Pfaden.
+Konzentriert sich auf die Minimierung anormaler Befehlszeilenargumente und Ausführungskontexte
+Fehlalarme aus standardmäßigen IIS- oder Windows-Wartungsprozessen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -5988,7 +5990,7 @@ Ernte oder Exfiltration.
 
 
 ---
-## Erkennung von Anwendungs-Token und Session-Hijacking (T1528)
+## Erkennung von Anwendungs-Token und Sitzungs-Hijacking (T1528)
 - **ID:** `T1528.yaml`
 - **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)

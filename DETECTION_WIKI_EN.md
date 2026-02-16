@@ -6147,16 +6147,18 @@ suspicious discovery commands and configuration changes (xp_cmdshell, sp_configu
 
 
 ---
-## Ultra-Pro IIS Native Module Injection (T1505.002)
+## IIS Native Module Injection (T1505.002)
 - **ID:** `T1505_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [NGEN.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the registration or manual injection of IIS modules by monitoring 
-appcmd.exe usage, direct applicationHost.config edits, and DLL loads 
-from non-standard or user-writable paths.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [NGEN.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects unauthorized IIS native module registration or injection by monitoring
+usage of appcmd.exe, direct edits to applicationHost.config or web.config, 
+and DLL loads from non-standard, user-writable, or suspicious paths.
+Focuses on anomalous command-line arguments and execution contexts to minimize
+false positives from standard IIS or Windows servicing processes.
 
 
 #### 🚨 Response Playbook

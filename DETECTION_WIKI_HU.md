@@ -5404,16 +5404,14 @@ A rendellenes folyamatvonalra összpontosít (pl. interaktív héjak a munkaáll
 
 
 ---
-## Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484)
+## Domainházirend-manipuláció és csoportházirend-objektumokkal való visszaélés (T1484)
 - **ID:** `T1484.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Tárolás-igényes)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Figyeléssel észleli a kritikus tartományi szabályzatok jogosulatlan módosításait
-A fájlrendszer a SYSVOL mappába ír, és a GPO-hivatkozás módosul, kiszűri
-szabványos adminisztrációs eszközök (GPMC).
+- **Leírás:** Érzékeli a kritikus tartományi szabályzatok jogosulatlan módosításait azáltal, hogy figyeli a fájlrendszer írásait a SYSVOL mappába és az Active Directory GPO hivatkozásmódosításait.Kiszűri a szabványos adminisztrációs műveleteket, például a GPMC-t és az ismert rendszerfolyamatokat a téves pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

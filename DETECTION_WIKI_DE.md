@@ -5404,16 +5404,14 @@ und spezifische Aufklärungsmuster, die von Tools wie BloodHound/SharpHound verw
 
 
 ---
-## Manipulation von Ultra-Pro-Domänenrichtlinien und GPO-Missbrauch (T1484)
+## Manipulation von Domänenrichtlinien und GPO-Missbrauch (T1484)
 - **ID:** `T1484.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Speicherintensiv)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Änderungen an kritischen Domänenrichtlinien durch Überwachung
-Das Dateisystem schreibt in den SYSVOL-Ordner und die GPO-Linkänderungen werden herausgefiltert
-Standard-Verwaltungstools (GPMC).
+- **Beschreibung:** Erkennt nicht autorisierte Änderungen an kritischen Domänenrichtlinien durch Überwachung von Dateisystemschreibvorgängen in den SYSVOL-Ordner und Änderungen an Active Directory-GPO-Links.Filtert standardmäßige Verwaltungsvorgänge wie GPMC und bekannte Systemprozesse heraus, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

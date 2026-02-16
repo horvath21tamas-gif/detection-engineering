@@ -5681,16 +5681,14 @@ and specific reconnaissance patterns used by tools like BloodHound/SharpHound.
 
 
 ---
-## Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484)
+## Domain Policy Manipulation & GPO Abuse (T1484)
 - **ID:** `T1484.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Tárolás-igényes)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized modifications to critical Domain Policies by monitoring 
-file system writes to the SYSVOL folder and GPO link changes, filtering out 
-standard administrative tools (GPMC).
+- **Leírás:** Detects unauthorized modifications to critical Domain Policies by monitoring  file system writes to the SYSVOL folder and Active Directory GPO link changes.  Filters out standard administrative operations, such as GPMC, and known system processes to reduce false positives.
 
 
 #### 🚨 Response Playbook

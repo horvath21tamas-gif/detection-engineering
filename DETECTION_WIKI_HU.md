@@ -6158,7 +6158,7 @@ villogó eszközök és UEFI-változómanipuláció a nem szabványos szülőfol
 
 
 ---
-## Ultra-Pro ROM készlet és UEFI firmware-szabotázs (T1542.001)
+## ROM készlet és UEFI firmware manipuláció (T1542.001)
 - **ID:** `T1542_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -6168,6 +6168,7 @@ villogó eszközök és UEFI-változómanipuláció a nem szabványos szülőfol
 - **Leírás:** Érzékeli a jogosulatlan firmware-manipulációt a magas kockázatú illesztőprogramok figyelésével
 gyanústól kezdeményezett regisztrációk és firmware-frissítési segédprogramok
 folyamatfák, kifejezetten a BYOVD és az SPI flash hozzáférést célozva.
+Kiszűri a megbízható szállítók frissítő segédprogramjait, hogy minimalizálja a hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

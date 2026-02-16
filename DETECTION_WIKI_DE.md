@@ -6158,7 +6158,7 @@ Flash-Tools und UEFI-Variablenmanipulation von nicht standardmäßigen übergeor
 
 
 ---
-## Ultra-Pro ROM-Kit und UEFI-Firmware-Manipulation (T1542.001)
+## Manipulation des ROM-Kits und der UEFI-Firmware (T1542.001)
 - **ID:** `T1542_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -6168,6 +6168,7 @@ Flash-Tools und UEFI-Variablenmanipulation von nicht standardmäßigen übergeor
 - **Beschreibung:** Erkennt unbefugte Firmware-Manipulationen durch Überwachung hochriskanter Treiber
 Registrierungen und Firmware-Update-Dienstprogramme, die von verdächtigen Unternehmen initiiert wurden
 Prozessbäume, die speziell auf den BYOVD- und SPI-Flash-Zugriff abzielen.
+Filtert Update-Dienstprogramme vertrauenswürdiger Anbieter heraus, um Fehlalarme zu minimieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

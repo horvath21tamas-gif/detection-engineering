@@ -6478,7 +6478,7 @@ flashing tools, and UEFI variable manipulation from non-standard parent processe
 
 
 ---
-## Ultra-Pro ROM Kit & UEFI Firmware Tampering (T1542.001)
+## ROM Kit & UEFI Firmware Tampering (T1542.001)
 - **ID:** `T1542_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -6487,7 +6487,8 @@ flashing tools, and UEFI variable manipulation from non-standard parent processe
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects unauthorized firmware manipulation by monitoring high-risk driver 
 registrations and firmware update utilities initiated from suspicious 
-process trees, specifically targeting BYOVD and SPI flash access.
+process trees, specifically targeting BYOVD and SPI flash access. 
+Filters out trusted vendor update utilities to minimize false positives.
 
 
 #### 🚨 Response Playbook

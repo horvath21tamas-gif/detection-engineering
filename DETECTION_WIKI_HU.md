@@ -6857,16 +6857,16 @@ törvényes rendszerfolyamatokon belül, mint például az explorer.exe.
 
 
 ---
-## Ultra-Pro Privilege Eszkaláció a rendszerleíró adatbázis eltérítésével (T1548.002)
+## Jogosultság kiterjesztése rendszerleíró adatbázis eltérítésével (T1548)
 - **ID:** `T1548.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [COMPUTERDEFAULTS.EXE](https://lolbas-project.github.io/lolbas/), [EVENTVWR.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A rendszerleíró adatbázis jogosulatlan módosításainak figyelésével észleli az UAC megkerülési kísérleteit
-hogy shell open parancsokat.Kifejezetten szűrők megbízható telepítőknek és
-rendszer által kezdeményezett változtatások a hamis pozitívumok minimalizálása érdekében.
+- **Leírás:** Érzékeli az UAC megkerülési és jogosultság-kiterjesztési kísérleteket a jogosulatlanok figyelésével
+A rendszerleíró adatbázis módosításai a shell open parancsokhoz.Kiszűri a megbízható telepítőket
+és a rendszer által kezdeményezett változtatások a hamis pozitívumok csökkentésére.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

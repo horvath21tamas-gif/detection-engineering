@@ -6857,16 +6857,16 @@ innerhalb legitimer Systemprozesse wie explorer.exe.
 
 
 ---
-## Ultra-Pro-Berechtigungsausweitung durch Registry-Hijacking (T1548.002)
+## Rechteausweitung durch Registry-Hijacking (T1548)
 - **ID:** `T1548.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Medium (Mäßiger Geräuschpegel)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [COMPUTERDEFAULTS.EXE](https://lolbas-project.github.io/lolbas/), [EVENTVWR.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt UAC-Umgehungsversuche durch Überwachung nicht autorisierter Registrierungsänderungen
-zum Öffnen von Shell-Befehlen.Filtert speziell nach vertrauenswürdigen Installateuren und
-systeminitiierte Änderungen, um Fehlalarme zu minimieren.
+- **Beschreibung:** Erkennt UAC-Umgehungsversuche und Versuche zur Rechteausweitung durch Überwachung unbefugter Zugriffe
+Registry-Änderungen an Shell-Open-Befehlen.Filtert vertrauenswürdige Installer heraus
+und vom System initiierte Änderungen, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

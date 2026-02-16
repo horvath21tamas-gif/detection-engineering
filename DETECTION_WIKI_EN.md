@@ -7219,16 +7219,16 @@ within legitimate system processes like explorer.exe.
 
 
 ---
-## Ultra-Pro Privilege Escalation via Registry Hijacking (T1548.002)
+## Privilege Escalation via Registry Hijacking (T1548)
 - **ID:** `T1548.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [COMPUTERDEFAULTS.EXE](https://lolbas-project.github.io/lolbas/), [EVENTVWR.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects UAC bypass attempts by monitoring unauthorized Registry modifications 
-to shell open commands. Specifically filters for trusted installers and 
-system-initiated changes to minimize false positives.
+- **Leírás:** Detects UAC bypass and privilege escalation attempts by monitoring unauthorized 
+Registry modifications to shell open commands. Filters out trusted installers 
+and system-initiated changes to reduce false positives.
 
 
 #### 🚨 Response Playbook

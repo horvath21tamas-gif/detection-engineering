@@ -1,9 +1,10 @@
-title: Ultra-Pro DHCP/PXE Boot Hijacking (T1542.005)
+title: DHCP/PXE Boot Hijacking (T1542.005)
 id: 87ff2f63-b7b4-4741-a2cb-263e4cd6a9ad
 status: stable
 description: |
-    Detects unauthorized modification of DHCP Options 66 (Boot Server) and 67 (Bootfile Name).
-    Attackers use this to redirect network boot requests to a malicious TFTP server.
+    Detects unauthorized modification of DHCP Options 66 (Boot Server) and 67 (Bootfile Name), 
+    which attackers use to redirect network boot requests to a malicious TFTP server. 
+    Filters trusted system services to reduce false positives.
 author: hota05
 date: 2026-02-02
 tags:
@@ -13,36 +14,35 @@ logsource:
     product: windows
     category: registry_event
 detection:
-    selection_registry:
+    selection_dhcp_registry_keys:
         TargetObject|contains: '\Services\DHCPServer\Parameters\Options\'
-    
-    selection_options:
-        TargetObject|contains:
-            - '\066'
-            - '\067'
 
-    selection_values:
+    selection_boot_options:
+        TargetObject|contains:
+            - '\066'   
+            - '\067'   
+
+    selection_suspicious_values:
         Details|contains:
             - '.efi'
             - '.bin'
             - '.pxe'
-            - '.com' 
+            - '.com'
 
-    selection_unauthorized_actor:
+    selection_unauthorized_processes:
         Image|endswith:
-            - '\dhcpssvc.exe' 
-            - '\mmc.exe'      
+            - '\dhcpssvc.exe'
+            - '\mmc.exe'
             - '\svchost.exe'
-        Image|endswith:
             - '\powershell.exe'
             - '\pwsh.exe'
             - '\cmd.exe'
-            - '\netsh.exe'    
+            - '\netsh.exe'
             - '\reg.exe'
 
-    filter_trusted_admin:
-        username: 'NT AUTHORITY\NETWORK SERVICE'
-        Image|contains: 'C:\Windows\System32\'
+    filters_trusted_system:
+        - username: 'NT AUTHORITY\NETWORK SERVICE'
+        - Image|contains: 'C:\Windows\System32\'
 
-    condition: selection_registry and selection_options and selection_unauthorized_actor and not filter_trusted_admin
+    condition: selection_dhcp_registry_keys and selection_boot_options and selection_suspicious_values and selection_unauthorized_processes and not filters_trusted_system
 level: critical

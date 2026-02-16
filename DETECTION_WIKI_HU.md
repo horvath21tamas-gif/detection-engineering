@@ -7189,15 +7189,18 @@ interaktív vagy távoli héjakból származnak.
 
 
 ---
-## Ultra-Pro High-Fidelity Subvert Trust Controls (T1553)
+## Subvert Trust Controls (T1553)
 - **ID:** `T1553.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a bizalmi vezérlők felforgatására irányuló kísérleteket a gyökértanúsítványok kényszertelepítésével
-vagy biztonsági zónák/MotW beállítások módosítása nem szabványos folyamatokból és útvonalakból.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a Windows megbízhatósági vezérlőinek felforgatására irányuló kísérleteket, beleértve a kényszerített
+gyökértanúsítvány telepítése és Mark-of-the-Web (MotW) / Biztonság
+Zóna manipuláció.A gyanús végrehajtási kontextusra összpontosít, nem szabványos
+forrásútvonalak és a rendellenes szülő-gyermek kapcsolatok csökkentése érdekében
+vállalati telepítési téves pozitív eredmények.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

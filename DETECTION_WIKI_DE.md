@@ -7189,15 +7189,18 @@ stammen aus interaktiven oder Remote-Shells.
 
 
 ---
-## Ultra-Pro High-Fidelity Subvert Trust Controls (T1553)
+## Vertrauenskontrollen untergraben (T1553)
 - **ID:** `T1553.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Versuche, Vertrauenskontrollen durch die erzwungene Installation von Stammzertifikaten zu untergraben
-oder Ändern von Sicherheitszonen/MotW-Einstellungen aus nicht standardmäßigen Prozessen und Pfaden.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt Versuche, die Windows-Vertrauenskontrollen zu untergraben, einschließlich erzwungener Versuche
+Root-Zertifikat-Installation und Mark-of-the-Web (MotW) / Sicherheit
+Zonenmanipulation.Konzentriert sich auf verdächtige Ausführungskontexte, die nicht dem Standard entsprechen
+Quellpfade und abnormale Eltern-Kind-Beziehungen reduzieren
+Fehlalarme bei der Unternehmensbereitstellung.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

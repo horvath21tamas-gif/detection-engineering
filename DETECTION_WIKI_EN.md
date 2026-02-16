@@ -7571,15 +7571,18 @@ originating from interactive or remote shells.
 
 
 ---
-## Ultra-Pro High-Fidelity Subvert Trust Controls (T1553)
+## Subvert Trust Controls (T1553)
 - **ID:** `T1553.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects attempts to subvert trust controls by force-installing root certificates 
-or modifying security zones/MotW settings from non-standard processes and paths.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects attempts to subvert Windows trust controls including forced
+root certificate installation and Mark-of-the-Web (MotW) / Security
+Zone manipulation. Focuses on suspicious execution context, non-standard
+source paths, and abnormal parent-child relationships to reduce
+enterprise deployment false positives.
 
 
 #### 🚨 Response Playbook

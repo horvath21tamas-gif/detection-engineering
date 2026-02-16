@@ -6051,16 +6051,17 @@ die aus nicht standardmäßigen Prozesslinien stammen (z. B. Office-Apps, Webser
 
 
 ---
-## Ultra-Pro High-Fidelity interne Spearphishing-Erkennung (T1534)
+## Interne Spearphishing-Erkennung (T1534)
 - **ID:** `T1534.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt fortgeschrittene interne Spearphishing-Versuche durch Identifizierung von Anomalien
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt fortgeschrittene interne Spearphishing-Versuche durch die Überwachung von Anomalien
 Programmgesteuerter Zugriff auf die Outlook-MAPI-Schnittstelle, verdächtige untergeordnete Prozesse,
-und Befehlszeilen-Flags, die für den Massenversand oder die Einfügung von Anhängen verwendet werden.
+gefährliche Befehlszeilenflags und ungewöhnliche Dateianhänge.
+Konzentriert sich auf PowerShell, cmd, Skript-Engines und Anomalien nicht-browserübergreifender übergeordneter Elemente.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

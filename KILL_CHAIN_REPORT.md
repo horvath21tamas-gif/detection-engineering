@@ -5,7 +5,7 @@ Ez a jelentés automatikusan készült **628** szabály alapján.
 | Támadási Fázis | Szabályok Száma | Lefedettség |
 | :--- | :---: | :--- |
 | Belépési pont (`initial-access`) | 0 | `░░░░░░░░░░` |
-| Végrehajtás (`execution`) | 39 | `███████░░░` |
+| Végrehajtás (`execution`) | 40 | `████████░░` |
 | Perzisztencia (`persistence`) | 140 | `██████████` |
 | Jogosultság kiterjesztés (`privilege-escalation`) | 0 | `░░░░░░░░░░` |
 | Védelem elkerülése (`defense-evasion`) | 0 | `░░░░░░░░░░` |

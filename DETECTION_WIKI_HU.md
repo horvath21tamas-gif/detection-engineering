@@ -6051,16 +6051,17 @@ nem szabványos folyamatvonalakból (pl. Office-alkalmazások, webszerverek) sz�
 
 
 ---
-## Ultra-Pro High-Fidelity belső adathalász-észlelés (T1534)
+## Belső adathalászat-észlelés (T1534)
 - **ID:** `T1534.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Az anomáliák azonosításával észleli a fejlett belső adathalász kísérleteket
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Az anomáliák figyelésével észleli a fejlett belső adathalász kísérleteket
 programozott hozzáférés az Outlook MAPI felületéhez, gyanús gyermekfolyamatok,
-és a tömeges levélküldéshez vagy a mellékletek beillesztéséhez használt parancssori jelzők.
+veszélyes parancssori jelzők és abnormális fájlmellékletek.
+A PowerShellre, a cmd-re, a szkriptmotorokra és a nem böngésző szülő anomáliáira összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

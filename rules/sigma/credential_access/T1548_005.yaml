@@ -1,8 +1,8 @@
-title: Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005)
+title: SUID Desktop Entry & Shortcut Abuse (T1548.005)
 id: 008e5d12-9d9a-41c1-a84b-006ee99bd436
 status: stable
 description: |
-    Detects unauthorized modification of XDG desktop entries or shortcuts that attempt 
+    Detects unauthorized modifications of XDG desktop entries or shortcuts that attempt 
     to execute SUID binaries or leverage pkexec for privilege escalation. 
     Focuses on modifications in user-writable directories by untrusted processes.
 author: hota05
@@ -22,15 +22,15 @@ detection:
             - '/Desktop/'
         TargetFilename|endswith: '.desktop'
 
-    selection_content_abuse:
+    selection_exec_abuse:
         Details|contains:
             - 'Exec=sudo'
-            - 'Exec=pkexec'     
+            - 'Exec=pkexec'
             - 'Exec=gksudo'
-            - 'Exec=/tmp/'      
-            - 'Exec=/dev/shm/'   
+            - 'Exec=/tmp/'
+            - 'Exec=/dev/shm/'
 
-    selection_suspicious_writer:
+    selection_untrusted_writer:
         Image|endswith:
             - '/wget'
             - '/curl'
@@ -43,7 +43,7 @@ detection:
             - '/node'
             - '/php'
 
-    filter_trusted_installers:
+    filters_trusted_processes:
         - Image|endswith:
             - '/apt'
             - '/dpkg'
@@ -52,5 +52,5 @@ detection:
             - '/rpm'
         - username: 'root'
 
-    condition: (selection_target_paths and selection_content_abuse and not filter_trusted_installers) or (selection_target_paths and selection_suspicious_writer)
+    condition: (selection_target_paths and selection_exec_abuse and not filters_trusted_processes) or (selection_target_paths and selection_untrusted_writer)
 level: high

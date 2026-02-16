@@ -5350,16 +5350,14 @@ Systempfade, die von nicht privilegierten oder weborientierten Dienstkonten init
 
 
 ---
-## Ultra-Pro High-Fidelity Execution Guardrails Discovery (T1480)
+## Ausführungsleitplanken-Erkennung (T1480)
 - **ID:** `T1480.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezielte Ausführungsleitlinien durch Identifizierung einer anomalen Umgebung
-Entdeckungsmuster, die von nicht privilegierten Benutzern oder misstrauischen Eltern initiiert wurden,
-Herausfiltern allgemeiner Verwaltungs- und Systemgeräusche.
+- **Beschreibung:** Erkennt gezielte Ausführungsleitlinien durch die Identifizierung anomaler Umgebungserkennungsmuster, die von nicht privilegierten Benutzern oder verdächtigen übergeordneten Prozessen initiiert wurden.Filtert allgemeine Verwaltungs- und Systemstörungen heraus, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -5368,16 +5366,14 @@ Herausfiltern allgemeiner Verwaltungs- und Systemgeräusche.
 
 
 ---
-## Ultra-Pro Environmental Keying Discovery (T1480.001)
+## Erkennung von Umgebungsschlüsseln (T1480.001)
 - **ID:** `T1480_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezieltes Umgebungs-Keying durch Identifizierung von Hardware-Fingerprinting
-und maschinenspezifische Registrierungssuchen, die von verdächtigen, nicht gesicherten,
-oder nicht standardmäßige übergeordnete Prozesse.
+- **Beschreibung:** Erkennt gezielte Umgebungsschlüsselung durch Identifizierung von Hardware-Fingerprinting und maschinenspezifischen Registrierungs- oder AD-Suchen, die von verdächtigen, nicht vertrauenswürdigen oder nicht standardmäßigen übergeordneten Prozessen initiiert werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -5386,16 +5382,14 @@ oder nicht standardmäßige übergeordnete Prozesse.
 
 
 ---
-## Ultra-Pro High-Fidelity Domain Trust Discovery (T1482)
+## Domänenvertrauenserkennung (T1482)
 - **ID:** `T1482.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [QUERY.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Aufzählung von Domänen- und Gesamtstrukturvertrauensstellungen.
-Konzentriert sich auf anomale Prozessherkunft (z. B. interaktive Shells auf Workstations)
-und spezifische Aufklärungsmuster, die von Tools wie BloodHound/SharpHound verwendet werden.
+- **Beschreibung:** Erkennt die systematische Aufzählung von Domänen- und Gesamtstrukturvertrauensstellungen und konzentriert sich dabei auf anomale Prozessherkunft wie interaktive Shells auf Workstations und Aufklärungsmuster, die von Tools wie BloodHound/SharpHound verwendet werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

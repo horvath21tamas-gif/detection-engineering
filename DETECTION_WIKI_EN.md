@@ -5624,16 +5624,14 @@ system paths initiated by non-privileged or web-facing service accounts.
 
 
 ---
-## Ultra-Pro High-Fidelity Execution Guardrails Discovery (T1480)
+## Execution Guardrails Discovery (T1480)
 - **ID:** `T1480.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted execution guardrails by identifying anomalous environment 
-discovery patterns initiated by non-privileged users or suspicious parents, 
-filtering out common administrative and system noise.
+- **Leírás:** Detects targeted execution guardrails by identifying anomalous environment  discovery patterns initiated by non-privileged users or suspicious parent processes.  Filters out common administrative and system noise to reduce false positives.
 
 
 #### 🚨 Response Playbook
@@ -5643,16 +5641,14 @@ filtering out common administrative and system noise.
 
 
 ---
-## Ultra-Pro Environmental Keying Discovery (T1480.001)
+## Environmental Keying Discovery (T1480.001)
 - **ID:** `T1480_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted environmental keying by identifying hardware fingerprinting 
-and machine-specific registry lookups initiated by suspicious, unbacked, 
-or non-standard parent processes.
+- **Leírás:** Detects targeted environmental keying by identifying hardware fingerprinting  and machine-specific registry or AD lookups initiated by suspicious, untrusted,  or non-standard parent processes.
 
 
 #### 🚨 Response Playbook
@@ -5662,16 +5658,14 @@ or non-standard parent processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Domain Trust Discovery (T1482)
+## Domain Trust Discovery (T1482)
 - **ID:** `T1482.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [QUERY.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic enumeration of domain and forest trusts. 
-Focuses on anomalous process lineage (e.g., interactive shells on workstations) 
-and specific reconnaissance patterns used by tools like BloodHound/SharpHound.
+- **Leírás:** Detects systematic enumeration of domain and forest trusts,  focusing on anomalous process lineage such as interactive shells  on workstations, and reconnaissance patterns used by tools like  BloodHound/SharpHound.
 
 
 #### 🚨 Response Playbook

@@ -5350,16 +5350,14 @@ nem privilegizált vagy webes szolgáltatásfiókok által kezdeményezett rends
 
 
 ---
-## Ultra-Pro High-Fidelity Execution Guardrails Discovery (T1480)
+## Execution Guardrails Discovery (T1480)
 - **ID:** `T1480.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a célzott végrehajtási korlátokat a rendellenes környezet azonosításával
-nem privilegizált felhasználók vagy gyanús szülők által kezdeményezett felfedezési minták,
-a gyakori adminisztrációs és rendszerzaj kiszűrése.
+- **Leírás:** Érzékeli a célzott végrehajtási korlátokat a nem privilegizált felhasználók vagy gyanús szülőfolyamatok által kezdeményezett rendellenes környezetfelderítési minták azonosításával.Kiszűri a gyakori adminisztrációs és rendszerzajt, hogy csökkentse a hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -5368,16 +5366,14 @@ a gyakori adminisztrációs és rendszerzaj kiszűrése.
 
 
 ---
-## Ultra-Pro Environmental Keying Discovery (T1480.001)
+## Environmental Keying Discovery (T1480.001)
 - **ID:** `T1480_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A hardveres ujjlenyomatok azonosításával észleli a célzott környezeti kulcsozást
-valamint a gyanús, nem támogatott,
-vagy nem szabványos szülőfolyamatok.
+- **Leírás:** Érzékeli a célzott környezeti kulcsozást a hardveres ujjlenyomatok és a gyanús, nem megbízható vagy nem szabványos szülői folyamatok által kezdeményezett gépspecifikus regisztrációs vagy AD-keresések azonosításával.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -5386,16 +5382,14 @@ vagy nem szabványos szülőfolyamatok.
 
 
 ---
-## Ultra-Pro High-Fidelity Domain Trust Discovery (T1482)
+## Domain Trust Discovery (T1482)
 - **ID:** `T1482.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [QUERY.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a tartomány- és erdőtrösztök szisztematikus felsorolását.
-A rendellenes folyamatvonalra összpontosít (pl. interaktív héjak a munkaállomásokon)
-és az olyan eszközök által használt konkrét felderítési minták, mint a BloodHound/SharpHound.
+- **Leírás:** Érzékeli a tartomány- és erdőtrösztök szisztematikus felsorolását, összpontosítva a rendellenes folyamatvonalra, például a munkaállomásokon lévő interaktív héjakra és az olyan eszközök által használt felderítési mintákra, mint a BloodHound/SharpHound.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

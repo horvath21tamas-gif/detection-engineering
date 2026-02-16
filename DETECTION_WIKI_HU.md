@@ -7033,16 +7033,17 @@ Nem tartalmazza a legális böngészőfrissítési és szinkronizálási mechani
 
 
 ---
-## Ultra-Pro High-Fidelity, nem biztonságos hitelesítő adatok felfedezése (T1552)
+## Nem biztonságos hitelesítő adatok felfedezése (T1552)
 - **ID:** `T1552.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a hitelesítő adatok célzott felfedezését a fájlokban, a rendszerleíró adatbázisban és a shell előzményeiben.
-Speciális korrelációt használ a keresőeszközök között (findstr, grep, PowerShell),
-érzékeny fájlkiterjesztéseket és nagy entrópiájú kulcsszavakat.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a hitelesítő adatok célzott felderítését fájlok, rendszerleíró adatbázis,
+és héjtörténet.Összefügg a keresési eszközökkel (findstr, grep, PowerShell)
+magas kockázatú fájltípusokkal, érzékeny kulcsszavakkal és gyanús végrehajtással
+kontextusban, hogy minimalizálja a hamis pozitív eredményeket a hitelesítő adatok begyűjtése során.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

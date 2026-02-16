@@ -7033,16 +7033,17 @@ Schließt legitime Browser-Update- und Synchronisierungsmechanismen aus.
 
 
 ---
-## Ultra-Pro High-Fidelity-Erkennung ungesicherter Anmeldeinformationen (T1552)
+## Erkennung ungesicherter Anmeldeinformationen (T1552)
 - **ID:** `T1552.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die gezielte Erkennung von Anmeldeinformationen in Dateien, der Registrierung und dem Shell-Verlauf.
-Verwendet erweiterte Korrelation zwischen Suchtools (findstr, grep, PowerShell),
-sensible Dateierweiterungen und Schlüsselwörter mit hoher Entropie.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die gezielte Erkennung von Anmeldeinformationen in Dateien, Registrierungen usw.
+und Muschelgeschichte.Korreliert Suchwerkzeuge (findstr, grep, PowerShell)
+mit risikoreichen Dateitypen, sensiblen Schlüsselwörtern und verdächtiger Ausführung
+Kontexte, um Fehlalarme zu minimieren und gleichzeitig das Sammeln von Anmeldeinformationen zu identifizieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

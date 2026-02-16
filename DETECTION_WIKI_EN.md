@@ -7406,16 +7406,17 @@ Excludes legitimate browser update and synchronization mechanisms.
 
 
 ---
-## Ultra-Pro High-Fidelity Unsecured Credentials Discovery (T1552)
+## Unsecured Credentials Discovery (T1552)
 - **ID:** `T1552.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted discovery of credentials in files, registry, and shell history. 
-Uses advanced correlation between search tools (findstr, grep, PowerShell), 
-sensitive file extensions, and high-entropy keywords.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects targeted discovery of credentials across files, registry, 
+and shell history. Correlates search tools (findstr, grep, PowerShell)
+with high-risk file types, sensitive keywords, and suspicious execution
+contexts to minimize false positives while identifying credential harvesting.
 
 
 #### 🚨 Response Playbook

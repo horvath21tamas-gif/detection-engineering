@@ -5754,16 +5754,18 @@ vertrauenswürdige Verwaltungs- und Aktualisierungsprozesse.
 
 
 ---
-## Ultra-Pro High-Fidelity-Service-Erschöpfung (T1499.002)
+## Erkennung von Service-Erschöpfung (T1499.002)
 - **ID:** `T1499_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Denial-of-Service am Endpunkt aufgrund der Erschöpfung des Dienstes durch Überwachung
-Unbefugte Dienstbeendigung und dauerhafte Konfigurationsänderungen (Deaktivierung)
-Angriffe auf Sicherheits- und Infrastrukturdienste, die aus verdächtigen Abstammungslinien stammen.
+- **Beschreibung:** Erkennt potenzielle Denial-of-Service-Versuche (DoS) am Endpunkt über gezielte Dienste
+Erschöpfung.Überwacht unbefugte Dienststopps und dauerhafte Konfigurationsänderungen
+(Deaktivieren) und binäre Pfadänderungen, die auf Sicherheit und kritische Aspekte abzielen
+Infrastrukturdienstleistungen.Filtert legitime Systemverwaltung, Patches usw. heraus.
+und Überwachungsaktivitäten, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -5772,17 +5774,18 @@ Angriffe auf Sicherheits- und Infrastrukturdienste, die aus verdächtigen Abstam
 
 
 ---
-## Ultra-Pro High-Fidelity OS-Selbstzerstörung (T1499.003)
+## Erkennung der Selbstzerstörung des Betriebssystems (T1499.003)
 - **ID:** `T1499_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [NTSD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezielte Selbstzerstörung des Betriebssystems durch Überwachung auf erzwungene Beendigung von
-kritische Kernelprozesse (csrss.exe, wininit.exe) und böswillige Verwendung von
-System-Debugger, um sofortiges BSOD auszulösen, insbesondere das Herausfiltern
-vertrauenswürdige Verwaltungs- und Aktualisierungsprozesse.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [CDB.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [NTSD.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt gezielte Selbstzerstörungsversuche des Betriebssystems durch Überwachung der erzwungenen Beendigung
+kritischer Windows-Kernelprozesse (csrss.exe, wininit.exe, smss.exe, services.exe)
+und böswillige Nutzung von System-Debuggern (ntsd.exe, cdb.exe), um BSOD auszulösen.
+High-Fidelity-Filter schließen vertrauenswürdige Verwaltungs-, Patch- und Diagnoseprozesse aus
+um Fehlalarme zu minimieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

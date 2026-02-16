@@ -5754,16 +5754,18 @@ megbízható kezelési és frissítési folyamatok.
 
 
 ---
-## Ultra-Pro High-Fidelity szolgáltatás kimerülése (T1499.002)
+## Szolgáltatás kimerülésének észlelése (T1499.002)
 - **ID:** `T1499_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a végpont szolgáltatásmegtagadást a szolgáltatás kimerülésén keresztül figyeléssel
-jogosulatlan szolgáltatás megszüntetése és állandó konfigurációmódosítások (letiltása)
-gyanús származásúakból származó biztonsági és infrastrukturális szolgáltatásokat céloz meg.
+- **Leírás:** Érzékeli a lehetséges végpont-szolgáltatásmegtagadási (DoS) kísérleteket a célzott szolgáltatáson keresztül
+kimerültség.Figyeli a jogosulatlan szervizleállásokat, a tartós konfigurációmódosításokat
+(letiltás), valamint a biztonsági és kritikus bináris útvonal-módosítások
+infrastrukturális szolgáltatások.Kiszűri a legitim rendszerkezelést, javításokat,
+és a hamis pozitív eredmények csökkentésére irányuló tevékenységek ellenőrzése.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -5772,17 +5774,18 @@ gyanús származásúakból származó biztonsági és infrastrukturális szolg�
 
 
 ---
-## Ultra-Pro High-Fidelity OS önmegsemmisítés (T1499.003)
+## OS önmegsemmisítés-észlelés (T1499.003)
 - **ID:** `T1499_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [NTSD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a célzott operációs rendszer önmegsemmisítését azáltal, hogy figyeli a kényszerített leállítást
-kritikus kernelfolyamatok (csrss.exe, wininit.exe) és rosszindulatú használata
-rendszer hibakeresők az azonnali BSOD kiváltására, konkrétan kiszűrve
-megbízható kezelési és frissítési folyamatok.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [CDB.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [NTSD.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** A kényszerített leállítás figyelésével észleli a célzott operációs rendszer önmegsemmisítési kísérleteit
+kritikus Windows kernelfolyamatok (csrss.exe, wininit.exe, smss.exe, services.exe)
+és a rendszerhibakeresők (ntsd.exe, cdb.exe) rosszindulatú használata a BSOD kiváltására.
+A nagy pontosságú szűrők kizárják a megbízható kezelési, javítási és diagnosztikai folyamatokat
+a téves pozitívumok minimalizálása érdekében.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

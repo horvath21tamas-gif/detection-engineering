@@ -6051,16 +6051,18 @@ trusted management and update processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Service Exhaustion (T1499.002)
+## Service Exhaustion Detection (T1499.002)
 - **ID:** `T1499_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects endpoint denial of service via service exhaustion by monitoring 
-unauthorized service termination and persistent configuration changes (disabling) 
-targeting security and infrastructure services, originating from suspicious lineages.
+- **Leírás:** Detects potential endpoint denial-of-service (DoS) attempts via targeted service
+exhaustion. Monitors unauthorized service stops, persistent configuration changes 
+(disabling), and binary path modifications targeting security and critical 
+infrastructure services. Filters out legitimate system management, patching, 
+and monitoring activities to reduce false positives.
 
 
 #### 🚨 Response Playbook
@@ -6070,17 +6072,18 @@ targeting security and infrastructure services, originating from suspicious line
 
 
 ---
-## Ultra-Pro High-Fidelity OS Self-Destruction (T1499.003)
+## OS Self-Destruction Detection (T1499.003)
 - **ID:** `T1499_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [NTSD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted OS self-destruction by monitoring for forced termination of 
-critical kernel processes (csrss.exe, wininit.exe) and malicious use of 
-system debuggers to trigger immediate BSOD, specifically filtering out 
-trusted management and update processes.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [CDB.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [NTSD.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects targeted OS self-destruction attempts by monitoring forced termination
+of critical Windows kernel processes (csrss.exe, wininit.exe, smss.exe, services.exe)
+and malicious usage of system debuggers (ntsd.exe, cdb.exe) to trigger BSOD.
+High-fidelity filters exclude trusted management, patching, and diagnostic processes
+to minimize false positives.
 
 
 #### 🚨 Response Playbook

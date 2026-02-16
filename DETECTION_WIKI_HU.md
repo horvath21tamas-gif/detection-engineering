@@ -5438,14 +5438,12 @@ replikáció és szabványos GPMC felügyeleti konzolok a téves pozitívumok mi
 
 
 ---
-## Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)
+## Domain Trust Tampering & SID Filtering Bypass (T1484.002)
 - **ID:** `T1484_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a Domain Trust kapcsolatok magas kockázatú módosításait, összpontosítva a
-a SID-szűrés (karantén) és a jogosulatlan bizalom létrehozásának letiltása.
-Összekapcsolja az AD-objektum változásait az ismert adminisztrációs környezettel.
+- **Leírás:** Érzékeli az Active Directory Domain Trust kapcsolatok magas kockázatú módosításait, beleértve a SID-szűrés (karantén) letiltását és a jogosulatlan bizalom létrehozását.Összeegyezteti az AD-objektum-módosításokat, a biztonsági eseményeket és az eszközvégrehajtást, hogy azonosítsa a potenciálisan rosszindulatú tevékenységeket a megbízható felügyeleti kontextusokon kívül.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

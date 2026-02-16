@@ -5438,14 +5438,12 @@ Replikation und Standard-GPMC-Verwaltungskonsolen, um Fehlalarme zu minimieren.
 
 
 ---
-## Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)
+## Domain-Trust-Manipulation und Umgehung der SID-Filterung (T1484.002)
 - **ID:** `T1484_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt risikoreiche Änderungen an Domain Trust-Beziehungen und konzentriert sich dabei auf
-die Deaktivierung der SID-Filterung (Quarantäne) und der unbefugten Vertrauenserstellung.
-Korreliert AD-Objektänderungen mit dem bekannten Verwaltungskontext.
+- **Beschreibung:** Erkennt risikoreiche Änderungen an Active Directory-Domänenvertrauensbeziehungen, einschließlich der Deaktivierung der SID-Filterung (Quarantäne) und der unbefugten Erstellung von Vertrauensstellungen.Korreliert AD-Objektänderungen, Sicherheitsereignisse und Toolausführung, um potenziell schädliche Aktivitäten außerhalb vertrauenswürdiger Verwaltungskontexte zu identifizieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

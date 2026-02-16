@@ -5717,14 +5717,12 @@ replication and standard GPMC management consoles to minimize false positives.
 
 
 ---
-## Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)
+## Domain Trust Tampering & SID Filtering Bypass (T1484.002)
 - **ID:** `T1484_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects high-risk modifications to Domain Trust relationships, focusing on 
-the disabling of SID Filtering (Quarantine) and unauthorized trust creation. 
-Correlates AD object changes with known administrative context.
+- **Leírás:** Detects high-risk modifications to Active Directory Domain Trust relationships, including disabling of SID Filtering (Quarantine) and unauthorized trust creation. Correlates AD object changes, security events, and tool execution to identify  potentially malicious activity outside of trusted administrative contexts.
 
 
 #### 🚨 Response Playbook

@@ -66,7 +66,7 @@ detection:
             - '\mshta.exe'
 
     selection_non_system_user:
-        User|not_contains:
+        User|contains:
             - 'NT AUTHORITY\SYSTEM'
             - 'NT AUTHORITY\LOCAL SERVICE'
             - 'NT AUTHORITY\NETWORK SERVICE'
@@ -88,11 +88,10 @@ detection:
     condition:
         selection_sip_keys
         and selection_registry_write
-        and (
-            selection_suspicious_dll_path
+        and (selection_suspicious_dll_path
             or selection_high_risk_process
             or selection_suspicious_parent
-            or selection_non_system_user)
+            or not selection_non_system_user)
         and not filter_legitimate_servicing
         and not filter_system_dll_path
 

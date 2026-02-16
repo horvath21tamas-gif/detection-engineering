@@ -6128,16 +6128,17 @@ for legitimate .NET compilation and IIS administration.
 
 
 ---
-## Ultra-Pro SQL Server Command Shell Execution (T1505.001)
+## SQL Server Command Shell Execution (T1505.001)
 - **ID:** `T1505_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized OS command execution through SQL Server extended stored procedures 
-and CLR assemblies. Filters legitimate SQL Agent maintenance while flagging 
-suspicious discovery commands and configuration changes (xp_cmdshell, sp_configure).
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects unauthorized OS command execution via Microsoft SQL Server using
+extended stored procedures (xp_cmdshell) or CLR assemblies. 
+Focuses on suspicious discovery commands, configuration changes, and shell execution
+while filtering legitimate SQL Agent maintenance and installer operations.
 
 
 #### 🚨 Response Playbook

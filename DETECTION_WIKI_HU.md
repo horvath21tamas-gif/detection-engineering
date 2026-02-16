@@ -5827,16 +5827,17 @@ törvényes .NET fordításhoz és IIS adminisztrációhoz.
 
 
 ---
-## Ultra-Pro SQL Server Command Shell végrehajtás (T1505.001)
+## SQL Server Command Shell végrehajtása (T1505.001)
 - **ID:** `T1505_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Az SQL Server kiterjesztett tárolt eljárásain keresztül észleli az OS parancsok jogosulatlan végrehajtását
-és CLR szerelvények.Szűri a jogos SQL Agent karbantartást a megjelölés közben
-gyanús felderítési parancsok és konfigurációs változások (xp_cmdshell, sp_configure).
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli az OS parancsok jogosulatlan végrehajtását a Microsoft SQL Server segítségével
+kiterjesztett tárolt eljárások (xp_cmdshell) vagy CLR összeállítások.
+A gyanús felderítési parancsokra, a konfigurációs módosításokra és a shell-végrehajtásra összpontosít
+miközben szűri a jogos SQL Agent karbantartási és telepítői műveleteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

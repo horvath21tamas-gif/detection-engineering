@@ -5827,16 +5827,17 @@ für legitime .NET-Kompilierung und IIS-Verwaltung.
 
 
 ---
-## Ultra-Pro SQL Server-Befehls-Shell-Ausführung (T1505.001)
+## Ausführung der SQL Server-Befehlsshell (T1505.001)
 - **ID:** `T1505_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die nicht autorisierte Ausführung von Betriebssystembefehlen über erweiterte gespeicherte Prozeduren von SQL Server
-und CLR-Baugruppen.Filtert legitime SQL-Agent-Wartung beim Markieren
-verdächtige Erkennungsbefehle und Konfigurationsänderungen (xp_cmdshell, sp_configure).
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die nicht autorisierte Ausführung von Betriebssystembefehlen über Microsoft SQL Server mithilfe von
+erweiterte gespeicherte Prozeduren (xp_cmdshell) oder CLR-Assemblys.
+Konzentriert sich auf verdächtige Erkennungsbefehle, Konfigurationsänderungen und Shell-Ausführung
+während legitime SQL Agent-Wartungs- und Installationsvorgänge gefiltert werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

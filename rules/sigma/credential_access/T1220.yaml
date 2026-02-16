@@ -1,18 +1,19 @@
-title: Ultra-Pro High-Fidelity XSL Script Processing (T1220)
+title: XSL Script Processing (T1220)
 id: 902f23f4-3765-46d8-a920-73627a263791
 status: stable
-description: |
-    Detects suspicious WMIC execution with XSL stylesheets located in non-standard 
-    directories or remote URLs, which is a common technique to bypass application 
-    whitelisting and execute arbitrary scripts.
+description: >
+    Detects suspicious WMIC executions using XSL stylesheets located in non-standard 
+    directories or remote URLs. This behavior is commonly used to bypass application 
+    whitelisting and execute arbitrary scripts. Filters out known legitimate WBEM 
+    directories and common XSL templates to reduce false positives.
 author: hota05
 date: 2026-02-03
 tags:
     - attack.defense_evasion
     - attack.t1220
 logsource:
-    category: process_creation
     product: windows
+    category: process_creation
 detection:
     selection_wmic:
         Image|endswith: '\wmic.exe'
@@ -20,13 +21,13 @@ detection:
 
     selection_suspicious_source:
         CommandLine|contains:
-            - 'http'          
+            - 'http'
             - 'ftp'
-            - ':\Users\'      
+            - ':\Users\'
             - ':\ProgramData\'
             - '\AppData\'
             - '\Temp\'
-            - '\\'            
+            - '\\'
 
     selection_extension_anomaly:
         CommandLine|contains:
@@ -39,7 +40,7 @@ detection:
         CommandLine|contains:
             - ':\Windows\System32\wbem\'
             - ':\Windows\SysWOW64\wbem\'
-    
+
     filter_common_formats:
         CommandLine|contains:
             - 'csv.xsl'
@@ -48,5 +49,7 @@ detection:
             - 'texttable.xsl'
             - 'xml.xsl'
 
-    condition: selection_wmic and (selection_suspicious_source or selection_extension_anomaly) and not filter_legit_wbem
+    condition: selection_wmic 
+               and (selection_suspicious_source or selection_extension_anomaly) 
+               and not (filter_legit_wbem or filter_common_formats)
 level: high

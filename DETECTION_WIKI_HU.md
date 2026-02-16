@@ -385,7 +385,7 @@
 - [Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002)](#ultra-pro-high-fidelity-pass-the-hash-detection-(t1550002))
 - [Ultra-Pro High-Fidelity Pass-the-Ticket Detection (T1550.003)](#ultra-pro-high-fidelity-pass-the-ticket-detection-(t1550003))
 - [Ultra-Pro High-Fidelity Pass-the-Session Detection (T1550.004)](#ultra-pro-high-fidelity-pass-the-session-detection-(t1550004))
-- [Ultra-Pro High-Fidelity, nem biztonságos hitelesítő adatok felfedezése (T1552)](#ultra-pro-high-fidelity-nem-biztonságos-hitelesítő-adatok-felfedezése-(t1552))
+- [Nem biztonságos hitelesítő adatok felfedezése (T1552)](#nem-biztonságos-hitelesítő-adatok-felfedezése-(t1552))
 - [Hitelesítő adatok a Files Discoveryben (T1552.001)](#hitelesítő-adatok-a-files-discoveryben-(t1552001))
 - [Hitelesítési adatok a rendszerleíró adatbázisban (T1552.002)](#hitelesítési-adatok-a-rendszerleíró-adatbázisban-(t1552002))
 - [Shell History & Console Discovery (T1552.003)](#shell-history-&-console-discovery-(t1552003))
@@ -7043,7 +7043,7 @@ Nem tartalmazza a legális böngészőfrissítési és szinkronizálási mechani
 - **Leírás:** Érzékeli a hitelesítő adatok célzott felderítését fájlok, rendszerleíró adatbázis,
 és héjtörténet.Összefügg a keresési eszközökkel (findstr, grep, PowerShell)
 magas kockázatú fájltípusokkal, érzékeny kulcsszavakkal és gyanús végrehajtással
-kontextusban, hogy minimalizálja a hamis pozitív eredményeket a hitelesítő adatok begyűjtése során.
+kontextusokban, hogy minimalizálja a hamis pozitívumot, miközben azonosítja a hitelesítő adatok begyűjtését.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -7198,7 +7198,7 @@ miközben szűri a legitim belépési pontot és figyeli a tevékenységet.
 - **Leírás:** Érzékeli a titkosított csoportházirend-beállítások (GPP) célzott felfedezését
 jelszavak (cpassword) a SYSVOL megosztásokon belül.A parancssorra összpontosít
 karakterlánc-keresések, PowerShell-felsorolás, távoli végrehajtási környezet,
-és abnormális felhasználói tevékenység a téves pozitívumok visszaszorítása érdekében
+és abnormális felhasználói tevékenység a hamis pozitív visszaszorítása érdekében a jogostól
 Csoportházirend feldolgozás.
 
 #### 🚨 Response Playbook
@@ -7215,7 +7215,7 @@ Csoportházirend feldolgozás.
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Windows megbízhatósági vezérlőinek felforgatására irányuló kísérleteket, beleértve a kényszerített
+- **Leírás:** Érzékeli a Windows megbízhatósági vezérlőinek felforgatására tett kísérleteket, beleértve a kényszerített
 gyökértanúsítvány telepítése és Mark-of-the-Web (MotW) / Biztonság
 Zóna manipuláció.A gyanús végrehajtási kontextusra összpontosít, nem szabványos
 forrásútvonalak és a rendellenes szülő-gyermek kapcsolatok csökkentése érdekében
@@ -7236,7 +7236,7 @@ vállalati telepítési téves pozitív eredmények.
 - **Leírás:** Érzékeli a Gatekeeper globális vagy programozott letiltására irányuló kísérleteket
 távolítsa el a com.apple.quarantine attribútumot a fájlokból.-ra összpontosít
 nem interaktív végrehajtás, gyanús fájlhelyek és rendellenes
-a szülő-gyerek kapcsolatok a fejlesztői és adminisztratív csökkentése érdekében
+a szülő-gyermek kapcsolatok a fejlesztői és adminisztratív csökkentése érdekében
 hamis pozitívumok.
 
 #### 🚨 Response Playbook
@@ -7305,7 +7305,7 @@ vállalati telepítési téves pozitív eredmények.
 
 
 ---
-## Mark-of-the-Web (MotW) Bypass & Zone Subversion Detection (T1553.005)
+## Mark-of-the-Web (MotW) bypass & Zone Subversion Detection (T1553.005)
 - **ID:** `T1553_005.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)

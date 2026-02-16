@@ -385,7 +385,7 @@
 - [Ultra-Pro High-Fidelity Pass-the-Hash-Erkennung (T1550.002)](#ultra-pro-high-fidelity-pass-the-hash-erkennung-(t1550002))
 - [Ultraprofessionelle High-Fidelity-Pass-the-Ticket-Erkennung (T1550.003)](#ultraprofessionelle-high-fidelity-pass-the-ticket-erkennung-(t1550003))
 - [Ultra-Pro High-Fidelity Pass-the-Session-Erkennung (T1550.004)](#ultra-pro-high-fidelity-pass-the-session-erkennung-(t1550004))
-- [Ultra-Pro High-Fidelity-Erkennung ungesicherter Anmeldeinformationen (T1552)](#ultra-pro-high-fidelity-erkennung-ungesicherter-anmeldeinformationen-(t1552))
+- [Erkennung ungesicherter Anmeldeinformationen (T1552)](#erkennung-ungesicherter-anmeldeinformationen-(t1552))
 - [Anmeldeinformationen in der Dateierkennung (T1552.001)](#anmeldeinformationen-in-der-dateierkennung-(t1552001))
 - [Anmeldeinformationen bei der Registrierungserkennung (T1552.002)](#anmeldeinformationen-bei-der-registrierungserkennung-(t1552002))
 - [Shell-Verlauf und Konsolenerkennung (T1552.003)](#shell-verlauf-und-konsolenerkennung-(t1552003))

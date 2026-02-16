@@ -385,7 +385,7 @@
 - [Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002)](#ultra-pro-high-fidelity-pass-the-hash-detection-(t1550002))
 - [Ultra-Pro High-Fidelity Pass-the-Ticket Detection (T1550.003)](#ultra-pro-high-fidelity-pass-the-ticket-detection-(t1550003))
 - [Ultra-Pro High-Fidelity Pass-the-Session Detection (T1550.004)](#ultra-pro-high-fidelity-pass-the-session-detection-(t1550004))
-- [Ultra-Pro High-Fidelity Unsecured Credentials Discovery (T1552)](#ultra-pro-high-fidelity-unsecured-credentials-discovery-(t1552))
+- [Unsecured Credentials Discovery (T1552)](#unsecured-credentials-discovery-(t1552))
 - [Credentials In Files Discovery (T1552.001)](#credentials-in-files-discovery-(t1552001))
 - [Credentials In Registry Discovery (T1552.002)](#credentials-in-registry-discovery-(t1552002))
 - [Shell History & Console Discovery (T1552.003)](#shell-history-&-console-discovery-(t1552003))

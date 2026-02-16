@@ -329,12 +329,12 @@
 - [Ultra-Pro High-Fidelity Unused Service Manipulation (T1535)](#ultra-pro-high-fidelity-unused-service-manipulation-(t1535))
 - [Ultra-Pro High-Fidelity Cloud Account Exfil (T1537)](#ultra-pro-high-fidelity-cloud-account-exfil-(t1537))
 - [Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538)](#ultra-pro-high-fidelity-cloud-service-dashboard-discovery-(t1538))
-- [Ultra-Pro High-Fidelity Web Session Cookie Theft (T1539)](#ultra-pro-high-fidelity-web-session-cookie-theft-(t1539))
-- [Ultra-Pro Pre-OS Boot Manipulation (T1542)](#ultra-pro-pre-os-boot-manipulation-(t1542))
-- [Ultra-Pro ROM Kit & UEFI Firmware Tampering (T1542.001)](#ultra-pro-rom-kit-&-uefi-firmware-tampering-(t1542001))
-- [Ultra-Pro Component Firmware Tampering (T1542.002)](#ultra-pro-component-firmware-tampering-(t1542002))
-- [Ultra-Pro Bootkit Persistence & EFI Tampering (T1542.003)](#ultra-pro-bootkit-persistence-&-efi-tampering-(t1542003))
-- [Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004)](#ultra-pro-mainboard-boot-image-&-spi-flash-tampering-(t1542004))
+- [Web Browser Session Cookie & Credential Theft Detection (T1539)](#web-browser-session-cookie-&-credential-theft-detection-(t1539))
+- [Pre-OS Boot Manipulation (T1542)](#pre-os-boot-manipulation-(t1542))
+- [ROM Kit & UEFI Firmware Tampering (T1542.001)](#rom-kit-&-uefi-firmware-tampering-(t1542001))
+- [Component Firmware Tampering (T1542.002)](#component-firmware-tampering-(t1542002))
+- [Bootkit Persistence & EFI Tampering (T1542.003)](#bootkit-persistence-&-efi-tampering-(t1542003))
+- [Mainboard Boot Image & SPI Flash Tampering (T1542.004)](#mainboard-boot-image-&-spi-flash-tampering-(t1542004))
 - [DHCP/PXE Boot Hijacking (T1542.005)](#dhcppxe-boot-hijacking-(t1542005))
 - [Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services](#non-admin-user-attempting-to-stop-or-modify-multiple-sensitive-windows-services)
 - [Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001)](#ultra-pro-macos-launch-agent-persistence-detection-(t1543001))
@@ -374,15 +374,15 @@
 - [High-Fidelity Email Client Helper Persistence (T1547.013)](#high-fidelity-email-client-helper-persistence-(t1547013))
 - [High-Fidelity Active Setup Persistence (T1547.014)](#high-fidelity-active-setup-persistence-(t1547014))
 - [High-Fidelity COM Hijacking Persistence (T1547.015)](#high-fidelity-com-hijacking-persistence-(t1547015))
-- [Ultra-Pro Privilege Escalation via Registry Hijacking (T1548.002)](#ultra-pro-privilege-escalation-via-registry-hijacking-(t1548002))
+- [Privilege Escalation via Registry Hijacking (T1548)](#privilege-escalation-via-registry-hijacking-(t1548))
 - [Setuid/Setgid Bit Manipulation (T1548.001)](#setuidsetgid-bit-manipulation-(t1548001))
 - [UAC Bypass via Fodhelper Registry Hijack (High Fidelity)](#uac-bypass-via-fodhelper-registry-hijack-(high-fidelity))
-- [Ultra-Pro Sudoers Manipulation and Sudo Abuse (T1548.003)](#ultra-pro-sudoers-manipulation-and-sudo-abuse-(t1548003))
-- [Ultra-Pro AppleScript Privilege Escalation (T1548.004)](#ultra-pro-applescript-privilege-escalation-(t1548004))
-- [Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005)](#ultra-pro-suid-desktop-entry-&-shortcut-abuse-(t1548005))
-- [Ultra-Pro High-Fidelity Alternate Authentication Material (T1550)](#ultra-pro-high-fidelity-alternate-authentication-material-(t1550))
-- [Ultra-Pro High-Fidelity Application Access Token Abuse (T1550.001)](#ultra-pro-high-fidelity-application-access-token-abuse-(t1550001))
-- [Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002)](#ultra-pro-high-fidelity-pass-the-hash-detection-(t1550002))
+- [Sudoers Manipulation and Sudo Abuse (T1548.003)](#sudoers-manipulation-and-sudo-abuse-(t1548003))
+- [AppleScript Privilege Escalation (T1548.004)](#applescript-privilege-escalation-(t1548004))
+- [SUID Desktop Entry & Shortcut Abuse (T1548.005)](#suid-desktop-entry-&-shortcut-abuse-(t1548005))
+- [Alternate Authentication Material (T1550)](#alternate-authentication-material-(t1550))
+- [Application Access Token Abuse (T1550.001)](#application-access-token-abuse-(t1550001))
+- [Pass-the-Hash Detection (T1550.002)](#pass-the-hash-detection-(t1550002))
 - [Pass-the-Ticket Detection (T1550.003)](#pass-the-ticket-detection-(t1550003))
 - [Pass-the-Session Detection (T1550.004)](#pass-the-session-detection-(t1550004))
 - [Unsecured Credentials Discovery (T1552)](#unsecured-credentials-discovery-(t1552))
@@ -6440,16 +6440,17 @@ via console sign-in tokens and suspicious browser launches from non-interactive 
 
 
 ---
-## Ultra-Pro High-Fidelity Web Session Cookie Theft (T1539)
+## Web Browser Session Cookie & Credential Theft Detection (T1539)
 - **ID:** `T1539.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized access to browser session cookies. Monitors for non-browser 
-processes accessing both 'Cookies' and 'Local State' (encryption key) files, 
-identifying exfiltration attempts via LOLBins and suspicious scripts.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence browser session cookie and credential theft activity.
+Identifies non-browser processes accessing Chromium and Firefox cookie databases,
+encryption key files (Local State), or login databases. 
+Focuses on LOLBins, scripting engines, DPAPI abuse, and staging/exfiltration behavior.
 
 
 #### 🚨 Response Playbook

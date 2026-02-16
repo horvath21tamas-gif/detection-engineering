@@ -329,12 +329,12 @@
 - [Ultra-Pro High-Fidelity-Manipulation ungenutzter Dienste (T1535)](#ultra-pro-high-fidelity-manipulation-ungenutzter-dienste-(t1535))
 - [Ultra-Pro High-Fidelity-Cloud-Konto-Exfil (T1537)](#ultra-pro-high-fidelity-cloud-konto-exfil-(t1537))
 - [Ultra-Pro High-Fidelity-Cloud-Service-Dashboard-Erkennung (T1538)](#ultra-pro-high-fidelity-cloud-service-dashboard-erkennung-(t1538))
-- [Ultra-Pro High-Fidelity-Websitzungs-Cookie-Diebstahl (T1539)](#ultra-pro-high-fidelity-websitzungs-cookie-diebstahl-(t1539))
-- [Ultra-Pro Pre-OS-Boot-Manipulation (T1542)](#ultra-pro-pre-os-boot-manipulation-(t1542))
-- [Ultra-Pro ROM-Kit und UEFI-Firmware-Manipulation (T1542.001)](#ultra-pro-rom-kit-und-uefi-firmware-manipulation-(t1542001))
-- [Manipulation der Ultra-Pro-Komponenten-Firmware (T1542.002)](#manipulation-der-ultra-pro-komponenten-firmware-(t1542002))
-- [Ultra-Pro Bootkit-Persistenz und EFI-Manipulation (T1542.003)](#ultra-pro-bootkit-persistenz-und-efi-manipulation-(t1542003))
-- [Ultra-Pro Mainboard-Boot-Image und SPI-Flash-Manipulation (T1542.004)](#ultra-pro-mainboard-boot-image-und-spi-flash-manipulation-(t1542004))
+- [Webbrowser-Sitzungs-Cookie und Erkennung von Anmeldedatendiebstahl (T1539)](#webbrowser-sitzungs-cookie-und-erkennung-von-anmeldedatendiebstahl-(t1539))
+- [Manipulation vor dem Betriebssystemstart (T1542)](#manipulation-vor-dem-betriebssystemstart-(t1542))
+- [Manipulation des ROM-Kits und der UEFI-Firmware (T1542.001)](#manipulation-des-rom-kits-und-der-uefi-firmware-(t1542001))
+- [Manipulation der Komponenten-Firmware (T1542.002)](#manipulation-der-komponenten-firmware-(t1542002))
+- [Bootkit-Persistenz und EFI-Manipulation (T1542.003)](#bootkit-persistenz-und-efi-manipulation-(t1542003))
+- [Mainboard-Boot-Image und SPI-Flash-Manipulation (T1542.004)](#mainboard-boot-image-und-spi-flash-manipulation-(t1542004))
 - [DHCP/PXE-Boot-Hijacking (T1542.005)](#dhcppxe-boot-hijacking-(t1542005))
 - [Benutzer ohne Administratorrechte versuchen, mehrere sensible Windows-Dienste zu stoppen oder zu ändern](#benutzer-ohne-administratorrechte-versuchen-mehrere-sensible-windows-dienste-zu-stoppen-oder-zu-ändern)
 - [Ultra-Pro macOS Launch Agent-Persistenzerkennung (T1543.001)](#ultra-pro-macos-launch-agent-persistenzerkennung-(t1543001))
@@ -374,15 +374,15 @@
 - [High-Fidelity-E-Mail-Client-Helper-Persistenz (T1547.013)](#high-fidelity-e-mail-client-helper-persistenz-(t1547013))
 - [High-Fidelity Active Setup Persistence (T1547.014)](#high-fidelity-active-setup-persistence-(t1547014))
 - [High-Fidelity-COM-Hijacking-Persistenz (T1547.015)](#high-fidelity-com-hijacking-persistenz-(t1547015))
-- [Ultra-Pro-Berechtigungsausweitung durch Registry-Hijacking (T1548.002)](#ultra-pro-berechtigungsausweitung-durch-registry-hijacking-(t1548002))
+- [Rechteausweitung durch Registry-Hijacking (T1548)](#rechteausweitung-durch-registry-hijacking-(t1548))
 - [Setuid/Setgid-Bit-Manipulation (T1548.001)](#setuidsetgid-bit-manipulation-(t1548001))
 - [UAC-Umgehung über Fodhelper Registry Hijack (High Fidelity)](#uac-umgehung-über-fodhelper-registry-hijack-(high-fidelity))
-- [Ultra-Pro-Sudo-Manipulation und Sudo-Missbrauch (T1548.003)](#ultra-pro-sudo-manipulation-und-sudo-missbrauch-(t1548003))
-- [Ultra-Pro-AppleScript-Berechtigungseskalation (T1548.004)](#ultra-pro-applescript-berechtigungseskalation-(t1548004))
-- [Ultra-Pro SUID-Desktop-Eintrag und Missbrauch von Verknüpfungen (T1548.005)](#ultra-pro-suid-desktop-eintrag-und-missbrauch-von-verknüpfungen-(t1548005))
-- [Ultra-Pro High-Fidelity Alternatives Authentifizierungsmaterial (T1550)](#ultra-pro-high-fidelity-alternatives-authentifizierungsmaterial-(t1550))
-- [Missbrauch von Ultra-Pro High-Fidelity-Anwendungszugriffstoken (T1550.001)](#missbrauch-von-ultra-pro-high-fidelity-anwendungszugriffstoken-(t1550001))
-- [Ultra-Pro High-Fidelity Pass-the-Hash-Erkennung (T1550.002)](#ultra-pro-high-fidelity-pass-the-hash-erkennung-(t1550002))
+- [Sudo-Manipulation und Sudo-Missbrauch (T1548.003)](#sudo-manipulation-und-sudo-missbrauch-(t1548003))
+- [Eskalation von AppleScript-Berechtigungen (T1548.004)](#eskalation-von-applescript-berechtigungen-(t1548004))
+- [SUID-Desktop-Eintrag und Missbrauch von Verknüpfungen (T1548.005)](#suid-desktop-eintrag-und-missbrauch-von-verknüpfungen-(t1548005))
+- [Alternatives Authentifizierungsmaterial (T1550)](#alternatives-authentifizierungsmaterial-(t1550))
+- [Missbrauch des Anwendungszugriffstokens (T1550.001)](#missbrauch-des-anwendungszugriffstokens-(t1550001))
+- [Pass-the-Hash-Erkennung (T1550.002)](#pass-the-hash-erkennung-(t1550002))
 - [Pass-the-Ticket-Erkennung (T1550.003)](#pass-the-ticket-erkennung-(t1550003))
 - [Pass-the-Session-Erkennung (T1550.004)](#pass-the-session-erkennung-(t1550004))
 - [Erkennung ungesicherter Anmeldeinformationen (T1552)](#erkennung-ungesicherter-anmeldeinformationen-(t1552))
@@ -6122,16 +6122,17 @@ Dashboard-Zugriff.Konzentriert sich auf CLI-Befehle, die zur Umgehung von Standa
 
 
 ---
-## Ultra-Pro High-Fidelity-Websitzungs-Cookie-Diebstahl (T1539)
+## Webbrowser-Sitzungs-Cookie und Erkennung von Anmeldedatendiebstahl (T1539)
 - **ID:** `T1539.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugten Zugriff auf Browser-Sitzungscookies.Überwacht Nicht-Browser
-Prozesse, die sowohl auf „Cookies“- als auch auf „Lokalstatus“-Dateien (Verschlüsselungsschlüssel) zugreifen,
-Identifizierung von Exfiltrationsversuchen über LOLBins und verdächtige Skripte.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochvertrauliche Browser-Sitzungscookies und Aktivitäten zum Diebstahl von Anmeldeinformationen.
+Identifiziert Nicht-Browser-Prozesse, die auf Chromium- und Firefox-Cookie-Datenbanken zugreifen.
+Verschlüsselungsschlüsseldateien (Local State) oder Anmeldedatenbanken.
+Konzentriert sich auf LOLBins, Skript-Engines, DPAPI-Missbrauch und Staging-/Exfiltrationsverhalten.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -6917,7 +6918,7 @@ Muster mithilfe von „find“ entfernen und dabei vertrauenswürdige Paketmanag
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 - **Beschreibung:** Erkennt nicht autorisierte Sudoers-Dateiänderungen und Sudo-Caching-Missbrauch.
-Konzentriert sich auf NOPASSWD-Ergänzungen, Timestamp_Timeout-Manipulation und
+Konzentriert sich auf NOPASSWD-Ergänzungen, die Manipulation von timestamp_timeout und
 gefährliche Umgebungsvariableninjektionen wie LD_PRELOAD.Ausgeschlossen
 vertrauenswürdige Automatisierungstools.
 

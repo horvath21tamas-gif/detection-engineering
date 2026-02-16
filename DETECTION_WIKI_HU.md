@@ -329,12 +329,12 @@
 - [Ultra-Pro High-Fidelity, nem használt szolgáltatás-manipuláció (T1535)](#ultra-pro-high-fidelity-nem-használt-szolgáltatás-manipuláció-(t1535))
 - [Ultra-Pro High-Fidelity Cloud Account Exfil (T1537)](#ultra-pro-high-fidelity-cloud-account-exfil-(t1537))
 - [Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538)](#ultra-pro-high-fidelity-cloud-service-dashboard-discovery-(t1538))
-- [Ultra-Pro High-Fidelity webes munkamenet cookie-lopás (T1539)](#ultra-pro-high-fidelity-webes-munkamenet-cookie-lopás-(t1539))
-- [Ultra-Pro Pre-OS Boot Manipulation (T1542)](#ultra-pro-pre-os-boot-manipulation-(t1542))
-- [Ultra-Pro ROM készlet és UEFI firmware-szabotázs (T1542.001)](#ultra-pro-rom-készlet-és-uefi-firmware-szabotázs-(t1542001))
-- [Ultra-Pro komponens firmware-szabotázs (T1542.002)](#ultra-pro-komponens-firmware-szabotázs-(t1542002))
-- [Ultra-Pro Bootkit Perzisztencia és EFI-szabotázs (T1542.003)](#ultra-pro-bootkit-perzisztencia-és-efi-szabotázs-(t1542003))
-- [Ultra-Pro alaplapi rendszerindítási kép és SPI Flash-szabotázs (T1542.004)](#ultra-pro-alaplapi-rendszerindítási-kép-és-spi-flash-szabotázs-(t1542004))
+- [Webböngésző munkamenet-cookie-k és hitelesítő adatok lopásának észlelése (T1539)](#webböngésző-munkamenet-cookie-k-és-hitelesítő-adatok-lopásának-észlelése-(t1539))
+- [OS előtti rendszerindítási manipuláció (T1542)](#os-előtti-rendszerindítási-manipuláció-(t1542))
+- [ROM készlet és UEFI firmware manipuláció (T1542.001)](#rom-készlet-és-uefi-firmware-manipuláció-(t1542001))
+- [Komponens firmware-szabotázs (T1542.002)](#komponens-firmware-szabotázs-(t1542002))
+- [Bootkit Persistence & EFI manipuláció (T1542.003)](#bootkit-persistence-&-efi-manipuláció-(t1542003))
+- [Alaplapi rendszerindítási kép és SPI Flash-szabotázs (T1542.004)](#alaplapi-rendszerindítási-kép-és-spi-flash-szabotázs-(t1542004))
 - [DHCP/PXE rendszerindítási eltérítés (T1542.005)](#dhcppxe-rendszerindítási-eltérítés-(t1542005))
 - [Nem adminisztrátor felhasználó, aki több érzékeny Windows-szolgáltatást próbál leállítani vagy módosítani](#nem-adminisztrátor-felhasználó-aki-több-érzékeny-windows-szolgáltatást-próbál-leállítani-vagy-módosítani)
 - [Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001)](#ultra-pro-macos-launch-agent-persistence-detection-(t1543001))
@@ -374,15 +374,15 @@
 - [High-Fidelity E-mail Client Helper Perzisztencia (T1547.013)](#high-fidelity-e-mail-client-helper-perzisztencia-(t1547013))
 - [High-Fidelity Active Setup Persistence (T1547.014)](#high-fidelity-active-setup-persistence-(t1547014))
 - [High-Fidelity COM-eltérítés tartósság (T1547.015)](#high-fidelity-com-eltérítés-tartósság-(t1547015))
-- [Ultra-Pro Privilege Eszkaláció a rendszerleíró adatbázis eltérítésével (T1548.002)](#ultra-pro-privilege-eszkaláció-a-rendszerleíró-adatbázis-eltérítésével-(t1548002))
+- [Jogosultság kiterjesztése rendszerleíró adatbázis eltérítésével (T1548)](#jogosultság-kiterjesztése-rendszerleíró-adatbázis-eltérítésével-(t1548))
 - [Setuid/Setgid bitmanipuláció (T1548.001)](#setuidsetgid-bitmanipuláció-(t1548001))
 - [UAC bypass a Fodhelper Registry Hijack segítségével (High Fidelity)](#uac-bypass-a-fodhelper-registry-hijack-segítségével-(high-fidelity))
-- [Ultra-Pro Sudoer manipuláció és Sudo Abuse (T1548.003)](#ultra-pro-sudoer-manipuláció-és-sudo-abuse-(t1548003))
-- [Ultra-Pro AppleScript Privilege Escalation (T1548.004)](#ultra-pro-applescript-privilege-escalation-(t1548004))
-- [Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005)](#ultra-pro-suid-desktop-entry-&-shortcut-abuse-(t1548005))
-- [Ultra-Pro High-Fidelity alternatív hitelesítő anyag (T1550)](#ultra-pro-high-fidelity-alternatív-hitelesítő-anyag-(t1550))
-- [Ultra-Pro High-Fidelity alkalmazás-hozzáférési token visszaélés (T1550.001)](#ultra-pro-high-fidelity-alkalmazás-hozzáférési-token-visszaélés-(t1550001))
-- [Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002)](#ultra-pro-high-fidelity-pass-the-hash-detection-(t1550002))
+- [Sudoer-manipuláció és szudóval való visszaélés (T1548.003)](#sudoer-manipuláció-és-szudóval-való-visszaélés-(t1548003))
+- [AppleScript Privilege Escalation (T1548.004)](#applescript-privilege-escalation-(t1548004))
+- [SUID Desktop Entry & Shortcut Abuse (T1548.005)](#suid-desktop-entry-&-shortcut-abuse-(t1548005))
+- [Alternatív hitelesítési anyag (T1550)](#alternatív-hitelesítési-anyag-(t1550))
+- [Alkalmazás-hozzáférési token visszaélés (T1550.001)](#alkalmazás-hozzáférési-token-visszaélés-(t1550001))
+- [Pass-the-Hash Detection (T1550.002)](#pass-the-hash-detection-(t1550002))
 - [Pass-the-Ticket Detection (T1550.003)](#pass-the-ticket-detection-(t1550003))
 - [Pass-the-Session Detection (T1550.004)](#pass-the-session-detection-(t1550004))
 - [Nem biztonságos hitelesítő adatok felfedezése (T1552)](#nem-biztonságos-hitelesítő-adatok-felfedezése-(t1552))
@@ -6122,16 +6122,17 @@ konzol bejelentkezési tokenjein és gyanús böngészőindításokon keresztül
 
 
 ---
-## Ultra-Pro High-Fidelity webes munkamenet cookie-lopás (T1539)
+## Webböngésző munkamenet-cookie-k és hitelesítő adatok lopásának észlelése (T1539)
 - **ID:** `T1539.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a böngésző munkamenet-cookie-ihoz való jogosulatlan hozzáférést.Monitorok nem böngészőhöz
-a „Cookie-k” és a „Helyi állapot” (titkosítási kulcs) fájlokhoz egyaránt hozzáférő folyamatok,
-a kiszűrési kísérletek azonosítása LOLBineken és gyanús szkripteken keresztül.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a nagy megbízhatóságú böngésző munkamenet-cookie-kat és a hitelesítő adatok ellopását.
+Azonosítja a Chromium és Firefox cookie-adatbázisokhoz hozzáférő nem böngésző folyamatokat,
+titkosítási kulcsfájlok (Helyi állapot), vagy bejelentkezési adatbázisok.
+A LOLBin-ekre, a szkriptmotorokra, a DPAPI-visszaélésekre és a staging/exfiltration viselkedésre összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -6148,9 +6149,9 @@ a kiszűrési kísérletek azonosítása LOLBineken és gyanús szkripteken kere
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a firmware vagy a rendszerbetöltő illetéktelen módosításait.Monitorok a
-EFI partíció felszerelése, jogosulatlan firmware flash eszköz használata és
+EFI partíció rögzítése, illetéktelen firmware flash eszköz használata és
 Nem szabványos folyamatfákból kezdeményezett UEFI-változómanipuláció.
-Kiszűri a megbízható szállítók frissítő segédprogramjait, hogy csökkentse a hamis pozitívumot.
+Kiszűri a megbízható szállítók frissítési segédprogramjait, hogy csökkentse a hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -6997,7 +6998,7 @@ parancssori segédprogramokban, kivéve a legitim Azure CLI-t és a böngészőf
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** A Pass-the-Hash (PtH) támadásokat a rendellenes NTLM visszacsatolási hitelesítés azonosításával észleli,
+- **Leírás:** Felismeri a Pass-the-Hash (PtH) támadásokat a rendellenes NTLM loopback hitelesítés azonosításával,
 korlátozott rendszergazdai bejelentkezés (LogonType 9 a seclogo-n keresztül) és a hitelesítő adatok beszúróeszköz-tevékenysége,
 miközben kizárja a legitim szolgáltatás- és gépfiókokat.
 

@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-16 12:08:47`
+**Utolsó frissítés:** `2026-02-16 12:45:25`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -335,12 +335,12 @@
 | T1535 | CRITICAL | Ultra-Pro High-Fidelity Unused Service Manipulation (T1535) |
 | T1537 | CRITICAL | Ultra-Pro High-Fidelity Cloud Account Exfil (T1537) |
 | T1538 | HIGH | Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538) |
-| T1539 | CRITICAL | Ultra-Pro High-Fidelity Web Session Cookie Theft (T1539) |
-| T1542 | CRITICAL | Ultra-Pro Pre-OS Boot Manipulation (T1542) |
-| T1542.001 | CRITICAL | Ultra-Pro ROM Kit & UEFI Firmware Tampering (T1542.001) |
-| T1542.002 | CRITICAL | Ultra-Pro Component Firmware Tampering (T1542.002) |
-| T1542.003 | CRITICAL | Ultra-Pro Bootkit Persistence & EFI Tampering (T1542.003) |
-| T1542.004 | CRITICAL | Ultra-Pro Mainboard Boot Image & SPI Flash Tampering (T1542.004) |
+| T1539 | CRITICAL | Web Browser Session Cookie & Credential Theft Detection (T1539) |
+| T1542 | CRITICAL | Pre-OS Boot Manipulation (T1542) |
+| T1542.001 | CRITICAL | ROM Kit & UEFI Firmware Tampering (T1542.001) |
+| T1542.002 | CRITICAL | Component Firmware Tampering (T1542.002) |
+| T1542.003 | CRITICAL | Bootkit Persistence & EFI Tampering (T1542.003) |
+| T1542.004 | CRITICAL | Mainboard Boot Image & SPI Flash Tampering (T1542.004) |
 | T1542.005 | CRITICAL | DHCP/PXE Boot Hijacking (T1542.005) |
 | T1543 | CRITICAL | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services, Windows Event Log Service Impairment |
 | T1543.001 | HIGH | Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001), Suspicious macOS LaunchAgent or LaunchDaemon Plist Modification |
@@ -380,16 +380,16 @@
 | T1547.013 | HIGH | High-Fidelity Email Client Helper Persistence (T1547.013) |
 | T1547.014 | CRITICAL | High-Fidelity Active Setup Persistence (T1547.014) |
 | T1547.015 | HIGH | High-Fidelity COM Hijacking Persistence (T1547.015) |
-| T1548 | CRITICAL | Ultra-Pro Privilege Escalation via Registry Hijacking (T1548.002) |
+| T1548 | CRITICAL | Privilege Escalation via Registry Hijacking (T1548) |
 | T1548.001 | HIGH | Setuid/Setgid Bit Manipulation (T1548.001) |
-| T1548.002 | HIGH | Ultra-Pro Privilege Escalation via Registry Hijacking (T1548.002), UAC Bypass via Fodhelper Registry Hijack (High Fidelity) |
-| T1548.003 | CRITICAL | Ultra-Pro Sudoers Manipulation and Sudo Abuse (T1548.003) |
-| T1548.004 | CRITICAL | Ultra-Pro AppleScript Privilege Escalation (T1548.004) |
-| T1548.005 | HIGH | Ultra-Pro SUID Desktop Entry & Shortcut Abuse (T1548.005) |
-| T1550 | CRITICAL | Ultra-Pro High-Fidelity Alternate Authentication Material (T1550) |
-| T1550.001 | CRITICAL | Ultra-Pro High-Fidelity Application Access Token Abuse (T1550.001) |
-| T1550.002 | CRITICAL | Ultra-Pro High-Fidelity Alternate Authentication Material (T1550), Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002) |
-| T1550.003 | CRITICAL | Ultra-Pro High-Fidelity Alternate Authentication Material (T1550), Pass-the-Ticket Detection (T1550.003) |
+| T1548.002 | HIGH | UAC Bypass via Fodhelper Registry Hijack (High Fidelity) |
+| T1548.003 | CRITICAL | Sudoers Manipulation and Sudo Abuse (T1548.003) |
+| T1548.004 | CRITICAL | AppleScript Privilege Escalation (T1548.004) |
+| T1548.005 | HIGH | SUID Desktop Entry & Shortcut Abuse (T1548.005) |
+| T1550 | CRITICAL | Alternate Authentication Material (T1550) |
+| T1550.001 | CRITICAL | Application Access Token Abuse (T1550.001) |
+| T1550.002 | CRITICAL | Alternate Authentication Material (T1550), Pass-the-Hash Detection (T1550.002) |
+| T1550.003 | CRITICAL | Alternate Authentication Material (T1550), Pass-the-Ticket Detection (T1550.003) |
 | T1550.004 | CRITICAL | Pass-the-Session Detection (T1550.004) |
 | T1552 | HIGH | Credentials In Registry Discovery (T1552.002) |
 | T1552.001 | HIGH | Unsecured Credentials Discovery (T1552), Credentials In Files Discovery (T1552.001) |

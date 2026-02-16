@@ -12,6 +12,6 @@ Ez a jelentés automatikusan készült **628** szabály alapján.
 | Hitelesítő adatok megszerzése (`credential-access`) | 0 | `░░░░░░░░░░` |
 | Felderítés (`discovery`) | 50 | `██████████` |
 | Oldalirányú mozgás (`lateral-movement`) | 0 | `░░░░░░░░░░` |
-| Adatgyűjtés (`collection`) | 39 | `███████░░░` |
-| Adatszivárogtatás (`exfiltration`) | 30 | `██████░░░░` |
+| Adatgyűjtés (`collection`) | 40 | `████████░░` |
+| Adatszivárogtatás (`exfiltration`) | 31 | `██████░░░░` |
 | Vezérlés (C2) (`command-and-control`) | 0 | `░░░░░░░░░░` |

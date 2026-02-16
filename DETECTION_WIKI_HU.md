@@ -6194,7 +6194,7 @@ láncok vagy nem szabványos fájlhelyek.
 
 
 ---
-## Ultra-Pro Bootkit Perzisztencia és EFI-szabotázs (T1542.003)
+## Bootkit Persistence & EFI manipuláció (T1542.003)
 - **ID:** `T1542_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

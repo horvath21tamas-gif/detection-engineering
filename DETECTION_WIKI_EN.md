@@ -6516,14 +6516,14 @@ chains or non-standard file locations.
 
 
 ---
-## Ultra-Pro Bootkit Persistence & EFI Tampering (T1542.003)
+## Bootkit Persistence & EFI Tampering (T1542.003)
 - **ID:** `T1542_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized bootloader modification by monitoring for BCD integrity bypasses, 
+- **Leírás:** Detects unauthorized bootloader modification by monitoring BCD integrity bypasses, 
 manual EFI partition mounting, and suspicious boot path redirection. 
 Filters out legitimate OS repairs and BitLocker operations.
 

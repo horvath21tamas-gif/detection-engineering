@@ -6194,14 +6194,14 @@ Ketten oder nicht standardmäßige Dateispeicherorte.
 
 
 ---
-## Ultra-Pro Bootkit-Persistenz und EFI-Manipulation (T1542.003)
+## Bootkit-Persistenz und EFI-Manipulation (T1542.003)
 - **ID:** `T1542_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Bootloader-Änderungen durch Überwachung auf BCD-Integritätsumgehungen,
+- **Beschreibung:** Erkennt unbefugte Bootloader-Änderungen durch Überwachung von BCD-Integritätsumgehungen,
 manuelle EFI-Partitionsmontage und verdächtige Boot-Pfad-Umleitung.
 Filtert legitime Betriebssystemreparaturen und BitLocker-Vorgänge heraus.
 

@@ -1,10 +1,10 @@
-title: Ultra-Pro High-Fidelity Pass-the-Session Detection (T1550.004)
+title: Pass-the-Session Detection (T1550.004)
 id: f57a2e7b-3b1a-4456-b968-621a909d6fe2
 status: stable
 description: |
-    Detects unauthorized web session theft by monitoring for non-browser processes 
-    accessing both the encrypted AES key (Local State) and the cookie database (Cookies/Network).
-    Excludes legitimate browser update and synchronization mechanisms.
+    Detects unauthorized attempts to steal web sessions by monitoring non-browser processes 
+    accessing both the encrypted AES key (Local State) and browser cookie databases.
+    Excludes legitimate browser update, utility, and synchronization processes.
 author: hota05
 date: 2026-02-03
 tags:
@@ -32,7 +32,7 @@ detection:
             - '\User Data\Local State'             
             - '\Profiles\*\cookies.sqlite'       
 
-    selection_actions:
+    selection_suspicious_actions:
         CommandLine|contains:
             - 'copy '
             - 'type '
@@ -41,17 +41,15 @@ detection:
             - 'Get-Content'
             - '.ReadBytes'
 
-    filter_legit_browser:
-        Image|contains:
+    filters_legitimate:
+        - Image|contains:
             - '\Google\Chrome\Application\'
             - '\Microsoft\Edge\Application\'
-        CommandLine|contains:
+          CommandLine|contains:
             - '--type=utility'
             - '--utility-sub-type=network.mojom.NetworkService'
+        - username: 'NT AUTHORITY\SYSTEM'
+          Image|contains: '\Windows\System32\svchost.exe'
 
-    filter_it_inventory:
-        username: 'NT AUTHORITY\SYSTEM'
-        Image|contains: '\Windows\System32\svchost.exe'
-
-    condition: selection_suspicious_actor and (selection_target_files or selection_actions) and not filter_legit_browser
+    condition: selection_suspicious_actor and (selection_target_files or selection_suspicious_actions) and not filters_legitimate
 level: critical

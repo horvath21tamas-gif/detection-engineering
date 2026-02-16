@@ -1,10 +1,10 @@
-title: Ultra-Pro AppleScript Privilege Escalation (T1548.004)
+title: AppleScript Privilege Escalation (T1548.004)
 id: 5204521c-b47f-4471-9ac9-afb4e9665101
 status: stable
 description: |
-    Detects unauthorized AppleScript elevation attempts. Specifically monitors 
-    osascript execution with "administrator privileges" from untrusted parent 
-    processes such as browsers, office suites, or temporary directories.
+    Detects unauthorized AppleScript elevation attempts by monitoring osascript execution 
+    with "administrator privileges" from untrusted parent processes such as browsers, office suites, 
+    collaboration apps, or temporary directories, while excluding trusted system management tools.
 author: hota05
 date: 2026-02-02
 tags:
@@ -14,17 +14,17 @@ logsource:
     product: macos
     category: process_creation
 detection:
-    selection_osascript:
-        - Image|endswith: '/osascript'
-        - OriginalFileName: 'osascript'
+    selection_osascript_execution:
+        Image|endswith: '/osascript'
+        OriginalFileName: 'osascript'
 
-    selection_elevation_args:
+    selection_elevation_commands:
         CommandLine|contains:
             - 'with administrator privileges'
             - 'do shell script'
-            - 'display dialog' 
+            - 'display dialog'
 
-    selection_suspicious_parent:
+    selection_untrusted_parents:
         ParentImage|contains:
             - '/Applications/Google Chrome.app/'
             - '/Applications/Safari.app/'
@@ -35,14 +35,14 @@ detection:
             - '/private/tmp/'
             - '/Users/Shared/'
 
-    filter_trusted_management:
+    filters_trusted_management:
         - ParentImage|contains:
             - '/Library/Application Support/JamfSoftware/' 
-            - '/usr/local/bin/kandji'                       
-            - '/System/Library/PrivateFrameworks/'        
+            - '/usr/local/bin/kandji'
+            - '/System/Library/PrivateFrameworks/'
         - Image|contains:
             - '/usr/sbin/softwareupdate'
         - username: 'root'
 
-    condition: selection_osascript and selection_elevation_args and selection_suspicious_parent and not filter_trusted_management
+    condition: selection_osascript_execution and selection_elevation_commands and selection_untrusted_parents and not filters_trusted_management
 level: critical

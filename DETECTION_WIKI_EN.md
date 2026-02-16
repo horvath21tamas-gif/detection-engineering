@@ -383,8 +383,8 @@
 - [Ultra-Pro High-Fidelity Alternate Authentication Material (T1550)](#ultra-pro-high-fidelity-alternate-authentication-material-(t1550))
 - [Ultra-Pro High-Fidelity Application Access Token Abuse (T1550.001)](#ultra-pro-high-fidelity-application-access-token-abuse-(t1550001))
 - [Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002)](#ultra-pro-high-fidelity-pass-the-hash-detection-(t1550002))
-- [Ultra-Pro High-Fidelity Pass-the-Ticket Detection (T1550.003)](#ultra-pro-high-fidelity-pass-the-ticket-detection-(t1550003))
-- [Ultra-Pro High-Fidelity Pass-the-Session Detection (T1550.004)](#ultra-pro-high-fidelity-pass-the-session-detection-(t1550004))
+- [Pass-the-Ticket Detection (T1550.003)](#pass-the-ticket-detection-(t1550003))
+- [Pass-the-Session Detection (T1550.004)](#pass-the-session-detection-(t1550004))
 - [Unsecured Credentials Discovery (T1552)](#unsecured-credentials-discovery-(t1552))
 - [Credentials In Files Discovery (T1552.001)](#credentials-in-files-discovery-(t1552001))
 - [Credentials In Registry Discovery (T1552.002)](#credentials-in-registry-discovery-(t1552002))
@@ -7371,14 +7371,14 @@ tool patterns while excluding legitimate service accounts.
 
 
 ---
-## Ultra-Pro High-Fidelity Pass-the-Ticket Detection (T1550.003)
+## Pass-the-Ticket Detection (T1550.003)
 - **ID:** `T1550_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects Pass-the-Ticket (PtH) by identifying Kerberos encryption downgrades (RC4), 
-anomalous ticket flags (Rubeus/Mimikatz defaults), and unauthorized ticket injection 
-into the LSA process memory.
+- **Leírás:** Detects Pass-the-Ticket (PtH) attacks by identifying Kerberos encryption downgrades (RC4), 
+anomalous ticket flags typical of Rubeus/Mimikatz, and unauthorized ticket injection 
+into LSA process memory.
 
 
 #### 🚨 Response Playbook
@@ -7387,16 +7387,16 @@ into the LSA process memory.
 
 
 ---
-## Ultra-Pro High-Fidelity Pass-the-Session Detection (T1550.004)
+## Pass-the-Session Detection (T1550.004)
 - **ID:** `T1550_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized web session theft by monitoring for non-browser processes 
-accessing both the encrypted AES key (Local State) and the cookie database (Cookies/Network).
-Excludes legitimate browser update and synchronization mechanisms.
+- **Leírás:** Detects unauthorized attempts to steal web sessions by monitoring non-browser processes 
+accessing both the encrypted AES key (Local State) and browser cookie databases.
+Excludes legitimate browser update, utility, and synchronization processes.
 
 
 #### 🚨 Response Playbook

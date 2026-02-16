@@ -383,8 +383,8 @@
 - [Ultra-Pro High-Fidelity alternatív hitelesítő anyag (T1550)](#ultra-pro-high-fidelity-alternatív-hitelesítő-anyag-(t1550))
 - [Ultra-Pro High-Fidelity alkalmazás-hozzáférési token visszaélés (T1550.001)](#ultra-pro-high-fidelity-alkalmazás-hozzáférési-token-visszaélés-(t1550001))
 - [Ultra-Pro High-Fidelity Pass-the-Hash Detection (T1550.002)](#ultra-pro-high-fidelity-pass-the-hash-detection-(t1550002))
-- [Ultra-Pro High-Fidelity Pass-the-Ticket Detection (T1550.003)](#ultra-pro-high-fidelity-pass-the-ticket-detection-(t1550003))
-- [Ultra-Pro High-Fidelity Pass-the-Session Detection (T1550.004)](#ultra-pro-high-fidelity-pass-the-session-detection-(t1550004))
+- [Pass-the-Ticket Detection (T1550.003)](#pass-the-ticket-detection-(t1550003))
+- [Pass-the-Session Detection (T1550.004)](#pass-the-session-detection-(t1550004))
 - [Nem biztonságos hitelesítő adatok felfedezése (T1552)](#nem-biztonságos-hitelesítő-adatok-felfedezése-(t1552))
 - [Hitelesítő adatok a Files Discoveryben (T1552.001)](#hitelesítő-adatok-a-files-discoveryben-(t1552001))
 - [Hitelesítési adatok a rendszerleíró adatbázisban (T1552.002)](#hitelesítési-adatok-a-rendszerleíró-adatbázisban-(t1552002))
@@ -7000,13 +7000,13 @@ eszközmintákat, miközben kizárja a legitim szolgáltatásfiókokat.
 
 
 ---
-## Ultra-Pro High-Fidelity Pass-the-Ticket Detection (T1550.003)
+## Pass-the-Ticket Detection (T1550.003)
 - **ID:** `T1550_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a Pass-the-Ticket (PtH) jelet a Kerberos titkosítási visszaminősítések (RC4) azonosításával,
-rendellenes jegyjelzők (Rubeus/Mimikatz alapértelmezések) és jogosulatlan jegybeadás
+- **Leírás:** Érzékeli a Pass-the-Ticket (PtH) támadásokat a Kerberos titkosítási leminősítések (RC4) azonosításával,
+a Rubeus/Mimikatzra jellemző rendhagyó jegyzászlók és az illetéktelen jegybeadás
 az LSA folyamatmemóriába.
 
 #### 🚨 Response Playbook
@@ -7015,16 +7015,16 @@ az LSA folyamatmemóriába.
 
 
 ---
-## Ultra-Pro High-Fidelity Pass-the-Session Detection (T1550.004)
+## Pass-the-Session Detection (T1550.004)
 - **ID:** `T1550_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli a jogosulatlan webes munkamenet-lopást a nem böngésző folyamatok figyelésével
-hozzáférés a titkosított AES-kulcshoz (Helyi állapot) és a cookie-adatbázishoz (Cookie-k/Network).
-Nem tartalmazza a legális böngészőfrissítési és szinkronizálási mechanizmusokat.
+- **Leírás:** A nem böngésző folyamatok figyelésével észleli a webes munkamenetek ellopására irányuló jogosulatlan kísérleteket
+a titkosított AES-kulcs (Helyi állapot) és a böngésző cookie-adatbázisainak elérése.
+Nem tartalmazza a legális böngészőfrissítési, segédprogram- és szinkronizálási folyamatokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

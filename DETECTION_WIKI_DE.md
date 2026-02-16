@@ -383,8 +383,8 @@
 - [Ultra-Pro High-Fidelity Alternatives Authentifizierungsmaterial (T1550)](#ultra-pro-high-fidelity-alternatives-authentifizierungsmaterial-(t1550))
 - [Missbrauch von Ultra-Pro High-Fidelity-Anwendungszugriffstoken (T1550.001)](#missbrauch-von-ultra-pro-high-fidelity-anwendungszugriffstoken-(t1550001))
 - [Ultra-Pro High-Fidelity Pass-the-Hash-Erkennung (T1550.002)](#ultra-pro-high-fidelity-pass-the-hash-erkennung-(t1550002))
-- [Ultraprofessionelle High-Fidelity-Pass-the-Ticket-Erkennung (T1550.003)](#ultraprofessionelle-high-fidelity-pass-the-ticket-erkennung-(t1550003))
-- [Ultra-Pro High-Fidelity Pass-the-Session-Erkennung (T1550.004)](#ultra-pro-high-fidelity-pass-the-session-erkennung-(t1550004))
+- [Pass-the-Ticket-Erkennung (T1550.003)](#pass-the-ticket-erkennung-(t1550003))
+- [Pass-the-Session-Erkennung (T1550.004)](#pass-the-session-erkennung-(t1550004))
 - [Erkennung ungesicherter Anmeldeinformationen (T1552)](#erkennung-ungesicherter-anmeldeinformationen-(t1552))
 - [Anmeldeinformationen in der Dateierkennung (T1552.001)](#anmeldeinformationen-in-der-dateierkennung-(t1552001))
 - [Anmeldeinformationen bei der Registrierungserkennung (T1552.002)](#anmeldeinformationen-bei-der-registrierungserkennung-(t1552002))
@@ -7000,13 +7000,13 @@ Tool-Muster, während legitime Dienstkonten ausgeschlossen werden.
 
 
 ---
-## Ultraprofessionelle High-Fidelity-Pass-the-Ticket-Erkennung (T1550.003)
+## Pass-the-Ticket-Erkennung (T1550.003)
 - **ID:** `T1550_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt Pass-the-Ticket (PtH) durch Identifizierung von Kerberos-Verschlüsselungs-Downgrades (RC4),
-anomale Ticket-Flags (Rubeus/Mimikatz-Standards) und nicht autorisierte Ticket-Injektion
+- **Beschreibung:** Erkennt Pass-the-Ticket (PtH)-Angriffe durch Identifizierung von Kerberos-Verschlüsselungs-Downgrades (RC4).
+Anomale Ticket-Flags, typisch für Rubeus/Mimikatz, und unbefugte Ticket-Einschleusung
 in den LSA-Prozessspeicher.
 
 #### 🚨 Reaktions-Playbook
@@ -7015,16 +7015,16 @@ in den LSA-Prozessspeicher.
 
 
 ---
-## Ultra-Pro High-Fidelity Pass-the-Session-Erkennung (T1550.004)
+## Pass-the-Session-Erkennung (T1550.004)
 - **ID:** `T1550_004.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugten Websitzungsdiebstahl durch Überwachung auf Nicht-Browser-Prozesse
-Zugriff sowohl auf den verschlüsselten AES-Schlüssel (Local State) als auch auf die Cookie-Datenbank (Cookies/Netzwerk).
-Schließt legitime Browser-Update- und Synchronisierungsmechanismen aus.
+- **Beschreibung:** Erkennt unbefugte Versuche, Websitzungen zu stehlen, indem es Nicht-Browser-Prozesse überwacht
+Zugriff auf den verschlüsselten AES-Schlüssel (Local State) und die Browser-Cookie-Datenbanken.
+Ausgeschlossen sind legitime Browseraktualisierungs-, Dienstprogramm- und Synchronisierungsprozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

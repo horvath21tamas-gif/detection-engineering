@@ -52,7 +52,6 @@ detection:
     userIdentity.type:
       - Root
       - IAMUser
-    userIdentity.sessionContext.attributes.mfaAuthenticated: 'false'
 
   selection_suspicious_useragent:
     userAgent|contains:
@@ -74,9 +73,6 @@ detection:
       - role/AWSServiceRoleForSecurityHub
       - role/OrganizationAccountAccessRole
 
-  filter_aws_internal:
-    userIdentity.invokedBy|exists: true
-
   filter_known_ip_ranges:
     sourceIPAddress|startswith:
       - 10.
@@ -84,22 +80,15 @@ detection:
       - 172.16.
 
   condition:
-    (
-      selection_security_impairment
+    (selection_security_impairment
       or
-      selection_suppression_abuse
-    )
+      selection_suppression_abuse)
     and
-    (
-      selection_identity_risky
-      or selection_suspicious_useragent
-    )
+    (selection_identity_risky
+      or selection_suspicious_useragent)
     and
-    not (
-      filter_trusted_roles
-      or filter_aws_internal
-      or filter_known_ip_ranges
-    )
+    not (filter_trusted_roles
+      or filter_known_ip_ranges)
 
 fields:
   - eventTime

@@ -1,9 +1,9 @@
-title: Ultra-Pro Environmental Keying Discovery (T1480.001)
+title: Environmental Keying Discovery (T1480.001)
 id: 72473592-3c50-4f77-ad84-3ca36f6a798b
 status: stable
-description: |
+description: >
     Detects targeted environmental keying by identifying hardware fingerprinting 
-    and machine-specific registry lookups initiated by suspicious, unbacked, 
+    and machine-specific registry or AD lookups initiated by suspicious, untrusted, 
     or non-standard parent processes.
 author: hota05
 date: 2026-02-03
@@ -16,25 +16,25 @@ logsource:
 detection:
     selection_hardware_id:
         CommandLine|contains:
-            - 'csproduct get uuid'          
-            - 'diskdrive get serialnumber'   
-            - 'bios get serialnumber'      
-            - 'MachineGuid'              
+            - 'csproduct get uuid'
+            - 'diskdrive get serialnumber'
+            - 'bios get serialnumber'
+            - 'MachineGuid'
 
     selection_ad_sid:
         CommandLine|contains:
-            - 'get-adpdmomainsid'            
+            - 'get-adpdmomainsid'
             - 'objectSid'
             - 'machineObjectGuid'
 
     selection_suspicious_context:
-        - Image|contains:
+        Image|contains:
             - '\Users\'
             - '\AppData\'
             - '\Temp\'
             - '\Downloads\'
             - '\Public\'
-        - ParentImage|endswith:
+        ParentImage|endswith:
             - '\powershell.exe'
             - '\pwsh.exe'
             - '\cmd.exe'
@@ -45,16 +45,18 @@ detection:
             - '\excel.exe'
 
     filter_trusted_apps:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - Image|contains:
+        username: 'NT AUTHORITY\SYSTEM'
+        Image|contains:
             - '\Windows\System32\wbem\WmiPrvSE.exe'
             - '\Windows\System32\svchost.exe'
             - '\Program Files\Microsoft Monitoring Agent\'
             - '\Program Files\Tanium\'
             - '\Program Files (x86)\Kaspersky Lab\'
-        - CommandLine|contains:
+        CommandLine|contains:
             - 'InTune'
             - 'AzureAD'
 
-    condition: (selection_hardware_id or selection_ad_sid) and selection_suspicious_context and not filter_trusted_apps
+    condition: (selection_hardware_id or selection_ad_sid) 
+               and selection_suspicious_context 
+               and not filter_trusted_apps
 level: high

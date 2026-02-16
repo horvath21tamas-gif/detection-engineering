@@ -5863,12 +5863,16 @@ aus nicht standardmäßigen oder vom Benutzer beschreibbaren Pfaden.
 
 
 ---
-## Webshell-Upload oder Interaktion auf dem Webserver erkannt (High Fidelity)
+## Webshell-Upload oder Interaktionserkennung (T1505.003)
 - **ID:** `T1505_003.yaml`
 - **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt potenzielle Webshell-Aktivitäten, indem verdächtige Skript-Uploads in über das Internet zugängliche Verzeichnisse und nachfolgende Interaktionen mithilfe von Parametern im Befehlsausführungsstil identifiziert werden.Die Regel minimiert Fehlalarme, indem sie sich auf angreifertypische Pfade, Parameter und Zugriffsmuster konzentriert.
+- **Beschreibung:** Erkennt potenzielle Webshell-Aktivitäten durch Identifizierung verdächtiger Skript-Uploads
+zu über das Internet zugänglichen Verzeichnissen und anschließenden Interaktionen im Stil eines Angreifers
+Verwendung von Befehlsausführungsstilparametern.Konzentriert sich auf anomale Pfade, HTTP
+Methoden, Abfrageparameter und Benutzeragenten und minimiert gleichzeitig Fehlalarme
+von legitimen CMS- oder API-Funktionen.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

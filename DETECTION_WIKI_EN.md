@@ -6166,12 +6166,16 @@ from non-standard or user-writable paths.
 
 
 ---
-## Webshell Upload or Interaction Detected on Web Server (High Fidelity)
+## Webshell Upload or Interaction Detection (T1505.003)
 - **ID:** `T1505_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects potential webshell activity by identifying suspicious script uploads to web-accessible directories and subsequent interactions using command-execution style parameters. The rule minimizes false positives by focusing on attacker-typical paths, parameters, and access patterns.
+- **Leírás:** Detects potential webshell activity by identifying suspicious script uploads
+to web-accessible directories and subsequent attacker-style interactions
+using command-execution style parameters. Focuses on anomalous paths, HTTP
+methods, query parameters, and user agents, while minimizing false positives
+from legitimate CMS or API functionality.
 
 
 #### 🚨 Response Playbook

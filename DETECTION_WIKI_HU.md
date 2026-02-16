@@ -5863,12 +5863,16 @@ nem szabványos vagy a felhasználó által írható útvonalakról.
 
 
 ---
-## Webshell-feltöltés vagy interakció észlelve a webszerveren (high Fidelity)
+## Webshell-feltöltés vagy interakcióészlelés (T1505.003)
 - **ID:** `T1505_003.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a lehetséges webshell-tevékenységeket azáltal, hogy azonosítja a gyanús szkript-feltöltéseket a web-elérhető könyvtárakba, és az azt követő interakciókat parancs-végrehajtási stílusparaméterek segítségével.A szabály minimálisra csökkenti a hamis pozitívumot azáltal, hogy a támadókra jellemző útvonalakra, paraméterekre és hozzáférési mintákra összpontosít.
+- **Leírás:** A gyanús szkript-feltöltések azonosításával észleli a lehetséges webshell-tevékenységet
+az interneten elérhető könyvtárakhoz és az azt követő támadó jellegű interakciókhoz
+parancs-végrehajtási stílusparaméterek használatával.A rendellenes útvonalakra összpontosít, a HTTP-re
+metódusokat, lekérdezési paramétereket és felhasználói ügynököket, miközben minimalizálja a hamis pozitívumot
+törvényes CMS- vagy API-funkciókból.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

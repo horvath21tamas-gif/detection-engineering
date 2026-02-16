@@ -123,7 +123,7 @@
 | T1056.003 | CRITICAL | Ultra-Pro High-Fidelity Digital Certificate Theft (T1056.003) |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 Libraries |
 | T1057 | HIGH | Ultra-Pro High-Fidelity Process Discovery (T1057) |
-| T1059 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), High-Fidelity Scripting Interpreter Contextual Anomaly, Webshell Upload or Interaction Detected on Web Server (High Fidelity) |
+| T1059 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), High-Fidelity Scripting Interpreter Contextual Anomaly, Webshell Upload or Interaction Detection (T1505.003) |
 | T1059.001 | HIGH | Suspicious Encoded PowerShell Command Execution |
 | T1059.002 | HIGH | High-Fidelity AppleScript (osascript) Abuse Detection |
 | T1059.003 | CRITICAL | Advanced Windows Command Shell Contextual Anomaly |

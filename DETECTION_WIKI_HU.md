@@ -6953,14 +6953,14 @@ A felhasználók által írható könyvtárakban a nem megbízható folyamatok �
 
 
 ---
-## Ultra-Pro High-Fidelity alternatív hitelesítő anyag (T1550)
+## Alternatív hitelesítési anyag (T1550)
 - **ID:** `T1550.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Azonosítással észleli az ellopott hash-ek vagy jegyek oldalirányú mozgáshoz való használatát
-NTLM/Kerberos protokoll anomáliák, például RC4 leminősítés és korlátozott adminisztrátor
-bejelentkezési típusok.Kiszűri a legitim rendszerfelügyeleti eszközöket.
+NTLM/Kerberos protokoll anomáliák, beleértve az RC4 titkosítás visszaminősítését és
+korlátozott rendszergazdai bejelentkezési típusok, ugyanakkor kizárják a legitim rendszerfelügyeleti eszközöket.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -6968,15 +6968,16 @@ bejelentkezési típusok.Kiszűri a legitim rendszerfelügyeleti eszközöket.
 
 
 ---
-## Ultra-Pro High-Fidelity alkalmazás-hozzáférési token visszaélés (T1550.001)
+## Alkalmazás-hozzáférési token visszaélés (T1550.001)
 - **ID:** `T1550_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli az alkalmazás-hozzáférési tokenek ellopását azáltal, hogy azonosítja a jogosulatlan hozzáférést
-Az IdentityCRL és a TokenBroker tárolók, valamint a hordozó tokenek használata parancssori segédprogramokban.
+- **Leírás:** A jogosulatlanok figyelésével észleli az alkalmazás-hozzáférési tokenek ellopását vagy azokkal való visszaélést
+hozzáférés az IdentityCRL és TokenBroker üzletekhez, valamint a hordozó tokenek használata
+parancssori segédprogramokban, kivéve a legitim Azure CLI-t és a böngészőfolyamatokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

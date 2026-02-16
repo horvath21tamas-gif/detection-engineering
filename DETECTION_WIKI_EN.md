@@ -7321,14 +7321,14 @@ Focuses on modifications in user-writable directories by untrusted processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Alternate Authentication Material (T1550)
+## Alternate Authentication Material (T1550)
 - **ID:** `T1550.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects the use of stolen hashes or tickets for lateral movement by identifying 
-NTLM/Kerberos protocol anomalies, such as RC4 downgrades and restricted admin 
-logon types. Filters out legitimate system management tools.
+NTLM/Kerberos protocol anomalies, including RC4 encryption downgrades and 
+restricted admin logon types, while excluding legitimate system management tools.
 
 
 #### 🚨 Response Playbook
@@ -7337,15 +7337,16 @@ logon types. Filters out legitimate system management tools.
 
 
 ---
-## Ultra-Pro High-Fidelity Application Access Token Abuse (T1550.001)
+## Application Access Token Abuse (T1550.001)
 - **ID:** `T1550_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the theft of application access tokens by identifying unauthorized access to 
-IdentityCRL and TokenBroker stores, as well as the use of bearer tokens in command-line utilities.
+- **Leírás:** Detects the theft or misuse of application access tokens by monitoring unauthorized 
+access to IdentityCRL and TokenBroker stores, as well as the use of bearer tokens 
+in command-line utilities, excluding legitimate Azure CLI and browser processes.
 
 
 #### 🚨 Response Playbook

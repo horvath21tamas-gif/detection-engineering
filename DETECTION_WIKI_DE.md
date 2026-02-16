@@ -6953,14 +6953,14 @@ Konzentriert sich auf Änderungen in vom Benutzer beschreibbaren Verzeichnissen 
 
 
 ---
-## Ultra-Pro High-Fidelity Alternatives Authentifizierungsmaterial (T1550)
+## Alternatives Authentifizierungsmaterial (T1550)
 - **ID:** `T1550.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 - **Beschreibung:** Erkennt die Verwendung gestohlener Hashes oder Tickets für Lateral Movement durch Identifizierung
-NTLM/Kerberos-Protokollanomalien, wie RC4-Downgrades und eingeschränkter Administrator
-Anmeldetypen.Filtert legitime Systemverwaltungstools heraus.
+NTLM/Kerberos-Protokollanomalien, einschließlich Downgrades der RC4-Verschlüsselung und
+eingeschränkte Administrator-Anmeldetypen, während legitime Systemverwaltungstools ausgeschlossen sind.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**
@@ -6968,15 +6968,16 @@ Anmeldetypen.Filtert legitime Systemverwaltungstools heraus.
 
 
 ---
-## Missbrauch von Ultra-Pro High-Fidelity-Anwendungszugriffstoken (T1550.001)
+## Missbrauch des Anwendungszugriffstokens (T1550.001)
 - **ID:** `T1550_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt den Diebstahl von Anwendungszugriffstokens durch Identifizierung unbefugter Zugriffe
-IdentityCRL- und TokenBroker-Speicher sowie die Verwendung von Inhabertokens in Befehlszeilendienstprogrammen.
+- **Beschreibung:** Erkennt den Diebstahl oder Missbrauch von Anwendungszugriffstokens durch Überwachung unbefugter Zugriffe
+Zugriff auf IdentityCRL- und TokenBroker-Stores sowie die Verwendung von Inhabertokens
+in Befehlszeilendienstprogrammen, mit Ausnahme legitimer Azure CLI- und Browserprozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -6922,14 +6922,14 @@ gefährliche Umgebungsvariableninjektionen wie LD_PRELOAD.
 
 
 ---
-## Ultra-Pro-AppleScript-Berechtigungseskalation (T1548.004)
+## Eskalation von AppleScript-Berechtigungen (T1548.004)
 - **ID:** `T1548_004.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt nicht autorisierte AppleScript-Erhöhungsversuche.Konkret überwacht
-Osascript-Ausführung mit „Administratorrechten“ von einem nicht vertrauenswürdigen übergeordneten Element
-Prozesse wie Browser, Office-Suiten oder temporäre Verzeichnisse.
+- **Beschreibung:** Erkennt nicht autorisierte AppleScript-Erhöhungsversuche durch Überwachung der Osascript-Ausführung
+mit „Administratorrechten“ von nicht vertrauenswürdigen übergeordneten Prozessen wie Browsern, Office-Suiten,
+Collaboration-Apps oder temporäre Verzeichnisse, während vertrauenswürdige Systemverwaltungstools ausgeschlossen sind.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

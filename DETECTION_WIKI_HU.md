@@ -6922,14 +6922,14 @@ veszélyes környezeti változó injekciók, mint például az LD_PRELOAD.
 
 
 ---
-## Ultra-Pro AppleScript Privilege Escalation (T1548.004)
+## AppleScript Privilege Escalation (T1548.004)
 - **ID:** `T1548_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a jogosulatlan AppleScript-emelési kísérleteket.Konkrétan monitorok
-osascript végrehajtása "rendszergazdai jogosultságokkal" nem megbízható szülőtől
-folyamatok, például böngészők, irodai programcsomagok vagy ideiglenes címtárak.
+- **Leírás:** Az Osascript végrehajtásának figyelésével észleli a jogosulatlan AppleScript-emelési kísérleteket
+"rendszergazdai jogosultságokkal" olyan nem megbízható szülői folyamatoktól, mint a böngészők, irodai programcsomagok,
+együttműködési alkalmazások vagy ideiglenes címtárak, a megbízható rendszerfelügyeleti eszközök kizárása mellett.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

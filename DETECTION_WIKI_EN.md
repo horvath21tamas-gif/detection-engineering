@@ -7288,14 +7288,14 @@ dangerous environment variable injections like LD_PRELOAD.
 
 
 ---
-## Ultra-Pro AppleScript Privilege Escalation (T1548.004)
+## AppleScript Privilege Escalation (T1548.004)
 - **ID:** `T1548_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects unauthorized AppleScript elevation attempts. Specifically monitors 
-osascript execution with "administrator privileges" from untrusted parent 
-processes such as browsers, office suites, or temporary directories.
+- **Leírás:** Detects unauthorized AppleScript elevation attempts by monitoring osascript execution 
+with "administrator privileges" from untrusted parent processes such as browsers, office suites, 
+collaboration apps, or temporary directories, while excluding trusted system management tools.
 
 
 #### 🚨 Response Playbook

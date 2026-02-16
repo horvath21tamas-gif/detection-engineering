@@ -38,7 +38,7 @@ detection:
             - '\zip.exe'
 
     selection_archive_tool_originalname:
-        OriginalFileName|in:
+        OriginalFileName:
             - '7z.exe'
             - '7za.exe'
             - 'WinRAR.exe'
@@ -73,7 +73,7 @@ detection:
         Image|endswith:
             - '\powershell.exe'
             - '\pwsh.exe'
-        CommandLine|contains|all:
+        CommandLine|contains:
             - 'Compress-Archive'
             - '-DestinationPath'
 
@@ -123,23 +123,15 @@ detection:
             - 'C:\Program Files\Splunk\'
             - 'C:\Program Files\Elastic\'
 
-    condition: (
-                    (
-                        (selection_archive_tool_image or selection_archive_tool_originalname)
+    condition: (((selection_archive_tool_image or selection_archive_tool_originalname)
                         and selection_archive_creation
-                        and (
-                                selection_password_protected
+                        and (selection_password_protected
                                 or selection_volume_split
-                                or selection_delete_after
-                            )
-                        and selection_sensitive_source
-                    )
+                                or selection_delete_after)
+                        and selection_sensitive_source)
                     or
-                    (
-                        selection_ps_compress
-                        and selection_sensitive_source
-                    )
-               )
+                    (selection_ps_compress
+                        and selection_sensitive_source))
                and (selection_suspicious_parent or selection_temp_execution)
                and not filter_system_context
                and not filter_backup_software

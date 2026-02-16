@@ -5894,16 +5894,17 @@ Konzentriert sich auf SPI-Flash-Schreib- und Image-Injection-Versuche.
 
 
 ---
-## Ultra-Pro Terminal Services DLL-Hijacking (T1505.005)
+## Erkennung von Terminaldienste-DLL-Hijacking (T1505.005)
 - **ID:** `T1505_005.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Medium (Mäßiger Geräuschpegel)
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Änderungen an Terminal Services (RDP)-Dienst-DLLs
-und Anbieter.Überwacht ServiceDll- und ProviderPath-Manipulationen durch
-nicht vertrauenswürdige Prozesse und nicht standardmäßige Dateipfade.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt unbefugte Änderungen oder Hijacking von Terminal Services (RDP)-Dienst-DLLs
+und Anbieter.Überwacht ServiceDll- und ProviderPath-Registrierungsschlüssel auf Manipulation durch
+Nicht vertrauenswürdige Prozesse, ungewöhnliche Wege oder verdächtige Akteure, die Filterung legitim
+Systembinärdateien und Dienstvorgänge, um Fehlalarme zu minimieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

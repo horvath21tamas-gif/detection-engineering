@@ -5894,16 +5894,17 @@ Az SPI flash írásra és a képinjektálási kísérletekre összpontosít.
 
 
 ---
-## Ultra-Pro Terminal Services DLL-eltérítés (T1505.005)
+## Terminal Services DLL-eltérítés észlelése (T1505.005)
 - **ID:** `T1505_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a terminálszolgáltatások (RDP) szolgáltatási DLL-ek jogosulatlan módosítását
-és szolgáltatók.Figyeli a ServiceDll és a ProviderPath szabotázsát innen
-nem megbízható folyamatok és nem szabványos fájl útvonalak.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a Terminal Services (RDP) szolgáltatás DLL-einek jogosulatlan módosítását vagy eltérítését
+és szolgáltatók.Figyeli a ServiceDll és a ProviderPath rendszerleíró kulcsokat a manipulációra
+megbízhatatlan folyamatok, szokatlan utak vagy gyanús szereplők, kiszűrve a legitim
+rendszer bináris fájljai és szolgáltatási műveletei a téves pozitívumok minimalizálása érdekében.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

@@ -6199,16 +6199,17 @@ Focuses on SPI flash writing and image injection attempts.
 
 
 ---
-## Ultra-Pro Terminal Services DLL Hijacking (T1505.005)
+## Terminal Services DLL Hijacking Detection (T1505.005)
 - **ID:** `T1505_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized modification of Terminal Services (RDP) service DLLs 
-and providers. Monitors for ServiceDll and ProviderPath tampering from 
-untrusted processes and non-standard file paths.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects unauthorized modification or hijacking of Terminal Services (RDP) service DLLs 
+and providers. Monitors ServiceDll and ProviderPath registry keys for tampering by 
+untrusted processes, unusual paths, or suspicious actors, filtering legitimate 
+system binaries and service operations to minimize false positives.
 
 
 #### 🚨 Response Playbook

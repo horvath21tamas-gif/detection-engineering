@@ -1,59 +1,128 @@
-title: Ultra-Pro High-Fidelity Container Secret Discovery (T1552.007)
+title: Container Secret Discovery (T1552.007)
 id: 2234f2b9-defa-4698-9abd-49cb386a6455
 status: stable
 description: |
-    Detects targeted discovery of secrets (K8s tokens, Cloud keys, Env vars) within containers. 
-    Filters legitimate entrypoint scripts and monitoring agents while focusing on 
-    interactive shell sessions and anomalous command chaining (e.g., env | grep).
+    Detects targeted discovery of sensitive credentials inside containers,
+    including Kubernetes service account tokens, mounted secrets, cloud
+    provider keys, and environment variables. Focuses on interactive
+    shell execution, command chaining, and abnormal process lineage
+    while filtering legitimate entrypoint and monitoring activity.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1552/007/
 tags:
     - attack.credential_access
     - attack.t1552.007
+    - attack.discovery
+    - attack.container
+
 logsource:
     category: process_creation
     product: linux
-detection:
-    selection_paths:
-        CommandLine|contains:
-            - '/var/run/secrets/kubernetes.io/serviceaccount' 
-            - '/run/secrets/'                                  
-            - '.docker/config.json'                            
-            - '/etc/kubernetes/admin.conf'                   
-            - 'secret.yml'                                     
 
-    selection_methods:
+detection:
+    selection_secret_paths:
+        CommandLine|contains:
+            - '/var/run/secrets/kubernetes.io/serviceaccount'
+            - '/run/secrets/'
+            - '/etc/kubernetes/admin.conf'
+            - '/root/.kube/config'
+            - '.docker/config.json'
+            - '/.aws/credentials'
+            - '/.azure/'
+            - '/.config/gcloud/'
+
+    selection_token_keywords:
+        CommandLine|contains:
+            - 'token'
+            - 'authorization'
+            - 'kubeconfig'
+            - 'client-secret'
+            - 'access_key'
+            - 'secret_key'
+
+    selection_env_enumeration:
         - CommandLine|contains|all:
             - 'env'
-            - 'grep'
+            - '|'
         - CommandLine|contains|all:
             - 'printenv'
-            - 'token'
+            - '|'
+        - CommandLine|contains|all:
+            - 'set'
+            - '|'
+        - CommandLine|contains|all:
+            - 'export'
+            - '|'
+
+    selection_secret_dumping:
         - CommandLine|contains|all:
             - 'cat'
             - 'base64'
+        - CommandLine|contains|all:
+            - 'cat'
+            - 'grep'
         - CommandLine|contains:
-            - 'export'                                     
+            - 'xxd'
+            - 'hexdump'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
+    selection_interactive_shell:
+        Image|endswith:
             - '/sh'
             - '/bash'
-            - '/zsh'
             - '/dash'
-            - '/kubectl'                                       
-        ParentImage|contains:
+            - '/zsh'
+        CommandLine|contains:
+            - '-i'
+            - '-c'
+
+    selection_web_parent:
+        ParentImage|endswith:
             - '/nginx'
             - '/httpd'
-            - '/php'
+            - '/apache2'
+            - '/php-fpm'
+            - '/node'
+            - '/gunicorn'
+            - '/uwsgi'
 
-    filter_legit_init:
+    selection_exec_context:
+        ParentImage|contains:
+            - 'kubectl'
+            - 'containerd'
+            - 'docker'
+            - 'cri-o'
+
+    filter_legitimate_container_activity:
         CommandLine|contains:
-            - '/usr/local/bin/docker-entrypoint.sh'
+            - 'docker-entrypoint.sh'
             - '/init.sh'
-        username: 'fluentd'
+            - '/usr/local/bin/start.sh'
         Image|contains:
             - '/usr/bin/promtail'
+            - '/usr/bin/fluentd'
+            - '/usr/bin/telegraf'
+            - '/pause'
+        User|in:
+            - 'fluentd'
+            - 'root'   
 
-    condition: (selection_paths or selection_methods) and selection_suspicious_parent and not filter_legit_init
+    condition:
+        (selection_secret_paths
+            or selection_token_keywords
+            or selection_env_enumeration
+            or selection_secret_dumping)
+        and (selection_interactive_shell
+            or selection_web_parent
+            or selection_exec_context)
+        and not filter_legitimate_container_activity
+
+falsepositives:
+    - Debugging sessions inside containers
+    - CI/CD pipeline validation jobs
+    - Security scanning agents inspecting secrets
+    - Application startup scripts validating environment variables
+
 level: high

@@ -6421,16 +6421,18 @@ and transfers initiated from non-administrative process lineages.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538)
+## Cloud Service Dashboard Discovery (T1538)
 - **ID:** `T1538.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects anomalous generation of federated login tokens and automated cloud 
-dashboard access. Focuses on CLI commands used to bypass standard MFA 
-via console sign-in tokens and suspicious browser launches from non-interactive shells.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects anomalous cloud dashboard access and federated login token generation.
+Focuses on suspicious CLI commands and browser launches that bypass MFA or
+originate from non-interactive shells. Covers AWS, Azure, GCP, Okta, and 
+other SaaS portals. Detects potential reconnaissance or lateral movement 
+activity in cloud environments.
 
 
 #### 🚨 Response Playbook

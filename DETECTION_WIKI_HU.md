@@ -6104,16 +6104,18 @@ fiókok közötti szinkronizálás, kézi hitelesítő adatok beadása a CLI-ben
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Service Dashboard Discovery (T1538)
+## Cloud Service Dashboard Discovery (T1538)
 - **ID:** `T1538.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az egyesített bejelentkezési tokenek és az automatizált felhő rendellenes generálását
-műszerfal hozzáférés.A szabványos MFA megkerülésére használt CLI-parancsokra összpontosít
-konzol bejelentkezési tokenjein és gyanús böngészőindításokon keresztül nem interaktív shellekből.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a rendellenes felhőalapú irányítópult-hozzáférést és az egyesített bejelentkezési token generálását.
+A gyanús CLI-parancsokra és a böngészőindításokra összpontosít, amelyek megkerülik az MFA-t vagy
+nem interaktív héjakból származnak.Az AWS, Azure, GCP, Okta és
+más SaaS-portálok.Érzékeli a lehetséges felderítést vagy oldalirányú mozgást
+tevékenység felhőkörnyezetben.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -6187,7 +6189,7 @@ Kiszűri a megbízható szállítók frissítő segédprogramjait, hogy minimali
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a perifériás firmware (NIC, SSD, GPU) jogosulatlan módosítását
-a nem megbízható folyamatból indított önálló villogó eszközök figyelése
+a nem megbízható folyamatból kezdeményezett önálló villogó eszközök figyelése
 láncok vagy nem szabványos fájlhelyek.Kiszűri a megbízható kezelést
 eszközök a hamis pozitív eredmények csökkentésére.
 
@@ -6235,7 +6237,7 @@ megbízható menedzsment eszközök.
 
 
 ---
-## DHCP/PXE rendszerindítási eltérítés (T1542.005)
+## DHCP/PXE rendszerindító eltérítés (T1542.005)
 - **ID:** `T1542_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -6243,7 +6245,7 @@ megbízható menedzsment eszközök.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a 66-os (Boot Server) és a 67-es (Bootfile Name) DHCP-opciók jogosulatlan módosítását,
-amelyet a támadók a hálózati rendszerindítási kérelmek rosszindulatú TFTP-kiszolgálóra való átirányítására használnak.
+amelyeket a támadók a hálózati rendszerindítási kérelmek rosszindulatú TFTP-kiszolgálóra való átirányítására használnak.
 Szűri a megbízható rendszerszolgáltatásokat a téves pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
@@ -6934,7 +6936,7 @@ megbízható automatizálási eszközök.
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Az Osascript végrehajtásának figyelésével észleli a jogosulatlan AppleScript-emelési kísérleteket
+- **Leírás:** Az osascript végrehajtásának figyelésével észleli a jogosulatlan AppleScript-emelési kísérleteket
 "rendszergazdai jogosultságokkal" olyan nem megbízható szülői folyamatoktól, mint a böngészők, irodai programcsomagok,
 együttműködési alkalmazások vagy ideiglenes címtárak, a megbízható rendszerfelügyeleti eszközök kizárása mellett.
 

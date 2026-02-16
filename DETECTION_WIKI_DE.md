@@ -6104,16 +6104,18 @@ und Übertragungen, die von nicht-administrativen Prozesslinien initiiert werden
 
 
 ---
-## Ultra-Pro High-Fidelity-Cloud-Service-Dashboard-Erkennung (T1538)
+## Cloud-Service-Dashboard-Erkennung (T1538)
 - **ID:** `T1538.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die anomale Generierung föderierter Anmeldetokens und der automatisierten Cloud
-Dashboard-Zugriff.Konzentriert sich auf CLI-Befehle, die zur Umgehung von Standard-MFA verwendet werden
-über Konsolen-Anmeldetokens und verdächtige Browserstarts von nicht interaktiven Shells.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt anormale Cloud-Dashboard-Zugriffe und die Generierung föderierter Anmeldetokens.
+Konzentriert sich auf verdächtige CLI-Befehle und Browserstarts, die MFA umgehen oder
+stammen aus nicht interaktiven Shells.Deckt AWS, Azure, GCP, Okta und ab
+andere SaaS-Portale.Erkennt potenzielle Aufklärung oder seitliche Bewegungen
+Aktivität in Cloud-Umgebungen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

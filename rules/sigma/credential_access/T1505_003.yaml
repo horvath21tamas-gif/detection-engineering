@@ -1,19 +1,27 @@
-title: Webshell Upload or Interaction Detected on Web Server (High Fidelity)
-id: 46a34a4b-8860-43a8-9f2a-3f50166641af
+title: Webshell Upload or Interaction Detection (T1505.003)
+id: 0829dfb0-a84b-484f-a797-a85eaaa513d7
 status: stable
-description: >
-  Detects potential webshell activity by identifying suspicious script uploads
-  to web-accessible directories and subsequent interactions using
-  command-execution style parameters. The rule minimizes false positives by
-  focusing on attacker-typical paths, parameters, and access patterns.
+description: |
+    Detects potential webshell activity by identifying suspicious script uploads
+    to web-accessible directories and subsequent attacker-style interactions
+    using command-execution style parameters. Focuses on anomalous paths, HTTP
+    methods, query parameters, and user agents, while minimizing false positives
+    from legitimate CMS or API functionality.
+
 author: hota05
-date: 2026/01/26
+date: 2026-02-16
 references:
-  - https://attack.mitre.org/techniques/T1505/003/
+    - https://attack.mitre.org/techniques/T1505/003/
+tags:
+    - attack.persistence
+    - attack.t1505.003
+    - attack.execution
+    - attack.t1059
+    - attack.webshell
 
 logsource:
-  product: generic
-  category: webserver
+    product: generic
+    category: webserver
 
 detection:
 
@@ -25,6 +33,7 @@ detection:
       - '/images/'
       - '/tmp/'
       - '/data/'
+      - '/public/'
 
   script_file_extension:
     cs-uri-stem|endswith:
@@ -34,11 +43,15 @@ detection:
       - '.asp'
       - '.aspx'
       - '.jsp'
+      - '.ashx'
+      - '.cgi'
+      - '.pl'
 
   upload_method:
     cs-method:
       - POST
       - PUT
+      - PATCH
 
   webshell_parameters:
     cs-uri-query|contains:
@@ -48,14 +61,19 @@ detection:
       - 'powershell='
       - 'whoami'
       - 'net user'
-      - 'uname'
       - 'id'
+      - 'uname'
       - 'curl '
       - 'wget '
+      - 'base64'
+      - 'eval('
+      - 'shell='
 
   successful_response:
     sc-status:
       - 200
+      - 201
+      - 202
 
   suspicious_user_agent:
     cs-user-agent|contains:
@@ -65,6 +83,8 @@ detection:
       - 'powershell'
       - 'httpclient'
       - 'libwww'
+      - 'java'
+      - 'perl'
 
   filter_legit_cms:
     cs-uri-stem|contains:
@@ -73,31 +93,24 @@ detection:
       - '/administrator/'
       - '/api/'
       - '/rest/'
+      - '/media/'
+      - '/uploads/plugins/'
+      - '/uploads/themes/'
 
   condition: >
-    (
-      upload_method
+    (upload_method
       and suspicious_upload_path
-      and script_file_extension
-    )
-    or
-    (
-      script_file_extension
+      and script_file_extension)
+    or (script_file_extension
       and webshell_parameters
       and successful_response
-      and suspicious_user_agent
-    )
+      and suspicious_user_agent)
     and not filter_legit_cms
 
 falsepositives:
-  - Legitimate file upload functionality with misconfiguration
-  - Developer debugging on non-production systems
-  - Approved penetration testing
+  - Legitimate file uploads in public directories
+  - Developer debugging or testing on non-production servers
+  - Approved penetration tests or red-team exercises
+  - Automated CMS or plugin update scripts
 
 level: high
-
-tags:
-  - attack.persistence
-  - attack.t1505.003
-  - attack.execution
-  - attack.t1059

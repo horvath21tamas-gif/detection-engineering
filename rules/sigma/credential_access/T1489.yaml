@@ -1,10 +1,11 @@
-title: Ultra-Pro High-Fidelity Service Stop (T1489)
+title: Service Stop (T1489)
 id: f8f66619-569f-485c-a13b-2aa1f68f8f08
 status: stable
-description: |
-    Detects unauthorized stopping of critical system and security services 
-    by monitoring service control tools originating from suspicious process 
-    lineages or targeting high-value defense mechanisms (EDR, VSS, AV).
+description: >
+    Detects unauthorized attempts to stop or disable critical system and security services.
+    Monitors process creation events involving service control tools initiated from suspicious
+    parent processes or targeting high-value defensive mechanisms such as EDR, antivirus, 
+    and system recovery services.
 author: hota05
 date: 2026-02-09
 tags:
@@ -15,7 +16,7 @@ logsource:
     product: windows
 detection:
     selection_tools:
-        - Image|endswith:
+        Image|endswith:
             - '\sc.exe'
             - '\net.exe'
             - '\net1.exe'
@@ -23,52 +24,52 @@ detection:
             - '\pwsh.exe'
             - '\taskkill.exe'
 
-    selection_logic:
+    selection_commands:
         CommandLine|contains:
-            - 'stop'                  
-            - 'Stop-Service'          
-            - 'Set-Service'           
-            - ' -f '                  
-            - ' -im '                 
+            - 'stop'
+            - 'Stop-Service'
+            - 'Set-Service'
+            - ' -f '
+            - ' -im '
 
     selection_targets:
         CommandLine|contains:
-            - 'WinDefend'             
-            - 'MpsSvc'                
-            - 'EventLog'              
-            - 'VSS'                   
-            - 'Sentinel'             
-            - 'CrowdStrike'          
-            - 'Sophos'                
-            - 'SepMasterService'      
-            - 'CylanceSvc'           
-            - 'MeSvc'                 
+            - 'WinDefend'
+            - 'MpsSvc'
+            - 'EventLog'
+            - 'VSS'
+            - 'Sentinel'
+            - 'CrowdStrike'
+            - 'Sophos'
+            - 'SepMasterService'
+            - 'CylanceSvc'
+            - 'MeSvc'
 
     selection_context:
-        - ParentImage|endswith:
-            - '\winword.exe'          
+        ParentImage|endswith:
+            - '\winword.exe'
             - '\excel.exe'
-            - '\httpd.exe'           
-            - '\chrome.exe'          
-            - '\rundll32.exe'        
+            - '\httpd.exe'
+            - '\chrome.exe'
+            - '\rundll32.exe'
             - '\outlook.exe'
             - '\wscript.exe'
             - '\cscript.exe'
-        - Image|contains:
+        Image|contains:
             - '\Temp\'
             - '\Users\Public\'
             - '\AppData\Local\Temp\'
 
-    filter_legit_mgmt:
-        - username: 'NT AUTHORITY\SYSTEM' 
-        - ParentImage|endswith:
-            - '\CcmExec.exe'          
-            - '\msiexec.exe'          
-            - '\TiWorker.exe'        
-        - CommandLine|contains:
+    filter_legit:
+        username: 'NT AUTHORITY\SYSTEM'
+        ParentImage|endswith:
+            - '\CcmExec.exe'
+            - '\msiexec.exe'
+            - '\TiWorker.exe'
+        CommandLine|contains:
             - 'Update'
             - 'HealthCheck'
             - 'Diagnostic'
 
-    condition: selection_tools and selection_logic and selection_targets and selection_context and not filter_legit_mgmt
+    condition: selection_tools and selection_commands and selection_targets and selection_context and not filter_legit
 level: critical

@@ -1,58 +1,84 @@
-title: Ultra-Pro High-Fidelity Resource Exhaustion (T1499.004)
-id: cb7eddb1-06a2-4c5b-989e-261ebd252d34
+title: Resource Exhaustion Detection (T1499.004)
+id: 148b9eb5-6bb0-45cc-9b63-6d45dee4e6ad
 status: stable
 description: |
-    Detects targeted resource exhaustion attempts (CPU/RAM/IO) by identifying 
-    infinite loop patterns and massive memory allocation attempts 
-    originating from suspicious process lineages.
+    Detects targeted resource exhaustion attempts (CPU, RAM, or IO) by monitoring
+    infinite loop constructs, massive memory allocations, and recursive process spawns
+    originating from suspicious or non-standard parent process lineages. 
+    Filters out legitimate automation, maintenance scripts, and development environments.
+
 author: hota05
-date: 2026-02-09
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1499/004/
 tags:
     - attack.impact
     - attack.t1499.004
+    - attack.resource_exhaustion
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_engines:
-        - Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\cmd.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
 
-    selection_logic:
-        CommandLine|contains:
-            - 'while($true)'          
-            - 'for(;;)'               
-            - '::MemoryStream'       
-            - 'AllocHGlobal'          
-            - 'foreach($i in 1..1gb)' 
-            - ':loop'                
+  selection_engines:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\python.exe'
+      - '\ruby.exe'
 
-    selection_context:
-        - ParentImage|endswith:
-            - '\winword.exe'         
-            - '\excel.exe'
-            - '\httpd.exe'            
-            - '\rundll32.exe'         
-            - '\outlook.exe'
-        - Image|contains:
-            - '\Temp\'
-            - '\Users\Public\'
-            - '\AppData\Local\Temp\'
+  selection_logic:
+    CommandLine|contains:
+      - 'while($true)'
+      - 'for(;;)'
+      - ':loop'
+      - 'foreach($i in 1..1gb)'
+      - 'AllocHGlobal'
+      - '::MemoryStream'
+      - 'New-Object System.Collections.ArrayList'
+      - 'Start-Job'
+      - 'Start-ThreadJob'
+      - 'Thread.Sleep'
 
-    filter_legit_apps:
-        - username: 'NT AUTHORITY\SYSTEM' 
-        - ParentImage|endswith:
-            - '\CcmExec.exe'          
-            - '\msiexec.exe'          
-            - '\devenv.exe'          
-        - CommandLine|contains:
-            - 'HealthCheck'           
-            - 'Diagnostic'
-            - 'AzureAD'               
+  selection_context:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\powerpnt.exe'
+      - '\httpd.exe'
+      - '\nginx.exe'
+      - '\rundll32.exe'
+      - '\explorer.exe'
+    Image|contains:
+      - '\Temp\'
+      - '\Users\Public\'
+      - '\AppData\Local\Temp\'
 
-    condition: selection_engines and selection_logic and selection_context and not filter_legit_apps
+  filter_legit_apps:
+    username: 'NT AUTHORITY\SYSTEM'
+    ParentImage|endswith:
+      - '\CcmExec.exe'
+      - '\msiexec.exe'
+      - '\devenv.exe'
+      - '\powershellISE.exe'
+    CommandLine|contains:
+      - 'HealthCheck'
+      - 'Diagnostic'
+      - 'AzureAD'
+      - 'System Center'
+      - 'Test-Connection'
+
+  condition: selection_engines and selection_logic and selection_context and not filter_legit_apps
+
+falsepositives:
+  - Legitimate administrative automation scripts running loops for monitoring
+  - CI/CD or test environment scripts executing batch or threaded tasks
+  - Developer debugging or memory stress testing
+
 level: critical

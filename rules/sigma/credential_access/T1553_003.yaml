@@ -68,7 +68,7 @@ detection:
     selection_non_system_user:
         User|contains:
             - '\'
-        User|not_contains:
+        User|contains:
             - 'NT AUTHORITY\SYSTEM'
             - 'NT AUTHORITY\LOCAL SERVICE'
             - 'NT AUTHORITY\NETWORK SERVICE'
@@ -91,7 +91,7 @@ detection:
     condition:
         selection_tooling
         and selection_catalog_db_target
-        and (selection_suspicious_origin or selection_suspicious_parent or selection_non_system_user)
+        and (selection_suspicious_origin or selection_suspicious_parent or not selection_non_system_user)
         and not filter_legitimate_servicing
         and not filter_driver_dev
 

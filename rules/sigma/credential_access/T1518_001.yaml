@@ -1,32 +1,49 @@
-title: Ultra-Pro High-Fidelity Security Software Discovery (T1518.001)
-id: 7db3536d-05ab-4614-bcff-db103b75d1a4
+title: Security Software Discovery Detection (T1518.001)
+id: 348830cf-841c-48c4-bf03-bccb1b626e4c
 status: stable
 description: |
-    Detects targeted discovery of security products (AV/EDR/HIPS) and sandboxes. 
-    Focuses on keyword-specific filtering (findstr/grep) and anomalous process 
-    lineages (Office apps, web servers, or non-elevated shells).
+    Detects targeted discovery of security products such as AV, EDR, HIPS, and sandbox environments.
+    Focuses on keyword-specific enumeration, suspicious command-line usage (findstr, grep, Get-Process/Service),
+    and anomalous parent process lineages (Office apps, web servers, non-elevated shells).  
+    Also detects attempts to fingerprint virtual machines.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-16
+references:
+    - https://attack.mitre.org/techniques/T1518/001/
 tags:
     - attack.discovery
     - attack.t1518.001
+    - attack.reconnaissance
+    - attack.endpoint
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
-    selection_tools:
-        - Image|endswith:
+
+    selection_discovery_tools:
+        Image|endswith:
             - '\wmic.exe'
             - '\tasklist.exe'
-            - '\sc.exe'           
+            - '\sc.exe'
             - '\reg.exe'
             - '\net.exe'
-        - CommandLine|contains:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        CommandLine|contains:
             - 'Get-Process'
             - 'Get-Service'
             - 'Get-ItemProperty'
+            - 'tasklist'
+            - 'sc query'
+            - 'reg query'
+            - 'net start'
+            - 'findstr'
+            - 'grep'
 
-    selection_keywords:
+    selection_security_keywords:
         CommandLine|contains:
             - 'defender'
             - 'sentinel'
@@ -38,31 +55,49 @@ detection:
             - 'sophos'
             - 'antivirus'
             - 'firewall'
+            - 'edr'
+            - 'hip' 
+            - 'sandbox'
 
-    selection_suspicious_lineage:
-        ParentImage|endswith:
-            - '\wsmprovhost.exe'   
-            - '\httpd.exe'           
-            - '\winword.exe'      
-            - '\excel.exe'
-            - '\outlook.exe'
-        IntegrityLevel: 'Medium'     
-
-    selection_vm_check:
+    selection_vm_enumeration:
         CommandLine|contains:
             - 'VBOX'
             - 'VMWARE'
             - 'VirtualBox'
             - 'Guest Additions'
+            - 'Hyper-V'
+            - 'VirtualMachine'
 
-    filter_legit_noise:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith:
-            - '\CcmExec.exe'         
+    selection_suspicious_parents:
+        ParentImage|endswith:
+            - '\wsmprovhost.exe'
+            - '\httpd.exe'
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\outlook.exe'
+            - '\powerpoint.exe'
+        IntegrityLevel: 'Medium'
+
+    filter_legit_system_noise:
+        username: 'NT AUTHORITY\SYSTEM'
+        ParentImage|endswith:
+            - '\CcmExec.exe'
             - '\svchost.exe'
-        - CommandLine|contains:
-            - 'Program Files'     
+            - '\services.exe'
+        CommandLine|contains:
+            - 'Program Files'
             - 'Google\Update'
+            - 'Windows Defender'
+            - 'Microsoft Security'
 
-    condition: selection_tools and (selection_keywords or selection_vm_check or selection_suspicious_lineage) and not filter_legit_noise
+    condition: 
+        selection_discovery_tools 
+        and (selection_security_keywords or selection_vm_enumeration or selection_suspicious_parents) 
+        and not filter_legit_system_noise
+
+falsepositives:
+    - Scheduled antivirus or EDR scans querying local services
+    - IT admins performing system audits or using WMIC/PowerShell
+    - Legitimate software installation or update routines
+
 level: high

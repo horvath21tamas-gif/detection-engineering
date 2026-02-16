@@ -5645,7 +5645,7 @@ sich auf Techniken zur Malware-Umgehung zu konzentrieren.
 
 
 ---
-## Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002)
+## Umgehung von Benutzerinteraktionen (T1497.002)
 - **ID:** `T1497_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
@@ -5654,7 +5654,7 @@ sich auf Techniken zur Malware-Umgehung zu konzentrieren.
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt raffinierte Umgehungen von Benutzerinteraktionen durch Identifizierung nicht signierter oder nicht signierter Benutzer
 verdächtig lokalisierte Prozesse, die menschenzentrierte APIs abfragen (Maus, Tastatur, aktuelle Dateien)
-ohne einen legitimen UI-Kontext zu haben.
+ohne einen legitimen UI-Kontext.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

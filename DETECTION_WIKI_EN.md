@@ -5936,7 +5936,7 @@ to focus on malware evasion techniques.
 
 
 ---
-## Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002)
+## User Interaction Evasion (T1497.002)
 - **ID:** `T1497_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
@@ -5945,7 +5945,7 @@ to focus on malware evasion techniques.
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects sophisticated user interaction evasion by identifying un-signed or 
 suspiciously located processes that query human-centric APIs (mouse, keyboard, recent files) 
-without having a legitimate UI context.
+without a legitimate UI context.
 
 
 #### 🚨 Response Playbook

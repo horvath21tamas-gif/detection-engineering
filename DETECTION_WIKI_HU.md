@@ -5645,14 +5645,14 @@ hogy a rosszindulatú programok elkerülési technikáira összpontosítson.
 
 
 ---
-## Ultra-Pro High-Fidelity User Interaction Evasion (T1497.002)
+## Felhasználói interakciók elkerülése (T1497.002)
 - **ID:** `T1497_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a kifinomult felhasználói interakciók kijátszását azáltal, hogy azonosítja az aláíratlan vagy
+- **Leírás:** Érzékeli a kifinomult felhasználói interakciók elkerülését azáltal, hogy azonosítja az aláíratlan vagy
 gyanúsan elhelyezkedő folyamatok, amelyek emberközpontú API-kat kérnek le (egér, billentyűzet, legutóbbi fájlok)
 legitim UI kontextus nélkül.
 

@@ -4990,16 +4990,15 @@ Protokoll und anomale Prozesslinie.
 
 
 ---
-## Ultra-Pro High-Fidelity Browser Information Discovery (T1217)
+## Erkennung von Browserinformationen (T1217)
 - **ID:** `T1217.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die unbefugte Entdeckung von Browser-Metadaten und -Verlauf.
-Konzentriert sich auf Nicht-Browser-Prozesse, die auf vertrauliche Profildateien zugreifen (SQLite/JSON).
-Verwendung von Befehlszeilentools oder anomalen Umleitungsmustern.
+- **Beschreibung:** Erkennt mit hoher Sicherheit die unbefugte Entdeckung von Browserinformationen (MITRE ATT&CK T1217).Konzentriert sich auf Nicht-Browser-Prozesse, die auf vertrauliche Profildateien (SQLite/JSON) zugreifen oder mithilfe von Befehlszeilen- oder Skripttools eine anomale Umleitung/Extraktion durchführen.
+Beinhaltet Multi-Browser-Unterstützung (Chrome, Edge, Firefox, Brave) und Multi-Profil-Erkennung bei gleichzeitiger Filterung legitimer Unternehmens-IT-Tools, um Fehlalarme zu minimieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

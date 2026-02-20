@@ -4990,16 +4990,15 @@ protokoll és rendellenes folyamatvonal.
 
 
 ---
-## Ultra-Pro High-Fidelity Browser Information Discovery (T1217)
+## Böngészőinformációk felfedezése (T1217)
 - **ID:** `T1217.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a böngésző metaadatainak és előzményeinek jogosulatlan felfedezését.
-Az érzékeny profilfájlokhoz (SQLite/JSON) hozzáférő, nem böngészős folyamatokra összpontosít
-parancssori eszközök vagy rendellenes átirányítási minták használatával.
+- **Leírás:** Érzékeli a nagy megbízhatóságú jogosulatlan böngészőinformációk felfedezését (MITRE ATT&CK T1217).Azokra a nem böngészős folyamatokra összpontosít, amelyek érzékeny profilfájlokhoz (SQLite/JSON) hozzáférnek, vagy rendellenes átirányítást/kibontást hajtanak végre parancssori vagy parancsfájl-eszközök használatával.
+Tartalmazza a több böngésző támogatását (Chrome, Edge, Firefox, Brave) és a többprofil észlelést, miközben szűri a törvényes vállalati IT-eszközöket a hamis pozitívumok minimalizálása érdekében.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

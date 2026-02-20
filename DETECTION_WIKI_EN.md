@@ -5243,16 +5243,15 @@ protocol and anomalous process lineage.
 
 
 ---
-## Ultra-Pro High-Fidelity Browser Information Discovery (T1217)
+## Browser Information Discovery (T1217)
 - **ID:** `T1217.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized discovery of browser metadata and history. 
-Focuses on non-browser processes accessing sensitive profile files (SQLite/JSON) 
-using command-line tools or anomalous redirection patterns.
+- **Leírás:** Detects high-confidence unauthorized browser information discovery (MITRE ATT&CK T1217). Focuses on non-browser processes accessing sensitive profile files (SQLite/JSON) or performing anomalous redirection/extraction using command-line or script tools.
+Includes multi-browser support (Chrome, Edge, Firefox, Brave) and multi-profile detection while filtering legitimate enterprise IT tooling to minimize false positives.
 
 
 #### 🚨 Response Playbook

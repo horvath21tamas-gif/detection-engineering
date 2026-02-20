@@ -4295,16 +4295,16 @@ credential stuffing or lateral movement from external jump boxes.
 
 
 ---
-## Ultra-Pro Access Token Manipulation & Impersonation (T1134)
+## Access Token Manipulation & Impersonation (T1134)
 - **ID:** `T1134.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects high-risk access token manipulation by monitoring for suspicious 
-Integrity Level transitions and the use of specialized tools that interact 
-with LSASS to duplicate or steal security tokens.
+- **Leírás:** Detects high-risk access token manipulation and impersonation by monitoring:
+  - Specialized tools interacting with LSASS to steal or duplicate tokens
+  - Suspicious integrity level transitions indicative of token elevation
+  - Unauthorized LSASS handle access
+Filters known trusted system processes to minimize false positives
 
 
 #### 🚨 Response Playbook

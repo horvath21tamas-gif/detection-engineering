@@ -4094,16 +4094,16 @@ Credential Stuffing oder seitliche Bewegung von externen Sprungboxen.
 
 
 ---
-## Ultra-Pro-Access-Token-Manipulation und -Imitation (T1134)
+## Zugriffstoken-Manipulation und Identitätswechsel (T1134)
 - **ID:** `T1134.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt hochriskante Zugriffstoken-Manipulationen durch Überwachung auf verdächtige Daten
-Übergänge auf Integritätsebene und die Verwendung spezialisierter Tools, die interagieren
-mit LSASS, um Sicherheitstoken zu duplizieren oder zu stehlen.
+- **Beschreibung:** Erkennt hochriskante Zugriffstoken-Manipulationen und Identitätsdiebstahl durch Überwachung:
+– Spezialisierte Tools, die mit LSASS interagieren, um Token zu stehlen oder zu duplizieren
+– Verdächtige Übergänge der Integritätsebene, die auf eine Token-Erhöhung hinweisen
+– Unbefugter LSASS-Handle-Zugriff
+Filtert bekannte vertrauenswürdige Systemprozesse, um Fehlalarme zu minimieren
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

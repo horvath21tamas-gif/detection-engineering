@@ -4094,16 +4094,16 @@ hitelesítő adatok kitöltése vagy oldalirányú mozgás a külső ugródobozo
 
 
 ---
-## Ultra-Pro hozzáférési token manipuláció és megszemélyesítés (T1134)
+## Hozzáférési token manipuláció és megszemélyesítés (T1134)
 - **ID:** `T1134.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a magas kockázatú hozzáférési jogkivonat-manipulációt a gyanús jelek figyelésével
-Integritási szint átmenetek és speciális eszközök használata, amelyek kölcsönhatásba lépnek
-LSASS segítségével biztonsági tokenek sokszorosításához vagy ellopásához.
+- **Leírás:** Érzékeli a magas kockázatú hozzáférési jogkivonat-manipulációt és a megszemélyesítést a következők figyelésével:
+- Az LSASS-szal együttműködő speciális eszközök tokenek ellopásához vagy másolásához
+- Gyanús integritásszint-átmenetek, amelyek a token emelkedését jelzik
+- Jogosulatlan LSASS kezelhetőség
+Szűri az ismert megbízható rendszerfolyamatokat a téves pozitívumok minimalizálása érdekében
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

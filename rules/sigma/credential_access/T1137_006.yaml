@@ -1,47 +1,36 @@
-title: Ultra-Pro Office Add-in Binary Persistence (T1137.006)
+title: Office Add-in Binary Persistence (T1137.006)
 id: 0f68c83a-9f80-47ca-81e8-d6685813fa66
 status: stable
 description: |
-    Detects unauthorized Office Add-in (.wll, .xll) persistence by filtering for 
-    untrusted file locations, unsigned binaries, and suspicious writing processes.
+    Detects unauthorized Office Add-in (.wll, .xll) persistence by monitoring:
+      - Untrusted file locations (Word/Excel startup folders, AddIns folder)
+      - Office add-in binaries with suspicious writers (PowerShell, setup, browser, etc.)
+      - Excludes known trusted applications to reduce false positives
+
 author: hota05
 date: 2026-02-02
 tags:
     - attack.persistence
     - attack.t1137.006
+
 logsource:
     product: windows
     category: file_event
+
 detection:
     selection_paths:
-        TargetFilename|contains:
-            - '\AppData\Roaming\Microsoft\Word\STARTUP\'
-            - '\AppData\Roaming\Microsoft\Excel\XLSTART\'
-            - '\AppData\Local\Microsoft\Office\AddIns\'
+        TargetFilename|re: '(\\AppData\\Roaming\\Microsoft\\Word\\STARTUP\\|\\AppData\\Roaming\\Microsoft\\Excel\\XLSTART\\|\\AppData\\Local\\Microsoft\\Office\\AddIns\\)'
 
     selection_extensions:
-        TargetFilename|endswith:
-            - '.wll' 
-            - '.xll' 
+        TargetFilename|re: '(\.wll|\.xll)$'
 
     selection_suspicious_writer:
-        Image|endswith:
-            - '\msiexec.exe'
-            - '\OfficeClickToRun.exe'
-            - '\setup.exe'
-        Image|endswith:
-            - '\powershell.exe'
-            - '\cmd.exe'
-            - '\browser.exe' 
-            - '\outlook.exe' 
+        Image|re: '(msiexec\.exe|OfficeClickToRun\.exe|setup\.exe|powershell\.exe|cmd\.exe|browser\.exe|outlook\.exe)$'
 
     filter_trusted_apps:
-        TargetFilename|contains:
-            - '\Adobe\'
-            - '\Webex\'
-        Image|contains:
-            - 'C:\Program Files\'
-            - 'C:\Program Files (x86)\'
+        TargetFilename|re: '(\\Adobe\\|\\Webex\\)'
+        Image|re: '^(C:\\Program Files\\|C:\\Program Files \(x86\)\\)'
 
     condition: selection_paths and selection_extensions and selection_suspicious_writer and not filter_trusted_apps
+
 level: critical

@@ -235,7 +235,7 @@
 | T1137.004 | CRITICAL | Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004) |
 | T1137.005 | CRITICAL | Ultra-Pro Office Security Policy Tampering (T1137.005) |
 | T1137.006 | CRITICAL | Ultra-Pro Office Add-in Binary Persistence (T1137.006) |
-| T1140 | HIGH | Ultra-Pro Stealthy Deobfuscation/Decoding (T1140) |
+| T1140 | HIGH | Stealthy Deobfuscation/Decoding (T1140) |
 | T1176 | CRITICAL | Ultra-Pro Browser Extension Force-Install Persistence (T1176) |
 | T1185 | CRITICAL | Ultra-Pro High-Fidelity Browser Session Hijacking (T1185) |
 | T1187 | CRITICAL | Forced Authentication (T1187) |

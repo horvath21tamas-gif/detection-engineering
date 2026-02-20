@@ -1,1 +1,14 @@
-(Image="*\\certutil.exe" CommandLine IN ("*-decode*", "*-decodehex*")) OR (Image IN ("*\\expand.exe", "*\\extrac32.exe") CommandLine IN ("*.txt*", "*.jpg*", "*.png*", "*.xml*", "*.log*")) ParentImage IN ("*\\cmd.exe", "*\\powershell.exe", "*\\pwsh.exe", "*\\wscript.exe", "*\\cscript.exe", "*\\nginx.exe", "*\\httpd.exe", "*\\mshta.exe") OR (CommandLine IN ("*\\Users\\*", "*\\Temp\\*", "*\\AppData\\*", "*.exe*", "*.dll*", "*.vbs*", "*.ps1*") NOT (ParentImage IN ("*\\Windows\\servicing\\TrustedInstaller.exe*", "*\\CcmExec.exe*", "*\\Package Cache\\*") Image IN ("*\\Program Files\\*", "*\\Windows\\System32\\*") CommandLine="*Microsoft\\Windows\\SoftwareDistribution*"))
+
+| rex field=ParentImage "(?<ParentImageMatch>(cmd\\.exe|powershell\\.exe|pwsh\\.exe|wscript\\.exe|cscript\\.exe|nginx\\.exe|httpd\\.exe|mshta\\.exe)$)"
+| eval ParentImageCondition=if(isnotnull(ParentImageMatch), "true", "false")
+| rex field=CommandLine "(?<CommandLineMatch>(\\\\Users\\\\|\\\\Temp\\\\|\\\\AppData\\\\).*|(\\.exe|\\.dll|\\.vbs|\\.ps1)$)"
+| eval CommandLineCondition=if(isnotnull(CommandLineMatch), "true", "false")
+| rex field=ParentImage "(?<ParentImageMatch2>(\\\\Windows\\\\servicing\\\\TrustedInstaller\\.exe|\\\\CcmExec\\.exe|\\\\Package Cache\\\\))"
+| eval ParentImageCondition2=if(isnotnull(ParentImageMatch2), "true", "false")
+| rex field=Image "(?<ImageMatch>(\\\\Program Files\\\\|\\\\Windows\\\\System32\\\\))"
+| eval ImageCondition=if(isnotnull(ImageMatch), "true", "false")
+| rex field=CommandLine "(?<CommandLineMatch2>Microsoft\\\\Windows\\\\SoftwareDistribution)"
+| eval CommandLineCondition2=if(isnotnull(CommandLineMatch2), "true", "false")
+| search ParentImageCondition="true" OR (CommandLineCondition="true" NOT (ParentImageCondition2="true" ImageCondition="true" CommandLineCondition2="true"))
+| regex Image="(certutil\\.exe|expand\\.exe|extrac32\\.exe)$"
+| regex CommandLine="(-decode|-decodehex|(\\.txt|\\.jpg|\\.png|\\.xml|\\.log))"

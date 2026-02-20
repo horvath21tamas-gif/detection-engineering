@@ -230,7 +230,7 @@
 - [Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004)](#ultra-pro-outlook-home-page-hijacking-&-bypass-(t1137004))
 - [Ultra-Pro Office Security Policy Tampering (T1137.005)](#ultra-pro-office-security-policy-tampering-(t1137005))
 - [Ultra-Pro Office Add-in Binary Persistence (T1137.006)](#ultra-pro-office-add-in-binary-persistence-(t1137006))
-- [Ultra-Pro Stealthy Deobfuscation/Decoding (T1140)](#ultra-pro-stealthy-deobfuscationdecoding-(t1140))
+- [Stealthy Deobfuscation/Decoding (T1140)](#stealthy-deobfuscationdecoding-(t1140))
 - [Ultra-Pro Browser Extension Force-Install Persistence (T1176)](#ultra-pro-browser-extension-force-install-persistence-(t1176))
 - [Ultra-Pro High-Fidelity Browser Session Hijacking (T1185)](#ultra-pro-high-fidelity-browser-session-hijacking-(t1185))
 - [Forced Authentication (T1187)](#forced-authentication-(t1187))
@@ -4617,16 +4617,15 @@ untrusted file locations, unsigned binaries, and suspicious writing processes.
 
 
 ---
-## Ultra-Pro Stealthy Deobfuscation/Decoding (T1140)
+## Stealthy Deobfuscation/Decoding (T1140)
 - **ID:** `T1140.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPAND.EXE](https://lolbas-project.github.io/lolbas/), [EXTRAC32.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects high-fidelity deobfuscation by monitoring native tools (certutil, expand) 
-decoding binaries from non-executable extensions (txt, jpg, xml) initiated 
-by suspicious parents or targeting sensitive temp directories.
+- **Leírás:** Detects deobfuscation and decoding activity by monitoring:
+  - Native Windows tools (certutil, expand, extrac32)
+  - Decoding binaries from non-executable sources (txt, jpg, xml, log)
+  - Suspicious parent processes or targeting sensitive/untrusted directories
 
 
 #### 🚨 Response Playbook

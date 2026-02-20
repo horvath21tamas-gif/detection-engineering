@@ -230,7 +230,7 @@
 - [Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004)](#ultra-pro-outlook-home-page-hijacking-&-bypass-(t1137004))
 - [Manipulation von Ultra-Pro Office-Sicherheitsrichtlinien (T1137.005)](#manipulation-von-ultra-pro-office-sicherheitsrichtlinien-(t1137005))
 - [Ultra-Pro Office Add-in Binäre Persistenz (T1137.006)](#ultra-pro-office-add-in-binäre-persistenz-(t1137006))
-- [Ultra-Pro Stealthy Deobfuscation/Dekodierung (T1140)](#ultra-pro-stealthy-deobfuscationdekodierung-(t1140))
+- [Heimliche Entschleierung/Dekodierung (T1140)](#heimliche-entschleierungdekodierung-(t1140))
 - [Ultra-Pro-Browsererweiterung Force-Install Persistence (T1176)](#ultra-pro-browsererweiterung-force-install-persistence-(t1176))
 - [Ultra-Pro High-Fidelity-Browser-Sitzungs-Hijacking (T1185)](#ultra-pro-high-fidelity-browser-sitzungs-hijacking-(t1185))
 - [Erzwungene Authentifizierung (T1187)](#erzwungene-authentifizierung-(t1187))
@@ -4398,16 +4398,15 @@ nicht vertrauenswürdige Dateispeicherorte, nicht signierte Binärdateien und ve
 
 
 ---
-## Ultra-Pro Stealthy Deobfuscation/Dekodierung (T1140)
+## Heimliche Entschleierung/Dekodierung (T1140)
 - **ID:** `T1140.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPAND.EXE](https://lolbas-project.github.io/lolbas/), [EXTRAC32.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt High-Fidelity-Deobfuscation durch Überwachung nativer Tools (certutil, expand)
-Die Dekodierung von Binärdateien aus nicht ausführbaren Erweiterungen (txt, jpg, xml) wurde eingeleitet
-durch misstrauische Eltern oder gezielte Angriffe auf sensible temporäre Verzeichnisse.
+- **Beschreibung:** Erkennt Deobfuscation- und Decoding-Aktivitäten durch Überwachung:
+- Native Windows-Tools (certutil, expand, extrac32)
+- Dekodierung von Binärdateien aus nicht ausführbaren Quellen (txt, jpg, xml, log)
+- Verdächtige übergeordnete Prozesse oder Angriff auf sensible/nicht vertrauenswürdige Verzeichnisse
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

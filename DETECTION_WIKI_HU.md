@@ -230,7 +230,7 @@
 - [Ultra-Pro Outlook kezdőlap eltérítése és megkerülése (T1137.004)](#ultra-pro-outlook-kezdőlap-eltérítése-és-megkerülése-(t1137004))
 - [Ultra-Pro Office biztonsági házirendek manipulálása (T1137.005)](#ultra-pro-office-biztonsági-házirendek-manipulálása-(t1137005))
 - [Ultra-Pro Office-bővítmény bináris perzisztencia (T1137.006)](#ultra-pro-office-bővítmény-bináris-perzisztencia-(t1137006))
-- [Ultra-Pro lopakodó deobfuszkálás/dekódolás (T1140)](#ultra-pro-lopakodó-deobfuszkálásdekódolás-(t1140))
+- [Lopakodó deobfuszkálás/dekódolás (T1140)](#lopakodó-deobfuszkálásdekódolás-(t1140))
 - [Ultra-Pro Browser Extension Force-Install Persistence (T1176)](#ultra-pro-browser-extension-force-install-persistence-(t1176))
 - [Ultra-Pro High-Fidelity böngésző munkamenet-eltérítés (T1185)](#ultra-pro-high-fidelity-böngésző-munkamenet-eltérítés-(t1185))
 - [Kényszerített hitelesítés (T1187)](#kényszerített-hitelesítés-(t1187))
@@ -4398,16 +4398,15 @@ nem megbízható fájlhelyek, aláíratlan binárisok és gyanús írási folyam
 
 
 ---
-## Ultra-Pro lopakodó deobfuszkálás/dekódolás (T1140)
+## Lopakodó deobfuszkálás/dekódolás (T1140)
 - **ID:** `T1140.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPAND.EXE](https://lolbas-project.github.io/lolbas/), [EXTRAC32.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a nagy pontosságú deobfuszkációt a natív eszközök figyelésével (certutil, expand)
-a nem végrehajtható kiterjesztések (txt, jpg, xml) binárisok dekódolása elindítva
-gyanús szülők által, vagy érzékeny ideiglenes könyvtárakat céloznak meg.
+- **Leírás:** Érzékeli a deobfuszkálási és dekódolási tevékenységet a következő megfigyeléssel:
+- Natív Windows-eszközök (certutil, expand, extrac32)
+- Binárisok dekódolása nem végrehajtható forrásokból (txt, jpg, xml, log)
+- Gyanús szülőfolyamatok vagy érzékeny/nem megbízható könyvtárakat céloznak meg
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -4775,7 +4774,7 @@ a Mark-of-the-Web megkerülését szolgáló rosszindulatú programok gyakori mi
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a port kopogtatás / közlekedési jelzés végrehajtására vagy kiváltására irányuló kísérleteket.
+- **Leírás:** Érzékeli a Port kopogtatás/Traffic Signaling megvalósítására vagy kiváltására irányuló kísérleteket.
 Monitorok:
 - Nyers csomagrögzítő eszközök (Npcap/WinPcap/sniffer eszközök)
 - Gyanús tűzfalszabály-módosítások, amelyek lehetővé teszik az UDP/ICMP/Bármely portot

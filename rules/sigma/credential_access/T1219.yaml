@@ -1,15 +1,21 @@
-title: Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern
+title: Suspicious Service Creation via Remote Administration Tools Outside Approved Management Scope
 id: b132d51c-1bc1-4f6c-a1c8-337dc5dfefff
 status: stable
 description: >
-  Detects suspicious creation of services associated with legitimate
-  remote administration tools (e.g. PsExec) when used outside
-  approved enterprise management patterns. This behavior is commonly
-  observed during lateral movement by attackers abusing admin tools.
+  Detects the creation of Windows services commonly associated with
+  legitimate remote administration tools (e.g., PsExec, PAExec, RemCom)
+  when executed outside approved enterprise management patterns.
+
+  Adversaries frequently abuse these tools for lateral movement by
+  remotely creating temporary services on target systems. The rule
+  filters known management hosts, service accounts, and approved
+  enterprise tooling paths to reduce false positives.
+
 author: hota05
-date: 2026/01/26
+date: 2026/02/20
 references:
   - https://attack.mitre.org/techniques/T1219/
+  - https://attack.mitre.org/techniques/T1021/
 
 logsource:
   product: windows
@@ -17,13 +23,21 @@ logsource:
 
 detection:
 
-  remote_admin_services:
-    ServiceName:
-      - 'PSEXECSVC'
+  selection_remote_admin_services:
+    ServiceName|startswith:
+      - 'PSEXEC'
       - 'PAExec'
-      - 'RemComSvc'
+      - 'RemCom'
       - 'CSEXEC'
       - 'ATSVC'
+
+  selection_suspicious_binary_path:
+    ImagePath|contains:
+      - '\ADMIN$'
+      - '\C$\Windows\'
+      - '\Users\Public\'
+      - '\AppData\Local\Temp\'
+      - '\Windows\Temp\'
 
   filter_legit_management_hosts:
     Computer|startswith:
@@ -32,7 +46,7 @@ detection:
       - 'DEPLOY-'
       - 'ADMIN-'
 
-  filter_legit_accounts:
+  filter_legit_service_accounts:
     User|contains:
       - 'svc_'
       - 'admin_'
@@ -41,8 +55,8 @@ detection:
       - 'ansible'
       - 'pdq'
 
-  filter_legit_tooling:
-    Image|contains:
+  filter_legit_tooling_paths:
+    ImagePath|contains:
       - '\Windows\CCM\'
       - '\Microsoft Configuration Manager\'
       - '\PDQ\'
@@ -51,19 +65,24 @@ detection:
       - '\Tanium\'
 
   condition: >
-    remote_admin_services
-    and not (
-      filter_legit_management_hosts
-      or filter_legit_accounts
-      or filter_legit_tooling
-    )
+    selection_remote_admin_services
+    and (selection_suspicious_binary_path
+        or not (filter_legit_management_hosts
+            or filter_legit_service_accounts
+            or filter_legit_tooling_paths))
 
 falsepositives:
-  - Approved penetration testing
-  - Emergency troubleshooting from non-standard hosts (rare)
+  - Approved penetration testing activities
+  - Red team / purple team operations
+  - Emergency IT troubleshooting from non-standard hosts
+  - Temporary admin activity during incident response
 
 level: high
 
 tags:
   - attack.lateral_movement
+  - attack.execution
   - attack.t1219
+  - attack.t1021
+  - attack.windows
+  - attack.defense_evasion

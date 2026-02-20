@@ -4107,16 +4107,18 @@ process integrity, parent-child relationships, and specific metadata queries.
 
 
 ---
-## Ultra-Pro High-Fidelity Audio Capture & Spying (T1123)
+## Audio Capture & Spying (T1123)
 - **ID:** `T1123.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TEAMS.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized audio recording by correlating low-level multimedia API 
-calls (winmm, dsound) with suspicious process lineages (Shells, Office, W3WP) 
-and anomalous command-line arguments used by offensive toolsets.
+- **Leírás:** Detects unauthorized audio recording and spying.
+Focuses on:
+  - Low-level multimedia API calls (winmm.dll, dsound.dll, NAudio)
+  - Script-based audio capture routines
+  - Suspicious parent/child process relationships (Office apps, shells, web servers)
+  - Malicious command-line patterns used by offensive tooling
+Filters legitimate communication apps to reduce false positives.
 
 
 #### 🚨 Response Playbook

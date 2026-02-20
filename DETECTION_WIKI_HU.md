@@ -3916,16 +3916,18 @@ folyamat integritása, szülő-gyermek kapcsolatok és konkrét metaadatlekérde
 
 
 ---
-## Ultra-Pro High-Fidelity hangrögzítés és kémkedés (T1123)
+## Hangrögzítés és kémkedés (T1123)
 - **ID:** `T1123.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TEAMS.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Az alacsony szintű multimédiás API korrelációjával észleli a jogosulatlan hangfelvételt
-hívások (winmm, dsound) gyanús folyamatvonalakkal (Shells, Office, W3WP)
-és a támadó eszközkészletek által használt rendellenes parancssori argumentumok.
+- **Leírás:** Érzékeli a jogosulatlan hangfelvételt és kémkedést.
+A következőkre összpontosít:
+- Alacsony szintű multimédiás API-hívások (winmm.dll, dsound.dll, NAudio)
+- Szkript alapú hangrögzítési rutinok
+- Gyanús szülő/gyermek folyamatkapcsolatok (irodai alkalmazások, héjak, webszerverek)
+- A támadó eszközök által használt rosszindulatú parancssori minták
+Szűri a jogszerű kommunikációs alkalmazásokat a téves pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

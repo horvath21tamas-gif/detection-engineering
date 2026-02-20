@@ -3916,16 +3916,18 @@ Prozessintegrität, Eltern-Kind-Beziehungen und spezifische Metadatenabfragen.
 
 
 ---
-## Ultraprofessionelle High-Fidelity-Audioaufnahme und -Spionage (T1123)
+## Audioerfassung und Spionage (T1123)
 - **ID:** `T1123.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TEAMS.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt nicht autorisierte Audioaufnahmen durch Korrelation der Low-Level-Multimedia-API
-Aufrufe (winmm, dsound) mit verdächtigen Prozesslinien (Shells, Office, W3WP)
-und anomale Befehlszeilenargumente, die von anstößigen Toolsets verwendet werden.
+- **Beschreibung:** Erkennt unbefugte Audioaufnahmen und Spionage.
+Konzentriert sich auf:
+- Low-Level-Multimedia-API-Aufrufe (winmm.dll, dsound.dll, NAudio)
+- Skriptbasierte Audioaufnahmeroutinen
+- Verdächtige Beziehungen zwischen übergeordneten und untergeordneten Prozessen (Office-Apps, Shells, Webserver)
+– Schädliche Befehlszeilenmuster, die von anstößigen Tools verwendet werden
+Filtert legitime Kommunikations-Apps, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

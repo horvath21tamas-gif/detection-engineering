@@ -210,8 +210,8 @@
 | T1123 | CRITICAL | Ultra-Pro High-Fidelity Audio Capture & Spying (T1123) |
 | T1124 | HIGH | Ultra-Pro High-Fidelity System Time Discovery (T1124) |
 | T1125 | CRITICAL | Ultra-Pro High-Fidelity Video Capture Anomaly (T1125) |
-| T1127 | CRITICAL | Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127), Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001) |
-| T1127.001 | CRITICAL | Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001) |
+| T1127 | CRITICAL | Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127), MSBuild Proxy Execution (T1127.001) |
+| T1127.001 | CRITICAL | MSBuild Proxy Execution (T1127.001) |
 | T1129 | HIGH | High-Fidelity Shared Module Load from Untrusted Path |
 | T1132 | CRITICAL | Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132) |
 | T1132.001 | CRITICAL | Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132), Ultra-Pro High-Fidelity Standard Encoding & Payload Injection (T1132.001) |

@@ -206,7 +206,7 @@
 - [Ultra-Pro High-Fidelity System Time Discovery (T1124)](#ultra-pro-high-fidelity-system-time-discovery-(t1124))
 - [Ultra-Pro High-Fidelity Video Capture Anomaly (T1125)](#ultra-pro-high-fidelity-video-capture-anomaly-(t1125))
 - [Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)](#ultra-pro-high-fidelity-trusted-developer-utility-proxy-(t1127))
-- [Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001)](#ultra-pro-high-fidelity-msbuild-proxy-execution-(t1127001))
+- [MSBuild Proxy Execution (T1127.001)](#msbuild-proxy-execution-(t1127001))
 - [High-Fidelity Shared Module Load from Untrusted Path](#high-fidelity-shared-module-load-from-untrusted-path)
 - [Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132)](#ultra-pro-high-fidelity-data-encoding-&-obfuscation-(t1132))
 - [Ultra-Pro High-Fidelity Standard Encoding & Payload Injection (T1132.001)](#ultra-pro-high-fidelity-standard-encoding-&-payload-injection-(t1132001))
@@ -4183,16 +4183,18 @@ by focusing on suspicious parentage and command-line anomalies.
 
 
 ---
-## Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001)
+## MSBuild Proxy Execution (T1127.001)
 - **ID:** `T1127_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects malicious MSBuild.exe execution by identifying anomalous parent processes, 
-untrusted command-line arguments (like inline XML tasks), and excluding 
-standard development and CI/CD environments.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects malicious MSBuild.exe proxy execution by monitoring:
+  - Anomalous parent processes (Office apps, browsers, scripts)
+  - Suspicious command-line arguments (inline XML tasks, remote paths)
+  - Excludes standard development and CI/CD environments (Visual Studio, Jenkins, Build Agents)
+Helps detect fileless or C2 payload deployment via MSBuild without triggering standard dev tool alerts.
 
 
 #### 🚨 Response Playbook

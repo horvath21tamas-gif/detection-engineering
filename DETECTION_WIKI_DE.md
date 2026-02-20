@@ -206,7 +206,7 @@
 - [Ultra-Pro High-Fidelity-Systemzeiterkennung (T1124)](#ultra-pro-high-fidelity-systemzeiterkennung-(t1124))
 - [Ultra-Pro High-Fidelity-Videoaufnahmeanomalie (T1125)](#ultra-pro-high-fidelity-videoaufnahmeanomalie-(t1125))
 - [Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)](#ultra-pro-high-fidelity-trusted-developer-utility-proxy-(t1127))
-- [Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001)](#ultra-pro-high-fidelity-msbuild-proxy-execution-(t1127001))
+- [MSBuild-Proxy-Ausführung (T1127.001)](#msbuild-proxy-ausführung-(t1127001))
 - [Gemeinsames Laden von High-Fidelity-Modulen aus einem nicht vertrauenswürdigen Pfad](#gemeinsames-laden-von-high-fidelity-modulen-aus-einem-nicht-vertrauenswürdigen-pfad)
 - [Ultraprofessionelle High-Fidelity-Datenkodierung und -Verschleierung (T1132)](#ultraprofessionelle-high-fidelity-datenkodierung-und--verschleierung-(t1132))
 - [Ultra-Pro High-Fidelity-Standardkodierung und Nutzlastinjektion (T1132.001)](#ultra-pro-high-fidelity-standardkodierung-und-nutzlastinjektion-(t1132001))
@@ -3988,16 +3988,18 @@ indem wir uns auf verdächtige Abstammungs- und Befehlszeilenanomalien konzentri
 
 
 ---
-## Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001)
+## MSBuild-Proxy-Ausführung (T1127.001)
 - **ID:** `T1127_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die böswillige Ausführung von MSBuild.exe durch Identifizierung anomaler übergeordneter Prozesse.
-nicht vertrauenswürdige Befehlszeilenargumente (wie Inline-XML-Aufgaben) und ausschließen
-Standardentwicklung und CI/CD-Umgebungen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die Ausführung bösartiger MSBuild.exe-Proxys durch Überwachung:
+- Anomale übergeordnete Prozesse (Office-Apps, Browser, Skripte)
+- Verdächtige Befehlszeilenargumente (Inline-XML-Aufgaben, Remote-Pfade)
+- Ausgenommen Standardentwicklungs- und CI/CD-Umgebungen (Visual Studio, Jenkins, Build Agents)
+Hilft bei der Erkennung dateiloser oder C2-Payload-Bereitstellungen über MSBuild, ohne Standard-Entwickler-Tool-Warnungen auszulösen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

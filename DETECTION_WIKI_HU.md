@@ -206,7 +206,7 @@
 - [Ultra-Pro High-Fidelity System Time Discovery (T1124)](#ultra-pro-high-fidelity-system-time-discovery-(t1124))
 - [Ultra-Pro nagy felbontású videórögzítési anomália (T1125)](#ultra-pro-nagy-felbontású-videórögzítési-anomália-(t1125))
 - [Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)](#ultra-pro-high-fidelity-trusted-developer-utility-proxy-(t1127))
-- [Ultra-Pro High-Fidelity MSBuild proxy végrehajtás (T1127.001)](#ultra-pro-high-fidelity-msbuild-proxy-végrehajtás-(t1127001))
+- [MSBuild proxy végrehajtás (T1127.001)](#msbuild-proxy-végrehajtás-(t1127001))
 - [Nagy pontosságú megosztott modul betöltése nem megbízható útvonalról](#nagy-pontosságú-megosztott-modul-betöltése-nem-megbízható-útvonalról)
 - [Ultra-Pro nagy hűségű adatkódolás és obfuszkálás (T1132)](#ultra-pro-nagy-hűségű-adatkódolás-és-obfuszkálás-(t1132))
 - [Ultra-Pro High-Fidelity szabványos kódolás és hasznos terhelés befecskendezése (T1132.001)](#ultra-pro-high-fidelity-szabványos-kódolás-és-hasznos-terhelés-befecskendezése-(t1132001))
@@ -3988,16 +3988,18 @@ a gyanús származási és parancssori anomáliákra összpontosítva.
 
 
 ---
-## Ultra-Pro High-Fidelity MSBuild proxy végrehajtás (T1127.001)
+## MSBuild proxy végrehajtás (T1127.001)
 - **ID:** `T1127_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a rosszindulatú MSBuild.exe végrehajtást a rendellenes szülőfolyamatok azonosításával,
-nem megbízható parancssori argumentumok (például a soron belüli XML-feladatok), és a kizárás
-szabványos fejlesztési és CI/CD környezetek.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a rosszindulatú MSBuild.exe proxy végrehajtását a következő megfigyeléssel:
+- Rendellenes szülői folyamatok (irodai alkalmazások, böngészők, szkriptek)
+- Gyanús parancssori argumentumok (inline XML feladatok, távoli elérési utak)
+- Nem tartalmazza a szabványos fejlesztői és CI/CD környezeteket (Visual Studio, Jenkins, Build Agents)
+Segít észlelni a fájl nélküli vagy C2 hasznos terhelések telepítését az MSBuild segítségével anélkül, hogy a szabványos fejlesztői eszköz riasztásait kiváltaná.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

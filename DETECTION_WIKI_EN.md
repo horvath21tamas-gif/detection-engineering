@@ -5281,16 +5281,16 @@ command-line arguments like URLs or non-DLL extensions.
 
 
 ---
-## Ultra-Pro High-Fidelity HH.exe Proxy Execution (T1218.001)
+## HH.exe CHM/ITS Proxy Execution
 - **ID:** `T1218_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [HH.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the abuse of hh.exe to execute malicious code via CHM files or remote ITS protocols. 
-Focuses on non-standard parent processes and command-line flags used for de-compilation 
-or fetching remote payloads, while filtering out legitimate help file usage.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [HH.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence abuse of hh.exe for proxy execution (MITRE ATT&CK T1218.001). Adversaries may leverage HTML Help (hh.exe) to execute malicious CHM content, decompile CHM files, or fetch remote payloads via ITS/MSITStore protocols.
+The rule focuses on anomalous parent processes, remote or user- writable CHM execution, suspicious protocol handlers, decompile misuse, relocated binaries, and uncommon integrity contexts.
+Designed to reduce noise from legitimate application help file usage.
 
 
 #### 🚨 Response Playbook

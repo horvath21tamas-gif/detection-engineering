@@ -5026,16 +5026,16 @@ Befehlszeilenargumente wie URLs oder Nicht-DLL-Erweiterungen.
 
 
 ---
-## Ultra-Pro High-Fidelity HH.exe Proxy-Ausführung (T1218.001)
+## HH.exe CHM/ITS-Proxy-Ausführung
 - **ID:** `T1218_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [HH.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt den Missbrauch von hh.exe zur Ausführung von Schadcode über CHM-Dateien oder Remote-ITS-Protokolle.
-Konzentriert sich auf nicht standardmäßige übergeordnete Prozesse und Befehlszeilenflags, die zur Dekompilierung verwendet werden
-oder das Abrufen von Remote-Payloads, während die legitime Verwendung von Hilfedateien herausgefiltert wird.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [HH.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochvertraulichen Missbrauch von hh.exe für die Proxy-Ausführung (MITRE ATT&CK T1218.001).Angreifer können die HTML-Hilfe (hh.exe) nutzen, um schädliche CHM-Inhalte auszuführen, CHM-Dateien zu dekompilieren oder Remote-Payloads über ITS/MSITStore-Protokolle abzurufen.
+Die Regel konzentriert sich auf anomale übergeordnete Prozesse, Remote- oder vom Benutzer beschreibbare CHM-Ausführung, verdächtige Protokollhandler, Dekompilierungsmissbrauch, verschobene Binärdateien und ungewöhnliche Integritätskontexte.
+Entwickelt, um Störungen durch die legitime Verwendung von Anwendungshilfedateien zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

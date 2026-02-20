@@ -5026,16 +5026,16 @@ parancssori argumentumokat, például URL-eket vagy nem DLL-kiterjesztéseket.
 
 
 ---
-## Ultra-Pro High-Fidelity HH.exe proxy végrehajtás (T1218.001)
+## HH.exe CHM/ITS proxy végrehajtás
 - **ID:** `T1218_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [HH.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli a hh.exe visszaélést rosszindulatú kód futtatására CHM-fájlokon vagy távoli ITS-protokollokon keresztül.
-A nem szabványos szülőfolyamatokra és a dekompilációhoz használt parancssori jelzőkre összpontosít
-vagy távoli rakományok lekérése, miközben kiszűri a jogos súgófájlok használatát.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [HH.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Észleli a hh.exe nagy megbízhatóságú visszaélést a proxy-végrehajtáshoz (MITRE ATT&CK T1218.001).Az ellenfelek a HTML Súgót (hh.exe) felhasználhatják rosszindulatú CHM-tartalom futtatására, CHM-fájlok visszafordítására vagy távoli hasznos adatok lekérésére ITS/MSITStore protokollokon keresztül.
+A szabály a rendellenes szülőfolyamatokra, a távoli vagy felhasználó által írható CHM-végrehajtásra, a gyanús protokollkezelőkre, a visszafordítási visszaélésekre, az áthelyezett bináris fájlokra és a szokatlan integritási környezetekre összpontosít.
+Úgy tervezték, hogy csökkentse az alkalmazás súgófájljainak használatából származó zajt.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

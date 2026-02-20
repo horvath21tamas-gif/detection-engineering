@@ -1,57 +1,128 @@
-title: Ultra-Pro High-Fidelity MsiExec Proxy Execution (T1218.003)
+title: MsiExec Proxy Execution
 id: b8e2ecc7-fa30-4668-acdd-29f3174d26d9
 status: stable
-description: |
-    Detects the abuse of msiexec.exe to execute malicious payloads. 
-    Focuses on non-standard parent-child relationships (e.g., Office to MsiExec) 
-    and remote resource fetching while filtering out legitimate enterprise installers.
+description: >
+  Detects high-confidence abuse of msiexec.exe for proxy execution
+  (MITRE ATT&CK T1218.003). Adversaries commonly leverage msiexec to
+  download and execute remote MSI packages or silently install payloads.
+
+  The rule focuses on remote resource execution, silent installation
+  flags, user-writable path execution, suspicious parent processes,
+  relocated binaries, and anomalous integrity contexts.
+
+  Designed to reduce noise from legitimate enterprise software
+  deployment and management frameworks.
+
 author: hota05
-date: 2026-02-03
-tags:
-    - attack.defense_evasion
-    - attack.t1218.003
+date: 2026/02/20
+references:
+  - https://attack.mitre.org/techniques/T1218/003/
+  - https://lolbas-project.github.io/lolbas/Binaries/Msiexec/
+
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_img:
-        Image|endswith: '\msiexec.exe'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\powerpnt.exe'
-            - '\outlook.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\brave.exe'
-            - '\powershell.exe'
-            - '\cmd.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
+  selection_msiexec_image:
+    Image|endswith: '\msiexec.exe'
+    OriginalFileName: 'msiexec.exe'
 
-    selection_cmd_args:
-        CommandLine|contains:
-            - 'http'         
-            - 'ftp'
-            - ' /q'          
-            - ' /p '         
-            - ' /y '         
-            - ' /z '        
+  selection_relocated_binary:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\ProgramData\'
 
-    selection_paths:
-        CommandLine|contains:
-            - '\AppData\Local\Temp\'
-            - '\Users\Public\'
-            - '\Downloads\'
+  selection_remote_install:
+    CommandLine|contains:
+      - 'http://'
+      - 'https://'
+      - 'ftp://'
 
-    filter_trusted_management:
-        ParentImage|startswith:
-            - 'C:\Windows\System32\svchost.exe'
-            - 'C:\Windows\CCM\CcmExec.exe'
-            - 'C:\Program Files\Microsoft.Management.Services.IntuneWindowsAgent.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+  selection_silent_flags:
+    CommandLine|contains:
+      - ' /q'
+      - ' /quiet'
+      - ' /qn'
+      - ' /i '
+      - ' /package '
+      - ' /update '
+      - ' /p '
+      - ' /y '
+      - ' /z '
 
-    condition: selection_img and (selection_suspicious_parent or (selection_cmd_args and selection_paths)) and not filter_trusted_management
+  selection_user_writable_msi:
+    CommandLine|contains:
+      - '\AppData\Local\Temp\'
+      - '\Users\Public\'
+      - '\Downloads\'
+      - '\Temp\'
+
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\powerpnt.exe'
+      - '\outlook.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+      - '\rundll32.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\brave.exe'
+
+  selection_low_integrity:
+    IntegrityLevel:
+      - 'Low'
+      - 'Medium'
+
+  filter_legitimate_system_usage:
+    Image|startswith:
+      - 'C:\Windows\System32\'
+      - 'C:\Windows\SysWOW64\'
+
+  filter_enterprise_management:
+    ParentImage|endswith:
+      - '\ccmexec.exe'
+      - '\intunemanagementextension.exe'
+      - '\msiexec.exe'
+      - '\svchost.exe'
+    IntegrityLevel: 'High'
+
+  filter_trustedinstaller:
+    User: 'NT AUTHORITY\SYSTEM'
+    ParentImage|endswith: '\trustedinstaller.exe'
+
+  condition: >
+    selection_msiexec_image
+    and selection_low_integrity
+    and (selection_relocated_binary
+        or selection_remote_install
+        or (selection_silent_flags
+            and (selection_user_writable_msi
+                or selection_suspicious_parent)))
+    and not (filter_legitimate_system_usage
+        and filter_enterprise_management)
+    and not filter_trustedinstaller
+
+falsepositives:
+  - Enterprise software deployment frameworks
+  - Patch management systems
+  - Legitimate remote MSI installations
+  - Internal IT automation
+
 level: critical
+
+tags:
+  - attack.execution
+  - attack.defense_evasion
+  - attack.t1218.003
+  - attack.lolbas
+  - attack.windows

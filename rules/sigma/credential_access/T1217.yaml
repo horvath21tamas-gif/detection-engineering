@@ -1,66 +1,104 @@
-title: Ultra-Pro High-Fidelity Browser Information Discovery (T1217)
+title: Browser Information Discovery (T1217)
 id: 0de57089-fd4d-491f-86f4-bceb7919a98c
 status: stable
-description: |
-    Detects unauthorized discovery of browser metadata and history. 
-    Focuses on non-browser processes accessing sensitive profile files (SQLite/JSON) 
-    using command-line tools or anomalous redirection patterns.
+description: >
+  Detects high-confidence unauthorized browser information discovery
+  (MITRE ATT&CK T1217). Focuses on non-browser processes accessing
+  sensitive profile files (SQLite/JSON) or performing anomalous
+  redirection/extraction using command-line or script tools.
+
+  Includes multi-browser support (Chrome, Edge, Firefox, Brave) and
+  multi-profile detection while filtering legitimate enterprise IT
+  tooling to minimize false positives.
+
 author: hota05
-date: 2026-02-04
-tags:
-    - attack.discovery
-    - attack.t1217
+date: 2026/02/20
+references:
+  - https://attack.mitre.org/techniques/T1217/
+  - https://lolbas-project.github.io/lolbas/Binaries
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_paths:
-        CommandLine|contains:
-            - '\User Data\*\Bookmarks'
-            - '\User Data\*\History'
-            - '\User Data\*\Login Data'       
-            - '\User Data\Local State'        
-            - '\Profiles\*\places.sqlite'     
-            - '\Profiles\*\key4.db'           
+  selection_browser_paths:
+    CommandLine|contains:
+      - '\User Data\*\Bookmarks'
+      - '\User Data\*\History'
+      - '\User Data\*\Login Data'
+      - '\User Data\Local State'
+      - '\Profiles\*\places.sqlite'
+      - '\Profiles\*\key4.db'
 
-    selection_tools:
-        - Image|endswith:
-            - '\findstr.exe'
-            - '\grep.exe'
-            - '\sqlite3.exe'               
-            - '\powershell.exe'
-            - '\pwsh.exe'
-        - CommandLine|contains:
-            - 'type '                         
-            - 'copy '                       
-            - 'Get-ChildItem -Recurse'
+  selection_tools:
+    Image|endswith:
+      - '\findstr.exe'
+      - '\grep.exe'
+      - '\sqlite3.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+    CommandLine|contains:
+      - 'type '
+      - 'copy '
+      - 'Get-ChildItem -Recurse'
 
-    selection_extraction:
-        CommandLine|contains:
-            - ' > '                         
-            - 'Export-Csv'
-            - 'ConvertTo-Json'
-            - 'base64'                        
+  selection_extraction:
+    CommandLine|contains:
+      - ' > '
+      - 'Export-Csv'
+      - 'ConvertTo-Json'
+      - 'base64'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\wsmprovhost.exe'           
-            - '\httpd.exe'                   
-        Image|endswith:
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\firefox.exe'
-            - '\brave.exe'
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wsmprovhost.exe'
+      - '\httpd.exe'
+    Image|endswith:
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\firefox.exe'
+      - '\brave.exe'
 
-    # 5. ELITE WHITELIST (Profi zajmentesítés)
-    filter_legit_it_tools:
-        username: 'NT AUTHORITY\SYSTEM'
-        Image|contains:
-            - '\Program Files\Splunk\'
-            - '\Program Files\Tanium\'
-            - '\CcmExec.exe'                
+  selection_relocated_profiles:
+    CommandLine|contains:
+      - '\Users\Public\'
+      - '\AppData\Local\Temp\'
+      - '\Temp\'
 
-    condition: (selection_paths and selection_tools and selection_suspicious_parent) or (selection_paths and selection_extraction) and not filter_legit_it_tools
+  filter_legit_it_tools:
+    username: 'NT AUTHORITY\SYSTEM'
+    Image|contains:
+      - '\Program Files\Splunk\'
+      - '\Program Files\Tanium\'
+      - '\CcmExec.exe'
+      - '\Ivanti\'
+      - '\PDQ\'
+
+  selection_low_integrity:
+    IntegrityLevel:
+      - 'Low'
+      - 'Medium'
+
+  condition: >
+    selection_browser_paths
+    and selection_low_integrity
+    and (selection_tools and selection_suspicious_parent
+        or selection_extraction
+        or selection_relocated_profiles)
+    and not filter_legit_it_tools
+
+falsepositives:
+  - Enterprise monitoring, IT automation, or patching tools accessing browser profiles
+  - Penetration testing / red team exercises
+  - User-driven browser export or backup scripts
+
 level: high
+
+tags:
+  - attack.discovery
+  - attack.t1217
+  - attack.windows

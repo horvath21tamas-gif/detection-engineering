@@ -4147,16 +4147,16 @@ szabványos UAC-emelés (Consent.exe) vagy jogszerű szolgáltatásindítás né
 
 
 ---
-## Ultra-Pro Make és Impersonate Token (T1134.003)
+## Gyári és megszemélyesítő token (T1134.003)
 - **ID:** `T1134_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a biztonsági tokenek jogosulatlan létrehozását explicit hitelesítő adatok használatával.
-Figyeli a gyanús parancssori argumentumokat a támadó eszközökből és
-korrelál a nem megbízható szülőktől származó 9-es bejelentkezési (NewCredentials) anomáliákkal.
+- **Leírás:** Figyelemmel kíséri a biztonsági tokenek jogosulatlan létrehozását és a hitelesítő adatok megszemélyesítését:
+- Támadó eszközhasználat (Mimikatz, sekurlsa::pth, New-PassThroughToken)
+- Gyanús parancssori argumentumok, például /netonly
+- Nem megbízható szülői folyamatok generálják ezeket a műveleteket
+- 9. bejelentkezési típus (NewCredentials) rendellenességek
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

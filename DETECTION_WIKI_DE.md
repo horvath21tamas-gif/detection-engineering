@@ -4147,16 +4147,16 @@ ohne standardmäßige UAC-Erhöhung (Consent.exe) oder legitimen Dienststart.
 
 
 ---
-## Ultra-Pro Make-and-Imitate-Token (T1134.003)
+## Token erstellen und imitieren (T1134.003)
 - **ID:** `T1134_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die unbefugte Erstellung von Sicherheitstokens mithilfe expliziter Anmeldeinformationen.
-Überwacht verdächtige Befehlszeilenargumente von anstößigen Tools und
-korreliert mit Anomalien des Anmeldetyps 9 (NewCredentials) von nicht vertrauenswürdigen Eltern.
+- **Beschreibung:** Erkennt die unbefugte Erstellung von Sicherheitstokens und Identitätsdiebstahl von Anmeldeinformationen durch Überwachung:
+– Anstößige Tool-Nutzung (Mimikatz, sekurlsa::pth, New-PassThroughToken)
+– Verdächtige Befehlszeilenargumente wie /netonly
+– Nicht vertrauenswürdige übergeordnete Prozesse, die diese Aktionen auslösen
+– Anomalien beim Anmeldetyp 9 (NewCredentials).
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

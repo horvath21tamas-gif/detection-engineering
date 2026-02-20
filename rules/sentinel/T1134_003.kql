@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where ((ProcessCommandLine in ("*make_token*", "*sekurlsa::pth*", "*kerberos::pth*", "*Invoke-Mimikatz*", "*New-PassThroughToken*", "*/netonly*")) or (ParentProcessName in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\rundll32.exe"))) and (not ((ParentProcessName in ("*\Windows\System32\services.exe*", "*\Windows\System32\msiexec.exe*", "*\AzureAD\*")) or (ProcessCommandLine in ("*Visual Studio*", "*IntelliJ*", "*git-remote-https*")) or username =~ "NT AUTHORITY\SYSTEM"))
+| where (ProcessCommandLine =~ "(make_token|sekurlsa::pth|kerberos::pth|Invoke-Mimikatz|New-PassThroughToken|/netonly)" or ParentProcessName =~ "(powershell\.exe|pwsh\.exe|cmd\.exe|wscript\.exe|cscript\.exe|rundll32\.exe)$" or (LogonType =~ 9 and AuthenticationPackage =~ "Negotiate")) and (not (ParentProcessName =~ "(\Windows\System32\services\.exe|\Windows\System32\msiexec\.exe|\AzureAD\)" or ProcessCommandLine =~ "(Visual Studio|IntelliJ|git-remote-https)" or username =~ "NT AUTHORITY\SYSTEM"))

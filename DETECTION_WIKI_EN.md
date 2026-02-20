@@ -4351,16 +4351,16 @@ without standard UAC elevation (Consent.exe) or legitimate service startup.
 
 
 ---
-## Ultra-Pro Make and Impersonate Token (T1134.003)
+## Make and Impersonate Token (T1134.003)
 - **ID:** `T1134_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized creation of security tokens using explicit credentials. 
-Monitors for suspicious command line arguments from offensive tools and 
-correlates with Logon Type 9 (NewCredentials) anomalies from untrusted parents.
+- **Leírás:** Detects unauthorized creation of security tokens and credential impersonation by monitoring:
+  - Offensive tool usage (Mimikatz, sekurlsa::pth, New-PassThroughToken)
+  - Suspicious command-line arguments like /netonly
+  - Untrusted parent processes spawning these actions
+  - Logon Type 9 (NewCredentials) anomalies
 
 
 #### 🚨 Response Playbook

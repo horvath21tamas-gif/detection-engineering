@@ -1,62 +1,42 @@
-title: Ultra-Pro High-Fidelity Automated Collection (T1119)
+title: Automated Collection (T1119)
 id: 2aff3fc7-2045-4801-8e72-17c3d85a5ee0
 status: stable
 description: |
-    Detects highly suspicious, automated data collection by monitoring for 
-    wildcard-based recursive file transfers of sensitive extensions into 
-    common staging areas, originating from interactive or web shells.
+    Detects highly suspicious automated data collection targeting sensitive files.
+    Focuses on wildcard-based recursive file transfers from interactive or web shells,
+    copying into common staging areas, excluding legitimate system maintenance and backup operations.
 author: hota05
 date: 2026-02-05
 tags:
     - attack.collection
     - attack.t1119
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_logic:
-        CommandLine|contains:
-            - ' -Recurse '           
-            - ' /s '                 
-            - ' -Include *.'         
-            - ' -Filter *.'
-            - 'copy *.'               
+        CommandLine: '(\s(-Recurse|/s)\s.*(\*\.))|copy\s+\*\.' 
 
     selection_extensions:
-        CommandLine|contains:
-            - '.doc'
-            - '.pdf'
-            - '.xls'
-            - '.pst'
-            - '.key'                  
-            - '.msg'                  
-            - '.pfx'                  
-            - '.rdp'
+        CommandLine: '(\.doc|\.docx|\.pdf|\.xls|\.xlsx|\.pst|\.key|\.msg|\.pfx|\.rdp)$'
 
     selection_staging:
-        CommandLine|contains:
-            - '\Users\Public'
-            - '\Windows\Temp'
-            - '\AppData\Local\Temp'
-            - 'C:\ProgramData'
+        CommandLine: '(\\Users\\Public|\\Windows\\Temp|\\AppData\\Local\\Temp|C:\\ProgramData)'
 
     selection_context:
-        ParentImage|endswith:
-            - '\w3wp.exe'             
-            - '\httpd.exe'            
-            - '\powershell.exe'     
-            - '\cmd.exe'
-        IntegrityLevel: 'Medium'      
+        ParentImage: '(w3wp\.exe|httpd\.exe|powershell\.exe|cmd\.exe)$'
+        IntegrityLevel: 'Medium'
 
     filter_trusted_systems:
         - Image|contains:
-            - 'C:\Program Files\Microsoft Monitoring Agent\'
-            - 'C:\Windows\CCM\'     
-            - '\OneDrive.exe'         
-        - CommandLine|contains:
-            - ' -Filter *.log'        
-            - 'HealthCheck'
+            - 'C:\\Program Files\\Microsoft Monitoring Agent\\'
+            - 'C:\\Windows\\CCM\\'
+            - '\\OneDrive.exe'
+        - CommandLine: '(-Filter\s+\*\.log|HealthCheck)'
         - username: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_logic and selection_extensions and selection_staging and selection_context and not filter_trusted_systems
+
 level: critical

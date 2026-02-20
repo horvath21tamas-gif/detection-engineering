@@ -4164,16 +4164,16 @@ standalone media binaries (FFmpeg) with redirection, or headless shell sessions.
 
 
 ---
-## Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)
+## Trusted Developer Utility Proxy (T1127)
 - **ID:** `T1127.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSC.EXE](https://lolbas-project.github.io/lolbas/), [JSC.EXE](https://lolbas-project.github.io/lolbas/), [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [VBC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the abuse of trusted developer utilities (MSBuild, CSC, JSC) to proxy 
-malicious code execution. Filters out legitimate CI/CD and IDE activity 
-by focusing on suspicious parentage and command-line anomalies.
+- **Leírás:** Detects abuse of trusted developer utilities (MSBuild, CSC, JSC, VBC) to proxy malicious code execution:
+  - Monitors suspicious parent processes (Office apps, browsers, scripts)
+  - Detects anomalous command-line arguments (remote paths, AppData, Temp)
+  - Filters out legitimate IDE/CI/CD activity (Visual Studio, Jenkins, Build Agents)
+Focused on high-fidelity alerts for fileless or lateral C2 execution attempts.
 
 
 #### 🚨 Response Playbook

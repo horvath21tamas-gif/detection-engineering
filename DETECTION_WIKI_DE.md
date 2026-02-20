@@ -3970,16 +3970,16 @@ eigenständige Medienbinärdateien (FFmpeg) mit Umleitung oder Headless-Shell-Si
 
 
 ---
-## Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)
+## Trusted Developer Utility-Proxy (T1127)
 - **ID:** `T1127.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSC.EXE](https://lolbas-project.github.io/lolbas/), [JSC.EXE](https://lolbas-project.github.io/lolbas/), [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [VBC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt den Missbrauch vertrauenswürdiger Entwicklerdienstprogramme (MSBuild, CSC, JSC) als Proxy
-Ausführung von Schadcode.Filtert legitime CI/CD- und IDE-Aktivitäten heraus
-indem wir uns auf verdächtige Abstammungs- und Befehlszeilenanomalien konzentrieren.
+- **Beschreibung:** Erkennt den Missbrauch vertrauenswürdiger Entwicklerdienstprogramme (MSBuild, CSC, JSC, VBC), um die Ausführung von Schadcode zu vertreten:
+- Überwacht verdächtige übergeordnete Prozesse (Office-Apps, Browser, Skripte)
+- Erkennt anomale Befehlszeilenargumente (Remotepfade, AppData, Temp)
+- Filtert legitime IDE/CI/CD-Aktivitäten heraus (Visual Studio, Jenkins, Build Agents)
+Konzentriert sich auf High-Fidelity-Warnungen für dateilose oder laterale C2-Ausführungsversuche.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

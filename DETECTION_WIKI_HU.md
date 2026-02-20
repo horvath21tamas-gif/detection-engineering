@@ -3970,16 +3970,16 @@ multimédiás keretrendszerek (DirectShow, Media Foundation) gyanús tolmácsoko
 
 
 ---
-## Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)
+## Trusted Developer Utility Proxy (T1127)
 - **ID:** `T1127.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSC.EXE](https://lolbas-project.github.io/lolbas/), [JSC.EXE](https://lolbas-project.github.io/lolbas/), [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [VBC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli a megbízható fejlesztői segédprogramokkal (MSBuild, CSC, JSC) való visszaélést a proxyval
-rosszindulatú kód végrehajtása.Kiszűri a jogos CI/CD és IDE tevékenységeket
-a gyanús származási és parancssori anomáliákra összpontosítva.
+- **Leírás:** Észleli a megbízható fejlesztői segédprogramokkal (MSBuild, CSC, JSC, VBC) való visszaélést a rosszindulatú kód végrehajtásának proxyjával:
+- Figyeli a gyanús szülői folyamatokat (Office alkalmazások, böngészők, szkriptek)
+- Érzékeli a rendellenes parancssori argumentumokat (távoli elérési utak, AppData, Temp)
+- Kiszűri a jogos IDE/CI/CD tevékenységeket (Visual Studio, Jenkins, Build Agents)
+A fájl nélküli vagy oldalsó C2-végrehajtási kísérletek nagy pontosságú riasztásaira összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

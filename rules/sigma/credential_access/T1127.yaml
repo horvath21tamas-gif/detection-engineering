@@ -20,18 +20,18 @@ logsource:
 
 detection:
     selection_tools:
-        Image: '(msbuild\.exe|csc\.exe|jsc\.exe|vbc\.exe)$'
+        processname: '(msbuild\.exe|csc\.exe|jsc\.exe|vbc\.exe)$'
         OriginalFileName: '(MSBuild\.exe|csc\.exe|jsc\.exe|vbc\.exe)$'
 
     selection_suspicious_parent:
-        ParentImage: '(winword\.exe|excel\.exe|powerpnt\.exe|outlook\.exe|chrome\.exe|msedge\.exe|wmiprvse\.exe|mshta\.exe)$'
+        Parentprocessname: '(winword\.exe|excel\.exe|powerpnt\.exe|outlook\.exe|chrome\.exe|msedge\.exe|wmiprvse\.exe|mshta\.exe)$'
 
     selection_cmd_anomalies:
-        CommandLine: '(http|\\\\|\\AppData\\|\\Temp\\|\\Users\\Public\\)'
+        processcommandline: '(http|\\\\|\\AppData\\|\\Temp\\|\\Users\\Public\\)'
 
     filter_trusted_dev:
-        ParentImage: '(\\Microsoft Visual Studio\\|\\Common7\\IDE\\|\\BuildAgent\\|\\Jenkins\\)'
-        CommandLine: '(C:\\Program Files \(x86\)\\Microsoft Visual Studio|C:\\Windows\\Microsoft\.NET\\Framework)'
+        Parentprocessname: '(\\Microsoft Visual Studio\\|\\Common7\\IDE\\|\\BuildAgent\\|\\Jenkins\\)'
+        processcommandline: '(C:\\Program Files \(x86\)\\Microsoft Visual Studio|C:\\Windows\\Microsoft\.NET\\Framework)'
 
     condition: selection_tools and (selection_suspicious_parent or selection_cmd_anomalies) and not filter_trusted_dev
 

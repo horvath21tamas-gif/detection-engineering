@@ -1,59 +1,136 @@
-title: Ultra-Pro High-Fidelity Knowledge Base Scraping (T1213.003)
-id: 0e0c1eaf-612b-419e-920b-28f41f6e72f1
+title: Enterprise Knowledge Base Mass Scraping / Mirroring Detection (T1213.003)
+id: cec11b65-ca04-4340-92d6-43e4534024f5
 status: stable
 description: |
-    Detects systematic knowledge base exfiltration (Wiki, Stack Overflow for Teams) 
-    by identifying recursive mirroring flags, mass archival logic, and 
-    non-browser scripting engines targeting internal documentation URLs.
+    Detects high-volume internal knowledge base scraping and mirroring activity 
+    (Confluence, Wiki, Stack Overflow for Teams, Git-based documentation) 
+    using recursive download flags, REST API content expansion, headless scripting engines,
+    and mass archival patterns. 
+    
+    Focuses on non-browser engines performing systematic collection indicative 
+    of staged intellectual property exfiltration.
+
 author: hota05
-date: 2026-02-09
+date: 2026-02-20
+references:
+    - https://attack.mitre.org/techniques/T1213/003/
 tags:
     - attack.collection
+    - attack.exfiltration
     - attack.t1213.003
+    - attack.t1567
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_kb_targets:
         CommandLine|contains:
-            - '/wiki/display/'         
+            - '/wiki/display/'
+            - '/wiki/spaces/'
             - '/wiki/pages/viewpage'
-            - 'stackoverflow.com/c/'   
-            - '.wiki.git'             
-            - '/rest/api/content?expand=body' 
+            - '/rest/api/content'
+            - '/rest/api/content?expand=body'
+            - '/exportword'
+            - '/exportpdf'
+            - 'stackoverflow.com/c/'
+            - '.wiki.git'
+            - '/_git/'
+            - '/docs/'
+            - '/knowledgebase/'
+            - '/kb/'
 
     selection_mirroring_args:
         CommandLine|contains:
-            - ' --mirror'            
-            - ' --recursive'          
+            - ' --mirror'
+            - ' --recursive'
             - ' -r '
-            - ' --level '             
-            - ' clone '               
-            - ' --accept pdf,docx,zip' 
+            - ' --level '
+            - ' --convert-links'
+            - ' --page-requisites'
+            - ' --no-parent'
+            - ' --accept pdf'
+            - ' --accept doc'
+            - ' --accept zip'
+            - ' clone '
+            - ' archive '
+            - ' --depth '
+            - ' --bare'
 
     selection_engines:
-        - Image|endswith:
+        Image|endswith:
             - '\wget.exe'
-            - '\httrack.exe'          
-            - '\python.exe'            
             - '\curl.exe'
+            - '\httrack.exe'
+            - '\python.exe'
             - '\git.exe'
+            - '\powershell.exe'
+            - '\node.exe'
+            - '\pwsh.exe'
 
-    selection_context:
+    selection_scripted_context:
         ParentImage|endswith:
-            - '\w3wp.exe'              
             - '\cmd.exe'
             - '\powershell.exe'
-        IntegrityLevel: 'Medium'       
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\services.exe'
+            - '\w3wp.exe'
+        IntegrityLevel:
+            - 'Medium'
+            - 'High'
 
-    filter_trusted_processes:
-        - Image|contains:
+    selection_bulk_output:
+        CommandLine|contains:
+            - '.zip'
+            - '.7z'
+            - '.tar'
+            - '.gz'
+            - ' -o '
+            - ' --output '
+            - ' --output-document='
+
+    filter_trusted_paths:
+        Image|contains:
             - 'C:\Program Files\Elastic\'
             - 'C:\Program Files\Splunk\'
-        - username: 'NT AUTHORITY\SYSTEM'
-        - CommandLine|contains:
-            - 'healthcheck'
-            - ' --version'           
+            - 'C:\Program Files\Backup'
+            - 'C:\Program Files\Atlassian\'
 
-    condition: selection_kb_targets and selection_engines and (selection_mirroring_args or selection_context) and not filter_trusted_processes
+    filter_system_accounts:
+        User|startswith:
+            - 'NT AUTHORITY\'
+            - 'DOMAIN\svc_'
+            - 'DOMAIN\backup_'
+
+    filter_benign_flags:
+        CommandLine|contains:
+            - ' --version'
+            - ' healthcheck'
+            - ' status'
+            - ' --help'
+
+    condition: 
+        selection_kb_targets
+        and selection_engines
+        and (selection_mirroring_args or selection_scripted_context or selection_bulk_output)
+        and not (filter_trusted_paths or filter_system_accounts or filter_benign_flags)
+
+fields:
+    - User
+    - Image
+    - ParentImage
+    - CommandLine
+    - IntegrityLevel
+    - CurrentDirectory
+    - Hashes
+
+falsepositives:
+    - Approved documentation backup jobs
+    - DevOps Git documentation mirroring
+    - Migration or export tasks
+    - Security scanning tools indexing internal wiki
+    - Disaster recovery validation scripts
+
 level: critical

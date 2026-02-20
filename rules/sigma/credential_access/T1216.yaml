@@ -1,61 +1,103 @@
-title: Ultra-Pro High-Fidelity System Script Proxy Execution (T1216)
+title: Windows System Script Proxy Execution (T1216)
 id: 297ab9c8-540e-4a37-9c63-30d8d8a87e40
 status: stable
-description: |
-    Detects the abuse of trusted Windows signed scripts to proxy malicious code. 
-    Focuses on network-based execution triggers and anomalous parent-child 
-    process relationships to minimize false positives.
+description: >
+  Detects high-confidence abuse of trusted Windows signed scripts
+  (MITRE ATT&CK T1216) to proxy malicious code execution. Focuses
+  on network-based triggers, anomalous argument injection, and
+  suspicious parent-child process relationships. Filters legitimate
+  administrative contexts to reduce false positives.
+
 author: hota05
-date: 2026-02-03
-tags:
-    - attack.defense_evasion
-    - attack.t1216
+date: 2026/02/20
+references:
+  - https://attack.mitre.org/techniques/T1216/
+  - https://lolbas-project.github.io/lolbas/
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_itp:
-        - Image|endswith: 
-            - '\wscript.exe'
-            - '\cscript.exe'
-        - OriginalFileName: 
-            - 'wscript.exe'
-            - 'cscript.exe'
+  selection_itp:
+    Image|endswith:
+      - '\wscript.exe'
+      - '\cscript.exe'
+    OriginalFileName:
+      - 'wscript.exe'
+      - 'cscript.exe'
 
-    selection_scripts:
-        CommandLine|contains:
-            - 'pubprn.vbs'   
-            - 'slmgr.vbs'    
-            - 'manage-bde.wsf' 
-            - 'SyncAppvPublishingServer.vbs'
-            - 'Adsiedit.vbs'
+  selection_signed_scripts:
+    CommandLine|contains:
+      - 'pubprn.vbs'
+      - 'slmgr.vbs'
+      - 'manage-bde.wsf'
+      - 'SyncAppvPublishingServer.vbs'
+      - 'Adsiedit.vbs'
 
-    selection_attack_params:
-        CommandLine|contains:
-            - 'http'        
-            - 'script:'      
-            - 'soap:'        
-            - '\\'          
-            - ' /e:'        
+  selection_attack_params:
+    CommandLine|contains:
+      - 'http://'
+      - 'https://'
+      - 'script:'
+      - 'soap:'
+      - '\\\\'
+      - ' /e:'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\powershell.exe'
-            - '\cmd.exe'
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\powerpnt.exe'
+      - '\outlook.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\brave.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
 
-    filter_legit_context:
-        ParentImage|endswith: 
-            - '\explorer.exe'
-            - '\svchost.exe'
-        CommandLine|contains:
-            - 'C:\Windows\System32\'
-            - 'C:\Windows\SysWOW64\'
-        username: 'NT AUTHORITY\SYSTEM'
+  selection_low_integrity:
+    IntegrityLevel:
+      - 'Low'
+      - 'Medium'
 
-    condition: selection_itp and selection_scripts and (selection_attack_params or selection_suspicious_parent) and not filter_legit_context
+  selection_relocated_binary:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\ProgramData\'
+
+  filter_legit_context:
+    ParentImage|endswith:
+      - '\explorer.exe'
+      - '\svchost.exe'
+    CommandLine|contains:
+      - 'C:\Windows\System32\'
+      - 'C:\Windows\SysWOW64\'
+    username: 'NT AUTHORITY\SYSTEM'
+
+  condition: >
+    selection_itp
+    and selection_signed_scripts
+    and selection_low_integrity
+    and (selection_attack_params
+        or selection_suspicious_parent
+        or selection_relocated_binary)
+    and not filter_legit_context
+
+falsepositives:
+  - Legit admin/system scripts executed locally
+  - IT automation, patching, or monitoring tools
+  - Penetration testing / red team operations
+
 level: critical
+
+tags:
+  - attack.defense_evasion
+  - attack.t1216
+  - attack.lolbas
+  - attack.windows

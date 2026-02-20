@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-20 07:37:02`
+**Utolsó frissítés:** `2026-02-20 08:01:56`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -266,14 +266,14 @@
 | T1213 | CRITICAL | Ultra-Pro High-Fidelity Repository Dump (T1213) |
 | T1213.001 | CRITICAL | Ultra-Pro High-Fidelity Confluence Scraping (T1213.001) |
 | T1213.002 | CRITICAL | Ultra-Pro High-Fidelity SharePoint Mass Data Exfiltration (T1213.002) |
-| T1213.003 | CRITICAL | Ultra-Pro High-Fidelity Knowledge Base Scraping (T1213.003) |
-| T1216 | CRITICAL | Ultra-Pro High-Fidelity System Script Proxy Execution (T1216) |
-| T1216.001 | CRITICAL | Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001) |
-| T1217 | HIGH | Ultra-Pro High-Fidelity Browser Information Discovery (T1217) |
-| T1218 | HIGH | Ultra-Pro High-Fidelity Regsvcs/Regasm Proxy Execution (T1218.009), Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218), Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
-| T1218.001 | CRITICAL | Ultra-Pro High-Fidelity HH.exe Proxy Execution (T1218.001) |
-| T1218.002 | CRITICAL | Ultra-Pro High-Fidelity Control.exe Proxy Execution (T1218.002) |
-| T1218.003 | CRITICAL | Ultra-Pro High-Fidelity MsiExec Proxy Execution (T1218.003) |
+| T1213.003 | CRITICAL | Enterprise Knowledge Base Mass Scraping / Mirroring Detection (T1213.003) |
+| T1216 | CRITICAL | Windows System Script Proxy Execution (T1216) |
+| T1216.001 | CRITICAL | Pubprn.vbs Script Proxy Execution (T1216.001) |
+| T1217 | HIGH | Browser Information Discovery (T1217) |
+| T1218 | HIGH | Windows System Binary Proxy Execution, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
+| T1218.001 | CRITICAL | HH.exe CHM/ITS Proxy Execution |
+| T1218.002 | CRITICAL | Control.exe CPL/DLL Proxy Execution |
+| T1218.003 | CRITICAL | MsiExec Proxy Execution |
 | T1218.004 | CRITICAL | InstallUtil .NET Proxy Execution |
 | T1218.005 | HIGH | Suspicious Mshta Execution of Remote Script (High Fidelity) |
 | T1218.007 | HIGH | Suspicious Msiexec Installation from Remote URL (High Fidelity) |
@@ -479,7 +479,7 @@
 | T1566.002 | CRITICAL | High-Fidelity Browser-Originating Payload Execution |
 | T1566.003 | CRITICAL | High-Fidelity Process Spawn from Business Communication Service |
 | T1566.004 | HIGH | High-Fidelity Detection of Post-Vishing Remote Tool Execution |
-| T1567 | CRITICAL | Web Service Exfiltration (T1567) |
+| T1567 | CRITICAL | Enterprise Knowledge Base Mass Scraping / Mirroring Detection (T1213.003), Web Service Exfiltration (T1567) |
 | T1567.001 | CRITICAL | Code Repository Exfil (T1567.001) |
 | T1567.002 | CRITICAL | Cloud Storage Exfil (T1567.002) |
 | T1567.003 | CRITICAL | Video Hosting Exfil (T1567.003) |

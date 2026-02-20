@@ -261,14 +261,14 @@
 - [Ultra-Pro High-Fidelity Repository Dump (T1213)](#ultra-pro-high-fidelity-repository-dump-(t1213))
 - [Ultra-Pro High-Fidelity összefolyó kaparás (T1213.001)](#ultra-pro-high-fidelity-összefolyó-kaparás-(t1213001))
 - [Ultra-Pro High-Fidelity SharePoint Mass Data Exfiltration (T1213.002)](#ultra-pro-high-fidelity-sharepoint-mass-data-exfiltration-(t1213002))
-- [Ultra-Pro High-Fidelity tudásbázis kaparás (T1213.003)](#ultra-pro-high-fidelity-tudásbázis-kaparás-(t1213003))
-- [Ultra-Pro High-Fidelity rendszer parancsfájl-proxy végrehajtása (T1216)](#ultra-pro-high-fidelity-rendszer-parancsfájl-proxy-végrehajtása-(t1216))
-- [Ultra-Pro High-Fidelity Pubprn Script proxy végrehajtás (T1216.001)](#ultra-pro-high-fidelity-pubprn-script-proxy-végrehajtás-(t1216001))
-- [Ultra-Pro High-Fidelity Browser Information Discovery (T1217)](#ultra-pro-high-fidelity-browser-information-discovery-(t1217))
-- [Ultra-Pro High-Fidelity rendszerű bináris proxy végrehajtás (T1218)](#ultra-pro-high-fidelity-rendszerű-bináris-proxy-végrehajtás-(t1218))
-- [Ultra-Pro High-Fidelity HH.exe proxy végrehajtás (T1218.001)](#ultra-pro-high-fidelity-hhexe-proxy-végrehajtás-(t1218001))
-- [Ultra-Pro High-Fidelity Control.exe proxy végrehajtás (T1218.002)](#ultra-pro-high-fidelity-controlexe-proxy-végrehajtás-(t1218002))
-- [Ultra-Pro High-Fidelity MsiExec proxy végrehajtás (T1218.003)](#ultra-pro-high-fidelity-msiexec-proxy-végrehajtás-(t1218003))
+- [Vállalati tudásbázis tömeges kaparás/tükrözés észlelése (T1213.003)](#vállalati-tudásbázis-tömeges-kaparástükrözés-észlelése-(t1213003))
+- [Windows rendszerszkript proxy végrehajtása (T1216)](#windows-rendszerszkript-proxy-végrehajtása-(t1216))
+- [Pubprn.vbs Script proxy végrehajtása (T1216.001)](#pubprnvbs-script-proxy-végrehajtása-(t1216001))
+- [Böngészőinformációk felfedezése (T1217)](#böngészőinformációk-felfedezése-(t1217))
+- [Windows rendszer bináris proxy végrehajtása](#windows-rendszer-bináris-proxy-végrehajtása)
+- [HH.exe CHM/ITS proxy végrehajtás](#hhexe-chmits-proxy-végrehajtás)
+- [Control.exe CPL/DLL proxy végrehajtása](#controlexe-cpldll-proxy-végrehajtása)
+- [MsiExec proxy végrehajtás](#msiexec-proxy-végrehajtás)
 - [InstallUtil .NET proxy végrehajtás](#installutil-net-proxy-végrehajtás)
 - [A távoli szkript gyanús Mshta végrehajtása (high Fidelity)](#a-távoli-szkript-gyanús-mshta-végrehajtása-(high-fidelity))
 - [Gyanús Msiexec telepítés távoli URL-ről (High Fidelity)](#gyanús-msiexec-telepítés-távoli-url-ről-(high-fidelity))
@@ -4936,16 +4936,20 @@ SharePoint Online Management Shell tevékenység nem szabványos környezetekbő
 
 
 ---
-## Ultra-Pro High-Fidelity tudásbázis kaparás (T1213.003)
+## Vállalati tudásbázis tömeges kaparás/tükrözés észlelése (T1213.003)
 - **ID:** `T1213_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a tudásbázis szisztematikus kiszűrését (Wiki, Stack Overflow for Teams)
-rekurzív tükrözési jelzők azonosításával, tömeges archiválási logikával és
-nem böngésző szkriptmotorok, amelyek belső dokumentációs URL-eket céloznak meg.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a nagy mennyiségű belső tudásbázis kaparási és tükrözési tevékenységét
+(Confluence, Wiki, Stack Overflow for Teams, Git-alapú dokumentáció)
+rekurzív letöltési jelzők használata, REST API tartalombővítés, fej nélküli szkriptmotorok,
+és tömeges levéltári minták.
+
+Azokra a nem böngészőmotorokra összpontosít, amelyek szisztematikus gyűjtést végeznek indikatív módon
+a szellemi tulajdon színpadi kiszivárgása.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -4994,7 +4998,7 @@ A „script:” protokollt, HTTP/UNC hivatkozásokat, SOAP-hívásokat és gyan�
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FINDSTR.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a nagy megbízhatóságú jogosulatlan böngészőinformációk felfedezését (MITRE ATT&CK T1217).Azokra a nem böngészős folyamatokra összpontosít, amelyek érzékeny profilfájlokhoz (SQLite/JSON) hozzáférnek, vagy rendellenes átirányítást/kibontást hajtanak végre parancssori vagy parancsfájl-eszközök használatával.
+- **Leírás:** Érzékeli a nagy megbízhatóságú, jogosulatlan böngészőinformációk felfedezését (MITRE ATT&CK T1217).Azokra a nem böngészős folyamatokra összpontosít, amelyek érzékeny profilfájlokhoz (SQLite/JSON) hozzáférnek, vagy rendellenes átirányítást/kibontást hajtanak végre parancssori vagy parancsfájl-eszközök használatával.
 Tartalmazza a több böngésző támogatását (Chrome, Edge, Firefox, Brave) és a többprofil észlelést, miközben szűri a törvényes vállalati IT-eszközöket a hamis pozitívumok minimalizálása érdekében.
 
 #### 🚨 Response Playbook
@@ -5011,8 +5015,8 @@ Tartalmazza a több böngésző támogatását (Chrome, Edge, Firefox, Brave) é
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CMSTP.EXE](https://lolbas-project.github.io/lolbas/), [CONTROL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [HH.EXE](https://lolbas-project.github.io/lolbas/), [INSTALLUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [ODBCCONF.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [SCROBJ.DLL](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a megbízható Windows binárisokkal való nagy megbízhatóságú visszaélést a rosszindulatú végrehajtás proxyjával (MITRE ATT&CK T1218).Az ellenfelek olyan bináris fájlokat használnak fel, mint a rundll32.exe, regsvr32.exe, msiexec.exe, installutil.exe, mshta.exe, control.exe, cmstp.exe, odbcconf.exe vagy hh.exe, hogy kódot hajtsanak végre nem szabványos útvonalakról, távoli forrásokból vagy többfolyamat-határhívásokon keresztül.
-A rendellenes szülőfolyamatokra, a gyanús parancssori argumentumokra, a felhasználók által írható útvonalakra és az áthelyezett binárisokra összpontosít.Szűri a legitim rendszer által felügyelt végrehajtási környezeteket a hamis pozitívumok csökkentése érdekében.
+- **Leírás:** Érzékeli a megbízható Windows binárisokkal való nagy megbízhatóságú visszaélést a rosszindulatú végrehajtás proxyja céljából (MITRE ATT&CK T1218).Az ellenfelek olyan bináris fájlokat használnak fel, mint a rundll32.exe, regsvr32.exe, msiexec.exe, installutil.exe, mshta.exe, control.exe, cmstp.exe, odbcconf.exe vagy hh.exe, hogy kódot hajtsanak végre nem szabványos útvonalakról, távoli forrásokból vagy többfolyamat-határhívásokon keresztül.
+A rendellenes szülőfolyamatokra, a gyanús parancssori argumentumokra, a felhasználók által írható útvonalakra és az áthelyezett binárisokra összpontosít.Szűri a legitim rendszer által felügyelt végrehajtási kontextust, hogy csökkentse a hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -5083,7 +5087,7 @@ A szabály a távoli erőforrás-végrehajtásra, a csendes telepítési jelzők
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [INSTALLUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Az InstallUtil.exe nagy megbízhatóságú visszaélést észlel a proxy végrehajtásához (MITRE ATT&CK T1218.004).Az ellenfelek az InstallUtil alkalmazást használják fel rosszindulatú .NET-szerelvények futtatására telepítő/eltávolító módszerekkel.
-A szabály a gyanús eltávolítási jelzőtáblákra, a felhasználó által írható vagy távoli útvonalakról történő összeállítások végrehajtására, a rendellenes szülőfolyamatokra, az áthelyezett bináris használatra és a szokatlan integritási környezetekre összpontosít.
+A szabály a gyanús eltávolítási jelzőkre, a felhasználó által írható vagy távoli útvonalakról történő összeállítások végrehajtására, a rendellenes szülőfolyamatokra, az áthelyezett bináris használatra és a szokatlan integritási környezetekre összpontosít.
 Úgy tervezték, hogy csökkentse a legitim .NET-keretrendszer telepítéséből és az MSI-vezérelt telepítési tevékenységből származó zajt.
 
 #### 🚨 Response Playbook
@@ -5401,7 +5405,7 @@ Az ellenfelek gyakran visszaélnek ezekkel az eszközökkel oldalirányú mozgá
 
 
 ---
-## Csoportházirend-módosítás és visszaélés (T1484.001)
+## Csoportházirend módosítása és visszaélés (T1484.001)
 - **ID:** `T1484_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

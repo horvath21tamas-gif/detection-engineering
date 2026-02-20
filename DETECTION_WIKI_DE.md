@@ -261,14 +261,14 @@
 - [Ultra-Pro High-Fidelity-Repository-Dump (T1213)](#ultra-pro-high-fidelity-repository-dump-(t1213))
 - [Ultra-Pro High-Fidelity Confluence Scraping (T1213.001)](#ultra-pro-high-fidelity-confluence-scraping-(t1213001))
 - [Ultra-Pro High-Fidelity-SharePoint-Massendaten-Exfiltration (T1213.002)](#ultra-pro-high-fidelity-sharepoint-massendaten-exfiltration-(t1213002))
-- [Ultra-Pro High-Fidelity Knowledge Base Scraping (T1213.003)](#ultra-pro-high-fidelity-knowledge-base-scraping-(t1213003))
-- [Ultra-Pro High-Fidelity-System-Skript-Proxy-Ausführung (T1216)](#ultra-pro-high-fidelity-system-skript-proxy-ausführung-(t1216))
-- [Ultra-Pro High-Fidelity-Pubprn-Skript-Proxy-Ausführung (T1216.001)](#ultra-pro-high-fidelity-pubprn-skript-proxy-ausführung-(t1216001))
-- [Ultra-Pro High-Fidelity Browser Information Discovery (T1217)](#ultra-pro-high-fidelity-browser-information-discovery-(t1217))
-- [Ultra-Pro High-Fidelity-System-Binär-Proxy-Ausführung (T1218)](#ultra-pro-high-fidelity-system-binär-proxy-ausführung-(t1218))
-- [Ultra-Pro High-Fidelity HH.exe Proxy-Ausführung (T1218.001)](#ultra-pro-high-fidelity-hhexe-proxy-ausführung-(t1218001))
-- [Ultra-Pro High-Fidelity Control.exe Proxy-Ausführung (T1218.002)](#ultra-pro-high-fidelity-controlexe-proxy-ausführung-(t1218002))
-- [Ultra-Pro High-Fidelity MsiExec Proxy Execution (T1218.003)](#ultra-pro-high-fidelity-msiexec-proxy-execution-(t1218003))
+- [Enterprise Knowledge Base Massen-Scraping-/Spiegelungserkennung (T1213.003)](#enterprise-knowledge-base-massen-scraping-spiegelungserkennung-(t1213003))
+- [Windows-Systemskript-Proxy-Ausführung (T1216)](#windows-systemskript-proxy-ausführung-(t1216))
+- [Pubprn.vbs-Skript-Proxy-Ausführung (T1216.001)](#pubprnvbs-skript-proxy-ausführung-(t1216001))
+- [Erkennung von Browserinformationen (T1217)](#erkennung-von-browserinformationen-(t1217))
+- [Ausführung des Windows-System-Binärproxys](#ausführung-des-windows-system-binärproxys)
+- [HH.exe CHM/ITS-Proxy-Ausführung](#hhexe-chmits-proxy-ausführung)
+- [Control.exe CPL/DLL-Proxy-Ausführung](#controlexe-cpldll-proxy-ausführung)
+- [MsiExec-Proxy-Ausführung](#msiexec-proxy-ausführung)
 - [InstallUtil .NET Proxy-Ausführung](#installutil-net-proxy-ausführung)
 - [Verdächtige Mshta-Ausführung von Remote-Skript (High Fidelity)](#verdächtige-mshta-ausführung-von-remote-skript-(high-fidelity))
 - [Verdächtige Msiexec-Installation von einer Remote-URL (High Fidelity)](#verdächtige-msiexec-installation-von-einer-remote-url-(high-fidelity))
@@ -4936,16 +4936,20 @@ Aktivitäten der SharePoint Online-Verwaltungsshell aus nicht standardmäßigen 
 
 
 ---
-## Ultra-Pro High-Fidelity Knowledge Base Scraping (T1213.003)
+## Enterprise Knowledge Base Massen-Scraping-/Spiegelungserkennung (T1213.003)
 - **ID:** `T1213_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt systematische Wissensdatenbank-Exfiltration (Wiki, Stack Overflow for Teams)
-durch die Identifizierung rekursiver Spiegelungsflags, Massenarchivierungslogik usw
-Nicht-Browser-Skript-Engines, die auf interne Dokumentations-URLs abzielen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochvolumige interne Wissensdatenbank-Scraping- und Mirroring-Aktivitäten
+(Confluence, Wiki, Stack Overflow für Teams, Git-basierte Dokumentation)
+Verwendung rekursiver Download-Flags, REST-API-Inhaltserweiterung, Headless-Scripting-Engines,
+und Massenarchivierungsmuster.
+
+Konzentriert sich auf Nicht-Browser-Engines, die eine systematische, indikative Erfassung durchführen
+der inszenierten Exfiltration von geistigem Eigentum.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -5083,7 +5087,7 @@ Entwickelt, um Störungen durch legitime Frameworks für die Bereitstellung und 
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [INSTALLUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt hochvertraulichen Missbrauch von InstallUtil.exe für die Proxy-Ausführung (MITRE ATT&CK T1218.004).Angreifer nutzen InstallUtil, um bösartige .NET-Assemblys über Installations-/Deinstallationsmethoden auszuführen.
-Die Regel konzentriert sich auf verdächtige Deinstallationsflags, die Ausführung von Assemblys über vom Benutzer beschreibbare oder entfernte Pfade, anomale übergeordnete Prozesse, verlagerte Binärverwendung und ungewöhnliche Integritätskontexte.
+Die Regel konzentriert sich auf verdächtige Deinstallationsflags, die Ausführung von Assemblys über vom Benutzer beschreibbare oder Remote-Pfade, anomale übergeordnete Prozesse, verlagerte Binärverwendung und ungewöhnliche Integritätskontexte.
 Entwickelt, um Störungen durch legitime .NET Framework-Installationen und MSI-gesteuerte Bereitstellungsaktivitäten zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
@@ -5201,7 +5205,7 @@ Entwickelt, um Störungen durch legitime .NET-Registrierung und MSI-gesteuerte I
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [VERCLSID.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt hochvertraulichen Missbrauch von verclsid.exe für die Proxy-Ausführung (MITRE ATT&CK T1218.012) durch das Laden bösartiger COM-Objekte.
-Die Regel konzentriert sich auf anomale übergeordnete Prozesse, verdächtige CLSID-Aufrufmuster, die Ausführung außerhalb von Standardsystempfaden, die Beteiligung von benutzerbeschreibbaren Verzeichnissen und ungewöhnliche Integritätskontexte.
+Die Regel konzentriert sich auf anomale übergeordnete Prozesse, verdächtige CLSID-Aufrufmuster, die Ausführung außerhalb von Standardsystempfaden, die Einbindung von vom Benutzer beschreibbaren Verzeichnissen und ungewöhnliche Integritätskontexte.
 Entwickelt, um Störungen durch legitime Shell-COM-Validierungsaktivitäten zu reduzieren.
 
 #### 🚨 Reaktions-Playbook

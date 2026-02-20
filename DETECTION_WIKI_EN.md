@@ -261,14 +261,14 @@
 - [Ultra-Pro High-Fidelity Repository Dump (T1213)](#ultra-pro-high-fidelity-repository-dump-(t1213))
 - [Ultra-Pro High-Fidelity Confluence Scraping (T1213.001)](#ultra-pro-high-fidelity-confluence-scraping-(t1213001))
 - [Ultra-Pro High-Fidelity SharePoint Mass Data Exfiltration (T1213.002)](#ultra-pro-high-fidelity-sharepoint-mass-data-exfiltration-(t1213002))
-- [Ultra-Pro High-Fidelity Knowledge Base Scraping (T1213.003)](#ultra-pro-high-fidelity-knowledge-base-scraping-(t1213003))
-- [Ultra-Pro High-Fidelity System Script Proxy Execution (T1216)](#ultra-pro-high-fidelity-system-script-proxy-execution-(t1216))
-- [Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001)](#ultra-pro-high-fidelity-pubprn-script-proxy-execution-(t1216001))
-- [Ultra-Pro High-Fidelity Browser Information Discovery (T1217)](#ultra-pro-high-fidelity-browser-information-discovery-(t1217))
-- [Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218)](#ultra-pro-high-fidelity-system-binary-proxy-execution-(t1218))
-- [Ultra-Pro High-Fidelity HH.exe Proxy Execution (T1218.001)](#ultra-pro-high-fidelity-hhexe-proxy-execution-(t1218001))
-- [Ultra-Pro High-Fidelity Control.exe Proxy Execution (T1218.002)](#ultra-pro-high-fidelity-controlexe-proxy-execution-(t1218002))
-- [Ultra-Pro High-Fidelity MsiExec Proxy Execution (T1218.003)](#ultra-pro-high-fidelity-msiexec-proxy-execution-(t1218003))
+- [Enterprise Knowledge Base Mass Scraping / Mirroring Detection (T1213.003)](#enterprise-knowledge-base-mass-scraping--mirroring-detection-(t1213003))
+- [Windows System Script Proxy Execution (T1216)](#windows-system-script-proxy-execution-(t1216))
+- [Pubprn.vbs Script Proxy Execution (T1216.001)](#pubprnvbs-script-proxy-execution-(t1216001))
+- [Browser Information Discovery (T1217)](#browser-information-discovery-(t1217))
+- [Windows System Binary Proxy Execution](#windows-system-binary-proxy-execution)
+- [HH.exe CHM/ITS Proxy Execution](#hhexe-chmits-proxy-execution)
+- [Control.exe CPL/DLL Proxy Execution](#controlexe-cpldll-proxy-execution)
+- [MsiExec Proxy Execution](#msiexec-proxy-execution)
 - [InstallUtil .NET Proxy Execution](#installutil-net-proxy-execution)
 - [Suspicious Mshta Execution of Remote Script (High Fidelity)](#suspicious-mshta-execution-of-remote-script-(high-fidelity))
 - [Suspicious Msiexec Installation from Remote URL (High Fidelity)](#suspicious-msiexec-installation-from-remote-url-(high-fidelity))
@@ -5186,16 +5186,20 @@ SharePoint Online Management Shell activity from non-standard contexts.
 
 
 ---
-## Ultra-Pro High-Fidelity Knowledge Base Scraping (T1213.003)
+## Enterprise Knowledge Base Mass Scraping / Mirroring Detection (T1213.003)
 - **ID:** `T1213_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic knowledge base exfiltration (Wiki, Stack Overflow for Teams) 
-by identifying recursive mirroring flags, mass archival logic, and 
-non-browser scripting engines targeting internal documentation URLs.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-volume internal knowledge base scraping and mirroring activity 
+(Confluence, Wiki, Stack Overflow for Teams, Git-based documentation) 
+using recursive download flags, REST API content expansion, headless scripting engines,
+and mass archival patterns. 
+
+Focuses on non-browser engines performing systematic collection indicative 
+of staged intellectual property exfiltration.
 
 
 #### 🚨 Response Playbook

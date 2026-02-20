@@ -1,1 +1,1 @@
-TargetObject="*\\Software\\Microsoft\\Office\\*" TargetObject IN ("*\\Addins\\LoadBehavior", "*\\Options\\OPEN", "*\\Outlook\\WebView\\URL", "*\\Security\\Trusted Documents\\TrustRecords") Details IN ("*\\AppData\\Local\\Temp\\*", "*C:\\Users\\Public\\*", "*\\Downloads\\*", "*http*") OR Image IN ("*\\powershell.exe", "*\\cmd.exe", "*\\wscript.exe", "*\\cscript.exe", "*\\reg.exe", "*\\bitsadmin.exe") NOT (Image IN ("*\\msiexec.exe", "*\\setup.exe", "*\\OfficeClickToRun.exe") Details IN ("*C:\\Program Files\\*", "*C:\\Program Files (x86)\\*"))
+conversion_failed

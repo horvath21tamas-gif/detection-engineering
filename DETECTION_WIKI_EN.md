@@ -223,7 +223,7 @@
 - [Ultra-Pro Unauthorized Local Account Creation (T1136.001)](#ultra-pro-unauthorized-local-account-creation-(t1136001))
 - [Ultra-Pro Unauthorized Domain Account Creation (T1136.002)](#ultra-pro-unauthorized-domain-account-creation-(t1136002))
 - [Ultra-Pro Unauthorized Cloud Account Creation (T1136.003)](#ultra-pro-unauthorized-cloud-account-creation-(t1136003))
-- [Ultra-Pro Office Application Startup Persistence (T1137)](#ultra-pro-office-application-startup-persistence-(t1137))
+- [Office Application Startup Persistence (T1137)](#office-application-startup-persistence-(t1137))
 - [Suspicious Modification of Office Global Template (Normal.dotm)](#suspicious-modification-of-office-global-template-(normaldotm))
 - [Ultra-Pro Office Test DLL Persistence (T1137.002)](#ultra-pro-office-test-dll-persistence-(t1137002))
 - [Ultra-Pro Outlook Custom Forms Persistence (T1137.003)](#ultra-pro-outlook-custom-forms-persistence-(t1137003))
@@ -4495,15 +4495,15 @@ source IP reputation, and the absence of authorized provisioning service princip
 
 
 ---
-## Ultra-Pro Office Application Startup Persistence (T1137)
+## Office Application Startup Persistence (T1137)
 - **ID:** `T1137.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized Office persistence by monitoring Registry modifications
-originating from non-standard processes or pointing to suspicious file locations.
+- **Leírás:** Detects unauthorized Office persistence by monitoring registry modifications:
+  - Tracks Add-ins LoadBehavior, OPEN options, WebView URLs, and TrustRecords
+  - Flags modifications originating from non-standard processes or suspicious paths
+  - Filters out trusted installers and system paths to reduce false positives
 
 
 #### 🚨 Response Playbook

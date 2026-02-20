@@ -228,7 +228,7 @@
 | T1136.001 | CRITICAL | Ultra-Pro Unauthorized Local Account Creation (T1136.001) |
 | T1136.002 | CRITICAL | Ultra-Pro Unauthorized Domain Account Creation (T1136.002) |
 | T1136.003 | CRITICAL | Ultra-Pro Unauthorized Cloud Account Creation (T1136.003) |
-| T1137 | HIGH | Ultra-Pro Office Application Startup Persistence (T1137) |
+| T1137 | HIGH | Office Application Startup Persistence (T1137) |
 | T1137.001 | CRITICAL | Suspicious Modification of Office Global Template (Normal.dotm) |
 | T1137.002 | CRITICAL | Ultra-Pro Office Test DLL Persistence (T1137.002) |
 | T1137.003 | HIGH | Ultra-Pro Outlook Custom Forms Persistence (T1137.003) |

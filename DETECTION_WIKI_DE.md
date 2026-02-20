@@ -223,7 +223,7 @@
 - [Unbefugte Erstellung eines lokalen Ultra-Pro-Kontos (T1136.001)](#unbefugte-erstellung-eines-lokalen-ultra-pro-kontos-(t1136001))
 - [Ultra-Pro-Erstellung eines nicht autorisierten Domänenkontos (T1136.002)](#ultra-pro-erstellung-eines-nicht-autorisierten-domänenkontos-(t1136002))
 - [Unbefugte Erstellung eines Ultra-Pro-Cloud-Kontos (T1136.003)](#unbefugte-erstellung-eines-ultra-pro-cloud-kontos-(t1136003))
-- [Ultra-Pro Office-Anwendungsstartpersistenz (T1137)](#ultra-pro-office-anwendungsstartpersistenz-(t1137))
+- [Startpersistenz der Office-Anwendung (T1137)](#startpersistenz-der-office-anwendung-(t1137))
 - [Verdächtige Änderung der globalen Office-Vorlage (Normal.dotm)](#verdächtige-änderung-der-globalen-office-vorlage-(normaldotm))
 - [Ultra-Pro Office Test-DLL-Persistenz (T1137.002)](#ultra-pro-office-test-dll-persistenz-(t1137002))
 - [Persistenz benutzerdefinierter Outlook-Formulare von Ultra-Pro (T1137.003)](#persistenz-benutzerdefinierter-outlook-formulare-von-ultra-pro-(t1137003))
@@ -4283,15 +4283,15 @@ die Reputation der Quell-IP und das Fehlen autorisierter Bereitstellungsdienstpr
 
 
 ---
-## Ultra-Pro Office-Anwendungsstartpersistenz (T1137)
+## Startpersistenz der Office-Anwendung (T1137)
 - **ID:** `T1137.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Medium (Mäßiger Geräuschpegel)
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt nicht autorisierte Office-Persistenz durch Überwachung von Registrierungsänderungen
-von nicht standardmäßigen Prozessen stammen oder auf verdächtige Dateispeicherorte verweisen.
+- **Beschreibung:** Erkennt nicht autorisierte Office-Persistenz durch Überwachung von Registrierungsänderungen:
+- Verfolgt Add-Ins LoadBehavior, OPEN-Optionen, WebView-URLs und TrustRecords
+– Kennzeichnet Änderungen, die von nicht standardmäßigen Prozessen oder verdächtigen Pfaden herrühren
+– Filtert vertrauenswürdige Installationsprogramme und Systempfade heraus, um Fehlalarme zu reduzieren
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

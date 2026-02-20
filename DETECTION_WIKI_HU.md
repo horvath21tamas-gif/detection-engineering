@@ -223,7 +223,7 @@
 - [Ultra-Pro jogosulatlan helyi fiók létrehozása (T1136.001)](#ultra-pro-jogosulatlan-helyi-fiók-létrehozása-(t1136001))
 - [Ultra-Pro jogosulatlan domain fiók létrehozása (T1136.002)](#ultra-pro-jogosulatlan-domain-fiók-létrehozása-(t1136002))
 - [Ultra-Pro jogosulatlan felhőfiók létrehozása (T1136.003)](#ultra-pro-jogosulatlan-felhőfiók-létrehozása-(t1136003))
-- [Ultra-Pro Office-alkalmazások indítási állandósága (T1137)](#ultra-pro-office-alkalmazások-indítási-állandósága-(t1137))
+- [Az Office-alkalmazás indítási állandósága (T1137)](#az-office-alkalmazás-indítási-állandósága-(t1137))
 - [Az Office globális sablonjának gyanús módosítása (Normal.dotm)](#az-office-globális-sablonjának-gyanús-módosítása-(normaldotm))
 - [Ultra-Pro Office teszt DLL-perzisztencia (T1137.002)](#ultra-pro-office-teszt-dll-perzisztencia-(t1137002))
 - [Ultra-Pro Outlook egyéni űrlapok tartóssága (T1137.003)](#ultra-pro-outlook-egyéni-űrlapok-tartóssága-(t1137003))
@@ -4283,15 +4283,15 @@ a forrás IP-hírneve, valamint az engedélyezett kiépítési szolgáltatási t
 
 
 ---
-## Ultra-Pro Office-alkalmazások indítási állandósága (T1137)
+## Az Office-alkalmazás indítási állandósága (T1137)
 - **ID:** `T1137.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A rendszerleíró adatbázis módosításainak figyelésével észleli a jogosulatlan Office-maradványt
-nem szabványos folyamatokból ered, vagy gyanús fájlhelyekre mutat.
+- **Leírás:** A rendszerleíró adatbázis módosításainak figyelésével észleli a jogosulatlan Office-maradványt:
+- Nyomon követi a bővítmények terhelési viselkedését, az OPEN opciókat, a WebView URL-eket és a TrustRecords-t
+- Megjelöli a nem szabványos folyamatokból vagy gyanús útvonalakból származó módosításokat
+- Kiszűri a megbízható telepítőket és a rendszerútvonalakat, hogy csökkentse a hamis pozitívumot
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

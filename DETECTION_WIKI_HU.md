@@ -4622,16 +4622,22 @@ szabványos GUI interakció nélkül.
 
 
 ---
-## Ultra-Pro nagy pontosságú jelszóházirend-felderítés (T1201)
+## Jelszóházirend-felderítés észlelése (T1201)
 - **ID:** `T1201.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a tartományi/helyi jelszóházirendek célzott felsorolását.
-A nyers erő kalibrálására használt felderítési mintákra összpontosít
-támadásokat, miközben kiszűri a legitim rendszer-/adminisztrációs zajt.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a tartományi vagy helyi jelszóházirendek célzott felsorolását.
+A támadók által a kalibráláshoz használt felderítési mintákra összpontosít
+brute-force támadások, miközben kiszűrik a legitim rendszer- vagy adminisztrátori tevékenységet.
+
+Monitorok:
+- Natív Windows-eszközök: net.exe, net1.exe
+- PowerShell ActiveDirectory-parancsmagok a jelszóházirendekhez
+- Gyanús kimeneti átirányítás vagy exportálási minták
+- Végrehajtás nem megbízható vagy közepes integritású szülőfolyamatokból
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

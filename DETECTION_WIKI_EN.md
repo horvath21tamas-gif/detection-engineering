@@ -4854,16 +4854,22 @@ without standard GUI interaction.
 
 
 ---
-## Ultra-Pro High-Fidelity Password Policy Discovery (T1201)
+## Password Policy Discovery Detection (T1201)
 - **ID:** `T1201.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted enumeration of domain/local password policies. 
-Focuses on reconnaissance patterns used to calibrate brute-force 
-attacks while filtering out legitimate system/admin noise.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects targeted enumeration of domain or local password policies. 
+Focuses on reconnaissance patterns used by attackers to calibrate 
+brute-force attacks while filtering out legitimate system or admin activity.
+
+Monitors:
+  - Native Windows tools: net.exe, net1.exe
+  - PowerShell ActiveDirectory cmdlets for password policies
+  - Suspicious output redirection or export patterns
+  - Execution from untrusted or medium integrity parent processes
 
 
 #### 🚨 Response Playbook

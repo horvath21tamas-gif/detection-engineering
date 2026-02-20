@@ -4622,16 +4622,22 @@ ohne Standard-GUI-Interaktion.
 
 
 ---
-## Ultra-Pro High-Fidelity-Kennwortrichtlinienerkennung (T1201)
+## Erkennung der Passwortrichtlinien-Erkennung (T1201)
 - **ID:** `T1201.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die gezielte Aufzählung von Domänen-/lokalen Passwortrichtlinien.
-Konzentriert sich auf Aufklärungsmuster, die zur Kalibrierung von Brute-Force verwendet werden
-Angriffe und filtert gleichzeitig legitime System-/Administratorgeräusche heraus.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die gezielte Aufzählung von Domänen- oder lokalen Passwortrichtlinien.
+Konzentriert sich auf Aufklärungsmuster, die von Angreifern zur Kalibrierung verwendet werden
+Brute-Force-Angriffe, während legitime System- oder Administratoraktivitäten herausgefiltert werden.
+
+Monitore:
+- Native Windows-Tools: net.exe, net1.exe
+– PowerShell ActiveDirectory-Cmdlets für Passwortrichtlinien
+- Verdächtige Ausgabeumleitung oder Exportmuster
+- Ausführung von nicht vertrauenswürdigen oder übergeordneten Prozessen mittlerer Integrität
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

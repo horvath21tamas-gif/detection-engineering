@@ -1,61 +1,102 @@
-title: Ultra-Pro High-Fidelity Confluence Scraping (T1213.001)
-id: adaceb09-0828-45e0-8064-17ba63f5072c
+title: Confluence Mass Scraping Detection (T1213.001)
+id: 0798361f-6618-4d4c-87a1-23c4e0e89f1d
 status: stable
 description: |
-    Detects unauthorized mass content extraction from Atlassian Confluence by 
-    identifying suspicious API-driven read/export patterns originating from 
-    untrusted shell contexts or temporary directories.
+    Detects unauthorized mass content extraction from Atlassian Confluence by monitoring:
+    - Suspicious API-driven reads and exports (/rest/api/content, /rest/api/space)
+    - CLI-based scraping tools (curl, wget, confluence-cli)
+    - PowerShell/Python automation
+    - Staging/export to temporary or public directories
+    Non-standard execution contexts and untrusted automation are flagged.
+
 author: hota05
-date: 2026-02-05
+date: 2026-02-20
+references:
+    - https://attack.mitre.org/techniques/T1213/001/
 tags:
     - attack.collection
+    - attack.exfiltration
     - attack.t1213.001
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_api_paths:
         CommandLine|contains:
-            - '/rest/api/space'      
-            - '/rest/api/content'      
-            - '/doexportpage.action'   
-            - '/exportword'           
-            - 'pages/viewpage.action?pageId=' 
+            - '/rest/api/space'
+            - '/rest/api/content'
+            - '/doexportpage.action'
+            - '/exportword'
+            - 'pages/viewpage.action?pageId='
+            - '/pages/exportpdf.action'
+            - '/pages/exportword.action'
 
     selection_engines:
-        - Image|endswith:
+        Image|endswith:
             - '\curl.exe'
             - '\wget.exe'
             - '\powershell.exe'
             - '\pwsh.exe'
             - '\python.exe'
             - '\confluence-cli.exe'
+            - '\node.exe'
+            - '\java.exe'
 
     selection_context:
         ParentImage|endswith:
-            - '\w3wp.exe'            
-            - '\httpd.exe'            
-            - '\winword.exe'        
+            - '\w3wp.exe'
+            - '\httpd.exe'
+            - '\winword.exe'
             - '\excel.exe'
             - '\rundll32.exe'
-        IntegrityLevel: 'Medium'       
+            - '\cmd.exe'
+            - '\taskhostw.exe'
+        IntegrityLevel:
+            - 'Medium'
+            - 'High'
 
     selection_staging:
         CommandLine|contains:
-            - ' > '                  
+            - ' > '
             - ' -OutFile '
             - ' -o '
             - '\Users\Public\'
             - '\Temp\'
+            - '\AppData\Local\Temp\'
 
     filter_trusted_automation:
         - Image|contains:
             - 'C:\Program Files\Atlassian\'
             - 'C:\Program Files (x86)\Atlassian\'
-        - username: 'NT AUTHORITY\SYSTEM'
+        - User|startswith:
+            - 'NT AUTHORITY\SYSTEM'
+            - 'DOMAIN\svc_'
+            - 'DOMAIN\backup_'
         - CommandLine|contains:
             - 'confluence-healthcheck'
             - 'inventory-agent'
+            - '--version'
+            - '-help'
 
-    condition: selection_api_paths and selection_engines and (selection_context or selection_staging) and not filter_trusted_automation
+    condition: selection_api_paths 
+               and selection_engines 
+               and (selection_context or selection_staging) 
+               and not filter_trusted_automation
+
+fields:
+    - User
+    - Image
+    - ParentImage
+    - CommandLine
+    - IntegrityLevel
+    - CurrentDirectory
+    - Hashes
+
+falsepositives:
+    - Approved Confluence backup or export scripts
+    - Approved DevOps or migration scripts
+    - Disaster recovery verification jobs
+    - Security scanning or compliance exports
+
 level: critical

@@ -269,7 +269,7 @@
 - [Ultra-Pro High-Fidelity HH.exe Proxy-Ausführung (T1218.001)](#ultra-pro-high-fidelity-hhexe-proxy-ausführung-(t1218001))
 - [Ultra-Pro High-Fidelity Control.exe Proxy-Ausführung (T1218.002)](#ultra-pro-high-fidelity-controlexe-proxy-ausführung-(t1218002))
 - [Ultra-Pro High-Fidelity MsiExec Proxy Execution (T1218.003)](#ultra-pro-high-fidelity-msiexec-proxy-execution-(t1218003))
-- [Ultra-Pro High-Fidelity InstallUtil Proxy-Ausführung (T1218.004)](#ultra-pro-high-fidelity-installutil-proxy-ausführung-(t1218004))
+- [InstallUtil .NET Proxy-Ausführung](#installutil-net-proxy-ausführung)
 - [Verdächtige Mshta-Ausführung von Remote-Skript (High Fidelity)](#verdächtige-mshta-ausführung-von-remote-skript-(high-fidelity))
 - [Verdächtige Msiexec-Installation von einer Remote-URL (High Fidelity)](#verdächtige-msiexec-installation-von-einer-remote-url-(high-fidelity))
 - [Odbcconf REGSVR-Proxy-Ausführung](#odbcconf-regsvr-proxy-ausführung)
@@ -5080,16 +5080,16 @@ und Remote-Ressourcenabruf, während legitime Unternehmensinstallationsprogramme
 
 
 ---
-## Ultra-Pro High-Fidelity InstallUtil Proxy-Ausführung (T1218.004)
+## InstallUtil .NET Proxy-Ausführung
 - **ID:** `T1218_004.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [INSTALLUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Ausführung von InstallUtil.exe als Proxy für bösartigen Code.
-Konzentriert sich auf das /u-Flag, nicht standardmäßige übergeordnete Prozesse und die Ausführung
-aus beschreibbaren Verzeichnissen, während legitime .NET-Installationen herausgefiltert werden.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [INSTALLUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochvertraulichen Missbrauch von InstallUtil.exe für die Proxy-Ausführung (MITRE ATT&CK T1218.004).Angreifer nutzen InstallUtil, um bösartige .NET-Assemblys über Installations-/Deinstallationsmethoden auszuführen.
+Die Regel konzentriert sich auf verdächtige Deinstallationsflags, die Ausführung von Assemblys über vom Benutzer beschreibbare oder entfernte Pfade, anomale übergeordnete Prozesse, verlagerte Binärverwendung und ungewöhnliche Integritätskontexte.
+Entwickelt, um Störungen durch legitime .NET Framework-Installationen und MSI-gesteuerte Bereitstellungsaktivitäten zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

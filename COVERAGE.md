@@ -274,7 +274,7 @@
 | T1218.001 | CRITICAL | Ultra-Pro High-Fidelity HH.exe Proxy Execution (T1218.001) |
 | T1218.002 | CRITICAL | Ultra-Pro High-Fidelity Control.exe Proxy Execution (T1218.002) |
 | T1218.003 | CRITICAL | Ultra-Pro High-Fidelity MsiExec Proxy Execution (T1218.003) |
-| T1218.004 | CRITICAL | Ultra-Pro High-Fidelity InstallUtil Proxy Execution (T1218.004) |
+| T1218.004 | CRITICAL | InstallUtil .NET Proxy Execution |
 | T1218.005 | HIGH | Suspicious Mshta Execution of Remote Script (High Fidelity) |
 | T1218.007 | HIGH | Suspicious Msiexec Installation from Remote URL (High Fidelity) |
 | T1218.008 | CRITICAL | Odbcconf REGSVR Proxy Execution |

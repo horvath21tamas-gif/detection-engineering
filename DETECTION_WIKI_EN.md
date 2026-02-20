@@ -269,7 +269,7 @@
 - [Ultra-Pro High-Fidelity HH.exe Proxy Execution (T1218.001)](#ultra-pro-high-fidelity-hhexe-proxy-execution-(t1218001))
 - [Ultra-Pro High-Fidelity Control.exe Proxy Execution (T1218.002)](#ultra-pro-high-fidelity-controlexe-proxy-execution-(t1218002))
 - [Ultra-Pro High-Fidelity MsiExec Proxy Execution (T1218.003)](#ultra-pro-high-fidelity-msiexec-proxy-execution-(t1218003))
-- [Ultra-Pro High-Fidelity InstallUtil Proxy Execution (T1218.004)](#ultra-pro-high-fidelity-installutil-proxy-execution-(t1218004))
+- [InstallUtil .NET Proxy Execution](#installutil-net-proxy-execution)
 - [Suspicious Mshta Execution of Remote Script (High Fidelity)](#suspicious-mshta-execution-of-remote-script-(high-fidelity))
 - [Suspicious Msiexec Installation from Remote URL (High Fidelity)](#suspicious-msiexec-installation-from-remote-url-(high-fidelity))
 - [Odbcconf REGSVR Proxy Execution](#odbcconf-regsvr-proxy-execution)
@@ -5338,16 +5338,16 @@ and remote resource fetching while filtering out legitimate enterprise installer
 
 
 ---
-## Ultra-Pro High-Fidelity InstallUtil Proxy Execution (T1218.004)
+## InstallUtil .NET Proxy Execution
 - **ID:** `T1218_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [INSTALLUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the execution of InstallUtil.exe to proxy malicious code. 
-Focuses on the /u flag, non-standard parent processes, and execution 
-from writable directories, while filtering out legitimate .NET installations.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [INSTALLUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence abuse of InstallUtil.exe for proxy execution (MITRE ATT&CK T1218.004). Adversaries leverage InstallUtil to execute malicious .NET assemblies via installer/uninstaller methods.
+The rule focuses on suspicious uninstall flags, execution of assemblies from user-writable or remote paths, anomalous parent processes, relocated binary usage, and uncommon integrity contexts.
+Designed to reduce noise from legitimate .NET framework installation and MSI-driven deployment activity.
 
 
 #### 🚨 Response Playbook

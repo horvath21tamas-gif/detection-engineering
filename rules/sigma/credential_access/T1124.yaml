@@ -21,23 +21,23 @@ logsource:
 
 detection:
     selection_tools:
-        Image: '(w32tm\.exe|tzutil\.exe|net\.exe|net1\.exe)$'
-        CommandLine: '(Get-Date|Get-TimeZone|\[System\.DateTime\]::Now)'
+        processname: '(w32tm\.exe|tzutil\.exe|net\.exe|net1\.exe)$'
+        processcommandline: '(Get-Date|Get-TimeZone|\[System\.DateTime\]::Now)'
 
     selection_patterns:
-        CommandLine: '( /query| /g|time \\)'
+        processcommandline: '( /query| /g|time \\)'
 
     selection_suspicious_lineage:
-        ParentImage: '(winword\.exe|excel\.exe|outlook\.exe|httpd\.exe|wsmprovhost\.exe)$'
+        Parentprocessname: '(winword\.exe|excel\.exe|outlook\.exe|httpd\.exe|wsmprovhost\.exe)$'
         IntegrityLevel: 'Medium'
 
     selection_automation:
-        CommandLine: '(findstr|select-string| > |\$time\s?=)'
+        processcommandline: '(findstr|select-string| > |\$time\s?=)'
 
     filter_legit_noise:
         username: 'NT AUTHORITY\SYSTEM'
-        ParentImage: '(svchost\.exe|CcmExec\.exe|msiexec\.exe|explorer\.exe)$'
-        CommandLine: '(Program Files|\\AppData\\Local\\Google\\Chrome)'
+        Parentprocessname: '(svchost\.exe|CcmExec\.exe|msiexec\.exe|explorer\.exe)$'
+        processcommandline: '(Program Files|\\AppData\\Local\\Google\\Chrome)'
 
     condition: selection_tools and (selection_patterns or selection_suspicious_lineage or selection_automation) and not filter_legit_noise
 

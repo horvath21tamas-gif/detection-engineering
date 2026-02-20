@@ -3934,16 +3934,17 @@ hívások (winmm, dsound) gyanús folyamatvonalakkal (Shells, Office, W3WP)
 
 
 ---
-## Ultra-Pro High-Fidelity System Time Discovery (T1124)
+## Rendszeridő-felderítés (T1124)
 - **ID:** `T1124.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a célzott rendszeridő- vagy időzóna-felderítést.A rendellenes folyamatra összpontosít
-vonalak (pl. Office-alkalmazások, webszerverek) és meghatározott automatizálási minták
-homokozók elkerülésére vagy a geokerítés ellenőrzésére használják.
+- **Leírás:** Érzékeli a célzott rendszeridő- és időzóna-felderítési technikákat.
+A következőkre összpontosít:
+- Gyanús folyamatvonalak (irodai alkalmazások, webszerverek, parancsfájl-gazdagépek)
+- A homokozók elkerülésére vagy a geokerítésre általánosan használt automatizálási minták
+- Az időszámláláshoz használt CLI-eszközök és PowerShell/.NET API-k
+Nem tartalmazza az ismert rendszert, felügyeletet és jóindulatú automatizálást a hamis pozitívumok csökkentésére.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

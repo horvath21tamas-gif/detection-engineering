@@ -3934,16 +3934,17 @@ und anomale Befehlszeilenargumente, die von anstößigen Toolsets verwendet werd
 
 
 ---
-## Ultra-Pro High-Fidelity-Systemzeiterkennung (T1124)
+## Systemzeiterkennung (T1124)
 - **ID:** `T1124.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Zielsystemzeit oder die Zeitzonenerkennung.Konzentriert sich auf anomale Prozesse
-Abstammungslinien (z. B. Office-Apps, Webserver) und spezifische Automatisierungsmuster
-Wird für Sandbox-Umgehungs- oder Geofencing-Prüfungen verwendet.
+- **Beschreibung:** Erkennt gezielte Systemzeit- und Zeitzonenerkennungstechniken.
+Konzentriert sich auf:
+– Verdächtige Prozesslinien (Office-Apps, Webserver, Skript-Hosts)
+– Automatisierungsmuster, die häufig für Sandbox-Umgehung oder Geofencing verwendet werden
+– CLI-Tools und PowerShell/.NET-APIs für die Zeitaufzählung
+Ausgeschlossen sind bekannte Systeme, Verwaltung und harmlose Automatisierung, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

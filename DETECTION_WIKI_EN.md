@@ -4126,16 +4126,17 @@ and anomalous command-line arguments used by offensive toolsets.
 
 
 ---
-## Ultra-Pro High-Fidelity System Time Discovery (T1124)
+## System Time Discovery (T1124)
 - **ID:** `T1124.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted system time or time zone discovery. Focuses on anomalous process 
-lineages (e.g., Office apps, Web servers) and specific automation patterns 
-used for sandbox evasion or geofencing checks.
+- **Leírás:** Detects targeted system time and time zone discovery techniques.
+Focuses on:
+  - Suspicious process lineages (Office apps, Web servers, scripting hosts)
+  - Automation patterns commonly used for sandbox evasion or geofencing
+  - CLI tools and PowerShell/.NET APIs used for time enumeration
+Excludes known system, management, and benign automation to reduce false positives.
 
 
 #### 🚨 Response Playbook

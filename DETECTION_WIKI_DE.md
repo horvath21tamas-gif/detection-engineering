@@ -4129,16 +4129,15 @@ Sicherheitsagenten, um hochpräzise Warnungen zu gewährleisten.
 
 
 ---
-## Ultra-Pro-Erstellungsprozess mit Token (T1134.002)
+## Prozess mit Token erstellen (T1134.002)
 - **ID:** `T1134_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die unbefugte Prozesserstellung mithilfe duplizierter Token.
-Überwacht verdächtige Übergänge der Integritätsebene von „Medium“ zu „System“.
-ohne standardmäßige UAC-Erhöhung (Consent.exe) oder legitimen Dienststart.
+- **Beschreibung:** Erkennt die nicht autorisierte Prozesserstellung mithilfe duplizierter Token durch Überwachung:
+- Anstößige Tools und Token-Manipulationsbefehle
+- Verdächtige Übergänge der Integritätsstufe von „Mittel“ zu „SYSTEM“.
+– Filtert legitime Systemprozesse, UAC-Erhöhungen und Sicherheitsagenten heraus
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

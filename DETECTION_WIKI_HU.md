@@ -4129,16 +4129,15 @@ biztonsági ügynökök a nagy pontosságú riasztások biztosítására.
 
 
 ---
-## Ultra-Pro létrehozási folyamat tokennel (T1134.002)
+## Folyamat létrehozása tokennel (T1134.002)
 - **ID:** `T1134_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a jogosulatlan folyamat-létrehozást duplikált tokenek használatával.
-Figyeli a gyanús integritásszint-átmeneteket közepesről rendszerre
-szabványos UAC-emelés (Consent.exe) vagy jogszerű szolgáltatásindítás nélkül.
+- **Leírás:** Felismeri a jogosulatlan folyamat-létrehozást duplikált tokenek használatával a következő megfigyeléssel:
+- Támadó eszközök és token manipulációs parancsok
+- Gyanús integritásszint-átmenet közepesről RENDSZERRE
+- Kiszűri a legitim rendszerfolyamatokat, az UAC-emeléseket és a biztonsági ügynököket
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

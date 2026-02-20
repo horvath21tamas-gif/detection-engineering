@@ -4332,16 +4332,15 @@ security agents to ensure high-fidelity alerts.
 
 
 ---
-## Ultra-Pro Create Process with Token (T1134.002)
+## Create Process with Token (T1134.002)
 - **ID:** `T1134_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized process creation using duplicated tokens. 
-Monitors for suspicious integrity level transitions from Medium to System 
-without standard UAC elevation (Consent.exe) or legitimate service startup.
+- **Leírás:** Detects unauthorized process creation using duplicated tokens by monitoring:
+  - Offensive tools and token manipulation commands
+  - Suspicious integrity level transitions from Medium to SYSTEM
+  - Filters out legitimate system processes, UAC elevation, and security agents
 
 
 #### 🚨 Response Playbook

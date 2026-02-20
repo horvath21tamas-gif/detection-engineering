@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (TargetFilename in ("*\AppData\Roaming\Microsoft\Word\STARTUP\*", "*\AppData\Roaming\Microsoft\Excel\XLSTART\*", "*\AppData\Local\Microsoft\Office\AddIns\*")) and (TargetFilename in ("*.wll", "*.xll")) and (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\browser.exe", "*\outlook.exe")) and (not ((TargetFilename in ("*\Adobe\*", "*\Webex\*")) and (FolderPath in ("*C:\Program Files\*", "*C:\Program Files (x86)\*"))))
+| where TargetFilename matches regex "(\\\\AppData\\\\Roaming\\\\Microsoft\\\\Word\\\\STARTUP\\\\|\\\\AppData\\\\Roaming\\\\Microsoft\\\\Excel\\\\XLSTART\\\\|\\\\AppData\\\\Local\\\\Microsoft\\\\Office\\\\AddIns\\\\)" and TargetFilename matches regex "(\\.wll|\\.xll)$" and FolderPath matches regex "(msiexec\\.exe|OfficeClickToRun\\.exe|setup\\.exe|powershell\\.exe|cmd\\.exe|browser\\.exe|outlook\\.exe)$" and (not (TargetFilename matches regex "(\\\\Adobe\\\\|\\\\Webex\\\\)" and FolderPath matches regex "^(C:\\\\Program Files\\\\|C:\\\\Program Files \\(x86\\)\\\\)"))

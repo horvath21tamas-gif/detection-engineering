@@ -4365,16 +4365,15 @@ tetszőleges kód, amikor a felhasználó egy Outlook mappára kattint.
 
 
 ---
-## Ultra-Pro Office biztonsági házirendek manipulálása (T1137.005)
+## Az Office biztonsági házirendjének manipulálása (T1137.005)
 - **ID:** `T1137_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Microsoft Office biztonsági irányelveinek jogosulatlan gyengülését.
-A globális makró engedélyezésére, a nem megbízható hálózati helyek hozzáadására összpontosít,
-és a nem szabványos folyamatokból származó irányelvmódosítások.
+- **Leírás:** Felismeri a Microsoft Office biztonsági szabályzatainak jogosulatlan módosításait a következők figyelésével:
+- Globális makró engedélyezési változások
+- Nem megbízható hálózati helyek hozzáadása
+- Szabványmódosítások nem szabványos folyamatokból
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -4382,15 +4381,15 @@ A globális makró engedélyezésére, a nem megbízható hálózati helyek hozz
 
 
 ---
-## Ultra-Pro Office-bővítmény bináris perzisztencia (T1137.006)
+## Office-bővítmény bináris állandósága (T1137.006)
 - **ID:** `T1137_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Tárolás-igényes)
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Szűréssel észleli a jogosulatlan Office-bővítmények (.wll, .xll) fennmaradását
-nem megbízható fájlhelyek, aláíratlan binárisok és gyanús írási folyamatok.
+- **Leírás:** Felismeri a jogosulatlan Office-bővítmények (.wll, .xll) fennmaradását a következők figyelésével:
+- Nem megbízható fájlhelyek (Word/Excel indító mappák, AddIns mappa)
+- Office-bővítmények binárisai gyanús írókkal (PowerShell, beállítás, böngésző stb.)
+- Kizárja az ismert megbízható alkalmazásokat a hamis pozitívumok csökkentése érdekében
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

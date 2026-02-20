@@ -4582,16 +4582,15 @@ arbitrary code when a user clicks on an Outlook folder.
 
 
 ---
-## Ultra-Pro Office Security Policy Tampering (T1137.005)
+## Office Security Policy Tampering (T1137.005)
 - **ID:** `T1137_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized weakening of Microsoft Office security policies. 
-Focuses on global macro enablement, addition of untrusted network locations, 
-and policy modifications originating from non-standard processes.
+- **Leírás:** Detects unauthorized modifications of Microsoft Office security policies by monitoring:
+  - Global macro enablement changes
+  - Addition of untrusted network locations
+  - Policy modifications from non-standard processes
 
 
 #### 🚨 Response Playbook
@@ -4600,15 +4599,15 @@ and policy modifications originating from non-standard processes.
 
 
 ---
-## Ultra-Pro Office Add-in Binary Persistence (T1137.006)
+## Office Add-in Binary Persistence (T1137.006)
 - **ID:** `T1137_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Tárolás-igényes)
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized Office Add-in (.wll, .xll) persistence by filtering for 
-untrusted file locations, unsigned binaries, and suspicious writing processes.
+- **Leírás:** Detects unauthorized Office Add-in (.wll, .xll) persistence by monitoring:
+  - Untrusted file locations (Word/Excel startup folders, AddIns folder)
+  - Office add-in binaries with suspicious writers (PowerShell, setup, browser, etc.)
+  - Excludes known trusted applications to reduce false positives
 
 
 #### 🚨 Response Playbook

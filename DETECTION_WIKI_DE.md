@@ -4365,16 +4365,15 @@ willkürlicher Code, wenn ein Benutzer auf einen Outlook-Ordner klickt.
 
 
 ---
-## Manipulation von Ultra-Pro Office-Sicherheitsrichtlinien (T1137.005)
+## Manipulation der Sicherheitsrichtlinien des Büros (T1137.005)
 - **ID:** `T1137_005.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Medium (Mäßiger Geräuschpegel)
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Schwächungen der Microsoft Office-Sicherheitsrichtlinien.
-Konzentriert sich auf die globale Makroaktivierung, das Hinzufügen nicht vertrauenswürdiger Netzwerkstandorte,
-und Richtlinienänderungen, die aus nicht standardmäßigen Prozessen resultieren.
+- **Beschreibung:** Erkennt unbefugte Änderungen der Microsoft Office-Sicherheitsrichtlinien durch Überwachung:
+- Globale Änderungen bei der Makroaktivierung
+– Hinzufügen nicht vertrauenswürdiger Netzwerkstandorte
+- Richtlinienänderungen aufgrund nicht standardmäßiger Prozesse
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**
@@ -4382,15 +4381,15 @@ und Richtlinienänderungen, die aus nicht standardmäßigen Prozessen resultiere
 
 
 ---
-## Ultra-Pro Office Add-in Binäre Persistenz (T1137.006)
+## Binäre Persistenz des Office-Add-Ins (T1137.006)
 - **ID:** `T1137_006.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Speicherintensiv)
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Persistenz nicht autorisierter Office-Add-Ins (.wll, .xll) durch Filtern
-nicht vertrauenswürdige Dateispeicherorte, nicht signierte Binärdateien und verdächtige Schreibprozesse.
+- **Beschreibung:** Erkennt die Persistenz nicht autorisierter Office-Add-Ins (.wll, .xll) durch Überwachung:
+- Nicht vertrauenswürdige Dateispeicherorte (Word/Excel-Startordner, AddIns-Ordner)
+– Office-Add-In-Binärdateien mit verdächtigen Autoren (PowerShell, Setup, Browser usw.)
+– Schließt bekanntermaßen vertrauenswürdige Anwendungen aus, um Fehlalarme zu reduzieren
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

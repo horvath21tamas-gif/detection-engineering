@@ -4759,16 +4759,21 @@ a Mark-of-the-Web megkerülését szolgáló rosszindulatú programok gyakori mi
 
 
 ---
-## Ultra-Pro közlekedési jelzések és portok kopogtatása (T1205)
+## Forgalomjelző és port kopogtatási tevékenység (T1205)
 - **ID:** `T1205.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Port kopogtatás/Traffic Signaling megvalósítására vagy kiváltására irányuló kísérleteket.
-A nyers csomagrögzítő illesztőprogramok regisztrációjára összpontosít (Npcap/WinPcap)
-és gyanús tűzfalszabály-módosítások, amelyeket nem megbízható shellekből kezdeményeztek.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a port kopogtatás / közlekedési jelzés végrehajtására vagy kiváltására irányuló kísérleteket.
+Monitorok:
+- Nyers csomagrögzítő eszközök (Npcap/WinPcap/sniffer eszközök)
+- Gyanús tűzfalszabály-módosítások, amelyek lehetővé teszik az UDP/ICMP/Bármely portot
+- Végrehajtás nem megbízható parancsfájlokból vagy shell környezetekből
+
+Ezt a technikát gyakran használják a támadók, hogy lopva jelezzék a C2-t,
+megkerülheti a tűzfalakat, vagy rejtett szolgáltatásokat indíthat el.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -4777,16 +4782,21 @@ A nyers csomagrögzítő illesztőprogramok regisztrációjára összpontosít (
 
 
 ---
-## Ultra-Pro Port Knocking & Raw Socket Listener (T1205.001)
+## Port Knocking vagy Raw Socket Listener telepítése (T1205.001)
 - **ID:** `T1205_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Port Knocking jogosulatlan megvalósítását a
-nyers csomagrögzítő illesztőprogramok és gyanús tűzfal regisztrációja
-nem megbízható shellekből kezdeményezett módosítások (UDP/ICMP/LocalPort Any).
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a Port Knocking vagy a nyers csomag jogosulatlan megvalósítását
+hallgatók figyeléssel:
+- nyers csomagrögzítő illesztőprogramok/eszközök regisztrációja
+- gyanús tűzfalmódosítások, amelyek lehetővé teszik az UDP/ICMP/Bármely portot
+- végrehajtás nem megbízható parancsfájlokból vagy shell környezetekből
+
+A támadók kihasználhatják ezt a technikát, hogy lopva jelezzék a C2-t,
+megkerülheti a tűzfalakat, vagy rejtett szolgáltatásokat indíthat el.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

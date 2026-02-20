@@ -4999,16 +4999,21 @@ a common pattern for malware bypassing Mark-of-the-Web.
 
 
 ---
-## Ultra-Pro Traffic Signaling & Port Knocking (T1205)
+## Traffic Signaling and Port Knocking Activity (T1205)
 - **ID:** `T1205.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects attempts to implement or trigger Port Knocking/Traffic Signaling. 
-Focuses on the registration of raw packet capturing drivers (Npcap/WinPcap) 
-and suspicious firewall rule modifications initiated from untrusted shells.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects attempts to implement or trigger Port Knocking / Traffic Signaling.
+Monitors:
+  - Raw packet capture tools (Npcap/WinPcap/sniffer tools)
+  - Suspicious firewall rule modifications allowing UDP/ICMP/Any port
+  - Execution from untrusted scripting or shell environments
+
+This technique is often used by attackers to stealthily signal C2, 
+bypass firewalls, or trigger hidden services.
 
 
 #### 🚨 Response Playbook
@@ -5018,16 +5023,21 @@ and suspicious firewall rule modifications initiated from untrusted shells.
 
 
 ---
-## Ultra-Pro Port Knocking & Raw Socket Listener (T1205.001)
+## Port Knocking or Raw Socket Listener Deployment (T1205.001)
 - **ID:** `T1205_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized implementation of Port Knocking by monitoring the 
-registration of raw packet capturing drivers and suspicious firewall 
-modifications (UDP/ICMP/LocalPort Any) initiated from untrusted shells.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects unauthorized implementation of Port Knocking or raw packet 
+listeners by monitoring:
+  - registration of raw packet capturing drivers/tools
+  - suspicious firewall modifications allowing UDP/ICMP/Any port
+  - execution from untrusted scripting or shell environments
+
+Attackers may leverage this technique to stealthily signal C2, 
+bypass firewalls, or trigger hidden services.
 
 
 #### 🚨 Response Playbook

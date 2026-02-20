@@ -95,7 +95,7 @@
 | T1048.001 | CRITICAL | Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001) |
 | T1048.002 | CRITICAL | Ultra-Pro High-Fidelity Asymmetric Encrypted Exfiltration (T1048.002) |
 | T1048.003 | CRITICAL | Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003) |
-| T1049 | HIGH | Ultra-Pro High-Fidelity System Network Connections Discovery (T1049) |
+| T1049 | HIGH | Port Knocking or Raw Socket Listener Deployment (T1205.001), Traffic Signaling and Port Knocking Activity (T1205), Ultra-Pro High-Fidelity System Network Connections Discovery (T1049) |
 | T1052 | CRITICAL | Ultra-Pro High-Fidelity Physical Medium Exfiltration (T1052) |
 | T1052.001 | CRITICAL | Ultra-Pro High-Fidelity USB Exfiltration (T1052.001) |
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |

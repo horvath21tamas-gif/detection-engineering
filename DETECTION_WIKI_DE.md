@@ -4759,16 +4759,21 @@ ein häufiges Muster für Malware, die Mark-of-the-Web umgeht.
 
 
 ---
-## Ultraprofessionelle Verkehrssignalisierung und Port-Knocking (T1205)
+## Verkehrssignalisierung und Port-Knocking-Aktivität (T1205)
 - **ID:** `T1205.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt Versuche, Port Knocking/Traffic Signaling zu implementieren oder auszulösen.
-Konzentriert sich auf die Registrierung von Rohpaket-Erfassungstreibern (Npcap/WinPcap).
-und verdächtige Änderungen an Firewall-Regeln, die von nicht vertrauenswürdigen Shells aus initiiert werden.
+Monitore:
+- Tools zur Rohpaketerfassung (Npcap/WinPcap/Sniffer-Tools)
+– Verdächtige Änderungen an den Firewall-Regeln, die UDP/ICMP/einen beliebigen Port zulassen
+– Ausführung aus nicht vertrauenswürdigen Skript- oder Shell-Umgebungen
+
+Diese Technik wird häufig von Angreifern verwendet, um heimlich C2 zu signalisieren,
+Firewalls umgehen oder versteckte Dienste auslösen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -4777,16 +4782,21 @@ und verdächtige Änderungen an Firewall-Regeln, die von nicht vertrauenswürdig
 
 
 ---
-## Ultra-Pro Port Knocking & Raw Socket Listener (T1205.001)
+## Port Knocking oder Raw Socket Listener-Bereitstellung (T1205.001)
 - **ID:** `T1205_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die unbefugte Implementierung von Port Knocking durch Überwachung
-Registrierung von Rohpaket-Erfassungstreibern und verdächtiger Firewall
-Änderungen (UDP/ICMP/LocalPort Any), die von nicht vertrauenswürdigen Shells initiiert werden.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die unbefugte Implementierung von Port Knocking oder Rohpaketen
+Zuhörer durch Überwachung:
+- Registrierung von Treibern/Tools zur Rohpaketerfassung
+- Verdächtige Firewall-Änderungen, die UDP/ICMP/einen beliebigen Port zulassen
+- Ausführung aus nicht vertrauenswürdigen Skript- oder Shell-Umgebungen
+
+Angreifer können diese Technik nutzen, um heimlich C2 zu signalisieren,
+Firewalls umgehen oder versteckte Dienste auslösen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -4863,7 +4873,7 @@ Entwickelt, um Störungen durch legitime IT-Orchestrierung zu reduzieren.
 
 
 ---
-## Sandbox-Breakout/Ausnutzung der Privilegieneskalation (T1211)
+## Sandbox-Ausbruch/Ausnutzung der Privilegieneskalation (T1211)
 - **ID:** `T1211.yaml`
 - **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)

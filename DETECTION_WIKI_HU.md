@@ -4813,14 +4813,16 @@ megbízhatatlan folyamatvonalak, gyakori technika a titkos portkopogtatásra.
 
 
 ---
-## Ultra-Pro High-Fidelity Rogue DC topológia manipuláció (T1207)
+## Rogue DC / DCSárnyékérzékelés (T1207)
 - **ID:** `T1207.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli egy új nTDSDSA objektum létrehozását vagy a kritikus objektumok regisztrálását
-Domain Controller SPN-ek nem DC-fiókkal.Ez egy Rogue DC-re utal
-vagy DCShadow támadás.
+- **Leírás:** Érzékeli a gyanús tartományvezérlő topológia változásait, beleértve:
+- nTDSDSA objektumok létrehozása nem DC fiókokkal
+- A kritikus tartományvezérlő SPN-ek regisztrációja (E3514235 / GC)
+- Rogue DC telepítésre vagy DCShadow támadásokra utal
+A jogos domain rendszergazdák és a meglévő DC-fiókok kizárva a téves pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -4952,7 +4954,7 @@ A nem szabványos végrehajtási környezetek és a nem megbízható automatizá
 - Tömeges REST API lekérdezések
 - SharePoint Online Management Shell használata
 - Nem szabványos végrehajtási környezetek (nem rendszergazdai automatizálás)
-Az exportált tartalom átmeneti/nyilvános könyvtárakban történő állomásoztatása szintén meg van jelölve.
+Az exportált tartalom ideiglenes/nyilvános könyvtárakban történő állomásoztatása szintén meg van jelölve.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -5056,14 +5056,16 @@ untrusted process lineages, a common technique for stealthy port knocking.
 
 
 ---
-## Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207)
+## Rogue DC / DCShadow Detection (T1207)
 - **ID:** `T1207.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects the creation of a new nTDSDSA object or the registration of critical 
-Domain Controller SPNs by a non-DC account. This is indicative of a Rogue DC 
-or DCShadow attack.
+- **Leírás:** Detects suspicious Domain Controller topology changes, including:
+- Creation of nTDSDSA objects by non-DC accounts
+- Registration of critical Domain Controller SPNs (E3514235 / GC)
+- Indicative of Rogue DC deployment or DCShadow attacks
+Legitimate domain admins and existing DC accounts are excluded to reduce false positives.
 
 
 #### 🚨 Response Playbook

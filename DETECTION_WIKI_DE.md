@@ -4813,14 +4813,16 @@ nicht vertrauenswürdige Prozesslinien, eine gängige Technik für heimliches Po
 
 
 ---
-## Ultra-Pro High-Fidelity-Rogue-DC-Topologiemanipulation (T1207)
+## Rogue DC / DCShadow-Erkennung (T1207)
 - **ID:** `T1207.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt die Erstellung eines neuen nTDSDSA-Objekts oder die Registrierung eines kritischen Objekts
-Domänencontroller-SPNs durch ein Nicht-DC-Konto.Dies weist auf einen Rogue DC hin
-oder DCShadow-Angriff.
+- **Beschreibung:** Erkennt verdächtige Änderungen der Domänencontroller-Topologie, einschließlich:
+– Erstellung von nTDSDSA-Objekten durch Nicht-DC-Konten
+- Registrierung kritischer Domänencontroller-SPNs (E3514235 / GC)
+– Zeigt einen Rogue DC-Einsatz oder DCShadow-Angriffe an
+Um Fehlalarme zu reduzieren, werden legitime Domänenadministratoren und bestehende DC-Konten ausgeschlossen.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

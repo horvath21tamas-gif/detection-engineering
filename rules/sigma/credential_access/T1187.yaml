@@ -1,55 +1,53 @@
-title: Ultra-Pro High-Fidelity Forced Authentication (T1187)
+title: Forced Authentication (T1187)
 id: ce4ce3bf-299e-4c6a-a364-77bf88a5cc6d
 status: stable
 description: |
-    Detects forced authentication attempts (NTLM Relay/Coercion) by monitoring 
-    suspicious UNC path patterns, WebDAV redirection, and specific RPC 
-    interface exploitation used to trigger outbound authentication.
+    Detects forced authentication attempts (NTLM Relay/Coercion) by monitoring:
+      - Suspicious UNC path patterns
+      - WebDAV redirection
+      - RPC interface abuse (EfsRpc, PrinterChangeNotification, LSARPC, etc.)
+      - Outbound authentication triggers from untrusted processes
+
 author: hota05
 date: 2026-02-04
 tags:
     - attack.credential_access
     - attack.t1187
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_unc_coercion:
         CommandLine|contains:
             - '@80\'           
             - '@SSL\'         
             - 'davwwwroot'    
-            - '\\*\IPC$'      
+            - '\\*\IPC$'       
 
     selection_api_abuse:
         CommandLine|contains:
             - 'EfsRpcOpenFileRaw'              
             - 'RpcRemoteFindFirstPrinterChangeNotification' 
-            - 'lsarpc'                            
-            - 'efsrpc'                             
+        CommandLine|re: '(lsarpc|efsrpc)'
 
     selection_ip_unc:
-        CommandLine|re: '\\\\[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\\.*\$'
+        CommandLine|re: '\\\\(?:[0-9]{1,3}\.){3}[0-9]{1,3}\\.*\$'
 
     selection_untrusted_context:
-        Image|contains:
-            - '\Users\'
-            - '\Temp\'
-            - '\Downloads\'
-        Image|endswith:
-            - '\powershell.exe'
-            - '\cmd.exe'
-            - '\python.exe'
-            - '\rundll32.exe'
+        Image|re: '(?:\\Users\\|\\Temp\\|\\Downloads\\).*(powershell\.exe|cmd\.exe|python\.exe|rundll32\.exe)$'
 
     filter_domain_infra:
         CommandLine|contains:
-            - '\\SYSVOL\'
-            - '\\NETLOGON\'
-        ParentImage|endswith:
-            - '\services.exe'
-            - '\svchost.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+            - '\\SYSVOL\\'
+            - '\\NETLOGON\\'
+        ParentImage|re: '(services\.exe|svchost\.exe)$'
+        username: 'NT AUTHORITY\\SYSTEM'
 
-    condition: (selection_unc_coercion or selection_api_abuse or selection_ip_unc) and selection_untrusted_context and not filter_domain_infra
+    condition: >
+        (selection_unc_coercion or selection_api_abuse or selection_ip_unc)
+        and selection_untrusted_context
+        and not filter_domain_infra
+
 level: critical

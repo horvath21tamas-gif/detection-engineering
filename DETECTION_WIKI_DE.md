@@ -4314,16 +4314,15 @@ von nicht standardmäßigen Prozessen stammen oder auf verdächtige Dateispeiche
 
 
 ---
-## Ultra-Pro Office Test-DLL-Persistenz (T1137.002)
+## Office-Test-DLL-Persistenz (T1137.002)
 - **ID:** `T1137_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Medium (Mäßiger Geräuschpegel)
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Erstellung oder Änderung des Registrierungsschlüssels „Office Test“, der für verwendet wird
-DLL-Sideloading-Persistenz.High-Fidelity-Erkennungsfilter für Nicht-Standard
-Pfade und nicht autorisierte übergeordnete Prozesse.
+- **Beschreibung:** Erkennt die Erstellung oder Änderung des Registrierungsschlüssels „Office Test“, der für die DLL-Sideloading-Persistenz verwendet wird:
+– Überwacht nicht standardmäßige Pfade auf potenzielle DLL-Nutzlasten
+– Erkennt nicht autorisierte übergeordnete Prozesse, die auf diesen Schlüssel schreiben
+– Filtert legitime Installationsaktivitäten heraus
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

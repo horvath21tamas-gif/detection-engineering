@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (TargetObject contains "\Software\Microsoft\Office\" and TargetObject endswith "\Office Test\Special\Defrag") and ((Details in ("*\AppData\Local\*", "*\AppData\Roaming\*", "*C:\Users\Public\*", "*C:\Windows\Temp\*", "*\Downloads\*", "*\*")) or (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\reg.exe", "*\cscript.exe", "*\wscript.exe", "*\rundll32.exe"))) and (not (FolderPath in ("*\msiexec.exe", "*\OfficeClickToRun.exe")))
+| where TargetObject matches regex "\\\\Software\\\\Microsoft\\\\Office\\\\.*\\\\Office Test\\\\Special\\\\Defrag$" and (Details matches regex "(\\\\AppData\\\\Local\\\\|\\\\AppData\\\\Roaming\\\\|C:\\\\Users\\\\Public\\\\|C:\\\\Windows\\\\Temp\\\\|\\\\Downloads\\\\|\\\\\\\\)" or FolderPath matches regex "(powershell\\.exe|pwsh\\.exe|cmd\\.exe|reg\\.exe|cscript\\.exe|wscript\\.exe|rundll32\\.exe)$") and (not (Details matches regex "(C:\\\\Program Files\\\\|C:\\\\Program Files \\(x86\\)\\\\)" or FolderPath matches regex "(msiexec\\.exe|OfficeClickToRun\\.exe)$"))

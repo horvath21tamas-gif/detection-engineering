@@ -4528,16 +4528,15 @@ originating from non-standard processes or pointing to suspicious file locations
 
 
 ---
-## Ultra-Pro Office Test DLL Persistence (T1137.002)
+## Office Test DLL Persistence (T1137.002)
 - **ID:** `T1137_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the creation or modification of the 'Office Test' Registry key used for 
-DLL sideloading persistence. High-fidelity detection filters for non-standard 
-paths and unauthorized parent processes.
+- **Leírás:** Detects the creation or modification of the 'Office Test' registry key used for DLL sideloading persistence:
+  - Monitors non-standard paths for potential DLL payloads
+  - Detects unauthorized parent processes writing to this key
+  - Filters out legitimate installer activity
 
 
 #### 🚨 Response Playbook

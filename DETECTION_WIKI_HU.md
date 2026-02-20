@@ -4314,16 +4314,15 @@ nem szabványos folyamatokból ered, vagy gyanús fájlhelyekre mutat.
 
 
 ---
-## Ultra-Pro Office teszt DLL-perzisztencia (T1137.002)
+## Office teszt DLL-perzisztencia (T1137.002)
 - **ID:** `T1137_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a használt „Office Test” beállításkulcs létrehozását vagy módosítását
-DLL oldalbetöltési kitartás.Nagy pontosságú érzékelő szűrők nem szabványos használatra
-elérési utak és a jogosulatlan szülőfolyamatok.
+- **Leírás:** Érzékeli az „Office Test” rendszerleíró kulcs létrehozását vagy módosítását, amelyet a DLL oldalbetöltésének fennmaradásához használnak:
+- Figyeli a nem szabványos elérési utakat a potenciális DLL rakományokhoz
+- Érzékeli a jogosulatlan szülői folyamatokat, amelyek erre a kulcsra írnak
+- Kiszűri a törvényes telepítői tevékenységet
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

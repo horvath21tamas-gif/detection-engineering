@@ -362,7 +362,7 @@
 | T1546.012 | CRITICAL | Ultra-Pro IFEO Debugger Hijacking Detection (T1546.012) |
 | T1546.013 | HIGH | Ultra-Pro PowerShell Profile Injection Detection (T1546.013) |
 | T1546.014 | CRITICAL | Ultra-Pro WMI Event Subscription Persistence (T1546.014) |
-| T1546.015 | HIGH | Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
+| T1546.015 | CRITICAL | Suspicious COM Hijacking for User-Level Persistence (High Fidelity), Suspicious MMC Proxy Execution via Untrusted MSC or COM Hijack |
 | T1546.016 | HIGH | Ultra-Pro MSI Installer Custom Action Persistence (T1546.016) |
 | T1547 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása |
 | T1547.001 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása, Suspicious Registry Run Key Modification for User Persistence (High Fidelity) |

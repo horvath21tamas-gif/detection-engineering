@@ -5233,15 +5233,16 @@ argumentumok, nem szabványos fájlkiterjesztések és nem megbízható végreha
 
 
 ---
-## Ultra-Pro High-Fidelity MMC proxy végrehajtás (T1218.014)
+## Gyanús MMC-proxy-végrehajtás nem megbízható MSC-n vagy COM-eltérítésen keresztül
 - **ID:** `T1218_014.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli az mmc.exe-vel való visszaélést, hogy rosszindulatú kódot hajtson végre a Component Object Model (COM) segítségével.
-eltérítő vagy nem megbízható konzolfájlok (.msc).Kiszűri a jogos adminisztratív műveleteket.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli az mmc.exe gyanús végrehajtását, amelyet proxy-végrehajtáshoz (T1218.014) lehet visszaélni rosszindulatú .msc konzolfájlokon vagy COM-eltérítésen keresztül.
+A szabály azonosítja az mmc.exe fájlt, amely nem interaktív vagy parancsfájl-alapú szülőfolyamatokból indult, a konzolfájlok futtatását a felhasználó által írható helyekről, távoli elérési utakat vagy gyanús parancssori jelzőket.
+Nagy pontosságú észlelésre tervezték vállalati környezetekben, csökkentett téves pozitív eredményekkel.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -5405,7 +5406,7 @@ Az ellenfelek gyakran visszaélnek ezekkel az eszközökkel oldalirányú mozgá
 
 
 ---
-## Csoportházirend módosítása és visszaélés (T1484.001)
+## Csoportházirend-módosítás és visszaélés (T1484.001)
 - **ID:** `T1484_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

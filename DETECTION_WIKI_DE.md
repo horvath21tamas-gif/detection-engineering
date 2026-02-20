@@ -5233,15 +5233,16 @@ Argumente, nicht standardmäßige Dateierweiterungen und nicht vertrauenswürdig
 
 
 ---
-## Ultra-Pro High-Fidelity MMC Proxy Execution (T1218.014)
+## Verdächtige MMC-Proxy-Ausführung über nicht vertrauenswürdigen MSC- oder COM-Hijack
 - **ID:** `T1218_014.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt den Missbrauch von mmc.exe zur Ausführung von Schadcode über Component Object Model (COM)
-Entführung oder nicht vertrauenswürdige Konsolendateien (.msc).Filtert legitime Verwaltungsmaßnahmen heraus.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die verdächtige Ausführung von mmc.exe, die möglicherweise für die Proxy-Ausführung (T1218.014) über bösartige .msc-Konsolendateien oder COM-Hijacking missbraucht wird.
+Die Regel identifiziert mmc.exe, das von nicht interaktiven oder skriptbasierten übergeordneten Prozessen gestartet wird, die Ausführung von Konsolendateien von Speicherorten, die vom Benutzer beschreibbar sind, Remotepfade oder verdächtige Befehlszeilenindikatoren.
+Entwickelt für eine High-Fidelity-Erkennung in Unternehmensumgebungen mit weniger Fehlalarmen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

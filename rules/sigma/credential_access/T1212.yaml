@@ -1,25 +1,32 @@
-title: Ultra-Pro High-Fidelity Credential Service Exploitation (T1212)
-id: 7ddf4c76-5aad-47df-a5d1-409869953b5e
+title: Credential Service Exploitation Detection (T1212)
+id: e8c2f9b4-6a3d-4c88-9f4d-2b1a5e7f9c88
 status: stable
 description: |
-    Detects potential exploitation of authentication services (LSASS, LogonUI, Spooler) 
-    by identifying illegal child processes, unbacked memory execution, and known 
-    exploitation patterns while filtering legitimate security tool interference.
+    Detects potential exploitation of Windows authentication services 
+    (LSASS, LogonUI, Spooler, LSM) by monitoring:
+    - Illegal child processes spawned by credential services
+    - Memory injection / reflective loading / pipe abuse attempts
+    - Suspicious execution from user temp or download directories
+    Excludes legitimate security agent activity and Windows Error Reporting.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-20
+references:
+    - https://attack.mitre.org/techniques/T1212/
 tags:
     - attack.credential_access
     - attack.t1212
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_illegal_spawn:
         ParentImage|endswith:
-            - '\lsass.exe'       
-            - '\logonui.exe'      
-            - '\lsm.exe'         
-            - '\spoolsv.exe'  
+            - '\lsass.exe'
+            - '\logonui.exe'
+            - '\lsm.exe'
+            - '\spoolsv.exe'
         Image|endswith:
             - '\cmd.exe'
             - '\powershell.exe'
@@ -27,19 +34,27 @@ detection:
             - '\net.exe'
             - '\whoami.exe'
             - '\nltest.exe'
+            - '\rundll32.exe'
+            - '\mimikatz.exe'
 
     selection_exploit_cmd:
         CommandLine|contains:
             - ' -inject '
             - ' -leak '
             - ' --pipe '
-            - 'reflectiveloader' 
+            - 'reflectiveloader'
+            - 'sekurlsa'
+            - 'lsass::memory'
+            - 'procdump'
+            - 'SharpDump'
+            - 'Invoke-Mimikatz'
 
     selection_suspicious_source:
         ParentImage|contains:
             - '\Users\'
             - '\AppData\Local\Temp\'
             - '\Downloads\'
+            - '\Public\'
 
     filter_legit_wer:
         Image|endswith: '\WerFault.exe'
@@ -50,7 +65,27 @@ detection:
             - '\CrowdStrike\'
             - '\SentinelOne\'
             - '\Windows Defender\'
-        username: 'NT AUTHORITY\SYSTEM'
+            - '\Microsoft Defender ATP\'
+            - '\CarbonBlack\'
+        User|startswith:
+            - 'NT AUTHORITY\SYSTEM'
 
-    condition: (selection_illegal_spawn or selection_exploit_cmd) and not (filter_legit_wer or filter_security_agents)
+    condition: 
+        (selection_illegal_spawn or selection_exploit_cmd or selection_suspicious_source) 
+        and not (filter_legit_wer or filter_security_agents)
+
+fields:
+    - User
+    - Image
+    - ParentImage
+    - CommandLine
+    - IntegrityLevel
+    - CurrentDirectory
+    - Hashes
+
+falsepositives:
+    - Approved memory dump / credential audit tools (ProcDump, Task Manager, Sysinternals)
+    - Security software internal tests or scripts
+    - Windows Error Reporting (WerFault) interactions with LSASS
+
 level: critical

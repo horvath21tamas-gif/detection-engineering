@@ -1,51 +1,38 @@
-title: Ultra-Pro Office Test DLL Persistence (T1137.002)
+title: Office Test DLL Persistence (T1137.002)
 id: 756e1e79-216b-4f5d-8068-3cf6fd15cdab
 status: stable
 description: |
-    Detects the creation or modification of the 'Office Test' Registry key used for 
-    DLL sideloading persistence. High-fidelity detection filters for non-standard 
-    paths and unauthorized parent processes.
+    Detects the creation or modification of the 'Office Test' registry key used for DLL sideloading persistence:
+      - Monitors non-standard paths for potential DLL payloads
+      - Detects unauthorized parent processes writing to this key
+      - Filters out legitimate installer activity
+
 author: hota05
 date: 2026-02-02
 tags:
     - attack.persistence
     - attack.t1137.002
+
 logsource:
     product: windows
     category: registry_event
+
 detection:
     selection_registry_path:
-        TargetObject|contains: '\Software\Microsoft\Office\'
-        TargetObject|endswith: '\Office Test\Special\Defrag'
+        TargetObject|re: '\\Software\\Microsoft\\Office\\.*\\Office Test\\Special\\Defrag$'
 
     selection_suspicious_payload:
-        Details|contains:
-            - '\AppData\Local\'
-            - '\AppData\Roaming\'
-            - 'C:\Users\Public\'
-            - 'C:\Windows\Temp\'
-            - '\Downloads\'
-            - '\\' 
+        Details|re: '(\\AppData\\Local\\|\\AppData\\Roaming\\|C:\\Users\\Public\\|C:\\Windows\\Temp\\|\\Downloads\\|\\\\)'
 
     selection_suspicious_issuer:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\cmd.exe'
-            - '\reg.exe'
-            - '\cscript.exe'
-            - '\wscript.exe'
-            - '\rundll32.exe'
+        Image|re: '(powershell\.exe|pwsh\.exe|cmd\.exe|reg\.exe|cscript\.exe|wscript\.exe|rundll32\.exe)$'
 
     filter_trusted_locations:
-        Details|contains:
-            - 'C:\Program Files\'
-            - 'C:\Program Files (x86)\'
-    
-    filter_installers:
-        Image|endswith:
-            - '\msiexec.exe'
-            - '\OfficeClickToRun.exe'
+        Details|re: '(C:\\Program Files\\|C:\\Program Files \(x86\)\\)'
 
-    condition: selection_registry_path and (selection_suspicious_payload or selection_suspicious_issuer) and not filter_installers
+    filter_installers:
+        Image|re: '(msiexec\.exe|OfficeClickToRun\.exe)$'
+
+    condition: selection_registry_path and (selection_suspicious_payload or selection_suspicious_issuer) and not (filter_trusted_locations or filter_installers)
+
 level: critical

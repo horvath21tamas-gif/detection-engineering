@@ -5148,16 +5148,19 @@ process contexts or temporary directories.
 
 
 ---
-## Ultra-Pro High-Fidelity Confluence Scraping (T1213.001)
+## Confluence Mass Scraping Detection (T1213.001)
 - **ID:** `T1213_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized mass content extraction from Atlassian Confluence by 
-identifying suspicious API-driven read/export patterns originating from 
-untrusted shell contexts or temporary directories.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects unauthorized mass content extraction from Atlassian Confluence by monitoring:
+- Suspicious API-driven reads and exports (/rest/api/content, /rest/api/space)
+- CLI-based scraping tools (curl, wget, confluence-cli)
+- PowerShell/Python automation
+- Staging/export to temporary or public directories
+Non-standard execution contexts and untrusted automation are flagged.
 
 
 #### 🚨 Response Playbook

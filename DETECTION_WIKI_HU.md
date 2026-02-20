@@ -4900,16 +4900,19 @@ folyamatkontextusok vagy ideiglenes könyvtárak.
 
 
 ---
-## Ultra-Pro High-Fidelity összefolyó kaparás (T1213.001)
+## Összefolyási tömeg kaparás észlelése (T1213.001)
 - **ID:** `T1213_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a jogosulatlan tömeges tartalom kinyerését az Atlassian Confluence-ből
-a gyanús API-vezérelt olvasási/exportálási minták azonosítása, amelyek innen származnak
-nem megbízható shell-kontextusok vagy ideiglenes könyvtárak.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Észleli az Atlassian Confluence-ből az illetéktelen tömegtartalom-kinyerést a következő megfigyeléssel:
+- Gyanús API-vezérelt olvasások és exportálások (/rest/api/content, /rest/api/space)
+- CLI-alapú kaparóeszközök (curl, wget, confluence-cli)
+- PowerShell/Python automatizálás
+- Áthelyezés/exportálás ideiglenes vagy nyilvános könyvtárakba
+A nem szabványos végrehajtási környezetek és a nem megbízható automatizálás megjelölve.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

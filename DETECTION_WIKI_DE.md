@@ -4900,16 +4900,19 @@ Prozesskontexte oder temporäre Verzeichnisse.
 
 
 ---
-## Ultra-Pro High-Fidelity Confluence Scraping (T1213.001)
+## Confluence Mass Scraping-Erkennung (T1213.001)
 - **ID:** `T1213_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Massenextraktion von Inhalten aus Atlassian Confluence durch
-Identifizieren verdächtiger API-gesteuerter Lese-/Exportmuster, die ihren Ursprung haben
-nicht vertrauenswürdige Shell-Kontexte oder temporäre Verzeichnisse.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt unbefugte Massenextraktion von Inhalten aus Atlassian Confluence durch Überwachung:
+– Verdächtige API-gesteuerte Lese- und Exportvorgänge (/rest/api/content, /rest/api/space)
+- CLI-basierte Scraping-Tools (Curl, Wget, Confluence-Cli)
+- PowerShell/Python-Automatisierung
+- Staging/Export in temporäre oder öffentliche Verzeichnisse
+Nicht standardmäßige Ausführungskontexte und nicht vertrauenswürdige Automatisierung werden gekennzeichnet.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

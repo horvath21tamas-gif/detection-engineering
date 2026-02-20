@@ -4331,16 +4331,15 @@ Pfade und nicht autorisierte übergeordnete Prozesse.
 
 
 ---
-## Persistenz benutzerdefinierter Outlook-Formulare von Ultra-Pro (T1137.003)
+## Persistenz benutzerdefinierter Outlook-Formulare (T1137.003)
 - **ID:** `T1137_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Medium (Mäßiger Geräuschpegel)
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die nicht autorisierte Persistenz benutzerdefinierter Outlook-Formulare durch Überwachung
-nicht standardmäßige Registrierungsänderungen und das Spawnen verdächtiger Prozesse
-aus Outlook im Zusammenhang mit der Ausführung von Formularskripten.
+- **Beschreibung:** Erkennt die nicht autorisierte Persistenz benutzerdefinierter Outlook-Formulare durch Überwachung:
+- Nicht standardmäßige Registrierungsänderungen
+– Verdächtiges Prozess-Spawnen im Zusammenhang mit Formularskripten
+– Nutzlasten, die DLLs, VBS-Skripte oder Remote-Inhalte angeben
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**
@@ -4348,16 +4347,15 @@ aus Outlook im Zusammenhang mit der Ausführung von Formularskripten.
 
 
 ---
-## Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004)
+## Entführung und Umgehung der Outlook-Startseite (T1137.004)
 - **ID:** `T1137_004.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Medium (Mäßiger Geräuschpegel)
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Änderungen an den Startseiten von Outlook-Ordnern und den
-Aktivieren von WebView-Bypass-Schlüsseln.Diese Technik wird zur Ausführung verwendet
-willkürlicher Code, wenn ein Benutzer auf einen Outlook-Ordner klickt.
+- **Beschreibung:** Erkennt unbefugte Änderungen an Outlook-Ordner-Homepages und WebView-Umgehungsschlüsseln:
+– Verfolgt Registrierungsänderungen, die die Ausführung von beliebigem Code über Ordnerklicks ermöglichen
+- Überwacht verdächtige URLs oder lokale Dateiverweise
+– Erkennt nicht standardmäßige Prozesse, die versuchen, die Registrierung zu bearbeiten
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

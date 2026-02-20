@@ -4546,16 +4546,15 @@ paths and unauthorized parent processes.
 
 
 ---
-## Ultra-Pro Outlook Custom Forms Persistence (T1137.003)
+## Outlook Custom Forms Persistence (T1137.003)
 - **ID:** `T1137_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized Outlook Custom Forms persistence by monitoring 
-non-standard Registry modifications and suspicious process spawning 
-from Outlook related to form script execution.
+- **Leírás:** Detects unauthorized Outlook Custom Forms persistence by monitoring:
+  - Non-standard registry modifications
+  - Suspicious process spawning related to form scripts
+  - Payloads indicating DLLs, VBS scripts, or remote content
 
 
 #### 🚨 Response Playbook
@@ -4564,16 +4563,15 @@ from Outlook related to form script execution.
 
 
 ---
-## Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004)
+## Outlook Home Page Hijacking & Bypass (T1137.004)
 - **ID:** `T1137_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized modification of Outlook Folder Home Pages and the 
-enabling of WebView bypass keys. This technique is used to execute 
-arbitrary code when a user clicks on an Outlook folder.
+- **Leírás:** Detects unauthorized modification of Outlook Folder Home Pages and WebView bypass keys:
+  - Tracks registry changes that enable execution of arbitrary code via folder clicks
+  - Monitors suspicious URLs or local file references
+  - Detects non-standard processes attempting registry edits
 
 
 #### 🚨 Response Playbook

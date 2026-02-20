@@ -4331,16 +4331,15 @@ elérési utak és a jogosulatlan szülőfolyamatok.
 
 
 ---
-## Ultra-Pro Outlook egyéni űrlapok tartóssága (T1137.003)
+## Az Outlook egyéni űrlapjainak fennmaradása (T1137.003)
 - **ID:** `T1137_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Megfigyeléssel észleli a jogosulatlan Outlook egyéni űrlapok fennmaradását
-nem szabványos regisztrációs módosítások és gyanús folyamatok megjelenése
-az Outlookból az űrlapszkript végrehajtásához kapcsolódóan.
+- **Leírás:** Észleli a jogosulatlan Outlook egyéni űrlapok fennmaradását a következők figyelésével:
+- Nem szabványos regisztrációs módosítások
+- Gyanús folyamatok megjelenése űrlapszkriptekkel kapcsolatban
+- DLL-eket, VBS-szkripteket vagy távoli tartalmat jelző hasznos terhek
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -4348,16 +4347,15 @@ az Outlookból az űrlapszkript végrehajtásához kapcsolódóan.
 
 
 ---
-## Ultra-Pro Outlook kezdőlap eltérítése és megkerülése (T1137.004)
+## Az Outlook kezdőlapjának eltérítése és megkerülése (T1137.004)
 - **ID:** `T1137_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [GPSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az Outlook mappa kezdőlapjainak jogosulatlan módosítását és a
-WebView bypass kulcsok engedélyezése.Ezt a technikát használják a végrehajtáshoz
-tetszőleges kód, amikor a felhasználó egy Outlook mappára kattint.
+- **Leírás:** Érzékeli az Outlook mappa kezdőlapjainak és a WebView áthidaló kulcsainak jogosulatlan módosítását:
+- Nyomon követi azokat a rendszerleíró adatbázis-módosításokat, amelyek lehetővé teszik tetszőleges kód végrehajtását mappakattintásokkal
+- Figyeli a gyanús URL-eket vagy a helyi fájlhivatkozásokat
+- Érzékeli a nem szabványos folyamatokat, amelyek megpróbálják módosítani a rendszerleíró adatbázist
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

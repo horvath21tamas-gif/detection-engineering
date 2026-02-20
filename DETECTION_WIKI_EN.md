@@ -4314,16 +4314,16 @@ with LSASS to duplicate or steal security tokens.
 
 
 ---
-## Ultra-Pro Token Impersonation via LSASS Handle Duplication (T1134.001)
+## Token Impersonation via LSASS Handle Duplication (T1134.001)
 - **ID:** `T1134_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects token theft by monitoring for suspicious handle duplication requests 
-targeting LSASS.exe. It filters for known legitimate system processes and 
-security agents to ensure high-fidelity alerts.
+- **Leírás:** Detects token theft via suspicious handle duplication targeting LSASS.exe.
+High-fidelity detection by filtering:
+  - Known legitimate system processes
+  - Security agents
+  - Normal administrative activity
 
 
 #### 🚨 Response Playbook

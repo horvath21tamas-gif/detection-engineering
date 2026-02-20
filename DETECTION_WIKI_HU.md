@@ -4112,16 +4112,16 @@ LSASS segítségével biztonsági tokenek sokszorosításához vagy ellopásáho
 
 
 ---
-## Ultra-Pro token megszemélyesítés LSASS Handle Duplikáción keresztül (T1134.001)
+## Token megszemélyesítés LSASS Handle Duplikáción keresztül (T1134.001)
 - **ID:** `T1134_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli a jogkivonat-lopást a gyanús kezelési többszörözési kérelmek figyelésével
-az LSASS.exe fájlt célozva meg.Szűri az ismert legitim rendszerfolyamatokat és
-biztonsági ügynökök a nagy pontosságú riasztások biztosítására.
+- **Leírás:** A tokenlopást észleli az LSASS.exe fájlt célzó gyanús leírómásolatok révén.
+Nagy pontosságú észlelés szűréssel:
+- Ismert legitim rendszerfolyamatok
+- Biztonsági ügynökök
+- Normális adminisztratív tevékenység
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

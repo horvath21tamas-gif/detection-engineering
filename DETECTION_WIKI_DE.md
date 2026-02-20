@@ -4112,16 +4112,16 @@ mit LSASS, um Sicherheitstoken zu duplizieren oder zu stehlen.
 
 
 ---
-## Ultra-Pro-Token-Imitation über LSASS-Handle-Duplizierung (T1134.001)
+## Token-Identitätswechsel über LSASS-Handle-Duplizierung (T1134.001)
 - **ID:** `T1134_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Token-Diebstahl durch Überwachung auf verdächtige Handle-Duplizierungsanfragen
-Ziel ist LSASS.exe.Es filtert nach bekannten legitimen Systemprozessen und
-Sicherheitsagenten, um hochpräzise Warnungen zu gewährleisten.
+- **Beschreibung:** Erkennt Token-Diebstahl durch verdächtige Handle-Duplizierung, die auf LSASS.exe abzielt.
+High-Fidelity-Erkennung durch Filterung:
+- Bekannte legitime Systemprozesse
+- Sicherheitsagenten
+- Normale Verwaltungstätigkeit
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

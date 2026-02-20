@@ -1,52 +1,41 @@
-title: Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132)
+title: Data Encoding & Obfuscation (T1132)
 id: 69a086dc-f089-4d22-a153-d7d9c2a309bf
 status: stable
 description: |
-    Detects suspicious data encoding/decoding sequences used for C2 stealth. 
-    Focuses on programmatic Base64/Hex conversion within non-standard process 
-    lineages and the abuse of Certutil for payload deployment.
+    Detects suspicious data encoding/decoding sequences used for C2 stealth:
+      - Programmatic Base64/Hex conversion (FromBase64String, ToBase64String, System.Text.Encoding)
+      - Embedded payload headers (TVqQA, BXAAR)
+      - High-entropy command lines indicative of obfuscated payloads
+      - Non-standard process lineages abusing tools like rundll32, regsvr32, colorcpl
+    Filters legitimate administrative and system processes to reduce false positives.
+
 author: hota05
 date: 2026-02-09
 tags:
     - attack.command_and_control
     - attack.t1132.001
     - attack.t1132
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_encoding_logic:
-        CommandLine|contains:
-            - 'FromBase64String'           
-            - 'ToBase64String'             
-            - ' -decode '                  
-            - ' -encode '                 
-            - '[System.Text.Encoding]::'   
-            - 'BXAAR'                      
-            - 'TVqQA'                    
+        CommandLine: '(FromBase64String|ToBase64String|-decode\s|-encode\s|\\[System\.Text\.Encoding\\]::|BXAAR|TVqQA)'
 
     selection_entropy:
-        CommandLine|re: '(?i).*[a-z0-9+/]{500,}.*' 
+        CommandLine: '(?i).*[a-z0-9+/]{500,}.*'
 
     selection_context:
-        - ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\w3wp.exe'                 
-            - '\sqlservr.exe'             
-        - Image|endswith:
-            - '\rundll32.exe'
-            - '\regsvr32.exe'
-            - '\colorcpl.exe'
+        ParentImage: '(winword\.exe|excel\.exe|w3wp\.exe|sqlservr\.exe)$'
+        Image: '(rundll32\.exe|regsvr32\.exe|colorcpl\.exe)$'
 
     filter_legit_infra:
-        - CommandLine|contains:
-            - 'C:\Windows\System32\wbem\WmiPrvSE.exe'
-            - 'CCM\Cache'                  
-            - 'Microsoft.Cloud.Data'
-        - Image|endswith:
-            - '\powershell_ise.exe'       
-        - username: 'NT AUTHORITY\SYSTEM'
+        CommandLine: '(C:\\Windows\\System32\\wbem\\WmiPrvSE\.exe|CCM\\Cache|Microsoft\.Cloud\.Data)'
+        Image: 'powershell_ise\.exe$'
+        UserName: 'NT AUTHORITY\\SYSTEM'
 
-    condition: (selection_encoding_logic and selection_entropy) or (selection_context and selection_encoding_logic) and not filter_legit_infra
+    condition: ((selection_encoding_logic and selection_entropy) or (selection_context and selection_encoding_logic)) and not filter_legit_infra
+
 level: critical

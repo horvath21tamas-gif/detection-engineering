@@ -1,59 +1,38 @@
-title: Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)
+title: Trusted Developer Utility Proxy (T1127)
 id: 5ea8068d-33f7-4dac-8f7e-71c8fd198343
 status: stable
 description: |
-    Detects the abuse of trusted developer utilities (MSBuild, CSC, JSC) to proxy 
-    malicious code execution. Filters out legitimate CI/CD and IDE activity 
-    by focusing on suspicious parentage and command-line anomalies.
+    Detects abuse of trusted developer utilities (MSBuild, CSC, JSC, VBC) to proxy malicious code execution:
+      - Monitors suspicious parent processes (Office apps, browsers, scripts)
+      - Detects anomalous command-line arguments (remote paths, AppData, Temp)
+      - Filters out legitimate IDE/CI/CD activity (Visual Studio, Jenkins, Build Agents)
+    Focused on high-fidelity alerts for fileless or lateral C2 execution attempts.
+
 author: hota05
 date: 2026-02-03
 tags:
     - attack.defense_evasion
     - attack.t1127
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_tools:
-        - Image|endswith:
-            - '\msbuild.exe'
-            - '\csc.exe'
-            - '\jsc.exe'
-            - '\vbc.exe'
-        - OriginalFileName:
-            - 'MSBuild.exe'
-            - 'csc.exe'
-            - 'jsc.exe'
-            - 'vbc.exe'
+        Image: '(msbuild\.exe|csc\.exe|jsc\.exe|vbc\.exe)$'
+        OriginalFileName: '(MSBuild\.exe|csc\.exe|jsc\.exe|vbc\.exe)$'
 
     selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\powerpnt.exe'
-            - '\outlook.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\wmiprvse.exe' 
-            - '\mshta.exe'
+        ParentImage: '(winword\.exe|excel\.exe|powerpnt\.exe|outlook\.exe|chrome\.exe|msedge\.exe|wmiprvse\.exe|mshta\.exe)$'
 
     selection_cmd_anomalies:
-        CommandLine|contains:
-            - 'http'         
-            - '\\'          
-            - '\AppData\'    
-            - '\Temp\'
-            - '\Users\Public\'
+        CommandLine: '(http|\\\\|\\AppData\\|\\Temp\\|\\Users\\Public\\)'
 
     filter_trusted_dev:
-        ParentImage|contains:
-            - '\Microsoft Visual Studio\'
-            - '\Common7\IDE\'
-            - '\BuildAgent\'
-            - '\Jenkins\'
-        CommandLine|contains:
-            - 'C:\Program Files (x86)\Microsoft Visual Studio'
-            - 'C:\Windows\Microsoft.NET\Framework'
+        ParentImage: '(\\Microsoft Visual Studio\\|\\Common7\\IDE\\|\\BuildAgent\\|\\Jenkins\\)'
+        CommandLine: '(C:\\Program Files \(x86\)\\Microsoft Visual Studio|C:\\Windows\\Microsoft\.NET\\Framework)'
 
     condition: selection_tools and (selection_suspicious_parent or selection_cmd_anomalies) and not filter_trusted_dev
+
 level: critical

@@ -1,40 +1,44 @@
-title: Ultra-Pro SID-History Injection & DS Manipulation (T1134.005)
+title: SID-History Injection & DS Manipulation (T1134.005)
 id: 6752f192-2a6a-49ec-bf17-aaefaecbe92b
 status: stable
 description: |
-    Detects sIDHistory injection by monitoring Directory Service object changes (Event 5136) 
-    and correlating them with suspicious RPC calls or unauthorized LSASS access on Domain Controllers.
+    Detects sIDHistory injection and unauthorized Directory Service manipulations by monitoring:
+      - Active Directory object changes (EventID 5136) for sIDHistory
+      - Unauthorized LSASS handle access (EventID 10)
+      - Filters trusted migration tools and system accounts to reduce false positives
+
 author: hota05
 date: 2026-02-02
 tags:
     - attack.privilege_escalation
     - attack.persistence
     - attack.t1134.005
+
 logsource:
     product: windows
     service: security
     definition: 'Audit Directory Service Changes and Audit RPC Events must be enabled'
+
 detection:
     selection_ds_change:
         EventID: 5136
         AttributeCommonName: 'sIDHistory'
-        OperationType: '%%14674' 
+        OperationType: '%%14674'  
 
     selection_lsass_handle:
         EventID: 10
-        TargetImage|endswith: '\lsass.exe'
+        TargetImage|re: 'lsass\.exe$'
         GrantedAccess: '0x1438'
 
     filter_trusted_migration:
-        - SubjectUserName|contains: 
-            - 'ADMT_'           
-            - 'MSOL_'           
-        - SubjectUserSid: 'S-1-5-18' 
+        - SubjectUserName|re: '(ADMT_|MSOL_)'
+        - SubjectUserSid: 'S-1-5-18'
         - SubjectDomainName: 'NT AUTHORITY'
 
     selection_unauthorized_source:
-        Subjectlogonid:
-            - '0x3e7' 
+        SubjectLogonId:
+            - '0x3e7'
 
     condition: (selection_ds_change or selection_lsass_handle) and not filter_trusted_migration
+
 level: critical

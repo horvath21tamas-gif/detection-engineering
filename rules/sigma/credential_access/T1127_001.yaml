@@ -1,57 +1,40 @@
-title: Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001)
+title: MSBuild Proxy Execution (T1127.001)
 id: 6704c267-8909-404d-9e5a-fcfd7570038d
 status: stable
 description: |
-    Detects malicious MSBuild.exe execution by identifying anomalous parent processes, 
-    untrusted command-line arguments (like inline XML tasks), and excluding 
-    standard development and CI/CD environments.
+    Detects malicious MSBuild.exe proxy execution by monitoring:
+      - Anomalous parent processes (Office apps, browsers, scripts)
+      - Suspicious command-line arguments (inline XML tasks, remote paths)
+      - Excludes standard development and CI/CD environments (Visual Studio, Jenkins, Build Agents)
+    Helps detect fileless or C2 payload deployment via MSBuild without triggering standard dev tool alerts.
+
 author: hota05
 date: 2026-02-03
 tags:
     - attack.defense_evasion
     - attack.t1127.001
     - attack.t1127
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_img:
-        - Image|endswith: '\msbuild.exe'
-        - OriginalFileName: 'MSBuild.exe'
+        Image|endswith: '\msbuild.exe'
+        OriginalFileName: 'MSBuild.exe'
 
     selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\powerpnt.exe'
-            - '\outlook.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
-            - '\mshta.exe'
-            - '\wmiprvse.exe'
+        ParentImage: '(winword\.exe|excel\.exe|powerpnt\.exe|outlook\.exe|chrome\.exe|msedge\.exe|wscript\.exe|cscript\.exe|mshta\.exe|wmiprvse\.exe)$'
 
     selection_cmd_anomalies:
-        CommandLine|contains:
-            - 'http'         
-            - '\\'           
-            - '\AppData\'    
-            - '\Temp\'
-            - '.xml'        
+        CommandLine: '(http|\\\\|\\AppData\\|\\Temp\\|\.xml)'
 
     filter_trusted_dev:
-        ParentImage|contains:
-            - '\Microsoft Visual Studio\'
-            - '\Common7\IDE\'
-            - '\BuildAgent\'
-            - '\Jenkins\'
-            - '\ServiceFabric\'
-        CommandLine|contains:
-            - '/p:Configuration=' 
-            - '.sln'         
-            - '.csproj'          
-        User|contains: 'svc_build' 
+        ParentImage: '(\\Microsoft Visual Studio\\|\\Common7\\IDE\\|\\BuildAgent\\|\\Jenkins\\|\\ServiceFabric\\)'
+        CommandLine: '(/p:Configuration=|\.sln|\.csproj)'
+        User: 'svc_build'
 
     condition: selection_img and (selection_suspicious_parent or selection_cmd_anomalies) and not filter_trusted_dev
+
 level: critical

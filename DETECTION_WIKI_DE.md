@@ -4023,16 +4023,17 @@ DLL-Side-Loading oder Search Order Hijacking.
 
 
 ---
-## Ultraprofessionelle High-Fidelity-Datenkodierung und -Verschleierung (T1132)
+## Datenverschlüsselung und -verschleierung (T1132)
 - **ID:** `T1132.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt verdächtige Datenkodierungs-/Dekodierungssequenzen, die für C2-Stealth verwendet werden.
-Konzentriert sich auf die programmatische Base64/Hex-Konvertierung innerhalb eines nicht standardmäßigen Prozesses
-Abstammungslinien und der Missbrauch von Certutil für die Nutzlastbereitstellung.
+- **Beschreibung:** Erkennt verdächtige Datenkodierungs-/Dekodierungssequenzen, die für C2-Stealth verwendet werden:
+- Programmatische Base64/Hex-Konvertierung (FromBase64String, ToBase64String, System.Text.Encoding)
+- Eingebettete Payload-Header (TVqQA, BXAAR)
+- Befehlszeilen mit hoher Entropie, die auf verschleierte Nutzlasten hinweisen
+– Nicht standardmäßige Prozesslinien, die Tools wie rundll32, regsvr32, colorcpl missbrauchen
+Filtert legitime Verwaltungs- und Systemprozesse, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

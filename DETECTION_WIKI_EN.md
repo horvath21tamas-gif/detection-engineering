@@ -4220,16 +4220,17 @@ DLL Side-Loading or Search Order Hijacking.
 
 
 ---
-## Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132)
+## Data Encoding & Obfuscation (T1132)
 - **ID:** `T1132.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects suspicious data encoding/decoding sequences used for C2 stealth. 
-Focuses on programmatic Base64/Hex conversion within non-standard process 
-lineages and the abuse of Certutil for payload deployment.
+- **Leírás:** Detects suspicious data encoding/decoding sequences used for C2 stealth:
+  - Programmatic Base64/Hex conversion (FromBase64String, ToBase64String, System.Text.Encoding)
+  - Embedded payload headers (TVqQA, BXAAR)
+  - High-entropy command lines indicative of obfuscated payloads
+  - Non-standard process lineages abusing tools like rundll32, regsvr32, colorcpl
+Filters legitimate administrative and system processes to reduce false positives.
 
 
 #### 🚨 Response Playbook

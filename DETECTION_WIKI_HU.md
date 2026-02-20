@@ -4023,16 +4023,17 @@ DLL oldalsó betöltés vagy keresési rendelés eltérítése.
 
 
 ---
-## Ultra-Pro nagy hűségű adatkódolás és obfuszkálás (T1132)
+## Adatkódolás és obfuszkálás (T1132)
 - **ID:** `T1132.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a gyanús adatkódoló/dekódoló szekvenciákat, amelyeket a C2 lopakodáshoz használnak.
-A programozott Base64/Hex konverzióra összpontosít a nem szabványos folyamatokon belül
-leszármazási vonalak és a Certutil visszaélése a hasznos teher telepítése érdekében.
+- **Leírás:** Érzékeli a gyanús adatkódoló/dekódoló szekvenciákat, amelyeket a C2 titkosításhoz használnak:
+- Programozott Base64/Hex konverzió (FromBase64String, ToBase64String, System.Text.Encoding)
+- Beágyazott hasznos fejlécek (TVqQA, BXAAR)
+- Magas entrópiájú parancssorok, amelyek az elhomályosított hasznos adatokat jelzik
+- Nem szabványos folyamatvonalak, amelyek visszaélnek olyan eszközökkel, mint a rundll32, regsvr32, colorcpl
+Szűri a jogos adminisztrációs és rendszerfolyamatokat a téves pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -4394,7 +4395,7 @@ a forrás IP-hírneve, valamint az engedélyezett kiépítési szolgáltatási t
 
 
 ---
-## Lopakodó deobfuszkálás/dekódolás (T1140)
+## Lopakodó deobfuszkáció/dekódolás (T1140)
 - **ID:** `T1140.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

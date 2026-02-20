@@ -1,65 +1,40 @@
-title: Ultra-Pro Stealthy Deobfuscation/Decoding (T1140)
+title: Stealthy Deobfuscation/Decoding (T1140)
 id: e0f0c9b6-01b4-4cd8-b505-9eeae318a7d4
 status: stable
 description: |
-    Detects high-fidelity deobfuscation by monitoring native tools (certutil, expand) 
-    decoding binaries from non-executable extensions (txt, jpg, xml) initiated 
-    by suspicious parents or targeting sensitive temp directories.
+    Detects deobfuscation and decoding activity by monitoring:
+      - Native Windows tools (certutil, expand, extrac32)
+      - Decoding binaries from non-executable sources (txt, jpg, xml, log)
+      - Suspicious parent processes or targeting sensitive/untrusted directories
+
 author: hota05
 date: 2026-02-03
 tags:
     - attack.defense_evasion
     - attack.t1140
+
 logsource:
     product: windows
     category: process_creation
+
 detection:
     selection_tools:
-        - Image|endswith: '\certutil.exe'
-          CommandLine|contains:
-              - '-decode'
-              - '-decodehex'
-        - Image|endswith: 
-              - '\expand.exe'
-              - '\extrac32.exe'
-          CommandLine|contains:
-              - '.txt' 
-              - '.jpg'
-              - '.png'
-              - '.xml'
-              - '.log'
+        Image|re: '(certutil\.exe|expand\.exe|extrac32\.exe)$'
+        CommandLine|re: '(-decode|-decodehex|(\.txt|\.jpg|\.png|\.xml|\.log))'
 
     selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
-            - '\nginx.exe'
-            - '\httpd.exe'
-            - '\mshta.exe'
-
-    filter_trusted_installers:
-        ParentImage|contains:
-            - '\Windows\servicing\TrustedInstaller.exe'
-            - '\CcmExec.exe'        
-            - '\Package Cache\'     
-        Image|contains:
-            - '\Program Files\'
-            - '\Windows\System32\'
-        CommandLine|contains:
-            - 'Microsoft\Windows\SoftwareDistribution' 
+        ParentImage|re: '(cmd\.exe|powershell\.exe|pwsh\.exe|wscript\.exe|cscript\.exe|nginx\.exe|httpd\.exe|mshta\.exe)$'
 
     selection_suspicious_output:
-        CommandLine|contains:
-            - '\Users\'
-            - '\Temp\'
-            - '\AppData\'
-            - '.exe'
-            - '.dll'
-            - '.vbs'
-            - '.ps1'
+        CommandLine|re: '(\\Users\\|\\Temp\\|\\AppData\\).*|(\.exe|\.dll|\.vbs|\.ps1)$'
 
-    condition: selection_tools and (selection_suspicious_parent or (selection_suspicious_output and not filter_trusted_installers))
+    filter_trusted_installers:
+        ParentImage|re: '(\\Windows\\servicing\\TrustedInstaller\.exe|\\CcmExec\.exe|\\Package Cache\\)'
+        Image|re: '(\\Program Files\\|\\Windows\\System32\\)'
+        CommandLine|re: 'Microsoft\\Windows\\SoftwareDistribution'
+
+    condition: >
+        selection_tools 
+        and (selection_suspicious_parent or (selection_suspicious_output and not filter_trusted_installers))
+
 level: high

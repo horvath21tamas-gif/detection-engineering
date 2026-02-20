@@ -5044,16 +5044,16 @@ oder das Abrufen von Remote-Payloads, während die legitime Verwendung von Hilfe
 
 
 ---
-## Ultra-Pro High-Fidelity Control.exe Proxy-Ausführung (T1218.002)
+## Control.exe CPL/DLL-Proxy-Ausführung
 - **ID:** `T1218_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONTROL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt den Missbrauch von control.exe, um schädliche .CPL- oder DLL-Dateien von nicht vertrauenswürdigen Pfaden zu laden.
-Nutzt OriginalFileName, um umbenannte Binärdateien abzufangen, und konzentriert sich auf grenzüberschreitende Dateien
-Prozessausführung (z. B. Office- oder Scripting-Hosts starten die Systemsteuerung).
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONTROL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochzuverlässigen Missbrauch von control.exe für die Proxy-Ausführung (MITRE ATT&CK T1218.002).Angreifer können control.exe nutzen, um bösartige .cpl- oder DLL-Nutzlasten von vom Benutzer beschreibbaren oder entfernten Standorten zu laden.
+Die Regel konzentriert sich auf anomale übergeordnete Prozesse, die Ausführung von control.exe außerhalb von Standardsystemverzeichnissen, verdächtige Befehlszeilenerweiterungen, vom Benutzer beschreibbare Pfade und ungewöhnliche Integritätskontexte.OriginalFileName wird verwendet, um umbenannte Binärdateien zu erkennen.
+Entwickelt, um Lärm durch legitime Aktivitäten des Control Panels zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -5062,16 +5062,16 @@ Prozessausführung (z. B. Office- oder Scripting-Hosts starten die Systemsteueru
 
 
 ---
-## Ultra-Pro High-Fidelity MsiExec Proxy Execution (T1218.003)
+## MsiExec-Proxy-Ausführung
 - **ID:** `T1218_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt den Missbrauch von msiexec.exe zur Ausführung bösartiger Payloads.
-Konzentriert sich auf nicht standardmäßige Eltern-Kind-Beziehungen (z. B. Office zu MsiExec)
-und Remote-Ressourcenabruf, während legitime Unternehmensinstallationsprogramme herausgefiltert werden.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochzuverlässigen Missbrauch von msiexec.exe für die Proxy-Ausführung (MITRE ATT&CK T1218.003).Angreifer nutzen msiexec häufig, um Remote-MSI-Pakete herunterzuladen und auszuführen oder Nutzlasten unbemerkt zu installieren.
+Die Regel konzentriert sich auf die Remote-Ressourcenausführung, stille Installationsflags, die vom Benutzer beschreibbare Pfadausführung, verdächtige übergeordnete Prozesse, verschobene Binärdateien und anomale Integritätskontexte.
+Entwickelt, um Störungen durch legitime Frameworks für die Bereitstellung und Verwaltung von Unternehmenssoftware zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

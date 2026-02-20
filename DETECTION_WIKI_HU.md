@@ -5044,16 +5044,16 @@ vagy távoli rakományok lekérése, miközben kiszűri a jogos súgófájlok ha
 
 
 ---
-## Ultra-Pro High-Fidelity Control.exe proxy végrehajtás (T1218.002)
+## Control.exe CPL/DLL proxy végrehajtása
 - **ID:** `T1218_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONTROL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli a control.exe-vel való visszaélést, hogy rosszindulatú .CPL- vagy DLL-fájlokat töltsön be nem megbízható útvonalakról.
-Használja az OriginalFileName-et az átnevezett binárisok elkapásához, és a határokon átnyúló fájlok elérésére összpontosít
-folyamatvégrehajtás (pl. Office vagy Scripting gazdagépek elindítják a Vezérlőpultot).
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONTROL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Nagy megbízhatóságú visszaélést észlel a control.exe-vel a proxy végrehajtásához (MITRE ATT&CK T1218.002).Az ellenfelek kihasználhatják a control.exe fájlt, hogy rosszindulatú .cpl vagy DLL fájlokat töltsenek be a felhasználó által írható vagy távoli helyekről.
+A szabály a rendellenes szülőfolyamatokra, a control.exe szabványos rendszerkönyvtárakon kívüli végrehajtására, a gyanús parancssori kiterjesztésekre, a felhasználók által írható útvonalakra és a szokatlan integritási környezetekre összpontosít.Az OriginalFileName az átnevezett bináris fájlok észlelésére szolgál.
+Úgy tervezték, hogy csökkentse a vezérlőpult törvényes tevékenységéből származó zajt.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -5062,16 +5062,16 @@ folyamatvégrehajtás (pl. Office vagy Scripting gazdagépek elindítják a Vez�
 
 
 ---
-## Ultra-Pro High-Fidelity MsiExec proxy végrehajtás (T1218.003)
+## MsiExec proxy végrehajtás
 - **ID:** `T1218_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli az msiexec.exe visszaélést rosszindulatú rakományok végrehajtására.
-A nem szabványos szülő-gyermek kapcsolatokra összpontosít (pl. Office to MsiExec)
-és távoli erőforrás-lekérés, miközben kiszűri a törvényes vállalati telepítőket.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Észleli az msiexec.exe nagy megbízhatóságú visszaélést a proxy végrehajtásához (MITRE ATT&CK T1218.003).Az ellenfelek általában kihasználják az msiexec-et távoli MSI-csomagok letöltéséhez és végrehajtásához, vagy a hasznos terhek csendes telepítéséhez.
+A szabály a távoli erőforrás-végrehajtásra, a csendes telepítési jelzőkre, a felhasználó által írható útvonal-végrehajtásra, a gyanús szülőfolyamatokra, az áthelyezett binárisokra és a rendellenes integritási környezetekre összpontosít.
+Úgy tervezték, hogy csökkentse a legális vállalati szoftvertelepítési és -felügyeleti keretrendszerekből származó zajt.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

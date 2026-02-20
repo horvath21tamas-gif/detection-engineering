@@ -97,7 +97,7 @@ detection:
     IntegrityLevel: 'High'
 
   filter_trustedinstaller:
-    User: 'NT AUTHORITY\SYSTEM'
+    username: 'NT AUTHORITY\SYSTEM'
     ParentImage|endswith: '\trustedinstaller.exe'
 
   condition: >

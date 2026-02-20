@@ -5300,16 +5300,16 @@ or fetching remote payloads, while filtering out legitimate help file usage.
 
 
 ---
-## Ultra-Pro High-Fidelity Control.exe Proxy Execution (T1218.002)
+## Control.exe CPL/DLL Proxy Execution
 - **ID:** `T1218_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONTROL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the abuse of control.exe to load malicious .CPL or DLL files from untrusted paths.
-Leverages OriginalFileName to catch renamed binaries and focuses on cross-boundary 
-process execution (e.g., Office or Scripting hosts launching Control Panel).
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONTROL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence abuse of control.exe for proxy execution (MITRE ATT&CK T1218.002). Adversaries may leverage control.exe to load malicious .cpl or DLL payloads from user-writable or remote locations.
+The rule focuses on anomalous parent processes, execution of control.exe outside standard system directories, suspicious command-line extensions, user-writable paths, and uncommon integrity contexts. OriginalFileName is used to detect renamed binaries.
+Designed to reduce noise from legitimate Control Panel activity.
 
 
 #### 🚨 Response Playbook
@@ -5319,16 +5319,16 @@ process execution (e.g., Office or Scripting hosts launching Control Panel).
 
 
 ---
-## Ultra-Pro High-Fidelity MsiExec Proxy Execution (T1218.003)
+## MsiExec Proxy Execution
 - **ID:** `T1218_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the abuse of msiexec.exe to execute malicious payloads. 
-Focuses on non-standard parent-child relationships (e.g., Office to MsiExec) 
-and remote resource fetching while filtering out legitimate enterprise installers.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence abuse of msiexec.exe for proxy execution (MITRE ATT&CK T1218.003). Adversaries commonly leverage msiexec to download and execute remote MSI packages or silently install payloads.
+The rule focuses on remote resource execution, silent installation flags, user-writable path execution, suspicious parent processes, relocated binaries, and anomalous integrity contexts.
+Designed to reduce noise from legitimate enterprise software deployment and management frameworks.
 
 
 #### 🚨 Response Playbook

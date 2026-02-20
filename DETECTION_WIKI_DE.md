@@ -3898,16 +3898,14 @@ Gemeinsame Bereitstellungsbereiche, die aus interaktiven oder Web-Shells stammen
 
 
 ---
-## Ultra-Pro High-Fidelity-Peripheriegeräteerkennung (T1120)
+## Erkennung von Peripheriegeräten (T1120)
 - **ID:** `T1120.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [PNPUTIL.EXE](https://lolbas-project.github.io/lolbas/), [QUERY.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die gezielte Aufzählung von Peripheriegeräten mit Schwerpunkt auf USB- und Speichergeräten.
-Filtert durch Analyse legitime System-PnP-Aktivitäten und Treiberverwaltung heraus
-Prozessintegrität, Eltern-Kind-Beziehungen und spezifische Metadatenabfragen.
+- **Beschreibung:** Erkennt die gezielte Aufzählung von Peripheriegeräten und konzentriert sich dabei auf USB-, Festplatten- und Netzwerkgeräte.
+Die High-Fidelity-Erkennung filtert legitime System-PnP-Aktivitäten und Treiberverwaltung
+durch Analyse der Prozessintegrität, Eltern-Kind-Beziehungen und Metadaten-Abfragemuster.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

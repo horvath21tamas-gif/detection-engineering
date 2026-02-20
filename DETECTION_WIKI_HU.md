@@ -3898,16 +3898,14 @@ interaktív vagy webes shellekből származó közös színpadi területek.
 
 
 ---
-## Ultra-Pro High-Fidelity perifériás eszközök felfedezése (T1120)
+## Perifériás eszköz felfedezése (T1120)
 - **ID:** `T1120.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [PNPUTIL.EXE](https://lolbas-project.github.io/lolbas/), [QUERY.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a perifériás eszközök célzott felsorolását, az USB-re és a tárolóeszközökre összpontosítva.
-Elemzéssel kiszűri a rendszer jogszerű PnP-tevékenységét és az illesztőprogram-kezelést
-folyamat integritása, szülő-gyermek kapcsolatok és konkrét metaadatlekérdezések.
+- **Leírás:** Érzékeli a perifériás eszközök célzott felsorolását, az USB-re, lemezre és hálózati eszközökre összpontosítva.
+A nagy pontosságú észlelés kiszűri a jogszerű PnP-tevékenységet és az illesztőprogram-kezelést
+a folyamat integritásának, a szülő-gyermek kapcsolatok és a metaadatlekérdezési minták elemzésével.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

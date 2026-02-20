@@ -4088,16 +4088,14 @@ common staging areas, originating from interactive or web shells.
 
 
 ---
-## Ultra-Pro High-Fidelity Peripheral Device Discovery (T1120)
+## Peripheral Device Discovery (T1120)
 - **ID:** `T1120.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [PNPUTIL.EXE](https://lolbas-project.github.io/lolbas/), [QUERY.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted peripheral device enumeration focusing on USB and storage devices.
-Filters out legitimate system PnP activity and driver management by analyzing 
-process integrity, parent-child relationships, and specific metadata queries.
+- **Leírás:** Detects targeted peripheral device enumeration, focusing on USB, disk, and network devices.
+High-fidelity detection filters legitimate system PnP activity and driver management
+by analyzing process integrity, parent-child relationships, and metadata query patterns.
 
 
 #### 🚨 Response Playbook

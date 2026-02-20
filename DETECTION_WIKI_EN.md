@@ -4370,17 +4370,15 @@ correlates with Logon Type 9 (NewCredentials) anomalies from untrusted parents.
 
 
 ---
-## Ultra-Pro Parent PID Spoofing & Process Tree Violation (T1134.004)
+## Parent PID Spoofing & Process Tree Violation (T1134.004)
 - **ID:** `T1134_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BASH.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [CSC.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects Parent PID spoofing by identifying violations of the Windows process 
-hierarchical model. Specifically targets critical system processes (LSASS, 
-Spooler, CSRSS) spawning shells or script interpreters, which is architecturally 
-impossible in a healthy environment.
+- **Leírás:** Detects Parent PID spoofing and process tree violations by monitoring:
+  - Critical system processes (LSASS, CSRSS, Spooler) spawning shells or interpreters
+  - User-level processes spawning unusual system utilities
+  - Filters trusted Windows behavior and legitimate WMI/scheduled task activity
 
 
 #### 🚨 Response Playbook
@@ -4390,13 +4388,15 @@ impossible in a healthy environment.
 
 
 ---
-## Ultra-Pro SID-History Injection & DS Manipulation (T1134.005)
+## SID-History Injection & DS Manipulation (T1134.005)
 - **ID:** `T1134_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects sIDHistory injection by monitoring Directory Service object changes (Event 5136) 
-and correlating them with suspicious RPC calls or unauthorized LSASS access on Domain Controllers.
+- **Leírás:** Detects sIDHistory injection and unauthorized Directory Service manipulations by monitoring:
+  - Active Directory object changes (EventID 5136) for sIDHistory
+  - Unauthorized LSASS handle access (EventID 10)
+  - Filters trusted migration tools and system accounts to reduce false positives
 
 
 #### 🚨 Response Playbook

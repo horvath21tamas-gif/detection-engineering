@@ -4165,17 +4165,15 @@ korrelál a nem megbízható szülőktől származó 9-es bejelentkezési (NewCr
 
 
 ---
-## Ultra-Pro Parent PID-hamisítás és folyamatfa megsértése (T1134.004)
+## Szülői PID-hamisítás és folyamatfa megsértése (T1134.004)
 - **ID:** `T1134_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BASH.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [CSC.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A Windows-folyamat megsértésének azonosításával észleli a szülői PID-hamisítást
-hierarchikus modell.Kifejezetten a kritikus rendszerfolyamatokat célozza meg (LSASS,
-Spooler, CSRSS) spawning shell vagy script interpreters, ami építészetileg
-egészséges környezetben lehetetlen.
+- **Leírás:** Felismeri a szülői PID-hamisítást és a folyamatfa megsértését a következők figyelésével:
+- A kritikus rendszerfolyamatok (LSASS, CSRSS, Spooler) shell-eket vagy értelmezőket hoznak létre
+- A felhasználói szintű folyamatok szokatlan rendszer segédprogramokat eredményeznek
+- Szűri a megbízható Windows viselkedést és a jogos WMI/ütemezett feladattevékenységet
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -4184,13 +4182,15 @@ egészséges környezetben lehetetlen.
 
 
 ---
-## Ultra-Pro SID-History Injection & DS Manipulation (T1134.005)
+## SID-előzmény befecskendezés és DS-manipuláció (T1134.005)
 - **ID:** `T1134_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli az sIDHistory injekciót a Directory Service objektum változásainak figyelésével (5136. esemény)
-és korrelálja azokat gyanús RPC-hívásokkal vagy jogosulatlan LSASS-hozzáféréssel a tartományvezérlőkön.
+- **Leírás:** Érzékeli az sIDHistory injekciót és a címtárszolgáltatás jogosulatlan manipulációit a következők figyelésével:
+- Az Active Directory objektum változásai (EventID 5136) az sIDHistory számára
+- Jogosulatlan LSASS-leíró hozzáférés (EventID 10)
+- Szűri a megbízható migrációs eszközöket és a rendszerfiókokat a hamis pozitívumok csökkentése érdekében
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

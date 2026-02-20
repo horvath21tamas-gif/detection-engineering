@@ -4165,17 +4165,15 @@ korreliert mit Anomalien des Anmeldetyps 9 (NewCredentials) von nicht vertrauens
 
 
 ---
-## Ultra-Pro-Parent-PID-Spoofing und Prozessbaumverletzung (T1134.004)
+## Übergeordnetes PID-Spoofing und Verletzung des Prozessbaums (T1134.004)
 - **ID:** `T1134_004.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BASH.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [CSC.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Parent-PID-Spoofing durch Identifizierung von Verstößen gegen den Windows-Prozess
-hierarchisches Modell.Konzentriert sich speziell auf kritische Systemprozesse (LSASS,
-Spooler, CSRSS), die Shells oder Skriptinterpreter erzeugen, was architektonisch sinnvoll ist
-in einer gesunden Umgebung unmöglich.
+- **Beschreibung:** Erkennt Parent-PID-Spoofing und Prozessbaumverletzungen durch Überwachung:
+- Kritische Systemprozesse (LSASS, CSRSS, Spooler), die Shells oder Interpreter erzeugen
+- Prozesse auf Benutzerebene, die ungewöhnliche Systemdienstprogramme hervorbringen
+– Filtert vertrauenswürdiges Windows-Verhalten und legitime WMI-/geplante Aufgabenaktivitäten
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -4184,13 +4182,15 @@ in einer gesunden Umgebung unmöglich.
 
 
 ---
-## Ultra-Pro SID-History-Injektion und DS-Manipulation (T1134.005)
+## SID-History-Injektion und DS-Manipulation (T1134.005)
 - **ID:** `T1134_005.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt die sIDHistory-Injection durch Überwachung von Änderungen an Verzeichnisdienstobjekten (Ereignis 5136).
-und sie mit verdächtigen RPC-Aufrufen oder unbefugtem LSASS-Zugriff auf Domänencontrollern in Zusammenhang zu bringen.
+- **Beschreibung:** Erkennt sIDHistory-Injection und unbefugte Verzeichnisdienstmanipulationen durch Überwachung:
+– Active Directory-Objektänderungen (EventID 5136) für sIDHistory
+– Unautorisierter LSASS-Handle-Zugriff (EventID 10)
+– Filtert vertrauenswürdige Migrationstools und Systemkonten, um Fehlalarme zu reduzieren
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

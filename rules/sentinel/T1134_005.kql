@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where ((EventID =~ 5136 and AttributeCommonName =~ "sIDHistory" and OperationType =~ "%%14674") or (EventID =~ 10 and TargetImage endswith "\lsass.exe" and GrantedAccess =~ "0x1438")) and (not ((SubjectUserName in ("*ADMT_*", "*MSOL_*")) or SubjectUserSid =~ "S-1-5-18" or SubjectDomainName =~ "NT AUTHORITY"))
+| where ((EventID =~ 5136 and AttributeCommonName =~ "sIDHistory" and OperationType =~ "%%14674") or (EventID =~ 10 and TargetImage matches regex "lsass\\.exe$" and GrantedAccess =~ "0x1438")) and (not (SubjectUserName matches regex "(ADMT_|MSOL_)" or SubjectUserSid =~ "S-1-5-18" or SubjectDomainName =~ "NT AUTHORITY"))

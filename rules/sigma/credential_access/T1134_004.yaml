@@ -20,15 +20,15 @@ logsource:
 
 detection:
     selection_impossible_parent:
-        ParentImage: '(lsass\.exe|lsm\.exe|csrss\.exe|wininit\.exe|smss\.exe|spoolsv\.exe)$'
-        Image: '(cmd\.exe|powershell\.exe|pwsh\.exe|wscript\.exe|cscript\.exe|sh\.exe|bash\.exe|scrcons\.exe)$'
+        Parentprocessname: '(lsass\.exe|lsm\.exe|csrss\.exe|wininit\.exe|smss\.exe|spoolsv\.exe)$'
+        processname: '(cmd\.exe|powershell\.exe|pwsh\.exe|wscript\.exe|cscript\.exe|sh\.exe|bash\.exe|scrcons\.exe)$'
 
     selection_suspicious_context:
-        ParentImage: '(chrome\.exe|msedge\.exe|winword\.exe|excel\.exe)$'
-        Image: '(whoami\.exe|nltest\.exe|net\.exe|net1\.exe|ipconfig\.exe)$'
+        Parentprocessname: '(chrome\.exe|msedge\.exe|winword\.exe|excel\.exe)$'
+        processname: '(whoami\.exe|nltest\.exe|net\.exe|net1\.exe|ipconfig\.exe)$'
 
     filter_trusted_windows:
-        - Image: '(WerFault\.exe|conhost\.exe|csc\.exe)$'
+        - processname: '(WerFault\.exe|conhost\.exe|csc\.exe)$'
         - ParentCommandLine|re: 'svchost\.exe -k'
         - username: 'NT AUTHORITY\\SYSTEM'
 

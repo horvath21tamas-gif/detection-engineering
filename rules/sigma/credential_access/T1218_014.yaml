@@ -1,49 +1,106 @@
-title: Ultra-Pro High-Fidelity MMC Proxy Execution (T1218.014)
+title: Suspicious MMC Proxy Execution via Untrusted MSC or COM Hijack
 id: 11327903-2f1a-484d-9dcc-67e327b16482
 status: stable
-description: |
-    Detects the abuse of mmc.exe to execute malicious code via Component Object Model (COM) 
-    hijacking or untrusted console files (.msc). Filters out legitimate administrative actions.
-author: hota05
-date: 2026-02-03
-tags:
-    - attack.defense_evasion
-    - attack.t1218.014
+description: >
+  Detects suspicious execution of mmc.exe potentially abused for
+  proxy execution (T1218.014) via malicious .msc console files or
+  COM hijacking.
+
+  The rule identifies mmc.exe launched from non-interactive or
+  script-based parent processes, execution of console files from
+  user-writable locations, remote paths, or suspicious command-line
+  indicators.
+
+  Designed for high-fidelity detection in enterprise environments
+  with reduced false positives.
+
+author: hota05 
+date: 2026/02/20
+references:
+  - https://attack.mitre.org/techniques/T1218/014/
+  - https://attack.mitre.org/techniques/T1546/015/
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_img:
-        - Image|endswith: '\mmc.exe'
-        - OriginalFileName: 'mmc.exe'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\powerpnt.exe'
-            - '\outlook.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\powershell.exe'
-            - '\cmd.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
+  selection_mmc_image:
+    Image|endswith: '\mmc.exe'
+    OriginalFileName: 'mmc.exe'
 
-    selection_untrusted_args:
-        CommandLine|contains:
-            - '\Users\'
-            - '\AppData\'
-            - '\Temp\'
-            - '\Public\'
-            - '\Downloads\'
-            - '\\'             
-            - 'http'            
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\powerpnt.exe'
+      - '\outlook.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\rundll32.exe'
+      - '\mshta.exe'
 
-    filter_trusted_admin:
-        ParentImage|endswith: '\explorer.exe'
-        CommandLine|contains: 'C:\Windows\System32\'
-        User|contains: 'Admin'
+  selection_untrusted_msc_location:
+    CommandLine|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Public\'
+      - '\Downloads\'
+      - '\\'
+      - 'http://'
+      - 'https://'
 
-    condition: selection_img and (selection_suspicious_parent or selection_untrusted_args) and not filter_trusted_admin
+  selection_suspicious_flags:
+    CommandLine|contains:
+      - '/a'
+      - '-Embedding'
+
+  selection_rare_execution_context:
+    IntegrityLevel:
+      - 'Medium'
+      - 'Low'
+
+  filter_legitimate_console_files:
+    CommandLine|contains:
+      - '\Windows\System32\'
+      - '\Windows\SysWOW64\'
+      - 'eventvwr.msc'
+      - 'services.msc'
+      - 'compmgmt.msc'
+      - 'gpedit.msc'
+      - 'devmgmt.msc'
+      - 'taskschd.msc'
+
+  filter_interactive_admin_baseline:
+    ParentImage|endswith: '\explorer.exe'
+    IntegrityLevel: 'High'
+
+  condition: >
+    selection_mmc_image
+    and (selection_suspicious_parent
+        or selection_untrusted_msc_location
+        or selection_suspicious_flags)
+    and selection_rare_execution_context
+    and not (filter_legitimate_console_files
+        or filter_interactive_admin_baseline)
+
+falsepositives:
+  - Custom administrative MSC consoles stored in user profiles
+  - Internal IT automation invoking MMC indirectly
+  - Software deployment frameworks embedding MMC
+
 level: critical
+
+tags:
+  - attack.defense_evasion
+  - attack.execution
+  - attack.t1218.014
+  - attack.t1546.015
+  - attack.windows

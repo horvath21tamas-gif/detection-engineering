@@ -276,9 +276,9 @@
 - [Regsvcs/Regasm .NET proxy végrehajtás](#regsvcsregasm-net-proxy-végrehajtás)
 - [Gyanús Regsvr32 végrehajtás, amely LOLBAS-visszaélést jelez (high Fidelity)](#gyanús-regsvr32-végrehajtás-amely-lolbas-visszaélést-jelez-(high-fidelity))
 - [Gyanús Rundll32 végrehajtás szkripttel vagy távoli hasznos adattartalommal (high Fidelity)](#gyanús-rundll32-végrehajtás-szkripttel-vagy-távoli-hasznos-adattartalommal-(high-fidelity))
-- [Ultra-Pro High-Fidelity Verclsid proxy végrehajtás (T1218.012)](#ultra-pro-high-fidelity-verclsid-proxy-végrehajtás-(t1218012))
-- [Ultra-Pro High-Fidelity Rundll32 proxy végrehajtás (T1218.013)](#ultra-pro-high-fidelity-rundll32-proxy-végrehajtás-(t1218013))
-- [Ultra-Pro High-Fidelity MMC proxy végrehajtás (T1218.014)](#ultra-pro-high-fidelity-mmc-proxy-végrehajtás-(t1218014))
+- [Verclsid proxy végrehajtása COM Object Abuse segítségével](#verclsid-proxy-végrehajtása-com-object-abuse-segítségével)
+- [Rundll32 proxy végrehajtása (LOLBAS visszaélés)](#rundll32-proxy-végrehajtása-(lolbas-visszaélés))
+- [Gyanús MMC-proxy-végrehajtás nem megbízható MSC-n vagy COM-eltérítésen keresztül](#gyanús-mmc-proxy-végrehajtás-nem-megbízható-msc-n-vagy-com-eltérítésen-keresztül)
 - [Gyanús szolgáltatás létrehozása a távfelügyeleti eszközökön keresztül a jóváhagyott felügyeleti körön kívül](#gyanús-szolgáltatás-létrehozása-a-távfelügyeleti-eszközökön-keresztül-a-jóváhagyott-felügyeleti-körön-kívül)
 - [XSL-szkript feldolgozás (T1220)](#xsl-szkript-feldolgozás-(t1220))
 - [Irodai sablon befecskendezése (T1221)](#irodai-sablon-befecskendezése-(t1221))
@@ -4972,16 +4972,15 @@ feldolgozza a kapcsolatokat a hamis pozitívumok minimalizálása érdekében.
 
 
 ---
-## Ultra-Pro High-Fidelity Pubprn Script proxy végrehajtás (T1216.001)
+## Pubprn.vbs Script proxy végrehajtása (T1216.001)
 - **ID:** `T1216_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/), [PUBPRN.VBS](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli az aláírt „pubprn.vbs” Windows-szkripttel való visszaélést a végrehajtás proxyjával
-távoli szkriptletekből (.sct).Az argumentumbefecskendezésre összpontosít a "script:" használatával
-protokoll és rendellenes folyamatvonal.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/), [PUBPRN.VBS](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Észleli a pubprn.vbs aláírt Windows-szkripttel való nagy megbízhatóságú visszaélést a távoli szkriptletek (.sct) végrehajtásának proxyjával (MITRE ATT&CK T1216.001).
+A „script:” protokollt, HTTP/UNC hivatkozásokat, SOAP-hívásokat és gyanús folyamatsort használó anomális argumentumbefecskendezésre összpontosít, miközben kiszűri a legitim adminisztratív végrehajtási kontextusokat és a localhost-alapú szkripteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

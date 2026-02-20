@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-20 07:16:35`
+**Utolsó frissítés:** `2026-02-20 07:37:02`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -281,9 +281,9 @@
 | T1218.009 | CRITICAL | Regsvcs/Regasm .NET Proxy Execution |
 | T1218.010 | HIGH | Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity) |
 | T1218.011 | HIGH | Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity) |
-| T1218.012 | CRITICAL | Ultra-Pro High-Fidelity Verclsid Proxy Execution (T1218.012) |
-| T1218.013 | CRITICAL | Ultra-Pro High-Fidelity Rundll32 Proxy Execution (T1218.013) |
-| T1218.014 | CRITICAL | Ultra-Pro High-Fidelity MMC Proxy Execution (T1218.014) |
+| T1218.012 | CRITICAL | Verclsid Proxy Execution via COM Object Abuse |
+| T1218.013 | CRITICAL | Rundll32 Proxy Execution (LOLBAS Abuse) |
+| T1218.014 | CRITICAL | Suspicious MMC Proxy Execution via Untrusted MSC or COM Hijack |
 | T1219 | HIGH | Suspicious Service Creation via Remote Administration Tools Outside Approved Management Scope |
 | T1220 | HIGH | XSL Script Processing (T1220) |
 | T1221 | HIGH | Office Template Injection (T1221) |

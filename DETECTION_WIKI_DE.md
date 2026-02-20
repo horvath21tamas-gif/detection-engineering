@@ -276,9 +276,9 @@
 - [Regsvcs/Regasm .NET Proxy-Ausführung](#regsvcsregasm-net-proxy-ausführung)
 - [Verdächtige Regsvr32-Ausführung, die auf LOLBAS-Missbrauch hinweist (High Fidelity)](#verdächtige-regsvr32-ausführung-die-auf-lolbas-missbrauch-hinweist-(high-fidelity))
 - [Verdächtige Rundll32-Ausführung mit Skript oder Remote-Payload (High Fidelity)](#verdächtige-rundll32-ausführung-mit-skript-oder-remote-payload-(high-fidelity))
-- [Ultra-Pro High-Fidelity Verclsid Proxy Execution (T1218.012)](#ultra-pro-high-fidelity-verclsid-proxy-execution-(t1218012))
-- [Ultra-Pro High-Fidelity Rundll32 Proxy-Ausführung (T1218.013)](#ultra-pro-high-fidelity-rundll32-proxy-ausführung-(t1218013))
-- [Ultra-Pro High-Fidelity MMC Proxy Execution (T1218.014)](#ultra-pro-high-fidelity-mmc-proxy-execution-(t1218014))
+- [Verclsid-Proxy-Ausführung über COM-Objektmissbrauch](#verclsid-proxy-ausführung-über-com-objektmissbrauch)
+- [Rundll32-Proxy-Ausführung (LOLBAS-Missbrauch)](#rundll32-proxy-ausführung-(lolbas-missbrauch))
+- [Verdächtige MMC-Proxy-Ausführung über nicht vertrauenswürdigen MSC- oder COM-Hijack](#verdächtige-mmc-proxy-ausführung-über-nicht-vertrauenswürdigen-msc--oder-com-hijack)
 - [Erstellung verdächtiger Dienste über Remote-Verwaltungstools außerhalb des genehmigten Verwaltungsbereichs](#erstellung-verdächtiger-dienste-über-remote-verwaltungstools-außerhalb-des-genehmigten-verwaltungsbereichs)
 - [XSL-Skriptverarbeitung (T1220)](#xsl-skriptverarbeitung-(t1220))
 - [Office-Vorlageninjektion (T1221)](#office-vorlageninjektion-(t1221))
@@ -4972,16 +4972,15 @@ Prozessbeziehungen, um Fehlalarme zu minimieren.
 
 
 ---
-## Ultra-Pro High-Fidelity-Pubprn-Skript-Proxy-Ausführung (T1216.001)
+## Pubprn.vbs-Skript-Proxy-Ausführung (T1216.001)
 - **ID:** `T1216_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/), [PUBPRN.VBS](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt den Missbrauch des signierten Windows-Skripts „pubprn.vbs“ als Proxy für die Ausführung
-von Remote-Skriptlets (.sct).Konzentriert sich auf die Argumentinjektion mit dem „script:“
-Protokoll und anomale Prozesslinie.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/), [PUBPRN.VBS](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochvertraulichen Missbrauch des signierten Windows-Skripts pubprn.vbs als Proxy für die Ausführung von Remote-Skriptlets (.sct) (MITRE ATT&CK T1216.001).
+Konzentriert sich auf die Einschleusung anomaler Argumente mithilfe des „script:“-Protokolls, HTTP/UNC-Referenzen, SOAP-Aufrufen und verdächtiger Prozessherkunft und filtert gleichzeitig legitime administrative Ausführungskontexte und Localhost-basierte Skripte heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

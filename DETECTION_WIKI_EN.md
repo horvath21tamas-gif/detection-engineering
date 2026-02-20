@@ -276,9 +276,9 @@
 - [Regsvcs/Regasm .NET Proxy Execution](#regsvcsregasm-net-proxy-execution)
 - [Suspicious Regsvr32 Execution Indicative of LOLBAS Abuse (High Fidelity)](#suspicious-regsvr32-execution-indicative-of-lolbas-abuse-(high-fidelity))
 - [Suspicious Rundll32 Execution with Script or Remote Payload (High Fidelity)](#suspicious-rundll32-execution-with-script-or-remote-payload-(high-fidelity))
-- [Ultra-Pro High-Fidelity Verclsid Proxy Execution (T1218.012)](#ultra-pro-high-fidelity-verclsid-proxy-execution-(t1218012))
-- [Ultra-Pro High-Fidelity Rundll32 Proxy Execution (T1218.013)](#ultra-pro-high-fidelity-rundll32-proxy-execution-(t1218013))
-- [Ultra-Pro High-Fidelity MMC Proxy Execution (T1218.014)](#ultra-pro-high-fidelity-mmc-proxy-execution-(t1218014))
+- [Verclsid Proxy Execution via COM Object Abuse](#verclsid-proxy-execution-via-com-object-abuse)
+- [Rundll32 Proxy Execution (LOLBAS Abuse)](#rundll32-proxy-execution-(lolbas-abuse))
+- [Suspicious MMC Proxy Execution via Untrusted MSC or COM Hijack](#suspicious-mmc-proxy-execution-via-untrusted-msc-or-com-hijack)
 - [Suspicious Service Creation via Remote Administration Tools Outside Approved Management Scope](#suspicious-service-creation-via-remote-administration-tools-outside-approved-management-scope)
 - [XSL Script Processing (T1220)](#xsl-script-processing-(t1220))
 - [Office Template Injection (T1221)](#office-template-injection-(t1221))
@@ -5224,16 +5224,15 @@ process relationships to minimize false positives.
 
 
 ---
-## Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001)
+## Pubprn.vbs Script Proxy Execution (T1216.001)
 - **ID:** `T1216_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/), [PUBPRN.VBS](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the abuse of the signed Windows script 'pubprn.vbs' to proxy the execution 
-of remote scriptlets (.sct). Focuses on argument injection using the 'script:' 
-protocol and anomalous process lineage.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/), [PUBPRN.VBS](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence abuse of the signed Windows script pubprn.vbs to proxy the execution of remote scriptlets (.sct) (MITRE ATT&CK T1216.001).  
+Focuses on anomalous argument injection using the 'script:' protocol, HTTP/UNC references, SOAP calls, and suspicious process lineage while filtering out legitimate administrative execution contexts and localhost-based scripts.
 
 
 #### 🚨 Response Playbook

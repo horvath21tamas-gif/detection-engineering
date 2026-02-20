@@ -1,61 +1,41 @@
-title: Ultra-Pro High-Fidelity Peripheral Device Discovery (T1120)
+title: Peripheral Device Discovery (T1120)
 id: 4642e41b-d17b-4c85-a9ec-b8071f91ca80
 status: stable
 description: |
-    Detects targeted peripheral device enumeration focusing on USB and storage devices.
-    Filters out legitimate system PnP activity and driver management by analyzing 
-    process integrity, parent-child relationships, and specific metadata queries.
+    Detects targeted peripheral device enumeration, focusing on USB, disk, and network devices.
+    High-fidelity detection filters legitimate system PnP activity and driver management
+    by analyzing process integrity, parent-child relationships, and metadata query patterns.
+
 author: hota05
 date: 2026-02-04
 tags:
     - attack.discovery
     - attack.t1120
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_tools:
-        - Image|endswith:
-            - '\wmic.exe'
-            - '\pnputil.exe'
-            - '\driverquery.exe'
-            - '\devcon.exe'       
-        - CommandLine|contains:
-            - 'Get-PnpDevice'
-            - 'Get-WmiObject'
-            - 'gwmi '              
+        Image: '(wmic\.exe|pnputil\.exe|driverquery\.exe|devcon\.exe)$'
+        CommandLine: '(Get-PnpDevice|Get-WmiObject|gwmi)'
 
     selection_keywords:
-        CommandLine|contains:
-            - 'Win32_USBController'
-            - 'Win32_DiskDrive'
-            - 'Win32_NetworkAdapter'
-            - 'USBSTOR'            
-            - ' /enum-devices'     
-            - ' /deviceid'
+        CommandLine: '(Win32_USBController|Win32_DiskDrive|Win32_NetworkAdapter|USBSTOR|/enum-devices|/deviceid)'
 
     selection_suspicious_lineage:
-        ParentImage|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\wsmprovhost.exe'     
-            - '\httpd.exe'           
-            - '\winword.exe'         
-        IntegrityLevel: 'Medium'     
+        ParentImage: '(cmd\.exe|powershell\.exe|wsmprovhost\.exe|httpd\.exe|winword\.exe)$'
+        IntegrityLevel: 'Medium'
 
     selection_extraction:
-        CommandLine|contains:
-            - ' > '
-            - 'ConvertTo-Json'
-            - 'format-list'         
+        CommandLine: '(>\s|ConvertTo-Json|format-list)'
 
     filter_legit_system:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith:
-            - '\svchost.exe'
-            - '\msiexec.exe'         
-        - CommandLine|contains:
-            - 'Program Files'        
+        username: 'NT AUTHORITY\SYSTEM'
+        ParentImage: '(svchost\.exe|msiexec\.exe)$'
+        CommandLine|contains: 'Program Files'
 
     condition: selection_tools and (selection_keywords or selection_extraction or selection_suspicious_lineage) and not filter_legit_system
+
 level: high

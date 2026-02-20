@@ -4918,16 +4918,19 @@ nem megbízható shell-kontextusok vagy ideiglenes könyvtárak.
 
 
 ---
-## Ultra-Pro High-Fidelity SharePoint Mass Data Exfiltration (T1213.002)
+## Vállalati SharePoint tömeges adatok kiszűrésének észlelése (T1213.002)
 - **ID:** `T1213_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Azonosítással észleli a jogosulatlan tömeges adatgyűjtést a SharePointból
-gyanús PnP PowerShell használat, tömeges REST API lekérdezések és jogosulatlan
-SharePoint Online Management Shell tevékenység nem szabványos környezetekből.
+- **Leírás:** Észleli a SharePoint Online rendszerből származó, jogosulatlan tömeges adatgyűjtést a következők figyelésével:
+- PnP PowerShell tevékenység
+- Tömeges REST API lekérdezések
+- SharePoint Online Management Shell használata
+- Nem szabványos végrehajtási környezetek (nem rendszergazdai automatizálás)
+Az exportált tartalom átmeneti/nyilvános könyvtárakban történő állomásoztatása szintén meg van jelölve.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -5167,16 +5167,19 @@ untrusted shell contexts or temporary directories.
 
 
 ---
-## Ultra-Pro High-Fidelity SharePoint Mass Data Exfiltration (T1213.002)
+## Enterprise SharePoint Mass Data Exfiltration Detection (T1213.002)
 - **ID:** `T1213_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized mass data collection from SharePoint by identifying 
-suspicious PnP PowerShell usage, bulk REST API queries, and unauthorized 
-SharePoint Online Management Shell activity from non-standard contexts.
+- **Leírás:** Detects unauthorized bulk data collection from SharePoint Online by monitoring:
+- PnP PowerShell activity
+- Bulk REST API queries
+- SharePoint Online Management Shell usage
+- Non-standard execution contexts (non-admin automation)
+Staging of exported content in temp/public directories is also flagged.
 
 
 #### 🚨 Response Playbook

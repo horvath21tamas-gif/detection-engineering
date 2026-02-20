@@ -4918,16 +4918,19 @@ nicht vertrauenswürdige Shell-Kontexte oder temporäre Verzeichnisse.
 
 
 ---
-## Ultra-Pro High-Fidelity-SharePoint-Massendaten-Exfiltration (T1213.002)
+## Erkennung von Massendatenexfiltration in SharePoint für Unternehmen (T1213.002)
 - **ID:** `T1213_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Massendatenerfassung aus SharePoint durch Identifizierung
-verdächtige PnP-PowerShell-Nutzung, Massen-REST-API-Abfragen und nicht autorisierte Angriffe
-Aktivitäten der SharePoint Online-Verwaltungsshell aus nicht standardmäßigen Kontexten.
+- **Beschreibung:** Erkennt die unbefugte Massendatenerfassung von SharePoint Online durch Überwachung:
+- PnP-PowerShell-Aktivität
+- Massen-REST-API-Abfragen
+- Nutzung der SharePoint Online-Verwaltungsshell
+- Nicht standardmäßige Ausführungskontexte (Automatisierung ohne Administratorrechte)
+Die Bereitstellung exportierter Inhalte in temporären/öffentlichen Verzeichnissen ist ebenfalls gekennzeichnet.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

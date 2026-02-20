@@ -210,29 +210,29 @@
 - [Nagy pontosságú megosztott modul betöltése nem megbízható útvonalról](#nagy-pontosságú-megosztott-modul-betöltése-nem-megbízható-útvonalról)
 - [Ultra-Pro nagy hűségű adatkódolás és obfuszkálás (T1132)](#ultra-pro-nagy-hűségű-adatkódolás-és-obfuszkálás-(t1132))
 - [Ultra-Pro High-Fidelity szabványos kódolás és hasznos terhelés befecskendezése (T1132.001)](#ultra-pro-high-fidelity-szabványos-kódolás-és-hasznos-terhelés-befecskendezése-(t1132001))
-- [Ultra-Pro High-Fidelity, nem szabványos kódolás és XOR obfuszkáció (T1132.002)](#ultra-pro-high-fidelity-nem-szabványos-kódolás-és-xor-obfuszkáció-(t1132002))
+- [Nem szabványos kódolás és XOR obfuszkáció (T1132.002)](#nem-szabványos-kódolás-és-xor-obfuszkáció-(t1132002))
 - [Rendellenes külső távoli szolgáltatás-hozzáférési kontextus](#rendellenes-külső-távoli-szolgáltatás-hozzáférési-kontextus)
-- [Ultra-Pro hozzáférési token manipuláció és megszemélyesítés (T1134)](#ultra-pro-hozzáférési-token-manipuláció-és-megszemélyesítés-(t1134))
-- [Ultra-Pro token megszemélyesítés LSASS Handle Duplikáción keresztül (T1134.001)](#ultra-pro-token-megszemélyesítés-lsass-handle-duplikáción-keresztül-(t1134001))
-- [Ultra-Pro létrehozási folyamat tokennel (T1134.002)](#ultra-pro-létrehozási-folyamat-tokennel-(t1134002))
-- [Ultra-Pro Make és Impersonate Token (T1134.003)](#ultra-pro-make-és-impersonate-token-(t1134003))
-- [Ultra-Pro Parent PID-hamisítás és folyamatfa megsértése (T1134.004)](#ultra-pro-parent-pid-hamisítás-és-folyamatfa-megsértése-(t1134004))
-- [Ultra-Pro SID-History Injection & DS Manipulation (T1134.005)](#ultra-pro-sid-history-injection-&-ds-manipulation-(t1134005))
+- [Hozzáférési token manipuláció és megszemélyesítés (T1134)](#hozzáférési-token-manipuláció-és-megszemélyesítés-(t1134))
+- [Token megszemélyesítés LSASS Handle Duplikáción keresztül (T1134.001)](#token-megszemélyesítés-lsass-handle-duplikáción-keresztül-(t1134001))
+- [Folyamat létrehozása tokennel (T1134.002)](#folyamat-létrehozása-tokennel-(t1134002))
+- [Gyári és megszemélyesítő token (T1134.003)](#gyári-és-megszemélyesítő-token-(t1134003))
+- [Szülői PID-hamisítás és folyamatfa megsértése (T1134.004)](#szülői-pid-hamisítás-és-folyamatfa-megsértése-(t1134004))
+- [SID-előzmény befecskendezés és DS-manipuláció (T1134.005)](#sid-előzmény-befecskendezés-és-ds-manipuláció-(t1134005))
 - [Hálózati megosztás felfedezése (T1135)](#hálózati-megosztás-felfedezése-(t1135))
 - [Ultra-Pro jogosulatlan fiók létrehozása (T1136)](#ultra-pro-jogosulatlan-fiók-létrehozása-(t1136))
 - [Ultra-Pro jogosulatlan helyi fiók létrehozása (T1136.001)](#ultra-pro-jogosulatlan-helyi-fiók-létrehozása-(t1136001))
 - [Ultra-Pro jogosulatlan domain fiók létrehozása (T1136.002)](#ultra-pro-jogosulatlan-domain-fiók-létrehozása-(t1136002))
 - [Ultra-Pro jogosulatlan felhőfiók létrehozása (T1136.003)](#ultra-pro-jogosulatlan-felhőfiók-létrehozása-(t1136003))
-- [Az Office-alkalmazás indítási állandósága (T1137)](#az-office-alkalmazás-indítási-állandósága-(t1137))
+- [Az Office-alkalmazások indítási állandósága (T1137)](#az-office-alkalmazások-indítási-állandósága-(t1137))
 - [Az Office globális sablonjának gyanús módosítása (Normal.dotm)](#az-office-globális-sablonjának-gyanús-módosítása-(normaldotm))
-- [Ultra-Pro Office teszt DLL-perzisztencia (T1137.002)](#ultra-pro-office-teszt-dll-perzisztencia-(t1137002))
-- [Ultra-Pro Outlook egyéni űrlapok tartóssága (T1137.003)](#ultra-pro-outlook-egyéni-űrlapok-tartóssága-(t1137003))
-- [Ultra-Pro Outlook kezdőlap eltérítése és megkerülése (T1137.004)](#ultra-pro-outlook-kezdőlap-eltérítése-és-megkerülése-(t1137004))
-- [Ultra-Pro Office biztonsági házirendek manipulálása (T1137.005)](#ultra-pro-office-biztonsági-házirendek-manipulálása-(t1137005))
-- [Ultra-Pro Office-bővítmény bináris perzisztencia (T1137.006)](#ultra-pro-office-bővítmény-bináris-perzisztencia-(t1137006))
+- [Office teszt DLL-perzisztencia (T1137.002)](#office-teszt-dll-perzisztencia-(t1137002))
+- [Outlook egyéni űrlapok állandósága (T1137.003)](#outlook-egyéni-űrlapok-állandósága-(t1137003))
+- [Az Outlook kezdőlapjának eltérítése és megkerülése (T1137.004)](#az-outlook-kezdőlapjának-eltérítése-és-megkerülése-(t1137004))
+- [Az Office biztonsági házirendjének manipulálása (T1137.005)](#az-office-biztonsági-házirendjének-manipulálása-(t1137005))
+- [Office-bővítmény bináris állandósága (T1137.006)](#office-bővítmény-bináris-állandósága-(t1137006))
 - [Lopakodó deobfuszkálás/dekódolás (T1140)](#lopakodó-deobfuszkálásdekódolás-(t1140))
 - [Ultra-Pro Browser Extension Force-Install Persistence (T1176)](#ultra-pro-browser-extension-force-install-persistence-(t1176))
-- [Ultra-Pro High-Fidelity böngésző munkamenet-eltérítés (T1185)](#ultra-pro-high-fidelity-böngésző-munkamenet-eltérítés-(t1185))
+- [Böngészőmunkamenet-eltérítés (T1185)](#böngészőmunkamenet-eltérítés-(t1185))
 - [Kényszerített hitelesítés (T1187)](#kényszerített-hitelesítés-(t1187))
 - [Böngészőből származó shell vagy rendszereszköz végrehajtása](#böngészőből-származó-shell-vagy-rendszereszköz-végrehajtása)
 - [Gyanús Cross-Site Scripting (XSS) kísérlet észlelve a webszerveren](#gyanús-cross-site-scripting-(xss)-kísérlet-észlelve-a-webszerveren)
@@ -4060,16 +4060,17 @@ nem adminisztratív folyamatok.
 
 
 ---
-## Ultra-Pro High-Fidelity, nem szabványos kódolás és XOR obfuszkáció (T1132.002)
+## Nem szabványos kódolás és XOR obfuszkáció (T1132.002)
 - **ID:** `T1132_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A programozott bájtszint azonosításával észleli az egyéni kódolást és az obfuszkációt
-manipuláció (XOR), backtick alapú karakterlánc-töredezettség és karakterkód
-rekonstrukció nem interaktív folyamatkontextusban.
+- **Leírás:** Felismeri az egyéni kódolást és az obfuszkációt a következő megfigyeléssel:
+- Byte szintű XOR manipulációk
+- Backtick alapú karakterlánc-töredezettség
+- Karakterkód rekonstrukció (pl. ::FromCharacterCode)
+- Gyanús, nem interaktív folyamatkörnyezetek (rundll32, regsvr32, colorcpl)
+Kiszűri a törvényes adminisztratív és infrastrukturális folyamatokat a téves pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -4099,7 +4100,7 @@ hitelesítő adatok kitöltése vagy oldalirányú mozgás a külső ugródobozo
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a magas kockázatú hozzáférési jogkivonat-manipulációt és a megszemélyesítést a következők figyelésével:
+- **Leírás:** Észleli a magas kockázatú hozzáférési jogkivonat-manipulációt és a megszemélyesítést a következők figyelésével:
 - Az LSASS-szal együttműködő speciális eszközök tokenek ellopásához vagy másolásához
 - Gyanús integritásszint-átmenetek, amelyek a token emelkedését jelzik
 - Jogosulatlan LSASS kezelhetőség
@@ -4117,7 +4118,7 @@ Szűri az ismert megbízható rendszerfolyamatokat a téves pozitívumok minimal
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** A tokenlopást észleli az LSASS.exe fájlt célzó gyanús leírómásolatok révén.
+- **Leírás:** A tokenlopást észleli az LSASS.exe fájlt célzó, gyanús fogantyúduplikáción keresztül.
 Nagy pontosságú észlelés szűréssel:
 - Ismert legitim rendszerfolyamatok
 - Biztonsági ügynökök
@@ -4170,7 +4171,7 @@ Nagy pontosságú észlelés szűréssel:
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 - **Leírás:** Felismeri a szülői PID-hamisítást és a folyamatfa megsértését a következők figyelésével:
-- A kritikus rendszerfolyamatok (LSASS, CSRSS, Spooler) shell-eket vagy értelmezőket hoznak létre
+- Kritikus rendszerfolyamatok (LSASS, CSRSS, Spooler) létrehozzák a shell-eket vagy értelmezőket
 - A felhasználói szintű folyamatok szokatlan rendszer segédprogramokat eredményeznek
 - Szűri a megbízható Windows viselkedést és a jogos WMI/ütemezett feladattevékenységet
 
@@ -4282,7 +4283,7 @@ a forrás IP-hírneve, valamint az engedélyezett kiépítési szolgáltatási t
 
 
 ---
-## Az Office-alkalmazás indítási állandósága (T1137)
+## Az Office-alkalmazások indítási állandósága (T1137)
 - **ID:** `T1137.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
@@ -4319,9 +4320,9 @@ a forrás IP-hírneve, valamint az engedélyezett kiépítési szolgáltatási t
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
 - **Leírás:** Érzékeli az „Office Test” rendszerleíró kulcs létrehozását vagy módosítását, amelyet a DLL oldalbetöltésének fennmaradásához használnak:
-- Figyeli a nem szabványos elérési utakat a potenciális DLL rakományokhoz
+- Figyeli a nem szabványos elérési utakat a potenciális DLL-adatokhoz
 - Érzékeli a jogosulatlan szülői folyamatokat, amelyek erre a kulcsra írnak
-- Kiszűri a törvényes telepítői tevékenységet
+- Kiszűri a legitim telepítői tevékenységet
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -4329,12 +4330,12 @@ a forrás IP-hírneve, valamint az engedélyezett kiépítési szolgáltatási t
 
 
 ---
-## Az Outlook egyéni űrlapjainak fennmaradása (T1137.003)
+## Outlook egyéni űrlapok állandósága (T1137.003)
 - **ID:** `T1137_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
-- **Leírás:** Észleli a jogosulatlan Outlook egyéni űrlapok fennmaradását a következők figyelésével:
+- **Leírás:** Észleli az Outlook egyéni űrlapjainak jogosulatlan fennmaradását a következők figyelésével:
 - Nem szabványos regisztrációs módosítások
 - Gyanús folyamatok megjelenése űrlapszkriptekkel kapcsolatban
 - DLL-eket, VBS-szkripteket vagy távoli tartalmat jelző hasznos terhek
@@ -4769,7 +4770,7 @@ a Mark-of-the-Web megkerülését szolgáló rosszindulatú programok gyakori mi
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Port kopogtatás/Traffic Signaling megvalósítására vagy kiváltására irányuló kísérleteket.
+- **Leírás:** Érzékeli a port kopogtatás / közlekedési jelzés végrehajtására vagy kiváltására irányuló kísérleteket.
 Monitorok:
 - Nyers csomagrögzítő eszközök (Npcap/WinPcap/sniffer eszközök)
 - Gyanús tűzfalszabály-módosítások, amelyek lehetővé teszik az UDP/ICMP/Bármely portot

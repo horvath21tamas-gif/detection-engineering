@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where TargetImage =~ "(lsaccess\.exe|lsass\.exe)$" and GrantedAccess =~ "(0x1438|0x143a|0x1038)" and SourceImage =~ "(\Temp\|\Users\Public\|\AppData\|cmd\.exe|powershell\.exe|wscript\.exe|cscript\.exe|rundll32\.exe)$" and (not (SourceImage =~ "(MsMpEng\.exe|Cyserver\.exe|wininit\.exe|services\.exe|csrss\.exe|GoogleUpdate\.exe)$" and SourceUserName =~ "NT AUTHORITY\SYSTEM"))
+| where Targetprocessname =~ "(lsaccess\.exe|lsass\.exe)$" and GrantedAccess =~ "(0x1438|0x143a|0x1038)" and Sourceprocessname =~ "(\Temp\|\Users\Public\|\AppData\|cmd\.exe|powershell\.exe|wscript\.exe|cscript\.exe|rundll32\.exe)$" and (not (Sourceprocessname =~ "(MsMpEng\.exe|Cyserver\.exe|wininit\.exe|services\.exe|csrss\.exe|GoogleUpdate\.exe)$" and SourceUserName =~ "NT AUTHORITY\SYSTEM"))

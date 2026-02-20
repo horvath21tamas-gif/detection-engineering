@@ -210,14 +210,14 @@
 - [High-Fidelity Shared Module Load from Untrusted Path](#high-fidelity-shared-module-load-from-untrusted-path)
 - [Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132)](#ultra-pro-high-fidelity-data-encoding-&-obfuscation-(t1132))
 - [Ultra-Pro High-Fidelity Standard Encoding & Payload Injection (T1132.001)](#ultra-pro-high-fidelity-standard-encoding-&-payload-injection-(t1132001))
-- [Ultra-Pro High-Fidelity Non-Standard Encoding & XOR Obfuscation (T1132.002)](#ultra-pro-high-fidelity-non-standard-encoding-&-xor-obfuscation-(t1132002))
+- [Non-Standard Encoding & XOR Obfuscation (T1132.002)](#non-standard-encoding-&-xor-obfuscation-(t1132002))
 - [Anomalous External Remote Service Access Context](#anomalous-external-remote-service-access-context)
-- [Ultra-Pro Access Token Manipulation & Impersonation (T1134)](#ultra-pro-access-token-manipulation-&-impersonation-(t1134))
-- [Ultra-Pro Token Impersonation via LSASS Handle Duplication (T1134.001)](#ultra-pro-token-impersonation-via-lsass-handle-duplication-(t1134001))
-- [Ultra-Pro Create Process with Token (T1134.002)](#ultra-pro-create-process-with-token-(t1134002))
-- [Ultra-Pro Make and Impersonate Token (T1134.003)](#ultra-pro-make-and-impersonate-token-(t1134003))
-- [Ultra-Pro Parent PID Spoofing & Process Tree Violation (T1134.004)](#ultra-pro-parent-pid-spoofing-&-process-tree-violation-(t1134004))
-- [Ultra-Pro SID-History Injection & DS Manipulation (T1134.005)](#ultra-pro-sid-history-injection-&-ds-manipulation-(t1134005))
+- [Access Token Manipulation & Impersonation (T1134)](#access-token-manipulation-&-impersonation-(t1134))
+- [Token Impersonation via LSASS Handle Duplication (T1134.001)](#token-impersonation-via-lsass-handle-duplication-(t1134001))
+- [Create Process with Token (T1134.002)](#create-process-with-token-(t1134002))
+- [Make and Impersonate Token (T1134.003)](#make-and-impersonate-token-(t1134003))
+- [Parent PID Spoofing & Process Tree Violation (T1134.004)](#parent-pid-spoofing-&-process-tree-violation-(t1134004))
+- [SID-History Injection & DS Manipulation (T1134.005)](#sid-history-injection-&-ds-manipulation-(t1134005))
 - [Network Share Discovery (T1135)](#network-share-discovery-(t1135))
 - [Ultra-Pro Unauthorized Account Creation (T1136)](#ultra-pro-unauthorized-account-creation-(t1136))
 - [Ultra-Pro Unauthorized Local Account Creation (T1136.001)](#ultra-pro-unauthorized-local-account-creation-(t1136001))
@@ -225,14 +225,14 @@
 - [Ultra-Pro Unauthorized Cloud Account Creation (T1136.003)](#ultra-pro-unauthorized-cloud-account-creation-(t1136003))
 - [Office Application Startup Persistence (T1137)](#office-application-startup-persistence-(t1137))
 - [Suspicious Modification of Office Global Template (Normal.dotm)](#suspicious-modification-of-office-global-template-(normaldotm))
-- [Ultra-Pro Office Test DLL Persistence (T1137.002)](#ultra-pro-office-test-dll-persistence-(t1137002))
-- [Ultra-Pro Outlook Custom Forms Persistence (T1137.003)](#ultra-pro-outlook-custom-forms-persistence-(t1137003))
-- [Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004)](#ultra-pro-outlook-home-page-hijacking-&-bypass-(t1137004))
-- [Ultra-Pro Office Security Policy Tampering (T1137.005)](#ultra-pro-office-security-policy-tampering-(t1137005))
-- [Ultra-Pro Office Add-in Binary Persistence (T1137.006)](#ultra-pro-office-add-in-binary-persistence-(t1137006))
+- [Office Test DLL Persistence (T1137.002)](#office-test-dll-persistence-(t1137002))
+- [Outlook Custom Forms Persistence (T1137.003)](#outlook-custom-forms-persistence-(t1137003))
+- [Outlook Home Page Hijacking & Bypass (T1137.004)](#outlook-home-page-hijacking-&-bypass-(t1137004))
+- [Office Security Policy Tampering (T1137.005)](#office-security-policy-tampering-(t1137005))
+- [Office Add-in Binary Persistence (T1137.006)](#office-add-in-binary-persistence-(t1137006))
 - [Stealthy Deobfuscation/Decoding (T1140)](#stealthy-deobfuscationdecoding-(t1140))
 - [Ultra-Pro Browser Extension Force-Install Persistence (T1176)](#ultra-pro-browser-extension-force-install-persistence-(t1176))
-- [Ultra-Pro High-Fidelity Browser Session Hijacking (T1185)](#ultra-pro-high-fidelity-browser-session-hijacking-(t1185))
+- [Browser Session Hijacking (T1185)](#browser-session-hijacking-(t1185))
 - [Forced Authentication (T1187)](#forced-authentication-(t1187))
 - [Browser-Originating Shell or System Tool Execution](#browser-originating-shell-or-system-tool-execution)
 - [Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server](#suspicious-cross-site-scripting-(xss)-attempt-detected-on-web-server)
@@ -4259,16 +4259,17 @@ non-administrative processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Non-Standard Encoding & XOR Obfuscation (T1132.002)
+## Non-Standard Encoding & XOR Obfuscation (T1132.002)
 - **ID:** `T1132_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects custom encoding and obfuscation by identifying programmatic byte-level 
-manipulation (XOR), backtick-based string fragmentation, and character-code 
-reconstruction in non-interactive process contexts.
+- **Leírás:** Detects custom encoding and obfuscation by monitoring:
+  - Byte-level XOR manipulations
+  - Backtick-based string fragmentation
+  - Character-code reconstruction (e.g., ::FromCharacterCode)
+  - Suspicious non-interactive process contexts (rundll32, regsvr32, colorcpl)
+Filters out legitimate administrative and infrastructure processes to reduce false positives.
 
 
 #### 🚨 Response Playbook

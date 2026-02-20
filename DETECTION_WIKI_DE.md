@@ -210,14 +210,14 @@
 - [Gemeinsames Laden von High-Fidelity-Modulen aus einem nicht vertrauenswürdigen Pfad](#gemeinsames-laden-von-high-fidelity-modulen-aus-einem-nicht-vertrauenswürdigen-pfad)
 - [Ultraprofessionelle High-Fidelity-Datenkodierung und -Verschleierung (T1132)](#ultraprofessionelle-high-fidelity-datenkodierung-und--verschleierung-(t1132))
 - [Ultra-Pro High-Fidelity-Standardkodierung und Nutzlastinjektion (T1132.001)](#ultra-pro-high-fidelity-standardkodierung-und-nutzlastinjektion-(t1132001))
-- [Ultraprofessionelle, nicht standardmäßige High-Fidelity-Kodierung und XOR-Verschleierung (T1132.002)](#ultraprofessionelle-nicht-standardmäßige-high-fidelity-kodierung-und-xor-verschleierung-(t1132002))
+- [Nicht standardmäßige Kodierung und XOR-Verschleierung (T1132.002)](#nicht-standardmäßige-kodierung-und-xor-verschleierung-(t1132002))
 - [Anomaler externer Remote-Service-Zugriffskontext](#anomaler-externer-remote-service-zugriffskontext)
-- [Ultra-Pro-Access-Token-Manipulation und -Imitation (T1134)](#ultra-pro-access-token-manipulation-und--imitation-(t1134))
-- [Ultra-Pro-Token-Imitation über LSASS-Handle-Duplizierung (T1134.001)](#ultra-pro-token-imitation-über-lsass-handle-duplizierung-(t1134001))
-- [Ultra-Pro-Erstellungsprozess mit Token (T1134.002)](#ultra-pro-erstellungsprozess-mit-token-(t1134002))
-- [Ultra-Pro Make-and-Imitate-Token (T1134.003)](#ultra-pro-make-and-imitate-token-(t1134003))
-- [Ultra-Pro-Parent-PID-Spoofing und Prozessbaumverletzung (T1134.004)](#ultra-pro-parent-pid-spoofing-und-prozessbaumverletzung-(t1134004))
-- [Ultra-Pro SID-History-Injektion und DS-Manipulation (T1134.005)](#ultra-pro-sid-history-injektion-und-ds-manipulation-(t1134005))
+- [Zugriffstoken-Manipulation und Identitätswechsel (T1134)](#zugriffstoken-manipulation-und-identitätswechsel-(t1134))
+- [Token-Identitätswechsel über LSASS-Handle-Duplizierung (T1134.001)](#token-identitätswechsel-über-lsass-handle-duplizierung-(t1134001))
+- [Prozess mit Token erstellen (T1134.002)](#prozess-mit-token-erstellen-(t1134002))
+- [Token erstellen und imitieren (T1134.003)](#token-erstellen-und-imitieren-(t1134003))
+- [Übergeordnetes PID-Spoofing und Verletzung des Prozessbaums (T1134.004)](#übergeordnetes-pid-spoofing-und-verletzung-des-prozessbaums-(t1134004))
+- [SID-History-Injektion und DS-Manipulation (T1134.005)](#sid-history-injektion-und-ds-manipulation-(t1134005))
 - [Erkennung von Netzwerkfreigaben (T1135)](#erkennung-von-netzwerkfreigaben-(t1135))
 - [Unbefugte Ultra-Pro-Kontoerstellung (T1136)](#unbefugte-ultra-pro-kontoerstellung-(t1136))
 - [Unbefugte Erstellung eines lokalen Ultra-Pro-Kontos (T1136.001)](#unbefugte-erstellung-eines-lokalen-ultra-pro-kontos-(t1136001))
@@ -225,14 +225,14 @@
 - [Unbefugte Erstellung eines Ultra-Pro-Cloud-Kontos (T1136.003)](#unbefugte-erstellung-eines-ultra-pro-cloud-kontos-(t1136003))
 - [Startpersistenz der Office-Anwendung (T1137)](#startpersistenz-der-office-anwendung-(t1137))
 - [Verdächtige Änderung der globalen Office-Vorlage (Normal.dotm)](#verdächtige-änderung-der-globalen-office-vorlage-(normaldotm))
-- [Ultra-Pro Office Test-DLL-Persistenz (T1137.002)](#ultra-pro-office-test-dll-persistenz-(t1137002))
-- [Persistenz benutzerdefinierter Outlook-Formulare von Ultra-Pro (T1137.003)](#persistenz-benutzerdefinierter-outlook-formulare-von-ultra-pro-(t1137003))
-- [Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004)](#ultra-pro-outlook-home-page-hijacking-&-bypass-(t1137004))
-- [Manipulation von Ultra-Pro Office-Sicherheitsrichtlinien (T1137.005)](#manipulation-von-ultra-pro-office-sicherheitsrichtlinien-(t1137005))
-- [Ultra-Pro Office Add-in Binäre Persistenz (T1137.006)](#ultra-pro-office-add-in-binäre-persistenz-(t1137006))
+- [Office-Test-DLL-Persistenz (T1137.002)](#office-test-dll-persistenz-(t1137002))
+- [Persistenz benutzerdefinierter Outlook-Formulare (T1137.003)](#persistenz-benutzerdefinierter-outlook-formulare-(t1137003))
+- [Entführung und Umgehung der Outlook-Startseite (T1137.004)](#entführung-und-umgehung-der-outlook-startseite-(t1137004))
+- [Manipulation der Sicherheitsrichtlinien des Büros (T1137.005)](#manipulation-der-sicherheitsrichtlinien-des-büros-(t1137005))
+- [Binäre Persistenz des Office-Add-Ins (T1137.006)](#binäre-persistenz-des-office-add-ins-(t1137006))
 - [Heimliche Entschleierung/Dekodierung (T1140)](#heimliche-entschleierungdekodierung-(t1140))
 - [Ultra-Pro-Browsererweiterung Force-Install Persistence (T1176)](#ultra-pro-browsererweiterung-force-install-persistence-(t1176))
-- [Ultra-Pro High-Fidelity-Browser-Sitzungs-Hijacking (T1185)](#ultra-pro-high-fidelity-browser-sitzungs-hijacking-(t1185))
+- [Browser-Sitzungs-Hijacking (T1185)](#browser-sitzungs-hijacking-(t1185))
 - [Erzwungene Authentifizierung (T1187)](#erzwungene-authentifizierung-(t1187))
 - [Vom Browser stammende Shell- oder Systemtool-Ausführung](#vom-browser-stammende-shell--oder-systemtool-ausführung)
 - [Auf dem Webserver wurde ein verdächtiger Cross-Site-Scripting-Versuch (XSS) erkannt](#auf-dem-webserver-wurde-ein-verdächtiger-cross-site-scripting-versuch-(xss)-erkannt)
@@ -4060,16 +4060,17 @@ nicht-administrative Prozesse.
 
 
 ---
-## Ultraprofessionelle, nicht standardmäßige High-Fidelity-Kodierung und XOR-Verschleierung (T1132.002)
+## Nicht standardmäßige Kodierung und XOR-Verschleierung (T1132.002)
 - **ID:** `T1132_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt benutzerdefinierte Codierung und Verschleierung durch Identifizierung der programmatischen Byteebene
-Manipulation (XOR), Backtick-basierte String-Fragmentierung und Zeichencode
-Rekonstruktion in nicht-interaktiven Prozesskontexten.
+- **Beschreibung:** Erkennt benutzerdefinierte Codierung und Verschleierung durch Überwachung:
+- XOR-Manipulationen auf Byte-Ebene
+- Backtick-basierte String-Fragmentierung
+- Zeichencode-Rekonstruktion (z. B. ::FromCharacterCode)
+– Verdächtige nicht interaktive Prozesskontexte (rundll32, regsvr32, colorcpl)
+Filtert legitime Verwaltungs- und Infrastrukturprozesse heraus, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -4099,7 +4100,7 @@ Credential Stuffing oder seitliche Bewegung von externen Sprungboxen.
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt hochriskante Zugriffstoken-Manipulationen und Identitätsdiebstahl durch Überwachung:
+- **Beschreibung:** Erkennt hochriskante Zugriffstoken-Manipulationen und -Identitätsfälschungen durch Überwachung:
 – Spezialisierte Tools, die mit LSASS interagieren, um Token zu stehlen oder zu duplizieren
 – Verdächtige Übergänge der Integritätsebene, die auf eine Token-Erhöhung hinweisen
 – Unbefugter LSASS-Handle-Zugriff
@@ -4785,7 +4786,7 @@ Firewalls umgehen oder versteckte Dienste auslösen.
 
 
 ---
-## Port-Knocking oder Raw-Socket-Listener-Bereitstellung (T1205.001)
+## Port Knocking oder Raw Socket Listener-Bereitstellung (T1205.001)
 - **ID:** `T1205_001.yaml`
 - **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)

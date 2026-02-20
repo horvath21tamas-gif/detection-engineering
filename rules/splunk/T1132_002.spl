@@ -1,4 +1,1 @@
-
-| rex field=CommandLine "(?<CommandLineMatch>(?i)([`]{2,}.*){2,})"
-| eval CommandLineCondition=if(isnotnull(CommandLineMatch), "true", "false")
-| search (CommandLine IN ("*-bxor*", "*bit.bxor*", "*[char[]]*", "*::FromCharacterCode*", "*.replace(*") CommandLineCondition="true") OR (ParentImage IN ("*\\winword.exe", "*\\excel.exe", "*\\outlook.exe", "*\\w3wp.exe") OR Image IN ("*\\rundll32.exe", "*\\regsvr32.exe", "*\\colorcpl.exe") CommandLine IN ("*-bxor*", "*bit.bxor*", "*[char[]]*", "*::FromCharacterCode*", "*.replace(*") NOT (CommandLine IN ("*C:\\Program Files\\*", "*Microsoft\\Exchange*", "*Chocolatey*", "*NuGet*") OR username="NT AUTHORITY\\SYSTEM"))
+(processcommandline="(-bxor|bit\\.bxor|\\[char\\[\\]\\]|::FromCharacterCode|\\.replace\\()" processcommandline="(*i)([`]{2,}.*){2,}") OR (Parentprocessname="(winword\\.exe|excel\\.exe|outlook\\.exe|w3wp\\.exe)$" processname="(rundll32\\.exe|regsvr32\\.exe|colorcpl\\.exe)$" processcommandline="(-bxor|bit\\.bxor|\\[char\\[\\]\\]|::FromCharacterCode|\\.replace\\()") NOT (processcommandline="(C:\\Program Files\\|Microsoft\\Exchange|Chocolatey|NuGet)" UserName="NT AUTHORITY\\SYSTEM")

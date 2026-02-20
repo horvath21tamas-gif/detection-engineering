@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-20 10:46:40`
+**Utolsó frissítés:** `2026-02-20 11:27:46`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -215,14 +215,14 @@
 | T1129 | HIGH | High-Fidelity Shared Module Load from Untrusted Path |
 | T1132 | CRITICAL | Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132) |
 | T1132.001 | CRITICAL | Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132), Ultra-Pro High-Fidelity Standard Encoding & Payload Injection (T1132.001) |
-| T1132.002 | CRITICAL | Ultra-Pro High-Fidelity Non-Standard Encoding & XOR Obfuscation (T1132.002) |
+| T1132.002 | CRITICAL | Non-Standard Encoding & XOR Obfuscation (T1132.002) |
 | T1133 | HIGH | Anomalous External Remote Service Access Context |
-| T1134 | CRITICAL | Ultra-Pro Access Token Manipulation & Impersonation (T1134) |
-| T1134.001 | CRITICAL | Ultra-Pro Token Impersonation via LSASS Handle Duplication (T1134.001) |
-| T1134.002 | CRITICAL | Ultra-Pro Create Process with Token (T1134.002) |
-| T1134.003 | CRITICAL | Ultra-Pro Make and Impersonate Token (T1134.003) |
-| T1134.004 | CRITICAL | Ultra-Pro Parent PID Spoofing & Process Tree Violation (T1134.004) |
-| T1134.005 | CRITICAL | Ultra-Pro SID-History Injection & DS Manipulation (T1134.005) |
+| T1134 | CRITICAL | Access Token Manipulation & Impersonation (T1134) |
+| T1134.001 | CRITICAL | Token Impersonation via LSASS Handle Duplication (T1134.001) |
+| T1134.002 | CRITICAL | Create Process with Token (T1134.002) |
+| T1134.003 | CRITICAL | Make and Impersonate Token (T1134.003) |
+| T1134.004 | CRITICAL | Parent PID Spoofing & Process Tree Violation (T1134.004) |
+| T1134.005 | CRITICAL | SID-History Injection & DS Manipulation (T1134.005) |
 | T1135 | HIGH | Network Share Discovery (T1135) |
 | T1136 | CRITICAL | Ultra-Pro Unauthorized Account Creation (T1136) |
 | T1136.001 | CRITICAL | Ultra-Pro Unauthorized Local Account Creation (T1136.001) |
@@ -230,14 +230,14 @@
 | T1136.003 | CRITICAL | Ultra-Pro Unauthorized Cloud Account Creation (T1136.003) |
 | T1137 | HIGH | Office Application Startup Persistence (T1137) |
 | T1137.001 | CRITICAL | Suspicious Modification of Office Global Template (Normal.dotm) |
-| T1137.002 | CRITICAL | Ultra-Pro Office Test DLL Persistence (T1137.002) |
-| T1137.003 | HIGH | Ultra-Pro Outlook Custom Forms Persistence (T1137.003) |
-| T1137.004 | CRITICAL | Ultra-Pro Outlook Home Page Hijacking & Bypass (T1137.004) |
-| T1137.005 | CRITICAL | Ultra-Pro Office Security Policy Tampering (T1137.005) |
-| T1137.006 | CRITICAL | Ultra-Pro Office Add-in Binary Persistence (T1137.006) |
+| T1137.002 | CRITICAL | Office Test DLL Persistence (T1137.002) |
+| T1137.003 | HIGH | Outlook Custom Forms Persistence (T1137.003) |
+| T1137.004 | CRITICAL | Outlook Home Page Hijacking & Bypass (T1137.004) |
+| T1137.005 | CRITICAL | Office Security Policy Tampering (T1137.005) |
+| T1137.006 | CRITICAL | Office Add-in Binary Persistence (T1137.006) |
 | T1140 | HIGH | Stealthy Deobfuscation/Decoding (T1140) |
 | T1176 | CRITICAL | Ultra-Pro Browser Extension Force-Install Persistence (T1176) |
-| T1185 | CRITICAL | Ultra-Pro High-Fidelity Browser Session Hijacking (T1185) |
+| T1185 | CRITICAL | Browser Session Hijacking (T1185) |
 | T1187 | CRITICAL | Forced Authentication (T1187) |
 | T1189 | CRITICAL | Browser-Originating Shell or System Tool Execution |
 | T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |

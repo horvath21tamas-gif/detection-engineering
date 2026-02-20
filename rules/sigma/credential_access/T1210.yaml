@@ -1,47 +1,72 @@
-title: Ultra-Pro High-Fidelity Exploitation of Remote Services (T1210)
-id: 08680bfd-0625-4cd6-8ef4-3d8341d163b1
+title: Remote Service RCE / Post-Exploitation Spawn Detection (T1210)
+id: 7b5c6832-2ce3-4450-b9a8-e20ded698740
 status: stable
 description: |
-    Detects successful post-exploitation patterns where a network service spawns an 
-    interactive shell or a proxy binary. Specifically tuned to catch RCE via SMB, 
-    RPC, Spooler, and WMI while ignoring standard IT orchestration.
+    Detects post-exploitation behavior following exploitation of remote services 
+    (SMB, RPC, Spooler, WMI, SQL, IIS). 
+    
+    Focuses on:
+    - Service processes spawning interactive shells
+    - Encoded or hidden PowerShell execution
+    - LOLBin proxy execution
+    - Suspicious execution paths
+    - SYSTEM / NETWORK SERVICE context abuse
+    
+    Designed to reduce noise from legitimate IT orchestration.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-20
+references:
+    - https://attack.mitre.org/techniques/T1210/
 tags:
     - attack.lateral_movement
+    - attack.execution
     - attack.t1210
 logsource:
     category: process_creation
     product: windows
-detection:
-    selection_parent:
-        ParentImage|endswith:
-            - '\spoolsv.exe'         
-            - '\lsass.exe'           
-            - '\services.exe'        
-            - '\sqlservr.exe'       
-            - '\umworkerprocess.exe' 
-            - '\w3wp.exe'          
 
-    selection_child_binaries:
+detection:
+    selection_service_parents:
+        ParentImage|endswith:
+            - '\spoolsv.exe'
+            - '\services.exe'
+            - '\svchost.exe'
+            - '\lsass.exe'
+            - '\wmiprvse.exe'
+            - '\sqlservr.exe'
+            - '\w3wp.exe'
+            - '\umworkerprocess.exe'
+            - '\winrm.exe'
+
+    selection_shell_children:
         Image|endswith:
             - '\cmd.exe'
             - '\powershell.exe'
             - '\pwsh.exe'
             - '\mshta.exe'
-            - '\rundll32.exe'       
-            - '\werfault.exe'        
+            - '\rundll32.exe'
+            - '\regsvr32.exe'
             - '\certutil.exe'
-            - '\scrcons.exe'         
+            - '\bitsadmin.exe'
+            - '\scrcons.exe'
+            - '\whoami.exe'
+            - '\net.exe'
+            - '\net1.exe'
 
-    selection_child_args:
+    selection_suspicious_args:
         CommandLine|contains:
-            - ' -nop'                
-            - ' -w hidden'           
-            - ' -enc'           
-            - 'bypass'             
-            - 'iex('                
-            - 'net user /add'      
+            - ' -nop'
+            - ' -w hidden'
+            - ' -enc'
+            - ' -encodedcommand'
+            - 'bypass'
+            - 'iex('
+            - 'Invoke-Expression'
+            - 'DownloadString'
+            - 'FromBase64String'
+            - 'net user /add'
+            - 'net localgroup administrators'
 
     selection_suspicious_paths:
         Image|contains:
@@ -49,15 +74,56 @@ detection:
             - '\Temp\'
             - '\Users\Public\'
             - '\PerfLogs\'
+        CurrentDirectory|contains:
+            - '\AppData\'
+            - '\Temp\'
 
-    filter_legit_admin:
+    selection_service_context:
+        User|contains:
+            - 'SYSTEM'
+            - 'NETWORK SERVICE'
+            - 'LOCAL SERVICE'
+        IntegrityLevel:
+            - 'High'
+            - 'System'
+
+    filter_legit_orchestration:
         - CommandLine|contains:
-            - 'C:\Windows\System32\wbem\WmiPrvSE.exe' 
-            - 'C:\Windows\ccmcache\'                 
+            - 'C:\Windows\System32\wbem\WmiPrvSE.exe'
+            - 'C:\Windows\ccmcache\'
             - '\HealthCheck\'
+            - 'sccm'
+            - 'pdqdeploy'
         - ParentCommandLine|contains:
-            - 'winrm'                                
-        - username: 'NT AUTHORITY\NETWORK SERVICE'      
+            - 'winrm'
+            - 'ansible'
+        - Image|contains:
+            - '\Program Files\Microsoft Monitoring Agent\'
+            - '\Program Files\Elastic\'
+            - '\Program Files\Splunk\'
 
-    condition: selection_parent and (selection_child_args or selection_suspicious_paths or selection_child_binaries) and not filter_legit_admin
+    condition:
+        selection_service_parents
+        and selection_shell_children
+        and (selection_suspicious_args or selection_suspicious_paths or selection_service_context)
+        and not filter_legit_orchestration
+
+fields:
+    - User
+    - Image
+    - ParentImage
+    - CommandLine
+    - ParentCommandLine
+    - IntegrityLevel
+    - CurrentDirectory
+    - LogonId
+    - Hashes
+
+falsepositives:
+    - Approved SCCM / Intune / PDQ deployments
+    - WinRM-based automation
+    - SQL Server maintenance jobs invoking cmd utilities
+    - IIS management scripts
+    - Security tooling performing controlled tests
+
 level: critical

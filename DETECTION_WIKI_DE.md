@@ -253,10 +253,10 @@
 - [Phishing über einen bösartigen Link mit Domänen- und Absenderanomalien](#phishing-über-einen-bösartigen-link-mit-domänen--und-absenderanomalien)
 - [Ultraprofessionelle Verkehrssignalisierung und Port-Knocking (T1205)](#ultraprofessionelle-verkehrssignalisierung-und-port-knocking-(t1205))
 - [Ultra-Pro Port Knocking & Raw Socket Listener (T1205.001)](#ultra-pro-port-knocking-&-raw-socket-listener-(t1205001))
-- [Ultra-Pro-Steckdosenfilter und WFP-Verkehrssignalisierung (T1205.002)](#ultra-pro-steckdosenfilter-und-wfp-verkehrssignalisierung-(t1205002))
-- [Ultra-Pro High-Fidelity-Rogue-DC-Topologiemanipulation (T1207)](#ultra-pro-high-fidelity-rogue-dc-topologiemanipulation-(t1207))
-- [Ultraprofessionelle High-Fidelity-Nutzung von Remote-Diensten (T1210)](#ultraprofessionelle-high-fidelity-nutzung-von-remote-diensten-(t1210))
-- [Ultra-Pro High-Fidelity-Berechtigungseskalationsausnutzung (T1211)](#ultra-pro-high-fidelity-berechtigungseskalationsausnutzung-(t1211))
+- [WFP-Callout-Registrierung oder Kernel-Treiber-Staging (T1205.002)](#wfp-callout-registrierung-oder-kernel-treiber-staging-(t1205002))
+- [Rogue DC / DCShadow-Erkennung (T1207)](#rogue-dc--dcshadow-erkennung-(t1207))
+- [Remote Service RCE / Post-Exploitation Spawn Detection (T1210)](#remote-service-rce--post-exploitation-spawn-detection-(t1210))
+- [Sandbox-Breakout/Ausnutzung der Privilegieneskalation (T1211)](#sandbox-breakoutausnutzung-der-privilegieneskalation-(t1211))
 - [Erkennung der Ausnutzung von Anmeldeinformationsdiensten (T1212)](#erkennung-der-ausnutzung-von-anmeldeinformationsdiensten-(t1212))
 - [Interne Repository-Massendump-Erkennung (T1213)](#interne-repository-massendump-erkennung-(t1213))
 - [Confluence Mass Scraping-Erkennung (T1213.001)](#confluence-mass-scraping-erkennung-(t1213001))
@@ -4795,16 +4795,23 @@ Registrierung von Rohpaket-Erfassungstreibern und verdächtiger Firewall
 
 
 ---
-## Ultra-Pro-Steckdosenfilter und WFP-Verkehrssignalisierung (T1205.002)
+## WFP-Callout-Registrierung oder Kernel-Treiber-Staging (T1205.002)
 - **ID:** `T1205_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FLTMC.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die unbefugte Registrierung von Netzwerk-Socket-Filtern oder WFP-Callouts.
-Überwacht das Laden von Treibern auf niedriger Ebene und die Manipulation der WFP-Datenbank von
-nicht vertrauenswürdige Prozesslinien, eine gängige Technik für heimliches Port-Klopfen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt verdächtige Aufrufe oder Filter der Windows Filtering Platform (WFP).
+Manipulation und Kernel-Treiber-Staging aus nicht vertrauenswürdigen Prozessherkunftsbereichen.
+Angreifer können böswillige WFP-Callouts oder Socket-Filter registrieren, um sie zu aktivieren
+heimliches Portklopfen, verdecktes C2 oder Abfangen des Datenverkehrs.
+
+Diese Regel korreliert:
+- WFP/Callout/Filteränderung über Netsh oder PowerShell
+- Erstellung eines Kernel-Treiberdienstes aus verdächtigen Pfaden
+- Ausführung über interaktive oder Skript-Engines
+– Ausgeschlossen sind bekannte EDR-/Sicherheits-Tooling-Pfade
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

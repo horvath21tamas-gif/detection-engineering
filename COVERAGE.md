@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-20 08:42:26`
+**Utolsó frissítés:** `2026-02-20 09:34:00`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -258,10 +258,10 @@
 | T1204.004 | HIGH | Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel |
 | T1205 | HIGH | Ultra-Pro Traffic Signaling & Port Knocking (T1205) |
 | T1205.001 | HIGH | Ultra-Pro Port Knocking & Raw Socket Listener (T1205.001) |
-| T1205.002 | CRITICAL | Ultra-Pro Socket Filter & WFP Traffic Signaling (T1205.002) |
-| T1207 | CRITICAL | Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207) |
-| T1210 | CRITICAL | Ultra-Pro High-Fidelity Exploitation of Remote Services (T1210) |
-| T1211 | CRITICAL | Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211) |
+| T1205.002 | CRITICAL | WFP Callout Registration or Kernel Driver Staging (T1205.002) |
+| T1207 | CRITICAL | Rogue DC / DCShadow Detection (T1207) |
+| T1210 | CRITICAL | Remote Service RCE / Post-Exploitation Spawn Detection (T1210) |
+| T1211 | CRITICAL | Sandbox Breakout / Privilege Escalation Exploitation (T1211) |
 | T1212 | CRITICAL | Credential Service Exploitation Detection (T1212) |
 | T1213 | CRITICAL | Internal Repository Mass Dump Detection (T1213) |
 | T1213.001 | CRITICAL | Confluence Mass Scraping Detection (T1213.001) |
@@ -370,7 +370,7 @@
 | T1547.003 | CRITICAL | High-Fidelity Time Provider Persistence (T1547.003) |
 | T1547.004 | CRITICAL | High-Fidelity Winlogon Helper DLL Persistence (T1547.004) |
 | T1547.005 | CRITICAL | High-Fidelity SSP DLL Persistence (T1547.005) |
-| T1547.006 | CRITICAL | High-Fidelity Kernel Driver Registration (T1547.006) |
+| T1547.006 | CRITICAL | WFP Callout Registration or Kernel Driver Staging (T1205.002), High-Fidelity Kernel Driver Registration (T1547.006) |
 | T1547.007 | HIGH | High-Fidelity Browser Session Persistence (T1547.007) |
 | T1547.008 | CRITICAL | High-Fidelity LSASS Driver/Package Persistence (T1547.008) |
 | T1547.009 | HIGH | High-Fidelity Shortcut Modification Detection |
@@ -445,7 +445,7 @@
 | T1561.001 | CRITICAL | Disk Content Wipe, Disk Wipe |
 | T1561.002 | CRITICAL | Disk Structure Wipe, Disk Wipe |
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
-| T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
+| T1562.001 | CRITICAL | WFP Callout Registration or Kernel Driver Staging (T1205.002), Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.002 | CRITICAL | Windows Event Log Service Impairment |
 | T1562.003 | HIGH | Command History Logging Impairment |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |

@@ -253,10 +253,10 @@
 - [Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel](#adathalászat-rosszindulatú-linken-keresztül-domain-és-feladó-rendellenességekkel)
 - [Ultra-Pro közlekedési jelzések és portok kopogtatása (T1205)](#ultra-pro-közlekedési-jelzések-és-portok-kopogtatása-(t1205))
 - [Ultra-Pro Port Knocking & Raw Socket Listener (T1205.001)](#ultra-pro-port-knocking-&-raw-socket-listener-(t1205001))
-- [Ultra-Pro Socket szűrő és WFP forgalomjelző (T1205.002)](#ultra-pro-socket-szűrő-és-wfp-forgalomjelző-(t1205002))
-- [Ultra-Pro High-Fidelity Rogue DC topológia manipuláció (T1207)](#ultra-pro-high-fidelity-rogue-dc-topológia-manipuláció-(t1207))
-- [Ultra-Pro, nagy pontosságú távoli szolgáltatások kihasználása (T1210)](#ultra-pro-nagy-pontosságú-távoli-szolgáltatások-kihasználása-(t1210))
-- [Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211)](#ultra-pro-high-fidelity-privilege-escalation-exploitation-(t1211))
+- [WFP kiemelés regisztrációja vagy kernel-illesztőprogram-beállítás (T1205.002)](#wfp-kiemelés-regisztrációja-vagy-kernel-illesztőprogram-beállítás-(t1205002))
+- [Rogue DC / DCSárnyékérzékelés (T1207)](#rogue-dc--dcsárnyékérzékelés-(t1207))
+- [Remote Service RCE/Post Exploitation Spawn Detection (T1210)](#remote-service-rcepost-exploitation-spawn-detection-(t1210))
+- [Sandbox Breakout / Privilege Escalation Exploitation (T1211)](#sandbox-breakout--privilege-escalation-exploitation-(t1211))
 - [Hitelesítési adatok szolgáltatás kihasználásának észlelése (T1212)](#hitelesítési-adatok-szolgáltatás-kihasználásának-észlelése-(t1212))
 - [Belső adattár tömegkiíratásának észlelése (T1213)](#belső-adattár-tömegkiíratásának-észlelése-(t1213))
 - [Összefolyási tömeg kaparás észlelése (T1213.001)](#összefolyási-tömeg-kaparás-észlelése-(t1213001))
@@ -4795,16 +4795,23 @@ nem megbízható shellekből kezdeményezett módosítások (UDP/ICMP/LocalPort 
 
 
 ---
-## Ultra-Pro Socket szűrő és WFP forgalomjelző (T1205.002)
+## WFP kiemelés regisztrációja vagy kernel-illesztőprogram-beállítás (T1205.002)
 - **ID:** `T1205_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FLTMC.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a hálózati aljzatszűrők vagy WFP-felhívások jogosulatlan regisztrációját.
-Figyeli az alacsony szintű illesztőprogram-betöltést és a WFP-adatbázis kezelését
-megbízhatatlan folyamatvonalak, gyakori technika a titkos portkopogtatásra.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a gyanús Windows Filtering Platform (WFP) feliratot vagy szűrőt
+manipuláció és kernel-illesztőprogramok állomásoztatása nem megbízható folyamatvonalból.
+A támadók rosszindulatú WFP-feliratokat vagy socket-szűrőket regisztrálhatnak az engedélyezéshez
+lopakodó port kopogtatás, rejtett C2 vagy forgalom elfogása.
+
+Ez a szabály korrelál:
+- WFP / kiemelés / szűrő módosítása netsh vagy PowerShell segítségével
+- Kernel-illesztőprogram-szolgáltatás létrehozása gyanús útvonalakból
+- Végrehajtás interaktív vagy script motorokból
+- Nem tartalmazza az ismert EDR/biztonsági szerszámozási útvonalakat
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -4954,7 +4961,7 @@ A nem szabványos végrehajtási környezetek és a nem megbízható automatizá
 - Tömeges REST API lekérdezések
 - SharePoint Online Management Shell használata
 - Nem szabványos végrehajtási környezetek (nem rendszergazdai automatizálás)
-Az exportált tartalom ideiglenes/nyilvános könyvtárakban történő állomásoztatása szintén meg van jelölve.
+Az exportált tartalom átmeneti/nyilvános könyvtárakban történő állomásoztatása szintén meg van jelölve.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

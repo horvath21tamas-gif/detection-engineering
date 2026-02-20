@@ -253,10 +253,10 @@
 - [Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel](#adathalászat-rosszindulatú-linken-keresztül-domain-és-feladó-rendellenességekkel)
 - [Ultra-Pro Traffic Signaling & Port Knocking (T1205)](#ultra-pro-traffic-signaling-&-port-knocking-(t1205))
 - [Ultra-Pro Port Knocking & Raw Socket Listener (T1205.001)](#ultra-pro-port-knocking-&-raw-socket-listener-(t1205001))
-- [Ultra-Pro Socket Filter & WFP Traffic Signaling (T1205.002)](#ultra-pro-socket-filter-&-wfp-traffic-signaling-(t1205002))
-- [Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207)](#ultra-pro-high-fidelity-rogue-dc-topology-manipulation-(t1207))
-- [Ultra-Pro High-Fidelity Exploitation of Remote Services (T1210)](#ultra-pro-high-fidelity-exploitation-of-remote-services-(t1210))
-- [Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211)](#ultra-pro-high-fidelity-privilege-escalation-exploitation-(t1211))
+- [WFP Callout Registration or Kernel Driver Staging (T1205.002)](#wfp-callout-registration-or-kernel-driver-staging-(t1205002))
+- [Rogue DC / DCShadow Detection (T1207)](#rogue-dc--dcshadow-detection-(t1207))
+- [Remote Service RCE / Post-Exploitation Spawn Detection (T1210)](#remote-service-rce--post-exploitation-spawn-detection-(t1210))
+- [Sandbox Breakout / Privilege Escalation Exploitation (T1211)](#sandbox-breakout--privilege-escalation-exploitation-(t1211))
 - [Credential Service Exploitation Detection (T1212)](#credential-service-exploitation-detection-(t1212))
 - [Internal Repository Mass Dump Detection (T1213)](#internal-repository-mass-dump-detection-(t1213))
 - [Confluence Mass Scraping Detection (T1213.001)](#confluence-mass-scraping-detection-(t1213001))
@@ -5037,16 +5037,23 @@ modifications (UDP/ICMP/LocalPort Any) initiated from untrusted shells.
 
 
 ---
-## Ultra-Pro Socket Filter & WFP Traffic Signaling (T1205.002)
+## WFP Callout Registration or Kernel Driver Staging (T1205.002)
 - **ID:** `T1205_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FLTMC.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized registration of network socket filters or WFP callouts. 
-Monitors for low-level driver loading and WFP database manipulation from 
-untrusted process lineages, a common technique for stealthy port knocking.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects suspicious Windows Filtering Platform (WFP) callout or filter 
+manipulation and kernel driver staging from untrusted process lineage.
+Attackers may register malicious WFP callouts or socket filters to enable
+stealthy port knocking, covert C2, or traffic interception.
+
+This rule correlates:
+  - WFP / callout / filter modification via netsh or PowerShell
+  - Kernel driver service creation from suspicious paths
+  - Execution from interactive or scripting engines
+  - Excludes known EDR/security tooling paths
 
 
 #### 🚨 Response Playbook

@@ -4041,17 +4041,17 @@ leszármazási vonalak és a Certutil visszaélése a hasznos teher telepítése
 
 
 ---
-## Ultra-Pro High-Fidelity szabványos kódolás és hasznos terhelés befecskendezése (T1132.001)
+## Szabványos kódolás és hasznos terhelés befecskendezése (T1132.001)
 - **ID:** `T1132_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A beágyazott kód azonosításával észleli a gyanús szabványos kódolást
-végrehajtható fejlécek (MZ/PE) a Base64 karakterláncokon belül, rendellenes
-programozott dekódolás és nagy entrópiájú parancssorok innen
-nem adminisztratív folyamatok.
+- **Leírás:** Felismeri a gyanús szabványos kódoláshasználatot a következők figyelésével:
+- Beágyazott végrehajtható fejlécek (MZ/PE) a Base64 karakterláncokon belül
+- Programozott dekódolás FromBase64String, DeflateStream, MemoryStream vagy .NET konverziókkal
+- Nagy entrópiájú parancssorok, amelyek a hasznos terhelés befecskendezését jelzik
+- Nem adminisztratív folyamatok, amelyek kódolt hasznos adatokat hajtanak végre
+Szűri a megbízható infrastruktúrát a téves pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -4136,7 +4136,7 @@ Nagy pontosságú észlelés szűréssel:
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 - **Leírás:** Felismeri a jogosulatlan folyamat-létrehozást duplikált tokenek használatával a következő megfigyeléssel:
-- Támadó eszközök és token manipulációs parancsok
+- Támadó eszközök és token-manipulációs parancsok
 - Gyanús integritásszint-átmenet közepesről RENDSZERRE
 - Kiszűri a legitim rendszerfolyamatokat, az UAC-emeléseket és a biztonsági ügynököket
 
@@ -4385,8 +4385,8 @@ a forrás IP-hírneve, valamint az engedélyezett kiépítési szolgáltatási t
 - **Becsült zajszint:** Magas (Tárolás-igényes)
 - **Leírás:** Felismeri a jogosulatlan Office-bővítmények (.wll, .xll) fennmaradását a következők figyelésével:
 - Nem megbízható fájlhelyek (Word/Excel indító mappák, AddIns mappa)
-- Office-bővítmények binárisai gyanús írókkal (PowerShell, beállítás, böngésző stb.)
-- Kizárja az ismert megbízható alkalmazásokat a hamis pozitívumok csökkentése érdekében
+- Office-bővítmények bináris fájljai gyanús írókkal (PowerShell, beállítás, böngésző stb.)
+- Kizárja az ismert megbízható alkalmazásokat a téves pozitívumok csökkentésére
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

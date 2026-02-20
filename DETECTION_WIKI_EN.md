@@ -4239,17 +4239,17 @@ lineages and the abuse of Certutil for payload deployment.
 
 
 ---
-## Ultra-Pro High-Fidelity Standard Encoding & Payload Injection (T1132.001)
+## Standard Encoding & Payload Injection (T1132.001)
 - **ID:** `T1132_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects suspicious standard encoding usage by identifying embedded 
-executable headers (MZ/PE) within Base64 strings, anomalous 
-programmatic decoding, and high-entropy command lines from 
-non-administrative processes.
+- **Leírás:** Detects suspicious standard encoding usage by monitoring:
+  - Embedded executable headers (MZ/PE) within Base64 strings
+  - Programmatic decoding via FromBase64String, DeflateStream, MemoryStream, or .NET conversions
+  - High-entropy command lines indicating payload injection
+  - Non-administrative processes executing encoded payloads
+Filters trusted infrastructure to reduce false positives.
 
 
 #### 🚨 Response Playbook

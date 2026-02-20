@@ -4041,17 +4041,17 @@ Abstammungslinien und der Missbrauch von Certutil für die Nutzlastbereitstellun
 
 
 ---
-## Ultra-Pro High-Fidelity-Standardkodierung und Nutzlastinjektion (T1132.001)
+## Standardkodierung und Nutzlastinjektion (T1132.001)
 - **ID:** `T1132_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt verdächtige Standard-Codierungsnutzung durch Identifizierung eingebetteter Codes
-Ausführbare Header (MZ/PE) innerhalb von Base64-Strings, anomal
-programmatische Dekodierung und Befehlszeilen mit hoher Entropie von
-nicht-administrative Prozesse.
+- **Beschreibung:** Erkennt verdächtige Standardkodierungsnutzung durch Überwachung:
+– Eingebettete ausführbare Header (MZ/PE) in Base64-Strings
+- Programmatische Dekodierung über FromBase64String-, DeflateStream-, MemoryStream- oder .NET-Konvertierungen
+- Befehlszeilen mit hoher Entropie, die die Nutzlastinjektion anzeigen
+– Nicht-administrative Prozesse, die codierte Nutzlasten ausführen
+Filtert vertrauenswürdige Infrastrukturen, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

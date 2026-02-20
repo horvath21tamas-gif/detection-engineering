@@ -1,57 +1,41 @@
-title: Ultra-Pro High-Fidelity Audio Capture & Spying (T1123)
+title: Audio Capture & Spying (T1123)
 id: 9840be94-2851-4c12-b73e-695ff7575989
 status: stable
 description: |
-    Detects unauthorized audio recording by correlating low-level multimedia API 
-    calls (winmm, dsound) with suspicious process lineages (Shells, Office, W3WP) 
-    and anomalous command-line arguments used by offensive toolsets.
+    Detects unauthorized audio recording and spying.
+    Focuses on:
+      - Low-level multimedia API calls (winmm.dll, dsound.dll, NAudio)
+      - Script-based audio capture routines
+      - Suspicious parent/child process relationships (Office apps, shells, web servers)
+      - Malicious command-line patterns used by offensive tooling
+    Filters legitimate communication apps to reduce false positives.
+
 author: hota05
 date: 2026-02-05
 tags:
     - attack.collection
     - attack.t1123
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_mci_cmd:
-        CommandLine|contains:
-            - 'winmm.dll,mciSendString'
-            - 'record'                
-            - 'save'                
-            - 'open new type waveaudio'
+        CommandLine: '(winmm\.dll,?mciSendString|record|save|open new type waveaudio)'
 
     selection_scripts:
-        CommandLine|contains:
-            - 'Get-MicrophoneAudio'   
-            - 'Start-AudioCapture'
-            - 'waveInStart'          
-            - 'naudio'             
+        CommandLine: '(Get-MicrophoneAudio|Start-AudioCapture|waveInStart|naudio)'
 
     selection_context:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\cmd.exe'
-            - '\rundll32.exe'
-            - '\mshta.exe'
-            - '\wscript.exe'
-        ParentImage|endswith:
-            - '\winword.exe'          
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\w3wp.exe'             
+        Image: '(powershell\.exe|cmd\.exe|rundll32\.exe|mshta\.exe|wscript\.exe)$'
+        ParentImage: '(winword\.exe|excel\.exe|outlook\.exe|w3wp\.exe)$'
         IntegrityLevel: 'Medium'
 
     filter_legit_comms:
-        - Image|contains:
-            - '\Teams.exe'
-            - '\Zoom.exe'
-            - '\webex'
-            - '\slack.exe'
-            - '\discord.exe'
-            - '\whatsapp.exe'
-        - Image|startswith: 'C:\Program Files\Google\Chrome\' 
-        - Image|startswith: 'C:\Program Files (x86)\Microsoft\Edge\'
+        Image: '(Teams\.exe|Zoom\.exe|webex|slack\.exe|discord\.exe|whatsapp\.exe)$'
+        Image: '^(C:\\Program Files\\Google\\Chrome\\|C:\\Program Files \\(x86\\)\\Microsoft\\Edge\\)'
 
     condition: (selection_mci_cmd or selection_scripts) and selection_context and not filter_legit_comms
+
 level: critical

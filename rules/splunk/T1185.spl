@@ -1,1 +1,11 @@
-TargetFilename IN ("*\\Default\\Cookies*", "*\\Default\\Network\\Cookies*", "*\\Profiles\*.default-release\\cookies.sqlite*", "*\\Local State*") Image IN ("*\\Users\\*", "*\\Temp\\*", "*\\AppData\\Local\\*", "*\\AppData\\Roaming\\*", "*\\Public\\*") OR Image IN ("*\\powershell.exe", "*\\pwsh.exe", "*\\cmd.exe", "*\\cscript.exe", "*\\wscript.exe", "*\\python.exe") NOT (Image IN ("*\\chrome.exe", "*\\msedge.exe", "*\\firefox.exe", "*\\brave.exe", "*\\opera.exe") OR Image IN ("C:\\Program Files\\*", "C:\\Program Files (x86)\\*", "C:\\Windows\\System32\\*") OR username="NT AUTHORITY\\SYSTEM")
+
+| rex field=Image "(?<ImageMatch>(\\\\Users\\\\|\\\\Temp\\\\|\\\\AppData\\\\Local\\\\|\\\\AppData\\\\Roaming\\\\|\\\\Public\\\\))"
+| eval ImageCondition=if(isnotnull(ImageMatch), "true", "false")
+| rex field=Image "(?<ImageMatch2>(powershell\\.exe|pwsh\\.exe|cmd\\.exe|cscript\\.exe|wscript\\.exe|python\\.exe)$)"
+| eval ImageCondition2=if(isnotnull(ImageMatch2), "true", "false")
+| rex field=Image "(?<ImageMatch3>(chrome\\.exe|msedge\\.exe|firefox\\.exe|brave\\.exe|opera\\.exe)$)"
+| eval ImageCondition3=if(isnotnull(ImageMatch3), "true", "false")
+| rex field=Image "(?<ImageMatch4>^(C:\\\\Program Files\\\\|C:\\\\Program Files \\(x86\\)\\\\|C:\\\\Windows\\\\System32\\\\))"
+| eval ImageCondition4=if(isnotnull(ImageMatch4), "true", "false")
+| search ImageCondition="true" OR ImageCondition2="true" NOT (ImageCondition3="true" OR (ImageCondition4="true" username="NT AUTHORITY\\SYSTEM"))
+| regex TargetFilename="(\\\\Default\\\\Cookies|\\\\Default\\\\Network\\\\Cookies|\\\\Profiles\\\\.*\\.default-release\\\\cookies\\.sqlite|\\\\Local State)$"

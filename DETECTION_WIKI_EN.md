@@ -4654,16 +4654,14 @@ and to allow installation from non-official webstores.
 
 
 ---
-## Ultra-Pro High-Fidelity Browser Session Hijacking (T1185)
+## Browser Session Hijacking (T1185)
 - **ID:** `T1185.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Tárolás-igényes)
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects advanced browser session hijacking by monitoring unauthorized access 
-to cookie databases from untrusted/unsigned processes or suspicious locations 
-like \Temp or \AppData.
+to browser cookie databases from untrusted or unsigned processes, or from 
+suspicious locations such as \Temp or \AppData.
 
 
 #### 🚨 Response Playbook

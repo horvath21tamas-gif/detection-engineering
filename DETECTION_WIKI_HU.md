@@ -4433,16 +4433,14 @@ A támadók ezeket a rosszindulatú bővítmények telepítésére használják,
 
 
 ---
-## Ultra-Pro High-Fidelity böngésző munkamenet-eltérítés (T1185)
+## Böngészőmunkamenet-eltérítés (T1185)
 - **ID:** `T1185.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Tárolás-igényes)
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Az illetéktelen hozzáférés figyelésével észleli a fejlett böngésző-munkamenet-eltérítést
-nem megbízható/nem aláírt folyamatokból vagy gyanús helyekről származó adatbázisok sütésére
-például a \Temp vagy \AppData.
+a böngésző cookie-adatbázisaihoz nem megbízható vagy aláíratlan folyamatokból, vagy a
+gyanús helyek, például \Temp vagy \AppData.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

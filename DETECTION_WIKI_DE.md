@@ -4433,16 +4433,14 @@ und um die Installation von nicht offiziellen Webstores zu ermöglichen.
 
 
 ---
-## Ultra-Pro High-Fidelity-Browser-Sitzungs-Hijacking (T1185)
+## Browser-Sitzungs-Hijacking (T1185)
 - **ID:** `T1185.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Speicherintensiv)
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt fortgeschrittenes Browser-Session-Hijacking durch Überwachung unbefugter Zugriffe
-an Cookie-Datenbanken von nicht vertrauenswürdigen/nicht signierten Prozessen oder verdächtigen Standorten
-wie \Temp oder \AppData.
+an Browser-Cookie-Datenbanken von nicht vertrauenswürdigen oder nicht signierten Prozessen oder von
+verdächtige Speicherorte wie \Temp oder \AppData.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**
@@ -4793,7 +4791,7 @@ Firewalls umgehen oder versteckte Dienste auslösen.
 
 
 ---
-## Port Knocking oder Raw Socket Listener-Bereitstellung (T1205.001)
+## Port-Knocking oder Raw-Socket-Listener-Bereitstellung (T1205.001)
 - **ID:** `T1205_001.yaml`
 - **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)

@@ -1,56 +1,127 @@
-title: Ultra-Pro High-Fidelity Odbcconf Proxy Execution (T1218.008)
+title: Odbcconf REGSVR Proxy Execution
 id: 6c48c067-e162-4b76-b663-1e832b3d0754
 status: stable
-description: |
-    Detects the abuse of odbcconf.exe to load malicious DLLs via the REGSVR action. 
-    Focuses on command-line anomalies, suspicious parent processes, and 
-    non-standard file paths to minimize false positives from legitimate installers.
+description: >
+  Detects high-confidence abuse of odbcconf.exe for proxy execution
+  via the REGSVR action (MITRE ATT&CK T1218.008).
+
+  The rule focuses on anomalous REGSVR invocation patterns, execution
+  of DLLs from user-writable or remote paths, suspicious parent
+  processes, relocated binaries, and uncommon integrity contexts.
+
+  Designed to reduce noise from legitimate installer-driven ODBC
+  configuration activity.
+
 author: hota05
-date: 2026-02-03
-tags:
-    - attack.defense_evasion
-    - attack.t1218.008
+date: 2026/02/20
+references:
+  - https://attack.mitre.org/techniques/T1218/008/
+  - https://lolbas-project.github.io/lolbas/Binaries/Odbcconf/
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_img:
-        - Image|endswith: '\odbcconf.exe'
-        - OriginalFileName: 'odbcconf.exe'
 
-    selection_cmd_args:
-        CommandLine|contains:
-            - 'REGSVR'
-            - 'regsvr'
-            - ' /a ' 
+  selection_odbcconf_image:
+    Image|endswith: '\odbcconf.exe'
+    OriginalFileName: 'odbcconf.exe'
 
-    selection_anomalies:
-        CommandLine|contains:
-            - '\Users\'
-            - '\AppData\'
-            - '\Temp\'
-            - '\Public\'
-            - '\Downloads\'
-            - '.txt' 
-            - '.dat'
-            - '.png'
-            - '\\'   
+  selection_relocated_binary:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\ProgramData\'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\powershell.exe'
-            - '\cmd.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
+  selection_regsvr_action:
+    CommandLine|contains:
+      - 'REGSVR'
+      - 'regsvr'
+      - '/a'
+      - '{REGSVR'
 
-    filter_trusted_install:
-        ParentImage|startswith: 'C:\Windows\Installer\'
-        username: 'NT AUTHORITY\SYSTEM'
+  selection_user_writable_dll:
+    CommandLine|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Public\'
+      - '\Downloads\'
 
-    condition: selection_img and selection_cmd_args and (selection_anomalies or selection_suspicious_parent) and not filter_trusted_install
+  selection_remote_dll:
+    CommandLine|contains:
+      - 'http://'
+      - 'https://'
+      - '\\\\'
+
+  selection_non_dll_extension:
+    CommandLine|contains:
+      - '.txt'
+      - '.dat'
+      - '.png'
+      - '.tmp'
+      - '.inf'
+
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\powerpnt.exe'
+      - '\outlook.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+      - '\rundll32.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+
+  selection_low_integrity:
+    IntegrityLevel:
+      - 'Low'
+      - 'Medium'
+
+  filter_legitimate_system_path:
+    Image|startswith:
+      - 'C:\Windows\System32\'
+      - 'C:\Windows\SysWOW64\'
+
+  filter_legitimate_installers:
+    ParentImage|endswith:
+      - '\msiexec.exe'
+      - '\trustedinstaller.exe'
+    IntegrityLevel: 'High'
+
+  filter_system_context:
+    User|startswith: 'NT AUTHORITY\'
+
+  condition: >
+    selection_odbcconf_image
+    and selection_low_integrity
+    and (selection_relocated_binary
+        or (selection_regsvr_action
+            and (selection_user_writable_dll
+                or selection_remote_dll
+                or selection_non_dll_extension
+                or selection_suspicious_parent)))
+    and not (filter_legitimate_system_path
+        and filter_legitimate_installers)
+    and not filter_system_context
+
+falsepositives:
+  - Rare enterprise ODBC driver deployment scripts
+  - Development environments registering custom ODBC DLLs
+  - Security testing activity
+
 level: critical
+
+tags:
+  - attack.execution
+  - attack.defense_evasion
+  - attack.t1218.008
+  - attack.lolbas
+  - attack.windows

@@ -1,59 +1,102 @@
-title: Ultra-Pro High-Fidelity SharePoint Mass Data Exfiltration (T1213.002)
-id: d956d265-2fa3-45e6-a44c-19e84c56e77e
+title: Enterprise SharePoint Mass Data Exfiltration Detection (T1213.002)
+id: a3e4c1f8-7b21-4bfa-87e0-3f2d4a5f6b72
 status: stable
 description: |
-    Detects unauthorized mass data collection from SharePoint by identifying 
-    suspicious PnP PowerShell usage, bulk REST API queries, and unauthorized 
-    SharePoint Online Management Shell activity from non-standard contexts.
+    Detects unauthorized bulk data collection from SharePoint Online by monitoring:
+    - PnP PowerShell activity
+    - Bulk REST API queries
+    - SharePoint Online Management Shell usage
+    - Non-standard execution contexts (non-admin automation)
+    Staging of exported content in temp/public directories is also flagged.
+
 author: hota05
-date: 2026-02-05
+date: 2026-02-20
+references:
+    - https://attack.mitre.org/techniques/T1213/002/
 tags:
     - attack.collection
+    - attack.exfiltration
     - attack.t1213.002
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_interfaces:
         CommandLine|contains:
-            - 'Get-PnP'                 
-            - 'Get-SPO'                 
+            - 'Get-PnP'
+            - 'Get-SPO'
+            - 'Connect-PnPOnline'
             - 'Microsoft.SharePoint.PowerShell'
-            - '/_api/web/lists'         
-            - '/_api/search/query'     
-            - 'Connect-PnPOnline'       
+            - '/_api/web/lists'
+            - '/_api/search/query'
+            - 'Export-PnPListItem'
+            - 'Get-PnPListItem'
 
     selection_bulk_args:
         CommandLine|contains:
-            - ' -All'                    
-            - ' -Recurse'                
-            - ' -PageSize 1000'          
+            - ' -All'
+            - ' -Recurse'
+            - ' -PageSize 1000'
             - ' -Limit All'
-            - 'Export-PnPListItem'
+            - ' -BatchSize '
+            - ' -AsJob'
 
     selection_context:
         ParentImage|endswith:
-            - '\powershell.exe'        
+            - '\powershell.exe'
+            - '\pwsh.exe'
             - '\cmd.exe'
-            - '\w3wp.exe'               
-            - '\explorer.exe'          
-        IntegrityLevel: 'Medium'         
+            - '\w3wp.exe'
+            - '\explorer.exe'
+            - '\taskhostw.exe'
+        IntegrityLevel:
+            - 'Medium'
+            - 'High'
 
     selection_staging:
         CommandLine|contains:
             - '\Users\Public\'
             - '\Windows\Temp\'
             - '\AppData\Local\Temp\'
-            - ' -OutFile '               
+            - ' -OutFile '
+            - ' -Path '
 
     filter_trusted_automation:
         - Image|contains:
             - 'C:\Program Files\SharePoint Online Management Shell\'
             - 'C:\Program Files\Microsoft SDKs\SharePoint\'
-        - username: 'NT AUTHORITY\SYSTEM'    
+            - 'C:\Program Files\Office\root\Office'
+            - 'C:\Program Files\OneDrive\'
+        - User|startswith:
+            - 'NT AUTHORITY\SYSTEM'
+            - 'DOMAIN\svc_'
+            - 'DOMAIN\backup_'
         - CommandLine|contains:
-            - 'OneDrive.exe'            
             - 'OfficeClickToRun.exe'
+            - 'OneDrive.exe'
+            - 'HealthCheck'
+            - ' --version'
+            - ' -help'
 
-    condition: selection_interfaces and (selection_bulk_args or selection_staging) and selection_context and not filter_trusted_automation
+    condition: selection_interfaces 
+               and (selection_bulk_args or selection_staging) 
+               and selection_context 
+               and not filter_trusted_automation
+
+fields:
+    - User
+    - Image
+    - ParentImage
+    - CommandLine
+    - IntegrityLevel
+    - CurrentDirectory
+    - Hashes
+
+falsepositives:
+    - Approved SharePoint / PnP backup or migration jobs
+    - Approved DevOps scripts interacting with SharePoint
+    - Disaster recovery validation scripts
+    - Approved bulk export for auditing / compliance
+
 level: critical

@@ -4145,16 +4145,16 @@ used for sandbox evasion or geofencing checks.
 
 
 ---
-## Ultra-Pro High-Fidelity Video Capture Anomaly (T1125)
+## Video Capture Anomaly (T1125)
 - **ID:** `T1125.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized video capture by identifying programmatic access to 
-multimedia frameworks (DirectShow, Media Foundation) via suspicious interpreters, 
-standalone media binaries (FFmpeg) with redirection, or headless shell sessions.
+- **Leírás:** Detects unauthorized video capture by monitoring:
+  - Programmatic access to multimedia APIs (DirectShow, Media Foundation)
+  - Use of standalone media binaries (FFmpeg, VLC) with capture parameters
+  - Headless or script-based execution contexts (PowerShell, cmd, IIS worker)
+Filters out legitimate conferencing, collaboration, and system processes to reduce false positives.
 
 
 #### 🚨 Response Playbook

@@ -3952,16 +3952,16 @@ homokozók elkerülésére vagy a geokerítés ellenőrzésére használják.
 
 
 ---
-## Ultra-Pro nagy felbontású videórögzítési anomália (T1125)
+## Videórögzítési anomália (T1125)
 - **ID:** `T1125.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a jogosulatlan videórögzítést azáltal, hogy azonosítja a programozott hozzáférést
-multimédiás keretrendszerek (DirectShow, Media Foundation) gyanús tolmácsokon keresztül,
-önálló médiabinárisok (FFmpeg) átirányítással vagy fej nélküli shell-munkamenetekkel.
+- **Leírás:** Felügyeli a jogosulatlan videórögzítést:
+- Programozott hozzáférés a multimédiás API-khoz (DirectShow, Media Foundation)
+- Önálló médiabinárisok (FFmpeg, VLC) használata rögzítési paraméterekkel
+- Fej nélküli vagy szkript alapú végrehajtási környezetek (PowerShell, cmd, IIS-munkás)
+Kiszűri a jogszerű konferencia-, együttműködési- és rendszerfolyamatokat, hogy csökkentse a hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

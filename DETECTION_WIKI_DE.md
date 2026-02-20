@@ -3952,16 +3952,16 @@ Wird für Sandbox-Umgehungs- oder Geofencing-Prüfungen verwendet.
 
 
 ---
-## Ultra-Pro High-Fidelity-Videoaufnahmeanomalie (T1125)
+## Anomalie bei der Videoaufnahme (T1125)
 - **ID:** `T1125.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Videoaufnahmen durch Identifizierung des programmgesteuerten Zugriffs auf
-Multimedia-Frameworks (DirectShow, Media Foundation) über verdächtige Interpreter,
-eigenständige Medienbinärdateien (FFmpeg) mit Umleitung oder Headless-Shell-Sitzungen.
+- **Beschreibung:** Erkennt unbefugte Videoaufnahmen durch Überwachung:
+- Programmatischer Zugriff auf Multimedia-APIs (DirectShow, Media Foundation)
+- Verwendung eigenständiger Medienbinärdateien (FFmpeg, VLC) mit Erfassungsparametern
+- Headless- oder skriptbasierte Ausführungskontexte (PowerShell, cmd, IIS-Worker)
+Filtert legitime Konferenzen, Zusammenarbeit und Systemprozesse heraus, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

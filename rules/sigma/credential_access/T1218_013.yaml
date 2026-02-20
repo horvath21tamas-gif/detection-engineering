@@ -1,61 +1,124 @@
-title: Ultra-Pro High-Fidelity Rundll32 Proxy Execution (T1218.013)
+title: Rundll32 Proxy Execution (LOLBAS Abuse)
 id: 2fbea7c5-55cc-4433-a063-87ace403aaf6
 status: stable
-description: |
-    Detects anomalous rundll32.exe execution by focusing on suspicious command-line 
-    arguments, non-standard file extensions, and untrusted execution paths.
-author: hota05
-date: 2026-02-03
-tags:
-    - attack.defense_evasion
-    - attack.t1218.013
+description: >
+  Detects high-confidence abuse of rundll32.exe for proxy execution
+  (MITRE ATT&CK T1218.013). The rule focuses on suspicious command-line
+  patterns, script-based invocation, non-DLL file extensions, execution
+  from user-writable locations, remote URL invocation, and anomalous
+  parent processes.
+
+  Designed for high-fidelity enterprise detection with reduced noise
+  from legitimate Control Panel and system activity.
+
+author: hota05 
+date: 2026/02/20
+references:
+  - https://attack.mitre.org/techniques/T1218/013/
+  - https://lolbas-project.github.io/lolbas/Binaries/Rundll32/
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_img:
-        - Image|endswith: '\rundll32.exe'
-        - OriginalFileName: 'RUNDLL32.EXE'
 
-    selection_args:
-        CommandLine|contains:
-            - 'javascript:'   
-            - 'vbscript:'
-            - 'url.dll,OpenURL' 
-            - 'url.dll,FileProtocolHandler'
-            - 'pcwutl.dll,LaunchApplication'
-            - 'shell32.dll,Control_RunDLL' 
+  selection_rundll32_image:
+    Image|endswith: '\rundll32.exe'
+    OriginalFileName: 'RUNDLL32.EXE'
 
-    selection_anomalies:
-        CommandLine|contains:
-            - '\AppData\'
-            - '\Users\Public\'
-            - '\Temp\'
-            - '\Downloads\'
-            - '.txt'          
-            - '.png'
-            - '.jpg'
-            - '.dat'
-            - '.inf'
+  selection_renamed_or_relocated:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\ProgramData\'
 
-    selection_parents:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\powerpnt.exe'
-            - '\outlook.exe'
-            - '\powershell.exe'
-            - '\cmd.exe'
-            - '\wscript.exe'
-            - '\mshta.exe'
+  selection_script_invocation:
+    CommandLine|contains:
+      - 'javascript:'
+      - 'vbscript:'
+      - 'mshtml,RunHTMLApplication'
+      - 'url.dll,OpenURL'
+      - 'url.dll,FileProtocolHandler'
+      - 'shell32.dll,ShellExec_RunDLL'
+      - 'pcwutl.dll,LaunchApplication'
 
-    filter_legit:
-        CommandLine|contains:
-            - 'C:\Windows\System32\'
-            - 'C:\Windows\SysWOW64\'
-            - 'C:\Windows\WinSxS\'
-        ParentImage|endswith: '\explorer.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+  selection_remote_execution:
+    CommandLine|contains:
+      - 'http://'
+      - 'https://'
+      - '\\\\'
 
-    condition: selection_img and (selection_args or (selection_anomalies and selection_parents)) and not filter_legit
+  selection_non_dll_extensions:
+    CommandLine|contains:
+      - '.txt'
+      - '.png'
+      - '.jpg'
+      - '.dat'
+      - '.inf'
+      - '.tmp'
+
+  selection_user_writable_paths:
+    CommandLine|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Downloads\'
+      - '\Public\'
+
+  selection_suspicious_parents:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\powerpnt.exe'
+      - '\outlook.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+
+  selection_low_integrity:
+    IntegrityLevel:
+      - 'Low'
+      - 'Medium'
+
+  filter_legitimate_system_usage:
+    Image|startswith:
+      - 'C:\Windows\System32\'
+      - 'C:\Windows\SysWOW64\'
+    ParentImage|endswith:
+      - '\explorer.exe'
+      - '\svchost.exe'
+    CommandLine|contains:
+      - '.cpl'
+      - 'shell32.dll,Control_RunDLL'
+
+  condition: >
+    selection_rundll32_image
+    and selection_low_integrity
+    and (selection_script_invocation
+        or selection_remote_execution
+        or selection_renamed_or_relocated
+        or (selection_non_dll_extensions
+            and selection_user_writable_paths
+            and selection_suspicious_parents))
+    and not filter_legitimate_system_usage
+
+falsepositives:
+  - Rare third-party software abusing rundll32 for legitimate plugin loading
+  - Custom enterprise scripts using url.dll handlers internally
+  - Legacy administrative tooling
+
 level: critical
+
+tags:
+  - attack.execution
+  - attack.defense_evasion
+  - attack.t1218.013
+  - attack.lolbas
+  - attack.windows

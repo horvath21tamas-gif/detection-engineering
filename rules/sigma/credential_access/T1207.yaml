@@ -1,18 +1,25 @@
-title: Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207)
-id: 58db436e-5e0b-414f-8e0f-fa0b5f3827a7
+title: Rogue DC / DCShadow Detection (T1207)
+id: 6558bf71-2871-406e-a9e1-9c0cda8b65be
 status: stable
 description: |
-    Detects the creation of a new nTDSDSA object or the registration of critical 
-    Domain Controller SPNs by a non-DC account. This is indicative of a Rogue DC 
-    or DCShadow attack.
+    Detects suspicious Domain Controller topology changes, including:
+    - Creation of nTDSDSA objects by non-DC accounts
+    - Registration of critical Domain Controller SPNs (E3514235 / GC)
+    - Indicative of Rogue DC deployment or DCShadow attacks
+    Legitimate domain admins and existing DC accounts are excluded to reduce false positives.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-20
+references:
+    - https://attack.mitre.org/techniques/T1207/
 tags:
     - attack.t1207
     - attack.persistence
+    - attack.lateral_movement
 logsource:
     product: windows
     service: security
+
 detection:
     selection_ntdsdsa_creation:
         EventID: 5136
@@ -22,18 +29,37 @@ detection:
         EventID: 4742
         ServicePrincipalNames|contains:
             - 'E3514235-4B06-11D1-AB04-00C04FC2DCD2/' 
-            - 'GC/'                                  
+            - 'GC/'                                   
 
     filter_legit_actors:
         SubjectUserName|contains:
             - 'NT AUTHORITY'
-            - 'AD-ADMIN-' 
+            - 'AD-ADMIN-'
         SubjectUserName|endswith: '$'
 
     filter_known_dcs:
         TargetUserName|contains:
             - 'DC-PROD-'
             - 'DC-BACKUP-'
+            - 'DC-ARCHIVE-'
 
-    condition: (selection_ntdsdsa_creation or selection_spn_registration) and not (filter_legit_actors or filter_known_dcs)
+    condition: 
+        (selection_ntdsdsa_creation or selection_spn_registration)
+        and not (filter_legit_actors or filter_known_dcs)
+
+fields:
+    - TimeCreated
+    - SubjectUserName
+    - SubjectDomainName
+    - TargetUserName
+    - TargetDomainName
+    - ObjectClass
+    - ServicePrincipalNames
+    - EventID
+
+falsepositives:
+    - Approved DC provisioning or cloning processes
+    - Disaster recovery or lab DC creation
+    - AD forest migrations performed by authorized admins
+
 level: critical

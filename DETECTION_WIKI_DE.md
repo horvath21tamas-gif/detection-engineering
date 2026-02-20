@@ -3,8 +3,8 @@
 ### 📊 Erkennungstechnik-Dashboard
 | Kritikalität | Stückzahl |
 | :--- | :--- |
-| 🔴 Critical | 360 |
-| 🟠 High | 261 |
+| 🔴 Critical | 361 |
+| 🟠 High | 260 |
 | 🟡 Medium | 7 |
 | 🔵 Low | 0 |
 | **Alle** | **628** |
@@ -5008,16 +5008,15 @@ Verwendung von Befehlszeilentools oder anomalen Umleitungsmustern.
 
 
 ---
-## Ultra-Pro High-Fidelity-System-Binär-Proxy-Ausführung (T1218)
+## Ausführung des Windows-System-Binärproxys
 - **ID:** `T1218.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
-- **Kritikalität:** 🟠 (high)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
+- **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMSTP.EXE](https://lolbas-project.github.io/lolbas/), [CONTROL.EXE](https://lolbas-project.github.io/lolbas/), [INSTALLUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [ODBCCONF.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SCROBJ.DLL](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die anomale Ausführung vertrauenswürdiger Windows-Binärdateien, die als Proxy für bösartigen Code verwendet werden.
-Konzentriert sich auf prozessübergreifende Aufrufe (z. B. Office an Rundll32) und ist verdächtig
-Befehlszeilenargumente wie URLs oder Nicht-DLL-Erweiterungen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CMSTP.EXE](https://lolbas-project.github.io/lolbas/), [CONTROL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [HH.EXE](https://lolbas-project.github.io/lolbas/), [INSTALLUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [ODBCCONF.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [SCROBJ.DLL](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt mit hoher Sicherheit den Missbrauch vertrauenswürdiger Windows-Binärdateien, um böswillige Ausführungen als Proxy zu nutzen (MITRE ATT&CK T1218).Angreifer nutzen Binärdateien wie rundll32.exe, regsvr32.exe, msiexec.exe, installutil.exe, mshta.exe, control.exe, cmstp.exe, odbcconf.exe oder hh.exe, um Code aus nicht standardmäßigen Pfaden, Remote-Quellen oder über prozessübergreifende Aufrufe auszuführen.
+Konzentriert sich auf anomale übergeordnete Prozesse, verdächtige Befehlszeilenargumente, vom Benutzer beschreibbare Pfade und verschobene Binärdateien.Filtert legitime, vom System verwaltete Ausführungskontexte, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

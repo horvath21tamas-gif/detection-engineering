@@ -3,8 +3,8 @@
 ### 📊 Detection Engineering Dashboard
 | Kritikusság | Darabszám |
 | :--- | :--- |
-| 🔴 Critical | 360 |
-| 🟠 High | 261 |
+| 🔴 Critical | 361 |
+| 🟠 High | 260 |
 | 🟡 Medium | 7 |
 | 🔵 Low | 0 |
 | **Összesen** | **628** |
@@ -5262,16 +5262,15 @@ using command-line tools or anomalous redirection patterns.
 
 
 ---
-## Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218)
+## Windows System Binary Proxy Execution
 - **ID:** `T1218.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
-- **Kritikusság:** 🟠 (high)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMSTP.EXE](https://lolbas-project.github.io/lolbas/), [CONTROL.EXE](https://lolbas-project.github.io/lolbas/), [INSTALLUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [ODBCCONF.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SCROBJ.DLL](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects anomalous execution of trusted Windows binaries used to proxy malicious code. 
-Focuses on cross-process boundary calls (e.g., Office to Rundll32) and suspicious 
-command-line arguments like URLs or non-DLL extensions.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CMSTP.EXE](https://lolbas-project.github.io/lolbas/), [CONTROL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [HH.EXE](https://lolbas-project.github.io/lolbas/), [INSTALLUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [ODBCCONF.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [SCROBJ.DLL](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects high-confidence abuse of trusted Windows binaries to proxy malicious execution (MITRE ATT&CK T1218). Adversaries leverage binaries such as rundll32.exe, regsvr32.exe, msiexec.exe, installutil.exe, mshta.exe, control.exe, cmstp.exe, odbcconf.exe, or hh.exe to execute code from non-standard paths, remote sources, or via cross-process boundary calls.
+Focuses on anomalous parent processes, suspicious command-line arguments, user-writable paths, and relocated binaries. Filters legitimate system-managed execution contexts to reduce false positives.
 
 
 #### 🚨 Response Playbook

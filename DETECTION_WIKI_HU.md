@@ -3,8 +3,8 @@
 ### 📊 Detection Engineering Dashboard
 | Kritikusság | Darabszám |
 | :--- | :--- |
-| 🔴 Critical | 360 |
-| 🟠 High | 261 |
+| 🔴 Critical | 361 |
+| 🟠 High | 260 |
 | 🟡 Medium | 7 |
 | 🔵 Low | 0 |
 | **Összesen** | **628** |
@@ -5008,16 +5008,15 @@ parancssori eszközök vagy rendellenes átirányítási minták használatával
 
 
 ---
-## Ultra-Pro High-Fidelity rendszerű bináris proxy végrehajtás (T1218)
+## Windows rendszer bináris proxy végrehajtása
 - **ID:** `T1218.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
-- **Kritikusság:** 🟠 (high)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMSTP.EXE](https://lolbas-project.github.io/lolbas/), [CONTROL.EXE](https://lolbas-project.github.io/lolbas/), [INSTALLUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [ODBCCONF.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SCROBJ.DLL](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a rosszindulatú kód proxyjára használt megbízható Windows binárisok rendellenes végrehajtását.
-A folyamatok közötti határhívásokra összpontosít (pl. Office to Rundll32) és gyanús
-parancssori argumentumokat, például URL-eket vagy nem DLL-kiterjesztéseket.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CMSTP.EXE](https://lolbas-project.github.io/lolbas/), [CONTROL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [HH.EXE](https://lolbas-project.github.io/lolbas/), [INSTALLUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [ODBCCONF.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [SCROBJ.DLL](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a megbízható Windows binárisokkal való nagy megbízhatóságú visszaélést a rosszindulatú végrehajtás proxyjával (MITRE ATT&CK T1218).Az ellenfelek olyan bináris fájlokat használnak fel, mint a rundll32.exe, regsvr32.exe, msiexec.exe, installutil.exe, mshta.exe, control.exe, cmstp.exe, odbcconf.exe vagy hh.exe, hogy kódot hajtsanak végre nem szabványos útvonalakról, távoli forrásokból vagy többfolyamat-határhívásokon keresztül.
+A rendellenes szülőfolyamatokra, a gyanús parancssori argumentumokra, a felhasználók által írható útvonalakra és az áthelyezett binárisokra összpontosít.Szűri a legitim rendszer által felügyelt végrehajtási környezeteket a hamis pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -4882,16 +4882,20 @@ kihasználási mintákat, miközben kiszűri a jogos biztonsági eszközök inte
 
 
 ---
-## Ultra-Pro High-Fidelity Repository Dump (T1213)
+## Belső adattár tömegkiíratásának észlelése (T1213)
 - **ID:** `T1213.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a jogosulatlan tömeges adatgyűjtést belső tudásbázisokból (Confluence, Jira, SharePoint)
-a gyanús API-vezérelt exportparancsok azonosításával, amelyek nem megbízhatóaktól származnak
-folyamatkontextusok vagy ideiglenes könyvtárak.
+- **Leírás:** Érzékeli a jogosulatlan tömeges adatgyűjtést belső tudásbázisokból
+(Confluence, Jira, SharePoint, Wiki) figyeléssel:
+- Gyanús API-vezérelt exportparancsok
+- Tömeges vagy rekurzív letöltési kísérletek
+- Nem szabványos folyamatvégrehajtási környezetek
+- Áthelyezés/exportálás ideiglenes vagy nyilvános könyvtárakba
+Nem tartalmazza a megbízható automatizálást és a rendszerfolyamatokat a hamis pozitívumok csökkentésére.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

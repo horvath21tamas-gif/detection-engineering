@@ -4882,16 +4882,20 @@ Ausnutzungsmuster erkennen und gleichzeitig legitime Sicherheitstool-Interferenz
 
 
 ---
-## Ultra-Pro High-Fidelity-Repository-Dump (T1213)
+## Interne Repository-Massendump-Erkennung (T1213)
 - **ID:** `T1213.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugte Massendatenerfassung aus internen Wissensdatenbanken (Confluence, Jira, SharePoint)
-durch die Identifizierung verdächtiger API-gesteuerter Exportbefehle, die von nicht vertrauenswürdigen Unternehmen stammen
-Prozesskontexte oder temporäre Verzeichnisse.
+- **Beschreibung:** Erkennt unbefugte Massendatenerfassung aus internen Wissensdatenbanken
+(Confluence, Jira, SharePoint, Wiki) durch Überwachung:
+– Verdächtige API-gesteuerte Exportbefehle
+- Massen- oder rekursive Download-Versuche
+- Nicht standardmäßige Prozessausführungskontexte
+- Staging/Export in temporäre oder öffentliche Verzeichnisse
+Schließt vertrauenswürdige Automatisierungs- und Systemprozesse aus, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

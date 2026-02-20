@@ -5129,16 +5129,20 @@ exploitation patterns while filtering legitimate security tool interference.
 
 
 ---
-## Ultra-Pro High-Fidelity Repository Dump (T1213)
+## Internal Repository Mass Dump Detection (T1213)
 - **ID:** `T1213.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized mass data collection from internal knowledge bases (Confluence, Jira, SharePoint) 
-by identifying suspicious API-driven export commands originating from untrusted 
-process contexts or temporary directories.
+- **Leírás:** Detects unauthorized mass data collection from internal knowledge bases 
+(Confluence, Jira, SharePoint, Wiki) by monitoring:
+- Suspicious API-driven export commands
+- Bulk or recursive download attempts
+- Non-standard process execution contexts
+- Staging/export to temporary or public directories
+Excludes trusted automation and system processes to reduce false positives.
 
 
 #### 🚨 Response Playbook

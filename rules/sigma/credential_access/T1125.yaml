@@ -1,56 +1,40 @@
-title: Ultra-Pro High-Fidelity Video Capture Anomaly (T1125)
+title: Video Capture Anomaly (T1125)
 id: 89a26b4a-2b75-4ae7-8f9b-e63005fc1f61
 status: stable
 description: |
-    Detects unauthorized video capture by identifying programmatic access to 
-    multimedia frameworks (DirectShow, Media Foundation) via suspicious interpreters, 
-    standalone media binaries (FFmpeg) with redirection, or headless shell sessions.
+    Detects unauthorized video capture by monitoring:
+      - Programmatic access to multimedia APIs (DirectShow, Media Foundation)
+      - Use of standalone media binaries (FFmpeg, VLC) with capture parameters
+      - Headless or script-based execution contexts (PowerShell, cmd, IIS worker)
+    Filters out legitimate conferencing, collaboration, and system processes to reduce false positives.
+
 author: hota05
 date: 2026-02-09
 tags:
     - attack.collection
     - attack.t1125
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_multimedia_apis:
-        CommandLine|contains:
-            - 'avicap32.dll'             
-            - 'capCreateCaptureWindow'
-            - 'ksuser.dll'              
-            - 'mfplat.dll'               
-            - 'Windows.Media.Capture'    
+        CommandLine: '(avicap32\.dll|capCreateCaptureWindow|ksuser\.dll|mfplat\.dll|Windows\.Media\.Capture)'
 
     selection_media_bins:
-        - Image|endswith:
-            - '\ffmpeg.exe'
-            - '\vlc.exe'
-        - CommandLine|contains:
-            - '-dshow'                   
-            - '-f dshow'
-            - '-video_size'             
-            - 'capture'
+        Image: '(ffmpeg\.exe|vlc\.exe)$'
+        CommandLine: '(-dshow|-f dshow|-video_size|capture)'
 
     selection_context:
-        ParentImage|endswith:
-            - '\powershell.exe'
-            - '\cmd.exe'
-            - '\w3wp.exe'               
-            - '\rundll32.exe'
-            - '\regsvr32.exe'
-        IntegrityLevel: 'Medium'        
+        ParentImage: '(powershell\.exe|cmd\.exe|w3wp\.exe|rundll32\.exe|regsvr32\.exe)$'
+        IntegrityLevel: 'Medium'
 
     filter_trusted_apps:
-        - Image|contains:
-            - '\Microsoft Teams\'
-            - '\Zoom.exe'
-            - '\Webex.exe'
-            - '\Slack.exe'
-            - 'C:\Windows\System32\CameraSettingsUIHost.exe'
-        - CommandLine|contains:
-            - 'skype.exe'
-        - username: 'NT AUTHORITY\SYSTEM'   
+        Image: '(Microsoft Teams|Zoom\.exe|Webex\.exe|Slack\.exe|CameraSettingsUIHost\.exe)'
+        CommandLine: '(skype\.exe)'
+        username: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_multimedia_apis or selection_media_bins) and selection_context and not filter_trusted_apps
+
 level: critical

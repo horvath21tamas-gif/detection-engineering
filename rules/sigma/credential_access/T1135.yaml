@@ -1,66 +1,43 @@
-title: Ultra-Pro High-Fidelity Network Share Discovery (T1135)
+title: Network Share Discovery (T1135)
 id: 5a044d3e-0f7a-4ec7-a91a-2c3e4a5ffc7b
 status: stable
 description: |
-    Detects systematic network share discovery and content crawling. 
-    Focuses on automated enumeration patterns (loops, UNC sweeps) 
-    originating from non-standard parent processes and specialized tools like Snaffler.
+    Detects systematic network share discovery and content crawling by monitoring:
+      - Automated UNC enumeration patterns (loops, sweeps)
+      - Specialized tools like Snaffler, SharpShares, PowerView, and native net commands
+      - Suspicious content keywords in command-line arguments
+      - Non-standard parent process lineage
+
 author: hota05
 date: 2026-02-04
 tags:
     - attack.discovery
     - attack.t1135
+
 logsource:
     category: process_creation
     product: windows
+
 detection:
     selection_tools:
-        - Image|endswith:
-            - '\Snaffler.exe'      
-            - '\SharpShares.exe'
-            - '\PowerView.ps1'
-            - '\net.exe'
-            - '\net1.exe'
-        - CommandLine|contains:
-            - 'view'               
-            - 'Invoke-ShareFinder'
-            - 'Get-NetShare'
-            - 'Find-DomainShare'
+        Image|re: '(Snaffler\.exe|SharpShares\.exe|PowerView\.ps1|net\.exe|net1\.exe)$'
+        CommandLine|re: '(view|Invoke-ShareFinder|Get-NetShare|Find-DomainShare)'
 
     selection_logic:
-        CommandLine|contains:
-            - ' /domain'         
-            - ' /all'             
-            - ' -ComputerName'     
-            - 'foreach'            
-            - '\\\\*'              
+        CommandLine|re: '( /domain| /all| -ComputerName|foreach|\\\\\\\\\*)'
 
     selection_content:
-        CommandLine|contains:
-            - 'password'
-            - 'confidential'
-            - 'backup'
-            - 'config'
-            - 'credentials'
-            - 'key'
+        CommandLine|re: '(password|confidential|backup|config|credentials|key)'
 
     selection_suspicious_lineage:
-        ParentImage|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\wsmprovhost.exe'   
-            - '\httpd.exe'         
-            - '\winword.exe'      
-        IntegrityLevel: 'Medium'  
+        ParentImage|re: '(cmd\.exe|powershell\.exe|wsmprovhost\.exe|httpd\.exe|winword\.exe)$'
+        IntegrityLevel: 'Medium'
 
     filter_legit_noise:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - Image|contains:
-            - '\Program Files\Tanium\'
-            - '\Program Files\Splunk\'
-            - '\Windows\System32\CcmExec.exe' 
-        - CommandLine|contains:
-            - 'net share'         
+        - username: 'NT AUTHORITY\\SYSTEM'
+        - Image|re: '(\\Program Files\\Tanium\\|\\Program Files\\Splunk\\|\\Windows\\System32\\CcmExec\.exe)$'
+        - CommandLine|re: 'net share'
 
     condition: selection_tools and (selection_logic or selection_content or selection_suspicious_lineage) and not filter_legit_noise
+
 level: high

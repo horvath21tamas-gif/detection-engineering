@@ -218,7 +218,7 @@
 - [Ultra-Pro Make and Impersonate Token (T1134.003)](#ultra-pro-make-and-impersonate-token-(t1134003))
 - [Ultra-Pro Parent PID Spoofing & Process Tree Violation (T1134.004)](#ultra-pro-parent-pid-spoofing-&-process-tree-violation-(t1134004))
 - [Ultra-Pro SID-History Injection & DS Manipulation (T1134.005)](#ultra-pro-sid-history-injection-&-ds-manipulation-(t1134005))
-- [Ultra-Pro High-Fidelity Network Share Discovery (T1135)](#ultra-pro-high-fidelity-network-share-discovery-(t1135))
+- [Network Share Discovery (T1135)](#network-share-discovery-(t1135))
 - [Ultra-Pro Unauthorized Account Creation (T1136)](#ultra-pro-unauthorized-account-creation-(t1136))
 - [Ultra-Pro Unauthorized Local Account Creation (T1136.001)](#ultra-pro-unauthorized-local-account-creation-(t1136001))
 - [Ultra-Pro Unauthorized Domain Account Creation (T1136.002)](#ultra-pro-unauthorized-domain-account-creation-(t1136002))
@@ -4405,16 +4405,16 @@ and correlating them with suspicious RPC calls or unauthorized LSASS access on D
 
 
 ---
-## Ultra-Pro High-Fidelity Network Share Discovery (T1135)
+## Network Share Discovery (T1135)
 - **ID:** `T1135.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic network share discovery and content crawling. 
-Focuses on automated enumeration patterns (loops, UNC sweeps) 
-originating from non-standard parent processes and specialized tools like Snaffler.
+- **Leírás:** Detects systematic network share discovery and content crawling by monitoring:
+  - Automated UNC enumeration patterns (loops, sweeps)
+  - Specialized tools like Snaffler, SharpShares, PowerView, and native net commands
+  - Suspicious content keywords in command-line arguments
+  - Non-standard parent process lineage
 
 
 #### 🚨 Response Playbook

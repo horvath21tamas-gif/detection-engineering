@@ -218,7 +218,7 @@
 - [Ultra-Pro Make-and-Imitate-Token (T1134.003)](#ultra-pro-make-and-imitate-token-(t1134003))
 - [Ultra-Pro-Parent-PID-Spoofing und Prozessbaumverletzung (T1134.004)](#ultra-pro-parent-pid-spoofing-und-prozessbaumverletzung-(t1134004))
 - [Ultra-Pro SID-History-Injektion und DS-Manipulation (T1134.005)](#ultra-pro-sid-history-injektion-und-ds-manipulation-(t1134005))
-- [Ultra-Pro High-Fidelity Network Share Discovery (T1135)](#ultra-pro-high-fidelity-network-share-discovery-(t1135))
+- [Erkennung von Netzwerkfreigaben (T1135)](#erkennung-von-netzwerkfreigaben-(t1135))
 - [Unbefugte Ultra-Pro-Kontoerstellung (T1136)](#unbefugte-ultra-pro-kontoerstellung-(t1136))
 - [Unbefugte Erstellung eines lokalen Ultra-Pro-Kontos (T1136.001)](#unbefugte-erstellung-eines-lokalen-ultra-pro-kontos-(t1136001))
 - [Ultra-Pro-Erstellung eines nicht autorisierten Domänenkontos (T1136.002)](#ultra-pro-erstellung-eines-nicht-autorisierten-domänenkontos-(t1136002))
@@ -4198,16 +4198,16 @@ und sie mit verdächtigen RPC-Aufrufen oder unbefugtem LSASS-Zugriff auf Domäne
 
 
 ---
-## Ultra-Pro High-Fidelity Network Share Discovery (T1135)
+## Erkennung von Netzwerkfreigaben (T1135)
 - **ID:** `T1135.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Erkennung von Netzwerkfreigaben und das Crawlen von Inhalten.
-Konzentriert sich auf automatisierte Aufzählungsmuster (Schleifen, UNC-Sweeps)
-stammen aus nicht standardmäßigen übergeordneten Prozessen und spezialisierten Tools wie Snaffler.
+- **Beschreibung:** Erkennt die systematische Erkennung von Netzwerkfreigaben und das Crawlen von Inhalten durch Überwachung:
+- Automatisierte UNC-Aufzählungsmuster (Schleifen, Sweeps)
+- Spezialisierte Tools wie Snaffler, SharpShares, PowerView und native Netzbefehle
+– Verdächtige Inhaltsschlüsselwörter in Befehlszeilenargumenten
+- Nicht standardmäßige Abstammung des übergeordneten Prozesses
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

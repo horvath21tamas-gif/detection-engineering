@@ -218,7 +218,7 @@
 - [Ultra-Pro Make és Impersonate Token (T1134.003)](#ultra-pro-make-és-impersonate-token-(t1134003))
 - [Ultra-Pro Parent PID-hamisítás és folyamatfa megsértése (T1134.004)](#ultra-pro-parent-pid-hamisítás-és-folyamatfa-megsértése-(t1134004))
 - [Ultra-Pro SID-History Injection & DS Manipulation (T1134.005)](#ultra-pro-sid-history-injection-&-ds-manipulation-(t1134005))
-- [Ultra-Pro High-Fidelity Network Share Discovery (T1135)](#ultra-pro-high-fidelity-network-share-discovery-(t1135))
+- [Hálózati megosztás felfedezése (T1135)](#hálózati-megosztás-felfedezése-(t1135))
 - [Ultra-Pro jogosulatlan fiók létrehozása (T1136)](#ultra-pro-jogosulatlan-fiók-létrehozása-(t1136))
 - [Ultra-Pro jogosulatlan helyi fiók létrehozása (T1136.001)](#ultra-pro-jogosulatlan-helyi-fiók-létrehozása-(t1136001))
 - [Ultra-Pro jogosulatlan domain fiók létrehozása (T1136.002)](#ultra-pro-jogosulatlan-domain-fiók-létrehozása-(t1136002))
@@ -4198,16 +4198,16 @@ egészséges környezetben lehetetlen.
 
 
 ---
-## Ultra-Pro High-Fidelity Network Share Discovery (T1135)
+## Hálózati megosztás felfedezése (T1135)
 - **ID:** `T1135.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a hálózati megosztások szisztematikus felderítését és a tartalom feltérképezését.
-Az automatizált felsorolási mintákra összpontosít (hurkok, UNC sweepek)
-nem szabványos szülői folyamatokból és speciális eszközökből, például a Snafflerből származik.
+- **Leírás:** Figyelemmel kíséri a szisztematikus hálózati megosztások felfedezését és a tartalom feltérképezését:
+- Automatizált UNC felsorolási minták (hurkok, sweepek)
+- Speciális eszközök, például Snaffler, SharpShares, PowerView és natív net parancsok
+- Gyanús tartalom kulcsszavak a parancssori argumentumokban
+- Nem szabványos szülőfolyamat vonal
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

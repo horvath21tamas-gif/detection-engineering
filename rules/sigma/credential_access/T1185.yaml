@@ -1,59 +1,42 @@
-title: Ultra-Pro High-Fidelity Browser Session Hijacking (T1185)
+title: Browser Session Hijacking (T1185)
 id: ddc16ca4-54d3-4412-a468-c350d11e86bc
 status: stable
 description: |
     Detects advanced browser session hijacking by monitoring unauthorized access 
-    to cookie databases from untrusted/unsigned processes or suspicious locations 
-    like \Temp or \AppData.
+    to browser cookie databases from untrusted or unsigned processes, or from 
+    suspicious locations such as \Temp or \AppData.
+
 author: hota05
 date: 2026-02-05
 tags:
     - attack.initial_access
     - attack.credential_access
     - attack.t1185
+
 logsource:
-    category: file_event 
+    category: file_event
     product: windows
+
 detection:
     selection_target_files:
-        TargetFilename|contains:
-            - '\Default\Cookies'
-            - '\Default\Network\Cookies'
-            - '\Profiles\*.default-release\cookies.sqlite' 
-            - '\Local State'
+        TargetFilename|re: '(\\Default\\Cookies|\\Default\\Network\\Cookies|\\Profiles\\.*\.default-release\\cookies\.sqlite|\\Local State)$'
 
     selection_suspicious_source:
-        Image|contains:
-            - '\Users\'
-            - '\Temp\'
-            - '\AppData\Local\'
-            - '\AppData\Roaming\'
-            - '\Public\'
+        Image|re: '(\\Users\\|\\Temp\\|\\AppData\\Local\\|\\AppData\\Roaming\\|\\Public\\)'
 
     filter_browsers:
-        Image|endswith:
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\firefox.exe'
-            - '\brave.exe'
-            - '\opera.exe'
+        Image|re: '(chrome\.exe|msedge\.exe|firefox\.exe|brave\.exe|opera\.exe)$'
 
     selection_shell_access:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\cmd.exe'
-            - '\cscript.exe'
-            - '\wscript.exe'
-            - '\python.exe'
+        Image|re: '(powershell\.exe|pwsh\.exe|cmd\.exe|cscript\.exe|wscript\.exe|python\.exe)$'
 
     filter_trusted_apps:
-        - Image|startswith:
-            - 'C:\Program Files\'
-            - 'C:\Program Files (x86)\'
-            - 'C:\Windows\System32\'
+        Image|re: '^(C:\\Program Files\\|C:\\Program Files \(x86\)\\|C:\\Windows\\System32\\)'
+        username: 'NT AUTHORITY\\SYSTEM'
 
-        - username: 'NT AUTHORITY\SYSTEM'
+    condition: >
+        selection_target_files 
+        and (selection_suspicious_source or selection_shell_access)
+        and not (filter_browsers or filter_trusted_apps)
 
-    condition: selection_target_files and (selection_suspicious_source or selection_shell_access) and not (filter_browsers or filter_trusted_apps)
 level: critical

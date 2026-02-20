@@ -5198,16 +5198,16 @@ und Ausführung über beschreibbare/nicht vertrauenswürdige Pfade.
 
 
 ---
-## Ultra-Pro High-Fidelity Verclsid Proxy Execution (T1218.012)
+## Verclsid-Proxy-Ausführung über COM-Objektmissbrauch
 - **ID:** `T1218_012.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [VERCLSID.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt den Missbrauch von verclsid.exe als Proxy für die Ausführung schädlicher COM-Objekte (DLLs).
-Filtert legitime, vom System initiierte Überprüfungen heraus und konzentriert sich dabei auf verdächtige
-Eltern-Kind-Beziehungen und anomale Befehlszeilenauslöser.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [VERCLSID.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochvertraulichen Missbrauch von verclsid.exe für die Proxy-Ausführung (MITRE ATT&CK T1218.012) durch das Laden bösartiger COM-Objekte.
+Die Regel konzentriert sich auf anomale übergeordnete Prozesse, verdächtige CLSID-Aufrufmuster, die Ausführung außerhalb von Standardsystempfaden, die Beteiligung von benutzerbeschreibbaren Verzeichnissen und ungewöhnliche Integritätskontexte.
+Entwickelt, um Störungen durch legitime Shell-COM-Validierungsaktivitäten zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

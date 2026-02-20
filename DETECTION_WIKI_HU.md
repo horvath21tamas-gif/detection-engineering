@@ -5198,16 +5198,16 @@ A /U jelzőre összpontosít a proxy végrehajtásához, a nem szabványos szül
 
 
 ---
-## Ultra-Pro High-Fidelity Verclsid proxy végrehajtás (T1218.012)
+## Verclsid proxy végrehajtása COM Object Abuse segítségével
 - **ID:** `T1218_012.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [VERCLSID.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli a verclsid.exe visszaélést a rosszindulatú COM-objektumok (DLL-ek) végrehajtásának proxyjával.
-Kiszűri a jogszerű rendszer által kezdeményezett ellenőrzéseket a gyanúsra összpontosítva
-szülő-gyermek kapcsolatok és rendellenes parancssori triggerek.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [VERCLSID.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a verclsid.exe nagy megbízhatóságú visszaélést a proxy végrehajtásához (MITRE ATT&CK T1218.012) rosszindulatú COM-objektum betöltése révén.
+A szabály a rendellenes szülőfolyamatokra, a gyanús CLSID-hívási mintákra, a szabványos rendszerútvonalakon kívüli végrehajtásra, a felhasználó által írható címtárak bevonására és a szokatlan integritási környezetekre összpontosít.
+Úgy tervezték, hogy csökkentse a legitim shell COM-érvényesítési tevékenységből származó zajt.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

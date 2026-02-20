@@ -272,8 +272,8 @@
 - [Ultra-Pro High-Fidelity InstallUtil Proxy-Ausführung (T1218.004)](#ultra-pro-high-fidelity-installutil-proxy-ausführung-(t1218004))
 - [Verdächtige Mshta-Ausführung von Remote-Skript (High Fidelity)](#verdächtige-mshta-ausführung-von-remote-skript-(high-fidelity))
 - [Verdächtige Msiexec-Installation von einer Remote-URL (High Fidelity)](#verdächtige-msiexec-installation-von-einer-remote-url-(high-fidelity))
-- [Ultra-Pro High-Fidelity Odbcconf Proxy Execution (T1218.008)](#ultra-pro-high-fidelity-odbcconf-proxy-execution-(t1218008))
-- [Ultra-Pro High-Fidelity Regsvcs/Regasm Proxy Execution (T1218.009)](#ultra-pro-high-fidelity-regsvcsregasm-proxy-execution-(t1218009))
+- [Odbcconf REGSVR-Proxy-Ausführung](#odbcconf-regsvr-proxy-ausführung)
+- [Regsvcs/Regasm .NET Proxy-Ausführung](#regsvcsregasm-net-proxy-ausführung)
 - [Verdächtige Regsvr32-Ausführung, die auf LOLBAS-Missbrauch hinweist (High Fidelity)](#verdächtige-regsvr32-ausführung-die-auf-lolbas-missbrauch-hinweist-(high-fidelity))
 - [Verdächtige Rundll32-Ausführung mit Skript oder Remote-Payload (High Fidelity)](#verdächtige-rundll32-ausführung-mit-skript-oder-remote-payload-(high-fidelity))
 - [Ultra-Pro High-Fidelity Verclsid Proxy Execution (T1218.012)](#ultra-pro-high-fidelity-verclsid-proxy-execution-(t1218012))
@@ -5130,16 +5130,16 @@ aus beschreibbaren Verzeichnissen, während legitime .NET-Installationen herausg
 
 
 ---
-## Ultra-Pro High-Fidelity Odbcconf Proxy Execution (T1218.008)
+## Odbcconf REGSVR-Proxy-Ausführung
 - **ID:** `T1218_008.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [ODBCCONF.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt den Missbrauch von odbcconf.exe zum Laden schädlicher DLLs über die REGSVR-Aktion.
-Konzentriert sich auf Befehlszeilenanomalien, verdächtige übergeordnete Prozesse usw
-Nicht standardmäßige Dateipfade, um Fehlalarme von legitimen Installationsprogrammen zu minimieren.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [ODBCCONF.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochvertraulichen Missbrauch von odbcconf.exe für die Proxy-Ausführung über die REGSVR-Aktion (MITRE ATT&CK T1218.008).
+Die Regel konzentriert sich auf anomale REGSVR-Aufrufmuster, die Ausführung von DLLs über vom Benutzer beschreibbare oder entfernte Pfade, verdächtige übergeordnete Prozesse, verschobene Binärdateien und ungewöhnliche Integritätskontexte.
+Entwickelt, um Störungen durch legitime, vom Installationsprogramm gesteuerte ODBC-Konfigurationsaktivitäten zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -5148,16 +5148,16 @@ Nicht standardmäßige Dateipfade, um Fehlalarme von legitimen Installationsprog
 
 
 ---
-## Ultra-Pro High-Fidelity Regsvcs/Regasm Proxy Execution (T1218.009)
+## Regsvcs/Regasm .NET Proxy-Ausführung
 - **ID:** `T1218_009.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REGASM.EXE](https://lolbas-project.github.io/lolbas/), [REGSVCS.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt den Missbrauch von regsvcs.exe oder regasm.exe zur Ausführung schädlicher .NET-Assemblys.
-Konzentriert sich auf das /U-Flag für die Proxy-Ausführung, nicht standardmäßige übergeordnete Prozesse,
-und Ausführung über beschreibbare/nicht vertrauenswürdige Pfade.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGASM.EXE](https://lolbas-project.github.io/lolbas/), [REGSVCS.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt hochvertraulichen Missbrauch von regsvcs.exe oder regasm.exe für die Proxy-Ausführung bösartiger .NET-Assemblys (MITRE ATT&CK T1218.009).
+Die Regel konzentriert sich auf verdächtige Deinstallationsflags (/U, /uninstall), die Ausführung von Assemblys über vom Benutzer beschreibbare oder entfernte Pfade, anomale übergeordnete Prozesse, den Integritätsebenenkontext und die verschobene Binärausführung außerhalb der Standardverzeichnisse von .NET Framework.
+Entwickelt, um Störungen durch legitime .NET-Registrierung und MSI-gesteuerte Installationsaktivitäten zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

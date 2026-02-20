@@ -272,8 +272,8 @@
 - [Ultra-Pro High-Fidelity InstallUtil proxy végrehajtás (T1218.004)](#ultra-pro-high-fidelity-installutil-proxy-végrehajtás-(t1218004))
 - [A távoli szkript gyanús Mshta végrehajtása (high Fidelity)](#a-távoli-szkript-gyanús-mshta-végrehajtása-(high-fidelity))
 - [Gyanús Msiexec telepítés távoli URL-ről (High Fidelity)](#gyanús-msiexec-telepítés-távoli-url-ről-(high-fidelity))
-- [Ultra-Pro High-Fidelity Odbcconf proxy végrehajtás (T1218.008)](#ultra-pro-high-fidelity-odbcconf-proxy-végrehajtás-(t1218008))
-- [Ultra-Pro High-Fidelity Regsvcs/Regasm proxy végrehajtás (T1218.009)](#ultra-pro-high-fidelity-regsvcsregasm-proxy-végrehajtás-(t1218009))
+- [Odbcconf REGSVR proxy végrehajtás](#odbcconf-regsvr-proxy-végrehajtás)
+- [Regsvcs/Regasm .NET proxy végrehajtás](#regsvcsregasm-net-proxy-végrehajtás)
 - [Gyanús Regsvr32 végrehajtás, amely LOLBAS-visszaélést jelez (high Fidelity)](#gyanús-regsvr32-végrehajtás-amely-lolbas-visszaélést-jelez-(high-fidelity))
 - [Gyanús Rundll32 végrehajtás szkripttel vagy távoli hasznos adattartalommal (high Fidelity)](#gyanús-rundll32-végrehajtás-szkripttel-vagy-távoli-hasznos-adattartalommal-(high-fidelity))
 - [Ultra-Pro High-Fidelity Verclsid proxy végrehajtás (T1218.012)](#ultra-pro-high-fidelity-verclsid-proxy-végrehajtás-(t1218012))
@@ -5130,16 +5130,16 @@ A /u jelzőre, a nem szabványos szülőfolyamatokra és a végrehajtásra össz
 
 
 ---
-## Ultra-Pro High-Fidelity Odbcconf proxy végrehajtás (T1218.008)
+## Odbcconf REGSVR proxy végrehajtás
 - **ID:** `T1218_008.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [ODBCCONF.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli az odbcconf.exe visszaélést rosszindulatú DLL-ek betöltéséhez a REGSVR műveleten keresztül.
-A parancssori anomáliákra, a gyanús szülőfolyamatokra és a
-nem szabványos fájl elérési utak, hogy minimalizálják a törvényes telepítőktől származó hamis pozitív eredményeket.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [ODBCCONF.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli az odbcconf.exe nagy megbízhatóságú visszaélést a REGSVR-műveleten keresztül proxy-végrehajtáshoz (MITRE ATT&CK T1218.008).
+A szabály a rendhagyó REGSVR-hívási mintákra, a felhasználó által írható vagy távoli útvonalakról való DLL-ek végrehajtására, a gyanús szülőfolyamatokra, az áthelyezett binárisokra és a szokatlan integritási környezetekre összpontosít.
+Úgy tervezték, hogy csökkentse a legitim telepítő által vezérelt ODBC konfigurációs tevékenységből származó zajt.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -5148,16 +5148,16 @@ nem szabványos fájl elérési utak, hogy minimalizálják a törvényes telep�
 
 
 ---
-## Ultra-Pro High-Fidelity Regsvcs/Regasm proxy végrehajtás (T1218.009)
+## Regsvcs/Regasm .NET proxy végrehajtás
 - **ID:** `T1218_009.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [REGASM.EXE](https://lolbas-project.github.io/lolbas/), [REGSVCS.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli a regsvcs.exe vagy regasm.exe visszaélést rosszindulatú .NET-szerelvények végrehajtása érdekében.
-A /U jelzőre összpontosít a proxy végrehajtásához, a nem szabványos szülőfolyamatokhoz,
-és a végrehajtás írható/nem megbízható útvonalakról.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGASM.EXE](https://lolbas-project.github.io/lolbas/), [REGSVCS.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a regsvcs.exe vagy regasm.exe nagy megbízhatóságú visszaéléseit rosszindulatú .NET-szerelvények proxy futtatása céljából (MITRE ATT&CK T1218.009).
+A szabály a gyanús eltávolítási jelzők (/U, /uninstall), a felhasználó által írható vagy távoli útvonalakról történő összeállítások végrehajtására, a rendellenes szülőfolyamatokra, az integritási szintű kontextusra és az alapértelmezett .NET-keretrendszer-könyvtárakon kívüli áthelyezett bináris végrehajtásra összpontosít.
+Úgy tervezték, hogy csökkentse a törvényes .NET regisztrációból és az MSI-vezérelt telepítési tevékenységből származó zajt.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -4954,16 +4954,14 @@ Nicht-Browser-Skript-Engines, die auf interne Dokumentations-URLs abzielen.
 
 
 ---
-## Ultra-Pro High-Fidelity-System-Skript-Proxy-Ausführung (T1216)
+## Windows-Systemskript-Proxy-Ausführung (T1216)
 - **ID:** `T1216.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/), [MANAGE-BDE.WSF](https://lolbas-project.github.io/lolbas/), [PUBPRN.VBS](https://lolbas-project.github.io/lolbas/), [SYNCAPPVPUBLISHINGSERVER.VBS](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt den Missbrauch vertrauenswürdiger, von Windows signierter Skripts, um schädlichen Code weiterzuleiten.
-Konzentriert sich auf netzwerkbasierte Ausführungsauslöser und anomale Eltern-Kind-Verbindungen
-Prozessbeziehungen, um Fehlalarme zu minimieren.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/), [MANAGE-BDE.WSF](https://lolbas-project.github.io/lolbas/), [PUBPRN.VBS](https://lolbas-project.github.io/lolbas/), [SYNCAPPVPUBLISHINGSERVER.VBS](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt den Missbrauch vertrauenswürdiger, von Windows signierter Skripts (MITRE ATT&CK T1216) als Proxy für die Ausführung von Schadcode.Der Schwerpunkt liegt auf netzwerkbasierten Auslösern, der Einschleusung anomaler Argumente und verdächtigen Eltern-Kind-Prozessbeziehungen.Filtert legitime Verwaltungskontexte, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -4954,16 +4954,14 @@ nem böngésző szkriptmotorok, amelyek belső dokumentációs URL-eket célozna
 
 
 ---
-## Ultra-Pro High-Fidelity rendszer parancsfájl-proxy végrehajtása (T1216)
+## Windows rendszerszkript proxy végrehajtása (T1216)
 - **ID:** `T1216.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/), [MANAGE-BDE.WSF](https://lolbas-project.github.io/lolbas/), [PUBPRN.VBS](https://lolbas-project.github.io/lolbas/), [SYNCAPPVPUBLISHINGSERVER.VBS](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli a megbízható Windows aláírt szkriptekkel való visszaélést a rosszindulatú kód proxyjával.
-A hálózati alapú végrehajtási triggerekre és a rendellenes szülő-gyermek kapcsolatra összpontosít
-feldolgozza a kapcsolatokat a hamis pozitívumok minimalizálása érdekében.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/), [MANAGE-BDE.WSF](https://lolbas-project.github.io/lolbas/), [PUBPRN.VBS](https://lolbas-project.github.io/lolbas/), [SYNCAPPVPUBLISHINGSERVER.VBS](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a megbízható Windows aláírt szkriptekkel (MITRE ATT&CK T1216) való nagy megbízhatóságú visszaélést a rosszindulatú kód proxy futtatása érdekében.Hálózati alapú triggerekre, anomális érvek befecskendezésére és gyanús szülő-gyermek folyamatkapcsolatokra összpontosít.Szűri a jogos adminisztratív környezeteket a téves pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

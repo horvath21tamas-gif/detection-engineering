@@ -249,7 +249,7 @@
 | T1199 | HIGH | High-Fidelity Trusted Relationship Abuse Detection |
 | T1200 | CRITICAL | Malicious Hardware-Induced Command Execution (HID Injection) |
 | T1201 | HIGH | Ultra-Pro High-Fidelity Password Policy Discovery (T1201) |
-| T1202 | HIGH | Ultra-Pro High-Fidelity Indirect Command Execution (T1202) |
+| T1202 | HIGH | Indirect Command Execution via Proxy Binaries (T1202) |
 | T1203 | CRITICAL | High-Fidelity Client-Side Exploitation and Shell Spawning |
 | T1204 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity) |
 | T1204.001 | CRITICAL | High-Fidelity User Execution of Malicious Link (T1204.001) |

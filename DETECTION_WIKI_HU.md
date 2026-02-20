@@ -244,7 +244,7 @@
 - [Nagy pontosságú megbízható kapcsolati visszaélések észlelése](#nagy-pontosságú-megbízható-kapcsolati-visszaélések-észlelése)
 - [Rosszindulatú hardver által kiváltott parancsvégrehajtás (HID-injektálás)](#rosszindulatú-hardver-által-kiváltott-parancsvégrehajtás-(hid-injektálás))
 - [Ultra-Pro nagy pontosságú jelszóházirend-felderítés (T1201)](#ultra-pro-nagy-pontosságú-jelszóházirend-felderítés-(t1201))
-- [Ultra-Pro High-Fidelity közvetett parancsvégrehajtás (T1202)](#ultra-pro-high-fidelity-közvetett-parancsvégrehajtás-(t1202))
+- [Közvetett parancsvégrehajtás proxy binárisokon keresztül (T1202)](#közvetett-parancsvégrehajtás-proxy-binárisokon-keresztül-(t1202))
 - [High-Fidelity kliensoldali kihasználás és shell spawning](#high-fidelity-kliensoldali-kihasználás-és-shell-spawning)
 - [Gyanús gyermekfolyamat, amelyet a Microsoft Office alkalmazás idézett elő (High Fidelity)](#gyanús-gyermekfolyamat-amelyet-a-microsoft-office-alkalmazás-idézett-elő-(high-fidelity))
 - [A rosszindulatú hivatkozás nagy pontosságú felhasználói végrehajtása (T1204.001)](#a-rosszindulatú-hivatkozás-nagy-pontosságú-felhasználói-végrehajtása-(t1204001))
@@ -4640,16 +4640,21 @@ támadásokat, miközben kiszűri a legitim rendszer-/adminisztrációs zajt.
 
 
 ---
-## Ultra-Pro High-Fidelity közvetett parancsvégrehajtás (T1202)
+## Közvetett parancsvégrehajtás proxy binárisokon keresztül (T1202)
 - **ID:** `T1202.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [FORFILES.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [PCALUA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a proxy parancs végrehajtására használható binárisok végrehajtását.
-A nem szabványos szülőfolyamatokra és specifikus parancssori argumentumokra összpontosít
-pcalua.exe, conhost.exe és forfiles.exe esetén a téves pozitívumok minimalizálása érdekében.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [FORFILES.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [PCALUA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a közvetett parancsvégrehajtáshoz vagy proxyhoz gyakran visszaélt binárisok végrehajtását.
+A nem szabványos szülőfolyamatokra és a gyanús parancssori argumentumokra összpontosít:
+- pcalua.exe
+- forfiles.exe
+- conhost.exe
+
+Figyeli a váratlan alkalmazások által kezdeményezett szkriptek, binárisok és DLL-ek végrehajtását,
+általában védelmi kikerülésre vagy a földön kívüli támadásokra használják.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

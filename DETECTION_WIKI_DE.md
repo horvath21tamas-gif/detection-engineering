@@ -244,7 +244,7 @@
 - [High-Fidelity-Missbrauchserkennung in vertrauenswürdigen Beziehungen](#high-fidelity-missbrauchserkennung-in-vertrauenswürdigen-beziehungen)
 - [Schädliche hardwareinduzierte Befehlsausführung (HID-Injection)](#schädliche-hardwareinduzierte-befehlsausführung-(hid-injection))
 - [Ultra-Pro High-Fidelity-Kennwortrichtlinienerkennung (T1201)](#ultra-pro-high-fidelity-kennwortrichtlinienerkennung-(t1201))
-- [Ultra-Pro High-Fidelity Indirekte Befehlsausführung (T1202)](#ultra-pro-high-fidelity-indirekte-befehlsausführung-(t1202))
+- [Indirekte Befehlsausführung über Proxy-Binärdateien (T1202)](#indirekte-befehlsausführung-über-proxy-binärdateien-(t1202))
 - [High-Fidelity-Client-seitige Ausbeutung und Shell-Spawning](#high-fidelity-client-seitige-ausbeutung-und-shell-spawning)
 - [Verdächtiger untergeordneter Prozess, der von einer Microsoft Office-Anwendung erzeugt wurde (High Fidelity)](#verdächtiger-untergeordneter-prozess-der-von-einer-microsoft-office-anwendung-erzeugt-wurde-(high-fidelity))
 - [High-Fidelity-Benutzerausführung eines schädlichen Links (T1204.001)](#high-fidelity-benutzerausführung-eines-schädlichen-links-(t1204001))
@@ -4640,16 +4640,21 @@ Angriffe und filtert gleichzeitig legitime System-/Administratorgeräusche herau
 
 
 ---
-## Ultra-Pro High-Fidelity Indirekte Befehlsausführung (T1202)
+## Indirekte Befehlsausführung über Proxy-Binärdateien (T1202)
 - **ID:** `T1202.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [FORFILES.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [PCALUA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Ausführung von Binärdateien, die als Proxy für die Befehlsausführung verwendet werden können.
-Konzentriert sich auf nicht standardmäßige übergeordnete Prozesse und spezifische Befehlszeilenargumente
-für pcalua.exe, conhost.exe und forfiles.exe, um Fehlalarme zu minimieren.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [FORFILES.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [PCALUA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die Ausführung von Binärdateien, die häufig zur indirekten Befehlsausführung oder zum Proxying missbraucht werden.
+Konzentriert sich auf nicht standardmäßige übergeordnete Prozesse und verdächtige Befehlszeilenargumente für:
+- pcalua.exe
+- forfiles.exe
+- conhost.exe
+
+Überwacht die Ausführung von Skripten, Binärdateien und DLLs, die von unerwarteten Anwendungen initiiert werden.
+Wird häufig zur Umgehung der Verteidigung oder für Angriffe außerhalb des Landes verwendet.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

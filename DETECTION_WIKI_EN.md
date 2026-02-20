@@ -244,7 +244,7 @@
 - [High-Fidelity Trusted Relationship Abuse Detection](#high-fidelity-trusted-relationship-abuse-detection)
 - [Malicious Hardware-Induced Command Execution (HID Injection)](#malicious-hardware-induced-command-execution-(hid-injection))
 - [Ultra-Pro High-Fidelity Password Policy Discovery (T1201)](#ultra-pro-high-fidelity-password-policy-discovery-(t1201))
-- [Ultra-Pro High-Fidelity Indirect Command Execution (T1202)](#ultra-pro-high-fidelity-indirect-command-execution-(t1202))
+- [Indirect Command Execution via Proxy Binaries (T1202)](#indirect-command-execution-via-proxy-binaries-(t1202))
 - [High-Fidelity Client-Side Exploitation and Shell Spawning](#high-fidelity-client-side-exploitation-and-shell-spawning)
 - [Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity)](#suspicious-child-process-spawned-by-microsoft-office-application-(high-fidelity))
 - [High-Fidelity User Execution of Malicious Link (T1204.001)](#high-fidelity-user-execution-of-malicious-link-(t1204001))
@@ -4873,16 +4873,21 @@ attacks while filtering out legitimate system/admin noise.
 
 
 ---
-## Ultra-Pro High-Fidelity Indirect Command Execution (T1202)
+## Indirect Command Execution via Proxy Binaries (T1202)
 - **ID:** `T1202.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [FORFILES.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [PCALUA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the execution of binaries that can be used to proxy command execution. 
-Focuses on non-standard parent processes and specific command-line arguments 
-for pcalua.exe, conhost.exe, and forfiles.exe to minimize false positives.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [FORFILES.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [PCALUA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects execution of binaries often abused for indirect command execution or proxying.
+Focuses on non-standard parent processes and suspicious command-line arguments for:
+  - pcalua.exe
+  - forfiles.exe
+  - conhost.exe
+
+Monitors for execution of scripts, binaries, and DLLs initiated by unexpected applications,
+commonly used for defense evasion or living-off-the-land attacks.
 
 
 #### 🚨 Response Playbook

@@ -4828,16 +4828,24 @@ oder DCShadow-Angriff.
 
 
 ---
-## Ultraprofessionelle High-Fidelity-Nutzung von Remote-Diensten (T1210)
+## Remote Service RCE / Post-Exploitation Spawn Detection (T1210)
 - **ID:** `T1210.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt erfolgreiche Post-Exploitation-Muster, bei denen ein Netzwerkdienst eine generiert
-interaktive Shell oder eine Proxy-Binärdatei.Speziell darauf abgestimmt, RCE über SMB zu empfangen,
-RPC, Spooler und WMI, während die Standard-IT-Orchestrierung ignoriert wird.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt das Post-Exploitation-Verhalten nach der Ausnutzung von Remote-Diensten
+(SMB, RPC, Spooler, WMI, SQL, IIS).
+
+Konzentriert sich auf:
+- Dienstprozesse, die interaktive Shells erzeugen
+- Verschlüsselte oder versteckte PowerShell-Ausführung
+- LOLBin-Proxy-Ausführung
+- Verdächtige Ausführungspfade
+- Missbrauch des SYSTEM-/NETZWERKDIENST-Kontexts
+
+Entwickelt, um Störungen durch legitime IT-Orchestrierung zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

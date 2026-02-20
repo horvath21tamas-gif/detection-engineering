@@ -4828,16 +4828,24 @@ vagy DCShadow támadás.
 
 
 ---
-## Ultra-Pro, nagy pontosságú távoli szolgáltatások kihasználása (T1210)
+## Remote Service RCE/Post Exploitation Spawn Detection (T1210)
 - **ID:** `T1210.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Sikeres utólagos kihasználási mintákat észlel, ahol egy hálózati szolgáltatás egy
-interaktív shell vagy proxy bináris.Kifejezetten az RCE SMB-n keresztüli fogadására hangolva,
-RPC, Spooler és WMI, miközben figyelmen kívül hagyja a szabványos informatikai hangszerelést.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a távoli szolgáltatások kihasználását követő kihasználás utáni viselkedést
+(SMB, RPC, Spooler, WMI, SQL, IIS).
+
+A következőkre összpontosít:
+- A szolgáltatás interaktív héjakat készít
+- Kódolt vagy rejtett PowerShell-végrehajtás
+- LOLBin proxy végrehajtás
+- Gyanús végrehajtási utak
+- RENDSZER/HÁLÓZATI SZOLGÁLTATÁS környezeti visszaélés
+
+Úgy tervezték, hogy csökkentse a törvényes informatikai hangszerelésből származó zajt.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

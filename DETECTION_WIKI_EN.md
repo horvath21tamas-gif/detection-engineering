@@ -4069,16 +4069,14 @@ suspicious process lineages (Webshells, Office macros) accessing the API.
 
 
 ---
-## Ultra-Pro High-Fidelity Automated Collection (T1119)
+## Automated Collection (T1119)
 - **ID:** `T1119.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects highly suspicious, automated data collection by monitoring for 
-wildcard-based recursive file transfers of sensitive extensions into 
-common staging areas, originating from interactive or web shells.
+- **Leírás:** Detects highly suspicious automated data collection targeting sensitive files.
+Focuses on wildcard-based recursive file transfers from interactive or web shells,
+copying into common staging areas, excluding legitimate system maintenance and backup operations.
 
 
 #### 🚨 Response Playbook

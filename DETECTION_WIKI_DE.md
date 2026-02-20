@@ -3880,16 +3880,14 @@ verdächtige Prozesslinien (Webshells, Office-Makros), die auf die API zugreifen
 
 
 ---
-## Ultra-Pro High-Fidelity Automatisierte Sammlung (T1119)
+## Automatisierte Sammlung (T1119)
 - **ID:** `T1119.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt hochverdächtige, automatisierte Datenerfassung durch Überwachung
-Wildcard-basierte rekursive Dateiübertragungen sensibler Erweiterungen in
-Gemeinsame Bereitstellungsbereiche, die aus interaktiven oder Web-Shells stammen.
+- **Beschreibung:** Erkennt höchst verdächtige automatisierte Datenerfassung, die auf sensible Dateien abzielt.
+Konzentriert sich auf Wildcard-basierte rekursive Dateiübertragungen von interaktiven oder Web-Shells.
+Kopieren in gemeinsame Staging-Bereiche, ausgenommen legitime Systemwartungs- und Sicherungsvorgänge.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -3880,16 +3880,14 @@ gyanús folyamatvonalak (Webshell-ek, Office-makrók), amelyek hozzáférnek az 
 
 
 ---
-## Ultra-Pro High-Fidelity automatizált gyűjtés (T1119)
+## Automatizált begyűjtés (T1119)
 - **ID:** `T1119.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Felismeri a nagyon gyanús, automatizált adatgyűjtést a következő felügyeletével
-érzékeny kiterjesztések helyettesítő karakter alapú rekurzív fájlátvitele ide
-interaktív vagy webes shellekből származó közös színpadi területek.
+- **Leírás:** Érzékeli az érzékeny fájlokat célzó, rendkívül gyanús automatizált adatgyűjtést.
+A helyettesítő karakter alapú rekurzív fájlátvitelre összpontosít interaktív vagy webes shellekből,
+másolás közös állomásozási területekre, kivéve a jogszerű rendszerkarbantartási és biztonsági mentési műveleteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

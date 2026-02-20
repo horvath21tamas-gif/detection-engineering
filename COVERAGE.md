@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-16 14:45:53`
+**Utolsó frissítés:** `2026-02-20 07:16:35`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -21,7 +21,7 @@
 | T1001.002 | CRITICAL | Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001.002) |
 | T1001.003 | HIGH | Ultra-Pro High-Fidelity Protocol Impersonation (T1001.003) |
 | T1003 | HIGH | Suspicious Access to LSASS Process Memory (Credential Dumping Attempt) |
-| T1003.001 | CRITICAL | Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007), Suspicious Access to LSASS Process Memory, Suspicious Access to LSASS Process Memory (Credential Dumping Attempt), Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003) |
+| T1003.001 | HIGH | Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007), Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003), Suspicious Access to LSASS Process Memory, Suspicious Access to LSASS Process Memory (Credential Dumping Attempt) |
 | T1003.002 | CRITICAL | Ultra-Pro High-Fidelity SAM & SYSTEM Registry Theft (T1003.002) |
 | T1003.003 | CRITICAL | Ultra-Pro High-Fidelity NTDS.dit Extraction (T1003.003) |
 | T1003.004 | CRITICAL | Ultra-Pro High-Fidelity LSA Secrets & Security Hive Theft (T1003.004) |
@@ -31,7 +31,7 @@
 | T1003.008 | CRITICAL | Ultra-Pro High-Fidelity Linux Shadow File Extraction (T1003.008) |
 | T1005 | CRITICAL | Ultra-Pro High-Fidelity Local Data Harvesting (T1005) |
 | T1006 | CRITICAL | Ultra-Pro Stealthy Direct Volume Access (T1006) |
-| T1007 | HIGH | Ultra-Pro High-Fidelity System Service Discovery (T1007), Suspicious Event Log Enumeration from Anomalous Execution Context |
+| T1007 | HIGH | Suspicious Event Log Enumeration from Anomalous Execution Context, Ultra-Pro High-Fidelity System Service Discovery (T1007) |
 | T1008 | CRITICAL | Ultra-Pro High-Fidelity Fallback Channel Detection (T1008) |
 | T1010 | HIGH | Ultra-Pro High-Fidelity Application Window Discovery (T1010) |
 | T1011 | HIGH | Ultra-Pro High-Fidelity Bluetooth Exfiltration (T1011) |
@@ -44,7 +44,7 @@
 | T1018 | HIGH | Ultra-Pro High-Fidelity Remote System Discovery (T1018) |
 | T1020 | CRITICAL | Ultra-Pro High-Fidelity Automated Exfiltration (T1020) |
 | T1020.001 | CRITICAL | Ultra-Pro High-Fidelity Client-Linked Cloud Exfil (T1020.001) |
-| T1021 | MEDIUM | Rapid Logons to Multiple Distant Hosts by Same User |
+| T1021 | HIGH | Rapid Logons to Multiple Distant Hosts by Same User, Suspicious Service Creation via Remote Administration Tools Outside Approved Management Scope |
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |
 | T1021.002 | CRITICAL | Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002), Admin Share Data Exfiltration (T1602.001) |
 | T1021.003 | CRITICAL | Ultra-Pro High-Fidelity DCOM Remote Execution (T1021.003) |
@@ -70,7 +70,7 @@
 | T1029 | CRITICAL | Ultra-Pro High-Fidelity Scheduled Transfer (T1029) |
 | T1030 | CRITICAL | Ultra-Pro High-Fidelity Data Chunking and Fragmentation (T1030) |
 | T1033 | HIGH | Ultra-Pro High-Fidelity System Owner/User Discovery (T1033) |
-| T1036 | CRITICAL | Legitimate Windows Binary Copied to User-Writable Location, Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036), Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007) |
+| T1036 | CRITICAL | Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036), Legitimate Windows Binary Copied to User-Writable Location, Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007) |
 | T1036.001 | CRITICAL | Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001) |
 | T1036.002 | CRITICAL | Ultra-Pro High-Fidelity RTLO Character Execution (T1036.002) |
 | T1036.003 | CRITICAL | Ultra-Pro High-Fidelity Renamed System Utility (T1036.003) |
@@ -123,7 +123,7 @@
 | T1056.003 | CRITICAL | Ultra-Pro High-Fidelity Digital Certificate Theft (T1056.003) |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 Libraries |
 | T1057 | HIGH | Ultra-Pro High-Fidelity Process Discovery (T1057) |
-| T1059 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), High-Fidelity Scripting Interpreter Contextual Anomaly, Webshell Upload or Interaction Detection (T1505.003) |
+| T1059 | HIGH | High-Fidelity Scripting Interpreter Contextual Anomaly, Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detection (T1505.003) |
 | T1059.001 | HIGH | Suspicious Encoded PowerShell Command Execution |
 | T1059.002 | HIGH | High-Fidelity AppleScript (osascript) Abuse Detection |
 | T1059.003 | CRITICAL | Advanced Windows Command Shell Contextual Anomaly |
@@ -138,18 +138,18 @@
 | T1069.001 | HIGH | Ultra-Pro High-Fidelity Local Group Discovery (T1069.001) |
 | T1069.002 | HIGH | Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002) |
 | T1069.003 | HIGH | Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003) |
-| T1070 | HIGH | Indicator Blocking and Telemetry Suppression, Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Command History Logging Impairment |
+| T1070 | CRITICAL | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Command History Logging Impairment, Indicator Blocking and Telemetry Suppression |
 | T1070.001 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Security Event Log Cleared Using wevtutil.exe |
 | T1070.002 | HIGH | Ultra-Pro High-Fidelity Linux Log Clearing and Journal Sabotage (T1070.002) |
 | T1070.003 | HIGH | Ultra-Pro High-Fidelity Mailbox Data Clearing and Rule Sabotage (T1070.003) |
-| T1070.004 | HIGH | Ultra-Pro High-Fidelity Forensic Artifact and File Deletion (T1070.004), Ultra-Pro High-Fidelity Indicator Removal on Host (T1070) |
+| T1070.004 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Ultra-Pro High-Fidelity Forensic Artifact and File Deletion (T1070.004) |
 | T1070.005 | HIGH | Ultra-Pro High-Fidelity Network Share and Credential Removal (T1070.005) |
 | T1070.006 | HIGH | Ultra-Pro High-Fidelity Timestomp and MACE Attribute Manipulation (T1070.006) |
 | T1070.007 | HIGH | Ultra-Pro High-Fidelity Network History and RDP Trace Removal (T1070.007) |
 | T1070.008 | CRITICAL | Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008) |
 | T1070.009 | HIGH | Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009) |
 | T1071 | CRITICAL | Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071) |
-| T1071.001 | CRITICAL | Ultra-Pro High-Fidelity HTTP/S C2 Anomaly (T1071.001), Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071) |
+| T1071.001 | CRITICAL | Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071), Ultra-Pro High-Fidelity HTTP/S C2 Anomaly (T1071.001) |
 | T1071.002 | CRITICAL | Ultra-Pro High-Fidelity FTP/SFTP Protocol Anomaly (T1071.002) |
 | T1071.003 | CRITICAL | Ultra-Pro High-Fidelity Mail Protocol Anomaly (T1071.003) |
 | T1071.004 | CRITICAL | Ultra-Pro High-Fidelity DNS Tunneling & Beaconing (T1071.004) |
@@ -157,7 +157,7 @@
 | T1074 | CRITICAL | Ultra-Pro High-Fidelity Data Staging Anomaly (T1074), Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001) |
 | T1074.001 | CRITICAL | Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001) |
 | T1074.002 | CRITICAL | Ultra-Pro High-Fidelity Remote Data Staging (T1074.002) |
-| T1078 | HIGH | Suspicious Impersonation via RunAs Abuse or Deceptive Local Account Creation, High-Fidelity Anomalous Logon via Valid Account |
+| T1078 | HIGH | High-Fidelity Anomalous Logon via Valid Account, Suspicious Impersonation via RunAs Abuse or Deceptive Local Account Creation |
 | T1078.001 | CRITICAL | High-Fidelity Default Account Abuse Detection |
 | T1078.002 | HIGH | High-Fidelity Domain Account Lateral Movement Anomaly |
 | T1078.003 | CRITICAL | High-Fidelity Local Account Remote Access Detection |
@@ -178,7 +178,7 @@
 | T1091 | HIGH | High-Fidelity Process Execution from Removable Media |
 | T1092 | CRITICAL | Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092) |
 | T1095 | CRITICAL | Ultra-Pro High-Fidelity Non-Application Layer C2 (T1095) |
-| T1098 | HIGH | High-Fidelity Account Manipulation - Persistence Focused, Suspicious Use of net user or net localgroup via cmd.exe |
+| T1098 | CRITICAL | Suspicious Use of net user or net localgroup via cmd.exe, High-Fidelity Account Manipulation - Persistence Focused |
 | T1098.001 | CRITICAL | High-Fidelity Entra ID Application Credential Addition |
 | T1098.002 | CRITICAL | High-Fidelity Exchange Mailbox Permission Grant (T1098.002) |
 | T1098.003 | CRITICAL | High-Fidelity Entra ID App Certificate Addition |
@@ -198,11 +198,11 @@
 | T1110.003 | HIGH | Ultra-Pro High-Fidelity Password Spraying (T1110.003) |
 | T1110.004 | HIGH | Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004) |
 | T1111 | CRITICAL | Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111) |
-| T1112 | CRITICAL | Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112), Indicator Blocking and Telemetry Suppression, Windows Event Log Service Impairment |
+| T1112 | CRITICAL | Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112), Windows Event Log Service Impairment, Indicator Blocking and Telemetry Suppression |
 | T1113 | CRITICAL | Ultra-Pro High-Fidelity Screen Capture Anomaly (T1113) |
 | T1114 | CRITICAL | Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |
-| T1114.001 | CRITICAL | Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114), Ultra-Pro High-Fidelity Local Email Harvesting Anomaly (T1114.001) |
-| T1114.002 | CRITICAL | Ultra-Pro High-Fidelity Remote Email Export Anomaly (T1114.002), Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |
+| T1114.001 | CRITICAL | Ultra-Pro High-Fidelity Local Email Harvesting Anomaly (T1114.001), Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |
+| T1114.002 | CRITICAL | Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114), Ultra-Pro High-Fidelity Remote Email Export Anomaly (T1114.002) |
 | T1114.003 | CRITICAL | Ultra-Pro High-Fidelity Email Forwarding Rule Anomaly (T1114.003) |
 | T1115 | CRITICAL | Ultra-Pro High-Fidelity Clipboard Data Spying (T1115) |
 | T1119 | CRITICAL | Ultra-Pro High-Fidelity Automated Collection (T1119) |
@@ -214,7 +214,7 @@
 | T1127.001 | CRITICAL | Ultra-Pro High-Fidelity MSBuild Proxy Execution (T1127.001) |
 | T1129 | HIGH | High-Fidelity Shared Module Load from Untrusted Path |
 | T1132 | CRITICAL | Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132) |
-| T1132.001 | CRITICAL | Ultra-Pro High-Fidelity Standard Encoding & Payload Injection (T1132.001), Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132) |
+| T1132.001 | CRITICAL | Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132), Ultra-Pro High-Fidelity Standard Encoding & Payload Injection (T1132.001) |
 | T1132.002 | CRITICAL | Ultra-Pro High-Fidelity Non-Standard Encoding & XOR Obfuscation (T1132.002) |
 | T1133 | HIGH | Anomalous External Remote Service Access Context |
 | T1134 | CRITICAL | Ultra-Pro Access Token Manipulation & Impersonation (T1134) |
@@ -270,7 +270,7 @@
 | T1216 | CRITICAL | Ultra-Pro High-Fidelity System Script Proxy Execution (T1216) |
 | T1216.001 | CRITICAL | Ultra-Pro High-Fidelity Pubprn Script Proxy Execution (T1216.001) |
 | T1217 | HIGH | Ultra-Pro High-Fidelity Browser Information Discovery (T1217) |
-| T1218 | CRITICAL | Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218), Suspicious Use of Built-in Windows Tools for File Download and Code Execution, Ultra-Pro High-Fidelity Regsvcs/Regasm Proxy Execution (T1218.009) |
+| T1218 | HIGH | Ultra-Pro High-Fidelity Regsvcs/Regasm Proxy Execution (T1218.009), Ultra-Pro High-Fidelity System Binary Proxy Execution (T1218), Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1218.001 | CRITICAL | Ultra-Pro High-Fidelity HH.exe Proxy Execution (T1218.001) |
 | T1218.002 | CRITICAL | Ultra-Pro High-Fidelity Control.exe Proxy Execution (T1218.002) |
 | T1218.003 | CRITICAL | Ultra-Pro High-Fidelity MsiExec Proxy Execution (T1218.003) |
@@ -284,39 +284,39 @@
 | T1218.012 | CRITICAL | Ultra-Pro High-Fidelity Verclsid Proxy Execution (T1218.012) |
 | T1218.013 | CRITICAL | Ultra-Pro High-Fidelity Rundll32 Proxy Execution (T1218.013) |
 | T1218.014 | CRITICAL | Ultra-Pro High-Fidelity MMC Proxy Execution (T1218.014) |
-| T1219 | HIGH | Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern |
-| T1220 | HIGH | Ultra-Pro High-Fidelity XSL Script Processing (T1220) |
-| T1221 | HIGH | Ultra-Pro High-Fidelity Office Template Injection (T1221) |
-| T1222 | HIGH | Ultra-Pro High-Fidelity Permissions Modification (T1222) |
-| T1222.001 | HIGH | Ultra-Pro High-Fidelity Permissions Modification (T1222), Ultra-Pro High-Fidelity Windows File Permissions Modification (T1222.001) |
-| T1222.002 | HIGH | Ultra-Pro High-Fidelity Linux File Permissions Modification (T1222.002) |
-| T1480 | HIGH | Ultra-Pro High-Fidelity Execution Guardrails Discovery (T1480) |
-| T1480.001 | HIGH | Ultra-Pro Environmental Keying Discovery (T1480.001) |
-| T1482 | HIGH | Ultra-Pro High-Fidelity Domain Trust Discovery (T1482) |
-| T1484 | CRITICAL | Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484) |
-| T1484.001 | CRITICAL | Ultra-Pro Group Policy Modification & Abuse (T1484.001) |
-| T1484.002 | CRITICAL | Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002) |
+| T1219 | HIGH | Suspicious Service Creation via Remote Administration Tools Outside Approved Management Scope |
+| T1220 | HIGH | XSL Script Processing (T1220) |
+| T1221 | HIGH | Office Template Injection (T1221) |
+| T1222 | HIGH | Windows Permissions Modification (T1222) |
+| T1222.001 | HIGH | Windows File Permissions Modification (T1222.001), Windows Permissions Modification (T1222) |
+| T1222.002 | HIGH | Linux File Permissions Modification (T1222.002) |
+| T1480 | HIGH | Execution Guardrails Discovery (T1480) |
+| T1480.001 | HIGH | Environmental Keying Discovery (T1480.001) |
+| T1482 | HIGH | Domain Trust Discovery (T1482) |
+| T1484 | CRITICAL | Domain Policy Manipulation & GPO Abuse (T1484) |
+| T1484.001 | CRITICAL | Group Policy Modification & Abuse (T1484.001) |
+| T1484.002 | CRITICAL | Domain Trust Tampering & SID Filtering Bypass (T1484.002) |
 | T1485 | CRITICAL | Data Destruction (T1485/T1490) |
 | T1486 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1489 | CRITICAL | Service Stop (T1489) |
-| T1490 | HIGH | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Ultra-Pro High-Fidelity Data Destruction (T1485), Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity) |
+| T1490 | CRITICAL | Suspicious Deletion of Volume Shadow Copies via VSSAdmin (High Fidelity), Data Destruction (T1485/T1490), Ransomware Preparation Activity Detected on Windows Host (High Fidelity) |
 | T1491 | CRITICAL | Defacement (T1491) |
 | T1491.001 | CRITICAL | Defacement (T1491), Internal Defacement (T1491.001) |
 | T1491.002 | CRITICAL | Defacement (T1491), External Defacement (T1491.002) |
 | T1495 | CRITICAL | Firmware Corruption (T1495) |
 | T1496 | HIGH | Resource Hijacking (T1496) |
 | T1497 | HIGH | Virtualization/Sandbox Evasion (T1497) |
-| T1497.001 | HIGH | Virtualization/Sandbox Evasion (T1497), VM Artifact Discovery (T1497.001) |
+| T1497.001 | HIGH | VM Artifact Discovery (T1497.001), Virtualization/Sandbox Evasion (T1497) |
 | T1497.002 | HIGH | User Interaction Evasion (T1497.002) |
 | T1497.003 | HIGH | Virtualization/Sandbox Evasion (T1497), Time-based Evasion (T1497.003) |
 | T1498 | HIGH | Network DoS (T1498) |
-| T1498.001 | HIGH | Direct Flow Flood (T1498.001), Network DoS (T1498) |
+| T1498.001 | HIGH | Network DoS (T1498), Direct Flow Flood (T1498.001) |
 | T1498.002 | HIGH | Network DoS (T1498) |
 | T1499 | CRITICAL | Endpoint Denial of Service (T1499) |
 | T1499.001 | CRITICAL | OS Self-Destruction Detection (T1499.001) |
 | T1499.002 | CRITICAL | Service Exhaustion Detection (T1499.002) |
 | T1499.003 | CRITICAL | OS Self-Destruction Detection (T1499.003), Endpoint Denial of Service (T1499) |
-| T1499.004 | CRITICAL | Resource Exhaustion Detection (T1499.004), Endpoint Denial of Service (T1499) |
+| T1499.004 | CRITICAL | Endpoint Denial of Service (T1499), Resource Exhaustion Detection (T1499.004) |
 | T1505 | CRITICAL | Web Shell Execution Patterns (T1505) |
 | T1505.001 | CRITICAL | SQL Server Command Shell Execution (T1505.001) |
 | T1505.002 | CRITICAL | IIS Native Module Injection (T1505.002) |
@@ -344,10 +344,10 @@
 | T1542.005 | CRITICAL | DHCP/PXE Boot Hijacking (T1542.005) |
 | T1543 | CRITICAL | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services, Windows Event Log Service Impairment |
 | T1543.001 | HIGH | Ultra-Pro macOS Launch Agent Persistence Detection (T1543.001), Suspicious macOS LaunchAgent or LaunchDaemon Plist Modification |
-| T1543.002 | HIGH | Ultra-Pro Systemd Service Persistence (T1543.002), High-Fidelity Systemd Timer Persistence Detection |
+| T1543.002 | CRITICAL | High-Fidelity Systemd Timer Persistence Detection, Ultra-Pro Systemd Service Persistence (T1543.002) |
 | T1543.003 | CRITICAL | Ultra-Pro Unauthorized Windows Service Installation (T1543.003) |
 | T1543.004 | CRITICAL | Ultra-Pro Unauthorized macOS Launch Daemon (T1543.004) |
-| T1546 | HIGH | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity), Ultra-Pro WMI Event Subscription Persistence (T1546.003), Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
+| T1546 | CRITICAL | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity), Suspicious COM Hijacking for User-Level Persistence (High Fidelity), Ultra-Pro WMI Event Subscription Persistence (T1546.003) |
 | T1546.001 | CRITICAL | Ultra-Pro File Association Hijacking (T1546.001) |
 | T1546.002 | CRITICAL | Ultra-Pro Screensaver Persistence Detection (T1546.002) |
 | T1546.003 | CRITICAL | WMI Event Subscription Persistence via WMIC or PowerShell (High Fidelity), Ultra-Pro WMI Event Subscription Persistence (T1546.003) |
@@ -365,7 +365,7 @@
 | T1546.015 | HIGH | Suspicious COM Hijacking for User-Level Persistence (High Fidelity) |
 | T1546.016 | HIGH | Ultra-Pro MSI Installer Custom Action Persistence (T1546.016) |
 | T1547 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása |
-| T1547.001 | HIGH | Suspicious Registry Run Key Modification for User Persistence (High Fidelity), Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása |
+| T1547.001 | HIGH | Gyanús rendszerindítási vagy bejelentkezési automatikus indítás végrehajtása, Suspicious Registry Run Key Modification for User Persistence (High Fidelity) |
 | T1547.002 | CRITICAL | High-Fidelity LSA Authentication Package Persistence |
 | T1547.003 | CRITICAL | High-Fidelity Time Provider Persistence (T1547.003) |
 | T1547.004 | CRITICAL | High-Fidelity Winlogon Helper DLL Persistence (T1547.004) |
@@ -394,7 +394,7 @@
 | T1552 | HIGH | Credentials In Registry Discovery (T1552.002) |
 | T1552.001 | HIGH | Unsecured Credentials Discovery (T1552), Credentials In Files Discovery (T1552.001) |
 | T1552.002 | HIGH | Unsecured Credentials Discovery (T1552), Credentials In Registry Discovery (T1552.002) |
-| T1552.003 | HIGH | Shell History & Console Discovery (T1552.003), Unsecured Credentials Discovery (T1552) |
+| T1552.003 | HIGH | Unsecured Credentials Discovery (T1552), Shell History & Console Discovery (T1552.003) |
 | T1552.004 | HIGH | Private Key Discovery (T1552.004) |
 | T1552.005 | CRITICAL | Cloud Credential Discovery (T1552.005) |
 | T1552.006 | CRITICAL | Credentials in Files Discovery (T1552.006) |
@@ -404,8 +404,8 @@
 | T1553.001 | CRITICAL | macOS Gatekeeper and Quarantine Bypass (T1553.001) |
 | T1553.002 | CRITICAL | SIP Hijacking and Trust Subversion (T1553.002) |
 | T1553.003 | CRITICAL | Windows Catalog Database Subversion (T1553.003) |
-| T1553.004 | CRITICAL | Subvert Trust Controls (T1553), Root Certificate Injection (T1553.004) |
-| T1553.005 | CRITICAL | Subvert Trust Controls (T1553), Mark-of-the-Web (MotW) Bypass & Zone Subversion Detection (T1553.005) |
+| T1553.004 | CRITICAL | Root Certificate Injection (T1553.004), Subvert Trust Controls (T1553) |
+| T1553.005 | CRITICAL | Mark-of-the-Web (MotW) Bypass & Zone Subversion Detection (T1553.005), Subvert Trust Controls (T1553) |
 | T1553.006 | CRITICAL | Windows Code Integrity & DSE Subversion Detection (T1553.006) |
 | T1554 | CRITICAL | Ultra-Pro Client Binary Integrity Compromise (T1554) |
 | T1555 | HIGH | Nem böngészős folyamat hozzáférése a böngésző hitelesítőadat-tárolóihoz (High Fidelity) |
@@ -435,17 +435,17 @@
 | T1558.004 | CRITICAL | Kerberos Attack Detection, Ultra-Pro High-Fidelity AS-REP Roasting & LDAP Enumeration |
 | T1559 | CRITICAL | High-Fidelity Indirect IPC and COM Execution |
 | T1559.001 | HIGH | High-Fidelity Indirect IPC and COM Execution, Gyanús elnevezett csővezeték-létrehozás, amely utólagos kihasználási eszközökhöz kapcsolódik (High Fidelity) |
-| T1559.002 | CRITICAL | High-Fidelity Indirect IPC and COM Execution, High-Fidelity Office DDE Contextual Anomaly |
+| T1559.002 | CRITICAL | High-Fidelity Office DDE Contextual Anomaly, High-Fidelity Indirect IPC and COM Execution |
 | T1559.003 | HIGH | High-Fidelity Hypervisor API and VM Escape Research |
 | T1560 | HIGH | Adatok gyanús archiválása exfiltráció céljából |
-| T1560.001 | HIGH | Data Archiving for Exfiltration, Adatok gyanús archiválása exfiltráció céljából |
+| T1560.001 | CRITICAL | Adatok gyanús archiválása exfiltráció céljából, Data Archiving for Exfiltration |
 | T1560.002 | CRITICAL | Data Archiving via Library |
 | T1560.003 | CRITICAL | Archive via Custom Method |
-| T1561 | CRITICAL | Disk Content Wipe, Disk Wipe, Disk Structure Wipe |
+| T1561 | CRITICAL | Disk Structure Wipe, Disk Content Wipe, Disk Wipe |
 | T1561.001 | CRITICAL | Disk Content Wipe, Disk Wipe |
-| T1561.002 | CRITICAL | Disk Wipe, Disk Structure Wipe |
+| T1561.002 | CRITICAL | Disk Structure Wipe, Disk Wipe |
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
-| T1562.001 | HIGH | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Biztonsági szolgáltatások gyanús leállítása, Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével |
+| T1562.001 | CRITICAL | Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.002 | CRITICAL | Windows Event Log Service Impairment |
 | T1562.003 | HIGH | Command History Logging Impairment |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |
@@ -456,20 +456,20 @@
 | T1562.010 | CRITICAL | Defense Downgrade Attack (T1562.010) |
 | T1562.012 | CRITICAL | Cloud Security Infrastructure Impairment (T1562.012) |
 | T1563 | CRITICAL | Remote Service Session Hijacking (T1563) |
-| T1563.001 | CRITICAL | Local Session Hijacking (T1563.001), Remote Service Session Hijacking (T1563) |
+| T1563.001 | CRITICAL | Remote Service Session Hijacking (T1563), Local Session Hijacking (T1563.001) |
 | T1563.002 | CRITICAL | Remote Service Session Hijacking (T1563), RDP Session Hijacking (T1563.002) |
 | T1564 | HIGH | Hide Artifacts Detection (T1564) |
-| T1564.001 | HIGH | Hide Artifacts Detection (T1564), Hidden File Attribute Manipulation (T1564.001) |
+| T1564.001 | HIGH | Hidden File Attribute Manipulation (T1564.001), Hide Artifacts Detection (T1564) |
 | T1564.002 | CRITICAL | Hide Artifacts Detection (T1564), Hidden User Account Creation (T1564.002) |
 | T1564.003 | HIGH | Hidden Window Execution (T1564.003) |
-| T1564.004 | HIGH | NTFS Alternative Data Stream (ADS) Abuse (T1564.004), Hide Artifacts Detection (T1564) |
+| T1564.004 | HIGH | Hide Artifacts Detection (T1564), NTFS Alternative Data Stream (ADS) Abuse (T1564.004) |
 | T1564.005 | HIGH | Hidden File System Manipulation (T1564.005) |
 | T1564.006 | HIGH | Virtual Instance Execution Abuse (T1564.006) |
 | T1564.007 | HIGH | VBA Macro Security Evasion (T1564.007) |
 | T1564.008 | CRITICAL | Email Hiding Rules Detection (T1564.008) |
 | T1564.009 | HIGH | Resource Extraction and Abuse (T1564.009) |
 | T1564.010 | HIGH | Process Argument Spoofing Detection (T1564.010) |
-| T1564.011 | HIGH | Virtualization and Sandbox Evasion (T1564.011), Virtual Instance Abuse (T1564.011) |
+| T1564.011 | HIGH | Virtual Instance Abuse (T1564.011), Virtualization and Sandbox Evasion (T1564.011) |
 | T1565 | CRITICAL | Data Manipulation (T1565) |
 | T1565.001 | CRITICAL | Stored Data Manipulation (T1565.001), Data Manipulation (T1565) |
 | T1565.002 | CRITICAL | Transmitted Data Manipulation (T1565.002), Data Manipulation (T1565) |
@@ -486,7 +486,7 @@
 | T1567.004 | CRITICAL | Text Storage Exfil (T1567.004) |
 | T1568 | HIGH | Dynamic Resolution & DGA (T1568) |
 | T1568.001 | CRITICAL | Fast Flux & DNS Cache Evasion (T1568.001) |
-| T1568.002 | HIGH | Domain Generation Algorithm (DGA) Detection (T1568.002), Dynamic Resolution & DGA (T1568) |
+| T1568.002 | CRITICAL | Dynamic Resolution & DGA (T1568), Domain Generation Algorithm (DGA) Detection (T1568.002) |
 | T1568.003 | CRITICAL | DNS Calculation & Extraction (T1568.003) |
 | T1569 | HIGH | High-Fidelity System Service Execution Detection |
 | T1569.001 | CRITICAL | High-Fidelity Launch Daemon Persistence Detection |
@@ -496,10 +496,10 @@
 | T1572 | CRITICAL | Protocol Tunneling Detection (T1572) |
 | T1573 | CRITICAL | Encrypted C2 Channel (T1573) |
 | T1573.001 | CRITICAL | Encrypted C2 Channel (T1573), Symmetric Encryption C2 Channel (T1573.001) |
-| T1573.002 | CRITICAL | Encrypted C2 Channel (T1573), Asymmetric Encryption C2 (T1573.002) |
+| T1573.002 | CRITICAL | Asymmetric Encryption C2 (T1573.002), Encrypted C2 Channel (T1573) |
 | T1574 | CRITICAL | Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574) |
 | T1574.001 | CRITICAL | Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574), Ultra-Pro DLL Search Order Hijacking Detection (T1574.001) |
-| T1574.002 | CRITICAL | Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574), Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002) |
+| T1574.002 | CRITICAL | Ultra-Pro DLL Side-Loading Integrity Gap Detection (T1574.002), Ultra-Pro DLL Hijacking & Side-Loading Detection (T1574) |
 | T1574.003 | HIGH | Ultra-Pro Shell Configuration & Path Interception (T1574.003) |
 | T1574.004 | CRITICAL | Ultra-Pro Library Search Order Hijacking & Integrity Gap (T1574.004) |
 | T1574.005 | CRITICAL | Ultra-Pro Installer File Permissions Weakness (T1574.005) |
@@ -511,7 +511,7 @@
 | T1574.011 | CRITICAL | Privileged Service ImagePath or ServiceDll Hijacked via Registry |
 | T1574.012 | CRITICAL | Exploit-Grade COR_PROFILER Hijacking via User-Writable Profiler DLL |
 | T1574.013 | CRITICAL | Exploit-Grade KernelCallbackTable Manipulation |
-| T1578 | CRITICAL | Cloud Infrastructure Tampering (T1578), Cloud Snapshot Exfiltration (T1578.002) |
+| T1578 | CRITICAL | Cloud Snapshot Exfiltration (T1578.002), Cloud Infrastructure Tampering (T1578) |
 | T1578.001 | CRITICAL | Suspicious Cloud Instance Creation (T1578.001) |
 | T1578.002 | CRITICAL | Cloud Snapshot Exfiltration (T1578.002) |
 | T1578.003 | CRITICAL | Cloud Instance Destruction (T1578.003) |
@@ -555,7 +555,7 @@
 | T1588.004 | HIGH | Strategic Trusted Root Certificate Store Manipulation |
 | T1588.005 | HIGH | Anomalous Procurement of Exploit or PoC Code |
 | T1588.006 | HIGH | Targeted Harvesting of Vulnerability Research Artifacts |
-| T1589 | HIGH | Credential Enumeration via Authentication API (High Confidence), Targeted OSINT Enumeration of Open Websites and Domains, High-Fidelity Identity Enumeration via Authentication Endpoints, High-Confidence OSINT Identity Enumeration via Public APIs |
+| T1589 | HIGH | High-Confidence OSINT Identity Enumeration via Public APIs, High-Fidelity Identity Enumeration via Authentication Endpoints, Targeted OSINT Enumeration of Open Websites and Domains, Credential Enumeration via Authentication API (High Confidence) |
 | T1589.001 | HIGH | Credential Enumeration via Authentication API (High Confidence) |
 | T1589.002 | HIGH | High-Confidence OSINT Identity Enumeration via Public APIs |
 | T1589.003 | HIGH | Targeted OSINT Enumeration of Open Websites and Domains |
@@ -571,7 +571,7 @@
 | T1591.002 | HIGH | Advanced Business Relationship Information Discovery - T1591.002 |
 | T1591.003 | HIGH | Advanced Knowledge Management Discovery - T1591.003 |
 | T1591.004 | HIGH | High-Fidelity Personnel Information Discovery - T1591.004 |
-| T1592 | HIGH | Advanced Software Enumeration Reconnaissance via Web Endpoints, High-Confidence Hardware Enumeration via Management Interfaces, High-Confidence Client Configuration Fingerprinting (Reconnaissance), High-Fidelity Host Information Reconnaissance Activity, High-Confidence Firmware Enumeration Against Network Devices |
+| T1592 | HIGH | High-Confidence Firmware Enumeration Against Network Devices, Advanced Software Enumeration Reconnaissance via Web Endpoints, High-Confidence Hardware Enumeration via Management Interfaces, High-Confidence Client Configuration Fingerprinting (Reconnaissance), High-Fidelity Host Information Reconnaissance Activity |
 | T1592.001 | HIGH | High-Confidence Hardware Enumeration via Management Interfaces |
 | T1592.002 | HIGH | Advanced Software Enumeration Reconnaissance via Web Endpoints |
 | T1592.003 | HIGH | High-Confidence Firmware Enumeration Against Network Devices |
@@ -581,7 +581,7 @@
 | T1593.002 | HIGH | High-Fidelity Automated Search Engine Reconnaissance - T1593.002 |
 | T1593.003 | HIGH | High-Fidelity Social Media Entity Harvesting - T1593.003 |
 | T1594 | HIGH | High-Fidelity Information Repository Reconnaissance - T1594 |
-| T1595 | HIGH | Active Wordlist Scanning Against Authentication Endpoints, High-Fidelity External IP Block Scanning Detection, High-Fidelity Active Scanning Detection (Behavior-Based), High-Confidence External Vulnerability Scanning Activity |
+| T1595 | HIGH | High-Fidelity Active Scanning Detection (Behavior-Based), High-Fidelity External IP Block Scanning Detection, High-Confidence External Vulnerability Scanning Activity, Active Wordlist Scanning Against Authentication Endpoints |
 | T1595.001 | HIGH | High-Fidelity External IP Block Scanning Detection |
 | T1595.002 | HIGH | High-Confidence External Vulnerability Scanning Activity |
 | T1595.003 | HIGH | Active Wordlist Scanning Against Authentication Endpoints |
@@ -611,7 +611,7 @@
 | T1602.001 | CRITICAL | Admin Share Data Exfiltration (T1602.001) |
 | T1602.002 | CRITICAL | Ultra-Pro High-Fidelity Cloud Share Exfiltration (T1602.002) |
 | T1606 | CRITICAL | Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606) |
-| T1606.001 | CRITICAL | Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606), Ultra-Pro High-Fidelity Web Cookie & Browser Credential Harvesting (T1606.001) |
+| T1606.001 | CRITICAL | Ultra-Pro High-Fidelity Web Cookie & Browser Credential Harvesting (T1606.001), Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606) |
 | T1606.002 | CRITICAL | Ultra-Pro High-Fidelity Web Token Forgery & Golden SAML (T1606.002), Ultra-Pro High-Fidelity Web Token & Credential Forgery (T1606) |
 | T1608 | HIGH | Anomalous Infrastructure Staging and Resource Deployment |
 | T1608.001 | HIGH | Anomalous Malware Staging to External Infrastructure |

@@ -279,23 +279,23 @@
 - [Ultra-Pro High-Fidelity Verclsid proxy végrehajtás (T1218.012)](#ultra-pro-high-fidelity-verclsid-proxy-végrehajtás-(t1218012))
 - [Ultra-Pro High-Fidelity Rundll32 proxy végrehajtás (T1218.013)](#ultra-pro-high-fidelity-rundll32-proxy-végrehajtás-(t1218013))
 - [Ultra-Pro High-Fidelity MMC proxy végrehajtás (T1218.014)](#ultra-pro-high-fidelity-mmc-proxy-végrehajtás-(t1218014))
-- [Jogos távfelügyeleti eszközök gyanús használata a vállalati mintán kívül](#jogos-távfelügyeleti-eszközök-gyanús-használata-a-vállalati-mintán-kívül)
-- [Ultra-Pro High-Fidelity XSL Script Processing (T1220)](#ultra-pro-high-fidelity-xsl-script-processing-(t1220))
-- [Ultra-Pro High-Fidelity irodai sablonbefecskendezés (T1221)](#ultra-pro-high-fidelity-irodai-sablonbefecskendezés-(t1221))
-- [Ultra-Pro High-Fidelity engedélyek módosítása (T1222)](#ultra-pro-high-fidelity-engedélyek-módosítása-(t1222))
-- [Ultra-Pro High-Fidelity Windows fájlengedélyek módosítása (T1222.001)](#ultra-pro-high-fidelity-windows-fájlengedélyek-módosítása-(t1222001))
-- [Ultra-Pro High-Fidelity Linux-fájlengedélyek módosítása (T1222.002)](#ultra-pro-high-fidelity-linux-fájlengedélyek-módosítása-(t1222002))
-- [Ultra-Pro High-Fidelity Execution Guardrails Discovery (T1480)](#ultra-pro-high-fidelity-execution-guardrails-discovery-(t1480))
-- [Ultra-Pro Environmental Keying Discovery (T1480.001)](#ultra-pro-environmental-keying-discovery-(t1480001))
-- [Ultra-Pro High-Fidelity Domain Trust Discovery (T1482)](#ultra-pro-high-fidelity-domain-trust-discovery-(t1482))
-- [Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484)](#ultra-pro-domain-policy-manipulation-&-gpo-abuse-(t1484))
-- [Ultra-Pro csoportházirend-módosítás és visszaélés (T1484.001)](#ultra-pro-csoportházirend-módosítás-és-visszaélés-(t1484001))
-- [Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)](#ultra-pro-domain-trust-tampering-&-sid-filtering-bypass-(t1484002))
+- [Gyanús szolgáltatás létrehozása a távfelügyeleti eszközökön keresztül a jóváhagyott felügyeleti körön kívül](#gyanús-szolgáltatás-létrehozása-a-távfelügyeleti-eszközökön-keresztül-a-jóváhagyott-felügyeleti-körön-kívül)
+- [XSL-szkript feldolgozás (T1220)](#xsl-szkript-feldolgozás-(t1220))
+- [Irodai sablon befecskendezése (T1221)](#irodai-sablon-befecskendezése-(t1221))
+- [Windows engedélyek módosítása (T1222)](#windows-engedélyek-módosítása-(t1222))
+- [Windows fájlengedélyek módosítása (T1222.001)](#windows-fájlengedélyek-módosítása-(t1222001))
+- [Linux fájlengedélyek módosítása (T1222.002)](#linux-fájlengedélyek-módosítása-(t1222002))
+- [Execution Guardrails Discovery (T1480)](#execution-guardrails-discovery-(t1480))
+- [Environmental Keying Discovery (T1480.001)](#environmental-keying-discovery-(t1480001))
+- [Domain Trust Discovery (T1482)](#domain-trust-discovery-(t1482))
+- [Domainházirend-manipuláció és csoportházirend-objektumokkal való visszaélés (T1484)](#domainházirend-manipuláció-és-csoportházirend-objektumokkal-való-visszaélés-(t1484))
+- [Csoportházirend módosítása és visszaélés (T1484.001)](#csoportházirend-módosítása-és-visszaélés-(t1484001))
+- [Domain Trust Tampering & SID Filtering Bypass (T1484.002)](#domain-trust-tampering-&-sid-filtering-bypass-(t1484002))
 - [Adatmegsemmisítés (T1485/T1490)](#adatmegsemmisítés-(t1485t1490))
 - [Ransomware-előkészítési tevékenység észlelve a Windows Host-on (High Fidelity)](#ransomware-előkészítési-tevékenység-észlelve-a-windows-host-on-(high-fidelity))
 - [Szervizmegálló (T1489)](#szervizmegálló-(t1489))
 - [Kötet árnyékmásolatok gyanús törlése a VSSAdminon keresztül (High Fidelity)](#kötet-árnyékmásolatok-gyanús-törlése-a-vssadminon-keresztül-(high-fidelity))
-- [Defacement (T1491)](#defacement-(t1491))
+- [Elrontás (T1491)](#elrontás-(t1491))
 - [Belső sérülés (T1491.001)](#belső-sérülés-(t1491001))
 - [Külső rontás (T1491.002)](#külső-rontás-(t1491002))
 - [Firmware korrupció (T1495)](#firmware-korrupció-(t1495))
@@ -5250,12 +5250,13 @@ eltérítő vagy nem megbízható konzolfájlok (.msc).Kiszűri a jogos adminisz
 
 
 ---
-## Jogos távfelügyeleti eszközök gyanús használata a vállalati mintán kívül
+## Gyanús szolgáltatás létrehozása a távfelügyeleti eszközökön keresztül a jóváhagyott felügyeleti körön kívül
 - **ID:** `T1219.yaml`
-- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a legitim távoli adminisztrációs eszközökkel (pl. PsExec) kapcsolatos szolgáltatások gyanús létrehozását, ha a jóváhagyott vállalatirányítási mintákon kívül használják.Ez a viselkedés gyakran megfigyelhető oldalirányú mozgások során, amikor a támadók visszaélnek a rendszergazdai eszközökkel.
+- **Leírás:** Érzékeli a legális távoli adminisztrációs eszközökhöz (pl. PsExec, PAExec, RemCom) általában társított Windows-szolgáltatások létrehozását, ha azokat a jóváhagyott vállalati felügyeleti mintákon kívül hajtják végre.
+Az ellenfelek gyakran visszaélnek ezekkel az eszközökkel oldalirányú mozgáshoz azáltal, hogy távolról hoznak létre ideiglenes szolgáltatásokat a célrendszereken.A szabály szűri az ismert felügyeleti gazdagépeket, szolgáltatásfiókokat és jóváhagyott vállalati szerszámozási útvonalakat a téves pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -5286,7 +5287,7 @@ eltérítő vagy nem megbízható konzolfájlok (.msc).Kiszűri a jogos adminisz
 - **Becsült zajszint:** Kritikusan Magas (SIEM gyilkos kategória!)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Microsoft Office-alkalmazásokat, amelyek távoli sablonokat kérnek le a nem Microsoft infrastruktúrából, ami potenciálisan rosszindulatú sabloninjektálást jelez.Figyeli az Office-alkalmazások és a gyanús külső gazdagépek közötti hálózati kapcsolatokat, kivéve a megbízható Microsoft-tartományokat és a belső IP-tartományokat.
+- **Leírás:** Érzékeli a Microsoft Office-alkalmazásokat, amelyek távoli sablonokat töltenek le a nem Microsoft infrastruktúrából, ami potenciálisan rosszindulatú sabloninjektálást jelez.Figyeli az Office-alkalmazások és a gyanús külső gazdagépek közötti hálózati kapcsolatokat, kivéve a megbízható Microsoft-tartományokat és a belső IP-tartományokat.
 
 #### 🚨 Response Playbook
 1. **IP hírnév: Ellenőrizd a távoli IP címet hírnév-adatbázisokban.**
@@ -5302,7 +5303,7 @@ eltérítő vagy nem megbízható konzolfájlok (.msc).Kiszűri a jogos adminisz
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a gyanús fájlengedély-módosításokat azáltal, hogy azonosítja a natív eszközök (icacls, takeown, cacls, attrib) használatát széles hozzáférésű jelzőkkel (Teljes felügyelet, Mindenki), amelyeket nem szabványos szülőfolyamatok vagy gyanús útvonalak kezdeményeztek.Kiszűri a megbízható rendszertelepítőket és a felügyeleti műveleteket, hogy csökkentse a hamis pozitívumot.
+- **Leírás:** Érzékeli a gyanús fájlengedély-módosításokat azáltal, hogy azonosítja a natív eszközök (icacls, takeown, cacls, attrib) használatát széles hozzáférésű jelzőkkel (Teljes felügyelet, Mindenki), amelyeket nem szabványos szülőfolyamatok vagy gyanús útvonalak kezdeményeztek.Kiszűri a megbízható rendszertelepítőket és a felügyeleti műveleteket a téves pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -5364,7 +5365,7 @@ eltérítő vagy nem megbízható konzolfájlok (.msc).Kiszűri a jogos adminisz
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a célzott környezeti kulcsozást a hardveres ujjlenyomatok és a gyanús, nem megbízható vagy nem szabványos szülői folyamatok által kezdeményezett gépspecifikus regisztrációs vagy AD-keresések azonosításával.
+- **Leírás:** Érzékeli a célzott környezeti kulcsozást a hardveres ujjlenyomatok és a gyanús, nem megbízható vagy nem szabványos szülői folyamatok által kezdeményezett, gépspecifikus regisztrációs vagy AD-keresések azonosításával.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

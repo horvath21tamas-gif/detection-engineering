@@ -279,18 +279,18 @@
 - [Ultra-Pro High-Fidelity Verclsid Proxy Execution (T1218.012)](#ultra-pro-high-fidelity-verclsid-proxy-execution-(t1218012))
 - [Ultra-Pro High-Fidelity Rundll32 Proxy Execution (T1218.013)](#ultra-pro-high-fidelity-rundll32-proxy-execution-(t1218013))
 - [Ultra-Pro High-Fidelity MMC Proxy Execution (T1218.014)](#ultra-pro-high-fidelity-mmc-proxy-execution-(t1218014))
-- [Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern](#suspicious-use-of-legitimate-remote-administration-tools-outside-enterprise-pattern)
-- [Ultra-Pro High-Fidelity XSL Script Processing (T1220)](#ultra-pro-high-fidelity-xsl-script-processing-(t1220))
-- [Ultra-Pro High-Fidelity Office Template Injection (T1221)](#ultra-pro-high-fidelity-office-template-injection-(t1221))
-- [Ultra-Pro High-Fidelity Permissions Modification (T1222)](#ultra-pro-high-fidelity-permissions-modification-(t1222))
-- [Ultra-Pro High-Fidelity Windows File Permissions Modification (T1222.001)](#ultra-pro-high-fidelity-windows-file-permissions-modification-(t1222001))
-- [Ultra-Pro High-Fidelity Linux File Permissions Modification (T1222.002)](#ultra-pro-high-fidelity-linux-file-permissions-modification-(t1222002))
-- [Ultra-Pro High-Fidelity Execution Guardrails Discovery (T1480)](#ultra-pro-high-fidelity-execution-guardrails-discovery-(t1480))
-- [Ultra-Pro Environmental Keying Discovery (T1480.001)](#ultra-pro-environmental-keying-discovery-(t1480001))
-- [Ultra-Pro High-Fidelity Domain Trust Discovery (T1482)](#ultra-pro-high-fidelity-domain-trust-discovery-(t1482))
-- [Ultra-Pro Domain Policy Manipulation & GPO Abuse (T1484)](#ultra-pro-domain-policy-manipulation-&-gpo-abuse-(t1484))
-- [Ultra-Pro Group Policy Modification & Abuse (T1484.001)](#ultra-pro-group-policy-modification-&-abuse-(t1484001))
-- [Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)](#ultra-pro-domain-trust-tampering-&-sid-filtering-bypass-(t1484002))
+- [Suspicious Service Creation via Remote Administration Tools Outside Approved Management Scope](#suspicious-service-creation-via-remote-administration-tools-outside-approved-management-scope)
+- [XSL Script Processing (T1220)](#xsl-script-processing-(t1220))
+- [Office Template Injection (T1221)](#office-template-injection-(t1221))
+- [Windows Permissions Modification (T1222)](#windows-permissions-modification-(t1222))
+- [Windows File Permissions Modification (T1222.001)](#windows-file-permissions-modification-(t1222001))
+- [Linux File Permissions Modification (T1222.002)](#linux-file-permissions-modification-(t1222002))
+- [Execution Guardrails Discovery (T1480)](#execution-guardrails-discovery-(t1480))
+- [Environmental Keying Discovery (T1480.001)](#environmental-keying-discovery-(t1480001))
+- [Domain Trust Discovery (T1482)](#domain-trust-discovery-(t1482))
+- [Domain Policy Manipulation & GPO Abuse (T1484)](#domain-policy-manipulation-&-gpo-abuse-(t1484))
+- [Group Policy Modification & Abuse (T1484.001)](#group-policy-modification-&-abuse-(t1484001))
+- [Domain Trust Tampering & SID Filtering Bypass (T1484.002)](#domain-trust-tampering-&-sid-filtering-bypass-(t1484002))
 - [Data Destruction (T1485/T1490)](#data-destruction-(t1485t1490))
 - [Ransomware Preparation Activity Detected on Windows Host (High Fidelity)](#ransomware-preparation-activity-detected-on-windows-host-(high-fidelity))
 - [Service Stop (T1489)](#service-stop-(t1489))
@@ -5518,12 +5518,13 @@ hijacking or untrusted console files (.msc). Filters out legitimate administrati
 
 
 ---
-## Suspicious Use of Legitimate Remote Administration Tools Outside Enterprise Pattern
+## Suspicious Service Creation via Remote Administration Tools Outside Approved Management Scope
 - **ID:** `T1219.yaml`
-- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects suspicious creation of services associated with legitimate remote administration tools (e.g. PsExec) when used outside approved enterprise management patterns. This behavior is commonly observed during lateral movement by attackers abusing admin tools.
+- **Leírás:** Detects the creation of Windows services commonly associated with legitimate remote administration tools (e.g., PsExec, PAExec, RemCom) when executed outside approved enterprise management patterns.
+Adversaries frequently abuse these tools for lateral movement by remotely creating temporary services on target systems. The rule filters known management hosts, service accounts, and approved enterprise tooling paths to reduce false positives.
 
 
 #### 🚨 Response Playbook

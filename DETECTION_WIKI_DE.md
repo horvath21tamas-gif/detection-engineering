@@ -279,18 +279,18 @@
 - [Ultra-Pro High-Fidelity Verclsid Proxy Execution (T1218.012)](#ultra-pro-high-fidelity-verclsid-proxy-execution-(t1218012))
 - [Ultra-Pro High-Fidelity Rundll32 Proxy-Ausführung (T1218.013)](#ultra-pro-high-fidelity-rundll32-proxy-ausführung-(t1218013))
 - [Ultra-Pro High-Fidelity MMC Proxy Execution (T1218.014)](#ultra-pro-high-fidelity-mmc-proxy-execution-(t1218014))
-- [Verdächtige Verwendung legitimer Remote-Verwaltungstools außerhalb des Unternehmensmusters](#verdächtige-verwendung-legitimer-remote-verwaltungstools-außerhalb-des-unternehmensmusters)
-- [Ultraprofessionelle High-Fidelity-XSL-Skriptverarbeitung (T1220)](#ultraprofessionelle-high-fidelity-xsl-skriptverarbeitung-(t1220))
-- [Ultra-Pro High-Fidelity-Office-Vorlageninjektion (T1221)](#ultra-pro-high-fidelity-office-vorlageninjektion-(t1221))
-- [Änderung der Ultra-Pro High-Fidelity-Berechtigungen (T1222)](#änderung-der-ultra-pro-high-fidelity-berechtigungen-(t1222))
-- [Änderung der Dateiberechtigungen für Ultra-Pro High-Fidelity Windows (T1222.001)](#änderung-der-dateiberechtigungen-für-ultra-pro-high-fidelity-windows-(t1222001))
-- [Änderung der Dateiberechtigungen für Ultra-Pro High-Fidelity Linux (T1222.002)](#änderung-der-dateiberechtigungen-für-ultra-pro-high-fidelity-linux-(t1222002))
-- [Ultra-Pro High-Fidelity Execution Guardrails Discovery (T1480)](#ultra-pro-high-fidelity-execution-guardrails-discovery-(t1480))
-- [Ultra-Pro Environmental Keying Discovery (T1480.001)](#ultra-pro-environmental-keying-discovery-(t1480001))
-- [Ultra-Pro High-Fidelity Domain Trust Discovery (T1482)](#ultra-pro-high-fidelity-domain-trust-discovery-(t1482))
-- [Manipulation von Ultra-Pro-Domänenrichtlinien und GPO-Missbrauch (T1484)](#manipulation-von-ultra-pro-domänenrichtlinien-und-gpo-missbrauch-(t1484))
-- [Änderung und Missbrauch der Ultra-Pro-Gruppenrichtlinien (T1484.001)](#änderung-und-missbrauch-der-ultra-pro-gruppenrichtlinien-(t1484001))
-- [Ultra-Pro Domain Trust Tampering & SID Filtering Bypass (T1484.002)](#ultra-pro-domain-trust-tampering-&-sid-filtering-bypass-(t1484002))
+- [Erstellung verdächtiger Dienste über Remote-Verwaltungstools außerhalb des genehmigten Verwaltungsbereichs](#erstellung-verdächtiger-dienste-über-remote-verwaltungstools-außerhalb-des-genehmigten-verwaltungsbereichs)
+- [XSL-Skriptverarbeitung (T1220)](#xsl-skriptverarbeitung-(t1220))
+- [Office-Vorlageninjektion (T1221)](#office-vorlageninjektion-(t1221))
+- [Änderung der Windows-Berechtigungen (T1222)](#änderung-der-windows-berechtigungen-(t1222))
+- [Änderung der Windows-Dateiberechtigungen (T1222.001)](#änderung-der-windows-dateiberechtigungen-(t1222001))
+- [Änderung der Linux-Dateiberechtigungen (T1222.002)](#änderung-der-linux-dateiberechtigungen-(t1222002))
+- [Ausführungsleitplanken-Erkennung (T1480)](#ausführungsleitplanken-erkennung-(t1480))
+- [Erkennung von Umgebungsschlüsseln (T1480.001)](#erkennung-von-umgebungsschlüsseln-(t1480001))
+- [Domänenvertrauenserkennung (T1482)](#domänenvertrauenserkennung-(t1482))
+- [Manipulation von Domänenrichtlinien und GPO-Missbrauch (T1484)](#manipulation-von-domänenrichtlinien-und-gpo-missbrauch-(t1484))
+- [Änderung und Missbrauch von Gruppenrichtlinien (T1484.001)](#änderung-und-missbrauch-von-gruppenrichtlinien-(t1484001))
+- [Domain-Trust-Manipulation und Umgehung der SID-Filterung (T1484.002)](#domain-trust-manipulation-und-umgehung-der-sid-filterung-(t1484002))
 - [Datenvernichtung (T1485/T1490)](#datenvernichtung-(t1485t1490))
 - [Ransomware-Vorbereitungsaktivität auf Windows-Host erkannt (High Fidelity)](#ransomware-vorbereitungsaktivität-auf-windows-host-erkannt-(high-fidelity))
 - [Servicestopp (T1489)](#servicestopp-(t1489))
@@ -5250,12 +5250,13 @@ Entführung oder nicht vertrauenswürdige Konsolendateien (.msc).Filtert legitim
 
 
 ---
-## Verdächtige Verwendung legitimer Remote-Verwaltungstools außerhalb des Unternehmensmusters
+## Erstellung verdächtiger Dienste über Remote-Verwaltungstools außerhalb des genehmigten Verwaltungsbereichs
 - **ID:** `T1219.yaml`
-- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt verdächtige Erstellung von Diensten im Zusammenhang mit legitimen Remote-Verwaltungstools (z. B. PsExec), wenn diese außerhalb genehmigter Unternehmensverwaltungsmuster verwendet werden.Dieses Verhalten wird häufig bei lateraler Bewegung durch Angreifer beobachtet, die Admin-Tools missbrauchen.
+- **Beschreibung:** Erkennt die Erstellung von Windows-Diensten, die häufig mit legitimen Remoteverwaltungstools (z. B. PsExec, PAExec, RemCom) verbunden sind, wenn sie außerhalb genehmigter Unternehmensverwaltungsmuster ausgeführt werden.
+Angreifer missbrauchen diese Tools häufig für laterale Bewegungen, indem sie aus der Ferne temporäre Dienste auf Zielsystemen erstellen.Die Regel filtert bekannte Verwaltungshosts, Dienstkonten und genehmigte Unternehmenstoolpfade, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**
@@ -5332,7 +5333,7 @@ Entführung oder nicht vertrauenswürdige Konsolendateien (.msc).Filtert legitim
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt gezielte Manipulationen von Linux-Berechtigungen, indem es risikoreiche Attributänderungen wie SUID, unveränderliche oder Nur-Anhängen-Flags sowie Massenberechtigungsänderungen in sensiblen Systempfaden identifiziert.Konzentriert sich auf Aktionen, die von unprivilegierten oder mit dem Internet verbundenen Dienstkonten initiiert werden, und filtert gleichzeitig vertrauenswürdige Systemvorgänge heraus.
+- **Beschreibung:** Erkennt gezielte Manipulationen von Linux-Berechtigungen, indem es risikoreiche Attributänderungen wie SUID, unveränderliche oder Nur-Anhängen-Flags sowie Massen-Berechtigungsänderungen in sensiblen Systempfaden identifiziert.Konzentriert sich auf Aktionen, die von unprivilegierten oder mit dem Internet verbundenen Dienstkonten initiiert werden, und filtert gleichzeitig vertrauenswürdige Systemvorgänge heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -5505,7 +5506,7 @@ Entführung oder nicht vertrauenswürdige Konsolendateien (.msc).Filtert legitim
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt unbefugte Website-Verunstaltungen durch Überwachung verdächtiger Dateien
 Manipulationen (Verschieben, Kopieren, Echo, Inhalt festlegen, Ersetzen) im Web-Root
-Verzeichnisse, die aus nicht standardmäßigen oder potenziell gefährdeten Verzeichnissen stammen
+Verzeichnisse, die aus nicht standardmäßigen oder möglicherweise gefährdeten Verzeichnissen stammen
 Webdienstprozesse (z. B. w3wp.exe, httpd.exe).
 
 #### 🚨 Reaktions-Playbook

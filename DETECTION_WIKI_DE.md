@@ -257,10 +257,10 @@
 - [Ultra-Pro High-Fidelity-Rogue-DC-Topologiemanipulation (T1207)](#ultra-pro-high-fidelity-rogue-dc-topologiemanipulation-(t1207))
 - [Ultraprofessionelle High-Fidelity-Nutzung von Remote-Diensten (T1210)](#ultraprofessionelle-high-fidelity-nutzung-von-remote-diensten-(t1210))
 - [Ultra-Pro High-Fidelity-Berechtigungseskalationsausnutzung (T1211)](#ultra-pro-high-fidelity-berechtigungseskalationsausnutzung-(t1211))
-- [Ultra-Pro High-Fidelity Credential Service Exploitation (T1212)](#ultra-pro-high-fidelity-credential-service-exploitation-(t1212))
-- [Ultra-Pro High-Fidelity-Repository-Dump (T1213)](#ultra-pro-high-fidelity-repository-dump-(t1213))
-- [Ultra-Pro High-Fidelity Confluence Scraping (T1213.001)](#ultra-pro-high-fidelity-confluence-scraping-(t1213001))
-- [Ultra-Pro High-Fidelity-SharePoint-Massendaten-Exfiltration (T1213.002)](#ultra-pro-high-fidelity-sharepoint-massendaten-exfiltration-(t1213002))
+- [Erkennung der Ausnutzung von Anmeldeinformationsdiensten (T1212)](#erkennung-der-ausnutzung-von-anmeldeinformationsdiensten-(t1212))
+- [Interne Repository-Massendump-Erkennung (T1213)](#interne-repository-massendump-erkennung-(t1213))
+- [Confluence Mass Scraping-Erkennung (T1213.001)](#confluence-mass-scraping-erkennung-(t1213001))
+- [Erkennung von Massendatenexfiltration in SharePoint für Unternehmen (T1213.002)](#erkennung-von-massendatenexfiltration-in-sharepoint-für-unternehmen-(t1213002))
 - [Enterprise Knowledge Base Massen-Scraping-/Spiegelungserkennung (T1213.003)](#enterprise-knowledge-base-massen-scraping-spiegelungserkennung-(t1213003))
 - [Windows-Systemskript-Proxy-Ausführung (T1216)](#windows-systemskript-proxy-ausführung-(t1216))
 - [Pubprn.vbs-Skript-Proxy-Ausführung (T1216.001)](#pubprnvbs-skript-proxy-ausführung-(t1216001))
@@ -4864,16 +4864,19 @@ Ausbrechen aus Anwendungs-Sandboxen (Browser, Office, PDF).
 
 
 ---
-## Ultra-Pro High-Fidelity Credential Service Exploitation (T1212)
+## Erkennung der Ausnutzung von Anmeldeinformationsdiensten (T1212)
 - **ID:** `T1212.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt potenzielle Ausnutzung von Authentifizierungsdiensten (LSASS, LogonUI, Spooler)
-durch Identifizierung illegaler untergeordneter Prozesse, nicht gesicherter Speicherausführung und bekannter
-Ausnutzungsmuster erkennen und gleichzeitig legitime Sicherheitstool-Interferenzen filtern.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt potenzielle Ausnutzung von Windows-Authentifizierungsdiensten
+(LSASS, LogonUI, Spooler, LSM) durch Überwachung:
+– Unzulässige untergeordnete Prozesse, die von Anmeldeinformationsdiensten erzeugt werden
+- Memory-Injection-/Reflective-Loading-/Pipe-Missbrauchsversuche
+- Verdächtige Ausführung aus Benutzer-Temp- oder Download-Verzeichnissen
+Ausgeschlossen sind legitime Aktivitäten von Sicherheitsagenten und die Windows-Fehlerberichterstattung.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

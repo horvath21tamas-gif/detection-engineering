@@ -257,10 +257,10 @@
 - [Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207)](#ultra-pro-high-fidelity-rogue-dc-topology-manipulation-(t1207))
 - [Ultra-Pro High-Fidelity Exploitation of Remote Services (T1210)](#ultra-pro-high-fidelity-exploitation-of-remote-services-(t1210))
 - [Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211)](#ultra-pro-high-fidelity-privilege-escalation-exploitation-(t1211))
-- [Ultra-Pro High-Fidelity Credential Service Exploitation (T1212)](#ultra-pro-high-fidelity-credential-service-exploitation-(t1212))
-- [Ultra-Pro High-Fidelity Repository Dump (T1213)](#ultra-pro-high-fidelity-repository-dump-(t1213))
-- [Ultra-Pro High-Fidelity Confluence Scraping (T1213.001)](#ultra-pro-high-fidelity-confluence-scraping-(t1213001))
-- [Ultra-Pro High-Fidelity SharePoint Mass Data Exfiltration (T1213.002)](#ultra-pro-high-fidelity-sharepoint-mass-data-exfiltration-(t1213002))
+- [Credential Service Exploitation Detection (T1212)](#credential-service-exploitation-detection-(t1212))
+- [Internal Repository Mass Dump Detection (T1213)](#internal-repository-mass-dump-detection-(t1213))
+- [Confluence Mass Scraping Detection (T1213.001)](#confluence-mass-scraping-detection-(t1213001))
+- [Enterprise SharePoint Mass Data Exfiltration Detection (T1213.002)](#enterprise-sharepoint-mass-data-exfiltration-detection-(t1213002))
 - [Enterprise Knowledge Base Mass Scraping / Mirroring Detection (T1213.003)](#enterprise-knowledge-base-mass-scraping--mirroring-detection-(t1213003))
 - [Windows System Script Proxy Execution (T1216)](#windows-system-script-proxy-execution-(t1216))
 - [Pubprn.vbs Script Proxy Execution (T1216.001)](#pubprnvbs-script-proxy-execution-(t1216001))
@@ -5110,16 +5110,19 @@ breaking out of application sandboxes (browsers, office, pdf).
 
 
 ---
-## Ultra-Pro High-Fidelity Credential Service Exploitation (T1212)
+## Credential Service Exploitation Detection (T1212)
 - **ID:** `T1212.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects potential exploitation of authentication services (LSASS, LogonUI, Spooler) 
-by identifying illegal child processes, unbacked memory execution, and known 
-exploitation patterns while filtering legitimate security tool interference.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects potential exploitation of Windows authentication services 
+(LSASS, LogonUI, Spooler, LSM) by monitoring:
+- Illegal child processes spawned by credential services
+- Memory injection / reflective loading / pipe abuse attempts
+- Suspicious execution from user temp or download directories
+Excludes legitimate security agent activity and Windows Error Reporting.
 
 
 #### 🚨 Response Playbook

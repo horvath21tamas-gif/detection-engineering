@@ -257,10 +257,10 @@
 - [Ultra-Pro High-Fidelity Rogue DC topológia manipuláció (T1207)](#ultra-pro-high-fidelity-rogue-dc-topológia-manipuláció-(t1207))
 - [Ultra-Pro, nagy pontosságú távoli szolgáltatások kihasználása (T1210)](#ultra-pro-nagy-pontosságú-távoli-szolgáltatások-kihasználása-(t1210))
 - [Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211)](#ultra-pro-high-fidelity-privilege-escalation-exploitation-(t1211))
-- [Ultra-Pro High-Fidelity Credential Service Exploitation (T1212)](#ultra-pro-high-fidelity-credential-service-exploitation-(t1212))
-- [Ultra-Pro High-Fidelity Repository Dump (T1213)](#ultra-pro-high-fidelity-repository-dump-(t1213))
-- [Ultra-Pro High-Fidelity összefolyó kaparás (T1213.001)](#ultra-pro-high-fidelity-összefolyó-kaparás-(t1213001))
-- [Ultra-Pro High-Fidelity SharePoint Mass Data Exfiltration (T1213.002)](#ultra-pro-high-fidelity-sharepoint-mass-data-exfiltration-(t1213002))
+- [Hitelesítési adatok szolgáltatás kihasználásának észlelése (T1212)](#hitelesítési-adatok-szolgáltatás-kihasználásának-észlelése-(t1212))
+- [Belső adattár tömegkiíratásának észlelése (T1213)](#belső-adattár-tömegkiíratásának-észlelése-(t1213))
+- [Összefolyási tömeg kaparás észlelése (T1213.001)](#összefolyási-tömeg-kaparás-észlelése-(t1213001))
+- [Vállalati SharePoint tömeges adatok kiszűrésének észlelése (T1213.002)](#vállalati-sharepoint-tömeges-adatok-kiszűrésének-észlelése-(t1213002))
 - [Vállalati tudásbázis tömeges kaparás/tükrözés észlelése (T1213.003)](#vállalati-tudásbázis-tömeges-kaparástükrözés-észlelése-(t1213003))
 - [Windows rendszerszkript proxy végrehajtása (T1216)](#windows-rendszerszkript-proxy-végrehajtása-(t1216))
 - [Pubprn.vbs Script proxy végrehajtása (T1216.001)](#pubprnvbs-script-proxy-végrehajtása-(t1216001))
@@ -4864,16 +4864,19 @@ kitörés az alkalmazások homokozóiból (böngésző, iroda, pdf).
 
 
 ---
-## Ultra-Pro High-Fidelity Credential Service Exploitation (T1212)
+## Hitelesítési adatok szolgáltatás kihasználásának észlelése (T1212)
 - **ID:** `T1212.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli a hitelesítési szolgáltatások potenciális kihasználását (LSASS, LogonUI, Spooler)
-illegális gyermekfolyamatok azonosításával, nem támogatott memóriavégrehajtással és ismert
-kihasználási mintákat, miközben kiszűri a jogos biztonsági eszközök interferenciáját.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Észleli a Windows hitelesítési szolgáltatások potenciális kihasználását
+(LSASS, LogonUI, Spooler, LSM) figyeléssel:
+- A hitelesítő szolgáltatások által kiváltott illegális gyermekfolyamatok
+- Memória befecskendezése / fényvisszaverő terhelés / cső visszaélési kísérletek
+- Gyanús végrehajtás a felhasználói ideiglenes vagy letöltési könyvtárakból
+Nem tartalmazza a jogszerű biztonsági ügynöki tevékenységet és a Windows hibajelentést.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

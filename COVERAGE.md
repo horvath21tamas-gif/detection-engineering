@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-20 08:01:56`
+**Utolsó frissítés:** `2026-02-20 08:42:26`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -262,10 +262,10 @@
 | T1207 | CRITICAL | Ultra-Pro High-Fidelity Rogue DC Topology Manipulation (T1207) |
 | T1210 | CRITICAL | Ultra-Pro High-Fidelity Exploitation of Remote Services (T1210) |
 | T1211 | CRITICAL | Ultra-Pro High-Fidelity Privilege Escalation Exploitation (T1211) |
-| T1212 | CRITICAL | Ultra-Pro High-Fidelity Credential Service Exploitation (T1212) |
-| T1213 | CRITICAL | Ultra-Pro High-Fidelity Repository Dump (T1213) |
-| T1213.001 | CRITICAL | Ultra-Pro High-Fidelity Confluence Scraping (T1213.001) |
-| T1213.002 | CRITICAL | Ultra-Pro High-Fidelity SharePoint Mass Data Exfiltration (T1213.002) |
+| T1212 | CRITICAL | Credential Service Exploitation Detection (T1212) |
+| T1213 | CRITICAL | Internal Repository Mass Dump Detection (T1213) |
+| T1213.001 | CRITICAL | Confluence Mass Scraping Detection (T1213.001) |
+| T1213.002 | CRITICAL | Enterprise SharePoint Mass Data Exfiltration Detection (T1213.002) |
 | T1213.003 | CRITICAL | Enterprise Knowledge Base Mass Scraping / Mirroring Detection (T1213.003) |
 | T1216 | CRITICAL | Windows System Script Proxy Execution (T1216) |
 | T1216.001 | CRITICAL | Pubprn.vbs Script Proxy Execution (T1216.001) |

@@ -233,7 +233,7 @@
 - [Ultra-Pro lopakodó deobfuszkálás/dekódolás (T1140)](#ultra-pro-lopakodó-deobfuszkálásdekódolás-(t1140))
 - [Ultra-Pro Browser Extension Force-Install Persistence (T1176)](#ultra-pro-browser-extension-force-install-persistence-(t1176))
 - [Ultra-Pro High-Fidelity böngésző munkamenet-eltérítés (T1185)](#ultra-pro-high-fidelity-böngésző-munkamenet-eltérítés-(t1185))
-- [Ultra-Pro High-Fidelity kényszerített hitelesítés (T1187)](#ultra-pro-high-fidelity-kényszerített-hitelesítés-(t1187))
+- [Kényszerített hitelesítés (T1187)](#kényszerített-hitelesítés-(t1187))
 - [Böngészőből származó shell vagy rendszereszköz végrehajtása](#böngészőből-származó-shell-vagy-rendszereszköz-végrehajtása)
 - [Gyanús Cross-Site Scripting (XSS) kísérlet észlelve a webszerveren](#gyanús-cross-site-scripting-(xss)-kísérlet-észlelve-a-webszerveren)
 - [Nagy pontosságú ellátási lánc-kompromittálódás észlelése (frissítés utáni anomália)](#nagy-pontosságú-ellátási-lánc-kompromittálódás-észlelése-(frissítés-utáni-anomália))
@@ -243,7 +243,7 @@
 - [Gyanús fájlok letöltése a Bitsadmin segítségével (High Fidelity)](#gyanús-fájlok-letöltése-a-bitsadmin-segítségével-(high-fidelity))
 - [Nagy pontosságú megbízható kapcsolati visszaélések észlelése](#nagy-pontosságú-megbízható-kapcsolati-visszaélések-észlelése)
 - [Rosszindulatú hardver által kiváltott parancsvégrehajtás (HID-injektálás)](#rosszindulatú-hardver-által-kiváltott-parancsvégrehajtás-(hid-injektálás))
-- [Ultra-Pro nagy pontosságú jelszóházirend-felderítés (T1201)](#ultra-pro-nagy-pontosságú-jelszóházirend-felderítés-(t1201))
+- [Jelszóházirend-felderítés észlelése (T1201)](#jelszóházirend-felderítés-észlelése-(t1201))
 - [Közvetett parancsvégrehajtás proxy binárisokon keresztül (T1202)](#közvetett-parancsvégrehajtás-proxy-binárisokon-keresztül-(t1202))
 - [High-Fidelity kliensoldali kihasználás és shell spawning](#high-fidelity-kliensoldali-kihasználás-és-shell-spawning)
 - [Gyanús gyermekfolyamat, amelyet a Microsoft Office alkalmazás idézett elő (High Fidelity)](#gyanús-gyermekfolyamat-amelyet-a-microsoft-office-alkalmazás-idézett-elő-(high-fidelity))
@@ -251,8 +251,8 @@
 - [Rosszindulatú fájlok nagy pontosságú felhasználói végrehajtása](#rosszindulatú-fájlok-nagy-pontosságú-felhasználói-végrehajtása)
 - [Nagy pontosságú végrehajtás a beépített virtuális lemezről (T1204.003)](#nagy-pontosságú-végrehajtás-a-beépített-virtuális-lemezről-(t1204003))
 - [Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel](#adathalászat-rosszindulatú-linken-keresztül-domain-és-feladó-rendellenességekkel)
-- [Ultra-Pro közlekedési jelzések és portok kopogtatása (T1205)](#ultra-pro-közlekedési-jelzések-és-portok-kopogtatása-(t1205))
-- [Ultra-Pro Port Knocking & Raw Socket Listener (T1205.001)](#ultra-pro-port-knocking-&-raw-socket-listener-(t1205001))
+- [Forgalomjelző és port kopogtatási tevékenység (T1205)](#forgalomjelző-és-port-kopogtatási-tevékenység-(t1205))
+- [Port Knocking vagy Raw Socket Listener telepítése (T1205.001)](#port-knocking-vagy-raw-socket-listener-telepítése-(t1205001))
 - [WFP kiemelés regisztrációja vagy kernel-illesztőprogram-beállítás (T1205.002)](#wfp-kiemelés-regisztrációja-vagy-kernel-illesztőprogram-beállítás-(t1205002))
 - [Rogue DC / DCSárnyékérzékelés (T1207)](#rogue-dc--dcsárnyékérzékelés-(t1207))
 - [Remote Service RCE/Post Exploitation Spawn Detection (T1210)](#remote-service-rcepost-exploitation-spawn-detection-(t1210))
@@ -4450,16 +4450,16 @@ például a \Temp vagy \AppData.
 
 
 ---
-## Ultra-Pro High-Fidelity kényszerített hitelesítés (T1187)
+## Kényszerített hitelesítés (T1187)
 - **ID:** `T1187.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Figyeléssel észleli a kényszerített hitelesítési kísérleteket (NTLM Relay/Coercion).
-gyanús UNC-útvonal-minták, WebDAV-átirányítás és adott RPC
-interfész kihasználása a kimenő hitelesítés kiváltására.
+- **Leírás:** Érzékeli a kényszerített hitelesítési kísérleteket (NTLM Relay/Coercion) a következők figyelésével:
+- Gyanús UNC útvonalminták
+- WebDAV átirányítás
+- RPC interfész visszaélés (EfsRpc, PrinterChangeNotification, LSARPC stb.)
+- Nem megbízható folyamatokból származó kimenő hitelesítési triggerek
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -4660,7 +4660,7 @@ A nem szabványos szülőfolyamatokra és a gyanús parancssori argumentumokra �
 - conhost.exe
 
 Figyeli a váratlan alkalmazások által kezdeményezett szkriptek, binárisok és DLL-ek végrehajtását,
-általában védelmi kikerülésre vagy a földön kívüli támadásokra használják.
+általában védelmi kikerülésre vagy földön kívüli támadásokra használják.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

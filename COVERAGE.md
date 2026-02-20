@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-20 09:34:00`
+**Utolsó frissítés:** `2026-02-20 10:46:40`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -238,7 +238,7 @@
 | T1140 | HIGH | Ultra-Pro Stealthy Deobfuscation/Decoding (T1140) |
 | T1176 | CRITICAL | Ultra-Pro Browser Extension Force-Install Persistence (T1176) |
 | T1185 | CRITICAL | Ultra-Pro High-Fidelity Browser Session Hijacking (T1185) |
-| T1187 | CRITICAL | Ultra-Pro High-Fidelity Forced Authentication (T1187) |
+| T1187 | CRITICAL | Forced Authentication (T1187) |
 | T1189 | CRITICAL | Browser-Originating Shell or System Tool Execution |
 | T1190 | MEDIUM | Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server |
 | T1195 | CRITICAL | High-Fidelity Supply Chain Compromise Detection (Post-Update Anomaly) |
@@ -248,7 +248,7 @@
 | T1197 | HIGH | Suspicious File Download via Bitsadmin (High Fidelity) |
 | T1199 | HIGH | High-Fidelity Trusted Relationship Abuse Detection |
 | T1200 | CRITICAL | Malicious Hardware-Induced Command Execution (HID Injection) |
-| T1201 | HIGH | Ultra-Pro High-Fidelity Password Policy Discovery (T1201) |
+| T1201 | HIGH | Password Policy Discovery Detection (T1201) |
 | T1202 | HIGH | Indirect Command Execution via Proxy Binaries (T1202) |
 | T1203 | CRITICAL | High-Fidelity Client-Side Exploitation and Shell Spawning |
 | T1204 | HIGH | Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity) |
@@ -256,8 +256,8 @@
 | T1204.002 | CRITICAL | High-Fidelity User Execution of Malicious File |
 | T1204.003 | CRITICAL | High-Fidelity Execution from Mounted Virtual Disk (T1204.003) |
 | T1204.004 | HIGH | Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel |
-| T1205 | HIGH | Ultra-Pro Traffic Signaling & Port Knocking (T1205) |
-| T1205.001 | HIGH | Ultra-Pro Port Knocking & Raw Socket Listener (T1205.001) |
+| T1205 | HIGH | Traffic Signaling and Port Knocking Activity (T1205) |
+| T1205.001 | HIGH | Port Knocking or Raw Socket Listener Deployment (T1205.001) |
 | T1205.002 | CRITICAL | WFP Callout Registration or Kernel Driver Staging (T1205.002) |
 | T1207 | CRITICAL | Rogue DC / DCShadow Detection (T1207) |
 | T1210 | CRITICAL | Remote Service RCE / Post-Exploitation Spawn Detection (T1210) |
@@ -445,7 +445,7 @@
 | T1561.001 | CRITICAL | Disk Content Wipe, Disk Wipe |
 | T1561.002 | CRITICAL | Disk Structure Wipe, Disk Wipe |
 | T1562 | HIGH | Non-Admin User Attempting to Stop or Modify Multiple Sensitive Windows Services |
-| T1562.001 | CRITICAL | WFP Callout Registration or Kernel Driver Staging (T1205.002), Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
+| T1562.001 | CRITICAL | WFP Callout Registration or Kernel Driver Staging (T1205.002), Port Knocking or Raw Socket Listener Deployment (T1205.001), Traffic Signaling and Port Knocking Activity (T1205), Ransomware Preparation Activity Detected on Windows Host (High Fidelity), Windows Defender védelem kikapcsolása vagy módosítása PowerShell segítségével, Biztonsági szolgáltatások gyanús leállítása |
 | T1562.002 | CRITICAL | Windows Event Log Service Impairment |
 | T1562.003 | HIGH | Command History Logging Impairment |
 | T1562.004 | HIGH | Suspicious Firewall Modification via Netsh.exe |

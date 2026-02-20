@@ -1,4 +1,8 @@
 
-| rex field=CommandLine "(?<CommandLineMatch>\\\\\\\\[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\\\.*\\$)"
+| rex field=CommandLine "(?<CommandLineMatch>(lsarpc|efsrpc))"
 | eval CommandLineCondition=if(isnotnull(CommandLineMatch), "true", "false")
-| search CommandLine IN ("*@80\\*", "*@SSL\\*", "*davwwwroot*", "*\\*\\IPC$*") OR CommandLine IN ("*EfsRpcOpenFileRaw*", "*RpcRemoteFindFirstPrinterChangeNotification*", "*lsarpc*", "*efsrpc*") OR CommandLineCondition="true" Image IN ("*\\Users\\*", "*\\Temp\\*", "*\\Downloads\\*") Image IN ("*\\powershell.exe", "*\\cmd.exe", "*\\python.exe", "*\\rundll32.exe") NOT (CommandLine IN ("*\\SYSVOL\\*", "*\\NETLOGON\\*") ParentImage IN ("*\\services.exe", "*\\svchost.exe") username="NT AUTHORITY\\SYSTEM")
+| rex field=CommandLine "(?<CommandLineMatch2>\\\\\\\\(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\\\.*\\$)"
+| eval CommandLineCondition2=if(isnotnull(CommandLineMatch2), "true", "false")
+| search CommandLine IN ("*@80\\*", "*@SSL\\*", "*davwwwroot*", "*\\*\\IPC$*") OR (CommandLine IN ("*EfsRpcOpenFileRaw*", "*RpcRemoteFindFirstPrinterChangeNotification*") CommandLineCondition="true") OR CommandLineCondition2="true" NOT (CommandLine IN ("*\\SYSVOL\\*", "*\\NETLOGON\\*") username="NT AUTHORITY\\SYSTEM")
+| regex Image="(?:\\\\Users\\\\|\\\\Temp\\\\|\\\\Downloads\\\\).*(powershell\\.exe|cmd\\.exe|python\\.exe|rundll32\\.exe)$"
+| regex ParentImage="(services\\.exe|svchost\\.exe)$"

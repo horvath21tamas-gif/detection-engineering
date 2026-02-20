@@ -233,7 +233,7 @@
 - [Ultra-Pro Stealthy Deobfuscation/Decoding (T1140)](#ultra-pro-stealthy-deobfuscationdecoding-(t1140))
 - [Ultra-Pro Browser Extension Force-Install Persistence (T1176)](#ultra-pro-browser-extension-force-install-persistence-(t1176))
 - [Ultra-Pro High-Fidelity Browser Session Hijacking (T1185)](#ultra-pro-high-fidelity-browser-session-hijacking-(t1185))
-- [Ultra-Pro High-Fidelity Forced Authentication (T1187)](#ultra-pro-high-fidelity-forced-authentication-(t1187))
+- [Forced Authentication (T1187)](#forced-authentication-(t1187))
 - [Browser-Originating Shell or System Tool Execution](#browser-originating-shell-or-system-tool-execution)
 - [Suspicious Cross-Site Scripting (XSS) Attempt Detected on Web Server](#suspicious-cross-site-scripting-(xss)-attempt-detected-on-web-server)
 - [High-Fidelity Supply Chain Compromise Detection (Post-Update Anomaly)](#high-fidelity-supply-chain-compromise-detection-(post-update-anomaly))
@@ -243,7 +243,7 @@
 - [Suspicious File Download via Bitsadmin (High Fidelity)](#suspicious-file-download-via-bitsadmin-(high-fidelity))
 - [High-Fidelity Trusted Relationship Abuse Detection](#high-fidelity-trusted-relationship-abuse-detection)
 - [Malicious Hardware-Induced Command Execution (HID Injection)](#malicious-hardware-induced-command-execution-(hid-injection))
-- [Ultra-Pro High-Fidelity Password Policy Discovery (T1201)](#ultra-pro-high-fidelity-password-policy-discovery-(t1201))
+- [Password Policy Discovery Detection (T1201)](#password-policy-discovery-detection-(t1201))
 - [Indirect Command Execution via Proxy Binaries (T1202)](#indirect-command-execution-via-proxy-binaries-(t1202))
 - [High-Fidelity Client-Side Exploitation and Shell Spawning](#high-fidelity-client-side-exploitation-and-shell-spawning)
 - [Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity)](#suspicious-child-process-spawned-by-microsoft-office-application-(high-fidelity))
@@ -251,8 +251,8 @@
 - [High-Fidelity User Execution of Malicious File](#high-fidelity-user-execution-of-malicious-file)
 - [High-Fidelity Execution from Mounted Virtual Disk (T1204.003)](#high-fidelity-execution-from-mounted-virtual-disk-(t1204003))
 - [Adathalászat rosszindulatú linken keresztül, domain és feladó rendellenességekkel](#adathalászat-rosszindulatú-linken-keresztül-domain-és-feladó-rendellenességekkel)
-- [Ultra-Pro Traffic Signaling & Port Knocking (T1205)](#ultra-pro-traffic-signaling-&-port-knocking-(t1205))
-- [Ultra-Pro Port Knocking & Raw Socket Listener (T1205.001)](#ultra-pro-port-knocking-&-raw-socket-listener-(t1205001))
+- [Traffic Signaling and Port Knocking Activity (T1205)](#traffic-signaling-and-port-knocking-activity-(t1205))
+- [Port Knocking or Raw Socket Listener Deployment (T1205.001)](#port-knocking-or-raw-socket-listener-deployment-(t1205001))
 - [WFP Callout Registration or Kernel Driver Staging (T1205.002)](#wfp-callout-registration-or-kernel-driver-staging-(t1205002))
 - [Rogue DC / DCShadow Detection (T1207)](#rogue-dc--dcshadow-detection-(t1207))
 - [Remote Service RCE / Post-Exploitation Spawn Detection (T1210)](#remote-service-rce--post-exploitation-spawn-detection-(t1210))
@@ -4672,16 +4672,16 @@ like \Temp or \AppData.
 
 
 ---
-## Ultra-Pro High-Fidelity Forced Authentication (T1187)
+## Forced Authentication (T1187)
 - **ID:** `T1187.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects forced authentication attempts (NTLM Relay/Coercion) by monitoring 
-suspicious UNC path patterns, WebDAV redirection, and specific RPC 
-interface exploitation used to trigger outbound authentication.
+- **Leírás:** Detects forced authentication attempts (NTLM Relay/Coercion) by monitoring:
+  - Suspicious UNC path patterns
+  - WebDAV redirection
+  - RPC interface abuse (EfsRpc, PrinterChangeNotification, LSARPC, etc.)
+  - Outbound authentication triggers from untrusted processes
 
 
 #### 🚨 Response Playbook

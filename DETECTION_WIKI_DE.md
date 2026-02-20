@@ -233,7 +233,7 @@
 - [Ultra-Pro Stealthy Deobfuscation/Dekodierung (T1140)](#ultra-pro-stealthy-deobfuscationdekodierung-(t1140))
 - [Ultra-Pro-Browsererweiterung Force-Install Persistence (T1176)](#ultra-pro-browsererweiterung-force-install-persistence-(t1176))
 - [Ultra-Pro High-Fidelity-Browser-Sitzungs-Hijacking (T1185)](#ultra-pro-high-fidelity-browser-sitzungs-hijacking-(t1185))
-- [Ultra-Pro High-Fidelity-Zwangsauthentifizierung (T1187)](#ultra-pro-high-fidelity-zwangsauthentifizierung-(t1187))
+- [Erzwungene Authentifizierung (T1187)](#erzwungene-authentifizierung-(t1187))
 - [Vom Browser stammende Shell- oder Systemtool-Ausführung](#vom-browser-stammende-shell--oder-systemtool-ausführung)
 - [Auf dem Webserver wurde ein verdächtiger Cross-Site-Scripting-Versuch (XSS) erkannt](#auf-dem-webserver-wurde-ein-verdächtiger-cross-site-scripting-versuch-(xss)-erkannt)
 - [High-Fidelity-Erkennung von Kompromittierungen in der Lieferkette (Anomalie nach der Aktualisierung)](#high-fidelity-erkennung-von-kompromittierungen-in-der-lieferkette-(anomalie-nach-der-aktualisierung))
@@ -243,7 +243,7 @@
 - [Download verdächtiger Dateien über Bitsadmin (High Fidelity)](#download-verdächtiger-dateien-über-bitsadmin-(high-fidelity))
 - [High-Fidelity-Missbrauchserkennung in vertrauenswürdigen Beziehungen](#high-fidelity-missbrauchserkennung-in-vertrauenswürdigen-beziehungen)
 - [Schädliche hardwareinduzierte Befehlsausführung (HID-Injection)](#schädliche-hardwareinduzierte-befehlsausführung-(hid-injection))
-- [Ultra-Pro High-Fidelity-Kennwortrichtlinienerkennung (T1201)](#ultra-pro-high-fidelity-kennwortrichtlinienerkennung-(t1201))
+- [Erkennung der Passwortrichtlinien-Erkennung (T1201)](#erkennung-der-passwortrichtlinien-erkennung-(t1201))
 - [Indirekte Befehlsausführung über Proxy-Binärdateien (T1202)](#indirekte-befehlsausführung-über-proxy-binärdateien-(t1202))
 - [High-Fidelity-Client-seitige Ausbeutung und Shell-Spawning](#high-fidelity-client-seitige-ausbeutung-und-shell-spawning)
 - [Verdächtiger untergeordneter Prozess, der von einer Microsoft Office-Anwendung erzeugt wurde (High Fidelity)](#verdächtiger-untergeordneter-prozess-der-von-einer-microsoft-office-anwendung-erzeugt-wurde-(high-fidelity))
@@ -251,8 +251,8 @@
 - [High-Fidelity-Benutzerausführung einer schädlichen Datei](#high-fidelity-benutzerausführung-einer-schädlichen-datei)
 - [High-Fidelity-Ausführung von gemounteter virtueller Festplatte (T1204.003)](#high-fidelity-ausführung-von-gemounteter-virtueller-festplatte-(t1204003))
 - [Phishing über einen bösartigen Link mit Domänen- und Absenderanomalien](#phishing-über-einen-bösartigen-link-mit-domänen--und-absenderanomalien)
-- [Ultraprofessionelle Verkehrssignalisierung und Port-Knocking (T1205)](#ultraprofessionelle-verkehrssignalisierung-und-port-knocking-(t1205))
-- [Ultra-Pro Port Knocking & Raw Socket Listener (T1205.001)](#ultra-pro-port-knocking-&-raw-socket-listener-(t1205001))
+- [Verkehrssignalisierung und Port-Knocking-Aktivität (T1205)](#verkehrssignalisierung-und-port-knocking-aktivität-(t1205))
+- [Port Knocking oder Raw Socket Listener-Bereitstellung (T1205.001)](#port-knocking-oder-raw-socket-listener-bereitstellung-(t1205001))
 - [WFP-Callout-Registrierung oder Kernel-Treiber-Staging (T1205.002)](#wfp-callout-registrierung-oder-kernel-treiber-staging-(t1205002))
 - [Rogue DC / DCShadow-Erkennung (T1207)](#rogue-dc--dcshadow-erkennung-(t1207))
 - [Remote Service RCE / Post-Exploitation Spawn Detection (T1210)](#remote-service-rce--post-exploitation-spawn-detection-(t1210))
@@ -4450,16 +4450,16 @@ wie \Temp oder \AppData.
 
 
 ---
-## Ultra-Pro High-Fidelity-Zwangsauthentifizierung (T1187)
+## Erzwungene Authentifizierung (T1187)
 - **ID:** `T1187.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt erzwungene Authentifizierungsversuche (NTLM Relay/Coercion) durch Überwachung
-verdächtige UNC-Pfadmuster, WebDAV-Umleitung und spezifisches RPC
-Schnittstellenausnutzung zum Auslösen der ausgehenden Authentifizierung.
+- **Beschreibung:** Erkennt erzwungene Authentifizierungsversuche (NTLM Relay/Coercion) durch Überwachung:
+- Verdächtige UNC-Pfadmuster
+- WebDAV-Umleitung
+- Missbrauch der RPC-Schnittstelle (EfsRpc, PrinterChangeNotification, LSARPC usw.)
+– Ausgehende Authentifizierungsauslöser von nicht vertrauenswürdigen Prozessen
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -4884,7 +4884,7 @@ Entwickelt, um Störungen durch legitime IT-Orchestrierung zu reduzieren.
 
 
 ---
-## Sandbox-Ausbruch/Ausnutzung der Privilegieneskalation (T1211)
+## Sandbox-Breakout/Ausnutzung der Privilegieneskalation (T1211)
 - **ID:** `T1211.yaml`
 - **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)

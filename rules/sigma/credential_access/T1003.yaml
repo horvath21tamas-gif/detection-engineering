@@ -1,59 +1,66 @@
-title: Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003)
+title: LSASS Credential Dumping (T1003)
 id: 2eb29a87-e9c8-45b0-9387-ef3ea14a6526
 status: stable
 description: |
-    Detects highly sophisticated LSASS memory dumping techniques. 
-    Focuses on DLL export ordinals (#24), handle duplication, 
-    and specialized LOLBins that bypass standard EDR string-based detection.
+  Detects highly sophisticated LSASS memory dumping techniques, including:
+  - DLL export ordinals (#24) via rundll32.exe
+  - Handle duplication using specialized LOLBins
+  - Advanced offensive patterns bypassing standard EDR string detection
 author: hota05
 date: 2026-02-04
 tags:
-    - attack.credential_access
-    - attack.t1003.001
+  - attack.credential_access
+  - attack.t1003.001
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_comsvcs_ordinal:
-        Image|endswith: '\rundll32.exe'
-        CommandLine|contains:
-            - 'comsvcs.dll, #24'
-            - 'comsvcs.dll,#24'
-            - 'MiniDump'
+  selection_comsvcs_ordinal:
+    Image|endswith: '\rundll32.exe'
+    CommandLine|contains:
+      - 'comsvcs.dll, #24'
+      - 'comsvcs.dll,#24'
+      - 'MiniDump'
 
-    selection_specialized_tools:
-        - Image|endswith:
-            - '\nanodump.exe'   
-            - '\handle_dump.exe'
-            - '\mirror.exe'     
-        - CommandLine|contains:
-            - ' -ma '           
-            - 'lsass'
+  selection_specialized_tools:
+    Image|endswith:
+      - '\nanodump.exe'
+      - '\handle_dump.exe'
+      - '\mirror.exe'
+    CommandLine|contains:
+      - ' -ma '
+      - 'lsass'
 
-    selection_offensive_patterns:
-        CommandLine|contains:
-            - 'sekurlsa'        
-            - 'logonpasswords'
-            - 'lsadump'
-            - 'rpc::'           
-            - 'creds::'
+  selection_offensive_patterns:
+    CommandLine|contains:
+      - 'sekurlsa'
+      - 'logonpasswords'
+      - 'lsadump'
+      - 'rpc::'
+      - 'creds::'
 
-    selection_suspicious_output:
-        CommandLine|contains:
-            - '.dmp'
-            - '.bin'
-            - '.kirbi'        
-        CommandLine|contains:
-            - '\Windows\Temp\'
-            - '\Users\Public\'
-            - '\AppData\Local\Temp\'
+  selection_suspicious_output:
+    CommandLine|contains:
+      - '.dmp'
+      - '.bin'
+      - '.kirbi'
+      - '\Windows\Temp\'
+      - '\Users\Public\'
+      - '\AppData\Local\Temp\'
 
-    filter_legit_os_behavior:
-        ParentImage|endswith: '\WerFault.exe'
-        Image|contains: 
-            - '\Program Files\'
-            - '\Windows\System32\taskmgr.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+  filter_legit_os_behavior:
+    ParentImage|endswith:
+      - '\WerFault.exe'
+    Image|contains:
+      - '\Program Files\'
+      - '\Windows\System32\taskmgr.exe'
+    username: 'NT AUTHORITY\SYSTEM'
 
-    condition: (selection_comsvcs_ordinal or selection_specialized_tools or selection_offensive_patterns) and not filter_legit_os_behavior
+  condition: >
+    (selection_comsvcs_ordinal or selection_specialized_tools or selection_offensive_patterns)
+    and (selection_suspicious_output)
+    and not filter_legit_os_behavior
+
 level: critical

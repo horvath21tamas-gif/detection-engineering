@@ -184,15 +184,15 @@
 - [Ultra-Pro High-Fidelity Dead Drop Resolver (T1102.001)](#ultra-pro-high-fidelity-dead-drop-resolver-(t1102001))
 - [Ultra-Pro High-Fidelity kétirányú felhő C2 (T1102.002)](#ultra-pro-high-fidelity-kétirányú-felhő-c2-(t1102002))
 - [Ultra-Pro High-Fidelity egyirányú webszolgáltatás C2 (T1102.003)](#ultra-pro-high-fidelity-egyirányú-webszolgáltatás-c2-(t1102003))
-- [Ultra-Pro High-Fidelity többlépcsős C2 (T1104)](#ultra-pro-high-fidelity-többlépcsős-c2-(t1104))
+- [Többlépcsős C2 (T1104)](#többlépcsős-c2-(t1104))
 - [Beépített Windows-eszközök gyanús használata fájlok letöltéséhez és kódvégrehajtáshoz](#beépített-windows-eszközök-gyanús-használata-fájlok-letöltéséhez-és-kódvégrehajtáshoz)
 - [High-Fidelity Native API visszaélés LOLBins-en keresztül](#high-fidelity-native-api-visszaélés-lolbins-en-keresztül)
 - [Brute Force & Tooling (T1110)](#brute-force-&-tooling-(t1110))
 - [Egyetlen felhasználó többszöri sikertelen bejelentkezési kísérlete (lehetséges jelszókitalálás)](#egyetlen-felhasználó-többszöri-sikertelen-bejelentkezési-kísérlete-(lehetséges-jelszókitalálás))
-- [Ultra-Pro High-Fidelity hitelesítő adatok exportálása és feltörése (T1110.002)](#ultra-pro-high-fidelity-hitelesítő-adatok-exportálása-és-feltörése-(t1110002))
-- [Ultra-Pro nagy pontosságú jelszószóró (T1110.003)](#ultra-pro-nagy-pontosságú-jelszószóró-(t1110003))
-- [Ultra-Pro High-Fidelity hitelesítő adatok kitöltése és visszaélések kombinált listája (T1110.004)](#ultra-pro-high-fidelity-hitelesítő-adatok-kitöltése-és-visszaélések-kombinált-listája-(t1110004))
-- [Ultra-Pro High-Fidelity MFA-kijátszás és munkamenet-eltérítés (T1111)](#ultra-pro-high-fidelity-mfa-kijátszás-és-munkamenet-eltérítés-(t1111))
+- [Hitelesítési adatok exportálása és feltörése (T1110.002)](#hitelesítési-adatok-exportálása-és-feltörése-(t1110002))
+- [Jelszó kiszórás (T1110.003)](#jelszó-kiszórás-(t1110003))
+- [Hitelesítési adatokkal való visszaélés és a kombinált listákkal való visszaélés (T1110.004)](#hitelesítési-adatokkal-való-visszaélés-és-a-kombinált-listákkal-való-visszaélés-(t1110004))
+- [MFA-kijátszás és munkamenet-eltérítés (T1111)](#mfa-kijátszás-és-munkamenet-eltérítés-(t1111))
 - [Registry manipuláció kijátszás céljából (T1112)](#registry-manipuláció-kijátszás-céljából-(t1112))
 - [Képernyőrögzítési anomália (T1113)](#képernyőrögzítési-anomália-(t1113))
 - [E-mail betakarítási anomália (T1114)](#e-mail-betakarítási-anomália-(t1114))
@@ -3605,16 +3605,16 @@ specifikus API-feltöltési/letöltési módszerek nem szabványos folyamathelye
 
 
 ---
-## Ultra-Pro High-Fidelity többlépcsős C2 (T1104)
+## Többlépcsős C2 (T1104)
 - **ID:** `T1104.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Fájl nélküli végrehajtási minták azonosításával érzékeli a többlépcsős C2 kommunikációt
-ahol a hálózati kérés eredménye közvetlenül a memóriaterhelésbe kerül
-függvények vagy script kiértékelők köztes lemezírás nélkül.
+- **Leírás:** Fájl nélküli végrehajtási minták azonosításával érzékeli a többlépcsős parancs- és vezérlési (C2) tevékenységet
+ahol a hálózati kérések eredménye közvetlenül a memóriaterhelési függvényekbe vagy a parancsfájl-kiértékelőkbe kerül
+közbenső lemezírás nélkül.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -3694,7 +3694,7 @@ feldolgozza a nem megbízható helyekről származó vonalakat.
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a hitelesítőadat-adatbázisok (SAM, SYSTEM, NTDS.dit) kibontására tett kísérleteket offline feltöréshez
+- **Leírás:** Érzékeli a hitelesítőadat-adatbázisok (SAM, SYSTEM, NTDS.dit) kibontási kísérleteit offline feltöréshez
 és kiszűréssel nagy pontossággal azonosítja a jelszó-helyreállító eszközök végrehajtását
 törvényes biztonsági mentési és rendszerkarbantartási folyamatok.
 
@@ -3705,7 +3705,7 @@ törvényes biztonsági mentési és rendszerkarbantartási folyamatok.
 
 
 ---
-## Jelszó spray (T1110.003)
+## Jelszó kiszórás (T1110.003)
 - **ID:** `T1110_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

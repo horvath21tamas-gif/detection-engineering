@@ -184,15 +184,15 @@
 - [Ultra-Pro High-Fidelity Dead Drop Resolver (T1102.001)](#ultra-pro-high-fidelity-dead-drop-resolver-(t1102001))
 - [Ultra-Pro High-Fidelity Bidirektional Cloud C2 (T1102.002)](#ultra-pro-high-fidelity-bidirektional-cloud-c2-(t1102002))
 - [Ultra-Pro High-Fidelity One-Way Web Service C2 (T1102.003)](#ultra-pro-high-fidelity-one-way-web-service-c2-(t1102003))
-- [Ultra-Pro High-Fidelity Multi-Stage C2 (T1104)](#ultra-pro-high-fidelity-multi-stage-c2-(t1104))
+- [Mehrstufig C2 (T1104)](#mehrstufig-c2-(t1104))
 - [Verdächtige Verwendung integrierter Windows-Tools zum Herunterladen von Dateien und zur Codeausführung](#verdächtige-verwendung-integrierter-windows-tools-zum-herunterladen-von-dateien-und-zur-codeausführung)
 - [Missbrauch von nativen High-Fidelity-APIs über LOLBins](#missbrauch-von-nativen-high-fidelity-apis-über-lolbins)
 - [Brute Force & Werkzeug (T1110)](#brute-force-&-werkzeug-(t1110))
 - [Mehrere fehlgeschlagene Anmeldeversuche für einen einzelnen Benutzer (mögliches Erraten des Passworts)](#mehrere-fehlgeschlagene-anmeldeversuche-für-einen-einzelnen-benutzer-(mögliches-erraten-des-passworts))
-- [Ultra-Pro High-Fidelity-Zugangsdatenexport und -knacken (T1110.002)](#ultra-pro-high-fidelity-zugangsdatenexport-und--knacken-(t1110002))
-- [Ultra-Pro High-Fidelity-Passwort-Sprühen (T1110.003)](#ultra-pro-high-fidelity-passwort-sprühen-(t1110003))
-- [Ultra-Pro High-Fidelity Credential Stuffing und Combo-List-Missbrauch (T1110.004)](#ultra-pro-high-fidelity-credential-stuffing-und-combo-list-missbrauch-(t1110004))
-- [Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111)](#ultra-pro-high-fidelity-mfa-evasion-&-session-hijacking-(t1111))
+- [Exportieren und Knacken von Anmeldeinformationen (T1110.002)](#exportieren-und-knacken-von-anmeldeinformationen-(t1110002))
+- [Passwortsprühen (T1110.003)](#passwortsprühen-(t1110003))
+- [Credential Stuffing und Combo-List-Missbrauch (T1110.004)](#credential-stuffing-und-combo-list-missbrauch-(t1110004))
+- [MFA-Umgehung und Sitzungsentführung (T1111)](#mfa-umgehung-und-sitzungsentführung-(t1111))
 - [Manipulation der Registrierung zur Umgehung (T1112)](#manipulation-der-registrierung-zur-umgehung-(t1112))
 - [Anomalie bei der Bildschirmaufnahme (T1113)](#anomalie-bei-der-bildschirmaufnahme-(t1113))
 - [Anomalie beim E-Mail-Ernten (T1114)](#anomalie-beim-e-mail-ernten-(t1114))
@@ -3605,16 +3605,16 @@ und verdächtige übergeordnete Prozesslinien.
 
 
 ---
-## Ultra-Pro High-Fidelity Multi-Stage C2 (T1104)
+## Mehrstufig C2 (T1104)
 - **ID:** `T1104.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt mehrstufige C2-Kommunikation durch Identifizierung dateiloser Ausführungsmuster
-Dabei wird das Ergebnis einer Netzwerkanforderung direkt an die Speicherlast weitergeleitet
-Funktionen oder Skriptauswertungen ohne Zwischenschreibvorgänge auf der Festplatte.
+- **Beschreibung:** Erkennt mehrstufige Command-and-Control-Aktivitäten (C2) durch Identifizierung dateiloser Ausführungsmuster
+Dabei wird das Ergebnis von Netzwerkanforderungen direkt an Speicherladefunktionen oder Skriptauswerter weitergeleitet
+ohne Zwischenschreibvorgänge auf der Festplatte.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -3696,7 +3696,7 @@ Prozessabstammungen von nicht vertrauenswürdigen Standorten.
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt Versuche, Anmeldeinformationsdatenbanken (SAM, SYSTEM, NTDS.dit) für Offline-Cracking zu extrahieren
 und identifiziert die Ausführung von Passwort-Wiederherstellungstools mit hoher Präzision durch Herausfiltern
-legitime Backup- und Systemwartungsprozesse.
+legitime Sicherungs- und Systemwartungsprozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

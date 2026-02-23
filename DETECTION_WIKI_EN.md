@@ -184,15 +184,15 @@
 - [Ultra-Pro High-Fidelity Dead Drop Resolver (T1102.001)](#ultra-pro-high-fidelity-dead-drop-resolver-(t1102001))
 - [Ultra-Pro High-Fidelity Bidirectional Cloud C2 (T1102.002)](#ultra-pro-high-fidelity-bidirectional-cloud-c2-(t1102002))
 - [Ultra-Pro High-Fidelity One-Way Web Service C2 (T1102.003)](#ultra-pro-high-fidelity-one-way-web-service-c2-(t1102003))
-- [Ultra-Pro High-Fidelity Multi-Stage C2 (T1104)](#ultra-pro-high-fidelity-multi-stage-c2-(t1104))
+- [Multi-Stage C2 (T1104)](#multi-stage-c2-(t1104))
 - [Suspicious Use of Built-in Windows Tools for File Download and Code Execution](#suspicious-use-of-built-in-windows-tools-for-file-download-and-code-execution)
 - [High-Fidelity Native API Abuse via LOLBins](#high-fidelity-native-api-abuse-via-lolbins)
 - [Brute Force & Tooling (T1110)](#brute-force-&-tooling-(t1110))
 - [Multiple Failed Login Attempts for Single User (Possible Password Guessing)](#multiple-failed-login-attempts-for-single-user-(possible-password-guessing))
-- [Ultra-Pro High-Fidelity Credential Export & Cracking (T1110.002)](#ultra-pro-high-fidelity-credential-export-&-cracking-(t1110002))
-- [Ultra-Pro High-Fidelity Password Spraying (T1110.003)](#ultra-pro-high-fidelity-password-spraying-(t1110003))
-- [Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004)](#ultra-pro-high-fidelity-credential-stuffing-&-combo-list-abuse-(t1110004))
-- [Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111)](#ultra-pro-high-fidelity-mfa-evasion-&-session-hijacking-(t1111))
+- [Credential Export & Cracking (T1110.002)](#credential-export-&-cracking-(t1110002))
+- [Password Spraying (T1110.003)](#password-spraying-(t1110003))
+- [Credential Stuffing & Combo-list Abuse (T1110.004)](#credential-stuffing-&-combo-list-abuse-(t1110004))
+- [MFA Evasion & Session Hijacking (T1111)](#mfa-evasion-&-session-hijacking-(t1111))
 - [Registry Tampering for Evasion (T1112)](#registry-tampering-for-evasion-(t1112))
 - [Screen Capture Anomaly (T1113)](#screen-capture-anomaly-(t1113))
 - [Email Harvesting Anomaly (T1114)](#email-harvesting-anomaly-(t1114))
@@ -3778,16 +3778,16 @@ and suspicious parent process lineages.
 
 
 ---
-## Ultra-Pro High-Fidelity Multi-Stage C2 (T1104)
+## Multi-Stage C2 (T1104)
 - **ID:** `T1104.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects multi-stage C2 communication by identifying fileless execution patterns 
-where the result of a network request is piped directly into memory-load 
-functions or script evaluators without intermediate disk writes.
+- **Leírás:** Detects multi-stage command-and-control (C2) activity by identifying fileless execution patterns 
+where the result of network requests is piped directly into memory-load functions or script evaluators 
+without intermediate disk writes.
 
 
 #### 🚨 Response Playbook

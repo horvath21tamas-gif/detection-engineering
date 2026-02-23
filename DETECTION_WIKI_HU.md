@@ -3212,16 +3212,16 @@ folyamat integritását, szülő-gyermek kapcsolatokat és konkrét kulcsszómin
 
 
 ---
-## Ultra-Pro High-Fidelity helyi fiókfelderítés (T1087.001)
+## Helyi fiókfelderítés (T1087.001)
 - **ID:** `T1087_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a szisztematikus helyi fiókok és csoportok felsorolását.
-A rendellenes folyamatvonalakra összpontosít (pl. webszerverek által elindított felderítő eszközök vagy
-távoli héjak) és a modern felsorolási módszerek, például a WMI/CIM használata.
+- **Leírás:** Érzékeli a szisztematikus helyi fiókok és csoportok felsorolását.A rendellenes folyamatvonalakra összpontosít
+(pl. webszerverek vagy távoli héjak által indított felfedezőeszközök) és a modern
+felsorolási módszerek, például a WMI/CIM.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

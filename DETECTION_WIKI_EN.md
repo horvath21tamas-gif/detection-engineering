@@ -3362,16 +3362,16 @@ process integrity, parent-child relationships, and specific keyword patterns.
 
 
 ---
-## Ultra-Pro High-Fidelity Local Account Discovery (T1087.001)
+## Local Account Discovery (T1087.001)
 - **ID:** `T1087_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic local account and group enumeration. 
-Focuses on anomalous process lineages (e.g., discovery tools launched by web servers or 
-remote shells) and the use of modern enumeration methods like WMI/CIM.
+- **Leírás:** Detects systematic local account and group enumeration. Focuses on anomalous process lineages 
+(e.g., discovery tools launched by web servers or remote shells) and the use of modern 
+enumeration methods like WMI/CIM.
 
 
 #### 🚨 Response Playbook

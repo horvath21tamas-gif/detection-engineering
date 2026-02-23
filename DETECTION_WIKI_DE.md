@@ -3212,16 +3212,16 @@ Prozessintegrität, Eltern-Kind-Beziehungen und spezifische Schlüsselwortmuster
 
 
 ---
-## Ultra-Pro High-Fidelity Local Account Discovery (T1087.001)
+## Erkennung lokaler Konten (T1087.001)
 - **ID:** `T1087_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Aufzählung lokaler Konten und Gruppen.
-Konzentriert sich auf anomale Prozessabläufe (z. B. von Webservern gestartete Erkennungstools oder
-Remote-Shells) und die Verwendung moderner Aufzählungsmethoden wie WMI/CIM.
+- **Beschreibung:** Erkennt die systematische Aufzählung lokaler Konten und Gruppen.Konzentriert sich auf anomale Prozesslinien
+(z. B. von Webservern oder Remote-Shells gestartete Erkennungstools) und die Verwendung moderner
+Aufzählungsmethoden wie WMI/CIM.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

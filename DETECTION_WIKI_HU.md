@@ -3739,7 +3739,7 @@ a keretrendszer argumentumainak kitöltése nem megbízható helyekről.
 
 
 ---
-## Ultra-Pro High-Fidelity MFA-kijátszás és munkamenet-eltérítés (T1111)
+## MFA-kijátszás és munkamenet-eltérítés (T1111)
 - **ID:** `T1111.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

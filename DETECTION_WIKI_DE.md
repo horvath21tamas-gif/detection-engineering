@@ -3739,7 +3739,7 @@ Stuffing von Framework-Argumenten von nicht vertrauenswürdigen Orten.
 
 
 ---
-## Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111)
+## MFA-Umgehung und Sitzungsentführung (T1111)
 - **ID:** `T1111.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

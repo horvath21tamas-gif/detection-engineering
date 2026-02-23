@@ -3920,12 +3920,12 @@ stuffing framework arguments from untrusted locations.
 
 
 ---
-## Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111)
+## MFA Evasion & Session Hijacking (T1111)
 - **ID:** `T1111.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects MFA evasion by identifying unauthorized access to browser master keys (Local State) 
+- **Leírás:** Detects MFA evasion by identifying unauthorized access to browser master keys (Local State)
 and session databases (Cookies) by untrusted processes. It also monitors for 
 Reverse Proxy phishing frameworks (Evilginx, Muraena) and token manipulation tools.
 

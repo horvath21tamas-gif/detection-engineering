@@ -3266,16 +3266,17 @@ A nem interaktív PowerShell-munkamenetekre, a tömegesen exportáló címzettek
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004)
+## Cloud Account Discovery (T1087.004)
 - **ID:** `T1087_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a felhőfiókok (AWS, Azure, GCP) szisztematikus felfedezését, összpontosítva
-interaktív shell munkamenetek és rendellenes parancsláncolás.A szűrők jogosak
-CI/CD és automatizálási munkaterhelések a folyamatvonal és a felhasználói kontextus alapján.
+- **Leírás:** Érzékeli a felhőalapú fiókok (AWS, Azure, GCP) szisztematikus felfedezését
+az interaktív CLI használat és a rendellenes parancsláncolás figyelése.
+Kiszűri a jogos CI/CD-folyamatokat és az automatizálási munkaterheléseket
+a folyamat vonaláról és a felhasználói kontextusról.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

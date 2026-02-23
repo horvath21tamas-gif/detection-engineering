@@ -3419,16 +3419,17 @@ and anomalous access to local mail profile configurations by untrusted processes
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004)
+## Cloud Account Discovery (T1087.004)
 - **ID:** `T1087_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic discovery of cloud accounts (AWS, Azure, GCP) focusing on 
-interactive shell sessions and anomalous command chaining. Filters legitimate 
-CI/CD and automation workloads based on process lineage and user context.
+- **Leírás:** Detects systematic discovery of cloud accounts (AWS, Azure, GCP) by 
+monitoring interactive CLI usage and anomalous command chaining. 
+Filters out legitimate CI/CD pipelines and automation workloads based 
+on process lineage and user context.
 
 
 #### 🚨 Response Playbook

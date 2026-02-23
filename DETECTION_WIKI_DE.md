@@ -3266,16 +3266,17 @@ und anormaler Zugriff auf lokale E-Mail-Profilkonfigurationen durch nicht vertra
 
 
 ---
-## Ultra-Pro High-Fidelity-Cloud-Kontoerkennung (T1087.004)
+## Cloud-Kontoerkennung (T1087.004)
 - **ID:** `T1087_004.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Erkennung von Cloud-Konten (AWS, Azure, GCP) mit Schwerpunkt auf
-interaktive Shell-Sitzungen und anomale Befehlsverkettung.Filter legitim
-CI/CD- und Automatisierungs-Workloads basierend auf Prozessherkunft und Benutzerkontext.
+- **Beschreibung:** Erkennt die systematische Erkennung von Cloud-Konten (AWS, Azure, GCP) durch
+Überwachung der interaktiven CLI-Nutzung und anomaler Befehlsverkettung.
+Filtert legitime CI/CD-Pipelines und Automatisierungs-Workloads heraus
+zur Prozessherkunft und zum Benutzerkontext.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -1,58 +1,94 @@
-title: Ultra-Pro High-Fidelity Exfiltration Over C2 Channel (T1041)
+title: Exfiltration Over C2 Channel (ATT&CK T1041)
 id: a44e690b-fc3b-4d35-b9a4-11c2470640e1
 status: stable
-description: |
-    Detects data exfiltration over an established C2 channel by correlating 
-    systematic file read operations, memory-stream encoding, and long-standing 
-    outbound network connections from non-browser processes.
-author: hota05
-date: 2026-02-09
+description: >
+  Detects potential data exfiltration over an established Command-and-Control (C2)
+  channel by identifying file-to-memory read operations, Base64 encoding,
+  compression staging, and in-memory stream manipulation executed from
+  non-standard paths or suspicious parent processes.
+  Focuses on staged exfiltration behavior rather than simple outbound traffic.
+author: hota05 
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1041/
 tags:
-    - attack.exfiltration
-    - attack.t1041
+  - attack.exfiltration
+  - attack.t1041
+  - attack.command_and_control
+  - attack.collection
+  - attack.host
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_mem_logic:
-        CommandLine|contains:
-            - ' [System.IO.MemoryStream]'     
-            - ' [System.Convert]::ToBase64'   
-            - ' .ReadBytes('                 
-            - ' .ReadAllBytes('
-            - 'Compress-Archive'            
+  selection_file_to_memory:
+    CommandLine|contains:
+      - '[System.IO.MemoryStream]'
+      - 'System.Convert]::ToBase64'
+      - '.ReadBytes('
+      - '.ReadAllBytes('
+      - 'Get-Content -Encoding Byte'
+      - 'FromBase64String('
+      - 'Compress-Archive'
+      - 'System.IO.Compression'
+      - 'GZipStream'
 
-    selection_tools:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\rundll32.exe'        
-            - '\regsvcs.exe'
-            - '\mshta.exe'
-            - '\certutil.exe'        
+  selection_c2_capable_bins:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\rundll32.exe'
+      - '\regsvcs.exe'
+      - '\mshta.exe'
+      - '\certutil.exe'
+      - '\wmic.exe'
+      - '\cscript.exe'
+      - '\wscript.exe'
 
-    selection_context:
-        - Image|contains:
-            - '\Users\'
-            - '\AppData\'
-            - '\Temp\'
-            - '\Public\'
-        - ParentImage|endswith:
-            - '\winword.exe'         
-            - '\excel.exe'
-            - '\wmiprvse.exe'        
-            - '\svchost.exe'         
+  selection_untrusted_path:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Public\'
 
-    filter_legit:
-        - Image|contains:
-            - '\Program Files\'
-            - '\Program Files (x86)\'
-        - CommandLine|contains:
-            - 'Windows\Logs'        
-            - 'softwareupdate'
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith:
-            - '\services.exe'
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\wmiprvse.exe'
+      - '\wsmprovhost.exe'
+      - '\svchost.exe'
 
-    condition: selection_mem_logic and selection_tools and selection_context and not filter_legit
+  selection_user_context:
+    IntegrityLevel: 'Medium'
+
+  filter_legitimate_activity:
+    - Image|contains:
+        - '\Program Files\'
+        - '\Program Files (x86)\'
+    - CommandLine|contains:
+        - 'Windows\Logs'
+        - 'softwareupdate'
+        - 'defender'
+    - username: 'NT AUTHORITY\SYSTEM'
+    - ParentImage|endswith:
+        - '\services.exe'
+
+  condition:
+    selection_file_to_memory
+    and selection_c2_capable_bins
+    and (selection_untrusted_path or selection_suspicious_parent)
+    and selection_user_context
+    and not filter_legitimate_activity
+
+falsepositives:
+  - Legitimate automation scripts performing file encoding
+  - DevOps pipelines compressing or encoding artifacts
+  - Administrative PowerShell data processing tasks
+  - Backup or archiving scripts using compression libraries
+
 level: critical

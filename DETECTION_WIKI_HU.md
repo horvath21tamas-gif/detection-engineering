@@ -1083,7 +1083,7 @@ vagy letiltotta a biztonsági beállításokat.
 
 
 ---
-## Ultra-Pro High-Fidelity Remote System Discovery (T1018)
+## Remote System Discovery (T1018)
 - **ID:** `T1018.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

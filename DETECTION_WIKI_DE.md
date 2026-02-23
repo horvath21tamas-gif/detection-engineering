@@ -1083,7 +1083,7 @@ oder deaktivierte Sicherheitseinstellungen.
 
 
 ---
-## Ultra-Pro High-Fidelity Remote System Discovery (T1018)
+## Remote-Systemerkennung (T1018)
 - **ID:** `T1018.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

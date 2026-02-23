@@ -115,7 +115,7 @@
 - [Ultra-Pro High-Fidelity-Eingangserfassungserkennung (T1056)](#ultra-pro-high-fidelity-eingangserfassungserkennung-(t1056))
 - [Ultraprofessionelles High-Fidelity-Keylogging und Input-Hooking (T1056.001)](#ultraprofessionelles-high-fidelity-keylogging-und-input-hooking-(t1056001))
 - [Ultra-Pro High-Fidelity-GUI-Eingabeerfassung (T1056.002)](#ultra-pro-high-fidelity-gui-eingabeerfassung-(t1056002))
-- [Ultra-Pro High-Fidelity-Digitalzertifikat-Diebstahl (T1056.003)](#ultra-pro-high-fidelity-digitalzertifikat-diebstahl-(t1056003))
+- [Diebstahl digitaler Zertifikate (ATT&CK T1056.003)](#diebstahl-digitaler-zertifikate-(att&ck-t1056003))
 - [Verdächtiges Einbinden der Anmeldeinformations-API über Win32-Bibliotheken](#verdächtiges-einbinden-der-anmeldeinformations-api-über-win32-bibliotheken)
 - [Prozesserkennung (ATT&CK T1057)](#prozesserkennung-(att&ck-t1057))
 - [Kontextuelle Anomalie des High-Fidelity-Scripting-Interpreters](#kontextuelle-anomalie-des-high-fidelity-scripting-interpreters)
@@ -2428,17 +2428,14 @@ Prozesse (Browser, Office-Apps) und nicht gesicherte Skripte.
 
 
 ---
-## Ultra-Pro High-Fidelity-Digitalzertifikat-Diebstahl (T1056.003)
+## Diebstahl digitaler Zertifikate (ATT&CK T1056.003)
 - **ID:** `T1056_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die unbefugte Entnahme privater Schlüssel und digitaler Zertifikate.
-Überwacht die Extraktion „nicht exportierbarer“ Schlüssel über Speicher-Patching,
-verdächtige Verwendung von certutil/PowerShell zur PFX-Erstellung und direkt
-Zugriff auf den kryptografischen Schlüsselspeicher von Windows.
+- **Beschreibung:** Erkennt die unbefugte Entnahme privater Schlüssel und digitaler Zertifikate.Überwacht die Extraktion „nicht exportierbarer“ Schlüssel über Speicherpatches, die verdächtige Verwendung von certutil oder PowerShell für die PFX-Erstellung und den direkten Zugriff auf den kryptografischen Schlüsselspeicher von Windows.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

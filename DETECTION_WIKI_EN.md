@@ -115,7 +115,7 @@
 - [Ultra-Pro High-Fidelity Input Capture Detection (T1056)](#ultra-pro-high-fidelity-input-capture-detection-(t1056))
 - [Ultra-Pro High-Fidelity Keylogging & Input Hooking (T1056.001)](#ultra-pro-high-fidelity-keylogging-&-input-hooking-(t1056001))
 - [Ultra-Pro High-Fidelity GUI Input Capture (T1056.002)](#ultra-pro-high-fidelity-gui-input-capture-(t1056002))
-- [Ultra-Pro High-Fidelity Digital Certificate Theft (T1056.003)](#ultra-pro-high-fidelity-digital-certificate-theft-(t1056003))
+- [Digital Certificate Theft (ATT&CK T1056.003)](#digital-certificate-theft-(att&ck-t1056003))
 - [Suspicious Credential API Hooking via Win32 Libraries](#suspicious-credential-api-hooking-via-win32-libraries)
 - [Process Discovery (ATT&CK T1057)](#process-discovery-(att&ck-t1057))
 - [High-Fidelity Scripting Interpreter Contextual Anomaly](#high-fidelity-scripting-interpreter-contextual-anomaly)
@@ -2532,17 +2532,14 @@ processes (browsers, office apps) and unbacked scripts.
 
 
 ---
-## Ultra-Pro High-Fidelity Digital Certificate Theft (T1056.003)
+## Digital Certificate Theft (ATT&CK T1056.003)
 - **ID:** `T1056_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized extraction of private keys and digital certificates. 
-Monitors for 'non-exportable' key extraction via memory patching, 
-suspicious use of certutil/PowerShell for PFX creation, and direct 
-access to the Windows Cryptographic Key Store.
+- **Leírás:** Detects unauthorized extraction of private keys and digital certificates. Monitors for 'non-exportable' key extraction via memory patching, suspicious use of certutil or PowerShell for PFX creation, and direct access to the Windows Cryptographic Key Store.
 
 
 #### 🚨 Response Playbook

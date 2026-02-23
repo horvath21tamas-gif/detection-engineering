@@ -115,7 +115,7 @@
 - [Ultra-Pro nagy felbontású bemeneti rögzítésérzékelés (T1056)](#ultra-pro-nagy-felbontású-bemeneti-rögzítésérzékelés-(t1056))
 - [Ultra-Pro High-Fidelity billentyűzetnaplózás és beviteli rögzítés (T1056.001)](#ultra-pro-high-fidelity-billentyűzetnaplózás-és-beviteli-rögzítés-(t1056001))
 - [Ultra-Pro High-Fidelity GUI bemenet rögzítése (T1056.002)](#ultra-pro-high-fidelity-gui-bemenet-rögzítése-(t1056002))
-- [Ultra-Pro High-Fidelity digitális tanúsítványlopás (T1056.003)](#ultra-pro-high-fidelity-digitális-tanúsítványlopás-(t1056003))
+- [Digitális tanúsítvány ellopása (ATT&CK T1056.003)](#digitális-tanúsítvány-ellopása-(att&ck-t1056003))
 - [Gyanús hitelesítő adatok API-hozzákapcsolása a Win32 könyvtárakon keresztül](#gyanús-hitelesítő-adatok-api-hozzákapcsolása-a-win32-könyvtárakon-keresztül)
 - [Folyamatfelderítés (ATT&CK T1057)](#folyamatfelderítés-(att&ck-t1057))
 - [High-Fidelity Scripting Interpreter Contextual Anomália](#high-fidelity-scripting-interpreter-contextual-anomália)
@@ -2428,17 +2428,14 @@ folyamatok (böngészők, irodai alkalmazások) és nem támogatott szkriptek.
 
 
 ---
-## Ultra-Pro High-Fidelity digitális tanúsítványlopás (T1056.003)
+## Digitális tanúsítvány ellopása (ATT&CK T1056.003)
 - **ID:** `T1056_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a magánkulcsok és digitális tanúsítványok jogosulatlan kimásolását.
-Felügyeli a „nem exportálható” kulcsok memóriafoltozással történő kinyerését,
-a certutil/PowerShell gyanús használata PFX-létrehozásra és közvetlen
-hozzáférést biztosít a Windows Cryptographic Key Store-hoz.
+- **Leírás:** Érzékeli a magánkulcsok és digitális tanúsítványok jogosulatlan kimásolását.Figyeli a „nem exportálható” kulcsok memóriajavítással történő kivonatolását, a certutil vagy a PowerShell gyanús használatát PFX-létrehozáshoz, valamint a Windows Cryptographic Key Store közvetlen elérését.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

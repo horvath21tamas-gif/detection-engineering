@@ -866,16 +866,16 @@ A gyanús útvonalakra való átirányításra, archiválásra,
 
 
 ---
-## Ultra-Pro, nagy pontosságú helyi adatgyűjtés (T1005)
+## Helyi adatgyűjtés (T1005)
 - **ID:** `T1005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Felismeri a szisztematikus helyi adatgyűjtést a kombinációk azonosításával
-rekurzív fájlfelderítés, célzott érzékeny kiterjesztések és használata
-nem szabványos keresőeszközök vagy gyanús folyamatvonalak.
+- **Leírás:** Érzékeli a szisztematikus helyi adatgyűjtést a rekurzív fájlfelderítés azonosításával,
+az érzékeny kiterjesztések célzása, valamint a nem szabványos kereső- vagy tömörítőeszközök használata
+gyanús folyamatvonalakból.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

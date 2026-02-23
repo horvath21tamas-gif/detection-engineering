@@ -879,16 +879,16 @@ and exfiltration via network tools (LOLBins) from interactive shells.
 
 
 ---
-## Ultra-Pro High-Fidelity Local Data Harvesting (T1005)
+## Local Data Harvesting (T1005)
 - **ID:** `T1005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic local data collection by identifying the combination of 
-recursive file discovery, targeted sensitive extensions, and the use of 
-non-standard search tools or suspicious process lineages.
+- **Leírás:** Detects systematic local data collection by identifying recursive file discovery, 
+targeting of sensitive extensions, and the use of non-standard search or compression tools 
+from suspicious process lineages.
 
 
 #### 🚨 Response Playbook

@@ -866,16 +866,16 @@ und Exfiltration über Netzwerktools (LOLBins) aus interaktiven Shells.
 
 
 ---
-## Ultraprofessionelle lokale Datenerfassung mit hoher Wiedergabetreue (T1005)
+## Lokale Datenerfassung (T1005)
 - **ID:** `T1005.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische lokale Datenerfassung durch Identifizierung der Kombination von
-rekursive Dateierkennung, gezielte sensible Erweiterungen und die Verwendung von
-nicht standardmäßige Suchwerkzeuge oder verdächtige Prozessabstammungen.
+- **Beschreibung:** Erkennt systematische lokale Datenerfassung durch Identifizierung rekursiver Dateierkennung,
+Targeting sensibler Erweiterungen und Verwendung nicht standardmäßiger Such- oder Komprimierungstools
+aus verdächtigen Prozesslinien.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -4031,16 +4031,16 @@ output to non-standard internal UNC paths or administrative shares.
 
 
 ---
-## Ultra-Pro High-Fidelity Email Forwarding Rule Anomaly (T1114.003)
+## Email Forwarding Rule Anomaly (T1114.003)
 - **ID:** `T1114_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized email forwarding rules by identifying programmatic 
-redirection to external/untrusted domains combined with sensitive keyword 
-filtering, originating from suspicious process lineages.
+- **Leírás:** Detects unauthorized email forwarding rule configurations by identifying 
+programmatic redirection to external or untrusted domains, combined with 
+sensitive keyword filtering, originating from suspicious process lineages.
 
 
 #### 🚨 Response Playbook

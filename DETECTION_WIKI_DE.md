@@ -3844,16 +3844,16 @@ Ausgabe auf nicht standardmäßige interne UNC-Pfade oder administrative Freigab
 
 
 ---
-## Ultra-Pro High-Fidelity-E-Mail-Weiterleitungsregelanomalie (T1114.003)
+## Anomalie der E-Mail-Weiterleitungsregel (T1114.003)
 - **ID:** `T1114_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt nicht autorisierte E-Mail-Weiterleitungsregeln durch programmgesteuerte Identifizierung
-Umleitung zu externen/nicht vertrauenswürdigen Domänen in Kombination mit sensiblen Schlüsselwörtern
-Filterung, die aus verdächtigen Prozesslinien stammt.
+- **Beschreibung:** Erkennt nicht autorisierte E-Mail-Weiterleitungsregelkonfigurationen durch Identifizierung
+Programmatische Umleitung zu externen oder nicht vertrauenswürdigen Domänen, kombiniert mit
+Filterung sensibler Schlüsselwörter, die aus verdächtigen Prozesslinien stammen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

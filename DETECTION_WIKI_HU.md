@@ -3844,16 +3844,16 @@ kimenet nem szabványos belső UNC-útvonalakra vagy adminisztrációs megosztá
 
 
 ---
-## Ultra-Pro nagy pontosságú e-mail továbbítási szabály rendellenessége (T1114.003)
+## E-mail továbbítási szabály rendellenessége (T1114.003)
 - **ID:** `T1114_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Az automatizált azonosítással észleli a jogosulatlan e-mail-továbbítási szabályokat
-átirányítás külső/nem megbízható domainekre érzékeny kulcsszóval kombinálva
-gyanús folyamatvonalakból származó szűrés.
+- **Leírás:** Azonosítással észleli a jogosulatlan e-mail-továbbítási szabálykonfigurációkat
+programozott átirányítás külső vagy nem megbízható domainekre, kombinálva ezzel
+érzékeny kulcsszószűrés, amely gyanús folyamatvonalakból származik.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -920,7 +920,7 @@ rosszul konfigurált szolgáltatások a jogosultságok kiterjesztéséhez.
 
 
 ---
-## Ultra-Pro High-Fidelity tartalék csatornaérzékelés (T1008)
+## Tartalékcsatorna-észlelés (T1008)
 - **ID:** `T1008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

@@ -936,7 +936,7 @@ misconfigured services for privilege escalation.
 
 
 ---
-## Ultra-Pro High-Fidelity Fallback Channel Detection (T1008)
+## Fallback Channel Detection (T1008)
 - **ID:** `T1008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

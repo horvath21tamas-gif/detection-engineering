@@ -920,7 +920,7 @@ falsch konfigurierte Dienste zur Rechteausweitung.
 
 
 ---
-## Ultraprofessionelle High-Fidelity-Fallback-Kanalerkennung (T1008)
+## Fallback-Kanalerkennung (T1008)
 - **ID:** `T1008.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

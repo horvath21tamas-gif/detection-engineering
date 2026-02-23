@@ -1929,16 +1929,14 @@ nem IT rendszergazdai környezetből származó bináris fájlok.
 
 
 ---
-## Ultra-Pro High-Fidelity Alternatív Protocol Exfiltration (T1048)
+## Alternatív protokoll-szűrés (ATT&CK T1048)
 - **ID:** `T1048.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Azonosítással észleli a nem szabványos protokollokon keresztüli adatszűrést
-abnormális ICMP pufferméretek, SSH/tunneling flagek nem rendszergazdai környezetben,
-és a gyanús útvonalakról végrehajtott, hálózatra képes LoLBins.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [SSH.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli az alternatív vagy nem szabványos protokollokon (ICMP, SSH-alagút, TCP-relék, DNS-alagútkezelő segédprogramok) keresztül történő esetleges adatszivárgást az alagútjelzők, a rendellenes ICMP hasznos terhelések és a gyanús felhasználói térútvonalakról végrehajtott hálózatképes LoLBin azonosításával.A nem interaktív felhasználásra és a jogosultságokkal ellentmondó végrehajtási környezetre összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

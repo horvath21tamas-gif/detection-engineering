@@ -2004,16 +2004,14 @@ binaries originating from non-IT admin contexts.
 
 
 ---
-## Ultra-Pro High-Fidelity Alternative Protocol Exfiltration (T1048)
+## Alternative Protocol Exfiltration (ATT&CK T1048)
 - **ID:** `T1048.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects data exfiltration over non-standard protocols by identifying 
-abnormal ICMP buffer sizes, SSH/tunneling flags in non-admin contexts, 
-and network-capable LoLBins executing from suspicious paths.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [SSH.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects potential data exfiltration over alternative or non-standard protocols (ICMP, SSH tunneling, TCP relays, DNS tunneling utilities) by identifying tunneling flags, abnormal ICMP payload sizes, and network-capable LoLBins executing from suspicious user-space paths. Focuses on non-interactive usage and privilege-inconsistent execution context.
 
 
 #### 🚨 Response Playbook

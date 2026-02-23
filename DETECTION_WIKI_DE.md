@@ -1929,16 +1929,14 @@ Binärdateien, die aus Nicht-IT-Administratorkontexten stammen.
 
 
 ---
-## Ultra-Pro High-Fidelity Alternative Protocol Exfiltration (T1048)
+## Alternative Protokoll-Exfiltration (ATT&CK T1048)
 - **ID:** `T1048.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [AT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Datenexfiltration über nicht standardmäßige Protokolle durch Identifizierung
-ungewöhnliche ICMP-Puffergrößen, SSH-/Tunneling-Flags in Nicht-Administratorkontexten,
-und netzwerkfähige LoLBins, die über verdächtige Pfade ausgeführt werden.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [SSH.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt potenzielle Datenexfiltration über alternative oder nicht standardmäßige Protokolle (ICMP, SSH-Tunneling, TCP-Relays, DNS-Tunneling-Dienstprogramme), indem es Tunnelflags, ungewöhnliche ICMP-Nutzlastgrößen und netzwerkfähige LoLBins identifiziert, die von verdächtigen User-Space-Pfaden ausgeführt werden.Konzentriert sich auf die nicht interaktive Nutzung und den privilegierten inkonsistenten Ausführungskontext.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -1,2 +1,1 @@
-((((param = '* -l 14*' OR param = '* -s 14*' OR param = '* -R *' OR param = '* -L *' OR param = '* -D *' OR param = '* -X *' OR param = '* -N *'))) OR (((process = '*\\plink.exe*' OR process = '*\\pscp.exe*' OR process = '*\\ncat.exe*' OR process = '*\\nc.exe*' OR process = '*\\socat.exe*' OR process = '*\\iodine.exe*')))) AND ((((process = '*\\Users\\*' OR process = '*\\AppData\\*' OR process = '*\\Temp\\*' OR process = '*\\Public\\*' OR process = '*\\PerfLogs\\*'))) AND ((param = '* -pw *'))) AND (NOT (((((process = '*\\Program Files\\*' OR process = '*\\Program Files (x86)\\*'))) OR (((param = '*127.0.0.1*' OR param = '*localhost*'))) OR ((user.dst = '*NT AUTHORITY\\SYSTEM*'))|| ((ParentImage = '*\\services.exe*'))))
-)
+conversion_failed

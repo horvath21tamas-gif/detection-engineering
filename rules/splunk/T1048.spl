@@ -1,1 +1,1 @@
-CommandLine IN ("* -l 14*", "* -s 14*", "* -R *", "* -L *", "* -D *", "* -X *", "* -N *") OR Image IN ("*\\plink.exe", "*\\pscp.exe", "*\\ncat.exe", "*\\nc.exe", "*\\socat.exe", "*\\iodine.exe") Image IN ("*\\Users\\*", "*\\AppData\\*", "*\\Temp\\*", "*\\Public\\*", "*\\PerfLogs\\*") CommandLine="* -pw *" NOT (Image IN ("*\\Program Files\\*", "*\\Program Files (x86)\\*") OR CommandLine IN ("*127.0.0.1*", "*localhost*") OR username="NT AUTHORITY\\SYSTEM" OR ParentImage="*\\services.exe")
+conversion_failed

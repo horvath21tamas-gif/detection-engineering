@@ -1,60 +1,79 @@
-title: Ultra-Pro High-Fidelity System Owner/User Discovery (T1033)
+title: System Owner/User Discovery (T1033)
 id: 10a60959-1c3a-40e8-820b-43de06c423d5
 status: stable
-description: |
-    Detects systematic discovery of the current user, logged-on users, and token privileges. 
-    Focuses on anomalous process lineages (Office, Browsers) and specific switch 
-    combinations (/priv, /groups) used before privilege escalation attempts.
+description: >
+  Detects systematic discovery of the current user, logged-on users, and token
+  privileges. Targets anomalous process lineages (Office apps, browsers) and
+  suspicious command-line patterns (/priv, /groups, /all) often used prior
+  to privilege escalation attempts. Filters out legitimate system automation
+  and enterprise management noise.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-23
 tags:
-    - attack.discovery
-    - attack.t1033
+  - attack.discovery
+  - attack.t1033
+  - attack.execution
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\whoami.exe'
-            - '\quser.exe'
-            - '\qwinsta.exe'
-        - CommandLine|contains:
-            - 'net user '
-            - 'net localgroup '
-            - '$env:username'
+  selection_tools:
+    Image|endswith:
+      - '\whoami.exe'
+      - '\quser.exe'
+      - '\qwinsta.exe'
+    CommandLine|contains:
+      - 'net user '
+      - 'net localgroup '
+      - '$env:username'
 
-    selection_patterns:
-        CommandLine|contains:
-            - ' /priv'             
-            - ' /groups'
-            - ' /all'
-            - ' /fo csv'            
+  selection_patterns:
+    CommandLine|contains:
+      - ' /priv'
+      - ' /groups'
+      - ' /all'
+      - ' /fo csv'
 
-    selection_suspicious_lineage:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\httpd.exe'           
-            - '\wsmprovhost.exe'     
-        IntegrityLevel: 'Medium'     
+  selection_suspicious_lineage:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\httpd.exe'
+      - '\wsmprovhost.exe'
+    IntegrityLevel: 'Medium'
 
-    selection_automation:
-        CommandLine|contains:
-            - ' > '
-            - 'findstr'
-            - 'select-string'
+  selection_automation:
+    CommandLine|contains:
+      - ' > '
+      - 'findstr'
+      - 'select-string'
 
-    filter_legit_noise:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith:
-            - '\svchost.exe'
-            - '\msiexec.exe'        
-            - '\CcmExec.exe'         
-        - CommandLine|contains:
-            - 'Program Files'        
-            - 'AppData\Local\Temp' 
+  filter_legit_noise:
+    - User:
+        - 'NT AUTHORITY\SYSTEM'
+        - 'NT AUTHORITY\LOCAL SERVICE'
+        - 'NT AUTHORITY\NETWORK SERVICE'
+    - ParentImage|endswith:
+        - '\svchost.exe'
+        - '\msiexec.exe'
+        - '\CcmExec.exe'
+    - CommandLine|contains:
+        - 'Program Files'
+        - 'AppData\Local\Temp'
 
-    condition: selection_tools and (selection_patterns or selection_suspicious_lineage or selection_automation) and not filter_legit_noise
+  condition: >
+    selection_tools
+    and (selection_patterns or selection_suspicious_lineage or selection_automation)
+    and not filter_legit_noise
+
+falsepositives:
+  - Scheduled scripts or maintenance tasks using whoami / net commands
+  - Enterprise management or SCCM/MECM automated processes
+  - Security testing or red team simulations
+  - Admin activities performed by standard user context processes
+
 level: high

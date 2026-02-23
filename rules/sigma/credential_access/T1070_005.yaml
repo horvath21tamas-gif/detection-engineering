@@ -1,54 +1,72 @@
-title: Ultra-Pro High-Fidelity Network Share and Credential Removal (T1070.005)
+title: Network Share and Credential Cleanup (ATT&CK T1070.005)
 id: 889b8be9-9bf6-4a6a-9cb8-397ed550cace
 status: stable
-description: |
-    Detects systematic removal of network shares and stored credentials using wildcard 
-    deletion and force flags. Distinguishes between manual user activity and 
-    automated anti-forensic cleanup post-lateral movement.
+description: >
+  Detects bulk removal of mapped network shares and stored credentials using
+  wildcard deletion, force flags, or scripted credential wiping utilities.
+  Designed to distinguish automated anti-forensic cleanup after lateral
+  movement from routine administrative activity.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1070/005/
 tags:
-    - attack.defense_evasion
-    - attack.t1070.005
+  - attack.defense-evasion
+  - attack.t1070.005
+  - attack.lateral-movement
+
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_net_share_bulk:
-        - Image|endswith:
-            - '\net.exe'
-            - '\net1.exe'
-          CommandLine|contains|all:
-            - 'use'
-            - '/delete'
-          CommandLine|contains:
-            - '*'        
-            - ' /y'       
-            - ' /yes'
+  selection_net_share_bulk:
+    Image|endswith:
+      - '\net.exe'
+      - '\net1.exe'
+    CommandLine|contains:
+      - 'use'
+      - '/delete'
+    CommandLine|contains:
+      - '*'
+      - ' /y'
+      - ' /yes'
 
-    selection_cred_wipe:
-        - Image|endswith: '\cmdkey.exe'
-          CommandLine|contains: ' /delete'
-        - Image|endswith: '\vaultcmd.exe' 
-          CommandLine|contains: ' /delete'
+  selection_credential_tools:
+    - Image|endswith: '\cmdkey.exe'
+      CommandLine|contains: ' /delete'
+    - Image|endswith: '\vaultcmd.exe'
+      CommandLine|contains: ' /delete'
 
-    selection_suspicious_origin:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\w3wp.exe'      
-            - '\powershell.exe'  
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\powerpnt.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\outlook.exe'
+      - '\w3wp.exe'
+      - '\powershell.exe'
+      - '\cmd.exe'
 
-    filter_trusted_automation:
-        - username: 'NT AUTHORITY\SYSTEM'
-          ParentImage|endswith: '\services.exe'
-        - CommandLine|contains:
-            - 'logon.bat'      
-            - 'netlogon'
-            - 'policy'        
-        - ParentImage|endswith: '\explorer.exe' 
+  filter_legitimate_automation:
+    - User|startswith: 'NT AUTHORITY\'
+      ParentImage|endswith: '\services.exe'
+    - ParentImage|endswith: '\explorer.exe'
+    - CommandLine|contains:
+        - 'logon.bat'
+        - 'netlogon'
+        - 'gpo'
+        - 'group policy'
 
-    condition: (selection_net_share_bulk or selection_cred_wipe) and (selection_suspicious_origin or not filter_trusted_automation)
+  condition: (selection_net_share_bulk or selection_credential_tools)
+             and (selection_suspicious_parent or not filter_legitimate_automation)
+
+falsepositives:
+  - Enterprise login/logoff scripts removing mapped drives
+  - IT automation or configuration management tools
+  - VDI environment session cleanup
+
 level: high

@@ -38,16 +38,16 @@
 - [Ultra-Pro High-Fidelity Terminal Services Configuration Discovery (T1016.002)](#ultra-pro-high-fidelity-terminal-services-configuration-discovery-(t1016002))
 - [Ultra-Pro High-Fidelity Remote System Discovery (T1018)](#ultra-pro-high-fidelity-remote-system-discovery-(t1018))
 - [Ultra-Pro High-Fidelity Automatisierte Exfiltration (T1020)](#ultra-pro-high-fidelity-automatisierte-exfiltration-(t1020))
-- [Ultra-Pro High-Fidelity Client-Linked Cloud Exfil (T1020.001)](#ultra-pro-high-fidelity-client-linked-cloud-exfil-(t1020001))
+- [Client-Linked Cloud Exfil (T1020.001)](#client-linked-cloud-exfil-(t1020001))
 - [Schnelle Anmeldungen desselben Benutzers an mehreren entfernten Hosts](#schnelle-anmeldungen-desselben-benutzers-an-mehreren-entfernten-hosts)
 - [Verdächtige RDP-Anmeldung aus ungewöhnlicher Quelle](#verdächtige-rdp-anmeldung-aus-ungewöhnlicher-quelle)
-- [Ultra-Pro High-Fidelity-KMU-Admin-Freigabezuordnung (T1021.002)](#ultra-pro-high-fidelity-kmu-admin-freigabezuordnung-(t1021002))
-- [Ultra-Pro High-Fidelity DCOM Remote Execution (T1021.003)](#ultra-pro-high-fidelity-dcom-remote-execution-(t1021003))
-- [Ultra-Pro High-Fidelity SSH Lateral Movement & Tunneling (T1021.004)](#ultra-pro-high-fidelity-ssh-lateral-movement-&-tunneling-(t1021004))
-- [Ultra-Pro High-Fidelity VNC Lateral Movement & Hijacking (T1021.005)](#ultra-pro-high-fidelity-vnc-lateral-movement-&-hijacking-(t1021005))
-- [Ultra-Pro High-Fidelity WinRM Remote Execution (T1021.006)](#ultra-pro-high-fidelity-winrm-remote-execution-(t1021006))
-- [Ultra-Pro High-Fidelity Cloud Control Plane Hijacking (T1021.007)](#ultra-pro-high-fidelity-cloud-control-plane-hijacking-(t1021007))
-- [Ultra-Pro High-Fidelity macOS ARD Remote Hijacking (T1021.008)](#ultra-pro-high-fidelity-macos-ard-remote-hijacking-(t1021008))
+- [SMB-Admin-Freigabezuordnung (T1021.002)](#smb-admin-freigabezuordnung-(t1021002))
+- [DCOM-Remoteausführung (T1021.003)](#dcom-remoteausführung-(t1021003))
+- [SSH-Lateralbewegung und Tunnelbau (T1021.004)](#ssh-lateralbewegung-und-tunnelbau-(t1021004))
+- [VNC-Lateralbewegung und Entführung (T1021.005)](#vnc-lateralbewegung-und-entführung-(t1021005))
+- [WinRM-Remoteausführung (T1021.006)](#winrm-remoteausführung-(t1021006))
+- [Entführung der Cloud-Kontrollebene (T1021.007)](#entführung-der-cloud-kontrollebene-(t1021007))
+- [macOS ARD Remote Hijacking (T1021.008)](#macos-ard-remote-hijacking-(t1021008))
 - [Datendiebstahl auf Wechselmedien (T1025)](#datendiebstahl-auf-wechselmedien-(t1025))
 - [Verdächtiger Base64-codierter PowerShell-Befehl mit Netzwerkaktivität](#verdächtiger-base64-codierter-powershell-befehl-mit-netzwerkaktivität)
 - [Binäre Auffüllaktivität (T1027.001)](#binäre-auffüllaktivität-(t1027001))
@@ -1117,7 +1117,7 @@ nicht standardmäßige Tools oder Cloud-Sync-Binärdateien von verdächtigen Spe
 
 
 ---
-## Ultra-Pro High-Fidelity Client-Linked Cloud Exfil (T1020.001)
+## Client-Linked Cloud Exfil (T1020.001)
 - **ID:** `T1020_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -1125,8 +1125,8 @@ nicht standardmäßige Tools oder Cloud-Sync-Binärdateien von verdächtigen Spe
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt Datenexfiltration durch Identifizierung offizieller Cloud-Speicher-Clients
-(OneDrive, Dropbox usw.) werden über die Befehlszeile zur Synchronisierung manipuliert
-nicht standardmäßige Staging-Verzeichnisse oder die Ausführung mit Argumenten mit hoher Entropie/Skripten.
+(OneDrive, Dropbox, Google Drive, Box) über die Befehlszeile manipuliert werden
+um nicht standardmäßige Staging-Verzeichnisse zu synchronisieren oder mit Argumenten mit hoher Entropie/Skripten auszuführen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -1363,7 +1363,7 @@ verdächtige Prozesslinien und filtert gleichzeitig Standardaktivitäten des Bet
 - **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt die Extraktion bösartiger Payloads aus Bilddateien mithilfe von Low-Level-GDI+- oder .NET-Bitmap-Methoden.Konzentriert sich auf Invoke-PSImage oder ähnliche Steganographie-Frameworks und filtert gleichzeitig legitime Bildbearbeitungssoftware und Systemprozesse.
+- **Beschreibung:** Erkennt die Extraktion bösartiger Payloads aus Bilddateien mit Low-Level-GDI+- oder .NET-Bitmap-Methoden.Konzentriert sich auf Invoke-PSImage oder ähnliche Steganographie-Frameworks und filtert gleichzeitig legitime Bildbearbeitungssoftware und Systemprozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

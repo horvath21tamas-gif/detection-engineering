@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-23 13:24:17`
+**Utolsó frissítés:** `2026-02-23 13:55:41`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -43,16 +43,16 @@
 | T1016.002 | HIGH | Ultra-Pro High-Fidelity Terminal Services Configuration Discovery (T1016.002) |
 | T1018 | HIGH | Ultra-Pro High-Fidelity Remote System Discovery (T1018) |
 | T1020 | CRITICAL | Ultra-Pro High-Fidelity Automated Exfiltration (T1020) |
-| T1020.001 | CRITICAL | Ultra-Pro High-Fidelity Client-Linked Cloud Exfil (T1020.001) |
+| T1020.001 | CRITICAL | Client-Linked Cloud Exfil (T1020.001) |
 | T1021 | HIGH | Rapid Logons to Multiple Distant Hosts by Same User, Suspicious Service Creation via Remote Administration Tools Outside Approved Management Scope |
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |
-| T1021.002 | CRITICAL | Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002), Admin Share Data Exfiltration (T1602.001) |
-| T1021.003 | CRITICAL | Ultra-Pro High-Fidelity DCOM Remote Execution (T1021.003) |
-| T1021.004 | CRITICAL | Ultra-Pro High-Fidelity SSH Lateral Movement & Tunneling (T1021.004) |
-| T1021.005 | CRITICAL | Ultra-Pro High-Fidelity VNC Lateral Movement & Hijacking (T1021.005) |
-| T1021.006 | CRITICAL | Ultra-Pro High-Fidelity WinRM Remote Execution (T1021.006) |
-| T1021.007 | CRITICAL | Ultra-Pro High-Fidelity Cloud Control Plane Hijacking (T1021.007) |
-| T1021.008 | CRITICAL | Ultra-Pro High-Fidelity macOS ARD Remote Hijacking (T1021.008) |
+| T1021.002 | CRITICAL | SMB Admin Share Mapping (T1021.002), Admin Share Data Exfiltration (T1602.001) |
+| T1021.003 | CRITICAL | DCOM Remote Execution (T1021.003) |
+| T1021.004 | CRITICAL | SSH Lateral Movement & Tunneling (T1021.004) |
+| T1021.005 | CRITICAL | VNC Lateral Movement & Hijacking (T1021.005) |
+| T1021.006 | CRITICAL | WinRM Remote Execution (T1021.006) |
+| T1021.007 | CRITICAL | Cloud Control Plane Hijacking (T1021.007) |
+| T1021.008 | CRITICAL | macOS ARD Remote Hijacking (T1021.008) |
 | T1025 | CRITICAL | Removable Media Data Theft (T1025) |
 | T1027 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Encoded PowerShell Command Execution |
 | T1027.001 | HIGH | Binary Padding Activity (T1027.001) |

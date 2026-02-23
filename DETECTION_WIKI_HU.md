@@ -38,16 +38,16 @@
 - [Ultra-Pro High-Fidelity terminálszolgáltatások konfigurációs felderítése (T1016.002)](#ultra-pro-high-fidelity-terminálszolgáltatások-konfigurációs-felderítése-(t1016002))
 - [Ultra-Pro High-Fidelity Remote System Discovery (T1018)](#ultra-pro-high-fidelity-remote-system-discovery-(t1018))
 - [Ultra-Pro High-Fidelity automatizált szűrés (T1020)](#ultra-pro-high-fidelity-automatizált-szűrés-(t1020))
-- [Ultra-Pro High-Fidelity Client-Linked Cloud Exfil (T1020.001)](#ultra-pro-high-fidelity-client-linked-cloud-exfil-(t1020001))
+- [Client-Linked Cloud Exfil (T1020.001)](#client-linked-cloud-exfil-(t1020001))
 - [Gyors bejelentkezés több távoli gépre ugyanazon felhasználó által](#gyors-bejelentkezés-több-távoli-gépre-ugyanazon-felhasználó-által)
 - [Gyanús RDP bejelentkezés szokatlan forrásból](#gyanús-rdp-bejelentkezés-szokatlan-forrásból)
-- [Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002)](#ultra-pro-high-fidelity-smb-admin-share-mapping-(t1021002))
-- [Ultra-Pro High-Fidelity DCOM távoli végrehajtás (T1021.003)](#ultra-pro-high-fidelity-dcom-távoli-végrehajtás-(t1021003))
-- [Ultra-Pro High-Fidelity SSH Lateral Movement & Tunneling (T1021.004)](#ultra-pro-high-fidelity-ssh-lateral-movement-&-tunneling-(t1021004))
-- [Ultra-Pro High-Fidelity VNC oldalirányú mozgás és eltérítés (T1021.005)](#ultra-pro-high-fidelity-vnc-oldalirányú-mozgás-és-eltérítés-(t1021005))
-- [Ultra-Pro High-Fidelity WinRM távoli végrehajtás (T1021.006)](#ultra-pro-high-fidelity-winrm-távoli-végrehajtás-(t1021006))
-- [Ultra-Pro High-Fidelity felhővezérlő sík eltérítés (T1021.007)](#ultra-pro-high-fidelity-felhővezérlő-sík-eltérítés-(t1021007))
-- [Ultra-Pro High-Fidelity macOS ARD távoli eltérítés (T1021.008)](#ultra-pro-high-fidelity-macos-ard-távoli-eltérítés-(t1021008))
+- [SMB Admin Share Mapping (T1021.002)](#smb-admin-share-mapping-(t1021002))
+- [DCOM távoli végrehajtás (T1021.003)](#dcom-távoli-végrehajtás-(t1021003))
+- [SSH Lateral Movement & Tunneling (T1021.004)](#ssh-lateral-movement-&-tunneling-(t1021004))
+- [VNC oldalirányú mozgás és eltérítés (T1021.005)](#vnc-oldalirányú-mozgás-és-eltérítés-(t1021005))
+- [WinRM távoli végrehajtás (T1021.006)](#winrm-távoli-végrehajtás-(t1021006))
+- [Felhővezérlő sík eltérítése (T1021.007)](#felhővezérlő-sík-eltérítése-(t1021007))
+- [macOS ARD távoli eltérítés (T1021.008)](#macos-ard-távoli-eltérítés-(t1021008))
 - [Cserélhető adathordozó adatlopás (T1025)](#cserélhető-adathordozó-adatlopás-(t1025))
 - [Gyanús Base64 kódolású PowerShell-parancs hálózati tevékenységgel](#gyanús-base64-kódolású-powershell-parancs-hálózati-tevékenységgel)
 - [Bináris kitöltési tevékenység (T1027.001)](#bináris-kitöltési-tevékenység-(t1027001))
@@ -1117,7 +1117,7 @@ nem szabványos eszközök vagy felhőszinkronizáló binárisok gyanús helyekr
 
 
 ---
-## Ultra-Pro High-Fidelity Client-Linked Cloud Exfil (T1020.001)
+## Client-Linked Cloud Exfil (T1020.001)
 - **ID:** `T1020_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -1125,8 +1125,8 @@ nem szabványos eszközök vagy felhőszinkronizáló binárisok gyanús helyekr
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Az adatok kiszűrését észleli a hivatalos felhőalapú tárolási ügyfelek azonosításával
-(OneDrive, Dropbox stb.) a szinkronizáláshoz parancssoron keresztül manipulálható
-nem szabványos állomásozó könyvtárak vagy nagy entrópiájú/script argumentumokkal futnak.
+(OneDrive, Dropbox, Google Drive, Box) a parancssoron keresztül manipulálható
+a nem szabványos állomásoztatási könyvtárak szinkronizálásához vagy a nagy entrópiájú/script argumentumokkal való futtatáshoz.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1255,8 +1255,8 @@ a WinRM gazdafolyamatból származó üreges kísérletek.
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Felhő-műszerfalakon keresztül korrelálással észleli az illetéktelen oldalirányú mozgást
-magas kockázatú műveletek rendellenes felhasználói ügynökökkel, szokatlan forrás IP-címekkel és
-MFA-elkerülés vagy automatizált munkamenet-eltérítés jelei.
+nagy kockázatú műveletek rendellenes felhasználói ügynökökkel, szokatlan forrás IP-címekkel és
+az MFA-elkerülés vagy az automatizált munkamenet-eltérítés jelei.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -1335,7 +1335,7 @@ gyanús folyamatvonalakat, miközben kiszűri a szabványos operációs rendszer
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a bináris csomagolók (UPX, MPRESS, ASPack stb.) használatát nem szabványos vagy gyanús környezetben.A nagy tömörítésű és elhomályosító parancssori mintákra, valamint a gyanús szülőfolyamatokra összpontosít, miközben szűri a jogszerű fejlesztéseket és a CI/CD munkafolyamatokat.
+- **Leírás:** Érzékeli a bináris csomagolók (UPX, MPRESS, ASPack stb.) használatát nem szabványos vagy gyanús környezetben.A nagy tömörítési és elfedési parancssori mintákra, valamint a gyanús szülőfolyamatokra összpontosít, miközben szűri a jogszerű fejlesztéseket és a CI/CD munkafolyamatokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1409,7 +1409,7 @@ gyanús folyamatvonalakat, miközben kiszűri a szabványos operációs rendszer
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a hibakeresési szimbólumok és a szakaszfejlécek aktív eltávolítását a binárisokból nem build rendszereken, a fejlesztői vagy CI/CD környezeteken kívüli eltávolító eszközök végrehajtására összpontosítva.Optimalizált, hogy csökkentse az engedélyezett építési folyamatokból és fejlesztői rendszerekből származó hamis pozitív eredményeket.
+- **Leírás:** Érzékeli a hibakeresési szimbólumok és a szakaszfejlécek aktív eltávolítását a binárisokból nem build rendszereken, a fejlesztői vagy CI/CD környezeteken kívüli eltávolító eszközök végrehajtására összpontosítva.Optimalizált, hogy csökkentse az engedélyezett építési folyamatokból és fejlesztőrendszerekből származó hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1457,7 +1457,7 @@ gyanús folyamatvonalakat, miközben kiszűri a szabványos operációs rendszer
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a fejlett parancssori homályosítási technikákat, beleértve a túlzott escape karaktereket, a környezeti változók szeletelését, a PowerShell karakterlánc-rekonstrukciót és a kódolt parancsokat.A statikus észlelési szűrők megkerülésére optimalizálva, miközben szűri a törvényes telepítőket és a megbízható rendszerkarbantartó eszközöket.
+- **Leírás:** Érzékeli a fejlett parancssori homályosítási technikákat, beleértve a túlzott escape-karaktereket, a környezeti változók szeletelését, a PowerShell-karakterlánc-rekonstrukciót és a kódolt parancsokat.A statikus észlelési szűrők megkerülésére optimalizálva, miközben szűri a törvényes telepítőket és a megbízható rendszerkarbantartó eszközöket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

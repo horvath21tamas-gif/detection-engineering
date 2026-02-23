@@ -38,16 +38,16 @@
 - [Ultra-Pro High-Fidelity Terminal Services Configuration Discovery (T1016.002)](#ultra-pro-high-fidelity-terminal-services-configuration-discovery-(t1016002))
 - [Ultra-Pro High-Fidelity Remote System Discovery (T1018)](#ultra-pro-high-fidelity-remote-system-discovery-(t1018))
 - [Ultra-Pro High-Fidelity Automated Exfiltration (T1020)](#ultra-pro-high-fidelity-automated-exfiltration-(t1020))
-- [Ultra-Pro High-Fidelity Client-Linked Cloud Exfil (T1020.001)](#ultra-pro-high-fidelity-client-linked-cloud-exfil-(t1020001))
+- [Client-Linked Cloud Exfil (T1020.001)](#client-linked-cloud-exfil-(t1020001))
 - [Rapid Logons to Multiple Distant Hosts by Same User](#rapid-logons-to-multiple-distant-hosts-by-same-user)
 - [Suspicious RDP Logon from Unusual Source](#suspicious-rdp-logon-from-unusual-source)
-- [Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002)](#ultra-pro-high-fidelity-smb-admin-share-mapping-(t1021002))
-- [Ultra-Pro High-Fidelity DCOM Remote Execution (T1021.003)](#ultra-pro-high-fidelity-dcom-remote-execution-(t1021003))
-- [Ultra-Pro High-Fidelity SSH Lateral Movement & Tunneling (T1021.004)](#ultra-pro-high-fidelity-ssh-lateral-movement-&-tunneling-(t1021004))
-- [Ultra-Pro High-Fidelity VNC Lateral Movement & Hijacking (T1021.005)](#ultra-pro-high-fidelity-vnc-lateral-movement-&-hijacking-(t1021005))
-- [Ultra-Pro High-Fidelity WinRM Remote Execution (T1021.006)](#ultra-pro-high-fidelity-winrm-remote-execution-(t1021006))
-- [Ultra-Pro High-Fidelity Cloud Control Plane Hijacking (T1021.007)](#ultra-pro-high-fidelity-cloud-control-plane-hijacking-(t1021007))
-- [Ultra-Pro High-Fidelity macOS ARD Remote Hijacking (T1021.008)](#ultra-pro-high-fidelity-macos-ard-remote-hijacking-(t1021008))
+- [SMB Admin Share Mapping (T1021.002)](#smb-admin-share-mapping-(t1021002))
+- [DCOM Remote Execution (T1021.003)](#dcom-remote-execution-(t1021003))
+- [SSH Lateral Movement & Tunneling (T1021.004)](#ssh-lateral-movement-&-tunneling-(t1021004))
+- [VNC Lateral Movement & Hijacking (T1021.005)](#vnc-lateral-movement-&-hijacking-(t1021005))
+- [WinRM Remote Execution (T1021.006)](#winrm-remote-execution-(t1021006))
+- [Cloud Control Plane Hijacking (T1021.007)](#cloud-control-plane-hijacking-(t1021007))
+- [macOS ARD Remote Hijacking (T1021.008)](#macos-ard-remote-hijacking-(t1021008))
 - [Removable Media Data Theft (T1025)](#removable-media-data-theft-(t1025))
 - [Suspicious Base64-Encoded PowerShell Command with Network Activity](#suspicious-base64-encoded-powershell-command-with-network-activity)
 - [Binary Padding Activity (T1027.001)](#binary-padding-activity-(t1027001))
@@ -1144,7 +1144,7 @@ non-standard tools or cloud-sync binaries from suspicious locations.
 
 
 ---
-## Ultra-Pro High-Fidelity Client-Linked Cloud Exfil (T1020.001)
+## Client-Linked Cloud Exfil (T1020.001)
 - **ID:** `T1020_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -1152,8 +1152,8 @@ non-standard tools or cloud-sync binaries from suspicious locations.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects data exfiltration by identifying official cloud storage clients 
-(OneDrive, Dropbox, etc.) being manipulated via command-line to sync 
-non-standard staging directories or running with high-entropy/scripted arguments.
+(OneDrive, Dropbox, Google Drive, Box) being manipulated via command-line 
+to sync non-standard staging directories or running with high-entropy/scripted arguments.
 
 
 #### 🚨 Response Playbook

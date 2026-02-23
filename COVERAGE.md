@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-23 09:50:46`
+**Utolsó frissítés:** `2026-02-23 10:11:57`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -134,10 +134,10 @@
 | T1059.008 | CRITICAL | High-Fidelity Network Device CLI Manipulation |
 | T1059.009 | CRITICAL | High-Fidelity Cloud Shell Exploitation and Data Exfiltration |
 | T1068 | HIGH | Suspicious SYSTEM Process Spawned from User Context |
-| T1069 | HIGH | Ultra-Pro High-Fidelity Permission Groups Discovery (T1069) |
-| T1069.001 | HIGH | Ultra-Pro High-Fidelity Local Group Discovery (T1069.001) |
-| T1069.002 | HIGH | Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002) |
-| T1069.003 | HIGH | Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003) |
+| T1069 | HIGH | Permission Groups Discovery (ATT&CK T1069) |
+| T1069.001 | HIGH | Local Group Discovery (ATT&CK T1069.001) |
+| T1069.002 | HIGH | Domain Group Discovery (ATT&CK T1069.002) |
+| T1069.003 | HIGH | Cloud Groups Discovery (ATT&CK T1069.003) |
 | T1070 | CRITICAL | Indicator Removal on Host (ATT&CK T1070), Command History Logging Impairment, Indicator Blocking and Telemetry Suppression |
 | T1070.001 | HIGH | Indicator Removal on Host (ATT&CK T1070), Security Event Log Cleared Using wevtutil.exe |
 | T1070.002 | HIGH | Linux Log Clearing and Journal Sabotage (ATT&CK T1070.002) |

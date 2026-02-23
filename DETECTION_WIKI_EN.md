@@ -2513,16 +2513,14 @@ within non-standard execution contexts (e.g., PowerShell, Rundll32).
 
 
 ---
-## Ultra-Pro High-Fidelity GUI Input Capture (T1056.002)
+## GUI Input Capture (ATT&CK T1056.002)
 - **ID:** `T1056_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects attempts to capture credentials through deceptive GUI prompts or overlays. 
-Focuses on PowerShell/C# snippets creating modal dialogs from suspicious parent 
-processes (browsers, office apps) and unbacked scripts.
+- **Leírás:** Detects attempts to capture credentials through deceptive GUI prompts or overlays. Focuses on PowerShell/C# snippets creating modal dialogs from suspicious parent processes (browsers, office apps) and unbacked scripts.
 
 
 #### 🚨 Response Playbook

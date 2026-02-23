@@ -2410,16 +2410,14 @@ nem szabványos végrehajtási környezetekben (pl. PowerShell, Rundll32).
 
 
 ---
-## Ultra-Pro High-Fidelity GUI bemenet rögzítése (T1056.002)
+## GUI bemenet rögzítése (ATT&CK T1056.002)
 - **ID:** `T1056_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a hitelesítő adatok megtévesztő grafikus felhasználói felületen vagy átfedéseken keresztüli rögzítésére irányuló kísérleteket.
-A gyanús szülőből modális párbeszédpaneleket létrehozó PowerShell/C# kódrészletekre összpontosít
-folyamatok (böngészők, irodai alkalmazások) és nem támogatott szkriptek.
+- **Leírás:** Érzékeli a hitelesítő adatok megtévesztő grafikus felhasználói felületen vagy átfedéseken keresztüli rögzítésére irányuló kísérleteket.A PowerShell/C# kódrészletekre összpontosít, amelyek modális párbeszédpaneleket hoznak létre gyanús szülőfolyamatokból (böngészők, irodai alkalmazások) és nem támogatott szkriptekből.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

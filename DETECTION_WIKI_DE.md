@@ -2410,16 +2410,14 @@ innerhalb nicht standardmäßiger Ausführungskontexte (z. B. PowerShell, Rundll
 
 
 ---
-## Ultra-Pro High-Fidelity-GUI-Eingabeerfassung (T1056.002)
+## GUI-Eingabeerfassung (ATT&CK T1056.002)
 - **ID:** `T1056_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Versuche, Anmeldeinformationen durch irreführende GUI-Eingabeaufforderungen oder Overlays zu erfassen.
-Konzentriert sich auf PowerShell/C#-Snippets, die modale Dialoge aus verdächtigen übergeordneten Elementen erstellen
-Prozesse (Browser, Office-Apps) und nicht gesicherte Skripte.
+- **Beschreibung:** Erkennt Versuche, Anmeldeinformationen durch irreführende GUI-Eingabeaufforderungen oder Overlays zu erfassen.Konzentriert sich auf PowerShell/C#-Snippets, die modale Dialoge aus verdächtigen übergeordneten Prozessen (Browser, Office-Apps) und nicht gesicherten Skripten erstellen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

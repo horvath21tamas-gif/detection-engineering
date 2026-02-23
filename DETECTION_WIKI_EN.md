@@ -3865,16 +3865,16 @@ process lineages from untrusted locations.
 
 
 ---
-## Ultra-Pro High-Fidelity Credential Export & Cracking (T1110.002)
+## Credential Export & Cracking (T1110.002)
 - **ID:** `T1110_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects attempts to extract credential databases (SAM, SYSTEM, NTDS.dit) for offline 
-cracking and identifies the execution of password recovery tools with high precision 
-by filtering out legitimate backup and system maintenance processes.
+- **Leírás:** Detects attempts to extract credential databases (SAM, SYSTEM, NTDS.dit) for offline cracking
+and identifies the execution of password recovery tools with high precision by filtering out
+legitimate backup and system maintenance processes.
 
 
 #### 🚨 Response Playbook

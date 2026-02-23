@@ -3687,16 +3687,16 @@ feldolgozza a nem megbízható helyekről származó vonalakat.
 
 
 ---
-## Ultra-Pro High-Fidelity hitelesítő adatok exportálása és feltörése (T1110.002)
+## Hitelesítési adatok exportálása és feltörése (T1110.002)
 - **ID:** `T1110_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a hitelesítőadat-adatbázisok (SAM, SYSTEM, NTDS.dit) offline kibontására tett kísérleteket
-feltörni, és nagy pontossággal azonosítja a jelszó-helyreállító eszközök végrehajtását
-a jogszerű biztonsági mentési és rendszerkarbantartási folyamatok kiszűrésével.
+- **Leírás:** Érzékeli a hitelesítőadat-adatbázisok (SAM, SYSTEM, NTDS.dit) kibontására tett kísérleteket offline feltöréshez
+és kiszűréssel nagy pontossággal azonosítja a jelszó-helyreállító eszközök végrehajtását
+törvényes biztonsági mentési és rendszerkarbantartási folyamatok.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -3940,10 +3940,10 @@ Szűri a legitim kommunikációs alkalmazásokat a téves pozitívumok csökkent
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 - **Leírás:** Érzékeli a célzott rendszeridő- és időzóna-felderítési technikákat.
 A következőkre összpontosít:
-- Gyanús folyamatvonalak (irodai alkalmazások, webszerverek, szkriptgazdagok)
+- Gyanús folyamatvonalak (irodai alkalmazások, webszerverek, parancsfájl-gazdagépek)
 - A homokozók elkerülésére vagy a geokerítésre általánosan használt automatizálási minták
 - Az időszámláláshoz használt CLI-eszközök és PowerShell/.NET API-k
-Nem tartalmazza az ismert rendszereket, felügyeletet és jóindulatú automatizálást a hamis pozitívumok csökkentésére.
+Nem tartalmazza az ismert rendszert, felügyeletet és jóindulatú automatizálást a hamis pozitívumok csökkentésére.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -3995,11 +3995,11 @@ A fájl nélküli vagy oldalsó C2-végrehajtási kísérletek nagy pontosságú
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli a rosszindulatú MSBuild.exe proxy végrehajtását a következő megfigyeléssel:
+- **Leírás:** Érzékeli a rosszindulatú MSBuild.exe proxy végrehajtását a következő megfigyeléssel:
 - Rendellenes szülői folyamatok (irodai alkalmazások, böngészők, szkriptek)
 - Gyanús parancssori argumentumok (inline XML feladatok, távoli elérési utak)
 - Nem tartalmazza a szabványos fejlesztői és CI/CD környezeteket (Visual Studio, Jenkins, Build Agents)
-Segít észlelni a fájl nélküli vagy C2 hasznos terhek telepítését az MSBuild segítségével anélkül, hogy a szabványos fejlesztői eszköz riasztásait kiváltaná.
+Segít észlelni a fájl nélküli vagy C2 hasznos terhelések telepítését az MSBuild segítségével anélkül, hogy a szabványos fejlesztői eszköz riasztásait kiváltaná.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

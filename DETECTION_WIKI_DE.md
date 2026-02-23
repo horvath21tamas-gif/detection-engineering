@@ -3687,16 +3687,16 @@ Prozessabstammungen von nicht vertrauenswürdigen Standorten.
 
 
 ---
-## Ultra-Pro High-Fidelity-Zugangsdatenexport und -knacken (T1110.002)
+## Exportieren und Knacken von Anmeldeinformationen (T1110.002)
 - **ID:** `T1110_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Versuche, Anmeldeinformationsdatenbanken (SAM, SYSTEM, NTDS.dit) offline zu extrahieren
-Cracking und identifiziert die Ausführung von Passwort-Wiederherstellungstools mit hoher Präzision
-durch Herausfiltern legitimer Backup- und Systemwartungsprozesse.
+- **Beschreibung:** Erkennt Versuche, Anmeldeinformationsdatenbanken (SAM, SYSTEM, NTDS.dit) für Offline-Cracking zu extrahieren
+und identifiziert die Ausführung von Passwort-Wiederherstellungstools mit hoher Präzision durch Herausfiltern
+legitime Backup- und Systemwartungsprozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

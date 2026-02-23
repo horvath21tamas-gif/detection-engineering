@@ -2781,16 +2781,14 @@ Staubsaugen von Systemd-Journalen außerhalb automatisierter Wartungsfenster.
 
 
 ---
-## Ultra-Pro High-Fidelity-Mailbox-Datenlöschung und Regelsabotage (T1070.003)
+## Postfachdatenlöschung und Regelmanipulation (ATT&CK T1070.003)
 - **ID:** `T1070_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt das systematische Entfernen von Postfachdaten und die Erstellung schädlicher Posteingangsregeln.
-Der Schwerpunkt liegt auf Massenlösch-Cmdlets und automatisierten Regelsätzen zur Unterdrückung
-Sicherheitsbenachrichtigungen oder die Angreiferkommunikation verbergen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt das systematische Entfernen von Postfachdaten und die Erstellung schädlicher Posteingangsregeln.Der Schwerpunkt liegt auf Massenlösch-Cmdlets und automatisierten Regelsätzen, die darauf ausgelegt sind, Sicherheitsbenachrichtigungen zu unterdrücken oder die Kommunikation von Angreifern zu verbergen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -2799,16 +2797,14 @@ Sicherheitsbenachrichtigungen oder die Angreiferkommunikation verbergen.
 
 
 ---
-## Ultra-Pro High-Fidelity forensische Artefakt- und Dateilöschung (T1070.004)
+## Forensische Artefakt- und Dateilöschung (ATT&CK T1070.004)
 - **ID:** `T1070_004.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CIPHER.EXE](https://lolbas-project.github.io/lolbas/), [FSUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die gezielte Zerstörung hochwertiger forensischer Artefakte (USN Journal, Prefetch, Amcache)
-und die Verwendung von Secure Wipe-Dienstprogrammen.Konzentriert sich auf nicht standardmäßige Prozessursprünge und
-Umgehungstechniken, die eingesetzt werden, um eine Wiederherstellung nach einem Vorfall zu verhindern.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CIPHER.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FSUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die gezielte Zerstörung hochwertiger forensischer Artefakte (USN Journal, Prefetch, Amcache) und die Verwendung sicherer Löschprogramme.Konzentriert sich auf nicht standardmäßige Prozessursprünge und Umgehungstechniken, die darauf abzielen, eine Wiederherstellung nach einem Vorfall zu verhindern.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -2817,16 +2813,14 @@ Umgehungstechniken, die eingesetzt werden, um eine Wiederherstellung nach einem 
 
 
 ---
-## Ultra-Pro High-Fidelity-Netzwerkfreigabe und Entfernung von Anmeldeinformationen (T1070.005)
+## Bereinigung von Netzwerkfreigaben und Anmeldeinformationen (ATT&CK T1070.005)
 - **ID:** `T1070_005.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CMDKEY.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt das systematische Entfernen von Netzwerkfreigaben und gespeicherten Anmeldeinformationen mithilfe von Platzhaltern
-Lösch- und Force-Flags.Unterscheidet zwischen manueller Benutzeraktivität und
-automatisierte anti-forensische Bereinigung nach seitlicher Bewegung.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CMDKEY.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt die Massenentfernung von zugeordneten Netzwerkfreigaben und gespeicherten Anmeldeinformationen mithilfe von Wildcard-Löschung, Force-Flags oder skriptgesteuerten Dienstprogrammen zum Löschen von Anmeldeinformationen.Entwickelt, um die automatisierte antiforensische Bereinigung nach seitlicher Bewegung von routinemäßigen Verwaltungsaktivitäten zu unterscheiden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -3176,7 +3170,7 @@ Konzentriert sich auf makrofähige Vorlagen, Shortcut-Hijacking und Binärersetz
 - **Beschreibung:** Erkennt die systematische Erkennung von Systeminformationen (Betriebssystem, Patches, Architektur)
 Der Schwerpunkt liegt auf der Aufklärung zur Exploit-Auswahl.Filtert laute Geräusche
 von Inventaragenten, Verwaltungstools und Browsern mithilfe von Integritätsstufen
-und Gating des übergeordneten Prozesses.
+und übergeordnetes Prozess-Gating.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

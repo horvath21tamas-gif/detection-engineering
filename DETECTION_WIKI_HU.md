@@ -2781,16 +2781,14 @@ rendszernaplók porszívózása az automatizált karbantartási ablakokon kívü
 
 
 ---
-## Ultra-Pro High-Fidelity postafiókadatok törlése és szabályszabotázs (T1070.003)
+## Postafiókadatok törlése és szabálymanipuláció (ATT&CK T1070.003)
 - **ID:** `T1070_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a postafiókadatok szisztematikus eltávolítását és a rosszindulatú beérkező levelek szabályainak létrehozását.
-A tömeges törlési parancsmagokra és az elnyomásra tervezett automatizált szabálykészletekre összpontosít
-biztonsági értesítéseket, vagy elrejti a támadói kommunikációt.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a postafiók adatok szisztematikus eltávolítását és a rosszindulatú beérkező levelek szabályainak létrehozását.A tömeges törlési parancsmagokra és az automatizált szabálykészletekre összpontosít, amelyek célja a biztonsági értesítések letiltása vagy a támadói kommunikáció elrejtése.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -2799,16 +2797,14 @@ biztonsági értesítéseket, vagy elrejti a támadói kommunikációt.
 
 
 ---
-## Ultra-Pro High-Fidelity kriminalisztikai műtermékek és fájltörlés (T1070.004)
+## Törvényszéki műtermékek és fájltörlés (ATT&CK T1070.004)
 - **ID:** `T1070_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CIPHER.EXE](https://lolbas-project.github.io/lolbas/), [FSUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a nagy értékű kriminalisztikai műtermékek célzott megsemmisítését (USN Journal, Prefetch, Amcache)
-és biztonságos törlési segédprogramok használata.A nem szabványos folyamatok eredetére összpontosít és
-az incidens utáni felépülés megelőzésére használt kijátszási technikák.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CIPHER.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FSUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a nagy értékű kriminalisztikai műtermékek (USN Journal, Prefetch, Amcache) célzott megsemmisítését és a biztonságos törlési segédprogramok használatát.A nem szabványos folyamatok eredetére és az elkerülési technikákra összpontosít, amelyek célja az incidens utáni helyreállítás megelőzése.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -2817,16 +2813,14 @@ az incidens utáni felépülés megelőzésére használt kijátszási techniká
 
 
 ---
-## Ultra-Pro High-Fidelity hálózati megosztás és hitelesítő adatok eltávolítása (T1070.005)
+## Hálózati megosztás és hitelesítő adatok tisztítása (ATT&CK T1070.005)
 - **ID:** `T1070_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CMDKEY.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a hálózati megosztások és a tárolt hitelesítő adatok szisztematikus eltávolítását helyettesítő karakter használatával
-törlés és erőltetés zászlók.Megkülönbözteti a kézi felhasználói tevékenységet és
-automatizált igazságügyi orvosszakértői tisztítás oldalirányú mozgás után.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CMDKEY.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a leképezett hálózati megosztások és a tárolt hitelesítő adatok tömeges eltávolítását helyettesítő karakter törléssel, kényszerjelzőkkel vagy parancsfájllal ellátott hitelesítő adatok törlésével.Úgy tervezték, hogy megkülönböztesse az oldalirányú mozgás utáni automatizált igazságügyi szakértői tisztítást a rutin adminisztratív tevékenységtől.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -2916,9 +2910,9 @@ feldolgozza a vonalakat.Kiszűri a gyakori szoftverfrissítési ciklusokat, az M
 - **Becsült zajszint:** Kritikusan Magas (SIEM gyilkos kategória!)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A rendellenes hálózat figyelésével észleli a potenciális C2 alkalmazási rétegű kommunikációt
+- **Leírás:** A rendellenes hálózat figyelésével észleli a potenciális C2 alkalmazásrétegű kommunikációt
 nem böngésző folyamatok által kezdeményezett kapcsolatok.A gyanús szülő-gyermekre összpontosít
-kapcsolatok, magas kockázatú LOLBins és könyvtár-alapú hálózati tevékenység (WinInet/WinHTTP).
+kapcsolatok, magas kockázatú LOLBin-ek és könyvtár-alapú hálózati tevékenység (WinInet/WinHTTP).
 Szűri a jogos böngészőforgalmat és a megbízható infrastruktúrát, hogy csökkentse a hamis pozitívumot.
 
 #### 🚨 Response Playbook
@@ -2974,7 +2968,7 @@ a nem interaktív munkamenetek, a gyanús szkript alapú átvitelek figyelésév
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGEWEBVIEW2.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** A direkt mail figyelésével észleli a jogosulatlan e-mail-alapú C2-t vagy a kiszűrést
 protokoll kapcsolatok (SMTP, IMAP, POP3) a nem levelező folyamatokból.-ra összpontosít
-automatizálás és szkriptekkel való visszaélés PowerShell-en, .NET-en és régi szkriptgazdagépeken keresztül,
+automatizálás és szkriptekkel való visszaélés a PowerShell-en, .NET-en és a régi szkriptgazdagépeken keresztül,
 és rendellenes folyamatvonalak.
 
 #### 🚨 Response Playbook
@@ -3027,7 +3021,7 @@ telepítési szolgáltatásokkal, kiszűrve a szabványos karbantartási minták
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MAKECAB.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Fájl-összesítési minták figyelésével észleli a rendellenes adatsorolást,
+- **Leírás:** Felismeri a rendellenes adatsorolást a fájl-összesítési minták figyelésével,
 alacsony tömörítésű vagy jelszóval védett archiválási műveletek és tömeges másolás
 parancsokat rejtett vagy ideiglenes rendszerkönyvtárakba nem megbízható shellekből
 vagy forgatókönyveket.

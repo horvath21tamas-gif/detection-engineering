@@ -2906,16 +2906,14 @@ vacuuming of systemd journals outside of automated maintenance windows.
 
 
 ---
-## Ultra-Pro High-Fidelity Mailbox Data Clearing and Rule Sabotage (T1070.003)
+## Mailbox Data Clearing and Rule Manipulation (ATT&CK T1070.003)
 - **ID:** `T1070_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic mailbox data removal and the creation of malicious inbox rules. 
-Focuses on bulk deletion cmdlets and automated rule sets designed to suppress 
-security notifications or hide attacker communication.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects systematic mailbox data removal and the creation of malicious inbox rules. Focuses on bulk deletion cmdlets and automated rule sets designed to suppress security notifications or hide attacker communication.
 
 
 #### 🚨 Response Playbook
@@ -2925,16 +2923,14 @@ security notifications or hide attacker communication.
 
 
 ---
-## Ultra-Pro High-Fidelity Forensic Artifact and File Deletion (T1070.004)
+## Forensic Artifact and File Deletion (ATT&CK T1070.004)
 - **ID:** `T1070_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CIPHER.EXE](https://lolbas-project.github.io/lolbas/), [FSUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted destruction of high-value forensic artifacts (USN Journal, Prefetch, Amcache) 
-and the use of secure wipe utilities. Focuses on non-standard process origins and 
-evasion techniques used to prevent post-incident recovery.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CIPHER.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FSUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects targeted destruction of high-value forensic artifacts (USN Journal, Prefetch, Amcache) and the use of secure deletion utilities. Focuses on non-standard process origins and evasion techniques aimed at preventing post-incident recovery.
 
 
 #### 🚨 Response Playbook
@@ -2944,16 +2940,14 @@ evasion techniques used to prevent post-incident recovery.
 
 
 ---
-## Ultra-Pro High-Fidelity Network Share and Credential Removal (T1070.005)
+## Network Share and Credential Cleanup (ATT&CK T1070.005)
 - **ID:** `T1070_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CMDKEY.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic removal of network shares and stored credentials using wildcard 
-deletion and force flags. Distinguishes between manual user activity and 
-automated anti-forensic cleanup post-lateral movement.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CMDKEY.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects bulk removal of mapped network shares and stored credentials using wildcard deletion, force flags, or scripted credential wiping utilities. Designed to distinguish automated anti-forensic cleanup after lateral movement from routine administrative activity.
 
 
 #### 🚨 Response Playbook

@@ -1265,7 +1265,7 @@ credential injection while filtering enterprise remote support tools.
 
 
 ---
-## Ultra-Pro High-Fidelity WinRM Remote Execution (T1021.006)
+## WinRM Remote Execution (T1021.006)
 - **ID:** `T1021_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

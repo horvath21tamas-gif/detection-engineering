@@ -1231,7 +1231,7 @@ Credential-Injection beim Filtern von Remote-Support-Tools für Unternehmen.
 
 
 ---
-## Ultra-Pro High-Fidelity WinRM Remote Execution (T1021.006)
+## WinRM-Remoteausführung (T1021.006)
 - **ID:** `T1021_006.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

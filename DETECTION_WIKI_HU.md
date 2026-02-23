@@ -1231,7 +1231,7 @@ hitelesítő adatok beadása a vállalati távoli támogatási eszközök szűr�
 
 
 ---
-## Ultra-Pro High-Fidelity WinRM távoli végrehajtás (T1021.006)
+## WinRM távoli végrehajtás (T1021.006)
 - **ID:** `T1021_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -1335,7 +1335,7 @@ gyanús folyamatvonalakat, miközben kiszűri a szabványos operációs rendszer
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a bináris csomagolók (UPX, MPRESS, ASPack stb.) használatát nem szabványos vagy gyanús környezetben.A nagy tömörítési és elfedési parancssori mintákra, valamint a gyanús szülőfolyamatokra összpontosít, miközben szűri a jogszerű fejlesztéseket és a CI/CD munkafolyamatokat.
+- **Leírás:** Érzékeli a bináris csomagolók (UPX, MPRESS, ASPack stb.) használatát nem szabványos vagy gyanús környezetben.A nagy tömörítésű és elhomályosító parancssori mintákra, valamint a gyanús szülőfolyamatokra összpontosít, miközben szűri a jogszerű fejlesztéseket és a CI/CD munkafolyamatokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

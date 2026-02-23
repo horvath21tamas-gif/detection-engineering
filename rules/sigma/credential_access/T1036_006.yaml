@@ -1,51 +1,71 @@
-title: Ultra-Pro High-Fidelity Space After Filename Masquerading (T1036.006)
+title: Space After Filename Masquerading (T1036.006)
 id: f56a90c1-0a71-4184-80de-7fc674da4c11
 status: stable
-description: |
-    Detects intentional masquerading using trailing spaces in filenames or directory names. 
-    Focuses on executable extensions followed by spaces to evade string-based detection 
-    while filtering common Windows Update and SCCM/MECM noise.
+description: >
+  Detects intentional masquerading using trailing spaces in executable filenames
+  or directory names (e.g., "malware.exe "). Targets evasions that use spaces
+  to bypass string-based detections, while filtering common Windows Update,
+  SCCM/MECM, and system automation noise.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-23
 tags:
-    - attack.defense_evasion
-    - attack.t1036.006
+  - attack.defense_evasion
+  - attack.t1036.006
+  - attack.execution
+
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_trailing_space:
-        - Image|contains: 
-            - '.exe '
-            - '.com '
-            - '.scr '
-            - '.pif '
-        - CommandLine|contains:
-            - '.exe  ' 
-            - '.exe "' 
-            - '.exe /' 
+  selection_trailing_space:
+    Image|contains:
+      - '.exe '
+      - '.com '
+      - '.scr '
+      - '.pif '
+    CommandLine|contains:
+      - '.exe  '
+      - '.exe "'
+      - '.exe /'
 
-    selection_padded_paths:
-        Image|contains:
-            - 'Windows \'    
-            - 'System32 \'     
-            - 'Program Files \'
-            - 'AppData \'
+  selection_padded_paths:
+    Image|contains:
+      - 'Windows \'
+      - 'System32 \'
+      - 'Program Files \'
+      - 'AppData \'
 
-    selection_untrusted_context:
-        Image|contains:
-            - '\Users\'
-            - '\Public\'
-            - '\Temp\'
-            - '\Downloads\'
+  selection_untrusted_context:
+    Image|contains:
+      - '\Users\'
+      - '\Public\'
+      - '\Temp\'
+      - '\Downloads\'
 
-    filter_legit_system:
-        - Image|startswith:
-            - 'C:\Windows\System32\'
-            - 'C:\Windows\WinSxS\'
-            - 'C:\Windows\SoftwareDistribution\'
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith: '\msiexec.exe'
+  filter_legit_system:
+    - Image|startswith:
+        - 'C:\Windows\System32\'
+        - 'C:\Windows\WinSxS\'
+        - 'C:\Windows\SoftwareDistribution\'
+    - User:
+        - 'NT AUTHORITY\SYSTEM'
+        - 'NT AUTHORITY\LOCAL SERVICE'
+        - 'NT AUTHORITY\NETWORK SERVICE'
+    - ParentImage|endswith:
+        - '\msiexec.exe'
+        - '\trustedinstaller.exe'
 
-    condition: (selection_trailing_space or selection_padded_paths) and (selection_untrusted_context or not filter_legit_system)
+  condition: >
+    (selection_trailing_space or selection_padded_paths)
+    and selection_untrusted_context
+    and not filter_legit_system
+
+falsepositives:
+  - Windows Update and SCCM/MECM temporary files
+  - System maintenance scripts
+  - Enterprise deployment tools executed from trusted paths
+  - Red team or internal security testing
+
 level: critical

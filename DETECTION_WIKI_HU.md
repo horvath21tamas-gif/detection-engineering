@@ -2222,16 +2222,14 @@ a hívási verem nem támogatott memóriából (shellkód) származik.
 
 
 ---
-## Ultra-Pro Stealthy APC injekció (T1055.004)
+## APC befecskendezés észlelése (ATT&CK T1055.004)
 - **ID:** `T1055_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a nagy pontosságú APC befecskendezési kísérleteket (beleértve az Early Bird-et is) a figyeléssel
-speciális szál hozzáférési maszkok (THREAD_SET_CONTEXT), ahonnan a hívó kód származik
-nem támogatott vagy nem megbízható memóriarégiókból (CallTrace elemzés).
+- **Leírás:** Érzékeli a nagy pontosságú APC (aszinkron eljáráshívás) befecskendezési kísérleteket, beleértve az Early Bird injekciót is, a szál hozzáférési maszkok (THREAD_SET_CONTEXT) figyelésével, ahol a hívó kód nem támogatott vagy nem megbízható memóriarégiókból származik.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

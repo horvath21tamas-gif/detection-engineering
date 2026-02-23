@@ -2222,16 +2222,14 @@ Der aufrufende Stack stammt aus dem nicht gesicherten Speicher (Shellcode).
 
 
 ---
-## Ultra-Pro Stealthy APC-Injektion (T1055.004)
+## APC-Injektionserkennung (ATT&CK T1055.004)
 - **ID:** `T1055_004.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Hi-Fi-APC-Injektionsversuche (einschließlich Early Bird) durch Überwachung
-spezifische Thread-Zugriffsmasken (THREAD_SET_CONTEXT), aus denen der aufrufende Code stammt
-aus nicht gesicherten oder nicht vertrauenswürdigen Speicherbereichen (CallTrace-Analyse).
+- **Beschreibung:** Erkennt High-Fidelity-APC-Injection-Versuche (Asynchronous Procedure Call), einschließlich Early-Bird-Injection, durch Überwachung von Thread-Zugriffsmasken (THREAD_SET_CONTEXT), bei denen der aufrufende Code aus nicht gesicherten oder nicht vertrauenswürdigen Speicherbereichen stammt.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

@@ -2314,16 +2314,14 @@ calling stack originates from unbacked memory (shellcode).
 
 
 ---
-## Ultra-Pro Stealthy APC Injection (T1055.004)
+## APC Injection Detection (ATT&CK T1055.004)
 - **ID:** `T1055_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects high-fidelity APC injection attempts (including Early Bird) by monitoring for 
-specific thread access masks (THREAD_SET_CONTEXT) where the calling code originates 
-from unbacked or untrusted memory regions (CallTrace analysis).
+- **Leírás:** Detects high-fidelity APC (Asynchronous Procedure Call) injection attempts, including Early Bird injection, by monitoring thread access masks (THREAD_SET_CONTEXT) where the calling code originates from unbacked or untrusted memory regions.
 
 
 #### 🚨 Response Playbook

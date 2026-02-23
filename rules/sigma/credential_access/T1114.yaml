@@ -1,59 +1,64 @@
-title: Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114)
+title: Email Harvesting Anomaly (T1114)
 id: d162bda3-b988-4e4d-8b20-a2fd6c1192b6
 status: stable
 description: |
-    Detects unauthorized automated email collection by identifying suspicious 
-    COM object instantiation (Outlook.Application), mailbox export requests, 
-    and programmatic access to Inbox/Sent folders from non-standard shells.
+  Detects unauthorized automated email collection by identifying suspicious 
+  COM object instantiation (Outlook.Application), mailbox export requests, 
+  and programmatic access to Inbox/Sent folders from non-standard shells.
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.collection
-    - attack.t1114.001
-    - attack.t1114.002
-    - attack.t1114
+  - attack.collection
+  - attack.t1114.001
+  - attack.t1114.002
+  - attack.t1114
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_com_api:
-        CommandLine|contains:
-            - 'New-Object -ComObject Outlook.Application'
-            - 'CreateObject("Outlook.Application")'
-            - 'GetDefaultFolder(6)'       
-            - 'GetDefaultFolder(5)'       
-            - '.GetNamespace("MAPI")'     
+  selection_com_api:
+    CommandLine|contains:
+      - 'New-Object -ComObject Outlook.Application'  
+      - 'CreateObject("Outlook.Application")'           
+      - 'GetDefaultFolder(6)'                          
+      - 'GetDefaultFolder(5)'                         
+      - '.GetNamespace("MAPI")'                         
 
-    selection_extraction:
-        CommandLine|contains:
-            - '.SaveAs('                  
-            - '.Attachments'              
-            - 'ContentFilter'             
-            - 'New-MailboxExportRequest'  
+  selection_extraction:
+    CommandLine|contains:
+      - '.SaveAs('                                     
+      - '.Attachments'                              
+      - 'ContentFilter'                                
+      - 'New-MailboxExportRequest'                      
 
-    selection_evasion:
-        CommandLine|contains:
-            - ' -WindowStyle Hidden'
-            - 'SilentlyContinue'
-            - '.Display = $false'         
+  selection_evasion:
+    CommandLine|contains:
+      - ' -WindowStyle Hidden'                        
+      - 'SilentlyContinue'                            
+      - '.Display = $false'                            
 
-    selection_context:
-        ParentImage|endswith:
-            - '\powershell.exe'
-            - '\cmd.exe'
-            - '\cscript.exe'
-            - '\wscript.exe'
-            - '\mshta.exe'               
-        IntegrityLevel: 'Medium'          
+  selection_context:
+    ParentImage|endswith:
+      - '\powershell.exe'                              
+      - '\cmd.exe'                                      
+      - '\cscript.exe'                                  
+      - '\wscript.exe'                                  
+      - '\mshta.exe'                                    
+    IntegrityLevel: 'Medium'                           
 
-    filter_trusted_processes:
-        - Image|contains:
-            - 'C:\Program Files\Microsoft Office\' 
-            - 'C:\Program Files (x86)\Microsoft Office\'
-        - username: 'NT AUTHORITY\SYSTEM'
-        - CommandLine|contains:
-            - 'HealthCheck.ps1'          
-            - 'Add-in'                    
+  filter_trusted_processes:
+    - Image|contains:
+        - 'C:\Program Files\Microsoft Office\'           
+        - 'C:\Program Files (x86)\Microsoft Office\'     
+    - username: 'NT AUTHORITY\SYSTEM'                 
+    - CommandLine|contains:
+        - 'HealthCheck.ps1'                             
+        - 'Add-in'                                     
 
-    condition: (selection_com_api and selection_extraction) or (selection_extraction and selection_evasion) and selection_context and not filter_trusted_processes
+  condition: |
+    (selection_com_api and selection_extraction) or 
+    (selection_extraction and selection_evasion) and 
+    selection_context and 
+    not filter_trusted_processes
+
 level: critical

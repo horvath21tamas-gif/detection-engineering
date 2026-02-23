@@ -1031,7 +1031,7 @@ and integrity level gating to minimize false positives.
 
 
 ---
-## Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014)
+## BYOVD Rootkit Loading (T1014)
 - **ID:** `T1014.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -1039,7 +1039,7 @@ and integrity level gating to minimize false positives.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects the "Bring Your Own Vulnerable Driver" (BYOVD) technique. 
-Focuses on the execution of known driver loaders or the registration of kernel-mode 
+Focuses on execution of known driver loaders or the registration of kernel-mode 
 services from non-standard paths, while filtering out legitimate OS driver maintenance.
 
 

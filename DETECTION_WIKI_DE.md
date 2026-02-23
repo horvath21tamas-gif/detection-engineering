@@ -1010,7 +1010,7 @@ und Integritätslevel-Gating, um Fehlalarme zu minimieren.
 
 
 ---
-## Laden von Ultra-Pro High-Fidelity BYOVD-Rootkits (T1014)
+## Laden des BYOVD-Rootkits (T1014)
 - **ID:** `T1014.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

@@ -1010,7 +1010,7 @@ hitelesítő adatok tárolása és perzisztencia útvonalai.Rekurzív lekérdez�
 
 
 ---
-## Ultra-Pro High-Fidelity BYOVD Rootkit betöltése (T1014)
+## BYOVD Rootkit betöltése (T1014)
 - **ID:** `T1014.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -1018,8 +1018,8 @@ hitelesítő adatok tárolása és perzisztencia útvonalai.Rekurzív lekérdez�
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a "Bring Your Own Vulnerable Driver" (BYOVD) technikát.
-Az ismert illesztőprogram-betöltők végrehajtására vagy a kernel mód regisztrálására összpontosít
-szolgáltatások nem szabványos útvonalakról, miközben kiszűri a jogszerű operációs rendszer-illesztőprogram-karbantartást.
+Az ismert illesztőprogram-betöltők végrehajtására vagy a kernel-mód regisztrációjára összpontosít
+szolgáltatások nem szabványos útvonalakról, miközben kiszűri a jogos operációs rendszer-illesztőprogram-karbantartást.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

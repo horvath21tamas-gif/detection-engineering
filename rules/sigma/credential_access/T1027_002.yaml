@@ -1,64 +1,77 @@
-title: Ultra-Pro High-Fidelity Software Packing Event (T1027.002)
+title: Software Packing Event (T1027.002)
 id: d512eb95-a1b5-4961-83d7-389584157a33
 status: stable
-description: |
-    Detects the use of binary packers (UPX, MPRESS, etc.) in non-standard environments. 
-    Focuses on command-line patterns used for high-compression/obfuscation and 
-    suspicious parent process lineages.
+description: >
+  Detects the use of binary packers (UPX, MPRESS, ASPack, etc.) 
+  in non-standard or suspicious environments. Focuses on high-compression
+  and obfuscation command-line patterns as well as suspicious parent processes,
+  while filtering legitimate development and CI/CD workflows.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-23
 tags:
-    - attack.defense_evasion
-    - attack.t1027.002
+  - attack.defense_evasion
+  - attack.t1027.002
+
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_tools:
-        Image|endswith:
-            - '\upx.exe'
-            - '\mpress.exe'
-            - '\aspack.exe'
-            - '\pecompact.exe'
-            - '\fsg.exe'
-            - '\themida.exe'
+  selection_tools:
+    Image|endswith:
+      - '\upx.exe'
+      - '\mpress.exe'
+      - '\aspack.exe'
+      - '\pecompact.exe'
+      - '\fsg.exe'
+      - '\themida.exe'
 
-    selection_flags:
-        CommandLine|contains:
-            - ' -9'              
-            - ' --ultra-brute'  
-            - ' --brute'
-            - ' -f'              
-            - ' -o '            
+  selection_flags:
+    CommandLine|contains:
+      - ' -9'
+      - ' --ultra-brute'
+      - ' --brute'
+      - ' -f'
+      - ' -o '
 
-    selection_paths:
-        CommandLine|contains:
-            - '\AppData\Local\Temp\'
-            - '\Users\Public\'
-            - '\Windows\Temp\'
-            - '\Downloads\'
-            - '\Desktop\'
+  selection_paths:
+    CommandLine|contains:
+      - '\AppData\Local\Temp\'
+      - '\Users\Public\'
+      - '\Windows\Temp\'
+      - '\Downloads\'
+      - '\Desktop\'
 
-    selection_suspicious_parents:
-        ParentImage|endswith:
-            - '\powershell.exe'
-            - '\cmd.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
-            - '\mshta.exe'
+  selection_suspicious_parents:
+    ParentImage|endswith:
+      - '\powershell.exe'
+      - '\cmd.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
 
-    filter_dev_environments:
-        Image|contains:
-            - '\Visual Studio\'
-            - '\Jenkins\'
-            - '\GitLab-Runner\'
-        ParentImage|contains:
-            - '\msbuild.exe'
-            - '\devenv.exe'
-    filter_build_users:
-        User|contains:
-            - 'svc-build'
-            - 'cicd'
+  filter_dev_environments:
+    Image|contains:
+      - '\Visual Studio\'
+      - '\Jenkins\'
+      - '\GitLab-Runner\'
+    ParentImage|contains:
+      - '\msbuild.exe'
+      - '\devenv.exe'
 
-    condition: selection_tools and (selection_flags or selection_paths or selection_suspicious_parents) and not filter_dev_environments
+  filter_build_users:
+    User|contains:
+      - 'svc-build'
+      - 'cicd'
+
+  condition: selection_tools
+             and (selection_flags or selection_paths or selection_suspicious_parents)
+             and not filter_dev_environments
+             and not filter_build_users
+
+falsepositives:
+  - Legitimate usage of packers in build pipelines
+  - Developers testing compression/obfuscation locally
+
 level: high

@@ -1,49 +1,63 @@
-title: Ultra-Pro High-Fidelity Steganography Payload Extraction (T1027.004)
+title: Steganography Payload Extraction (T1027.004)
 id: 87564476-2d4a-400f-9748-08f32bbb5381
 status: stable
-description: |
-    Detects the extraction of malicious payloads from image files using 
-    low-level GDI+ or .NET Bitmap methods often seen in Invoke-PSImage or similar 
-    steganography frameworks.
+description: >
+  Detects extraction of malicious payloads from image files using low-level GDI+ or 
+  .NET Bitmap methods. Focuses on Invoke-PSImage or similar steganography frameworks, 
+  while filtering legitimate image manipulation software and system processes.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-23
 tags:
-    - attack.defense_evasion
-    - attack.t1027.004
+  - attack.defense_evasion
+  - attack.t1027.004
+
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_pixel_extraction:
-        CommandLine|contains:
-            - 'GetPixel'                  
-            - 'LockBits'                  
-            - 'System.Drawing.Bitmap'     
-            - 'System.Drawing.Image'
-            - '[Drawing.Color]'
+  selection_pixel_extraction:
+    CommandLine|contains:
+      - 'GetPixel'
+      - 'LockBits'
+      - 'System.Drawing.Bitmap'
+      - 'System.Drawing.Image'
+      - '[Drawing.Color]'
 
-    selection_execution:
-        CommandLine|contains:
-            - 'iex'                       
-            - 'Invoke-Command'
-            - ' -enc '                   
-            - 'ScriptBlock'
+  selection_execution:
+    CommandLine|contains:
+      - 'iex'
+      - 'Invoke-Command'
+      - ' -enc '
+      - 'ScriptBlock'
 
-    selection_image_files:
-        CommandLine|contains:
-            - '.png'
-            - '.jpg'
-            - '.jpeg'
-            - '.bmp'
+  selection_image_files:
+    CommandLine|contains:
+      - '.png'
+      - '.jpg'
+      - '.jpeg'
+      - '.bmp'
 
-    filter_trusted_apps:
-        Image|contains:
-            - 'C:\Program Files\Adobe\'
-            - 'C:\Program Files\GIMP'
-            - 'C:\Windows\System32\mspaint.exe'
-            - 'Visual Studio'
-    filter_null_user:
-        username: 'NT AUTHORITY\SYSTEM'
+  filter_trusted_apps:
+    Image|contains:
+      - 'C:\Program Files\Adobe\'
+      - 'C:\Program Files\GIMP'
+      - 'C:\Windows\System32\mspaint.exe'
+      - 'Visual Studio'
 
-    condition: selection_pixel_extraction and selection_execution and selection_image_files and not filter_trusted_apps
+  filter_null_user:
+    username: 'NT AUTHORITY\SYSTEM'
+
+  condition: selection_pixel_extraction
+             and selection_execution
+             and selection_image_files
+             and not filter_trusted_apps
+             and not filter_null_user
+
+falsepositives:
+  - Legitimate image processing or editing in PowerShell scripts
+  - Visual Studio / development automation that manipulates image assets
+  - System maintenance tasks using MSPaint or GDI+ utilities
+
 level: critical

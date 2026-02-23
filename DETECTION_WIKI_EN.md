@@ -2384,16 +2384,14 @@ unbacked memory (shellcode) rather than a signed on-disk module.
 
 
 ---
-## Ultra-Pro Stealthy EWM Injection (T1055.011)
+## Stealthy Extra Window Memory (EWM) Injection (ATT&CK T1055.011)
 - **ID:** `T1055_011.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects Extra Window Memory (EWM) injection by monitoring for suspicious 
-cross-process access with memory manipulation rights where the CallTrace 
-indicates execution from unbacked memory (shellcode) targeting GUI processes.
+- **Leírás:** Detects Extra Window Memory (EWM) injection by monitoring suspicious cross-process  memory access requests where the CallTrace indicates execution from unbacked memory  (shellcode), targeting common GUI processes.
 
 
 #### 🚨 Response Playbook

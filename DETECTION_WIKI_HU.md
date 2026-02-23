@@ -2288,16 +2288,14 @@ nem támogatott memória (shellkód), nem pedig aláírt lemezen található mod
 
 
 ---
-## Ultra-Pro Stealthy EWM befecskendezés (T1055.011)
+## Lopakodó extra ablakmemória (EWM) befecskendezés (ATT&CK T1055.011)
 - **ID:** `T1055_011.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az extra ablakmemória (EWM) befecskendezését a gyanús jelek megfigyelésével
-folyamatok közötti hozzáférés memória manipulációs jogokkal, ahol a CallTrace
-a nem támogatott memóriából (shellkódból) történő végrehajtást jelzi, amely a GUI-folyamatokat célozza.
+- **Leírás:** Érzékeli az extra ablakmemória (EWM) befecskendezését azáltal, hogy figyeli a gyanús, többfolyamat-memória-hozzáférési kéréseket, ahol a CallTrace a nem támogatott memóriából (shellkódból) történő végrehajtást jelzi, megcélozva a gyakori grafikus felhasználói felületi folyamatokat.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

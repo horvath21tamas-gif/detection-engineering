@@ -2288,16 +2288,14 @@ nicht gesicherter Speicher (Shellcode) statt eines signierten On-Disk-Moduls.
 
 
 ---
-## Ultra-Pro Stealthy EWM-Injektion (T1055.011)
+## Stealthy Extra Window Memory (EWM)-Injektion (ATT&CK T1055.011)
 - **ID:** `T1055_011.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Einschleusung von Extra Window Memory (EWM) durch Überwachung auf verdächtige Daten
-Prozessübergreifender Zugriff mit Speichermanipulationsrechten bei CallTrace
-Zeigt die Ausführung aus nicht gesichertem Speicher (Shellcode) an, die auf GUI-Prozesse abzielt.
+- **Beschreibung:** Erkennt die Einschleusung von Extra Window Memory (EWM) durch die Überwachung verdächtiger prozessübergreifender Speicherzugriffsanforderungen, bei denen CallTrace die Ausführung aus nicht gesichertem Speicher (Shellcode) anzeigt und auf gängige GUI-Prozesse abzielt.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

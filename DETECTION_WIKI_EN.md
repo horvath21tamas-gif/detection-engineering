@@ -69,7 +69,7 @@
 - [Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001)](#ultra-pro-high-fidelity-invalid-or-forged-code-signature-(t1036001))
 - [Ultra-Pro High-Fidelity RTLO Character Execution (T1036.002)](#ultra-pro-high-fidelity-rtlo-character-execution-(t1036002))
 - [Ultra-Pro High-Fidelity Renamed System Utility (T1036.003)](#ultra-pro-high-fidelity-renamed-system-utility-(t1036003))
-- [Ultra-Pro High-Fidelity Masquerading via Path Anomaly (T1036.004)](#ultra-pro-high-fidelity-masquerading-via-path-anomaly-(t1036004))
+- [Masquerading via Path Anomaly (T1036.004)](#masquerading-via-path-anomaly-(t1036004))
 - [Legitimate Windows Binary Copied to User-Writable Location](#legitimate-windows-binary-copied-to-user-writable-location)
 - [Ultra-Pro High-Fidelity Space After Filename Masquerading (T1036.006)](#ultra-pro-high-fidelity-space-after-filename-masquerading-(t1036006))
 - [Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007)](#ultra-pro-high-fidelity-double-file-extension-execution-(t1036007))
@@ -1699,16 +1699,14 @@ and signature-awareness to eliminate false positives from installers.
 
 
 ---
-## Ultra-Pro High-Fidelity Masquerading via Path Anomaly (T1036.004)
+## Masquerading via Path Anomaly (T1036.004)
 - **ID:** `T1036_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects sophisticated masquerading where system binaries are executed from 
-untrusted, user-writable directories or from spoofed system paths (e.g., space padding). 
-Filters out legitimate Side-by-Side (WinSxS) and Windows Update behaviors.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects sophisticated masquerading where system binaries are executed from untrusted, user-writable directories or spoofed system paths (e.g., trailing space padding). Filters out legitimate Side-by-Side (WinSxS) and Windows Update behaviors.
 
 
 #### 🚨 Response Playbook

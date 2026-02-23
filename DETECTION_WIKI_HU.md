@@ -69,7 +69,7 @@
 - [Ultra-Pro High-Fidelity érvénytelen vagy hamisított kódaláírás (T1036.001)](#ultra-pro-high-fidelity-érvénytelen-vagy-hamisított-kódaláírás-(t1036001))
 - [Ultra-Pro High-Fidelity RTLO karakter-végrehajtás (T1036.002)](#ultra-pro-high-fidelity-rtlo-karakter-végrehajtás-(t1036002))
 - [Ultra-Pro High-Fidelity átnevezett rendszer segédprogram (T1036.003)](#ultra-pro-high-fidelity-átnevezett-rendszer-segédprogram-(t1036003))
-- [Ultra-Pro High-Fidelity maszkolás útvonal anomálián keresztül (T1036.004)](#ultra-pro-high-fidelity-maszkolás-útvonal-anomálián-keresztül-(t1036004))
+- [Maszkírozás útvonal-anomálián keresztül (T1036.004)](#maszkírozás-útvonal-anomálián-keresztül-(t1036004))
 - [Jogos Windows bináris fájl a felhasználó által írható helyre másolva](#jogos-windows-bináris-fájl-a-felhasználó-által-írható-helyre-másolva)
 - [Ultra-Pro High-Fidelity Space a fájlnév-maszkolás után (T1036.006)](#ultra-pro-high-fidelity-space-a-fájlnév-maszkolás-után-(t1036006))
 - [Ultra-Pro High-Fidelity kettős fájlkiterjesztés végrehajtása (T1036.007)](#ultra-pro-high-fidelity-kettős-fájlkiterjesztés-végrehajtása-(t1036007))
@@ -1641,16 +1641,14 @@ aktuális folyamatnevek belső metaadatokkal.Útvonal alapú szűrést használ
 
 
 ---
-## Ultra-Pro High-Fidelity maszkolás útvonal anomálián keresztül (T1036.004)
+## Maszkírozás útvonal-anomálián keresztül (T1036.004)
 - **ID:** `T1036_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Kifinomult maszkolást észlel, ahol a rendszer bináris fájljait végrehajtják
-nem megbízható, felhasználó által írható könyvtárak vagy hamisított rendszerútvonalakból (pl. szóköz kitöltése).
-Kiszűri a legitim Side-by-Side (WinSxS) és Windows Update viselkedéseket.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Kifinomult maszkolást észlel, amikor a rendszer bináris fájljait nem megbízható, felhasználó által írható könyvtárakból vagy hamisított rendszerútvonalakból hajtják végre (pl. záró szóköz kitöltése).Kiszűri a legitim Side-by-Side (WinSxS) és Windows Update viselkedéseket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

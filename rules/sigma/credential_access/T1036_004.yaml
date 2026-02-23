@@ -63,7 +63,7 @@ detection:
         - 'C:\Windows\SysWOW64\'
         - 'C:\Windows\WinSxS\'
         - 'C:\Windows\servicing\'
-    - User:
+    - username:
         - 'NT AUTHORITY\SYSTEM'
         - 'NT AUTHORITY\LOCAL SERVICE'
         - 'NT AUTHORITY\NETWORK SERVICE'

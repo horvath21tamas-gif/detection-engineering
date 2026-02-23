@@ -74,7 +74,7 @@
 | T1036.001 | CRITICAL | Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001) |
 | T1036.002 | CRITICAL | Ultra-Pro High-Fidelity RTLO Character Execution (T1036.002) |
 | T1036.003 | CRITICAL | Ultra-Pro High-Fidelity Renamed System Utility (T1036.003) |
-| T1036.004 | CRITICAL | Ultra-Pro High-Fidelity Masquerading via Path Anomaly (T1036.004) |
+| T1036.004 | CRITICAL | Masquerading via Path Anomaly (T1036.004) |
 | T1036.005 | HIGH | Legitimate Windows Binary Copied to User-Writable Location |
 | T1036.006 | CRITICAL | Ultra-Pro High-Fidelity Space After Filename Masquerading (T1036.006) |
 | T1036.007 | CRITICAL | Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007) |

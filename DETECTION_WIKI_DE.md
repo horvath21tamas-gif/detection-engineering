@@ -69,7 +69,7 @@
 - [Ultra-Pro High-Fidelity ungültige oder gefälschte Code-Signatur (T1036.001)](#ultra-pro-high-fidelity-ungültige-oder-gefälschte-code-signatur-(t1036001))
 - [Ultra-Pro High-Fidelity RTLO-Charakterausführung (T1036.002)](#ultra-pro-high-fidelity-rtlo-charakterausführung-(t1036002))
 - [Ultra-Pro High-Fidelity umbenanntes System-Dienstprogramm (T1036.003)](#ultra-pro-high-fidelity-umbenanntes-system-dienstprogramm-(t1036003))
-- [Ultra-Pro High-Fidelity Masquerading über Path Anomaly (T1036.004)](#ultra-pro-high-fidelity-masquerading-über-path-anomaly-(t1036004))
+- [Maskierung durch Pfadanomalie (T1036.004)](#maskierung-durch-pfadanomalie-(t1036004))
 - [Legitime Windows-Binärdatei an einen vom Benutzer beschreibbaren Speicherort kopiert](#legitime-windows-binärdatei-an-einen-vom-benutzer-beschreibbaren-speicherort-kopiert)
 - [Ultra-Pro High-Fidelity-Speicherplatz nach Dateinamenmaskierung (T1036.006)](#ultra-pro-high-fidelity-speicherplatz-nach-dateinamenmaskierung-(t1036006))
 - [Ultra-Pro High-Fidelity-Doppeldateierweiterungsausführung (T1036.007)](#ultra-pro-high-fidelity-doppeldateierweiterungsausführung-(t1036007))
@@ -1641,16 +1641,14 @@ und Signaturerkennung, um Fehlalarme von Installateuren zu vermeiden.
 
 
 ---
-## Ultra-Pro High-Fidelity Masquerading über Path Anomaly (T1036.004)
+## Maskierung durch Pfadanomalie (T1036.004)
 - **ID:** `T1036_004.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt ausgefeiltes Masquerading, von dem aus Systembinärdateien ausgeführt werden
-nicht vertrauenswürdige, vom Benutzer beschreibbare Verzeichnisse oder aus gefälschten Systempfaden (z. B. Leerzeichenauffüllung).
-Filtert legitimes Side-by-Side- (WinSxS) und Windows Update-Verhalten heraus.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt ausgefeiltes Masquerading, bei dem Systembinärdateien aus nicht vertrauenswürdigen, vom Benutzer beschreibbaren Verzeichnissen oder gefälschten Systempfaden (z. B. nachgestellte Leerzeichenauffüllung) ausgeführt werden.Filtert legitimes Side-by-Side- (WinSxS) und Windows Update-Verhalten heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

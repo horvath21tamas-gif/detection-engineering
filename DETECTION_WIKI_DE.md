@@ -2339,16 +2339,14 @@ stammt aus ungesichertem Speicher (Shellcode) und zielt auf häufige Opferprozes
 
 
 ---
-## Ultra-Pro Stealthy Process Ghosting (T1055.014)
+## Stealthy Process Ghosting (ATT&CK T1055.014)
 - **ID:** `T1055_014.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Prozess-Ghosting durch Identifizierung von Prozesserstellungsereignissen, bei denen dies der Fall ist
-Die zugrunde liegende Datei befindet sich im Status „Löschen steht aus“, was durch fehlende Hashes belegt wird
-zur Ausführungszeit und stammen aus nicht standardmäßigen Verzeichnissen.
+- **Beschreibung:** Erkennt Prozess-Ghosting durch Identifizierung von Prozesserstellungsereignissen, bei denen sich die zugrunde liegende Datei im Status „Löschen ausstehend“ befindet, was durch fehlende Hashes zur Ausführungszeit nachgewiesen wird und aus nicht standardmäßigen Verzeichnissen stammt.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -2339,16 +2339,14 @@ háttér nélküli memóriából (shellkód) származik, és általános áldoza
 
 
 ---
-## Ultra-Pro Stealthy Process Ghosting (T1055.014)
+## Stealthy Process Ghosting (ATT&CK T1055.014)
 - **ID:** `T1055_014.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Felismeri a Process Ghosting-ot azáltal, hogy azonosítja a folyamatlétrehozási eseményeket, ahol a
-az alapul szolgáló fájl „törlés-függő” állapotban van, amit hiányzó hashek bizonyítanak
-végrehajtási időben és nem szabványos könyvtárakból származik.
+- **Leírás:** Felismeri a Process Ghosting-ot azáltal, hogy azonosítja azokat a folyamatlétrehozási eseményeket, ahol az alapul szolgáló fájl „törlés-függő” állapotban van, amit a végrehajtás során hiányzó hash-ek bizonyítanak, és amelyek nem szabványos könyvtárakból származnak.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

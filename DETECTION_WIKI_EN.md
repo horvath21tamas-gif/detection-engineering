@@ -2438,16 +2438,14 @@ originates from unbacked memory (shellcode) and targets common sacrificial proce
 
 
 ---
-## Ultra-Pro Stealthy Process Ghosting (T1055.014)
+## Stealthy Process Ghosting (ATT&CK T1055.014)
 - **ID:** `T1055_014.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects Process Ghosting by identifying process creation events where the 
-underlying file is in a 'delete-pending' state, evidenced by missing hashes 
-at execution time and originating from non-standard directories.
+- **Leírás:** Detects Process Ghosting by identifying process creation events where the  underlying file is in a 'delete-pending' state, evidenced by missing hashes  at execution time and originating from non-standard directories.
 
 
 #### 🚨 Response Playbook

@@ -142,23 +142,23 @@
 - [Ultra-Pro High-Fidelity Timestomp and MACE Attribute Manipulation (T1070.006)](#ultra-pro-high-fidelity-timestomp-and-mace-attribute-manipulation-(t1070006))
 - [Ultra-Pro High-Fidelity Network History and RDP Trace Removal (T1070.007)](#ultra-pro-high-fidelity-network-history-and-rdp-trace-removal-(t1070007))
 - [Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008)](#ultra-pro-high-fidelity-email-storage-and-database-destruction-(t1070008))
-- [Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009)](#ultra-pro-high-fidelity-persistence-artifact-removal-(t1070009))
-- [Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071)](#ultra-pro-high-fidelity-application-layer-c2-anomaly-(t1071))
-- [Ultra-Pro High-Fidelity HTTP/S C2 Anomaly (T1071.001)](#ultra-pro-high-fidelity-https-c2-anomaly-(t1071001))
-- [Ultra-Pro High-Fidelity FTP/SFTP Protocol Anomaly (T1071.002)](#ultra-pro-high-fidelity-ftpsftp-protocol-anomaly-(t1071002))
-- [Ultra-Pro High-Fidelity Mail Protocol Anomaly (T1071.003)](#ultra-pro-high-fidelity-mail-protocol-anomaly-(t1071003))
+- [Persistence Artifact Removal (T1070.009)](#persistence-artifact-removal-(t1070009))
+- [Application Layer C2 Anomaly (T1071)](#application-layer-c2-anomaly-(t1071))
+- [HTTP/S C2 Anomaly (T1071.001)](#https-c2-anomaly-(t1071001))
+- [FTP/SFTP Protocol Anomaly (T1071.002)](#ftpsftp-protocol-anomaly-(t1071002))
+- [Mail Protocol Anomaly (T1071.003)](#mail-protocol-anomaly-(t1071003))
 - [DNS Tunneling & Beaconing (T1071.004)](#dns-tunneling-&-beaconing-(t1071004))
 - [High-Fidelity Software Deployment Tool Abuse Detection](#high-fidelity-software-deployment-tool-abuse-detection)
-- [Ultra-Pro High-Fidelity Data Staging Anomaly (T1074)](#ultra-pro-high-fidelity-data-staging-anomaly-(t1074))
-- [Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001)](#ultra-pro-high-fidelity-local-data-staging-anomaly-(t1074001))
+- [Data Staging Anomaly (T1074)](#data-staging-anomaly-(t1074))
+- [Local Data Staging Anomaly (T1074.001)](#local-data-staging-anomaly-(t1074001))
 - [Remote Data Staging (T1074.002)](#remote-data-staging-(t1074002))
 - [High-Fidelity Anomalous Logon via Valid Account](#high-fidelity-anomalous-logon-via-valid-account)
 - [High-Fidelity Default Account Abuse Detection](#high-fidelity-default-account-abuse-detection)
 - [High-Fidelity Domain Account Lateral Movement Anomaly](#high-fidelity-domain-account-lateral-movement-anomaly)
 - [High-Fidelity Local Account Remote Access Detection](#high-fidelity-local-account-remote-access-detection)
 - [High-Fidelity Cloud Account Compromise (Entra ID)](#high-fidelity-cloud-account-compromise-(entra-id))
-- [Ultra-Pro High-Fidelity Taint Shared Content (T1080)](#ultra-pro-high-fidelity-taint-shared-content-(t1080))
-- [Ultra-Pro High-Fidelity System Information Discovery (T1082)](#ultra-pro-high-fidelity-system-information-discovery-(t1082))
+- [Taint Shared Content (T1080)](#taint-shared-content-(t1080))
+- [System Information Discovery (T1082)](#system-information-discovery-(t1082))
 - [File and Directory Discovery (T1083)](#file-and-directory-discovery-(t1083))
 - [Suspicious Use of net user or net localgroup via cmd.exe](#suspicious-use-of-net-user-or-net-localgroup-via-cmdexe)
 - [Local Account Discovery (T1087.001)](#local-account-discovery-(t1087001))
@@ -3020,16 +3020,17 @@ patterns from untrusted processes or suspicious parent-child chains.
 
 
 ---
-## Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009)
+## Persistence Artifact Removal (T1070.009)
 - **ID:** `T1070_009.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RESET.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [SCHTASKS.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the systematic removal of persistence mechanisms (Scheduled Tasks, Services, WMI) 
-focusing on forced deletion patterns and suspicious process lineages. 
-Filters out common software update cycles and MSI installer noise.
+- **Leírás:** Detects the systematic removal of persistence mechanisms, including Scheduled Tasks, 
+Services, and WMI objects, by monitoring forced deletion patterns and suspicious 
+process lineages. Filters out common software update cycles, MSI installer activity, 
+and known trusted maintenance processes.
 
 
 #### 🚨 Response Playbook

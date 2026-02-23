@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-23 08:49:54`
+**Utolsó frissítés:** `2026-02-23 09:30:52`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -147,23 +147,23 @@
 | T1070.006 | HIGH | Ultra-Pro High-Fidelity Timestomp and MACE Attribute Manipulation (T1070.006) |
 | T1070.007 | HIGH | Ultra-Pro High-Fidelity Network History and RDP Trace Removal (T1070.007) |
 | T1070.008 | CRITICAL | Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008) |
-| T1070.009 | HIGH | Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009) |
-| T1071 | CRITICAL | Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071) |
-| T1071.001 | CRITICAL | Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071), Ultra-Pro High-Fidelity HTTP/S C2 Anomaly (T1071.001) |
-| T1071.002 | CRITICAL | Ultra-Pro High-Fidelity FTP/SFTP Protocol Anomaly (T1071.002) |
-| T1071.003 | CRITICAL | Ultra-Pro High-Fidelity Mail Protocol Anomaly (T1071.003) |
+| T1070.009 | HIGH | Persistence Artifact Removal (T1070.009) |
+| T1071 | CRITICAL | Application Layer C2 Anomaly (T1071) |
+| T1071.001 | CRITICAL | Application Layer C2 Anomaly (T1071), HTTP/S C2 Anomaly (T1071.001) |
+| T1071.002 | CRITICAL | FTP/SFTP Protocol Anomaly (T1071.002) |
+| T1071.003 | CRITICAL | Mail Protocol Anomaly (T1071.003) |
 | T1071.004 | CRITICAL | DNS Tunneling & Beaconing (T1071.004) |
 | T1072 | CRITICAL | High-Fidelity Software Deployment Tool Abuse Detection |
-| T1074 | CRITICAL | Ultra-Pro High-Fidelity Data Staging Anomaly (T1074), Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001) |
-| T1074.001 | CRITICAL | Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001) |
+| T1074 | CRITICAL | Data Staging Anomaly (T1074), Local Data Staging Anomaly (T1074.001) |
+| T1074.001 | CRITICAL | Local Data Staging Anomaly (T1074.001) |
 | T1074.002 | CRITICAL | Remote Data Staging (T1074.002) |
 | T1078 | HIGH | High-Fidelity Anomalous Logon via Valid Account, Suspicious Impersonation via RunAs Abuse or Deceptive Local Account Creation |
 | T1078.001 | CRITICAL | High-Fidelity Default Account Abuse Detection |
 | T1078.002 | HIGH | High-Fidelity Domain Account Lateral Movement Anomaly |
 | T1078.003 | CRITICAL | High-Fidelity Local Account Remote Access Detection |
 | T1078.004 | CRITICAL | High-Fidelity Cloud Account Compromise (Entra ID) |
-| T1080 | HIGH | Ultra-Pro High-Fidelity Taint Shared Content (T1080) |
-| T1082 | HIGH | Suspicious Event Log Enumeration from Anomalous Execution Context, Ultra-Pro High-Fidelity System Information Discovery (T1082) |
+| T1080 | HIGH | Taint Shared Content (T1080) |
+| T1082 | HIGH | Suspicious Event Log Enumeration from Anomalous Execution Context, System Information Discovery (T1082) |
 | T1083 | HIGH | File and Directory Discovery (T1083) |
 | T1087 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
 | T1087.001 | HIGH | Local Account Discovery (T1087.001) |

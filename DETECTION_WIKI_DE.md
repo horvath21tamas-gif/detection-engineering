@@ -142,23 +142,23 @@
 - [Ultra-Pro High-Fidelity Timestomp und MACE-Attributmanipulation (T1070.006)](#ultra-pro-high-fidelity-timestomp-und-mace-attributmanipulation-(t1070006))
 - [Ultra-Pro High-Fidelity-Netzwerkverlauf und RDP-Trace-Entfernung (T1070.007)](#ultra-pro-high-fidelity-netzwerkverlauf-und-rdp-trace-entfernung-(t1070007))
 - [Ultra-Pro High-Fidelity-E-Mail-Speicherung und Datenbankvernichtung (T1070.008)](#ultra-pro-high-fidelity-e-mail-speicherung-und-datenbankvernichtung-(t1070008))
-- [Ultra-Pro High-Fidelity-Entfernung von Persistenzartefakten (T1070.009)](#ultra-pro-high-fidelity-entfernung-von-persistenzartefakten-(t1070009))
-- [Ultra-Pro High-Fidelity-Anwendungsschicht-C2-Anomalie (T1071)](#ultra-pro-high-fidelity-anwendungsschicht-c2-anomalie-(t1071))
-- [Ultra-Pro High-Fidelity HTTP/S C2-Anomalie (T1071.001)](#ultra-pro-high-fidelity-https-c2-anomalie-(t1071001))
-- [Ultra-Pro High-Fidelity FTP/SFTP-Protokollanomalie (T1071.002)](#ultra-pro-high-fidelity-ftpsftp-protokollanomalie-(t1071002))
-- [Anomalie des Ultra-Pro High-Fidelity-Mail-Protokolls (T1071.003)](#anomalie-des-ultra-pro-high-fidelity-mail-protokolls-(t1071003))
+- [Entfernung von Persistenzartefakten (T1070.009)](#entfernung-von-persistenzartefakten-(t1070009))
+- [Anomalie der Anwendungsschicht C2 (T1071)](#anomalie-der-anwendungsschicht-c2-(t1071))
+- [HTTPS-C2-Anomalie (T1071.001)](#https-c2-anomalie-(t1071001))
+- [FTP/SFTP-Protokollanomalie (T1071.002)](#ftpsftp-protokollanomalie-(t1071002))
+- [Mail-Protokoll-Anomalie (T1071.003)](#mail-protokoll-anomalie-(t1071003))
 - [DNS-Tunneling und Beaconing (T1071.004)](#dns-tunneling-und-beaconing-(t1071004))
 - [Erkennung von Missbrauch durch High-Fidelity-Softwarebereitstellungstools](#erkennung-von-missbrauch-durch-high-fidelity-softwarebereitstellungstools)
-- [Ultra-Pro High-Fidelity-Daten-Staging-Anomalie (T1074)](#ultra-pro-high-fidelity-daten-staging-anomalie-(t1074))
-- [Ultra-Pro High-Fidelity Local Data Staging-Anomalie (T1074.001)](#ultra-pro-high-fidelity-local-data-staging-anomalie-(t1074001))
+- [Daten-Staging-Anomalie (T1074)](#daten-staging-anomalie-(t1074))
+- [Lokale Daten-Staging-Anomalie (T1074.001)](#lokale-daten-staging-anomalie-(t1074001))
 - [Remote-Datenbereitstellung (T1074.002)](#remote-datenbereitstellung-(t1074002))
 - [Anomale High-Fidelity-Anmeldung über ein gültiges Konto](#anomale-high-fidelity-anmeldung-über-ein-gültiges-konto)
 - [High-Fidelity-Standard-Kontomissbrauchserkennung](#high-fidelity-standard-kontomissbrauchserkennung)
 - [Anomalie der seitlichen Bewegung des High-Fidelity-Domänenkontos](#anomalie-der-seitlichen-bewegung-des-high-fidelity-domänenkontos)
 - [High-Fidelity-Fernzugriffserkennung für lokale Konten](#high-fidelity-fernzugriffserkennung-für-lokale-konten)
 - [Kompromittierung eines High-Fidelity-Cloud-Kontos (Entra-ID)](#kompromittierung-eines-high-fidelity-cloud-kontos-(entra-id))
-- [Ultra-Pro High-Fidelity Taint Shared Content (T1080)](#ultra-pro-high-fidelity-taint-shared-content-(t1080))
-- [Ultra-Pro High-Fidelity-Systeminformationserkennung (T1082)](#ultra-pro-high-fidelity-systeminformationserkennung-(t1082))
+- [Geteilte Inhalte verunreinigen (T1080)](#geteilte-inhalte-verunreinigen-(t1080))
+- [Systeminformationserkennung (T1082)](#systeminformationserkennung-(t1082))
 - [Datei- und Verzeichniserkennung (T1083)](#datei--und-verzeichniserkennung-(t1083))
 - [Verdächtige Verwendung von Net User oder Net Localgroup über cmd.exe](#verdächtige-verwendung-von-net-user-oder-net-localgroup-über-cmdexe)
 - [Erkennung lokaler Konten (T1087.001)](#erkennung-lokaler-konten-(t1087001))
@@ -2889,16 +2889,17 @@ Muster aus nicht vertrauenswürdigen Prozessen oder verdächtigen Eltern-Kind-Ke
 
 
 ---
-## Ultra-Pro High-Fidelity-Entfernung von Persistenzartefakten (T1070.009)
+## Entfernung von Persistenzartefakten (T1070.009)
 - **ID:** `T1070_009.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RESET.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [SCHTASKS.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Entfernung von Persistenzmechanismen (geplante Aufgaben, Dienste, WMI)
-Der Schwerpunkt liegt auf erzwungenen Löschmustern und verdächtigen Prozessabläufen.
-Filtert gängige Software-Update-Zyklen und MSI-Installationsgeräusche heraus.
+- **Beschreibung:** Erkennt die systematische Entfernung von Persistenzmechanismen, einschließlich geplanter Aufgaben.
+Dienste und WMI-Objekte werden durch die Überwachung erzwungener und verdächtiger Löschmuster erkannt
+Prozesslinien.Filtert gängige Software-Update-Zyklen, MSI-Installer-Aktivitäten usw. heraus.
+und bekannte vertrauenswürdige Wartungsprozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

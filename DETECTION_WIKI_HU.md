@@ -142,23 +142,23 @@
 - [Ultra-Pro High-Fidelity Timestomp és MACE attribútummanipuláció (T1070.006)](#ultra-pro-high-fidelity-timestomp-és-mace-attribútummanipuláció-(t1070006))
 - [Ultra-Pro High-Fidelity hálózati előzmények és RDP-nyomok eltávolítása (T1070.007)](#ultra-pro-high-fidelity-hálózati-előzmények-és-rdp-nyomok-eltávolítása-(t1070007))
 - [Ultra-Pro High-Fidelity e-mail tárolás és adatbázis-megsemmisítés (T1070.008)](#ultra-pro-high-fidelity-e-mail-tárolás-és-adatbázis-megsemmisítés-(t1070008))
-- [Ultra-Pro, nagy pontosságú, tartós műtermékeltávolítás (T1070.009)](#ultra-pro-nagy-pontosságú-tartós-műtermékeltávolítás-(t1070009))
-- [Ultra-Pro High-Fidelity alkalmazási réteg C2 anomália (T1071)](#ultra-pro-high-fidelity-alkalmazási-réteg-c2-anomália-(t1071))
-- [Ultra-Pro High-Fidelity HTTP/S C2 anomália (T1071.001)](#ultra-pro-high-fidelity-https-c2-anomália-(t1071001))
-- [Ultra-Pro High-Fidelity FTP/SFTP protokoll anomália (T1071.002)](#ultra-pro-high-fidelity-ftpsftp-protokoll-anomália-(t1071002))
-- [Ultra-Pro High-Fidelity Mail Protocol Anomália (T1071.003)](#ultra-pro-high-fidelity-mail-protocol-anomália-(t1071003))
+- [Perzisztencia műtermékek eltávolítása (T1070.009)](#perzisztencia-műtermékek-eltávolítása-(t1070009))
+- [Alkalmazási réteg C2 anomália (T1071)](#alkalmazási-réteg-c2-anomália-(t1071))
+- [HTTPS C2 anomália (T1071.001)](#https-c2-anomália-(t1071001))
+- [FTP/SFTP protokoll anomália (T1071.002)](#ftpsftp-protokoll-anomália-(t1071002))
+- [Levelezési protokoll anomália (T1071.003)](#levelezési-protokoll-anomália-(t1071003))
 - [DNS Tunneling & Beaconing (T1071.004)](#dns-tunneling-&-beaconing-(t1071004))
 - [Nagy pontosságú szoftvertelepítési eszköz visszaélések észlelése](#nagy-pontosságú-szoftvertelepítési-eszköz-visszaélések-észlelése)
-- [Ultra-Pro High-Fidelity adatállomási anomália (T1074)](#ultra-pro-high-fidelity-adatállomási-anomália-(t1074))
-- [Ultra-Pro High-Fidelity helyi adatállomási anomália (T1074.001)](#ultra-pro-high-fidelity-helyi-adatállomási-anomália-(t1074001))
+- [Adatállomási anomália (T1074)](#adatállomási-anomália-(t1074))
+- [Helyi adatállomási anomália (T1074.001)](#helyi-adatállomási-anomália-(t1074001))
 - [Távoli adatállomásozás (T1074.002)](#távoli-adatállomásozás-(t1074002))
 - [Nagy pontosságú rendellenes bejelentkezés érvényes fiókon keresztül](#nagy-pontosságú-rendellenes-bejelentkezés-érvényes-fiókon-keresztül)
 - [Nagy pontosságú alapértelmezett fiókkal való visszaélés észlelése](#nagy-pontosságú-alapértelmezett-fiókkal-való-visszaélés-észlelése)
 - [High-Fidelity Domain Account Lateral Movement Anomália](#high-fidelity-domain-account-lateral-movement-anomália)
 - [Nagy pontosságú helyi fiók távelérés észlelése](#nagy-pontosságú-helyi-fiók-távelérés-észlelése)
 - [High-Fidelity Cloud-fiók kompromittálódása (Entra ID)](#high-fidelity-cloud-fiók-kompromittálódása-(entra-id))
-- [Ultra-Pro High-Fidelity Taint megosztott tartalom (T1080)](#ultra-pro-high-fidelity-taint-megosztott-tartalom-(t1080))
-- [Ultra-Pro High-Fidelity System Information Discovery (T1082)](#ultra-pro-high-fidelity-system-information-discovery-(t1082))
+- [Megosztott tartalom (T1080)](#megosztott-tartalom-(t1080))
+- [Rendszerinformáció-felderítés (T1082)](#rendszerinformáció-felderítés-(t1082))
 - [Fájl- és könyvtárfelderítés (T1083)](#fájl--és-könyvtárfelderítés-(t1083))
 - [Net user vagy net localgroup gyanús használata a cmd.exe-n keresztül](#net-user-vagy-net-localgroup-gyanús-használata-a-cmdexe-n-keresztül)
 - [Helyi fiókfelderítés (T1087.001)](#helyi-fiókfelderítés-(t1087001))
@@ -2889,16 +2889,17 @@ nem megbízható folyamatokból vagy gyanús szülő-gyermek láncokból szárma
 
 
 ---
-## Ultra-Pro, nagy pontosságú, tartós műtermékeltávolítás (T1070.009)
+## Perzisztencia műtermékek eltávolítása (T1070.009)
 - **ID:** `T1070_009.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RESET.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/), [SCHTASKS.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a perzisztencia mechanizmusok szisztematikus eltávolítását (ütemezett feladatok, szolgáltatások, WMI)
-a kényszertörlési mintákra és a gyanús folyamatvonalakra összpontosítva.
-Kiszűri a gyakori szoftverfrissítési ciklusokat és az MSI telepítői zajt.
+- **Leírás:** Érzékeli a kitartási mechanizmusok szisztematikus eltávolítását, beleértve az ütemezett feladatokat,
+Szolgáltatások és WMI objektumok, a kényszertörlési minták és a gyanús
+feldolgozza a vonalakat.Kiszűri a gyakori szoftverfrissítési ciklusokat, az MSI telepítői tevékenységet,
+és az ismert megbízható karbantartási folyamatok.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -2990,7 +2991,7 @@ automatizálás és szkriptekkel való visszaélés PowerShell-en, .NET-en és r
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a DNS-alagút és a C2 tevékenységet a nagy entrópiájú aldomainek figyelésével,
-szokatlan lekérdezési típusok (TXT, NULL és SIG), hosszú vagy ismétlődő lekérdezések és DNS
+szokatlan lekérdezéstípusok (TXT, NULL és SIG), hosszú vagy ismétlődő lekérdezések és DNS
 tevékenység a nem hálózati natív folyamatokból.A rendellenes hosszra, gyakoriságra összpontosít,
 és feldolgozza a kontextust a hamis pozitívumok csökkentésére.
 
@@ -3155,7 +3156,7 @@ vagy nem szabványos automatizálási felhasználói ügynökök emberi fiókok 
 - **Becsült zajszint:** Magas (Tárolás-igényes)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli a megosztott tartalom beszennyezésére irányuló kísérleteket azáltal, hogy figyeli a folyamat és a fájl megosztása közötti gyanús interakciókat.
+- **Leírás:** Észleli a megosztott tartalom beszennyezésére irányuló kísérleteket azáltal, hogy figyeli a gyanús folyamat-fájl-megosztás interakciókat.
 A makró-kompatibilis sablonokra, a parancsikon-eltérítésre és az UNC-útvonalak bináris cseréjére összpontosít.
 
 #### 🚨 Response Playbook
@@ -3173,7 +3174,7 @@ A makró-kompatibilis sablonokra, a parancsikon-eltérítésre és az UNC-útvon
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Szisztematikus rendszerinformáció-felderítést észlel (OS, javítások, architektúra)
 a felderítésre összpontosítva az exploit kiválasztásához.Szűri a nagy mennyiségű zajt
-készletügynökökből, felügyeleti eszközökből és integritási szinteket használó böngészőkből
+készletügynökökből, felügyeleti eszközökből és integritási szintet használó böngészőkből
 és a szülői folyamat kapuzása.
 
 #### 🚨 Response Playbook
@@ -3261,7 +3262,7 @@ ismert szolgáltatásfiókok és felügyeleti eszközök kizárásával.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli az e-mail fiókok és a globális címlisták (GAL) szisztematikus felfedezését
-a nem interaktív PowerShell-munkamenetek, a tömeges exportálási parancsok figyelése és
+a nem interaktív PowerShell-munkamenetek, a tömeges exportálási parancsok és a
 a nem megbízható folyamatok rendellenes hozzáférése a helyi Outlook/Exchange profilkonfigurációkhoz.
 
 #### 🚨 Response Playbook
@@ -3279,7 +3280,7 @@ a nem megbízható folyamatok rendellenes hozzáférése a helyi Outlook/Exchang
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a felhőalapú fiókok (AWS, Azure, GCP) szisztematikus felfedezését
-interaktív CLI használat és rendellenes parancsláncolás figyelése.
+az interaktív CLI használat és a rendellenes parancsláncolás figyelése.
 Kiszűri a jogos CI/CD-folyamatokat és az automatizálási munkaterheléseket
 a folyamat vonaláról és a felhasználói kontextusról.
 

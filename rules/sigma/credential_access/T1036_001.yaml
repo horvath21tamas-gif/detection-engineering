@@ -1,50 +1,69 @@
-title: Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001)
+title: Invalid or Forged Code Signature (T1036.001)
 id: 1f0e4eae-4c82-4006-9959-6339c18757fe
 status: stable
-description: |
-    Detects critical system processes (e.g., lsass, svchost) running with invalid, 
-    untrusted, or forged digital signatures. Focuses on identity-signature 
-    mismatch and publisher typosquatting to eliminate developer noise.
-author: hota05
-date: 2026-02-03
+description: >
+  Detects critical Windows system processes (e.g., lsass.exe, svchost.exe) running
+  with invalid, untrusted, or forged digital signatures. Focuses on identity-signature
+  mismatches and publisher typosquatting while filtering legitimate signed binaries
+  and developer noise.
+
+author: hota05 
+date: 2026-02-23
 tags:
-    - attack.defense_evasion
-    - attack.t1036.001
+  - attack.defense_evasion
+  - attack.t1036.001
+  - attack.execution
+
 logsource:
-    product: windows
-    service: sysmon 
+  product: windows
+  service: sysmon
+
 detection:
-    selection_critical_names:
-        Image|endswith:
-            - '\svchost.exe'
-            - '\lsass.exe'
-            - '\services.exe'
-            - '\wininit.exe'
-            - '\smss.exe'
-            - '\csrss.exe'
-            - '\winlogon.exe'
-            - '\spoolsv.exe'
-            - '\taskhostw.exe'
+  selection_critical_names:
+    Image|endswith:
+      - '\svchost.exe'
+      - '\lsass.exe'
+      - '\services.exe'
+      - '\wininit.exe'
+      - '\smss.exe'
+      - '\csrss.exe'
+      - '\winlogon.exe'
+      - '\spoolsv.exe'
+      - '\taskhostw.exe'
 
-    selection_bad_signature:
-        SignatureStatus:
-            - 'invalid'
-            - 'unavailable'
-            - 'error'
+  selection_bad_signature:
+    SignatureStatus:
+      - 'invalid'
+      - 'unavailable'
+      - 'error'
 
-    selection_forged_publisher:
-        CommandLine|contains: 
-            - 'Micros0ft'
-            - 'Mircosoft'
-            - 'Microsof '
-            - 'Google Inc' 
-            - 'Microsofts'
+  selection_forged_publisher:
+    CommandLine|contains:
+      - 'Micros0ft'
+      - 'Mircosoft'
+      - 'Microsof '
+      - 'Microsofts'
+      - 'Google Inc'
 
-    filter_legit:
-        - Signed: 'true'
-          SignatureStatus: 'Valid'
-          Publisher|contains: 'Microsoft Corporation'
-        - Image|startswith: 'C:\Windows\WinSxS\' 
+  filter_legit:
+    - Signed: 'true'
+      SignatureStatus: 'Valid'
+      Publisher|contains: 'Microsoft Corporation'
+    - Image|startswith:
+        - 'C:\Windows\WinSxS\'
+    - User:
+        - 'NT AUTHORITY\SYSTEM'
+        - 'NT AUTHORITY\LOCAL SERVICE'
+        - 'NT AUTHORITY\NETWORK SERVICE'
 
-    condition: (selection_critical_names and selection_bad_signature) or selection_forged_publisher
+  condition: >
+    (selection_critical_names and selection_bad_signature and not filter_legit)
+    or (selection_forged_publisher and not filter_legit)
+
+falsepositives:
+  - Legitimate Windows updates in WinSxS folder
+  - Enterprise deployment or patching tools
+  - Internal security testing / red team exercises
+  - Developer test binaries with mismatched signatures
+
 level: critical

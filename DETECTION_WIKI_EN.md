@@ -2420,16 +2420,14 @@ originates from unbacked memory (shellcode) and targets common sacrificial proce
 
 
 ---
-## Ultra-Pro Stealthy Process Hollowing (T1055.013)
+## Stealthy Process Hollowing (ATT&CK T1055.013)
 - **ID:** `T1055_013.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [REGASM.EXE](https://lolbas-project.github.io/lolbas/), [VBC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects high-fidelity process hollowing by identifying cross-process access 
-requests with VM_WRITE/VM_OPERATION permissions where the calling stack 
-originates from unbacked memory (shellcode) and targets common sacrificial processes.
+- **Leírás:** Detects high-fidelity process hollowing by identifying cross-process access  requests with VM_WRITE/VM_OPERATION permissions where the calling stack  originates from unbacked memory (shellcode) and targets common sacrificial processes.
 
 
 #### 🚨 Response Playbook

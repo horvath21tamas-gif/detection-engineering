@@ -2322,16 +2322,14 @@ háttér nélküli memóriából (shellkód) származik, és általános áldoza
 
 
 ---
-## Ultra-Pro lopakodó eljárás (T1055.013)
+## Lopakodó eljárással történő kiürítés (ATT&CK T1055.013)
 - **ID:** `T1055_013.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [REGASM.EXE](https://lolbas-project.github.io/lolbas/), [VBC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A folyamatok közötti hozzáférés azonosításával nagy pontosságú folyamatkiürítést észlel
-kérések VM_WRITE/VM_OPERATION engedélyekkel, ahol a hívó verem
-háttér nélküli memóriából (shellkód) származik, és általános áldozati folyamatokat céloz meg.
+- **Leírás:** Érzékeli a nagy pontosságú folyamatok kiüresedését azáltal, hogy azonosítja azokat a VM_WRITE/VM_OPERATION engedéllyel rendelkező, többfolyamat-hozzáférési kérelmeket, ahol a hívó verem nem támogatott memóriából (shellkód) származik, és általános áldozati folyamatokat céloz meg.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

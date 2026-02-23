@@ -1264,7 +1264,7 @@ Anzeichen einer MFA-Umgehung/automatisierten Sitzungsentführung.
 
 
 ---
-## Ultra-Pro High-Fidelity macOS ARD Remote Hijacking (T1021.008)
+## macOS ARD Remote Hijacking (T1021.008)
 - **ID:** `T1021_008.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -1363,7 +1363,7 @@ verdächtige Prozesslinien und filtert gleichzeitig Standardaktivitäten des Bet
 - **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt die Extraktion bösartiger Payloads aus Bilddateien mit Low-Level-GDI+- oder .NET-Bitmap-Methoden.Konzentriert sich auf Invoke-PSImage oder ähnliche Steganographie-Frameworks und filtert gleichzeitig legitime Bildbearbeitungssoftware und Systemprozesse.
+- **Beschreibung:** Erkennt die Extraktion bösartiger Payloads aus Bilddateien mithilfe von Low-Level-GDI+- oder .NET-Bitmap-Methoden.Konzentriert sich auf Invoke-PSImage oder ähnliche Steganographie-Frameworks und filtert gleichzeitig legitime Bildbearbeitungssoftware und Systemprozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

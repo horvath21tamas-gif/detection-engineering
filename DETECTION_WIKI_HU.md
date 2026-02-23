@@ -1264,7 +1264,7 @@ MFA-elkerülésre/automatizált munkamenet-eltérítésre utaló jelek.
 
 
 ---
-## Ultra-Pro High-Fidelity macOS ARD távoli eltérítés (T1021.008)
+## macOS ARD távoli eltérítés (T1021.008)
 - **ID:** `T1021_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -1409,7 +1409,7 @@ gyanús folyamatvonalakat, miközben kiszűri a szabványos operációs rendszer
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a hibakeresési szimbólumok és a szakaszfejlécek aktív eltávolítását a binárisokból nem build rendszereken, a fejlesztői vagy CI/CD környezeteken kívüli eltávolító eszközök végrehajtására összpontosítva.Optimalizált, hogy csökkentse az engedélyezett építési folyamatokból és fejlesztőrendszerekből származó hamis pozitívumot.
+- **Leírás:** Érzékeli a hibakeresési szimbólumok és a szakaszfejlécek aktív eltávolítását a binárisokból nem build rendszereken, a fejlesztői vagy CI/CD környezeteken kívüli eltávolító eszközök végrehajtására összpontosítva.Optimalizált, hogy csökkentse az engedélyezett építési folyamatokból és fejlesztői rendszerekből származó hamis pozitív eredményeket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1457,7 +1457,7 @@ gyanús folyamatvonalakat, miközben kiszűri a szabványos operációs rendszer
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a fejlett parancssori homályosítási technikákat, beleértve a túlzott escape-karaktereket, a környezeti változók szeletelését, a PowerShell-karakterlánc-rekonstrukciót és a kódolt parancsokat.A statikus észlelési szűrők megkerülésére optimalizálva, miközben szűri a törvényes telepítőket és a megbízható rendszerkarbantartó eszközöket.
+- **Leírás:** Érzékeli a fejlett parancssori homályosítási technikákat, beleértve a túlzott escape karaktereket, a környezeti változók szeletelését, a PowerShell karakterlánc-rekonstrukciót és a kódolt parancsokat.A statikus észlelési szűrők megkerülésére optimalizálva, miközben szűri a törvényes telepítőket és a megbízható rendszerkarbantartó eszközöket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -1300,7 +1300,7 @@ signs of MFA-evasion/automated session hijacking.
 
 
 ---
-## Ultra-Pro High-Fidelity macOS ARD Remote Hijacking (T1021.008)
+## macOS ARD Remote Hijacking (T1021.008)
 - **ID:** `T1021_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

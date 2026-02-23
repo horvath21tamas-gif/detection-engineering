@@ -1,56 +1,60 @@
-title: Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112)
+title: Registry Tampering for Evasion (T1112)
 id: fab62a86-e8dd-4a9f-afed-37b09db2306b
 status: stable
 description: |
-    Detects high-risk modifications to the Windows Registry aimed at disabling 
-    security controls (Defender, UAC, LSA) or enabling unauthorized remote access.
-    Optimized to ignore standard system updates and focus on non-standard process behavior.
+  Detects high-risk modifications to the Windows Registry aimed at disabling 
+  security controls (Defender, UAC, LSA) or enabling unauthorized remote access. 
+  Optimized to ignore standard system updates and focus on non-standard process behavior.
 author: hota05
 date: 2026-02-03
 tags:
-    - attack.defense_evasion
-    - attack.t1112
+  - attack.defense_evasion
+  - attack.t1112
 logsource:
-    product: windows
-    category: registry_event 
+  product: windows
+  category: registry_event
 detection:
-    selection_security_keys:
-        TargetObject|contains:
-            - '\Microsoft\Windows Defender\Real-Time Protection\DisableRealtimeMonitoring'
-            - '\Microsoft\Windows Defender\Features\TamperProtection'
-            - '\Microsoft\Windows\CurrentVersion\Policies\System\EnableLUA'
-            - '\Control\Lsa\RunAsPPL'
-            - '\Control\Lsa\LimitBlankPasswordUse'
-            - '\Control\Terminal Server\fDenyTSConnections'
-            - '\System\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\'
+  selection_security_keys:
+    TargetObject|contains:
+      - '\Microsoft\Windows Defender\Real-Time Protection\DisableRealtimeMonitoring'  
+      - '\Microsoft\Windows Defender\Features\TamperProtection'                     
+      - '\Microsoft\Windows\CurrentVersion\Policies\System\EnableLUA'               
+      - '\Control\Lsa\RunAsPPL'                                                    
+      - '\Control\Lsa\LimitBlankPasswordUse'                                       
+      - '\Control\Terminal Server\fDenyTSConnections'                             
+      - '\System\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\' 
 
-    selection_suspicious_executor:
-        Image|endswith: 
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\cmd.exe'
-            - '\reg.exe'
-            - '\mshta.exe'
-            - '\cscript.exe'
-            - '\wscript.exe'
-            - '\python.exe'
-            - '\perl.exe'
+  selection_suspicious_executor:
+    Image|endswith: 
+      - '\powershell.exe'   
+      - '\pwsh.exe'         
+      - '\cmd.exe'          
+      - '\reg.exe'          
+      - '\mshta.exe'        
+      - '\cscript.exe'      
+      - '\wscript.exe'      
+      - '\python.exe'       
+      - '\perl.exe'         
 
-    selection_exploitation_origin:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\outlook.exe'
+  selection_exploitation_origin:
+    ParentImage|endswith:
+      - '\winword.exe'     
+      - '\excel.exe'       
+      - '\chrome.exe'      
+      - '\msedge.exe'     
+      - '\outlook.exe'    
 
-    filter_trusted_system_procs:
-        Image|startswith: 
-            - 'C:\Windows\System32\services.exe'
-            - 'C:\Windows\System32\svchost.exe'
-            - 'C:\Windows\System32\msiexec.exe' 
-            - 'C:\Program Files\Common Files\Microsoft Shared\ClickToRun\'
-        username: 'NT AUTHORITY\SYSTEM'
+  filter_trusted_system_procs:
+    - Image|startswith:
+        - 'C:\Windows\System32\services.exe'             
+        - 'C:\Windows\System32\svchost.exe'              
+        - 'C:\Windows\System32\msiexec.exe'             
+        - 'C:\Program Files\Common Files\Microsoft Shared\ClickToRun\' 
+    - username: 'NT AUTHORITY\SYSTEM'                  
 
-    condition: selection_security_keys and (selection_suspicious_executor or selection_exploitation_origin) and not filter_trusted_system_procs
+  condition: |
+    selection_security_keys and 
+    (selection_suspicious_executor or selection_exploitation_origin) and 
+    not filter_trusted_system_procs
+
 level: critical

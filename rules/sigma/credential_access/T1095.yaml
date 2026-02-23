@@ -1,52 +1,53 @@
-title: Ultra-Pro High-Fidelity Non-Application Layer C2 (T1095)
+title: Non-Application Layer C2 (T1095)
 id: 4952e5f4-e0c3-4473-a4b3-04dde60e02b4
 status: stable
 description: |
-    Detects custom C2 communication via raw TCP/UDP sockets by identifying 
-    the instantiation of low-level NetworkStreams and manual byte-array 
-    buffer manipulation followed by socket write operations.
+  Detects custom C2 communication via raw TCP/UDP sockets by identifying the
+  instantiation of low-level NetworkStreams and manual byte-array buffer 
+  manipulation followed by socket write/read operations.
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.command_and_control
-    - attack.t1095
+  - attack.command_and_control
+  - attack.t1095
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_socket_api:
-        CommandLine|contains:
-            - 'Net.Sockets.TcpClient'      
-            - 'Net.Sockets.UdpClient'      
-            - 'Net.Sockets.Socket'        
-            - 'GetStream()'                
-            - 'NetworkStream'              
+  selection_socket_api:
+    CommandLine|contains:
+      - 'Net.Sockets.TcpClient'
+      - 'Net.Sockets.UdpClient'
+      - 'Net.Sockets.Socket'
+      - 'GetStream()'
+      - 'NetworkStream'
 
-    selection_byte_logic:
-        CommandLine|contains:
-            - 'new-object byte[]'          
-            - '.Write('                    
-            - '.Read('                    
-            - '[Byte[]]'                   
+  selection_byte_logic:
+    CommandLine|contains:
+      - 'new-object byte[]'
+      - '.Write('
+      - '.Read('
+      - '[Byte[]]'
 
-    selection_procs:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
-            - '\mshta.exe'
-            - '\rundll32.exe'
+  selection_procs:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+      - '\rundll32.exe'
 
-    filter_legit_infra:
-        - CommandLine|contains:
-            - 'C:\Program Files\'
-            - 'Microsoft\Azure'           
-            - 'HealthCheck'                
-            - 'Test-NetConnection'       
-        - username: 'NT AUTHORITY\SYSTEM'      
-        - ParentImage|endswith:
-            - '\services.exe'
+  filter_legit_infra:
+    CommandLine|contains:
+      - 'C:\Program Files\'
+      - 'Microsoft\Azure'
+      - 'HealthCheck'
+      - 'Test-NetConnection'
+    username: 'NT AUTHORITY\SYSTEM'
+    ParentImage|endswith:
+      - '\services.exe'
 
-    condition: selection_socket_api and selection_byte_logic and selection_procs and not filter_legit_infra
+  condition: selection_socket_api and selection_byte_logic and selection_procs and not filter_legit_infra
+
 level: critical

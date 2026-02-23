@@ -1,56 +1,70 @@
-title: Ultra-Pro Stealthy PE Injection (T1055.002)
+title: PE Injection Detection (ATT&CK T1055.002)
 id: df708914-9a49-4f1a-b7d3-633a4285969d
 status: stable
-description: |
-    Detects high-fidelity PE injection by identifying cross-process memory 
-    manipulation where the source of the call is an unbacked memory region 
-    (shellcode) and the target is a critical system process.
-author: hota05
-date: 2026-02-03
+description: >
+  Detects PE injection by identifying cross-process memory 
+  manipulation where the source of the call is unbacked memory (shellcode) 
+  and the target is a critical Windows system process. Designed to filter 
+  out trusted AV and system services.
+author: hota05 
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1055/002/
 tags:
-    - attack.defense_evasion
-    - attack.privilege_escalation
-    - attack.t1055.002
+  - attack.defense_evasion
+  - attack.privilege_escalation
+  - attack.t1055.002
+  - attack.host
+
 logsource:
-    product: windows
-    category: process_access 
+  product: windows
+  category: process_access
+
 detection:
-    selection_access_mask:
-        GrantedAccess:
-            - '0x1410'
-            - '0x1411'
-            - '0x1438'
-            - '0x143a'
-            - '0x1F1FFF' 
+  selection_access_mask:
+    GrantedAccess|contains:
+      - '0x1410'       
+      - '0x1411'
+      - '0x1438'
+      - '0x143a'
+      - '0x1F1FFF'     
 
-    selection_unbacked_calltrace:
-        CallTrace|contains: 'unknown'
+  selection_unbacked_calltrace:
+    CallTrace|contains: 'unknown'
 
-    selection_system_targets:
-        TargetImage|endswith:
-            - '\lsass.exe'
-            - '\svchost.exe'
-            - '\explorer.exe'
-            - '\winlogon.exe'
-            - '\spoolsv.exe'
-            - '\runtimebroker.exe'
+  selection_system_targets:
+    TargetImage|endswith:
+      - '\lsass.exe'
+      - '\svchost.exe'
+      - '\explorer.exe'
+      - '\winlogon.exe'
+      - '\spoolsv.exe'
+      - '\runtimebroker.exe'
 
-    filter_trusted_processes:
-        - Sourceprocessname: 'C:\Windows\System32\csrss.exe'
-        - SourceImage|endswith:
-            - '\MsMpEng.exe'        
-            - '\CcmExec.exe'       
-        - CallTrace|contains:
-            - 'clr.dll+'            
-            - 'wer.dll+'            
-            - 'ntdll.dll+LdrpWorkItem'
-        - condition: selection_source_equals_target
+  filter_trusted_processes:
+    - Sourceprocessname: 'C:\Windows\System32\csrss.exe'
+    - SourceImage|endswith:
+        - '\MsMpEng.exe'
+        - '\CcmExec.exe'
+    - CallTrace|contains:
+        - 'clr.dll+'
+        - 'wer.dll+'
+        - 'ntdll.dll+LdrpWorkItem'
+    - condition: selection_source_equals_target
 
-    selection_suspicious_source:
-        SourceImage|contains:
-            - '\Users\'
-            - '\Temp\'
-            - '\AppData\'
+  selection_suspicious_source:
+    SourceImage|contains:
+      - '\Users\'
+      - '\Temp\'
+      - '\AppData\'
 
-    condition: selection_access_mask and selection_unbacked_calltrace and selection_system_targets and not filter_trusted_processes
+  condition: selection_access_mask 
+             and selection_unbacked_calltrace 
+             and selection_system_targets 
+             and not filter_trusted_processes
+
+falsepositives:
+  - Legitimate AV or system memory operations
+  - Admin tools performing debugging or live memory access
+
 level: critical

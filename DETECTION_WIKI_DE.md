@@ -3014,16 +3014,17 @@ durch Bereitstellungsdienste, Herausfiltern von Standardwartungsmustern.
 
 
 ---
-## Ultra-Pro High-Fidelity-Daten-Staging-Anomalie (T1074)
+## Daten-Staging-Anomalie (T1074)
 - **ID:** `T1074.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MAKECAB.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt das Staging von Daten durch die Identifizierung anomaler Dateiaggregationsmuster.
-Archivwechsel mit geringer Komprimierung und Massenkopiervorgänge
-versteckte oder temporäre Systemverzeichnisse von nicht vertrauenswürdigen Shells.
+- **Beschreibung:** Erkennt anomale Datenbereitstellung durch Überwachung auf Dateiaggregationsmuster,
+Archivierungsvorgänge mit geringer Komprimierung oder Passwortschutz sowie Massenkopien
+Befehle von nicht vertrauenswürdigen Shells in versteckte oder temporäre Systemverzeichnisse kopieren
+oder Skripte.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -3032,7 +3033,7 @@ versteckte oder temporäre Systemverzeichnisse von nicht vertrauenswürdigen She
 
 
 ---
-## Ultra-Pro High-Fidelity Local Data Staging-Anomalie (T1074.001)
+## Lokale Daten-Staging-Anomalie (T1074.001)
 - **ID:** `T1074_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -3040,8 +3041,8 @@ versteckte oder temporäre Systemverzeichnisse von nicht vertrauenswürdigen She
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MAKECAB.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt systematisches lokales Daten-Staging durch die Identifizierung einer anomalen Dateiaggregation
-Muster, bestimmte Archivierungsschalter mit geringer Komprimierung oder Passwortschutz,
-und Massenkopiervorgänge aus nicht vertrauenswürdigen Kontexten in versteckte Systemverzeichnisse.
+Muster, niedrigkomprimierte oder passwortgeschützte Archivierungsschalter und Massenkopien
+Operationen in versteckte oder sensible Systemverzeichnisse aus nicht vertrauenswürdigen Prozesskontexten.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

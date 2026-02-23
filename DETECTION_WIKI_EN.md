@@ -3152,16 +3152,17 @@ by deployment services, filtering out standard maintenance patterns.
 
 
 ---
-## Ultra-Pro High-Fidelity Data Staging Anomaly (T1074)
+## Data Staging Anomaly (T1074)
 - **ID:** `T1074.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MAKECAB.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects data staging by identifying anomalous file aggregation patterns, 
-low-compression archival switches, and mass-copy operations into 
-hidden or temporary system directories from untrusted shells.
+- **Leírás:** Detects anomalous data staging by monitoring for file aggregation patterns,
+low-compression or password-protected archival operations, and mass-copy
+commands into hidden or temporary system directories from untrusted shells
+or scripts.
 
 
 #### 🚨 Response Playbook
@@ -3171,16 +3172,16 @@ hidden or temporary system directories from untrusted shells.
 
 
 ---
-## Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001)
+## Local Data Staging Anomaly (T1074.001)
 - **ID:** `T1074_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MAKECAB.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic local data staging by identifying anomalous file aggregation 
-patterns, specific low-compression or password-protected archival switches, 
-and mass-copy operations into hidden system directories from untrusted contexts.
+- **Leírás:** Detects systematic local data staging by identifying anomalous file aggregation
+patterns, low-compression or password-protected archival switches, and mass-copy
+operations into hidden or sensitive system directories from untrusted process contexts.
 
 
 #### 🚨 Response Playbook

@@ -3014,16 +3014,17 @@ telepítési szolgáltatásokkal, kiszűrve a szabványos karbantartási minták
 
 
 ---
-## Ultra-Pro High-Fidelity adatállomási anomália (T1074)
+## Adatállomási anomália (T1074)
 - **ID:** `T1074.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MAKECAB.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A rendellenes fájlösszesítési minták azonosításával észleli az adatsorolást,
-alacsony tömörítésű archiválási kapcsolók és tömeges másolási műveletek
-rejtett vagy ideiglenes rendszerkönyvtárak nem megbízható shellekből.
+- **Leírás:** Fájl-összesítési minták figyelésével észleli a rendellenes adatsorolást,
+alacsony tömörítésű vagy jelszóval védett archiválási műveletek és tömeges másolás
+parancsokat rejtett vagy ideiglenes rendszerkönyvtárakba nem megbízható shellekből
+vagy forgatókönyveket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -3032,16 +3033,16 @@ rejtett vagy ideiglenes rendszerkönyvtárak nem megbízható shellekből.
 
 
 ---
-## Ultra-Pro High-Fidelity helyi adatállomási anomália (T1074.001)
+## Helyi adatállomási anomália (T1074.001)
 - **ID:** `T1074_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MAKECAB.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli a szisztematikus helyi adatsorolást a rendellenes fájlösszesítés azonosításával
-minták, speciális alacsony tömörítésű vagy jelszóval védett archiválási kapcsolók,
-és tömegesen másolja a műveleteket rejtett rendszerkönyvtárakba nem megbízható kontextusokból.
+- **Leírás:** Felismeri a szisztematikus helyi adatsorolást a rendellenes fájlösszesítés azonosításával
+minták, alacsony tömörítésű vagy jelszóval védett archiválási kapcsolók és tömeges másolás
+műveleteket rejtett vagy érzékeny rendszerkönyvtárakba nem megbízható folyamatkörnyezetekből.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

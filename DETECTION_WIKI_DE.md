@@ -1485,15 +1485,14 @@ Dekonstruktion zur Umgehung statischer Erkennungsfilter.
 
 
 ---
-## Ultra-Pro High-Fidelity-Erstellung verdächtiger Archive (T1027.011)
+## Verdächtige Archiverstellung (T1027.011)
 - **ID:** `T1027_011.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MAKECAB.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Erstellung passwortgeschützter und/oder verschlüsselter Archive mithilfe gängiger CLI-Tools.
-Der Schwerpunkt liegt auf Befehlszeilen-Passwortargumenten und der rekursiven Erfassung sensibler Pfade.
+- **Beschreibung:** Erkennt die Erstellung passwortgeschützter oder verschlüsselter Archive mithilfe gängiger CLI-Archivierungstools.Der Schwerpunkt liegt auf Befehlszeilen-Passwortargumenten, rekursiven Vorgängen und der Ausgabe in nicht standardmäßige oder vertrauliche Pfade.Filtert legitimen Cloud-Speicher und autorisierte Anwendungsnutzung heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

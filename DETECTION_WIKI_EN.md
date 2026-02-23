@@ -1534,15 +1534,14 @@ deconstruction used to bypass static detection filters.
 
 
 ---
-## Ultra-Pro High-Fidelity Suspicious Archive Creation (T1027.011)
+## Suspicious Archive Creation (T1027.011)
 - **ID:** `T1027_011.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MAKECAB.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the creation of password-protected and/or encrypted archives using common CLI tools. 
-Focuses on command-line password arguments and recursive collection from sensitive paths.
+- **Leírás:** Detects the creation of password-protected or encrypted archives using common CLI archiving tools. Focuses on command-line password arguments, recursive operations, and output to non-standard or sensitive paths. Filters out legitimate cloud storage and authorized application usage.
 
 
 #### 🚨 Response Playbook

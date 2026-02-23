@@ -1485,15 +1485,14 @@ dekonstrukció, amelyet a statikus érzékelőszűrők megkerülésére használ
 
 
 ---
-## Ultra-Pro High-Fidelity gyanús archívum létrehozása (T1027.011)
+## Gyanús archívum létrehozása (T1027.011)
 - **ID:** `T1027_011.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MAKECAB.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Jelszóval védett és/vagy titkosított archívumok létrehozását észleli az általános CLI-eszközök használatával.
-A parancssori jelszó argumentumaira és az érzékeny útvonalakból származó rekurzív gyűjtésre összpontosít.
+- **Leírás:** Jelszóval védett vagy titkosított archívumok létrehozását észleli a szokásos CLI archiváló eszközök segítségével.A parancssori jelszó argumentumaira, a rekurzív műveletekre és a nem szabványos vagy érzékeny útvonalakra történő kimenetre összpontosít.Kiszűri a jogos felhőalapú tárolást és az engedélyezett alkalmazáshasználatot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1555,7 +1554,7 @@ A parancssori jelszó argumentumaira és az érzékeny útvonalakból származó
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az aktuális felhasználó, a bejelentkezett felhasználók és a token jogosultságok szisztematikus felderítését.Rendellenes folyamatsorokat (Office-alkalmazások, böngészők) és gyanús parancssori mintákat (/priv, /groups, /all) céloz meg, amelyeket gyakran használnak a jogosultság-kiterjesztési kísérletek előtt.Kiszűri a jogszerű rendszerautomatizálást és a vállalatirányítási zajt.
+- **Leírás:** Érzékeli az aktuális felhasználó, a bejelentkezett felhasználók és a token jogosultságok szisztematikus felderítését.Rendellenes folyamatsorokat (Office-alkalmazások, böngészők) és gyanús parancssori mintákat (/priv, /groups, /all) céloz meg, amelyeket gyakran használnak a jogosultság-kiterjesztési kísérletek előtt.Kiszűri a jogszerű rendszerautomatizálást és a vállalatirányítási zajokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1625,7 +1624,7 @@ A parancssori jelszó argumentumaira és az érzékeny útvonalakból származó
 
 
 ---
-## Maszkírozás útvonal-anomálián keresztül (T1036.004)
+## Masquerade via Path Anomalia (T1036.004)
 - **ID:** `T1036_004.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)

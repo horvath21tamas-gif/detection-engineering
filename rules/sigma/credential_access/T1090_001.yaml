@@ -1,59 +1,59 @@
-title: Ultra-Pro High-Fidelity Internal Proxy & Pivot Detection (T1090.001)
+title: Internal Proxy & Pivot Detection (T1090.001)
 id: 4f67dbe4-6f79-4102-90cc-c18f1a132621
 status: stable
 description: |
-    Detects internal network pivoting by identifying the configuration of 
-    port forwarding to private RFC 1918 IP addresses from non-system 
-    processes, excluding legitimate local virtualization and container traffic.
+  Detects internal network pivoting by identifying the configuration of 
+  port forwarding to private RFC 1918 IP addresses from non-system 
+  processes, excluding legitimate local virtualization and container traffic.
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.command_and_control
-    - attack.t1090.001
+  - attack.command_and_control
+  - attack.t1090.001
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_internal_pivot:
-        CommandLine|contains|all:
-            - 'portproxy'
-            - 'v4tov4'
-            - 'connectaddress='
-        CommandLine|contains:
-            - '10.'
-            - '192.168.'
-            - '172.16.'
-            - '172.17.'
-            - '172.18.'
-            - '172.19.'
-            - '172.2'
-            - '172.3'
+  selection_internal_pivot:
+    CommandLine|contains:
+      - 'portproxy'
+      - 'v4tov4'
+      - 'connectaddress='
+    CommandLine|contains:
+      - '10.'
+      - '192.168.'
+      - '172.16.'
+      - '172.17.'
+      - '172.18.'
+      - '172.19.'
+      - '172.2'
+      - '172.3'
 
-    selection_logic:
-        CommandLine|contains:
-            - 'listenaddress=0.0.0.0'         
-            - 'listenport='
-            - 'connectport='
+  selection_logic:
+    CommandLine|contains:
+      - 'listenaddress=0.0.0.0'
+      - 'listenport='
+      - 'connectport='
 
-    selection_procs:
-        Image|endswith:
-            - '\netsh.exe'
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\cmd.exe'
-            - '\plink.exe'
-            - '\socat.exe'
+  selection_procs:
+    Image|endswith:
+      - '\netsh.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\plink.exe'
+      - '\socat.exe'
 
-    filter_legit_virtualization:
-        - CommandLine|contains:
-            - '127.0.0.1'                      
-            - '::1'                            
-            - 'C:\Program Files\Docker'        
-            - 'C:\Program Files\WSL'           
-            - 'C:\Windows\System32\WSL'
-        - username: 'NT AUTHORITY\SYSTEM'        
-        - ParentImage|endswith:
-            - '\services.exe'
+  filter_legit_virtualization:
+    CommandLine|contains:
+      - '127.0.0.1'
+      - '::1'
+      - 'C:\Program Files\Docker'
+      - 'C:\Program Files\WSL'
+      - 'C:\Windows\System32\WSL'
+    username: 'NT AUTHORITY\SYSTEM'
+    ParentImage|endswith:
+      - '\services.exe'
 
-    condition: selection_internal_pivot and selection_logic and selection_procs and not filter_legit_virtualization
+  condition: selection_internal_pivot and selection_logic and selection_procs and not filter_legit_virtualization
 level: critical

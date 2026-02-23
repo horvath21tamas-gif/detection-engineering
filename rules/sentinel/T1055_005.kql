@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (GrantedAccess in ("0x1410", "0x1411", "0x1438", "0x1F1FFF")) and CallTrace contains "unknown" and (TargetImage in ("*\explorer.exe", "*\svchost.exe", "*\lsass.exe", "*\winlogon.exe")) and (not (Sourceprocessname =~ "C:\Windows\System32\csrss.exe" or (SourceImage in ("*\MsMpEng.exe", "*\CcmExec.exe")) or (CallTrace in ("*ntdll.dll+LdrpWorkItem*", "*ntdll.dll+LdrpInitializeProcess*")) or condition =~ "selection_source_equals_target"))
+| where (GrantedAccess in ("*0x1410*", "*0x1411*", "*0x1438*", "*0x1F1FFF*")) and CallTrace contains "unknown" and (TargetImage in ("*\explorer.exe", "*\svchost.exe", "*\lsass.exe", "*\winlogon.exe")) and (not (Sourceprocessname =~ "C:\Windows\System32\csrss.exe" or (SourceImage in ("*\MsMpEng.exe", "*\CcmExec.exe")) or (CallTrace in ("*ntdll.dll+LdrpWorkItem*", "*ntdll.dll+LdrpInitializeProcess*")) or condition =~ "selection_source_equals_target"))

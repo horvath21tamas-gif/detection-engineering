@@ -2332,16 +2332,14 @@ from unbacked or untrusted memory regions (CallTrace analysis).
 
 
 ---
-## Ultra-Pro Stealthy TLS Injection (T1055.005)
+## TLS Injection Detection (ATT&CK T1055.005)
 - **ID:** `T1055_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects high-fidelity TLS injection by monitoring for cross-process memory 
-manipulation targeting PE headers where the execution flow originates 
-from unbacked memory (shellcode).
+- **Leírás:** Detects TLS injection by monitoring cross-process memory  manipulation targeting PE headers, where the execution flow originates  from unbacked memory regions (shellcode), while filtering out trusted system processes.
 
 
 #### 🚨 Response Playbook
@@ -2350,14 +2348,12 @@ from unbacked memory (shellcode).
 
 
 ---
-## Ultra-Pro Stealthy Ptrace Injection (T1055.008)
+## Ptrace Injection Detection (ATT&CK T1055.008)
 - **ID:** `T1055_008.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects high-fidelity ptrace-based process injection by identifying 
-PTRACE_POKETEXT/DATA operations from suspicious sources or 
-cross-user ptrace attachments, filtering out legitimate debuggers.
+- **Leírás:** Detects ptrace-based process injection by monitoring PTRACE_POKETEXT/DATA operations  originating from suspicious binaries or cross-user ptrace attachments, while filtering out legitimate  debugging and monitoring tools.
 
 
 #### 🚨 Response Playbook

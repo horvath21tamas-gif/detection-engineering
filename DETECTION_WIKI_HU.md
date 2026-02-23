@@ -2239,16 +2239,14 @@ nem támogatott vagy nem megbízható memóriarégiókból (CallTrace elemzés).
 
 
 ---
-## Ultra-Pro Stealthy TLS injekció (T1055.005)
+## TLS befecskendezés észlelése (ATT&CK T1055.005)
 - **ID:** `T1055_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a nagy pontosságú TLS-injekciót a többfolyamat-memória figyelésével
-manipuláció, amely azokat a PE-fejléceket célozza meg, amelyekből a végrehajtási folyamat származik
-nem támogatott memóriából (shellkód).
+- **Leírás:** Érzékeli a TLS-befecskendezést a folyamatok közötti memóriamanipuláció figyelésével, amely a PE-fejléceket célozza meg, ahol a végrehajtási folyamat nem támogatott memóriarégiókból (shellkód) származik, miközben kiszűri a megbízható rendszerfolyamatokat.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -2256,14 +2254,12 @@ nem támogatott memóriából (shellkód).
 
 
 ---
-## Ultra-Pro Stealthy Ptrace injekció (T1055.008)
+## Ptrace Injection Detection (ATT&CK T1055.008)
 - **ID:** `T1055_008.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** A nagy pontosságú, ptrace alapú folyamatinjektálást azonosítással érzékeli
-PTRACE_POKETEXT/DATA műveletek gyanús forrásból vagy
-cross-user ptrace mellékletek, kiszűrve a jogos hibakeresőket.
+- **Leírás:** Érzékeli a ptrace alapú folyamatinjektálást a gyanús binárisokból vagy több felhasználó közötti ptrace mellékletekből származó PTRACE_POKETEXT/DATA műveletek figyelésével, miközben kiszűri a jogos hibakereső és megfigyelő eszközöket.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -2362,7 +2358,7 @@ cross-user ptrace mellékletek, kiszűrve a jogos hibakeresőket.
 
 
 ---
-## Bemeneti rögzítés észlelése (ATT&CK T1056)
+## Bemenetrögzítés észlelése (ATT&CK T1056)
 - **ID:** `T1056.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)

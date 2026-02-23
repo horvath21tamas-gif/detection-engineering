@@ -2239,16 +2239,14 @@ aus nicht gesicherten oder nicht vertrauenswürdigen Speicherbereichen (CallTrac
 
 
 ---
-## Ultra-Pro Stealthy TLS-Injektion (T1055.005)
+## TLS-Injektionserkennung (ATT&CK T1055.005)
 - **ID:** `T1055_005.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt High-Fidelity-TLS-Injection durch Überwachung des prozessübergreifenden Speichers
-Manipulation, die auf PE-Header abzielt, von denen der Ausführungsfluss stammt
-aus ungesichertem Speicher (Shellcode).
+- **Beschreibung:** Erkennt TLS-Injection durch Überwachung der prozessübergreifenden Speichermanipulation, die auf PE-Header abzielt, bei denen der Ausführungsfluss aus nicht gesicherten Speicherbereichen (Shellcode) stammt, und filtert gleichzeitig vertrauenswürdige Systemprozesse heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**
@@ -2256,14 +2254,12 @@ aus ungesichertem Speicher (Shellcode).
 
 
 ---
-## Ultra-Pro Stealthy Ptrace-Injektion (T1055.008)
+## Ptrace-Injektionserkennung (ATT&CK T1055.008)
 - **ID:** `T1055_008.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt hochpräzise Ptrace-basierte Prozessinjektionen durch Identifizierung
-PTRACE_POKETEXT/DATA-Vorgänge aus verdächtigen Quellen oder
-Benutzerübergreifende Ptrace-Anhänge, die legitime Debugger herausfiltern.
+- **Beschreibung:** Erkennt Ptrace-basierte Prozesseinschleusung durch Überwachung von PTRACE_POKETEXT/DATA-Vorgängen, die von verdächtigen Binärdateien oder benutzerübergreifenden Ptrace-Anhängen stammen, und filtert gleichzeitig legitime Debugging- und Überwachungstools heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**
@@ -2293,7 +2289,7 @@ Benutzerübergreifende Ptrace-Anhänge, die legitime Debugger herausfiltern.
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Einschleusung von Extra Window Memory (EWM) durch die Überwachung verdächtiger prozessübergreifender Speicherzugriffsanforderungen, bei denen CallTrace die Ausführung aus nicht gesichertem Speicher (Shellcode) anzeigt und auf gängige GUI-Prozesse abzielt.
+- **Beschreibung:** Erkennt die Einschleusung von Extra Window Memory (EWM) durch Überwachung verdächtiger prozessübergreifender Speicherzugriffsanforderungen, bei denen CallTrace die Ausführung aus nicht gesichertem Speicher (Shellcode) anzeigt und auf gängige GUI-Prozesse abzielt.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

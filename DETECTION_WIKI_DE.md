@@ -2305,16 +2305,14 @@ Zeigt die Ausführung aus nicht gesichertem Speicher (Shellcode) an, die auf GUI
 
 
 ---
-## Ultra-Pro Stealthy Process Hollowing (T1055.012)
+## Stealthy Process Hollowing (ATT&CK T1055.012)
 - **ID:** `T1055_012.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [REGASM.EXE](https://lolbas-project.github.io/lolbas/), [VBC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt High-Fidelity Process Hollowing durch Identifizierung prozessübergreifender Zugriffe
-Anfragen mit VM_WRITE/VM_OPERATION-Berechtigungen an den aufrufenden Stack
-stammt aus ungesichertem Speicher (Shellcode) und zielt auf häufige Opferprozesse ab.
+- **Beschreibung:** Erkennt High-Fidelity-Prozess-Hollowing durch Identifizierung prozessübergreifender Zugriffsanforderungen mit VM_WRITE/VM_OPERATION-Berechtigungen, bei denen der aufrufende Stack aus nicht gesichertem Speicher (Shellcode) stammt und auf häufige Opferprozesse abzielt.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

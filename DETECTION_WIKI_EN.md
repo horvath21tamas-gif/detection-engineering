@@ -2889,14 +2889,12 @@ clearing of security-sensitive providers.
 
 
 ---
-## Ultra-Pro High-Fidelity Linux Log Clearing and Journal Sabotage (T1070.002)
+## Linux Log Clearing and Journal Sabotage (ATT&CK T1070.002)
 - **ID:** `T1070_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects targeted attempts to clear or truncate Linux system logs and journald buffers. 
-Focuses on manual command-line patterns, shell redirection to log files, and 
-vacuuming of systemd journals outside of automated maintenance windows.
+- **Leírás:** Detects targeted attempts to clear or truncate Linux system logs and journald buffers. Focuses on manual command-line patterns, shell redirection to log files, and vacuuming of systemd journals outside of automated maintenance windows.
 
 
 #### 🚨 Response Playbook

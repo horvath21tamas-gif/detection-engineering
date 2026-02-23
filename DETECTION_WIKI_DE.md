@@ -2765,14 +2765,12 @@ Clearing sicherheitsrelevanter Anbieter.
 
 
 ---
-## Ultra-Pro High-Fidelity-Linux-Protokolllöschung und Journalsabotage (T1070.002)
+## Linux-Protokolllöschung und Journalsabotage (ATT&CK T1070.002)
 - **ID:** `T1070_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt gezielte Versuche, Linux-Systemprotokolle und Journalpuffer zu löschen oder zu kürzen.
-Konzentriert sich auf manuelle Befehlszeilenmuster, Shell-Umleitung auf Protokolldateien usw
-Staubsaugen von Systemd-Journalen außerhalb automatisierter Wartungsfenster.
+- **Beschreibung:** Erkennt gezielte Versuche, Linux-Systemprotokolle und Journalpuffer zu löschen oder zu kürzen.Der Schwerpunkt liegt auf manuellen Befehlszeilenmustern, der Shell-Umleitung auf Protokolldateien und der Bereinigung von Systemd-Journalen außerhalb automatisierter Wartungsfenster.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -2765,14 +2765,12 @@ biztonsági szempontból érzékeny szolgáltatók elszámolása.
 
 
 ---
-## Ultra-Pro High-Fidelity Linux naplótörlés és naplószabotázs (T1070.002)
+## Linux naplótörlés és naplószabotázs (ATT&CK T1070.002)
 - **ID:** `T1070_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a Linux rendszernaplók és a naplózott pufferek törlésére vagy csonkolására irányuló célzott kísérleteket.
-A kézi parancssori mintákra, a naplófájlokba való shell-átirányításra összpontosít, és
-rendszernaplók porszívózása az automatizált karbantartási ablakokon kívül.
+- **Leírás:** Érzékeli a Linux rendszernaplók és a naplózott pufferek törlésére vagy csonkolására irányuló célzott kísérleteket.A kézi parancssori mintákra, a naplófájlokba való shell-átirányításra és a rendszernaplók felszívására összpontosít az automatizált karbantartási ablakokon kívül.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

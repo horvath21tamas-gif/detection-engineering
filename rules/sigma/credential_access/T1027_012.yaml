@@ -1,51 +1,68 @@
-title: Ultra-Pro High-Fidelity Windows LDR Hijacking (T1027.012)
+title: Windows LDR Hijacking (T1027.012)
 id: c225968f-09a4-4379-ab6f-32ff44ec2a2e
 status: stable
-description: |
-    Detects attempts to hijack the Windows loader (LDR) via AppInit_DLLs or AppCertDLLs. 
-    It specifically targets DLL registrations originating from non-system paths (Temp, Public, User profiles) 
-    and the activation of the LoadAppInit_DLLs flag by suspicious processes.
+description: >
+  Detects attempts to hijack the Windows loader (LDR) via AppInit_DLLs or
+  AppCertDLLs. Targets DLL registrations from non-system paths (Temp, Public,
+  User profiles) and activation of LoadAppInit_DLLs flag by suspicious actors.
+  Filters out legitimate installers and system maintenance processes.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-23
 tags:
-    - attack.defense_evasion
-    - attack.persistence
-    - attack.t1027.012
+  - attack.defense_evasion
+  - attack.persistence
+  - attack.t1027.012
+
 logsource:
-    product: windows
-    category: registry_event
+  product: windows
+  category: registry_event
+
 detection:
-    selection_registry_keys:
-        TargetObject|contains:
-            - '\Microsoft\Windows NT\CurrentVersion\Windows\AppInit_DLLs'
-            - '\Microsoft\Windows NT\CurrentVersion\Windows\AppCertDlls'
-            - '\Control\Session Manager\AppCertDlls'
+  selection_registry_keys:
+    TargetObject|contains:
+      - '\Microsoft\Windows NT\CurrentVersion\Windows\AppInit_DLLs'
+      - '\Microsoft\Windows NT\CurrentVersion\Windows\AppCertDlls'
+      - '\Control\Session Manager\AppCertDlls'
 
-    selection_suspicious_paths:
-        Details|contains:
-            - '\Users\'
-            - '\AppData\Local\Temp\'
-            - '\Windows\Temp\'
-            - '\PerfLogs\'
-            - '\ProgramData\'
+  selection_suspicious_paths:
+    Details|contains:
+      - '\Users\'
+      - '\AppData\Local\Temp\'
+      - '\Windows\Temp\'
+      - '\PerfLogs\'
+      - '\ProgramData\'
 
-    selection_enable_flag:
-        TargetObject|endswith: '\Microsoft\Windows NT\CurrentVersion\Windows\LoadAppInit_DLLs'
-        Details: 'DWORD (0x00000001)'
+  selection_enable_flag:
+    TargetObject|endswith: '\Microsoft\Windows NT\CurrentVersion\Windows\LoadAppInit_DLLs'
+    Details: 'DWORD (0x00000001)'
 
-    selection_suspicious_actors:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\cmd.exe'
-            - '\reg.exe'
-            - '\cscript.exe'
-            - '\wscript.exe'
+  selection_suspicious_actors:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\cmd.exe'
+      - '\reg.exe'
+      - '\cscript.exe'
+      - '\wscript.exe'
 
-    filter_trusted_installers:
-        Image|startswith:
-            - 'C:\Windows\System32\msiexec.exe'
-            - 'C:\Windows\System32\wbem\WmiPrvSE.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+  filter_trusted_installers:
+    Image|startswith:
+      - 'C:\Windows\System32\msiexec.exe'
+      - 'C:\Windows\System32\wbem\WmiPrvSE.exe'
+    User:
+      - 'NT AUTHORITY\SYSTEM'
+      - 'NT AUTHORITY\LOCAL SERVICE'
+      - 'NT AUTHORITY\NETWORK SERVICE'
 
-    condition: ((selection_registry_keys and selection_suspicious_paths) or (selection_enable_flag and selection_suspicious_actors)) and not filter_trusted_installers
+  condition: >
+    ((selection_registry_keys and selection_suspicious_paths)
+     or (selection_enable_flag and selection_suspicious_actors))
+    and not filter_trusted_installers
+
+falsepositives:
+  - Legitimate software installers modifying AppCertDLLs / AppInit_DLLs
+  - System maintenance or security monitoring scripts
+  - Red team testing or internal automation
+  - Enterprise deployment tools writing to registry from trusted paths
+
 level: critical

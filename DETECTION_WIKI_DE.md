@@ -1467,16 +1467,14 @@ Ausrichtung auf nicht standardmäßige Ressourcenstandorte.
 
 
 ---
-## Ultra-Pro High-Fidelity-Befehlszeilenverschleierung (T1027.010)
+## Befehlszeilenverschleierung (T1027.010)
 - **ID:** `T1027_010.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt erweiterte Befehlszeilen-Verschleierungstechniken.Konzentriert sich auf Übermaß
-Escape-Zeichendichte, Slicing von Umgebungsvariablen und PowerShell-String
-Dekonstruktion zur Umgehung statischer Erkennungsfilter.
+- **Beschreibung:** Erkennt erweiterte Befehlszeilen-Verschleierungstechniken, einschließlich übermäßiger Escape-Zeichen, Slicing von Umgebungsvariablen, PowerShell-String-Rekonstruktion und codierte Befehle.Optimiert, um statische Erkennungsfilter zu umgehen und gleichzeitig legitime Installer und vertrauenswürdige Systemwartungstools zu filtern.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -1679,7 +1677,7 @@ Dekonstruktion zur Umgehung statischer Erkennungsfilter.
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Ausführung von Binärdateien, die sich über doppelte Dateierweiterungen als Dokumente ausgeben (z. B. .pdf.exe, .docx.exe).Filtert Entwicklerartefakte (.min.js, .map), Systembinärdateien und verifizierte Installationsprogramme heraus.Konzentriert sich auf Benutzerverzeichnisse mit hohem Risiko und verdächtige übergeordnete Prozesse.
+- **Beschreibung:** Erkennt die Ausführung von Binärdateien, die sich als Dokumente über doppelte Dateierweiterungen ausgeben (z. B. .pdf.exe, .docx.exe).Filtert Entwicklerartefakte (.min.js, .map), Systembinärdateien und verifizierte Installationsprogramme heraus.Konzentriert sich auf Benutzerverzeichnisse mit hohem Risiko und verdächtige übergeordnete Prozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

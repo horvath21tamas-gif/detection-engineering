@@ -1515,16 +1515,14 @@ targeting non-standard resource locations.
 
 
 ---
-## Ultra-Pro High-Fidelity Command Line Obfuscation (T1027.010)
+## Command Line Obfuscation (T1027.010)
 - **ID:** `T1027_010.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects advanced command line obfuscation techniques. Focuses on excessive 
-escape character density, environment variable slicing, and PowerShell string 
-deconstruction used to bypass static detection filters.
+- **Leírás:** Detects advanced command line obfuscation techniques including excessive escape characters, environment variable slicing, PowerShell string reconstruction, and encoded commands. Optimized to bypass static detection filters while filtering legitimate installers and trusted system maintenance tools.
 
 
 #### 🚨 Response Playbook

@@ -1467,16 +1467,14 @@ nem szabványos erőforrás-helyek célzása.
 
 
 ---
-## Ultra-Pro High-Fidelity parancssori obfuszkáció (T1027.010)
+## Parancssori zavarás (T1027.010)
 - **ID:** `T1027_010.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a fejlett parancssori obfuszkációs technikákat.A túlzásra összpontosít
-escape karaktersűrűség, környezeti változó szeletelés és PowerShell karakterlánc
-dekonstrukció, amelyet a statikus érzékelőszűrők megkerülésére használnak.
+- **Leírás:** Érzékeli a fejlett parancssori homályosítási technikákat, beleértve a túlzott escape-karaktereket, a környezeti változók szeletelését, a PowerShell-karakterlánc-rekonstrukciót és a kódolt parancsokat.A statikus észlelési szűrők megkerülésére optimalizálva, miközben szűri a törvényes telepítőket és a megbízható rendszerkarbantartó eszközöket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

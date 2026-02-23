@@ -74,7 +74,7 @@
 - [Ultra-Pro High-Fidelity-Speicherplatz nach Dateinamenmaskierung (T1036.006)](#ultra-pro-high-fidelity-speicherplatz-nach-dateinamenmaskierung-(t1036006))
 - [Ultra-Pro High-Fidelity-Doppeldateierweiterungsausführung (T1036.007)](#ultra-pro-high-fidelity-doppeldateierweiterungsausführung-(t1036007))
 - [Ultra-Pro High-Fidelity-Masquerade-Dateityp durch Interpreter-Missbrauch (T1036.008)](#ultra-pro-high-fidelity-masquerade-dateityp-durch-interpreter-missbrauch-(t1036008))
-- [Ultra-Pro High-Fidelity Allure Document und RTLO Masquerading (T1036.009)](#ultra-pro-high-fidelity-allure-document-und-rtlo-masquerading-(t1036009))
+- [Allure Document & RTLO Masquerading Detection](#allure-document-&-rtlo-masquerading-detection)
 - [Persistenz des High-Fidelity-Anmeldeskripts (T1037)](#persistenz-des-high-fidelity-anmeldeskripts-(t1037))
 - [High-Fidelity UserInitMprLogonScript-Persistenz](#high-fidelity-userinitmprlogonscript-persistenz)
 - [High-Fidelity-Netsh-Helper-DLL-Persistenz](#high-fidelity-netsh-helper-dll-persistenz)
@@ -1729,16 +1729,14 @@ Filtert die Automatisierung auf Systemebene heraus und konzentriert sich auf nic
 
 
 ---
-## Ultra-Pro High-Fidelity Allure Document und RTLO Masquerading (T1036.009)
+## Allure Document & RTLO Masquerading Detection
 - **ID:** `T1036_009.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt raffiniertes Maskieren mithilfe von Allure-Dokumenten und RTLO-Zeichen.
-Konzentriert sich auf die Ausführung aus nicht vertrauenswürdigen Benutzerverzeichnissen und verdächtigen übergeordneten Verzeichnissen
-Prozesse (Browser, E-Mail-Clients) und filtert gleichzeitig allgemeine Entwicklergeräusche.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt Maskierung mit doppelten Dateierweiterungen und Zeichen zur Rechts-nach-Links-Überschreibung (RTLO – U+202E).Konzentriert sich auf die Ausführung aus vom Benutzer beschreibbaren Verzeichnissen oder verdächtigen übergeordneten Prozessen wie Browsern, E-Mail-Clients und Archivierungsdienstprogrammen.Entwickelt, um Entwickler- und Systemgeräusche zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

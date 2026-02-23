@@ -75,7 +75,7 @@ detection:
       - '\AppData\Local\Programs\'
 
   filter_system_accounts:
-    User:
+    username:
       - 'NT AUTHORITY\SYSTEM'
       - 'NT AUTHORITY\LOCAL SERVICE'
       - 'NT AUTHORITY\NETWORK SERVICE'

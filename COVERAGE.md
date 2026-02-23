@@ -79,7 +79,7 @@
 | T1036.006 | CRITICAL | Ultra-Pro High-Fidelity Space After Filename Masquerading (T1036.006) |
 | T1036.007 | CRITICAL | Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007) |
 | T1036.008 | CRITICAL | Ultra-Pro High-Fidelity Masquerade File Type via Interpreter Misuse (T1036.008) |
-| T1036.009 | CRITICAL | Ultra-Pro High-Fidelity Allure Document and RTLO Masquerading (T1036.009) |
+| T1036.009 | CRITICAL | Allure Document & RTLO Masquerading Detection |
 | T1037 | CRITICAL | High-Fidelity Logon Script Persistence (T1037) |
 | T1037.001 | CRITICAL | High-Fidelity UserInitMprLogonScript Persistence |
 | T1037.002 | CRITICAL | High-Fidelity Netsh Helper DLL Persistence |

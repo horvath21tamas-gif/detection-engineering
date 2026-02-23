@@ -74,7 +74,7 @@
 - [Ultra-Pro High-Fidelity Space a fájlnév-maszkolás után (T1036.006)](#ultra-pro-high-fidelity-space-a-fájlnév-maszkolás-után-(t1036006))
 - [Ultra-Pro High-Fidelity kettős fájlkiterjesztés végrehajtása (T1036.007)](#ultra-pro-high-fidelity-kettős-fájlkiterjesztés-végrehajtása-(t1036007))
 - [Ultra-Pro High-Fidelity álarcos fájltípus tolmács visszaélésen keresztül (T1036.008)](#ultra-pro-high-fidelity-álarcos-fájltípus-tolmács-visszaélésen-keresztül-(t1036008))
-- [Ultra-Pro High-Fidelity Allure Document és RTLO maszkolás (T1036.009)](#ultra-pro-high-fidelity-allure-document-és-rtlo-maszkolás-(t1036009))
+- [Allure Document & RTLO Maszkírozás Detection](#allure-document-&-rtlo-maszkírozás-detection)
 - [Nagy pontosságú bejelentkezési szkript fennmaradása (T1037)](#nagy-pontosságú-bejelentkezési-szkript-fennmaradása-(t1037))
 - [High-Fidelity UserInitMprLogonScript perzisztencia](#high-fidelity-userinitmprlogonscript-perzisztencia)
 - [High-Fidelity Netsh Helper DLL tartósság](#high-fidelity-netsh-helper-dll-tartósság)
@@ -1729,16 +1729,14 @@ Kiszűri a rendszerszintű automatizálást, és a nem megbízható felhasznál�
 
 
 ---
-## Ultra-Pro High-Fidelity Allure Document és RTLO maszkolás (T1036.009)
+## Allure Document & RTLO Maszkírozás Detection
 - **ID:** `T1036_009.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a kifinomult maszkolást csábító dokumentumok és RTLO karakterek segítségével.
-A nem megbízható felhasználói könyvtárakból és a gyanús szülőből történő végrehajtásra összpontosít
-folyamatok (böngészők, levelezőkliensek), miközben szűrik a gyakori fejlesztői zajokat.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli az álcázást kettős fájlkiterjesztések és jobbról balra felülbíráló (RTLO - U+202E) karakterek használatával.A felhasználó által írható könyvtárakból vagy gyanús szülőfolyamatokból, például böngészőkből, levelezőkliensekből és archiváló segédprogramokból történő végrehajtásra összpontosít.A fejlesztői és a rendszerzaj csökkentésére tervezték.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1896,7 +1894,7 @@ alrendszerben, és az aláíratlan vagy szkript által generált tartósságra �
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a szisztematikus belső hálózati szolgáltatás-felderítést és portellenőrzést a hurok alapú felsorolási minták, a magas kockázatú portcélzás és a nem adminisztratív vagy gyanús szülői környezetből végrehajtott ellenőrző segédprogramok azonosításával.Az egyedi interaktív parancsok helyett a szkriptezett oldalsó felderítési tevékenységre összpontosít.
+- **Leírás:** Érzékeli a szisztematikus belső hálózati szolgáltatás-felderítést és a portellenőrzést a hurokalapú felsorolási minták, a magas kockázatú portcélzás és a nem adminisztratív vagy gyanús szülői környezetből végrehajtott ellenőrző segédprogramok azonosításával.Az egyedi interaktív parancsok helyett a szkriptezett oldalsó felderítési tevékenységre összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -74,7 +74,7 @@
 - [Ultra-Pro High-Fidelity Space After Filename Masquerading (T1036.006)](#ultra-pro-high-fidelity-space-after-filename-masquerading-(t1036006))
 - [Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007)](#ultra-pro-high-fidelity-double-file-extension-execution-(t1036007))
 - [Ultra-Pro High-Fidelity Masquerade File Type via Interpreter Misuse (T1036.008)](#ultra-pro-high-fidelity-masquerade-file-type-via-interpreter-misuse-(t1036008))
-- [Ultra-Pro High-Fidelity Allure Document and RTLO Masquerading (T1036.009)](#ultra-pro-high-fidelity-allure-document-and-rtlo-masquerading-(t1036009))
+- [Allure Document & RTLO Masquerading Detection](#allure-document-&-rtlo-masquerading-detection)
 - [High-Fidelity Logon Script Persistence (T1037)](#high-fidelity-logon-script-persistence-(t1037))
 - [High-Fidelity UserInitMprLogonScript Persistence](#high-fidelity-userinitmprlogonscript-persistence)
 - [High-Fidelity Netsh Helper DLL Persistence](#high-fidelity-netsh-helper-dll-persistence)
@@ -1792,16 +1792,14 @@ Filters out system-level automation and focuses on untrusted user directories.
 
 
 ---
-## Ultra-Pro High-Fidelity Allure Document and RTLO Masquerading (T1036.009)
+## Allure Document & RTLO Masquerading Detection
 - **ID:** `T1036_009.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects sophisticated masquerading using allure documents and RTLO characters. 
-Focuses on execution from untrusted user directories and suspicious parent 
-processes (browsers, mail clients) while filtering common developer noise.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects masquerading using double file extensions and Right-to-Left Override (RTLO - U+202E) characters. Focuses on execution from user-writable directories or suspicious parent processes such as browsers, mail clients, and archive utilities. Designed to reduce developer and system noise.
 
 
 #### 🚨 Response Playbook

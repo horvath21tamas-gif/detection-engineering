@@ -3721,7 +3721,7 @@ nicht vertrauenswürdige Prozessstandorte und bekannte Angriffsmodulsignaturen.
 
 
 ---
-## Ultra-Pro High-Fidelity Credential Stuffing und Combo-List-Missbrauch (T1110.004)
+## Credential Stuffing und Combo-List-Missbrauch (T1110.004)
 - **ID:** `T1110_004.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

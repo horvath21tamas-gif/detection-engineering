@@ -3901,7 +3901,7 @@ untrusted process locations and known attack module signatures.
 
 
 ---
-## Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004)
+## Credential Stuffing & Combo-list Abuse (T1110.004)
 - **ID:** `T1110_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

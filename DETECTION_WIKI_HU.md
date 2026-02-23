@@ -3721,7 +3721,7 @@ nem megbízható folyamathelyek és ismert támadási modul aláírások.
 
 
 ---
-## Ultra-Pro High-Fidelity hitelesítő adatok kitöltése és visszaélések kombinált listája (T1110.004)
+## Hitelesítési adatokkal való visszaélés és a kombinált listákkal való visszaélés (T1110.004)
 - **ID:** `T1110_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

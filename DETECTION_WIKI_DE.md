@@ -2961,16 +2961,17 @@ und anomale Eltern-Kind-Prozessbeziehungen (z. B. Office zu FTP).
 
 
 ---
-## Anomalie des Ultra-Pro High-Fidelity-Mail-Protokolls (T1071.003)
+## Mail-Protokoll-Anomalie (T1071.003)
 - **ID:** `T1071_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Kritisch hoch (SIEM-Killerkategorie!)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGEWEBVIEW2.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt nicht autorisierte E-Mail-basierte C2- oder Exfiltrationsvorgänge durch direkte Identifizierung
-Mail-Protokoll-Verbindungen (SMTP, IMAP, POP3) von Nicht-Mail-Prozessen,
-Schwerpunkt auf .NET/PowerShell-Automatisierung und verdächtigen Prozesslinien.
+- **Beschreibung:** Erkennt unbefugtes E-Mail-basiertes C2 oder Exfiltration durch Überwachung von Direktmailings
+Protokollverbindungen (SMTP, IMAP, POP3) von Nicht-Mail-Prozessen.Konzentriert sich auf
+Automatisierungs- und Skriptmissbrauch über PowerShell, .NET und ältere Skripthosts,
+und anomale Prozesslinien.
 
 #### 🚨 Reaktions-Playbook
 1. **IP-Reputation: Überprüfen Sie die Remote-IP-Adresse in Reputationsdatenbanken.**

@@ -3096,16 +3096,17 @@ and anomalous parent-child process relationships (e.g., Office to FTP).
 
 
 ---
-## Ultra-Pro High-Fidelity Mail Protocol Anomaly (T1071.003)
+## Mail Protocol Anomaly (T1071.003)
 - **ID:** `T1071_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Kritikusan Magas (SIEM gyilkos kategória!)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGEWEBVIEW2.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized email-based C2 or exfiltration by identifying direct 
-mail protocol (SMTP, IMAP, POP3) connections from non-mail processes, 
-focusing on .NET/PowerShell automation and suspicious process lineages.
+- **Leírás:** Detects unauthorized email-based C2 or exfiltration by monitoring direct mail 
+protocol connections (SMTP, IMAP, POP3) from non-mail processes. Focuses on 
+automation and scripting abuse via PowerShell, .NET, and legacy script hosts, 
+and anomalous process lineages.
 
 
 #### 🚨 Response Playbook

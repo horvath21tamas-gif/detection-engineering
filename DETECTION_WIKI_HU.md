@@ -2961,16 +2961,17 @@ nem interaktív FTP/SFTP munkamenetek, gyanús szkript alapú átvitelek,
 
 
 ---
-## Ultra-Pro High-Fidelity Mail Protocol Anomália (T1071.003)
+## Levelezési protokoll anomália (T1071.003)
 - **ID:** `T1071_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Kritikusan Magas (SIEM gyilkos kategória!)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGEWEBVIEW2.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Közvetlen azonosítással észleli a jogosulatlan e-mail-alapú C2-t vagy kiszűrést
-mail protokoll (SMTP, IMAP, POP3) kapcsolatok a nem levelező folyamatokból,
-a .NET/PowerShell automatizálásra és a gyanús folyamatvonalakra összpontosítva.
+- **Leírás:** A direkt mail figyelésével észleli a jogosulatlan e-mail-alapú C2-t vagy a kiszűrést
+protokoll kapcsolatok (SMTP, IMAP, POP3) a nem levelező folyamatokból.-ra összpontosít
+automatizálás és szkriptekkel való visszaélés PowerShell-en, .NET-en és régi szkriptgazdagépeken keresztül,
+és rendellenes folyamatvonalak.
 
 #### 🚨 Response Playbook
 1. **IP hírnév: Ellenőrizd a távoli IP címet hírnév-adatbázisokban.**

@@ -3533,16 +3533,16 @@ um den Zugriff nach einer anfänglichen Kontokompromittierung aufrechtzuerhalten
 
 
 ---
-## Ultra-Pro High-Fidelity Web Service C2 (T1102)
+## Webdienst C2 (T1102)
 - **ID:** `T1102.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt C2-Kommunikation über legitime Cloud-Dienste durch Identifizierung
-Roh-API oder Rohinhalts-Subdomains, auf die von Nicht-Browser-LoLBins zugegriffen wird,
-Skriptinterpreter oder Binärdateien, die von verdächtigen Pfaden ausgeführt werden.
+- **Beschreibung:** Erkennt Command-and-Control-Kommunikation (C2) über legitime Cloud-Dienste durch
+Identifizieren von Roh-API- oder Rohinhalts-Endpunkten, auf die von Nicht-Browser-LoLBins zugegriffen wird, Skript
+Interpreter oder Binärdateien, die von verdächtigen Pfaden laufen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -3551,7 +3551,7 @@ Skriptinterpreter oder Binärdateien, die von verdächtigen Pfaden ausgeführt w
 
 
 ---
-## Ultra-Pro High-Fidelity Dead Drop Resolver (T1102.001)
+## Dead Drop Resolver (T1102.001)
 - **ID:** `T1102_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -3559,8 +3559,8 @@ Skriptinterpreter oder Binärdateien, die von verdächtigen Pfaden ausgeführt w
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt die Verwendung von Dead-Drop-Resolvern durch Identifizierung des Rohinhaltsabrufs
-von sozialen/Code-Plattformen, insbesondere Filterung nach verdächtigem Eltern-Kind
-Beziehungen und nicht standardmäßige Download-Methoden.
+von sozialen und Code-Plattformen, Filterung nach verdächtigem Eltern-Kind
+Prozessbeziehungen und nicht standardmäßige Download-Methoden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

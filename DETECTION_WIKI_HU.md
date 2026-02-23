@@ -3533,16 +3533,16 @@ hogy fenntartsa a hozzáférést egy kezdeti fiókkompromittálódás után.
 
 
 ---
-## Ultra-Pro High-Fidelity Web Service C2 (T1102)
+## Web Service C2 (T1102)
 - **ID:** `T1102.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Azonosítással észleli a C2 kommunikációt a legitim felhőszolgáltatásokon keresztül
-nyers API vagy nyers tartalmú aldomainek, amelyekhez nem böngésző LoLBins fér hozzá,
-szkript értelmezők, vagy gyanús utakról futó binárisok.
+- **Leírás:** Érzékeli a parancs- és vezérlési (C2) kommunikációt legitim felhőszolgáltatásokon keresztül
+nyers API vagy nyers tartalmú végpontok azonosítása, amelyekhez nem böngésző LoLBins, szkript
+értelmezők, vagy gyanús utakról futó binárisok.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -3551,7 +3551,7 @@ szkript értelmezők, vagy gyanús utakról futó binárisok.
 
 
 ---
-## Ultra-Pro High-Fidelity Dead Drop Resolver (T1102.001)
+## Dead Drop Resolver (T1102.001)
 - **ID:** `T1102_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -3559,8 +3559,8 @@ szkript értelmezők, vagy gyanús utakról futó binárisok.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** A nyers tartalom lekérésének azonosításával észleli a holtpont-feloldók használatát
-közösségi/kódplatformokról, kifejezetten a gyanús szülő-gyerek szűrésével
-kapcsolatok és a nem szabványos letöltési módszerek.
+közösségi és kódplatformokról, a gyanús szülő-gyerek szűrésével
+folyamatkapcsolatok és nem szabványos letöltési módszerek.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

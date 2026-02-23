@@ -3702,16 +3702,16 @@ to maintain access after an initial account compromise.
 
 
 ---
-## Ultra-Pro High-Fidelity Web Service C2 (T1102)
+## Web Service C2 (T1102)
 - **ID:** `T1102.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects C2 communication via legitimate cloud services by identifying 
-raw API or raw-content subdomains accessed by non-browser LoLBins, 
-script interpreters, or binaries running from suspicious paths.
+- **Leírás:** Detects command-and-control (C2) communication via legitimate cloud services by
+identifying raw API or raw-content endpoints accessed by non-browser LoLBins, script
+interpreters, or binaries running from suspicious paths.
 
 
 #### 🚨 Response Playbook
@@ -3721,7 +3721,7 @@ script interpreters, or binaries running from suspicious paths.
 
 
 ---
-## Ultra-Pro High-Fidelity Dead Drop Resolver (T1102.001)
+## Dead Drop Resolver (T1102.001)
 - **ID:** `T1102_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -3729,8 +3729,8 @@ script interpreters, or binaries running from suspicious paths.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects the use of dead drop resolvers by identifying raw content retrieval 
-from social/code platforms, specifically filtering for suspicious parent-child 
-relationships and non-standard download methods.
+from social and code platforms, filtering for suspicious parent-child 
+process relationships and non-standard download methods.
 
 
 #### 🚨 Response Playbook

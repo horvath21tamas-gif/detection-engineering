@@ -53,7 +53,7 @@ detection:
     - CommandLine|contains:
         - 'Windows\Logs'
         - 'NuGet'
-    - User:
+    - username:
         - 'NT AUTHORITY\SYSTEM'
         - 'NT AUTHORITY\LOCAL SERVICE'
         - 'NT AUTHORITY\NETWORK SERVICE'

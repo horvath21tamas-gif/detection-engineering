@@ -1536,16 +1536,14 @@ hochfrequente oder außerhalb der Geschäftszeiten auftretende Auslöser und fil
 
 
 ---
-## Ultra-Pro High-Fidelity-Daten-Chunking und -Fragmentierung (T1030)
+## Daten-Chunking und Fragmentierung (T1030)
 - **ID:** `T1030.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSC.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt heimliche Datenfragmentierung zur Exfiltration durch Identifizierung
-Dateistream-Manipulation auf niedriger Ebene, benutzerdefinierte pufferbasierte Aufteilung,
-und nicht standardmäßige Archiv-Volume-Erstellung aus verdächtigen Ausführungspfaden.
+- **Beschreibung:** Erkennt heimliche Datenfragmentierungs- und Exfiltrationstechniken durch Identifizierung von Dateistrommanipulationen auf niedriger Ebene, pufferbasierter Aufteilung, Base64-Konvertierungen und der Erstellung nicht standardmäßiger Archivvolumes.Zielt auf verdächtige Ausführungspfade und filtert gleichzeitig legitime Unternehmenssoftware und Systemautomatisierung.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

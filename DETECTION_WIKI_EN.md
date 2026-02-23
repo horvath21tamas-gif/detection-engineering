@@ -1588,16 +1588,14 @@ high-frequency or off-hours triggers, while filtering legitimate system updates.
 
 
 ---
-## Ultra-Pro High-Fidelity Data Chunking and Fragmentation (T1030)
+## Data Chunking and Fragmentation (T1030)
 - **ID:** `T1030.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSC.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects stealthy data fragmentation for exfiltration by identifying 
-low-level file stream manipulation, custom buffer-based splitting, 
-and non-standard archive volume creation from suspicious execution paths.
+- **Leírás:** Detects stealthy data fragmentation and exfiltration techniques by identifying low-level file stream manipulation, buffer-based splitting, Base64 conversions, and non-standard archive volume creation. Targets suspicious execution paths while filtering legitimate enterprise software and system automation.
 
 
 #### 🚨 Response Playbook

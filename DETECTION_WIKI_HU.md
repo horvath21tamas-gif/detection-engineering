@@ -1536,16 +1536,14 @@ magas frekvenciájú vagy munkaidőn kívüli triggereket, miközben szűri a jo
 
 
 ---
-## Ultra-Pro High-Fidelity adatfeldarabolás és töredezettség (T1030)
+## Adatok darabolása és töredezettsége (T1030)
 - **ID:** `T1030.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSC.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Azonosítással észleli a rejtett adattöredezettséget a kiszűréshez
-alacsony szintű fájlfolyam-manipuláció, egyedi puffer alapú felosztás,
-és nem szabványos archív kötetek létrehozása gyanús végrehajtási útvonalakból.
+- **Leírás:** Az alacsony szintű fájlfolyam-manipuláció, a pufferalapú felosztás, a Base64-konverziók és a nem szabványos archív kötet-létrehozás azonosításával észleli a lopakodó adattöredezési és kiszűrési technikákat.Gyanús végrehajtási útvonalakat céloz meg, miközben kiszűri a törvényes vállalati szoftvereket és a rendszerautomatizálást.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

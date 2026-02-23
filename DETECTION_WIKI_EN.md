@@ -169,9 +169,9 @@
 - [Ultra-Pro High-Fidelity Internal Proxy & Pivot Detection (T1090.001)](#ultra-pro-high-fidelity-internal-proxy-&-pivot-detection-(t1090001))
 - [Ultra-Pro High-Fidelity External Proxy & Tunneling (T1090.002)](#ultra-pro-high-fidelity-external-proxy-&-tunneling-(t1090002))
 - [Ultra-Pro High-Fidelity Multi-hop Proxy & Tor Detection (T1090.003)](#ultra-pro-high-fidelity-multi-hop-proxy-&-tor-detection-(t1090003))
-- [Ultra-Pro High-Fidelity Domain Fronting Detection (T1090.004)](#ultra-pro-high-fidelity-domain-fronting-detection-(t1090004))
+- [Domain Fronting Detection (T1090.004)](#domain-fronting-detection-(t1090004))
 - [High-Fidelity Process Execution from Removable Media](#high-fidelity-process-execution-from-removable-media)
-- [Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092)](#ultra-pro-high-fidelity-removable-media-c2-anomaly-(t1071002--t1092))
+- [Removable Media C2 Anomaly (T1071.002 / T1092)](#removable-media-c2-anomaly-(t1071002--t1092))
 - [Non-Application Layer C2 (T1095)](#non-application-layer-c2-(t1095))
 - [High-Fidelity Account Manipulation - Persistence Focused](#high-fidelity-account-manipulation---persistence-focused)
 - [High-Fidelity Entra ID Application Credential Addition](#high-fidelity-entra-id-application-credential-addition)
@@ -180,10 +180,10 @@
 - [High-Fidelity Azure Role Assignment Escalation](#high-fidelity-azure-role-assignment-escalation)
 - [High-Fidelity Device Registration Persistence (T1098.005)](#high-fidelity-device-registration-persistence-(t1098005))
 - [High-Fidelity MFA Method Addition](#high-fidelity-mfa-method-addition)
-- [Ultra-Pro High-Fidelity Web Service C2 (T1102)](#ultra-pro-high-fidelity-web-service-c2-(t1102))
-- [Ultra-Pro High-Fidelity Dead Drop Resolver (T1102.001)](#ultra-pro-high-fidelity-dead-drop-resolver-(t1102001))
-- [Ultra-Pro High-Fidelity Bidirectional Cloud C2 (T1102.002)](#ultra-pro-high-fidelity-bidirectional-cloud-c2-(t1102002))
-- [Ultra-Pro High-Fidelity One-Way Web Service C2 (T1102.003)](#ultra-pro-high-fidelity-one-way-web-service-c2-(t1102003))
+- [Web Service C2 (T1102)](#web-service-c2-(t1102))
+- [Dead Drop Resolver (T1102.001)](#dead-drop-resolver-(t1102001))
+- [Bidirectional Cloud C2 (T1102.002)](#bidirectional-cloud-c2-(t1102002))
+- [One-Way Web Service C2 (T1102.003)](#one-way-web-service-c2-(t1102003))
 - [Multi-Stage C2 (T1104)](#multi-stage-c2-(t1104))
 - [Suspicious Use of Built-in Windows Tools for File Download and Code Execution](#suspicious-use-of-built-in-windows-tools-for-file-download-and-code-execution)
 - [High-Fidelity Native API Abuse via LOLBins](#high-fidelity-native-api-abuse-via-lolbins)
@@ -3514,7 +3514,7 @@ directories, focusing on control port manipulation and SOCKS5 chaining.
 
 
 ---
-## Ultra-Pro High-Fidelity Domain Fronting Detection (T1090.004)
+## Domain Fronting Detection (T1090.004)
 - **ID:** `T1090_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

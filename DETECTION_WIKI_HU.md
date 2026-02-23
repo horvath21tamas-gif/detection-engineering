@@ -169,9 +169,9 @@
 - [Ultra-Pro High-Fidelity belső proxy és forgásérzékelés (T1090.001)](#ultra-pro-high-fidelity-belső-proxy-és-forgásérzékelés-(t1090001))
 - [Ultra-Pro High-Fidelity külső proxy és tunneling (T1090.002)](#ultra-pro-high-fidelity-külső-proxy-és-tunneling-(t1090002))
 - [Ultra-Pro High-Fidelity Multi-hop proxy és Tor-észlelés (T1090.003)](#ultra-pro-high-fidelity-multi-hop-proxy-és-tor-észlelés-(t1090003))
-- [Ultra-Pro High-Fidelity Domain Fronting Detection (T1090.004)](#ultra-pro-high-fidelity-domain-fronting-detection-(t1090004))
+- [Domain Fronting Detection (T1090.004)](#domain-fronting-detection-(t1090004))
 - [Nagy pontosságú folyamatvégrehajtás cserélhető adathordozóról](#nagy-pontosságú-folyamatvégrehajtás-cserélhető-adathordozóról)
-- [Ultra-Pro High-Fidelity cserélhető adathordozó C2 anomália (T1071.002 / T1092)](#ultra-pro-high-fidelity-cserélhető-adathordozó-c2-anomália-(t1071002--t1092))
+- [C2 cserélhető adathordozó anomália (T1071.002 / T1092)](#c2-cserélhető-adathordozó-anomália-(t1071002--t1092))
 - [Nem alkalmazási réteg C2 (T1095)](#nem-alkalmazási-réteg-c2-(t1095))
 - [Nagy pontosságú fiókmanipuláció – a kitartásra összpontosítva](#nagy-pontosságú-fiókmanipuláció-–-a-kitartásra-összpontosítva)
 - [High-Fidelity Entra ID alkalmazás hitelesítő adatok kiegészítése](#high-fidelity-entra-id-alkalmazás-hitelesítő-adatok-kiegészítése)
@@ -180,10 +180,10 @@
 - [High-Fidelity Azure-szerepkör-hozzárendelés eszkalációja](#high-fidelity-azure-szerepkör-hozzárendelés-eszkalációja)
 - [High-Fidelity Device Registration Perzisztencia (T1098.005)](#high-fidelity-device-registration-perzisztencia-(t1098005))
 - [High-Fidelity MFA módszer kiegészítés](#high-fidelity-mfa-módszer-kiegészítés)
-- [Ultra-Pro High-Fidelity Web Service C2 (T1102)](#ultra-pro-high-fidelity-web-service-c2-(t1102))
-- [Ultra-Pro High-Fidelity Dead Drop Resolver (T1102.001)](#ultra-pro-high-fidelity-dead-drop-resolver-(t1102001))
-- [Ultra-Pro High-Fidelity kétirányú felhő C2 (T1102.002)](#ultra-pro-high-fidelity-kétirányú-felhő-c2-(t1102002))
-- [Ultra-Pro High-Fidelity egyirányú webszolgáltatás C2 (T1102.003)](#ultra-pro-high-fidelity-egyirányú-webszolgáltatás-c2-(t1102003))
+- [Web Service C2 (T1102)](#web-service-c2-(t1102))
+- [Dead Drop Resolver (T1102.001)](#dead-drop-resolver-(t1102001))
+- [Kétirányú felhő C2 (T1102.002)](#kétirányú-felhő-c2-(t1102002))
+- [Egyirányú webszolgáltatás C2 (T1102.003)](#egyirányú-webszolgáltatás-c2-(t1102003))
 - [Többlépcsős C2 (T1104)](#többlépcsős-c2-(t1104))
 - [Beépített Windows-eszközök gyanús használata fájlok letöltéséhez és kódvégrehajtáshoz](#beépített-windows-eszközök-gyanús-használata-fájlok-letöltéséhez-és-kódvégrehajtáshoz)
 - [High-Fidelity Native API visszaélés LOLBins-en keresztül](#high-fidelity-native-api-visszaélés-lolbins-en-keresztül)
@@ -3356,7 +3356,7 @@ könyvtárak, a vezérlőportok manipulálására és a SOCKS5 láncolására ö
 
 
 ---
-## Ultra-Pro High-Fidelity Domain Fronting Detection (T1090.004)
+## Domain Fronting Detection (T1090.004)
 - **ID:** `T1090_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -3594,7 +3594,7 @@ gyanús útvonalakról fut, miközben kizárja a hivatalos kliens alkalmazásoka
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects one-way command-and-control (C2) or data exfiltration via cloud services by
+- **Leírás:** Érzékeli az egyirányú parancs és vezérlés (C2) vagy az adatok felhőszolgáltatásokon keresztüli kiszűrését
 specifikus API-feltöltési/letöltési módszerek korrelációja nem szabványos folyamathelyekkel
 és a gyanús szülői folyamatok vonalai.
 

@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-23 07:14:58`
+**Utolsó frissítés:** `2026-02-23 08:08:25`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -174,9 +174,9 @@
 | T1090.001 | CRITICAL | Ultra-Pro High-Fidelity Internal Proxy & Pivot Detection (T1090.001) |
 | T1090.002 | CRITICAL | Ultra-Pro High-Fidelity External Proxy & Tunneling (T1090.002) |
 | T1090.003 | CRITICAL | Ultra-Pro High-Fidelity Multi-hop Proxy & Tor Detection (T1090.003) |
-| T1090.004 | CRITICAL | Ultra-Pro High-Fidelity Domain Fronting Detection (T1090.004) |
+| T1090.004 | CRITICAL | Domain Fronting Detection (T1090.004) |
 | T1091 | HIGH | High-Fidelity Process Execution from Removable Media |
-| T1092 | CRITICAL | Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092) |
+| T1092 | CRITICAL | Removable Media C2 Anomaly (T1071.002 / T1092) |
 | T1095 | CRITICAL | Non-Application Layer C2 (T1095) |
 | T1098 | CRITICAL | Suspicious Use of net user or net localgroup via cmd.exe, High-Fidelity Account Manipulation - Persistence Focused |
 | T1098.001 | CRITICAL | High-Fidelity Entra ID Application Credential Addition |
@@ -185,10 +185,10 @@
 | T1098.004 | CRITICAL | High-Fidelity Azure Role Assignment Escalation |
 | T1098.005 | HIGH | High-Fidelity Device Registration Persistence (T1098.005) |
 | T1098.006 | CRITICAL | High-Fidelity MFA Method Addition |
-| T1102 | CRITICAL | Ultra-Pro High-Fidelity Web Service C2 (T1102) |
-| T1102.001 | CRITICAL | Ultra-Pro High-Fidelity Dead Drop Resolver (T1102.001) |
-| T1102.002 | CRITICAL | Ultra-Pro High-Fidelity Bidirectional Cloud C2 (T1102.002) |
-| T1102.003 | CRITICAL | Ultra-Pro High-Fidelity One-Way Web Service C2 (T1102.003) |
+| T1102 | CRITICAL | Web Service C2 (T1102) |
+| T1102.001 | CRITICAL | Dead Drop Resolver (T1102.001) |
+| T1102.002 | CRITICAL | Bidirectional Cloud C2 (T1102.002) |
+| T1102.003 | CRITICAL | One-Way Web Service C2 (T1102.003) |
 | T1104 | CRITICAL | Multi-Stage C2 (T1104) |
 | T1105 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1106 | CRITICAL | High-Fidelity Native API Abuse via LOLBins |

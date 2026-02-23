@@ -169,9 +169,9 @@
 - [Ultra-Pro High-Fidelity Interner Proxy und Pivot-Erkennung (T1090.001)](#ultra-pro-high-fidelity-interner-proxy-und-pivot-erkennung-(t1090001))
 - [Ultra-Profi-externer High-Fidelity-Proxy und Tunneling (T1090.002)](#ultra-profi-externer-high-fidelity-proxy-und-tunneling-(t1090002))
 - [Ultra-Pro High-Fidelity-Multi-Hop-Proxy- und Tor-Erkennung (T1090.003)](#ultra-pro-high-fidelity-multi-hop-proxy--und-tor-erkennung-(t1090003))
-- [Ultra-Pro High-Fidelity Domain Fronting Detection (T1090.004)](#ultra-pro-high-fidelity-domain-fronting-detection-(t1090004))
+- [Domain-Fronting-Erkennung (T1090.004)](#domain-fronting-erkennung-(t1090004))
 - [High-Fidelity-Prozessausführung von Wechselmedien](#high-fidelity-prozessausführung-von-wechselmedien)
-- [Ultra-Pro High-Fidelity-Wechselmedien C2-Anomalie (T1071.002 / T1092)](#ultra-pro-high-fidelity-wechselmedien-c2-anomalie-(t1071002--t1092))
+- [Wechselmedien-C2-Anomalie (T1071.002 / T1092)](#wechselmedien-c2-anomalie-(t1071002--t1092))
 - [Nicht-Anwendungsschicht C2 (T1095)](#nicht-anwendungsschicht-c2-(t1095))
 - [High-Fidelity-Kontomanipulation – auf Persistenz ausgerichtet](#high-fidelity-kontomanipulation-–-auf-persistenz-ausgerichtet)
 - [High-Fidelity-Entra-ID-Anwendungszugangsberechtigungszusatz](#high-fidelity-entra-id-anwendungszugangsberechtigungszusatz)
@@ -180,14 +180,14 @@
 - [Hochpräzise Eskalation der Azure-Rollenzuweisung](#hochpräzise-eskalation-der-azure-rollenzuweisung)
 - [Persistenz der High-Fidelity-Geräteregistrierung (T1098.005)](#persistenz-der-high-fidelity-geräteregistrierung-(t1098005))
 - [Ergänzung der High-Fidelity-MFA-Methode](#ergänzung-der-high-fidelity-mfa-methode)
-- [Ultra-Pro High-Fidelity Web Service C2 (T1102)](#ultra-pro-high-fidelity-web-service-c2-(t1102))
-- [Ultra-Pro High-Fidelity Dead Drop Resolver (T1102.001)](#ultra-pro-high-fidelity-dead-drop-resolver-(t1102001))
-- [Ultra-Pro High-Fidelity Bidirektional Cloud C2 (T1102.002)](#ultra-pro-high-fidelity-bidirektional-cloud-c2-(t1102002))
-- [Ultra-Pro High-Fidelity One-Way Web Service C2 (T1102.003)](#ultra-pro-high-fidelity-one-way-web-service-c2-(t1102003))
+- [Webdienst C2 (T1102)](#webdienst-c2-(t1102))
+- [Dead Drop Resolver (T1102.001)](#dead-drop-resolver-(t1102001))
+- [Bidirektionale Cloud C2 (T1102.002)](#bidirektionale-cloud-c2-(t1102002))
+- [Einweg-Webdienst C2 (T1102.003)](#einweg-webdienst-c2-(t1102003))
 - [Mehrstufig C2 (T1104)](#mehrstufig-c2-(t1104))
 - [Verdächtige Verwendung integrierter Windows-Tools zum Herunterladen von Dateien und zur Codeausführung](#verdächtige-verwendung-integrierter-windows-tools-zum-herunterladen-von-dateien-und-zur-codeausführung)
 - [Missbrauch von nativen High-Fidelity-APIs über LOLBins](#missbrauch-von-nativen-high-fidelity-apis-über-lolbins)
-- [Brute Force und Werkzeuge (T1110)](#brute-force-und-werkzeuge-(t1110))
+- [Brute Force & Werkzeug (T1110)](#brute-force-&-werkzeug-(t1110))
 - [Mehrere fehlgeschlagene Anmeldeversuche für einen einzelnen Benutzer (mögliches Erraten des Passworts)](#mehrere-fehlgeschlagene-anmeldeversuche-für-einen-einzelnen-benutzer-(mögliches-erraten-des-passworts))
 - [Exportieren und Knacken von Anmeldeinformationen (T1110.002)](#exportieren-und-knacken-von-anmeldeinformationen-(t1110002))
 - [Passwortsprühen (T1110.003)](#passwortsprühen-(t1110003))
@@ -3356,7 +3356,7 @@ Verzeichnisse, wobei der Schwerpunkt auf der Manipulation von Steuerports und de
 
 
 ---
-## Ultra-Pro High-Fidelity Domain Fronting Detection (T1090.004)
+## Domain-Fronting-Erkennung (T1090.004)
 - **ID:** `T1090_004.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -3657,7 +3657,7 @@ werden von nicht vertrauenswürdigen übergeordneten Prozessen missbraucht, um e
 
 
 ---
-## Brute Force und Werkzeuge (T1110)
+## Brute Force & Werkzeug (T1110)
 - **ID:** `T1110.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

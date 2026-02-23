@@ -1,49 +1,56 @@
-title: Ultra-Pro High-Fidelity Cloud Control Plane Hijacking (T1021.007)
+title: Cloud Control Plane Hijacking (T1021.007)
 id: f05145d4-f513-4416-ae4e-7896510ef203
 status: stable
 description: |
-    Detects unauthorized lateral movement through cloud dashboards by correlating 
-    high-risk operations with anomalous user agents, unusual source IPs, and 
-    signs of MFA-evasion/automated session hijacking.
+  Detects unauthorized lateral movement through cloud dashboards by correlating 
+  high-risk operations with anomalous user agents, unusual source IPs, and 
+  signs of MFA-evasion or automated session hijacking.
 author: hota05
 date: 2026-02-05
 tags:
-    - attack.lateral_movement
-    - attack.t1021.007
+  - attack.lateral_movement
+  - attack.t1021.007
+
 logsource:
-    product: azure
-    service: activitylogs
+  product: azure
+  service: activitylogs
+
 detection:
-    selection_risky_ops:
-        operationNameValue:
-            - 'Microsoft.Compute/virtualMachines/runCommand/action'    
-            - 'Microsoft.Compute/virtualMachines/extensions/write'    
-            - 'Microsoft.Resources/deployments/write'                 
-            - 'Microsoft.Network/networkSecurityGroups/securityRules/write' 
-            - 'Microsoft.Web/sites/config/listcallbacks/action'       
+  selection_risky_ops:
+    operationNameValue:
+      - 'Microsoft.Compute/virtualMachines/runCommand/action'
+      - 'Microsoft.Compute/virtualMachines/extensions/write'
+      - 'Microsoft.Resources/deployments/write'
+      - 'Microsoft.Network/networkSecurityGroups/securityRules/write'
+      - 'Microsoft.Web/sites/config/listcallbacks/action'
 
-    selection_unusual_source:
-        callerIpAddress_not_in:
-            - '1.2.3.4/32'  
-            - '5.6.7.8/24'  
+  selection_unusual_source:
+    callerIpAddress_not_in:
+      - '1.2.3.4/32'
+      - '5.6.7.8/24'
 
-    selection_agent_entropy:
-        userAgent_contains:
-            - 'python-requests'
-            - 'Go-http-client'
-            - 'curl'
-            - 'Postman'
-            - 'Az.Compute'          
+  selection_agent_entropy:
+    userAgent_contains:
+      - 'python-requests'
+      - 'Go-http-client'
+      - 'curl'
+      - 'Postman'
+      - 'Az.Compute'
 
-    selection_mfa_anomaly:
-        properties.authenticationMethod_not: 'MFA'
-        properties.resultSignature: 'Succeeded'
+  selection_mfa_anomaly:
+    properties.authenticationMethod_not: 'MFA'
+    properties.resultSignature: 'Succeeded'
 
-    filter_trusted_entities:
-        - caller_contains: 'service-principal' 
-        - userAgent_contains: 'HashiCorp/Terraform' # Legitim IaC szűrése
-        - operationNameValue: 'Microsoft.Compute/virtualMachines/runCommand/action'
-          caller: 'system-auto-patcher@company.com'
+  filter_trusted_entities:
+    - caller_contains: 'service-principal'
+    - userAgent_contains: 'HashiCorp/Terraform'  
+    - operationNameValue: 'Microsoft.Compute/virtualMachines/runCommand/action'
+      caller: 'system-auto-patcher@company.com'
 
-    condition: selection_risky_ops and selection_unusual_source and (selection_agent_entropy or selection_mfa_anomaly) and not filter_trusted_entities
+  condition: >
+    selection_risky_ops and
+    selection_unusual_source and
+    (selection_agent_entropy or selection_mfa_anomaly) and
+    not filter_trusted_entities
+
 level: critical

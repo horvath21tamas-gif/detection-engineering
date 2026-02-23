@@ -193,12 +193,12 @@
 - [Ultra-Pro High-Fidelity Password Spraying (T1110.003)](#ultra-pro-high-fidelity-password-spraying-(t1110003))
 - [Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004)](#ultra-pro-high-fidelity-credential-stuffing-&-combo-list-abuse-(t1110004))
 - [Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111)](#ultra-pro-high-fidelity-mfa-evasion-&-session-hijacking-(t1111))
-- [Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112)](#ultra-pro-high-fidelity-registry-tampering-for-evasion-(t1112))
-- [Ultra-Pro High-Fidelity Screen Capture Anomaly (T1113)](#ultra-pro-high-fidelity-screen-capture-anomaly-(t1113))
-- [Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114)](#ultra-pro-high-fidelity-email-harvesting-anomaly-(t1114))
-- [Ultra-Pro High-Fidelity Local Email Harvesting Anomaly (T1114.001)](#ultra-pro-high-fidelity-local-email-harvesting-anomaly-(t1114001))
-- [Ultra-Pro High-Fidelity Remote Email Export Anomaly (T1114.002)](#ultra-pro-high-fidelity-remote-email-export-anomaly-(t1114002))
-- [Ultra-Pro High-Fidelity Email Forwarding Rule Anomaly (T1114.003)](#ultra-pro-high-fidelity-email-forwarding-rule-anomaly-(t1114003))
+- [Registry Tampering for Evasion (T1112)](#registry-tampering-for-evasion-(t1112))
+- [Screen Capture Anomaly (T1113)](#screen-capture-anomaly-(t1113))
+- [Email Harvesting Anomaly (T1114)](#email-harvesting-anomaly-(t1114))
+- [Local Email Harvesting Anomaly (T1114.001)](#local-email-harvesting-anomaly-(t1114001))
+- [Remote Email Export Anomaly (T1114.002)](#remote-email-export-anomaly-(t1114002))
+- [Email Forwarding Rule Anomaly (T1114.003)](#email-forwarding-rule-anomaly-(t1114003))
 - [Clipboard Data Spying (T1115)](#clipboard-data-spying-(t1115))
 - [Automated Collection (T1119)](#automated-collection-(t1119))
 - [Peripheral Device Discovery (T1120)](#peripheral-device-discovery-(t1120))
@@ -3937,7 +3937,7 @@ Reverse Proxy phishing frameworks (Evilginx, Muraena) and token manipulation too
 
 
 ---
-## Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112)
+## Registry Tampering for Evasion (T1112)
 - **ID:** `T1112.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -3945,7 +3945,7 @@ Reverse Proxy phishing frameworks (Evilginx, Muraena) and token manipulation too
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects high-risk modifications to the Windows Registry aimed at disabling 
-security controls (Defender, UAC, LSA) or enabling unauthorized remote access.
+security controls (Defender, UAC, LSA) or enabling unauthorized remote access. 
 Optimized to ignore standard system updates and focus on non-standard process behavior.
 
 

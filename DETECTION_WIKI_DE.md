@@ -193,12 +193,12 @@
 - [Ultra-Pro High-Fidelity-Passwort-Sprühen (T1110.003)](#ultra-pro-high-fidelity-passwort-sprühen-(t1110003))
 - [Ultra-Pro High-Fidelity Credential Stuffing und Combo-List-Missbrauch (T1110.004)](#ultra-pro-high-fidelity-credential-stuffing-und-combo-list-missbrauch-(t1110004))
 - [Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111)](#ultra-pro-high-fidelity-mfa-evasion-&-session-hijacking-(t1111))
-- [Ultra-Pro High-Fidelity-Registrierungsmanipulation zur Umgehung (T1112)](#ultra-pro-high-fidelity-registrierungsmanipulation-zur-umgehung-(t1112))
-- [Anomalie bei der Ultra-Pro-High-Fidelity-Bildschirmaufnahme (T1113)](#anomalie-bei-der-ultra-pro-high-fidelity-bildschirmaufnahme-(t1113))
-- [Ultra-Pro-High-Fidelity-E-Mail-Ernte-Anomalie (T1114)](#ultra-pro-high-fidelity-e-mail-ernte-anomalie-(t1114))
-- [Ultra-Pro High-Fidelity Local Email Harvesting-Anomalie (T1114.001)](#ultra-pro-high-fidelity-local-email-harvesting-anomalie-(t1114001))
-- [Anomalie beim Remote-E-Mail-Export von Ultra-Pro High-Fidelity (T1114.002)](#anomalie-beim-remote-e-mail-export-von-ultra-pro-high-fidelity-(t1114002))
-- [Ultra-Pro High-Fidelity-E-Mail-Weiterleitungsregelanomalie (T1114.003)](#ultra-pro-high-fidelity-e-mail-weiterleitungsregelanomalie-(t1114003))
+- [Manipulation der Registrierung zur Umgehung (T1112)](#manipulation-der-registrierung-zur-umgehung-(t1112))
+- [Anomalie bei der Bildschirmaufnahme (T1113)](#anomalie-bei-der-bildschirmaufnahme-(t1113))
+- [Anomalie beim E-Mail-Ernten (T1114)](#anomalie-beim-e-mail-ernten-(t1114))
+- [Lokale E-Mail-Ernte-Anomalie (T1114.001)](#lokale-e-mail-ernte-anomalie-(t1114001))
+- [Anomalie beim Remote-E-Mail-Export (T1114.002)](#anomalie-beim-remote-e-mail-export-(t1114002))
+- [Anomalie der E-Mail-Weiterleitungsregel (T1114.003)](#anomalie-der-e-mail-weiterleitungsregel-(t1114003))
 - [Ausspionieren von Zwischenablagedaten (T1115)](#ausspionieren-von-zwischenablagedaten-(t1115))
 - [Automatisierte Sammlung (T1119)](#automatisierte-sammlung-(t1119))
 - [Erkennung von Peripheriegeräten (T1120)](#erkennung-von-peripheriegeräten-(t1120))
@@ -3755,7 +3755,7 @@ Reverse-Proxy-Phishing-Frameworks (Evilginx, Muraena) und Token-Manipulationstoo
 
 
 ---
-## Ultra-Pro High-Fidelity-Registrierungsmanipulation zur Umgehung (T1112)
+## Manipulation der Registrierung zur Umgehung (T1112)
 - **ID:** `T1112.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

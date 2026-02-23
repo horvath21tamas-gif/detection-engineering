@@ -193,12 +193,12 @@
 - [Ultra-Pro nagy pontosságú jelszószóró (T1110.003)](#ultra-pro-nagy-pontosságú-jelszószóró-(t1110003))
 - [Ultra-Pro High-Fidelity hitelesítő adatok kitöltése és visszaélések kombinált listája (T1110.004)](#ultra-pro-high-fidelity-hitelesítő-adatok-kitöltése-és-visszaélések-kombinált-listája-(t1110004))
 - [Ultra-Pro High-Fidelity MFA-kijátszás és munkamenet-eltérítés (T1111)](#ultra-pro-high-fidelity-mfa-kijátszás-és-munkamenet-eltérítés-(t1111))
-- [Ultra-Pro High-Fidelity Registry manipuláció az Evasion miatt (T1112)](#ultra-pro-high-fidelity-registry-manipuláció-az-evasion-miatt-(t1112))
-- [Ultra-Pro nagy felbontású képernyőrögzítési anomália (T1113)](#ultra-pro-nagy-felbontású-képernyőrögzítési-anomália-(t1113))
-- [Ultra-Pro High-Fidelity e-mail-gyűjtési anomália (T1114)](#ultra-pro-high-fidelity-e-mail-gyűjtési-anomália-(t1114))
-- [Ultra-Pro High-Fidelity helyi e-mail-gyűjtési anomália (T1114.001)](#ultra-pro-high-fidelity-helyi-e-mail-gyűjtési-anomália-(t1114001))
-- [Ultra-Pro High-Fidelity távoli e-mail exportálási rendellenesség (T1114.002)](#ultra-pro-high-fidelity-távoli-e-mail-exportálási-rendellenesség-(t1114002))
-- [Ultra-Pro nagy pontosságú e-mail továbbítási szabály rendellenessége (T1114.003)](#ultra-pro-nagy-pontosságú-e-mail-továbbítási-szabály-rendellenessége-(t1114003))
+- [Registry manipuláció kijátszás céljából (T1112)](#registry-manipuláció-kijátszás-céljából-(t1112))
+- [Képernyőrögzítési anomália (T1113)](#képernyőrögzítési-anomália-(t1113))
+- [E-mail betakarítási anomália (T1114)](#e-mail-betakarítási-anomália-(t1114))
+- [Helyi e-mail-gyűjtési anomália (T1114.001)](#helyi-e-mail-gyűjtési-anomália-(t1114001))
+- [Távoli e-mail exportálási rendellenesség (T1114.002)](#távoli-e-mail-exportálási-rendellenesség-(t1114002))
+- [E-mail továbbítási szabály rendellenessége (T1114.003)](#e-mail-továbbítási-szabály-rendellenessége-(t1114003))
 - [Vágólapadatok kémkedése (T1115)](#vágólapadatok-kémkedése-(t1115))
 - [Automatizált begyűjtés (T1119)](#automatizált-begyűjtés-(t1119))
 - [Perifériás eszköz felfedezése (T1120)](#perifériás-eszköz-felfedezése-(t1120))
@@ -3755,7 +3755,7 @@ Reverse Proxy adathalászati keretrendszerek (Evilginx, Muraena) és token manip
 
 
 ---
-## Ultra-Pro High-Fidelity Registry manipuláció az Evasion miatt (T1112)
+## Registry manipuláció kijátszás céljából (T1112)
 - **ID:** `T1112.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

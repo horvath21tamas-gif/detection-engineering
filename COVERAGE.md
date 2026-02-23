@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-23 06:15:23`
+**Utolsó frissítés:** `2026-02-23 06:36:11`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -198,12 +198,12 @@
 | T1110.003 | HIGH | Ultra-Pro High-Fidelity Password Spraying (T1110.003) |
 | T1110.004 | HIGH | Ultra-Pro High-Fidelity Credential Stuffing & Combo-list Abuse (T1110.004) |
 | T1111 | CRITICAL | Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111) |
-| T1112 | CRITICAL | Ultra-Pro High-Fidelity Registry Tampering for Evasion (T1112), Windows Event Log Service Impairment, Indicator Blocking and Telemetry Suppression |
-| T1113 | CRITICAL | Ultra-Pro High-Fidelity Screen Capture Anomaly (T1113) |
-| T1114 | CRITICAL | Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |
-| T1114.001 | CRITICAL | Ultra-Pro High-Fidelity Local Email Harvesting Anomaly (T1114.001), Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |
-| T1114.002 | CRITICAL | Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114), Ultra-Pro High-Fidelity Remote Email Export Anomaly (T1114.002) |
-| T1114.003 | CRITICAL | Ultra-Pro High-Fidelity Email Forwarding Rule Anomaly (T1114.003) |
+| T1112 | CRITICAL | Registry Tampering for Evasion (T1112), Windows Event Log Service Impairment, Indicator Blocking and Telemetry Suppression |
+| T1113 | CRITICAL | Screen Capture Anomaly (T1113) |
+| T1114 | CRITICAL | Email Harvesting Anomaly (T1114) |
+| T1114.001 | CRITICAL | Local Email Harvesting Anomaly (T1114.001), Email Harvesting Anomaly (T1114) |
+| T1114.002 | CRITICAL | Email Harvesting Anomaly (T1114), Remote Email Export Anomaly (T1114.002) |
+| T1114.003 | CRITICAL | Email Forwarding Rule Anomaly (T1114.003) |
 | T1115 | CRITICAL | Clipboard Data Spying (T1115) |
 | T1119 | CRITICAL | Automated Collection (T1119) |
 | T1120 | HIGH | Peripheral Device Discovery (T1120) |

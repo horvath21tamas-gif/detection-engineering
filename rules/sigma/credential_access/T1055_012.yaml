@@ -1,49 +1,71 @@
-title: Ultra-Pro Stealthy Process Hollowing (T1055.012)
+title: Stealthy Process Hollowing (ATT&CK T1055.012)
 id: 80cd04ff-c961-44b6-b5d5-2ce4b7c760ad
 status: stable
-description: |
-    Detects high-fidelity process hollowing by identifying cross-process access 
-    requests with VM_WRITE/VM_OPERATION permissions where the calling stack 
-    originates from unbacked memory (shellcode) and targets common sacrificial processes.
+description: >
+  Detects high-fidelity process hollowing by identifying cross-process access 
+  requests with VM_WRITE/VM_OPERATION permissions where the calling stack 
+  originates from unbacked memory (shellcode) and targets common sacrificial processes.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1055/012/
 tags:
-    - attack.defense_evasion
-    - attack.privilege_escalation
-    - attack.t1055.012
+  - attack.defense_evasion
+  - attack.privilege_escalation
+  - attack.t1055.012
+  - attack.host
+
 logsource:
-    product: windows
-    category: process_access 
+  product: windows
+  category: process_access
+
 detection:
-    selection_access_mask:
-        GrantedAccess:
-            - '0x1410'
-            - '0x1411'
-            - '0x1438'
-            - '0x1F1FFF'
+  selection_access_mask:
+    GrantedAccess|contains:
+      - '0x1410'
+      - '0x1411'
+      - '0x1438'
+      - '0x1F1FFF'
 
-    selection_unbacked_calltrace:
-        CallTrace|contains: 'unknown'
+  selection_unbacked_calltrace:
+    CallTrace|contains: 'unknown'
 
-    selection_sacrificial_targets:
-        TargetImage|endswith:
-            - '\svchost.exe'
-            - '\werfault.exe'
-            - '\regasm.exe'
-            - '\vbc.exe'
-            - '\cvtres.exe'
-            - '\smartscreen.exe'
+  selection_sacrificial_targets:
+    TargetImage|endswith:
+      - '\svchost.exe'
+      - '\werfault.exe'
+      - '\regasm.exe'
+      - '\vbc.exe'
+      - '\cvtres.exe'
+      - '\smartscreen.exe'
 
-    filter_trusted_processes:
-        - Sourceprocessname: 'C:\Windows\System32\csrss.exe'
-        - SourceImage|endswith:
-            - '\MsMpEng.exe'        
-            - '\CcmExec.exe'       
-        - CallTrace|contains:
-            - 'clr.dll+'
-            - 'wer.dll+'
-            - 'ntdll.dll+LdrpWorkItem'
-        - condition: selection_source_equals_target
+  filter_trusted_processes:
+    - SourceProcessName: 'C:\Windows\System32\csrss.exe'
+    - SourceImage|endswith:
+        - '\MsMpEng.exe'
+        - '\CcmExec.exe'
+    - CallTrace|contains:
+        - 'clr.dll+'
+        - 'wer.dll+'
+        - 'ntdll.dll+LdrpWorkItem'
+    - condition: SourceProcessName == TargetImage
 
-    condition: selection_access_mask and selection_unbacked_calltrace and selection_sacrificial_targets and not filter_trusted_processes
+  selection_suspicious_source:
+    SourceImage|contains:
+      - '\Users\'
+      - '\Temp\'
+      - '\AppData\'
+
+  condition: selection_access_mask
+             and selection_unbacked_calltrace
+             and selection_sacrificial_targets
+             and selection_suspicious_source
+             and not filter_trusted_processes
+
+falsepositives:
+  - Legitimate cross-process instrumentation by signed management or AV tools
+  - Admin scripts running in Temp or AppData folders
+  - Trusted software performing automation using sacrificial processes
+
 level: critical

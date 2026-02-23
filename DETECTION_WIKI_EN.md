@@ -1227,7 +1227,7 @@ execution and anomalous network-to-process lineage.
 
 
 ---
-## Ultra-Pro High-Fidelity SSH Lateral Movement & Tunneling (T1021.004)
+## SSH Lateral Movement & Tunneling (T1021.004)
 - **ID:** `T1021_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -1246,7 +1246,7 @@ entropy, and non-standard authentication patterns.
 
 
 ---
-## Ultra-Pro High-Fidelity VNC Lateral Movement & Hijacking (T1021.005)
+## VNC Lateral Movement & Hijacking (T1021.005)
 - **ID:** `T1021_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

@@ -1195,7 +1195,7 @@ Ausführung und anomale Netzwerk-zu-Prozess-Herkunft.
 
 
 ---
-## Ultra-Pro High-Fidelity SSH Lateral Movement & Tunneling (T1021.004)
+## SSH-Lateralbewegung und Tunnelbau (T1021.004)
 - **ID:** `T1021_004.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -1213,7 +1213,7 @@ Entropie und nicht standardmäßige Authentifizierungsmuster.
 
 
 ---
-## Ultra-Pro High-Fidelity VNC Lateral Movement & Hijacking (T1021.005)
+## VNC-Lateralbewegung und Entführung (T1021.005)
 - **ID:** `T1021_005.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

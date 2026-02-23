@@ -1195,7 +1195,7 @@ végrehajtás és rendellenes hálózat-folyamat vonal.
 
 
 ---
-## Ultra-Pro High-Fidelity SSH Lateral Movement & Tunneling (T1021.004)
+## SSH Lateral Movement & Tunneling (T1021.004)
 - **ID:** `T1021_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -1213,7 +1213,7 @@ entrópia és nem szabványos hitelesítési minták.
 
 
 ---
-## Ultra-Pro High-Fidelity VNC oldalirányú mozgás és eltérítés (T1021.005)
+## VNC oldalirányú mozgás és eltérítés (T1021.005)
 - **ID:** `T1021_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

@@ -1,54 +1,60 @@
-title: Ultra-Pro High-Fidelity WinRM Remote Execution (T1021.006)
+title: WinRM Remote Execution (T1021.006)
 id: ec70654a-a991-45e9-83ef-fbcb6beb907a
 status: stable
 description: |
-    Detects advanced lateral movement via WinRM by monitoring for high-entropy 
-    PowerShell commands, in-memory execution, and suspicious process 
-    hollowing attempts originating from the WinRM host process.
+  Detects advanced lateral movement via WinRM by monitoring for high-entropy 
+  PowerShell commands, in-memory execution, and suspicious process 
+  hollowing attempts originating from the WinRM host process.
 author: hota05
 date: 2026-02-05
 tags:
-    - attack.lateral_movement
-    - attack.t1021.006
+  - attack.lateral_movement
+  - attack.t1021.006
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_parent:
-        ParentImage|endswith: '\wsmprovhost.exe'
-        ParentCommandLine|contains: ' -Embedding' 
+  selection_parent:
+    ParentImage|endswith: '\wsmprovhost.exe'
+    ParentCommandLine|contains: ' -Embedding'
 
-    selection_encoded:
-        CommandLine|contains:
-            - ' -enc '
-            - ' -encodedcommand '
-            - ' -e '                  
-            - ' [Convert]::ToBase64String'
+  selection_encoded:
+    CommandLine|contains:
+      - ' -enc '
+      - ' -encodedcommand '
+      - ' -e '
+      - ' [Convert]::ToBase64String'
 
-    selection_reflection:
-        CommandLine|contains:
-            - 'Runtime.InteropServices.Marshal'
-            - 'Reflection.Assembly'             
-            - 'VirtualAlloc'                   
-            - 'DownloadString'                  
-            - 'IEX'
+  selection_reflection:
+    CommandLine|contains:
+      - 'Runtime.InteropServices.Marshal'
+      - 'Reflection.Assembly'
+      - 'VirtualAlloc'
+      - 'DownloadString'
+      - 'IEX'
 
-    selection_suspicious_children:
-        Image|endswith:
-            - '\certutil.exe'        
-            - '\whoami.exe'
-            - '\nltest.exe'          
-            - '\net.exe'
-            - '\findstr.exe'         
-            - '\adsiedit.msc'
+  selection_suspicious_children:
+    Image|endswith:
+      - '\certutil.exe'
+      - '\whoami.exe'
+      - '\nltest.exe'
+      - '\net.exe'
+      - '\findstr.exe'
+      - '\adsiedit.msc'
 
-    filter_azure_it:
-        - CommandLine|contains:
-            - 'C:\Packages\Plugins\'  
-            - 'Monitoring'
-            - 'HealthCheck'
-        - ParentImage|contains: 'C:\Windows\System32\svchost.exe'
-        - username: 'NT AUTHORITY\SYSTEM'
+  filter_azure_it:
+    - CommandLine|contains:
+        - 'C:\Packages\Plugins\'
+        - 'Monitoring'
+        - 'HealthCheck'
+    - ParentImage|contains: 'C:\Windows\System32\svchost.exe'
+    - username: 'NT AUTHORITY\SYSTEM'
 
-    condition: selection_parent and (selection_encoded or selection_reflection or selection_suspicious_children) and not filter_azure_it
+  condition: >
+    selection_parent and
+    (selection_encoded or selection_reflection or selection_suspicious_children) and
+    not filter_azure_it
+
 level: critical

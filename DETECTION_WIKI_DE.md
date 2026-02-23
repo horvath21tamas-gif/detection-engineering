@@ -187,7 +187,7 @@
 - [Mehrstufig C2 (T1104)](#mehrstufig-c2-(t1104))
 - [Verdächtige Verwendung integrierter Windows-Tools zum Herunterladen von Dateien und zur Codeausführung](#verdächtige-verwendung-integrierter-windows-tools-zum-herunterladen-von-dateien-und-zur-codeausführung)
 - [Missbrauch von nativen High-Fidelity-APIs über LOLBins](#missbrauch-von-nativen-high-fidelity-apis-über-lolbins)
-- [Brute Force & Werkzeug (T1110)](#brute-force-&-werkzeug-(t1110))
+- [Brute Force und Werkzeuge (T1110)](#brute-force-und-werkzeuge-(t1110))
 - [Mehrere fehlgeschlagene Anmeldeversuche für einen einzelnen Benutzer (mögliches Erraten des Passworts)](#mehrere-fehlgeschlagene-anmeldeversuche-für-einen-einzelnen-benutzer-(mögliches-erraten-des-passworts))
 - [Exportieren und Knacken von Anmeldeinformationen (T1110.002)](#exportieren-und-knacken-von-anmeldeinformationen-(t1110002))
 - [Passwortsprühen (T1110.003)](#passwortsprühen-(t1110003))
@@ -3587,15 +3587,15 @@ oder Binärdateien, die von verdächtigen Pfaden laufen, mit Ausnahme offizielle
 
 
 ---
-## Ultra-Pro High-Fidelity One-Way Web Service C2 (T1102.003)
+## Einweg-Webdienst C2 (T1102.003)
 - **ID:** `T1102_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unidirektionale C2- oder Datenexfiltration über Cloud-Dienste durch Korrelation
-Spezifische API-Upload-/Download-Methoden mit nicht standardmäßigen Prozessspeicherorten
+- **Beschreibung:** Erkennt einseitiges Command-and-Control (C2) oder Datenexfiltration über Cloud-Dienste durch
+Korrelation spezifischer API-Upload-/Download-Methoden mit nicht standardmäßigen Prozessstandorten
 und verdächtige übergeordnete Prozesslinien.
 
 #### 🚨 Reaktions-Playbook
@@ -3657,7 +3657,7 @@ werden von nicht vertrauenswürdigen übergeordneten Prozessen missbraucht, um e
 
 
 ---
-## Brute Force & Werkzeug (T1110)
+## Brute Force und Werkzeuge (T1110)
 - **ID:** `T1110.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

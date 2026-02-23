@@ -3759,15 +3759,15 @@ or binaries running from suspicious paths, excluding official clients.
 
 
 ---
-## Ultra-Pro High-Fidelity One-Way Web Service C2 (T1102.003)
+## One-Way Web Service C2 (T1102.003)
 - **ID:** `T1102_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects one-way C2 or data exfiltration via cloud services by correlating 
-specific API upload/download methods with non-standard process locations 
+- **Leírás:** Detects one-way command-and-control (C2) or data exfiltration via cloud services by 
+correlating specific API upload/download methods with non-standard process locations 
 and suspicious parent process lineages.
 
 

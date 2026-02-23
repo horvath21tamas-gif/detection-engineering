@@ -3587,15 +3587,15 @@ vagy gyanús útvonalakról futó binárisok, kivéve a hivatalos klienseket.
 
 
 ---
-## Ultra-Pro High-Fidelity egyirányú webszolgáltatás C2 (T1102.003)
+## Egyirányú webszolgáltatás C2 (T1102.003)
 - **ID:** `T1102_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Korrelációval észleli az egyirányú C2 vagy adatkiszűrést felhőszolgáltatásokon keresztül
-specifikus API-feltöltési/letöltési módszerek nem szabványos folyamathelyekkel
+- **Leírás:** Detects one-way command-and-control (C2) or data exfiltration via cloud services by
+specifikus API-feltöltési/letöltési módszerek korrelációja nem szabványos folyamathelyekkel
 és a gyanús szülői folyamatok vonalai.
 
 #### 🚨 Response Playbook

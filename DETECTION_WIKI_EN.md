@@ -660,16 +660,17 @@ specifically looking for pixel-level data extraction routines.
 
 
 ---
-## Ultra-Pro High-Fidelity Junk Data & Command Padding (T1001.001)
+## Junk Data & Command Padding (T1001.001)
 - **ID:** `T1001_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects command padding and junk data injection by identifying anomalous 
-white-space distribution, repetitive environmental variable definitions, 
-and extreme command line lengths in non-installer processes.
+- **Leírás:** Detects anomalous command padding and junk data injection in non-installer processes by monitoring:
+- Extreme white-space sequences
+- Repetitive environmental variable definitions
+- High-density special character usage in command lines
 
 
 #### 🚨 Response Playbook
@@ -679,16 +680,17 @@ and extreme command line lengths in non-installer processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001.002)
+## Steganography & Data Reconstruction (T1001.002)
 - **ID:** `T1001_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects data de-steganography by identifying anomalous programmatic access 
-to image manipulation APIs (GDI+, System.Drawing) from script interpreters, 
-specifically looking for pixel-level data extraction routines.
+- **Leírás:** Detects programmatic extraction of hidden data from images (de-steganography) by monitoring:
+- Pixel-level access routines (GetPixel, LockBits)
+- GDI+ / System.Drawing API usage
+- Script interpreter or suspicious process execution contexts
 
 
 #### 🚨 Response Playbook

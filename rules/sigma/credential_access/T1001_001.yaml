@@ -18,13 +18,13 @@ logsource:
 
 detection:
   selection_padding:
-    CommandLine: '(?i)([\s\t,;]{50,})'  # Excessive whitespace or padding
+    processcommandline: '(?i)([\s\t,;]{50,})'  # Excessive whitespace or padding
 
   selection_junk_vars:
-    CommandLine: '(?i)(set\s+[a-z0-9]{1,3}=\s*[^&]{1,5}&[\s\t]*){8,}'  # Repeated short env variables
+    processcommandline: '(?i)(set\s+[a-z0-9]{1,3}=\s*[^&]{1,5}&[\s\t]*){8,}'  # Repeated short env variables
 
   selection_high_density:
-    CommandLine: '(?i)([\%\!\^\`]{3,}.*){5,}'  # Dense special characters
+    processcommandline: '(?i)([\%\!\^\`]{3,}.*){5,}'  # Dense special characters
 
   selection_script_procs:
     Image|endswith:

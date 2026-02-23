@@ -659,16 +659,17 @@ Ich suche speziell nach Datenextraktionsroutinen auf Pixelebene.
 
 
 ---
-## Ultra-Pro High-Fidelity Junk Data & Command Padding (T1001.001)
+## Junk-Daten- und Befehlsauffüllung (T1001.001)
 - **ID:** `T1001_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Befehlsauffüllung und Junk-Data-Injection durch Identifizierung von Anomalien
-Leerraumverteilung, sich wiederholende Umgebungsvariablendefinitionen,
-und extreme Befehlszeilenlängen in Nicht-Installer-Prozessen.
+- **Beschreibung:** Erkennt anomale Befehlsauffüllung und Junk-Data-Injection in Nicht-Installer-Prozessen durch Überwachung:
+- Extreme Leerraumsequenzen
+- Wiederholte Definitionen von Umgebungsvariablen
+- Verwendung von Sonderzeichen mit hoher Dichte in Befehlszeilen
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -677,16 +678,17 @@ und extreme Befehlszeilenlängen in Nicht-Installer-Prozessen.
 
 
 ---
-## Ultra-Pro High-Fidelity-Steganographie und Datenrekonstruktion (T1001.002)
+## Steganographie und Datenrekonstruktion (T1001.002)
 - **ID:** `T1001_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Daten-Desteganographie durch Identifizierung anomaler programmatischer Zugriffe
-zu Bildbearbeitungs-APIs (GDI+, System.Drawing) von Skriptinterpretern,
-Ich suche speziell nach Datenextraktionsroutinen auf Pixelebene.
+- **Beschreibung:** Erkennt die programmgesteuerte Extraktion versteckter Daten aus Bildern (Desteganographie) durch Überwachung:
+- Zugriffsroutinen auf Pixelebene (GetPixel, LockBits)
+- GDI+ / System.Drawing API-Nutzung
+- Skriptinterpreter oder verdächtige Prozessausführungskontexte
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

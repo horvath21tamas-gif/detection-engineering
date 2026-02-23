@@ -659,16 +659,17 @@ kifejezetten pixel szintű adatkinyerési rutinokat keres.
 
 
 ---
-## Ultra-Pro High-Fidelity levélszemét adat és parancstömítés (T1001.001)
+## Kéretlen adatok és parancsok kitöltése (T1001.001)
 - **ID:** `T1001_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Az anomáliák azonosításával észleli a parancsok kitöltését és a kéretlen adatinjektálást
-téreloszlás, ismétlődő környezeti változó-definíciók,
-és rendkívül hosszú parancssori nem telepítő folyamatokban.
+- **Leírás:** Érzékeli a rendellenes parancskitöltést és a kéretlen adatinjektálást nem telepítői folyamatokban a következők figyelésével:
+- Extrém szóköz sorozatok
+- Ismétlődő környezeti változó-definíciók
+- Nagy sűrűségű speciális karakterhasználat a parancssorban
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -677,16 +678,17 @@ téreloszlás, ismétlődő környezeti változó-definíciók,
 
 
 ---
-## Ultra-Pro High-Fidelity szteganográfia és adatrekonstrukció (T1001.002)
+## Szteganográfia és adatrekonstrukció (T1001.002)
 - **ID:** `T1001_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A rendellenes programozott hozzáférés azonosításával észleli az adatok desztiganográfiáját
-képmanipulációs API-khoz (GDI+, System.Drawing) a szkript értelmezőktől,
-kifejezetten pixel szintű adatkinyerési rutinokat keres.
+- **Leírás:** Érzékeli a rejtett adatok programozott kinyerését a képekből (de-steganográfia) a következők figyelésével:
+- Pixel szintű hozzáférési rutinok (GetPixel, LockBits)
+- GDI+ / System.Drawing API használat
+- Szkript értelmező vagy gyanús folyamatvégrehajtási kontextusok
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -1,8 +1,1 @@
-
-| rex field=CommandLine "(?<CommandLineMatch>(?i)([\\s\\t,;]{50,}))"
-| eval CommandLineCondition=if(isnotnull(CommandLineMatch), "true", "false")
-| rex field=CommandLine "(?<CommandLineMatch2>(?i)(set\\s+[a-z0-9]{1,3}=\\s*[^&]{1,5}&[\\s\\t]*){8,})"
-| eval CommandLineCondition2=if(isnotnull(CommandLineMatch2), "true", "false")
-| rex field=CommandLine "(?<CommandLineMatch3>(?i)([\\%\\!\\^\\`]{3,}.*){5,})"
-| eval CommandLineCondition3=if(isnotnull(CommandLineMatch3), "true", "false")
-| search CommandLineCondition="true" OR CommandLineCondition2="true" OR CommandLineCondition3="true" Image IN ("*\\powershell.exe", "*\\cmd.exe", "*\\cscript.exe", "*\\wscript.exe", "*\\mshta.exe", "*\\rundll32.exe") NOT (Image IN ("*\\Windows\\System32\\wbem\\WmiPrvSE.exe*", "*\\Program Files\\*", "*\\Windows\\System32\\msiexec.exe*") OR CommandLine IN ("*Microsoft.Cloud.Data*", "*chocolatey*") OR username="NT AUTHORITY\\SYSTEM")
+processcommandline IN ("(*i)([\\s\\t,;]{50,})", "(*i)(set\\s+[a-z0-9]{1,3}=\\s*[^&]{1,5}&[\\s\\t]*){8,}", "(*i)([\\%\\!\\^\\`]{3,}.*){5,}") Image IN ("*\\powershell.exe", "*\\cmd.exe", "*\\cscript.exe", "*\\wscript.exe", "*\\mshta.exe", "*\\rundll32.exe") NOT (Image IN ("*\\Windows\\System32\\wbem\\WmiPrvSE.exe*", "*\\Program Files\\*", "*\\Windows\\System32\\msiexec.exe*") CommandLine IN ("*Microsoft.Cloud.Data*", "*chocolatey*") username="NT AUTHORITY\\SYSTEM")

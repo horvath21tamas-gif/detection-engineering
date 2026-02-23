@@ -90,8 +90,8 @@
 - [Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001)](#ultra-pro-high-fidelity-symmetric-encrypted-exfiltration-(t1048001))
 - [Ultra-Pro High-Fidelity Asymmetrische verschlüsselte Exfiltration (T1048.002)](#ultra-pro-high-fidelity-asymmetrische-verschlüsselte-exfiltration-(t1048002))
 - [Ultra-Pro High-Fidelity unverschlüsseltes Protokoll Exfil (T1048.003)](#ultra-pro-high-fidelity-unverschlüsseltes-protokoll-exfil-(t1048003))
-- [Ultra-Pro High-Fidelity-System-Netzwerkverbindungserkennung (T1049)](#ultra-pro-high-fidelity-system-netzwerkverbindungserkennung-(t1049))
-- [Ultra-Pro High-Fidelity-Physical-Medium-Exfiltration (T1052)](#ultra-pro-high-fidelity-physical-medium-exfiltration-(t1052))
+- [Erkennung von Systemnetzwerkverbindungen (ATT&CK T1049)](#erkennung-von-systemnetzwerkverbindungen-(att&ck-t1049))
+- [Physikalische Medienexfiltration (ATT&CK T1052)](#physikalische-medienexfiltration-(att&ck-t1052))
 - [USB-Exfiltrationserkennung (ATT&CK T1052.001)](#usb-exfiltrationserkennung-(att&ck-t1052001))
 - [Verdächtige geplante Aufgaben- oder Joberstellung aufgrund von Persistenz (T1053).](#verdächtige-geplante-aufgaben--oder-joberstellung-aufgrund-von-persistenz-(t1053))
 - [Hochpräzise At.exe-Aktivitätserkennung](#hochpräzise-atexe-aktivitätserkennung)
@@ -99,13 +99,13 @@
 - [Verdächtige geplante Aufgabenerstellung beim Ausführen von PowerShell](#verdächtige-geplante-aufgabenerstellung-beim-ausführen-von-powershell)
 - [Erstellung oder Änderung eines High-Fidelity-Systemd-Dienstes](#erstellung-oder-änderung-eines-high-fidelity-systemd-dienstes)
 - [High-Fidelity-Systemd-Timer-Persistenzerkennung](#high-fidelity-systemd-timer-persistenzerkennung)
-- [Ultra-Pro-Stealthy-Prozessinjektionserkennung (T1055)](#ultra-pro-stealthy-prozessinjektionserkennung-(t1055))
-- [Ultra-Pro Stealthy DLL-Injektion (T1055.001)](#ultra-pro-stealthy-dll-injektion-(t1055001))
-- [Ultra-Pro Stealthy PE-Injektion (T1055.002)](#ultra-pro-stealthy-pe-injektion-(t1055002))
-- [Ultra-Pro Stealthy Thread Hijacking (T1055.003)](#ultra-pro-stealthy-thread-hijacking-(t1055003))
-- [Ultra-Pro Stealthy APC-Injektion (T1055.004)](#ultra-pro-stealthy-apc-injektion-(t1055004))
-- [Ultra-Pro Stealthy TLS-Injektion (T1055.005)](#ultra-pro-stealthy-tls-injektion-(t1055005))
-- [Ultra-Pro Stealthy Ptrace-Injektion (T1055.008)](#ultra-pro-stealthy-ptrace-injektion-(t1055008))
+- [Prozessinjektionserkennung (ATT&CK T1055)](#prozessinjektionserkennung-(att&ck-t1055))
+- [DLL-Injection-Erkennung (ATT&CK T1055.001)](#dll-injection-erkennung-(att&ck-t1055001))
+- [PE-Injektionserkennung (ATT&CK T1055.002)](#pe-injektionserkennung-(att&ck-t1055002))
+- [Thread-Hijacking-Erkennung (ATT&CK T1055.003)](#thread-hijacking-erkennung-(att&ck-t1055003))
+- [APC-Injektionserkennung (ATT&CK T1055.004)](#apc-injektionserkennung-(att&ck-t1055004))
+- [TLS-Injektionserkennung (ATT&CK T1055.005)](#tls-injektionserkennung-(att&ck-t1055005))
+- [Ptrace-Injektionserkennung (ATT&CK T1055.008)](#ptrace-injektionserkennung-(att&ck-t1055008))
 - [Heimliches Überschreiben des Moduls (ATT&CK T1055.009)](#heimliches-überschreiben-des-moduls-(att&ck-t1055009))
 - [Stealthy Extra Window Memory (EWM)-Injektion (ATT&CK T1055.011)](#stealthy-extra-window-memory-(ewm)-injektion-(att&ck-t1055011))
 - [Stealthy Process Hollowing (ATT&CK T1055.012)](#stealthy-process-hollowing-(att&ck-t1055012))
@@ -2001,17 +2001,14 @@ Prozesslinien und nicht vertrauenswürdige Ausführungspfade.
 
 
 ---
-## Ultra-Pro High-Fidelity-System-Netzwerkverbindungserkennung (T1049)
+## Erkennung von Systemnetzwerkverbindungen (ATT&CK T1049)
 - **ID:** `T1049.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die gezielte Erkennung aktiver Netzwerkverbindungen und bestehender Sitzungen.
-Konzentriert sich auf nicht standardmäßige Prozesslinien (Office, Browser, Webserver) und
-Erkennt bestimmte Befehlszeilen-Schalterkombinationen, die von Angreifern zur Zuordnung verwendet werden
-der Netzwerklandschaft.
+- **Beschreibung:** Erkennt die gezielte Erkennung aktiver Netzwerkverbindungen und bestehender Sitzungen.Konzentriert sich auf Angreifer-Handwerk wie erweiterte Netstat/Net-Nutzung, PowerShell-Netzwerk-Cmdlets, verdächtige übergeordnete Prozessherkunft (Office, Webdienste, Remoteverwaltung) und automatisierte Ausgabeanalyse oder -umleitung.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -2275,7 +2272,7 @@ Auslöser und verdächtige Ausführungsnutzlasten (Verschleierung, Netzwerk-Tool
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Einschleusung von Extra Window Memory (EWM) durch Überwachung verdächtiger prozessübergreifender Speicherzugriffsanforderungen, bei denen CallTrace die Ausführung aus nicht gesichertem Speicher (Shellcode) anzeigt und auf gängige GUI-Prozesse abzielt.
+- **Beschreibung:** Erkennt die Einschleusung von Extra Window Memory (EWM) durch die Überwachung verdächtiger prozessübergreifender Speicherzugriffsanforderungen, bei denen CallTrace die Ausführung aus nicht gesichertem Speicher (Shellcode) anzeigt und auf gängige GUI-Prozesse abzielt.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

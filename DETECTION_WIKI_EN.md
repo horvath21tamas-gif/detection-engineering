@@ -90,8 +90,8 @@
 - [Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001)](#ultra-pro-high-fidelity-symmetric-encrypted-exfiltration-(t1048001))
 - [Ultra-Pro High-Fidelity Asymmetric Encrypted Exfiltration (T1048.002)](#ultra-pro-high-fidelity-asymmetric-encrypted-exfiltration-(t1048002))
 - [Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003)](#ultra-pro-high-fidelity-unencrypted-protocol-exfil-(t1048003))
-- [Ultra-Pro High-Fidelity System Network Connections Discovery (T1049)](#ultra-pro-high-fidelity-system-network-connections-discovery-(t1049))
-- [Ultra-Pro High-Fidelity Physical Medium Exfiltration (T1052)](#ultra-pro-high-fidelity-physical-medium-exfiltration-(t1052))
+- [System Network Connections Discovery (ATT&CK T1049)](#system-network-connections-discovery-(att&ck-t1049))
+- [Physical Medium Exfiltration (ATT&CK T1052)](#physical-medium-exfiltration-(att&ck-t1052))
 - [USB Exfiltration Detection (ATT&CK T1052.001)](#usb-exfiltration-detection-(att&ck-t1052001))
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [High-Fidelity At.exe Activity Detection](#high-fidelity-atexe-activity-detection)
@@ -99,13 +99,13 @@
 - [Suspicious Scheduled Task Creation Executing PowerShell](#suspicious-scheduled-task-creation-executing-powershell)
 - [High-Fidelity Systemd Service Creation or Modification](#high-fidelity-systemd-service-creation-or-modification)
 - [High-Fidelity Systemd Timer Persistence Detection](#high-fidelity-systemd-timer-persistence-detection)
-- [Ultra-Pro Stealthy Process Injection Detection (T1055)](#ultra-pro-stealthy-process-injection-detection-(t1055))
-- [Ultra-Pro Stealthy DLL Injection (T1055.001)](#ultra-pro-stealthy-dll-injection-(t1055001))
-- [Ultra-Pro Stealthy PE Injection (T1055.002)](#ultra-pro-stealthy-pe-injection-(t1055002))
-- [Ultra-Pro Stealthy Thread Hijacking (T1055.003)](#ultra-pro-stealthy-thread-hijacking-(t1055003))
-- [Ultra-Pro Stealthy APC Injection (T1055.004)](#ultra-pro-stealthy-apc-injection-(t1055004))
-- [Ultra-Pro Stealthy TLS Injection (T1055.005)](#ultra-pro-stealthy-tls-injection-(t1055005))
-- [Ultra-Pro Stealthy Ptrace Injection (T1055.008)](#ultra-pro-stealthy-ptrace-injection-(t1055008))
+- [Process Injection Detection (ATT&CK T1055)](#process-injection-detection-(att&ck-t1055))
+- [DLL Injection Detection (ATT&CK T1055.001)](#dll-injection-detection-(att&ck-t1055001))
+- [PE Injection Detection (ATT&CK T1055.002)](#pe-injection-detection-(att&ck-t1055002))
+- [Thread Hijacking Detection (ATT&CK T1055.003)](#thread-hijacking-detection-(att&ck-t1055003))
+- [APC Injection Detection (ATT&CK T1055.004)](#apc-injection-detection-(att&ck-t1055004))
+- [TLS Injection Detection (ATT&CK T1055.005)](#tls-injection-detection-(att&ck-t1055005))
+- [Ptrace Injection Detection (ATT&CK T1055.008)](#ptrace-injection-detection-(att&ck-t1055008))
 - [Stealthy Module Overwriting (ATT&CK T1055.009)](#stealthy-module-overwriting-(att&ck-t1055009))
 - [Stealthy Extra Window Memory (EWM) Injection (ATT&CK T1055.011)](#stealthy-extra-window-memory-(ewm)-injection-(att&ck-t1055011))
 - [Stealthy Process Hollowing (ATT&CK T1055.012)](#stealthy-process-hollowing-(att&ck-t1055012))
@@ -2080,17 +2080,14 @@ process lineages and untrusted execution paths.
 
 
 ---
-## Ultra-Pro High-Fidelity System Network Connections Discovery (T1049)
+## System Network Connections Discovery (ATT&CK T1049)
 - **ID:** `T1049.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted discovery of active network connections and established sessions. 
-Focuses on non-standard process lineages (Office, Browsers, Web Servers) and 
-detects specific command-line switch combinations used by attackers to map 
-the network landscape.
+- **Leírás:** Detects targeted discovery of active network connections and established sessions. Focuses on attacker tradecraft such as advanced netstat/net usage, PowerShell network cmdlets, suspicious parent process lineage (Office, web services, remote management), and automated output parsing or redirection.
 
 
 #### 🚨 Response Playbook

@@ -90,8 +90,8 @@
 - [Ultra-Pro High-Fidelity szimmetrikus titkosított kiszűrés (T1048.001)](#ultra-pro-high-fidelity-szimmetrikus-titkosított-kiszűrés-(t1048001))
 - [Ultra-Pro High-Fidelity aszimmetrikus titkosított kiszűrés (T1048.002)](#ultra-pro-high-fidelity-aszimmetrikus-titkosított-kiszűrés-(t1048002))
 - [Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003)](#ultra-pro-high-fidelity-unencrypted-protocol-exfil-(t1048003))
-- [Ultra-Pro High-Fidelity rendszer hálózati kapcsolatok felfedezése (T1049)](#ultra-pro-high-fidelity-rendszer-hálózati-kapcsolatok-felfedezése-(t1049))
-- [Ultra-Pro High-Fidelity fizikai közeg szűrés (T1052)](#ultra-pro-high-fidelity-fizikai-közeg-szűrés-(t1052))
+- [Rendszerhálózati kapcsolatok felderítése (ATT&CK T1049)](#rendszerhálózati-kapcsolatok-felderítése-(att&ck-t1049))
+- [Fizikai közeg kiszűrése (ATT&CK T1052)](#fizikai-közeg-kiszűrése-(att&ck-t1052))
 - [USB kiszűrésérzékelés (ATT&CK T1052.001)](#usb-kiszűrésérzékelés-(att&ck-t1052001))
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [High-Fidelity At.exe tevékenységészlelés](#high-fidelity-atexe-tevékenységészlelés)
@@ -99,13 +99,13 @@
 - [Gyanús ütemezett feladat létrehozása PowerShell végrehajtása során](#gyanús-ütemezett-feladat-létrehozása-powershell-végrehajtása-során)
 - [High-Fidelity Systemd szolgáltatás létrehozása vagy módosítása](#high-fidelity-systemd-szolgáltatás-létrehozása-vagy-módosítása)
 - [High-Fidelity Systemd Timer Persistence Detection](#high-fidelity-systemd-timer-persistence-detection)
-- [Ultra-Pro lopakodó folyamat-injekcióérzékelő (T1055)](#ultra-pro-lopakodó-folyamat-injekcióérzékelő-(t1055))
-- [Ultra-Pro Stealthy DLL Injection (T1055.001)](#ultra-pro-stealthy-dll-injection-(t1055001))
-- [Ultra-Pro Stealthy PE befecskendezés (T1055.002)](#ultra-pro-stealthy-pe-befecskendezés-(t1055002))
-- [Ultra-Pro lopakodó száleltérítés (T1055.003)](#ultra-pro-lopakodó-száleltérítés-(t1055003))
-- [Ultra-Pro Stealthy APC injekció (T1055.004)](#ultra-pro-stealthy-apc-injekció-(t1055004))
-- [Ultra-Pro Stealthy TLS injekció (T1055.005)](#ultra-pro-stealthy-tls-injekció-(t1055005))
-- [Ultra-Pro Stealthy Ptrace injekció (T1055.008)](#ultra-pro-stealthy-ptrace-injekció-(t1055008))
+- [Befecskendezési folyamat észlelése (ATT&CK T1055)](#befecskendezési-folyamat-észlelése-(att&ck-t1055))
+- [DLL befecskendezés észlelése (ATT&CK T1055.001)](#dll-befecskendezés-észlelése-(att&ck-t1055001))
+- [PE befecskendezés észlelése (ATT&CK T1055.002)](#pe-befecskendezés-észlelése-(att&ck-t1055002))
+- [Száleltérítés-észlelés (ATT&CK T1055.003)](#száleltérítés-észlelés-(att&ck-t1055003))
+- [APC befecskendezés észlelése (ATT&CK T1055.004)](#apc-befecskendezés-észlelése-(att&ck-t1055004))
+- [TLS befecskendezés észlelése (ATT&CK T1055.005)](#tls-befecskendezés-észlelése-(att&ck-t1055005))
+- [Ptrace Injection Detection (ATT&CK T1055.008)](#ptrace-injection-detection-(att&ck-t1055008))
 - [Lopakodó modul-felülírás (ATT&CK T1055.009)](#lopakodó-modul-felülírás-(att&ck-t1055009))
 - [Lopakodó extra ablakmemória (EWM) befecskendezés (ATT&CK T1055.011)](#lopakodó-extra-ablakmemória-(ewm)-befecskendezés-(att&ck-t1055011))
 - [Lopakodó eljárással történő kiürítés (ATT&CK T1055.012)](#lopakodó-eljárással-történő-kiürítés-(att&ck-t1055012))
@@ -2001,17 +2001,14 @@ folyamatvonalak és nem megbízható végrehajtási útvonalak.
 
 
 ---
-## Ultra-Pro High-Fidelity rendszer hálózati kapcsolatok felfedezése (T1049)
+## Rendszerhálózati kapcsolatok felderítése (ATT&CK T1049)
 - **ID:** `T1049.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az aktív hálózati kapcsolatok és a létrehozott munkamenetek célzott felfedezését.
-A nem szabványos folyamatvonalakra összpontosít (Office, Böngészők, Webszerverek) és
-észleli a támadók által a leképezéshez használt parancssori kapcsolókombinációkat
-a hálózati tájat.
+- **Leírás:** Érzékeli az aktív hálózati kapcsolatok és a létrehozott munkamenetek célzott felfedezését.A támadó kereskedelmi eszközökre összpontosít, mint például a fejlett netstat/net használat, a PowerShell hálózati parancsmagok, a gyanús szülőfolyamatok (Office, webszolgáltatások, távoli felügyelet) és az automatizált kimeneti elemzés vagy átirányítás.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -2043,7 +2040,7 @@ a hálózati tájat.
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A nem interaktív fájlmásolási, -áthelyezési és -archiválási műveletek figyelésével észleli az adatok célzott kiszűrését az USB-/cserélhető meghajtókra.A gyanús parancssori argumentumokra, a rejtett automatizálási jelzőkre és a szokatlan szülőfolyamat-vonalra összpontosít.
+- **Leírás:** A nem interaktív fájlmásolási, -áthelyezési és -archiválási műveletek figyelésével észleli a célzott adatszivárgást az USB-/cserélhető meghajtókra.A gyanús parancssori argumentumokra, a rejtett automatizálási jelzőkre és a szokatlan szülőfolyamat-vonalra összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -2172,7 +2169,7 @@ triggerek és gyanús végrehajtási terhelések (zavarás, hálózati eszközö
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a DLL-befecskendezést azáltal, hogy azonosítja a kritikus Windows-folyamatokat célzó távoli szál létrehozását, ahol a kezdőcím a könyvtárbetöltési függvényeknek felel meg, vagy a forrásmemória-régió nem támogatott (shellkód).A megbízható rendszerfolyamatok és AV-komponensek nem tartoznak ide.
+- **Leírás:** Érzékeli a DLL-befecskendezést azáltal, hogy azonosítja a kritikus Windows-folyamatokat célzó távoli szál-létrehozást, ahol a kezdőcím a könyvtárbetöltési függvényeknek felel meg, vagy a forrásmemória-régió nem támogatott (shellkód).A megbízható rendszerfolyamatok és AV-komponensek nem tartoznak ide.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -2217,7 +2214,7 @@ triggerek és gyanús végrehajtási terhelések (zavarás, hálózati eszközö
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a nagy pontosságú APC (aszinkron eljáráshívás) befecskendezési kísérleteket, beleértve az Early Bird injekciót is, a szál hozzáférési maszkok (THREAD_SET_CONTEXT) figyelésével, ahol a hívó kód nem támogatott vagy nem megbízható memóriarégiókból származik.
+- **Leírás:** Érzékeli a nagy pontosságú APC (Asynchronous Procedure Call) befecskendezési kísérleteket, beleértve az Early Bird injekciót is, a szál hozzáférési maszkok (THREAD_SET_CONTEXT) figyelésével, ahol a hívó kód nem támogatott vagy nem megbízható memóriarégiókból származik.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -2275,7 +2272,7 @@ triggerek és gyanús végrehajtási terhelések (zavarás, hálózati eszközö
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az extra ablakmemória (EWM) befecskendezését a gyanús, többfolyamat-memória-hozzáférési kérelmek figyelésével, ahol a CallTrace a nem támogatott memóriából (shellkódból) történő végrehajtást jelzi, megcélozva a gyakori grafikus felületi folyamatokat.
+- **Leírás:** Érzékeli az extra ablakmemória (EWM) befecskendezését azáltal, hogy figyeli a gyanús, többfolyamat-memória-hozzáférési kéréseket, ahol a CallTrace a nem támogatott memóriából (shellkódból) történő végrehajtást jelzi, megcélozva a gyakori grafikus felhasználói felületi folyamatokat.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -2344,7 +2341,7 @@ triggerek és gyanús végrehajtási terhelések (zavarás, hálózati eszközö
 
 
 ---
-## Bemenetrögzítés észlelése (ATT&CK T1056)
+## Bemeneti rögzítés észlelése (ATT&CK T1056)
 - **ID:** `T1056.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
@@ -2360,7 +2357,7 @@ triggerek és gyanús végrehajtási terhelések (zavarás, hálózati eszközö
 
 
 ---
-## Billentyűnaplózás és beviteli bekötés (ATT&CK T1056.001)
+## Keylogging & Input Hooking (ATT&CK T1056.001)
 - **ID:** `T1056_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)

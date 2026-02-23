@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-23 10:43:08`
+**Utolsó frissítés:** `2026-02-23 11:18:07`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -95,8 +95,8 @@
 | T1048.001 | CRITICAL | Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001) |
 | T1048.002 | CRITICAL | Ultra-Pro High-Fidelity Asymmetric Encrypted Exfiltration (T1048.002) |
 | T1048.003 | CRITICAL | Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003) |
-| T1049 | HIGH | Port Knocking or Raw Socket Listener Deployment (T1205.001), Traffic Signaling and Port Knocking Activity (T1205), Ultra-Pro High-Fidelity System Network Connections Discovery (T1049) |
-| T1052 | CRITICAL | Ultra-Pro High-Fidelity Physical Medium Exfiltration (T1052) |
+| T1049 | HIGH | Port Knocking or Raw Socket Listener Deployment (T1205.001), Traffic Signaling and Port Knocking Activity (T1205), System Network Connections Discovery (ATT&CK T1049) |
+| T1052 | CRITICAL | Physical Medium Exfiltration (ATT&CK T1052) |
 | T1052.001 | CRITICAL | USB Exfiltration Detection (ATT&CK T1052.001) |
 | T1053 | HIGH | Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt |
 | T1053.002 | HIGH | High-Fidelity At.exe Activity Detection |
@@ -104,13 +104,13 @@
 | T1053.005 | HIGH | Suspicious Scheduled Task Creation Executing PowerShell |
 | T1053.006 | HIGH | High-Fidelity Systemd Service Creation or Modification |
 | T1053.007 | HIGH | High-Fidelity Systemd Timer Persistence Detection |
-| T1055 | CRITICAL | Ultra-Pro Stealthy Process Injection Detection (T1055) |
-| T1055.001 | CRITICAL | Ultra-Pro Stealthy DLL Injection (T1055.001) |
-| T1055.002 | CRITICAL | Ultra-Pro Stealthy PE Injection (T1055.002) |
-| T1055.003 | CRITICAL | Ultra-Pro Stealthy Thread Hijacking (T1055.003) |
-| T1055.004 | CRITICAL | Ultra-Pro Stealthy APC Injection (T1055.004) |
-| T1055.005 | CRITICAL | Ultra-Pro Stealthy TLS Injection (T1055.005) |
-| T1055.008 | CRITICAL | Ultra-Pro Stealthy Ptrace Injection (T1055.008) |
+| T1055 | CRITICAL | Process Injection Detection (ATT&CK T1055) |
+| T1055.001 | CRITICAL | DLL Injection Detection (ATT&CK T1055.001) |
+| T1055.002 | CRITICAL | PE Injection Detection (ATT&CK T1055.002) |
+| T1055.003 | CRITICAL | Thread Hijacking Detection (ATT&CK T1055.003) |
+| T1055.004 | CRITICAL | APC Injection Detection (ATT&CK T1055.004) |
+| T1055.005 | CRITICAL | TLS Injection Detection (ATT&CK T1055.005) |
+| T1055.008 | CRITICAL | Ptrace Injection Detection (ATT&CK T1055.008) |
 | T1055.009 | CRITICAL | Stealthy Module Overwriting (ATT&CK T1055.009) |
 | T1055.011 | CRITICAL | Stealthy Extra Window Memory (EWM) Injection (ATT&CK T1055.011) |
 | T1055.012 | CRITICAL | Stealthy Process Hollowing (ATT&CK T1055.012) |

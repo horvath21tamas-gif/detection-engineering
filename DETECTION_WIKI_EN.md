@@ -2260,16 +2260,14 @@ suspicious source-target relationships and unbacked memory regions.
 
 
 ---
-## Ultra-Pro Stealthy DLL Injection (T1055.001)
+## DLL Injection Detection (ATT&CK T1055.001)
 - **ID:** `T1055_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects high-fidelity DLL injection by identifying remote thread creation 
-where the start address is a known library-loading function or the source 
-memory region is not backed by a file on disk (unbacked memory).
+- **Leírás:** Detects DLL injection by identifying remote thread creation  targeting critical Windows processes, where the start address corresponds  to library-loading functions or the source memory region is unbacked (shellcode).  Trusted system processes and AV components are excluded.
 
 
 #### 🚨 Response Playbook

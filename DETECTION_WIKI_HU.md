@@ -2171,16 +2171,14 @@ gyanús forrás-cél kapcsolatok és nem támogatott memóriarégiók.
 
 
 ---
-## Ultra-Pro Stealthy DLL Injection (T1055.001)
+## DLL befecskendezés észlelése (ATT&CK T1055.001)
 - **ID:** `T1055_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a nagy pontosságú DLL-befecskendezést a távoli szál létrehozásának azonosításával
-ahol a kezdőcím egy ismert könyvtárbetöltő függvény vagy a forrás
-A memóriaterületet nem támogatja a lemezen lévő fájl (nem támogatott memória).
+- **Leírás:** Érzékeli a DLL-befecskendezést azáltal, hogy azonosítja a kritikus Windows-folyamatokat célzó távoli szál létrehozását, ahol a kezdőcím a könyvtárbetöltési függvényeknek felel meg, vagy a forrásmemória-régió nem támogatott (shellkód).A megbízható rendszerfolyamatok és AV-komponensek nem tartoznak ide.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

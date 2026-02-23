@@ -2171,16 +2171,14 @@ verdächtige Quelle-Ziel-Beziehungen und nicht gesicherte Speicherbereiche.
 
 
 ---
-## Ultra-Pro Stealthy DLL-Injektion (T1055.001)
+## DLL-Injection-Erkennung (ATT&CK T1055.001)
 - **ID:** `T1055_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die High-Fidelity-DLL-Injektion durch Identifizierung der Remote-Thread-Erstellung
-Dabei ist die Startadresse eine bekannte Bibliotheksladefunktion oder die Quelle
-Der Speicherbereich wird nicht durch eine Datei auf der Festplatte gesichert (nicht gesicherter Speicher).
+- **Beschreibung:** Erkennt die DLL-Injektion durch Identifizierung der Remote-Thread-Erstellung, die auf kritische Windows-Prozesse abzielt, wobei die Startadresse Bibliotheksladefunktionen entspricht oder der Quellspeicherbereich nicht gesichert ist (Shellcode).Ausgenommen sind vertrauenswürdige Systemprozesse und AV-Komponenten.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

@@ -1693,16 +1693,14 @@ Gleichzeitig werden häufig auftretende Windows Update- und SCCM/MECM-Rauschen g
 
 
 ---
-## Ultra-Pro High-Fidelity-Doppeldateierweiterungsausführung (T1036.007)
+## Ausführung der doppelten Dateierweiterung (T1036.007)
 - **ID:** `T1036_007.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Ausführung von Binärdateien, die sich über doppelte Erweiterungen als Dokumente ausgeben.
-Filtert strikt Entwicklerartefakte (.min.js, .map) und verifizierte Installationsprogramme.
-Der Schwerpunkt liegt auf Benutzerverzeichnissen mit hohem Risiko und verdächtigen übergeordneten Abstammungslinien.
+- **Beschreibung:** Erkennt die Ausführung von Binärdateien, die sich über doppelte Dateierweiterungen als Dokumente ausgeben (z. B. .pdf.exe, .docx.exe).Filtert Entwicklerartefakte (.min.js, .map), Systembinärdateien und verifizierte Installationsprogramme heraus.Konzentriert sich auf Benutzerverzeichnisse mit hohem Risiko und verdächtige übergeordnete Prozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

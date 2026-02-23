@@ -67,7 +67,7 @@ detection:
         - 'C:\Windows\SysWOW64\'
         - 'C:\Program Files\'
         - 'C:\Program Files (x86)\'
-    - User:
+    - username:
         - 'NT AUTHORITY\SYSTEM'
         - 'NT AUTHORITY\LOCAL SERVICE'
         - 'NT AUTHORITY\NETWORK SERVICE'

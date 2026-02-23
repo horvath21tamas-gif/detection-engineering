@@ -1693,16 +1693,14 @@ miközben szűri a gyakori Windows Update és SCCM/MECM zajokat.
 
 
 ---
-## Ultra-Pro High-Fidelity kettős fájlkiterjesztés végrehajtása (T1036.007)
+## Dupla fájlkiterjesztés végrehajtása (T1036.007)
 - **ID:** `T1036_007.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a dokumentumoknak álcázott binárisok végrehajtását kettős kiterjesztéssel.
-Szigorúan szűri a fejlesztői melléktermékeket (.min.js, .map) és az ellenőrzött telepítőket,
-a nagy kockázatú felhasználói könyvtárakra és a gyanús szülői vonalakra összpontosítva.
+- **Leírás:** Érzékeli a dokumentumoknak álcázott binárisok végrehajtását kettős fájlkiterjesztéseken keresztül (pl. .pdf.exe, .docx.exe).Kiszűri a fejlesztői melléktermékeket (.min.js, .map), a rendszer bináris fájljait és az ellenőrzött telepítőket.A nagy kockázatú felhasználói könyvtárakra és a gyanús szülőfolyamatokra összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

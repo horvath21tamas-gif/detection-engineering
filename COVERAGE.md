@@ -70,7 +70,7 @@
 | T1029 | CRITICAL | Ultra-Pro High-Fidelity Scheduled Transfer (T1029) |
 | T1030 | CRITICAL | Ultra-Pro High-Fidelity Data Chunking and Fragmentation (T1030) |
 | T1033 | HIGH | Ultra-Pro High-Fidelity System Owner/User Discovery (T1033) |
-| T1036 | CRITICAL | Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036), Legitimate Windows Binary Copied to User-Writable Location, Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007) |
+| T1036 | CRITICAL | Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036), Legitimate Windows Binary Copied to User-Writable Location, Double File Extension Execution (T1036.007) |
 | T1036.001 | CRITICAL | Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001) |
 | T1036.002 | CRITICAL | Ultra-Pro High-Fidelity RTLO Character Execution (T1036.002) |
 | T1036.003 | CRITICAL | Ultra-Pro High-Fidelity Renamed System Utility (T1036.003) |

@@ -1754,16 +1754,14 @@ while filtering common Windows Update and SCCM/MECM noise.
 
 
 ---
-## Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007)
+## Double File Extension Execution (T1036.007)
 - **ID:** `T1036_007.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects execution of binaries masquerading as documents via double extensions. 
-Strictly filters developer artifacts (.min.js, .map) and verified installers, 
-focusing on high-risk user directories and suspicious parent lineages.
+- **Leírás:** Detects execution of binaries masquerading as documents via double file extensions (e.g., .pdf.exe, .docx.exe). Filters out developer artifacts (.min.js, .map), system binaries, and verified installers. Focuses on high-risk user directories and suspicious parent processes.
 
 
 #### 🚨 Response Playbook

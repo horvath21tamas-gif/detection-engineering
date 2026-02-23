@@ -917,7 +917,7 @@ file system locks and EDR monitoring for credential dumping.
 
 
 ---
-## Ultra-Pro High-Fidelity System Service Discovery (T1007)
+## System Service Discovery (T1007)
 - **ID:** `T1007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

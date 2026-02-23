@@ -902,7 +902,7 @@ Dateisystemsperren und EDR-Überwachung für das Dumping von Anmeldeinformatione
 
 
 ---
-## Ultra-Pro High-Fidelity System Service Discovery (T1007)
+## Systemdiensterkennung (T1007)
 - **ID:** `T1007.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

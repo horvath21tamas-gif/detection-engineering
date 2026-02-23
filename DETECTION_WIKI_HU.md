@@ -902,7 +902,7 @@ fájlrendszer zárolása és EDR-figyelés a hitelesítő adatok kiürítéséhe
 
 
 ---
-## Ultra-Pro High-Fidelity System Service Discovery (T1007)
+## Rendszerszolgáltatás-felderítés (T1007)
 - **ID:** `T1007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

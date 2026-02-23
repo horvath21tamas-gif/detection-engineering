@@ -167,7 +167,7 @@
 - [Ultra-Pro High-Fidelity-Cloud-Kontoerkennung (T1087.004)](#ultra-pro-high-fidelity-cloud-kontoerkennung-(t1087004))
 - [Ultraprofessioneller High-Fidelity-Proxy und Pivot-Punkt-Erkennung (T1090)](#ultraprofessioneller-high-fidelity-proxy-und-pivot-punkt-erkennung-(t1090))
 - [Ultra-Pro High-Fidelity Interner Proxy und Pivot-Erkennung (T1090.001)](#ultra-pro-high-fidelity-interner-proxy-und-pivot-erkennung-(t1090001))
-- [Ultra-Profi-externer High-Fidelity-Proxy und Tunneling (T1090.002)](#ultra-profi-externer-high-fidelity-proxy-und-tunneling-(t1090002))
+- [Externer Proxy und Tunneling (T1090.002)](#externer-proxy-und-tunneling-(t1090002))
 - [Ultra-Pro High-Fidelity-Multi-Hop-Proxy- und Tor-Erkennung (T1090.003)](#ultra-pro-high-fidelity-multi-hop-proxy--und-tor-erkennung-(t1090003))
 - [Domain-Fronting-Erkennung (T1090.004)](#domain-fronting-erkennung-(t1090004))
 - [High-Fidelity-Prozessausführung von Wechselmedien](#high-fidelity-prozessausführung-von-wechselmedien)
@@ -3320,7 +3320,7 @@ Prozesse, ausgenommen legitime lokale Virtualisierung und Containerverkehr.
 
 
 ---
-## Ultra-Profi-externer High-Fidelity-Proxy und Tunneling (T1090.002)
+## Externer Proxy und Tunneling (T1090.002)
 - **ID:** `T1090_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

@@ -167,7 +167,7 @@
 - [Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004)](#ultra-pro-high-fidelity-cloud-account-discovery-(t1087004))
 - [Ultra-Pro High-Fidelity Proxy & Pivot Point Detection (T1090)](#ultra-pro-high-fidelity-proxy-&-pivot-point-detection-(t1090))
 - [Ultra-Pro High-Fidelity Internal Proxy & Pivot Detection (T1090.001)](#ultra-pro-high-fidelity-internal-proxy-&-pivot-detection-(t1090001))
-- [Ultra-Pro High-Fidelity External Proxy & Tunneling (T1090.002)](#ultra-pro-high-fidelity-external-proxy-&-tunneling-(t1090002))
+- [External Proxy & Tunneling (T1090.002)](#external-proxy-&-tunneling-(t1090002))
 - [Ultra-Pro High-Fidelity Multi-hop Proxy & Tor Detection (T1090.003)](#ultra-pro-high-fidelity-multi-hop-proxy-&-tor-detection-(t1090003))
 - [Domain Fronting Detection (T1090.004)](#domain-fronting-detection-(t1090004))
 - [High-Fidelity Process Execution from Removable Media](#high-fidelity-process-execution-from-removable-media)
@@ -3476,7 +3476,7 @@ processes, excluding legitimate local virtualization and container traffic.
 
 
 ---
-## Ultra-Pro High-Fidelity External Proxy & Tunneling (T1090.002)
+## External Proxy & Tunneling (T1090.002)
 - **ID:** `T1090_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

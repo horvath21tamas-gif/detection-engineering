@@ -167,7 +167,7 @@
 - [Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004)](#ultra-pro-high-fidelity-cloud-account-discovery-(t1087004))
 - [Ultra-Pro High-Fidelity proxy és forgáspont-észlelés (T1090)](#ultra-pro-high-fidelity-proxy-és-forgáspont-észlelés-(t1090))
 - [Ultra-Pro High-Fidelity belső proxy és forgásérzékelés (T1090.001)](#ultra-pro-high-fidelity-belső-proxy-és-forgásérzékelés-(t1090001))
-- [Ultra-Pro High-Fidelity külső proxy és tunneling (T1090.002)](#ultra-pro-high-fidelity-külső-proxy-és-tunneling-(t1090002))
+- [Külső proxy és alagút (T1090.002)](#külső-proxy-és-alagút-(t1090002))
 - [Ultra-Pro High-Fidelity Multi-hop proxy és Tor-észlelés (T1090.003)](#ultra-pro-high-fidelity-multi-hop-proxy-és-tor-észlelés-(t1090003))
 - [Domain Fronting Detection (T1090.004)](#domain-fronting-detection-(t1090004))
 - [Nagy pontosságú folyamatvégrehajtás cserélhető adathordozóról](#nagy-pontosságú-folyamatvégrehajtás-cserélhető-adathordozóról)
@@ -3320,7 +3320,7 @@ folyamatok, kivéve a legitim helyi virtualizációt és a konténerforgalmat.
 
 
 ---
-## Ultra-Pro High-Fidelity külső proxy és tunneling (T1090.002)
+## Külső proxy és alagút (T1090.002)
 - **ID:** `T1090_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

@@ -170,9 +170,9 @@
 | T1087.002 | HIGH | Ultra-Pro High-Fidelity Domain Account Discovery (T1087.002) |
 | T1087.003 | HIGH | Ultra-Pro High-Fidelity Email Account Discovery (T1087.003) |
 | T1087.004 | HIGH | Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004) |
-| T1090 | CRITICAL | Ultra-Pro High-Fidelity Proxy & Pivot Point Detection (T1090), Ultra-Pro High-Fidelity External Proxy & Tunneling (T1090.002) |
+| T1090 | CRITICAL | Ultra-Pro High-Fidelity Proxy & Pivot Point Detection (T1090), External Proxy & Tunneling (T1090.002) |
 | T1090.001 | CRITICAL | Ultra-Pro High-Fidelity Internal Proxy & Pivot Detection (T1090.001) |
-| T1090.002 | CRITICAL | Ultra-Pro High-Fidelity External Proxy & Tunneling (T1090.002) |
+| T1090.002 | CRITICAL | External Proxy & Tunneling (T1090.002) |
 | T1090.003 | CRITICAL | Ultra-Pro High-Fidelity Multi-hop Proxy & Tor Detection (T1090.003) |
 | T1090.004 | CRITICAL | Domain Fronting Detection (T1090.004) |
 | T1091 | HIGH | High-Fidelity Process Execution from Removable Media |

@@ -1,58 +1,71 @@
-title: Ultra-Pro High-Fidelity Input Capture Detection (T1056)
+title: Input Capture Detection (ATT&CK T1056)
 id: f523d8a5-ef56-4546-bf96-c45d0586b9a0
 status: stable
-description: |
-    Detects sophisticated input capture (keylogging) by identifying suspicious 
-    API-related command lines, unauthorized shell-based keylogging snippets, 
-    and anomalous process behavior targeting user input.
+description: >
+  Detects sophisticated input capture (keylogging) by identifying suspicious
+  API-related command lines, unauthorized shell-based keylogging snippets,
+  and anomalous process behavior targeting user input.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1056/
 tags:
-    - attack.collection
-    - attack.t1056.001
-    - attack.t1056
+  - attack.collection
+  - attack.t1056
+  - attack.t1056.001
+  - attack.host
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_script_keylogger:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\rundll32.exe'
-            - '\cscript.exe'
-        CommandLine|contains:
-            - 'user32.dll,SetWindowsHook'
-            - '[User32]::GetAsyncKeyState'
-            - 'GetKeyboardState'
-            - 'RawInput' 
+  selection_script_keylogger:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\rundll32.exe'
+      - '\cscript.exe'
+    CommandLine|contains:
+      - 'user32.dll,SetWindowsHook'
+      - '[User32]::GetAsyncKeyState'
+      - 'GetKeyboardState'
+      - 'RawInput'
 
-    selection_logging_behavior:
-        CommandLine|contains:
-            - 'keylog'
-            - 'keystrokes'
-            - 'klgr'
-        CommandLine|contains:
-            - ' >> ' 
-            - 'out-file'
-        Image|contains:
-            - '\Users\'
-            - '\Temp\'
+  selection_logging_behavior:
+    CommandLine|contains:
+      - 'keylog'
+      - 'keystrokes'
+      - 'klgr'
+    CommandLine|contains:
+      - ' >> '
+      - 'out-file'
+    Image|contains:
+      - '\Users\'
+      - '\Temp\'
 
-    selection_offensive_tools:
-        CommandLine|contains:
-            - 'Invoke-Keystrokes' 
-            - 'Get-Keystrokes'
-            - 'keylog_recorder'
-            - 'logkeys'
+  selection_offensive_tools:
+    CommandLine|contains:
+      - 'Invoke-Keystrokes'
+      - 'Get-Keystrokes'
+      - 'keylog_recorder'
+      - 'logkeys'
 
-    filter_legit_apps:
-        Image|contains:
-            - '\Program Files\'
-            - '\Program Files (x86)\'
-        CommandLine|contains:
-            - 'node_modules' 
-        username: 'NT AUTHORITY\SYSTEM'
+  filter_legit_apps:
+    Image|contains:
+      - '\Program Files\'
+      - '\Program Files (x86)\'
+    CommandLine|contains:
+      - 'node_modules'
+    User|startswith: 'NT AUTHORITY\'
 
-    condition: (selection_script_keylogger or (selection_logging_behavior) or selection_offensive_tools) and not filter_legit_apps
+  condition: (selection_script_keylogger or selection_logging_behavior or selection_offensive_tools)
+             and not filter_legit_apps
+
+falsepositives:
+  - Authorized PowerShell scripts performing input capture for testing or monitoring
+  - Developer environments using node_modules that touch input buffers
+  - SYSTEM or admin automation writing keystroke logs in Temp for auditing
+
 level: high

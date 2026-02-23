@@ -1,58 +1,98 @@
-title: Ultra-Pro High-Fidelity Alternative Protocol Exfiltration (T1048)
+title: Alternative Protocol Exfiltration (ATT&CK T1048)
 id: ef99c2e8-73e5-4c16-8549-a56e545b9a96
 status: stable
-description: |
-    Detects data exfiltration over non-standard protocols by identifying 
-    abnormal ICMP buffer sizes, SSH/tunneling flags in non-admin contexts, 
-    and network-capable LoLBins executing from suspicious paths.
+description: >
+  Detects potential data exfiltration over alternative or non-standard
+  protocols (ICMP, SSH tunneling, TCP relays, DNS tunneling utilities)
+  by identifying tunneling flags, abnormal ICMP payload sizes, and
+  network-capable LoLBins executing from suspicious user-space paths.
+  Focuses on non-interactive usage and privilege-inconsistent execution context.
 author: hota05
-date: 2026-02-09
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1048/
 tags:
-    - attack.exfiltration
-    - attack.t1048
+  - attack.exfiltration
+  - attack.t1048
+  - attack.command_and_control
+  - attack.defense_evasion
+  - attack.host
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_protocol_abuse:
-        CommandLine|contains:
-            - ' -l 14'             
-            - ' -s 14'              
-            - ' -R '                
-            - ' -L '               
-            - ' -D '                
-            - ' -X '               
-            - ' -N '               
+  selection_tunneling_flags:
+    CommandLine|contains|any:
+      - ' -R '
+      - ' -L '
+      - ' -D '
+      - ' -X '
+      - ' -N '
+      - ' -ssh'
+      - ' -proxy'
+      - ' -listen'
+      - ' -connect'
 
-    selection_tools:
-        Image|endswith:
-            - '\plink.exe'           
-            - '\pscp.exe'          
-            - '\ncat.exe'           
-            - '\nc.exe'
-            - '\socat.exe'
-            - '\iodine.exe'          
+  selection_icmp_large_buffer:
+    CommandLine|re: '(?i).* -l ([5-9][0-9]{2,}|[1-9][0-9]{3,}).*'
 
-    selection_context:
-        Image|contains:
-            - '\Users\'
-            - '\AppData\'
-            - '\Temp\'
-            - '\Public\'
-            - '\PerfLogs\'
-        CommandLine|contains:
-            - ' -pw '               
+  selection_network_tools:
+    Image|endswith:
+      - '\plink.exe'
+      - '\pscp.exe'
+      - '\ncat.exe'
+      - '\nc.exe'
+      - '\socat.exe'
+      - '\iodine.exe'
+      - '\ssh.exe'
+      - '\curl.exe'
+      - '\wget.exe'
 
-    filter_legit_admin:
-        - Image|contains:
-            - '\Program Files\'
-            - '\Program Files (x86)\'
-        - CommandLine|contains:
-            - '127.0.0.1'            
-            - 'localhost'
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith:
-            - '\services.exe'
+  selection_credential_flags:
+    CommandLine|contains:
+      - ' -pw '
+      - ' -i '
+      - ' -batch'
+      - ' --pass'
+      - ' --key'
 
-    condition: (selection_protocol_abuse or selection_tools) and selection_context and not filter_legit_admin
+  selection_untrusted_path:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Public\'
+      - '\PerfLogs\'
+
+  selection_user_context:
+    IntegrityLevel: 'Medium'
+
+  filter_legitimate_admin_activity:
+    - Image|contains:
+        - '\Program Files\'
+        - '\Program Files (x86)\'
+    - CommandLine|contains:
+        - '127.0.0.1'
+        - 'localhost'
+        - 'intranet'
+    - username: 'NT AUTHORITY\SYSTEM'
+    - ParentImage|endswith:
+        - '\services.exe'
+        - '\svchost.exe'
+
+  condition:
+    ((selection_network_tools and selection_tunneling_flags)
+      or selection_icmp_large_buffer)
+    and selection_untrusted_path
+    and selection_user_context
+    and not filter_legitimate_admin_activity
+
+falsepositives:
+  - Legitimate SSH port forwarding by developers
+  - Authorized red team / penetration testing
+  - Internal diagnostic ICMP testing with large buffers
+  - IT administrators using plink or ssh for maintenance
+
 level: critical

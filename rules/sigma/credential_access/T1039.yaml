@@ -1,62 +1,111 @@
-title: Ultra-Pro High-Fidelity Network Share Discovery (T1039)
+title: Network Share Discovery and Collection (ATT&CK T1039)
 id: d38a5a71-cc10-4439-9c0d-74262249eb1e
 status: stable
-description: |
-    Detects systematic discovery and collection of sensitive data from network shares 
-    by identifying recursive file enumeration using UNC paths, combined with 
-    output redirection or mass archival from non-standard process contexts.
-author: hota05
-date: 2026-02-09
+description: >
+  Detects systematic discovery and collection of sensitive data from network shares
+  by identifying recursive enumeration of UNC paths combined with staging,
+  output redirection, compression, or targeting of sensitive file types.
+  Focuses on bulk discovery and collection behavior executed from non-administrative
+  or suspicious process contexts.
+author: hota05 
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1039/
 tags:
-    - attack.collection
-    - attack.t1039
+  - attack.collection
+  - attack.t1039
+  - attack.discovery
+  - attack.exfiltration
+  - attack.host
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_net_discovery:
-        CommandLine|contains:
-            - '\\\\'                 
-            - 'net use'
-            - 'dir /s /b'             
-            - 'Get-ChildItem -Recurse'
-            - 'robocopy'             
-            - 'findstr /s /i'        
+  selection_unc_enumeration:
+    CommandLine|contains:
+      - '\\\\'
+      - 'net use'
+      - 'net view'
+      - 'dir \\\\'
+      - 'dir /s /b'
+      - 'Get-ChildItem -Recurse'
+      - 'Get-SmbShare'
+      - 'Get-SmbMapping'
+      - 'robocopy \\\\'
+      - 'findstr /s /i'
 
-    selection_intent:
-        CommandLine|contains:
-            - ' > '                   
-            - ' -OutFile '
-            - 'Compress-Archive'
-            - '7z.exe a'
-            - 'tar.exe -c'
+  selection_collection_intent:
+    CommandLine|contains:
+      - ' > '
+      - ' >> '
+      - ' -OutFile '
+      - 'Compress-Archive'
+      - 'System.IO.Compression'
+      - '7z.exe a'
+      - 'rar.exe a'
+      - 'tar.exe -c'
+      - 'copy \\\\'
+      - 'move \\\\'
 
-    selection_sensitive:
-        CommandLine|contains:
-            - '*.kdbx'               
-            - '*.xlsx'             
-            - '*.pdf'
-            - 'id_rsa'                
-            - 'password'
-            - 'confidential'
+  selection_sensitive_targets:
+    CommandLine|contains:
+      - '*.kdbx'
+      - '*.xlsx'
+      - '*.xls'
+      - '*.docx'
+      - '*.pdf'
+      - '*.pst'
+      - '*.bak'
+      - 'id_rsa'
+      - 'id_dsa'
+      - 'password'
+      - 'confidential'
+      - 'finance'
+      - 'hr'
 
-    selection_context:
-        ParentImage|endswith:
-            - '\powershell.exe'
-            - '\cmd.exe'
-            - '\w3wp.exe'             
-            - '\httpd.exe'           
-            - '\rundll32.exe'
-        IntegrityLevel: 'Medium'      
+  selection_suspicious_context:
+    ParentImage|endswith:
+      - '\powershell.exe'
+      - '\cmd.exe'
+      - '\w3wp.exe'
+      - '\httpd.exe'
+      - '\rundll32.exe'
+      - '\wmiprvse.exe'
+    IntegrityLevel: 'Medium'
 
-    filter_trusted_infra:
-        - Image|contains:
-            - 'C:\Program Files\Veritas\'
-            - 'C:\Program Files\Commvault\' 
-            - 'C:\Windows\CCM\'         
-        - username: 'NT AUTHORITY\SYSTEM'
-        - CommandLine|contains:
-            - 'SoftwareDistribution'    
+  selection_user_path:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Public\'
 
-    condition: selection_net_discovery and (selection_intent or selection_sensitive) and selection_context and not filter_trusted_infra
+  filter_trusted_infrastructure:
+    - Image|contains:
+        - 'C:\Program Files\Veritas\'
+        - 'C:\Program Files\Commvault\'
+        - 'C:\Program Files\Veeam\'
+        - 'C:\Windows\CCM\'
+    - ParentImage|endswith:
+        - '\services.exe'
+        - '\svchost.exe'
+    - username: 'NT AUTHORITY\SYSTEM'
+    - CommandLine|contains:
+        - 'SoftwareDistribution'
+        - 'backup'
+
+  condition:
+    selection_unc_enumeration
+    and (selection_collection_intent or selection_sensitive_targets)
+    and selection_suspicious_context
+    and not filter_trusted_infrastructure
+
+falsepositives:
+  - Authorized backup operations
+  - IT administrators collecting logs from file servers
+  - Incident response artifact collection
+  - DevOps bulk file migration projects
+
 level: critical

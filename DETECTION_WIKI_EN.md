@@ -2042,16 +2042,14 @@ flags and suspicious parent process lineages.
 
 
 ---
-## Ultra-Pro High-Fidelity Asymmetric Encrypted Exfiltration (T1048.002)
+## Asymmetric Encrypted Exfiltration (ATT&CK T1048.002)
 - **ID:** `T1048_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects data exfiltration over asymmetric encrypted protocols (HTTPS) 
-by identifying command-line tools (curl, powershell) using upload-specific 
-flags from untrusted paths or launched by suspicious parent processes.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects potential data exfiltration over asymmetric encrypted protocols (HTTPS) by identifying command-line upload behaviors (curl, wget, PowerShell, BITS, certutil) combined with suspicious execution context or parent process lineage. Focuses on explicit upload flags, insecure TLS usage, and user-space execution paths.
 
 
 #### 🚨 Response Playbook

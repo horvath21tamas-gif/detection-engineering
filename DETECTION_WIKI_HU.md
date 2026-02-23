@@ -1965,16 +1965,14 @@ zászlók és gyanús szülőfolyamatok vonalai.
 
 
 ---
-## Ultra-Pro High-Fidelity aszimmetrikus titkosított kiszűrés (T1048.002)
+## Aszimmetrikus titkosított kiszűrés (ATT&CK T1048.002)
 - **ID:** `T1048_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az adatok kiszűrését aszimmetrikus titkosított protokollokon (HTTPS) keresztül
-a parancssori eszközök (curl, powershell) azonosításával a feltöltési specifikus használatával
-nem megbízható útvonalakról vagy gyanús szülőfolyamatok által elindított zászlók.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Az aszimmetrikus titkosított protokollokon (HTTPS) keresztül észleli a lehetséges adatszivárgást azáltal, hogy azonosítja a parancssori feltöltési viselkedést (curl, wget, PowerShell, BITS, certutil) gyanús végrehajtási környezettel vagy szülőfolyamat-sorral kombinálva.Az explicit feltöltési jelzőkre, a nem biztonságos TLS-használatra és a felhasználói tér végrehajtási útvonalaira összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

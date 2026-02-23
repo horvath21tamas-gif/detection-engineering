@@ -1965,16 +1965,14 @@ Flags und verdächtige übergeordnete Prozesslinien.
 
 
 ---
-## Ultra-Pro High-Fidelity Asymmetrische verschlüsselte Exfiltration (T1048.002)
+## Asymmetrische verschlüsselte Exfiltration (ATT&CK T1048.002)
 - **ID:** `T1048_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Datenexfiltration über asymmetrische verschlüsselte Protokolle (HTTPS)
-durch die Identifizierung von Befehlszeilentools (Curl, Powershell) mithilfe von Upload-spezifischen
-Flags von nicht vertrauenswürdigen Pfaden oder von verdächtigen übergeordneten Prozessen gestartet.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt potenzielle Datenexfiltration über asymmetrische verschlüsselte Protokolle (HTTPS), indem Verhaltensweisen beim Hochladen über die Befehlszeile (curl, wget, PowerShell, BITS, certutil) in Kombination mit verdächtigem Ausführungskontext oder der Herkunft des übergeordneten Prozesses identifiziert werden.Konzentriert sich auf explizite Upload-Flags, unsichere TLS-Nutzung und Ausführungspfade im Benutzerbereich.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

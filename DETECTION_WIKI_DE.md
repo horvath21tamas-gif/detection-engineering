@@ -117,7 +117,7 @@
 - [Ultra-Pro High-Fidelity-GUI-Eingabeerfassung (T1056.002)](#ultra-pro-high-fidelity-gui-eingabeerfassung-(t1056002))
 - [Ultra-Pro High-Fidelity-Digitalzertifikat-Diebstahl (T1056.003)](#ultra-pro-high-fidelity-digitalzertifikat-diebstahl-(t1056003))
 - [Verdächtiges Einbinden der Anmeldeinformations-API über Win32-Bibliotheken](#verdächtiges-einbinden-der-anmeldeinformations-api-über-win32-bibliotheken)
-- [Ultra-Pro High-Fidelity-Prozesserkennung (T1057)](#ultra-pro-high-fidelity-prozesserkennung-(t1057))
+- [Prozesserkennung (ATT&CK T1057)](#prozesserkennung-(att&ck-t1057))
 - [Kontextuelle Anomalie des High-Fidelity-Scripting-Interpreters](#kontextuelle-anomalie-des-high-fidelity-scripting-interpreters)
 - [Verdächtige verschlüsselte PowerShell-Befehlsausführung](#verdächtige-verschlüsselte-powershell-befehlsausführung)
 - [High-Fidelity-AppleScript-Missbrauchserkennung (Osascript).](#high-fidelity-applescript-missbrauchserkennung-(osascript))
@@ -2462,16 +2462,14 @@ Zugriff auf den kryptografischen Schlüsselspeicher von Windows.
 
 
 ---
-## Ultra-Pro High-Fidelity-Prozesserkennung (T1057)
+## Prozesserkennung (ATT&CK T1057)
 - **ID:** `T1057.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezielte Prozesserkennung mit Schwerpunkt auf der Identifizierung von Sicherheitsprodukten
-und Erinnerungszielaufklärung.Filtert hochfrequente Geräusche aus
-Browser und legitime Update-Orchestratoren.
+- **Beschreibung:** Erkennt gezielte Prozesserkennung mit Schwerpunkt auf der Identifizierung von Sicherheitsprodukten und der Aufklärung von Speicherzielen.Filtert hochfrequentes Rauschen von Browsern und legitimen Update-Orchestratoren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

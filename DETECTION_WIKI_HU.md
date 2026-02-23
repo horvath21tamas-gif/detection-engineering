@@ -117,7 +117,7 @@
 - [Ultra-Pro High-Fidelity GUI bemenet rögzítése (T1056.002)](#ultra-pro-high-fidelity-gui-bemenet-rögzítése-(t1056002))
 - [Ultra-Pro High-Fidelity digitális tanúsítványlopás (T1056.003)](#ultra-pro-high-fidelity-digitális-tanúsítványlopás-(t1056003))
 - [Gyanús hitelesítő adatok API-hozzákapcsolása a Win32 könyvtárakon keresztül](#gyanús-hitelesítő-adatok-api-hozzákapcsolása-a-win32-könyvtárakon-keresztül)
-- [Ultra-Pro High-Fidelity Process Discovery (T1057)](#ultra-pro-high-fidelity-process-discovery-(t1057))
+- [Folyamatfelderítés (ATT&CK T1057)](#folyamatfelderítés-(att&ck-t1057))
 - [High-Fidelity Scripting Interpreter Contextual Anomália](#high-fidelity-scripting-interpreter-contextual-anomália)
 - [Gyanús kódolt PowerShell-parancsvégrehajtás](#gyanús-kódolt-powershell-parancsvégrehajtás)
 - [High-Fidelity AppleScript (osascript) visszaélés-észlelés](#high-fidelity-applescript-(osascript)-visszaélés-észlelés)
@@ -2462,16 +2462,14 @@ hozzáférést biztosít a Windows Cryptographic Key Store-hoz.
 
 
 ---
-## Ultra-Pro High-Fidelity Process Discovery (T1057)
+## Folyamatfelderítés (ATT&CK T1057)
 - **ID:** `T1057.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a célzott folyamatfelderítést a biztonsági termékek azonosítására összpontosítva
-és memóriacélú felderítés.Kiszűri a nagyfrekvenciás zajokat
-böngészők és törvényes frissítési szervezők.
+- **Leírás:** Érzékeli a célzott folyamatfelderítést, a biztonsági termékek azonosítására és a memóriacélok felderítésére összpontosítva.Kiszűri a böngészőkből és a törvényes frissítési szervezőkből származó nagyfrekvenciás zajokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

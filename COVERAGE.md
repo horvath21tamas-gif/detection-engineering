@@ -122,7 +122,7 @@
 | T1056.002 | HIGH | Ultra-Pro High-Fidelity GUI Input Capture (T1056.002) |
 | T1056.003 | CRITICAL | Ultra-Pro High-Fidelity Digital Certificate Theft (T1056.003) |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 Libraries |
-| T1057 | HIGH | Ultra-Pro High-Fidelity Process Discovery (T1057) |
+| T1057 | HIGH | Process Discovery (ATT&CK T1057) |
 | T1059 | HIGH | High-Fidelity Scripting Interpreter Contextual Anomaly, Suspicious Child Process Spawned by Microsoft Office Application (High Fidelity), Webshell Upload or Interaction Detection (T1505.003) |
 | T1059.001 | HIGH | Suspicious Encoded PowerShell Command Execution |
 | T1059.002 | HIGH | High-Fidelity AppleScript (osascript) Abuse Detection |

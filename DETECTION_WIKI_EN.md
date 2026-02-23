@@ -117,7 +117,7 @@
 - [Ultra-Pro High-Fidelity GUI Input Capture (T1056.002)](#ultra-pro-high-fidelity-gui-input-capture-(t1056002))
 - [Ultra-Pro High-Fidelity Digital Certificate Theft (T1056.003)](#ultra-pro-high-fidelity-digital-certificate-theft-(t1056003))
 - [Suspicious Credential API Hooking via Win32 Libraries](#suspicious-credential-api-hooking-via-win32-libraries)
-- [Ultra-Pro High-Fidelity Process Discovery (T1057)](#ultra-pro-high-fidelity-process-discovery-(t1057))
+- [Process Discovery (ATT&CK T1057)](#process-discovery-(att&ck-t1057))
 - [High-Fidelity Scripting Interpreter Contextual Anomaly](#high-fidelity-scripting-interpreter-contextual-anomaly)
 - [Suspicious Encoded PowerShell Command Execution](#suspicious-encoded-powershell-command-execution)
 - [High-Fidelity AppleScript (osascript) Abuse Detection](#high-fidelity-applescript-(osascript)-abuse-detection)
@@ -2568,16 +2568,14 @@ access to the Windows Cryptographic Key Store.
 
 
 ---
-## Ultra-Pro High-Fidelity Process Discovery (T1057)
+## Process Discovery (ATT&CK T1057)
 - **ID:** `T1057.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted process discovery focusing on security product identification 
-and memory target reconnaissance. Filters high-frequency noise from 
-browsers and legitimate update orchestrators.
+- **Leírás:** Detects targeted process discovery focusing on security product identification and memory target reconnaissance. Filters high-frequency noise from browsers and legitimate update orchestrators.
 
 
 #### 🚨 Response Playbook

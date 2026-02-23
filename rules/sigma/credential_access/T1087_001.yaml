@@ -1,56 +1,56 @@
-title: Ultra-Pro High-Fidelity Local Account Discovery (T1087.001)
+title: Local Account Discovery (T1087.001)
 id: e53f7712-2e1e-4ccf-8da7-9054deac6ddc
 status: stable
 description: |
-    Detects systematic local account and group enumeration. 
-    Focuses on anomalous process lineages (e.g., discovery tools launched by web servers or 
-    remote shells) and the use of modern enumeration methods like WMI/CIM.
+  Detects systematic local account and group enumeration. Focuses on anomalous process lineages 
+  (e.g., discovery tools launched by web servers or remote shells) and the use of modern 
+  enumeration methods like WMI/CIM.
 author: hota05
 date: 2026-02-04
 tags:
-    - attack.discovery
-    - attack.t1087.001
+  - attack.discovery
+  - attack.t1087.001
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\net.exe'
-            - '\net1.exe'
-            - '\whoami.exe'
-            - '\quser.exe'
-            - '\qwinsta.exe'
-        - CommandLine|contains:
-            - 'Get-LocalUser'
-            - 'Get-LocalGroup'
-            - 'Win32_UserAccount'
-            - 'Win32_Group'
+  selection_tools:
+    Image|endswith:
+      - '\net.exe'
+      - '\net1.exe'
+      - '\whoami.exe'
+      - '\quser.exe'
+      - '\qwinsta.exe'
+    CommandLine|contains:
+      - 'Get-LocalUser'
+      - 'Get-LocalGroup'
+      - 'Win32_UserAccount'
+      - 'Win32_Group'
 
-    selection_args:
-        CommandLine|contains:
-            - ' user'
-            - ' localgroup'
-            - ' /all'           
-            - ' /groups'       
+  selection_args:
+    CommandLine|contains:
+      - ' user'
+      - ' localgroup'
+      - ' /all'
+      - ' /groups'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\httpd.exe'      
-            - '\nginx.exe'
-            - '\wsmprovhost.exe'
-            - '\psexesvc.exe'    
-            - '\php-cgi.exe'
-            - '\sqlservr.exe'   
-        Image|contains:
-            - '\AppData\Local\Temp\'
-            - '\Users\Public\'
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\httpd.exe'
+      - '\nginx.exe'
+      - '\wsmprovhost.exe'
+      - '\psexesvc.exe'
+      - '\php-cgi.exe'
+      - '\sqlservr.exe'
+    Image|contains:
+      - '\AppData\Local\Temp\'
+      - '\Users\Public\'
 
-    filter_legit_automation:
-        username: 'NT AUTHORITY\SYSTEM'
-        ParentImage|contains:
-            - '\Windows\System32\msiexec.exe'
-            - '\Windows\System32\svchost.exe'
+  filter_legit_automation:
+    username: 'NT AUTHORITY\SYSTEM'
+    ParentImage|contains:
+      - '\Windows\System32\msiexec.exe'
+      - '\Windows\System32\svchost.exe'
 
-    condition: selection_tools and selection_args and selection_suspicious_parent and not filter_legit_automation
+  condition: selection_tools and selection_args and selection_suspicious_parent and not filter_legit_automation
 level: high

@@ -3248,16 +3248,16 @@ ismert szolgáltatásfiókok és felügyeleti eszközök kizárásával.
 
 
 ---
-## Ultra-Pro High-Fidelity e-mail fiók felderítés (T1087.003)
+## E-mail fiók felderítése (T1087.003)
 - **ID:** `T1087_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az e-mail fiókok és a globális címlisták (GAL) szisztematikus felfedezését.
-A nem interaktív PowerShell-munkamenetekre, a tömegesen exportáló címzettekre összpontosít,
-és a nem megbízható folyamatok rendellenes hozzáférése a helyi levelezési profil konfigurációkhoz.
+- **Leírás:** Érzékeli az e-mail fiókok és a globális címlisták (GAL) szisztematikus felfedezését
+a nem interaktív PowerShell-munkamenetek, a tömeges exportálási parancsok és a
+a nem megbízható folyamatok rendellenes hozzáférése a helyi Outlook/Exchange profilkonfigurációkhoz.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

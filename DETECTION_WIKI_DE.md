@@ -3248,16 +3248,16 @@ durch den Ausschluss bekannter Dienstkonten und Verwaltungstools.
 
 
 ---
-## Ultra-Pro High-Fidelity-E-Mail-Kontoerkennung (T1087.003)
+## E-Mail-Kontoerkennung (T1087.003)
 - **ID:** `T1087_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Erkennung von E-Mail-Konten und globalen Adresslisten (GAL).
-Konzentriert sich auf nicht interaktive PowerShell-Sitzungen, den Massenexport von Empfängern,
-und anormaler Zugriff auf lokale E-Mail-Profilkonfigurationen durch nicht vertrauenswürdige Prozesse.
+- **Beschreibung:** Erkennt die systematische Erkennung von E-Mail-Konten und globalen Adresslisten (GAL) durch
+Überwachung nicht interaktiver PowerShell-Sitzungen, Massenexportbefehle und
+Anomaler Zugriff auf lokale Outlook/Exchange-Profilkonfigurationen durch nicht vertrauenswürdige Prozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

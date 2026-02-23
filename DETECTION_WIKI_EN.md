@@ -3400,16 +3400,16 @@ by excluding known service accounts and management tools.
 
 
 ---
-## Ultra-Pro High-Fidelity Email Account Discovery (T1087.003)
+## Email Account Discovery (T1087.003)
 - **ID:** `T1087_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic discovery of email accounts and Global Address Lists (GAL). 
-Focuses on non-interactive PowerShell sessions, mass-exporting recipients, 
-and anomalous access to local mail profile configurations by untrusted processes.
+- **Leírás:** Detects systematic discovery of email accounts and Global Address Lists (GAL) by
+monitoring non-interactive PowerShell sessions, mass-export commands, and 
+anomalous access to local Outlook/Exchange profile configurations by untrusted processes.
 
 
 #### 🚨 Response Playbook

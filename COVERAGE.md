@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-23 09:30:52`
+**Utolsó frissítés:** `2026-02-23 09:50:46`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -138,15 +138,15 @@
 | T1069.001 | HIGH | Ultra-Pro High-Fidelity Local Group Discovery (T1069.001) |
 | T1069.002 | HIGH | Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002) |
 | T1069.003 | HIGH | Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003) |
-| T1070 | CRITICAL | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Command History Logging Impairment, Indicator Blocking and Telemetry Suppression |
-| T1070.001 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Security Event Log Cleared Using wevtutil.exe |
-| T1070.002 | HIGH | Ultra-Pro High-Fidelity Linux Log Clearing and Journal Sabotage (T1070.002) |
-| T1070.003 | HIGH | Ultra-Pro High-Fidelity Mailbox Data Clearing and Rule Sabotage (T1070.003) |
-| T1070.004 | HIGH | Ultra-Pro High-Fidelity Indicator Removal on Host (T1070), Ultra-Pro High-Fidelity Forensic Artifact and File Deletion (T1070.004) |
-| T1070.005 | HIGH | Ultra-Pro High-Fidelity Network Share and Credential Removal (T1070.005) |
-| T1070.006 | HIGH | Ultra-Pro High-Fidelity Timestomp and MACE Attribute Manipulation (T1070.006) |
-| T1070.007 | HIGH | Ultra-Pro High-Fidelity Network History and RDP Trace Removal (T1070.007) |
-| T1070.008 | CRITICAL | Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008) |
+| T1070 | CRITICAL | Indicator Removal on Host (ATT&CK T1070), Command History Logging Impairment, Indicator Blocking and Telemetry Suppression |
+| T1070.001 | HIGH | Indicator Removal on Host (ATT&CK T1070), Security Event Log Cleared Using wevtutil.exe |
+| T1070.002 | HIGH | Linux Log Clearing and Journal Sabotage (ATT&CK T1070.002) |
+| T1070.003 | HIGH | Mailbox Data Clearing and Rule Manipulation (ATT&CK T1070.003) |
+| T1070.004 | HIGH | Indicator Removal on Host (ATT&CK T1070), Forensic Artifact and File Deletion (ATT&CK T1070.004) |
+| T1070.005 | HIGH | Network Share and Credential Cleanup (ATT&CK T1070.005) |
+| T1070.006 | HIGH | Timestomp and MACE Attribute Manipulation (T1070.006) |
+| T1070.007 | HIGH | Network History and RDP Trace Removal (T1070.007) |
+| T1070.008 | CRITICAL | Email Storage and Database Destruction (T1070.008) |
 | T1070.009 | HIGH | Persistence Artifact Removal (T1070.009) |
 | T1071 | CRITICAL | Application Layer C2 Anomaly (T1071) |
 | T1071.001 | CRITICAL | Application Layer C2 Anomaly (T1071), HTTP/S C2 Anomaly (T1071.001) |

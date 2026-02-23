@@ -1,52 +1,67 @@
-title: Ultra-Pro Stealthy EWM Injection (T1055.011)
+title: Stealthy Extra Window Memory (EWM) Injection (ATT&CK T1055.011)
 id: 9775b6cb-15a8-457c-8a6f-68d326251eae
 status: stable
-description: |
-    Detects Extra Window Memory (EWM) injection by monitoring for suspicious 
-    cross-process access with memory manipulation rights where the CallTrace 
-    indicates execution from unbacked memory (shellcode) targeting GUI processes.
+description: >
+  Detects Extra Window Memory (EWM) injection by monitoring suspicious cross-process 
+  memory access requests where the CallTrace indicates execution from unbacked memory 
+  (shellcode), targeting common GUI processes.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1055/011/
 tags:
-    - attack.defense_evasion
-    - attack.privilege_escalation
-    - attack.t1055.011
+  - attack.defense_evasion
+  - attack.privilege_escalation
+  - attack.t1055.011
+  - attack.host
+
 logsource:
-    product: windows
-    category: process_access 
+  product: windows
+  category: process_access
+
 detection:
-    selection_access_mask:
-        GrantedAccess:
-            - '0x1410'
-            - '0x1411'
-            - '0x1438'
-            - '0x143a'
+  selection_access_mask:
+    GrantedAccess|contains:
+      - '0x1410'
+      - '0x1411'
+      - '0x1438'
+      - '0x143a'
 
-    selection_gui_targets:
-        TargetImage|endswith:
-            - '\explorer.exe'
-            - '\taskhostw.exe'
-            - '\sihost.exe'
-            - '\searchui.exe'
+  selection_gui_targets:
+    TargetImage|endswith:
+      - '\explorer.exe'
+      - '\taskhostw.exe'
+      - '\sihost.exe'
+      - '\searchui.exe'
 
-    selection_unbacked_calltrace:
-        CallTrace|contains: 'unknown'
+  selection_unbacked_calltrace:
+    CallTrace|contains: 'unknown'
 
-    filter_trusted_gui:
-        - SourceImage|endswith:
-            - '\MsMpEng.exe'
-            - '\CcmExec.exe'
-        - CallTrace|contains:
-            - 'user32.dll+'
-            - 'win32u.dll+'
-            - 'ntdll.dll+LdrpWorkItem'
-        - condition: selection_source_equals_target
+  selection_suspicious_source:
+    SourceImage|contains:
+      - '\Users\'
+      - '\Temp\'
+      - '\AppData\'
 
-    selection_suspicious_source:
-        SourceImage|contains:
-            - '\Users\'
-            - '\Temp\'
-            - '\AppData\'
+  filter_trusted_gui:
+    - SourceImage|endswith:
+        - '\MsMpEng.exe'
+        - '\CcmExec.exe'
+    - CallTrace|contains:
+        - 'user32.dll+'
+        - 'win32u.dll+'
+        - 'ntdll.dll+LdrpWorkItem'
+    - condition: SourceProcessName == TargetImage
 
-    condition: selection_access_mask and selection_gui_targets and selection_unbacked_calltrace and not filter_trusted_gui
+  condition: selection_access_mask
+             and selection_gui_targets
+             and selection_unbacked_calltrace
+             and selection_suspicious_source
+             and not filter_trusted_gui
+
+falsepositives:
+  - Legitimate AV or management software performing GUI process memory inspection
+  - Admin or automation scripts interacting with Explorer/TaskHost from trusted signed locations
+
 level: critical

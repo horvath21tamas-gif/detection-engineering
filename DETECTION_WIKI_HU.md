@@ -3230,7 +3230,7 @@ távoli héjak) és a modern felsorolási módszerek, például a WMI/CIM haszn�
 
 
 ---
-## Ultra-Pro High-Fidelity Domain Account Discovery (T1087.002)
+## Domainfiók felderítése (T1087.002)
 - **ID:** `T1087_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

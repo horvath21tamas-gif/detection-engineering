@@ -3230,7 +3230,7 @@ Remote-Shells) und die Verwendung moderner Aufzählungsmethoden wie WMI/CIM.
 
 
 ---
-## Ultra-Pro High-Fidelity-Domänenkontoerkennung (T1087.002)
+## Domänenkontoerkennung (T1087.002)
 - **ID:** `T1087_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

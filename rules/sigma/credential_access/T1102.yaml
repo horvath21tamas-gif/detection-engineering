@@ -1,57 +1,58 @@
-title: Ultra-Pro High-Fidelity Web Service C2 (T1102)
+title: Web Service C2 (T1102)
 id: 854a32bc-83c2-44e0-ad88-2093a4f6299d
 status: stable
 description: |
-    Detects C2 communication via legitimate cloud services by identifying 
-    raw API or raw-content subdomains accessed by non-browser LoLBins, 
-    script interpreters, or binaries running from suspicious paths.
+  Detects command-and-control (C2) communication via legitimate cloud services by
+  identifying raw API or raw-content endpoints accessed by non-browser LoLBins, script
+  interpreters, or binaries running from suspicious paths.
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.command_and_control
-    - attack.t1102
+  - attack.command_and_control
+  - attack.t1102
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_api_endpoints:
-        CommandLine|contains:
-            - 'api.github.com'
-            - 'raw.githubusercontent.com'     
-            - 'api.telegram.org'               
-            - 'discord.com/api/webhooks'       
-            - 'pastebin.com/raw/'             
-            - 'gist.githubusercontent.com'     
-            - 'drive.google.com/uc'           
+  selection_api_endpoints:
+    CommandLine|contains:
+      - 'api.github.com'
+      - 'raw.githubusercontent.com'
+      - 'api.telegram.org'
+      - 'discord.com/api/webhooks'
+      - 'pastebin.com/raw/'
+      - 'gist.githubusercontent.com'
+      - 'drive.google.com/uc'
 
-    selection_procs:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\curl.exe'
-            - '\certutil.exe'
-            - '\bitsadmin.exe'
-            - '\rundll32.exe'
-            - '\regsvr32.exe'
-            - '\mshta.exe'
+  selection_procs:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\curl.exe'
+      - '\certutil.exe'
+      - '\bitsadmin.exe'
+      - '\rundll32.exe'
+      - '\regsvr32.exe'
+      - '\mshta.exe'
 
-    selection_suspicious_path:
-        Image|contains:
-            - '\Users\'
-            - '\AppData\'
-            - '\Temp\'
-            - '\Windows\Temp\'
-            - '\Users\Public\'
+  selection_suspicious_path:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Windows\Temp\'
+      - '\Users\Public\'
 
-    filter_legit_software:
-        - Image|contains:
-            - '\Program Files\'               
-            - '\Program Files (x86)\'
-        - CommandLine|contains:
-            - 'chocolatey'                    
-            - 'scoop'
-            - 'winget'
-        - username: 'NT AUTHORITY\SYSTEM'         
+  filter_legit_software:
+    Image|contains:
+      - '\Program Files\'
+      - '\Program Files (x86)\'
+    CommandLine|contains:
+      - 'chocolatey'
+      - 'scoop'
+      - 'winget'
+    username: 'NT AUTHORITY\SYSTEM'
 
-    condition: selection_api_endpoints and (selection_procs or selection_suspicious_path) and not filter_legit_software
+  condition: selection_api_endpoints and (selection_procs or selection_suspicious_path) and not filter_legit_software
+
 level: critical

@@ -2716,14 +2716,12 @@ und Prozessherkunft, um Fehlalarme von Administrator-Workstations zu minimieren.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003)
+## Erkennung von Cloud-Gruppen (ATT&CK T1069.003)
 - **ID:** `T1069_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt die systematische Entdeckung von Wolkengruppen durch die Identifizierung von Massenaufklärungsmustern.
-atypische Benutzeragenten und Erweiterung sensibler Gruppeneigenschaften.
-Entwickelt, um CSPM- und IaC-Dienstprinzipale mit hohem Volumen herauszufiltern.
+- **Beschreibung:** Erkennt die systematische Entdeckung von Cloud-Gruppen durch die Identifizierung von Massenaufklärungsmustern, atypischen Benutzeragenten und der Erweiterung sensibler Gruppeneigenschaften.Entwickelt, um CSPM- und IaC-Dienstprinzipale mit hohem Volumen herauszufiltern.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**
@@ -3166,7 +3164,7 @@ Konzentriert sich auf makrofähige Vorlagen, Shortcut-Hijacking und Binärersetz
 - **Beschreibung:** Erkennt die systematische Erkennung von Systeminformationen (Betriebssystem, Patches, Architektur)
 Der Schwerpunkt liegt auf der Aufklärung zur Exploit-Auswahl.Filtert laute Geräusche
 von Inventaragenten, Verwaltungstools und Browsern mithilfe von Integritätsstufen
-und übergeordnetes Prozess-Gating.
+und Gating des übergeordneten Prozesses.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

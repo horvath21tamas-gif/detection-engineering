@@ -2837,14 +2837,12 @@ and process lineage to minimize false positives from admin workstations.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003)
+## Cloud Groups Discovery (ATT&CK T1069.003)
 - **ID:** `T1069_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects systematic cloud group discovery by identifying mass reconnaissance patterns, 
-atypical User-Agents, and expansion of sensitive group properties. 
-Designed to filter out high-volume CSPM and IaC service principals.
+- **Leírás:** Detects systematic cloud group discovery by identifying mass reconnaissance patterns, atypical User-Agents, and expansion of sensitive group properties. Designed to filter out high-volume CSPM and IaC service principals.
 
 
 #### 🚨 Response Playbook

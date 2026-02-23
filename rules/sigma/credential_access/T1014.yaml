@@ -1,55 +1,61 @@
-title: Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014)
+title: BYOVD Rootkit Loading (T1014)
 id: 0b346918-0e30-4b44-9d1c-b772f6fdaf4b
 status: stable
 description: |
-    Detects the "Bring Your Own Vulnerable Driver" (BYOVD) technique. 
-    Focuses on the execution of known driver loaders or the registration of kernel-mode 
-    services from non-standard paths, while filtering out legitimate OS driver maintenance.
+  Detects the "Bring Your Own Vulnerable Driver" (BYOVD) technique. 
+  Focuses on execution of known driver loaders or the registration of kernel-mode 
+  services from non-standard paths, while filtering out legitimate OS driver maintenance.
 author: hota05
 date: 2026-02-03
 tags:
-    - attack.defense_evasion
-    - attack.privilege_escalation
-    - attack.t1014
+  - attack.defense_evasion
+  - attack.privilege_escalation
+  - attack.t1014
+
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_loaders:
-        Image|endswith:
-            - '\kdmapper.exe'
-            - '\kdu.exe'
-            - '\drvmap.exe'
-            - '\gdriver.exe'
+  selection_loaders:
+    Image|endswith:
+      - '\kdmapper.exe'
+      - '\kdu.exe'
+      - '\drvmap.exe'
+      - '\gdriver.exe'
 
-    selection_sc_kernel:
-        CommandLine|contains:
-            - ' create '
-        CommandLine|contains:
-            - 'type= kernel'
+  selection_sc_kernel:
+    CommandLine|contains:
+      - ' create '
+      - 'type= kernel'
 
-    selection_paths:
-        CommandLine|contains:
-            - '\AppData\Local\Temp\'
-            - '\Users\Public\'
-            - '\Windows\Temp\'
-            - '\Downloads\'
-            - '\Desktop\'
+  selection_paths:
+    CommandLine|contains:
+      - '\AppData\Local\Temp\'
+      - '\Users\Public\'
+      - '\Windows\Temp\'
+      - '\Downloads\'
+      - '\Desktop\'
 
-    selection_vuln_drivers:
-        CommandLine|contains:
-            - 'RTCore64.sys'     
-            - 'gdrv.sys'         
-            - 'ene.sys'          
-            - 'WinRing0.sys'    
-            - 'procexp.sys'     
+  selection_vuln_drivers:
+    CommandLine|contains:
+      - 'RTCore64.sys'
+      - 'gdrv.sys'
+      - 'ene.sys'
+      - 'WinRing0.sys'
+      - 'procexp.sys'
 
-    filter_legit_install:
-        Image|startswith:
-            - 'C:\Windows\System32\msiexec.exe'
-            - 'C:\Windows\System32\DriverStore\'
-            - 'C:\Windows\System32\drvinst.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+  filter_legit_install:
+    Image|startswith:
+      - 'C:\Windows\System32\msiexec.exe'
+      - 'C:\Windows\System32\DriverStore\'
+      - 'C:\Windows\System32\drvinst.exe'
+    username: 'NT AUTHORITY\SYSTEM'
 
-    condition: (selection_loaders or (selection_sc_kernel and selection_paths) or (selection_vuln_drivers and selection_paths)) and not filter_legit_install
+  condition: >
+    (selection_loaders or
+    (selection_sc_kernel and selection_paths) or
+    (selection_vuln_drivers and selection_paths)) and
+    not filter_legit_install
+
 level: critical

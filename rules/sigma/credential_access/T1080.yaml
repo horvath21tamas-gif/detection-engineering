@@ -41,7 +41,7 @@ detection:
     IntegrityLevel: 'Medium'
 
   selection_masquerade:
-    TargetFilename: '.*\.(pdf|docx|xlsx|txt)\.(exe|vbs|ps1|lnk|bat)$'
+    filename: '.*\.(pdf|docx|xlsx|txt)\.(exe|vbs|ps1|lnk|bat)$'
 
   filter_legit_apps:
     Image|endswith:

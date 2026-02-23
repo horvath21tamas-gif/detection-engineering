@@ -3289,16 +3289,15 @@ or the use of non-standard automation User-Agents by human accounts.
 
 
 ---
-## Ultra-Pro High-Fidelity Taint Shared Content (T1080)
+## Taint Shared Content (T1080)
 - **ID:** `T1080.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Tárolás-igényes)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects attempts to taint shared content by monitoring for suspicious 
-process-to-file-share interactions, focusing on macro-enabled templates, 
-shortcut hijacking, and binary replacement on UNC paths.
+- **Leírás:** Detects attempts to taint shared content by monitoring suspicious process-to-file-share interactions.
+Focuses on macro-enabled templates, shortcut hijacking, and binary replacement on UNC paths.
 
 
 #### 🚨 Response Playbook

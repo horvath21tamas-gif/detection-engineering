@@ -3143,16 +3143,15 @@ oder die Verwendung nicht standardmäßiger Automatisierungs-Benutzeragenten dur
 
 
 ---
-## Ultra-Pro High-Fidelity Taint Shared Content (T1080)
+## Geteilte Inhalte verunreinigen (T1080)
 - **ID:** `T1080.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Speicherintensiv)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Versuche, freigegebene Inhalte zu manipulieren, indem es auf verdächtige Inhalte überwacht
-Prozess-zu-Dateifreigabe-Interaktionen mit Schwerpunkt auf makrofähigen Vorlagen,
-Shortcut-Hijacking und Binärersetzung auf UNC-Pfaden.
+- **Beschreibung:** Erkennt Versuche, freigegebene Inhalte zu manipulieren, indem verdächtige Prozess-zu-Dateifreigabe-Interaktionen überwacht werden.
+Konzentriert sich auf makrofähige Vorlagen, Shortcut-Hijacking und Binärersetzung auf UNC-Pfaden.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

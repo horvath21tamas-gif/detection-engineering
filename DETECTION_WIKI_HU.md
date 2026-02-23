@@ -3143,16 +3143,15 @@ vagy nem szabványos automatizálási felhasználói ügynökök emberi fiókok 
 
 
 ---
-## Ultra-Pro High-Fidelity Taint megosztott tartalom (T1080)
+## Megosztott tartalom (T1080)
 - **ID:** `T1080.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Tárolás-igényes)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli a megosztott tartalom beszennyezésének kísérleteit a gyanús tartalom megfigyelésével
-folyamat-fájlmegosztás interakciók, a makróképes sablonokra összpontosítva,
-parancsikon-eltérítés és bináris csere az UNC útvonalakon.
+- **Leírás:** Észleli a megosztott tartalom beszennyezésére irányuló kísérleteket azáltal, hogy figyeli a folyamat és a fájl megosztása közötti gyanús interakciókat.
+A makró-kompatibilis sablonokra, a parancsikon-eltérítésre és az UNC-útvonalak bináris cseréjére összpontosít.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

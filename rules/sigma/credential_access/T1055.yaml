@@ -1,56 +1,70 @@
-title: Ultra-Pro Stealthy Process Injection Detection (T1055)
+title: Process Injection Detection (ATT&CK T1055)
 id: d693769d-1fae-4a9a-9daa-7a290408d22c
 status: stable
-description: |
-    Detects advanced process injection (e.g. DLL injection, Thread Hijacking) by 
-    monitoring for specific high-risk GrantedAccess masks combined with 
-    suspicious source-target relationships and unbacked memory regions.
-author: hota05
-date: 2026-02-03
+description: >
+  Detects advanced process injection techniques (DLL Injection, PE Injection, Thread Hijacking, 
+  APC, TLS, EWM, Hollowing) by monitoring for high-risk GrantedAccess masks, 
+  suspicious source-target process relationships, and unbacked memory regions. 
+  Trusted system processes and AV components are excluded to reduce false positives.
+author: hota05 
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1055/
 tags:
-    - attack.defense_evasion
-    - attack.privilege_escalation
-    - attack.t1055
+  - attack.defense_evasion
+  - attack.privilege_escalation
+  - attack.t1055
+  - attack.host
+
 logsource:
-    product: windows
-    category: process_access 
+  product: windows
+  category: process_access
+
 detection:
-    selection_access_flags:
-        GrantedAccess:
-            - '0x1410'
-            - '0x1411'
-            - '0x1438'
-            - '0x143a'
-            - '0x1F1FFF' 
+  selection_access_flags:
+    GrantedAccess|contains:
+      - '0x1410'
+      - '0x1411'
+      - '0x1438'
+      - '0x143a'
+      - '0x1F1FFF'
 
-    selection_suspicious_pairing:
-        TargetImage|endswith:
-            - '\explorer.exe'
-            - '\svchost.exe'
-            - '\lsass.exe'
-            - '\spoolsv.exe'
-            - '\winlogon.exe'
-        SourceImage|contains:
-            - '\Users\'
-            - '\Temp\'
-            - '\AppData\'
+  selection_suspicious_pairing:
+    TargetImage|endswith:
+      - '\explorer.exe'
+      - '\svchost.exe'
+      - '\lsass.exe'
+      - '\spoolsv.exe'
+      - '\winlogon.exe'
+    SourceImage|contains:
+      - '\Users\'
+      - '\Temp\'
+      - '\AppData\'
 
-    filter_legitimate:
-        - SourceImage|endswith:
-            - '\MsMpEng.exe'        
-            - '\CcmExec.exe'        
-            - '\msteams.exe'        
-        - Sourceprocessname: 'C:\Windows\System32\csrss.exe'
-        - TargetImage|endswith:
-            - '\WerFault.exe'       
-            - '\conhost.exe'
-        - CallTrace|contains: 'unknown'
+  selection_tools:
+    SourceImage|endswith:
+      - '\mimikatz.exe'
+      - '\cobaltstrike.exe'
+      - '\powershell.exe'
 
-    selection_tools:
-        SourceImage|endswith:
-            - '\mimikatz.exe'
-            - '\cobaltstrike.exe'
-            - '\powershell.exe'
+  filter_legitimate:
+    - SourceImage|endswith:
+        - '\MsMpEng.exe'
+        - '\CcmExec.exe'
+        - '\msteams.exe'
+    - Sourceprocessname: 'C:\Windows\System32\csrss.exe'
+    - TargetImage|endswith:
+        - '\WerFault.exe'
+        - '\conhost.exe'
+    - CallTrace|contains: 'unknown'
 
-    condition: (selection_access_flags and selection_suspicious_pairing) or selection_tools and not filter_legitimate
+  condition: (selection_access_flags and selection_suspicious_pairing) 
+             or selection_tools 
+             and not filter_legitimate
+
+falsepositives:
+  - Admin or security tooling performing legitimate memory injection
+  - System maintenance processes
+  - Debuggers and monitoring tools
+
 level: critical

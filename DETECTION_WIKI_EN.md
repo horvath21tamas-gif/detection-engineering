@@ -3740,16 +3740,16 @@ relationships and non-standard download methods.
 
 
 ---
-## Ultra-Pro High-Fidelity Bidirectional Cloud C2 (T1102.002)
+## Bidirectional Cloud C2 (T1102.002)
 - **ID:** `T1102_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects interactive C2 communication via cloud APIs by identifying 
-specific write/read methods (POST/GET) issued by non-browser LoLBins 
-or binaries running from suspicious paths, excluding official clients.
+- **Leírás:** Detects interactive command-and-control (C2) communication via cloud APIs by identifying
+specific write/read methods (POST/GET) issued by non-browser LoLBins or binaries 
+running from suspicious paths, while excluding official client applications.
 
 
 #### 🚨 Response Playbook

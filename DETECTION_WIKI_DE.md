@@ -3569,16 +3569,16 @@ Beziehungen und nicht standardmäßige Download-Methoden.
 
 
 ---
-## Ultra-Pro High-Fidelity Bidirektional Cloud C2 (T1102.002)
+## Bidirektionale Cloud C2 (T1102.002)
 - **ID:** `T1102_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt interaktive C2-Kommunikation über Cloud-APIs durch Identifizierung
-spezifische Schreib-/Lesemethoden (POST/GET), die von Nicht-Browser-LoLBins ausgegeben werden
-oder Binärdateien, die von verdächtigen Pfaden laufen, mit Ausnahme offizieller Clients.
+- **Beschreibung:** Erkennt interaktive Command-and-Control-Kommunikation (C2) über Cloud-APIs durch Identifizierung
+spezifische Schreib-/Lesemethoden (POST/GET), die von Nicht-Browser-LoLBins oder Binärdateien ausgegeben werden
+von verdächtigen Pfaden ausführen und dabei offizielle Client-Anwendungen ausschließen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -3569,16 +3569,16 @@ kapcsolatok és a nem szabványos letöltési módszerek.
 
 
 ---
-## Ultra-Pro High-Fidelity kétirányú felhő C2 (T1102.002)
+## Kétirányú felhő C2 (T1102.002)
 - **ID:** `T1102_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Azonosítással észleli az interaktív C2 kommunikációt felhő API-kon keresztül
-specifikus írási/olvasási módszerek (POST/GET), amelyeket a nem böngésző LoLBins bocsát ki
-vagy gyanús útvonalakról futó binárisok, kivéve a hivatalos klienseket.
+- **Leírás:** Azonosítással észleli az interaktív parancs- és vezérlési (C2) kommunikációt felhő API-kon keresztül
+speciális írási/olvasási módszerek (POST/GET), amelyeket nem böngésző LoLBins vagy bináris fájl bocsát ki
+gyanús útvonalakról fut, miközben kizárja a hivatalos kliens alkalmazásokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

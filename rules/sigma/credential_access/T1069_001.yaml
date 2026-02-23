@@ -1,60 +1,74 @@
-title: Ultra-Pro High-Fidelity Local Group Discovery (T1069.001)
+title: Local Group Discovery (ATT&CK T1069.001)
 id: ea03e11d-f961-4173-b238-1b26fbc05ebf
 status: stable
-description: |
-    Detects targeted local group reconnaissance focusing on privileged accounts 
-    (Administrators, RDP). Filters out legitimate system/inventory noise 
-    through integrity level gating and parent-process correlation.
+description: >
+  Detects targeted local group reconnaissance focusing on privileged accounts
+  (Administrators, RDP). Filters out legitimate system and inventory noise
+  through integrity level gating and parent-process correlation.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1069/001/
 tags:
-    - attack.discovery
-    - attack.t1069.001
+  - attack.discovery
+  - attack.t1069.001
+  - attack.lateral-movement
+  - attack.local
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\net.exe'
-            - '\net1.exe'
-        - CommandLine|contains:
-            - 'localgroup'           
-            - 'Get-LocalGroup'
-            - 'Get-LocalGroupMember'
-            - 'Get-NetLocalGroup'    
+  selection_tools:
+    Image|endswith:
+      - '\net.exe'
+      - '\net1.exe'
+    CommandLine|contains:
+      - 'localgroup'
+      - 'Get-LocalGroup'
+      - 'Get-LocalGroupMember'
+      - 'Get-NetLocalGroup'
 
-    selection_targets:
-        CommandLine|contains:
-            - 'Administrators'       
-            - 'Remote Desktop Users'
-            - 'Remote Management Users'
-            - 'Power Users'
-            - 'Distributed COM Users'
+  selection_targets:
+    CommandLine|contains:
+      - 'Administrators'
+      - 'Remote Desktop Users'
+      - 'Remote Management Users'
+      - 'Power Users'
+      - 'Distributed COM Users'
 
-    selection_suspicious_lineage:
-        ParentImage|endswith:
-            - '\wsmprovhost.exe'     
-            - '\httpd.exe'          
-            - '\winword.exe'        
-            - '\outlook.exe'
-        IntegrityLevel: 'Medium'     
+  selection_suspicious_lineage:
+    ParentImage|endswith:
+      - '\wsmprovhost.exe'
+      - '\httpd.exe'
+      - '\winword.exe'
+      - '\outlook.exe'
+    IntegrityLevel: 'Medium'
+  selection_automation:
+    CommandLine|contains:
+      - ' > '
+      - 'ConvertTo-Json'
+      - 'Export-Csv'
+      - 'findstr'
 
-    selection_automation:
-        CommandLine|contains:
-            - ' > '                 
-            - 'ConvertTo-Json'
-            - 'Export-Csv'
-            - 'findstr'              
+  filter_legit_noise:
+    - User|startswith: 'NT AUTHORITY\'
+    - ParentImage|contains:
+        - '\Program Files\Tanium\'
+        - '\Program Files\Elastic\Agent\'
+        - '\Windows\System32\CcmExec.exe'
+    - CommandLine|contains: 'Program Files'
 
-    filter_legit_noise:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|contains:
-            - '\Program Files\Tanium\'
-            - '\Program Files\Elastic\Agent\'
-            - '\Windows\System32\CcmExec.exe' 
-        - CommandLine|contains:
-            - 'Program Files'        
+  condition: selection_tools
+             and (selection_targets or selection_automation or selection_suspicious_lineage)
+             and not filter_legit_noise
 
-    condition: selection_tools and (selection_targets or selection_automation or selection_suspicious_lineage) and not filter_legit_noise
+falsepositives:
+  - System inventory scripts querying local groups
+  - Admin workstations using Tanium or Elastic agents
+  - SCCM (CcmExec) automated queries
+  - Legitimate PowerShell scripts exporting group membership to JSON/CSV
+
 level: high

@@ -898,15 +898,15 @@ non-standard search tools or suspicious process lineages.
 
 
 ---
-## Ultra-Pro Stealthy Direct Volume Access (T1006)
+## Stealthy Direct Volume Access (T1006)
 - **ID:** `T1006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects high-fidelity direct volume access by monitoring for raw device paths 
-initiated by non-system processes or suspicious parents, often used to bypass 
+- **Leírás:** Detects high-fidelity direct volume access by monitoring raw device paths 
+initiated by non-system processes or suspicious parents. Often used to bypass 
 file system locks and EDR monitoring for credential dumping.
 
 

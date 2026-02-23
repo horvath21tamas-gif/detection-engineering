@@ -884,15 +884,15 @@ nicht standardmäßige Suchwerkzeuge oder verdächtige Prozessabstammungen.
 
 
 ---
-## Ultra-Pro Stealthy Direct Volume Access (T1006)
+## Stealthy Direct Volume Access (T1006)
 - **ID:** `T1006.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt direkten High-Fidelity-Volume-Zugriff durch Überwachung auf Rohgerätepfade
-Initiiert durch systemfremde Prozesse oder misstrauische Eltern, oft zur Umgehung verwendet
+- **Beschreibung:** Erkennt direkten High-Fidelity-Volume-Zugriff durch Überwachung der Rohgerätepfade
+initiiert durch systemfremde Prozesse oder misstrauische Eltern.Wird oft zur Umgehung verwendet
 Dateisystemsperren und EDR-Überwachung für das Dumping von Anmeldeinformationen.
 
 #### 🚨 Reaktions-Playbook

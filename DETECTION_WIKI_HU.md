@@ -884,7 +884,7 @@ nem szabványos keresőeszközök vagy gyanús folyamatvonalak.
 
 
 ---
-## Ultra-Pro lopakodó közvetlen hangerő-hozzáférés (T1006)
+## Lopakodó közvetlen hangerő-hozzáférés (T1006)
 - **ID:** `T1006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -892,8 +892,8 @@ nem szabványos keresőeszközök vagy gyanús folyamatvonalak.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a nagy pontosságú közvetlen kötet-hozzáférést a nyers eszközútvonalak figyelésével
-rendszeren kívüli folyamatok vagy gyanús szülők által kezdeményezett, gyakran megkerülésére használják
-fájlrendszer zárolása és EDR-figyelés a hitelesítő adatok kiürítéséhez.
+rendszeren kívüli folyamatok vagy gyanús szülők kezdeményezték.Gyakran megkerülésére használják
+fájlrendszer-zárak és EDR-figyelés a hitelesítő adatok kiürítéséhez.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

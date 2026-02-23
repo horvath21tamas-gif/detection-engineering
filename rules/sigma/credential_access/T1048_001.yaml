@@ -1,59 +1,99 @@
-title: Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001)
+title: Symmetric Encrypted Exfiltration (ATT&CK T1048.001)
 id: 215fb2e5-1244-46fb-ac5a-1a2ddb506c3b
 status: stable
-description: |
-    Detects encrypted data exfiltration by identifying SCP/SFTP/Rclone 
-    usage from non-standard paths, focusing on automated (non-interactive) 
-    flags and suspicious parent process lineages.
+description: >
+  Detects potential encrypted data exfiltration over symmetric encrypted
+  protocols (SCP, SFTP, Rclone, WinSCP) by identifying automated,
+  non-interactive upload behaviors combined with suspicious execution
+  paths or unusual parent process lineage. Focuses on credential flags,
+  batch execution, and bulk transfer operations.
 author: hota05
-date: 2026-02-09
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1048/001/
 tags:
-    - attack.exfiltration
-    - attack.t1048.001
+  - attack.exfiltration
+  - attack.t1048.001
+  - attack.command_and_control
+  - attack.host
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_tools:
-        Image|endswith:
-            - '\pscp.exe'            
-            - '\psftp.exe'           
-            - '\scp.exe'             
-            - '\sftp.exe'           
-            - '\rclone.exe'          
-            - '\winscp.com'          
+  selection_tools:
+    Image|endswith:
+      - '\pscp.exe'
+      - '\psftp.exe'
+      - '\scp.exe'
+      - '\sftp.exe'
+      - '\rclone.exe'
+      - '\winscp.com'
+      - '\winscp.exe'
 
-    selection_flags:
-        CommandLine|contains:
-            - ' -pw '                
-            - ' -batch'              
-            - ' -hostkey '           
-            - ' -ls '               
-            - 'copy'                 
-            - 'sync'
+  selection_automation_flags:
+    CommandLine|contains:
+      - ' -pw '
+      - ' -i '
+      - ' -batch'
+      - ' -hostkey '
+      - ' -P '
+      - ' -r '
+      - ' copy '
+      - ' sync '
+      - ' move '
+      - ' mirror'
+      - ' /command '
+      - ' /script='
 
-    selection_context:
-        - Image|contains:
-            - '\Users\'
-            - '\AppData\'
-            - '\Temp\'
-            - '\Public\'
-        - ParentImage|endswith:
-            - '\winword.exe'        
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\powershell.exe'      
+  selection_remote_target:
+    CommandLine|contains:
+      - '@'
+      - 'sftp://'
+      - 'scp://'
+      - '://'
+      - ':22'
+      - ':2222'
 
-    filter_legit:
-        - Image|contains:
-            - '\Program Files\'
-            - '\Program Files (x86)\'
-        - CommandLine|contains:
-            - '127.0.0.1'            
-            - 'localhost'
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith:
-            - '\services.exe'
+  selection_untrusted_path:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Public\'
 
-    condition: selection_tools and (selection_flags or selection_context) and not filter_legit
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\powershell.exe'
+      - '\cmd.exe'
+
+  filter_legitimate_activity:
+    - Image|contains:
+        - '\Program Files\'
+        - '\Program Files (x86)\'
+    - CommandLine|contains:
+        - '127.0.0.1'
+        - 'localhost'
+        - 'internal-sftp'
+    - username: 'NT AUTHORITY\SYSTEM'
+    - ParentImage|endswith: '\services.exe'
+
+  condition: selection_tools
+             and selection_remote_target
+             and (selection_automation_flags or selection_untrusted_path or selection_suspicious_parent)
+             and not filter_legitimate_activity
+
+falsepositives:
+  - Legitimate DevOps artifact uploads
+  - Automated backup or synchronization jobs
+  - Internal SFTP batch transfers
+  - IT administration using WinSCP scripts
+  - Developer usage of rclone for cloud sync
+
 level: critical

@@ -19,40 +19,40 @@ detection:
   selection_com_api:
     CommandLine|contains:
       - 'New-Object -ComObject Outlook.Application'  
-      - 'CreateObject("Outlook.Application")'           
-      - 'GetDefaultFolder(6)'                          
+      - 'CreateObject("Outlook.Application")'          
+      - 'GetDefaultFolder(6)'                       
       - 'GetDefaultFolder(5)'                         
-      - '.GetNamespace("MAPI")'                         
+      - '.GetNamespace("MAPI")'                        
 
   selection_extraction:
     CommandLine|contains:
-      - '.SaveAs('                                     
-      - '.Attachments'                              
-      - 'ContentFilter'                                
+      - '.SaveAs('                                   
+      - '.Attachments'                                 
+      - 'ContentFilter'                                 
       - 'New-MailboxExportRequest'                      
 
   selection_evasion:
     CommandLine|contains:
       - ' -WindowStyle Hidden'                        
-      - 'SilentlyContinue'                            
-      - '.Display = $false'                            
+      - 'SilentlyContinue'                             
+      - '.Display = $false'                           
 
   selection_context:
     ParentImage|endswith:
-      - '\powershell.exe'                              
-      - '\cmd.exe'                                      
-      - '\cscript.exe'                                  
-      - '\wscript.exe'                                  
-      - '\mshta.exe'                                    
+      - '\powershell.exe'                            
+      - '\cmd.exe'                                    
+      - '\cscript.exe'                             
+      - '\wscript.exe'                             
+      - '\mshta.exe'                                
     IntegrityLevel: 'Medium'                           
 
   filter_trusted_processes:
     - Image|contains:
-        - 'C:\Program Files\Microsoft Office\'           
-        - 'C:\Program Files (x86)\Microsoft Office\'     
-    - username: 'NT AUTHORITY\SYSTEM'                 
+        - 'C:\Program Files\Microsoft Office\'          
+        - 'C:\Program Files (x86)\Microsoft Office\'  
+    - username: 'NT AUTHORITY\SYSTEM'                  
     - CommandLine|contains:
-        - 'HealthCheck.ps1'                             
+        - 'HealthCheck.ps1'                            
         - 'Add-in'                                     
 
   condition: |

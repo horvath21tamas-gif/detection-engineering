@@ -1,54 +1,70 @@
-title: Ultra-Pro High-Fidelity Suspicious Archive Creation (T1027.011)
+title: Suspicious Archive Creation (T1027.011)
 id: 3812afc2-2fb1-4fb2-9280-b4068ad09984
 status: stable
-description: |
-    Detects the creation of password-protected and/or encrypted archives using common CLI tools. 
-    Focuses on command-line password arguments and recursive collection from sensitive paths.
-author: hota05
-date: 2026-02-03
+description: >
+  Detects the creation of password-protected or encrypted archives using common
+  CLI archiving tools. Focuses on command-line password arguments, recursive
+  operations, and output to non-standard or sensitive paths. Filters out
+  legitimate cloud storage and authorized application usage.
+
+author: hota05 
+date: 2026-02-23
 tags:
-    - attack.defense_evasion
-    - attack.collection
-    - attack.t1027.011
+  - attack.defense_evasion
+  - attack.collection
+  - attack.t1027.011
+
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_tools:
-        Image|endswith:
-            - '\7z.exe'
-            - '\7za.exe'
-            - '\rar.exe'
-            - '\WinRAR.exe'
-            - '\zip.exe'
-            - '\compact.exe'
-            - '\makecab.exe'
+  selection_tools:
+    Image|endswith:
+      - '\7z.exe'
+      - '\7za.exe'
+      - '\rar.exe'
+      - '\WinRAR.exe'
+      - '\zip.exe'
+      - '\compact.exe'
+      - '\makecab.exe'
 
-    selection_suspicious_flags:
-        CommandLine|contains:
-            - ' -p'         
-            - ' -hp'         
-            - ' -mhe=on'     
-            - ' -ta'        
-            - ' -r '         
+  selection_suspicious_flags:
+    CommandLine|contains:
+      - ' -p'          
+      - ' -hp'          
+      - ' -mhe=on'     
+      - ' -ta'         
+      - ' -r '      
 
-    selection_output_paths:
-        CommandLine|contains:
-            - '\AppData\Local\Temp\'
-            - '\Users\Public\'
-            - '\Windows\Temp\'
-            - '\PerfLogs\'
-            - '\RECYCLER\'
+  selection_output_paths:
+    CommandLine|contains:
+      - '\AppData\Local\Temp\'
+      - '\Users\Public\'
+      - '\Windows\Temp\'
+      - '\PerfLogs\'
+      - '\RECYCLER\'
 
-    filter_authorized_apps:
-        Image|contains:
-            - '\Microsoft\OneDrive\'
-            - '\Dropbox\'
-            - '\Google\Drive\'
-            - '\Steam\'
-        CommandLine|contains:
-            - 'Update'
-            - 'Install'
+  filter_authorized_apps:
+    Image|contains:
+      - '\Microsoft\OneDrive\'
+      - '\Dropbox\'
+      - '\Google\Drive\'
+      - '\Steam\'
+    CommandLine|contains:
+      - 'Update'
+      - 'Install'
 
-    condition: selection_tools and selection_suspicious_flags and selection_output_paths and not filter_authorized_apps
+  condition: >
+    selection_tools
+    and selection_suspicious_flags
+    and selection_output_paths
+    and not filter_authorized_apps
+
+falsepositives:
+  - Legitimate cloud storage updates or sync operations
+  - Software installers creating temporary archives
+  - Backup utilities writing to Temp or Public folders
+  - Security testing or red team archive creation
+
 level: high

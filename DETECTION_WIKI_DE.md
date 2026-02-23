@@ -1605,16 +1605,14 @@ Nichtübereinstimmungen und Tippfehler des Herausgebers, um Entwicklerlärm zu e
 
 
 ---
-## Ultra-Pro High-Fidelity RTLO-Charakterausführung (T1036.002)
+## RTLO-Charakterausführung (T1036.002)
 - **ID:** `T1036_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Ausführung von Prozessen, die das Right-to-Left Override (RTLO) enthalten.
-Unicode-Zeichen (U+202E).Optimiert, um verschiedene Kodierungen zu erkennen und
-verdächtige Ausführungskontexte (Downloads, Temp) und filtert gleichzeitig Systemrauschen.
+- **Beschreibung:** Erkennt die Ausführung von Prozessen, die das Unicode-Zeichen Right-to-Left Override (RTLO) (U+202E) enthalten.Optimiert für mehrere Codierungen und verdächtige Ausführungskontexte (Downloads, Temp) und filtert gleichzeitig System- und Entwicklergeräusche.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

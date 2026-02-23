@@ -1661,16 +1661,14 @@ mismatch and publisher typosquatting to eliminate developer noise.
 
 
 ---
-## Ultra-Pro High-Fidelity RTLO Character Execution (T1036.002)
+## RTLO Character Execution (T1036.002)
 - **ID:** `T1036_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the execution of processes containing the Right-to-Left Override (RTLO) 
-Unicode character (U+202E). Optimized to detect various encodings and 
-suspicious execution contexts (Downloads, Temp) while filtering system noise.
+- **Leírás:** Detects execution of processes containing the Right-to-Left Override (RTLO) Unicode character (U+202E). Optimized for multiple encodings and suspicious execution contexts (Downloads, Temp) while filtering system and developer noise.
 
 
 #### 🚨 Response Playbook

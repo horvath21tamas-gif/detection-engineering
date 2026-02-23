@@ -1605,16 +1605,14 @@ eltérés és a kiadói elgépelés a fejlesztői zaj kiküszöbölése érdeké
 
 
 ---
-## Ultra-Pro High-Fidelity RTLO karakter-végrehajtás (T1036.002)
+## RTLO karaktervégrehajtás (T1036.002)
 - **ID:** `T1036_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a jobbról balra felülbírálást (RTLO) tartalmazó folyamatok végrehajtását
-Unicode karakter (U+202E).Különféle kódolások észlelésére optimalizálva és
-gyanús végrehajtási kontextusok (Letöltések, Temp) a rendszerzaj szűrése közben.
+- **Leírás:** Érzékeli a jobbról balra felülírás (RTLO) Unicode karaktert (U+202E) tartalmazó folyamatok végrehajtását.Többféle kódolásra és gyanús végrehajtási kontextusokra (Letöltések, Temp) optimalizálva, miközben szűri a rendszer és a fejlesztői zajt.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -1,60 +1,77 @@
-title: Ultra-Pro High-Fidelity Forensic Artifact and File Deletion (T1070.004)
+title: Forensic Artifact and File Deletion (ATT&CK T1070.004)
 id: 1b52fe36-bda7-47fd-bb3b-d5960345737a
 status: stable
-description: |
-    Detects targeted destruction of high-value forensic artifacts (USN Journal, Prefetch, Amcache) 
-    and the use of secure wipe utilities. Focuses on non-standard process origins and 
-    evasion techniques used to prevent post-incident recovery.
+description: >
+  Detects targeted destruction of high-value forensic artifacts (USN Journal, Prefetch, Amcache)
+  and the use of secure deletion utilities. Focuses on non-standard process origins and
+  evasion techniques aimed at preventing post-incident recovery.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1070/004/
 tags:
-    - attack.defense_evasion
-    - attack.t1070.004
+  - attack.defense-evasion
+  - attack.t1070.004
+  - attack.lateral-movement
+
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_forensic_wipe:
-        - Image|endswith: '\fsutil.exe'
-          CommandLine|contains|all:
-            - 'usn'
-            - 'deletejournal'
-        - CommandLine|contains:
-            - '\Windows\Prefetch\'
-            - '\Windows\AppCompat\Programs\Amcache.hve'
-            - '\System32\config\journal'
+  selection_forensic_wipe:
+    - Image|endswith: '\fsutil.exe'
+      CommandLine|contains:
+        - 'usn'
+        - 'deletejournal'
+    - CommandLine|contains:
+        - '\Windows\Prefetch\'
+        - '\Windows\AppCompat\Programs\Amcache.hve'
+        - '\System32\config\journal'
 
-    selection_secure_delete:
-        - Image|endswith: 
-            - '\sdelete.exe'
-            - '\sdelete64.exe'
-        - Image|endswith: '\cipher.exe'
-          CommandLine|contains: ' /w'
-        - Image|endswith: '\powershell.exe'
-          CommandLine|contains: 'Remove-Item'
-          CommandLine|contains: ' -Recurse'
-          CommandLine|contains: ' -Force'
+  selection_secure_delete:
+    - Image|endswith:
+        - '\sdelete.exe'
+        - '\sdelete64.exe'
+    - Image|endswith: '\cipher.exe'
+      CommandLine|contains: ' /w'
+    - Image|endswith: '\powershell.exe'
+      CommandLine|contains:
+        - 'Remove-Item'
+        - ' -Recurse'
+        - ' -Force'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\w3wp.exe'     
-            - '\sqlservr.exe' 
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\w3wp.exe'
+      - '\sqlservr.exe'
+      - '\powershell.exe'
+      - '\cmd.exe'
 
-    filter_trusted_maintenance:
-        - Image|endswith: 
-            - '\cleanmgr.exe' 
-            - '\dism.exe'
-        - ParentImage|endswith: 
-            - '\msiexec.exe'
-            - '\TiWorker.exe'
-        - CommandLine|contains:
-            - '\Windows\SoftwareDistribution\Download'
-        - username: 'NT AUTHORITY\SYSTEM'
+  filter_trusted_maintenance:
+    - Image|endswith:
+        - '\cleanmgr.exe'
+        - '\dism.exe'
+    - ParentImage|endswith:
+        - '\msiexec.exe'
+        - '\TiWorker.exe'
+    - CommandLine|contains:
+        - '\Windows\SoftwareDistribution\Download'
+    - User|startswith: 'NT AUTHORITY\'
 
-    condition: (selection_forensic_wipe or selection_secure_delete) and (selection_suspicious_parent or not filter_trusted_maintenance)
+  condition: (selection_forensic_wipe or selection_secure_delete)
+             and (selection_suspicious_parent or not filter_trusted_maintenance)
+
+falsepositives:
+  - Routine system maintenance and cleanup utilities
+  - Windows Update activity and DISM operations
+  - Admin scripts using PowerShell for file or cache cleanup
+  - Backup/VDI session cleanup operations
+
 level: high

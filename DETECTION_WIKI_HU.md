@@ -850,14 +850,14 @@ sorszám alapú hívások (#24) a karakterlánc-alapú észlelés megkerülésé
 
 
 ---
-## Ultra-Pro High-Fidelity Linux Shadow File Extraction (T1003.008)
+## Linux árnyékfájl kibontása (T1003.008)
 - **ID:** `T1003_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli az /etc/shadow fájl jogosulatlan kibontását.
-A gyanús útvonalakra való átirányításra, archiválásra,
-és kiszűrés hálózati eszközökön (LOLBins) keresztül interaktív héjakból.
+- **Leírás:** Érzékeli az /etc/shadow fájl jogosulatlan kibontását.-ra összpontosít
+átirányítás gyanús útvonalakra, archiválás és kiszűrés hálózati eszközökön keresztül
+vagy natív segédprogramokat az interaktív héjakból, miközben szűri a legitim rendszerműveleteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

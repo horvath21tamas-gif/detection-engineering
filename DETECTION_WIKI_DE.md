@@ -850,14 +850,14 @@ Ordinalbasierte Aufrufe (#24), um die stringbasierte Erkennung zu umgehen.
 
 
 ---
-## Ultra-Pro High-Fidelity-Linux-Schattendateiextraktion (T1003.008)
+## Linux-Schattendateiextraktion (T1003.008)
 - **ID:** `T1003_008.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt unbefugtes Extrahieren der Datei /etc/shadow.
-Konzentriert sich auf die Umleitung auf verdächtige Pfade, die Archivierung,
-und Exfiltration über Netzwerktools (LOLBins) aus interaktiven Shells.
+- **Beschreibung:** Erkennt unbefugtes Extrahieren der Datei /etc/shadow.Konzentriert sich auf
+Umleitung auf verdächtige Pfade, Archivierung und Exfiltration über Netzwerktools
+oder native Dienstprogramme aus interaktiven Shells, während legitime Systemvorgänge gefiltert werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

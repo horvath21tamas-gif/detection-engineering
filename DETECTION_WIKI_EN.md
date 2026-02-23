@@ -862,14 +862,14 @@ ordinal-based calls (#24) to bypass string-based detection.
 
 
 ---
-## Ultra-Pro High-Fidelity Linux Shadow File Extraction (T1003.008)
+## Linux Shadow File Extraction (T1003.008)
 - **ID:** `T1003_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects unauthorized extraction of the /etc/shadow file. 
-Focuses on redirection to suspicious paths, archiving, 
-and exfiltration via network tools (LOLBins) from interactive shells.
+- **Leírás:** Detects unauthorized extraction of the /etc/shadow file. Focuses on 
+redirection to suspicious paths, archiving, and exfiltration via network tools 
+or native utilities from interactive shells, while filtering legitimate system operations.
 
 
 #### 🚨 Response Playbook

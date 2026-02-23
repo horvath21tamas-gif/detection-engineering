@@ -956,7 +956,7 @@ Konzentriert sich auf nicht standardmäßige Abstammungslinien und Ausgabeumleit
 
 
 ---
-## Ultra-Pro High-Fidelity-Bluetooth-Exfiltration (T1011)
+## Bluetooth-Exfiltration (T1011)
 - **ID:** `T1011.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

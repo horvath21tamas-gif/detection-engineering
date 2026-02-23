@@ -956,7 +956,7 @@ A nem szabványos vonalakra és a rosszindulatú programok által az ablakcímek
 
 
 ---
-## Ultra-Pro High-Fidelity Bluetooth Exfiltration (T1011)
+## Bluetooth Exfiltration (T1011)
 - **ID:** `T1011.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

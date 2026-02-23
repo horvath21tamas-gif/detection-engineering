@@ -974,7 +974,7 @@ Focuses on non-standard lineages and output redirection used by malware to exfil
 
 
 ---
-## Ultra-Pro High-Fidelity Bluetooth Exfiltration (T1011)
+## Bluetooth Exfiltration (T1011)
 - **ID:** `T1011.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

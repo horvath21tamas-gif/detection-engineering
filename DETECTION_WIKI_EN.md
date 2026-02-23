@@ -1607,16 +1607,14 @@ and non-standard archive volume creation from suspicious execution paths.
 
 
 ---
-## Ultra-Pro High-Fidelity System Owner/User Discovery (T1033)
+## System Owner/User Discovery (T1033)
 - **ID:** `T1033.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic discovery of the current user, logged-on users, and token privileges. 
-Focuses on anomalous process lineages (Office, Browsers) and specific switch 
-combinations (/priv, /groups) used before privilege escalation attempts.
+- **Leírás:** Detects systematic discovery of the current user, logged-on users, and token privileges. Targets anomalous process lineages (Office apps, browsers) and suspicious command-line patterns (/priv, /groups, /all) often used prior to privilege escalation attempts. Filters out legitimate system automation and enterprise management noise.
 
 
 #### 🚨 Response Playbook

@@ -1554,16 +1554,14 @@ und nicht standardmäßige Archiv-Volume-Erstellung aus verdächtigen Ausführun
 
 
 ---
-## Besitzer-/Benutzererkennung für Ultra-Pro-High-Fidelity-Systeme (T1033)
+## Systembesitzer-/Benutzererkennung (T1033)
 - **ID:** `T1033.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Erkennung des aktuellen Benutzers, angemeldeter Benutzer und Token-Berechtigungen.
-Konzentriert sich auf anomale Prozesslinien (Office, Browser) und bestimmte Switches
-Kombinationen (/priv, /groups), die vor Versuchen zur Rechteausweitung verwendet werden.
+- **Beschreibung:** Erkennt die systematische Erkennung des aktuellen Benutzers, angemeldeter Benutzer und Token-Berechtigungen.Zielt auf anomale Prozessabläufe (Office-Anwendungen, Browser) und verdächtige Befehlszeilenmuster (/priv, /groups, /all) ab, die häufig vor Versuchen zur Rechteausweitung verwendet werden.Filtert legitime Systemautomatisierungs- und Unternehmensverwaltungsgeräusche heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

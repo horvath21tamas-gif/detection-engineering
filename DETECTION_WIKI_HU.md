@@ -1554,16 +1554,14 @@ alacsony szintű fájlfolyam-manipuláció, egyedi puffer alapú felosztás,
 
 
 ---
-## Ultra-Pro High-Fidelity rendszer tulajdonos/felhasználói felfedezés (T1033)
+## Rendszertulajdonos/felhasználó felfedezése (T1033)
 - **ID:** `T1033.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az aktuális felhasználó, a bejelentkezett felhasználók és a token jogosultságok szisztematikus felderítését.
-A rendellenes folyamatvonalakra (iroda, böngészők) és konkrét kapcsolókra összpontosít
-kombinációk (/priv, /groups) a jogosultság-kiterjesztési kísérletek előtt.
+- **Leírás:** Érzékeli az aktuális felhasználó, a bejelentkezett felhasználók és a token jogosultságok szisztematikus felderítését.Rendellenes folyamatsorokat (Office-alkalmazások, böngészők) és gyanús parancssori mintákat (/priv, /groups, /all) céloz meg, amelyeket gyakran használnak a jogosultság-kiterjesztési kísérletek előtt.Kiszűri a jogszerű rendszerautomatizálást és a vállalatirányítási zajt.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

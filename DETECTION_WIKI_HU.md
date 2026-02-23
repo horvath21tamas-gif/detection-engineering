@@ -2662,16 +2662,14 @@ felhő erőforrások nyilvános hozzáféréshez.
 
 
 ---
-## Ultra-Pro High-Fidelity engedélycsoportok felfedezése (T1069)
+## Engedélycsoportok felderítése (ATT&CK T1069)
 - **ID:** `T1069.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a helyi vagy tartományi engedélycsoportok szisztematikus felfedezését.
-A kiemelt fiókok azonosítására használt felderítési mintákra összpontosít
-miközben kiszűri a legitim rendszer-/leltárzajt az integritás és a szülőelemzés révén.
+- **Leírás:** Érzékeli a helyi vagy tartományi engedélycsoportok szisztematikus felfedezését.A kiemelt fiókok azonosítására használt felderítési mintákra összpontosít, miközben az integritás és a szülő-folyamat elemzése révén kiszűri a legitim rendszer- és készletzajt.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -2662,16 +2662,14 @@ Cloud-Ressourcen öffentlich zugänglich machen.
 
 
 ---
-## Ultra-Pro High-Fidelity-Berechtigungsgruppenerkennung (T1069)
+## Erkennung von Berechtigungsgruppen (ATT&CK T1069)
 - **ID:** `T1069.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Erkennung lokaler oder domänenbezogener Berechtigungsgruppen.
-Konzentriert sich auf Aufklärungsmuster zur Identifizierung privilegierter Konten
-Gleichzeitig werden legitime System-/Inventarstörungen durch Integritäts- und übergeordnete Analyse herausgefiltert.
+- **Beschreibung:** Erkennt die systematische Erkennung lokaler oder domänenbezogener Berechtigungsgruppen.Der Schwerpunkt liegt auf Aufklärungsmustern zur Identifizierung privilegierter Konten und zum Herausfiltern legitimer System- und Inventarstörungen durch Integritäts- und übergeordnete Prozessanalysen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

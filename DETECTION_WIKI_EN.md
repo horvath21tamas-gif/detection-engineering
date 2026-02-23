@@ -2780,16 +2780,14 @@ cloud resources to public access.
 
 
 ---
-## Ultra-Pro High-Fidelity Permission Groups Discovery (T1069)
+## Permission Groups Discovery (ATT&CK T1069)
 - **ID:** `T1069.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic discovery of local or domain permission groups. 
-Focuses on reconnaissance patterns used to identify privileged accounts 
-while filtering out legitimate system/inventory noise through integrity and parent analysis.
+- **Leírás:** Detects systematic discovery of local or domain permission groups. Focuses on reconnaissance patterns used to identify privileged accounts while filtering out legitimate system and inventory noise through integrity and parent-process analysis.
 
 
 #### 🚨 Response Playbook

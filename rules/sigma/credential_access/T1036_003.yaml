@@ -1,68 +1,87 @@
-title: Ultra-Pro High-Fidelity Renamed System Utility (T1036.003)
+title: Renamed System Utility Detection (T1036.003)
 id: 87f1932a-a955-41d9-a1c2-cb72bd45c1dd
 status: stable
-description: |
-    Detects the execution of renamed Windows system utilities (LOLBins) by comparing 
-    current process names with internal metadata. Uses path-based filtering 
-    and signature-awareness to eliminate false positives from installers.
+description: >
+  Detects execution of renamed Windows system utilities (LOLBins) by comparing
+  current process names with internal metadata (OriginalFileName). Uses
+  path-based filtering and signature-awareness to reduce false positives
+  from installers, system maintenance tasks, and legitimate binaries.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-23
 tags:
-    - attack.defense_evasion
-    - attack.t1036.003
+  - attack.defense_evasion
+  - attack.t1036.003
+  - attack.execution
+
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_metadata:
-        OriginalFileName:
-            - 'Cmd.Exe'
-            - 'PowerShell.EXE'
-            - 'pwsh.dll'
-            - 'wscript.exe'
-            - 'cscript.exe'
-            - 'mshta.exe'
-            - 'regsvr32.exe'
-            - 'rundll32.exe'
-            - 'certutil.exe'
-            - 'bitsadmin.exe'
-            - 'schtasks.exe'
-            - 'net.exe'
-            - 'net1.exe'
-            - 'scrcons.exe'
+  selection_metadata:
+    OriginalFileName:
+      - 'Cmd.Exe'
+      - 'PowerShell.EXE'
+      - 'pwsh.dll'
+      - 'wscript.exe'
+      - 'cscript.exe'
+      - 'mshta.exe'
+      - 'regsvr32.exe'
+      - 'rundll32.exe'
+      - 'certutil.exe'
+      - 'bitsadmin.exe'
+      - 'schtasks.exe'
+      - 'net.exe'
+      - 'net1.exe'
+      - 'scrcons.exe'
 
-    filter_matching_names:
-        - Image|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
-            - '\mshta.exe'
-            - '\regsvr32.exe'
-            - '\rundll32.exe'
-            - '\certutil.exe'
-            - '\bitsadmin.exe'
-            - '\schtasks.exe'
-            - '\net.exe'
-            - '\net1.exe'
-            - '\scrcons.exe'
+  filter_matching_names:
+    Image|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+      - '\regsvr32.exe'
+      - '\rundll32.exe'
+      - '\certutil.exe'
+      - '\bitsadmin.exe'
+      - '\schtasks.exe'
+      - '\net.exe'
+      - '\net1.exe'
+      - '\scrcons.exe'
 
-    selection_suspicious_zones:
-        Image|contains:
-            - '\Users\'
-            - '\ProgramData\'
-            - '\Temp\'
-            - '\Public\'
-            - '\AppData\'
+  selection_suspicious_zones:
+    Image|contains:
+      - '\Users\'
+      - '\ProgramData\'
+      - '\Temp\'
+      - '\Public\'
+      - '\AppData\'
 
-    filter_system_maintenance:
-        - Image|startswith: 
-            - 'C:\Windows\System32\'
-            - 'C:\Windows\SysWOW64\'
-            - 'C:\Windows\WinSxS\'
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith: '\msiexec.exe'
+  filter_system_maintenance:
+    - Image|startswith:
+        - 'C:\Windows\System32\'
+        - 'C:\Windows\SysWOW64\'
+        - 'C:\Windows\WinSxS\'
+    - User:
+        - 'NT AUTHORITY\SYSTEM'
+        - 'NT AUTHORITY\LOCAL SERVICE'
+        - 'NT AUTHORITY\NETWORK SERVICE'
+    - ParentImage|endswith:
+        - '\msiexec.exe'
+        - '\trustedinstaller.exe'
 
-    condition: selection_metadata and not filter_matching_names and (selection_suspicious_zones or not filter_system_maintenance)
+  condition: >
+    selection_metadata
+    and not filter_matching_names
+    and (selection_suspicious_zones or not filter_system_maintenance)
+
+falsepositives:
+  - Legitimate system utilities executed from standard locations
+  - Enterprise deployment tools
+  - Security testing / red team simulations
+
 level: critical

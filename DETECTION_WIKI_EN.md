@@ -1127,7 +1127,7 @@ browsers, and inventory agents using integrity levels and parent process gating.
 
 
 ---
-## Ultra-Pro High-Fidelity Automated Exfiltration (T1020)
+## Automated Exfiltration (T1020)
 - **ID:** `T1020.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

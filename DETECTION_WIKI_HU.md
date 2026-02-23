@@ -1101,7 +1101,7 @@ böngészők és készletügynökök integritási szinteket és szülőfolyamat 
 
 
 ---
-## Ultra-Pro High-Fidelity automatizált szűrés (T1020)
+## Automatizált szűrés (T1020)
 - **ID:** `T1020.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

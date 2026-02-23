@@ -1101,7 +1101,7 @@ Browser und Inventarisierungsagenten mithilfe von Integritätsebenen und überge
 
 
 ---
-## Ultra-Pro High-Fidelity Automatisierte Exfiltration (T1020)
+## Automatisierte Exfiltration (T1020)
 - **ID:** `T1020.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

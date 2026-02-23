@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-23 10:11:57`
+**Utolsó frissítés:** `2026-02-23 10:43:08`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -111,15 +111,15 @@
 | T1055.004 | CRITICAL | Ultra-Pro Stealthy APC Injection (T1055.004) |
 | T1055.005 | CRITICAL | Ultra-Pro Stealthy TLS Injection (T1055.005) |
 | T1055.008 | CRITICAL | Ultra-Pro Stealthy Ptrace Injection (T1055.008) |
-| T1055.009 | CRITICAL | Ultra-Pro Stealthy Module Overwriting (T1055.009) |
-| T1055.011 | CRITICAL | Ultra-Pro Stealthy EWM Injection (T1055.011) |
-| T1055.012 | CRITICAL | Ultra-Pro Stealthy Process Hollowing (T1055.012) |
-| T1055.013 | CRITICAL | Ultra-Pro Stealthy Process Hollowing (T1055.013) |
-| T1055.014 | CRITICAL | Ultra-Pro Stealthy Process Ghosting (T1055.014) |
-| T1055.015 | CRITICAL | Ultra-Pro Stealthy ListPlanting Injection (T1055.015) |
-| T1056 | HIGH | Ultra-Pro High-Fidelity Input Capture Detection (T1056) |
-| T1056.001 | HIGH | Ultra-Pro High-Fidelity Input Capture Detection (T1056), Ultra-Pro High-Fidelity Keylogging & Input Hooking (T1056.001) |
-| T1056.002 | HIGH | Ultra-Pro High-Fidelity GUI Input Capture (T1056.002) |
+| T1055.009 | CRITICAL | Stealthy Module Overwriting (ATT&CK T1055.009) |
+| T1055.011 | CRITICAL | Stealthy Extra Window Memory (EWM) Injection (ATT&CK T1055.011) |
+| T1055.012 | CRITICAL | Stealthy Process Hollowing (ATT&CK T1055.012) |
+| T1055.013 | CRITICAL | Stealthy Process Hollowing (ATT&CK T1055.013) |
+| T1055.014 | CRITICAL | Stealthy Process Ghosting (ATT&CK T1055.014) |
+| T1055.015 | CRITICAL | Stealthy ListPlanting Injection (ATT&CK T1055.015) |
+| T1056 | HIGH | Input Capture Detection (ATT&CK T1056) |
+| T1056.001 | HIGH | Input Capture Detection (ATT&CK T1056), Keylogging & Input Hooking (ATT&CK T1056.001) |
+| T1056.002 | HIGH | GUI Input Capture (ATT&CK T1056.002) |
 | T1056.003 | CRITICAL | Digital Certificate Theft (ATT&CK T1056.003) |
 | T1056.004 | HIGH | Suspicious Credential API Hooking via Win32 Libraries |
 | T1057 | HIGH | Process Discovery (ATT&CK T1057) |

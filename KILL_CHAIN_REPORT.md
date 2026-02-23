@@ -11,7 +11,7 @@ Ez a jelentés automatikusan készült **628** szabály alapján.
 | Védelem elkerülése (`defense-evasion`) | 5 | `█░░░░░░░░░` |
 | Hitelesítő adatok megszerzése (`credential-access`) | 0 | `░░░░░░░░░░` |
 | Felderítés (`discovery`) | 50 | `██████████` |
-| Oldalirányú mozgás (`lateral-movement`) | 5 | `█░░░░░░░░░` |
+| Oldalirányú mozgás (`lateral-movement`) | 9 | `█░░░░░░░░░` |
 | Adatgyűjtés (`collection`) | 40 | `████████░░` |
 | Adatszivárogtatás (`exfiltration`) | 37 | `███████░░░` |
 | Vezérlés (C2) (`command-and-control`) | 0 | `░░░░░░░░░░` |

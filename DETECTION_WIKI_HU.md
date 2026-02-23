@@ -106,15 +106,15 @@
 - [Ultra-Pro Stealthy APC injekció (T1055.004)](#ultra-pro-stealthy-apc-injekció-(t1055004))
 - [Ultra-Pro Stealthy TLS injekció (T1055.005)](#ultra-pro-stealthy-tls-injekció-(t1055005))
 - [Ultra-Pro Stealthy Ptrace injekció (T1055.008)](#ultra-pro-stealthy-ptrace-injekció-(t1055008))
-- [Ultra-Pro lopakodó modul felülírása (T1055.009)](#ultra-pro-lopakodó-modul-felülírása-(t1055009))
-- [Ultra-Pro Stealthy EWM befecskendezés (T1055.011)](#ultra-pro-stealthy-ewm-befecskendezés-(t1055011))
-- [Ultra-Pro lopakodó eljárás (T1055.012)](#ultra-pro-lopakodó-eljárás-(t1055012))
-- [Ultra-Pro lopakodó eljárás (T1055.013)](#ultra-pro-lopakodó-eljárás-(t1055013))
-- [Ultra-Pro Stealthy Process Ghosting (T1055.014)](#ultra-pro-stealthy-process-ghosting-(t1055014))
-- [Ultra-Pro Stealthy List Planting Injection (T1055.015)](#ultra-pro-stealthy-list-planting-injection-(t1055015))
-- [Ultra-Pro nagy felbontású bemeneti rögzítésérzékelés (T1056)](#ultra-pro-nagy-felbontású-bemeneti-rögzítésérzékelés-(t1056))
-- [Ultra-Pro High-Fidelity billentyűzetnaplózás és beviteli rögzítés (T1056.001)](#ultra-pro-high-fidelity-billentyűzetnaplózás-és-beviteli-rögzítés-(t1056001))
-- [Ultra-Pro High-Fidelity GUI bemenet rögzítése (T1056.002)](#ultra-pro-high-fidelity-gui-bemenet-rögzítése-(t1056002))
+- [Lopakodó modul-felülírás (ATT&CK T1055.009)](#lopakodó-modul-felülírás-(att&ck-t1055009))
+- [Lopakodó extra ablakmemória (EWM) befecskendezés (ATT&CK T1055.011)](#lopakodó-extra-ablakmemória-(ewm)-befecskendezés-(att&ck-t1055011))
+- [Lopakodó eljárással történő kiürítés (ATT&CK T1055.012)](#lopakodó-eljárással-történő-kiürítés-(att&ck-t1055012))
+- [Lopakodó eljárással történő kiürítés (ATT&CK T1055.013)](#lopakodó-eljárással-történő-kiürítés-(att&ck-t1055013))
+- [Stealthy Process Ghosting (ATT&CK T1055.014)](#stealthy-process-ghosting-(att&ck-t1055014))
+- [Stealthy List Planting Injection (ATT&CK T1055.015)](#stealthy-list-planting-injection-(att&ck-t1055015))
+- [Bemeneti rögzítés észlelése (ATT&CK T1056)](#bemeneti-rögzítés-észlelése-(att&ck-t1056))
+- [Keylogging & Input Hooking (ATT&CK T1056.001)](#keylogging-&-input-hooking-(att&ck-t1056001))
+- [GUI bemenet rögzítése (ATT&CK T1056.002)](#gui-bemenet-rögzítése-(att&ck-t1056002))
 - [Digitális tanúsítvány ellopása (ATT&CK T1056.003)](#digitális-tanúsítvány-ellopása-(att&ck-t1056003))
 - [Gyanús hitelesítő adatok API-hozzákapcsolása a Win32 könyvtárakon keresztül](#gyanús-hitelesítő-adatok-api-hozzákapcsolása-a-win32-könyvtárakon-keresztül)
 - [Folyamatfelderítés (ATT&CK T1057)](#folyamatfelderítés-(att&ck-t1057))
@@ -129,8 +129,8 @@
 - [High-Fidelity hálózati eszköz CLI-manipulációja](#high-fidelity-hálózati-eszköz-cli-manipulációja)
 - [High-Fidelity Cloud Shell kihasználása és adatszivárgás](#high-fidelity-cloud-shell-kihasználása-és-adatszivárgás)
 - [Gyanús RENDSZER folyamat a felhasználói kontextusból](#gyanús-rendszer-folyamat-a-felhasználói-kontextusból)
-- [Ultra-Pro High-Fidelity engedélycsoportok felfedezése (T1069)](#ultra-pro-high-fidelity-engedélycsoportok-felfedezése-(t1069))
-- [Ultra-Pro High-Fidelity helyi csoportos felfedezés (T1069.001)](#ultra-pro-high-fidelity-helyi-csoportos-felfedezés-(t1069001))
+- [Engedélycsoportok felderítése (ATT&CK T1069)](#engedélycsoportok-felderítése-(att&ck-t1069))
+- [Helyi csoportfelderítés (ATT&CK T1069.001)](#helyi-csoportfelderítés-(att&ck-t1069001))
 - [Domaincsoport felfedezése (ATT&CK T1069.002)](#domaincsoport-felfedezése-(att&ck-t1069002))
 - [Cloud Groups Discovery (ATT&CK T1069.003)](#cloud-groups-discovery-(att&ck-t1069003))
 - [Jelző eltávolítása a gazdagépen (ATT&CK T1070)](#jelző-eltávolítása-a-gazdagépen-(att&ck-t1070))
@@ -2271,16 +2271,14 @@ cross-user ptrace mellékletek, kiszűrve a jogos hibakeresőket.
 
 
 ---
-## Ultra-Pro lopakodó modul felülírása (T1055.009)
+## Lopakodó modul-felülírás (ATT&CK T1055.009)
 - **ID:** `T1055_009.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Felismeri a folyamat vagy modul felülírását a folyamatok közötti hozzáférés azonosításával
-VM_WRITE engedélyekkel rendelkező kéréseket, ahonnan a hívó verem származik
-nem támogatott memória (shellkód), nem pedig aláírt lemezen található modul.
+- **Leírás:** Érzékeli a rejtett folyamat- vagy modul-felülírást a VM_WRITE engedélyekkel rendelkező, többfolyamat-memória-hozzáférés figyelésével, ahol a hívó verem nem támogatott memóriából (shellkód) származik, és a kritikus rendszerfolyamatokat célozza meg.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -2356,7 +2354,7 @@ nem támogatott memória (shellkód), nem pedig aláírt lemezen található mod
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a ListPlanting injekciót azáltal, hogy azonosítja a ListView-képes folyamatokhoz intézett gyanús, többfolyamat-hozzáférési kérelmeket, ahol a végrehajtási folyamat nem aláírt modulokból, hanem nem támogatott memóriarégiókból (shellkód) származik.
+- **Leírás:** Érzékeli a ListPlanting injekciót azáltal, hogy azonosítja a ListView-képes folyamatokhoz intézett gyanús, többfolyamat-hozzáférési kérelmeket, ahol a végrehajtási folyamat nem aláírt modulokból, hanem nem támogatott memóriarégiókból (shellkódból) származik.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -2419,7 +2417,7 @@ nem támogatott memória (shellkód), nem pedig aláírt lemezen található mod
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a magánkulcsok és digitális tanúsítványok jogosulatlan kimásolását.Figyeli a „nem exportálható” kulcsok memóriajavítással történő kivonatolását, a certutil vagy a PowerShell gyanús használatát PFX-létrehozáshoz, valamint a Windows Cryptographic Key Store közvetlen elérését.
+- **Leírás:** Érzékeli a magánkulcsok és digitális tanúsítványok jogosulatlan kimásolását.Figyeli a „nem exportálható” kulcsok memóriafoltozáson keresztüli kibontását, a certutil vagy a PowerShell gyanús használatát PFX-létrehozáshoz, valamint a Windows Cryptographic Key Store közvetlen elérését.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -2450,7 +2448,7 @@ nem támogatott memória (shellkód), nem pedig aláírt lemezen található mod
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a célzott folyamatfelderítést, a biztonsági termékek azonosítására és a memóriacélok felderítésére összpontosítva.Kiszűri a böngészőkből és a törvényes frissítési szervezőkből származó nagyfrekvenciás zajokat.
+- **Leírás:** Érzékeli a célzott folyamatfelderítést, amely a biztonsági termékek azonosítására és a memóriacélok felderítésére összpontosít.Kiszűri a böngészőkből és a törvényes frissítési szervezőkből származó nagyfrekvenciás zajokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -2823,7 +2821,7 @@ miközben szűri a jogszerű telepítői és rendszerkarbantartási tevékenysé
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RESET.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a célzott próbálkozásokat a hálózati csatlakozási előzmények törlésére, az RDP-re összpontosítva
 Terminal Server Client MRU listák, hálózati megosztási metaadatok eltávolítása és DNS-gyorsítótár
-kipirul a gyanús folyamatláncokból.Kiszűri a gyakori adminisztrációt
+kipirul a gyanús folyamatláncokból.Kiszűri a gyakori adminisztrációkat
 és az ügyfélszolgálati műveletek, hacsak nem részei szélesebb körű támadási tevékenységnek.
 
 #### 🚨 Response Playbook

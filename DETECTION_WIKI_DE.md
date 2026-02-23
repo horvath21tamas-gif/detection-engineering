@@ -106,15 +106,15 @@
 - [Ultra-Pro Stealthy APC-Injektion (T1055.004)](#ultra-pro-stealthy-apc-injektion-(t1055004))
 - [Ultra-Pro Stealthy TLS-Injektion (T1055.005)](#ultra-pro-stealthy-tls-injektion-(t1055005))
 - [Ultra-Pro Stealthy Ptrace-Injektion (T1055.008)](#ultra-pro-stealthy-ptrace-injektion-(t1055008))
-- [Überschreiben des Ultra-Pro-Stealthy-Moduls (T1055.009)](#überschreiben-des-ultra-pro-stealthy-moduls-(t1055009))
-- [Ultra-Pro Stealthy EWM-Injektion (T1055.011)](#ultra-pro-stealthy-ewm-injektion-(t1055011))
-- [Ultra-Pro Stealthy Process Hollowing (T1055.012)](#ultra-pro-stealthy-process-hollowing-(t1055012))
-- [Ultra-Pro Stealthy Process Hollowing (T1055.013)](#ultra-pro-stealthy-process-hollowing-(t1055013))
-- [Ultra-Pro Stealthy Process Ghosting (T1055.014)](#ultra-pro-stealthy-process-ghosting-(t1055014))
-- [Ultra-Pro Stealthy ListPlanting-Injektion (T1055.015)](#ultra-pro-stealthy-listplanting-injektion-(t1055015))
-- [Ultra-Pro High-Fidelity-Eingangserfassungserkennung (T1056)](#ultra-pro-high-fidelity-eingangserfassungserkennung-(t1056))
-- [Ultraprofessionelles High-Fidelity-Keylogging und Input-Hooking (T1056.001)](#ultraprofessionelles-high-fidelity-keylogging-und-input-hooking-(t1056001))
-- [Ultra-Pro High-Fidelity-GUI-Eingabeerfassung (T1056.002)](#ultra-pro-high-fidelity-gui-eingabeerfassung-(t1056002))
+- [Heimliches Überschreiben des Moduls (ATT&CK T1055.009)](#heimliches-überschreiben-des-moduls-(att&ck-t1055009))
+- [Stealthy Extra Window Memory (EWM)-Injektion (ATT&CK T1055.011)](#stealthy-extra-window-memory-(ewm)-injektion-(att&ck-t1055011))
+- [Stealthy Process Hollowing (ATT&CK T1055.012)](#stealthy-process-hollowing-(att&ck-t1055012))
+- [Stealthy Process Hollowing (ATT&CK T1055.013)](#stealthy-process-hollowing-(att&ck-t1055013))
+- [Stealthy Process Ghosting (ATT&CK T1055.014)](#stealthy-process-ghosting-(att&ck-t1055014))
+- [Stealthy ListPlanting-Injektion (ATT&CK T1055.015)](#stealthy-listplanting-injektion-(att&ck-t1055015))
+- [Eingabeerfassungserkennung (ATT&CK T1056)](#eingabeerfassungserkennung-(att&ck-t1056))
+- [Keylogging und Eingabe-Hooking (ATT&CK T1056.001)](#keylogging-und-eingabe-hooking-(att&ck-t1056001))
+- [GUI-Eingabeerfassung (ATT&CK T1056.002)](#gui-eingabeerfassung-(att&ck-t1056002))
 - [Diebstahl digitaler Zertifikate (ATT&CK T1056.003)](#diebstahl-digitaler-zertifikate-(att&ck-t1056003))
 - [Verdächtiges Einbinden der Anmeldeinformations-API über Win32-Bibliotheken](#verdächtiges-einbinden-der-anmeldeinformations-api-über-win32-bibliotheken)
 - [Prozesserkennung (ATT&CK T1057)](#prozesserkennung-(att&ck-t1057))
@@ -129,8 +129,8 @@
 - [CLI-Manipulation von High-Fidelity-Netzwerkgeräten](#cli-manipulation-von-high-fidelity-netzwerkgeräten)
 - [High-Fidelity-Cloud-Shell-Ausnutzung und Datenexfiltration](#high-fidelity-cloud-shell-ausnutzung-und-datenexfiltration)
 - [Verdächtiger SYSTEM-Prozess, der aus dem Benutzerkontext hervorgegangen ist](#verdächtiger-system-prozess-der-aus-dem-benutzerkontext-hervorgegangen-ist)
-- [Ultra-Pro High-Fidelity-Berechtigungsgruppenerkennung (T1069)](#ultra-pro-high-fidelity-berechtigungsgruppenerkennung-(t1069))
-- [Ultra-Pro High-Fidelity Local Group Discovery (T1069.001)](#ultra-pro-high-fidelity-local-group-discovery-(t1069001))
+- [Erkennung von Berechtigungsgruppen (ATT&CK T1069)](#erkennung-von-berechtigungsgruppen-(att&ck-t1069))
+- [Lokale Gruppenerkennung (ATT&CK T1069.001)](#lokale-gruppenerkennung-(att&ck-t1069001))
 - [Domänengruppenerkennung (ATT&CK T1069.002)](#domänengruppenerkennung-(att&ck-t1069002))
 - [Erkennung von Cloud-Gruppen (ATT&CK T1069.003)](#erkennung-von-cloud-gruppen-(att&ck-t1069003))
 - [Entfernen der Anzeige am Host (ATT&CK T1070)](#entfernen-der-anzeige-am-host-(att&ck-t1070))
@@ -2271,16 +2271,14 @@ Benutzerübergreifende Ptrace-Anhänge, die legitime Debugger herausfiltern.
 
 
 ---
-## Überschreiben des Ultra-Pro-Stealthy-Moduls (T1055.009)
+## Heimliches Überschreiben des Moduls (ATT&CK T1055.009)
 - **ID:** `T1055_009.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt das Überschreiben von Prozessen oder Modulen durch Identifizierung prozessübergreifender Zugriffe
-Anfragen mit VM_WRITE-Berechtigungen, von denen der aufrufende Stack stammt
-nicht gesicherter Speicher (Shellcode) statt eines signierten On-Disk-Moduls.
+- **Beschreibung:** Erkennt heimliches Überschreiben von Prozessen oder Modulen durch Überwachung des prozessübergreifenden Speicherzugriffs mit VM_WRITE-Berechtigungen, wobei der aufrufende Stack aus nicht gesichertem Speicher (Shellcode) stammt und auf kritische Systemprozesse abzielt.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**
@@ -2787,7 +2785,7 @@ Cloud-Ressourcen öffentlich zugänglich machen.
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CMDKEY.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Massenentfernung zugeordneter Netzwerkfreigaben und gespeicherter Anmeldeinformationen mithilfe von Wildcard-Löschung, Force-Flags oder skriptgesteuerten Dienstprogrammen zum Löschen von Anmeldeinformationen.Entwickelt, um die automatisierte antiforensische Bereinigung nach seitlicher Bewegung von routinemäßigen Verwaltungsaktivitäten zu unterscheiden.
+- **Beschreibung:** Erkennt die Massenentfernung von zugeordneten Netzwerkfreigaben und gespeicherten Anmeldeinformationen mithilfe von Wildcard-Löschung, Force-Flags oder skriptgesteuerten Dienstprogrammen zum Löschen von Anmeldeinformationen.Entwickelt, um die automatisierte antiforensische Bereinigung nach seitlicher Bewegung von routinemäßigen Verwaltungsaktivitäten zu unterscheiden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

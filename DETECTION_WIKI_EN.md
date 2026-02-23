@@ -106,15 +106,15 @@
 - [Ultra-Pro Stealthy APC Injection (T1055.004)](#ultra-pro-stealthy-apc-injection-(t1055004))
 - [Ultra-Pro Stealthy TLS Injection (T1055.005)](#ultra-pro-stealthy-tls-injection-(t1055005))
 - [Ultra-Pro Stealthy Ptrace Injection (T1055.008)](#ultra-pro-stealthy-ptrace-injection-(t1055008))
-- [Ultra-Pro Stealthy Module Overwriting (T1055.009)](#ultra-pro-stealthy-module-overwriting-(t1055009))
-- [Ultra-Pro Stealthy EWM Injection (T1055.011)](#ultra-pro-stealthy-ewm-injection-(t1055011))
-- [Ultra-Pro Stealthy Process Hollowing (T1055.012)](#ultra-pro-stealthy-process-hollowing-(t1055012))
-- [Ultra-Pro Stealthy Process Hollowing (T1055.013)](#ultra-pro-stealthy-process-hollowing-(t1055013))
-- [Ultra-Pro Stealthy Process Ghosting (T1055.014)](#ultra-pro-stealthy-process-ghosting-(t1055014))
-- [Ultra-Pro Stealthy ListPlanting Injection (T1055.015)](#ultra-pro-stealthy-listplanting-injection-(t1055015))
-- [Ultra-Pro High-Fidelity Input Capture Detection (T1056)](#ultra-pro-high-fidelity-input-capture-detection-(t1056))
-- [Ultra-Pro High-Fidelity Keylogging & Input Hooking (T1056.001)](#ultra-pro-high-fidelity-keylogging-&-input-hooking-(t1056001))
-- [Ultra-Pro High-Fidelity GUI Input Capture (T1056.002)](#ultra-pro-high-fidelity-gui-input-capture-(t1056002))
+- [Stealthy Module Overwriting (ATT&CK T1055.009)](#stealthy-module-overwriting-(att&ck-t1055009))
+- [Stealthy Extra Window Memory (EWM) Injection (ATT&CK T1055.011)](#stealthy-extra-window-memory-(ewm)-injection-(att&ck-t1055011))
+- [Stealthy Process Hollowing (ATT&CK T1055.012)](#stealthy-process-hollowing-(att&ck-t1055012))
+- [Stealthy Process Hollowing (ATT&CK T1055.013)](#stealthy-process-hollowing-(att&ck-t1055013))
+- [Stealthy Process Ghosting (ATT&CK T1055.014)](#stealthy-process-ghosting-(att&ck-t1055014))
+- [Stealthy ListPlanting Injection (ATT&CK T1055.015)](#stealthy-listplanting-injection-(att&ck-t1055015))
+- [Input Capture Detection (ATT&CK T1056)](#input-capture-detection-(att&ck-t1056))
+- [Keylogging & Input Hooking (ATT&CK T1056.001)](#keylogging-&-input-hooking-(att&ck-t1056001))
+- [GUI Input Capture (ATT&CK T1056.002)](#gui-input-capture-(att&ck-t1056002))
 - [Digital Certificate Theft (ATT&CK T1056.003)](#digital-certificate-theft-(att&ck-t1056003))
 - [Suspicious Credential API Hooking via Win32 Libraries](#suspicious-credential-api-hooking-via-win32-libraries)
 - [Process Discovery (ATT&CK T1057)](#process-discovery-(att&ck-t1057))
@@ -129,8 +129,8 @@
 - [High-Fidelity Network Device CLI Manipulation](#high-fidelity-network-device-cli-manipulation)
 - [High-Fidelity Cloud Shell Exploitation and Data Exfiltration](#high-fidelity-cloud-shell-exploitation-and-data-exfiltration)
 - [Suspicious SYSTEM Process Spawned from User Context](#suspicious-system-process-spawned-from-user-context)
-- [Ultra-Pro High-Fidelity Permission Groups Discovery (T1069)](#ultra-pro-high-fidelity-permission-groups-discovery-(t1069))
-- [Ultra-Pro High-Fidelity Local Group Discovery (T1069.001)](#ultra-pro-high-fidelity-local-group-discovery-(t1069001))
+- [Permission Groups Discovery (ATT&CK T1069)](#permission-groups-discovery-(att&ck-t1069))
+- [Local Group Discovery (ATT&CK T1069.001)](#local-group-discovery-(att&ck-t1069001))
 - [Domain Group Discovery (ATT&CK T1069.002)](#domain-group-discovery-(att&ck-t1069002))
 - [Cloud Groups Discovery (ATT&CK T1069.003)](#cloud-groups-discovery-(att&ck-t1069003))
 - [Indicator Removal on Host (ATT&CK T1070)](#indicator-removal-on-host-(att&ck-t1070))
@@ -2366,16 +2366,14 @@ cross-user ptrace attachments, filtering out legitimate debuggers.
 
 
 ---
-## Ultra-Pro Stealthy Module Overwriting (T1055.009)
+## Stealthy Module Overwriting (ATT&CK T1055.009)
 - **ID:** `T1055_009.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects process or module overwriting by identifying cross-process access 
-requests with VM_WRITE permissions where the calling stack originates from 
-unbacked memory (shellcode) rather than a signed on-disk module.
+- **Leírás:** Detects stealthy process or module overwriting by monitoring cross-process memory  access with VM_WRITE permissions where the calling stack originates from unbacked memory  (shellcode), targeting critical system processes.
 
 
 #### 🚨 Response Playbook

@@ -1,49 +1,70 @@
-title: Ultra-Pro High-Fidelity RTLO Character Execution (T1036.002)
+title: RTLO Character Execution (T1036.002)
 id: a284053c-6388-40e5-8d47-31ce1053c71c
 status: stable
-description: |
-    Detects the execution of processes containing the Right-to-Left Override (RTLO) 
-    Unicode character (U+202E). Optimized to detect various encodings and 
-    suspicious execution contexts (Downloads, Temp) while filtering system noise.
+description: >
+  Detects execution of processes containing the Right-to-Left Override (RTLO)
+  Unicode character (U+202E). Optimized for multiple encodings and suspicious
+  execution contexts (Downloads, Temp) while filtering system and developer noise.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-23
 tags:
-    - attack.defense_evasion
-    - attack.t1036.002
+  - attack.defense_evasion
+  - attack.t1036.002
+  - attack.execution
+
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_rtlo_patterns:
-        - Image|contains: '‮' # Nyers RTLO karakter (U+202E)
-        - CommandLine|contains: '‮'
-        - CommandLine|contains:
-            - '\u202e'       
-            - 'U+202E'        
-            - '%E2%80%AE'     
-            - '??'          
+  selection_rtlo_patterns:
+    Image|contains:
+      - '‮'          # Raw Unicode character
+    CommandLine|contains:
+      - '‮'
+      - '\u202e'
+      - 'U+202E'
+      - '%E2%80%AE'
 
-    selection_untrusted_path:
-        Image|contains:
-            - '\Users\'
-            - '\Downloads\'
-            - '\Desktop\'
-            - '\AppData\Local\Temp\'
-            - '\Public\'
+  selection_untrusted_path:
+    Image|contains:
+      - '\Users\'
+      - '\Downloads\'
+      - '\Desktop\'
+      - '\AppData\Local\Temp\'
+      - '\Public\'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\outlook.exe'
-            - '\explorer.exe'
-            - '\winrar.exe'
-            - '\7zFM.exe'
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\firefox.exe'
+      - '\outlook.exe'
+      - '\explorer.exe'
+      - '\winrar.exe'
+      - '\7zFM.exe'
 
-    filter_legit_system:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - Image|startswith: 'C:\Windows\System32\'
-        - Image|contains: '\node_modules\' 
+  filter_legit_system:
+    - User:
+        - 'NT AUTHORITY\SYSTEM'
+        - 'NT AUTHORITY\LOCAL SERVICE'
+        - 'NT AUTHORITY\NETWORK SERVICE'
+    - Image|startswith:
+        - 'C:\Windows\System32\'
+        - 'C:\Windows\SysWOW64\'
+    - Image|contains:
+        - '\node_modules\'
 
-    condition: selection_rtlo_patterns and (selection_untrusted_path or selection_suspicious_parent) and not filter_legit_system
+  condition: >
+    selection_rtlo_patterns
+    and (selection_untrusted_path or selection_suspicious_parent)
+    and not filter_legit_system
+
+falsepositives:
+  - Developer and test scripts using RTLO
+  - System processes executed from standard locations
+  - Enterprise deployment tools from trusted paths
+  - Security research or red team simulations
+
 level: critical

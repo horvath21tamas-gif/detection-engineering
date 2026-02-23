@@ -3307,7 +3307,7 @@ shortcut hijacking, and binary replacement on UNC paths.
 
 
 ---
-## Ultra-Pro High-Fidelity System Information Discovery (T1082)
+## System Information Discovery (T1082)
 - **ID:** `T1082.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
@@ -3316,7 +3316,8 @@ shortcut hijacking, and binary replacement on UNC paths.
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects systematic system information discovery (OS, patches, architecture) 
 focusing on reconnaissance for exploit selection. Filters high-volume noise 
-from inventory agents and browsers using integrity levels and parent process gating.
+from inventory agents, management tools, and browsers using integrity levels 
+and parent process gating.
 
 
 #### 🚨 Response Playbook

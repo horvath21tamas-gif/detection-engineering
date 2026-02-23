@@ -3160,7 +3160,7 @@ parancsikon-eltérítés és bináris csere az UNC útvonalakon.
 
 
 ---
-## Ultra-Pro High-Fidelity System Information Discovery (T1082)
+## Rendszerinformáció-felderítés (T1082)
 - **ID:** `T1082.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
@@ -3169,7 +3169,8 @@ parancsikon-eltérítés és bináris csere az UNC útvonalakon.
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Szisztematikus rendszerinformáció-felderítést észlel (OS, javítások, architektúra)
 a felderítésre összpontosítva az exploit kiválasztásához.Szűri a nagy mennyiségű zajt
-készletügynököktől és böngészőktől integritási szinteket és szülőfolyamat kapuzást használva.
+készletügynökökből, felügyeleti eszközökből és integritási szinteket használó böngészőkből
+és a szülői folyamat kapuzása.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -3274,7 +3275,7 @@ a nem megbízható folyamatok rendellenes hozzáférése a helyi Outlook/Exchang
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a felhőalapú fiókok (AWS, Azure, GCP) szisztematikus felfedezését
-az interaktív CLI használat és a rendellenes parancsláncolás figyelése.
+interaktív CLI használat és rendellenes parancsláncolás figyelése.
 Kiszűri a jogos CI/CD-folyamatokat és az automatizálási munkaterheléseket
 a folyamat vonaláról és a felhasználói kontextusról.
 

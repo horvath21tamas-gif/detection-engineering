@@ -3160,7 +3160,7 @@ Shortcut-Hijacking und Binärersetzung auf UNC-Pfaden.
 
 
 ---
-## Ultra-Pro High-Fidelity-Systeminformationserkennung (T1082)
+## Systeminformationserkennung (T1082)
 - **ID:** `T1082.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
@@ -3169,7 +3169,8 @@ Shortcut-Hijacking und Binärersetzung auf UNC-Pfaden.
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt die systematische Erkennung von Systeminformationen (Betriebssystem, Patches, Architektur)
 Der Schwerpunkt liegt auf der Aufklärung zur Exploit-Auswahl.Filtert laute Geräusche
-von Inventaragenten und Browsern mithilfe von Integritätsstufen und übergeordnetem Prozess-Gating.
+von Inventaragenten, Verwaltungstools und Browsern mithilfe von Integritätsstufen
+und Gating des übergeordneten Prozesses.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

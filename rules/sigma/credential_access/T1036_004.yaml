@@ -1,62 +1,81 @@
-title: Ultra-Pro High-Fidelity Masquerading via Path Anomaly (T1036.004)
+title: Masquerading via Path Anomaly (T1036.004)
 id: b69a6b31-811e-4d81-a9f2-7ea0234be4fb
 status: stable
-description: |
-    Detects sophisticated masquerading where system binaries are executed from 
-    untrusted, user-writable directories or from spoofed system paths (e.g., space padding). 
-    Filters out legitimate Side-by-Side (WinSxS) and Windows Update behaviors.
+description: >
+  Detects sophisticated masquerading where system binaries are executed from
+  untrusted, user-writable directories or spoofed system paths (e.g., trailing
+  space padding). Filters out legitimate Side-by-Side (WinSxS) and Windows
+  Update behaviors.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-23
 tags:
-    - attack.defense_evasion
-    - attack.t1036.004
+  - attack.defense_evasion
+  - attack.t1036.004
+  - attack.execution
+
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_space_padding:
-        Image|contains:
-            - 'Windows \'      
-            - 'System32 \'    
-            - 'Program Files \'
-            - 'AppData \'
+  selection_space_padding:
+    Image|contains:
+      - 'Windows \'
+      - 'System32 \'
+      - 'Program Files \'
+      - 'AppData \'
 
-    selection_system_names_in_user_zones:
-        Image|endswith:
-            - '\svchost.exe'
-            - '\lsass.exe'
-            - '\services.exe'
-            - '\wininit.exe'
-            - '\smss.exe'
-            - '\csrss.exe'
-            - '\winlogon.exe'
-            - '\taskhostw.exe'
-            - '\spoolsv.exe'
-        Image|contains:
-            - '\Users\'
-            - '\ProgramData\'
-            - '\AppData\'
-            - '\Local\Temp\'
-            - '\Public\'
+  selection_system_names_in_user_zones:
+    Image|endswith:
+      - '\svchost.exe'
+      - '\lsass.exe'
+      - '\services.exe'
+      - '\wininit.exe'
+      - '\smss.exe'
+      - '\csrss.exe'
+      - '\winlogon.exe'
+      - '\taskhostw.exe'
+      - '\spoolsv.exe'
+    Image|contains:
+      - '\Users\'
+      - '\ProgramData\'
+      - '\AppData\'
+      - '\Local\Temp\'
+      - '\Public\'
 
-    selection_suspicious_parent:
-        Image|endswith: 
-            - '\lsass.exe'
-            - '\svchost.exe'
-        ParentImage|endswith:
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\powershell.exe'
+  selection_suspicious_parent:
+    Image|endswith:
+      - '\lsass.exe'
+      - '\svchost.exe'
+    ParentImage|endswith:
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\firefox.exe'
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\powerpnt.exe'
+      - '\powershell.exe'
 
-    filter_legit_system_zones:
-        Image|startswith:
-            - 'C:\Windows\System32\'
-            - 'C:\Windows\SysWOW64\'
-            - 'C:\Windows\WinSxS\'
-            - 'C:\Windows\servicing\'
-        username: 'NT AUTHORITY\SYSTEM'
+  filter_legit_system_zones:
+    - Image|startswith:
+        - 'C:\Windows\System32\'
+        - 'C:\Windows\SysWOW64\'
+        - 'C:\Windows\WinSxS\'
+        - 'C:\Windows\servicing\'
+    - User:
+        - 'NT AUTHORITY\SYSTEM'
+        - 'NT AUTHORITY\LOCAL SERVICE'
+        - 'NT AUTHORITY\NETWORK SERVICE'
 
-    condition: (selection_space_padding or (selection_system_names_in_user_zones and not filter_legit_system_zones)) or (selection_suspicious_parent and not filter_legit_system_zones)
+  condition: >
+    (selection_space_padding)
+    or (selection_system_names_in_user_zones and not filter_legit_system_zones)
+    or (selection_suspicious_parent and not filter_legit_system_zones)
+
+falsepositives:
+  - Windows Update and Side-by-Side (WinSxS) operations
+  - Enterprise deployment or IT management tools
+  - Security testing and red team exercises
+
 level: critical

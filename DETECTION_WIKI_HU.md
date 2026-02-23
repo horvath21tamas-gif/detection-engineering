@@ -2943,16 +2943,16 @@ vagy a folyamat kiüresedésének és a gyanús szülő-gyerek származás jelei
 
 
 ---
-## Ultra-Pro High-Fidelity FTP/SFTP protokoll anomália (T1071.002)
+## FTP/SFTP protokoll anomália (T1071.002)
 - **ID:** `T1071_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Kritikusan Magas (SIEM gyilkos kategória!)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Felfigyeli a fájlátviteli protokollok jogosulatlan használatát
-nem interaktív FTP/SFTP munkamenetek, gyanús szkript alapú átvitelek,
-és rendellenes szülő-gyermek folyamatkapcsolatok (pl. Office to FTP).
+- **Leírás:** Érzékeli az FTP/SFTP és a kapcsolódó fájlátviteli protokollok jogosulatlan használatát
+a nem interaktív munkamenetek, a gyanús szkript alapú átvitelek figyelésével,
+és rendellenes szülő-gyermek folyamatkapcsolatok (pl. Office to FTP kliensek).
 
 #### 🚨 Response Playbook
 1. **IP hírnév: Ellenőrizd a távoli IP címet hírnév-adatbázisokban.**

@@ -2943,16 +2943,16 @@ oder Anzeichen von Prozessaushöhlung und verdächtiger Eltern-Kind-Abstammung a
 
 
 ---
-## Ultra-Pro High-Fidelity FTP/SFTP-Protokollanomalie (T1071.002)
+## FTP/SFTP-Protokollanomalie (T1071.002)
 - **ID:** `T1071_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Kritisch hoch (SIEM-Killerkategorie!)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die unbefugte Nutzung von Dateiübertragungsprotokollen durch Überwachung
-nicht interaktive FTP/SFTP-Sitzungen, verdächtige skriptbasierte Übertragungen,
-und anomale Eltern-Kind-Prozessbeziehungen (z. B. Office zu FTP).
+- **Beschreibung:** Erkennt die unbefugte Nutzung von FTP/SFTP und verwandten Dateiübertragungsprotokollen
+durch Überwachung nicht interaktiver Sitzungen, verdächtiger skriptbasierter Übertragungen,
+und anomale Eltern-Kind-Prozessbeziehungen (z. B. Office-zu-FTP-Clients).
 
 #### 🚨 Reaktions-Playbook
 1. **IP-Reputation: Überprüfen Sie die Remote-IP-Adresse in Reputationsdatenbanken.**

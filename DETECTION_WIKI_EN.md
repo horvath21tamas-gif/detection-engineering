@@ -3077,16 +3077,16 @@ or show signs of process hollowing and suspicious parent-child lineage.
 
 
 ---
-## Ultra-Pro High-Fidelity FTP/SFTP Protocol Anomaly (T1071.002)
+## FTP/SFTP Protocol Anomaly (T1071.002)
 - **ID:** `T1071_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Kritikusan Magas (SIEM gyilkos kategória!)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized use of file transfer protocols by monitoring for 
-non-interactive FTP/SFTP sessions, suspicious script-based transfers, 
-and anomalous parent-child process relationships (e.g., Office to FTP).
+- **Leírás:** Detects unauthorized use of FTP/SFTP and related file transfer protocols 
+by monitoring non-interactive sessions, suspicious script-based transfers, 
+and anomalous parent-child process relationships (e.g., Office to FTP clients).
 
 
 #### 🚨 Response Playbook

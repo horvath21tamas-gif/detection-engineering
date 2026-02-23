@@ -1,62 +1,67 @@
-title: Ultra-Pro High-Fidelity HTTP/S C2 Anomaly (T1071.001)
+title: HTTP/S C2 Anomaly (T1071.001)
 id: 8903efa3-4b3a-4b9c-9618-3c59053d36f2
 status: stable
 description: |
-    Detects potential C2 communication over HTTP/S by identifying anomalous 
-    network connections from processes that typically lack networking logic, 
-    or show signs of process hollowing and suspicious parent-child lineage.
+  Detects anomalous HTTP/S-based C2 communication by monitoring network connections
+  from non-networking processes or processes showing signs of hollowing, unusual 
+  parent-child lineage, or suspicious automation. Filters out legitimate browsers 
+  and known safe destinations to reduce false positives.
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.command_and_control
-    - attack.t1071.001
+  - attack.command_and_control
+  - attack.t1071.001
 logsource:
-    category: network_connection
-    product: windows
+  category: network_connection
+  product: windows
 detection:
-    selection_hollow_victims:
-        Image|endswith:
-            - '\notepad.exe'
-            - '\calc.exe'
-            - '\mspaint.exe'
-            - '\winver.exe'
-            - '\colorcpl.exe'
-            - '\spoolsv.exe'              
-            - '\scrcons.exe'             
+  selection_hollow_victims:
+    Image|endswith:
+      - '\notepad.exe'
+      - '\calc.exe'
+      - '\mspaint.exe'
+      - '\winver.exe'
+      - '\colorcpl.exe'
+      - '\spoolsv.exe'
+      - '\scrcons.exe'
 
-    selection_scripts_lolbins:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\rundll32.exe'
-            - '\regsvr32.exe'
-            - '\mshta.exe'
-            - '\certutil.exe'             
+  selection_scripts_lolbins:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\rundll32.exe'
+      - '\regsvr32.exe'
+      - '\mshta.exe'
+      - '\certutil.exe'
 
-    filter_legit_destinations:
-        DestinationHostname|endswith:
-            - '.microsoft.com'
-            - '.windowsupdate.com'
-            - '.digicert.com'
-            - '.amazontrust.com'
-            - 'ocsp.globalsign.com'
+  selection_context:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\w3wp.exe'
 
-    filter_browsers:
-        Image|contains:
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\firefox.exe'
-            - '\googleupdate.exe'
+  selection_integrity:
+    IntegrityLevel: 'Medium'
 
-    selection_context:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\w3wp.exe'                
+  filter_legit_destinations:
+    DestinationHostname|endswith:
+      - '.microsoft.com'
+      - '.windowsupdate.com'
+      - '.digicert.com'
+      - '.amazontrust.com'
+      - 'ocsp.globalsign.com'
 
-    selection_integrity:
-        IntegrityLevel: 'Medium'
+  filter_browsers:
+    Image|contains:
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\firefox.exe'
+      - '\googleupdate.exe'
 
-    condition: (selection_hollow_victims or (selection_scripts_lolbins and selection_context)) and selection_integrity and not (filter_browsers or filter_legit_destinations)
+  condition: 
+    (selection_hollow_victims 
+      or (selection_scripts_lolbins and selection_context)) 
+    and selection_integrity 
+    and not (filter_browsers or filter_legit_destinations)
 level: critical

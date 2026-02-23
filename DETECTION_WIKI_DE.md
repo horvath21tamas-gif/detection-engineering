@@ -199,17 +199,17 @@
 - [Ultra-Pro High-Fidelity Local Email Harvesting-Anomalie (T1114.001)](#ultra-pro-high-fidelity-local-email-harvesting-anomalie-(t1114001))
 - [Anomalie beim Remote-E-Mail-Export von Ultra-Pro High-Fidelity (T1114.002)](#anomalie-beim-remote-e-mail-export-von-ultra-pro-high-fidelity-(t1114002))
 - [Ultra-Pro High-Fidelity-E-Mail-Weiterleitungsregelanomalie (T1114.003)](#ultra-pro-high-fidelity-e-mail-weiterleitungsregelanomalie-(t1114003))
-- [Ultra-Pro High-Fidelity-Zwischenablage-Datenspionage (T1115)](#ultra-pro-high-fidelity-zwischenablage-datenspionage-(t1115))
-- [Ultra-Pro High-Fidelity Automatisierte Sammlung (T1119)](#ultra-pro-high-fidelity-automatisierte-sammlung-(t1119))
-- [Ultra-Pro High-Fidelity-Peripheriegeräteerkennung (T1120)](#ultra-pro-high-fidelity-peripheriegeräteerkennung-(t1120))
-- [Ultraprofessionelle High-Fidelity-Audioaufnahme und -Spionage (T1123)](#ultraprofessionelle-high-fidelity-audioaufnahme-und--spionage-(t1123))
-- [Ultra-Pro High-Fidelity-Systemzeiterkennung (T1124)](#ultra-pro-high-fidelity-systemzeiterkennung-(t1124))
-- [Ultra-Pro High-Fidelity-Videoaufnahmeanomalie (T1125)](#ultra-pro-high-fidelity-videoaufnahmeanomalie-(t1125))
-- [Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)](#ultra-pro-high-fidelity-trusted-developer-utility-proxy-(t1127))
+- [Ausspionieren von Zwischenablagedaten (T1115)](#ausspionieren-von-zwischenablagedaten-(t1115))
+- [Automatisierte Sammlung (T1119)](#automatisierte-sammlung-(t1119))
+- [Erkennung von Peripheriegeräten (T1120)](#erkennung-von-peripheriegeräten-(t1120))
+- [Audioerfassung und Spionage (T1123)](#audioerfassung-und-spionage-(t1123))
+- [Systemzeiterkennung (T1124)](#systemzeiterkennung-(t1124))
+- [Anomalie bei der Videoaufnahme (T1125)](#anomalie-bei-der-videoaufnahme-(t1125))
+- [Trusted Developer Utility-Proxy (T1127)](#trusted-developer-utility-proxy-(t1127))
 - [MSBuild-Proxy-Ausführung (T1127.001)](#msbuild-proxy-ausführung-(t1127001))
 - [Gemeinsames Laden von High-Fidelity-Modulen aus einem nicht vertrauenswürdigen Pfad](#gemeinsames-laden-von-high-fidelity-modulen-aus-einem-nicht-vertrauenswürdigen-pfad)
-- [Ultraprofessionelle High-Fidelity-Datenkodierung und -Verschleierung (T1132)](#ultraprofessionelle-high-fidelity-datenkodierung-und--verschleierung-(t1132))
-- [Ultra-Pro High-Fidelity-Standardkodierung und Nutzlastinjektion (T1132.001)](#ultra-pro-high-fidelity-standardkodierung-und-nutzlastinjektion-(t1132001))
+- [Datenverschlüsselung und -verschleierung (T1132)](#datenverschlüsselung-und--verschleierung-(t1132))
+- [Standardkodierung und Nutzlastinjektion (T1132.001)](#standardkodierung-und-nutzlastinjektion-(t1132001))
 - [Nicht standardmäßige Kodierung und XOR-Verschleierung (T1132.002)](#nicht-standardmäßige-kodierung-und-xor-verschleierung-(t1132002))
 - [Anomaler externer Remote-Service-Zugriffskontext](#anomaler-externer-remote-service-zugriffskontext)
 - [Zugriffstoken-Manipulation und Identitätswechsel (T1134)](#zugriffstoken-manipulation-und-identitätswechsel-(t1134))
@@ -3862,16 +3862,17 @@ Filterung, die aus verdächtigen Prozesslinien stammt.
 
 
 ---
-## Ultra-Pro High-Fidelity-Zwischenablage-Datenspionage (T1115)
+## Ausspionieren von Zwischenablagedaten (T1115)
 - **ID:** `T1115.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die automatische Überwachung und den Diebstahl der Zwischenablage durch Identifizierung persistenter Daten
-Abfrageschleifen, nicht verwaltete Assembly-Ladevorgänge für den Zugriff auf die Zwischenablage und
-verdächtige Prozesslinien (Webshells, Office-Makros), die auf die API zugreifen.
+- **Beschreibung:** Erkennt Aktivitäten zur Überwachung der Zwischenablage und zur Datenexfiltration durch Identifizierung
+ständige Abfrageschleifen, nicht autorisierte Assembly-Ladevorgänge für den Zugriff auf die Zwischenablage,
+und verdächtige Eltern-Kind-Prozessbeziehungen (z. B. Webshells, Office-Makros)
+Interaktion mit der Zwischenablage-API.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

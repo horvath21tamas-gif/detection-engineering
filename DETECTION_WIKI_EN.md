@@ -199,17 +199,17 @@
 - [Ultra-Pro High-Fidelity Local Email Harvesting Anomaly (T1114.001)](#ultra-pro-high-fidelity-local-email-harvesting-anomaly-(t1114001))
 - [Ultra-Pro High-Fidelity Remote Email Export Anomaly (T1114.002)](#ultra-pro-high-fidelity-remote-email-export-anomaly-(t1114002))
 - [Ultra-Pro High-Fidelity Email Forwarding Rule Anomaly (T1114.003)](#ultra-pro-high-fidelity-email-forwarding-rule-anomaly-(t1114003))
-- [Ultra-Pro High-Fidelity Clipboard Data Spying (T1115)](#ultra-pro-high-fidelity-clipboard-data-spying-(t1115))
-- [Ultra-Pro High-Fidelity Automated Collection (T1119)](#ultra-pro-high-fidelity-automated-collection-(t1119))
-- [Ultra-Pro High-Fidelity Peripheral Device Discovery (T1120)](#ultra-pro-high-fidelity-peripheral-device-discovery-(t1120))
-- [Ultra-Pro High-Fidelity Audio Capture & Spying (T1123)](#ultra-pro-high-fidelity-audio-capture-&-spying-(t1123))
-- [Ultra-Pro High-Fidelity System Time Discovery (T1124)](#ultra-pro-high-fidelity-system-time-discovery-(t1124))
-- [Ultra-Pro High-Fidelity Video Capture Anomaly (T1125)](#ultra-pro-high-fidelity-video-capture-anomaly-(t1125))
-- [Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)](#ultra-pro-high-fidelity-trusted-developer-utility-proxy-(t1127))
+- [Clipboard Data Spying (T1115)](#clipboard-data-spying-(t1115))
+- [Automated Collection (T1119)](#automated-collection-(t1119))
+- [Peripheral Device Discovery (T1120)](#peripheral-device-discovery-(t1120))
+- [Audio Capture & Spying (T1123)](#audio-capture-&-spying-(t1123))
+- [System Time Discovery (T1124)](#system-time-discovery-(t1124))
+- [Video Capture Anomaly (T1125)](#video-capture-anomaly-(t1125))
+- [Trusted Developer Utility Proxy (T1127)](#trusted-developer-utility-proxy-(t1127))
 - [MSBuild Proxy Execution (T1127.001)](#msbuild-proxy-execution-(t1127001))
 - [High-Fidelity Shared Module Load from Untrusted Path](#high-fidelity-shared-module-load-from-untrusted-path)
-- [Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132)](#ultra-pro-high-fidelity-data-encoding-&-obfuscation-(t1132))
-- [Ultra-Pro High-Fidelity Standard Encoding & Payload Injection (T1132.001)](#ultra-pro-high-fidelity-standard-encoding-&-payload-injection-(t1132001))
+- [Data Encoding & Obfuscation (T1132)](#data-encoding-&-obfuscation-(t1132))
+- [Standard Encoding & Payload Injection (T1132.001)](#standard-encoding-&-payload-injection-(t1132001))
 - [Non-Standard Encoding & XOR Obfuscation (T1132.002)](#non-standard-encoding-&-xor-obfuscation-(t1132002))
 - [Anomalous External Remote Service Access Context](#anomalous-external-remote-service-access-context)
 - [Access Token Manipulation & Impersonation (T1134)](#access-token-manipulation-&-impersonation-(t1134))
@@ -4050,16 +4050,17 @@ filtering, originating from suspicious process lineages.
 
 
 ---
-## Ultra-Pro High-Fidelity Clipboard Data Spying (T1115)
+## Clipboard Data Spying (T1115)
 - **ID:** `T1115.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects automated clipboard monitoring and theft by identifying persistent 
-polling loops, unmanaged assembly loads for clipboard access, and 
-suspicious process lineages (Webshells, Office macros) accessing the API.
+- **Leírás:** Detects clipboard monitoring and data exfiltration activities by identifying 
+persistent polling loops, unauthorized assembly loads for clipboard access, 
+and suspicious parent-child process relationships (e.g., webshells, Office macros) 
+interacting with the clipboard API.
 
 
 #### 🚨 Response Playbook

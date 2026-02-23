@@ -199,17 +199,17 @@
 - [Ultra-Pro High-Fidelity helyi e-mail-gyűjtési anomália (T1114.001)](#ultra-pro-high-fidelity-helyi-e-mail-gyűjtési-anomália-(t1114001))
 - [Ultra-Pro High-Fidelity távoli e-mail exportálási rendellenesség (T1114.002)](#ultra-pro-high-fidelity-távoli-e-mail-exportálási-rendellenesség-(t1114002))
 - [Ultra-Pro nagy pontosságú e-mail továbbítási szabály rendellenessége (T1114.003)](#ultra-pro-nagy-pontosságú-e-mail-továbbítási-szabály-rendellenessége-(t1114003))
-- [Ultra-Pro High-Fidelity vágólap adatkémkedés (T1115)](#ultra-pro-high-fidelity-vágólap-adatkémkedés-(t1115))
-- [Ultra-Pro High-Fidelity automatizált gyűjtés (T1119)](#ultra-pro-high-fidelity-automatizált-gyűjtés-(t1119))
-- [Ultra-Pro High-Fidelity perifériás eszközök felfedezése (T1120)](#ultra-pro-high-fidelity-perifériás-eszközök-felfedezése-(t1120))
-- [Ultra-Pro High-Fidelity hangrögzítés és kémkedés (T1123)](#ultra-pro-high-fidelity-hangrögzítés-és-kémkedés-(t1123))
-- [Ultra-Pro High-Fidelity System Time Discovery (T1124)](#ultra-pro-high-fidelity-system-time-discovery-(t1124))
-- [Ultra-Pro nagy felbontású videórögzítési anomália (T1125)](#ultra-pro-nagy-felbontású-videórögzítési-anomália-(t1125))
-- [Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127)](#ultra-pro-high-fidelity-trusted-developer-utility-proxy-(t1127))
-- [MSBuild proxy végrehajtás (T1127.001)](#msbuild-proxy-végrehajtás-(t1127001))
+- [Vágólapadatok kémkedése (T1115)](#vágólapadatok-kémkedése-(t1115))
+- [Automatizált begyűjtés (T1119)](#automatizált-begyűjtés-(t1119))
+- [Perifériás eszköz felfedezése (T1120)](#perifériás-eszköz-felfedezése-(t1120))
+- [Hangrögzítés és kémkedés (T1123)](#hangrögzítés-és-kémkedés-(t1123))
+- [Rendszeridő-felderítés (T1124)](#rendszeridő-felderítés-(t1124))
+- [Videórögzítési anomália (T1125)](#videórögzítési-anomália-(t1125))
+- [Trusted Developer Utility Proxy (T1127)](#trusted-developer-utility-proxy-(t1127))
+- [MSBuild proxy végrehajtása (T1127.001)](#msbuild-proxy-végrehajtása-(t1127001))
 - [Nagy pontosságú megosztott modul betöltése nem megbízható útvonalról](#nagy-pontosságú-megosztott-modul-betöltése-nem-megbízható-útvonalról)
-- [Ultra-Pro nagy hűségű adatkódolás és obfuszkálás (T1132)](#ultra-pro-nagy-hűségű-adatkódolás-és-obfuszkálás-(t1132))
-- [Ultra-Pro High-Fidelity szabványos kódolás és hasznos terhelés befecskendezése (T1132.001)](#ultra-pro-high-fidelity-szabványos-kódolás-és-hasznos-terhelés-befecskendezése-(t1132001))
+- [Adatkódolás és obfuszkálás (T1132)](#adatkódolás-és-obfuszkálás-(t1132))
+- [Szabványos kódolás és hasznos terhelés beadása (T1132.001)](#szabványos-kódolás-és-hasznos-terhelés-beadása-(t1132001))
 - [Nem szabványos kódolás és XOR obfuszkáció (T1132.002)](#nem-szabványos-kódolás-és-xor-obfuszkáció-(t1132002))
 - [Rendellenes külső távoli szolgáltatás-hozzáférési kontextus](#rendellenes-külső-távoli-szolgáltatás-hozzáférési-kontextus)
 - [Hozzáférési token manipuláció és megszemélyesítés (T1134)](#hozzáférési-token-manipuláció-és-megszemélyesítés-(t1134))
@@ -3862,16 +3862,17 @@ gyanús folyamatvonalakból származó szűrés.
 
 
 ---
-## Ultra-Pro High-Fidelity vágólap adatkémkedés (T1115)
+## Vágólapadatok kémkedése (T1115)
 - **ID:** `T1115.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Észleli az automatikus vágólap-figyelést és a lopást a tartós azonosítással
-lekérdezési hurkok, nem kezelt összeállítási terhelések a vágólap eléréséhez és
-gyanús folyamatvonalak (Webshell-ek, Office-makrók), amelyek hozzáférnek az API-hoz.
+- **Leírás:** Azonosítással észleli a vágólap megfigyelési és adatkiszűrési tevékenységeit
+tartós lekérdezési hurkok, illetéktelen összeszerelési terhelések a vágólap eléréséhez,
+és gyanús szülő-gyermek folyamatkapcsolatok (pl. webshellek, Office-makrók)
+interakció a vágólap API-val.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -3923,7 +3924,7 @@ A következőkre összpontosít:
 - Szkript alapú hangrögzítési rutinok
 - Gyanús szülő/gyermek folyamatkapcsolatok (irodai alkalmazások, héjak, webszerverek)
 - A támadó eszközök által használt rosszindulatú parancssori minták
-Szűri a jogszerű kommunikációs alkalmazásokat a téves pozitívumok csökkentése érdekében.
+Szűri a legitim kommunikációs alkalmazásokat a téves pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -3987,7 +3988,7 @@ A fájl nélküli vagy oldalsó C2-végrehajtási kísérletek nagy pontosságú
 
 
 ---
-## MSBuild proxy végrehajtás (T1127.001)
+## MSBuild proxy végrehajtása (T1127.001)
 - **ID:** `T1127_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -4043,7 +4044,7 @@ Szűri a jogos adminisztrációs és rendszerfolyamatokat a téves pozitívumok 
 
 
 ---
-## Szabványos kódolás és hasznos terhelés befecskendezése (T1132.001)
+## Szabványos kódolás és hasznos terhelés beadása (T1132.001)
 - **ID:** `T1132_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -4138,7 +4139,7 @@ Nagy pontosságú észlelés szűréssel:
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 - **Leírás:** Felismeri a jogosulatlan folyamat-létrehozást duplikált tokenek használatával a következő megfigyeléssel:
-- Támadó eszközök és token-manipulációs parancsok
+- Támadó eszközök és token manipulációs parancsok
 - Gyanús integritásszint-átmenet közepesről RENDSZERRE
 - Kiszűri a legitim rendszerfolyamatokat, az UAC-emeléseket és a biztonsági ügynököket
 
@@ -4387,8 +4388,8 @@ a forrás IP-hírneve, valamint az engedélyezett kiépítési szolgáltatási t
 - **Becsült zajszint:** Magas (Tárolás-igényes)
 - **Leírás:** Felismeri a jogosulatlan Office-bővítmények (.wll, .xll) fennmaradását a következők figyelésével:
 - Nem megbízható fájlhelyek (Word/Excel indító mappák, AddIns mappa)
-- Office-bővítmények bináris fájljai gyanús írókkal (PowerShell, beállítás, böngésző stb.)
-- Kizárja az ismert megbízható alkalmazásokat a téves pozitívumok csökkentésére
+- Office-bővítmények binárisai gyanús írókkal (PowerShell, beállítás, böngésző stb.)
+- Kizárja az ismert megbízható alkalmazásokat a hamis pozitívumok csökkentése érdekében
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -4396,7 +4397,7 @@ a forrás IP-hírneve, valamint az engedélyezett kiépítési szolgáltatási t
 
 
 ---
-## Lopakodó deobfuszkáció/dekódolás (T1140)
+## Lopakodó deobfuszkálás/dekódolás (T1140)
 - **ID:** `T1140.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

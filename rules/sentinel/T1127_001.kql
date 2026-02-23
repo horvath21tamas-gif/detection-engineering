@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (FolderPath endswith "\msbuild.exe" and OriginalFileName =~ "MSBuild.exe") and (ParentProcessName =~ "(winword\.exe|excel\.exe|powerpnt\.exe|outlook\.exe|chrome\.exe|msedge\.exe|wscript\.exe|cscript\.exe|mshta\.exe|wmiprvse\.exe)$" or ProcessCommandLine =~ "(http|\\|\AppData\|\Temp\|\.xml)") and (not (ParentProcessName =~ "(\Microsoft Visual Studio\|\Common7\IDE\|\BuildAgent\|\Jenkins\|\ServiceFabric\)" and ProcessCommandLine =~ "(/p:Configuration=|\.sln|\.csproj)" and User =~ "svc_build"))
+| where (FolderPath endswith "\msbuild.exe" and OriginalFileName =~ "MSBuild.exe") and (Parentprocessname =~ "(winword\.exe|excel\.exe|powerpnt\.exe|outlook\.exe|chrome\.exe|msedge\.exe|wscript\.exe|cscript\.exe|mshta\.exe|wmiprvse\.exe)$" or processcommandline =~ "(http|\\|\AppData\|\Temp\|\.xml)") and (not (Parentprocessname =~ "(\Microsoft Visual Studio\|\Common7\IDE\|\BuildAgent\|\Jenkins\|\ServiceFabric\)" and processcommandline =~ "(/p:Configuration=|\.sln|\.csproj)" and username =~ "svc_build"))

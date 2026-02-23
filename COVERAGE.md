@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-20 11:27:46`
+**Utolsó frissítés:** `2026-02-23 06:15:23`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -204,17 +204,17 @@
 | T1114.001 | CRITICAL | Ultra-Pro High-Fidelity Local Email Harvesting Anomaly (T1114.001), Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114) |
 | T1114.002 | CRITICAL | Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114), Ultra-Pro High-Fidelity Remote Email Export Anomaly (T1114.002) |
 | T1114.003 | CRITICAL | Ultra-Pro High-Fidelity Email Forwarding Rule Anomaly (T1114.003) |
-| T1115 | CRITICAL | Ultra-Pro High-Fidelity Clipboard Data Spying (T1115) |
-| T1119 | CRITICAL | Ultra-Pro High-Fidelity Automated Collection (T1119) |
-| T1120 | HIGH | Ultra-Pro High-Fidelity Peripheral Device Discovery (T1120) |
-| T1123 | CRITICAL | Ultra-Pro High-Fidelity Audio Capture & Spying (T1123) |
-| T1124 | HIGH | Ultra-Pro High-Fidelity System Time Discovery (T1124) |
-| T1125 | CRITICAL | Ultra-Pro High-Fidelity Video Capture Anomaly (T1125) |
-| T1127 | CRITICAL | Ultra-Pro High-Fidelity Trusted Developer Utility Proxy (T1127), MSBuild Proxy Execution (T1127.001) |
+| T1115 | CRITICAL | Clipboard Data Spying (T1115) |
+| T1119 | CRITICAL | Automated Collection (T1119) |
+| T1120 | HIGH | Peripheral Device Discovery (T1120) |
+| T1123 | CRITICAL | Audio Capture & Spying (T1123) |
+| T1124 | HIGH | System Time Discovery (T1124) |
+| T1125 | CRITICAL | Video Capture Anomaly (T1125) |
+| T1127 | CRITICAL | Trusted Developer Utility Proxy (T1127), MSBuild Proxy Execution (T1127.001) |
 | T1127.001 | CRITICAL | MSBuild Proxy Execution (T1127.001) |
 | T1129 | HIGH | High-Fidelity Shared Module Load from Untrusted Path |
-| T1132 | CRITICAL | Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132) |
-| T1132.001 | CRITICAL | Ultra-Pro High-Fidelity Data Encoding & Obfuscation (T1132), Ultra-Pro High-Fidelity Standard Encoding & Payload Injection (T1132.001) |
+| T1132 | CRITICAL | Data Encoding & Obfuscation (T1132) |
+| T1132.001 | CRITICAL | Data Encoding & Obfuscation (T1132), Standard Encoding & Payload Injection (T1132.001) |
 | T1132.002 | CRITICAL | Non-Standard Encoding & XOR Obfuscation (T1132.002) |
 | T1133 | HIGH | Anomalous External Remote Service Access Context |
 | T1134 | CRITICAL | Access Token Manipulation & Impersonation (T1134) |

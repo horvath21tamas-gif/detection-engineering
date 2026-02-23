@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where (ProcessCommandLine in ("(winmm\.dll,*mciSendString|record|save|open new type waveaudio)", "(Get-MicrophoneAudio|Start-AudioCapture|waveInStart|naudio)")) and (FolderPath =~ "(powershell\.exe|cmd\.exe|rundll32\.exe|mshta\.exe|wscript\.exe)$" and ParentProcessName =~ "(winword\.exe|excel\.exe|outlook\.exe|w3wp\.exe)$" and IntegrityLevel =~ "Medium") and (not FolderPath =~ "^(C:\Program Files\Google\Chrome\|C:\Program Files \(x86\)\Microsoft\Edge\)")
+| where (processcommandline in ("(winmm\.dll,*mciSendString|record|save|open new type waveaudio)", "(Get-MicrophoneAudio|Start-AudioCapture|waveInStart|naudio)")) and (processname =~ "(powershell\.exe|cmd\.exe|rundll32\.exe|mshta\.exe|wscript\.exe)$" and Parentprocessname =~ "(winword\.exe|excel\.exe|outlook\.exe|w3wp\.exe)$" and IntegrityLevel =~ "Medium") and (not processname =~ "^(C:\Program Files\Google\Chrome\|C:\Program Files \(x86\)\Microsoft\Edge\)")

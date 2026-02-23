@@ -1,54 +1,60 @@
-title: Ultra-Pro High-Fidelity Application Window Discovery (T1010)
+title: Application Window Discovery (T1010)
 id: 38ba07c9-66a2-47f1-8ea8-d4073de9be7d
 status: stable
 description: |
-    Detects unauthorized application window discovery by monitoring for .NET 
-    MainWindowTitle property access and Win32 API calls via CLI. 
-    Focuses on non-standard lineages and output redirection used by malware to exfiltrate window titles.
+  Detects unauthorized application window discovery by monitoring for .NET 
+  MainWindowTitle property access and Win32 API calls via CLI. 
+  Focuses on non-standard lineages and output redirection used by malware to exfiltrate window titles.
 author: hota05
 date: 2026-02-04
 tags:
-    - attack.discovery
-    - attack.t1010
+  - attack.discovery
+  - attack.t1010
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_pwsh:
-        CommandLine|contains:
-            - '.MainWindowTitle'           
-            - 'Get-Process | select'        
-            - 'Get-Process | Where-Object'
+  selection_pwsh:
+    CommandLine|contains:
+      - '.MainWindowTitle'
+      - 'Get-Process | select'
+      - 'Get-Process | Where-Object'
 
-    selection_api:
-        CommandLine|contains:
-            - 'EnumWindows'
-            - 'GetWindowText'
-            - 'GetForegroundWindow'
+  selection_api:
+    CommandLine|contains:
+      - 'EnumWindows'
+      - 'GetWindowText'
+      - 'GetForegroundWindow'
 
-    selection_exfil:
-        CommandLine|contains:
-            - ' > '                        
-            - ' | Export-Csv'
-            - 'ConvertTo-Json'
-            - 'base64'                     
-            - ' | clip'                      
+  selection_exfil:
+    CommandLine|contains:
+      - ' > '
+      - ' | Export-Csv'
+      - 'ConvertTo-Json'
+      - 'base64'
+      - ' | clip'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\wsmprovhost.exe' 
-            - '\httpd.exe'     
-            - '\winword.exe'     
-            - '\excel.exe'
-        Image|contains:
-            - '\AppData\Local\Temp\'
-            - '\Users\Public\'
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\wsmprovhost.exe'
+      - '\httpd.exe'
+      - '\winword.exe'
+      - '\excel.exe'
+    Image|contains:
+      - '\AppData\Local\Temp\'
+      - '\Users\Public\'
 
-    filter_legit:
-        username: 'NT AUTHORITY\SYSTEM'
-        Image|contains:
-            - '\Program Files\AnyDesk\'
-            - '\Program Files\TeamViewer\'
+  filter_legit:
+    username: 'NT AUTHORITY\SYSTEM'
+    Image|contains:
+      - '\Program Files\AnyDesk\'
+      - '\Program Files\TeamViewer\'
 
-    condition: (selection_pwsh or selection_api) and (selection_exfil or selection_suspicious_parent) and not filter_legit
+  condition: >
+    (selection_pwsh or selection_api) and
+    (selection_exfil or selection_suspicious_parent) and
+    not filter_legit
+
 level: high

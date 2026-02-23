@@ -2357,16 +2357,14 @@ végrehajtási időben és nem szabványos könyvtárakból származik.
 
 
 ---
-## Ultra-Pro Stealthy List Planting Injection (T1055.015)
+## Stealthy List Planting Injection (ATT&CK T1055.015)
 - **ID:** `T1055_015.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a ListPlanting injekciót a gyanús folyamatok közötti hozzáférés azonosításával
-kéréseket küld a ListView-képes folyamatokhoz, ahol a végrehajtási folyamat származik
-nem támogatott memóriarégiókból (shellkód), nem pedig aláírt modulokból.
+- **Leírás:** Érzékeli a ListPlanting injekciót azáltal, hogy azonosítja a ListView-képes folyamatokhoz intézett gyanús, többfolyamat-hozzáférési kérelmeket, ahol a végrehajtási folyamat nem aláírt modulokból, hanem nem támogatott memóriarégiókból (shellkód) származik.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

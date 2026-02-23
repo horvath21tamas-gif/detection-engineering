@@ -2357,16 +2357,14 @@ zur Ausführungszeit und stammen aus nicht standardmäßigen Verzeichnissen.
 
 
 ---
-## Ultra-Pro Stealthy ListPlanting-Injektion (T1055.015)
+## Stealthy ListPlanting-Injektion (ATT&CK T1055.015)
 - **ID:** `T1055_015.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die ListPlanting-Injection durch Identifizierung verdächtiger prozessübergreifender Zugriffe
-Anfragen an ListView-fähige Prozesse, von denen der Ausführungsfluss stammt
-aus nicht gesicherten Speicherbereichen (Shellcode) und nicht aus signierten Modulen.
+- **Beschreibung:** Erkennt die ListPlanting-Injection durch die Identifizierung verdächtiger prozessübergreifender Zugriffsanforderungen an ListView-fähige Prozesse, bei denen der Ausführungsfluss aus nicht gesicherten Speicherbereichen (Shellcode) und nicht aus signierten Modulen stammt.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

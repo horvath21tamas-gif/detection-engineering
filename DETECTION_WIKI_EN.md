@@ -2457,16 +2457,14 @@ at execution time and originating from non-standard directories.
 
 
 ---
-## Ultra-Pro Stealthy ListPlanting Injection (T1055.015)
+## Stealthy ListPlanting Injection (ATT&CK T1055.015)
 - **ID:** `T1055_015.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MMC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects ListPlanting injection by identifying suspicious cross-process access 
-requests to ListView-capable processes where the execution flow originates 
-from unbacked memory regions (shellcode) rather than signed modules.
+- **Leírás:** Detects ListPlanting injection by identifying suspicious cross-process access requests to ListView-capable processes where the execution flow originates from unbacked memory regions (shellcode) rather than signed modules.
 
 
 #### 🚨 Response Playbook

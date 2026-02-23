@@ -1,4 +1,1 @@
-
-| rex field=QueryName "(?<QueryNameMatch>^.{64,255}\\..*$)"
-| eval QueryNameCondition=if(isnotnull(QueryNameMatch), "true", "false")
-| search Image IN ("*\\notepad.exe", "*\\calc.exe", "*\\winver.exe", "*\\spoolsv.exe", "*\\rundll32.exe", "*\\regsvr32.exe", "*\\powershell.exe", "*\\pwsh.exe", "*\\cmd.exe") QueryNameCondition="true" OR QueryType IN (16, 10, 33) IntegrityLevel="Medium" CommandLine IN ("*-enc*", "*nslookup*") NOT (QueryName IN ("*.microsoft.com", "*.windowsupdate.com", "*.google.com", "*.azure.com", "*.cloudfront.net", "*.akamaized.net") OR Image IN ("*\\chrome.exe*", "*\\msedge.exe*", "*\\firefox.exe*", "*\\svchost.exe*"))
+Image IN ("*\\notepad.exe", "*\\calc.exe", "*\\winver.exe", "*\\spoolsv.exe", "*\\rundll32.exe", "*\\regsvr32.exe", "*\\powershell.exe", "*\\pwsh.exe", "*\\cmd.exe") QueryName="^.{64,255}\\..*$" OR QueryType IN (16, 10, 33) IntegrityLevel="Medium" CommandLine IN ("*-enc*", "*nslookup*") NOT (QueryName IN ("*.microsoft.com", "*.windowsupdate.com", "*.google.com", "*.azure.com", "*.cloudfront.net", "*.akamaized.net") Image IN ("*\\chrome.exe*", "*\\msedge.exe*", "*\\firefox.exe*", "*\\svchost.exe*"))

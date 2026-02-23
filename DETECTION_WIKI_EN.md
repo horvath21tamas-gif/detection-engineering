@@ -147,7 +147,7 @@
 - [Ultra-Pro High-Fidelity HTTP/S C2 Anomaly (T1071.001)](#ultra-pro-high-fidelity-https-c2-anomaly-(t1071001))
 - [Ultra-Pro High-Fidelity FTP/SFTP Protocol Anomaly (T1071.002)](#ultra-pro-high-fidelity-ftpsftp-protocol-anomaly-(t1071002))
 - [Ultra-Pro High-Fidelity Mail Protocol Anomaly (T1071.003)](#ultra-pro-high-fidelity-mail-protocol-anomaly-(t1071003))
-- [Ultra-Pro High-Fidelity DNS Tunneling & Beaconing (T1071.004)](#ultra-pro-high-fidelity-dns-tunneling-&-beaconing-(t1071004))
+- [DNS Tunneling & Beaconing (T1071.004)](#dns-tunneling-&-beaconing-(t1071004))
 - [High-Fidelity Software Deployment Tool Abuse Detection](#high-fidelity-software-deployment-tool-abuse-detection)
 - [Ultra-Pro High-Fidelity Data Staging Anomaly (T1074)](#ultra-pro-high-fidelity-data-staging-anomaly-(t1074))
 - [Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001)](#ultra-pro-high-fidelity-local-data-staging-anomaly-(t1074001))
@@ -3115,16 +3115,17 @@ focusing on .NET/PowerShell automation and suspicious process lineages.
 
 
 ---
-## Ultra-Pro High-Fidelity DNS Tunneling & Beaconing (T1071.004)
+## DNS Tunneling & Beaconing (T1071.004)
 - **ID:** `T1071_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects DNS tunneling and C2 by monitoring for high-entropy subdomains, 
-unusual query types (TXT, NULL), and DNS activity from non-network 
-native processes with specific focus on length and frequency.
+- **Leírás:** Detects DNS tunneling and C2 activity by monitoring for high-entropy subdomains, 
+unusual query types (TXT, NULL, and SIG), long or repetitive queries, and DNS 
+activity from non-network native processes. Focuses on anomalous length, frequency, 
+and process context to reduce false positives.
 
 
 #### 🚨 Response Playbook

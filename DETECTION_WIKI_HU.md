@@ -147,7 +147,7 @@
 - [Ultra-Pro High-Fidelity HTTP/S C2 anomália (T1071.001)](#ultra-pro-high-fidelity-https-c2-anomália-(t1071001))
 - [Ultra-Pro High-Fidelity FTP/SFTP protokoll anomália (T1071.002)](#ultra-pro-high-fidelity-ftpsftp-protokoll-anomália-(t1071002))
 - [Ultra-Pro High-Fidelity Mail Protocol Anomália (T1071.003)](#ultra-pro-high-fidelity-mail-protocol-anomália-(t1071003))
-- [Ultra-Pro High-Fidelity DNS Tunneling & Beaconing (T1071.004)](#ultra-pro-high-fidelity-dns-tunneling-&-beaconing-(t1071004))
+- [DNS Tunneling & Beaconing (T1071.004)](#dns-tunneling-&-beaconing-(t1071004))
 - [Nagy pontosságú szoftvertelepítési eszköz visszaélések észlelése](#nagy-pontosságú-szoftvertelepítési-eszköz-visszaélések-észlelése)
 - [Ultra-Pro High-Fidelity adatállomási anomália (T1074)](#ultra-pro-high-fidelity-adatállomási-anomália-(t1074))
 - [Ultra-Pro High-Fidelity helyi adatállomási anomália (T1074.001)](#ultra-pro-high-fidelity-helyi-adatállomási-anomália-(t1074001))
@@ -2979,16 +2979,17 @@ a .NET/PowerShell automatizálásra és a gyanús folyamatvonalakra összpontos�
 
 
 ---
-## Ultra-Pro High-Fidelity DNS Tunneling & Beaconing (T1071.004)
+## DNS Tunneling & Beaconing (T1071.004)
 - **ID:** `T1071_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a DNS-alagút és a C2-t a nagy entrópiájú aldomainek figyelésével,
-szokatlan lekérdezéstípusok (TXT, NULL) és DNS-tevékenység nem hálózatról
-natív folyamatok, különös tekintettel a hosszra és gyakoriságra.
+- **Leírás:** Érzékeli a DNS-alagút és a C2 tevékenységet a nagy entrópiájú aldomainek figyelésével,
+szokatlan lekérdezési típusok (TXT, NULL és SIG), hosszú vagy ismétlődő lekérdezések és DNS
+tevékenység a nem hálózati natív folyamatokból.A rendellenes hosszra, gyakoriságra összpontosít,
+és feldolgozza a kontextust a hamis pozitívumok csökkentésére.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

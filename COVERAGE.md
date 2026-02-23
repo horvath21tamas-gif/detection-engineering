@@ -152,7 +152,7 @@
 | T1071.001 | CRITICAL | Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071), Ultra-Pro High-Fidelity HTTP/S C2 Anomaly (T1071.001) |
 | T1071.002 | CRITICAL | Ultra-Pro High-Fidelity FTP/SFTP Protocol Anomaly (T1071.002) |
 | T1071.003 | CRITICAL | Ultra-Pro High-Fidelity Mail Protocol Anomaly (T1071.003) |
-| T1071.004 | CRITICAL | Ultra-Pro High-Fidelity DNS Tunneling & Beaconing (T1071.004) |
+| T1071.004 | CRITICAL | DNS Tunneling & Beaconing (T1071.004) |
 | T1072 | CRITICAL | High-Fidelity Software Deployment Tool Abuse Detection |
 | T1074 | CRITICAL | Ultra-Pro High-Fidelity Data Staging Anomaly (T1074), Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001) |
 | T1074.001 | CRITICAL | Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001) |

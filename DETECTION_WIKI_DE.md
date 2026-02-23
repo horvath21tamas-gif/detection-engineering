@@ -147,7 +147,7 @@
 - [Ultra-Pro High-Fidelity HTTP/S C2-Anomalie (T1071.001)](#ultra-pro-high-fidelity-https-c2-anomalie-(t1071001))
 - [Ultra-Pro High-Fidelity FTP/SFTP-Protokollanomalie (T1071.002)](#ultra-pro-high-fidelity-ftpsftp-protokollanomalie-(t1071002))
 - [Anomalie des Ultra-Pro High-Fidelity-Mail-Protokolls (T1071.003)](#anomalie-des-ultra-pro-high-fidelity-mail-protokolls-(t1071003))
-- [Ultraprofessionelles High-Fidelity-DNS-Tunneling und -Beaconing (T1071.004)](#ultraprofessionelles-high-fidelity-dns-tunneling-und--beaconing-(t1071004))
+- [DNS-Tunneling und Beaconing (T1071.004)](#dns-tunneling-und-beaconing-(t1071004))
 - [Erkennung von Missbrauch durch High-Fidelity-Softwarebereitstellungstools](#erkennung-von-missbrauch-durch-high-fidelity-softwarebereitstellungstools)
 - [Ultra-Pro High-Fidelity-Daten-Staging-Anomalie (T1074)](#ultra-pro-high-fidelity-daten-staging-anomalie-(t1074))
 - [Ultra-Pro High-Fidelity Local Data Staging-Anomalie (T1074.001)](#ultra-pro-high-fidelity-local-data-staging-anomalie-(t1074001))
@@ -2979,16 +2979,17 @@ Schwerpunkt auf .NET/PowerShell-Automatisierung und verdächtigen Prozesslinien.
 
 
 ---
-## Ultraprofessionelles High-Fidelity-DNS-Tunneling und -Beaconing (T1071.004)
+## DNS-Tunneling und Beaconing (T1071.004)
 - **ID:** `T1071_004.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt DNS-Tunneling und C2 durch Überwachung auf Subdomänen mit hoher Entropie.
-ungewöhnliche Abfragetypen (TXT, NULL) und DNS-Aktivität von Nicht-Netzwerk
-native Prozesse mit besonderem Fokus auf Länge und Häufigkeit.
+- **Beschreibung:** Erkennt DNS-Tunneling und C2-Aktivität durch Überwachung auf Subdomänen mit hoher Entropie.
+ungewöhnliche Abfragetypen (TXT, NULL und SIG), lange oder sich wiederholende Abfragen und DNS
+Aktivität von nicht netzwerkeigenen Prozessen.Konzentriert sich auf anomale Länge, Häufigkeit,
+und Prozesskontext, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

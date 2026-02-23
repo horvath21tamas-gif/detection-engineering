@@ -1,63 +1,79 @@
-title: Ultra-Pro High-Fidelity Process Discovery (T1057)
+title: Process Discovery (ATT&CK T1057)
 id: c58b0360-c80e-416f-9895-1bb21e2e1de9
 status: stable
-description: |
-    Detects targeted process discovery focusing on security product identification 
-    and memory target reconnaissance. Filters high-frequency noise from 
-    browsers and legitimate update orchestrators.
+description: >
+  Detects targeted process discovery focusing on security product identification
+  and memory target reconnaissance. Filters high-frequency noise from browsers
+  and legitimate update orchestrators.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1057/
 tags:
-    - attack.discovery
-    - attack.t1057
+  - attack.discovery
+  - attack.t1057
+  - attack.lateral-movement
+  - attack.host
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\tasklist.exe'
-            - '\qprocess.exe'
-        - CommandLine|contains:
-            - 'Get-Process'
-            - 'gps '                
-            - 'process where'       
+  selection_tools:
+    Image|endswith|any:
+      - '\tasklist.exe'
+      - '\qprocess.exe'
+    CommandLine|contains:
+      - 'Get-Process'
+      - 'gps '
+      - 'process where'
 
-    selection_security_targets:
-        CommandLine|contains:
-            - 'msmpeng'              
-            - 'cb.exe'              
-            - 'falcon'              
-            - 'sentinel'           
-            - 'cyvera'             
-            - 'fireeye'
-            - 'tanium'
+  selection_security_targets:
+    CommandLine|contains:
+      - 'msmpeng'
+      - 'cb.exe'
+      - 'falcon'
+      - 'sentinel'
+      - 'cyvera'
+      - 'fireeye'
+      - 'tanium'
 
-    selection_memory_targets:
-        CommandLine|contains:
-            - 'lsass'
-            - 'winlogon'
-            - 'explorer'
-            - 'spoolsv'
+  selection_memory_targets:
+    CommandLine|contains:
+      - 'lsass'
+      - 'winlogon'
+      - 'explorer'
+      - 'spoolsv'
 
-    selection_suspicious_lineage:
-        ParentImage|endswith:
-            - '\wsmprovhost.exe'    
-            - '\httpd.exe'         
-            - '\winword.exe'         
-            - '\powershell.exe'      
-        IntegrityLevel: 'Medium'    
+  selection_suspicious_lineage:
+    ParentImage|endswith:
+      - '\wsmprovhost.exe'
+      - '\httpd.exe'
+      - '\winword.exe'
+      - '\powershell.exe'
+    IntegrityLevel: 'Medium'
 
-    filter_legit_noise:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith:
-            - '\chrome.exe'          
-            - '\msedge.exe'
-            - '\brave.exe'
-            - '\svchost.exe'
-        - CommandLine|contains:
-            - 'Program Files'       
-            - '/all /v'              
+  filter_legit_noise:
+    - User|startswith: 'NT AUTHORITY\'
+    - ParentImage|endswith:
+        - '\chrome.exe'
+        - '\msedge.exe'
+        - '\brave.exe'
+        - '\svchost.exe'
+    - CommandLine|contains:
+        - 'Program Files'
+        - '/all /v'
 
-    condition: selection_tools and (selection_security_targets or selection_memory_targets or selection_suspicious_lineage) and not filter_legit_noise
+  condition: selection_tools
+             and (selection_security_targets or selection_memory_targets or selection_suspicious_lineage)
+             and not filter_legit_noise
+
+falsepositives:
+  - Browsers scanning running processes
+  - SYSTEM services (svchost) performing process inventory
+  - Admin or update scripts querying process lists
+  - Tanium or other endpoint management agents
+
 level: high

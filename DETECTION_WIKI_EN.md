@@ -82,14 +82,14 @@
 - [Ultra-Pro RC Script and Init.d Persistence (T1037.004)](#ultra-pro-rc-script-and-initd-persistence-(t1037004))
 - [Ultra-Pro macOS Startup Items Persistence (T1037.005)](#ultra-pro-macos-startup-items-persistence-(t1037005))
 - [Ultra-Pro High-Fidelity Network Share Discovery (T1039)](#ultra-pro-high-fidelity-network-share-discovery-(t1039))
-- [Ultra-Pro High-Fidelity Network Sniffing Detection (T1040)](#ultra-pro-high-fidelity-network-sniffing-detection-(t1040))
-- [Ultra-Pro High-Fidelity Exfiltration Over C2 Channel (T1041)](#ultra-pro-high-fidelity-exfiltration-over-c2-channel-(t1041))
+- [Network Sniffing Detection (ATT&CK T1040)](#network-sniffing-detection-(att&ck-t1040))
+- [Exfiltration Over C2 Channel (ATT&CK T1041)](#exfiltration-over-c2-channel-(att&ck-t1041))
 - [Network Service Discovery (ATT&CK T1046)](#network-service-discovery-(att&ck-t1046))
 - [Suspicious Remote Process Creation via WMIC](#suspicious-remote-process-creation-via-wmic)
-- [Ultra-Pro High-Fidelity Alternative Protocol Exfiltration (T1048)](#ultra-pro-high-fidelity-alternative-protocol-exfiltration-(t1048))
-- [Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001)](#ultra-pro-high-fidelity-symmetric-encrypted-exfiltration-(t1048001))
-- [Ultra-Pro High-Fidelity Asymmetric Encrypted Exfiltration (T1048.002)](#ultra-pro-high-fidelity-asymmetric-encrypted-exfiltration-(t1048002))
-- [Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003)](#ultra-pro-high-fidelity-unencrypted-protocol-exfil-(t1048003))
+- [Alternative Protocol Exfiltration (ATT&CK T1048)](#alternative-protocol-exfiltration-(att&ck-t1048))
+- [Symmetric Encrypted Exfiltration (ATT&CK T1048.001)](#symmetric-encrypted-exfiltration-(att&ck-t1048001))
+- [Asymmetric Encrypted Exfiltration (ATT&CK T1048.002)](#asymmetric-encrypted-exfiltration-(att&ck-t1048002))
+- [Unencrypted Protocol Exfiltration (ATT&CK T1048.003)](#unencrypted-protocol-exfiltration-(att&ck-t1048003))
 - [System Network Connections Discovery (ATT&CK T1049)](#system-network-connections-discovery-(att&ck-t1049))
 - [Physical Medium Exfiltration (ATT&CK T1052)](#physical-medium-exfiltration-(att&ck-t1052))
 - [USB Exfiltration Detection (ATT&CK T1052.001)](#usb-exfiltration-detection-(att&ck-t1052001))
@@ -1930,16 +1930,14 @@ output redirection or mass archival from non-standard process contexts.
 
 
 ---
-## Ultra-Pro High-Fidelity Network Sniffing Detection (T1040)
+## Network Sniffing Detection (ATT&CK T1040)
 - **ID:** `T1040.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [PKTMON.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized network sniffing by monitoring for administrative tools 
-used in capture mode, driver installation for packet interception, 
-and offensive sniffing frameworks running from untrusted paths.
+- **Leírás:** Detects unauthorized packet capture and network sniffing activity by identifying native Windows capture utilities, third-party sniffing frameworks, packet interception driver installation attempts, and execution from suspicious user-space locations. Focuses on capture-mode invocation rather than mere tool presence to reduce false positives.
 
 
 #### 🚨 Response Playbook

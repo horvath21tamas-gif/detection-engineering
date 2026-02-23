@@ -82,14 +82,14 @@
 - [Ultra-Pro RC-Skript und Init.d-Persistenz (T1037.004)](#ultra-pro-rc-skript-und-initd-persistenz-(t1037004))
 - [Persistenz von Ultra-Pro macOS-Startelementen (T1037.005)](#persistenz-von-ultra-pro-macos-startelementen-(t1037005))
 - [Ultra-Pro High-Fidelity Network Share Discovery (T1039)](#ultra-pro-high-fidelity-network-share-discovery-(t1039))
-- [Ultraprofessionelle High-Fidelity-Netzwerk-Sniffing-Erkennung (T1040)](#ultraprofessionelle-high-fidelity-netzwerk-sniffing-erkennung-(t1040))
-- [Ultra-Pro High-Fidelity-Exfiltration über C2-Kanal (T1041)](#ultra-pro-high-fidelity-exfiltration-über-c2-kanal-(t1041))
+- [Netzwerk-Sniffing-Erkennung (ATT&CK T1040)](#netzwerk-sniffing-erkennung-(att&ck-t1040))
+- [Exfiltration über C2-Kanal (ATT&CK T1041)](#exfiltration-über-c2-kanal-(att&ck-t1041))
 - [Netzwerkdiensterkennung (ATT&CK T1046)](#netzwerkdiensterkennung-(att&ck-t1046))
 - [Verdächtige Remote-Prozesserstellung über WMIC](#verdächtige-remote-prozesserstellung-über-wmic)
-- [Ultra-Pro High-Fidelity Alternative Protocol Exfiltration (T1048)](#ultra-pro-high-fidelity-alternative-protocol-exfiltration-(t1048))
-- [Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001)](#ultra-pro-high-fidelity-symmetric-encrypted-exfiltration-(t1048001))
-- [Ultra-Pro High-Fidelity Asymmetrische verschlüsselte Exfiltration (T1048.002)](#ultra-pro-high-fidelity-asymmetrische-verschlüsselte-exfiltration-(t1048002))
-- [Ultra-Pro High-Fidelity unverschlüsseltes Protokoll Exfil (T1048.003)](#ultra-pro-high-fidelity-unverschlüsseltes-protokoll-exfil-(t1048003))
+- [Alternative Protokoll-Exfiltration (ATT&CK T1048)](#alternative-protokoll-exfiltration-(att&ck-t1048))
+- [Symmetrische verschlüsselte Exfiltration (ATT&CK T1048.001)](#symmetrische-verschlüsselte-exfiltration-(att&ck-t1048001))
+- [Asymmetrische verschlüsselte Exfiltration (ATT&CK T1048.002)](#asymmetrische-verschlüsselte-exfiltration-(att&ck-t1048002))
+- [Unverschlüsselte Protokoll-Exfiltration (ATT&CK T1048.003)](#unverschlüsselte-protokoll-exfiltration-(att&ck-t1048003))
 - [Erkennung von Systemnetzwerkverbindungen (ATT&CK T1049)](#erkennung-von-systemnetzwerkverbindungen-(att&ck-t1049))
 - [Physikalische Medienexfiltration (ATT&CK T1052)](#physikalische-medienexfiltration-(att&ck-t1052))
 - [USB-Exfiltrationserkennung (ATT&CK T1052.001)](#usb-exfiltrationserkennung-(att&ck-t1052001))
@@ -1859,16 +1859,14 @@ Ausgabeumleitung oder Massenarchivierung aus nicht standardmäßigen Prozesskont
 
 
 ---
-## Ultraprofessionelle High-Fidelity-Netzwerk-Sniffing-Erkennung (T1040)
+## Netzwerk-Sniffing-Erkennung (ATT&CK T1040)
 - **ID:** `T1040.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [PKTMON.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt unbefugtes Netzwerk-Sniffing durch Überwachung auf Verwaltungstools
-Verwendung im Capture-Modus, Treiberinstallation zum Abfangen von Paketen,
-und anstößige Sniffing-Frameworks, die von nicht vertrauenswürdigen Pfaden ausgehen.
+- **Beschreibung:** Erkennt nicht autorisierte Paketerfassungs- und Netzwerk-Sniffing-Aktivitäten, indem native Windows-Erfassungsdienstprogramme, Sniffing-Frameworks von Drittanbietern, Installationsversuche von Paketabfangtreibern und die Ausführung von verdächtigen Speicherorten im Benutzerbereich identifiziert werden.Konzentriert sich auf den Aufruf im Erfassungsmodus und nicht auf die bloße Anwesenheit von Tools, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

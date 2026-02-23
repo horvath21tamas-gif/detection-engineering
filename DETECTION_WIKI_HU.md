@@ -82,14 +82,14 @@
 - [Ultra-Pro RC Script és Init.d Persistence (T1037.004)](#ultra-pro-rc-script-és-initd-persistence-(t1037004))
 - [Ultra-Pro macOS indítási elemek tartóssága (T1037.005)](#ultra-pro-macos-indítási-elemek-tartóssága-(t1037005))
 - [Ultra-Pro High-Fidelity Network Share Discovery (T1039)](#ultra-pro-high-fidelity-network-share-discovery-(t1039))
-- [Ultra-Pro High-Fidelity hálózati szippantásérzékelés (T1040)](#ultra-pro-high-fidelity-hálózati-szippantásérzékelés-(t1040))
-- [Ultra-Pro High-Fidelity szűrés C2 csatornán keresztül (T1041)](#ultra-pro-high-fidelity-szűrés-c2-csatornán-keresztül-(t1041))
+- [Hálózati szippantásérzékelés (ATT&CK T1040)](#hálózati-szippantásérzékelés-(att&ck-t1040))
+- [Kiszűrés a C2 csatornán keresztül (ATT&CK T1041)](#kiszűrés-a-c2-csatornán-keresztül-(att&ck-t1041))
 - [Hálózati szolgáltatáskeresés (ATT&CK T1046)](#hálózati-szolgáltatáskeresés-(att&ck-t1046))
 - [Gyanús távoli folyamat létrehozása a WMIC-en keresztül](#gyanús-távoli-folyamat-létrehozása-a-wmic-en-keresztül)
-- [Ultra-Pro High-Fidelity Alternatív Protocol Exfiltration (T1048)](#ultra-pro-high-fidelity-alternatív-protocol-exfiltration-(t1048))
-- [Ultra-Pro High-Fidelity szimmetrikus titkosított kiszűrés (T1048.001)](#ultra-pro-high-fidelity-szimmetrikus-titkosított-kiszűrés-(t1048001))
-- [Ultra-Pro High-Fidelity aszimmetrikus titkosított kiszűrés (T1048.002)](#ultra-pro-high-fidelity-aszimmetrikus-titkosított-kiszűrés-(t1048002))
-- [Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003)](#ultra-pro-high-fidelity-unencrypted-protocol-exfil-(t1048003))
+- [Alternatív protokoll-szűrés (ATT&CK T1048)](#alternatív-protokoll-szűrés-(att&ck-t1048))
+- [Szimmetrikus titkosított kiszűrés (ATT&CK T1048.001)](#szimmetrikus-titkosított-kiszűrés-(att&ck-t1048001))
+- [Aszimmetrikus titkosított kiszűrés (ATT&CK T1048.002)](#aszimmetrikus-titkosított-kiszűrés-(att&ck-t1048002))
+- [Titkosítatlan protokoll kiszűrése (ATT&CK T1048.003)](#titkosítatlan-protokoll-kiszűrése-(att&ck-t1048003))
 - [Rendszerhálózati kapcsolatok felderítése (ATT&CK T1049)](#rendszerhálózati-kapcsolatok-felderítése-(att&ck-t1049))
 - [Fizikai közeg kiszűrése (ATT&CK T1052)](#fizikai-közeg-kiszűrése-(att&ck-t1052))
 - [USB kiszűrésérzékelés (ATT&CK T1052.001)](#usb-kiszűrésérzékelés-(att&ck-t1052001))
@@ -1859,16 +1859,14 @@ kimenet átirányítása vagy tömeges archiválása nem szabványos folyamatkö
 
 
 ---
-## Ultra-Pro High-Fidelity hálózati szippantásérzékelés (T1040)
+## Hálózati szippantásérzékelés (ATT&CK T1040)
 - **ID:** `T1040.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [PKTMON.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Az adminisztrációs eszközök figyelésével észleli a jogosulatlan hálózati szippantást
-rögzítési módban használatos, illesztőprogram telepítése csomagelfogáshoz,
-és a nem megbízható utakon futó támadó szippantó keretrendszerek.
+- **Leírás:** Érzékeli a jogosulatlan csomagrögzítési és hálózati szippantási tevékenységet a natív Windows rögzítő segédprogramok, harmadik féltől származó szippantási keretrendszerek, csomagelfogó illesztőprogram-telepítési kísérletek és gyanús felhasználói helyekről történő végrehajtás azonosításával.A téves pozitívumok csökkentése érdekében a rögzítési módú meghívásra összpontosít, nem pedig puszta eszköz jelenlétére.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1932,7 +1930,7 @@ rögzítési módban használatos, illesztőprogram telepítése csomagelfogásh
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [SSH.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az alternatív vagy nem szabványos protokollokon (ICMP, SSH-alagút, TCP-relék, DNS-alagútkezelő segédprogramok) keresztül történő esetleges adatszivárgást az alagútjelzők, a rendellenes ICMP hasznos terhelések és a gyanús felhasználói térútvonalakról végrehajtott hálózatképes LoLBin azonosításával.A nem interaktív felhasználásra és a jogosultságokkal ellentmondó végrehajtási környezetre összpontosít.
+- **Leírás:** Érzékeli az alternatív vagy nem szabványos protokollokon (ICMP, SSH-alagút, TCP-relék, DNS-alagútkezelő segédprogramok) keresztül történő esetleges adatszivárgást az alagútjelzők, a rendellenes ICMP-rakományméretek és a gyanús felhasználói térútvonalakról végrehajtott hálózatképes LoLBin-ek azonosításával.A nem interaktív felhasználásra és a jogosultságokkal ellentmondó végrehajtási környezetre összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1964,7 +1962,7 @@ rögzítési módban használatos, illesztőprogram telepítése csomagelfogásh
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Az aszimmetrikus titkosított protokollokon (HTTPS) keresztül észleli a lehetséges adatszivárgást azáltal, hogy azonosítja a parancssori feltöltési viselkedést (curl, wget, PowerShell, BITS, certutil) gyanús végrehajtási környezettel vagy szülőfolyamat-sorral kombinálva.Az explicit feltöltési jelzőkre, a nem biztonságos TLS-használatra és a felhasználói tér végrehajtási útvonalaira összpontosít.
+- **Leírás:** Az aszimmetrikus titkosított protokollokon (HTTPS) keresztül észleli a lehetséges adatszivárgást azáltal, hogy azonosítja a parancssori feltöltési viselkedést (curl, wget, PowerShell, BITS, certutil) a gyanús végrehajtási környezettel vagy szülőfolyamat vonallal kombinálva.Az explicit feltöltési jelzőkre, a nem biztonságos TLS-használatra és a felhasználói tér végrehajtási útvonalaira összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -2012,7 +2010,7 @@ rögzítési módban használatos, illesztőprogram telepítése csomagelfogásh
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A nem interaktív másolási, áthelyezési vagy archiválási parancsok figyelésével érzékeli a célzott adatszivárgást a fizikai adathordozóra (USB/cserélhető lemezekre).A rejtett parancssori zászlókra, a gyanús szülőfolyamatokra összpontosít, és kizárja a jogszerű Windows Intéző és adminisztrátori műveleteket.
+- **Leírás:** A nem interaktív másolási, áthelyezési vagy archiválási parancsok figyelésével észleli a célzott adatszivárgást a fizikai adathordozóra (USB/cserélhető lemezekre).A rejtett parancssori zászlókra, a gyanús szülőfolyamatokra összpontosít, és kizárja a jogszerű Windows Intéző és adminisztrátori műveleteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -2135,14 +2133,14 @@ triggerek és gyanús végrehajtási terhelések (zavarás, hálózati eszközö
 
 
 ---
-## Folyamatos befecskendezés észlelése (ATT&CK T1055)
+## Befecskendezési folyamat észlelése (ATT&CK T1055)
 - **ID:** `T1055.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [TEAMS.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a fejlett folyamatbefecskendezési technikákat (DLL-befecskendezés, PE-befecskendezés, száleltérítés, APC, TLS, EWM, hollowing) a magas kockázatú GrantedAccess-maszkok, a gyanús forrás-cél folyamatkapcsolatok és a nem támogatott memóriarégiók figyelésével.Megbízható rendszerfolyamatok és AV-komponensek kizárva a hamis pozitívumok csökkentése érdekében.
+- **Leírás:** Érzékeli a fejlett folyamatbefecskendezési technikákat (DLL-befecskendezés, PE-befecskendezés, száleltérítés, APC, TLS, EWM, Hollowing) a magas kockázatú GrantedAccess-maszkok, a gyanús forrás-cél folyamatkapcsolatok és a nem támogatott memóriarégiók figyelésével.Megbízható rendszerfolyamatok és AV-komponensek kizárva a téves pozitív eredmények csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-23 11:18:07`
+**Utolsó frissítés:** `2026-02-23 12:07:00`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -87,14 +87,14 @@
 | T1037.004 | CRITICAL | Ultra-Pro RC Script and Init.d Persistence (T1037.004) |
 | T1037.005 | CRITICAL | Ultra-Pro macOS Startup Items Persistence (T1037.005) |
 | T1039 | CRITICAL | Ultra-Pro High-Fidelity Network Share Discovery (T1039) |
-| T1040 | HIGH | Ultra-Pro High-Fidelity Network Sniffing Detection (T1040) |
-| T1041 | CRITICAL | Ultra-Pro High-Fidelity Exfiltration Over C2 Channel (T1041) |
+| T1040 | HIGH | Network Sniffing Detection (ATT&CK T1040) |
+| T1041 | CRITICAL | Exfiltration Over C2 Channel (ATT&CK T1041) |
 | T1046 | HIGH | Network Service Discovery (ATT&CK T1046) |
 | T1047 | HIGH | Suspicious Remote Process Creation via WMIC |
-| T1048 | CRITICAL | Ultra-Pro High-Fidelity Alternative Protocol Exfiltration (T1048) |
-| T1048.001 | CRITICAL | Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001) |
-| T1048.002 | CRITICAL | Ultra-Pro High-Fidelity Asymmetric Encrypted Exfiltration (T1048.002) |
-| T1048.003 | CRITICAL | Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003) |
+| T1048 | CRITICAL | Alternative Protocol Exfiltration (ATT&CK T1048) |
+| T1048.001 | CRITICAL | Symmetric Encrypted Exfiltration (ATT&CK T1048.001) |
+| T1048.002 | CRITICAL | Asymmetric Encrypted Exfiltration (ATT&CK T1048.002) |
+| T1048.003 | CRITICAL | Unencrypted Protocol Exfiltration (ATT&CK T1048.003) |
 | T1049 | HIGH | Port Knocking or Raw Socket Listener Deployment (T1205.001), Traffic Signaling and Port Knocking Activity (T1205), System Network Connections Discovery (ATT&CK T1049) |
 | T1052 | CRITICAL | Physical Medium Exfiltration (ATT&CK T1052) |
 | T1052.001 | CRITICAL | USB Exfiltration Detection (ATT&CK T1052.001) |

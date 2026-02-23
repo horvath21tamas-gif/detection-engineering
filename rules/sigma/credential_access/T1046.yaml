@@ -1,59 +1,105 @@
-title: Ultra-Pro High-Fidelity Network Service Discovery (T1046)
+title: Network Service Discovery (ATT&CK T1046)
 id: dfb67413-d4b3-497f-8360-1faecf3bebd2
 status: stable
-description: |
-    Detects systematic network service discovery and internal port scanning. 
-    Focuses on loop-based scanning patterns in PowerShell, CMD, and specialized 
-    binaries originating from non-IT admin contexts.
+description: >
+  Detects systematic internal network service discovery and port scanning
+  by identifying loop-based enumeration patterns, high-risk port targeting,
+  and scanning utilities executed from non-administrative or suspicious
+  parent contexts. Focuses on scripted lateral reconnaissance activity
+  rather than single interactive commands.
 author: hota05
-date: 2026-02-04
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1046/
 tags:
-    - attack.discovery
-    - attack.t1046
+  - attack.discovery
+  - attack.t1046
+  - attack.lateral_movement
+  - attack.host
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\netstat.exe'
-            - '\nmap.exe'
-            - '\portqry.exe'
-            - '\telnet.exe'
-            - '\powershell.exe'
-            - '\pwsh.exe'
+  selection_tools:
+    Image|endswith:
+      - '\nmap.exe'
+      - '\portqry.exe'
+      - '\telnet.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\netstat.exe'
 
-    selection_scripts:
-        CommandLine|contains:
-            - 'foreach'              
-            - 'for /L'               
-            - '1..254'               
-            - 'Test-NetConnection'
-            - 'System.Net.Sockets.TcpClient' 
+  selection_loop_patterns:
+    CommandLine|contains:
+      - 'foreach'
+      - 'ForEach-Object'
+      - 'for /L'
+      - '1..254'
+      - '1..255'
+      - 'Test-NetConnection'
+      - 'System.Net.Sockets.TcpClient'
+      - 'New-Object Net.Sockets.TcpClient'
 
-    selection_ports:
-        CommandLine|contains:
-            - '-Port 445'            
-            - '-Port 3389'           
-            - '-Port 5985'           
-            - '-Port 22'            
-            - '-Port 80'             
+  selection_port_targets:
+    CommandLine|contains:
+      - '-Port 445'
+      - '-Port 3389'
+      - '-Port 5985'
+      - '-Port 22'
+      - '-Port 80'
+      - '-p 445'
+      - '-p 3389'
+      - '-p 22'
+      - '-p 1-1024'
+      - '-p-'
 
-    selection_suspicious_lineage:
-        ParentImage|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\wsmprovhost.exe'     
-            - '\winword.exe'         
-            - '\httpd.exe'           
-        IntegrityLevel: 'Medium'    
+  selection_subnet_targeting:
+    CommandLine|re: '(?i).*(10\.|172\.16\.|192\.168\.).*(\/24|\/16).*'
 
-    filter_legit_automation:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - Image|contains:
-            - '\Program Files\Zabbix\'
-            - '\Program Files\Tanium\'
-            - '\Windows\System32\wbem\wmiprvse.exe' 
+  selection_suspicious_lineage:
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\wsmprovhost.exe'
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\httpd.exe'
+    IntegrityLevel: 'Medium'
 
-    condition: selection_tools and (selection_scripts or (selection_ports and selection_suspicious_lineage)) and not filter_legit_automation
+  selection_user_context:
+    username|contains: '\'
+  filter_system_account:
+    username: 'NT AUTHORITY\SYSTEM'
+
+  filter_legitimate_monitoring:
+    - Image|contains:
+        - '\Program Files\Zabbix\'
+        - '\Program Files\Tanium\'
+        - '\Program Files\Nessus\'
+    - ParentImage|endswith:
+        - '\services.exe'
+        - '\svchost.exe'
+    - CommandLine|contains:
+        - 'healthcheck'
+        - 'monitor'
+
+  condition:
+    selection_tools
+    and (selection_loop_patterns
+          or selection_subnet_targeting
+          or (selection_port_targets and selection_suspicious_lineage))
+    and selection_user_context
+    and not filter_system_account
+    and not filter_legitimate_monitoring
+
+falsepositives:
+  - Authorized vulnerability scanning (Nessus, internal scanners)
+  - IT administrators performing manual diagnostics
+  - Monitoring agents executing port checks
+  - DevOps network troubleshooting scripts
+
 level: high

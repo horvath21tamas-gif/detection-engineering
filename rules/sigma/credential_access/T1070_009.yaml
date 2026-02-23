@@ -1,64 +1,66 @@
-title: Ultra-Pro High-Fidelity Persistence Artifact Removal (T1070.009)
+title: Persistence Artifact Removal (T1070.009)
 id: 101917e8-9bd9-486e-8c42-87131e24981c
 status: stable
 description: |
-    Detects the systematic removal of persistence mechanisms (Scheduled Tasks, Services, WMI) 
-    focusing on forced deletion patterns and suspicious process lineages. 
-    Filters out common software update cycles and MSI installer noise.
+  Detects the systematic removal of persistence mechanisms, including Scheduled Tasks, 
+  Services, and WMI objects, by monitoring forced deletion patterns and suspicious 
+  process lineages. Filters out common software update cycles, MSI installer activity, 
+  and known trusted maintenance processes.
 author: hota05
 date: 2026-02-03
 tags:
-    - attack.defense_evasion
-    - attack.t1070.009
+  - attack.defense_evasion
+  - attack.t1070.009
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
 detection:
-    selection_schtasks_force_delete:
-        Image|endswith: '\schtasks.exe'
-        CommandLine|contains|all:
-            - ' /delete '
-            - ' /f'
-        CommandLine|contains:
-            - ' /tn ' 
+  selection_schtasks_force_delete:
+    Image|endswith: '\schtasks.exe'
+    CommandLine|contains:
+      - ' /delete '
+      - ' /f'
+    CommandLine|contains: ' /tn '
 
-    selection_sc_delete:
-        Image|endswith: '\sc.exe'
-        CommandLine|contains: ' delete '
+  selection_sc_delete:
+    Image|endswith: '\sc.exe'
+    CommandLine|contains: ' delete '
 
-    selection_powershell_cleanup:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-        CommandLine|contains:
-            - 'Unregister-ScheduledTask'
-            - 'Remove-Service'
-            - 'Remove-WmiObject' 
-        CommandLine|contains:
-            - ' -Confirm:$false'
-            - ' -Force'
+  selection_powershell_cleanup:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+    CommandLine|contains:
+      - 'Unregister-ScheduledTask'
+      - 'Remove-Service'
+      - 'Remove-WmiObject'
+    CommandLine|contains:
+      - ' -Confirm:$false'
+      - ' -Force'
 
-    selection_suspicious_origin:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\w3wp.exe'     
-            - '\sqlservr.exe' 
-            - '\java.exe'
-            - '\php-cgi.exe'
+  selection_suspicious_origin:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\w3wp.exe'
+      - '\sqlservr.exe'
+      - '\java.exe'
+      - '\php-cgi.exe'
 
-    filter_trusted_updates:
-        - ParentImage|endswith:
-            - '\msiexec.exe' 
-            - '\GoogleUpdate.exe'
-            - '\MicrosoftEdgeUpdate.exe'
-        - CommandLine|contains:
-            - 'Windows\System32\SystemReset.exe'
-            - 'Telemetry'
-        - username: 'NT AUTHORITY\SYSTEM'
-          ParentImage|endswith: '\services.exe'
+  filter_trusted_updates:
+    - ParentImage|endswith:
+        - '\msiexec.exe'
+        - '\GoogleUpdate.exe'
+        - '\MicrosoftEdgeUpdate.exe'
+    - CommandLine|contains:
+        - 'Windows\System32\SystemReset.exe'
+        - 'Telemetry'
+    - username: 'NT AUTHORITY\SYSTEM'
+      ParentImage|endswith: '\services.exe'
 
-    condition: (selection_schtasks_force_delete or selection_sc_delete or selection_powershell_cleanup) and (selection_suspicious_origin or not filter_trusted_updates)
+  condition: 
+    (selection_schtasks_force_delete or selection_sc_delete or selection_powershell_cleanup) 
+    and (selection_suspicious_origin and not filter_trusted_updates)
 level: high

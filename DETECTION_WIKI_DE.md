@@ -187,7 +187,7 @@
 - [Ultra-Pro High-Fidelity Multi-Stage C2 (T1104)](#ultra-pro-high-fidelity-multi-stage-c2-(t1104))
 - [Verdächtige Verwendung integrierter Windows-Tools zum Herunterladen von Dateien und zur Codeausführung](#verdächtige-verwendung-integrierter-windows-tools-zum-herunterladen-von-dateien-und-zur-codeausführung)
 - [Missbrauch von nativen High-Fidelity-APIs über LOLBins](#missbrauch-von-nativen-high-fidelity-apis-über-lolbins)
-- [Ultra-Pro High-Fidelity Brute Force & Tooling (T1110)](#ultra-pro-high-fidelity-brute-force-&-tooling-(t1110))
+- [Brute Force & Werkzeug (T1110)](#brute-force-&-werkzeug-(t1110))
 - [Mehrere fehlgeschlagene Anmeldeversuche für einen einzelnen Benutzer (mögliches Erraten des Passworts)](#mehrere-fehlgeschlagene-anmeldeversuche-für-einen-einzelnen-benutzer-(mögliches-erraten-des-passworts))
 - [Ultra-Pro High-Fidelity-Zugangsdatenexport und -knacken (T1110.002)](#ultra-pro-high-fidelity-zugangsdatenexport-und--knacken-(t1110002))
 - [Ultra-Pro High-Fidelity-Passwort-Sprühen (T1110.003)](#ultra-pro-high-fidelity-passwort-sprühen-(t1110003))
@@ -3657,7 +3657,7 @@ werden von nicht vertrauenswürdigen übergeordneten Prozessen missbraucht, um e
 
 
 ---
-## Ultra-Pro High-Fidelity Brute Force & Tooling (T1110)
+## Brute Force & Werkzeug (T1110)
 - **ID:** `T1110.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

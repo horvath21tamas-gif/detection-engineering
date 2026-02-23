@@ -192,7 +192,7 @@
 | T1104 | CRITICAL | Ultra-Pro High-Fidelity Multi-Stage C2 (T1104) |
 | T1105 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Use of Built-in Windows Tools for File Download and Code Execution |
 | T1106 | CRITICAL | High-Fidelity Native API Abuse via LOLBins |
-| T1110 | HIGH | Ultra-Pro High-Fidelity Brute Force & Tooling (T1110) |
+| T1110 | HIGH | Brute Force & Tooling (T1110) |
 | T1110.001 | MEDIUM | Multiple Failed Login Attempts for Single User (Possible Password Guessing) |
 | T1110.002 | CRITICAL | Ultra-Pro High-Fidelity Credential Export & Cracking (T1110.002) |
 | T1110.003 | HIGH | Ultra-Pro High-Fidelity Password Spraying (T1110.003) |

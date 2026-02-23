@@ -187,7 +187,7 @@
 - [Ultra-Pro High-Fidelity Multi-Stage C2 (T1104)](#ultra-pro-high-fidelity-multi-stage-c2-(t1104))
 - [Suspicious Use of Built-in Windows Tools for File Download and Code Execution](#suspicious-use-of-built-in-windows-tools-for-file-download-and-code-execution)
 - [High-Fidelity Native API Abuse via LOLBins](#high-fidelity-native-api-abuse-via-lolbins)
-- [Ultra-Pro High-Fidelity Brute Force & Tooling (T1110)](#ultra-pro-high-fidelity-brute-force-&-tooling-(t1110))
+- [Brute Force & Tooling (T1110)](#brute-force-&-tooling-(t1110))
 - [Multiple Failed Login Attempts for Single User (Possible Password Guessing)](#multiple-failed-login-attempts-for-single-user-(possible-password-guessing))
 - [Ultra-Pro High-Fidelity Credential Export & Cracking (T1110.002)](#ultra-pro-high-fidelity-credential-export-&-cracking-(t1110002))
 - [Ultra-Pro High-Fidelity Password Spraying (T1110.003)](#ultra-pro-high-fidelity-password-spraying-(t1110003))
@@ -3833,7 +3833,7 @@ are abused by untrusted parent processes to perform memory injection.
 
 
 ---
-## Ultra-Pro High-Fidelity Brute Force & Tooling (T1110)
+## Brute Force & Tooling (T1110)
 - **ID:** `T1110.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

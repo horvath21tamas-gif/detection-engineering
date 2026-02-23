@@ -187,7 +187,7 @@
 - [Ultra-Pro High-Fidelity többlépcsős C2 (T1104)](#ultra-pro-high-fidelity-többlépcsős-c2-(t1104))
 - [Beépített Windows-eszközök gyanús használata fájlok letöltéséhez és kódvégrehajtáshoz](#beépített-windows-eszközök-gyanús-használata-fájlok-letöltéséhez-és-kódvégrehajtáshoz)
 - [High-Fidelity Native API visszaélés LOLBins-en keresztül](#high-fidelity-native-api-visszaélés-lolbins-en-keresztül)
-- [Ultra-Pro High-Fidelity Brute Force & Tooling (T1110)](#ultra-pro-high-fidelity-brute-force-&-tooling-(t1110))
+- [Brute Force & Tooling (T1110)](#brute-force-&-tooling-(t1110))
 - [Egyetlen felhasználó többszöri sikertelen bejelentkezési kísérlete (lehetséges jelszókitalálás)](#egyetlen-felhasználó-többszöri-sikertelen-bejelentkezési-kísérlete-(lehetséges-jelszókitalálás))
 - [Ultra-Pro High-Fidelity hitelesítő adatok exportálása és feltörése (T1110.002)](#ultra-pro-high-fidelity-hitelesítő-adatok-exportálása-és-feltörése-(t1110002))
 - [Ultra-Pro nagy pontosságú jelszószóró (T1110.003)](#ultra-pro-nagy-pontosságú-jelszószóró-(t1110003))
@@ -3657,7 +3657,7 @@ nem megbízható szülői folyamatok visszaélnek memóriainjektálás végrehaj
 
 
 ---
-## Ultra-Pro High-Fidelity Brute Force & Tooling (T1110)
+## Brute Force & Tooling (T1110)
 - **ID:** `T1110.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

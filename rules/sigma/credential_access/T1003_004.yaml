@@ -1,64 +1,72 @@
-title: Ultra-Pro High-Fidelity LSA Secrets & Security Hive Theft (T1003.004)
+title: LSA Secrets & Security Hive Theft (T1003.004)
 id: 66caa906-5490-4f50-9bd3-c1a15efd65f7
 status: stable
 description: |
-    Detects unauthorized extraction of LSA Secrets from the HKLM\SECURITY registry hive. 
-    Focuses on advanced export patterns, Impacket-style remote dumps, and 
-    credential access via untrusted parent processes.
+  Detects unauthorized extraction of LSA Secrets from the HKLM\SECURITY registry hive.
+  Focuses on:
+  - Advanced registry export patterns (reg.exe, PowerShell)
+  - Impacket-style remote or local dumps
+  - Credential access via untrusted or suspicious parent processes
 author: hota05
 date: 2026-02-04
 tags:
-    - attack.credential_access
-    - attack.t1003.004
+  - attack.credential_access
+  - attack.t1003.004
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_reg_export:
-        - Image|endswith: '\reg.exe'
-          CommandLine|contains: ' save '
-          CommandLine|contains: 'hklm\security'
-        - Image|endswith: '\powershell.exe'
-          CommandLine|contains:
-              - 'reg '
-              - 'Get-ItemProperty'
-          CommandLine|contains:
-              - 'SECURITY'
+  selection_reg_export:
+    - Image|endswith: '\reg.exe'
+      CommandLine|contains:
+        - ' save '
+        - 'hklm\security'
+    - Image|endswith: '\powershell.exe'
+      CommandLine|contains:
+        - 'reg '
+        - 'Get-ItemProperty'
+        - 'SECURITY'
 
-    selection_offensive_logic:
-        CommandLine|contains:
-            - 'lsadump'       
-            - 'secretsdump'   
-            - 'dump-lsa'      
-            - 'Get-LSASecrets' 
-            - 'cachedump'      
+  selection_offensive_logic:
+    CommandLine|contains:
+      - 'lsadump'
+      - 'secretsdump'
+      - 'dump-lsa'
+      - 'Get-LSASecrets'
+      - 'cachedump'
 
-    selection_output_anomaly:
-        CommandLine|contains:
-            - '.tmp'
-            - '.log'
-            - '.txt'
-            - 'C:\Users\Public\'
-            - 'C:\Windows\Temp\'
-            - 'C:\PerfLogs\'
+  selection_output_anomaly:
+    CommandLine|contains:
+      - '.tmp'
+      - '.log'
+      - '.txt'
+      - 'C:\Users\Public\'
+      - 'C:\Windows\Temp\'
+      - 'C:\PerfLogs\'
 
-    selection_untrusted_parent:
-        ParentImage|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\wsmprovhost.exe' 
-            - '\psexesvc.exe'    
-            - '\wmiprvse.exe'    
-            - '\httpd.exe'       
+  selection_untrusted_parent:
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\wsmprovhost.exe'
+      - '\psexesvc.exe'
+      - '\wmiprvse.exe'
+      - '\httpd.exe'
 
-    filter_legit_os_maintenance:
-        username: 'NT AUTHORITY\SYSTEM'
-        ParentImage|endswith:
-            - '\services.exe'
-            - '\msiexec.exe'
-        Image|contains:
-            - '\Program Files\'
-            - '\Program Files (x86)\'
+  filter_legit_os_maintenance:
+    username: 'NT AUTHORITY\SYSTEM'
+    ParentImage|endswith:
+      - '\services.exe'
+      - '\msiexec.exe'
+    Image|contains:
+      - '\Program Files\'
+      - '\Program Files (x86)\'
 
-    condition: (selection_reg_export or selection_offensive_logic) and (selection_untrusted_parent or selection_output_anomaly) and not filter_legit_os_maintenance
+  condition: >
+    (selection_reg_export or selection_offensive_logic)
+    and (selection_untrusted_parent or selection_output_anomaly)
+    and not filter_legit_os_maintenance
+
 level: critical

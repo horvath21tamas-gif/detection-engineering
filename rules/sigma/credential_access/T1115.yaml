@@ -1,55 +1,59 @@
-title: Ultra-Pro High-Fidelity Clipboard Data Spying (T1115)
+title: Clipboard Data Spying (T1115)
 id: 8004a269-c8ac-4eb6-9cc6-0dc71168c3fd
 status: stable
 description: |
-    Detects automated clipboard monitoring and theft by identifying persistent 
-    polling loops, unmanaged assembly loads for clipboard access, and 
-    suspicious process lineages (Webshells, Office macros) accessing the API.
+  Detects clipboard monitoring and data exfiltration activities by identifying 
+  persistent polling loops, unauthorized assembly loads for clipboard access, 
+  and suspicious parent-child process relationships (e.g., webshells, Office macros) 
+  interacting with the clipboard API.
 author: hota05
 date: 2026-02-05
 tags:
-    - attack.collection
-    - attack.t1115
+  - attack.collection
+  - attack.t1115
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_api_calls:
-        CommandLine|contains:
-            - '[Windows.Forms.Clipboard]::GetText'
-            - '[System.Windows.Clipboard]::GetText'
-            - 'Add-Type -AssemblyName System.Windows.Forms'
-            - 'user32.dll,OpenClipboard'
-            - 'user32.dll,GetClipboardData'
+  selection_api_calls:
+    CommandLine|contains:
+      - '[Windows.Forms.Clipboard]::GetText'
+      - '[System.Windows.Clipboard]::GetText'
+      - 'Add-Type -AssemblyName System.Windows.Forms'
+      - 'user32.dll,OpenClipboard'
+      - 'user32.dll,GetClipboardData'
 
-    selection_loop:
-        CommandLine|contains:
-            - 'while($true)'
-            - 'while (1)'
-            - 'Start-Sleep'           
-            - 'do {'
+  selection_loop:
+    CommandLine|contains:
+      - 'while($true)'
+      - 'while (1)'
+      - 'Start-Sleep'
+      - 'do {'
 
-    selection_context:
-        ParentImage|endswith:
-            - '\w3wp.exe'            
-            - '\winword.exe'         
-            - '\excel.exe'
-            - '\rundll32.exe'         
-        IntegrityLevel: 'Medium'       
+  selection_context:
+    ParentImage|endswith:
+      - '\w3wp.exe'          
+      - '\winword.exe'       
+      - '\excel.exe'         
+      - '\rundll32.exe'      
+    IntegrityLevel: 'Medium'  
 
-    selection_tools:
-        CommandLine|contains:
-            - 'clip.exe'              
-            - 'Get-Clipboard -Raw'
+  selection_tools:
+    CommandLine|contains:
+      - 'clip.exe'              
+      - 'Get-Clipboard -Raw'     
 
-    filter_legit_apps:
-        - Image|contains:
-            - 'C:\Program Files\'      
-            - 'C:\Program Files (x86)\'
-        - ParentImage|endswith:
-            - '\explorer.exe'       
-            - '\taskhostw.exe'      
-        - username: 'NT AUTHORITY\SYSTEM'
+  filter_legit_apps:
+    - Image|contains:
+        - 'C:\Program Files\'
+        - 'C:\Program Files (x86)\'
+    - ParentImage|endswith:
+        - '\explorer.exe'        
+        - '\taskhostw.exe'        
+    - username: 'NT AUTHORITY\SYSTEM'  
 
-    condition: (selection_api_calls and selection_loop) or (selection_context and selection_api_calls) and not filter_legit_apps
+  condition: |
+    (selection_api_calls and selection_loop) or 
+    (selection_context and selection_api_calls) and not filter_legit_apps
+
 level: critical

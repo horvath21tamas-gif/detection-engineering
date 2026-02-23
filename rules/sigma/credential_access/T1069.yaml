@@ -1,63 +1,79 @@
-title: Ultra-Pro High-Fidelity Permission Groups Discovery (T1069)
+title: Permission Groups Discovery (ATT&CK T1069)
 id: e736094b-fb54-464f-a0cb-3f17dbf5fadb
 status: stable
-description: |
-    Detects systematic discovery of local or domain permission groups. 
-    Focuses on reconnaissance patterns used to identify privileged accounts 
-    while filtering out legitimate system/inventory noise through integrity and parent analysis.
+description: >
+  Detects systematic discovery of local or domain permission groups. Focuses on
+  reconnaissance patterns used to identify privileged accounts while filtering
+  out legitimate system and inventory noise through integrity and parent-process analysis.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1069/
 tags:
-    - attack.discovery
-    - attack.t1069
+  - attack.discovery
+  - attack.t1069
+  - attack.lateral-movement
+  - attack.ad
+  - attack.local
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\net.exe'
-            - '\net1.exe'
-        - CommandLine|contains:
-            - 'localgroup'           
-            - 'group '               
-            - 'Get-ADGroup'
-            - 'Get-DomainGroup'      
-            - 'Get-NetLocalGroup'
-            - 'Get-ADPrincipalGroupMembership'
+  selection_tools:
+    Image|endswith:
+      - '\net.exe'
+      - '\net1.exe'
+    CommandLine|contains:
+      - 'localgroup'
+      - 'group '
+      - 'Get-ADGroup'
+      - 'Get-DomainGroup'
+      - 'Get-NetLocalGroup'
+      - 'Get-ADPrincipalGroupMembership'
 
-    selection_targets:
-        CommandLine|contains:
-            - 'Admins'
-            - 'Domain Admins'
-            - 'Enterprise Admins'
-            - 'Remote Desktop Users'
-            - 'DnsAdmins'
-            - 'Schema Admins'
+  selection_targets:
+    CommandLine|contains:
+      - 'Admins'
+      - 'Domain Admins'
+      - 'Enterprise Admins'
+      - 'Remote Desktop Users'
+      - 'DnsAdmins'
+      - 'Schema Admins'
 
-    selection_suspicious_lineage:
-        ParentImage|endswith:
-            - '\wsmprovhost.exe'    
-            - '\httpd.exe'           
-            - '\winword.exe'         
-            - '\powershell.exe'      
-        IntegrityLevel: 'Medium'    
+  selection_suspicious_lineage:
+    ParentImage|endswith:
+      - '\wsmprovhost.exe'
+      - '\httpd.exe'
+      - '\winword.exe'
+      - '\powershell.exe'
+    IntegrityLevel: 'Medium'
 
-    selection_automation:
-        CommandLine|contains:
-            - ' > '                
-            - 'ConvertTo-Json'       
-            - 'Export-Csv'
-            - 'format-list'        
+  selection_automation:
+    CommandLine|contains:
+      - ' > '
+      - 'ConvertTo-Json'
+      - 'Export-Csv'
+      - 'format-list'
 
-    filter_legit_noise:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|contains:
-            - '\Program Files\Tanium\'
-            - '\Program Files\Splunk\'
-            - '\Windows\System32\CcmExec.exe' 
-        - CommandLine|contains:
-            - 'net localgroup'      
+  filter_legit_noise:
+    - User|startswith: 'NT AUTHORITY\'
+    - ParentImage|contains:
+        - '\Program Files\Tanium\'
+        - '\Program Files\Splunk\'
+        - '\Windows\System32\CcmExec.exe'
+    - CommandLine|contains: 'net localgroup'
 
-    condition: selection_tools and (selection_targets or selection_automation or selection_suspicious_lineage) and not filter_legit_noise
+  condition: selection_tools
+             and (selection_targets or selection_automation or selection_suspicious_lineage)
+             and not filter_legit_noise
+
+falsepositives:
+  - System inventory scripts querying local or AD group membership
+  - Admin workstations using Tanium or Splunk agents
+  - SCCM (CcmExec) automated queries
+  - Legitimate PowerShell scripts exporting group membership to JSON/CSV
+
 level: high

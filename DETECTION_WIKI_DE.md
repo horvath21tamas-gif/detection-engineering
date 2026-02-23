@@ -133,7 +133,7 @@
 - [Ultra-Pro High-Fidelity Local Group Discovery (T1069.001)](#ultra-pro-high-fidelity-local-group-discovery-(t1069001))
 - [Ultra-Pro High-Fidelity-Domänengruppenerkennung (T1069.002)](#ultra-pro-high-fidelity-domänengruppenerkennung-(t1069002))
 - [Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003)](#ultra-pro-high-fidelity-cloud-groups-discovery-(t1069003))
-- [Entfernung des Ultra-Pro High-Fidelity-Indikators auf dem Host (T1070)](#entfernung-des-ultra-pro-high-fidelity-indikators-auf-dem-host-(t1070))
+- [Entfernen der Anzeige am Host (ATT&CK T1070)](#entfernen-der-anzeige-am-host-(att&ck-t1070))
 - [Sicherheitsereignisprotokoll mit wevtutil.exe gelöscht](#sicherheitsereignisprotokoll-mit-wevtutilexe-gelöscht)
 - [Ultra-Pro High-Fidelity-Linux-Protokolllöschung und Journalsabotage (T1070.002)](#ultra-pro-high-fidelity-linux-protokolllöschung-und-journalsabotage-(t1070002))
 - [Ultra-Pro High-Fidelity-Mailbox-Datenlöschung und Regelsabotage (T1070.003)](#ultra-pro-high-fidelity-mailbox-datenlöschung-und-regelsabotage-(t1070003))
@@ -2731,16 +2731,14 @@ Entwickelt, um CSPM- und IaC-Dienstprinzipale mit hohem Volumen herauszufiltern.
 
 
 ---
-## Entfernung des Ultra-Pro High-Fidelity-Indikators auf dem Host (T1070)
+## Entfernen der Anzeige am Host (ATT&CK T1070)
 - **ID:** `T1070.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `100/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [FSUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezielte Versuche, Windows-Ereignisprotokolle und hochwertige forensische Artefakte zu löschen
-(USN Journal, Prefetch).Konzentriert sich auf nicht standardmäßige und spezifische Ausführungsketten
-Clearing sicherheitsrelevanter Anbieter.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FSUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt gezielte Versuche, Windows-Ereignisprotokolle und hochwertige forensische Artefakte (USN Journal, Prefetch) zu löschen.Der Schwerpunkt liegt auf nicht standardmäßigen Ausführungsketten und dem spezifischen Clearing sicherheitsrelevanter Anbieter.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

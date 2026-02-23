@@ -133,7 +133,7 @@
 - [Ultra-Pro High-Fidelity helyi csoportos felfedezés (T1069.001)](#ultra-pro-high-fidelity-helyi-csoportos-felfedezés-(t1069001))
 - [Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002)](#ultra-pro-high-fidelity-domain-group-discovery-(t1069002))
 - [Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003)](#ultra-pro-high-fidelity-cloud-groups-discovery-(t1069003))
-- [Ultra-Pro nagy pontosságú jelző eltávolítása a gazdagépen (T1070)](#ultra-pro-nagy-pontosságú-jelző-eltávolítása-a-gazdagépen-(t1070))
+- [Jelző eltávolítása a gazdagépen (ATT&CK T1070)](#jelző-eltávolítása-a-gazdagépen-(att&ck-t1070))
 - [A biztonsági eseménynapló törölve a wevtutil.exe használatával](#a-biztonsági-eseménynapló-törölve-a-wevtutilexe-használatával)
 - [Ultra-Pro High-Fidelity Linux naplótörlés és naplószabotázs (T1070.002)](#ultra-pro-high-fidelity-linux-naplótörlés-és-naplószabotázs-(t1070002))
 - [Ultra-Pro High-Fidelity postafiókadatok törlése és szabályszabotázs (T1070.003)](#ultra-pro-high-fidelity-postafiókadatok-törlése-és-szabályszabotázs-(t1070003))
@@ -2731,16 +2731,14 @@ atipikus felhasználói ügynökök, valamint az érzékeny csoporttulajdonságo
 
 
 ---
-## Ultra-Pro nagy pontosságú jelző eltávolítása a gazdagépen (T1070)
+## Jelző eltávolítása a gazdagépen (ATT&CK T1070)
 - **ID:** `T1070.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [FSUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Windows eseménynaplók és a nagy értékű törvényszéki műtermékek törlésére irányuló célzott kísérleteket
-(USN Journal, Prefetch).A nem szabványos végrehajtási láncokra összpontosít, és konkrét
-biztonsági szempontból érzékeny szolgáltatók elszámolása.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FSUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a Windows eseménynaplóinak és a nagy értékű törvényszéki műtermékeknek (USN Journal, Prefetch) törlésére irányuló célzott kísérleteket.A nem szabványos végrehajtási láncokra és a biztonsági szempontból érzékeny szolgáltatók speciális elszámolására összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -2927,10 +2925,10 @@ Szűri a jogos böngészőforgalmat és a megbízható infrastruktúrát, hogy c
 - **Becsült zajszint:** Kritikusan Magas (SIEM gyilkos kategória!)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A hálózati kapcsolatok figyelésével észleli a rendellenes HTTP/S-alapú C2 kommunikációt
+- **Leírás:** A hálózati kapcsolatok figyelésével észleli a rendellenes HTTP/S alapú C2 kommunikációt
 nem hálózatos folyamatokból vagy az üregesedés jeleit mutató folyamatokból, szokatlan
 szülő-gyerek származás, vagy gyanús automatizálás.Kiszűri a legális böngészőket
-és ismert biztonságos úticélok a hamis pozitívumok csökkentése érdekében.
+és ismert biztonságos úti célok a hamis pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **IP hírnév: Ellenőrizd a távoli IP címet hírnév-adatbázisokban.**

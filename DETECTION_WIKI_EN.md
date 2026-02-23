@@ -133,7 +133,7 @@
 - [Ultra-Pro High-Fidelity Local Group Discovery (T1069.001)](#ultra-pro-high-fidelity-local-group-discovery-(t1069001))
 - [Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002)](#ultra-pro-high-fidelity-domain-group-discovery-(t1069002))
 - [Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003)](#ultra-pro-high-fidelity-cloud-groups-discovery-(t1069003))
-- [Ultra-Pro High-Fidelity Indicator Removal on Host (T1070)](#ultra-pro-high-fidelity-indicator-removal-on-host-(t1070))
+- [Indicator Removal on Host (ATT&CK T1070)](#indicator-removal-on-host-(att&ck-t1070))
 - [Security Event Log Cleared Using wevtutil.exe](#security-event-log-cleared-using-wevtutilexe)
 - [Ultra-Pro High-Fidelity Linux Log Clearing and Journal Sabotage (T1070.002)](#ultra-pro-high-fidelity-linux-log-clearing-and-journal-sabotage-(t1070002))
 - [Ultra-Pro High-Fidelity Mailbox Data Clearing and Rule Sabotage (T1070.003)](#ultra-pro-high-fidelity-mailbox-data-clearing-and-rule-sabotage-(t1070003))
@@ -2853,16 +2853,14 @@ Designed to filter out high-volume CSPM and IaC service principals.
 
 
 ---
-## Ultra-Pro High-Fidelity Indicator Removal on Host (T1070)
+## Indicator Removal on Host (ATT&CK T1070)
 - **ID:** `T1070.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `100/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [FSUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted attempts to clear Windows Event Logs and high-value forensic artifacts 
-(USN Journal, Prefetch). Focuses on non-standard execution chains and specific 
-clearing of security-sensitive providers.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [FSUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects targeted attempts to clear Windows Event Logs and high-value forensic artifacts (USN Journal, Prefetch). Focuses on non-standard execution chains and specific clearing of security-sensitive providers.
 
 
 #### 🚨 Response Playbook

@@ -1,62 +1,92 @@
-title: Ultra-Pro High-Fidelity Asymmetric Encrypted Exfiltration (T1048.002)
+title: Asymmetric Encrypted Exfiltration (ATT&CK T1048.002)
 id: d80e4ddb-6b41-48df-9ea6-d984b4de1e3e
 status: stable
-description: |
-    Detects data exfiltration over asymmetric encrypted protocols (HTTPS) 
-    by identifying command-line tools (curl, powershell) using upload-specific 
-    flags from untrusted paths or launched by suspicious parent processes.
+description: >
+  Detects potential data exfiltration over asymmetric encrypted protocols (HTTPS)
+  by identifying command-line upload behaviors (curl, wget, PowerShell, BITS, certutil)
+  combined with suspicious execution context or parent process lineage.
+  Focuses on explicit upload flags, insecure TLS usage, and user-space execution paths.
 author: hota05
-date: 2026-02-09
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1048/002/
 tags:
-    - attack.exfiltration
-    - attack.t1048.002
+  - attack.exfiltration
+  - attack.t1048.002
+  - attack.command_and_control
+  - attack.host
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_tools:
-        Image|endswith:
-            - '\curl.exe'
-            - '\wget.exe'
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\bitsadmin.exe'
-            - '\certutil.exe'
+  selection_tools:
+    Image|endswith:
+      - '\curl.exe'
+      - '\wget.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\bitsadmin.exe'
+      - '\certutil.exe'
 
-    selection_upload_flags:
-        CommandLine|contains:
-            - ' -F '                         
-            - ' --data-binary'                
-            - ' -T '                        
-            - ' -k'                       
-            - ' --insecure'
-            - 'UploadFile('                  
-            - 'PutAsync('                   
-            - 'PostAsync('
+  selection_upload_flags:
+    CommandLine|contains:
+      - ' -F '
+      - ' --data-binary'
+      - ' -T '
+      - ' --upload-file'
+      - 'UploadFile('
+      - 'PutAsync('
+      - 'PostAsync('
+      - 'Invoke-WebRequest'
+      - 'Invoke-RestMethod'
 
-    selection_context:
-        - Image|contains:
-            - '\Users\'
-            - '\AppData\'
-            - '\Temp\'
-            - '\Public\'
-        - ParentImage|endswith:
-            - '\winword.exe'                
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\explorer.exe'               
+  selection_insecure_tls:
+    CommandLine|contains:
+      - ' -k'
+      - ' --insecure'
+      - ' -SkipCertificateCheck'
+      - ' -UseBasicParsing'
 
-    filter_legit_traffic:
-        - Image|contains:
-            - '\Program Files\'
-            - '\Program Files (x86)\'
-        - CommandLine|contains:
-            - 'microsoft.com'               
-            - 'office.com'
-            - '127.0.0.1'                  
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith:
-            - '\services.exe'
+  selection_untrusted_path:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Public\'
 
-    condition: selection_tools and (selection_upload_flags or selection_context) and not filter_legit_traffic
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\explorer.exe'
+
+  filter_legit_traffic:
+    - Image|contains:
+        - '\Program Files\'
+        - '\Program Files (x86)\'
+    - CommandLine|contains:
+        - 'microsoft.com'
+        - 'office.com'
+        - 'windowsupdate.com'
+        - '127.0.0.1'
+        - 'localhost'
+    - username: 'NT AUTHORITY\SYSTEM'
+    - ParentImage|endswith: '\services.exe'
+
+  condition: selection_tools
+             and (selection_upload_flags or selection_insecure_tls)
+             and (selection_untrusted_path or selection_suspicious_parent)
+             and not filter_legit_traffic
+
+falsepositives:
+  - Legitimate DevOps or automation scripts uploading artifacts
+  - IT administration using curl or PowerShell for API interaction
+  - Internal application update mechanisms
+  - Security tooling communicating with trusted cloud endpoints
+
 level: critical

@@ -1,61 +1,79 @@
-title: Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003)
+title: Unencrypted Protocol Exfiltration (ATT&CK T1048.003)
 id: c352950f-1d8c-4162-b0c5-2d224582c305
 status: stable
-description: |
-    Detects stealthy data exfiltration via DNS and ICMP by correlating 
-    anomalous payload sizes and non-standard query types with suspicious 
-    process lineages and untrusted execution paths.
+description: >
+  Detects stealthy data exfiltration over unencrypted protocols (DNS, ICMP)
+  by identifying anomalous DNS TXT queries, high-entropy subdomains, oversized
+  ICMP payloads, and suspicious execution lineage (Office/macros/scripts).
+  Designed to reduce false positives from legitimate administrative usage.
 author: hota05
-date: 2026-02-09
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1048/003/
 tags:
-    - attack.exfiltration
-    - attack.t1048.003
+  - attack.exfiltration
+  - attack.t1048.003
+  - attack.command_and_control
+  - attack.host
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_dns_abuse:
-        - CommandLine|contains:
-            - ' -type=TXT'            
-            - ' -querytype=TXT'
-            - ' -q=TXT'
-            - ' -class=IN'            
-        - CommandLine|re: '(?i)nslookup.*[a-zA-Z0-9+/=]{30,}\.' 
+  selection_dns_txt:
+    CommandLine|contains:
+      - ' -type=TXT'
+      - ' -querytype=TXT'
+      - ' -q=TXT'
+      - ' -class=IN'
 
-    selection_icmp_abuse:
-        CommandLine|contains: 'ping '
-        CommandLine|re: '.* -l (1[0-9]{3}|[2-9][0-9]{3}).*' 
+  selection_dns_encoded:
+    CommandLine: '(?i)nslookup.*[A-Za-z0-9+/=]{30,}\.'
 
-    selection_context:
-        Image|contains:
-            - '\Users\'
-            - '\AppData\'
-            - '\Temp\'
-            - '\Public\'
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\certutil.exe'
-            - '\nslookup.exe'
+  selection_icmp_large_payload:
+    CommandLine|contains: 'ping '
+    CommandLine: '.* -l (1[0-9]{3}|[2-9][0-9]{3}).*'
 
-    selection_parent:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
+  selection_context:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Public\'
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\certutil.exe'
+      - '\nslookup.exe'
 
-    filter_legit:
-        - Image|contains:
-            - '\Program Files\'
-            - '\Program Files (x86)\'
-        - CommandLine|contains:
-            - 'microsoft.com'
-            - '127.0.0.1'
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith:
-            - '\services.exe'
+  selection_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
 
-    condition: (selection_dns_abuse or selection_icmp_abuse) and (selection_context or selection_parent) and not filter_legit
+  filter_legit:
+    - Image|contains:
+        - '\Program Files\'
+        - '\Program Files (x86)\'
+    - CommandLine|contains:
+        - 'microsoft.com'
+        - '127.0.0.1'
+        - 'localhost'
+    - username: 'NT AUTHORITY\SYSTEM'
+    - ParentImage|endswith: '\services.exe'
+
+  condition: (selection_dns_txt or selection_dns_encoded or selection_icmp_large_payload)
+             and (selection_context or selection_parent)
+             and not filter_legit
+
+falsepositives:
+  - Legitimate DNS TXT lookups for SPF/DMARC validation
+  - Network troubleshooting using large ICMP packets
+  - Security tools performing DNS diagnostics
+  - Automated scripts querying internal DNS infrastructure
+
 level: critical

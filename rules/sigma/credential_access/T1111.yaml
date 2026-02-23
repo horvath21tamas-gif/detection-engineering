@@ -1,61 +1,64 @@
-title: Ultra-Pro High-Fidelity MFA Evasion & Session Hijacking (T1111)
+title: MFA Evasion & Session Hijacking (T1111)
 id: 95fdbbb8-aaf6-4468-8b0c-07170853b5a9
 status: stable
 description: |
-    Detects MFA evasion by identifying unauthorized access to browser master keys (Local State) 
-    and session databases (Cookies) by untrusted processes. It also monitors for 
-    Reverse Proxy phishing frameworks (Evilginx, Muraena) and token manipulation tools.
+  Detects MFA evasion by identifying unauthorized access to browser master keys (Local State)
+  and session databases (Cookies) by untrusted processes. It also monitors for 
+  Reverse Proxy phishing frameworks (Evilginx, Muraena) and token manipulation tools.
 author: hota05
 date: 2026-02-04
 tags:
-    - attack.credential_access
-    - attack.t1111
+  - attack.credential_access
+  - attack.t1111
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_session_theft:
-        CommandLine|contains:
-            - '\Local State'       
-        CommandLine|contains:
-            - '\Network\Cookies'      
-            - '\cookies.sqlite'
-            - '\Login Data'
+  selection_session_theft:
+    CommandLine|contains:
+      - '\Local State'              
+      - '\Network\Cookies'          
+      - '\cookies.sqlite'          
+      - '\Login Data'            
 
-    selection_decryption:
-        CommandLine|contains:
-            - 'os_crypt'              
-            - 'crypt32.dll'           
-            - 'unprotect'             
-            - ' -key '             
+  selection_decryption:
+    CommandLine|contains:
+      - 'os_crypt'                  
+      - 'crypt32.dll'               
+      - 'unprotect'               
+      - ' -key '                    
 
-    selection_proxy_tools:
-        - CommandLine|contains:
-            - 'evilginx'             
-            - 'modlishka'             
-            - 'muraena'
-            - 'phishlets'             
-        - Image|endswith:
-            - '\roadtools.exe'       
-            - '\aad-token.exe'
+  selection_proxy_tools:
+    - CommandLine|contains:
+        - 'evilginx'                
+        - 'modlishka'              
+        - 'muraena'                 
+        - 'phishlets'               
+    - Image|endswith:
+        - '\roadtools.exe'          
+        - '\aad-token.exe'          
 
-    selection_untrusted_context:
-        Image|contains:
-            - '\Users\'
-            - '\AppData\'
-            - '\Temp\'
-        Image|endswith:
-            - '\powershell.exe'       
-            - '\python.exe'
-            - '\node.exe'             
+  selection_untrusted_context:
+    Image|contains:
+      - '\Users\'                    
+      - '\AppData\'                  
+      - '\Temp\'                      
+    Image|endswith:
+      - '\powershell.exe'            
+      - '\python.exe'                
+      - '\node.exe'                  
 
-    filter_official_apps:
-        Image|contains:
-            - '\Program Files\Google\Chrome\'
-            - '\Program Files (x86)\Microsoft\Edge\'
-            - '\Program Files\Mozilla Firefox\'
-        ParentImage|endswith: '\services.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+  filter_official_apps:
+    - Image|contains:
+        - '\Program Files\Google\Chrome\'         
+        - '\Program Files (x86)\Microsoft\Edge\'  
+        - '\Program Files\Mozilla Firefox\'     
+    - ParentImage|endswith: '\services.exe'      
+    - username: 'NT AUTHORITY\SYSTEM'            
 
-    condition: (selection_session_theft or selection_decryption or selection_proxy_tools) and selection_untrusted_context and not filter_official_apps
+  condition: |
+    (selection_session_theft or selection_decryption or selection_proxy_tools) and 
+    selection_untrusted_context and 
+    not filter_official_apps
+
 level: critical

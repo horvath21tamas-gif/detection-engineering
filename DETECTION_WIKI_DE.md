@@ -2374,16 +2374,14 @@ aus nicht gesicherten Speicherbereichen (Shellcode) und nicht aus signierten Mod
 
 
 ---
-## Ultra-Pro High-Fidelity-Eingangserfassungserkennung (T1056)
+## Eingabeerfassungserkennung (ATT&CK T1056)
 - **ID:** `T1056.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt anspruchsvolle Eingabeerfassung (Keylogging) durch Identifizierung verdächtiger Eingaben
-API-bezogene Befehlszeilen, nicht autorisierte Shell-basierte Keylogging-Snippets,
-und anomales Prozessverhalten, das auf Benutzereingaben abzielt.
+- **Beschreibung:** Erkennt anspruchsvolle Eingabeerfassung (Keylogging), indem verdächtige API-bezogene Befehlszeilen, nicht autorisierte Shell-basierte Keylogging-Snippets und anomales Prozessverhalten, das auf Benutzereingaben abzielt, identifiziert werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

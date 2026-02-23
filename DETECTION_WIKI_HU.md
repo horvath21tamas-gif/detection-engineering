@@ -2374,16 +2374,14 @@ nem támogatott memóriarégiókból (shellkód), nem pedig aláírt modulokból
 
 
 ---
-## Ultra-Pro nagy felbontású bemeneti rögzítésérzékelés (T1056)
+## Bemeneti rögzítés észlelése (ATT&CK T1056)
 - **ID:** `T1056.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a kifinomult bemeneti rögzítést (billentyűnaplózást) a gyanús elemek azonosításával
-API-val kapcsolatos parancssorok, jogosulatlan shell-alapú billentyűnaplózó kódrészletek,
-és a felhasználói bevitelt célzó rendellenes folyamatviselkedés.
+- **Leírás:** Érzékeli a kifinomult bemenetrögzítést (keylogging) azáltal, hogy azonosítja a gyanús API-val kapcsolatos parancssorokat, a jogosulatlan shell-alapú billentyűnaplózási kódrészleteket és a felhasználói bevitelt célzó rendellenes folyamatviselkedést.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

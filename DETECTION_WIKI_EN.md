@@ -2475,16 +2475,14 @@ from unbacked memory regions (shellcode) rather than signed modules.
 
 
 ---
-## Ultra-Pro High-Fidelity Input Capture Detection (T1056)
+## Input Capture Detection (ATT&CK T1056)
 - **ID:** `T1056.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects sophisticated input capture (keylogging) by identifying suspicious 
-API-related command lines, unauthorized shell-based keylogging snippets, 
-and anomalous process behavior targeting user input.
+- **Leírás:** Detects sophisticated input capture (keylogging) by identifying suspicious API-related command lines, unauthorized shell-based keylogging snippets, and anomalous process behavior targeting user input.
 
 
 #### 🚨 Response Playbook

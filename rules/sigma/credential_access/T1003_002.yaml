@@ -1,66 +1,74 @@
-title: Ultra-Pro High-Fidelity SAM & SYSTEM Registry Theft (T1003.002)
+title: SAM & SYSTEM Registry Theft (T1003.002)
 id: 36c79790-fa49-4b2f-9c82-cffbc5cb6637
 status: stable
 description: |
-    Detects unauthorized extraction of the SAM, SYSTEM, and SECURITY registry hives. 
-    Focuses on 'reg.exe' abuse, VSS-based theft, and 'esentutl.exe' file copying 
-    from non-standard parent processes and untrusted execution paths.
+  Detects unauthorized extraction of the SAM, SYSTEM, and SECURITY registry hives.
+  Focuses on:
+  - reg.exe abuse with 'save' or 'export' commands targeting critical hives
+  - VSS shadow copy creation via vssadmin.exe
+  - Direct copying via esentutl.exe from non-standard parents or suspicious paths
 author: hota05
 date: 2026-02-04
 tags:
-    - attack.credential_access
-    - attack.t1003.002
+  - attack.credential_access
+  - attack.t1003.002
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_reg_logic:
-        Image|endswith: '\reg.exe'
-        CommandLine|contains:
-            - ' save '
-            - ' export '
-        CommandLine|contains:
-            - 'hklm\sam'
-            - 'hklm\system'
-            - 'hklm\security'
+  selection_reg_logic:
+    Image|endswith: '\reg.exe'
+    CommandLine|contains:
+      - ' save '
+      - ' export '
+    CommandLine|contains:
+      - 'hklm\sam'
+      - 'hklm\system'
+      - 'hklm\security'
 
-    selection_direct_copy:
-        - Image|endswith: '\vssadmin.exe'
-          CommandLine|contains: 'create shadow'
-        - Image|endswith: '\esentutl.exe'
-          CommandLine|contains:
-              - '/y'
-              - '/vss'
-              - 'config\sam'
-              - 'config\system'
+  selection_direct_copy:
+    - Image|endswith: '\vssadmin.exe'
+      CommandLine|contains: 'create shadow'
+    - Image|endswith: '\esentutl.exe'
+      CommandLine|contains:
+        - '/y'
+        - '/vss'
+        - 'config\sam'
+        - 'config\system'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\powershell.exe'
-            - '\cmd.exe'
-            - '\wsmprovhost.exe'
-            - '\psexesvc.exe'    
-            - '\httpd.exe'      
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\powershell.exe'
+      - '\cmd.exe'
+      - '\wsmprovhost.exe'
+      - '\psexesvc.exe'
+      - '\httpd.exe'
 
-    selection_file_anomalies:
-        CommandLine|contains:
-            - '.tmp'
-            - '.txt'
-            - '.jpg'
-            - 'C:\Users\Public\'
-            - 'C:\Windows\Temp\'
+  selection_file_anomalies:
+    CommandLine|contains:
+      - '.tmp'
+      - '.txt'
+      - '.jpg'
+      - 'C:\Users\Public\'
+      - 'C:\Windows\Temp\'
 
-    filter_legit_maintenance:
-        username: 'NT AUTHORITY\SYSTEM'
-        ParentImage|endswith:
-            - '\services.exe'
-            - '\svchost.exe'
-            - '\msiexec.exe'
-    
-    filter_legit_backup_tools:
-        Image|contains:
-            - '\Program Files\'
-            - '\Program Files (x86)\'
+  filter_legit_maintenance:
+    username: 'NT AUTHORITY\SYSTEM'
+    ParentImage|endswith:
+      - '\services.exe'
+      - '\svchost.exe'
+      - '\msiexec.exe'
 
-    condition: (selection_reg_logic or selection_direct_copy) and (selection_suspicious_parent or selection_file_anomalies) and not (filter_legit_maintenance or filter_legit_backup_tools)
+  filter_legit_backup_tools:
+    Image|contains:
+      - '\Program Files\'
+      - '\Program Files (x86)\'
+
+  condition: >
+    (selection_reg_logic or selection_direct_copy)
+    and (selection_suspicious_parent or selection_file_anomalies)
+    and not (filter_legit_maintenance or filter_legit_backup_tools)
+
 level: critical

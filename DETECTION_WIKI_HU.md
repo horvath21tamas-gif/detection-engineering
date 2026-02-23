@@ -1249,14 +1249,14 @@ a WinRM gazdafolyamatból származó üreges kísérletek.
 
 
 ---
-## Ultra-Pro High-Fidelity felhővezérlő sík eltérítés (T1021.007)
+## Felhővezérlő sík eltérítése (T1021.007)
 - **ID:** `T1021_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Felhő-műszerfalakon keresztül korrelálással észleli az illetéktelen oldalirányú mozgást
 magas kockázatú műveletek rendellenes felhasználói ügynökökkel, szokatlan forrás IP-címekkel és
-MFA-elkerülésre/automatizált munkamenet-eltérítésre utaló jelek.
+MFA-elkerülés vagy automatizált munkamenet-eltérítés jelei.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

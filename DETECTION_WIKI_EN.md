@@ -1284,14 +1284,14 @@ hollowing attempts originating from the WinRM host process.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Control Plane Hijacking (T1021.007)
+## Cloud Control Plane Hijacking (T1021.007)
 - **ID:** `T1021_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 - **Leírás:** Detects unauthorized lateral movement through cloud dashboards by correlating 
 high-risk operations with anomalous user agents, unusual source IPs, and 
-signs of MFA-evasion/automated session hijacking.
+signs of MFA-evasion or automated session hijacking.
 
 
 #### 🚨 Response Playbook

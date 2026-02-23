@@ -1249,14 +1249,14 @@ Hollowing-Versuche, die vom WinRM-Hostprozess ausgehen.
 
 
 ---
-## Ultra-Pro High-Fidelity Cloud Control Plane Hijacking (T1021.007)
+## Entführung der Cloud-Kontrollebene (T1021.007)
 - **ID:** `T1021_007.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 - **Beschreibung:** Erkennt unbefugte seitliche Bewegungen über Cloud-Dashboards durch Korrelation
 Hochriskante Vorgänge mit anomalen Benutzeragenten, ungewöhnlichen Quell-IPs usw
-Anzeichen einer MFA-Umgehung/automatisierten Sitzungsentführung.
+Anzeichen einer MFA-Umgehung oder automatisierten Sitzungsentführung.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

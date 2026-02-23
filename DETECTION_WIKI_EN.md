@@ -1050,7 +1050,7 @@ services from non-standard paths, while filtering out legitimate OS driver maint
 
 
 ---
-## Ultra-Pro High-Fidelity System Network Configuration Discovery (T1016)
+## System Network Configuration Discovery (T1016)
 - **ID:** `T1016.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
@@ -1069,7 +1069,7 @@ levels, parent process gating, and command-line switch analysis.
 
 
 ---
-## Ultra-Pro High-Fidelity Internet IP Discovery (T1016.001)
+## Internet IP Discovery (T1016.001)
 - **ID:** `T1016_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
@@ -1088,7 +1088,7 @@ process relationship, integrity levels, and typical developer tool fingerprints.
 
 
 ---
-## Ultra-Pro High-Fidelity Terminal Services Configuration Discovery (T1016.002)
+## Terminal Services Configuration Discovery (T1016.002)
 - **ID:** `T1016_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

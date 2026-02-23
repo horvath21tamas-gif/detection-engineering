@@ -1028,7 +1028,7 @@ szolgáltatások nem szabványos útvonalakról, miközben kiszűri a jogszerű 
 
 
 ---
-## Ultra-Pro High-Fidelity rendszer hálózati konfigurációjának felfedezése (T1016)
+## Rendszerhálózati konfiguráció felfedezése (T1016)
 - **ID:** `T1016.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
@@ -1046,7 +1046,7 @@ szintek, szülőfolyamatok kapuzása és parancssori kapcsolóelemzés.
 
 
 ---
-## Ultra-Pro High-Fidelity Internet IP Discovery (T1016.001)
+## Internet IP-felderítés (T1016.001)
 - **ID:** `T1016_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
@@ -1064,7 +1064,7 @@ folyamatkapcsolat, integritási szintek és tipikus fejlesztői eszköz ujjlenyo
 
 
 ---
-## Ultra-Pro High-Fidelity terminálszolgáltatások konfigurációs felderítése (T1016.002)
+## Terminálszolgáltatások konfigurációs felderítése (T1016.002)
 - **ID:** `T1016_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

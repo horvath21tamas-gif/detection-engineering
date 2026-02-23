@@ -1028,7 +1028,7 @@ Dienste von nicht standardmäßigen Pfaden und filtert gleichzeitig die legitime
 
 
 ---
-## Ultra-Pro High-Fidelity-System-Netzwerkkonfigurationserkennung (T1016)
+## Erkennung der Systemnetzwerkkonfiguration (T1016)
 - **ID:** `T1016.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
@@ -1046,7 +1046,7 @@ Ebenen, Gating des übergeordneten Prozesses und Analyse von Befehlszeilenschalt
 
 
 ---
-## Ultraprofessionelle High-Fidelity-Internet-IP-Erkennung (T1016.001)
+## Internet-IP-Erkennung (T1016.001)
 - **ID:** `T1016_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
@@ -1064,7 +1064,7 @@ Prozessbeziehung, Integritätsstufen und typische Fingerabdrücke von Entwickler
 
 
 ---
-## Ultra-Pro High-Fidelity Terminal Services Configuration Discovery (T1016.002)
+## Terminaldienste-Konfigurationserkennung (T1016.002)
 - **ID:** `T1016_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

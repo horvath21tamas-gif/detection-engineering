@@ -48,19 +48,19 @@
 - [Ultra-Pro High-Fidelity WinRM Remote Execution (T1021.006)](#ultra-pro-high-fidelity-winrm-remote-execution-(t1021006))
 - [Ultra-Pro High-Fidelity Cloud Control Plane Hijacking (T1021.007)](#ultra-pro-high-fidelity-cloud-control-plane-hijacking-(t1021007))
 - [Ultra-Pro High-Fidelity macOS ARD Remote Hijacking (T1021.008)](#ultra-pro-high-fidelity-macos-ard-remote-hijacking-(t1021008))
-- [Ultra-Pro High-Fidelity-Wechselmedien-Datendiebstahl (T1025)](#ultra-pro-high-fidelity-wechselmedien-datendiebstahl-(t1025))
+- [Datendiebstahl auf Wechselmedien (T1025)](#datendiebstahl-auf-wechselmedien-(t1025))
 - [Verdächtiger Base64-codierter PowerShell-Befehl mit Netzwerkaktivität](#verdächtiger-base64-codierter-powershell-befehl-mit-netzwerkaktivität)
-- [Ultra-Pro High-Fidelity Binary Padding-Aktivität (T1027.001)](#ultra-pro-high-fidelity-binary-padding-aktivität-(t1027001))
-- [Ultra-Pro High-Fidelity-Software-Verpackungsveranstaltung (T1027.002)](#ultra-pro-high-fidelity-software-verpackungsveranstaltung-(t1027002))
-- [Ultra-Pro High-Fidelity-Steganographie-Nutzlastextraktion (T1027.003)](#ultra-pro-high-fidelity-steganographie-nutzlastextraktion-(t1027003))
-- [Ultra-Pro High-Fidelity-Steganographie-Nutzlastextraktion (T1027.004)](#ultra-pro-high-fidelity-steganographie-nutzlastextraktion-(t1027004))
-- [Ultra-Pro High-Fidelity-Indikatorentfernung und Signaturdiebstahl (T1027.005)](#ultra-pro-high-fidelity-indikatorentfernung-und-signaturdiebstahl-(t1027005))
-- [Ultraprofessionelle High-Fidelity-HTML-Schmuggelausführung (T1027.006)](#ultraprofessionelle-high-fidelity-html-schmuggelausführung-(t1027006))
-- [Ultra-Pro High-Fidelity-Binärsymbol-Stripping (T1027.007)](#ultra-pro-high-fidelity-binärsymbol-stripping-(t1027007))
-- [Ultra-Pro High-Fidelity-Binärsymbol-Stripping (T1027.008)](#ultra-pro-high-fidelity-binärsymbol-stripping-(t1027008))
-- [Ultra-Pro High-Fidelity Embedded Payload Extraction (T1027.009)](#ultra-pro-high-fidelity-embedded-payload-extraction-(t1027009))
-- [Ultra-Pro High-Fidelity-Befehlszeilenverschleierung (T1027.010)](#ultra-pro-high-fidelity-befehlszeilenverschleierung-(t1027010))
-- [Ultra-Pro High-Fidelity-Erstellung verdächtiger Archive (T1027.011)](#ultra-pro-high-fidelity-erstellung-verdächtiger-archive-(t1027011))
+- [Binäre Auffüllaktivität (T1027.001)](#binäre-auffüllaktivität-(t1027001))
+- [Software-Packungsereignis (T1027.002)](#software-packungsereignis-(t1027002))
+- [Steganographie-Nutzlastextraktion (T1027.003)](#steganographie-nutzlastextraktion-(t1027003))
+- [Steganographie-Nutzlastextraktion (T1027.004)](#steganographie-nutzlastextraktion-(t1027004))
+- [Entfernen des Indikators und Diebstahl der Unterschrift (T1027.005)](#entfernen-des-indikators-und-diebstahl-der-unterschrift-(t1027005))
+- [Ausführung von HTML-Schmuggel (T1027.006)](#ausführung-von-html-schmuggel-(t1027006))
+- [Binärsymbol-Strippung (T1027.007)](#binärsymbol-strippung-(t1027007))
+- [Binärsymbol-Strippung (T1027.008)](#binärsymbol-strippung-(t1027008))
+- [Eingebettete Nutzlastextraktion (T1027.009)](#eingebettete-nutzlastextraktion-(t1027009))
+- [Befehlszeilenverschleierung (T1027.010)](#befehlszeilenverschleierung-(t1027010))
+- [Verdächtige Archiverstellung (T1027.011)](#verdächtige-archiverstellung-(t1027011))
 - [Windows-LDR-Hijacking (T1027.012)](#windows-ldr-hijacking-(t1027012))
 - [Geplante Übertragung (T1029)](#geplante-übertragung-(t1029))
 - [Daten-Chunking und Fragmentierung (T1030)](#daten-chunking-und-fragmentierung-(t1030))
@@ -1280,7 +1280,7 @@ universeller Zugriff, während legitime MDM-Orchestrierung (Jamf, Kandji) gefilt
 
 
 ---
-## Ultra-Pro High-Fidelity-Wechselmedien-Datendiebstahl (T1025)
+## Datendiebstahl auf Wechselmedien (T1025)
 - **ID:** `T1025.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -1473,7 +1473,7 @@ verdächtige Prozesslinien und filtert gleichzeitig Standardaktivitäten des Bet
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MAKECAB.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Erstellung passwortgeschützter oder verschlüsselter Archive mithilfe gängiger CLI-Archivierungstools.Der Schwerpunkt liegt auf Befehlszeilen-Passwortargumenten, rekursiven Vorgängen und der Ausgabe in nicht standardmäßige oder vertrauliche Pfade.Filtert legitimen Cloud-Speicher und autorisierte Anwendungsnutzung heraus.
+- **Beschreibung:** Erkennt die Erstellung passwortgeschützter oder verschlüsselter Archive mithilfe gängiger CLI-Archivierungstools.Der Schwerpunkt liegt auf Befehlszeilen-Passwortargumenten, rekursiven Vorgängen und der Ausgabe auf nicht standardmäßigen oder vertraulichen Pfaden.Filtert legitimen Cloud-Speicher und autorisierte Anwendungsnutzung heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -1660,7 +1660,7 @@ verdächtige Prozesslinien und filtert gleichzeitig Standardaktivitäten des Bet
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Ausführung von Binärdateien, die sich als Dokumente über doppelte Dateierweiterungen ausgeben (z. B. .pdf.exe, .docx.exe).Filtert Entwicklerartefakte (.min.js, .map), Systembinärdateien und verifizierte Installationsprogramme heraus.Konzentriert sich auf Benutzerverzeichnisse mit hohem Risiko und verdächtige übergeordnete Prozesse.
+- **Beschreibung:** Erkennt die Ausführung von Binärdateien, die sich über doppelte Dateierweiterungen als Dokumente ausgeben (z. B. .pdf.exe, .docx.exe).Filtert Entwicklerartefakte (.min.js, .map), Systembinärdateien und verifizierte Installationsprogramme heraus.Konzentriert sich auf Benutzerverzeichnisse mit hohem Risiko und verdächtige übergeordnete Prozesse.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

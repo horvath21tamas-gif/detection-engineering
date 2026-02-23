@@ -48,19 +48,19 @@
 - [Ultra-Pro High-Fidelity WinRM távoli végrehajtás (T1021.006)](#ultra-pro-high-fidelity-winrm-távoli-végrehajtás-(t1021006))
 - [Ultra-Pro High-Fidelity felhővezérlő sík eltérítés (T1021.007)](#ultra-pro-high-fidelity-felhővezérlő-sík-eltérítés-(t1021007))
 - [Ultra-Pro High-Fidelity macOS ARD távoli eltérítés (T1021.008)](#ultra-pro-high-fidelity-macos-ard-távoli-eltérítés-(t1021008))
-- [Ultra-Pro High-Fidelity cserélhető adathordozó adatlopás (T1025)](#ultra-pro-high-fidelity-cserélhető-adathordozó-adatlopás-(t1025))
+- [Cserélhető adathordozó adatlopás (T1025)](#cserélhető-adathordozó-adatlopás-(t1025))
 - [Gyanús Base64 kódolású PowerShell-parancs hálózati tevékenységgel](#gyanús-base64-kódolású-powershell-parancs-hálózati-tevékenységgel)
-- [Ultra-Pro High-Fidelity bináris padding tevékenység (T1027.001)](#ultra-pro-high-fidelity-bináris-padding-tevékenység-(t1027001))
-- [Ultra-Pro High-Fidelity szoftvercsomagolási esemény (T1027.002)](#ultra-pro-high-fidelity-szoftvercsomagolási-esemény-(t1027002))
-- [Ultra-Pro High-Fidelity steganográfia hasznos teher kivonás (T1027.003)](#ultra-pro-high-fidelity-steganográfia-hasznos-teher-kivonás-(t1027003))
-- [Ultra-Pro High-Fidelity steganográfia hasznos teher kivonás (T1027.004)](#ultra-pro-high-fidelity-steganográfia-hasznos-teher-kivonás-(t1027004))
-- [Ultra-Pro High-Fidelity kijelző eltávolítása és aláíráslopás (T1027.005)](#ultra-pro-high-fidelity-kijelző-eltávolítása-és-aláíráslopás-(t1027005))
-- [Ultra-Pro High-Fidelity HTML-csempészet végrehajtása (T1027.006)](#ultra-pro-high-fidelity-html-csempészet-végrehajtása-(t1027006))
-- [Ultra-Pro High-Fidelity bináris szimbólumeltávolítás (T1027.007)](#ultra-pro-high-fidelity-bináris-szimbólumeltávolítás-(t1027007))
-- [Ultra-Pro High-Fidelity bináris szimbólumeltávolítás (T1027.008)](#ultra-pro-high-fidelity-bináris-szimbólumeltávolítás-(t1027008))
-- [Ultra-Pro High-Fidelity beágyazott hasznos teher kivonás (T1027.009)](#ultra-pro-high-fidelity-beágyazott-hasznos-teher-kivonás-(t1027009))
-- [Ultra-Pro High-Fidelity parancssori obfuszkáció (T1027.010)](#ultra-pro-high-fidelity-parancssori-obfuszkáció-(t1027010))
-- [Ultra-Pro High-Fidelity gyanús archívum létrehozása (T1027.011)](#ultra-pro-high-fidelity-gyanús-archívum-létrehozása-(t1027011))
+- [Bináris kitöltési tevékenység (T1027.001)](#bináris-kitöltési-tevékenység-(t1027001))
+- [Szoftvercsomagolási esemény (T1027.002)](#szoftvercsomagolási-esemény-(t1027002))
+- [Szteganográfia hasznos teher kivonás (T1027.003)](#szteganográfia-hasznos-teher-kivonás-(t1027003))
+- [Szteganográfia hasznos teher kivonás (T1027.004)](#szteganográfia-hasznos-teher-kivonás-(t1027004))
+- [Jelző eltávolítása és aláíráslopás (T1027.005)](#jelző-eltávolítása-és-aláíráslopás-(t1027005))
+- [HTML-csempészet végrehajtása (T1027.006)](#html-csempészet-végrehajtása-(t1027006))
+- [Bináris szimbólumok eltávolítása (T1027.007)](#bináris-szimbólumok-eltávolítása-(t1027007))
+- [Bináris szimbólumok eltávolítása (T1027.008)](#bináris-szimbólumok-eltávolítása-(t1027008))
+- [Beágyazott hasznos teher kivonás (T1027.009)](#beágyazott-hasznos-teher-kivonás-(t1027009))
+- [Parancssori zavarás (T1027.010)](#parancssori-zavarás-(t1027010))
+- [Gyanús archívum létrehozása (T1027.011)](#gyanús-archívum-létrehozása-(t1027011))
 - [Windows LDR-eltérítés (T1027.012)](#windows-ldr-eltérítés-(t1027012))
 - [Ütemezett transzfer (T1029)](#ütemezett-transzfer-(t1029))
 - [Adatok darabolása és töredezettsége (T1030)](#adatok-darabolása-és-töredezettsége-(t1030))
@@ -1280,7 +1280,7 @@ univerzális hozzáférés, miközben szűri a legitim MDM (Jamf, Kandji) hangsz
 
 
 ---
-## Ultra-Pro High-Fidelity cserélhető adathordozó adatlopás (T1025)
+## Cserélhető adathordozó adatlopás (T1025)
 - **ID:** `T1025.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -1319,7 +1319,7 @@ gyanús folyamatvonalakat, miközben kiszűri a szabványos operációs rendszer
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a rosszindulatú bináris kitöltési kísérleteket, amikor a támadók mesterségesen növelik a fájlméretet, hogy megkerüljék a biztonsági szkennereket vagy módosítsák a fájlkivonatokat.Az fsutil, dd és bináris másolási parancsokra összpontosít, amelyek a gyanús könyvtárakban lévő végrehajtható fájlokat és rendszerfájlokat célozzák meg, miközben szűri a törvényes rendszerműveleteket.
+- **Leírás:** Érzékeli a rosszindulatú bináris kitöltési kísérleteket, ahol a támadók mesterségesen növelik a fájlméretet, hogy megkerüljék a biztonsági szkennereket vagy módosítsák a fájlkivonatokat.Az fsutil, dd és bináris másolási parancsokra összpontosít, amelyek a gyanús könyvtárakban lévő végrehajtható fájlokat és rendszerfájlokat célozzák meg, miközben szűri a törvényes rendszerműveleteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1349,7 +1349,7 @@ gyanús folyamatvonalakat, miközben kiszűri a szabványos operációs rendszer
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a rejtett hasznos anyagok programozott kivonását a képfájlokból.Azokra a munkafolyamatokra összpontosít, amelyek kombinálják a pixel szintű adathozzáférést (GDI+) a dinamikus kódvégrehajtással Reflection vagy Invoke-Expression (IEX) segítségével ugyanazon folyamatkörnyezeten belül, miközben szűri a megbízható grafikus eszközöket.
+- **Leírás:** Érzékeli a rejtett hasznos anyagok programozott kivonását a képfájlokból.Azokra a munkafolyamatokra összpontosít, amelyek kombinálják a pixel szintű adathozzáférést (GDI+) a dinamikus kódvégrehajtással Reflection vagy Invoke-Expression (IEX) segítségével ugyanabban a folyamatkörnyezetben, miközben szűri a megbízható grafikus eszközöket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1473,7 +1473,7 @@ gyanús folyamatvonalakat, miközben kiszűri a szabványos operációs rendszer
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MAKECAB.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Jelszóval védett vagy titkosított archívumok létrehozását észleli a szokásos CLI archiváló eszközök segítségével.A parancssori jelszó argumentumaira, a rekurzív műveletekre és a nem szabványos vagy érzékeny útvonalakra történő kimenetre összpontosít.Kiszűri a jogos felhőalapú tárolást és az engedélyezett alkalmazáshasználatot.
+- **Leírás:** Jelszóval védett vagy titkosított archívumok létrehozását észleli a szokásos CLI archiváló eszközök segítségével.A parancssori jelszó argumentumaira, a rekurzív műveletekre és a nem szabványos vagy érzékeny útvonalakra történő kimenetekre összpontosít.Kiszűri a jogos felhőalapú tárolást és az engedélyezett alkalmazáshasználatot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1535,7 +1535,7 @@ gyanús folyamatvonalakat, miközben kiszűri a szabványos operációs rendszer
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az aktuális felhasználó, a bejelentkezett felhasználók és a token jogosultságok szisztematikus felderítését.Rendellenes folyamatsorokat (Office-alkalmazások, böngészők) és gyanús parancssori mintákat (/priv, /groups, /all) céloz meg, amelyeket gyakran használnak a jogosultság-kiterjesztési kísérletek előtt.Kiszűri a jogszerű rendszerautomatizálást és a vállalatirányítási zajokat.
+- **Leírás:** Érzékeli az aktuális felhasználó, a bejelentkezett felhasználók és a token jogosultságok szisztematikus felderítését.Rendellenes folyamatsorokat (Office-alkalmazások, böngészők) és gyanús parancssori mintákat (/priv, /groups, /all) céloz meg, amelyeket gyakran használnak a jogosultság-kiterjesztési kísérletek előtt.Kiszűri a jogszerű rendszerautomatizálást és a vállalatirányítási zajt.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1605,7 +1605,7 @@ gyanús folyamatvonalakat, miközben kiszűri a szabványos operációs rendszer
 
 
 ---
-## Masquerade via Path Anomalia (T1036.004)
+## Maszkírozás útvonal-anomálián keresztül (T1036.004)
 - **ID:** `T1036_004.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)

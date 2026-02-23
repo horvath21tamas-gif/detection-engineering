@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-23 12:48:56`
+**Utolsó frissítés:** `2026-02-23 13:24:17`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -53,19 +53,19 @@
 | T1021.006 | CRITICAL | Ultra-Pro High-Fidelity WinRM Remote Execution (T1021.006) |
 | T1021.007 | CRITICAL | Ultra-Pro High-Fidelity Cloud Control Plane Hijacking (T1021.007) |
 | T1021.008 | CRITICAL | Ultra-Pro High-Fidelity macOS ARD Remote Hijacking (T1021.008) |
-| T1025 | CRITICAL | Ultra-Pro High-Fidelity Removable Media Data Theft (T1025) |
+| T1025 | CRITICAL | Removable Media Data Theft (T1025) |
 | T1027 | HIGH | Suspicious Base64-Encoded PowerShell Command with Network Activity, Suspicious Encoded PowerShell Command Execution |
-| T1027.001 | HIGH | Ultra-Pro High-Fidelity Binary Padding Activity (T1027.001) |
-| T1027.002 | HIGH | Ultra-Pro High-Fidelity Software Packing Event (T1027.002) |
-| T1027.003 | CRITICAL | Ultra-Pro High-Fidelity Steganography Payload Extraction (T1027.003) |
-| T1027.004 | CRITICAL | Ultra-Pro High-Fidelity Steganography Payload Extraction (T1027.004) |
-| T1027.005 | CRITICAL | Ultra-Pro High-Fidelity Indicator Removal and Signature Theft (T1027.005) |
-| T1027.006 | CRITICAL | Ultra-Pro High-Fidelity HTML Smuggling Execution (T1027.006) |
-| T1027.007 | HIGH | Ultra-Pro High-Fidelity Binary Symbol Stripping (T1027.007) |
-| T1027.008 | HIGH | Ultra-Pro High-Fidelity Binary Symbol Stripping (T1027.008) |
-| T1027.009 | CRITICAL | Ultra-Pro High-Fidelity Embedded Payload Extraction (T1027.009) |
-| T1027.010 | HIGH | Ultra-Pro High-Fidelity Command Line Obfuscation (T1027.010) |
-| T1027.011 | HIGH | Ultra-Pro High-Fidelity Suspicious Archive Creation (T1027.011) |
+| T1027.001 | HIGH | Binary Padding Activity (T1027.001) |
+| T1027.002 | HIGH | Software Packing Event (T1027.002) |
+| T1027.003 | CRITICAL | Steganography Payload Extraction (T1027.003) |
+| T1027.004 | CRITICAL | Steganography Payload Extraction (T1027.004) |
+| T1027.005 | CRITICAL | Indicator Removal and Signature Theft (T1027.005) |
+| T1027.006 | CRITICAL | HTML Smuggling Execution (T1027.006) |
+| T1027.007 | HIGH | Binary Symbol Stripping (T1027.007) |
+| T1027.008 | HIGH | Binary Symbol Stripping (T1027.008) |
+| T1027.009 | CRITICAL | Embedded Payload Extraction (T1027.009) |
+| T1027.010 | HIGH | Command Line Obfuscation (T1027.010) |
+| T1027.011 | HIGH | Suspicious Archive Creation (T1027.011) |
 | T1027.012 | CRITICAL | Windows LDR Hijacking (T1027.012) |
 | T1029 | CRITICAL | Scheduled Transfer (T1029) |
 | T1030 | CRITICAL | Data Chunking and Fragmentation (T1030) |

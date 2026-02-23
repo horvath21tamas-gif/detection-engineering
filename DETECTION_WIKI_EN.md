@@ -4012,7 +4012,7 @@ and programmatic evasion (Visible=$false) from untrusted shells.
 
 
 ---
-## Ultra-Pro High-Fidelity Remote Email Export Anomaly (T1114.002)
+## Remote Email Export Anomaly (T1114.002)
 - **ID:** `T1114_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -4020,7 +4020,7 @@ and programmatic evasion (Visible=$false) from untrusted shells.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects unauthorized remote email collection by identifying systematic 
-mailbox export requests that use sensitive keyword filters and redirect 
+mailbox export requests that apply sensitive keyword filters and redirect 
 output to non-standard internal UNC paths or administrative shares.
 
 

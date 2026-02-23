@@ -3826,7 +3826,7 @@ COM objektum példányosítás (Outlook.Application), mappaindex célzás (Beér
 
 
 ---
-## Ultra-Pro High-Fidelity távoli e-mail exportálási rendellenesség (T1114.002)
+## Távoli e-mail exportálási rendellenesség (T1114.002)
 - **ID:** `T1114_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -3834,7 +3834,7 @@ COM objektum példányosítás (Outlook.Application), mappaindex célzás (Beér
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** A szisztematikus azonosítással észleli a jogosulatlan távoli e-mail-gyűjtést
-postafiók-exportálási kérelmek, amelyek érzékeny kulcsszószűrőket és átirányítást használnak
+postafiók-exportálási kérelmek, amelyek érzékeny kulcsszószűrőket és átirányítást alkalmaznak
 kimenet nem szabványos belső UNC-útvonalakra vagy adminisztrációs megosztásokra.
 
 #### 🚨 Response Playbook

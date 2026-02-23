@@ -3826,7 +3826,7 @@ und programmatische Umgehung (Visible=$false) von nicht vertrauenswürdigen Shel
 
 
 ---
-## Anomalie beim Remote-E-Mail-Export von Ultra-Pro High-Fidelity (T1114.002)
+## Anomalie beim Remote-E-Mail-Export (T1114.002)
 - **ID:** `T1114_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -3834,7 +3834,7 @@ und programmatische Umgehung (Visible=$false) von nicht vertrauenswürdigen Shel
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt die unbefugte Remote-E-Mail-Sammlung durch Identifizierung systematischer
-Postfachexportanfragen, die sensible Schlüsselwortfilter und Weiterleitungen verwenden
+Postfachexportanfragen, die Filter und Umleitungen für sensible Schlüsselwörter anwenden
 Ausgabe auf nicht standardmäßige interne UNC-Pfade oder administrative Freigaben.
 
 #### 🚨 Reaktions-Playbook

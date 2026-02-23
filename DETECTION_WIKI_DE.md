@@ -2907,16 +2907,17 @@ Filtert gängige Software-Update-Zyklen und MSI-Installationsgeräusche heraus.
 
 
 ---
-## Ultra-Pro High-Fidelity-Anwendungsschicht-C2-Anomalie (T1071)
+## Anomalie der Anwendungsschicht C2 (T1071)
 - **ID:** `T1071.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Kritisch hoch (SIEM-Killerkategorie!)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt potenzielle C2-Kommunikation durch Identifizierung anomaler Netzwerkverbindungen
-Initiiert durch Nicht-Browser-Prozesse, Schwerpunkt auf Bibliotheksladungen (WinInet/WinHTTP)
-und verdächtige Eltern-Kind-Beziehungen.
+- **Beschreibung:** Erkennt potenzielle C2-Kommunikation auf Anwendungsebene durch Überwachung anormaler Netzwerke
+Verbindungen, die von Nicht-Browser-Prozessen initiiert werden.Konzentriert sich auf verdächtige Eltern-Kind-Beziehungen
+Beziehungen, hochriskante LOLBins und bibliotheksbasierte Netzwerkaktivitäten (WinInet/WinHTTP).
+Filtert legitimen Browserverkehr und vertrauenswürdige Infrastruktur, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **IP-Reputation: Überprüfen Sie die Remote-IP-Adresse in Reputationsdatenbanken.**

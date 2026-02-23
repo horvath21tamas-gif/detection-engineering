@@ -2907,16 +2907,17 @@ Kiszűri a gyakori szoftverfrissítési ciklusokat és az MSI telepítői zajt.
 
 
 ---
-## Ultra-Pro High-Fidelity alkalmazási réteg C2 anomália (T1071)
+## Alkalmazási réteg C2 anomália (T1071)
 - **ID:** `T1071.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Kritikusan Magas (SIEM gyilkos kategória!)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a lehetséges C2 kommunikációt a rendellenes hálózati kapcsolatok azonosításával
-nem böngésző folyamatok által kezdeményezett, a könyvtárbetöltésekre összpontosítva (WinInet/WinHTTP)
-és gyanús szülő-gyerek kapcsolatok.
+- **Leírás:** A rendellenes hálózat figyelésével észleli a potenciális C2 alkalmazási rétegű kommunikációt
+nem böngésző folyamatok által kezdeményezett kapcsolatok.A gyanús szülő-gyermekre összpontosít
+kapcsolatok, magas kockázatú LOLBins és könyvtár-alapú hálózati tevékenység (WinInet/WinHTTP).
+Szűri a jogos böngészőforgalmat és a megbízható infrastruktúrát, hogy csökkentse a hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **IP hírnév: Ellenőrizd a távoli IP címet hírnév-adatbázisokban.**

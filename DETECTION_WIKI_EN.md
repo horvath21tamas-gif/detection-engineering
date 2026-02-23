@@ -3039,16 +3039,17 @@ Filters out common software update cycles and MSI installer noise.
 
 
 ---
-## Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071)
+## Application Layer C2 Anomaly (T1071)
 - **ID:** `T1071.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Kritikusan Magas (SIEM gyilkos kategória!)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects potential C2 communication by identifying anomalous network connections 
-initiated by non-browser processes, focusing on library loads (WinInet/WinHTTP) 
-and suspicious parent-child relationships.
+- **Leírás:** Detects potential application-layer C2 communication by monitoring anomalous network 
+connections initiated by non-browser processes. Focuses on suspicious parent-child 
+relationships, high-risk LOLBins, and library-based network activity (WinInet/WinHTTP). 
+Filters legitimate browser traffic and trusted infrastructure to reduce false positives.
 
 
 #### 🚨 Response Playbook

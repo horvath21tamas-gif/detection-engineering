@@ -744,16 +744,18 @@ A DLL export sorszámára (#24), a duplikáció kezelésére,
 
 
 ---
-## Ultra-Pro High-Fidelity SAM & SYSTEM Registry Theft (T1003.002)
+## SAM & SYSTEM Registry Theft (T1003.002)
 - **ID:** `T1003_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a SAM, a SYSTEM és a SECURITY nyilvántartási kaptárak jogosulatlan kibontását.
-A „reg.exe” visszaélésre, a VSS-alapú lopásra és az „esentutl.exe” fájlok másolására összpontosít
-nem szabványos szülőfolyamatokból és nem megbízható végrehajtási útvonalakból.
+- **Leírás:** Érzékeli a SAM, SYSTEM és SECURITY nyilvántartási kaptárak jogosulatlan kibontását.
+A következőkre összpontosít:
+- Reg.exe visszaélés a „mentés” vagy „export” parancsokkal, amelyek a kritikus csalánkiütéseket célozzák meg
+- VSS árnyékmásolat létrehozása a vssadmin.exe segítségével
+- Közvetlen másolás az esentutl.exe-n keresztül nem szabványos szülőkről vagy gyanús útvonalakról
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -762,7 +764,7 @@ nem szabványos szülőfolyamatokból és nem megbízható végrehajtási útvon
 
 
 ---
-## Ultra-Pro High-Fidelity NTDS.dit kivonás (T1003.003)
+## NTDS.dit kivonat (T1003.003)
 - **ID:** `T1003_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -770,8 +772,10 @@ nem szabványos szülőfolyamatokból és nem megbízható végrehajtási útvon
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [DISKSHADOW.EXE](https://lolbas-project.github.io/lolbas/), [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [NTDSUTIL.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli az Active Directory adatbázis (NTDS.dit) jogosulatlan kibontását.
-Az 'ntdsutil'-t rövidített parancsokkal, diskshadow szkriptekkel azonosítja,
-és árnyékmásolat létrehozása nem biztonsági mentési folyamatokkal a tartományvezérlőkön.
+A következőkre összpontosít:
+- 'ntdsutil' használat rövidített vagy gyanús parancsokkal
+- DiskShadow szkriptek és árnyékmásolat létrehozása
+- 'esentutl' hozzáférés az NTDS.dit fájlhoz nem tartalék környezetből
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -780,7 +784,7 @@ Az 'ntdsutil'-t rövidített parancsokkal, diskshadow szkriptekkel azonosítja,
 
 
 ---
-## Ultra-Pro High-Fidelity LSA titkok és biztonsági kaptárlopás (T1003.004)
+## LSA titkai és biztonsági kaptárlopás (T1003.004)
 - **ID:** `T1003_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -788,8 +792,10 @@ Az 'ntdsutil'-t rövidített parancsokkal, diskshadow szkriptekkel azonosítja,
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli az LSA-titkok jogosulatlan kimásolását a HKLM\SECURITY rendszerleíró adatbázisból.
-A fejlett exportmintákra, az Impacket-stílusú távoli dumpokra és a
-hitelesítő adatokhoz való hozzáférés nem megbízható szülői folyamatokon keresztül.
+A következőkre összpontosít:
+- Speciális beállításjegyzék-exportálási minták (reg.exe, PowerShell)
+- Impacket stílusú távoli vagy helyi dump
+- Hitelesítési adatokhoz való hozzáférés nem megbízható vagy gyanús szülői folyamatokon keresztül
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -744,7 +744,7 @@ und spezielle LOLBins, die die standardmäßige EDR-String-basierte Erkennung um
 
 
 ---
-## Ultra-Pro High-Fidelity SAM & SYSTEM-Registrierungsdiebstahl (T1003.002)
+## Diebstahl der SAM- und SYSTEM-Registrierung (T1003.002)
 - **ID:** `T1003_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -752,8 +752,10 @@ und spezielle LOLBins, die die standardmäßige EDR-String-basierte Erkennung um
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt unbefugtes Extrahieren der Registrierungsstrukturen SAM, SYSTEM und SECURITY.
-Konzentriert sich auf den Missbrauch von „reg.exe“, VSS-basierten Diebstahl und das Kopieren von „esentutl.exe“-Dateien
-von nicht standardmäßigen übergeordneten Prozessen und nicht vertrauenswürdigen Ausführungspfaden.
+Konzentriert sich auf:
+- Missbrauch von reg.exe mit den Befehlen „save“ oder „export“, die auf kritische Bienenstöcke abzielen
+- Erstellung einer VSS-Schattenkopie über vssadmin.exe
+- Direktes Kopieren über esentutl.exe von nicht standardmäßigen Eltern oder verdächtigen Pfaden
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -762,7 +764,7 @@ von nicht standardmäßigen übergeordneten Prozessen und nicht vertrauenswürdi
 
 
 ---
-## Ultra-Pro High-Fidelity NTDS.dit-Extraktion (T1003.003)
+## NTDS.dit-Extraktion (T1003.003)
 - **ID:** `T1003_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -770,8 +772,10 @@ von nicht standardmäßigen übergeordneten Prozessen und nicht vertrauenswürdi
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [DISKSHADOW.EXE](https://lolbas-project.github.io/lolbas/), [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [NTDSUTIL.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt unbefugtes Extrahieren der Active Directory-Datenbank (NTDS.dit).
-Identifiziert „ntdsutil“ mit abgekürzten Befehlen, Diskshadow-Skripten,
-und Erstellung von Schattenkopien durch Nicht-Backup-Prozesse auf Domänencontrollern.
+Konzentriert sich auf:
+– Verwendung von „ntdsutil“ mit abgekürzten oder verdächtigen Befehlen
+- DiskShadow-Skripte und Erstellung von Schattenkopien
+- 'esentutl'-Zugriff auf NTDS.dit aus Nicht-Backup-Kontexten
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -780,7 +784,7 @@ und Erstellung von Schattenkopien durch Nicht-Backup-Prozesse auf Domänencontro
 
 
 ---
-## Ultra-Pro High-Fidelity LSA Secrets & Security Hive Theft (T1003.004)
+## LSA Secrets & Security Hive Theft (T1003.004)
 - **ID:** `T1003_004.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -788,8 +792,10 @@ und Erstellung von Schattenkopien durch Nicht-Backup-Prozesse auf Domänencontro
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt die unbefugte Extraktion von LSA-Geheimnissen aus der Registrierungsstruktur HKLM\SECURITY.
-Konzentriert sich auf erweiterte Exportmuster, Remote-Dumps im Impacket-Stil und
-Anmeldeinformationszugriff über nicht vertrauenswürdige übergeordnete Prozesse.
+Konzentriert sich auf:
+- Erweiterte Registrierungsexportmuster (reg.exe, PowerShell)
+- Remote- oder lokale Dumps im Impacket-Stil
+– Zugriff auf Anmeldeinformationen über nicht vertrauenswürdige oder verdächtige übergeordnete Prozesse
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

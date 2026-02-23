@@ -750,16 +750,18 @@ and specialized LOLBins that bypass standard EDR string-based detection.
 
 
 ---
-## Ultra-Pro High-Fidelity SAM & SYSTEM Registry Theft (T1003.002)
+## SAM & SYSTEM Registry Theft (T1003.002)
 - **ID:** `T1003_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized extraction of the SAM, SYSTEM, and SECURITY registry hives. 
-Focuses on 'reg.exe' abuse, VSS-based theft, and 'esentutl.exe' file copying 
-from non-standard parent processes and untrusted execution paths.
+- **Leírás:** Detects unauthorized extraction of the SAM, SYSTEM, and SECURITY registry hives.
+Focuses on:
+- reg.exe abuse with 'save' or 'export' commands targeting critical hives
+- VSS shadow copy creation via vssadmin.exe
+- Direct copying via esentutl.exe from non-standard parents or suspicious paths
 
 
 #### 🚨 Response Playbook
@@ -769,7 +771,7 @@ from non-standard parent processes and untrusted execution paths.
 
 
 ---
-## Ultra-Pro High-Fidelity NTDS.dit Extraction (T1003.003)
+## NTDS.dit Extraction (T1003.003)
 - **ID:** `T1003_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -777,8 +779,10 @@ from non-standard parent processes and untrusted execution paths.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [DISKSHADOW.EXE](https://lolbas-project.github.io/lolbas/), [ESENTUTL.EXE](https://lolbas-project.github.io/lolbas/), [NTDSUTIL.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects unauthorized extraction of the Active Directory database (NTDS.dit).
-Identifies 'ntdsutil' with abbreviated commands, diskshadow scripts, 
-and shadow copy creation by non-backup processes on Domain Controllers.
+Focuses on:
+- 'ntdsutil' usage with abbreviated or suspicious commands
+- DiskShadow scripts and shadow copy creation
+- 'esentutl' access to NTDS.dit from non-backup contexts
 
 
 #### 🚨 Response Playbook
@@ -788,16 +792,18 @@ and shadow copy creation by non-backup processes on Domain Controllers.
 
 
 ---
-## Ultra-Pro High-Fidelity LSA Secrets & Security Hive Theft (T1003.004)
+## LSA Secrets & Security Hive Theft (T1003.004)
 - **ID:** `T1003_004.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized extraction of LSA Secrets from the HKLM\SECURITY registry hive. 
-Focuses on advanced export patterns, Impacket-style remote dumps, and 
-credential access via untrusted parent processes.
+- **Leírás:** Detects unauthorized extraction of LSA Secrets from the HKLM\SECURITY registry hive.
+Focuses on:
+- Advanced registry export patterns (reg.exe, PowerShell)
+- Impacket-style remote or local dumps
+- Credential access via untrusted or suspicious parent processes
 
 
 #### 🚨 Response Playbook

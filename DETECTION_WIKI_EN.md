@@ -172,7 +172,7 @@
 - [Ultra-Pro High-Fidelity Domain Fronting Detection (T1090.004)](#ultra-pro-high-fidelity-domain-fronting-detection-(t1090004))
 - [High-Fidelity Process Execution from Removable Media](#high-fidelity-process-execution-from-removable-media)
 - [Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092)](#ultra-pro-high-fidelity-removable-media-c2-anomaly-(t1071002--t1092))
-- [Ultra-Pro High-Fidelity Non-Application Layer C2 (T1095)](#ultra-pro-high-fidelity-non-application-layer-c2-(t1095))
+- [Non-Application Layer C2 (T1095)](#non-application-layer-c2-(t1095))
 - [High-Fidelity Account Manipulation - Persistence Focused](#high-fidelity-account-manipulation---persistence-focused)
 - [High-Fidelity Entra ID Application Credential Addition](#high-fidelity-entra-id-application-credential-addition)
 - [High-Fidelity Exchange Mailbox Permission Grant (T1098.002)](#high-fidelity-exchange-mailbox-permission-grant-(t1098002))
@@ -3570,16 +3570,16 @@ focusing on automated script execution and Alternate Data Stream (ADS) abuse.
 
 
 ---
-## Ultra-Pro High-Fidelity Non-Application Layer C2 (T1095)
+## Non-Application Layer C2 (T1095)
 - **ID:** `T1095.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects custom C2 communication via raw TCP/UDP sockets by identifying 
-the instantiation of low-level NetworkStreams and manual byte-array 
-buffer manipulation followed by socket write operations.
+- **Leírás:** Detects custom C2 communication via raw TCP/UDP sockets by identifying the
+instantiation of low-level NetworkStreams and manual byte-array buffer 
+manipulation followed by socket write/read operations.
 
 
 #### 🚨 Response Playbook

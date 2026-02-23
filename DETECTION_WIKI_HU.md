@@ -172,7 +172,7 @@
 - [Ultra-Pro High-Fidelity Domain Fronting Detection (T1090.004)](#ultra-pro-high-fidelity-domain-fronting-detection-(t1090004))
 - [Nagy pontosságú folyamatvégrehajtás cserélhető adathordozóról](#nagy-pontosságú-folyamatvégrehajtás-cserélhető-adathordozóról)
 - [Ultra-Pro High-Fidelity cserélhető adathordozó C2 anomália (T1071.002 / T1092)](#ultra-pro-high-fidelity-cserélhető-adathordozó-c2-anomália-(t1071002--t1092))
-- [Ultra-Pro High-Fidelity, nem alkalmazási réteg C2 (T1095)](#ultra-pro-high-fidelity-nem-alkalmazási-réteg-c2-(t1095))
+- [Nem alkalmazási réteg C2 (T1095)](#nem-alkalmazási-réteg-c2-(t1095))
 - [Nagy pontosságú fiókmanipuláció – a kitartásra összpontosítva](#nagy-pontosságú-fiókmanipuláció-–-a-kitartásra-összpontosítva)
 - [High-Fidelity Entra ID alkalmazás hitelesítő adatok kiegészítése](#high-fidelity-entra-id-alkalmazás-hitelesítő-adatok-kiegészítése)
 - [High-Fidelity Exchange Mailbox Permission Grant (T1098.002)](#high-fidelity-exchange-mailbox-permission-grant-(t1098002))
@@ -3409,16 +3409,16 @@ az automatikus szkript-végrehajtásra és az alternatív adatfolyammal (ADS) va
 
 
 ---
-## Ultra-Pro High-Fidelity, nem alkalmazási réteg C2 (T1095)
+## Nem alkalmazási réteg C2 (T1095)
 - **ID:** `T1095.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az egyéni C2 kommunikációt a nyers TCP/UDP socketeken keresztül azonosítással
-az alacsony szintű NetworkStreams és a kézi bájttömb példányosítása
-puffer manipuláció, majd socket írási műveletek.
+- **Leírás:** Érzékeli az egyéni C2 kommunikációt a nyers TCP/UDP socketeken keresztül azáltal, hogy azonosítja a
+alacsony szintű NetworkStreams és kézi byte-array puffer példányosítása
+manipuláció, amelyet socket írási/olvasási műveletek követnek.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

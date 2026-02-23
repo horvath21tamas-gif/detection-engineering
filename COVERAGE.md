@@ -177,7 +177,7 @@
 | T1090.004 | CRITICAL | Ultra-Pro High-Fidelity Domain Fronting Detection (T1090.004) |
 | T1091 | HIGH | High-Fidelity Process Execution from Removable Media |
 | T1092 | CRITICAL | Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092) |
-| T1095 | CRITICAL | Ultra-Pro High-Fidelity Non-Application Layer C2 (T1095) |
+| T1095 | CRITICAL | Non-Application Layer C2 (T1095) |
 | T1098 | CRITICAL | Suspicious Use of net user or net localgroup via cmd.exe, High-Fidelity Account Manipulation - Persistence Focused |
 | T1098.001 | CRITICAL | High-Fidelity Entra ID Application Credential Addition |
 | T1098.002 | CRITICAL | High-Fidelity Exchange Mailbox Permission Grant (T1098.002) |

@@ -172,7 +172,7 @@
 - [Ultra-Pro High-Fidelity Domain Fronting Detection (T1090.004)](#ultra-pro-high-fidelity-domain-fronting-detection-(t1090004))
 - [High-Fidelity-Prozessausführung von Wechselmedien](#high-fidelity-prozessausführung-von-wechselmedien)
 - [Ultra-Pro High-Fidelity-Wechselmedien C2-Anomalie (T1071.002 / T1092)](#ultra-pro-high-fidelity-wechselmedien-c2-anomalie-(t1071002--t1092))
-- [Ultra-Pro High-Fidelity Non-Application Layer C2 (T1095)](#ultra-pro-high-fidelity-non-application-layer-c2-(t1095))
+- [Nicht-Anwendungsschicht C2 (T1095)](#nicht-anwendungsschicht-c2-(t1095))
 - [High-Fidelity-Kontomanipulation – auf Persistenz ausgerichtet](#high-fidelity-kontomanipulation-–-auf-persistenz-ausgerichtet)
 - [High-Fidelity-Entra-ID-Anwendungszugangsberechtigungszusatz](#high-fidelity-entra-id-anwendungszugangsberechtigungszusatz)
 - [Berechtigungsgewährung für High-Fidelity-Exchange-Postfächer (T1098.002)](#berechtigungsgewährung-für-high-fidelity-exchange-postfächer-(t1098002))
@@ -3409,7 +3409,7 @@ Der Schwerpunkt liegt auf der automatisierten Skriptausführung und dem Missbrau
 
 
 ---
-## Ultra-Pro High-Fidelity Non-Application Layer C2 (T1095)
+## Nicht-Anwendungsschicht C2 (T1095)
 - **ID:** `T1095.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -3417,8 +3417,8 @@ Der Schwerpunkt liegt auf der automatisierten Skriptausführung und dem Missbrau
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt benutzerdefinierte C2-Kommunikation über unformatierte TCP/UDP-Sockets durch Identifizierung
-die Instanziierung von Low-Level-NetworkStreams und manuellem Byte-Array
-Puffermanipulation, gefolgt von Socket-Schreibvorgängen.
+Instanziierung von Low-Level-NetworkStreams und manueller Byte-Array-Puffer
+Manipulation gefolgt von Socket-Schreib-/Lesevorgängen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -89,7 +89,7 @@
 | T1039 | CRITICAL | Ultra-Pro High-Fidelity Network Share Discovery (T1039) |
 | T1040 | HIGH | Ultra-Pro High-Fidelity Network Sniffing Detection (T1040) |
 | T1041 | CRITICAL | Ultra-Pro High-Fidelity Exfiltration Over C2 Channel (T1041) |
-| T1046 | HIGH | Ultra-Pro High-Fidelity Network Service Discovery (T1046) |
+| T1046 | HIGH | Network Service Discovery (ATT&CK T1046) |
 | T1047 | HIGH | Suspicious Remote Process Creation via WMIC |
 | T1048 | CRITICAL | Ultra-Pro High-Fidelity Alternative Protocol Exfiltration (T1048) |
 | T1048.001 | CRITICAL | Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001) |

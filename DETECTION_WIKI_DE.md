@@ -84,7 +84,7 @@
 - [Ultra-Pro High-Fidelity Network Share Discovery (T1039)](#ultra-pro-high-fidelity-network-share-discovery-(t1039))
 - [Ultraprofessionelle High-Fidelity-Netzwerk-Sniffing-Erkennung (T1040)](#ultraprofessionelle-high-fidelity-netzwerk-sniffing-erkennung-(t1040))
 - [Ultra-Pro High-Fidelity-Exfiltration über C2-Kanal (T1041)](#ultra-pro-high-fidelity-exfiltration-über-c2-kanal-(t1041))
-- [Ultra-Pro High-Fidelity-Netzwerkdiensterkennung (T1046)](#ultra-pro-high-fidelity-netzwerkdiensterkennung-(t1046))
+- [Netzwerkdiensterkennung (ATT&CK T1046)](#netzwerkdiensterkennung-(att&ck-t1046))
 - [Verdächtige Remote-Prozesserstellung über WMIC](#verdächtige-remote-prozesserstellung-über-wmic)
 - [Ultra-Pro High-Fidelity Alternative Protocol Exfiltration (T1048)](#ultra-pro-high-fidelity-alternative-protocol-exfiltration-(t1048))
 - [Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001)](#ultra-pro-high-fidelity-symmetric-encrypted-exfiltration-(t1048001))
@@ -1895,16 +1895,14 @@ ausgehende Netzwerkverbindungen von Nicht-Browser-Prozessen.
 
 
 ---
-## Ultra-Pro High-Fidelity-Netzwerkdiensterkennung (T1046)
+## Netzwerkdiensterkennung (ATT&CK T1046)
 - **ID:** `T1046.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Erkennung von Netzwerkdiensten und das Scannen interner Ports.
-Konzentriert sich auf schleifenbasierte Scanmuster in PowerShell, CMD und spezialisiert
-Binärdateien, die aus Nicht-IT-Administratorkontexten stammen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt systematische interne Netzwerkdiensterkennung und Port-Scans, indem es schleifenbasierte Aufzählungsmuster, Port-Targeting mit hohem Risiko und Scan-Dienstprogramme identifiziert, die aus nicht-administrativen oder verdächtigen übergeordneten Kontexten ausgeführt werden.Konzentriert sich auf geskriptete seitliche Aufklärungsaktivitäten und nicht auf einzelne interaktive Befehle.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

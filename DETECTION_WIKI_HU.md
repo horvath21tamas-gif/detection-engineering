@@ -84,7 +84,7 @@
 - [Ultra-Pro High-Fidelity Network Share Discovery (T1039)](#ultra-pro-high-fidelity-network-share-discovery-(t1039))
 - [Ultra-Pro High-Fidelity hálózati szippantásérzékelés (T1040)](#ultra-pro-high-fidelity-hálózati-szippantásérzékelés-(t1040))
 - [Ultra-Pro High-Fidelity szűrés C2 csatornán keresztül (T1041)](#ultra-pro-high-fidelity-szűrés-c2-csatornán-keresztül-(t1041))
-- [Ultra-Pro High-Fidelity Network Service Discovery (T1046)](#ultra-pro-high-fidelity-network-service-discovery-(t1046))
+- [Hálózati szolgáltatáskeresés (ATT&CK T1046)](#hálózati-szolgáltatáskeresés-(att&ck-t1046))
 - [Gyanús távoli folyamat létrehozása a WMIC-en keresztül](#gyanús-távoli-folyamat-létrehozása-a-wmic-en-keresztül)
 - [Ultra-Pro High-Fidelity Alternatív Protocol Exfiltration (T1048)](#ultra-pro-high-fidelity-alternatív-protocol-exfiltration-(t1048))
 - [Ultra-Pro High-Fidelity szimmetrikus titkosított kiszűrés (T1048.001)](#ultra-pro-high-fidelity-szimmetrikus-titkosított-kiszűrés-(t1048001))
@@ -1895,16 +1895,14 @@ kimenő hálózati kapcsolatok a nem böngésző folyamatokból.
 
 
 ---
-## Ultra-Pro High-Fidelity Network Service Discovery (T1046)
+## Hálózati szolgáltatáskeresés (ATT&CK T1046)
 - **ID:** `T1046.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a rendszeres hálózati szolgáltatás-felderítést és a belső port-ellenőrzést.
-A PowerShell, CMD és specializált hurokalapú szkennelési mintákra összpontosít
-nem IT rendszergazdai környezetből származó bináris fájlok.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a szisztematikus belső hálózati szolgáltatás-felderítést és portellenőrzést a hurok alapú felsorolási minták, a magas kockázatú portcélzás és a nem adminisztratív vagy gyanús szülői környezetből végrehajtott ellenőrző segédprogramok azonosításával.Az egyedi interaktív parancsok helyett a szkriptezett oldalsó felderítési tevékenységre összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

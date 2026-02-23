@@ -84,7 +84,7 @@
 - [Ultra-Pro High-Fidelity Network Share Discovery (T1039)](#ultra-pro-high-fidelity-network-share-discovery-(t1039))
 - [Ultra-Pro High-Fidelity Network Sniffing Detection (T1040)](#ultra-pro-high-fidelity-network-sniffing-detection-(t1040))
 - [Ultra-Pro High-Fidelity Exfiltration Over C2 Channel (T1041)](#ultra-pro-high-fidelity-exfiltration-over-c2-channel-(t1041))
-- [Ultra-Pro High-Fidelity Network Service Discovery (T1046)](#ultra-pro-high-fidelity-network-service-discovery-(t1046))
+- [Network Service Discovery (ATT&CK T1046)](#network-service-discovery-(att&ck-t1046))
 - [Suspicious Remote Process Creation via WMIC](#suspicious-remote-process-creation-via-wmic)
 - [Ultra-Pro High-Fidelity Alternative Protocol Exfiltration (T1048)](#ultra-pro-high-fidelity-alternative-protocol-exfiltration-(t1048))
 - [Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001)](#ultra-pro-high-fidelity-symmetric-encrypted-exfiltration-(t1048001))
@@ -1968,16 +1968,14 @@ outbound network connections from non-browser processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Network Service Discovery (T1046)
+## Network Service Discovery (ATT&CK T1046)
 - **ID:** `T1046.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic network service discovery and internal port scanning. 
-Focuses on loop-based scanning patterns in PowerShell, CMD, and specialized 
-binaries originating from non-IT admin contexts.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects systematic internal network service discovery and port scanning by identifying loop-based enumeration patterns, high-risk port targeting, and scanning utilities executed from non-administrative or suspicious parent contexts. Focuses on scripted lateral reconnaissance activity rather than single interactive commands.
 
 
 #### 🚨 Response Playbook

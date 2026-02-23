@@ -2925,16 +2925,17 @@ nem böngésző folyamatok által kezdeményezett, a könyvtárbetöltésekre ö
 
 
 ---
-## Ultra-Pro High-Fidelity HTTP/S C2 anomália (T1071.001)
+## HTTPS C2 anomália (T1071.001)
 - **ID:** `T1071_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Kritikusan Magas (SIEM gyilkos kategória!)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a lehetséges C2 kommunikációt a HTTP/S-n keresztül az anomáliák azonosításával
-hálózati kapcsolatok olyan folyamatokból, amelyekből általában hiányzik a hálózati logika,
-vagy a folyamat kiüresedésének és a gyanús szülő-gyerek származás jeleit mutatják.
+- **Leírás:** A hálózati kapcsolatok figyelésével észleli a rendellenes HTTP/S-alapú C2 kommunikációt
+nem hálózatos folyamatokból vagy az üregesedés jeleit mutató folyamatokból, szokatlan
+szülő-gyerek származás, vagy gyanús automatizálás.Kiszűri a legális böngészőket
+és ismert biztonságos úticélok a hamis pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **IP hírnév: Ellenőrizd a távoli IP címet hírnév-adatbázisokban.**

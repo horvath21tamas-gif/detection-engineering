@@ -2925,16 +2925,17 @@ und verdächtige Eltern-Kind-Beziehungen.
 
 
 ---
-## Ultra-Pro High-Fidelity HTTP/S C2-Anomalie (T1071.001)
+## HTTPS-C2-Anomalie (T1071.001)
 - **ID:** `T1071_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Kritisch hoch (SIEM-Killerkategorie!)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt potenzielle C2-Kommunikation über HTTP/S durch Identifizierung von Anomalien
-Netzwerkverbindungen von Prozessen, denen es typischerweise an Netzwerklogik mangelt,
-oder Anzeichen von Prozessaushöhlung und verdächtiger Eltern-Kind-Abstammung aufweisen.
+- **Beschreibung:** Erkennt anomale HTTP/S-basierte C2-Kommunikation durch Überwachung von Netzwerkverbindungen
+von nicht vernetzten Prozessen oder Prozessen, die Anzeichen von Aushöhlung zeigen, ungewöhnlich
+Eltern-Kind-Abstammung oder verdächtige Automatisierung.Filtert legitime Browser heraus
+und bekannte sichere Ziele, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **IP-Reputation: Überprüfen Sie die Remote-IP-Adresse in Reputationsdatenbanken.**

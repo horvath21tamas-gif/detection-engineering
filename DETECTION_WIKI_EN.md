@@ -3058,16 +3058,17 @@ and suspicious parent-child relationships.
 
 
 ---
-## Ultra-Pro High-Fidelity HTTP/S C2 Anomaly (T1071.001)
+## HTTP/S C2 Anomaly (T1071.001)
 - **ID:** `T1071_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Kritikusan Magas (SIEM gyilkos kategória!)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects potential C2 communication over HTTP/S by identifying anomalous 
-network connections from processes that typically lack networking logic, 
-or show signs of process hollowing and suspicious parent-child lineage.
+- **Leírás:** Detects anomalous HTTP/S-based C2 communication by monitoring network connections
+from non-networking processes or processes showing signs of hollowing, unusual 
+parent-child lineage, or suspicious automation. Filters out legitimate browsers 
+and known safe destinations to reduce false positives.
 
 
 #### 🚨 Response Playbook

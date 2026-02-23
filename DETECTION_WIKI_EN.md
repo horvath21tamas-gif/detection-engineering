@@ -1406,14 +1406,12 @@ code execution (Reflection/IEX) within the same process context.
 
 
 ---
-## Ultra-Pro High-Fidelity Steganography Payload Extraction (T1027.004)
+## Steganography Payload Extraction (T1027.004)
 - **ID:** `T1027_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects the extraction of malicious payloads from image files using 
-low-level GDI+ or .NET Bitmap methods often seen in Invoke-PSImage or similar 
-steganography frameworks.
+- **Leírás:** Detects extraction of malicious payloads from image files using low-level GDI+ or  .NET Bitmap methods. Focuses on Invoke-PSImage or similar steganography frameworks,  while filtering legitimate image manipulation software and system processes.
 
 
 #### 🚨 Response Playbook

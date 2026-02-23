@@ -1364,14 +1364,12 @@ kódvégrehajtás (Reflection/IEX) ugyanabban a folyamatkörnyezetben.
 
 
 ---
-## Ultra-Pro High-Fidelity steganográfia hasznos teher kivonás (T1027.004)
+## Szteganográfia hasznos teher kivonás (T1027.004)
 - **ID:** `T1027_004.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Használatával észleli a rosszindulatú rakományok kinyerését a képfájlokból
-alacsony szintű GDI+ vagy .NET Bitmap metódusok, amelyek gyakran láthatók az Invoke-PSImage-ben vagy hasonlókban
-szteganográfiai keretek.
+- **Leírás:** Alacsony szintű GDI+ vagy .NET Bitmap metódusokkal észleli a rosszindulatú rakományok kibontását a képfájlokból.Az Invoke-PSImage vagy hasonló szteganográfiai keretrendszerre összpontosít, miközben szűri a jogos képmanipulációs szoftvereket és rendszerfolyamatokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

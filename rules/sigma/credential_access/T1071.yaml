@@ -1,64 +1,67 @@
-title: Ultra-Pro High-Fidelity Application Layer C2 Anomaly (T1071)
+title: Application Layer C2 Anomaly (T1071)
 id: b1b226a4-7a15-425e-ac30-67745915aa59
 status: stable
 description: |
-    Detects potential C2 communication by identifying anomalous network connections 
-    initiated by non-browser processes, focusing on library loads (WinInet/WinHTTP) 
-    and suspicious parent-child relationships.
+  Detects potential application-layer C2 communication by monitoring anomalous network 
+  connections initiated by non-browser processes. Focuses on suspicious parent-child 
+  relationships, high-risk LOLBins, and library-based network activity (WinInet/WinHTTP). 
+  Filters legitimate browser traffic and trusted infrastructure to reduce false positives.
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.command_and_control
-    - attack.t1071.001
-    - attack.t1071
+  - attack.command_and_control
+  - attack.t1071
+  - attack.t1071.001
 logsource:
-    category: network_connection
-    product: windows
+  category: network_connection
+  product: windows
 detection:
-    selection_suspicious_procs:
-        Image|endswith:
-            - '\notepad.exe'
-            - '\calc.exe'
-            - '\mspaint.exe'
-            - '\colorcpl.exe'
-            - '\spoolsv.exe'              
-            - '\winver.exe'
-            - '\scrcons.exe'             
+  selection_suspicious_procs:
+    Image|endswith:
+      - '\notepad.exe'
+      - '\calc.exe'
+      - '\mspaint.exe'
+      - '\colorcpl.exe'
+      - '\spoolsv.exe'
+      - '\winver.exe'
+      - '\scrcons.exe'
 
-    selection_lolbins:
-        Image|endswith:
-            - '\rundll32.exe'
-            - '\regsvr32.exe'
-            - '\mshta.exe'
-            - '\certutil.exe'          
-        CommandLine|contains:
-            - 'http'                    
-            - 'ftp'
+  selection_lolbins:
+    Image|endswith:
+      - '\rundll32.exe'
+      - '\regsvr32.exe'
+      - '\mshta.exe'
+      - '\certutil.exe'
+    CommandLine|contains:
+      - 'http'
+      - 'ftp'
 
-    filter_legit_destinations:
-        DestinationHostname|endswith:
-            - '.microsoft.com'
-            - '.windowsupdate.com'
-            - '.digicert.com'
-            - '.amazontrust.com'
-        DestinationPort:
-            - 135
-            - 139
-            - 445                         
+  selection_context:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\powershell.exe'
+      - '\cmd.exe'
 
-    filter_browsers:
-        Image|contains:
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\firefox.exe'
-            - '\brave.exe'
+  filter_legit_destinations:
+    DestinationHostname|endswith:
+      - '.microsoft.com'
+      - '.windowsupdate.com'
+      - '.digicert.com'
+      - '.amazontrust.com'
+    DestinationPort:
+      - 135
+      - 139
+      - 445
 
-    selection_context:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\powershell.exe'
-            - '\cmd.exe'
+  filter_browsers:
+    Image|contains:
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\firefox.exe'
+      - '\brave.exe'
 
-    condition: (selection_suspicious_procs or selection_lolbins or selection_context) and not (filter_browsers or filter_legit_destinations)
+  condition: 
+    (selection_suspicious_procs or selection_lolbins or selection_context) 
+    and not (filter_browsers or filter_legit_destinations)
 level: critical

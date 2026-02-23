@@ -1423,14 +1423,12 @@ steganography frameworks.
 
 
 ---
-## Ultra-Pro High-Fidelity Indicator Removal and Signature Theft (T1027.005)
+## Indicator Removal and Signature Theft (T1027.005)
 - **ID:** `T1027_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects attempts to remove indicators or manipulate digital signatures on binaries. 
-Focuses on signature theft (SigThief), PE header stripping, and string replacement 
-in suspicious locations.
+- **Leírás:** Detects attempts to remove indicators or manipulate digital signatures on binaries. Focuses on signature theft (SigThief), PE header stripping, and string replacement in suspicious execution contexts. Optimized to reduce false positives from  legitimate build tools and developer environments.
 
 
 #### 🚨 Response Playbook

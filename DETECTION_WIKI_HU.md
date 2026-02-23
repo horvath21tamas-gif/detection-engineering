@@ -1380,14 +1380,12 @@ szteganográfiai keretek.
 
 
 ---
-## Ultra-Pro High-Fidelity kijelző eltávolítása és aláíráslopás (T1027.005)
+## Jelző eltávolítása és aláíráslopás (T1027.005)
 - **ID:** `T1027_005.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a binárisokon lévő indikátorok eltávolítására vagy a digitális aláírások manipulálására irányuló kísérleteket.
-Az aláíráslopásra (SigThief), a PE-fejlécek eltávolítására és a karakterlánc-cserére összpontosít
-gyanús helyeken.
+- **Leírás:** Érzékeli a binárisokon lévő indikátorok eltávolítására vagy a digitális aláírások manipulálására irányuló kísérleteket.Az aláíráslopásra (SigThief), a PE-fejlécek eltávolítására és a karakterláncok cseréjére összpontosít gyanús végrehajtási környezetben.Optimalizált, hogy csökkentse a törvényes építési eszközökből és fejlesztői környezetekből származó hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

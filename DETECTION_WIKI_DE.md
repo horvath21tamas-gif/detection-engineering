@@ -1380,14 +1380,12 @@ Steganographie-Frameworks.
 
 
 ---
-## Ultra-Pro High-Fidelity-Indikatorentfernung und Signaturdiebstahl (T1027.005)
+## Entfernen des Indikators und Diebstahl der Unterschrift (T1027.005)
 - **ID:** `T1027_005.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt Versuche, Indikatoren zu entfernen oder digitale Signaturen auf Binärdateien zu manipulieren.
-Konzentriert sich auf Signaturdiebstahl (SigThief), PE-Header-Stripping und String-Ersetzung
-an verdächtigen Orten.
+- **Beschreibung:** Erkennt Versuche, Indikatoren zu entfernen oder digitale Signaturen auf Binärdateien zu manipulieren.Konzentriert sich auf Signaturdiebstahl (SigThief), PE-Header-Stripping und String-Ersetzung in verdächtigen Ausführungskontexten.Optimiert, um Fehlalarme aus legitimen Build-Tools und Entwicklerumgebungen zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

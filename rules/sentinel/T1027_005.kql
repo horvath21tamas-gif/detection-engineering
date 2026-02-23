@@ -1,4 +1,4 @@
 DeviceProcessEvents
 | where TimeGenerated > ago(24h)
 union *
-| where ((ProcessCommandLine in ("*sigthief*", "*copy-signature*", "*osslsigncode*", "*deltasig*")) or (ProcessCommandLine in ("*petools *", "*sethc.exe*", "*strings -d*", "*strip -s*"))) and (ProcessCommandLine in ("*\Users\Public\*", "*\AppData\Local\Temp\*", "*\Windows\Temp\*", "*\PerfLogs\*")) and (not ((FolderPath in ("*\Microsoft SDKs\*", "*\Windows Kits\*", "*\Visual Studio\*")) and ProcessCommandLine contains "signtool.exe sign"))
+| where ((ProcessCommandLine in ("*sigthief*", "*copy-signature*", "*osslsigncode*", "*deltasig*")) or (ProcessCommandLine in ("*petools *", "*sethc.exe*", "*strings -d*", "*strip -s*"))) and (ProcessCommandLine in ("*\Users\Public\*", "*\AppData\Local\Temp\*", "*\Windows\Temp\*", "*\PerfLogs\*")) and (not (((FolderPath in ("*\Microsoft SDKs\*", "*\Windows Kits\*", "*\Visual Studio\*")) and ProcessCommandLine contains "signtool.exe sign") or (User in ("*svc-build*", "*cicd*"))))

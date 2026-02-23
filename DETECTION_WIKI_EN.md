@@ -2023,16 +2023,14 @@ and network-capable LoLBins executing from suspicious paths.
 
 
 ---
-## Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001)
+## Symmetric Encrypted Exfiltration (ATT&CK T1048.001)
 - **ID:** `T1048_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [FTP.EXE](https://lolbas-project.github.io/lolbas/), [SFTP.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects encrypted data exfiltration by identifying SCP/SFTP/Rclone 
-usage from non-standard paths, focusing on automated (non-interactive) 
-flags and suspicious parent process lineages.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [FTP.EXE](https://lolbas-project.github.io/lolbas/), [SFTP.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Detects potential encrypted data exfiltration over symmetric encrypted protocols (SCP, SFTP, Rclone, WinSCP) by identifying automated, non-interactive upload behaviors combined with suspicious execution paths or unusual parent process lineage. Focuses on credential flags, batch execution, and bulk transfer operations.
 
 
 #### 🚨 Response Playbook

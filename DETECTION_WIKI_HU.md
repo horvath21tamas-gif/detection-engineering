@@ -1947,16 +1947,14 @@ abnormális ICMP pufferméretek, SSH/tunneling flagek nem rendszergazdai környe
 
 
 ---
-## Ultra-Pro High-Fidelity szimmetrikus titkosított kiszűrés (T1048.001)
+## Szimmetrikus titkosított kiszűrés (ATT&CK T1048.001)
 - **ID:** `T1048_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [FTP.EXE](https://lolbas-project.github.io/lolbas/), [SFTP.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Az SCP/SFTP/Rclone azonosításával észleli a titkosított adatok kiszűrését
-használat nem szabványos útvonalakról, az automatizált (nem interaktív) megoldásra összpontosítva
-zászlók és gyanús szülőfolyamatok vonalai.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [FTP.EXE](https://lolbas-project.github.io/lolbas/), [SFTP.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a lehetséges titkosított adatok kiszűrését szimmetrikus titkosított protokollokon (SCP, SFTP, Rclone, WinSCP) azáltal, hogy azonosítja az automatizált, nem interaktív feltöltési viselkedéseket, amelyek gyanús végrehajtási útvonalakkal vagy szokatlan szülőfolyamat-vonallal kombinálódnak.A hitelesítő adatok jelzőire, a kötegelt végrehajtásra és a tömeges átviteli műveletekre összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

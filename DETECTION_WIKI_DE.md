@@ -1947,16 +1947,14 @@ und netzwerkfähige LoLBins, die über verdächtige Pfade ausgeführt werden.
 
 
 ---
-## Ultra-Pro High-Fidelity Symmetric Encrypted Exfiltration (T1048.001)
+## Symmetrische verschlüsselte Exfiltration (ATT&CK T1048.001)
 - **ID:** `T1048_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [FTP.EXE](https://lolbas-project.github.io/lolbas/), [SFTP.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Exfiltration verschlüsselter Daten durch Identifizierung von SCP/SFTP/Rclone
-Nutzung von nicht standardmäßigen Pfaden, mit Schwerpunkt auf automatisierten (nicht interaktiven)
-Flags und verdächtige übergeordnete Prozesslinien.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [FTP.EXE](https://lolbas-project.github.io/lolbas/), [SFTP.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt potenzielle Exfiltration verschlüsselter Daten über symmetrische verschlüsselte Protokolle (SCP, SFTP, Rclone, WinSCP), indem automatisiertes, nicht interaktives Upload-Verhalten in Kombination mit verdächtigen Ausführungspfaden oder ungewöhnlicher Herkunft des übergeordneten Prozesses identifiziert wird.Der Schwerpunkt liegt auf Anmeldeinformationsflags, Stapelausführung und Massenübertragungsvorgängen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

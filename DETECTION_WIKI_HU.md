@@ -1711,16 +1711,14 @@ a nagy kockázatú felhasználói könyvtárakra és a gyanús szülői vonalakr
 
 
 ---
-## Ultra-Pro High-Fidelity álarcos fájltípus tolmács visszaélésen keresztül (T1036.008)
+## Masquerade via tolmács visszaélés (T1036.008)
 - **ID:** `T1036_008.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a nem egyező fájltípus-végrehajtást, ahol legitim értelmezők (wscript, cscript, powershell, regsvr32)
-nem szabványos kiterjesztésű fájlokat hajt végre (pl. .jpg, .txt, .png).
-Kiszűri a rendszerszintű automatizálást, és a nem megbízható felhasználói könyvtárakra összpontosít.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a nem egyező fájltípus-végrehajtást, ahol a legitim értelmezők (wscript, cscript, powershell, regsvr32, mshta, rundll32) nem szabványos kiterjesztésű fájlokat hajtanak végre (.jpg, .txt, .png stb.).A nem megbízható felhasználói könyvtárakra és a gyanús szülőfolyamatokra összpontosít, miközben szűri a rendszerszintű automatizálást és a fejlesztői műtermékeket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

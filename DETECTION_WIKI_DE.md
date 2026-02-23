@@ -1711,16 +1711,14 @@ Der Schwerpunkt liegt auf Benutzerverzeichnissen mit hohem Risiko und verdächti
 
 
 ---
-## Ultra-Pro High-Fidelity-Masquerade-Dateityp durch Interpreter-Missbrauch (T1036.008)
+## Maskerade durch Dolmetschermissbrauch (T1036.008)
 - **ID:** `T1036_008.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Ausführung nicht übereinstimmender Dateitypen, wenn legitime Interpreter (wscript, cscript, powershell, regsvr32)
-Dateien mit nicht standardmäßigen Erweiterungen ausführen (z. B. .jpg, .txt, .png).
-Filtert die Automatisierung auf Systemebene heraus und konzentriert sich auf nicht vertrauenswürdige Benutzerverzeichnisse.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt nicht übereinstimmende Dateitypausführungen, bei denen legitime Interpreter (wscript, cscript, powershell, regsvr32, mshta, rundll32) Dateien mit nicht standardmäßigen Erweiterungen (.jpg, .txt, .png usw.) ausführen.Konzentriert sich auf nicht vertrauenswürdige Benutzerverzeichnisse und verdächtige übergeordnete Prozesse und filtert gleichzeitig Automatisierungs- und Entwicklerartefakte auf Systemebene.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

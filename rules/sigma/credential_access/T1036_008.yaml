@@ -73,7 +73,7 @@ detection:
       - '\explorer.exe'
 
   filter_trusted_apps:
-    - User:
+    - username:
         - 'NT AUTHORITY\SYSTEM'
         - 'NT AUTHORITY\LOCAL SERVICE'
         - 'NT AUTHORITY\NETWORK SERVICE'

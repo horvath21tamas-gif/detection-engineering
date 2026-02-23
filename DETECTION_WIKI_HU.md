@@ -1449,16 +1449,14 @@ függvénynevek és szimbólumtáblázatok eltávolításával.
 
 
 ---
-## Ultra-Pro High-Fidelity beágyazott hasznos teher kivonás (T1027.009)
+## Beágyazott hasznos teher kivonás (T1027.009)
 - **ID:** `T1027_009.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [NGEN.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Megfigyeléssel észleli a beágyazott hasznos terhek kinyerését és végrehajtását
-gyanús, csak memóriát használó kódbetöltés (Reflection) és bájttömb manipuláció
-nem szabványos erőforrás-helyek célzása.
+- **Leírás:** Érzékeli a beágyazott hasznos adatok kinyerését és végrehajtását csak a memóriát használó kódbetöltés (Reflection), a bájttömb manipuláció és a nem szabványos erőforrás-folyamok segítségével.A szabványos .NET futásidejű és telepítői műveletekből származó téves pozitívumok csökkentésére optimalizálva.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

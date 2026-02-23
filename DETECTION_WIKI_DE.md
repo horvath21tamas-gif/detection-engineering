@@ -1449,16 +1449,14 @@ durch Entfernen von Funktionsnamen und Symboltabellen.
 
 
 ---
-## Ultra-Pro High-Fidelity Embedded Payload Extraction (T1027.009)
+## Eingebettete Nutzlastextraktion (T1027.009)
 - **ID:** `T1027_009.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [NGEN.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Extraktion und Ausführung eingebetteter Nutzlasten durch Überwachung
-verdächtiges Laden von Nur-Speicher-Code (Reflection) und Byte-Array-Manipulation
-Ausrichtung auf nicht standardmäßige Ressourcenstandorte.
+- **Beschreibung:** Erkennt die Extraktion und Ausführung eingebetteter Nutzlasten über das Laden von Nur-Speicher-Code (Reflection), Byte-Array-Manipulation und nicht standardmäßige Ressourcenströme.Optimiert, um Fehlalarme durch standardmäßige .NET-Laufzeit- und Installationsvorgänge zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

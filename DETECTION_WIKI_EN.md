@@ -1496,16 +1496,14 @@ by removing function names and symbol tables.
 
 
 ---
-## Ultra-Pro High-Fidelity Embedded Payload Extraction (T1027.009)
+## Embedded Payload Extraction (T1027.009)
 - **ID:** `T1027_009.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [NGEN.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the extraction and execution of embedded payloads by monitoring 
-suspicious memory-only code loading (Reflection) and byte-array manipulation 
-targeting non-standard resource locations.
+- **Leírás:** Detects extraction and execution of embedded payloads via memory-only code loading (Reflection), byte-array manipulation, and non-standard resource streams. Optimized to reduce false positives from standard .NET runtime and installer operations.
 
 
 #### 🚨 Response Playbook

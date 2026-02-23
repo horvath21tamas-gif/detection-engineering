@@ -1,68 +1,83 @@
-title: Ultra-Pro High-Fidelity Digital Certificate Theft (T1056.003)
+title: Digital Certificate Theft (ATT&CK T1056.003)
 id: 64a4f55c-23d1-4c90-9d96-fd03b66e730e
 status: stable
-description: |
-    Detects unauthorized extraction of private keys and digital certificates. 
-    Monitors for 'non-exportable' key extraction via memory patching, 
-    suspicious use of certutil/PowerShell for PFX creation, and direct 
-    access to the Windows Cryptographic Key Store.
+description: >
+  Detects unauthorized extraction of private keys and digital certificates.
+  Monitors for 'non-exportable' key extraction via memory patching, suspicious use
+  of certutil or PowerShell for PFX creation, and direct access to the Windows
+  Cryptographic Key Store.
+
 author: hota05
-date: 2026-02-04
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1056/003/
 tags:
-    - attack.credential_access
-    - attack.t1056.003
+  - attack.credential_access
+  - attack.t1056.003
+  - attack.host
+  - attack.privilege_escalation
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_export_cli:
-        - Image|endswith: '\certutil.exe'
-          CommandLine|contains:
-              - '-exportPFX' 
-              - '-user -export'
-              - '-p '        
-        - Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-          CommandLine|contains:
-              - 'Export-PfxCertificate'
-              - 'Export-Certificate'
-              - ' -Password' 
+  selection_export_cli:
+    - Image|endswith: '\certutil.exe'
+      CommandLine|contains:
+        - '-exportPFX'
+        - '-user -export'
+        - '-p '
+    - Image|endswith:
+        - '\powershell.exe'
+        - '\pwsh.exe'
+      CommandLine|contains:
+        - 'Export-PfxCertificate'
+        - 'Export-Certificate'
+        - ' -Password'
 
-    selection_crypto_abuse:
-        CommandLine|contains:
-            - 'crypto::certificates' 
-            - 'crypto::keys'         
-            - 'patch'                
-            - 'certificates /pvk'    
+  selection_crypto_abuse:
+    CommandLine|contains:
+      - 'crypto::certificates'
+      - 'crypto::keys'
+      - 'patch'
+      - 'certificates /pvk'
 
-    selection_filesystem_search:
-        CommandLine|contains:
-            - '\Microsoft\Crypto\RSA\'
-            - '\Microsoft\SystemCertificates\'
-            - '.pfx'
-            - '.p12'
-            - '.pvk'
-        CommandLine|contains:
-            - 'copy '
-            - 'move '
-            - 'type '
+  selection_filesystem_search:
+    CommandLine|contains:
+      - '\Microsoft\Crypto\RSA\'
+      - '\Microsoft\SystemCertificates\'
+      - '.pfx'
+      - '.p12'
+      - '.pvk'
+    CommandLine|contains:
+      - 'copy '
+      - 'move '
+      - 'type '
 
-    selection_untrusted_context:
-        Image|contains:
-            - '\Users\'
-            - '\AppData\'
-            - '\Temp\'
-            - '\Public\'
+  selection_untrusted_context:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Public\'
 
-    filter_legit_pki:
-        Image|contains:
-            - '\Windows\System32\certsrv.exe'
-            - '\Windows\System32\certmgr.dll'
-        ParentImage|endswith:
-            - '\services.exe'
-            - '\svchost.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+  filter_legit_pki:
+    - Image|contains:
+        - '\Windows\System32\certsrv.exe'
+        - '\Windows\System32\certmgr.dll'
+    - ParentImage|endswith:
+        - '\services.exe'
+        - '\svchost.exe'
+    - User|startswith: 'NT AUTHORITY\'
 
-    condition: (selection_export_cli or selection_crypto_abuse or selection_filesystem_search) and selection_untrusted_context and not filter_legit_pki
+  condition: (selection_export_cli or selection_crypto_abuse or selection_filesystem_search)
+             and selection_untrusted_context
+             and not filter_legit_pki
+
+falsepositives:
+  - Legitimate certificate export via certsrv or certmgr on SYSTEM context
+  - IT administrative scripts exporting certificates in authorized locations
+  - Endpoint management automation accessing certificates for backup or deployment
+
 level: critical

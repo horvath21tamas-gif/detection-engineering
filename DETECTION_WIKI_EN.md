@@ -2799,16 +2799,14 @@ while filtering out legitimate system/inventory noise through integrity and pare
 
 
 ---
-## Ultra-Pro High-Fidelity Local Group Discovery (T1069.001)
+## Local Group Discovery (ATT&CK T1069.001)
 - **ID:** `T1069_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted local group reconnaissance focusing on privileged accounts 
-(Administrators, RDP). Filters out legitimate system/inventory noise 
-through integrity level gating and parent-process correlation.
+- **Leírás:** Detects targeted local group reconnaissance focusing on privileged accounts (Administrators, RDP). Filters out legitimate system and inventory noise through integrity level gating and parent-process correlation.
 
 
 #### 🚨 Response Playbook

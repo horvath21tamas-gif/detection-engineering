@@ -2680,16 +2680,14 @@ Gleichzeitig werden legitime System-/Inventarstörungen durch Integritäts- und 
 
 
 ---
-## Ultra-Pro High-Fidelity Local Group Discovery (T1069.001)
+## Lokale Gruppenerkennung (ATT&CK T1069.001)
 - **ID:** `T1069_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt gezielte lokale Gruppenaufklärung mit Schwerpunkt auf privilegierten Konten
-(Administratoren, RDP).Filtert legitimes System-/Inventarrauschen heraus
-durch Integrity Level Gating und Parent-Process-Korrelation.
+- **Beschreibung:** Erkennt gezielte lokale Gruppenaufklärung mit Schwerpunkt auf privilegierten Konten (Administratoren, RDP).Filtert legitimes System- und Inventarrauschen durch Integrity Level Gating und übergeordnete Prozesskorrelation heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

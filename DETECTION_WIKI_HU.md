@@ -2680,16 +2680,14 @@ miközben kiszűri a legitim rendszer-/leltárzajt az integritás és a szülőe
 
 
 ---
-## Ultra-Pro High-Fidelity helyi csoportos felfedezés (T1069.001)
+## Helyi csoportfelderítés (ATT&CK T1069.001)
 - **ID:** `T1069_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Felderíti a célzott helyi csoportos felderítést, a kiemelt fiókokra összpontosítva
-(Adminisztrátorok, RDP).Kiszűri a jogos rendszer-/leltárzajt
-integritási szintű kapuzáson és szülő-folyamat korreláción keresztül.
+- **Leírás:** Érzékeli a célzott helyi csoportos felderítést, a kiemelt fiókokra összpontosítva (Adminisztrátorok, RDP).Kiszűri a legitim rendszer- és készletzajt az integritási szint kapuzásán és a szülő-folyamat korreláción keresztül.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

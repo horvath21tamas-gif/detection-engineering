@@ -1348,14 +1348,12 @@ verdächtige übergeordnete Prozesslinien.
 
 
 ---
-## Ultra-Pro High-Fidelity-Steganographie-Nutzlastextraktion (T1027.003)
+## Steganographie-Nutzlastextraktion (T1027.003)
 - **ID:** `T1027_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt die programmgesteuerte Extraktion versteckter Nutzlasten aus Bilddateien.
-Konzentriert sich auf den Übergang vom Datenzugriff auf Pixelebene (GDI+) zum dynamischen Datenzugriff
-Codeausführung (Reflection/IEX) innerhalb desselben Prozesskontexts.
+- **Beschreibung:** Erkennt die programmgesteuerte Extraktion versteckter Nutzlasten aus Bilddateien.Konzentriert sich auf Workflows, die den Datenzugriff auf Pixelebene (GDI+) mit dynamischer Codeausführung über Reflection oder Invoke-Expression (IEX) innerhalb desselben Prozesskontexts kombinieren und gleichzeitig vertrauenswürdige Grafiktools filtern.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

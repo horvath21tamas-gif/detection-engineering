@@ -1348,14 +1348,12 @@ gyanús szülői folyamatok vonalai.
 
 
 ---
-## Ultra-Pro High-Fidelity steganográfia hasznos teher kivonás (T1027.003)
+## Szteganográfia hasznos teher kivonás (T1027.003)
 - **ID:** `T1027_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a rejtett hasznos adatok programozott kivonását a képfájlokból.
-A pixelszintű adatelérésről (GDI+) a dinamikusra való átállásra összpontosít
-kódvégrehajtás (Reflection/IEX) ugyanabban a folyamatkörnyezetben.
+- **Leírás:** Érzékeli a rejtett hasznos anyagok programozott kivonását a képfájlokból.Azokra a munkafolyamatokra összpontosít, amelyek kombinálják a pixel szintű adathozzáférést (GDI+) a dinamikus kódvégrehajtással Reflection vagy Invoke-Expression (IEX) segítségével ugyanazon folyamatkörnyezeten belül, miközben szűri a megbízható grafikus eszközöket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

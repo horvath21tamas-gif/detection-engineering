@@ -1389,14 +1389,12 @@ suspicious parent process lineages.
 
 
 ---
-## Ultra-Pro High-Fidelity Steganography Payload Extraction (T1027.003)
+## Steganography Payload Extraction (T1027.003)
 - **ID:** `T1027_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects the programmatic extraction of hidden payloads from image files. 
-Focuses on the transition from pixel-level data access (GDI+) to dynamic 
-code execution (Reflection/IEX) within the same process context.
+- **Leírás:** Detects programmatic extraction of hidden payloads from image files.  Focuses on workflows combining pixel-level data access (GDI+) with  dynamic code execution via Reflection or Invoke-Expression (IEX)  within the same process context, while filtering trusted graphics tools.
 
 
 #### 🚨 Response Playbook

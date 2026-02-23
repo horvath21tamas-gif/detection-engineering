@@ -151,7 +151,7 @@
 - [High-Fidelity Software Deployment Tool Abuse Detection](#high-fidelity-software-deployment-tool-abuse-detection)
 - [Ultra-Pro High-Fidelity Data Staging Anomaly (T1074)](#ultra-pro-high-fidelity-data-staging-anomaly-(t1074))
 - [Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001)](#ultra-pro-high-fidelity-local-data-staging-anomaly-(t1074001))
-- [Ultra-Pro High-Fidelity Remote Data Staging (T1074.002)](#ultra-pro-high-fidelity-remote-data-staging-(t1074002))
+- [Remote Data Staging (T1074.002)](#remote-data-staging-(t1074002))
 - [High-Fidelity Anomalous Logon via Valid Account](#high-fidelity-anomalous-logon-via-valid-account)
 - [High-Fidelity Default Account Abuse Detection](#high-fidelity-default-account-abuse-detection)
 - [High-Fidelity Domain Account Lateral Movement Anomaly](#high-fidelity-domain-account-lateral-movement-anomaly)
@@ -3190,16 +3190,16 @@ and mass-copy operations into hidden system directories from untrusted contexts.
 
 
 ---
-## Ultra-Pro High-Fidelity Remote Data Staging (T1074.002)
+## Remote Data Staging (T1074.002)
 - **ID:** `T1074_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects remote data staging by identifying anomalous mass-file movements to 
-internal UNC paths, followed by archival commands with low-compression/encryption 
-flags, originating from untrusted process lineages.
+- **Leírás:** Detects remote data staging by identifying anomalous mass-file movements to internal UNC paths,
+followed by archival commands with low-compression/encryption flags, originating from
+untrusted process lineages.
 
 
 #### 🚨 Response Playbook

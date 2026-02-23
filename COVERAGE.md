@@ -156,7 +156,7 @@
 | T1072 | CRITICAL | High-Fidelity Software Deployment Tool Abuse Detection |
 | T1074 | CRITICAL | Ultra-Pro High-Fidelity Data Staging Anomaly (T1074), Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001) |
 | T1074.001 | CRITICAL | Ultra-Pro High-Fidelity Local Data Staging Anomaly (T1074.001) |
-| T1074.002 | CRITICAL | Ultra-Pro High-Fidelity Remote Data Staging (T1074.002) |
+| T1074.002 | CRITICAL | Remote Data Staging (T1074.002) |
 | T1078 | HIGH | High-Fidelity Anomalous Logon via Valid Account, Suspicious Impersonation via RunAs Abuse or Deceptive Local Account Creation |
 | T1078.001 | CRITICAL | High-Fidelity Default Account Abuse Detection |
 | T1078.002 | HIGH | High-Fidelity Domain Account Lateral Movement Anomaly |

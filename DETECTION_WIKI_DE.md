@@ -151,7 +151,7 @@
 - [Erkennung von Missbrauch durch High-Fidelity-Softwarebereitstellungstools](#erkennung-von-missbrauch-durch-high-fidelity-softwarebereitstellungstools)
 - [Ultra-Pro High-Fidelity-Daten-Staging-Anomalie (T1074)](#ultra-pro-high-fidelity-daten-staging-anomalie-(t1074))
 - [Ultra-Pro High-Fidelity Local Data Staging-Anomalie (T1074.001)](#ultra-pro-high-fidelity-local-data-staging-anomalie-(t1074001))
-- [Ultra-Pro High-Fidelity Remote Data Staging (T1074.002)](#ultra-pro-high-fidelity-remote-data-staging-(t1074002))
+- [Remote-Datenbereitstellung (T1074.002)](#remote-datenbereitstellung-(t1074002))
 - [Anomale High-Fidelity-Anmeldung über ein gültiges Konto](#anomale-high-fidelity-anmeldung-über-ein-gültiges-konto)
 - [High-Fidelity-Standard-Kontomissbrauchserkennung](#high-fidelity-standard-kontomissbrauchserkennung)
 - [Anomalie der seitlichen Bewegung des High-Fidelity-Domänenkontos](#anomalie-der-seitlichen-bewegung-des-high-fidelity-domänenkontos)
@@ -3050,16 +3050,16 @@ und Massenkopiervorgänge aus nicht vertrauenswürdigen Kontexten in versteckte 
 
 
 ---
-## Ultra-Pro High-Fidelity Remote Data Staging (T1074.002)
+## Remote-Datenbereitstellung (T1074.002)
 - **ID:** `T1074_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Remote-Datenbereitstellung durch die Identifizierung anomaler Massendateibewegungen
-interne UNC-Pfade, gefolgt von Archivierungsbefehlen mit geringer Komprimierung/Verschlüsselung
-Flags, die aus nicht vertrauenswürdigen Prozesslinien stammen.
+- **Beschreibung:** Erkennt Remote-Daten-Staging durch die Identifizierung anomaler Massendateibewegungen zu internen UNC-Pfaden.
+gefolgt von Archivierungsbefehlen mit Flags für niedrige Komprimierung/Verschlüsselung, die von stammen
+nicht vertrauenswürdige Prozesslinien.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -151,7 +151,7 @@
 - [Nagy pontosságú szoftvertelepítési eszköz visszaélések észlelése](#nagy-pontosságú-szoftvertelepítési-eszköz-visszaélések-észlelése)
 - [Ultra-Pro High-Fidelity adatállomási anomália (T1074)](#ultra-pro-high-fidelity-adatállomási-anomália-(t1074))
 - [Ultra-Pro High-Fidelity helyi adatállomási anomália (T1074.001)](#ultra-pro-high-fidelity-helyi-adatállomási-anomália-(t1074001))
-- [Ultra-Pro High-Fidelity Remote Data Staging (T1074.002)](#ultra-pro-high-fidelity-remote-data-staging-(t1074002))
+- [Távoli adatállomásozás (T1074.002)](#távoli-adatállomásozás-(t1074002))
 - [Nagy pontosságú rendellenes bejelentkezés érvényes fiókon keresztül](#nagy-pontosságú-rendellenes-bejelentkezés-érvényes-fiókon-keresztül)
 - [Nagy pontosságú alapértelmezett fiókkal való visszaélés észlelése](#nagy-pontosságú-alapértelmezett-fiókkal-való-visszaélés-észlelése)
 - [High-Fidelity Domain Account Lateral Movement Anomália](#high-fidelity-domain-account-lateral-movement-anomália)
@@ -3050,16 +3050,16 @@ minták, speciális alacsony tömörítésű vagy jelszóval védett archiválá
 
 
 ---
-## Ultra-Pro High-Fidelity Remote Data Staging (T1074.002)
+## Távoli adatállomásozás (T1074.002)
 - **ID:** `T1074_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a távoli adatsorolást azáltal, hogy azonosítja a rendellenes tömeges fájlmozgásokat
-belső UNC elérési utak, majd az archiválási parancsok alacsony tömörítéssel/titkosítással
-zászlók, amelyek nem megbízható folyamatvonalakból származnak.
+- **Leírás:** Érzékeli a távoli adatsorolást azáltal, hogy azonosítja a rendellenes tömeges fájlmozgásokat a belső UNC útvonalakra,
+Ezt követik az archiválási parancsok alacsony tömörítési/titkosítási jelzőkkel, amelyek innen származnak
+megbízhatatlan folyamatvonalak.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -3256,7 +3256,7 @@ ismert szolgáltatásfiókok és felügyeleti eszközök kizárásával.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli az e-mail fiókok és a globális címlisták (GAL) szisztematikus felfedezését
-a nem interaktív PowerShell-munkamenetek, a tömeges exportálási parancsok és a
+a nem interaktív PowerShell-munkamenetek, a tömeges exportálási parancsok figyelése és
 a nem megbízható folyamatok rendellenes hozzáférése a helyi Outlook/Exchange profilkonfigurációkhoz.
 
 #### 🚨 Response Playbook

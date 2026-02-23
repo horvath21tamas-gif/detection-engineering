@@ -1,55 +1,55 @@
-title: Ultra-Pro High-Fidelity Domain Account Discovery (T1087.002)
+title: Domain Account Discovery (T1087.002)
 id: 47468e85-7d55-44fe-b800-96f2eee0bcf3
 status: stable
 description: |
-    Detects systematic Active Directory enumeration focusing on offensive LDAP filters 
-    and non-standard process lineages. Filters legitimate administrative behavior 
-    by excluding known service accounts and management tools.
+  Detects systematic Active Directory enumeration focusing on offensive LDAP filters 
+  and non-standard process lineages. Filters legitimate administrative behavior 
+  by excluding known service accounts and management tools.
 author: hota05
 date: 2026-02-04
 tags:
-    - attack.discovery
-    - attack.t1087.002
+  - attack.discovery
+  - attack.t1087.002
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_ldap_filters:
-        CommandLine|contains:
-            - '(objectCategory=person)'      
-            - '(objectClass=user)'
-            - 'adminCount=1'                 
-            - 'userAccountControl:1.2.840.113556.1.4.803:=2' 
-            - 'pwdLastSet=0'                
+  selection_ldap_filters:
+    CommandLine|contains:
+      - '(objectCategory=person)'
+      - '(objectClass=user)'
+      - 'adminCount=1'
+      - 'userAccountControl:1.2.840.113556.1.4.803:=2'
+      - 'pwdLastSet=0'
 
-    selection_tools:
-        - Image|endswith:
-            - '\adfind.exe'
-            - '\sharphound.exe'
-            - '\bloodhound.exe'
-            - '\net1.exe' 
-        - CommandLine|contains:
-            - 'Get-DomainUser'
-            - 'Get-ADUser'
-            - 'Get-NetUser'
-            - 'invoke-bloodhound'
+  selection_tools:
+    Image|endswith:
+      - '\adfind.exe'
+      - '\sharphound.exe'
+      - '\bloodhound.exe'
+      - '\net1.exe'
+    CommandLine|contains:
+      - 'Get-DomainUser'
+      - 'Get-ADUser'
+      - 'Get-NetUser'
+      - 'invoke-bloodhound'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\httpd.exe'      
-            - '\sqlservr.exe'   
-            - '\wsmprovhost.exe' 
-            - '\winword.exe'     
-            - '\excel.exe'
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\httpd.exe'
+      - '\sqlservr.exe'
+      - '\wsmprovhost.exe'
+      - '\winword.exe'
+      - '\excel.exe'
 
-    filter_legit_context:
-        username: 'NT AUTHORITY\SYSTEM'
-        Image|contains:
-            - '\Windows\System32\svchost.exe'
-            - '\Microsoft.ActiveDirectory.WebServices.exe'
-        ParentImage|endswith:
-            - '\services.exe'
-            - '\explorer.exe' 
+  filter_legit_context:
+    username: 'NT AUTHORITY\SYSTEM'
+    Image|contains:
+      - '\Windows\System32\svchost.exe'
+      - '\Microsoft.ActiveDirectory.WebServices.exe'
+    ParentImage|endswith:
+      - '\services.exe'
+      - '\explorer.exe'
 
-    condition: (selection_ldap_filters or selection_tools) and selection_suspicious_parent and not filter_legit_context
+  condition: (selection_ldap_filters or selection_tools) and selection_suspicious_parent and not filter_legit_context
 level: high

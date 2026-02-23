@@ -131,8 +131,8 @@
 - [Verdächtiger SYSTEM-Prozess, der aus dem Benutzerkontext hervorgegangen ist](#verdächtiger-system-prozess-der-aus-dem-benutzerkontext-hervorgegangen-ist)
 - [Ultra-Pro High-Fidelity-Berechtigungsgruppenerkennung (T1069)](#ultra-pro-high-fidelity-berechtigungsgruppenerkennung-(t1069))
 - [Ultra-Pro High-Fidelity Local Group Discovery (T1069.001)](#ultra-pro-high-fidelity-local-group-discovery-(t1069001))
-- [Ultra-Pro High-Fidelity-Domänengruppenerkennung (T1069.002)](#ultra-pro-high-fidelity-domänengruppenerkennung-(t1069002))
-- [Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003)](#ultra-pro-high-fidelity-cloud-groups-discovery-(t1069003))
+- [Domänengruppenerkennung (ATT&CK T1069.002)](#domänengruppenerkennung-(att&ck-t1069002))
+- [Erkennung von Cloud-Gruppen (ATT&CK T1069.003)](#erkennung-von-cloud-gruppen-(att&ck-t1069003))
 - [Entfernen der Anzeige am Host (ATT&CK T1070)](#entfernen-der-anzeige-am-host-(att&ck-t1070))
 - [Sicherheitsereignisprotokoll mit wevtutil.exe gelöscht](#sicherheitsereignisprotokoll-mit-wevtutilexe-gelöscht)
 - [Linux-Protokolllöschung und Journalsabotage (ATT&CK T1070.002)](#linux-protokolllöschung-und-journalsabotage-(att&ck-t1070002))
@@ -2698,16 +2698,14 @@ durch Integrity Level Gating und Parent-Process-Korrelation.
 
 
 ---
-## Ultra-Pro High-Fidelity-Domänengruppenerkennung (T1069.002)
+## Domänengruppenerkennung (ATT&CK T1069.002)
 - **ID:** `T1069_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [QUERY.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Erkennung von AD-Domänengruppen mit Schwerpunkt auf Aufklärungstools
-(BloodHound, AdFind) und verdächtige PowerShell-Muster.Verwendet die Integritätsstufe
-und Prozessherkunft, um Fehlalarme von Administrator-Workstations zu minimieren.
+- **Beschreibung:** Erkennt die systematische Erkennung von AD-Domänengruppen mit Schwerpunkt auf Aufklärungstools (BloodHound, AdFind) und verdächtigen PowerShell-Mustern.Verwendet Integritätsstufe und Prozessherkunft, um Fehlalarme von Administrator-Workstations zu minimieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -2814,7 +2812,7 @@ und Prozessherkunft, um Fehlalarme von Administrator-Workstations zu minimieren.
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CMDKEY.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [POWERPNT.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Massenentfernung von zugeordneten Netzwerkfreigaben und gespeicherten Anmeldeinformationen mithilfe von Wildcard-Löschung, Force-Flags oder skriptgesteuerten Dienstprogrammen zum Löschen von Anmeldeinformationen.Entwickelt, um die automatisierte antiforensische Bereinigung nach seitlicher Bewegung von routinemäßigen Verwaltungsaktivitäten zu unterscheiden.
+- **Beschreibung:** Erkennt die Massenentfernung zugeordneter Netzwerkfreigaben und gespeicherter Anmeldeinformationen mithilfe von Wildcard-Löschung, Force-Flags oder skriptgesteuerten Dienstprogrammen zum Löschen von Anmeldeinformationen.Entwickelt, um die automatisierte antiforensische Bereinigung nach seitlicher Bewegung von routinemäßigen Verwaltungsaktivitäten zu unterscheiden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

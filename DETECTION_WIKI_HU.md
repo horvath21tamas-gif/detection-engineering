@@ -131,8 +131,8 @@
 - [Gyanús RENDSZER folyamat a felhasználói kontextusból](#gyanús-rendszer-folyamat-a-felhasználói-kontextusból)
 - [Ultra-Pro High-Fidelity engedélycsoportok felfedezése (T1069)](#ultra-pro-high-fidelity-engedélycsoportok-felfedezése-(t1069))
 - [Ultra-Pro High-Fidelity helyi csoportos felfedezés (T1069.001)](#ultra-pro-high-fidelity-helyi-csoportos-felfedezés-(t1069001))
-- [Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002)](#ultra-pro-high-fidelity-domain-group-discovery-(t1069002))
-- [Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003)](#ultra-pro-high-fidelity-cloud-groups-discovery-(t1069003))
+- [Domaincsoport felfedezése (ATT&CK T1069.002)](#domaincsoport-felfedezése-(att&ck-t1069002))
+- [Cloud Groups Discovery (ATT&CK T1069.003)](#cloud-groups-discovery-(att&ck-t1069003))
 - [Jelző eltávolítása a gazdagépen (ATT&CK T1070)](#jelző-eltávolítása-a-gazdagépen-(att&ck-t1070))
 - [A biztonsági eseménynapló törölve a wevtutil.exe használatával](#a-biztonsági-eseménynapló-törölve-a-wevtutilexe-használatával)
 - [Linux naplótörlés és naplószabotázs (ATT&CK T1070.002)](#linux-naplótörlés-és-naplószabotázs-(att&ck-t1070002))
@@ -2698,16 +2698,14 @@ integritási szintű kapuzáson és szülő-folyamat korreláción keresztül.
 
 
 ---
-## Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002)
+## Domaincsoport felfedezése (ATT&CK T1069.002)
 - **ID:** `T1069_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [QUERY.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Szisztematikus AD-tartománycsoport-felderítést észlel, a felderítő eszközökre összpontosítva
-(BloodHound, AdFind) és a gyanús PowerShell-minták.Integritási szintet használ
-és a feldolgozási vonalat az adminisztrátori munkaállomásokról származó téves pozitívumok minimalizálása érdekében.
+- **Leírás:** Szisztematikus AD-tartománycsoport-felderítést észlel a felderítő eszközökre (BloodHound, AdFind) és a gyanús PowerShell-mintákra összpontosítva.Integritási szintet és folyamatvonalat használ az adminisztrátori munkaállomásokról érkező téves pozitívumok minimalizálására.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -2923,10 +2921,10 @@ Szűri a jogos böngészőforgalmat és a megbízható infrastruktúrát, hogy c
 - **Becsült zajszint:** Kritikusan Magas (SIEM gyilkos kategória!)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [COLORCPL.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [TE.EXE](https://lolbas-project.github.io/lolbas/), [UPDATE.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A hálózati kapcsolatok figyelésével észleli a rendellenes HTTP/S alapú C2 kommunikációt
+- **Leírás:** A hálózati kapcsolatok figyelésével észleli a rendellenes HTTP/S-alapú C2 kommunikációt
 nem hálózatos folyamatokból vagy az üregesedés jeleit mutató folyamatokból, szokatlan
 szülő-gyerek származás, vagy gyanús automatizálás.Kiszűri a legális böngészőket
-és ismert biztonságos úti célok a hamis pozitívumok csökkentése érdekében.
+és ismert biztonságos úticélok a hamis pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **IP hírnév: Ellenőrizd a távoli IP címet hírnév-adatbázisokban.**

@@ -131,8 +131,8 @@
 - [Suspicious SYSTEM Process Spawned from User Context](#suspicious-system-process-spawned-from-user-context)
 - [Ultra-Pro High-Fidelity Permission Groups Discovery (T1069)](#ultra-pro-high-fidelity-permission-groups-discovery-(t1069))
 - [Ultra-Pro High-Fidelity Local Group Discovery (T1069.001)](#ultra-pro-high-fidelity-local-group-discovery-(t1069001))
-- [Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002)](#ultra-pro-high-fidelity-domain-group-discovery-(t1069002))
-- [Ultra-Pro High-Fidelity Cloud Groups Discovery (T1069.003)](#ultra-pro-high-fidelity-cloud-groups-discovery-(t1069003))
+- [Domain Group Discovery (ATT&CK T1069.002)](#domain-group-discovery-(att&ck-t1069002))
+- [Cloud Groups Discovery (ATT&CK T1069.003)](#cloud-groups-discovery-(att&ck-t1069003))
 - [Indicator Removal on Host (ATT&CK T1070)](#indicator-removal-on-host-(att&ck-t1070))
 - [Security Event Log Cleared Using wevtutil.exe](#security-event-log-cleared-using-wevtutilexe)
 - [Linux Log Clearing and Journal Sabotage (ATT&CK T1070.002)](#linux-log-clearing-and-journal-sabotage-(att&ck-t1070002))
@@ -2818,16 +2818,14 @@ through integrity level gating and parent-process correlation.
 
 
 ---
-## Ultra-Pro High-Fidelity Domain Group Discovery (T1069.002)
+## Domain Group Discovery (ATT&CK T1069.002)
 - **ID:** `T1069_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [QUERY.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic AD domain group discovery focusing on reconnaissance tools 
-(BloodHound, AdFind) and suspicious PowerShell patterns. Uses integrity level 
-and process lineage to minimize false positives from admin workstations.
+- **Leírás:** Detects systematic AD domain group discovery focusing on reconnaissance tools (BloodHound, AdFind) and suspicious PowerShell patterns. Uses integrity level and process lineage to minimize false positives from admin workstations.
 
 
 #### 🚨 Response Playbook

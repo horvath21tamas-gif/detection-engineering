@@ -1983,16 +1983,14 @@ nem megbízható útvonalakról vagy gyanús szülőfolyamatok által elindítot
 
 
 ---
-## Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003)
+## Titkosítatlan protokoll kiszűrése (ATT&CK T1048.003)
 - **ID:** `T1048_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Korrelációval észleli a DNS-en és ICMP-n keresztüli titkos adatszűrést
-rendellenes rakományméretek és nem szabványos lekérdezéstípusok gyanús
-folyamatvonalak és nem megbízható végrehajtási útvonalak.
+- **Leírás:** Érzékeli a titkosítatlan protokollokon (DNS, ICMP) keresztüli lopakodó adatszivárgást a rendellenes DNS TXT-lekérdezések, a nagy entrópiájú aldomainek, a túlméretezett ICMP hasznos terhelések és a gyanús végrehajtási vonalak (Office/makrók/scriptek) azonosításával.Úgy tervezték, hogy csökkentse a jogszerű adminisztratív használatból származó téves eredményeket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -2024,7 +2022,7 @@ folyamatvonalak és nem megbízható végrehajtási útvonalak.
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A nem interaktív másolási, áthelyezési vagy archiválási parancsok figyelésével észleli a célzott adatszivárgást a fizikai adathordozóra (USB/cserélhető lemezekre).A rejtett parancssori zászlókra, a gyanús szülőfolyamatokra összpontosít, és kizárja a jogszerű Windows Intéző és adminisztrátori műveleteket.
+- **Leírás:** A nem interaktív másolási, áthelyezési vagy archiválási parancsok figyelésével érzékeli a célzott adatszivárgást a fizikai adathordozóra (USB/cserélhető lemezekre).A rejtett parancssori zászlókra, a gyanús szülőfolyamatokra összpontosít, és kizárja a jogszerű Windows Intéző és adminisztrátori műveleteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -2147,14 +2145,14 @@ triggerek és gyanús végrehajtási terhelések (zavarás, hálózati eszközö
 
 
 ---
-## Befecskendezési folyamat észlelése (ATT&CK T1055)
+## Folyamatos befecskendezés észlelése (ATT&CK T1055)
 - **ID:** `T1055.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [TEAMS.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a fejlett folyamatbefecskendezési technikákat (DLL-befecskendezés, PE-befecskendezés, száleltérítés, APC, TLS, EWM, Hollowing) a magas kockázatú GrantedAccess-maszkok, a gyanús forrás-cél folyamatkapcsolatok és a nem támogatott memóriarégiók figyelésével.Megbízható rendszerfolyamatok és AV-komponensek kizárva a téves pozitív eredmények csökkentése érdekében.
+- **Leírás:** Érzékeli a fejlett folyamatbefecskendezési technikákat (DLL-befecskendezés, PE-befecskendezés, száleltérítés, APC, TLS, EWM, hollowing) a magas kockázatú GrantedAccess-maszkok, a gyanús forrás-cél folyamatkapcsolatok és a nem támogatott memóriarégiók figyelésével.Megbízható rendszerfolyamatok és AV-komponensek kizárva a hamis pozitívumok csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

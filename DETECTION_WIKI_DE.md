@@ -1983,16 +1983,14 @@ Flags von nicht vertrauenswürdigen Pfaden oder von verdächtigen übergeordnete
 
 
 ---
-## Ultra-Pro High-Fidelity unverschlüsseltes Protokoll Exfil (T1048.003)
+## Unverschlüsselte Protokoll-Exfiltration (ATT&CK T1048.003)
 - **ID:** `T1048_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt heimliche Datenexfiltration über DNS und ICMP durch Korrelation
-Anomale Nutzlastgrößen und nicht standardmäßige Abfragetypen mit verdächtigen
-Prozesslinien und nicht vertrauenswürdige Ausführungspfade.
+- **Beschreibung:** Erkennt heimliche Datenexfiltration über unverschlüsselte Protokolle (DNS, ICMP), indem es anomale DNS-TXT-Abfragen, Subdomänen mit hoher Entropie, übergroße ICMP-Nutzlasten und verdächtige Ausführungsherkunft (Office/Makros/Skripte) identifiziert.Entwickelt, um Fehlalarme durch legitime administrative Nutzung zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

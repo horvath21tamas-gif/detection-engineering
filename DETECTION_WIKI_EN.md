@@ -2061,16 +2061,14 @@ flags from untrusted paths or launched by suspicious parent processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003)
+## Unencrypted Protocol Exfiltration (ATT&CK T1048.003)
 - **ID:** `T1048_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects stealthy data exfiltration via DNS and ICMP by correlating 
-anomalous payload sizes and non-standard query types with suspicious 
-process lineages and untrusted execution paths.
+- **Leírás:** Detects stealthy data exfiltration over unencrypted protocols (DNS, ICMP) by identifying anomalous DNS TXT queries, high-entropy subdomains, oversized ICMP payloads, and suspicious execution lineage (Office/macros/scripts). Designed to reduce false positives from legitimate administrative usage.
 
 
 #### 🚨 Response Playbook

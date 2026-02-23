@@ -1396,16 +1396,14 @@ gyanús helyeken.
 
 
 ---
-## Ultra-Pro High-Fidelity HTML-csempészet végrehajtása (T1027.006)
+## HTML-csempészet végrehajtása (T1027.006)
 - **ID:** `T1027_006.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a gyanús fájlok végrehajtását, amelyeket általában HTML-csempészeten keresztül szállítanak.
-Azokra a böngészőfolyamatokra összpontosít, amelyek szkript értelmezőket generálnak vagy lemezképeket csatolnak
-ideiglenes vagy helyi alkalmazásadat-könyvtárakból.
+- **Leírás:** Érzékeli a gyanús fájlok végrehajtását, amelyeket általában HTML-csempészeten keresztül szállítanak.Azokra a böngészőfolyamatokra összpontosít, amelyek szkript értelmezőket generálnak, vagy lemezképeket csatolnak ideiglenes vagy helyi alkalmazásadat-könyvtárakból.Optimalizált, hogy csökkentse a törvényes telepítők és frissítések téves pozitívumait.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1414,15 +1412,14 @@ ideiglenes vagy helyi alkalmazásadat-könyvtárakból.
 
 
 ---
-## Ultra-Pro High-Fidelity bináris szimbólumeltávolítás (T1027.007)
+## Bináris szimbólumok eltávolítása (T1027.007)
 - **ID:** `T1027_007.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a hibakeresési szimbólumok és szakaszfejlécek aktív eltávolítását a binárisokból.
-A tisztítószerszámok végrehajtására összpontosít nem építhető rendszereken a kriminalisztika akadályozása érdekében.
+- **Leírás:** Érzékeli a hibakeresési szimbólumok és a szakaszfejlécek aktív eltávolítását a binárisokból nem build rendszereken, a fejlesztői vagy CI/CD környezeteken kívüli eltávolító eszközök végrehajtására összpontosítva.Optimalizált, hogy csökkentse az engedélyezett építési folyamatokból és fejlesztőrendszerekből származó hamis pozitívumot.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

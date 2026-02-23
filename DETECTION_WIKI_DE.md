@@ -1396,16 +1396,14 @@ an verdächtigen Orten.
 
 
 ---
-## Ultraprofessionelle High-Fidelity-HTML-Schmuggelausführung (T1027.006)
+## Ausführung von HTML-Schmuggel (T1027.006)
 - **ID:** `T1027_006.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Ausführung verdächtiger Dateien, die typischerweise über HTML-Schmuggel übermittelt werden.
-Konzentriert sich auf Browserprozesse, die Skriptinterpreter erzeugen oder Datenträgerabbilder bereitstellen
-aus temporären oder lokalen App-Datenverzeichnissen.
+- **Beschreibung:** Erkennt die Ausführung verdächtiger Dateien, die typischerweise über HTML-Schmuggel übermittelt werden.Konzentriert sich auf Browserprozesse, die Skriptinterpreter erzeugen oder Datenträgerabbilder aus temporären oder lokalen App-Datenverzeichnissen bereitstellen.Optimiert, um Fehlalarme von legitimen Installationsprogrammen und Updates zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -1414,15 +1412,14 @@ aus temporären oder lokalen App-Datenverzeichnissen.
 
 
 ---
-## Ultra-Pro High-Fidelity-Binärsymbol-Stripping (T1027.007)
+## Binärsymbol-Strippung (T1027.007)
 - **ID:** `T1027_007.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt das aktive Entfernen von Debugsymbolen und Abschnittsüberschriften aus Binärdateien.
-Konzentriert sich auf die Ausführung von Stripping-Tools auf Nicht-Build-Systemen, um die Forensik zu behindern.
+- **Beschreibung:** Erkennt das aktive Entfernen von Debug-Symbolen und Abschnittsüberschriften aus Binärdateien auf Nicht-Build-Systemen und konzentriert sich auf die Ausführung von Stripping-Tools außerhalb von Entwicklungs- oder CI/CD-Umgebungen.Optimiert, um Fehlalarme aus autorisierten Build-Pipelines und Entwicklersystemen zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

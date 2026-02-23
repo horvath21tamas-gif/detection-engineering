@@ -1440,16 +1440,14 @@ in suspicious locations.
 
 
 ---
-## Ultra-Pro High-Fidelity HTML Smuggling Execution (T1027.006)
+## HTML Smuggling Execution (T1027.006)
 - **ID:** `T1027_006.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the execution of suspicious files typically delivered via HTML Smuggling. 
-Focuses on browser processes spawning script interpreters or mounting disk images 
-from temporary or local app data directories.
+- **Leírás:** Detects execution of suspicious files typically delivered via HTML Smuggling. Focuses on browser processes spawning script interpreters or mounting disk images from temporary or local app data directories. Optimized to reduce false positives from legitimate installers and updates.
 
 
 #### 🚨 Response Playbook
@@ -1459,15 +1457,14 @@ from temporary or local app data directories.
 
 
 ---
-## Ultra-Pro High-Fidelity Binary Symbol Stripping (T1027.007)
+## Binary Symbol Stripping (T1027.007)
 - **ID:** `T1027_007.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the active stripping of debug symbols and section headers from binaries. 
-Focuses on the execution of stripping tools on non-build systems to hinder forensics.
+- **Leírás:** Detects active stripping of debug symbols and section headers from binaries on non-build systems, focusing on the execution of stripping tools outside of development or CI/CD environments. Optimized to reduce false positives from authorized build pipelines and developer systems.
 
 
 #### 🚨 Response Playbook

@@ -1,60 +1,61 @@
-title: Ultra-Pro High-Fidelity DNS Tunneling & Beaconing (T1071.004)
+title: DNS Tunneling & Beaconing (T1071.004)
 id: 11c69f3f-7e7d-4dd5-ab3b-92d2a3e521f9
 status: stable
 description: |
-    Detects DNS tunneling and C2 by monitoring for high-entropy subdomains, 
-    unusual query types (TXT, NULL), and DNS activity from non-network 
-    native processes with specific focus on length and frequency.
+  Detects DNS tunneling and C2 activity by monitoring for high-entropy subdomains, 
+  unusual query types (TXT, NULL, and SIG), long or repetitive queries, and DNS 
+  activity from non-network native processes. Focuses on anomalous length, frequency, 
+  and process context to reduce false positives.
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.command_and_control
-    - attack.exfiltration
-    - attack.t1071.004
+  - attack.command_and_control
+  - attack.exfiltration
+  - attack.t1071.004
 logsource:
-    category: dns_query  
-    product: windows
+  category: dns_query
+  product: windows
 detection:
-    selection_suspicious_procs:
-        Image|endswith:
-            - '\notepad.exe'
-            - '\calc.exe'
-            - '\winver.exe'
-            - '\spoolsv.exe'
-            - '\rundll32.exe'
-            - '\regsvr32.exe'
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\cmd.exe'
+  selection_suspicious_procs:
+    Image|endswith:
+      - '\notepad.exe'
+      - '\calc.exe'
+      - '\winver.exe'
+      - '\spoolsv.exe'
+      - '\rundll32.exe'
+      - '\regsvr32.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
 
-    selection_long_queries:
-        QueryName|re: '^.{64,255}\..*$' 
+  selection_long_queries:
+    QueryName: '^.{64,255}\..*$'
 
-    selection_query_types:
-        QueryType:
-            - 16  
-            - 10  
-            - 33  
+  selection_query_types:
+    QueryType:
+      - 16   
+      - 10   
+      - 33   
 
-    filter_legit_noise:
-        - QueryName|endswith:
-            - '.microsoft.com'
-            - '.windowsupdate.com'
-            - '.google.com'
-            - '.azure.com'
-            - '.cloudfront.net'          
-            - '.akamaized.net'
-        - Image|contains:
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\firefox.exe'
-            - '\svchost.exe'             
+  selection_context:
+    IntegrityLevel: 'Medium'
+    CommandLine|contains:
+      - '-enc'
+      - 'nslookup'
 
-    selection_context:
-        IntegrityLevel: 'Medium'       
-        CommandLine|contains:
-            - '-enc'                      
-            - 'nslookup'                  
+  filter_legit_noise:
+    QueryName|endswith:
+      - '.microsoft.com'
+      - '.windowsupdate.com'
+      - '.google.com'
+      - '.azure.com'
+      - '.cloudfront.net'
+      - '.akamaized.net'
+    Image|contains:
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\firefox.exe'
+      - '\svchost.exe'
 
-    condition: (selection_suspicious_procs and (selection_long_queries or selection_query_types)) and selection_context and not filter_legit_noise
+  condition: selection_suspicious_procs and (selection_long_queries or selection_query_types) and selection_context and not filter_legit_noise
 level: critical

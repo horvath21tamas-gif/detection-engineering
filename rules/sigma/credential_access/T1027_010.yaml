@@ -1,59 +1,76 @@
-title: Ultra-Pro High-Fidelity Command Line Obfuscation (T1027.010)
+title: Command Line Obfuscation (T1027.010)
 id: fea0d463-b905-4076-aa09-76de1357ceba
 status: stable
-description: |
-    Detects advanced command line obfuscation techniques. Focuses on excessive 
-    escape character density, environment variable slicing, and PowerShell string 
-    deconstruction used to bypass static detection filters.
+description: >
+  Detects advanced command line obfuscation techniques including excessive escape
+  characters, environment variable slicing, PowerShell string reconstruction, and
+  encoded commands. Optimized to bypass static detection filters while filtering
+  legitimate installers and trusted system maintenance tools.
+
 author: hota05
-date: 2026-02-03
+date: 2026-02-23
 tags:
-    - attack.defense_evasion
-    - attack.t1027.010
+  - attack.defense_evasion
+  - attack.t1027.010
+  - attack.execution
+
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_cmd_excessive_carets:
-        CommandLine|contains:
-            - '^e^'
-            - '^p^'
-            - '^s^'
-            - '^^^'
-            - '\"^'
+  selection_cmd_excessive_carets:
+    CommandLine|contains:
+      - '^e^'
+      - '^p^'
+      - '^s^'
+      - '^^^'
+      - '"^'
 
-    selection_env_slicing:
-        CommandLine|contains:
-            - ':~'
-            - '%:'
-            - '!:'
+  selection_env_slicing:
+    CommandLine|contains:
+      - ':~'
+      - '%:'
+      - '!:'
 
-    selection_ps_reconstruction:
-        CommandLine|contains:
-            - "'+'"
-            - "'-join'"
-            - '[char[]]'
-            - '::Reverse'
-            - '.Replace('
-            - 'bxor' 
+  selection_ps_reconstruction:
+    CommandLine|contains:
+      - "'+'"
+      - "'-join'"
+      - '[char[]]'
+      - '::Reverse'
+      - '.Replace('
+      - 'bxor'
 
-    selection_encoded:
-        CommandLine|contains:
-            - ' -enc '
-            - ' -e '
-            - ' -encodedcommand '
-            - ' FromBase64String'
-            - ' IO.Compression'
+  selection_encoded:
+    CommandLine|contains:
+      - ' -enc '
+      - ' -e '
+      - ' -encodedcommand '
+      - ' FromBase64String'
+      - ' IO.Compression'
 
-    filter_trusted_installers:
-        Image|startswith:
-            - 'C:\Windows\System32\msiexec.exe'
-            - 'C:\Program Files\Common Files\Microsoft Shared\'
-            - 'C:\Windows\System32\wbem\WmiPrvSE.exe'
-        CommandLine|contains:
-            - '/package'
-            - '/update'
-            - 'Data Source=' 
+  filter_trusted_installers:
+    Image|startswith:
+      - 'C:\Windows\System32\msiexec.exe'
+      - 'C:\Program Files\Common Files\Microsoft Shared\'
+      - 'C:\Windows\System32\wbem\WmiPrvSE.exe'
+    CommandLine|contains:
+      - '/package'
+      - '/update'
+      - 'Data Source='
 
-    condition: (selection_cmd_excessive_carets or selection_env_slicing or selection_ps_reconstruction or selection_encoded) and not filter_trusted_installers
+  condition: >
+    (selection_cmd_excessive_carets
+     or selection_env_slicing
+     or selection_ps_reconstruction
+     or selection_encoded)
+    and not filter_trusted_installers
+
+falsepositives:
+  - Legitimate software installers using encoded or multiline commands
+  - Enterprise update and deployment scripts
+  - PowerShell scripts for CI/CD or DevOps automation
+  - Security testing or red team operations
+
 level: high

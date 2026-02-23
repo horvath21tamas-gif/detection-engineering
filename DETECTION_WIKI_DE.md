@@ -2188,16 +2188,14 @@ Der Speicherbereich wird nicht durch eine Datei auf der Festplatte gesichert (ni
 
 
 ---
-## Ultra-Pro Stealthy PE-Injektion (T1055.002)
+## PE-Injektionserkennung (ATT&CK T1055.002)
 - **ID:** `T1055_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt High-Fidelity-PE-Injection durch Identifizierung des prozessübergreifenden Speichers
-Manipulation, bei der die Quelle des Aufrufs ein nicht gesicherter Speicherbereich ist
-(Shellcode) und das Ziel ist ein kritischer Systemprozess.
+- **Beschreibung:** Erkennt PE-Injection durch Identifizierung einer prozessübergreifenden Speichermanipulation, bei der die Quelle des Aufrufs nicht gesicherter Speicher (Shellcode) und das Ziel ein kritischer Windows-Systemprozess ist.Entwickelt, um vertrauenswürdige AV- und Systemdienste herauszufiltern.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

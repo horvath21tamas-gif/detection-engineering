@@ -2278,16 +2278,14 @@ memory region is not backed by a file on disk (unbacked memory).
 
 
 ---
-## Ultra-Pro Stealthy PE Injection (T1055.002)
+## PE Injection Detection (ATT&CK T1055.002)
 - **ID:** `T1055_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects high-fidelity PE injection by identifying cross-process memory 
-manipulation where the source of the call is an unbacked memory region 
-(shellcode) and the target is a critical system process.
+- **Leírás:** Detects PE injection by identifying cross-process memory  manipulation where the source of the call is unbacked memory (shellcode)  and the target is a critical Windows system process. Designed to filter  out trusted AV and system services.
 
 
 #### 🚨 Response Playbook

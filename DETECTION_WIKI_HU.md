@@ -2188,16 +2188,14 @@ A memóriaterületet nem támogatja a lemezen lévő fájl (nem támogatott mem�
 
 
 ---
-## Ultra-Pro Stealthy PE befecskendezés (T1055.002)
+## PE befecskendezés észlelése (ATT&CK T1055.002)
 - **ID:** `T1055_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a nagy pontosságú PE befecskendezést a folyamatok közötti memória azonosításával
-manipuláció, ahol a hívás forrása egy nem támogatott memóriaterület
-(shellcode), és a cél egy kritikus rendszerfolyamat.
+- **Leírás:** Érzékeli a PE-injektálást a folyamatok közötti memóriamanipuláció azonosításával, ahol a hívás forrása nem támogatott memória (shellkód), és a cél egy kritikus Windows-rendszerfolyamat.Úgy tervezték, hogy kiszűrje a megbízható AV- és rendszerszolgáltatásokat.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

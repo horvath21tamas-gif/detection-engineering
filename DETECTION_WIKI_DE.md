@@ -92,7 +92,7 @@
 - [Ultra-Pro High-Fidelity unverschlüsseltes Protokoll Exfil (T1048.003)](#ultra-pro-high-fidelity-unverschlüsseltes-protokoll-exfil-(t1048003))
 - [Ultra-Pro High-Fidelity-System-Netzwerkverbindungserkennung (T1049)](#ultra-pro-high-fidelity-system-netzwerkverbindungserkennung-(t1049))
 - [Ultra-Pro High-Fidelity-Physical-Medium-Exfiltration (T1052)](#ultra-pro-high-fidelity-physical-medium-exfiltration-(t1052))
-- [Ultra-Pro High-Fidelity USB-Exfiltration (T1052.001)](#ultra-pro-high-fidelity-usb-exfiltration-(t1052001))
+- [USB-Exfiltrationserkennung (ATT&CK T1052.001)](#usb-exfiltrationserkennung-(att&ck-t1052001))
 - [Verdächtige geplante Aufgaben- oder Joberstellung aufgrund von Persistenz (T1053).](#verdächtige-geplante-aufgaben--oder-joberstellung-aufgrund-von-persistenz-(t1053))
 - [Hochpräzise At.exe-Aktivitätserkennung](#hochpräzise-atexe-aktivitätserkennung)
 - [High-Fidelity-Cron-Persistenz und In-Place-Änderung](#high-fidelity-cron-persistenz-und-in-place-änderung)
@@ -2038,16 +2038,14 @@ Herausfiltern legitimer Windows Explorer-GUI-Vorgänge.
 
 
 ---
-## Ultra-Pro High-Fidelity USB-Exfiltration (T1052.001)
+## USB-Exfiltrationserkennung (ATT&CK T1052.001)
 - **ID:** `T1052_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt systematische Datenexfiltration auf USB-Geräte durch Überwachung
-nicht interaktive Befehle zum Kopieren/Verschieben/Archivieren, die auf Wechseldatenträger abzielen,
-Der Schwerpunkt liegt auf verdächtigen Prozessabläufen und versteckten CLI-Argumenten.
+- **Beschreibung:** Erkennt gezielte Datenexfiltration auf USB-/Wechseldatenträger durch Überwachung nicht interaktiver Dateikopier-, -verschiebungs- und -archivierungsvorgänge.Konzentriert sich auf verdächtige Befehlszeilenargumente, versteckte Automatisierungsflags und ungewöhnliche Abstammungslinien des übergeordneten Prozesses.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

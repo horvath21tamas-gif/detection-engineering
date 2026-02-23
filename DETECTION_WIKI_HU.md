@@ -92,7 +92,7 @@
 - [Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003)](#ultra-pro-high-fidelity-unencrypted-protocol-exfil-(t1048003))
 - [Ultra-Pro High-Fidelity rendszer hálózati kapcsolatok felfedezése (T1049)](#ultra-pro-high-fidelity-rendszer-hálózati-kapcsolatok-felfedezése-(t1049))
 - [Ultra-Pro High-Fidelity fizikai közeg szűrés (T1052)](#ultra-pro-high-fidelity-fizikai-közeg-szűrés-(t1052))
-- [Ultra-Pro High-Fidelity USB Exfiltration (T1052.001)](#ultra-pro-high-fidelity-usb-exfiltration-(t1052001))
+- [USB kiszűrésérzékelés (ATT&CK T1052.001)](#usb-kiszűrésérzékelés-(att&ck-t1052001))
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [High-Fidelity At.exe tevékenységészlelés](#high-fidelity-atexe-tevékenységészlelés)
 - [High-Fidelity Cron perzisztencia és helyben történő módosítás](#high-fidelity-cron-perzisztencia-és-helyben-történő-módosítás)
@@ -2038,16 +2038,14 @@ a Windows Intéző GUI-műveleteinek kiszűrése.
 
 
 ---
-## Ultra-Pro High-Fidelity USB Exfiltration (T1052.001)
+## USB kiszűrésérzékelés (ATT&CK T1052.001)
 - **ID:** `T1052_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Megfigyeléssel észleli a szisztematikus adatszivárgást USB-eszközökre
-cserélhető meghajtókat célzó nem interaktív másolás/áthelyezés/archiválás parancsok,
-a gyanús folyamatvonalakra és a rejtett CLI-érvekre összpontosítva.
+- **Leírás:** A nem interaktív fájlmásolási, -áthelyezési és -archiválási műveletek figyelésével észleli az adatok célzott kiszűrését az USB-/cserélhető meghajtókra.A gyanús parancssori argumentumokra, a rejtett automatizálási jelzőkre és a szokatlan szülőfolyamat-vonalra összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

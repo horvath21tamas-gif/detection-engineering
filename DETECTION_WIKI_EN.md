@@ -92,7 +92,7 @@
 - [Ultra-Pro High-Fidelity Unencrypted Protocol Exfil (T1048.003)](#ultra-pro-high-fidelity-unencrypted-protocol-exfil-(t1048003))
 - [Ultra-Pro High-Fidelity System Network Connections Discovery (T1049)](#ultra-pro-high-fidelity-system-network-connections-discovery-(t1049))
 - [Ultra-Pro High-Fidelity Physical Medium Exfiltration (T1052)](#ultra-pro-high-fidelity-physical-medium-exfiltration-(t1052))
-- [Ultra-Pro High-Fidelity USB Exfiltration (T1052.001)](#ultra-pro-high-fidelity-usb-exfiltration-(t1052001))
+- [USB Exfiltration Detection (ATT&CK T1052.001)](#usb-exfiltration-detection-(att&ck-t1052001))
 - [Gyanús ütemezett feladat vagy munkakör létrehozása a Persistence (T1053) miatt](#gyanús-ütemezett-feladat-vagy-munkakör-létrehozása-a-persistence-(t1053)-miatt)
 - [High-Fidelity At.exe Activity Detection](#high-fidelity-atexe-activity-detection)
 - [High-Fidelity Cron Persistence and In-Place Modification](#high-fidelity-cron-persistence-and-in-place-modification)
@@ -2119,16 +2119,14 @@ filtering out legitimate Windows Explorer GUI operations.
 
 
 ---
-## Ultra-Pro High-Fidelity USB Exfiltration (T1052.001)
+## USB Exfiltration Detection (ATT&CK T1052.001)
 - **ID:** `T1052_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic data exfiltration to USB devices by monitoring 
-non-interactive copy/move/archive commands targeting removable drives, 
-focusing on suspicious process lineages and stealthy CLI arguments.
+- **Leírás:** Detects targeted data exfiltration to USB/removable drives by monitoring  non-interactive file copy, move, and archive operations. Focuses on suspicious  command-line arguments, stealthy automation flags, and unusual parent process lineage.
 
 
 #### 🚨 Response Playbook

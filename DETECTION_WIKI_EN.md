@@ -15,7 +15,7 @@
 - [Ultra-Pro High-Fidelity Junk Data & Command Padding (T1001.001)](#ultra-pro-high-fidelity-junk-data-&-command-padding-(t1001001))
 - [Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001.002)](#ultra-pro-high-fidelity-steganography-&-data-reconstruction-(t1001002))
 - [Ultra-Pro High-Fidelity Protocol Impersonation (T1001.003)](#ultra-pro-high-fidelity-protocol-impersonation-(t1001003))
-- [Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003)](#ultra-pro-high-fidelity-lsass-credential-dumping-(t1003))
+- [LSASS Credential Dumping (T1003)](#lsass-credential-dumping-(t1003))
 - [Suspicious Access to LSASS Process Memory](#suspicious-access-to-lsass-process-memory)
 - [Ultra-Pro High-Fidelity SAM & SYSTEM Registry Theft (T1003.002)](#ultra-pro-high-fidelity-sam-&-system-registry-theft-(t1003002))
 - [Ultra-Pro High-Fidelity NTDS.dit Extraction (T1003.003)](#ultra-pro-high-fidelity-ntdsdit-extraction-(t1003003))
@@ -717,16 +717,17 @@ targeting attempts to mimic mobile devices or search crawlers from non-browser p
 
 
 ---
-## Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003)
+## LSASS Credential Dumping (T1003)
 - **ID:** `T1003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [COMSVCS.DLL](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects highly sophisticated LSASS memory dumping techniques. 
-Focuses on DLL export ordinals (#24), handle duplication, 
-and specialized LOLBins that bypass standard EDR string-based detection.
+- **Leírás:** Detects highly sophisticated LSASS memory dumping techniques, including:
+- DLL export ordinals (#24) via rundll32.exe
+- Handle duplication using specialized LOLBins
+- Advanced offensive patterns bypassing standard EDR string detection
 
 
 #### 🚨 Response Playbook

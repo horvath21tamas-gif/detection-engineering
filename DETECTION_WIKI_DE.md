@@ -15,7 +15,7 @@
 - [Ultra-Pro High-Fidelity Junk Data & Command Padding (T1001.001)](#ultra-pro-high-fidelity-junk-data-&-command-padding-(t1001001))
 - [Ultra-Pro High-Fidelity-Steganographie und Datenrekonstruktion (T1001.002)](#ultra-pro-high-fidelity-steganographie-und-datenrekonstruktion-(t1001002))
 - [Ultra-Pro High-Fidelity-Protokoll-Imitation (T1001.003)](#ultra-pro-high-fidelity-protokoll-imitation-(t1001003))
-- [Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003)](#ultra-pro-high-fidelity-lsass-credential-dumping-(t1003))
+- [LSASS-Anmeldeinformations-Dumping (T1003)](#lsass-anmeldeinformations-dumping-(t1003))
 - [Verdächtiger Zugriff auf den LSASS-Prozessspeicher](#verdächtiger-zugriff-auf-den-lsass-prozessspeicher)
 - [Ultra-Pro High-Fidelity SAM & SYSTEM-Registrierungsdiebstahl (T1003.002)](#ultra-pro-high-fidelity-sam-&-system-registrierungsdiebstahl-(t1003002))
 - [Ultra-Pro High-Fidelity NTDS.dit-Extraktion (T1003.003)](#ultra-pro-high-fidelity-ntdsdit-extraktion-(t1003003))
@@ -713,16 +713,17 @@ Targeting-Versuche, mobile Geräte nachzuahmen oder Crawler aus Nicht-Browser-Pr
 
 
 ---
-## Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003)
+## LSASS-Anmeldeinformations-Dumping (T1003)
 - **ID:** `T1003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [COMSVCS.DLL](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt hochentwickelte LSASS-Speicherauszugstechniken.
-Konzentriert sich auf DLL-Export-Ordinalzahlen (#24), die Handhabung von Duplikaten,
-und spezielle LOLBins, die die standardmäßige EDR-String-basierte Erkennung umgehen.
+- **Beschreibung:** Erkennt hochentwickelte LSASS-Speicherauszugstechniken, darunter:
+- DLL-Export-Ordinalzahlen (#24) über rundll32.exe
+- Behandeln Sie die Duplizierung mit speziellen LOLBins
+- Erweiterte Angriffsmuster, die die standardmäßige EDR-Saitenerkennung umgehen
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

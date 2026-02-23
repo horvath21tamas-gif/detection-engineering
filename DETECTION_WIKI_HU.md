@@ -15,7 +15,7 @@
 - [Ultra-Pro High-Fidelity levélszemét adat és parancstömítés (T1001.001)](#ultra-pro-high-fidelity-levélszemét-adat-és-parancstömítés-(t1001001))
 - [Ultra-Pro High-Fidelity szteganográfia és adatrekonstrukció (T1001.002)](#ultra-pro-high-fidelity-szteganográfia-és-adatrekonstrukció-(t1001002))
 - [Ultra-Pro High-Fidelity Protocol megszemélyesítés (T1001.003)](#ultra-pro-high-fidelity-protocol-megszemélyesítés-(t1001003))
-- [Ultra-Pro High-Fidelity LSASS hitelesítő adatok dömping (T1003)](#ultra-pro-high-fidelity-lsass-hitelesítő-adatok-dömping-(t1003))
+- [LSASS Credential Dumping (T1003)](#lsass-credential-dumping-(t1003))
 - [Gyanús hozzáférés az LSASS folyamatmemóriához](#gyanús-hozzáférés-az-lsass-folyamatmemóriához)
 - [Ultra-Pro High-Fidelity SAM & SYSTEM Registry Theft (T1003.002)](#ultra-pro-high-fidelity-sam-&-system-registry-theft-(t1003002))
 - [Ultra-Pro High-Fidelity NTDS.dit kivonás (T1003.003)](#ultra-pro-high-fidelity-ntdsdit-kivonás-(t1003003))
@@ -713,16 +713,17 @@ a nem böngésző folyamatokból származó mobileszközök vagy feltérképező
 
 
 ---
-## Ultra-Pro High-Fidelity LSASS hitelesítő adatok dömping (T1003)
+## LSASS Credential Dumping (T1003)
 - **ID:** `T1003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [COMSVCS.DLL](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a rendkívül kifinomult LSASS memóriadömping technikákat.
-A DLL export sorszámára (#24), a duplikáció kezelésére,
-és speciális LOLBin-ek, amelyek megkerülik a szabványos EDR karakterlánc-alapú észlelést.
+- **Leírás:** Érzékeli a rendkívül kifinomult LSASS memóriadömping technikákat, beleértve:
+- DLL-exportálási sorszámok (#24) a rundll32.exe-n keresztül
+- Kezelje a sokszorosítást speciális LOLBin-ekkel
+- Fejlett támadó minták, amelyek megkerülik a szabványos EDR karakterlánc-érzékelést
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

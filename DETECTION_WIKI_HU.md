@@ -2392,16 +2392,14 @@ API-val kapcsolatos parancssorok, jogosulatlan shell-alapú billentyűnaplózó 
 
 
 ---
-## Ultra-Pro High-Fidelity billentyűzetnaplózás és beviteli rögzítés (T1056.001)
+## Keylogging & Input Hooking (ATT&CK T1056.001)
 - **ID:** `T1056_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a fejlett billentyűnaplózást azáltal, hogy azonosítja a nem jogosultak gyanús API-hívásait
-vagy efemer folyamatok, amelyek a SetWindowsHookEx és a GetAsyncKeyState használatát célozzák
-nem szabványos végrehajtási környezetekben (pl. PowerShell, Rundll32).
+- **Leírás:** Érzékeli a fejlett billentyűnaplózást azáltal, hogy azonosítja a gyanús API-hívásokat a nem jogosult vagy átmeneti folyamatokból, és a SetWindowsHookEx és a GetAsyncKeyState használatát célozza meg nem szabványos végrehajtási környezetekben (például PowerShell, Rundll32).
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

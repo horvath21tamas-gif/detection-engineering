@@ -2494,16 +2494,14 @@ and anomalous process behavior targeting user input.
 
 
 ---
-## Ultra-Pro High-Fidelity Keylogging & Input Hooking (T1056.001)
+## Keylogging & Input Hooking (ATT&CK T1056.001)
 - **ID:** `T1056_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects advanced keylogging by identifying suspicious API calls from unprivileged 
-or ephemeral processes, targeting the use of SetWindowsHookEx and GetAsyncKeyState 
-within non-standard execution contexts (e.g., PowerShell, Rundll32).
+- **Leírás:** Detects advanced keylogging by identifying suspicious API calls from unprivileged or ephemeral processes, targeting the use of SetWindowsHookEx and GetAsyncKeyState within non-standard execution contexts (e.g., PowerShell, Rundll32).
 
 
 #### 🚨 Response Playbook

@@ -2392,16 +2392,14 @@ und anomales Prozessverhalten, das auf Benutzereingaben abzielt.
 
 
 ---
-## Ultraprofessionelles High-Fidelity-Keylogging und Input-Hooking (T1056.001)
+## Keylogging und Eingabe-Hooking (ATT&CK T1056.001)
 - **ID:** `T1056_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt erweitertes Keylogging, indem verdächtige API-Aufrufe von unprivilegierten Personen identifiziert werden
-oder kurzlebige Prozesse, die auf die Verwendung von SetWindowsHookEx und GetAsyncKeyState abzielen
-innerhalb nicht standardmäßiger Ausführungskontexte (z. B. PowerShell, Rundll32).
+- **Beschreibung:** Erkennt erweitertes Keylogging durch die Identifizierung verdächtiger API-Aufrufe von unprivilegierten oder kurzlebigen Prozessen und zielt auf die Verwendung von SetWindowsHookEx und GetAsyncKeyState in nicht standardmäßigen Ausführungskontexten (z. B. PowerShell, Rundll32) ab.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

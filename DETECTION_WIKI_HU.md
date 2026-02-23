@@ -1431,16 +1431,14 @@ A tisztítószerszámok végrehajtására összpontosít nem építhető rendsze
 
 
 ---
-## Ultra-Pro High-Fidelity bináris szimbólumeltávolítás (T1027.008)
+## Bináris szimbólumok eltávolítása (T1027.008)
 - **ID:** `T1027_008.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a hibakeresési szimbólumok és szakaszfejlécek aktív eltávolítását a binárisokból
-nem fejlesztői környezetben.Ez akadályozza a kriminalisztikai elemzést és a visszafejtést
-függvénynevek és szimbólumtáblázatok eltávolításával.
+- **Leírás:** Érzékeli a hibakeresési szimbólumok és szakaszfejlécek aktív eltávolítását a binárisokból nem fejlesztői környezetben.Ez akadályozza a kriminalisztikai elemzést és a visszafejtést a függvénynevek és szimbólumtáblázatok eltávolításával.A CI/CD és a fejlesztési környezet kiszűrésére optimalizálva.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -1431,16 +1431,14 @@ Konzentriert sich auf die Ausführung von Stripping-Tools auf Nicht-Build-System
 
 
 ---
-## Ultra-Pro High-Fidelity-Binärsymbol-Stripping (T1027.008)
+## Binärsymbol-Strippung (T1027.008)
 - **ID:** `T1027_008.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt das aktive Entfernen von Debugsymbolen und Abschnittsüberschriften aus Binärdateien
-in Nicht-Entwicklungsumgebungen.Dies behindert forensische Analysen und Reverse Engineering
-durch Entfernen von Funktionsnamen und Symboltabellen.
+- **Beschreibung:** Erkennt das aktive Entfernen von Debugsymbolen und Abschnittsüberschriften aus Binärdateien in Nicht-Entwicklungsumgebungen.Dies behindert die forensische Analyse und das Reverse Engineering durch das Entfernen von Funktionsnamen und Symboltabellen.Optimiert, um CI/CD- und Entwicklungs-Build-Umgebungen herauszufiltern.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

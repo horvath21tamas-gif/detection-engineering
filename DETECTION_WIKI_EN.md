@@ -1477,16 +1477,14 @@ Focuses on the execution of stripping tools on non-build systems to hinder foren
 
 
 ---
-## Ultra-Pro High-Fidelity Binary Symbol Stripping (T1027.008)
+## Binary Symbol Stripping (T1027.008)
 - **ID:** `T1027_008.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the active stripping of debug symbols and section headers from binaries 
-in non-development environments. This hinders forensic analysis and reverse engineering 
-by removing function names and symbol tables.
+- **Leírás:** Detects active stripping of debug symbols and section headers from binaries in non-development environments. This hinders forensic analysis and reverse engineering by removing function names and symbol tables. Optimized to filter out CI/CD and development build environments.
 
 
 #### 🚨 Response Playbook

@@ -1,60 +1,67 @@
-title: Ultra-Pro High-Fidelity NTDS.dit Extraction (T1003.003)
+title: NTDS.dit Extraction (T1003.003)
 id: bd51282a-94de-496b-a93e-87c6f51200c5
 status: stable
 description: |
-    Detects unauthorized extraction of the Active Directory database (NTDS.dit).
-    Identifies 'ntdsutil' with abbreviated commands, diskshadow scripts, 
-    and shadow copy creation by non-backup processes on Domain Controllers.
+  Detects unauthorized extraction of the Active Directory database (NTDS.dit).
+  Focuses on:
+  - 'ntdsutil' usage with abbreviated or suspicious commands
+  - DiskShadow scripts and shadow copy creation
+  - 'esentutl' access to NTDS.dit from non-backup contexts
 author: hota05
 date: 2026-02-04
 tags:
-    - attack.credential_access
-    - attack.t1003.003
+  - attack.credential_access
+  - attack.t1003.003
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_ntdsutil_logic:
-        Image|endswith: '\ntdsutil.exe'
-        CommandLine|contains:
-            - 'ac i ntds' 
-            - ' ifm'      
-            - 'create f'  
-            - 'create h'  
+  selection_ntdsutil_logic:
+    Image|endswith: '\ntdsutil.exe'
+    CommandLine|contains:
+      - 'ac i ntds'
+      - ' ifm'
+      - 'create f'
+      - 'create h'
 
-    selection_diskshadow:
-        Image|endswith: '\diskshadow.exe'
-        CommandLine|contains:
-            - ' /s '     
+  selection_diskshadow:
+    Image|endswith: '\diskshadow.exe'
+    CommandLine|contains: ' /s '
 
-    selection_esentutl:
-        Image|endswith: '\esentutl.exe'
-        CommandLine|contains:
-            - '/y'        
-            - '/vss'      
-            - 'ntds.dit'
+  selection_esentutl:
+    Image|endswith: '\esentutl.exe'
+    CommandLine|contains:
+      - '/y'
+      - '/vss'
+      - 'ntds.dit'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\wsmprovhost.exe'
-            - '\psexesvc.exe'    
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wsmprovhost.exe'
+      - '\psexesvc.exe'
 
-    selection_output:
-        CommandLine|contains:
-            - '\AppData\'
-            - '\Temp\'
-            - 'C:\PerfLogs\'
-            - 'C:\Users\Public\'
-            - '\\'              
+  selection_output:
+    CommandLine|contains:
+      - '\AppData\'
+      - '\Temp\'
+      - 'C:\PerfLogs\'
+      - 'C:\Users\Public\'
+      - '\\'
 
-    filter_backup_agents:
-        Image|contains:
-            - '\Program Files\'
-            - '\Program Files (x86)\'
-        username: 'NT AUTHORITY\SYSTEM'
+  filter_backup_agents:
+    Image|contains:
+      - '\Program Files\'
+      - '\Program Files (x86)\'
+    username: 'NT AUTHORITY\SYSTEM'
 
-    condition: (selection_ntdsutil_logic or selection_diskshadow or selection_esentutl) and (selection_suspicious_parent or selection_output) and not filter_backup_agents
+  condition: >
+    (selection_ntdsutil_logic or selection_diskshadow or selection_esentutl)
+    and (selection_suspicious_parent or selection_output)
+    and not filter_backup_agents
+
 level: critical

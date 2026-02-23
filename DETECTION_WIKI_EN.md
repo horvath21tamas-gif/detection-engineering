@@ -2963,16 +2963,16 @@ automated anti-forensic cleanup post-lateral movement.
 
 
 ---
-## Ultra-Pro High-Fidelity Timestomp and MACE Attribute Manipulation (T1070.006)
+## Timestomp and MACE Attribute Manipulation (T1070.006)
 - **ID:** `T1070_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects attempts to modify file timestamps (MACE attributes) to evade forensic analysis. 
-Focuses on direct object property manipulation in PowerShell and specialized 
-anti-forensic utilities, while filtering out legitimate installer behavior.
+- **Leírás:** Detects attempts to manipulate file timestamps (MACE attributes) to evade forensic analysis.
+Focuses on PowerShell-based object property modification and specialized anti-forensic utilities,
+while filtering legitimate installer and system maintenance activities.
 
 
 #### 🚨 Response Playbook

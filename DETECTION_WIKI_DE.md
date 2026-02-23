@@ -2835,16 +2835,16 @@ automatisierte anti-forensische Bereinigung nach seitlicher Bewegung.
 
 
 ---
-## Ultra-Pro High-Fidelity Timestomp und MACE-Attributmanipulation (T1070.006)
+## Timestomp- und MACE-Attributmanipulation (T1070.006)
 - **ID:** `T1070_006.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Versuche, Dateizeitstempel (MACE-Attribute) zu ändern, um einer forensischen Analyse zu entgehen.
-Konzentriert sich auf die direkte Manipulation von Objekteigenschaften in PowerShell und ist spezialisiert
-Anti-Forensik-Dienstprogramme, während legitimes Installationsverhalten herausgefiltert wird.
+- **Beschreibung:** Erkennt Versuche, Dateizeitstempel (MACE-Attribute) zu manipulieren, um einer forensischen Analyse zu entgehen.
+Konzentriert sich auf die PowerShell-basierte Änderung von Objekteigenschaften und spezielle Anti-Forensik-Dienstprogramme.
+während legitime Installations- und Systemwartungsaktivitäten gefiltert werden.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

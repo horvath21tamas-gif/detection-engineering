@@ -2835,16 +2835,16 @@ automatizált igazságügyi orvosszakértői tisztítás oldalirányú mozgás u
 
 
 ---
-## Ultra-Pro High-Fidelity Timestomp és MACE attribútummanipuláció (T1070.006)
+## Timestomp és MACE attribútummanipuláció (T1070.006)
 - **ID:** `T1070_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a fájlok időbélyegeinek (MACE attribútumainak) módosítására tett kísérleteket, hogy elkerülje a törvényszéki elemzést.
-A PowerShell és speciális objektumtulajdonságok közvetlen manipulálására összpontosít
-kriminalisztika ellenes segédprogramok, miközben kiszűrik a legitim telepítői viselkedést.
+- **Leírás:** Érzékeli a fájlok időbélyegeinek (MACE attribútumainak) manipulálására irányuló kísérleteket, hogy elkerülje a törvényszéki elemzést.
+A PowerShell-alapú objektumtulajdonságok módosítására és a speciális kriminalisztikai segédprogramokra összpontosít,
+miközben szűri a jogszerű telepítői és rendszerkarbantartási tevékenységeket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -1,68 +1,75 @@
-title: Ultra-Pro High-Fidelity Internet IP Discovery (T1016.001)
+title: Internet IP Discovery (T1016.001)
 id: 8792df4d-fa7b-4179-9afd-f0d461ceaae3
 status: stable
 description: |
-    Detects attempts to discover the system's external IP address using command-line tools 
-    and common IP-echo services. Minimizes false positives by analyzing the parent-child 
-    process relationship, integrity levels, and typical developer tool fingerprints.
+  Detects attempts to discover the system's external IP address using command-line tools 
+  and common IP-echo services. Minimizes false positives by analyzing the parent-child 
+  process relationship, integrity levels, and typical developer tool fingerprints.
 author: hota05
 date: 2026-02-04
 tags:
-    - attack.discovery
-    - attack.t1016.001
+  - attack.discovery
+  - attack.t1016.001
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\curl.exe'
-            - '\wget.exe'
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\certutil.exe'        
-            - '\bitsadmin.exe'
+  selection_tools:
+    Image|endswith:
+      - '\curl.exe'
+      - '\wget.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\certutil.exe'
+      - '\bitsadmin.exe'
 
-    selection_apis:
-        CommandLine|contains:
-            - 'icanhazip.com'
-            - 'ipinfo.io'
-            - 'api.ipify.org'
-            - 'ifconfig.me'
-            - 'checkip.amazonaws.com'
-            - 'ident.me'
-            - 'ipecho.net'
-            - 'ip-api.com'
-            - 'whatismyip'
+  selection_apis:
+    CommandLine|contains:
+      - 'icanhazip.com'
+      - 'ipinfo.io'
+      - 'api.ipify.org'
+      - 'ifconfig.me'
+      - 'checkip.amazonaws.com'
+      - 'ident.me'
+      - 'ipecho.net'
+      - 'ip-api.com'
+      - 'whatismyip'
 
-    selection_suspicious_lineage:
-        ParentImage|endswith:
-            - '\winword.exe'        
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\wsmprovhost.exe'   
-            - '\httpd.exe'           
-            - '\cmd.exe'             
-        IntegrityLevel: 'Medium'     
+  selection_suspicious_lineage:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\wsmprovhost.exe'
+      - '\httpd.exe'
+      - '\cmd.exe'
+    IntegrityLevel: 'Medium'
 
-    selection_patterns:
-        CommandLine|contains:
-            - '-urlcache'            
-            - 'Invoke-WebRequest'
-            - 'iwr '
-            - 'DownloadString'
-            - 'content.asstring'
+  selection_patterns:
+    CommandLine|contains:
+      - '-urlcache'
+      - 'Invoke-WebRequest'
+      - 'iwr '
+      - 'DownloadString'
+      - 'content.asstring'
 
-    filter_legit_software:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith:
-            - '\svchost.exe'
-            - '\CcmExec.exe'         
-            - '\msiexec.exe'        
-        - CommandLine|contains:
-            - 'Program Files'      
-            - 'node_modules'         
-            - 'azcopy'             
+  filter_legit_software:
+    - username: 'NT AUTHORITY\SYSTEM'
+    - ParentImage|endswith:
+        - '\svchost.exe'
+        - '\CcmExec.exe'
+        - '\msiexec.exe'
+    - CommandLine|contains:
+        - 'Program Files'
+        - 'node_modules'
+        - 'azcopy'
 
-    condition: selection_tools and selection_apis and (selection_suspicious_lineage or selection_patterns) and not filter_legit_software
+  condition: >
+    selection_tools and
+    selection_apis and
+    (selection_suspicious_lineage or selection_patterns) and
+    not filter_legit_software
+
 level: high

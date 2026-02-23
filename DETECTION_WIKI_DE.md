@@ -1675,16 +1675,14 @@ Filtert legitimes Side-by-Side- (WinSxS) und Windows Update-Verhalten heraus.
 
 
 ---
-## Ultra-Pro High-Fidelity-Speicherplatz nach Dateinamenmaskierung (T1036.006)
+## Leerzeichen nach Dateinamenmaskierung (T1036.006)
 - **ID:** `T1036_006.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt absichtliche Maskierung durch nachgestellte Leerzeichen in Dateinamen oder Verzeichnisnamen.
-Konzentriert sich auf ausführbare Erweiterungen gefolgt von Leerzeichen, um der stringbasierten Erkennung zu entgehen
-Gleichzeitig werden häufig auftretende Windows Update- und SCCM/MECM-Rauschen gefiltert.
+- **Beschreibung:** Erkennt absichtliche Maskierung durch nachgestellte Leerzeichen in ausführbaren Dateinamen oder Verzeichnisnamen (z. B. „malware.exe“).Zielt auf Umgehungen ab, die Leerzeichen verwenden, um stringbasierte Erkennungen zu umgehen, und filtert gleichzeitig gängige Windows Update-, SCCM/MECM- und Systemautomatisierungsgeräusche.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

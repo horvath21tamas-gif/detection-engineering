@@ -1675,16 +1675,14 @@ Kiszűri a legitim Side-by-Side (WinSxS) és Windows Update viselkedéseket.
 
 
 ---
-## Ultra-Pro High-Fidelity Space a fájlnév-maszkolás után (T1036.006)
+## Szóköz a fájlnév maszkolása után (T1036.006)
 - **ID:** `T1036_006.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Szándékos maszkolást észlel a fájlnevekben vagy a könyvtárnevekben lévő szóközök használatával.
-A futtatható kiterjesztésekre összpontosít, majd szóközökre, hogy elkerülje a karakterlánc-alapú észlelést
-miközben szűri a gyakori Windows Update és SCCM/MECM zajokat.
+- **Leírás:** Szándékos maszkolást észlel a végrehajtható fájlnevekben vagy könyvtárnevekben (pl. "malware.exe") lévő szóközök használatával.Célozza azokat az adókijátszásokat, amelyek szóközt használnak a karakterlánc-alapú észlelések megkerülésére, miközben kiszűrik a gyakori Windows Update-, SCCM/MECM- és rendszerautomatizálási zajokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

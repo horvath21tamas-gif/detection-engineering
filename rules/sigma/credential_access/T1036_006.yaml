@@ -49,7 +49,7 @@ detection:
         - 'C:\Windows\System32\'
         - 'C:\Windows\WinSxS\'
         - 'C:\Windows\SoftwareDistribution\'
-    - User:
+    - username:
         - 'NT AUTHORITY\SYSTEM'
         - 'NT AUTHORITY\LOCAL SERVICE'
         - 'NT AUTHORITY\NETWORK SERVICE'

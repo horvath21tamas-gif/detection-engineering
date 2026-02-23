@@ -1735,16 +1735,14 @@ Filters out legitimate Side-by-Side (WinSxS) and Windows Update behaviors.
 
 
 ---
-## Ultra-Pro High-Fidelity Space After Filename Masquerading (T1036.006)
+## Space After Filename Masquerading (T1036.006)
 - **ID:** `T1036_006.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects intentional masquerading using trailing spaces in filenames or directory names. 
-Focuses on executable extensions followed by spaces to evade string-based detection 
-while filtering common Windows Update and SCCM/MECM noise.
+- **Leírás:** Detects intentional masquerading using trailing spaces in executable filenames or directory names (e.g., "malware.exe "). Targets evasions that use spaces to bypass string-based detections, while filtering common Windows Update, SCCM/MECM, and system automation noise.
 
 
 #### 🚨 Response Playbook

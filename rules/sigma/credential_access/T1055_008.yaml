@@ -1,46 +1,59 @@
-title: Ultra-Pro Stealthy Ptrace Injection (T1055.008)
+title: Ptrace Injection Detection (ATT&CK T1055.008)
 id: ebab4539-89be-4492-87c9-c4015a4a6bff
 status: stable
-description: |
-    Detects high-fidelity ptrace-based process injection by identifying 
-    PTRACE_POKETEXT/DATA operations from suspicious sources or 
-    cross-user ptrace attachments, filtering out legitimate debuggers.
-author: hota05
-date: 2026-02-03
+description: >
+  Detects ptrace-based process injection by monitoring PTRACE_POKETEXT/DATA operations 
+  originating from suspicious binaries or cross-user ptrace attachments, while filtering out legitimate 
+  debugging and monitoring tools.
+author: hota05 
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1055/008/
 tags:
-    - attack.defense_evasion
-    - attack.t1055.008
+  - attack.defense_evasion
+  - attack.privilege_escalation
+  - attack.t1055.008
+  - attack.host
+
 logsource:
-    product: linux
-    service: auditd
+  product: linux
+  service: auditd
+  category: process_access
+
 detection:
-    selection_ptrace_ops:
-        type: 'SYSCALL'
-        syscall: 'ptrace'
-        a0:
-            - '0x4'
-            - '0x5'
-            - '0x10'
+  selection_ptrace_ops:
+    type: 'SYSCALL'
+    syscall: 'ptrace'
+    a0|contains:
+      - '0x4'  
+      - '0x5'   
+      - '0x10'  
 
-    selection_suspicious_binaries:
-        exe|contains:
-            - '/bin/python'
-            - '/bin/php'
-            - '/bin/perl'
-            - '/bin/node'
-            - '/usr/sbin/nginx'
-            - '/usr/sbin/apache'
-            - '/usr/bin/socat'
-            - '/usr/bin/nc'
+  selection_suspicious_binaries:
+    exe|contains:
+      - '/bin/python'
+      - '/bin/php'
+      - '/bin/perl'
+      - '/bin/node'
+      - '/usr/sbin/nginx'
+      - '/usr/sbin/apache'
+      - '/usr/bin/socat'
+      - '/usr/bin/nc'
 
-    filter_trusted_debuggers:
-        exe:
-            - '/usr/bin/gdb'
-            - '/usr/bin/strace'
-            - '/usr/bin/ltrace'
-            - '/usr/bin/auditd'
-            - '/opt/datadog/agent' 
-        auid: '4294967295' 
+  filter_trusted_debuggers:
+    exe|contains:
+      - '/usr/bin/gdb'
+      - '/usr/bin/strace'
+      - '/usr/bin/ltrace'
+      - '/usr/bin/auditd'
+      - '/opt/datadog/agent'
+    auid: '4294967295'  
 
-    condition: selection_ptrace_ops and (selection_suspicious_binaries or not filter_trusted_debuggers)
+  condition: selection_ptrace_ops
+             and (selection_suspicious_binaries or not filter_trusted_debuggers)
+
+falsepositives:
+  - Legitimate debugging sessions by admins (gdb, strace, ltrace)
+  - System or monitoring agents performing ptrace for tracing or auditing
+
 level: critical

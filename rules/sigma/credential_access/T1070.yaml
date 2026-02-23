@@ -1,64 +1,81 @@
-title: Ultra-Pro High-Fidelity Indicator Removal on Host (T1070)
+title: Indicator Removal on Host (ATT&CK T1070)
 id: 29f1cc4a-8018-4b6f-a09b-9fe3358ca8c9
 status: stable
-description: |
-    Detects targeted attempts to clear Windows Event Logs and high-value forensic artifacts 
-    (USN Journal, Prefetch). Focuses on non-standard execution chains and specific 
-    clearing of security-sensitive providers.
-author: hota05
-date: 2026-02-03
+description: >
+  Detects targeted attempts to clear Windows Event Logs and high-value forensic artifacts
+  (USN Journal, Prefetch). Focuses on non-standard execution chains and specific clearing
+  of security-sensitive providers.
+
+author: hota05 
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1070/
+  - https://attack.mitre.org/techniques/T1070/001/
+  - https://attack.mitre.org/techniques/T1070/004/
 tags:
-    - attack.defense_evasion
-    - attack.t1070
-    - attack.t1070.001
-    - attack.t1070.004
+  - attack.defense-evasion
+  - attack.t1070
+  - attack.t1070.001
+  - attack.t1070.004
+  - attack.lateral-movement
+
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
+
 detection:
-    selection_wevtutil_clear:
-        Image|endswith: '\wevtutil.exe'
-        CommandLine|contains:
-            - ' cl '
-            - ' clear-log '
-        CommandLine|contains:
-            - 'Security'
-            - 'System'
-            - 'Setup'
-            - 'PowerShell'
+  selection_wevtutil_clear:
+    Image|endswith: '\wevtutil.exe'
+    CommandLine|contains:
+      - ' cl '
+      - ' clear-log '
+    CommandLine|contains:
+      - 'Security'
+      - 'System'
+      - 'Setup'
+      - 'PowerShell'
 
-    selection_forensic_wipe:
-        - Image|endswith: '\fsutil.exe'
-          CommandLine|contains|all:
-            - 'usn'
-            - 'deletejournal'
-        - CommandLine|contains:
-            - 'del '
-            - 'Remove-Item'
-        - CommandLine|contains:
-            - '\Windows\Prefetch\'
-            - '\System32\config\Journal'
+  selection_forensic_wipe:
+    - Image|endswith: '\fsutil.exe'
+      CommandLine|contains:
+        - 'usn'
+        - 'deletejournal'
+    - CommandLine|contains:
+        - 'del '
+        - 'Remove-Item'
+    - CommandLine|contains:
+        - '\Windows\Prefetch\'
+        - '\System32\config\Journal'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\w3wp.exe'
-            - '\powershell.exe'
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\w3wp.exe'
+      - '\powershell.exe'
+      - '\cmd.exe'
 
-    filter_legit_maintenance:
-        - username: 'NT AUTHORITY\SYSTEM'
-          ParentImage|endswith: 
-            - '\services.exe'
-            - '\svchost.exe'
-            - '\msiexec.exe'
-        - CommandLine|contains:
-            - 'cleanmgr.exe'
-            - 'CCM\Temp'    
-            - 'HealthCheck'
+  filter_legit_maintenance:
+    - User|startswith: 'NT AUTHORITY\'
+      ParentImage|endswith:
+        - '\services.exe'
+        - '\svchost.exe'
+        - '\msiexec.exe'
+    - CommandLine|contains:
+        - 'cleanmgr.exe'
+        - 'CCM\Temp'
+        - 'HealthCheck'
 
-    condition: (selection_wevtutil_clear or selection_forensic_wipe) and (selection_suspicious_parent or not filter_legit_maintenance)
+  condition: (selection_wevtutil_clear or selection_forensic_wipe)
+             and (selection_suspicious_parent or not filter_legit_maintenance)
+
+falsepositives:
+  - Routine SYSTEM service maintenance or cleanup tasks
+  - Disk cleanup (cleanmgr.exe) and SCCM temporary operations
+  - IT admin PowerShell scripts performing legitimate artifact management
+  - MSI installation or update operations triggering fsutil activity
+
 level: high

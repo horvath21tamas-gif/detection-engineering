@@ -1,67 +1,87 @@
-title: Ultra-Pro High-Fidelity System Network Connections Discovery (T1049)
+title: System Network Connections Discovery (ATT&CK T1049)
 id: fe347f5b-3329-427f-8ff3-49bcfb3cc89d
 status: stable
-description: |
-    Detects targeted discovery of active network connections and established sessions. 
-    Focuses on non-standard process lineages (Office, Browsers, Web Servers) and 
-    detects specific command-line switch combinations used by attackers to map 
-    the network landscape.
-author: hota05
-date: 2026-02-04
+description: >
+  Detects targeted discovery of active network connections and established sessions.
+  Focuses on attacker tradecraft such as advanced netstat/net usage, PowerShell
+  network cmdlets, suspicious parent process lineage (Office, web services, remote
+  management), and automated output parsing or redirection.
+author: hota05 
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1049/
 tags:
-    - attack.discovery
-    - attack.t1049
+  - attack.discovery
+  - attack.t1049
+  - attack.host
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\netstat.exe'
-            - '\net.exe'
-            - '\net1.exe'
-            - '\nbtstat.exe'
-            - '\arp.exe'
-        - CommandLine|contains:
-            - 'Get-NetTCPConnection'
-            - 'Get-NetUDPEndpoint'
-            - 'net session'         
-            - 'net use'              
-            - 'net view'           
+  selection_native_tools:
+    Image|endswith:
+      - '\netstat.exe'
+      - '\net.exe'
+      - '\net1.exe'
+      - '\nbtstat.exe'
+      - '\arp.exe'
 
-    selection_patterns:
-        CommandLine|contains:
-            - ' -ano'                
-            - ' -na '
-            - ' -p tcp'
-            - ' -s '                 
+  selection_powershell_cmdlets:
+    CommandLine|contains:
+      - 'Get-NetTCPConnection'
+      - 'Get-NetUDPEndpoint'
+      - 'Get-NetIPAddress'
+      - 'Get-NetRoute'
+      - 'net session'
+      - 'net use'
+      - 'net view'
 
-    selection_suspicious_lineage:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\httpd.exe'           
-            - '\wsmprovhost.exe'    
-        IntegrityLevel: 'Medium'    
+  selection_patterns:
+    CommandLine|contains:
+      - ' -ano'
+      - ' -na '
+      - ' -p tcp'
+      - ' -s '
+      - ' /domain'
 
-    selection_automation:
-        CommandLine|contains:
-            - 'findstr'
-            - 'select-string'
-            - ' > '                  
-            - 'ConvertTo-Json'
+  selection_suspicious_lineage:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\httpd.exe'
+      - '\wsmprovhost.exe'
+    IntegrityLevel: 'Medium'
 
-    filter_legit_noise:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith:
-            - '\svchost.exe'
-            - '\CcmExec.exe'         
-            - '\msiexec.exe'
-        - CommandLine|contains:
-            - 'Program Files'        
-            - 'Splunk'               
-            - 'healthcheck'
+  selection_automation:
+    CommandLine|contains:
+      - 'findstr'
+      - 'select-string'
+      - ' > '
+      - ' >> '
+      - 'ConvertTo-Json'
+      - 'Out-File'
 
-    condition: selection_tools and (selection_patterns or selection_suspicious_lineage or selection_automation) and not filter_legit_noise
+  filter_legit_noise:
+    - username: 'NT AUTHORITY\SYSTEM'
+    - ParentImage|endswith:
+        - '\svchost.exe'
+        - '\CcmExec.exe'
+        - '\msiexec.exe'
+    - CommandLine|contains:
+        - 'Program Files'
+        - 'Splunk'
+        - 'healthcheck'
+
+  condition: (selection_native_tools or selection_powershell_cmdlets)
+             and (selection_patterns or selection_suspicious_lineage or selection_automation)
+             and not filter_legit_noise
+
+falsepositives:
+  - Legitimate administrative network troubleshooting
+  - IT monitoring or health-check scripts
+  - SCCM/EDR telemetry collection
+
 level: high

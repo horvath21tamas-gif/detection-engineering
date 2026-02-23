@@ -1,57 +1,57 @@
-title: Ultra-Pro High-Fidelity Domain Fronting Detection (T1090.004)
+title: Domain Fronting Detection (T1090.004)
 id: 15d182d7-e843-4da6-b639-769003c8c24a
 status: stable
 description: |
-    Detects domain fronting by identifying manual HTTP Host header overrides 
-    within command-line arguments of common web-enabled LoLBins, 
-    specifically targeting CDN-backed infrastructure redirection.
+  Detects domain fronting by identifying manual HTTP Host header overrides 
+  within command-line arguments of common web-enabled LoLBins, 
+  specifically targeting CDN-backed infrastructure redirection.
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.command_and_control
-    - attack.t1090.004
+  - attack.command_and_control
+  - attack.t1090.004
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_header_logic:
-        CommandLine|contains:
-            - ' -H "Host:'
-            - " -H 'Host:"
-            - ' -Header "Host:'
-            - ' --header "Host:'
-            - '.Headers.Add("Host"'
-            - 'Set-Item -Path env:http_proxy'    
+  selection_header_logic:
+    CommandLine|contains:
+      - ' -H "Host:'
+      - " -H 'Host:"
+      - ' -Header "Host:'
+      - ' --header "Host:'
+      - '.Headers.Add("Host"'
+      - 'Set-Item -Path env:http_proxy'
 
-    selection_fronts:
-        CommandLine|contains:
-            - 'cloudfront.net'
-            - 'azureedge.net'
-            - 'cloudflare.com'
-            - 'fastly.net'
-            - 'google.com'
-            - 'microsoft.com'
-            - 's3.amazonaws.com'
+  selection_fronts:
+    CommandLine|contains:
+      - 'cloudfront.net'
+      - 'azureedge.net'
+      - 'cloudflare.com'
+      - 'fastly.net'
+      - 'google.com'
+      - 'microsoft.com'
+      - 's3.amazonaws.com'
 
-    selection_procs:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\curl.exe'
-            - '\certutil.exe'
-            - '\bitsadmin.exe'
-            - '\rundll32.exe'
+  selection_procs:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\curl.exe'
+      - '\certutil.exe'
+      - '\bitsadmin.exe'
+      - '\rundll32.exe'
 
-    filter_legit_infra:
-        - Image|contains:
-            - '\Program Files\'                
-            - '\Program Files (x86)\'
-        - CommandLine|contains:
-            - 'localhost'
-            - '127.0.0.1'
-        - username: 'NT AUTHORITY\SYSTEM'          
-        - ParentImage|endswith:
-            - '\services.exe'
+  filter_legit_infra:
+    Image|contains:
+      - '\Program Files\'
+      - '\Program Files (x86)\'
+    CommandLine|contains:
+      - 'localhost'
+      - '127.0.0.1'
+    username: 'NT AUTHORITY\SYSTEM'
+    ParentImage|endswith:
+      - '\services.exe'
 
-    condition: selection_header_logic and selection_fronts and selection_procs and not filter_legit_infra
+  condition: selection_header_logic and selection_fronts and selection_procs and not filter_legit_infra
 level: critical

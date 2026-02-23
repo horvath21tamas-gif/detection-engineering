@@ -1,55 +1,56 @@
-title: Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092)
+title: Removable Media C2 Anomaly (T1071.002 / T1092)
 id: 549879ab-ac9e-404c-935c-a168a9d17690
 status: stable
 description: |
-    Detects unauthorized C2 or data staging via removable media by identifying 
-    non-interactive processes accessing hidden/system files on USB volumes, 
-    focusing on automated script execution and Alternate Data Stream (ADS) abuse.
+  Detects unauthorized C2 or data staging via removable media by identifying 
+  non-interactive processes accessing hidden/system files on USB volumes,
+  focusing on automated script execution and Alternate Data Stream (ADS) abuse.
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.command_and_control
-    - attack.exfiltration
-    - attack.t1092
+  - attack.command_and_control
+  - attack.exfiltration
+  - attack.t1092
 logsource:
-    category: file_event
-    product: windows
+  category: file_event
+  product: windows
 detection:
-    selection_removable:
-        TargetFilename|re: '^[D-Z]:\\.*'
+  selection_removable:
+    TargetFilename: '^[D-Z]:\\.*'
 
-    selection_suspicious_files:
-        - TargetFilename|contains:
-            - '\.'                         
-            - '\autorun'                   
-            - ':'                          
-        - TargetFilename|endswith:
-            - '.dat'                       
-            - '.bin'                      
-            - '.lnk'                       
-            - '.vbs'
-            - '.ps1'
+  selection_suspicious_files:
+    TargetFilename|contains:
+      - '\.'               
+      - '\autorun'       
+      - ':'                 
+    TargetFilename|endswith:
+      - '.dat'
+      - '.bin'
+      - '.lnk'
+      - '.vbs'
+      - '.ps1'
 
-    selection_procs:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\cmd.exe'
-            - '\rundll32.exe'
-            - '\regsvr32.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
-            - '\scrcons.exe'             
+  selection_procs:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\rundll32.exe'
+      - '\regsvr32.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\scrcons.exe'
 
-    filter_legit_noise:
-        - Image|endswith:
-            - '\explorer.exe'             
-            - '\msiexec.exe'              
-        - TargetFilename|contains:
-            - '$RECYCLE.BIN'
-            - 'System Volume Information'
-            - 'Found.000'
-        - username: 'NT AUTHORITY\SYSTEM'     
+  filter_legit_noise:
+    Image|endswith:
+      - '\explorer.exe'
+      - '\msiexec.exe'
+    TargetFilename|contains:
+      - '$RECYCLE.BIN'
+      - 'System Volume Information'
+      - 'Found.000'
+    username: 'NT AUTHORITY\SYSTEM'
 
-    condition: selection_removable and selection_suspicious_files and selection_procs and not filter_legit_noise
+  condition: selection_removable and selection_suspicious_files and selection_procs and not filter_legit_noise
+
 level: critical

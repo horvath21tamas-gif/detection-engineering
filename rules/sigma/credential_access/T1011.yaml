@@ -1,51 +1,57 @@
-title: Ultra-Pro High-Fidelity Bluetooth Exfiltration (T1011)
+title: Bluetooth Exfiltration (T1011)
 id: e9e265b7-0fe0-44b9-baee-c20b16130e4d
 status: stable
 description: |
-    Detects unauthorized Bluetooth data exfiltration by identifying programmatic 
-    triggers of Bluetooth transfer wizards (fsquirt.exe) from non-standard 
-    parent processes or suspicious command-line executions of radio-control tools.
+  Detects unauthorized Bluetooth data exfiltration by identifying programmatic 
+  triggers of Bluetooth transfer wizards (fsquirt.exe) from non-standard 
+  parent processes or suspicious command-line executions of radio-control tools.
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.exfiltration
-    - attack.t1011
+  - attack.exfiltration
+  - attack.t1011
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\fsquirt.exe'          
-            - '\bttransfer.exe'       
-            - '\BTTray.exe'           
-        - CommandLine|contains:
-            - 'Bluetooth.Radio'       
-            - 'System.Net.Sockets.AddressFamily::BlueTooth'
+  selection_tools:
+    Image|endswith:
+      - '\fsquirt.exe'
+      - '\bttransfer.exe'
+      - '\BTTray.exe'
+    CommandLine|contains:
+      - 'Bluetooth.Radio'
+      - 'System.Net.Sockets.AddressFamily::BlueTooth'
 
-    selection_parent:
-        ParentImage|endswith:
-            - '\winword.exe'          
-            - '\excel.exe'
-            - '\powershell.exe'       
-            - '\wscript.exe'       
-            - '\cmd.exe'
-            - '\schtasks.exe'       
+  selection_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\powershell.exe'
+      - '\wscript.exe'
+      - '\cmd.exe'
+      - '\schtasks.exe'
 
-    selection_context:
-        - CommandLine|contains:
-            - '\AppData\'             
-            - '\Temp\'
-            - '\Public\'
-            - ' -send'               
-            - ' /send'
+  selection_context:
+    CommandLine|contains:
+      - '\AppData\'
+      - '\Temp\'
+      - '\Public\'
+      - ' -send'
+      - ' /send'
 
-    filter_legit_user:
-        - ParentImage|endswith:
-            - '\explorer.exe'        
-        - Image|contains:
-            - '\Program Files\'       
-        - username: 'NT AUTHORITY\SYSTEM'
+  filter_legit_user:
+    ParentImage|endswith:
+      - '\explorer.exe'
+    Image|contains:
+      - '\Program Files\'
+    username: 'NT AUTHORITY\SYSTEM'
 
-    condition: selection_tools and (selection_parent or selection_context) and not filter_legit_user
+  condition: >
+    selection_tools and
+    (selection_parent or selection_context) and
+    not filter_legit_user
+
 level: high

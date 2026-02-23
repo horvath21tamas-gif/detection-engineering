@@ -3955,7 +3955,7 @@ Optimized to ignore standard system updates and focus on non-standard process be
 
 
 ---
-## Ultra-Pro High-Fidelity Screen Capture Anomaly (T1113)
+## Screen Capture Anomaly (T1113)
 - **ID:** `T1113.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

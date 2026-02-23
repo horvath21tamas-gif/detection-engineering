@@ -3772,7 +3772,7 @@ Optimiert, um Standardsystemaktualisierungen zu ignorieren und sich auf nicht st
 
 
 ---
-## Anomalie bei der Ultra-Pro-High-Fidelity-Bildschirmaufnahme (T1113)
+## Anomalie bei der Bildschirmaufnahme (T1113)
 - **ID:** `T1113.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

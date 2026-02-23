@@ -3772,7 +3772,7 @@ A szabványos rendszerfrissítések figyelmen kívül hagyására optimalizálva
 
 
 ---
-## Ultra-Pro nagy felbontású képernyőrögzítési anomália (T1113)
+## Képernyőrögzítési anomália (T1113)
 - **ID:** `T1113.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

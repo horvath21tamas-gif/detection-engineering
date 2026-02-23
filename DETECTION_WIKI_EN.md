@@ -1626,16 +1626,14 @@ combinations (/priv, /groups) used before privilege escalation attempts.
 
 
 ---
-## Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036)
+## Masquerading and Process Path Abuse (T1036)
 - **ID:** `T1036.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects advanced masquerading techniques including system binary path anomalies, 
-double extensions, and critical system processes spawned by untrusted parents. 
-Optimized to filter out legitimate Windows Update and side-loading behaviors.
+- **Leírás:** Detects advanced masquerading techniques including system binary path anomalies, double extensions, critical system processes spawned by untrusted parents, and executables with suspicious trailing or leading spaces. Optimized to filter out legitimate Windows Update, system maintenance, and side-loading behaviors.
 
 
 #### 🚨 Response Playbook

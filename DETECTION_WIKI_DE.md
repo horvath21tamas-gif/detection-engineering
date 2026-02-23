@@ -1572,16 +1572,14 @@ Kombinationen (/priv, /groups), die vor Versuchen zur Rechteausweitung verwendet
 
 
 ---
-## Ultra-Pro High-Fidelity-Masquerading und Prozesspfadmissbrauch (T1036)
+## Masquerading und Prozesspfadmissbrauch (T1036)
 - **ID:** `T1036.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt fortgeschrittene Maskierungstechniken, einschließlich System-Binärpfad-Anomalien,
-doppelte Erweiterungen und kritische Systemprozesse, die von nicht vertrauenswürdigen übergeordneten Systemen erzeugt werden.
-Optimiert, um legitimes Windows Update- und Seitenladeverhalten herauszufiltern.
+- **Beschreibung:** Erkennt fortgeschrittene Maskierungstechniken, einschließlich System-Binärpfad-Anomalien, doppelte Erweiterungen, kritische Systemprozesse, die von nicht vertrauenswürdigen übergeordneten Systemen erzeugt wurden, und ausführbare Dateien mit verdächtigen Leerzeichen am Ende oder am Anfang.Optimiert, um legitimes Windows Update, Systemwartungs- und Seitenladeverhalten herauszufiltern.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

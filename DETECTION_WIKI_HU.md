@@ -1572,16 +1572,14 @@ kombinációk (/priv, /groups) a jogosultság-kiterjesztési kísérletek előtt
 
 
 ---
-## Ultra-Pro High-Fidelity maszkolás és folyamatúttal való visszaélés (T1036)
+## Maszkolás és visszaélés a folyamat során (T1036)
 - **ID:** `T1036.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Fejlett maszkolási technikákat észlel, beleértve a rendszer bináris útvonalának anomáliáit,
-kettős kiterjesztések és a nem megbízható szülők által létrehozott kritikus rendszerfolyamatok.
-A jogos Windows Update és az oldalsó betöltési viselkedés kiszűrésére optimalizálva.
+- **Leírás:** Érzékeli a fejlett maszkolási technikákat, beleértve a rendszer bináris útvonalának anomáliáit, a kettős kiterjesztést, a nem megbízható szülők által létrehozott kritikus rendszerfolyamatokat és a gyanús záró- vagy kezdő szóközöket tartalmazó végrehajtható fájlokat.A jogos Windows Update, a rendszerkarbantartás és az oldalsó betöltési viselkedés kiszűrésére optimalizálva.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

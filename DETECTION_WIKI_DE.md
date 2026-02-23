@@ -3302,7 +3302,7 @@ externe Überwachungsports zu internen Netzwerkressourcen.
 
 
 ---
-## Ultra-Pro High-Fidelity Interner Proxy und Pivot-Erkennung (T1090.001)
+## Interner Proxy und Pivot-Erkennung (T1090.001)
 - **ID:** `T1090_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

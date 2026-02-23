@@ -3457,7 +3457,7 @@ external listening ports to internal network assets.
 
 
 ---
-## Ultra-Pro High-Fidelity Internal Proxy & Pivot Detection (T1090.001)
+## Internal Proxy & Pivot Detection (T1090.001)
 - **ID:** `T1090_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

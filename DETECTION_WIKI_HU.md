@@ -2205,16 +2205,14 @@ manipuláció, ahol a hívás forrása egy nem támogatott memóriaterület
 
 
 ---
-## Ultra-Pro lopakodó száleltérítés (T1055.003)
+## Száleltérítés-észlelés (ATT&CK T1055.003)
 - **ID:** `T1055_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a szálvégrehajtás-eltérítést a folyamatok közötti hozzáférés azonosításával
-kérések szálkezelési jogokkal (SET_CONTEXT), ahol a
-a hívási verem nem támogatott memóriából (shellkód) származik.
+- **Leírás:** Érzékeli a lopakodó szálvégrehajtás-eltérítést azáltal, hogy figyeli a folyamatok közötti hozzáférési kérelmeket szálkezelési jogokkal (SET_CONTEXT), ahol a hívó verem nem támogatott vagy beillesztett memóriából (shellkód) származik.Nagy értékű folyamatokat céloz meg a fejlett jogosultság-eszkalációs kísérletek azonosítása érdekében.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -2287,7 +2285,7 @@ a hívási verem nem támogatott memóriából (shellkód) származik.
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az extra ablakmemória (EWM) befecskendezését azáltal, hogy figyeli a gyanús, többfolyamat-memória-hozzáférési kéréseket, ahol a CallTrace a nem támogatott memóriából (shellkódból) történő végrehajtást jelzi, megcélozva a gyakori grafikus felhasználói felületi folyamatokat.
+- **Leírás:** Érzékeli az extra ablakmemória (EWM) befecskendezését a gyanús, többfolyamat-memória-hozzáférési kérelmek figyelésével, ahol a CallTrace a nem támogatott memóriából (shellkódból) történő végrehajtást jelzi, megcélozva a gyakori grafikus felületi folyamatokat.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -2372,7 +2370,7 @@ a hívási verem nem támogatott memóriából (shellkód) származik.
 
 
 ---
-## Keylogging & Input Hooking (ATT&CK T1056.001)
+## Billentyűnaplózás és beviteli bekötés (ATT&CK T1056.001)
 - **ID:** `T1056_001.yaml`
 - **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🟠 (high)

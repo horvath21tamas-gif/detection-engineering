@@ -2205,16 +2205,14 @@ Manipulation, bei der die Quelle des Aufrufs ein nicht gesicherter Speicherberei
 
 
 ---
-## Ultra-Pro Stealthy Thread Hijacking (T1055.003)
+## Thread-Hijacking-Erkennung (ATT&CK T1055.003)
 - **ID:** `T1055_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Thread-Ausführungs-Hijacking durch Identifizierung prozessübergreifender Zugriffe
-Anfragen mit Thread-Manipulationsrechten (SET_CONTEXT), bei denen die
-Der aufrufende Stack stammt aus dem nicht gesicherten Speicher (Shellcode).
+- **Beschreibung:** Erkennt heimliches Thread-Ausführungs-Hijacking durch Überwachung prozessübergreifender Zugriffsanforderungen mit Thread-Manipulationsrechten (SET_CONTEXT), wobei der aufrufende Stack aus nicht gesichertem oder injiziertem Speicher (Shellcode) stammt.Zielt auf hochwertige Prozesse ab, um fortgeschrittene Eskalationsversuche von Berechtigungen zu identifizieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

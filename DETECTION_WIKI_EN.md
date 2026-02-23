@@ -2296,16 +2296,14 @@ manipulation where the source of the call is an unbacked memory region
 
 
 ---
-## Ultra-Pro Stealthy Thread Hijacking (T1055.003)
+## Thread Hijacking Detection (ATT&CK T1055.003)
 - **ID:** `T1055_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects thread execution hijacking by identifying cross-process access 
-requests with thread manipulation rights (SET_CONTEXT) where the 
-calling stack originates from unbacked memory (shellcode).
+- **Leírás:** Detects stealthy thread execution hijacking by monitoring cross-process access requests with thread manipulation rights (SET_CONTEXT) where the calling stack originates from unbacked or injected memory (shellcode). Targets high-value processes to identify advanced privilege escalation attempts.
 
 
 #### 🚨 Response Playbook

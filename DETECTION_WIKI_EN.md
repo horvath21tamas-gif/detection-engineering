@@ -2100,16 +2100,14 @@ the network landscape.
 
 
 ---
-## Ultra-Pro High-Fidelity Physical Medium Exfiltration (T1052)
+## Physical Medium Exfiltration (ATT&CK T1052)
 - **ID:** `T1052.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic data exfiltration to physical media by monitoring 
-non-interactive copy/archive commands targeting removable disk volumes, 
-filtering out legitimate Windows Explorer GUI operations.
+- **Leírás:** Detects targeted data exfiltration to physical media (USB/removable disks)  by monitoring non-interactive copy, move, or archive commands. Focuses on  stealthy command-line flags, suspicious parent processes, and excludes  legitimate Windows Explorer and admin operations.
 
 
 #### 🚨 Response Playbook

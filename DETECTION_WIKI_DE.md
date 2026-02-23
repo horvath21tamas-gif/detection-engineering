@@ -2020,16 +2020,14 @@ der Netzwerklandschaft.
 
 
 ---
-## Ultra-Pro High-Fidelity-Physical-Medium-Exfiltration (T1052)
+## Physikalische Medienexfiltration (ATT&CK T1052)
 - **ID:** `T1052.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt systematische Datenexfiltration auf physische Medien durch Überwachung
-nicht interaktive Kopier-/Archivierungsbefehle, die auf Wechseldatenträger-Volumes abzielen,
-Herausfiltern legitimer Windows Explorer-GUI-Vorgänge.
+- **Beschreibung:** Erkennt gezielte Datenexfiltration auf physische Medien (USB/Wechseldatenträger) durch Überwachung nicht interaktiver Kopier-, Verschiebungs- oder Archivierungsbefehle.Konzentriert sich auf getarnte Befehlszeilenflags und verdächtige übergeordnete Prozesse und schließt legitime Windows Explorer- und Administratorvorgänge aus.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -2020,16 +2020,14 @@ a hálózati tájat.
 
 
 ---
-## Ultra-Pro High-Fidelity fizikai közeg szűrés (T1052)
+## Fizikai közeg kiszűrése (ATT&CK T1052)
 - **ID:** `T1052.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Figyelemmel észleli a szisztematikus adatszivárgást a fizikai adathordozóra
-cserélhető lemezköteteket célzó nem interaktív másolási/archiválási parancsok,
-a Windows Intéző GUI-műveleteinek kiszűrése.
+- **Leírás:** A nem interaktív másolási, áthelyezési vagy archiválási parancsok figyelésével észleli a célzott adatszivárgást a fizikai adathordozóra (USB/cserélhető lemezekre).A rejtett parancssori zászlókra, a gyanús szülőfolyamatokra összpontosít, és kizárja a jogszerű Windows Intéző és adminisztrátori műveleteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

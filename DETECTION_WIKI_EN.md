@@ -843,16 +843,18 @@ and anomalous process lineage on non-DC assets.
 
 
 ---
-## Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007)
+## LSASS Memory Dump & LOLBin Abuse (T1003.007)
 - **ID:** `T1003_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [COMSVCS.DLL](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects sophisticated LSASS memory dumping. Focuses on Procdump argument patterns, 
-Task Manager-initiated dumps via WerFault, and COM+ (comsvcs.dll) exports using 
-ordinal-based calls (#24) to bypass string-based detection.
+- **Leírás:** Detects sophisticated LSASS memory dumping techniques. Focuses on:
+- Procdump argument patterns (-ma, -mm) targeting LSASS
+- Task Manager-initiated dumps via WerFault (-u -p)
+- COM+ (comsvcs.dll) exports using ordinal-based calls (#24, MiniDump)
+Incorporates parent process context and filters legitimate development/diagnostic activity.
 
 
 #### 🚨 Response Playbook

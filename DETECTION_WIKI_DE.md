@@ -832,16 +832,18 @@ und anomale Prozessherkunft bei Nicht-DC-Assets.
 
 
 ---
-## Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin-Missbrauch (T1003.007)
+## LSASS-Speicherauszug und LOLBin-Missbrauch (T1003.007)
 - **ID:** `T1003_007.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [COMSVCS.DLL](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt anspruchsvolles LSASS-Speicher-Dumping.Konzentriert sich auf Procdump-Argumentmuster,
-Vom Task-Manager initiierte Dumps über WerFault und COM+-Exporte (comsvcs.dll) mit
-Ordinalbasierte Aufrufe (#24), um die stringbasierte Erkennung zu umgehen.
+- **Beschreibung:** Erkennt hochentwickelte LSASS-Speicherauszugstechniken.Konzentriert sich auf:
+– Procdump-Argumentmuster (-ma, -mm) für LSASS
+- Vom Task-Manager initiierte Dumps über WerFault (-u -p)
+– COM+ (comsvcs.dll) exportiert mit ordinalbasierten Aufrufen (#24, MiniDump)
+Bezieht den übergeordneten Prozesskontext ein und filtert legitime Entwicklungs-/Diagnoseaktivitäten.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

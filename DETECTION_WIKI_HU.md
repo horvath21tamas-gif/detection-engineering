@@ -832,16 +832,18 @@ hitelesítő adatokat kérni.Konkrét RPC-jelzőkre, rövidített eszközparancs
 
 
 ---
-## Ultra-Pro High-Fidelity LSASS memória kiíratása és LOLBin visszaélés (T1003.007)
+## LSASS Memory Dump és LOLBin visszaélés (T1003.007)
 - **ID:** `T1003_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [COMSVCS.DLL](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a kifinomult LSASS memória kiürítést.A Procdump argumentummintáira összpontosít,
-Feladatkezelő által kezdeményezett kiíratások a WerFaulton keresztül, és COM+ (comsvcs.dll) exportálás
-sorszám alapú hívások (#24) a karakterlánc-alapú észlelés megkerülésére.
+- **Leírás:** Érzékeli a kifinomult LSASS memóriadömping technikákat.A következőkre összpontosít:
+- Procdump argumentumminták (-ma, -mm), amelyek az LSASS-t célozzák
+- Feladatkezelő által kezdeményezett kiíratások a WerFaulton keresztül (-u -p)
+- COM+ (comsvcs.dll) exportálás sorszám alapú hívásokkal (#24, MiniDump)
+Tartalmazza a szülő folyamat környezetét, és szűri a jogos fejlesztési/diagnosztikai tevékenységet.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

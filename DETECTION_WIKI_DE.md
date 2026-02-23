@@ -992,7 +992,7 @@ APIs zur Übertragung benutzerdefinierter Herstellerdatennutzlasten.
 
 
 ---
-## Ultra-Pro High-Fidelity Query Registry Discovery (T1012)
+## Registrierungserkennung abfragen (T1012)
 - **ID:** `T1012.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

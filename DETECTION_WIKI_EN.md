@@ -1012,7 +1012,7 @@ APIs to broadcast custom manufacturer data payloads.
 
 
 ---
-## Ultra-Pro High-Fidelity Query Registry Discovery (T1012)
+## Query Registry Discovery (T1012)
 - **ID:** `T1012.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

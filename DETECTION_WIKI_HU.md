@@ -992,7 +992,7 @@ API-k az egyéni gyártói adatátvitelhez.
 
 
 ---
-## Ultra-Pro High-Fidelity Query Registry Discovery (T1012)
+## Registry Discovery lekérdezése (T1012)
 - **ID:** `T1012.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

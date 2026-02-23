@@ -1159,7 +1159,7 @@ nicht standardmäßige Staging-Verzeichnisse oder die Ausführung mit Argumenten
 
 
 ---
-## Ultra-Pro High-Fidelity-KMU-Admin-Freigabezuordnung (T1021.002)
+## SMB-Admin-Freigabezuordnung (T1021.002)
 - **ID:** `T1021_002.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
@@ -1177,7 +1177,7 @@ Orchestrierung und Lärm auf Serviceebene.
 
 
 ---
-## Ultra-Pro High-Fidelity DCOM Remote Execution (T1021.003)
+## DCOM-Remoteausführung (T1021.003)
 - **ID:** `T1021_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

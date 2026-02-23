@@ -1189,7 +1189,7 @@ non-standard staging directories or running with high-entropy/scripted arguments
 
 
 ---
-## Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002)
+## SMB Admin Share Mapping (T1021.002)
 - **ID:** `T1021_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
@@ -1208,7 +1208,7 @@ orchestration and service-level noise.
 
 
 ---
-## Ultra-Pro High-Fidelity DCOM Remote Execution (T1021.003)
+## DCOM Remote Execution (T1021.003)
 - **ID:** `T1021_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

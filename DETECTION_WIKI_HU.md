@@ -1159,7 +1159,7 @@ nem szabványos állomásozó könyvtárak vagy nagy entrópiájú/script argume
 
 
 ---
-## Ultra-Pro High-Fidelity SMB Admin Share Mapping (T1021.002)
+## SMB Admin Share Mapping (T1021.002)
 - **ID:** `T1021_002.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
@@ -1177,7 +1177,7 @@ hangszerelés és szolgáltatási szintű zaj.
 
 
 ---
-## Ultra-Pro High-Fidelity DCOM távoli végrehajtás (T1021.003)
+## DCOM távoli végrehajtás (T1021.003)
 - **ID:** `T1021_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

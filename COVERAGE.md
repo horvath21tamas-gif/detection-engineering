@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-23 08:08:25`
+**Utolsó frissítés:** `2026-02-23 08:49:54`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -164,16 +164,16 @@
 | T1078.004 | CRITICAL | High-Fidelity Cloud Account Compromise (Entra ID) |
 | T1080 | HIGH | Ultra-Pro High-Fidelity Taint Shared Content (T1080) |
 | T1082 | HIGH | Suspicious Event Log Enumeration from Anomalous Execution Context, Ultra-Pro High-Fidelity System Information Discovery (T1082) |
-| T1083 | HIGH | Ultra-Pro High-Fidelity File and Directory Discovery (T1083) |
+| T1083 | HIGH | File and Directory Discovery (T1083) |
 | T1087 | HIGH | Suspicious Use of net user or net localgroup via cmd.exe |
-| T1087.001 | HIGH | Ultra-Pro High-Fidelity Local Account Discovery (T1087.001) |
-| T1087.002 | HIGH | Ultra-Pro High-Fidelity Domain Account Discovery (T1087.002) |
-| T1087.003 | HIGH | Ultra-Pro High-Fidelity Email Account Discovery (T1087.003) |
-| T1087.004 | HIGH | Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004) |
-| T1090 | CRITICAL | Ultra-Pro High-Fidelity Proxy & Pivot Point Detection (T1090), External Proxy & Tunneling (T1090.002) |
-| T1090.001 | CRITICAL | Ultra-Pro High-Fidelity Internal Proxy & Pivot Detection (T1090.001) |
+| T1087.001 | HIGH | Local Account Discovery (T1087.001) |
+| T1087.002 | HIGH | Domain Account Discovery (T1087.002) |
+| T1087.003 | HIGH | Email Account Discovery (T1087.003) |
+| T1087.004 | HIGH | Cloud Account Discovery (T1087.004) |
+| T1090 | CRITICAL | Proxy & Pivot Point Detection (T1090), External Proxy & Tunneling (T1090.002) |
+| T1090.001 | CRITICAL | Internal Proxy & Pivot Detection (T1090.001) |
 | T1090.002 | CRITICAL | External Proxy & Tunneling (T1090.002) |
-| T1090.003 | CRITICAL | Ultra-Pro High-Fidelity Multi-hop Proxy & Tor Detection (T1090.003) |
+| T1090.003 | CRITICAL | Multi-hop Proxy & Tor Detection (T1090.003) |
 | T1090.004 | CRITICAL | Domain Fronting Detection (T1090.004) |
 | T1091 | HIGH | High-Fidelity Process Execution from Removable Media |
 | T1092 | CRITICAL | Removable Media C2 Anomaly (T1071.002 / T1092) |

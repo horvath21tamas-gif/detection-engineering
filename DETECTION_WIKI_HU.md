@@ -159,16 +159,16 @@
 - [High-Fidelity Cloud-fiók kompromittálódása (Entra ID)](#high-fidelity-cloud-fiók-kompromittálódása-(entra-id))
 - [Ultra-Pro High-Fidelity Taint megosztott tartalom (T1080)](#ultra-pro-high-fidelity-taint-megosztott-tartalom-(t1080))
 - [Ultra-Pro High-Fidelity System Information Discovery (T1082)](#ultra-pro-high-fidelity-system-information-discovery-(t1082))
-- [Ultra-Pro nagy felbontású fájl- és könyvtárfelderítés (T1083)](#ultra-pro-nagy-felbontású-fájl--és-könyvtárfelderítés-(t1083))
+- [Fájl- és könyvtárfelderítés (T1083)](#fájl--és-könyvtárfelderítés-(t1083))
 - [Net user vagy net localgroup gyanús használata a cmd.exe-n keresztül](#net-user-vagy-net-localgroup-gyanús-használata-a-cmdexe-n-keresztül)
-- [Ultra-Pro High-Fidelity helyi fiókfelderítés (T1087.001)](#ultra-pro-high-fidelity-helyi-fiókfelderítés-(t1087001))
-- [Ultra-Pro High-Fidelity Domain Account Discovery (T1087.002)](#ultra-pro-high-fidelity-domain-account-discovery-(t1087002))
-- [Ultra-Pro High-Fidelity e-mail fiók felderítés (T1087.003)](#ultra-pro-high-fidelity-e-mail-fiók-felderítés-(t1087003))
-- [Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004)](#ultra-pro-high-fidelity-cloud-account-discovery-(t1087004))
-- [Ultra-Pro High-Fidelity proxy és forgáspont-észlelés (T1090)](#ultra-pro-high-fidelity-proxy-és-forgáspont-észlelés-(t1090))
-- [Ultra-Pro High-Fidelity belső proxy és forgásérzékelés (T1090.001)](#ultra-pro-high-fidelity-belső-proxy-és-forgásérzékelés-(t1090001))
+- [Helyi fiókfelderítés (T1087.001)](#helyi-fiókfelderítés-(t1087001))
+- [Domainfiók felderítése (T1087.002)](#domainfiók-felderítése-(t1087002))
+- [E-mail fiók felderítése (T1087.003)](#e-mail-fiók-felderítése-(t1087003))
+- [Cloud Account Discovery (T1087.004)](#cloud-account-discovery-(t1087004))
+- [Proxy és forgáspont-észlelés (T1090)](#proxy-és-forgáspont-észlelés-(t1090))
+- [Belső proxy és pivot észlelés (T1090.001)](#belső-proxy-és-pivot-észlelés-(t1090001))
 - [Külső proxy és alagút (T1090.002)](#külső-proxy-és-alagút-(t1090002))
-- [Ultra-Pro High-Fidelity Multi-hop proxy és Tor-észlelés (T1090.003)](#ultra-pro-high-fidelity-multi-hop-proxy-és-tor-észlelés-(t1090003))
+- [Többugrásos proxy és Tor észlelés (T1090.003)](#többugrásos-proxy-és-tor-észlelés-(t1090003))
 - [Domain Fronting Detection (T1090.004)](#domain-fronting-detection-(t1090004))
 - [Nagy pontosságú folyamatvégrehajtás cserélhető adathordozóról](#nagy-pontosságú-folyamatvégrehajtás-cserélhető-adathordozóról)
 - [C2 cserélhető adathordozó anomália (T1071.002 / T1092)](#c2-cserélhető-adathordozó-anomália-(t1071002--t1092))
@@ -3178,7 +3178,7 @@ készletügynököktől és böngészőktől integritási szinteket és szülőf
 
 
 ---
-## Ultra-Pro nagy felbontású fájl- és könyvtárfelderítés (T1083)
+## Fájl- és könyvtárfelderítés (T1083)
 - **ID:** `T1083.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
@@ -3418,7 +3418,7 @@ az automatikus szkript-végrehajtásra és az alternatív adatfolyammal (ADS) va
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az egyéni C2 kommunikációt a nyers TCP/UDP socketeken keresztül, azonosítva a
+- **Leírás:** Érzékeli az egyéni C2 kommunikációt a nyers TCP/UDP socketeken keresztül azáltal, hogy azonosítja a
 alacsony szintű NetworkStreams és kézi byte-array puffer példányosítása
 manipuláció, amelyet socket írási/olvasási műveletek követnek.
 

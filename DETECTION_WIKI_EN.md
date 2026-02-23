@@ -159,16 +159,16 @@
 - [High-Fidelity Cloud Account Compromise (Entra ID)](#high-fidelity-cloud-account-compromise-(entra-id))
 - [Ultra-Pro High-Fidelity Taint Shared Content (T1080)](#ultra-pro-high-fidelity-taint-shared-content-(t1080))
 - [Ultra-Pro High-Fidelity System Information Discovery (T1082)](#ultra-pro-high-fidelity-system-information-discovery-(t1082))
-- [Ultra-Pro High-Fidelity File and Directory Discovery (T1083)](#ultra-pro-high-fidelity-file-and-directory-discovery-(t1083))
+- [File and Directory Discovery (T1083)](#file-and-directory-discovery-(t1083))
 - [Suspicious Use of net user or net localgroup via cmd.exe](#suspicious-use-of-net-user-or-net-localgroup-via-cmdexe)
-- [Ultra-Pro High-Fidelity Local Account Discovery (T1087.001)](#ultra-pro-high-fidelity-local-account-discovery-(t1087001))
-- [Ultra-Pro High-Fidelity Domain Account Discovery (T1087.002)](#ultra-pro-high-fidelity-domain-account-discovery-(t1087002))
-- [Ultra-Pro High-Fidelity Email Account Discovery (T1087.003)](#ultra-pro-high-fidelity-email-account-discovery-(t1087003))
-- [Ultra-Pro High-Fidelity Cloud Account Discovery (T1087.004)](#ultra-pro-high-fidelity-cloud-account-discovery-(t1087004))
-- [Ultra-Pro High-Fidelity Proxy & Pivot Point Detection (T1090)](#ultra-pro-high-fidelity-proxy-&-pivot-point-detection-(t1090))
-- [Ultra-Pro High-Fidelity Internal Proxy & Pivot Detection (T1090.001)](#ultra-pro-high-fidelity-internal-proxy-&-pivot-detection-(t1090001))
+- [Local Account Discovery (T1087.001)](#local-account-discovery-(t1087001))
+- [Domain Account Discovery (T1087.002)](#domain-account-discovery-(t1087002))
+- [Email Account Discovery (T1087.003)](#email-account-discovery-(t1087003))
+- [Cloud Account Discovery (T1087.004)](#cloud-account-discovery-(t1087004))
+- [Proxy & Pivot Point Detection (T1090)](#proxy-&-pivot-point-detection-(t1090))
+- [Internal Proxy & Pivot Detection (T1090.001)](#internal-proxy-&-pivot-detection-(t1090001))
 - [External Proxy & Tunneling (T1090.002)](#external-proxy-&-tunneling-(t1090002))
-- [Ultra-Pro High-Fidelity Multi-hop Proxy & Tor Detection (T1090.003)](#ultra-pro-high-fidelity-multi-hop-proxy-&-tor-detection-(t1090003))
+- [Multi-hop Proxy & Tor Detection (T1090.003)](#multi-hop-proxy-&-tor-detection-(t1090003))
 - [Domain Fronting Detection (T1090.004)](#domain-fronting-detection-(t1090004))
 - [High-Fidelity Process Execution from Removable Media](#high-fidelity-process-execution-from-removable-media)
 - [Removable Media C2 Anomaly (T1071.002 / T1092)](#removable-media-c2-anomaly-(t1071002--t1092))
@@ -3326,7 +3326,7 @@ from inventory agents and browsers using integrity levels and parent process gat
 
 
 ---
-## Ultra-Pro High-Fidelity File and Directory Discovery (T1083)
+## File and Directory Discovery (T1083)
 - **ID:** `T1083.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

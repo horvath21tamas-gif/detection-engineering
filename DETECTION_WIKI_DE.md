@@ -159,16 +159,16 @@
 - [Kompromittierung eines High-Fidelity-Cloud-Kontos (Entra-ID)](#kompromittierung-eines-high-fidelity-cloud-kontos-(entra-id))
 - [Ultra-Pro High-Fidelity Taint Shared Content (T1080)](#ultra-pro-high-fidelity-taint-shared-content-(t1080))
 - [Ultra-Pro High-Fidelity-Systeminformationserkennung (T1082)](#ultra-pro-high-fidelity-systeminformationserkennung-(t1082))
-- [Ultra-Pro High-Fidelity-Datei- und Verzeichniserkennung (T1083)](#ultra-pro-high-fidelity-datei--und-verzeichniserkennung-(t1083))
+- [Datei- und Verzeichniserkennung (T1083)](#datei--und-verzeichniserkennung-(t1083))
 - [Verdächtige Verwendung von Net User oder Net Localgroup über cmd.exe](#verdächtige-verwendung-von-net-user-oder-net-localgroup-über-cmdexe)
-- [Ultra-Pro High-Fidelity Local Account Discovery (T1087.001)](#ultra-pro-high-fidelity-local-account-discovery-(t1087001))
-- [Ultra-Pro High-Fidelity-Domänenkontoerkennung (T1087.002)](#ultra-pro-high-fidelity-domänenkontoerkennung-(t1087002))
-- [Ultra-Pro High-Fidelity-E-Mail-Kontoerkennung (T1087.003)](#ultra-pro-high-fidelity-e-mail-kontoerkennung-(t1087003))
-- [Ultra-Pro High-Fidelity-Cloud-Kontoerkennung (T1087.004)](#ultra-pro-high-fidelity-cloud-kontoerkennung-(t1087004))
-- [Ultraprofessioneller High-Fidelity-Proxy und Pivot-Punkt-Erkennung (T1090)](#ultraprofessioneller-high-fidelity-proxy-und-pivot-punkt-erkennung-(t1090))
-- [Ultra-Pro High-Fidelity Interner Proxy und Pivot-Erkennung (T1090.001)](#ultra-pro-high-fidelity-interner-proxy-und-pivot-erkennung-(t1090001))
+- [Erkennung lokaler Konten (T1087.001)](#erkennung-lokaler-konten-(t1087001))
+- [Domänenkontoerkennung (T1087.002)](#domänenkontoerkennung-(t1087002))
+- [E-Mail-Kontoerkennung (T1087.003)](#e-mail-kontoerkennung-(t1087003))
+- [Cloud-Kontoerkennung (T1087.004)](#cloud-kontoerkennung-(t1087004))
+- [Proxy- und Pivot-Punkt-Erkennung (T1090)](#proxy--und-pivot-punkt-erkennung-(t1090))
+- [Interner Proxy und Pivot-Erkennung (T1090.001)](#interner-proxy-und-pivot-erkennung-(t1090001))
 - [Externer Proxy und Tunneling (T1090.002)](#externer-proxy-und-tunneling-(t1090002))
-- [Ultra-Pro High-Fidelity-Multi-Hop-Proxy- und Tor-Erkennung (T1090.003)](#ultra-pro-high-fidelity-multi-hop-proxy--und-tor-erkennung-(t1090003))
+- [Multi-Hop-Proxy- und Tor-Erkennung (T1090.003)](#multi-hop-proxy--und-tor-erkennung-(t1090003))
 - [Domain-Fronting-Erkennung (T1090.004)](#domain-fronting-erkennung-(t1090004))
 - [High-Fidelity-Prozessausführung von Wechselmedien](#high-fidelity-prozessausführung-von-wechselmedien)
 - [Wechselmedien-C2-Anomalie (T1071.002 / T1092)](#wechselmedien-c2-anomalie-(t1071002--t1092))
@@ -3178,7 +3178,7 @@ von Inventaragenten und Browsern mithilfe von Integritätsstufen und übergeordn
 
 
 ---
-## Ultra-Pro High-Fidelity-Datei- und Verzeichniserkennung (T1083)
+## Datei- und Verzeichniserkennung (T1083)
 - **ID:** `T1083.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

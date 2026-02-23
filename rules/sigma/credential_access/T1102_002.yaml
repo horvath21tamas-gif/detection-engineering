@@ -1,61 +1,62 @@
-title: Ultra-Pro High-Fidelity Bidirectional Cloud C2 (T1102.002)
+title: Bidirectional Cloud C2 (T1102.002)
 id: 3925996b-3dee-45c0-b4e5-2a899ec65880
 status: stable
 description: |
-    Detects interactive C2 communication via cloud APIs by identifying 
-    specific write/read methods (POST/GET) issued by non-browser LoLBins 
-    or binaries running from suspicious paths, excluding official clients.
+  Detects interactive command-and-control (C2) communication via cloud APIs by identifying
+  specific write/read methods (POST/GET) issued by non-browser LoLBins or binaries 
+  running from suspicious paths, while excluding official client applications.
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.command_and_control
-    - attack.t1102.002
+  - attack.command_and_control
+  - attack.t1102.002
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_api_actions:
-        CommandLine|contains:
-            - '/sendMessage'                 
-            - '/getUpdates'                   
-            - 'chat.postMessage'              
-            - 'files.upload'                
-            - '/webhooks/'                   
-            - 'invocations'                  
-            - 'channels.messages'             
+  selection_api_actions:
+    CommandLine|contains:
+      - '/sendMessage'                    
+      - '/getUpdates'                     
+      - 'chat.postMessage'                 
+      - 'files.upload'                     
+      - '/webhooks/'                       
+      - 'invocations'                      
+      - 'channels.messages'                
 
-    selection_context:
-        Image|contains:
-            - '\Users\'
-            - '\AppData\'
-            - '\Temp\'
-            - '\Public\'
-            - '\PerfLogs\'
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\curl.exe'
-            - '\rundll32.exe'
-            - '\certutil.exe'
-            - '\cmd.exe'
+  selection_context:
+    Image|contains:
+      - '\Users\'                         
+      - '\AppData\'                       
+      - '\Temp\'                          
+      - '\Public\'                        
+      - '\PerfLogs\'                      
+    Image|endswith:
+      - '\powershell.exe'                  
+      - '\pwsh.exe'                        
+      - '\curl.exe'                        
+      - '\rundll32.exe'                    
+      - '\certutil.exe'                    
+      - '\cmd.exe'                         
 
-    selection_domains:
-        CommandLine|contains:
-            - 'api.telegram.org'
-            - 'slack.com/api'
-            - 'discord.com/api'
-            - 'api.github.com'
-            - 'graph.microsoft.com'
+  selection_domains:
+    CommandLine|contains:
+      - 'api.telegram.org'                 
+      - 'slack.com/api'                    
+      - 'discord.com/api'                  
+      - 'api.github.com'                   
+      - 'graph.microsoft.com'              
 
-    filter_legit_installations:
-        - Image|contains:
-            - '\Local\Discord\app-'         
-            - '\Local\slack\app-'              
-            - '\Program Files\Microsoft\Teams' 
-            - '\Program Files\'                
-        - CommandLine|contains:
-            - '127.0.0.1'                      
-        - username: 'NT AUTHORITY\SYSTEM'         
+  filter_legit_installations:
+    Image|contains:
+      - '\Local\Discord\app-'              
+      - '\Local\slack\app-'                
+      - '\Program Files\Microsoft\Teams'   
+      - '\Program Files\'                   
+    CommandLine|contains:
+      - '127.0.0.1'                         
+    username: 'NT AUTHORITY\SYSTEM'        
 
-    condition: selection_api_actions and selection_context and selection_domains and not filter_legit_installations
+  condition: selection_api_actions and selection_context and selection_domains and not filter_legit_installations
+
 level: critical

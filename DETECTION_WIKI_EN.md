@@ -641,16 +641,17 @@
 - [Suspicious Access to LSASS Process Memory (Credential Dumping Attempt)](#suspicious-access-to-lsass-process-memory-(credential-dumping-attempt))
 
 ---
-## Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001)
+## Steganography & Data Reconstruction (T1001)
 - **ID:** `T1001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects data de-steganography by identifying anomalous programmatic access 
-to image manipulation APIs (GDI+, System.Drawing) from script interpreters, 
-specifically looking for pixel-level data extraction routines.
+- **Leírás:** Detects data de-steganography by monitoring anomalous programmatic access
+to image manipulation APIs (GDI+, System.Drawing, WindowsCodecs) from script
+interpreters or non-standard parent processes, specifically targeting
+pixel-level extraction routines.
 
 
 #### 🚨 Response Playbook

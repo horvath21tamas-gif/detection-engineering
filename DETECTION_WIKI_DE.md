@@ -641,16 +641,17 @@
 - [Verdächtiger Zugriff auf den LSASS-Prozessspeicher (Credential Dumping-Versuch)](#verdächtiger-zugriff-auf-den-lsass-prozessspeicher-(credential-dumping-versuch))
 
 ---
-## Ultraprofessionelle High-Fidelity-Steganographie und Datenrekonstruktion (T1001)
+## Steganographie und Datenrekonstruktion (T1001)
 - **ID:** `T1001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Daten-Desteganographie durch Identifizierung anomaler programmatischer Zugriffe
-zu Bildbearbeitungs-APIs (GDI+, System.Drawing) von Skriptinterpretern,
-Ich suche speziell nach Datenextraktionsroutinen auf Pixelebene.
+- **Beschreibung:** Erkennt Daten-Desteganographie durch Überwachung anomaler programmatischer Zugriffe
+zu Bildbearbeitungs-APIs (GDI+, System.Drawing, WindowsCodecs) aus dem Skript
+Interpreter oder nicht standardmäßige übergeordnete Prozesse, insbesondere Targeting
+Extraktionsroutinen auf Pixelebene.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

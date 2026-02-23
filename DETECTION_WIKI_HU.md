@@ -641,16 +641,17 @@
 - [Gyanús hozzáférés az LSASS folyamatmemóriához (hitelesítő adatok kiürítési kísérlete)](#gyanús-hozzáférés-az-lsass-folyamatmemóriához-(hitelesítő-adatok-kiürítési-kísérlete))
 
 ---
-## Ultra-Pro High-Fidelity szteganográfia és adatrekonstrukció (T1001)
+## Szteganográfia és adatrekonstrukció (T1001)
 - **ID:** `T1001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** A rendellenes programozott hozzáférés azonosításával észleli az adatok desztiganográfiáját
-képmanipulációs API-khoz (GDI+, System.Drawing) a szkript értelmezőktől,
-kifejezetten pixel szintű adatkinyerési rutinokat keres.
+- **Leírás:** A rendellenes programozott hozzáférés figyelésével észleli az adatok desztiganográfiáját
+képmanipulációs API-khoz (GDI+, System.Drawing, WindowsCodecs) szkriptből
+tolmácsok vagy nem szabványos szülői folyamatok, konkrétan a célzás
+pixel szintű kinyerési rutinok.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

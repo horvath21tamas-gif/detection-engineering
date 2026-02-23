@@ -1,67 +1,70 @@
-title: Ultra-Pro High-Fidelity Mail Protocol Anomaly (T1071.003)
+title: Mail Protocol Anomaly (T1071.003)
 id: 6dc498c5-15eb-4254-8d4a-eb9ecb2174b1
 status: stable
 description: |
-    Detects unauthorized email-based C2 or exfiltration by identifying direct 
-    mail protocol (SMTP, IMAP, POP3) connections from non-mail processes, 
-    focusing on .NET/PowerShell automation and suspicious process lineages.
+  Detects unauthorized email-based C2 or exfiltration by monitoring direct mail 
+  protocol connections (SMTP, IMAP, POP3) from non-mail processes. Focuses on 
+  automation and scripting abuse via PowerShell, .NET, and legacy script hosts, 
+  and anomalous process lineages.
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.command_and_control
-    - attack.exfiltration
-    - attack.t1071.003
+  - attack.command_and_control
+  - attack.exfiltration
+  - attack.t1071.003
 logsource:
-    category: network_connection
-    product: windows
+  category: network_connection
+  product: windows
 detection:
-    selection_hollow_victims:
-        Image|endswith:
-            - '\notepad.exe'
-            - '\calc.exe'
-            - '\mspaint.exe'
-            - '\winver.exe'
-            - '\spoolsv.exe'
-            - '\colorcpl.exe'
-            - '\scrcons.exe'              
+  selection_non_mail_procs:
+    Image|endswith:
+      - '\notepad.exe'
+      - '\calc.exe'
+      - '\mspaint.exe'
+      - '\winver.exe'
+      - '\spoolsv.exe'
+      - '\colorcpl.exe'
+      - '\scrcons.exe'
 
-    selection_automation:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\cscript.exe'
-            - '\wscript.exe'
-            - '\rundll32.exe'
-        CommandLine|contains:
-            - 'Send-MailMessage'         
-            - 'Net.Mail.SmtpClient'       
-            - 'System.Net.Mail'           
-            - '.Credentials'            
+  selection_automation:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cscript.exe'
+      - '\wscript.exe'
+      - '\rundll32.exe'
+    CommandLine|contains:
+      - 'Send-MailMessage'
+      - 'Net.Mail.SmtpClient'
+      - 'System.Net.Mail'
+      - '.Credentials'
 
-    selection_context:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\w3wp.exe'                
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\w3wp.exe'
 
-    selection_ports:
-        DestinationPort:
-            - 25                        
-            - 465                         
-            - 587                         
-            - 993                         
-            - 995                         
+  selection_mail_ports:
+    DestinationPort:
+      - 25     # SMTP
+      - 465    # SMTP SSL
+      - 587    # SMTP TLS
+      - 993    # IMAP SSL
+      - 995    # POP3 SSL
 
-    filter_trusted_apps:
-        - Image|endswith:
-            - '\outlook.exe'
-            - '\thunderbird.exe'
-            - '\msedgewebview2.exe'       
-        - DestinationIP:
-            - '10.0.0.0/8'                
-            - '192.168.0.0/16'
-        - username: 'NT AUTHORITY\SYSTEM'     
+  filter_legit_mail:
+    Image|endswith:
+      - '\outlook.exe'
+      - '\thunderbird.exe'
+      - '\msedgewebview2.exe'
+    DestinationIP|in_cidr:
+      - '10.0.0.0/8'
+      - '192.168.0.0/16'
+    username: 'NT AUTHORITY\SYSTEM'
 
-    condition: (selection_hollow_victims or selection_automation or selection_context) and selection_ports and not filter_trusted_apps
+  condition: (selection_non_mail_procs or selection_automation or selection_suspicious_parent) 
+             and selection_mail_ports 
+             and not filter_legit_mail
 level: critical

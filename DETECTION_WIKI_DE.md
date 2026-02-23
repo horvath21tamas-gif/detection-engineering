@@ -1877,16 +1877,14 @@ und anstößige Sniffing-Frameworks, die von nicht vertrauenswürdigen Pfaden au
 
 
 ---
-## Ultra-Pro High-Fidelity-Exfiltration über C2-Kanal (T1041)
+## Exfiltration über C2-Kanal (ATT&CK T1041)
 - **ID:** `T1041.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
-> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVCS.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Datenexfiltration über einen etablierten C2-Kanal durch Korrelation
-systematische Dateilesevorgänge, Memory-Stream-Codierung und langjährige Erfahrung
-ausgehende Netzwerkverbindungen von Nicht-Browser-Prozessen.
+> ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVCS.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Beschreibung:** Erkennt potenzielle Datenexfiltration über einen etablierten Command-and-Control-Kanal (C2), indem Datei-zu-Speicher-Lesevorgänge, Base64-Codierung, Komprimierungs-Staging und In-Memory-Stream-Manipulation identifiziert werden, die von nicht standardmäßigen Pfaden oder verdächtigen übergeordneten Prozessen ausgeführt werden.Konzentriert sich auf abgestuftes Exfiltrationsverhalten und nicht auf einfachen ausgehenden Datenverkehr.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

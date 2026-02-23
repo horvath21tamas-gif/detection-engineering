@@ -1877,16 +1877,14 @@ rögzítési módban használatos, illesztőprogram telepítése csomagelfogásh
 
 
 ---
-## Ultra-Pro High-Fidelity szűrés C2 csatornán keresztül (T1041)
+## Kiszűrés a C2 csatornán keresztül (ATT&CK T1041)
 - **ID:** `T1041.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
-> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVCS.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Korrelációval észleli az adatok kiszűrését egy létrehozott C2 csatornán keresztül
-szisztematikus fájlolvasási műveletek, memóriafolyam-kódolás és hosszú távú
-kimenő hálózati kapcsolatok a nem böngésző folyamatokból.
+> ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [REGSVCS.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WMIC.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
+- **Leírás:** Érzékeli a lehetséges adatszivárgást egy létrehozott Command-and-Control (C2) csatornán keresztül a fájl-memória olvasási műveletek, a Base64 kódolás, a tömörítési szakaszolás és a nem szabványos útvonalakról vagy gyanús szülőfolyamatokról végrehajtott, memórián belüli adatfolyam-manipulációk azonosításával.Az egyszerű kimenő forgalom helyett a fokozatos kiszűrési viselkedésre összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -1,57 +1,63 @@
-title: Ultra-Pro High-Fidelity Query Registry Discovery (T1012)
+title: Query Registry Discovery (T1012)
 id: 29835d91-ee1a-49bd-a447-fefe5e8f82b3
 status: stable
 description: |
-    Detects systematic Registry discovery targeting sensitive security configurations, 
-    credential storage, and persistence paths. Uses recursive query detection 
-    and integrity level gating to minimize false positives.
+  Detects systematic Registry discovery targeting sensitive security configurations, 
+  credential storage, and persistence paths. Uses recursive query detection 
+  and integrity level gating to minimize false positives.
 author: hota05
 date: 2026-02-04
 tags:
-    - attack.discovery
-    - attack.t1012
+  - attack.discovery
+  - attack.t1012
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_tools:
-        - Image|endswith:
-            - '\reg.exe'
-        - CommandLine|contains:
-            - 'reg query'
-            - 'Get-ItemProperty'      
-            - 'Get-ChildItem -Path Registry::'
+  selection_tools:
+    Image|endswith:
+      - '\reg.exe'
+    CommandLine|contains:
+      - 'reg query'
+      - 'Get-ItemProperty'
+      - 'Get-ChildItem -Path Registry::'
 
-    selection_recursive:
-        CommandLine|contains:
-            - ' /s '
-            - ' -Recurse'
+  selection_recursive:
+    CommandLine|contains:
+      - ' /s '
+      - ' -Recurse'
 
-    selection_keys:
-        CommandLine|contains:
-            - '\System\CurrentControlSet\Control\Lsa'          
-            - '\Software\Microsoft\Windows\CurrentVersion\Run' 
-            - '\Software\Policies\Microsoft\Windows Defender'  
-            - '\SECURITY\Policy\Secrets'                       
-            - '\Control\SecurityProviders\WDigest'            
-            - 'Putty\Sessions'                                 
-            - 'Software\ORL\WinVNC3'                           
+  selection_keys:
+    CommandLine|contains:
+      - '\System\CurrentControlSet\Control\Lsa'
+      - '\Software\Microsoft\Windows\CurrentVersion\Run'
+      - '\Software\Policies\Microsoft\Windows Defender'
+      - '\SECURITY\Policy\Secrets'
+      - '\Control\SecurityProviders\WDigest'
+      - 'Putty\Sessions'
+      - 'Software\ORL\WinVNC3'
 
-    selection_suspicious_lineage:
-        ParentImage|endswith:
-            - '\wsmprovhost.exe'     
-            - '\httpd.exe'          
-            - '\winword.exe'         
-        IntegrityLevel: 'Medium'     
+  selection_suspicious_lineage:
+    ParentImage|endswith:
+      - '\wsmprovhost.exe'
+      - '\httpd.exe'
+      - '\winword.exe'
+    IntegrityLevel: 'Medium'
 
-    filter_legit_system:
-        - username: 'NT AUTHORITY\SYSTEM'
-        - ParentImage|endswith:
-            - '\msiexec.exe'         
-            - '\svchost.exe'
-            - '\CcmExec.exe'         
-        - CommandLine|contains:
-            - 'Microsoft\Windows\CurrentVersion\Uninstall' 
+  filter_legit_system:
+    - username: 'NT AUTHORITY\SYSTEM'
+    - ParentImage|endswith:
+        - '\msiexec.exe'
+        - '\svchost.exe'
+        - '\CcmExec.exe'
+    - CommandLine|contains:
+        - 'Microsoft\Windows\CurrentVersion\Uninstall'
 
-    condition: selection_tools and (selection_recursive or selection_keys or selection_suspicious_lineage) and not filter_legit_system
+  condition: >
+    selection_tools and
+    (selection_recursive or selection_keys or selection_suspicious_lineage) and
+    not filter_legit_system
+
 level: high

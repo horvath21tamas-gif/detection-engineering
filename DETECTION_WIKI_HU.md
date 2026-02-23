@@ -3808,7 +3808,7 @@ COM objektum példányosítás (Outlook.Application), postaláda export kérése
 
 
 ---
-## Ultra-Pro High-Fidelity helyi e-mail-gyűjtési anomália (T1114.001)
+## Helyi e-mail-gyűjtési anomália (T1114.001)
 - **ID:** `T1114_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

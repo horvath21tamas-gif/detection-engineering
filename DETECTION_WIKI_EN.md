@@ -3993,7 +3993,7 @@ and programmatic access to Inbox/Sent folders from non-standard shells.
 
 
 ---
-## Ultra-Pro High-Fidelity Local Email Harvesting Anomaly (T1114.001)
+## Local Email Harvesting Anomaly (T1114.001)
 - **ID:** `T1114_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

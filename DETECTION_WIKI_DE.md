@@ -3808,7 +3808,7 @@ und programmgesteuerter Zugriff auf Posteingangs-/Gesendet-Ordner über nicht st
 
 
 ---
-## Ultra-Pro High-Fidelity Local Email Harvesting-Anomalie (T1114.001)
+## Lokale E-Mail-Ernte-Anomalie (T1114.001)
 - **ID:** `T1114_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

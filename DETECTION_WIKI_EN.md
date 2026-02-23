@@ -698,16 +698,17 @@ specifically looking for pixel-level data extraction routines.
 
 
 ---
-## Ultra-Pro High-Fidelity Protocol Impersonation (T1001.003)
+## Protocol Impersonation (T1001.003)
 - **ID:** `T1001_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects protocol impersonation by identifying manual manipulation of network headers 
-and anomalous User-Agent strings within script interpreters, specifically 
-targeting attempts to mimic mobile devices or search crawlers from non-browser processes.
+- **Leírás:** Detects protocol impersonation attempts by monitoring for:
+- Manual manipulation of HTTP/S headers in scripts
+- Anomalous or spoofed User-Agent strings
+- Non-browser processes attempting to mimic mobile devices, crawlers, or other client types
 
 
 #### 🚨 Response Playbook

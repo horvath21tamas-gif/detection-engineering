@@ -695,16 +695,17 @@ Ich suche speziell nach Datenextraktionsroutinen auf Pixelebene.
 
 
 ---
-## Ultra-Pro High-Fidelity-Protokoll-Imitation (T1001.003)
+## Protokollidentitätsbetrug (T1001.003)
 - **ID:** `T1001_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Protokollfälschungen durch Identifizierung manueller Manipulationen von Netzwerk-Headern
-und insbesondere anomale User-Agent-Zeichenfolgen innerhalb von Skriptinterpretern
-Targeting-Versuche, mobile Geräte nachzuahmen oder Crawler aus Nicht-Browser-Prozessen zu durchsuchen.
+- **Beschreibung:** Erkennt Protokollidentitätsversuche durch Überwachung auf Folgendes:
+- Manuelle Manipulation von HTTP/S-Headern in Skripten
+– Anomale oder gefälschte User-Agent-Strings
+– Nicht-Browser-Prozesse, die versuchen, mobile Geräte, Crawler oder andere Clienttypen nachzuahmen
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

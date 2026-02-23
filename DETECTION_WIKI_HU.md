@@ -695,16 +695,17 @@ kifejezetten pixel szintű adatkinyerési rutinokat keres.
 
 
 ---
-## Ultra-Pro High-Fidelity Protocol megszemélyesítés (T1001.003)
+## Protokoll-megszemélyesítés (T1001.003)
 - **ID:** `T1001_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSEDGE.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a protokoll megszemélyesítését a hálózati fejlécek kézi manipulációjának azonosításával
-és a rendellenes User-Agent karakterláncok a script interpreterekben, különösen
-a nem böngésző folyamatokból származó mobileszközök vagy feltérképező robotok utánzására irányuló kísérletek célzása.
+- **Leírás:** Érzékeli a protokoll megszemélyesítési kísérleteit a következők figyelésével:
+- A HTTP/S fejlécek kézi manipulálása szkriptekben
+- Rendellenes vagy hamisított User-Agent karakterláncok
+- Nem böngésző folyamatok, amelyek megkísérlik utánozni a mobileszközöket, bejárókat vagy más klienstípusokat
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

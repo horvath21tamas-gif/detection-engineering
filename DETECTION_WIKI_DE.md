@@ -2154,16 +2154,14 @@ Auslöser und verdächtige Ausführungsnutzlasten (Verschleierung, Netzwerk-Tool
 
 
 ---
-## Ultra-Pro-Stealthy-Prozessinjektionserkennung (T1055)
+## Prozessinjektionserkennung (ATT&CK T1055)
 - **ID:** `T1055.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [TEAMS.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt erweiterte Prozessinjektionen (z. B. DLL-Injection, Thread-Hijacking) durch
-Überwachung auf bestimmte GrantedAccess-Masken mit hohem Risiko in Kombination mit
-verdächtige Quelle-Ziel-Beziehungen und nicht gesicherte Speicherbereiche.
+- **Beschreibung:** Erkennt fortgeschrittene Prozessinjektionstechniken (DLL-Injektion, PE-Injektion, Thread-Hijacking, APC, TLS, EWM, Hollowing) durch Überwachung auf risikoreiche GrantedAccess-Masken, verdächtige Quelle-Ziel-Prozessbeziehungen und nicht gesicherte Speicherbereiche.Vertrauenswürdige Systemprozesse und AV-Komponenten werden ausgeschlossen, um Fehlalarme zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

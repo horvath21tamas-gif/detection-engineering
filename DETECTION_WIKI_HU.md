@@ -2154,16 +2154,14 @@ triggerek és gyanús végrehajtási terhelések (zavarás, hálózati eszközö
 
 
 ---
-## Ultra-Pro lopakodó folyamat-injekcióérzékelő (T1055)
+## Befecskendezési folyamat észlelése (ATT&CK T1055)
 - **ID:** `T1055.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [TEAMS.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a fejlett folyamatinjektálást (pl. DLL-befecskendezés, száleltérítés)
-bizonyos magas kockázatú GrantedAccess maszkok megfigyelése kombinálva
-gyanús forrás-cél kapcsolatok és nem támogatott memóriarégiók.
+- **Leírás:** Érzékeli a fejlett folyamatbefecskendezési technikákat (DLL-befecskendezés, PE-befecskendezés, száleltérítés, APC, TLS, EWM, Hollowing) a magas kockázatú GrantedAccess-maszkok, a gyanús forrás-cél folyamatkapcsolatok és a nem támogatott memóriarégiók figyelésével.Megbízható rendszerfolyamatok és AV-komponensek kizárva a téves pozitív eredmények csökkentése érdekében.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

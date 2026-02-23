@@ -2242,16 +2242,14 @@ triggers, and suspicious execution payloads (obfuscation, network tools).
 
 
 ---
-## Ultra-Pro Stealthy Process Injection Detection (T1055)
+## Process Injection Detection (ATT&CK T1055)
 - **ID:** `T1055.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CONHOST.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [TEAMS.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects advanced process injection (e.g. DLL injection, Thread Hijacking) by 
-monitoring for specific high-risk GrantedAccess masks combined with 
-suspicious source-target relationships and unbacked memory regions.
+- **Leírás:** Detects advanced process injection techniques (DLL Injection, PE Injection, Thread Hijacking,  APC, TLS, EWM, Hollowing) by monitoring for high-risk GrantedAccess masks,  suspicious source-target process relationships, and unbacked memory regions.  Trusted system processes and AV components are excluded to reduce false positives.
 
 
 #### 🚨 Response Playbook

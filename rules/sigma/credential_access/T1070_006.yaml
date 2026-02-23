@@ -1,61 +1,63 @@
-title: Ultra-Pro High-Fidelity Timestomp and MACE Attribute Manipulation (T1070.006)
+title: Timestomp and MACE Attribute Manipulation (T1070.006)
 id: 49d228af-40b1-4c88-93e4-2ec1a43175d9
 status: stable
 description: |
-    Detects attempts to modify file timestamps (MACE attributes) to evade forensic analysis. 
-    Focuses on direct object property manipulation in PowerShell and specialized 
-    anti-forensic utilities, while filtering out legitimate installer behavior.
+  Detects attempts to manipulate file timestamps (MACE attributes) to evade forensic analysis.
+  Focuses on PowerShell-based object property modification and specialized anti-forensic utilities,
+  while filtering legitimate installer and system maintenance activities.
 author: hota05
 date: 2026-02-03
 tags:
-    - attack.defense_evasion
-    - attack.t1070.006
+  - attack.defense_evasion
+  - attack.t1070.006
 logsource:
-    product: windows
-    category: process_creation
+  product: windows
+  category: process_creation
 detection:
-    selection_powershell_mace:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-        CommandLine|contains:
-            - '.LastWriteTime'
-            - '.CreationTime'
-            - '.LastAccessTime'
-        CommandLine|contains:
-            - 'Get-Item'
-            - 'Get-ChildItem'
-            - 'IO.File'
+  selection_powershell_mace:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+    CommandLine|contains:
+      - '.LastWriteTime'
+      - '.CreationTime'
+      - '.LastAccessTime'
+    CommandLine|contains:
+      - 'Get-Item'
+      - 'Get-ChildItem'
+      - 'IO.File'
 
-    selection_specialized_tools:
-        - Image|endswith:
-            - '\nircmd.exe'
-            - '\setmace.exe'
-            - '\timestomp.exe'
-            - '\touch.exe' 
-        - CommandLine|contains:
-            - 'setfiletime'
-            - 'setmace'
+  selection_specialized_tools:
+    Image|endswith:
+      - '\nircmd.exe'
+      - '\setmace.exe'
+      - '\timestomp.exe'
+      - '\touch.exe'
+    CommandLine|contains:
+      - 'setfiletime'
+      - 'setmace'
 
-    selection_suspicious_parent:
-        ParentImage|endswith:
-            - '\winword.exe'
-            - '\excel.exe'
-            - '\chrome.exe'
-            - '\msedge.exe'
-            - '\w3wp.exe'     
-            - '\sqlservr.exe' 
-            - '\powershell.exe'
+  selection_suspicious_parent:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\w3wp.exe'
+      - '\sqlservr.exe'
+      - '\powershell.exe'
 
-    filter_trusted_maintenance:
-        - username: 'NT AUTHORITY\SYSTEM'
-          ParentImage|endswith:
-            - '\msiexec.exe'
-            - '\TiWorker.exe' 
-        - CommandLine|contains:
-            - 'C:\Windows\SoftwareDistribution\'
-            - 'C:\Program Files\Common Files\Microsoft Shared\'
-        - Image|endswith: '\git.exe' 
+  filter_trusted_maintenance:
+    - username: 'NT AUTHORITY\SYSTEM'
+      ParentImage|endswith:
+        - '\msiexec.exe'
+        - '\TiWorker.exe'
+    - CommandLine|contains:
+        - 'C:\Windows\SoftwareDistribution\'
+        - 'C:\Program Files\Common Files\Microsoft Shared\'
+    - Image|endswith: '\git.exe'
 
-    condition: (selection_powershell_mace or selection_specialized_tools) and (selection_suspicious_parent or not filter_trusted_maintenance)
+  condition: 
+    (selection_powershell_mace or selection_specialized_tools)
+    and (selection_suspicious_parent or not filter_trusted_maintenance)
 level: high

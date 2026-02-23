@@ -938,7 +938,7 @@ ausgelöst durch Verbindungsfehler in nicht standardmäßigen Prozesskontexten.
 
 
 ---
-## Ultra-Pro High-Fidelity-Anwendungsfenstererkennung (T1010)
+## Anwendungsfenstererkennung (T1010)
 - **ID:** `T1010.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

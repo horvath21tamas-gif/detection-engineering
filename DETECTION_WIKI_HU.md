@@ -938,7 +938,7 @@ nem szabványos folyamatkörnyezetben előforduló csatlakozási hibák váltjá
 
 
 ---
-## Ultra-Pro High-Fidelity Application Window Discovery (T1010)
+## Alkalmazásablak felfedezése (T1010)
 - **ID:** `T1010.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

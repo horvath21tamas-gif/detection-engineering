@@ -955,7 +955,7 @@ triggered by connection failures in non-standard process contexts.
 
 
 ---
-## Ultra-Pro High-Fidelity Application Window Discovery (T1010)
+## Application Window Discovery (T1010)
 - **ID:** `T1010.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

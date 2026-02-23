@@ -3495,7 +3495,7 @@ launched from interactive or script interpreters.
 
 
 ---
-## Ultra-Pro High-Fidelity Multi-hop Proxy & Tor Detection (T1090.003)
+## Multi-hop Proxy & Tor Detection (T1090.003)
 - **ID:** `T1090_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

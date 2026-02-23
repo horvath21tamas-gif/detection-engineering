@@ -3338,7 +3338,7 @@ von interaktiven oder Skript-Interpretern gestartet.
 
 
 ---
-## Ultra-Pro High-Fidelity-Multi-Hop-Proxy- und Tor-Erkennung (T1090.003)
+## Multi-Hop-Proxy- und Tor-Erkennung (T1090.003)
 - **ID:** `T1090_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

@@ -3338,7 +3338,7 @@ interaktív vagy script interpreterekből indítva.
 
 
 ---
-## Ultra-Pro High-Fidelity Multi-hop proxy és Tor-észlelés (T1090.003)
+## Többugrásos proxy és Tor észlelés (T1090.003)
 - **ID:** `T1090_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -3416,7 +3416,7 @@ az automatikus szkript-végrehajtásra és az alternatív adatfolyammal (ADS) va
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az egyéni C2 kommunikációt a nyers TCP/UDP socketeken keresztül azáltal, hogy azonosítja a
+- **Leírás:** Érzékeli az egyéni C2 kommunikációt a nyers TCP/UDP socketeken keresztül, azonosítva a
 alacsony szintű NetworkStreams és kézi byte-array puffer példányosítása
 manipuláció, amelyet socket írási/olvasási műveletek követnek.
 

@@ -1,63 +1,68 @@
-title: Ultra-Pro High-Fidelity Linux Shadow File Extraction (T1003.008)
+title: Linux Shadow File Extraction (T1003.008)
 id: 6adcdb54-5167-4bf2-8236-5044de9a4067
 status: stable
 description: |
-    Detects unauthorized extraction of the /etc/shadow file. 
-    Focuses on redirection to suspicious paths, archiving, 
-    and exfiltration via network tools (LOLBins) from interactive shells.
+  Detects unauthorized extraction of the /etc/shadow file. Focuses on 
+  redirection to suspicious paths, archiving, and exfiltration via network tools 
+  or native utilities from interactive shells, while filtering legitimate system operations.
 author: hota05
 date: 2026-02-04
 tags:
-    - attack.credential_access
-    - attack.t1003.008
+  - attack.credential_access
+  - attack.t1003.008
+
 logsource:
-    product: linux
-    category: process_creation
+  product: linux
+  category: process_creation
+
 detection:
-    selection_redirection:
-        CommandLine|contains:
-            - 'cat /etc/shadow'
-            - 'grep . /etc/shadow'
-            - 'dd if=/etc/shadow'
-            - 'python -c .* /etc/shadow' 
-        CommandLine|contains:
-            - ' > /tmp/'
-            - ' > /var/tmp/'
-            - ' > /dev/shm/'        
-            - ' > /home/'
+  selection_redirection:
+    CommandLine|contains:
+      - 'cat /etc/shadow'
+      - 'grep . /etc/shadow'
+      - 'dd if=/etc/shadow'
+      - 'python -c .* /etc/shadow'
+    CommandLine|contains:
+      - ' > /tmp/'
+      - ' > /var/tmp/'
+      - ' > /dev/shm/'
+      - ' > /home/'
 
-    selection_archive:
-        CommandLine|contains:
-            - 'tar '
-            - 'zip '
-            - '7z '
-            - 'gzip '
-        CommandLine|contains:
-            - '/etc/shadow'
-            - '/etc/passwd'
+  selection_archive:
+    CommandLine|contains:
+      - 'tar '
+      - 'zip '
+      - '7z '
+      - 'gzip '
+    CommandLine|contains:
+      - '/etc/shadow'
+      - '/etc/passwd'
 
-    selection_network:
-        CommandLine|contains:
-            - 'nc '                 
-            - 'curl '               
-            - 'wget '
-            - 'base64'             
-        CommandLine|contains:
-            - '/etc/shadow'
+  selection_network:
+    CommandLine|contains:
+      - 'nc '
+      - 'curl '
+      - 'wget '
+      - 'base64'
+    CommandLine|contains:
+      - '/etc/shadow'
 
-    selection_tools:
-        CommandLine|contains:
-            - 'unshadow '           
-            - 'mimipenguin'         
-            - 'linpeas.sh'          
+  selection_tools:
+    CommandLine|contains:
+      - 'unshadow '
+      - 'mimipenguin'
+      - 'linpeas.sh'
 
-    filter_legit_behavior:
-        CommandLine|contains:
-            - '/usr/sbin/pwconv'
-            - '/usr/sbin/useradd'
-            - '/usr/sbin/usermod'
-            - 'logrotate'
-        ParentImage|startswith: '/etc/cron.'
+  filter_legit_behavior:
+    CommandLine|contains:
+      - '/usr/sbin/pwconv'
+      - '/usr/sbin/useradd'
+      - '/usr/sbin/usermod'
+      - 'logrotate'
+    ParentImage|startswith: '/etc/cron.'
 
-    condition: (selection_redirection or selection_archive or selection_network or selection_tools) and not filter_legit_behavior
+  condition: >
+    (selection_redirection or selection_archive or selection_network or selection_tools)
+    and not filter_legit_behavior
+
 level: critical

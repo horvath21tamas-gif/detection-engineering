@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-23 13:55:41`
+**Utolsó frissítés:** `2026-02-23 14:28:55`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -26,23 +26,23 @@
 | T1003.003 | CRITICAL | Ultra-Pro High-Fidelity NTDS.dit Extraction (T1003.003) |
 | T1003.004 | CRITICAL | Ultra-Pro High-Fidelity LSA Secrets & Security Hive Theft (T1003.004) |
 | T1003.005 | CRITICAL | Ultra-Pro High-Fidelity MSCASH/DCC Extraction (T1003.005) |
-| T1003.006 | CRITICAL | Ultra-Pro High-Fidelity DCSync Attack Detection (T1003.006) |
-| T1003.007 | CRITICAL | Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007) |
-| T1003.008 | CRITICAL | Ultra-Pro High-Fidelity Linux Shadow File Extraction (T1003.008) |
-| T1005 | CRITICAL | Ultra-Pro High-Fidelity Local Data Harvesting (T1005) |
-| T1006 | CRITICAL | Ultra-Pro Stealthy Direct Volume Access (T1006) |
-| T1007 | HIGH | Suspicious Event Log Enumeration from Anomalous Execution Context, Ultra-Pro High-Fidelity System Service Discovery (T1007) |
-| T1008 | CRITICAL | Ultra-Pro High-Fidelity Fallback Channel Detection (T1008) |
-| T1010 | HIGH | Ultra-Pro High-Fidelity Application Window Discovery (T1010) |
-| T1011 | HIGH | Ultra-Pro High-Fidelity Bluetooth Exfiltration (T1011) |
-| T1011.001 | CRITICAL | Ultra-Pro High-Fidelity BLE Advertising Exfiltration (T1011.001) |
-| T1012 | HIGH | Ultra-Pro High-Fidelity Query Registry Discovery (T1012) |
-| T1014 | CRITICAL | Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014) |
-| T1016 | HIGH | Ultra-Pro High-Fidelity System Network Configuration Discovery (T1016) |
-| T1016.001 | HIGH | Ultra-Pro High-Fidelity Internet IP Discovery (T1016.001) |
-| T1016.002 | HIGH | Ultra-Pro High-Fidelity Terminal Services Configuration Discovery (T1016.002) |
-| T1018 | HIGH | Ultra-Pro High-Fidelity Remote System Discovery (T1018) |
-| T1020 | CRITICAL | Ultra-Pro High-Fidelity Automated Exfiltration (T1020) |
+| T1003.006 | CRITICAL | DCSync Attack Detection (T1003.006) |
+| T1003.007 | CRITICAL | LSASS Memory Dump & LOLBin Abuse (T1003.007) |
+| T1003.008 | CRITICAL | Linux Shadow File Extraction (T1003.008) |
+| T1005 | CRITICAL | Local Data Harvesting (T1005) |
+| T1006 | CRITICAL | Stealthy Direct Volume Access (T1006) |
+| T1007 | HIGH | Suspicious Event Log Enumeration from Anomalous Execution Context, System Service Discovery (T1007) |
+| T1008 | CRITICAL | Fallback Channel Detection (T1008) |
+| T1010 | HIGH | Application Window Discovery (T1010) |
+| T1011 | HIGH | Bluetooth Exfiltration (T1011) |
+| T1011.001 | CRITICAL | BLE Advertising Exfiltration (T1011.001) |
+| T1012 | HIGH | Query Registry Discovery (T1012) |
+| T1014 | CRITICAL | BYOVD Rootkit Loading (T1014) |
+| T1016 | HIGH | System Network Configuration Discovery (T1016) |
+| T1016.001 | HIGH | Internet IP Discovery (T1016.001) |
+| T1016.002 | HIGH | Terminal Services Configuration Discovery (T1016.002) |
+| T1018 | HIGH | Remote System Discovery (T1018) |
+| T1020 | CRITICAL | Automated Exfiltration (T1020) |
 | T1020.001 | CRITICAL | Client-Linked Cloud Exfil (T1020.001) |
 | T1021 | HIGH | Rapid Logons to Multiple Distant Hosts by Same User, Suspicious Service Creation via Remote Administration Tools Outside Approved Management Scope |
 | T1021.001 | MEDIUM | Suspicious RDP Logon from Unusual Source |

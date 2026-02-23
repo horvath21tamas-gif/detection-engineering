@@ -21,23 +21,23 @@
 - [Ultra-Pro High-Fidelity NTDS.dit Extraction (T1003.003)](#ultra-pro-high-fidelity-ntdsdit-extraction-(t1003003))
 - [Ultra-Pro High-Fidelity LSA Secrets & Security Hive Theft (T1003.004)](#ultra-pro-high-fidelity-lsa-secrets-&-security-hive-theft-(t1003004))
 - [Ultra-Pro High-Fidelity MSCASH/DCC Extraction (T1003.005)](#ultra-pro-high-fidelity-mscashdcc-extraction-(t1003005))
-- [Ultra-Pro High-Fidelity DCSync Attack Detection (T1003.006)](#ultra-pro-high-fidelity-dcsync-attack-detection-(t1003006))
-- [Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007)](#ultra-pro-high-fidelity-lsass-memory-dump-&-lolbin-abuse-(t1003007))
-- [Ultra-Pro High-Fidelity Linux Shadow File Extraction (T1003.008)](#ultra-pro-high-fidelity-linux-shadow-file-extraction-(t1003008))
-- [Ultra-Pro High-Fidelity Local Data Harvesting (T1005)](#ultra-pro-high-fidelity-local-data-harvesting-(t1005))
-- [Ultra-Pro Stealthy Direct Volume Access (T1006)](#ultra-pro-stealthy-direct-volume-access-(t1006))
-- [Ultra-Pro High-Fidelity System Service Discovery (T1007)](#ultra-pro-high-fidelity-system-service-discovery-(t1007))
-- [Ultra-Pro High-Fidelity Fallback Channel Detection (T1008)](#ultra-pro-high-fidelity-fallback-channel-detection-(t1008))
-- [Ultra-Pro High-Fidelity Application Window Discovery (T1010)](#ultra-pro-high-fidelity-application-window-discovery-(t1010))
-- [Ultra-Pro High-Fidelity Bluetooth Exfiltration (T1011)](#ultra-pro-high-fidelity-bluetooth-exfiltration-(t1011))
-- [Ultra-Pro High-Fidelity BLE Advertising Exfiltration (T1011.001)](#ultra-pro-high-fidelity-ble-advertising-exfiltration-(t1011001))
-- [Ultra-Pro High-Fidelity Query Registry Discovery (T1012)](#ultra-pro-high-fidelity-query-registry-discovery-(t1012))
-- [Ultra-Pro High-Fidelity BYOVD Rootkit Loading (T1014)](#ultra-pro-high-fidelity-byovd-rootkit-loading-(t1014))
-- [Ultra-Pro High-Fidelity System Network Configuration Discovery (T1016)](#ultra-pro-high-fidelity-system-network-configuration-discovery-(t1016))
-- [Ultra-Pro High-Fidelity Internet IP Discovery (T1016.001)](#ultra-pro-high-fidelity-internet-ip-discovery-(t1016001))
-- [Ultra-Pro High-Fidelity Terminal Services Configuration Discovery (T1016.002)](#ultra-pro-high-fidelity-terminal-services-configuration-discovery-(t1016002))
-- [Ultra-Pro High-Fidelity Remote System Discovery (T1018)](#ultra-pro-high-fidelity-remote-system-discovery-(t1018))
-- [Ultra-Pro High-Fidelity Automated Exfiltration (T1020)](#ultra-pro-high-fidelity-automated-exfiltration-(t1020))
+- [DCSync Attack Detection (T1003.006)](#dcsync-attack-detection-(t1003006))
+- [LSASS Memory Dump & LOLBin Abuse (T1003.007)](#lsass-memory-dump-&-lolbin-abuse-(t1003007))
+- [Linux Shadow File Extraction (T1003.008)](#linux-shadow-file-extraction-(t1003008))
+- [Local Data Harvesting (T1005)](#local-data-harvesting-(t1005))
+- [Stealthy Direct Volume Access (T1006)](#stealthy-direct-volume-access-(t1006))
+- [System Service Discovery (T1007)](#system-service-discovery-(t1007))
+- [Fallback Channel Detection (T1008)](#fallback-channel-detection-(t1008))
+- [Application Window Discovery (T1010)](#application-window-discovery-(t1010))
+- [Bluetooth Exfiltration (T1011)](#bluetooth-exfiltration-(t1011))
+- [BLE Advertising Exfiltration (T1011.001)](#ble-advertising-exfiltration-(t1011001))
+- [Query Registry Discovery (T1012)](#query-registry-discovery-(t1012))
+- [BYOVD Rootkit Loading (T1014)](#byovd-rootkit-loading-(t1014))
+- [System Network Configuration Discovery (T1016)](#system-network-configuration-discovery-(t1016))
+- [Internet IP Discovery (T1016.001)](#internet-ip-discovery-(t1016001))
+- [Terminal Services Configuration Discovery (T1016.002)](#terminal-services-configuration-discovery-(t1016002))
+- [Remote System Discovery (T1018)](#remote-system-discovery-(t1018))
+- [Automated Exfiltration (T1020)](#automated-exfiltration-(t1020))
 - [Client-Linked Cloud Exfil (T1020.001)](#client-linked-cloud-exfil-(t1020001))
 - [Rapid Logons to Multiple Distant Hosts by Same User](#rapid-logons-to-multiple-distant-hosts-by-same-user)
 - [Suspicious RDP Logon from Unusual Source](#suspicious-rdp-logon-from-unusual-source)
@@ -826,14 +826,16 @@ the Cache key, and anomalous parent-child process relationships.
 
 
 ---
-## Ultra-Pro High-Fidelity DCSync Attack Detection (T1003.006)
+## DCSync Attack Detection (T1003.006)
 - **ID:** `T1003_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Detects DCSync attacks where an attacker impersonates a Domain Controller 
-to request credentials. Focuses on specific RPC flags, abbreviated tool commands, 
-and anomalous process lineage on non-DC assets.
+- **Leírás:** Detects DCSync attacks where an attacker impersonates a Domain Controller to request credentials.
+Focuses on:
+- Specific RPC flags and abbreviated Mimikatz/DCSync commands
+- Targeting sensitive accounts (krbtgt, administrator)
+- Anomalous process lineage on non-DC assets
 
 
 #### 🚨 Response Playbook

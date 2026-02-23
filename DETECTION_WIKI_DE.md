@@ -21,23 +21,23 @@
 - [Ultra-Pro High-Fidelity NTDS.dit-Extraktion (T1003.003)](#ultra-pro-high-fidelity-ntdsdit-extraktion-(t1003003))
 - [Ultra-Pro High-Fidelity LSA Secrets & Security Hive Theft (T1003.004)](#ultra-pro-high-fidelity-lsa-secrets-&-security-hive-theft-(t1003004))
 - [Ultra-Pro High-Fidelity MSCASH/DCC-Extraktion (T1003.005)](#ultra-pro-high-fidelity-mscashdcc-extraktion-(t1003005))
-- [Ultra-Pro High-Fidelity DCSync-Angriffserkennung (T1003.006)](#ultra-pro-high-fidelity-dcsync-angriffserkennung-(t1003006))
-- [Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin-Missbrauch (T1003.007)](#ultra-pro-high-fidelity-lsass-memory-dump-&-lolbin-missbrauch-(t1003007))
-- [Ultra-Pro High-Fidelity-Linux-Schattendateiextraktion (T1003.008)](#ultra-pro-high-fidelity-linux-schattendateiextraktion-(t1003008))
-- [Ultraprofessionelle lokale Datenerfassung mit hoher Wiedergabetreue (T1005)](#ultraprofessionelle-lokale-datenerfassung-mit-hoher-wiedergabetreue-(t1005))
-- [Ultra-Pro Stealthy Direct Volume Access (T1006)](#ultra-pro-stealthy-direct-volume-access-(t1006))
-- [Ultra-Pro High-Fidelity System Service Discovery (T1007)](#ultra-pro-high-fidelity-system-service-discovery-(t1007))
-- [Ultraprofessionelle High-Fidelity-Fallback-Kanalerkennung (T1008)](#ultraprofessionelle-high-fidelity-fallback-kanalerkennung-(t1008))
-- [Ultra-Pro High-Fidelity-Anwendungsfenstererkennung (T1010)](#ultra-pro-high-fidelity-anwendungsfenstererkennung-(t1010))
-- [Ultra-Pro High-Fidelity-Bluetooth-Exfiltration (T1011)](#ultra-pro-high-fidelity-bluetooth-exfiltration-(t1011))
-- [Ultra-Pro High-Fidelity BLE-Werbe-Exfiltration (T1011.001)](#ultra-pro-high-fidelity-ble-werbe-exfiltration-(t1011001))
-- [Ultra-Pro High-Fidelity Query Registry Discovery (T1012)](#ultra-pro-high-fidelity-query-registry-discovery-(t1012))
-- [Laden von Ultra-Pro High-Fidelity BYOVD-Rootkits (T1014)](#laden-von-ultra-pro-high-fidelity-byovd-rootkits-(t1014))
-- [Ultra-Pro High-Fidelity-System-Netzwerkkonfigurationserkennung (T1016)](#ultra-pro-high-fidelity-system-netzwerkkonfigurationserkennung-(t1016))
-- [Ultraprofessionelle High-Fidelity-Internet-IP-Erkennung (T1016.001)](#ultraprofessionelle-high-fidelity-internet-ip-erkennung-(t1016001))
-- [Ultra-Pro High-Fidelity Terminal Services Configuration Discovery (T1016.002)](#ultra-pro-high-fidelity-terminal-services-configuration-discovery-(t1016002))
-- [Ultra-Pro High-Fidelity Remote System Discovery (T1018)](#ultra-pro-high-fidelity-remote-system-discovery-(t1018))
-- [Ultra-Pro High-Fidelity Automatisierte Exfiltration (T1020)](#ultra-pro-high-fidelity-automatisierte-exfiltration-(t1020))
+- [DCSync-Angriffserkennung (T1003.006)](#dcsync-angriffserkennung-(t1003006))
+- [LSASS-Speicherauszug und LOLBin-Missbrauch (T1003.007)](#lsass-speicherauszug-und-lolbin-missbrauch-(t1003007))
+- [Linux-Schattendateiextraktion (T1003.008)](#linux-schattendateiextraktion-(t1003008))
+- [Lokale Datenerfassung (T1005)](#lokale-datenerfassung-(t1005))
+- [Stealthy Direct Volume Access (T1006)](#stealthy-direct-volume-access-(t1006))
+- [Systemdiensterkennung (T1007)](#systemdiensterkennung-(t1007))
+- [Fallback-Kanalerkennung (T1008)](#fallback-kanalerkennung-(t1008))
+- [Anwendungsfenstererkennung (T1010)](#anwendungsfenstererkennung-(t1010))
+- [Bluetooth-Exfiltration (T1011)](#bluetooth-exfiltration-(t1011))
+- [BLE-Werbe-Exfiltration (T1011.001)](#ble-werbe-exfiltration-(t1011001))
+- [Registrierungserkennung abfragen (T1012)](#registrierungserkennung-abfragen-(t1012))
+- [Laden des BYOVD-Rootkits (T1014)](#laden-des-byovd-rootkits-(t1014))
+- [Erkennung der Systemnetzwerkkonfiguration (T1016)](#erkennung-der-systemnetzwerkkonfiguration-(t1016))
+- [Internet-IP-Erkennung (T1016.001)](#internet-ip-erkennung-(t1016001))
+- [Terminaldienste-Konfigurationserkennung (T1016.002)](#terminaldienste-konfigurationserkennung-(t1016002))
+- [Remote-Systemerkennung (T1018)](#remote-systemerkennung-(t1018))
+- [Automatisierte Exfiltration (T1020)](#automatisierte-exfiltration-(t1020))
 - [Client-Linked Cloud Exfil (T1020.001)](#client-linked-cloud-exfil-(t1020001))
 - [Schnelle Anmeldungen desselben Benutzers an mehreren entfernten Hosts](#schnelle-anmeldungen-desselben-benutzers-an-mehreren-entfernten-hosts)
 - [Verdächtige RDP-Anmeldung aus ungewöhnlicher Quelle](#verdächtige-rdp-anmeldung-aus-ungewöhnlicher-quelle)
@@ -816,14 +816,16 @@ der Cache-Schlüssel und anomale Eltern-Kind-Prozessbeziehungen.
 
 
 ---
-## Ultra-Pro High-Fidelity DCSync-Angriffserkennung (T1003.006)
+## DCSync-Angriffserkennung (T1003.006)
 - **ID:** `T1003_006.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
-- **Beschreibung:** Erkennt DCSync-Angriffe, bei denen sich ein Angreifer als Domänencontroller ausgibt
-Anmeldeinformationen anzufordern.Konzentriert sich auf bestimmte RPC-Flags, abgekürzte Toolbefehle,
-und anomale Prozessherkunft bei Nicht-DC-Assets.
+- **Beschreibung:** Erkennt DCSync-Angriffe, bei denen ein Angreifer sich als Domänencontroller ausgibt, um Anmeldeinformationen anzufordern.
+Konzentriert sich auf:
+– Spezifische RPC-Flags und abgekürzte Mimikatz/DCSync-Befehle
+- Ausrichtung auf sensible Konten (krbtgt, Administrator)
+- Anomale Prozessherkunft bei Nicht-DC-Assets
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -21,23 +21,23 @@
 - [Ultra-Pro High-Fidelity NTDS.dit kivonás (T1003.003)](#ultra-pro-high-fidelity-ntdsdit-kivonás-(t1003003))
 - [Ultra-Pro High-Fidelity LSA titkok és biztonsági kaptárlopás (T1003.004)](#ultra-pro-high-fidelity-lsa-titkok-és-biztonsági-kaptárlopás-(t1003004))
 - [Ultra-Pro High-Fidelity MSCASH/DCC extrakció (T1003.005)](#ultra-pro-high-fidelity-mscashdcc-extrakció-(t1003005))
-- [Ultra-Pro High-Fidelity DCSync támadásészlelés (T1003.006)](#ultra-pro-high-fidelity-dcsync-támadásészlelés-(t1003006))
-- [Ultra-Pro High-Fidelity LSASS memória kiíratása és LOLBin visszaélés (T1003.007)](#ultra-pro-high-fidelity-lsass-memória-kiíratása-és-lolbin-visszaélés-(t1003007))
-- [Ultra-Pro High-Fidelity Linux Shadow File Extraction (T1003.008)](#ultra-pro-high-fidelity-linux-shadow-file-extraction-(t1003008))
-- [Ultra-Pro, nagy pontosságú helyi adatgyűjtés (T1005)](#ultra-pro-nagy-pontosságú-helyi-adatgyűjtés-(t1005))
-- [Ultra-Pro lopakodó közvetlen hangerő-hozzáférés (T1006)](#ultra-pro-lopakodó-közvetlen-hangerő-hozzáférés-(t1006))
-- [Ultra-Pro High-Fidelity System Service Discovery (T1007)](#ultra-pro-high-fidelity-system-service-discovery-(t1007))
-- [Ultra-Pro High-Fidelity tartalék csatornaérzékelés (T1008)](#ultra-pro-high-fidelity-tartalék-csatornaérzékelés-(t1008))
-- [Ultra-Pro High-Fidelity Application Window Discovery (T1010)](#ultra-pro-high-fidelity-application-window-discovery-(t1010))
-- [Ultra-Pro High-Fidelity Bluetooth Exfiltration (T1011)](#ultra-pro-high-fidelity-bluetooth-exfiltration-(t1011))
-- [Ultra-Pro High-Fidelity BLE Advertising Exfiltration (T1011.001)](#ultra-pro-high-fidelity-ble-advertising-exfiltration-(t1011001))
-- [Ultra-Pro High-Fidelity Query Registry Discovery (T1012)](#ultra-pro-high-fidelity-query-registry-discovery-(t1012))
-- [Ultra-Pro High-Fidelity BYOVD Rootkit betöltése (T1014)](#ultra-pro-high-fidelity-byovd-rootkit-betöltése-(t1014))
-- [Ultra-Pro High-Fidelity rendszer hálózati konfigurációjának felfedezése (T1016)](#ultra-pro-high-fidelity-rendszer-hálózati-konfigurációjának-felfedezése-(t1016))
-- [Ultra-Pro High-Fidelity Internet IP Discovery (T1016.001)](#ultra-pro-high-fidelity-internet-ip-discovery-(t1016001))
-- [Ultra-Pro High-Fidelity terminálszolgáltatások konfigurációs felderítése (T1016.002)](#ultra-pro-high-fidelity-terminálszolgáltatások-konfigurációs-felderítése-(t1016002))
-- [Ultra-Pro High-Fidelity Remote System Discovery (T1018)](#ultra-pro-high-fidelity-remote-system-discovery-(t1018))
-- [Ultra-Pro High-Fidelity automatizált szűrés (T1020)](#ultra-pro-high-fidelity-automatizált-szűrés-(t1020))
+- [DCSync támadásészlelés (T1003.006)](#dcsync-támadásészlelés-(t1003006))
+- [LSASS Memory Dump és LOLBin visszaélés (T1003.007)](#lsass-memory-dump-és-lolbin-visszaélés-(t1003007))
+- [Linux árnyékfájl kibontása (T1003.008)](#linux-árnyékfájl-kibontása-(t1003008))
+- [Helyi adatgyűjtés (T1005)](#helyi-adatgyűjtés-(t1005))
+- [Lopakodó közvetlen hangerő-hozzáférés (T1006)](#lopakodó-közvetlen-hangerő-hozzáférés-(t1006))
+- [Rendszerszolgáltatás-felderítés (T1007)](#rendszerszolgáltatás-felderítés-(t1007))
+- [Tartalékcsatorna-észlelés (T1008)](#tartalékcsatorna-észlelés-(t1008))
+- [Alkalmazásablak felfedezése (T1010)](#alkalmazásablak-felfedezése-(t1010))
+- [Bluetooth Exfiltration (T1011)](#bluetooth-exfiltration-(t1011))
+- [BLE Advertising Exfiltration (T1011.001)](#ble-advertising-exfiltration-(t1011001))
+- [Registry Discovery lekérdezése (T1012)](#registry-discovery-lekérdezése-(t1012))
+- [BYOVD Rootkit betöltése (T1014)](#byovd-rootkit-betöltése-(t1014))
+- [Rendszerhálózati konfiguráció felfedezése (T1016)](#rendszerhálózati-konfiguráció-felfedezése-(t1016))
+- [Internet IP-felderítés (T1016.001)](#internet-ip-felderítés-(t1016001))
+- [Terminálszolgáltatások konfigurációs felderítése (T1016.002)](#terminálszolgáltatások-konfigurációs-felderítése-(t1016002))
+- [Remote System Discovery (T1018)](#remote-system-discovery-(t1018))
+- [Automatizált szűrés (T1020)](#automatizált-szűrés-(t1020))
 - [Client-Linked Cloud Exfil (T1020.001)](#client-linked-cloud-exfil-(t1020001))
 - [Gyors bejelentkezés több távoli gépre ugyanazon felhasználó által](#gyors-bejelentkezés-több-távoli-gépre-ugyanazon-felhasználó-által)
 - [Gyanús RDP bejelentkezés szokatlan forrásból](#gyanús-rdp-bejelentkezés-szokatlan-forrásból)
@@ -816,14 +816,16 @@ a gyorsítótár kulcs és a rendellenes szülő-gyermek folyamatkapcsolatok.
 
 
 ---
-## Ultra-Pro High-Fidelity DCSync támadásészlelés (T1003.006)
+## DCSync támadásészlelés (T1003.006)
 - **ID:** `T1003_006.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
-- **Leírás:** Érzékeli a DCSync támadásokat, amikor a támadó tartományvezérlőnek adja ki magát
-hitelesítő adatokat kérni.Konkrét RPC-jelzőkre, rövidített eszközparancsokra összpontosít,
-és rendellenes folyamatvonal a nem egyenáramú eszközökön.
+- **Leírás:** Érzékeli a DCSync támadásokat, amikor a támadó egy tartományvezérlőnek adja ki magát, hogy hitelesítő adatokat kérjen.
+A következőkre összpontosít:
+- Speciális RPC jelzők és rövidített Mimikatz/DCSync parancsok
+- Érzékeny fiókok célzása (krbtgt, rendszergazda)
+- Rendellenes folyamatvonal nem egyenáramú eszközökön
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -895,7 +897,7 @@ gyanús folyamatvonalakból.
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a nagy pontosságú közvetlen kötet-hozzáférést a nyers eszközútvonalak figyelésével
 rendszeren kívüli folyamatok vagy gyanús szülők kezdeményezték.Gyakran megkerülésére használják
-fájlrendszer-zárak és EDR-figyelés a hitelesítő adatok kiürítéséhez.
+fájlrendszer zárolása és EDR-figyelés a hitelesítő adatok kiürítéséhez.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1020,8 +1022,8 @@ hitelesítő adatok tárolása és perzisztencia útvonalai.Rekurzív lekérdez�
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a "Bring Your Own Vulnerable Driver" (BYOVD) technikát.
-Az ismert illesztőprogram-betöltők végrehajtására vagy a kernel-mód regisztrációjára összpontosít
-szolgáltatások nem szabványos útvonalakról, miközben kiszűri a jogos operációs rendszer-illesztőprogram-karbantartást.
+Az ismert illesztőprogram-betöltők végrehajtására vagy a kernel mód regisztrálására összpontosít
+szolgáltatások nem szabványos útvonalakról, miközben kiszűri a jogszerű operációs rendszer-illesztőprogram-karbantartást.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

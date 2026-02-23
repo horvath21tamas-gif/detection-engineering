@@ -1,4 +1,4 @@
-title: Ultra-Pro High-Fidelity Removable Media Data Theft (T1025)
+title: Removable Media Data Theft (T1025)
 id: e5c80085-48e1-4197-96ef-8c989deb86d2
 status: stable
 description: |
@@ -8,52 +8,59 @@ description: |
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.collection
-    - attack.t1025
+  - attack.collection
+  - attack.t1025
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_drive_access:
-        CommandLine|contains:
-            - 'D:\*'
-            - 'E:\*'
-            - 'F:\*'
-            - 'G:\*'
-            - 'H:\*'
+  selection_drive_access:
+    CommandLine|contains:
+      - 'D:\*'
+      - 'E:\*'
+      - 'F:\*'
+      - 'G:\*'
+      - 'H:\*'
 
-    selection_harvesting_switches:
-        CommandLine|contains:
-            - ' /s /b'                   
-            - ' /e /i /h'               
-            - ' -Recurse -Force'         
-            - ' -ErrorAction SilentlyContinue'
+  selection_harvesting_switches:
+    CommandLine|contains:
+      - ' /s /b'
+      - ' /e /i /h'
+      - ' -Recurse -Force'
+      - ' -ErrorAction SilentlyContinue'
 
-    selection_sensitive_ext:
-        CommandLine|contains:
-            - '*.kdbx'               
-            - '*.pst'                 
-            - '*.key'                 
-            - 'id_rsa'              
-            - '*.docx'
-            - '*.xlsx'
+  selection_sensitive_ext:
+    CommandLine|contains:
+      - '*.kdbx'
+      - '*.pst'
+      - '*.key'
+      - 'id_rsa'
+      - '*.docx'
+      - '*.xlsx'
 
-    selection_context:
-        ParentImage|endswith:
-            - '\powershell.exe'
-            - '\cmd.exe'
-            - '\w3wp.exe'               
-            - '\rundll32.exe'           
-        IntegrityLevel: 'Medium'      
+  selection_context:
+    ParentImage|endswith:
+      - '\powershell.exe'
+      - '\cmd.exe'
+      - '\w3wp.exe'
+      - '\rundll32.exe'
+    IntegrityLevel: 'Medium'
 
-    filter_trusted_infra:
-        - Image|contains:
-            - 'C:\Program Files\Everything\'
-            - 'C:\Program Files\Veeam\' 
-        - username: 'NT AUTHORITY\SYSTEM'
-        - CommandLine|contains:
-            - 'SoftwareDistribution'
-            - 'OneDrive.exe'
+  filter_trusted_infra:
+    - Image|contains:
+        - 'C:\Program Files\Everything\'
+        - 'C:\Program Files\Veeam\'
+    - username: 'NT AUTHORITY\SYSTEM'
+    - CommandLine|contains:
+        - 'SoftwareDistribution'
+        - 'OneDrive.exe'
 
-    condition: selection_drive_access and selection_harvesting_switches and (selection_sensitive_ext or selection_context) and not filter_trusted_infra
+  condition: >
+    selection_drive_access and
+    selection_harvesting_switches and
+    (selection_sensitive_ext or selection_context) and
+    not filter_trusted_infra
+
 level: critical

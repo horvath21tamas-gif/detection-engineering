@@ -1519,16 +1519,14 @@ und die Aktivierung des LoadAppInit_DLLs-Flags durch verdächtige Prozesse.
 
 
 ---
-## Geplante Ultra-Pro High-Fidelity-Übertragung (T1029)
+## Geplante Übertragung (T1029)
 - **ID:** `T1029.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Erstellung geplanter Aufgaben zur automatisierten Datenexfiltration durch
-Analysieren von Aufgaben-XML auf verdächtige CLI-Tools, Cloud-Synchronisierungsargumente usw
-hochfrequente oder außerhalb der Geschäftszeiten auftretende Auslöser und filtert gleichzeitig legitime Systemaktualisierungen.
+- **Beschreibung:** Erkennt die Erstellung geplanter Aufgaben zur automatisierten Datenexfiltration durch Analyse der Aufgaben-XML auf verdächtige Befehlszeilentools, Cloud-Synchronisierungsargumente und hochfrequente oder außerhalb der Geschäftszeiten auftretende Auslöser.Filtert legitime Systemaktualisierungen und Unternehmensverwaltungsaufgaben heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

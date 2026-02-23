@@ -1570,16 +1570,14 @@ and the activation of the LoadAppInit_DLLs flag by suspicious processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Scheduled Transfer (T1029)
+## Scheduled Transfer (T1029)
 - **ID:** `T1029.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the creation of scheduled tasks for automated data exfiltration by 
-analyzing Task XML for suspicious CLI tools, cloud-sync arguments, and 
-high-frequency or off-hours triggers, while filtering legitimate system updates.
+- **Leírás:** Detects creation of scheduled tasks for automated data exfiltration by analyzing Task XML for suspicious command-line tools, cloud-sync arguments, and high-frequency or off-hours triggers. Filters out legitimate system updates and enterprise management tasks.
 
 
 #### 🚨 Response Playbook

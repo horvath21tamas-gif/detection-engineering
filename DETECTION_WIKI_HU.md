@@ -1519,16 +1519,14 @@ Kifejezetten a rendszeren kívüli útvonalakról (Temp, Nyilvános, Felhasznál
 
 
 ---
-## Ultra-Pro High-Fidelity ütemezett átvitel (T1029)
+## Ütemezett transzfer (T1029)
 - **ID:** `T1029.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli ütemezett feladatok létrehozását az automatikus adatkiszűréshez
-a Task XML elemzése gyanús CLI-eszközök, felhőszinkronizálási argumentumok és
-magas frekvenciájú vagy munkaidőn kívüli triggereket, miközben szűri a jogos rendszerfrissítéseket.
+- **Leírás:** Érzékeli az ütemezett feladatok létrehozását az automatikus adatkiszűréshez a Task XML elemzésével a gyanús parancssori eszközök, a felhőszinkronizálási argumentumok és a nagyfrekvenciás vagy a munkaidőn kívüli triggerek keresésére.Kiszűri a jogszerű rendszerfrissítéseket és a vállalatirányítási feladatokat.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

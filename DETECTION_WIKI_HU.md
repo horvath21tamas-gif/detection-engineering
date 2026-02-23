@@ -1623,16 +1623,14 @@ gyanús végrehajtási kontextusok (Letöltések, Temp) a rendszerzaj szűrése 
 
 
 ---
-## Ultra-Pro High-Fidelity átnevezett rendszer segédprogram (T1036.003)
+## Átnevezett System Utility Detection (T1036.003)
 - **ID:** `T1036_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SCHTASKS.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Összehasonlítással észleli az átnevezett Windows rendszersegédprogramok (LOLBins) végrehajtását
-aktuális folyamatnevek belső metaadatokkal.Útvonal alapú szűrést használ
-és aláírás-tudatosság, hogy kiküszöbölje a hamis pozitív üzeneteket a telepítőktől.
+- **Leírás:** Érzékeli az átnevezett Windows rendszersegédprogramok (LOLBins) végrehajtását az aktuális folyamatnevek és a belső metaadatok (OriginalFileName) összehasonlításával.Útvonal-alapú szűrést és aláírás-figyelést használ, hogy csökkentse a telepítőktől, a rendszerkarbantartási feladatoktól és a legitim bináris fájloktól származó hamis pozitív üzeneteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

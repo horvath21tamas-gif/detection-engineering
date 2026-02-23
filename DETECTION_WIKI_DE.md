@@ -1623,16 +1623,14 @@ verdächtige Ausführungskontexte (Downloads, Temp) und filtert gleichzeitig Sys
 
 
 ---
-## Ultra-Pro High-Fidelity umbenanntes System-Dienstprogramm (T1036.003)
+## Umbenannt in System Utility Detection (T1036.003)
 - **ID:** `T1036_003.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SCHTASKS.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Ausführung umbenannter Windows-Systemdienstprogramme (LOLBins) durch Vergleich
-aktuelle Prozessnamen mit internen Metadaten.Verwendet pfadbasierte Filterung
-und Signaturerkennung, um Fehlalarme von Installateuren zu vermeiden.
+- **Beschreibung:** Erkennt die Ausführung umbenannter Windows-Systemdienstprogramme (LOLBins), indem aktuelle Prozessnamen mit internen Metadaten (OriginalFileName) verglichen werden.Verwendet pfadbasierte Filterung und Signaturerkennung, um Fehlalarme von Installationsprogrammen, Systemwartungsaufgaben und legitimen Binärdateien zu reduzieren.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

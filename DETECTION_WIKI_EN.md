@@ -1680,16 +1680,14 @@ suspicious execution contexts (Downloads, Temp) while filtering system noise.
 
 
 ---
-## Ultra-Pro High-Fidelity Renamed System Utility (T1036.003)
+## Renamed System Utility Detection (T1036.003)
 - **ID:** `T1036_003.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [SCHTASKS.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the execution of renamed Windows system utilities (LOLBins) by comparing 
-current process names with internal metadata. Uses path-based filtering 
-and signature-awareness to eliminate false positives from installers.
+- **Leírás:** Detects execution of renamed Windows system utilities (LOLBins) by comparing current process names with internal metadata (OriginalFileName). Uses path-based filtering and signature-awareness to reduce false positives from installers, system maintenance tasks, and legitimate binaries.
 
 
 #### 🚨 Response Playbook

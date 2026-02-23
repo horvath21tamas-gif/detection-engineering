@@ -1312,16 +1312,14 @@ gyanús folyamatvonalakat, miközben kiszűri a szabványos operációs rendszer
 
 
 ---
-## Ultra-Pro High-Fidelity bináris padding tevékenység (T1027.001)
+## Bináris kitöltési tevékenység (T1027.001)
 - **ID:** `T1027_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a bináris kitöltést, ahol a támadók növelik a fájlméretet a biztonság megkerülése érdekében
-szkennerek vagy módosítsa a hash-eket.Olyan eszközökre összpontosít, mint az fsutil, dd és bináris másolás
-parancsok, amelyek a gyanús útvonalakon lévő végrehajtható fájlokat célozzák meg.
+- **Leírás:** Érzékeli a rosszindulatú bináris kitöltési kísérleteket, amikor a támadók mesterségesen növelik a fájlméretet, hogy megkerüljék a biztonsági szkennereket vagy módosítsák a fájlkivonatokat.Az fsutil, dd és bináris másolási parancsokra összpontosít, amelyek a gyanús könyvtárakban lévő végrehajtható fájlokat és rendszerfájlokat célozzák meg, miközben szűri a törvényes rendszerműveleteket.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

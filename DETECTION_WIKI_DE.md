@@ -1312,16 +1312,14 @@ verdächtige Prozesslinien und filtert gleichzeitig Standardaktivitäten des Bet
 
 
 ---
-## Ultra-Pro High-Fidelity Binary Padding-Aktivität (T1027.001)
+## Binäre Auffüllaktivität (T1027.001)
 - **ID:** `T1027_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt binäres Auffüllen, bei dem Angreifer die Dateigröße erhöhen, um die Sicherheit zu umgehen
-scannen oder Hashes ändern.Konzentriert sich auf Tools wie fsutil, dd und Binärkopie
-Befehle, die auf ausführbare Dateien in verdächtigen Pfaden abzielen.
+- **Beschreibung:** Erkennt bösartige binäre Auffüllversuche, bei denen Angreifer die Dateigröße künstlich erhöhen, um Sicherheitsscanner zu umgehen oder Datei-Hashes zu ändern.Konzentriert sich auf fsutil-, dd- und binäre Kopierbefehle, die auf ausführbare Dateien und Systemdateien in verdächtigen Verzeichnissen abzielen und gleichzeitig legitime Systemvorgänge filtern.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

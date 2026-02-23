@@ -1351,16 +1351,14 @@ suspicious process lineages, while filtering out standard OS activities.
 
 
 ---
-## Ultra-Pro High-Fidelity Binary Padding Activity (T1027.001)
+## Binary Padding Activity (T1027.001)
 - **ID:** `T1027_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects binary padding where attackers increase file size to bypass security 
-scanners or alter hashes. Focuses on tools like fsutil, dd, and binary copy 
-commands targeting executable files in suspicious paths.
+- **Leírás:** Detects malicious binary padding attempts where attackers artificially inflate file sizes to bypass security scanners or modify file hashes. Focuses on  fsutil, dd, and binary copy commands targeting executables and system files in suspicious directories, while filtering legitimate system operations.
 
 
 #### 🚨 Response Playbook

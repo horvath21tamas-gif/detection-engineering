@@ -807,16 +807,18 @@ credential access via untrusted parent processes.
 
 
 ---
-## Ultra-Pro High-Fidelity MSCASH/DCC Extraction (T1003.005)
+## MSCASH/DCC Extraction (T1003.005)
 - **ID:** `T1003_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects unauthorized extraction of Cached Domain Credentials (MSCASH/DCC).
-Monitors for specialized tool fingerprints, registry save operations targeting 
-the Cache key, and anomalous parent-child process relationships.
+- **Leírás:** Detects unauthorized extraction of Cached Domain Credentials (MSCASH/DCC). 
+Focuses on:
+- Specialized tool fingerprints (cachedump, lsadump::cache, dcc2)
+- Registry export operations targeting the HKLM\Security\Cache key
+- Anomalous parent-child process relationships and suspicious output locations
 
 
 #### 🚨 Response Playbook

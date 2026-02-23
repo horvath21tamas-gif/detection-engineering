@@ -798,7 +798,7 @@ hitelesítő adatokhoz való hozzáférés nem megbízható szülői folyamatoko
 
 
 ---
-## Ultra-Pro High-Fidelity MSCASH/DCC extrakció (T1003.005)
+## MSCASH/DCC kivonás (T1003.005)
 - **ID:** `T1003_005.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -806,8 +806,10 @@ hitelesítő adatokhoz való hozzáférés nem megbízható szülői folyamatoko
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a gyorsítótárazott tartományi hitelesítő adatok (MSCASH/DCC) jogosulatlan kibontását.
-Figyeli a speciális eszközök ujjlenyomatait, a rendszerleíró adatbázis mentési műveleteinek célzását
-a gyorsítótár kulcs és a rendellenes szülő-gyermek folyamatkapcsolatok.
+A következőkre összpontosít:
+- Speciális eszközök ujjlenyomatai (cachedump, lsadump::cache, dcc2)
+- A HKLM\Security\Cache kulcsot célzó beállításjegyzék-exportálási műveletek
+- Rendellenes szülő-gyermek folyamatkapcsolatok és gyanús kimeneti helyek
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -834,7 +836,7 @@ A következőkre összpontosít:
 
 
 ---
-## LSASS Memory Dump és LOLBin visszaélés (T1003.007)
+## LSASS Memory Dump & LOLBin Abuse (T1003.007)
 - **ID:** `T1003_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

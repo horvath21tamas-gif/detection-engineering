@@ -798,16 +798,18 @@ Anmeldeinformationszugriff über nicht vertrauenswürdige übergeordnete Prozess
 
 
 ---
-## Ultra-Pro High-Fidelity MSCASH/DCC-Extraktion (T1003.005)
+## MSCASH/DCC-Extraktion (T1003.005)
 - **ID:** `T1003_005.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die unbefugte Extraktion von zwischengespeicherten Domänenanmeldeinformationen (MSCASH/DCC).
-Überwacht die Fingerabdrücke spezieller Tools und zielt auf Registrierungsspeichervorgänge ab
-der Cache-Schlüssel und anomale Eltern-Kind-Prozessbeziehungen.
+- **Beschreibung:** Erkennt die unbefugte Entnahme von zwischengespeicherten Domänenanmeldeinformationen (MSCASH/DCC).
+Konzentriert sich auf:
+- Fingerabdrücke spezieller Tools (cachedump, lsadump::cache, dcc2)
+– Registrierungsexportvorgänge, die auf den Schlüssel HKLM\Security\Cache abzielen
+- Anomale Eltern-Kind-Prozessbeziehungen und verdächtige Ausgabeorte
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

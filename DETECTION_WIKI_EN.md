@@ -3884,7 +3884,7 @@ by filtering out legitimate backup and system maintenance processes.
 
 
 ---
-## Ultra-Pro High-Fidelity Password Spraying (T1110.003)
+## Password Spraying (T1110.003)
 - **ID:** `T1110_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

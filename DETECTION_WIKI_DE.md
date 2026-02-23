@@ -3705,7 +3705,7 @@ durch Herausfiltern legitimer Backup- und Systemwartungsprozesse.
 
 
 ---
-## Ultra-Pro High-Fidelity-Passwort-Sprühen (T1110.003)
+## Passwortsprühen (T1110.003)
 - **ID:** `T1110_003.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)

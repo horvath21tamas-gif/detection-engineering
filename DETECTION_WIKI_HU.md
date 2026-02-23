@@ -3705,7 +3705,7 @@ a jogszerű biztonsági mentési és rendszerkarbantartási folyamatok kiszűré
 
 
 ---
-## Ultra-Pro nagy pontosságú jelszószóró (T1110.003)
+## Jelszó spray (T1110.003)
 - **ID:** `T1110_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)

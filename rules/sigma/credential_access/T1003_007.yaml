@@ -1,51 +1,57 @@
-title: Ultra-Pro High-Fidelity LSASS Memory Dump & LOLBin Abuse (T1003.007)
+title: LSASS Memory Dump & LOLBin Abuse (T1003.007)
 id: 76aebc90-5a8f-44ca-827d-bd63ed108dda
 status: stable
 description: |
-    Detects sophisticated LSASS memory dumping. Focuses on Procdump argument patterns, 
-    Task Manager-initiated dumps via WerFault, and COM+ (comsvcs.dll) exports using 
-    ordinal-based calls (#24) to bypass string-based detection.
+  Detects sophisticated LSASS memory dumping techniques. Focuses on:
+  - Procdump argument patterns (-ma, -mm) targeting LSASS
+  - Task Manager-initiated dumps via WerFault (-u -p)
+  - COM+ (comsvcs.dll) exports using ordinal-based calls (#24, MiniDump)
+  Incorporates parent process context and filters legitimate development/diagnostic activity.
 author: hota05
 date: 2026-02-04
 tags:
-    - attack.credential_access
-    - attack.t1003.001
-    - attack.t1003.007
+  - attack.credential_access
+  - attack.t1003.001
+  - attack.t1003.007
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_procdump_args:
-        CommandLine|contains:
-            - ' -ma '         
-            - ' -mm '         
-        CommandLine|contains:
-            - 'lsass'        
+  selection_procdump:
+    CommandLine|contains:
+      - ' -ma '
+      - ' -mm '
+    CommandLine|contains: 'lsass'
 
-    selection_comsvcs_ordinal:
-        Image|endswith: '\rundll32.exe'
-        CommandLine|contains:
-            - 'comsvcs.dll, #24'
-            - 'comsvcs.dll,#24'
-            - 'comsvcs.dll, MiniDump'
+  selection_comsvcs_ordinal:
+    Image|endswith: '\rundll32.exe'
+    CommandLine|contains:
+      - 'comsvcs.dll, #24'
+      - 'comsvcs.dll,#24'
+      - 'comsvcs.dll, MiniDump'
 
-    selection_taskmgr_werfault:
-        ParentImage|endswith: '\taskmgr.exe'
-        Image|endswith: '\werfault.exe'
-        CommandLine|contains: '-u -p ' 
+  selection_taskmgr_werfault:
+    ParentImage|endswith: '\taskmgr.exe'
+    Image|endswith: '\werfault.exe'
+    CommandLine|contains: '-u -p '
 
-    selection_suspicious_context:
-        ParentImage|endswith:
-            - '\cmd.exe'
-            - '\powershell.exe'
-            - '\wsmprovhost.exe' 
-            - '\psexesvc.exe'   
-            - '\httpd.exe'       
+  selection_suspicious_context:
+    ParentImage|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\wsmprovhost.exe'
+      - '\psexesvc.exe'
+      - '\httpd.exe'
 
-    filter_legit_diagnostic:
-        ParentImage|contains: 
-            - '\Microsoft Visual Studio\'
-        username: 'NT AUTHORITY\SYSTEM'
+  filter_legit_diagnostic:
+    ParentImage|contains: '\Microsoft Visual Studio\'
+    username: 'NT AUTHORITY\SYSTEM'
 
-    condition: (selection_procdump_args or selection_comsvcs_ordinal or selection_taskmgr_werfault) and selection_suspicious_context and not filter_legit_diagnostic
+  condition: >
+    (selection_procdump or selection_comsvcs_ordinal or selection_taskmgr_werfault)
+    and selection_suspicious_context
+    and not filter_legit_diagnostic
+
 level: critical

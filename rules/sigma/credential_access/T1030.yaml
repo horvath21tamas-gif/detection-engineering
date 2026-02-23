@@ -1,54 +1,72 @@
-title: Ultra-Pro High-Fidelity Data Chunking and Fragmentation (T1030)
+title: Data Chunking and Fragmentation (T1030)
 id: 52f845f3-2ca1-4fc0-9916-d10ba808aa19
 status: stable
-description: |
-    Detects stealthy data fragmentation for exfiltration by identifying 
-    low-level file stream manipulation, custom buffer-based splitting, 
-    and non-standard archive volume creation from suspicious execution paths.
+description: >
+  Detects stealthy data fragmentation and exfiltration techniques by identifying
+  low-level file stream manipulation, buffer-based splitting, Base64 conversions,
+  and non-standard archive volume creation. Targets suspicious execution paths
+  while filtering legitimate enterprise software and system automation.
+
 author: hota05
-date: 2026-02-09
+date: 2026-02-23
 tags:
-    - attack.exfiltration
-    - attack.t1030
+  - attack.exfiltration
+  - attack.t1030
+  - attack.execution
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_logic:
-        CommandLine|contains:
-            - ' [System.IO.File]::OpenRead'  
-            - '.Read('                        
-            - ' [System.Convert]::ToBase64'    
-            - ' -Split '                       
-            - ' [byte[]]'                      
+  selection_logic:
+    CommandLine|contains:
+      - ' [System.IO.File]::OpenRead'
+      - '.Read('
+      - ' [System.Convert]::ToBase64'
+      - ' -Split '
+      - ' [byte[]]'
 
-    selection_archiver_pro:
-        CommandLine|contains:
-            - ' -v'                           
-            - ' -m0'                           
-            - ' -sdel'                       
-            - ' -rn'                         
+  selection_archiver_pro:
+    CommandLine|contains:
+      - ' -v'
+      - ' -m0'
+      - ' -sdel'
+      - ' -rn'
 
-    selection_context:
-        Image|contains:
-            - '\Users\'
-            - '\AppData\'
-            - '\Temp\'
-            - '\Public\'
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\csc.exe'                       
-            - '\certutil.exe'                   
+  selection_context:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Public\'
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\csc.exe'
+      - '\certutil.exe'
 
-    filter_legit_software:
-        - Image|contains:
-            - '\Program Files\'
-            - '\Program Files (x86)\'
-        - CommandLine|contains:
-            - 'Windows\Logs'                   
-            - 'NuGet'                          
-        - username: 'NT AUTHORITY\SYSTEM'
+  filter_legit_software:
+    - Image|contains:
+        - '\Program Files\'
+        - '\Program Files (x86)\'
+    - CommandLine|contains:
+        - 'Windows\Logs'
+        - 'NuGet'
+    - User:
+        - 'NT AUTHORITY\SYSTEM'
+        - 'NT AUTHORITY\LOCAL SERVICE'
+        - 'NT AUTHORITY\NETWORK SERVICE'
 
-    condition: (selection_logic or selection_archiver_pro) and selection_context and not filter_legit_software
+  condition: >
+    (selection_logic or selection_archiver_pro)
+    and selection_context
+    and not filter_legit_software
+
+falsepositives:
+  - Enterprise deployment tools or script-based logging
+  - System backup or file archiving software
+  - Security automation scripts (PowerShell, certutil) by admins
+  - Development or CI/CD processes manipulating files in user profiles
+
 level: critical

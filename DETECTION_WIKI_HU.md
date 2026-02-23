@@ -61,19 +61,19 @@
 - [Ultra-Pro High-Fidelity beágyazott hasznos teher kivonás (T1027.009)](#ultra-pro-high-fidelity-beágyazott-hasznos-teher-kivonás-(t1027009))
 - [Ultra-Pro High-Fidelity parancssori obfuszkáció (T1027.010)](#ultra-pro-high-fidelity-parancssori-obfuszkáció-(t1027010))
 - [Ultra-Pro High-Fidelity gyanús archívum létrehozása (T1027.011)](#ultra-pro-high-fidelity-gyanús-archívum-létrehozása-(t1027011))
-- [Ultra-Pro High-Fidelity Windows LDR-eltérítés (T1027.012)](#ultra-pro-high-fidelity-windows-ldr-eltérítés-(t1027012))
-- [Ultra-Pro High-Fidelity ütemezett átvitel (T1029)](#ultra-pro-high-fidelity-ütemezett-átvitel-(t1029))
-- [Ultra-Pro High-Fidelity adatfeldarabolás és töredezettség (T1030)](#ultra-pro-high-fidelity-adatfeldarabolás-és-töredezettség-(t1030))
-- [Ultra-Pro High-Fidelity rendszer tulajdonos/felhasználói felfedezés (T1033)](#ultra-pro-high-fidelity-rendszer-tulajdonosfelhasználói-felfedezés-(t1033))
-- [Ultra-Pro High-Fidelity maszkolás és folyamatúttal való visszaélés (T1036)](#ultra-pro-high-fidelity-maszkolás-és-folyamatúttal-való-visszaélés-(t1036))
-- [Ultra-Pro High-Fidelity érvénytelen vagy hamisított kódaláírás (T1036.001)](#ultra-pro-high-fidelity-érvénytelen-vagy-hamisított-kódaláírás-(t1036001))
-- [Ultra-Pro High-Fidelity RTLO karakter-végrehajtás (T1036.002)](#ultra-pro-high-fidelity-rtlo-karakter-végrehajtás-(t1036002))
-- [Ultra-Pro High-Fidelity átnevezett rendszer segédprogram (T1036.003)](#ultra-pro-high-fidelity-átnevezett-rendszer-segédprogram-(t1036003))
+- [Windows LDR-eltérítés (T1027.012)](#windows-ldr-eltérítés-(t1027012))
+- [Ütemezett transzfer (T1029)](#ütemezett-transzfer-(t1029))
+- [Adatok darabolása és töredezettsége (T1030)](#adatok-darabolása-és-töredezettsége-(t1030))
+- [Rendszertulajdonos/felhasználó felfedezése (T1033)](#rendszertulajdonosfelhasználó-felfedezése-(t1033))
+- [Maszkolás és visszaélés a folyamat során (T1036)](#maszkolás-és-visszaélés-a-folyamat-során-(t1036))
+- [Érvénytelen vagy hamisított kódaláírás (T1036.001)](#érvénytelen-vagy-hamisított-kódaláírás-(t1036001))
+- [RTLO karaktervégrehajtás (T1036.002)](#rtlo-karaktervégrehajtás-(t1036002))
+- [Átnevezett System Utility Detection (T1036.003)](#átnevezett-system-utility-detection-(t1036003))
 - [Maszkírozás útvonal-anomálián keresztül (T1036.004)](#maszkírozás-útvonal-anomálián-keresztül-(t1036004))
 - [Jogos Windows bináris fájl a felhasználó által írható helyre másolva](#jogos-windows-bináris-fájl-a-felhasználó-által-írható-helyre-másolva)
-- [Ultra-Pro High-Fidelity Space a fájlnév-maszkolás után (T1036.006)](#ultra-pro-high-fidelity-space-a-fájlnév-maszkolás-után-(t1036006))
-- [Ultra-Pro High-Fidelity kettős fájlkiterjesztés végrehajtása (T1036.007)](#ultra-pro-high-fidelity-kettős-fájlkiterjesztés-végrehajtása-(t1036007))
-- [Ultra-Pro High-Fidelity álarcos fájltípus tolmács visszaélésen keresztül (T1036.008)](#ultra-pro-high-fidelity-álarcos-fájltípus-tolmács-visszaélésen-keresztül-(t1036008))
+- [Szóköz a fájlnév maszkolása után (T1036.006)](#szóköz-a-fájlnév-maszkolása-után-(t1036006))
+- [Dupla fájlkiterjesztés végrehajtása (T1036.007)](#dupla-fájlkiterjesztés-végrehajtása-(t1036007))
+- [Masquerade via tolmács visszaélés (T1036.008)](#masquerade-via-tolmács-visszaélés-(t1036008))
 - [Allure Document & RTLO Maszkírozás Detection](#allure-document-&-rtlo-maszkírozás-detection)
 - [Nagy pontosságú bejelentkezési szkript fennmaradása (T1037)](#nagy-pontosságú-bejelentkezési-szkript-fennmaradása-(t1037))
 - [High-Fidelity UserInitMprLogonScript perzisztencia](#high-fidelity-userinitmprlogonscript-perzisztencia)
@@ -81,7 +81,7 @@
 - [Ultra-Pro hálózati bejelentkezési szkript/parancsikon módosítása (T1037.003)](#ultra-pro-hálózati-bejelentkezési-szkriptparancsikon-módosítása-(t1037003))
 - [Ultra-Pro RC Script és Init.d Persistence (T1037.004)](#ultra-pro-rc-script-és-initd-persistence-(t1037004))
 - [Ultra-Pro macOS indítási elemek tartóssága (T1037.005)](#ultra-pro-macos-indítási-elemek-tartóssága-(t1037005))
-- [Ultra-Pro High-Fidelity Network Share Discovery (T1039)](#ultra-pro-high-fidelity-network-share-discovery-(t1039))
+- [Hálózati megosztások felfedezése és gyűjtése (ATT&CK T1039)](#hálózati-megosztások-felfedezése-és-gyűjtése-(att&ck-t1039))
 - [Hálózati szippantásérzékelés (ATT&CK T1040)](#hálózati-szippantásérzékelés-(att&ck-t1040))
 - [Kiszűrés a C2 csatornán keresztül (ATT&CK T1041)](#kiszűrés-a-c2-csatornán-keresztül-(att&ck-t1041))
 - [Hálózati szolgáltatáskeresés (ATT&CK T1046)](#hálózati-szolgáltatáskeresés-(att&ck-t1046))
@@ -1502,16 +1502,14 @@ A parancssori jelszó argumentumaira és az érzékeny útvonalakból származó
 
 
 ---
-## Ultra-Pro High-Fidelity Windows LDR-eltérítés (T1027.012)
+## Windows LDR-eltérítés (T1027.012)
 - **ID:** `T1027_012.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a Windows betöltő (LDR) AppInit_DLL-eken vagy AppCertDLL-eken keresztüli eltérítési kísérleteit.
-Kifejezetten a rendszeren kívüli útvonalakról (Temp, Nyilvános, Felhasználói profilok) származó DLL regisztrációkat célozza meg.
-és a LoadAppInit_DLLs jelző aktiválása gyanús folyamatok által.
+- **Leírás:** Érzékeli a Windows betöltő (LDR) AppInit_DLL-eken vagy AppCertDLL-eken keresztüli eltérítési kísérleteit.Megcélozza a DLL-regisztrációkat nem rendszerútvonalakról (Temp, Nyilvános, Felhasználói profilok) és a LoadAppInit_DLLs jelző aktiválását gyanús szereplők által.Kiszűri a törvényes telepítőket és a rendszerkarbantartási folyamatokat.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -1526,7 +1524,7 @@ Kifejezetten a rendszeren kívüli útvonalakról (Temp, Nyilvános, Felhasznál
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [BITSADMIN.EXE](https://lolbas-project.github.io/lolbas/), [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az ütemezett feladatok létrehozását az automatikus adatkiszűréshez a Task XML elemzésével a gyanús parancssori eszközök, a felhőszinkronizálási argumentumok és a nagyfrekvenciás vagy a munkaidőn kívüli triggerek keresésére.Kiszűri a jogszerű rendszerfrissítéseket és a vállalatirányítási feladatokat.
+- **Leírás:** Érzékeli az ütemezett feladatok létrehozását az automatikus adatkiszűréshez azáltal, hogy elemzi a Task XML-t a gyanús parancssori eszközök, felhőszinkronizálási argumentumok és nagyfrekvenciás vagy munkaidőn kívüli triggerek keresésére.Kiszűri a jogszerű rendszerfrissítéseket és a vállalatirányítási feladatokat.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**
@@ -1541,7 +1539,7 @@ Kifejezetten a rendszeren kívüli útvonalakról (Temp, Nyilvános, Felhasznál
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CERTUTIL.EXE](https://lolbas-project.github.io/lolbas/), [CSC.EXE](https://lolbas-project.github.io/lolbas/), [SC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Az alacsony szintű fájlfolyam-manipuláció, a pufferalapú felosztás, a Base64-konverziók és a nem szabványos archív kötet-létrehozás azonosításával észleli a lopakodó adattöredezési és kiszűrési technikákat.Gyanús végrehajtási útvonalakat céloz meg, miközben kiszűri a törvényes vállalati szoftvereket és a rendszerautomatizálást.
+- **Leírás:** Az alacsony szintű fájlfolyam-manipuláció, a pufferalapú felosztás, a Base64-konverziók és a nem szabványos archív kötet-létrehozás azonosításával észleli a lopakodó adattöredezési és kiszűrési technikákat.Gyanús végrehajtási útvonalakat céloz meg, miközben szűri a törvényes vállalati szoftvereket és a rendszerautomatizálást.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1666,7 +1664,7 @@ Kifejezetten a rendszeren kívüli útvonalakról (Temp, Nyilvános, Felhasznál
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Szándékos maszkolást észlel a végrehajtható fájlnevekben vagy könyvtárnevekben (pl. "malware.exe") lévő szóközök használatával.Célozza azokat az adókijátszásokat, amelyek szóközt használnak a karakterlánc-alapú észlelések megkerülésére, miközben kiszűrik a gyakori Windows Update-, SCCM/MECM- és rendszerautomatizálási zajokat.
+- **Leírás:** Szándékos maszkolást észlel a végrehajtható fájlnevekben vagy könyvtárnevekben (pl. "malware.exe") lévő szóközök használatával.Olyan csalásokat céloz meg, amelyek szóközt használnak a karakterlánc-alapú észlelések megkerülésére, miközben kiszűrik a gyakori Windows Update-, SCCM/MECM- és rendszerautomatizálási zajokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -1872,7 +1870,7 @@ alrendszerben, és az aláíratlan vagy szkript által generált tartósságra �
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [AT.EXE](https://lolbas-project.github.io/lolbas/), [CMD.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a szisztematikus belső hálózati szolgáltatás-felderítést és a portellenőrzést a hurokalapú felsorolási minták, a magas kockázatú portcélzás és a nem adminisztratív vagy gyanús szülői környezetből végrehajtott ellenőrző segédprogramok azonosításával.Az egyedi interaktív parancsok helyett a szkriptezett oldalsó felderítési tevékenységre összpontosít.
+- **Leírás:** Érzékeli a szisztematikus belső hálózati szolgáltatás-felderítést és portellenőrzést a hurok alapú felsorolási minták, a magas kockázatú portcélzás és a nem adminisztratív vagy gyanús szülői környezetből végrehajtott ellenőrző segédprogramok azonosításával.Az egyedi interaktív parancsok helyett a szkriptezett oldalsó felderítési tevékenységre összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

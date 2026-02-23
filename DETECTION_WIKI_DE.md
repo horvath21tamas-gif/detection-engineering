@@ -61,19 +61,19 @@
 - [Ultra-Pro High-Fidelity Embedded Payload Extraction (T1027.009)](#ultra-pro-high-fidelity-embedded-payload-extraction-(t1027009))
 - [Ultra-Pro High-Fidelity-Befehlszeilenverschleierung (T1027.010)](#ultra-pro-high-fidelity-befehlszeilenverschleierung-(t1027010))
 - [Ultra-Pro High-Fidelity-Erstellung verdächtiger Archive (T1027.011)](#ultra-pro-high-fidelity-erstellung-verdächtiger-archive-(t1027011))
-- [Ultra-Pro High-Fidelity Windows LDR Hijacking (T1027.012)](#ultra-pro-high-fidelity-windows-ldr-hijacking-(t1027012))
-- [Geplante Ultra-Pro High-Fidelity-Übertragung (T1029)](#geplante-ultra-pro-high-fidelity-übertragung-(t1029))
-- [Ultra-Pro High-Fidelity-Daten-Chunking und -Fragmentierung (T1030)](#ultra-pro-high-fidelity-daten-chunking-und--fragmentierung-(t1030))
-- [Besitzer-/Benutzererkennung für Ultra-Pro-High-Fidelity-Systeme (T1033)](#besitzer-benutzererkennung-für-ultra-pro-high-fidelity-systeme-(t1033))
-- [Ultra-Pro High-Fidelity-Masquerading und Prozesspfadmissbrauch (T1036)](#ultra-pro-high-fidelity-masquerading-und-prozesspfadmissbrauch-(t1036))
-- [Ultra-Pro High-Fidelity ungültige oder gefälschte Code-Signatur (T1036.001)](#ultra-pro-high-fidelity-ungültige-oder-gefälschte-code-signatur-(t1036001))
-- [Ultra-Pro High-Fidelity RTLO-Charakterausführung (T1036.002)](#ultra-pro-high-fidelity-rtlo-charakterausführung-(t1036002))
-- [Ultra-Pro High-Fidelity umbenanntes System-Dienstprogramm (T1036.003)](#ultra-pro-high-fidelity-umbenanntes-system-dienstprogramm-(t1036003))
+- [Windows-LDR-Hijacking (T1027.012)](#windows-ldr-hijacking-(t1027012))
+- [Geplante Übertragung (T1029)](#geplante-übertragung-(t1029))
+- [Daten-Chunking und Fragmentierung (T1030)](#daten-chunking-und-fragmentierung-(t1030))
+- [Systembesitzer-/Benutzererkennung (T1033)](#systembesitzer-benutzererkennung-(t1033))
+- [Masquerading und Prozesspfadmissbrauch (T1036)](#masquerading-und-prozesspfadmissbrauch-(t1036))
+- [Ungültige oder gefälschte Code-Signatur (T1036.001)](#ungültige-oder-gefälschte-code-signatur-(t1036001))
+- [RTLO-Charakterausführung (T1036.002)](#rtlo-charakterausführung-(t1036002))
+- [Umbenannt in System Utility Detection (T1036.003)](#umbenannt-in-system-utility-detection-(t1036003))
 - [Maskierung durch Pfadanomalie (T1036.004)](#maskierung-durch-pfadanomalie-(t1036004))
 - [Legitime Windows-Binärdatei an einen vom Benutzer beschreibbaren Speicherort kopiert](#legitime-windows-binärdatei-an-einen-vom-benutzer-beschreibbaren-speicherort-kopiert)
-- [Ultra-Pro High-Fidelity-Speicherplatz nach Dateinamenmaskierung (T1036.006)](#ultra-pro-high-fidelity-speicherplatz-nach-dateinamenmaskierung-(t1036006))
-- [Ultra-Pro High-Fidelity-Doppeldateierweiterungsausführung (T1036.007)](#ultra-pro-high-fidelity-doppeldateierweiterungsausführung-(t1036007))
-- [Ultra-Pro High-Fidelity-Masquerade-Dateityp durch Interpreter-Missbrauch (T1036.008)](#ultra-pro-high-fidelity-masquerade-dateityp-durch-interpreter-missbrauch-(t1036008))
+- [Leerzeichen nach Dateinamenmaskierung (T1036.006)](#leerzeichen-nach-dateinamenmaskierung-(t1036006))
+- [Ausführung der doppelten Dateierweiterung (T1036.007)](#ausführung-der-doppelten-dateierweiterung-(t1036007))
+- [Maskerade durch Dolmetschermissbrauch (T1036.008)](#maskerade-durch-dolmetschermissbrauch-(t1036008))
 - [Allure Document & RTLO Masquerading Detection](#allure-document-&-rtlo-masquerading-detection)
 - [Persistenz des High-Fidelity-Anmeldeskripts (T1037)](#persistenz-des-high-fidelity-anmeldeskripts-(t1037))
 - [High-Fidelity UserInitMprLogonScript-Persistenz](#high-fidelity-userinitmprlogonscript-persistenz)
@@ -81,7 +81,7 @@
 - [Ultra-Pro-Netzwerk-Anmeldeskript/Verknüpfungsänderung (T1037.003)](#ultra-pro-netzwerk-anmeldeskriptverknüpfungsänderung-(t1037003))
 - [Ultra-Pro RC-Skript und Init.d-Persistenz (T1037.004)](#ultra-pro-rc-skript-und-initd-persistenz-(t1037004))
 - [Persistenz von Ultra-Pro macOS-Startelementen (T1037.005)](#persistenz-von-ultra-pro-macos-startelementen-(t1037005))
-- [Ultra-Pro High-Fidelity Network Share Discovery (T1039)](#ultra-pro-high-fidelity-network-share-discovery-(t1039))
+- [Erkennung und Erfassung von Netzwerkfreigaben (ATT&CK T1039)](#erkennung-und-erfassung-von-netzwerkfreigaben-(att&ck-t1039))
 - [Netzwerk-Sniffing-Erkennung (ATT&CK T1040)](#netzwerk-sniffing-erkennung-(att&ck-t1040))
 - [Exfiltration über C2-Kanal (ATT&CK T1041)](#exfiltration-über-c2-kanal-(att&ck-t1041))
 - [Netzwerkdiensterkennung (ATT&CK T1046)](#netzwerkdiensterkennung-(att&ck-t1046))
@@ -1502,16 +1502,14 @@ Der Schwerpunkt liegt auf Befehlszeilen-Passwortargumenten und der rekursiven Er
 
 
 ---
-## Ultra-Pro High-Fidelity Windows LDR Hijacking (T1027.012)
+## Windows-LDR-Hijacking (T1027.012)
 - **ID:** `T1027_012.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Medium (Mäßiger Geräuschpegel)
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt Versuche, den Windows Loader (LDR) über AppInit_DLLs oder AppCertDLLs zu kapern.
-Es zielt speziell auf DLL-Registrierungen ab, die von Nicht-Systempfaden (Temp, Öffentlich, Benutzerprofile) stammen.
-und die Aktivierung des LoadAppInit_DLLs-Flags durch verdächtige Prozesse.
+- **Beschreibung:** Erkennt Versuche, den Windows Loader (LDR) über AppInit_DLLs oder AppCertDLLs zu kapern.Zielt auf DLL-Registrierungen von Nicht-Systempfaden (Temp, Öffentlich, Benutzerprofile) und die Aktivierung des LoadAppInit_DLLs-Flags durch verdächtige Akteure ab.Filtert legitime Installateure und Systemwartungsprozesse heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**
@@ -1557,7 +1555,7 @@ und die Aktivierung des LoadAppInit_DLLs-Flags durch verdächtige Prozesse.
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Erkennung des aktuellen Benutzers, angemeldeter Benutzer und Token-Berechtigungen.Zielt auf anomale Prozessabläufe (Office-Anwendungen, Browser) und verdächtige Befehlszeilenmuster (/priv, /groups, /all) ab, die häufig vor Versuchen zur Rechteausweitung verwendet werden.Filtert legitime Systemautomatisierungs- und Unternehmensverwaltungsgeräusche heraus.
+- **Beschreibung:** Erkennt die systematische Erkennung des aktuellen Benutzers, angemeldeter Benutzer und Token-Berechtigungen.Zielt auf anomale Prozesslinien (Office-Apps, Browser) und verdächtige Befehlszeilenmuster (/priv, /groups, /all) ab, die häufig vor Versuchen zur Rechteausweitung verwendet werden.Filtert legitime Systemautomatisierungs- und Unternehmensverwaltungsgeräusche heraus.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -1666,7 +1664,7 @@ und die Aktivierung des LoadAppInit_DLLs-Flags durch verdächtige Prozesse.
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt absichtliche Maskierung durch nachgestellte Leerzeichen in ausführbaren Dateinamen oder Verzeichnisnamen (z. B. „malware.exe“).Zielt auf Umgehungen ab, die Leerzeichen verwenden, um stringbasierte Erkennungen zu umgehen, und filtert gleichzeitig gängige Windows Update-, SCCM/MECM- und Systemautomatisierungsgeräusche.
+- **Beschreibung:** Erkennt absichtliche Maskierung durch nachgestellte Leerzeichen in ausführbaren Dateinamen oder Verzeichnisnamen (z. B. „malware.exe“).Zielt auf Umgehungen ab, die Leerzeichen verwenden, um zeichenfolgenbasierte Erkennungen zu umgehen, und filtert gleichzeitig gängige Windows Update-, SCCM/MECM- und Systemautomatisierungsgeräusche.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -1920,7 +1918,7 @@ Subsystem und konzentriert sich auf nicht signierte oder skriptgenerierte Persis
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [FTP.EXE](https://lolbas-project.github.io/lolbas/), [SFTP.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die potenzielle Exfiltration verschlüsselter Daten über symmetrische verschlüsselte Protokolle (SCP, SFTP, Rclone, WinSCP), indem automatisiertes, nicht interaktives Upload-Verhalten in Kombination mit verdächtigen Ausführungspfaden oder ungewöhnlicher Herkunft des übergeordneten Prozesses identifiziert wird.Der Schwerpunkt liegt auf Anmeldeinformationsflags, Stapelausführung und Massenübertragungsvorgängen.
+- **Beschreibung:** Erkennt potenzielle Exfiltration verschlüsselter Daten über symmetrische verschlüsselte Protokolle (SCP, SFTP, Rclone, WinSCP), indem automatisiertes, nicht interaktives Upload-Verhalten in Kombination mit verdächtigen Ausführungspfaden oder ungewöhnlicher Herkunft des übergeordneten Prozesses identifiziert wird.Der Schwerpunkt liegt auf Anmeldeinformationsflags, Stapelausführung und Massenübertragungsvorgängen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

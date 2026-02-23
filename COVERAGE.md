@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-23 12:07:00`
+**Utolsó frissítés:** `2026-02-23 12:48:56`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -66,19 +66,19 @@
 | T1027.009 | CRITICAL | Ultra-Pro High-Fidelity Embedded Payload Extraction (T1027.009) |
 | T1027.010 | HIGH | Ultra-Pro High-Fidelity Command Line Obfuscation (T1027.010) |
 | T1027.011 | HIGH | Ultra-Pro High-Fidelity Suspicious Archive Creation (T1027.011) |
-| T1027.012 | CRITICAL | Ultra-Pro High-Fidelity Windows LDR Hijacking (T1027.012) |
-| T1029 | CRITICAL | Ultra-Pro High-Fidelity Scheduled Transfer (T1029) |
-| T1030 | CRITICAL | Ultra-Pro High-Fidelity Data Chunking and Fragmentation (T1030) |
-| T1033 | HIGH | Ultra-Pro High-Fidelity System Owner/User Discovery (T1033) |
-| T1036 | CRITICAL | Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036), Legitimate Windows Binary Copied to User-Writable Location, Double File Extension Execution (T1036.007) |
-| T1036.001 | CRITICAL | Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001) |
-| T1036.002 | CRITICAL | Ultra-Pro High-Fidelity RTLO Character Execution (T1036.002) |
-| T1036.003 | CRITICAL | Ultra-Pro High-Fidelity Renamed System Utility (T1036.003) |
+| T1027.012 | CRITICAL | Windows LDR Hijacking (T1027.012) |
+| T1029 | CRITICAL | Scheduled Transfer (T1029) |
+| T1030 | CRITICAL | Data Chunking and Fragmentation (T1030) |
+| T1033 | HIGH | System Owner/User Discovery (T1033) |
+| T1036 | CRITICAL | Masquerading and Process Path Abuse (T1036), Legitimate Windows Binary Copied to User-Writable Location, Double File Extension Execution (T1036.007) |
+| T1036.001 | CRITICAL | Invalid or Forged Code Signature (T1036.001) |
+| T1036.002 | CRITICAL | RTLO Character Execution (T1036.002) |
+| T1036.003 | CRITICAL | Renamed System Utility Detection (T1036.003) |
 | T1036.004 | CRITICAL | Masquerading via Path Anomaly (T1036.004) |
 | T1036.005 | HIGH | Legitimate Windows Binary Copied to User-Writable Location |
-| T1036.006 | CRITICAL | Ultra-Pro High-Fidelity Space After Filename Masquerading (T1036.006) |
-| T1036.007 | CRITICAL | Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007) |
-| T1036.008 | CRITICAL | Ultra-Pro High-Fidelity Masquerade File Type via Interpreter Misuse (T1036.008) |
+| T1036.006 | CRITICAL | Space After Filename Masquerading (T1036.006) |
+| T1036.007 | CRITICAL | Double File Extension Execution (T1036.007) |
+| T1036.008 | CRITICAL | Masquerade via Interpreter Misuse (T1036.008) |
 | T1036.009 | CRITICAL | Allure Document & RTLO Masquerading Detection |
 | T1037 | CRITICAL | High-Fidelity Logon Script Persistence (T1037) |
 | T1037.001 | CRITICAL | High-Fidelity UserInitMprLogonScript Persistence |
@@ -86,7 +86,7 @@
 | T1037.003 | CRITICAL | Ultra-Pro Network Logon Script/Shortcut Modification (T1037.003) |
 | T1037.004 | CRITICAL | Ultra-Pro RC Script and Init.d Persistence (T1037.004) |
 | T1037.005 | CRITICAL | Ultra-Pro macOS Startup Items Persistence (T1037.005) |
-| T1039 | CRITICAL | Ultra-Pro High-Fidelity Network Share Discovery (T1039) |
+| T1039 | CRITICAL | Network Share Discovery and Collection (ATT&CK T1039) |
 | T1040 | HIGH | Network Sniffing Detection (ATT&CK T1040) |
 | T1041 | CRITICAL | Exfiltration Over C2 Channel (ATT&CK T1041) |
 | T1046 | HIGH | Network Service Discovery (ATT&CK T1046) |

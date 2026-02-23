@@ -61,19 +61,19 @@
 - [Ultra-Pro High-Fidelity Embedded Payload Extraction (T1027.009)](#ultra-pro-high-fidelity-embedded-payload-extraction-(t1027009))
 - [Ultra-Pro High-Fidelity Command Line Obfuscation (T1027.010)](#ultra-pro-high-fidelity-command-line-obfuscation-(t1027010))
 - [Ultra-Pro High-Fidelity Suspicious Archive Creation (T1027.011)](#ultra-pro-high-fidelity-suspicious-archive-creation-(t1027011))
-- [Ultra-Pro High-Fidelity Windows LDR Hijacking (T1027.012)](#ultra-pro-high-fidelity-windows-ldr-hijacking-(t1027012))
-- [Ultra-Pro High-Fidelity Scheduled Transfer (T1029)](#ultra-pro-high-fidelity-scheduled-transfer-(t1029))
-- [Ultra-Pro High-Fidelity Data Chunking and Fragmentation (T1030)](#ultra-pro-high-fidelity-data-chunking-and-fragmentation-(t1030))
-- [Ultra-Pro High-Fidelity System Owner/User Discovery (T1033)](#ultra-pro-high-fidelity-system-owneruser-discovery-(t1033))
-- [Ultra-Pro High-Fidelity Masquerading and Process Path Abuse (T1036)](#ultra-pro-high-fidelity-masquerading-and-process-path-abuse-(t1036))
-- [Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001)](#ultra-pro-high-fidelity-invalid-or-forged-code-signature-(t1036001))
-- [Ultra-Pro High-Fidelity RTLO Character Execution (T1036.002)](#ultra-pro-high-fidelity-rtlo-character-execution-(t1036002))
-- [Ultra-Pro High-Fidelity Renamed System Utility (T1036.003)](#ultra-pro-high-fidelity-renamed-system-utility-(t1036003))
+- [Windows LDR Hijacking (T1027.012)](#windows-ldr-hijacking-(t1027012))
+- [Scheduled Transfer (T1029)](#scheduled-transfer-(t1029))
+- [Data Chunking and Fragmentation (T1030)](#data-chunking-and-fragmentation-(t1030))
+- [System Owner/User Discovery (T1033)](#system-owneruser-discovery-(t1033))
+- [Masquerading and Process Path Abuse (T1036)](#masquerading-and-process-path-abuse-(t1036))
+- [Invalid or Forged Code Signature (T1036.001)](#invalid-or-forged-code-signature-(t1036001))
+- [RTLO Character Execution (T1036.002)](#rtlo-character-execution-(t1036002))
+- [Renamed System Utility Detection (T1036.003)](#renamed-system-utility-detection-(t1036003))
 - [Masquerading via Path Anomaly (T1036.004)](#masquerading-via-path-anomaly-(t1036004))
 - [Legitimate Windows Binary Copied to User-Writable Location](#legitimate-windows-binary-copied-to-user-writable-location)
-- [Ultra-Pro High-Fidelity Space After Filename Masquerading (T1036.006)](#ultra-pro-high-fidelity-space-after-filename-masquerading-(t1036006))
-- [Ultra-Pro High-Fidelity Double File Extension Execution (T1036.007)](#ultra-pro-high-fidelity-double-file-extension-execution-(t1036007))
-- [Ultra-Pro High-Fidelity Masquerade File Type via Interpreter Misuse (T1036.008)](#ultra-pro-high-fidelity-masquerade-file-type-via-interpreter-misuse-(t1036008))
+- [Space After Filename Masquerading (T1036.006)](#space-after-filename-masquerading-(t1036006))
+- [Double File Extension Execution (T1036.007)](#double-file-extension-execution-(t1036007))
+- [Masquerade via Interpreter Misuse (T1036.008)](#masquerade-via-interpreter-misuse-(t1036008))
 - [Allure Document & RTLO Masquerading Detection](#allure-document-&-rtlo-masquerading-detection)
 - [High-Fidelity Logon Script Persistence (T1037)](#high-fidelity-logon-script-persistence-(t1037))
 - [High-Fidelity UserInitMprLogonScript Persistence](#high-fidelity-userinitmprlogonscript-persistence)
@@ -81,7 +81,7 @@
 - [Ultra-Pro Network Logon Script/Shortcut Modification (T1037.003)](#ultra-pro-network-logon-scriptshortcut-modification-(t1037003))
 - [Ultra-Pro RC Script and Init.d Persistence (T1037.004)](#ultra-pro-rc-script-and-initd-persistence-(t1037004))
 - [Ultra-Pro macOS Startup Items Persistence (T1037.005)](#ultra-pro-macos-startup-items-persistence-(t1037005))
-- [Ultra-Pro High-Fidelity Network Share Discovery (T1039)](#ultra-pro-high-fidelity-network-share-discovery-(t1039))
+- [Network Share Discovery and Collection (ATT&CK T1039)](#network-share-discovery-and-collection-(att&ck-t1039))
 - [Network Sniffing Detection (ATT&CK T1040)](#network-sniffing-detection-(att&ck-t1040))
 - [Exfiltration Over C2 Channel (ATT&CK T1041)](#exfiltration-over-c2-channel-(att&ck-t1041))
 - [Network Service Discovery (ATT&CK T1046)](#network-service-discovery-(att&ck-t1046))
@@ -1552,16 +1552,14 @@ Focuses on command-line password arguments and recursive collection from sensiti
 
 
 ---
-## Ultra-Pro High-Fidelity Windows LDR Hijacking (T1027.012)
+## Windows LDR Hijacking (T1027.012)
 - **ID:** `T1027_012.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Közepes (Mérsékelt zajszint)
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REG.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects attempts to hijack the Windows loader (LDR) via AppInit_DLLs or AppCertDLLs. 
-It specifically targets DLL registrations originating from non-system paths (Temp, Public, User profiles) 
-and the activation of the LoadAppInit_DLLs flag by suspicious processes.
+- **Leírás:** Detects attempts to hijack the Windows loader (LDR) via AppInit_DLLs or AppCertDLLs. Targets DLL registrations from non-system paths (Temp, Public, User profiles) and activation of LoadAppInit_DLLs flag by suspicious actors. Filters out legitimate installers and system maintenance processes.
 
 
 #### 🚨 Response Playbook

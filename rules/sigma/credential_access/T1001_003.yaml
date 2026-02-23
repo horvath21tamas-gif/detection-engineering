@@ -1,54 +1,62 @@
-title: Ultra-Pro High-Fidelity Protocol Impersonation (T1001.003)
+title: Protocol Impersonation (T1001.003)
 id: c0591b1f-d374-4409-b7ab-9bc9be8ff6de
 status: stable
 description: |
-    Detects protocol impersonation by identifying manual manipulation of network headers 
-    and anomalous User-Agent strings within script interpreters, specifically 
-    targeting attempts to mimic mobile devices or search crawlers from non-browser processes.
+  Detects protocol impersonation attempts by monitoring for:
+  - Manual manipulation of HTTP/S headers in scripts
+  - Anomalous or spoofed User-Agent strings
+  - Non-browser processes attempting to mimic mobile devices, crawlers, or other client types
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.command_and_control
-    - attack.t1001.003
+  - attack.command_and_control
+  - attack.t1001.003
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_header_logic:
-        CommandLine|contains:
-            - '.Headers.Add('              
-            - 'WinHttp.WinHttpRequest'    
-            - 'msxml2.xmlhttp'          
-            - 'Net.Sockets.TcpClient'     
-            - 'Net.WebClient).Download'    
+  selection_header_logic:
+    CommandLine|contains:
+      - '.Headers.Add('
+      - 'WinHttp.WinHttpRequest'
+      - 'msxml2.xmlhttp'
+      - 'Net.Sockets.TcpClient'
+      - 'Net.WebClient).Download'
 
-    selection_spoofed_ua:
-        CommandLine|contains:
-            - 'Mozilla/4.0'           
-            - 'iPhone'                    
-            - 'Googlebot'               
-            - 'Baiduspider'
-            - 'curl/'                     
+  selection_spoofed_ua:
+    CommandLine|contains:
+      - 'Mozilla/4.0'
+      - 'iPhone'
+      - 'Android'
+      - 'Googlebot'
+      - 'Baiduspider'
+      - 'curl/'
 
-    selection_procs:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\wscript.exe'
-            - '\cscript.exe'
-            - '\rundll32.exe'
-            - '\mshta.exe'
+  selection_procs:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\rundll32.exe'
+      - '\mshta.exe'
 
-    filter_legit_infra:
-        - Image|endswith:
-            - '\chrome.exe'               
-            - '\msedge.exe'
-            - '\firefox.exe'
-        - CommandLine|contains:
-            - 'C:\Program Files\'
-            - 'Microsoft\Azure'           
-            - 'Chocolatey'
-        - username: 'NT AUTHORITY\SYSTEM'    
+  filter_legit_infra:
+    Image|endswith:
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\firefox.exe'
+    CommandLine|contains:
+      - 'C:\Program Files\'
+      - 'Microsoft\Azure'
+      - 'Chocolatey'
+    username: 'NT AUTHORITY\SYSTEM'
 
-    condition: (selection_header_logic and selection_procs) or (selection_spoofed_ua and selection_procs) and not filter_legit_infra
+  condition: >
+    ((selection_header_logic and selection_procs)
+     or (selection_spoofed_ua and selection_procs))
+    and not filter_legit_infra
+
 level: high

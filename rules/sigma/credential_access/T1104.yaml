@@ -1,53 +1,54 @@
-title: Ultra-Pro High-Fidelity Multi-Stage C2 (T1104)
+title: Multi-Stage C2 (T1104)
 id: 6a11584b-d797-4636-b63e-14bd6d35e43f
 status: stable
 description: |
-    Detects multi-stage C2 communication by identifying fileless execution patterns 
-    where the result of a network request is piped directly into memory-load 
-    functions or script evaluators without intermediate disk writes.
+  Detects multi-stage command-and-control (C2) activity by identifying fileless execution patterns 
+  where the result of network requests is piped directly into memory-load functions or script evaluators 
+  without intermediate disk writes.
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.command_and_control
-    - attack.t1104
+  - attack.command_and_control
+  - attack.t1104
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_fileless_logic:
-        CommandLine|contains:
-            - 'IEX(New-Object'              
-            - 'IEX (New-Object'
-            - 'Invoke-Expression(Invoke-WebRequest'
-            - '.Run((New-Object'           
-            - '[System.Reflection.Assembly]::Load(' 
-            - ' -Command - '                
+  selection_fileless_logic:
+    CommandLine|contains:
+      - 'IEX(New-Object'                          
+      - 'IEX (New-Object'                          
+      - 'Invoke-Expression(Invoke-WebRequest'      
+      - '.Run((New-Object'                         
+      - '[System.Reflection.Assembly]::Load('      
+      - ' -Command - '                              
 
-    selection_stage_indicators:
-        CommandLine|contains:
-            - 'DownloadString'              
-            - 'DownloadData'                
-            - 'FromBase64String'            
-            - 'GzipStream'                 
+  selection_stage_indicators:
+    CommandLine|contains:
+      - 'DownloadString'                           
+      - 'DownloadData'                      
+      - 'FromBase64String'                         
+      - 'GzipStream'                              
 
-    selection_procs:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\mshta.exe'
-            - '\rundll32.exe'
-            - '\regsvr32.exe'
-            - '\cscript.exe'
+  selection_procs:
+    Image|endswith:
+      - '\powershell.exe'                        
+      - '\pwsh.exe'                                
+      - '\mshta.exe'                               
+      - '\rundll32.exe'                         
+      - '\regsvr32.exe'                           
+      - '\cscript.exe'                         
 
-    filter_legit_infra:
-        - CommandLine|contains:
-            - 'C:\Program Files\'
-            - 'Chocolatey'                  
-            - 'Microsoft\Azure'            
-            - 'HealthCheck'
-        - username: 'NT AUTHORITY\SYSTEM'       
-        - ParentImage|endswith:
-            - '\services.exe'
+  filter_legit_infra:
+    CommandLine|contains:
+      - 'C:\Program Files\'                      
+      - 'Chocolatey'                              
+      - 'Microsoft\Azure'                          
+      - 'HealthCheck'                             
+    username: 'NT AUTHORITY\SYSTEM'               
+    ParentImage|endswith:
+      - '\services.exe'                            
 
-    condition: selection_fileless_logic and selection_stage_indicators and selection_procs and not filter_legit_infra
+  condition: selection_fileless_logic and selection_stage_indicators and selection_procs and not filter_legit_infra
+
 level: critical

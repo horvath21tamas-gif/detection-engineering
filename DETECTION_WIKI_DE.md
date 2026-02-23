@@ -3790,7 +3790,7 @@ Serialisierung in temporäre/öffentliche Verzeichnisse.
 
 
 ---
-## Ultra-Pro-High-Fidelity-E-Mail-Ernte-Anomalie (T1114)
+## Anomalie beim E-Mail-Ernten (T1114)
 - **ID:** `T1114.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

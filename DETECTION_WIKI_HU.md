@@ -3790,7 +3790,7 @@ szerializálás ideiglenes/nyilvános könyvtárakra.
 
 
 ---
-## Ultra-Pro High-Fidelity e-mail-gyűjtési anomália (T1114)
+## E-mail betakarítási anomália (T1114)
 - **ID:** `T1114.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -3940,10 +3940,10 @@ Szűri a legitim kommunikációs alkalmazásokat a téves pozitívumok csökkent
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 - **Leírás:** Érzékeli a célzott rendszeridő- és időzóna-felderítési technikákat.
 A következőkre összpontosít:
-- Gyanús folyamatvonalak (irodai alkalmazások, webszerverek, parancsfájl-gazdagépek)
+- Gyanús folyamatvonalak (irodai alkalmazások, webszerverek, szkriptgazdagok)
 - A homokozók elkerülésére vagy a geokerítésre általánosan használt automatizálási minták
 - Az időszámláláshoz használt CLI-eszközök és PowerShell/.NET API-k
-Nem tartalmazza az ismert rendszert, felügyeletet és jóindulatú automatizálást a hamis pozitívumok csökkentésére.
+Nem tartalmazza az ismert rendszereket, felügyeletet és jóindulatú automatizálást a hamis pozitívumok csökkentésére.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -3995,11 +3995,11 @@ A fájl nélküli vagy oldalsó C2-végrehajtási kísérletek nagy pontosságú
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a rosszindulatú MSBuild.exe proxy végrehajtását a következő megfigyeléssel:
+- **Leírás:** Észleli a rosszindulatú MSBuild.exe proxy végrehajtását a következő megfigyeléssel:
 - Rendellenes szülői folyamatok (irodai alkalmazások, böngészők, szkriptek)
 - Gyanús parancssori argumentumok (inline XML feladatok, távoli elérési utak)
 - Nem tartalmazza a szabványos fejlesztői és CI/CD környezeteket (Visual Studio, Jenkins, Build Agents)
-Segít észlelni a fájl nélküli vagy C2 hasznos terhelések telepítését az MSBuild segítségével anélkül, hogy a szabványos fejlesztői eszköz riasztásait kiváltaná.
+Segít észlelni a fájl nélküli vagy C2 hasznos terhek telepítését az MSBuild segítségével anélkül, hogy a szabványos fejlesztői eszköz riasztásait kiváltaná.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

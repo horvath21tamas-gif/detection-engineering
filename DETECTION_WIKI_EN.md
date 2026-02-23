@@ -3974,7 +3974,7 @@ serialization to temporary/public directories.
 
 
 ---
-## Ultra-Pro High-Fidelity Email Harvesting Anomaly (T1114)
+## Email Harvesting Anomaly (T1114)
 - **ID:** `T1114.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

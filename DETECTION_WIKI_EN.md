@@ -3438,7 +3438,7 @@ CI/CD and automation workloads based on process lineage and user context.
 
 
 ---
-## Ultra-Pro High-Fidelity Proxy & Pivot Point Detection (T1090)
+## Proxy & Pivot Point Detection (T1090)
 - **ID:** `T1090.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -3446,8 +3446,9 @@ CI/CD and automation workloads based on process lineage and user context.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects the creation of network proxies and port forwarding rules by correlating 
-high-risk native binaries (Netsh) with pivot-specific arguments that map 
-external listening ports to internal network assets.
+high-risk native binaries (Netsh, PowerShell) with pivot-specific arguments that map 
+external listening ports to internal network assets. Designed to exclude legitimate 
+virtualization and loopback traffic.
 
 
 #### 🚨 Response Playbook

@@ -3284,7 +3284,7 @@ CI/CD és automatizálási munkaterhelések a folyamatvonal és a felhasználói
 
 
 ---
-## Ultra-Pro High-Fidelity proxy és forgáspont-észlelés (T1090)
+## Proxy és forgáspont-észlelés (T1090)
 - **ID:** `T1090.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -3292,8 +3292,9 @@ CI/CD és automatizálási munkaterhelések a folyamatvonal és a felhasználói
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Korrelációval észleli a hálózati proxy-k és porttovábbítási szabályok létrehozását
-magas kockázatú natív bináris fájlok (Netsh) pivot-specifikus argumentumokkal, amelyek leképeznek
-külső figyelő portok a belső hálózati eszközökhöz.
+magas kockázatú natív bináris fájlok (Netsh, PowerShell) pivot-specifikus argumentumokkal, amelyek leképeznek
+külső figyelő portok a belső hálózati eszközökhöz.Úgy tervezték, hogy kizárja a legitim
+virtualizáció és visszacsatolási forgalom.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

@@ -3284,7 +3284,7 @@ CI/CD- und Automatisierungs-Workloads basierend auf Prozessherkunft und Benutzer
 
 
 ---
-## Ultraprofessioneller High-Fidelity-Proxy und Pivot-Punkt-Erkennung (T1090)
+## Proxy- und Pivot-Punkt-Erkennung (T1090)
 - **ID:** `T1090.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
@@ -3292,8 +3292,9 @@ CI/CD- und Automatisierungs-Workloads basierend auf Prozessherkunft und Benutzer
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [NETSH.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt die Erstellung von Netzwerk-Proxys und Port-Weiterleitungsregeln durch Korrelation
-Hochriskante native Binärdateien (Netsh) mit Pivot-spezifischen Argumenten, die zugeordnet werden können
-externe Überwachungsports zu internen Netzwerkressourcen.
+Hochriskante native Binärdateien (Netsh, PowerShell) mit Pivot-spezifischen Argumenten, die zugeordnet werden können
+externe Überwachungsports zu internen Netzwerkressourcen.Entwickelt, um Legitimität auszuschließen
+Virtualisierung und Loopback-Verkehr.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

@@ -1330,16 +1330,14 @@ parancsok, amelyek a gyanús útvonalakon lévő végrehajtható fájlokat célo
 
 
 ---
-## Ultra-Pro High-Fidelity szoftvercsomagolási esemény (T1027.002)
+## Szoftvercsomagolási esemény (T1027.002)
 - **ID:** `T1027_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a bináris csomagolók (UPX, MPRESS stb.) használatát nem szabványos környezetben.
-Azokra a parancssori mintákra összpontosít, amelyeket a nagy tömörítéshez/elhomályosításhoz használnak és
-gyanús szülői folyamatok vonalai.
+- **Leírás:** Érzékeli a bináris csomagolók (UPX, MPRESS, ASPack stb.) használatát nem szabványos vagy gyanús környezetben.A nagy tömörítési és elfedési parancssori mintákra, valamint a gyanús szülőfolyamatokra összpontosít, miközben szűri a jogszerű fejlesztéseket és a CI/CD munkafolyamatokat.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

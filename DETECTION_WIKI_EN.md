@@ -1370,16 +1370,14 @@ commands targeting executable files in suspicious paths.
 
 
 ---
-## Ultra-Pro High-Fidelity Software Packing Event (T1027.002)
+## Software Packing Event (T1027.002)
 - **ID:** `T1027_002.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects the use of binary packers (UPX, MPRESS, etc.) in non-standard environments. 
-Focuses on command-line patterns used for high-compression/obfuscation and 
-suspicious parent process lineages.
+- **Leírás:** Detects the use of binary packers (UPX, MPRESS, ASPack, etc.)  in non-standard or suspicious environments. Focuses on high-compression and obfuscation command-line patterns as well as suspicious parent processes, while filtering legitimate development and CI/CD workflows.
 
 
 #### 🚨 Response Playbook

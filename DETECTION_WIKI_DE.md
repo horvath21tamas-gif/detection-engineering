@@ -1330,16 +1330,14 @@ Befehle, die auf ausführbare Dateien in verdächtigen Pfaden abzielen.
 
 
 ---
-## Ultra-Pro High-Fidelity-Software-Verpackungsveranstaltung (T1027.002)
+## Software-Packungsereignis (T1027.002)
 - **ID:** `T1027_002.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🟠 (high)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [MSBUILD.EXE](https://lolbas-project.github.io/lolbas/), [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die Verwendung von Binärpackern (UPX, MPRESS usw.) in nicht standardmäßigen Umgebungen.
-Konzentriert sich auf Befehlszeilenmuster, die für hohe Komprimierung/Verschleierung verwendet werden
-verdächtige übergeordnete Prozesslinien.
+- **Beschreibung:** Erkennt die Verwendung von Binärpackern (UPX, MPRESS, ASPack usw.) in nicht standardmäßigen oder verdächtigen Umgebungen.Konzentriert sich auf Befehlszeilenmuster mit hoher Komprimierung und Verschleierung sowie verdächtige übergeordnete Prozesse und filtert gleichzeitig legitime Entwicklungs- und CI/CD-Workflows.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

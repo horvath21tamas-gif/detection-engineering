@@ -1590,14 +1590,12 @@ Optimiert, um legitimes Windows Update- und Seitenladeverhalten herauszufiltern.
 
 
 ---
-## Ultra-Pro High-Fidelity ungültige oder gefälschte Code-Signatur (T1036.001)
+## Ungültige oder gefälschte Code-Signatur (T1036.001)
 - **ID:** `T1036_001.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt kritische Systemprozesse (z. B. lsass, svchost), die mit ungültigen,
-nicht vertrauenswürdige oder gefälschte digitale Signaturen.Konzentriert sich auf Identitätssignatur
-Nichtübereinstimmungen und Tippfehler des Herausgebers, um Entwicklerlärm zu eliminieren.
+- **Beschreibung:** Erkennt kritische Windows-Systemprozesse (z. B. lsass.exe, svchost.exe), die mit ungültigen, nicht vertrauenswürdigen oder gefälschten digitalen Signaturen ausgeführt werden.Konzentriert sich auf Identitäts-Signatur-Nichtübereinstimmungen und Tippfehler von Herausgebern und filtert gleichzeitig legitim signierte Binärdateien und Entwicklergeräusche.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

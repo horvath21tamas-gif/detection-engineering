@@ -1645,14 +1645,12 @@ Optimized to filter out legitimate Windows Update and side-loading behaviors.
 
 
 ---
-## Ultra-Pro High-Fidelity Invalid or Forged Code Signature (T1036.001)
+## Invalid or Forged Code Signature (T1036.001)
 - **ID:** `T1036_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects critical system processes (e.g., lsass, svchost) running with invalid, 
-untrusted, or forged digital signatures. Focuses on identity-signature 
-mismatch and publisher typosquatting to eliminate developer noise.
+- **Leírás:** Detects critical Windows system processes (e.g., lsass.exe, svchost.exe) running with invalid, untrusted, or forged digital signatures. Focuses on identity-signature mismatches and publisher typosquatting while filtering legitimate signed binaries and developer noise.
 
 
 #### 🚨 Response Playbook

@@ -1590,14 +1590,12 @@ A jogos Windows Update és az oldalsó betöltési viselkedés kiszűrésére op
 
 
 ---
-## Ultra-Pro High-Fidelity érvénytelen vagy hamisított kódaláírás (T1036.001)
+## Érvénytelen vagy hamisított kódaláírás (T1036.001)
 - **ID:** `T1036_001.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli a kritikus rendszerfolyamatokat (pl. lsass, svchost), amelyek érvénytelenekkel futnak,
-nem megbízható vagy hamisított digitális aláírások.A személyazonosság-aláírásra összpontosít
-eltérés és a kiadói elgépelés a fejlesztői zaj kiküszöbölése érdekében.
+- **Leírás:** Érzékeli a kritikus Windows rendszerfolyamatokat (pl. lsass.exe, svchost.exe), amelyek érvénytelen, nem megbízható vagy hamisított digitális aláírással futnak.Az identitás-aláírás eltéréseire és a kiadói elírásokra összpontosít, miközben kiszűri a jogos aláírt binárisokat és a fejlesztői zajt.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

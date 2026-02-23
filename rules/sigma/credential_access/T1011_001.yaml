@@ -1,53 +1,60 @@
-title: Ultra-Pro High-Fidelity BLE Advertising Exfiltration (T1011.001)
+title: BLE Advertising Exfiltration (T1011.001)
 id: 5611984d-ae1a-4905-b5e9-1cab05973801
 status: stable
 description: |
-    Detects covert data exfiltration via BLE Advertising frames by identifying 
-    unauthorized processes invoking WinRT BluetoothLEAdvertisementPublisher 
-    APIs to broadcast custom manufacturer data payloads.
+  Detects covert data exfiltration via BLE Advertising frames by identifying 
+  unauthorized processes invoking WinRT BluetoothLEAdvertisementPublisher 
+  APIs to broadcast custom manufacturer data payloads.
 author: hota05
 date: 2026-02-09
 tags:
-    - attack.exfiltration
-    - attack.t1011.001
+  - attack.exfiltration
+  - attack.t1011.001
+
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
+
 detection:
-    selection_api_usage:
-        CommandLine|contains:
-            - 'BluetoothLEAdvertisement'     
-            - 'BluetoothLEManufacturerData'   
-            - 'ManufacturerId'               
-            - 'DataSection'                   
-            - 'Publisher.Start()'             
+  selection_api_usage:
+    CommandLine|contains:
+      - 'BluetoothLEAdvertisement'
+      - 'BluetoothLEManufacturerData'
+      - 'ManufacturerId'
+      - 'DataSection'
+      - 'Publisher.Start()'
 
-    selection_runtime:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-            - '\python.exe'                  
-            - '\csc.exe'                       
+  selection_runtime:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\python.exe'
+      - '\csc.exe'
 
-    selection_context:
-        - Image|contains:
-            - '\Users\'
-            - '\AppData\'
-            - '\Temp\'
-        - ParentImage|endswith:
-            - '\winword.exe'              
-            - '\excel.exe'
-            - '\outlook.exe'
-            - '\explorer.exe'                
+  selection_context:
+    Image|contains:
+      - '\Users\'
+      - '\AppData\'
+      - '\Temp\'
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+      - '\explorer.exe'
 
-    filter_legit_services:
-        - Image|contains:
-            - '\Program Files\'
-            - '\System32\svchost.exe'       
-        - CommandLine|contains:
-            - 'Microsoft.YourPhone'         
-            - 'NearbySharing'                
-        - username: 'NT AUTHORITY\SYSTEM'
+  filter_legit_services:
+    Image|contains:
+      - '\Program Files\'
+      - '\System32\svchost.exe'
+    CommandLine|contains:
+      - 'Microsoft.YourPhone'
+      - 'NearbySharing'
+    username: 'NT AUTHORITY\SYSTEM'
 
-    condition: selection_api_usage and selection_runtime and selection_context and not filter_legit_services
+  condition: >
+    selection_api_usage and
+    selection_runtime and
+    selection_context and
+    not filter_legit_services
+
 level: critical

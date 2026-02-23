@@ -16,7 +16,7 @@ logsource:
   product: windows
 detection:
   selection_removable:
-    TargetFilename: '^[D-Z]:\\.*'
+    filename: '^[D-Z]:\\.*'
 
   selection_suspicious_files:
     TargetFilename|contains:

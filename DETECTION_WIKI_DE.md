@@ -3392,7 +3392,7 @@ Angriffe, während gängige tragbare Anwendungen herausgefiltert werden.
 
 
 ---
-## Ultra-Pro High-Fidelity-Wechselmedien C2-Anomalie (T1071.002 / T1092)
+## Wechselmedien-C2-Anomalie (T1071.002 / T1092)
 - **ID:** `T1092.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

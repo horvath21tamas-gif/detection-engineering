@@ -3392,7 +3392,7 @@ támadásokat, miközben kiszűri a gyakori hordozható alkalmazásokat.
 
 
 ---
-## Ultra-Pro High-Fidelity cserélhető adathordozó C2 anomália (T1071.002 / T1092)
+## C2 cserélhető adathordozó anomália (T1071.002 / T1092)
 - **ID:** `T1092.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

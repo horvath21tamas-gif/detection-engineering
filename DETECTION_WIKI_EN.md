@@ -3552,7 +3552,7 @@ attacks while filtering out common portable applications.
 
 
 ---
-## Ultra-Pro High-Fidelity Removable Media C2 Anomaly (T1071.002 / T1092)
+## Removable Media C2 Anomaly (T1071.002 / T1092)
 - **ID:** `T1092.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
@@ -3560,7 +3560,7 @@ attacks while filtering out common portable applications.
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXPLORER.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [REGSVR32.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Detects unauthorized C2 or data staging via removable media by identifying 
-non-interactive processes accessing hidden/system files on USB volumes, 
+non-interactive processes accessing hidden/system files on USB volumes,
 focusing on automated script execution and Alternate Data Stream (ADS) abuse.
 
 

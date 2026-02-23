@@ -1,64 +1,99 @@
-title: Ultra-Pro High-Fidelity Network Sniffing Detection (T1040)
+title: Network Sniffing Detection (ATT&CK T1040)
 id: ac19d0e3-b22b-4a78-8729-97fbed28c876
 status: stable
-description: |
-    Detects unauthorized network sniffing by monitoring for administrative tools 
-    used in capture mode, driver installation for packet interception, 
-    and offensive sniffing frameworks running from untrusted paths.
+description: >
+  Detects unauthorized packet capture and network sniffing activity by identifying
+  native Windows capture utilities, third-party sniffing frameworks, packet
+  interception driver installation attempts, and execution from suspicious
+  user-space locations. Focuses on capture-mode invocation rather than mere
+  tool presence to reduce false positives.
 author: hota05
-date: 2026-02-04
+date: 2026-02-23
+references:
+  - https://attack.mitre.org/techniques/T1040/
 tags:
-    - attack.credential_access
-    - attack.t1040
+  - attack.credential_access
+  - attack.t1040
+  - attack.collection
+  - attack.discovery
+  - attack.host
+
 logsource:
-    category: process_creation
-    product: windows
+  product: windows
+  category: process_creation
+
 detection:
-    selection_native_sniff:
-        - Image|endswith: '\netsh.exe'
-          CommandLine|contains:
-              - 'trace start'
-              - 'capture=yes' 
-              - 'report=yes'
-        - Image|endswith: '\pktmon.exe' 
-          CommandLine|contains:
-              - 'start'
-              - 'capture'
-              - '--etw'
+  selection_native_capture:
+    - Image|endswith: '\netsh.exe'
+      CommandLine|contains:
+        - 'trace start'
+        - 'capture=yes'
+        - 'report=yes'
+        - 'persistent=yes'
+    - Image|endswith: '\pktmon.exe'
+      CommandLine|contains:
+        - 'start'
+        - 'capture'
+        - '--etw'
+        - '--pkt-size'
 
-    selection_driver_install:
-        CommandLine|contains:
-            - 'npcap'
-            - 'winpcap'
-            - 'packet.dll'
-            - 'wpcap.dll'
-            - 'ndiscap.sys' 
+  selection_driver_installation:
+    CommandLine|contains:
+      - 'npcap'
+      - 'winpcap'
+      - 'packet.dll'
+      - 'wpcap.dll'
+      - 'ndiscap.sys'
+      - 'npf.sys'
 
-    selection_offensive:
-        - Image|endswith:
-            - '\tshark.exe'
-            - '\windump.exe'
-            - '\ettercap.exe'
-            - '\bettercap.exe'
-            - '\dsniff.exe'
-        - CommandLine|contains:
-            - 'responder'      
-            - 'scapy'          
-            - '-i eth0'        
+  selection_offensive_tools:
+    Image|endswith:
+      - '\tshark.exe'
+      - '\windump.exe'
+      - '\ettercap.exe'
+      - '\bettercap.exe'
+      - '\dsniff.exe'
+      - '\tcpdump.exe'
+    CommandLine|contains:
+      - '-i '
+      - '--interface'
+      - 'responder'
+      - 'scapy'
+      - '-w '
 
-    selection_untrusted_source:
-        Image|contains:
-            - '\Users\'
-            - '\Temp\'
-            - '\Downloads\'
-            - '\Public\'
+  selection_untrusted_path:
+    Image|contains:
+      - '\Users\'
+      - '\Temp\'
+      - '\Downloads\'
+      - '\Public\'
+      - '\AppData\'
 
-    filter_authorized_admin:
-        Image|contains:
-            - '\Program Files\Wireshark\'
-            - '\Program Files\Microsoft Message Analyzer\'
-            - '\Windows\System32\wbem\wmiprvse.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+  selection_user_context:
+    IntegrityLevel: 'Medium'
 
-    condition: (selection_native_sniff or selection_driver_install or selection_offensive) and selection_untrusted_source and not filter_authorized_admin
+  filter_authorized_activity:
+    - Image|contains:
+        - '\Program Files\Wireshark\'
+        - '\Program Files\Npcap\'
+        - '\Program Files\Microsoft Message Analyzer\'
+    - ParentImage|endswith:
+        - '\services.exe'
+        - '\svchost.exe'
+    - username: 'NT AUTHORITY\SYSTEM'
+
+  condition:
+    (selection_native_capture
+      or selection_driver_installation
+      or selection_offensive_tools)
+    and selection_untrusted_path
+    and selection_user_context
+    and not filter_authorized_activity
+
+falsepositives:
+  - Authorized network troubleshooting by IT administrators
+  - Incident response packet capture during investigations
+  - Security tooling using Npcap or tshark legitimately
+  - Developer testing with packet analysis utilities
+
 level: high

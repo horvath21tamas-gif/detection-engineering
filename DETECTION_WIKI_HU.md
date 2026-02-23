@@ -1841,16 +1841,14 @@ alrendszerben, és az aláíratlan vagy szkript által generált tartósságra �
 
 
 ---
-## Ultra-Pro High-Fidelity Network Share Discovery (T1039)
+## Hálózati megosztások felfedezése és gyűjtése (ATT&CK T1039)
 - **ID:** `T1039.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli a hálózati megosztásokból származó érzékeny adatok szisztematikus felfedezését és gyűjtését
-rekurzív fájlfelsorolás azonosításával UNC elérési utak használatával, kombinálva a
-kimenet átirányítása vagy tömeges archiválása nem szabványos folyamatkörnyezetekből.
+- **Leírás:** Érzékeli az érzékeny adatok szisztematikus felderítését és gyűjtését a hálózati megosztásokról az UNC-útvonalak rekurzív felsorolásának azonosításával, kombinálva állomásoztatással, kimenet átirányítással, tömörítéssel vagy érzékeny fájltípusok célzásával.A tömeges felfedezésre és a nem adminisztratív vagy gyanús folyamatkörnyezetekből végrehajtott gyűjtési viselkedésre összpontosít.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

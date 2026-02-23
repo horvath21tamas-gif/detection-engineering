@@ -1911,16 +1911,14 @@ subsystem and focusing on unsigned or script-generated persistence.
 
 
 ---
-## Ultra-Pro High-Fidelity Network Share Discovery (T1039)
+## Network Share Discovery and Collection (ATT&CK T1039)
 - **ID:** `T1039.yaml`
-- **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
+- **Minőségi mutató:** `90/100` ⭐⭐⭐⭐⭐ (Kiváló)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects systematic discovery and collection of sensitive data from network shares 
-by identifying recursive file enumeration using UNC paths, combined with 
-output redirection or mass archival from non-standard process contexts.
+- **Leírás:** Detects systematic discovery and collection of sensitive data from network shares by identifying recursive enumeration of UNC paths combined with staging, output redirection, compression, or targeting of sensitive file types. Focuses on bulk discovery and collection behavior executed from non-administrative or suspicious process contexts.
 
 
 #### 🚨 Response Playbook

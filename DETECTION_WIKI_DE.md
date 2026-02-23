@@ -1841,16 +1841,14 @@ Subsystem und konzentriert sich auf nicht signierte oder skriptgenerierte Persis
 
 
 ---
-## Ultra-Pro High-Fidelity Network Share Discovery (T1039)
+## Erkennung und Erfassung von Netzwerkfreigaben (ATT&CK T1039)
 - **ID:** `T1039.yaml`
-- **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
+- **Qualitätsindikator:** `90/100` ⭐⭐⭐⭐⭐ (Exzellent)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [RUNDLL32.EXE](https://lolbas-project.github.io/lolbas/), [TAR.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die systematische Entdeckung und Sammlung sensibler Daten aus Netzwerkfreigaben
-durch Identifizieren der rekursiven Dateiaufzählung mithilfe von UNC-Pfaden, kombiniert mit
-Ausgabeumleitung oder Massenarchivierung aus nicht standardmäßigen Prozesskontexten.
+- **Beschreibung:** Erkennt die systematische Erkennung und Sammlung sensibler Daten aus Netzwerkfreigaben durch die Identifizierung der rekursiven Aufzählung von UNC-Pfaden in Kombination mit Staging, Ausgabeumleitung, Komprimierung oder Targeting sensibler Dateitypen.Konzentriert sich auf das Massenerkennungs- und Sammlungsverhalten, das aus nicht-administrativen oder verdächtigen Prozesskontexten ausgeführt wird.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -1946,7 +1944,7 @@ Ausgabeumleitung oder Massenarchivierung aus nicht standardmäßigen Prozesskont
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [CMD.EXE](https://lolbas-project.github.io/lolbas/), [CSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [FTP.EXE](https://lolbas-project.github.io/lolbas/), [SFTP.EXE](https://lolbas-project.github.io/lolbas/), [WSCRIPT.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt potenzielle Exfiltration verschlüsselter Daten über symmetrische verschlüsselte Protokolle (SCP, SFTP, Rclone, WinSCP), indem automatisiertes, nicht interaktives Upload-Verhalten in Kombination mit verdächtigen Ausführungspfaden oder ungewöhnlicher Herkunft des übergeordneten Prozesses identifiziert wird.Der Schwerpunkt liegt auf Anmeldeinformationsflags, Stapelausführung und Massenübertragungsvorgängen.
+- **Beschreibung:** Erkennt die potenzielle Exfiltration verschlüsselter Daten über symmetrische verschlüsselte Protokolle (SCP, SFTP, Rclone, WinSCP), indem automatisiertes, nicht interaktives Upload-Verhalten in Kombination mit verdächtigen Ausführungspfaden oder ungewöhnlicher Herkunft des übergeordneten Prozesses identifiziert wird.Der Schwerpunkt liegt auf Anmeldeinformationsflags, Stapelausführung und Massenübertragungsvorgängen.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

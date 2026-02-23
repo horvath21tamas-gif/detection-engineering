@@ -2982,16 +2982,17 @@ anti-forensic utilities, while filtering out legitimate installer behavior.
 
 
 ---
-## Ultra-Pro High-Fidelity Network History and RDP Trace Removal (T1070.007)
+## Network History and RDP Trace Removal (T1070.007)
 - **ID:** `T1070_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RESET.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted attempts to clear network connection history, focusing on RDP 
-Terminal Server Client MRU lists and network share metadata removal. 
-Filters out common helpdesk troubleshooting (DNS flush) unless part of a broader attack.
+- **Leírás:** Detects targeted attempts to clear network connection history, focusing on RDP
+Terminal Server Client MRU lists, network share metadata removal, and DNS cache
+flushes from suspicious process chains. Filters out common administrative
+and helpdesk actions unless part of broader attack activity.
 
 
 #### 🚨 Response Playbook
@@ -3001,16 +3002,16 @@ Filters out common helpdesk troubleshooting (DNS flush) unless part of a broader
 
 
 ---
-## Ultra-Pro High-Fidelity Email Storage and Database Destruction (T1070.008)
+## Email Storage and Database Destruction (T1070.008)
 - **ID:** `T1070_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Detects targeted destruction of email storage (PST/OST) and Exchange Databases (EDB). 
-Focuses on programmatic deletion, database dismounting, and forensic wiping 
-patterns from untrusted processes or suspicious parent-child chains.
+- **Leírás:** Detects targeted destruction of email storage files (PST/OST) and Exchange Databases (EDB).
+Focuses on programmatic deletion, database dismounting, and forensic wiping patterns
+originating from untrusted processes or suspicious parent-child process chains.
 
 
 #### 🚨 Response Playbook

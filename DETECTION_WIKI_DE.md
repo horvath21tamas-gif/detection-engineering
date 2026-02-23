@@ -2853,7 +2853,7 @@ Anti-Forensik-Dienstprogramme, während legitimes Installationsverhalten herausg
 
 
 ---
-## Ultra-Pro High-Fidelity-Netzwerkverlauf und RDP-Trace-Entfernung (T1070.007)
+## Netzwerkverlauf und RDP-Trace-Entfernung (T1070.007)
 - **ID:** `T1070_007.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🟠 (high)
@@ -2861,8 +2861,9 @@ Anti-Forensik-Dienstprogramme, während legitimes Installationsverhalten herausg
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RESET.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Beschreibung:** Erkennt gezielte Versuche, den Netzwerkverbindungsverlauf zu löschen, wobei der Schwerpunkt auf RDP liegt
-MRU-Listen des Terminalserver-Clients und Entfernung von Netzwerkfreigabe-Metadaten.
-Filtert gängige Helpdesk-Fehlerbehebungen (DNS-Flush) heraus, sofern sie nicht Teil eines umfassenderen Angriffs sind.
+MRU-Listen für Terminalserver-Clients, Entfernung von Netzwerkfreigabe-Metadaten und DNS-Cache
+Spülungen aus verdächtigen Prozessketten.Filtert allgemeine Verwaltungsaufgaben heraus
+und Helpdesk-Aktionen, sofern sie nicht Teil einer umfassenderen Angriffsaktivität sind.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**
@@ -2871,16 +2872,16 @@ Filtert gängige Helpdesk-Fehlerbehebungen (DNS-Flush) heraus, sofern sie nicht 
 
 
 ---
-## Ultra-Pro High-Fidelity-E-Mail-Speicherung und Datenbankvernichtung (T1070.008)
+## E-Mail-Speicherung und Datenbankzerstörung (T1070.008)
 - **ID:** `T1070_008.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Hoch (Starke Filterung empfohlen (viele Protokolle))
 
 > ⚠️ **LOLBAS-Auswirkungen: Diese Regel betrifft eine Factory-Binärdatei, die missbraucht werden kann:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Beschreibung:** Erkennt die gezielte Zerstörung von E-Mail-Speicher (PST/OST) und Exchange-Datenbanken (EDB).
-Der Schwerpunkt liegt auf der programmgesteuerten Löschung, dem Aufheben der Bereitstellung von Datenbanken und der forensischen Löschung
-Muster aus nicht vertrauenswürdigen Prozessen oder verdächtigen Eltern-Kind-Ketten.
+- **Beschreibung:** Erkennt die gezielte Zerstörung von E-Mail-Speicherdateien (PST/OST) und Exchange-Datenbanken (EDB).
+Konzentriert sich auf programmgesteuertes Löschen, Datenbank-Dismounting und forensische Löschmuster
+stammen aus nicht vertrauenswürdigen Prozessen oder verdächtigen Eltern-Kind-Prozessketten.
 
 #### 🚨 Reaktions-Playbook
 1. **Prozessprüfung: Überprüfen Sie den übergeordneten Prozess und die Befehlszeile.**

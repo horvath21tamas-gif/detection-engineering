@@ -2853,7 +2853,7 @@ kriminalisztika ellenes segédprogramok, miközben kiszűrik a legitim telepít�
 
 
 ---
-## Ultra-Pro High-Fidelity hálózati előzmények és RDP-nyomok eltávolítása (T1070.007)
+## Hálózati előzmények és RDP nyomkövetés eltávolítása (T1070.007)
 - **ID:** `T1070_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
@@ -2861,8 +2861,9 @@ kriminalisztika ellenes segédprogramok, miközben kiszűrik a legitim telepít�
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [MSIEXEC.EXE](https://lolbas-project.github.io/lolbas/), [RESET.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
 - **Leírás:** Érzékeli a célzott próbálkozásokat a hálózati csatlakozási előzmények törlésére, az RDP-re összpontosítva
-Terminal Server Client MRU listák és hálózati megosztási metaadatok eltávolítása.
-Kiszűri az általános helpdesk hibaelhárítást (DNS-öblítés), hacsak nem egy szélesebb körű támadás része.
+Terminal Server Client MRU listák, hálózati megosztási metaadatok eltávolítása és DNS-gyorsítótár
+kipirul a gyanús folyamatláncokból.Kiszűri a gyakori adminisztrációkat
+és az ügyfélszolgálati műveletek, hacsak nem részei szélesebb körű támadási tevékenységnek.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -2871,16 +2872,16 @@ Kiszűri az általános helpdesk hibaelhárítást (DNS-öblítés), hacsak nem 
 
 
 ---
-## Ultra-Pro High-Fidelity e-mail tárolás és adatbázis-megsemmisítés (T1070.008)
+## E-mail tárolás és adatbázis-megsemmisítés (T1070.008)
 - **ID:** `T1070_008.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Magas (Erős szűrés javasolt (sok log))
 
 > ⚠️ **LOLBAS Érintettség: Ez a szabály visszaélésre alkalmas gyári binárist érint:** [MSHTA.EXE](https://lolbas-project.github.io/lolbas/), [EXCEL.EXE](https://lolbas-project.github.io/lolbas/), [WINWORD.EXE](https://lolbas-project.github.io/lolbas/)
-- **Leírás:** Érzékeli az e-mail-tárhely (PST/OST) és az Exchange-adatbázisok (EDB) célzott megsemmisítését.
-A programozott törlésre, az adatbázis leválasztására és a törvényszéki törlésre összpontosít
-nem megbízható folyamatokból vagy gyanús szülő-gyermek láncokból származó minták.
+- **Leírás:** Érzékeli az e-mail tárolófájlok (PST/OST) és az Exchange adatbázisok (EDB) célzott megsemmisítését.
+A programozott törlésre, az adatbázis leválasztására és a törvényszéki törlési mintákra összpontosít
+nem megbízható folyamatokból vagy gyanús szülő-gyermek folyamatláncokból erednek.
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**

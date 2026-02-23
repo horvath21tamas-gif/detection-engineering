@@ -993,7 +993,7 @@ parent processes or suspicious command-line executions of radio-control tools.
 
 
 ---
-## Ultra-Pro High-Fidelity BLE Advertising Exfiltration (T1011.001)
+## BLE Advertising Exfiltration (T1011.001)
 - **ID:** `T1011_001.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

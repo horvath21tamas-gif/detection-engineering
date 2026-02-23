@@ -974,7 +974,7 @@ Auslöser von Bluetooth-Übertragungsassistenten (fsquirt.exe) von nicht standar
 
 
 ---
-## Ultra-Pro High-Fidelity BLE-Werbe-Exfiltration (T1011.001)
+## BLE-Werbe-Exfiltration (T1011.001)
 - **ID:** `T1011_001.yaml`
 - **Qualitätsindikator:** `60/100` ⭐⭐⭐ (Medium)
 - **Kritikalität:** 🔴 (critical)

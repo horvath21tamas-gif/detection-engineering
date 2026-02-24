@@ -11,16 +11,16 @@
 
 ---
 ## 📖 Tartalomjegyzék
-- [Ultra-Pro High-Fidelity szteganográfia és adatrekonstrukció (T1001)](#ultra-pro-high-fidelity-szteganográfia-és-adatrekonstrukció-(t1001))
-- [Ultra-Pro High-Fidelity levélszemét adat és parancstömítés (T1001.001)](#ultra-pro-high-fidelity-levélszemét-adat-és-parancstömítés-(t1001001))
-- [Ultra-Pro High-Fidelity szteganográfia és adatrekonstrukció (T1001.002)](#ultra-pro-high-fidelity-szteganográfia-és-adatrekonstrukció-(t1001002))
-- [Ultra-Pro High-Fidelity Protocol megszemélyesítés (T1001.003)](#ultra-pro-high-fidelity-protocol-megszemélyesítés-(t1001003))
+- [Szteganográfia és adatrekonstrukció (T1001)](#szteganográfia-és-adatrekonstrukció-(t1001))
+- [Kéretlen adatok és parancsok kitöltése (T1001.001)](#kéretlen-adatok-és-parancsok-kitöltése-(t1001001))
+- [Szteganográfia és adatrekonstrukció (T1001.002)](#szteganográfia-és-adatrekonstrukció-(t1001002))
+- [Protokoll megszemélyesítés (T1001.003)](#protokoll-megszemélyesítés-(t1001003))
 - [LSASS Credential Dumping (T1003)](#lsass-credential-dumping-(t1003))
 - [Gyanús hozzáférés az LSASS folyamatmemóriához](#gyanús-hozzáférés-az-lsass-folyamatmemóriához)
-- [Ultra-Pro High-Fidelity SAM & SYSTEM Registry Theft (T1003.002)](#ultra-pro-high-fidelity-sam-&-system-registry-theft-(t1003002))
-- [Ultra-Pro High-Fidelity NTDS.dit kivonás (T1003.003)](#ultra-pro-high-fidelity-ntdsdit-kivonás-(t1003003))
-- [Ultra-Pro High-Fidelity LSA titkok és biztonsági kaptárlopás (T1003.004)](#ultra-pro-high-fidelity-lsa-titkok-és-biztonsági-kaptárlopás-(t1003004))
-- [Ultra-Pro High-Fidelity MSCASH/DCC extrakció (T1003.005)](#ultra-pro-high-fidelity-mscashdcc-extrakció-(t1003005))
+- [SAM & SYSTEM Registry Theft (T1003.002)](#sam-&-system-registry-theft-(t1003002))
+- [NTDS.dit kivonat (T1003.003)](#ntdsdit-kivonat-(t1003003))
+- [LSA titkai és biztonsági kaptárlopás (T1003.004)](#lsa-titkai-és-biztonsági-kaptárlopás-(t1003004))
+- [MSCASH/DCC kivonás (T1003.005)](#mscashdcc-kivonás-(t1003005))
 - [DCSync támadásészlelés (T1003.006)](#dcsync-támadásészlelés-(t1003006))
 - [LSASS Memory Dump és LOLBin visszaélés (T1003.007)](#lsass-memory-dump-és-lolbin-visszaélés-(t1003007))
 - [Linux árnyékfájl kibontása (T1003.008)](#linux-árnyékfájl-kibontása-(t1003008))
@@ -698,7 +698,7 @@ pixel szintű kinyerési rutinok.
 
 
 ---
-## Protokoll-megszemélyesítés (T1001.003)
+## Protokoll megszemélyesítés (T1001.003)
 - **ID:** `T1001_003.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🟠 (high)
@@ -708,7 +708,7 @@ pixel szintű kinyerési rutinok.
 - **Leírás:** Érzékeli a protokoll megszemélyesítési kísérleteit a következők figyelésével:
 - A HTTP/S fejlécek kézi manipulálása szkriptekben
 - Rendellenes vagy hamisított User-Agent karakterláncok
-- Nem böngésző folyamatok, amelyek megkísérlik utánozni a mobileszközöket, bejárókat vagy más klienstípusokat
+- Nem böngészős folyamatok, amelyek megpróbálják utánozni a mobileszközöket, bejárókat vagy más klienstípusokat
 
 #### 🚨 Response Playbook
 1. **Folyamat vizsgálata: Ellenőrizd a szülő folyamatot és a parancssort.**
@@ -847,7 +847,7 @@ A következőkre összpontosít:
 
 
 ---
-## LSASS Memory Dump & LOLBin Abuse (T1003.007)
+## LSASS Memory Dump és LOLBin visszaélés (T1003.007)
 - **ID:** `T1003_007.yaml`
 - **Minőségi mutató:** `60/100` ⭐⭐⭐ (Közepes)
 - **Kritikusság:** 🔴 (critical)

@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-23 14:28:55`
+**Utolsó frissítés:** `2026-02-24 06:10:06`
 
 ## 📈 SIEM Platform Lefedettség
 
@@ -16,16 +16,16 @@
 ## 🎯 Technika alapú bontás
 | Technika ID | Szint | Kapcsolódó szabályok |
 | :--- | :--- | :--- |
-| T1001 | CRITICAL | Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001) |
-| T1001.001 | HIGH | Ultra-Pro High-Fidelity Junk Data & Command Padding (T1001.001) |
-| T1001.002 | CRITICAL | Ultra-Pro High-Fidelity Steganography & Data Reconstruction (T1001.002) |
+| T1001 | CRITICAL | Steganography & Data Reconstruction (T1001) |
+| T1001.001 | HIGH | Junk Data & Command Padding (T1001.001) |
+| T1001.002 | CRITICAL | Steganography & Data Reconstruction (T1001.002) |
 | T1001.003 | HIGH | Protocol Impersonation (T1001.003) |
 | T1003 | HIGH | Suspicious Access to LSASS Process Memory (Credential Dumping Attempt) |
-| T1003.001 | HIGH | LSASS Memory Dump & LOLBin Abuse (T1003.007), Ultra-Pro High-Fidelity LSASS Credential Dumping (T1003), Suspicious Access to LSASS Process Memory, Suspicious Access to LSASS Process Memory (Credential Dumping Attempt) |
-| T1003.002 | CRITICAL | Ultra-Pro High-Fidelity SAM & SYSTEM Registry Theft (T1003.002) |
-| T1003.003 | CRITICAL | Ultra-Pro High-Fidelity NTDS.dit Extraction (T1003.003) |
-| T1003.004 | CRITICAL | Ultra-Pro High-Fidelity LSA Secrets & Security Hive Theft (T1003.004) |
-| T1003.005 | CRITICAL | Ultra-Pro High-Fidelity MSCASH/DCC Extraction (T1003.005) |
+| T1003.001 | HIGH | LSASS Memory Dump & LOLBin Abuse (T1003.007), LSASS Credential Dumping (T1003), Suspicious Access to LSASS Process Memory, Suspicious Access to LSASS Process Memory (Credential Dumping Attempt) |
+| T1003.002 | CRITICAL | SAM & SYSTEM Registry Theft (T1003.002) |
+| T1003.003 | CRITICAL | NTDS.dit Extraction (T1003.003) |
+| T1003.004 | CRITICAL | LSA Secrets & Security Hive Theft (T1003.004) |
+| T1003.005 | CRITICAL | MSCASH/DCC Extraction (T1003.005) |
 | T1003.006 | CRITICAL | DCSync Attack Detection (T1003.006) |
 | T1003.007 | CRITICAL | LSASS Memory Dump & LOLBin Abuse (T1003.007) |
 | T1003.008 | CRITICAL | Linux Shadow File Extraction (T1003.008) |

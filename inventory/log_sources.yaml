@@ -23,6 +23,7 @@ available_sources:
   - m365
   - cloud
   - network
+  - aws
   - generic
   service:
   - sysmon
@@ -45,3 +46,4 @@ available_sources:
   - Cisco IOS
   - activitylogs
   - azure_ad
+  - cloudtrail

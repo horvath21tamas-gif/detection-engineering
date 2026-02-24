@@ -3,7 +3,7 @@
 ## 📊 Összesített Statisztika
 - **Lefedett technikák:** `627` db
 - **Sigma szabályok:** `628` db
-- **MITRE ATT&CK Lefedettség:** `[99.8%]`
+- **MITRE ATT&CK Lefedettség:** `[100.0%]`
 - **Részletes lista:** [COVERAGE.md](./COVERAGE.md)
 
 ![Progress Bar](https://geps.dev/progress/99?dangerColor=ff6666&warningColor=ffbd66&successColor=8ecb88&v=1771921599)

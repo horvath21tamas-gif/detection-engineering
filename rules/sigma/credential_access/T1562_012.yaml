@@ -69,10 +69,10 @@ detection:
 
   filter_internal_ip:
     sourceIPAddress|startswith:
-      - 10.
-      - 192.168.
-      - 172.
-      - 127.
+      - '10.'
+      - '192.168.'
+      - '172.'
+      - '127.'
 
   condition:
     (selection_guardduty_impair

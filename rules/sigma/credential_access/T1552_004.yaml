@@ -118,7 +118,7 @@ detection:
             - '\Windows\System32\certutil.exe'
         ParentImage|endswith:
             - '\explorer.exe'
-        User|not_contains:
+        User|contains:
             - 'NT AUTHORITY'
 
     filter_certificate_management:

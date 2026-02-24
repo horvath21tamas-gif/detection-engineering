@@ -97,7 +97,7 @@ detection:
             - '\docker.exe'
         ParentImage|endswith:
             - '\explorer.exe'
-        User|not_contains:
+        User|contains:
             - 'NT AUTHORITY'
 
     filter_ci_cd_context:

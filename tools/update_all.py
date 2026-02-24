@@ -116,7 +116,7 @@ def update_all():
     
     ts = int(time.time())
     current_time = time.strftime('%Y-%m-%d %H:%M:%S')
-    total_mitre_tech = 628 
+    total_mitre_tech = 627
     coverage_pct = round((len(techniques) / total_mitre_tech) * 100, 1)
     
     # Százalékos SIEM lefedettség számítása

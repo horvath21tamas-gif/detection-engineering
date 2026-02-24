@@ -449,7 +449,7 @@
 - [Safe Mode Defense Evasion (T1562.009)](#safe-mode-defense-evasion-(t1562009))
 - [Defense Downgrade Attack (T1562.010)](#defense-downgrade-attack-(t1562010))
 - [Virtualization and Sandbox Evasion (T1564.011)](#virtualization-and-sandbox-evasion-(t1564011))
-- [Cloud Security Infrastructure Impairment (T1562.012)](#cloud-security-infrastructure-impairment-(t1562012))
+- [AWS Cloud Security Control Impairment Attempt](#aws-cloud-security-control-impairment-attempt)
 - [Remote Service Session Hijacking (T1563)](#remote-service-session-hijacking-(t1563))
 - [Local Session Hijacking (T1563.001)](#local-session-hijacking-(t1563001))
 - [RDP Session Hijacking (T1563.002)](#rdp-session-hijacking-(t1563002))
@@ -8627,15 +8627,12 @@ discovery initiated from suspicious process chains or user-writable paths.
 
 
 ---
-## Cloud Security Infrastructure Impairment (T1562.012)
+## AWS Cloud Security Control Impairment Attempt
 - **ID:** `T1562_012.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects targeted attempts to impair AWS-native security controls such as 
-GuardDuty, Security Hub, and related threat intelligence mechanisms.
-Focuses on detector deletion, suppression rule abuse, and threat intel tampering 
-initiated by root, non-MFA, or non-automated identities.
+- **Leírás:** Detects attempts to impair AWS-native security controls such as GuardDuty, Security Hub, and Inspector2 via detector deletion, suppression abuse, or threat intelligence tampering. Focuses on high-risk identities and non-standard automation tooling.
 
 
 #### 🚨 Response Playbook

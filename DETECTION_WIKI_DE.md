@@ -449,7 +449,7 @@
 - [Verteidigungsumgehung im abgesicherten Modus (T1562.009)](#verteidigungsumgehung-im-abgesicherten-modus-(t1562009))
 - [Verteidigungsherabstufungsangriff (T1562.010)](#verteidigungsherabstufungsangriff-(t1562010))
 - [Virtualisierung und Sandbox-Umgehung (T1564.011)](#virtualisierung-und-sandbox-umgehung-(t1564011))
-- [Beeinträchtigung der Cloud-Sicherheitsinfrastruktur (T1562.012)](#beeinträchtigung-der-cloud-sicherheitsinfrastruktur-(t1562012))
+- [Versuch einer Beeinträchtigung der AWS Cloud Security Control](#versuch-einer-beeinträchtigung-der-aws-cloud-security-control)
 - [Entführung von Remote-Service-Sitzungen (T1563)](#entführung-von-remote-service-sitzungen-(t1563))
 - [Entführung lokaler Sitzungen (T1563.001)](#entführung-lokaler-sitzungen-(t1563001))
 - [RDP-Sitzungs-Hijacking (T1563.002)](#rdp-sitzungs-hijacking-(t1563002))
@@ -8190,15 +8190,12 @@ Entdeckung, die von verdächtigen Prozessketten oder vom Benutzer beschreibbaren
 
 
 ---
-## Beeinträchtigung der Cloud-Sicherheitsinfrastruktur (T1562.012)
+## Versuch einer Beeinträchtigung der AWS Cloud Security Control
 - **ID:** `T1562_012.yaml`
 - **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt gezielte Versuche, AWS-native Sicherheitskontrollen zu beeinträchtigen, z
-GuardDuty, Security Hub und zugehörige Threat-Intelligence-Mechanismen.
-Der Schwerpunkt liegt auf der Löschung von Detektoren, dem Missbrauch von Unterdrückungsregeln und der Manipulation von Bedrohungsinformationen
-initiiert durch Root-, Nicht-MFA- oder nicht automatisierte Identitäten.
+- **Beschreibung:** Erkennt Versuche, AWS-native Sicherheitskontrollen wie GuardDuty, Security Hub und Inspector2 durch Detektorlöschung, Unterdrückungsmissbrauch oder Manipulation von Bedrohungsinformationen zu beeinträchtigen.Konzentriert sich auf Hochrisikoidentitäten und nicht standardmäßige Automatisierungstools.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

@@ -454,7 +454,7 @@
 | T1562.008 | CRITICAL | Cloud Logging Impairment (T1562.008) |
 | T1562.009 | CRITICAL | Safe Mode Defense Evasion (T1562.009) |
 | T1562.010 | CRITICAL | Defense Downgrade Attack (T1562.010) |
-| T1562.012 | CRITICAL | Cloud Security Infrastructure Impairment (T1562.012) |
+| T1562.012 | CRITICAL | AWS Cloud Security Control Impairment Attempt |
 | T1563 | CRITICAL | Remote Service Session Hijacking (T1563) |
 | T1563.001 | CRITICAL | Remote Service Session Hijacking (T1563), Local Session Hijacking (T1563.001) |
 | T1563.002 | CRITICAL | Remote Service Session Hijacking (T1563), RDP Session Hijacking (T1563.002) |

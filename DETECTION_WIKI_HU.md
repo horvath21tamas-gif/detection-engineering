@@ -449,7 +449,7 @@
 - [Csökkentett módú védelmi kijátszás (T1562.009)](#csökkentett-módú-védelmi-kijátszás-(t1562009))
 - [Defense Downgrade Attack (T1562.010)](#defense-downgrade-attack-(t1562010))
 - [Virtualizáció és Sandbox Evasion (T1564.011)](#virtualizáció-és-sandbox-evasion-(t1564011))
-- [Felhőbiztonsági infrastruktúra károsodása (T1562.012)](#felhőbiztonsági-infrastruktúra-károsodása-(t1562012))
+- [AWS Cloud Security Control károsodási kísérlet](#aws-cloud-security-control-károsodási-kísérlet)
 - [Távoli szolgáltatási munkamenet-eltérítés (T1563)](#távoli-szolgáltatási-munkamenet-eltérítés-(t1563))
 - [Helyi munkamenet-eltérítés (T1563.001)](#helyi-munkamenet-eltérítés-(t1563001))
 - [RDP munkamenet-eltérítés (T1563.002)](#rdp-munkamenet-eltérítés-(t1563002))
@@ -8190,15 +8190,12 @@ gyanús folyamatláncokból vagy a felhasználó által írható útvonalakból 
 
 
 ---
-## Felhőbiztonsági infrastruktúra károsodása (T1562.012)
+## AWS Cloud Security Control károsodási kísérlet
 - **ID:** `T1562_012.yaml`
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli az AWS-natív biztonsági vezérlők megsértésére irányuló célzott kísérleteket, mint pl
-GuardDuty, Security Hub és a kapcsolódó fenyegetés-felderítési mechanizmusok.
-Az érzékelő törlésére, az elnyomási szabályokkal való visszaélésre és a fenyegető információk manipulálására összpontosít
-gyökér, nem MFA vagy nem automatizált identitások kezdeményezték.
+- **Leírás:** Érzékeli az AWS-natív biztonsági vezérlők, például a GuardDuty, a Security Hub és az Inspector2 megsértésére irányuló kísérleteket az érzékelő törlésével, az elnyomással való visszaélésekkel vagy a fenyegetés intelligencia manipulációjával.A magas kockázatú identitásokra és a nem szabványos automatizálási eszközökre összpontosít.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

@@ -4,8 +4,7 @@ status: stable
 description: >
   Detects attempts to impair AWS-native security controls such as GuardDuty,
   Security Hub, and Inspector2 via detector deletion, suppression abuse,
-  or threat intelligence tampering. Focuses on high-risk identities and
-  non-standard automation tooling.
+  or threat intelligence tampering.
 
 author: hota05
 date: 2026-02-24
@@ -21,50 +20,41 @@ logsource:
 
 detection:
 
-  selection_services:
-    eventSource:
-      - guardduty.amazonaws.com
-      - securityhub.amazonaws.com
-      - inspector2.amazonaws.com
-
-  selection_impairment_actions:
+  selection_guardduty_impair:
+    eventSource: guardduty.amazonaws.com
     eventName:
       - DeleteDetector
       - UpdateDetector
       - DeleteMembers
       - DisassociateMembers
-      - DisableSecurityHub
-      - BatchDisableStandards
       - DeleteThreatIntelSet
       - DeleteIPSet
 
-  selection_suppression_actions:
+  selection_securityhub_impair:
+    eventSource: securityhub.amazonaws.com
     eventName:
+      - DisableSecurityHub
+      - BatchDisableStandards
       - CreateFilter
       - UpdateFilter
-      - CreateSuppressionRule
       - BatchUpdateFindings
 
-  selection_suppression_keywords:
-    requestParameters|contains:
-      - ARCHIVE
-      - SUPPRESS
-      - Workflow
-      - RecordState
+  selection_inspector_impair:
+    eventSource: inspector2.amazonaws.com
+    eventName:
+      - UpdateConfiguration
+      - Disable
 
-  selection_api_activity:
-    eventType: AwsApiCall
-    readOnly: false
+  selection_root_identity:
+    userIdentity.type: Root
 
-  selection_high_risk_identity:
-    userIdentity.type:
-      - Root
-      - IAMUser
+  selection_iam_identity:
+    userIdentity.type: IAMUser
 
   selection_suspicious_useragent:
     userAgent|contains:
-      - python
       - curl
+      - python
       - postman
       - httpclient
       - boto3
@@ -72,30 +62,28 @@ detection:
 
   filter_trusted_roles:
     userIdentity.arn|contains:
-      - role/Security-Infrastructure-Terraform
-      - role/AWSServiceRoleForGuardDuty
-      - role/AWSServiceRoleForSecurityHub
-      - role/OrganizationAccountAccessRole
+      - Security-Infrastructure-Terraform
+      - AWSServiceRoleForGuardDuty
+      - AWSServiceRoleForSecurityHub
+      - OrganizationAccountAccessRole
 
-  filter_internal_ips:
+  filter_internal_ip:
     sourceIPAddress|startswith:
       - 10.
       - 192.168.
-      - 172.16.
-
-  filter_mfa_authenticated:
-    userIdentity.sessionContext.attributes.mfaAuthenticated: "true"
+      - 172.
+      - 127.
 
   condition:
-    selection_services
-    and selection_api_activity
-    and (selection_impairment_actions
-          or (selection_suppression_actions and selection_suppression_keywords))
-    and (selection_high_risk_identity
-          or selection_suspicious_useragent)
+    (selection_guardduty_impair
+      or selection_securityhub_impair
+      or selection_inspector_impair)
+    and
+    (selection_root_identity
+      or selection_iam_identity
+      or selection_suspicious_useragent)
     and not (filter_trusted_roles
-          or filter_internal_ips
-          or filter_mfa_authenticated)
+      or filter_internal_ip)
 
 fields:
   - eventTime
@@ -105,12 +93,11 @@ fields:
   - userIdentity.arn
   - sourceIPAddress
   - userAgent
-  - requestParameters
   - awsRegion
 
 falsepositives:
-  - Infrastructure-as-code deployments without MFA
-  - Initial security service onboarding
-  - MSSP tuning activity
+  - Planned security configuration changes
+  - Infrastructure-as-code deployments
+  - MSSP-managed security operations
 
 level: critical

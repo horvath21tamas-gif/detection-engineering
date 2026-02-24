@@ -62,7 +62,7 @@ detection:
     - CommandLine|contains:
         - 'logrotate.conf'
         - '/var/lib/docker/containers'
-    - User|exact: 'root'
+    - User: 'root'
       ParentImage|endswith: '/ansible'
 
   condition: (selection_journal_purge or selection_manual_truncation)

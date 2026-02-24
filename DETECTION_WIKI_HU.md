@@ -8195,7 +8195,7 @@ gyanús folyamatláncokból vagy a felhasználó által írható útvonalakból 
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Érzékeli az AWS-natív biztonsági vezérlők, például a GuardDuty, a Security Hub és az Inspector2 megsértésére irányuló kísérleteket az érzékelő törlésével, az elnyomással való visszaélésekkel vagy a fenyegetés intelligencia manipulációjával.A magas kockázatú identitásokra és a nem szabványos automatizálási eszközökre összpontosít.
+- **Leírás:** Érzékeli az AWS natív biztonsági vezérlőinek, például a GuardDuty-nak, a Security Hubnak és az Inspector2-nek az érzékelő törlésével, az elnyomással való visszaélésekkel vagy a fenyegetés-intelligencia manipulálásával kapcsolatos kísérleteket.
 
 #### 🚨 Response Playbook
 1. **Triage: Vizsgáld meg a nyers eseményeket a SIEM-ben.**

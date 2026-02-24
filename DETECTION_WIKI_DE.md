@@ -8195,7 +8195,7 @@ Entdeckung, die von verdächtigen Prozessketten oder vom Benutzer beschreibbaren
 - **Qualitätsindikator:** `80/100` ⭐⭐⭐⭐ (Gut)
 - **Kritikalität:** 🔴 (critical)
 - **Geschätzter Geräuschpegel:** Unbekannt (Keine Daten)
-- **Beschreibung:** Erkennt Versuche, AWS-native Sicherheitskontrollen wie GuardDuty, Security Hub und Inspector2 durch Detektorlöschung, Unterdrückungsmissbrauch oder Manipulation von Bedrohungsinformationen zu beeinträchtigen.Konzentriert sich auf Hochrisikoidentitäten und nicht standardmäßige Automatisierungstools.
+- **Beschreibung:** Erkennt Versuche, AWS-native Sicherheitskontrollen wie GuardDuty, Security Hub und Inspector2 durch Detektorlöschung, Unterdrückungsmissbrauch oder Manipulation von Bedrohungsinformationen zu beeinträchtigen.
 
 #### 🚨 Reaktions-Playbook
 1. **Triage: Untersuchen Sie Rohereignisse in SIEM.**

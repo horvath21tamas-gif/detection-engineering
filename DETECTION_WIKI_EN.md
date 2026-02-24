@@ -8632,7 +8632,7 @@ discovery initiated from suspicious process chains or user-writable paths.
 - **Minőségi mutató:** `80/100` ⭐⭐⭐⭐ (Jó)
 - **Kritikusság:** 🔴 (critical)
 - **Becsült zajszint:** Ismeretlen (Nincs adat)
-- **Leírás:** Detects attempts to impair AWS-native security controls such as GuardDuty, Security Hub, and Inspector2 via detector deletion, suppression abuse, or threat intelligence tampering. Focuses on high-risk identities and non-standard automation tooling.
+- **Leírás:** Detects attempts to impair AWS-native security controls such as GuardDuty, Security Hub, and Inspector2 via detector deletion, suppression abuse, or threat intelligence tampering.
 
 
 #### 🚨 Response Playbook

@@ -37,7 +37,7 @@ detection:
             - 'ptt'
             - 'tgtdelegate'
             - 'ms-mcs-admpwd'
-        Image|endswith|any:
+        Image|endswith:
             - '\rubeus.exe'
             - '\mimikatz.exe'
             - '\powershell.exe'

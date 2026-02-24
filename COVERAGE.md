@@ -1,6 +1,6 @@
 # 📘 Részletes MITRE ATT&CK Lefedettség
 
-**Utolsó frissítés:** `2026-02-24 07:45:30`
+**Utolsó frissítés:** `2026-02-24 08:26:39`
 
 ## 📈 SIEM Platform Lefedettség
 

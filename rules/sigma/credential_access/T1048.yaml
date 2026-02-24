@@ -24,7 +24,7 @@ logsource:
 
 detection:
   selection_tunneling_flags:
-    CommandLine|contains|any:
+    CommandLine|contains:
       - ' -R '
       - ' -L '
       - ' -D '

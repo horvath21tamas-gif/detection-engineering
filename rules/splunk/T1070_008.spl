@@ -1,1 +1,1 @@
-conversion_failed
+(Image IN ("*\\powershell.exe", "*\\pwsh.exe") CommandLine IN ("* -Confirm:$false*", "* -Force*")) OR CommandLine IN ("*.pst*", "*.ost*", "*.edb*", "*.nst*") ParentImage IN ("*\\w3wp.exe", "*\\winword.exe", "*\\excel.exe", "*\\mshta.exe", "*\\php-cgi.exe", "*\\nginx.exe") NOT (Image="*\\SearchIndexer.exe" OR ParentImage IN ("*\\outlook.exe", "*\\backup.exe", "*\\veeam") OR CommandLine="*\\AppData\\Local\\Microsoft\\Outlook*" OR username="NT AUTHORITY\\SYSTEM")

@@ -1,1 +1,2 @@
-conversion_failed
+(((((process = '*\\powershell.exe*' OR process = '*\\pwsh.exe*'))) AND (((param = '* -Confirm:$false*' OR param = '* -Force*')))) OR (((param = '*.pst*' OR param = '*.ost*' OR param = '*.edb*' OR param = '*.nst*')))) AND ((((ParentImage = '*\\w3wp.exe*' OR ParentImage = '*\\winword.exe*' OR ParentImage = '*\\excel.exe*' OR ParentImage = '*\\mshta.exe*' OR ParentImage = '*\\php-cgi.exe*' OR ParentImage = '*\\nginx.exe*'))) AND (NOT ((((process = '*\\SearchIndexer.exe*'))|| (((ParentImage = '*\\outlook.exe*' OR ParentImage = '*\\backup.exe*' OR ParentImage = '*\\veeam*'))) OR ((param = '*\\AppData\\Local\\Microsoft\\Outlook*'))|| ((user.dst = '*NT AUTHORITY\\SYSTEM*')))))
+)

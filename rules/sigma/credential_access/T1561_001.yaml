@@ -35,7 +35,7 @@ detection:
 
     selection_dd_overwrite:
         Image|endswith: '\dd.exe'
-        CommandLine|contains|any:
+        CommandLine|contains:
             - 'if=/dev/zero'
             - 'if=/dev/urandom'
             - 'of=\\.\PhysicalDrive'
@@ -52,7 +52,7 @@ detection:
         Image|endswith:
             - '\powershell.exe'
             - '\pwsh.exe'
-        CommandLine|contains|all:
+        CommandLine|contains:
             - 'Clear-Disk'
             - '-RemoveData'
 
@@ -60,7 +60,7 @@ detection:
         Image|endswith:
             - '\powershell.exe'
             - '\pwsh.exe'
-        CommandLine|contains|all:
+        CommandLine|contains:
             - 'Format-Volume'
             - '-Force'
             - '-Confirm:$false'

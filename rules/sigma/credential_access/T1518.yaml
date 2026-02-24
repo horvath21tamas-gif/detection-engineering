@@ -29,7 +29,7 @@ detection:
             - '\reg.exe'
             - '\powershell.exe'
             - '\pwsh.exe'
-        CommandLine|contains|any:
+        CommandLine|contains:
             - 'Get-Package'
             - 'Get-ItemProperty'
             - 'product get name'

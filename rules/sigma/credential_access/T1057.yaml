@@ -22,7 +22,7 @@ logsource:
 
 detection:
   selection_tools:
-    Image|endswith|any:
+    Image|endswith:
       - '\tasklist.exe'
       - '\qprocess.exe'
     CommandLine|contains:

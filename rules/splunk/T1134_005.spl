@@ -1,6 +1,6 @@
-
+source="WinEventLog:Security"
 | rex field=TargetImage "(?<TargetImageMatch>lsass\\.exe$)"
 | eval TargetImageCondition=if(isnotnull(TargetImageMatch), "true", "false")
 | rex field=SubjectUserName "(?<SubjectUserNameMatch>(ADMT_|MSOL_))"
 | eval SubjectUserNameCondition=if(isnotnull(SubjectUserNameMatch), "true", "false")
-| search source="WinEventLog:Security" (EventCode=5136 AttributeCommonName="sIDHistory" OperationType="%%14674") OR (EventCode=10 TargetImageCondition="true" GrantedAccess="0x1438") NOT (SubjectUserNameCondition="true" OR SubjectUserSid="S-1-5-18" OR SubjectDomainName="NT AUTHORITY")
+| search (EventCode=5136 AttributeCommonName="sIDHistory" OperationType="%%14674") OR (EventCode=10 TargetImageCondition="true" GrantedAccess="0x1438") NOT (SubjectUserNameCondition="true" OR SubjectUserSid="S-1-5-18" OR SubjectDomainName="NT AUTHORITY")

@@ -1,4 +1,4 @@
-
+processcommandline="(runas /token|make_token|steal_token|Invoke-TokenManipulation|CPAU\\.exe|load_privilege)"
 | rex field=ParentCommandLine "(?<ParentCommandLineMatch>svchost\\.exe -k)"
 | eval ParentCommandLineCondition=if(isnotnull(ParentCommandLineMatch), "true", "false")
-| search processcommandline="(runas /token|make_token|steal_token|Invoke-TokenManipulation|CPAU\\.exe|load_privilege)" OR (Parentprocessname="(powershell\\.exe|pwsh\\.exe|cmd\\.exe|cscript\\.exe|wscript\\.exe)$" username="SYSTEM" logonid="0x3e7") NOT (Parentprocessname="(services\\.exe|wininit\\.exe|lsass\\.exe|winlogon\\.exe)$" OR processname="(conhost\\.exe|WerFault\\.exe|WmiPrvSE\\.exe)$" OR ParentCommandLineCondition="true" OR processname="(\\Program Files\\Windows Defender\\|\\Program Files\\CrowdStrike\\|\\SentinelOne\\)")
+| search OR (Parentprocessname="(powershell\\.exe|pwsh\\.exe|cmd\\.exe|cscript\\.exe|wscript\\.exe)$" username="SYSTEM" logonid="0x3e7") NOT (Parentprocessname="(services\\.exe|wininit\\.exe|lsass\\.exe|winlogon\\.exe)$" OR processname="(conhost\\.exe|WerFault\\.exe|WmiPrvSE\\.exe)$" OR ParentCommandLineCondition="true" OR processname="(\\Program Files\\Windows Defender\\|\\Program Files\\CrowdStrike\\|\\SentinelOne\\)")

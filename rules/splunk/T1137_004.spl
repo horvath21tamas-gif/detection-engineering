@@ -1,1 +1,9 @@
-conversion_failed
+
+| rex field=Details "(?<DetailsMatch>(http|script|file://|C:\\\\Users\\\\Public|C:\\\\Windows\\\\Temp))"
+| eval DetailsCondition=if(isnotnull(DetailsMatch), "true", "false")
+| rex field=Image "(?<ImageMatch>(powershell\\.exe|pwsh\\.exe|cmd\\.exe|reg\\.exe|cscript\\.exe|wscript\\.exe)$)"
+| eval ImageCondition=if(isnotnull(ImageMatch), "true", "false")
+| search DetailsCondition="true" OR ImageCondition="true"
+| regex TargetObject="\\\\Software\\\\Microsoft\\\\Office\\\\.*\\\\Outlook\\\\(WebView\\\\URL|Security\\\\EnableRoamingFolderHomepages|Security\\\\EnableExternalFolderHomepages)$"
+| regex Details="(https://outlook\\.office365\\.com|res://)"
+| regex Image="gpscript\\.exe$"

@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dectools"
+version = "1.0.0"
+description = "Detection-engineering toolkit: Sigma rule validation and Sigma -> Wazuh compilation"
+requires-python = ">=3.10"
+dependencies = [
+  "pysigma>=1.1,<2",
+  "pyyaml>=6",
+  "lxml>=5",
+  "regex>=2024.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+siem = [
+  "sigma-cli>=2",
+  "pysigma-backend-splunk>=2",
+  "pysigma-backend-elasticsearch>=2",
+  "pysigma-pipeline-sysmon>=2",
+  "pysigma-pipeline-windows>=2",
+]
+
+[project.scripts]
+dectools-wazuh = "dectools.wazuh.cli:main"
+dectools-validate = "dectools.validate:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"dectools.wazuh" = ["mapping.yml", "mitre_ids.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = ["E501", "B905"]

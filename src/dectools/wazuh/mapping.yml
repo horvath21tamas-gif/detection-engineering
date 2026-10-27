@@ -1,0 +1,112 @@
+# Sigma logsource / field -> Wazuh mapping.
+#
+# Edit this file to teach the converter about new log sources. Everything a
+# rule needs from Wazuh (parent rule, extra requirements, field names) lives
+# here, nothing is hard-coded in the converter.
+#
+# Wazuh parent rule ids come from the stock ruleset (v4.x):
+#   60000 windows eventchannel   60001 Security   60002 System   60003 Application
+#   61600 Sysmon base            61603.. Sysmon EID 1.. (see below)
+#   31100 web access log
+
+version: 1
+
+# Rules are tried top to bottom, the first entry whose "match" keys all equal the
+# Sigma logsource wins (case-insensitive). Put specific entries before generic ones.
+logsources:
+  # ---- Windows / Sysmon (event channel) ------------------------------------
+  - {match: {product: windows, category: process_creation},   field_map: sysmon, if_sid: [61603], note: "Sysmon EID 1"}
+  - {match: {product: windows, category: file_change},        field_map: sysmon, if_sid: [61604], note: "Sysmon EID 2"}
+  - {match: {product: windows, category: network_connection}, field_map: sysmon, if_sid: [61605], note: "Sysmon EID 3"}
+  - {match: {product: windows, category: driver_load},        field_map: sysmon, if_sid: [61608], note: "Sysmon EID 6"}
+  - {match: {product: windows, category: image_load},         field_map: sysmon, if_sid: [61609], note: "Sysmon EID 7"}
+  - {match: {product: windows, category: create_remote_thread}, field_map: sysmon, if_sid: [61610], note: "Sysmon EID 8"}
+  - {match: {product: windows, category: raw_access_thread},  field_map: sysmon, if_sid: [61611], note: "Sysmon EID 9"}
+  - {match: {product: windows, category: process_access},     field_map: sysmon, if_sid: [61612], note: "Sysmon EID 10"}
+  - {match: {product: windows, category: file_event},         field_map: sysmon, if_sid: [61613], note: "Sysmon EID 11"}
+  - {match: {product: windows, category: registry_add},       field_map: sysmon, if_sid: [61614], note: "Sysmon EID 12"}
+  - {match: {product: windows, category: registry_delete},    field_map: sysmon, if_sid: [61614], note: "Sysmon EID 12"}
+  - {match: {product: windows, category: registry_set},       field_map: sysmon, if_sid: [61615], note: "Sysmon EID 13"}
+  - {match: {product: windows, category: registry_rename},    field_map: sysmon, if_sid: [61616], note: "Sysmon EID 14"}
+  - {match: {product: windows, category: registry_event},     field_map: sysmon, if_sid: [61614, 61615, 61616], note: "Sysmon EID 12/13/14"}
+  - {match: {product: windows, category: create_stream_hash}, field_map: sysmon, if_sid: [61617], note: "Sysmon EID 15"}
+  - {match: {product: windows, category: pipe_created},       field_map: sysmon, if_sid: [61645, 61646], note: "Sysmon EID 17/18"}
+  - {match: {product: windows, category: wmi_event},          field_map: sysmon, if_sid: [61647, 61648, 61649], note: "Sysmon EID 19/20/21"}
+  - {match: {product: windows, category: dns_query},          field_map: sysmon, if_sid: [61650], note: "Sysmon EID 22"}
+  - {match: {product: windows, category: file_delete},        field_map: sysmon, if_sid: [61651], note: "Sysmon EID 23"}
+  - {match: {product: windows, category: clipboard_change},   field_map: sysmon, if_sid: [61652], note: "Sysmon EID 24"}
+  - {match: {product: windows, category: process_tampering},  field_map: sysmon, if_sid: [61653], note: "Sysmon EID 25"}
+  - {match: {product: windows, service: sysmon},              field_map: sysmon, if_sid: [61600], note: "any Sysmon event"}
+  - {match: {product: windows, service: process_creation},    field_map: sysmon, if_sid: [61603], note: "Sysmon EID 1"}
+  # ---- Windows / classic channels ------------------------------------------
+  - {match: {product: windows, service: security},   field_map: winevent, if_sid: [60001], note: "Security channel"}
+  - {match: {product: windows, service: system},     field_map: winevent, if_sid: [60002], note: "System channel"}
+  - {match: {product: windows, service: application}, field_map: winevent, if_sid: [60003], note: "Application channel"}
+  - {match: {product: windows, service: powershell}, field_map: winevent, if_sid: [60000], require: {win.system.channel: "^Microsoft-Windows-PowerShell/Operational$"}, note: "PowerShell/Operational"}
+  - {match: {product: windows, service: powershell-classic}, field_map: winevent, if_sid: [60000], require: {win.system.channel: "^Windows PowerShell$"}}
+  - {match: {product: windows, service: taskscheduler}, field_map: winevent, if_sid: [60000], require: {win.system.channel: "^Microsoft-Windows-TaskScheduler/Operational$"}}
+  - {match: {product: windows, service: wmi},        field_map: winevent, if_sid: [60000], require: {win.system.channel: "^Microsoft-Windows-WMI-Activity/Operational$"}}
+  - {match: {product: windows, service: windefend},  field_map: winevent, if_sid: [60005], note: "Defender channel"}
+  # ---- Web servers (Wazuh web-accesslog decoder) -----------------------------
+  - {match: {category: webserver}, field_map: web, if_sid: [31100], note: "web access log"}
+  # ---- Linux auditd -----------------------------------------------------------
+  - {match: {product: linux, service: auditd}, field_map: auditd, if_group: audit}
+
+# Unsupported on purpose (no reliable Wazuh equivalent yet): linux process_creation
+# without auditd, macOS, cloud (Azure/AWS/M365), network devices. They are listed in
+# the coverage report as "unsupported logsource" instead of being silently dropped.
+
+# Field maps -----------------------------------------------------------------
+# strategy "lower_first": Sigma `CommandLine` -> `win.eventdata.commandLine`
+# (this is how Wazuh flattens event channel XML), "explicit": only `map` entries.
+field_maps:
+  sysmon:
+    strategy: lower_first
+    prefix: win.eventdata.
+    map:
+      EventID: win.system.eventID
+      Computer: win.system.computer
+      Channel: win.system.channel
+      Provider_Name: win.system.providerName
+  winevent:
+    strategy: lower_first
+    prefix: win.eventdata.
+    map:
+      EventID: win.system.eventID
+      Computer: win.system.computer
+      Channel: win.system.channel
+      Provider_Name: win.system.providerName
+      Level: win.system.severityValue
+      # Security 4688 uses different names than Sysmon
+      Image: win.eventdata.newProcessName
+      ParentImage: win.eventdata.parentProcessName
+      User: win.eventdata.subjectUserName
+  web:
+    strategy: explicit
+    map:
+      c-uri: url
+      cs-uri: url
+      cs-uri-query: url
+      cs-method: protocol
+      sc-status: id
+  auditd:
+    strategy: explicit
+    map:
+      type: audit.type
+      exe: audit.exe
+      comm: audit.command
+      key: audit.key
+      a0: audit.execve.a0
+      a1: audit.execve.a1
+      a2: audit.execve.a2
+      a3: audit.execve.a3
+      cwd: audit.cwd
+      name: audit.file.name
+
+# Sigma level -> Wazuh level (0..15)
+levels:
+  informational: 3
+  low: 5
+  medium: 8
+  high: 11
+  critical: 13

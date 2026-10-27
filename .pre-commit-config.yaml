@@ -1,0 +1,23 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+        exclude: ^(archive/|\.github/)
+      - id: end-of-file-fixer
+        exclude: ^(archive/|DETECTION_WIKI|rules/sigma/|.*\.svg$)
+      - id: detect-private-key
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        files: ^(src|tests)/
+  - repo: local
+    hooks:
+      - id: sigma-validate
+        name: validate Sigma rules
+        entry: dectools-validate rules/sigma
+        language: system
+        pass_filenames: false
+        files: ^rules/sigma/

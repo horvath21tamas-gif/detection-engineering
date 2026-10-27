@@ -22,6 +22,7 @@ detection:
       - '\User Data\Default\Login Data'
       - '\User Data\Default\Network\Cookies'
       - '\AppData\Roaming\Mozilla\Firefox\Profiles'
+  selection_token_theft_and2:
     CommandLine|contains:
       - 'copy '
       - 'type '
@@ -60,7 +61,7 @@ detection:
       - '\CcmExec.exe' 
       - '\gpscript.exe'
 
-  condition: (selection_token_theft and not filter_browser_binaries and not filter_migration) or (selection_spoofing and not filter_admin)
+  condition: ((selection_token_theft and selection_token_theft_and2) and not filter_browser_binaries and not filter_migration) or (selection_spoofing and not filter_admin)
 falsepositives:
   - IT support scripts used for legitimate credential collection.
   - Browser profile backup tools.

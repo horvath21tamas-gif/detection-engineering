@@ -23,6 +23,7 @@ detection:
     CommandLine|contains:
       - ' save '
       - ' export '
+  selection_reg_logic_and2:
     CommandLine|contains:
       - 'hklm\sam'
       - 'hklm\system'
@@ -67,7 +68,7 @@ detection:
       - '\Program Files (x86)\'
 
   condition: >
-    (selection_reg_logic or selection_direct_copy)
+    ((selection_reg_logic and selection_reg_logic_and2) or selection_direct_copy)
     and (selection_suspicious_parent or selection_file_anomalies)
     and not (filter_legit_maintenance or filter_legit_backup_tools)
 

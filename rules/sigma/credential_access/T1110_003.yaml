@@ -30,6 +30,7 @@ detection:
       - 'foreach'                     
       - 'net'                       
       - 'use'                         
+  selection_loops_and2:
     CommandLine|contains|all:
       - 'for /f'                 
       - 'net'                       
@@ -57,7 +58,7 @@ detection:
       - 'C:\IT_Admin\Scripts\'        
 
   condition: |
-    (selection_spray_logic or selection_loops) and 
+    (selection_spray_logic or (selection_loops and selection_loops_and2)) and 
     selection_untrusted_location and 
     not filter_it_infra and 
     not filter_legit_scripts

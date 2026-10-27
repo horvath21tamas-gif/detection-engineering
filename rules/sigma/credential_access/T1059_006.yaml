@@ -27,6 +27,7 @@ detection:
     selection_one_liner_logic:
         CommandLine|contains:
             - ' -c '
+    selection_one_liner_logic_and2:
         CommandLine|contains:
             - 'import socket'   
             - 'pty.spawn'       
@@ -56,5 +57,5 @@ detection:
         - User: 'root'
           ParentImage: '/usr/sbin/sshd' 
 
-    condition: selection_interpreter and (selection_one_liner_logic or selection_risky_parents) and not filter_legit_automation
+    condition: selection_interpreter and ((selection_one_liner_logic and selection_one_liner_logic_and2) or selection_risky_parents) and not filter_legit_automation
 level: critical

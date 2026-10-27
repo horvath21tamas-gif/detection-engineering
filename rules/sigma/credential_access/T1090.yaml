@@ -21,6 +21,7 @@ detection:
       - 'portproxy'
       - 'add'
       - 'v4tov4'
+  selection_netsh_pivot_and2:
     CommandLine|contains:
       - 'listenport='
       - 'connectaddress='
@@ -51,5 +52,5 @@ detection:
     ParentImage|endswith:
       - '\services.exe'
 
-  condition: (selection_netsh_pivot or selection_proxy_args) and selection_procs and not filter_legit_infra
+  condition: ((selection_netsh_pivot and selection_netsh_pivot_and2) or selection_proxy_args) and selection_procs and not filter_legit_infra
 level: critical

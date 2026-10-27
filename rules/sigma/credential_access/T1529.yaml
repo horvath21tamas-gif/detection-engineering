@@ -36,9 +36,11 @@ detection:
             - 'Restart-Computer'
             - 'shutdown'
             - 'reboot'
+    selection_shutdown_commands_and2:
         CommandLine|contains:
             - ' /f'
             - ' /t 0'
+    selection_shutdown_commands_and3:
         CommandLine|contains:
             - ' /a'  # abort flag
 
@@ -77,7 +79,7 @@ detection:
 
     condition: 
         selection_shutdown_tools 
-        and selection_shutdown_commands 
+        and (selection_shutdown_commands and selection_shutdown_commands_and2 and selection_shutdown_commands_and3) 
         and selection_suspicious_context 
         and not filter_legit_system_automation
 

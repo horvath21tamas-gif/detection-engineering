@@ -22,18 +22,18 @@ logsource:
 
 detection:
     selection_encoding_logic:
-        CommandLine: '(FromBase64String|ToBase64String|-decode\s|-encode\s|\\[System\.Text\.Encoding\\]::|BXAAR|TVqQA)'
+        CommandLine|re|i: '(FromBase64String|ToBase64String|-decode\s|-encode\s|\[System\.Text\.Encoding\]::|BXAAR|TVqQA)'
 
     selection_entropy:
-        CommandLine: '(?i).*[a-z0-9+/]{500,}.*'
+        CommandLine|re|i: '(?i).*[a-z0-9+/]{500,}.*'
 
     selection_context:
-        ParentImage: '(winword\.exe|excel\.exe|w3wp\.exe|sqlservr\.exe)$'
-        Image: '(rundll32\.exe|regsvr32\.exe|colorcpl\.exe)$'
+        ParentImage|re|i: '(winword\.exe|excel\.exe|w3wp\.exe|sqlservr\.exe)$'
+        Image|re|i: '(rundll32\.exe|regsvr32\.exe|colorcpl\.exe)$'
 
     filter_legit_infra:
-        CommandLine: '(C:\\Windows\\System32\\wbem\\WmiPrvSE\.exe|CCM\\Cache|Microsoft\.Cloud\.Data)'
-        Image: 'powershell_ise\.exe$'
+        CommandLine|re|i: '(C:\\Windows\\System32\\wbem\\WmiPrvSE\.exe|CCM\\Cache|Microsoft\.Cloud\.Data)'
+        Image|re|i: 'powershell_ise\.exe$'
         UserName: 'NT AUTHORITY\\SYSTEM'
 
     condition: ((selection_encoding_logic and selection_entropy) or (selection_context and selection_encoding_logic)) and not filter_legit_infra

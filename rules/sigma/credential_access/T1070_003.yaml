@@ -39,11 +39,13 @@ detection:
       - 'Set-InboxRule'
       - ' -DeleteMessage $true'
       - ' -MoveToFolder'
+  selection_malicious_rules_and2:
     CommandLine|contains:
       - 'Junk'
       - 'Trash'
       - 'Deleted Items'
       - 'Archive'
+  selection_malicious_rules_and3:
     CommandLine|contains:
       - 'Security'
       - 'Alert'
@@ -68,7 +70,7 @@ detection:
         - 'Retention'
     - ParentImage|endswith: '\ExSetup.exe'
 
-  condition: (selection_bulk_delete or selection_malicious_rules)
+  condition: (selection_bulk_delete or (selection_malicious_rules and selection_malicious_rules_and2 and selection_malicious_rules_and3))
              and (selection_suspicious_chain or not filter_trusted_operations)
 
 falsepositives:

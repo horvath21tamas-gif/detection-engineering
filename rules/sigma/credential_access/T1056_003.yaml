@@ -50,6 +50,7 @@ detection:
       - '.pfx'
       - '.p12'
       - '.pvk'
+  selection_filesystem_search_and2:
     CommandLine|contains:
       - 'copy '
       - 'move '
@@ -71,7 +72,7 @@ detection:
         - '\svchost.exe'
     - User|startswith: 'NT AUTHORITY\'
 
-  condition: (selection_export_cli or selection_crypto_abuse or selection_filesystem_search)
+  condition: (selection_export_cli or selection_crypto_abuse or (selection_filesystem_search and selection_filesystem_search_and2))
              and selection_untrusted_context
              and not filter_legit_pki
 

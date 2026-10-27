@@ -34,6 +34,7 @@ detection:
       - 'wget '
       - 'Invoke-WebRequest'
       - 'Invoke-RestMethod'
+  selection_external_and2:
     CommandLine|contains:
       - 'ifconfig.me'
       - 'icanhazip.com'
@@ -55,7 +56,7 @@ detection:
       - '--check-connection'
       - '--update'
 
-  condition: (selection_local or selection_external) and not filter_system and not filter_installers
+  condition: (selection_local or (selection_external and selection_external_and2)) and not filter_system and not filter_installers
 falsepositives:
   - IT Support troubleshooting network issues
   - Automated software update checks

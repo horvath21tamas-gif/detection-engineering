@@ -44,6 +44,7 @@ detection:
             - '\trustedinstaller.exe'
             - '\System32\msiexec.exe'
             - '\Microsoft\Office\root\Integration\Integrator.exe' # Office frissítő
+    filter_trusted_installers_and2:
         Image|endswith:
             - '\chrome.exe'
             - '\msedge.exe'
@@ -53,5 +54,5 @@ detection:
             - 'C:\Program Files\'
             - 'C:\Program Files (x86)\'
 
-    condition: selection_registry and (selection_suspicious_path or selection_suspicious_writer) and not (filter_trusted_installers or filter_standard_location)
+    condition: selection_registry and (selection_suspicious_path or selection_suspicious_writer) and not ((filter_trusted_installers and filter_trusted_installers_and2) or filter_standard_location)
 level: high

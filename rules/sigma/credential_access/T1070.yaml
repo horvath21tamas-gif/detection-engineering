@@ -29,6 +29,7 @@ detection:
     CommandLine|contains:
       - ' cl '
       - ' clear-log '
+  selection_wevtutil_clear_and2:
     CommandLine|contains:
       - 'Security'
       - 'System'
@@ -69,7 +70,7 @@ detection:
         - 'CCM\Temp'
         - 'HealthCheck'
 
-  condition: (selection_wevtutil_clear or selection_forensic_wipe)
+  condition: ((selection_wevtutil_clear and selection_wevtutil_clear_and2) or selection_forensic_wipe)
              and (selection_suspicious_parent or not filter_legit_maintenance)
 
 falsepositives:

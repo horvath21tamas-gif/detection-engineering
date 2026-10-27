@@ -28,7 +28,6 @@ detection:
 
   selection_compiler_stripping:
     CommandLine|contains:
-      - ' -s '
       - '-Wl,-s'
       - '-strip-all'
       - '/NODEBUG'

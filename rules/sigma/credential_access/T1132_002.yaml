@@ -21,17 +21,17 @@ logsource:
 
 detection:
     selection_logic:
-        CommandLine: '(-bxor|bit\.bxor|\[char\[\]\]|::FromCharacterCode|\.replace\()'
+        CommandLine|re|i: '(-bxor|bit\.bxor|\[char\[\]\]|::FromCharacterCode|\.replace\()'
 
     selection_fragmentation:
-        CommandLine: '(?i)([`]{2,}.*){2,}'
+        CommandLine|re|i: '(?i)([`]{2,}.*){2,}'
 
     selection_context:
-        ParentImage: '(winword\.exe|excel\.exe|outlook\.exe|w3wp\.exe)$'
-        Image: '(rundll32\.exe|regsvr32\.exe|colorcpl\.exe)$'
+        ParentImage|re|i: '(winword\.exe|excel\.exe|outlook\.exe|w3wp\.exe)$'
+        Image|re|i: '(rundll32\.exe|regsvr32\.exe|colorcpl\.exe)$'
 
     filter_legit_infra:
-        CommandLine: '(C:\\Program Files\\|Microsoft\\Exchange|Chocolatey|NuGet)'
+        CommandLine|re|i: '(C:\\Program Files\\|Microsoft\\Exchange|Chocolatey|NuGet)'
         UserName: 'NT AUTHORITY\\SYSTEM'
 
     condition: ((selection_logic and selection_fragmentation) or (selection_context and selection_logic)) and not filter_legit_infra

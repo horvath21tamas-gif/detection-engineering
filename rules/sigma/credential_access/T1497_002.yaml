@@ -39,6 +39,7 @@ detection:
       - 'MessageBox'
       - 'powershell -Command "[Reflection.Assembly]::LoadWithPartialName(''System.Windows.Forms''); [System.Windows.Forms.MessageBox]::Show'
       - 'wscript.shell'
+  fake_ui_attempts_and2:
     CommandLine|contains:
       - 'Error'
       - 'Required'
@@ -57,6 +58,6 @@ detection:
       - '\msedge.exe'
       - '\firefox.exe'
 
-  condition: suspicious_process and (api_discovery or fake_ui_attempts) 
+  condition: suspicious_process and (api_discovery or (fake_ui_attempts and fake_ui_attempts_and2)) 
              and not (trusted_system_filter or known_browsers_filter)
 level: high

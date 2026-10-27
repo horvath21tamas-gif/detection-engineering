@@ -38,6 +38,7 @@ detection:
       - '> /var/log/'
       - '>/var/log/'
       - '/dev/null'
+  selection_manual_truncation_and2:
     CommandLine|contains:
       - 'auth.log'
       - 'secure'
@@ -65,7 +66,7 @@ detection:
     - User: 'root'
       ParentImage|endswith: '/ansible'
 
-  condition: (selection_journal_purge or selection_manual_truncation)
+  condition: (selection_journal_purge or (selection_manual_truncation and selection_manual_truncation_and2))
              and (selection_suspicious_origin or not filter_automated_maintenance)
 
 falsepositives:

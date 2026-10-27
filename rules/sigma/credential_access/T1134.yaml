@@ -21,21 +21,21 @@ logsource:
 
 detection:
     selection_tools:
-        CommandLine: '(steal_token|impersonate|incognito|make_token|token::elevate|token::revert)'
-        Image: '(\\incognito\.exe|\\mimikatz\.exe)$'
+        CommandLine|re|i: '(steal_token|impersonate|incognito|make_token|token::elevate|token::revert)'
+        Image|re|i: '(\\incognito\.exe|\\mimikatz\.exe)$'
 
     selection_token_hop:
-        ParentImage: '(powershell\.exe|pwsh\.exe|cmd\.exe|cscript\.exe|wscript\.exe)$'
+        ParentImage|re|i: '(powershell\.exe|pwsh\.exe|cmd\.exe|cscript\.exe|wscript\.exe)$'
         User: 'SYSTEM'
         LogonId: '0x3e7'
 
     selection_lsass_access:
-        TargetImage: 'lsass\.exe$'
+        TargetImage|re|i: 'lsass\.exe$'
         GrantedAccess: '0x1438'
 
     filter_trusted_system:
-        - ParentImage: '(services\.exe|wininit\.exe|winlogon\.exe|lsass\.exe)$'
-        - Image: '\\Windows\\System32\\wbem\\WmiPrvSE\.exe'
+        - ParentImage|re|i: '(services\.exe|wininit\.exe|winlogon\.exe|lsass\.exe)$'
+        - Image|re|i: '\\Windows\\System32\\wbem\\WmiPrvSE\.exe'
         - UserName: 'NT AUTHORITY\\SYSTEM'
 
     condition: (selection_tools or selection_token_hop or selection_lsass_access) and not filter_trusted_system

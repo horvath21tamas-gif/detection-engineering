@@ -38,6 +38,7 @@ detection:
             - 'SaveNothing'
             - 'HistorySavePath'
             - 'AddToHistoryHandler'
+    selection_psreadline_impairment_and2:
         CommandLine|contains:
             - '$false'
             - '$null'
@@ -75,6 +76,7 @@ detection:
             - 'del '
             - 'erase '
             - 'rm '
+    selection_history_delete_and2:
         CommandLine|contains:
             - '\ConsoleHost_history.txt'
             - '\PSReadLine\'
@@ -107,10 +109,10 @@ detection:
             - 'AppData\Local\Temp\SDI'
 
     condition: (
-                    (selection_psreadline_core and selection_psreadline_impairment)
+                    (selection_psreadline_core and (selection_psreadline_impairment and selection_psreadline_impairment_and2))
                     or (selection_ps_encoded and selection_history_keywords)
                     or selection_registry_console_history
-                    or selection_history_delete
+                    or (selection_history_delete and selection_history_delete_and2)
                )
                and selection_suspicious_parent
                and not filter_dev_tools

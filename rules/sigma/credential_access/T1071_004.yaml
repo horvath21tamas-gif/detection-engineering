@@ -29,7 +29,7 @@ detection:
       - '\cmd.exe'
 
   selection_long_queries:
-    QueryName: '^.{64,255}\..*$'
+    QueryName|re|i: '^.{64,255}\..*$'
 
   selection_query_types:
     QueryType:

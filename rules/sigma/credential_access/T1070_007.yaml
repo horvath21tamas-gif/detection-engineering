@@ -19,6 +19,7 @@ detection:
     CommandLine|contains:
       - 'reg'
       - 'delete'
+  selection_rdp_registry_wipe_and2:
     CommandLine|contains:
       - '\Software\Microsoft\Terminal Server Client\Default'
       - '\Software\Microsoft\Terminal Server Client\Servers'
@@ -31,6 +32,7 @@ detection:
     CommandLine|contains:
       - 'use'
       - '/delete'
+  selection_net_share_wipe_and2:
     CommandLine|contains:
       - '*'
       - ' /y'
@@ -55,8 +57,8 @@ detection:
         - 'SystemReset.exe'
 
   condition: 
-    (selection_rdp_registry_wipe 
-     or selection_net_share_wipe 
+    ((selection_rdp_registry_wipe and selection_rdp_registry_wipe_and2) 
+     or (selection_net_share_wipe and selection_net_share_wipe_and2) 
      or (selection_dns_flush and selection_suspicious_chain))
     and not filter_trusted_admin_behavior
 level: high

@@ -1,5 +1,1 @@
 # Sigma rules kept out of the Wazuh build until they are fixed (id: reason).
-3b3710a7-1b89-477a-894d-f9f8a80da1c1: High-Fidelity Account Compromise and Identity Manipulation - T1586 - alerts on benign event 'scheduler service host'
-6d401796-b411-4224-a008-2481aa5a7402: Binary Symbol Stripping (T1027.007) - alerts on benign event 'scheduler service host'
-94d292a3-0a22-430c-b8b3-a83f21d96a79: Credential Export & Cracking (T1110.002) - alerts on benign event 'notepad opens a text file'
-f1c7ad80-e15c-460d-890d-7da3b6b961af: External Proxy & Tunneling (T1090.002) - alerts on benign event 'scheduler service host'

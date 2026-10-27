@@ -40,6 +40,7 @@ detection:
         CommandLine|contains:
             - ' /c '
             - ' -c '
+    selection_forfiles_and2:
         CommandLine|contains:
             - 'cmd'
             - 'powershell'
@@ -82,7 +83,7 @@ detection:
             - '\Windows\System32\'
 
     condition: 
-        (selection_pcalua or selection_forfiles or selection_conhost)
+        (selection_pcalua or (selection_forfiles and selection_forfiles_and2) or selection_conhost)
         and selection_suspicious_origin
         and not filter_trusted_system
 

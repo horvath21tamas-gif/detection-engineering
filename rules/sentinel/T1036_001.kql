@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath in ("*\svchost.exe", "*\lsass.exe", "*\services.exe", "*\wininit.exe", "*\smss.exe", "*\csrss.exe", "*\winlogon.exe", "*\spoolsv.exe", "*\taskhostw.exe")) and (SignatureStatus in ("invalid", "unavailable", "error")) and (not ((Signed =~ "true" and SignatureStatus =~ "Valid" and Publisher contains "Microsoft Corporation") or FolderPath startswith "C:\Windows\WinSxS\" or (username in ("NT AUTHORITY\SYSTEM", "NT AUTHORITY\LOCAL SERVICE", "NT AUTHORITY\NETWORK SERVICE"))))) or ((ProcessCommandLine in ("*Micros0ft*", "*Mircosoft*", "*Microsof *", "*Microsofts*", "*Google Inc*")) and (not ((Signed =~ "true" and SignatureStatus =~ "Valid" and Publisher contains "Microsoft Corporation") or FolderPath startswith "C:\Windows\WinSxS\" or (username in ("NT AUTHORITY\SYSTEM", "NT AUTHORITY\LOCAL SERVICE", "NT AUTHORITY\NETWORK SERVICE")))))

@@ -1,1 +1,0 @@
-(operationName:"Add user" AND result:success) AND initiatedBy_user_userPrincipalName:*@* AND (ipAddress:unusual_ip OR (userAgent:(*python\-requests* OR *curl* OR *Postman* OR *Kali*))) AND (NOT (initiatedBy_app_displayName:("Azure AD Connect" OR "Workday to Azure AD" OR "Okta Provisioning" OR MS\-PIM)))

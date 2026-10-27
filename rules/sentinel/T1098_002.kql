@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (Operation in ("Add-MailboxPermission", "Add-RecipientPermission")) and (AccessRights in ("*FullAccess*", "*SendAs*", "*SendOnBehalf*")) and ((UserId contains "admin-" or ClientIPAddress contains "10.50.") or (TargetUser in ("*ceo*", "*cfo*", "*director*", "*legal*", "*finance*"))) and (not (((UserId in ("NT AUTHORITY\SYSTEM", "Microsoft.Exchange.ServiceMS")) and UserAgent contains "ExchangeConfiguration/15") or (UserId in ("*svc-backup-cloud*", "*it-automation-principal*"))))

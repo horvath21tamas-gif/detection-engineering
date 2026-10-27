@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powerpnt.exe", "*\outlook.exe", "*\acrord32.exe", "*\chrome.exe", "*\msedge.exe", "*\vlc.exe", "*\7zFM.exe", "*\winrar.exe")) and (FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\certutil.exe", "*\bitsadmin.exe", "*\scrcons.exe", "*\schtasks.exe", "*\regsvr32.exe", "*\rundll32.exe", "*\whoami.exe")) and (not ((ProcessCommandLine in ("*--type=renderer*", "*--type=utility*", "*MicrosoftEdgeUpdate.exe*", "*OfficeClickToRun.exe*")) or (FolderPath in ("*\splwow64.exe", "*\WerFault.exe")))) and (not processcommandline is null)

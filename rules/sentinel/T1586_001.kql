@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe")) or (ProcessCommandLine in ("*--headless*", "*--remote-debugging-port*", "*--disable-gpu*", "*--user-data-dir=*"))) or ((FolderPath in ("*\python.exe", "*\node.exe")) or (ProcessCommandLine in ("*selenium*", "*puppeteer*", "*playwright*", "*tweepy*", "*instaloader*")))) and (not ((User in ("*mkt_automation*", "*social_media_mgr*")) and ProcessCommandLine contains "C:\Program Files\Social_Tools\")) and (not ((ParentProcessName in ("*\code.exe", "*\idea64.exe")) and (ProcessCommandLine in ("*localhost*", "*127.0.0.1*")))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_headless_automation"))

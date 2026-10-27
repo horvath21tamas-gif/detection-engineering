@@ -1,1 +1,0 @@
-TargetObject="*\\Services\\DHCPServer\\Parameters\\Options\\*" TargetObject IN ("*\\066*", "*\\067*") Details IN ("*.efi*", "*.bin*", "*.pxe*", "*.com*") Image IN ("*\\dhcpssvc.exe", "*\\mmc.exe", "*\\svchost.exe", "*\\powershell.exe", "*\\pwsh.exe", "*\\cmd.exe", "*\\netsh.exe", "*\\reg.exe") NOT (username="NT AUTHORITY\\NETWORK SERVICE" OR Image="*C:\\Windows\\System32\\*")

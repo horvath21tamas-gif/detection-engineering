@@ -1,9 +1,0 @@
-
-| rex field=Details "(?<DetailsMatch>(\\\\AppData\\\\Local\\\\Temp\\\\|C:\\\\Users\\\\Public\\\\|\\\\Downloads\\\\|http))"
-| eval DetailsCondition=if(isnotnull(DetailsMatch), "true", "false")
-| rex field=Image "(?<ImageMatch>(powershell\\.exe|cmd\\.exe|wscript\\.exe|cscript\\.exe|reg\\.exe|bitsadmin\\.exe)$)"
-| eval ImageCondition=if(isnotnull(ImageMatch), "true", "false")
-| search DetailsCondition="true" OR ImageCondition="true"
-| regex TargetObject="\\\\Software\\\\Microsoft\\\\Office\\\\.*\\\\(Addins\\\\LoadBehavior|Options\\\\OPEN|Outlook\\\\WebView\\\\URL|Security\\\\Trusted Documents\\\\TrustRecords)$"
-| regex Image="(msiexec\\.exe|setup\\.exe|OfficeClickToRun\\.exe)$"
-| regex Details="(C:\\\\Program Files\\\\|C:\\\\Program Files \\(x86\\)\\\\)"

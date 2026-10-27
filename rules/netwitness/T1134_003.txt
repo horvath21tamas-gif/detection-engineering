@@ -1,2 +1,0 @@
-(((processcommandline = '*(make_token|sekurlsa::pth|kerberos::pth|Invoke-Mimikatz|New-PassThroughToken|/netonly)*'))|| ((Parentprocessname = '*(powershell\\.exe|pwsh\\.exe|cmd\\.exe|wscript\\.exe|cscript\\.exe|rundll32\\.exe)$*'))|| (LogonType = 9 AND ((AuthenticationPackage = '*Negotiate*')))) AND (NOT ((((Parentprocessname = '*(\\Windows\\System32\\services\\.exe|\\Windows\\System32\\msiexec\\.exe|\\AzureAD\\)*'))|| ((processcommandline = '*(Visual Studio|IntelliJ|git-remote-https)*'))|| ((user.dst = '*NT AUTHORITY\\SYSTEM*'))))
-)

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*/docker", "*/kubectl", "*/podman", "*/crictl")) and (ProcessCommandLine in ("* run *", "* apply *", "* create *")) and (((ProcessCommandLine in ("* --privileged*", "* --cap-add=SYS_ADMIN*", "* --cap-add=ALL*")) or (ProcessCommandLine in ("* --network=host*", "* --pid=host*", "* --ipc=host*")) or (ProcessCommandLine in ("*-v /var/run/docker.sock*", "*-v /:/host*", "*-v /etc/shadow*"))) or (ProcessCommandLine in ("*docker.io/*", "*quay.io/*", "*ghcr.io/*", "*bitnami/*"))) and (not ((username in ("terraform", "ansible-runner", "kube-system")) or (ProcessCommandLine in ("*my-company.azurecr.io*", "*internal-registry.local*"))))

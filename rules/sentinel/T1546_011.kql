@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath endswith "\sdbinst.exe" and ProcessCommandLine contains ".sdb") and (ProcessCommandLine in ("*\Users\*", "*\ProgramData\*", "*\Windows\Temp\*", "*\AppData\*")) and (not ProcessCommandLine contains "C:\Windows\AppPatch\")) or (TargetObject contains "AppCompatFlags\InstalledSDB" and (not ((ParentProcessName in ("*\msiexec.exe", "*\trustedinstaller.exe", "*\TiWorker.exe")) and username =~ "NT AUTHORITY\SYSTEM")))

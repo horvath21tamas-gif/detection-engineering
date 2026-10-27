@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((processcommandline =~ "(-bxor|bit\.bxor|\[char\[\]\]|::FromCharacterCode|\.replace\()" and processcommandline match "(*i)([`]{2,}.*){2,}") or ((Parentprocessname =~ "(winword\.exe|excel\.exe|outlook\.exe|w3wp\.exe)$" and processname =~ "(rundll32\.exe|regsvr32\.exe|colorcpl\.exe)$") and processcommandline =~ "(-bxor|bit\.bxor|\[char\[\]\]|::FromCharacterCode|\.replace\()")) and (not (processcommandline =~ "(C:\Program Files\|Microsoft\Exchange|Chocolatey|NuGet)" and UserName =~ "NT AUTHORITY\SYSTEM"))

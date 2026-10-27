@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath endswith "\tscon.exe" and OriginalFileName =~ "tscon.exe") and ((ProcessCommandLine in ("* /dest:*", "* /password*", "*dest:console*", "*rdp-tcp#*", "* /shadow*", "* /control*")) or ((ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\psexesvc.exe", "*\wsmprovhost.exe", "*\winword.exe", "*\excel.exe", "*\httpd.exe", "*\w3wp.exe")) and IntegrityLevel =~ "System")) and (not ((ParentProcessName in ("*\svchost.exe", "*\rdpinit.exe", "*\winlogon.exe", "*\termsrv.dll")) and (ProcessCommandLine in ("*Citrix*", "*VMware*", "*vmsvga*", "*C:\Program Files\*")) and (username in ("NT AUTHORITY\SYSTEM", "NT AUTHORITY\NETWORK SERVICE"))))

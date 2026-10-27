@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where hash =~ "" and (FolderPath in ("*\Users\*", "*\ProgramData\*", "*\Windows\Temp\*", "*\AppData\Local\Temp\*")) and (ParentProcessName in ("*\powershell.exe", "*\cmd.exe", "*\cscript.exe", "*\wscript.exe", "*\rundll32.exe", "*\mshta.exe")) and (not ((ParentProcessName in ("*\Google\Update\*", "*\Microsoft\EdgeUpdate\*", "*\Windows\servicing\TrustedInstaller.exe*")) or (FolderPath in ("*\Program Files\*", "*\Windows\System32\*")) or Company =~ "Microsoft Corporation"))

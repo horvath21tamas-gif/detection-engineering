@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ProcessCommandLine in ("*user /add*", "*user /ad*", "*New-LocalUser*", "*New-ADUser*", "*ad-user -name*")) and ((ParentProcessName in ("*\w3wp.exe", "*\httpd.exe", "*\sqlservr.exe", "*\winword.exe", "*\powershell.exe")) or ((not ((ParentProcessName in ("*\CcmExec.exe", "*\omadmac.exe", "*\svchost.exe")) and (FolderPath in ("*\net.exe", "*\net1.exe")) and username =~ "NT AUTHORITY\SYSTEM")) and (not ((ParentProcessName in ("*\Windows\Temp\*", "*\ConfigMgr\*")) and (ProcessCommandLine in ("*MSSQL$*", "*IIS_*"))))))

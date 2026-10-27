@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((IntegrityLevel in ("System", "High")) and User contains "NT AUTHORITY\SYSTEM") and (FolderPath in ("*\Users\*", "*\Downloads\*", "*\AppData\Local\Temp\*", "*\Windows\Temp\*", "*\PerfLogs\*", "*\ProgramData\*")) and (FolderPath in ("*\setup.exe", "*\install.exe", "*\update.exe", "*\msiexec.exe", "*\cmd.exe", "*\powershell.exe")) and (not (((ParentProcessName in ("*\CcmExec.exe", "*\TaniumClient.exe", "*\MonitoringHost.exe", "*\ManagementAgent.exe")) and (ProcessCommandLine in ("*\Windows\ccmcache\*", "*\Windows\SoftwareDistribution\*", "*\Windows\System32\DriverStore\*"))) or (FolderPath in ("*\Google\Update\*", "*\Microsoft\EdgeUpdate\*"))))

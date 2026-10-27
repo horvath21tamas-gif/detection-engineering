@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (TargetObject contains "System\CurrentControlSet\Services\" and TargetObject endswith "\ImagePath") and ((Details in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Public\*", "*\Downloads\*", "*C:\PerfLogs\*", "*\OneDrive\*", "*\Dropbox\*")) or (Details in ("*cmd.exe*", "*powershell.exe*", "*pwsh.exe*", "*cscript.exe*", "*wscript.exe*", "*mshta.exe*", "*rundll32.exe*", "*explorer.exe /embedding*", "*regsvr32.exe*"))) and (not (((FolderPath in ("C:\Windows\servicing\*", "C:\Windows\System32\svchost.exe*", "C:\Windows\sysnative\svchost.exe*", "C:\Windows\System32\sc.exe*")) and User startswith "NT AUTHORITY\SYSTEM") or ((FolderPath in ("*\Google\Update\*", "*\Microsoft\EdgeUpdate\*", "*\Adobe\ARM\*", "*\Apple\MobileDevice\*", "*\Zoom\bin\*")) and (Details in ("*\Program Files\*", "*\Program Files (x86)\*")))))

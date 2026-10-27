@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\rundll32.exe", "*\cscript.exe")) and (ProcessCommandLine in ("*user32.dll,SetWindowsHook*", "*[User32]::GetAsyncKeyState*", "*GetKeyboardState*", "*RawInput*"))) or ((ProcessCommandLine in ("* >> *", "*out-file*")) and (FolderPath in ("*\Users\*", "*\Temp\*"))) or (ProcessCommandLine in ("*Invoke-Keystrokes*", "*Get-Keystrokes*", "*keylog_recorder*", "*logkeys*"))) and (not ((FolderPath in ("*\Program Files\*", "*\Program Files (x86)\*")) and ProcessCommandLine contains "node_modules" and User startswith "NT AUTHORITY\"))

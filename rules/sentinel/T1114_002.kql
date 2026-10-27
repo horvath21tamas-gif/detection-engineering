@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ProcessCommandLine in ("*New-MailboxExportRequest*", "*New-ComplianceSearch*", "*Search-Mailbox*")) and ((ProcessCommandLine in ("*-ContentFilter*", "*-TargetMailbox*", "*-FilePath \\*", "*-Subject*")) or (ProcessCommandLine in ("*password*", "*invoice*", "*budget*", "*confidential*", "* -Force*", "* -ErrorAction SilentlyContinue*"))) and ((ParentProcessName in ("*\powershell.exe", "*\w3wp.exe", "*\cmd.exe")) and IntegrityLevel =~ "High") and (not ((username in ("NT AUTHORITY\SYSTEM", "SVC_BACKUP_EXCH")) or (ProcessCommandLine in ("*HealthCheck.ps1*", "*Maintenance*", "*\Standard_Backup_Path\*"))))

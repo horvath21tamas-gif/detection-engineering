@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (processcommandline =~ "(TVqQA|TVpQA|f0VMR|UEsDB)" or (processcommandline =~ "(FromBase64String\(|-decode\s|\[System\.Convert\]::|IO\.MemoryStream|DeflateStream)" and processcommandline match "(*i).*[a-z0-9+/=]{1500,}.*")) and ((processname =~ "(winword\.exe|excel\.exe|w3wp\.exe|sqlservr\.exe|spoolsv\.exe)$" and Parentprocessname =~ "(outlook\.exe|chrome\.exe)$") or (not (processname =~ "(\Program Files\|\ccm\|\AzureConnectedMachineAgent\)" and processcommandline =~ "(Chocolatey|NuGet|Microsoft\.Cloud\.Data)" and UserName =~ "NT AUTHORITY\SYSTEM")))

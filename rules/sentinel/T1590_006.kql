@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((ProcessCommandLine in ("*/.env*", "*/.git/*", "*/.ssh/*", "*/config.php*", "*/web.config*", "*/settings.py*", "*/.aws/credentials*")) or ((FolderPath in ("*\ffuf.exe", "*\gobuster.exe", "*\dirsearch.exe", "*\nikto.exe")) or (ProcessCommandLine in ("* -wordlist*", "* -w *", "* --threads*", "* -recursive*"))) or (ProcessCommandLine in ("* --banner*", "* --header \"User-Agent:*", "*whatweb*", "*Wappalyzer*"))) and (not (ProcessCommandLine in ("*localhost:*", "*127.0.0.1*", "*::1*", "*.local*", "*.test*"))) and (not (ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe"))) and (not (FolderPath in ("*\OneDrive.exe", "*\Dropbox.exe", "*\Teams.exe")))

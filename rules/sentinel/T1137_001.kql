@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (TargetFilename contains "\AppData\Roaming\Microsoft\Templates\" and (TargetFilename in ("*\Normal.dotm", "*\NormalEmail.dotm"))) and (EventType in ("Create", "Write", "Modify", "Rename", "Delete")) and ((FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\rundll32.exe")) or (FolderPath in ("*\AppData\Local\Temp\*", "*\Users\Public\*", "*\ProgramData\*", "*\Windows\Temp\*")) or (not (FolderPath in ("*\winword.exe", "*\outlook.exe", "*\OfficeClickToRun.exe")))) and (not (FolderPath in ("*\Windows\ccm\*", "*\IntuneManagementExtension\*", "*\Tanium\*", "*\Program Files\OneDrive\*", "*\MigrateUser.exe*"))) and (not (User in ("NT AUTHORITY\*", "NT SERVICE\*")))

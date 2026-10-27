@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\aws.exe", "*\az.exe", "*\gsutil.exe", "*\rclone.exe", "*\mega.exe")) or (ProcessCommandLine in ("*put-bucket-acl*", "*--acl public-read*", "*upload-batch*", "*sync*", "*copy*"))) and (ProcessCommandLine in ("*.exe*", "*.dll*", "*.ps1*", "*.zip*", "*.7z*", "*--public-access*"))) and (not ((User in ("*svc_backup*", "*svc_deploy*", "*github_actions_runner*")) or (FolderPath in ("*\Veeam\*", "*\actions-runner\*", "*\Jenkins\*")))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_high_risk_payloads")) and (not ((ProcessCommandLine in ("*.jpg*", "*.png*", "*.pdf*", "*.docx*")) and condition =~ "not selection_high_risk_payloads"))

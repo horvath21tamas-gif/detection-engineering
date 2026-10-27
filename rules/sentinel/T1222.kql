@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\icacls.exe", "*\takeown.exe", "*\cacls.exe", "*\attrib.exe")) and (ProcessCommandLine in ("*:f*", "* /grant*", "*Everyone:*", "*Authenticated Users:*", "*/setowner*", "*/inheritance:r*")) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\mshta.exe", "*\wscript.exe", "*\cscript.exe", "*\httpd.exe", "*\nginx.exe", "*\php-cgi.exe", "*\sqlservr.exe")) or (FolderPath in ("*\Users\*", "*\Temp\*", "*\AppData\*"))) and (not ((ParentProcessName in ("*\Windows\servicing\TrustedInstaller.exe*", "*\CcmExec.exe*", "*\Program Files\Microsoft Visual Studio\*")) and (ProcessCommandLine in ("*Microsoft\Windows\SoftwareDistribution*", "*AppData\Local\Packages*"))))

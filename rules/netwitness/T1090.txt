@@ -1,2 +1,0 @@
-((((param = '*listenport=*' OR param = '*connectaddress=*'))) OR (((param = '* -socks5 *' OR param = '* -reverse *' OR param = '* -L:*' OR param = '* -R:*' OR param = '* --proxy-server=*')))) AND (((process = '*\\netsh.exe*' OR process = '*\\powershell.exe*' OR process = '*\\pwsh.exe*' OR process = '*\\rundll32.exe*' OR process = '*\\regsvr32.exe*'))) AND (NOT (((((param = '*C:\\Program Files\\Docker*' OR param = '*C:\\Program Files\\WSL*' OR param = '*127.0.0.1*' OR param = '*::1*'))) AND ((user.dst = '*NT AUTHORITY\\SYSTEM*'))&& ((ParentImage = '*\\services.exe*'))))
-)

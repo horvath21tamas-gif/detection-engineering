@@ -1,2 +1,0 @@
-((Targetprocessname = '*(lsaccess\\.exe|lsass\\.exe)$*'))&& ((GrantedAccess = '*(0x1438|0x143a|0x1038)*'))&& ((Sourceprocessname = '*(\\Temp\\|\\Users\\Public\\|\\AppData\\|cmd\\.exe|powershell\\.exe|wscript\\.exe|cscript\\.exe|rundll32\\.exe)$*'))&& (NOT ((((Sourceprocessname = '*(MsMpEng\\.exe|Cyserver\\.exe|wininit\\.exe|services\\.exe|csrss\\.exe|GoogleUpdate\\.exe)$*'))&& ((SourceUserName = '*NT AUTHORITY\\SYSTEM*'))))
-)

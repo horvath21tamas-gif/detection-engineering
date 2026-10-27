@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (DestinationHostname in ("*facebook.com/reg*", "*accounts.google.com/signup*", "*twitter.com/i/flow/signup*", "*linkedin.com/signup*", "*instagram.com/accounts/emailsignup*", "*reddit.com/register*")) and ((FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\python.exe", "*\curl.exe", "*\wget.exe")) or (not (FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe", "*\brave.exe"))))

@@ -1,2 +1,0 @@
-(EventID = 4624 AND ((Status = '*0x0*'))) AND (LogonType = 3,10,8) AND (NOT ((((TargetUserName begins 'UMFD-','DWM-') AND (((TargetUserName = '*SYSTEM*' OR TargetUserName = '*LOCAL SERVICE*' OR TargetUserName = '*NETWORK SERVICE*' OR TargetUserName = '*ANONYMOUS LOGON*'))) AND ((TargetUserName = '*$*'))) OR (((IpAddress = '*127.0.0.1*' OR IpAddress = '*::1*')))))
-)

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath endswith "\powercfg.exe" or OriginalFileName =~ "PowerCfg.exe") and ((ProcessCommandLine in ("* -hibernate off*", "* -x *", "* -setacvalueindex *", "* -requestsoverride *", "* SCHEME_MIN *")) or (ProcessCommandLine in ("* 0*", "* 000*"))) and (ParentProcessName in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\psexec.exe")) and (not (ParentProcessName contains "C:\Windows\System32\SystemSettingsAdminFlows.exe" or ProcessCommandLine contains "monitor-timeout-ac"))

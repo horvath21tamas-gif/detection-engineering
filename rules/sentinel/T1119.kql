@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where processcommandline match "(\s(-Recurse|/s)\s.*(\*\.))|copy\s+\*\." and processcommandline =~ "(\.doc|\.docx|\.pdf|\.xls|\.xlsx|\.pst|\.key|\.msg|\.pfx|\.rdp)$" and processcommandline =~ "(\Users\Public|\Windows\Temp|\AppData\Local\Temp|C:\ProgramData)" and (Parentprocessname =~ "(w3wp\.exe|httpd\.exe|powershell\.exe|cmd\.exe)$" and IntegrityLevel =~ "Medium") and (not ((FolderPath in ("*C:\Program Files\Microsoft Monitoring Agent\*", "*C:\Windows\CCM\*", "*\OneDrive.exe*")) or processcommandline =~ "(-Filter\s+\*\.log|HealthCheck)" or username =~ "NT AUTHORITY\SYSTEM"))

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe", "*\brave.exe", "*\outlook.exe", "*\thunderbird.exe", "*\teams.exe", "*\slack.exe", "*\discord.exe")) and ((FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\mshta.exe", "*\wscript.exe", "*\cscript.exe", "*\certutil.exe", "*\bitsadmin.exe", "*\rundll32.exe", "*\regsvr32.exe", "*\hh.exe", "*\scrcons.exe")) or (ProcessCommandLine in ("*-enc*", "*http*", "*DownloadString*", "*Invoke-WebRequest*", "*-ExecutionPolicy Bypass*", "*javascript:*", "*vbscript:*", "*.jnlp*", "* -e *"))) and (not ((ProcessCommandLine in ("*--type=renderer*", "*--type=utility*", "*--type=gpu-process*", "*\Google\Update\*", "*\Microsoft\EdgeUpdate\*")) or (ProcessCommandLine in ("*RemoteAssistance*", "*TeamViewer*"))))

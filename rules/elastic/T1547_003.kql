@@ -1,1 +1,0 @@
-(registry.path:*Services\\W32Time\\TimeProviders\\* AND registry.path:*DllName) AND ((NOT (winlog.event_data.Details:(w32time.dll OR vmictimeprovider.dll))) OR (winlog.event_data.Details:(*\:\\* OR *\\* OR *%AppData%* OR *%Temp%* OR *C\:\\Users\\*))) AND (NOT process.executable.caseless:*\\trustedinstaller.exe)

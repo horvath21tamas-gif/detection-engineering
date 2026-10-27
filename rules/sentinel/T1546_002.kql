@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where TargetObject contains "Control Panel\Desktop\SCRNSAVE.EXE" and ((Details endswith ".exe" or (Details in ("*\Users\*", "*\ProgramData\*", "*\Windows\Temp\*", "*powershell*", "*cmd.exe*", "*regsvr32*"))) or (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\reg.exe", "*\w3wp.exe", "*\cscript.exe", "*\python.exe"))) and (not (((FolderPath in ("*\svchost.exe", "*\control.exe", "*\explorer.exe", "*\SystemSettings.exe")) and username =~ "NT AUTHORITY\SYSTEM") or (Details startswith "C:\Windows\System32\" and Details endswith ".scr")))

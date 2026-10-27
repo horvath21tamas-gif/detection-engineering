@@ -1,2 +1,0 @@
-Image IN ("*\\powershell.exe", "*\\pwsh.exe", "*\\mshta.exe", "*\\wscript.exe", "*\\cscript.exe", "*\\regsvr32.exe", "*\\rundll32.exe", "*\\cmd.exe") OR CommandLine IN ("* -enc *", "* -nop *", "* -w hidden *", "*javascript:*", "*vbscript:*", "*shell32.dll,Control_RunDLL*") NOT ((Image IN ("*\\PortableApps\\*", "*\\VLC\\*", "*\\Wireshark\\*", "*\\Putty\\*") CommandLine IN ("*Launcher.exe*", "*Unlocker.exe*")) OR ParentImage IN ("*\\services.exe", "*\\wininit.exe"))
-| regex Image="^[a-bd-z,A-BD-Z]:\\\\"

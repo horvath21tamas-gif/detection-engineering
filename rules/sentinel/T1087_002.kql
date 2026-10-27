@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((ProcessCommandLine in ("*(objectCategory=person)*", "*(objectClass=user)*", "*adminCount=1*", "*userAccountControl:1.2.840.113556.1.4.803:=2*", "*pwdLastSet=0*")) or ((FolderPath in ("*\adfind.exe", "*\sharphound.exe", "*\bloodhound.exe", "*\net1.exe")) and (ProcessCommandLine in ("*Get-DomainUser*", "*Get-ADUser*", "*Get-NetUser*", "*invoke-bloodhound*")))) and (ParentProcessName in ("*\httpd.exe", "*\sqlservr.exe", "*\wsmprovhost.exe", "*\winword.exe", "*\excel.exe")) and (not (username =~ "NT AUTHORITY\SYSTEM" and (FolderPath in ("*\Windows\System32\svchost.exe*", "*\Microsoft.ActiveDirectory.WebServices.exe*")) and (ParentProcessName in ("*\services.exe", "*\explorer.exe"))))

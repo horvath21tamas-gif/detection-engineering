@@ -1,2 +1,0 @@
-(((processcommandline = '*(winmm\\.dll*' OR processcommandline = '*mciSendString|record|save|open new type waveaudio)*' OR processcommandline = '*(Get-MicrophoneAudio|Start-AudioCapture|waveInStart|naudio)*'))) AND (((processname = '*(powershell\\.exe|cmd\\.exe|rundll32\\.exe|mshta\\.exe|wscript\\.exe)$*'))&& ((Parentprocessname = '*(winword\\.exe|excel\\.exe|outlook\\.exe|w3wp\\.exe)$*'))&& ((IntegrityLevel = '*Medium*'))) AND (NOT ((((processname = '*^(C:\\Program Files\\Google\\Chrome\\|C:\\Program Files \\(x86\\)\\Microsoft\\Edge\\)*'))))
-)

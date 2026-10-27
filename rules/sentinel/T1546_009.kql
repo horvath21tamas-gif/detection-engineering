@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (TargetObject in ("*\AppInit_DLLs*", "*\LoadAppInit_DLLs*")) and ((TargetObject endswith "\LoadAppInit_DLLs" and Details =~ "0x00000001") or (TargetObject endswith "\AppInit_DLLs" and (Details in ("*\Users\*", "*\ProgramData\*", "*\Temp\*", "*\Public\*", "*\AppData\*"))) or (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\reg.exe", "*\w3wp.exe", "*\cscript.exe"))) and (not (((FolderPath in ("*\msiexec.exe", "*\trustedinstaller.exe", "*\TiWorker.exe")) and username =~ "NT AUTHORITY\SYSTEM") or (Details startswith "C:\Windows\System32\" and Details endswith ".dll")))

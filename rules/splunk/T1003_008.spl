@@ -1,1 +1,0 @@
-CommandLine IN ("* > /tmp/*", "* > /var/tmp/*", "* > /dev/shm/*", "* > /home/*") OR CommandLine IN ("*/etc/shadow*", "*/etc/passwd*") OR CommandLine="*/etc/shadow*" OR CommandLine IN ("*unshadow *", "*mimipenguin*", "*linpeas.sh*") NOT (CommandLine IN ("*/usr/sbin/pwconv*", "*/usr/sbin/useradd*", "*/usr/sbin/usermod*", "*logrotate*") ParentImage="/etc/cron.*")

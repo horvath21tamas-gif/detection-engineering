@@ -1,1 +1,0 @@
-(process.executable.caseless:(*\\winword.exe OR *\\excel.exe OR *\\powerpnt.exe)) AND (destination.port:(80 OR 443 OR 445)) AND (NOT ((destination.domain:(*.microsoft.com OR *.office.com OR *.office365.com OR *.live.com OR *.sharepoint.com OR *.onmicrosoft.com OR *microsoft.com OR *bing.com OR *msn.com OR *azureedge.net)) OR (destination.ip:(10.* OR 192.168.* OR 172.16.*))))

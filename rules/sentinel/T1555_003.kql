@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ProcessCommandLine in ("*\Login Data*", "*\Cookies*", "*\Web Data*", "*\key4.db*", "*\logins.json*")) and (((ProcessCommandLine in ("*copy *", "*type *", "*add *", "*tar *", "*Get-Content*", "*cp *", "*7z *", "*rar *", "*zip *")) and (FolderPath in ("*\sqlite3.exe", "*\esentutl.exe", "*\7z.exe", "*\rar.exe", "*\tar.exe", "*\gzip.exe"))) or ((FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Downloads\*", "*\Public\*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\python.exe", "*\cscript.exe", "*\node.exe")))) and (not (((FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe", "*\brave.exe")) and (ParentProcessName in ("*\Program Files\*", "*\Windows\System32\*"))) or ((FolderPath in ("*\Program Files\Veeam\*", "*\Program Files\Microsoft OneDrive\*", "*\Program Files\Dropbox\*", "*\Program Files\Google\Drive\*")) and username =~ "NT AUTHORITY\SYSTEM")))

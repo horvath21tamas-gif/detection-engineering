@@ -1,2 +1,0 @@
-((process = '*\\cmd.exe*'))&& ((((ParentImage = '*\\w3wp.exe*' OR ParentImage = '*\\sqlservr.exe*' OR ParentImage = '*\\winword.exe*' OR ParentImage = '*\\excel.exe*' OR ParentImage = '*\\mshta.exe*' OR ParentImage = '*\\tomcat.exe*'))) OR ((((param = '* /c *' OR param = '* /r *'))) AND (((param = '* AND *'))&& ((param = '*whoami*'))))) AND (NOT ((((ParentImage = '*\\services.exe*'))|| (((param = '*C:\\Windows\\System32\\wbem\\WMIC.exe*' OR param = '*Microsoft Monitoring Agent*'))) OR (((user.dst = '*NT AUTHORITY\\SYSTEM*'))&& ((param = '*C:\\Windows\\TEMP\\*')))))
-)

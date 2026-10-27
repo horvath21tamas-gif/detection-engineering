@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (TargetObject contains "Services\W32Time\TimeProviders\" and TargetObject endswith "DllName") and ((not (Details in ("w32time.dll", "vmictimeprovider.dll"))) or (Details in ("*:\*", "*\*", "*%AppData%*", "*%Temp%*", "*C:\Users\*"))) and (not FolderPath endswith "\trustedinstaller.exe")

@@ -1,2 +1,0 @@
-(((process = '*\\msbuild.exe*'))&& ((OriginalFileName = '*MSBuild.exe*'))) AND (((Parentprocessname = '*(winword\\.exe|excel\\.exe|powerpnt\\.exe|outlook\\.exe|chrome\\.exe|msedge\\.exe|wscript\\.exe|cscript\\.exe|mshta\\.exe|wmiprvse\\.exe)$*'))|| ((processcommandline = '*(http|\\\\|\\AppData\\|\\Temp\\|\\.xml)*'))) AND (NOT ((((Parentprocessname = '*(\\Microsoft Visual Studio\\|\\Common7\\IDE\\|\\BuildAgent\\|\\Jenkins\\|\\ServiceFabric\\)*'))&& ((processcommandline = '*(/p:Configuration=|\\.sln|\\.csproj)*'))&& ((user.dst = '*svc_build*'))))
-)

@@ -1,2 +1,0 @@
-(EventID = 4624 AND ((Status = '*0x0*'))) AND (((ComputerName = '*-DC*' OR ComputerName = '*-SQL*' OR ComputerName = '*-SAP*' OR ComputerName = '*-EXCH*'))) AND (LogonType = 10,3) AND (NOT ((((TargetUserName = '*$*'))|| (IpAddress begins '10.50.10.' AND WorkstationName begins 'ADM-JUMP-') OR TargetUserName begins 'svc_infra_'))
-)

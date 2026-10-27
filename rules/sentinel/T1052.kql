@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\robocopy.exe", "*\xcopy.exe", "*\powershell.exe", "*\7z.exe", "*\rar.exe", "*\bitsadmin.exe")) and (ProcessCommandLine in ("* D:\*", "* E:\*", "* F:\*", "* G:\*", "* H:\*", "*\Device\HarddiskVolume*", "*\*\root\*")) and ((ProcessCommandLine in ("* /S /E /H /K /R:0 /W:0*", "* -Recurse*", "* -Hidden*", "* -ExecutionPolicy Bypass*", "* a -p*")) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\sqlservr.exe", "*\wscript.exe"))) and (not (ParentProcessName endswith "\explorer.exe" or FolderPath contains "\Program Files\" or username =~ "NT AUTHORITY\SYSTEM" or ProcessCommandLine contains "Windows\Logs"))

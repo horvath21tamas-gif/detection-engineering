@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((TargetFilename in ("*\mimikatz*", "*\bloodhound*", "*\sharphound*", "*\cobaltstrike*", "*\metasploit*", "*\responder*", "*\pypykatz*", "*\impacket*", "*\chisel*", "*\ngrok*")) or (TargetFilename in ("*\nmap.exe", "*\nc.exe", "*\netcat.exe", "*\socat.exe", "*\7z.exe"))) and (FolderPath in ("*\certutil.exe", "*\bitsadmin.exe", "*\powershell.exe", "*\pwsh.exe", "*\curl.exe", "*\wget.exe", "*\csc.exe", "*\msbuild.exe")) and (not ((FolderPath in ("*\sccm\*", "*\tanium\*", "*\pdq\*", "*\intune\*", "*\chocolatey\*")) and SubjectUserName =~ "SYSTEM"))

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*/az", "*/aws", "*/gcloud", "*/kubectl")) and ((ProcessCommandLine in ("*list-access-keys*", "*export-credentials*", "*get-secret*")) or (ProcessCommandLine in ("*stop-logging*", "*delete-trail*", "*disable-policy*", "*delete-flow-log*")) or (ProcessCommandLine in ("*make-public*", "*add-iam-policy-binding*", "*modify-instance-attribute --attribute disableApiTermination*", "*create-presigned-url*"))) and (not ((username in ("deployment-service-account", "terraform-runner")) or (ProcessCommandLine in ("*--describe*", "*--list*"))))

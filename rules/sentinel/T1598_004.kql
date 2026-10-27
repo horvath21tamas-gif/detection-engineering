@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe")) and (ProcessCommandLine in ("*.html*", "*.htm*", "*.js*"))) and (ProcessCommandLine in ("* -WindowStyle Hidden*", "* -ExecutionPolicy Bypass*", "*login*", "*auth*", "*verify*", "*token*"))) or ((((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powerpnt.exe")) and (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe"))) and (ProcessCommandLine in ("* -WindowStyle Hidden*", "* -ExecutionPolicy Bypass*", "*login*", "*auth*", "*verify*", "*token*"))) and (not ((ProcessCommandLine in ("*SharePoint*", "*Microsoft365*", "*GraphAPI*")) and username =~ "NT AUTHORITY\SYSTEM")) and (not (ProcessCommandLine in ("*--type=utility*", "*--type=renderer*", "*--type=gpu-process*"))) and (not (ParentProcessName in ("*\Windows\Installer\*", "*\ConfigMgr\*"))))

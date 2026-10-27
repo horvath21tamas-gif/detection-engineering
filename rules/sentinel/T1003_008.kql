@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((ProcessCommandLine in ("* > /tmp/*", "* > /var/tmp/*", "* > /dev/shm/*", "* > /home/*")) or (ProcessCommandLine in ("*/etc/shadow*", "*/etc/passwd*")) or ProcessCommandLine contains "/etc/shadow" or (ProcessCommandLine in ("*unshadow *", "*mimipenguin*", "*linpeas.sh*"))) and (not ((ProcessCommandLine in ("*/usr/sbin/pwconv*", "*/usr/sbin/useradd*", "*/usr/sbin/usermod*", "*logrotate*")) and ParentProcessName startswith "/etc/cron."))

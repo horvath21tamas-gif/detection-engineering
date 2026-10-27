@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath matches regex "(certutil\\.exe|expand\\.exe|extrac32\\.exe)$" and ProcessCommandLine matches regex "(-decode|-decodehex|(\\.txt|\\.jpg|\\.png|\\.xml|\\.log))") and (ParentProcessName matches regex "(cmd\\.exe|powershell\\.exe|pwsh\\.exe|wscript\\.exe|cscript\\.exe|nginx\\.exe|httpd\\.exe|mshta\\.exe)$" or (ProcessCommandLine matches regex "(\\\\Users\\\\|\\\\Temp\\\\|\\\\AppData\\\\).*|(\\.exe|\\.dll|\\.vbs|\\.ps1)$" and (not (ParentProcessName matches regex "(\\\\Windows\\\\servicing\\\\TrustedInstaller\\.exe|\\\\CcmExec\\.exe|\\\\Package Cache\\\\)" and FolderPath matches regex "(\\\\Program Files\\\\|\\\\Windows\\\\System32\\\\)" and ProcessCommandLine matches regex "Microsoft\\\\Windows\\\\SoftwareDistribution"))))

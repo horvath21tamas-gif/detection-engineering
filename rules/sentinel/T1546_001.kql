@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (TargetObject in ("*\shell\open\command\*", "*HKEY_CLASSES_ROOT\.*", "*_Classes\.*")) and ((Details in ("*powershell*", "*cmd.exe*", "*regsvr32*", "*mshta*", "*cscript*", "*wscript*", "*\Users\Public\*", "*\AppData\Local\Temp\*", "*\PerfLogs\*")) or (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\w3wp.exe", "*\cscript.exe", "*\wscript.exe"))) and (not (((FolderPath in ("*\explorer.exe", "*\msiexec.exe", "*\OpenWith.exe", "*\svchost.exe", "*\TiWorker.exe")) and username =~ "NT AUTHORITY\SYSTEM") or (Details in ("*C:\Program Files\*", "*C:\Program Files (x86)\*", "*C:\Windows\System32\*"))))

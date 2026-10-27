@@ -1,2 +1,0 @@
-TargetObject regex '\\\\Software\\\\Microsoft\\\\Office\\\\.*\\\\Outlook\\\\(WebView\\\\URL|Security\\\\EnableRoamingFolderHomepages|Security\\\\EnableExternalFolderHomepages)$' AND (Details regex '(http|script|file://|C:\\\\Users\\\\Public|C:\\\\Windows\\\\Temp)' OR process regex '(powershell\\.exe|pwsh\\.exe|cmd\\.exe|reg\\.exe|cscript\\.exe|wscript\\.exe)$') AND (NOT ((Details regex '(https://outlook\\.office365\\.com|res://)' AND process regex 'gpscript\\.exe$'))
-)

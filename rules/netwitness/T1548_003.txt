@@ -1,2 +1,0 @@
-((((param = '*NOPASSWD:*' OR param = '*ALL=(ALL)*' OR param = '*timestamp_timeout*'))) OR ((param = '*sudo *'))|| (((param = '*sudo -l*' OR param = '*sudo -n -l*')))) AND ((((ParentImage = '*/apache2*' OR ParentImage = '*/nginx*' OR ParentImage = '*/php-fpm*' OR ParentImage = '*/node*'))) OR (NOT (((((ParentImage = '*/ansible-playbook*' OR ParentImage = '*/puppet*' OR ParentImage = '*/salt-minion*' OR ParentImage = '*/chef-client*'))) OR ((user.dst = '*root*')))))
-)

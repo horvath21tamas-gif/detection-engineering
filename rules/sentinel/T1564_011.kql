@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\WindowsSandbox.exe", "*\wsl.exe", "*\wslhost.exe", "*\vmcompute.exe")) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\mshta.exe", "*\sqlservr.exe")) or ((ProcessCommandLine in ("*.wsb*", "*--exec*", "* -e *", "*--mount*", "*HostFolder*", "*LogonCommand*")) and (ProcessCommandLine in ("*\Users\*", "*\Downloads\*", "*\Temp\*", "*\AppData\*")))) and (not ((ParentProcessName in ("*\Common7\IDE\devenv.exe*", "*\bin\code.exe*", "*\Program Files\Docker\*")) or (ProcessCommandLine in ("*docker-desktop*", "*Microsoft.WSL*")) or username =~ "NT AUTHORITY\SYSTEM"))

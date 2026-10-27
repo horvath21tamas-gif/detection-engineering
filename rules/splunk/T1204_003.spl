@@ -1,2 +1,0 @@
-Image IN ("*\\powershell.exe", "*\\pwsh.exe", "*\\cmd.exe", "*\\wscript.exe", "*\\cscript.exe", "*\\mshta.exe", "*\\rundll32.exe", "*\\regsvr32.exe", "*\\scrcons.exe") ParentImage="*\\explorer.exe" NOT (CommandLine IN ("*setup.exe*", "*install.exe*", "*autorun.inf*") OR Image="*C:\\Windows\\*" OR CommandLine="*\\YourCompanyShare\\*")
-| regex CommandLine="^[D-Z]:\\\\.*"

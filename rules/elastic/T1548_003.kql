@@ -1,1 +1,0 @@
-((CommandLine:(*NOPASSWD\:* OR *ALL\=\(ALL\)* OR *timestamp_timeout*)) OR CommandLine:*sudo\ * OR (CommandLine:(*sudo\ \-l* OR *sudo\ \-n\ \-l*))) AND ((ParentImage:(*\/apache2 OR *\/nginx OR *\/php\-fpm OR *\/node)) OR (NOT ((ParentImage:(*\/ansible\-playbook OR *\/puppet OR *\/salt\-minion OR *\/chef\-client)) OR username:root)))

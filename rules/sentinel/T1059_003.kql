@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where FolderPath endswith "\cmd.exe" and ((ParentProcessName in ("*\w3wp.exe", "*\sqlservr.exe", "*\winword.exe", "*\excel.exe", "*\mshta.exe", "*\tomcat.exe")) or ((ProcessCommandLine in ("* /c *", "* /r *")) and (ProcessCommandLine contains " && " and ProcessCommandLine contains "whoami"))) and (not (ParentProcessName endswith "\services.exe" or (ProcessCommandLine in ("*C:\Windows\System32\wbem\WMIC.exe*", "*Microsoft Monitoring Agent*")) or (username =~ "NT AUTHORITY\SYSTEM" and ProcessCommandLine contains "C:\Windows\TEMP\")))

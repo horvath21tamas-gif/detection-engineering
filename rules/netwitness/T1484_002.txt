@@ -1,2 +1,0 @@
-((EventID = 5136 AND ((ObjectClass = '*trustedDomain*'))&& (((AttributeCommonName = '*trustAttributes*' OR AttributeCommonName = '*msDS-TrustForestTrustInfo*' OR AttributeCommonName = '*trustDirection*')))) OR (EventID = 4706,4716) OR ((((process = '*\\netdom.exe*' OR process = '*\\nltest.exe*'))) AND (((param = '* trust *' OR param = '*/quarantine*' OR param = '*/enable_sidhistory*'))))) AND (NOT ((((SubjectUserSid = '*S-1-5-18*'))&& ((SubjectUserName = '*$*'))&& ((SubjectUserName = '*SVC_TrustAdmin*'))))
-)

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath contains "‮" and (ProcessCommandLine in ("*‮*", "*\u202e*", "*U+202E*", "*%E2%80%AE*"))) and ((FolderPath in ("*\Users\*", "*\Downloads\*", "*\Desktop\*", "*\AppData\Local\Temp\*", "*\Public\*")) or (ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe", "*\outlook.exe", "*\explorer.exe", "*\winrar.exe", "*\7zFM.exe"))) and (not ((username in ("NT AUTHORITY\SYSTEM", "NT AUTHORITY\LOCAL SERVICE", "NT AUTHORITY\NETWORK SERVICE")) or (FolderPath in ("C:\Windows\System32\*", "C:\Windows\SysWOW64\*")) or FolderPath contains "\node_modules\"))

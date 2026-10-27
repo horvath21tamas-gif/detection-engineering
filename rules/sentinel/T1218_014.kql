@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath endswith "\mmc.exe" and OriginalFileName =~ "mmc.exe") and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powerpnt.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\rundll32.exe", "*\mshta.exe")) or (ProcessCommandLine in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Public\*", "*\Downloads\*", "*\*", "*http://*", "*https://*")) or (ProcessCommandLine in ("*/a*", "*-Embedding*"))) and (IntegrityLevel in ("Medium", "Low")) and (not ((ProcessCommandLine in ("*\Windows\System32\*", "*\Windows\SysWOW64\*", "*eventvwr.msc*", "*services.msc*", "*compmgmt.msc*", "*gpedit.msc*", "*devmgmt.msc*", "*taskschd.msc*")) or (ParentProcessName endswith "\explorer.exe" and IntegrityLevel =~ "High")))

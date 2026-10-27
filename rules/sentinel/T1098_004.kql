@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where operationNameValue =~ "Microsoft.Authorization/roleAssignments/write" and statusValue =~ "Success" and (['properties.requestbody'] in ("*8e3af657-a8ff-443c-a75c-2fe8c4bcb635*", "*b24988ac-6180-42a0-ab88-20f7382dd24c*", "*18d7d81d-022d-446a-b976-5d3f57fbe149*", "*fdd26090-ad57-4cfb-8440-41a33b7d652d*")) and caller contains "@" and (not ((caller in ("MS-PIM", "Azure Privileged Identity Management", "ms-pim@microsoft.com")) or (caller in ("*svc-terraform*", "*github-actions*", "*azure-devops-deployment*"))))

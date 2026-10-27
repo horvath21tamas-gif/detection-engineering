@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (processname =~ "(msbuild\.exe|csc\.exe|jsc\.exe|vbc\.exe)$" and OriginalFileName =~ "(MSBuild\.exe|csc\.exe|jsc\.exe|vbc\.exe)$") and (Parentprocessname =~ "(winword\.exe|excel\.exe|powerpnt\.exe|outlook\.exe|chrome\.exe|msedge\.exe|wmiprvse\.exe|mshta\.exe)$" or processcommandline =~ "(http|\\|\AppData\|\Temp\|\Users\Public\)") and (not (Parentprocessname =~ "(\Microsoft Visual Studio\|\Common7\IDE\|\BuildAgent\|\Jenkins\)" and processcommandline =~ "(C:\Program Files \(x86\)\Microsoft Visual Studio|C:\Windows\Microsoft\.NET\Framework)"))

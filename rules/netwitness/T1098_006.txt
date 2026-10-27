@@ -1,2 +1,0 @@
-(((operationName = '*User registered security info*' OR operationName = '*Admin registered security info*'))) AND (targetResources.modifiedProperties.((newValue = '*StrongAuthenticationPhoneAppDetail*' OR newValue = '*StrongAuthenticationUserDetails*'))) AND (additionalDetails.((value = '*MFA requirement satisfied by claim in the token*'))|| (NOT ((ipAddress begins '203.0.113.','198.51.100.'))) AND (NOT ((initiatedBy.user.((userPrincipalName = '*helpdesk-admin@*' OR userPrincipalName = '*it-support@*'))))
-))

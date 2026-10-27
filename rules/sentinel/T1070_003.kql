@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("*Search-Mailbox*", "*New-MailboxSearch*", "*Export-Mailbox*", "* -DeleteContent*", "* -Force*", "* -Purge*"))) or (ProcessCommandLine in ("*Security*", "*Alert*", "*Phish*", "*Login*"))) and ((ParentProcessName in ("*\w3wp.exe", "*\winword.exe", "*\excel.exe", "*\mshta.exe", "*\php-cgi.exe", "*\powershell.exe", "*\cmd.exe")) or (not (User startswith "NT AUTHORITY\" or (ProcessCommandLine in ("*Discovery Management*", "*Compliance*", "*Retention*")) or ParentProcessName endswith "\ExSetup.exe")))

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((TargetFilename in ("*\User Data\Default\Preferences*", "*\User Data\Default\Secure Preferences*", "*\User Data\Default\Current Session*", "*\User Data\Default\Last Session*", "*\AppData\Roaming\Mozilla\Firefox\Profiles\*")) and (not ((FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe", "*\brave.exe", "*\opera.exe")) or ((FolderPath in ("*\C:\Windows\System32\robocopy.exe", "*\C:\Windows\System32\xcopy.exe")) and (FolderPath in ("*\Microsoft\EdgeUpdate\*", "*\Google\Update\*")))))) or (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\cscript.exe", "*\wscript.exe", "*\python.exe"))

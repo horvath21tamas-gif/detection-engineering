@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ProcessCommandLine in ("*fsutil file setzero*", "*fsutil file seteof*", "*dd if=*", "*copy /b*")) and (ProcessCommandLine in ("*.exe*", "*.dll*", "*.ocx*", "*.sys*", "*.scr*")) and (ProcessCommandLine in ("*\Users\Public\*", "*\AppData\Local\Temp\*", "*\Windows\Temp\*", "*\Downloads\*", "*\PerfLogs\*")) and (not ((FolderPath in ("C:\Windows\System32\msiexec.exe*", "C:\Windows\System32\CompatTelRunner.exe*", "C:\Program Files\Common Files\Microsoft Shared\*")) and username =~ "NT AUTHORITY\SYSTEM"))

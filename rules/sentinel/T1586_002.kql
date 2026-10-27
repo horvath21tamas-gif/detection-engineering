@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\powershell.exe", "*\pwsh.exe")) or (ProcessCommandLine in ("*New-InboxRule*", "*Set-InboxRule*", "*Set-Mailbox*")) or (ProcessCommandLine in ("*ForwardTo*", "*ForwardAsAttachmentTo*", "*RedirectTo*", "*DeliverToMailboxAndForward*"))) or (FolderPath endswith "\mgc.exe" or (ProcessCommandLine in ("*messageRules*", "*mailFolders*")))) and (not ((ParentProcessName in ("*\explorer.exe", "*\outlook.exe")) and condition =~ "not selection_powershell_rules")) and (not (User in ("*svc_exchange_migration*", "*adm_helpdesk_mail*", "*it_ops_automation*"))) and (not username =~ "NT AUTHORITY\SYSTEM")

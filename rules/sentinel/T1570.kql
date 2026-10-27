@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\robocopy.exe", "*\xcopy.exe", "*\bitsadmin.exe", "*\certutil.exe", "*\curl.exe")) and (ProcessCommandLine in ("*\C$\*", "*\ADMIN$\*", "*\IPC$\*", "*c$*", "*admin$*")) and (ProcessCommandLine in ("*.exe*", "*.dll*", "*.ps1*", "*.vbs*", "*.bat*", "*.zip*", "*.7z*", "*.vhd*", "*.iso*")) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\httpd.exe", "*\w3wp.exe", "*\sqlservr.exe")) and IntegrityLevel =~ "Medium") and (not ((FolderPath in ("*\CcmExec.exe", "*\msiexec.exe")) or (ProcessCommandLine in ("*\SoftwareDistribution\*", "*\HealthCheck\*", "*AppData\Local\Google\Chrome*")) or username =~ "NT AUTHORITY\SYSTEM"))

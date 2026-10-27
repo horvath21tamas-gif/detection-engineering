@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((EventID in (4768, 4769)) and TicketEncryptionType =~ "0x17" and Status =~ "0x0") or (EventID =~ 4768 and (TicketOptions in ("0x40810000", "0x40810010"))) or (EventID =~ 4688 and (ProcessCommandLine in ("*klist purge*", "*kerberos::ptt*", "*monitor /interval*")))) and (not (TargetUserName endswith "$" or ServicePrincipalName contains "krbtgt" or IpAddress =~ "10.0.0.5"))

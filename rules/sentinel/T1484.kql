@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((TargetFilename contains "\Windows\SYSVOL\domain\Policies\" and (TargetFilename in ("*\GptTmpl.inf", "*\Scripts.ini", "*\ScheduledTasks.xml", "*\Registry.pol"))) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\python.exe", "*\bitsadmin.exe"))) or ((EventID =~ 5136 and AttributeCommonName =~ "gPLink") and (not (username =~ "NT AUTHORITY\SYSTEM" and (FolderPath in ("*\mmc.exe", "*\svchost.exe")) and SubjectUserName contains "GPO_Admin_")))

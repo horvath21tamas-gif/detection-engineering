@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\wscript.exe", "*\cscript.exe")) and (ProcessCommandLine in ("*.js*", "*.jse*")) and ((ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\brave.exe", "*\outlook.exe", "*\winword.exe", "*\excel.exe", "*\mshta.exe")) or (ProcessCommandLine in ("*\Users\Public\*", "*\AppData\Local\Temp\*", "*\Downloads\*", "*C:\ProgramData\*")) or (ProcessCommandLine in ("* -e:jscript*", "*http*", "*xmlhttp*", "*adodb.stream*", "* -b*"))) and (not (ProcessCommandLine contains "C:\Windows\System32\" or ParentProcessName endswith "\services.exe" or ProcessCommandLine contains "UevAgent.js"))

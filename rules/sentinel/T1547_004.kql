@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (TargetObject contains "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" and (TargetObject in ("*\Userinit", "*\Shell"))) and ((TargetObject endswith "\Userinit" and (Details in ("*.exe,*", "*.dll,*", "*.ps1*", "*.bat*"))) or (TargetObject endswith "\Shell" and Details contains "explorer.exe") or (Details in ("*:\Users\*", "*:\ProgramData\*", "*:\Temp\*", "*C:\PerfLogs\*", "*\*"))) and (not (FolderPath in ("*\trustedinstaller.exe", "*\msiexec.exe", "*\C:\Windows\System32\oobe\msoobe.exe")))

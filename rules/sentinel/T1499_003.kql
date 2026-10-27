@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\taskkill.exe", "*\powershell.exe", "*\pwsh.exe", "*\cmd.exe")) and (ProcessCommandLine in ("* /f /im csrss.exe*", "* /f /im wininit.exe*", "* /f /im smss.exe*", "* /f /im services.exe*"))) or ((FolderPath in ("*\ntsd.exe", "*\cdb.exe")) and (ProcessCommandLine in ("*-pn csrss.exe*", "*-pn wininit.exe*", "*-pn smss.exe*", "*-pn services.exe*", "*-c q*")))) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\powerpnt.exe", "*\httpd.exe", "*\nginx.exe", "*\rundll32.exe", "*\explorer.exe")) and (FolderPath in ("*\Temp\*", "*\Users\Public\*", "*\AppData\Local\Temp\*", "*\Downloads\*"))) and (not (username =~ "NT AUTHORITY\SYSTEM" and (ParentProcessName in ("*\CcmExec.exe", "*\msiexec.exe", "*\TiWorker.exe", "*\TrustedInstaller.exe")) and (ProcessCommandLine in ("*HealthCheck*", "*Diagnostic*", "*Patch*", "*Update*"))))

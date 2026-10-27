@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\move.exe", "*\copy.exe", "*\xcopy.exe", "*\robocopy.exe")) and (ProcessCommandLine in ("*index.html*", "*index.php*", "*default.aspx*", "*main.js*", "*logo.*", "*move *", "*copy *", "*echo *", "*Set-Content*", "*replace*")) and (ProcessCommandLine in ("*\inetpub\wwwroot\*", "*\var\www\*", "*\htdocs\*", "*\WordPress\*")) and ((ParentProcessName in ("*\w3wp.exe", "*\httpd.exe", "*\php-cgi.exe", "*\nginx.exe", "*\rundll32.exe")) and FolderPath contains "\Temp\") and (not ((ProcessCommandLine in ("*deploy*", "*Jenkins*", "*AzureDevOps*", "*site_update*")) or ParentProcessName endswith "\msiexec.exe" or username =~ "NT AUTHORITY\SYSTEM"))

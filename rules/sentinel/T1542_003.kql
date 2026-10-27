@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath in ("*\mountvol.exe", "*\bcdedit.exe")) and (OriginalFileName in ("mountvol.exe", "bcdedit.exe"))) and (ProcessCommandLine in ("* /s*", "*nointegritychecks*", "*testsigning*", "*loadoptions DDISABLE_INTEGRITY_CHECKS*", "*path \EFI\*", "*recoveryenabled no*")) and ((ParentProcessName in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\psexec.exe", "*\python.exe")) and (FolderPath in ("*\Users\*", "*\Temp\*"))) and (not (ParentProcessName endswith "\svchost.exe" or FolderPath contains "C:\Windows\System32\SystemSettingsAdminFlows.exe" or ProcessCommandLine contains "recoverysequence"))

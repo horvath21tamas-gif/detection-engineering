@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ParentProcessName in ("*\amazon-ssm-agent.exe", "*\CaaSAgent.exe", "*\WaAppAgent.exe", "*\google_guest_agent.exe")) and ((FolderPath in ("*\whoami.exe", "*\nltest.exe", "*\nbtstat.exe", "*\net1.exe", "*\qwinsta.exe", "*\klist.exe")) or (ProcessCommandLine in ("* -enc *", "* -encodedcommand *", "*Invoke-WebRequest*", "*IEX*", "*MiniDump*"))) and (not ((ProcessCommandLine in ("*\Packages\Plugins\Microsoft.Azure.Monitoring*", "*\Packages\Plugins\Microsoft.EnterpriseCloud.Monitoring*", "*CollectGuestLogs.exe*")) or (ProcessCommandLine in ("*AmazonCloudWatchAgent*", "*ssm-document-worker.exe*"))))

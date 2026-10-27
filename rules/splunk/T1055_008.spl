@@ -1,1 +1,0 @@
-type="SYSCALL" syscall="ptrace" a0 IN ("*0x4*", "*0x5*", "*0x10*") exe IN ("*/bin/python*", "*/bin/php*", "*/bin/perl*", "*/bin/node*", "*/usr/sbin/nginx*", "*/usr/sbin/apache*", "*/usr/bin/socat*", "*/usr/bin/nc*") OR NOT (exe IN ("*/usr/bin/gdb*", "*/usr/bin/strace*", "*/usr/bin/ltrace*", "*/usr/bin/auditd*", "*/opt/datadog/agent*") auid="4294967295")

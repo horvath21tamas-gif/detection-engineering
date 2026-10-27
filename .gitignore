@@ -1,0 +1,32 @@
+# generated SIEM queries (built by CI / `make build`, attached as artifacts)
+rules/splunk/
+rules/elastic/
+rules/qradar/
+rules/netwitness/
+rules/sentinel/
+build/
+dist/
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# editor / OS
+.vscode/
+.idea/
+.DS_Store
+
+# secrets - never commit
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+id_ecdsa*
+id_dsa*
+!*.pub
+.env

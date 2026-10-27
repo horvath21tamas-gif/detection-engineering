@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\python.exe", "*\ruby.exe")) and (ProcessCommandLine in ("*while($true)*", "*for(;;)*", "*:loop*", "*foreach($i in 1..1gb)*", "*AllocHGlobal*", "*::MemoryStream*", "*New-Object System.Collections.ArrayList*", "*Start-Job*", "*Start-ThreadJob*", "*Thread.Sleep*")) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\powerpnt.exe", "*\httpd.exe", "*\nginx.exe", "*\rundll32.exe", "*\explorer.exe")) and (FolderPath in ("*\Temp\*", "*\Users\Public\*", "*\AppData\Local\Temp\*"))) and (not (username =~ "NT AUTHORITY\SYSTEM" and (ParentProcessName in ("*\CcmExec.exe", "*\msiexec.exe", "*\devenv.exe", "*\powershellISE.exe")) and (ProcessCommandLine in ("*HealthCheck*", "*Diagnostic*", "*AzureAD*", "*System Center*", "*Test-Connection*"))))

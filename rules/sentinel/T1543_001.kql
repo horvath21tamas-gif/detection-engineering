@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (TargetFilename contains "/Library/LaunchAgents/" and TargetFilename endswith ".plist") and ((FolderPath in ("*/bash", "*/zsh", "*/sh", "*/python", "*/python3", "*/curl", "*/wget", "*/Safari", "*/Google Chrome", "*/terminal")) or (TargetCodeSignature in ("*unsigned*", "*Developer ID Application:*"))) and (not ((FolderPath in ("*/installd", "*/package_script_service", "*/softwareupdated", "*/jamf", "*/kandji-agent")) and username =~ "root"))

@@ -1,2 +1,0 @@
-email_content_type="*text/html*" url IN ("*bit.ly/*", "*tinyurl.com/*", "*t.co/*", "*rebrand.ly/*", "*is.gd/*", "*cutt.ly/*") OR (url_domain_age<30 url_reputation="low") sender_display_name IN ("*Microsoft*", "*Office 365*", "*OneDrive*", "*DocuSign*", "*PayPal*", "*Bank*") NOT (sender_domain IN ("*microsoft.com*", "*office.com*", "*docusign.com*", "*paypal.com*")) NOT (url IN ("*microsoft.com*", "*google.com*", "*amazon.com*", "*github.com*", "*linkedin.com*"))
-| regex url=".+"

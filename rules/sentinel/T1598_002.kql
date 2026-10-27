@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\7z.exe", "*\rar.exe", "*\tar.exe", "*\powershell.exe", "*\curl.exe")) and (ProcessCommandLine in ("*.pst*", "*.ost*", "*.msg*", "*contacts.edb*"))) and (not (ParentProcessName in ("*\outlook.exe", "*\SearchIndexer.exe", "*\SearchHost.exe", "*\RuntimeBroker.exe"))) and (not (username =~ "NT AUTHORITY\SYSTEM" and (FolderPath in ("*\Veeam\*", "*\Veritas\*", "*\Commvault\*", "*\Backup\*"))))) or (((FolderPath in ("*\findstr.exe", "*\grep.exe")) and (ProcessCommandLine in ("*invoice*", "*payment*", "*swift*", "*iban*", "*szamla*", "*utalas*"))) and (not (ParentProcessName in ("*\outlook.exe", "*\SearchIndexer.exe", "*\SearchHost.exe", "*\RuntimeBroker.exe"))))

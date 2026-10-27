@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath endswith "\vaultcmd.exe" and (ProcessCommandLine in ("* /list*", "* /show*"))) and (ProcessCommandLine in ("* > *", "* >> *", "* | *", "*clip*"))) or (ProcessCommandLine in ("*VaultEnumerateItems*", "*VaultGetItem*", "*Windows.Security.Credentials.PasswordVault*", "*Get-VaultCredential*"))) and ((FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Downloads\*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\python.exe", "*\cscript.exe", "*\wscript.exe"))) and (not ((ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe")) or ((ParentProcessName in ("*\services.exe", "*\msiexec.exe", "*\TrustedInstaller.exe")) and username =~ "NT AUTHORITY\SYSTEM")))

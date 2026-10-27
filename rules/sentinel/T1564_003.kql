@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\mshta.exe", "*\cscript.exe", "*\wscript.exe")) and ProcessCommandLine matches regex "(-w\\s*h|-window\\s*h|-win\\s*h|-wind\\s*h|showwindow\\s*=\\s*0|windowstyle\\s*1|sw_hide)" and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\acrord32.exe", "*\sqlservr.exe", "*\w3wp.exe")) or (ProcessCommandLine in ("* -enc*", "* -e *", "* -nop*", "* -noni*", "*iex*", "*downloadstring*", "*frombase64string*", "*Invoke-Expression*"))) and (not (username =~ "NT AUTHORITY\SYSTEM" and (ParentProcessName in ("*\Windows\System32\ServerManager.exe*", "*\Configuration Manager\*", "*\HealthService.exe*", "*\CcmExec.exe*")) and (ProcessCommandLine in ("*Chocolatey*", "*Splunk*", "*Logitech*", "*SCCM*", "*Microsoft.WSUS*"))))

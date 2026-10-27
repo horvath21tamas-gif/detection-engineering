@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath in ("*\reg.exe", "*\powershell.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\schtasks.exe")) and (ProcessCommandLine in ("*\Microsoft\Windows\CurrentVersion\Run*", "*\Microsoft\Windows\CurrentVersion\RunOnce*", "*\Microsoft\Windows\CurrentVersion\RunService*", "*\Group Policy\Scripts*", "*\Start Menu\Programs\Startup*")) and (ProcessCommandLine in ("*\AppData\Local\Temp\*", "*\Users\Public\*", "*\ProgramData\*", "*C:\Windows\Temp\*", "*http*"))) and (not (ProcessCommandLine in ("*\Microsoft\Windows\CloudExperienceHost*", "*OneDrive.exe*", "*Teams.exe*", "*AdobeCollabSync.exe*", "*GoogleUpdate.exe*")))

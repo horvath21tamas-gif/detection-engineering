@@ -1,1 +1,0 @@
-winlog.channel:Security AND (event.code:4720 AND (process.executable.caseless:(*\\net.exe OR *\\net1.exe OR *\\powershell.exe OR *\\pwsh.exe OR *\\cmd.exe OR *\\wscript.exe OR *\\cscript.exe)) AND (NOT (user.name:*$ OR ((user.name:(*MSOL_* OR *AAD_* OR *Sync*)) AND user.domain:"NT AUTHORITY"))))

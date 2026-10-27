@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ParentProcessName in ("*\rdpinit.exe", "*\rdpclip.exe", "*\wfshell.exe", "*\ctxsi.exe", "*\vpnui.exe", "*\TeamViewer.exe", "*\AnyDesk.exe")) and ((FolderPath in ("*\nltest.exe", "*\whoami.exe", "*\net.exe", "*\net1.exe", "*\qwinsta.exe", "*\nslookup.exe", "*\arp.exe", "*\nbtstat.exe")) and (ProcessCommandLine in ("* /domain*", "* /all*", "* /groups*", "*dclist*", "*trust_dom*", "*all-ad-servers*"))) and (not (ProcessCommandLine contains "C:\Windows\System32\GroupPolicy\Machine\Scripts\" or FolderPath endswith "\gpupdate.exe" or ParentProcessName endswith "\services.exe"))

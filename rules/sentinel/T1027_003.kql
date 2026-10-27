@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ProcessCommandLine in ("*GetPixel*", "*LockBits*", "*BitmapData*", "*Drawing.Bitmap*")) and (ProcessCommandLine in ("*[System.Text.Encoding]::ASCII.GetString*", "*[char[]]*", "*::FromBase64String*", "*[System.Convert]::ToByte*")) and (ProcessCommandLine in ("*iex*", "*Invoke-Command*", "*[Reflection.Assembly]::Load*", "*ScriptBlock*")) and (ProcessCommandLine in ("*.png*", "*.jpg*", "*.jpeg*", "*.bmp*")) and (not (FolderPath in ("*\Adobe\*", "*\GIMP*", "*\Visual Studio\*", "*\mspaint.exe*"))) and (not username =~ "NT AUTHORITY\SYSTEM")

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (TargetObject in ("*SYSTEM\CurrentControlSet\Services\TermService\Parameters\ServiceDll*", "*SYSTEM\CurrentControlSet\Control\Terminal Server\Providers\*")) and ((Details in ("*\Users\*", "*\Temp\*", "*\AppData\*", "*\ProgramData\*", "*\Public\*", "*\PerfLogs\*", "*\Downloads\*")) or ((FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\reg.exe", "*\net.exe", "*\python.exe")) and (ParentProcessName in ("*\explorer.exe", "*\wsmprovhost.exe", "*\httpd.exe")))) and (not ((Details in ("*\System32\termsrv.dll", "*\System32\rdpcorets.dll")) and (FolderPath in ("*\Windows\servicing\TrustedInstaller.exe*", "*\Windows\System32\svchost.exe*"))))

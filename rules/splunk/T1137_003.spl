@@ -1,8 +1,0 @@
-
-| rex field=Image "(?<ImageMatch>(outlook\\.exe|msiexec\\.exe|powershell\\.exe|cmd\\.exe|reg\\.exe|cscript\\.exe|wscript\\.exe)$)"
-| eval ImageCondition=if(isnotnull(ImageMatch), "true", "false")
-| rex field=Details "(?<DetailsMatch>(CLSID|\\.dll|\\.vbs|http))"
-| eval DetailsCondition=if(isnotnull(DetailsMatch), "true", "false")
-| search ImageCondition="true" OR DetailsCondition="true"
-| regex TargetObject="(\\\\Software\\\\Microsoft\\\\Office\\\\|\\\\Software\\\\WOW6432Node\\\\Microsoft\\\\Office\\\\).*\\\\Outlook\\\\Forms\\\\(Registry|Cache)$"
-| regex Details!="(C:\\\\Program Files\\\\|C:\\\\Program Files \\(x86\\)\\\\)"

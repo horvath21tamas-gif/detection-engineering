@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ParentProcessName in ("*\wmiprvse.exe", "*\svchost.exe", "*\dllhost.exe")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\cmd.exe", "*\scrcons.exe")) and (ProcessCommandLine in ("*-ExecutionPolicy Bypass*", "*new-object -comobject*", "*ActiveXObject*", "*GetObject(\"script:*", "* -e:vbscript*")) and (not ((ProcessCommandLine in ("*\Windows\CCM\*", "*\Microsoft Help\*", "*UevAgent.js*")) or (Parentprocessname =~ "C:\Windows\System32\svchost.exe" and username =~ "NT AUTHORITY\SYSTEM")))

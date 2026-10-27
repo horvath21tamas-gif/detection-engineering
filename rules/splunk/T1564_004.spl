@@ -1,6 +1,0 @@
-
-| rex field=CommandLine "(?<CommandLineMatch>(\\s>\\s.*:.*|\\stype\\s.*:.*|\\sexpand\\s.*:.*|\\smakecab\\s.*:.*|\\sfindstr\\s.*:.*))"
-| eval CommandLineCondition=if(isnotnull(CommandLineMatch), "true", "false")
-| rex field=CommandLine "(?<CommandLineMatch2>(\\sstart\\s.*:.*|wmic\\sprocess\\s+call\\s+create|control\\.exe\\s.*:.*|rundll32\\.exe\\s.*:.*|regsvr32\\.exe\\s+/s\\s.*:.*))"
-| eval CommandLineCondition2=if(isnotnull(CommandLineMatch2), "true", "false")
-| search CommandLineCondition="true" OR CommandLineCondition2="true" OR CommandLine IN ("* -stream *", "*Set-Content*", "*Add-Content*", "*Get-Item*", "* -alternate *", "*Get-Content -Stream*", "*Remove-Item -Stream*") ParentImage IN ("*\\winword.exe", "*\\excel.exe", "*\\outlook.exe", "*\\chrome.exe", "*\\msedge.exe", "*\\mshta.exe", "*\\w3wp.exe", "*\\powershell.exe", "*\\cmd.exe") OR NOT (CommandLine IN ("*:Zone.Identifier*", "*:favicon*", "*:\\Windows\\*") username="NT AUTHORITY\\SYSTEM" ParentImage IN ("*\\Windows\\System32\\svchost.exe*", "*\\Windows\\System32\\services.exe*")) NOT (CommandLine IN ("*:Zone.Identifier*", "*:favicon*", "*:\\Windows\\*") username="NT AUTHORITY\\SYSTEM" ParentImage IN ("*\\Windows\\System32\\svchost.exe*", "*\\Windows\\System32\\services.exe*")) | table Time,SourceImage,ParentImage,CommandLine,SourceUsername

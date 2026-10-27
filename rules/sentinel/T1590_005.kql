@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath endswith "\aws.exe" and (ProcessCommandLine in ("* iam list-*", "* s3api list-*", "* secretsmanager list-secrets*"))) or (FolderPath endswith "\az.exe" and (ProcessCommandLine in ("* network nsg list*", "* account list*", "* keyvault list*"))) or ((FolderPath in ("*\gcloud.exe", "*\gsutil.exe")) and (ProcessCommandLine in ("* projects list*", "* iam roles list*")))) and (not (ParentProcessName in ("*\jenkins.exe", "*\git-remote-http.exe", "*\gitlab-runner.exe", "*\terraform.exe", "*\ansible.exe"))) and (not (ProcessCommandLine in ("*--version*", "* help*", "*--help*"))) and (not (User in ("*SVC_*", "*SA_*", "*AUTO_*")))

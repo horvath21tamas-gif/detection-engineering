@@ -1,2 +1,0 @@
-(EventID = 4624 AND (LogonType = 2,10)) AND (NOT ((((TargetUserName = '*$*'))|| (((TargetUserName = '*SYSTEM*' OR TargetUserName = '*LOCAL SERVICE*' OR TargetUserName = '*NETWORK SERVICE*'))) OR (((IpAddress = '*127.0.0.1*' OR IpAddress = '*::1*'))) OR (WorkstationName begins 'JUMP-','BASTION-','MGMT-') OR (TargetUserName begins 'admin','svc_')))
-)

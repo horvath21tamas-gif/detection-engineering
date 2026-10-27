@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where FolderPath endswith "\rundll32.exe" and (ProcessCommandLine in ("*javascript:*", "*RunHTMLApplication*", "*mshtml,*", "*http://*", "*https://*", "*scrobj.dll*", "*shell32.dll,ShellExec_RunDLL*")) and ((ParentProcessName in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe")) or (ProcessCommandLine in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Downloads\*"))) and (not ((ProcessCommandLine in ("*\Windows\System32\*", "*\Windows\SysWOW64\*")) or (ParentProcessName in ("*\Windows\Installer\*", "*\Program Files\*", "*\Program Files (x86)\*", "*\DriverStore\*", "*\Dell\*", "*\HP\*", "*\Lenovo\*", "*\Intel\*"))))

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (processcommandline in ("(*i)([\s\t,;]{50,})", "(*i)(set\s+[a-z0-9]{1,3}=\s*[^&]{1,5}&[\s\t]*){8,}", "(*i)([\%\!\^\`]{3,}.*){5,}")) and (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\cscript.exe", "*\wscript.exe", "*\mshta.exe", "*\rundll32.exe")) and (not ((FolderPath in ("*\Windows\System32\wbem\WmiPrvSE.exe*", "*\Program Files\*", "*\Windows\System32\msiexec.exe*")) and (ProcessCommandLine in ("*Microsoft.Cloud.Data*", "*chocolatey*")) and username =~ "NT AUTHORITY\SYSTEM"))

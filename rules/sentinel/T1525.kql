@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*/docker", "*/podman", "*/containerd", "*/ctr", "*/crictl")) and (ProcessCommandLine in ("* run *", "* create *", "* start *")) and (ProcessCommandLine in ("*docker.io/*", "*ghcr.io/*", "*quay.io/*", "*registry.hub.docker.com/*")) and (ProcessCommandLine in ("*:latest*", "*:dev*", "*:test*", "*:debug*")) and (not (ProcessCommandLine in ("*registry.corp.local/*", "*harbor.prod.local/*", "*acr.company.com/*"))) and (not (ParentProcessName in ("*/jenkins*", "*/gitlab-runner*", "*/github-actions*", "*/azure-pipelines*", "*/tekton*"))) and (not (ProcessCommandLine in ("*kube-system*", "*istio-system*", "*monitoring*"))) and (not (Hostname in ("*build*", "*ci*", "*runner*")))

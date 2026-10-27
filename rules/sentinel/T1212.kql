@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((ParentProcessName in ("*\lsass.exe", "*\logonui.exe", "*\lsm.exe", "*\spoolsv.exe")) and (FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\net.exe", "*\whoami.exe", "*\nltest.exe", "*\rundll32.exe", "*\mimikatz.exe"))) or (ProcessCommandLine in ("* -inject *", "* -leak *", "* --pipe *", "*reflectiveloader*", "*sekurlsa*", "*lsass::memory*", "*procdump*", "*SharpDump*", "*Invoke-Mimikatz*")) or (ParentProcessName in ("*\Users\*", "*\AppData\Local\Temp\*", "*\Downloads\*", "*\Public\*"))) and (not ((FolderPath endswith "\WerFault.exe" and ParentProcessName endswith "\lsass.exe") or ((FolderPath in ("*\CrowdStrike\*", "*\SentinelOne\*", "*\Windows Defender\*", "*\Microsoft Defender ATP\*", "*\CarbonBlack\*")) and User startswith "NT AUTHORITY\SYSTEM")))

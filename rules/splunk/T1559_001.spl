@@ -1,6 +1,0 @@
-
-| rex field=PipeName "(?<PipeNameMatch>^\\\\+[a-f0-9]{8,12}$)"
-| eval PipeNameCondition=if(isnotnull(PipeNameMatch), "true", "false")
-| rex field=PipeName "(?<PipeNameMatch2>^\\\\+(chrome|edge|mojo))"
-| eval PipeNameCondition2=if(isnotnull(PipeNameMatch2), "true", "false")
-| search PipeName IN ("*\\msagent_*", "*\\postex_*", "*\\status_*", "*\\psexec*", "*\\paexec*", "*\\remcom*", "*\\lsadump*", "*\\cachedump*", "*\\win_svc*", "*\\mypipe*") OR (PipeNameCondition="true" Image IN ("*\\cmd.exe", "*\\powershell.exe", "*\\pwsh.exe", "*\\powershell_ise.exe", "*\\wscript.exe", "*\\cscript.exe", "*\\rundll32.exe", "*\\mshta.exe") ParentImage IN ("*\\cmd.exe", "*\\powershell.exe", "*\\wscript.exe", "*\\cscript.exe") NOT ((Image IN ("C:\\Windows\\System32\\*", "C:\\Windows\\SysWOW64\\*") PipeName IN ("*\\lsass*", "*\\ntsvcs*", "*\\scerpc*", "*\\epmapper*", "*\\atsvc*", "*\\spoolss*", "*\\srvsvc*")) OR Image IN ("*\\vmtoolsd.exe", "*\\vboxservice.exe", "*\\docker.exe") OR (Image IN ("*\\chrome.exe", "*\\msedge.exe") PipeNameCondition2="true")))

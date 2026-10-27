@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath endswith "\at.exe" or OriginalFileName =~ "at.exe") and ((ProcessCommandLine in ("* \*", "* /interactive*", "*cmd*", "*powershell*", "*wscript*", "*cscript*", "*http*", "*.exe*")) or (ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\explorer.exe", "*\winword.exe", "*\excel.exe"))) and (not (ProcessCommandLine contains "C:\Legacy\Backup.bat" or username =~ "NT AUTHORITY\SYSTEM"))

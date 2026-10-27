@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (operationName =~ "Add user" and result =~ "success") and initiatedBy_user_userPrincipalName contains "@" and (ipAddress =~ "unusual_ip" or (userAgent in ("*python-requests*", "*curl*", "*Postman*", "*Kali*"))) and (not (initiatedBy_app_displayName in ("Azure AD Connect", "Workday to Azure AD", "Okta Provisioning", "MS-PIM")))

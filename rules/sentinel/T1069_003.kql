@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (operationName in ("*Get group*", "*List groups*", "*Get members of group*", "*ListGroupPolicies*", "*v1.compute.instanceGroups.list*")) and ((requestParameters in ("*$expand*", "*$select*", "*--all*", "*--filter*")) or (userAgent in ("*python-requests*", "*Go-http-client*", "*Postman*", "*Roadtools*", "*MicroBurst*"))) and (src_ip_is_external =~ true or user_agent_is_bot =~ true) and (not (userIdentity_type =~ "AssumedRole" and (userAgent in ("*Terraform*", "*PrismaCloud*", "*Wiz.io*", "*Azure-Sentinel*"))))

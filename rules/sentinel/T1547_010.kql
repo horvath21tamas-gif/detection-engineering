@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where TargetObject contains "System\CurrentControlSet\Control\Session Manager\AppCertDlls" and ((Details in ("*:\Users\*", "*:\ProgramData\*", "*:\Temp\*", "*:\Windows\Temp\*", "*C:\PerfLogs\*")) or (FolderPath in ("*\powershell.exe", "*\cmd.exe", "*\reg.exe", "*\cscript.exe", "*\wscript.exe"))) and (not ((FolderPath in ("*\trustedinstaller.exe", "*\System32\msiexec.exe")) and (FolderPath in ("*C:\$WINDOWS.~BT\*", "*C:\Windows\System32\oobe\*"))))

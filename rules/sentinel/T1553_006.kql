@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath endswith "\bcdedit.exe" and (ProcessCommandLine in ("*set *", "*nointegritychecks*", "*testsigning*", "*disable-elam*"))) or (ProcessCommandLine in ("*reg add*", "*Set-ItemProperty*"))) and ((ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe")) and FolderPath contains "\Temp\") and (not ((FolderPath in ("C:\Windows\servicing\TrustedInstaller.exe*", "C:\Windows\System32\sysprep\*", "C:\Windows\System32\oobe\*", "C:\Windows\Setup\*")) and username =~ "NT AUTHORITY\SYSTEM"))

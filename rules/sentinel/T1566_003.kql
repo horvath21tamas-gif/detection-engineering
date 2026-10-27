@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ParentProcessName in ("*\teams.exe", "*\slack.exe", "*\discord.exe", "*\webex.exe", "*\zoom.exe", "*\whatsapp.exe", "*\linkedin.exe")) and ((FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\scrcons.exe", "*\regsvr32.exe", "*\rundll32.exe")) and (ProcessCommandLine in ("*\Downloads\*", "*\AppData\Local\Temp\*", "*\Users\Public\*", "*C:\Windows\Temp\*"))) and (not (((FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe")) and (ProcessCommandLine in ("*--type=*", "*squirrel*", "*--update*", "*--checkInstall*", "*notification*"))) or (FolderPath in ("*\winword.exe", "*\excel.exe", "*\powerpnt.exe"))))

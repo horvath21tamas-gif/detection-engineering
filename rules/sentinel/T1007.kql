@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath in ("*\sc.exe", "*\tasklist.exe", "*\net.exe", "*\net1.exe")) and (ProcessCommandLine in ("*Get-Service*", "*Get-WmiObject Win32_Service*", "*Get-CimInstance Win32_Service*"))) and ((ProcessCommandLine in ("*query*", "*state= all*", "*config*", "*sdshow*")) or ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\httpd.exe", "*\wsmprovhost.exe", "*\powershell.exe")) and IntegrityLevel =~ "Medium") or (ProcessCommandLine in ("*findstr*", "*select-string*", "*where-object*", "* > *", "*ConvertTo-Json*"))) and (not (username =~ "NT AUTHORITY\SYSTEM" and (ParentProcessName in ("*\svchost.exe", "*\msiexec.exe", "*\CcmExec.exe")) and (ProcessCommandLine in ("*Program Files*", "*Splunk*", "*Tanium*"))))

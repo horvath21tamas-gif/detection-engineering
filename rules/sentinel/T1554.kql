@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((TargetFilename in ("*\Google\Chrome\Application\*", "*\Microsoft\Edge\Application\*", "*\Microsoft\Teams\current\*", "*\Zoom\bin\*", "*\AnyDesk.exe*", "*\TeamViewer.exe*")) and TargetFilename endswith ".exe") and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\cscript.exe", "*\wscript.exe", "*\mshta.exe", "*\bitsadmin.exe", "*\certutil.exe", "*\curl.exe")) and (not ((FolderPath in ("*\GoogleUpdate.exe", "*\MicrosoftEdgeUpdate.exe", "*\installer.exe", "*\setup.exe", "*\Update.exe", "*\trustedinstaller.exe")) and (username in ("NT AUTHORITY\SYSTEM", "NT AUTHORITY\NETWORK SERVICE"))))

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath endswith "\sdbinst.exe" or OriginalFileName =~ "sdbinst.exe") and ((ProcessCommandLine in ("*:\Users\*", "*:\ProgramData\*", "*:\Windows\Temp\*", "*:\Temp\*", "*C:\PerfLogs\*")) or (ParentProcessName in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\cscript.exe", "*\wscript.exe", "*\mshta.exe"))) and (not ((ParentProcessName in ("*\msiexec.exe", "*\trustedinstaller.exe")) and ProcessCommandLine contains " -u " and (ParentProcessName in ("*\AppData\Local\Microsoft\Teams\*", "*\AppData\Local\Google\Update\*"))))

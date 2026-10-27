@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((ProcessCommandLine in ("*lsadump::dcsync*", "*-just-dc*", "*-just-dc-user*", "*Invoke-DCSync*", "*mimikatz(adsiedit)*", "*DRSGetNCChanges*")) or (ProcessCommandLine in ("*/user:krbtgt*", "*/user:administrator*", "*-user krbtgt*"))) and (ParentProcessName in ("*\wsmprovhost.exe", "*\httpd.exe", "*\php-cgi.exe", "*\psexesvc.exe")) and (not ((username in ("NT AUTHORITY\SYSTEM", "NT AUTHORITY\NETWORK SERVICE")) and FolderPath contains "\Windows\System32\lsass.exe"))

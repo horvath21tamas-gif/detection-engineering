@@ -1,2 +1,0 @@
-(((GrantedAccess = '*0x20*' OR GrantedAccess = '*0x22*' OR GrantedAccess = '*0x1438*' OR GrantedAccess = '*0x1F1FFF*'))) AND ((CallTrace = '*unknown*'))&& (((TargetImage = '*\\svchost.exe*' OR TargetImage = '*\\explorer.exe*' OR TargetImage = '*\\werfault.exe*' OR TargetImage = '*\\searchindexer.exe*'))) AND (NOT (((((SourceImage = '*\\MsMpEng.exe*' OR SourceImage = '*\\CcmExec.exe*' OR SourceImage = '*\\csrss.exe*'))) OR (((CallTrace = '*ntdll.dll+LdrpWorkItem*' OR CallTrace = '*kernel32.dll+BaseThreadInitThunk*'))) OR ((condition = '*selection_source_equals_target*'))))
-)

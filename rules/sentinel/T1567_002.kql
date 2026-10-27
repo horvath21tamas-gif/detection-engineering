@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\rclone.exe", "*\megatools.exe", "*\mega-put.exe", "*\pcloud.exe")) and (ProcessCommandLine in ("* upload *", "* sync *", "* --ignore-existing*"))) and ((ProcessCommandLine in ("* --config *", "* --no-check-certificate*", "* --bwlimit *", "* --include *")) or (ProcessCommandLine in ("*mega.nz*", "*dropboxapi.com*", "*googleapis.com/upload*", "*pcloud.com*", "*transfer.sh*")))) and ((FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*")) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\rundll32.exe", "*\powershell.exe"))) and (not ((FolderPath in ("*\Program Files\*", "*\System32\OneDrive.exe*")) or username =~ "NT AUTHORITY\SYSTEM" or ParentProcessName endswith "\services.exe"))

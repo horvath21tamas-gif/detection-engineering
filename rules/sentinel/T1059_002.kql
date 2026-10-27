@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where FolderPath endswith "/osascript" and ((ProcessCommandLine in ("*do shell script*", "*curl *", "*python*", "*eval*", "*base64*")) or (ParentProcessName in ("*/Safari", "*/Google Chrome", "*/Microsoft Edge", "*/Mail", "*/Slack", "*/Telegram", "*/Terminal"))) and (not (ProcessCommandLine contains "/Library/Application Support/Jamf/" or ProcessCommandLine contains "com.apple.quarantine" or ParentProcessName endswith "/launchd"))

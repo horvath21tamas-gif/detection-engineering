@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ServiceName in ("PSEXEC*", "PAExec*", "RemCom*", "CSEXEC*", "ATSVC*")) and ((ImagePath in ("*\ADMIN$*", "*\C$\Windows\*", "*\Users\Public\*", "*\AppData\Local\Temp\*", "*\Windows\Temp\*")) or (not ((Computer in ("MGMT-*", "SCCM-*", "DEPLOY-*", "ADMIN-*")) or (User in ("*svc_*", "*admin_*", "*deploy*", "*sccm*", "*ansible*", "*pdq*")) or (ImagePath in ("*\Windows\CCM\*", "*\Microsoft Configuration Manager\*", "*\PDQ\*", "*\Ivanti\*", "*\ManageEngine\*", "*\Tanium\*")))))

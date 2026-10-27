@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (operation_name in ("*DeleteSnapshot*", "*ModifyInstanceAttribute*", "*RevokeSecurityGroupIngress*", "*AuthorizeSecurityGroupIngress*", "*DeleteVpcPeeringConnection*", "*ModifyNetworkAcl*", "*ModifyImageAttribute*", "*CopySnapshot*", "*SetSnapshotPermissions*")) and ((request_parameters in ("*0.0.0.0/0*", "*::/0*", "*all*", "*public*", "*grantee*", "*Add.UserId*")) or (mfa_authenticated =~ "false" and (user_agent in ("*kali*", "*python-requests*", "*curl*", "*postman*", "*boto3*")))) and (not ((user_name in ("svc-terraform*", "svc-ansible*", "svc-packer*", "svc-github-actions*")) or (user_name in ("*system-internal*", "*cloud-controller*", "*service-linked-role*"))))

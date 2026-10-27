@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\rclone.exe", "*\megatools.exe", "*\mega-put.exe", "*\rcloud.exe")) and (ProcessCommandLine in ("*discordapp.com/api/webhooks*", "*api.telegram.org/bot*"))) and ((ProcessCommandLine in ("* --config *", "* --no-check-certificate*", "* --bwlimit *", "* sync *", "* copy --ignore-existing*")) or (ProcessCommandLine in ("*mega.nz*", "*transfer.sh*", "*webhook.site*", "*pastebin.com*", "*file.io*")))) and ((FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*")) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\rundll32.exe"))) and (not (FolderPath contains "\Program Files\" or (ProcessCommandLine in ("*127.0.0.1*", "*localhost*")) or username =~ "NT AUTHORITY\SYSTEM" or ParentProcessName endswith "\services.exe"))

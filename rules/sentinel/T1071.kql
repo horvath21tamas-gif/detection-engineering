@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath in ("*\notepad.exe", "*\calc.exe", "*\mspaint.exe", "*\colorcpl.exe", "*\spoolsv.exe", "*\winver.exe", "*\scrcons.exe")) or ((FolderPath in ("*\rundll32.exe", "*\regsvr32.exe", "*\mshta.exe", "*\certutil.exe")) and (ProcessCommandLine in ("*http*", "*ftp*"))) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powershell.exe", "*\cmd.exe"))) and (not ((FolderPath in ("*\chrome.exe*", "*\msedge.exe*", "*\firefox.exe*", "*\brave.exe*")) or ((DestinationHostname in ("*.microsoft.com", "*.windowsupdate.com", "*.digicert.com", "*.amazontrust.com")) and (RemotePort in (135, 139, 445)))))

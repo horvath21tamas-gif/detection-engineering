@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where FolderPath endswith ".exe" and (ImageLoaded in ("*\user32.dll", "*\advapi32.dll", "*\win32u.dll")) and (ImageLoaded in ("*user32.dll*", "*advapi32.dll*")) and (FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\ProgramData\*")) and (not ((FolderPath in ("C:\Windows\System32\*", "C:\Windows\SysWOW64\*")) or (FolderPath in ("*\explorer.exe", "*\chrome.exe", "*\msedge.exe", "*\firefox.exe", "*\teams.exe", "*\outlook.exe", "*\slack.exe", "*\zoom.exe")) or (FolderPath in ("*\Accessibility\*", "*\Screen Recorder\*", "*\ScreenCapture\*", "*\Security\*", "*\Antivirus\*", "*\EDR\*", "*\Defender\*", "*\CrowdStrike\*", "*\SentinelOne\*"))))

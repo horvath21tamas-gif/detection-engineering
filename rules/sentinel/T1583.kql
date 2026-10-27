@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\doctl.exe", "*\linode-cli.exe", "*\vultr-cli.exe", "*\terraform.exe", "*\pulumi.exe")) or (ProcessCommandLine in ("*domain register*", "*vps create*", "*droplet create*", "*compute instances create*"))) or ((FolderPath in ("*\curl.exe", "*\wget.exe", "*\python.exe")) or (ProcessCommandLine in ("*api.namecheap.com*", "*api.godaddy.com*", "*freenom.com*", "*/v2/droplets*")))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_infra_tools")) and (not ((User in ("*svc_jenkins*", "*adm_infra_deploy*", "*terraform_worker*")) and (FolderPath in ("*\Program Files\Terraform\*", "*\Program Files\GitLab-Runner\*")))) and (not (ParentProcessName in ("*\code.exe", "*\devenv.exe", "*\idea64.exe")))

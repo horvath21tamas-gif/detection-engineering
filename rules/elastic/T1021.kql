@@ -1,1 +1,0 @@
-winlog.channel:Security AND ((event.code:4624 AND (winlog.event_data.LogonType:(2 OR 10))) AND (NOT (winlog.event_data.TargetUserName:*$ OR (winlog.event_data.TargetUserName:(SYSTEM OR "LOCAL SERVICE" OR "NETWORK SERVICE")) OR (source.ip:(127.0.0.1 OR \:\:1)) OR (source.domain:(JUMP\-* OR BASTION\-* OR MGMT\-*)) OR (winlog.event_data.TargetUserName:(admin* OR svc_*)))))

@@ -1,2 +1,0 @@
-(((EventID = 4768,4769) AND ((TicketEncryptionType = '*0x17*'))&& ((Status = '*0x0*'))) OR (EventID = 4768 AND (((TicketOptions = '*0x40810000*' OR TicketOptions = '*0x40810010*')))) OR (EventID = 4688 AND (((param = '*klist purge*' OR param = '*kerberos::ptt*' OR param = '*monitor /interval*'))))) AND (NOT ((((TargetUserName = '*$*'))|| ((ServicePrincipalName = '*krbtgt*'))|| ((IpAddress = '*10.0.0.5*'))))
-)

@@ -68,7 +68,7 @@ detection:
     - CommandLine|contains:
         - 'Program Files'
         - 'Get-EventLog'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
 
   condition: selection_tools and selection_logic and (selection_targets or selection_context) and not filter_legit
 

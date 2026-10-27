@@ -48,7 +48,7 @@ detection:
     - CommandLine|contains:
         - 'git-remote-https'              
         - 'Azure'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
 
   condition: (selection_tools_cli or selection_encapsulation) and selection_procs and not filter_legit_admin_tools
 

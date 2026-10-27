@@ -53,7 +53,7 @@ detection:
       - 'select-string'
 
   filter_legit_noise:
-    - username:
+    - User:
         - 'NT AUTHORITY\SYSTEM'
         - 'NT AUTHORITY\LOCAL SERVICE'
         - 'NT AUTHORITY\NETWORK SERVICE'

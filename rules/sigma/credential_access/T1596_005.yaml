@@ -58,7 +58,7 @@ detection:
     - condition: not selection_specialized_tools
 
   filter_security_vendors:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     Image|contains:
       - '\SentinelOne\'
       - '\CrowdStrike\'

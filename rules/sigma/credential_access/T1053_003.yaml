@@ -51,7 +51,7 @@ detection:
             - '/salt-minion'
             - '/puppet'
             - '/chef-client'
-        - username: 'root'
+        - User: 'root'
           ParentImage|endswith:
             - '/dpkg'
             - '/rpm'

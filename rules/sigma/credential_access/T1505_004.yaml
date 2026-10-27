@@ -66,7 +66,7 @@ detection:
             - 'C:\Program Files (x86)\'
         ParentImage|endswith:
             - '\svchost.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_firmware_tools and selection_suspicious_commands and selection_untrusted_origin and not filter_trusted_management
 

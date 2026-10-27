@@ -32,7 +32,7 @@ detection:
 
     filter_trusted_apps:
         Image|re: '^(C:\\Program Files\\|C:\\Program Files \(x86\)\\|C:\\Windows\\System32\\)'
-        username: 'NT AUTHORITY\\SYSTEM'
+        User: 'NT AUTHORITY\\SYSTEM'
 
     condition: >
         selection_target_files 

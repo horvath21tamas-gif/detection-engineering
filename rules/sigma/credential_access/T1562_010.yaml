@@ -92,7 +92,7 @@ detection:
       - System
 
   filter_legit_admin_context:
-    username:
+    User:
       - 'NT AUTHORITY\SYSTEM'
       - 'NT AUTHORITY\NETWORK SERVICE'
 

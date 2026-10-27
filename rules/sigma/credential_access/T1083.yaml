@@ -58,7 +58,7 @@ detection:
     ParentImage|endswith:
       - '\msmpeng.exe'
       - '\searchindexer.exe'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: selection_tools and (selection_keywords or (selection_depth and selection_suspicious_lineage)) and not filter_legit_noise
 level: high

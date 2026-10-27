@@ -18,22 +18,22 @@ logsource:
 
 detection:
     selection_tools:
-        processname: '(wmic\.exe|pnputil\.exe|driverquery\.exe|devcon\.exe)$'
-        processcommandline: '(Get-PnpDevice|Get-WmiObject|gwmi)'
+        Image: '(wmic\.exe|pnputil\.exe|driverquery\.exe|devcon\.exe)$'
+        CommandLine: '(Get-PnpDevice|Get-WmiObject|gwmi)'
 
     selection_keywords:
-        processcommandline: '(Win32_USBController|Win32_DiskDrive|Win32_NetworkAdapter|USBSTOR|/enum-devices|/deviceid)'
+        CommandLine: '(Win32_USBController|Win32_DiskDrive|Win32_NetworkAdapter|USBSTOR|/enum-devices|/deviceid)'
 
     selection_suspicious_lineage:
-        Parentprocessname: '(cmd\.exe|powershell\.exe|wsmprovhost\.exe|httpd\.exe|winword\.exe)$'
+        ParentImage: '(cmd\.exe|powershell\.exe|wsmprovhost\.exe|httpd\.exe|winword\.exe)$'
         IntegrityLevel: 'Medium'
 
     selection_extraction:
-        processcommandline: '(>\s|ConvertTo-Json|format-list)'
+        CommandLine: '(>\s|ConvertTo-Json|format-list)'
 
     filter_legit_system:
-        username: 'NT AUTHORITY\SYSTEM'
-        Parentprocessname: '(svchost\.exe|msiexec\.exe)$'
+        User: 'NT AUTHORITY\SYSTEM'
+        ParentImage: '(svchost\.exe|msiexec\.exe)$'
         CommandLine|contains: 'Program Files'
 
     condition: selection_tools and (selection_keywords or selection_extraction or selection_suspicious_lineage) and not filter_legit_system

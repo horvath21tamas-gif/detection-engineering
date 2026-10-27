@@ -17,16 +17,16 @@ logsource:
 
 detection:
     selection_logic:
-        processcommandline: '(\s(-Recurse|/s)\s.*(\*\.))|copy\s+\*\.' 
+        CommandLine: '(\s(-Recurse|/s)\s.*(\*\.))|copy\s+\*\.' 
 
     selection_extensions:
-        processcommandline: '(\.doc|\.docx|\.pdf|\.xls|\.xlsx|\.pst|\.key|\.msg|\.pfx|\.rdp)$'
+        CommandLine: '(\.doc|\.docx|\.pdf|\.xls|\.xlsx|\.pst|\.key|\.msg|\.pfx|\.rdp)$'
 
     selection_staging:
-        processcommandline: '(\\Users\\Public|\\Windows\\Temp|\\AppData\\Local\\Temp|C:\\ProgramData)'
+        CommandLine: '(\\Users\\Public|\\Windows\\Temp|\\AppData\\Local\\Temp|C:\\ProgramData)'
 
     selection_context:
-        Parentprocessname: '(w3wp\.exe|httpd\.exe|powershell\.exe|cmd\.exe)$'
+        ParentImage: '(w3wp\.exe|httpd\.exe|powershell\.exe|cmd\.exe)$'
         IntegrityLevel: 'Medium'
 
     filter_trusted_systems:
@@ -34,8 +34,8 @@ detection:
             - 'C:\\Program Files\\Microsoft Monitoring Agent\\'
             - 'C:\\Windows\\CCM\\'
             - '\\OneDrive.exe'
-        - processcommandline: '(-Filter\s+\*\.log|HealthCheck)'
-        - username: 'NT AUTHORITY\SYSTEM'
+        - CommandLine: '(-Filter\s+\*\.log|HealthCheck)'
+        - User: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_logic and selection_extensions and selection_staging and selection_context and not filter_trusted_systems
 

@@ -52,7 +52,7 @@ detection:
       - 'C:\Program Files\'
       - 'Microsoft\Azure'
       - 'Chocolatey'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: >
     ((selection_header_logic and selection_procs)

@@ -61,7 +61,7 @@ detection:
             - '\AppData\Local\Temp\'
 
     filter_legit_system_automation:
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
         ParentImage|endswith:
             - '\CcmExec.exe'
             - '\TiWorker.exe'

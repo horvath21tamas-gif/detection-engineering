@@ -51,7 +51,7 @@ detection:
             - '\Downloads\'
 
     filter_legit_noise:
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
         ParentImage|contains:
             - '\Windows\System32\svchost.exe'
             - '\Program Files\Microsoft Monitoring Agent\'

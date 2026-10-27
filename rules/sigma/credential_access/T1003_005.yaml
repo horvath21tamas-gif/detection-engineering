@@ -48,7 +48,7 @@ detection:
       - 'C:\Windows\Temp\'
 
   filter_legit_maintenance:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     Image|contains:
       - '\Program Files\'
       - '\Program Files (x86)\'

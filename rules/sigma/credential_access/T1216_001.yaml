@@ -56,7 +56,7 @@ detection:
       - '\explorer.exe'
       - '\svchost.exe'
     CommandLine|contains: '127.0.0.1'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   selection_low_integrity:
     IntegrityLevel:

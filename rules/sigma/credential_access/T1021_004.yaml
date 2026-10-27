@@ -60,7 +60,7 @@ detection:
         - 'git-upload-pack'
         - 'git-receive-pack'
         - 'vscode-remote'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
 
   condition: >
     selection_img and

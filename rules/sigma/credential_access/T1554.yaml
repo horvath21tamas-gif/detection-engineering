@@ -45,7 +45,7 @@ detection:
             - '\setup.exe'
             - '\Update.exe' 
             - '\trustedinstaller.exe'
-        username: 
+        User: 
             - 'NT AUTHORITY\SYSTEM'
             - 'NT AUTHORITY\NETWORK SERVICE'
 

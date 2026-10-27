@@ -52,7 +52,7 @@ detection:
         - '\MsMpEng.exe'
         - '\CcmExec.exe'
         - '\msteams.exe'
-    - Sourceprocessname: 'C:\Windows\System32\csrss.exe'
+    - SourceImage: 'C:\Windows\System32\csrss.exe'
     - TargetImage|endswith:
         - '\WerFault.exe'
         - '\conhost.exe'

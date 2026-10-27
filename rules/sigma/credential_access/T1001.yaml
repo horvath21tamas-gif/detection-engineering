@@ -50,7 +50,7 @@ detection:
       - '\PhotosApp.exe'
       - '\Snagit\'
     CommandLine|contains: 'C:\Program Files\'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: selection_stego_logic and (selection_script_procs or selection_suspicious_parents) and not filter_legit_apps
 

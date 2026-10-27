@@ -99,7 +99,7 @@ detection:
       - '\Microsoft.IdentityServer.ServiceHost.exe'
       - '\Microsoft.IdentityServer.Service.exe'
       - '\miiserver.exe'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   filter_legit_admin_activity:
     CommandLine|contains:

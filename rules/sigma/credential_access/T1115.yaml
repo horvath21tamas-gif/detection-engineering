@@ -50,7 +50,7 @@ detection:
     - ParentImage|endswith:
         - '\explorer.exe'        
         - '\taskhostw.exe'        
-    - username: 'NT AUTHORITY\SYSTEM'  
+    - User: 'NT AUTHORITY\SYSTEM'  
 
   condition: |
     (selection_api_calls and selection_loop) or 

@@ -46,7 +46,7 @@ detection:
       - '\htdocs\'
 
   deployment_filter:
-    - username:
+    - User:
         - 'AD\svc_deploy'
         - 'AD\github_actions'
     - CommandLine|contains:

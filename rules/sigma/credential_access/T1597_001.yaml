@@ -40,7 +40,7 @@ detection:
         - ' -enum'
 
   filter_standard_troubleshooting:
-    - processcommandline:
+    - CommandLine:
         - 'nslookup '
         - 'ping '
         - 'tracert '

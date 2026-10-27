@@ -60,7 +60,7 @@ detection:
             - '\Desktop\'
 
     filter_trusted_processes:
-        - username: 'NT AUTHORITY\SYSTEM'
+        - User: 'NT AUTHORITY\SYSTEM'
           Image|contains:
             - '\Windows\System32\inetsrv\iissetup.exe'
             - '\Windows\SoftwareDistribution\'

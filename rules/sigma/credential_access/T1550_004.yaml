@@ -48,7 +48,7 @@ detection:
           CommandLine|contains:
             - '--type=utility'
             - '--utility-sub-type=network.mojom.NetworkService'
-        - username: 'NT AUTHORITY\SYSTEM'
+        - User: 'NT AUTHORITY\SYSTEM'
           Image|contains: '\Windows\System32\svchost.exe'
 
     condition: selection_suspicious_actor and (selection_target_files or selection_suspicious_actions) and not filters_legitimate

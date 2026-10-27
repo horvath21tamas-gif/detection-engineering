@@ -57,7 +57,7 @@ detection:
       - 'VMware'
       - 'vmsvga'
       - 'C:\Program Files\'
-    username:
+    User:
       - 'NT AUTHORITY\SYSTEM'
       - 'NT AUTHORITY\NETWORK SERVICE'
 

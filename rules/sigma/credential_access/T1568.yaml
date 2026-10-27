@@ -52,7 +52,7 @@ detection:
         - 'Check-Connectivity'
         - 'domain-verification'
         - 'update.microsoft.com'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - ParentImage|endswith:
         - '\services.exe'
         - '\explorer.exe'

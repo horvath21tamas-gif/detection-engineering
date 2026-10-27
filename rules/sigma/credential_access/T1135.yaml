@@ -34,7 +34,7 @@ detection:
         IntegrityLevel: 'Medium'
 
     filter_legit_noise:
-        - username: 'NT AUTHORITY\\SYSTEM'
+        - User: 'NT AUTHORITY\\SYSTEM'
         - Image|re: '(\\Program Files\\Tanium\\|\\Program Files\\Splunk\\|\\Windows\\System32\\CcmExec\.exe)$'
         - CommandLine|re: 'net share'
 

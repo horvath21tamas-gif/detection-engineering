@@ -65,7 +65,7 @@ detection:
             - '\setup.exe'
             - '\chrome.exe'
             - '\msedge.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
 
     condition:
         (

@@ -49,7 +49,7 @@ detection:
       - '\RuntimeBroker.exe'
 
   filter_backup_agents:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     Image|contains:
       - '\Veeam\'
       - '\Veritas\'

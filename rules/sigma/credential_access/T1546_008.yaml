@@ -42,7 +42,7 @@ detection:
             - '\msiexec.exe'   
             - '\trustedinstaller.exe'
             - '\svchost.exe'    
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
 
     filter_standard_tools:
         Image|endswith:

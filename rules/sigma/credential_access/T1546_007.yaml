@@ -39,7 +39,7 @@ detection:
             - '\msiexec.exe'
             - '\trustedinstaller.exe'
             - '\TiWorker.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
 
     filter_microsoft_signed:
         Details|startswith: 'C:\Windows\System32\'

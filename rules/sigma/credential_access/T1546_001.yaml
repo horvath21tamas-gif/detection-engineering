@@ -48,7 +48,7 @@ detection:
             - '\OpenWith.exe'   
             - '\svchost.exe'     
             - '\TiWorker.exe'    
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
 
     filter_known_paths:
         Details|contains:

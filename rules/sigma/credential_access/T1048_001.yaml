@@ -81,7 +81,7 @@ detection:
         - '127.0.0.1'
         - 'localhost'
         - 'internal-sftp'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - ParentImage|endswith: '\services.exe'
 
   condition: selection_tools

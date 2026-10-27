@@ -41,7 +41,7 @@ detection:
     selection_db_access:
         Image|endswith: '\sqlcmd.exe'
         CommandLine|contains: 'ADSync'
-        processname|contains:
+        Image|contains:
             - 'miiserver.exe'
             - 'Microsoft.Identity.AadConnect.Health.AadSync.Host.exe'
 

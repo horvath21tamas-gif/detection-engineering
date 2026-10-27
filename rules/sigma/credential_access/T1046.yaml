@@ -71,9 +71,9 @@ detection:
     IntegrityLevel: 'Medium'
 
   selection_user_context:
-    username|contains: '\'
+    User|contains: '\'
   filter_system_account:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   filter_legitimate_monitoring:
     - Image|contains:

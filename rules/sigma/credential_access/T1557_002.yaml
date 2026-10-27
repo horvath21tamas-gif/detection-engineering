@@ -61,7 +61,7 @@ detection:
             - 'C:\Program Files\Oracle\VirtualBox\'
             - 'C:\Program Files\Docker\'
             - 'C:\Program Files\Microsoft\Hyper-V\'
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
 
     filter_vpn_and_diag:
         Image|contains:

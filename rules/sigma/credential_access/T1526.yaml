@@ -72,7 +72,7 @@ detection:
             - '\Terraform\'
             - '\Ansible\'
             - '\OctopusDeploy\'
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
         CommandLine|contains:
             - '-NonInteractive'
             - '-EncodedCommand'

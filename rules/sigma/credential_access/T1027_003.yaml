@@ -54,7 +54,7 @@ detection:
       - '\mspaint.exe'
 
   filter_system_processes:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: selection_pixel_access
              and selection_conversion

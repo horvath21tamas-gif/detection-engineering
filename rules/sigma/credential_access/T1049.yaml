@@ -65,7 +65,7 @@ detection:
       - 'Out-File'
 
   filter_legit_noise:
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - ParentImage|endswith:
         - '\svchost.exe'
         - '\CcmExec.exe'

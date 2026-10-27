@@ -67,7 +67,7 @@ detection:
       - 'Export-Csv'
 
   filter_legit_noise:
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - ParentImage|endswith:
         - '\msiexec.exe'
         - '\CcmExec.exe'

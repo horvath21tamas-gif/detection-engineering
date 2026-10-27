@@ -44,7 +44,7 @@ detection:
       - '\CcmExec.exe'
       - '\SidecarAgent.exe' # Intune
       - '\ManagementAgent.exe'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   filter_updates:
     CommandLine|contains:

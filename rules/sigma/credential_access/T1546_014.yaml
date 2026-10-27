@@ -43,7 +43,7 @@ detection:
             - '\TaniumClient.exe'
             - '\MonitoringHost.exe' 
             - '\ltsvc.exe'      
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
 
     filter_known_names:
         Name:

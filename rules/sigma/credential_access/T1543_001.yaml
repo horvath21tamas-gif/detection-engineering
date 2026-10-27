@@ -39,7 +39,7 @@ detection:
             - '/softwareupdated'         
             - '/jamf'                   
             - '/kandji-agent'         
-        username: 'root'
+        User: 'root'
 
     selection_unsigned_target:
         - TargetCodeSignature|contains: 'unsigned'

@@ -49,7 +49,7 @@ detection:
       - '\cmd.exe'
 
   legit_workload_filter:
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - Image|contains:
         - '\Program Files\'
         - '\Program Files (x86)\'

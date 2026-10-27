@@ -38,12 +38,12 @@ detection:
       - '\spoolsv.exe'
 
   filter_trusted:
-    - Sourceprocessname: 'C:\Windows\System32\csrss.exe'
+    - SourceImage: 'C:\Windows\System32\csrss.exe'
     - SourceImage|endswith:
         - '\MsMpEng.exe'
         - '\CcmExec.exe'
     - Sourceusername: 'NT AUTHORITY\SYSTEM'
-      Targetprocessname: 'C:\Windows\System32\svchost.exe'
+      TargetImage: 'C:\Windows\System32\svchost.exe'
 
   condition: (selection_load_library or selection_unbacked_start)
              and selection_critical_targets

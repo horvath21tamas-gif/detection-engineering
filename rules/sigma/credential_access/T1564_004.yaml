@@ -49,7 +49,7 @@ detection:
       - ':Zone.Identifier'
       - ':favicon'
       - ':\Windows\' 
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     ParentImage|contains:
       - '\Windows\System32\svchost.exe'
       - '\Windows\System32\services.exe'

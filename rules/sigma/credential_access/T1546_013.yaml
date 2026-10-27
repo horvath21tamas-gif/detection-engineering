@@ -52,7 +52,7 @@ detection:
             - '\msiexec.exe'
             - '\trustedinstaller.exe'
             - '\choco.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_target_files and (selection_suspicious_actor or selection_suspicious_parent) and not (filter_trusted_editors or filter_installers)
 level: high

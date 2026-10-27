@@ -41,7 +41,7 @@ detection:
             - '\reg.exe'
 
     filters_trusted_system:
-        - username: 'NT AUTHORITY\NETWORK SERVICE'
+        - User: 'NT AUTHORITY\NETWORK SERVICE'
         - Image|contains: 'C:\Windows\System32\'
 
     condition: selection_dhcp_registry_keys and selection_boot_options and selection_suspicious_values and selection_unauthorized_processes and not filters_trusted_system

@@ -45,7 +45,7 @@ detection:
             - '\CcmExec.exe'    
             - '\omadmac.exe'     
             - '\svchost.exe'     
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
 
     filter_known_provisioning:
         CommandLine|contains:

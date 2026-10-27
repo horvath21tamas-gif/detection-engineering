@@ -21,7 +21,7 @@ logsource:
 
 detection:
   selection_ghost_state:
-    hash: ''
+    Hashes: ''
 
   selection_suspicious_paths:
     Image|contains:

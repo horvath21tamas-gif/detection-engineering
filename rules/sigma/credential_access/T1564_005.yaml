@@ -56,7 +56,7 @@ detection:
       - '.img'
 
   filter_trusted_automation:
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - ParentImage|contains:
         - '\Windows\System32\svchost.exe'
         - '\Program Files\Hyper-V\'

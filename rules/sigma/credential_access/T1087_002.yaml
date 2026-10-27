@@ -43,7 +43,7 @@ detection:
       - '\excel.exe'
 
   filter_legit_context:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     Image|contains:
       - '\Windows\System32\svchost.exe'
       - '\Microsoft.ActiveDirectory.WebServices.exe'

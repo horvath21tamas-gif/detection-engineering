@@ -47,8 +47,8 @@ detection:
             - '\Windows\CCM\'      
             - '\Microsoft Help\'   
             - 'UevAgent.js'       
-        - Parentprocessname: 'C:\Windows\System32\svchost.exe'
-          username: 'NT AUTHORITY\SYSTEM'
+        - ParentImage: 'C:\Windows\System32\svchost.exe'
+          User: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_proxies and selection_suspicious_children and selection_suspicious_args and not filter_legit_automation
 level: critical

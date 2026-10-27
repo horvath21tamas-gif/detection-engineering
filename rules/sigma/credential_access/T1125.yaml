@@ -20,20 +20,20 @@ logsource:
 
 detection:
     selection_multimedia_apis:
-        processcommandline: '(avicap32\.dll|capCreateCaptureWindow|ksuser\.dll|mfplat\.dll|Windows\.Media\.Capture)'
+        CommandLine: '(avicap32\.dll|capCreateCaptureWindow|ksuser\.dll|mfplat\.dll|Windows\.Media\.Capture)'
 
     selection_media_bins:
-        processname: '(ffmpeg\.exe|vlc\.exe)$'
-        processcommandline: '(-dshow|-f dshow|-video_size|capture)'
+        Image: '(ffmpeg\.exe|vlc\.exe)$'
+        CommandLine: '(-dshow|-f dshow|-video_size|capture)'
 
     selection_context:
-        Parentprocessname: '(powershell\.exe|cmd\.exe|w3wp\.exe|rundll32\.exe|regsvr32\.exe)$'
+        ParentImage: '(powershell\.exe|cmd\.exe|w3wp\.exe|rundll32\.exe|regsvr32\.exe)$'
         IntegrityLevel: 'Medium'
 
     filter_trusted_apps:
-        processname: '(Microsoft Teams|Zoom\.exe|Webex\.exe|Slack\.exe|CameraSettingsUIHost\.exe)'
-        processcommandline: '(skype\.exe)'
-        username: 'NT AUTHORITY\SYSTEM'
+        Image: '(Microsoft Teams|Zoom\.exe|Webex\.exe|Slack\.exe|CameraSettingsUIHost\.exe)'
+        CommandLine: '(skype\.exe)'
+        User: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_multimedia_apis or selection_media_bins) and selection_context and not filter_trusted_apps
 

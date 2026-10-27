@@ -61,7 +61,7 @@ detection:
       - '\Downloads\'
 
   filter_trusted_system:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     ParentImage|contains:
       - '\Windows\servicing\TrustedInstaller.exe'
       - '\CcmExec.exe'

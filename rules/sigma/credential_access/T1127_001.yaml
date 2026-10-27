@@ -25,15 +25,15 @@ detection:
         OriginalFileName: 'MSBuild.exe'
 
     selection_suspicious_parent:
-        Parentprocessname: '(winword\.exe|excel\.exe|powerpnt\.exe|outlook\.exe|chrome\.exe|msedge\.exe|wscript\.exe|cscript\.exe|mshta\.exe|wmiprvse\.exe)$'
+        ParentImage: '(winword\.exe|excel\.exe|powerpnt\.exe|outlook\.exe|chrome\.exe|msedge\.exe|wscript\.exe|cscript\.exe|mshta\.exe|wmiprvse\.exe)$'
 
     selection_cmd_anomalies:
-        processcommandline: '(http|\\\\|\\AppData\\|\\Temp\\|\.xml)'
+        CommandLine: '(http|\\\\|\\AppData\\|\\Temp\\|\.xml)'
 
     filter_trusted_dev:
-        Parentprocessname: '(\\Microsoft Visual Studio\\|\\Common7\\IDE\\|\\BuildAgent\\|\\Jenkins\\|\\ServiceFabric\\)'
-        processcommandline: '(/p:Configuration=|\.sln|\.csproj)'
-        username: 'svc_build'
+        ParentImage: '(\\Microsoft Visual Studio\\|\\Common7\\IDE\\|\\BuildAgent\\|\\Jenkins\\|\\ServiceFabric\\)'
+        CommandLine: '(/p:Configuration=|\.sln|\.csproj)'
+        User: 'svc_build'
 
     condition: selection_img and (selection_suspicious_parent or selection_cmd_anomalies) and not filter_trusted_dev
 

@@ -29,11 +29,11 @@ detection:
       - ' -class=IN'
 
   selection_dns_encoded:
-    processcommandline: '(?i)nslookup.*[A-Za-z0-9+/=]{30,}\.'
+    CommandLine: '(?i)nslookup.*[A-Za-z0-9+/=]{30,}\.'
 
   selection_icmp_large_payload:
     CommandLine|contains: 'ping '
-    processcommandline: '.* -l (1[0-9]{3}|[2-9][0-9]{3}).*'
+    CommandLine: '.* -l (1[0-9]{3}|[2-9][0-9]{3}).*'
 
   selection_context:
     Image|contains:
@@ -63,7 +63,7 @@ detection:
         - 'microsoft.com'
         - '127.0.0.1'
         - 'localhost'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - ParentImage|endswith: '\services.exe'
 
   condition: (selection_dns_txt or selection_dns_encoded or selection_icmp_large_payload)

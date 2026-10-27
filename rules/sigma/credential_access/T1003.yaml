@@ -56,7 +56,7 @@ detection:
     Image|contains:
       - '\Program Files\'
       - '\Windows\System32\taskmgr.exe'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: >
     (selection_comsvcs_ordinal or selection_specialized_tools or selection_offensive_patterns)

@@ -57,7 +57,7 @@ detection:
     - CommandLine|contains:
         - '127.0.0.1'
         - 'localhost'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
 
   condition: selection_tools and (selection_logic or selection_hosts) and selection_context and not filter_legit
 

@@ -47,7 +47,7 @@ detection:
       - '\mshta.exe'
 
   filter_trusted_automation:
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - ParentImage|contains:
         - '\Windows\System32\svchost.exe'
         - '\Windows\CCM\CcmExec.exe'

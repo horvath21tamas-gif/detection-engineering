@@ -46,7 +46,7 @@ detection:
       - 'vmsvga'
       - 'Citrix'
       - 'C:\Program Files\'
-    username: 'NT AUTHORITY\NETWORK SERVICE'
+    User: 'NT AUTHORITY\NETWORK SERVICE'
 
   condition: 
     selection_img and 

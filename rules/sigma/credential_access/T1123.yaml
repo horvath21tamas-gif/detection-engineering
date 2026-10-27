@@ -22,19 +22,19 @@ logsource:
 
 detection:
     selection_mci_cmd:
-        processcommandline: '(winmm\.dll,?mciSendString|record|save|open new type waveaudio)'
+        CommandLine: '(winmm\.dll,?mciSendString|record|save|open new type waveaudio)'
 
     selection_scripts:
-        processcommandline: '(Get-MicrophoneAudio|Start-AudioCapture|waveInStart|naudio)'
+        CommandLine: '(Get-MicrophoneAudio|Start-AudioCapture|waveInStart|naudio)'
 
     selection_context:
-        processname: '(powershell\.exe|cmd\.exe|rundll32\.exe|mshta\.exe|wscript\.exe)$'
-        Parentprocessname: '(winword\.exe|excel\.exe|outlook\.exe|w3wp\.exe)$'
+        Image: '(powershell\.exe|cmd\.exe|rundll32\.exe|mshta\.exe|wscript\.exe)$'
+        ParentImage: '(winword\.exe|excel\.exe|outlook\.exe|w3wp\.exe)$'
         IntegrityLevel: 'Medium'
 
     filter_legit_comms:
-        processname: '(Teams\.exe|Zoom\.exe|webex|slack\.exe|discord\.exe|whatsapp\.exe)$'
-        processname: '^(C:\\Program Files\\Google\\Chrome\\|C:\\Program Files \\(x86\\)\\Microsoft\\Edge\\)'
+        Image: '(Teams\.exe|Zoom\.exe|webex|slack\.exe|discord\.exe|whatsapp\.exe)$'
+        Image: '^(C:\\Program Files\\Google\\Chrome\\|C:\\Program Files \\(x86\\)\\Microsoft\\Edge\\)'
 
     condition: (selection_mci_cmd or selection_scripts) and selection_context and not filter_legit_comms
 

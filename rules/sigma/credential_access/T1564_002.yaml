@@ -39,7 +39,7 @@ detection:
       - '\AppData\'
 
   filter_trusted_system:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     ParentImage|contains:
       - '\Windows\System32\svchost.exe'
       - '\Windows\servicing\TrustedInstaller.exe'

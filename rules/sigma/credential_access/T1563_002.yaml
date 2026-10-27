@@ -51,7 +51,7 @@ detection:
       - 'C:\Program Files\Remote Desktop'
       - 'Citrix'
       - 'VMware'
-    username: 'NT AUTHORITY\NETWORK SERVICE'
+    User: 'NT AUTHORITY\NETWORK SERVICE'
 
   condition: 
     selection_tools and 

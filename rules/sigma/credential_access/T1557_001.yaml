@@ -57,7 +57,7 @@ detection:
             - '\svchost.exe'
             - '\lsass.exe'
             - '\System32\nbtstat.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
 
     filter_security_tools:
         Image|contains:

@@ -43,7 +43,7 @@ detection:
             - '\\SYSVOL\\'
             - '\\NETLOGON\\'
         ParentImage|re: '(services\.exe|svchost\.exe)$'
-        username: 'NT AUTHORITY\\SYSTEM'
+        User: 'NT AUTHORITY\\SYSTEM'
 
     condition: >
         (selection_unc_coercion or selection_api_abuse or selection_ip_unc)

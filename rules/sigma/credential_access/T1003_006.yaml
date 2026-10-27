@@ -41,7 +41,7 @@ detection:
       - '\psexesvc.exe'
 
   filter_legit_domain_controllers:
-    username:
+    User:
       - 'NT AUTHORITY\SYSTEM'
       - 'NT AUTHORITY\NETWORK SERVICE'
     Image|contains: '\Windows\System32\lsass.exe'

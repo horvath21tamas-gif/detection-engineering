@@ -71,7 +71,7 @@ detection:
       - ' .exe'
 
   filter_trusted_maintenance:
-    - username:
+    - User:
         - 'NT AUTHORITY\SYSTEM'
         - 'NT AUTHORITY\LOCAL SERVICE'
         - 'NT AUTHORITY\NETWORK SERVICE'

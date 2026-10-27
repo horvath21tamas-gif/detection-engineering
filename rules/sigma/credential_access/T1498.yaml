@@ -48,7 +48,7 @@ detection:
       - '\AppData\Local\Temp\'
 
   allowlist:
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - Image|contains:
         - '\Program Files\NetworkMonitoring\'
         - '\Azure\'

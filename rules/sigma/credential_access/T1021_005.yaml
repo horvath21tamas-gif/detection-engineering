@@ -59,7 +59,7 @@ detection:
         - 'C:\Program Files\UltraVNC\'
     - CommandLine|contains:
         - 'service'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - ParentImage|endswith:
         - '\services.exe'
 

@@ -91,7 +91,7 @@ detection:
     - ParentImage|endswith:
         - '\services.exe'
         - '\svchost.exe'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - CommandLine|contains:
         - 'SoftwareDistribution'
         - 'backup'

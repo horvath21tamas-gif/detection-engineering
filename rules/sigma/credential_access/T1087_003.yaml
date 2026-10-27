@@ -45,7 +45,7 @@ detection:
       - '\excel.exe'
 
   filter_legit_admin_hosts:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     Image|contains:
       - '\Exchange Server\bin\'
       - '\Program Files\Veritas\'

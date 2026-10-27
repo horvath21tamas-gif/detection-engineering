@@ -53,7 +53,7 @@ detection:
             - '\Temp\'
 
     filter_legit:
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
         ParentImage|endswith:
             - '\msiexec.exe'
             - '\CcmExec.exe'

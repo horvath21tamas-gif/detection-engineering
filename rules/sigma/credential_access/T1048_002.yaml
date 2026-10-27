@@ -75,7 +75,7 @@ detection:
         - 'windowsupdate.com'
         - '127.0.0.1'
         - 'localhost'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - ParentImage|endswith: '\services.exe'
 
   condition: selection_tools

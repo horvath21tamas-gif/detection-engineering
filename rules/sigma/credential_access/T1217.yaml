@@ -70,7 +70,7 @@ detection:
       - '\Temp\'
 
   filter_legit_it_tools:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     Image|contains:
       - '\Program Files\Splunk\'
       - '\Program Files\Tanium\'

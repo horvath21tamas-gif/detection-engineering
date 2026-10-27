@@ -52,7 +52,7 @@ detection:
     - Image|contains:
         - 'C:\Program Files\Everything\'
         - 'C:\Program Files\Veeam\'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - CommandLine|contains:
         - 'SoftwareDistribution'
         - 'OneDrive.exe'

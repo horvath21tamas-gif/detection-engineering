@@ -49,7 +49,7 @@ detection:
     ParentImage|endswith:
       - '\services.exe'
       - '\explorer.exe'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   known_browsers_filter:
     Image|endswith:

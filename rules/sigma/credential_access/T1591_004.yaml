@@ -46,7 +46,7 @@ detection:
     - ParentImage|endswith:
         - '\mmc.exe'
         - '\ServerManager.exe'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
 
   filter_local_queries:
     CommandLine|contains:

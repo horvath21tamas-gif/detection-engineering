@@ -49,7 +49,7 @@ detection:
     Image|startswith:
       - 'C:\Windows\System32\msiexec.exe'
       - 'C:\Windows\System32\wbem\WmiPrvSE.exe'
-    username:
+    User:
       - 'NT AUTHORITY\SYSTEM'
       - 'NT AUTHORITY\LOCAL SERVICE'
       - 'NT AUTHORITY\NETWORK SERVICE'

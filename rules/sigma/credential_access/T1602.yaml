@@ -71,7 +71,7 @@ detection:
     - CommandLine|contains:
         - 'SoftwareDistribution'
         - '.log'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
 
   condition: selection_automation and selection_unc_path and selection_sensitive_files and selection_suspicious_context and not filter_trusted_processes
 

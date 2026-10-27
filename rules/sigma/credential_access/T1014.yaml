@@ -50,7 +50,7 @@ detection:
       - 'C:\Windows\System32\msiexec.exe'
       - 'C:\Windows\System32\DriverStore\'
       - 'C:\Windows\System32\drvinst.exe'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: >
     (selection_loaders or

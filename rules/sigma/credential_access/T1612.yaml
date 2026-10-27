@@ -57,7 +57,7 @@ detection:
       - '--ssh'
 
   filter_trusted_users:
-    username:
+    User:
       - 'jenkins'
       - 'gitlab-runner'
       - 'github-actions'

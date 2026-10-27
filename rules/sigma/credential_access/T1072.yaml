@@ -53,7 +53,7 @@ detection:
             - 'PolicyNames'
             - 'SoftwareCenter'
             - 'Configuration Manager'
-        - username: 'NT AUTHORITY\SYSTEM'
+        - User: 'NT AUTHORITY\SYSTEM'
           CommandLine|contains: 'C:\Windows\ccmcache\'
 
     condition: selection_deployment_parents and (selection_suspicious_children or selection_dangerous_args) and not filter_legit_patterns

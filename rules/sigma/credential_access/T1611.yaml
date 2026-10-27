@@ -60,7 +60,7 @@ detection:
       - 'istio-proxy'
       - 'fluentd'
       - 'prometheus'
-    username: 'root'
+    User: 'root'
 
   condition: (selection_escape_flags or selection_dangerous_mounts) and selection_interactive and not filter_infrastructure
 

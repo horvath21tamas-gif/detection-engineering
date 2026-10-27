@@ -56,7 +56,7 @@ detection:
       - 'chocolatey'                    
       - 'microsoft.com'                 
       - 'pnp.microsoft.com'             
-    username: 'NT AUTHORITY\SYSTEM'    
+    User: 'NT AUTHORITY\SYSTEM'    
     ParentImage|endswith:
       - '\services.exe'                 
 

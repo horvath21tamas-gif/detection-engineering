@@ -50,7 +50,7 @@ detection:
         - 'Monitoring'
         - 'HealthCheck'
     - ParentImage|contains: 'C:\Windows\System32\svchost.exe'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
 
   condition: >
     selection_parent and

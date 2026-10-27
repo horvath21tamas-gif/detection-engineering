@@ -18,13 +18,13 @@ logsource:
 
 detection:
   selection_padding:
-    processcommandline: '(?i)([\s\t,;]{50,})'  # Excessive whitespace or padding
+    CommandLine: '(?i)([\s\t,;]{50,})'  # Excessive whitespace or padding
 
   selection_junk_vars:
-    processcommandline: '(?i)(set\s+[a-z0-9]{1,3}=\s*[^&]{1,5}&[\s\t]*){8,}'  # Repeated short env variables
+    CommandLine: '(?i)(set\s+[a-z0-9]{1,3}=\s*[^&]{1,5}&[\s\t]*){8,}'  # Repeated short env variables
 
   selection_high_density:
-    processcommandline: '(?i)([\%\!\^\`]{3,}.*){5,}'  # Dense special characters
+    CommandLine: '(?i)([\%\!\^\`]{3,}.*){5,}'  # Dense special characters
 
   selection_script_procs:
     Image|endswith:
@@ -43,7 +43,7 @@ detection:
     CommandLine|contains:
       - 'Microsoft.Cloud.Data'
       - 'chocolatey'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: (selection_padding or selection_junk_vars or selection_high_density) and selection_script_procs and not filter_legit_infra
 

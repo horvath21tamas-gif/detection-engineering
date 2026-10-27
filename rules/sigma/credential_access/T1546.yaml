@@ -47,7 +47,7 @@ detection:
             - '\MonitoringHost.exe'
             - '\svchost.exe'
             - '\msiexec.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
 
     filter_known_patterns:
         CommandLine|contains:

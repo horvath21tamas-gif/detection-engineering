@@ -46,7 +46,7 @@ detection:
         - 'C:\Program Files\'
         - 'Microsoft\Azure'
         - 'SoftwareDistribution'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - ParentImage|endswith:
         - '\services.exe'
         - '\explorer.exe'

@@ -54,7 +54,7 @@ detection:
       - '127.0.0.1'
       - 'microsoft.com'
       - 'windowsupdate'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: (selection_proxy_auth or (selection_proxy_logic and selection_context)) and not filter_legit_browsers_and_updates
 level: critical

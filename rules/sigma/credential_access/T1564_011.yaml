@@ -56,7 +56,7 @@ detection:
     - CommandLine|contains:
         - 'docker-desktop'
         - 'Microsoft.WSL'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
 
   condition: selection_tools and (
                  selection_suspicious_parent or 

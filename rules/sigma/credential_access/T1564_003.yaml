@@ -50,7 +50,7 @@ detection:
       - 'Invoke-Expression'
 
   filter_trusted_automation:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     ParentImage|contains:
       - '\Windows\System32\ServerManager.exe'
       - '\Configuration Manager\'

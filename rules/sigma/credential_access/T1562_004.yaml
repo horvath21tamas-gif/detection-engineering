@@ -19,7 +19,7 @@ logsource:
 detection:
   selection_img:
     - Image|endswith: '\netsh.exe'
-    - filename: 'netsh.exe'
+    - TargetFilename: 'netsh.exe'
 
   selection_cmd_base:
     CommandLine|contains:

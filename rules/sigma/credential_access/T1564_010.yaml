@@ -39,7 +39,7 @@ detection:
       - '\w3wp.exe'
 
   filter_trusted_system_context:
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - ParentImage|contains:
         - '\Windows\System32\services.exe'
         - '\Windows\System32\wininit.exe'

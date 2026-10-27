@@ -104,7 +104,7 @@ detection:
       - 'Connect-AzureAD'
 
   filter_system_context:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     ParentImage|endswith:
       - '\services.exe'
       - '\MsMpEng.exe'

@@ -76,7 +76,7 @@ detection:
             - '\Program Files\Microsoft OneDrive\'
             - '\Program Files\Dropbox\'
             - '\Program Files\Google\Drive\'
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
 
     condition:
         selection_files

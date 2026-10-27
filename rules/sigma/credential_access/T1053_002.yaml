@@ -43,7 +43,7 @@ detection:
 
     filter_legit_backup:
         - CommandLine|contains: 'C:\Legacy\Backup.bat'
-        - username: 'NT AUTHORITY\SYSTEM'
+        - User: 'NT AUTHORITY\SYSTEM'
 
     condition: selection_img and (selection_dangerous_args or selection_untrusted_context) and not filter_legit_backup
 level: high

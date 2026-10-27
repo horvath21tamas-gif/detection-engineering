@@ -40,7 +40,7 @@ detection:
       - '\sc.exe'
 
   system_context:
-    username:
+    User:
       - 'NT AUTHORITY\SYSTEM'
 
   non_system_path:

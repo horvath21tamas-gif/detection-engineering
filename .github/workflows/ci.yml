@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main, test]
+    paths-ignore: ["DETECTION_WIKI*.md", "COVERAGE.md", "DASHBOARD.md", "*.svg", "rule_scores.json", "attack_navigator_layer.json"]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  PYTHON_VERSION: "3.12"
+  PYTHONDONTWRITEBYTECODE: "1"
+
+jobs:
+  quality:
+    name: Validate, lint, test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: python -m pip install -e ".[dev,siem]"
+      - name: Sigma rules are valid (errors fail, new warnings fail)
+        run: dectools-validate rules/sigma --github
+      - run: ruff check src tests tools/convert_siem.py
+      - run: python -m pytest
+
+  wazuh:
+    name: Compile Sigma -> Wazuh
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: python -m pip install -e .
+      - name: Compile (fails on invalid XML/regex, stale id registry, benign-event alerts)
+        run: dectools-wazuh build --check-registry --max-unsupported 80
+      - run: dectools-wazuh bundle --git-sha "${{ github.sha }}"
+      - name: Summary
+        run: cat build/wazuh/report.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wazuh-bundle
+          path: |
+            build/wazuh-bundle.tar.gz
+            build/wazuh/report.md
+            build/wazuh/report.json
+          retention-days: 30
+
+  siem:
+    name: Splunk + Elastic queries
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: python -m pip install -e ".[siem]"
+      - run: python tools/convert_siem.py --max-failures 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: siem-queries
+          path: build/siem
+          retention-days: 30

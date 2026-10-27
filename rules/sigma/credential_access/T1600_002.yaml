@@ -36,16 +36,18 @@ detection:
     CommandLine|contains:
       - '-addstore'
       - '-importcert'
+    CommandLine|re: '.*(cert|crt|cer|pfx)$'
+  selection_certutil_and2:
     CommandLine|contains:
       - 'Root'
       - 'AuthRoot'
       - 'TrustedPublisher'
-    CommandLine|re: '.*(cert|crt|cer|pfx)$'
 
   selection_wintrust_bypass:
     CommandLine|contains:
       - '\WinTrust\Trust Providers\Software Publishing'
       - '\CurrentVersion\Policies\Associations'
+  selection_wintrust_bypass_and2:
     CommandLine|contains:
       - 'State'
       - '0x00023e00'
@@ -65,7 +67,7 @@ detection:
       - '\Program Files (x86)\'
       - '\Windows\System32\'
 
-  condition: selection_untrusted_actor and (selection_certutil or selection_wintrust_bypass) and not (filter_trusted_it or filter_known_updaters)
+  condition: selection_untrusted_actor and ((selection_certutil and selection_certutil_and2) or (selection_wintrust_bypass and selection_wintrust_bypass_and2)) and not (filter_trusted_it or filter_known_updaters)
 
 fields:
   - Time

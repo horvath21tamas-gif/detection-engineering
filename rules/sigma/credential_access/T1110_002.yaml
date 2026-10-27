@@ -17,10 +17,12 @@ detection:
   selection_reg_export:
     Image|endswith: '\reg.exe'                          
     CommandLine|contains: ' save '                      
+  selection_reg_export_and2:
     CommandLine|contains:
       - 'HKLM\SAM'                                   
       - 'HKLM\SYSTEM'                                 
       - 'HKLM\SECURITY'                             
+  selection_reg_export_and3:
     CommandLine|contains:
       - '\Temp\'                                         
       - '\Users\Public\'                                  
@@ -42,6 +44,7 @@ detection:
       - ' --wordlist'                                    
       - ' --force'                                       
       - ' --format='                                     
+  selection_crack_tools_and2:
     CommandLine|contains:
       - '.hash'                                          
       - '.txt'                                           
@@ -59,7 +62,7 @@ detection:
       - '\Program Files\Backup\'                         
 
   condition: |
-    (selection_reg_export or selection_ntds_export or selection_crack_tools) and 
+    ((selection_reg_export and selection_reg_export_and2 and selection_reg_export_and3) or selection_ntds_export or (selection_crack_tools and selection_crack_tools_and2)) and 
     not (filter_legit_maintenance or filter_backup_software)
 
 level: critical

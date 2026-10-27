@@ -22,20 +22,21 @@ logsource:
 
 detection:
     selection_mci_cmd:
-        CommandLine: '(winmm\.dll,?mciSendString|record|save|open new type waveaudio)'
+        CommandLine|re|i: '(winmm\.dll,?mciSendString|record|save|open new type waveaudio)'
 
     selection_scripts:
-        CommandLine: '(Get-MicrophoneAudio|Start-AudioCapture|waveInStart|naudio)'
+        CommandLine|re|i: '(Get-MicrophoneAudio|Start-AudioCapture|waveInStart|naudio)'
 
     selection_context:
-        Image: '(powershell\.exe|cmd\.exe|rundll32\.exe|mshta\.exe|wscript\.exe)$'
-        ParentImage: '(winword\.exe|excel\.exe|outlook\.exe|w3wp\.exe)$'
+        Image|re|i: '(powershell\.exe|cmd\.exe|rundll32\.exe|mshta\.exe|wscript\.exe)$'
+        ParentImage|re|i: '(winword\.exe|excel\.exe|outlook\.exe|w3wp\.exe)$'
         IntegrityLevel: 'Medium'
 
     filter_legit_comms:
-        Image: '(Teams\.exe|Zoom\.exe|webex|slack\.exe|discord\.exe|whatsapp\.exe)$'
-        Image: '^(C:\\Program Files\\Google\\Chrome\\|C:\\Program Files \\(x86\\)\\Microsoft\\Edge\\)'
+        Image|re|i: '(Teams\.exe|Zoom\.exe|webex|slack\.exe|discord\.exe|whatsapp\.exe)$'
+    filter_legit_comms_and2:
+        Image|re|i: '^(C:\\Program Files\\Google\\Chrome\\|C:\\Program Files \\(x86\\)\\Microsoft\\Edge\\)'
 
-    condition: (selection_mci_cmd or selection_scripts) and selection_context and not filter_legit_comms
+    condition: (selection_mci_cmd or selection_scripts) and selection_context and not (filter_legit_comms and filter_legit_comms_and2)
 
 level: critical

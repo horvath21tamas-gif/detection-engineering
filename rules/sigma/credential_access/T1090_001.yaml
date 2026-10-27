@@ -19,6 +19,7 @@ detection:
       - 'portproxy'
       - 'v4tov4'
       - 'connectaddress='
+  selection_internal_pivot_and2:
     CommandLine|contains:
       - '10.'
       - '192.168.'
@@ -55,5 +56,5 @@ detection:
     ParentImage|endswith:
       - '\services.exe'
 
-  condition: selection_internal_pivot and selection_logic and selection_procs and not filter_legit_virtualization
+  condition: (selection_internal_pivot and selection_internal_pivot_and2) and selection_logic and selection_procs and not filter_legit_virtualization
 level: critical

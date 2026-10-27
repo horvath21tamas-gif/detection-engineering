@@ -23,6 +23,7 @@ detection:
     CommandLine|contains:
       - ' -ma '
       - ' -mm '
+  selection_procdump_and2:
     CommandLine|contains: 'lsass'
 
   selection_comsvcs_ordinal:
@@ -50,7 +51,7 @@ detection:
     User: 'NT AUTHORITY\SYSTEM'
 
   condition: >
-    (selection_procdump or selection_comsvcs_ordinal or selection_taskmgr_werfault)
+    ((selection_procdump and selection_procdump_and2) or selection_comsvcs_ordinal or selection_taskmgr_werfault)
     and selection_suspicious_context
     and not filter_legit_diagnostic
 

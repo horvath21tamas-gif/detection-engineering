@@ -27,7 +27,7 @@ detection:
             - '*StrongAuthenticationUserDetails*'    
 
     filter_trusted_ips:
-        ipAddress:
+        ipAddress|re|i:
             - '203.0.113.*' 
             - '198.51.100.*'
 

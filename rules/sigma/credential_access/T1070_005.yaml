@@ -28,6 +28,7 @@ detection:
     CommandLine|contains:
       - 'use'
       - '/delete'
+  selection_net_share_bulk_and2:
     CommandLine|contains:
       - '*'
       - ' /y'
@@ -61,7 +62,7 @@ detection:
         - 'gpo'
         - 'group policy'
 
-  condition: (selection_net_share_bulk or selection_credential_tools)
+  condition: ((selection_net_share_bulk and selection_net_share_bulk_and2) or selection_credential_tools)
              and (selection_suspicious_parent or not filter_legitimate_automation)
 
 falsepositives:

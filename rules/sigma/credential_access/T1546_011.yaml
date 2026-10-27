@@ -23,6 +23,7 @@ detection:
         CommandLine|contains:
             - ' -i '   
             - ' -q '   
+    selection_suspicious_args_and2:
         CommandLine|contains:
             - '\Users\'
             - '\ProgramData\'
@@ -42,5 +43,5 @@ detection:
     filter_standard_location:
         CommandLine|contains: 'C:\Windows\AppPatch\'
 
-    condition: (selection_sdbinst and selection_suspicious_args and not filter_standard_location) or (selection_registry and not filter_trusted_installers)
+    condition: (selection_sdbinst and (selection_suspicious_args and selection_suspicious_args_and2) and not filter_standard_location) or (selection_registry and not filter_trusted_installers)
 level: critical

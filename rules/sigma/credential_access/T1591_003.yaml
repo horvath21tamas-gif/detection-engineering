@@ -26,13 +26,17 @@ detection:
         - ' --recursive'
         - ' -r '
         - ' --no-parent'
-    - Image|endswith: '\powershell.exe'
-      CommandLine|contains:
-        - 'Invoke-WebRequest'
-        - 'Invoke-RestMethod'
-      CommandLine|contains:
-        - 'foreach'
-        - 'while'
+
+  selection_scraping_ps:
+    Image|endswith: '\powershell.exe'
+    CommandLine|contains:
+      - 'Invoke-WebRequest'
+      - 'Invoke-RestMethod'
+
+  selection_scraping_ps_loop:
+    CommandLine|contains:
+      - 'foreach'
+      - 'while'
 
   selection_keywords:
     CommandLine|contains:
@@ -65,7 +69,7 @@ detection:
       - '\SearchIndexer.exe'
       - '\SearchHost.exe'
 
-  condition: (selection_scraping or (selection_keywords and not filter_browsers)) and not filter_it_automation and not filter_indexers
+  condition: (selection_scraping or (selection_scraping_ps and selection_scraping_ps_loop) or (selection_keywords and not filter_browsers)) and not filter_it_automation and not filter_indexers
 falsepositives:
   - IT administrators performing site migrations or bulk edits via API.
   - Authorized security scanners auditing internal documentation.

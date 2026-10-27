@@ -17,26 +17,23 @@ logsource:
   product: windows
 detection:
   selection_brute_force_tools:
-    - Image|endswith:
-        - '\hydra.exe'
-        - '\medusa.exe'
-        - '\patator.exe'
-        - '\ncrack.exe'
-    - CommandLine|contains:
-        - ' -P '            
-        - ' -L '            
-        - ' -C '            
+    Image|endswith:
+      - '\hydra.exe'
+      - '\medusa.exe'
+      - '\patator.exe'
+      - '\ncrack.exe'
 
   selection_identity_takeover:
-    - Image|endswith:
-        - '\aws.exe'
-        - '\az.exe'
-        - '\mgc.exe'        
-    - CommandLine|contains:
-        - ' update-login-profile'      
-        - ' delete-virtual-mfa-device' 
-        - ' authentication-method-create' 
-        - ' ad user update --password'  
+    Image|endswith:
+      - '\aws.exe'
+      - '\az.exe'
+      - '\mgc.exe'
+  selection_identity_takeover_and2:
+    CommandLine|contains:
+      - ' update-login-profile'
+      - ' delete-virtual-mfa-device'
+      - ' authentication-method-create'
+      - ' ad user update --password'
 
   filter_authorized_iam:
     User|contains:
@@ -54,9 +51,8 @@ detection:
 
   filter_interactive:
     ParentImage|endswith: '\explorer.exe'
-    condition: not selection_brute_force_tools
 
-  condition: (selection_brute_force_tools or selection_identity_takeover) and not filter_authorized_iam and not filter_dev_context and not filter_interactive
+  condition: (selection_brute_force_tools or (selection_identity_takeover and selection_identity_takeover_and2)) and not filter_authorized_iam and not filter_dev_context and not filter_interactive
 falsepositives:
   - Authorized Red Team exercises or internal penetration testing.
   - Emergency account recovery by senior IT staff via CLI.

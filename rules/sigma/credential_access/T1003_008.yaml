@@ -22,6 +22,7 @@ detection:
       - 'grep . /etc/shadow'
       - 'dd if=/etc/shadow'
       - 'python -c .* /etc/shadow'
+  selection_redirection_and2:
     CommandLine|contains:
       - ' > /tmp/'
       - ' > /var/tmp/'
@@ -34,6 +35,7 @@ detection:
       - 'zip '
       - '7z '
       - 'gzip '
+  selection_archive_and2:
     CommandLine|contains:
       - '/etc/shadow'
       - '/etc/passwd'
@@ -44,6 +46,7 @@ detection:
       - 'curl '
       - 'wget '
       - 'base64'
+  selection_network_and2:
     CommandLine|contains:
       - '/etc/shadow'
 
@@ -62,7 +65,7 @@ detection:
     ParentImage|startswith: '/etc/cron.'
 
   condition: >
-    (selection_redirection or selection_archive or selection_network or selection_tools)
+    ((selection_redirection and selection_redirection_and2) or (selection_archive and selection_archive_and2) or (selection_network and selection_network_and2) or selection_tools)
     and not filter_legit_behavior
 
 level: critical

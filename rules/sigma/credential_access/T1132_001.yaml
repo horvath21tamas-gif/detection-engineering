@@ -21,21 +21,21 @@ logsource:
 
 detection:
     selection_encoded_headers:
-        CommandLine: '(TVqQA|TVpQA|f0VMR|UEsDB)'
+        CommandLine|re|i: '(TVqQA|TVpQA|f0VMR|UEsDB)'
 
     selection_decoding_logic:
-        CommandLine: '(FromBase64String\(|-decode\s|\\[System\.Convert\]::|IO\.MemoryStream|DeflateStream)'
+        CommandLine|re|i: '(FromBase64String\(|-decode\s|\[System\.Convert\]::|IO\.MemoryStream|DeflateStream)'
 
     selection_high_entropy:
-        CommandLine: '(?i).*[a-z0-9+/=]{1500,}.*'
+        CommandLine|re|i: '(?i).*[a-z0-9+/=]{1500,}.*'
 
     selection_context:
-        Image: '(winword\.exe|excel\.exe|w3wp\.exe|sqlservr\.exe|spoolsv\.exe)$'
-        ParentImage: '(outlook\.exe|chrome\.exe)$'
+        Image|re|i: '(winword\.exe|excel\.exe|w3wp\.exe|sqlservr\.exe|spoolsv\.exe)$'
+        ParentImage|re|i: '(outlook\.exe|chrome\.exe)$'
 
     filter_legit_infra:
-        Image: '(\\Program Files\\|\\ccm\\|\\AzureConnectedMachineAgent\\)'
-        CommandLine: '(Chocolatey|NuGet|Microsoft\.Cloud\.Data)'
+        Image|re|i: '(\\Program Files\\|\\ccm\\|\\AzureConnectedMachineAgent\\)'
+        CommandLine|re|i: '(Chocolatey|NuGet|Microsoft\.Cloud\.Data)'
         UserName: 'NT AUTHORITY\\SYSTEM'
 
     condition: (selection_encoded_headers or (selection_decoding_logic and selection_high_entropy)) and (selection_context or not filter_legit_infra)

@@ -35,6 +35,7 @@ detection:
             - ' -addstore '
             - ' -importcert '
             - ' Import-Certificate '
+    selection_root_store_and2:
         CommandLine|contains:
             - ' Root'
             - ' AuthRoot'
@@ -87,7 +88,7 @@ detection:
 
     condition:
         selection_tools
-        and selection_root_store
+        and (selection_root_store and selection_root_store_and2)
         and (selection_high_risk_flags or selection_suspicious_paths or selection_suspicious_parent)
         and not filter_legitimate_enterprise
         and not filter_gpo_deployment

@@ -28,12 +28,16 @@ detection:
         - 'contract'
         - 'beszallito'
         - 'szerzodes'
-    - Image|endswith: '\powershell.exe'
-      CommandLine|contains:
-        - 'Select-String'
-      CommandLine|contains:
-        - ' -Path '
-        - ' -Recurse'
+
+  selection_recon_ps:
+    Image|endswith: '\powershell.exe'
+    CommandLine|contains:
+      - 'Select-String'
+
+  selection_recon_ps_args:
+    CommandLine|contains:
+      - ' -Path '
+      - ' -Recurse'
 
   selection_file_search:
     CommandLine|contains:
@@ -62,7 +66,7 @@ detection:
       - '\services.exe'
       - '\svchost.exe'
 
-  condition: (selection_recon_pattern or selection_file_search) and not filter_office_context and not filter_department and not filter_system
+  condition: (selection_recon_pattern or (selection_recon_ps and selection_recon_ps_args) or selection_file_search) and not filter_office_context and not filter_department and not filter_system
 falsepositives:
   - Legal or Finance team performing legitimate data migration.
   - Desktop search tools indexing local documents.

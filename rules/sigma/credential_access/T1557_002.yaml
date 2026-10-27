@@ -23,6 +23,7 @@ detection:
         CommandLine|contains:
             - 'Services\Tcpip\Parameters'
             - 'IPEnableRouter'
+    selection_ip_forwarding_and2:
         CommandLine|contains: '1'
 
     selection_attack_tools:
@@ -73,7 +74,7 @@ detection:
 
     condition:
         (
-            selection_ip_forwarding
+            (selection_ip_forwarding and selection_ip_forwarding_and2)
             or selection_attack_tools
         )
         and selection_suspicious_actor

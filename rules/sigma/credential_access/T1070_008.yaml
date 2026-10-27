@@ -22,6 +22,7 @@ detection:
       - 'Dismount-Database'
       - 'Remove-MailboxDatabase'
       - 'Remove-StoreMailbox'
+  selection_exchange_mgmt_and2:
     CommandLine|contains:
       - ' -Confirm:$false'
       - ' -Force'
@@ -33,6 +34,7 @@ detection:
       - 'Remove-Item'
       - 'sdelete'
       - 'fsutil file setzero'
+  selection_file_destruction_and2:
     CommandLine|contains:
       - '.pst'
       - '.ost'
@@ -58,6 +60,6 @@ detection:
     - User: 'NT AUTHORITY\SYSTEM'
 
   condition: 
-    (selection_exchange_mgmt or selection_file_destruction) 
+    ((selection_exchange_mgmt and selection_exchange_mgmt_and2) or (selection_file_destruction and selection_file_destruction_and2)) 
     and (selection_suspicious_origin and not filter_trusted_apps)
 level: critical

@@ -22,6 +22,7 @@ detection:
       - '.LastWriteTime'
       - '.CreationTime'
       - '.LastAccessTime'
+  selection_powershell_mace_and2:
     CommandLine|contains:
       - 'Get-Item'
       - 'Get-ChildItem'
@@ -58,6 +59,6 @@ detection:
     - Image|endswith: '\git.exe'
 
   condition: 
-    (selection_powershell_mace or selection_specialized_tools)
+    ((selection_powershell_mace and selection_powershell_mace_and2) or selection_specialized_tools)
     and (selection_suspicious_parent or not filter_trusted_maintenance)
 level: high

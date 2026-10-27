@@ -30,6 +30,7 @@ detection:
             - '--global-disable'
             - 'disable'
             - '--status'
+    selection_gatekeeper_disable_and2:
         CommandLine|contains:
             - 'assess'
 
@@ -87,7 +88,7 @@ detection:
             - '/iTerm2'
 
     condition:
-        (selection_gatekeeper_disable
+        ((selection_gatekeeper_disable and selection_gatekeeper_disable_and2)
             or (selection_quarantine_removal
                 and selection_suspicious_paths
                 and (selection_non_interactive_parent or selection_suspicious_parent)))

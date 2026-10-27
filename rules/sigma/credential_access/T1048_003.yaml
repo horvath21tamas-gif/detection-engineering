@@ -29,11 +29,11 @@ detection:
       - ' -class=IN'
 
   selection_dns_encoded:
-    CommandLine: '(?i)nslookup.*[A-Za-z0-9+/=]{30,}\.'
+    CommandLine|re|i: '(?i)nslookup.*[A-Za-z0-9+/=]{30,}\.'
 
   selection_icmp_large_payload:
     CommandLine|contains: 'ping '
-    CommandLine: '.* -l (1[0-9]{3}|[2-9][0-9]{3}).*'
+    CommandLine|re|i: '.* -l (1[0-9]{3}|[2-9][0-9]{3}).*'
 
   selection_context:
     Image|contains:

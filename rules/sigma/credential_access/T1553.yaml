@@ -40,6 +40,7 @@ detection:
             - ' -importcert '
             - ' -installcert '
             - ' Import-Certificate '
+    selection_root_store_and2:
         CommandLine|contains:
             - ' Root'
             - ' AuthRoot'
@@ -101,7 +102,7 @@ detection:
 
     condition:
         ((selection_cert_tools
-                and selection_root_store
+                and (selection_root_store and selection_root_store_and2)
                 and (selection_cert_high_risk_flags or selection_suspicious_paths or selection_suspicious_parent))
             or(selection_motw_manipulation
                 and (selection_suspicious_paths or selection_suspicious_parent or not selection_non_system_user)))

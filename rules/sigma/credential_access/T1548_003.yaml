@@ -19,6 +19,7 @@ detection:
         CommandLine|contains:
             - '/etc/sudoers'
             - '/etc/sudoers.d/'
+    selection_sudoers_modification_and2:
         CommandLine|contains:
             - 'NOPASSWD:'
             - 'ALL=(ALL)'
@@ -29,6 +30,7 @@ detection:
             - 'LD_PRELOAD='
             - 'PYTHONPATH='
             - 'PERL5LIB='
+    selection_environment_injection_and2:
         CommandLine|contains: 'sudo '
 
     selection_sudo_recon:
@@ -51,5 +53,5 @@ detection:
             - '/php-fpm'
             - '/node'
 
-    condition: (selection_sudoers_modification or selection_environment_injection or selection_sudo_recon) and (selection_untrusted_actor or not filters_trusted_automation)
+    condition: ((selection_sudoers_modification and selection_sudoers_modification_and2) or (selection_environment_injection and selection_environment_injection_and2) or selection_sudo_recon) and (selection_untrusted_actor or not filters_trusted_automation)
 level: critical

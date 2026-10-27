@@ -21,8 +21,6 @@ detection:
       - 'proxy-password='
       - 'http-proxy-user='
       - 'https-proxy-pass='
-      - ' -U '
-      - ' -P '
 
   selection_proxy_logic:
     CommandLine|contains:

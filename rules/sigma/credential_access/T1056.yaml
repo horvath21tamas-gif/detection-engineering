@@ -38,12 +38,13 @@ detection:
       - 'keylog'
       - 'keystrokes'
       - 'klgr'
-    CommandLine|contains:
-      - ' >> '
-      - 'out-file'
     Image|contains:
       - '\Users\'
       - '\Temp\'
+  selection_logging_behavior_and2:
+    CommandLine|contains:
+      - ' >> '
+      - 'out-file'
 
   selection_offensive_tools:
     CommandLine|contains:
@@ -60,7 +61,7 @@ detection:
       - 'node_modules'
     User|startswith: 'NT AUTHORITY\'
 
-  condition: (selection_script_keylogger or selection_logging_behavior or selection_offensive_tools)
+  condition: (selection_script_keylogger or (selection_logging_behavior and selection_logging_behavior_and2) or selection_offensive_tools)
              and not filter_legit_apps
 
 falsepositives:

@@ -30,6 +30,7 @@ detection:
         CommandLine|contains:
             - 'Microsoft\CodeIntegrity\Options'
             - 'Microsoft\Windows\CurrentVersion\Policies\System\Audit'
+    selection_registry_and2:
         CommandLine|contains:
             - 'reg add'
             - 'Set-ItemProperty'
@@ -53,7 +54,7 @@ detection:
         User: 'NT AUTHORITY\SYSTEM'
 
     condition:
-        (selection_bcdedit or selection_registry)
+        (selection_bcdedit or (selection_registry and selection_registry_and2))
         and selection_context
         and not filter_trusted_processes
 

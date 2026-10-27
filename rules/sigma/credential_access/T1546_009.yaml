@@ -18,6 +18,7 @@ logsource:
 detection:
     selection_registry_path:
         TargetObject|contains: 'Microsoft\Windows NT\CurrentVersion\Windows\'
+    selection_registry_path_and2:
         TargetObject|contains:
             - '\AppInit_DLLs'
             - '\LoadAppInit_DLLs'
@@ -54,5 +55,5 @@ detection:
         Details|startswith: 'C:\Windows\System32\'
         Details|endswith: '.dll'
 
-    condition: selection_registry_path and (selection_enable or selection_suspicious_path or selection_suspicious_actor) and not (filter_trusted_installers or filter_standard_locations)
+    condition: (selection_registry_path and selection_registry_path_and2) and (selection_enable or selection_suspicious_path or selection_suspicious_actor) and not (filter_trusted_installers or filter_standard_locations)
 level: critical

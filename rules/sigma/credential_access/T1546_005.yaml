@@ -26,6 +26,7 @@ detection:
 
     selection_trap_syntax:
         CommandLine|contains: 'trap '
+    selection_trap_syntax_and2:
         CommandLine|contains:
             - 'DEBUG'
             - 'EXIT'
@@ -56,5 +57,5 @@ detection:
             - 'pyenv'
             - 'bash_completion'
 
-    condition: selection_target_files and selection_trap_syntax and selection_suspicious_payload and not (filter_trusted_automation or filter_dev_tools)
+    condition: selection_target_files and (selection_trap_syntax and selection_trap_syntax_and2) and selection_suspicious_payload and not (filter_trusted_automation or filter_dev_tools)
 level: critical

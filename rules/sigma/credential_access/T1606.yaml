@@ -50,6 +50,7 @@ detection:
       - '\Identity.db'
       - '\Web Data'
       - '\Login Data'
+  selection_token_db_access_and2:
     CommandLine|contains:
       - 'select '
       - 'password_value'
@@ -113,7 +114,7 @@ detection:
   condition: (
                 selection_offensive_tools
                 or selection_dpapi_theft
-                or (selection_token_db_access and selection_untrusted_context)
+                or ((selection_token_db_access and selection_token_db_access_and2) and selection_untrusted_context)
              )
              and not (
                 filter_legit_browsers

@@ -20,6 +20,7 @@ detection:
     CommandLine|contains:
       - ' /delete '
       - ' /f'
+  selection_schtasks_force_delete_and2:
     CommandLine|contains: ' /tn '
 
   selection_sc_delete:
@@ -34,6 +35,7 @@ detection:
       - 'Unregister-ScheduledTask'
       - 'Remove-Service'
       - 'Remove-WmiObject'
+  selection_powershell_cleanup_and2:
     CommandLine|contains:
       - ' -Confirm:$false'
       - ' -Force'
@@ -61,6 +63,6 @@ detection:
       ParentImage|endswith: '\services.exe'
 
   condition: 
-    (selection_schtasks_force_delete or selection_sc_delete or selection_powershell_cleanup) 
+    ((selection_schtasks_force_delete and selection_schtasks_force_delete_and2) or selection_sc_delete or (selection_powershell_cleanup and selection_powershell_cleanup_and2)) 
     and (selection_suspicious_origin and not filter_trusted_updates)
 level: high

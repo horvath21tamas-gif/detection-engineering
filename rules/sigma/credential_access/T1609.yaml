@@ -27,6 +27,7 @@ detection:
     selection_exec_params:
         CommandLine|contains:
             - ' exec '
+    selection_exec_params_and2:
         CommandLine|contains:
             - ' -it '
             - ' -i '
@@ -56,5 +57,5 @@ detection:
         - ParentImage|endswith:
             - '/kubelet'
 
-    condition: selection_tools and selection_exec_params and selection_suspicious_shells and not filter_legit_automation
+    condition: selection_tools and (selection_exec_params and selection_exec_params_and2) and selection_suspicious_shells and not filter_legit_automation
 level: critical

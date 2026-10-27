@@ -25,6 +25,7 @@ detection:
       - '\Content.Outlook\'
       - '\AppData\Local\Temp\'
       - '\INetCache\'
+  selection_html_smuggling_and2:
     CommandLine|contains:
       - '.html'
       - '.htm'
@@ -69,7 +70,7 @@ detection:
       - '\Windows\Installer\'
       - '\ConfigMgr\'
 
-  condition: (selection_html_smuggling and selection_harvesting_params) or (selection_office_anomaly and selection_harvesting_params) and not filter_legit_automation and not filter_browser_internals and not filter_installers
+  condition: ((selection_html_smuggling and selection_html_smuggling_and2) and selection_harvesting_params) or (selection_office_anomaly and selection_harvesting_params) and not filter_legit_automation and not filter_browser_internals and not filter_installers
 falsepositives:
   - Internal business automation using Excel macros to pull data via PowerShell.
   - Software installers opening "ReadMe" or "Release Notes" in HTML format.

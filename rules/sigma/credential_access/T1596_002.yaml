@@ -66,7 +66,7 @@ detection:
       - 'msdn.microsoft.com'
 
   filter_system_context:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: (selection_dork_binaries or selection_dork_operators or selection_api_interaction) and not filter_interactive_browsers and not filter_ide_automation and not filter_system_context
 falsepositives:

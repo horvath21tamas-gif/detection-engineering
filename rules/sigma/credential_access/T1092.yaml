@@ -16,7 +16,7 @@ logsource:
   product: windows
 detection:
   selection_removable:
-    filename: '^[D-Z]:\\.*'
+    TargetFilename: '^[D-Z]:\\.*'
 
   selection_suspicious_files:
     TargetFilename|contains:
@@ -49,7 +49,7 @@ detection:
       - '$RECYCLE.BIN'
       - 'System Volume Information'
       - 'Found.000'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: selection_removable and selection_suspicious_files and selection_procs and not filter_legit_noise
 

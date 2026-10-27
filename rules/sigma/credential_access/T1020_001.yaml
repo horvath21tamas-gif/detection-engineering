@@ -51,7 +51,7 @@ detection:
     - CommandLine|contains:
         - ' /background'
         - ' /client=personal'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - Image|contains:
         - '\Program Files\'
 

@@ -1,2 +1,0 @@
-((((process = '*\\sdbinst.exe*'))&& ((param = '*.sdb*'))) AND (((param = '*\\Users\\*' OR param = '*\\ProgramData\\*' OR param = '*\\Windows\\Temp\\*' OR param = '*\\AppData\\*'))) AND (NOT ((((param = '*C:\\Windows\\AppPatch\\*'))))) OR (((TargetObject = '*AppCompatFlags\\InstalledSDB*'))&& (NOT (((((ParentImage = '*\\msiexec.exe*' OR ParentImage = '*\\trustedinstaller.exe*' OR ParentImage = '*\\TiWorker.exe*'))) AND ((user.dst = '*NT AUTHORITY\\SYSTEM*')))))
-))

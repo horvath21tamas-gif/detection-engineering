@@ -40,7 +40,7 @@ detection:
             - 'create-presigned-url'
 
     filter_known_ci_cd:
-        - username: 
+        - User: 
             - 'deployment-service-account'
             - 'terraform-runner'
         - CommandLine|contains:

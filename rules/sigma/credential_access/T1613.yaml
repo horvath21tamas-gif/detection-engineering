@@ -50,7 +50,7 @@ detection:
       - '/php-fpm'
       - '/python'
       - '/node'
-    username: ['root', 'www-data', 'nginx']
+    User: ['root', 'www-data', 'nginx']
 
   selection_automation:
     CommandLine|contains:

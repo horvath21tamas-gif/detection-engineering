@@ -20,20 +20,20 @@ logsource:
 
 detection:
     selection_impossible_parent:
-        Parentprocessname: '(lsass\.exe|lsm\.exe|csrss\.exe|wininit\.exe|smss\.exe|spoolsv\.exe)$'
-        processname: '(cmd\.exe|powershell\.exe|pwsh\.exe|wscript\.exe|cscript\.exe|sh\.exe|bash\.exe|scrcons\.exe)$'
+        ParentImage: '(lsass\.exe|lsm\.exe|csrss\.exe|wininit\.exe|smss\.exe|spoolsv\.exe)$'
+        Image: '(cmd\.exe|powershell\.exe|pwsh\.exe|wscript\.exe|cscript\.exe|sh\.exe|bash\.exe|scrcons\.exe)$'
 
     selection_suspicious_context:
-        Parentprocessname: '(chrome\.exe|msedge\.exe|winword\.exe|excel\.exe)$'
-        processname: '(whoami\.exe|nltest\.exe|net\.exe|net1\.exe|ipconfig\.exe)$'
+        ParentImage: '(chrome\.exe|msedge\.exe|winword\.exe|excel\.exe)$'
+        Image: '(whoami\.exe|nltest\.exe|net\.exe|net1\.exe|ipconfig\.exe)$'
 
     filter_trusted_windows:
-        - processname: '(WerFault\.exe|conhost\.exe|csc\.exe)$'
-        - Parentprocesscommandline: 'svchost\.exe -k'
-        - username: 'NT AUTHORITY\\SYSTEM'
+        - Image: '(WerFault\.exe|conhost\.exe|csc\.exe)$'
+        - ParentCommandLine: 'svchost\.exe -k'
+        - User: 'NT AUTHORITY\\SYSTEM'
 
     filter_wmi_sched:
-        Parentprocessname: '(wmiprvse\.exe|taskhostw\.exe|svchost\.exe)$'
+        ParentImage: '(wmiprvse\.exe|taskhostw\.exe|svchost\.exe)$'
 
     condition: (selection_impossible_parent or selection_suspicious_context) and not (filter_trusted_windows or filter_wmi_sched)
 

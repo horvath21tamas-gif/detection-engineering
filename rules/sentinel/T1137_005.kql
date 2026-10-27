@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where TargetObject matches regex "\\\\Software\\\\Microsoft\\\\Office\\\\.*\\\\Security\\\\(VBAWarnings|Trusted Locations\\\\|Trusted Documents\\\\DisableTrustedDocuments|BlockContentExecutionFromInternet)$" and (Details matches regex "DWORD \\(0x0000000[01]\\)" or FolderPath matches regex "(winword\\.exe|excel\\.exe|outlook\\.exe|svchost\\.exe|msiexec\\.exe|powershell\\.exe|cmd\\.exe|reg\\.exe|wscript\\.exe|cscript\\.exe)$") and (not Details matches regex "(\\\\\\\\InternalStorage\\\\Templates|C:\\\\Program Files\\\\)")

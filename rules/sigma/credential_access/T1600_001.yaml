@@ -51,7 +51,7 @@ detection:
       - '\TrustedInstaller.exe'
       - '\TiWorker.exe'
       - '\explorer.exe'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   filter_known_vendors:
     Image|contains:

@@ -1,2 +1,0 @@
-(((operationName = '*Update application – Certificates and secrets management *' OR operationName = '*Add service principal credentials*'))) AND ((result = '*success*'))&& (NOT (((initiatedBy.app.((displayName = '*Microsoft App-Registration-Service*' OR displayName = '*Azure Resource Manager*'))) OR (initiatedBy.user.((userPrincipalName = '*svc-terraform*' OR userPrincipalName = '*github-actions*' OR userPrincipalName = '*devops-pipeline*'))) OR (targetResources.((displayName = '*Office 365*' OR displayName = '*Microsoft Teams*' OR displayName = '*Azure Monitor*')))))
-)

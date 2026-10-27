@@ -50,7 +50,7 @@ detection:
         - '\explorer.exe'
 
   filter_security_context:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     Image|contains:
       - '\SentinelOne\'
       - '\CrowdStrike\'

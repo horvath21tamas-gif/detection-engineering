@@ -59,7 +59,7 @@ detection:
       - 'C:\Program Files\Everything\'
       - 'C:\Windows\CCM\'
       - 'C:\Program Files\Splunk\'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     CommandLine|contains:
       - 'SoftwareDistribution'
       - 'node_modules'

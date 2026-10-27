@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath endswith "\verclsid.exe" and OriginalFileName =~ "verclsid.exe") and (IntegrityLevel in ("Low", "Medium")) and ((FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\ProgramData\*")) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powerpnt.exe", "*\outlook.exe", "*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\rundll32.exe", "*\chrome.exe", "*\msedge.exe")) or ((ProcessCommandLine in ("* /S *", "* /C *", "*{*", "*}*")) and (ProcessCommandLine in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Public\*")))) and (not (((FolderPath in ("C:\Windows\System32\*", "C:\Windows\SysWOW64\*")) and (ParentProcessName in ("*\explorer.exe", "*\svchost.exe", "*\SearchIndexer.exe")) and IntegrityLevel =~ "High") or User startswith "NT AUTHORITY\"))

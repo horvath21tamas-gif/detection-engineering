@@ -105,7 +105,7 @@ detection:
       - '\Program Files\Microsoft Monitoring Agent\'
 
   filter_system_context:
-    username:
+    User:
       - 'NT AUTHORITY\SYSTEM'
       - 'NT AUTHORITY\NETWORK SERVICE'
     ParentImage|contains:

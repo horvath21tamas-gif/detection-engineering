@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath in ("*\net.exe", "*\net1.exe")) and (ProcessCommandLine in ("*localgroup*", "*Get-LocalGroup*", "*Get-LocalGroupMember*", "*Get-NetLocalGroup*"))) and ((ProcessCommandLine in ("*Administrators*", "*Remote Desktop Users*", "*Remote Management Users*", "*Power Users*", "*Distributed COM Users*")) or (ProcessCommandLine in ("* > *", "*ConvertTo-Json*", "*Export-Csv*", "*findstr*")) or ((ParentProcessName in ("*\wsmprovhost.exe", "*\httpd.exe", "*\winword.exe", "*\outlook.exe")) and IntegrityLevel =~ "Medium")) and (not (User startswith "NT AUTHORITY\" or (ParentProcessName in ("*\Program Files\Tanium\*", "*\Program Files\Elastic\Agent\*", "*\Windows\System32\CcmExec.exe*")) or ProcessCommandLine contains "Program Files"))

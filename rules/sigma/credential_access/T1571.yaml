@@ -55,7 +55,7 @@ detection:
     - Image|contains:
         - '\Program Files\'
         - '\Program Files (x86)\'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
 
   condition: selection_procs and not filter_standard_ports and not filter_internal_networks and not filter_legit_software
 

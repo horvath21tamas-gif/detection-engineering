@@ -44,7 +44,7 @@ detection:
     IntegrityLevel: 'High'          
 
   filter_trusted_automation:
-    - username:
+    - User:
         - 'NT AUTHORITY\SYSTEM'      
         - 'SVC_BACKUP_EXCH'          
     - CommandLine|contains:

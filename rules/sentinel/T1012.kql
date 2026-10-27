@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath endswith "\reg.exe" and (ProcessCommandLine in ("*reg query*", "*Get-ItemProperty*", "*Get-ChildItem -Path Registry::*"))) and ((ProcessCommandLine in ("* /s *", "* -Recurse*")) or (ProcessCommandLine in ("*\System\CurrentControlSet\Control\Lsa*", "*\Software\Microsoft\Windows\CurrentVersion\Run*", "*\Software\Policies\Microsoft\Windows Defender*", "*\SECURITY\Policy\Secrets*", "*\Control\SecurityProviders\WDigest*", "*Putty\Sessions*", "*Software\ORL\WinVNC3*")) or ((ParentProcessName in ("*\wsmprovhost.exe", "*\httpd.exe", "*\winword.exe")) and IntegrityLevel =~ "Medium")) and (not (username =~ "NT AUTHORITY\SYSTEM" or (ParentProcessName in ("*\msiexec.exe", "*\svchost.exe", "*\CcmExec.exe")) or ProcessCommandLine contains "Microsoft\Windows\CurrentVersion\Uninstall"))

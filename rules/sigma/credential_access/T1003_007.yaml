@@ -47,7 +47,7 @@ detection:
 
   filter_legit_diagnostic:
     ParentImage|contains: '\Microsoft Visual Studio\'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: >
     (selection_procdump or selection_comsvcs_ordinal or selection_taskmgr_werfault)

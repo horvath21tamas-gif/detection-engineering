@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((ProcessCommandLine in ("*VBAWarnings*", "*AccessVBOM*", "*ExtensionHardness*", "*TrustRecords*", "*EnableMacros*", "*DisableNotifications*")) or ((FolderPath in ("*\scrcons.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\powershell.exe")) and (ProcessCommandLine in ("*ExecuteExcel4Macro*", "*VBAProject.bin*", "*RunMacro*", "*AutoOpen*")))) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\mshta.exe")) or (not (username =~ "NT AUTHORITY\SYSTEM" or (ParentProcessName in ("*\Windows\System32\svchost.exe*", "*\Windows\CCM\CcmExec.exe*", "*\Windows\System32\consent.exe*")) or (ProcessCommandLine in ("*\Program Files\*", "*\Program Files (x86)\*", "*Microsoft Office\*")))))

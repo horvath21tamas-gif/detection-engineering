@@ -73,7 +73,7 @@ detection:
             - 'Select-String'
 
     filter_legit_noise:
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
         ParentImage|endswith:
             - '\CcmExec.exe'
             - '\svchost.exe'

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((ProcessCommandLine in ("* -p*", "* -hp*", "* -mhe=on*", "* -mx9*", "* -ta*")) or (FolderPath in ("*\rclone.exe", "*\mega.exe", "*\file.exe", "*\powershell.exe", "*\curl.exe"))) and (FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Public\*", "*\PerfLogs\*")) and (ProcessCommandLine in ("*copy *", "*sync *", "*ftp*", "*http*", "*--config*")) and (not ((FolderPath in ("*\Program Files\*", "*\Program Files (x86)\*")) or (ProcessCommandLine in ("*localhost*", "*127.0.0.1*")) or username =~ "NT AUTHORITY\SYSTEM" or ParentProcessName endswith "\services.exe"))

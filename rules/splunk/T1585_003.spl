@@ -1,1 +1,0 @@
-operationName="Add user" result="success" userAgent IN ("*AzureCLI*", "*AzurePowerShell*", "*GraphExplorer*", "*python-requests*") NOT (identity IN ("*Sync_*", "*On-Premises Directory Synchronization*", "*ManagedIdentity*") OR identity="*MS-PIM*" OR identity IN ("*Workday_Sync*", "*Okta_Provisioner*"))

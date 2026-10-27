@@ -1,1 +1,0 @@
-source="WinEventLog:Security" EventCode=4738 PasswordNeverExpires="true" OR SidHistory="*" OR AllowedToDelegateTo="*" OR SecurityDescriptor="*" NOT (SubjectUserSid="S-1-5-18" OR SubjectUserName IN ("*MSOL_*", "*AD_Sync_Admin*", "*AzureADConnect*") OR ComputerName IN ("*PAW-ADMIN-*", "*JUMP-HOST-*"))

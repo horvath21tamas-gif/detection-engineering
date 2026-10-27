@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where TargetObject matches regex "(\\\\Software\\\\Microsoft\\\\Office\\\\|\\\\Software\\\\WOW6432Node\\\\Microsoft\\\\Office\\\\).*\\\\Outlook\\\\Forms\\\\(Registry|Cache)$" and (FolderPath matches regex "(outlook\\.exe|msiexec\\.exe|powershell\\.exe|cmd\\.exe|reg\\.exe|cscript\\.exe|wscript\\.exe)$" or Details matches regex "(CLSID|\\.dll|\\.vbs|http)") and (not Details matches regex "(C:\\\\Program Files\\\\|C:\\\\Program Files \\(x86\\)\\\\)")

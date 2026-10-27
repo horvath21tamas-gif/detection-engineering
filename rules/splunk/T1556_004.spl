@@ -1,1 +1,0 @@
-Message IN ("*aaa authentication*", "*aaa authorization*", "*tacacs-server host*", "*radius-server host*", "*no aaa*") OR (Message="*username *" Message="privilege 15" Message="secret") SourceIp="NOT 10.50.0.0/24" SourceIp="NOT 127.0.0.1" NOT (username IN ("SVC_NetworkAutomation", "CiscoDNA_Admin") SourceIp="10.50.0.100")

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (TargetFilename in ("/etc/rc.local*", "/etc/rc.d/*", "/etc/init.d/*", "/etc/update-rc.d/*", "/usr/lib/systemd/system-generators/*")) and ((FolderPath in ("*/python", "*/python3", "*/perl", "*/ruby", "*/lua", "*/bash", "*/sh", "*/nc", "*/socat", "*/curl", "*/wget")) or (ProcessCommandLine in ("*>>*", "*tee -a*", "*sed -i*"))) and (not (((ParentProcessName in ("*/apt", "*/dpkg", "*/yum", "*/dnf", "*/rpm", "*/zypper", "*/pacman")) and (FolderPath in ("*/frontend", "*/preinst", "*/postinst"))) or (FolderPath in ("*/ansible/*", "*/salt/*", "*/puppet/*"))))

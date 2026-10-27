@@ -50,7 +50,7 @@ detection:
             - 'C:\Windows\System32\sysprep\'
             - 'C:\Windows\System32\oobe\'
             - 'C:\Windows\Setup\'
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
 
     condition:
         (selection_bcdedit or selection_registry)

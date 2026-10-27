@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((ProcessCommandLine in ("*copy *", "*type *", "*tar *", "*7z*", "*powershell*")) and (not (FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe", "*\GoogleUpdate.exe", "*\MicrosoftEdgeUpdate.exe"))) and (not ((FolderPath in ("*\migwiz.exe", "*\OneDrive.exe")) and (ProcessCommandLine in ("*MigLog*", "*settings*"))))) or (((FolderPath endswith "\powershell.exe" and (ProcessCommandLine in ("*Get-Credential*", "*prompt*", "*CredentialPrompt*", "*-WindowStyle Hidden*"))) or (FolderPath endswith "\msg.exe" and ProcessCommandLine startswith "")) and (not (ParentProcessName in ("*\CcmExec.exe", "*\gpscript.exe"))))

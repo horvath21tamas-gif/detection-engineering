@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath in ("*\wscript.exe", "*\cscript.exe")) and (OriginalFileName in ("wscript.exe", "cscript.exe"))) and (ProcessCommandLine in ("*pubprn.vbs*", "*slmgr.vbs*", "*manage-bde.wsf*", "*SyncAppvPublishingServer.vbs*", "*Adsiedit.vbs*")) and (IntegrityLevel in ("Low", "Medium")) and ((ProcessCommandLine in ("*http://*", "*https://*", "*script:*", "*soap:*", "*\\*", "* /e:*")) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powerpnt.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\brave.exe", "*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe")) or (FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\ProgramData\*"))) and (not ((ParentProcessName in ("*\explorer.exe", "*\svchost.exe")) and (ProcessCommandLine in ("*C:\Windows\System32\*", "*C:\Windows\SysWOW64\*")) and username =~ "NT AUTHORITY\SYSTEM"))

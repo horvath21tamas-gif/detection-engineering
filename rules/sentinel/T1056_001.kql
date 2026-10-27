@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\rundll32.exe", "*\regsvr32.exe", "*\mshta.exe", "*\cscript.exe", "*\wscript.exe")) and (ProcessCommandLine in ("*SetWindowsHook*", "*GetAsyncKeyState*", "*GetKeyboardState*", "*user32.dll*"))) or (ProcessCommandLine in ("*\AppData\*", "*\Temp\*", "*\Public\*"))) and (not ((FolderPath in ("*\Windows\System32\*", "*\Program Files\*", "*\Program Files (x86)\*")) or ((FolderPath in ("*\AnyDesk.exe", "*\TeamViewer.exe", "*\tv_w32.exe", "*\RemoteDesktopManager.exe")) and User startswith "NT AUTHORITY\")))

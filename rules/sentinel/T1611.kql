@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((ProcessCommandLine in ("*--privileged*", "*--cap-add=SYS_ADMIN*", "*--cap-add=SYS_PTRACE*", "*--pid=host*", "*--net=host*", "*--ipc=host*", "*--security-opt=seccomp=unconfined*", "*--security-opt=apparmor=unconfined*")) or (ProcessCommandLine in ("*-v /:/*", "*-v /proc:/proc*", "*-v /sys:/sys*", "*-v /var/run/docker.sock:/var/run/docker.sock*", "*-v /run/containerd:/run/containerd*", "*-v /etc/kubernetes:/etc/kubernetes*", "*-v /root/.ssh:/root/.ssh*"))) and (ParentProcessName in ("*/bash", "*/sh", "*/zsh", "*/python", "*/ruby", "*/php", "*/node")) and (not ((FolderPath in ("*kube-proxy*", "*calico/node*", "*cilium*", "*datadog/agent*", "*node-exporter*", "*istio-proxy*", "*fluentd*", "*prometheus*")) and username =~ "root"))

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (processcommandline =~ "(avicap32\.dll|capCreateCaptureWindow|ksuser\.dll|mfplat\.dll|Windows\.Media\.Capture)" or (processname =~ "(ffmpeg\.exe|vlc\.exe)$" and processcommandline =~ "(-dshow|-f dshow|-video_size|capture)")) and (Parentprocessname =~ "(powershell\.exe|cmd\.exe|w3wp\.exe|rundll32\.exe|regsvr32\.exe)$" and IntegrityLevel =~ "Medium") and (not (processname =~ "(Microsoft Teams|Zoom\.exe|Webex\.exe|Slack\.exe|CameraSettingsUIHost\.exe)" and processcommandline =~ "(skype\.exe)" and username =~ "NT AUTHORITY\SYSTEM"))

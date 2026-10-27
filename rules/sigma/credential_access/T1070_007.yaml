@@ -47,7 +47,7 @@ detection:
       - '\mshta.exe'
 
   filter_trusted_admin_behavior:
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
       ParentImage|endswith: '\services.exe'
     - ParentImage|endswith: '\msiexec.exe'
     - CommandLine|contains:

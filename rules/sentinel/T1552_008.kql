@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ProcessCommandLine in ("*\SYSVOL\*", "*\SYSVOL\*", "*\Policies\*", "*\*\SYSVOL\*")) and (ProcessCommandLine in ("*cpassword*", "*Get-GPPPassword*", "*gpp-decrypt*", "*Groups.xml*", "*ScheduledTasks.xml*", "*Services.xml*")) and (((FolderPath in ("*\findstr.exe", "*\find.exe", "*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\grep.exe")) and (ProcessCommandLine in ("*Select-String*", "*Get-ChildItem*", "*dir *", "*type *", "*gc *"))) or (ProcessCommandLine in ("*-enc*", "*-EncodedCommand*", "*IEX*", "*Invoke-Expression*")) or (ParentProcessName in ("*\wsmprovhost.exe", "*\psexesvc.exe", "*\wmiprvse.exe", "*\cmd.exe", "*\powershell.exe"))) and (not (User in ("*NT AUTHORITY\SYSTEM*", "*NT AUTHORITY\LOCAL SERVICE*", "*NT AUTHORITY\NETWORK SERVICE*"))) and (not (FolderPath endswith "\svchost.exe" and User startswith "NT AUTHORITY\SYSTEM"))

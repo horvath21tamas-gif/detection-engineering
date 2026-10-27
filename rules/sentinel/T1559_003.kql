@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\vmtoolsd.exe", "*\vboxmanage.exe", "*\vboxguest.exe", "*\hyperv-daemons.exe", "*\vmmem.exe")) and ((ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe")) or (ProcessCommandLine in ("*debug-vm*", "*dump-guest-memory*", "*hypercall*", "*--cpuid*", "*in-out-instruction*", "*guest-property*"))) and (not (username =~ "NT AUTHORITY\SYSTEM" or (ParentProcessName in ("*\services.exe", "*\svchost.exe"))))

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\query.exe", "*\qwinsta.exe", "*\quser.exe", "*\reg.exe", "*\sc.exe", "*\tasklist.exe")) or (ProcessCommandLine in ("*qwinsta*", "*quser*", "*query user*", "*query session*"))) or (ProcessCommandLine in ("*Terminal Server\fDenyTSConnections*", "*Terminal Server\WinStations\RDP-Tcp*", "*UserConfig*", "*AllowRemoteRPC*"))) and (((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\httpd.exe", "*\wsmprovhost.exe")) and IntegrityLevel =~ "Medium") or (ProcessCommandLine in ("* > *", "*findstr*", "*ConvertTo-Json*"))) and (not (username =~ "NT AUTHORITY\SYSTEM" or (ParentProcessName in ("*\svchost.exe", "*\msiexec.exe", "*\CcmExec.exe")) or (ProcessCommandLine in ("*Program Files*", "*Splunk*"))))

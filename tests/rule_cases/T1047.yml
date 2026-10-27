@@ -1,0 +1,23 @@
+# Behavioural tests for rules/sigma/**/T1047.yaml
+# Events use Sigma field names. `match` must trigger the rule, `no_match` must not.
+rule: T1047
+match:
+  - name: remote wmic process creation from cmd
+    event:
+      Image: 'C:\Windows\System32\wbem\WMIC.exe'
+      CommandLine: 'wmic /node:SRV01 process call create "cmd.exe /c whoami"'
+      ParentImage: 'C:\Windows\System32\cmd.exe'
+      User: 'CORP\alice'
+no_match:
+  - name: local wmic query is not remote process creation
+    event:
+      Image: 'C:\Windows\System32\wbem\WMIC.exe'
+      CommandLine: 'wmic os get caption'
+      ParentImage: 'C:\Windows\explorer.exe'
+      User: 'CORP\alice'
+  - name: SYSTEM service account is filtered
+    event:
+      Image: 'C:\Windows\System32\wbem\WMIC.exe'
+      CommandLine: 'wmic /node:SRV01 process call create "cmd.exe /c whoami"'
+      ParentImage: 'C:\Windows\System32\cmd.exe'
+      User: 'NT AUTHORITY\SYSTEM'

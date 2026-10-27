@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((ProcessCommandLine in ("*^e^*", "*^p^*", "*^s^*", "*^^^*", "*\"^*")) or (ProcessCommandLine in ("*:~*", "*%:*", "*!:*")) or (ProcessCommandLine in ("*'+'*", "*'-join'*", "*[char[]]*", "*::Reverse*", "*.Replace(*", "*bxor*")) or (ProcessCommandLine in ("* -enc *", "* -e *", "* -encodedcommand *", "* FromBase64String*", "* IO.Compression*"))) and (not ((FolderPath in ("C:\Windows\System32\msiexec.exe*", "C:\Program Files\Common Files\Microsoft Shared\*", "C:\Windows\System32\wbem\WmiPrvSE.exe*")) and (ProcessCommandLine in ("*/package*", "*/update*", "*Data Source=*"))))

@@ -97,7 +97,7 @@ detection:
       - 'CCMCACHE'
 
   filter_system_user:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: selection_shares and (
                 selection_high_value_files

@@ -1,1 +1,0 @@
-winlog.channel:Security AND ((event.code:4624 AND winlog.event_data.Status:0x0) AND (winlog.event_data.TargetUserName:(Administrator OR Guest OR Admin OR root OR DefaultAccount)) AND (winlog.event_data.LogonType:(3 OR 8 OR 10)) AND (NOT (((source.ip:(\:\:1 OR 127.0.0.1)) AND winlog.event_data.TargetUserName:UMFD\-*) OR (source.domain:(INFRA\-MONITOR\-* OR BACKUP\-SRV\-*)))))

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\sls.exe", "*\sam.exe", "*\func.exe", "*\serverless.exe")) or (ProcessCommandLine in ("* deploy*", "* create-function*", "* functions deploy*", "* invoke*"))) or ((FolderPath in ("*\terraform.exe", "*\pulumi.exe")) and (ProcessCommandLine in ("*aws_lambda_function*", "*azurerm_function_app*", "*google_cloudfunctions_function*")))) and (not ((User in ("*svc_jenkins*", "*svc_github_actions*", "*adm_devops_deploy*")) or (FolderPath in ("*\Program Files\Terraform\*", "*\actions-runner\*")))) and (not (ParentProcessName in ("*\code.exe", "*\devenv.exe", "*\idea64.exe"))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_serverless_tools"))

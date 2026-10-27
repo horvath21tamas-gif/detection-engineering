@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\brave.exe", "*\firefox.exe", "*\iexplore.exe")) and (FolderPath in ("*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\powershell.exe", "*\cmd.exe", "*\scrcons.exe")) and (ProcessCommandLine in ("*.vbs*", "*.jse*", "*.hta*", "*.wsf*", "*.iso*", "*.vhd*", "*.vba*", "*.lnk*")) and (ProcessCommandLine in ("*\AppData\Local\Temp\*", "*\Downloads\*", "*\Users\Public\*", "*\INetCache\*")) and (not ((ProcessCommandLine in ("*update*", "*setup.exe*", "*installer.exe*")) and (FolderPath in ("C:\Program Files\*", "C:\Windows\System32\*"))))

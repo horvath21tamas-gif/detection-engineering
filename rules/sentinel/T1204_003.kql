@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ProcessCommandLine matches regex "^[D-Z]:\\\\.*" and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\rundll32.exe", "*\regsvr32.exe", "*\scrcons.exe")) and ParentProcessName endswith "\explorer.exe" and (not ((ProcessCommandLine in ("*setup.exe*", "*install.exe*", "*autorun.inf*")) or FolderPath contains "C:\Windows\" or ProcessCommandLine contains "\YourCompanyShare\"))

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ProcessCommandLine in ("*securityd*", "*keychain.db*")) and (((FolderPath in ("*/lldb", "*/gcore", "*/vmmap", "*/heap", "*/frida-server")) or (ProcessCommandLine in ("*attach*", "*memory read*", "*dump*", "*save*", "*--pid*", "*-p*"))) or ((FolderPath in ("*/Users/*", "*/tmp/*", "*/var/tmp/*", "*/Library/Caches/*")) and (FolderPath in ("*/python3", "*/python", "*/ruby", "*/node")))) and (not ((ParentProcessName in ("*/usr/bin/sysdiagnose", "*/usr/libexec/periodic-wrapper", "*/System/Library/CoreServices/ReportCrash", "*/usr/bin/spindump")) or ParentProcessName contains "/Applications/Xcode.app/"))

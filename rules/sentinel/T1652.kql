@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (["*"] contains "selection_cli_binary and selection_cli_enum" or ["*"] contains "selection_powershell_binary and selection_wmi_enum") and ((ProcessCommandLine in ("* > *", "*Out-File*", "*Export-Csv*", "*ConvertTo-Json*", "* | clip*", "*base64*", "*certutil -encode*")) or (ParentProcessName in ("*\wsmprovhost.exe", "*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\rundll32.exe", "*\httpd.exe", "*\w3wp.exe")) or (FolderPath in ("*\AppData\Local\Temp\*", "*\Users\Public\*", "*\ProgramData\*", "*\Windows\Temp\*")) or IntegrityLevel =~ "Medium") and (not (FolderPath in ("*\Program Files\Tanium\*", "*\Program Files\Splunk\*", "*\Program Files\Datadog\*", "*\Program Files\Elastic\*", "*\Windows\System32\CcmExec.exe*"))) and (not (User in ("NT AUTHORITY\*", "NT SERVICE\*"))) and (not ParentProcessName endswith "\explorer.exe")

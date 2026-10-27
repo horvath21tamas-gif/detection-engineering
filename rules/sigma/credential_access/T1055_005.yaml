@@ -44,7 +44,7 @@ detection:
       - '\AppData\'
 
   filter_trusted:
-    - Sourceprocessname: 'C:\Windows\System32\csrss.exe'
+    - SourceImage: 'C:\Windows\System32\csrss.exe'
     - SourceImage|endswith:
         - '\MsMpEng.exe'
         - '\CcmExec.exe'

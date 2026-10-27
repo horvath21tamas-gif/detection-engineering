@@ -1,3 +1,0 @@
-ParentImage IN ("*\\winword.exe", "*\\excel.exe", "*\\powershell.exe", "*\\cmd.exe", "*\\mshta.exe", "*\\cscript.exe", "*\\wscript.exe", "*\\bash.exe") Image IN ("*\\Users\\*", "*\\Temp\\*", "*\\AppData\\*") NOT (username="NT AUTHORITY\\SYSTEM" ParentImage IN ("*\\Windows\\System32\\svchost.exe*", "*\\Windows\\servicing\\TrustedInstaller.exe*", "*\\CcmExec.exe*", "*\\Program Files\\Microsoft SQL Server\\*", "*\\Program Files\\Microsoft Visual Studio\\*") CommandLine IN ("*InstallShield*", "*msiexec*", "*SQLSetup*"))
-| regex CommandLine=".*\\\\Winlogon\\\\(SpecialAccounts\\\\UserList|UserList).*"
-| regex CommandLine=".*(/d\\s*0|REG_DWORD).*" | table Time,SourceImage,ParentImage,CommandLine,SourceUsername,TargetRegistryKey,RegistryValue

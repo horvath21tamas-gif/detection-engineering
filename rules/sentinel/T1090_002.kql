@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((ProcessCommandLine in ("*proxy-user=*", "*proxy-password=*", "*http-proxy-user=*", "*https-proxy-pass=*", "* -U *", "* -P *")) or ((ProcessCommandLine in ("*--proxy-pac-url=*", "*--proxy-server=http*", "* -setproxy *", "* -proxybaseurl:*")) and ((ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\cscript.exe", "*\wscript.exe")) and (FolderPath in ("*\certutil.exe", "*\bitsadmin.exe", "*\curl.exe", "*\rundll32.exe", "*\regsvr32.exe"))))) and (not ((FolderPath in ("*\Program Files\*", "*\Program Files (x86)\*")) and (ProcessCommandLine in ("*localhost*", "*127.0.0.1*", "*microsoft.com*", "*windowsupdate*")) and username =~ "NT AUTHORITY\SYSTEM"))

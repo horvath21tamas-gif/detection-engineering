@@ -1,2 +1,0 @@
-TargetObject regex '(\\\\Software\\\\Microsoft\\\\Office\\\\|\\\\Software\\\\WOW6432Node\\\\Microsoft\\\\Office\\\\).*\\\\Outlook\\\\Forms\\\\(Registry|Cache)$' AND (process regex '(outlook\\.exe|msiexec\\.exe|powershell\\.exe|cmd\\.exe|reg\\.exe|cscript\\.exe|wscript\\.exe)$' OR Details regex '(CLSID|\\.dll|\\.vbs|http)') AND (NOT ((Details regex '(C:\\\\Program Files\\\\|C:\\\\Program Files \\(x86\\)\\\\)'))
-)

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (TargetFilename in ("*\*", "*:\*")) and (TargetFilename in ("*.docm", "*.dotm", "*.xlsm", "*.lnk", "*.vbs", "*.ps1", "*.bat", "*.chm")) and (((FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\certutil.exe", "*\bitsadmin.exe", "*\curl.exe", "*\wget.exe")) and IntegrityLevel =~ "Medium") or filename match ".*\.(pdf|docx|xlsx|txt)\.(exe|vbs|ps1|lnk|bat)$") and (not ((FolderPath in ("*\winword.exe", "*\excel.exe", "*\explorer.exe")) and (FolderPath in ("*C:\Program Files\Microsoft Office\*", "*C:\Windows\System32\msiexec.exe*")) and username =~ "NT AUTHORITY\SYSTEM"))

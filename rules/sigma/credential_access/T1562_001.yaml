@@ -23,7 +23,7 @@ detection:
         - '\powershell.exe'
         - '\pwsh.exe'
         - '\powershell_ise.exe'
-    - filename: 
+    - TargetFilename: 
         - 'PowerShell.EXE'
         - 'pwsh.dll'
         - 'powershell_ise.EXE'

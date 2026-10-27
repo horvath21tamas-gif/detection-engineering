@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (SrcIp in ("1.*", "2.*", "3.*", "4.*", "5.*", "6.*", "7.*", "8.*", "9.*")) and ((Action in ("deny", "drop", "reset")) and Protocol =~ "tcp") and (Status in (400, 401, 403, 404, 408, 444, 499)) and (not ((DestIp in ("10.*", "192.168.*", "172.16.*", "172.17.*", "172.18.*", "172.19.*", "172.20.*", "172.21.*", "172.22.*", "172.23.*", "172.24.*", "172.25.*", "172.26.*", "172.27.*", "172.28.*", "172.29.*", "172.30.*", "172.31.*")) or (UserAgent in ("*nessus*", "*qualys*", "*openvas*", "*acunetix*", "*burp*", "*nikto*", "*zabbix*", "*nagios*")) or (UserAgent in ("*googlebot*", "*bingbot*", "*yandex*", "*ahrefs*", "*semrush*", "*uptimerobot*", "*pingdom*")) or (SrcIp in ("34.*", "35.*", "52.*", "54.*"))))

@@ -68,7 +68,7 @@ detection:
             - '\JetBrains\'
             - '\actions-runner\'
             - '\agent\'
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
 
     condition:
         selection_cloud_paths

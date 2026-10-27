@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\aws.exe", "*\az.exe", "*\gcloud.exe", "*\sam.exe", "*\sls.exe")) or (ProcessCommandLine in ("*update-function-configuration*", "*update-function-code*", "*functionapp config set*", "*functions deploy*", "*lambda publish-layer-version*"))) and (ProcessCommandLine in ("*--layers*", "*--variables*", "*--environment*", "*--image-uri*", "*--role*"))) and (not ((User in ("*svc_deploy*", "*svc_pipeline*", "*github_actions*")) or (FolderPath in ("*\actions-runner\*", "*\Jenkins\*", "*\AzureDevOps\*")))) and (not (ProcessCommandLine in ("*--stage dev*", "*--stage test*", "*sandbox*", "*local-test*"))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_high_risk_params"))

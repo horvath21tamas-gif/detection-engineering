@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (EventID =~ 4624 and Status =~ "0x0") and (LogonType in (3, 10, 8)) and ((TargetUserName startswith "svc_" and LogonType =~ 10) or (TargetUserName contains "admin" and IpAddress matches regex "^(?!127\\.|192\\.168\\.|10\\.).*")) and (not (WorkstationName startswith "INFRA-MONITOR-" or (IpAddress in ("::1", "127.0.0.1")) or TargetUserName =~ "svc_vulnerability_scanner"))

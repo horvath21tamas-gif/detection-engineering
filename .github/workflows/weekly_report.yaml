@@ -1,9 +1,6 @@
 name: Weekly Detection Engineering Report
 
 on:
-  push:          # <--- Ez kényszeríti a GitHubot, hogy most azonnal felismerje a workflow-t
-    branches:
-      - test
   schedule:
     # Minden hétfőn reggel 08:00-kor (UTC szerint 07:00)
     - cron: '0 7 * * 1'

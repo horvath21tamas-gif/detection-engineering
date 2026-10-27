@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath endswith "\openssl.exe" and (ProcessCommandLine in ("* s_client*", "* x509*", "* -text*"))) or (FolderPath endswith "\certutil.exe" and (ProcessCommandLine in ("* -dump*", "* -viewstore*", "* -user*"))) or (FolderPath endswith "\powershell.exe" and ProcessCommandLine contains "Get-ChildItem -Path Cert:")) or (ProcessCommandLine in ("*.pfx*", "*.p12*", "*.pem*", "*exportable*"))) and (not (ProcessCommandLine in ("* -verify*", "* -v *", "* -silent*"))) and (not (ParentProcessName in ("*\services.exe", "*\svchost.exe", "*\CcmExec.exe", "*\TrustedInstaller.exe"))) and (not (ProcessCommandLine in ("*localhost*", "*dev.local*")))

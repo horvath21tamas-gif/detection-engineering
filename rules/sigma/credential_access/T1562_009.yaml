@@ -94,7 +94,7 @@ detection:
       - System
 
   filter_legit_system_context:
-    username:
+    User:
       - 'NT AUTHORITY\SYSTEM'
       - 'NT AUTHORITY\LOCAL SERVICE'
       - 'NT AUTHORITY\NETWORK SERVICE'

@@ -121,10 +121,11 @@ def fix_netwitness(content):
     return content
 
 def process_files():
+    root = os.environ.get('SIEM_ROOT', 'rules')  # CI points this at build/legacy
     tasks = [
-        ('rules/qradar', '.aql', fix_qradar),
-        ('rules/netwitness', '.txt', fix_netwitness),
-        ('rules/sentinel', '.kql', fix_sentinel)
+        (f'{root}/qradar', '.aql', fix_qradar),
+        (f'{root}/netwitness', '.txt', fix_netwitness),
+        (f'{root}/sentinel', '.kql', fix_sentinel)
     ]
 
     for folder, extension, fixer in tasks:

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*/systemctl", "*/systemd-analyze")) and ((ProcessCommandLine in ("*enable*", "*start*", "*daemon-reload*", "*--user*")) and (ProcessCommandLine in ("*base64*", "*curl*", "*wget*", "*python*", "*perl*", "*ruby*", "*nc *", "*sh -c*", "*/tmp/*", "*/var/tmp/*", "*/dev/tcp/*"))) and (not ((ParentProcessName in ("*/apt", "*/yum", "*/dnf", "*/dpkg", "*/ansible-playbook", "*/salt-minion")) or (username =~ "root" and (ProcessCommandLine in ("*apt-daily*", "*motd-news*", "*logrotate*")))))

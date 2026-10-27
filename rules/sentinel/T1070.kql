@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath endswith "\wevtutil.exe" and (ProcessCommandLine in ("*Security*", "*System*", "*Setup*", "*PowerShell*"))) or ((FolderPath endswith "\fsutil.exe" and (ProcessCommandLine in ("*usn*", "*deletejournal*"))) or (ProcessCommandLine in ("*del *", "*Remove-Item*")) or (ProcessCommandLine in ("*\Windows\Prefetch\*", "*\System32\config\Journal*")))) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\chrome.exe", "*\msedge.exe", "*\w3wp.exe", "*\powershell.exe", "*\cmd.exe")) or (not ((User startswith "NT AUTHORITY\" and (ParentProcessName in ("*\services.exe", "*\svchost.exe", "*\msiexec.exe"))) or (ProcessCommandLine in ("*cleanmgr.exe*", "*CCM\Temp*", "*HealthCheck*")))))

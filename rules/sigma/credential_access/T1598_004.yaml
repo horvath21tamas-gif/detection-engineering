@@ -56,7 +56,7 @@ detection:
       - 'SharePoint'
       - 'Microsoft365'
       - 'GraphAPI'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   filter_browser_internals:
     CommandLine|contains:

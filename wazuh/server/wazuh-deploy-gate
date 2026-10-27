@@ -1,0 +1,359 @@
+#!/usr/bin/env python3
+"""wazuh-deploy-gate - safe, rollback-capable deployment of compiled Sigma rules.
+
+Runs on the Wazuh manager as root (via sudo, from the restricted ``wazuh-deploy`` SSH user).
+The CI runner pipes a bundle to it over SSH:
+
+    printf 'deploy\\n' | cat - bundle.tar.gz | ssh wazuh-deploy@manager
+
+stdin protocol: first line = command (deploy | rollback | status), rest = bundle (deploy only).
+
+deploy:
+  1. verify bundle (manifest hashes, file-name whitelist, rule-id range, no active-response/command)
+  2. back up the currently installed sigma_*.xml files
+  3. install new files, run ``wazuh-analysisd -t`` (syntax gate)
+  4. restart the manager, replay test vectors through the logtest API
+       - every attack vector must fire a rule from our id range (>= MIN_PASS_RATIO)
+       - no benign event may fire a rule from our id range
+  5. on ANY failure: restore the backup and restart again (automatic rollback)
+
+Only the Python standard library is used. Everything environment-specific can be overridden
+with WDG_* environment variables (used by the test-suite).
+"""
+
+from __future__ import annotations
+
+import base64
+import fcntl
+import hashlib
+import io
+import json
+import os
+import re
+import shutil
+import ssl
+import subprocess
+import sys
+import tarfile
+import tempfile
+import time
+import urllib.error
+import urllib.request
+from pathlib import Path
+from xml.etree import ElementTree as ET
+
+RULES_DIR = Path(os.environ.get("WDG_RULES_DIR", "/var/ossec/etc/rules"))
+STATE_DIR = Path(os.environ.get("WDG_STATE_DIR", "/var/lib/wazuh-deploy"))
+ANALYSISD = os.environ.get("WDG_ANALYSISD", "/var/ossec/bin/wazuh-analysisd")
+RESTART_CMD = os.environ.get("WDG_RESTART_CMD", "systemctl restart wazuh-manager").split()
+API_ENV_FILE = Path(os.environ.get("WDG_API_ENV_FILE", "/etc/wazuh-deploy/api.env"))
+FILE_GROUP = os.environ.get("WDG_FILE_GROUP", "wazuh")
+ID_MIN = int(os.environ.get("WDG_ID_MIN", "100000"))
+ID_MAX = int(os.environ.get("WDG_ID_MAX", "119999"))
+MIN_PASS_RATIO = float(os.environ.get("WDG_MIN_PASS_RATIO", "0.90"))
+KEEP_BACKUPS = int(os.environ.get("WDG_KEEP_BACKUPS", "10"))
+MAX_BUNDLE = 64 * 1024 * 1024
+RULE_FILE = re.compile(r"^sigma_[0-9]_[a-z]+\.xml$")
+FORBIDDEN_TAGS = {"command", "active-response", "include", "list"}
+
+
+class GateError(Exception):
+    pass
+
+
+def log(stage: str, **kw) -> None:
+    print(json.dumps({"stage": stage, "ts": int(time.time()), **kw}, ensure_ascii=False), flush=True)
+
+
+def run(cmd: list[str], timeout: int = 600) -> subprocess.CompletedProcess:
+    return subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, check=False)
+
+
+# ---------------------------------------------------------------- bundle handling
+def read_bundle(data: bytes, workdir: Path) -> dict:
+    if len(data) > MAX_BUNDLE:
+        raise GateError("bundle too large")
+    try:
+        tf = tarfile.open(fileobj=io.BytesIO(data), mode="r:gz")
+    except tarfile.TarError as exc:
+        raise GateError(f"not a tar.gz bundle: {exc}") from exc
+    allowed_prefix = ("rules/",)
+    allowed_exact = {"manifest.json", "testvectors.jsonl", "benign.jsonl"}
+    for m in tf.getmembers():
+        if not m.isfile() or m.name.startswith("/") or ".." in Path(m.name).parts:
+            raise GateError(f"unsafe member in bundle: {m.name!r}")
+        if m.name not in allowed_exact and not m.name.startswith(allowed_prefix):
+            raise GateError(f"unexpected file in bundle: {m.name!r}")
+        if m.name.startswith("rules/") and not RULE_FILE.match(m.name[len("rules/"):]):
+            raise GateError(f"rule file name not allowed: {m.name!r}")
+        dest = workdir / m.name
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        with tf.extractfile(m) as src, open(dest, "wb") as out:  # type: ignore[union-attr]
+            shutil.copyfileobj(src, out)
+    try:
+        manifest = json.loads((workdir / "manifest.json").read_text())
+    except (OSError, ValueError) as exc:
+        raise GateError(f"bad manifest.json: {exc}") from exc
+    for rel, digest in manifest.get("files", {}).items():
+        p = workdir / rel
+        if not p.is_file() or hashlib.sha256(p.read_bytes()).hexdigest() != digest:
+            raise GateError(f"hash mismatch for {rel}")
+    on_disk = {str(p.relative_to(workdir)) for p in (workdir / "rules").glob("*.xml")}
+    if on_disk != {r for r in manifest.get("files", {}) if r.startswith("rules/")}:
+        raise GateError("manifest does not list exactly the shipped rule files")
+    if not on_disk:
+        raise GateError("bundle contains no rules")
+    return manifest
+
+
+def check_rule_xml(workdir: Path) -> int:
+    count, seen = 0, set()
+    for path in sorted((workdir / "rules").glob("*.xml")):
+        try:
+            root = ET.parse(path).getroot()
+        except ET.ParseError as exc:
+            raise GateError(f"{path.name}: XML error {exc}") from exc
+        for el in root.iter():
+            if el.tag in FORBIDDEN_TAGS:
+                raise GateError(f"{path.name}: <{el.tag}> is not allowed in deployed rules")
+        for rule in root.iter("rule"):
+            rid = int(rule.get("id", "0"))
+            if not ID_MIN <= rid <= ID_MAX:
+                raise GateError(f"{path.name}: rule id {rid} outside {ID_MIN}-{ID_MAX}")
+            if rid in seen:
+                raise GateError(f"duplicate rule id {rid}")
+            seen.add(rid)
+            count += 1
+    return count
+
+
+# ---------------------------------------------------------------- install / rollback
+def installed_files() -> list[Path]:
+    return sorted(p for p in RULES_DIR.glob("sigma_*.xml") if RULE_FILE.match(p.name))
+
+
+def backup_current() -> Path:
+    stamp = time.strftime("%Y%m%dT%H%M%S")
+    dest, n = STATE_DIR / "backups" / stamp, 0
+    while dest.exists():  # two deployments within one second
+        n += 1
+        dest = STATE_DIR / "backups" / f"{stamp}-{n:02d}"
+    dest.mkdir(parents=True)
+    for p in installed_files():
+        shutil.copy2(p, dest / p.name)
+    prune_backups()
+    return dest
+
+
+def prune_backups() -> None:
+    backups = sorted(p for p in (STATE_DIR / "backups").glob("*") if p.is_dir())
+    for old in backups[:-KEEP_BACKUPS]:
+        shutil.rmtree(old, ignore_errors=True)
+
+
+def set_owner(path: Path) -> None:
+    try:
+        shutil.chown(path, user="root", group=FILE_GROUP)
+    except (LookupError, PermissionError):
+        pass
+    path.chmod(0o660)
+
+
+def install_files(workdir: Path) -> None:
+    keep = set()
+    for src in sorted((workdir / "rules").glob("*.xml")):
+        tmp = RULES_DIR / f".{src.name}.new"
+        shutil.copyfile(src, tmp)
+        set_owner(tmp)
+        os.replace(tmp, RULES_DIR / src.name)  # atomic per file
+        keep.add(src.name)
+    for old in installed_files():
+        if old.name not in keep:
+            old.unlink()
+
+
+def restore(backup: Path) -> None:
+    for p in installed_files():
+        p.unlink()
+    for src in sorted(backup.glob("sigma_*.xml")):
+        shutil.copy2(src, RULES_DIR / src.name)
+        set_owner(RULES_DIR / src.name)
+
+
+def syntax_check() -> None:
+    r = run([ANALYSISD, "-t"], timeout=300)
+    if r.returncode != 0:
+        raise GateError("wazuh-analysisd -t failed: " + (r.stderr or r.stdout)[-1500:])
+
+
+def restart_manager() -> None:
+    r = run(RESTART_CMD, timeout=600)
+    if r.returncode != 0:
+        raise GateError("manager restart failed: " + (r.stderr or r.stdout)[-800:])
+
+
+# ---------------------------------------------------------------- logtest replay
+class LogtestClient:
+    def __init__(self) -> None:
+        env = {}
+        for line in API_ENV_FILE.read_text().splitlines():
+            if "=" in line and not line.lstrip().startswith("#"):
+                k, v = line.split("=", 1)
+                env[k.strip()] = v.strip().strip("'\"")
+        self.base = env.get("WAZUH_API_URL", "https://127.0.0.1:55000").rstrip("/")
+        self.user, self.password = env["WAZUH_API_USER"], env["WAZUH_API_PASSWORD"]
+        self.ctx = ssl.create_default_context()
+        if self.base.startswith("https://127.0.0.1") or self.base.startswith("https://localhost"):
+            self.ctx.check_hostname = False  # local self-signed API certificate
+            self.ctx.verify_mode = ssl.CERT_NONE
+        self.jwt = ""
+        self.token = None
+
+    def _call(self, method: str, path: str, body: dict | None = None, auth_basic: bool = False) -> dict:
+        headers = {"Content-Type": "application/json"}
+        if auth_basic:
+            headers["Authorization"] = "Basic " + base64.b64encode(f"{self.user}:{self.password}".encode()).decode()
+        else:
+            headers["Authorization"] = "Bearer " + self.jwt
+        req = urllib.request.Request(self.base + path, method=method, headers=headers,
+                                     data=json.dumps(body).encode() if body is not None else None)
+        with urllib.request.urlopen(req, context=self.ctx, timeout=60) as resp:
+            return json.loads(resp.read().decode() or "{}") if not path.endswith("raw=true") else {"raw": resp.read().decode()}
+
+    def login(self) -> None:
+        self.jwt = self._call("POST", "/security/user/authenticate?raw=true", auth_basic=True)["raw"].strip()
+
+    def fired_rule(self, log_line: str) -> dict | None:
+        body = {"event": log_line, "log_format": "eventchannel", "location": "EventChannel"}
+        if self.token:
+            body["token"] = self.token
+        data = self._call("PUT", "/logtest", body).get("data", {})
+        self.token = data.get("token", self.token)
+        rule = (data.get("output") or {}).get("rule")
+        return {"id": int(rule["id"]), "level": int(rule.get("level", 0))} if rule else None
+
+
+def wait_for_api(client: LogtestClient, seconds: int = 240) -> None:
+    deadline = time.time() + seconds
+    while time.time() < deadline:
+        try:
+            client.login()
+            return
+        except (urllib.error.URLError, OSError, KeyError, ValueError):
+            time.sleep(5)
+    raise GateError("Wazuh API did not come back after restart")
+
+
+def load_jsonl(path: Path) -> list[dict]:
+    if not path.exists():
+        return []
+    return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+
+
+def replay_vectors(workdir: Path) -> dict:
+    client = LogtestClient()
+    wait_for_api(client)
+    attack, benign = load_jsonl(workdir / "testvectors.jsonl"), load_jsonl(workdir / "benign.jsonl")
+    ours = lambda r: bool(r) and ID_MIN <= r["id"] <= ID_MAX  # noqa: E731
+    hit = exact = 0
+    missed: list[int] = []
+    for v in attack:
+        fired = client.fired_rule(v["log"])
+        if ours(fired):
+            hit += 1
+            exact += fired["id"] == v["rule_id"]
+        else:
+            missed.append(v["rule_id"])
+    false_pos = []
+    for b in benign:
+        fired = client.fired_rule(b["log"])
+        if ours(fired):
+            false_pos.append({"name": b.get("name"), "fired": fired["id"]})
+    result = {"attack_vectors": len(attack), "attack_fired": hit, "attack_exact": exact,
+              "attack_missed_sample": missed[:20], "benign_vectors": len(benign), "benign_false_positives": false_pos}
+    if false_pos:
+        raise GateError(f"benign events triggered Sigma rules: {false_pos}")
+    if attack and hit / len(attack) < MIN_PASS_RATIO:
+        raise GateError(f"only {hit}/{len(attack)} attack vectors fired a Sigma rule (< {MIN_PASS_RATIO:.0%})")
+    return result
+
+
+# ---------------------------------------------------------------- commands
+def cmd_deploy(data: bytes) -> None:
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    (STATE_DIR / "backups").mkdir(exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=STATE_DIR) as tmp:
+        work = Path(tmp)
+        manifest = read_bundle(data, work)
+        log("bundle", git_sha=manifest.get("git_sha"), files=len(manifest["files"]))
+        log("static-check", rules=check_rule_xml(work))
+        backup = backup_current()
+        log("backup", path=str(backup), files=len(list(backup.glob("*.xml"))))
+        try:
+            install_files(work)
+            syntax_check()
+            log("syntax-check", ok=True)
+            restart_manager()
+            log("restart", ok=True)
+            result = replay_vectors(work)
+            log("logtest", **result)
+        except Exception as exc:
+            log("failure", error=str(exc), action="rollback")
+            restore(backup)
+            try:
+                syntax_check()
+                restart_manager()
+                log("rollback", ok=True)
+            except GateError as exc2:
+                log("rollback", ok=False, error=str(exc2))
+            raise GateError(f"deployment rolled back: {exc}") from exc
+        shutil.copy2(work / "manifest.json", STATE_DIR / "current-manifest.json")
+        log("done", git_sha=manifest.get("git_sha"))
+
+
+def cmd_rollback() -> None:
+    backups = sorted(p for p in (STATE_DIR / "backups").glob("*") if p.is_dir())
+    if not backups:
+        raise GateError("no backup available")
+    restore(backups[-1])
+    syntax_check()
+    restart_manager()
+    log("rollback", ok=True, restored=str(backups[-1]))
+
+
+def cmd_status() -> None:
+    manifest = STATE_DIR / "current-manifest.json"
+    info = json.loads(manifest.read_text()) if manifest.exists() else {}
+    log("status", git_sha=info.get("git_sha"), created=info.get("created"),
+        installed=[p.name for p in installed_files()],
+        backups=len(list((STATE_DIR / "backups").glob("*"))) if (STATE_DIR / "backups").exists() else 0)
+
+
+def main() -> int:
+    raw = sys.stdin.buffer.read(MAX_BUNDLE + 1024)
+    command, _, payload = raw.partition(b"\n")
+    command = command.decode(errors="replace").strip()
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    with open(STATE_DIR / "lock", "w") as lock:
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            log("error", error="another deployment is running")
+            return 2
+        try:
+            if command == "deploy":
+                cmd_deploy(payload)
+            elif command == "rollback":
+                cmd_rollback()
+            elif command == "status":
+                cmd_status()
+            else:
+                raise GateError(f"unknown command {command!r}")
+        except GateError as exc:
+            log("error", error=str(exc))
+            return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

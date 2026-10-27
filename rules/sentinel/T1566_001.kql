@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ParentProcessName in ("*\outlook.exe", "*\winword.exe", "*\excel.exe", "*\powerpnt.exe", "*\mspub.exe", "*\visio.exe")) and ((FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\scrcons.exe", "*\hh.exe")) and (ProcessCommandLine in ("*\AppData\Local\Temp\*", "*\AppData\Local\Microsoft\Windows\INetCache\*", "*\Downloads\*", "*\Users\Public\*", "*C:\ProgramData\*"))) and (not (((FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe", "*\AcroRd32.exe")) and ParentProcessCommandLine contains "\Common Files\Microsoft Shared\ClickToRun\") or (FolderPath in ("*\splwow64.exe", "*\werfault.exe"))))

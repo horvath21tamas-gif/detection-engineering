@@ -61,7 +61,7 @@ detection:
     ParentImage|endswith:
       - '\services.exe'
       - '\svchost.exe'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: (selection_automation_flags or selection_sensitive_files) and not filter_browser_subprocesses and not filter_dev_context and not filter_windows_internal
 falsepositives:

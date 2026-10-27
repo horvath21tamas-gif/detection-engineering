@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath endswith "\pcalua.exe" and ProcessCommandLine contains " -a " and (ProcessCommandLine in ("*.exe*", "*.ps1*", "*.bat*", "*.vbs*", "*.dll*"))) or (FolderPath endswith "\forfiles.exe" and (ProcessCommandLine in ("*cmd*", "*powershell*", "*pwsh*", "*regsvr32*", "*mshta*", "*bitsadmin*", "*wscript*", "*cscript*"))) or (FolderPath endswith "\conhost.exe" and (ProcessCommandLine in ("* -- *", "* -e *")))) and (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\powerpnt.exe", "*\chrome.exe", "*\msedge.exe", "*\w3wp.exe", "*\sqlservr.exe", "*\php-cgi.exe")) and (not (User startswith "NT AUTHORITY\" and (ParentProcessName in ("*\services.exe", "*\msiexec.exe", "*\TiWorker.exe", "*\explorer.exe")) and (ProcessCommandLine in ("*\Windows\SoftwareDistribution\*", "*Program Files*")) and FolderPath contains "\Windows\System32\"))

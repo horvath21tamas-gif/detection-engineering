@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath in ("*\curl.exe", "*\powershell.exe", "*\pwsh.exe", "*\certutil.exe", "*\bitsadmin.exe")) and (ProcessCommandLine in ("*pastebin.com/api/api_post.php*", "*api.pastebin.com*", "*ghostbin.co/paste*", "*hastebin.com/documents*", "*controlc.com/index.php*", "*rentry.co/api*"))) and ((ProcessCommandLine in ("*Get-Clipboard*", "*pbpaste*", "*api_dev_key*", "*api_paste_code*", "* -d *", "* --data*", "*Invoke-RestMethod*")) or ((FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*")) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\rundll32.exe", "*\explorer.exe")))) and (not (FolderPath contains "\Program Files\" or (ProcessCommandLine in ("* --version*", "* --help*")) or username =~ "NT AUTHORITY\SYSTEM" or ParentProcessName endswith "\services.exe"))

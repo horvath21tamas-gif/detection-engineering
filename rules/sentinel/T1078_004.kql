@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ['properties.status.errorCode'] =~ 0 and (((['properties.userPrincipalName'] in ("*admin*", "*sync_*", "*global*")) and ['properties.authenticationRequirement'] =~ "singleFactorAuthentication") or (['properties.userAgent'] in ("*python-requests*", "*curl*", "*Postman*", "*PowerShell*"))) and (not ((['properties.ipAddress'] =~ "1.2.3.4" and ['properties.location.city'] =~ "Budapest") or ['properties.authenticationProtocol'] =~ "servicePrincipal"))

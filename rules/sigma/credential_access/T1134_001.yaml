@@ -21,16 +21,16 @@ logsource:
 
 detection:
     selection_target:
-        Targetprocessname: '(lsaccess\.exe|lsass\.exe)$'
+        TargetImage: '(lsaccess\.exe|lsass\.exe)$'
 
     selection_access_mask:
         GrantedAccess: '(0x1438|0x143a|0x1038)'
 
     selection_source:
-        Sourceprocessname: '(\\Temp\\|\\Users\\Public\\|\\AppData\\|cmd\.exe|powershell\.exe|wscript\.exe|cscript\.exe|rundll32\.exe)$'
+        SourceImage: '(\\Temp\\|\\Users\\Public\\|\\AppData\\|cmd\.exe|powershell\.exe|wscript\.exe|cscript\.exe|rundll32\.exe)$'
 
     filter_trusted_apps:
-        Sourceprocessname: '(MsMpEng\.exe|Cyserver\.exe|wininit\.exe|services\.exe|csrss\.exe|GoogleUpdate\.exe)$'
+        SourceImage: '(MsMpEng\.exe|Cyserver\.exe|wininit\.exe|services\.exe|csrss\.exe|GoogleUpdate\.exe)$'
         SourceUserName: 'NT AUTHORITY\\SYSTEM'
 
     filter_callstack:

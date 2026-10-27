@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\pscp.exe", "*\psftp.exe", "*\scp.exe", "*\sftp.exe", "*\rclone.exe", "*\winscp.com", "*\winscp.exe")) and (ProcessCommandLine in ("*@*", "*sftp://*", "*scp://*", "*://*", "*:22*", "*:2222*")) and ((ProcessCommandLine in ("* -pw *", "* -i *", "* -batch*", "* -hostkey *", "* -P *", "* -r *", "* copy *", "* sync *", "* move *", "* mirror*", "* /command *", "* /script=*")) or (FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Public\*")) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\wscript.exe", "*\cscript.exe", "*\powershell.exe", "*\cmd.exe"))) and (not ((FolderPath in ("*\Program Files\*", "*\Program Files (x86)\*")) or (ProcessCommandLine in ("*127.0.0.1*", "*localhost*", "*internal-sftp*")) or username =~ "NT AUTHORITY\SYSTEM" or ParentProcessName endswith "\services.exe"))

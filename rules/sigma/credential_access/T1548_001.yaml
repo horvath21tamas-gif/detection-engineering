@@ -54,7 +54,7 @@ detection:
             - '/rpm'
             - '/ansible'
             - '/puppet'
-        - username: 'root'
+        - User: 'root'
 
     condition: ((selection_chmod_suid_sgid and (selection_suspicious_directories or selection_shell_parents)) or selection_find_recon) and not filters_trusted_processes
 level: high

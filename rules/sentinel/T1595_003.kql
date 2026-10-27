@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (SrcIp in ("1.*", "2.*", "3.*", "4.*", "5.*", "6.*", "7.*", "8.*", "9.*")) and (UriStem in ("*/login*", "*/signin*", "*/auth*", "*/admin*", "*/administrator*", "*/wp-login*", "*/wp-admin*", "*/account*", "*/user*")) and (UriQuery in ("*user=*", "*username=*", "*login=*", "*email=*", "*account=*")) and (Status in (401, 403, 404)) and (UserAgent in ("*python*", "*curl*", "*wget*", "*httpclient*", "*go-http-client*", "*libwww*", "*scrapy*")) and (not ((UserAgent in ("*Mozilla*", "*Chrome*", "*Safari*", "*Firefox*", "*Edge*")) or (UserAgent in ("*nessus*", "*qualys*", "*openvas*", "*acunetix*", "*nikto*", "*nuclei*", "*zap*", "*burp*")) or (UriStem in ("*.css", "*.js", "*.png", "*.jpg", "*.ico", "*.svg", "*.woff", "*.json"))))

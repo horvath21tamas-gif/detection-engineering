@@ -1,1 +1,0 @@
-operationName="Add user" result="success" initiatedBy_user_userPrincipalName="*@*" ipAddress="unusual_ip" OR userAgent IN ("*python-requests*", "*curl*", "*Postman*", "*Kali*") NOT (initiatedBy_app_displayName IN ("Azure AD Connect", "Workday to Azure AD", "Okta Provisioning", "MS-PIM"))

@@ -105,6 +105,15 @@ def generate_matrix_svg(techniques_found):
     with open('mitre_matrix.svg', 'w', encoding='utf-8') as f:
         f.write(svg)
 
+def wazuh_converted():
+    """Sigma rules compiled to Wazuh (from `dectools-wazuh build`), 0 if not built."""
+    try:
+        with open('build/wazuh/report.json', 'r', encoding='utf-8') as f:
+            return json.load(f)['summary']['converted']
+    except (OSError, KeyError, ValueError):
+        return 0
+
+
 def update_all():
     # ÚJ: sentinel_count fogadása (se_count)
     techniques, rule_mapping, rules_count, ls_stats, splunk_count, qradar_count, nw_count, el_count, se_count = get_rule_data()
@@ -142,6 +151,9 @@ def update_all():
     siem_table += "| :--- | :---: | :---: |\n"
     siem_table += f"| Sigma (Forrás) | {rules_count} | 100% |\n"
     siem_table += f"| Splunk (SPL) | {splunk_count} | {splunk_pct}% |\n"
+    wazuh_count = wazuh_converted()
+    wazuh_pct = round((wazuh_count / rules_count * 100), 1) if rules_count > 0 else 0
+    siem_table += f"| Wazuh (XML) | {wazuh_count} | {wazuh_pct}% |\n"
     siem_table += f"| Microsoft Sentinel (KQL) | {se_count} | {se_pct}% |\n" # ÚJ sor
     siem_table += f"| QRadar (AQL) | {qradar_count} | {qradar_pct}% |\n"
     siem_table += f"| Elastic (KQL/EQL) | {el_count} | {el_pct}% |\n"
@@ -165,7 +177,7 @@ def update_all():
     for source, count in sorted(ls_stats.items(), key=lambda item: item[1], reverse=True):
         ls_table += f"| {source.capitalize()} | {count} |\n"
 
-    # 4. README.md
+    # 4. DASHBOARD.md
     raw_json_url = f"https://raw.githubusercontent.com/{USER}/{REPO}/{BRANCH}/attack_navigator_layer.json"
     navigator_link = f"https://mitre-attack.github.io/attack-navigator/#layerURL={raw_json_url}"
 
@@ -189,7 +201,7 @@ def update_all():
 *Ez a dokumentum automatikusan frissül minden módosítás után.*
 *Legutóbbi frissítés: {current_time} (UTC)*
 """
-    with open('README.md', 'w', encoding='utf-8') as f:
+    with open('DASHBOARD.md', 'w', encoding='utf-8') as f:
         f.write(readme_content)
 
 if __name__ == "__main__":

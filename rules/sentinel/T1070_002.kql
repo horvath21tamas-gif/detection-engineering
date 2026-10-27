@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath endswith "/journalctl" and (ProcessCommandLine in ("*--vacuum-time*", "*--vacuum-size*", "*--rotate*", "*--flush*"))) or ((FolderPath in ("*/truncate", "*/shred", "*/tee")) and (ProcessCommandLine in ("*auth.log*", "*secure*", "*syslog*", "*wtmp*", "*lastlog*")))) and ((ParentProcessName in ("*/apache2", "*/nginx", "*/httpd", "*/php-fpm", "*/python*", "*/perl", "*/node")) or (not ((ParentProcessName in ("*/logrotate", "*/systemd")) or (ProcessCommandLine in ("*logrotate.conf*", "*/var/lib/docker/containers*")) or (username =~ "root" and ParentProcessName endswith "/ansible"))))

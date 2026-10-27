@@ -51,7 +51,7 @@ detection:
         - '\Sysmon.exe'
     - CallTrace|contains:
         - 'unknown'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
 
   condition: (selection_mem_access or selection_remote_thread) and selection_context and not filter_legit_tools
 

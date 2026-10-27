@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath endswith "\rundll32.exe" and (ProcessCommandLine in ("*comsvcs.dll, #24*", "*comsvcs.dll,#24*", "*MiniDump*"))) or ((FolderPath in ("*\nanodump.exe", "*\handle_dump.exe", "*\mirror.exe")) and (ProcessCommandLine in ("* -ma *", "*lsass*"))) or (ProcessCommandLine in ("*sekurlsa*", "*logonpasswords*", "*lsadump*", "*rpc::*", "*creds::*"))) and (ProcessCommandLine in ("*.dmp*", "*.bin*", "*.kirbi*", "*\Windows\Temp\*", "*\Users\Public\*", "*\AppData\Local\Temp\*")) and (not (ParentProcessName endswith "\WerFault.exe" and (FolderPath in ("*\Program Files\*", "*\Windows\System32\taskmgr.exe*")) and username =~ "NT AUTHORITY\SYSTEM"))

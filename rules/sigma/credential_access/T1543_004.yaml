@@ -44,7 +44,7 @@ detection:
             - '/softwareupdated'         
             - '/jamf'                    
             - '/kandji-agent'            
-        username: 'root'
+        User: 'root'
 
     filter_signed_binaries:
         - TargetCodeSignature|contains: 'Developer ID Application: Google LLC'

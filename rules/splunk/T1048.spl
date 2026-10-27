@@ -1,4 +1,0 @@
-
-| rex field=CommandLine "(?<CommandLineMatch>(?i).* -l ([5-9][0-9]{2,}|[1-9][0-9]{3,}).*)"
-| eval CommandLineCondition=if(isnotnull(CommandLineMatch), "true", "false")
-| search (Image IN ("*\\plink.exe", "*\\pscp.exe", "*\\ncat.exe", "*\\nc.exe", "*\\socat.exe", "*\\iodine.exe", "*\\ssh.exe", "*\\curl.exe", "*\\wget.exe") CommandLine IN ("* -R *", "* -L *", "* -D *", "* -X *", "* -N *", "* -ssh*", "* -proxy*", "* -listen*", "* -connect*")) OR CommandLineCondition="true" Image IN ("*\\Users\\*", "*\\AppData\\*", "*\\Temp\\*", "*\\Public\\*", "*\\PerfLogs\\*") IntegrityLevel="Medium" NOT (Image IN ("*\\Program Files\\*", "*\\Program Files (x86)\\*") OR CommandLine IN ("*127.0.0.1*", "*localhost*", "*intranet*") OR username="NT AUTHORITY\\SYSTEM" OR ParentImage IN ("*\\services.exe", "*\\svchost.exe"))

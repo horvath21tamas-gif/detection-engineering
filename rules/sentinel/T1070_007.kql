@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((ProcessCommandLine in ("*\Software\Microsoft\Terminal Server Client\Default*", "*\Software\Microsoft\Terminal Server Client\Servers*", "*MRU0*")) or ((FolderPath in ("*\net.exe", "*\net1.exe")) and (ProcessCommandLine in ("*", "* /y*"))) or (ProcessCommandLine contains "ipconfig /flushdns" and (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\chrome.exe", "*\powershell.exe", "*\mshta.exe")))) and (not ((username =~ "NT AUTHORITY\SYSTEM" and ParentProcessName endswith "\services.exe") or ParentProcessName endswith "\msiexec.exe" or (ProcessCommandLine in ("*AppData\Local\Temp\SDI*", "*SystemReset.exe*"))))

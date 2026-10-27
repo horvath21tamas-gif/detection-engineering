@@ -1,2 +1,0 @@
-param regex '^[D-Z]:\\\\.*' AND (((process = '*\\powershell.exe*' OR process = '*\\pwsh.exe*' OR process = '*\\cmd.exe*' OR process = '*\\wscript.exe*' OR process = '*\\cscript.exe*' OR process = '*\\mshta.exe*' OR process = '*\\rundll32.exe*' OR process = '*\\regsvr32.exe*' OR process = '*\\scrcons.exe*'))) AND ((ParentImage = '*\\explorer.exe*'))&& (NOT (((((param = '*setup.exe*' OR param = '*install.exe*' OR param = '*autorun.inf*'))) OR ((process = '*C:\\Windows\\*'))|| ((param = '*\\YourCompanyShare\\*'))))
-)

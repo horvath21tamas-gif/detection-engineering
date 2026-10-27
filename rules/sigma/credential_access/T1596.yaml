@@ -42,7 +42,7 @@ detection:
         - 'api.binaryedge.io'
 
   filter_security_products:
-    username: 
+    User: 
       - 'NT AUTHORITY\SYSTEM'
       - 'NT AUTHORITY\NETWORK SERVICE'
     Image|contains:

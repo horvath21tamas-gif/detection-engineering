@@ -78,7 +78,7 @@ detection:
     CommandLine|contains:
       - 'C:\Windows\System32\'
       - 'C:\Windows\SysWOW64\'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: >
     selection_itp

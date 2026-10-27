@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath in ("*.pdf.exe", "*.doc.exe", "*.docx.exe", "*.xls.exe", "*.xlsx.exe", "*.ppt.exe", "*.pptx.exe", "*.txt.exe", "*.jpg.exe", "*.jpeg.exe", "*.png.exe", "*.zip.exe", "*.rar.exe")) or (ProcessCommandLine in ("*‮*", "*\u202e*", "*%E2%80%AE*"))) and ((FolderPath in ("*\Users\*", "*\Downloads\*", "*\Desktop\*", "*\AppData\Local\Temp\*", "*\AppData\Roaming\*", "*\Users\Public\*")) or (ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe", "*\outlook.exe", "*\thunderbird.exe", "*\winword.exe", "*\excel.exe", "*\powerpnt.exe", "*\acrord32.exe", "*\winrar.exe", "*\7zFM.exe", "*\explorer.exe"))) and (not ((FolderPath in ("*\node_modules\*", "*\bin\Debug\*", "*\bin\Release\*", "*\AppData\Local\Programs\*")) or (username in ("NT AUTHORITY\SYSTEM", "NT AUTHORITY\LOCAL SERVICE", "NT AUTHORITY\NETWORK SERVICE")) or (ParentProcessName in ("*\msiexec.exe", "*\trustedinstaller.exe"))))

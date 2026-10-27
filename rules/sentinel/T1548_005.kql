@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((TargetFilename in ("*/.local/share/applications/*", "*/.config/autostart/*", "*/Desktop/*")) and TargetFilename endswith ".desktop") and (Details in ("*Exec=sudo*", "*Exec=pkexec*", "*Exec=gksudo*", "*Exec=/tmp/*", "*Exec=/dev/shm/*")) and (not ((FolderPath in ("*/apt", "*/dpkg", "*/yum", "*/dnf", "*/rpm")) or username =~ "root"))) or (((TargetFilename in ("*/.local/share/applications/*", "*/.config/autostart/*", "*/Desktop/*")) and TargetFilename endswith ".desktop") and ((FolderPath in ("*/wget", "*/curl", "*/python", "*/perl", "*/bash")) and (ParentProcessName in ("*/apache*", "*/nginx*", "*/node*", "*/php*"))))

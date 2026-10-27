@@ -53,7 +53,7 @@ detection:
     - ParentImage|contains:
         - '\Program Files\'         
         - '\Windows\System32\'      
-    - username: 'NT AUTHORITY\SYSTEM'  
+    - User: 'NT AUTHORITY\SYSTEM'  
 
   condition: |
     (selection_framework_args or selection_combolist_files) and 

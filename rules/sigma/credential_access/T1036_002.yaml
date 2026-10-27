@@ -46,7 +46,7 @@ detection:
       - '\7zFM.exe'
 
   filter_legit_system:
-    - username:
+    - User:
         - 'NT AUTHORITY\SYSTEM'
         - 'NT AUTHORITY\LOCAL SERVICE'
         - 'NT AUTHORITY\NETWORK SERVICE'

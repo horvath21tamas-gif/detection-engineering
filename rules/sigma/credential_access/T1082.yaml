@@ -41,7 +41,7 @@ detection:
       - 'findstr'
 
   filter_legit_system:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     ParentImage|endswith:
       - '\CcmExec.exe'
       - '\svchost.exe'

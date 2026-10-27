@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (email_content_type contains "text/html" and url matches regex ".+") and ((url in ("*bit.ly/*", "*tinyurl.com/*", "*t.co/*", "*rebrand.ly/*", "*is.gd/*", "*cutt.ly/*")) or (url_domain_age < 30 and url_reputation =~ "low")) and (sender_display_name in ("*Microsoft*", "*Office 365*", "*OneDrive*", "*DocuSign*", "*PayPal*", "*Bank*")) and (not (sender_domain in ("*microsoft.com*", "*office.com*", "*docusign.com*", "*paypal.com*"))) and (not (url in ("*microsoft.com*", "*google.com*", "*amazon.com*", "*github.com*", "*linkedin.com*")))

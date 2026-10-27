@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (processname =~ "(w32tm\.exe|tzutil\.exe|net\.exe|net1\.exe)$" and processcommandline =~ "(Get-Date|Get-TimeZone|\[System\.DateTime\]::Now)") and (processcommandline =~ "( /query| /g|time \)" or (Parentprocessname =~ "(winword\.exe|excel\.exe|outlook\.exe|httpd\.exe|wsmprovhost\.exe)$" and IntegrityLevel =~ "Medium") or processcommandline match "(findstr|select-string| > |\$time\s*=)") and (not (username =~ "NT AUTHORITY\SYSTEM" and Parentprocessname =~ "(svchost\.exe|CcmExec\.exe|msiexec\.exe|explorer\.exe)$" and processcommandline =~ "(Program Files|\AppData\Local\Google\Chrome)"))

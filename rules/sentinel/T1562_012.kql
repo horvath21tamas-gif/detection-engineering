@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((eventSource =~ "guardduty.amazonaws.com" and (eventName in ("DeleteDetector", "UpdateDetector", "DeleteMembers", "DisassociateMembers", "DeleteThreatIntelSet", "DeleteIPSet"))) or (eventSource =~ "securityhub.amazonaws.com" and (eventName in ("DisableSecurityHub", "BatchDisableStandards", "CreateFilter", "UpdateFilter", "BatchUpdateFindings"))) or (eventSource =~ "inspector2.amazonaws.com" and (eventName in ("UpdateConfiguration", "Disable")))) and (['userIdentity.type'] =~ "Root" or ['userIdentity.type'] =~ "IAMUser" or (userAgent in ("*curl*", "*python*", "*postman*", "*httpclient*", "*boto3*", "*aws-cli*"))) and (not ((['userIdentity.arn'] in ("*Security-Infrastructure-Terraform*", "*AWSServiceRoleForGuardDuty*", "*AWSServiceRoleForSecurityHub*", "*OrganizationAccountAccessRole*")) or (sourceIPAddress in ("10.*", "192.168.*", "172.*", "127.*"))))

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\7z.exe", "*\7za.exe", "*\rar.exe", "*\WinRAR.exe", "*\zip.exe", "*\compact.exe", "*\makecab.exe")) and (ProcessCommandLine in ("* -p*", "* -hp*", "* -mhe=on*", "* -ta*", "* -r *")) and (ProcessCommandLine in ("*\AppData\Local\Temp\*", "*\Users\Public\*", "*\Windows\Temp\*", "*\PerfLogs\*", "*\RECYCLER\*")) and (not ((FolderPath in ("*\Microsoft\OneDrive\*", "*\Dropbox\*", "*\Google\Drive\*", "*\Steam\*")) and (ProcessCommandLine in ("*Update*", "*Install*"))))

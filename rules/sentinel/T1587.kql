@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((ProcessCommandLine in ("*msfvenom -p *", "*sliver-gen*", "*cobaltstrike.jar*", "* -payload-type *", "* --obfuscate*")) or ((FolderPath in ("*\csc.exe", "*\vbc.exe", "*\jsc.exe")) and (ProcessCommandLine in ("*\AppData\Local\Temp\*", "*\Users\Public\*"))) or ((FolderPath in ("*\upx.exe", "*\pyarmor.exe", "*\confuser.exe")) or (ProcessCommandLine in ("* --compress-icons*", "* --all-methods*")))) and (not ((User in ("*svc_jenkins*", "*svc_gitlab_runner*", "*adm_devops_build*")) or (FolderPath in ("*\Program Files\Microsoft Visual Studio\*", "*\MsBuild\*")))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not (selection_c2_build or selection_packers)")) and (not ParentProcessName endswith "\mscorsvw.exe")

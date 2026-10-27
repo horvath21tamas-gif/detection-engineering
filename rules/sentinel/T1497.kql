@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\Users\*", "*\AppData\Local\Temp\*", "*\Downloads\*", "*\Public\*", "*\PerfLogs\*")) and (((ProcessCommandLine in ("*Win32_BIOS*", "*Win32_ComputerSystem*", "*Win32_BaseBoard*", "*Win32_DiskDrive*", "*Win32_VideoController*")) and (ProcessCommandLine in ("*VMware*", "*VBOX*", "*VirtualBox*", "*QEMU*", "*Hyper-V*", "*Parallels*"))) or (ProcessCommandLine in ("*timeout /t*", "*ping 127.0.0.1 -n*", "*choice /c y /n /t*"))) and (not ((FolderPath in ("C:\Windows\System32\wbem\WmiPrvSE.exe*", "C:\Program Files\Microsoft Configuration Manager\*", "C:\Program Files (x86)\*")) and ParentProcessName endswith "\svchost.exe"))

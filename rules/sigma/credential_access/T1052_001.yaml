@@ -59,7 +59,7 @@ detection:
   filter_legit:
     - ParentImage|endswith: '\explorer.exe'
     - Image|contains: '\Program Files\'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - CommandLine|contains: 'SoftwareDistribution'
 
   condition: selection_tools and selection_usb_target and (selection_flags or selection_parent) and not filter_legit

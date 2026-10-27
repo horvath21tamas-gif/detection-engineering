@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\trufflehog.exe", "*\gitleaks.exe", "*\git-robber.exe", "*\shhgit.exe", "*\ripsecrets.exe")) or (ProcessCommandLine in ("*github-dorks*", "*git-dump*", "*--scan-all*"))) or ((FolderPath in ("*\curl.exe", "*\wget.exe", "*\python.exe", "*\pwsh.exe")) or (ProcessCommandLine contains "api.github.com" and ProcessCommandLine contains "/search/") or (ProcessCommandLine in ("*.env*", "*id_rsa*", "*aws_access_key*", "*connectionstring*")))) and (not (ProcessCommandLine in ("*git clone*", "*git pull*", "*git fetch*", "*git push*"))) and (not (ParentProcessName in ("*\code.exe", "*\devenv.exe", "*\idea64.exe"))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_specialized_tools")) and (not (User in ("*svc_jenkins*", "*svc_devsecops*", "*github-actions*")))

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (EventID =~ 4624 and (LogonType in (2, 10))) and (not (TargetUserName endswith "$" or (TargetUserName in ("SYSTEM", "LOCAL SERVICE", "NETWORK SERVICE")) or (IpAddress in ("127.0.0.1", "::1")) or (WorkstationName in ("JUMP-*", "BASTION-*", "MGMT-*")) or (TargetUserName in ("admin*", "svc_*"))))

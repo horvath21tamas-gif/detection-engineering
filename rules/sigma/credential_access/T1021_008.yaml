@@ -35,7 +35,7 @@ detection:
       - '/perl'
       - '/ruby'
       - '/curl'
-    username: 'root'
+    User: 'root'
 
   filter_mdm_orchestration:
     - ParentImage|endswith:

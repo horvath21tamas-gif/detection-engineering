@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (TargetObject in ("*Environment\Path*", "*Software\Microsoft\Command Processor\Autorun*", "*Software\Microsoft\Windows\CurrentVersion\App Paths*")) and (Details startswith "C:\Users\" or Details startswith "C:\ProgramData\" or (Details in ("*powershell*", "*cmd.exe /c*", "*iex*", "*WScript.Shell*"))) and (not (((FolderPath in ("*\msiexec.exe", "*\trustedinstaller.exe", "*\TiWorker.exe")) and username =~ "NT AUTHORITY\SYSTEM") or (FolderPath in ("*\AppData\Local\Programs\Python\*", "*\AppData\Local\Programs\Microsoft VS Code\*", "*\node.exe*", "*\chocolatey\choco.exe*"))))

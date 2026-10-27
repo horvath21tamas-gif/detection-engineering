@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ParentProcessName in ("*\3CXDesktopApp.exe", "*\SolarWinds.BusinessLayerHost.exe", "*\sqlservr.exe", "*\vboxmsi.exe", "*\anydesk.exe", "*\teamviewer.exe", "*\slack.exe", "*\zoom.exe")) and ((FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\whoami.exe", "*\net.exe", "*\ipconfig.exe", "*\nltest.exe", "*\nslookup.exe")) or (ProcessCommandLine in ("* -enc *", "* -w hidden *", "*Invoke-WebRequest*", "*DownloadString*", "*http*", "*/domain*"))) and (not (FolderPath contains "\Program Files\" or ProcessCommandLine contains "setup" or ProcessCommandLine contains "install"))

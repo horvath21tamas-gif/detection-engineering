@@ -64,7 +64,7 @@ detection:
         - 'site_update'
     - ParentImage|endswith:
         - '\msiexec.exe'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
 
   condition: shell_tools and file_mod_commands and sensitive_web_paths 
              and suspicious_context and not legit_filters

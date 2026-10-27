@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*.exe *", "*.com *", "*.scr *", "*.pif *")) and (ProcessCommandLine in ("*.exe  *", "*.exe \"*", "*.exe /*"))) or (FolderPath in ("*Windows \*", "*System32 \*", "*Program Files \*", "*AppData \*"))) and (FolderPath in ("*\Users\*", "*\Public\*", "*\Temp\*", "*\Downloads\*")) and (not ((FolderPath in ("C:\Windows\System32\*", "C:\Windows\WinSxS\*", "C:\Windows\SoftwareDistribution\*")) or (username in ("NT AUTHORITY\SYSTEM", "NT AUTHORITY\LOCAL SERVICE", "NT AUTHORITY\NETWORK SERVICE")) or (ParentProcessName in ("*\msiexec.exe", "*\trustedinstaller.exe"))))

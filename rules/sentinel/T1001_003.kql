@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((ProcessCommandLine in ("*.Headers.Add(*", "*WinHttp.WinHttpRequest*", "*msxml2.xmlhttp*", "*Net.Sockets.TcpClient*", "*Net.WebClient).Download*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\rundll32.exe", "*\mshta.exe"))) or ((ProcessCommandLine in ("*Mozilla/4.0*", "*iPhone*", "*Android*", "*Googlebot*", "*Baiduspider*", "*curl/*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\rundll32.exe", "*\mshta.exe")))) and (not ((FolderPath in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe")) and (ProcessCommandLine in ("*C:\Program Files\*", "*Microsoft\Azure*", "*Chocolatey*")) and username =~ "NT AUTHORITY\SYSTEM"))

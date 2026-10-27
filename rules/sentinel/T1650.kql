@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\aws.exe", "*\az.exe", "*\gcloud.exe")) or (ProcessCommandLine in ("* configure *", "* login *", "* account set *", "* iam create-user*", "* adsp *"))) or ((FolderPath in ("*\python.exe", "*\pwsh.exe", "*\node.exe")) or (ProcessCommandLine contains "boto3" and ProcessCommandLine contains ".credentials") or (ProcessCommandLine in ("*DefaultAzureCredential*", "*GoogleCredentials*")))) and (not ((User in ("*svc_jenkins*", "*svc_terraform*", "*ansible_worker*")) or (FolderPath in ("*\Terraform\*", "*\Jenkins\*")))) and (not (ParentProcessName in ("*\code.exe", "*\devenv.exe", "*\idea64.exe"))) and (not username =~ "NT AUTHORITY\SYSTEM")

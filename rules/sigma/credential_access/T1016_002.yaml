@@ -54,7 +54,7 @@ detection:
       - 'ConvertTo-Json'
 
   filter_legit_noise:
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - ParentImage|endswith:
         - '\svchost.exe'
         - '\msiexec.exe'

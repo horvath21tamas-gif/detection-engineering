@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\openssl.exe", "*\makecert.exe", "*\certutil.exe")) or (ProcessCommandLine in ("*1.3.6.1.5.5.7.3.3*", "* -eku *", "* -pe *", "* -cy authority*"))) or ((FolderPath in ("*\signtool.exe", "*\osslsigncode.exe")) or (ProcessCommandLine in ("* sign *", "* /f *", "* /p *")))) and (not ((User in ("*svc_jenkins*", "*svc_code_signer*", "*adm_build_master*")) or (FolderPath in ("*\Program Files (x86)\Windows Kits\*", "*\actions-runner\*")))) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_cert_gen")) and (not (ProcessCommandLine in ("*1.3.6.1.5.5.7.3.1*", "*1.3.6.1.5.5.7.3.2*")))

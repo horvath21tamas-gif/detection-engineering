@@ -47,7 +47,7 @@ detection:
       - '\explorer.exe'
     Image|contains:
       - '\Program Files\'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: >
     selection_tools and

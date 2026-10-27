@@ -42,7 +42,7 @@ detection:
       - '\services.exe'
       - '\msiexec.exe'
       - '\TrustedInstaller.exe'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   known_admin_tools_filter:
     Image|endswith:

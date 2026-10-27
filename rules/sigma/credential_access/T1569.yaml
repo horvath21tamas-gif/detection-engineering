@@ -55,7 +55,7 @@ detection:
             - '\msiexec.exe'
             - '\TrustedInstaller.exe'
             - '\CcmExec.exe'
-        - username: 'NT AUTHORITY\SYSTEM'
+        - User: 'NT AUTHORITY\SYSTEM'
           CommandLine|contains: 'C:\Windows\System32\'
 
     condition: selection_tools and selection_action and (selection_suspicious_paths or selection_shell_wrappers) and not filter_legit_installers

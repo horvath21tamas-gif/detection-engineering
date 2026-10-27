@@ -107,7 +107,7 @@ detection:
       - 'Medium'
 
   filter_trusted_management:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     ParentImage|startswith:
       - 'C:\Windows\System32\svchost.exe'
       - 'C:\Windows\CCM\CcmExec.exe'

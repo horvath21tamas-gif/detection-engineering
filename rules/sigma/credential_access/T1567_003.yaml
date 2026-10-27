@@ -53,7 +53,7 @@ detection:
         - '\Program Files\Blackmagic Design\'
     - CommandLine|contains:
         - ' --version'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
 
   condition: selection_tools and (selection_logic or selection_context) and not filter_legit_apps
 

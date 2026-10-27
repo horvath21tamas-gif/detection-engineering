@@ -52,7 +52,7 @@ detection:
       - 'Export-Csv'
 
   filter_legit_system:
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - ParentImage|endswith:
         - '\svchost.exe'
         - '\CcmExec.exe'

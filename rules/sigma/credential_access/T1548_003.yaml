@@ -42,7 +42,7 @@ detection:
             - '/puppet'
             - '/salt-minion'
             - '/chef-client'
-        - username: 'root'
+        - User: 'root'
 
     selection_untrusted_actor:
         ParentImage|endswith:

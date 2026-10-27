@@ -19,20 +19,20 @@ logsource:
 
 detection:
     selection_tools:
-        processcommandline: '(runas /token|make_token|steal_token|Invoke-TokenManipulation|CPAU\.exe|load_privilege)'
+        CommandLine: '(runas /token|make_token|steal_token|Invoke-TokenManipulation|CPAU\.exe|load_privilege)'
 
     selection_integrity_anomaly:
-        Parentprocessname: '(powershell\.exe|pwsh\.exe|cmd\.exe|cscript\.exe|wscript\.exe)$'
-        username: 'SYSTEM'
-        logonid: '0x3e7'
+        ParentImage: '(powershell\.exe|pwsh\.exe|cmd\.exe|cscript\.exe|wscript\.exe)$'
+        User: 'SYSTEM'
+        LogonId: '0x3e7'
 
     filter_trusted_system_procs:
-        - Parentprocessname: '(services\.exe|wininit\.exe|lsass\.exe|winlogon\.exe)$'
-        - processname: '(conhost\.exe|WerFault\.exe|WmiPrvSE\.exe)$'
+        - ParentImage: '(services\.exe|wininit\.exe|lsass\.exe|winlogon\.exe)$'
+        - Image: '(conhost\.exe|WerFault\.exe|WmiPrvSE\.exe)$'
         - ParentCommandLine|re: 'svchost\.exe -k'
 
     filter_security_agents:
-        processname: '(\\Program Files\\Windows Defender\\|\\Program Files\\CrowdStrike\\|\\SentinelOne\\)'
+        Image: '(\\Program Files\\Windows Defender\\|\\Program Files\\CrowdStrike\\|\\SentinelOne\\)'
 
     condition: (selection_tools or selection_integrity_anomaly) and not (filter_trusted_system_procs or filter_security_agents)
 

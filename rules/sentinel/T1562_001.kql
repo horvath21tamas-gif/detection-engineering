@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\powershell_ise.exe")) or (filename in ("PowerShell.EXE", "pwsh.dll", "powershell_ise.EXE"))) and (((ProcessCommandLine in ("*Set-MpPreference*", "*Add-MpPreference*")) and ((ProcessCommandLine in ("*DisableRealtimeMonitoring*", "*DisableBehaviorMonitoring*", "*DisableIOAVProtection*", "*ExclusionPath*", "*ExclusionExtension*", "*ExclusionProcess*", "*MAPSReporting*", "*SubmitSamplesConsent*")) or (ProcessCommandLine in ("*1*", "*$true*", "*NeverSend*")))) or (ProcessCommandLine in ("* -disablere*", "* -excl*"))) and (not ((ParentProcessName in ("*\CcmExec.exe", "*\Gpscript.exe")) and ProcessCommandLine contains "Specific_Safe_Admin_Script.ps1"))

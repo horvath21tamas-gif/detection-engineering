@@ -21,15 +21,15 @@ logsource:
 
 detection:
     selection_offensive_tools:
-        processcommandline: '(make_token|sekurlsa::pth|kerberos::pth|Invoke-Mimikatz|New-PassThroughToken|/netonly)'
+        CommandLine: '(make_token|sekurlsa::pth|kerberos::pth|Invoke-Mimikatz|New-PassThroughToken|/netonly)'
 
     selection_suspicious_origin:
-        Parentprocessname: '(powershell\.exe|pwsh\.exe|cmd\.exe|wscript\.exe|cscript\.exe|rundll32\.exe)$'
+        ParentImage: '(powershell\.exe|pwsh\.exe|cmd\.exe|wscript\.exe|cscript\.exe|rundll32\.exe)$'
 
     filter_trusted_management:
-        - Parentprocessname: '(\\Windows\\System32\\services\.exe|\\Windows\\System32\\msiexec\.exe|\\AzureAD\\)'
-        - processcommandline: '(Visual Studio|IntelliJ|git-remote-https)'
-        - username: 'NT AUTHORITY\\SYSTEM'
+        - ParentImage: '(\\Windows\\System32\\services\.exe|\\Windows\\System32\\msiexec\.exe|\\AzureAD\\)'
+        - CommandLine: '(Visual Studio|IntelliJ|git-remote-https)'
+        - User: 'NT AUTHORITY\\SYSTEM'
 
     selection_logon_type_9:
         LogonType: 9

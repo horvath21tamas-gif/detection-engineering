@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\certutil.exe", "*\certmgr.exe", "*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("*-addstore*", "*Import-Certificate*", "*-importCertificate*", "*Install-Certificate*")) and (ProcessCommandLine in ("* Root*", "* AuthRoot*", "* Disallowed*")) and (not (((ParentProcessName in ("*\msiexec.exe", "*\CcmExec.exe", "*\setup.exe")) and User contains "SYSTEM") or (FolderPath in ("*\SentinelOne\*", "*\CrowdStrike\*", "*\Cisco\AnyConnect\*"))))

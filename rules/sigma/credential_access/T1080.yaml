@@ -41,7 +41,7 @@ detection:
     IntegrityLevel: 'Medium'
 
   selection_masquerade:
-    filename: '.*\.(pdf|docx|xlsx|txt)\.(exe|vbs|ps1|lnk|bat)$'
+    TargetFilename: '.*\.(pdf|docx|xlsx|txt)\.(exe|vbs|ps1|lnk|bat)$'
 
   filter_legit_apps:
     Image|endswith:
@@ -51,7 +51,7 @@ detection:
     Image|contains:
       - 'C:\Program Files\Microsoft Office\'
       - 'C:\Windows\System32\msiexec.exe'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: selection_shares and selection_extensions and (selection_suspicious_procs or selection_masquerade) and not filter_legit_apps
 level: high

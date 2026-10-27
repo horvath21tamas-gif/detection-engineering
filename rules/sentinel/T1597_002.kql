@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\trufflehog.exe", "*\gitleaks.exe", "*\shhgit.exe", "*\git-secrets.exe", "*\detect-secrets.exe")) or (ProcessCommandLine in ("*trufflehog*", "*gitleaks*", "*scan --repo*"))) or ((FolderPath endswith "\git.exe" and (ProcessCommandLine in ("* log -G*", "* log -S*", "* rev-list --all*", "* log --pretty=format*", "* grep --cached*"))) and (ProcessCommandLine in ("*password=*", "*api_key*", "*client_secret*", "*private_key*", "*access_token*", "*jelszo*", "*titok*")))) and (not (ParentProcessName in ("*\code.exe", "*\idea64.exe", "*\visualstudio.exe", "*\eclipse.exe"))) and (not ((User in ("*svc_jenkins*", "*github_runner*", "*gitlab_runner*", "*azure_devops*")) and (ProcessCommandLine in ("*npm *", "*nuget *", "*dotnet *")))) and (not (ProcessCommandLine in ("*git pull*", "*git push*", "*git commit*", "*git clone*", "*git fetch*")))

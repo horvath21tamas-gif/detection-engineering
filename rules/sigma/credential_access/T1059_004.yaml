@@ -32,7 +32,7 @@ detection:
             - '/node'
             - '/python' 
             - '/java'
-        username:
+        User:
             - 'www-data'
             - 'apache'
             - 'nginx'
@@ -61,8 +61,8 @@ detection:
             - '/var/lib/apt/'
             - 'logrotate'
             - '/usr/bin/mandb'
-        - username: 'root'
-          Parentprocessname: '/usr/sbin/sshd' 
+        - User: 'root'
+          ParentImage: '/usr/sbin/sshd' 
 
     condition: selection_shells and (selection_web_rce or selection_attack_logic) and not filter_legit_automation
 level: critical

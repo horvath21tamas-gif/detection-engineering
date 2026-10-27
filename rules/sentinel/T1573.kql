@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ProcessCommandLine in ("*AesManaged*", "*RijndaelManaged*", "*CryptoStream*", "*CreateEncryptor*", "*ICryptoTransform*", "*CreateDecryptor*")) and (ProcessCommandLine in ("*Net.Sockets.TcpClient*", "*Net.Sockets.Socket*", "*IO.MemoryStream*", "*NetworkStream*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\rundll32.exe")) and (not ((ProcessCommandLine in ("*C:\Program Files\*", "*Microsoft\Azure*", "*HealthCheck*", "*SoftwareDistribution*")) or username =~ "NT AUTHORITY\SYSTEM" or (ParentProcessName in ("*\services.exe", "*\explorer.exe"))))

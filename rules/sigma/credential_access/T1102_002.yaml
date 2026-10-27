@@ -55,7 +55,7 @@ detection:
       - '\Program Files\'                   
     CommandLine|contains:
       - '127.0.0.1'                         
-    username: 'NT AUTHORITY\SYSTEM'        
+    User: 'NT AUTHORITY\SYSTEM'        
 
   condition: selection_api_actions and selection_context and selection_domains and not filter_legit_installations
 

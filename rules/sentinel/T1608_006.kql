@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath in ("*\xrumer.exe", "*\scrapebox.exe", "*\gsa_ser.exe", "*\senuke.exe")) or ((ProcessCommandLine in ("*wp-cli.phar post create*", "*wp post generate*", "*wp plugin install*", "*joomla-cli.php*")) or (ProcessCommandLine in ("*keyword-stuff*", "*spin-content*", "*word-ai*", "*--sitemap-gen*", "*cloaking-enable*")))) and (not (((UserName in ("*svc_marketing*", "*seo_lead*", "*content_bot*")) and (FolderPath in ("*\ScreamingFrogSEOSpider\*", "*\Sitebulb\*")) and (ParentProcessName in ("*\w3wp.exe", "*\httpd.exe", "*\nginx.exe"))) or (ParentProcessName in ("*\chrome.exe", "*\msedge.exe"))))

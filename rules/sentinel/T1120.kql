@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (processname =~ "(wmic\.exe|pnputil\.exe|driverquery\.exe|devcon\.exe)$" and processcommandline =~ "(Get-PnpDevice|Get-WmiObject|gwmi)") and (processcommandline =~ "(Win32_USBController|Win32_DiskDrive|Win32_NetworkAdapter|USBSTOR|/enum-devices|/deviceid)" or processcommandline =~ "(>\s|ConvertTo-Json|format-list)" or (Parentprocessname =~ "(cmd\.exe|powershell\.exe|wsmprovhost\.exe|httpd\.exe|winword\.exe)$" and IntegrityLevel =~ "Medium")) and (not (username =~ "NT AUTHORITY\SYSTEM" and Parentprocessname =~ "(svchost\.exe|msiexec\.exe)$" and ProcessCommandLine contains "Program Files"))

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*/sh", "*/bash", "*/zsh", "*/dash")) and (((ParentProcessName in ("*/httpd", "*/apache2", "*/nginx", "*/php-fpm", "*/node", "*/python", "*/java")) and (username in ("www-data", "apache", "nginx", "nobody"))) or ((ProcessCommandLine in ("*/dev/tcp/*", "*/dev/udp/*", "*>&*", "*0>&1*")) or (ProcessCommandLine contains "curl" and ProcessCommandLine contains "|" and ProcessCommandLine contains "sh") or (ProcessCommandLine contains "wget" and ProcessCommandLine contains "|" and ProcessCommandLine contains "bash"))) and (not ((ParentProcessName in ("*/systemd", "*/sbin/init")) or (ProcessCommandLine in ("*/var/lib/apt/*", "*logrotate*", "*/usr/bin/mandb*")) or (username =~ "root" and Parentprocessname =~ "/usr/sbin/sshd")))

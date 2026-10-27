@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\curl.exe", "*\wget.exe", "*\powershell.exe", "*\pwsh.exe", "*\bitsadmin.exe", "*\certutil.exe")) and ((ProcessCommandLine in ("* -F *", "* --data-binary*", "* -T *", "* --upload-file*", "*UploadFile(*", "*PutAsync(*", "*PostAsync(*", "*Invoke-WebRequest*", "*Invoke-RestMethod*")) or (ProcessCommandLine in ("* -k*", "* --insecure*", "* -SkipCertificateCheck*", "* -UseBasicParsing*"))) and ((FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Public\*")) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\wscript.exe", "*\cscript.exe", "*\explorer.exe"))) and (not ((FolderPath in ("*\Program Files\*", "*\Program Files (x86)\*")) or (ProcessCommandLine in ("*microsoft.com*", "*office.com*", "*windowsupdate.com*", "*127.0.0.1*", "*localhost*")) or username =~ "NT AUTHORITY\SYSTEM" or ParentProcessName endswith "\services.exe"))

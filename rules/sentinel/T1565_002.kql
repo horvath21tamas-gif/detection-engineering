@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\netsh.exe", "*\powershell.exe", "*\pwsh.exe", "*\reg.exe", "*\cmd.exe")) and ((ProcessCommandLine in ("*set dns*", "*set proxy*", "*winhttp set proxy*", "*AutoConfigURL*", "*ProxyServer*", "*ProxyEnable*", "*Internet Settings*")) or (ProcessCommandLine in ("*\etc\hosts*", "*System32\drivers\etc\hosts*", "* >> *", "*Set-Content*", "*Add-Content*"))) and (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\httpd.exe", "*\rundll32.exe", "*\explorer.exe")) and (not ((ParentProcessName in ("*\msiexec.exe", "*\CcmExec.exe")) or (ProcessCommandLine in ("*127.0.0.1*", "*localhost*")) or username =~ "NT AUTHORITY\SYSTEM"))

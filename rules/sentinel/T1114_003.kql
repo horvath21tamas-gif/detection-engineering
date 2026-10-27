@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ProcessCommandLine in ("*New-InboxRule*", "*Set-InboxRule*", "*New-TransportRule*", "*Set-Mailbox*")) and ((ProcessCommandLine in ("*-ForwardTo*", "*-ForwardAsAttachmentTo*", "*-RedirectTo*", "*-ForwardingSmtpAddress*")) and (ProcessCommandLine in ("*@gmail.com*", "*@outlook.com*", "*@protonmail.*", "*@tutanota.*", "*.ru*", "*.top*", "*.zip*"))) and ((ProcessCommandLine in ("*password*", "*invoice*", "*számla*", "*transfer*", "*bank*", "*confidential*")) or ((ParentProcessName in ("*\powershell.exe", "*\w3wp.exe", "*\cmd.exe")) and IntegrityLevel =~ "Medium")) and (not ((ProcessCommandLine in ("*@sajatdomain.hu*", "*HealthCheck*")) or username =~ "NT AUTHORITY\SYSTEM" or ProcessCommandLine contains "Standard_Admin_Script.ps1"))

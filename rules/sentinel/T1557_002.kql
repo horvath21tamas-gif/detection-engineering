@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath endswith "\reg.exe" and ProcessCommandLine contains "1") or (ProcessCommandLine in ("*arpspoof*", "*bettercap*", "*ettercap*", "*mitm6*", "*Inveigh*", "* -i *", "* -t *", "* -m arp*", "*.sniff*"))) and ((FolderPath in ("*\Users\*", "*\AppData\*", "*\Temp\*", "*\Downloads\*", "*\Public\*")) and (FolderPath in ("*\python.exe", "*\pythonw.exe", "*\powershell.exe", "*\pwsh.exe", "*\cmd.exe"))) and User startswith "NT AUTHORITY\" and (not (((ParentProcessName in ("C:\Program Files\VMware\*", "C:\Program Files (x86)\VMware\*", "C:\Program Files\Oracle\VirtualBox\*", "C:\Program Files\Docker\*", "C:\Program Files\Microsoft\Hyper-V\*")) and username =~ "NT AUTHORITY\SYSTEM") or (FolderPath in ("*\Program Files\Wireshark\*", "*\Program Files\Cisco\*", "*\System32\nbtstat.exe*", "*\System32\pathping.exe*", "*\Program Files\OpenVPN\*"))))

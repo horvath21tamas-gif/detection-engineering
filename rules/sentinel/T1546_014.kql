@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((Operation =~ "Created" and (ConsumerType in ("CommandLineEventConsumer", "ActiveScriptEventConsumer"))) and ((Destination in ("*powershell*", "*cmd.exe*", "*mshta*", "*regsvr32*", "*scrcons.exe*", "*C:\Users\*", "*C:\Windows\Temp\*")) or (Query in ("*SELECT * FROM __InstanceModificationEvent WITHIN*", "*SELECT * FROM Win32_LocalTime*")))) and (not (((FolderPath in ("*\CcmExec.exe", "*\TaniumClient.exe", "*\MonitoringHost.exe", "*\ltsvc.exe")) and username =~ "NT AUTHORITY\SYSTEM") or (Name in ("SCM Event Log Consumer", "BVTConsumer"))))

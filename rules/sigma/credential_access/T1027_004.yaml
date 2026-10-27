@@ -47,7 +47,7 @@ detection:
       - 'Visual Studio'
 
   filter_null_user:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: selection_pixel_extraction
              and selection_execution

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where TargetObject contains "\Environment\UserInitMprLogonScript" and ((Details in ("*powershell*", "*pwsh*", "*cmd.exe*", "*mshta*", "*cscript*", "*wscript*", "*rundll32*", "*regsvr32*", "*bitsadmin*")) or (Details in ("*:\Users\*", "*:\ProgramData\*", "*:\Temp\*", "*:\Windows\Temp\*", "*AppData\*", "*C:\PerfLogs\*"))) and (not ((FolderPath in ("*\System32\gpupdate.exe", "*\System32\reg.exe", "*\trustedinstaller.exe", "*\System32\svchost.exe")) or ((Details in ("*\NETLOGON\*", "*C:\Windows\System32\GroupPolicy\*")) and (Details in ("C:\Program Files\*", "C:\Program Files (x86)\*")))))

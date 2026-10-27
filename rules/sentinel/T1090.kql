@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((ProcessCommandLine in ("*listenport=*", "*connectaddress=*")) or (ProcessCommandLine in ("* -socks5 *", "* -reverse *", "* -L:*", "* -R:*", "* --proxy-server=*"))) and (FolderPath in ("*\netsh.exe", "*\powershell.exe", "*\pwsh.exe", "*\rundll32.exe", "*\regsvr32.exe")) and (not ((ProcessCommandLine in ("*C:\Program Files\Docker*", "*C:\Program Files\WSL*", "*127.0.0.1*", "*::1*")) and username =~ "NT AUTHORITY\SYSTEM" and ParentProcessName endswith "\services.exe"))

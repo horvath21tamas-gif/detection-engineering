@@ -44,7 +44,7 @@ detection:
             - '\Windows\servicing\TrustedInstaller.exe'
             - '\Windows\System32\svchost.exe'
             - '\Windows\System32\msiexec.exe'
-        - username: 'NT AUTHORITY\SYSTEM'
+        - User: 'NT AUTHORITY\SYSTEM'
 
     condition: (selection_uac_registry_keys and selection_suspicious_payloads and not filters_trusted_system) or selection_suspicious_parents
 level: critical

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\curl.exe", "*\wget.exe", "*\python.exe", "*\pwsh.exe")) or (ProcessCommandLine in ("*api.namecheap.com*", "*api.godaddy.com*", "*api.registrar.eu*", "*freenom.com/api*", "*dot.tk*"))) or ((FolderPath in ("*\domain-manager.exe", "*\bulky-domain.exe", "*\tld-scanner.exe")) or (ProcessCommandLine in ("*register-domain*", "*purchase-domain*", "*--check-availability*")))) and (not ((FolderPath in ("*\certbot\*", "*\acme.sh\*", "*\win-acme.exe*")) or ProcessCommandLine contains "_acme-challenge")) and (not (ParentProcessName endswith "\explorer.exe" and condition =~ "not selection_specialized_tools")) and (not ((User in ("*svc_terraform*", "*adm_infra_deploy*")) and FolderPath contains "\Program Files\Terraform\")) and (not (ParentProcessName in ("*\code.exe", "*\devenv.exe")))

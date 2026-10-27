@@ -66,7 +66,7 @@ detection:
     CommandLine|contains:
       - 'appcmd.exe list config'
       - 'iisreset.exe'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   filter_legit_automation:
     ParentImage|contains:
@@ -74,7 +74,7 @@ detection:
       - '\GitLab-Runner\'
       - '\Terraform\'
       - '\Ansible\'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: selection_web_servers and selection_suspicious_children and not (filter_legit_compilation or filter_iis_management or filter_legit_automation)
 

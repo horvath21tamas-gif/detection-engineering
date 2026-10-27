@@ -74,7 +74,7 @@ detection:
             - '\Windows\Temp\'
 
     filter_legit_system:
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
         Image|endswith:
             - '\Windows\System32\lsass.exe'
             - '\Windows\System32\svchost.exe'

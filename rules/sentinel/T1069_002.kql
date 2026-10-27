@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath in ("*\adfind.exe", "*\net.exe", "*\net1.exe", "*\dsquery.exe", "*\SharpHound.exe")) and (ProcessCommandLine in ("*Get-DomainGroup*", "*Get-ADGroup*", "*search -filter*"))) and ((ProcessCommandLine in ("*Domain Admins*", "*Enterprise Admins*", "*Schema Admins*", "*Remote Desktop Users*", "* /domain*")) or (ProcessCommandLine in ("*ConvertTo-Json*", "* -Properties *", "* -CSV *", "* > *")) or ((ParentProcessName in ("*\wsmprovhost.exe", "*\httpd.exe", "*\winword.exe")) and IntegrityLevel =~ "Medium")) and (not (User startswith "NT AUTHORITY\" or ComputerName contains "DC-" or (ParentProcessName in ("*\Program Files\Tanium\*", "*\Windows\System32\CcmExec.exe*")) or ProcessCommandLine contains "Get-ADGroupMember -Identity"))

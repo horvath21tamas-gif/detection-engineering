@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where TargetObject startswith "HKLM\SYSTEM\CurrentControlSet\Services\" and (TargetObject in ("*\ImagePath", "*\ServiceDll", "*\Parameters\ServiceDll")) and (Details in ("*.exe*", "*.dll*")) and (Details in ("*\Users\*", "*\ProgramData\*", "*\AppData\*", "*\Temp\*")) and (not (Details in ("*\Windows\*", "*\Program Files\*", "*\Program Files (x86)\*"))) and (not (FolderPath in ("*\Windows\System32\services.exe*", "*\Windows\System32\svchost.exe*", "*\Windows\System32\msiexec.exe*", "*\Windows\servicing\*"))) and (not (User in ("*NT AUTHORITY\SYSTEM*", "*NT SERVICE\TrustedInstaller*")))

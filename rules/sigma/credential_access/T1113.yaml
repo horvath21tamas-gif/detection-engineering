@@ -51,7 +51,7 @@ detection:
     - CommandLine|contains:
         - 'Microsoft.AAD.BrokerPlugin'          
         - 'C:\Windows\System32\SmartScreen.exe'  
-    - username: 'NT AUTHORITY\SYSTEM'          
+    - User: 'NT AUTHORITY\SYSTEM'          
 
   condition: |
     (selection_ps_api and selection_evasion) or 

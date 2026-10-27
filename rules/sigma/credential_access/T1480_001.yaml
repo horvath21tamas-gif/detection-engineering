@@ -45,7 +45,7 @@ detection:
             - '\excel.exe'
 
     filter_trusted_apps:
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
         Image|contains:
             - '\Windows\System32\wbem\WmiPrvSE.exe'
             - '\Windows\System32\svchost.exe'

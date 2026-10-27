@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((((FolderPath in ("*\wget.exe", "*\curl.exe")) and (ProcessCommandLine in ("* --mirror*", "* -m *", "* --recursive*", "* -r *", "* --no-parent*"))) or (FolderPath endswith "\powershell.exe" and (ProcessCommandLine in ("*foreach*", "*while*")))) or ((ProcessCommandLine in ("*confluence*", "*sharepoint*", "*wiki.*", "*tudastar*", "*onboarding*", "*network-diagram*", "*credential*", "*jelszo*")) and (not (ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe", "*\brave.exe"))))) and (not ((User in ("*svc_deploy*", "*svc_wiki_backup*")) and (ProcessCommandLine in ("*--update*", "*/check-updates*")))) and (not (FolderPath in ("*\SearchIndexer.exe", "*\SearchHost.exe")))

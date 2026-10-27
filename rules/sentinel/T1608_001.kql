@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\curl.exe", "*\wget.exe", "*\rclone.exe", "*\aws.exe", "*\az.exe", "*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("* -F *", "* --upload-file *", "* s3 cp *", "* storage blob upload *", "* rclone copy *", "* Invoke-RestMethod *", "* -Method Post *")) and (ProcessCommandLine in ("*github.com*", "*gitlab.com*", "*s3.amazonaws.com*", "*blob.core.windows.net*", "*transfer.sh*", "*mega.nz*", "*pastebin.com*")) and (not (((FolderPath in ("*\Jenkins\*", "*\GitLab-Runner\*", "*\AzureDevOps\*")) and (ProcessCommandLine in ("*\Program Files\*", "*backup_config.json*")) and username =~ "SYSTEM") or (ParentProcessName in ("*\chrome.exe", "*\msedge.exe"))))

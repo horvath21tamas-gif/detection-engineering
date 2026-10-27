@@ -51,7 +51,7 @@ detection:
         - 'domain-verification'           
         - 'letsencrypt'                  
         - 'acme-challenge'               
-    - username: 'NT AUTHORITY\SYSTEM'    
+    - User: 'NT AUTHORITY\SYSTEM'    
     - ParentImage|endswith:
         - '\services.exe'
         - '\explorer.exe'

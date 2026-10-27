@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (name in ("/etc/pam.d/*", "/lib/security/*", "/lib64/security/*", "/usr/lib/security/*", "/usr/lib64/security/*")) and ((nametype in ("CREATE", "DELETE")) or (FolderPath in ("*/vim", "*/nano", "*/sed", "*/awk", "*/python*", "*/perl", "*/insmod"))) and (not (((FolderPath in ("*/apt", "*/dpkg", "*/yum", "*/dnf", "*/rpm", "*/pam-auth-update")) and (FolderPath in ("*/ansible/*", "*/salt-minion*", "*/chef-client*", "*/puppet*"))) or ParentProcessName endswith "/unattended-upgrade"))

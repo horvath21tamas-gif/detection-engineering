@@ -41,7 +41,7 @@ detection:
             - '\gpupdate.exe'
             - '\trustedinstaller.exe'
             - '\System32\msiexec.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
 
     filter_known_good_sources:
         Details|contains:

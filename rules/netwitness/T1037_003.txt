@@ -1,2 +1,0 @@
-((((TargetFilename = '*\\SYSVOL\\*' OR TargetFilename = '*\\NETLOGON\\*'))) AND (((TargetFilename = '*.lnk*' OR TargetFilename = '*.bat*' OR TargetFilename = '*.ps1*' OR TargetFilename = '*.vbs*' OR TargetFilename = '*.cmd*' OR TargetFilename = '*.exe*')))) AND (NOT (((((process = '*\\ntfrs.exe*' OR process = '*\\dfsrs.exe*' OR process = '*\\robocopy.exe*' OR process = '*\\svchost.exe*'))) OR (((user.dst = '*NT AUTHORITY\\SYSTEM*' OR user.dst = '*NT AUTHORITY\\NETWORK SERVICE*')))))
-)

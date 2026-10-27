@@ -48,7 +48,7 @@ detection:
       - 'Microsoft\Azure'
       - 'WindowsUpdate'
       - 'Chocolatey'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     ParentImage|endswith:
       - '\services.exe'
 

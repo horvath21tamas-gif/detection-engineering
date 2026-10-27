@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((ProcessCommandLine in ("*[Windows.Forms.Clipboard]::GetText*", "*[System.Windows.Clipboard]::GetText*", "*Add-Type -AssemblyName System.Windows.Forms*", "*user32.dll,OpenClipboard*", "*user32.dll,GetClipboardData*")) and (ProcessCommandLine in ("*while($true)*", "*while (1)*", "*Start-Sleep*", "*do {*"))) or ((((ParentProcessName in ("*\w3wp.exe", "*\winword.exe", "*\excel.exe", "*\rundll32.exe")) and IntegrityLevel =~ "Medium") and (ProcessCommandLine in ("*[Windows.Forms.Clipboard]::GetText*", "*[System.Windows.Clipboard]::GetText*", "*Add-Type -AssemblyName System.Windows.Forms*", "*user32.dll,OpenClipboard*", "*user32.dll,GetClipboardData*"))) and (not ((FolderPath in ("*C:\Program Files\*", "*C:\Program Files (x86)\*")) or (ParentProcessName in ("*\explorer.exe", "*\taskhostw.exe")) or username =~ "NT AUTHORITY\SYSTEM")))

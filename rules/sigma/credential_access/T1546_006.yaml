@@ -42,7 +42,7 @@ detection:
             - '/usr/bin/codesign'
             - '/usr/bin/xcodebuild'
             - '/usr/bin/ld'
-        username: 'root'
+        User: 'root'
 
     filter_installers:
         Image|endswith:

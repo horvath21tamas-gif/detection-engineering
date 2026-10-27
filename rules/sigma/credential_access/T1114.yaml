@@ -50,7 +50,7 @@ detection:
     - Image|contains:
         - 'C:\Program Files\Microsoft Office\'          
         - 'C:\Program Files (x86)\Microsoft Office\'  
-    - username: 'NT AUTHORITY\SYSTEM'                  
+    - User: 'NT AUTHORITY\SYSTEM'                  
     - CommandLine|contains:
         - 'HealthCheck.ps1'                            
         - 'Add-in'                                     

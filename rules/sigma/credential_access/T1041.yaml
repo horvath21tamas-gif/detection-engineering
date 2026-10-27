@@ -74,7 +74,7 @@ detection:
         - 'Windows\Logs'
         - 'softwareupdate'
         - 'defender'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - ParentImage|endswith:
         - '\services.exe'
 

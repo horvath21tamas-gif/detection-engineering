@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\nltest.exe", "*\dsquery.exe")) and (ProcessCommandLine in ("*/domain_trusts*", "*/all_trusts*", "*trustedDomain*"))) or (ProcessCommandLine in ("*Get-DomainTrust*", "*Get-NetForest*", "*Get-NetDomainTrust*", "*Invoke-Recon*", "*LDAP://*"))) and ((ProcessCommandLine in ("* > *", "*ConvertTo-Json*", "*Export-Csv*", "* -o *", "*zip*")) or (not ((ComputerName in ("*DC-*", "*ADM-*", "*SERVER-*")) and (ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\wsmprovhost.exe", "*\httpd.exe"))))) and (not (username =~ "NT AUTHORITY\SYSTEM" and FolderPath contains "\Windows\System32\CcmExec.exe"))

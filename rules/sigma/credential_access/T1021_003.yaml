@@ -57,7 +57,7 @@ detection:
         - '.msc'
     - ParentCommandLine|contains:
         - 'servermanager.msc'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
 
   condition: >
     selection_parent and

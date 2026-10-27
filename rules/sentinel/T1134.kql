@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((processcommandline =~ "(steal_token|impersonate|incognito|make_token|token::elevate|token::revert)" and processname =~ "(\incognito\.exe|\mimikatz\.exe)$") or (Parentprocessname =~ "(powershell\.exe|pwsh\.exe|cmd\.exe|cscript\.exe|wscript\.exe)$" and username =~ "SYSTEM" and logonid =~ "0x3e7") or (Targetprocessname =~ "lsass\.exe$" and GrantedAccess =~ "0x1438")) and (not (Parentprocessname =~ "(services\.exe|wininit\.exe|winlogon\.exe|lsass\.exe)$" or processname =~ "\Windows\System32\wbem\WmiPrvSE\.exe" or UserName =~ "NT AUTHORITY\SYSTEM"))

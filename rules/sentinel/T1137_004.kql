@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where TargetObject matches regex "\\\\Software\\\\Microsoft\\\\Office\\\\.*\\\\Outlook\\\\(WebView\\\\URL|Security\\\\EnableRoamingFolderHomepages|Security\\\\EnableExternalFolderHomepages)$" and (Details matches regex "(http|script|file://|C:\\\\Users\\\\Public|C:\\\\Windows\\\\Temp)" or FolderPath matches regex "(powershell\\.exe|pwsh\\.exe|cmd\\.exe|reg\\.exe|cscript\\.exe|wscript\\.exe)$") and (not (Details matches regex "(https://outlook\\.office365\\.com|res://)" and FolderPath matches regex "gpscript\\.exe$"))

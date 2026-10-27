@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ProcessCommandLine in ("*\.\*", "*\*\*", "*GlobalRoot*", "*\Device\HarddiskVolume*")) and ((ProcessCommandLine in ("*ntds.dit*", "*sam*", "*system*", "*security*", "*software*")) or (ParentProcessName in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\cscript.exe", "*\wscript.exe", "*\mshta.exe")) or (FolderPath in ("*\Users\*", "*\Temp\*", "*\Downloads\*"))) and (not ((FolderPath in ("*\defrag.exe", "*\dfrgui.exe", "*\chkdsk.exe", "*\format.com", "*\vssadmin.exe")) and (FolderPath in ("*\Windows\System32\*", "*\Windows\SysWOW64\*")) and (Company in ("*Veeam Software Group*", "*Acronis*"))))

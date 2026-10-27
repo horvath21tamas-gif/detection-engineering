@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (TargetObject in ("*\Software\Microsoft\Office\Outlook\Addins\*", "*\Software\Classes\CLSID\*", "*\Software\Microsoft\Windows Messaging Subsystem\MSMapiApps*")) and ((Details in ("*:\Users\*", "*:\ProgramData\*", "*:\Temp\*", "*:\Windows\Temp\*", "*C:\PerfLogs\*")) or (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\reg.exe", "*\cscript.exe", "*\wscript.exe", "*\mshta.exe"))) and (not ((FolderPath in ("*\chrome.exe", "*\msedge.exe")) or (Details in ("*C:\Program Files\*", "*C:\Program Files (x86)\*"))))

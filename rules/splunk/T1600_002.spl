@@ -1,4 +1,0 @@
-
-| rex field=CommandLine "(?<CommandLineMatch>.*(cert|crt|cer|pfx)$)"
-| eval CommandLineCondition=if(isnotnull(CommandLineMatch), "true", "false")
-| search Image IN ("*\\AppData\\Local\\Temp\\*", "*\\Users\\Public\\*", "*\\Downloads\\*", "*\\Desktop\\*", "*\\PerfLogs\\*") ParentImage IN ("*\\powershell.exe", "*\\cmd.exe", "*\\wscript.exe", "*\\cscript.exe", "*\\pwsh.exe") (Image="*\\certutil.exe" CommandLine IN ("*Root*", "*AuthRoot*", "*TrustedPublisher*") CommandLineCondition="true") OR CommandLine IN ("*State*", "*0x00023e00*", "*LowRiskFileTypes*") NOT ((ParentImage IN ("*\\msiexec.exe", "*\\TrustedInstaller.exe", "*\\CcmExec.exe", "*\\gpscript.exe") username="NT AUTHORITY\\SYSTEM") OR Image IN ("*\\Program Files\\*", "*\\Program Files (x86)\\*", "*\\Windows\\System32\\*")) | table Time,User,Image,ParentImage,CommandLine

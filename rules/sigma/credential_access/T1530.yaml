@@ -70,7 +70,7 @@ detection:
             - 'C:\Program Files\Microsoft SDKs\'
             - 'cloud-init'
             - 'backup.ps1'
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
         ParentImage|contains:
             - '\Jenkins\'
             - '\TeamCity\'

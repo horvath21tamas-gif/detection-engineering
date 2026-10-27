@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ProcessCommandLine in ("* -H \"Host:*", "* -H 'Host:*", "* -Header \"Host:*", "* --header \"Host:*", "*.Headers.Add(\"Host\"*", "*Set-Item -Path env:http_proxy*")) and (ProcessCommandLine in ("*cloudfront.net*", "*azureedge.net*", "*cloudflare.com*", "*fastly.net*", "*google.com*", "*microsoft.com*", "*s3.amazonaws.com*")) and (FolderPath in ("*\powershell.exe", "*\pwsh.exe", "*\curl.exe", "*\certutil.exe", "*\bitsadmin.exe", "*\rundll32.exe")) and (not ((FolderPath in ("*\Program Files\*", "*\Program Files (x86)\*")) and (ProcessCommandLine in ("*localhost*", "*127.0.0.1*")) and username =~ "NT AUTHORITY\SYSTEM" and ParentProcessName endswith "\services.exe"))

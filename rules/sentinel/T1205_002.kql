@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (((FolderPath in ("*\netsh.exe", "*\powershell.exe", "*\pwsh.exe")) and (ProcessCommandLine in ("*wfp*", "*callout*", "*add-filter*", "*add callout*", "*fwpm*", "*netsh wfp*", "*netsh advfirewall*"))) or ((FolderPath in ("*\sc.exe", "*\reg.exe")) and (ProcessCommandLine contains "create" and ProcessCommandLine contains "type=" and ProcessCommandLine contains "kernel") and (ProcessCommandLine in ("*\Temp\*", "*\AppData\*", "*\Users\Public\*", "*\ProgramData\*")))) and ((ParentProcessName in ("*\services.exe", "*\svchost.exe", "*\TrustedInstaller.exe", "*\msiexec.exe")) and (FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\python.exe", "*\wscript.exe", "*\cscript.exe"))) and (not ((FolderPath in ("*\Program Files\Windows Defender\*", "*\Program Files\CrowdStrike\*", "*\Program Files\SentinelOne\*", "*\Program Files\Microsoft Security\*")) and User startswith "NT AUTHORITY\"))

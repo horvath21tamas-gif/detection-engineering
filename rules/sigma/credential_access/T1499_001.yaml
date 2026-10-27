@@ -58,7 +58,7 @@ detection:
       - '\Downloads\'
 
   filter_legit_management:
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     ParentImage|endswith:
       - '\CcmExec.exe'
       - '\msiexec.exe'

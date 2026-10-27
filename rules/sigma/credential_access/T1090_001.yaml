@@ -51,7 +51,7 @@ detection:
       - 'C:\Program Files\Docker'
       - 'C:\Program Files\WSL'
       - 'C:\Windows\System32\WSL'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
     ParentImage|endswith:
       - '\services.exe'
 

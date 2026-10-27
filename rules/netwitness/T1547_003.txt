@@ -1,2 +1,0 @@
-(((TargetObject = '*Services\\W32Time\\TimeProviders\\*'))&& ((TargetObject = '*DllName*'))) AND ((NOT ((((Details = '*w32time.dll*' OR Details = '*vmictimeprovider.dll*')))) OR (((Details = '*:\\*' OR Details = '*\\*' OR Details = '*AppData*' OR Details = '*Temp*' OR Details = '*C:\\Users\\*')))) AND (NOT ((((process = '*\\trustedinstaller.exe*'))))
-))

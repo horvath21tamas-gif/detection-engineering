@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*/echo", "*/tee", "*/sed", "*/cat", "*/printf")) and (ProcessCommandLine in ("*/etc/cron.d/*", "*/etc/cron.daily/*", "*/etc/cron.hourly/*", "*/etc/cron.monthly/*", "*/etc/cron.weekly/*", "*/var/spool/cron/*", "*/etc/crontab*")) and (ProcessCommandLine in ("*bash -i*", "*python*", "*curl*", "*wget*", "*base64*", "*/dev/tcp/*", "*nc *", "*chmod +x*")) and (not ((ParentProcessName in ("*/ansible", "*/salt-minion", "*/puppet", "*/chef-client")) or (username =~ "root" and (ParentProcessName in ("*/dpkg", "*/rpm", "*/apt")))))

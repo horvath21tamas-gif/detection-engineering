@@ -64,7 +64,7 @@ detection:
       - '\Ansible\'
       - '\Pulumi\'
       - '\Octopus\'
-    username: 'NT AUTHORITY\SYSTEM'
+    User: 'NT AUTHORITY\SYSTEM'
 
   condition: selection_cli and selection_infra and (selection_extraction or selection_interactive_parent) and not filter_legit_automation
 

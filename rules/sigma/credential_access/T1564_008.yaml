@@ -54,7 +54,7 @@ detection:
       - '\powershell.exe'
 
   filter_trusted_admin_activity:
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
     - CommandLine|contains:
         - 'Spam'
         - 'Junk'

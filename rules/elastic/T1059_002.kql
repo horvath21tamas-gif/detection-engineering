@@ -1,1 +1,0 @@
-Image:*\/osascript AND ((CommandLine:(*do\ shell\ script* OR *curl\ * OR *python* OR *eval* OR *base64*)) OR (ParentImage:(*\/Safari OR *\/Google\ Chrome OR *\/Microsoft\ Edge OR *\/Mail OR *\/Slack OR *\/Telegram OR *\/Terminal))) AND (NOT (CommandLine:*\/Library\/Application\ Support\/Jamf\/* OR CommandLine:*com.apple.quarantine* OR ParentImage:*\/launchd))

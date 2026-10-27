@@ -1,2 +1,0 @@
-TargetFilename regex '(\\\\AppData\\\\Roaming\\\\Microsoft\\\\Word\\\\STARTUP\\\\|\\\\AppData\\\\Roaming\\\\Microsoft\\\\Excel\\\\XLSTART\\\\|\\\\AppData\\\\Local\\\\Microsoft\\\\Office\\\\AddIns\\\\)' AND TargetFilename regex '(\\.wll|\\.xll)$' AND process regex '(msiexec\\.exe|OfficeClickToRun\\.exe|setup\\.exe|powershell\\.exe|cmd\\.exe|browser\\.exe|outlook\\.exe)$' AND (NOT ((TargetFilename regex '(\\\\Adobe\\\\|\\\\Webex\\\\)' AND process regex '^(C:\\\\Program Files\\\\|C:\\\\Program Files \\(x86\\)\\\\)'))
-)

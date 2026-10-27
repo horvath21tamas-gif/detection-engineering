@@ -38,7 +38,7 @@ detection:
             - '\msiexec.exe'
             - '\trustedinstaller.exe'
             - '\TiWorker.exe'
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
 
     filter_known_dev_tools:
         Image|contains:

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath in ("*\net.exe", "*\net1.exe", "*\sc.exe", "*\powershell.exe", "*\pwsh.exe", "*\taskkill.exe")) or (filename in ("net.exe", "net1.exe", "sc.exe", "PowerShell.EXE", "taskkill.exe"))) and (ProcessCommandLine in ("*stop*", "*delete*", "*disable*", "*kill*", "*/F*")) and (ProcessCommandLine in ("*WinDefend*", "*MpsSvc*", "*Sense*", "*MsSense*", "*SentinelAgent*", "*CarbonBlack*", "*CylanceSvc*", "*CrowdStrike*", "*Symantec*", "*Sophos*", "*McAfee*")) and (not (ParentProcessName in ("*\CcmExec.exe", "*\Gpscript.exe")))

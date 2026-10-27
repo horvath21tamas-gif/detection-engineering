@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\aws.exe", "*\az.exe", "*\gcloud.exe", "*\terraform.exe", "*\ansible-playbook.exe", "*\rclone.exe")) and (ProcessCommandLine in ("* s3 cp *", "* s3 sync *", "* storage blob upload *", "* apply *", "* lambda update-function *", "* rclone copy *", "* rclone move *")) and (not ((UserName in ("*svc_devops*", "*cloud_mgr*", "*deploy_bot*", "*admin_pki*")) and (FolderPath in ("*\AppData\Local\Programs\Microsoft VS Code\*", "*\.jenkins\*", "*\github_runner\*")) and SubjectUserName =~ "SYSTEM"))

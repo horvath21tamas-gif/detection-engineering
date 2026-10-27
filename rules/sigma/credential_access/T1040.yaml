@@ -80,7 +80,7 @@ detection:
     - ParentImage|endswith:
         - '\services.exe'
         - '\svchost.exe'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
 
   condition:
     (selection_native_capture

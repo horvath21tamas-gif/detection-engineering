@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ProcessCommandLine in ("*New-InboxRule*", "*Set-InboxRule*", "*Set-MailboxForwardingConfiguration*", "*Remove-InboxRule*")) and (((ProcessCommandLine in ("*DeleteMessage*", "*PermanentDelete*", "*MarkAsRead*", "*MoveToFolder*", "*ForwardTo*")) and (ProcessCommandLine in ("*Security*", "*Alert*", "*Password*", "*MFA*", "*Sign-in*", "*Phish*", "*Compromise*", "*Unauthorized*", "*Breach*"))) or (ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\outlook.exe", "*\msedge.exe", "*\chrome.exe", "*\mshta.exe", "*\powershell.exe"))) and (not (username =~ "NT AUTHORITY\SYSTEM" or (ProcessCommandLine in ("*Spam*", "*Junk*", "*Internal-Auto-Forward*")) or (ParentProcessName in ("*\Windows\System32\svchost.exe*", "*\ExchangeManagementShell\*"))))

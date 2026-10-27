@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (processcommandline =~ "(runas /token|make_token|steal_token|Invoke-TokenManipulation|CPAU\.exe|load_privilege)" or (Parentprocessname =~ "(powershell\.exe|pwsh\.exe|cmd\.exe|cscript\.exe|wscript\.exe)$" and username =~ "SYSTEM" and logonid =~ "0x3e7")) and (not ((Parentprocessname =~ "(services\.exe|wininit\.exe|lsass\.exe|winlogon\.exe)$" or processname =~ "(conhost\.exe|WerFault\.exe|WmiPrvSE\.exe)$" or ParentProcessCommandLine matches regex "svchost\\.exe -k") or processname =~ "(\Program Files\Windows Defender\|\Program Files\CrowdStrike\|\SentinelOne\)"))

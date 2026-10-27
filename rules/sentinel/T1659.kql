@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\wget.exe", "*\curl.exe", "*\httrack.exe", "*\python.exe", "*\node.exe")) and (ProcessCommandLine in ("* --mirror *", "* --recursive *", "* --page-requisites *", "* --clobber *", "*setoolkit*", "*clonesite*", "*evilginx*")) and (ProcessCommandLine in ("*login*", "*auth*", "*sso*", "*portal*", "*owa*", "*adfs*")) and (not (((UserName in ("*svc_webdev*", "*admin_backup*")) and (FolderPath in ("*\AppData\Local\Programs\Microsoft VS Code\*", "*\Git\*", "*\npm\*"))) or (ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe"))))

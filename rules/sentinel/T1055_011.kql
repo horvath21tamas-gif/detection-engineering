@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (GrantedAccess in ("*0x1410*", "*0x1411*", "*0x1438*", "*0x143a*")) and (TargetImage in ("*\explorer.exe", "*\taskhostw.exe", "*\sihost.exe", "*\searchui.exe")) and CallTrace contains "unknown" and (SourceImage in ("*\Users\*", "*\Temp\*", "*\AppData\*")) and (not ((SourceImage in ("*\MsMpEng.exe", "*\CcmExec.exe")) or (CallTrace in ("*user32.dll+*", "*win32u.dll+*", "*ntdll.dll+LdrpWorkItem*")) or condition =~ "SourceProcessName == TargetImage"))

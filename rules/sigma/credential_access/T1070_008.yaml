@@ -55,7 +55,7 @@ detection:
         - '\backup.exe'
         - '\veeam'
     - CommandLine|contains: '\AppData\Local\Microsoft\Outlook'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
 
   condition: 
     (selection_exchange_mgmt or selection_file_destruction) 

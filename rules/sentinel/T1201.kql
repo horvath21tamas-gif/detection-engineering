@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where ((FolderPath in ("*\net.exe", "*\net1.exe")) and (ProcessCommandLine in ("*accounts*", "*Get-DomainPolicy*", "*Get-ADDefaultDomainPasswordPolicy*", "*Get-ADFineGrainedPasswordPolicy*", "*Get-ADAccountResultantPasswordPolicy*"))) and ((ProcessCommandLine in ("*lockoutthreshold*", "*minpwdlength*", "*lockoutduration*", "*pwdcomplexity*", "*maxpwdage*", "*minpwdage*", "*historycount*")) or (ProcessCommandLine in ("* > *", "*ConvertTo-Json*", "*Export-Csv*", "*Out-File*")) or ((ParentProcessName in ("*\wsmprovhost.exe", "*\httpd.exe", "*\winword.exe", "*\excel.exe", "*\powershell.exe", "*\pwsh.exe")) and IntegrityLevel =~ "Medium")) and (not (User startswith "NT AUTHORITY\" and ComputerName contains "DC-" and (ProcessCommandLine in ("*logon.bat*", "*Program Files*", "*GroupPolicy*")) and FolderPath contains "\Windows\System32\"))

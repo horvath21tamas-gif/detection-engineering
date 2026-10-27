@@ -1,2 +1,0 @@
-((((param = '* -type=AXFR*' OR param = '* -query=AXFR*' OR param = '* -type=ANY*' OR param = '* -type=SOA*' OR param = '* -type=TXT*' OR param = '*ls -d*' OR param = '* -q=srv*'))) OR ((((process = '*\\dig.exe*' OR process = '*\\host.exe*' OR process = '*\\dnscmd.exe*'))) AND (((param = '* /enumzones*' OR param = '* /zoneprint*'))))) AND (NOT ((((param = '*nslookup.exe*')))) AND (NOT ((((user.dst = '*svc_monitoring*' OR user.dst = '*AD_Sync_Account*'))))
-))

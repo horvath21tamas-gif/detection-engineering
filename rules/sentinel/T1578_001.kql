@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (operation_name in ("*RunInstances*", "*Microsoft.Compute/virtualMachines/write*", "*v1.compute.instances.insert*", "*CreateVirtualMachine*", "*Instances:Insert*")) and ((request_parameters in ("*p3.*", "*p4.*", "*g4.*", "*c5.24xlarge*", "*Standard_ND*", "*Standard_NC*", "*n1-highcpu-*", "*n1-ultramem-*", "*A100*", "*V100*")) or (mfa_authenticated =~ "false" and (user_agent in ("*kali*", "*python-requests*", "*boto3*", "*postman*", "*curl*", "*Terraform*", "*Pulumi*")))) and (not ((user_name in ("svc-terraform*", "svc-github-actions*", "aws-autoscaling*", "svc-packer*", "svc-azure-devops*")) or (user_name in ("*system-internal*", "*cloud-controller*"))))

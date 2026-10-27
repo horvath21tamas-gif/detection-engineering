@@ -1,1 +1,0 @@
-source="WinEventLog:Security" EventCode=4624 LogonType IN (2, 10) NOT (TargetUserName="*$" OR TargetUserName IN ("SYSTEM", "LOCAL SERVICE", "NETWORK SERVICE") OR IpAddress IN ("127.0.0.1", "::1") OR WorkstationName IN ("JUMP-*", "BASTION-*", "MGMT-*") OR TargetUserName IN ("admin*", "svc_*")) | table TargetUserName,WorkstationName,IpAddress

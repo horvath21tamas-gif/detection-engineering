@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\net.exe", "*\net1.exe", "*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\dsmod.exe", "*\dsrm.exe")) and (ProcessCommandLine in ("* user *", "*Remove-LocalUser*", "*Remove-ADUser*", "*Disable-LocalUser*", "*Disable-ADAccount*", "*Set-LocalUser -AccountExpires*", "*dsrm*", "*dsmod user -disabled yes*")) and (ProcessCommandLine in ("* /delete*", "* /active:no*", "* /logoff*", "*-Confirm:$false*", "*-Force*")) and ((ParentProcessName in ("*\winword.exe", "*\excel.exe", "*\powerpoint.exe", "*\httpd.exe", "*\php-cgi.exe", "*\rundll32.exe", "*\explorer.exe")) and (ParentProcessCommandLine in ("*-EncodedCommand*", "*-NonInteractive*"))) and (not ((ProcessCommandLine in ("*Add-LocalUser*", "* /add*", "*WDAGUtilityAccount*", "*DefaultAccount*")) and (ParentProcessName in ("*\msiexec.exe", "*\services.exe")) and User startswith "NT AUTHORITY\"))

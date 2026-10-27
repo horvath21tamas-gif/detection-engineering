@@ -37,7 +37,7 @@ detection:
         AttributeCommonName: 'gPLink'
 
     filter_trusted:
-        username: 'NT AUTHORITY\SYSTEM'
+        User: 'NT AUTHORITY\SYSTEM'
         Image|endswith:
             - '\mmc.exe'
             - '\svchost.exe'

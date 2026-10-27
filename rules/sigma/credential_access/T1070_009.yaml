@@ -57,7 +57,7 @@ detection:
     - CommandLine|contains:
         - 'Windows\System32\SystemReset.exe'
         - 'Telemetry'
-    - username: 'NT AUTHORITY\SYSTEM'
+    - User: 'NT AUTHORITY\SYSTEM'
       ParentImage|endswith: '\services.exe'
 
   condition: 

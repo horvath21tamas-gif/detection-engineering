@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (ParentProcessName in ("*\chrome.exe", "*\msedge.exe", "*\firefox.exe", "*\brave.exe", "*\opera.exe")) and ((FolderPath in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wscript.exe", "*\cscript.exe", "*\mshta.exe", "*\scrcons.exe", "*\regsvr32.exe")) and (ProcessCommandLine in ("*\Downloads\*", "*\AppData\Local\Temp\*", "*\Users\Public\*", "*C:\Windows\Temp\*"))) and (not ((ProcessCommandLine in ("*--type=*", "*crashpad-handler*", "*--extension-process*", "*\Google\Update\*", "*\Microsoft\EdgeUpdate\*")) or ((FolderPath in ("*\msiexec.exe", "*\setup.exe", "*\install.exe")) and ProcessCommandLine contains "C:\Program Files")))

@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where EventID =~ 4720 and (ProcessName in ("*\net.exe", "*\net1.exe", "*\powershell.exe", "*\pwsh.exe", "*\cmd.exe", "*\wscript.exe", "*\cscript.exe")) and (not (SubjectUserName endswith "$" or ((SubjectUserName in ("*MSOL_*", "*AAD_*", "*Sync*")) and SubjectDomainName =~ "NT AUTHORITY")))

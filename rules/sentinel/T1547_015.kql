@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (TargetObject contains "Classes\CLSID\" and TargetObject endswith "\InprocServer32\(Default)") and ((Details in ("*:\Users\*", "*:\ProgramData\*", "*:\Windows\Temp\*", "*:\Temp\*", "*AppData\Local\Temp\*", "*C:\PerfLogs\*")) or ((Details in ("*.tmp", "*.dat", "*.js", "*.vbs")) and (Details in ("*scrobj.dll*", "*script:*")))) and (not ((FolderPath in ("*\Microsoft\OneDrive\OneDrive.exe", "*\Microsoft\Teams\current\Teams.exe", "*\System32\msiexec.exe", "*\trustedinstaller.exe", "*\AppData\Local\Microsoft\Edge\Application\msedge.exe")) or (Details in ("*C:\Program Files\*", "*C:\Program Files (x86)\*", "*C:\Windows\System32\*"))))

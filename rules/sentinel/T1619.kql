@@ -1,4 +1,0 @@
-DeviceProcessEvents
-| where TimeGenerated > ago(24h)
-union *
-| where (FolderPath in ("*\aws.exe", "*\az.cmd", "*\gcloud.cmd", "*\gsutil.py", "*\rclone.exe")) and (ProcessCommandLine in ("*s3 ls*", "*s3api list-objects*", "*s3api list-object-versions*", "*storage blob list*", "*storage container list*", "*storage ls*", "*storage objects list*", "*ls -R*")) and ((ProcessCommandLine in ("*--recursive*", "*--query*", "*--output json*", "* | jq*", "* > *", "*| Out-File*", "*base64*")) or (ParentProcessName in ("*\cmd.exe", "*\powershell.exe", "*\pwsh.exe", "*\wsmprovhost.exe", "*\httpd.exe", "*\taskeng.exe")) or (FolderPath in ("*\AppData\Local\Temp\*", "*\Users\Public\*", "*\Temp\*", "*\ProgramData\*"))) and (not ((ParentProcessName in ("*\Veeam\*", "*\Commvault\*", "*\terraform.exe*", "*\azcopy.exe*", "*\rclone.exe*")) and (User in ("NT AUTHORITY\*", "SYSTEM*", "svc-backup*", "svc-automation*")))) and (not (User in ("*cloudadmin*", "*svc-cloudops*", "*svc-storage*")))
